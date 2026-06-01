@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 export type DomainId = "people" | "economy" | "energy" | "climate" | "health" | "society";
 
@@ -250,8 +251,7 @@ export function chartUrl(chart: ChartRecord, locale = "en") {
 }
 
 export function loadSeries(seriesPath: string): SeriesArtifact {
-  const fileUrl = new URL(`../../${seriesPath}`, import.meta.url);
-  return JSON.parse(readFileSync(fileUrl, "utf8"));
+  return JSON.parse(readFileSync(resolve(process.cwd(), seriesPath), "utf8"));
 }
 
 export function cleanObservations(series: SeriesArtifact) {
@@ -283,4 +283,3 @@ export function axisLabel(value: number, format: ChartRecord["axisFormat"]) {
   if (format === "percent") return `${Math.round(value)}%`;
   return value.toLocaleString("en-IN");
 }
-
