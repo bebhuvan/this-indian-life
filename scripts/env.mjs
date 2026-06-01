@@ -21,5 +21,18 @@ export function loadEnv(path = ".env") {
 
     process.env[key] = value;
   }
+
+  applyAliases();
 }
 
+function applyAliases() {
+  const aliases = {
+    CDSAPI_KEY: ["COPERNICUS", "copernicus", "COPERNICUS_API_KEY"]
+  };
+
+  for (const [canonical, names] of Object.entries(aliases)) {
+    if (process.env[canonical]) continue;
+    const alias = names.find((name) => process.env[name]);
+    if (alias) process.env[canonical] = process.env[alias];
+  }
+}
