@@ -88,6 +88,7 @@ function cardClass(visualIndex: number, visual: VisualSpec) {
   if (visualIndex === 0) return "viz-card viz-main";
   if (visual.kind === "change") return "viz-card viz-wide";
   if (visual.kind === "line" && visual.lines.length > 1) return "viz-card viz-wide";
+  if (visual.kind === "bar" && visual.bars.length > 8) return "viz-card viz-wide";
   if (visual.kind === "pyramid" || visual.kind === "stack") return "viz-card viz-wide";
   return "viz-card";
 }

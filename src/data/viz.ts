@@ -406,6 +406,26 @@ function pyramidVisual(artifact: Artifact): PyramidVisual | null {
   };
 }
 
+function ageBandBars(artifact: Artifact): BarVisual | null {
+  if (artifact.indicatorId !== "people.population.un.age_sex_5y") return null;
+  const rows = artifact.rows || [];
+  const bars = rows
+    .filter((row) => row.variant === "Median" && row.sex === "Both sexes" && String(row.timeLabel) === "2025")
+    .map((row) => ({ label: String(row.ageLabel || ""), value: numberFrom(row.value) || 0, ageStart: numberFrom(row.ageStart) || 0 }))
+    .filter((item) => item.label && item.label !== "Total" && item.value > 0)
+    .sort((a, b) => a.ageStart - b.ageStart)
+    .map(({ label, value }) => ({ label, value }));
+  if (!bars.length) return null;
+  return {
+    kind: "bar",
+    title: "Population by 5-year age band",
+    subtitle: "UN median variant · both sexes · 2025",
+    unit: "people",
+    source: sourceFor(artifact),
+    bars
+  };
+}
+
 function genericBarForLatestRows(artifact: Artifact): BarVisual | null {
   const rows = artifact.rows || [];
   if (artifact.indicatorId !== "people.population.un.broad_age_share") return null;
@@ -462,7 +482,7 @@ function variantBars(artifact: Artifact): BarVisual | null {
 
 function visualsForArtifact(artifact: Artifact): VisualWithRole[] {
   const visuals: VisualWithRole[] = [];
-  const custom = [pyramidVisual(artifact), latestStack(artifact), waqiBars(artifact), genericBarForLatestRows(artifact), variantBars(artifact)]
+  const custom = [pyramidVisual(artifact), ageBandBars(artifact), latestStack(artifact), waqiBars(artifact), genericBarForLatestRows(artifact), variantBars(artifact)]
     .filter(Boolean) as VisualSpec[];
   visuals.push(...custom.map((visual) => ({ visual, role: "primary" as const })));
   const line = artifact.artifactType === "series" ? seriesVisual(artifact) : tableLineVisual(artifact);
@@ -482,11 +502,11 @@ export function visualsForQuestion(page: QuestionPage) {
   const matched = indicatorIds
     .flatMap((indicator) => artifacts.filter((artifact) => artifact.indicatorId === indicator));
   const visualGroups = matched.map(visualsForArtifact).filter((group) => group.length);
-  const firstPass = visualGroups.flatMap((group) => group.filter((item) => item.role === "primary").slice(0, 1));
+  const firstPass = visualGroups.flatMap((group) => group.filter((item) => item.role === "primary"));
   const contextPass = visualGroups.flatMap((group) => group.filter((item) => item.role === "context").slice(0, 1));
   const companionPass = visualGroups
     .slice(0, 1)
-    .flatMap((group) => group.filter((item) => item.role === "companion").slice(0, 2));
+    .flatMap((group) => group.filter((item) => item.role === "companion" && item.visual.kind === "change").slice(0, 1));
   const seen = new Set<string>();
   const visuals = [...firstPass, ...contextPass, ...companionPass].map((item) => item.visual).filter((visual) => {
     const key = `${visual.kind}:${visual.title}:${visual.subtitle}`;
@@ -494,5 +514,5 @@ export function visualsForQuestion(page: QuestionPage) {
     seen.add(key);
     return true;
   });
-  return visuals.slice(0, 9);
+  return visuals.slice(0, 10);
 }
