@@ -1,8 +1,10 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import Nav from "../../../components/Nav.astro";
+import ArticleVisuals from "../../../components/ArticleVisuals.astro";
 import { locales } from "../../../data/site";
 import { formatLockedNumber, inlineMarkdownHtml, markdownBlocks, questionPages, questionUrl } from "../../../data/questions";
+import { visualsForQuestion } from "../../../data/viz";
 
 export function getStaticPaths() {
   return locales.flatMap((locale) =>
@@ -19,6 +21,7 @@ const explanation = page.explanation;
 const lockedNumbers = explanation.evidence.lockedNumbers.slice(0, 4);
 const related = questionPages.filter((item) => item.id !== page.id && item.domain === page.domain).slice(0, 4);
 const blocks = markdownBlocks(explanation.article.bodyMarkdown);
+const visuals = visualsForQuestion(page);
 ---
 
 <Base title={`${page.question} · Indica`} description={explanation.short.dek} domain={page.domain}>
@@ -34,6 +37,8 @@ const blocks = markdownBlocks(explanation.article.bodyMarkdown);
         <span>Generated from {explanation.evidence.availableIndicatorIds.length} local artifact{explanation.evidence.availableIndicatorIds.length === 1 ? "" : "s"}</span>
       </div>
     </header>
+
+    <ArticleVisuals visuals={visuals} />
 
     <section class="article-hero">
       <div>

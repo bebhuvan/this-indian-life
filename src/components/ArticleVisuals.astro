@@ -1,0 +1,145 @@
+---
+import type { VisualSpec, LineVisual, StackVisual, BarVisual, PyramidVisual } from "../data/viz";
+
+type Props = {
+  visuals: VisualSpec[];
+};
+
+const { visuals } = Astro.props;
+
+const colors = ["var(--c)", "#0b0b0b", "#15A382", "#EFA227", "#7C5AD6", "#EE6A4C", "#5c5c5c"];
+
+function fmt(value: number) {
+  const abs = Math.abs(value);
+  if (abs >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(1)}B`;
+  if (abs >= 10_000_000) return `${(value / 10_000_000).toFixed(1)}cr`;
+  if (abs >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
+  if (abs >= 1000) return `${(value / 1000).toFixed(1)}k`;
+  if (abs >= 100) return value.toFixed(0);
+  return value.toFixed(1);
+}
+
+function lineGeometry(visual: LineVisual) {
+  const width = 960;
+  const height = 430;
+  const pad = { l: 70, r: 34, t: 34, b: 52 };
+  const all = visual.lines.flatMap((line) => line.points);
+  const values = all.map((point) => point.value);
+  const rawMin = Math.min(...values);
+  const rawMax = Math.max(...values);
+  const min = rawMin < 0 ? rawMin : 0;
+  const max = rawMax * 1.08 || 1;
+  const span = max - min || 1;
+  const longest = Math.max(...visual.lines.map((line) => line.points.length));
+  const x = (index: number, count: number) => pad.l + (index / Math.max(1, count - 1)) * (width - pad.l - pad.r);
+  const y = (value: number) => height - pad.b - ((value - min) / span) * (height - pad.t - pad.b);
+  const ticks = Array.from({ length: 5 }, (_, index) => min + (span * index) / 4);
+  const paths = visual.lines.map((line, lineIndex) => {
+    const d = line.points.map((point, index) => `${index === 0 ? "M" : "L"} ${x(index, line.points.length).toFixed(2)} ${y(point.value).toFixed(2)}`).join(" ");
+    return { ...line, d, color: colors[lineIndex % colors.length] };
+  });
+  const axisPoints = visual.lines[0]?.points || [];
+  const yearEvery = Math.max(1, Math.ceil(longest / 7));
+  return { width, height, pad, ticks, paths, axisPoints, yearEvery, x, y };
+}
+---
+
+{visuals.length ? (
+  <section class="section viz-section">
+    <div class="layers-top">
+      <span class="lbl">The data</span>
+      <span class="ai-badge"><span class="sp"></span>Charts are rendered from local artifacts, not live API calls</span>
+    </div>
+    <div class="viz-grid">
+      {visuals.map((visual, visualIndex) => {
+        if (visual.kind === "line") {
+          const g = lineGeometry(visual as LineVisual);
+          return (
+            <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
+              <div class="viz-head">
+                <div><h2 class="serif">{visual.title}</h2><p>{visual.subtitle}</p></div>
+                <span>{visual.unit}</span>
+              </div>
+              <svg class="viz-svg" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
+                {g.ticks.map((tick) => (
+                  <g>
+                    <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
+                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick)}</text>
+                  </g>
+                ))}
+                {g.axisPoints.map((point, index) => (
+                  (index % g.yearEvery === 0 || index === g.axisPoints.length - 1) && (
+                    <text class="xaxt" x={g.x(index, g.axisPoints.length)} y={g.height - g.pad.b + 24} text-anchor="middle">{point.date}</text>
+                  )
+                ))}
+                {g.paths.map((path) => (
+                  <path d={path.d} fill="none" stroke={path.color} stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                ))}
+              </svg>
+              {visual.lines.length > 1 && (
+                <div class="viz-legend">
+                  {visual.lines.map((line, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{line.label}</span>)}
+                </div>
+              )}
+            </article>
+          );
+        }
+
+        if (visual.kind === "stack") {
+          const stack = visual as StackVisual;
+          const total = stack.segments.reduce((sum, item) => sum + item.value, 0) || 1;
+          return (
+            <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
+              <div class="viz-head"><div><h2 class="serif">{stack.title}</h2><p>{stack.subtitle}</p></div><span>{stack.unit}</span></div>
+              <div class="viz-stack">
+                {stack.segments.map((segment, index) => (
+                  <div class="viz-seg" style={`width:${(segment.value / total) * 100}%;background:${colors[index % colors.length]}`}>
+                    <span>{segment.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div class="viz-bars">
+                {stack.segments.map((segment) => (
+                  <div class="viz-bar"><span>{segment.label}</span><div><i style={`width:${(segment.value / total) * 100}%`}></i></div><b>{fmt(segment.value)}</b></div>
+                ))}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "bar") {
+          const bar = visual as BarVisual;
+          const max = Math.max(...bar.bars.map((item) => item.value), 1);
+          return (
+            <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
+              <div class="viz-head"><div><h2 class="serif">{bar.title}</h2><p>{bar.subtitle}</p></div><span>{bar.unit}</span></div>
+              <div class="viz-bars">
+                {bar.bars.map((item) => (
+                  <div class="viz-bar"><span>{item.label}</span><div><i style={`width:${(item.value / max) * 100}%`}></i></div><b>{fmt(item.value)}</b></div>
+                ))}
+              </div>
+            </article>
+          );
+        }
+
+        const pyramid = visual as PyramidVisual;
+        const max = Math.max(...pyramid.rows.flatMap((row) => [row.male, row.female]), 1);
+        return (
+          <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
+            <div class="viz-head"><div><h2 class="serif">{pyramid.title}</h2><p>{pyramid.subtitle}</p></div><span>{pyramid.year}</span></div>
+            <div class="pyramid">
+              {pyramid.rows.map((row) => (
+                <div class="pyr-row">
+                  <div class="pyr-side male"><i style={`width:${(row.male / max) * 100}%`}></i></div>
+                  <span>{row.age}</span>
+                  <div class="pyr-side female"><i style={`width:${(row.female / max) * 100}%`}></i></div>
+                </div>
+              ))}
+            </div>
+            <div class="viz-legend"><span><i style="background:var(--c)"></i>Male</span><span><i style="background:#0b0b0b"></i>Female</span></div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+) : null}
