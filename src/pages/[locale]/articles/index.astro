@@ -1,0 +1,44 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Nav from "../../../components/Nav.astro";
+import { domains, locales } from "../../../data/site";
+import { questionPages, questionUrl } from "../../../data/questions";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+---
+
+<Base title="Articles · Indica" description="All V1 article pages generated from Indica's locked evidence packets.">
+  <div class="wrap">
+    <Nav locale={locale} />
+
+    <header class="domain-head">
+      <span class="lbl">Articles</span>
+      <h1 class="serif">The first Indica question set.</h1>
+      <p class="muted">
+        Thirty national questions about India, each written from local data artifacts and stored evidence packets.
+      </p>
+    </header>
+
+    {domains.map((domain) => {
+      const pages = questionPages.filter((page) => page.domain === domain.id);
+      if (!pages.length) return null;
+      return (
+        <section class={`section dom-${domain.id}`}>
+          <p class="sec-hd">{domain.label}</p>
+          {pages.map((page) => (
+            <a class="q-row" href={questionUrl(page, locale)}>
+              <span class="q-dot" style={`background:var(--${page.domain})`}></span>
+              <span class="q-txt">{page.question}</span>
+              <span class="q-ans" style={`color:var(--${page.domain})`}>{page.explanation.status === "ready" ? "Article" : "Needs data"}</span>
+              <span class="q-arrow">-></span>
+            </a>
+          ))}
+        </section>
+      );
+    })}
+  </div>
+</Base>

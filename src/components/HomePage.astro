@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Nav from "./Nav.astro";
 import { charts, chartUrl, domains, formatValue, latestObservation, loadSeries } from "../data/site";
+import { questionPages, questionUrl } from "../data/questions";
 
 const locale = "en";
 const featured = charts.find((chart) => chart.id === "people.population.total")!;
@@ -34,8 +35,8 @@ const ledger = charts
       </div>
       <div class="demo home-chips">
         <span class="chip">World Bank seed data</span>
-        <span class="chip">7 live chart artifacts</span>
-        <span class="chip">RBI + MoSPI next</span>
+        <span class="chip">30 article pages</span>
+        <span class="chip">DeepSeek explanations from locked evidence</span>
       </div>
       <h1 class="serif home-title">Every question about India, answered in numbers and explained in plain language.</h1>
       <p class="muted home-dek">
@@ -78,13 +79,12 @@ const ledger = charts
     <section class="section">
       <p class="sec-hd">Starter questions</p>
       <div>
-        {charts.slice(0, 6).map((chart) => {
-          const latest = latestObservation(loadSeries(chart.seriesPath))!;
+        {questionPages.slice(0, 10).map((page) => {
           return (
-            <a class="q-row" href={chartUrl(chart, locale)}>
-              <span class="q-dot" style={`background:var(--${chart.domain})`}></span>
-              <span class="q-txt">{chart.title}</span>
-              <span class="q-ans" style={`color:var(--${chart.domain})`}>{formatValue(latest.value, chart.valueFormat)}</span>
+            <a class="q-row" href={questionUrl(page, locale)}>
+              <span class="q-dot" style={`background:var(--${page.domain})`}></span>
+              <span class="q-txt">{page.question}</span>
+              <span class="q-ans" style={`color:var(--${page.domain})`}>{page.explanation.status === "ready" ? "Article" : "Needs data"}</span>
               <span class="q-arrow">-></span>
             </a>
           );
@@ -101,4 +101,3 @@ const ledger = charts
     </footer>
   </div>
 </Base>
-

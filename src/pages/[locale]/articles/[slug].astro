@@ -1,0 +1,108 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Nav from "../../../components/Nav.astro";
+import { locales } from "../../../data/site";
+import { formatLockedNumber, inlineMarkdownHtml, markdownBlocks, questionPages, questionUrl } from "../../../data/questions";
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) =>
+    questionPages.map((page) => ({
+      params: { locale, slug: page.slug },
+      props: { page }
+    }))
+  );
+}
+
+const { locale } = Astro.params;
+const { page } = Astro.props;
+const explanation = page.explanation;
+const lockedNumbers = explanation.evidence.lockedNumbers.slice(0, 4);
+const related = questionPages.filter((item) => item.id !== page.id && item.domain === page.domain).slice(0, 4);
+const blocks = markdownBlocks(explanation.article.bodyMarkdown);
+---
+
+<Base title={`${page.question} · Indica`} description={explanation.short.dek} domain={page.domain}>
+  <div class="wrap">
+    <Nav active={page.domain} locale={locale} />
+
+    <header class="article-head">
+      <span class="domain-chip"><span class="tk"></span><span>{page.domain} · V1 question</span></span>
+      <h1 class="serif">{page.question}</h1>
+      <p class="muted">{explanation.short.dek}</p>
+      <div class="article-status">
+        <span class={explanation.status === "ready" ? "status ready" : "status needs"}>{explanation.status === "ready" ? "Ready" : "Needs more data"}</span>
+        <span>Generated from {explanation.evidence.availableIndicatorIds.length} local artifact{explanation.evidence.availableIndicatorIds.length === 1 ? "" : "s"}</span>
+      </div>
+    </header>
+
+    <section class="article-hero">
+      <div>
+        <p class="lbl">Short answer</p>
+        <h2 class="serif">{explanation.short.headline}</h2>
+        <p>{explanation.short.body}</p>
+      </div>
+      <aside class="evidence-card">
+        <p class="lbl">Locked evidence</p>
+        {lockedNumbers.length ? lockedNumbers.map((item) => (
+          <div class="evidence-number">
+            <span class="n">{formatLockedNumber(item)}</span>
+            <span class="t">{item.label}{item.date ? ` · ${item.date}` : ""}</span>
+          </div>
+        )) : <p class="muted">No locked number was available for this question.</p>}
+      </aside>
+    </section>
+
+    <section class="section article-layout">
+      <article class="article-body">
+        <p class="lbl">Article</p>
+        <h2 class="serif">{explanation.article.title}</h2>
+        <p class="standfirst">{explanation.article.standfirst}</p>
+        <div class="longform">
+          {blocks.map((block) => {
+            if (block.type === "h2") return <h3>{block.text}</h3>;
+            if (block.type === "h3") return <h4>{block.text}</h4>;
+            return <p set:html={inlineMarkdownHtml(block.text)} />;
+          })}
+        </div>
+      </article>
+
+      <aside class="article-side">
+        <div class="side-box">
+          <p class="lbl">Indicators</p>
+          <div class="def-tags">
+            {page.indicators.map((indicator) => <span>{indicator}</span>)}
+          </div>
+        </div>
+
+        <div class="side-box">
+          <p class="lbl">Caveats</p>
+          {explanation.caveats.length ? (
+            <ul>
+              {explanation.caveats.slice(0, 5).map((item) => <li>{item}</li>)}
+            </ul>
+          ) : <p class="muted">No caveats recorded.</p>}
+        </div>
+
+        <div class="side-box">
+          <p class="lbl">Sources</p>
+          {explanation.sourceNotes.length ? (
+            <ul>
+              {explanation.sourceNotes.slice(0, 5).map((item) => <li>{item}</li>)}
+            </ul>
+          ) : <p class="muted">Source notes are embedded in the evidence packet.</p>}
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Related questions</p>
+      {related.map((item) => (
+        <a class="q-row" href={questionUrl(item, locale)}>
+          <span class="q-dot" style={`background:var(--${item.domain})`}></span>
+          <span class="q-txt">{item.question}</span>
+          <span class="q-arrow">-></span>
+        </a>
+      ))}
+    </section>
+  </div>
+</Base>

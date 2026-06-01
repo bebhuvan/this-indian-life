@@ -2,6 +2,7 @@
 import Base from "../../../layouts/Base.astro";
 import Nav from "../../../components/Nav.astro";
 import { chartUrl, charts, domainFor, domains, latestObservation, loadSeries, formatValue, locales } from "../../../data/site";
+import { questionPages, questionUrl } from "../../../data/questions";
 
 export function getStaticPaths() {
   return locales.flatMap((locale) => domains.map((domain) => ({ params: { locale, domain: domain.id } })));
@@ -10,6 +11,7 @@ export function getStaticPaths() {
 const { locale, domain } = Astro.params;
 const current = domainFor(domain as any)!;
 const domainCharts = charts.filter((chart) => chart.domain === domain);
+const domainQuestions = questionPages.filter((page) => page.domain === domain);
 ---
 
 <Base title={`${current.label} · Indica`} domain={current.id}>
@@ -19,8 +21,22 @@ const domainCharts = charts.filter((chart) => chart.domain === domain);
     <header class="domain-head">
       <span class="domain-chip"><span class="tk"></span><span>{current.label}</span></span>
       <h1 class="serif">{current.line}</h1>
-      <p class="muted">A seed catalog of sourced chart pages. More indicators can be added as catalog records once the ingestion adapter exists.</p>
+      <p class="muted">A seed catalog of sourced chart pages and article pages generated from locked evidence packets.</p>
     </header>
+
+    <section class="section">
+      <p class="sec-hd">{domainQuestions.length} article pages</p>
+      <div>
+        {domainQuestions.map((page) => (
+          <a class="q-row" href={questionUrl(page, locale)}>
+            <span class="q-dot" style={`background:var(--${page.domain})`}></span>
+            <span class="q-txt">{page.question}</span>
+            <span class="q-ans" style={`color:var(--${page.domain})`}>{page.explanation.status === "ready" ? "Article" : "Needs data"}</span>
+            <span class="q-arrow">-></span>
+          </a>
+        ))}
+      </div>
+    </section>
 
     <section class="section">
       <p class="sec-hd">{domainCharts.length} chart pages</p>
@@ -41,4 +57,3 @@ const domainCharts = charts.filter((chart) => chart.domain === domain);
     </section>
   </div>
 </Base>
-
