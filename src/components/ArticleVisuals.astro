@@ -159,8 +159,8 @@ function visualPayload(visual: VisualSpec) {
 
 function lineGeometry(visual: LineVisual, isLead = false) {
   const width = isLead ? 1160 : 620;
-  const height = isLead ? 560 : 360;
-  const pad = isLead ? { l: 86, r: 58, t: 42, b: 62 } : { l: 58, r: 34, t: 30, b: 48 };
+  const height = isLead ? 500 : 330;
+  const pad = isLead ? { l: 86, r: 58, t: 38, b: 58 } : { l: 58, r: 34, t: 28, b: 44 };
   const all = visual.lines.flatMap((line) => line.points);
   const values = all.map((point) => point.value);
   const rawMin = Math.min(...values);

@@ -50,6 +50,8 @@ export type PyramidVisual = {
   rows: Array<{ age: string; male: number; female: number }>;
 };
 export type VisualSpec = LineVisual | StackVisual | BarVisual | ChangeVisual | PyramidVisual;
+type VisualRole = "primary" | "context" | "companion";
+type VisualWithRole = { visual: VisualSpec; role: VisualRole };
 
 type Artifact = {
   artifactType?: "series" | "table";
@@ -458,16 +460,19 @@ function variantBars(artifact: Artifact): BarVisual | null {
   };
 }
 
-function visualsForArtifact(artifact: Artifact): VisualSpec[] {
-  const visuals: VisualSpec[] = [];
+function visualsForArtifact(artifact: Artifact): VisualWithRole[] {
+  const visuals: VisualWithRole[] = [];
   const custom = [pyramidVisual(artifact), latestStack(artifact), waqiBars(artifact), genericBarForLatestRows(artifact), variantBars(artifact)]
     .filter(Boolean) as VisualSpec[];
-  visuals.push(...custom);
+  visuals.push(...custom.map((visual) => ({ visual, role: "primary" as const })));
   const line = artifact.artifactType === "series" ? seriesVisual(artifact) : tableLineVisual(artifact);
   if (line) {
-    visuals.push(line);
+    const keepContextLine = ["people.population.un.total", "energy.ember.generation"].includes(artifact.indicatorId);
+    if (!custom.length || keepContextLine) {
+      visuals.push({ visual: line, role: custom.length ? "context" : "primary" });
+    }
     const companions = [changeVisual(line), recentBars(line), indexedLineVisual(line)].filter(Boolean) as VisualSpec[];
-    visuals.push(...companions);
+    visuals.push(...companions.map((visual) => ({ visual, role: "companion" as const })));
   }
   return visuals;
 }
@@ -477,14 +482,17 @@ export function visualsForQuestion(page: QuestionPage) {
   const matched = indicatorIds
     .flatMap((indicator) => artifacts.filter((artifact) => artifact.indicatorId === indicator));
   const visualGroups = matched.map(visualsForArtifact).filter((group) => group.length);
-  const firstPass = visualGroups.map((group) => group[0]);
-  const secondPass = visualGroups.flatMap((group) => group.slice(1));
+  const firstPass = visualGroups.flatMap((group) => group.filter((item) => item.role === "primary").slice(0, 1));
+  const contextPass = visualGroups.flatMap((group) => group.filter((item) => item.role === "context").slice(0, 1));
+  const companionPass = visualGroups
+    .slice(0, 1)
+    .flatMap((group) => group.filter((item) => item.role === "companion").slice(0, 2));
   const seen = new Set<string>();
-  const visuals = [...firstPass, ...secondPass].filter((visual) => {
+  const visuals = [...firstPass, ...contextPass, ...companionPass].map((item) => item.visual).filter((visual) => {
     const key = `${visual.kind}:${visual.title}:${visual.subtitle}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
   });
-  return visuals.slice(0, 12);
+  return visuals.slice(0, 9);
 }
