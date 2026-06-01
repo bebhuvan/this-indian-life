@@ -112,6 +112,16 @@ Build this as an experimental adapter first. The API is not formally documented,
 3. Avoid high-volume crawling until request shapes, limits, and terms are clear.
 4. Promote individual endpoints to stable ingestion only after they are reproducible and attributable.
 
+## Data Portal for Cities
+
+- API docs: `https://dataportalforcities.org/api`
+- Base URL: `https://dataportalforcities.org`
+- Auth: none.
+- Main endpoint: `/api/emissions?cityid={cityid}&year={year}&sector={sector}&scope={scope}`
+- Scope values: `direct`, `indirect`, `total`.
+
+This is a clean JSON API for city greenhouse-gas inventories. It is not India-specific, but it is useful for city-level climate comparisons if Indian city IDs are available. The public docs say city IDs can be looked up through the city picker or requested by country/region list from the portal team.
+
 ## Secret Handling
 
 Real keys live only in `.env`, which is gitignored. Commit `.env.example` when adding new variable names. Scripts must never log full request URLs containing `api_key` or `token`.
