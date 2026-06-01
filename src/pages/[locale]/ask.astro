@@ -1,0 +1,85 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import { charts, chartUrl, formatValue, latestObservation, loadSeries, locales } from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+---
+
+<Base title="Ask Indica · Indica">
+  <div class="wrap">
+    <Nav locale={locale} />
+
+    <section class="ask-hero">
+      <p class="lbl">Ask about India</p>
+      <h1 class="serif ask-title">Find the chart behind the question.</h1>
+      <div class="ask-field ask-large">
+        <input id="askInput" placeholder="Try: how big is India's economy?" />
+        <button id="askButton" aria-label="Search">-></button>
+      </div>
+      <div class="suggest">
+        {charts.slice(0, 5).map((chart) => <button class="sg" data-query={chart.aliases[0]}>{chart.aliases[0]}</button>)}
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Best matches</p>
+      <div id="results">
+        {charts.map((chart) => {
+          const latest = latestObservation(loadSeries(chart.seriesPath))!;
+          return (
+            <a class={`q-row result-row dom-${chart.domain}`} href={chartUrl(chart, locale)} data-text={`${chart.title} ${chart.dek} ${chart.aliases.join(" ")}`.toLowerCase()}>
+              <span class="q-dot" style={`background:var(--${chart.domain})`}></span>
+              <span class="q-txt">{chart.title}</span>
+              <span class="q-ans" style={`color:var(--${chart.domain})`}>{formatValue(latest.value, chart.valueFormat)}</span>
+              <span class="q-arrow">-></span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="section mods">
+      <div>
+        <p class="lbl">How this works now</p>
+        <p class="muted prose">
+          The launch matcher is deliberately simple: it searches chart titles, descriptions,
+          and aliases in the local catalog. Embeddings can come later when the catalog is large
+          enough to need semantic retrieval.
+        </p>
+      </div>
+      <div class="ask-box">
+        <div class="t">No live model call</div>
+        <p class="muted">This page does not send your question to an LLM. It matches against static catalog metadata.</p>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  const input = document.getElementById("askInput");
+  const button = document.getElementById("askButton");
+  const rows = [...document.querySelectorAll(".result-row")];
+
+  function runSearch() {
+    const query = input.value.toLowerCase().trim();
+    rows.forEach((row) => {
+      const score = !query || row.dataset.text.includes(query);
+      row.style.display = score ? "flex" : "none";
+    });
+  }
+
+  button.addEventListener("click", runSearch);
+  input.addEventListener("input", runSearch);
+  document.querySelectorAll(".sg").forEach((button) => {
+    button.addEventListener("click", () => {
+      input.value = button.dataset.query;
+      runSearch();
+    });
+  });
+</script>
+

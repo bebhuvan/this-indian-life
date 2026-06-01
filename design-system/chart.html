@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India’s GDP, 2000–2024 · Indica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="indica.css">
+</head>
+<body lang="en" class="dom-economy">
+<div class="wrap">
+  <nav class="nav">
+    <a class="brand" href="index.html">Indica</a>
+    <div class="nav-r">
+      <div class="crumb"><a href="domain.html">Economy</a><span class="sep">/</span><a href="domain.html">National accounts</a><span class="sep">/</span><span class="here">GDP</span></div>
+      <div class="lang"><button class="on">EN</button><button>हि</button></div>
+    </div>
+  </nav>
+  <hr class="r">
+
+  <header style="padding:40px 0 26px">
+    <span class="domain-chip" style="margin-bottom:16px"><span class="tk"></span><span>Economy · National Accounts</span></span>
+    <h1 class="serif" style="font-weight:400;font-size:var(--t-h1);line-height:1.07;max-width:20ch">How big is India’s economy, and how fast did it get here?</h1>
+    <p class="muted" style="margin-top:14px;max-width:64ch;font-size:1.02rem">India’s gross domestic product in current US dollars, every year from 2000 to 2024. Hover the line to read any year.</p>
+  </header>
+
+  <!-- CHART -->
+  <section>
+    <div class="chart-toolbar">
+      <div class="figrow"><span class="fignum"><span id="bigNum">0</span><span class="u" id="bigUnit"> T USD</span></span>
+        <div class="figmeta"><span class="delta" id="delta">▲ 8.3× since 2000</span><span class="since" id="since">Nominal · 2024 estimate</span></div></div>
+      <div class="seg" id="seg"><button class="on" data-mode="nominal">Nominal</button><button data-mode="growth">Growth %</button><button data-mode="percap">Per capita</button></div>
+    </div>
+    <div class="chart-wrap" id="wrap"><svg class="chart" id="big" viewBox="0 0 960 520"></svg><div class="tip" id="tip"></div></div>
+    <div class="chart-cap"><span class="src"><strong>Source:</strong> World Bank · IMF WEO · MoSPI. Current US$.</span><span>Illustrative values.</span></div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="section" style="border-bottom:1px solid var(--ghost)">
+    <p class="lbl" style="margin-bottom:24px">At a glance</p>
+    <div class="glance-grid">
+      <div class="gi"><div class="n">5th</div><div class="t">largest economy by total size</div></div>
+      <div class="gi"><div class="n">~140th</div><div class="t">by income per person</div></div>
+      <div class="gi"><div class="n">~9.2%</div><div class="t">nominal CAGR since 2000</div></div>
+      <div class="gi"><div class="n">~6.5%</div><div class="t">real growth, inflation-adjusted</div></div>
+    </div>
+  </section>
+
+  <!-- LAYERED EXPLANATIONS -->
+  <section class="section">
+    <div class="layers-top"><span class="lbl">The explanation</span><span class="ai-badge"><span class="sp"></span>Written by Indica AI from the data &amp; cited sources — the numbers are not generated</span></div>
+    <p class="bottomline">In one generation India went from a $0.5-trillion economy to nearly $4 trillion — without most people feeling four times richer.</p>
+    <div class="regs" id="regs">
+      <button class="reg-tab" data-p="reading"><div class="rt-name">The Reading</div><div class="rt-sub">analyst’s view</div></button>
+      <button class="reg-tab" data-p="plain"><div class="rt-name">In Plain English</div><div class="rt-sub">no jargon</div></button>
+      <button class="reg-tab" data-p="ground"><div class="rt-name">On the Ground</div><div class="rt-sub">what it means here</div></button>
+    </div>
+    <div class="panel-wrap">
+      <div class="panel reading" data-p="reading">
+        <div class="body"><p>India’s nominal GDP rose from <strong>$0.47 trillion in 2000 to an estimated $3.94 trillion in 2024</strong>, a compound annual growth rate of roughly 9.2% in current-dollar terms. The series is non-linear: a contraction in FY2020–21 interrupts an otherwise steep post-2003 expansion.</p><p>Much of the dollar increase reflects <strong>price and exchange-rate changes</strong>, not pure volume; real growth averaged ~6.5%. India is the world’s 5th-largest economy by nominal GDP, but ranks ~140th by GDP <em>per capita</em>.</p></div>
+        <div class="aside"><span class="kpill">CAGR <b>~9.2%</b></span><span class="kpill">Real <b>~6.5%</b></span><span class="kpill">Rank <b>5th</b></span></div>
+      </div>
+      <div class="panel plain" data-p="plain">
+        <div class="body"><p>Think of the whole country’s yearly output as one big number. In 2000 it was about <strong>half a trillion dollars</strong>. Today it’s almost <strong>four trillion</strong> — roughly eight times bigger.</p><p>Two catches: a chunk of that is just <strong>prices rising</strong>, not eight times more stuff; and there are <strong>far more people to share it with</strong>, so a huge economy doesn’t automatically mean well-off people.</p></div>
+        <div class="aside"><span class="kpill">2000 <b>≈$0.5T</b></span><span class="kpill">2024 <b>≈$3.9T</b></span><span class="kpill"><b>≈8× bigger</b></span></div>
+      </div>
+      <div class="panel ground" data-p="ground">
+        <div class="body"><p>On paper India is now a <em>top-5 economy</em> — the headline runs on every channel, and it’s true. But split that pie across <strong>1.4 billion people</strong> and the slice per person is still small: about <em>140th in the world</em> by income.</p><p>Both things are real at once. The country is genuinely big and growing fast — <strong>that’s why global companies keep showing up.</strong> And the average household still feels stretched on rent, fuel and school fees — <em>because “5th-largest economy” and “richer family” are not the same sentence.</em></p></div>
+        <div class="analogy"><div class="a"><div class="big">≈$2,700</div><div class="t">GDP per person a year — about a sixth of the world average.</div></div><div class="a"><div class="big">8×</div><div class="t">Bigger economy than 2000 — but population grew too.</div></div><div class="a"><div class="big">5th → 140th</div><div class="t">Rank by total size vs. by income per head.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECONDARY VIZ -->
+  <section class="section mods" style="grid-template-columns:1fr 1fr">
+    <div><h3 class="serif" style="font-weight:400;font-size:var(--t-h3)">What the economy is made of</h3><p class="muted" style="font-size:.82rem;margin:6px 0 20px">Share of output by sector, 2024.</p><div id="sectors"></div></div>
+    <div><h3 class="serif" style="font-weight:400;font-size:var(--t-h3)">How India compares</h3><p class="muted" style="font-size:.82rem;margin:6px 0 20px">Largest economies, 2024, nominal GDP (T USD).</p><div id="compare"></div></div>
+  </section>
+
+  <!-- RELATED + ASK -->
+  <section class="section mods">
+    <div><p class="lbl" style="margin-bottom:14px">Keep pulling the thread</p>
+      <a class="q-row" href="#" style="text-decoration:none;color:inherit"><span class="q-dot" style="background:var(--economy)"></span><span class="q-txt">Why doesn’t GDP growth reach my salary?</span><span class="q-arrow">→</span></a>
+      <a class="q-row" href="#" style="text-decoration:none;color:inherit"><span class="q-dot" style="background:var(--people)"></span><span class="q-txt">How does the economy compare per person to China?</span><span class="q-arrow">→</span></a>
+      <a class="q-row" href="#" style="text-decoration:none;color:inherit"><span class="q-dot" style="background:var(--society)"></span><span class="q-txt">Which states produce most of India’s output?</span><span class="q-arrow">→</span></a>
+    </div>
+    <div>
+      <div class="ask-box"><div class="t">Ask a follow-up</div><div class="ask-field"><input placeholder="e.g. show this adjusted for inflation"><button>→</button></div></div>
+      <div class="meth"><p class="lbl" style="margin-bottom:4px">Methodology</p>
+        <div class="row"><span class="k">Measure</span><span class="v">Nominal GDP, current US$</span></div>
+        <div class="row"><span class="k">Frequency</span><span class="v">Annual</span></div>
+        <div class="row"><span class="k">Updated</span><span class="v">May 2026</span></div>
+        <div class="row"><span class="k">Download</span><span class="v" style="color:var(--c)">CSV · JSON · PNG</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot"><div class="foot-brand">Indica</div><p class="foot-note">Figures are sourced and reproducible. Explanatory text is generated by a language model from the underlying data and cited sources, and reviewed; it may simplify. Check the methodology before citing.</p></footer>
+</div>
+
+<script src="chart-kit.js"></script>
+<script>
+const C='#3A5BD0';
+const years=[];for(let y=2000;y<=2024;y++)years.push(y);
+const nominal=[0.47,0.49,0.52,0.62,0.72,0.82,0.94,1.22,1.20,1.34,1.68,1.82,1.83,1.86,2.04,2.10,2.29,2.65,2.71,2.87,2.67,3.15,3.39,3.55,3.94];
+const growth=[3.8,4.8,3.8,7.9,7.9,7.9,8.1,7.7,3.1,7.9,8.5,5.2,5.5,6.4,7.4,8.0,8.3,6.8,6.5,3.9,-5.8,9.7,7.0,7.2,7.0];
+const percap=[443,460,485,565,650,730,820,1060,1020,1130,1390,1490,1480,1490,1620,1650,1780,2040,2070,2170,1990,2330,2490,2590,2850];
+const MODES={
+  nominal:{d:nominal,fmt:v=>v.toFixed(2),u:' T USD',min:0,max:4.4,ticks:4,ylab:v=>v.toFixed(1)+'T',dec:2,
+    ann:[{i:8,t:'Global financial crisis',s:'2008'},{i:20,t:'Covid contraction',s:'2020'}],end:'$3.94T',
+    delta:'▲ 8.3× since 2000',since:'Nominal · 2024 estimate'},
+  growth:{d:growth,fmt:v=>v.toFixed(1),u:' % / yr',min:-8,max:12,ticks:5,ylab:v=>v+'%',dec:1,
+    ann:[{i:20,t:'−5.8% · pandemic',s:'2020'},{i:21,t:'+9.7% rebound',s:'2021'}],end:'7.0%',
+    delta:'fastest major economy',since:'Real GDP growth · 2024'},
+  percap:{d:percap,fmt:v=>Math.round(v).toLocaleString(),u:' USD',min:0,max:3000,ticks:5,ylab:v=>(v/1000).toFixed(1)+'k',dec:0,
+    ann:[{i:20,t:'Covid dip',s:'2020'}],end:'$2,850',
+    delta:'▲ 6.4× since 2000',since:'Per person · 2024'}};
+let mode='nominal';
+const svg=document.getElementById('big'),wrap=document.getElementById('wrap'),tip=document.getElementById('tip');
+function render(){
+  const m=MODES[mode];
+  const ctx=Indica.heroLine(svg,{x:years,data:m.d,color:C,min:m.min,max:m.max,ticks:m.ticks,ylab:m.ylab,everyX:4,annotations:m.ann,endLabel:m.end,endSub:'2024'});
+  Indica.attachHover(svg,{wrap,tip,ctx,fmt:m.fmt,unit:m.u,x:years});
+  document.getElementById('bigUnit').textContent=m.u;
+  document.getElementById('delta').textContent=m.delta;
+  document.getElementById('since').textContent=m.since;
+  Indica.countTo(document.getElementById('bigNum'),m.d[24],m.dec);
+}
+document.getElementById('seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.mode;document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x.dataset.mode===mode));render();});
+
+// secondary viz — shared kit components
+Indica.stack('#sectors',[['Services',53],['Industry',26],['Agriculture',16],['Other',5]],{color:C});
+Indica.rank('#compare',[['USA',29.2],['China',18.5],['Germany',4.7],['Japan',4.1],['India',3.9]],{color:C,highlight:'India',max:30,unit:'T'});
+
+// sticky register preference
+let reg=localStorage.getItem('indica-register')||'plain';
+function setReg(r){reg=r;localStorage.setItem('indica-register',r);document.querySelectorAll('.reg-tab').forEach(x=>x.classList.toggle('on',x.dataset.p===r));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.dataset.p===r));}
+document.getElementById('regs').addEventListener('click',e=>{const b=e.target.closest('.reg-tab');if(b)setReg(b.dataset.p);});
+setReg(reg);
+render();
+</script>
+</body>
+</html>

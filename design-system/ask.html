@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask India · Indica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="indica.css">
+</head>
+<body lang="en">
+<div class="wrap">
+  <nav class="nav"><a class="brand" href="index.html">Indica</a><div class="nav-r"><a class="btn ghost dom-economy" href="domain.html" style="text-decoration:none">Browse all</a></div></nav>
+  <hr class="r">
+
+  <section class="ask-hero">
+    <span class="domain-chip dom-health" style="margin-bottom:22px;justify-content:center"><span class="tk"></span><span>11 open datasets · live</span></span>
+    <h1 class="serif" style="font-weight:400;font-size:var(--t-h1);max-width:16ch;margin:0 auto;line-height:1.04">Ask India anything.</h1>
+    <p class="muted" style="max-width:52ch;margin:18px auto 0;font-size:1.05rem">A question about the economy, climate, health or society — get a sourced answer with a chart and a plain-language explanation.</p>
+    <div style="max-width:600px;margin:30px auto 0" class="dom-health">
+      <div class="ask-field"><input id="q" placeholder="Ask about India…" autocomplete="off"><button id="go">→</button></div>
+    </div>
+    <div class="suggest" id="suggest">
+      <button class="sg" data-k="energy">How has India’s clean energy grown?</button>
+      <button class="sg" data-k="pop">When did India overtake China?</button>
+      <button class="sg" data-k="solar">Why did solar get so cheap?</button>
+      <button class="sg" data-k="life">How much longer do Indians live?</button>
+    </div>
+  </section>
+
+  <!-- ANSWER CARD -->
+  <section class="section" id="answerSec" style="border-top:1px solid var(--ghost)">
+    <div class="layers-top" style="margin-bottom:10px"><span class="lbl" id="aQ"></span><span class="ai-badge"><span class="sp"></span>Sourced answer · numbers not generated</span></div>
+    <div class="figrow" style="margin:6px 0 14px"><span class="fignum" id="aBig" style="color:var(--c)">0</span><div class="figmeta"><span class="delta" id="aDelta"></span><span class="since" id="aSince"></span></div></div>
+    <div class="chart-wrap"><svg class="chart" id="aChart" viewBox="0 0 920 360"></svg></div>
+    <p class="serif" id="aProse" style="font-size:var(--t-read);line-height:1.6;max-width:64ch;margin:24px 0 0;color:#1a1a1a"></p>
+    <div class="demo" id="aSrc" style="margin-top:20px;gap:8px"></div>
+    <div style="margin-top:24px"><a class="btn dom-health" id="aOpen" href="chart.html" style="text-decoration:none">Open the full chart page →</a></div>
+  </section>
+
+  <footer class="foot"><div class="foot-brand">Indica</div><p class="foot-note">Every answer links to a full, sourced chart page. Explanatory text is LLM-written from the data; numbers are not.</p></footer>
+</div>
+
+<script src="chart-kit.js"></script>
+<script>
+const DATA={
+ energy:{c:'#EFA227',q:'Energy · clean power',big:'203',u:' GW',delta:'▲ 5.8× since 2014',since:'Non-fossil capacity, 2024',x:[2014,2016,2018,2020,2022,2024],d:[35,49,72,90,150,203],
+   prose:'India’s non-fossil capacity grew almost six-fold since 2014 — from 35 GW to about 203 GW in 2024 — as utility-scale solar came online and tariffs fell below ₹2.5/kWh. The 2030 target is 500 GW.',src:['MNRE','Our World in Data','RBI']},
+ pop:{c:'#DB5C97',q:'People · population',big:'1.43',u:' bn',delta:'▲ No. 1 since 2023',since:'Total population, 2023',x:[2000,2005,2010,2015,2020,2023],d:[1059,1147,1234,1310,1396,1429],
+   prose:'India became the world’s most populous country in 2023, around 1.43 billion people — roughly one in six humans. It crossed not by surging, but because China’s population began to shrink.',src:['UN WPP','MoSPI']},
+ solar:{c:'#EFA227',q:'Energy · solar price',big:'₹2.4',u:' /kWh',delta:'▼ 80% since 2010',since:'Winning solar tariff, 2023',x:[2010,2014,2017,2020,2023],d:[12,7,3.3,2.4,2.4],
+   prose:'The winning solar tariff collapsed from ₹12/kWh in 2010 to about ₹2.4 — an 80% fall — driven by cheaper panels, competitive auctions and huge project scale. Solar is now cheaper than new coal.',src:['MNRE','IRENA']},
+ life:{c:'#15A382',q:'Health · life expectancy',big:'70.2',u:' yrs',delta:'▲ +25 yrs since 1960',since:'Life expectancy at birth, 2020',x:[1960,1980,1990,2000,2010,2020],d:[45,54,58,63,67,70.2],
+   prose:'Life expectancy rose from about 45 years in 1960 to 70.2 today — a 25-year gain in two generations, driven mainly by falling infant and child mortality, better nutrition and vaccination.',src:['Our World in Data','WHO','MoSPI']}};
+function show(k){const o=DATA[k];if(!o)return;document.documentElement.style.setProperty('--c',o.c);
+  document.getElementById('q').value='';document.getElementById('aQ').textContent=o.q;
+  document.getElementById('aBig').innerHTML=o.big+'<span class="u">'+o.u+'</span>';document.getElementById('aBig').style.color=o.c;
+  document.getElementById('aDelta').textContent=o.delta;document.getElementById('aDelta').style.color=o.c;document.getElementById('aSince').textContent=o.since;
+  Indica.heroLine(document.getElementById('aChart'),{w:920,h:360,pad:{l:54,r:34,t:30,b:42},x:o.x,data:o.d,color:o.c,everyX:1});
+  document.getElementById('aProse').textContent=o.prose;
+  document.getElementById('aSrc').innerHTML='<span class="lbl" style="align-self:center">Sources</span>'+o.src.map(s=>`<span class="chip soft">${s}</span>`).join('');
+  document.getElementById('aOpen').style.setProperty('--c',o.c);
+  document.getElementById('answerSec').scrollIntoView({behavior:'smooth',block:'start'});}
+document.querySelectorAll('.sg').forEach(b=>b.addEventListener('click',()=>show(b.dataset.k)));
+function ask(){const v=document.getElementById('q').value.toLowerCase();let k='energy';if(/popul|china|billion|people/.test(v))k='pop';else if(/solar|cheap|tariff|price/.test(v))k='solar';else if(/life|live|expect|health|age/.test(v))k='life';show(k);}
+document.getElementById('go').addEventListener('click',ask);document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')ask();});
+const st=document.createElement('style');st.textContent='@keyframes drw{to{stroke-dashoffset:0}}';document.head.appendChild(st);
+show('energy');
+</script>
+</body>
+</html>

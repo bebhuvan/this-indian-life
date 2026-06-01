@@ -1,0 +1,57 @@
+---
+import type { ChartRecord } from "../data/site";
+
+type Props = {
+  chart: ChartRecord;
+};
+
+const { chart } = Astro.props;
+---
+
+<div class="regs" data-registers>
+  <button class="reg-tab on" data-p="plain">
+    <div class="rt-name">In Plain English</div>
+    <div class="rt-sub">no jargon</div>
+  </button>
+  <button class="reg-tab" data-p="reading">
+    <div class="rt-name">The Reading</div>
+    <div class="rt-sub">analyst's view</div>
+  </button>
+  <button class="reg-tab" data-p="ground">
+    <div class="rt-name">On the Ground</div>
+    <div class="rt-sub">what it means here</div>
+  </button>
+</div>
+<div class="panel-wrap">
+  {(["plain", "reading", "ground"] as const).map((key) => (
+    <div class={`panel ${key} ${key === "plain" ? "on" : ""}`} data-p={key}>
+      <div class="body">
+        <p>{chart.explanations[key]}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  const root = document.currentScript?.parentElement;
+  const tabs = root?.querySelector("[data-registers]");
+  const preferred = localStorage.getItem("indica-register") || "plain";
+
+  function setRegister(register) {
+    localStorage.setItem("indica-register", register);
+    root?.querySelectorAll(".reg-tab").forEach((tab) => {
+      tab.classList.toggle("on", tab.dataset.p === register);
+    });
+    root?.querySelectorAll(".panel").forEach((panel) => {
+      panel.classList.toggle("on", panel.dataset.p === register);
+    });
+  }
+
+  tabs?.addEventListener("click", (event) => {
+    const button = event.target.closest(".reg-tab");
+    if (button) setRegister(button.dataset.p);
+  });
+
+  setRegister(preferred);
+</script>
+

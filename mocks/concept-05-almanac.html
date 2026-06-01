@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDICA — A Living Almanac of India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff; --ink:#0b0b0b; --mid:#5c5c5c; --dim:#a6a6a6; --ghost:#e7e7e7;
+  /* bright-but-soft domain inks — one harmonised family */
+  --people:#DB5C97;   /* rose      */
+  --economy:#3A5BD0;  /* indigo    */
+  --energy:#EFA227;   /* marigold  */
+  --climate:#EE6A4C;  /* coral     */
+  --health:#15A382;   /* jade      */
+  --society:#7C5AD6;  /* violet    */
+  --c:var(--ink);     /* per-section active colour */
+}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6}
+.w{max-width:1280px;margin:0 auto;padding:0 52px}
+@media(max-width:680px){.w{padding:0 24px}}
+hr.r{border:none;border-top:1px solid var(--ghost)}
+.serif{font-family:'Cormorant Garamond',serif}
+.lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--dim)}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:28px 0 22px}
+.brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.95rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.domains{display:flex;gap:26px}
+.domains button{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--dim);padding:2px 0 5px;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s}
+.domains button:hover,.domains button.on{color:var(--ink)}
+.domains button[data-d="economy"]:hover,.domains button[data-d="economy"].on{color:var(--economy);border-color:var(--economy)}
+.domains button[data-d="climate"]:hover,.domains button[data-d="climate"].on{color:var(--climate);border-color:var(--climate)}
+.domains button[data-d="people"]:hover,.domains button[data-d="people"].on{color:var(--people);border-color:var(--people)}
+.domains button[data-d="energy"]:hover,.domains button[data-d="energy"].on{color:var(--energy);border-color:var(--energy)}
+.domains button[data-d="health"]:hover,.domains button[data-d="health"].on{color:var(--health);border-color:var(--health)}
+.domains button[data-d="society"]:hover,.domains button[data-d="society"].on{color:var(--society);border-color:var(--society)}
+
+/* ── MASTHEAD ── */
+.mast{display:flex;justify-content:space-between;align-items:baseline;padding:46px 0 0}
+.mast .l{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--mid)}
+.mast .d{font-size:.64rem;letter-spacing:.06em;color:var(--dim)}
+
+/* ── HERO ── */
+.hero{padding:30px 0 70px}
+.hero-num-row{display:flex;align-items:flex-end;gap:20px}
+.hero-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(108px,16vw,244px);line-height:.78;letter-spacing:-.05em;color:var(--people);font-variant-numeric:tabular-nums;transition:color .4s}
+.hero-num .u{font-size:.32em;letter-spacing:-.01em}
+.hero-aside{padding-bottom:16px;display:flex;flex-direction:column;gap:7px}
+.hero-aside .cat{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.55rem;font-weight:500}
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 42px}
+.chip{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--mid);border:1px solid var(--ghost);padding:5px 11px}
+.hero-hed{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.7rem,3.4vw,3.3rem);line-height:1.13;max-width:21ch;margin-bottom:18px}
+.hero-hed em{font-style:italic}
+.hero-sub{font-size:clamp(.92rem,1.25vw,1.05rem);line-height:1.75;color:var(--mid);max-width:60ch}
+.hero-sub strong{color:var(--ink);font-weight:500}
+
+/* ── LEDGER ── */
+.ledger{padding:62px 0;border-top:1px solid var(--ghost);border-bottom:1px solid var(--ghost)}
+.ledger-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+@media(max-width:880px){.ledger-grid{grid-template-columns:1fr 1fr;gap:52px 0}}
+@media(max-width:520px){.ledger-grid{grid-template-columns:1fr;gap:46px 0}}
+.li{padding-right:42px;position:relative}
+.li+.li{padding-left:42px}
+.li:not(:last-child)::after{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;background:var(--ghost)}
+@media(max-width:880px){.li:nth-child(2n)::after{display:none}.li+.li{padding-left:0}.li:nth-child(odd){padding-right:0}.li{padding-left:0!important}}
+.li-n{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3rem,5vw,5.4rem);letter-spacing:-.03em;line-height:1;color:var(--c);display:block;font-variant-numeric:tabular-nums}
+.li-n .u{font-size:.34em;color:var(--dim);letter-spacing:0;margin-left:3px}
+.li-lbl{font-size:.6rem;letter-spacing:.17em;text-transform:uppercase;font-weight:500;color:var(--dim);margin:9px 0 18px;display:flex;align-items:center;gap:8px}
+.li-lbl .tk{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.li-vis{min-height:54px;margin-bottom:16px}
+.li-vis svg{display:block}
+.li-cut{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.02rem;line-height:1.42;color:var(--mid)}
+
+/* dot matrix */
+#dotmat{display:grid;grid-template-columns:repeat(13,8px);gap:3px}
+#dotmat .d{width:8px;height:8px;border-radius:50%}
+#dotmat .on{background:var(--people)}
+#dotmat .off{background:transparent;outline:1px solid var(--ghost)}
+
+/* ── CHARTS ── */
+.charts{padding:70px 0;border-bottom:1px solid var(--ghost)}
+.sec-hd{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--dim);display:flex;align-items:center;gap:16px;margin-bottom:48px}
+.sec-hd::after{content:'';flex:1;height:1px;background:var(--ghost)}
+.charts-row{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:start}
+@media(max-width:840px){.charts-row{grid-template-columns:1fr;gap:56px}}
+.chart-title{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--dim);margin-bottom:4px}
+.chart-note{font-size:.76rem;color:var(--mid);margin-bottom:18px;line-height:1.5}
+svg.chart{display:block;width:100%}
+/* share bars */
+.share{display:flex;flex-direction:column;gap:18px}
+.sr{display:flex;align-items:center;gap:14px}
+.sr-nm{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--mid);width:92px;flex-shrink:0}
+.sr-track{flex:1;height:3px;background:var(--ghost);position:relative}
+.sr-fill{position:absolute;left:0;top:0;bottom:0}
+.sr-val{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--ink);width:58px;text-align:right}
+
+/* ── QUESTIONS ── */
+.questions{padding:70px 0;border-bottom:1px solid var(--ghost)}
+.q-row{display:flex;align-items:baseline;gap:20px;padding:22px 0;border-top:1px solid var(--ghost);cursor:pointer;transition:padding .25s}
+.q-row:last-child{border-bottom:1px solid var(--ghost)}
+.q-row:hover{padding-left:10px}
+.q-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;align-self:center;background:var(--c)}
+.q-txt{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,1.9vw,1.55rem);font-weight:400;line-height:1.25;flex:1}
+.q-row:hover .q-txt{font-style:italic}
+.q-ans{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--c);white-space:nowrap}
+.q-arrow{color:var(--dim);font-size:1rem;transition:transform .25s,color .25s}
+.q-row:hover .q-arrow{transform:translateX(5px);color:var(--c)}
+
+/* ── ANALYSIS ── */
+.analysis{padding:70px 0;border-bottom:1px solid var(--ghost)}
+.analysis-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:46px}
+.live{display:flex;align-items:center;gap:8px;font-size:.66rem;color:var(--dim)}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--health);animation:blink 2.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.analysis-cols{display:grid;grid-template-columns:1fr 300px;gap:80px;align-items:start}
+@media(max-width:900px){.analysis-cols{grid-template-columns:1fr;gap:48px}}
+.a-body{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,1.7vw,1.32rem);font-weight:400;line-height:1.7}
+.a-body p+p{margin-top:1.3em}
+.a-body em{font-style:italic}
+.pull{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:300;letter-spacing:-.025em;line-height:1;margin:26px 0;color:var(--economy)}
+.sb-item{padding:16px 0;border-bottom:1px solid var(--ghost)}
+.sb-item:first-child{border-top:1px solid var(--ghost)}
+.sb-lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;color:var(--dim);margin-bottom:5px;display:flex;align-items:center;gap:7px}
+.sb-lbl .tk{width:7px;height:7px;border-radius:50%}
+.sb-val{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;line-height:1;margin-bottom:5px}
+.sb-note{font-size:.76rem;line-height:1.5;color:var(--mid)}
+
+/* ── FOOTER ── */
+footer{padding:46px 0 60px}
+.foot-row{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.foot-brand{font-family:'Cormorant Garamond',serif;font-size:.95rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+.foot-src{font-size:.72rem;line-height:1.7;color:var(--dim);max-width:520px}
+.foot-src strong{color:var(--mid);font-weight:500}
+.foot-pal{display:flex;gap:6px;margin-top:14px}
+.foot-pal i{width:22px;height:5px;display:block}
+
+/* ── PRESENCE / MOTION ── */
+.cnt{font-variant-numeric:tabular-nums}
+#dotmat .d.on{opacity:0;transform:scale(.4);transition:opacity .45s ease,transform .45s ease}
+.ledger.in #dotmat .d.on{opacity:1;transform:none}
+#enrBars rect{transform:scaleY(0);transform-origin:bottom;transform-box:fill-box;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.ledger.in #enrBars rect{transform:scaleY(1)}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.3s ease .15s}
+.in .draw{stroke-dashoffset:0}
+.fade{opacity:0;transition:opacity .9s ease .3s}
+.in .fade{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  .draw{transition:none;stroke-dashoffset:0}.fade{transition:none;opacity:1}
+  #dotmat .d.on,.ledger.in #dotmat .d.on{transition:none;opacity:1;transform:none}
+  #enrBars rect{transition:none;transform:scaleY(1)}
+}
+</style>
+</head>
+<body>
+<div class="w">
+
+<!-- NAV -->
+<nav>
+  <a class="brand" href="#">Indica</a>
+  <div class="domains">
+    <button data-d="economy">Economy</button>
+    <button data-d="climate">Climate</button>
+    <button data-d="people" class="on">People</button>
+    <button data-d="energy">Energy</button>
+    <button data-d="health">Health</button>
+    <button data-d="society">Society</button>
+  </div>
+</nav>
+<hr class="r">
+
+<!-- MASTHEAD -->
+<div class="mast">
+  <span class="l">India — A Living Almanac</span>
+  <span class="d">Updated continuously · 11 open archives</span>
+</div>
+
+<!-- HERO -->
+<section class="hero" data-reveal>
+  <div class="hero-num-row">
+    <span class="hero-num"><span class="cnt" data-to="1.43" data-dec="2">0</span><span class="u"> bn</span></span>
+    <div class="hero-aside">
+      <span class="lbl">People · 2023</span>
+      <span class="cat serif">The most populous nation on Earth</span>
+    </div>
+  </div>
+  <div class="chips">
+    <span class="chip">+1 in 6 humans alive</span>
+    <span class="chip">Fertility now below 2.0</span>
+    <span class="chip">Median age 28</span>
+  </div>
+  <h1 class="hero-hed">Every question about India, <em>answered in numbers</em> — and explained in plain language.</h1>
+  <p class="hero-sub">From the price of solar power to the air over Delhi, from literacy to life expectancy, Indica reads a billion-and-a-half lives through open data — <strong>Our World in Data, MoSPI, RBI, NASA, Copernicus, WRI</strong> — and tells you what it actually means. Ask anything. Start anywhere.</p>
+</section>
+
+<!-- LEDGER -->
+<section class="ledger" data-reveal>
+  <div class="ledger-grid">
+
+    <div class="li" style="--c:var(--people)">
+      <span class="li-n"><span class="cnt" data-to="1.43" data-dec="2">0</span><span class="u">bn</span></span>
+      <p class="li-lbl"><span class="tk"></span>People</p>
+      <div class="li-vis"><div id="dotmat"></div></div>
+      <p class="li-cut">Each dot, twenty-five million. One in six humans alive.</p>
+    </div>
+
+    <div class="li" style="--c:var(--economy)">
+      <span class="li-n">$<span class="cnt" data-to="3.9" data-dec="1">0</span><span class="u">T</span></span>
+      <p class="li-lbl"><span class="tk"></span>Economy · nominal GDP</p>
+      <div class="li-vis"><svg id="ecoSpark" viewBox="0 0 180 54" width="100%" height="54"></svg></div>
+      <p class="li-cut">Quadrupled in twenty years. The fastest-growing major economy.</p>
+    </div>
+
+    <div class="li" style="--c:var(--energy)">
+      <span class="li-n"><span class="cnt" data-to="203" data-dec="0">0</span><span class="u">GW</span></span>
+      <p class="li-lbl"><span class="tk"></span>Energy · non-fossil</p>
+      <div class="li-vis"><svg id="enrBars" viewBox="0 0 180 54" width="100%" height="54"></svg></div>
+      <p class="li-cut">Clean power, up 5.8× in a decade. Solar now ₹2.4 a unit.</p>
+    </div>
+
+    <div class="li" style="--c:var(--health)">
+      <span class="li-n"><span class="cnt" data-to="70.2" data-dec="1">0</span><span class="u">yrs</span></span>
+      <p class="li-lbl"><span class="tk"></span>Health · life expectancy</p>
+      <div class="li-vis"><svg id="hlthLine" viewBox="0 0 180 54" width="100%" height="54"></svg></div>
+      <p class="li-cut">Twenty-five years longer than a child born in 1960.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="charts" data-reveal>
+  <p class="sec-hd">Two Readings</p>
+  <div class="charts-row">
+    <div>
+      <p class="chart-title">The Economy, 2000 – 2024</p>
+      <p class="chart-note">GDP, nominal, in trillions of US dollars. Note the dip in 2020 and the steep recovery that followed.</p>
+      <svg class="chart" id="gdpChart" viewBox="0 0 540 200"></svg>
+    </div>
+    <div>
+      <p class="chart-title">India's Share of the World</p>
+      <p class="chart-note">India holds a sixth of humanity — but a much smaller share of its wealth and emissions.</p>
+      <div class="share" id="shareBars"></div>
+      <p style="font-size:.7rem;color:var(--dim);margin-top:16px;line-height:1.55">17.8% of people, 7.5% of emissions: India's per-capita footprint remains roughly half the world average.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTIONS -->
+<section class="questions">
+  <p class="sec-hd">Ask Anything · A Sample</p>
+  <div id="qList"></div>
+</section>
+
+<!-- ANALYSIS -->
+<section class="analysis">
+  <div class="analysis-hdr">
+    <span class="lbl">The Long View</span>
+    <span class="live"><span class="live-dot"></span> Data synced 4 minutes ago</span>
+  </div>
+  <div class="analysis-cols">
+    <div class="a-body">
+      <p>You cannot read a single Indian statistic in isolation. Wealth, air, literacy, lifespan and power all move together — and they have moved further, faster, here than almost anywhere in recorded history.</p>
+      <span class="pull">8.3×</span>
+      <p>The economy is more than eight times its size at the turn of the century. In the same span, a child gained twenty-five years of life expectancy, four hundred million people came online, and the price of a unit of solar electricity fell by four-fifths.</p>
+      <p>Indica's premise is simple: place every number beside its companions, name the source, and let you draw the line. <em>The data is open. The interpretation is the work.</em></p>
+    </div>
+    <div>
+      <div class="sb-item"><p class="sb-lbl"><span class="tk" style="background:var(--people)"></span>Population</p><p class="sb-val serif">1.43 bn</p><p class="sb-note">Surpassed China in April 2023.</p></div>
+      <div class="sb-item"><p class="sb-lbl"><span class="tk" style="background:var(--economy)"></span>GDP growth</p><p class="sb-val serif">7.0%</p><p class="sb-note">Fastest among major economies.</p></div>
+      <div class="sb-item"><p class="sb-lbl"><span class="tk" style="background:var(--society)"></span>Literacy</p><p class="sb-val serif">77.7%</p><p class="sb-note">Up from 18% in 1951.</p></div>
+      <div class="sb-item"><p class="sb-lbl"><span class="tk" style="background:var(--climate)"></span>Delhi PM2.5</p><p class="sb-val serif">~100 µg/m³</p><p class="sb-note">Still ~20× the WHO guideline.</p></div>
+      <div class="sb-item"><p class="sb-lbl"><span class="tk" style="background:var(--health)"></span>Sources</p><p class="sb-val serif" style="font-size:1.1rem;font-style:italic">11 open archives</p><p class="sb-note">OWID · MoSPI · RBI · NASA · Copernicus · WRI.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-row">
+    <div>
+      <div class="foot-brand">Indica</div>
+      <div class="foot-pal"><i style="background:var(--people)"></i><i style="background:var(--economy)"></i><i style="background:var(--energy)"></i><i style="background:var(--climate)"></i><i style="background:var(--health)"></i><i style="background:var(--society)"></i></div>
+    </div>
+    <div class="foot-src"><strong>Sources:</strong> Our World in Data; Ministry of Statistics &amp; Programme Implementation (MoSPI); Reserve Bank of India; World Resources Institute; NASA; EU Copernicus / CAMS; UN World Population Prospects. Figures are illustrative ranges for this study. Every published figure is sourced and reproducible.</div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+const root=document.documentElement;
+
+// ---- domain accent switcher (nav) ----
+document.querySelectorAll('.domains button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.domains button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const c=getComputedStyle(root).getPropertyValue('--'+b.dataset.d).trim();
+    document.querySelector('.hero-num').style.color=c;
+  });
+});
+
+// ---- count-up ----
+function animateCount(el){
+  if(el.dataset.done)return; el.dataset.done=1;
+  const to=parseFloat(el.dataset.to), dec=+(el.dataset.dec||0), dur=1150, t0=performance.now();
+  (function tick(t){let p=Math.min(1,(t-t0)/dur); p=1-Math.pow(1-p,3);
+    el.textContent=(to*p).toFixed(dec);
+    if(p<1)requestAnimationFrame(tick); else el.textContent=to.toFixed(dec);})(t0);
+}
+
+// ---- dot matrix (population) ----
+(function(){
+  const g=document.getElementById('dotmat'); if(!g)return;
+  const total=65, on=57; // 57 * 25M ≈ 1.43bn
+  for(let i=0;i<total;i++){const d=document.createElement('div');d.className='d '+(i<on?'on':'off');
+    if(i<on)d.style.transitionDelay=(i*9)+'ms'; g.appendChild(d);}
+})();
+
+// ---- helper: smooth path ----
+function smooth(pts){let p=`M ${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const cx=(pts[i-1][0]+pts[i][0])/2;p+=` C ${cx} ${pts[i-1][1]}, ${cx} ${pts[i][1]}, ${pts[i][0]} ${pts[i][1]}`;}return p;}
+
+// ---- economy sparkline ----
+(function(){
+  const v=[0.47,0.82,1.32,1.68,2.10,2.67,3.55,3.94];
+  const W=180,H=54,p=4,mx=4.2;
+  const x=i=>p+(i/(v.length-1))*(W-2*p), y=val=>H-p-((val)/(mx))*(H-2*p);
+  const pts=v.map((val,i)=>[x(i),y(val)]);
+  const line=smooth(pts), area=line+` L ${x(v.length-1)} ${H-p} L ${x(0)} ${H-p} Z`;
+  document.getElementById('ecoSpark').innerHTML=
+    `<defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--economy)" stop-opacity=".16"/><stop offset="1" stop-color="var(--economy)" stop-opacity="0"/></linearGradient></defs>
+     <path class="fade" d="${area}" fill="url(#eg)"/>
+     <path class="draw" pathLength="1" d="${line}" fill="none" stroke="var(--economy)" stroke-width="1.6" stroke-linecap="round"/>
+     <circle class="fade" cx="${x(v.length-1)}" cy="${y(v[v.length-1])}" r="2.6" fill="var(--economy)"/>`;
+})();
+
+// ---- energy ascending bars ----
+(function(){
+  const v=[35,57,72,90,150,203],W=180,H=54,mx=210,n=v.length;
+  const bw=(W-(n-1)*6)/n; let s='';
+  v.forEach((val,i)=>{const h=(val/mx)*(H-6),x=i*(bw+6),yy=H-h;
+    s+=`<rect x="${x}" y="${yy}" width="${bw}" height="${h}" fill="var(--energy)" opacity="${0.45+0.55*i/(n-1)}" style="transition-delay:${i*80}ms"/>`;});
+  document.getElementById('enrBars').innerHTML=s;
+})();
+
+// ---- health rising line ----
+(function(){
+  const v=[45,49,54,58,63,67,70.2],W=180,H=54,p=4,mn=40,mx=72;
+  const x=i=>p+(i/(v.length-1))*(W-2*p), y=val=>H-p-((val-mn)/(mx-mn))*(H-2*p);
+  const pts=v.map((val,i)=>[x(i),y(val)]);
+  document.getElementById('hlthLine').innerHTML=
+    `<path class="draw" pathLength="1" d="${smooth(pts)}" fill="none" stroke="var(--health)" stroke-width="1.6" stroke-linecap="round"/>
+     <circle class="fade" cx="${x(v.length-1)}" cy="${y(v[v.length-1])}" r="2.6" fill="var(--health)"/>`;
+})();
+
+// ---- GDP main chart ----
+(function(){
+  const years=[2000,2003,2006,2009,2012,2015,2018,2020,2021,2023,2024];
+  const v=[0.47,0.62,0.94,1.34,1.83,2.10,2.71,2.67,3.15,3.55,3.94];
+  const W=540,H=200,pad={l:30,r:14,t:14,b:26},mx=4.2;
+  const x=i=>pad.l+(i/(years.length-1))*(W-pad.l-pad.r);
+  const y=val=>H-pad.b-(val/mx)*(H-pad.t-pad.b);
+  let s='';
+  [0,1,2,3,4].forEach(g=>{s+=`<line x1="${pad.l}" y1="${y(g)}" x2="${W-pad.r}" y2="${y(g)}" stroke="var(--ghost)" stroke-width="1"/><text x="${pad.l-8}" y="${y(g)+3}" font-size="8" fill="var(--dim)" text-anchor="end" font-family="DM Sans">${g}T</text>`;});
+  [2000,2010,2020,2024].forEach(yr=>{let ii=years.indexOf(yr);if(ii<0)ii=years.findIndex(z=>z>=yr);s+=`<text x="${x(ii)}" y="${H-8}" font-size="8" fill="var(--dim)" text-anchor="middle" font-family="DM Sans">${yr}</text>`;});
+  const pts=years.map((yr,i)=>[x(i),y(v[i])]);
+  const line=smooth(pts), area=line+` L ${x(years.length-1)} ${y(0)} L ${x(0)} ${y(0)} Z`;
+  s+=`<defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--economy)" stop-opacity=".14"/><stop offset="1" stop-color="var(--economy)" stop-opacity="0"/></linearGradient></defs>`;
+  s+=`<path class="fade" d="${area}" fill="url(#gg)"/><path class="draw" pathLength="1" d="${line}" fill="none" stroke="var(--economy)" stroke-width="2" stroke-linecap="round"/>`;
+  s+=`<circle class="fade" cx="${x(years.length-1)}" cy="${y(v[v.length-1])}" r="3.4" fill="var(--economy)"/>`;
+  s+=`<text class="fade" x="${x(years.length-1)}" y="${y(v[v.length-1])-9}" font-size="11" fill="var(--ink)" text-anchor="end" font-family="Cormorant Garamond" font-weight="500">$3.94T</text>`;
+  document.getElementById('gdpChart').innerHTML=s;
+})();
+
+// ---- share-of-world bars ----
+(function(){
+  const rows=[
+    {nm:'Population',v:17.8,c:'var(--people)'},
+    {nm:'CO₂ emissions',v:7.5,c:'var(--climate)'},
+    {nm:'Internet users',v:14.2,c:'var(--society)'},
+    {nm:'GDP (nominal)',v:3.6,c:'var(--economy)'},
+    {nm:'Solar capacity',v:6.4,c:'var(--energy)'},
+  ];
+  const max=20;
+  document.getElementById('shareBars').innerHTML=rows.map((r,i)=>
+    `<div class="sr"><span class="sr-nm">${r.nm}</span><div class="sr-track"><div class="sr-fill" data-w="${r.v/max*100}%" style="width:0;background:${r.c};transition:width 1s cubic-bezier(.2,.7,.2,1) ${i*90}ms"></div></div><span class="sr-val">${r.v}%</span></div>`).join('');
+})();
+
+// ---- questions ----
+(function(){
+  const Q=[
+    {q:'How fast is India’s economy really growing?',a:'7.0% / yr',c:'var(--economy)'},
+    {q:'When did India become the most populous country?',a:'April 2023',c:'var(--people)'},
+    {q:'Is Delhi’s air getting any cleaner?',a:'≈ flat',c:'var(--climate)'},
+    {q:'How cheap has solar power become?',a:'₹2.4 / kWh',c:'var(--energy)'},
+    {q:'How much longer do Indians live now?',a:'+25 yrs',c:'var(--health)'},
+    {q:'How literate is India today?',a:'77.7%',c:'var(--society)'},
+  ];
+  document.getElementById('qList').innerHTML=Q.map(o=>
+    `<div class="q-row" style="--c:${o.c}"><span class="q-dot"></span><span class="q-txt">${o.q}</span><span class="q-ans">${o.a}</span><span class="q-arrow">&rarr;</span></div>`).join('');
+})();
+
+// ---- reveal on scroll ----
+function reveal(el){
+  el.classList.add('in');
+  el.querySelectorAll('.cnt').forEach(animateCount);
+  el.querySelectorAll('.sr-fill[data-w]').forEach(f=>{f.style.width=f.dataset.w;});
+}
+const targets=document.querySelectorAll('[data-reveal]');
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},{threshold:.3});
+  targets.forEach(t=>io.observe(t));
+}else targets.forEach(reveal);
+</script>
+</body>
+</html>

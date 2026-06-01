@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indica · A Living Almanac of India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="indica.css">
+</head>
+<body lang="en">
+<div class="wrap">
+  <nav class="nav">
+    <a class="brand" href="index.html">Indica</a>
+    <div class="domains">
+      <a data-d="economy" href="domain.html">Economy</a><a data-d="climate" href="domain.html">Climate</a>
+      <a data-d="people" class="on" href="domain.html">People</a><a data-d="energy" href="domain.html">Energy</a>
+      <a data-d="health" href="domain.html">Health</a><a data-d="society" href="domain.html">Society</a>
+    </div>
+  </nav>
+  <hr class="r">
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;padding:46px 0 0">
+    <span class="lbl" style="color:var(--mid)">India — A Living Almanac</span>
+    <span class="lbl">Updated continuously · 11 open archives</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="dom-people" data-reveal style="padding:30px 0 70px">
+    <div class="hero-num-row">
+      <span class="hero-num"><span class="cnt" data-to="1.43" data-dec="2">0</span><span class="u"> bn</span></span>
+      <div class="hero-aside"><span class="lbl">People · 2023</span><span class="cat serif">The most populous nation on Earth</span></div>
+    </div>
+    <div class="demo" style="margin:16px 0 40px;gap:9px"><span class="chip">1 in 6 humans alive</span><span class="chip">Fertility below 2.0</span><span class="chip">Median age 28</span></div>
+    <h1 class="serif" style="font-weight:400;font-size:var(--t-h1);line-height:1.1;max-width:21ch">Every question about India, <em style="font-style:italic">answered in numbers</em> — and explained in plain language.</h1>
+    <p class="muted" style="margin-top:18px;max-width:62ch;font-size:1.05rem">From the price of solar power to the air over Delhi, Indica reads 1.4 billion lives through open data — Our World in Data, MoSPI, RBI, NASA, Copernicus, WRI — and tells you what it means. Ask anything.</p>
+    <div style="max-width:520px;margin-top:26px"><a class="btn dom-people" href="ask.html" style="display:inline-block;text-decoration:none">Ask a question →</a></div>
+  </section>
+
+  <!-- LEDGER -->
+  <section class="section" data-reveal style="border-bottom:1px solid var(--ghost)">
+    <div class="ledger-grid">
+      <div class="li dom-people"><span class="li-n"><span class="cnt" data-to="1.43" data-dec="2">0</span><span class="u">bn</span></span><p class="li-lbl"><span class="tk"></span>People</p><div class="li-vis dotmat" id="dotmat" style="grid-template-columns:repeat(13,8px)"></div><p class="li-cut">Each dot, 25 million. One in six humans alive.</p></div>
+      <div class="li dom-economy"><span class="li-n">$<span class="cnt" data-to="3.9" data-dec="1">0</span><span class="u">T</span></span><p class="li-lbl"><span class="tk"></span>Economy · GDP</p><div class="li-vis"><svg id="s1" viewBox="0 0 180 54" width="100%" height="54"></svg></div><p class="li-cut">Quadrupled in twenty years.</p></div>
+      <div class="li dom-energy"><span class="li-n"><span class="cnt" data-to="203" data-dec="0">0</span><span class="u">GW</span></span><p class="li-lbl"><span class="tk"></span>Energy · non-fossil</p><div class="li-vis"><svg id="s2" viewBox="0 0 180 54" width="100%" height="54"></svg></div><p class="li-cut">Up 5.8× in a decade.</p></div>
+      <div class="li dom-health"><span class="li-n"><span class="cnt" data-to="70.2" data-dec="1">0</span><span class="u">yrs</span></span><p class="li-lbl"><span class="tk"></span>Health · life expectancy</p><div class="li-vis"><svg id="s3" viewBox="0 0 180 54" width="100%" height="54"></svg></div><p class="li-cut">+25 years since 1960.</p></div>
+    </div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="section">
+    <p class="sec-hd">Ask anything · a sample</p>
+    <div id="qList"></div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-brand">Indica</div>
+    <div class="foot-pal"><i style="background:var(--people)"></i><i style="background:var(--economy)"></i><i style="background:var(--energy)"></i><i style="background:var(--climate)"></i><i style="background:var(--health)"></i><i style="background:var(--society)"></i></div>
+    <p class="foot-note">Sources: Our World in Data · MoSPI · RBI · WRI · NASA · Copernicus · UN WPP. Figures illustrative for this mock.</p>
+  </footer>
+</div>
+
+<script src="chart-kit.js"></script>
+<script>
+// dot matrix
+(function(){const g=document.getElementById('dotmat'),on=57,total=65;for(let i=0;i<total;i++){const d=document.createElement('div');d.className='d '+(i<on?'on':'off');if(i<on)d.style.transitionDelay=(i*9)+'ms';g.appendChild(d);}})();
+// sparklines via kit
+Indica.mount('#s1',Indica.spark({data:[0.47,0.82,1.32,1.68,2.10,2.67,3.55,3.94],color:'#3A5BD0',area:true,animate:true}));
+Indica.mount('#s2',Indica.spark({data:[35,57,72,90,150,203],color:'#EFA227',animate:true}));
+Indica.mount('#s3',Indica.spark({data:[45,49,54,58,63,67,70.2],color:'#15A382',animate:true}));
+// questions
+const Q=[['economy','How fast is India’s economy really growing?','7.0% / yr','#3A5BD0'],['people','When did India become the most populous country?','April 2023','#DB5C97'],['climate','Is Delhi’s air getting any cleaner?','≈ flat','#EE6A4C'],['energy','How cheap has solar power become?','₹2.4 / kWh','#EFA227'],['health','How much longer do Indians live now?','+25 yrs','#15A382'],['society','How literate is India today?','77.7%','#7C5AD6']];
+document.getElementById('qList').innerHTML=Q.map(o=>`<a class="q-row" href="chart.html" style="text-decoration:none;color:inherit"><span class="q-dot" style="background:${o[3]}"></span><span class="q-txt">${o[1]}</span><span class="q-ans" style="color:${o[3]}">${o[2]}</span><span class="q-arrow">→</span></a>`).join('');
+// count-up + reveal
+function cnt(el){const to=+el.dataset.to,dec=+el.dataset.dec,t0=performance.now();(function tk(t){let p=Math.min(1,(t-t0)/1100);p=1-Math.pow(1-p,3);el.textContent=(to*p).toFixed(dec);if(p<1)requestAnimationFrame(tk);else el.textContent=to.toFixed(dec);})(t0);}
+function reveal(el){el.classList.add('in');el.querySelectorAll('.cnt').forEach(c=>{if(!c.dataset.done){c.dataset.done=1;cnt(c);}});}
+const ts=document.querySelectorAll('[data-reveal]');
+if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}}),{threshold:.25});ts.forEach(t=>io.observe(t));}else ts.forEach(reveal);
+</script>
+</body>
+</html>

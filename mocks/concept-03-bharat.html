@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDICA · Bharat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF6;--ink:#23201C;--soft:#6B655C;
+    --indigo:#243A8E;--marigold:#E0982A;--terra:#C0563B;--leaf:#3E7C5A;
+    --line:#EAE5DA;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:"Hanken Grotesk",sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .serif{font-family:"Instrument Serif",serif;font-weight:400}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 36px}
+
+  header{padding:26px 0;position:sticky;top:0;background:rgba(251,250,246,.85);backdrop-filter:blur(10px);z-index:30}
+  header .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:"Instrument Serif",serif;font-size:30px;letter-spacing:.01em}
+  .logo b{color:var(--terra);font-weight:400}
+  header nav{display:flex;gap:30px;font-size:14px;font-weight:500}
+  header nav a{color:var(--soft);text-decoration:none;transition:.2s}
+  header nav a:hover{color:var(--indigo)}
+  .pill{border:1.5px solid var(--ink);border-radius:40px;padding:9px 20px;font-size:13.5px;font-weight:600;cursor:pointer;background:var(--ink);color:var(--paper)}
+
+  /* hero with layered warm gradient + soft chakra-inspired arcs (abstract, not literal) */
+  .hero{position:relative;padding:80px 0 70px;overflow:hidden}
+  .hero .glow{position:absolute;inset:0;background:
+    radial-gradient(620px 460px at 82% 18%, rgba(224,152,42,.20), transparent 60%),
+    radial-gradient(540px 420px at 92% 60%, rgba(192,86,59,.15), transparent 62%),
+    radial-gradient(500px 500px at 8% 88%, rgba(36,58,142,.10), transparent 60%);z-index:0}
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--terra);text-transform:uppercase;margin-bottom:22px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--terra)}
+  h1{font-family:"Instrument Serif",serif;font-size:clamp(48px,7vw,92px);line-height:1.02;letter-spacing:-.01em;font-weight:400}
+  h1 i{color:var(--indigo)}
+  h1 .m{color:var(--marigold)}
+  .lead{margin-top:26px;font-size:19px;color:var(--soft);max-width:48ch;line-height:1.55}
+  .search{margin-top:34px;display:flex;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:7px 7px 7px 22px;box-shadow:0 18px 50px -28px rgba(36,58,142,.4)}
+  .search input{flex:1;border:none;outline:none;font-family:"Hanken Grotesk",sans-serif;font-size:16px;background:transparent;color:var(--ink)}
+  .search input::placeholder{color:var(--soft)}
+  .search button{background:var(--indigo);color:#fff;border:none;border-radius:11px;padding:12px 22px;font-weight:600;font-size:14.5px;cursor:pointer}
+  .chips{margin-top:18px;display:flex;gap:9px;flex-wrap:wrap}
+  .chip{font-size:13px;color:var(--soft);background:#fff;border:1px solid var(--line);border-radius:30px;padding:7px 15px;cursor:pointer;transition:.2s}
+  .chip:hover{border-color:var(--indigo);color:var(--indigo)}
+
+  /* hero card with donut */
+  .herocard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 30px 70px -40px rgba(36,58,142,.45)}
+  .herocard .ttl{font-size:14px;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:.05em}
+  .herocard .q{font-family:"Instrument Serif",serif;font-size:25px;line-height:1.18;margin:8px 0 20px}
+  .donutwrap{display:flex;align-items:center;gap:26px}
+  .donut-legend{display:flex;flex-direction:column;gap:13px;flex:1}
+  .dl{display:flex;align-items:center;gap:11px;font-size:14px}
+  .dl .sw{width:12px;height:12px;border-radius:3px}
+  .dl b{margin-left:auto;font-variant-numeric:tabular-nums}
+
+  /* section */
+  section.block{padding:64px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+  .sec-head h2{font-family:"Instrument Serif",serif;font-size:42px;font-weight:400;letter-spacing:-.01em;max-width:18ch;line-height:1.05}
+  .sec-head p{color:var(--soft);max-width:38ch;font-size:15.5px}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;transition:.25s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -32px rgba(36,58,142,.4)}
+  .card .tag{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:30px;display:inline-block}
+  .t-eco{background:rgba(36,58,142,.1);color:var(--indigo)}
+  .t-cli{background:rgba(62,124,90,.12);color:var(--leaf)}
+  .t-soc{background:rgba(224,152,42,.16);color:#A06b12}
+  .card h3{font-family:"Instrument Serif",serif;font-size:25px;font-weight:400;margin:16px 0 4px;line-height:1.12}
+  .card .stat{font-size:13.5px;color:var(--soft)}
+  .card svg{width:100%;margin-top:18px;overflow:visible}
+
+  footer{border-top:1px solid var(--line);padding:50px 0;display:flex;justify-content:space-between;align-items:center;color:var(--soft);font-size:14px}
+  footer .srcs{display:flex;gap:8px;flex-wrap:wrap}
+  footer .srcs span{border:1px solid var(--line);border-radius:30px;padding:5px 13px;font-size:12px}
+
+  @media(max-width:880px){.hero .wrap{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.sec-head{flex-direction:column;align-items:flex-start;gap:16px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="logo">Indi<b>c</b>a</div>
+  <nav><a href="#">Explore</a><a href="#">Datasets</a><a href="#">Stories</a><a href="#">About</a></nav>
+  <button class="pill">Ask a question</button>
+</div></header>
+
+<section class="hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>Understand India, one question at a time</span>
+      <h1>What does <i>1.4&nbsp;billion</i> people<br>look like in <span class="m">data?</span></h1>
+      <p class="lead">From the price of solar power to the air in Delhi, from literacy to life expectancy — ask anything about India, and we'll answer it with sourced, beautiful charts.</p>
+      <div class="search">
+        <input placeholder="e.g. How has India's clean energy capacity grown?" />
+        <button>Ask →</button>
+      </div>
+      <div class="chips">
+        <span class="chip">India vs China population</span>
+        <span class="chip">Delhi air quality trend</span>
+        <span class="chip">GDP per capita by state</span>
+        <span class="chip">Forest cover since 2000</span>
+      </div>
+    </div>
+    <div class="herocard">
+      <div class="ttl">Sample answer</div>
+      <div class="q">How does India generate its electricity in 2024?</div>
+      <div class="donutwrap">
+        <svg id="donut" width="170" height="170" viewBox="0 0 170 170"></svg>
+        <div class="donut-legend">
+          <div class="dl"><span class="sw" style="background:#23201C"></span>Coal <b>49%</b></div>
+          <div class="dl"><span class="sw" style="background:var(--marigold)"></span>Solar <b>18%</b></div>
+          <div class="dl"><span class="sw" style="background:var(--indigo)"></span>Hydro <b>11%</b></div>
+          <div class="dl"><span class="sw" style="background:var(--leaf)"></span>Wind <b>10%</b></div>
+          <div class="dl"><span class="sw" style="background:var(--terra)"></span>Other <b>12%</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="block" style="border-top:none">
+    <div class="sec-head">
+      <h2>Pick a question. Watch India explain itself.</h2>
+      <p>Every card is a real question answered from open datasets — MoSPI, RBI, World in Data, NASA, Copernicus and WRI — refreshed continuously.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="tag t-eco">Economy</span>
+        <h3>Is India still the fastest-growing major economy?</h3>
+        <div class="stat">GDP growth, % per year</div>
+        <svg viewBox="0 0 300 110" data-line="6.4,7.4,8.0,4.2,-5.8,9.1,7.2,7.0" data-color="#243A8E"></svg>
+      </div>
+      <div class="card">
+        <span class="tag t-cli">Climate</span>
+        <h3>Is Delhi's air getting any cleaner?</h3>
+        <div class="stat">Annual PM2.5, µg/m³</div>
+        <svg viewBox="0 0 300 110" data-line="113,115,108,104,99,102" data-color="#C0563B"></svg>
+      </div>
+      <div class="card">
+        <span class="tag t-soc">Society</span>
+        <h3>How long do Indians live now?</h3>
+        <div class="stat">Life expectancy at birth, years</div>
+        <svg viewBox="0 0 300 110" data-line="45,49,54,58,63,67,70.2" data-color="#3E7C5A"></svg>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1200px">
+  <div class="logo" style="font-size:24px">Indi<b>c</b>a</div>
+  <div class="srcs"><span>World in Data</span><span>MoSPI</span><span>RBI</span><span>NASA</span><span>Copernicus</span><span>WRI</span></div>
+</div></footer>
+
+<script>
+// donut
+(function(){
+  const data=[{v:49,c:'#23201C'},{v:18,c:'#E0982A'},{v:11,c:'#243A8E'},{v:10,c:'#3E7C5A'},{v:12,c:'#C0563B'}];
+  const cx=85,cy=85,r=62,sw=24;const C=2*Math.PI*r;let off=0;let s='';
+  data.forEach(d=>{const len=d.v/100*C;
+    s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${d.c}" stroke-width="${sw}" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-off}" transform="rotate(-90 ${cx} ${cy})"/>`;
+    off+=len;});
+  s+=`<text x="${cx}" y="${cy-2}" text-anchor="middle" font-family="Instrument Serif" font-size="26" fill="#23201C">71%</text>`;
+  s+=`<text x="${cx}" y="${cy+16}" text-anchor="middle" font-family="Hanken Grotesk" font-size="9.5" letter-spacing=".06em" fill="#6B655C">FOSSIL+SOLAR</text>`;
+  document.getElementById('donut').innerHTML=s;
+})();
+// card lines
+document.querySelectorAll('[data-line]').forEach(svg=>{
+  const d=svg.dataset.line.split(',').map(Number),col=svg.dataset.color;
+  const W=300,H=110,p=10;const mn=Math.min(...d),mx=Math.max(...d);
+  const x=i=>p+(i/(d.length-1))*(W-2*p);
+  const y=v=>H-p-((v-mn)/(mx-mn||1))*(H-2*p-14)-4;
+  let path=`M ${x(0)} ${y(d[0])}`;
+  d.forEach((v,i)=>{if(i>0){const cxp=(x(i-1)+x(i))/2;path+=` C ${cxp} ${y(d[i-1])}, ${cxp} ${y(v)}, ${x(i)} ${y(v)}`;}});
+  const area=path+` L ${x(d.length-1)} ${H} L ${x(0)} ${H} Z`;
+  const id='gr'+Math.round(x(1)*d.length);
+  svg.innerHTML=`<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".18"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>
+  <path d="${area}" fill="url(#${id})"/><path d="${path}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="${x(d.length-1)}" cy="${y(d[d.length-1])}" r="4" fill="#fff" stroke="${col}" stroke-width="2.5"/>`;
+});
+</script>
+</body>
+</html>

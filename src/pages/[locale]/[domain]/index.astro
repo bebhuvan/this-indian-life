@@ -1,0 +1,44 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Nav from "../../../components/Nav.astro";
+import { chartUrl, charts, domainFor, domains, latestObservation, loadSeries, formatValue, locales } from "../../../data/site";
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) => domains.map((domain) => ({ params: { locale, domain: domain.id } })));
+}
+
+const { locale, domain } = Astro.params;
+const current = domainFor(domain as any)!;
+const domainCharts = charts.filter((chart) => chart.domain === domain);
+---
+
+<Base title={`${current.label} · Indica`} domain={current.id}>
+  <div class="wrap">
+    <Nav active={current.id} locale={locale} />
+
+    <header class="domain-head">
+      <span class="domain-chip"><span class="tk"></span><span>{current.label}</span></span>
+      <h1 class="serif">{current.line}</h1>
+      <p class="muted">A seed catalog of sourced chart pages. More indicators can be added as catalog records once the ingestion adapter exists.</p>
+    </header>
+
+    <section class="section">
+      <p class="sec-hd">{domainCharts.length} chart pages</p>
+      <div class="cards">
+        {domainCharts.map((chart) => {
+          const latest = latestObservation(loadSeries(chart.seriesPath))!;
+          return (
+            <a class={`card dom-${chart.domain}`} href={chartUrl(chart, locale)}>
+              <div class="tag">{chart.topic}</div>
+              <h4>{chart.title}</h4>
+              <p class="sub">{chart.dek}</p>
+              <p class="card-value">{formatValue(latest.value, chart.valueFormat)} <span>{latest.date}</span></p>
+              <span class="arrow">-></span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  </div>
+</Base>
+

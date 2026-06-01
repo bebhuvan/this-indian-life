@@ -1,0 +1,67 @@
+---
+import type { ChartRecord, SeriesArtifact } from "../data/site";
+import { axisLabel, cleanObservations } from "../data/site";
+
+type Props = {
+  chart: ChartRecord;
+  series: SeriesArtifact;
+};
+
+const { chart, series } = Astro.props;
+const observations = cleanObservations(series);
+const plotted = observations.filter((_, index) => {
+  if (observations.length <= 45) return true;
+  return index % 2 === 0 || index === observations.length - 1;
+});
+
+const width = 960;
+const height = 520;
+const pad = { l: 68, r: 112, t: 46, b: 52 };
+const values = plotted.map((item) => item.value);
+const rawMin = Math.min(...values);
+const rawMax = Math.max(...values);
+const min = rawMin < 0 ? Math.floor(rawMin / 5) * 5 : 0;
+const max = chart.axisFormat === "percent" ? Math.ceil(rawMax / 10) * 10 : rawMax * 1.08;
+const span = max - min || 1;
+const x = (index: number) => pad.l + (index / (plotted.length - 1)) * (width - pad.l - pad.r);
+const y = (value: number) => height - pad.b - ((value - min) / span) * (height - pad.t - pad.b);
+const points = plotted.map((item, index) => [x(index), y(item.value)]);
+const line = points.map((point, index) => `${index === 0 ? "M" : "L"} ${point[0].toFixed(2)} ${point[1].toFixed(2)}`).join(" ");
+const zeroY = Math.max(pad.t, Math.min(height - pad.b, y(0)));
+const area = `${line} L ${x(plotted.length - 1).toFixed(2)} ${zeroY.toFixed(2)} L ${x(0).toFixed(2)} ${zeroY.toFixed(2)} Z`;
+const ticks = Array.from({ length: 5 }, (_, index) => min + (span * index) / 4);
+const yearEvery = Math.max(1, Math.ceil(plotted.length / 8));
+const latestPoint = points.at(-1);
+const latest = plotted.at(-1);
+const gradientId = `area-${chart.id.replaceAll(".", "-")}`;
+---
+
+<svg class="chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={chart.title}>
+  <defs>
+    <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="var(--c)" stop-opacity=".24" />
+      <stop offset="1" stop-color="var(--c)" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  {ticks.map((tick) => (
+    <g>
+      <line x1={pad.l} y1={y(tick)} x2={width - pad.r} y2={y(tick)} stroke="#ededed" />
+      <text class="yaxt" x={pad.l - 12} y={y(tick) + 4} text-anchor="end">{axisLabel(tick, chart.axisFormat)}</text>
+    </g>
+  ))}
+  {plotted.map((item, index) => (
+    (index % yearEvery === 0 || index === plotted.length - 1) && (
+      <text class="xaxt" x={x(index)} y={height - pad.b + 24} text-anchor="middle">{item.date}</text>
+    )
+  ))}
+  <path d={area} fill={`url(#${gradientId})`} />
+  <path d={line} fill="none" stroke="var(--c)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+  {latestPoint && latest && (
+    <g>
+      <line x1={latestPoint[0]} y1={latestPoint[1]} x2={width - pad.r + 12} y2={latestPoint[1]} stroke="var(--c)" stroke-dasharray="2 4" opacity=".45" />
+      <circle cx={latestPoint[0]} cy={latestPoint[1]} r="6" fill="var(--c)" />
+      <text class="end-s" x={width - pad.r + 16} y={latestPoint[1] + 13}>{latest.date}</text>
+    </g>
+  )}
+</svg>
+

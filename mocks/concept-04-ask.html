@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDICA · Ask</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FCFCFB;--ink:#16181C;--soft:#5F646E;--faint:#9CA1AB;
+    --line:#ECECEA;--em:#0E7C66;--em-soft:#E4F3EF;--am:#B45309;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:"Hanken Grotesk",sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .disp{font-family:"Bricolage Grotesque",sans-serif}
+  .serif{font-family:"Source Serif 4",serif}
+  .shell{max-width:880px;margin:0 auto;padding:0 28px}
+
+  header{padding:22px 0;display:flex;align-items:center;justify-content:space-between;max-width:880px;margin:0 auto;padding-left:28px;padding-right:28px}
+  .logo{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:21px;letter-spacing:-.02em}
+  .logo .d{color:var(--em)}
+  header .right{display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--soft)}
+  .ghost{border:1px solid var(--line);border-radius:9px;padding:8px 14px;background:#fff;cursor:pointer;font-weight:500;color:var(--ink)}
+
+  .hero{text-align:center;padding:58px 0 30px}
+  .hero .badge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--em);background:var(--em-soft);padding:6px 14px;border-radius:30px;margin-bottom:26px}
+  .hero h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:clamp(34px,5.4vw,58px);line-height:1.02;letter-spacing:-.035em;max-width:16ch;margin:0 auto}
+  .hero p{margin:20px auto 0;color:var(--soft);max-width:52ch;font-size:17.5px}
+
+  /* search box */
+  .ask{margin:34px auto 0;max-width:680px;background:#fff;border:1.5px solid var(--line);border-radius:18px;box-shadow:0 20px 50px -34px rgba(14,124,102,.55);transition:.2s}
+  .ask:focus-within{border-color:var(--em);box-shadow:0 24px 60px -32px rgba(14,124,102,.6)}
+  .ask .row{display:flex;align-items:center;padding:8px 8px 8px 20px;gap:12px}
+  .ask svg.ic{flex:none;color:var(--faint)}
+  .ask input{flex:1;border:none;outline:none;font-size:17px;font-family:"Hanken Grotesk",sans-serif;background:transparent;color:var(--ink);padding:12px 0}
+  .ask .go{background:var(--ink);color:#fff;border:none;border-radius:11px;width:46px;height:46px;font-size:19px;cursor:pointer;flex:none;transition:.2s}
+  .ask .go:hover{background:var(--em)}
+  .suggest{margin:20px auto 0;max-width:680px;display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+  .sg{font-size:13.5px;color:var(--soft);background:#fff;border:1px solid var(--line);border-radius:30px;padding:8px 16px;cursor:pointer;transition:.18s}
+  .sg:hover{border-color:var(--em);color:var(--em);transform:translateY(-1px)}
+
+  /* answer */
+  .answer{max-width:760px;margin:46px auto 0;opacity:0;transform:translateY(12px);transition:.45s cubic-bezier(.2,.7,.2,1)}
+  .answer.show{opacity:1;transform:none}
+  .a-q{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:24px;letter-spacing:-.02em;display:flex;gap:12px;align-items:baseline}
+  .a-q .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--em);background:var(--em-soft);padding:4px 10px;border-radius:20px;flex:none;align-self:center}
+  .a-card{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .a-chart{padding:30px 30px 16px}
+  .a-chart svg{width:100%;overflow:visible}
+  .gl{stroke:var(--line);stroke-width:1}
+  .ax{font-family:"Hanken Grotesk",sans-serif;font-size:11.5px;fill:var(--faint)}
+  .a-prose{padding:6px 30px 26px;font-family:"Source Serif 4",serif;font-size:18px;line-height:1.62;color:#2A2D33}
+  .a-prose b{font-weight:600;color:var(--ink);background:linear-gradient(transparent 62%, var(--em-soft) 0)}
+  .a-foot{border-top:1px solid var(--line);background:#FAFAF9;padding:16px 30px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .srcs{display:flex;gap:7px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--soft)}
+  .src{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 11px}
+  .src .n{width:6px;height:6px;border-radius:50%;background:var(--em)}
+  .acts{display:flex;gap:8px}
+  .acts button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;font-size:12.5px;cursor:pointer;color:var(--soft);display:flex;gap:6px;align-items:center}
+  .acts button:hover{color:var(--em);border-color:var(--em)}
+  .followups{margin-top:20px}
+  .followups .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);font-weight:600;margin-bottom:10px}
+  .fu{display:flex;align-items:center;gap:10px;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:8px;cursor:pointer;font-size:15px;transition:.18s}
+  .fu:hover{border-color:var(--em);background:#fff;transform:translateX(3px)}
+  .fu .arr{margin-left:auto;color:var(--faint)}
+
+  footer{text-align:center;color:var(--faint);font-size:13px;padding:60px 0 40px}
+  @media(max-width:560px){.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">indica<span class="d">.</span></div>
+  <div class="right"><button class="ghost">Datasets</button><button class="ghost">Sign in</button></div>
+</header>
+
+<div class="shell">
+  <section class="hero">
+    <span class="badge">● 11 open datasets · live</span>
+    <h1 class="disp">Ask India anything.</h1>
+    <p>Type a question about the economy, climate, health, or society — get a sourced, beautiful answer in seconds. Powered by MoSPI, RBI, World in Data, NASA &amp; Copernicus.</p>
+
+    <div class="ask">
+      <div class="row">
+        <svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="q" placeholder="Ask about India…" autocomplete="off"/>
+        <button class="go" id="go">→</button>
+      </div>
+    </div>
+    <div class="suggest" id="suggest">
+      <span class="sg" data-k="energy">How has India's clean energy capacity grown?</span>
+      <span class="sg" data-k="pop">When did India overtake China?</span>
+      <span class="sg" data-k="solar">Why did solar get so cheap?</span>
+      <span class="sg" data-k="life">How much longer do Indians live now?</span>
+    </div>
+  </section>
+
+  <section class="answer" id="answer">
+    <div class="a-q"><span class="tag" id="aTag">Energy</span><span id="aQ"></span></div>
+    <div class="a-card">
+      <div class="a-chart"><svg id="aChart" viewBox="0 0 700 300"></svg></div>
+      <div class="a-prose" id="aProse"></div>
+      <div class="a-foot">
+        <div class="srcs" id="aSrcs"></div>
+        <div class="acts"><button>⤓ Export</button><button>↗ Share</button><button>♡ Save</button></div>
+      </div>
+    </div>
+    <div class="followups">
+      <div class="lbl">Follow-up questions</div>
+      <div id="aFollow"></div>
+    </div>
+  </section>
+</div>
+
+<footer>Indica · Ask — every answer is sourced and reproducible.</footer>
+
+<script>
+const DATA={
+  energy:{tag:'Energy',q:"How has India's clean energy capacity grown?",
+    years:[2014,2016,2018,2020,2022,2024],vals:[35,49,72,90,150,203],unit:'GW',color:'#0E7C66',
+    prose:'India\'s non-fossil generating capacity has grown almost <b>six-fold since 2014</b>, from 35&nbsp;GW to <b>203&nbsp;GW in 2024</b>. The ramp steepens sharply after 2020 as utility-scale solar comes online and tariffs fall below ₹2.5/kWh. India now targets 500&nbsp;GW of non-fossil capacity by 2030.',
+    srcs:['MNRE','World in Data','RBI'],
+    follow:["What share of electricity is still from coal?","How cheap is Indian solar compared to the world?","Which states lead on renewables?"]},
+  pop:{tag:'People',q:"When did India overtake China in population?",
+    years:[2000,2005,2010,2015,2020,2023],vals:[1059,1147,1234,1310,1396,1429],unit:'M',color:'#243A8E',
+    prose:'India became the world\'s most populous country in <b>April 2023</b>, reaching roughly <b>1.43&nbsp;billion</b> people and edging past China. Unlike China, India\'s population is still growing — though its fertility rate has now fallen <b>below replacement</b>, so the curve is beginning to flatten.',
+    srcs:['UN WPP','MoSPI','World in Data'],
+    follow:["What is India's fertility rate today?","How young is India's population?","When will India's population peak?"]},
+  solar:{tag:'Energy',q:"Why did solar power get so cheap in India?",
+    years:[2010,2014,2017,2020,2023],vals:[12,7,3.3,2.4,2.4],unit:'₹/kWh',color:'#B45309',
+    prose:'The winning solar tariff in Indian auctions collapsed from <b>₹12/kWh in 2010 to about ₹2.4/kWh</b> — an <b>80% drop</b>. Falling global panel prices, competitive reverse auctions, and enormous project scale drove the decline. Solar is now cheaper than new coal in India.',
+    srcs:['MNRE','IRENA','RBI'],
+    follow:["How does this compare to coal power cost?","How much solar has India installed?","What are the grid challenges?"]},
+  life:{tag:'Health',q:"How much longer do Indians live now?",
+    years:[1960,1980,1990,2000,2010,2020],vals:[45,54,58,63,67,70.2],unit:'yrs',color:'#0E7C66',
+    prose:'Life expectancy at birth has risen from about <b>45 years in 1960 to 70.2 years</b> today — a gain of <b>25 years in two generations</b>. The biggest driver was the fall in infant and child mortality, alongside better nutrition, vaccination, and access to care.',
+    srcs:['World in Data','MoSPI','WHO'],
+    follow:["How does this vary by state?","What is the infant mortality trend?","Men vs women life expectancy?"]},
+};
+
+function drawChart(d){
+  const W=700,H=300,pad={l:46,r:20,t:24,b:36};
+  const xs=d.years,ys=d.vals;
+  const mx=Math.max(...ys),mn=Math.min(0,...ys);
+  const x=i=>pad.l+(i/(xs.length-1))*(W-pad.l-pad.r);
+  const y=v=>H-pad.b-((v-mn)/(mx-mn))*(H-pad.t-pad.b);
+  let s='';
+  const ticks=4;
+  for(let t=0;t<=ticks;t++){const v=mn+(mx-mn)*t/ticks;const yy=y(v);
+    s+=`<line class="gl" x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}"/>`;
+    s+=`<text class="ax" x="${pad.l-10}" y="${yy+4}" text-anchor="end">${v>=100?Math.round(v):v.toFixed(1)}</text>`;}
+  xs.forEach((yr,i)=>s+=`<text class="ax" x="${x(i)}" y="${H-pad.b+22}" text-anchor="middle">${yr}</text>`);
+  let path=`M ${x(0)} ${y(ys[0])}`;
+  ys.forEach((v,i)=>{if(i>0){const cx=(x(i-1)+x(i))/2;path+=` C ${cx} ${y(ys[i-1])}, ${cx} ${y(v)}, ${x(i)} ${y(v)}`;}});
+  const area=path+` L ${x(xs.length-1)} ${y(mn)} L ${x(0)} ${y(mn)} Z`;
+  s+=`<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${d.color}" stop-opacity=".16"/><stop offset="1" stop-color="${d.color}" stop-opacity="0"/></linearGradient></defs>`;
+  s+=`<path d="${area}" fill="url(#ag)"/><path d="${path}" fill="none" stroke="${d.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s .15s cubic-bezier(.4,0,.2,1) forwards"/>`;
+  ys.forEach((v,i)=>s+=`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="#fff" stroke="${d.color}" stroke-width="2.5"/>`);
+  s+=`<text x="${x(xs.length-1)}" y="${y(ys[ys.length-1])-14}" text-anchor="end" font-family="Bricolage Grotesque" font-weight="700" font-size="17" fill="${d.color}">${ys[ys.length-1]} ${d.unit}</text>`;
+  return s;
+}
+function showAnswer(key){
+  const d=DATA[key];if(!d)return;
+  document.getElementById('q').value=d.q;
+  document.getElementById('aTag').textContent=d.tag;
+  document.getElementById('aQ').textContent=d.q;
+  document.getElementById('aChart').innerHTML=drawChart(d);
+  document.getElementById('aProse').innerHTML=d.prose;
+  document.getElementById('aSrcs').innerHTML='<span style="font-weight:600;color:var(--ink)">Sources</span>'+d.srcs.map(x=>`<span class="src"><span class="n"></span>${x}</span>`).join('');
+  document.getElementById('aFollow').innerHTML=d.follow.map(f=>`<div class="fu">${f}<span class="arr">→</span></div>`).join('');
+  const a=document.getElementById('answer');a.classList.remove('show');void a.offsetWidth;a.classList.add('show');
+  a.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('.sg').forEach(el=>el.addEventListener('click',()=>showAnswer(el.dataset.k)));
+function freeAsk(){
+  const v=document.getElementById('q').value.toLowerCase();
+  let k='energy';
+  if(/popul|china|billion|people/.test(v))k='pop';
+  else if(/solar|cheap|tariff|price|cost/.test(v))k='solar';
+  else if(/live|life|expect|health|age/.test(v))k='life';
+  else if(/energy|renew|clean|power|solar|gw/.test(v))k='energy';
+  showAnswer(k);
+}
+document.getElementById('go').addEventListener('click',freeAsk);
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')freeAsk();});
+// initial answer
+showAnswer('energy');
+const st=document.createElement('style');st.textContent='@keyframes draw{to{stroke-dashoffset:0}}';document.head.appendChild(st);
+</script>
+</body>
+</html>

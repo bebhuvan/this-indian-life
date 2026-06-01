@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indica · Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="indica.css">
+<style>
+  .gline{display:grid;grid-template-columns:160px 1fr;gap:30px;padding:28px 0;border-top:1px solid var(--ghost);align-items:start}
+  .gline .k{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:500;padding-top:6px}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .sw{border:1px solid var(--ghost)}
+  .sw .c{height:64px}.sw .m{padding:9px 11px;font-size:.7rem;color:var(--mid)}.sw .m b{display:block;color:var(--ink);font-weight:500;margin-bottom:2px}
+  .typ>*{margin:0 0 6px}
+  .dir{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ghost);border:1px solid var(--ghost)}
+  .dir a{background:#fff;padding:26px 24px;text-decoration:none;color:inherit;transition:.2s;position:relative}
+  .dir a:hover{background:var(--paper)}
+  .dir .pg{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c);font-weight:600}
+  .dir h4{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:8px 0 6px}
+  .dir p{font-size:.82rem;color:var(--mid);line-height:1.5}
+  .demo{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+</style>
+</head>
+<body lang="en">
+<div class="wrap">
+  <nav class="nav"><a class="brand" href="#">Indica</a><span class="lbl">Design System · v0.1</span></nav>
+  <hr class="r">
+
+  <header style="padding:56px 0 10px">
+    <span class="eyebrow dom-economy">The Almanac System</span>
+    <h1 class="serif" style="font-size:var(--t-h1);font-weight:400;max-width:18ch;margin-top:14px;line-height:1.05">Refined elements &amp; page templates for Indica.</h1>
+    <p class="muted" style="max-width:60ch;margin-top:14px;font-size:1.02rem">Pure white, multi-colour domain inks, Cormorant + DM Sans. One stylesheet (<code>indica.css</code>), one chart kit (<code>chart-kit.js</code>). Read <code>SPEC.md</code> for product + architecture decisions.</p>
+  </header>
+
+  <!-- PAGE DIRECTORY -->
+  <section class="section" style="border-top:none">
+    <p class="sec-hd">Page templates</p>
+    <div class="dir">
+      <a class="dom-people" href="home.html"><span class="pg">Home</span><h4 class="serif">The Almanac</h4><p>Hero numeral, domain nav, stat ledger, share-of-world, question index.</p></a>
+      <a class="dom-economy" href="chart.html"><span class="pg">Core</span><h4 class="serif">Chart detail</h4><p>Interactive chart + Bottom Line + 3 explanation registers + secondary viz + related.</p></a>
+      <a class="dom-health" href="ask.html"><span class="pg">Entry</span><h4 class="serif">Ask / results</h4><p>Question-first search, suggestions, generated answer card linking to charts.</p></a>
+      <a class="dom-society" href="domain.html"><span class="pg">Browse</span><h4 class="serif">Domain catalog</h4><p>Filterable grid of chart cards — the "thousands of charts" surface.</p></a>
+      <a class="dom-climate" href="about.html"><span class="pg">Trust</span><h4 class="serif">About / Methodology</h4><p>Sources, data provenance, the LLM-text policy.</p></a>
+    </div>
+  </section>
+
+  <!-- COLOUR -->
+  <section class="section">
+    <p class="sec-hd">Foundations</p>
+    <div class="gline"><div class="k">Domain inks</div><div class="swatches">
+      <div class="sw"><div class="c" style="background:var(--people)"></div><div class="m"><b>People</b>#DB5C97</div></div>
+      <div class="sw"><div class="c" style="background:var(--economy)"></div><div class="m"><b>Economy</b>#3A5BD0</div></div>
+      <div class="sw"><div class="c" style="background:var(--energy)"></div><div class="m"><b>Energy</b>#EFA227</div></div>
+      <div class="sw"><div class="c" style="background:var(--climate)"></div><div class="m"><b>Climate</b>#EE6A4C</div></div>
+      <div class="sw"><div class="c" style="background:var(--health)"></div><div class="m"><b>Health</b>#15A382</div></div>
+      <div class="sw"><div class="c" style="background:var(--society)"></div><div class="m"><b>Society</b>#7C5AD6</div></div>
+    </div></div>
+    <div class="gline"><div class="k">Neutrals</div><div class="swatches">
+      <div class="sw"><div class="c" style="background:var(--ink)"></div><div class="m"><b>Ink</b>#0b0b0b</div></div>
+      <div class="sw"><div class="c" style="background:var(--mid)"></div><div class="m"><b>Mid</b>#5c5c5c</div></div>
+      <div class="sw"><div class="c" style="background:var(--dim)"></div><div class="m"><b>Dim</b>#a6a6a6</div></div>
+      <div class="sw"><div class="c" style="background:var(--ghost)"></div><div class="m"><b>Ghost</b>#e7e7e7</div></div>
+      <div class="sw"><div class="c" style="background:var(--paper);border-bottom:1px solid var(--ghost)"></div><div class="m"><b>Paper</b>#fafafa</div></div>
+    </div></div>
+
+    <!-- TYPE -->
+    <div class="gline"><div class="k">Display · Cormorant</div><div class="typ">
+      <div class="serif" style="font-size:4rem;font-weight:300;line-height:1;letter-spacing:-.03em">1.43 bn</div>
+      <div class="serif" style="font-size:2rem;font-weight:400">The country, in numbers</div>
+      <div class="serif" style="font-size:1.3rem;font-style:italic;color:var(--mid)">italic, for voice &amp; pull quotes</div>
+    </div></div>
+    <div class="gline"><div class="k">Body / UI · DM Sans</div><div class="typ">
+      <div style="font-size:1.02rem;max-width:52ch">Body copy at 300 weight. Clear, quiet, gets out of the way of the numbers.</div>
+      <div class="lbl">Letterspaced micro-label</div>
+      <div style="font-size:.82rem;color:var(--mid);margin-top:6px">Caption / note, mid grey.</div>
+    </div></div>
+    <div class="gline"><div class="k">Hindi · Tiro Devanagari</div><div class="typ" lang="hi">
+      <div class="serif" style="font-size:2.4rem">भारत, आँकड़ों में</div>
+      <div style="font-size:1rem;color:var(--mid)">देवनागरी के लिए अलग सेरिफ़ फ़ॉन्ट।</div>
+    </div></div>
+
+    <!-- COMPONENTS -->
+    <div class="gline"><div class="k">Buttons</div><div class="demo">
+      <button class="btn dom-economy">Primary</button>
+      <button class="btn ghost dom-economy">Ghost</button>
+      <span class="chip">PM2.5 dominant</span><span class="chip soft">soft chip</span>
+    </div></div>
+    <div class="gline"><div class="k">Segmented</div><div class="demo dom-people">
+      <div class="seg"><button class="on">India vs China</button><button>India only</button><button>Growth %</button></div>
+    </div></div>
+    <div class="gline"><div class="k">Register tabs</div><div class="dom-economy" style="max-width:520px">
+      <div class="regs" style="margin-bottom:0">
+        <button class="reg-tab on"><div class="rt-name">The Reading</div><div class="rt-sub">analyst’s view</div></button>
+        <button class="reg-tab"><div class="rt-name">In Plain English</div><div class="rt-sub">no jargon</div></button>
+        <button class="reg-tab"><div class="rt-name">On the Ground</div><div class="rt-sub">what it means here</div></button>
+      </div>
+    </div></div>
+    <div class="gline"><div class="k">Stat (ledger)</div><div class="dom-energy">
+      <span class="li-n">203<span class="u">GW</span></span>
+      <p class="li-lbl"><span class="tk"></span>Energy · non-fossil</p>
+      <p class="li-cut">Clean power, up 5.8× in a decade.</p>
+    </div></div>
+    <div class="gline"><div class="k">Question row</div><div class="dom-health" style="max-width:620px">
+      <div class="q-row"><span class="q-dot" style="background:var(--health)"></span><span class="q-txt">How much longer do Indians live now?</span><span class="q-ans" style="color:var(--health)">+25 yrs</span><span class="q-arrow">→</span></div>
+    </div></div>
+  </section>
+
+  <!-- LIVE CHART COMPONENTS -->
+  <section class="section">
+    <p class="sec-hd">Chart components (live · from chart-kit.js)</p>
+    <div class="dom-economy">
+      <p class="lbl" style="margin-bottom:12px">Indica.heroLine() — bold annotated line · hover it</p>
+      <div class="chart-wrap" id="dWrap"><svg class="chart" id="dHero" viewBox="0 0 960 420"></svg><div class="tip" id="dTip"></div></div>
+    </div>
+    <div class="mods" style="grid-template-columns:1fr 1fr;margin-top:48px">
+      <div class="dom-economy"><p class="lbl" style="margin-bottom:16px">Indica.stack() — composition</p><div id="dStack"></div></div>
+      <div class="dom-economy"><p class="lbl" style="margin-bottom:16px">Indica.rank() — ranked board</p><div id="dRank"></div></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-brand">Indica</div>
+    <p class="foot-note">Design system v0.1 · pair with SPEC.md · charts are intentionally rough pending iteration.</p>
+    <div class="foot-pal"><i style="background:var(--people)"></i><i style="background:var(--economy)"></i><i style="background:var(--energy)"></i><i style="background:var(--climate)"></i><i style="background:var(--health)"></i><i style="background:var(--society)"></i></div>
+  </footer>
+</div>
+
+<script src="chart-kit.js"></script>
+<script>
+const yrs=[2000,2004,2008,2012,2016,2020,2024];
+const gdp=[0.47,0.72,1.20,1.83,2.29,2.67,3.94];
+const ctx=Indica.heroLine(document.getElementById('dHero'),{w:960,h:420,x:yrs,data:gdp,color:'#3A5BD0',ylab:v=>v.toFixed(1)+'T',annotations:[{i:5,t:'Covid contraction',s:'2020'}],endLabel:'$3.94T',endSub:'2024'});
+Indica.attachHover(document.getElementById('dHero'),{wrap:document.getElementById('dWrap'),tip:document.getElementById('dTip'),ctx,fmt:v=>v.toFixed(2),unit:' T USD',x:yrs});
+Indica.stack('#dStack',[['Services',53],['Industry',26],['Agriculture',16],['Other',5]],{color:'#3A5BD0'});
+Indica.rank('#dRank',[['USA',29.2],['China',18.5],['Germany',4.7],['Japan',4.1],['India',3.9]],{color:'#3A5BD0',highlight:'India',max:30,unit:'T'});
+</script>
+</body>
+</html>

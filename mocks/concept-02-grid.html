@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDICA · The Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;--ink:#0B0B0C;--soft:#6E6E73;--faint:#9A9AA0;
+    --line:#E6E6E6;--line-strong:#0B0B0C;
+    --blue:#0A35FF;--blue-soft:#E8ECFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:"Archivo",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+  /* baseline grid columns overlay feel */
+  header.bar{border-bottom:1px solid var(--line-strong);position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);z-index:40}
+  .bar .wrap{display:grid;grid-template-columns:repeat(12,1fr);align-items:center;height:58px;gap:0}
+  .logo{grid-column:span 3;font-weight:800;font-size:18px;letter-spacing:-.02em}
+  .logo span{color:var(--blue)}
+  .bar nav{grid-column:5 / 11;display:flex;gap:0}
+  .bar nav a{flex:1;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);text-decoration:none;padding:6px 0;border-left:1px solid var(--line)}
+  .bar nav a:hover{color:var(--blue)}
+  .bar .clock{grid-column:11 / 13;text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:repeat(12,1fr);border-bottom:1px solid var(--line-strong)}
+  .hero .lhs{grid-column:1 / 8;padding:64px 40px 56px 0;border-right:1px solid var(--line)}
+  .hero .rhs{grid-column:8 / 13;padding:64px 0 56px 40px;display:flex;flex-direction:column;justify-content:space-between}
+  .idx{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--blue);letter-spacing:.08em;margin-bottom:30px}
+  h1{font-size:clamp(40px,5.6vw,78px);line-height:.98;font-weight:700;letter-spacing:-.035em}
+  h1 .lite{font-weight:400;color:var(--soft)}
+  .sub{margin-top:26px;max-width:46ch;font-size:17px;color:var(--soft);line-height:1.5}
+  .specs{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+  .spec{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:12px}
+  .spec .k{color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+  .spec .v{color:var(--ink);font-weight:500}
+  .cta{margin-top:26px;background:var(--ink);color:#fff;border:none;padding:15px 26px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%}
+  .cta:hover{background:var(--blue)}
+
+  /* section label row */
+  .secrow{display:grid;grid-template-columns:repeat(12,1fr);border-bottom:1px solid var(--line-strong)}
+  .secrow .lab{grid-column:1/4;padding:18px 0;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .secrow .lab b{color:var(--blue)}
+  .secrow .desc{grid-column:4/13;padding:18px 0 18px 40px;border-left:1px solid var(--line);color:var(--soft);font-size:14px;max-width:64ch}
+
+  /* main chart panel */
+  .panel{display:grid;grid-template-columns:repeat(12,1fr);border-bottom:1px solid var(--line-strong)}
+  .panel .meta{grid-column:1/4;padding:34px 40px 34px 0;border-right:1px solid var(--line)}
+  .panel .meta h3{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+  .panel .meta p{margin-top:14px;font-size:13.5px;color:var(--soft);line-height:1.55}
+  .legend{margin-top:22px;display:flex;flex-direction:column;gap:9px}
+  .lg{display:flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:11.5px}
+  .swatch{width:14px;height:14px;border-radius:2px}
+  .panel .canvas{grid-column:4/13;padding:30px 0 24px 40px}
+  svg{display:block;width:100%;overflow:visible}
+  .gl{stroke:var(--line);stroke-width:1}
+  .ax{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--faint)}
+  .barlbl{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--ink);font-weight:500}
+
+  /* KPI strip */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line-strong)}
+  .kpi{padding:30px 28px;border-right:1px solid var(--line)}
+  .kpi:last-child{border-right:none}
+  .kpi .n{font-size:46px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .kpi .n small{font-size:20px;color:var(--soft);font-weight:500}
+  .kpi .t{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--soft)}
+  .kpi .bar{margin-top:14px;height:3px;background:var(--line)}
+  .kpi .bar i{display:block;height:100%;background:var(--blue)}
+
+  footer{display:grid;grid-template-columns:repeat(12,1fr);padding:30px 0;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint)}
+  footer .a{grid-column:1/4}footer .b{grid-column:4/13;border-left:1px solid var(--line);padding-left:40px;display:flex;gap:30px;flex-wrap:wrap}
+  footer a{color:var(--soft);text-decoration:none}
+
+  @media(max-width:900px){
+    .hero .lhs,.hero .rhs,.panel .meta,.panel .canvas,.secrow .lab,.secrow .desc,footer .a,footer .b{grid-column:1/13;border:none;padding-left:0;padding-right:0}
+    .bar nav{display:none}.kpis{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <div class="logo">INDICA<span>.</span></div>
+  <nav><a href="#">Economy</a><a href="#">Energy</a><a href="#">Society</a><a href="#">Climate</a><a href="#">Datasets</a></nav>
+  <div class="clock">IN · 28°N 77°E</div>
+</div></header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="lhs">
+      <div class="idx mono">INDEX 00 / NATIONAL OVERVIEW — 2026</div>
+      <h1>India,<br>measured<br><span class="lite">to the decimal.</span></h1>
+      <p class="sub">A structured reading of a nation across 11 open datasets — World in Data, MoSPI, RBI, NASA, Copernicus, WRI. No noise. No decoration. Only what the numbers say.</p>
+    </div>
+    <div class="rhs">
+      <div class="specs">
+        <div class="spec"><span class="k">Population</span><span class="v">1,428,627,663</span></div>
+        <div class="spec"><span class="k">GDP / nominal</span><span class="v">$3.94 T</span></div>
+        <div class="spec"><span class="k">GDP / growth</span><span class="v">+7.0 % y-o-y</span></div>
+        <div class="spec"><span class="k">Non-fossil cap.</span><span class="v">203 GW</span></div>
+        <div class="spec"><span class="k">Datasets live</span><span class="v">11 / 11</span></div>
+        <div class="spec"><span class="k">Last sync</span><span class="v">31 MAY 2026 · 09:00 IST</span></div>
+      </div>
+      <button class="cta">EXPLORE THE INDEX <span>→</span></button>
+    </div>
+  </section>
+
+  <div class="secrow">
+    <div class="lab mono"><b>FIG. 01</b> / ECONOMY</div>
+    <div class="desc">Gross domestic product, nominal, in trillions USD. Compound annual reading 2000–2024. The vertical step from 2010 onward marks India's transition from a $1.7 T to a near-$4 T economy.</div>
+  </div>
+
+  <section class="panel">
+    <div class="meta">
+      <h3>An economy that quadrupled in twenty years</h3>
+      <p>Each bar is one observation year. The trajectory is not smooth — note the dip in 2020 — but the direction is unambiguous.</p>
+      <div class="legend">
+        <div class="lg"><span class="swatch" style="background:var(--blue)"></span>GDP, nominal (T USD)</div>
+        <div class="lg"><span class="swatch" style="background:var(--blue-soft)"></span>Projection band</div>
+      </div>
+    </div>
+    <div class="canvas"><svg id="gdp" viewBox="0 0 880 380"></svg></div>
+  </section>
+
+  <div class="secrow">
+    <div class="lab mono"><b>FIG. 02</b> / ENERGY</div>
+    <div class="desc">Installed non-fossil generating capacity, gigawatts, 2014–2024. India's clean-power base grew nearly six-fold over the decade as solar tariffs collapsed below ₹2.5 / kWh.</div>
+  </div>
+
+  <section class="panel">
+    <div class="meta">
+      <h3>The clean-power ramp</h3>
+      <p>Solar, wind, hydro and nuclear, combined. The curve steepens after 2020 as utility-scale solar comes online.</p>
+      <div class="legend">
+        <div class="lg"><span class="swatch" style="background:var(--ink)"></span>Capacity (GW)</div>
+      </div>
+    </div>
+    <div class="canvas"><svg id="energy" viewBox="0 0 880 340"></svg></div>
+  </section>
+
+  <section class="kpis">
+    <div class="kpi"><div class="n">77.7<small>%</small></div><div class="t">Literacy rate · 2021</div><div class="bar"><i style="width:78%"></i></div></div>
+    <div class="kpi"><div class="n">70.2<small>yrs</small></div><div class="t">Life expectancy</div><div class="bar"><i style="width:84%"></i></div></div>
+    <div class="kpi"><div class="n">35<small>%</small></div><div class="t">Urban population</div><div class="bar"><i style="width:35%"></i></div></div>
+    <div class="kpi"><div class="n">880<small>M</small></div><div class="t">Internet users</div><div class="bar"><i style="width:62%"></i></div></div>
+  </section>
+
+  <footer>
+    <div class="a">INDICA · THE GRID</div>
+    <div class="b">
+      <a href="#">World in Data</a><a href="#">MoSPI</a><a href="#">RBI</a><a href="#">NASA</a><a href="#">Copernicus</a><a href="#">WRI</a><span>© 2026</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+// FIG 01 — GDP bars
+(function(){
+  const years=[2000,2005,2010,2015,2020,2023,2024];
+  const v=[0.47,0.82,1.68,2.10,2.67,3.55,3.94];
+  const W=880,H=380,pad={l:8,r:8,t:20,b:34};
+  const ymax=4.5;
+  const y=val=>H-pad.b-(val/ymax)*(H-pad.t-pad.b);
+  const bw=(W-pad.l-pad.r)/years.length;
+  let s='';
+  [0,1,2,3,4].forEach(g=>{const yy=y(g);s+=`<line class="gl" x1="0" y1="${yy}" x2="${W}" y2="${yy}"/><text class="ax" x="0" y="${yy-5}">${g}.0 T</text>`;});
+  years.forEach((yr,i)=>{
+    const bx=pad.l+i*bw+bw*0.18, bwid=bw*0.64, top=y(v[i]);
+    const fill=i>=6?'var(--blue-soft)':'var(--blue)';
+    s+=`<rect x="${bx}" y="${top}" width="${bwid}" height="${H-pad.b-top}" fill="${fill}"/>`;
+    s+=`<text class="barlbl" x="${bx+bwid/2}" y="${top-9}" text-anchor="middle">${v[i].toFixed(2)}</text>`;
+    s+=`<text class="ax" x="${bx+bwid/2}" y="${H-pad.b+20}" text-anchor="middle">${yr}</text>`;
+  });
+  document.getElementById('gdp').innerHTML=s;
+})();
+// FIG 02 — energy step/line
+(function(){
+  const years=[2014,2016,2018,2020,2022,2024];
+  const v=[35,49,72,90,150,203];
+  const W=880,H=340,pad={l:8,r:8,t:24,b:34};
+  const ymax=220;
+  const x=i=>pad.l+(i/(years.length-1))*(W-pad.l-pad.r);
+  const y=val=>H-pad.b-(val/ymax)*(H-pad.t-pad.b);
+  let s='';
+  [0,50,100,150,200].forEach(g=>{const yy=y(g);s+=`<line class="gl" x1="0" y1="${yy}" x2="${W}" y2="${yy}"/><text class="ax" x="0" y="${yy-5}">${g} GW</text>`;});
+  let path=`M ${x(0)} ${y(v[0])}`;
+  v.forEach((val,i)=>{if(i>0)path+=` L ${x(i)} ${y(val)}`;});
+  let area=path+` L ${x(v.length-1)} ${y(0)} L ${x(0)} ${y(0)} Z`;
+  s+=`<path d="${area}" fill="rgba(11,11,12,.05)"/>`;
+  s+=`<path d="${path}" fill="none" stroke="var(--ink)" stroke-width="2.5"/>`;
+  v.forEach((val,i)=>{s+=`<rect x="${x(i)-3.5}" y="${y(val)-3.5}" width="7" height="7" fill="var(--bg)" stroke="var(--ink)" stroke-width="2"/>`;
+    s+=`<text class="ax" x="${x(i)}" y="${H-pad.b+20}" text-anchor="middle">${years[i]}</text>`;});
+  s+=`<text class="barlbl" x="${x(5)}" y="${y(203)-12}" text-anchor="middle">203</text>`;
+  document.getElementById('energy').innerHTML=s;
+})();
+</script>
+</body>
+</html>

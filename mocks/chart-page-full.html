@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India’s population — Indica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--ink:#0b0b0b;--mid:#5c5c5c;--dim:#a6a6a6;--ghost:#e7e7e7;--paper:#fafafa;
+  --people:#DB5C97;--economy:#3A5BD0;--energy:#EFA227;--climate:#EE6A4C;--health:#15A382;--society:#7C5AD6;
+  --slate:#b7b7bf;
+  --c:var(--people); --c-tint:rgba(219,92,151,.10);
+}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6}
+[lang="hi"] .serif,[lang="hi"] h1,[lang="hi"] .bottomline,[lang="hi"] .panel .body,[lang="hi"] .q-txt,[lang="hi"] .fignum{font-family:'Tiro Devanagari Hindi',serif}
+.w{max-width:1180px;margin:0 auto;padding:0 52px}
+@media(max-width:680px){.w{padding:0 22px}}
+.serif{font-family:'Cormorant Garamond',serif}
+.lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--dim)}
+hr.r{border:none;border-top:1px solid var(--ghost)}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0 18px}
+.brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:.92rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.nav-r{display:flex;align-items:center;gap:24px}
+.crumb{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;gap:8px;align-items:center}
+.crumb a{color:var(--mid);text-decoration:none}.crumb .sep{color:var(--ghost)}.crumb .here{color:var(--c)}
+.lang{display:inline-flex;border:1px solid var(--ghost);border-radius:2px;overflow:hidden}
+.lang button{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.64rem;letter-spacing:.06em;padding:6px 11px;color:var(--dim);border-right:1px solid var(--ghost)}
+.lang button:last-child{border-right:none}
+.lang button.on{background:var(--ink);color:#fff}
+.acts{display:flex;gap:14px}
+.acts button{background:none;border:none;cursor:pointer;color:var(--dim);font-size:.7rem;letter-spacing:.06em}
+.acts button:hover{color:var(--c)}
+
+/* header */
+.head{padding:40px 0 26px}
+.head .domain{display:inline-flex;align-items:center;gap:9px;margin-bottom:16px}
+.head .domain .tk{width:9px;height:9px;border-radius:50%;background:var(--c)}
+.head .domain span{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--c)}
+.head h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.07;letter-spacing:-.01em;max-width:20ch}
+.head .deck{margin-top:14px;font-size:1.02rem;color:var(--mid);max-width:64ch;line-height:1.65}
+
+/* chart */
+.chart-shell{padding:14px 0 4px}
+.chart-toolbar{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.figrow{display:flex;align-items:baseline;gap:22px}
+.fignum{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3rem,6vw,5.4rem);line-height:.9;letter-spacing:-.03em;color:var(--c);font-variant-numeric:tabular-nums}
+.fignum .u{font-size:.3em;color:var(--dim);letter-spacing:0}
+.figmeta{display:flex;flex-direction:column;gap:5px;padding-bottom:9px}
+.figmeta .delta{font-size:.92rem;color:var(--c);font-weight:500}
+.figmeta .since{font-size:.74rem;color:var(--dim)}
+.seg{display:inline-flex;border:1px solid var(--ghost);border-radius:2px;overflow:hidden}
+.seg button{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--dim);padding:9px 14px;border-right:1px solid var(--ghost);transition:.18s;white-space:nowrap}
+.seg button:last-child{border-right:none}
+.seg button.on{background:var(--c);color:#fff}
+.seg button:hover:not(.on){color:var(--ink)}
+.legend{display:flex;gap:18px;margin:6px 0 0;font-size:.72rem;color:var(--mid)}
+.legend i{display:inline-block;width:14px;height:2.5px;vertical-align:middle;margin-right:6px}
+.chart-wrap{position:relative;width:100%}
+svg.big{display:block;width:100%;height:auto;overflow:visible}
+.tip{position:absolute;top:0;left:0;pointer-events:none;background:var(--ink);color:#fff;padding:8px 11px;border-radius:3px;font-size:.7rem;line-height:1.4;opacity:0;transition:opacity .12s;white-space:nowrap;z-index:6}
+.tip b{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1rem}
+.tip .ty{color:#bbb;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase}
+.chart-cap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:.72rem;color:var(--dim)}
+.chart-cap .src strong{color:var(--mid);font-weight:500}
+
+/* at a glance */
+.glance{padding:42px 0;border-top:1px solid var(--ghost);margin-top:30px;border-bottom:1px solid var(--ghost)}
+.glance-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.glance-grid{grid-template-columns:1fr 1fr;gap:36px 0}}
+.gi{padding-right:34px;position:relative}
+.gi:not(:last-child)::after{content:'';position:absolute;right:0;top:4px;bottom:4px;width:1px;background:var(--ghost)}
+.gi+.gi{padding-left:34px}
+@media(max-width:760px){.gi:nth-child(2n)::after{display:none}.gi+.gi{padding-left:0}.gi{padding-left:0!important;padding-right:18px}}
+.gi .n{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.7rem;line-height:1;color:var(--c);letter-spacing:-.02em}
+.gi .t{font-size:.8rem;color:var(--mid);margin-top:10px;line-height:1.45}
+
+/* layered explanations */
+.layers{padding:54px 0}
+.layers-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.layers-top .ttl{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.ai-badge{display:inline-flex;align-items:center;gap:7px;font-size:.62rem;color:var(--mid)}
+.ai-badge .sp{width:6px;height:6px;border-radius:50%;background:var(--c);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.bottomline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(1.5rem,2.8vw,2.25rem);line-height:1.3;letter-spacing:-.005em;max-width:26ch;margin:18px 0 36px}
+.bottomline::before{content:'“';color:var(--c)}.bottomline::after{content:'”';color:var(--c)}
+[lang="hi"] .bottomline::before{content:'“'}[lang="hi"] .bottomline::after{content:'”'}
+.regs{display:flex;border-bottom:1px solid var(--ghost);margin-bottom:30px;flex-wrap:wrap}
+.reg-tab{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0 0 14px;margin-right:34px;position:relative;text-align:left}
+.reg-tab .rt-name{font-size:.96rem;font-weight:500;color:var(--dim);transition:.2s}
+.reg-tab .rt-sub{font-size:.7rem;color:var(--dim);margin-top:2px;transition:.2s}
+.reg-tab.on .rt-name{color:var(--ink)}.reg-tab.on .rt-sub{color:var(--c)}
+.reg-tab::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .28s cubic-bezier(.2,.7,.2,1)}
+.reg-tab.on::after{transform:scaleX(1)}
+.reg-tab:hover .rt-name{color:var(--mid)}
+.panel-wrap{position:relative;min-height:220px}
+.panel{display:none;animation:rise .5s cubic-bezier(.2,.7,.2,1)}
+.panel.on{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel .body{font-family:'Cormorant Garamond',serif;font-size:clamp(1.18rem,2vw,1.44rem);font-weight:400;line-height:1.66;max-width:64ch;color:#1a1a1a}
+[lang="hi"] .panel .body{font-size:clamp(1.02rem,1.7vw,1.18rem);line-height:1.85}
+.panel .body p+p{margin-top:1.05em}
+.panel .body strong{font-weight:600;background:linear-gradient(transparent 64%,var(--c-tint) 0)}
+.panel.ground .body{padding-left:24px;border-left:2px solid var(--c)}
+.panel.ground .body em{font-style:italic;color:var(--c)}
+.panel .aside{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.kpill{font-size:.74rem;color:var(--mid);border:1px solid var(--ghost);border-radius:30px;padding:7px 14px;background:var(--paper)}
+.kpill b{color:var(--ink);font-weight:500}
+.analogy{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ghost);border:1px solid var(--ghost);margin-top:26px}
+.analogy .a{background:#fff;padding:20px 18px}
+.analogy .a .big{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:400;color:var(--c);line-height:1}
+.analogy .a .t{font-size:.78rem;color:var(--mid);margin-top:8px;line-height:1.45}
+@media(max-width:620px){.analogy{grid-template-columns:1fr}}
+
+/* secondary viz row */
+.viz2{padding:54px 0;border-top:1px solid var(--ghost);display:grid;grid-template-columns:1fr 1fr;gap:64px}
+@media(max-width:840px){.viz2{grid-template-columns:1fr;gap:48px}}
+.viz2 h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.7rem;margin-bottom:6px}
+.viz2 .note{font-size:.78rem;color:var(--mid);margin-bottom:22px;line-height:1.5}
+.hbar{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+.hbar .nm{font-size:.74rem;color:var(--mid);width:74px;flex-shrink:0;text-align:right}
+.hbar .track{flex:1;height:18px;background:var(--paper);position:relative;overflow:hidden}
+.hbar .fill{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.hbar .v{font-size:.76rem;color:var(--ink);width:64px;font-family:'Cormorant Garamond',serif;font-size:1rem}
+
+/* modules */
+.mods{padding:54px 0;border-top:1px solid var(--ghost);display:grid;grid-template-columns:1fr 320px;gap:70px}
+@media(max-width:840px){.mods{grid-template-columns:1fr;gap:44px}}
+.related .q-row{display:flex;align-items:baseline;gap:16px;padding:18px 0;border-top:1px solid var(--ghost);cursor:pointer;transition:padding .25s}
+.related .q-row:last-child{border-bottom:1px solid var(--ghost)}
+.related .q-row:hover{padding-left:9px}
+.related .q-dot{width:8px;height:8px;border-radius:50%;align-self:center}
+.related .q-txt{font-family:'Cormorant Garamond',serif;font-size:1.22rem;flex:1}
+.related .q-row:hover .q-txt{font-style:italic}
+.related .q-arrow{color:var(--dim)}
+.ask-box{border:1px solid var(--ghost);padding:22px}
+.ask-box .t{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:500;margin-bottom:14px}
+.ask-field{display:flex;border:1px solid var(--ghost);align-items:center;padding:6px 6px 6px 14px}
+.ask-field input{flex:1;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:.9rem;background:none;color:var(--ink)}
+.ask-field button{background:var(--ink);color:#fff;border:none;width:34px;height:34px;cursor:pointer;font-size:1rem}
+.meth{margin-top:24px}
+.meth .row{padding:13px 0;border-top:1px solid var(--ghost);display:flex;justify-content:space-between;gap:14px;font-size:.78rem}
+.meth .row .k{color:var(--dim)}.meth .row .v{color:var(--ink);text-align:right}
+footer{padding:42px 0 64px;border-top:1px solid var(--ghost)}
+.foot-brand{font-family:'Cormorant Garamond',serif;font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
+.foot-note{font-size:.72rem;color:var(--dim);margin-top:10px;max-width:64ch;line-height:1.6}
+</style>
+</head>
+<body lang="en">
+<div class="w">
+
+<nav>
+  <a class="brand" href="#">Indica</a>
+  <div class="nav-r">
+    <div class="crumb"><a href="#" id="cb0">People</a><span class="sep">/</span><a href="#" id="cb1">Demography</a><span class="sep">/</span><span class="here" id="cb2">Population</span></div>
+    <div class="lang" id="lang"><button class="on" data-l="en">EN</button><button data-l="hi">हि</button></div>
+  </div>
+</nav>
+<hr class="r">
+
+<header class="head">
+  <span class="domain"><span class="tk"></span><span id="domLbl">People · Demography</span></span>
+  <h1 id="h1"></h1>
+  <p class="deck" id="deck"></p>
+</header>
+
+<section class="chart-shell">
+  <div class="chart-toolbar">
+    <div class="figrow">
+      <span class="fignum"><span id="bigNum">0</span><span class="u" id="bigUnit"></span></span>
+      <div class="figmeta"><span class="delta" id="delta"></span><span class="since" id="since"></span></div>
+    </div>
+    <div class="seg" id="seg"></div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="chart-wrap" id="wrap">
+    <svg class="big" id="big" viewBox="0 0 920 440" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="tip" id="tip"></div>
+  </div>
+  <div class="chart-cap"><span class="src" id="srcLine"></span><span id="mockLine"></span></div>
+</section>
+
+<section class="glance">
+  <p class="lbl" id="glanceTitle" style="margin-bottom:24px"></p>
+  <div class="glance-grid" id="glance"></div>
+</section>
+
+<section class="layers">
+  <div class="layers-top"><span class="ttl" id="explTitle"></span><span class="ai-badge"><span class="sp"></span><span id="aiBadge"></span></span></div>
+  <p class="bottomline" id="bl"></p>
+  <div class="regs" id="regs"></div>
+  <div class="panel-wrap" id="panels"></div>
+</section>
+
+<section class="viz2">
+  <div>
+    <h3 id="ageTitle"></h3>
+    <p class="note" id="ageNote"></p>
+    <div id="ageChart"></div>
+  </div>
+  <div>
+    <h3 id="cmpTitle"></h3>
+    <p class="note" id="cmpNote"></p>
+    <div id="cmpChart"></div>
+  </div>
+</section>
+
+<section class="mods">
+  <div class="related"><p class="lbl" id="relTitle" style="margin-bottom:14px"></p><div id="relList"></div></div>
+  <div>
+    <div class="ask-box"><div class="t" id="askTitle"></div><div class="ask-field"><input id="askInput"><button>→</button></div></div>
+    <div class="meth"><p class="lbl" id="methTitle" style="margin-bottom:4px"></p><div id="methRows"></div></div>
+  </div>
+</section>
+
+<footer><div class="foot-brand">Indica</div><p class="foot-note" id="footNote"></p></footer>
+
+</div>
+
+<script>
+/* ============ CONTENT AS DATA (per-locale) ============ */
+const T={
+ en:{
+  crumb:['People','Demography','Population'], dom:'People · Demography',
+  h1:'When did India become the world’s most populous country?',
+  deck:'India’s population against China’s, 2000–2024. Around 2023 the two lines crossed. Hover the chart to read any year.',
+  bigNum:1.43, bigDec:2, bigUnit:'bn', delta:'▲ No. 1 since 2023', since:'Most populous nation · est. 2024',
+  seg:['India vs China','India only','Growth %'],
+  legend:[['India','var(--people)'],['China','var(--slate)']],
+  src:'Source: UN World Population Prospects 2024 · MoSPI.', mock:'Illustrative values for this mock.',
+  cross:'India overtakes China · 2023',
+  glanceTitle:'At a glance',
+  glance:[['143 cr','people, mid-2024'],['28','median age — one of the world’s youngest'],['1 in 6','of all humans alive are Indian'],['~2.0','births per woman — now at replacement']],
+  explTitle:'The explanation', aiBadge:'Written by Indica AI from the data & cited sources — the numbers are not generated',
+  bl:'India didn’t suddenly surge ahead — China began to shrink. We crossed because their population started falling while ours kept rising, slowly.',
+  regs:[['The Reading','analyst’s view'],['In Plain English','no jargon'],['On the Ground','what it means here']],
+  panels:{
+   reading:{body:['India’s population reached an estimated <strong>1.43 billion in 2023</strong>, surpassing China to become the world’s most populous country. The crossover reflects divergent momentum: India’s annual growth has slowed to ~0.7% but stays positive, while China’s turned <strong>negative in 2022</strong> as deaths exceeded births.','India’s total fertility rate has fallen to roughly <strong>2.0 — replacement level</strong> — so the population is projected to peak near 1.7 billion around 2060 before declining. The age structure is young: a median age of ~28, versus China’s ~39.'], pills:[['Median age','28'],['Fertility','~2.0'],['Projected peak','~2060']]},
+   plain:{body:['India is now the most populous country on Earth — about <strong>1.43 billion people</strong>, roughly one in every six humans.','It happened not because India suddenly sped up, but because <strong>China’s population started shrinking</strong>. India is still growing, but slowly — and will likely stop growing around 2060.'], pills:[['','1 in 6 humans'],['','still growing'],['','peaks ~2060']]},
+   ground:{body:['Every news channel ran the same headline — <em>India is now No. 1 in population</em> — like it was a trophy. But on the ground it’s quieter than that. We didn’t leap ahead; <strong>China simply began to shrink, and we edged past.</strong>','What actually matters is who these 143 crore people are: <strong>half the country is under 28.</strong> That’s the real story — a young workforce that could power decades of growth, <em>if there are enough jobs, schools and clinics to meet them.</em> Numbers don’t raise a generation; the system around them does.'],
+     analogy:[['143 cr','people — easier to picture than 1.43 billion'],['Under 28','half of all Indians. The youngest big country.'],['2060','when India’s population is expected to stop growing']]}
+  },
+  ageTitle:'The shape of 1.4 billion', ageNote:'Population by age band, share of total. India’s median age is just ~28 — a young, working-age-heavy country.',
+  age:[['0–14',25],['15–24',18],['25–39',23],['40–59',22],['60+',12]], ageUnit:'%',
+  cmpTitle:'How India compares', cmpNote:'The five most populous countries, 2024, in millions. India and China are in a league of their own.',
+  cmp:[['India',1441,true],['China',1422,false],['USA',341,false],['Indonesia',279,false],['Pakistan',245,false]],
+  relTitle:'Keep pulling the thread',
+  rel:[['var(--people)','When will India’s population actually peak?'],['var(--society)','What is the ‘demographic dividend’ — and is India using it?'],['var(--economy)','Does a bigger population mean a bigger economy?'],['var(--health)','Why is India’s fertility rate falling so fast?']],
+  askTitle:'Ask a follow-up', askPh:'e.g. show me India’s median age over time',
+  methTitle:'Methodology', meth:[['Measure','Total population, mid-year'],['Frequency','Annual estimate'],['Updated','May 2026'],['Download','CSV · JSON · PNG']],
+  foot:'Figures are sourced and reproducible. Explanatory text is generated by a language model from the underlying data and cited sources, and reviewed; it may simplify. Check the methodology before citing.'
+ },
+ hi:{
+  crumb:['लोग','जनसांख्यिकी','जनसंख्या'], dom:'लोग · जनसांख्यिकी',
+  h1:'भारत दुनिया का सबसे अधिक आबादी वाला देश कब बना?',
+  deck:'भारत बनाम चीन की जनसंख्या, 2000–2024। लगभग 2023 में दोनों रेखाएँ एक-दूसरे को पार कर गईं। किसी भी वर्ष को पढ़ने के लिए चार्ट पर कर्सर ले जाएँ।',
+  bigNum:143, bigDec:0, bigUnit:'करोड़', delta:'▲ 2023 से नंबर 1', since:'सबसे अधिक आबादी · अनुमान 2024',
+  seg:['भारत बनाम चीन','केवल भारत','वृद्धि %'],
+  legend:[['भारत','var(--people)'],['चीन','var(--slate)']],
+  src:'स्रोत: यूएन विश्व जनसंख्या संभावना 2024 · MoSPI.', mock:'इस मॉक के लिए उदाहरण-स्वरूप आँकड़े।',
+  cross:'भारत ने चीन को पीछे छोड़ा · 2023',
+  glanceTitle:'एक नज़र में',
+  glance:[['143 करोड़','लोग, मध्य-2024'],['28','औसत आयु — दुनिया के सबसे युवा देशों में'],['हर 6 में 1','जीवित इंसान भारतीय है'],['~2.0','प्रति महिला जन्म — अब प्रतिस्थापन स्तर पर']],
+  explTitle:'व्याख्या', aiBadge:'Indica AI द्वारा आँकड़ों और स्रोतों से लिखा गया — संख्याएँ AI से नहीं बनतीं',
+  bl:'भारत अचानक आगे नहीं बढ़ा — चीन घटने लगा। हम इसलिए आगे निकले क्योंकि उनकी आबादी गिरने लगी जबकि हमारी धीरे-धीरे बढ़ती रही।',
+  regs:[['विश्लेषण','विशेषज्ञ की नज़र'],['आसान भाषा में','बिना शब्दजाल'],['ज़मीनी हकीकत','यहाँ इसका मतलब']],
+  panels:{
+   reading:{body:['2023 में भारत की जनसंख्या अनुमानित <strong>1.43 अरब</strong> तक पहुँच गई और चीन को पीछे छोड़ते हुए यह दुनिया का सबसे अधिक आबादी वाला देश बन गया। यह अलग-अलग रफ़्तार का नतीजा है: भारत की वार्षिक वृद्धि घटकर ~0.7% रह गई पर अब भी सकारात्मक है, जबकि चीन की वृद्धि <strong>2022 में नकारात्मक</strong> हो गई।','भारत की प्रजनन दर घटकर लगभग <strong>2.0 — प्रतिस्थापन स्तर</strong> — पर आ गई है, इसलिए जनसंख्या 2060 के आसपास ~1.7 अरब पर चरम के बाद घटने का अनुमान है। आयु-संरचना युवा है: औसत आयु ~28, चीन की ~39 के मुक़ाबले।'], pills:[['औसत आयु','28'],['प्रजनन दर','~2.0'],['अनुमानित चरम','~2060']]},
+   plain:{body:['भारत अब धरती का सबसे अधिक आबादी वाला देश है — लगभग <strong>1.43 अरब लोग</strong>, यानी हर छह इंसानों में एक।','ऐसा इसलिए नहीं हुआ कि भारत अचानक तेज़ बढ़ा, बल्कि इसलिए कि <strong>चीन की आबादी घटने लगी</strong>। भारत अब भी बढ़ रहा है, पर धीरे — और लगभग 2060 तक बढ़ना रुक जाएगा।'], pills:[['','हर 6 में 1'],['','अब भी बढ़ रहा'],['','चरम ~2060']]},
+   ground:{body:['हर न्यूज़ चैनल ने एक ही हेडलाइन चलाई — <em>जनसंख्या में भारत अब नंबर 1</em> — मानो कोई ट्रॉफ़ी हो। पर ज़मीन पर बात इतनी शोर वाली नहीं। हम छलाँग लगाकर आगे नहीं निकले; <strong>चीन घटने लगा, और हम बस आगे निकल गए।</strong>','असल बात यह है कि ये 143 करोड़ लोग कौन हैं: <strong>देश की आधी आबादी 28 साल से कम उम्र की है।</strong> यही असली कहानी है — एक युवा कार्यबल जो दशकों की तरक़्क़ी की ताक़त बन सकता है, <em>बशर्ते उनके लिए पर्याप्त नौकरियाँ, स्कूल और अस्पताल हों।</em> आँकड़े पीढ़ी नहीं बनाते; उनके आसपास का सिस्टम बनाता है।'],
+     analogy:[['143 करोड़','लोग — 1.43 अरब से आसान तस्वीर'],['28 से कम','आधे भारतीय। सबसे युवा बड़ा देश।'],['2060','जब भारत की आबादी बढ़ना रुकेगी']]}
+  },
+  ageTitle:'1.4 अरब की बनावट', ageNote:'आयु-वर्ग के अनुसार जनसंख्या, कुल का प्रतिशत। भारत की औसत आयु केवल ~28 है — एक युवा, कार्यशील देश।',
+  age:[['0–14',25],['15–24',18],['25–39',23],['40–59',22],['60+',12]], ageUnit:'%',
+  cmpTitle:'भारत की तुलना', cmpNote:'सबसे अधिक आबादी वाले पाँच देश, 2024, करोड़ में। भारत और चीन अपनी ही श्रेणी में हैं।',
+  cmp:[['भारत',1441,true],['चीन',1422,false],['अमेरिका',341,false],['इंडोनेशिया',279,false],['पाकिस्तान',245,false]],
+  relTitle:'और जानें',
+  rel:[['var(--people)','भारत की आबादी असल में कब चरम पर पहुँचेगी?'],['var(--society)','‘जनसांख्यिकीय लाभांश’ क्या है — और क्या भारत इसका उपयोग कर रहा है?'],['var(--economy)','क्या बड़ी आबादी का मतलब बड़ी अर्थव्यवस्था है?'],['var(--health)','भारत की प्रजनन दर इतनी तेज़ी से क्यों गिर रही है?']],
+  askTitle:'आगे पूछें', askPh:'जैसे: समय के साथ भारत की औसत आयु दिखाएँ',
+  methTitle:'कार्यप्रणाली', meth:[['माप','कुल जनसंख्या, मध्य-वर्ष'],['आवृत्ति','वार्षिक अनुमान'],['अपडेट','मई 2026'],['डाउनलोड','CSV · JSON · PNG']],
+  foot:'आँकड़े स्रोत-सहित और पुनरुत्पादन-योग्य हैं। व्याख्यात्मक पाठ एक भाषा मॉडल द्वारा आँकड़ों और स्रोतों से तैयार किया गया है और जाँचा गया है; यह सरलीकृत हो सकता है। उद्धृत करने से पहले कार्यप्रणाली देखें।'
+ }
+};
+
+/* ============ DATA (locale-independent) ============ */
+function interp(keys){const o=[];for(let y=2000;y<=2024;y++){let a=keys[0],b=keys[keys.length-1];for(let i=0;i<keys.length-1;i++){if(y>=keys[i][0]&&y<=keys[i+1][0]){a=keys[i];b=keys[i+1];break;}}const t=(y-a[0])/((b[0]-a[0])||1);o.push(a[1]+(b[1]-a[1])*t);}return o;}
+const years=[];for(let y=2000;y<=2024;y++)years.push(y);
+const india=interp([[2000,1059],[2010,1240],[2020,1392],[2024,1441]]);
+const china=interp([[2000,1264],[2010,1341],[2020,1412],[2024,1423]]);
+const growth=india.map((v,i)=>i?((v-india[i-1])/india[i-1]*100):1.8);
+
+/* ============ STATE ============ */
+let loc=localStorage.getItem('indica-loc')||'en';
+let reg=localStorage.getItem('indica-register')||'plain';
+let mode='vs';
+const C={vs:'#DB5C97',china:'#b7b7bf'};
+
+/* ============ CHART ============ */
+const svg=document.getElementById('big'),wrap=document.getElementById('wrap'),tip=document.getElementById('tip');
+const W=920,H=440,pad={l:54,r:24,t:30,b:40};let PX=[];
+function smooth(pts){let p=`M ${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const cx=(pts[i-1][0]+pts[i][0])/2;p+=` C ${cx} ${pts[i-1][1]}, ${cx} ${pts[i][1]}, ${pts[i][0]} ${pts[i][1]}`;}return p;}
+function lineSet(){return mode==='growth'?[growth]:mode==='total'?[india]:[india,china];}
+function draw(){
+  const sets=lineSet();const all=[].concat(...sets);
+  const mn=mode==='growth'?Math.min(...all,0):0, mx=Math.max(...all)*1.06;
+  const x=i=>pad.l+(i/(years.length-1))*(W-pad.l-pad.r);
+  const y=v=>H-pad.b-((v-mn)/(mx-mn))*(H-pad.t-pad.b);
+  PX=years.map((_,i)=>x(i));
+  let g='',t=document.documentElement;
+  for(let k=0;k<=5;k++){const v=mn+(mx-mn)*k/5,yy=y(v);g+=`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="#ededed"/>`;g+=`<text x="${pad.l-10}" y="${yy+4}" font-size="10.5" fill="#a6a6a6" text-anchor="end" font-family="DM Sans">${mode==='growth'?v.toFixed(0)+'%':Math.round(v)}</text>`;}
+  years.forEach((yr,i)=>{if(yr%4===0||i===years.length-1)g+=`<text x="${x(i)}" y="${H-pad.b+22}" font-size="10.5" fill="#a6a6a6" text-anchor="middle" font-family="DM Sans">${yr}</text>`;});
+  // china (under)
+  if(mode==='vs'){const p=china.map((v,i)=>[x(i),y(v)]);g+=`<path d="${smooth(p)}" fill="none" stroke="${C.china}" stroke-width="2.2" stroke-linecap="round"/>`;g+=`<circle cx="${x(24)}" cy="${y(china[24])}" r="3.6" fill="${C.china}"/>`;}
+  // india / main
+  const main=mode==='growth'?growth:india;
+  const mp=main.map((v,i)=>[x(i),y(v)]);
+  if(mode!=='growth'){const ar=smooth(mp)+` L ${x(24)} ${y(mn)} L ${x(0)} ${y(mn)} Z`;g+=`<defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.vs}" stop-opacity=".14"/><stop offset="1" stop-color="${C.vs}" stop-opacity="0"/></linearGradient></defs><path d="${ar}" fill="url(#gd)"/>`;}
+  g+=`<path d="${smooth(mp)}" fill="none" stroke="${C.vs}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;animation:drw 1.2s cubic-bezier(.4,0,.2,1) forwards"/>`;
+  g+=`<circle cx="${x(24)}" cy="${y(main[24])}" r="4.4" fill="${C.vs}"/>`;
+  // crossover marker (vs mode)
+  if(mode==='vs'){const ci=23;const cy=(y(india[ci])+y(china[ci]))/2;
+    g+=`<line x1="${x(ci)}" y1="${pad.t}" x2="${x(ci)}" y2="${H-pad.b}" stroke="${C.vs}" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>`;
+    g+=`<circle cx="${x(ci)}" cy="${cy}" r="4" fill="#fff" stroke="${C.vs}" stroke-width="2"/>`;
+    g+=`<text x="${x(ci)-8}" y="${pad.t+14}" font-size="11" fill="${C.vs}" text-anchor="end" font-family="DM Sans" font-weight="500">${T[loc].cross}</text>`;}
+  g+=`<g id="hg" opacity="0"><line id="hl" y1="${pad.t}" y2="${H-pad.b}" stroke="#999" stroke-width="1" stroke-dasharray="3 3"/><circle id="hc1" r="5" fill="#fff" stroke="${C.vs}" stroke-width="2.4"/><circle id="hc2" r="4.5" fill="#fff" stroke="${C.china}" stroke-width="2.2"/></g>`;
+  g+=`<rect id="cap" x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" fill="transparent" style="cursor:crosshair"/>`;
+  svg.innerHTML=g;bindHover(y);
+}
+function bindHover(y){
+  const cap=document.getElementById('cap'),hg=document.getElementById('hg'),hl=document.getElementById('hl'),hc1=document.getElementById('hc1'),hc2=document.getElementById('hc2');
+  function move(e){const r=svg.getBoundingClientRect();const cx=(e.touches?e.touches[0].clientX:e.clientX);const vbX=(cx-r.left)/r.width*W;
+    let idx=0,best=1e9;PX.forEach((px,i)=>{const d=Math.abs(px-vbX);if(d<best){best=d;idx=i;}});
+    const main=mode==='growth'?growth:india;const px=PX[idx];
+    hg.setAttribute('opacity','1');hl.setAttribute('x1',px);hl.setAttribute('x2',px);
+    hc1.setAttribute('cx',px);hc1.setAttribute('cy',y(main[idx]));
+    if(mode==='vs'){hc2.setAttribute('opacity','1');hc2.setAttribute('cx',px);hc2.setAttribute('cy',y(china[idx]));}else hc2.setAttribute('opacity','0');
+    const cw=wrap.getBoundingClientRect().width,leftPx=px/W*cw;tip.style.opacity='1';
+    const L=T[loc];let html=`<span class="ty">${years[idx]}</span><br>`;
+    if(mode==='growth')html+=`<b>${growth[idx].toFixed(1)}%</b>`;
+    else if(mode==='total')html+=`<b>${Math.round(india[idx])}</b> mn`;
+    else html+=`${L.legend[0][0]} <b>${Math.round(india[idx])}</b> · ${L.legend[1][0]} <b>${Math.round(china[idx])}</b> mn`;
+    tip.innerHTML=html;const tw=tip.getBoundingClientRect().width;
+    tip.style.left=Math.max(0,Math.min(cw-tw,leftPx-tw/2))+'px';
+    tip.style.top=Math.max(0,(y(main[idx])/H*wrap.getBoundingClientRect().height)-tip.getBoundingClientRect().height-14)+'px';}
+  function leave(){hg.setAttribute('opacity','0');tip.style.opacity='0';}
+  cap.addEventListener('mousemove',move);cap.addEventListener('mouseleave',leave);
+  cap.addEventListener('touchmove',move,{passive:true});cap.addEventListener('touchend',leave);
+}
+
+/* ============ count-up ============ */
+function countUp(el,to,dec){const dur=1100,t0=performance.now();(function tk(t){let p=Math.min(1,(t-t0)/dur);p=1-Math.pow(1-p,3);el.textContent=(to*p).toFixed(dec);if(p<1)requestAnimationFrame(tk);else el.textContent=to.toFixed(dec);})(t0);}
+
+/* ============ RENDER ============ */
+function render(){
+  const L=T[loc];document.body.setAttribute('lang',loc);
+  document.getElementById('cb0').textContent=L.crumb[0];document.getElementById('cb1').textContent=L.crumb[1];document.getElementById('cb2').textContent=L.crumb[2];
+  document.getElementById('domLbl').textContent=L.dom;
+  document.getElementById('h1').textContent=L.h1;document.getElementById('deck').textContent=L.deck;
+  document.getElementById('bigUnit').textContent=' '+L.bigUnit;countUp(document.getElementById('bigNum'),L.bigNum,L.bigDec);
+  document.getElementById('delta').textContent=L.delta;document.getElementById('since').textContent=L.since;
+  document.getElementById('seg').innerHTML=L.seg.map((s,i)=>`<button class="${['vs','total','growth'][i]===mode?'on':''}" data-mode="${['vs','total','growth'][i]}">${s}</button>`).join('');
+  document.getElementById('legend').innerHTML=(mode==='vs'?L.legend:[L.legend[0]]).map(g=>`<span><i style="background:${g[1]}"></i>${g[0]}</span>`).join('');
+  document.getElementById('srcLine').innerHTML='<strong>'+L.src.split(':')[0]+':</strong>'+L.src.split(':').slice(1).join(':');
+  document.getElementById('mockLine').textContent=L.mock;
+  document.getElementById('glanceTitle').textContent=L.glanceTitle;
+  document.getElementById('glance').innerHTML=L.glance.map(g=>`<div class="gi"><div class="n">${g[0]}</div><div class="t">${g[1]}</div></div>`).join('');
+  document.getElementById('explTitle').textContent=L.explTitle;document.getElementById('aiBadge').textContent=L.aiBadge;
+  document.getElementById('bl').textContent=L.bl;
+  document.getElementById('regs').innerHTML=L.regs.map((r,i)=>`<button class="reg-tab ${['reading','plain','ground'][i]===reg?'on':''}" data-p="${['reading','plain','ground'][i]}"><div class="rt-name">${r[0]}</div><div class="rt-sub">${r[1]}</div></button>`).join('');
+  // panels
+  const P=L.panels;let ph='';
+  ['reading','plain','ground'].forEach(k=>{const d=P[k];let inner=`<div class="body">${d.body.map(p=>`<p>${p}</p>`).join('')}</div>`;
+    if(d.pills)inner+=`<div class="aside">${d.pills.map(p=>`<span class="kpill">${p[0]?p[0]+' ':''}<b>${p[1]}</b></span>`).join('')}</div>`;
+    if(d.analogy)inner+=`<div class="analogy">${d.analogy.map(a=>`<div class="a"><div class="big">${a[0]}</div><div class="t">${a[1]}</div></div>`).join('')}</div>`;
+    ph+=`<div class="panel ${k} ${k===reg?'on':''}" data-p="${k}">${inner}</div>`;});
+  document.getElementById('panels').innerHTML=ph;
+  // age
+  document.getElementById('ageTitle').textContent=L.ageTitle;document.getElementById('ageNote').textContent=L.ageNote;
+  const amx=Math.max(...L.age.map(a=>a[1]));
+  document.getElementById('ageChart').innerHTML=L.age.map((a,i)=>`<div class="hbar"><span class="nm">${a[0]}</span><div class="track"><div class="fill" style="background:var(--people);opacity:${0.45+0.5*(1-i/L.age.length)}"></div></div><span class="v">${a[1]}${L.ageUnit}</span></div>`).join('');
+  // cmp
+  document.getElementById('cmpTitle').textContent=L.cmpTitle;document.getElementById('cmpNote').textContent=L.cmpNote;
+  const cmx=Math.max(...L.cmp.map(c=>c[1]));
+  document.getElementById('cmpChart').innerHTML=L.cmp.map(c=>`<div class="hbar"><span class="nm">${c[0]}</span><div class="track"><div class="fill" data-w="${c[1]/cmx*100}" style="background:${c[2]?'var(--people)':'var(--slate)'}"></div></div><span class="v">${c[1]}</span></div>`).join('');
+  // related / ask / meth
+  document.getElementById('relTitle').textContent=L.relTitle;
+  document.getElementById('relList').innerHTML=L.rel.map(r=>`<div class="q-row"><span class="q-dot" style="background:${r[0]}"></span><span class="q-txt">${r[1]}</span><span class="q-arrow">→</span></div>`).join('');
+  document.getElementById('askTitle').textContent=L.askTitle;document.getElementById('askInput').placeholder=L.askPh;
+  document.getElementById('methTitle').textContent=L.methTitle;
+  document.getElementById('methRows').innerHTML=L.meth.map((m,i)=>`<div class="row"><span class="k">${m[0]}</span><span class="v" ${i===L.meth.length-1?'style="color:var(--c)"':''}>${m[1]}</span></div>`).join('');
+  draw();
+  // animate bars in
+  requestAnimationFrame(()=>{document.querySelectorAll('#ageChart .fill').forEach((f,i)=>{const v=L.age[i][1]/amx*100;setTimeout(()=>f.style.width=v+'%',60+i*70);});
+    document.querySelectorAll('#cmpChart .fill').forEach((f,i)=>setTimeout(()=>f.style.width=f.dataset.w+'%',60+i*70));});
+}
+
+/* ============ EVENTS ============ */
+document.getElementById('lang').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;loc=b.dataset.l;localStorage.setItem('indica-loc',loc);document.querySelectorAll('#lang button').forEach(x=>x.classList.toggle('on',x.dataset.l===loc));render();});
+document.getElementById('seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.mode;document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x.dataset.mode===mode));document.getElementById('legend').innerHTML=(mode==='vs'?T[loc].legend:[T[loc].legend[0]]).map(g=>`<span><i style="background:${g[1]}"></i>${g[0]}</span>`).join('');draw();});
+document.getElementById('panels').addEventListener('click',()=>{});
+document.addEventListener('click',e=>{const rt=e.target.closest('.reg-tab');if(!rt)return;reg=rt.dataset.p;localStorage.setItem('indica-register',reg);document.querySelectorAll('.reg-tab').forEach(x=>x.classList.toggle('on',x.dataset.p===reg));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.dataset.p===reg));});
+document.querySelectorAll('#lang button').forEach(x=>x.classList.toggle('on',x.dataset.l===loc));
+const st=document.createElement('style');st.textContent='@keyframes drw{to{stroke-dashoffset:0}}';document.head.appendChild(st);
+render();
+</script>
+</body>
+</html>

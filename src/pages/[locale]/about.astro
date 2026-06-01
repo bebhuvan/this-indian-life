@@ -1,0 +1,50 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import { locales } from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+---
+
+<Base title="About · Indica">
+  <div class="wrap">
+    <Nav locale={locale} />
+
+    <header class="domain-head">
+      <span class="lbl">About Indica</span>
+      <h1 class="serif">A living almanac for how India lives.</h1>
+      <p class="muted">
+        Indica turns scattered public statistics into durable, sourced chart pages with clear explanations.
+      </p>
+    </header>
+
+    <section class="section mods">
+      <div>
+        <p class="sec-hd">Principles</p>
+        <div class="prose">
+          <p><strong>Numbers come from sources.</strong> RBI, MoSPI, World Bank, OWID, NASA, OpenAQ, WAQI, and other data providers are ingested into normalized artifacts.</p>
+          <p><strong>Prose wraps locked numbers.</strong> LLMs can help write explanations, but they do not invent figures or answer live from memory.</p>
+          <p><strong>The site is static first.</strong> Published pages do not call third-party APIs during a page view.</p>
+        </div>
+      </div>
+      <div class="ask-box">
+        <div class="t">Current build</div>
+        <p class="muted">This first live scaffold uses World Bank India series to prove the full path from ingest to chart page.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Next sources</p>
+      <div class="cards">
+        <div class="card dom-economy"><div class="tag">RBI</div><h4>Database on Indian Economy</h4><p class="sub">Monetary, banking, inflation, external sector, and financial-market data.</p></div>
+        <div class="card dom-economy"><div class="tag">MoSPI</div><h4>Official statistics</h4><p class="sub">National accounts, CPI/IIP, surveys, and statistical products.</p></div>
+        <div class="card dom-climate"><div class="tag">Air + climate</div><h4>OpenAQ, WAQI, NASA POWER</h4><p class="sub">Pollution, heat, rainfall, and meteorological exposure.</p></div>
+      </div>
+    </section>
+  </div>
+</Base>
+

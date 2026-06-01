@@ -1,0 +1,27 @@
+---
+import { domains } from "../data/site";
+
+type Props = {
+  active?: string;
+  locale?: string;
+};
+
+const { active, locale = "en" } = Astro.props;
+---
+
+<nav class="nav">
+  <a class="brand" href={`/${locale}/`}>Indica</a>
+  <div class="domains">
+    {domains.map((domain) => (
+      <a
+        data-d={domain.id}
+        class={active === domain.id ? "on" : ""}
+        href={`/${locale}/${domain.id}/`}
+      >
+        {domain.label}
+      </a>
+    ))}
+  </div>
+</nav>
+<hr class="r" />
+

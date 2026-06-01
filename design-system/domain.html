@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Economy · Indica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="indica.css">
+</head>
+<body lang="en" class="dom-economy">
+<div class="wrap">
+  <nav class="nav">
+    <a class="brand" href="index.html">Indica</a>
+    <div class="domains">
+      <a data-d="economy" class="on" href="#">Economy</a><a data-d="climate" href="#">Climate</a>
+      <a data-d="people" href="#">People</a><a data-d="energy" href="#">Energy</a>
+      <a data-d="health" href="#">Health</a><a data-d="society" href="#">Society</a>
+    </div>
+  </nav>
+  <hr class="r">
+
+  <header style="padding:46px 0 26px">
+    <span class="domain-chip" style="margin-bottom:14px"><span class="tk"></span><span>Economy</span></span>
+    <h1 class="serif" style="font-weight:400;font-size:var(--t-h1);max-width:18ch;line-height:1.06">The Indian economy, measured.</h1>
+    <p class="muted" style="margin-top:14px;max-width:60ch;font-size:1.02rem">Growth, prices, jobs, trade and money — <b id="count">214</b> charts, each sourced and explained in three registers.</p>
+    <div class="demo" style="margin-top:24px;gap:8px" id="filters">
+      <button class="chip soft on">All</button><button class="chip soft">Growth</button><button class="chip soft">Prices</button><button class="chip soft">Trade</button><button class="chip soft">Jobs</button><button class="chip soft">Money</button>
+    </div>
+  </header>
+
+  <section style="padding-bottom:64px">
+    <div class="cards" id="grid"></div>
+  </section>
+
+  <footer class="foot"><div class="foot-brand">Indica</div><p class="foot-note">Browse surface for one domain. In production this is generated from the chart catalog (one config row per chart).</p></footer>
+</div>
+
+<script src="chart-kit.js"></script>
+<script>
+const C='#3A5BD0';
+const CHARTS=[
+ ['Growth','How fast is the economy growing?','Real GDP growth, % / yr',[6.4,7.4,8.0,4.2,-5.8,9.7,7.0]],
+ ['Growth','How big is India’s economy?','Nominal GDP, T USD',[0.47,0.82,1.68,2.10,2.67,3.55,3.94]],
+ ['Prices','Is inflation under control?','CPI inflation, %',[10.0,9.4,5.9,3.6,6.2,5.5,4.9]],
+ ['Money','What does ₹1 buy now?','USD per ₹, inverted',[45,48,60,64,71,74,83]],
+ ['Trade','What does India sell the world?','Merchandise exports, B USD',[185,251,310,275,330,422,437]],
+ ['Jobs','How many Indians are working?','Labour-force participation, %',[58,56,52,49,46,49,50]],
+ ['Money','How much do Indians save?','Gross savings, % of GDP',[34,33,31,30,29,30,30]],
+ ['Trade','How much comes from abroad?','FDI inflows, B USD',[35,46,55,60,74,84,71]],
+ ['Growth','How much is services vs factories?','Services share of GVA, %',[49,50,52,53,54,53,53]]];
+const grid=document.getElementById('grid');
+function render(filter){grid.innerHTML=CHARTS.filter(c=>!filter||filter==='All'||c[0]===filter).map(c=>
+  `<a class="card" href="chart.html"><span class="tag">${c[0]}</span><h4 class="serif">${c[1]}</h4><span class="sub">${c[2]}</span><svg class="spark" viewBox="0 0 240 56" width="100%" height="56">${Indica.spark({w:240,h:56,data:c[3],color:C,area:true})}</svg><span class="arrow">→</span></a>`).join('');}
+render('All');
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render(b.textContent);});
+</script>
+</body>
+</html>
