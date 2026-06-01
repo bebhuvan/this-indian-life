@@ -1,0 +1,183 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import { locales } from "../../data/site";
+import {
+  emberDatasets,
+  owidGrapherDatasets,
+  unPopulationIndicators,
+  v1Questions,
+  waqiCities,
+  whoIndicators,
+  worldBankIndicators
+} from "../../../scripts/registry/v1-indicators.mjs";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+
+const sourceGroups = [
+  { name: "World Bank", rows: worldBankIndicators, codeKey: "sourceIndicatorId" },
+  { name: "UN Population", rows: unPopulationIndicators, codeKey: "indicator" },
+  { name: "WHO GHO", rows: whoIndicators, codeKey: "indicatorCode" },
+  { name: "Ember", rows: emberDatasets, codeKey: "dataset" },
+  { name: "OWID Grapher", rows: owidGrapherDatasets, codeKey: "slug" },
+  { name: "WAQI", rows: waqiCities, codeKey: "city" }
+];
+
+const schemas = [
+  {
+    name: "SeriesArtifact",
+    use: "Simple time series such as GDP, population, electricity access, or tax revenue.",
+    code: `type SeriesArtifact = {
+  schemaVersion: 1;
+  artifactType: "series";
+  indicatorId: string;
+  title: string;
+  sourceId: string;
+  sourceIndicatorId: string;
+  sourceUrl: string;
+  unit: string;
+  frequency: "annual" | "quarterly" | "monthly" | "daily";
+  geography: { type: string; id: string; name: string };
+  fetchedAt: string;
+  observations: Array<{ date: string; value: number | null }>;
+};`
+  },
+  {
+    name: "TableArtifact",
+    use: "Dimensional data that should not be flattened early: age-sex tables, fuel mixes, WHO rows, and city AQI.",
+    code: `type TableArtifact = {
+  schemaVersion: 1;
+  artifactType: "table";
+  indicatorId: string;
+  title: string;
+  sourceId: string;
+  sourceIndicatorId: string;
+  sourceUrl: string;
+  unit: string;
+  geography: { type: string; id: string; name: string };
+  fetchedAt: string;
+  dimensions: string[];
+  rows: Array<Record<string, unknown>>;
+  metadata: Record<string, unknown>;
+};`
+  },
+  {
+    name: "EvidencePacket",
+    use: "The locked input sent to DeepSeek. Prose can use these numbers, and no others.",
+    code: `type EvidencePacket = {
+  schemaVersion: 1;
+  questionId: string;
+  question: string;
+  requiredIndicatorIds: string[];
+  availableIndicatorIds: string[];
+  lockedNumbers: Array<{
+    label: string;
+    value: number;
+    date?: string;
+    unit: string;
+    sourceId: string;
+    indicatorId: string;
+  }>;
+  sourceSummaries: Array<Record<string, unknown>>;
+  caveats: string[];
+  forbiddenClaims: string[];
+};`
+  },
+  {
+    name: "ExplanationArtifact",
+    use: "The generated short and long prose saved for each V1 question.",
+    code: `type ExplanationArtifact = {
+  schemaVersion: 1;
+  questionId: string;
+  status: "ready" | "needs_data";
+  short: { headline: string; dek: string; body: string };
+  article: { title: string; standfirst: string; bodyMarkdown: string };
+  sourceNotes: string[];
+  caveats: string[];
+  lockedNumbersUsed: string[];
+  qualityFlags: string[];
+  generatedAt: string;
+  model: string;
+  evidence: EvidencePacket;
+};`
+  }
+];
+---
+
+<Base title="Definitions · Indica" description="The V1 question spine, indicator registry, and data artifact contracts behind Indica.">
+  <div class="wrap">
+    <Nav locale={locale} />
+
+    <header class="domain-head">
+      <span class="lbl">Reference</span>
+      <h1 class="serif">Definitions that keep Indica reproducible.</h1>
+      <p class="muted">
+        The site is built from a small set of contracts: questions map to indicator IDs, indicators map to source APIs, and every explanation is generated from locked evidence.
+      </p>
+    </header>
+
+    <section class="section def-grid">
+      <div>
+        <p class="sec-hd">V1 question spine</p>
+        <div class="definition-list">
+          {v1Questions.map((item, index) => (
+            <article class="definition-row">
+              <div class="definition-index">{String(index + 1).padStart(2, "0")}</div>
+              <div>
+                <h2>{item.question}</h2>
+                <p class="mono">{item.id}</p>
+                <div class="def-tags">
+                  {item.indicators.map((indicator) => <span>{indicator}</span>)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <aside class="def-note">
+        <p class="lbl">Rule</p>
+        <p>Questions do not fetch data directly. They reference stable indicator IDs. That keeps the writing, charts, and source adapters decoupled.</p>
+      </aside>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Artifact schemas</p>
+      <div class="schema-grid">
+        {schemas.map((schema) => (
+          <article class="schema-card">
+            <div>
+              <p class="lbl">{schema.name}</p>
+              <p class="muted">{schema.use}</p>
+            </div>
+            <pre><code>{schema.code}</code></pre>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Source registry</p>
+      <div class="source-groups">
+        {sourceGroups.map((group) => (
+          <article class="source-group">
+            <h2 class="serif">{group.name}</h2>
+            <div class="source-table">
+              {group.rows.map((row) => (
+                <div class="source-row">
+                  <span class="mono">{row.id}</span>
+                  <span>{row.title}</span>
+                  <span class="faint">{row[group.codeKey]}</span>
+                  <span class="faint">{row.unit}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>

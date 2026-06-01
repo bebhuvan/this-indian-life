@@ -21,7 +21,8 @@ const { active, locale = "en" } = Astro.props;
         {domain.label}
       </a>
     ))}
+    <a data-d="reference" href={`/${locale}/definitions/`}>Definitions</a>
+    <a data-d="reference" href={`/${locale}/about/`}>About</a>
   </div>
 </nav>
 <hr class="r" />
-
