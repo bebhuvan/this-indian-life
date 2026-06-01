@@ -3,7 +3,7 @@ import Base from "../../../layouts/Base.astro";
 import Nav from "../../../components/Nav.astro";
 import ArticleVisuals from "../../../components/ArticleVisuals.astro";
 import { locales } from "../../../data/site";
-import { formatLockedNumber, inlineMarkdownHtml, markdownBlocks, questionPages, questionUrl } from "../../../data/questions";
+import { inlineMarkdownHtml, macchaExplanation, markdownBlocks, pullQuoteForQuestion, questionPages, questionUrl } from "../../../data/questions";
 import { visualsForQuestion } from "../../../data/viz";
 
 export function getStaticPaths() {
@@ -18,10 +18,11 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 const { page } = Astro.props;
 const explanation = page.explanation;
-const lockedNumbers = explanation.evidence.lockedNumbers.slice(0, 4);
 const related = questionPages.filter((item) => item.id !== page.id && item.domain === page.domain).slice(0, 4);
 const blocks = markdownBlocks(explanation.article.bodyMarkdown);
 const visuals = visualsForQuestion(page);
+const maccha = macchaExplanation(page);
+const pullQuote = pullQuoteForQuestion(page);
 ---
 
 <Base title={`${page.question} · Indica`} description={explanation.short.dek} domain={page.domain}>
@@ -38,22 +39,29 @@ const visuals = visualsForQuestion(page);
       </div>
     </header>
 
-    <ArticleVisuals visuals={visuals} />
+    <ArticleVisuals visuals={visuals} lockedNumbers={explanation.evidence.lockedNumbers} />
+
+    <section class="data-pull">
+      <p class="lbl">The point</p>
+      <div>
+        <span class="serif">{pullQuote.stat}</span>
+        <p class="serif">{pullQuote.line}</p>
+      </div>
+    </section>
 
     <section class="article-hero">
-      <div>
+      <div class="explain-card standard">
         <p class="lbl">Short answer</p>
         <h2 class="serif">{explanation.short.headline}</h2>
         <p>{explanation.short.body}</p>
       </div>
-      <aside class="evidence-card">
-        <p class="lbl">Locked evidence</p>
-        {lockedNumbers.length ? lockedNumbers.map((item) => (
-          <div class="evidence-number">
-            <span class="n">{formatLockedNumber(item)}</span>
-            <span class="t">{item.label}{item.date ? ` · ${item.date}` : ""}</span>
-          </div>
-        )) : <p class="muted">No locked number was available for this question.</p>}
+      <aside class="explain-card maccha">
+        <p class="lbl">{maccha.kicker}</p>
+        <h2 class="serif">{maccha.title}</h2>
+        <p>{maccha.body}</p>
+        <ul>
+          {maccha.bullets.map((item) => <li>{item}</li>)}
+        </ul>
       </aside>
     </section>
 

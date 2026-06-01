@@ -110,6 +110,64 @@ export function formatLockedNumber(item: LockedNumber) {
   return item.value.toLocaleString("en-IN", { maximumFractionDigits: 3 });
 }
 
+export function macchaExplanation(page: QuestionPage) {
+  const locked = page.explanation.evidence.lockedNumbers;
+  const top = locked[0];
+  const second = locked.find((item) => item.indicatorId !== top?.indicatorId) || locked[1];
+  const topText = top ? `${formatLockedNumber(top)}${top.date ? ` in ${top.date}` : ""}` : "not enough clean evidence yet";
+  const secondText = second ? `${formatLockedNumber(second)}${second.date ? ` in ${second.date}` : ""}` : "";
+  const caveat = page.explanation.caveats[0] || "This is a national number, so it can hide big differences across states, cities, class, caste, gender, and age.";
+  const sourceCount = page.explanation.evidence.availableIndicatorIds.length;
+  const statusText = page.explanation.status === "ready"
+    ? "The chart is useful, but do not convert it into a WhatsApp forward. Read the caveat before the confidence."
+    : "The honest answer is: we need more indicators before making a big claim.";
+
+  return {
+    title: "What does it mean, maccha?",
+    kicker: "That and all ok, but I understood nothing",
+    body: top
+      ? `Translation: the main number to hold in your head is ${topText}. ${secondText ? `The useful comparison number is ${secondText}. ` : ""}${statusText}`
+      : statusText,
+    bullets: [
+      `Built from ${sourceCount} local data artifact${sourceCount === 1 ? "" : "s"}, not live model memory.`,
+      caveat,
+      "Use this as a clean starting point, not the final word on India."
+    ]
+  };
+}
+
+export function pullQuoteForQuestion(page: QuestionPage) {
+  const top = page.explanation.evidence.lockedNumbers[0];
+  if (page.id.startsWith("q.people.")) {
+    return {
+      stat: top ? formatLockedNumber(top) : "India-scale",
+      line: "In India, scale is the story. A small-looking change can still mean a city, a state, or a generation."
+    };
+  }
+  if (page.id.startsWith("q.econ.")) {
+    return {
+      stat: top ? formatLockedNumber(top) : "The average",
+      line: "The national headline and the household feeling can both be true. The chart tells you where the gap starts."
+    };
+  }
+  if (page.id.startsWith("q.energy.")) {
+    return {
+      stat: top ? formatLockedNumber(top) : "The grid",
+      line: "Energy data is not abstract. It is fans, pumps, factories, trains, and the fuel mix behind them."
+    };
+  }
+  if (page.id.startsWith("q.climate.") || page.id.startsWith("q.air.")) {
+    return {
+      stat: top ? formatLockedNumber(top) : "The atmosphere",
+      line: "Climate and air numbers become real when you read them beside exposure, people, and time."
+    };
+  }
+  return {
+    stat: top ? formatLockedNumber(top) : "The number",
+    line: "The first number is only the entry point. The shape of the data is where the answer begins."
+  };
+}
+
 export function markdownBlocks(markdown: string) {
   const blocks: Array<{ type: "h2" | "h3" | "p"; text: string }> = [];
   for (const block of markdown.split(/\n{2,}/).map((item) => item.trim()).filter(Boolean)) {

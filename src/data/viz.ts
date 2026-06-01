@@ -3,11 +3,17 @@ import { resolve } from "node:path";
 import type { QuestionPage } from "./questions";
 
 export type Point = { date: string; value: number };
+export type VisualSource = {
+  sourceId: string;
+  sourceIndicatorId: string;
+  sourceUrl?: string;
+};
 export type LineVisual = {
   kind: "line";
   title: string;
   subtitle: string;
   unit: string;
+  source: VisualSource;
   lines: Array<{ label: string; points: Point[] }>;
 };
 export type StackVisual = {
@@ -15,6 +21,7 @@ export type StackVisual = {
   title: string;
   subtitle: string;
   unit: string;
+  source: VisualSource;
   segments: Array<{ label: string; value: number }>;
 };
 export type BarVisual = {
@@ -22,17 +29,27 @@ export type BarVisual = {
   title: string;
   subtitle: string;
   unit: string;
+  source: VisualSource;
   bars: Array<{ label: string; value: number }>;
+};
+export type ChangeVisual = {
+  kind: "change";
+  title: string;
+  subtitle: string;
+  unit: string;
+  source: VisualSource;
+  items: Array<{ label: string; start: Point; end: Point; change: number; pctChange: number | null }>;
 };
 export type PyramidVisual = {
   kind: "pyramid";
   title: string;
   subtitle: string;
   unit: string;
+  source: VisualSource;
   year: string;
   rows: Array<{ age: string; male: number; female: number }>;
 };
-export type VisualSpec = LineVisual | StackVisual | BarVisual | PyramidVisual;
+export type VisualSpec = LineVisual | StackVisual | BarVisual | ChangeVisual | PyramidVisual;
 
 type Artifact = {
   artifactType?: "series" | "table";
@@ -40,6 +57,7 @@ type Artifact = {
   title: string;
   sourceId: string;
   sourceIndicatorId: string;
+  sourceUrl?: string;
   unit: string;
   observations?: Array<{ date: string; value: number | null }>;
   rows?: Array<Record<string, unknown>>;
@@ -55,6 +73,78 @@ function loadArtifacts() {
 }
 
 const artifacts = loadArtifacts();
+
+const companionIndicators: Record<string, string[]> = {
+  "q.people.total": [
+    "people.population.un.change_rate",
+    "people.population.un.median_age",
+    "people.population.un.broad_age_share",
+    "people.population.un.age_sex_5y"
+  ],
+  "q.people.growth": [
+    "people.population.total",
+    "people.population.un.total",
+    "people.population.un.median_age"
+  ],
+  "q.people.age": [
+    "people.population.un.broad_age_share",
+    "people.population.un.old_age_dependency",
+    "people.population.un.age_sex_5y"
+  ],
+  "q.people.pyramid": [
+    "people.population.un.total",
+    "people.population.un.median_age",
+    "people.population.un.broad_age_share"
+  ],
+  "q.people.old_before_rich": [
+    "people.population.un.median_age",
+    "people.population.un.broad_age_share",
+    "people.population.un.total"
+  ],
+  "q.energy.mix": [
+    "energy.ember.demand",
+    "energy.ember.emissions",
+    "energy.ember.carbon_intensity"
+  ],
+  "q.energy.coal": [
+    "energy.ember.demand",
+    "energy.ember.emissions",
+    "energy.ember.carbon_intensity"
+  ],
+  "q.energy.renewables": [
+    "energy.ember.demand",
+    "energy.ember.emissions",
+    "energy.ember.carbon_intensity"
+  ],
+  "q.climate.co2": [
+    "owid.co2_per_capita",
+    "owid.co2_cumulative"
+  ],
+  "q.climate.co2_pc": [
+    "owid.co2_total",
+    "owid.co2_cumulative"
+  ],
+  "q.health.life": [
+    "health.who.hale_birth",
+    "health.under5_mortality",
+    "people.population.un.life_expectancy"
+  ],
+  "q.health.hale": [
+    "health.who.life_expectancy",
+    "health.who.life_expectancy_age_60"
+  ],
+  "q.services.water": [
+    "society.sanitation_basic"
+  ]
+};
+
+function sourceFor(artifact: Artifact): VisualSource {
+  return {
+    sourceId: artifact.sourceId,
+    sourceIndicatorId: artifact.sourceIndicatorId,
+    sourceUrl: artifact.sourceUrl
+  };
+}
 
 function numberFrom(value: unknown) {
   if (typeof value === "number" && Number.isFinite(value)) return value;
@@ -103,7 +193,69 @@ function seriesVisual(artifact: Artifact): LineVisual | null {
     title: artifact.title,
     subtitle: `${artifact.sourceId} · ${artifact.sourceIndicatorId}`,
     unit: artifact.unit,
+    source: sourceFor(artifact),
     lines: [{ label: artifact.title, points }]
+  };
+}
+
+function indexedLineVisual(line: LineVisual): LineVisual | null {
+  const lines = line.lines
+    .map((item) => {
+      const first = item.points.find((point) => point.value !== 0);
+      if (!first) return null;
+      const points = item.points.map((point) => ({ date: point.date, value: (point.value / first.value) * 100 }));
+      return { label: item.label, points };
+    })
+    .filter(Boolean) as LineVisual["lines"];
+  if (!lines.length) return null;
+  return {
+    kind: "line",
+    title: "Indexed change",
+    subtitle: `${line.title} · first observation = 100`,
+    unit: "index",
+    source: line.source,
+    lines
+  };
+}
+
+function changeVisual(line: LineVisual): ChangeVisual | null {
+  const items = line.lines
+    .map((item) => {
+      const start = item.points.at(0);
+      const end = item.points.at(-1);
+      if (!start || !end || start.value === 0) return null;
+      const change = end.value - start.value;
+      return {
+        label: item.label,
+        start,
+        end,
+        change,
+        pctChange: (change / Math.abs(start.value)) * 100
+      };
+    })
+    .filter(Boolean) as ChangeVisual["items"];
+  if (!items.length) return null;
+  return {
+    kind: "change",
+    title: "How much changed?",
+    subtitle: `${line.title} · first to latest point`,
+    unit: line.unit,
+    source: line.source,
+    items
+  };
+}
+
+function recentBars(line: LineVisual): BarVisual | null {
+  if (line.lines.length !== 1) return null;
+  const points = line.lines[0].points.slice(-10);
+  if (points.length < 3) return null;
+  return {
+    kind: "bar",
+    title: "Latest observations",
+    subtitle: `${line.title} · most recent ${points.length} points`,
+    unit: line.unit,
+    source: line.source,
+    bars: points.map((point) => ({ label: point.date, value: point.value }))
   };
 }
 
@@ -124,6 +276,28 @@ function tableLineVisual(artifact: Artifact): LineVisual | null {
   if (!key) return null;
   const groupKey = rows.some((row) => row.series) ? "series" : "";
 
+  if (rows.some((row) => row.sex) && ["people.population.un.total", "people.population.un.life_expectancy"].includes(artifact.indicatorId)) {
+    const wanted = ["Both sexes", "Male", "Female"];
+    const lines = wanted
+      .map((label) => {
+        const points = sortPoints(rows
+          .filter((row) => row.sex === label && (!row.variant || row.variant === "Median"))
+          .map((row) => ({ date: dateFrom(row), value: numberFrom(row[key]) ?? NaN })));
+        return { label, points };
+      })
+      .filter((line) => line.points.length >= 2);
+    if (lines.length) {
+      return {
+        kind: "line",
+        title: artifact.title,
+        subtitle: `${artifact.sourceId} · ${key}`,
+        unit: artifact.unit,
+        source: sourceFor(artifact),
+        lines
+      };
+    }
+  }
+
   if (groupKey) {
     const priority = ["Coal", "Fossil", "Clean", "Solar", "Wind", "Hydro"];
     const lines = priority
@@ -140,6 +314,7 @@ function tableLineVisual(artifact: Artifact): LineVisual | null {
       title: artifact.title,
       subtitle: `${artifact.sourceId} · ${key}`,
       unit: artifact.unit,
+      source: sourceFor(artifact),
       lines
     };
   }
@@ -153,6 +328,7 @@ function tableLineVisual(artifact: Artifact): LineVisual | null {
     title: artifact.title,
     subtitle: `${artifact.sourceId} · ${key}`,
     unit: artifact.unit,
+    source: sourceFor(artifact),
     lines: [{ label: artifact.title, points }]
   };
 }
@@ -175,6 +351,7 @@ function latestStack(artifact: Artifact): StackVisual | null {
     title: "Electricity generation mix",
     subtitle: `India · ${latestYear}`,
     unit: "TWh",
+    source: sourceFor(artifact),
     segments
   };
 }
@@ -196,6 +373,7 @@ function waqiBars(artifact: Artifact): BarVisual | null {
     title: artifact.title,
     subtitle: String((row.city as { name?: string } | undefined)?.name || "Latest station reading"),
     unit: artifact.unit,
+    source: sourceFor(artifact),
     bars
   };
 }
@@ -220,6 +398,7 @@ function pyramidVisual(artifact: Artifact): PyramidVisual | null {
     title: "Population pyramid",
     subtitle: "UN median variant · 2025",
     unit: "people",
+    source: sourceFor(artifact),
     year: "2025",
     rows: rowsOut
   };
@@ -229,8 +408,14 @@ function genericBarForLatestRows(artifact: Artifact): BarVisual | null {
   const rows = artifact.rows || [];
   if (artifact.indicatorId !== "people.population.un.broad_age_share") return null;
   const latestYear = "2025";
+  const wanted = ["0-14", "15-64", "65+"];
   const bars = rows
-    .filter((row) => row.variant === "Median" && row.sex === "Both sexes" && String(row.timeLabel) === latestYear)
+    .filter((row) =>
+      row.variant === "Median" &&
+      row.sex === "Both sexes" &&
+      String(row.timeLabel) === latestYear &&
+      wanted.includes(String(row.ageLabel || ""))
+    )
     .map((row) => ({ label: String(row.ageLabel || row.category), value: numberFrom(row.value) || 0 }))
     .filter((item) => item.label && item.value > 0);
   if (!bars.length) return null;
@@ -239,29 +424,67 @@ function genericBarForLatestRows(artifact: Artifact): BarVisual | null {
     title: "Broad age structure",
     subtitle: `UN median variant · ${latestYear}`,
     unit: "%",
+    source: sourceFor(artifact),
+    bars
+  };
+}
+
+function variantBars(artifact: Artifact): BarVisual | null {
+  if (!["people.population.un.total", "people.population.un.growth"].includes(artifact.indicatorId)) return null;
+  const rows = artifact.rows || [];
+  const key = numericKey(rows[0] || {});
+  if (!key) return null;
+  const targetYear = "2030";
+  const wanted = ["Low-fertility", "Median", "High-fertility", "Constant-fertility", "Zero migration"];
+  const bars = wanted
+    .map((variant) => {
+      const row = rows.find((item) =>
+        item.variant === variant &&
+        String(item.timeLabel || item.Year || item.date) === targetYear &&
+        String(item.sex || "").toLowerCase() === "both sexes" &&
+        ["Total", "Not applicable", ""].includes(String(item.ageLabel || item.category || ""))
+      );
+      return { label: variant.replace("-fertility", ""), value: numberFrom(row?.[key]) || 0 };
+    })
+    .filter((item) => item.value !== 0);
+  if (bars.length < 2) return null;
+  return {
+    kind: "bar",
+    title: `${targetYear} scenario spread`,
+    subtitle: `${artifact.title} · UN variants`,
+    unit: artifact.unit,
+    source: sourceFor(artifact),
     bars
   };
 }
 
 function visualsForArtifact(artifact: Artifact): VisualSpec[] {
   const visuals: VisualSpec[] = [];
-  const custom = [pyramidVisual(artifact), latestStack(artifact), waqiBars(artifact), genericBarForLatestRows(artifact)]
+  const custom = [pyramidVisual(artifact), latestStack(artifact), waqiBars(artifact), genericBarForLatestRows(artifact), variantBars(artifact)]
     .filter(Boolean) as VisualSpec[];
   visuals.push(...custom);
   const line = artifact.artifactType === "series" ? seriesVisual(artifact) : tableLineVisual(artifact);
-  if (line) visuals.push(line);
+  if (line) {
+    visuals.push(line);
+    const companions = [changeVisual(line), recentBars(line), indexedLineVisual(line)].filter(Boolean) as VisualSpec[];
+    visuals.push(...companions);
+  }
   return visuals;
 }
 
 export function visualsForQuestion(page: QuestionPage) {
-  const matched = page.indicators
+  const indicatorIds = [...page.indicators, ...(companionIndicators[page.id] || [])];
+  const matched = indicatorIds
     .flatMap((indicator) => artifacts.filter((artifact) => artifact.indicatorId === indicator));
+  const visualGroups = matched.map(visualsForArtifact).filter((group) => group.length);
+  const firstPass = visualGroups.map((group) => group[0]);
+  const secondPass = visualGroups.flatMap((group) => group.slice(1));
   const seen = new Set<string>();
-  const visuals = matched.flatMap(visualsForArtifact).filter((visual) => {
+  const visuals = [...firstPass, ...secondPass].filter((visual) => {
     const key = `${visual.kind}:${visual.title}:${visual.subtitle}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
   });
-  return visuals.slice(0, 4);
+  return visuals.slice(0, 12);
 }

@@ -1,28 +1,166 @@
 ---
-import type { VisualSpec, LineVisual, StackVisual, BarVisual, PyramidVisual } from "../data/viz";
+import type { VisualSpec, LineVisual, StackVisual, BarVisual, ChangeVisual, PyramidVisual } from "../data/viz";
+import type { LockedNumber } from "../data/questions";
+import { formatLockedNumber } from "../data/questions";
 
 type Props = {
   visuals: VisualSpec[];
+  lockedNumbers?: LockedNumber[];
 };
 
-const { visuals } = Astro.props;
+const { visuals, lockedNumbers = [] } = Astro.props;
 
 const colors = ["var(--c)", "#0b0b0b", "#15A382", "#EFA227", "#7C5AD6", "#EE6A4C", "#5c5c5c"];
+const sourceNames: Record<string, string> = {
+  worldbank: "World Bank",
+  "un-population": "UN Population",
+  "who-gho": "WHO GHO",
+  ember: "Ember",
+  owid: "Our World in Data",
+  waqi: "WAQI"
+};
 
-function fmt(value: number) {
+function fmt(value: number, unit = "") {
   const abs = Math.abs(value);
-  if (abs >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(1)}B`;
-  if (abs >= 10_000_000) return `${(value / 10_000_000).toFixed(1)}cr`;
+  if (/US\$|usd|\$/i.test(unit)) {
+    if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 2 })}T`;
+    if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}B`;
+  }
+  if (/people/i.test(unit) && abs >= 10_000_000) return `${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} cr`;
+  if (abs >= 1_000_000_000) return `${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}B`;
   if (abs >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
   if (abs >= 1000) return `${(value / 1000).toFixed(1)}k`;
   if (abs >= 100) return value.toFixed(0);
   return value.toFixed(1);
 }
 
-function lineGeometry(visual: LineVisual) {
-  const width = 960;
-  const height = 430;
-  const pad = { l: 70, r: 34, t: 34, b: 52 };
+function shortLabel(label: string) {
+  const dimensions = label.match(/\(([^)]+)\)/)?.[1]
+    .split(",")
+    .map((item) => item.trim())
+    .filter((item) => item && !/not applicable/i.test(item));
+  const cleaned = label
+    .replace(/: value$/i, "")
+    .replace(/: NumericValue$/i, "")
+    .replace(/ by sex/i, "")
+    .replace(/\s+\([^)]*\)/g, "")
+    .replace(/, latest/i, "")
+    .replace(/, earliest/i, "");
+  return dimensions?.length ? `${cleaned} · ${dimensions.join(" · ")}` : cleaned;
+}
+
+function kpiLabel(item: LockedNumber) {
+  const raw = item.label.toLowerCase();
+  const dims = item.label.match(/\(([^)]+)\)/)?.[1]
+    .split(",")
+    .map((part) => part.trim())
+    .filter((part) => part && !/not applicable/i.test(part)) || [];
+  const sex = dims.find((part) => /both sexes|male|female/i.test(part));
+  const variant = dims.find((part) => /median|high|low|constant|zero/i.test(part));
+  if (raw.includes("population")) {
+    if (/high/i.test(variant || "")) return "High-fertility scenario";
+    if (/low/i.test(variant || "")) return "Low-fertility scenario";
+    if (/male/i.test(sex || "") && !/female/i.test(sex || "")) return "Men";
+    if (/female/i.test(sex || "")) return "Women";
+    if (/latest/i.test(raw)) return "Latest population estimate";
+    if (/earliest/i.test(raw)) return "Earliest population estimate";
+    return "Projected population";
+  }
+  if (/latest/i.test(raw)) return `Latest ${shortLabel(item.label).toLowerCase()}`;
+  if (/earliest/i.test(raw)) return `Earliest ${shortLabel(item.label).toLowerCase()}`;
+  return shortLabel(item.label);
+}
+
+function valueParts(item: LockedNumber) {
+  const value = formatLockedNumber(item);
+  const match = value.match(/^(.+?)\s+(crore|lakh|million|billion|trillion)$/i);
+  if (!match) return { number: value, unit: "" };
+  return { number: match[1], unit: match[2] };
+}
+
+function pct(value: number | null) {
+  if (value === null || !Number.isFinite(value)) return "n/a";
+  const sign = value > 0 ? "+" : "";
+  return `${sign}${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}%`;
+}
+
+function cardClass(visualIndex: number, visual: VisualSpec) {
+  if (visualIndex === 0) return "viz-card viz-main";
+  if (visual.kind === "change") return "viz-card viz-wide";
+  if (visual.kind === "line" && visual.lines.length > 1) return "viz-card viz-wide";
+  if (visual.kind === "pyramid" || visual.kind === "stack") return "viz-card viz-wide";
+  return "viz-card";
+}
+
+function sourceName(sourceId: string) {
+  return sourceNames[sourceId] || sourceId;
+}
+
+function cleanSubtitle(value: string, sourceId: string) {
+  return value
+    .replace(sourceId, sourceName(sourceId))
+    .replace(" · value", "")
+    .replace(" · NumericValue", "");
+}
+
+function fileSafe(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 70) || "indica-chart";
+}
+
+function visualPayload(visual: VisualSpec) {
+  const source = visual.source;
+  if (visual.kind === "line") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.lines.flatMap((line) => line.points.map((point) => ({ series: line.label, date: point.date, value: point.value })))
+    };
+  }
+  if (visual.kind === "stack") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.segments.map((item) => ({ series: item.label, value: item.value }))
+    };
+  }
+  if (visual.kind === "bar") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.bars.map((item) => ({ series: item.label, value: item.value }))
+    };
+  }
+  if (visual.kind === "change") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.items.map((item) => ({
+        series: item.label,
+        startDate: item.start.date,
+        startValue: item.start.value,
+        endDate: item.end.date,
+        endValue: item.end.value,
+        change: item.change,
+        pctChange: item.pctChange
+      }))
+    };
+  }
+  return {
+    title: visual.title,
+    unit: visual.unit,
+    source,
+    rows: visual.rows.map((item) => ({ age: item.age, male: item.male, female: item.female }))
+  };
+}
+
+function lineGeometry(visual: LineVisual, isLead = false) {
+  const width = isLead ? 1160 : 620;
+  const height = isLead ? 560 : 360;
+  const pad = isLead ? { l: 86, r: 58, t: 42, b: 62 } : { l: 58, r: 34, t: 30, b: 48 };
   const all = visual.lines.flatMap((line) => line.points);
   const values = all.map((point) => point.value);
   const rawMin = Math.min(...values);
@@ -36,7 +174,11 @@ function lineGeometry(visual: LineVisual) {
   const ticks = Array.from({ length: 5 }, (_, index) => min + (span * index) / 4);
   const paths = visual.lines.map((line, lineIndex) => {
     const d = line.points.map((point, index) => `${index === 0 ? "M" : "L"} ${x(index, line.points.length).toFixed(2)} ${y(point.value).toFixed(2)}`).join(" ");
-    return { ...line, d, color: colors[lineIndex % colors.length] };
+    const areaD = `${d} L ${x(line.points.length - 1, line.points.length).toFixed(2)} ${height - pad.b} L ${x(0, line.points.length).toFixed(2)} ${height - pad.b} Z`;
+    const latest = line.points.at(-1);
+    const latestX = latest ? x(line.points.length - 1, line.points.length) : 0;
+    const latestY = latest ? y(latest.value) : 0;
+    return { ...line, d, areaD, latest, latestX, latestY, color: colors[lineIndex % colors.length] };
   });
   const axisPoints = visual.lines[0]?.points || [];
   const yearEvery = Math.max(1, Math.ceil(longest / 7));
@@ -48,23 +190,55 @@ function lineGeometry(visual: LineVisual) {
   <section class="section viz-section">
     <div class="layers-top">
       <span class="lbl">The data</span>
-      <span class="ai-badge"><span class="sp"></span>Charts are rendered from local artifacts, not live API calls</span>
+      <span class="ai-badge"><span class="sp"></span>Built from local artifacts</span>
     </div>
+    {lockedNumbers.length ? (
+      <div class="visual-kpis">
+        {lockedNumbers.slice(0, 5).map((item) => {
+          const parts = valueParts(item);
+          return (
+            <div class="visual-kpi">
+              <span><strong>{parts.number}</strong>{parts.unit ? <em>{parts.unit}</em> : null}</span>
+              <p><b>{kpiLabel(item)}</b>{item.date ? <small>{item.date}</small> : null}</p>
+            </div>
+          );
+        })}
+      </div>
+    ) : null}
     <div class="viz-grid">
       {visuals.map((visual, visualIndex) => {
+        const source = visual.source;
+        const sourceText = `${sourceName(source.sourceId)} · ${source.sourceIndicatorId}`;
+        const chartId = `viz-${visualIndex + 1}`;
+        const fileName = fileSafe(visual.title);
         if (visual.kind === "line") {
-          const g = lineGeometry(visual as LineVisual);
+          const isLead = visualIndex === 0;
+          const isWideLine = visual.lines.length > 1;
+          const g = lineGeometry(visual as LineVisual, isLead || isWideLine);
+          const leadPoint = visual.lines[0]?.points.at(-1);
           return (
-            <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
+            <article class={cardClass(visualIndex, visual)}>
               <div class="viz-head">
-                <div><h2 class="serif">{visual.title}</h2><p>{visual.subtitle}</p></div>
+                <div><h2 class="serif">{visual.title}</h2><p>{cleanSubtitle(visual.subtitle, source.sourceId)}</p></div>
                 <span>{visual.unit}</span>
               </div>
-              <svg class="viz-svg" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
+              <div class="viz-actions" id={chartId}>
+                <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
+              {leadPoint ? (
+                <div class={isLead ? "viz-lead-number" : "viz-line-number"}>
+                  <span>{fmt(leadPoint.value, visual.unit)}</span>
+                  <p>{leadPoint.date} · latest point</p>
+                </div>
+              ) : null}
+              <svg class={isLead ? "viz-svg viz-svg-lead" : "viz-svg"} viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
                 {g.ticks.map((tick) => (
                   <g>
                     <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
-                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick)}</text>
+                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, visual.unit)}</text>
                   </g>
                 ))}
                 {g.axisPoints.map((point, index) => (
@@ -73,7 +247,21 @@ function lineGeometry(visual: LineVisual) {
                   )
                 ))}
                 {g.paths.map((path) => (
-                  <path d={path.d} fill="none" stroke={path.color} stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <>
+                    {isLead && visual.lines.length === 1 ? <path d={path.areaD} fill="var(--c-tint)" /> : null}
+                    <path d={path.d} fill="none" stroke={path.color} stroke-width={isLead ? "5" : "3.5"} stroke-linecap="round" stroke-linejoin="round" />
+                    {path.latest && (
+                      <g>
+                        <circle cx={path.latestX} cy={path.latestY} r={isLead ? "7" : "5"} fill="#fff" stroke={path.color} stroke-width={isLead ? "4" : "3"} />
+                        {isLead ? (
+                          <>
+                            <text class="end-v" x={Math.min(g.width - 180, path.latestX + 14)} y={path.latestY - 14}>{fmt(path.latest.value, visual.unit)}</text>
+                            <text class="end-s" x={Math.min(g.width - 180, path.latestX + 15)} y={path.latestY + 10}>{path.label} · {path.latest.date}</text>
+                          </>
+                        ) : null}
+                      </g>
+                    )}
+                  </>
                 ))}
               </svg>
               {visual.lines.length > 1 && (
@@ -81,6 +269,10 @@ function lineGeometry(visual: LineVisual) {
                   {visual.lines.map((line, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{line.label}</span>)}
                 </div>
               )}
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
             </article>
           );
         }
@@ -89,8 +281,13 @@ function lineGeometry(visual: LineVisual) {
           const stack = visual as StackVisual;
           const total = stack.segments.reduce((sum, item) => sum + item.value, 0) || 1;
           return (
-            <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
-              <div class="viz-head"><div><h2 class="serif">{stack.title}</h2><p>{stack.subtitle}</p></div><span>{stack.unit}</span></div>
+            <article class={cardClass(visualIndex, visual)}>
+              <div class="viz-head"><div><h2 class="serif">{stack.title}</h2><p>{cleanSubtitle(stack.subtitle, source.sourceId)}</p></div><span>{stack.unit}</span></div>
+              <div class="viz-actions" id={chartId}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
               <div class="viz-stack">
                 {stack.segments.map((segment, index) => (
                   <div class="viz-seg" style={`width:${(segment.value / total) * 100}%;background:${colors[index % colors.length]}`}>
@@ -100,8 +297,12 @@ function lineGeometry(visual: LineVisual) {
               </div>
               <div class="viz-bars">
                 {stack.segments.map((segment) => (
-                  <div class="viz-bar"><span>{segment.label}</span><div><i style={`width:${(segment.value / total) * 100}%`}></i></div><b>{fmt(segment.value)}</b></div>
+                  <div class="viz-bar"><span>{segment.label}</span><div><i style={`width:${(segment.value / total) * 100}%`}></i></div><b>{fmt(segment.value, stack.unit)}</b></div>
                 ))}
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
               </div>
             </article>
           );
@@ -110,13 +311,74 @@ function lineGeometry(visual: LineVisual) {
         if (visual.kind === "bar") {
           const bar = visual as BarVisual;
           const max = Math.max(...bar.bars.map((item) => item.value), 1);
+          const isShare = /%/.test(bar.unit) && bar.bars.length <= 6;
+          const total = bar.bars.reduce((sum, item) => sum + item.value, 0) || 1;
           return (
-            <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
-              <div class="viz-head"><div><h2 class="serif">{bar.title}</h2><p>{bar.subtitle}</p></div><span>{bar.unit}</span></div>
+            <article class={cardClass(visualIndex, visual)}>
+              <div class="viz-head"><div><h2 class="serif">{bar.title}</h2><p>{cleanSubtitle(bar.subtitle, source.sourceId)}</p></div><span>{bar.unit}</span></div>
+              <div class="viz-actions" id={chartId}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
+              {isShare ? (
+                <div class="share-strip">
+                  {bar.bars.map((item, index) => (
+                    <div style={`width:${(item.value / total) * 100}%;background:${colors[index % colors.length]}`}>
+                      <span>{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
               <div class="viz-bars">
                 {bar.bars.map((item) => (
-                  <div class="viz-bar"><span>{item.label}</span><div><i style={`width:${(item.value / max) * 100}%`}></i></div><b>{fmt(item.value)}</b></div>
+                  <div class="viz-bar"><span>{item.label}</span><div><i style={`width:${isShare ? item.value : (item.value / max) * 100}%`}></i></div><b>{fmt(item.value, bar.unit)}</b></div>
                 ))}
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "change") {
+          const change = visual as ChangeVisual;
+          const max = Math.max(...change.items.map((item) => Math.abs(item.change)), 1);
+          return (
+            <article class={cardClass(visualIndex, visual)}>
+              <div class="viz-head">
+                <div><h2 class="serif">{change.title}</h2><p>{cleanSubtitle(change.subtitle, source.sourceId)}</p></div>
+                <span>{change.unit}</span>
+              </div>
+              <div class="viz-actions" id={chartId}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
+              <div class="change-grid">
+                {change.items.slice(0, 4).map((item, index) => (
+                  <div class="change-row">
+                    <div>
+                      <span>{shortLabel(item.label)}</span>
+                      <b>{fmt(item.start.value, change.unit)}</b>
+                      <small>From {item.start.date}</small>
+                    </div>
+                    <div class="change-track">
+                      <i style={`width:${Math.max(5, (Math.abs(item.change) / max) * 100)}%;background:${colors[index % colors.length]}`}></i>
+                    </div>
+                    <div>
+                      <span>{pct(item.pctChange)} change</span>
+                      <b>{fmt(item.end.value, change.unit)}</b>
+                      <small>To {item.end.date}</small>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
               </div>
             </article>
           );
@@ -125,8 +387,13 @@ function lineGeometry(visual: LineVisual) {
         const pyramid = visual as PyramidVisual;
         const max = Math.max(...pyramid.rows.flatMap((row) => [row.male, row.female]), 1);
         return (
-          <article class={visualIndex === 0 ? "viz-card viz-main" : "viz-card"}>
-            <div class="viz-head"><div><h2 class="serif">{pyramid.title}</h2><p>{pyramid.subtitle}</p></div><span>{pyramid.year}</span></div>
+          <article class={cardClass(visualIndex, visual)}>
+            <div class="viz-head"><div><h2 class="serif">{pyramid.title}</h2><p>{cleanSubtitle(pyramid.subtitle, source.sourceId)}</p></div><span>{pyramid.year}</span></div>
+            <div class="viz-actions" id={chartId}>
+              <button type="button" data-viz-action="csv">CSV</button>
+              <button type="button" data-viz-action="share">Share</button>
+            </div>
+            <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
             <div class="pyramid">
               {pyramid.rows.map((row) => (
                 <div class="pyr-row">
@@ -137,9 +404,70 @@ function lineGeometry(visual: LineVisual) {
               ))}
             </div>
             <div class="viz-legend"><span><i style="background:var(--c)"></i>Male</span><span><i style="background:#0b0b0b"></i>Female</span></div>
+            <div class="viz-source">
+              <span>Source</span>
+              {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+            </div>
           </article>
         );
       })}
     </div>
+    <script is:inline>
+      function downloadBlob(name, type, content) {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = name;
+        document.body.append(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+      function csvEscape(value) {
+        if (value === null || value === undefined) return "";
+        const text = String(value);
+        return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+      }
+      function payloadToCsv(payload) {
+        const sourceRows = [
+          ["title", payload.title],
+          ["unit", payload.unit],
+          ["sourceId", payload.source?.sourceId],
+          ["sourceIndicatorId", payload.source?.sourceIndicatorId],
+          ["sourceUrl", payload.source?.sourceUrl || ""],
+          []
+        ];
+        const rows = payload.rows || [];
+        const keys = [...new Set(rows.flatMap((row) => Object.keys(row)))];
+        const body = [keys, ...rows.map((row) => keys.map((key) => row[key]))];
+        return [...sourceRows, ...body].map((row) => row.map(csvEscape).join(",")).join("\n");
+      }
+      document.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-viz-action]");
+        if (!button) return;
+        const card = button.closest(".viz-card");
+        if (!card) return;
+        const action = button.dataset.vizAction;
+        const dataEl = card.querySelector(".viz-data");
+        const file = dataEl?.dataset.file || "indica-chart";
+        if (action === "csv" && dataEl) {
+          downloadBlob(`${file}.csv`, "text/csv;charset=utf-8", payloadToCsv(JSON.parse(dataEl.textContent || "{}")));
+        }
+        if (action === "svg") {
+          const svg = card.querySelector("svg");
+          if (!svg) return;
+          downloadBlob(`${file}.svg`, "image/svg+xml;charset=utf-8", new XMLSerializer().serializeToString(svg));
+        }
+        if (action === "share") {
+          const anchor = card.querySelector(".viz-actions")?.id;
+          const url = `${location.origin}${location.pathname}${anchor ? `#${anchor}` : ""}`;
+          if (navigator.share) await navigator.share({ title: document.title, url });
+          else await navigator.clipboard.writeText(url);
+          button.textContent = "Copied";
+          setTimeout(() => { button.textContent = "Share"; }, 1400);
+        }
+      });
+    </script>
   </section>
 ) : null}
