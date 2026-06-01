@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.work.agriculture",
+  "question": "What share of Indians still work in agriculture?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "work.employment_agriculture",
+    "econ.gdp.sector_agriculture"
+  ],
+  "availableIndicatorIds": [
+    "econ.gdp.sector_agriculture",
+    "work.employment_agriculture"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Agriculture, value added, latest",
+      "value": 16.2854335605917,
+      "date": "2024",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_agriculture"
+    },
+    {
+      "label": "Agriculture, value added, earliest",
+      "value": 41.7413351234112,
+      "date": "1960",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_agriculture"
+    },
+    {
+      "label": "Employment in agriculture, latest",
+      "value": 41.6251280877573,
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    },
+    {
+      "label": "Employment in agriculture, earliest",
+      "value": 63.1283195373591,
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "econ.gdp.sector_agriculture",
+      "title": "Agriculture, value added",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "NV.AGR.TOTL.ZS",
+      "unit": "% of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 41.7413351234112
+      },
+      "latest": {
+        "date": "2024",
+        "value": 16.2854335605917
+      }
+    },
+    {
+      "indicatorId": "work.employment_agriculture",
+      "title": "Employment in agriculture",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 63.1283195373591
+      },
+      "latest": {
+        "date": "2025",
+        "value": 41.6251280877573
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

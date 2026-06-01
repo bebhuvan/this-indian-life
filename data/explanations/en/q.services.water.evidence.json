@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.services.water",
+  "question": "Do Indians have safe drinking water?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "society.water_basic"
+  ],
+  "availableIndicatorIds": [
+    "society.water_basic"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "People using at least basic drinking water services, latest",
+      "value": 95.7247373523918,
+      "date": "2024",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "society.water_basic"
+    },
+    {
+      "label": "People using at least basic drinking water services, earliest",
+      "value": 79.4918924474821,
+      "date": "2000",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "society.water_basic"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "society.water_basic",
+      "title": "People using at least basic drinking water services",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SH.H2O.BASW.ZS",
+      "unit": "% of population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "2000",
+        "value": 79.4918924474821
+      },
+      "latest": {
+        "date": "2024",
+        "value": 95.7247373523918
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

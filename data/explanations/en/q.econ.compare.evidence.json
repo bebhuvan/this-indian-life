@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.compare",
+  "question": "How does India compare with China, the US, and the world?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "econ.gdp.current_usd",
+    "econ.gdp.per_capita_current_usd",
+    "people.population.total"
+  ],
+  "availableIndicatorIds": [
+    "econ.gdp.current_usd",
+    "econ.gdp.per_capita_current_usd",
+    "people.population.total"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "GDP, current US dollars, latest",
+      "value": 3909891533858.08,
+      "date": "2024",
+      "unit": "current US$",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.current_usd"
+    },
+    {
+      "label": "GDP, current US dollars, earliest",
+      "value": 37029883876.1839,
+      "date": "1960",
+      "unit": "current US$",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.current_usd"
+    },
+    {
+      "label": "GDP per capita, current US dollars, latest",
+      "value": 2694.73780859961,
+      "date": "2024",
+      "unit": "current US$ per person",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.per_capita_current_usd"
+    },
+    {
+      "label": "GDP per capita, current US dollars, earliest",
+      "value": 84.9328084793106,
+      "date": "1960",
+      "unit": "current US$ per person",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.per_capita_current_usd"
+    },
+    {
+      "label": "Population, total, latest",
+      "value": 1450935791,
+      "date": "2024",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "people.population.total"
+    },
+    {
+      "label": "Population, total, earliest",
+      "value": 435990338,
+      "date": "1960",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "people.population.total"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "econ.gdp.current_usd",
+      "title": "GDP, current US dollars",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "NY.GDP.MKTP.CD",
+      "unit": "current US$",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 37029883876.1839
+      },
+      "latest": {
+        "date": "2024",
+        "value": 3909891533858.08
+      }
+    },
+    {
+      "indicatorId": "econ.gdp.per_capita_current_usd",
+      "title": "GDP per capita, current US dollars",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "NY.GDP.PCAP.CD",
+      "unit": "current US$ per person",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 84.9328084793106
+      },
+      "latest": {
+        "date": "2024",
+        "value": 2694.73780859961
+      }
+    },
+    {
+      "indicatorId": "people.population.total",
+      "title": "Population, total",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SP.POP.TOTL",
+      "unit": "people",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 435990338
+      },
+      "latest": {
+        "date": "2024",
+        "value": 1450935791
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

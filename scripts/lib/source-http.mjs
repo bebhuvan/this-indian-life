@@ -26,21 +26,54 @@ export function redactUrl(url) {
   return copy.toString();
 }
 
-export async function fetchJson(url, options = {}) {
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      accept: "application/json",
-      "user-agent": "Indica/0.1 data ingest",
-      ...options.headers
-    }
-  });
+export function timeoutSignal(timeoutMs = Number(process.env.INDICA_FETCH_TIMEOUT_MS || 30000)) {
+  if (!timeoutMs) return undefined;
+  if (typeof globalThis.AbortSignal?.timeout === "function") return globalThis.AbortSignal.timeout(timeoutMs);
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), timeoutMs);
+  return controller.signal;
+}
 
-  if (!response.ok) {
-    throw new Error(`Fetch failed ${response.status} ${response.statusText}: ${redactUrl(url)}`);
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export async function fetchJson(url, options = {}) {
+  const {
+    timeoutMs,
+    retries = 2,
+    retryDelayMs = 1200,
+    headers,
+    ...fetchOptions
+  } = options;
+
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        ...fetchOptions,
+        signal: fetchOptions.signal || timeoutSignal(timeoutMs),
+        headers: {
+          accept: "application/json",
+          "user-agent": "Indica/0.1 data ingest",
+          ...headers
+        }
+      });
+
+      if (response.ok) return response.json();
+      if (![429, 500, 502, 503, 504].includes(response.status)) {
+        throw new Error(`Fetch failed ${response.status} ${response.statusText}: ${redactUrl(url)}`);
+      }
+      if (attempt === retries) {
+        throw new Error(`Fetch failed ${response.status} ${response.statusText}: ${redactUrl(url)}`);
+      }
+    } catch (error) {
+      if (attempt === retries || error.name === "AbortError" || error.message.startsWith("Fetch failed 4")) throw error;
+    }
+
+    await wait(retryDelayMs * (attempt + 1));
   }
 
-  return response.json();
+  throw new Error(`Fetch failed after retries: ${redactUrl(url)}`);
 }
 
 export async function writeJsonSnapshot(sourceId, name, payload) {

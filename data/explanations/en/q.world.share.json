@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.world.share",
+  "status": "needs_data",
+  "short": {
+    "headline": "India's share of the world cannot be determined from available data",
+    "dek": "India's absolute numbers for population, GDP, and CO2 are available, but world totals are not provided.",
+    "body": "The question asks for India's share of the world in terms of population, economy, and emissions. The evidence packet contains India's total population (1.45 billion in 2024), GDP ($3.91 trillion in 2024), and CO2 emissions (latest year not given in lockedNumbers but source summary exists). However, to calculate shares, we need corresponding world totals, which are not included. Without world totals, it is impossible to compute India's share. The data gap means the question cannot be answered with the provided evidence."
+  },
+  "article": {
+    "title": "India's Share of the World: Data Limitations",
+    "standfirst": "The evidence contains India's absolute population, GDP, and CO2 emissions, but lacks the world totals needed to compute shares. This article explains the gap.",
+    "bodyMarkdown": "The question \"What share of the world is India?\" typically seeks India's percentage of global population, economic output, or carbon emissions. To compute these shares, one needs both India's figure and the corresponding global total. The provided evidence packet supplies India's absolute numbers for three key indicators:\n\n- **Population**: 1,450,935,791 as of 2024 (World Bank).\n- **GDP (current US$)**: $3,909,891,533,858.08 as of 2024 (World Bank).\n- **CO2 emissions** (kt): The source summary lists CO2 emissions as an available indicator but does not include a specific latest value in the locked numbers; however, the source summary for CO2 exists.\n\nCritically, **no world totals** are provided for any of these indicators. Without global figures, we cannot calculate India's share of world population, world GDP, or world CO2 emissions. For example, India's population share would require the world population in 2024, which is absent. Similarly, global GDP and global CO2 emissions are missing.\n\nThe evidence packet also includes historical data (earliest from 1960), but again only for India. While we could describe India's growth over time (population grew from 435,990,338 in 1960 to 1.45 billion in 2024; GDP grew from $37 billion to $3.91 trillion), these trends do not answer the question of share.\n\nTo answer the question, the evidence needs to include world totals for the same years and indicators. This is a straightforward data gap: the denominators are missing. Once world figures are supplied, shares can be computed directly.\n\nGiven this limitation, the status is set to \"needs_data\"."
+  },
+  "sourceNotes": [
+    "World Bank for India's population, GDP, and CO2 emissions"
+  ],
+  "caveats": [
+    "World totals are not provided in the evidence packet. Shares cannot be calculated.",
+    "CO2 emissions latest value is not explicitly given in lockedNumbers, but source summary indicates availability."
+  ],
+  "lockedNumbersUsed": [
+    "GDP, current US dollars, latest",
+    "Population, total, latest"
+  ],
+  "qualityFlags": [
+    "Missing world totals for all indicators"
+  ],
+  "generatedAt": "2026-06-01T04:40:28.672Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.world.share",
+    "question": "What share of the world is India?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "people.population.total",
+      "econ.gdp.current_usd",
+      "climate.co2.total"
+    ],
+    "availableIndicatorIds": [
+      "climate.co2.total",
+      "econ.gdp.current_usd",
+      "people.population.total"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "GDP, current US dollars, latest",
+        "value": 3909891533858.08,
+        "date": "2024",
+        "unit": "current US$",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.current_usd"
+      },
+      {
+        "label": "GDP, current US dollars, earliest",
+        "value": 37029883876.1839,
+        "date": "1960",
+        "unit": "current US$",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.current_usd"
+      },
+      {
+        "label": "Population, total, latest",
+        "value": 1450935791,
+        "date": "2024",
+        "unit": "people",
+        "sourceId": "worldbank",
+        "indicatorId": "people.population.total"
+      },
+      {
+        "label": "Population, total, earliest",
+        "value": 435990338,
+        "date": "1960",
+        "unit": "people",
+        "sourceId": "worldbank",
+        "indicatorId": "people.population.total"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "climate.co2.total",
+        "title": "CO2 emissions",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "EN.ATM.CO2E.KT",
+        "unit": "kt",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 0
+      },
+      {
+        "indicatorId": "econ.gdp.current_usd",
+        "title": "GDP, current US dollars",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.MKTP.CD",
+        "unit": "current US$",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1960",
+          "value": 37029883876.1839
+        },
+        "latest": {
+          "date": "2024",
+          "value": 3909891533858.08
+        }
+      },
+      {
+        "indicatorId": "people.population.total",
+        "title": "Population, total",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "SP.POP.TOTL",
+        "unit": "people",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1960",
+          "value": 435990338
+        },
+        "latest": {
+          "date": "2024",
+          "value": 1450935791
+        }
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

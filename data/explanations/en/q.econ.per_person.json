@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.per_person",
+  "status": "needs_data",
+  "short": {
+    "headline": "India's GDP per capita has grown from $85 to $2,695 since 1960",
+    "dek": "The average Indian's income, measured by GDP per capita, has increased significantly but remains modest.",
+    "body": "The most widely used measure of average income is GDP per capita. India's GDP per capita in current US dollars has risen from $85 in 1960 to $2,695 in 2024, according to World Bank data. This represents a 31-fold increase over 64 years. However, this figure is an average and does not reflect income inequality. Moreover, GDP per capita in current dollars is affected by exchange rates and inflation. Additional data—such as purchasing-power-parity (PPP) adjusted values or household consumption measures—would provide a more complete picture of the average Indian's economic well-being. Without such data, the answer to 'How rich is the average Indian?' is limited to this single, partial measure."
+  },
+  "article": {
+    "title": "How Rich Is the Average Indian?",
+    "standfirst": "Only one indicator—GDP per capita in current US dollars—is available for this question, providing a limited but important snapshot of a trend spanning six decades.",
+    "bodyMarkdown": "The question 'How rich is the average Indian?' is a deceptively simple one. In economics, the standard answer begins with GDP per capita—the total value of goods and services produced in a country divided by its population. For India, the World Bank provides annual GDP per capita figures in current US dollars from 1960 to 2024, a total of 66 observations.\n\n**The Numbers**\n\nThe earliest figure, from 1960, is $84.93 per person. The latest, from 2024, is $2,694.74 per person. That is an increase of roughly 32 times over 64 years, or an average annual growth rate of about 5.6% (though not calculated here as we do not have year-on-year numbers).\n\n**What This Tells Us**\n\nThis trajectory confirms that India has experienced substantial economic growth over the long run. The average Indian in 2024 can consume far more goods and services than her counterpart in 1960. However, 'average' masks enormous disparities: GDP per capita says nothing about how income is distributed among the population. A handful of very high earners can pull the average up while most people earn far less.\n\n**What This Does Not Tell Us**\n\nGDP per capita in current US dollars also has limitations. It is affected by exchange rate fluctuations—a strong dollar artificially lowers India's figure when converted. It does not account for differences in purchasing power: the same dollar buys more in India than in the United States. Alternative measures such as GDP per capita in purchasing-power-parity (PPP) terms would adjust for this, but such data are not included in the available evidence.\n\nFurthermore, GDP per capita is a production-side measure. It does not directly capture household savings, consumption, or subjective well-being. To fully answer 'How rich is the average Indian?', one would need data on household income, consumption expenditure, wealth distribution, and perhaps even indices of health and education.\n\n**Why This Gap Matters**\n\nThe limited evidence prevents a nuanced answer. A policymaker wondering about the typical Indian's living standards cannot rely solely on GDP per capita. The available data only show a top-line trend, not the lived reality of a population of 1.4 billion. Until more comprehensive indicators are provided—preferably covering consumption, inequality, and purchasing power—any answer remains incomplete.\n\n**Methodological Notes**\n\nThe source is the World Bank's World Development Indicators (indicator NY.GDP.PCAP.CD). The unit is current US dollars per person. The series is published annually.\n\nIn summary, the evidence packet confirms that India's average income has grown dramatically since 1960, but it stops short of offering a complete picture of how rich the average Indian truly is."
+  },
+  "sourceNotes": [
+    "World Bank, World Development Indicators: GDP per capita (current US$) for India (NY.GDP.PCAP.CD), 1960–2024."
+  ],
+  "caveats": [
+    "Only one indicator (GDP per capita, current US$) is available; no PPP-adjusted or household-level measures are included.",
+    "GDP per capita is an average and does not reflect income inequality.",
+    "Current dollar figures are affected by exchange rates and inflation."
+  ],
+  "lockedNumbersUsed": [
+    "GDP per capita, current US dollars, latest",
+    "GDP per capita, current US dollars, earliest"
+  ],
+  "qualityFlags": [
+    "Single-indicator limitation",
+    "No distributional or PPP data available"
+  ],
+  "generatedAt": "2026-06-01T04:34:56.181Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.econ.per_person",
+    "question": "How rich is the average Indian?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "econ.gdp.per_capita_current_usd"
+    ],
+    "availableIndicatorIds": [
+      "econ.gdp.per_capita_current_usd"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "GDP per capita, current US dollars, latest",
+        "value": 2694.73780859961,
+        "date": "2024",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.per_capita_current_usd"
+      },
+      {
+        "label": "GDP per capita, current US dollars, earliest",
+        "value": 84.9328084793106,
+        "date": "1960",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.per_capita_current_usd"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "econ.gdp.per_capita_current_usd",
+        "title": "GDP per capita, current US dollars",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.PCAP.CD",
+        "unit": "current US$ per person",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1960",
+          "value": 84.9328084793106
+        },
+        "latest": {
+          "date": "2024",
+          "value": 2694.73780859961
+        }
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

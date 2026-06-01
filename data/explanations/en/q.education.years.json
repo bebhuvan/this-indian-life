@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.education.years",
+  "status": "ready",
+  "short": {
+    "headline": "Indians get about 11.5 years of schooling on average",
+    "dek": "From under 6 years in 1971 to over 11 years in 2019, school life expectancy has nearly doubled. Secondary enrollment also rose from 24% to 80%.",
+    "body": "School life expectancy (SLE) measures the total number of years a child can expect to spend in education, from primary to tertiary. In India, SLE has risen from 5.8 years in 1971 to 11.5 years in 2019, reflecting major expansions in school access. Meanwhile, the secondary gross enrollment ratio increased from 24% in 1971 to 80% in 2025. These figures show significant progress, but they do not account for quality of education or dropout rates. SLE is a theoretical measure assuming current enrollment patterns continue."
+  },
+  "article": {
+    "title": "How many years of schooling do Indians get?",
+    "standfirst": "School life expectancy in India has increased from 5.8 years in 1971 to 11.5 years in 2019, reflecting major improvements in access to education. Yet secondary enrollment remains below universal levels.",
+    "bodyMarkdown": "## What is school life expectancy?\n\nSchool life expectancy (SLE) is a measure that estimates the total number of years a child of school-entering age can expect to spend in formal education, from primary through tertiary. It is a theoretical construct that sums age-specific enrollment rates across all levels of education. It does not represent the actual number of years completed by an individual, but rather an indicator of the overall educational coverage in a country.\n\n## The trend in India\n\nAccording to World Bank data, India's school life expectancy has nearly doubled over the past five decades. In 1971, SLE stood at just 5.8 years — meaning a child starting school could expect to spend fewer than six years in education. By 2019, that figure had risen to 11.5 years. This increase reflects a steady expansion of educational infrastructure, policy efforts like the Right to Education Act, and rising demand for schooling.\n\n## Secondary enrollment\n\nA complementary indicator is the secondary gross enrollment ratio, which measures total enrollment in secondary education as a percentage of the official school-age population. Here too, India has seen dramatic growth. From a low of 24% in 1971, the ratio climbed to 79.6% by 2025. While this is a notable achievement, it also means that about one in five children of secondary school age are not enrolled.\n\n## What the numbers do and do not tell us\n\nThese figures signal clear progress in expanding access to education. However, they have important limitations:\n\n- **SLE is theoretical**: It assumes that current enrollment rates for each age will apply to a child throughout their school career. If enrollment rates change, actual years completed may differ.\n- **Gross enrollment can exceed 100%**: Because it includes over-age and under-age students, a gross rate above 100% is possible. India's secondary enrollment is still below that threshold, indicating room for improvement.\n- **No measure of quality**: Neither SLE nor enrollment ratios capture learning outcomes, school infrastructure, teacher quality, or completion rates. Students may be enrolled but not acquiring basic skills.\n- **Inequality is hidden**: National averages mask wide disparities by gender, wealth, and geography. The evidence does not provide state-level or district-level breakdowns.\n\n## Why it matters\n\nThe number of years of schooling a population receives is closely linked to human capital development, economic productivity, and social outcomes. For India, the increase from under 6 years to over 11 years represents a substantial investment in its young people. Yet the fact that secondary enrollment is not yet universal suggests that further gains are possible. Policies aimed at reducing dropout rates and improving the quality of secondary education could help India approach the SLE levels of higher-income countries.\n\n## Conclusion\n\nIndia's school life expectancy has risen from 5.8 years (1971) to 11.5 years (2019), and secondary enrollment has grown from 24% to 79.6%. These are meaningful improvements, but they are not the full story. Without data on learning outcomes and completion, we cannot say how many years of effective schooling Indians actually receive. Continued monitoring of both access and quality is essential."
+  },
+  "sourceNotes": [
+    "World Bank: School life expectancy (primary to tertiary) for India (1971-2019).",
+    "World Bank: Secondary gross enrollment ratio for India (1971-2025).",
+    "All figures are from the World Bank's World Development Indicators database."
+  ],
+  "caveats": [
+    "School life expectancy is a theoretical measure based on current enrollment rates; actual completed years may differ.",
+    "Secondary enrollment gross ratio can exceed 100% due to over-age and under-age students.",
+    "Data only available up to 2019 for SLE; secondary enrollment figure for 2025 may be a projection.",
+    "No state-level or subnational breakdowns are provided in the evidence."
+  ],
+  "lockedNumbersUsed": [
+    "School life expectancy, latest",
+    "School life expectancy, earliest",
+    "School enrollment, secondary, latest",
+    "School enrollment, secondary, earliest"
+  ],
+  "qualityFlags": [
+    "Secondary enrollment figure for 2025 is labeled as 2025 in source data; may be a projection or estimate.",
+    "SLE data ends in 2019; more recent data could show further changes."
+  ],
+  "generatedAt": "2026-06-01T04:37:10.519Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.education.years",
+    "question": "How many years of schooling do Indians get?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "education.school_life_expectancy",
+      "education.school_enrollment_secondary"
+    ],
+    "availableIndicatorIds": [
+      "education.school_life_expectancy",
+      "education.school_enrollment_secondary"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "School life expectancy, latest",
+        "value": 11.46347,
+        "date": "2019",
+        "unit": "years",
+        "sourceId": "worldbank",
+        "indicatorId": "education.school_life_expectancy"
+      },
+      {
+        "label": "School life expectancy, earliest",
+        "value": 5.83956,
+        "date": "1971",
+        "unit": "years",
+        "sourceId": "worldbank",
+        "indicatorId": "education.school_life_expectancy"
+      },
+      {
+        "label": "School enrollment, secondary, latest",
+        "value": 79.594985086469,
+        "date": "2025",
+        "unit": "% gross",
+        "sourceId": "worldbank",
+        "indicatorId": "education.school_enrollment_secondary"
+      },
+      {
+        "label": "School enrollment, secondary, earliest",
+        "value": 23.9795207977295,
+        "date": "1971",
+        "unit": "% gross",
+        "sourceId": "worldbank",
+        "indicatorId": "education.school_enrollment_secondary"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "education.school_life_expectancy",
+        "title": "School life expectancy",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "SE.SCH.LIFE",
+        "unit": "years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 101,
+        "earliest": {
+          "date": "1971",
+          "value": 5.83956
+        },
+        "latest": {
+          "date": "2019",
+          "value": 11.46347
+        }
+      },
+      {
+        "indicatorId": "education.school_enrollment_secondary",
+        "title": "School enrollment, secondary",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "SE.SEC.ENRR",
+        "unit": "% gross",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1971",
+          "value": 23.9795207977295
+        },
+        "latest": {
+          "date": "2025",
+          "value": 79.594985086469
+        }
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

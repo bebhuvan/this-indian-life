@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.climate.co2",
+  "question": "How much CO2 does India emit?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "climate.co2.total",
+    "owid.co2_total"
+  ],
+  "availableIndicatorIds": [
+    "owid.co2_total",
+    "climate.co2.total"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 3193478100,
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_total"
+    },
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 394481,
+      "date": "1858",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_total"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "owid.co2_total",
+      "title": "Annual CO2 emissions",
+      "sourceId": "owid",
+      "sourceIndicatorId": "annual-co2-emissions-per-country",
+      "unit": "tonnes",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 156,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Annual CO₂ emissions"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Annual CO₂ emissions": "3193478100"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Annual CO₂ emissions": "3062756400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Annual CO₂ emissions": "2831131600"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Annual CO₂ emissions": "2675778000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Annual CO₂ emissions": "2422732000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Annual CO₂ emissions": "2611174700"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Annual CO₂ emissions": "2595227100"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Annual CO₂ emissions": "2425721900"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Annual CO₂ emissions": "2352540200"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Annual CO₂ emissions": "2231817500"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.co2.total",
+      "title": "CO2 emissions",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "EN.ATM.CO2E.KT",
+      "unit": "kt",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 0
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

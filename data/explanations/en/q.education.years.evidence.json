@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.education.years",
+  "question": "How many years of schooling do Indians get?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "education.school_life_expectancy",
+    "education.school_enrollment_secondary"
+  ],
+  "availableIndicatorIds": [
+    "education.school_life_expectancy",
+    "education.school_enrollment_secondary"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "School life expectancy, latest",
+      "value": 11.46347,
+      "date": "2019",
+      "unit": "years",
+      "sourceId": "worldbank",
+      "indicatorId": "education.school_life_expectancy"
+    },
+    {
+      "label": "School life expectancy, earliest",
+      "value": 5.83956,
+      "date": "1971",
+      "unit": "years",
+      "sourceId": "worldbank",
+      "indicatorId": "education.school_life_expectancy"
+    },
+    {
+      "label": "School enrollment, secondary, latest",
+      "value": 79.594985086469,
+      "date": "2025",
+      "unit": "% gross",
+      "sourceId": "worldbank",
+      "indicatorId": "education.school_enrollment_secondary"
+    },
+    {
+      "label": "School enrollment, secondary, earliest",
+      "value": 23.9795207977295,
+      "date": "1971",
+      "unit": "% gross",
+      "sourceId": "worldbank",
+      "indicatorId": "education.school_enrollment_secondary"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "education.school_life_expectancy",
+      "title": "School life expectancy",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SE.SCH.LIFE",
+      "unit": "years",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 101,
+      "earliest": {
+        "date": "1971",
+        "value": 5.83956
+      },
+      "latest": {
+        "date": "2019",
+        "value": 11.46347
+      }
+    },
+    {
+      "indicatorId": "education.school_enrollment_secondary",
+      "title": "School enrollment, secondary",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SE.SEC.ENRR",
+      "unit": "% gross",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1971",
+        "value": 23.9795207977295
+      },
+      "latest": {
+        "date": "2025",
+        "value": 79.594985086469
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

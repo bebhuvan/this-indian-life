@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.work.women",
+  "question": "Why is women's work participation so low?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "work.labor_force_participation_female"
+  ],
+  "availableIndicatorIds": [
+    "work.labor_force_participation_female"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Labor force participation rate, female, latest",
+      "value": 32.425,
+      "date": "2025",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "work.labor_force_participation_female"
+    },
+    {
+      "label": "Labor force participation rate, female, earliest",
+      "value": 30.257,
+      "date": "1990",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "work.labor_force_participation_female"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "work.labor_force_participation_female",
+      "title": "Labor force participation rate, female",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% ages 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1990",
+        "value": 30.257
+      },
+      "latest": {
+        "date": "2025",
+        "value": 32.425
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

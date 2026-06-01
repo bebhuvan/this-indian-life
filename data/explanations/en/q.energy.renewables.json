@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.energy.renewables",
+  "status": "needs_data",
+  "short": {
+    "headline": "Renewables growth cannot be determined from available data",
+    "dek": "Only bioenergy data from 2000 to 2025 shows growth, but total renewables trend is missing.",
+    "body": "The evidence provides electricity generation figures for India in 2025: clean sources (including nuclear) at 554.81 TWh (26.65%), and fossil fuels at 73.35%. However, to measure growth rate, we need historical data. Only bioenergy has a 2000-2025 comparison, growing from 1.69 TWh to 23.04 TWh. Without historical data for solar, wind, hydro, or total renewables, the overall growth rate cannot be quantified from this evidence."
+  },
+  "article": {
+    "title": "Assessing Renewable Energy Growth in India: Data Gaps",
+    "standfirst": "The available data shows only a single year snapshot and limited historical data, making it impossible to calculate the growth rate of renewables overall.",
+    "bodyMarkdown": "The question of how fast renewables are growing in India cannot be answered with the evidence currently available. The dataset from Ember provides electricity generation figures for 2025, broken down by source. In 2025, clean electricity—which includes nuclear and all renewables—amounted to 554.81 terawatt-hours (TWh), or 26.65% of total generation. Fossil fuels produced 1,526.79 TWh (73.35%), and coal alone accounted for 1,474.15 TWh (70.82%). However, these are single-year figures; they show the current share but not the rate of change.\n\nTo measure growth, we need data from multiple years. The only renewable source with a historical comparison in the evidence is bioenergy. Bioenergy generation rose from 1.69 TWh in 2000 to 23.04 TWh in 2025, an increase of 21.35 TWh over 25 years. But this is a narrow slice. The broader category “Hydro, bioenergy and other renewables” stood at 201.01 TWh in 2025, yet we have no earlier figure to compare it against. Similarly, there is no historical data for solar, wind, or the aggregate “Clean” category.\n\nWithout a time series, we cannot compute a compound annual growth rate or even a simple percentage increase for total renewables. The evidence packet includes only one year of data for most renewable sources. This data gap means any claim about the speed of renewable growth would be speculative.\n\nIn summary, while the 2025 snapshot shows that clean sources supply over a quarter of India’s electricity, and bioenergy has grown markedly since 2000, the overall growth trajectory for renewables remains undocumented in the provided evidence. More historical data is needed to answer the question rigorously."
+  },
+  "sourceNotes": [
+    "Ember electricity generation data for India, 2025 and 2000 (bioenergy)"
+  ],
+  "caveats": [
+    "Only one historical data point (bioenergy) available; no data for solar, wind, hydro over time."
+  ],
+  "lockedNumbersUsed": [
+    "Electricity generation by source (Bioenergy): generation_twh (2025)",
+    "Electricity generation by source (Bioenergy): generation_twh (2000)",
+    "Electricity generation by source (Clean): generation_twh (2025)",
+    "Electricity generation by source (Fossil): generation_twh (2025)"
+  ],
+  "qualityFlags": [
+    "Insufficient historical data to compute growth rate",
+    "Only 2025 snapshot for most renewable sources"
+  ],
+  "generatedAt": "2026-06-01T04:38:32.048Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.energy.renewables",
+    "question": "How fast are renewables growing?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "energy.ember.generation"
+    ],
+    "availableIndicatorIds": [
+      "energy.ember.generation"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "Electricity generation by source (Bioenergy): generation_twh",
+        "value": 23.04,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+        "value": 1.11,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Clean): generation_twh",
+        "value": 554.81,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Clean): share_of_generation_pct",
+        "value": 26.65,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Coal): generation_twh",
+        "value": 1474.15,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Coal): share_of_generation_pct",
+        "value": 70.82,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Demand): generation_twh",
+        "value": 2082.82,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Demand): share_of_generation_pct",
+        "value": 100.06,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Fossil): generation_twh",
+        "value": 1526.79,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Fossil): share_of_generation_pct",
+        "value": 73.35,
+        "date": "2025",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Bioenergy): generation_twh",
+        "value": 1.69,
+        "date": "2000",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      },
+      {
+        "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+        "value": 0.3,
+        "date": "2000",
+        "unit": "TWh",
+        "sourceId": "ember",
+        "indicatorId": "energy.ember.generation"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "energy.ember.generation",
+        "title": "Electricity generation by source",
+        "sourceId": "ember",
+        "sourceIndicatorId": "electricity-generation/yearly",
+        "unit": "TWh",
+        "geography": {
+          "type": "country",
+          "id": "IND",
+          "name": "India"
+        },
+        "rows": 416,
+        "dimensions": [
+          "entity",
+          "entity_code",
+          "is_aggregate_entity",
+          "date",
+          "series",
+          "is_aggregate_series",
+          "generation_twh",
+          "share_of_generation_pct"
+        ],
+        "latestRows": [
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Bioenergy",
+            "is_aggregate_series": false,
+            "generation_twh": 23.04,
+            "share_of_generation_pct": 1.11
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Clean",
+            "is_aggregate_series": true,
+            "generation_twh": 554.81,
+            "share_of_generation_pct": 26.65
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Coal",
+            "is_aggregate_series": false,
+            "generation_twh": 1474.15,
+            "share_of_generation_pct": 70.82
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Demand",
+            "is_aggregate_series": true,
+            "generation_twh": 2082.82,
+            "share_of_generation_pct": 100.06
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Fossil",
+            "is_aggregate_series": true,
+            "generation_twh": 1526.79,
+            "share_of_generation_pct": 73.35
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Gas",
+            "is_aggregate_series": false,
+            "generation_twh": 48.54,
+            "share_of_generation_pct": 2.33
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Hydro",
+            "is_aggregate_series": false,
+            "generation_twh": 177.97,
+            "share_of_generation_pct": 8.55
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Hydro, bioenergy and other renewables",
+            "is_aggregate_series": true,
+            "generation_twh": 201.01,
+            "share_of_generation_pct": 9.66
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Net imports",
+            "is_aggregate_series": false,
+            "generation_twh": 1.22,
+            "share_of_generation_pct": 0.06
+          },
+          {
+            "entity": "India",
+            "entity_code": "IND",
+            "is_aggregate_entity": false,
+            "date": "2025",
+            "series": "Nuclear",
+            "is_aggregate_series": false,
+            "generation_twh": 53.83,
+            "share_of_generation_pct": 2.59
+          }
+        ]
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.education.literacy",
+  "question": "How literate is India?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "education.literacy_adult"
+  ],
+  "availableIndicatorIds": [
+    "education.literacy_adult"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Adult literacy rate, latest",
+      "value": 78.1625330351403,
+      "date": "2024",
+      "unit": "% ages 15 and above",
+      "sourceId": "worldbank",
+      "indicatorId": "education.literacy_adult"
+    },
+    {
+      "label": "Adult literacy rate, earliest",
+      "value": 40.7599983215332,
+      "date": "1981",
+      "unit": "% ages 15 and above",
+      "sourceId": "worldbank",
+      "indicatorId": "education.literacy_adult"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "education.literacy_adult",
+      "title": "Adult literacy rate",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SE.ADT.LITR.ZS",
+      "unit": "% ages 15 and above",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1981",
+        "value": 40.7599983215332
+      },
+      "latest": {
+        "date": "2024",
+        "value": 78.1625330351403
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

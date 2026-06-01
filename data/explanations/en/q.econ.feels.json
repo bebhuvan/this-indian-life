@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.feels",
+  "status": "needs_data",
+  "short": {
+    "headline": "Why GDP growth doesn’t feel like salary growth",
+    "dek": "India’s GDP grows, but high inflation and low per capita income explain the disconnect.",
+    "body": "India’s GDP growth of 6.5% in 2024 suggests a booming economy, but this rarely reflects in salaries. Inflation averaged 4.95%, eating into real wages. GDP per capita is just $2,695, indicating modest average income. Additionally, growth in GDP often comes from sectors that do not directly benefit workers, such as capital-intensive industries. Without data on wage growth, it is difficult to compare directly, but the gap between headline GDP and personal income is clear."
+  },
+  "article": {
+    "title": "Why India's GDP Growth Does Not Feel Like Salary Growth",
+    "standfirst": "Despite robust GDP growth, high inflation and low per capita income mean most Indians do not see their salaries keep pace.",
+    "bodyMarkdown": "India's economy has been growing steadily, with GDP growth at 6.49% in 2024. Yet many Indians feel that their salaries are not rising correspondingly. This disconnect can be explained by two key factors: inflation and low per capita income.\n\nInflation, measured by the consumer price index, stood at 4.95% in 2024. This means that while nominal GDP grows, the purchasing power of income increases only by the difference between growth and inflation. In 2024, the real GDP growth minus inflation is just 1.54%, a modest increase in living standards.\n\nMoreover, GDP per capita is only $2,694.74 in 2024. Even though this has risen from $84.93 in 1960, the absolute level remains low. A large portion of the population may still be near subsistence level, where any increase in income is offset by rising prices.\n\nAnother reason is that GDP growth is an aggregate measure. It includes profits and income from capital, which may not translate into higher wages. Without data on wage growth, we cannot directly compare salary trends to GDP. However, the available evidence suggests that high inflation and low per capita income are key reasons why GDP growth does not feel like salary growth.\n\nIn summary, while India's economy is expanding, the benefits are not uniformly felt. Inflation erodes real gains, and per capita income remains modest. Without more granular data on wages, the perceived gap between GDP and salary growth persists."
+  },
+  "sourceNotes": [
+    "World Bank: Inflation, consumer prices (annual %) for India, 2024.",
+    "World Bank: GDP growth (annual %) for India, 2024.",
+    "World Bank: GDP per capita (current US$) for India, 2024."
+  ],
+  "caveats": [
+    "No direct salary or wage data is available; analysis relies on aggregate GDP and inflation figures.",
+    "GDP per capita is an average and does not reflect distribution of income.",
+    "Comparison between GDP growth and salary growth is inferred, not directly measured."
+  ],
+  "lockedNumbersUsed": [
+    "Inflation, consumer prices, latest",
+    "GDP growth, annual percent, latest",
+    "GDP per capita, current US dollars, latest"
+  ],
+  "qualityFlags": [
+    "Limited data: only GDP growth, inflation, and GDP per capita available; no salary or wage data."
+  ],
+  "generatedAt": "2026-06-01T04:35:08.058Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.econ.feels",
+    "question": "Why does GDP growth not feel like salary growth?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "econ.gdp.growth_real",
+      "econ.gdp.per_capita_current_usd",
+      "econ.inflation_cpi"
+    ],
+    "availableIndicatorIds": [
+      "econ.inflation_cpi",
+      "econ.gdp.growth_real",
+      "econ.gdp.per_capita_current_usd"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "Inflation, consumer prices, latest",
+        "value": 4.95303550973656,
+        "date": "2024",
+        "unit": "annual %",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.inflation_cpi"
+      },
+      {
+        "label": "Inflation, consumer prices, earliest",
+        "value": 1.77987784677382,
+        "date": "1960",
+        "unit": "annual %",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.inflation_cpi"
+      },
+      {
+        "label": "GDP growth, annual percent, latest",
+        "value": 6.49476552383821,
+        "date": "2024",
+        "unit": "annual %",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.growth_real"
+      },
+      {
+        "label": "GDP growth, annual percent, earliest",
+        "value": 3.72274253311053,
+        "date": "1961",
+        "unit": "annual %",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.growth_real"
+      },
+      {
+        "label": "GDP per capita, current US dollars, latest",
+        "value": 2694.73780859961,
+        "date": "2024",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.per_capita_current_usd"
+      },
+      {
+        "label": "GDP per capita, current US dollars, earliest",
+        "value": 84.9328084793106,
+        "date": "1960",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.per_capita_current_usd"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "econ.inflation_cpi",
+        "title": "Inflation, consumer prices",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "FP.CPI.TOTL.ZG",
+        "unit": "annual %",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1960",
+          "value": 1.77987784677382
+        },
+        "latest": {
+          "date": "2024",
+          "value": 4.95303550973656
+        }
+      },
+      {
+        "indicatorId": "econ.gdp.growth_real",
+        "title": "GDP growth, annual percent",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.MKTP.KD.ZG",
+        "unit": "annual %",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1961",
+          "value": 3.72274253311053
+        },
+        "latest": {
+          "date": "2024",
+          "value": 6.49476552383821
+        }
+      },
+      {
+        "indicatorId": "econ.gdp.per_capita_current_usd",
+        "title": "GDP per capita, current US dollars",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.PCAP.CD",
+        "unit": "current US$ per person",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1960",
+          "value": 84.9328084793106
+        },
+        "latest": {
+          "date": "2024",
+          "value": 2694.73780859961
+        }
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

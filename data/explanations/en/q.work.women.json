@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.work.women",
+  "status": "needs_data",
+  "short": {
+    "headline": "Women's labour force participation: stuck at 32%",
+    "dek": "India's female labour force participation rate has barely moved from 30% in 1990 to 32% in 2025.",
+    "body": "India's female labour force participation rate (LFPR) for ages 15 and above stands at 32.4% as of 2025, barely changed from 30.3% in 1990. This is one of the lowest rates in the world for a large economy. However, the available data – just two national-level figures – does not explain why participation is so low. We lack breakdowns by age, education, rural/urban status, or state-level data that could point to underlying causes. To answer the 'why', we need more granular, multi-dimensional evidence."
+  },
+  "article": {
+    "title": "Why is women’s work participation so low?",
+    "standfirst": "The simple answer: we don't have enough data to say. Only a single national-level indicator is available, showing a flat trend over 35 years.",
+    "bodyMarkdown": "The question of why women’s work participation in India is so low is an important one, but the evidence that would allow us to answer it is not available here. We have only one indicator: the female labour force participation rate (LFPR) for ages 15 and above, sourced from the World Bank.\n\n**What the data shows**\nIn 1990, India’s female LFPR was 30.3%. By 2025, it had inched up to 32.4%. That is an increase of just 2.2 percentage points over 35 years. The rate remains very low compared to global averages and to other South Asian or developing economies, but the dataset does not include any comparative benchmarks.\n\n**What the data does not tell us**\nTo understand why participation is low, we would need variables such as:\n- Participation by age group (are young women dropping out after marriage?)\n- Educational attainment (does higher education correlate with higher or lower participation?)\n- Rural vs. urban location\n- Type of employment (regular, casual, self-employed)\n- Reasons for not working (domestic duties, study, discouragement)\n- State-level variation (some states may have much higher or lower rates)\n- Time-use data on unpaid care work\nNone of these are present in the source material. The single national LFPR figure cannot reveal whether low participation stems from social norms, lack of jobs, care responsibilities, measurement issues, or other factors.\n\n**Why this matters**\nWithout disaggregated data, policymakers and researchers cannot target interventions effectively. For example, if the main barrier is lack of safe transportation, the solution differs from one where the barrier is lack of childcare. The flat trend also suggests that broad economic growth alone has not pulled women into the workforce – but again, we cannot probe why.\n\n**Conclusion**\nThe evidence is insufficient to answer the question. More data, including from India’s own Periodic Labour Force Survey (PLFS) and time-use surveys, would be needed to explore causes. The small change over 35 years is striking, but its explanation lies beyond what is provided here."
+  },
+  "sourceNotes": [
+    "World Bank, Labor force participation rate, female (% of female population ages 15+) – India, 1990 and 2025.",
+    "Only this single indicator is available; no disaggregated or explanatory data is provided."
+  ],
+  "caveats": [
+    "The analysis is limited to two data points (1990 and 2025) from the same source.",
+    "No breakdown by age, education, geography, or employment type is available.",
+    "The data may not reflect recent trends from other surveys like PLFS."
+  ],
+  "lockedNumbersUsed": [
+    "Labor force participation rate, female, latest",
+    "Labor force participation rate, female, earliest"
+  ],
+  "qualityFlags": [
+    "Only one indicator available",
+    "No explanatory variables provided",
+    "No regional or demographic breakdowns"
+  ],
+  "generatedAt": "2026-06-01T04:37:30.322Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.work.women",
+    "question": "Why is women's work participation so low?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "work.labor_force_participation_female"
+    ],
+    "availableIndicatorIds": [
+      "work.labor_force_participation_female"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "Labor force participation rate, female, latest",
+        "value": 32.425,
+        "date": "2025",
+        "unit": "% ages 15+",
+        "sourceId": "worldbank",
+        "indicatorId": "work.labor_force_participation_female"
+      },
+      {
+        "label": "Labor force participation rate, female, earliest",
+        "value": 30.257,
+        "date": "1990",
+        "unit": "% ages 15+",
+        "sourceId": "worldbank",
+        "indicatorId": "work.labor_force_participation_female"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "work.labor_force_participation_female",
+        "title": "Labor force participation rate, female",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+        "unit": "% ages 15+",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1990",
+          "value": 30.257
+        },
+        "latest": {
+          "date": "2025",
+          "value": 32.425
+        }
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

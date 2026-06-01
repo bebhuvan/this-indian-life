@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.growth",
+  "status": "needs_data",
+  "short": {
+    "headline": "India's GDP growth at 6.49% in 2024",
+    "dek": "Long-term growth from 3.72% in 1961 to 6.49% in 2024, based on World Bank data.",
+    "body": "India's economy grew at an annual rate of 6.49% in 2024, according to World Bank data. This is the latest observation in a series spanning from 1961, when growth was 3.72%. The data covers 66 annual observations but only provides a single indicator—real GDP growth. Without additional measures like sectoral breakdowns or employment, the headline number offers a limited view of economic performance."
+  },
+  "article": {
+    "title": "How Fast Is India's Economy Growing?",
+    "standfirst": "India's real GDP growth stood at 6.49% in 2024, the latest figure in a six-decade-long series. But the single indicator tells only part of the story.",
+    "bodyMarkdown": "The most common measure of how fast an economy is growing is the annual percentage change in real Gross Domestic Product (GDP). For India, the latest available figure from the World Bank is 6.49% for 2024. This is the most recent data point in a time series that begins in 1961, when the economy grew by 3.72%. Over the 66-year span from 1961 to 2024, India's GDP growth has varied considerably, but only the endpoints are provided in the evidence.\n\nThe trend from the earliest to the latest observation shows an increase from 3.72% to 6.49%, suggesting that India's economy has, on average, grown faster in recent decades. However, this comparison masks the volatility: growth rates have fluctuated with booms, crises, and policy changes. Without the full series, we cannot describe intermediate periods or calculate an average.\n\nWhat this single indicator does not tell us is equally important. Real GDP growth is a macroeconomic headline, but it does not capture whether the benefits of growth are broadly shared. It says nothing about employment, income distribution, or the composition of growth—whether it comes from agriculture, industry, or services. It also does not account for inflation: real GDP is adjusted for price changes, but the method of adjustment can affect the number.\n\nWhy does this matter? The growth rate is often used as a proxy for economic health and is closely watched by policymakers, investors, and international institutions. A 6.49% growth rate places India among the fastest-growing major economies. But decisions based solely on this figure risk overlooking structural challenges. For a fuller picture, one would need data on sectors, states, employment, and external trade.\n\nThe evidence packet contains only one indicator—annual GDP growth. There are 66 observations available, but only two are locked numbers. This limits the depth of analysis. To answer 'How fast is India's economy growing?' with nuance, additional indicators are required. The single metric gives a snapshot but not a comprehensive story."
+  },
+  "sourceNotes": [
+    "World Bank, GDP growth (annual %) – NY.GDP.MKTP.KD.ZG, accessed for India, 1961-2024"
+  ],
+  "caveats": [
+    "Analysis is based solely on the annual real GDP growth rate from the World Bank. No sub-indicators (e.g., sectoral growth, employment, inflation) are available in the evidence."
+  ],
+  "lockedNumbersUsed": [
+    "GDP growth, annual percent, latest",
+    "GDP growth, annual percent, earliest"
+  ],
+  "qualityFlags": [
+    "Single indicator only; limited granularity",
+    "No recent quarterly or monthly data"
+  ],
+  "generatedAt": "2026-06-01T04:34:42.662Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.econ.growth",
+    "question": "How fast is India's economy growing?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "econ.gdp.growth_real"
+    ],
+    "availableIndicatorIds": [
+      "econ.gdp.growth_real"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "GDP growth, annual percent, latest",
+        "value": 6.49476552383821,
+        "date": "2024",
+        "unit": "annual %",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.growth_real"
+      },
+      {
+        "label": "GDP growth, annual percent, earliest",
+        "value": 3.72274253311053,
+        "date": "1961",
+        "unit": "annual %",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.gdp.growth_real"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "econ.gdp.growth_real",
+        "title": "GDP growth, annual percent",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.MKTP.KD.ZG",
+        "unit": "annual %",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1961",
+          "value": 3.72274253311053
+        },
+        "latest": {
+          "date": "2024",
+          "value": 6.49476552383821
+        }
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

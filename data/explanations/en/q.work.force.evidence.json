@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.work.force",
+  "question": "How many Indians are in the workforce?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "work.labor_force_total"
+  ],
+  "availableIndicatorIds": [
+    "work.labor_force_total"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Labor force, total, latest",
+      "value": 617625336,
+      "date": "2025",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "work.labor_force_total"
+    },
+    {
+      "label": "Labor force, total, earliest",
+      "value": 307898649,
+      "date": "1990",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "work.labor_force_total"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "work.labor_force_total",
+      "title": "Labor force, total",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.TOTL.IN",
+      "unit": "people",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1990",
+        "value": 307898649
+      },
+      "latest": {
+        "date": "2025",
+        "value": 617625336
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

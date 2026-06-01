@@ -1,5 +1,5 @@
 import { loadEnv } from "../env.mjs";
-import { buildUrl, fetchJson } from "../lib/source-http.mjs";
+import { buildUrl, fetchJson, timeoutSignal } from "../lib/source-http.mjs";
 
 loadEnv();
 
@@ -16,6 +16,7 @@ export async function fetchOwidMetadata(slug) {
 export async function fetchOwidCsv(slug, params = {}) {
   const url = owidGrapherUrl(slug, "csv", params);
   const response = await fetch(url, {
+    signal: timeoutSignal(),
     headers: {
       accept: "text/csv",
       "user-agent": "Indica/0.1 data ingest"
@@ -24,4 +25,3 @@ export async function fetchOwidCsv(slug, params = {}) {
   if (!response.ok) throw new Error(`OWID CSV failed ${response.status}: ${url}`);
   return response.text();
 }
-

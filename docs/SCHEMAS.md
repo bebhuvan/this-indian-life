@@ -64,15 +64,58 @@ type Observation = {
 ```ts
 type SeriesArtifact = {
   schemaVersion: 1;
+  artifactType: "series";
   indicatorId: string;
   title: string;
   sourceId: string;
+  sourceIndicatorId: string;
   sourceUrl: string;
   unit: string;
   frequency: "annual" | "quarterly" | "monthly" | "daily";
   geography: { type: string; id: string; name: string };
   fetchedAt: string;
   observations: Array<{ date: string; value: number | null }>;
+};
+```
+
+## Table Artifact
+
+Use this for multidimensional source data that should not be flattened too early: age-sex population tables, Ember source-level electricity rows, WHO rows with dimensions, and OWID Grapher exports.
+
+```ts
+type TableArtifact = {
+  schemaVersion: 1;
+  artifactType: "table";
+  indicatorId: string;
+  title: string;
+  sourceId: string;
+  sourceIndicatorId: string;
+  sourceUrl: string;
+  unit: string;
+  geography: { type: string; id: string; name: string };
+  fetchedAt: string;
+  dimensions: string[];
+  rows: Array<Record<string, unknown>>;
+  metadata: Record<string, unknown>;
+};
+```
+
+## Source Manifest
+
+Each ingest writes `data/catalog/<source>-manifest.json`. The manifest is the audit index for the source run.
+
+```ts
+type SourceManifestEntry = {
+  status: "ready" | "failed";
+  indicatorId: string;
+  sourceIndicatorId: string | number;
+  artifact?: string;
+  snapshot?: string;
+  rawHash?: string;
+  observations?: number;
+  rows?: number;
+  fetchedAt: string;
+  error?: string;
 };
 ```
 
@@ -113,15 +156,20 @@ type ChartRecord = {
 
 ```ts
 type EvidencePacket = {
-  chartId: string;
+  schemaVersion: 1;
+  questionId: string;
+  question: string;
+  requiredIndicatorIds: string[];
+  availableIndicatorIds: string[];
   lockedNumbers: Array<{
     label: string;
     value: number;
-    formatted: string;
     date?: string;
+    unit: string;
     sourceId: string;
+    indicatorId: string;
   }>;
-  trendFacts: string[];
+  sourceSummaries: Array<Record<string, unknown>>;
   caveats: string[];
   forbiddenClaims: string[];
 };
@@ -129,3 +177,29 @@ type EvidencePacket = {
 
 The LLM receives only the evidence packet, source notes, register instructions, and style guide. It does not receive permission to invent new figures.
 
+## Explanation Artifact
+
+```ts
+type ExplanationArtifact = {
+  schemaVersion: 1;
+  questionId: string;
+  status: "ready" | "needs_data";
+  short: {
+    headline: string;
+    dek: string;
+    body: string;
+  };
+  article: {
+    title: string;
+    standfirst: string;
+    bodyMarkdown: string;
+  };
+  sourceNotes: string[];
+  caveats: string[];
+  lockedNumbersUsed: string[];
+  qualityFlags: string[];
+  generatedAt: string;
+  model: string;
+  evidence: EvidencePacket;
+};
+```

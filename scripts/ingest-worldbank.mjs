@@ -1,61 +1,10 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { loadEnv } from "./env.mjs";
+import { fetchJson } from "./lib/source-http.mjs";
+import { createSeriesArtifact, sourceSlug, writeSeriesArtifact, writeSnapshot, writeSourceManifest } from "./core/artifacts.mjs";
+import { worldBankIndicators } from "./registry/v1-indicators.mjs";
 
 loadEnv();
 const fetchedAt = new Date().toISOString();
-
-const indicators = [
-  {
-    id: "econ.gdp.current_usd",
-    sourceIndicatorId: "NY.GDP.MKTP.CD",
-    title: "GDP, current US dollars",
-    unit: "current US$",
-    frequency: "annual"
-  },
-  {
-    id: "econ.gdp.growth_real",
-    sourceIndicatorId: "NY.GDP.MKTP.KD.ZG",
-    title: "GDP growth, annual percent",
-    unit: "annual %",
-    frequency: "annual"
-  },
-  {
-    id: "econ.gdp.per_capita_current_usd",
-    sourceIndicatorId: "NY.GDP.PCAP.CD",
-    title: "GDP per capita, current US dollars",
-    unit: "current US$ per person",
-    frequency: "annual"
-  },
-  {
-    id: "people.population.total",
-    sourceIndicatorId: "SP.POP.TOTL",
-    title: "Population, total",
-    unit: "people",
-    frequency: "annual"
-  },
-  {
-    id: "health.life_expectancy",
-    sourceIndicatorId: "SP.DYN.LE00.IN",
-    title: "Life expectancy at birth",
-    unit: "years",
-    frequency: "annual"
-  },
-  {
-    id: "energy.electricity_access",
-    sourceIndicatorId: "EG.ELC.ACCS.ZS",
-    title: "Access to electricity",
-    unit: "% of population",
-    frequency: "annual"
-  },
-  {
-    id: "society.urban_population_share",
-    sourceIndicatorId: "SP.URB.TOTL.IN.ZS",
-    title: "Urban population",
-    unit: "% of population",
-    frequency: "annual"
-  }
-];
 
 function artifactName(indicator) {
   return `worldbank.IN.${indicator.sourceIndicatorId.replaceAll(".", "_")}.json`;
@@ -63,18 +12,7 @@ function artifactName(indicator) {
 
 async function fetchIndicator(indicator) {
   const url = `https://api.worldbank.org/v2/country/IN/indicator/${indicator.sourceIndicatorId}?format=json&per_page=20000`;
-  const response = await fetch(url, {
-    headers: {
-      "accept": "application/json",
-      "user-agent": "Indica/0.1 data ingest"
-    }
-  });
-
-  if (!response.ok) {
-    throw new Error(`World Bank ${indicator.sourceIndicatorId} failed: ${response.status} ${response.statusText}`);
-  }
-
-  const raw = await response.json();
+  const raw = await fetchJson(url);
   const rows = Array.isArray(raw?.[1]) ? raw[1] : [];
   const observations = rows
     .map((row) => ({
@@ -84,13 +22,9 @@ async function fetchIndicator(indicator) {
     .filter((row) => row.date && row.date >= "1960")
     .sort((a, b) => a.date.localeCompare(b.date));
 
-  const rawHash = createHash("sha256").update(JSON.stringify(raw)).digest("hex");
-
   return {
     raw,
-    rawHash,
-    artifact: {
-      schemaVersion: 1,
+    artifact: createSeriesArtifact({
       indicatorId: indicator.id,
       title: indicator.title,
       sourceId: "worldbank",
@@ -105,32 +39,41 @@ async function fetchIndicator(indicator) {
       },
       fetchedAt,
       observations
-    }
+    })
   };
 }
 
-await mkdir("data/series", { recursive: true });
-await mkdir("data/snapshots/worldbank", { recursive: true });
-
 const manifest = [];
+const failures = [];
 
-for (const indicator of indicators) {
-  const result = await fetchIndicator(indicator);
-  const file = artifactName(indicator);
-  await writeFile(`data/series/${file}`, `${JSON.stringify(result.artifact, null, 2)}\n`);
-  await writeFile(
-    `data/snapshots/worldbank/${indicator.sourceIndicatorId}.${result.rawHash.slice(0, 12)}.json`,
-    `${JSON.stringify(result.raw, null, 2)}\n`
-  );
-  manifest.push({
-    indicatorId: indicator.id,
-    sourceIndicatorId: indicator.sourceIndicatorId,
-    artifact: `data/series/${file}`,
-    rawHash: result.rawHash,
-    fetchedAt,
-    observations: result.artifact.observations.length
-  });
+for (const indicator of worldBankIndicators) {
+  try {
+    const result = await fetchIndicator(indicator);
+    const file = artifactName(indicator);
+    const artifact = await writeSeriesArtifact({ sourceId: "worldbank", name: file.replace(/\.json$/, ""), artifact: result.artifact });
+    const snapshot = await writeSnapshot("worldbank", indicator.sourceIndicatorId, result.raw);
+    manifest.push({
+      status: "ready",
+      indicatorId: indicator.id,
+      sourceIndicatorId: indicator.sourceIndicatorId,
+      artifact,
+      snapshot: snapshot.path,
+      rawHash: snapshot.hash,
+      fetchedAt,
+      observations: result.artifact.observations.length
+    });
+    console.log(`worldbank ${sourceSlug(indicator.id)} ${result.artifact.observations.length} observations`);
+  } catch (error) {
+    failures.push({
+      status: "failed",
+      indicatorId: indicator.id,
+      sourceIndicatorId: indicator.sourceIndicatorId,
+      fetchedAt,
+      error: error.message
+    });
+    console.warn(`worldbank ${sourceSlug(indicator.id)} failed: ${error.message}`);
+  }
 }
 
-await writeFile("data/catalog/worldbank-manifest.json", `${JSON.stringify(manifest, null, 2)}\n`);
-console.log(`Wrote ${manifest.length} World Bank series artifacts.`);
+await writeSourceManifest("worldbank", [...manifest, ...failures]);
+console.log(`Wrote ${manifest.length} World Bank series artifacts; ${failures.length} failure(s).`);

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.state.tax",
+  "question": "How much tax does India collect?",
+  "priority": "core",
+  "requiredIndicatorIds": [
+    "state.tax_revenue_gdp"
+  ],
+  "availableIndicatorIds": [
+    "state.tax_revenue_gdp"
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Tax revenue, latest",
+      "value": 6.73444285965496,
+      "date": "2022",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "state.tax_revenue_gdp"
+    },
+    {
+      "label": "Tax revenue, earliest",
+      "value": 8.18112088549798,
+      "date": "1974",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "state.tax_revenue_gdp"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "state.tax_revenue_gdp",
+      "title": "Tax revenue",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "GC.TAX.TOTL.GD.ZS",
+      "unit": "% of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1974",
+        "value": 8.18112088549798
+      },
+      "latest": {
+        "date": "2022",
+        "value": 6.73444285965496
+      }
+    }
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

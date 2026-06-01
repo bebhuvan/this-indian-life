@@ -59,6 +59,7 @@ export async function fetchAllUnPopulationData({ indicators, locations, start, e
     start,
     end,
     params: {
+      pageSize: 1000,
       pageNumber: 1,
       ...params
     }
@@ -75,6 +76,7 @@ export async function fetchAllUnPopulationData({ indicators, locations, start, e
       start,
       end,
       params: {
+        pageSize: 1000,
         pageNumber,
         ...params
       }

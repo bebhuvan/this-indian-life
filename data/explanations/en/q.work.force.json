@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.work.force",
+  "status": "needs_data",
+  "short": {
+    "headline": "India's workforce: 62 crore in 2025",
+    "dek": "From 31 crore in 1990 to 62 crore in 2025 — nearly doubling in 35 years",
+    "body": "According to World Bank data, India's labour force — everyone of working age who is either employed or actively looking for work — stood at about 61.8 crore in 2025. That is roughly double the 30.8 crore recorded in 1990. The figure comes from a single source and covers the country as a whole; it does not break down by age, gender, or state. While the trend clearly shows growth, the headline number by itself does not reveal whether the share of the population in the workforce has risen or fallen."
+  },
+  "article": {
+    "title": "How many Indians are in the workforce?",
+    "standfirst": "India's labour force has nearly doubled over 35 years, reaching 61.8 crore in 2025. But the headline figure raises as many questions as it answers.",
+    "bodyMarkdown": "The simplest answer to 'How many Indians are in the workforce?' comes from the World Bank's estimate of the total labour force. As of 2025, that number is 617,625,336 — roughly 61.8 crore people. Thirty-five years earlier, in 1990, the number was 307,898,649, or about 30.8 crore.\n\n**What the measure means**\nThe labour force includes all people of working age who are either employed or actively seeking work. It does not include students, retirees, or people who are not looking for a job. The World Bank compiles this data from national sources using a standard definition, which makes the numbers comparable over time.\n\n**What the trend says**\nOver 35 years, India's labour force grew by about 30.9 crore — an increase of roughly 100%. That is a substantial absolute rise. However, because India's total population also grew over this period, the headline number does not tell us whether the share of working-age people in the workforce (the labour force participation rate) increased or decreased.\n\n**What the data does not say**\nThe single total figure masks important details. There is no breakdown by gender, age group, or geography. We cannot tell from this number how many women are in the workforce, how many youth are unemployed, or how the workforce is distributed across states. The data also does not indicate the quality of employment — whether jobs are formal or informal, full-time or part-time.\n\n**Why this matters**\nKnowing the size of the labour force is essential for economic planning. A growing labour force can power economic growth — but only if enough jobs are created. The sheer scale — 62 crore people — means that even small changes in unemployment rates affect millions of households. Without more granular data, policymakers and researchers cannot assess whether the workforce is ageing, becoming more educated, or shifting between sectors.\n\n**Caveats**\n- The data comes from a single source (World Bank) and may differ from national estimates.\n- The figure is an annual estimate; seasonal or monthly variations are not captured.\n- India's labour force statistics have known measurement challenges, particularly in capturing women's work in the informal sector.\n\nIn summary, the available evidence tells us the total size of India's labour force at two points in time, but it is not enough to answer deeper questions about who is working, where, and under what conditions. More detailed data is needed."
+  },
+  "sourceNotes": [
+    "World Bank, 'Labor force, total' (SL.TLF.TOTL.IN), India, 1990 and 2025."
+  ],
+  "caveats": [
+    "Only the total labour force number is available; no breakdown by age, gender, or state.",
+    "Data is from a single source and may differ from other estimates.",
+    "The labour force definition may exclude certain informal or unpaid workers, especially women."
+  ],
+  "lockedNumbersUsed": [
+    "Labor force, total, latest",
+    "Labor force, total, earliest"
+  ],
+  "qualityFlags": [
+    "Only two data points available (1990 and 2025); insufficient for detailed trend analysis.",
+    "No disaggregated data provided."
+  ],
+  "generatedAt": "2026-06-01T04:37:20.820Z",
+  "model": "deepseek-v4-flash",
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.work.force",
+    "question": "How many Indians are in the workforce?",
+    "priority": "core",
+    "requiredIndicatorIds": [
+      "work.labor_force_total"
+    ],
+    "availableIndicatorIds": [
+      "work.labor_force_total"
+    ],
+    "lockedNumbers": [
+      {
+        "label": "Labor force, total, latest",
+        "value": 617625336,
+        "date": "2025",
+        "unit": "people",
+        "sourceId": "worldbank",
+        "indicatorId": "work.labor_force_total"
+      },
+      {
+        "label": "Labor force, total, earliest",
+        "value": 307898649,
+        "date": "1990",
+        "unit": "people",
+        "sourceId": "worldbank",
+        "indicatorId": "work.labor_force_total"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "work.labor_force_total",
+        "title": "Labor force, total",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "SL.TLF.TOTL.IN",
+        "unit": "people",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 66,
+        "earliest": {
+          "date": "1990",
+          "value": 307898649
+        },
+        "latest": {
+          "date": "2025",
+          "value": 617625336
+        }
+      }
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}
