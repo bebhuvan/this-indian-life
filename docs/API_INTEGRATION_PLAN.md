@@ -122,6 +122,53 @@ Build this as an experimental adapter first. The API is not formally documented,
 
 This is a clean JSON API for city greenhouse-gas inventories. It is not India-specific, but it is useful for city-level climate comparisons if Indian city IDs are available. The public docs say city IDs can be looked up through the city picker or requested by country/region list from the portal team.
 
+## OECD SDMX
+
+- API explainer: `https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html`
+- Dataflow catalogue: `https://sdmx.oecd.org/public/rest/dataflow/all`
+- Data endpoint pattern: `https://sdmx.oecd.org/public/rest/data/{agency},{dataset},{version}/{key}?{params}`
+- Formats: `genericdata` XML, `jsondata`, `csvfile`, `csvfilewithlabels`.
+
+The dataflow catalogue probe works and returns SDMX XML. OECD is useful for international comparison context: education, health, labour, tax, trade, productivity, regional development, and well-being. Do not treat it as an India-first canonical source; use it to compare India with OECD/non-OECD countries where OECD coverage is available.
+
+Implementation note: OECD requires `Accept-Language: en` on data requests from this environment; without it, sample CSV queries returned `500 languageTag1`. Targeted India dataflow fetches now work, but broad catalogue discovery hits OECD rate limits and should run slowly in batches.
+
+## WHO Global Health Observatory
+
+- API docs: `https://www.who.int/data/gho/info/gho-odata-api`
+- Base URL: `https://ghoapi.azureedge.net/api`
+- Protocol: OData.
+- Auth: none.
+- Useful endpoints:
+  - `/Dimension`
+  - `/DIMENSION/COUNTRY/DimensionValues`
+  - `/Indicator`
+  - `/Indicator?$filter=contains(IndicatorName,'Life expectancy')`
+  - `/{IndicatorCode}?$filter=SpatialDim eq 'IND'`
+
+WHO GHO is a strong V1 health source. The probe for `WHOSIS_000001` returned India life expectancy records with `NumericValue`, confidence bounds, sex dimension, and year fields.
+
+## UN Population Data Portal
+
+- API docs: `https://population.un.org/dataportalapi/index.html`
+- Base URL: `https://population.un.org/dataportalapi`
+- OpenAPI specs:
+  - `/swagger/DataPortalOpenAPISpecificationv1.0/swagger.json`
+  - `/swagger/DataPortalOpenAPISpecificationv2.0/swagger.json`
+- Auth: metadata endpoints are public; the two data endpoints require `Authorization: Bearer <token>`.
+- Local env:
+  - `UN_POPULATION_BASE_URL`
+  - `UN_POPULATION_BEARER_TOKEN`
+
+Useful endpoints:
+
+- `/api/v1/locations`
+- `/api/v1/locations/356` for India
+- `/api/v1/Indicators`
+- `/api/v1/data/indicators/{indicators}/locations/{locations}/start/{startYear}/end/{endYear}?pagingInHeader=false&format=json`
+
+This is a high-priority V1 demography source for UN WPP-style population, fertility, mortality, age, sex, and projection indicators. The adapter adds the `Bearer` prefix automatically if the env value is only the raw JWT.
+
 ## Secret Handling
 
 Real keys live only in `.env`, which is gitignored. Commit `.env.example` when adding new variable names. Scripts must never log full request URLs containing `api_key` or `token`.

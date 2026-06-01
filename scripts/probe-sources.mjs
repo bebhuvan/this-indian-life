@@ -4,6 +4,8 @@ import { fetchEmberDataset } from "./adapters/ember.mjs";
 import { fetchOwidMetadata } from "./adapters/owid.mjs";
 import { fetchWaqiCity } from "./adapters/waqi.mjs";
 import { fetchCityEmissions } from "./adapters/dataportal-cities.mjs";
+import { fetchWhoIndicatorForIndia } from "./adapters/who-gho.mjs";
+import { fetchUnPopulationIndiaData, fetchUnPopulationLocation, fetchUnPopulationIndicators } from "./adapters/un-population.mjs";
 
 loadEnv();
 
@@ -64,6 +66,35 @@ await probe("Data Portal for Cities - sample emissions", async () => {
   return { city: data?.city_name, country: data?.country_name, year: data?.year, sectors: Array.isArray(data?.data) ? data.data.length : 0 };
 });
 
+await probe("OECD SDMX - dataflow catalogue", async () => {
+  const response = await fetch("https://sdmx.oecd.org/public/rest/dataflow/all", {
+    headers: { accept: "application/vnd.sdmx.structure+xml", "accept-language": "en", "user-agent": "Indica/0.1 source probe" }
+  });
+  const body = await response.text();
+  return { status: response.status, type: response.headers.get("content-type"), bytes: body.length };
+});
+
+await probe("WHO GHO - India life expectancy", async () => {
+  const data = await fetchWhoIndicatorForIndia("WHOSIS_000001");
+  return { rows: Array.isArray(data?.value) ? data.value.length : 0, firstYear: data?.value?.[0]?.TimeDim, firstValue: data?.value?.[0]?.NumericValue };
+});
+
+await probe("UN Population - India location metadata", async () => {
+  const data = await fetchUnPopulationLocation(356);
+  return { rows: Array.isArray(data) ? data.length : 0, name: data?.[0]?.name, iso3: data?.[0]?.iso3 };
+});
+
+await probe("UN Population - indicators metadata", async () => {
+  const data = await fetchUnPopulationIndicators();
+  return { total: data?.total, rows: Array.isArray(data?.data) ? data.data.length : 0 };
+});
+
+await probe("UN Population - India data endpoint", async () => {
+  const data = await fetchUnPopulationIndiaData({ indicator: 46, start: 2020, end: 2025 });
+  const rows = Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : Array.isArray(data?.value) ? data.value : [];
+  return { rows: rows.length, firstKeys: rows[0] ? Object.keys(rows[0]).slice(0, 8).join(",") : "" };
+});
+
 await requestPage("Census India - data catalog page", "https://censusindia.gov.in/census.website/en/data");
 await requestPage("Census India - population finder page", "https://censusindia.gov.in/census.website/en/data/population-finder");
 await requestPage("NFHS official site", "https://www.nfhsiips.in/");
@@ -78,4 +109,3 @@ await requestPage("Jal Jeevan Mission Web API PDF", "https://ejalshakti.gov.in/w
 await requestPage("CEA API docs page", "https://cea.adgstaging.in/api-for-central-electricity-authority-data/?lang=en");
 await requestPage("Agmarknet national portal page", "https://www.india.gov.in/category/agriculture-rural-environment/subcategory/agricultural-produce/details/website-of-agmarknet");
 await requestPage("Data Portal for Cities API docs", "https://dataportalforcities.org/api");
-

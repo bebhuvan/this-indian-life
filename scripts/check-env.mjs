@@ -9,7 +9,8 @@ const keys = [
   ["EMBER_API_KEY", "Ember electricity data"],
   ["WAQI_API_KEY", "WAQI/AQICN air quality"],
   ["OPENAQ_API_KEY", "OpenAQ air quality"],
-  ["CDSAPI_KEY", "Copernicus CDS"]
+  ["CDSAPI_KEY", "Copernicus CDS"],
+  ["UN_POPULATION_BEARER_TOKEN", "UN Population Data Portal"]
 ];
 
 let missing = 0;

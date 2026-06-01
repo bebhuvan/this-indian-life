@@ -14,6 +14,9 @@ Priority is based on usefulness, accessibility, provenance, and how quickly each
 | MoSPI / eSankhyiki | National accounts, CPI/IIP, surveys, official statistical products | https://www.mospi.gov.in/ and https://www.esankhyiki.mospi.gov.in/ | Treat as official but heterogeneous; expect table-specific parsing. |
 | data.gov.in APIs | Ministry and state datasets | https://data.gov.in/apis | Useful breadth, but quality varies by publisher; use after a source whitelist. |
 | Ember API | Electricity generation, demand, power-sector emissions, carbon intensity, capacity | https://api.ember-energy.org/v1/docs | Strong first energy source. Query India with `entity_code=IND`; auth uses `api_key`; data is CC BY 4.0. |
+| WHO Global Health Observatory | Health indicators, mortality, life expectancy, disease/risk factors | https://www.who.int/data/gho/info/gho-odata-api | Clean OData API; India country filters work. |
+| UN Population Data Portal | Population, fertility, mortality, age/sex structure, projections | https://population.un.org/dataportalapi/index.html | Metadata public; data endpoints require bearer token. India protected data fetch works. |
+| OECD SDMX | International comparison context | https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html | Use targeted flows; broad discovery is rate-limited. Requires `Accept-Language: en` in this environment. |
 
 ## Tier 2: Add After the First Catalog
 
@@ -40,10 +43,10 @@ Priority is based on usefulness, accessibility, provenance, and how quickly each
 
 ## First Ingestion Recommendation
 
-Start with World Bank for the live scaffold, then add RBI and MoSPI adapters. World Bank is not the best India source for everything, but it is the fastest way to validate the full pipeline:
+Start with the API-ready group documented in [V1_SOURCE_STRATEGY.md](./V1_SOURCE_STRATEGY.md): World Bank, India Data Hub, Ember, OWID, WAQI, and Data Portal for Cities. World Bank is not the best India source for everything, but it is the fastest way to validate the full pipeline:
 
 ```text
 fetch -> raw snapshot -> normalized series -> chart catalog -> static page
 ```
 
-Once the system is proven, replace or supplement World Bank values with RBI/MoSPI where they are the canonical Indian source.
+Once the system is proven, replace or supplement World Bank values with RBI/MoSPI/India Data Hub where they are the canonical Indian source. Use Census, NFHS, PLFS, HCES, and similar sources as page-backed or file-backed adapters rather than trying to pretend they are clean APIs.

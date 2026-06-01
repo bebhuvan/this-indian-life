@@ -18,6 +18,9 @@ npm run probe:sources
 | OWID Grapher | `/grapher/life-expectancy.metadata.json` | Metadata JSON returned successfully. |
 | WAQI | `/feed/delhi` | Authenticated request returned Delhi AQI payload. |
 | Data Portal for Cities | `/api/emissions?cityid=2618424&scope=total` | JSON returned for Copenhagen sample city. Indian city IDs still need lookup/request. |
+| OECD SDMX | `/public/rest/dataflow/all`; targeted CLI dataflow | Dataflow catalogue XML returned successfully. Targeted India dataflow fetch wrote 5,956 OECD rows. |
+| WHO GHO | `/api/WHOSIS_000001?$filter=SpatialDim eq 'IND'` | OData JSON returned India life expectancy records successfully. |
+| UN Population | `/api/v1/locations/356`, `/api/v1/Indicators`, protected `/api/v1/data/...` | Metadata endpoints are public. Protected India data endpoint works with local bearer token and wrote 2,394 rows for indicator 46. |
 
 ## Downloadable or page-backed
 
@@ -41,4 +44,4 @@ npm run probe:sources
 | CGWB | Timed out from this environment. Retry from another network and/or use India-WRIS/secondary official links. |
 | Agriculture Census official link | The `agricorpgov.org` host did not resolve from this environment. Need a canonical official endpoint before adapter work. |
 | data.gov.in API | Resource API attempts returned `Key not authorised` with the public sample key. Need a valid data.gov.in API key or rely on direct file downloads/pages. |
-
+| OECD wide discovery | Individual OECD data queries work when `Accept-Language: en` is supplied, but broad discovery hit API rate limits. Fetch targeted flows first; run full discovery slowly in batches. |
