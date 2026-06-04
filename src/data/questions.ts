@@ -192,8 +192,8 @@ export const questionPages: QuestionPage[] = v1Questions
   })
   .filter(Boolean) as QuestionPage[];
 
-export function questionUrl(page: QuestionPage, locale = "en") {
-  return `/${locale}/articles/${page.slug}/`;
+export function questionUrl(page: QuestionPage, _locale = "en") {
+  return `/articles/${page.slug}/`;
 }
 
 export type StatusMeta = {

@@ -28,8 +28,8 @@ export function GET({ site }: { site?: URL }) {
   }
 
   lines.push("## More");
-  lines.push(`- [About](${url("/en/about/")}): who makes this and why`);
-  lines.push(`- [Definitions](${url("/en/definitions/")}): the question spine, indicator registry, and data contracts`);
+  lines.push(`- [About](${url("/about/")}): who makes this and why`);
+  lines.push(`- [Definitions](${url("/definitions/")}): the question spine, indicator registry, and data contracts`);
   lines.push(`- [Sitemap](${url("/sitemap.xml")})`);
   lines.push("");
 

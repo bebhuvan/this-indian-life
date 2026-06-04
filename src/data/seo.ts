@@ -118,8 +118,8 @@ export function articleGraph(page: QuestionPage, locale = "en") {
   };
 
   const crumbs = breadcrumbNode([
-    { name: "Home", url: `/${locale}/` },
-    { name: section, url: `/${locale}/${page.domain}/` },
+    { name: "Home", url: "/" },
+    { name: section, url: `/${page.domain}/` },
     { name: page.question, url: questionUrl(page, locale) }
   ]);
 
@@ -152,8 +152,8 @@ export function chartGraph(chart: { title: string; dek: string; domain: string }
   };
 
   const crumbs = breadcrumbNode([
-    { name: "Home", url: `/${locale}/` },
-    { name: section, url: `/${locale}/${chart.domain}/` },
+    { name: "Home", url: "/" },
+    { name: section, url: `/${chart.domain}/` },
     { name: chart.title, url: chartUrl(chart as never, locale) }
   ]);
 

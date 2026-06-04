@@ -17,7 +17,7 @@ const ledger = charts
   .map((chart) => {
     const latest = latestObservation(loadSeries(chart.seriesPath))!;
     const article = questionPages.find((page) => page.indicators.includes(chart.id));
-    return { chart, latest, href: article ? questionUrl(article, locale) : `/${locale}/articles/` };
+    return { chart, latest, href: article ? questionUrl(article, locale) : `/articles/` };
   });
 ---
 
@@ -42,7 +42,7 @@ const ledger = charts
       <p class="muted home-dek">
         The big numbers behind everyday Indian life, sourced with care and explained in plain language.
       </p>
-      <a class="btn dom-people" href="/en/ask/">Ask a question</a>
+      <a class="btn dom-people" href="/ask/">Ask a question</a>
     </section>
 
     <section class="section" style="border-bottom:1px solid var(--ghost)">
@@ -63,7 +63,7 @@ const ledger = charts
         {domains.map((domain) => {
           const count = questionPages.filter((page) => page.domain === domain.id).length;
           return (
-            <a class={`card dom-${domain.id}`} href={`/${locale}/${domain.id}/`}>
+            <a class={`card dom-${domain.id}`} href={`/${domain.id}/`}>
               <div class="tag">{domain.label}</div>
               <h2>{domain.line}</h2>
               <p class="sub">{count} independent question page{count === 1 ? "" : "s"}</p>

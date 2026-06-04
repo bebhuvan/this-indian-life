@@ -1,14 +1,10 @@
 ---
-import Base from "../../layouts/Base.astro";
-import Nav from "../../components/Nav.astro";
-import Footer from "../../components/Footer.astro";
-import { locales, sources } from "../../data/site";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { locales, sources } from "../data/site";
 
-export function getStaticPaths() {
-  return locales.map((locale) => ({ params: { locale } }));
-}
-
-const { locale } = Astro.params;
+const locale = "en";
 const sourceList = Object.values(sources);
 ---
 

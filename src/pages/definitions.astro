@@ -1,7 +1,7 @@
 ---
-import Base from "../../layouts/Base.astro";
-import Nav from "../../components/Nav.astro";
-import { locales } from "../../data/site";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import { locales } from "../data/site";
 import {
   emberDatasets,
   eiaInternationalSeries,
@@ -16,13 +16,9 @@ import {
   waqiCities,
   whoIndicators,
   worldBankIndicators
-} from "../../../scripts/registry/v1-indicators.mjs";
+} from "../../scripts/registry/v1-indicators.mjs";
 
-export function getStaticPaths() {
-  return locales.map((locale) => ({ params: { locale } }));
-}
-
-const { locale } = Astro.params;
+const locale = "en";
 
 const sourceGroups = [
   { name: "World Bank", rows: worldBankIndicators, codeKey: "sourceIndicatorId" },

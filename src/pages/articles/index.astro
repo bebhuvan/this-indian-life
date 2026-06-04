@@ -1,15 +1,11 @@
 ---
-import Base from "../../../layouts/Base.astro";
-import Nav from "../../../components/Nav.astro";
-import Footer from "../../../components/Footer.astro";
-import { domains, locales } from "../../../data/site";
-import { questionPages, questionUrl, statusMeta } from "../../../data/questions";
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { domains, locales } from "../../data/site";
+import { questionPages, questionUrl, statusMeta } from "../../data/questions";
 
-export function getStaticPaths() {
-  return locales.map((locale) => ({ params: { locale } }));
-}
-
-const { locale } = Astro.params;
+const locale = "en";
 
 // Searchable text per question, baked in at build time (a few KB inline — no search
 // library, no extra request). The browse-by-domain grouping stays the default view;

@@ -19,7 +19,7 @@ directory = "./dist"
 binding = "ASSETS"
 # Run the Worker first only for article pages (Markdown-for-Agents negotiation);
 # every other path is served straight from assets with no Worker invocation.
-run_worker_first = ["/en/articles/*"]
+run_worker_first = ["/articles/*"]
 # src/pages/404.astro is emitted as /404.html and served for any unmatched path.
 not_found_handling = "404-page"
 # Directory build emits /path/index.html; serve canonical trailing-slash URLs.

@@ -1,16 +1,13 @@
 ---
-import Base from "../../layouts/Base.astro";
-import Nav from "../../components/Nav.astro";
-import NfBlock from "../../components/NfBlock.astro";
-import { locales } from "../../data/site";
-import * as N from "../../data/nfhs6.mjs";
-import { markdownBlocks, inlineMarkdownHtml } from "../../data/questions";
-import explainersData from "../../../data/nfhs6/explainers.json";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import NfBlock from "../components/NfBlock.astro";
+import { locales } from "../data/site";
+import * as N from "../data/nfhs6.mjs";
+import { markdownBlocks, inlineMarkdownHtml } from "../data/questions";
+import explainersData from "../../data/nfhs6/explainers.json";
 
-export function getStaticPaths() {
-  return locales.map((locale) => ({ params: { locale } }));
-}
-const { locale } = Astro.params;
+const locale = "en";
 type BlockEx = { takeaway?: string; read?: string };
 type TabEx = { answers?: Record<string, string>; intro?: string; macha?: { body?: string; soWhat?: string } };
 const explainers: Record<string, BlockEx & TabEx> = explainersData as any;

@@ -1,8 +1,8 @@
 ---
-import Base from "../../../layouts/Base.astro";
-import Nav from "../../../components/Nav.astro";
-import LineChart from "../../../components/LineChart.astro";
-import RegisterTabs from "../../../components/RegisterTabs.astro";
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import LineChart from "../../components/LineChart.astro";
+import RegisterTabs from "../../components/RegisterTabs.astro";
 import {
   chartUrl,
   charts,
@@ -13,19 +13,17 @@ import {
   loadSeries,
   locales,
   sources
-} from "../../../data/site";
-import { chartGraph } from "../../../data/seo";
+} from "../../data/site";
+import { chartGraph } from "../../data/seo";
 
 export function getStaticPaths() {
-  return locales.flatMap((locale) =>
-    charts.map((chart) => ({
-      params: { locale, domain: chart.domain, slug: chart.slug },
-      props: { chart }
-    }))
-  );
+  return charts.map((chart) => ({
+    params: { domain: chart.domain, slug: chart.slug },
+    props: { chart }
+  }));
 }
 
-const { locale } = Astro.params;
+const locale = "en";
 const { chart } = Astro.props;
 const series = loadSeries(chart.seriesPath);
 const latest = latestObservation(series)!;

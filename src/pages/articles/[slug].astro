@@ -1,27 +1,25 @@
 ---
-import Base from "../../../layouts/Base.astro";
-import Nav from "../../../components/Nav.astro";
-import ArticleVisuals from "../../../components/ArticleVisuals.astro";
-import ConceptPrimer from "../../../components/ConceptPrimer.astro";
-import EditorialStory from "../../../components/EditorialStory.astro";
-import ArticleEditLog from "../../../components/ArticleEditLog.astro";
-import ArticleEvidence from "../../../components/ArticleEvidence.astro";
-import Footer from "../../../components/Footer.astro";
-import { locales } from "../../../data/site";
-import { inlineMarkdownHtml, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../../data/questions";
-import { visualsForQuestion, bindSectionVisuals } from "../../../data/viz";
-import { articleGraph } from "../../../data/seo";
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import ArticleVisuals from "../../components/ArticleVisuals.astro";
+import ConceptPrimer from "../../components/ConceptPrimer.astro";
+import EditorialStory from "../../components/EditorialStory.astro";
+import ArticleEditLog from "../../components/ArticleEditLog.astro";
+import ArticleEvidence from "../../components/ArticleEvidence.astro";
+import Footer from "../../components/Footer.astro";
+import { locales } from "../../data/site";
+import { inlineMarkdownHtml, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../data/questions";
+import { visualsForQuestion, bindSectionVisuals } from "../../data/viz";
+import { articleGraph } from "../../data/seo";
 
 export function getStaticPaths() {
-  return locales.flatMap((locale) =>
-    questionPages.map((page) => ({
-      params: { locale, slug: page.slug },
-      props: { page }
-    }))
-  );
+  return questionPages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page }
+  }));
 }
 
-const { locale } = Astro.params;
+const locale = "en";
 const { page } = Astro.props;
 const explanation = page.explanation;
 const related = questionPages.filter((item) => item.id !== page.id && item.domain === page.domain).slice(0, 4);
@@ -77,7 +75,7 @@ const explicitMap = Object.fromEntries(
 const { bound: boundVisuals, leftover: leftoverVisuals } = bindSectionVisuals(sectionInputs, storyVisuals, explicitMap);
 ---
 
-<Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/${locale}/articles/${page.slug}.md`}>
+<Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
   <div class="wrap">
     <Nav active={page.domain} locale={locale} />
 

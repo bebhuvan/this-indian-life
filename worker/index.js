@@ -8,8 +8,8 @@
 // variant (/en/articles/<slug>/ -> /en/articles/<slug>.md) as text/markdown.
 // Browsers, which don't send that Accept value, keep getting HTML.
 
-// Locale + article slug, no trailing slash, single slug segment (won't match /og/...).
-const ARTICLE_RE = /^\/[a-z]{2}\/articles\/[^/]+$/;
+// Article slug, no trailing slash, single slug segment (won't match /og/... or sub-paths).
+const ARTICLE_RE = /^\/articles\/[^/]+$/;
 
 export default {
   async fetch(request, env) {

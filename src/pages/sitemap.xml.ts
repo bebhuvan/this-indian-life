@@ -3,16 +3,16 @@ import { questionPages, questionUrl } from "../data/questions";
 
 const staticPaths = [
   "/",
-  "/en/about/",
-  "/en/articles/",
-  "/en/ask/",
-  "/en/definitions/",
-  "/en/economy/",
-  "/en/people/",
-  "/en/health/",
-  "/en/energy/",
-  "/en/society/",
-  "/en/climate/"
+  "/about/",
+  "/articles/",
+  "/ask/",
+  "/definitions/",
+  "/economy/",
+  "/people/",
+  "/health/",
+  "/energy/",
+  "/society/",
+  "/climate/"
 ];
 
 type Entry = { path: string; lastmod?: string };

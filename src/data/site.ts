@@ -995,8 +995,8 @@ export function domainFor(id: DomainId) {
   return domains.find((domain) => domain.id === id);
 }
 
-export function chartUrl(chart: ChartRecord, locale = "en") {
-  return `/${locale}/${chart.domain}/${chart.slug}/`;
+export function chartUrl(chart: ChartRecord, _locale = "en") {
+  return `/${chart.domain}/${chart.slug}/`;
 }
 
 export function loadSeries(seriesPath: string): SeriesArtifact {

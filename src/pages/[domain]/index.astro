@@ -1,15 +1,16 @@
 ---
-import Base from "../../../layouts/Base.astro";
-import Nav from "../../../components/Nav.astro";
-import Footer from "../../../components/Footer.astro";
-import { domainFor, domains, locales } from "../../../data/site";
-import { questionPages, questionUrl, statusMeta } from "../../../data/questions";
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { domainFor, domains, locales } from "../../data/site";
+import { questionPages, questionUrl, statusMeta } from "../../data/questions";
 
 export function getStaticPaths() {
-  return locales.flatMap((locale) => domains.map((domain) => ({ params: { locale, domain: domain.id } })));
+  return domains.map((domain) => ({ params: { domain: domain.id } }));
 }
 
-const { locale, domain } = Astro.params;
+const { domain } = Astro.params;
+const locale = "en";
 const current = domainFor(domain as any)!;
 const domainQuestions = questionPages.filter((page) => page.domain === domain);
 const featuredReports = domain === "health"
@@ -17,7 +18,7 @@ const featuredReports = domain === "health"
       {
         title: "What NFHS-6 reveals about India",
         dek: "A visual reading of the 2023-24 National Family Health Survey: homes, women, fertility, birth, child health, nutrition, chronic disease, ageing, and care.",
-        href: `/${locale}/health/nfhs-6/`,
+        href: `/health/nfhs-6/`,
         meta: "Special report",
       },
     ]
