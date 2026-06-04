@@ -8,7 +8,11 @@ export default defineConfig({
   // so navigation never triggers a trailing-slash redirect.
   trailingSlash: "always",
   build: {
-    format: "directory"
+    format: "directory",
+    // Inline the single design-system stylesheet into each page's <head> instead of
+    // a render-blocking external request. One ~13 KB sheet (≈3-4 KB gzipped) ships with
+    // the HTML, removing the extra round-trip that was delaying FCP/LCP.
+    inlineStylesheets: "always"
   }
 });
 

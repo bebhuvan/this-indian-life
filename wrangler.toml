@@ -1,6 +1,7 @@
 # Cloudflare Workers — static-assets deploy (no server/runtime code).
 # Build with `npm run build` (emits ./dist), then `wrangler deploy`.
 name = "this-indian-life"
+main = "worker/index.js"
 compatibility_date = "2026-06-04"
 # Account ID is not secret (visible in dashboard URLs); committing it lets CI deploy
 # with only a CLOUDFLARE_API_TOKEN secret.
@@ -15,6 +16,10 @@ routes = [
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+# Run the Worker first only for article pages (Markdown-for-Agents negotiation);
+# every other path is served straight from assets with no Worker invocation.
+run_worker_first = ["/en/articles/*"]
 # src/pages/404.astro is emitted as /404.html and served for any unmatched path.
 not_found_handling = "404-page"
 # Directory build emits /path/index.html; serve canonical trailing-slash URLs.
