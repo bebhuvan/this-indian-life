@@ -2,11 +2,15 @@
 # Build with `npm run build` (emits ./dist), then `wrangler deploy`.
 name = "this-indian-life"
 compatibility_date = "2026-06-04"
+# Account ID is not secret (visible in dashboard URLs); committing it lets CI deploy
+# with only a CLOUDFLARE_API_TOKEN secret.
+account_id = "169758eb3d46dcbb6dba025317257426"
 
-# Custom domain — wrangler provisions the DNS record + edge cert on deploy.
+# Custom domains — wrangler provisions DNS records + edge certs on deploy.
 # Requires the thisindianlife.today zone to be in this Cloudflare account.
 routes = [
-  { pattern = "thisindianlife.today", custom_domain = true }
+  { pattern = "thisindianlife.today", custom_domain = true },
+  { pattern = "www.thisindianlife.today", custom_domain = true }
 ]
 
 [assets]
@@ -18,5 +22,6 @@ html_handling = "auto-trailing-slash"
 
 # _headers and _redirects in ./dist are honored automatically.
 #
-# To also serve www, add { pattern = "www.thisindianlife.today", custom_domain = true }
-# above, or set a www->apex redirect rule in the dashboard.
+# Both apex and www serve the site; the HTML canonical tags point to the apex, so
+# search engines treat apex as canonical. For a strict www->apex 301, add a
+# Redirect Rule in the dashboard (Rules -> Redirect Rules).

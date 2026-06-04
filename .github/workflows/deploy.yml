@@ -1,0 +1,43 @@
+name: Deploy to Cloudflare
+
+# Build the static site and deploy to Cloudflare Workers on every push to main.
+# One-time setup: add a repo secret CLOUDFLARE_API_TOKEN
+#   (GitHub → Settings → Secrets and variables → Actions → New repository secret).
+# Create the token at Cloudflare → My Profile → API Tokens → "Edit Cloudflare Workers"
+# template, scoped to this account + the thisindianlife.today zone.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history so scripts/build-git-meta.mjs can read each article's
+          # commit dates for the per-article edit log (shallow clones break it).
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Deploy
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
