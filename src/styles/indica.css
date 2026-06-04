@@ -8,12 +8,16 @@
 /* ---------- TOKENS ---------- */
 :root{
   /* surface + neutrals */
-  --bg:#ffffff; --ink:#0b0b0b; --mid:#5c5c5c; --dim:#a6a6a6;
+  --bg:#ffffff; --ink:#0b0b0b; --mid:#5c5c5c; --dim:#737373;
   --ghost:#e7e7e7; --line:#ededed; --paper:#fafafa;
-  /* domain inks — bright but soft, one family */
+  /* domain inks — bright but soft, one family (used for dots, bars, big numbers, charts) */
   --people:#DB5C97; --economy:#3A5BD0; --energy:#EFA227;
   --climate:#EE6A4C; --health:#15A382; --society:#7C5AD6; --slate:#b7b7bf;
+  /* darker text-safe variants — same hue, ≥4.5:1 on white, used only for small colored TEXT */
+  --people-ink:#B23A6E; --economy-ink:#2E49A8; --energy-ink:#9A6700;
+  --climate-ink:#C2492F; --health-ink:#0E7C63; --society-ink:#5E3FB0;
   --c:var(--ink);                 /* active domain ink (set per page/element) */
+  --c-ink:var(--ink);             /* text-safe active ink (set per page/element) */
   --c-tint:rgba(11,11,11,.08);
   /* type */
   --serif:'Cormorant Garamond',Georgia,serif;
@@ -35,12 +39,12 @@
 }
 
 /* domain helpers: set --c on a container */
-.dom-people{--c:var(--people);--c-tint:rgba(219,92,151,.10)}
-.dom-economy{--c:var(--economy);--c-tint:rgba(58,91,208,.10)}
-.dom-energy{--c:var(--energy);--c-tint:rgba(239,162,39,.14)}
-.dom-climate{--c:var(--climate);--c-tint:rgba(238,106,76,.12)}
-.dom-health{--c:var(--health);--c-tint:rgba(21,163,130,.10)}
-.dom-society{--c:var(--society);--c-tint:rgba(124,90,214,.10)}
+.dom-people{--c:var(--people);--c-ink:var(--people-ink);--c-tint:rgba(219,92,151,.10)}
+.dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(58,91,208,.10)}
+.dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(239,162,39,.14)}
+.dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(238,106,76,.12)}
+.dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(21,163,130,.10)}
+.dom-society{--c:var(--society);--c-ink:var(--society-ink);--c-tint:rgba(124,90,214,.10)}
 
 /* ---------- BASE ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -54,7 +58,7 @@ img,svg{max-width:100%}
 .wrap{max-width:min(1420px,100vw);margin:0 auto;padding:0 var(--gap)}
 @media(max-width:680px){.wrap{padding:0 22px}}
 .lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--dim)}
-.eyebrow{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--c)}
+.eyebrow{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--c-ink)}
 hr.r{border:none;border-top:1px solid var(--ghost)}
 a{color:inherit}
 .muted{color:var(--mid)} .faint{color:var(--dim)}
@@ -74,12 +78,12 @@ a{color:inherit}
 .domains{display:flex;gap:26px;flex-wrap:wrap}
 .domains a,.domains button{background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--dim);padding:2px 0 5px;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s;text-decoration:none}
 .domains a:hover,.domains a.on,.domains button:hover,.domains button.on{color:var(--ink)}
-.domains [data-d="economy"].on,.domains [data-d="economy"]:hover{color:var(--economy);border-color:var(--economy)}
-.domains [data-d="climate"].on,.domains [data-d="climate"]:hover{color:var(--climate);border-color:var(--climate)}
-.domains [data-d="people"].on,.domains [data-d="people"]:hover{color:var(--people);border-color:var(--people)}
-.domains [data-d="energy"].on,.domains [data-d="energy"]:hover{color:var(--energy);border-color:var(--energy)}
-.domains [data-d="health"].on,.domains [data-d="health"]:hover{color:var(--health);border-color:var(--health)}
-.domains [data-d="society"].on,.domains [data-d="society"]:hover{color:var(--society);border-color:var(--society)}
+.domains [data-d="economy"].on,.domains [data-d="economy"]:hover{color:var(--economy-ink);border-color:var(--economy)}
+.domains [data-d="climate"].on,.domains [data-d="climate"]:hover{color:var(--climate-ink);border-color:var(--climate)}
+.domains [data-d="people"].on,.domains [data-d="people"]:hover{color:var(--people-ink);border-color:var(--people)}
+.domains [data-d="energy"].on,.domains [data-d="energy"]:hover{color:var(--energy-ink);border-color:var(--energy)}
+.domains [data-d="health"].on,.domains [data-d="health"]:hover{color:var(--health-ink);border-color:var(--health)}
+.domains [data-d="society"].on,.domains [data-d="society"]:hover{color:var(--society-ink);border-color:var(--society)}
 .domains [data-d="reference"]:hover{color:var(--ink);border-color:var(--ink)}
 .lang{display:inline-flex;border:1px solid var(--ghost);border-radius:2px;overflow:hidden}
 .lang button{background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:.64rem;letter-spacing:.06em;padding:6px 11px;color:var(--dim);border-right:1px solid var(--ghost)}
@@ -92,7 +96,7 @@ a{color:inherit}
 /* ---------- DOMAIN CHIP ---------- */
 .domain-chip{display:inline-flex;align-items:center;gap:9px}
 .domain-chip .tk{width:9px;height:9px;border-radius:50%;background:var(--c)}
-.domain-chip span{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--c)}
+.domain-chip span{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--c-ink)}
 
 /* ---------- BUTTONS / CHIPS / SEG ---------- */
 .btn{font-family:var(--sans);font-size:.78rem;letter-spacing:.04em;border:1px solid var(--ink);background:var(--ink);color:#fff;padding:11px 20px;cursor:pointer;border-radius:2px;transition:.2s}
@@ -215,7 +219,7 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 @media(max-width:560px){.cards{grid-template-columns:1fr}}
 .card{background:#fff;padding:26px 24px;cursor:pointer;transition:.2s;position:relative}
 .card:hover{background:var(--paper)}
-.card .tag{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c)}
+.card .tag{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c-ink)}
 .card h2{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.16;margin:10px 0 4px}
 .card .sub{font-size:.78rem;color:var(--mid)}
 .card .spark{margin-top:18px}
@@ -313,7 +317,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .roadmap-step.done .roadmap-num{color:var(--c)}
 .roadmap li h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.15;margin-bottom:9px}
 .roadmap li p{color:var(--mid);max-width:64ch;font-size:1rem;line-height:1.62}
-.roadmap-tag{display:inline-block;margin-left:12px;font-family:var(--sans);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--health);border:1px solid var(--health);border-radius:30px;padding:3px 9px;vertical-align:middle}
+.roadmap-tag{display:inline-block;margin-left:12px;font-family:var(--sans);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--health-ink);border:1px solid var(--health);border-radius:30px;padding:3px 9px;vertical-align:middle}
 @media(max-width:560px){
   .roadmap li{grid-template-columns:1fr;gap:6px}
   .roadmap-num{font-size:1.2rem}
@@ -372,7 +376,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .article-head p{margin-top:14px;max-width:68ch;font-size:1.05rem}
 .article-status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px;font-size:.74rem;color:var(--mid)}
 .status{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ghost);padding:5px 9px;color:var(--ink)}
-.status.ready{border-color:var(--c);color:var(--c)}
+.status.ready{border-color:var(--c);color:var(--c-ink)}
 .status.wip{border-color:#e0a23c;color:#9c6b15}
 .status.needs{border-color:var(--dim);color:var(--mid)}
 .article-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);gap:1px;margin:34px 0 58px;border-top:1px solid var(--ghost);background:var(--ghost)}
@@ -750,7 +754,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 
 /* ── Concept primer ─ editorial teaching interlude (e.g. "what inflation means") ── */
 .primer{padding:72px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.primer .lbl{color:var(--c)}
+.primer .lbl{color:var(--c-ink)}
 .primer-head{max-width:820px;margin-bottom:8px}
 .primer-lead{font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.14;letter-spacing:-.015em;margin-top:14px;color:var(--ink)}
 

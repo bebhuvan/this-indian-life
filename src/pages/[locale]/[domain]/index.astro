@@ -45,7 +45,7 @@ const featuredReports = domain === "health"
                 <span class="report-title">{report.title}</span>
                 <span class="report-dek">{report.dek}</span>
               </span>
-              <span class="q-ans" style={`color:var(--${current.id})`}>{report.meta}</span>
+              <span class="q-ans" style={`color:var(--${current.id}-ink)`}>{report.meta}</span>
               <span class="q-arrow">-></span>
             </a>
           ))}
@@ -60,7 +60,7 @@ const featuredReports = domain === "health"
           <a class="q-row" href={questionUrl(page, locale)}>
             <span class="q-dot" style={`background:var(--${page.domain})`}></span>
             <span class="q-txt">{page.question}</span>
-            <span class="q-ans" style={`color:var(--${page.domain})`}>{statusMeta(page.explanation.status).short}</span>
+            <span class="q-ans" style={`color:var(--${page.domain}-ink)`}>{statusMeta(page.explanation.status).short}</span>
             <span class="q-arrow">-></span>
           </a>
         ))}

@@ -35,7 +35,7 @@ const { locale } = Astro.params;
             <a class={`q-row result-row dom-${chart.domain}`} href={chartUrl(chart, locale)} data-text={`${chart.title} ${chart.dek} ${chart.aliases.join(" ")}`.toLowerCase()}>
               <span class="q-dot" style={`background:var(--${chart.domain})`}></span>
               <span class="q-txt">{chart.title}</span>
-              <span class="q-ans" style={`color:var(--${chart.domain})`}>{formatValue(latest.value, chart.valueFormat)}</span>
+              <span class="q-ans" style={`color:var(--${chart.domain}-ink)`}>{formatValue(latest.value, chart.valueFormat)}</span>
               <span class="q-arrow">-></span>
             </a>
           );

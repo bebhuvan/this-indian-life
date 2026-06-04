@@ -68,7 +68,7 @@ const searchText = (page: (typeof questionPages)[number], domainLabel?: string) 
             <a class="q-row qrow" href={questionUrl(page, locale)} data-domain={domain.id} data-text={searchText(page, domain.label)}>
               <span class="q-dot" style={`background:var(--${page.domain})`}></span>
               <span class="q-txt">{page.question}</span>
-              <span class="q-ans" style={`color:var(--${page.domain})`}>{statusMeta(page.explanation.status).short}</span>
+              <span class="q-ans" style={`color:var(--${page.domain}-ink)`}>{statusMeta(page.explanation.status).short}</span>
               <span class="q-arrow">-></span>
             </a>
           ))}
