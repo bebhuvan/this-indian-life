@@ -12,6 +12,16 @@ export function getStaticPaths() {
 const { locale, domain } = Astro.params;
 const current = domainFor(domain as any)!;
 const domainQuestions = questionPages.filter((page) => page.domain === domain);
+const featuredReports = domain === "health"
+  ? [
+      {
+        title: "What NFHS-6 reveals about India",
+        dek: "A visual reading of the 2023-24 National Family Health Survey: homes, women, fertility, birth, child health, nutrition, chronic disease, ageing, and care.",
+        href: `/${locale}/health/nfhs-6/`,
+        meta: "Special report",
+      },
+    ]
+  : [];
 ---
 
 <Base title={`${current.label} · This Indian Life`} domain={current.id}>
@@ -23,6 +33,25 @@ const domainQuestions = questionPages.filter((page) => page.domain === domain);
       <h1 class="serif">{current.line}</h1>
       <p class="muted">Independent question pages with their own evidence, charts, caveats, and explainers.</p>
     </header>
+
+    {featuredReports.length > 0 && (
+      <section class="section featured-reports">
+        <p class="sec-hd">Featured report</p>
+        <div>
+          {featuredReports.map((report) => (
+            <a class="q-row report-row" href={report.href}>
+              <span class="q-dot" style={`background:var(--${current.id})`}></span>
+              <span class="q-txt">
+                <span class="report-title">{report.title}</span>
+                <span class="report-dek">{report.dek}</span>
+              </span>
+              <span class="q-ans" style={`color:var(--${current.id})`}>{report.meta}</span>
+              <span class="q-arrow">-></span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <section class="section">
       <p class="sec-hd">{domainQuestions.length} questions</p>
@@ -41,3 +70,39 @@ const domainQuestions = questionPages.filter((page) => page.domain === domain);
     <Footer locale={locale} />
   </div>
 </Base>
+
+<style>
+  .featured-reports {
+    padding-bottom: 8px;
+  }
+  .report-row {
+    align-items: flex-start;
+    text-decoration: none;
+  }
+  .report-row .q-txt,
+  .report-row .report-dek {
+    text-decoration: none;
+  }
+  .report-row .q-txt {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    max-width: 720px;
+  }
+  .report-title {
+    font: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .report-dek {
+    font: 300 0.9rem/1.55 "DM Sans", sans-serif;
+    color: var(--mid, #5c5c5c);
+  }
+  .report-row:hover .report-title {
+    text-decoration: underline;
+  }
+  .report-row:hover .report-dek {
+    text-decoration: none;
+  }
+</style>

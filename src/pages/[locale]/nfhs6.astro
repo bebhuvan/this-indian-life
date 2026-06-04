@@ -15,6 +15,7 @@ type BlockEx = { takeaway?: string; read?: string };
 type TabEx = { answers?: Record<string, string>; intro?: string; macha?: { body?: string; soWhat?: string } };
 const explainers: Record<string, BlockEx & TabEx> = explainersData as any;
 const tabEx = (tabId: string): TabEx => (explainers["__tab__" + tabId] as TabEx) || {};
+const nfhs6SourceUrl = "https://www.nfhsiips.in/nfhsuser/assets/National%20Family%20Health%20Survey%20(NFHS-6)%202023-2024%20Fact%20Sheets.pdf";
 
 function kpi(num: number) {
   const c = N.india(num);
@@ -156,7 +157,11 @@ function visualProminence(b: any, index: number, visibleCount = 1) {
 
     <footer class="nf-foot">
       <p class="lbl">Source</p>
-      <p class="muted">International Institute for Population Sciences (IIPS) & Ministry of Health and Family Welfare. National Family Health Survey (NFHS-6), 2023-24: India & State/UT Fact Sheets, May 2026. Results are provisional. Tiles marked “·” are suppressed in the source (fewer than 25 unweighted cases).</p>
+      <p class="muted">
+        International Institute for Population Sciences (IIPS) & Ministry of Health and Family Welfare.
+        <a href={nfhs6SourceUrl} target="_blank" rel="noreferrer">National Family Health Survey (NFHS-6), 2023-24: India & State/UT Fact Sheets</a>,
+        May 2026. Results are provisional. Tiles marked “·” are suppressed in the source (fewer than 25 unweighted cases).
+      </p>
     </footer>
   </div>
 
