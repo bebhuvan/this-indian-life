@@ -3,7 +3,6 @@ import { questionPages, questionUrl } from "../data/questions";
 
 const staticPaths = [
   "/",
-  "/en/",
   "/en/about/",
   "/en/articles/",
   "/en/ask/",

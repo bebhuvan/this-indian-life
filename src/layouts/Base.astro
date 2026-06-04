@@ -10,6 +10,8 @@ type Props = {
   ogType?: string;
   jsonLd?: unknown[];
   markdownUrl?: string;
+  /** Override the canonical path (e.g. point /en/ at the root "/"). Defaults to the page's own path. */
+  canonicalPath?: string;
 };
 
 const {
@@ -19,12 +21,13 @@ const {
   image = SITE.ogImage,
   ogType = "website",
   jsonLd = [],
-  markdownUrl
+  markdownUrl,
+  canonicalPath
 } = Astro.props;
 
 const bodyClass = domain ? `dom-${domain}` : "";
 const base = Astro.site || new URL(SITE.url);
-const canonical = new URL(Astro.url.pathname, base).toString();
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, base).toString();
 const ogImage = new URL(image, base).toString();
 const graph = jsonLd.length
   ? JSON.stringify({ "@context": "https://schema.org", "@graph": jsonLd })

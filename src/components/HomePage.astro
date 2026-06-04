@@ -6,6 +6,8 @@ import { charts, domains, formatValue, latestObservation, loadSeries } from "../
 import { questionPages, questionUrl, statusMeta } from "../data/questions";
 import { homeGraph } from "../data/seo";
 
+type Props = { canonicalPath?: string };
+const { canonicalPath } = Astro.props;
 const locale = "en";
 const featured = charts.find((chart) => chart.id === "people.population.total")!;
 const featuredSeries = loadSeries(featured.seriesPath);
@@ -19,7 +21,7 @@ const ledger = charts
   });
 ---
 
-<Base jsonLd={homeGraph()}>
+<Base jsonLd={homeGraph()} canonicalPath={canonicalPath}>
   <div class="wrap">
     <Nav active="people" locale={locale} />
 
