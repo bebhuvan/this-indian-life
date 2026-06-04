@@ -2,3 +2,12 @@
 # (Honored by Cloudflare Workers static assets.)
 /en/*  /:splat  301
 /en/   /        301
+
+# Conventional sitemap filenames (e.g. the @astrojs/sitemap defaults) -> our single sitemap.
+# Catches any crawler or Search Console entry that guesses or has the old paths.
+/sitemap-index.xml  /sitemap.xml  301
+/sitemap-0.xml      /sitemap.xml  301
+
+# Retired the thin GDP-vs-salary explainer; its closest sibling is the inflation flagship.
+/articles/why-does-gdp-growth-not-feel-like-salary-growth/  /articles/why-does-everything-keep-getting-more-expensive/  301
+/articles/why-does-gdp-growth-not-feel-like-salary-growth   /articles/why-does-everything-keep-getting-more-expensive/  301

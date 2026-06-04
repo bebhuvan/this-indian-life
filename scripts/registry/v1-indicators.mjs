@@ -198,14 +198,6 @@ export const v1Questions = [
     context: ["econ.idh.nominal_gdp_annual"]
   },
   {
-    id: "q.econ.feels",
-    question: "Why does GDP growth not feel like salary growth?",
-    priority: "core",
-    indicators: ["econ.gdp.growth_real", "econ.gdp.per_capita_current_usd", "econ.inflation_cpi"],
-    core: ["econ.gdp.growth_real", "econ.gdp.per_capita_current_usd", "econ.inflation_cpi"],
-    context: []
-  },
-  {
     id: "q.econ.inflation",
     question: "Why does everything keep getting more expensive?",
     priority: "core",
