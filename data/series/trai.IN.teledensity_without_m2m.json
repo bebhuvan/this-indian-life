@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "society.trai.teledensity_without_m2m",
+  "title": "Tele-density without M2M cellular mobile connections",
+  "sourceId": "trai",
+  "sourceIndicatorId": "teledensity_without_m2m",
+  "sourceUrl": "https://www.trai.gov.in/release-publication/reports/telecom-subscriptions-reports",
+  "unit": "%",
+  "frequency": "monthly",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-02T03:53:15.559Z",
+  "observations": [
+    {
+      "date": "2026-01",
+      "value": 84.26
+    },
+    {
+      "date": "2026-02",
+      "value": 3.37
+    },
+    {
+      "date": "2026-03",
+      "value": 84.57
+    },
+    {
+      "date": "2026-04",
+      "value": 84.76
+    }
+  ],
+  "metadata": {
+    "sourceOwner": "Telecom Regulatory Authority of India",
+    "reportSource": "live_TRAI_discovery",
+    "extractionMethod": "native_pdf_text_pdftotext_layout",
+    "pdfBacked": true,
+    "selector": {
+      "section": "overall",
+      "metric": "teledensity_without_m2m",
+      "valueField": "total"
+    },
+    "reportsParsed": [
+      {
+        "period": "2026-04",
+        "title": "Telecom Subscription Data as on April 2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-05/PR_No.63of2026_0.pdf",
+        "artifact": "data/series/trai.IN.telecom_subscription_summary.2026-04.json"
+      },
+      {
+        "period": "2026-03",
+        "title": "Telecom Subscription Data as on March 2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-04/PR_No.53of2026.pdf",
+        "artifact": "data/series/trai.IN.telecom_subscription_summary.2026-03.json"
+      },
+      {
+        "period": "2026-02",
+        "title": "Telecom Subscription Data as on February 2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-04/PR_No.46of2026_0.pdf",
+        "artifact": "data/series/trai.IN.telecom_subscription_summary.2026-02.json"
+      },
+      {
+        "period": "2026-01",
+        "title": "Telecom Subscription Data as on 31st January 2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-03/PR_No.39of2026_0.pdf",
+        "artifact": "data/series/trai.IN.telecom_subscription_summary.2026-01.json"
+      }
+    ],
+    "caveats": [
+      "Values are parsed from TRAI monthly report PDFs using embedded PDF text.",
+      "Subscriber counts are subscriptions or connections, not unique individuals.",
+      "Rows are profile-selected from the report headline table and should be revalidated when TRAI changes report layout."
+    ]
+  }
+}

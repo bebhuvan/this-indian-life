@@ -1,0 +1,828 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.climate.rainfall_cities",
+  "question": "How has rainfall changed in India's big cities?",
+  "priority": "core",
+  "theme": {
+    "id": "climate",
+    "label": "Climate, emissions, and air",
+    "readerQuestions": [
+      "Is this about total scale or per-person exposure?",
+      "Is the chart annual, cumulative, or a latest snapshot?",
+      "What comparison would stop the number from being misread?",
+      "What is outside the measure?"
+    ],
+    "glossaryTerms": [
+      "CO2",
+      "per capita emissions",
+      "cumulative emissions",
+      "AQI",
+      "PM2.5",
+      "ERA5",
+      "daily maximum temperature",
+      "precipitation"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "climate.openmeteo.delhi.precipitation_sum",
+    "climate.openmeteo.mumbai.precipitation_sum",
+    "climate.openmeteo.kolkata.precipitation_sum",
+    "climate.openmeteo.chennai.precipitation_sum",
+    "climate.openmeteo.bengaluru.precipitation_sum"
+  ],
+  "availableIndicatorIds": [
+    "climate.openmeteo.delhi.precipitation_sum",
+    "climate.openmeteo.mumbai.precipitation_sum",
+    "climate.openmeteo.kolkata.precipitation_sum",
+    "climate.openmeteo.chennai.precipitation_sum",
+    "climate.openmeteo.bengaluru.precipitation_sum"
+  ],
+  "themeIndicatorIds": [
+    "climate.openmeteo.delhi.precipitation_sum",
+    "climate.openmeteo.mumbai.precipitation_sum",
+    "climate.openmeteo.kolkata.precipitation_sum",
+    "climate.openmeteo.chennai.precipitation_sum",
+    "climate.openmeteo.bengaluru.precipitation_sum",
+    "climate.openmeteo.delhi.rainy_days",
+    "climate.openmeteo.mumbai.rainy_days",
+    "climate.openmeteo.kolkata.rainy_days",
+    "climate.openmeteo.chennai.rainy_days",
+    "climate.openmeteo.bengaluru.rainy_days"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.climate.openmeteo.delhi.precipitation_sum",
+      "indicatorId": "climate.openmeteo.delhi.precipitation_sum",
+      "title": "Delhi annual rainfall",
+      "sourceId": "open-meteo",
+      "unit": "mm",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.climate.openmeteo.mumbai.precipitation_sum",
+      "indicatorId": "climate.openmeteo.mumbai.precipitation_sum",
+      "title": "Mumbai annual rainfall",
+      "sourceId": "open-meteo",
+      "unit": "mm",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.climate.openmeteo.kolkata.precipitation_sum",
+      "indicatorId": "climate.openmeteo.kolkata.precipitation_sum",
+      "title": "Kolkata annual rainfall",
+      "sourceId": "open-meteo",
+      "unit": "mm",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.climate.openmeteo.chennai.precipitation_sum",
+      "indicatorId": "climate.openmeteo.chennai.precipitation_sum",
+      "title": "Chennai annual rainfall",
+      "sourceId": "open-meteo",
+      "unit": "mm",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.climate.openmeteo.bengaluru.precipitation_sum",
+      "indicatorId": "climate.openmeteo.bengaluru.precipitation_sum",
+      "title": "Bengaluru annual rainfall",
+      "sourceId": "open-meteo",
+      "unit": "mm",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.climate.openmeteo.delhi.rainy_days",
+      "indicatorId": "climate.openmeteo.delhi.rainy_days",
+      "title": "Delhi rainy days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.climate.openmeteo.mumbai.rainy_days",
+      "indicatorId": "climate.openmeteo.mumbai.rainy_days",
+      "title": "Mumbai rainy days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.climate.openmeteo.kolkata.rainy_days",
+      "indicatorId": "climate.openmeteo.kolkata.rainy_days",
+      "title": "Kolkata rainy days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.climate.openmeteo.chennai.rainy_days",
+      "indicatorId": "climate.openmeteo.chennai.rainy_days",
+      "title": "Chennai rainy days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.climate.openmeteo.bengaluru.rainy_days",
+      "indicatorId": "climate.openmeteo.bengaluru.rainy_days",
+      "title": "Bengaluru rainy days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "annual-rainfall-in-five-indian-cities",
+      "title": "Annual rainfall in five Indian cities",
+      "chartType": "multiLine",
+      "beat": "rainfall-total",
+      "window": "full",
+      "whyThisChart": "A city-by-city rainfall history shows how different India's water story is across regions."
+    },
+    {
+      "order": 2,
+      "chartId": "rainy-days-each-year",
+      "title": "Rainy days each year",
+      "chartType": "multiLine",
+      "beat": "rainfall-frequency",
+      "window": "full",
+      "whyThisChart": "Total rain and the number of rainy days answer different reader questions."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Delhi annual rainfall, latest",
+      "value": 841.7000000000003,
+      "displayValue": "841.7",
+      "date": "2025",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.delhi.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Delhi annual rainfall, earliest",
+      "value": 508.8,
+      "displayValue": "508.8",
+      "date": "1940",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.delhi.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mumbai annual rainfall, latest",
+      "value": 2234.7999999999997,
+      "displayValue": "2,234.8",
+      "date": "2025",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.mumbai.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mumbai annual rainfall, earliest",
+      "value": 2416.5,
+      "displayValue": "2,416.5",
+      "date": "1940",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.mumbai.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Kolkata annual rainfall, latest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.kolkata.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Kolkata annual rainfall, earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.kolkata.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Chennai annual rainfall, latest",
+      "value": 957.8999999999999,
+      "displayValue": "957.9",
+      "date": "2025",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.chennai.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Chennai annual rainfall, earliest",
+      "value": 549.3000000000001,
+      "displayValue": "549.3",
+      "date": "1940",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.chennai.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Bengaluru annual rainfall, latest",
+      "value": 1031.6000000000006,
+      "displayValue": "1,031.6",
+      "date": "2025",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.bengaluru.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Bengaluru annual rainfall, earliest",
+      "value": 1133.499999999999,
+      "displayValue": "1,133.5",
+      "date": "1940",
+      "unit": "mm",
+      "indicatorId": "climate.openmeteo.bengaluru.precipitation_sum",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Delhi rainy days, latest",
+      "value": 106,
+      "displayValue": "106",
+      "date": "2025",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.delhi.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Delhi rainy days, earliest",
+      "value": 68,
+      "displayValue": "68",
+      "date": "1940",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.delhi.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mumbai rainy days, latest",
+      "value": 157,
+      "displayValue": "157",
+      "date": "2025",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.mumbai.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mumbai rainy days, earliest",
+      "value": 127,
+      "displayValue": "127",
+      "date": "1940",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.mumbai.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Kolkata rainy days, latest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.kolkata.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Kolkata rainy days, earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.kolkata.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Chennai rainy days, latest",
+      "value": 120,
+      "displayValue": "120",
+      "date": "2025",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.chennai.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Chennai rainy days, earliest",
+      "value": 128,
+      "displayValue": "128",
+      "date": "1940",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.chennai.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Bengaluru rainy days, latest",
+      "value": 145,
+      "displayValue": "145",
+      "date": "2025",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.bengaluru.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Bengaluru rainy days, earliest",
+      "value": 144,
+      "displayValue": "144",
+      "date": "1940",
+      "unit": "days",
+      "indicatorId": "climate.openmeteo.bengaluru.rainy_days",
+      "sourceId": "open-meteo",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Delhi annual rainfall, latest",
+      "value": 841.7000000000003,
+      "displayValue": "841.7",
+      "date": "2025",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.precipitation_sum"
+    },
+    {
+      "label": "Delhi annual rainfall, earliest",
+      "value": 508.8,
+      "displayValue": "508.8",
+      "date": "1940",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.precipitation_sum"
+    },
+    {
+      "label": "Mumbai annual rainfall, latest",
+      "value": 2234.7999999999997,
+      "displayValue": "2,234.8",
+      "date": "2025",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.precipitation_sum"
+    },
+    {
+      "label": "Mumbai annual rainfall, earliest",
+      "value": 2416.5,
+      "displayValue": "2,416.5",
+      "date": "1940",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.precipitation_sum"
+    },
+    {
+      "label": "Kolkata annual rainfall, latest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.kolkata.precipitation_sum"
+    },
+    {
+      "label": "Kolkata annual rainfall, earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.kolkata.precipitation_sum"
+    },
+    {
+      "label": "Chennai annual rainfall, latest",
+      "value": 957.8999999999999,
+      "displayValue": "957.9",
+      "date": "2025",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.precipitation_sum"
+    },
+    {
+      "label": "Chennai annual rainfall, earliest",
+      "value": 549.3000000000001,
+      "displayValue": "549.3",
+      "date": "1940",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.precipitation_sum"
+    },
+    {
+      "label": "Bengaluru annual rainfall, latest",
+      "value": 1031.6000000000006,
+      "displayValue": "1,031.6",
+      "date": "2025",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.bengaluru.precipitation_sum"
+    },
+    {
+      "label": "Bengaluru annual rainfall, earliest",
+      "value": 1133.499999999999,
+      "displayValue": "1,133.5",
+      "date": "1940",
+      "unit": "mm",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.bengaluru.precipitation_sum"
+    },
+    {
+      "label": "Delhi rainy days, latest",
+      "value": 106,
+      "displayValue": "106",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.rainy_days"
+    },
+    {
+      "label": "Delhi rainy days, earliest",
+      "value": 68,
+      "displayValue": "68",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.rainy_days"
+    },
+    {
+      "label": "Mumbai rainy days, latest",
+      "value": 157,
+      "displayValue": "157",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.rainy_days"
+    },
+    {
+      "label": "Mumbai rainy days, earliest",
+      "value": 127,
+      "displayValue": "127",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.rainy_days"
+    },
+    {
+      "label": "Kolkata rainy days, latest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.kolkata.rainy_days"
+    },
+    {
+      "label": "Kolkata rainy days, earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.kolkata.rainy_days"
+    },
+    {
+      "label": "Chennai rainy days, latest",
+      "value": 120,
+      "displayValue": "120",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.rainy_days"
+    },
+    {
+      "label": "Chennai rainy days, earliest",
+      "value": 128,
+      "displayValue": "128",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.rainy_days"
+    },
+    {
+      "label": "Bengaluru rainy days, latest",
+      "value": 145,
+      "displayValue": "145",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.bengaluru.rainy_days"
+    },
+    {
+      "label": "Bengaluru rainy days, earliest",
+      "value": 144,
+      "displayValue": "144",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.bengaluru.rainy_days"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "climate.openmeteo.delhi.precipitation_sum",
+      "title": "Delhi annual rainfall",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "delhi.era5.precipitation_sum",
+      "unit": "mm",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "delhi",
+        "name": "Delhi",
+        "latitude": 28.6139,
+        "longitude": 77.209
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 508.8
+      },
+      "latest": {
+        "date": "2025",
+        "value": 841.7000000000003
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.mumbai.precipitation_sum",
+      "title": "Mumbai annual rainfall",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "mumbai.era5.precipitation_sum",
+      "unit": "mm",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "mumbai",
+        "name": "Mumbai",
+        "latitude": 19.076,
+        "longitude": 72.8777
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 2416.5
+      },
+      "latest": {
+        "date": "2025",
+        "value": 2234.7999999999997
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.kolkata.precipitation_sum",
+      "title": "Kolkata annual rainfall",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "kolkata.era5.precipitation_sum",
+      "unit": "mm",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "kolkata",
+        "name": "Kolkata",
+        "latitude": 22.5726,
+        "longitude": 88.3639
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025",
+        "value": 0
+      },
+      "latest": {
+        "date": "2025",
+        "value": 0
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.chennai.precipitation_sum",
+      "title": "Chennai annual rainfall",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "chennai.era5.precipitation_sum",
+      "unit": "mm",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "chennai",
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 549.3000000000001
+      },
+      "latest": {
+        "date": "2025",
+        "value": 957.8999999999999
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.bengaluru.precipitation_sum",
+      "title": "Bengaluru annual rainfall",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "bengaluru.era5.precipitation_sum",
+      "unit": "mm",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "bengaluru",
+        "name": "Bengaluru",
+        "latitude": 12.9716,
+        "longitude": 77.5946
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 1133.499999999999
+      },
+      "latest": {
+        "date": "2025",
+        "value": 1031.6000000000006
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.delhi.rainy_days",
+      "title": "Delhi rainy days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "delhi.era5.rainy_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "delhi",
+        "name": "Delhi",
+        "latitude": 28.6139,
+        "longitude": 77.209
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 68
+      },
+      "latest": {
+        "date": "2025",
+        "value": 106
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.mumbai.rainy_days",
+      "title": "Mumbai rainy days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "mumbai.era5.rainy_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "mumbai",
+        "name": "Mumbai",
+        "latitude": 19.076,
+        "longitude": 72.8777
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 127
+      },
+      "latest": {
+        "date": "2025",
+        "value": 157
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.kolkata.rainy_days",
+      "title": "Kolkata rainy days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "kolkata.era5.rainy_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "kolkata",
+        "name": "Kolkata",
+        "latitude": 22.5726,
+        "longitude": 88.3639
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025",
+        "value": 0
+      },
+      "latest": {
+        "date": "2025",
+        "value": 0
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.chennai.rainy_days",
+      "title": "Chennai rainy days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "chennai.era5.rainy_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "chennai",
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 128
+      },
+      "latest": {
+        "date": "2025",
+        "value": 120
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.bengaluru.rainy_days",
+      "title": "Bengaluru rainy days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "bengaluru.era5.rainy_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "bengaluru",
+        "name": "Bengaluru",
+        "latitude": 12.9716,
+        "longitude": 77.5946
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 144
+      },
+      "latest": {
+        "date": "2025",
+        "value": 145
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

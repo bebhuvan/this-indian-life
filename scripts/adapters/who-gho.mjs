@@ -27,3 +27,11 @@ export async function fetchWhoIndicatorForIndia(indicatorCode, extraFilter = "")
   const filter = [`SpatialDim eq 'IND'`, extraFilter].filter(Boolean).join(" and ");
   return fetchJson(whoGhoUrl(`/${indicatorCode}`, { "$filter": filter }));
 }
+
+export async function fetchWhoIndicatorForIndiaSample(indicatorCode, { extraFilter = "", top = 3 } = {}) {
+  const filter = [`SpatialDim eq 'IND'`, extraFilter].filter(Boolean).join(" and ");
+  return fetchJson(whoGhoUrl(`/${indicatorCode}`, {
+    "$filter": filter,
+    "$top": top
+  }));
+}

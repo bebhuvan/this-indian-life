@@ -3,9 +3,12 @@ import { spawn } from "node:child_process";
 const commands = [
   ["npm", ["run", "ingest:worldbank"]],
   ["npm", ["run", "ingest:ember"]],
+  ["npm", ["run", "ingest:eia"]],
+  ["npm", ["run", "ingest:ppac"]],
   ["npm", ["run", "ingest:who-gho"]],
   ["npm", ["run", "ingest:owid"]],
   ["npm", ["run", "ingest:waqi"]],
+  ["npm", ["run", "ingest:open-meteo"]],
   ["npm", ["run", "ingest:un-population"]]
 ];
 

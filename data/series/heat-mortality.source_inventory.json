@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "heat.source_inventory",
+  "title": "Source inventory for India heat mortality article",
+  "sourceId": "heat-mortality",
+  "sourceIndicatorId": "curated source inventory",
+  "sourceUrl": "docs/HEAT_MORTALITY_RESEARCH_DOSSIER.md",
+  "unit": "not applicable",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "source",
+    "articleRole"
+  ],
+  "fetchedAt": "2026-06-03T07:00:31.555Z",
+  "rows": [
+    {
+      "source": "Frontiers 2026",
+      "dataType": "modelled excess mortality",
+      "articleRole": "core estimate",
+      "caveat": "district model; not observed deaths",
+      "sourceUrl": "https://www.frontiersin.org/journals/environmental-health/articles/10.3389/fenvh.2026.1789071/full"
+    },
+    {
+      "source": "CRS",
+      "dataType": "registered deaths and completeness",
+      "articleRole": "baseline mortality",
+      "caveat": "annual; not event-level",
+      "sourceUrl": "https://censusindia.gov.in/nada/index.php/catalog/45564"
+    },
+    {
+      "source": "SRS",
+      "dataType": "death rates and age structure",
+      "articleRole": "baseline mortality",
+      "caveat": "sample survey; not daily deaths",
+      "sourceUrl": "https://ruralindiaonline.org/te/library/resource/sample-registration-system-statistical-report-2022/"
+    },
+    {
+      "source": "MCCD",
+      "dataType": "medically certified causes",
+      "articleRole": "cause-of-death gap",
+      "caveat": "low coverage and hospital skew",
+      "sourceUrl": "https://www.nature.com/articles/s41598-025-27634-1"
+    },
+    {
+      "source": "NCDC/NHRIDS/IHIP",
+      "dataType": "heatstroke surveillance",
+      "articleRole": "health-system reporting",
+      "caveat": "facility/reporting dependent; aggregate public data limited",
+      "sourceUrl": "https://ncdc.mohfw.gov.in/wp-content/uploads/2024/07/FAQ-on-Heat-Related-Illness-Death-Surveillance_2024.pdf"
+    },
+    {
+      "source": "NCRB ADSI",
+      "dataType": "heat/sunstroke accidental deaths",
+      "articleRole": "official administrative count",
+      "caveat": "narrow cause label",
+      "sourceUrl": "https://ncrb.gov.in/"
+    },
+    {
+      "source": "IMD",
+      "dataType": "heatwave days and disaster reports",
+      "articleRole": "meteorological event context",
+      "caveat": "DWE deaths are sourced from media reports, Disaster Management Authority reports, and IMD centre inputs; not an all-cause mortality system",
+      "sourceUrl": "https://mausam.imd.gov.in/responsive/heatwave_guidance.php"
+    },
+    {
+      "source": "OWID/EM-DAT",
+      "dataType": "reported extreme-temperature disaster deaths",
+      "articleRole": "international comparator",
+      "caveat": "event/disaster reporting, not full heat burden",
+      "sourceUrl": "https://ourworldindata.org/grapher/natural-disasters-deaths"
+    },
+    {
+      "source": "IMD gridded data",
+      "dataType": "daily Tmax/Tmin",
+      "articleRole": "India exposure backbone",
+      "caveat": "access and parsing required",
+      "sourceUrl": "https://mausam.imd.gov.in/"
+    },
+    {
+      "source": "ERA5/ERA5-Land",
+      "dataType": "temperature, humidity, wind, radiation",
+      "articleRole": "derived heat stress metrics",
+      "caveat": "reanalysis product",
+      "sourceUrl": "https://climate.copernicus.eu/climate-reanalysis"
+    },
+    {
+      "source": "NASA POWER",
+      "dataType": "daily/hourly weather API",
+      "articleRole": "accessible exposure cross-check",
+      "caveat": "model-derived/coarser",
+      "sourceUrl": "https://power.larc.nasa.gov/docs/services/api/temporal/hourly/"
+    },
+    {
+      "source": "World Bank heat hazard",
+      "dataType": "WBGT return-period hazard",
+      "articleRole": "human-health/labour heat stress",
+      "caveat": "probabilistic hazard, not daily deaths",
+      "sourceUrl": "https://datacatalog.worldbank.org/search/dataset/0040194/global-extreme-heat-hazard"
+    },
+    {
+      "source": "CEEW district heat risk",
+      "dataType": "734-district heat risk index using hazard, exposure, and vulnerability indicators",
+      "articleRole": "district risk and vulnerability context",
+      "caveat": "composite risk index; not a mortality count or causal death estimate",
+      "sourceUrl": "https://www.ceew.in/publications/mapping-climate-risks-and-impacts-of-extreme-heatwave-disaster-in-indian-districts"
+    },
+    {
+      "source": "UNDP HCH",
+      "dataType": "future heat, mortality, labour, energy projections",
+      "articleRole": "future risk context",
+      "caveat": "projection, not observed death count",
+      "sourceUrl": "https://hdr.undp.org/data-center/human-climate-horizons-data-and-insights-platform"
+    },
+    {
+      "source": "Lancet Countdown",
+      "dataType": "heatwave days, heat stress, labour, mortality indicators",
+      "articleRole": "peer-reviewed climate-health indicators",
+      "caveat": "some modelled indicators",
+      "sourceUrl": "https://lancetcountdown.org/explore-our-data/"
+    },
+    {
+      "source": "Census 2011",
+      "dataType": "district population, age, workers",
+      "articleRole": "subnational vulnerability",
+      "caveat": "old but official",
+      "sourceUrl": "https://censusindia.gov.in/census.website/en/data/population-finder"
+    },
+    {
+      "source": "WorldPop",
+      "dataType": "gridded population and age-sex",
+      "articleRole": "raster exposure overlay",
+      "caveat": "modelled population surface",
+      "sourceUrl": "https://hub.worldpop.org/geodata/summary?id=104815"
+    },
+    {
+      "source": "NFHS/DHS",
+      "dataType": "electricity, fan/AC/cooler, health vulnerability",
+      "articleRole": "cooling and household risk",
+      "caveat": "survey weights and timing",
+      "sourceUrl": "https://api.dhsprogram.com/"
+    },
+    {
+      "source": "PLFS",
+      "dataType": "sector/outdoor/informal work",
+      "articleRole": "occupational exposure",
+      "caveat": "survey weights and classifications",
+      "sourceUrl": "https://github.com/nso-india/esankhyiki-mcp"
+    },
+    {
+      "source": "NSS78",
+      "dataType": "living conditions, water, migration",
+      "articleRole": "household vulnerability",
+      "caveat": "survey analysis required",
+      "sourceUrl": "https://github.com/nso-india/esankhyiki-mcp"
+    },
+    {
+      "source": "HCES",
+      "dataType": "consumption/poverty proxy",
+      "articleRole": "adaptive capacity",
+      "caveat": "survey analysis required",
+      "sourceUrl": "https://github.com/nso-india/esankhyiki-mcp"
+    },
+    {
+      "source": "TUS",
+      "dataType": "time allocation and unpaid work",
+      "articleRole": "gendered exposure",
+      "caveat": "harder to connect directly to deaths",
+      "sourceUrl": "https://github.com/nso-india/esankhyiki-mcp"
+    },
+    {
+      "source": "CREA PM2.5",
+      "dataType": "daily gridded PM2.5",
+      "articleRole": "pollution modifier",
+      "caveat": "interaction with heat needs careful modelling",
+      "sourceUrl": "https://southasia-pm2-5.energyandcleanair.org/"
+    },
+    {
+      "source": "India Energy Atlas",
+      "dataType": "daily power supply position",
+      "articleRole": "cooling reliability context",
+      "caveat": "may not capture local outages",
+      "sourceUrl": "https://www.energymap.in/psp-daily"
+    },
+    {
+      "source": "MODIS/Yale SUHI",
+      "dataType": "land surface and urban heat islands",
+      "articleRole": "intra-urban heat inequality",
+      "caveat": "LST is not air temperature",
+      "sourceUrl": "https://data.nasa.gov/dataset/yale-center-for-earth-observation-yceo-surface-urban-heat-islands-version-4-2003-2018"
+    },
+    {
+      "source": "CPR HAP assessment",
+      "dataType": "heat action plan quality",
+      "articleRole": "policy preparedness",
+      "caveat": "plans may have changed",
+      "sourceUrl": "https://cprindia.org/briefsreports/how-is-india-adapting-to-heatwaves-an-assessment-of-heat-action-plans-with-insights-for-transformative-climate-action/"
+    }
+  ],
+  "metadata": {
+    "note": "Editorial source map. This table describes evidence roles and caveats."
+  }
+}

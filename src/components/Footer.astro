@@ -1,0 +1,23 @@
+---
+import { REPO_URL } from "../data/site";
+
+type Props = { locale?: string };
+const { locale = "en" } = Astro.props;
+---
+
+<footer class="foot">
+  <div class="foot-brand">This Indian Life</div>
+  <p class="foot-note">
+    One person dragging India's most important numbers out of stubborn PDFs and tired
+    government portals, and putting them in plain language. The data comes from the World Bank,
+    UN, WHO, Our World in Data, Ember and others — every page is static, sourced, and tied back
+    to where the numbers began.
+  </p>
+  <nav class="foot-links" aria-label="Site">
+    <a href={`/${locale}/articles/`}>All articles</a>
+    <a href={`/${locale}/about/`}>About</a>
+    <a href={`/${locale}/definitions/`}>Definitions</a>
+    <a href={`/${locale}/license/`}>License · CC BY 4.0</a>
+    <a href={REPO_URL} target="_blank" rel="noreferrer">Source on GitHub</a>
+  </nav>
+</footer>

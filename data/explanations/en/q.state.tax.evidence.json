@@ -3,16 +3,143 @@
   "questionId": "q.state.tax",
   "question": "How much tax does India collect?",
   "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
   "requiredIndicatorIds": [
-    "state.tax_revenue_gdp"
+    "state.tax_revenue_gdp",
+    "state.expense_gdp",
+    "state.debt_central_gdp"
   ],
   "availableIndicatorIds": [
-    "state.tax_revenue_gdp"
+    "state.tax_revenue_gdp",
+    "state.expense_gdp",
+    "state.debt_central_gdp"
+  ],
+  "themeIndicatorIds": [
+    "state.tax_revenue_gdp",
+    "state.expense_gdp",
+    "state.debt_central_gdp"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.state.tax_revenue_gdp",
+      "indicatorId": "state.tax_revenue_gdp",
+      "title": "Tax revenue",
+      "sourceId": "worldbank",
+      "unit": "% of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.state.expense_gdp",
+      "indicatorId": "state.expense_gdp",
+      "title": "Expense",
+      "sourceId": "worldbank",
+      "unit": "% of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.state.debt_central_gdp",
+      "indicatorId": "state.debt_central_gdp",
+      "title": "Central government debt",
+      "sourceId": "worldbank",
+      "unit": "% of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "Tax revenue, latest",
+      "value": 6.73444285965496,
+      "displayValue": "6.7%",
+      "date": "2022",
+      "unit": "% of GDP",
+      "indicatorId": "state.tax_revenue_gdp",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Tax revenue, earliest",
+      "value": 8.18112088549798,
+      "displayValue": "8.2%",
+      "date": "1974",
+      "unit": "% of GDP",
+      "indicatorId": "state.tax_revenue_gdp",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Expense, latest",
+      "value": 13.3335178491336,
+      "displayValue": "13.3%",
+      "date": "2022",
+      "unit": "% of GDP",
+      "indicatorId": "state.expense_gdp",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Expense, earliest",
+      "value": 8.73291191534832,
+      "displayValue": "8.7%",
+      "date": "1974",
+      "unit": "% of GDP",
+      "indicatorId": "state.expense_gdp",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Central government debt, latest",
+      "value": 46.5224986659322,
+      "displayValue": "46.5%",
+      "date": "2018",
+      "unit": "% of GDP",
+      "indicatorId": "state.debt_central_gdp",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Central government debt, earliest",
+      "value": 50.7832537948314,
+      "displayValue": "50.8%",
+      "date": "1990",
+      "unit": "% of GDP",
+      "indicatorId": "state.debt_central_gdp",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
   ],
   "lockedNumbers": [
     {
       "label": "Tax revenue, latest",
       "value": 6.73444285965496,
+      "displayValue": "6.7%",
       "date": "2022",
       "unit": "% of GDP",
       "sourceId": "worldbank",
@@ -21,10 +148,47 @@
     {
       "label": "Tax revenue, earliest",
       "value": 8.18112088549798,
+      "displayValue": "8.2%",
       "date": "1974",
       "unit": "% of GDP",
       "sourceId": "worldbank",
       "indicatorId": "state.tax_revenue_gdp"
+    },
+    {
+      "label": "Expense, latest",
+      "value": 13.3335178491336,
+      "displayValue": "13.3%",
+      "date": "2022",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "state.expense_gdp"
+    },
+    {
+      "label": "Expense, earliest",
+      "value": 8.73291191534832,
+      "displayValue": "8.7%",
+      "date": "1974",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "state.expense_gdp"
+    },
+    {
+      "label": "Central government debt, latest",
+      "value": 46.5224986659322,
+      "displayValue": "46.5%",
+      "date": "2018",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "state.debt_central_gdp"
+    },
+    {
+      "label": "Central government debt, earliest",
+      "value": 50.7832537948314,
+      "displayValue": "50.8%",
+      "date": "1990",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "state.debt_central_gdp"
     }
   ],
   "sourceSummaries": [
@@ -49,10 +213,62 @@
         "date": "2022",
         "value": 6.73444285965496
       }
+    },
+    {
+      "indicatorId": "state.expense_gdp",
+      "title": "Expense",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "GC.XPN.TOTL.GD.ZS",
+      "unit": "% of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1974",
+        "value": 8.73291191534832
+      },
+      "latest": {
+        "date": "2022",
+        "value": 13.3335178491336
+      }
+    },
+    {
+      "indicatorId": "state.debt_central_gdp",
+      "title": "Central government debt",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "GC.DOD.TOTL.GD.ZS",
+      "unit": "% of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1990",
+        "value": 50.7832537948314
+      },
+      "latest": {
+        "date": "2018",
+        "value": 46.5224986659322
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

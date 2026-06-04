@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "heat.work.lancet_labour_loss_sector_shares",
+  "title": "Heat-related labour-hour losses by sector",
+  "sourceId": "lancet-countdown",
+  "sourceIndicatorId": "India 2025 data sheet, heat-related labour-hour losses in 2024",
+  "sourceUrl": "https://lancetcountdown.org/wp-content/uploads/2025/10/India_Lancet-Countdown_2025_Data-Sheet-2.pdf",
+  "unit": "% of heat-related labour-hour losses",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-04T06:43:23.344Z",
+  "rows": [
+    {
+      "label": "Agriculture",
+      "value": 66,
+      "date": "2024"
+    },
+    {
+      "label": "Construction",
+      "value": 20,
+      "date": "2024"
+    },
+    {
+      "label": "Other sectors",
+      "value": 14,
+      "date": "2024",
+      "note": "Derived residual: 100 minus agriculture and construction shares."
+    }
+  ],
+  "metadata": {
+    "share": true,
+    "potentialLabourHoursLostBillion": 247,
+    "potentialLabourHoursLostPerPerson": 419,
+    "labourLossChangeSince1990sPct": 124,
+    "potentialIncomeLostUsdBillion": 194,
+    "method": "Keeps Lancet's agriculture and construction shares as comparable percentages and derives the residual other-sector share.",
+    "caveat": "Labour hours lost are labour-capacity estimates, not a count of deaths or observed wage losses."
+  }
+}

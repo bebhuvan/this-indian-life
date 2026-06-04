@@ -1,0 +1,38 @@
+{
+  "source": "SRS Cause of Death Statistics 2022-2024 (Report on Causes of Death in India)",
+  "publisher": "Office of the Registrar General & Census Commissioner, India (ORGI), Sample Registration System",
+  "sourceUrl": "https://censusindia.gov.in (SRS Cause of Death report 2022-2024)",
+  "sourceFile": "SRS_COD-STATISTICS_2022-2024.pdf",
+  "extractedFrom": "Table 2.1A (Distribution of Deaths by Major Cause Groups, India) p.12; Executive Summary leading-cause list / Table 2.3A (Top 10 Causes of Death, all ages)",
+  "extractedAt": "2026-06-03",
+  "geography": "India (national)",
+  "period": "2022-2024",
+  "method": "Verbal-autopsy cause assignment on the SRS sample. Unlike MCCD (only ~22% medically certified, urban/institutional), SRS-CoD is nationally representative and covers rural and at-home deaths. Most ill-defined causes are at ages 70+.",
+  "sampleDeaths": { "person": 151472, "male": 89106, "female": 62366 },
+  "broadGroups": {
+    "note": "Share of all deaths, %, by major cause group.",
+    "person": { "ncd": 60.1, "communicable_maternal_perinatal_nutritional": 19.7, "injuries": 10.5, "ill_defined": 9.7 },
+    "male": { "ncd": 62.3, "communicable_maternal_perinatal_nutritional": 17.7, "injuries": 12.6, "ill_defined": 7.4 },
+    "female": { "ncd": 56.9, "communicable_maternal_perinatal_nutritional": 22.6, "injuries": 7.5, "ill_defined": 12.9 },
+    "rural": { "ncd": 58.8, "communicable_maternal_perinatal_nutritional": 20.4, "injuries": 10.9 },
+    "urban": { "ncd": 64.8, "communicable_maternal_perinatal_nutritional": 17.2, "injuries": 8.9 },
+    "priorPeriod_2021_2023": { "ncd": 56.7, "communicable_maternal_perinatal_nutritional": 23.4, "note": "Source's own previous-period figures, showing NCDs rising and communicable falling." }
+  },
+  "leadingCauses": [
+    { "label": "Cardiovascular disease", "sharePct": 32.1, "male": 33.3, "female": 30.4 },
+    { "label": "Cancers (malignant & other neoplasms)", "sharePct": 7.0, "male": 6.6, "female": 7.6 },
+    { "label": "Respiratory diseases", "sharePct": 6.0 },
+    { "label": "Digestive diseases", "sharePct": 5.9, "male": 7.7, "female": 3.4 },
+    { "label": "Respiratory infections", "sharePct": 5.7, "male": 5.0, "female": 6.7 },
+    { "label": "Fever of unknown origin", "sharePct": 4.1, "male": 3.4, "female": 5.2 },
+    { "label": "Unintentional injuries (non-vehicle)", "sharePct": 4.1 },
+    { "label": "Diabetes mellitus", "sharePct": 3.6, "male": 3.2, "female": 4.2 },
+    { "label": "Genito-urinary diseases", "sharePct": 3.4, "male": 3.8, "female": 2.9 },
+    { "label": "Tuberculosis", "sharePct": 2.6 }
+  ],
+  "context": {
+    "ncd_share_eag_states": 53.9,
+    "ncd_share_other_states": 63.5,
+    "note": "NCD burden is higher in richer 'Other' states (63.5%) than poorer EAG states + Assam (53.9%); ill-defined causes concentrate at ages 70+."
+  }
+}

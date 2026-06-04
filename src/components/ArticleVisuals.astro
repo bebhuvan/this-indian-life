@@ -1,27 +1,89 @@
 ---
-import type { VisualSpec, LineVisual, StackVisual, BarVisual, ChangeVisual, PyramidVisual } from "../data/viz";
+import type { VisualSpec, LineVisual, LinePanelsVisual, StackVisual, BarVisual, GroupedBarVisual, ChangeVisual, PyramidVisual, StripeVisual, ChoroplethVisual, ScatterVisual, StripPairVisual, ScenarioMapsVisual, SparkGridVisual, RankedChangeVisual } from "../data/viz";
 import type { LockedNumber } from "../data/questions";
 import { formatLockedNumber } from "../data/questions";
+import { fileSafe } from "../data/chartDownloads";
+import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, viewBoxAspectRatio } from "../data/chartSvg";
+
+type ChartExplainer = {
+  visualId: string;
+  title: string;
+  takeaway?: string;
+  detail?: string;
+  whyShowThis: string;
+  howToRead: string;
+  mistakeToAvoid: string;
+  mobileNote: string;
+};
 
 type Props = {
   visuals: VisualSpec[];
   lockedNumbers?: LockedNumber[];
+  chartExplainers?: ChartExplainer[];
+  showKpis?: boolean;
+  leadFirst?: boolean;
+  startIndex?: number;
+  sectionLabel?: string;
+  sectionClass?: string;
 };
 
-const { visuals, lockedNumbers = [] } = Astro.props;
+const {
+  visuals,
+  lockedNumbers = [],
+  chartExplainers = [],
+  showKpis = true,
+  leadFirst = true,
+  startIndex = 0,
+  sectionLabel = "The data",
+  sectionClass = ""
+} = Astro.props;
 
-const colors = ["var(--c)", "#0b0b0b", "#15A382", "#EFA227", "#7C5AD6", "#EE6A4C", "#5c5c5c"];
+// Coral (domain ink) + near-black lead, then softened, harmonised secondaries so
+// multi-line charts read calm rather than rainbow-loud (riso-ink, bright-but-soft).
+const colors = ["var(--c)", "#0b0b0b", "#3f8378", "#cf9a3f", "#7e6ba6", "#b5765c", "#8c8780"];
 const sourceNames: Record<string, string> = {
   worldbank: "World Bank",
   "un-population": "UN Population",
   "who-gho": "WHO GHO",
+  indiadatahub: "IndiaDataHub",
   ember: "Ember",
+  eia: "EIA",
+  ppac: "PPAC",
+  tradestat: "TradeStat / DGCI&S",
+  "india-energy-derived": "PPAC + TradeStat / DGCI&S",
+  "un-comtrade": "UN Comtrade",
   owid: "Our World in Data",
-  waqi: "WAQI"
+  waqi: "WAQI",
+  "open-meteo": "Open-Meteo",
+  "world-context": "World Bank + Our World in Data",
+  trai: "TRAI",
+  "rbi-sibc": "RBI",
+  ceew: "CEEW",
+  imd: "IMD",
+  nfhs: "NFHS",
+  mospi: "MoSPI",
+  hces: "MoSPI HCES",
+  "lancet-countdown": "Lancet Countdown",
+  "heat-vulnerability": "CEEW + MoSPI + NITI + HCES + MCCD",
+  "heat-work": "MoSPI + ILOSTAT",
+  era5: "Copernicus ERA5"
 };
 
 function fmt(value: number, unit = "") {
   const abs = Math.abs(value);
+  if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
+  if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
+    if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh cr`;
+    if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
+    return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })} cr`;
+  }
+  if (/rupees|inr|₹/i.test(unit)) {
+    if (abs >= 1_000_000_000_000) return `₹${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh cr`;
+    if (abs >= 10_000_000_000) return `₹${(value / 10_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
+    if (abs >= 10_000_000) return `₹${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} cr`;
+    if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh`;
+    if (abs >= 1000) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+  }
   if (/US\$|usd|\$/i.test(unit)) {
     if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 2 })}T`;
     if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}B`;
@@ -32,6 +94,21 @@ function fmt(value: number, unit = "") {
   if (abs >= 1000) return `${(value / 1000).toFixed(1)}k`;
   if (abs >= 100) return value.toFixed(0);
   return value.toFixed(1);
+}
+
+function compactBarLabel(value: number, unit = "") {
+  const abs = Math.abs(value);
+  if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
+  if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
+    if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}L cr`;
+    if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
+    return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })} cr`;
+  }
+  if (/rupees|inr|₹/i.test(unit)) {
+    if (abs >= 1_000_000_000_000) return `₹${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}L cr`;
+    if (abs >= 10_000_000) return `₹${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} cr`;
+  }
+  return fmt(value, unit);
 }
 
 function shortLabel(label: string) {
@@ -71,11 +148,42 @@ function kpiLabel(item: LockedNumber) {
   return shortLabel(item.label);
 }
 
+function kpisToShow(items: LockedNumber[]) {
+  const preferred = [
+    "econ.idh.nominal_gdp_annual",
+    "econ.idh.per_capita_nominal_gdp",
+    "econ.idh.real_gdp_annual",
+    "econ.idh.gva_services_nominal",
+    "econ.idh.private_consumption_nominal"
+  ];
+  const latest = items.filter((item) => /latest/i.test(item.label));
+  const pool = latest.length ? latest : items;
+  const seen = new Set<string>();
+  return [...pool]
+    .sort((a, b) => {
+      const ai = preferred.indexOf(a.indicatorId);
+      const bi = preferred.indexOf(b.indicatorId);
+      if (ai !== -1 || bi !== -1) return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+      return 0;
+    })
+    .filter((item) => {
+      if (seen.has(item.indicatorId)) return false;
+      seen.add(item.indicatorId);
+      return true;
+    })
+    .slice(0, 5);
+}
+
 function valueParts(item: LockedNumber) {
-  const value = formatLockedNumber(item);
+  const formatted = formatLockedNumber(item);
+  const value = /rupees|inr|₹/i.test(item.unit) && !formatted.includes("₹") ? fmt(item.value, item.unit) : formatted;
   const match = value.match(/^(.+?)\s+(crore|lakh|million|billion|trillion)$/i);
   if (!match) return { number: value, unit: "" };
   return { number: match[1], unit: match[2] };
+}
+
+function kpiValue(item: LockedNumber) {
+  return fmt(item.value, item.unit);
 }
 
 function pct(value: number | null) {
@@ -84,17 +192,88 @@ function pct(value: number | null) {
   return `${sign}${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}%`;
 }
 
-function cardClass(visualIndex: number, visual: VisualSpec) {
-  if (visualIndex === 0) return "viz-card viz-main";
+function signedFmt(value: number, unit = "") {
+  const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+  return `${sign}${fmt(Math.abs(value), unit)}`;
+}
+
+function yearSpan(start: string, end: string) {
+  const startYear = Number(start);
+  const endYear = Number(end);
+  if (!Number.isFinite(startYear) || !Number.isFinite(endYear)) return null;
+  const span = endYear - startYear;
+  return span > 0 ? span : null;
+}
+
+function multiple(start: number, end: number) {
+  if (!start || !Number.isFinite(start) || !Number.isFinite(end)) return "n/a";
+  return `${(end / start).toLocaleString("en-IN", { maximumFractionDigits: 2 })}x`;
+}
+
+function formatAxisLabel(date: string) {
+  const match = String(date).match(/^(\d{4})(?:-(\d{2})-\d{2})?/);
+  if (!match) return date;
+  return match[1];
+}
+
+function svgCoord(value: number, precision = 1) {
+  return Number(value.toFixed(precision)).toString();
+}
+
+function cardClass(visualIndex: number, visual: VisualSpec, leadFirst = true) {
+  // Explicit plan size wins over heuristics: hero = full+large, feature = full, small = grid cell.
+  const size = (visual as { size?: string }).size;
+  if (size === "hero") return "viz-card viz-main";
+  if (size === "feature") return "viz-card viz-wide";
+  if (size === "small") return "viz-card";
+  if (leadFirst && visualIndex === 0) return "viz-card viz-main";
   if (visual.kind === "change") return "viz-card viz-wide";
   if (visual.kind === "line" && visual.lines.length > 1) return "viz-card viz-wide";
+  if (visual.kind === "linePanels") return "viz-card viz-wide";
+  if (visual.kind === "groupedBar") return "viz-card viz-wide";
+  if (visual.kind === "bar" && visual.title.toLowerCase().includes("trade flows")) return "viz-card viz-wide";
+  if (visual.kind === "bar" && visual.title.toLowerCase().includes("change by decade")) return "viz-card viz-wide";
   if (visual.kind === "bar" && visual.bars.length > 8) return "viz-card viz-wide";
   if (visual.kind === "pyramid" || visual.kind === "stack") return "viz-card viz-wide";
+  if (visual.kind === "stripes") return "viz-card viz-wide";
+  if (visual.kind === "choropleth" || visual.kind === "scatter" || visual.kind === "scenarioMaps" || visual.kind === "sparkGrid" || visual.kind === "rankedChange") return "viz-card viz-wide";
   return "viz-card";
 }
 
 function sourceName(sourceId: string) {
   return sourceNames[sourceId] || sourceId;
+}
+
+function sourceLabel(source: VisualSpec["source"]) {
+  const id = String(source.sourceIndicatorId || "");
+  if (source.sourceId === "ppac") {
+    if (id === "international-prices-crude-oil.indian-basket.$-per-bbl") return "PPAC · Indian crude basket price · $/bbl";
+    if (id.startsWith("import-export:2025-2026:reportBy:1")) return "PPAC · Import/export of crude oil and petroleum products, quantity · 2025-26";
+    if (id.startsWith("import-export:2025-2026:reportBy:2")) return "PPAC · Import/export of crude oil and petroleum products, value in rupees · 2025-26";
+    if (id.startsWith("import-export:2025-2026:reportBy:3")) return "PPAC · Import/export of crude oil and petroleum products, value in dollars · 2025-26";
+    if (id.includes("NG-C-LNG-Import")) return "PPAC · LNG imports, quantity and value · 2025-26";
+    return `PPAC · ${id}`;
+  }
+  if (source.sourceId === "tradestat") {
+    const history = id.match(/^(\d+)\.imports\.partner-history\.(\d{4})-(\d{4})$/);
+    if (history) return `TradeStat / DGCI&S · HS ${history[1]} imports by partner · ${history[2]}-${String(Number(history[2]) + 1).slice(-2)} to ${history[3]}-${String(Number(history[3]) + 1).slice(-2)}`;
+    const hs = id.match(/^(\d+)\.imports\.(\d{4})$/);
+    if (hs) return `TradeStat / DGCI&S · HS ${hs[1]} imports by partner · ${hs[2]}-${String(Number(hs[2]) + 1).slice(-2)}`;
+    return `TradeStat / DGCI&S · ${id}`;
+  }
+  if (source.sourceId === "ember") {
+    if (id === "electricity-generation/yearly") return "Ember · Yearly electricity generation by source";
+    if (id === "electricity-demand/yearly") return "Ember · Yearly electricity demand";
+    if (id === "carbon-intensity/yearly") return "Ember · Yearly electricity carbon intensity";
+  }
+  if (source.sourceId === "worldbank") {
+    if (id === "EG.ELC.ACCS.ZS") return "World Bank · Access to electricity (% of population)";
+    if (id === "SP.POP.TOTL") return "World Bank · Population, total";
+  }
+  if (source.sourceId === "india-energy-derived") {
+    if (id === "ppac-and-tradestat.fuel-import-spend.2025-2026") return "PPAC + TradeStat / DGCI&S · Fuel import spend · 2025-26";
+  }
+  return `${sourceName(source.sourceId)} · ${id}`;
 }
 
 function cleanSubtitle(value: string, sourceId: string) {
@@ -104,102 +283,344 @@ function cleanSubtitle(value: string, sourceId: string) {
     .replace(" · NumericValue", "");
 }
 
-function fileSafe(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 70) || "indica-chart";
+function insightForVisual(visual: VisualSpec) {
+  const title = visual.title.toLowerCase();
+  if (title.includes("latest gva by sector")) return "This is the production-side split. It shows whether the economy is mainly agriculture, industry, or services at the latest point.";
+  if (title.includes("what gdp is made of")) return "This is the spending-side split. Household consumption, investment, government consumption, and net exports are different ways GDP gets counted.";
+  if (title.includes("trade flows") || title.includes("imports and exports")) return "Each year has two bars: exports and imports. When the import bar is taller, net exports are negative and subtract from GDP.";
+  if (title.includes("nominal gdp")) return "This is the headline size of the economy in current rupees. It includes both real growth and price changes, so read it as the money value of output.";
+  if (title.includes("real gdp")) return "This removes the effect of inflation using 2011-12 prices. Use it when the question is growth in actual output, not just bigger rupee numbers.";
+  if (title.includes("per capita")) return "This divides the economy by the population. It is closer to the average-person question than total GDP, but it still says nothing about distribution.";
+  if (title.includes("gva") && title.includes("agriculture")) return "Agriculture supports a large share of livelihoods, but its output share is much smaller than services or industry. That gap is the structural story.";
+  if (title.includes("gva") && title.includes("industry")) return "Industry is the production base: factories, construction, mining, utilities. Watch whether it is expanding fast enough to absorb workers productively.";
+  if (title.includes("gva") && title.includes("services")) return "Services are the largest block of the economy. A services-heavy economy can grow fast, but the jobs question has to be asked separately.";
+  if (title.includes("private final consumption")) return "This is household spending. If this line is large, the economy is being pulled heavily by what people buy.";
+  if (title.includes("gross capital formation")) return "This is the investment line: buildings, machines, infrastructure, and inventories. It matters because today's investment shapes tomorrow's capacity.";
+  if (title.includes("government final consumption")) return "This is government spending on current services, not all public investment. It is one part of the state footprint in GDP.";
+  if (title.includes("net exports")) return "Positive means exports exceed imports. Negative means imports are larger, so domestic demand is partly being met from abroad.";
+  if (title.includes("population, total")) return "Read the headline chart as the scale of the whole country. Every later percentage on this page sits on top of this denominator.";
+  if (title.includes("scenario spread")) return "The variants are close, but the gap still represents crores of people. Projection uncertainty is small as a percentage and large in human terms.";
+  if (title.includes("crude rate")) return "The slope is the key: India is still growing, but the annual pace of addition is slowing.";
+  if (title.includes("median age")) return "Median age moves slowly, which is why this rising line matters. It shows the population becoming older even while India remains young overall.";
+  if (title.includes("broad age")) return "This is the quick dependency picture: children, working-age people, and older adults as shares of the total.";
+  if (title.includes("pyramid")) return "The widest bands show where demographic pressure sits today. A rectangular shape would mean an older, slower-growing population.";
+  if (title.includes("5-year age")) return "This is the granular version of the age story. It shows which cohorts are largest instead of compressing everyone into three buckets.";
+  if (title.includes("by sex")) return "The male and female lines move together, but their gap is visible. Use this with the pyramid for the age-specific picture.";
+  if (title.includes("change by decade")) return "This breaks the big rise into periods, so the reader can see when the population added more or less in absolute terms.";
+  if (title.includes("how much changed")) return "Read this as the extra population added, not the latest population repeated. The decade chart above shows how that addition was distributed over time.";
+  return "Use this chart as one view of the evidence, then read it beside the neighbouring charts before drawing a conclusion.";
 }
 
-function visualPayload(visual: VisualSpec) {
-  const source = visual.source;
-  if (visual.kind === "line") {
+function indicatorIdForVisual(visual: VisualSpec) {
+  return visual.source.indicatorId || "";
+}
+
+function slugifyTitle(value: string) {
+  return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function explainerForVisual(visual: VisualSpec, index: number) {
+  const indicatorId = indicatorIdForVisual(visual);
+  const title = visual.title.toLowerCase();
+  const slug = slugifyTitle(visual.title);
+  const generated = chartExplainers.find((item) =>
+    slugifyTitle(item.visualId || "") === slug ||
+    (indicatorId && item.visualId?.endsWith(indicatorId)) ||
+    item.title?.toLowerCase() === visual.title.toLowerCase() ||
+    (item.title && item.title.toLowerCase().includes(visual.title.toLowerCase()))
+  );
+  if (!generated && title.includes("latest gva by sector")) {
     return {
+      index: index + 1,
       title: visual.title,
-      unit: visual.unit,
-      source,
-      rows: visual.lines.flatMap((line) => line.points.map((point) => ({ series: line.label, date: point.date, value: point.value })))
+      whyShowThis: "Total GDP answers the size question. The sector chart answers the next question: what kind of economy creates that output.",
+      howToRead: insightForVisual(visual),
+      mistakeToAvoid: "Do not read sector output as sector employment. Agriculture can support many workers while forming a smaller share of output.",
+      mobileNote: "Use three horizontal bars and short labels."
     };
   }
-  if (visual.kind === "stack") {
+  if (!generated && title.includes("what gdp is made of")) {
     return {
+      index: index + 1,
       title: visual.title,
-      unit: visual.unit,
-      source,
-      rows: visual.segments.map((item) => ({ series: item.label, value: item.value }))
+      whyShowThis: "GDP is not just one giant number. This chart shows the spending pieces behind it.",
+      howToRead: insightForVisual(visual),
+      mistakeToAvoid: "Do not add this up like a household budget. Net exports can be negative because imports are subtracted in GDP accounting.",
+      mobileNote: "Keep the zero line visible because net exports can go below zero."
     };
   }
-  if (visual.kind === "bar") {
+  if (!generated && title.includes("quarterly")) {
     return {
+      index: index + 1,
       title: visual.title,
-      unit: visual.unit,
-      source,
-      rows: visual.bars.map((item) => ({ series: item.label, value: item.value }))
+      whyShowThis: title.includes("nominal")
+        ? "The annual number gives scale. The quarterly nominal line shows the latest current-price size within the year."
+        : "The annual number gives scale. The quarterly real line shows the more recent movement in inflation-adjusted output.",
+      howToRead: insightForVisual(visual),
+      mistakeToAvoid: "Do not compare one quarter directly with a full financial year. The units are rupees, but the time periods are different.",
+      mobileNote: "Use sparse year ticks and a clear latest-point label."
     };
   }
-  if (visual.kind === "change") {
+  if (!generated && (title.includes("trade flows") || title.includes("imports and exports"))) {
     return {
+      index: index + 1,
       title: visual.title,
-      unit: visual.unit,
-      source,
-      rows: visual.items.map((item) => ({
-        series: item.label,
-        startDate: item.start.date,
-        startValue: item.start.value,
-        endDate: item.end.date,
-        endValue: item.end.value,
-        change: item.change,
-        pctChange: item.pctChange
-      }))
+      whyShowThis: "Net exports alone is too compressed. This chart shows the two large flows behind it: what India sells abroad and what it buys from abroad.",
+      howToRead: insightForVisual(visual),
+      mistakeToAvoid: "Do not read a trade deficit as exports being unimportant. It means imports are larger than exports in value.",
+      mobileNote: "Use horizontal bars with a visible zero line for the net export bar."
     };
   }
+  // Curated plan note (from the registry visualPlan) is the fallback before the
+  // generic boilerplate, so every chart gets a specific reason even before the
+  // LLM-generated chartExplainers exist.
+  const note = (visual as { note?: { why?: string; detail?: string; read?: string; watch?: string } }).note;
   return {
-    title: visual.title,
-    unit: visual.unit,
-    source,
-    rows: visual.rows.map((item) => ({ age: item.age, male: item.male, female: item.female }))
+    index: index + 1,
+    title: generated?.title || visual.title,
+    // takeaway = the one-line point; detail = a fuller plain-language paragraph.
+    takeaway: generated?.takeaway || note?.why || generated?.whyShowThis || "What this chart is telling you.",
+    detail: note?.detail || generated?.detail || generated?.whyShowThis || note?.read || insightForVisual(visual),
+    howToRead: generated?.howToRead || note?.read || insightForVisual(visual),
+    mistakeToAvoid: generated?.mistakeToAvoid || note?.watch || "Do not turn one line into the whole story. Check the unit, the source, and the companion charts.",
+    mobileNote: generated?.mobileNote || "Keep the chart simple on phones: fewer ticks, short labels, and one clear takeaway."
   };
 }
 
-function lineGeometry(visual: LineVisual, isLead = false) {
-  const width = isLead ? 1160 : 620;
-  const height = isLead ? 500 : 330;
-  const pad = isLead ? { l: 86, r: 58, t: 38, b: 58 } : { l: 58, r: 34, t: 28, b: 44 };
+const chartDownloadBase = `${Astro.url.pathname.replace(/\/$/, "")}/charts`;
+
+// Cool->hot "temperature" ramp (blue -> marigold -> coral) for severity-graded bars.
+function tempColor(t: number) {
+  t = Math.max(0, Math.min(1, t));
+  const stops: Array<[number, number, number, number]> = [[0, 108, 143, 214], [0.5, 239, 162, 39], [1, 232, 96, 76]];
+  let a = stops[0], b = stops[stops.length - 1];
+  for (let i = 0; i < stops.length - 1; i++) { if (t >= stops[i][0] && t <= stops[i + 1][0]) { a = stops[i]; b = stops[i + 1]; break; } }
+  const f = b[0] > a[0] ? (t - a[0]) / (b[0] - a[0]) : 0;
+  return `rgb(${Math.round(a[1] + (b[1] - a[1]) * f)},${Math.round(a[2] + (b[2] - a[2]) * f)},${Math.round(a[3] + (b[3] - a[3]) * f)})`;
+}
+
+// Diverging blue->white->red colour for a value relative to a centre and spread.
+function stripeColor(value: number, center: number, spread: number) {
+  const t = Math.max(-1, Math.min(1, spread > 0 ? (value - center) / spread : 0));
+  if (t >= 0) {
+    // white -> red
+    const r = 200, g = Math.round(200 - 168 * t), b = Math.round(200 - 168 * t);
+    return `rgb(${r},${Math.max(28, g)},${Math.max(36, b)})`;
+  }
+  // white -> blue
+  const a = -t;
+  return `rgb(${Math.round(200 - 150 * a)},${Math.round(200 - 70 * a)},${Math.round(200 + 40 * a)})`;
+}
+
+// Round axis bounds and ticks to "nice" values (1/2/5 x 10^n), the d3-style algorithm,
+// so a chart reads 0 / 1B / 2B / 3B instead of 0 / 835.1M / 1.7B / 2.5B.
+function niceNum(range: number, round: boolean) {
+  if (!(range > 0) || !Number.isFinite(range)) return 1;
+  const exp = Math.floor(Math.log10(range));
+  const frac = range / Math.pow(10, exp);
+  const nf = round
+    ? (frac < 1.5 ? 1 : frac < 3 ? 2 : frac < 7 ? 5 : 10)
+    : (frac <= 1 ? 1 : frac <= 2 ? 2 : frac <= 5 ? 5 : 10);
+  return nf * Math.pow(10, exp);
+}
+function niceScale(lo: number, hi: number, count = 5) {
+  if (!(hi > lo)) hi = lo + 1;
+  const step = niceNum(niceNum(hi - lo, false) / Math.max(1, count - 1), true);
+  const niceMin = Math.floor(lo / step) * step;
+  const niceMax = Math.ceil(hi / step) * step;
+  const ticks: number[] = [];
+  for (let v = niceMin; v <= niceMax + step * 0.5; v += step) ticks.push(Number(v.toPrecision(12)));
+  return { min: niceMin, max: niceMax, ticks };
+}
+
+function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?: { min?: number; max?: number }) {
+  // The viewBox width is matched to how wide the chart actually renders, so one fixed
+  // axis-font size reads consistently: 2-up (leftover grid) charts render ~half width
+  // and use a narrow box; section-bound charts render full width and use a wide box.
+  // Without this, the same font is tiny on half-width charts and garish on full-width ones.
+  const width = twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000);
+  const isHero = (visual as { size?: string }).size === "hero";
+  const height = isHero ? 560 : isLead ? 500 : 360;
+  const pad = isLead ? { l: 86, r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 58 } : { l: 58, r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 44 };
   const all = visual.lines.flatMap((line) => line.points);
   const values = all.map((point) => point.value);
+  const useLogScale = visual.title.toLowerCase().includes("gdp per person over time");
+  const positiveValues = values.filter((value) => value > 0);
   const rawMin = Math.min(...values);
   const rawMax = Math.max(...values);
-  const min = rawMin < 0 ? rawMin : 0;
-  const max = rawMax * 1.08 || 1;
+  const bounded = bounds && (typeof bounds.min === "number" || typeof bounds.max === "number");
+  const scaleMin = typeof bounds?.min === "number" ? bounds.min : rawMin;
+  const scaleMax = typeof bounds?.max === "number" ? bounds.max : rawMax;
+  const logMinRaw = Math.max(1, (Math.min(...positiveValues) || 1) * 0.8);
+  const logMaxRaw = Math.max(10, (Math.max(...positiveValues) || 10) * 1.18);
+  // Temperature/ratio-like data (range small next to its own values) is not zero-baselined,
+  // or the lines compress into a thin band; magnitude data (range >> min, e.g. emissions,
+  // population) keeps a 0 floor so area height stays meaningful.
+  const tight = !bounded && rawMin > 0 && (rawMax - rawMin) < rawMin;
+  const linear = niceScale(scaleMin < 0 ? scaleMin : tight ? scaleMin : 0, scaleMax || 1, 5);
+  const min = useLogScale ? Math.log10(logMinRaw) : linear.min;
+  const max = useLogScale ? Math.log10(logMaxRaw) : linear.max;
   const span = max - min || 1;
-  const longest = Math.max(...visual.lines.map((line) => line.points.length));
-  const x = (index: number, count: number) => pad.l + (index / Math.max(1, count - 1)) * (width - pad.l - pad.r);
-  const y = (value: number) => height - pad.b - ((value - min) / span) * (height - pad.t - pad.b);
-  const ticks = Array.from({ length: 5 }, (_, index) => min + (span * index) / 4);
-  const paths = visual.lines.map((line, lineIndex) => {
-    const d = line.points.map((point, index) => `${index === 0 ? "M" : "L"} ${x(index, line.points.length).toFixed(2)} ${y(point.value).toFixed(2)}`).join(" ");
-    const areaD = `${d} L ${x(line.points.length - 1, line.points.length).toFixed(2)} ${height - pad.b} L ${x(0, line.points.length).toFixed(2)} ${height - pad.b} Z`;
+  const plotW = width - pad.l - pad.r;
+  // Position points by real time. Monthly series must use the month too; otherwise all
+  // twelve YYYY-MM points in a year collapse onto one x-position and render as steps.
+  const timeOf = (d: string) => {
+    const m = String(d).match(/^(-?\d{3,4})(?:-(\d{2}))?/);
+    if (!m) return null;
+    const year = Number(m[1]);
+    const month = m[2] ? Number(m[2]) : 1;
+    return year + (Math.max(1, Math.min(12, month)) - 1) / 12;
+  };
+  const totalPoints = visual.lines.reduce((n, l) => n + l.points.length, 0);
+  const timesAll = visual.lines.flatMap((line) => line.points.map((p) => timeOf(p.date))).filter((v): v is number => v !== null);
+  const dateMode = timesAll.length === totalPoints && timesAll.length > 0 && Math.max(...timesAll) > Math.min(...timesAll);
+  const minTime = dateMode ? Math.min(...timesAll) : 0;
+  const maxTime = dateMode ? Math.max(...timesAll) : 1;
+  const xByTime = (time: number) => pad.l + ((time - minTime) / Math.max(1 / 12, maxTime - minTime)) * plotW;
+  const xByIndex = (index: number, count: number) => pad.l + (index / Math.max(1, count - 1)) * plotW;
+  const px = (point: Point, index: number, count: number) => (dateMode ? xByTime(timeOf(point.date) ?? minTime) : xByIndex(index, count));
+  const scaled = (value: number) => useLogScale ? Math.log10(Math.max(1, value)) : value;
+  const y = (value: number) => height - pad.b - ((scaled(value) - min) / span) * (height - pad.t - pad.b);
+  const logTicks = [100, 1000, 10000, 100000].filter((tick) => tick >= logMinRaw * 0.9 && tick <= logMaxRaw * 1.1);
+  const ticks = useLogScale && logTicks.length >= 2 ? logTicks : linear.ticks;
+  const pathsRaw = visual.lines.map((line, lineIndex) => {
+    const d = line.points.map((point, index) => `${index === 0 ? "M" : "L"}${svgCoord(px(point, index, line.points.length))} ${svgCoord(y(point.value))}`).join("");
+    const xFirst = px(line.points[0], 0, line.points.length);
+    const xLast = px(line.points[line.points.length - 1], line.points.length - 1, line.points.length);
+    const areaD = `${d}L${svgCoord(xLast)} ${svgCoord(height - pad.b)}L${svgCoord(xFirst)} ${svgCoord(height - pad.b)}Z`;
     const latest = line.points.at(-1);
-    const latestX = latest ? x(line.points.length - 1, line.points.length) : 0;
+    const latestX = latest ? xLast : 0;
     const latestY = latest ? y(latest.value) : 0;
     return { ...line, d, areaD, latest, latestX, latestY, color: colors[lineIndex % colors.length] };
   });
-  const axisPoints = visual.lines[0]?.points || [];
-  const yearEvery = Math.max(1, Math.ceil(longest / 7));
-  return { width, height, pad, ticks, paths, axisPoints, yearEvery, x, y };
+  const minGap = isLead ? 34 : 24;
+  const labelTop = pad.t + 14;
+  const labelBottom = height - pad.b - 10;
+  const sorted = pathsRaw
+    .map((path, index) => ({ index, y: path.latestY }))
+    .sort((a, b) => a.y - b.y);
+  for (let i = 1; i < sorted.length; i += 1) {
+    if (sorted[i].y - sorted[i - 1].y < minGap) sorted[i].y = sorted[i - 1].y + minGap;
+  }
+  const overflow = sorted.at(-1) ? sorted.at(-1)!.y - labelBottom : 0;
+  if (overflow > 0) {
+    for (const item of sorted) item.y -= overflow;
+  }
+  for (let i = sorted.length - 2; i >= 0; i -= 1) {
+    if (sorted[i + 1].y - sorted[i].y < minGap) sorted[i].y = sorted[i + 1].y - minGap;
+  }
+  for (const item of sorted) item.y = Math.max(labelTop, Math.min(labelBottom, item.y));
+  const labelY = new Map(sorted.map((item) => [item.index, item.y]));
+  const paths = pathsRaw.map((path, index) => ({ ...path, labelY: labelY.get(index) || path.latestY }));
+  const tickCount = isLead ? 5 : 4;
+  let axisTicks: Array<{ xPos: number; label: string }>;
+  if (dateMode) {
+    axisTicks = niceScale(minTime, maxTime, tickCount).ticks
+      .filter((time) => time >= minTime && time <= maxTime)
+      .map((time) => ({ xPos: xByTime(time), label: String(Math.round(time)) }));
+  } else {
+    const ap = visual.lines[0]?.points || [];
+    axisTicks = Array.from({ length: tickCount }, (_, i) => Math.round((i / (tickCount - 1)) * Math.max(0, ap.length - 1)))
+      .filter((v, i, arr) => arr.indexOf(v) === i)
+      .filter((i) => ap[i])
+      .map((i) => ({ xPos: xByIndex(i, ap.length), label: formatAxisLabel(ap[i].date) }));
+  }
+  return { width, height, pad, ticks, paths, axisTicks, y };
 }
+
+function groupedBarGeometry(visual: GroupedBarVisual) {
+  const width = 1160;
+  const height = 430;
+  const pad = { l: 86, r: 46, t: 34, b: 70 };
+  const values = visual.groups.flatMap((group) => group.values);
+  const max = Math.max(...values, 1) * 1.12;
+  const plotW = width - pad.l - pad.r;
+  const plotH = height - pad.t - pad.b;
+  const groupW = plotW / Math.max(1, visual.groups.length);
+  const barGap = 5;
+  const barW = Math.max(8, Math.min(30, (groupW - 18 - barGap) / Math.max(1, visual.series.length)));
+  const y = (value: number) => height - pad.b - (value / max) * plotH;
+  const ticks = Array.from({ length: 5 }, (_, index) => (max * index) / 4);
+  return { width, height, pad, max, groupW, barGap, barW, y, ticks };
+}
+
+function scatterGeometry(visual: ScatterVisual) {
+  const width = 1160;
+  const height = 520;
+  const pad = { l: 94, r: 120, t: 44, b: 86 };
+  const plotW = width - pad.l - pad.r;
+  const plotH = height - pad.t - pad.b;
+  const xSpan = visual.xMax - visual.xMin || 1;
+  const ySpan = visual.yMax - visual.yMin || 1;
+  const x = (value: number) => pad.l + ((value - visual.xMin) / xSpan) * plotW;
+  const y = (value: number) => height - pad.b - ((value - visual.yMin) / ySpan) * plotH;
+  const sizes = visual.points.map((point) => point.size || 0).filter((value) => value > 0);
+  const maxSize = Math.max(...sizes, 1);
+  const r = (value?: number | null) => 5 + Math.sqrt(Math.max(0, value || 0) / maxSize) * 17;
+  const ticks = [0, 25, 50, 75, 100];
+  const labelExcluded = new Set([
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu"
+  ]);
+  const labelledPoints = [...visual.points]
+    .filter((point) => !labelExcluded.has(point.label))
+    .sort((a, b) => (b.x * b.y * (b.size || 1)) - (a.x * a.y * (a.size || 1)))
+    .slice(0, 5);
+  const labelled = new Set(labelledPoints.map((point) => point.label));
+  const rawLabels = labelledPoints.map((point) => {
+    const cx = x(point.x);
+    const cy = y(point.y);
+    const radius = r(point.size);
+    const side = point.x >= 70 ? "left" : "right";
+    const textX = side === "left" ? cx - radius - 24 : cx + radius + 24;
+    return {
+      label: point.label,
+      text: point.label,
+      side,
+      x: textX,
+      y: cy - radius - 5,
+      lineX1: side === "left" ? cx - radius * 0.65 : cx + radius * 0.65,
+      lineY1: cy - radius * 0.65,
+      lineX2: side === "left" ? textX + 5 : textX - 5
+    };
+  });
+  const labelsBySide = ["left", "right"].flatMap((side) => {
+    const items = rawLabels.filter((item) => item.side === side).sort((a, b) => a.y - b.y);
+    const minGap = 34;
+    const top = pad.t + 16;
+    const bottom = height - pad.b - 12;
+    for (let i = 1; i < items.length; i += 1) {
+      if (items[i].y - items[i - 1].y < minGap) items[i].y = items[i - 1].y + minGap;
+    }
+    const overflow = items.at(-1) ? Math.max(0, items.at(-1)!.y - bottom) : 0;
+    if (overflow) for (const item of items) item.y -= overflow;
+    for (let i = items.length - 2; i >= 0; i -= 1) {
+      if (items[i + 1].y - items[i].y < minGap) items[i].y = items[i + 1].y - minGap;
+    }
+    const underflow = items[0] ? Math.max(0, top - items[0].y) : 0;
+    if (underflow) for (const item of items) item.y += underflow;
+    return items;
+  });
+  const labelPositions = new Map(labelsBySide.map((item) => [item.label, item]));
+  return { width, height, pad, x, y, r, ticks, labelled, labelPositions };
+}
+
+const selectedKpis = kpisToShow(lockedNumbers);
+const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, index + startIndex));
 ---
 
 {visuals.length ? (
-  <section class="section viz-section">
+  <section class={`section viz-section ${sectionClass}`}>
     <div class="layers-top">
-      <span class="lbl">The data</span>
-      <span class="ai-badge"><span class="sp"></span>Built from local artifacts</span>
+      <span class="lbl">{sectionLabel}</span>
     </div>
-    {lockedNumbers.length ? (
+    {showKpis && selectedKpis.length ? (
       <div class="visual-kpis">
-        {lockedNumbers.slice(0, 5).map((item) => {
-          const parts = valueParts(item);
+        {selectedKpis.map((item) => {
           return (
             <div class="visual-kpi">
-              <span><strong>{parts.number}</strong>{parts.unit ? <em>{parts.unit}</em> : null}</span>
+              <span><strong>{kpiValue(item)}</strong></span>
               <p><b>{kpiLabel(item)}</b>{item.date ? <small>{item.date}</small> : null}</p>
             </div>
           );
@@ -209,26 +630,30 @@ function lineGeometry(visual: LineVisual, isLead = false) {
     <div class="viz-grid">
       {visuals.map((visual, visualIndex) => {
         const source = visual.source;
-        const sourceText = `${sourceName(source.sourceId)} · ${source.sourceIndicatorId}`;
-        const chartId = `viz-${visualIndex + 1}`;
+        const sourceText = sourceLabel(source);
         const fileName = fileSafe(visual.title);
+        const chartId = `viz-${fileName}-${visualIndex + 1}`;
+        const note = chartNotes[visualIndex];
         if (visual.kind === "line") {
-          const isLead = visualIndex === 0;
-          const isWideLine = visual.lines.length > 1;
-          const g = lineGeometry(visual as LineVisual, isLead || isWideLine);
+          const size = (visual as { size?: string }).size;
+          const isLead = size === "hero" || (leadFirst && visualIndex === 0 && !size);
+          // Use the large geometry only for big cards (hero / feature). A small
+          // multi-line card must NOT use the 1160-wide geometry, or its axis text
+          // downscales far smaller than the single-line small charts beside it.
+          const isLarge = isLead || size === "feature" || (visualIndex === 0 && leadFirst && !size && visual.lines.length > 1);
+          const g = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"));
           const leadPoint = visual.lines[0]?.points.at(-1);
           return (
-            <article class={cardClass(visualIndex, visual)}>
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head">
                 <div><h2 class="serif">{visual.title}</h2><p>{cleanSubtitle(visual.subtitle, source.sourceId)}</p></div>
                 <span>{visual.unit}</span>
               </div>
-              <div class="viz-actions" id={chartId}>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
                 <button type="button" data-viz-action="svg">SVG</button>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
               {leadPoint ? (
                 <div class={isLead ? "viz-lead-number" : "viz-line-number"}>
                   <span>{fmt(leadPoint.value, visual.unit)}</span>
@@ -242,10 +667,8 @@ function lineGeometry(visual: LineVisual, isLead = false) {
                     <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, visual.unit)}</text>
                   </g>
                 ))}
-                {g.axisPoints.map((point, index) => (
-                  (index % g.yearEvery === 0 || index === g.axisPoints.length - 1) && (
-                    <text class="xaxt" x={g.x(index, g.axisPoints.length)} y={g.height - g.pad.b + 24} text-anchor="middle">{point.date}</text>
-                  )
+                {g.axisTicks.map((tick) => (
+                  <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor="middle">{tick.label}</text>
                 ))}
                 {g.paths.map((path) => (
                   <>
@@ -254,10 +677,15 @@ function lineGeometry(visual: LineVisual, isLead = false) {
                     {path.latest && (
                       <g>
                         <circle cx={path.latestX} cy={path.latestY} r={isLead ? "7" : "5"} fill="#fff" stroke={path.color} stroke-width={isLead ? "4" : "3"} />
-                        {isLead ? (
+                        {isLead && visual.lines.length === 1 ? (
                           <>
-                            <text class="end-v" x={Math.min(g.width - 180, path.latestX + 14)} y={path.latestY - 14}>{fmt(path.latest.value, visual.unit)}</text>
-                            <text class="end-s" x={Math.min(g.width - 180, path.latestX + 15)} y={path.latestY + 10}>{path.label} · {path.latest.date}</text>
+                            <text class="end-v" x={path.latestX - 18} y={path.latestY - 16} text-anchor="end">{fmt(path.latest.value, visual.unit)}</text>
+                          </>
+                        ) : null}
+                        {visual.lines.length > 1 ? (
+                          <>
+                            <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.2" opacity=".4" />
+                            <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{fmt(path.latest.value, visual.unit)}</text>
                           </>
                         ) : null}
                       </g>
@@ -270,9 +698,206 @@ function lineGeometry(visual: LineVisual, isLead = false) {
                   {visual.lines.map((line, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{line.label}</span>)}
                 </div>
               )}
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
               <div class="viz-source">
                 <span>Source</span>
                 {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "linePanels") {
+          const lp = visual as LinePanelsVisual;
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head">
+                <div><h2 class="serif">{lp.title}</h2><p>{cleanSubtitle(lp.subtitle, source.sourceId)}</p></div>
+                <span>{lp.unit}</span>
+              </div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <div class="line-panels">
+                {lp.panels.map((panel) => {
+                  const panelVisual = {
+                    kind: "line",
+                    title: `${lp.title}: ${panel.label}`,
+                    subtitle: lp.subtitle,
+                    unit: lp.unit,
+                    source: lp.source,
+                    lines: panel.lines
+                  } as LineVisual;
+                  const g = lineGeometry(panelVisual, false, false, { min: lp.min, max: lp.max });
+                  return (
+                    <div class="line-panel">
+                      <h3>{panel.label}</h3>
+                      <svg class="viz-svg" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
+                        {g.ticks.map((tick) => (
+                          <g>
+                            <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
+                            <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, lp.unit)}</text>
+                          </g>
+                        ))}
+                        {g.axisTicks.map((tick) => (
+                          <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor="middle">{tick.label}</text>
+                        ))}
+                        {g.paths.map((path) => (
+                          <>
+                            <path d={path.d} fill="none" stroke={path.color} stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round" />
+                            {path.latest ? (
+                              <g>
+                                <circle cx={path.latestX} cy={path.latestY} r="4.5" fill="#fff" stroke={path.color} stroke-width="2.7" />
+                                <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.1" opacity=".4" />
+                                <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{fmt(path.latest.value, lp.unit)}</text>
+                              </g>
+                            ) : null}
+                          </>
+                        ))}
+                      </svg>
+                      <div class="viz-legend">
+                        {panel.lines.map((line, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{line.label}</span>)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "scatter") {
+          const scatter = visual as ScatterVisual;
+          const g = scatterGeometry(scatter);
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head"><div><h2 class="serif">{scatter.title}</h2><p>{cleanSubtitle(scatter.subtitle, source.sourceId)}</p></div><span>{scatter.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <svg class="viz-svg scatter-plot" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={scatter.title}>
+                <rect x={g.x(70)} y={g.pad.t} width={g.width - g.pad.r - g.x(70)} height={g.y(80) - g.pad.t} fill="rgba(211,80,58,0.08)" />
+                {g.ticks.map((tick) => (
+                  <g>
+                    <line x1={g.x(tick)} y1={g.pad.t} x2={g.x(tick)} y2={g.height - g.pad.b} stroke="#ededed" />
+                    <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
+                    <text class="xaxt" x={g.x(tick)} y={g.height - g.pad.b + 24} text-anchor="middle">{tick}%</text>
+                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{tick}%</text>
+                  </g>
+                ))}
+                <line x1={g.x(70)} y1={g.pad.t} x2={g.x(70)} y2={g.height - g.pad.b} stroke="rgba(211,80,58,0.34)" stroke-dasharray="7 7" />
+                <line x1={g.pad.l} y1={g.y(80)} x2={g.width - g.pad.r} y2={g.y(80)} stroke="rgba(211,80,58,0.34)" stroke-dasharray="7 7" />
+                {scatter.points.map((point) => {
+                  const cx = g.x(point.x);
+                  const cy = g.y(point.y);
+                  const vulnerable = point.x >= 70 && point.y >= 80;
+                  const radius = g.r(point.size);
+                  const label = g.labelled.has(point.label);
+                  const placement = g.labelPositions.get(point.label);
+                  const mpce = typeof point.meta?.ruralMpce === "number" ? `, rural MPCE ${fmt(point.meta.ruralMpce, "Rs per person per month")}` : "";
+                  return (
+                    <g>
+                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(211,80,58,0.72)" : "rgba(63,131,120,0.62)"} stroke="#fff" stroke-width="2">
+                        <title>{`${point.label}: heat risk ${fmt(point.x, "%")}%, without cooling proxy ${fmt(point.y, "%")}%, MPI ${fmt(point.size || 0, "%")}%${mpce}`}</title>
+                      </circle>
+                      {label && placement ? (
+                        <>
+                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#aaa" stroke-width="1" />
+                          <text class="point-label" x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"}>{placement.text}</text>
+                        </>
+                      ) : null}
+                    </g>
+                  );
+                })}
+                <text class="axis-title" x={(g.pad.l + g.width - g.pad.r) / 2} y={g.height - 20} text-anchor="middle">{scatter.xLabel}</text>
+                <text class="axis-title" transform={`translate(24 ${(g.pad.t + g.height - g.pad.b) / 2}) rotate(-90)`} text-anchor="middle">{scatter.yLabel}</text>
+                <text class="scatter-callout" x={g.x(72)} y={g.y(80) - 12}>High risk + little cooling</text>
+              </svg>
+              <div class="viz-legend">
+                <span><i style="background:rgba(211,80,58,0.72)"></i>High-risk quadrant</span>
+                <span><i style="background:rgba(63,131,120,0.62)"></i>Other states</span>
+                {scatter.sizeLabel ? <span>{scatter.sizeLabel}</span> : null}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "stripPair") {
+          const sp = visual as StripPairVisual;
+          return (
+            <article class="viz-card viz-wide">
+              <div class="viz-head"><div><h2 class="serif">{sp.title}</h2><p>{cleanSubtitle(sp.subtitle, source.sourceId)}</p></div><span>{sp.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              {sp.rows.map((row) => {
+                const tot = row.segments.reduce((s, x) => s + x.value, 0) || 1;
+                return (
+                  <div class="strip-pair-row">
+                    <span class="strip-pair-label">{row.label}</span>
+                    <div class="share-strip">
+                      {row.segments.map((seg, index) => {
+                        const pct = (seg.value / tot) * 100;
+                        const showLabel = pct >= 11;
+                        const lbl = `${seg.label} · ${Math.round(seg.value)}%`;
+                        return (
+                          <div style={`width:${pct}%;background:${colors[index % colors.length]}`}>
+                            {showLabel ? <span>{lbl}</span> : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+              <div class="strip-legend">
+                {sp.rows[0].segments.map((seg, index) => (
+                  <span class="sl-item"><i style={`background:${colors[index % colors.length]}`}></i>{seg.label}</span>
+                ))}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+                <div class="viz-source"><span>Source</span>{source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}</div>
               </div>
             </article>
           );
@@ -282,24 +907,34 @@ function lineGeometry(visual: LineVisual, isLead = false) {
           const stack = visual as StackVisual;
           const total = stack.segments.reduce((sum, item) => sum + item.value, 0) || 1;
           return (
-            <article class={cardClass(visualIndex, visual)}>
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{stack.title}</h2><p>{cleanSubtitle(stack.subtitle, source.sourceId)}</p></div><span>{stack.unit}</span></div>
-              <div class="viz-actions" id={chartId}>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
               <div class="viz-stack">
-                {stack.segments.map((segment, index) => (
-                  <div class="viz-seg" style={`width:${(segment.value / total) * 100}%;background:${colors[index % colors.length]}`}>
-                    <span>{segment.label}</span>
-                  </div>
-                ))}
+                {stack.segments.map((segment, index) => {
+                  const segPct = (segment.value / total) * 100;
+                  return (
+                    <div class="viz-seg" style={`width:${segPct}%;background:${colors[index % colors.length]}`}>
+                      {segPct >= 9 ? <span>{segment.label}</span> : null}
+                    </div>
+                  );
+                })}
               </div>
               <div class="viz-bars">
                 {stack.segments.map((segment) => (
                   <div class="viz-bar"><span>{segment.label}</span><div><i style={`width:${(segment.value / total) * 100}%`}></i></div><b>{fmt(segment.value, stack.unit)}</b></div>
                 ))}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
               </div>
               <div class="viz-source">
                 <span>Source</span>
@@ -311,30 +946,173 @@ function lineGeometry(visual: LineVisual, isLead = false) {
 
         if (visual.kind === "bar") {
           const bar = visual as BarVisual;
-          const max = Math.max(...bar.bars.map((item) => item.value), 1);
-          const isShare = /%/.test(bar.unit) && bar.bars.length <= 6;
-          const total = bar.bars.reduce((sum, item) => sum + item.value, 0) || 1;
+          const max = Math.max(...bar.bars.map((item) => Math.abs(item.value)), 1);
+          const isLog = (bar as { scale?: string }).scale === "log";
+          const logVals = bar.bars.map((b) => b.value).filter((v) => v > 0);
+          const logMin = isLog && logVals.length ? Math.log(Math.min(...logVals)) : 0;
+          const logSpan = (isLog && logVals.length ? Math.log(Math.max(...logVals)) : 1) - logMin || 1;
+          const logW = (v: number) => v > 0 ? 4 + ((Math.log(v) - logMin) / logSpan) * 95 : 2;
+          const logColor = (v: number) => tempColor(v > 0 ? (Math.log(v) - logMin) / logSpan : 0);
+          const hasNegative = bar.bars.some((item) => item.value < 0);
+          const isComparison = Boolean(source.indicatorId?.startsWith("compare.") || source.indicatorId?.startsWith("econ.compare."));
+          // Share-strip only for a few big slices; many small slices (e.g. 6 age
+          // groups with a 2% tail) render far more legibly as horizontal bars.
+          const isStrip = (bar as { share?: boolean }).share === true;
+          const isShare = isStrip || (/%/.test(bar.unit) && bar.bars.length <= 4 && !hasNegative && !isComparison);
+          const total = bar.bars.reduce((sum, item) => sum + Math.max(0, item.value), 0) || 1;
+          const groupedBars = [...new Set(bar.bars.map((item) => item.group).filter(Boolean))] as string[];
           return (
-            <article class={cardClass(visualIndex, visual)}>
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{bar.title}</h2><p>{cleanSubtitle(bar.subtitle, source.sourceId)}</p></div><span>{bar.unit}</span></div>
-              <div class="viz-actions" id={chartId}>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
               {isShare ? (
                 <div class="share-strip">
-                  {bar.bars.map((item, index) => (
-                    <div style={`width:${(item.value / total) * 100}%;background:${colors[index % colors.length]}`}>
-                      <span>{item.label}</span>
+                  {bar.bars.map((item, index) => {
+                    const pct = (item.value / total) * 100;
+                    const showLabel = pct >= 11;
+                    const lbl = isStrip ? `${item.label} · ${Math.round(item.value)}%` : item.label;
+                    return (
+                    <div style={`width:${pct}%;background:${colors[index % colors.length]}`}>
+                      {showLabel ? <span>{lbl}</span> : null}
                     </div>
+                    );
+                  })}
+                </div>
+              ) : null}
+              {isStrip ? (
+                <div class="strip-legend">
+                  {bar.bars.map((item, index) => (
+                    <span class="sl-item"><i style={`background:${colors[index % colors.length]}`}></i>{item.label} · {Math.round(item.value)}%</span>
                   ))}
                 </div>
               ) : null}
+              {!isStrip && groupedBars.length ? (
+              <div class="viz-bar-groups">
+                {groupedBars.map((group) => {
+                  const items = bar.bars.filter((item) => item.group === group);
+                  const groupMax = Math.max(100, ...items.map((item) => Math.abs(item.value)));
+                  return (
+                    <div class="viz-bar-group">
+                      <h3>{group}</h3>
+                      <div class="viz-bars">
+                        {items.map((item) => (
+                          <div class="viz-bar">
+                            <span>{item.label}</span>
+                            <div class="viz-bar-track">
+                              <i style={`width:${(item.value / groupMax) * 100}%`}></i>
+                            </div>
+                            <b>{fmt(item.value, bar.unit)}</b>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              ) : !isStrip ? (
               <div class="viz-bars">
                 {bar.bars.map((item) => (
-                  <div class="viz-bar"><span>{item.label}</span><div><i style={`width:${isShare ? item.value : (item.value / max) * 100}%`}></i></div><b>{fmt(item.value, bar.unit)}</b></div>
+                  <div class="viz-bar">
+                    <span>{item.label}</span>
+                    <div class={hasNegative ? "viz-bar-track bipolar" : "viz-bar-track"}>
+                      <i class={item.value < 0 ? "neg" : ""} style={hasNegative
+                        ? `width:${Math.max(2, (Math.abs(item.value) / max) * 50)}%;margin-left:${item.value < 0 ? 50 - (Math.abs(item.value) / max) * 50 : 50}%;`
+                        : isLog
+                        ? `width:${logW(item.value)}%;background:${logColor(item.value)}`
+                        : `width:${isShare ? item.value : (item.value / max) * 100}%`}
+                      ></i>
+                    </div>
+                    <b>{fmt(item.value, bar.unit)}</b>
+                  </div>
                 ))}
+              </div>
+              ) : null}
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "groupedBar") {
+          const grouped = visual as GroupedBarVisual;
+          const g = groupedBarGeometry(grouped);
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head"><div><h2 class="serif">{grouped.title}</h2><p>{cleanSubtitle(grouped.subtitle, source.sourceId)}</p></div><span>{grouped.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <svg class="viz-svg grouped-bars" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={grouped.title}>
+                {g.ticks.map((tick) => (
+                  <g>
+                    <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
+                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, grouped.unit)}</text>
+                  </g>
+                ))}
+                {grouped.groups.map((group, groupIndex) => {
+                  const groupX = g.pad.l + groupIndex * g.groupW;
+                  const centerX = groupX + g.groupW / 2;
+                  const barsW = grouped.series.length * g.barW + (grouped.series.length - 1) * g.barGap;
+                  const startX = centerX - barsW / 2;
+                  return (
+                    <g>
+                      {group.values.map((value, valueIndex) => {
+                        const x = startX + valueIndex * (g.barW + g.barGap);
+                        const y = g.y(value);
+                        const h = g.height - g.pad.b - y;
+                        const labelX = x + g.barW / 2;
+                        const labelY = g.height - g.pad.b - 10;
+                        return (
+                          <>
+                            <rect x={x} y={y} width={g.barW} height={Math.max(1, h)} fill={colors[valueIndex % colors.length]} />
+                            {h > 58 ? (
+                              <text
+                                class="bar-value-label"
+                                x={labelX}
+                                y={labelY}
+                                text-anchor="start"
+                                transform={`rotate(-90 ${labelX} ${labelY})`}
+                              >
+                                {compactBarLabel(value, grouped.unit)}
+                              </text>
+                            ) : null}
+                          </>
+                        );
+                      })}
+                      <text class="xaxt" x={centerX} y={g.height - g.pad.b + 24} text-anchor="middle">{group.label}</text>
+                    </g>
+                  );
+                })}
+              </svg>
+              <div class="viz-legend">
+                {grouped.series.map((name, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{name}</span>)}
+              </div>
+              <div class="trade-note-row">
+                {grouped.groups.slice(-3).map((group) => (
+                  <span><b>{group.label}</b>{typeof group.net === "number" ? signedFmt(group.net, grouped.unit) : "n/a"} net exports</span>
+                ))}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
               </div>
               <div class="viz-source">
                 <span>Source</span>
@@ -348,34 +1126,308 @@ function lineGeometry(visual: LineVisual, isLead = false) {
           const change = visual as ChangeVisual;
           const max = Math.max(...change.items.map((item) => Math.abs(item.change)), 1);
           return (
-            <article class={cardClass(visualIndex, visual)}>
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head">
                 <div><h2 class="serif">{change.title}</h2><p>{cleanSubtitle(change.subtitle, source.sourceId)}</p></div>
                 <span>{change.unit}</span>
               </div>
-              <div class="viz-actions" id={chartId}>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
               <div class="change-grid">
                 {change.items.slice(0, 4).map((item, index) => (
                   <div class="change-row">
-                    <div>
+                    <div class="change-main">
                       <span>{shortLabel(item.label)}</span>
-                      <b>{fmt(item.start.value, change.unit)}</b>
-                      <small>From {item.start.date}</small>
+                      <b>{signedFmt(item.change, change.unit)}</b>
+                      <small>Added from {item.start.date} to {item.end.date}</small>
                     </div>
-                    <div class="change-track">
+                    <div class="change-track" aria-label={`${shortLabel(item.label)} changed by ${signedFmt(item.change, change.unit)}`}>
                       <i style={`width:${Math.max(5, (Math.abs(item.change) / max) * 100)}%;background:${colors[index % colors.length]}`}></i>
                     </div>
-                    <div>
-                      <span>{pct(item.pctChange)} change</span>
-                      <b>{fmt(item.end.value, change.unit)}</b>
-                      <small>To {item.end.date}</small>
+                    <div class="change-facts">
+                      <span><b>{pct(item.pctChange)}</b><small>Total growth</small></span>
+                      <span><b>{multiple(item.start.value, item.end.value)}</b><small>End vs start</small></span>
+                      {yearSpan(item.start.date, item.end.date) ? (
+                        <span><b>{signedFmt(item.change / (yearSpan(item.start.date, item.end.date) || 1), change.unit)}</b><small>Per year avg</small></span>
+                      ) : null}
                     </div>
                   </div>
                 ))}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "stripes") {
+          const stripes = visual as StripeVisual;
+          const spread = Math.max(Math.abs(stripes.max - stripes.center), Math.abs(stripes.center - stripes.min)) || 1;
+          const n = stripes.stripes.length;
+          const w = 1160, h = 200;
+          const bw = w / n;
+          const first = stripes.stripes[0];
+          const last = stripes.stripes[n - 1];
+          // Year ticks as real HTML below the band (SVG text would be downscaled to ~8px
+          // because the 1160-wide viewBox renders at roughly half that). Force-include the
+          // last year so the axis ends on the latest point, not a sampled gap.
+          const step = Math.max(1, Math.round((n - 1) / 7));
+          const tickIdx: number[] = [];
+          for (let i = 0; i < n; i += step) tickIdx.push(i);
+          // End cleanly on the latest year: replace a near-final tick rather than crowd it.
+          const lastTick = tickIdx[tickIdx.length - 1];
+          if (lastTick !== n - 1) {
+            if (n - 1 - lastTick < step / 2) tickIdx[tickIdx.length - 1] = n - 1;
+            else tickIdx.push(n - 1);
+          }
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head"><div><h2 class="serif">{stripes.title}</h2><p>{cleanSubtitle(stripes.subtitle, source.sourceId)}</p></div><span>{stripes.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <svg class="viz-svg viz-stripes" viewBox={`0 0 ${w} ${h}`} role="img" aria-label={stripes.title} preserveAspectRatio="none">
+                {stripes.stripes.map((s, i) => (
+                  <rect x={i * bw} y={0} width={bw + 0.6} height={h} fill={stripeColor(s.value, stripes.center, spread)} />
+                ))}
+              </svg>
+              <div class="stripe-axis">
+                {tickIdx.map((i) => <span>{formatAxisLabel(stripes.stripes[i].date)}</span>)}
+              </div>
+              <div class="viz-legend">
+                <span><i style={`background:${stripeColor(stripes.min, stripes.center, spread)}`}></i>Cooler ({fmt(stripes.min, stripes.unit)})</span>
+                <span><i style={`background:${stripeColor(stripes.max, stripes.center, spread)}`}></i>Hotter ({fmt(stripes.max, stripes.unit)})</span>
+                <span><b>{first.date}</b> → <b>{last.date}</b></span>
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "sparkGrid") {
+          const sg = visual as SparkGridVisual;
+          const usuffix = /%/.test(sg.unit) ? "%" : "";
+          const sparkPts = (pts) => {
+            const n = pts.length;
+            return pts.map((p, i) => `${(n < 2 ? 0 : (i / (n - 1)) * 100).toFixed(1)},${(34 - (sg.max > 0 ? (p.value / sg.max) * 32 : 0)).toFixed(1)}`).join(" ");
+          };
+          const sparkArea = (pts) => `${sparkPts(pts)} 100,36 0,36`;
+          const startYear = sg.cells[0]?.points?.[0]?.date ?? "";
+          const endYear = sg.cells[0]?.points?.[sg.cells[0].points.length - 1]?.date ?? "";
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head"><div><h2 class="serif">{sg.title}</h2><p>{cleanSubtitle(sg.subtitle, source.sourceId)}</p></div><span>{sg.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <p class="spark-scale">Each chart is one city, {startYear}–{endYear}, all on the same scale: bottom = 0, top = {fmt(sg.max, sg.unit)}{usuffix} {sg.unit}. The big number is the {endYear} value.</p>
+              <div class="spark-grid">
+                {sg.cells.map((c) => {
+                  const col = choroColor(c.latest ?? 0, sg.min, sg.max);
+                  return (
+                    <div class="spark-cell">
+                      <div class="spark-head"><b>{c.label}</b><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em></div>
+                      <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${fmt(c.latest ?? 0, sg.unit)} in ${endYear}`}>
+                        <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
+                        <polygon points={sparkArea(c.points)} fill={col} fill-opacity="0.14" stroke="none" />
+                        <polyline points={sparkPts(c.points)} fill="none" stroke={col} stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+                      </svg>
+                      <div class="spark-axis"><span>{startYear}</span><span>{endYear}</span></div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "rankedChange") {
+          const rc = visual as RankedChangeVisual;
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head"><div><h2 class="serif">{rc.title}</h2><p>{cleanSubtitle(rc.subtitle, source.sourceId)}</p></div><span>{rc.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <div class="ranked-change">
+                <div class="ranked-change-head">
+                  <span>City</span>
+                  <span>{rc.startLabel} avg</span>
+                  <span>{rc.endLabel}</span>
+                  <span>Change</span>
+                </div>
+                {rc.rows.map((row) => {
+                  const startW = Math.max(1, (row.start / rc.max) * 100);
+                  const endW = Math.max(1, (row.end / rc.max) * 100);
+                  return (
+                    <div class="ranked-change-row">
+                      <b>{row.label}</b>
+                      <div class="ranked-change-bar muted" aria-label={`${row.label} baseline ${fmt(row.start, rc.unit)}`}>
+                        <i style={`width:${startW}%`}></i><span>{fmt(row.start, rc.unit)}</span>
+                      </div>
+                      <div class="ranked-change-bar hot" aria-label={`${row.label} latest ${fmt(row.end, rc.unit)}`}>
+                        <i style={`width:${endW}%`}></i><span>{fmt(row.end, rc.unit)}</span>
+                      </div>
+                      <em class={row.change >= 0 ? "pos" : "neg"}>{signedFmt(row.change, rc.unit)}</em>
+                    </div>
+                  );
+                })}
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "scenarioMaps") {
+          const sm = visual as ScenarioMapsVisual;
+          const smGradient = `linear-gradient(90deg, ${choroColor(sm.min, sm.min, sm.max)}, ${choroColor((sm.min + sm.max) / 2, sm.min, sm.max)}, ${choroColor(sm.max, sm.min, sm.max)})`;
+          const usuffix = /%/.test(sm.unit) ? "%" : /°C|degree/i.test(sm.unit) ? "°C" : "";
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head"><div><h2 class="serif">{sm.title}</h2><p>{cleanSubtitle(sm.subtitle, source.sourceId)}</p></div><span>{sm.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <div class="scenmap-row">
+                {sm.panels.map((p) => (
+                  <div class="scenmap-cell">
+                    <b class="scenmap-label">{p.label}</b>
+                    <svg class="viz-svg scenmap-svg" viewBox={sm.viewBox} role="img" aria-label={`${sm.title}: ${p.label}`}>
+                      {p.regions.map((r) => (
+                        <path d={compactSvgPath(r.path)} fill={r.value === null || r.value === undefined ? "#efeae4" : choroColor(r.value, sm.min, sm.max)} stroke="#fff" stroke-width="0.7" stroke-linejoin="round">
+                          <title>{r.name}: {r.value === null || r.value === undefined ? "no data" : `${fmt(r.value, sm.unit)}${usuffix}`}</title>
+                        </path>
+                      ))}
+                    </svg>
+                  </div>
+                ))}
+              </div>
+              <div class="scenmap-legend">
+                <span class="choro-bar" style={`background:${smGradient}`}></span>
+                <span class="choro-ends"><em>{fmt(sm.min, sm.unit)}{usuffix}</em><em>{fmt(sm.max, sm.unit)}{usuffix}</em></span>
+                <span class="choro-cap">{sm.unit}</span>
+              </div>
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
+
+        if (visual.kind === "choropleth") {
+          const cho = visual as ChoroplethVisual;
+          const valued = cho.regions.filter((r): r is { name: string; value: number; path: string } => r.value !== null && r.value !== undefined);
+          const top = [...valued].sort((a, b) => b.value - a.value).slice(0, 3);
+          const bottom = cho.bottomLabel ? [...valued].sort((a, b) => a.value - b.value).slice(0, 3) : [];
+          const vf = (v: number) => choroplethValueLabel(cho, v);
+          const choGradient = `linear-gradient(90deg, ${choroColor(cho.min, cho.min, cho.max, cho.ramp)}, ${choroColor((cho.min + cho.max) / 2, cho.min, cho.max, cho.ramp)}, ${choroColor(cho.max, cho.min, cho.max, cho.ramp)})`;
+          const noDataNames = cho.regions.filter((r) => r.value === null || r.value === undefined).map((r) => r.name);
+          const svgUrl = `${chartDownloadBase}/${fileName}.svg`;
+          const lazyMap = visualIndex > 0 || !leadFirst;
+          return (
+            <article class={cardClass(visualIndex, visual, leadFirst)}>
+              <div class="viz-head"><div><h2 class="serif">{cho.title}</h2><p>{cleanSubtitle(cho.subtitle, source.sourceId)}</p></div><span>{cho.unit}</span></div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`} data-svg-url={svgUrl}>
+                <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <div class="choro-wrap">
+                {lazyMap ? (
+                  <>
+                    <div class="lazy-svg-frame choro-map-frame" data-lazy-svg={svgUrl} aria-label={cho.title} style={`aspect-ratio:${viewBoxAspectRatio(cho.viewBox)}`}></div>
+                    <noscript><img class="viz-svg choro-map" src={svgUrl} alt={cho.title} loading="lazy" /></noscript>
+                  </>
+                ) : <Fragment set:html={renderChoroplethSvg(cho)} />}
+                <div class="choro-side">
+                  <div class="choro-scale">
+                    <span class="choro-bar" style={`background:${choGradient}`}></span>
+                    <span class="choro-ends"><em>{vf(cho.min)}</em><em>{vf(cho.max)}</em></span>
+                    <span class="choro-cap">{cho.unit}</span>
+                    {cho.regions.length > valued.length ? <span class="choro-nodata"><i style="background:#efeae4"></i>not surveyed</span> : null}
+                  </div>
+                  <div class="choro-top">
+                    <b>{cho.rankLabel || "Highest"}</b>
+                    {top.map((r) => <span><em>{r.name}</em>{vf(r.value)}</span>)}
+                  </div>
+                  {bottom.length ? (
+                    <div class="choro-top choro-bottom">
+                      <b>{cho.bottomLabel}</b>
+                      {bottom.map((r) => <span><em>{r.name}</em>{vf(r.value)}</span>)}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+              {noDataNames.length ? (
+                <p class="choro-foot">States shown in grey ({noDataNames.join(", ")}) were not covered by the survey sample, so no estimate exists for them. They are left uncoloured rather than counted as zero.</p>
+              ) : null}
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                </div>
               </div>
               <div class="viz-source">
                 <span>Source</span>
@@ -388,23 +1440,32 @@ function lineGeometry(visual: LineVisual, isLead = false) {
         const pyramid = visual as PyramidVisual;
         const max = Math.max(...pyramid.rows.flatMap((row) => [row.male, row.female]), 1);
         return (
-          <article class={cardClass(visualIndex, visual)}>
+          <article class={cardClass(visualIndex, visual, leadFirst)}>
             <div class="viz-head"><div><h2 class="serif">{pyramid.title}</h2><p>{cleanSubtitle(pyramid.subtitle, source.sourceId)}</p></div><span>{pyramid.year}</span></div>
-            <div class="viz-actions" id={chartId}>
+            <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
               <button type="button" data-viz-action="csv">CSV</button>
               <button type="button" data-viz-action="share">Share</button>
             </div>
-            <script type="application/json" class="viz-data" data-file={fileName} set:html={JSON.stringify(visualPayload(visual))}></script>
             <div class="pyramid">
               {pyramid.rows.map((row) => (
                 <div class="pyr-row">
+                  <b class="pyr-num pyr-num-male">{fmt(row.male, pyramid.unit)}</b>
                   <div class="pyr-side male"><i style={`width:${(row.male / max) * 100}%`}></i></div>
                   <span>{row.age}</span>
                   <div class="pyr-side female"><i style={`width:${(row.female / max) * 100}%`}></i></div>
+                  <b class="pyr-num pyr-num-female">{fmt(row.female, pyramid.unit)}</b>
                 </div>
               ))}
             </div>
             <div class="viz-legend"><span><i style="background:var(--c)"></i>Male</span><span><i style="background:#0b0b0b"></i>Female</span></div>
+            <div class="chart-note">
+              <p class="cn-take serif">{note.takeaway}</p>
+              {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+              <div class="cn-meta">
+                <p><b>How to read</b><span>{note.howToRead}</span></p>
+                <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+              </div>
+            </div>
             <div class="viz-source">
               <span>Source</span>
               {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
@@ -413,62 +1474,5 @@ function lineGeometry(visual: LineVisual, isLead = false) {
         );
       })}
     </div>
-    <script is:inline>
-      function downloadBlob(name, type, content) {
-        const blob = new Blob([content], { type });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = name;
-        document.body.append(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      }
-      function csvEscape(value) {
-        if (value === null || value === undefined) return "";
-        const text = String(value);
-        return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
-      }
-      function payloadToCsv(payload) {
-        const sourceRows = [
-          ["title", payload.title],
-          ["unit", payload.unit],
-          ["sourceId", payload.source?.sourceId],
-          ["sourceIndicatorId", payload.source?.sourceIndicatorId],
-          ["sourceUrl", payload.source?.sourceUrl || ""],
-          []
-        ];
-        const rows = payload.rows || [];
-        const keys = [...new Set(rows.flatMap((row) => Object.keys(row)))];
-        const body = [keys, ...rows.map((row) => keys.map((key) => row[key]))];
-        return [...sourceRows, ...body].map((row) => row.map(csvEscape).join(",")).join("\n");
-      }
-      document.addEventListener("click", async (event) => {
-        const button = event.target.closest("[data-viz-action]");
-        if (!button) return;
-        const card = button.closest(".viz-card");
-        if (!card) return;
-        const action = button.dataset.vizAction;
-        const dataEl = card.querySelector(".viz-data");
-        const file = dataEl?.dataset.file || "indica-chart";
-        if (action === "csv" && dataEl) {
-          downloadBlob(`${file}.csv`, "text/csv;charset=utf-8", payloadToCsv(JSON.parse(dataEl.textContent || "{}")));
-        }
-        if (action === "svg") {
-          const svg = card.querySelector("svg");
-          if (!svg) return;
-          downloadBlob(`${file}.svg`, "image/svg+xml;charset=utf-8", new XMLSerializer().serializeToString(svg));
-        }
-        if (action === "share") {
-          const anchor = card.querySelector(".viz-actions")?.id;
-          const url = `${location.origin}${location.pathname}${anchor ? `#${anchor}` : ""}`;
-          if (navigator.share) await navigator.share({ title: document.title, url });
-          else await navigator.clipboard.writeText(url);
-          button.textContent = "Copied";
-          setTimeout(() => { button.textContent = "Share"; }, 1400);
-        }
-      });
-    </script>
   </section>
 ) : null}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-06-02T07:52:20.525Z",
+  "sourceId": "rbi-dbie",
+  "reportId": 944,
+  "reportName": "Table No 1.4 Outstanding credit of scheduled commercial banks according to occupation",
+  "splitType": "occupation",
+  "evidenceStatus": "candidate_evidence_ready_after_raw_multipart_validation",
+  "artifact": "data/series/rbi-dbie.IN.banking.rbi.bsr1_occupation_credit_quarterly.long.json",
+  "snapshot": "data/snapshots/rbi-dbie/bsr1-occupation-credit-report944-parse-summary.1ee770c2e5ce.json",
+  "rawSnapshot": "data/snapshots/rbi-dbie/bo-report-944.839179.235.multipart.a1f7bf5c27db.multipart",
+  "rawSnapshots": [
+    {
+      "path": "data/snapshots/rbi-dbie/bo-report-944.839179.235.multipart.a1f7bf5c27db.multipart",
+      "rawHash": "a1f7bf5c27db3afa0bfb37b3a05ecad804a02a086cf479b9a9197beb641e7311",
+      "pageInfos": {
+        "width": 7065,
+        "height": 2287,
+        "num": 1,
+        "lastPage": false,
+        "px": 1,
+        "lastPx": false,
+        "py": 1,
+        "lastPy": true,
+        "format": "web-display"
+      }
+    }
+  ],
+  "rawHash": "a1f7bf5c27db3afa0bfb37b3a05ecad804a02a086cf479b9a9197beb641e7311",
+  "artifactHash": "c1a4b3981f1da3691a9bc4c6ada0caa39443531bd80e6cad6edc029fd1ff35f8",
+  "summary": {
+    "reportPages": 1,
+    "periods": 20,
+    "firstPeriod": "2021-06-30",
+    "latestPeriod": "2026-03-31",
+    "splitType": "occupation",
+    "categories": 70,
+    "measures": [
+      "no_of_accounts",
+      "credit_limit",
+      "amount_outstanding"
+    ],
+    "rows": 4200
+  },
+  "limitations": [
+    "This uses the Raylight multipart report-page payload captured after BO/OpenDocument browser initialization.",
+    "The parser does not treat the BO shell itself as evidence; only the preserved multipart source payload is parsed.",
+    "Report 944 covers occupation splits. Other credit reports still need equivalent raw payload captures and parsers before promotion."
+  ]
+}

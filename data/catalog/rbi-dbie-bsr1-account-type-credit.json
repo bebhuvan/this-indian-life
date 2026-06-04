@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-06-02T07:52:20.974Z",
+  "sourceId": "rbi-dbie",
+  "reportId": 945,
+  "reportName": "Table No 1.5 Outstanding credit of scheduled commercial banks according to type of account",
+  "splitType": "account_type",
+  "evidenceStatus": "candidate_evidence_ready_after_raw_multipart_validation",
+  "artifact": "data/series/rbi-dbie.IN.banking.rbi.bsr1_account_type_credit_quarterly.long.json",
+  "snapshot": "data/snapshots/rbi-dbie/bsr1-account_type-credit-report945-parse-summary.6e86e3780f29.json",
+  "rawSnapshot": "data/snapshots/rbi-dbie/bo-report-945.796355.223.multipart.cc305e91b390.multipart",
+  "rawSnapshots": [
+    {
+      "path": "data/snapshots/rbi-dbie/bo-report-945.796355.223.multipart.cc305e91b390.multipart",
+      "rawHash": "cc305e91b39008c73a4d3a49fc7c34b6c7466fc3a11327e552a0958b68abe562",
+      "pageInfos": {
+        "width": 7846,
+        "height": 1024,
+        "num": 1,
+        "lastPage": false,
+        "px": 1,
+        "lastPx": false,
+        "py": 1,
+        "lastPy": true,
+        "format": "web-display"
+      }
+    }
+  ],
+  "rawHash": "cc305e91b39008c73a4d3a49fc7c34b6c7466fc3a11327e552a0958b68abe562",
+  "artifactHash": "d10b84cb2fe5f72f0ab89bec93a29df7a4de61cde7b040d5a9a48af53a72bd70",
+  "summary": {
+    "reportPages": 1,
+    "periods": 20,
+    "firstPeriod": "2021-06-30",
+    "latestPeriod": "2026-03-31",
+    "splitType": "account_type",
+    "categories": 15,
+    "measures": [
+      "no_of_accounts",
+      "credit_limit",
+      "amount_outstanding"
+    ],
+    "rows": 900
+  },
+  "limitations": [
+    "This uses the Raylight multipart report-page payload captured after BO/OpenDocument browser initialization.",
+    "The parser does not treat the BO shell itself as evidence; only the preserved multipart source payload is parsed.",
+    "Report 945 covers account_type splits. Other credit reports still need equivalent raw payload captures and parsers before promotion."
+  ]
+}

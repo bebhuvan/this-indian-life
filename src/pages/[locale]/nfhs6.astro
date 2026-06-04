@@ -1,0 +1,348 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import NfBlock from "../../components/NfBlock.astro";
+import { locales } from "../../data/site";
+import * as N from "../../data/nfhs6.mjs";
+import { markdownBlocks, inlineMarkdownHtml } from "../../data/questions";
+import explainersData from "../../../data/nfhs6/explainers.json";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params;
+type BlockEx = { takeaway?: string; read?: string };
+type TabEx = { answers?: Record<string, string>; intro?: string; macha?: { body?: string; soWhat?: string } };
+const explainers: Record<string, BlockEx & TabEx> = explainersData as any;
+const tabEx = (tabId: string): TabEx => (explainers["__tab__" + tabId] as TabEx) || {};
+
+function kpi(num: number) {
+  const c = N.india(num);
+  return { now: c.total, then: c.nfhs5, label: N.label(num), unit: N.unitFor(num) };
+}
+const tabs = N.TABS;
+
+// Precompute the Q&A spine per tab (Astro templates can't host multi-statement
+// IIFEs): for each editorial question, parse its generated answer markdown and
+// resolve the charts it maps to; collect any unreferenced charts as a remainder.
+const qaByTab: Record<string, { qa: Array<{ q: string; ansBlocks: any[]; blocks: any[]; visibleBlocks: any[]; extraBlocks: any[] }>; remainder: any[] }> = {};
+for (const t of tabs as any[]) {
+  const byId: Record<string, any> = Object.fromEntries(t.blocks.map((b: any) => [b.id, b]));
+  const questions = t.questions || [];
+  const answers = tabEx(t.id).answers || {};
+  const used = new Set<string>(questions.flatMap((q: any) => q.blockIds || []));
+  qaByTab[t.id] = {
+    qa: questions.map((q: any) => {
+      const blocks = (q.blockIds || []).map((id: string) => byId[id]).filter(Boolean);
+      const visibleCount = blocks.length > 0 ? 1 : 0;
+      return {
+        q: q.q,
+        ansBlocks: answers[q.id] ? markdownBlocks(answers[q.id]) : [],
+        blocks,
+        visibleBlocks: blocks.slice(0, visibleCount),
+        extraBlocks: blocks.slice(visibleCount),
+      };
+    }),
+    remainder: t.blocks.filter((b: any) => !used.has(b.id)),
+  };
+}
+
+function visualProminence(b: any, index: number, visibleCount = 1) {
+  if (index === 0) return "feature";
+  if (visibleCount <= 2) return "feature";
+  if (["map", "dumbbell", "slope", "movers", "ranked", "diststrip"].includes(b.kind)) return "feature";
+  return "support";
+}
+---
+
+<Base title="What NFHS-6 reveals about India · This Indian Life" description="The 2023-24 National Family Health Survey, read across eight themes: nutrition, disease, birth, children, fertility, healthcare and women's lives. Every number locked from the official fact sheets." domain="health">
+  <div class="wrap">
+    <Nav active="health" locale={locale} />
+
+    <header class="nf-head">
+      <span class="domain-chip"><span class="tk"></span><span>Health · NFHS-6 2023-24</span></span>
+      <h1 class="serif">What NFHS-6 reveals about India</h1>
+      <p class="muted">The sixth National Family Health Survey reached 679,238 households, 716,397 women and 100,977 men across India and every State/UT except Manipur. Read here across eight themes. Every number is locked from the official fact sheets; the prose around each chart is written to those locked numbers.</p>
+    </header>
+
+    <nav class="nf-tabs" aria-label="Themes">
+      {tabs.map((t) => (
+        <button class="nf-tab" data-tab={t.id} type="button">{t.label}</button>
+      ))}
+    </nav>
+
+    {tabs.map((t) => (
+      <section class="nf-panel" data-panel={t.id} hidden={t.id !== "overview"}>
+        <div class="nf-panel-head">
+          <p class="lbl">{t.title}</p>
+          <h2 class="serif">{t.dek}</h2>
+          {tabEx(t.id).intro && <p class="nf-intro">{tabEx(t.id).intro}</p>}
+        </div>
+
+        <div class="nf-kpis">
+          {t.kpis.map((num) => {
+            const k = kpi(num);
+            const delta = k.now != null && k.then != null ? +(k.now - k.then).toFixed(1) : null;
+            const dir = delta == null ? "flat" : delta > 0 ? "up" : delta < 0 ? "down" : "flat";
+            return (
+              <div class="nf-kpi">
+                <span class="nf-kpi-n serif">{k.now ?? "—"}<span class="nf-kpi-u">{k.unit}</span></span>
+                {delta != null && (
+                  <span class={`nf-kpi-d ${dir}`}>{delta > 0 ? "▲" : delta < 0 ? "▼" : "—"} {Math.abs(delta)} since 2019-21</span>
+                )}
+                <span class="nf-kpi-l">{k.label}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {qaByTab[t.id].qa.map((q) => (
+          <div class="nf-qa">
+            <h2 class="nf-q serif">{q.q}</h2>
+            {q.ansBlocks.length > 0 && (
+              <div class="nf-answer">
+                {q.ansBlocks.map((bl: any) =>
+                  bl.type === "h3" ? <h4>{bl.text}</h4>
+                  : bl.type === "ul" ? <ul>{bl.items.map((it: string) => <li set:html={inlineMarkdownHtml(it)} />)}</ul>
+                  : bl.type === "p" ? <p set:html={inlineMarkdownHtml(bl.text)} />
+                  : null
+                )}
+              </div>
+            )}
+            <div class="nf-visual-run">
+              {q.visibleBlocks.map((b, i) => <NfBlock block={b} ex={explainers[b.id] || {}} prominence={visualProminence(b, i, q.visibleBlocks.length)} />)}
+            </div>
+            {q.extraBlocks.length > 0 && (
+              <details class="nf-extra-charts">
+                <summary>More charts from this question <span>{q.extraBlocks.length}</span></summary>
+                <div class="nf-visual-run nf-visual-run-extra">
+                  {q.extraBlocks.map((b, i) => <NfBlock block={b} ex={explainers[b.id] || {}} prominence={visualProminence(b, i, q.extraBlocks.length)} />)}
+                </div>
+              </details>
+            )}
+          </div>
+        ))}
+        {qaByTab[t.id].remainder.length > 0 && (
+          <details class="nf-more nf-extra-charts">
+            <summary>More from the data <span>{qaByTab[t.id].remainder.length}</span></summary>
+            <div class="nf-visual-run">
+              {qaByTab[t.id].remainder.map((b, i) => <NfBlock block={b} ex={explainers[b.id] || {}} prominence={visualProminence(b, i)} />)}
+            </div>
+          </details>
+        )}
+
+        {t.id === "overview" && (
+          <div class="nf-launch">
+            <p class="lbl">Eight themes</p>
+            <div class="nf-launch-grid">
+              {tabs.filter((x) => x.id !== "overview").map((x) => (
+                <button class="nf-launch-card" data-tab={x.id} type="button">
+                  <span class="serif">{x.title}</span>
+                  <span class="nf-launch-q">{x.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="nf-macha">
+          <p class="lbl">What this means</p>
+          <p class="nf-macha-q serif">{t.macha}</p>
+          {tabEx(t.id).macha?.body && <p class="nf-macha-body">{tabEx(t.id).macha!.body}</p>}
+          {tabEx(t.id).macha?.soWhat && <p class="nf-macha-sowhat">{tabEx(t.id).macha!.soWhat}</p>}
+        </div>
+      </section>
+    ))}
+
+    <footer class="nf-foot">
+      <p class="lbl">Source</p>
+      <p class="muted">International Institute for Population Sciences (IIPS) & Ministry of Health and Family Welfare. National Family Health Survey (NFHS-6), 2023-24: India & State/UT Fact Sheets, May 2026. Results are provisional. Tiles marked “·” are suppressed in the source (fewer than 25 unweighted cases).</p>
+    </footer>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll("[data-tab]"));
+      const panels = Array.from(document.querySelectorAll("[data-panel]"));
+      function show(id) {
+        panels.forEach((p) => (p.hidden = p.getAttribute("data-panel") !== id));
+        document.querySelectorAll(".nf-tab").forEach((b) =>
+          b.classList.toggle("is-active", b.getAttribute("data-tab") === id)
+        );
+        const url = new URL(window.location.href);
+        if (id === "overview") url.searchParams.delete("theme");
+        else url.searchParams.set("theme", id);
+        history.replaceState(null, "", url);
+        window.scrollTo({ top: 0 });
+      }
+      tabs.forEach((b) => b.addEventListener("click", () => show(b.getAttribute("data-tab"))));
+      const initial = new URL(window.location.href).searchParams.get("theme");
+      if (initial && panels.some((p) => p.getAttribute("data-panel") === initial)) show(initial);
+      else document.querySelector('.nf-tab[data-tab="overview"]').classList.add("is-active");
+    })();
+  </script>
+
+  <style is:global>
+    .nf-head { padding: 48px 0 8px; max-width: 760px; }
+    .nf-head h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 300; line-height: 1.05; margin: 14px 0 12px; letter-spacing: -0.01em; }
+    .nf-tabs { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; background: #fff; padding: 12px 0; border-bottom: 1px solid var(--line, #ededed); z-index: 20; margin-bottom: 8px; }
+    .nf-tab { font: 500 0.72rem/1 "DM Sans", sans-serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mid, #5c5c5c); background: none; border: 1px solid var(--ghost, #e7e7e7); border-radius: 2px; padding: 8px 12px; cursor: pointer; transition: all 0.15s; }
+    .nf-tab:hover { color: var(--ink, #0b0b0b); border-color: var(--dim, #a6a6a6); }
+    .nf-tab.is-active { color: #fff; background: var(--health, #15A382); border-color: var(--health, #15A382); }
+    .nf-panel { padding: 16px 0 40px; }
+    .nf-panel-head { max-width: 760px; margin: 18px 0 28px; }
+    .nf-panel-head .lbl { color: var(--health, #15A382); }
+    .nf-panel-head h2 { font-size: clamp(1.5rem, 3.6vw, 2.25rem); font-weight: 300; line-height: 1.22; letter-spacing: -0.01em; }
+    .nf-intro { font: 300 1.06rem/1.7 "DM Sans", sans-serif; color: var(--mid, #5c5c5c); margin: 16px 0 0; max-width: 70ch; }
+    .nf-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line, #ededed); border: 1px solid var(--line, #ededed); margin-bottom: 8px; }
+    .nf-kpi { background: #fff; padding: 18px 16px; display: flex; flex-direction: column; gap: 6px; }
+    .nf-kpi-n { font-size: 2.6rem; font-weight: 300; line-height: 0.9; color: var(--health, #15A382); }
+    .nf-kpi-u { font-size: 1.1rem; color: var(--dim, #a6a6a6); margin-left: 2px; }
+    .nf-kpi-d { font: 500 0.66rem/1 "DM Sans", sans-serif; letter-spacing: 0.02em; }
+    .nf-kpi-d.up { color: #EE6A4C; } .nf-kpi-d.down { color: #15A382; } .nf-kpi-d.flat { color: var(--dim); }
+    .nf-kpi-l { font: 400 0.74rem/1.3 "DM Sans", sans-serif; color: var(--mid, #5c5c5c); }
+
+    .nf-block { padding: 40px 0 44px; border-top: 1px solid var(--line, #ededed); }
+    .nf-block-head { max-width: 820px; margin-bottom: 26px; }
+    .nf-block-head h3 { font: 600 0.74rem/1 "DM Sans", sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: var(--health, #15A382); margin: 0 0 12px; }
+    .nf-take { font: 300 clamp(1.35rem, 2.4vw, 1.9rem)/1.28 "Cormorant Garamond", serif; color: var(--ink, #0b0b0b); margin: 0; letter-spacing: -0.01em; }
+    .nf-fig { margin: 0; min-width: 0; }
+    .nf-chart { width: 100%; max-width: none; }
+    .nf-chart.is-map {
+      display: flex;
+      justify-content: center;
+    }
+    .nf-read { font: 300 1rem/1.66 "DM Sans", sans-serif; color: var(--mid, #5c5c5c); margin: 20px 0 0; max-width: 76ch; }
+    .nf-svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .nf-chart.is-map .nf-svg {
+      width: min(100%, 800px);
+    }
+    .nf-fig figcaption { font: 400 0.74rem/1.4 "DM Sans", sans-serif; color: var(--dim, #a6a6a6); margin-top: 12px; }
+    .nf-svg text { font-family: "DM Sans", sans-serif; font-variant-numeric: tabular-nums; }
+    /* Values are set in the serif (Cormorant) with LINING + TABULAR figures
+       (lnum/tnum) — even-height, evenly-spaced numerals that read elegant and
+       editorial, like the rest of the site's charts. Without lining-nums,
+       Cormorant defaults to old-style figures, which look wrong in a chart. */
+    .nf-svg .grid { stroke: #f1f2f4; stroke-width: 1; }
+    .nf-svg .grid0 { stroke: #dadce0; stroke-width: 1; }
+    .nf-svg .rlab { font-size: 14.8px; font-weight: 500; fill: #282828; letter-spacing: 0; }
+    .nf-svg .vOut { font-family: var(--serif); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 16.8px; fill: #1a1a1a; }
+    .nf-svg .vIn { font-family: var(--serif); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 16px; fill: #fff; }
+    .nf-svg .vDiv { font-family: var(--serif); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 17.5px; }
+    .nf-svg .dchip { font-size: 12.4px; font-weight: 600; letter-spacing: 0.02em; }
+    .nf-svg .lglab { font-size: 12.2px; font-weight: 500; fill: var(--mid, #5c5c5c); }
+    .nf-svg .ax { font-size: 12px; font-weight: 500; fill: #999; }
+    .nf-svg .ind { font-size: 12px; font-weight: 700; fill: var(--ink, #0b0b0b); }
+    .nf-svg .indPill { font-size: 11.5px; font-weight: 600; fill: #fff; letter-spacing: 0.01em; }
+    .nf-svg .indHdr { font-size: 13px; font-weight: 600; fill: var(--mid, #5c5c5c); }
+    .nf-svg .dvh { font-size: 13.5px; font-weight: 700; letter-spacing: 0.02em; }
+    .nf-svg .tval { font-family: var(--serif); font-size: 25px; font-weight: 500; font-variant-numeric: lining-nums tabular-nums; }
+    .nf-svg .tabbr { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; }
+    .nf-svg .rkName { font-size: 12.5px; font-weight: 500; fill: #444; }
+    .nf-svg .rkVal { font-family: var(--serif); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 15.5px; fill: #555; }
+    .nf-svg .vMov { font-family: var(--serif); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 16.5px; fill: #1a1a1a; }
+    .nf-svg .slpHdr { font-size: 12.5px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; fill: var(--mid, #5c5c5c); }
+    .nf-svg .slpName { font-size: 15px; font-weight: 500; fill: #333; letter-spacing: -0.006em; }
+    .nf-svg .slpVal { font-family: var(--serif); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 17px; }
+    .nf-svg .slpAxis { stroke: #e4e5e8; stroke-width: 1; }
+    .nf-svg .slpLead { stroke: #cdced2; stroke-width: 1; }
+    .nf-svg .smName { font-size: 13.5px; font-weight: 500; fill: #282828; letter-spacing: 0; }
+    .nf-svg .smV { font-family: var(--serif); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; font-size: 15.8px; }
+    .nf-svg .smChip { font-size: 12.4px; font-weight: 700; }
+
+    /* Q&A spine — each theme reads as a sequence of questions, answered, then charted */
+    .nf-qa { padding: 8px 0 0; }
+    .nf-q { font-size: clamp(1.5rem, 3.4vw, 2.15rem); font-weight: 300; line-height: 1.18; letter-spacing: -0.01em; margin: 44px 0 0; max-width: 820px; padding-top: 36px; border-top: 1px solid var(--line, #ededed); }
+    .nf-qa:first-of-type .nf-q { border-top: none; padding-top: 8px; margin-top: 8px; }
+    .nf-answer { max-width: 72ch; margin: 18px 0 8px; }
+    .nf-answer p { font: 300 1.06rem/1.7 "DM Sans", sans-serif; color: var(--ink, #0b0b0b); margin: 0 0 14px; }
+    .nf-answer h4 { font: 600 0.78rem/1.3 "DM Sans", sans-serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--health, #15A382); margin: 22px 0 8px; }
+    .nf-answer ul { margin: 0 0 14px; padding-left: 18px; }
+    .nf-answer li { font: 300 1.02rem/1.6 "DM Sans", sans-serif; color: var(--ink, #0b0b0b); margin: 0 0 6px; }
+    .nf-qa .nf-block:first-of-type { border-top: none; padding-top: 14px; }
+    .nf-more { margin-top: 16px; }
+    .nf-more > .lbl { color: var(--dim, #a6a6a6); padding-top: 36px; border-top: 1px solid var(--line, #ededed); }
+    .nf-visual-run {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      align-items: start;
+      max-width: 1180px;
+      margin-top: 28px;
+    }
+    .nf-visual-run > .nf-card {
+      min-width: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      margin: 0;
+    }
+    .nf-visual-run .nf-card.is-feature,
+    .nf-visual-run .nf-card.is-map,
+    .nf-visual-run .nf-card.is-ranked,
+    .nf-visual-run .nf-card.is-dumbbell,
+    .nf-visual-run .nf-card.is-movers,
+    .nf-visual-run .nf-card.is-slope {
+      grid-column: 1 / -1;
+    }
+    .nf-visual-run .nf-card.is-map .nf-card-head,
+    .nf-visual-run .nf-card.is-support .nf-card-head {
+      min-height: 48px;
+    }
+    .nf-extra-charts {
+      max-width: 1180px;
+      margin-top: 20px;
+      border-top: 1px solid var(--line, #ededed);
+    }
+    .nf-extra-charts > summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 15px 0 0;
+      font: 600 0.68rem/1.2 "DM Sans", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim, #a6a6a6);
+    }
+    .nf-extra-charts > summary::-webkit-details-marker { display: none; }
+    .nf-extra-charts > summary::after {
+      content: "+";
+      font: 400 1.15rem/1 "Cormorant Garamond", serif;
+      color: var(--ink, #0b0b0b);
+    }
+    .nf-extra-charts[open] > summary::after { content: "−"; }
+    .nf-extra-charts > summary span {
+      margin-left: auto;
+      color: var(--health, #15A382);
+      letter-spacing: 0;
+      font-size: 0.72rem;
+    }
+    .nf-visual-run-extra {
+      margin-top: 20px;
+    }
+
+    .nf-launch { padding: 36px 0; border-top: 1px solid var(--line, #ededed); }
+    .nf-launch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 14px; }
+    .nf-launch-card { background: #fff; border: none; padding: 22px 18px; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 6px; transition: background 0.15s; }
+    .nf-launch-card:hover { background: var(--paper, #fafafa); }
+    .nf-launch-card .serif { font-size: 1.4rem; font-weight: 300; color: var(--ink); }
+    .nf-launch-q { font: 500 0.68rem/1 "DM Sans", sans-serif; letter-spacing: 0.05em; text-transform: uppercase; color: var(--health, #15A382); }
+    .nf-macha { margin-top: 36px; padding: 30px 28px; background: var(--paper, #fafafa); border-left: 2px solid var(--health, #15A382); }
+    .nf-macha .lbl { color: var(--health, #15A382); }
+    .nf-macha-q { font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 300; font-style: italic; line-height: 1.25; margin-top: 6px; }
+    .nf-macha-body { font: 400 1.04rem/1.7 "DM Sans", sans-serif; color: var(--ink, #0b0b0b); margin: 16px 0 0; max-width: 70ch; }
+    .nf-macha-sowhat { font: 600 1.04rem/1.55 "DM Sans", sans-serif; color: var(--health, #15A382); margin: 14px 0 0; max-width: 70ch; }
+    .nf-macha-sowhat::before { content: "So what — "; font-weight: 700; letter-spacing: 0.02em; }
+    .nf-foot { padding: 40px 0 80px; border-top: 1px solid var(--line, #ededed); margin-top: 20px; max-width: 760px; }
+    @media (max-width: 760px) {
+      .nf-visual-run { grid-template-columns: 1fr; gap: 22px; margin-top: 22px; }
+      .nf-chart { overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+      .nf-chart .nf-svg { min-width: 500px; }
+      .nf-chart.is-map .nf-svg { min-width: 480px; }
+      .nf-chart::-webkit-scrollbar { height: 5px; }
+      .nf-chart::-webkit-scrollbar-thumb { background: #d7d7d7; border-radius: 999px; }
+    }
+  </style>
+</Base>

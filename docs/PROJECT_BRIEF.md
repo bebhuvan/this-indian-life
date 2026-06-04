@@ -34,6 +34,8 @@ Examples:
 
 Datasets are ingredients. The catalog decides which questions matter and which measure answers them best.
 
+The operating editorial standard lives in [EDITORIAL_NORTH_STAR.md](./EDITORIAL_NORTH_STAR.md). In short: a question is only publishable when the page also has an answer thesis, a locked evidence packet, a chart list with distinct narrative jobs, and a visible caveat about what the data cannot prove.
+
 ## Explanation Model
 
 Each chart page has one always-visible bottom line and three explanation registers:
@@ -65,4 +67,3 @@ Launch with 10-25 high-quality pages instead of hundreds of thin pages. The syst
 - Transformations are explicit, versioned, and reproducible.
 - LLM prose is content, not runtime behavior.
 - Multilingual data model from day one, even if the first launch is English-only.
-

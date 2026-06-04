@@ -1,0 +1,3531 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.energy.system",
+  "question": "What powers India?",
+  "priority": "core",
+  "theme": {
+    "id": "energy",
+    "label": "Energy and electricity",
+    "readerQuestions": [
+      "How much energy or electricity is being used?",
+      "What is the fuel mix?",
+      "Is access different from reliability or consumption?",
+      "Is the system getting cleaner as demand grows?"
+    ],
+    "glossaryTerms": [
+      "TWh",
+      "kWh per capita",
+      "electricity access",
+      "carbon intensity",
+      "generation mix"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "energy.ember.generation",
+    "energy.tradestat.crude_oil_imports",
+    "energy.tradestat.coal_imports",
+    "energy.ppac.import_export_petroleum_current"
+  ],
+  "availableIndicatorIds": [
+    "energy.ember.generation",
+    "energy.tradestat.crude_oil_imports",
+    "energy.tradestat.coal_imports",
+    "energy.ppac.import_export_petroleum_current"
+  ],
+  "themeIndicatorIds": [
+    "energy.ember.generation",
+    "energy.tradestat.crude_oil_imports",
+    "energy.tradestat.coal_imports",
+    "energy.ppac.import_export_petroleum_current",
+    "energy.tradestat.lng_imports",
+    "energy.tradestat.crude_oil_imports_partner_history",
+    "energy.ppac.indian_crude_basket_price",
+    "energy.imports.fuel_spend_current",
+    "energy.ppac.lng_imports_current",
+    "energy.tradestat.petroleum_products_imports",
+    "energy.tradestat.coke_imports",
+    "energy.ppac.import_export_petroleum_value_usd",
+    "energy.ember.demand",
+    "energy.ember.carbon_intensity",
+    "energy.electricity_access",
+    "people.population.total"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.energy.ember.generation",
+      "indicatorId": "energy.ember.generation",
+      "title": "Electricity generation by source",
+      "sourceId": "ember",
+      "unit": "TWh",
+      "role": "primary",
+      "recommendedVisualization": "stacked mix bar plus selected source trends",
+      "mobileGuidance": "Use a stacked bar for the latest mix and avoid too many fuel lines on mobile.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.energy.tradestat.crude_oil_imports",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "title": "Crude oil imports by partner",
+      "sourceId": "tradestat",
+      "unit": "US$ million and quantity",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.energy.tradestat.coal_imports",
+      "indicatorId": "energy.tradestat.coal_imports",
+      "title": "Coal imports by partner",
+      "sourceId": "tradestat",
+      "unit": "US$ million and quantity",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.energy.ppac.import_export_petroleum_current",
+      "indicatorId": "energy.ppac.import_export_petroleum_current",
+      "title": "Import/export of crude oil and petroleum products, quantity",
+      "sourceId": "ppac",
+      "unit": "000 metric tonnes",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.energy.tradestat.lng_imports",
+      "indicatorId": "energy.tradestat.lng_imports",
+      "title": "Liquefied natural gas imports by partner",
+      "sourceId": "tradestat",
+      "unit": "US$ million and quantity",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.energy.tradestat.crude_oil_imports_partner_history",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history",
+      "title": "Crude oil imports by partner over time",
+      "sourceId": "tradestat",
+      "unit": "US$ million and quantity",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.energy.ppac.indian_crude_basket_price",
+      "indicatorId": "energy.ppac.indian_crude_basket_price",
+      "title": "Indian crude basket price",
+      "sourceId": "ppac",
+      "unit": "$/bbl",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.energy.imports.fuel_spend_current",
+      "indicatorId": "energy.imports.fuel_spend_current",
+      "title": "Fuel import spend by category",
+      "sourceId": "india-energy-derived",
+      "unit": "US$ billions and ₹ crore",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.energy.ppac.lng_imports_current",
+      "indicatorId": "energy.ppac.lng_imports_current",
+      "title": "LNG imports, quantity and value",
+      "sourceId": "ppac",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.energy.tradestat.petroleum_products_imports",
+      "indicatorId": "energy.tradestat.petroleum_products_imports",
+      "title": "Petroleum oils and products imports by partner",
+      "sourceId": "tradestat",
+      "unit": "US$ million and quantity",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.energy.tradestat.coke_imports",
+      "indicatorId": "energy.tradestat.coke_imports",
+      "title": "Coke and semi-coke imports by partner",
+      "sourceId": "tradestat",
+      "unit": "US$ million and quantity",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.energy.ppac.import_export_petroleum_value_usd",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd",
+      "title": "Import/export of crude oil and petroleum products, value in dollars",
+      "sourceId": "ppac",
+      "unit": "US$ million",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.energy.ember.demand",
+      "indicatorId": "energy.ember.demand",
+      "title": "Electricity demand",
+      "sourceId": "ember",
+      "unit": "TWh",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.energy.ember.carbon_intensity",
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "unit": "gCO2/kWh",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.energy.electricity_access",
+      "indicatorId": "energy.electricity_access",
+      "title": "Access to electricity",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.people.population.total",
+      "indicatorId": "people.population.total",
+      "title": "Population, total",
+      "sourceId": "worldbank",
+      "unit": "people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "electricity-is-the-visible-layer",
+      "title": "Electricity is the visible layer",
+      "chartType": "stack",
+      "beat": "power-layer",
+      "window": "latest",
+      "indicator": "energy.ember.generation",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Most readers feel the energy system through electricity: coal still dominates generation, while clean sources are growing."
+    },
+    {
+      "order": 2,
+      "chartId": "coal-clean-power-and-gas-generation",
+      "title": "Coal, clean power, and gas generation",
+      "chartType": "emberLines",
+      "beat": "power-mix-over-time",
+      "window": "",
+      "indicator": "energy.ember.generation",
+      "series": [
+        {
+          "indicator": "Coal",
+          "label": "Coal"
+        },
+        {
+          "indicator": "Clean",
+          "label": "Clean sources"
+        },
+        {
+          "indicator": "Gas",
+          "label": "Gas"
+        }
+      ],
+      "unit": "TWh",
+      "subtitle": "",
+      "whyThisChart": "The central power-system chart: it shows the absolute work done by coal versus clean generation."
+    },
+    {
+      "order": 3,
+      "chartId": "crude-oil-imports-in-2025-26",
+      "title": "Crude oil imports in 2025-26",
+      "chartType": "ppacMonthlyBars",
+      "beat": "oil-volume",
+      "window": "",
+      "indicator": "energy.ppac.import_export_petroleum_current",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "PPAC is the Indian petroleum source; it shows the monthly crude import flow in the latest available fiscal-year report."
+    },
+    {
+      "order": 4,
+      "chartId": "what-india-pays-per-barrel",
+      "title": "What India pays per barrel",
+      "chartType": "line",
+      "beat": "oil-price",
+      "window": "",
+      "indicator": "energy.ppac.indian_crude_basket_price",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The Indian crude basket price translates global oil markets into the price India actually pays for imported crude."
+    },
+    {
+      "order": 5,
+      "chartId": "fuel-import-bill-in-dollars",
+      "title": "Fuel import bill in dollars",
+      "chartType": "fuelSpendBars",
+      "beat": "fuel-spend-usd",
+      "window": "",
+      "indicator": "energy.imports.fuel_spend_current",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "This shows the money scale of India's imported fuels: crude dominates, but coal, products, and LNG are material."
+    },
+    {
+      "order": 6,
+      "chartId": "fuel-import-bill-in-rupees",
+      "title": "Fuel import bill in rupees",
+      "chartType": "fuelSpendBars",
+      "beat": "fuel-spend-rupees",
+      "window": "",
+      "indicator": "energy.imports.fuel_spend_current",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The rupee view makes the import bill legible in Indian fiscal terms."
+    },
+    {
+      "order": 7,
+      "chartId": "where-india-s-crude-oil-imports-come-from",
+      "title": "Where India's crude oil imports come from",
+      "chartType": "tradestatPartnerBars",
+      "beat": "oil-origin",
+      "window": "",
+      "indicator": "energy.tradestat.crude_oil_imports",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "TradeStat/DGCI&S gives the official India-side partner table for HS 270900 crude oil in 2025-26."
+    },
+    {
+      "order": 8,
+      "chartId": "how-russia-became-a-major-crude-supplier",
+      "title": "How Russia became a major crude supplier",
+      "chartType": "tradestatPartnerHistoryLines",
+      "beat": "oil-origin-shift",
+      "window": "",
+      "indicator": "energy.tradestat.crude_oil_imports_partner_history",
+      "series": [
+        {
+          "indicator": "Russia",
+          "label": "Russia"
+        },
+        {
+          "indicator": "Iraq",
+          "label": "Iraq"
+        },
+        {
+          "indicator": "Saudi Arabia",
+          "label": "Saudi Arabia"
+        },
+        {
+          "indicator": "UAE",
+          "label": "UAE"
+        },
+        {
+          "indicator": "US",
+          "label": "US"
+        },
+        {
+          "indicator": "Iran",
+          "label": "Iran"
+        }
+      ],
+      "unit": "US$ billions",
+      "subtitle": "",
+      "whyThisChart": "The current partner chart needs history: Russia was not a major source in 2017-18, then became India's largest crude supplier after 2022."
+    },
+    {
+      "order": 9,
+      "chartId": "where-india-s-coal-imports-come-from",
+      "title": "Where India's coal imports come from",
+      "chartType": "tradestatPartnerBars",
+      "beat": "coal-origin",
+      "window": "",
+      "indicator": "energy.tradestat.coal_imports",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Coal still powers the grid, and TradeStat shows which countries supply imported coal."
+    },
+    {
+      "order": 10,
+      "chartId": "where-india-s-lng-imports-come-from",
+      "title": "Where India's LNG imports come from",
+      "chartType": "tradestatPartnerBars",
+      "beat": "gas-origin",
+      "window": "",
+      "indicator": "energy.tradestat.lng_imports",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Gas is smaller than coal and oil, but LNG creates another named import channel."
+    },
+    {
+      "order": 11,
+      "chartId": "lng-import-volumes-in-2025-26",
+      "title": "LNG import volumes in 2025-26",
+      "chartType": "ppacMonthlyBars",
+      "beat": "gas-volume",
+      "window": "",
+      "indicator": "energy.ppac.lng_imports_current",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "PPAC's gas page gives the physical monthly LNG import flow, complementing TradeStat's partner-country value table."
+    },
+    {
+      "order": 12,
+      "chartId": "where-petroleum-product-imports-come-from",
+      "title": "Where petroleum product imports come from",
+      "chartType": "tradestatPartnerBars",
+      "beat": "product-origin",
+      "window": "",
+      "indicator": "energy.tradestat.petroleum_products_imports",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "India imports not only crude but also selected petroleum products, so this shows the product side of the oil trade."
+    },
+    {
+      "order": 13,
+      "chartId": "the-grid-is-getting-cleaner-per-unit",
+      "title": "The grid is getting cleaner per unit",
+      "chartType": "line",
+      "beat": "transition",
+      "window": "full",
+      "indicator": "energy.ember.carbon_intensity",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The transition is visible in electricity carbon intensity, even if total energy use keeps rising."
+    },
+    {
+      "order": 14,
+      "chartId": "electricity-demand-keeps-climbing",
+      "title": "Electricity demand keeps climbing",
+      "chartType": "line",
+      "beat": "demand",
+      "window": "full",
+      "indicator": "energy.ember.demand",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Clean power has to grow against rising demand, not a fixed electricity system."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 23.04,
+      "displayValue": "23.04",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 1.11,
+      "displayValue": "1.11",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Clean): generation_twh",
+      "value": 554.81,
+      "displayValue": "554.81",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Clean): share_of_generation_pct",
+      "value": 26.65,
+      "displayValue": "26.65",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Coal): generation_twh",
+      "value": 1474.15,
+      "displayValue": "1,474.15",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Coal): share_of_generation_pct",
+      "value": 70.82,
+      "displayValue": "70.82",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Demand): generation_twh",
+      "value": 2082.82,
+      "displayValue": "2,082.82",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Demand): share_of_generation_pct",
+      "value": 100.06,
+      "displayValue": "100.06",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Fossil): generation_twh",
+      "value": 1526.79,
+      "displayValue": "1,526.79",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Fossil): share_of_generation_pct",
+      "value": 73.35,
+      "displayValue": "73.35",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 1.69,
+      "displayValue": "1.69",
+      "date": "2000",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 0.3,
+      "displayValue": "0.3",
+      "date": "2000",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: serial",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: valuePreviousUsdMillion",
+      "value": 657.81,
+      "displayValue": "657.81",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: valueCurrentUsdMillion",
+      "value": 186.42,
+      "displayValue": "186.42",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: valueGrowthPct",
+      "value": -71.66,
+      "displayValue": "-71.66",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: quantityPrevious",
+      "value": 932834303,
+      "displayValue": "932.83 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: quantityCurrent",
+      "value": 264262000,
+      "displayValue": "264.26 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: quantityGrowthPct",
+      "value": -71.67,
+      "displayValue": "-71.67",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: serial",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: valuePreviousUsdMillion",
+      "value": 3575.53,
+      "displayValue": "3,575.53",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: valueCurrentUsdMillion",
+      "value": 3586.39,
+      "displayValue": "3,586.39",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: valueGrowthPct",
+      "value": 0.3,
+      "displayValue": "0.3",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Crude oil imports by partner: quantityPrevious",
+      "value": 5834311010,
+      "displayValue": "5.83 billion",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "sourceId": "tradestat",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 23.04,
+      "displayValue": "23.04",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 1.11,
+      "displayValue": "1.11",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Clean): generation_twh",
+      "value": 554.81,
+      "displayValue": "554.81",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Clean): share_of_generation_pct",
+      "value": 26.65,
+      "displayValue": "26.65",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Coal): generation_twh",
+      "value": 1474.15,
+      "displayValue": "1,474.15",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Coal): share_of_generation_pct",
+      "value": 70.82,
+      "displayValue": "70.82",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Demand): generation_twh",
+      "value": 2082.82,
+      "displayValue": "2,082.82",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Demand): share_of_generation_pct",
+      "value": 100.06,
+      "displayValue": "100.06",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Fossil): generation_twh",
+      "value": 1526.79,
+      "displayValue": "1,526.79",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Fossil): share_of_generation_pct",
+      "value": 73.35,
+      "displayValue": "73.35",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 1.69,
+      "displayValue": "1.69",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 0.3,
+      "displayValue": "0.3",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Crude oil imports by partner: serial",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: valuePreviousUsdMillion",
+      "value": 657.81,
+      "displayValue": "657.81",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: valueCurrentUsdMillion",
+      "value": 186.42,
+      "displayValue": "186.42",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: valueGrowthPct",
+      "value": -71.66,
+      "displayValue": "-71.66",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: quantityPrevious",
+      "value": 932834303,
+      "displayValue": "932.83 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: quantityCurrent",
+      "value": 264262000,
+      "displayValue": "264.26 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: quantityGrowthPct",
+      "value": -71.67,
+      "displayValue": "-71.67",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: serial",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: valuePreviousUsdMillion",
+      "value": 3575.53,
+      "displayValue": "3,575.53",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: valueCurrentUsdMillion",
+      "value": 3586.39,
+      "displayValue": "3,586.39",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: valueGrowthPct",
+      "value": 0.3,
+      "displayValue": "0.3",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Crude oil imports by partner: quantityPrevious",
+      "value": 5834311010,
+      "displayValue": "5.83 billion",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports"
+    },
+    {
+      "label": "Coal imports by partner: serial",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valuePreviousUsdMillion",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: serial",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valuePreviousUsdMillion",
+      "value": 6848.07,
+      "displayValue": "6,848.07",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valueCurrentUsdMillion",
+      "value": 6222.17,
+      "displayValue": "6,222.17",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valueGrowthPct",
+      "value": -9.14,
+      "displayValue": "-9.14",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: serial",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valuePreviousUsdMillion",
+      "value": 0.73,
+      "displayValue": "0.73",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valueCurrentUsdMillion",
+      "value": 0.71,
+      "displayValue": "0.71",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valueGrowthPct",
+      "value": -3.84,
+      "displayValue": "-3.84",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: serial",
+      "value": 4,
+      "displayValue": "4",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Coal imports by partner: valuePreviousUsdMillion",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coal_imports"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: monthIndex",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: value",
+      "value": 20986,
+      "displayValue": "20,986",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: reportBy",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: monthIndex",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: value",
+      "value": 21329,
+      "displayValue": "21,329",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: reportBy",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: monthIndex",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: value",
+      "value": 20314,
+      "displayValue": "20,314",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: reportBy",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: monthIndex",
+      "value": 4,
+      "displayValue": "4",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: value",
+      "value": 18889,
+      "displayValue": "18,889",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, quantity: reportBy",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "000 metric tonnes",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_current"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: serial",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: valuePreviousUsdMillion",
+      "value": 924.26,
+      "displayValue": "924.26",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: valueCurrentUsdMillion",
+      "value": 1274.56,
+      "displayValue": "1,274.56",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: valueGrowthPct",
+      "value": 37.9,
+      "displayValue": "37.9",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: quantityPrevious",
+      "value": 1685710835,
+      "displayValue": "1.69 billion",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: quantityCurrent",
+      "value": 2256739921,
+      "displayValue": "2.26 billion",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: quantityGrowthPct",
+      "value": 33.87,
+      "displayValue": "33.87",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: serial",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: valuePreviousUsdMillion",
+      "value": 114.38,
+      "displayValue": "114.38",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: valueCurrentUsdMillion",
+      "value": 238.46,
+      "displayValue": "238.46",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: valueGrowthPct",
+      "value": 108.48,
+      "displayValue": "108.48",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Liquefied natural gas imports by partner: quantityPrevious",
+      "value": 192977343,
+      "displayValue": "192.98 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.lng_imports"
+    },
+    {
+      "label": "Crude oil imports by partner over time: fiscalYear",
+      "value": 2017,
+      "displayValue": "2,017",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: valueUsdMillion",
+      "value": 1169.3,
+      "displayValue": "1,169.3",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: quantity",
+      "value": 2963759,
+      "displayValue": "2.96 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: rank",
+      "value": 14,
+      "displayValue": "14",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: fiscalYear",
+      "value": 2017,
+      "displayValue": "2,017",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: valueUsdMillion",
+      "value": 17544.24,
+      "displayValue": "17,544.24",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: quantity",
+      "value": 45740464,
+      "displayValue": "45.74 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: rank",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: fiscalYear",
+      "value": 2017,
+      "displayValue": "2,017",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: valueUsdMillion",
+      "value": 15262.6,
+      "displayValue": "15,262.6",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: quantity",
+      "value": 36162984,
+      "displayValue": "36.16 million",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Crude oil imports by partner over time: rank",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history"
+    },
+    {
+      "label": "Indian crude basket price, latest",
+      "value": 110.36,
+      "displayValue": "110.36",
+      "date": "2026-27",
+      "unit": "$/bbl",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.indian_crude_basket_price"
+    },
+    {
+      "label": "Indian crude basket price, earliest",
+      "value": 44.55,
+      "displayValue": "44.55",
+      "date": "2020-21",
+      "unit": "$/bbl",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.indian_crude_basket_price"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 123.114,
+      "displayValue": "₹123",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 20.895,
+      "displayValue": "₹21",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 26.729100000000003,
+      "displayValue": "₹27",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 13.306319780679031,
+      "displayValue": "₹13",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 1088904,
+      "displayValue": "₹10.9 lakh",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 183890,
+      "displayValue": "₹1.8 lakh",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 235953.49999999997,
+      "displayValue": "₹2.4 lakh",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "Fuel import spend by category: value",
+      "value": 117542.08698319517,
+      "displayValue": "₹1.2 lakh",
+      "date": "",
+      "unit": "US$ billions and ₹ crore",
+      "sourceId": "india-energy-derived",
+      "indicatorId": "energy.imports.fuel_spend_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: monthIndex",
+      "value": 1,
+      "displayValue": "₹1",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: value",
+      "value": 2.096533862,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: monthIndex",
+      "value": 2,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: value",
+      "value": 2.1621493989999996,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: monthIndex",
+      "value": 3,
+      "displayValue": "₹3",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: value",
+      "value": 2.0782157039999998,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: monthIndex",
+      "value": 4,
+      "displayValue": "₹4",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: value",
+      "value": 2.16771996,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: monthIndex",
+      "value": 5,
+      "displayValue": "₹5",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: value",
+      "value": 2.1978402150000003,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: monthIndex",
+      "value": 6,
+      "displayValue": "₹6",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "LNG imports, quantity and value: value",
+      "value": 2.4401134759999996,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.lng_imports_current"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: serial",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valuePreviousUsdMillion",
+      "value": 1.42,
+      "displayValue": "1.42",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valueCurrentUsdMillion",
+      "value": 0.45,
+      "displayValue": "0.45",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valueGrowthPct",
+      "value": -68.37,
+      "displayValue": "-68.37",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: serial",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valuePreviousUsdMillion",
+      "value": 0.14,
+      "displayValue": "0.14",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valueCurrentUsdMillion",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valueGrowthPct",
+      "value": -99.91,
+      "displayValue": "-99.91",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: serial",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valuePreviousUsdMillion",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valueCurrentUsdMillion",
+      "value": 0.01,
+      "displayValue": "0.01",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Petroleum oils and products imports by partner: valueGrowthPct",
+      "value": 103.24,
+      "displayValue": "103.24",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.petroleum_products_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: serial",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valuePreviousUsdMillion",
+      "value": 61.61,
+      "displayValue": "61.61",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: serial",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valuePreviousUsdMillion",
+      "value": 0.09,
+      "displayValue": "0.09",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valueCurrentUsdMillion",
+      "value": 0.55,
+      "displayValue": "0.55",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valueGrowthPct",
+      "value": 535.65,
+      "displayValue": "535.65",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: serial",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valueCurrentUsdMillion",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: serial",
+      "value": 4,
+      "displayValue": "4",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valuePreviousUsdMillion",
+      "value": 0.03,
+      "displayValue": "0.03",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valueCurrentUsdMillion",
+      "value": 0.1,
+      "displayValue": "0.1",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Coke and semi-coke imports by partner: valueGrowthPct",
+      "value": 187.8,
+      "displayValue": "187.8",
+      "date": "",
+      "unit": "US$ million and quantity",
+      "sourceId": "tradestat",
+      "indicatorId": "energy.tradestat.coke_imports"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: monthIndex",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: value",
+      "value": 10664,
+      "displayValue": "10,664",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: reportBy",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: monthIndex",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: value",
+      "value": 10284,
+      "displayValue": "10,284",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: reportBy",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: monthIndex",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: value",
+      "value": 9904,
+      "displayValue": "9,904",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: reportBy",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: monthIndex",
+      "value": 4,
+      "displayValue": "4",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: value",
+      "value": 9696,
+      "displayValue": "9,696",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Import/export of crude oil and petroleum products, value in dollars: reportBy",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "US$ million",
+      "sourceId": "ppac",
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd"
+    },
+    {
+      "label": "Electricity demand: demand_twh",
+      "value": 2082.82,
+      "displayValue": "2,082.82",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
+    },
+    {
+      "label": "Electricity demand: demand_mwh_per_capita",
+      "value": 1.42,
+      "displayValue": "1.42",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
+    },
+    {
+      "label": "Electricity demand: demand_twh",
+      "value": 572.69,
+      "displayValue": "572.69",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
+    },
+    {
+      "label": "Electricity demand: demand_mwh_per_capita",
+      "value": 0.54,
+      "displayValue": "0.54",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 670.13,
+      "displayValue": "670.13",
+      "date": "2025",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 740.04,
+      "displayValue": "740.04",
+      "date": "2000",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
+    },
+    {
+      "label": "Access to electricity, latest",
+      "value": 99.5,
+      "displayValue": "99.5%",
+      "date": "2023",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.electricity_access"
+    },
+    {
+      "label": "Access to electricity, earliest",
+      "value": 50.9,
+      "displayValue": "50.9%",
+      "date": "1993",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.electricity_access"
+    },
+    {
+      "label": "Population, total, latest",
+      "value": 1450935791,
+      "displayValue": "145.1 crore",
+      "date": "2024",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "people.population.total"
+    },
+    {
+      "label": "Population, total, earliest",
+      "value": 435990338,
+      "displayValue": "43.6 crore",
+      "date": "1960",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "people.population.total"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "energy.ember.generation",
+      "title": "Electricity generation by source",
+      "sourceId": "ember",
+      "sourceIndicatorId": "electricity-generation/yearly",
+      "unit": "TWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 416,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "series",
+        "is_aggregate_series",
+        "generation_twh",
+        "share_of_generation_pct"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Bioenergy",
+          "is_aggregate_series": false,
+          "generation_twh": 23.04,
+          "share_of_generation_pct": 1.11
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Clean",
+          "is_aggregate_series": true,
+          "generation_twh": 554.81,
+          "share_of_generation_pct": 26.65
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Coal",
+          "is_aggregate_series": false,
+          "generation_twh": 1474.15,
+          "share_of_generation_pct": 70.82
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Demand",
+          "is_aggregate_series": true,
+          "generation_twh": 2082.82,
+          "share_of_generation_pct": 100.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Fossil",
+          "is_aggregate_series": true,
+          "generation_twh": 1526.79,
+          "share_of_generation_pct": 73.35
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Gas",
+          "is_aggregate_series": false,
+          "generation_twh": 48.54,
+          "share_of_generation_pct": 2.33
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Hydro",
+          "is_aggregate_series": false,
+          "generation_twh": 177.97,
+          "share_of_generation_pct": 8.55
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Hydro, bioenergy and other renewables",
+          "is_aggregate_series": true,
+          "generation_twh": 201.01,
+          "share_of_generation_pct": 9.66
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Net imports",
+          "is_aggregate_series": false,
+          "generation_twh": 1.22,
+          "share_of_generation_pct": 0.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Nuclear",
+          "is_aggregate_series": false,
+          "generation_twh": 53.83,
+          "share_of_generation_pct": 2.59
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.tradestat.crude_oil_imports",
+      "title": "Crude oil imports by partner",
+      "sourceId": "tradestat",
+      "sourceIndicatorId": "270900.imports.2025",
+      "unit": "US$ million and quantity",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 49,
+      "dimensions": [
+        "serial",
+        "country",
+        "valuePreviousUsdMillion",
+        "valueCurrentUsdMillion",
+        "valueGrowthPct",
+        "quantityPrevious",
+        "quantityCurrent",
+        "quantityGrowthPct"
+      ],
+      "latestRows": [
+        {
+          "serial": 1,
+          "country": "ALGERIA",
+          "valuePreviousUsdMillion": 657.81,
+          "valueCurrentUsdMillion": 186.42,
+          "valueGrowthPct": -71.66,
+          "quantityPrevious": 932834303,
+          "quantityCurrent": 264262000,
+          "quantityGrowthPct": -71.67
+        },
+        {
+          "serial": 2,
+          "country": "ANGOLA",
+          "valuePreviousUsdMillion": 3575.53,
+          "valueCurrentUsdMillion": 3586.39,
+          "valueGrowthPct": 0.3,
+          "quantityPrevious": 5834311010,
+          "quantityCurrent": 6755216959,
+          "quantityGrowthPct": 15.78
+        },
+        {
+          "serial": 3,
+          "country": "ARGENTINA",
+          "valuePreviousUsdMillion": 57.55,
+          "valueCurrentUsdMillion": 110.36,
+          "valueGrowthPct": 91.77,
+          "quantityPrevious": 88048349,
+          "quantityCurrent": 182430000,
+          "quantityGrowthPct": 107.19
+        },
+        {
+          "serial": 4,
+          "country": "AUSTRALIA",
+          "valuePreviousUsdMillion": 0,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": 22,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 5,
+          "country": "BELGIUM",
+          "valuePreviousUsdMillion": 0,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": 24,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 6,
+          "country": "BRAZIL",
+          "valuePreviousUsdMillion": 1314.13,
+          "valueCurrentUsdMillion": 2276.27,
+          "valueGrowthPct": 73.21,
+          "quantityPrevious": 2430565650,
+          "quantityCurrent": 4697934027,
+          "quantityGrowthPct": 93.29
+        },
+        {
+          "serial": 7,
+          "country": "BRUNEI",
+          "valuePreviousUsdMillion": 125.82,
+          "valueCurrentUsdMillion": 227.19,
+          "valueGrowthPct": 80.57,
+          "quantityPrevious": 189929000,
+          "quantityCurrent": 392612000,
+          "quantityGrowthPct": 106.72
+        },
+        {
+          "serial": 8,
+          "country": "C AFRI REP",
+          "valuePreviousUsdMillion": 131.39,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": 213876000,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 9,
+          "country": "CAMEROON",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 19.75,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": 35461475,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 10,
+          "country": "CANADA",
+          "valuePreviousUsdMillion": 219.19,
+          "valueCurrentUsdMillion": 46.33,
+          "valueGrowthPct": -78.86,
+          "quantityPrevious": 401581794,
+          "quantityCurrent": 108894295,
+          "quantityGrowthPct": -72.88
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.tradestat.coal_imports",
+      "title": "Coal imports by partner",
+      "sourceId": "tradestat",
+      "sourceIndicatorId": "2701.imports.2025",
+      "unit": "US$ million and quantity",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 36,
+      "dimensions": [
+        "serial",
+        "country",
+        "valuePreviousUsdMillion",
+        "valueCurrentUsdMillion",
+        "valueGrowthPct",
+        "quantityPrevious",
+        "quantityCurrent",
+        "quantityGrowthPct"
+      ],
+      "latestRows": [
+        {
+          "serial": 1,
+          "country": "AFGHANISTAN",
+          "valuePreviousUsdMillion": 0,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 2,
+          "country": "AUSTRALIA",
+          "valuePreviousUsdMillion": 6848.07,
+          "valueCurrentUsdMillion": 6222.17,
+          "valueGrowthPct": -9.14,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 3,
+          "country": "BAHARAIN IS",
+          "valuePreviousUsdMillion": 0.73,
+          "valueCurrentUsdMillion": 0.71,
+          "valueGrowthPct": -3.84,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 4,
+          "country": "BELGIUM",
+          "valuePreviousUsdMillion": 0,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 5,
+          "country": "BHUTAN",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 0.04,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 6,
+          "country": "CANADA",
+          "valuePreviousUsdMillion": 417.43,
+          "valueCurrentUsdMillion": 276.99,
+          "valueGrowthPct": -33.64,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 7,
+          "country": "CHINA P RP",
+          "valuePreviousUsdMillion": 45.11,
+          "valueCurrentUsdMillion": 35.06,
+          "valueGrowthPct": -22.27,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 8,
+          "country": "COLOMBIA",
+          "valuePreviousUsdMillion": 279.42,
+          "valueCurrentUsdMillion": 137.78,
+          "valueGrowthPct": -50.69,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 9,
+          "country": "CROATIA",
+          "valuePreviousUsdMillion": 0.03,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 10,
+          "country": "ETHIOPIA",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 0,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ppac.import_export_petroleum_current",
+      "title": "Import/export of crude oil and petroleum products, quantity",
+      "sourceId": "ppac",
+      "sourceIndicatorId": "import-export:2025-2026:reportBy:1:page:14",
+      "unit": "000 metric tonnes",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 306,
+      "dimensions": [
+        "section",
+        "item",
+        "month",
+        "monthIndex",
+        "value",
+        "financialYear",
+        "reportBy"
+      ],
+      "latestRows": [
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "April",
+          "monthIndex": 1,
+          "value": 20986,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "May",
+          "monthIndex": 2,
+          "value": 21329,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "June",
+          "monthIndex": 3,
+          "value": 20314,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "July",
+          "monthIndex": 4,
+          "value": 18889,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "August",
+          "monthIndex": 5,
+          "value": 19603,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "September",
+          "monthIndex": 6,
+          "value": 20208,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "October",
+          "monthIndex": 7,
+          "value": 21005,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "November",
+          "monthIndex": 8,
+          "value": 21236,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "December",
+          "monthIndex": 9,
+          "value": 21588,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "January",
+          "monthIndex": 10,
+          "value": 21094,
+          "financialYear": "2025-2026",
+          "reportBy": "1"
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.tradestat.lng_imports",
+      "title": "Liquefied natural gas imports by partner",
+      "sourceId": "tradestat",
+      "sourceIndicatorId": "271111.imports.2025",
+      "unit": "US$ million and quantity",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 18,
+      "dimensions": [
+        "serial",
+        "country",
+        "valuePreviousUsdMillion",
+        "valueCurrentUsdMillion",
+        "valueGrowthPct",
+        "quantityPrevious",
+        "quantityCurrent",
+        "quantityGrowthPct"
+      ],
+      "latestRows": [
+        {
+          "serial": 1,
+          "country": "ANGOLA",
+          "valuePreviousUsdMillion": 924.26,
+          "valueCurrentUsdMillion": 1274.56,
+          "valueGrowthPct": 37.9,
+          "quantityPrevious": 1685710835,
+          "quantityCurrent": 2256739921,
+          "quantityGrowthPct": 33.87
+        },
+        {
+          "serial": 2,
+          "country": "AUSTRALIA",
+          "valuePreviousUsdMillion": 114.38,
+          "valueCurrentUsdMillion": 238.46,
+          "valueGrowthPct": 108.48,
+          "quantityPrevious": 192977343,
+          "quantityCurrent": 405827296,
+          "quantityGrowthPct": 110.3
+        },
+        {
+          "serial": 3,
+          "country": "BELGIUM",
+          "valuePreviousUsdMillion": 27.78,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": 69690478,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 4,
+          "country": "CAMEROON",
+          "valuePreviousUsdMillion": 300.73,
+          "valueCurrentUsdMillion": 169.42,
+          "valueGrowthPct": -43.66,
+          "quantityPrevious": 507985585,
+          "quantityCurrent": 329996583,
+          "quantityGrowthPct": -35.04
+        },
+        {
+          "serial": 5,
+          "country": "CHINA P RP",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 32.43,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": 67767144,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 6,
+          "country": "EQUTL GUINEA",
+          "valuePreviousUsdMillion": 403.64,
+          "valueCurrentUsdMillion": 116.98,
+          "valueGrowthPct": -71.02,
+          "quantityPrevious": 691145434,
+          "quantityCurrent": 222871785,
+          "quantityGrowthPct": -67.75
+        },
+        {
+          "serial": 7,
+          "country": "FRANCE",
+          "valuePreviousUsdMillion": 45,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": 68933872,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 8,
+          "country": "INDONESIA",
+          "valuePreviousUsdMillion": 32.48,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": 71888353,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 9,
+          "country": "MAURITANIA",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 16.34,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": 36860456,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 10,
+          "country": "MOZAMBIQUE",
+          "valuePreviousUsdMillion": 252.61,
+          "valueCurrentUsdMillion": 352.92,
+          "valueGrowthPct": 39.71,
+          "quantityPrevious": 519313049,
+          "quantityCurrent": 696942093,
+          "quantityGrowthPct": 34.2
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.tradestat.crude_oil_imports_partner_history",
+      "title": "Crude oil imports by partner over time",
+      "sourceId": "tradestat",
+      "sourceIndicatorId": "270900.imports.partner-history.2017-2025",
+      "unit": "US$ million and quantity",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 54,
+      "dimensions": [
+        "fiscalYear",
+        "fiscalYearLabel",
+        "country",
+        "sourceCountry",
+        "valueUsdMillion",
+        "quantity",
+        "rank"
+      ],
+      "latestRows": [
+        {
+          "fiscalYear": "2017",
+          "fiscalYearLabel": "2017-18",
+          "country": "Russia",
+          "sourceCountry": "RUSSIA",
+          "valueUsdMillion": 1169.3,
+          "quantity": 2963759,
+          "rank": 14
+        },
+        {
+          "fiscalYear": "2017",
+          "fiscalYearLabel": "2017-18",
+          "country": "Iraq",
+          "sourceCountry": "IRAQ",
+          "valueUsdMillion": 17544.24,
+          "quantity": 45740464,
+          "rank": 1
+        },
+        {
+          "fiscalYear": "2017",
+          "fiscalYearLabel": "2017-18",
+          "country": "Saudi Arabia",
+          "sourceCountry": "SAUDI ARAB",
+          "valueUsdMillion": 15262.6,
+          "quantity": 36162984,
+          "rank": 2
+        },
+        {
+          "fiscalYear": "2017",
+          "fiscalYearLabel": "2017-18",
+          "country": "UAE",
+          "sourceCountry": "U ARAB EMTS",
+          "valueUsdMillion": 6122.2,
+          "quantity": 14294378,
+          "rank": 5
+        },
+        {
+          "fiscalYear": "2017",
+          "fiscalYearLabel": "2017-18",
+          "country": "US",
+          "sourceCountry": "U S A",
+          "valueUsdMillion": 609.47,
+          "quantity": 1445747,
+          "rank": 18
+        },
+        {
+          "fiscalYear": "2017",
+          "fiscalYearLabel": "2017-18",
+          "country": "Iran",
+          "sourceCountry": "IRAN",
+          "valueUsdMillion": 8978.76,
+          "quantity": 22597564,
+          "rank": 3
+        },
+        {
+          "fiscalYear": "2018",
+          "fiscalYearLabel": "2018-19",
+          "country": "Russia",
+          "sourceCountry": "RUSSIA",
+          "valueUsdMillion": 1180.91,
+          "quantity": 2219741,
+          "rank": 15
+        },
+        {
+          "fiscalYear": "2018",
+          "fiscalYearLabel": "2018-19",
+          "country": "Iraq",
+          "sourceCountry": "IRAQ",
+          "valueUsdMillion": 22265.04,
+          "quantity": 46612692,
+          "rank": 1
+        },
+        {
+          "fiscalYear": "2018",
+          "fiscalYearLabel": "2018-19",
+          "country": "Saudi Arabia",
+          "sourceCountry": "SAUDI ARAB",
+          "valueUsdMillion": 21381.04,
+          "quantity": 40335644,
+          "rank": 2
+        },
+        {
+          "fiscalYear": "2018",
+          "fiscalYearLabel": "2018-19",
+          "country": "UAE",
+          "sourceCountry": "U ARAB EMTS",
+          "valueUsdMillion": 9512.48,
+          "quantity": 17491832,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ppac.indian_crude_basket_price",
+      "title": "Indian crude basket price",
+      "sourceId": "ppac",
+      "sourceIndicatorId": "international-prices-crude-oil.indian-basket.$-per-bbl",
+      "unit": "$/bbl",
+      "frequency": "fiscal-year average",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 5,
+      "earliest": {
+        "date": "2020-21",
+        "value": 44.55
+      },
+      "latest": {
+        "date": "2026-27",
+        "value": 110.36
+      }
+    },
+    {
+      "indicatorId": "energy.imports.fuel_spend_current",
+      "title": "Fuel import spend by category",
+      "sourceId": "india-energy-derived",
+      "sourceIndicatorId": "ppac-and-tradestat.fuel-import-spend.2025-2026",
+      "unit": "US$ billions and ₹ crore",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [
+        "item",
+        "measure",
+        "value",
+        "unit",
+        "sourceDetail",
+        "fiscalYear"
+      ],
+      "latestRows": [
+        {
+          "item": "Crude oil",
+          "measure": "usd_billion",
+          "value": 123.114,
+          "unit": "US$ billions",
+          "sourceDetail": "PPAC import/export value in dollars",
+          "fiscalYear": "2025-2026"
+        },
+        {
+          "item": "Petroleum products",
+          "measure": "usd_billion",
+          "value": 20.895,
+          "unit": "US$ billions",
+          "sourceDetail": "PPAC import/export value in dollars",
+          "fiscalYear": "2025-2026"
+        },
+        {
+          "item": "Coal",
+          "measure": "usd_billion",
+          "value": 26.729100000000003,
+          "unit": "US$ billions",
+          "sourceDetail": "TradeStat HS 2701 import value in dollars",
+          "fiscalYear": "2025-2026"
+        },
+        {
+          "item": "LNG",
+          "measure": "usd_billion",
+          "value": 13.306319780679031,
+          "unit": "US$ billions",
+          "sourceDetail": "PPAC LNG imports value in dollars",
+          "fiscalYear": "2025-2026"
+        },
+        {
+          "item": "Crude oil",
+          "measure": "rupees_crore",
+          "value": 1088904,
+          "unit": "₹ crore",
+          "sourceDetail": "PPAC import/export value in rupees",
+          "fiscalYear": "2025-2026"
+        },
+        {
+          "item": "Petroleum products",
+          "measure": "rupees_crore",
+          "value": 183890,
+          "unit": "₹ crore",
+          "sourceDetail": "PPAC import/export value in rupees",
+          "fiscalYear": "2025-2026"
+        },
+        {
+          "item": "Coal",
+          "measure": "rupees_crore",
+          "value": 235953.49999999997,
+          "unit": "₹ crore",
+          "sourceDetail": "TradeStat HS 2701 import value in rupees",
+          "fiscalYear": "2025-2026"
+        },
+        {
+          "item": "LNG",
+          "measure": "rupees_crore",
+          "value": 117542.08698319517,
+          "unit": "₹ crore",
+          "sourceDetail": "PPAC LNG imports value in rupees",
+          "fiscalYear": "2025-2026"
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ppac.lng_imports_current",
+      "title": "LNG imports, quantity and value",
+      "sourceId": "ppac",
+      "sourceIndicatorId": "https://ppac.gov.in/uploads/page-images/1778125589_NG-C-LNG-Import.xls",
+      "unit": "MMT, MMSCM, US$ million, ₹ crore",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 52,
+      "dimensions": [
+        "item",
+        "measure",
+        "unit",
+        "month",
+        "monthIndex",
+        "value",
+        "financialYear"
+      ],
+      "latestRows": [
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "April",
+          "monthIndex": 1,
+          "value": 2.096533862,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "May",
+          "monthIndex": 2,
+          "value": 2.1621493989999996,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "June",
+          "monthIndex": 3,
+          "value": 2.0782157039999998,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "July",
+          "monthIndex": 4,
+          "value": 2.16771996,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "August",
+          "monthIndex": 5,
+          "value": 2.1978402150000003,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "September",
+          "monthIndex": 6,
+          "value": 2.4401134759999996,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "October",
+          "monthIndex": 7,
+          "value": 2.444712431,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "November",
+          "monthIndex": 8,
+          "value": 2.009665144,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "December",
+          "monthIndex": 9,
+          "value": 2.297507125,
+          "financialYear": "2025-2026"
+        },
+        {
+          "item": "Total LNG Imports (Long Term, Spot)",
+          "measure": "lng_imports_mmt",
+          "unit": "MMT",
+          "month": "January",
+          "monthIndex": 10,
+          "value": 2.413897461,
+          "financialYear": "2025-2026"
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.tradestat.petroleum_products_imports",
+      "title": "Petroleum oils and products imports by partner",
+      "sourceId": "tradestat",
+      "sourceIndicatorId": "2710.imports.2025",
+      "unit": "US$ million and quantity",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 113,
+      "dimensions": [
+        "serial",
+        "country",
+        "valuePreviousUsdMillion",
+        "valueCurrentUsdMillion",
+        "valueGrowthPct",
+        "quantityPrevious",
+        "quantityCurrent",
+        "quantityGrowthPct"
+      ],
+      "latestRows": [
+        {
+          "serial": 1,
+          "country": "ALGERIA",
+          "valuePreviousUsdMillion": 1.42,
+          "valueCurrentUsdMillion": 0.45,
+          "valueGrowthPct": -68.37,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 2,
+          "country": "ANGOLA",
+          "valuePreviousUsdMillion": 0.14,
+          "valueCurrentUsdMillion": 0,
+          "valueGrowthPct": -99.91,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 3,
+          "country": "ARGENTINA",
+          "valuePreviousUsdMillion": 0,
+          "valueCurrentUsdMillion": 0.01,
+          "valueGrowthPct": 103.24,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 4,
+          "country": "ARUBA",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 0.26,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 5,
+          "country": "AUSTRALIA",
+          "valuePreviousUsdMillion": 2.95,
+          "valueCurrentUsdMillion": 3.86,
+          "valueGrowthPct": 30.99,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 6,
+          "country": "AUSTRIA",
+          "valuePreviousUsdMillion": 0.23,
+          "valueCurrentUsdMillion": 0.04,
+          "valueGrowthPct": -81.17,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 7,
+          "country": "AZERBAIJAN",
+          "valuePreviousUsdMillion": 0,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 8,
+          "country": "BAHAMAS",
+          "valuePreviousUsdMillion": 0.44,
+          "valueCurrentUsdMillion": 0.38,
+          "valueGrowthPct": -11.64,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 9,
+          "country": "BAHARAIN IS",
+          "valuePreviousUsdMillion": 19.32,
+          "valueCurrentUsdMillion": 14.8,
+          "valueGrowthPct": -23.4,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 10,
+          "country": "BANGLADESH PR",
+          "valuePreviousUsdMillion": 0.43,
+          "valueCurrentUsdMillion": 0.06,
+          "valueGrowthPct": -86.01,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.tradestat.coke_imports",
+      "title": "Coke and semi-coke imports by partner",
+      "sourceId": "tradestat",
+      "sourceIndicatorId": "2704.imports.2025",
+      "unit": "US$ million and quantity",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 25,
+      "dimensions": [
+        "serial",
+        "country",
+        "valuePreviousUsdMillion",
+        "valueCurrentUsdMillion",
+        "valueGrowthPct",
+        "quantityPrevious",
+        "quantityCurrent",
+        "quantityGrowthPct"
+      ],
+      "latestRows": [
+        {
+          "serial": 1,
+          "country": "AUSTRALIA",
+          "valuePreviousUsdMillion": 61.61,
+          "valueCurrentUsdMillion": null,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 2,
+          "country": "BAHARAIN IS",
+          "valuePreviousUsdMillion": 0.09,
+          "valueCurrentUsdMillion": 0.55,
+          "valueGrowthPct": 535.65,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 3,
+          "country": "BELGIUM",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 0,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 4,
+          "country": "BHUTAN",
+          "valuePreviousUsdMillion": 0.03,
+          "valueCurrentUsdMillion": 0.1,
+          "valueGrowthPct": 187.8,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 5,
+          "country": "CHINA P RP",
+          "valuePreviousUsdMillion": 160.94,
+          "valueCurrentUsdMillion": 79.66,
+          "valueGrowthPct": -50.5,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 6,
+          "country": "COLOMBIA",
+          "valuePreviousUsdMillion": 54.04,
+          "valueCurrentUsdMillion": 80.5,
+          "valueGrowthPct": 48.97,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 7,
+          "country": "GERMANY",
+          "valuePreviousUsdMillion": 0.21,
+          "valueCurrentUsdMillion": 0.19,
+          "valueGrowthPct": -9.81,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 8,
+          "country": "HONG KONG",
+          "valuePreviousUsdMillion": 3.6,
+          "valueCurrentUsdMillion": 19.62,
+          "valueGrowthPct": 444.56,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 9,
+          "country": "INDONESIA",
+          "valuePreviousUsdMillion": 651.23,
+          "valueCurrentUsdMillion": 418.82,
+          "valueGrowthPct": -35.69,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        },
+        {
+          "serial": 10,
+          "country": "ITALY",
+          "valuePreviousUsdMillion": null,
+          "valueCurrentUsdMillion": 4.1,
+          "valueGrowthPct": null,
+          "quantityPrevious": null,
+          "quantityCurrent": null,
+          "quantityGrowthPct": null
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ppac.import_export_petroleum_value_usd",
+      "title": "Import/export of crude oil and petroleum products, value in dollars",
+      "sourceId": "ppac",
+      "sourceIndicatorId": "import-export:2025-2026:reportBy:3:page:14",
+      "unit": "US$ million",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 307,
+      "dimensions": [
+        "section",
+        "item",
+        "month",
+        "monthIndex",
+        "value",
+        "financialYear",
+        "reportBy"
+      ],
+      "latestRows": [
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "April",
+          "monthIndex": 1,
+          "value": 10664,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "May",
+          "monthIndex": 2,
+          "value": 10284,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "June",
+          "monthIndex": 3,
+          "value": 9904,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "July",
+          "monthIndex": 4,
+          "value": 9696,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "August",
+          "monthIndex": 5,
+          "value": 9898,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "September",
+          "monthIndex": 6,
+          "value": 10310,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "October",
+          "monthIndex": 7,
+          "value": 10264,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "November",
+          "monthIndex": 8,
+          "value": 9969,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "December",
+          "monthIndex": 9,
+          "value": 9873,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        },
+        {
+          "section": "import",
+          "item": "CRUDE OIL",
+          "month": "January",
+          "monthIndex": 10,
+          "value": 9507,
+          "financialYear": "2025-2026",
+          "reportBy": "3"
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ember.demand",
+      "title": "Electricity demand",
+      "sourceId": "ember",
+      "sourceIndicatorId": "electricity-demand/yearly",
+      "unit": "TWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 26,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "demand_twh",
+        "demand_mwh_per_capita"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "demand_twh": 2082.82,
+          "demand_mwh_per_capita": 1.42
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2024",
+          "demand_twh": 2034.22,
+          "demand_mwh_per_capita": 1.4
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2023",
+          "demand_twh": 1916.2,
+          "demand_mwh_per_capita": 1.33
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2022",
+          "demand_twh": 1802.88,
+          "demand_mwh_per_capita": 1.27
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2021",
+          "demand_twh": 1678.69,
+          "demand_mwh_per_capita": 1.19
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2020",
+          "demand_twh": 1563.32,
+          "demand_mwh_per_capita": 1.12
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2019",
+          "demand_twh": 1597.84,
+          "demand_mwh_per_capita": 1.15
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2018",
+          "demand_twh": 1567.81,
+          "demand_mwh_per_capita": 1.14
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2017",
+          "demand_twh": 1460.8,
+          "demand_mwh_per_capita": 1.07
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2016",
+          "demand_twh": 1393.84,
+          "demand_mwh_per_capita": 1.04
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "sourceIndicatorId": "carbon-intensity/yearly",
+      "unit": "gCO2/kWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 26,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "emissions_intensity_gco2_per_kwh"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "emissions_intensity_gco2_per_kwh": 670.13
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2024",
+          "emissions_intensity_gco2_per_kwh": 705.4
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2023",
+          "emissions_intensity_gco2_per_kwh": 713.36
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2022",
+          "emissions_intensity_gco2_per_kwh": 705.75
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2021",
+          "emissions_intensity_gco2_per_kwh": 715.34
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2020",
+          "emissions_intensity_gco2_per_kwh": 709.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2019",
+          "emissions_intensity_gco2_per_kwh": 722.66
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2018",
+          "emissions_intensity_gco2_per_kwh": 737.72
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2017",
+          "emissions_intensity_gco2_per_kwh": 743.09
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2016",
+          "emissions_intensity_gco2_per_kwh": 751.87
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.electricity_access",
+      "title": "Access to electricity",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "EG.ELC.ACCS.ZS",
+      "unit": "% of population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1993",
+        "value": 50.9
+      },
+      "latest": {
+        "date": "2023",
+        "value": 99.5
+      }
+    },
+    {
+      "indicatorId": "people.population.total",
+      "title": "Population, total",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SP.POP.TOTL",
+      "unit": "people",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 435990338
+      },
+      "latest": {
+        "date": "2024",
+        "value": 1450935791
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

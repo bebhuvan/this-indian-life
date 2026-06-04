@@ -3,34 +3,736 @@
   "questionId": "q.work.agriculture",
   "question": "What share of Indians still work in agriculture?",
   "priority": "core",
+  "theme": {
+    "id": "society",
+    "label": "Society, work, education, and services",
+    "readerQuestions": [
+      "What basic capability is being measured?",
+      "How many people does the percentage represent?",
+      "Is this access, usage, quality, or outcome?",
+      "Which caveat stops the chart from being overclaimed?"
+    ],
+    "glossaryTerms": [
+      "labour force",
+      "participation rate",
+      "gross enrolment",
+      "basic drinking water",
+      "basic sanitation"
+    ]
+  },
   "requiredIndicatorIds": [
     "work.employment_agriculture",
     "econ.gdp.sector_agriculture"
   ],
   "availableIndicatorIds": [
-    "econ.gdp.sector_agriculture",
-    "work.employment_agriculture"
+    "work.employment_agriculture",
+    "econ.gdp.sector_agriculture"
   ],
-  "lockedNumbers": [
+  "themeIndicatorIds": [
+    "work.employment_agriculture",
+    "econ.gdp.sector_agriculture",
+    "work.employment_industry",
+    "work.employment_services",
+    "work.plfs.empshare_agriculture",
+    "work.plfs.empshare_industry",
+    "work.plfs.empshare_services",
+    "econ.gdp.sector_industry",
+    "econ.gdp.sector_services",
+    "compare.emp_agriculture.in",
+    "compare.emp_agriculture.chn",
+    "compare.emp_agriculture.vnm",
+    "compare.emp_agriculture.bgd",
+    "compare.emp_agriculture.idn",
+    "compare.emp_agriculture.wld",
+    "work.productivity_per_worker",
+    "work.owid.agri_employment_share_longrun",
+    "work.idh.nrega_person_days_created",
+    "work.idh.rural_wage_men",
+    "work.idh.rural_wage_women"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.work.employment_agriculture",
+      "indicatorId": "work.employment_agriculture",
+      "title": "Employment in agriculture",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.econ.gdp.sector_agriculture",
+      "indicatorId": "econ.gdp.sector_agriculture",
+      "title": "Agriculture, value added",
+      "sourceId": "worldbank",
+      "unit": "% of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.work.employment_industry",
+      "indicatorId": "work.employment_industry",
+      "title": "Employment in industry",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v4.work.employment_services",
+      "indicatorId": "work.employment_services",
+      "title": "Employment in services",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.work.plfs.empshare_agriculture",
+      "indicatorId": "work.plfs.empshare_agriculture",
+      "title": "Workers in agriculture (primary sector)",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.work.plfs.empshare_industry",
+      "indicatorId": "work.plfs.empshare_industry",
+      "title": "Workers in industry (secondary sector)",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.work.plfs.empshare_services",
+      "indicatorId": "work.plfs.empshare_services",
+      "title": "Workers in services (tertiary sector)",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.econ.gdp.sector_industry",
+      "indicatorId": "econ.gdp.sector_industry",
+      "title": "Industry, value added",
+      "sourceId": "worldbank",
+      "unit": "% of GDP",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.econ.gdp.sector_services",
+      "indicatorId": "econ.gdp.sector_services",
+      "title": "Services, value added",
+      "sourceId": "worldbank",
+      "unit": "% of GDP",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.compare.emp_agriculture.in",
+      "indicatorId": "compare.emp_agriculture.in",
+      "title": "Employment in agriculture — India",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.compare.emp_agriculture.chn",
+      "indicatorId": "compare.emp_agriculture.chn",
+      "title": "Employment in agriculture — China",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.compare.emp_agriculture.vnm",
+      "indicatorId": "compare.emp_agriculture.vnm",
+      "title": "Employment in agriculture — Vietnam",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.compare.emp_agriculture.bgd",
+      "indicatorId": "compare.emp_agriculture.bgd",
+      "title": "Employment in agriculture — Bangladesh",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.compare.emp_agriculture.idn",
+      "indicatorId": "compare.emp_agriculture.idn",
+      "title": "Employment in agriculture — Indonesia",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.compare.emp_agriculture.wld",
+      "indicatorId": "compare.emp_agriculture.wld",
+      "title": "Employment in agriculture — World",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.work.productivity_per_worker",
+      "indicatorId": "work.productivity_per_worker",
+      "title": "GDP per person employed (labour productivity)",
+      "sourceId": "worldbank",
+      "unit": "constant 2021 PPP $",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.work.owid.agri_employment_share_longrun",
+      "indicatorId": "work.owid.agri_employment_share_longrun",
+      "title": "Share of employment in agriculture (long run)",
+      "sourceId": "owid",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.work.idh.nrega_person_days_created",
+      "indicatorId": "work.idh.nrega_person_days_created",
+      "title": "Person-days of work created under MGNREGA",
+      "sourceId": "indiadatahub",
+      "unit": "person-days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.work.idh.rural_wage_men",
+      "indicatorId": "work.idh.rural_wage_men",
+      "title": "Daily average rural wage rate, men (blended series)",
+      "sourceId": "indiadatahub",
+      "unit": "₹/day",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.work.idh.rural_wage_women",
+      "indicatorId": "work.idh.rural_wage_women",
+      "title": "Daily average rural wage rate, women (blended series)",
+      "sourceId": "indiadatahub",
+      "unit": "₹/day",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "share-of-indians-working-in-agriculture",
+      "title": "Share of Indians working in agriculture",
+      "chartType": "line",
+      "beat": "answer",
+      "window": "full",
+      "indicator": "work.employment_agriculture",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The headline: how much of the workforce is still on the farm."
+    },
+    {
+      "order": 2,
+      "chartId": "the-slow-shift-from-farm-to-factory-to-office",
+      "title": "The slow shift from farm to factory to office",
+      "chartType": "multiLine",
+      "beat": "structural-shift",
+      "window": "",
+      "indicator": "work.employment_services",
+      "series": [
+        {
+          "indicator": "work.employment_agriculture",
+          "label": "Agriculture"
+        },
+        {
+          "indicator": "work.employment_industry",
+          "label": "Industry"
+        },
+        {
+          "indicator": "work.employment_services",
+          "label": "Services"
+        }
+      ],
+      "unit": "% of workers",
+      "subtitle": "",
+      "whyThisChart": "The classic development path — and how far India still has to go."
+    },
+    {
+      "order": 3,
+      "chartId": "the-post-2019-reversal",
+      "title": "The post-2019 reversal",
+      "chartType": "multiLine",
+      "beat": "reversal",
+      "window": "",
+      "indicator": "work.plfs.empshare_agriculture",
+      "series": [
+        {
+          "indicator": "work.plfs.empshare_agriculture",
+          "label": "Agriculture"
+        },
+        {
+          "indicator": "work.plfs.empshare_industry",
+          "label": "Industry"
+        },
+        {
+          "indicator": "work.plfs.empshare_services",
+          "label": "Services"
+        }
+      ],
+      "unit": "% of workers",
+      "subtitle": "",
+      "whyThisChart": "Recent PLFS data shows agriculture's share rising again — a warning sign."
+    },
+    {
+      "order": 4,
+      "chartId": "half-the-workers-a-fraction-of-the-output",
+      "title": "Half the workers, a fraction of the output",
+      "chartType": "multiLine",
+      "beat": "productivity-gap",
+      "window": "",
+      "indicator": "work.employment_agriculture",
+      "series": [
+        {
+          "indicator": "work.employment_agriculture",
+          "label": "Share of workers"
+        },
+        {
+          "indicator": "econ.gdp.sector_agriculture",
+          "label": "Share of GDP"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "The core problem: agriculture employs far more people than the value it produces."
+    },
+    {
+      "order": 5,
+      "chartId": "where-the-economy-s-value-comes-from",
+      "title": "Where the economy's value comes from",
+      "chartType": "multiLine",
+      "beat": "gdp-shares",
+      "window": "",
+      "indicator": "econ.gdp.sector_services",
+      "series": [
+        {
+          "indicator": "econ.gdp.sector_agriculture",
+          "label": "Agriculture"
+        },
+        {
+          "indicator": "econ.gdp.sector_industry",
+          "label": "Industry"
+        },
+        {
+          "indicator": "econ.gdp.sector_services",
+          "label": "Services"
+        }
+      ],
+      "unit": "% of GDP",
+      "subtitle": "",
+      "whyThisChart": "The mirror image: services dominate output while agriculture shrinks."
+    },
+    {
+      "order": 6,
+      "chartId": "how-india-compares-on-leaving-the-farm",
+      "title": "How India compares on leaving the farm",
+      "chartType": "multiLine",
+      "beat": "cross-country",
+      "window": "",
+      "indicator": "compare.emp_agriculture.in",
+      "series": [
+        {
+          "indicator": "compare.emp_agriculture.in",
+          "label": "India"
+        },
+        {
+          "indicator": "compare.emp_agriculture.chn",
+          "label": "China"
+        },
+        {
+          "indicator": "compare.emp_agriculture.vnm",
+          "label": "Vietnam"
+        },
+        {
+          "indicator": "compare.emp_agriculture.bgd",
+          "label": "Bangladesh"
+        },
+        {
+          "indicator": "compare.emp_agriculture.idn",
+          "label": "Indonesia"
+        },
+        {
+          "indicator": "compare.emp_agriculture.wld",
+          "label": "World"
+        }
+      ],
+      "unit": "% of workers",
+      "subtitle": "",
+      "whyThisChart": "China and Vietnam moved workers off farms much faster than India."
+    },
+    {
+      "order": 7,
+      "chartId": "output-per-worker",
+      "title": "Output per worker",
+      "chartType": "line",
+      "beat": "productivity",
+      "window": "full",
+      "indicator": "work.productivity_per_worker",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Why moving out of agriculture matters: productivity."
+    },
+    {
+      "order": 8,
+      "chartId": "the-very-long-view",
+      "title": "The very long view",
+      "chartType": "line",
+      "beat": "longrun",
+      "window": "full",
+      "indicator": "work.owid.agri_employment_share_longrun",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Agriculture's grip on Indian work over more than a century."
+    },
+    {
+      "order": 9,
+      "chartId": "rural-work-demand-the-nrega-signal",
+      "title": "Rural work demand: the NREGA signal",
+      "chartType": "line",
+      "beat": "nrega",
+      "window": "full",
+      "indicator": "work.idh.nrega_person_days_created",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "When farm and non-farm work fall short, rural Indians turn to the jobs guarantee."
+    },
+    {
+      "order": 10,
+      "chartId": "rural-wages",
+      "title": "Rural wages",
+      "chartType": "multiLine",
+      "beat": "rural-wages",
+      "window": "",
+      "indicator": "work.idh.rural_wage_men",
+      "series": [
+        {
+          "indicator": "work.idh.rural_wage_men",
+          "label": "Men"
+        },
+        {
+          "indicator": "work.idh.rural_wage_women",
+          "label": "Women"
+        }
+      ],
+      "unit": "₹ per day",
+      "subtitle": "",
+      "whyThisChart": "What rural work actually pays — the floor under farm livelihoods."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Employment in agriculture, latest",
+      "value": 41.6251280877573,
+      "displayValue": "41.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "indicatorId": "work.employment_agriculture",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in agriculture, earliest",
+      "value": 63.1283195373591,
+      "displayValue": "63.1%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "indicatorId": "work.employment_agriculture",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
     {
       "label": "Agriculture, value added, latest",
       "value": 16.2854335605917,
+      "displayValue": "16.3%",
       "date": "2024",
       "unit": "% of GDP",
+      "indicatorId": "econ.gdp.sector_agriculture",
       "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.sector_agriculture"
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
     },
     {
       "label": "Agriculture, value added, earliest",
       "value": 41.7413351234112,
+      "displayValue": "41.7%",
       "date": "1960",
       "unit": "% of GDP",
+      "indicatorId": "econ.gdp.sector_agriculture",
       "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.sector_agriculture"
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
     },
+    {
+      "label": "Employment in industry, latest",
+      "value": 25.8173073806381,
+      "displayValue": "25.8%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "indicatorId": "work.employment_industry",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in industry, earliest",
+      "value": 14.5849373001575,
+      "displayValue": "14.6%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "indicatorId": "work.employment_industry",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in services, latest",
+      "value": 32.5575625031109,
+      "displayValue": "32.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "indicatorId": "work.employment_services",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in services, earliest",
+      "value": 22.2867363071309,
+      "displayValue": "22.3%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "indicatorId": "work.employment_services",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Workers in agriculture (primary sector), latest",
+      "value": 43.5,
+      "displayValue": "43.5%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "indicatorId": "work.plfs.empshare_agriculture",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Workers in agriculture (primary sector), earliest",
+      "value": 42.4,
+      "displayValue": "42.4%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "indicatorId": "work.plfs.empshare_agriculture",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Workers in industry (secondary sector), latest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "indicatorId": "work.plfs.empshare_industry",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Workers in industry (secondary sector), earliest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "indicatorId": "work.plfs.empshare_industry",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Workers in services (tertiary sector), latest",
+      "value": 31.6,
+      "displayValue": "31.6%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "indicatorId": "work.plfs.empshare_services",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Workers in services (tertiary sector), earliest",
+      "value": 32.6,
+      "displayValue": "32.6%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "indicatorId": "work.plfs.empshare_services",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Industry, value added, latest",
+      "value": 24.6285041297852,
+      "displayValue": "24.6%",
+      "date": "2024",
+      "unit": "% of GDP",
+      "indicatorId": "econ.gdp.sector_industry",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Industry, value added, earliest",
+      "value": 20.8343434545716,
+      "displayValue": "20.8%",
+      "date": "1960",
+      "unit": "% of GDP",
+      "indicatorId": "econ.gdp.sector_industry",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Services, value added, latest",
+      "value": 49.874440225505,
+      "displayValue": "49.9%",
+      "date": "2024",
+      "unit": "% of GDP",
+      "indicatorId": "econ.gdp.sector_services",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Services, value added, earliest",
+      "value": 38.7824617546992,
+      "displayValue": "38.8%",
+      "date": "1960",
+      "unit": "% of GDP",
+      "indicatorId": "econ.gdp.sector_services",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in agriculture — India, latest",
+      "value": 41.6251280877573,
+      "displayValue": "41.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "indicatorId": "compare.emp_agriculture.in",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in agriculture — India, earliest",
+      "value": 63.1283195373591,
+      "displayValue": "63.1%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "indicatorId": "compare.emp_agriculture.in",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in agriculture — China, latest",
+      "value": 21.6768623336956,
+      "displayValue": "21.7%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "indicatorId": "compare.emp_agriculture.chn",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in agriculture — China, earliest",
+      "value": 59.6400851916364,
+      "displayValue": "59.6%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "indicatorId": "compare.emp_agriculture.chn",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in agriculture — Vietnam, latest",
+      "value": 25.0433926775449,
+      "displayValue": "25%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "indicatorId": "compare.emp_agriculture.vnm",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Employment in agriculture — Vietnam, earliest",
+      "value": 73.9942675327389,
+      "displayValue": "74%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "indicatorId": "compare.emp_agriculture.vnm",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
     {
       "label": "Employment in agriculture, latest",
       "value": 41.6251280877573,
+      "displayValue": "41.6%",
       "date": "2025",
       "unit": "% of total employment",
       "sourceId": "worldbank",
@@ -39,13 +741,378 @@
     {
       "label": "Employment in agriculture, earliest",
       "value": 63.1283195373591,
+      "displayValue": "63.1%",
       "date": "1991",
       "unit": "% of total employment",
       "sourceId": "worldbank",
       "indicatorId": "work.employment_agriculture"
+    },
+    {
+      "label": "Agriculture, value added, latest",
+      "value": 16.2854335605917,
+      "displayValue": "16.3%",
+      "date": "2024",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_agriculture"
+    },
+    {
+      "label": "Agriculture, value added, earliest",
+      "value": 41.7413351234112,
+      "displayValue": "41.7%",
+      "date": "1960",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_agriculture"
+    },
+    {
+      "label": "Employment in industry, latest",
+      "value": 25.8173073806381,
+      "displayValue": "25.8%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_industry"
+    },
+    {
+      "label": "Employment in industry, earliest",
+      "value": 14.5849373001575,
+      "displayValue": "14.6%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_industry"
+    },
+    {
+      "label": "Employment in services, latest",
+      "value": 32.5575625031109,
+      "displayValue": "32.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_services"
+    },
+    {
+      "label": "Employment in services, earliest",
+      "value": 22.2867363071309,
+      "displayValue": "22.3%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_services"
+    },
+    {
+      "label": "Workers in agriculture (primary sector), latest",
+      "value": 43.5,
+      "displayValue": "43.5%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_agriculture"
+    },
+    {
+      "label": "Workers in agriculture (primary sector), earliest",
+      "value": 42.4,
+      "displayValue": "42.4%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_agriculture"
+    },
+    {
+      "label": "Workers in industry (secondary sector), latest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_industry"
+    },
+    {
+      "label": "Workers in industry (secondary sector), earliest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_industry"
+    },
+    {
+      "label": "Workers in services (tertiary sector), latest",
+      "value": 31.6,
+      "displayValue": "31.6%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_services"
+    },
+    {
+      "label": "Workers in services (tertiary sector), earliest",
+      "value": 32.6,
+      "displayValue": "32.6%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_services"
+    },
+    {
+      "label": "Industry, value added, latest",
+      "value": 24.6285041297852,
+      "displayValue": "24.6%",
+      "date": "2024",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_industry"
+    },
+    {
+      "label": "Industry, value added, earliest",
+      "value": 20.8343434545716,
+      "displayValue": "20.8%",
+      "date": "1960",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_industry"
+    },
+    {
+      "label": "Services, value added, latest",
+      "value": 49.874440225505,
+      "displayValue": "49.9%",
+      "date": "2024",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_services"
+    },
+    {
+      "label": "Services, value added, earliest",
+      "value": 38.7824617546992,
+      "displayValue": "38.8%",
+      "date": "1960",
+      "unit": "% of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.gdp.sector_services"
+    },
+    {
+      "label": "Employment in agriculture — India, latest",
+      "value": 41.6251280877573,
+      "displayValue": "41.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.in"
+    },
+    {
+      "label": "Employment in agriculture — India, earliest",
+      "value": 63.1283195373591,
+      "displayValue": "63.1%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.in"
+    },
+    {
+      "label": "Employment in agriculture — China, latest",
+      "value": 21.6768623336956,
+      "displayValue": "21.7%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.chn"
+    },
+    {
+      "label": "Employment in agriculture — China, earliest",
+      "value": 59.6400851916364,
+      "displayValue": "59.6%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.chn"
+    },
+    {
+      "label": "Employment in agriculture — Vietnam, latest",
+      "value": 25.0433926775449,
+      "displayValue": "25%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.vnm"
+    },
+    {
+      "label": "Employment in agriculture — Vietnam, earliest",
+      "value": 73.9942675327389,
+      "displayValue": "74%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.vnm"
+    },
+    {
+      "label": "Employment in agriculture — Bangladesh, latest",
+      "value": 44.2601251126533,
+      "displayValue": "44.3%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.bgd"
+    },
+    {
+      "label": "Employment in agriculture — Bangladesh, earliest",
+      "value": 69.9213188544107,
+      "displayValue": "69.9%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.bgd"
+    },
+    {
+      "label": "Employment in agriculture — Indonesia, latest",
+      "value": 27.2969124578361,
+      "displayValue": "27.3%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.idn"
+    },
+    {
+      "label": "Employment in agriculture — Indonesia, earliest",
+      "value": 47.6552936266812,
+      "displayValue": "47.7%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.idn"
+    },
+    {
+      "label": "Employment in agriculture — World, latest",
+      "value": 25.780814880325,
+      "displayValue": "25.8%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.wld"
+    },
+    {
+      "label": "Employment in agriculture — World, earliest",
+      "value": 42.8230275944581,
+      "displayValue": "42.8%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.emp_agriculture.wld"
+    },
+    {
+      "label": "GDP per person employed (labour productivity), latest",
+      "value": 24430.1179611995,
+      "displayValue": "24,430.12",
+      "date": "2024",
+      "unit": "constant 2021 PPP $",
+      "sourceId": "worldbank",
+      "indicatorId": "work.productivity_per_worker"
+    },
+    {
+      "label": "GDP per person employed (labour productivity), earliest",
+      "value": 6601.07267223153,
+      "displayValue": "6,601.07",
+      "date": "1991",
+      "unit": "constant 2021 PPP $",
+      "sourceId": "worldbank",
+      "indicatorId": "work.productivity_per_worker"
+    },
+    {
+      "label": "Share of employment in agriculture (long run): Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)",
+      "value": 54.7,
+      "displayValue": "54.7%",
+      "date": "2010",
+      "unit": "%",
+      "sourceId": "owid",
+      "indicatorId": "work.owid.agri_employment_share_longrun"
+    },
+    {
+      "label": "Share of employment in agriculture (long run): Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)",
+      "value": 71.9,
+      "displayValue": "71.9%",
+      "date": "1960",
+      "unit": "%",
+      "sourceId": "owid",
+      "indicatorId": "work.owid.agri_employment_share_longrun"
+    },
+    {
+      "label": "Person-days of work created under MGNREGA, latest",
+      "value": 109928366,
+      "displayValue": "109.93 million",
+      "date": "2026-04-30",
+      "unit": "person-days",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.nrega_person_days_created"
+    },
+    {
+      "label": "Person-days of work created under MGNREGA, earliest",
+      "value": 186840321,
+      "displayValue": "186.84 million",
+      "date": "2013-04-30",
+      "unit": "person-days",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.nrega_person_days_created"
+    },
+    {
+      "label": "Daily average rural wage rate, men (blended series), latest",
+      "value": 453.5132,
+      "displayValue": "₹454",
+      "date": "2025-06-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_men"
+    },
+    {
+      "label": "Daily average rural wage rate, men (blended series), earliest",
+      "value": 72.0859913614955,
+      "displayValue": "₹72",
+      "date": "1998-04-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_men"
+    },
+    {
+      "label": "Daily average rural wage rate, women (blended series), latest",
+      "value": 322.061666666667,
+      "displayValue": "₹322",
+      "date": "2025-06-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_women"
+    },
+    {
+      "label": "Daily average rural wage rate, women (blended series), earliest",
+      "value": 162.784705882353,
+      "displayValue": "₹163",
+      "date": "2013-11-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_women"
     }
   ],
   "sourceSummaries": [
+    {
+      "indicatorId": "work.employment_agriculture",
+      "title": "Employment in agriculture",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 63.1283195373591
+      },
+      "latest": {
+        "date": "2025",
+        "value": 41.6251280877573
+      }
+    },
     {
       "indicatorId": "econ.gdp.sector_agriculture",
       "title": "Agriculture, value added",
@@ -69,10 +1136,10 @@
       }
     },
     {
-      "indicatorId": "work.employment_agriculture",
-      "title": "Employment in agriculture",
+      "indicatorId": "work.employment_industry",
+      "title": "Employment in industry",
       "sourceId": "worldbank",
-      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "sourceIndicatorId": "SL.IND.EMPL.ZS",
       "unit": "% of total employment",
       "frequency": "annual",
       "geography": {
@@ -83,16 +1150,457 @@
       "observations": 66,
       "earliest": {
         "date": "1991",
+        "value": 14.5849373001575
+      },
+      "latest": {
+        "date": "2025",
+        "value": 25.8173073806381
+      }
+    },
+    {
+      "indicatorId": "work.employment_services",
+      "title": "Employment in services",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.SRV.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 22.2867363071309
+      },
+      "latest": {
+        "date": "2025",
+        "value": 32.5575625031109
+      }
+    },
+    {
+      "indicatorId": "work.plfs.empshare_agriculture",
+      "title": "Workers in agriculture (primary sector)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "empshare_agriculture",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 42.4
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 43.5
+      }
+    },
+    {
+      "indicatorId": "work.plfs.empshare_industry",
+      "title": "Workers in industry (secondary sector)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "empshare_industry",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 24.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 24.9
+      }
+    },
+    {
+      "indicatorId": "work.plfs.empshare_services",
+      "title": "Workers in services (tertiary sector)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "empshare_services",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 32.6
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 31.6
+      }
+    },
+    {
+      "indicatorId": "econ.gdp.sector_industry",
+      "title": "Industry, value added",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "NV.IND.TOTL.ZS",
+      "unit": "% of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 20.8343434545716
+      },
+      "latest": {
+        "date": "2024",
+        "value": 24.6285041297852
+      }
+    },
+    {
+      "indicatorId": "econ.gdp.sector_services",
+      "title": "Services, value added",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "NV.SRV.TOTL.ZS",
+      "unit": "% of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 38.7824617546992
+      },
+      "latest": {
+        "date": "2024",
+        "value": 49.874440225505
+      }
+    },
+    {
+      "indicatorId": "compare.emp_agriculture.in",
+      "title": "Employment in agriculture — India",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
         "value": 63.1283195373591
       },
       "latest": {
         "date": "2025",
         "value": 41.6251280877573
       }
+    },
+    {
+      "indicatorId": "compare.emp_agriculture.chn",
+      "title": "Employment in agriculture — China",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "CHN",
+        "name": "China"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
+        "value": 59.6400851916364
+      },
+      "latest": {
+        "date": "2025",
+        "value": 21.6768623336956
+      }
+    },
+    {
+      "indicatorId": "compare.emp_agriculture.vnm",
+      "title": "Employment in agriculture — Vietnam",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "VNM",
+        "name": "Vietnam"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
+        "value": 73.9942675327389
+      },
+      "latest": {
+        "date": "2025",
+        "value": 25.0433926775449
+      }
+    },
+    {
+      "indicatorId": "compare.emp_agriculture.bgd",
+      "title": "Employment in agriculture — Bangladesh",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "BGD",
+        "name": "Bangladesh"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
+        "value": 69.9213188544107
+      },
+      "latest": {
+        "date": "2025",
+        "value": 44.2601251126533
+      }
+    },
+    {
+      "indicatorId": "compare.emp_agriculture.idn",
+      "title": "Employment in agriculture — Indonesia",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IDN",
+        "name": "Indonesia"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
+        "value": 47.6552936266812
+      },
+      "latest": {
+        "date": "2025",
+        "value": 27.2969124578361
+      }
+    },
+    {
+      "indicatorId": "compare.emp_agriculture.wld",
+      "title": "Employment in agriculture — World",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "WLD",
+        "name": "World"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
+        "value": 42.8230275944581
+      },
+      "latest": {
+        "date": "2025",
+        "value": 25.780814880325
+      }
+    },
+    {
+      "indicatorId": "work.productivity_per_worker",
+      "title": "GDP per person employed (labour productivity)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.GDP.PCAP.EM.KD",
+      "unit": "constant 2021 PPP $",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 6601.07267223153
+      },
+      "latest": {
+        "date": "2024",
+        "value": 24430.1179611995
+      }
+    },
+    {
+      "indicatorId": "work.owid.agri_employment_share_longrun",
+      "title": "Share of employment in agriculture (long run)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "share-of-agriculture-in-total-employment",
+      "unit": "%",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 51,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2010",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "54.7"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2009",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "53.7"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2008",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "54.4"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2007",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "55.4"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2006",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "57.2"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2005",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "57.3"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2004",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "56.5"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2003",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "56.6"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2002",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "56.6"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2001",
+          "Share of employment in agriculture (Herrendorf et al. and GGDC-10 data)": "58.8"
+        }
+      ]
+    },
+    {
+      "indicatorId": "work.idh.nrega_person_days_created",
+      "title": "Person-days of work created under MGNREGA",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LAEMNREGPD11M",
+      "unit": "person-days",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 157,
+      "earliest": {
+        "date": "2013-04-30",
+        "value": 186840321
+      },
+      "latest": {
+        "date": "2026-04-30",
+        "value": 109928366
+      }
+    },
+    {
+      "indicatorId": "work.idh.rural_wage_men",
+      "title": "Daily average rural wage rate, men (blended series)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LAWRAGGAVG13M",
+      "unit": "₹/day",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 327,
+      "earliest": {
+        "date": "1998-04-30",
+        "value": 72.0859913614955
+      },
+      "latest": {
+        "date": "2025-06-30",
+        "value": 453.5132
+      }
+    },
+    {
+      "indicatorId": "work.idh.rural_wage_women",
+      "title": "Daily average rural wage rate, women (blended series)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LAWRWTTAVG13M",
+      "unit": "₹/day",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 140,
+      "earliest": {
+        "date": "2013-11-30",
+        "value": 162.784705882353
+      },
+      "latest": {
+        "date": "2025-06-30",
+        "value": 322.061666666667
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

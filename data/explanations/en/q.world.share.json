@@ -1,144 +1,1047 @@
 {
   "schemaVersion": 1,
   "questionId": "q.world.share",
-  "status": "needs_data",
+  "status": "ready",
   "short": {
-    "headline": "India's share of the world cannot be determined from available data",
-    "dek": "India's absolute numbers for population, GDP, and CO2 are available, but world totals are not provided.",
-    "body": "The question asks for India's share of the world in terms of population, economy, and emissions. The evidence packet contains India's total population (1.45 billion in 2024), GDP ($3.91 trillion in 2024), and CO2 emissions (latest year not given in lockedNumbers but source summary exists). However, to calculate shares, we need corresponding world totals, which are not included. Without world totals, it is impossible to compute India's share. The data gap means the question cannot be answered with the provided evidence."
+    "headline": "India is 17.8% of people, 3.5% of GDP, and 8.3% of CO2",
+    "dek": "India's share of the world changes sharply depending on the denominator: people, economic output, or emissions.",
+    "body": "India is 17.8% of the world's population in 2024, according to the derived World Bank share. Its share of world GDP is much smaller at 3.5%. Its share of world CO2 emissions is 8.3% in the OWID-derived series. That is the clean answer: India is a very large share of humanity, a smaller share of current-dollar output, and a rising share of annual emissions. A share is not a moral scorecard. It is a denominator check. Always ask: share of what? people, money value, or pollution?"
   },
   "article": {
-    "title": "India's Share of the World: Data Limitations",
-    "standfirst": "The evidence contains India's absolute population, GDP, and CO2 emissions, but lacks the world totals needed to compute shares. This article explains the gap.",
-    "bodyMarkdown": "The question \"What share of the world is India?\" typically seeks India's percentage of global population, economic output, or carbon emissions. To compute these shares, one needs both India's figure and the corresponding global total. The provided evidence packet supplies India's absolute numbers for three key indicators:\n\n- **Population**: 1,450,935,791 as of 2024 (World Bank).\n- **GDP (current US$)**: $3,909,891,533,858.08 as of 2024 (World Bank).\n- **CO2 emissions** (kt): The source summary lists CO2 emissions as an available indicator but does not include a specific latest value in the locked numbers; however, the source summary for CO2 exists.\n\nCritically, **no world totals** are provided for any of these indicators. Without global figures, we cannot calculate India's share of world population, world GDP, or world CO2 emissions. For example, India's population share would require the world population in 2024, which is absent. Similarly, global GDP and global CO2 emissions are missing.\n\nThe evidence packet also includes historical data (earliest from 1960), but again only for India. While we could describe India's growth over time (population grew from 435,990,338 in 1960 to 1.45 billion in 2024; GDP grew from $37 billion to $3.91 trillion), these trends do not answer the question of share.\n\nTo answer the question, the evidence needs to include world totals for the same years and indicators. This is a straightforward data gap: the denominators are missing. Once world figures are supplied, shares can be computed directly.\n\nGiven this limitation, the status is set to \"needs_data\"."
+    "title": "What share of the world is India?",
+    "standfirst": "The answer depends on the denominator. India is a big slice of humanity, a smaller slice of GDP, and a rising slice of annual CO2 emissions.",
+    "bodyMarkdown": "## What is the headline answer?\n\nIndia is 17.8% of the world's population, 3.5% of world GDP, and 8.3% of world CO2 emissions in the latest 2024 data used here. Those three numbers should not be mashed into one slogan. They answer three different questions.\n\nPopulation asks: how many humans live here? GDP asks: how much current-dollar economic output is produced here? CO2 asks: how much annual carbon dioxide is emitted here? Same India, three different denominators, three different stories.\n\n## What does “share of the world” mean?\n\nA share is just India's number divided by the world number, then multiplied by 100. If India has 17.8% of world population, it means about 18 out of every 100 people on Earth live in India.\n\nThis is useful because India-scale numbers can become hard to feel. Crores and trillions are too large for the brain. A share converts the number into a slice of the whole. But the slice only makes sense if you know what the whole is.\n\n## Why is population share the biggest number?\n\nPopulation is the most direct India-scale fact. The World Bank-derived series puts India's share of world population at 14.4% in 1960 and 17.8% in 2024. That means India has been a large part of humanity for the entire period shown, not just at the latest point.\n\nThis number matters for everything that touches daily life: schools, jobs, housing, transport, food, healthcare, and public services. Even a small percentage-point movement is huge because the denominator is the whole world.\n\n## Why is GDP share so much smaller?\n\nIndia's share of world GDP is 3.5% in 2024, up from 2.7% in 1960. GDP here is current-dollar output. It counts the money value of final goods and services produced in a year. It does not count people.\n\nSo the gap between 17.8% population share and 3.5% GDP share is the core economic message. India has a large share of the world's people, but a much smaller share of the world's current-dollar output. That is why total national scale and average living standards can feel so different.\n\n## Why is CO2 share a separate story?\n\nIndia's share of annual world CO2 emissions is 8.3% in 2024 in the OWID-derived series. The earliest point in that series is 0.1% in 1858. This is not the same as GDP, and it is not the same as population. It is about annual emissions from fossil fuels and industry.\n\nThe useful reading is simple: India's annual emissions share is now much higher than its GDP share, but still lower than its population share. That does not tell you per-person emissions by itself. It only tells you India's slice of the annual global total.\n\n## What can this page not tell us?\n\nThese shares do not show inequality inside India. They do not show state differences. They do not tell you median income, household spending, job quality, air exposure, or historical responsibility for all accumulated emissions.\n\nThey also use different source families. Population and GDP shares come from World Bank data. CO2 share comes from Our World in Data. That is fine, but it means the page should be read as three carefully labelled lenses, not one blended score.\n\n## What should the reader remember?\n\nWhen someone says “India is a big part of the world,” ask: big part of what? By people, yes: 17.8%. By current-dollar GDP, 3.5%. By annual CO2 emissions, 8.3%.\n\nThat is the atlas habit: do not fight with adjectives first. Check the denominator first. Then the argument becomes clearer, calmer, and much harder to fake."
   },
+  "editorialPlan": {
+    "audience": "average Indian reader",
+    "heroDescription": "A denominator-first explanation of India's world share across people, GDP, and CO2.",
+    "selectedDataPoints": [
+      {
+        "label": "India share of world population, latest",
+        "reason": "The largest and most intuitive share.",
+        "use": "hero"
+      },
+      {
+        "label": "India share of world GDP, latest",
+        "reason": "Shows the economic-output share.",
+        "use": "hero"
+      },
+      {
+        "label": "India share of world CO2 emissions, latest",
+        "reason": "Shows annual emissions share.",
+        "use": "hero"
+      },
+      {
+        "label": "India share of world population, earliest",
+        "reason": "Shows that India has long been a large share of humanity.",
+        "use": "chart"
+      },
+      {
+        "label": "India share of world GDP, earliest",
+        "reason": "Shows slow movement in current-dollar GDP share.",
+        "use": "chart"
+      }
+    ],
+    "pullQuotes": [
+      {
+        "quote": "The first question is not whether India is big. It is: big share of what?",
+        "numberLabel": "India share of world population, latest"
+      }
+    ],
+    "glossaryBlocks": [
+      {
+        "term": "Share",
+        "plainMeaning": "A share is one part divided by the whole, shown as a percentage. India's share of world population means India's population divided by world population.",
+        "whyItMattersHere": "The page is built around denominator discipline: people, GDP, and CO2 are different wholes."
+      },
+      {
+        "term": "GDP",
+        "plainMeaning": "GDP is the value of final goods and services produced in a year. Current-dollar GDP uses market exchange rates and current prices.",
+        "whyItMattersHere": "India's GDP share is much smaller than its population share."
+      },
+      {
+        "term": "CO2 emissions",
+        "plainMeaning": "CO2 emissions are carbon dioxide released from fossil fuels and industry in a year. This page uses annual emissions, not cumulative historical emissions.",
+        "whyItMattersHere": "India's annual emissions share is a separate climate lens."
+      }
+    ]
+  },
+  "dataSelectionAudit": {
+    "areSelectedDataPointsGood": "yes, these three derived shares directly answer the question",
+    "addDataPoints": [
+      "Per-person GDP and per-person CO2 can be added as companion lenses on a future comparison page."
+    ],
+    "removeDataPoints": [
+      "Society indicators such as literacy, water, sanitation, internet, and labour force distract from this denominator question."
+    ],
+    "visualizationDecisions": [
+      {
+        "indicatorOrVisual": "latest world-share summary",
+        "bestChartType": "latest cards or horizontal bars",
+        "timeWindow": "latest point",
+        "frequency": "annual",
+        "reason": "The reader should first see the three headline shares side by side."
+      },
+      {
+        "indicatorOrVisual": "world.share.population",
+        "bestChartType": "line",
+        "timeWindow": "1960 to latest",
+        "frequency": "annual",
+        "reason": "Population share changes slowly, so the long line is useful."
+      },
+      {
+        "indicatorOrVisual": "world.share.gdp_current_usd",
+        "bestChartType": "line",
+        "timeWindow": "1960 to latest",
+        "frequency": "annual",
+        "reason": "GDP share needs trend context because one year can be affected by prices and exchange rates."
+      },
+      {
+        "indicatorOrVisual": "world.share.co2_total",
+        "bestChartType": "line",
+        "timeWindow": "1960 to latest for combined view; full history optional",
+        "frequency": "annual",
+        "reason": "The combined mobile chart should use a shared modern window; the detail chart can show longer history."
+      }
+    ]
+  },
+  "chartExplainers": [
+    {
+      "visualId": "v1.world.share.summary",
+      "title": "India's latest share of the world",
+      "whyShowThis": "This puts the three headline answers next to each other.",
+      "howToRead": "Each bar is India divided by the world for that measure.",
+      "mistakeToAvoid": "Do not compare shares without checking the denominator.",
+      "mobileNote": "Use three horizontal bars with percent labels."
+    },
+    {
+      "visualId": "v2.world.share.trends",
+      "title": "India's world share over time",
+      "whyShowThis": "The trend shows whether each share is stable, rising, or moving slowly.",
+      "howToRead": "Population, GDP, and CO2 are all percentages of world totals.",
+      "mistakeToAvoid": "Do not read CO2 share as per-person emissions.",
+      "mobileNote": "Keep only three lines and label the latest points."
+    },
+    {
+      "visualId": "v3.world.share.population",
+      "title": "India share of world population",
+      "whyShowThis": "Population is the most intuitive global share.",
+      "howToRead": "The line shows India's population divided by world population.",
+      "mistakeToAvoid": "Do not treat population share as economic power.",
+      "mobileNote": "Label the first and latest points."
+    },
+    {
+      "visualId": "v4.world.share.gdp_current_usd",
+      "title": "India share of world GDP",
+      "whyShowThis": "GDP share shows current-dollar economic output.",
+      "howToRead": "The line is India GDP divided by world GDP.",
+      "mistakeToAvoid": "Do not treat current-dollar GDP as living standards.",
+      "mobileNote": "Show percent labels clearly."
+    },
+    {
+      "visualId": "v5.world.share.co2_total",
+      "title": "India share of world CO2 emissions",
+      "whyShowThis": "CO2 share adds the annual emissions lens.",
+      "howToRead": "The line is India annual CO2 divided by world annual CO2.",
+      "mistakeToAvoid": "Do not confuse annual share with cumulative historical responsibility.",
+      "mobileNote": "Use sparse ticks because the series is long."
+    }
+  ],
   "sourceNotes": [
-    "World Bank for India's population, GDP, and CO2 emissions"
+    "Population and GDP shares are derived from World Bank India and world annual totals.",
+    "CO2 share is derived from Our World in Data India and world annual CO2 emissions.",
+    "All shares are computed as India value divided by world value times 100."
   ],
   "caveats": [
-    "World totals are not provided in the evidence packet. Shares cannot be calculated.",
-    "CO2 emissions latest value is not explicitly given in lockedNumbers, but source summary indicates availability."
+    "Shares answer denominator questions; they do not explain inequality or lived conditions inside India.",
+    "GDP share uses current US dollars, so prices and exchange rates affect the comparison.",
+    "CO2 share is annual emissions, not cumulative historical emissions or per-person emissions."
   ],
   "lockedNumbersUsed": [
-    "GDP, current US dollars, latest",
-    "Population, total, latest"
+    "India share of world population, latest",
+    "India share of world GDP, latest",
+    "India share of world CO2 emissions, latest",
+    "India share of world population, earliest",
+    "India share of world GDP, earliest",
+    "India share of world CO2 emissions, earliest"
   ],
-  "qualityFlags": [
-    "Missing world totals for all indicators"
-  ],
-  "generatedAt": "2026-06-01T04:40:28.672Z",
+  "qualityFlags": [],
+  "generatedAt": "2026-06-01T09:16:15.363Z",
   "model": "deepseek-v4-flash",
+  "generationPasses": [
+    {
+      "name": "single",
+      "model": "deepseek-v4-flash"
+    }
+  ],
   "evidence": {
     "schemaVersion": 1,
     "questionId": "q.world.share",
     "question": "What share of the world is India?",
     "priority": "core",
+    "theme": {
+      "id": "world",
+      "label": "India in the world",
+      "readerQuestions": [
+        "What is India's share of the global total?",
+        "Is the share about people, production, emissions, or another denominator?",
+        "Does the comparison use total numbers or per-person numbers?",
+        "Which caveat stops a share from becoming a boast or a panic headline?"
+      ],
+      "glossaryTerms": [
+        "share",
+        "world total",
+        "GDP",
+        "GDP per capita",
+        "CO2"
+      ]
+    },
     "requiredIndicatorIds": [
-      "people.population.total",
-      "econ.gdp.current_usd",
-      "climate.co2.total"
+      "world.share.population",
+      "world.share.gdp_current_usd",
+      "world.share.co2_total"
     ],
     "availableIndicatorIds": [
-      "climate.co2.total",
-      "econ.gdp.current_usd",
-      "people.population.total"
+      "world.share.population",
+      "world.share.gdp_current_usd",
+      "world.share.co2_total"
+    ],
+    "themeIndicatorIds": [
+      "world.share.population",
+      "world.share.gdp_current_usd",
+      "world.share.co2_total",
+      "econ.compare.gdp_current_usd",
+      "econ.compare.gdp_per_capita_current_usd",
+      "econ.compare.gdp_ppp_current_intl",
+      "econ.compare.population_total"
+    ],
+    "visualPlan": [
+      {
+        "visualId": "v1.world.share.population",
+        "indicatorId": "world.share.population",
+        "title": "India share of world population",
+        "sourceId": "worldbank",
+        "unit": "%",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v2.world.share.gdp_current_usd",
+        "indicatorId": "world.share.gdp_current_usd",
+        "title": "India share of world GDP",
+        "sourceId": "worldbank",
+        "unit": "%",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v3.world.share.co2_total",
+        "indicatorId": "world.share.co2_total",
+        "title": "India share of world CO2 emissions",
+        "sourceId": "owid",
+        "unit": "%",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v4.econ.compare.gdp_current_usd",
+        "indicatorId": "econ.compare.gdp_current_usd",
+        "title": "GDP comparison",
+        "sourceId": "worldbank",
+        "unit": "current US$",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v5.econ.compare.gdp_per_capita_current_usd",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+        "title": "GDP per person comparison",
+        "sourceId": "worldbank",
+        "unit": "current US$ per person",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v6.econ.compare.gdp_ppp_current_intl",
+        "indicatorId": "econ.compare.gdp_ppp_current_intl",
+        "title": "GDP by purchasing-power parity",
+        "sourceId": "worldbank",
+        "unit": "current international $",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v7.econ.compare.population_total",
+        "indicatorId": "econ.compare.population_total",
+        "title": "Population comparison",
+        "sourceId": "worldbank",
+        "unit": "people",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      }
+    ],
+    "selectedDataPoints": [
+      {
+        "label": "India share of world population, latest",
+        "value": 17.820803715752138,
+        "displayValue": "17.8%",
+        "date": "2024",
+        "unit": "%",
+        "indicatorId": "world.share.population",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "India share of world population, earliest",
+        "value": 14.42953897622637,
+        "displayValue": "14.4%",
+        "date": "1960",
+        "unit": "%",
+        "indicatorId": "world.share.population",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "India share of world GDP, latest",
+        "value": 3.522975113667771,
+        "displayValue": "3.5%",
+        "date": "2024",
+        "unit": "%",
+        "indicatorId": "world.share.gdp_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "India share of world GDP, earliest",
+        "value": 2.709857186528369,
+        "displayValue": "2.7%",
+        "date": "1960",
+        "unit": "%",
+        "indicatorId": "world.share.gdp_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "India share of world CO2 emissions, latest",
+        "value": 8.273563690684995,
+        "displayValue": "8.3%",
+        "date": "2024",
+        "unit": "%",
+        "indicatorId": "world.share.co2_total",
+        "sourceId": "owid",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "India share of world CO2 emissions, earliest",
+        "value": 0.13814856872940412,
+        "displayValue": "0.1%",
+        "date": "1858",
+        "unit": "%",
+        "indicatorId": "world.share.co2_total",
+        "sourceId": "owid",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP comparison: value",
+        "value": 37029883876.1839,
+        "displayValue": "37.03 billion",
+        "date": "1960",
+        "unit": "current US$",
+        "indicatorId": "econ.compare.gdp_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP comparison: value",
+        "value": 59846235024.7318,
+        "displayValue": "59.85 billion",
+        "date": "1960",
+        "unit": "current US$",
+        "indicatorId": "econ.compare.gdp_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP comparison: value",
+        "value": 541988586206.897,
+        "displayValue": "541.99 billion",
+        "date": "1960",
+        "unit": "current US$",
+        "indicatorId": "econ.compare.gdp_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP comparison: value",
+        "value": 1366488391354.06,
+        "displayValue": "$1.37 trillion",
+        "date": "1960",
+        "unit": "current US$",
+        "indicatorId": "econ.compare.gdp_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 84.9328084793106,
+        "displayValue": "84.93",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 89.7150749167731,
+        "displayValue": "89.72",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 2999.86487154495,
+        "displayValue": "2,999.86",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 452.253084186565,
+        "displayValue": "452.25",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Population comparison: value",
+        "value": 435990338,
+        "displayValue": "43.6 crore",
+        "date": "1960",
+        "unit": "people",
+        "indicatorId": "econ.compare.population_total",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Population comparison: value",
+        "value": 667070000,
+        "displayValue": "66.7 crore",
+        "date": "1960",
+        "unit": "people",
+        "indicatorId": "econ.compare.population_total",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Population comparison: value",
+        "value": 180671000,
+        "displayValue": "18.1 crore",
+        "date": "1960",
+        "unit": "people",
+        "indicatorId": "econ.compare.population_total",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Population comparison: value",
+        "value": 3021512598,
+        "displayValue": "302.2 crore",
+        "date": "1960",
+        "unit": "people",
+        "indicatorId": "econ.compare.population_total",
+        "sourceId": "worldbank",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      }
     ],
     "lockedNumbers": [
       {
-        "label": "GDP, current US dollars, latest",
-        "value": 3909891533858.08,
+        "label": "India share of world population, latest",
+        "value": 17.820803715752138,
+        "displayValue": "17.8%",
         "date": "2024",
-        "unit": "current US$",
+        "unit": "%",
         "sourceId": "worldbank",
-        "indicatorId": "econ.gdp.current_usd"
+        "indicatorId": "world.share.population"
       },
       {
-        "label": "GDP, current US dollars, earliest",
+        "label": "India share of world population, earliest",
+        "value": 14.42953897622637,
+        "displayValue": "14.4%",
+        "date": "1960",
+        "unit": "%",
+        "sourceId": "worldbank",
+        "indicatorId": "world.share.population"
+      },
+      {
+        "label": "India share of world GDP, latest",
+        "value": 3.522975113667771,
+        "displayValue": "3.5%",
+        "date": "2024",
+        "unit": "%",
+        "sourceId": "worldbank",
+        "indicatorId": "world.share.gdp_current_usd"
+      },
+      {
+        "label": "India share of world GDP, earliest",
+        "value": 2.709857186528369,
+        "displayValue": "2.7%",
+        "date": "1960",
+        "unit": "%",
+        "sourceId": "worldbank",
+        "indicatorId": "world.share.gdp_current_usd"
+      },
+      {
+        "label": "India share of world CO2 emissions, latest",
+        "value": 8.273563690684995,
+        "displayValue": "8.3%",
+        "date": "2024",
+        "unit": "%",
+        "sourceId": "owid",
+        "indicatorId": "world.share.co2_total"
+      },
+      {
+        "label": "India share of world CO2 emissions, earliest",
+        "value": 0.13814856872940412,
+        "displayValue": "0.1%",
+        "date": "1858",
+        "unit": "%",
+        "sourceId": "owid",
+        "indicatorId": "world.share.co2_total"
+      },
+      {
+        "label": "GDP comparison: value",
         "value": 37029883876.1839,
+        "displayValue": "37.03 billion",
         "date": "1960",
         "unit": "current US$",
         "sourceId": "worldbank",
-        "indicatorId": "econ.gdp.current_usd"
+        "indicatorId": "econ.compare.gdp_current_usd"
       },
       {
-        "label": "Population, total, latest",
-        "value": 1450935791,
-        "date": "2024",
-        "unit": "people",
+        "label": "GDP comparison: value",
+        "value": 59846235024.7318,
+        "displayValue": "59.85 billion",
+        "date": "1960",
+        "unit": "current US$",
         "sourceId": "worldbank",
-        "indicatorId": "people.population.total"
+        "indicatorId": "econ.compare.gdp_current_usd"
       },
       {
-        "label": "Population, total, earliest",
+        "label": "GDP comparison: value",
+        "value": 541988586206.897,
+        "displayValue": "541.99 billion",
+        "date": "1960",
+        "unit": "current US$",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.gdp_current_usd"
+      },
+      {
+        "label": "GDP comparison: value",
+        "value": 1366488391354.06,
+        "displayValue": "$1.37 trillion",
+        "date": "1960",
+        "unit": "current US$",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.gdp_current_usd"
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 84.9328084793106,
+        "displayValue": "84.93",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd"
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 89.7150749167731,
+        "displayValue": "89.72",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd"
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 2999.86487154495,
+        "displayValue": "2,999.86",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd"
+      },
+      {
+        "label": "GDP per person comparison: value",
+        "value": 452.253084186565,
+        "displayValue": "452.25",
+        "date": "1960",
+        "unit": "current US$ per person",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd"
+      },
+      {
+        "label": "Population comparison: value",
         "value": 435990338,
+        "displayValue": "43.6 crore",
         "date": "1960",
         "unit": "people",
         "sourceId": "worldbank",
-        "indicatorId": "people.population.total"
+        "indicatorId": "econ.compare.population_total"
+      },
+      {
+        "label": "Population comparison: value",
+        "value": 667070000,
+        "displayValue": "66.7 crore",
+        "date": "1960",
+        "unit": "people",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.population_total"
+      },
+      {
+        "label": "Population comparison: value",
+        "value": 180671000,
+        "displayValue": "18.1 crore",
+        "date": "1960",
+        "unit": "people",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.population_total"
+      },
+      {
+        "label": "Population comparison: value",
+        "value": 3021512598,
+        "displayValue": "302.2 crore",
+        "date": "1960",
+        "unit": "people",
+        "sourceId": "worldbank",
+        "indicatorId": "econ.compare.population_total"
       }
     ],
     "sourceSummaries": [
       {
-        "indicatorId": "climate.co2.total",
-        "title": "CO2 emissions",
+        "indicatorId": "world.share.population",
+        "title": "India share of world population",
         "sourceId": "worldbank",
-        "sourceIndicatorId": "EN.ATM.CO2E.KT",
-        "unit": "kt",
+        "sourceIndicatorId": "SP.POP.TOTL",
+        "unit": "%",
         "frequency": "annual",
         "geography": {
-          "type": "country",
-          "id": "IN",
-          "name": "India"
+          "type": "derived-share",
+          "id": "IND/WLD",
+          "name": "India as share of world"
         },
-        "observations": 0
+        "observations": 65,
+        "earliest": {
+          "date": "1960",
+          "value": 14.42953897622637
+        },
+        "latest": {
+          "date": "2024",
+          "value": 17.820803715752138
+        }
       },
       {
-        "indicatorId": "econ.gdp.current_usd",
-        "title": "GDP, current US dollars",
+        "indicatorId": "world.share.gdp_current_usd",
+        "title": "India share of world GDP",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.MKTP.CD",
+        "unit": "%",
+        "frequency": "annual",
+        "geography": {
+          "type": "derived-share",
+          "id": "IND/WLD",
+          "name": "India as share of world"
+        },
+        "observations": 65,
+        "earliest": {
+          "date": "1960",
+          "value": 2.709857186528369
+        },
+        "latest": {
+          "date": "2024",
+          "value": 3.522975113667771
+        }
+      },
+      {
+        "indicatorId": "world.share.co2_total",
+        "title": "India share of world CO2 emissions",
+        "sourceId": "owid",
+        "sourceIndicatorId": "annual-co2-emissions-per-country",
+        "unit": "%",
+        "frequency": "annual",
+        "geography": {
+          "type": "derived-share",
+          "id": "IND/WLD",
+          "name": "India as share of world"
+        },
+        "observations": 156,
+        "earliest": {
+          "date": "1858",
+          "value": 0.13814856872940412
+        },
+        "latest": {
+          "date": "2024",
+          "value": 8.273563690684995
+        }
+      },
+      {
+        "indicatorId": "econ.compare.gdp_current_usd",
+        "title": "GDP comparison",
         "sourceId": "worldbank",
         "sourceIndicatorId": "NY.GDP.MKTP.CD",
         "unit": "current US$",
-        "frequency": "annual",
         "geography": {
-          "type": "country",
-          "id": "IN",
-          "name": "India"
+          "type": "country-group",
+          "id": "IND-CHN-USA-WLD",
+          "name": "India, China, United States, and world"
         },
-        "observations": 66,
-        "earliest": {
-          "date": "1960",
-          "value": 37029883876.1839
-        },
-        "latest": {
-          "date": "2024",
-          "value": 3909891533858.08
-        }
+        "rows": 264,
+        "dimensions": [
+          "date",
+          "countryCode",
+          "countryName",
+          "value"
+        ],
+        "latestRows": [
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2024",
+            "value": 3909891533858.08,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2024",
+            "value": 18743803170827.2,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2024",
+            "value": 28750956130731.2,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2024",
+            "value": 110982661180013,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2023",
+            "value": 3638489096033.86,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2023",
+            "value": 18270356654533.2,
+            "countryCode": "CHN",
+            "countryName": "China"
+          }
+        ]
       },
       {
-        "indicatorId": "people.population.total",
-        "title": "Population, total",
+        "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+        "title": "GDP per person comparison",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.PCAP.CD",
+        "unit": "current US$ per person",
+        "geography": {
+          "type": "country-group",
+          "id": "IND-CHN-USA-WLD",
+          "name": "India, China, United States, and world"
+        },
+        "rows": 264,
+        "dimensions": [
+          "date",
+          "countryCode",
+          "countryName",
+          "value"
+        ],
+        "latestRows": [
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2024",
+            "value": 2694.73780859961,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2024",
+            "value": 13303.1481543868,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2024",
+            "value": 84534.0407841548,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2024",
+            "value": 13631.2043097215,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2023",
+            "value": 2530.12031278204,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2023",
+            "value": 12951.1782397043,
+            "countryCode": "CHN",
+            "countryName": "China"
+          }
+        ]
+      },
+      {
+        "indicatorId": "econ.compare.gdp_ppp_current_intl",
+        "title": "GDP by purchasing-power parity",
+        "sourceId": "worldbank",
+        "sourceIndicatorId": "NY.GDP.MKTP.PP.CD",
+        "unit": "current international $",
+        "geography": {
+          "type": "country-group",
+          "id": "IND-CHN-USA-WLD",
+          "name": "India, China, United States, and world"
+        },
+        "rows": 264,
+        "dimensions": [
+          "date",
+          "countryCode",
+          "countryName",
+          "value"
+        ],
+        "latestRows": [
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2024",
+            "value": 16192422603162.4,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2024",
+            "value": 38190084585497.8,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2024",
+            "value": 29184890000000.1,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2024",
+            "value": 199686103878086,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2023",
+            "value": 14845911292307.9,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2023",
+            "value": 35520435397067.7,
+            "countryCode": "CHN",
+            "countryName": "China"
+          }
+        ]
+      },
+      {
+        "indicatorId": "econ.compare.population_total",
+        "title": "Population comparison",
         "sourceId": "worldbank",
         "sourceIndicatorId": "SP.POP.TOTL",
         "unit": "people",
-        "frequency": "annual",
         "geography": {
-          "type": "country",
-          "id": "IN",
-          "name": "India"
+          "type": "country-group",
+          "id": "IND-CHN-USA-WLD",
+          "name": "India, China, United States, and world"
         },
-        "observations": 66,
-        "earliest": {
-          "date": "1960",
-          "value": 435990338
-        },
-        "latest": {
-          "date": "2024",
-          "value": 1450935791
-        }
+        "rows": 264,
+        "dimensions": [
+          "date",
+          "countryCode",
+          "countryName",
+          "value"
+        ],
+        "latestRows": [
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2025",
+            "value": null,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2024",
+            "value": 1450935791,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2024",
+            "value": 1408975000,
+            "countryCode": "CHN",
+            "countryName": "China"
+          },
+          {
+            "date": "2024",
+            "value": 340110988,
+            "countryCode": "USA",
+            "countryName": "United States"
+          },
+          {
+            "date": "2024",
+            "value": 8141808945,
+            "countryCode": "WLD",
+            "countryName": "World"
+          },
+          {
+            "date": "2023",
+            "value": 1438069596,
+            "countryCode": "IND",
+            "countryName": "India"
+          },
+          {
+            "date": "2023",
+            "value": 1410710000,
+            "countryCode": "CHN",
+            "countryName": "China"
+          }
+        ]
       }
+    ],
+    "selectionRules": [
+      "Start from the page question, not from the indicator name.",
+      "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+      "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+      "Use one strong pull quote only when the evidence supports it with a number.",
+      "Add glossary blocks for technical terms that normal readers may not know."
     ],
     "caveats": [
       "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
       "If source coverage is thin, say so directly.",
       "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
     ],

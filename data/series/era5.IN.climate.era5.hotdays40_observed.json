@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.era5.hotdays40_observed",
+  "title": "Observed hot days (max temperature at or above 40C), ERA5",
+  "sourceId": "era5",
+  "sourceIndicatorId": "ERA5 daily statistics, daily maximum >= 40.0C, India-masked",
+  "sourceUrl": "https://cds.climate.copernicus.eu/datasets/derived-era5-single-levels-daily-statistics",
+  "unit": "days per year",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-03T14:56:50.275127Z",
+  "observations": [
+    {
+      "date": "2015",
+      "value": 19.8
+    },
+    {
+      "date": "2016",
+      "value": 25.3
+    },
+    {
+      "date": "2017",
+      "value": 26.1
+    },
+    {
+      "date": "2018",
+      "value": 22.4
+    },
+    {
+      "date": "2019",
+      "value": 29.7
+    },
+    {
+      "date": "2020",
+      "value": 14.1
+    },
+    {
+      "date": "2021",
+      "value": 9.2
+    },
+    {
+      "date": "2022",
+      "value": 26.3
+    },
+    {
+      "date": "2023",
+      "value": 13.7
+    },
+    {
+      "date": "2024",
+      "value": 20.8
+    },
+    {
+      "date": "2025",
+      "value": 13.1
+    }
+  ],
+  "metadata": {
+    "bbox_NWSE": [
+      37,
+      68,
+      6,
+      98
+    ],
+    "threshold_C": 40.0,
+    "method": "per-cell day count, cosine-latitude-weighted India-polygon mean",
+    "note": "Observed/reanalysis. Levels not directly comparable to CMIP6-based CCKP; shown as its own observed series."
+  }
+}

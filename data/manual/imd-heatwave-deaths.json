@@ -1,0 +1,23 @@
+{
+  "source": "India Meteorological Department, Disastrous Weather Events (DWE) annual reports 2013-2024",
+  "sourceUrl": "https://www.imdpune.gov.in/library/publicationnew.html",
+  "unit": "reported deaths",
+  "extractedAt": "2026-06-03",
+  "method": "Extracted from the official DWE PDFs. Recent reports (2020-2024) give precise event-wise heatwave death counts; older reports (2013-2019) give a national narrative tally in deadly years and event-by-event detail in mild years. Extracted via Gemini direct-PDF (Indica-doc-parse pipeline, spot-checked precision 1.000) and cross-checked with liteparse; 2024 reconciles to the verified 460.",
+  "note": "These are IMD's reported heatwave deaths and are NOT a consistent series. The counting and reporting method changed over the decade (broad narrative tallies in the deadly early years; precise event-wise counts from 2020), and after the catastrophic 2015 heatwave many states launched Heat Action Plans that cut deaths. So the swing from roughly 2,000 down to near zero and back to 460 reflects policy and reporting at least as much as the weather. 2018 and 2020 were genuinely mild heat years.",
+  "regimeBreakYear": 2020,
+  "annual": [
+    { "year": 2013, "heatwaveDeaths": 1400, "approx": true, "detail": "over 1400 reported; 1393 from Andhra Pradesh" },
+    { "year": 2014, "heatwaveDeaths": 500, "approx": true, "detail": "over 500 reported; 450 from Andhra Pradesh and Telangana" },
+    { "year": 2015, "heatwaveDeaths": 2000, "approx": true, "detail": "over 2000 reported; 1422 Andhra Pradesh + 584 Telangana; India's deadliest recent heatwave" },
+    { "year": 2016, "heatwaveDeaths": 500, "approx": true, "detail": "over 500 reported; 324 from Telangana" },
+    { "year": 2017, "heatwaveDeaths": 375, "approx": false, "detail": "took a toll of 375; 236 Andhra Pradesh, 100 Telangana" },
+    { "year": 2018, "heatwaveDeaths": 38, "approx": false, "detail": "event-wise sum; mild heat year, no national headline tally" },
+    { "year": 2019, "heatwaveDeaths": 500, "approx": true, "detail": "about 500 reported; 293 from Bihar (15-18 June)" },
+    { "year": 2020, "heatwaveDeaths": 27, "approx": false, "detail": "event-wise sum; Odisha 16, Maharashtra 8, Bihar 2, Kerala 1" },
+    { "year": 2021, "heatwaveDeaths": 0, "approx": false, "detail": "no heatwave deaths recorded in the report" },
+    { "year": 2022, "heatwaveDeaths": 30, "approx": false, "detail": "event-wise; Maharashtra 13, Odisha 12, others" },
+    { "year": 2023, "heatwaveDeaths": 181, "approx": false, "detail": "event-wise; Uttar Pradesh 85+, Odisha 45, Jharkhand 25" },
+    { "year": 2024, "heatwaveDeaths": 460, "approx": false, "detail": "event-wise; Uttar Pradesh 240, Bihar 63, Telangana 46" }
+  ]
+}

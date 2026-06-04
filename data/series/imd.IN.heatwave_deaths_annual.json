@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "heat.imd_dwe.heatwave_deaths_annual",
+  "title": "Reported heatwave deaths, IMD (annual)",
+  "sourceId": "imd",
+  "sourceIndicatorId": "Disastrous Weather Events, eventwise Heat Wave deaths",
+  "sourceUrl": "https://www.imdpune.gov.in/library/publicationnew.html",
+  "unit": "reported deaths",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-03T14:38:33.634Z",
+  "observations": [
+    {
+      "date": "2013",
+      "value": 1400
+    },
+    {
+      "date": "2014",
+      "value": 500
+    },
+    {
+      "date": "2015",
+      "value": 2000
+    },
+    {
+      "date": "2016",
+      "value": 500
+    },
+    {
+      "date": "2017",
+      "value": 375
+    },
+    {
+      "date": "2018",
+      "value": 38
+    },
+    {
+      "date": "2019",
+      "value": 500
+    },
+    {
+      "date": "2020",
+      "value": 27
+    },
+    {
+      "date": "2021",
+      "value": 0
+    },
+    {
+      "date": "2022",
+      "value": 30
+    },
+    {
+      "date": "2023",
+      "value": 181
+    },
+    {
+      "date": "2024",
+      "value": 460
+    }
+  ],
+  "metadata": {
+    "method": "Extracted from the official DWE PDFs. Recent reports (2020-2024) give precise event-wise heatwave death counts; older reports (2013-2019) give a national narrative tally in deadly years and event-by-event detail in mild years. Extracted via Gemini direct-PDF (Indica-doc-parse pipeline, spot-checked precision 1.000) and cross-checked with liteparse; 2024 reconciles to the verified 460.",
+    "note": "These are IMD's reported heatwave deaths and are NOT a consistent series. The counting and reporting method changed over the decade (broad narrative tallies in the deadly early years; precise event-wise counts from 2020), and after the catastrophic 2015 heatwave many states launched Heat Action Plans that cut deaths. So the swing from roughly 2,000 down to near zero and back to 460 reflects policy and reporting at least as much as the weather. 2018 and 2020 were genuinely mild heat years."
+  }
+}

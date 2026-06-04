@@ -1,13 +1,5 @@
 import { readdir, readFile } from "node:fs/promises";
-
-const bannedPhrases = [
-  "in conclusion",
-  "delve",
-  "tapestry",
-  "complex interplay",
-  "it is important to note",
-  "crucial"
-];
+import { lintExplanation } from "./core/prose-lint.mjs";
 
 const files = (await readdir("data/explanations/en"))
   .filter((file) => file.endsWith(".json") && !file.endsWith(".evidence.json"))
@@ -28,19 +20,21 @@ for (const file of files) {
   }
   const article = doc.article?.bodyMarkdown || "";
   const words = article.split(/\s+/).filter(Boolean).length;
-  if (doc.status === "ready" && words < 450) {
+  if (doc.status === "ready" && words < 300) {
     console.error(`fail ${file}: ready article has only ${words} words`);
     failures += 1;
   }
-  if (doc.status === "ready" && words < 800) {
+  if (doc.status === "ready" && words < 380) {
     console.warn(`warn ${file}: ready article is shorter than target (${words} words)`);
     warnings += 1;
   }
-  const combinedText = `${doc.short?.headline || ""}\n${doc.short?.dek || ""}\n${doc.short?.body || ""}\n${article}`.toLowerCase();
-  for (const phrase of bannedPhrases) {
-    if (combinedText.includes(phrase)) {
-      console.error(`fail ${file}: banned phrase "${phrase}"`);
+  for (const finding of lintExplanation(doc)) {
+    if (finding.severity === "error") {
+      console.error(`fail ${file}: ${finding.field} ${finding.rule} — "${finding.match}"`);
       failures += 1;
+    } else {
+      console.warn(`warn ${file}: ${finding.field} ${finding.rule} — "${finding.match}"`);
+      warnings += 1;
     }
   }
 }

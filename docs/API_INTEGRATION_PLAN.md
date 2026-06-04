@@ -38,6 +38,49 @@ Use India Data Hub as the first serious India macro adapter because it can cover
 
 Use Ember for electricity generation mix, demand, power-sector emissions, carbon intensity, and installed capacity. Query India with `entity_code=IND`.
 
+## EIA International Energy Data
+
+- Base URL: `https://api.eia.gov/v2`
+- Open data portal: `https://www.eia.gov/opendata/`
+- Browser: `https://www.eia.gov/opendata/browser/international`
+- Auth: `api_key` query parameter.
+- Useful endpoint:
+  - `/international/data/`
+- Required request details:
+  - `frequency=annual`
+  - `data[0]=value`
+  - `facets[countryRegionId][]=IND`
+  - selected `productId`, `activityId`, and `unit` facets.
+
+Use EIA for the broad energy balance: total energy production/consumption, fuel-level energy use, coal and gas imports, petroleum production, electricity capacity, and energy-related CO2 by fuel. Ember remains the better electricity-generation source; EIA is the broader energy-system supplement.
+
+## PPAC
+
+- Base URL: `https://ppac.gov.in`
+- Key page: `https://ppac.gov.in/import-export`
+- Historical page: `https://ppac.gov.in/import-export/history`
+- Auth: none.
+- Current machine-readable artifact:
+  - `https://ppac.gov.in/uploads/pages/1669199925_Import-Export-C.xlsx`
+
+Use PPAC for official India petroleum import/export and petroleum-product workbook data. Current adapter parses the import/export workbook into monthly table rows. The historical import/export page exposes quantity, rupee-value, and dollar-value workbook names, but automated direct fetch currently returns HTML/login-wrapper content rather than XLSX bytes; keep those as discovery-only until raw download access validates. Many other PPAC surfaces are PDFs; add them one at a time after parser verification.
+
+## UN Comtrade
+
+- Base URL: `https://comtradeapi.un.org`
+- Public preview endpoint: `/public/v1/preview/{typeCode}/{freqCode}/{clCode}`
+- Keyed full endpoint: `/data/v1/get/{typeCode}/{freqCode}/{clCode}`
+- Auth: public preview works without a key; full data API requires subscription key header `Ocp-Apim-Subscription-Key`.
+- Energy commodity candidates:
+  - HS `270900`: crude oil
+  - HS `2710`: petroleum oils/products
+  - HS `2701`: coal
+  - HS `2704`: coke/semi-coke
+  - HS `271111`: liquefied natural gas
+  - HS `271121`: natural gas
+
+Use UN Comtrade for partner-origin import stories: where India's crude, coal, gas, and petroleum products come from. The adapter defaults to public preview mode; set `UN_COMTRADE_API_KEY` and `UN_COMTRADE_ENDPOINT=data/v1/get` when a full subscription is available.
+
 ## Our World in Data
 
 - Base URL: `https://ourworldindata.org`

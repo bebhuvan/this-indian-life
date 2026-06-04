@@ -1,0 +1,103 @@
+---
+// A hand-authored concept primer rendered as an editorial interlude, not a box grid:
+// a struck-through myth/reality list, a bespoke SVG "temperature of inflation" spectrum,
+// a worked numeric example, and a hyperinflation + protect-your-money close.
+import type { ConceptPrimer } from "../data/questions";
+interface Props { primer: ConceptPrimer; domain: string }
+const { primer, domain } = Astro.props;
+
+// Spectrum geometry: zones laid left→right, cold→hot. India marker sits on the
+// "here" zone; the worst end is annotated as off-scale.
+const zones = primer.ladder ?? [];
+const zoneW = zones.length ? 100 / zones.length : 0;
+const hereIdx = zones.findIndex((z) => z.here);
+const TONE: Record<string, string> = { cold: "#6c8fd6", cool: "#3fae9f", mid: "#3A5BD0", warm: "#EFA227", hot: "#e8604c" };
+---
+<section class={`primer dom-${domain}`}>
+  <div class="primer-head">
+    <p class="lbl">{primer.kicker}</p>
+    <h2 class="serif primer-lead">{primer.lead}</h2>
+  </div>
+
+  {primer.myths?.length ? (
+    <ol class="primer-myths">
+      {primer.myths.map((m, i) => (
+        <li class="myth">
+          <span class="myth-no serif">{String(i + 1).padStart(2, "0")}</span>
+          <p class="myth-claim serif">{m.myth}</p>
+          <p class="myth-real"><span class="myth-lead">Actually —</span> {m.reality}</p>
+        </li>
+      ))}
+    </ol>
+  ) : null}
+
+  {zones.length ? (
+    <figure class="primer-spectrum">
+      <figcaption class="lbl">The temperature of inflation</figcaption>
+      <svg viewBox="0 0 1000 150" role="img" aria-label="A scale of inflation from deflation to hyperinflation, with India marked in the normal range.">
+        <defs>
+          <linearGradient id="inflGrad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#6c8fd6" stop-opacity="0.85" />
+            <stop offset="28%" stop-color="#3fae9f" stop-opacity="0.85" />
+            <stop offset="50%" stop-color="#3A5BD0" stop-opacity="0.9" />
+            <stop offset="74%" stop-color="#EFA227" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="#e8604c" stop-opacity="0.95" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="58" width="1000" height="20" rx="3" fill="url(#inflGrad)" />
+        {zones.map((z, i) => i > 0 ? (
+          <line x1={i * zoneW * 10} y1="54" x2={i * zoneW * 10} y2="82" stroke="#ffffff" stroke-width="2" />
+        ) : null)}
+        {zones.map((z, i) => (
+          <text x={(i * zoneW + zoneW / 2) * 10} y="104" text-anchor="middle" class="sp-term">{z.term}</text>
+        ))}
+        {zones.map((z, i) => (
+          <text x={(i * zoneW + zoneW / 2) * 10} y="122" text-anchor="middle" class="sp-note">{z.note}</text>
+        ))}
+        {hereIdx >= 0 ? (
+          <g>
+            <line x1={(hereIdx * zoneW + zoneW / 2) * 10} y1="30" x2={(hereIdx * zoneW + zoneW / 2) * 10} y2="58" stroke="var(--c)" stroke-width="2" />
+            <circle cx={(hereIdx * zoneW + zoneW / 2) * 10} cy="30" r="5" fill="var(--c)" />
+            <text x={(hereIdx * zoneW + zoneW / 2) * 10} y="20" text-anchor="middle" class="sp-pin">India, most years</text>
+          </g>
+        ) : null}
+      </svg>
+      <p class="sp-caption">India’s worst year ever (1974) was 29% — high, but never near the runaway end. Hyperinflation runs into the thousands of percent, off the right of this scale.</p>
+    </figure>
+  ) : null}
+
+  {primer.example ? (
+    <div class="primer-example">
+      <p class="ex-lead serif">{primer.example.lead}</p>
+      <div class="ex-track">
+        {primer.example.steps.map((s, i) => (
+          <div class="ex-step">
+            <span class="ex-year">{s.year}</span>
+            <span class="ex-price serif">₹{s.to}</span>
+            <span class={`ex-rate ${i === 0 ? "ex-rate--hot" : "ex-rate--cool"}`}>{s.rate}</span>
+          </div>
+        ))}
+      </div>
+      <p class="ex-insight">{primer.example.insight}</p>
+    </div>
+  ) : null}
+
+  <div class="primer-close">
+    {primer.hyperinflation ? (
+      <div class="primer-hyper">
+        <h3 class="serif">{primer.hyperinflation.heading}</h3>
+        {primer.hyperinflation.stat ? (
+          <p class="hyper-stat"><span class="hyper-num serif">{primer.hyperinflation.stat}</span><span class="hyper-lab">{primer.hyperinflation.statLabel}</span></p>
+        ) : null}
+        <p class="hyper-body">{primer.hyperinflation.body}</p>
+      </div>
+    ) : null}
+    {primer.protect ? (
+      <div class="primer-protect">
+        <h3 class="serif">{primer.protect.heading}</h3>
+        <ul>{primer.protect.points.map((pt) => <li>{pt}</li>)}</ul>
+        {primer.protect.disclaimer ? <p class="primer-disclaimer">{primer.protect.disclaimer}</p> : null}
+      </div>
+    ) : null}
+  </div>
+</section>

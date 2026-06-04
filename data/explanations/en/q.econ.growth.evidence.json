@@ -3,16 +3,175 @@
   "questionId": "q.econ.growth",
   "question": "How fast is India's economy growing?",
   "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
   "requiredIndicatorIds": [
-    "econ.gdp.growth_real"
+    "econ.gdp.growth_real",
+    "econ.idh.real_gdp_annual",
+    "econ.idh.real_gdp_quarterly"
   ],
   "availableIndicatorIds": [
-    "econ.gdp.growth_real"
+    "econ.gdp.growth_real",
+    "econ.idh.real_gdp_annual",
+    "econ.idh.real_gdp_quarterly"
+  ],
+  "themeIndicatorIds": [
+    "econ.gdp.growth_real",
+    "econ.idh.real_gdp_annual",
+    "econ.idh.real_gdp_quarterly",
+    "econ.inflation_cpi"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.econ.gdp.growth_real",
+      "indicatorId": "econ.gdp.growth_real",
+      "title": "GDP growth, annual percent",
+      "sourceId": "worldbank",
+      "unit": "annual %",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.econ.idh.real_gdp_annual",
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "title": "Real GDP, annual",
+      "sourceId": "indiadatahub",
+      "unit": "rupees, 2011-12 prices",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.econ.idh.real_gdp_quarterly",
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "title": "Real GDP, quarterly",
+      "sourceId": "indiadatahub",
+      "unit": "rupees, 2011-12 prices",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.econ.inflation_cpi",
+      "indicatorId": "econ.inflation_cpi",
+      "title": "Inflation, consumer prices",
+      "sourceId": "worldbank",
+      "unit": "annual %",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "GDP growth, annual percent, latest",
+      "value": 6.49476552383821,
+      "displayValue": "6.5%",
+      "date": "2024",
+      "unit": "annual %",
+      "indicatorId": "econ.gdp.growth_real",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP growth, annual percent, earliest",
+      "value": 3.72274253311053,
+      "displayValue": "3.7%",
+      "date": "1961",
+      "unit": "annual %",
+      "indicatorId": "econ.gdp.growth_real",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, annual, latest",
+      "value": 201899190000000,
+      "displayValue": "₹201.9 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, annual, earliest",
+      "value": 4968481226714.06,
+      "displayValue": "₹5 lakh crore",
+      "date": "1951-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, quarterly, latest",
+      "value": 48633400000000,
+      "displayValue": "₹48.6 lakh crore",
+      "date": "2025-09-30",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, quarterly, earliest",
+      "value": 21028628175453.5,
+      "displayValue": "₹21 lakh crore",
+      "date": "2011-06-30",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Inflation, consumer prices, latest",
+      "value": 4.95303550973656,
+      "displayValue": "5%",
+      "date": "2024",
+      "unit": "annual %",
+      "indicatorId": "econ.inflation_cpi",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Inflation, consumer prices, earliest",
+      "value": 1.77987784677382,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "annual %",
+      "indicatorId": "econ.inflation_cpi",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
   ],
   "lockedNumbers": [
     {
       "label": "GDP growth, annual percent, latest",
       "value": 6.49476552383821,
+      "displayValue": "6.5%",
       "date": "2024",
       "unit": "annual %",
       "sourceId": "worldbank",
@@ -21,10 +180,65 @@
     {
       "label": "GDP growth, annual percent, earliest",
       "value": 3.72274253311053,
+      "displayValue": "3.7%",
       "date": "1961",
       "unit": "annual %",
       "sourceId": "worldbank",
       "indicatorId": "econ.gdp.growth_real"
+    },
+    {
+      "label": "Real GDP, annual, latest",
+      "value": 201899190000000,
+      "displayValue": "₹201.9 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_annual"
+    },
+    {
+      "label": "Real GDP, annual, earliest",
+      "value": 4968481226714.06,
+      "displayValue": "₹5 lakh crore",
+      "date": "1951-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_annual"
+    },
+    {
+      "label": "Real GDP, quarterly, latest",
+      "value": 48633400000000,
+      "displayValue": "₹48.6 lakh crore",
+      "date": "2025-09-30",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_quarterly"
+    },
+    {
+      "label": "Real GDP, quarterly, earliest",
+      "value": 21028628175453.5,
+      "displayValue": "₹21 lakh crore",
+      "date": "2011-06-30",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_quarterly"
+    },
+    {
+      "label": "Inflation, consumer prices, latest",
+      "value": 4.95303550973656,
+      "displayValue": "5%",
+      "date": "2024",
+      "unit": "annual %",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inflation_cpi"
+    },
+    {
+      "label": "Inflation, consumer prices, earliest",
+      "value": 1.77987784677382,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "annual %",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inflation_cpi"
     }
   ],
   "sourceSummaries": [
@@ -49,10 +263,84 @@
         "date": "2024",
         "value": 6.49476552383821
       }
+    },
+    {
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "title": "Real GDP, annual",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDREAGDP12A",
+      "unit": "rupees, 2011-12 prices",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 4968481226714.06
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 201899190000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "title": "Real GDP, quarterly",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDREAGDP12Q",
+      "unit": "rupees, 2011-12 prices",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 58,
+      "earliest": {
+        "date": "2011-06-30",
+        "value": 21028628175453.5
+      },
+      "latest": {
+        "date": "2025-09-30",
+        "value": 48633400000000
+      }
+    },
+    {
+      "indicatorId": "econ.inflation_cpi",
+      "title": "Inflation, consumer prices",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "FP.CPI.TOTL.ZG",
+      "unit": "annual %",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 1.77987784677382
+      },
+      "latest": {
+        "date": "2024",
+        "value": 4.95303550973656
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

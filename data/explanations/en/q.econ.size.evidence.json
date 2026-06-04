@@ -3,56 +3,1046 @@
   "questionId": "q.econ.size",
   "question": "How big is India's economy?",
   "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
   "requiredIndicatorIds": [
-    "econ.gdp.current_usd"
+    "econ.idh.nominal_gdp_annual",
+    "econ.idh.real_gdp_annual",
+    "econ.idh.nominal_gdp_quarterly",
+    "econ.idh.real_gdp_quarterly",
+    "econ.idh.per_capita_nominal_gdp",
+    "econ.idh.gva_agriculture_nominal",
+    "econ.idh.gva_industry_nominal",
+    "econ.idh.gva_services_nominal",
+    "econ.idh.private_consumption_nominal",
+    "econ.idh.gross_capital_formation_nominal",
+    "econ.idh.government_consumption_nominal",
+    "econ.idh.exports_nominal",
+    "econ.idh.imports_nominal",
+    "econ.idh.net_exports_nominal"
   ],
   "availableIndicatorIds": [
-    "econ.gdp.current_usd"
+    "econ.idh.nominal_gdp_annual",
+    "econ.idh.real_gdp_annual",
+    "econ.idh.nominal_gdp_quarterly",
+    "econ.idh.real_gdp_quarterly",
+    "econ.idh.per_capita_nominal_gdp",
+    "econ.idh.gva_agriculture_nominal",
+    "econ.idh.gva_industry_nominal",
+    "econ.idh.gva_services_nominal",
+    "econ.idh.private_consumption_nominal",
+    "econ.idh.gross_capital_formation_nominal",
+    "econ.idh.government_consumption_nominal",
+    "econ.idh.exports_nominal",
+    "econ.idh.imports_nominal",
+    "econ.idh.net_exports_nominal"
+  ],
+  "themeIndicatorIds": [
+    "econ.idh.nominal_gdp_annual",
+    "econ.idh.real_gdp_annual",
+    "econ.idh.nominal_gdp_quarterly",
+    "econ.idh.real_gdp_quarterly",
+    "econ.idh.per_capita_nominal_gdp",
+    "econ.idh.gva_agriculture_nominal",
+    "econ.idh.gva_industry_nominal",
+    "econ.idh.gva_services_nominal",
+    "econ.idh.private_consumption_nominal",
+    "econ.idh.gross_capital_formation_nominal",
+    "econ.idh.government_consumption_nominal",
+    "econ.idh.exports_nominal",
+    "econ.idh.imports_nominal",
+    "econ.idh.net_exports_nominal"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.econ.idh.nominal_gdp_annual",
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "title": "Nominal GDP, annual",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.econ.idh.real_gdp_annual",
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "title": "Real GDP, annual",
+      "sourceId": "indiadatahub",
+      "unit": "rupees, 2011-12 prices",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.econ.idh.nominal_gdp_quarterly",
+      "indicatorId": "econ.idh.nominal_gdp_quarterly",
+      "title": "Nominal GDP, quarterly",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.econ.idh.real_gdp_quarterly",
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "title": "Real GDP, quarterly",
+      "sourceId": "indiadatahub",
+      "unit": "rupees, 2011-12 prices",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.econ.idh.per_capita_nominal_gdp",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "title": "Per capita nominal GDP",
+      "sourceId": "indiadatahub",
+      "unit": "rupees per person",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.econ.idh.gva_agriculture_nominal",
+      "indicatorId": "econ.idh.gva_agriculture_nominal",
+      "title": "Nominal GVA, agriculture and allied activities",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.econ.idh.gva_industry_nominal",
+      "indicatorId": "econ.idh.gva_industry_nominal",
+      "title": "Nominal GVA, industry",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v8.econ.idh.gva_services_nominal",
+      "indicatorId": "econ.idh.gva_services_nominal",
+      "title": "Nominal GVA, services",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v9.econ.idh.private_consumption_nominal",
+      "indicatorId": "econ.idh.private_consumption_nominal",
+      "title": "Nominal private final consumption expenditure",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v10.econ.idh.gross_capital_formation_nominal",
+      "indicatorId": "econ.idh.gross_capital_formation_nominal",
+      "title": "Nominal gross capital formation",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v11.econ.idh.government_consumption_nominal",
+      "indicatorId": "econ.idh.government_consumption_nominal",
+      "title": "Nominal government final consumption expenditure",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v12.econ.idh.exports_nominal",
+      "indicatorId": "econ.idh.exports_nominal",
+      "title": "Nominal exports of goods and services",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v13.econ.idh.imports_nominal",
+      "indicatorId": "econ.idh.imports_nominal",
+      "title": "Nominal imports of goods and services",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v14.econ.idh.net_exports_nominal",
+      "indicatorId": "econ.idh.net_exports_nominal",
+      "title": "Nominal net exports of goods and services",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "Nominal GDP, annual, latest",
+      "value": 357138860000000,
+      "displayValue": "₹357.1 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GDP, annual, earliest",
+      "value": 102216298938.557,
+      "displayValue": "₹10,221.6 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, annual, latest",
+      "value": 201899190000000,
+      "displayValue": "₹201.9 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, annual, earliest",
+      "value": 4968481226714.06,
+      "displayValue": "₹5 lakh crore",
+      "date": "1951-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GDP, quarterly, latest",
+      "value": 85250700000000,
+      "displayValue": "₹85.3 lakh crore",
+      "date": "2025-09-30",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.nominal_gdp_quarterly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GDP, quarterly, earliest",
+      "value": 20434962911524.9,
+      "displayValue": "₹20.4 lakh crore",
+      "date": "2011-06-30",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.nominal_gdp_quarterly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, quarterly, latest",
+      "value": 48633400000000,
+      "displayValue": "₹48.6 lakh crore",
+      "date": "2025-09-30",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Real GDP, quarterly, earliest",
+      "value": 21028628175453.5,
+      "displayValue": "₹21 lakh crore",
+      "date": "2011-06-30",
+      "unit": "rupees, 2011-12 prices",
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Per capita nominal GDP, latest",
+      "value": 251393,
+      "displayValue": "₹2.5 lakh",
+      "date": "2026-03-31",
+      "unit": "rupees per person",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Per capita nominal GDP, earliest",
+      "value": 284.725066681216,
+      "displayValue": "₹285",
+      "date": "1951-03-31",
+      "unit": "rupees per person",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GVA, agriculture and allied activities, latest",
+      "value": 54279080000000,
+      "displayValue": "₹54.3 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gva_agriculture_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GVA, agriculture and allied activities, earliest",
+      "value": 52197647107.0242,
+      "displayValue": "₹5,219.8 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gva_agriculture_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GVA, industry, latest",
+      "value": 86802460000000,
+      "displayValue": "₹86.8 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gva_industry_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GVA, industry, earliest",
+      "value": 15840733038.932,
+      "displayValue": "₹1,584.1 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gva_industry_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GVA, services, latest",
+      "value": 182397190000000,
+      "displayValue": "₹182.4 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gva_services_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GVA, services, earliest",
+      "value": 34824903333.2432,
+      "displayValue": "₹3,482.5 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gva_services_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal private final consumption expenditure, latest",
+      "value": 219638650000000,
+      "displayValue": "₹219.6 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.private_consumption_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal private final consumption expenditure, earliest",
+      "value": 91087020007.8724,
+      "displayValue": "₹9,108.7 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.private_consumption_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal gross capital formation, latest",
+      "value": 118039860000000,
+      "displayValue": "₹118 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gross_capital_formation_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal gross capital formation, earliest",
+      "value": 10289724313.6471,
+      "displayValue": "₹1,029 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.gross_capital_formation_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal government final consumption expenditure, latest",
+      "value": 35198360000000,
+      "displayValue": "₹35.2 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.government_consumption_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal government final consumption expenditure, earliest",
+      "value": 5685720442.96763,
+      "displayValue": "₹568.6 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.government_consumption_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal exports of goods and services, latest",
+      "value": 76620520000000,
+      "displayValue": "₹76.6 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.exports_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal exports of goods and services, earliest",
+      "value": 7360000000,
+      "displayValue": "₹736 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.exports_nominal",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
   ],
   "lockedNumbers": [
     {
-      "label": "GDP, current US dollars, latest",
-      "value": 3909891533858.08,
-      "date": "2024",
-      "unit": "current US$",
-      "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.current_usd"
+      "label": "Nominal GDP, annual, latest",
+      "value": 357138860000000,
+      "displayValue": "₹357.1 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.nominal_gdp_annual"
     },
     {
-      "label": "GDP, current US dollars, earliest",
-      "value": 37029883876.1839,
-      "date": "1960",
-      "unit": "current US$",
-      "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.current_usd"
+      "label": "Nominal GDP, annual, earliest",
+      "value": 102216298938.557,
+      "displayValue": "₹10,221.6 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.nominal_gdp_annual"
+    },
+    {
+      "label": "Real GDP, annual, latest",
+      "value": 201899190000000,
+      "displayValue": "₹201.9 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_annual"
+    },
+    {
+      "label": "Real GDP, annual, earliest",
+      "value": 4968481226714.06,
+      "displayValue": "₹5 lakh crore",
+      "date": "1951-03-31",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_annual"
+    },
+    {
+      "label": "Nominal GDP, quarterly, latest",
+      "value": 85250700000000,
+      "displayValue": "₹85.3 lakh crore",
+      "date": "2025-09-30",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.nominal_gdp_quarterly"
+    },
+    {
+      "label": "Nominal GDP, quarterly, earliest",
+      "value": 20434962911524.9,
+      "displayValue": "₹20.4 lakh crore",
+      "date": "2011-06-30",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.nominal_gdp_quarterly"
+    },
+    {
+      "label": "Real GDP, quarterly, latest",
+      "value": 48633400000000,
+      "displayValue": "₹48.6 lakh crore",
+      "date": "2025-09-30",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_quarterly"
+    },
+    {
+      "label": "Real GDP, quarterly, earliest",
+      "value": 21028628175453.5,
+      "displayValue": "₹21 lakh crore",
+      "date": "2011-06-30",
+      "unit": "rupees, 2011-12 prices",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.real_gdp_quarterly"
+    },
+    {
+      "label": "Per capita nominal GDP, latest",
+      "value": 251393,
+      "displayValue": "₹2.5 lakh",
+      "date": "2026-03-31",
+      "unit": "rupees per person",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp"
+    },
+    {
+      "label": "Per capita nominal GDP, earliest",
+      "value": 284.725066681216,
+      "displayValue": "₹285",
+      "date": "1951-03-31",
+      "unit": "rupees per person",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp"
+    },
+    {
+      "label": "Nominal GVA, agriculture and allied activities, latest",
+      "value": 54279080000000,
+      "displayValue": "₹54.3 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gva_agriculture_nominal"
+    },
+    {
+      "label": "Nominal GVA, agriculture and allied activities, earliest",
+      "value": 52197647107.0242,
+      "displayValue": "₹5,219.8 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gva_agriculture_nominal"
+    },
+    {
+      "label": "Nominal GVA, industry, latest",
+      "value": 86802460000000,
+      "displayValue": "₹86.8 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gva_industry_nominal"
+    },
+    {
+      "label": "Nominal GVA, industry, earliest",
+      "value": 15840733038.932,
+      "displayValue": "₹1,584.1 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gva_industry_nominal"
+    },
+    {
+      "label": "Nominal GVA, services, latest",
+      "value": 182397190000000,
+      "displayValue": "₹182.4 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gva_services_nominal"
+    },
+    {
+      "label": "Nominal GVA, services, earliest",
+      "value": 34824903333.2432,
+      "displayValue": "₹3,482.5 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gva_services_nominal"
+    },
+    {
+      "label": "Nominal private final consumption expenditure, latest",
+      "value": 219638650000000,
+      "displayValue": "₹219.6 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.private_consumption_nominal"
+    },
+    {
+      "label": "Nominal private final consumption expenditure, earliest",
+      "value": 91087020007.8724,
+      "displayValue": "₹9,108.7 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.private_consumption_nominal"
+    },
+    {
+      "label": "Nominal gross capital formation, latest",
+      "value": 118039860000000,
+      "displayValue": "₹118 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gross_capital_formation_nominal"
+    },
+    {
+      "label": "Nominal gross capital formation, earliest",
+      "value": 10289724313.6471,
+      "displayValue": "₹1,029 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.gross_capital_formation_nominal"
+    },
+    {
+      "label": "Nominal government final consumption expenditure, latest",
+      "value": 35198360000000,
+      "displayValue": "₹35.2 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.government_consumption_nominal"
+    },
+    {
+      "label": "Nominal government final consumption expenditure, earliest",
+      "value": 5685720442.96763,
+      "displayValue": "₹568.6 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.government_consumption_nominal"
+    },
+    {
+      "label": "Nominal exports of goods and services, latest",
+      "value": 76620520000000,
+      "displayValue": "₹76.6 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.exports_nominal"
+    },
+    {
+      "label": "Nominal exports of goods and services, earliest",
+      "value": 7360000000,
+      "displayValue": "₹736 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.exports_nominal"
+    },
+    {
+      "label": "Nominal imports of goods and services, latest",
+      "value": 84688830000000,
+      "displayValue": "₹84.7 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.imports_nominal"
+    },
+    {
+      "label": "Nominal imports of goods and services, earliest",
+      "value": 7110000000,
+      "displayValue": "₹711 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.imports_nominal"
+    },
+    {
+      "label": "Nominal net exports of goods and services, latest",
+      "value": -8068310000000,
+      "displayValue": "₹-8.1 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.net_exports_nominal"
+    },
+    {
+      "label": "Nominal net exports of goods and services, earliest",
+      "value": 250000000,
+      "displayValue": "₹25 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.net_exports_nominal"
     }
   ],
   "sourceSummaries": [
     {
-      "indicatorId": "econ.gdp.current_usd",
-      "title": "GDP, current US dollars",
-      "sourceId": "worldbank",
-      "sourceIndicatorId": "NY.GDP.MKTP.CD",
-      "unit": "current US$",
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "title": "Nominal GDP, annual",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNOMGDP12A",
+      "unit": "rupees",
       "frequency": "annual",
       "geography": {
         "type": "country",
         "id": "IN",
         "name": "India"
       },
-      "observations": 66,
+      "observations": 76,
       "earliest": {
-        "date": "1960",
-        "value": 37029883876.1839
+        "date": "1951-03-31",
+        "value": 102216298938.557
       },
       "latest": {
-        "date": "2024",
-        "value": 3909891533858.08
+        "date": "2026-03-31",
+        "value": 357138860000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.real_gdp_annual",
+      "title": "Real GDP, annual",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDREAGDP12A",
+      "unit": "rupees, 2011-12 prices",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 4968481226714.06
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 201899190000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.nominal_gdp_quarterly",
+      "title": "Nominal GDP, quarterly",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNOMGDP12Q",
+      "unit": "rupees",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 58,
+      "earliest": {
+        "date": "2011-06-30",
+        "value": 20434962911524.9
+      },
+      "latest": {
+        "date": "2025-09-30",
+        "value": 85250700000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.real_gdp_quarterly",
+      "title": "Real GDP, quarterly",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDREAGDP12Q",
+      "unit": "rupees, 2011-12 prices",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 58,
+      "earliest": {
+        "date": "2011-06-30",
+        "value": 21028628175453.5
+      },
+      "latest": {
+        "date": "2025-09-30",
+        "value": 48633400000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "title": "Per capita nominal GDP",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNPCGDP12A",
+      "unit": "rupees per person",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 284.725066681216
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 251393
+      }
+    },
+    {
+      "indicatorId": "econ.idh.gva_agriculture_nominal",
+      "title": "Nominal GVA, agriculture and allied activities",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNAGGVA12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 52197647107.0242
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 54279080000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.gva_industry_nominal",
+      "title": "Nominal GVA, industry",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNINGVA12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 15840733038.932
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 86802460000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.gva_services_nominal",
+      "title": "Nominal GVA, services",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNSVGVA12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 34824903333.2432
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 182397190000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.private_consumption_nominal",
+      "title": "Nominal private final consumption expenditure",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNSPFCE12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 91087020007.8724
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 219638650000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.gross_capital_formation_nominal",
+      "title": "Nominal gross capital formation",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNSGCFA12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 10289724313.6471
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 118039860000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.government_consumption_nominal",
+      "title": "Nominal government final consumption expenditure",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNSGFCE12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 5685720442.96763
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 35198360000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.exports_nominal",
+      "title": "Nominal exports of goods and services",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNSXGAS12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 7360000000
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 76620520000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.imports_nominal",
+      "title": "Nominal imports of goods and services",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNSIGAS12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 7110000000
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 84688830000000
+      }
+    },
+    {
+      "indicatorId": "econ.idh.net_exports_nominal",
+      "title": "Nominal net exports of goods and services",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNSNXGS12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 250000000
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": -8068310000000
       }
     }
   ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

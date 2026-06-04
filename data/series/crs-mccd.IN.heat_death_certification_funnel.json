@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "heat.counting.death_certification_funnel",
+  "title": "How far death registration gets before medical cause is known",
+  "sourceId": "crs-mccd",
+  "sourceIndicatorId": "CRS 2023 death registration + MCCD 2023 medical certification",
+  "sourceUrl": "https://uat.crsorgi.gov.in/assets/download/Annual-Reports/crs/2023.pdf",
+  "unit": "deaths",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-04T05:14:14.953Z",
+  "rows": [
+    {
+      "step": "Estimated deaths",
+      "value": 8909135,
+      "shareOfEstimatedDeathsPct": 100,
+      "interpretation": "Estimated deaths used as the denominator for CRS death-registration level"
+    },
+    {
+      "step": "Registered deaths",
+      "value": 8659679,
+      "shareOfEstimatedDeathsPct": 97.2,
+      "interpretation": "Deaths registered in the Civil Registration System"
+    },
+    {
+      "step": "Institutional deaths",
+      "value": 2078323,
+      "shareOfEstimatedDeathsPct": 23.3,
+      "interpretation": "Registered deaths that occurred in institutions"
+    },
+    {
+      "step": "Medically certified cause",
+      "value": 1900956,
+      "shareOfEstimatedDeathsPct": 21.4,
+      "interpretation": "Registered deaths medically certified by cause under MCCD"
+    },
+    {
+      "step": "No medical attention at death",
+      "value": 4624269,
+      "shareOfEstimatedDeathsPct": 51.9,
+      "interpretation": "Registered deaths where the deceased received no medical attention at death"
+    }
+  ],
+  "metadata": {
+    "crsPublisher": "Office of the Registrar General & Census Commissioner, India (ORGI)",
+    "crsSourceUrl": "https://uat.crsorgi.gov.in/assets/download/Annual-Reports/crs/2023.pdf",
+    "mccdSourceUrl": "https://dc.crsorgi.gov.in/assets/download/Annual-Reports/mccd/2023.pdf",
+    "year": 2023,
+    "registeredDeaths": 8659679,
+    "deathRegistrationLevelPct": 97.2,
+    "institutionalDeathSharePct": 24,
+    "noMedicalAttentionSharePct": 53.4,
+    "medicallyCertifiedShareOfRegisteredDeathsPct": 22,
+    "note": "This is a counting-system funnel for scale and visibility. CRS registration, institutional death occurrence, medical attention at death, and MCCD cause certification are related but distinct measures."
+  }
+}

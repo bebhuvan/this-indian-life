@@ -13,6 +13,7 @@ These sources are API-ready or close enough to start adapter work immediately.
 | World Bank Indicators | GDP, population, life expectancy, electricity access, urbanization, poverty, global comparisons | Stable public JSON, no key, already powering seed pages | Country annual series artifacts |
 | India Data Hub | RBI, MoSPI, Ministry of Finance, macro, financial, district and multilateral feeds | Auth works; one API can cover many India-specific economic datasets | Source registry + selected economy series |
 | Ember | Electricity generation, demand, carbon intensity, power-sector emissions, capacity | Clean OpenAPI, India data available, good energy/climate backbone | India yearly/monthly electricity series |
+| EIA International | Broad energy balance, fuel consumption/production/imports, energy-related CO2 by fuel | API key works; India has hundreds of historical annual series | Selected India annual energy and emissions series |
 | OWID Grapher | Health, climate, energy, demography, global comparison context | Excellent metadata + CSV/JSON model, no key | India series plus comparison country series |
 | WAQI | Reader-facing AQI snapshots and city/station pages | Auth works; quick way to explain current air quality | City/station AQI snapshots with provider metadata |
 | Data Portal for Cities | City greenhouse-gas inventory comparisons | Clean JSON API; useful if Indian city IDs are available | City emissions sector series |
@@ -35,6 +36,12 @@ These should be included, but not treated as simple APIs yet. They need parsers,
 | Jal Jeevan Mission | Drinking water connections and household tap-water access | Web API PDF reachable | Extract endpoints from PDF, then build JSON adapter |
 | CEA | Electricity generation/capacity official India data | API docs page reachable | Enumerate docs, then build official-power adapter |
 | Agmarknet | Mandi prices and arrivals | Portal page reachable | Discover direct endpoints and rate limits |
+| MoSPI Energy Statistics | Official annual India energy balance: reserves, capacity, production, consumption, trade | Annual PDF/report source, useful as canonical India reference | Table extraction from annual Energy Statistics publication |
+| PPAC | Petroleum products, crude/LNG imports, oil and gas data | Official portal and reports available; file shapes need discovery | Download report tables first, then normalize petroleum dependence series |
+| Grid India / CEA | Daily demand, shortages, capacity/generation reports | Official reports and web endpoints exist; endpoint stability needs probing | Start with daily PSP/demand snapshots, then monthly generation/capacity |
+| MNRE | Renewable capacity and generation statistics | Official statistics page and PDFs | Parse renewable statistics tables after file discovery |
+| Ministry of Coal | Coal production/import/export | Official pages provide current files and historical summaries | Download official coal import/export files and normalize annual series |
+| UN Comtrade | Trade origin story for crude, coal, gas, solar modules | API-ready with registration/rate limits; needs commodity-code registry | Country-origin import tables for selected HS codes |
 
 ## Backlog / Re-Test Later
 

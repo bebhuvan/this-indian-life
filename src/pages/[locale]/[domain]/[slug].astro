@@ -14,6 +14,7 @@ import {
   locales,
   sources
 } from "../../../data/site";
+import { chartGraph } from "../../../data/seo";
 
 export function getStaticPaths() {
   return locales.flatMap((locale) =>
@@ -35,7 +36,7 @@ const related = charts.filter((item) => item.id !== chart.id && item.domain === 
 const source = sources[series.sourceId as keyof typeof sources];
 ---
 
-<Base title={`${chart.title} · Indica`} description={chart.dek} domain={chart.domain}>
+<Base title={`${chart.title} · This Indian Life`} description={chart.dek} domain={chart.domain} jsonLd={chartGraph(chart, series, locale)}>
   <div class="wrap">
     <Nav active={chart.domain} locale={locale} />
 

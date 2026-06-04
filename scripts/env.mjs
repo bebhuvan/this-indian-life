@@ -27,7 +27,9 @@ export function loadEnv(path = ".env") {
 
 function applyAliases() {
   const aliases = {
-    CDSAPI_KEY: ["COPERNICUS", "copernicus", "COPERNICUS_API_KEY"]
+    CDSAPI_KEY: ["COPERNICUS", "copernicus", "COPERNICUS_API_KEY"],
+    UN_COMTRADE_API_KEY: ["UN_COMTRADE__PRIMARY_API_KEY", "UN_COMTRADE__SECONDARY_API_KEY", "COMTRADE_API_KEY", "COMTRADE_SUBSCRIPTION_KEY", "UN_COMTRADE_SUBSCRIPTION_KEY"],
+    WTO_API_KEY: ["WTO_SUBSCRIPTION_KEY", "WTO__PRIMARY_API_KEY", "WTO__SECONDARY_API_KEY"]
   };
 
   for (const [canonical, names] of Object.entries(aliases)) {

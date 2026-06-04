@@ -3,136 +3,1555 @@
   "questionId": "q.econ.compare",
   "question": "How does India compare with China, the US, and the world?",
   "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
   "requiredIndicatorIds": [
-    "econ.gdp.current_usd",
-    "econ.gdp.per_capita_current_usd",
-    "people.population.total"
+    "econ.compare.gdp_current_usd",
+    "econ.compare.gdp_per_capita_current_usd",
+    "econ.compare.population_total",
+    "econ.compare.gdp_ppp_current_intl",
+    "compare.health.life_expectancy",
+    "compare.health.under5_mortality",
+    "compare.energy.electricity_access",
+    "compare.society.internet_users",
+    "compare.society.urban_population_share",
+    "compare.work.female_labor_participation",
+    "world.share.gdp_current_usd"
   ],
   "availableIndicatorIds": [
-    "econ.gdp.current_usd",
-    "econ.gdp.per_capita_current_usd",
-    "people.population.total"
+    "econ.compare.gdp_current_usd",
+    "econ.compare.gdp_per_capita_current_usd",
+    "econ.compare.population_total",
+    "econ.compare.gdp_ppp_current_intl",
+    "compare.health.life_expectancy",
+    "compare.health.under5_mortality",
+    "compare.energy.electricity_access",
+    "compare.society.internet_users",
+    "compare.society.urban_population_share",
+    "compare.work.female_labor_participation",
+    "world.share.gdp_current_usd"
+  ],
+  "themeIndicatorIds": [
+    "econ.compare.gdp_current_usd",
+    "econ.compare.gdp_per_capita_current_usd",
+    "econ.compare.population_total",
+    "econ.compare.gdp_ppp_current_intl",
+    "compare.health.life_expectancy",
+    "compare.health.under5_mortality",
+    "compare.energy.electricity_access",
+    "compare.society.internet_users",
+    "compare.society.urban_population_share",
+    "compare.work.female_labor_participation",
+    "world.share.gdp_current_usd"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.econ.compare.gdp_current_usd",
+      "indicatorId": "econ.compare.gdp_current_usd",
+      "title": "GDP comparison",
+      "sourceId": "worldbank",
+      "unit": "current US$",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.econ.compare.gdp_per_capita_current_usd",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+      "title": "GDP per person comparison",
+      "sourceId": "worldbank",
+      "unit": "current US$ per person",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.econ.compare.population_total",
+      "indicatorId": "econ.compare.population_total",
+      "title": "Population comparison",
+      "sourceId": "worldbank",
+      "unit": "people",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.econ.compare.gdp_ppp_current_intl",
+      "indicatorId": "econ.compare.gdp_ppp_current_intl",
+      "title": "GDP by purchasing-power parity",
+      "sourceId": "worldbank",
+      "unit": "current international $",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.compare.health.life_expectancy",
+      "indicatorId": "compare.health.life_expectancy",
+      "title": "Life expectancy comparison",
+      "sourceId": "worldbank",
+      "unit": "years",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.compare.health.under5_mortality",
+      "indicatorId": "compare.health.under5_mortality",
+      "title": "Under-five mortality comparison",
+      "sourceId": "worldbank",
+      "unit": "per 1,000 live births",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.compare.energy.electricity_access",
+      "indicatorId": "compare.energy.electricity_access",
+      "title": "Electricity access comparison",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v8.compare.society.internet_users",
+      "indicatorId": "compare.society.internet_users",
+      "title": "Internet use comparison",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v9.compare.society.urban_population_share",
+      "indicatorId": "compare.society.urban_population_share",
+      "title": "Urban population comparison",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v10.compare.work.female_labor_participation",
+      "indicatorId": "compare.work.female_labor_participation",
+      "title": "Women's labour-force participation comparison",
+      "sourceId": "worldbank",
+      "unit": "% ages 15+",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v11.world.share.gdp_current_usd",
+      "indicatorId": "world.share.gdp_current_usd",
+      "title": "India share of world GDP",
+      "sourceId": "worldbank",
+      "unit": "%",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "GDP comparison: value",
+      "value": 37029883876.1839,
+      "displayValue": "37.03 billion",
+      "date": "1960",
+      "unit": "current US$",
+      "indicatorId": "econ.compare.gdp_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP comparison: value",
+      "value": 59846235024.7318,
+      "displayValue": "59.85 billion",
+      "date": "1960",
+      "unit": "current US$",
+      "indicatorId": "econ.compare.gdp_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP comparison: value",
+      "value": 541988586206.897,
+      "displayValue": "541.99 billion",
+      "date": "1960",
+      "unit": "current US$",
+      "indicatorId": "econ.compare.gdp_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP comparison: value",
+      "value": 1366488391354.06,
+      "displayValue": "$1.37 trillion",
+      "date": "1960",
+      "unit": "current US$",
+      "indicatorId": "econ.compare.gdp_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP per person comparison: value",
+      "value": 84.9328084793106,
+      "displayValue": "84.93",
+      "date": "1960",
+      "unit": "current US$ per person",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP per person comparison: value",
+      "value": 89.7150749167731,
+      "displayValue": "89.72",
+      "date": "1960",
+      "unit": "current US$ per person",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP per person comparison: value",
+      "value": 2999.86487154495,
+      "displayValue": "2,999.86",
+      "date": "1960",
+      "unit": "current US$ per person",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP per person comparison: value",
+      "value": 452.253084186565,
+      "displayValue": "452.25",
+      "date": "1960",
+      "unit": "current US$ per person",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Population comparison: value",
+      "value": 435990338,
+      "displayValue": "43.6 crore",
+      "date": "1960",
+      "unit": "people",
+      "indicatorId": "econ.compare.population_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Population comparison: value",
+      "value": 667070000,
+      "displayValue": "66.7 crore",
+      "date": "1960",
+      "unit": "people",
+      "indicatorId": "econ.compare.population_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Population comparison: value",
+      "value": 180671000,
+      "displayValue": "18.1 crore",
+      "date": "1960",
+      "unit": "people",
+      "indicatorId": "econ.compare.population_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Population comparison: value",
+      "value": 3021512598,
+      "displayValue": "302.2 crore",
+      "date": "1960",
+      "unit": "people",
+      "indicatorId": "econ.compare.population_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 45.61,
+      "displayValue": "45.61",
+      "date": "1960",
+      "unit": "years",
+      "indicatorId": "compare.health.life_expectancy",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 33.419,
+      "displayValue": "33.42",
+      "date": "1960",
+      "unit": "years",
+      "indicatorId": "compare.health.life_expectancy",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 69.7707317073171,
+      "displayValue": "69.77",
+      "date": "1960",
+      "unit": "years",
+      "indicatorId": "compare.health.life_expectancy",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 50.9418860745353,
+      "displayValue": "50.94",
+      "date": "1960",
+      "unit": "years",
+      "indicatorId": "compare.health.life_expectancy",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Under-five mortality comparison: value",
+      "value": 241.3,
+      "displayValue": "241.3",
+      "date": "1960",
+      "unit": "per 1,000 live births",
+      "indicatorId": "compare.health.under5_mortality",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Under-five mortality comparison: value",
+      "value": 30.1,
+      "displayValue": "30.1",
+      "date": "1960",
+      "unit": "per 1,000 live births",
+      "indicatorId": "compare.health.under5_mortality",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 70,
+      "displayValue": "70%",
+      "date": "2025",
+      "unit": "% of population",
+      "indicatorId": "compare.society.internet_users",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 91.6,
+      "displayValue": "91.6%",
+      "date": "2025",
+      "unit": "% of population",
+      "indicatorId": "compare.society.internet_users",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 73.6,
+      "displayValue": "73.6%",
+      "date": "2025",
+      "unit": "% of population",
+      "indicatorId": "compare.society.internet_users",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Urban population comparison: value",
+      "value": 17.9250073975312,
+      "displayValue": "17.9%",
+      "date": "1960",
+      "unit": "% of population",
+      "indicatorId": "compare.society.urban_population_share",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Urban population comparison: value",
+      "value": 19.7456455230713,
+      "displayValue": "19.7%",
+      "date": "1960",
+      "unit": "% of population",
+      "indicatorId": "compare.society.urban_population_share",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Urban population comparison: value",
+      "value": 69.9799062047416,
+      "displayValue": "70%",
+      "date": "1960",
+      "unit": "% of population",
+      "indicatorId": "compare.society.urban_population_share",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
   ],
   "lockedNumbers": [
     {
-      "label": "GDP, current US dollars, latest",
-      "value": 3909891533858.08,
-      "date": "2024",
-      "unit": "current US$",
-      "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.current_usd"
-    },
-    {
-      "label": "GDP, current US dollars, earliest",
+      "label": "GDP comparison: value",
       "value": 37029883876.1839,
+      "displayValue": "37.03 billion",
       "date": "1960",
       "unit": "current US$",
       "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.current_usd"
+      "indicatorId": "econ.compare.gdp_current_usd"
     },
     {
-      "label": "GDP per capita, current US dollars, latest",
-      "value": 2694.73780859961,
-      "date": "2024",
-      "unit": "current US$ per person",
+      "label": "GDP comparison: value",
+      "value": 59846235024.7318,
+      "displayValue": "59.85 billion",
+      "date": "1960",
+      "unit": "current US$",
       "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.per_capita_current_usd"
+      "indicatorId": "econ.compare.gdp_current_usd"
     },
     {
-      "label": "GDP per capita, current US dollars, earliest",
+      "label": "GDP comparison: value",
+      "value": 541988586206.897,
+      "displayValue": "541.99 billion",
+      "date": "1960",
+      "unit": "current US$",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.compare.gdp_current_usd"
+    },
+    {
+      "label": "GDP comparison: value",
+      "value": 1366488391354.06,
+      "displayValue": "$1.37 trillion",
+      "date": "1960",
+      "unit": "current US$",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.compare.gdp_current_usd"
+    },
+    {
+      "label": "GDP per person comparison: value",
       "value": 84.9328084793106,
+      "displayValue": "84.93",
       "date": "1960",
       "unit": "current US$ per person",
       "sourceId": "worldbank",
-      "indicatorId": "econ.gdp.per_capita_current_usd"
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd"
     },
     {
-      "label": "Population, total, latest",
-      "value": 1450935791,
-      "date": "2024",
-      "unit": "people",
+      "label": "GDP per person comparison: value",
+      "value": 89.7150749167731,
+      "displayValue": "89.72",
+      "date": "1960",
+      "unit": "current US$ per person",
       "sourceId": "worldbank",
-      "indicatorId": "people.population.total"
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd"
     },
     {
-      "label": "Population, total, earliest",
+      "label": "GDP per person comparison: value",
+      "value": 2999.86487154495,
+      "displayValue": "2,999.86",
+      "date": "1960",
+      "unit": "current US$ per person",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd"
+    },
+    {
+      "label": "GDP per person comparison: value",
+      "value": 452.253084186565,
+      "displayValue": "452.25",
+      "date": "1960",
+      "unit": "current US$ per person",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd"
+    },
+    {
+      "label": "Population comparison: value",
       "value": 435990338,
+      "displayValue": "43.6 crore",
       "date": "1960",
       "unit": "people",
       "sourceId": "worldbank",
-      "indicatorId": "people.population.total"
+      "indicatorId": "econ.compare.population_total"
+    },
+    {
+      "label": "Population comparison: value",
+      "value": 667070000,
+      "displayValue": "66.7 crore",
+      "date": "1960",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.compare.population_total"
+    },
+    {
+      "label": "Population comparison: value",
+      "value": 180671000,
+      "displayValue": "18.1 crore",
+      "date": "1960",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.compare.population_total"
+    },
+    {
+      "label": "Population comparison: value",
+      "value": 3021512598,
+      "displayValue": "302.2 crore",
+      "date": "1960",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.compare.population_total"
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 45.61,
+      "displayValue": "45.61",
+      "date": "1960",
+      "unit": "years",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.health.life_expectancy"
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 33.419,
+      "displayValue": "33.42",
+      "date": "1960",
+      "unit": "years",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.health.life_expectancy"
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 69.7707317073171,
+      "displayValue": "69.77",
+      "date": "1960",
+      "unit": "years",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.health.life_expectancy"
+    },
+    {
+      "label": "Life expectancy comparison: value",
+      "value": 50.9418860745353,
+      "displayValue": "50.94",
+      "date": "1960",
+      "unit": "years",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.health.life_expectancy"
+    },
+    {
+      "label": "Under-five mortality comparison: value",
+      "value": 241.3,
+      "displayValue": "241.3",
+      "date": "1960",
+      "unit": "per 1,000 live births",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.health.under5_mortality"
+    },
+    {
+      "label": "Under-five mortality comparison: value",
+      "value": 30.1,
+      "displayValue": "30.1",
+      "date": "1960",
+      "unit": "per 1,000 live births",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.health.under5_mortality"
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 70,
+      "displayValue": "70%",
+      "date": "2025",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.internet_users"
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 91.6,
+      "displayValue": "91.6%",
+      "date": "2025",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.internet_users"
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 73.6,
+      "displayValue": "73.6%",
+      "date": "2025",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.internet_users"
+    },
+    {
+      "label": "Urban population comparison: value",
+      "value": 17.9250073975312,
+      "displayValue": "17.9%",
+      "date": "1960",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.urban_population_share"
+    },
+    {
+      "label": "Urban population comparison: value",
+      "value": 19.7456455230713,
+      "displayValue": "19.7%",
+      "date": "1960",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.urban_population_share"
+    },
+    {
+      "label": "Urban population comparison: value",
+      "value": 69.9799062047416,
+      "displayValue": "70%",
+      "date": "1960",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.urban_population_share"
+    },
+    {
+      "label": "Urban population comparison: value",
+      "value": 34.2335712808983,
+      "displayValue": "34.2%",
+      "date": "1960",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.urban_population_share"
+    },
+    {
+      "label": "Women's labour-force participation comparison: value",
+      "value": 32.425,
+      "displayValue": "32.4%",
+      "date": "2025",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.work.female_labor_participation"
+    },
+    {
+      "label": "Women's labour-force participation comparison: value",
+      "value": 59.148,
+      "displayValue": "59.1%",
+      "date": "2025",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.work.female_labor_participation"
+    },
+    {
+      "label": "Women's labour-force participation comparison: value",
+      "value": 56.343,
+      "displayValue": "56.3%",
+      "date": "2025",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.work.female_labor_participation"
+    },
+    {
+      "label": "Women's labour-force participation comparison: value",
+      "value": 48.9366751380821,
+      "displayValue": "48.9%",
+      "date": "2025",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.work.female_labor_participation"
+    },
+    {
+      "label": "India share of world GDP, latest",
+      "value": 3.522975113667771,
+      "displayValue": "3.5%",
+      "date": "2024",
+      "unit": "%",
+      "sourceId": "worldbank",
+      "indicatorId": "world.share.gdp_current_usd"
+    },
+    {
+      "label": "India share of world GDP, earliest",
+      "value": 2.709857186528369,
+      "displayValue": "2.7%",
+      "date": "1960",
+      "unit": "%",
+      "sourceId": "worldbank",
+      "indicatorId": "world.share.gdp_current_usd"
     }
   ],
   "sourceSummaries": [
     {
-      "indicatorId": "econ.gdp.current_usd",
-      "title": "GDP, current US dollars",
+      "indicatorId": "econ.compare.gdp_current_usd",
+      "title": "GDP comparison",
       "sourceId": "worldbank",
       "sourceIndicatorId": "NY.GDP.MKTP.CD",
       "unit": "current US$",
-      "frequency": "annual",
       "geography": {
-        "type": "country",
-        "id": "IN",
-        "name": "India"
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
       },
-      "observations": 66,
-      "earliest": {
-        "date": "1960",
-        "value": 37029883876.1839
-      },
-      "latest": {
-        "date": "2024",
-        "value": 3909891533858.08
-      }
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 3909891533858.08,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 18743803170827.2,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 28750956130731.2,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 110982661180013,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 3638489096033.86,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 18270356654533.2,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
     },
     {
-      "indicatorId": "econ.gdp.per_capita_current_usd",
-      "title": "GDP per capita, current US dollars",
+      "indicatorId": "econ.compare.gdp_per_capita_current_usd",
+      "title": "GDP per person comparison",
       "sourceId": "worldbank",
       "sourceIndicatorId": "NY.GDP.PCAP.CD",
       "unit": "current US$ per person",
-      "frequency": "annual",
       "geography": {
-        "type": "country",
-        "id": "IN",
-        "name": "India"
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
       },
-      "observations": 66,
-      "earliest": {
-        "date": "1960",
-        "value": 84.9328084793106
-      },
-      "latest": {
-        "date": "2024",
-        "value": 2694.73780859961
-      }
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 2694.73780859961,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 13303.1481543868,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 84534.0407841548,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 13631.2043097215,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 2530.12031278204,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 12951.1782397043,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
     },
     {
-      "indicatorId": "people.population.total",
-      "title": "Population, total",
+      "indicatorId": "econ.compare.population_total",
+      "title": "Population comparison",
       "sourceId": "worldbank",
       "sourceIndicatorId": "SP.POP.TOTL",
       "unit": "people",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 1450935791,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 1408975000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 340110988,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 8141808945,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 1438069596,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 1410710000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.compare.gdp_ppp_current_intl",
+      "title": "GDP by purchasing-power parity",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "NY.GDP.MKTP.PP.CD",
+      "unit": "current international $",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 16192422603162.4,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 38190084585497.8,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 29184890000000.1,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 199686103878086,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 14845911292307.9,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 35520435397067.7,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.health.life_expectancy",
+      "title": "Life expectancy comparison",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SP.DYN.LE00.IN",
+      "unit": "years",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 72.235,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 78.017,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 78.890243902439,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 73.480380292779,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 72.003,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 77.953,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.health.under5_mortality",
+      "title": "Under-five mortality comparison",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SH.DYN.MORT",
+      "unit": "per 1,000 live births",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 26.6,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 5.7,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 6.5,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 37.4,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 28,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 6.1,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.energy.electricity_access",
+      "title": "Electricity access comparison",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "EG.ELC.ACCS.ZS",
+      "unit": "% of population",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 99.5,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 100,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.society.internet_users",
+      "title": "Internet use comparison",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "IT.NET.USER.ZS",
+      "unit": "% of population",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": 70,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": 91.6,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": 73.6,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 64.9434967,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 92,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 94.69380188,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 71.2,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 60.25230026,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 90.6,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.society.urban_population_share",
+      "title": "Urban population comparison",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SP.URB.TOTL.IN.ZS",
+      "unit": "% of population",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 35.3788972368389,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 65.8946980998325,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 80.1247798047184,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 57.5634797111357,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 35.0676918424186,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 65.5301448035523,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.work.female_labor_participation",
+      "title": "Women's labour-force participation comparison",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% ages 15+",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": 32.425,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": 59.148,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": 56.343,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": 48.9366751380821,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 32.415,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 59.448,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 56.561,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 49.0782841403016,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 30.984,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 60.216,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "world.share.gdp_current_usd",
+      "title": "India share of world GDP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "NY.GDP.MKTP.CD",
+      "unit": "%",
       "frequency": "annual",
       "geography": {
-        "type": "country",
-        "id": "IN",
-        "name": "India"
+        "type": "derived-share",
+        "id": "IND/WLD",
+        "name": "India as share of world"
       },
-      "observations": 66,
+      "observations": 65,
       "earliest": {
         "date": "1960",
-        "value": 435990338
+        "value": 2.709857186528369
       },
       "latest": {
         "date": "2024",
-        "value": 1450935791
+        "value": 3.522975113667771
       }
     }
   ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

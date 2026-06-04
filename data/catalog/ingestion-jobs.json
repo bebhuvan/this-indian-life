@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-02",
+  "policy": {
+    "production_no_secret": "Runs only jobs that do not require API keys or credentials. Jobs write snapshots/manifests/artifacts and then run validation.",
+    "discovery_no_secret": "Refreshes public discovery catalogs. Discovery output is not article evidence until a production ingest promotes it.",
+    "validation": "Runs validators and build checks without fetching source data."
+  },
+  "jobs": [
+    {
+      "jobId": "discover-rbi-dbie",
+      "sourceId": "rbi-dbie",
+      "kind": "discovery",
+      "cadence": "weekly",
+      "groups": ["discovery_no_secret"],
+      "command": ["npm", "run", "discover:rbi-dbie"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/rbi-dbie-discovery.json"],
+      "evidenceEligible": false
+    },
+    {
+      "jobId": "discover-rbi-dbie-reports",
+      "sourceId": "rbi-dbie",
+      "kind": "discovery",
+      "cadence": "weekly",
+      "groups": ["production_no_secret", "discovery_no_secret"],
+      "command": ["npm", "run", "discover:rbi-dbie-reports"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/rbi-dbie-report-inventory.json"],
+      "evidenceEligible": false
+    },
+    {
+      "jobId": "discover-rbi-dbie-credit",
+      "sourceId": "rbi-dbie",
+      "kind": "discovery",
+      "cadence": "weekly",
+      "groups": ["discovery_no_secret"],
+      "command": ["npm", "run", "discover:rbi-dbie-credit"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/rbi-dbie-credit-coverage-matrix.json"],
+      "evidenceEligible": false
+    },
+    {
+      "jobId": "ingest-rbi-dbie-forex-reserves",
+      "sourceId": "rbi-dbie",
+      "kind": "ingest",
+      "cadence": "weekly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:rbi-dbie-forex-reserves"],
+      "requiredEnv": [],
+      "writes": [
+        "data/catalog/rbi-dbie-manifest.json",
+        "data/series/rbi-dbie.IN.forex_reserves.weekly.json"
+      ],
+      "evidenceEligible": true,
+      "qualityGates": [
+        "non-empty output per currency/reserve code",
+        "date/code/unit validation",
+        "TR reconciled against FCA + GOLD + SDR + IMF within 0.01%"
+      ]
+    },
+    {
+      "jobId": "ingest-rbi-dbie-macro-timeseries",
+      "sourceId": "rbi-dbie",
+      "kind": "ingest",
+      "cadence": "weekly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:rbi-dbie-macro-timeseries"],
+      "requiredEnv": [],
+      "writes": [
+        "data/catalog/rbi-dbie-manifest.json",
+        "data/series/rbi-dbie.IN.macro_50_indicators.long.json",
+        "data/series/rbi-dbie.IN.macro_other_timeseries.long.json"
+      ],
+      "evidenceEligible": true,
+      "qualityGates": [
+        "official RBI XLSX workbook snapshot retained",
+        "expected sheet names and minimum row counts",
+        "finite numeric values only",
+        "no duplicate dataset/frequency/period/indicator keys",
+        "foreign currency assets reconciled against RBI forex reserves artifact when present"
+      ]
+    },
+    {
+      "jobId": "derive-rbi-dbie-macro-series",
+      "sourceId": "rbi-dbie",
+      "kind": "transform",
+      "cadence": "weekly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "derive:rbi-dbie-macro-series"],
+      "requiredEnv": [],
+      "writes": [
+        "data/catalog/rbi-dbie-manifest.json",
+        "data/catalog/rbi-dbie-derived-series.json"
+      ],
+      "evidenceEligible": true,
+      "dependsOn": ["ingest-rbi-dbie-macro-timeseries"],
+      "qualityGates": [
+        "exact parent artifact label/frequency/unit match",
+        "finite numeric values only",
+        "unique period keys per derived series",
+        "minimum observation count per selected indicator",
+        "parent artifact hash recorded in child metadata"
+      ]
+    },
+    {
+      "jobId": "ingest-who-gho",
+      "sourceId": "who-gho",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:who-gho"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/who-gho-manifest.json"],
+      "evidenceEligible": true
+    },
+    {
+      "jobId": "ingest-trai-subscriptions",
+      "sourceId": "trai",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:trai-subscriptions", "--", "--limit", "12", "--ocr-fallback"],
+      "requiredEnv": [],
+      "writes": [
+        "data/catalog/trai-subscriptions-manifest.json",
+        "data/series/trai.IN.telecom_subscribers_total.json",
+        "data/series/trai.IN.telecom_subscribers_wireless.json",
+        "data/series/trai.IN.telecom_subscribers_wireline.json",
+        "data/series/trai.IN.telecom_subscribers_urban_total.json",
+        "data/series/trai.IN.telecom_subscribers_rural_total.json",
+        "data/series/trai.IN.broadband_subscribers_total.json",
+        "data/series/trai.IN.teledensity_total.json",
+        "data/series/trai.IN.active_wireless_mobile_subscribers_peak_vlr.json",
+        "data/series/trai.IN.mobile_number_portability_requests.json"
+      ],
+      "evidenceEligible": true,
+      "qualityGates": [
+        "official TRAI monthly report PDF snapshot retained",
+        "native PDF text parser used before OCR fallback",
+        "Paddle/Akshara structure OCR fallback available for image-only reports",
+        "required telecom, broadband, teledensity, active wireless, and MNP rows present",
+        "subscriber totals reconcile wireless plus wireline where report rows expose components",
+        "teledensity totals reconcile wireless plus wireline within tolerance",
+        "suspicious month-to-month jumps flagged by validator"
+      ]
+    },
+    {
+      "jobId": "discover-ppac-import-export",
+      "sourceId": "ppac",
+      "kind": "discovery",
+      "cadence": "weekly",
+      "groups": ["discovery_no_secret"],
+      "command": ["npm", "run", "discover:ppac-import-export"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/ppac-import-export-history-discovery.json"],
+      "evidenceEligible": false
+    },
+    {
+      "jobId": "ingest-ppac",
+      "sourceId": "ppac",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:ppac"],
+      "requiredEnv": [],
+      "writes": [
+        "data/catalog/ppac-manifest.json",
+        "data/series/ppac.IN.energy.ppac.import_export_petroleum_current.json"
+      ],
+      "evidenceEligible": true,
+      "qualityGates": [
+        "official PPAC XLSX byte signature",
+        "raw workbook snapshot retained",
+        "IMPORT/EXPORT header detected",
+        "finite numeric monthly and total values only"
+      ]
+    },
+    {
+      "jobId": "ingest-worldbank",
+      "sourceId": "worldbank",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:worldbank"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/worldbank-manifest.json"],
+      "evidenceEligible": true
+    },
+    {
+      "jobId": "ingest-owid",
+      "sourceId": "owid",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:owid"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/owid-manifest.json"],
+      "evidenceEligible": true
+    },
+    {
+      "jobId": "ingest-world-context",
+      "sourceId": "world-context",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:world-context"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/world-context-manifest.json"],
+      "evidenceEligible": true,
+      "dependsOn": ["ingest-worldbank", "ingest-owid"]
+    },
+    {
+      "jobId": "ingest-open-meteo",
+      "sourceId": "open-meteo",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:open-meteo"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/open-meteo-manifest.json"],
+      "evidenceEligible": true
+    },
+    {
+      "jobId": "ingest-berkeley",
+      "sourceId": "berkeley",
+      "kind": "ingest",
+      "cadence": "monthly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:berkeley"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/berkeley-manifest.json"],
+      "evidenceEligible": true
+    },
+    {
+      "jobId": "ingest-cckp",
+      "sourceId": "cckp",
+      "kind": "ingest",
+      "cadence": "quarterly",
+      "groups": ["production_no_secret"],
+      "command": ["npm", "run", "ingest:cckp"],
+      "requiredEnv": [],
+      "writes": ["data/catalog/cckp-manifest.json"],
+      "evidenceEligible": true
+    },
+    {
+      "jobId": "validate-rbi-dbie-inventory",
+      "sourceId": "rbi-dbie",
+      "kind": "validation",
+      "cadence": "every_run",
+      "groups": ["production_no_secret", "discovery_no_secret", "validation"],
+      "command": ["npm", "run", "validate:rbi-dbie-inventory"],
+      "requiredEnv": [],
+      "writes": [],
+      "evidenceEligible": false
+    },
+    {
+      "jobId": "validate-source-inventory",
+      "sourceId": "source-inventory",
+      "kind": "validation",
+      "cadence": "every_run",
+      "groups": ["production_no_secret", "discovery_no_secret", "validation"],
+      "command": ["npm", "run", "validate:source-inventory"],
+      "requiredEnv": [],
+      "writes": [],
+      "evidenceEligible": false
+    },
+    {
+      "jobId": "validate-trai-subscriptions",
+      "sourceId": "trai",
+      "kind": "validation",
+      "cadence": "every_run",
+      "groups": ["production_no_secret", "validation"],
+      "command": ["npm", "run", "validate:trai-subscriptions"],
+      "requiredEnv": [],
+      "writes": [],
+      "evidenceEligible": false
+    },
+    {
+      "jobId": "validate-data",
+      "sourceId": "all",
+      "kind": "validation",
+      "cadence": "every_run",
+      "groups": ["production_no_secret", "validation"],
+      "command": ["npm", "run", "validate:data"],
+      "requiredEnv": [],
+      "writes": [],
+      "evidenceEligible": false
+    }
+  ]
+}

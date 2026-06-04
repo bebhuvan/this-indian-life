@@ -1,0 +1,118 @@
+---
+// The evidence / "show your work" block at the foot of an article. Instead of a
+// wall of raw indicator IDs (some articles pull 100+), it reads as: how many series,
+// from which sources, with the full friendly list one click away. Pure static HTML
+// plus a native <details> — no JS.
+import type { ExplanationArtifact } from "../data/questions";
+import { sourceLabel, sourceHomepage } from "../data/site";
+
+type Props = { explanation: ExplanationArtifact };
+const { explanation } = Astro.props;
+
+type Summary = {
+  indicatorId?: string;
+  title?: string;
+  sourceId?: string;
+  earliest?: string;
+  latest?: string;
+  unit?: string;
+};
+const summaries = (explanation.evidence.sourceSummaries ?? []) as Summary[];
+
+const year = (value?: string) => (value ? String(value).slice(0, 4) : "");
+const coverage = (s: Summary) => {
+  const a = year(s.earliest);
+  const b = year(s.latest);
+  if (a && b) return a === b ? a : `${a}–${b}`;
+  return b || a || "";
+};
+
+const series = summaries
+  .map((s) => ({
+    title: s.title || s.indicatorId || "Untitled series",
+    source: sourceLabel(s.sourceId || "?"),
+    coverage: coverage(s)
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title));
+
+// Distinct sources with counts (most-used first).
+const counts = new Map<string, number>();
+for (const s of summaries) counts.set(s.sourceId || "?", (counts.get(s.sourceId || "?") ?? 0) + 1);
+const sourceChips = [...counts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .map(([id, n]) => ({ id, label: sourceLabel(id), href: sourceHomepage(id), count: n }));
+
+const seriesCount = series.length;
+const sourceCount = sourceChips.length;
+
+const glossary = explanation.editorialPlan?.glossaryBlocks ?? [];
+const caveats = explanation.caveats ?? [];
+const sourceNotes = explanation.sourceNotes ?? [];
+---
+
+<div class="evidence-grid">
+  <div class="evidence-main">
+    <p class="lbl">The data behind this article</p>
+    {seriesCount ? (
+      <p class="evidence-count">
+        Built from <strong>{seriesCount}</strong> data series across <strong>{sourceCount}</strong>
+        {sourceCount === 1 ? " source" : " sources"}.
+      </p>
+    ) : (
+      <p class="evidence-count">Sourced from the institutions listed below.</p>
+    )}
+
+    {sourceChips.length ? (
+      <div class="evidence-sources">
+        {sourceChips.map((chip) =>
+          chip.href ? (
+            <a href={chip.href} target="_blank" rel="noreferrer">
+              {chip.label}<span class="evidence-src-count">{chip.count}</span>
+            </a>
+          ) : (
+            <span>{chip.label}<span class="evidence-src-count">{chip.count}</span></span>
+          )
+        )}
+      </div>
+    ) : null}
+
+    {seriesCount ? (
+      <details class="evidence-series">
+        <summary>Browse all {seriesCount} series</summary>
+        <ul>
+          {series.map((s) => (
+            <li>
+              <span class="es-title">{s.title}</span>
+              <span class="es-meta">{s.source}{s.coverage ? ` · ${s.coverage}` : ""}</span>
+            </li>
+          ))}
+        </ul>
+      </details>
+    ) : null}
+  </div>
+
+  <aside class="evidence-aside">
+    {glossary.length ? (
+      <div>
+        <p class="lbl">Concepts</p>
+        <div class="def-tags">
+          {glossary.map((item) => <span>{item.term}</span>)}
+        </div>
+      </div>
+    ) : null}
+
+    <div>
+      <p class="lbl">Caveats</p>
+      {caveats.length ? (
+        <ul>{caveats.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
+      ) : <p class="muted">No caveats recorded.</p>}
+    </div>
+
+    {sourceNotes.length ? (
+      <div>
+        <p class="lbl">Source notes</p>
+        <ul>{sourceNotes.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
+      </div>
+    ) : null}
+  </aside>
+</div>

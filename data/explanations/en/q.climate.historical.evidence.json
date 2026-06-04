@@ -3,16 +3,140 @@
   "questionId": "q.climate.historical",
   "question": "Is India a big emitter historically?",
   "priority": "core",
+  "theme": {
+    "id": "climate",
+    "label": "Climate, emissions, and air",
+    "readerQuestions": [
+      "Is this about total scale or per-person exposure?",
+      "Is the chart annual, cumulative, or a latest snapshot?",
+      "What comparison would stop the number from being misread?",
+      "What is outside the measure?"
+    ],
+    "glossaryTerms": [
+      "CO2",
+      "per capita emissions",
+      "cumulative emissions",
+      "AQI",
+      "PM2.5",
+      "ERA5",
+      "daily maximum temperature",
+      "precipitation"
+    ]
+  },
   "requiredIndicatorIds": [
     "owid.co2_cumulative"
   ],
   "availableIndicatorIds": [
     "owid.co2_cumulative"
   ],
+  "themeIndicatorIds": [
+    "owid.co2_cumulative",
+    "owid.co2_total",
+    "owid.co2_per_capita"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.owid.co2_cumulative",
+      "indicatorId": "owid.co2_cumulative",
+      "title": "Cumulative CO2 emissions",
+      "sourceId": "owid",
+      "unit": "tonnes",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.owid.co2_total",
+      "indicatorId": "owid.co2_total",
+      "title": "Annual CO2 emissions",
+      "sourceId": "owid",
+      "unit": "tonnes",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v3.owid.co2_per_capita",
+      "indicatorId": "owid.co2_per_capita",
+      "title": "Annual CO2 emissions per capita",
+      "sourceId": "owid",
+      "unit": "tonnes per person",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "Cumulative CO2 emissions: Cumulative CO₂ emissions",
+      "value": 66072530000,
+      "displayValue": "66.07 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "indicatorId": "owid.co2_cumulative",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cumulative CO2 emissions: Cumulative CO₂ emissions",
+      "value": 394481,
+      "displayValue": "3,94,481",
+      "date": "1858",
+      "unit": "tonnes",
+      "indicatorId": "owid.co2_cumulative",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 3193478100,
+      "displayValue": "3.19 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "indicatorId": "owid.co2_total",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 394481,
+      "displayValue": "3,94,481",
+      "date": "1858",
+      "unit": "tonnes",
+      "indicatorId": "owid.co2_total",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Annual CO2 emissions per capita: CO₂ emissions per capita",
+      "value": 2.2009783,
+      "displayValue": "2.2",
+      "date": "2024",
+      "unit": "tonnes per person",
+      "indicatorId": "owid.co2_per_capita",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Annual CO2 emissions per capita: CO₂ emissions per capita",
+      "value": 0.0016306057,
+      "displayValue": "0",
+      "date": "1858",
+      "unit": "tonnes per person",
+      "indicatorId": "owid.co2_per_capita",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
   "lockedNumbers": [
     {
       "label": "Cumulative CO2 emissions: Cumulative CO₂ emissions",
       "value": 66072530000,
+      "displayValue": "66.07 billion",
       "date": "2024",
       "unit": "tonnes",
       "sourceId": "owid",
@@ -21,10 +145,47 @@
     {
       "label": "Cumulative CO2 emissions: Cumulative CO₂ emissions",
       "value": 394481,
+      "displayValue": "3,94,481",
       "date": "1858",
       "unit": "tonnes",
       "sourceId": "owid",
       "indicatorId": "owid.co2_cumulative"
+    },
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 3193478100,
+      "displayValue": "3.19 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_total"
+    },
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 394481,
+      "displayValue": "3,94,481",
+      "date": "1858",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_total"
+    },
+    {
+      "label": "Annual CO2 emissions per capita: CO₂ emissions per capita",
+      "value": 2.2009783,
+      "displayValue": "2.2",
+      "date": "2024",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_per_capita"
+    },
+    {
+      "label": "Annual CO2 emissions per capita: CO₂ emissions per capita",
+      "value": 0.0016306057,
+      "displayValue": "0",
+      "date": "1858",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_per_capita"
     }
   ],
   "sourceSummaries": [
@@ -108,10 +269,180 @@
           "Cumulative CO₂ emissions": "41901990000"
         }
       ]
+    },
+    {
+      "indicatorId": "owid.co2_total",
+      "title": "Annual CO2 emissions",
+      "sourceId": "owid",
+      "sourceIndicatorId": "annual-co2-emissions-per-country",
+      "unit": "tonnes",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 156,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Annual CO₂ emissions"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Annual CO₂ emissions": "3193478100"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Annual CO₂ emissions": "3062756400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Annual CO₂ emissions": "2831131600"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Annual CO₂ emissions": "2675778000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Annual CO₂ emissions": "2422732000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Annual CO₂ emissions": "2611174700"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Annual CO₂ emissions": "2595227100"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Annual CO₂ emissions": "2425721900"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Annual CO₂ emissions": "2352540200"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Annual CO₂ emissions": "2231817500"
+        }
+      ]
+    },
+    {
+      "indicatorId": "owid.co2_per_capita",
+      "title": "Annual CO2 emissions per capita",
+      "sourceId": "owid",
+      "sourceIndicatorId": "co-emissions-per-capita",
+      "unit": "tonnes per person",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 156,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "CO₂ emissions per capita"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "CO₂ emissions per capita": "2.2009783"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "CO₂ emissions per capita": "2.1297693"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "CO₂ emissions per capita": "1.9861692"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "CO₂ emissions per capita": "1.8920738"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "CO₂ emissions per capita": "1.7272933"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "CO₂ emissions per capita": "1.8798543"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "CO₂ emissions per capita": "1.8879061"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "CO₂ emissions per capita": "1.7840685"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "CO₂ emissions per capita": "1.7504745"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "CO₂ emissions per capita": "1.6805544"
+        }
+      ]
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

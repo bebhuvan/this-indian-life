@@ -1,0 +1,64 @@
+{
+  "artifactType": "table",
+  "indicatorId": "heat.work.worker_security_exposure",
+  "title": "Worker exposure and employment security",
+  "sourceId": "heat-work",
+  "sourceIndicatorId": "MoSPI PLFS 2023-24 worker status + ILOSTAT SDG 8.3.1 informality",
+  "sourceUrl": "https://api.mospi.gov.in/api/plfs/getData?indicator_code=4&frequency_code=1&Format=JSON",
+  "unit": "% of workers / employment",
+  "rows": [
+    {
+      "label": "Self-employed",
+      "value": 58.4,
+      "date": "2023-24",
+      "group": "Worker status",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_self_employed",
+      "note": "PLFS 2023-24, usual status, share of workers"
+    },
+    {
+      "label": "Casual labour",
+      "value": 19.8,
+      "date": "2023-24",
+      "group": "Worker status",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_casual",
+      "note": "PLFS 2023-24, usual status, share of workers"
+    },
+    {
+      "label": "Regular wage/salaried",
+      "value": 21.7,
+      "date": "2023-24",
+      "group": "Worker status",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_regular_wage",
+      "note": "PLFS 2023-24, usual status, share of workers"
+    },
+    {
+      "label": "Informal employment",
+      "value": 87.2,
+      "date": "2025",
+      "group": "Informality rate",
+      "sourceId": "ilostat",
+      "indicatorId": "work.ilo.informal_rate_total",
+      "note": "ILOSTAT SDG 8.3.1, total informal employment rate"
+    },
+    {
+      "label": "Informal agriculture",
+      "value": 98.6,
+      "date": "2025",
+      "group": "Informality rate",
+      "sourceId": "ilostat",
+      "indicatorId": "work.ilo.informal_rate_agriculture",
+      "note": "ILOSTAT SDG 8.3.1, informal employment rate in agriculture"
+    }
+  ],
+  "metadata": {
+    "sourceUrls": [
+      "https://api.mospi.gov.in/api/plfs/getData?indicator_code=4&frequency_code=1&Format=JSON",
+      "https://ilostat.ilo.org/methods/concepts-and-definitions/description-informality/"
+    ],
+    "method": "Combines latest PLFS worker-status shares with latest ILOSTAT informal-employment rates to contextualize heat exposure at work.",
+    "caveat": "PLFS worker status and ILOSTAT informality are different measures and years. Read each bar independently; do not add them."
+  }
+}

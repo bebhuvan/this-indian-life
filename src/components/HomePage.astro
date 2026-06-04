@@ -1,8 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
 import Nav from "./Nav.astro";
-import { charts, chartUrl, domains, formatValue, latestObservation, loadSeries } from "../data/site";
-import { questionPages, questionUrl } from "../data/questions";
+import Footer from "./Footer.astro";
+import { charts, domains, formatValue, latestObservation, loadSeries } from "../data/site";
+import { questionPages, questionUrl, statusMeta } from "../data/questions";
+import { homeGraph } from "../data/seo";
 
 const locale = "en";
 const featured = charts.find((chart) => chart.id === "people.population.total")!;
@@ -12,17 +14,18 @@ const ledger = charts
   .filter((chart) => ["people.population.total", "econ.gdp.current_usd", "energy.electricity_access", "health.life_expectancy"].includes(chart.id))
   .map((chart) => {
     const latest = latestObservation(loadSeries(chart.seriesPath))!;
-    return { chart, latest };
+    const article = questionPages.find((page) => page.indicators.includes(chart.id));
+    return { chart, latest, href: article ? questionUrl(article, locale) : `/${locale}/articles/` };
   });
 ---
 
-<Base>
+<Base jsonLd={homeGraph()}>
   <div class="wrap">
     <Nav active="people" locale={locale} />
 
     <div class="home-kicker">
       <span class="lbl">India - A Living Almanac</span>
-      <span class="lbl">Static-first · sourced · no runtime API calls</span>
+      <span class="lbl">Sourced charts · plain English</span>
     </div>
 
     <section class="dom-people home-hero">
@@ -33,24 +36,17 @@ const ledger = charts
           <span class="cat serif">A country large enough to bend every average</span>
         </div>
       </div>
-      <div class="demo home-chips">
-        <span class="chip">World Bank seed data</span>
-        <span class="chip">30 article pages</span>
-        <span class="chip">DeepSeek explanations from locked evidence</span>
-      </div>
-      <h1 class="serif home-title">Every question about India, answered in numbers and explained in plain language.</h1>
+      <h1 class="serif home-title">India isn't one country. It's many, wearing a single name.</h1>
       <p class="muted home-dek">
-        Indica pulls scattered public data into sourced chart pages: the number, the context,
-        the caveat, and the plain-English reading. The first build is wired to normalized data artifacts,
-        not mocks.
+        The big numbers behind everyday Indian life, sourced with care and explained in plain language.
       </p>
       <a class="btn dom-people" href="/en/ask/">Ask a question</a>
     </section>
 
     <section class="section" style="border-bottom:1px solid var(--ghost)">
       <div class="ledger-grid">
-        {ledger.map(({ chart, latest }) => (
-          <a class={`li dom-${chart.domain} ledger-link`} href={chartUrl(chart, locale)}>
+        {ledger.map(({ chart, latest, href }) => (
+          <a class={`li dom-${chart.domain} ledger-link`} href={href}>
             <span class="li-n">{formatValue(latest.value, chart.valueFormat)}</span>
             <p class="li-lbl"><span class="tk"></span>{chart.shortTitle}</p>
             <p class="li-cut">{chart.bottomLine}</p>
@@ -63,12 +59,12 @@ const ledger = charts
       <p class="sec-hd">Browse by domain</p>
       <div class="cards">
         {domains.map((domain) => {
-          const count = charts.filter((chart) => chart.domain === domain.id).length;
+          const count = questionPages.filter((page) => page.domain === domain.id).length;
           return (
             <a class={`card dom-${domain.id}`} href={`/${locale}/${domain.id}/`}>
               <div class="tag">{domain.label}</div>
               <h4>{domain.line}</h4>
-              <p class="sub">{count} live chart{count === 1 ? "" : "s"} in the seed catalog</p>
+              <p class="sub">{count} independent question page{count === 1 ? "" : "s"}</p>
               <span class="arrow">-></span>
             </a>
           );
@@ -84,7 +80,7 @@ const ledger = charts
             <a class="q-row" href={questionUrl(page, locale)}>
               <span class="q-dot" style={`background:var(--${page.domain})`}></span>
               <span class="q-txt">{page.question}</span>
-              <span class="q-ans" style={`color:var(--${page.domain})`}>{page.explanation.status === "ready" ? "Article" : "Needs data"}</span>
+              <span class="q-ans" style={`color:var(--${page.domain})`}>{statusMeta(page.explanation.status).short}</span>
               <span class="q-arrow">-></span>
             </a>
           );
@@ -92,12 +88,6 @@ const ledger = charts
       </div>
     </section>
 
-    <footer class="foot">
-      <div class="foot-brand">Indica</div>
-      <p class="foot-note">
-        Seed data source: World Bank Indicators API. Architecture is ready for RBI, MoSPI,
-        India Data Hub, OpenAQ/WAQI, NASA POWER, OWID, and survey datasets.
-      </p>
-    </footer>
+    <Footer locale={locale} />
   </div>
 </Base>

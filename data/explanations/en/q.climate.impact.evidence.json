@@ -1,0 +1,6352 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.climate.impact",
+  "question": "How is climate change changing India?",
+  "priority": "core",
+  "theme": {
+    "id": "climate",
+    "label": "Climate, emissions, and air",
+    "readerQuestions": [
+      "Is this about total scale or per-person exposure?",
+      "Is the chart annual, cumulative, or a latest snapshot?",
+      "What comparison would stop the number from being misread?",
+      "What is outside the measure?"
+    ],
+    "glossaryTerms": [
+      "CO2",
+      "per capita emissions",
+      "cumulative emissions",
+      "AQI",
+      "PM2.5",
+      "ERA5",
+      "daily maximum temperature",
+      "precipitation"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "climate.temp_anomaly_annual",
+    "climate.precipitation_annual"
+  ],
+  "availableIndicatorIds": [
+    "climate.temp_anomaly_annual",
+    "climate.precipitation_annual"
+  ],
+  "themeIndicatorIds": [
+    "climate.temp_anomaly_annual",
+    "climate.precipitation_annual",
+    "climate.surface_temp_monthly",
+    "climate.temp_anomaly_monthly",
+    "climate.waqi.delhi",
+    "climate.waqi.mumbai",
+    "climate.waqi.kolkata",
+    "climate.waqi.chennai",
+    "climate.waqi.bengaluru",
+    "owid.co2_total",
+    "owid.co2_per_capita",
+    "owid.co2_cumulative",
+    "energy.ember.carbon_intensity",
+    "world.share.co2_total",
+    "work.employment_agriculture",
+    "people.population.total",
+    "climate.cckp.temp_historical",
+    "climate.cckp.temp_ssp126",
+    "climate.cckp.temp_ssp245",
+    "climate.cckp.temp_ssp585",
+    "climate.cckp.precip_ssp245",
+    "climate.ghg_total",
+    "climate.ghg_by_gas",
+    "climate.co2_consumption",
+    "climate.pm25_exposure",
+    "climate.disaster_deaths",
+    "compare.climate.co2_per_capita",
+    "compare.climate.co2_total",
+    "compare.climate.co2_cumulative",
+    "climate.era5.temp_mean",
+    "climate.era5.rel_humidity_mean",
+    "climate.ghg_by_sector",
+    "climate.co2_vs_gdp",
+    "climate.openmeteo.delhi.very_hot_days",
+    "climate.openmeteo.mumbai.very_hot_days",
+    "climate.openmeteo.kolkata.very_hot_days",
+    "climate.openmeteo.chennai.very_hot_days",
+    "climate.openmeteo.bengaluru.very_hot_days",
+    "climate.openmeteo.delhi.hot_nights",
+    "climate.openmeteo.mumbai.hot_nights",
+    "climate.openmeteo.chennai.hot_nights",
+    "climate.psmsl.mumbai",
+    "climate.psmsl.chennai",
+    "energy.ember.generation",
+    "energy.eia.electricity_capacity_solar",
+    "energy.eia.electricity_capacity_wind",
+    "energy.eia.electricity_capacity_renewable"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.climate.temp_anomaly_annual",
+      "indicatorId": "climate.temp_anomaly_annual",
+      "title": "Annual temperature anomaly",
+      "sourceId": "owid",
+      "unit": "°C vs 1991-2020",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.climate.precipitation_annual",
+      "indicatorId": "climate.precipitation_annual",
+      "title": "Average annual precipitation",
+      "sourceId": "owid",
+      "unit": "mm",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.climate.surface_temp_monthly",
+      "indicatorId": "climate.surface_temp_monthly",
+      "title": "Average monthly surface temperature",
+      "sourceId": "owid",
+      "unit": "°C",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v4.climate.temp_anomaly_monthly",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "title": "Monthly temperature anomaly",
+      "sourceId": "owid",
+      "unit": "°C vs 1991-2020",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.climate.waqi.delhi",
+      "indicatorId": "climate.waqi.delhi",
+      "title": "Delhi air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "context",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.climate.waqi.mumbai",
+      "indicatorId": "climate.waqi.mumbai",
+      "title": "Mumbai air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "context",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.climate.waqi.kolkata",
+      "indicatorId": "climate.waqi.kolkata",
+      "title": "Kolkata air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "context",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.climate.waqi.chennai",
+      "indicatorId": "climate.waqi.chennai",
+      "title": "Chennai air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "context",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.climate.waqi.bengaluru",
+      "indicatorId": "climate.waqi.bengaluru",
+      "title": "Bengaluru air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "context",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.owid.co2_total",
+      "indicatorId": "owid.co2_total",
+      "title": "Annual CO2 emissions",
+      "sourceId": "owid",
+      "unit": "tonnes",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.owid.co2_per_capita",
+      "indicatorId": "owid.co2_per_capita",
+      "title": "Annual CO2 emissions per capita",
+      "sourceId": "owid",
+      "unit": "tonnes per person",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.owid.co2_cumulative",
+      "indicatorId": "owid.co2_cumulative",
+      "title": "Cumulative CO2 emissions",
+      "sourceId": "owid",
+      "unit": "tonnes",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.energy.ember.carbon_intensity",
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "unit": "gCO2/kWh",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.world.share.co2_total",
+      "indicatorId": "world.share.co2_total",
+      "title": "India share of world CO2 emissions",
+      "sourceId": "owid",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.work.employment_agriculture",
+      "indicatorId": "work.employment_agriculture",
+      "title": "Employment in agriculture",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.people.population.total",
+      "indicatorId": "people.population.total",
+      "title": "Population, total",
+      "sourceId": "worldbank",
+      "unit": "people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.climate.cckp.temp_historical",
+      "indicatorId": "climate.cckp.temp_historical",
+      "title": "India average temperature, observed (CMIP6 historical)",
+      "sourceId": "cckp",
+      "unit": "°C",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.climate.cckp.temp_ssp126",
+      "indicatorId": "climate.cckp.temp_ssp126",
+      "title": "India temperature projection, low emissions (SSP1-2.6)",
+      "sourceId": "cckp",
+      "unit": "°C",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.climate.cckp.temp_ssp245",
+      "indicatorId": "climate.cckp.temp_ssp245",
+      "title": "India temperature projection, middle road (SSP2-4.5)",
+      "sourceId": "cckp",
+      "unit": "°C",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.climate.cckp.temp_ssp585",
+      "indicatorId": "climate.cckp.temp_ssp585",
+      "title": "India temperature projection, high emissions (SSP5-8.5)",
+      "sourceId": "cckp",
+      "unit": "°C",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v21.climate.cckp.precip_ssp245",
+      "indicatorId": "climate.cckp.precip_ssp245",
+      "title": "India precipitation projection, middle road (SSP2-4.5)",
+      "sourceId": "cckp",
+      "unit": "mm",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v22.climate.ghg_total",
+      "indicatorId": "climate.ghg_total",
+      "title": "Total greenhouse gas emissions",
+      "sourceId": "owid",
+      "unit": "tonnes CO₂e",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v23.climate.ghg_by_gas",
+      "indicatorId": "climate.ghg_by_gas",
+      "title": "Greenhouse gas emissions by gas",
+      "sourceId": "owid",
+      "unit": "tonnes CO₂e",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v24.climate.co2_consumption",
+      "indicatorId": "climate.co2_consumption",
+      "title": "Consumption-based CO2 emissions",
+      "sourceId": "owid",
+      "unit": "tonnes",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v25.climate.pm25_exposure",
+      "indicatorId": "climate.pm25_exposure",
+      "title": "PM2.5 air pollution, mean annual exposure",
+      "sourceId": "worldbank",
+      "unit": "µg/m³",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v26.climate.disaster_deaths",
+      "indicatorId": "climate.disaster_deaths",
+      "title": "Deaths from natural disasters by type",
+      "sourceId": "owid",
+      "unit": "deaths",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v27.compare.climate.co2_per_capita",
+      "indicatorId": "compare.climate.co2_per_capita",
+      "title": "CO2 per person comparison",
+      "sourceId": "owid",
+      "unit": "tonnes per person",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v28.compare.climate.co2_total",
+      "indicatorId": "compare.climate.co2_total",
+      "title": "Total CO2 emissions comparison",
+      "sourceId": "owid",
+      "unit": "tonnes",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v29.compare.climate.co2_cumulative",
+      "indicatorId": "compare.climate.co2_cumulative",
+      "title": "Cumulative CO2 emissions comparison",
+      "sourceId": "owid",
+      "unit": "tonnes",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v30.climate.era5.temp_mean",
+      "indicatorId": "climate.era5.temp_mean",
+      "title": "India average temperature (ERA5)",
+      "sourceId": "era5",
+      "unit": "°C",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v31.climate.era5.rel_humidity_mean",
+      "indicatorId": "climate.era5.rel_humidity_mean",
+      "title": "India average relative humidity (ERA5, derived)",
+      "sourceId": "era5",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v32.climate.ghg_by_sector",
+      "indicatorId": "climate.ghg_by_sector",
+      "title": "Greenhouse gas emissions by sector",
+      "sourceId": "owid",
+      "unit": "tonnes CO₂e",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v33.climate.co2_vs_gdp",
+      "indicatorId": "climate.co2_vs_gdp",
+      "title": "CO2 emissions vs GDP",
+      "sourceId": "owid",
+      "unit": "tonnes / US$",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v34.climate.openmeteo.delhi.very_hot_days",
+      "indicatorId": "climate.openmeteo.delhi.very_hot_days",
+      "title": "Delhi very hot days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v35.climate.openmeteo.mumbai.very_hot_days",
+      "indicatorId": "climate.openmeteo.mumbai.very_hot_days",
+      "title": "Mumbai very hot days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v36.climate.openmeteo.kolkata.very_hot_days",
+      "indicatorId": "climate.openmeteo.kolkata.very_hot_days",
+      "title": "Kolkata very hot days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v37.climate.openmeteo.chennai.very_hot_days",
+      "indicatorId": "climate.openmeteo.chennai.very_hot_days",
+      "title": "Chennai very hot days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v38.climate.openmeteo.bengaluru.very_hot_days",
+      "indicatorId": "climate.openmeteo.bengaluru.very_hot_days",
+      "title": "Bengaluru very hot days",
+      "sourceId": "open-meteo",
+      "unit": "days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v39.climate.openmeteo.delhi.hot_nights",
+      "indicatorId": "climate.openmeteo.delhi.hot_nights",
+      "title": "Delhi hot nights",
+      "sourceId": "open-meteo",
+      "unit": "nights",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v40.climate.openmeteo.mumbai.hot_nights",
+      "indicatorId": "climate.openmeteo.mumbai.hot_nights",
+      "title": "Mumbai hot nights",
+      "sourceId": "open-meteo",
+      "unit": "nights",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v41.climate.openmeteo.chennai.hot_nights",
+      "indicatorId": "climate.openmeteo.chennai.hot_nights",
+      "title": "Chennai hot nights",
+      "sourceId": "open-meteo",
+      "unit": "nights",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v42.climate.psmsl.mumbai",
+      "indicatorId": "climate.psmsl.mumbai",
+      "title": "Sea level at Mumbai (since 1878)",
+      "sourceId": "psmsl",
+      "unit": "mm vs 1961-1990",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v43.climate.psmsl.chennai",
+      "indicatorId": "climate.psmsl.chennai",
+      "title": "Sea level at Chennai (since 1916)",
+      "sourceId": "psmsl",
+      "unit": "mm vs 1961-1990",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v44.energy.ember.generation",
+      "indicatorId": "energy.ember.generation",
+      "title": "Electricity generation by source",
+      "sourceId": "ember",
+      "unit": "TWh",
+      "role": "context",
+      "recommendedVisualization": "stacked mix bar plus selected source trends",
+      "mobileGuidance": "Use a stacked bar for the latest mix and avoid too many fuel lines on mobile.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v45.energy.eia.electricity_capacity_solar",
+      "indicatorId": "energy.eia.electricity_capacity_solar",
+      "title": "Solar electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v46.energy.eia.electricity_capacity_wind",
+      "indicatorId": "energy.eia.electricity_capacity_wind",
+      "title": "Wind electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v47.energy.eia.electricity_capacity_renewable",
+      "indicatorId": "energy.eia.electricity_capacity_renewable",
+      "title": "Renewable electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "how-much-hotter-india-is-than-normal",
+      "title": "How much hotter India is than normal",
+      "chartType": "line",
+      "beat": "signal",
+      "window": "full",
+      "indicator": "climate.temp_anomaly_annual",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The single clearest sign that India's climate is shifting, not just its weather."
+    },
+    {
+      "order": 2,
+      "chartId": "a-century-of-warming-one-stripe-per-year",
+      "title": "A century of warming, one stripe per year",
+      "chartType": "stripes",
+      "beat": "signal",
+      "window": "full",
+      "indicator": "climate.temp_anomaly_annual",
+      "series": [],
+      "unit": "°C vs 1991-2020",
+      "subtitle": "",
+      "whyThisChart": "The warming trend with no axes to hide behind, the famous climate-stripes view."
+    },
+    {
+      "order": 3,
+      "chartId": "each-decade-hotter-than-the-last",
+      "title": "Each decade hotter than the last",
+      "chartType": "decadeBars",
+      "beat": "dissection",
+      "window": "",
+      "indicator": "climate.temp_anomaly_annual",
+      "series": [],
+      "unit": "°C vs 1991-2020",
+      "subtitle": "",
+      "whyThisChart": "Smoothing year-to-year noise into decade averages shows the staircase of warming."
+    },
+    {
+      "order": 4,
+      "chartId": "india-s-actual-average-temperature-not-just-the-gap",
+      "title": "India's actual average temperature, not just the gap",
+      "chartType": "line",
+      "beat": "absolute",
+      "window": "full",
+      "indicator": "climate.era5.temp_mean",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Anomalies show change; this shows the real temperature India lives in, land-only."
+    },
+    {
+      "order": 5,
+      "chartId": "where-india-s-heat-is-headed-to-2100",
+      "title": "Where India's heat is headed, to 2100",
+      "chartType": "multiLine",
+      "beat": "projection",
+      "window": "",
+      "indicator": "climate.cckp.temp_ssp245",
+      "series": [
+        {
+          "indicator": "climate.cckp.temp_historical",
+          "label": "Observed"
+        },
+        {
+          "indicator": "climate.cckp.temp_ssp126",
+          "label": "Low emissions"
+        },
+        {
+          "indicator": "climate.cckp.temp_ssp245",
+          "label": "Middle road"
+        },
+        {
+          "indicator": "climate.cckp.temp_ssp585",
+          "label": "High emissions"
+        }
+      ],
+      "unit": "°C",
+      "subtitle": "World Bank CCKP · CMIP6 · observed and projected average temperature",
+      "whyThisChart": "Today's warming is small next to where the century is heading, and how hot it gets is still a choice."
+    },
+    {
+      "order": 6,
+      "chartId": "it-is-not-just-the-heat-it-is-the-humidity",
+      "title": "It is not just the heat, it is the humidity",
+      "chartType": "line",
+      "beat": "heat-stress",
+      "window": "full",
+      "indicator": "climate.era5.rel_humidity_mean",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Humid heat is what makes warming dangerous for the body; dry heat and wet heat are not the same threat."
+    },
+    {
+      "order": 7,
+      "chartId": "how-india-s-rainfall-is-swinging",
+      "title": "How India's rainfall is swinging",
+      "chartType": "line",
+      "beat": "shift",
+      "window": "full",
+      "indicator": "climate.precipitation_annual",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Warming does not just raise heat, it makes rain less predictable, and India runs on the monsoon."
+    },
+    {
+      "order": 8,
+      "chartId": "what-the-air-feels-like-across-india-today",
+      "title": "What the air feels like across India today",
+      "chartType": "waqiCompare",
+      "beat": "exposure",
+      "window": "",
+      "indicator": "climate.waqi.delhi",
+      "series": [
+        {
+          "indicator": "climate.waqi.delhi",
+          "label": "Delhi"
+        },
+        {
+          "indicator": "climate.waqi.mumbai",
+          "label": "Mumbai"
+        },
+        {
+          "indicator": "climate.waqi.kolkata",
+          "label": "Kolkata"
+        },
+        {
+          "indicator": "climate.waqi.chennai",
+          "label": "Chennai"
+        },
+        {
+          "indicator": "climate.waqi.bengaluru",
+          "label": "Bengaluru"
+        }
+      ],
+      "unit": "AQI",
+      "subtitle": "WAQI · live air quality index · latest reading",
+      "whyThisChart": "The same fossil-fuel burning that warms the planet also fills the air people breathe right now."
+    },
+    {
+      "order": 9,
+      "chartId": "and-how-dirty-the-air-has-been-year-after-year",
+      "title": "...and how dirty the air has been, year after year",
+      "chartType": "line",
+      "beat": "exposure",
+      "window": "full",
+      "indicator": "climate.pm25_exposure",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Today's snapshot means more next to the long run, and India's average exposure sits far above what is considered safe."
+    },
+    {
+      "order": 10,
+      "chartId": "the-local-heat-the-national-average-hides-very-hot-days",
+      "title": "The local heat the national average hides: very hot days",
+      "chartType": "multiLine",
+      "beat": "extremes",
+      "window": "",
+      "indicator": "climate.openmeteo.delhi.very_hot_days",
+      "series": [
+        {
+          "indicator": "climate.openmeteo.delhi.very_hot_days",
+          "label": "Delhi"
+        },
+        {
+          "indicator": "climate.openmeteo.mumbai.very_hot_days",
+          "label": "Mumbai"
+        },
+        {
+          "indicator": "climate.openmeteo.kolkata.very_hot_days",
+          "label": "Kolkata"
+        },
+        {
+          "indicator": "climate.openmeteo.chennai.very_hot_days",
+          "label": "Chennai"
+        },
+        {
+          "indicator": "climate.openmeteo.bengaluru.very_hot_days",
+          "label": "Bengaluru"
+        }
+      ],
+      "unit": "days",
+      "subtitle": "Open-Meteo ERA5 · days per year at or above 35°C",
+      "whyThisChart": "A one-degree national rise lands as many more dangerously hot days in specific cities, which is what people actually feel."
+    },
+    {
+      "order": 11,
+      "chartId": "and-the-nights-are-not-cooling-down",
+      "title": "And the nights are not cooling down",
+      "chartType": "multiLine",
+      "beat": "extremes",
+      "window": "",
+      "indicator": "climate.openmeteo.delhi.hot_nights",
+      "series": [
+        {
+          "indicator": "climate.openmeteo.delhi.hot_nights",
+          "label": "Delhi"
+        },
+        {
+          "indicator": "climate.openmeteo.mumbai.hot_nights",
+          "label": "Mumbai"
+        },
+        {
+          "indicator": "climate.openmeteo.kolkata.hot_nights",
+          "label": "Kolkata"
+        },
+        {
+          "indicator": "climate.openmeteo.chennai.hot_nights",
+          "label": "Chennai"
+        },
+        {
+          "indicator": "climate.openmeteo.bengaluru.hot_nights",
+          "label": "Bengaluru"
+        }
+      ],
+      "unit": "nights",
+      "subtitle": "Open-Meteo ERA5 · warm nights per year",
+      "whyThisChart": "Hot nights are a hidden killer: without a cool night the body never recovers from daytime heat."
+    },
+    {
+      "order": 12,
+      "chartId": "the-sea-is-rising-on-india-s-coasts",
+      "title": "The sea is rising on India's coasts",
+      "chartType": "multiLine",
+      "beat": "impact",
+      "window": "",
+      "indicator": "climate.psmsl.mumbai",
+      "series": [
+        {
+          "indicator": "climate.psmsl.mumbai",
+          "label": "Mumbai"
+        },
+        {
+          "indicator": "climate.psmsl.chennai",
+          "label": "Chennai"
+        }
+      ],
+      "unit": "mm vs 1961-1990",
+      "subtitle": "PSMSL tide gauges · annual mean sea level",
+      "whyThisChart": "India has a 7,500 km coastline and major coastal cities, so sea-level rise is a direct national exposure."
+    },
+    {
+      "order": 13,
+      "chartId": "the-human-toll-of-climate-linked-disasters",
+      "title": "The human toll of climate-linked disasters",
+      "chartType": "columnLines",
+      "beat": "impact",
+      "window": "",
+      "indicator": "climate.disaster_deaths",
+      "series": [],
+      "unit": "deaths",
+      "subtitle": "",
+      "whyThisChart": "Warming loads the dice on the floods, cyclones, droughts, and heatwaves that kill people."
+    },
+    {
+      "order": 14,
+      "chartId": "how-much-co2-india-now-emits-each-year",
+      "title": "How much CO2 India now emits each year",
+      "chartType": "line",
+      "beat": "cause",
+      "window": "full",
+      "indicator": "owid.co2_total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "To read India's climate fairly you have to see its part in the cause, not just the effect."
+    },
+    {
+      "order": 15,
+      "chartId": "co2-is-not-the-whole-story-the-gas-mix",
+      "title": "CO2 is not the whole story: the gas mix",
+      "chartType": "columnLines",
+      "beat": "composition",
+      "window": "",
+      "indicator": "climate.ghg_by_gas",
+      "series": [],
+      "unit": "tonnes CO₂e",
+      "subtitle": "",
+      "whyThisChart": "India's farms and livestock make methane and nitrous oxide unusually large, so CO2 alone undercounts."
+    },
+    {
+      "order": 16,
+      "chartId": "where-india-s-emissions-actually-come-from",
+      "title": "Where India's emissions actually come from",
+      "chartType": "compositionStack",
+      "beat": "composition",
+      "window": "",
+      "indicator": "climate.ghg_by_sector",
+      "series": [],
+      "unit": "tonnes CO₂e",
+      "subtitle": "",
+      "whyThisChart": "The path to lower emissions depends entirely on which sectors dominate."
+    },
+    {
+      "order": 17,
+      "chartId": "is-india-s-growth-pulling-away-from-its-emissions",
+      "title": "Is India's growth pulling away from its emissions?",
+      "chartType": "decoupleIndex",
+      "beat": "decoupling",
+      "window": "",
+      "indicator": "climate.co2_vs_gdp",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Whether emissions can fall while incomes rise is the whole development-and-climate question."
+    },
+    {
+      "order": 18,
+      "chartId": "is-india-s-electricity-getting-cleaner",
+      "title": "Is India's electricity getting cleaner?",
+      "chartType": "line",
+      "beat": "turn",
+      "window": "full",
+      "indicator": "energy.ember.carbon_intensity",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Whether the cause is easing depends on how dirty each unit of power is, not just how much is used."
+    },
+    {
+      "order": 19,
+      "chartId": "how-india-makes-its-electricity-and-how-it-is-shifting",
+      "title": "How India makes its electricity, and how it is shifting",
+      "chartType": "emberLines",
+      "beat": "transition",
+      "window": "",
+      "indicator": "energy.ember.generation",
+      "series": [
+        {
+          "indicator": "Coal",
+          "label": "Coal"
+        },
+        {
+          "indicator": "Solar",
+          "label": "Solar"
+        },
+        {
+          "indicator": "Wind",
+          "label": "Wind"
+        },
+        {
+          "indicator": "Hydro",
+          "label": "Hydro"
+        },
+        {
+          "indicator": "Gas",
+          "label": "Gas"
+        },
+        {
+          "indicator": "Nuclear",
+          "label": "Nuclear"
+        }
+      ],
+      "unit": "TWh",
+      "subtitle": "Ember · annual electricity generation by source",
+      "whyThisChart": "The whole climate question for India is whether clean power can grow faster than rising demand."
+    },
+    {
+      "order": 20,
+      "chartId": "the-clean-energy-surge-capacity-from-near-zero",
+      "title": "The clean-energy surge: capacity from near zero",
+      "chartType": "multiLine",
+      "beat": "transition",
+      "window": "",
+      "indicator": "energy.eia.electricity_capacity_solar",
+      "series": [
+        {
+          "indicator": "energy.eia.electricity_capacity_solar",
+          "label": "Solar"
+        },
+        {
+          "indicator": "energy.eia.electricity_capacity_wind",
+          "label": "Wind"
+        },
+        {
+          "indicator": "energy.eia.electricity_capacity_renewable",
+          "label": "All renewables"
+        }
+      ],
+      "unit": "GW",
+      "subtitle": "EIA · installed electricity capacity",
+      "whyThisChart": "India's solar build-out is one of the fastest energy stories anywhere, and it is recent."
+    },
+    {
+      "order": 21,
+      "chartId": "but-coal-still-rules-the-grid",
+      "title": "But coal still rules the grid",
+      "chartType": "emberShare",
+      "beat": "transition",
+      "window": "",
+      "indicator": "energy.ember.generation",
+      "series": [],
+      "unit": "% of generation",
+      "subtitle": "",
+      "whyThisChart": "The surge is real, but the honest headline is that fossil power still does most of the work."
+    },
+    {
+      "order": 22,
+      "chartId": "but-how-much-per-person-next-to-others",
+      "title": "...but how much per person, next to others?",
+      "chartType": "compareBars",
+      "beat": "fairness",
+      "window": "latest",
+      "indicator": "compare.climate.co2_per_capita",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Per-person emissions are the fairness number, and they only mean something next to China, the US, and the world."
+    },
+    {
+      "order": 23,
+      "chartId": "total-emissions-big-but-in-proportion",
+      "title": "Total emissions: big, but in proportion",
+      "chartType": "compareBars",
+      "beat": "scale",
+      "window": "latest",
+      "indicator": "compare.climate.co2_total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The headline 'third largest emitter' needs the company it keeps to be read honestly."
+    },
+    {
+      "order": 24,
+      "chartId": "and-who-actually-filled-the-atmosphere",
+      "title": "...and who actually filled the atmosphere?",
+      "chartType": "compareBars",
+      "beat": "fairness",
+      "window": "latest",
+      "indicator": "compare.climate.co2_cumulative",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Today's warming comes from more than a century of emissions, so historical responsibility is the honest accounting."
+    },
+    {
+      "order": 25,
+      "chartId": "per-person-emissions-four-very-different-paths",
+      "title": "Per-person emissions, four very different paths",
+      "chartType": "compareLine",
+      "beat": "fairness",
+      "window": "full",
+      "indicator": "compare.climate.co2_per_capita",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The gap is not new; the trajectories show how differently these economies grew."
+    },
+    {
+      "order": 26,
+      "chartId": "india-s-slice-of-the-world-s-emissions",
+      "title": "India's slice of the world's emissions",
+      "chartType": "line",
+      "beat": "scale",
+      "window": "full",
+      "indicator": "world.share.co2_total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Climate is a shared problem, so India's share of the global total frames its responsibility and its leverage."
+    },
+    {
+      "order": 27,
+      "chartId": "why-india-is-so-exposed-who-works-the-land",
+      "title": "Why India is so exposed: who works the land",
+      "chartType": "line",
+      "beat": "exposure",
+      "window": "full",
+      "indicator": "work.employment_agriculture",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Heat and erratic rain hit hardest where livelihoods depend on the sky, and a huge share of Indians still farm."
+    },
+    {
+      "order": 28,
+      "chartId": "and-how-many-people-face-the-hotter-century",
+      "title": "...and how many people face the hotter century",
+      "chartType": "line",
+      "beat": "exposure",
+      "window": "full",
+      "indicator": "people.population.total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The stakes of every degree are measured in people, and India has more of them than almost anywhere."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Annual temperature anomaly: Temperature anomaly",
+      "value": 0.068268776,
+      "displayValue": "0.07",
+      "date": "2025",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_annual",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Annual temperature anomaly: Temperature anomaly",
+      "value": -0.9220498,
+      "displayValue": "-0.92",
+      "date": "1940",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_annual",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average annual precipitation: Annual precipitation",
+      "value": 1404.35,
+      "displayValue": "1,404.35",
+      "date": "2025",
+      "unit": "mm",
+      "indicatorId": "climate.precipitation_annual",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average annual precipitation: Annual precipitation",
+      "value": 1211.8192,
+      "displayValue": "1,211.82",
+      "date": "1940",
+      "unit": "mm",
+      "indicatorId": "climate.precipitation_annual",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 17.029053,
+      "displayValue": "17.03",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 19.129791,
+      "displayValue": "19.13",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 21.74267,
+      "displayValue": "21.74",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 26.641914,
+      "displayValue": "26.64",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 28.93729,
+      "displayValue": "28.94",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 28.373158,
+      "displayValue": "28.37",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 25.785017,
+      "displayValue": "25.79",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 24.549425,
+      "displayValue": "24.55",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 24.543459,
+      "displayValue": "24.54",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 23.813171,
+      "displayValue": "23.81",
+      "date": "",
+      "unit": "°C",
+      "indicatorId": "climate.surface_temp_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": 0.18236542,
+      "displayValue": "0.18",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -0.7437649,
+      "displayValue": "-0.74",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -2.388836,
+      "displayValue": "-2.39",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.285162,
+      "displayValue": "-1.29",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.020298,
+      "displayValue": "-1.02",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -0.47850418,
+      "displayValue": "-0.48",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.1877384,
+      "displayValue": "-1.19",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.8170509,
+      "displayValue": "-1.82",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.5688019,
+      "displayValue": "-1.57",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -0.67344856,
+      "displayValue": "-0.67",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Annual temperature anomaly: Temperature anomaly",
+      "value": 0.068268776,
+      "displayValue": "0.07",
+      "date": "2025",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_annual"
+    },
+    {
+      "label": "Annual temperature anomaly: Temperature anomaly",
+      "value": -0.9220498,
+      "displayValue": "-0.92",
+      "date": "1940",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_annual"
+    },
+    {
+      "label": "Average annual precipitation: Annual precipitation",
+      "value": 1404.35,
+      "displayValue": "1,404.35",
+      "date": "2025",
+      "unit": "mm",
+      "sourceId": "owid",
+      "indicatorId": "climate.precipitation_annual"
+    },
+    {
+      "label": "Average annual precipitation: Annual precipitation",
+      "value": 1211.8192,
+      "displayValue": "1,211.82",
+      "date": "1940",
+      "unit": "mm",
+      "sourceId": "owid",
+      "indicatorId": "climate.precipitation_annual"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 17.029053,
+      "displayValue": "17.03",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 19.129791,
+      "displayValue": "19.13",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 21.74267,
+      "displayValue": "21.74",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 26.641914,
+      "displayValue": "26.64",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 28.93729,
+      "displayValue": "28.94",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 28.373158,
+      "displayValue": "28.37",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 25.785017,
+      "displayValue": "25.79",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 24.549425,
+      "displayValue": "24.55",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 24.543459,
+      "displayValue": "24.54",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Average monthly surface temperature: Monthly average",
+      "value": 23.813171,
+      "displayValue": "23.81",
+      "date": "",
+      "unit": "°C",
+      "sourceId": "owid",
+      "indicatorId": "climate.surface_temp_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": 0.18236542,
+      "displayValue": "0.18",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -0.7437649,
+      "displayValue": "-0.74",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -2.388836,
+      "displayValue": "-2.39",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.285162,
+      "displayValue": "-1.29",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.020298,
+      "displayValue": "-1.02",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -0.47850418,
+      "displayValue": "-0.48",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.1877384,
+      "displayValue": "-1.19",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.8170509,
+      "displayValue": "-1.82",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -1.5688019,
+      "displayValue": "-1.57",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Monthly temperature anomaly: Temperature anomaly",
+      "value": -0.67344856,
+      "displayValue": "-0.67",
+      "date": "",
+      "unit": "°C vs 1991-2020",
+      "sourceId": "owid",
+      "indicatorId": "climate.temp_anomaly_monthly"
+    },
+    {
+      "label": "Delhi air quality index: aqi",
+      "value": 95,
+      "displayValue": "95",
+      "date": {
+        "s": "2026-06-01 09:00:00",
+        "tz": "+05:30",
+        "v": 1780304400,
+        "iso": "2026-06-01T09:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.delhi"
+    },
+    {
+      "label": "Delhi air quality index: aqi",
+      "value": 95,
+      "displayValue": "95",
+      "date": {
+        "s": "2026-06-01 09:00:00",
+        "tz": "+05:30",
+        "v": 1780304400,
+        "iso": "2026-06-01T09:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.delhi"
+    },
+    {
+      "label": "Mumbai air quality index: aqi",
+      "value": 156,
+      "displayValue": "156",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.mumbai"
+    },
+    {
+      "label": "Mumbai air quality index: aqi",
+      "value": 156,
+      "displayValue": "156",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.mumbai"
+    },
+    {
+      "label": "Kolkata air quality index: aqi",
+      "value": 65,
+      "displayValue": "65",
+      "date": {
+        "s": "2026-05-30 12:00:00",
+        "tz": "+05:30",
+        "v": 1780142400,
+        "iso": "2026-05-30T12:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.kolkata"
+    },
+    {
+      "label": "Kolkata air quality index: aqi",
+      "value": 65,
+      "displayValue": "65",
+      "date": {
+        "s": "2026-05-30 12:00:00",
+        "tz": "+05:30",
+        "v": 1780142400,
+        "iso": "2026-05-30T12:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.kolkata"
+    },
+    {
+      "label": "Chennai air quality index: aqi",
+      "value": 73,
+      "displayValue": "73",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.chennai"
+    },
+    {
+      "label": "Chennai air quality index: aqi",
+      "value": 73,
+      "displayValue": "73",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.chennai"
+    },
+    {
+      "label": "Bengaluru air quality index: aqi",
+      "value": 58,
+      "displayValue": "58",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.bengaluru"
+    },
+    {
+      "label": "Bengaluru air quality index: aqi",
+      "value": 58,
+      "displayValue": "58",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.bengaluru"
+    },
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 3193478100,
+      "displayValue": "3.19 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_total"
+    },
+    {
+      "label": "Annual CO2 emissions: Annual CO₂ emissions",
+      "value": 394481,
+      "displayValue": "3,94,481",
+      "date": "1858",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_total"
+    },
+    {
+      "label": "Annual CO2 emissions per capita: CO₂ emissions per capita",
+      "value": 2.2009783,
+      "displayValue": "2.2",
+      "date": "2024",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_per_capita"
+    },
+    {
+      "label": "Annual CO2 emissions per capita: CO₂ emissions per capita",
+      "value": 0.0016306057,
+      "displayValue": "0",
+      "date": "1858",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_per_capita"
+    },
+    {
+      "label": "Cumulative CO2 emissions: Cumulative CO₂ emissions",
+      "value": 66072530000,
+      "displayValue": "66.07 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_cumulative"
+    },
+    {
+      "label": "Cumulative CO2 emissions: Cumulative CO₂ emissions",
+      "value": 394481,
+      "displayValue": "3,94,481",
+      "date": "1858",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "owid.co2_cumulative"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 670.13,
+      "displayValue": "670.13",
+      "date": "2025",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 740.04,
+      "displayValue": "740.04",
+      "date": "2000",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
+    },
+    {
+      "label": "India share of world CO2 emissions, latest",
+      "value": 8.273563690684995,
+      "displayValue": "8.3%",
+      "date": "2024",
+      "unit": "%",
+      "sourceId": "owid",
+      "indicatorId": "world.share.co2_total"
+    },
+    {
+      "label": "India share of world CO2 emissions, earliest",
+      "value": 0.13814856872940412,
+      "displayValue": "0.1%",
+      "date": "1858",
+      "unit": "%",
+      "sourceId": "owid",
+      "indicatorId": "world.share.co2_total"
+    },
+    {
+      "label": "Employment in agriculture, latest",
+      "value": 41.6251280877573,
+      "displayValue": "41.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    },
+    {
+      "label": "Employment in agriculture, earliest",
+      "value": 63.1283195373591,
+      "displayValue": "63.1%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    },
+    {
+      "label": "Population, total, latest",
+      "value": 1450935791,
+      "displayValue": "145.1 crore",
+      "date": "2024",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "people.population.total"
+    },
+    {
+      "label": "Population, total, earliest",
+      "value": 435990338,
+      "displayValue": "43.6 crore",
+      "date": "1960",
+      "unit": "people",
+      "sourceId": "worldbank",
+      "indicatorId": "people.population.total"
+    },
+    {
+      "label": "India average temperature, observed (CMIP6 historical), latest",
+      "value": 24.63,
+      "displayValue": "24.63",
+      "date": "2014",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_historical"
+    },
+    {
+      "label": "India average temperature, observed (CMIP6 historical), earliest",
+      "value": 24.23,
+      "displayValue": "24.23",
+      "date": "1950",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_historical"
+    },
+    {
+      "label": "India temperature projection, low emissions (SSP1-2.6), latest",
+      "value": 25.66,
+      "displayValue": "25.66",
+      "date": "2100",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_ssp126"
+    },
+    {
+      "label": "India temperature projection, low emissions (SSP1-2.6), earliest",
+      "value": 24.67,
+      "displayValue": "24.67",
+      "date": "2015",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_ssp126"
+    },
+    {
+      "label": "India temperature projection, middle road (SSP2-4.5), latest",
+      "value": 26.64,
+      "displayValue": "26.64",
+      "date": "2100",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_ssp245"
+    },
+    {
+      "label": "India temperature projection, middle road (SSP2-4.5), earliest",
+      "value": 24.67,
+      "displayValue": "24.67",
+      "date": "2015",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_ssp245"
+    },
+    {
+      "label": "India temperature projection, high emissions (SSP5-8.5), latest",
+      "value": 29.25,
+      "displayValue": "29.25",
+      "date": "2100",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_ssp585"
+    },
+    {
+      "label": "India temperature projection, high emissions (SSP5-8.5), earliest",
+      "value": 24.66,
+      "displayValue": "24.66",
+      "date": "2015",
+      "unit": "°C",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.temp_ssp585"
+    },
+    {
+      "label": "India precipitation projection, middle road (SSP2-4.5), latest",
+      "value": 1373.03,
+      "displayValue": "1,373.03",
+      "date": "2100",
+      "unit": "mm",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.precip_ssp245"
+    },
+    {
+      "label": "India precipitation projection, middle road (SSP2-4.5), earliest",
+      "value": 1221.44,
+      "displayValue": "1,221.44",
+      "date": "2015",
+      "unit": "mm",
+      "sourceId": "cckp",
+      "indicatorId": "climate.cckp.precip_ssp245"
+    },
+    {
+      "label": "Total greenhouse gas emissions: Annual greenhouse gas emissions including land use",
+      "value": 4262410800,
+      "displayValue": "4.26 billion",
+      "date": "2024",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_total"
+    },
+    {
+      "label": "Total greenhouse gas emissions: Annual greenhouse gas emissions including land use",
+      "value": 372714720,
+      "displayValue": "372.71 million",
+      "date": "1850",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_total"
+    },
+    {
+      "label": "Greenhouse gas emissions by gas: Nitrous oxide (N₂O)",
+      "value": 310004350,
+      "displayValue": "310 million",
+      "date": "2024",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_gas"
+    },
+    {
+      "label": "Greenhouse gas emissions by gas: Methane (CH₄)",
+      "value": 859294340,
+      "displayValue": "859.29 million",
+      "date": "2024",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_gas"
+    },
+    {
+      "label": "Greenhouse gas emissions by gas: Carbon dioxide (CO₂)",
+      "value": 3093112000,
+      "displayValue": "3.09 billion",
+      "date": "2024",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_gas"
+    },
+    {
+      "label": "Greenhouse gas emissions by gas: Nitrous oxide (N₂O)",
+      "value": 20668308,
+      "displayValue": "20.67 million",
+      "date": "1850",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_gas"
+    },
+    {
+      "label": "Greenhouse gas emissions by gas: Methane (CH₄)",
+      "value": 200839060,
+      "displayValue": "200.84 million",
+      "date": "1850",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_gas"
+    },
+    {
+      "label": "Greenhouse gas emissions by gas: Carbon dioxide (CO₂)",
+      "value": 151207360,
+      "displayValue": "151.21 million",
+      "date": "1850",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_gas"
+    },
+    {
+      "label": "Consumption-based CO2 emissions: Annual consumption-based CO₂ emissions",
+      "value": 2543215400,
+      "displayValue": "2.54 billion",
+      "date": "2023",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "climate.co2_consumption"
+    },
+    {
+      "label": "Consumption-based CO2 emissions: Annual consumption-based CO₂ emissions",
+      "value": 583352700,
+      "displayValue": "583.35 million",
+      "date": "1990",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "climate.co2_consumption"
+    },
+    {
+      "label": "PM2.5 air pollution, mean annual exposure, latest",
+      "value": 48.3948115195574,
+      "displayValue": "48.39",
+      "date": "2020",
+      "unit": "µg/m³",
+      "sourceId": "worldbank",
+      "indicatorId": "climate.pm25_exposure"
+    },
+    {
+      "label": "PM2.5 air pollution, mean annual exposure, earliest",
+      "value": 62.003888011973,
+      "displayValue": "62",
+      "date": "1990",
+      "unit": "µg/m³",
+      "sourceId": "worldbank",
+      "indicatorId": "climate.pm25_exposure"
+    },
+    {
+      "label": "Deaths from natural disasters by type: Flood",
+      "value": 405,
+      "displayValue": "405",
+      "date": "2025",
+      "unit": "deaths",
+      "sourceId": "owid",
+      "indicatorId": "climate.disaster_deaths"
+    },
+    {
+      "label": "Deaths from natural disasters by type: Landslide",
+      "value": 154,
+      "displayValue": "154",
+      "date": "2025",
+      "unit": "deaths",
+      "sourceId": "owid",
+      "indicatorId": "climate.disaster_deaths"
+    },
+    {
+      "label": "Deaths from natural disasters by type: Storms",
+      "value": 158,
+      "displayValue": "158",
+      "date": "2025",
+      "unit": "deaths",
+      "sourceId": "owid",
+      "indicatorId": "climate.disaster_deaths"
+    },
+    {
+      "label": "Deaths from natural disasters by type: All disasters",
+      "value": 717,
+      "displayValue": "717",
+      "date": "2025",
+      "unit": "deaths",
+      "sourceId": "owid",
+      "indicatorId": "climate.disaster_deaths"
+    },
+    {
+      "label": "Deaths from natural disasters by type: Drought",
+      "value": 1250000,
+      "displayValue": "1.25 million",
+      "date": "1900",
+      "unit": "deaths",
+      "sourceId": "owid",
+      "indicatorId": "climate.disaster_deaths"
+    },
+    {
+      "label": "Deaths from natural disasters by type: All disasters",
+      "value": 1250000,
+      "displayValue": "1.25 million",
+      "date": "1900",
+      "unit": "deaths",
+      "sourceId": "owid",
+      "indicatorId": "climate.disaster_deaths"
+    },
+    {
+      "label": "CO2 per person comparison: value",
+      "value": 2.2009783,
+      "displayValue": "2.2",
+      "date": "2024",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_per_capita"
+    },
+    {
+      "label": "CO2 per person comparison: value",
+      "value": 8.65839,
+      "displayValue": "8.66",
+      "date": "2024",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_per_capita"
+    },
+    {
+      "label": "CO2 per person comparison: value",
+      "value": 14.197287,
+      "displayValue": "14.2",
+      "date": "2024",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_per_capita"
+    },
+    {
+      "label": "CO2 per person comparison: value",
+      "value": 4.729075,
+      "displayValue": "4.73",
+      "date": "2024",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_per_capita"
+    },
+    {
+      "label": "CO2 per person comparison: value",
+      "value": 0.0123539,
+      "displayValue": "0.01",
+      "date": "1750",
+      "unit": "tonnes per person",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_per_capita"
+    },
+    {
+      "label": "Total CO2 emissions comparison: value",
+      "value": 3193478100,
+      "displayValue": "3.19 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_total"
+    },
+    {
+      "label": "Total CO2 emissions comparison: value",
+      "value": 12289037000,
+      "displayValue": "12.29 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_total"
+    },
+    {
+      "label": "Total CO2 emissions comparison: value",
+      "value": 4904120000,
+      "displayValue": "4.9 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_total"
+    },
+    {
+      "label": "Total CO2 emissions comparison: value",
+      "value": 38598580000,
+      "displayValue": "38.6 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_total"
+    },
+    {
+      "label": "Total CO2 emissions comparison: value",
+      "value": 9305937,
+      "displayValue": "9.31 million",
+      "date": "1750",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_total"
+    },
+    {
+      "label": "Cumulative CO2 emissions comparison: value",
+      "value": 66072530000,
+      "displayValue": "66.07 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_cumulative"
+    },
+    {
+      "label": "Cumulative CO2 emissions comparison: value",
+      "value": 285087040000,
+      "displayValue": "285.09 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_cumulative"
+    },
+    {
+      "label": "Cumulative CO2 emissions comparison: value",
+      "value": 434866550000,
+      "displayValue": "434.87 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_cumulative"
+    },
+    {
+      "label": "Cumulative CO2 emissions comparison: value",
+      "value": 1849123900000,
+      "displayValue": "1,849.12 billion",
+      "date": "2024",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_cumulative"
+    },
+    {
+      "label": "Cumulative CO2 emissions comparison: value",
+      "value": 9305937,
+      "displayValue": "9.31 million",
+      "date": "1750",
+      "unit": "tonnes",
+      "sourceId": "owid",
+      "indicatorId": "compare.climate.co2_cumulative"
+    },
+    {
+      "label": "India average temperature (ERA5), latest",
+      "value": 24.459,
+      "displayValue": "24.46",
+      "date": "2024",
+      "unit": "°C",
+      "sourceId": "era5",
+      "indicatorId": "climate.era5.temp_mean"
+    },
+    {
+      "label": "India average temperature (ERA5), earliest",
+      "value": 22.956,
+      "displayValue": "22.96",
+      "date": "1940",
+      "unit": "°C",
+      "sourceId": "era5",
+      "indicatorId": "climate.era5.temp_mean"
+    },
+    {
+      "label": "India average relative humidity (ERA5, derived), latest",
+      "value": 64.21,
+      "displayValue": "64.2%",
+      "date": "2024",
+      "unit": "%",
+      "sourceId": "era5",
+      "indicatorId": "climate.era5.rel_humidity_mean"
+    },
+    {
+      "label": "India average relative humidity (ERA5, derived), earliest",
+      "value": 51.49,
+      "displayValue": "51.5%",
+      "date": "1940",
+      "unit": "%",
+      "sourceId": "era5",
+      "indicatorId": "climate.era5.rel_humidity_mean"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Agriculture",
+      "value": 808710016,
+      "displayValue": "808.71 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Land-use change and forestry",
+      "value": -146470000,
+      "displayValue": "-146.47 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Waste",
+      "value": 94450000,
+      "displayValue": "94.45 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Buildings",
+      "value": 240310000,
+      "displayValue": "240.31 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Industry",
+      "value": 221070000,
+      "displayValue": "221.07 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Manufacturing and construction",
+      "value": 675640000,
+      "displayValue": "675.64 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Transport",
+      "value": 362860000,
+      "displayValue": "362.86 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Electricity and heat",
+      "value": 1550409984,
+      "displayValue": "1.55 billion",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Fugitive emissions",
+      "value": 95390000,
+      "displayValue": "95.39 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Other fuel combustion",
+      "value": 69320000,
+      "displayValue": "69.32 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Aviation and shipping",
+      "value": 18570000,
+      "displayValue": "18.57 million",
+      "date": "2023",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "Greenhouse gas emissions by sector: Agriculture",
+      "value": 603449984,
+      "displayValue": "603.45 million",
+      "date": "1990",
+      "unit": "tonnes CO₂e",
+      "sourceId": "owid",
+      "indicatorId": "climate.ghg_by_sector"
+    },
+    {
+      "label": "CO2 emissions vs GDP: GDP",
+      "value": 14245349560958,
+      "displayValue": "$14.25 trillion",
+      "date": "2024",
+      "unit": "tonnes / US$",
+      "sourceId": "owid",
+      "indicatorId": "climate.co2_vs_gdp"
+    },
+    {
+      "label": "CO2 emissions vs GDP: CO₂ emissions",
+      "value": 3193478100,
+      "displayValue": "3.19 billion",
+      "date": "2024",
+      "unit": "tonnes / US$",
+      "sourceId": "owid",
+      "indicatorId": "climate.co2_vs_gdp"
+    },
+    {
+      "label": "CO2 emissions vs GDP: GDP",
+      "value": 1905660987236,
+      "displayValue": "$1.91 trillion",
+      "date": "1990",
+      "unit": "tonnes / US$",
+      "sourceId": "owid",
+      "indicatorId": "climate.co2_vs_gdp"
+    },
+    {
+      "label": "CO2 emissions vs GDP: CO₂ emissions",
+      "value": 577986560,
+      "displayValue": "577.99 million",
+      "date": "1990",
+      "unit": "tonnes / US$",
+      "sourceId": "owid",
+      "indicatorId": "climate.co2_vs_gdp"
+    },
+    {
+      "label": "CO2 emissions vs GDP: Consumption-based CO₂ emissions",
+      "value": 583352700,
+      "displayValue": "583.35 million",
+      "date": "1990",
+      "unit": "tonnes / US$",
+      "sourceId": "owid",
+      "indicatorId": "climate.co2_vs_gdp"
+    },
+    {
+      "label": "Delhi very hot days, latest",
+      "value": 87,
+      "displayValue": "87",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.very_hot_days"
+    },
+    {
+      "label": "Delhi very hot days, earliest",
+      "value": 144,
+      "displayValue": "144",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.very_hot_days"
+    },
+    {
+      "label": "Mumbai very hot days, latest",
+      "value": 2,
+      "displayValue": "2",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.very_hot_days"
+    },
+    {
+      "label": "Mumbai very hot days, earliest",
+      "value": 3,
+      "displayValue": "3",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.very_hot_days"
+    },
+    {
+      "label": "Kolkata very hot days, latest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.kolkata.very_hot_days"
+    },
+    {
+      "label": "Kolkata very hot days, earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.kolkata.very_hot_days"
+    },
+    {
+      "label": "Chennai very hot days, latest",
+      "value": 21,
+      "displayValue": "21",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.very_hot_days"
+    },
+    {
+      "label": "Chennai very hot days, earliest",
+      "value": 28,
+      "displayValue": "28",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.very_hot_days"
+    },
+    {
+      "label": "Bengaluru very hot days, latest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2025",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.bengaluru.very_hot_days"
+    },
+    {
+      "label": "Bengaluru very hot days, earliest",
+      "value": 5,
+      "displayValue": "5",
+      "date": "1940",
+      "unit": "days",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.bengaluru.very_hot_days"
+    },
+    {
+      "label": "Delhi hot nights, latest",
+      "value": 37,
+      "displayValue": "37",
+      "date": "2025",
+      "unit": "nights",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.hot_nights"
+    },
+    {
+      "label": "Delhi hot nights, earliest",
+      "value": 49,
+      "displayValue": "49",
+      "date": "1940",
+      "unit": "nights",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.delhi.hot_nights"
+    },
+    {
+      "label": "Mumbai hot nights, latest",
+      "value": 14,
+      "displayValue": "14",
+      "date": "2025",
+      "unit": "nights",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.hot_nights"
+    },
+    {
+      "label": "Mumbai hot nights, earliest",
+      "value": 2,
+      "displayValue": "2",
+      "date": "1940",
+      "unit": "nights",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.mumbai.hot_nights"
+    },
+    {
+      "label": "Chennai hot nights, latest",
+      "value": 99,
+      "displayValue": "99",
+      "date": "2025",
+      "unit": "nights",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.hot_nights"
+    },
+    {
+      "label": "Chennai hot nights, earliest",
+      "value": 22,
+      "displayValue": "22",
+      "date": "1940",
+      "unit": "nights",
+      "sourceId": "open-meteo",
+      "indicatorId": "climate.openmeteo.chennai.hot_nights"
+    },
+    {
+      "label": "Sea level at Mumbai (since 1878), latest",
+      "value": 192,
+      "displayValue": "192",
+      "date": "2024",
+      "unit": "mm vs 1961-1990",
+      "sourceId": "psmsl",
+      "indicatorId": "climate.psmsl.mumbai"
+    },
+    {
+      "label": "Sea level at Mumbai (since 1878), earliest",
+      "value": -40,
+      "displayValue": "-40",
+      "date": "1878",
+      "unit": "mm vs 1961-1990",
+      "sourceId": "psmsl",
+      "indicatorId": "climate.psmsl.mumbai"
+    },
+    {
+      "label": "Sea level at Chennai (since 1916), latest",
+      "value": 317.5,
+      "displayValue": "317.5",
+      "date": "2022",
+      "unit": "mm vs 1961-1990",
+      "sourceId": "psmsl",
+      "indicatorId": "climate.psmsl.chennai"
+    },
+    {
+      "label": "Sea level at Chennai (since 1916), earliest",
+      "value": 2.5,
+      "displayValue": "2.5",
+      "date": "1916",
+      "unit": "mm vs 1961-1990",
+      "sourceId": "psmsl",
+      "indicatorId": "climate.psmsl.chennai"
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 23.04,
+      "displayValue": "23.04",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 1.11,
+      "displayValue": "1.11",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Clean): generation_twh",
+      "value": 554.81,
+      "displayValue": "554.81",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Clean): share_of_generation_pct",
+      "value": 26.65,
+      "displayValue": "26.65",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Coal): generation_twh",
+      "value": 1474.15,
+      "displayValue": "1,474.15",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Coal): share_of_generation_pct",
+      "value": 70.82,
+      "displayValue": "70.82",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Demand): generation_twh",
+      "value": 2082.82,
+      "displayValue": "2,082.82",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Demand): share_of_generation_pct",
+      "value": 100.06,
+      "displayValue": "100.06",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Fossil): generation_twh",
+      "value": 1526.79,
+      "displayValue": "1,526.79",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Fossil): share_of_generation_pct",
+      "value": 73.35,
+      "displayValue": "73.35",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 1.69,
+      "displayValue": "1.69",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 0.3,
+      "displayValue": "0.3",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Solar electricity installed capacity, latest",
+      "value": 97.384,
+      "displayValue": "97.38",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_solar"
+    },
+    {
+      "label": "Solar electricity installed capacity, earliest",
+      "value": 0.0011,
+      "displayValue": "0",
+      "date": "2000",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_solar"
+    },
+    {
+      "label": "Wind electricity installed capacity, latest",
+      "value": 48.163,
+      "displayValue": "48.16",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_wind"
+    },
+    {
+      "label": "Wind electricity installed capacity, earliest",
+      "value": 0.941,
+      "displayValue": "0.94",
+      "date": "2000",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_wind"
+    },
+    {
+      "label": "Renewable electricity installed capacity, latest",
+      "value": 204.107,
+      "displayValue": "204.11",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_renewable"
+    },
+    {
+      "label": "Renewable electricity installed capacity, earliest",
+      "value": 12.173,
+      "displayValue": "12.17",
+      "date": "1980",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_renewable"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "climate.temp_anomaly_annual",
+      "title": "Annual temperature anomaly",
+      "sourceId": "owid",
+      "sourceIndicatorId": "annual-temperature-anomalies",
+      "unit": "°C vs 1991-2020",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 86,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Temperature anomaly"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2025",
+          "Temperature anomaly": "0.068268776"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Temperature anomaly": "0.57244587"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Temperature anomaly": "0.27688804"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Temperature anomaly": "0.27105442"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Temperature anomaly": "0.094714165"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Temperature anomaly": "-0.0031148593"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Temperature anomaly": "0.2844162"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Temperature anomaly": "0.32134342"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Temperature anomaly": "0.5180332"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Temperature anomaly": "0.6567257"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.precipitation_annual",
+      "title": "Average annual precipitation",
+      "sourceId": "owid",
+      "sourceIndicatorId": "average-precipitation-per-year",
+      "unit": "mm",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 86,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Annual precipitation"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2025",
+          "Annual precipitation": "1404.35"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Annual precipitation": "1382.1575"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Annual precipitation": "1157.6791"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Annual precipitation": "1277.7179"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Annual precipitation": "1241.8716"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Annual precipitation": "1315.3904"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Annual precipitation": "1374.6685"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Annual precipitation": "1110.0332"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Annual precipitation": "1206.1223"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Annual precipitation": "1213.0835"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.surface_temp_monthly",
+      "title": "Average monthly surface temperature",
+      "sourceId": "owid",
+      "sourceIndicatorId": "average-monthly-surface-temperature",
+      "unit": "°C",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 1036,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Day",
+        "Monthly average"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-01-15",
+          "Monthly average": "17.029053"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-02-15",
+          "Monthly average": "19.129791"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-03-15",
+          "Monthly average": "21.74267"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-04-15",
+          "Monthly average": "26.641914"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-05-15",
+          "Monthly average": "28.93729"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-06-15",
+          "Monthly average": "28.373158"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-07-15",
+          "Monthly average": "25.785017"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-08-15",
+          "Monthly average": "24.549425"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-09-15",
+          "Monthly average": "24.543459"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-10-15",
+          "Monthly average": "23.813171"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.temp_anomaly_monthly",
+      "title": "Monthly temperature anomaly",
+      "sourceId": "owid",
+      "sourceIndicatorId": "monthly-temperature-anomalies",
+      "unit": "°C vs 1991-2020",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 1036,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Day",
+        "Temperature anomaly"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-01-15",
+          "Temperature anomaly": "0.18236542"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-02-15",
+          "Temperature anomaly": "-0.7437649"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-03-15",
+          "Temperature anomaly": "-2.388836"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-04-15",
+          "Temperature anomaly": "-1.285162"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-05-15",
+          "Temperature anomaly": "-1.020298"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-06-15",
+          "Temperature anomaly": "-0.47850418"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-07-15",
+          "Temperature anomaly": "-1.1877384"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-08-15",
+          "Temperature anomaly": "-1.8170509"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-09-15",
+          "Temperature anomaly": "-1.5688019"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Day": "1940-10-15",
+          "Temperature anomaly": "-0.67344856"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.delhi",
+      "title": "Delhi air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "delhi",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "delhi",
+        "name": "delhi"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 95,
+          "idx": 10111,
+          "attributions": [
+            {
+              "url": "http://dpccairdata.com/",
+              "name": "Delhi Pollution Control Commitee (Government of NCT of Delhi)",
+              "logo": "India-DPCCC.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              28.612498,
+              77.237388
+            ],
+            "name": "Major Dhyan Chand National Stadium, Delhi, Delhi, India",
+            "url": "https://aqicn.org/city/delhi/major-dhyan-chand-national-stadium",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 4.6
+            },
+            "dew": {
+              "v": 20
+            },
+            "h": {
+              "v": 52.333333333333336
+            },
+            "no2": {
+              "v": 10
+            },
+            "o3": {
+              "v": 7.4
+            },
+            "p": {
+              "v": 986.0333333333333
+            },
+            "pm10": {
+              "v": 60
+            },
+            "pm25": {
+              "v": 95
+            },
+            "so2": {
+              "v": 4.7
+            },
+            "t": {
+              "v": 32
+            },
+            "w": {
+              "v": 1.0666666666666667
+            },
+            "wd": {
+              "v": 153.3
+            },
+            "wg": {
+              "v": 10.2
+            }
+          },
+          "time": {
+            "s": "2026-06-01 09:00:00",
+            "tz": "+05:30",
+            "v": 1780304400,
+            "iso": "2026-06-01T09:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 110,
+                  "day": "2026-05-30",
+                  "max": 123,
+                  "min": 98
+                },
+                {
+                  "avg": 99,
+                  "day": "2026-05-31",
+                  "max": 123,
+                  "min": 73
+                },
+                {
+                  "avg": 87,
+                  "day": "2026-06-01",
+                  "max": 116,
+                  "min": 72
+                },
+                {
+                  "avg": 83,
+                  "day": "2026-06-02",
+                  "max": 123,
+                  "min": 58
+                },
+                {
+                  "avg": 79,
+                  "day": "2026-06-03",
+                  "max": 116,
+                  "min": 58
+                },
+                {
+                  "avg": 98,
+                  "day": "2026-06-04",
+                  "max": 123,
+                  "min": 73
+                },
+                {
+                  "avg": 140,
+                  "day": "2026-06-05",
+                  "max": 174,
+                  "min": 123
+                },
+                {
+                  "avg": 167,
+                  "day": "2026-06-06",
+                  "max": 289,
+                  "min": 123
+                },
+                {
+                  "avg": 163,
+                  "day": "2026-06-07",
+                  "max": 396,
+                  "min": 137
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 159,
+                  "day": "2026-05-30",
+                  "max": 159,
+                  "min": 159
+                },
+                {
+                  "avg": 152,
+                  "day": "2026-05-31",
+                  "max": 162,
+                  "min": 138
+                },
+                {
+                  "avg": 162,
+                  "day": "2026-06-01",
+                  "max": 174,
+                  "min": 150
+                },
+                {
+                  "avg": 170,
+                  "day": "2026-06-02",
+                  "max": 232,
+                  "min": 138
+                },
+                {
+                  "avg": 166,
+                  "day": "2026-06-03",
+                  "max": 186,
+                  "min": 149
+                },
+                {
+                  "avg": 153,
+                  "day": "2026-06-04",
+                  "max": 159,
+                  "min": 138
+                },
+                {
+                  "avg": 160,
+                  "day": "2026-06-05",
+                  "max": 174,
+                  "min": 150
+                },
+                {
+                  "avg": 167,
+                  "day": "2026-06-06",
+                  "max": 174,
+                  "min": 159
+                },
+                {
+                  "avg": 170,
+                  "day": "2026-06-07",
+                  "max": 252,
+                  "min": 159
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 0,
+                  "day": "2026-05-31",
+                  "max": 0,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 6,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-02",
+                  "max": 7,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-03",
+                  "max": 8,
+                  "min": 0
+                },
+                {
+                  "avg": 1,
+                  "day": "2026-06-04",
+                  "max": 7,
+                  "min": 0
+                },
+                {
+                  "avg": 3,
+                  "day": "2026-06-05",
+                  "max": 9,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-06-01T13:19:20+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.mumbai",
+      "title": "Mumbai air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "mumbai",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "mumbai",
+        "name": "mumbai"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 156,
+          "idx": 12454,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              19.0863,
+              72.8888
+            ],
+            "name": "Kurla, Mumbai, India",
+            "url": "https://aqicn.org/city/india/mumbai/kurla",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 2.7
+            },
+            "dew": {
+              "v": 25
+            },
+            "h": {
+              "v": 77.72
+            },
+            "no2": {
+              "v": 2.3
+            },
+            "o3": {
+              "v": 11.5
+            },
+            "p": {
+              "v": 1004.7
+            },
+            "pm10": {
+              "v": 88
+            },
+            "pm25": {
+              "v": 156
+            },
+            "so2": {
+              "v": 11.9
+            },
+            "t": {
+              "v": 34
+            },
+            "w": {
+              "v": 42.81
+            },
+            "wg": {
+              "v": 12.8
+            }
+          },
+          "time": {
+            "s": "2026-05-30 16:00:00",
+            "tz": "+05:30",
+            "v": 1780156800,
+            "iso": "2026-05-30T16:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 62,
+                  "day": "2026-05-28",
+                  "max": 65,
+                  "min": 52
+                },
+                {
+                  "avg": 63,
+                  "day": "2026-05-29",
+                  "max": 73,
+                  "min": 58
+                },
+                {
+                  "avg": 54,
+                  "day": "2026-05-30",
+                  "max": 58,
+                  "min": 48
+                },
+                {
+                  "avg": 57,
+                  "day": "2026-05-31",
+                  "max": 73,
+                  "min": 46
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-06-01",
+                  "max": 73,
+                  "min": 65
+                },
+                {
+                  "avg": 78,
+                  "day": "2026-06-02",
+                  "max": 94,
+                  "min": 67
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-06-03",
+                  "max": 112,
+                  "min": 65
+                },
+                {
+                  "avg": 51,
+                  "day": "2026-06-04",
+                  "max": 73,
+                  "min": 46
+                },
+                {
+                  "avg": 48,
+                  "day": "2026-06-05",
+                  "max": 58,
+                  "min": 46
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 109,
+                  "day": "2026-05-28",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 98,
+                  "day": "2026-05-29",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 83,
+                  "day": "2026-05-30",
+                  "max": 108,
+                  "min": 68
+                },
+                {
+                  "avg": 89,
+                  "day": "2026-05-31",
+                  "max": 138,
+                  "min": 68
+                },
+                {
+                  "avg": 105,
+                  "day": "2026-06-01",
+                  "max": 138,
+                  "min": 77
+                },
+                {
+                  "avg": 115,
+                  "day": "2026-06-02",
+                  "max": 157,
+                  "min": 89
+                },
+                {
+                  "avg": 99,
+                  "day": "2026-06-03",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 91,
+                  "day": "2026-06-04",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 94,
+                  "day": "2026-06-05",
+                  "max": 138,
+                  "min": 89
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 2,
+                  "day": "2026-05-28",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-29",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-30",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-02",
+                  "max": 8,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-03",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 0,
+                  "day": "2026-06-04",
+                  "max": 0,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T20:22:38+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.kolkata",
+      "title": "Kolkata air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "kolkata",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "kolkata",
+        "name": "kolkata"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 65,
+          "idx": 12746,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              22.5367507,
+              88.3638022
+            ],
+            "name": "Ballygunge, Kolkata, India",
+            "url": "https://aqicn.org/city/india/kolkata/ballygunge",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 3.1
+            },
+            "dew": {
+              "v": 26
+            },
+            "h": {
+              "v": 47.22
+            },
+            "no2": {
+              "v": 9.6
+            },
+            "o3": {
+              "v": 10.8
+            },
+            "p": {
+              "v": 1006
+            },
+            "pm10": {
+              "v": 48
+            },
+            "pm25": {
+              "v": 65
+            },
+            "so2": {
+              "v": 1.9
+            },
+            "t": {
+              "v": 33
+            },
+            "w": {
+              "v": 0.68
+            },
+            "wg": {
+              "v": 20
+            }
+          },
+          "time": {
+            "s": "2026-05-30 12:00:00",
+            "tz": "+05:30",
+            "v": 1780142400,
+            "iso": "2026-05-30T12:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 58,
+                  "day": "2026-05-28",
+                  "max": 58,
+                  "min": 58
+                },
+                {
+                  "avg": 54,
+                  "day": "2026-05-29",
+                  "max": 58,
+                  "min": 46
+                },
+                {
+                  "avg": 61,
+                  "day": "2026-05-30",
+                  "max": 73,
+                  "min": 46
+                },
+                {
+                  "avg": 68,
+                  "day": "2026-05-31",
+                  "max": 73,
+                  "min": 58
+                },
+                {
+                  "avg": 63,
+                  "day": "2026-06-01",
+                  "max": 73,
+                  "min": 55
+                },
+                {
+                  "avg": 59,
+                  "day": "2026-06-02",
+                  "max": 64,
+                  "min": 53
+                },
+                {
+                  "avg": 64,
+                  "day": "2026-06-03",
+                  "max": 73,
+                  "min": 58
+                },
+                {
+                  "avg": 57,
+                  "day": "2026-06-04",
+                  "max": 65,
+                  "min": 47
+                },
+                {
+                  "avg": 64,
+                  "day": "2026-06-05",
+                  "max": 73,
+                  "min": 51
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 109,
+                  "day": "2026-05-28",
+                  "max": 123,
+                  "min": 95
+                },
+                {
+                  "avg": 121,
+                  "day": "2026-05-29",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 128,
+                  "day": "2026-05-30",
+                  "max": 138,
+                  "min": 106
+                },
+                {
+                  "avg": 141,
+                  "day": "2026-05-31",
+                  "max": 152,
+                  "min": 120
+                },
+                {
+                  "avg": 133,
+                  "day": "2026-06-01",
+                  "max": 138,
+                  "min": 110
+                },
+                {
+                  "avg": 136,
+                  "day": "2026-06-02",
+                  "max": 141,
+                  "min": 110
+                },
+                {
+                  "avg": 146,
+                  "day": "2026-06-03",
+                  "max": 159,
+                  "min": 138
+                },
+                {
+                  "avg": 145,
+                  "day": "2026-06-04",
+                  "max": 159,
+                  "min": 138
+                },
+                {
+                  "avg": 163,
+                  "day": "2026-06-05",
+                  "max": 174,
+                  "min": 138
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 0,
+                  "day": "2026-05-29",
+                  "max": 0,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-30",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 7,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 8,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-02",
+                  "max": 7,
+                  "min": 0
+                },
+                {
+                  "avg": 4,
+                  "day": "2026-06-03",
+                  "max": 7,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T16:23:22+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.chennai",
+      "title": "Chennai air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "chennai",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "chennai",
+        "name": "chennai"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 73,
+          "idx": 13737,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              13.1036,
+              80.2909
+            ],
+            "name": "Royapuram, Chennai, Chennai, India",
+            "url": "https://aqicn.org/city/chennai//royapuram",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 9.7
+            },
+            "dew": {
+              "v": 26
+            },
+            "h": {
+              "v": 66.225
+            },
+            "no2": {
+              "v": 5
+            },
+            "o3": {
+              "v": 12.4
+            },
+            "p": {
+              "v": 731.94
+            },
+            "pm10": {
+              "v": 45
+            },
+            "pm25": {
+              "v": 73
+            },
+            "so2": {
+              "v": 2.4
+            },
+            "t": {
+              "v": 29.505000000000003
+            },
+            "w": {
+              "v": 0.5700000000000001
+            },
+            "wg": {
+              "v": 10.2
+            }
+          },
+          "time": {
+            "s": "2026-05-30 16:00:00",
+            "tz": "+05:30",
+            "v": 1780156800,
+            "iso": "2026-05-30T16:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 49,
+                  "day": "2026-05-28",
+                  "max": 56,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-05-29",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-05-30",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-05-31",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-01",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 48,
+                  "day": "2026-06-02",
+                  "max": 56,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-03",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-04",
+                  "max": 46,
+                  "min": 41
+                },
+                {
+                  "avg": 43,
+                  "day": "2026-06-05",
+                  "max": 46,
+                  "min": 28
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 113,
+                  "day": "2026-05-28",
+                  "max": 138,
+                  "min": 72
+                },
+                {
+                  "avg": 101,
+                  "day": "2026-05-29",
+                  "max": 138,
+                  "min": 72
+                },
+                {
+                  "avg": 88,
+                  "day": "2026-05-30",
+                  "max": 89,
+                  "min": 78
+                },
+                {
+                  "avg": 116,
+                  "day": "2026-05-31",
+                  "max": 138,
+                  "min": 72
+                },
+                {
+                  "avg": 125,
+                  "day": "2026-06-01",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 121,
+                  "day": "2026-06-02",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 107,
+                  "day": "2026-06-03",
+                  "max": 138,
+                  "min": 74
+                },
+                {
+                  "avg": 97,
+                  "day": "2026-06-04",
+                  "max": 124,
+                  "min": 68
+                },
+                {
+                  "avg": 86,
+                  "day": "2026-06-05",
+                  "max": 89,
+                  "min": 68
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 2,
+                  "day": "2026-05-28",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-29",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-30",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-02",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-03",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 0,
+                  "day": "2026-06-04",
+                  "max": 0,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T20:22:42+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.bengaluru",
+      "title": "Bengaluru air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "bengaluru",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "bengaluru",
+        "name": "bengaluru"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 58,
+          "idx": 11270,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              12.938539,
+              77.5901
+            ],
+            "name": "Hombegowda Nagar, Bengaluru, India",
+            "url": "https://aqicn.org/city/india/bengaluru/hombegowda-nagar",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 1.8
+            },
+            "dew": {
+              "v": 22
+            },
+            "h": {
+              "v": 42
+            },
+            "no2": {
+              "v": 9.7
+            },
+            "o3": {
+              "v": 18
+            },
+            "p": {
+              "v": 685
+            },
+            "pm10": {
+              "v": 36
+            },
+            "pm25": {
+              "v": 58
+            },
+            "so2": {
+              "v": 1.3
+            },
+            "t": {
+              "v": 39.5
+            },
+            "w": {
+              "v": 1.1
+            }
+          },
+          "time": {
+            "s": "2026-05-30 16:00:00",
+            "tz": "+05:30",
+            "v": 1780156800,
+            "iso": "2026-05-30T16:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 46,
+                  "day": "2026-05-28",
+                  "max": 46,
+                  "min": 45
+                },
+                {
+                  "avg": 29,
+                  "day": "2026-05-29",
+                  "max": 45,
+                  "min": 19
+                },
+                {
+                  "avg": 26,
+                  "day": "2026-05-30",
+                  "max": 33,
+                  "min": 19
+                },
+                {
+                  "avg": 30,
+                  "day": "2026-05-31",
+                  "max": 41,
+                  "min": 28
+                },
+                {
+                  "avg": 45,
+                  "day": "2026-06-01",
+                  "max": 46,
+                  "min": 28
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-02",
+                  "max": 46,
+                  "min": 45
+                },
+                {
+                  "avg": 29,
+                  "day": "2026-06-03",
+                  "max": 46,
+                  "min": 22
+                },
+                {
+                  "avg": 21,
+                  "day": "2026-06-04",
+                  "max": 27,
+                  "min": 19
+                },
+                {
+                  "avg": 27,
+                  "day": "2026-06-05",
+                  "max": 28,
+                  "min": 19
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 89,
+                  "day": "2026-05-28",
+                  "max": 89,
+                  "min": 89
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-05-29",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-05-30",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 84,
+                  "day": "2026-05-31",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 89,
+                  "day": "2026-06-01",
+                  "max": 89,
+                  "min": 89
+                },
+                {
+                  "avg": 89,
+                  "day": "2026-06-02",
+                  "max": 89,
+                  "min": 89
+                },
+                {
+                  "avg": 71,
+                  "day": "2026-06-03",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 60,
+                  "day": "2026-06-04",
+                  "max": 68,
+                  "min": 42
+                },
+                {
+                  "avg": 64,
+                  "day": "2026-06-05",
+                  "max": 68,
+                  "min": 42
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 3,
+                  "day": "2026-05-30",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 3,
+                  "day": "2026-06-02",
+                  "max": 12,
+                  "min": 0
+                },
+                {
+                  "avg": 3,
+                  "day": "2026-06-03",
+                  "max": 12,
+                  "min": 0
+                },
+                {
+                  "avg": 0,
+                  "day": "2026-06-04",
+                  "max": 0,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T20:23:38+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "owid.co2_total",
+      "title": "Annual CO2 emissions",
+      "sourceId": "owid",
+      "sourceIndicatorId": "annual-co2-emissions-per-country",
+      "unit": "tonnes",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 156,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Annual CO₂ emissions"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Annual CO₂ emissions": "3193478100"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Annual CO₂ emissions": "3062756400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Annual CO₂ emissions": "2831131600"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Annual CO₂ emissions": "2675778000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Annual CO₂ emissions": "2422732000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Annual CO₂ emissions": "2611174700"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Annual CO₂ emissions": "2595227100"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Annual CO₂ emissions": "2425721900"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Annual CO₂ emissions": "2352540200"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Annual CO₂ emissions": "2231817500"
+        }
+      ]
+    },
+    {
+      "indicatorId": "owid.co2_per_capita",
+      "title": "Annual CO2 emissions per capita",
+      "sourceId": "owid",
+      "sourceIndicatorId": "co-emissions-per-capita",
+      "unit": "tonnes per person",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 156,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "CO₂ emissions per capita"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "CO₂ emissions per capita": "2.2009783"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "CO₂ emissions per capita": "2.1297693"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "CO₂ emissions per capita": "1.9861692"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "CO₂ emissions per capita": "1.8920738"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "CO₂ emissions per capita": "1.7272933"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "CO₂ emissions per capita": "1.8798543"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "CO₂ emissions per capita": "1.8879061"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "CO₂ emissions per capita": "1.7840685"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "CO₂ emissions per capita": "1.7504745"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "CO₂ emissions per capita": "1.6805544"
+        }
+      ]
+    },
+    {
+      "indicatorId": "owid.co2_cumulative",
+      "title": "Cumulative CO2 emissions",
+      "sourceId": "owid",
+      "sourceIndicatorId": "cumulative-co-emissions",
+      "unit": "tonnes",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 156,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Cumulative CO₂ emissions"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Cumulative CO₂ emissions": "66072530000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Cumulative CO₂ emissions": "62879050000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Cumulative CO₂ emissions": "59816296000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Cumulative CO₂ emissions": "56985166000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Cumulative CO₂ emissions": "54309390000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Cumulative CO₂ emissions": "51886653000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Cumulative CO₂ emissions": "49275480000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Cumulative CO₂ emissions": "46680252000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Cumulative CO₂ emissions": "44254530000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Cumulative CO₂ emissions": "41901990000"
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "sourceIndicatorId": "carbon-intensity/yearly",
+      "unit": "gCO2/kWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 26,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "emissions_intensity_gco2_per_kwh"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "emissions_intensity_gco2_per_kwh": 670.13
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2024",
+          "emissions_intensity_gco2_per_kwh": 705.4
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2023",
+          "emissions_intensity_gco2_per_kwh": 713.36
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2022",
+          "emissions_intensity_gco2_per_kwh": 705.75
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2021",
+          "emissions_intensity_gco2_per_kwh": 715.34
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2020",
+          "emissions_intensity_gco2_per_kwh": 709.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2019",
+          "emissions_intensity_gco2_per_kwh": 722.66
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2018",
+          "emissions_intensity_gco2_per_kwh": 737.72
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2017",
+          "emissions_intensity_gco2_per_kwh": 743.09
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2016",
+          "emissions_intensity_gco2_per_kwh": 751.87
+        }
+      ]
+    },
+    {
+      "indicatorId": "world.share.co2_total",
+      "title": "India share of world CO2 emissions",
+      "sourceId": "owid",
+      "sourceIndicatorId": "annual-co2-emissions-per-country",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "derived-share",
+        "id": "IND/WLD",
+        "name": "India as share of world"
+      },
+      "observations": 156,
+      "earliest": {
+        "date": "1858",
+        "value": 0.13814856872940412
+      },
+      "latest": {
+        "date": "2024",
+        "value": 8.273563690684995
+      }
+    },
+    {
+      "indicatorId": "work.employment_agriculture",
+      "title": "Employment in agriculture",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 63.1283195373591
+      },
+      "latest": {
+        "date": "2025",
+        "value": 41.6251280877573
+      }
+    },
+    {
+      "indicatorId": "people.population.total",
+      "title": "Population, total",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SP.POP.TOTL",
+      "unit": "people",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 435990338
+      },
+      "latest": {
+        "date": "2024",
+        "value": 1450935791
+      }
+    },
+    {
+      "indicatorId": "climate.cckp.temp_historical",
+      "title": "India average temperature, observed (CMIP6 historical)",
+      "sourceId": "cckp",
+      "sourceIndicatorId": "tas.historical.1950-2014",
+      "unit": "°C",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 65,
+      "earliest": {
+        "date": "1950",
+        "value": 24.23
+      },
+      "latest": {
+        "date": "2014",
+        "value": 24.63
+      }
+    },
+    {
+      "indicatorId": "climate.cckp.temp_ssp126",
+      "title": "India temperature projection, low emissions (SSP1-2.6)",
+      "sourceId": "cckp",
+      "sourceIndicatorId": "tas.ssp126.2015-2100",
+      "unit": "°C",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "2015",
+        "value": 24.67
+      },
+      "latest": {
+        "date": "2100",
+        "value": 25.66
+      }
+    },
+    {
+      "indicatorId": "climate.cckp.temp_ssp245",
+      "title": "India temperature projection, middle road (SSP2-4.5)",
+      "sourceId": "cckp",
+      "sourceIndicatorId": "tas.ssp245.2015-2100",
+      "unit": "°C",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "2015",
+        "value": 24.67
+      },
+      "latest": {
+        "date": "2100",
+        "value": 26.64
+      }
+    },
+    {
+      "indicatorId": "climate.cckp.temp_ssp585",
+      "title": "India temperature projection, high emissions (SSP5-8.5)",
+      "sourceId": "cckp",
+      "sourceIndicatorId": "tas.ssp585.2015-2100",
+      "unit": "°C",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "2015",
+        "value": 24.66
+      },
+      "latest": {
+        "date": "2100",
+        "value": 29.25
+      }
+    },
+    {
+      "indicatorId": "climate.cckp.precip_ssp245",
+      "title": "India precipitation projection, middle road (SSP2-4.5)",
+      "sourceId": "cckp",
+      "sourceIndicatorId": "pr.ssp245.2015-2100",
+      "unit": "mm",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "2015",
+        "value": 1221.44
+      },
+      "latest": {
+        "date": "2100",
+        "value": 1373.03
+      }
+    },
+    {
+      "indicatorId": "climate.ghg_total",
+      "title": "Total greenhouse gas emissions",
+      "sourceId": "owid",
+      "sourceIndicatorId": "total-ghg-emissions",
+      "unit": "tonnes CO₂e",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 175,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Annual greenhouse gas emissions including land use"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Annual greenhouse gas emissions including land use": "4262410800"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Annual greenhouse gas emissions including land use": "4121423600"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Annual greenhouse gas emissions including land use": "3869995300"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Annual greenhouse gas emissions including land use": "3697615400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Annual greenhouse gas emissions including land use": "3436429300"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Annual greenhouse gas emissions including land use": "3613001000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Annual greenhouse gas emissions including land use": "3616201500"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Annual greenhouse gas emissions including land use": "3415988500"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Annual greenhouse gas emissions including land use": "3365011000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Annual greenhouse gas emissions including land use": "3290423000"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.ghg_by_gas",
+      "title": "Greenhouse gas emissions by gas",
+      "sourceId": "owid",
+      "sourceIndicatorId": "ghg-emissions-by-gas",
+      "unit": "tonnes CO₂e",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 175,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Nitrous oxide (N₂O)",
+        "Methane (CH₄)",
+        "Carbon dioxide (CO₂)"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Nitrous oxide (N₂O)": "310004350",
+          "Methane (CH₄)": "859294340",
+          "Carbon dioxide (CO₂)": "3093112000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Nitrous oxide (N₂O)": "305944400",
+          "Methane (CH₄)": "847636600",
+          "Carbon dioxide (CO₂)": "2967842600"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Nitrous oxide (N₂O)": "298331900",
+          "Methane (CH₄)": "835673600",
+          "Carbon dioxide (CO₂)": "2735989800"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Nitrous oxide (N₂O)": "290389200",
+          "Methane (CH₄)": "821052800",
+          "Carbon dioxide (CO₂)": "2586173400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Nitrous oxide (N₂O)": "289398100",
+          "Methane (CH₄)": "807834750",
+          "Carbon dioxide (CO₂)": "2339196400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Nitrous oxide (N₂O)": "282637920",
+          "Methane (CH₄)": "800178700",
+          "Carbon dioxide (CO₂)": "2530184200"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Nitrous oxide (N₂O)": "275219170",
+          "Methane (CH₄)": "800125400",
+          "Carbon dioxide (CO₂)": "2540856800"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Nitrous oxide (N₂O)": "267235780",
+          "Methane (CH₄)": "786600600",
+          "Carbon dioxide (CO₂)": "2362152200"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Nitrous oxide (N₂O)": "262253900",
+          "Methane (CH₄)": "781626500",
+          "Carbon dioxide (CO₂)": "2321130500"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Nitrous oxide (N₂O)": "263333860",
+          "Methane (CH₄)": "773450560",
+          "Carbon dioxide (CO₂)": "2253638400"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.co2_consumption",
+      "title": "Consumption-based CO2 emissions",
+      "sourceId": "owid",
+      "sourceIndicatorId": "consumption-co2-emissions",
+      "unit": "tonnes",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 34,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Annual consumption-based CO₂ emissions"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Annual consumption-based CO₂ emissions": "2543215400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Annual consumption-based CO₂ emissions": "2339991600"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Annual consumption-based CO₂ emissions": "2252029000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Annual consumption-based CO₂ emissions": "2085132000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Annual consumption-based CO₂ emissions": "2267293200"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Annual consumption-based CO₂ emissions": "2239063000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Annual consumption-based CO₂ emissions": "2112194700"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Annual consumption-based CO₂ emissions": "2002070000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Annual consumption-based CO₂ emissions": "1961052400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2014",
+          "Annual consumption-based CO₂ emissions": "1810893400"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.pm25_exposure",
+      "title": "PM2.5 air pollution, mean annual exposure",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "EN.ATM.PM25.MC.M3",
+      "unit": "µg/m³",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1990",
+        "value": 62.003888011973
+      },
+      "latest": {
+        "date": "2020",
+        "value": 48.3948115195574
+      }
+    },
+    {
+      "indicatorId": "climate.disaster_deaths",
+      "title": "Deaths from natural disasters by type",
+      "sourceId": "owid",
+      "sourceIndicatorId": "natural-disasters-deaths",
+      "unit": "deaths",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 92,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Drought",
+        "Earthquake",
+        "Volcanoes",
+        "Flood",
+        "Landslide",
+        "Storms",
+        "Wildfire",
+        "Extreme temperature",
+        "All disasters"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2025",
+          "Drought": "",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "405",
+          "Landslide": "154",
+          "Storms": "158",
+          "Wildfire": "",
+          "Extreme temperature": "",
+          "All disasters": "717"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Drought": "",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "285",
+          "Landslide": "388",
+          "Storms": "101",
+          "Wildfire": "",
+          "Extreme temperature": "733",
+          "All disasters": "1507"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Drought": "",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "1802",
+          "Landslide": "64",
+          "Storms": "79",
+          "Wildfire": "",
+          "Extreme temperature": "190",
+          "All disasters": "2135"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Drought": "",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "2098",
+          "Landslide": "67",
+          "Storms": "20",
+          "Wildfire": "",
+          "Extreme temperature": "25",
+          "All disasters": "2210"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Drought": "",
+          "Earthquake": "2",
+          "Volcanoes": "",
+          "Flood": "1807",
+          "Landslide": "68",
+          "Storms": "249",
+          "Wildfire": "",
+          "Extreme temperature": "",
+          "All disasters": "2126"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Drought": "",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "2104",
+          "Landslide": "91",
+          "Storms": "121",
+          "Wildfire": "",
+          "Extreme temperature": "",
+          "All disasters": "2316"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Drought": "0",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "2023",
+          "Landslide": "",
+          "Storms": "172",
+          "Wildfire": "",
+          "Extreme temperature": "112",
+          "All disasters": "2307"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Drought": "0",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "710",
+          "Landslide": "",
+          "Storms": "625",
+          "Wildfire": "17",
+          "Extreme temperature": "44",
+          "All disasters": "1396"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Drought": "",
+          "Earthquake": "",
+          "Volcanoes": "",
+          "Flood": "1046",
+          "Landslide": "96",
+          "Storms": "940",
+          "Wildfire": "",
+          "Extreme temperature": "264",
+          "All disasters": "2346"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Drought": "0",
+          "Earthquake": "8",
+          "Volcanoes": "",
+          "Flood": "666",
+          "Landslide": "20",
+          "Storms": "128",
+          "Wildfire": "7",
+          "Extreme temperature": "300",
+          "All disasters": "1129"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.climate.co2_per_capita",
+      "title": "CO2 per person comparison",
+      "sourceId": "owid",
+      "sourceIndicatorId": "co-emissions-per-capita",
+      "unit": "tonnes per person",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 729,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2024",
+          "value": 2.2009783,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 8.65839,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 14.197287,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 4.729075,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 2.1297693,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 8.556261,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2023",
+          "value": 14.31945,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2023",
+          "value": 4.707772,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2022",
+          "value": 1.9861692,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2022",
+          "value": 8.217776,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.climate.co2_total",
+      "title": "Total CO2 emissions comparison",
+      "sourceId": "owid",
+      "sourceIndicatorId": "annual-co2-emissions-per-country",
+      "unit": "tonnes",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 774,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2024",
+          "value": 3193478100,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 12289037000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 4904120000,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 38598580000,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 3062756400,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 12172008000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2023",
+          "value": 4918406700,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2023",
+          "value": 38094040000,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2022",
+          "value": 2831131600,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2022",
+          "value": 11711807000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "compare.climate.co2_cumulative",
+      "title": "Cumulative CO2 emissions comparison",
+      "sourceId": "owid",
+      "sourceIndicatorId": "cumulative-co-emissions",
+      "unit": "tonnes",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 774,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2024",
+          "value": 66072530000,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 285087040000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 434866550000,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 1849123900000,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 62879050000,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 272798000000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2023",
+          "value": 429962460000,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2023",
+          "value": 1810525300000,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2022",
+          "value": 59816296000,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2022",
+          "value": 260625990000,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.era5.temp_mean",
+      "title": "India average temperature (ERA5)",
+      "sourceId": "era5",
+      "sourceIndicatorId": "2m_temperature",
+      "unit": "°C",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 85,
+      "earliest": {
+        "date": "1940",
+        "value": 22.956
+      },
+      "latest": {
+        "date": "2024",
+        "value": 24.459
+      }
+    },
+    {
+      "indicatorId": "climate.era5.rel_humidity_mean",
+      "title": "India average relative humidity (ERA5, derived)",
+      "sourceId": "era5",
+      "sourceIndicatorId": "derived:t2m+d2m",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 85,
+      "earliest": {
+        "date": "1940",
+        "value": 51.49
+      },
+      "latest": {
+        "date": "2024",
+        "value": 64.21
+      }
+    },
+    {
+      "indicatorId": "climate.ghg_by_sector",
+      "title": "Greenhouse gas emissions by sector",
+      "sourceId": "owid",
+      "sourceIndicatorId": "ghg-emissions-by-sector",
+      "unit": "tonnes CO₂e",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 34,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Agriculture",
+        "Land-use change and forestry",
+        "Waste",
+        "Buildings",
+        "Industry",
+        "Manufacturing and construction",
+        "Transport",
+        "Electricity and heat",
+        "Fugitive emissions",
+        "Other fuel combustion",
+        "Aviation and shipping"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Agriculture": "808710016",
+          "Land-use change and forestry": "-146470000",
+          "Waste": "94450000",
+          "Buildings": "240310000",
+          "Industry": "221070000",
+          "Manufacturing and construction": "675640000",
+          "Transport": "362860000",
+          "Electricity and heat": "1550409984",
+          "Fugitive emissions": "95390000",
+          "Other fuel combustion": "69320000",
+          "Aviation and shipping": "18570000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Agriculture": "801750016",
+          "Land-use change and forestry": "-145010000",
+          "Waste": "93220000",
+          "Buildings": "237530000",
+          "Industry": "204990000",
+          "Manufacturing and construction": "613129984",
+          "Transport": "352200000",
+          "Electricity and heat": "1392150016",
+          "Fugitive emissions": "87680000",
+          "Other fuel combustion": "67800000",
+          "Aviation and shipping": "16549999"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Agriculture": "790169984",
+          "Land-use change and forestry": "-138520000",
+          "Waste": "92340000",
+          "Buildings": "237840000",
+          "Industry": "186520000",
+          "Manufacturing and construction": "584140032",
+          "Transport": "307780000",
+          "Electricity and heat": "1256240000",
+          "Fugitive emissions": "83630000",
+          "Other fuel combustion": "59740000",
+          "Aviation and shipping": "11390000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Agriculture": "787449984",
+          "Land-use change and forestry": "-123160000",
+          "Waste": "91370000",
+          "Buildings": "235240000",
+          "Industry": "157240000",
+          "Manufacturing and construction": "517549984",
+          "Transport": "280089984",
+          "Electricity and heat": "1156339968",
+          "Fugitive emissions": "77440000",
+          "Other fuel combustion": "54940000",
+          "Aviation and shipping": "10220000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Agriculture": "766330048",
+          "Land-use change and forestry": "-121310000",
+          "Waste": "89970000",
+          "Buildings": "233160000",
+          "Industry": "175860000",
+          "Manufacturing and construction": "554909952",
+          "Transport": "321300000",
+          "Electricity and heat": "1241959936",
+          "Fugitive emissions": "82370000",
+          "Other fuel combustion": "59200000",
+          "Aviation and shipping": "17680000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Agriculture": "757750016",
+          "Land-use change and forestry": "-118720000",
+          "Waste": "90900000",
+          "Buildings": "229900000",
+          "Industry": "168970000",
+          "Manufacturing and construction": "572729984",
+          "Transport": "317000000",
+          "Electricity and heat": "1232109952",
+          "Fugitive emissions": "87390000",
+          "Other fuel combustion": "60900000",
+          "Aviation and shipping": "18130000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Agriculture": "748889984",
+          "Land-use change and forestry": "-117430000",
+          "Waste": "91830000",
+          "Buildings": "225590000",
+          "Industry": "148780000",
+          "Manufacturing and construction": "562909952",
+          "Transport": "302369984",
+          "Electricity and heat": "1171629952",
+          "Fugitive emissions": "87140000",
+          "Other fuel combustion": "59370000",
+          "Aviation and shipping": "17250000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Agriculture": "743820032",
+          "Land-use change and forestry": "-120210000",
+          "Waste": "92740000",
+          "Buildings": "223950000",
+          "Industry": "148900000",
+          "Manufacturing and construction": "532950016",
+          "Transport": "279120000",
+          "Electricity and heat": "1110069888",
+          "Fugitive emissions": "91510000",
+          "Other fuel combustion": "56870000",
+          "Aviation and shipping": "16500000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Agriculture": "741140032",
+          "Land-use change and forestry": "-62610000",
+          "Waste": "90660000",
+          "Buildings": "221000000",
+          "Industry": "140910000",
+          "Manufacturing and construction": "519950016",
+          "Transport": "265480016",
+          "Electricity and heat": "1117540096",
+          "Fugitive emissions": "91250000",
+          "Other fuel combustion": "55190000",
+          "Aviation and shipping": "15360000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2014",
+          "Agriculture": "737750016",
+          "Land-use change and forestry": "-61240000",
+          "Waste": "88580000",
+          "Buildings": "220120000",
+          "Industry": "137730000",
+          "Manufacturing and construction": "506060000",
+          "Transport": "241380000",
+          "Electricity and heat": "1128790016",
+          "Fugitive emissions": "87850000",
+          "Other fuel combustion": "54590000",
+          "Aviation and shipping": "14400000"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.co2_vs_gdp",
+      "title": "CO2 emissions vs GDP",
+      "sourceId": "owid",
+      "sourceIndicatorId": "co2-emissions-and-gdp",
+      "unit": "tonnes / US$",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 35,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "GDP",
+        "CO₂ emissions",
+        "Consumption-based CO₂ emissions"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "GDP": "14245349560958",
+          "CO₂ emissions": "3193478100",
+          "Consumption-based CO₂ emissions": ""
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "GDP": "13376572539398",
+          "CO₂ emissions": "3062756400",
+          "Consumption-based CO₂ emissions": "2543215400"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "GDP": "12250645714410",
+          "CO₂ emissions": "2831131600",
+          "Consumption-based CO₂ emissions": "2339991600"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "GDP": "11384367630967",
+          "CO₂ emissions": "2675778000",
+          "Consumption-based CO₂ emissions": "2252029000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "GDP": "10378712667572",
+          "CO₂ emissions": "2422732000",
+          "Consumption-based CO₂ emissions": "2085132000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "GDP": "11015136957033",
+          "CO₂ emissions": "2611174700",
+          "Consumption-based CO₂ emissions": "2267293200"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "GDP": "10604587056326",
+          "CO₂ emissions": "2595227100",
+          "Consumption-based CO₂ emissions": "2239063000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "GDP": "9961675338509",
+          "CO₂ emissions": "2425721900",
+          "Consumption-based CO₂ emissions": "2112194700"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "GDP": "9327814573620",
+          "CO₂ emissions": "2352540200",
+          "Consumption-based CO₂ emissions": "2002070000"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "GDP": "8616416873256",
+          "CO₂ emissions": "2231817500",
+          "Consumption-based CO₂ emissions": "1961052400"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.openmeteo.delhi.very_hot_days",
+      "title": "Delhi very hot days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "delhi.era5.very_hot_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "delhi",
+        "name": "Delhi",
+        "latitude": 28.6139,
+        "longitude": 77.209
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 144
+      },
+      "latest": {
+        "date": "2025",
+        "value": 87
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.mumbai.very_hot_days",
+      "title": "Mumbai very hot days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "mumbai.era5.very_hot_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "mumbai",
+        "name": "Mumbai",
+        "latitude": 19.076,
+        "longitude": 72.8777
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 3
+      },
+      "latest": {
+        "date": "2025",
+        "value": 2
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.kolkata.very_hot_days",
+      "title": "Kolkata very hot days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "kolkata.era5.very_hot_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "kolkata",
+        "name": "Kolkata",
+        "latitude": 22.5726,
+        "longitude": 88.3639
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025",
+        "value": 0
+      },
+      "latest": {
+        "date": "2025",
+        "value": 0
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.chennai.very_hot_days",
+      "title": "Chennai very hot days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "chennai.era5.very_hot_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "chennai",
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 28
+      },
+      "latest": {
+        "date": "2025",
+        "value": 21
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.bengaluru.very_hot_days",
+      "title": "Bengaluru very hot days",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "bengaluru.era5.very_hot_days",
+      "unit": "days",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "bengaluru",
+        "name": "Bengaluru",
+        "latitude": 12.9716,
+        "longitude": 77.5946
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 5
+      },
+      "latest": {
+        "date": "2025",
+        "value": 0
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.delhi.hot_nights",
+      "title": "Delhi hot nights",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "delhi.era5.hot_nights",
+      "unit": "nights",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "delhi",
+        "name": "Delhi",
+        "latitude": 28.6139,
+        "longitude": 77.209
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 49
+      },
+      "latest": {
+        "date": "2025",
+        "value": 37
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.mumbai.hot_nights",
+      "title": "Mumbai hot nights",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "mumbai.era5.hot_nights",
+      "unit": "nights",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "mumbai",
+        "name": "Mumbai",
+        "latitude": 19.076,
+        "longitude": 72.8777
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 2
+      },
+      "latest": {
+        "date": "2025",
+        "value": 14
+      }
+    },
+    {
+      "indicatorId": "climate.openmeteo.chennai.hot_nights",
+      "title": "Chennai hot nights",
+      "sourceId": "open-meteo",
+      "sourceIndicatorId": "chennai.era5.hot_nights",
+      "unit": "nights",
+      "frequency": "annual",
+      "geography": {
+        "type": "city",
+        "id": "chennai",
+        "name": "Chennai",
+        "latitude": 13.0827,
+        "longitude": 80.2707
+      },
+      "observations": 86,
+      "earliest": {
+        "date": "1940",
+        "value": 22
+      },
+      "latest": {
+        "date": "2025",
+        "value": 99
+      }
+    },
+    {
+      "indicatorId": "climate.psmsl.mumbai",
+      "title": "Sea level at Mumbai (since 1878)",
+      "sourceId": "psmsl",
+      "sourceIndicatorId": "station-43",
+      "unit": "mm vs 1961-1990",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 122,
+      "earliest": {
+        "date": "1878",
+        "value": -40
+      },
+      "latest": {
+        "date": "2024",
+        "value": 192
+      }
+    },
+    {
+      "indicatorId": "climate.psmsl.chennai",
+      "title": "Sea level at Chennai (since 1916)",
+      "sourceId": "psmsl",
+      "sourceIndicatorId": "station-205",
+      "unit": "mm vs 1961-1990",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 52,
+      "earliest": {
+        "date": "1916",
+        "value": 2.5
+      },
+      "latest": {
+        "date": "2022",
+        "value": 317.5
+      }
+    },
+    {
+      "indicatorId": "energy.ember.generation",
+      "title": "Electricity generation by source",
+      "sourceId": "ember",
+      "sourceIndicatorId": "electricity-generation/yearly",
+      "unit": "TWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 416,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "series",
+        "is_aggregate_series",
+        "generation_twh",
+        "share_of_generation_pct"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Bioenergy",
+          "is_aggregate_series": false,
+          "generation_twh": 23.04,
+          "share_of_generation_pct": 1.11
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Clean",
+          "is_aggregate_series": true,
+          "generation_twh": 554.81,
+          "share_of_generation_pct": 26.65
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Coal",
+          "is_aggregate_series": false,
+          "generation_twh": 1474.15,
+          "share_of_generation_pct": 70.82
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Demand",
+          "is_aggregate_series": true,
+          "generation_twh": 2082.82,
+          "share_of_generation_pct": 100.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Fossil",
+          "is_aggregate_series": true,
+          "generation_twh": 1526.79,
+          "share_of_generation_pct": 73.35
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Gas",
+          "is_aggregate_series": false,
+          "generation_twh": 48.54,
+          "share_of_generation_pct": 2.33
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Hydro",
+          "is_aggregate_series": false,
+          "generation_twh": 177.97,
+          "share_of_generation_pct": 8.55
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Hydro, bioenergy and other renewables",
+          "is_aggregate_series": true,
+          "generation_twh": 201.01,
+          "share_of_generation_pct": 9.66
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Net imports",
+          "is_aggregate_series": false,
+          "generation_twh": 1.22,
+          "share_of_generation_pct": 0.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Nuclear",
+          "is_aggregate_series": false,
+          "generation_twh": 53.83,
+          "share_of_generation_pct": 2.59
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_solar",
+      "title": "Solar electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "116-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "2000",
+        "value": 0.0011
+      },
+      "latest": {
+        "date": "2024",
+        "value": 97.384
+      }
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_wind",
+      "title": "Wind electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "37-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "2000",
+        "value": 0.941
+      },
+      "latest": {
+        "date": "2024",
+        "value": 48.163
+      }
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_renewable",
+      "title": "Renewable electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "29-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 12.173
+      },
+      "latest": {
+        "date": "2024",
+        "value": 204.107
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

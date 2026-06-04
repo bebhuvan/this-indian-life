@@ -1,0 +1,63 @@
+---
+// Reader-facing edit log at the foot of each article. Curated, plain-English notes
+// (from the article JSON's `changelog`) sit on top; a synthesized "First published"
+// entry is derived from git; the exact line-level diffs live one click away on
+// GitHub. Pure static HTML — no client JS, no diff engine, a few hundred bytes.
+import type { ExplanationArtifact, ChangelogEntry } from "../data/questions";
+import { gitMetaFor } from "../data/questions";
+import { articleSourceUrl, commitUrl } from "../data/site";
+
+type Props = { questionId: string; explanation: ExplanationArtifact };
+const { questionId, explanation } = Astro.props;
+
+const git = gitMetaFor(questionId);
+
+const fmt = (iso?: string) =>
+  iso ? new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : null;
+
+const publishedLabel = fmt(git.published);
+const updatedLabel = fmt(git.updated ?? explanation.generatedAt);
+
+const curated: ChangelogEntry[] = (explanation.changelog ?? [])
+  .slice()
+  .sort((a, b) => (a.date < b.date ? 1 : -1));
+
+// Synthesize the "First published" entry from git so every article carries one
+// without bloating 42 JSON files. Skip it if a curated note already covers day one.
+const firstSha = git.history.at(-1)?.sha;
+const publishedEntry: ChangelogEntry | null =
+  git.published && !curated.some((entry) => entry.note.toLowerCase().includes("first published"))
+    ? { date: git.published, note: "First published.", commit: firstSha }
+    : null;
+
+const entries = [...curated, ...(publishedEntry ? [publishedEntry] : [])];
+---
+
+<section class="section editlog" aria-label="Edit history">
+  <p class="sec-hd">Edit history</p>
+
+  <div class="editlog-meta">
+    {publishedLabel ? <span>Published {publishedLabel}</span> : null}
+    {updatedLabel && updatedLabel !== publishedLabel ? <span>Updated {updatedLabel}</span> : null}
+    {explanation.lastReviewed ? <span>Last reviewed {explanation.lastReviewed}</span> : null}
+    {explanation.dataThrough ? <span>Data through {explanation.dataThrough}</span> : null}
+  </div>
+
+  {entries.length ? (
+    <ol class="editlog-list">
+      {entries.map((entry) => (
+        <li>
+          <span class="editlog-date">{fmt(entry.date)}</span>
+          <span class="editlog-note">{entry.note}</span>
+          {entry.commit ? (
+            <a class="editlog-diff" href={commitUrl(entry.commit)} target="_blank" rel="noreferrer">diff</a>
+          ) : null}
+        </li>
+      ))}
+    </ol>
+  ) : null}
+
+  <a class="editlog-history" href={articleSourceUrl(questionId)} target="_blank" rel="noreferrer">
+    View the full version history &amp; exact changes on GitHub →
+  </a>
+</section>

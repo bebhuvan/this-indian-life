@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-02",
+  "purpose": "Seed inventory of high-value India data sources to prioritize discovery and adapters. This is metadata, not a claim that every source has production-grade artifacts yet.",
+  "sources": [
+    {
+      "sourceId": "rbi-dbie",
+      "name": "RBI Database on Indian Economy",
+      "owner": "Reserve Bank of India",
+      "homepage": "https://data.rbi.org.in/DBIE/",
+      "accessMode": "spa_gateway_json_and_hdfs_workbooks",
+      "cadence": "daily_monthly_quarterly_annual",
+      "reliability": "official",
+      "adapterStatus": "implemented_partial",
+      "articleFamilies": ["inflation", "banking", "credit", "deposits", "monetary_policy", "money_markets", "payments", "external_sector", "public_finance", "national_accounts", "housing", "state_finance"],
+      "qualityNotes": ["Canonical for RBI-published monetary and financial data.", "Production adapters now cover weekly forex reserves, official macro HDFS workbooks, and curated derived macro series with raw snapshots and manifests.", "Forex reserves reconcile total reserves against FCA, gold, SDR, and IMF components; macro workbook series preserve parent artifact hashes and exact label/frequency/unit selectors.", "DBIE report discovery and BusinessObjects viewer links are catalog signals only, not article evidence until a stable downloadable or JSON table adapter validates table semantics."]
+    },
+    {
+      "sourceId": "mospi-unitdata",
+      "name": "MoSPI Unitdata / National Data Archive",
+      "owner": "Ministry of Statistics and Programme Implementation",
+      "homepage": "https://microdata.gov.in/",
+      "accessMode": "api_key_microdata_files",
+      "cadence": "survey_release",
+      "reliability": "official",
+      "adapterStatus": "discovery_started",
+      "articleFamilies": ["jobs", "consumption", "time_use", "informal_enterprises", "manufacturing", "education", "telecom"],
+      "qualityNotes": ["Survey estimates require correct weights, strata, geography definitions, and disclosure discipline.", "Prefer published tables first; microdata estimates need reviewed methodology."]
+    },
+    {
+      "sourceId": "data-gov-in",
+      "name": "Open Government Data Platform India",
+      "owner": "Government of India",
+      "homepage": "https://www.data.gov.in/",
+      "accessMode": "api_key_catalog_resources",
+      "cadence": "mixed",
+      "reliability": "official_aggregator",
+      "adapterStatus": "key_gated",
+      "articleFamilies": ["cross_ministry_catalog", "schemes", "district_indicators", "administrative_data"],
+      "qualityNotes": ["Treat as a catalog and pointer surface, not automatically as canonical data.", "Resource-level publisher, vintage, file type, and update frequency must be validated."]
+    },
+    {
+      "sourceId": "trai",
+      "name": "Telecom Regulatory Authority of India",
+      "owner": "Telecom Regulatory Authority of India",
+      "homepage": "https://www.trai.gov.in/release-publication/reports/telecom-subscriptions-reports",
+      "accessMode": "public_report_listing_pdf_native_text_and_ocr_fallback",
+      "cadence": "monthly",
+      "reliability": "official_regulator",
+      "adapterStatus": "implemented_partial",
+      "articleFamilies": ["telecom", "internet", "digital_payments_context", "connected_india", "rural_urban_connectivity"],
+      "qualityNotes": ["Production adapter covers latest monthly telecom subscription PDFs with raw report snapshots, per-report table artifacts, and derived monthly series.", "Parser uses native PDF text first and Paddle/Akshara structure OCR only for image-only or validation-failing reports.", "Validation checks required headline rows, additive subscriber totals, teledensity arithmetic, and suspicious month-to-month jumps.", "Subscriber counts are connections, not unique people; teledensity is connections per population, not individual ownership."]
+    },
+    {
+      "sourceId": "who-gho",
+      "name": "WHO Global Health Observatory",
+      "owner": "World Health Organization",
+      "homepage": "https://www.who.int/data/gho",
+      "accessMode": "odata_api",
+      "cadence": "annual_irregular",
+      "reliability": "multilateral",
+      "adapterStatus": "implemented_partial",
+      "articleFamilies": ["life_expectancy", "healthy_life_expectancy", "mortality", "ncds", "maternal_child_health", "uhc", "risk_factors"],
+      "qualityNotes": ["Excellent India health backbone and global comparison source.", "Rows often include sex, age, uncertainty intervals, and modeled estimates; retain dimensions."]
+    },
+    {
+      "sourceId": "ppac",
+      "name": "Petroleum Planning & Analysis Cell",
+      "owner": "Ministry of Petroleum and Natural Gas, Government of India",
+      "homepage": "https://ppac.gov.in/",
+      "accessMode": "public_xlsx_and_login_gated_history",
+      "cadence": "monthly_annual_mixed",
+      "reliability": "official",
+      "adapterStatus": "implemented_partial",
+      "articleFamilies": ["petroleum_imports", "petroleum_exports", "lng", "fuel_consumption", "crude_prices", "refining", "energy_security"],
+      "qualityNotes": ["Canonical official Indian source for petroleum and natural-gas administrative data.", "Current import/export workbook is production-ingested with raw XLSX snapshot and parser validation.", "Historical import/export page exposes quantity, rupee-value, and dollar-value workbook names, but direct automated fetch currently returns HTML/login wrapper responses; keep those records as discovery only until raw XLSX access is validated."]
+    },
+    {
+      "sourceId": "unicef-sdmx",
+      "name": "UNICEF Data Warehouse",
+      "owner": "UNICEF",
+      "homepage": "https://data.unicef.org/",
+      "accessMode": "sdmx_api",
+      "cadence": "annual_irregular",
+      "reliability": "multilateral",
+      "adapterStatus": "planned",
+      "articleFamilies": ["children", "nutrition", "wash", "education", "child_marriage", "immunization"],
+      "qualityNotes": ["Strong child and household welfare complement to WHO and NFHS.", "Use a reusable SDMX adapter instead of one-off fetch scripts."]
+    },
+    {
+      "sourceId": "ilostat",
+      "name": "ILOSTAT",
+      "owner": "International Labour Organization",
+      "homepage": "https://ilostat.ilo.org/",
+      "accessMode": "bulk_api_sdmx_like",
+      "cadence": "annual_quarterly_mixed",
+      "reliability": "multilateral",
+      "adapterStatus": "planned",
+      "articleFamilies": ["labour_force", "unemployment", "women_work", "agriculture_work", "informality_context"],
+      "qualityNotes": ["Useful for international comparison, not a replacement for PLFS.", "Must label ILO modeled estimates separately from official survey tables."]
+    },
+    {
+      "sourceId": "faostat",
+      "name": "FAOSTAT",
+      "owner": "Food and Agriculture Organization of the United Nations",
+      "homepage": "https://faostat.fao.org/",
+      "accessMode": "api",
+      "cadence": "annual",
+      "reliability": "multilateral",
+      "adapterStatus": "planned",
+      "articleFamilies": ["food_supply", "agriculture_output", "land_use", "fertilizer", "livestock", "trade_food"],
+      "qualityNotes": ["Good long-run agriculture and food comparison source.", "Official India agriculture sources should replace/supplement where more canonical."]
+    },
+    {
+      "sourceId": "imf-data",
+      "name": "IMF Data",
+      "owner": "International Monetary Fund",
+      "homepage": "https://data.imf.org/",
+      "accessMode": "sdmx_api",
+      "cadence": "monthly_quarterly_annual",
+      "reliability": "multilateral",
+      "adapterStatus": "planned",
+      "articleFamilies": ["macro_comparison", "inflation", "external_sector", "fiscal", "weo"],
+      "qualityNotes": ["Use for global comparability and IMF estimates.", "Do not override official Indian source without an explicit source-precedence note."]
+    },
+    {
+      "sourceId": "udise-plus",
+      "name": "UDISE+",
+      "owner": "Department of School Education and Literacy, Ministry of Education",
+      "homepage": "https://udiseplus.gov.in/",
+      "accessMode": "portal_api_reports",
+      "cadence": "annual",
+      "reliability": "official",
+      "adapterStatus": "planned_access_unclear",
+      "articleFamilies": ["school_infrastructure", "enrolment", "teachers", "gender_education", "digital_schooling"],
+      "qualityNotes": ["High-value official school data.", "API access may require credentials; use public reports while API access is unresolved."]
+    },
+    {
+      "sourceId": "ncrb",
+      "name": "NCRB Crime in India / Accidental Deaths / Prison Statistics",
+      "owner": "National Crime Records Bureau",
+      "homepage": "https://ncrb.gov.in/",
+      "accessMode": "reports_tables",
+      "cadence": "annual",
+      "reliability": "official_administrative",
+      "adapterStatus": "planned",
+      "articleFamilies": ["crime_reporting", "suicides", "accidental_deaths", "prisons"],
+      "qualityNotes": ["Administrative reported cases are not true incidence.", "Every article must carry a visible reporting-bias caveat."]
+    }
+  ]
+}

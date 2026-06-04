@@ -1,0 +1,122 @@
+---
+// One NFHS-6 chart, rendered as an editorial CARD in the same visual language as
+// the rest of the site's article charts (ArticleVisuals): a bordered, padded
+// card with a serif title + uppercase scope chip, the SSR-SVG chart, a serif
+// takeaway + detail note, an optional "How to read", and a Source line.
+// The chart kit stays bespoke (maps, league tables, dumbbells, beeswarms) — only
+// the wrapper/look is shared, so nothing is curtailed.
+import * as N from "../data/nfhs6.mjs";
+
+interface Props {
+  block: any;
+  ex?: { takeaway?: string; read?: string };
+  prominence?: "feature" | "support" | "standard";
+}
+const { block: b, ex = {}, prominence = "standard" } = Astro.props as Props;
+
+const single = b.num ?? (b.nums && b.nums.length === 1 ? b.nums[0] : null);
+const subtitle = single != null ? N.fullLabel(single).replace(/\s*\(%\)\s*$/, "") : "";
+const def = b.def ?? (single != null ? N.defFor(single) : null);
+
+function scopeTag(b: any): string {
+  if (b.kind === "map" || b.kind === "ranked" || b.kind === "dotstrip" || b.kind === "diststrip") return "By State / UT";
+  if (b.kind === "split") return "Urban vs Rural";
+  if (b.kind === "diverging") return "Adults 15–49";
+  if (b.kind === "movers") return "Change, points";
+  return "2019–21 → 2023–24";
+}
+const kindCls = `is-${b.kind}`;
+const prominenceCls = `is-${prominence}`;
+const chartCls = `nf-chart ${b.kind === "map" ? "is-map" : ""} ${b.kind === "ranked" ? "is-ranked" : ""} ${b.kind === "movers" ? "is-movers" : ""} ${b.kind === "slope" ? "is-slope" : ""}`;
+---
+
+<article class={`nf-card ${kindCls} ${prominenceCls}`}>
+  <header class="nf-card-head">
+    <div class="nf-card-titles">
+      <h3 class="nf-card-title serif">{b.h}</h3>
+      {subtitle && <p class="nf-card-sub">{subtitle}</p>}
+    </div>
+    <span class="nf-card-tag">{scopeTag(b)}</span>
+  </header>
+
+  <div class={chartCls} set:html={N.renderChart(b)} />
+
+  {(ex.takeaway || ex.read || def) && (
+    <div class="nf-note">
+      {ex.takeaway && <p class="nf-cn-take serif">{ex.takeaway}</p>}
+      {ex.read && <p class="nf-cn-detail">{ex.read}</p>}
+      <div class="nf-cn-meta">
+        {def && <p><b>How to read</b><span>{def}</span></p>}
+        <p class="nf-cn-src"><b>Source</b><span>NFHS-6 fact sheets · 2023-24</span></p>
+      </div>
+    </div>
+  )}
+</article>
+
+<style>
+  .nf-card {
+    background: #fff;
+    border: 1px solid var(--ghost, #e7e7e7);
+    padding: 36px 38px 32px;
+    margin: 28px 0 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: min(100%, 1180px);
+    max-width: 1180px;
+  }
+  .nf-card-head { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-bottom: 24px; }
+  .nf-card-titles { min-width: 0; }
+  .nf-card-title { font-size: clamp(1.42rem, 2.2vw, 2.05rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; color: var(--ink, #0b0b0b); margin: 0; }
+  .nf-card-sub { font: 400 0.82rem/1.45 "DM Sans", sans-serif; color: var(--mid, #5c5c5c); margin: 9px 0 0; max-width: 70ch; }
+  .nf-card-tag { font: 500 0.66rem/1 "DM Sans", sans-serif; letter-spacing: 0.13em; text-transform: uppercase; color: var(--dim, #a6a6a6); white-space: nowrap; padding-top: 4px; }
+
+  .nf-note { border-top: 1px solid var(--ink, #0b0b0b); padding-top: 22px; margin-top: 28px; }
+  .nf-cn-take { font: 500 1.32rem/1.32 "Cormorant Garamond", serif; color: #0e0e0e; margin: 0 0 12px; max-width: 82ch; letter-spacing: -0.005em; }
+  .nf-cn-detail { font: 400 1.04rem/1.68 "Cormorant Garamond", serif; color: #222; margin: 0 0 20px; max-width: 92ch; columns: 2; column-gap: 56px; }
+  @media (max-width: 760px) { .nf-cn-detail { columns: 1; } }
+  .nf-cn-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 52px; border-top: 1px solid var(--ghost, #e7e7e7); padding-top: 15px; }
+  @media (max-width: 700px) { .nf-cn-meta { grid-template-columns: 1fr; } }
+  .nf-cn-meta p { margin: 0; font: 400 0.88rem/1.55 "DM Sans", sans-serif; color: #333; }
+  .nf-cn-meta b { display: block; font-size: 0.6rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--mid, #5c5c5c); font-weight: 600; margin-bottom: 5px; }
+  .nf-cn-src span { color: var(--ink, #0b0b0b); font-weight: 500; }
+
+  .nf-card.is-support {
+    padding: 28px 28px 24px;
+  }
+  .nf-card.is-support .nf-card-head {
+    margin-bottom: 18px;
+  }
+  .nf-card.is-support .nf-card-title {
+    font-size: clamp(1.22rem, 1.55vw, 1.52rem);
+    line-height: 1.12;
+  }
+  .nf-card.is-support .nf-card-sub {
+    font-size: 0.76rem;
+  }
+  .nf-card.is-support .nf-note {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .nf-card.is-support .nf-cn-take {
+    font-size: 1.12rem;
+    line-height: 1.32;
+  }
+  .nf-card.is-support .nf-cn-detail {
+    columns: 1;
+    font-size: 0.96rem;
+    line-height: 1.58;
+  }
+  .nf-card.is-support .nf-cn-meta {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  @media (max-width: 760px) {
+    .nf-card { padding: 22px 18px 20px; margin-top: 22px; }
+    .nf-card-head { flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .nf-card-title { font-size: clamp(1.35rem, 8vw, 1.72rem); }
+    .nf-card-tag { white-space: normal; padding-top: 0; }
+    .nf-note { margin-top: 22px; padding-top: 18px; }
+  }
+</style>

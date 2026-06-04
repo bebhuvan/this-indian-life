@@ -1,44 +1,127 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import Nav from "../../../components/Nav.astro";
+import Footer from "../../../components/Footer.astro";
 import { domains, locales } from "../../../data/site";
-import { questionPages, questionUrl } from "../../../data/questions";
+import { questionPages, questionUrl, statusMeta } from "../../../data/questions";
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
 }
 
 const { locale } = Astro.params;
+
+// Searchable text per question, baked in at build time (a few KB inline — no search
+// library, no extra request). The browse-by-domain grouping stays the default view;
+// the search box and chips filter it live.
+const searchText = (page: (typeof questionPages)[number], domainLabel?: string) =>
+  [
+    page.question,
+    page.explanation.short?.dek,
+    page.explanation.short?.headline,
+    page.explanation.article?.title,
+    domainLabel,
+    ...(page.explanation.editorialPlan?.glossaryBlocks?.map((g) => g.term) ?? [])
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
 ---
 
-<Base title="Articles · Indica" description="All V1 article pages generated from Indica's locked evidence packets.">
+<Base title="Articles · This Indian Life" description="Every question on how India lives, each written from sourced data and locked evidence. Browse by topic or search.">
   <div class="wrap">
     <Nav locale={locale} />
 
     <header class="domain-head">
       <span class="lbl">Articles</span>
-      <h1 class="serif">The first Indica question set.</h1>
+      <h1 class="serif">The first question set.</h1>
       <p class="muted">
-        Thirty national questions about India, each written from local data artifacts and stored evidence packets.
+        National questions about India, each written from local data artifacts and stored evidence
+        packets. Browse by topic, or search for the one you want.
       </p>
     </header>
+
+    <div class="archive-search">
+      <input
+        id="q-search"
+        type="search"
+        placeholder="Search questions — try “inflation”, “electricity”, “children”…"
+        autocomplete="off"
+        aria-label="Search questions"
+      />
+    </div>
+
+    <div class="archive-filters" id="q-filters" role="group" aria-label="Filter by topic">
+      <button class="afilter is-active" data-domain="all" type="button">All topics</button>
+      {domains.map((domain) => (
+        <button class="afilter" data-domain={domain.id} type="button">{domain.label}</button>
+      ))}
+    </div>
 
     {domains.map((domain) => {
       const pages = questionPages.filter((page) => page.domain === domain.id);
       if (!pages.length) return null;
       return (
-        <section class={`section dom-${domain.id}`}>
+        <section class={`section dom-${domain.id} qgroup`} data-section={domain.id}>
           <p class="sec-hd">{domain.label}</p>
           {pages.map((page) => (
-            <a class="q-row" href={questionUrl(page, locale)}>
+            <a class="q-row qrow" href={questionUrl(page, locale)} data-domain={domain.id} data-text={searchText(page, domain.label)}>
               <span class="q-dot" style={`background:var(--${page.domain})`}></span>
               <span class="q-txt">{page.question}</span>
-              <span class="q-ans" style={`color:var(--${page.domain})`}>{page.explanation.status === "ready" ? "Article" : "Needs data"}</span>
+              <span class="q-ans" style={`color:var(--${page.domain})`}>{statusMeta(page.explanation.status).short}</span>
               <span class="q-arrow">-></span>
             </a>
           ))}
         </section>
       );
     })}
+
+    <p class="archive-empty" id="q-empty" hidden>No questions match that search yet.</p>
+
+    <Footer locale={locale} />
   </div>
+
+  <script is:inline>
+    (() => {
+      const input = document.getElementById("q-search");
+      const empty = document.getElementById("q-empty");
+      const groups = Array.from(document.querySelectorAll(".qgroup"));
+      const filters = Array.from(document.querySelectorAll(".afilter"));
+      let domain = "all";
+      let term = "";
+
+      function apply() {
+        let total = 0;
+        groups.forEach((group) => {
+          const groupDomain = group.getAttribute("data-section");
+          const domainMatch = domain === "all" || domain === groupDomain;
+          let visibleInGroup = 0;
+          group.querySelectorAll(".qrow").forEach((row) => {
+            const termMatch = !term || (row.getAttribute("data-text") || "").includes(term);
+            const show = domainMatch && termMatch;
+            row.hidden = !show;
+            if (show) visibleInGroup += 1;
+          });
+          group.hidden = visibleInGroup === 0;
+          total += visibleInGroup;
+        });
+        if (empty) empty.hidden = total !== 0;
+      }
+
+      if (input) {
+        input.addEventListener("input", (event) => {
+          term = event.target.value.trim().toLowerCase();
+          apply();
+        });
+      }
+      filters.forEach((button) => {
+        button.addEventListener("click", () => {
+          filters.forEach((other) => other.classList.remove("is-active"));
+          button.classList.add("is-active");
+          domain = button.getAttribute("data-domain") || "all";
+          apply();
+        });
+      });
+    })();
+  </script>
 </Base>

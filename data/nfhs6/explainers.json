@@ -1,0 +1,611 @@
+{
+  "db-diverging": {
+    "takeaway": "Adults now carry underweight and overweight at the same time.",
+    "read": "Women and men both show a double burden: underweight persists while overweight or obesity is higher. This is not a clean transition from scarcity to excess; both risks now have to be managed together.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "ov-crossover": {
+    "takeaway": "Child deprivation fell while adult metabolic risk rose.",
+    "read": "The chart puts the transition in one frame. Stunting, underweight and early marriage moved down; overweight, high blood sugar and surgical births moved up. NFHS-6 is therefore not a single-direction health story. It is a change in the type of risk Indian families are more likely to face.",
+    "model": "deepseek-v4-pro",
+    "tab": "overview"
+  },
+  "db-obesity-map": {
+    "takeaway": "Women’s overweight and obesity rose to 30.7%, with large state gaps.",
+    "read": "The national rise is large, but the spread is just as important. Some states now face a very high obesity burden, while others remain much lower and may still carry more undernutrition.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "db-obesity-strip": {
+    "takeaway": "Nationwide, 30.7% of women are overweight, yet state rates range from 13.8% to 51.3%.",
+    "read": "A nutritional paradox is unfolding: even as undernutrition persists, excess weight is rapidly emerging as a major health threat. The national average has shot up from 24% to 30.7% in just a few years, but the burden falls very differently across the country. Puducherry's rate of 51.3% signals an urban, high-calorie lifestyle, while Meghalaya's 13.8% reflects more traditional diets and greater food insecurity. This unequal shift means India must now fight both under- and over-nutrition simultaneously, straining an already stretched health system.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "db-stunting-map": {
+    "takeaway": "India’s child stunting fell from 35.5% to 29.3%, yet regional highs hit 37.1%.",
+    "read": "While India has made huge strides in curbing child stunting, the map reveals deep regional divides that mirror underlying inequalities. A child in Dadra & Nagar Haveli and Daman & Diu faces more than double the risk of stunting compared to one in Puducherry. This matters because stunting traps children in a cycle of poor health and lower cognitive potential, affecting their education and future earnings. The national drop from over a third to under 30% is real progress, but the stubbornly high pockets demand urgent, focused intervention.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "se-diabetes": {
+    "takeaway": "High blood sugar rose quickly for both men and women.",
+    "read": "Men crossed 20.9% and women reached 17.8%. The change is large enough to make blood sugar one of the clearest new adult-health pressures in NFHS-6.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "se-split": {
+    "takeaway": "High blood sugar stalks one in five men, with cities worst but villages closing the gap.",
+    "read": "High blood sugar is no longer just an urban worry. While 23.9% of men in cities have elevated sugar, rural men are close behind at 19.7%, and the gap is narrowing fast. For women, urban rates (21.9%) also exceed rural (16.2%), but the pattern is similar: villages are catching up. This silent epidemic means millions have no symptoms until a blood test reveals the damage.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "se-bp": {
+    "takeaway": "Raised blood pressure edged down, unlike blood sugar.",
+    "read": "The decline is modest, and the level is still high. Its importance is comparative: blood pressure and blood sugar are not moving together, so they should not be collapsed into one generic risk story.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "se-diabetes-map": {
+    "takeaway": "High blood sugar varies sharply by state.",
+    "read": "Men’s high blood sugar reached 20.9% nationally, but the state spread is wide: Goa is at 36.3%, while Meghalaya is at 6.8%. The map shows that the rise is national, but the burden is not evenly distributed.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "se-tobacco": {
+    "takeaway": "Tobacco and alcohol changed little compared with blood sugar.",
+    "read": "The behavioural indicators here moved only slightly. That does not make them harmless, but it means they cannot alone explain the speed of the blood-sugar rise.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "se-tobacco-map": {
+    "takeaway": "Tobacco use dips minimally: over a third of men still at risk, with Mizoram at 74%.",
+    "read": "Tobacco’s hold on Indian men has loosened only slightly—from 38% to 36.3% in a few years—meaning over one in three continue to inhale or chew a substance that causes cancers and heart disease long before symptoms appear. The national figure conceals a sharp divide: in Mizoram, 73.6% of men use tobacco, while in Puducherry, it’s just 11.4%. Such stark differences show that where you live can determine your invisible risk.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "bb-institutional": {
+    "takeaway": "Institutional birth is now the norm; quality of care is the next question.",
+    "read": "The move into facilities is a major public-health gain. But once facility birth is near universal, the key issue becomes whether care is timely, respectful and clinically necessary.",
+    "model": "deepseek-v4-pro",
+    "tab": "being-born"
+  },
+  "bb-csection": {
+    "takeaway": "Private facilities now report C-sections in more than half of births.",
+    "read": "The private-public gap is the clearest signal in the C-section story. Public rates remain much lower, while private rates have moved high enough to raise questions about overuse.",
+    "model": "deepseek-v4-pro",
+    "tab": "being-born"
+  },
+  "bb-csection-map": {
+    "takeaway": "A tenfold gap in surgical births divides India’s states.",
+    "read": "A caesarean can be life-saving, but at 27.2% across India—up sharply from 21.5% in just a few years—the procedure is no longer rare. In Telangana, over six in ten births are surgical, a pattern often tied to private hospital practices, while in Meghalaya it’s fewer than one in fifteen. Such extremes suggest that where a mother lives, not just her medical need, increasingly shapes how she gives birth.",
+    "model": "deepseek-v4-pro",
+    "tab": "being-born"
+  },
+  "bb-csection-strip": {
+    "takeaway": "C-section rates range from possible under-access to clear overuse.",
+    "read": "India’s C-section rate is 27.2%, but state rates vary widely. Telangana’s level suggests routine surgical delivery, while very low-rate states may still have limited access to emergency obstetric care. Both extremes matter.",
+    "model": "deepseek-v4-pro",
+    "tab": "being-born"
+  },
+  "bb-antenatal": {
+    "takeaway": "Repeated pregnancy care improved alongside early check-ups.",
+    "read": "First-trimester check-ups rose to 76.2%, and four or more antenatal visits rose to 65.2%. These gains matter because early and repeated contact is where risks are identified, supplements are tracked and delivery plans are made.",
+    "model": "deepseek-v4-pro",
+    "tab": "being-born"
+  },
+  "gu-immunisation": {
+    "takeaway": "Rotavirus vaccination turned from a gap into a strength.",
+    "read": "Rotavirus coverage rose from 36.4% to 85.4%, lifting the overall immunisation picture. The pace of change shows what a focused programme can do, even while child feeding indicators remain weak.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "gu-publicprivate": {
+    "takeaway": "Public health centres deliver nearly all rotavirus shots; private clinics barely matter.",
+    "read": "Rotavirus vaccination in India has become a triumph of the public health system. Even in cities, over 90% of vaccinated children get the shot at a government facility; in villages, it’s more than 97%. Nationally, public facilities account for 95.6% of vaccinations, while private clinics cover just 3.1%. This near-total reliance on public infrastructure explains how coverage expanded so rapidly, though other child health measures like complementary feeding remain far behind.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "gu-immunisation-map": {
+    "takeaway": "Full immunisation rose, but state gaps remain.",
+    "read": "Full immunisation reached 82.6% nationally, a six-point gain. Ladakh is near the top at 94.0%, while Nagaland remains much lower. The map shows that programme strength is real, but not uniform.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "gu-feeding": {
+    "takeaway": "Only 15.3% of young children receive an adequate diet.",
+    "read": "Early breastfeeding and solid-food introduction improved, but adequate diet remains very low. This is the sharpest contrast with vaccination: the health system can deliver a shot more reliably than households can deliver a diverse, frequent diet.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "ff-tfr-strip": {
+    "takeaway": "National replacement hides extremes: Bihar’s 2.7, Andaman’s 0.9—women still bear the burden.",
+    "read": "That India’s fertility sits exactly at replacement glosses over a nation drifting in two directions. Bihar, at 2.7, still has young couples having larger families, while the Andaman and Nicobar Islands have slipped to 0.9—well below the level needed to sustain their population. This split will shape everything from school demand in the north to elder care in the south. Yet the contraceptive burden remains overwhelmingly on women, even as the country’s needs diversify so sharply.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "ff-sterilisation": {
+    "takeaway": "India’s fertility has fallen, but the contraception burden still lands almost entirely on women.",
+    "read": "Even as India reaches replacement fertility, the responsibility for preventing pregnancy remains stubbornly gendered. Female sterilisation, at 36.5%, is still the mainstay—while vasectomies barely register at 0.5%. Meanwhile, the share of couples using any modern method has dropped from 56.4% to 52.7%, suggesting the burden may be driving some women away from contraception entirely. That imbalance carries real health costs.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "ff-teen": {
+    "takeaway": "Teen pregnancy barely changed even as child marriage declined.",
+    "read": "The near-flat teen pregnancy line is important. It suggests that later marriage helps, but does not replace contraception, schooling and local reproductive-health services.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "wgc-insurance": {
+    "takeaway": "Insurance now covers three in five households.",
+    "read": "The rise from 41.0% to 60.2% is one of the largest household-level changes in the survey. Rural coverage being higher than urban coverage points to the role of public schemes.",
+    "model": "deepseek-v4-pro",
+    "tab": "who-gets-care"
+  },
+  "wgc-insurance-map": {
+    "takeaway": "Insurance nearly doubled, but geography still determines financial safety.",
+    "read": "Household health insurance coverage surged from 41% to 60.2% nationally in three years. Yet the map reveals extremes: 96.3% in Jammu and Kashmir versus just 9.1% in the Andaman and Nicobar Islands. This uneven protection means millions still risk catastrophic health costs, even as insurance quietly funnels patients into private hospitals.",
+    "model": "deepseek-v4-pro",
+    "tab": "who-gets-care"
+  },
+  "wgc-publicshare": {
+    "takeaway": "Vaccination remains public; childbirth care is more mixed.",
+    "read": "Public facilities still deliver almost all vaccinations. Public-facility births, however, have slipped. The split shows that prevention and facility-based care are moving through different systems.",
+    "model": "deepseek-v4-pro",
+    "tab": "who-gets-care"
+  },
+  "wl-digital": {
+    "takeaway": "Women’s internet use rose faster than men’s, narrowing the digital gap.",
+    "read": "The jump from 33.3% to 64.3% is one of the largest movements in the survey. It expands access to information, services and payments, but the remaining gap with men and the uneven state map show that access is still not equal.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "wl-autonomy": {
+    "takeaway": "Bank accounts soared, but household power remained flat.",
+    "read": "Women’s economic resources are growing, yet their influence in household decisions has stalled. Nearly 9 in 10 women now have a bank account, a sharp jump from under four in five just a few years ago. Schooling and paid work also rose modestly. But the share involved in household decisions barely budged at 89%, revealing that financial access doesn't automatically shift power within the home.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "wl-marriage-map": {
+    "takeaway": "Child marriage declined nationally, but remains concentrated.",
+    "read": "A national fall to 20.1% is progress. The map shows why the problem cannot be treated as evenly distributed: some states are close to eliminating underage marriage, while others still report very high levels.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "wl-violence": {
+    "takeaway": "Reported spousal violence fell, but remains above one in five women.",
+    "read": "The decline from 29.2% to 22.3% is substantial. It still leaves a large share of women reporting violence, so the chart should be read as improvement from a high baseline, not resolution.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "wl-internet-map": {
+    "takeaway": "Women online nearly doubled, with a wide state spread.",
+    "read": "Women’s internet use rose from 33.3% to 64.3%. The map shows the unevenness behind that national jump: Goa is at 94.0%, while Tripura is at 48.8%. Digital access expanded quickly, but not evenly.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "db-children": {
+    "takeaway": "Stunting improved; acute nutrition stress remains stubborn.",
+    "read": "Stunting fell clearly, and severe wasting declined. But wasting overall barely changed and underweight remains high, so child nutrition progress is real but incomplete.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "ff-tfr-map": {
+    "takeaway": "A national TFR of 2.0 hides very different state futures.",
+    "read": "Replacement fertility does not mean demographic uniformity. Low-fertility states will age sooner; higher-fertility states will continue to add young people to schools and labour markets.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "ov-movers": {
+    "takeaway": "The largest jumps were in digital access, insurance and selected vaccines.",
+    "read": "Women’s internet use rose by 31 points, far more than any health indicator shown here. Insurance and several service-delivery measures also rose quickly. The negative side is smaller but important: obesity, high blood sugar and C-sections all increased.",
+    "model": "deepseek-v4-pro",
+    "tab": "overview"
+  },
+  "db-obesity-men-map": {
+    "takeaway": "Men’s overweight and obesity rose to 27.3%.",
+    "read": "Men overweight or obese increased from 22.9% to 27.3%. Chandigarh is at 48.5%, while Meghalaya is at 15.6%, showing a large state spread behind the national rise.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "db-underweight-map": {
+    "takeaway": "Across India, undernutrition is climbing—and Jharkhand's women bear the brunt.",
+    "read": "Even as India battles rising obesity, undernutrition is quietly rising too, with one in five women still underweight. The national map hides brutal extremes: in Jharkhand, nearly three in ten women are underweight, while in the Andaman and Nicobar Islands it’s barely one in thirty. The rate crept up from 18.7% to 19.7% in just a few years, signalling that progress has stalled. This stubborn hunger, coexisting with obesity, reveals a fractured food and health environment.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "se-severity": {
+    "takeaway": "Most of the blood sugar rise is in the danger zone, hitting men hardest.",
+    "read": "This isn’t just more people tipping into mild abnormality—it’s a surge into the danger zone, where blood sugar exceeds 160 mg/dl. Among men, the share with very high blood sugar jumped from 7.1% to 10.9%, and among women from 6.3% to 9.1%. The silent creep of elevated blood sugar is accelerating, and the steepest increases are in the range that signals serious metabolic damage, often before symptoms appear. Testing remains the only way to catch it early.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "se-bp-severity": {
+    "takeaway": "Elevated blood pressure is falling across the board, especially among men.",
+    "read": "A quiet but meaningful victory is taking shape in India's battle with blood pressure. Far fewer people now walk around with dangerously elevated levels than just three years ago. The share of men with moderate or severe hypertension has nearly halved, falling from 5.7% to 3.3%. Women saw gentler gains, though their rates were lower to begin with. This shift likely reflects more widespread screening and earlier intervention, but the stubbornly high overall numbers—over one in seven still affected—remind us that the silent threat persists.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "mh-antenatal": {
+    "takeaway": "Pregnancy care improved most where repeated visits increased.",
+    "read": "Almost all mothers receive some antenatal care. The stronger signal is the rise in first-trimester contact and four-plus visits, because those are the points where risks are found and followed.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "mh-anc-map": {
+    "takeaway": "More mothers get antenatal care, but your state still shapes your odds.",
+    "read": "Antenatal care acts as a quiet safety net—catching hidden risks early, guiding nutrition, preventing emergencies. Yet a mother in Puducherry is almost three times as likely to get full check-ups as one in Nagaland. Nationally, the share of women with four or more visits rose from 58.5% to 65.2%, a real gain that reminds us millions still lack this basic shield.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "mh-ifa": {
+    "takeaway": "More mothers receive iron for longer, but completion is still low.",
+    "read": "The 180-day course rose sharply, from 26.0% to 37.8%. That is progress, but it still means most mothers do not complete the longer course.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "mh-ifa-map": {
+    "takeaway": "Long-course iron coverage improved, with large state gaps.",
+    "read": "The share of mothers receiving iron-folic acid for 180 or more days rose to 37.8%. Kerala reaches 83.7%, while Bihar is at 11.2%. The gap points to uneven supply, counselling and follow-up.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "mh-aftercare": {
+    "takeaway": "Postnatal checks improved in the critical first two days.",
+    "read": "The first two days after birth are when complications can turn quickly. NFHS-6 shows better follow-up for mothers, but the newborn chart still shows how sharply home births fall outside the safety net.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "mh-mcp-map": {
+    "takeaway": "Near-universal card coverage masks stark state gaps.",
+    "read": "The MCP card reaches almost all expectant mothers, yet a dip from 95.9% to 95.6% suggests progress has stalled. Nearly nine in ten in Lakshadweep get one, compared to virtually every mother in Sikkim, revealing uneven care. Without this record, women risk missed check-ups and iron supplements, leaving the most vulnerable behind.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "bb-institutional-map": {
+    "takeaway": "Nagaland’s home births remain four times the national average.",
+    "read": "Despite India’s institutional births rising to over nine in ten, Nagaland lags significantly — only 62% of deliveries occur in a health facility. Geographic isolation, limited infrastructure, and cultural preferences likely contribute. While Lakshadweep achieves universal coverage, this gap leaves mothers and newborns more vulnerable to preventable complications.",
+    "model": "deepseek-v4-pro",
+    "tab": "being-born"
+  },
+  "gu-vaccines": {
+    "takeaway": "Vaccine coverage is climbing, but only 77.6% get the Hepatitis-B birth dose.",
+    "read": "India's immunisation programme is on a steady upward curve. Most routine vaccines are reaching more children, but the hepatitis B birth dose — meant to be given within 24 hours — lags behind at 77.6%. That means millions of newborns still miss a shot that prevents chronic liver disease later in life. Even as these numbers rise, they mask gaps elsewhere — exclusive breastfeeding and child malnutrition still need urgent attention.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "gu-rotavirus-map": {
+    "takeaway": "India’s rotavirus shield has grown fast, but gaps leave some children dangerously exposed.",
+    "read": "In just three years, rotavirus vaccination went from rare to routine for most Indian children. Yet the national figure hides a perilous divide: coverage is near-universal in Goa but only one in five in Lakshadweep. For a virus that causes severe diarrhoea and many child deaths, such gaps keep the threat alive in the most neglected places.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "gu-illness": {
+    "takeaway": "Children are better vaccinated, but care-seeking did not improve.",
+    "read": "The illness chart is a useful counterweight to the vaccine chart. Prevention improved, but formal care-seeking for fever or respiratory symptoms stayed flat, so the treatment side of child health still needs attention.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "ff-method-mix": {
+    "takeaway": "Contraceptive use rose, but modern methods lost share.",
+    "read": "Any method use increased, yet modern method use fell and traditional methods rose. That makes the fertility achievement more fragile, because less reliable methods can increase unintended pregnancy risk.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "ff-teen-map": {
+    "takeaway": "Almost one in five teens in Tripura are mothers; Chandigarh reveals this is preventable.",
+    "read": "Teen pregnancy is not a uniform challenge; it is driven by local factors like early marriage and lack of reproductive healthcare. While the national rate has barely budged from 6.8% to 6.7% in five years, Tripura's 18% contrasts starkly with Chandigarh's zero pregnancies among teenagers. This gap shows that when girls stay in school and have access to contraception, early motherhood can be prevented. The burden of prevention, however, still falls largely on young women, often without adequate support.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "ag-structure": {
+    "takeaway": "India remains young, but the age structure is tilting older.",
+    "read": "The child share fell and the 60-plus share rose. These are small percentage shifts, but they point in the same direction as replacement fertility: fewer young dependants, more older dependants over time.",
+    "model": "deepseek-v4-pro",
+    "tab": "ageing"
+  },
+  "ag-old-map": {
+    "takeaway": "Some states are already much older than the national average.",
+    "read": "Kerala’s elderly share shows what ageing looks like before the national average catches up. Other states remain much younger, so India will face youth and ageing pressures at the same time.",
+    "model": "deepseek-v4-pro",
+    "tab": "ageing"
+  },
+  "ag-young-map": {
+    "takeaway": "The child share is falling nationally, but not evenly.",
+    "read": "Children under 15 fell from 26.5% to 25.5% nationally. Bihar remains much younger, while states such as Sikkim have much smaller child shares. These differences will shape school demand, labour-force entry and ageing timelines.",
+    "model": "deepseek-v4-pro",
+    "tab": "ageing"
+  },
+  "ag-old-strip": {
+    "takeaway": "India is greying unevenly: Kerala already has one in five over 60, while some states remain young.",
+    "read": "This isn’t just about numbers—it’s about who will need care, pensions, and hospitals in the coming decade. Kerala, with over 20% elderly, is a window into India’s future, while Dadra & Nagar Haveli and Daman & Diu at just 6% still have a demographic dividend. The national share rose from 11.8% to 12.9% in just a few years—quietly, but unmistakably. The age gap between states means vastly different pressures on families and governments.",
+    "model": "deepseek-v4-pro",
+    "tab": "ageing"
+  },
+  "wl-schooling-map": {
+    "takeaway": "Where a girl is born still decides her schooling.",
+    "read": "While more Indian women now finish school, the map reveals stark inequality. Kerala leads with nearly 87% completing 10+ years, but in Tripura it’s just 33%. Nationally, the rise from 41% to 46.4% is real but slow. For the millions still left out, the digital world—where women’s internet use has nearly doubled—risks remaining out of reach.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "wl-menstrual-map": {
+    "takeaway": "While India nears 80% hygienic period care, Bihar trails at just 63%.",
+    "read": "Access to hygienic menstrual products is climbing, but a woman’s location still dictates her dignity. The national average masks a chasm: in Lakshadweep nearly all women use hygienic protection, whereas in Bihar only 63% do. Marginal gains in recent years (from 77.6% to 79.2%) signal that for many, period poverty remains a monthly reality, affecting health and daily life.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "wgc-bank": {
+    "takeaway": "Bank accounts are now almost universal household infrastructure.",
+    "read": "At 98.2%, banking is no longer a scarce service. That matters because insurance, transfers and reimbursements all work better when the payment rail already exists.",
+    "model": "deepseek-v4-pro",
+    "tab": "who-gets-care"
+  },
+  "wgc-publicbirth-map": {
+    "takeaway": "Despite wider insurance, public-hospital births fell from 61.9% to 58.6%.",
+    "read": "Even as more families gained health insurance, fewer women delivered in government hospitals. The share of public-facility births nationally dipped from 61.9% to 58.6% in recent years, suggesting insurance may be nudging families toward private care. In Ladakh, 95.4% of births remained in public facilities, while Gujarat saw just 31.6%. These disparities highlight where trust in the public system may be eroding fastest.",
+    "model": "deepseek-v4-pro",
+    "tab": "who-gets-care"
+  },
+  "hh-basics": {
+    "takeaway": "Electricity, improved water and iodised salt are now high-floor indicators.",
+    "read": "The basics are close to saturation nationally, which changes the policy question. The issue is less whether most households have access and more where the last gaps remain, whether quality is reliable, and whether public-health behaviours follow the infrastructure.",
+    "model": "deepseek-v4-pro",
+    "tab": "household"
+  },
+  "hh-water-map": {
+    "takeaway": "Clean water is almost universal, but in Nagaland, 1 in 6 still lack it.",
+    "read": "Access to clean drinking water now reaches 96.5% of Indian homes, up slightly from 95.9% in the last survey. Yet pockets of deprivation persist: in Nagaland, only 82.7% have an improved source, meaning roughly one in six residents must rely on water that risks their health. For a country that has electrified nearly every home, this persistent gap in something as basic as safe water is a glaring inequality—one that shapes child health and daily dignity.",
+    "model": "deepseek-v4-pro",
+    "tab": "household"
+  },
+  "hh-landown-map": {
+    "takeaway": "Women owning a home rose from 14% to 18.8%, but stark state gaps persist.",
+    "read": "Property in a woman’s name can anchor her independence, yet in most states, fewer than one in five households report this. Meghalaya’s matrilineal customs drive the highest rate at 65.3%, while Jammu and Kashmir sits at just 5%. The national figure has improved from 14% to 18.8%, hinting at gradual change, but the yawning gaps reveal how deeply local norms shape women’s economic footing.",
+    "model": "deepseek-v4-pro",
+    "tab": "household"
+  },
+  "hh-preschool": {
+    "takeaway": "Pre-school attendance rose, but still reaches fewer than half of young children.",
+    "read": "The increase to 47.0% is meaningful, but early learning remains far from universal. This is an important gap because pre-school shapes school readiness and can also change how mothers use their time.",
+    "model": "deepseek-v4-pro",
+    "tab": "household"
+  },
+  "hh-preschool-map": {
+    "takeaway": "Pre-school attendance surges nationally, but stark regional gaps persist.",
+    "read": "More Indian toddlers than ever are getting an early start in structured learning, with pre-school attendance rising to 47% nationally. Yet this progress is far from uniform — while Sikkim sees near-universal enrolment, Nagaland lags at barely one in six children, a gap that shapes future opportunity from the very first years. State-level investment, awareness, and infrastructure likely drive these divides, determining whether a child enters school ready to thrive.",
+    "model": "deepseek-v4-pro",
+    "tab": "household"
+  },
+  "hh-assets": {
+    "takeaway": "Bank accounts are nearly universal; women’s property ownership is not.",
+    "read": "Financial access is now far easier to find than a woman’s name on a house or land record. A bank account can connect a household to transfers and services. Property ownership changes security and bargaining power, and that shift is still limited.",
+    "model": "deepseek-v4-pro",
+    "tab": "household"
+  },
+  "__tab__overview": {
+    "answers": {
+      "ov-what": "NFHS-6 is not a simple progress report. Child stunting fell from 35.5% to 29.3%, women married before 18 fell to 20.1%, and household insurance rose sharply. At the same time, women overweight or obese rose from 24.0% to 30.7%, men with high blood sugar rose from 15.6% to 20.9%, and Caesarean births climbed to 27.2%. The main story is a handover: older deprivation indicators are improving, while adult metabolic and medical-system pressures are becoming harder to ignore.",
+      "ov-most": "The fastest movement came outside the clinic. Women using the internet rose by 31 points, household insurance by 19.2 points, and bank-account ownership among women by 10.4 points. Health indicators moved too, but in both directions: stunting fell 6.2 points, while obesity, high blood sugar and C-sections rose. NFHS-6 therefore shows both expanded access and a changing risk profile."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "overview",
+    "intro": "The survey points in two directions at once: fewer children are stunted or married early, while more adults show signs of obesity, high blood sugar and costly facility-based care.",
+    "macha": {
+      "body": "The country is not simply getting healthier. It is moving from one health burden to another. Fewer children are visibly deprived, but more adults are entering the zone of obesity, diabetes risk and surgicalised care.",
+      "soWhat": "The next health system has to handle both nutrition failure and lifestyle disease at the same time."
+    }
+  },
+  "ov-slope": {
+    "takeaway": "India’s health burden pivots from child malnutrition to adult obesity and diabetes.",
+    "read": "India’s health burden is pivoting from hunger to excess. Child stunting fell sharply from 35.5% to 29.3%, and early marriage declined, marking real gains against deprivation. But in the same span, women’s obesity jumped from 24% to 30.7% and men with high blood sugar reached 20.9%, as processed food and sedentary lives spread. This dual movement means a typical family may face less childhood malnutrition but more adult diabetes, demanding a health system that can handle both ends at once.",
+    "model": "deepseek-v4-pro",
+    "tab": "overview"
+  },
+  "wl-schooling-gap": {
+    "takeaway": "Women gained ground in schooling, but parity is still distant.",
+    "read": "Women’s ten-plus years of schooling rose faster than men’s, narrowing the gap. But the level remains lower for women, and state differences are large enough to shape internet use, work and autonomy later in life.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "wl-bank-map": {
+    "takeaway": "Nearly nine in ten women have their own bank account.",
+    "read": "Women with their own bank account rose from 78.6% to 89.0%. This is a major access gain, though the state spread shows that financial inclusion is still not identical everywhere.",
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives"
+  },
+  "ff-method-trend": {
+    "takeaway": "Family planning uptake rises, but more Indians rely on risky traditional methods.",
+    "read": "More couples are using contraception than ever, yet they are turning away from modern methods in favour of traditional approaches like withdrawal—a shift fraught with uncertainty. Traditional method use surged from 10.3% to 16.4%, while modern contraceptive use dropped, leaving women exposed to unintended pregnancies and their consequences. With fertility already at replacement level, this quiet reversal could push many women toward unsafe practices and erode hard-won reproductive control.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "ff-sterilisation-map": {
+    "takeaway": "Women still shoulder India’s family planning burden, especially in the high-sterilisation belt.",
+    "read": "Even as India’s fertility drops to replacement, family planning remains overwhelmingly a woman’s responsibility. Female sterilisation is the dominant method, with 36.5% of married women opting for it, and in Andhra Pradesh it spikes to 69.5%. This pattern leaves men largely out of the picture and concentrates permanent contraception in regions where it has long been promoted. A slight national dip from 37.9% to 36.5% may signal a slow, tentative shift, but the map still reveals a deep gender imbalance in reproductive choices.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "ff-unmet": {
+    "takeaway": "Spacing need remains the weak point in unmet family planning.",
+    "read": "Overall unmet need is not large, but the rise in spacing need matters. It shows that some women can limit family size yet still lack reliable support to time births as they want.",
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility"
+  },
+  "mh-firsttri-map": {
+    "takeaway": "A mother’s postcode still largely determines if her pregnancy gets a safe, early start.",
+    "read": "For millions of women, the first trimester brings a crucial window for health checks, yet geography remains a stubborn barrier. Nearly every mother in Ladakh (96.3%) receives this timely care, compared to barely half in Arunachal Pradesh (57.6%). While national rates improved from 70% to over 76% in recent years, a woman’s chances of a safe start still depend sharply on her state, reflecting unequal access to clinics and information.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "mh-newborn": {
+    "takeaway": "Newborn check-ups rise, but place of birth still decides early care.",
+    "read": "Timely newborn check-ups have become far more common, yet a child’s place of birth still dictates their chance of early care. Across India, 85.3% of newborns now receive a postnatal check within two days—a leap from 79.1%. But for those born at home, the safety net virtually disappears: only 6.4% get examined within 24 hours. This yawning gap means millions of home-born babies miss out on life-saving early assessments.",
+    "model": "deepseek-v4-pro",
+    "tab": "mothers"
+  },
+  "gu-breastfeeding": {
+    "takeaway": "More Indian newborns are losing the full protection of exclusive breastfeeding as water creeps in.",
+    "read": "The immune shield exclusive breastfeeding provides is quietly eroding. While breastfeeding remains near-universal, the share of infants under six months receiving only breast milk has fallen from 63.7% to 55.8%. The rise in families giving water alongside milk — from 82.8% to 85.3% — suggests that early introduction of even plain water is undermining this protective practice. For newborns, every sip of water that replaces breast milk can increase the risk of diarrhoea and malnutrition.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "gu-adequate-diet": {
+    "takeaway": "An adequate diet reaches only 15.3% of young children despite other health gains.",
+    "read": "India’s infants are increasingly protected from infections like rotavirus, yet their diets remain dangerously poor. Only 15.3% of 6- to 23-month-olds received an adequate diet in 2023-24, up just marginally from 11% three years earlier. Critically, whether a child is breastfed or not barely shifts this proportion—15.1% versus 16.3%—showing that complementary feeding fails equally across the board. Without urgent improvement in what young children eat, developmental gains risk being undermined.",
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up"
+  },
+  "db-obesity-dist": {
+    "takeaway": "India’s obesity epidemic is deeply divided: in some states it’s over 50%, in others under 14%.",
+    "read": "Obesity is climbing fast across India, but its burden is not shared equally. The national rate among women has jumped from 24% to 30.7% in just a few years, yet state-level figures swing from 13.8% in Meghalaya to 51.3% in Puducherry. This means health systems in high-obesity states face a looming wave of diabetes, hypertension, and heart disease, while others still grapple with undernutrition. The divergence signals that no single national strategy will work — states need tailored responses to keep populations healthy.",
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden"
+  },
+  "se-diabetes-dist": {
+    "takeaway": "Where you live can mean a fivefold difference in hidden high blood sugar.",
+    "read": "High blood sugar silently affects more Indian men each year, but the burden is deeply uneven. Goa's rate of 36.3% is over five times Meghalaya's 6.8%, revealing how lifestyle and healthcare access shape risk. Nationally, the prevalence has surged from 15.6% to 20.9% in just three years—a jump that often goes unnoticed until a routine test.",
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics"
+  },
+  "__tab__household": {
+    "answers": {
+      "hh-power": "Electricity, improved drinking water and iodised salt are now close to universal at the national level. Electricity reached 98.3%, improved drinking water 96.5%, and iodised salt 94.2%. That is a high floor for public health and daily life. But the averages are not the same as completion: Nagaland still trails badly on improved water, and iodised salt has barely moved. The unfinished work is now concentrated in pockets rather than spread evenly across the country.",
+      "hh-own": "Financial inclusion is far ahead of asset ownership. A bank account is present in 98.2% of households, but only 18.8% report a woman owning a home or land. That gap matters because a bank account improves access to payments and schemes, while property changes security and bargaining power. NFHS-6 shows access becoming normal, but ownership still rare.",
+      "hh-preschool-q": "Pre-school attendance is rising, but it is not yet the norm. The share of children aged 2-4 attending pre-school rose from 40.1% to 47.0%. That is meaningful progress, especially for early learning and for mothers’ time, but more than half of young children still miss this stage. State gaps remain large enough to shape school readiness before formal schooling begins."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "household",
+    "intro": "Most households now report the basic services that once defined deprivation. The remaining gaps are less about national access and more about ownership, quality and state-level unevenness.",
+    "macha": {
+      "body": "The home is better connected and better served than before. But the same survey shows that access is easier to expand than ownership or early learning.",
+      "soWhat": "Infrastructure progress is real, but household power still depends on who owns assets and whose child gets an early start."
+    }
+  },
+  "__tab__womens-lives": {
+    "answers": {
+      "wl-online": "Women’s internet use nearly doubled, rising from 33.3% to 64.3%. Men also moved online, from 51.2% to 80.5%, so the gender gap remains but narrowed. Phone ownership rose more slowly, which suggests that internet use may be expanding through shared devices, cheaper access or changing household norms. The map still matters: a woman in Goa and a woman in Tripura are not entering the same digital world.",
+      "wl-catchup": "Women gained ground in schooling and banking, but agency moved unevenly. Ten-plus years of schooling rose from 41.0% to 46.4%, and women with their own bank account rose to 89.0%. Paid work and household decision-making did not move with the same force. NFHS-6 therefore shows a distinction between being connected to systems and having greater control inside the household or labour market.",
+      "wl-childbrides": "Child marriage is lower, but still geographically concentrated. The share of women married before 18 fell from 23.3% to 20.1%. That is progress, but it still means one in five young women entered marriage before legal adulthood. The state pattern is the key: the issue is no longer evenly national, but concentrated enough to require targeted attention.",
+      "wl-safety": "Spousal violence declined, but remains high. The share of women reporting spousal violence fell from 29.2% to 22.3%. Violence during pregnancy and childhood sexual abuse indicators also edged down. These are important shifts, but the level is still large: a lower number is not yet a safe environment."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "womens-lives",
+    "intro": "Women’s access to systems improved quickly: internet, phones, accounts and schooling all rose. The harder indicators are authority, paid work and safety.",
+    "macha": {
+      "body": "The survey shows women entering systems faster than they are gaining power within them. More women are online, banked and schooled; fewer indicators show a comparable shift in work, property or household authority.",
+      "soWhat": "Access is the first layer. Agency is the harder one."
+    }
+  },
+  "__tab__family-fertility": {
+    "answers": {
+      "ff-howmany": "India is at replacement fertility nationally, with a total fertility rate of 2.0. But the map shows why the average is not enough: Bihar remains at 2.7, while several states and Union Territories are far below replacement. This split changes future needs. Some states will still need schools and jobs for a young population; others will move sooner toward ageing and care burdens.",
+      "ff-prevent": "The contraception picture is more fragile than the fertility number suggests. Use of any method rose to 69.1%, but modern methods fell from 56.4% to 52.7%, while traditional methods rose from 10.3% to 16.4%. Female sterilisation remains the dominant modern method at 36.5%; male sterilisation is only 0.5%. Fertility has fallen, but the work of preventing pregnancy is still overwhelmingly gendered.",
+      "ff-unmet-q": "Unmet need has not disappeared. Overall unmet need is 8.5%, and the need for spacing rose slightly. That matters because a country can reach replacement fertility while many women still lack the timing and choice they want. The rise in traditional methods makes this more important, not less.",
+      "ff-teen-q": "Teen pregnancy barely changed, even as child marriage fell. Teen pregnancy moved from 6.8% to 6.7%, while women married before 18 fell from 23.3% to 20.1%. The gap between the two indicators suggests that delaying marriage alone does not solve early motherhood; schooling, contraception and local health access still matter."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "family-fertility",
+    "intro": "India’s national fertility rate sits at 2.0, but the average hides large state differences and a contraception system that still places most responsibility on women.",
+    "macha": {
+      "body": "The national fertility number is calm. The system behind it is not. Contraception remains heavily female, modern method use has slipped, and states are moving through the transition at different speeds.",
+      "soWhat": "Replacement fertility is not the end of the family-planning story."
+    }
+  },
+  "__tab__mothers": {
+    "answers": {
+      "mh-anc": "Antenatal contact is broad, and repeated care improved. Any antenatal care reached 95.9%, first-trimester check-ups rose to 76.2%, and four or more visits rose from 58.5% to 65.2%. The shift is encouraging because repeated visits are where screening, counselling and supplementation happen. The remaining weakness is not first contact, but depth and continuity.",
+      "mh-iron": "Iron-folic acid coverage improved, especially for longer courses. At least 100 days reached 54.9%, while the full 180-day course rose from 26.0% to 37.8%. That is a large gain, but it still leaves most mothers short of the full recommended duration. The state spread shows supply and follow-up are still uneven.",
+      "mh-after": "Care in the first two days after delivery improved for mothers and newborns, but the home-birth gap remains severe. Maternal postnatal checks within two days rose to 82.8%, and newborn checks within two days rose to 85.3%. For babies born at home, however, check-up within 24 hours is still only 6.4%. The facility is increasingly the gateway to early care."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "mothers",
+    "intro": "Pregnancy care now reaches most mothers at least once. The bigger question is whether care starts early, repeats often and continues after birth.",
+    "macha": {
+      "body": "Mothers are more likely to enter care and to return for check-ups than before. But the survey still shows drop-offs between contact, completion and follow-up.",
+      "soWhat": "Maternal care is improving; continuity is the measure to watch."
+    }
+  },
+  "__tab__being-born": {
+    "answers": {
+      "bb-where": "Institutional birth is now close to universal at the national level. Institutional deliveries rose from 88.6% to 90.6%, and skilled attendance rose from 89.4% to 91.3%. The remaining home-birth pockets are smaller but important, because they are where mothers and newborns are most likely to miss emergency care and postnatal follow-up.",
+      "bb-csection-q": "Caesarean births rose from 21.5% to 27.2%. The private sector is the centre of the increase: 54.1% of births in private facilities are now surgical, compared with 16.9% in public facilities. That does not mean every C-section is unnecessary, but the gap is too large to read as clinical need alone. The state map shows both overuse and possible under-access."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "being-born",
+    "intro": "Birth has largely moved into health facilities. That progress now sits beside a second trend: surgical delivery is rising, especially in private facilities.",
+    "macha": {
+      "body": "The old question was whether women could reach a facility. The new question is what kind of care the facility provides, and whether intervention is driven by need.",
+      "soWhat": "Hospital birth is progress; surgical overuse is a separate problem."
+    }
+  },
+  "__tab__growing-up": {
+    "answers": {
+      "gu-vax": "Rotavirus vaccination is the standout child-health gain, rising from 36.4% to 85.4%. Full immunisation also rose to 82.6%, and measles second-dose coverage improved. The public system carries almost all routine vaccination, which helps explain how the programme expanded quickly. But state gaps remain, and vaccination success does not solve the nutrition indicators that follow.",
+      "gu-ill": "Care-seeking for fever or respiratory symptoms did not rise. It stayed just under 69%, while diarrhoea increased slightly and respiratory symptoms fell. That mix suggests prevention improved in some areas, but the system children use when they are sick has not become more reliable. Vaccines can reduce risk; they cannot replace accessible care.",
+      "gu-feed": "The feeding indicators are weaker than the vaccine indicators. Breastfeeding within one hour improved to 50.1%, and solid food at 6-8 months rose to 59.5%, but only 15.3% of children aged 6-23 months received an adequate diet. Exclusive breastfeeding also slipped. NFHS-6 therefore shows a clear split: children are better protected from some infections, but many are still not fed well enough."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "growing-up",
+    "intro": "Vaccination improved strongly, led by rotavirus. Feeding and early child nutrition did not improve at the same pace.",
+    "macha": {
+      "body": "The vaccine programme can move fast when the system is focused. Feeding is different: it depends on household food, caregiving, counselling and poverty all at once.",
+      "soWhat": "Child survival gains need a nutrition strategy that is just as operational."
+    }
+  },
+  "__tab__double-burden": {
+    "answers": {
+      "db-kids": "Child nutrition improved most clearly on stunting, which fell from 35.5% to 29.3%. Severe wasting also fell, from 7.7% to 5.2%. But wasting barely moved overall, and underweight remains close to one in three children. The progress is real, but it is not complete; acute nutrition stress remains visible even as long-term deprivation eases.",
+      "db-adults": "Adults now show both sides of the nutrition transition. Among women, 19.7% are underweight and 30.7% are overweight or obese. Men show a similar pattern, with 19.7% underweight and 27.3% overweight or obese. This is not a clean move from scarcity to excess. The two problems coexist, sometimes in the same state and even the same household economy.",
+      "db-obesity-q": "Overweight is now widespread, but not evenly distributed. Women overweight or obese rose from 24.0% to 30.7%, with Puducherry above 50% and Meghalaya below 14%. Men also rose, from 22.9% to 27.3%. The state spread matters because the places facing the fastest obesity rise will also carry more diabetes, hypertension and cardiovascular risk."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "double-burden",
+    "intro": "The nutrition story is no longer one-directional. Child undernutrition improved, but adult underweight and overweight now sit side by side.",
+    "macha": {
+      "body": "India is improving on some child undernutrition measures while gaining an adult weight problem. The difficult part is that both can be true in the same national survey.",
+      "soWhat": "Nutrition policy has to handle scarcity and excess together."
+    }
+  },
+  "__tab__silent-epidemics": {
+    "answers": {
+      "se-diab": "High blood sugar rose quickly. Among men it increased from 15.6% to 20.9%; among women, from 13.5% to 17.8%. The rise is not limited to mild cases: very high blood sugar also increased for both men and women. Urban rates remain higher, but rural rates are close enough to show that this is no longer just a city problem.",
+      "se-bp-q": "Blood pressure did not follow the same pattern. Raised blood pressure fell from 21.3% to 19.4% among women and from 24.0% to 22.1% among men. That is a modest decline, not a disappearance: roughly one in five adults still has raised blood pressure. But the contrast with blood sugar is important because the two risks are moving differently.",
+      "se-drivers": "Tobacco and alcohol changed only modestly, so they cannot explain the sharp blood-sugar rise by themselves. Men’s tobacco use fell from 38.0% to 36.3%, women’s tobacco use changed little, and alcohol indicators moved only slightly. The blood-sugar increase likely reflects diet, weight, inactivity, screening and treatment patterns more than any single behaviour captured here."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "silent-epidemics",
+    "intro": "NFHS-6 shows blood sugar rising sharply while blood pressure declines slightly. That split makes the metabolic story more specific than a general “lifestyle disease” label.",
+    "macha": {
+      "body": "The survey separates two risks that are often spoken about together. Blood pressure is not rising in the same way blood sugar is.",
+      "soWhat": "Diabetes risk needs its own attention, not just a generic NCD warning."
+    }
+  },
+  "__tab__ageing": {
+    "answers": {
+      "ag-young": "India still has a young age structure, but the base is narrowing. Children under 15 fell from 26.5% to 25.5%, and children under five now make up 8.0% of the population. At the same time, the 60-plus share rose from 11.8% to 12.9%. The change is gradual, but it is consistent with fertility at replacement and longer survival.",
+      "ag-where": "Ageing is not evenly distributed. Kerala already has 20.7% of its population aged 60 or more, while Bihar remains much younger, with a large under-15 share. These differences will create different policy pressures: some states need schools and jobs for a still-young population; others need chronic care, pensions and elder support sooner."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "ageing",
+    "intro": "India is still young, but the direction of change is clear. The child share is falling and the elderly share is rising.",
+    "macha": {
+      "body": "India does not become old all at once. Some states are already living with an elderly profile; others still have a large youth cohort moving toward work age.",
+      "soWhat": "The demographic dividend and the ageing challenge will exist side by side."
+    }
+  },
+  "__tab__who-gets-care": {
+    "answers": {
+      "wgc-insured": "Health insurance coverage rose sharply, from 41.0% of households to 60.2%. Rural coverage is higher than urban coverage, suggesting public insurance schemes are doing much of the work. The state spread is large, so financial protection is not equally available everywhere. Insurance coverage is now a major part of the health story, but coverage alone does not tell us what families still pay.",
+      "wgc-banked": "The payment infrastructure is almost universal. Household bank-account coverage is 98.2%, with rural coverage slightly higher than urban. This matters because bank accounts make insurance, transfers and reimbursements easier to deliver. The survey shows that the administrative base for financial protection is now much stronger than it was a decade ago.",
+      "wgc-publicprivate-q": "Vaccination and childbirth point in different directions. Vaccination remains overwhelmingly public, with 95.6% of vaccinations delivered through public facilities. Public-facility births, however, fell from 61.9% to 58.6%. That split suggests public health programmes remain strong, while childbirth care is more exposed to private-sector movement."
+    },
+    "model": "deepseek-v4-pro",
+    "tab": "who-gets-care",
+    "intro": "Insurance and banking coverage expanded, but NFHS-6 also shows a split in where care is delivered: vaccination stays public, births are more mixed.",
+    "macha": {
+      "body": "The state is still central to prevention: vaccination is almost entirely public. But facility-based childbirth is more mixed, and insurance may change where families seek care.",
+      "soWhat": "More coverage is useful only if it reduces risk rather than just redirects spending."
+    }
+  }
+}

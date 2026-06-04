@@ -4,8 +4,14 @@ import Nav from "../../components/Nav.astro";
 import { locales } from "../../data/site";
 import {
   emberDatasets,
+  eiaInternationalSeries,
+  openMeteoCities,
+  openMeteoDerivedIndicators,
   owidGrapherDatasets,
+  ppacDatasets,
+  tradeStatEnergyCommodities,
   unPopulationIndicators,
+  unComtradeEnergyCommodities,
   v1Questions,
   waqiCities,
   whoIndicators,
@@ -23,8 +29,14 @@ const sourceGroups = [
   { name: "UN Population", rows: unPopulationIndicators, codeKey: "indicator" },
   { name: "WHO GHO", rows: whoIndicators, codeKey: "indicatorCode" },
   { name: "Ember", rows: emberDatasets, codeKey: "dataset" },
+  { name: "EIA International", rows: eiaInternationalSeries, codeKey: "id" },
+  { name: "PPAC", rows: ppacDatasets, codeKey: "id" },
+  { name: "TradeStat / DGCI&S energy commodities", rows: tradeStatEnergyCommodities, codeKey: "hsCode" },
+  { name: "UN Comtrade energy commodities", rows: unComtradeEnergyCommodities, codeKey: "cmdCode" },
   { name: "OWID Grapher", rows: owidGrapherDatasets, codeKey: "slug" },
-  { name: "WAQI", rows: waqiCities, codeKey: "city" }
+  { name: "WAQI", rows: waqiCities, codeKey: "city" },
+  { name: "Open-Meteo historical cities", rows: openMeteoCities, codeKey: "id" },
+  { name: "Open-Meteo derived annual metrics", rows: openMeteoDerivedIndicators, codeKey: "metric" }
 ];
 
 const schemas = [
@@ -93,7 +105,7 @@ const schemas = [
     code: `type ExplanationArtifact = {
   schemaVersion: 1;
   questionId: string;
-  status: "ready" | "needs_data";
+  status: "ready" | "work_in_progress" | "needs_data";
   short: { headline: string; dek: string; body: string };
   article: { title: string; standfirst: string; bodyMarkdown: string };
   sourceNotes: string[];
@@ -108,13 +120,13 @@ const schemas = [
 ];
 ---
 
-<Base title="Definitions · Indica" description="The V1 question spine, indicator registry, and data artifact contracts behind Indica.">
+<Base title="Definitions · This Indian Life" description="The question spine, indicator registry, and data contracts behind This Indian Life.">
   <div class="wrap">
     <Nav locale={locale} />
 
     <header class="domain-head">
       <span class="lbl">Reference</span>
-      <h1 class="serif">Definitions that keep Indica reproducible.</h1>
+      <h1 class="serif">Definitions that keep This Indian Life reproducible.</h1>
       <p class="muted">
         The site is built from a small set of contracts: questions map to indicator IDs, indicators map to source APIs, and every explanation is generated from locked evidence.
       </p>

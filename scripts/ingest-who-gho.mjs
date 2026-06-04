@@ -8,9 +8,11 @@ const failures = [];
 
 for (const item of whoIndicators) {
   try {
-    const raw = await fetchWhoIndicatorForIndia(item.indicatorCode);
+    const extraFilter = item.extraFilter || "";
+    const raw = await fetchWhoIndicatorForIndia(item.indicatorCode, extraFilter);
     const rows = Array.isArray(raw?.value) ? raw.value : [];
-    const snapshot = await writeSnapshot("who-gho", `${item.indicatorCode}.IND`, raw);
+    const snapshotKey = extraFilter ? `${item.indicatorCode}.${item.id.split(".").pop()}` : `${item.indicatorCode}.IND`;
+    const snapshot = await writeSnapshot("who-gho", snapshotKey, raw);
     const artifact = createTableArtifact({
       indicatorId: item.id,
       title: item.title,
@@ -21,11 +23,11 @@ for (const item of whoIndicators) {
       fetchedAt,
       rows,
       dimensions: Object.keys(rows[0] || {}),
-      metadata: { spatialDim: "IND" }
+      metadata: { spatialDim: "IND", extraFilter: extraFilter || undefined }
     });
     const artifactPath = await writeSeriesArtifact({
       sourceId: "who-gho",
-      name: `who-gho.IN.${item.indicatorCode}`,
+      name: `who-gho.IN.${item.id.split(".").pop()}`,
       artifact
     });
     manifest.push({

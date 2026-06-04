@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "work.real.wage_self_employed_person",
+  "title": "Real earnings — self-employed (2012 ₹)",
+  "sourceId": "derived",
+  "sourceIndicatorId": "real.wage_self_employed_person",
+  "sourceUrl": "https://www.indica.local/derived/real-wages",
+  "unit": "₹/month (2012 prices)",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-03T00:54:26.114Z",
+  "observations": [
+    {
+      "date": "2017-18",
+      "value": 8807
+    },
+    {
+      "date": "2018-19",
+      "value": 7339
+    },
+    {
+      "date": "2019-20",
+      "value": 7035
+    },
+    {
+      "date": "2020-21",
+      "value": 6711
+    },
+    {
+      "date": "2021-22",
+      "value": 7004
+    },
+    {
+      "date": "2022-23",
+      "value": 7430
+    },
+    {
+      "date": "2023-24",
+      "value": 7128
+    }
+  ],
+  "metadata": {
+    "derivation": "nominal deflated by MOSPI CPI (2012=100)",
+    "deflator": "CPI-Combined (survey-year mean)",
+    "nominalSource": "mospi.IN.plfs.wage_self_employed_person"
+  }
+}

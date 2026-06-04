@@ -14,6 +14,8 @@ Priority is based on usefulness, accessibility, provenance, and how quickly each
 | MoSPI / eSankhyiki | National accounts, CPI/IIP, surveys, official statistical products | https://www.mospi.gov.in/ and https://www.esankhyiki.mospi.gov.in/ | Treat as official but heterogeneous; expect table-specific parsing. |
 | data.gov.in APIs | Ministry and state datasets | https://data.gov.in/apis | Useful breadth, but quality varies by publisher; use after a source whitelist. |
 | Ember API | Electricity generation, demand, power-sector emissions, carbon intensity, capacity | https://api.ember-energy.org/v1/docs | Strong first energy source. Query India with `entity_code=IND`; auth uses `api_key`; data is CC BY 4.0. |
+| EIA International Energy Data | Energy production/consumption, fuel imports, electricity capacity, energy-related CO2 by fuel | https://www.eia.gov/opendata/browser/international | Good broad energy-system supplement to Ember. API requires `api_key`; bulk file is public. Query India with `countryRegionId=IND`. |
+| PPAC | Petroleum imports/exports, crude, products, gas, monthly petroleum reports | https://ppac.gov.in/import-export and https://ppac.gov.in/import-export/history | Official India petroleum source. Current import/export workbook is parseable; historical import/export workbook names are discoverable but direct automation is login/html wrapped until raw XLSX access is validated. |
 | WHO Global Health Observatory | Health indicators, mortality, life expectancy, disease/risk factors | https://www.who.int/data/gho/info/gho-odata-api | Clean OData API; India country filters work. |
 | UN Population Data Portal | Population, fertility, mortality, age/sex structure, projections | https://population.un.org/dataportalapi/index.html | Metadata public; data endpoints require bearer token. India protected data fetch works. |
 | OECD SDMX | International comparison context | https://www.oecd.org/en/data/insights/data-explainers/2024/09/api.html | Use targeted flows; broad discovery is rate-limited. Requires `Accept-Language: en` in this environment. |
@@ -24,10 +26,12 @@ Priority is based on usefulness, accessibility, provenance, and how quickly each
 | --- | --- | --- | --- |
 | OpenAQ v3 | PM2.5, PM10, NO2, O3 and other pollutant observations | https://docs.openaq.org/about/about | Prefer pollutant concentrations over opaque AQI for analysis. Requires attention to station coverage and licenses. |
 | WAQI / AQICN | AQI and station-level current/forecast air quality | https://aqicn.org/api/ | Useful for reader-facing AQI, but store provider and station metadata carefully. |
+| Open-Meteo Historical Weather API | City-level historical weather, temperature, rainfall, hot days/nights | https://open-meteo.com/en/docs/historical-weather-api | Good no-key historical archive for article-ready city climate pages. Use a single model such as ERA5 for long-run comparisons, cache snapshots, and attribute Open-Meteo. |
 | NASA POWER | Temperature, rainfall, solar and meteorological data | https://power.larc.nasa.gov/docs/services/api/temporal/daily/ | Good for heat and climate pages; supports JSON/CSV and daily/monthly requests. |
 | Copernicus Climate Data Store | ERA5, climate reanalysis, atmospheric data, heat/humidity inputs | https://cds.climate.copernicus.eu/how-to-api | Python `cdsapi` workflow. Requires manual dataset terms acceptance before API downloads. |
 | DHS / NFHS | Health, fertility, nutrition, household indicators | https://api.dhsprogram.com/ | API for indicators; microdata needs registration and careful survey weighting. |
 | UN World Population Prospects | Population projections, age structure, fertility, mortality | https://population.un.org/wpp/ | Good for population pages and comparisons. |
+| UN Comtrade | Energy-import partner origin: crude, coal, LNG, petroleum products | https://comtradeplus.un.org/ | API requires subscription key. Use HS-code registry and snapshot partner-level annual imports. |
 
 ## Tier 3: High Value but More Work
 
@@ -50,3 +54,11 @@ fetch -> raw snapshot -> normalized series -> chart catalog -> static page
 ```
 
 Once the system is proven, replace or supplement World Bank values with RBI/MoSPI/India Data Hub where they are the canonical Indian source. Use Census, NFHS, PLFS, HCES, and similar sources as page-backed or file-backed adapters rather than trying to pretend they are clean APIs.
+
+For government-source discovery, adapter planning, and validation, use [INDIA_GOV_DATA_INFRASTRUCTURE.md](./INDIA_GOV_DATA_INFRASTRUCTURE.md). For the "How connected is India?" article and related telecom/internet access charts, use [CONNECTED_INDIA_SOURCE_MAP.md](./CONNECTED_INDIA_SOURCE_MAP.md). It maps the DFI chart assets back to CAMS, MIS, TRAI/NDAP, WDI/ITU, NFHS, and older NSS rounds.
+
+## Evaluated and parked
+
+| Source | Status | Decision |
+| --- | --- | --- |
+| Google Data Commons (REST v2, `api.datacommons.org`) | Key works (`DATACOMMONS_API_KEY` in `.env`). Probed live 2026-06: India `Count_Person` latest **2024**, GDP latest **2024**, energy/capita **2023**; electricity-generation and internet statvars returned no India data (statvar-naming mismatch). | **Parked.** It is an aggregator that mirrors its upstream source's vintage (WDI/Census), so it does not reach 2025 and never beats IndiaDataHub (to 2026) / Ember (2025) / OWID for current India series. Its real value is the country→state→district hierarchy and breadth of variables in one API — revisit only for **sub-national / breadth** pages, where older vintages are acceptable. For fresh Indian sub-national data prefer NDAP / RBI DBIE directly. Do not re-evaluate for recency. |

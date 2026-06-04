@@ -23,7 +23,7 @@ scripts/
 data/
   snapshots/      Raw source responses with content hashes.
   series/         Normalized series and table artifacts.
-  catalog/        Per-source manifests.
+  catalog/        Per-source manifests, source inventory, and ingestion job registry.
   explanations/   DeepSeek-generated prose artifacts.
 docs/
   SCHEMAS.md      Contracts for artifacts, manifests, and explanations.
@@ -72,15 +72,40 @@ npm run env:check
 npm run ingest:worldbank
 npm run ingest:ember
 npm run ingest:who-gho
+npm run ingest:rbi-dbie-forex-reserves
+npm run ingest:rbi-dbie-macro-timeseries
+npm run derive:rbi-dbie-macro-series
 npm run ingest:owid
 npm run ingest:waqi
 npm run ingest:un-population
 npm run ingest:v1
+npm run jobs:list
+npm run ingest:production-no-secret
+npm run discover:no-secret
+npm run validate:pipeline
 npm run explain:v1:dry-run
 npm run explain:v1 -- --limit=2
 ```
 
 `ingest:v1` runs the core national V1 sources in sequence. It is intentionally conservative: no parallel source fetching until rate-limit behavior is better understood.
+
+`data/catalog/ingestion-jobs.json` is the operational cadence registry. It records job id, source id, cadence, command, expected writes, required environment variables, and whether a job's output can be used as article evidence. `scripts/run-ingestion-jobs.mjs` reads that registry and stops on the first failed job or missing expected output.
+
+The `production_no_secret` group is the default scheduled set. It excludes API-key feeds such as EIA, WAQI, IndiaDataHub, and Data Commons until those jobs have explicit secret handling and source-specific quality gates. Discovery jobs can refresh catalogs, but discovery output is not article evidence until a separate production ingest writes validated artifacts.
+
+GitHub Actions runs `.github/workflows/data-pipeline.yml` weekly and on manual dispatch. The workflow runs the selected job group, validates data, builds the site, and uploads generated data/build artifacts. It does not auto-commit generated data; review the diff before committing source changes or refreshed artifacts.
+
+## RBI DBIE
+
+RBI DBIE is handled through a dedicated adapter because its public site is an Angular SPA backed by gateway endpoints. Current production ingests:
+
+- `ingest:rbi-dbie-forex-reserves`: weekly foreign exchange reserves from `/dbie_foreignExchangeReserves`, including INR/USD totals and components. It rejects empty slices and reconciles total reserves against component sums.
+- `ingest:rbi-dbie-macro-timeseries`: official DBIE HDFS workbook downloads for `MacroeconomicIndicators` and `OtherMacroeconomicTimeseriesData`. It snapshots the raw XLSX bytes, parses into long table artifacts, rejects duplicate dataset/frequency/period/indicator keys, emits finite numeric observations only, and reconciles latest foreign currency assets against the forex reserves artifact when present.
+- `derive:rbi-dbie-macro-series`: curated named series derived from the long macro artifacts for article generation. It covers policy rates, call-money rates, market yields, bank credit, deposits, money supply, CPI/WPI/IIP, trade, FDI/FPI, digital payments, public finance, national accounts, and house prices. Each child series records its parent artifact hash and exact source label/frequency/unit selector.
+
+DBIE report discovery (`discover:rbi-dbie-reports`) is not article evidence by itself. It inventories report IDs and can resolve encrypted report links, but BusinessObjects viewer links are promoted only after a source-specific adapter can fetch a stable downloadable or JSON payload and validate table semantics.
+
+See `docs/RBI_DBIE_ADAPTER.md` for the evidence-ready jobs, validation gates, and expansion rule.
 
 ## Adding A Source
 

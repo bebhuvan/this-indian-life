@@ -10,7 +10,9 @@ function sanitizeText(text) {
     .replace(/\bdelve\b/gi, "examine")
     .replace(/\btapestry\b/gi, "pattern")
     .replace(/\bcomplex interplay\b/gi, "relationship")
-    .replace(/\bin conclusion\b/gi, "overall");
+    .replace(/\bin conclusion\b/gi, "overall")
+    // Em-dash is a strong AI tell; replace with a comma. (En-dash in age ranges stays.)
+    .replace(/\s*—\s*/g, ", ");
 }
 
 function sanitizeDocument(value) {

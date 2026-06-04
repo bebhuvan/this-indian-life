@@ -3,108 +3,750 @@
   "questionId": "q.energy.mix",
   "question": "How does India generate electricity?",
   "priority": "core",
+  "theme": {
+    "id": "energy",
+    "label": "Energy and electricity",
+    "readerQuestions": [
+      "How much energy or electricity is being used?",
+      "What is the fuel mix?",
+      "Is access different from reliability or consumption?",
+      "Is the system getting cleaner as demand grows?"
+    ],
+    "glossaryTerms": [
+      "TWh",
+      "kWh per capita",
+      "electricity access",
+      "carbon intensity",
+      "generation mix"
+    ]
+  },
   "requiredIndicatorIds": [
     "energy.ember.generation"
   ],
   "availableIndicatorIds": [
     "energy.ember.generation"
   ],
+  "themeIndicatorIds": [
+    "energy.ember.generation",
+    "energy.eia.electricity_capacity_total",
+    "energy.eia.electricity_capacity_fossil",
+    "energy.eia.electricity_capacity_renewable",
+    "energy.eia.electricity_capacity_solar",
+    "energy.eia.electricity_capacity_wind",
+    "energy.owid.renewable_share_elec",
+    "energy.ember.carbon_intensity",
+    "energy.ember.demand"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.energy.ember.generation",
+      "indicatorId": "energy.ember.generation",
+      "title": "Electricity generation by source",
+      "sourceId": "ember",
+      "unit": "TWh",
+      "role": "primary",
+      "recommendedVisualization": "stacked mix bar plus selected source trends",
+      "mobileGuidance": "Use a stacked bar for the latest mix and avoid too many fuel lines on mobile.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.energy.eia.electricity_capacity_total",
+      "indicatorId": "energy.eia.electricity_capacity_total",
+      "title": "Electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v3.energy.eia.electricity_capacity_fossil",
+      "indicatorId": "energy.eia.electricity_capacity_fossil",
+      "title": "Fossil fuels electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v4.energy.eia.electricity_capacity_renewable",
+      "indicatorId": "energy.eia.electricity_capacity_renewable",
+      "title": "Renewable electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.energy.eia.electricity_capacity_solar",
+      "indicatorId": "energy.eia.electricity_capacity_solar",
+      "title": "Solar electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.energy.eia.electricity_capacity_wind",
+      "indicatorId": "energy.eia.electricity_capacity_wind",
+      "title": "Wind electricity installed capacity",
+      "sourceId": "eia",
+      "unit": "million kilowatts",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.energy.owid.renewable_share_elec",
+      "indicatorId": "energy.owid.renewable_share_elec",
+      "title": "Renewables' share of electricity",
+      "sourceId": "owid",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.energy.ember.carbon_intensity",
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "unit": "gCO2/kWh",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.energy.ember.demand",
+      "indicatorId": "energy.ember.demand",
+      "title": "Electricity demand",
+      "sourceId": "ember",
+      "unit": "TWh",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "where-india-s-electricity-came-from-last-year",
+      "title": "Where India's electricity came from last year",
+      "chartType": "stack",
+      "beat": "answer",
+      "window": "latest",
+      "indicator": "energy.ember.generation",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The direct answer: the split of actual generation by source in the latest year."
+    },
+    {
+      "order": 2,
+      "chartId": "coal-clean-power-and-gas-over-time",
+      "title": "Coal, clean power and gas over time",
+      "chartType": "emberLines",
+      "beat": "composition-over-time",
+      "window": "",
+      "indicator": "energy.ember.generation",
+      "series": [
+        {
+          "indicator": "Coal",
+          "label": "Coal"
+        },
+        {
+          "indicator": "Clean",
+          "label": "Clean sources"
+        },
+        {
+          "indicator": "Gas",
+          "label": "Gas"
+        }
+      ],
+      "unit": "TWh",
+      "subtitle": "",
+      "whyThisChart": "How the actual generation mix has moved: coal still does most of the work while clean sources climb."
+    },
+    {
+      "order": 3,
+      "chartId": "what-india-has-built-installed-capacity-by-source",
+      "title": "What India has built: installed capacity by source",
+      "chartType": "multiLine",
+      "beat": "buildout",
+      "window": "",
+      "indicator": "energy.eia.electricity_capacity_total",
+      "series": [
+        {
+          "indicator": "energy.eia.electricity_capacity_fossil",
+          "label": "Fossil"
+        },
+        {
+          "indicator": "energy.eia.electricity_capacity_renewable",
+          "label": "Renewable"
+        },
+        {
+          "indicator": "energy.eia.electricity_capacity_solar",
+          "label": "Solar"
+        },
+        {
+          "indicator": "energy.eia.electricity_capacity_wind",
+          "label": "Wind"
+        }
+      ],
+      "unit": "GW (million kW)",
+      "subtitle": "",
+      "whyThisChart": "The installed base tells a faster-moving story than generation: renewable capacity has been added at speed."
+    },
+    {
+      "order": 4,
+      "chartId": "renewables-share-of-generation",
+      "title": "Renewables' share of generation",
+      "chartType": "line",
+      "beat": "trend",
+      "window": "full",
+      "indicator": "energy.owid.renewable_share_elec",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The single line for how green the grid's output is becoming."
+    },
+    {
+      "order": 5,
+      "chartId": "the-grid-is-getting-cleaner-per-unit",
+      "title": "The grid is getting cleaner per unit",
+      "chartType": "line",
+      "beat": "direction",
+      "window": "full",
+      "indicator": "energy.ember.carbon_intensity",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Progress per kilowatt-hour, even as total demand keeps rising."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 23.04,
+      "displayValue": "23.04",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 1.11,
+      "displayValue": "1.11",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Clean): generation_twh",
+      "value": 554.81,
+      "displayValue": "554.81",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Clean): share_of_generation_pct",
+      "value": 26.65,
+      "displayValue": "26.65",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Coal): generation_twh",
+      "value": 1474.15,
+      "displayValue": "1,474.15",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Coal): share_of_generation_pct",
+      "value": 70.82,
+      "displayValue": "70.82",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Demand): generation_twh",
+      "value": 2082.82,
+      "displayValue": "2,082.82",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Demand): share_of_generation_pct",
+      "value": 100.06,
+      "displayValue": "100.06",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Fossil): generation_twh",
+      "value": 1526.79,
+      "displayValue": "1,526.79",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Fossil): share_of_generation_pct",
+      "value": 73.35,
+      "displayValue": "73.35",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 1.69,
+      "displayValue": "1.69",
+      "date": "2000",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 0.3,
+      "displayValue": "0.3",
+      "date": "2000",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity installed capacity, latest",
+      "value": 531.4596,
+      "displayValue": "531.46",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_total",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity installed capacity, earliest",
+      "value": 34.379,
+      "displayValue": "34.38",
+      "date": "1980",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_total",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Fossil fuels electricity installed capacity, latest",
+      "value": 315.017,
+      "displayValue": "315.02",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_fossil",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Fossil fuels electricity installed capacity, earliest",
+      "value": 20.662,
+      "displayValue": "20.66",
+      "date": "1980",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_fossil",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Renewable electricity installed capacity, latest",
+      "value": 204.107,
+      "displayValue": "204.11",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_renewable",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Renewable electricity installed capacity, earliest",
+      "value": 12.173,
+      "displayValue": "12.17",
+      "date": "1980",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_renewable",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Solar electricity installed capacity, latest",
+      "value": 97.384,
+      "displayValue": "97.38",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_solar",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Solar electricity installed capacity, earliest",
+      "value": 0.0011,
+      "displayValue": "0",
+      "date": "2000",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_solar",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Wind electricity installed capacity, latest",
+      "value": 48.163,
+      "displayValue": "48.16",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_wind",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Wind electricity installed capacity, earliest",
+      "value": 0.941,
+      "displayValue": "0.94",
+      "date": "2000",
+      "unit": "million kilowatts",
+      "indicatorId": "energy.eia.electricity_capacity_wind",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Renewables' share of electricity: Renewables",
+      "value": 24.067062,
+      "displayValue": "24.1%",
+      "date": "2025",
+      "unit": "%",
+      "indicatorId": "energy.owid.renewable_share_elec",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Renewables' share of electricity: Renewables",
+      "value": 27.798811,
+      "displayValue": "27.8%",
+      "date": "1985",
+      "unit": "%",
+      "indicatorId": "energy.owid.renewable_share_elec",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
   "lockedNumbers": [
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
       "value": 23.04,
+      "displayValue": "23.04",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
       "value": 1.11,
+      "displayValue": "1.11",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Clean): generation_twh",
       "value": 554.81,
+      "displayValue": "554.81",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Clean): share_of_generation_pct",
       "value": 26.65,
+      "displayValue": "26.65",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Coal): generation_twh",
       "value": 1474.15,
+      "displayValue": "1,474.15",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Coal): share_of_generation_pct",
       "value": 70.82,
+      "displayValue": "70.82",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Demand): generation_twh",
       "value": 2082.82,
+      "displayValue": "2,082.82",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Demand): share_of_generation_pct",
       "value": 100.06,
+      "displayValue": "100.06",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Fossil): generation_twh",
       "value": 1526.79,
+      "displayValue": "1,526.79",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Fossil): share_of_generation_pct",
       "value": 73.35,
+      "displayValue": "73.35",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
       "value": 1.69,
+      "displayValue": "1.69",
       "date": "2000",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
       "value": 0.3,
+      "displayValue": "0.3",
       "date": "2000",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Electricity installed capacity, latest",
+      "value": 531.4596,
+      "displayValue": "531.46",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_total"
+    },
+    {
+      "label": "Electricity installed capacity, earliest",
+      "value": 34.379,
+      "displayValue": "34.38",
+      "date": "1980",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_total"
+    },
+    {
+      "label": "Fossil fuels electricity installed capacity, latest",
+      "value": 315.017,
+      "displayValue": "315.02",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_fossil"
+    },
+    {
+      "label": "Fossil fuels electricity installed capacity, earliest",
+      "value": 20.662,
+      "displayValue": "20.66",
+      "date": "1980",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_fossil"
+    },
+    {
+      "label": "Renewable electricity installed capacity, latest",
+      "value": 204.107,
+      "displayValue": "204.11",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_renewable"
+    },
+    {
+      "label": "Renewable electricity installed capacity, earliest",
+      "value": 12.173,
+      "displayValue": "12.17",
+      "date": "1980",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_renewable"
+    },
+    {
+      "label": "Solar electricity installed capacity, latest",
+      "value": 97.384,
+      "displayValue": "97.38",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_solar"
+    },
+    {
+      "label": "Solar electricity installed capacity, earliest",
+      "value": 0.0011,
+      "displayValue": "0",
+      "date": "2000",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_solar"
+    },
+    {
+      "label": "Wind electricity installed capacity, latest",
+      "value": 48.163,
+      "displayValue": "48.16",
+      "date": "2024",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_wind"
+    },
+    {
+      "label": "Wind electricity installed capacity, earliest",
+      "value": 0.941,
+      "displayValue": "0.94",
+      "date": "2000",
+      "unit": "million kilowatts",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.electricity_capacity_wind"
+    },
+    {
+      "label": "Renewables' share of electricity: Renewables",
+      "value": 24.067062,
+      "displayValue": "24.1%",
+      "date": "2025",
+      "unit": "%",
+      "sourceId": "owid",
+      "indicatorId": "energy.owid.renewable_share_elec"
+    },
+    {
+      "label": "Renewables' share of electricity: Renewables",
+      "value": 27.798811,
+      "displayValue": "27.8%",
+      "date": "1985",
+      "unit": "%",
+      "sourceId": "owid",
+      "indicatorId": "energy.owid.renewable_share_elec"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 670.13,
+      "displayValue": "670.13",
+      "date": "2025",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 740.04,
+      "displayValue": "740.04",
+      "date": "2000",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
+    },
+    {
+      "label": "Electricity demand: demand_twh",
+      "value": 2082.82,
+      "displayValue": "2,082.82",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
+    },
+    {
+      "label": "Electricity demand: demand_mwh_per_capita",
+      "value": 1.42,
+      "displayValue": "1.42",
+      "date": "2025",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
+    },
+    {
+      "label": "Electricity demand: demand_twh",
+      "value": 572.69,
+      "displayValue": "572.69",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
+    },
+    {
+      "label": "Electricity demand: demand_mwh_per_capita",
+      "value": 0.54,
+      "displayValue": "0.54",
+      "date": "2000",
+      "unit": "TWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.demand"
     }
   ],
   "sourceSummaries": [
@@ -232,10 +874,404 @@
           "share_of_generation_pct": 2.59
         }
       ]
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_total",
+      "title": "Electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "2-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 34.379
+      },
+      "latest": {
+        "date": "2024",
+        "value": 531.4596
+      }
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_fossil",
+      "title": "Fossil fuels electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "28-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 20.662
+      },
+      "latest": {
+        "date": "2024",
+        "value": 315.017
+      }
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_renewable",
+      "title": "Renewable electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "29-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 12.173
+      },
+      "latest": {
+        "date": "2024",
+        "value": 204.107
+      }
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_solar",
+      "title": "Solar electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "116-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "2000",
+        "value": 0.0011
+      },
+      "latest": {
+        "date": "2024",
+        "value": 97.384
+      }
+    },
+    {
+      "indicatorId": "energy.eia.electricity_capacity_wind",
+      "title": "Wind electricity installed capacity",
+      "sourceId": "eia",
+      "sourceIndicatorId": "37-7-IND-MK.annual",
+      "unit": "million kilowatts",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "2000",
+        "value": 0.941
+      },
+      "latest": {
+        "date": "2024",
+        "value": 48.163
+      }
+    },
+    {
+      "indicatorId": "energy.owid.renewable_share_elec",
+      "title": "Renewables' share of electricity",
+      "sourceId": "owid",
+      "sourceIndicatorId": "share-of-electricity-production-from-renewable-sources",
+      "unit": "%",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 41,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Renewables"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2025",
+          "Renewables": "24.067062"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2024",
+          "Renewables": "19.80781"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2023",
+          "Renewables": "19.286749"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Renewables": "20.189959"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2021",
+          "Renewables": "18.791103"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Renewables": "19.006927"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Renewables": "17.61671"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Renewables": "16.293703"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Renewables": "15.451419"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Renewables": "14.438"
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "sourceIndicatorId": "carbon-intensity/yearly",
+      "unit": "gCO2/kWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 26,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "emissions_intensity_gco2_per_kwh"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "emissions_intensity_gco2_per_kwh": 670.13
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2024",
+          "emissions_intensity_gco2_per_kwh": 705.4
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2023",
+          "emissions_intensity_gco2_per_kwh": 713.36
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2022",
+          "emissions_intensity_gco2_per_kwh": 705.75
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2021",
+          "emissions_intensity_gco2_per_kwh": 715.34
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2020",
+          "emissions_intensity_gco2_per_kwh": 709.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2019",
+          "emissions_intensity_gco2_per_kwh": 722.66
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2018",
+          "emissions_intensity_gco2_per_kwh": 737.72
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2017",
+          "emissions_intensity_gco2_per_kwh": 743.09
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2016",
+          "emissions_intensity_gco2_per_kwh": 751.87
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ember.demand",
+      "title": "Electricity demand",
+      "sourceId": "ember",
+      "sourceIndicatorId": "electricity-demand/yearly",
+      "unit": "TWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 26,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "demand_twh",
+        "demand_mwh_per_capita"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "demand_twh": 2082.82,
+          "demand_mwh_per_capita": 1.42
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2024",
+          "demand_twh": 2034.22,
+          "demand_mwh_per_capita": 1.4
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2023",
+          "demand_twh": 1916.2,
+          "demand_mwh_per_capita": 1.33
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2022",
+          "demand_twh": 1802.88,
+          "demand_mwh_per_capita": 1.27
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2021",
+          "demand_twh": 1678.69,
+          "demand_mwh_per_capita": 1.19
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2020",
+          "demand_twh": 1563.32,
+          "demand_mwh_per_capita": 1.12
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2019",
+          "demand_twh": 1597.84,
+          "demand_mwh_per_capita": 1.15
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2018",
+          "demand_twh": 1567.81,
+          "demand_mwh_per_capita": 1.14
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2017",
+          "demand_twh": 1460.8,
+          "demand_mwh_per_capita": 1.07
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2016",
+          "demand_twh": 1393.84,
+          "demand_mwh_per_capita": 1.04
+        }
+      ]
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

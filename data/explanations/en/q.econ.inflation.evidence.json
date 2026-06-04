@@ -1,0 +1,5656 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.inflation",
+  "question": "Why does everything keep getting more expensive?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "prices.cpi.combined.purchasing_power",
+    "prices.cpi.headline_annual_long",
+    "prices.cpi.combined.general.inflation"
+  ],
+  "availableIndicatorIds": [
+    "prices.cpi.combined.purchasing_power",
+    "prices.cpi.headline_annual_long",
+    "prices.cpi.combined.general.inflation"
+  ],
+  "themeIndicatorIds": [
+    "prices.cpi.combined.purchasing_power",
+    "prices.cpi.headline_annual_long",
+    "prices.cpi.combined.general.inflation",
+    "prices.cpi.combined.general.index",
+    "econ.inflation_cpi",
+    "prices.cpi.price_multiple_since_1960",
+    "prices.cpi.purchasing_power_1960",
+    "prices.cpi.decade_avg_inflation",
+    "prices.cpi.price_level_since_1960",
+    "compare.cpi_inflation.in",
+    "compare.cpi_inflation.us",
+    "compare.cpi_inflation.chn",
+    "compare.cpi_inflation.bra",
+    "prices.wpi.all_commodities.inflation",
+    "prices.wpi.primary_articles.inflation",
+    "prices.wpi.fuel_power.inflation",
+    "prices.wpi.manufactured.inflation",
+    "prices.cpi.weight.food_beverages",
+    "prices.cpi.weight.miscellaneous",
+    "prices.cpi.weight.housing",
+    "prices.cpi.weight.fuel_light",
+    "prices.cpi.weight.clothing_footwear",
+    "prices.cpi.weight.pan_tobacco_intoxicants",
+    "prices.cpi.contribution.food_beverages",
+    "prices.cpi.contribution.miscellaneous",
+    "prices.cpi.contribution.housing",
+    "prices.cpi.contribution.fuel_light",
+    "prices.cpi.contribution.clothing_footwear",
+    "prices.cpi.contribution.pan_tobacco_intoxicants",
+    "prices.cpi.combined.food_beverages.inflation",
+    "prices.cpi.combined.fuel_light.inflation",
+    "prices.cpi.combined.housing.inflation",
+    "prices.cpi.combined.clothing_footwear.inflation",
+    "prices.cpi.combined.health.inflation",
+    "prices.cpi.combined.education.inflation",
+    "prices.cpi.combined.transport_communication.inflation",
+    "prices.cpi.combined.miscellaneous.inflation",
+    "prices.cpi.combined.pan_tobacco_intoxicants.inflation",
+    "prices.cpi.combined.personal_care_effects.inflation",
+    "prices.cpi.combined.recreation_amusement.inflation",
+    "prices.cpi.combined.household_goods_services.inflation",
+    "prices.cpi.combined.food_beverages.index",
+    "prices.cpi.combined.fuel_light.index",
+    "prices.cpi.combined.housing.index",
+    "prices.cpi.combined.clothing_footwear.index",
+    "prices.cpi.combined.health.index",
+    "prices.cpi.combined.education.index",
+    "prices.cpi.combined.transport_communication.index",
+    "prices.cpi.combined.miscellaneous.index",
+    "prices.cpi.combined.pan_tobacco_intoxicants.index",
+    "prices.cpi.combined.consumer_food_price.inflation",
+    "prices.cpi.combined.cereals_products.index",
+    "prices.cpi.combined.vegetables.index",
+    "prices.cpi.combined.pulses_products.index",
+    "prices.cpi.combined.oils_fats.index",
+    "prices.cpi.combined.milk_products.index",
+    "prices.cpi.combined.vegetables.inflation",
+    "prices.cpi.combined.pulses_products.inflation",
+    "prices.cpi.combined.oils_fats.inflation",
+    "prices.cpi.item.onion.index",
+    "prices.cpi.item.tomato.index",
+    "prices.cpi.item.potato.index",
+    "prices.cpi.item.onion.inflation",
+    "prices.cpi.item.tomato.inflation",
+    "prices.cpi.item.potato.inflation",
+    "prices.cpi.item.rice.inflation",
+    "prices.cpi.item.wheat_atta.inflation",
+    "prices.cpi.item.milk.inflation",
+    "prices.cpi.item.eggs.inflation",
+    "prices.cpi.item.pulses.inflation",
+    "prices.cpi.item.mustard_oil.inflation",
+    "prices.cpi.item.sugar.inflation",
+    "prices.cpi.item.tuition_fees.index",
+    "prices.cpi.item.doctor_fee.index",
+    "prices.cpi.item.medicine.index",
+    "prices.cpi.item.petrol.index",
+    "prices.cpi.item.diesel.index",
+    "prices.cpi.item.lpg.index",
+    "prices.cpi.item.electricity.index",
+    "prices.cpi.item.gold.index",
+    "prices.cpi.item.gold.inflation",
+    "prices.cpi.item.lpg.inflation",
+    "prices.cpi.real_fd_return",
+    "prices.deposit_rate_term",
+    "monetary.rbi.policy_repo_rate_weekly",
+    "prices.cpi.rural.general.inflation",
+    "prices.cpi.urban.general.inflation",
+    "prices.cpi.rural.food_beverages.inflation",
+    "prices.cpi.urban.food_beverages.inflation"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.prices.cpi.combined.purchasing_power",
+      "indicatorId": "prices.cpi.combined.purchasing_power",
+      "title": "What ₹100 from 2012 buys today",
+      "sourceId": "mospi",
+      "unit": "₹ (2012 rupees)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.prices.cpi.headline_annual_long",
+      "indicatorId": "prices.cpi.headline_annual_long",
+      "title": "India's consumer price inflation, 1960 to today",
+      "sourceId": "worldbank",
+      "unit": "% per year",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.prices.cpi.combined.general.inflation",
+      "indicatorId": "prices.cpi.combined.general.inflation",
+      "title": "CPI inflation — General (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.prices.cpi.combined.general.index",
+      "indicatorId": "prices.cpi.combined.general.index",
+      "title": "CPI index — General (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.econ.inflation_cpi",
+      "indicatorId": "econ.inflation_cpi",
+      "title": "Inflation, consumer prices",
+      "sourceId": "worldbank",
+      "unit": "annual %",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.prices.cpi.price_multiple_since_1960",
+      "indicatorId": "prices.cpi.price_multiple_since_1960",
+      "title": "How many times prices have risen since 1960",
+      "sourceId": "worldbank",
+      "unit": "× (1960=1)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.prices.cpi.purchasing_power_1960",
+      "indicatorId": "prices.cpi.purchasing_power_1960",
+      "title": "What ₹100 from 1960 buys today",
+      "sourceId": "worldbank",
+      "unit": "₹ (1960 rupees)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.prices.cpi.decade_avg_inflation",
+      "indicatorId": "prices.cpi.decade_avg_inflation",
+      "title": "Average inflation by decade",
+      "sourceId": "worldbank",
+      "unit": "% per year",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.prices.cpi.price_level_since_1960",
+      "indicatorId": "prices.cpi.price_level_since_1960",
+      "title": "India price level since 1960",
+      "sourceId": "worldbank",
+      "unit": "index (1960=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.compare.cpi_inflation.in",
+      "indicatorId": "compare.cpi_inflation.in",
+      "title": "CPI inflation — IND",
+      "sourceId": "world-context",
+      "unit": "% per year",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.compare.cpi_inflation.us",
+      "indicatorId": "compare.cpi_inflation.us",
+      "title": "CPI inflation — USA",
+      "sourceId": "world-context",
+      "unit": "% per year",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.compare.cpi_inflation.chn",
+      "indicatorId": "compare.cpi_inflation.chn",
+      "title": "CPI inflation — CHN",
+      "sourceId": "world-context",
+      "unit": "% per year",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.compare.cpi_inflation.bra",
+      "indicatorId": "compare.cpi_inflation.bra",
+      "title": "CPI inflation — BRA",
+      "sourceId": "world-context",
+      "unit": "% per year",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.prices.wpi.all_commodities.inflation",
+      "indicatorId": "prices.wpi.all_commodities.inflation",
+      "title": "WPI — all commodities (inflation)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.prices.wpi.primary_articles.inflation",
+      "indicatorId": "prices.wpi.primary_articles.inflation",
+      "title": "WPI — primary articles (inflation)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.prices.wpi.fuel_power.inflation",
+      "indicatorId": "prices.wpi.fuel_power.inflation",
+      "title": "WPI — fuel & power (inflation)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.prices.wpi.manufactured.inflation",
+      "indicatorId": "prices.wpi.manufactured.inflation",
+      "title": "WPI — manufactured products (inflation)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.prices.cpi.weight.food_beverages",
+      "indicatorId": "prices.cpi.weight.food_beverages",
+      "title": "CPI basket weight — Food & beverages",
+      "sourceId": "mospi",
+      "unit": "% of basket",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.prices.cpi.weight.miscellaneous",
+      "indicatorId": "prices.cpi.weight.miscellaneous",
+      "title": "CPI basket weight — Miscellaneous",
+      "sourceId": "mospi",
+      "unit": "% of basket",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.prices.cpi.weight.housing",
+      "indicatorId": "prices.cpi.weight.housing",
+      "title": "CPI basket weight — Housing",
+      "sourceId": "mospi",
+      "unit": "% of basket",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v21.prices.cpi.weight.fuel_light",
+      "indicatorId": "prices.cpi.weight.fuel_light",
+      "title": "CPI basket weight — Fuel & light",
+      "sourceId": "mospi",
+      "unit": "% of basket",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v22.prices.cpi.weight.clothing_footwear",
+      "indicatorId": "prices.cpi.weight.clothing_footwear",
+      "title": "CPI basket weight — Clothing & footwear",
+      "sourceId": "mospi",
+      "unit": "% of basket",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v23.prices.cpi.weight.pan_tobacco_intoxicants",
+      "indicatorId": "prices.cpi.weight.pan_tobacco_intoxicants",
+      "title": "CPI basket weight — Pan, tobacco, intoxicants",
+      "sourceId": "mospi",
+      "unit": "% of basket",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v24.prices.cpi.contribution.food_beverages",
+      "indicatorId": "prices.cpi.contribution.food_beverages",
+      "title": "Contribution to CPI inflation — Food & beverages",
+      "sourceId": "mospi",
+      "unit": "percentage points",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v25.prices.cpi.contribution.miscellaneous",
+      "indicatorId": "prices.cpi.contribution.miscellaneous",
+      "title": "Contribution to CPI inflation — Miscellaneous",
+      "sourceId": "mospi",
+      "unit": "percentage points",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v26.prices.cpi.contribution.housing",
+      "indicatorId": "prices.cpi.contribution.housing",
+      "title": "Contribution to CPI inflation — Housing",
+      "sourceId": "mospi",
+      "unit": "percentage points",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v27.prices.cpi.contribution.fuel_light",
+      "indicatorId": "prices.cpi.contribution.fuel_light",
+      "title": "Contribution to CPI inflation — Fuel & light",
+      "sourceId": "mospi",
+      "unit": "percentage points",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v28.prices.cpi.contribution.clothing_footwear",
+      "indicatorId": "prices.cpi.contribution.clothing_footwear",
+      "title": "Contribution to CPI inflation — Clothing & footwear",
+      "sourceId": "mospi",
+      "unit": "percentage points",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v29.prices.cpi.contribution.pan_tobacco_intoxicants",
+      "indicatorId": "prices.cpi.contribution.pan_tobacco_intoxicants",
+      "title": "Contribution to CPI inflation — Pan, tobacco, intoxicants",
+      "sourceId": "mospi",
+      "unit": "percentage points",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v30.prices.cpi.combined.food_beverages.inflation",
+      "indicatorId": "prices.cpi.combined.food_beverages.inflation",
+      "title": "CPI inflation — Food and Beverages (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v31.prices.cpi.combined.fuel_light.inflation",
+      "indicatorId": "prices.cpi.combined.fuel_light.inflation",
+      "title": "CPI inflation — Fuel and Light (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v32.prices.cpi.combined.housing.inflation",
+      "indicatorId": "prices.cpi.combined.housing.inflation",
+      "title": "CPI inflation — Housing (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v33.prices.cpi.combined.clothing_footwear.inflation",
+      "indicatorId": "prices.cpi.combined.clothing_footwear.inflation",
+      "title": "CPI inflation — Clothing and Footwear (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v34.prices.cpi.combined.health.inflation",
+      "indicatorId": "prices.cpi.combined.health.inflation",
+      "title": "CPI inflation — Miscellaneous: Health (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v35.prices.cpi.combined.education.inflation",
+      "indicatorId": "prices.cpi.combined.education.inflation",
+      "title": "CPI inflation — Miscellaneous: Education (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v36.prices.cpi.combined.transport_communication.inflation",
+      "indicatorId": "prices.cpi.combined.transport_communication.inflation",
+      "title": "CPI inflation — Miscellaneous: Transport and Communication (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v37.prices.cpi.combined.miscellaneous.inflation",
+      "indicatorId": "prices.cpi.combined.miscellaneous.inflation",
+      "title": "CPI inflation — Miscellaneous (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v38.prices.cpi.combined.pan_tobacco_intoxicants.inflation",
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.inflation",
+      "title": "CPI inflation — Pan, Tobacco and Intoxicants (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v39.prices.cpi.combined.personal_care_effects.inflation",
+      "indicatorId": "prices.cpi.combined.personal_care_effects.inflation",
+      "title": "CPI inflation — Miscellaneous: Personal Care and Effects (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v40.prices.cpi.combined.recreation_amusement.inflation",
+      "indicatorId": "prices.cpi.combined.recreation_amusement.inflation",
+      "title": "CPI inflation — Miscellaneous: Recreation and Amusement (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v41.prices.cpi.combined.household_goods_services.inflation",
+      "indicatorId": "prices.cpi.combined.household_goods_services.inflation",
+      "title": "CPI inflation — Miscellaneous: Household Goods and Services (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v42.prices.cpi.combined.food_beverages.index",
+      "indicatorId": "prices.cpi.combined.food_beverages.index",
+      "title": "CPI index — Food and Beverages (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v43.prices.cpi.combined.fuel_light.index",
+      "indicatorId": "prices.cpi.combined.fuel_light.index",
+      "title": "CPI index — Fuel and Light (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v44.prices.cpi.combined.housing.index",
+      "indicatorId": "prices.cpi.combined.housing.index",
+      "title": "CPI index — Housing (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v45.prices.cpi.combined.clothing_footwear.index",
+      "indicatorId": "prices.cpi.combined.clothing_footwear.index",
+      "title": "CPI index — Clothing and Footwear (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v46.prices.cpi.combined.health.index",
+      "indicatorId": "prices.cpi.combined.health.index",
+      "title": "CPI index — Miscellaneous: Health (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v47.prices.cpi.combined.education.index",
+      "indicatorId": "prices.cpi.combined.education.index",
+      "title": "CPI index — Miscellaneous: Education (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v48.prices.cpi.combined.transport_communication.index",
+      "indicatorId": "prices.cpi.combined.transport_communication.index",
+      "title": "CPI index — Miscellaneous: Transport and Communication (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v49.prices.cpi.combined.miscellaneous.index",
+      "indicatorId": "prices.cpi.combined.miscellaneous.index",
+      "title": "CPI index — Miscellaneous (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v50.prices.cpi.combined.pan_tobacco_intoxicants.index",
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.index",
+      "title": "CPI index — Pan, Tobacco and Intoxicants (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v51.prices.cpi.combined.consumer_food_price.inflation",
+      "indicatorId": "prices.cpi.combined.consumer_food_price.inflation",
+      "title": "CPI inflation — Consumer Food Price (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v52.prices.cpi.combined.cereals_products.index",
+      "indicatorId": "prices.cpi.combined.cereals_products.index",
+      "title": "CPI index — Food and Beverages: Cereals and Products (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v53.prices.cpi.combined.vegetables.index",
+      "indicatorId": "prices.cpi.combined.vegetables.index",
+      "title": "CPI index — Food and Beverages: Vegetables (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v54.prices.cpi.combined.pulses_products.index",
+      "indicatorId": "prices.cpi.combined.pulses_products.index",
+      "title": "CPI index — Food and Beverages: Pulses and Products (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v55.prices.cpi.combined.oils_fats.index",
+      "indicatorId": "prices.cpi.combined.oils_fats.index",
+      "title": "CPI index — Food and Beverages: Oils and Fats (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v56.prices.cpi.combined.milk_products.index",
+      "indicatorId": "prices.cpi.combined.milk_products.index",
+      "title": "CPI index — Food and Beverages: Milk and Products (Combined)",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v57.prices.cpi.combined.vegetables.inflation",
+      "indicatorId": "prices.cpi.combined.vegetables.inflation",
+      "title": "CPI inflation — Food and Beverages: Vegetables (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v58.prices.cpi.combined.pulses_products.inflation",
+      "indicatorId": "prices.cpi.combined.pulses_products.inflation",
+      "title": "CPI inflation — Food and Beverages: Pulses and Products (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v59.prices.cpi.combined.oils_fats.inflation",
+      "indicatorId": "prices.cpi.combined.oils_fats.inflation",
+      "title": "CPI inflation — Food and Beverages: Oils and Fats (Combined)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v60.prices.cpi.item.onion.index",
+      "indicatorId": "prices.cpi.item.onion.index",
+      "title": "Price index — Onion",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v61.prices.cpi.item.tomato.index",
+      "indicatorId": "prices.cpi.item.tomato.index",
+      "title": "Price index — Tomato",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v62.prices.cpi.item.potato.index",
+      "indicatorId": "prices.cpi.item.potato.index",
+      "title": "Price index — Potato",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v63.prices.cpi.item.onion.inflation",
+      "indicatorId": "prices.cpi.item.onion.inflation",
+      "title": "Price inflation — Onion",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v64.prices.cpi.item.tomato.inflation",
+      "indicatorId": "prices.cpi.item.tomato.inflation",
+      "title": "Price inflation — Tomato",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v65.prices.cpi.item.potato.inflation",
+      "indicatorId": "prices.cpi.item.potato.inflation",
+      "title": "Price inflation — Potato",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v66.prices.cpi.item.rice.inflation",
+      "indicatorId": "prices.cpi.item.rice.inflation",
+      "title": "Price inflation — Rice (market)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v67.prices.cpi.item.wheat_atta.inflation",
+      "indicatorId": "prices.cpi.item.wheat_atta.inflation",
+      "title": "Price inflation — Wheat / atta",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v68.prices.cpi.item.milk.inflation",
+      "indicatorId": "prices.cpi.item.milk.inflation",
+      "title": "Price inflation — Milk",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v69.prices.cpi.item.eggs.inflation",
+      "indicatorId": "prices.cpi.item.eggs.inflation",
+      "title": "Price inflation — Eggs",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v70.prices.cpi.item.pulses.inflation",
+      "indicatorId": "prices.cpi.item.pulses.inflation",
+      "title": "Price inflation — Pulses",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v71.prices.cpi.item.mustard_oil.inflation",
+      "indicatorId": "prices.cpi.item.mustard_oil.inflation",
+      "title": "Price inflation — Mustard oil",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v72.prices.cpi.item.sugar.inflation",
+      "indicatorId": "prices.cpi.item.sugar.inflation",
+      "title": "Price inflation — Sugar",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v73.prices.cpi.item.tuition_fees.index",
+      "indicatorId": "prices.cpi.item.tuition_fees.index",
+      "title": "Price index — Tuition fees",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v74.prices.cpi.item.doctor_fee.index",
+      "indicatorId": "prices.cpi.item.doctor_fee.index",
+      "title": "Price index — Doctor's fee",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v75.prices.cpi.item.medicine.index",
+      "indicatorId": "prices.cpi.item.medicine.index",
+      "title": "Price index — Medicine",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v76.prices.cpi.item.petrol.index",
+      "indicatorId": "prices.cpi.item.petrol.index",
+      "title": "Price index — Petrol",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v77.prices.cpi.item.diesel.index",
+      "indicatorId": "prices.cpi.item.diesel.index",
+      "title": "Price index — Diesel",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v78.prices.cpi.item.lpg.index",
+      "indicatorId": "prices.cpi.item.lpg.index",
+      "title": "Price index — LPG cylinder",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v79.prices.cpi.item.electricity.index",
+      "indicatorId": "prices.cpi.item.electricity.index",
+      "title": "Price index — Electricity",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v80.prices.cpi.item.gold.index",
+      "indicatorId": "prices.cpi.item.gold.index",
+      "title": "Price index — Gold",
+      "sourceId": "mospi",
+      "unit": "index (2012=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v81.prices.cpi.item.gold.inflation",
+      "indicatorId": "prices.cpi.item.gold.inflation",
+      "title": "Price inflation — Gold",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v82.prices.cpi.item.lpg.inflation",
+      "indicatorId": "prices.cpi.item.lpg.inflation",
+      "title": "Price inflation — LPG cylinder",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v83.prices.cpi.real_fd_return",
+      "indicatorId": "prices.cpi.real_fd_return",
+      "title": "Real return on a fixed deposit (after inflation)",
+      "sourceId": "indiadatahub",
+      "unit": "percentage points",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v84.prices.deposit_rate_term",
+      "indicatorId": "prices.deposit_rate_term",
+      "title": "Bank term-deposit (FD) rate, all SCBs",
+      "sourceId": "indiadatahub",
+      "unit": "% per year",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v85.monetary.rbi.policy_repo_rate_weekly",
+      "indicatorId": "monetary.rbi.policy_repo_rate_weekly",
+      "title": "RBI policy repo rate",
+      "sourceId": "rbi-dbie",
+      "unit": "Percent",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v86.prices.cpi.rural.general.inflation",
+      "indicatorId": "prices.cpi.rural.general.inflation",
+      "title": "CPI inflation — General (Rural)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v87.prices.cpi.urban.general.inflation",
+      "indicatorId": "prices.cpi.urban.general.inflation",
+      "title": "CPI inflation — General (Urban)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v88.prices.cpi.rural.food_beverages.inflation",
+      "indicatorId": "prices.cpi.rural.food_beverages.inflation",
+      "title": "CPI inflation — Food and Beverages (Rural)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v89.prices.cpi.urban.food_beverages.inflation",
+      "indicatorId": "prices.cpi.urban.food_beverages.inflation",
+      "title": "CPI inflation — Food and Beverages (Urban)",
+      "sourceId": "mospi",
+      "unit": "% YoY",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "what-100-from-2012-buys-today",
+      "title": "What ₹100 from 2012 buys today",
+      "chartType": "line",
+      "beat": "purchasing-power",
+      "window": "full",
+      "indicator": "prices.cpi.combined.purchasing_power",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The most concrete way to feel inflation: the same rupee buys steadily less."
+    },
+    {
+      "order": 2,
+      "chartId": "prices-are-over-90-times-their-1960-level",
+      "title": "Prices are over 90 times their 1960 level",
+      "chartType": "line",
+      "beat": "long-multiple",
+      "window": "full",
+      "indicator": "prices.cpi.price_multiple_since_1960",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The long view that puts a lifetime of inflation in one number."
+    },
+    {
+      "order": 3,
+      "chartId": "india-s-inflation-rate-1960-to-today",
+      "title": "India's inflation rate, 1960 to today",
+      "chartType": "line",
+      "beat": "long-view",
+      "window": "full",
+      "indicator": "prices.cpi.headline_annual_long",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Inflation is normal and usually positive; the question is how fast, not whether."
+    },
+    {
+      "order": 4,
+      "chartId": "average-inflation-decade-by-decade",
+      "title": "Average inflation, decade by decade",
+      "chartType": "decadeBars",
+      "beat": "decades",
+      "window": "",
+      "indicator": "prices.cpi.headline_annual_long",
+      "series": [],
+      "unit": "% per year",
+      "subtitle": "",
+      "whyThisChart": "The cleanest long story, stripped of year-to-year noise."
+    },
+    {
+      "order": 5,
+      "chartId": "inflation-month-by-month-since-2012",
+      "title": "Inflation month by month since 2012",
+      "chartType": "line",
+      "beat": "recent-volatility",
+      "window": "full",
+      "indicator": "prices.cpi.combined.general.inflation",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The recent, lived experience: the headline rate swings a lot within a few years."
+    },
+    {
+      "order": 6,
+      "chartId": "shops-vs-mandis-retail-cpi-vs-wholesale-wpi",
+      "title": "Shops vs mandis: retail (CPI) vs wholesale (WPI)",
+      "chartType": "multiLine",
+      "beat": "retail-vs-wholesale",
+      "window": "",
+      "indicator": "prices.cpi.combined.general.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.combined.general.inflation",
+          "label": "CPI (retail)"
+        },
+        {
+          "indicator": "prices.wpi.all_commodities.inflation",
+          "label": "WPI (wholesale)"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "Two official inflation measures: what you pay (CPI) vs what producers and traders pay (WPI)."
+    },
+    {
+      "order": 7,
+      "chartId": "is-india-s-inflation-high-a-world-comparison",
+      "title": "Is India's inflation high? A world comparison",
+      "chartType": "multiLine",
+      "beat": "cross-country",
+      "window": "",
+      "indicator": "compare.cpi_inflation.in",
+      "series": [
+        {
+          "indicator": "compare.cpi_inflation.in",
+          "label": "India"
+        },
+        {
+          "indicator": "compare.cpi_inflation.us",
+          "label": "United States"
+        },
+        {
+          "indicator": "compare.cpi_inflation.chn",
+          "label": "China"
+        },
+        {
+          "indicator": "compare.cpi_inflation.bra",
+          "label": "Brazil"
+        }
+      ],
+      "unit": "% per year",
+      "subtitle": "",
+      "whyThisChart": "Whether India's inflation is unusually high — or normal for a fast-growing economy."
+    },
+    {
+      "order": 8,
+      "chartId": "what-s-in-the-household-basket",
+      "title": "What's in the household basket",
+      "chartType": "latestBars",
+      "beat": "basket",
+      "window": "",
+      "indicator": "prices.cpi.weight.food_beverages",
+      "series": [
+        {
+          "indicator": "prices.cpi.weight.food_beverages",
+          "label": "Food & beverages"
+        },
+        {
+          "indicator": "prices.cpi.weight.miscellaneous",
+          "label": "Miscellaneous"
+        },
+        {
+          "indicator": "prices.cpi.weight.housing",
+          "label": "Housing"
+        },
+        {
+          "indicator": "prices.cpi.weight.fuel_light",
+          "label": "Fuel & light"
+        },
+        {
+          "indicator": "prices.cpi.weight.clothing_footwear",
+          "label": "Clothing & footwear"
+        },
+        {
+          "indicator": "prices.cpi.weight.pan_tobacco_intoxicants",
+          "label": "Pan, tobacco"
+        }
+      ],
+      "unit": "% of basket",
+      "subtitle": "",
+      "whyThisChart": "Why food dominates how inflation feels: it is nearly half the official basket."
+    },
+    {
+      "order": 9,
+      "chartId": "which-categories-actually-drove-the-latest-inflation",
+      "title": "Which categories actually drove the latest inflation",
+      "chartType": "latestBars",
+      "beat": "contribution",
+      "window": "",
+      "indicator": "prices.cpi.contribution.food_beverages",
+      "series": [
+        {
+          "indicator": "prices.cpi.contribution.food_beverages",
+          "label": "Food & beverages"
+        },
+        {
+          "indicator": "prices.cpi.contribution.miscellaneous",
+          "label": "Miscellaneous"
+        },
+        {
+          "indicator": "prices.cpi.contribution.housing",
+          "label": "Housing"
+        },
+        {
+          "indicator": "prices.cpi.contribution.fuel_light",
+          "label": "Fuel & light"
+        },
+        {
+          "indicator": "prices.cpi.contribution.clothing_footwear",
+          "label": "Clothing & footwear"
+        },
+        {
+          "indicator": "prices.cpi.contribution.pan_tobacco_intoxicants",
+          "label": "Pan, tobacco"
+        }
+      ],
+      "unit": "percentage points",
+      "subtitle": "",
+      "whyThisChart": "Weight times speed: a category matters to the headline only if it is both big and rising."
+    },
+    {
+      "order": 10,
+      "chartId": "what-s-getting-dearer-fastest-right-now",
+      "title": "What's getting dearer fastest right now",
+      "chartType": "latestBars",
+      "beat": "whats-biting",
+      "window": "",
+      "indicator": "prices.cpi.combined.health.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.combined.health.inflation",
+          "label": "Health"
+        },
+        {
+          "indicator": "prices.cpi.combined.education.inflation",
+          "label": "Education"
+        },
+        {
+          "indicator": "prices.cpi.combined.housing.inflation",
+          "label": "Housing"
+        },
+        {
+          "indicator": "prices.cpi.combined.transport_communication.inflation",
+          "label": "Transport & comms"
+        },
+        {
+          "indicator": "prices.cpi.combined.personal_care_effects.inflation",
+          "label": "Personal care"
+        },
+        {
+          "indicator": "prices.cpi.combined.recreation_amusement.inflation",
+          "label": "Recreation"
+        },
+        {
+          "indicator": "prices.cpi.combined.household_goods_services.inflation",
+          "label": "Household goods"
+        },
+        {
+          "indicator": "prices.cpi.combined.pan_tobacco_intoxicants.inflation",
+          "label": "Pan, tobacco"
+        },
+        {
+          "indicator": "prices.cpi.combined.fuel_light.inflation",
+          "label": "Fuel & light"
+        },
+        {
+          "indicator": "prices.cpi.combined.clothing_footwear.inflation",
+          "label": "Clothing & footwear"
+        },
+        {
+          "indicator": "prices.cpi.combined.food_beverages.inflation",
+          "label": "Food & beverages"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "The headline hides very different speeds across categories."
+    },
+    {
+      "order": 11,
+      "chartId": "how-each-part-of-life-got-pricier-since-2012",
+      "title": "How each part of life got pricier since 2012",
+      "chartType": "multiLine",
+      "beat": "compounding-groups",
+      "window": "",
+      "indicator": "prices.cpi.combined.food_beverages.index",
+      "series": [
+        {
+          "indicator": "prices.cpi.combined.food_beverages.index",
+          "label": "Food & beverages"
+        },
+        {
+          "indicator": "prices.cpi.combined.fuel_light.index",
+          "label": "Fuel & light"
+        },
+        {
+          "indicator": "prices.cpi.combined.housing.index",
+          "label": "Housing"
+        },
+        {
+          "indicator": "prices.cpi.combined.clothing_footwear.index",
+          "label": "Clothing & footwear"
+        },
+        {
+          "indicator": "prices.cpi.combined.miscellaneous.index",
+          "label": "Miscellaneous"
+        },
+        {
+          "indicator": "prices.cpi.combined.pan_tobacco_intoxicants.index",
+          "label": "Pan, tobacco"
+        }
+      ],
+      "unit": "index (2012=100)",
+      "subtitle": "",
+      "whyThisChart": "Inflation compounds: even 'low' categories pile up over a decade."
+    },
+    {
+      "order": 12,
+      "chartId": "food-swings-drive-the-headline",
+      "title": "Food swings drive the headline",
+      "chartType": "multiLine",
+      "beat": "food-driver",
+      "window": "",
+      "indicator": "prices.cpi.combined.consumer_food_price.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.combined.consumer_food_price.inflation",
+          "label": "Food"
+        },
+        {
+          "indicator": "prices.cpi.combined.general.inflation",
+          "label": "Headline (all items)"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "Because food is half the basket, food prices largely steer the headline."
+    },
+    {
+      "order": 13,
+      "chartId": "how-food-prices-climbed-group-by-group",
+      "title": "How food prices climbed, group by group",
+      "chartType": "multiLine",
+      "beat": "food-groups",
+      "window": "",
+      "indicator": "prices.cpi.combined.cereals_products.index",
+      "series": [
+        {
+          "indicator": "prices.cpi.combined.cereals_products.index",
+          "label": "Cereals"
+        },
+        {
+          "indicator": "prices.cpi.combined.vegetables.index",
+          "label": "Vegetables"
+        },
+        {
+          "indicator": "prices.cpi.combined.pulses_products.index",
+          "label": "Pulses"
+        },
+        {
+          "indicator": "prices.cpi.combined.oils_fats.index",
+          "label": "Oils & fats"
+        },
+        {
+          "indicator": "prices.cpi.combined.milk_products.index",
+          "label": "Milk"
+        }
+      ],
+      "unit": "index (2012=100)",
+      "subtitle": "",
+      "whyThisChart": "Food is not one thing: staples like cereals and milk grind up steadily, others lurch."
+    },
+    {
+      "order": 14,
+      "chartId": "the-food-prices-that-whipsaw",
+      "title": "The food prices that whipsaw",
+      "chartType": "multiLine",
+      "beat": "volatile-food",
+      "window": "",
+      "indicator": "prices.cpi.combined.vegetables.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.combined.vegetables.inflation",
+          "label": "Vegetables"
+        },
+        {
+          "indicator": "prices.cpi.combined.pulses_products.inflation",
+          "label": "Pulses"
+        },
+        {
+          "indicator": "prices.cpi.combined.oils_fats.inflation",
+          "label": "Oils & fats"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "A few items spike and crash hardest — the prices people notice most."
+    },
+    {
+      "order": 15,
+      "chartId": "the-price-of-onion-tomato-and-potato",
+      "title": "The price of onion, tomato and potato",
+      "chartType": "multiLine",
+      "beat": "tomato-onion",
+      "window": "",
+      "indicator": "prices.cpi.item.onion.index",
+      "series": [
+        {
+          "indicator": "prices.cpi.item.onion.index",
+          "label": "Onion"
+        },
+        {
+          "indicator": "prices.cpi.item.tomato.index",
+          "label": "Tomato"
+        },
+        {
+          "indicator": "prices.cpi.item.potato.index",
+          "label": "Potato"
+        }
+      ],
+      "unit": "index (2012=100)",
+      "subtitle": "",
+      "whyThisChart": "The vegetables that make headlines and move household budgets, item by item."
+    },
+    {
+      "order": 16,
+      "chartId": "what-your-groceries-cost-this-year",
+      "title": "What your groceries cost this year",
+      "chartType": "latestBars",
+      "beat": "grocery-basket",
+      "window": "",
+      "indicator": "prices.cpi.item.onion.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.item.tomato.inflation",
+          "label": "Tomato"
+        },
+        {
+          "indicator": "prices.cpi.item.milk.inflation",
+          "label": "Milk"
+        },
+        {
+          "indicator": "prices.cpi.item.eggs.inflation",
+          "label": "Eggs"
+        },
+        {
+          "indicator": "prices.cpi.item.mustard_oil.inflation",
+          "label": "Mustard oil"
+        },
+        {
+          "indicator": "prices.cpi.item.sugar.inflation",
+          "label": "Sugar"
+        },
+        {
+          "indicator": "prices.cpi.item.rice.inflation",
+          "label": "Rice"
+        },
+        {
+          "indicator": "prices.cpi.item.wheat_atta.inflation",
+          "label": "Wheat/atta"
+        },
+        {
+          "indicator": "prices.cpi.item.pulses.inflation",
+          "label": "Pulses"
+        },
+        {
+          "indicator": "prices.cpi.item.potato.inflation",
+          "label": "Potato"
+        },
+        {
+          "indicator": "prices.cpi.item.onion.inflation",
+          "label": "Onion"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "The grocery list, item by item — where some prices jumped and others fell."
+    },
+    {
+      "order": 17,
+      "chartId": "the-quiet-compounders-health-education-transport",
+      "title": "The quiet compounders: health, education, transport",
+      "chartType": "multiLine",
+      "beat": "services-compounding",
+      "window": "",
+      "indicator": "prices.cpi.combined.health.index",
+      "series": [
+        {
+          "indicator": "prices.cpi.combined.health.index",
+          "label": "Health"
+        },
+        {
+          "indicator": "prices.cpi.combined.education.index",
+          "label": "Education"
+        },
+        {
+          "indicator": "prices.cpi.combined.transport_communication.index",
+          "label": "Transport & comms"
+        }
+      ],
+      "unit": "index (2012=100)",
+      "subtitle": "",
+      "whyThisChart": "Services rarely spike, so they escape attention — but they climb relentlessly."
+    },
+    {
+      "order": 18,
+      "chartId": "the-price-of-school-fees-doctors-and-medicine",
+      "title": "The price of school fees, doctors and medicine",
+      "chartType": "multiLine",
+      "beat": "services-items",
+      "window": "",
+      "indicator": "prices.cpi.item.tuition_fees.index",
+      "series": [
+        {
+          "indicator": "prices.cpi.item.tuition_fees.index",
+          "label": "Tuition fees"
+        },
+        {
+          "indicator": "prices.cpi.item.doctor_fee.index",
+          "label": "Doctor's fee"
+        },
+        {
+          "indicator": "prices.cpi.item.medicine.index",
+          "label": "Medicine"
+        }
+      ],
+      "unit": "index (2012=100)",
+      "subtitle": "",
+      "whyThisChart": "The bills families dread, made concrete: school and healthcare."
+    },
+    {
+      "order": 19,
+      "chartId": "the-price-of-fuel-and-power",
+      "title": "The price of fuel and power",
+      "chartType": "multiLine",
+      "beat": "fuel-items",
+      "window": "",
+      "indicator": "prices.cpi.item.petrol.index",
+      "series": [
+        {
+          "indicator": "prices.cpi.item.petrol.index",
+          "label": "Petrol"
+        },
+        {
+          "indicator": "prices.cpi.item.diesel.index",
+          "label": "Diesel"
+        },
+        {
+          "indicator": "prices.cpi.item.lpg.index",
+          "label": "LPG cylinder"
+        },
+        {
+          "indicator": "prices.cpi.item.electricity.index",
+          "label": "Electricity"
+        }
+      ],
+      "unit": "index (2012=100)",
+      "subtitle": "",
+      "whyThisChart": "Energy at home and on the road — petrol, diesel, the gas cylinder, the power bill."
+    },
+    {
+      "order": 20,
+      "chartId": "the-biggest-price-moves-this-year",
+      "title": "The biggest price moves this year",
+      "chartType": "latestBars",
+      "beat": "extremes",
+      "window": "",
+      "indicator": "prices.cpi.item.gold.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.item.gold.inflation",
+          "label": "Gold"
+        },
+        {
+          "indicator": "prices.cpi.item.mustard_oil.inflation",
+          "label": "Mustard oil"
+        },
+        {
+          "indicator": "prices.cpi.item.lpg.inflation",
+          "label": "LPG cylinder"
+        },
+        {
+          "indicator": "prices.cpi.item.tomato.inflation",
+          "label": "Tomato"
+        },
+        {
+          "indicator": "prices.cpi.item.pulses.inflation",
+          "label": "Pulses"
+        },
+        {
+          "indicator": "prices.cpi.item.potato.inflation",
+          "label": "Potato"
+        },
+        {
+          "indicator": "prices.cpi.item.onion.inflation",
+          "label": "Onion"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "Inflation is an average; the lived experience is the extremes — what spiked and what crashed."
+    },
+    {
+      "order": 21,
+      "chartId": "gold-the-household-hedge-against-inflation",
+      "title": "Gold: the household hedge against inflation",
+      "chartType": "line",
+      "beat": "gold",
+      "window": "full",
+      "indicator": "prices.cpi.item.gold.index",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Indians buy gold partly to protect savings from inflation — and it has paid off."
+    },
+    {
+      "order": 22,
+      "chartId": "does-your-fixed-deposit-beat-inflation",
+      "title": "Does your fixed deposit beat inflation?",
+      "chartType": "line",
+      "beat": "real-return",
+      "window": "full",
+      "indicator": "prices.cpi.real_fd_return",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The question every saver asks: is my bank deposit actually growing my money?"
+    },
+    {
+      "order": 23,
+      "chartId": "fd-rate-vs-inflation-the-two-lines-behind-the-gap",
+      "title": "FD rate vs inflation, the two lines behind the gap",
+      "chartType": "multiLine",
+      "beat": "fd-vs-cpi",
+      "window": "",
+      "indicator": "prices.deposit_rate_term",
+      "series": [
+        {
+          "indicator": "prices.deposit_rate_term",
+          "label": "FD rate"
+        },
+        {
+          "indicator": "prices.cpi.combined.general.inflation",
+          "label": "Inflation"
+        }
+      ],
+      "unit": "% per year",
+      "subtitle": "",
+      "whyThisChart": "The real return is just the distance between these two lines."
+    },
+    {
+      "order": 24,
+      "chartId": "how-the-rbi-fights-inflation-the-repo-rate",
+      "title": "How the RBI fights inflation: the repo rate",
+      "chartType": "multiLine",
+      "beat": "repo",
+      "window": "",
+      "indicator": "monetary.rbi.policy_repo_rate_weekly",
+      "series": [
+        {
+          "indicator": "monetary.rbi.policy_repo_rate_weekly",
+          "label": "RBI repo rate"
+        },
+        {
+          "indicator": "prices.cpi.combined.general.inflation",
+          "label": "CPI inflation"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "The main tool against inflation: the central bank's policy rate."
+    },
+    {
+      "order": 25,
+      "chartId": "town-and-country-feel-it-differently",
+      "title": "Town and country feel it differently",
+      "chartType": "multiLine",
+      "beat": "rural-urban",
+      "window": "",
+      "indicator": "prices.cpi.combined.general.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.rural.general.inflation",
+          "label": "Rural"
+        },
+        {
+          "indicator": "prices.cpi.urban.general.inflation",
+          "label": "Urban"
+        },
+        {
+          "indicator": "prices.cpi.combined.general.inflation",
+          "label": "Combined"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "One national number hides that villages and cities buy different baskets."
+    },
+    {
+      "order": 26,
+      "chartId": "food-inflation-hits-the-village-harder",
+      "title": "Food inflation hits the village harder",
+      "chartType": "multiLine",
+      "beat": "rural-food",
+      "window": "",
+      "indicator": "prices.cpi.rural.food_beverages.inflation",
+      "series": [
+        {
+          "indicator": "prices.cpi.rural.food_beverages.inflation",
+          "label": "Rural food"
+        },
+        {
+          "indicator": "prices.cpi.urban.food_beverages.inflation",
+          "label": "Urban food"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "Food is a bigger share of a rural household's spend, so food spikes hurt more there."
+    },
+    {
+      "order": 27,
+      "chartId": "the-wholesale-pipeline-where-prices-start",
+      "title": "The wholesale pipeline: where prices start",
+      "chartType": "multiLine",
+      "beat": "wholesale-pipeline",
+      "window": "",
+      "indicator": "prices.wpi.primary_articles.inflation",
+      "series": [
+        {
+          "indicator": "prices.wpi.primary_articles.inflation",
+          "label": "Primary articles"
+        },
+        {
+          "indicator": "prices.wpi.fuel_power.inflation",
+          "label": "Fuel & power"
+        },
+        {
+          "indicator": "prices.wpi.manufactured.inflation",
+          "label": "Manufactured products"
+        }
+      ],
+      "unit": "% YoY",
+      "subtitle": "",
+      "whyThisChart": "Before prices reach you they move through wholesale; this is the pressure upstream."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "What ₹100 from 2012 buys today, latest",
+      "value": 50.5,
+      "displayValue": "₹51",
+      "date": "2025-12",
+      "unit": "₹ (2012 rupees)",
+      "indicatorId": "prices.cpi.combined.purchasing_power",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "What ₹100 from 2012 buys today, earliest",
+      "value": 111.7,
+      "displayValue": "₹112",
+      "date": "2011-01",
+      "unit": "₹ (2012 rupees)",
+      "indicatorId": "prices.cpi.combined.purchasing_power",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's consumer price inflation, 1960 to today, latest",
+      "value": 2.23,
+      "displayValue": "2.2%",
+      "date": "2025",
+      "unit": "% per year",
+      "indicatorId": "prices.cpi.headline_annual_long",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's consumer price inflation, 1960 to today, earliest",
+      "value": 1.78,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "% per year",
+      "indicatorId": "prices.cpi.headline_annual_long",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — General (Combined), latest",
+      "value": 1.33,
+      "displayValue": "1.3%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "indicatorId": "prices.cpi.combined.general.inflation",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — General (Combined), earliest",
+      "value": 6.26,
+      "displayValue": "6.3%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "indicatorId": "prices.cpi.combined.general.inflation",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI index — General (Combined), latest",
+      "value": 198,
+      "displayValue": "198",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "indicatorId": "prices.cpi.combined.general.index",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI index — General (Combined), earliest",
+      "value": 89.5,
+      "displayValue": "89.5",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "indicatorId": "prices.cpi.combined.general.index",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Inflation, consumer prices, latest",
+      "value": 4.95303550973656,
+      "displayValue": "5%",
+      "date": "2024",
+      "unit": "annual %",
+      "indicatorId": "econ.inflation_cpi",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Inflation, consumer prices, earliest",
+      "value": 1.77987784677382,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "annual %",
+      "indicatorId": "econ.inflation_cpi",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "How many times prices have risen since 1960, latest",
+      "value": 92.1,
+      "displayValue": "92.1",
+      "date": "2025",
+      "unit": "× (1960=1)",
+      "indicatorId": "prices.cpi.price_multiple_since_1960",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "How many times prices have risen since 1960, earliest",
+      "value": 1,
+      "displayValue": "1",
+      "date": "1960",
+      "unit": "× (1960=1)",
+      "indicatorId": "prices.cpi.price_multiple_since_1960",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "What ₹100 from 1960 buys today, latest",
+      "value": 1.1,
+      "displayValue": "₹1",
+      "date": "2025",
+      "unit": "₹ (1960 rupees)",
+      "indicatorId": "prices.cpi.purchasing_power_1960",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "What ₹100 from 1960 buys today, earliest",
+      "value": 100,
+      "displayValue": "₹100",
+      "date": "1960",
+      "unit": "₹ (1960 rupees)",
+      "indicatorId": "prices.cpi.purchasing_power_1960",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average inflation by decade, latest",
+      "value": 5.2,
+      "displayValue": "5.2%",
+      "date": "2020s",
+      "unit": "% per year",
+      "indicatorId": "prices.cpi.decade_avg_inflation",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Average inflation by decade, earliest",
+      "value": 5.9,
+      "displayValue": "5.9%",
+      "date": "1960s",
+      "unit": "% per year",
+      "indicatorId": "prices.cpi.decade_avg_inflation",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India price level since 1960, latest",
+      "value": 9209,
+      "displayValue": "9,209",
+      "date": "2025",
+      "unit": "index (1960=100)",
+      "indicatorId": "prices.cpi.price_level_since_1960",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India price level since 1960, earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1960",
+      "unit": "index (1960=100)",
+      "indicatorId": "prices.cpi.price_level_since_1960",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — IND, latest",
+      "value": 4.95303550973656,
+      "displayValue": "5%",
+      "date": "2024",
+      "unit": "% per year",
+      "indicatorId": "compare.cpi_inflation.in",
+      "sourceId": "world-context",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — IND, earliest",
+      "value": 1.77987784677382,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "% per year",
+      "indicatorId": "compare.cpi_inflation.in",
+      "sourceId": "world-context",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — USA, latest",
+      "value": 2.94952520485207,
+      "displayValue": "2.9%",
+      "date": "2024",
+      "unit": "% per year",
+      "indicatorId": "compare.cpi_inflation.us",
+      "sourceId": "world-context",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — USA, earliest",
+      "value": 1.45797598627791,
+      "displayValue": "1.5%",
+      "date": "1960",
+      "unit": "% per year",
+      "indicatorId": "compare.cpi_inflation.us",
+      "sourceId": "world-context",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — CHN, latest",
+      "value": 0.218128938439177,
+      "displayValue": "0.2%",
+      "date": "2024",
+      "unit": "% per year",
+      "indicatorId": "compare.cpi_inflation.chn",
+      "sourceId": "world-context",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "CPI inflation — CHN, earliest",
+      "value": 7.23383553065609,
+      "displayValue": "7.2%",
+      "date": "1987",
+      "unit": "% per year",
+      "indicatorId": "compare.cpi_inflation.chn",
+      "sourceId": "world-context",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "What ₹100 from 2012 buys today, latest",
+      "value": 50.5,
+      "displayValue": "₹51",
+      "date": "2025-12",
+      "unit": "₹ (2012 rupees)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.purchasing_power"
+    },
+    {
+      "label": "What ₹100 from 2012 buys today, earliest",
+      "value": 111.7,
+      "displayValue": "₹112",
+      "date": "2011-01",
+      "unit": "₹ (2012 rupees)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.purchasing_power"
+    },
+    {
+      "label": "India's consumer price inflation, 1960 to today, latest",
+      "value": 2.23,
+      "displayValue": "2.2%",
+      "date": "2025",
+      "unit": "% per year",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.headline_annual_long"
+    },
+    {
+      "label": "India's consumer price inflation, 1960 to today, earliest",
+      "value": 1.78,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "% per year",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.headline_annual_long"
+    },
+    {
+      "label": "CPI inflation — General (Combined), latest",
+      "value": 1.33,
+      "displayValue": "1.3%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.general.inflation"
+    },
+    {
+      "label": "CPI inflation — General (Combined), earliest",
+      "value": 6.26,
+      "displayValue": "6.3%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.general.inflation"
+    },
+    {
+      "label": "CPI index — General (Combined), latest",
+      "value": 198,
+      "displayValue": "198",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.general.index"
+    },
+    {
+      "label": "CPI index — General (Combined), earliest",
+      "value": 89.5,
+      "displayValue": "89.5",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.general.index"
+    },
+    {
+      "label": "Inflation, consumer prices, latest",
+      "value": 4.95303550973656,
+      "displayValue": "5%",
+      "date": "2024",
+      "unit": "annual %",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inflation_cpi"
+    },
+    {
+      "label": "Inflation, consumer prices, earliest",
+      "value": 1.77987784677382,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "annual %",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inflation_cpi"
+    },
+    {
+      "label": "How many times prices have risen since 1960, latest",
+      "value": 92.1,
+      "displayValue": "92.1",
+      "date": "2025",
+      "unit": "× (1960=1)",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.price_multiple_since_1960"
+    },
+    {
+      "label": "How many times prices have risen since 1960, earliest",
+      "value": 1,
+      "displayValue": "1",
+      "date": "1960",
+      "unit": "× (1960=1)",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.price_multiple_since_1960"
+    },
+    {
+      "label": "What ₹100 from 1960 buys today, latest",
+      "value": 1.1,
+      "displayValue": "₹1",
+      "date": "2025",
+      "unit": "₹ (1960 rupees)",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.purchasing_power_1960"
+    },
+    {
+      "label": "What ₹100 from 1960 buys today, earliest",
+      "value": 100,
+      "displayValue": "₹100",
+      "date": "1960",
+      "unit": "₹ (1960 rupees)",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.purchasing_power_1960"
+    },
+    {
+      "label": "Average inflation by decade, latest",
+      "value": 5.2,
+      "displayValue": "5.2%",
+      "date": "2020s",
+      "unit": "% per year",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.decade_avg_inflation"
+    },
+    {
+      "label": "Average inflation by decade, earliest",
+      "value": 5.9,
+      "displayValue": "5.9%",
+      "date": "1960s",
+      "unit": "% per year",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.decade_avg_inflation"
+    },
+    {
+      "label": "India price level since 1960, latest",
+      "value": 9209,
+      "displayValue": "9,209",
+      "date": "2025",
+      "unit": "index (1960=100)",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.price_level_since_1960"
+    },
+    {
+      "label": "India price level since 1960, earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1960",
+      "unit": "index (1960=100)",
+      "sourceId": "worldbank",
+      "indicatorId": "prices.cpi.price_level_since_1960"
+    },
+    {
+      "label": "CPI inflation — IND, latest",
+      "value": 4.95303550973656,
+      "displayValue": "5%",
+      "date": "2024",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.in"
+    },
+    {
+      "label": "CPI inflation — IND, earliest",
+      "value": 1.77987784677382,
+      "displayValue": "1.8%",
+      "date": "1960",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.in"
+    },
+    {
+      "label": "CPI inflation — USA, latest",
+      "value": 2.94952520485207,
+      "displayValue": "2.9%",
+      "date": "2024",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.us"
+    },
+    {
+      "label": "CPI inflation — USA, earliest",
+      "value": 1.45797598627791,
+      "displayValue": "1.5%",
+      "date": "1960",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.us"
+    },
+    {
+      "label": "CPI inflation — CHN, latest",
+      "value": 0.218128938439177,
+      "displayValue": "0.2%",
+      "date": "2024",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.chn"
+    },
+    {
+      "label": "CPI inflation — CHN, earliest",
+      "value": 7.23383553065609,
+      "displayValue": "7.2%",
+      "date": "1987",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.chn"
+    },
+    {
+      "label": "CPI inflation — BRA, latest",
+      "value": 4.36746407652336,
+      "displayValue": "4.4%",
+      "date": "2024",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.bra"
+    },
+    {
+      "label": "CPI inflation — BRA, earliest",
+      "value": 101.725072957927,
+      "displayValue": "101.7%",
+      "date": "1981",
+      "unit": "% per year",
+      "sourceId": "world-context",
+      "indicatorId": "compare.cpi_inflation.bra"
+    },
+    {
+      "label": "WPI — all commodities (inflation), latest",
+      "value": 8.3,
+      "displayValue": "8.3%",
+      "date": "2026-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.all_commodities.inflation"
+    },
+    {
+      "label": "WPI — all commodities (inflation), earliest",
+      "value": 3.7,
+      "displayValue": "3.7%",
+      "date": "2013-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.all_commodities.inflation"
+    },
+    {
+      "label": "WPI — primary articles (inflation), latest",
+      "value": 9.2,
+      "displayValue": "9.2%",
+      "date": "2026-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.primary_articles.inflation"
+    },
+    {
+      "label": "WPI — primary articles (inflation), earliest",
+      "value": 7,
+      "displayValue": "7%",
+      "date": "2013-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.primary_articles.inflation"
+    },
+    {
+      "label": "WPI — fuel & power (inflation), latest",
+      "value": 24.7,
+      "displayValue": "24.7%",
+      "date": "2026-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.fuel_power.inflation"
+    },
+    {
+      "label": "WPI — fuel & power (inflation), earliest",
+      "value": 1.6,
+      "displayValue": "1.6%",
+      "date": "2013-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.fuel_power.inflation"
+    },
+    {
+      "label": "WPI — manufactured products (inflation), latest",
+      "value": 4.6,
+      "displayValue": "4.6%",
+      "date": "2026-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.manufactured.inflation"
+    },
+    {
+      "label": "WPI — manufactured products (inflation), earliest",
+      "value": 2.9,
+      "displayValue": "2.9%",
+      "date": "2013-04",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.wpi.manufactured.inflation"
+    },
+    {
+      "label": "CPI basket weight — Food & beverages, latest",
+      "value": 45.86,
+      "displayValue": "45.9%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.food_beverages"
+    },
+    {
+      "label": "CPI basket weight — Food & beverages, earliest",
+      "value": 45.86,
+      "displayValue": "45.9%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.food_beverages"
+    },
+    {
+      "label": "CPI basket weight — Miscellaneous, latest",
+      "value": 28.32,
+      "displayValue": "28.3%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.miscellaneous"
+    },
+    {
+      "label": "CPI basket weight — Miscellaneous, earliest",
+      "value": 28.32,
+      "displayValue": "28.3%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.miscellaneous"
+    },
+    {
+      "label": "CPI basket weight — Housing, latest",
+      "value": 10.07,
+      "displayValue": "10.1%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.housing"
+    },
+    {
+      "label": "CPI basket weight — Housing, earliest",
+      "value": 10.07,
+      "displayValue": "10.1%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.housing"
+    },
+    {
+      "label": "CPI basket weight — Fuel & light, latest",
+      "value": 6.84,
+      "displayValue": "6.8%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.fuel_light"
+    },
+    {
+      "label": "CPI basket weight — Fuel & light, earliest",
+      "value": 6.84,
+      "displayValue": "6.8%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.fuel_light"
+    },
+    {
+      "label": "CPI basket weight — Clothing & footwear, latest",
+      "value": 6.53,
+      "displayValue": "6.5%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.clothing_footwear"
+    },
+    {
+      "label": "CPI basket weight — Clothing & footwear, earliest",
+      "value": 6.53,
+      "displayValue": "6.5%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.clothing_footwear"
+    },
+    {
+      "label": "CPI basket weight — Pan, tobacco, intoxicants, latest",
+      "value": 2.38,
+      "displayValue": "2.4%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.pan_tobacco_intoxicants"
+    },
+    {
+      "label": "CPI basket weight — Pan, tobacco, intoxicants, earliest",
+      "value": 2.38,
+      "displayValue": "2.4%",
+      "date": "2012",
+      "unit": "% of basket",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.weight.pan_tobacco_intoxicants"
+    },
+    {
+      "label": "Contribution to CPI inflation — Food & beverages, latest",
+      "value": -0.85,
+      "displayValue": "-0.85",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.food_beverages"
+    },
+    {
+      "label": "Contribution to CPI inflation — Food & beverages, earliest",
+      "value": -0.85,
+      "displayValue": "-0.85",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.food_beverages"
+    },
+    {
+      "label": "Contribution to CPI inflation — Miscellaneous, latest",
+      "value": 1.75,
+      "displayValue": "1.75",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.miscellaneous"
+    },
+    {
+      "label": "Contribution to CPI inflation — Miscellaneous, earliest",
+      "value": 1.75,
+      "displayValue": "1.75",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.miscellaneous"
+    },
+    {
+      "label": "Contribution to CPI inflation — Housing, latest",
+      "value": 0.29,
+      "displayValue": "0.29",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.housing"
+    },
+    {
+      "label": "Contribution to CPI inflation — Housing, earliest",
+      "value": 0.29,
+      "displayValue": "0.29",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.housing"
+    },
+    {
+      "label": "Contribution to CPI inflation — Fuel & light, latest",
+      "value": 0.13,
+      "displayValue": "0.13",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.fuel_light"
+    },
+    {
+      "label": "Contribution to CPI inflation — Fuel & light, earliest",
+      "value": 0.13,
+      "displayValue": "0.13",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.fuel_light"
+    },
+    {
+      "label": "Contribution to CPI inflation — Clothing & footwear, latest",
+      "value": 0.09,
+      "displayValue": "0.09",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.clothing_footwear"
+    },
+    {
+      "label": "Contribution to CPI inflation — Clothing & footwear, earliest",
+      "value": 0.09,
+      "displayValue": "0.09",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.clothing_footwear"
+    },
+    {
+      "label": "Contribution to CPI inflation — Pan, tobacco, intoxicants, latest",
+      "value": 0.07,
+      "displayValue": "0.07",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.pan_tobacco_intoxicants"
+    },
+    {
+      "label": "Contribution to CPI inflation — Pan, tobacco, intoxicants, earliest",
+      "value": 0.07,
+      "displayValue": "0.07",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.contribution.pan_tobacco_intoxicants"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages (Combined), latest",
+      "value": -1.85,
+      "displayValue": "-1.9%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.food_beverages.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages (Combined), earliest",
+      "value": 1.52,
+      "displayValue": "1.5%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.food_beverages.inflation"
+    },
+    {
+      "label": "CPI inflation — Fuel and Light (Combined), latest",
+      "value": 1.97,
+      "displayValue": "2%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.fuel_light.inflation"
+    },
+    {
+      "label": "CPI inflation — Fuel and Light (Combined), earliest",
+      "value": 11.83,
+      "displayValue": "11.8%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.fuel_light.inflation"
+    },
+    {
+      "label": "CPI inflation — Housing (Combined), latest",
+      "value": 2.86,
+      "displayValue": "2.9%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.housing.inflation"
+    },
+    {
+      "label": "CPI inflation — Housing (Combined), earliest",
+      "value": 9,
+      "displayValue": "9%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.housing.inflation"
+    },
+    {
+      "label": "CPI inflation — Clothing and Footwear (Combined), latest",
+      "value": 1.44,
+      "displayValue": "1.4%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.clothing_footwear.inflation"
+    },
+    {
+      "label": "CPI inflation — Clothing and Footwear (Combined), earliest",
+      "value": 15.1,
+      "displayValue": "15.1%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.clothing_footwear.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Health (Combined), latest",
+      "value": 3.43,
+      "displayValue": "3.4%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.health.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Health (Combined), earliest",
+      "value": 8.27,
+      "displayValue": "8.3%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.health.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Education (Combined), latest",
+      "value": 3.37,
+      "displayValue": "3.4%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.education.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Education (Combined), earliest",
+      "value": 10.69,
+      "displayValue": "10.7%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.education.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Transport and Communication (Combined), latest",
+      "value": 0.82,
+      "displayValue": "0.8%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.transport_communication.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Transport and Communication (Combined), earliest",
+      "value": 8.08,
+      "displayValue": "8.1%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.transport_communication.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous (Combined), latest",
+      "value": 6.17,
+      "displayValue": "6.2%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.miscellaneous.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous (Combined), earliest",
+      "value": 9.38,
+      "displayValue": "9.4%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.miscellaneous.inflation"
+    },
+    {
+      "label": "CPI inflation — Pan, Tobacco and Intoxicants (Combined), latest",
+      "value": 3.01,
+      "displayValue": "3%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.inflation"
+    },
+    {
+      "label": "CPI inflation — Pan, Tobacco and Intoxicants (Combined), earliest",
+      "value": 15.78,
+      "displayValue": "15.8%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Personal Care and Effects (Combined), latest",
+      "value": 28.16,
+      "displayValue": "28.2%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.personal_care_effects.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Personal Care and Effects (Combined), earliest",
+      "value": 15.08,
+      "displayValue": "15.1%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.personal_care_effects.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Recreation and Amusement (Combined), latest",
+      "value": 1.17,
+      "displayValue": "1.2%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.recreation_amusement.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Recreation and Amusement (Combined), earliest",
+      "value": 3.61,
+      "displayValue": "3.6%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.recreation_amusement.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Household Goods and Services (Combined), latest",
+      "value": 1.91,
+      "displayValue": "1.9%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.household_goods_services.inflation"
+    },
+    {
+      "label": "CPI inflation — Miscellaneous: Household Goods and Services (Combined), earliest",
+      "value": 9.31,
+      "displayValue": "9.3%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.household_goods_services.inflation"
+    },
+    {
+      "label": "CPI index — Food and Beverages (Combined), latest",
+      "value": 202.1,
+      "displayValue": "202.1",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.food_beverages.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages (Combined), earliest",
+      "value": 92.3,
+      "displayValue": "92.3",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.food_beverages.index"
+    },
+    {
+      "label": "CPI index — Fuel and Light (Combined), latest",
+      "value": 181.3,
+      "displayValue": "181.3",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.fuel_light.index"
+    },
+    {
+      "label": "CPI index — Fuel and Light (Combined), earliest",
+      "value": 86.2,
+      "displayValue": "86.2",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.fuel_light.index"
+    },
+    {
+      "label": "CPI index — Housing (Combined), latest",
+      "value": 186.9,
+      "displayValue": "186.9",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.housing.index"
+    },
+    {
+      "label": "CPI index — Housing (Combined), earliest",
+      "value": 87.8,
+      "displayValue": "87.8",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.housing.index"
+    },
+    {
+      "label": "CPI index — Clothing and Footwear (Combined), latest",
+      "value": 197.6,
+      "displayValue": "197.6",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.clothing_footwear.index"
+    },
+    {
+      "label": "CPI index — Clothing and Footwear (Combined), earliest",
+      "value": 82.8,
+      "displayValue": "82.8",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.clothing_footwear.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous: Health (Combined), latest",
+      "value": 204.8,
+      "displayValue": "204.8",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.health.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous: Health (Combined), earliest",
+      "value": 89.5,
+      "displayValue": "89.5",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.health.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous: Education (Combined), latest",
+      "value": 196.1,
+      "displayValue": "196.1",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.education.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous: Education (Combined), earliest",
+      "value": 87,
+      "displayValue": "87",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.education.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous: Transport and Communication (Combined), latest",
+      "value": 172.4,
+      "displayValue": "172.4",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.transport_communication.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous: Transport and Communication (Combined), earliest",
+      "value": 90.3,
+      "displayValue": "90.3",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.transport_communication.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous (Combined), latest",
+      "value": 198,
+      "displayValue": "198",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.miscellaneous.index"
+    },
+    {
+      "label": "CPI index — Miscellaneous (Combined), earliest",
+      "value": 88.5,
+      "displayValue": "88.5",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.miscellaneous.index"
+    },
+    {
+      "label": "CPI index — Pan, Tobacco and Intoxicants (Combined), latest",
+      "value": 215.9,
+      "displayValue": "215.9",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.index"
+    },
+    {
+      "label": "CPI index — Pan, Tobacco and Intoxicants (Combined), earliest",
+      "value": 82.4,
+      "displayValue": "82.4",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.index"
+    },
+    {
+      "label": "CPI inflation — Consumer Food Price (Combined), latest",
+      "value": -2.71,
+      "displayValue": "-2.7%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.consumer_food_price.inflation"
+    },
+    {
+      "label": "CPI inflation — Consumer Food Price (Combined), earliest",
+      "value": -0.21,
+      "displayValue": "-0.2%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.consumer_food_price.inflation"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Cereals and Products (Combined), latest",
+      "value": 197.4,
+      "displayValue": "197.4",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.cereals_products.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Cereals and Products (Combined), earliest",
+      "value": 92.6,
+      "displayValue": "92.6",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.cereals_products.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Vegetables (Combined), latest",
+      "value": 210.6,
+      "displayValue": "210.6",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.vegetables.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Vegetables (Combined), earliest",
+      "value": 124.6,
+      "displayValue": "124.6",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.vegetables.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Pulses and Products (Combined), latest",
+      "value": 181.8,
+      "displayValue": "181.8",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pulses_products.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Pulses and Products (Combined), earliest",
+      "value": 91.3,
+      "displayValue": "91.3",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pulses_products.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Oils and Fats (Combined), latest",
+      "value": 196.1,
+      "displayValue": "196.1",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.oils_fats.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Oils and Fats (Combined), earliest",
+      "value": 81.9,
+      "displayValue": "81.9",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.oils_fats.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Milk and Products (Combined), latest",
+      "value": 192.3,
+      "displayValue": "192.3",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.milk_products.index"
+    },
+    {
+      "label": "CPI index — Food and Beverages: Milk and Products (Combined), earliest",
+      "value": 82.7,
+      "displayValue": "82.7",
+      "date": "2011-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.milk_products.index"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages: Vegetables (Combined), latest",
+      "value": -18.47,
+      "displayValue": "-18.5%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.vegetables.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages: Vegetables (Combined), earliest",
+      "value": -31.86,
+      "displayValue": "-31.9%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.vegetables.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages: Pulses and Products (Combined), latest",
+      "value": -15.09,
+      "displayValue": "-15.1%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pulses_products.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages: Pulses and Products (Combined), earliest",
+      "value": 3.5,
+      "displayValue": "3.5%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.pulses_products.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages: Oils and Fats (Combined), latest",
+      "value": 6.75,
+      "displayValue": "6.8%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.oils_fats.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages: Oils and Fats (Combined), earliest",
+      "value": 13.92,
+      "displayValue": "13.9%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.combined.oils_fats.inflation"
+    },
+    {
+      "label": "Price index — Onion, latest",
+      "value": 201.3,
+      "displayValue": "201.3",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.onion.index"
+    },
+    {
+      "label": "Price index — Onion, earliest",
+      "value": 173.4,
+      "displayValue": "173.4",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.onion.index"
+    },
+    {
+      "label": "Price index — Tomato, latest",
+      "value": 259.6,
+      "displayValue": "259.6",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.tomato.index"
+    },
+    {
+      "label": "Price index — Tomato, earliest",
+      "value": 101.3,
+      "displayValue": "101.3",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.tomato.index"
+    },
+    {
+      "label": "Price index — Potato, latest",
+      "value": 172.5,
+      "displayValue": "172.5",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.potato.index"
+    },
+    {
+      "label": "Price index — Potato, earliest",
+      "value": 122.1,
+      "displayValue": "122.1",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.potato.index"
+    },
+    {
+      "label": "Price inflation — Onion, latest",
+      "value": -48.07,
+      "displayValue": "-48.1%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.onion.inflation"
+    },
+    {
+      "label": "Price inflation — Onion, earliest",
+      "value": 3.69,
+      "displayValue": "3.7%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.onion.inflation"
+    },
+    {
+      "label": "Price inflation — Tomato, latest",
+      "value": 14.36,
+      "displayValue": "14.4%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.tomato.inflation"
+    },
+    {
+      "label": "Price inflation — Tomato, earliest",
+      "value": 22.41,
+      "displayValue": "22.4%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.tomato.inflation"
+    },
+    {
+      "label": "Price inflation — Potato, latest",
+      "value": -34.98,
+      "displayValue": "-35%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.potato.inflation"
+    },
+    {
+      "label": "Price inflation — Potato, earliest",
+      "value": 0.57,
+      "displayValue": "0.6%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.potato.inflation"
+    },
+    {
+      "label": "Price inflation — Rice (market), latest",
+      "value": -1.26,
+      "displayValue": "-1.3%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.rice.inflation"
+    },
+    {
+      "label": "Price inflation — Rice (market), earliest",
+      "value": 3.4,
+      "displayValue": "3.4%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.rice.inflation"
+    },
+    {
+      "label": "Price inflation — Wheat / atta, latest",
+      "value": -0.66,
+      "displayValue": "-0.7%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.wheat_atta.inflation"
+    },
+    {
+      "label": "Price inflation — Wheat / atta, earliest",
+      "value": 2.53,
+      "displayValue": "2.5%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.wheat_atta.inflation"
+    },
+    {
+      "label": "Price inflation — Milk, latest",
+      "value": 2.51,
+      "displayValue": "2.5%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.milk.inflation"
+    },
+    {
+      "label": "Price inflation — Milk, earliest",
+      "value": 9.46,
+      "displayValue": "9.5%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.milk.inflation"
+    },
+    {
+      "label": "Price inflation — Eggs, latest",
+      "value": 4.81,
+      "displayValue": "4.8%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.eggs.inflation"
+    },
+    {
+      "label": "Price inflation — Eggs, earliest",
+      "value": -0.24,
+      "displayValue": "-0.2%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.eggs.inflation"
+    },
+    {
+      "label": "Price inflation — Pulses, latest",
+      "value": -5.36,
+      "displayValue": "-5.4%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.pulses.inflation"
+    },
+    {
+      "label": "Price inflation — Pulses, earliest",
+      "value": 3.89,
+      "displayValue": "3.9%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.pulses.inflation"
+    },
+    {
+      "label": "Price inflation — Mustard oil, latest",
+      "value": 8.23,
+      "displayValue": "8.2%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.mustard_oil.inflation"
+    },
+    {
+      "label": "Price inflation — Mustard oil, earliest",
+      "value": 0.86,
+      "displayValue": "0.9%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.mustard_oil.inflation"
+    },
+    {
+      "label": "Price inflation — Sugar, latest",
+      "value": 4.86,
+      "displayValue": "4.9%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.sugar.inflation"
+    },
+    {
+      "label": "Price inflation — Sugar, earliest",
+      "value": -1.72,
+      "displayValue": "-1.7%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.sugar.inflation"
+    },
+    {
+      "label": "Price index — Tuition fees, latest",
+      "value": 204.7,
+      "displayValue": "204.7",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.tuition_fees.index"
+    },
+    {
+      "label": "Price index — Tuition fees, earliest",
+      "value": 111.9,
+      "displayValue": "111.9",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.tuition_fees.index"
+    },
+    {
+      "label": "Price index — Doctor's fee, latest",
+      "value": 223.6,
+      "displayValue": "223.6",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.doctor_fee.index"
+    },
+    {
+      "label": "Price index — Doctor's fee, earliest",
+      "value": 117,
+      "displayValue": "117",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.doctor_fee.index"
+    },
+    {
+      "label": "Price index — Medicine, latest",
+      "value": 203,
+      "displayValue": "203",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.medicine.index"
+    },
+    {
+      "label": "Price index — Medicine, earliest",
+      "value": 108.9,
+      "displayValue": "108.9",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.medicine.index"
+    },
+    {
+      "label": "Price index — Petrol, latest",
+      "value": 140.2,
+      "displayValue": "140.2",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.petrol.index"
+    },
+    {
+      "label": "Price index — Petrol, earliest",
+      "value": 107.3,
+      "displayValue": "107.3",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.petrol.index"
+    },
+    {
+      "label": "Price index — Diesel, latest",
+      "value": 189.1,
+      "displayValue": "189.1",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.diesel.index"
+    },
+    {
+      "label": "Price index — Diesel, earliest",
+      "value": 121.3,
+      "displayValue": "121.3",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.diesel.index"
+    },
+    {
+      "label": "Price index — LPG cylinder, latest",
+      "value": 192.7,
+      "displayValue": "192.7",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.lpg.index"
+    },
+    {
+      "label": "Price index — LPG cylinder, earliest",
+      "value": 106.8,
+      "displayValue": "106.8",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.lpg.index"
+    },
+    {
+      "label": "Price index — Electricity, latest",
+      "value": 164.9,
+      "displayValue": "164.9",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.electricity.index"
+    },
+    {
+      "label": "Price index — Electricity, earliest",
+      "value": 112,
+      "displayValue": "112",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.electricity.index"
+    },
+    {
+      "label": "Price index — Gold, latest",
+      "value": 433.9,
+      "displayValue": "433.9",
+      "date": "2025-12",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.gold.index"
+    },
+    {
+      "label": "Price index — Gold, earliest",
+      "value": 100.6,
+      "displayValue": "100.6",
+      "date": "2014-01",
+      "unit": "index (2012=100)",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.gold.index"
+    },
+    {
+      "label": "Price inflation — Gold, latest",
+      "value": 68.7,
+      "displayValue": "68.7%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.gold.inflation"
+    },
+    {
+      "label": "Price inflation — Gold, earliest",
+      "value": -7.36,
+      "displayValue": "-7.4%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.gold.inflation"
+    },
+    {
+      "label": "Price inflation — LPG cylinder, latest",
+      "value": 5.47,
+      "displayValue": "5.5%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.lpg.inflation"
+    },
+    {
+      "label": "Price inflation — LPG cylinder, earliest",
+      "value": 1.22,
+      "displayValue": "1.2%",
+      "date": "2015-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.item.lpg.inflation"
+    },
+    {
+      "label": "Real return on a fixed deposit (after inflation), latest",
+      "value": 5.35,
+      "displayValue": "5.35",
+      "date": "2025-12",
+      "unit": "percentage points",
+      "sourceId": "indiadatahub",
+      "indicatorId": "prices.cpi.real_fd_return"
+    },
+    {
+      "label": "Real return on a fixed deposit (after inflation), earliest",
+      "value": -1.25,
+      "displayValue": "-1.25",
+      "date": "2013-03",
+      "unit": "percentage points",
+      "sourceId": "indiadatahub",
+      "indicatorId": "prices.cpi.real_fd_return"
+    },
+    {
+      "label": "Bank term-deposit (FD) rate, all SCBs, latest",
+      "value": 6.59,
+      "displayValue": "6.6%",
+      "date": "2026-04",
+      "unit": "% per year",
+      "sourceId": "indiadatahub",
+      "indicatorId": "prices.deposit_rate_term"
+    },
+    {
+      "label": "Bank term-deposit (FD) rate, all SCBs, earliest",
+      "value": 8.81,
+      "displayValue": "8.8%",
+      "date": "2013-03",
+      "unit": "% per year",
+      "sourceId": "indiadatahub",
+      "indicatorId": "prices.deposit_rate_term"
+    },
+    {
+      "label": "RBI policy repo rate, latest",
+      "value": 5.25,
+      "displayValue": "5.25",
+      "date": "2026-05-22",
+      "unit": "Percent",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "monetary.rbi.policy_repo_rate_weekly"
+    },
+    {
+      "label": "RBI policy repo rate, earliest",
+      "value": 6,
+      "displayValue": "6",
+      "date": "2017-10-13",
+      "unit": "Percent",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "monetary.rbi.policy_repo_rate_weekly"
+    },
+    {
+      "label": "CPI inflation — General (Rural), latest",
+      "value": 0.76,
+      "displayValue": "0.8%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.rural.general.inflation"
+    },
+    {
+      "label": "CPI inflation — General (Rural), earliest",
+      "value": 6.4,
+      "displayValue": "6.4%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.rural.general.inflation"
+    },
+    {
+      "label": "CPI inflation — General (Urban), latest",
+      "value": 2.03,
+      "displayValue": "2%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.urban.general.inflation"
+    },
+    {
+      "label": "CPI inflation — General (Urban), earliest",
+      "value": 6,
+      "displayValue": "6%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.urban.general.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages (Rural), latest",
+      "value": -2.31,
+      "displayValue": "-2.3%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.rural.food_beverages.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages (Rural), earliest",
+      "value": 2.18,
+      "displayValue": "2.2%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.rural.food_beverages.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages (Urban), latest",
+      "value": -1.05,
+      "displayValue": "-1.1%",
+      "date": "2025-12",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.urban.food_beverages.inflation"
+    },
+    {
+      "label": "CPI inflation — Food and Beverages (Urban), earliest",
+      "value": 0.32,
+      "displayValue": "0.3%",
+      "date": "2012-01",
+      "unit": "% YoY",
+      "sourceId": "mospi",
+      "indicatorId": "prices.cpi.urban.food_beverages.inflation"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "prices.cpi.combined.purchasing_power",
+      "title": "What ₹100 from 2012 buys today",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "DERIVED_purchasing_power",
+      "unit": "₹ (2012 rupees)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 185,
+      "earliest": {
+        "date": "2011-01",
+        "value": 111.7
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 50.5
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.headline_annual_long",
+      "title": "India's consumer price inflation, 1960 to today",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "FP.CPI.TOTL.ZG + MOSPI splice",
+      "unit": "% per year",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 1.78
+      },
+      "latest": {
+        "date": "2025",
+        "value": 2.23
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.general.inflation",
+      "title": "CPI inflation — General (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_general_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 159,
+      "earliest": {
+        "date": "2012-01",
+        "value": 6.26
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 1.33
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.general.index",
+      "title": "CPI index — General (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_general_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 185,
+      "earliest": {
+        "date": "2011-01",
+        "value": 89.5
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 198
+      }
+    },
+    {
+      "indicatorId": "econ.inflation_cpi",
+      "title": "Inflation, consumer prices",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "FP.CPI.TOTL.ZG",
+      "unit": "annual %",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 1.77987784677382
+      },
+      "latest": {
+        "date": "2024",
+        "value": 4.95303550973656
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.price_multiple_since_1960",
+      "title": "How many times prices have risen since 1960",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "prices.cpi.price_multiple_since_1960",
+      "unit": "× (1960=1)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 1
+      },
+      "latest": {
+        "date": "2025",
+        "value": 92.1
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.purchasing_power_1960",
+      "title": "What ₹100 from 1960 buys today",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "prices.cpi.purchasing_power_1960",
+      "unit": "₹ (1960 rupees)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 100
+      },
+      "latest": {
+        "date": "2025",
+        "value": 1.1
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.decade_avg_inflation",
+      "title": "Average inflation by decade",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "prices.cpi.decade_avg_inflation",
+      "unit": "% per year",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "1960s",
+        "value": 5.9
+      },
+      "latest": {
+        "date": "2020s",
+        "value": 5.2
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.price_level_since_1960",
+      "title": "India price level since 1960",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "prices.cpi.price_level_since_1960",
+      "unit": "index (1960=100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 100
+      },
+      "latest": {
+        "date": "2025",
+        "value": 9209
+      }
+    },
+    {
+      "indicatorId": "compare.cpi_inflation.in",
+      "title": "CPI inflation — IND",
+      "sourceId": "world-context",
+      "sourceIndicatorId": "FP.CPI.TOTL.ZG.IND",
+      "unit": "% per year",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 65,
+      "earliest": {
+        "date": "1960",
+        "value": 1.77987784677382
+      },
+      "latest": {
+        "date": "2024",
+        "value": 4.95303550973656
+      }
+    },
+    {
+      "indicatorId": "compare.cpi_inflation.us",
+      "title": "CPI inflation — USA",
+      "sourceId": "world-context",
+      "sourceIndicatorId": "FP.CPI.TOTL.ZG.USA",
+      "unit": "% per year",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 65,
+      "earliest": {
+        "date": "1960",
+        "value": 1.45797598627791
+      },
+      "latest": {
+        "date": "2024",
+        "value": 2.94952520485207
+      }
+    },
+    {
+      "indicatorId": "compare.cpi_inflation.chn",
+      "title": "CPI inflation — CHN",
+      "sourceId": "world-context",
+      "sourceIndicatorId": "FP.CPI.TOTL.ZG.CHN",
+      "unit": "% per year",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 38,
+      "earliest": {
+        "date": "1987",
+        "value": 7.23383553065609
+      },
+      "latest": {
+        "date": "2024",
+        "value": 0.218128938439177
+      }
+    },
+    {
+      "indicatorId": "compare.cpi_inflation.bra",
+      "title": "CPI inflation — BRA",
+      "sourceId": "world-context",
+      "sourceIndicatorId": "FP.CPI.TOTL.ZG.BRA",
+      "unit": "% per year",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 44,
+      "earliest": {
+        "date": "1981",
+        "value": 101.725072957927
+      },
+      "latest": {
+        "date": "2024",
+        "value": 4.36746407652336
+      }
+    },
+    {
+      "indicatorId": "prices.wpi.all_commodities.inflation",
+      "title": "WPI — all commodities (inflation)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "WPI_all_commodities_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 157,
+      "earliest": {
+        "date": "2013-04",
+        "value": 3.7
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 8.3
+      }
+    },
+    {
+      "indicatorId": "prices.wpi.primary_articles.inflation",
+      "title": "WPI — primary articles (inflation)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "WPI_primary_articles_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 157,
+      "earliest": {
+        "date": "2013-04",
+        "value": 7
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 9.2
+      }
+    },
+    {
+      "indicatorId": "prices.wpi.fuel_power.inflation",
+      "title": "WPI — fuel & power (inflation)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "WPI_fuel_power_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 157,
+      "earliest": {
+        "date": "2013-04",
+        "value": 1.6
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 24.7
+      }
+    },
+    {
+      "indicatorId": "prices.wpi.manufactured.inflation",
+      "title": "WPI — manufactured products (inflation)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "WPI_manufactured_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 157,
+      "earliest": {
+        "date": "2013-04",
+        "value": 2.9
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 4.6
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.weight.food_beverages",
+      "title": "CPI basket weight — Food & beverages",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_WEIGHT_food_beverages",
+      "unit": "% of basket",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2012",
+        "value": 45.86
+      },
+      "latest": {
+        "date": "2012",
+        "value": 45.86
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.weight.miscellaneous",
+      "title": "CPI basket weight — Miscellaneous",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_WEIGHT_miscellaneous",
+      "unit": "% of basket",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2012",
+        "value": 28.32
+      },
+      "latest": {
+        "date": "2012",
+        "value": 28.32
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.weight.housing",
+      "title": "CPI basket weight — Housing",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_WEIGHT_housing",
+      "unit": "% of basket",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2012",
+        "value": 10.07
+      },
+      "latest": {
+        "date": "2012",
+        "value": 10.07
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.weight.fuel_light",
+      "title": "CPI basket weight — Fuel & light",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_WEIGHT_fuel_light",
+      "unit": "% of basket",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2012",
+        "value": 6.84
+      },
+      "latest": {
+        "date": "2012",
+        "value": 6.84
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.weight.clothing_footwear",
+      "title": "CPI basket weight — Clothing & footwear",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_WEIGHT_clothing_footwear",
+      "unit": "% of basket",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2012",
+        "value": 6.53
+      },
+      "latest": {
+        "date": "2012",
+        "value": 6.53
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.weight.pan_tobacco_intoxicants",
+      "title": "CPI basket weight — Pan, tobacco, intoxicants",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_WEIGHT_pan_tobacco_intoxicants",
+      "unit": "% of basket",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2012",
+        "value": 2.38
+      },
+      "latest": {
+        "date": "2012",
+        "value": 2.38
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.contribution.food_beverages",
+      "title": "Contribution to CPI inflation — Food & beverages",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_contrib_food_beverages",
+      "unit": "percentage points",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025-12",
+        "value": -0.85
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -0.85
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.contribution.miscellaneous",
+      "title": "Contribution to CPI inflation — Miscellaneous",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_contrib_miscellaneous",
+      "unit": "percentage points",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025-12",
+        "value": 1.75
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 1.75
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.contribution.housing",
+      "title": "Contribution to CPI inflation — Housing",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_contrib_housing",
+      "unit": "percentage points",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025-12",
+        "value": 0.29
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 0.29
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.contribution.fuel_light",
+      "title": "Contribution to CPI inflation — Fuel & light",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_contrib_fuel_light",
+      "unit": "percentage points",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025-12",
+        "value": 0.13
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 0.13
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.contribution.clothing_footwear",
+      "title": "Contribution to CPI inflation — Clothing & footwear",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_contrib_clothing_footwear",
+      "unit": "percentage points",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025-12",
+        "value": 0.09
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 0.09
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.contribution.pan_tobacco_intoxicants",
+      "title": "Contribution to CPI inflation — Pan, tobacco, intoxicants",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_contrib_pan_tobacco_intoxicants",
+      "unit": "percentage points",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2025-12",
+        "value": 0.07
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 0.07
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.food_beverages.inflation",
+      "title": "CPI inflation — Food and Beverages (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_food_beverages_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 1.52
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -1.85
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.fuel_light.inflation",
+      "title": "CPI inflation — Fuel and Light (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_fuel_light_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 11.83
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 1.97
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.housing.inflation",
+      "title": "CPI inflation — Housing (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_housing_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 159,
+      "earliest": {
+        "date": "2012-01",
+        "value": 9
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 2.86
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.clothing_footwear.inflation",
+      "title": "CPI inflation — Clothing and Footwear (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_clothing_footwear_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 15.1
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 1.44
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.health.inflation",
+      "title": "CPI inflation — Miscellaneous: Health (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_health_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 8.27
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 3.43
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.education.inflation",
+      "title": "CPI inflation — Miscellaneous: Education (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_education_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 10.69
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 3.37
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.transport_communication.inflation",
+      "title": "CPI inflation — Miscellaneous: Transport and Communication (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_transport_communication_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 8.08
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 0.82
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.miscellaneous.inflation",
+      "title": "CPI inflation — Miscellaneous (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_miscellaneous_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 9.38
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 6.17
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.inflation",
+      "title": "CPI inflation — Pan, Tobacco and Intoxicants (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_pan_tobacco_intoxicants_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 15.78
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 3.01
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.personal_care_effects.inflation",
+      "title": "CPI inflation — Miscellaneous: Personal Care and Effects (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_personal_care_effects_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 15.08
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 28.16
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.recreation_amusement.inflation",
+      "title": "CPI inflation — Miscellaneous: Recreation and Amusement (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_recreation_amusement_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 3.61
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 1.17
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.household_goods_services.inflation",
+      "title": "CPI inflation — Miscellaneous: Household Goods and Services (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_household_goods_services_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 9.31
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 1.91
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.food_beverages.index",
+      "title": "CPI index — Food and Beverages (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_food_beverages_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 92.3
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 202.1
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.fuel_light.index",
+      "title": "CPI index — Fuel and Light (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_fuel_light_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 86.2
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 181.3
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.housing.index",
+      "title": "CPI index — Housing (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_housing_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 175,
+      "earliest": {
+        "date": "2011-01",
+        "value": 87.8
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 186.9
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.clothing_footwear.index",
+      "title": "CPI index — Clothing and Footwear (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_clothing_footwear_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 82.8
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 197.6
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.health.index",
+      "title": "CPI index — Miscellaneous: Health (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_health_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 89.5
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 204.8
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.education.index",
+      "title": "CPI index — Miscellaneous: Education (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_education_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 87
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 196.1
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.transport_communication.index",
+      "title": "CPI index — Miscellaneous: Transport and Communication (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_transport_communication_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 90.3
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 172.4
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.miscellaneous.index",
+      "title": "CPI index — Miscellaneous (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_miscellaneous_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 88.5
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 198
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.pan_tobacco_intoxicants.index",
+      "title": "CPI index — Pan, Tobacco and Intoxicants (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_pan_tobacco_intoxicants_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 82.4
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 215.9
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.consumer_food_price.inflation",
+      "title": "CPI inflation — Consumer Food Price (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_consumer_food_price_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 155,
+      "earliest": {
+        "date": "2012-01",
+        "value": -0.21
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -2.71
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.cereals_products.index",
+      "title": "CPI index — Food and Beverages: Cereals and Products (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_cereals_products_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 92.6
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 197.4
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.vegetables.index",
+      "title": "CPI index — Food and Beverages: Vegetables (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_vegetables_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 124.6
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 210.6
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.pulses_products.index",
+      "title": "CPI index — Food and Beverages: Pulses and Products (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_pulses_products_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 91.3
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 181.8
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.oils_fats.index",
+      "title": "CPI index — Food and Beverages: Oils and Fats (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_oils_fats_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 81.9
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 196.1
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.milk_products.index",
+      "title": "CPI index — Food and Beverages: Milk and Products (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_milk_products_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 180,
+      "earliest": {
+        "date": "2011-01",
+        "value": 82.7
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 192.3
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.vegetables.inflation",
+      "title": "CPI inflation — Food and Beverages: Vegetables (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_vegetables_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": -31.86
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -18.47
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.pulses_products.inflation",
+      "title": "CPI inflation — Food and Beverages: Pulses and Products (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_pulses_products_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 3.5
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -15.09
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.combined.oils_fats.inflation",
+      "title": "CPI inflation — Food and Beverages: Oils and Fats (Combined)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_combined_oils_fats_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 13.92
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 6.75
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.onion.index",
+      "title": "Price index — Onion",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_onion_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 173.4
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 201.3
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.tomato.index",
+      "title": "Price index — Tomato",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_tomato_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 101.3
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 259.6
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.potato.index",
+      "title": "Price index — Potato",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_potato_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 122.1
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 172.5
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.onion.inflation",
+      "title": "Price inflation — Onion",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_onion_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 3.69
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -48.07
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.tomato.inflation",
+      "title": "Price inflation — Tomato",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_tomato_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 22.41
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 14.36
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.potato.inflation",
+      "title": "Price inflation — Potato",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_potato_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 0.57
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -34.98
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.rice.inflation",
+      "title": "Price inflation — Rice (market)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_rice_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 3.4
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -1.26
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.wheat_atta.inflation",
+      "title": "Price inflation — Wheat / atta",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_wheat_atta_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 2.53
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -0.66
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.milk.inflation",
+      "title": "Price inflation — Milk",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_milk_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 9.46
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 2.51
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.eggs.inflation",
+      "title": "Price inflation — Eggs",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_eggs_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": -0.24
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 4.81
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.pulses.inflation",
+      "title": "Price inflation — Pulses",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_pulses_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 3.89
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -5.36
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.mustard_oil.inflation",
+      "title": "Price inflation — Mustard oil",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_mustard_oil_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 0.86
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 8.23
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.sugar.inflation",
+      "title": "Price inflation — Sugar",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_sugar_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": -1.72
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 4.86
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.tuition_fees.index",
+      "title": "Price index — Tuition fees",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_tuition_fees_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 111.9
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 204.7
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.doctor_fee.index",
+      "title": "Price index — Doctor's fee",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_doctor_fee_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 117
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 223.6
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.medicine.index",
+      "title": "Price index — Medicine",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_medicine_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 108.9
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 203
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.petrol.index",
+      "title": "Price index — Petrol",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_petrol_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 107.3
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 140.2
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.diesel.index",
+      "title": "Price index — Diesel",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_diesel_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 121.3
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 189.1
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.lpg.index",
+      "title": "Price index — LPG cylinder",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_lpg_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 106.8
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 192.7
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.electricity.index",
+      "title": "Price index — Electricity",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_electricity_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 112
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 164.9
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.gold.index",
+      "title": "Price index — Gold",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_gold_idx",
+      "unit": "index (2012=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 282,
+      "earliest": {
+        "date": "2014-01",
+        "value": 100.6
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 433.9
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.gold.inflation",
+      "title": "Price inflation — Gold",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_gold_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": -7.36
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 68.7
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.item.lpg.inflation",
+      "title": "Price inflation — LPG cylinder",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_item_lpg_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 250,
+      "earliest": {
+        "date": "2015-01",
+        "value": 1.22
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 5.47
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.real_fd_return",
+      "title": "Real return on a fixed deposit (after inflation)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "prices.cpi.real_fd_return",
+      "unit": "percentage points",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 145,
+      "earliest": {
+        "date": "2013-03",
+        "value": -1.25
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 5.35
+      }
+    },
+    {
+      "indicatorId": "prices.deposit_rate_term",
+      "title": "Bank term-deposit (FD) rate, all SCBs",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "MOIRCBOTDR11M",
+      "unit": "% per year",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 158,
+      "earliest": {
+        "date": "2013-03",
+        "value": 8.81
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 6.59
+      }
+    },
+    {
+      "indicatorId": "monetary.rbi.policy_repo_rate_weekly",
+      "title": "RBI policy repo rate",
+      "sourceId": "rbi-dbie",
+      "sourceIndicatorId": "download/dbie_FileDownloadHDFSAction:MacroeconomicIndicators:Weekly:Policy Repo Rate (%)",
+      "unit": "Percent",
+      "frequency": "weekly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 450,
+      "earliest": {
+        "date": "2017-10-13",
+        "value": 6,
+        "sourcePeriodType": "date",
+        "sourceDate": "2017-10-13"
+      },
+      "latest": {
+        "date": "2026-05-22",
+        "value": 5.25,
+        "sourcePeriodType": "date",
+        "sourceDate": "2026-05-22"
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.rural.general.inflation",
+      "title": "CPI inflation — General (Rural)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_rural_general_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 6.4
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 0.76
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.urban.general.inflation",
+      "title": "CPI inflation — General (Urban)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_urban_general_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 159,
+      "earliest": {
+        "date": "2012-01",
+        "value": 6
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 2.03
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.rural.food_beverages.inflation",
+      "title": "CPI inflation — Food and Beverages (Rural)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_rural_food_beverages_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 2.18
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -2.31
+      }
+    },
+    {
+      "indicatorId": "prices.cpi.urban.food_beverages.inflation",
+      "title": "CPI inflation — Food and Beverages (Urban)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "CPI2012_urban_food_beverages_inf",
+      "unit": "% YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 154,
+      "earliest": {
+        "date": "2012-01",
+        "value": 0.32
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": -1.05
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

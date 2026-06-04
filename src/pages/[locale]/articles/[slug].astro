@@ -2,9 +2,15 @@
 import Base from "../../../layouts/Base.astro";
 import Nav from "../../../components/Nav.astro";
 import ArticleVisuals from "../../../components/ArticleVisuals.astro";
+import ConceptPrimer from "../../../components/ConceptPrimer.astro";
+import EditorialStory from "../../../components/EditorialStory.astro";
+import ArticleEditLog from "../../../components/ArticleEditLog.astro";
+import ArticleEvidence from "../../../components/ArticleEvidence.astro";
+import Footer from "../../../components/Footer.astro";
 import { locales } from "../../../data/site";
-import { inlineMarkdownHtml, macchaExplanation, markdownBlocks, pullQuoteForQuestion, questionPages, questionUrl } from "../../../data/questions";
-import { visualsForQuestion } from "../../../data/viz";
+import { inlineMarkdownHtml, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../../data/questions";
+import { visualsForQuestion, bindSectionVisuals } from "../../../data/viz";
+import { articleGraph } from "../../../data/seo";
 
 export function getStaticPaths() {
   return locales.flatMap((locale) =>
@@ -20,12 +26,58 @@ const { page } = Astro.props;
 const explanation = page.explanation;
 const related = questionPages.filter((item) => item.id !== page.id && item.domain === page.domain).slice(0, 4);
 const blocks = markdownBlocks(explanation.article.bodyMarkdown);
+const updatedLabel = explanation.generatedAt
+  ? new Date(explanation.generatedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+  : null;
+const status = statusMeta(explanation.status);
+// Curated plan decides which charts show and at what size. The page reads as a
+// narrative: an opening answer + hero chart, then prose sections each interleaved
+// with the chart they discuss. The lead (core indicator) chart opens the story.
 const visuals = visualsForQuestion(page);
+// Bind ALL charts to sections via the map (including the hero) so the section that
+// maps to the lead chart actually receives it. Sizing (hero/feature/small) is carried
+// on each visual, so the lead still renders large in its section.
+const storyVisuals = visuals;
 const maccha = macchaExplanation(page);
-const pullQuote = pullQuoteForQuestion(page);
+// The "tell me what this means, bro" block: prefer the LLM-written version, fall
+// back to the template. It now lives AFTER the data, where the question naturally arises.
+const llmMacha = (explanation as { macha?: { heading?: string; body?: string; soWhat?: string } }).macha;
+const machaBlock = llmMacha?.heading
+  ? { heading: llmMacha.heading, body: llmMacha.body || "", soWhat: llmMacha.soWhat || "" }
+  : { heading: maccha.title, body: maccha.body, soWhat: maccha.bullets?.[0] || "" };
+const pullQuote = pullQuoteForPage(page);
+const editorialStory = explanation.editorialStory;
+
+type MarkdownBlock = ReturnType<typeof markdownBlocks>[number];
+const storySections: Array<{ heading: string; blocks: MarkdownBlock[] }> = [];
+let currentSection: { heading: string; blocks: MarkdownBlock[] } | null = null;
+for (const block of blocks) {
+  if (block.type === "h2") {
+    if (currentSection) storySections.push(currentSection);
+    currentSection = { heading: block.text, blocks: [] };
+  } else if (currentSection) {
+    currentSection.blocks.push(block);
+  } else {
+    currentSection = { heading: explanation.article.title, blocks: [block] };
+  }
+}
+if (currentSection) storySections.push(currentSection);
+
+// Pair each prose section with the chart it discusses. The LLM's sectionVisualMap
+// (heading -> visualId) wins; otherwise a token-overlap heuristic. Unbound charts
+// fall to a compact grid at the end so nothing high-signal is dropped.
+const sectionInputs = storySections.map((section) => ({
+  heading: section.heading,
+  text: section.blocks.filter((block) => block.type === "p").map((block) => block.text).join(" ")
+}));
+const explicitMap = Object.fromEntries(
+  ((explanation as { sectionVisualMap?: Array<{ heading: string; visualId: string }> }).sectionVisualMap || [])
+    .map((entry) => [entry.heading, entry.visualId])
+);
+const { bound: boundVisuals, leftover: leftoverVisuals } = bindSectionVisuals(sectionInputs, storyVisuals, explicitMap);
 ---
 
-<Base title={`${page.question} · Indica`} description={explanation.short.dek} domain={page.domain}>
+<Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/${locale}/articles/${page.slug}.md`}>
   <div class="wrap">
     <Nav active={page.domain} locale={locale} />
 
@@ -34,12 +86,29 @@ const pullQuote = pullQuoteForQuestion(page);
       <h1 class="serif">{page.question}</h1>
       <p class="muted">{explanation.short.dek}</p>
       <div class="article-status">
-        <span class={explanation.status === "ready" ? "status ready" : "status needs"}>{explanation.status === "ready" ? "Ready" : "Needs more data"}</span>
-        <span>Generated from {explanation.evidence.availableIndicatorIds.length} local artifact{explanation.evidence.availableIndicatorIds.length === 1 ? "" : "s"}</span>
+        <span class={`status ${status.cls}`}>{status.label}</span>
+        {explanation.lastReviewed
+          ? <span>Last reviewed {explanation.lastReviewed}</span>
+          : (updatedLabel ? <span>Updated {updatedLabel}</span> : null)}
+        {explanation.dataThrough ? <span>Data through {explanation.dataThrough}</span> : null}
       </div>
     </header>
 
-    <ArticleVisuals visuals={visuals} lockedNumbers={explanation.evidence.lockedNumbers} />
+    {editorialStory ? (
+      <nav class="article-tabs article-tabs--views" aria-label="Article views" data-article-tablist>
+        <button class="article-tab is-active" data-article-tab="data" type="button" aria-selected="true">Article</button>
+        <button class="article-tab" data-article-tab="essay" type="button" aria-selected="false">Essay</button>
+        <button class="article-tab" data-article-tab="evidence" type="button" aria-selected="false">Evidence</button>
+      </nav>
+    ) : null}
+
+    <section class="article-hero single">
+      <div class="explain-card standard">
+        <p class="lbl">Short answer</p>
+        <h2 class="serif">{explanation.short.headline}</h2>
+        <p>{explanation.short.body}</p>
+      </div>
+    </section>
 
     <section class="data-pull">
       <p class="lbl">The point</p>
@@ -49,63 +118,229 @@ const pullQuote = pullQuoteForQuestion(page);
       </div>
     </section>
 
-    <section class="article-hero">
-      <div class="explain-card standard">
-        <p class="lbl">Short answer</p>
-        <h2 class="serif">{explanation.short.headline}</h2>
-        <p>{explanation.short.body}</p>
-      </div>
-      <aside class="explain-card maccha">
-        <p class="lbl">{maccha.kicker}</p>
-        <h2 class="serif">{maccha.title}</h2>
-        <p>{maccha.body}</p>
-        <ul>
-          {maccha.bullets.map((item) => <li>{item}</li>)}
-        </ul>
-      </aside>
-    </section>
+    {page.primer ? <ConceptPrimer primer={page.primer} domain={page.domain} /> : null}
 
-    <section class="section article-layout">
-      <article class="article-body">
-        <p class="lbl">Article</p>
-        <h2 class="serif">{explanation.article.title}</h2>
-        <p class="standfirst">{explanation.article.standfirst}</p>
-        <div class="longform">
-          {blocks.map((block) => {
-            if (block.type === "h2") return <h3>{block.text}</h3>;
-            if (block.type === "h3") return <h4>{block.text}</h4>;
-            return <p set:html={inlineMarkdownHtml(block.text)} />;
-          })}
-        </div>
-      </article>
+    {editorialStory ? (
+      <>
+        <section class="article-panel" data-article-panel="data">
+          <section class="section article-story-section" id="charts">
+            <article class="article-body story-body">
+              <p class="lbl">Guided story</p>
+              <h2 class="serif">{explanation.article.title}</h2>
+              <p class="standfirst">{explanation.article.standfirst}</p>
+              <div class="story-flow">
+                {storySections.map((section, index) => (
+                  <section class={`story-step ${(boundVisuals[index] as { size?: string } | null)?.size === "small" ? "story-step--small" : "story-step--feature"}`}>
+                    <div class="story-copy longform">
+                      <h3>{section.heading}</h3>
+                      {section.blocks.map((block) => {
+                        if (block.type === "h3") return <h4>{block.text}</h4>;
+                        if (block.type === "p") return <p set:html={inlineMarkdownHtml(block.text)} />;
+                        if (block.type === "ul") {
+                          return (
+                            <ul class="story-list">
+                              {block.items.map((item) => <li set:html={inlineMarkdownHtml(item)} />)}
+                            </ul>
+                          );
+                        }
+                        if (block.type === "table") {
+                          return (
+                            <div class="story-table-wrap">
+                              <table class="story-table">
+                                <thead>
+                                  <tr>{block.headers.map((header) => <th set:html={inlineMarkdownHtml(header)} />)}</tr>
+                                </thead>
+                                <tbody>
+                                  {block.rows.map((row) => (
+                                    <tr>{row.map((cell) => <td set:html={inlineMarkdownHtml(cell)} />)}</tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+                    {boundVisuals[index] ? (
+                      <ArticleVisuals
+                        visuals={[boundVisuals[index]]}
+                        lockedNumbers={explanation.evidence.lockedNumbers}
+                        chartExplainers={explanation.chartExplainers}
+                        showKpis={false}
+                        leadFirst={false}
+                        startIndex={index + 1}
+                        sectionLabel={`Chart ${index + 2}`}
+                        sectionClass="story-viz"
+                      />
+                    ) : null}
+                  </section>
+                ))}
+                {leftoverVisuals.length ? (
+                  <ArticleVisuals
+                    visuals={leftoverVisuals}
+                    lockedNumbers={explanation.evidence.lockedNumbers}
+                    chartExplainers={explanation.chartExplainers}
+                    showKpis={false}
+                    leadFirst={false}
+                    startIndex={storySections.length + 1}
+                    sectionLabel="More from the data"
+                    sectionClass="story-viz story-leftover"
+                  />
+                ) : null}
+              </div>
+              {explanation.editorialPlan?.glossaryBlocks?.length ? (
+                <section class="concept-blocks">
+                  <p class="lbl">Plain English concepts</p>
+                  {explanation.editorialPlan.glossaryBlocks.map((item) => (
+                    <div class="concept-item">
+                      <h3 class="serif">{item.term}</h3>
+                      <p>{item.plainMeaning}</p>
+                      <p class="concept-why">{item.whyItMattersHere}</p>
+                    </div>
+                  ))}
+                </section>
+              ) : null}
+            </article>
+          </section>
 
-      <aside class="article-side">
-        <div class="side-box">
-          <p class="lbl">Indicators</p>
-          <div class="def-tags">
-            {page.indicators.map((indicator) => <span>{indicator}</span>)}
-          </div>
-        </div>
+          <section class="macha-block">
+            <p class="lbl">Tell me what this means, bro</p>
+            <h2 class="serif">{machaBlock.heading}</h2>
+            <p class="macha-body">{machaBlock.body}</p>
+            {machaBlock.soWhat ? <p class="macha-sowhat serif">{machaBlock.soWhat}</p> : null}
+          </section>
+        </section>
 
-        <div class="side-box">
-          <p class="lbl">Caveats</p>
-          {explanation.caveats.length ? (
-            <ul>
-              {explanation.caveats.slice(0, 5).map((item) => <li>{item}</li>)}
-            </ul>
-          ) : <p class="muted">No caveats recorded.</p>}
-        </div>
+        <section class="article-panel article-panel-story" data-article-panel="essay" hidden>
+          <EditorialStory story={editorialStory} lockedNumbers={explanation.evidence.lockedNumbers} />
+        </section>
 
-        <div class="side-box">
-          <p class="lbl">Sources</p>
-          {explanation.sourceNotes.length ? (
-            <ul>
-              {explanation.sourceNotes.slice(0, 5).map((item) => <li>{item}</li>)}
-            </ul>
-          ) : <p class="muted">Source notes are embedded in the evidence packet.</p>}
-        </div>
-      </aside>
-    </section>
+        <section class="article-panel" data-article-panel="evidence" hidden>
+          <section class="section article-meta-section" id="evidence">
+            <ArticleEvidence explanation={explanation} />
+          </section>
+        </section>
+
+        <script is:inline>
+          (() => {
+            const tablist = document.querySelector("[data-article-tablist]");
+            if (!tablist) return;
+            const tabs = Array.from(document.querySelectorAll("[data-article-tab]"));
+            const panels = Array.from(document.querySelectorAll("[data-article-panel]"));
+            const valid = new Set(panels.map((panel) => panel.getAttribute("data-article-panel")));
+            function show(id, updateUrl = true, scroll = true) {
+              const target = valid.has(id) ? id : "data";
+              panels.forEach((panel) => {
+                panel.hidden = panel.getAttribute("data-article-panel") !== target;
+              });
+              tabs.forEach((tab) => {
+                const active = tab.getAttribute("data-article-tab") === target;
+                tab.classList.toggle("is-active", active);
+                tab.setAttribute("aria-selected", active ? "true" : "false");
+              });
+              if (updateUrl) {
+                const url = new URL(window.location.href);
+                if (target === "data") url.searchParams.delete("view");
+                else url.searchParams.set("view", target);
+                history.replaceState(null, "", url);
+              }
+              if (scroll) {
+                if (target === "data") window.scrollTo({ top: 0, behavior: "smooth" });
+                else tablist.scrollIntoView({ block: "start", behavior: "smooth" });
+              }
+            }
+            tabs.forEach((tab) => {
+              tab.addEventListener("click", () => show(tab.getAttribute("data-article-tab")));
+            });
+            const initial = new URL(window.location.href).searchParams.get("view");
+            show(initial && valid.has(initial) ? initial : "data", false, false);
+          })();
+        </script>
+      </>
+    ) : (
+      <>
+        <section class="section article-story-section" id="charts">
+          <article class="article-body story-body">
+            <p class="lbl">Guided story</p>
+            <h2 class="serif">{explanation.article.title}</h2>
+            <p class="standfirst">{explanation.article.standfirst}</p>
+            <div class="story-flow">
+              {storySections.map((section, index) => (
+                <section class={`story-step ${(boundVisuals[index] as { size?: string } | null)?.size === "small" ? "story-step--small" : "story-step--feature"}`}>
+                  <div class="story-copy longform">
+                    <h3>{section.heading}</h3>
+                    {section.blocks.map((block) => {
+                      if (block.type === "h3") return <h4>{block.text}</h4>;
+                      if (block.type === "p") return <p set:html={inlineMarkdownHtml(block.text)} />;
+                      if (block.type === "ul") {
+                        return (
+                          <ul class="story-list">
+                            {block.items.map((item) => <li set:html={inlineMarkdownHtml(item)} />)}
+                          </ul>
+                        );
+                      }
+                      if (block.type === "table") {
+                        return (
+                          <div class="story-table-wrap">
+                            <table class="story-table">
+                              <thead>
+                                <tr>{block.headers.map((header) => <th set:html={inlineMarkdownHtml(header)} />)}</tr>
+                              </thead>
+                              <tbody>
+                                {block.rows.map((row) => (
+                                  <tr>{row.map((cell) => <td set:html={inlineMarkdownHtml(cell)} />)}</tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                  {boundVisuals[index] ? (
+                    <ArticleVisuals
+                      visuals={[boundVisuals[index]]}
+                      lockedNumbers={explanation.evidence.lockedNumbers}
+                      chartExplainers={explanation.chartExplainers}
+                      showKpis={false}
+                      leadFirst={false}
+                      startIndex={index + 1}
+                      sectionLabel={`Chart ${index + 2}`}
+                      sectionClass="story-viz"
+                    />
+                  ) : null}
+                </section>
+              ))}
+              {leftoverVisuals.length ? (
+                <ArticleVisuals
+                  visuals={leftoverVisuals}
+                  lockedNumbers={explanation.evidence.lockedNumbers}
+                  chartExplainers={explanation.chartExplainers}
+                  showKpis={false}
+                  leadFirst={false}
+                  startIndex={storySections.length + 1}
+                  sectionLabel="More from the data"
+                  sectionClass="story-viz story-leftover"
+                />
+              ) : null}
+            </div>
+          </article>
+        </section>
+
+        <section class="macha-block">
+          <p class="lbl">Tell me what this means, bro</p>
+          <h2 class="serif">{machaBlock.heading}</h2>
+          <p class="macha-body">{machaBlock.body}</p>
+          {machaBlock.soWhat ? <p class="macha-sowhat serif">{machaBlock.soWhat}</p> : null}
+        </section>
+
+        <section class="section article-meta-section" id="evidence">
+          <ArticleEvidence explanation={explanation} />
+        </section>
+      </>
+    )}
 
     <section class="section">
       <p class="sec-hd">Related questions</p>
@@ -117,5 +352,10 @@ const pullQuote = pullQuoteForQuestion(page);
         </a>
       ))}
     </section>
+
+    <ArticleEditLog questionId={page.id} explanation={explanation} />
+
+    <Footer locale={locale} />
+    <script src="/article-actions.js" defer></script>
   </div>
 </Base>

@@ -1,0 +1,40 @@
+[
+  {
+    "id": "health.life_expectancy.worldbank_vs_who",
+    "description": "World Bank and WHO life expectancy for India should stay broadly aligned. This is a sanity check, not a source-of-truth decision.",
+    "left": {
+      "type": "series",
+      "artifact": "data/series/worldbank.IN.SP_DYN_LE00_IN.json"
+    },
+    "right": {
+      "type": "table",
+      "artifact": "data/series/who-gho.IN.WHOSIS_000001.json",
+      "timeField": "TimeDim",
+      "valueField": "NumericValue",
+      "filters": {
+        "Dim1": "SEX_BTSX"
+      }
+    },
+    "maxYearGap": 4,
+    "maxAbsDiff": 5
+  },
+  {
+    "id": "health.under5_mortality.worldbank_vs_who",
+    "description": "World Bank and WHO under-five mortality for India should stay broadly aligned.",
+    "left": {
+      "type": "series",
+      "artifact": "data/series/worldbank.IN.SH_DYN_MORT.json"
+    },
+    "right": {
+      "type": "table",
+      "artifact": "data/series/who-gho.IN.MDG_0000000007.json",
+      "timeField": "TimeDim",
+      "valueField": "NumericValue",
+      "filters": {
+        "Dim1": "SEX_BTSX"
+      }
+    },
+    "maxYearGap": 2,
+    "maxAbsDiff": 3
+  }
+]

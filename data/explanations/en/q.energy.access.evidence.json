@@ -3,16 +3,222 @@
   "questionId": "q.energy.access",
   "question": "Do nearly all Indians have electricity now?",
   "priority": "core",
+  "theme": {
+    "id": "energy",
+    "label": "Energy and electricity",
+    "readerQuestions": [
+      "How much energy or electricity is being used?",
+      "What is the fuel mix?",
+      "Is access different from reliability or consumption?",
+      "Is the system getting cleaner as demand grows?"
+    ],
+    "glossaryTerms": [
+      "TWh",
+      "kWh per capita",
+      "electricity access",
+      "carbon intensity",
+      "generation mix"
+    ]
+  },
   "requiredIndicatorIds": [
     "energy.electricity_access"
   ],
   "availableIndicatorIds": [
     "energy.electricity_access"
   ],
+  "themeIndicatorIds": [
+    "energy.electricity_access",
+    "energy.clean_cooking_access",
+    "energy.electric_power_consumption_pc",
+    "energy.eia.energy_per_capita"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.energy.electricity_access",
+      "indicatorId": "energy.electricity_access",
+      "title": "Access to electricity",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.energy.clean_cooking_access",
+      "indicatorId": "energy.clean_cooking_access",
+      "title": "Access to clean fuels and technologies for cooking",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v3.energy.electric_power_consumption_pc",
+      "indicatorId": "energy.electric_power_consumption_pc",
+      "title": "Electric power consumption",
+      "sourceId": "worldbank",
+      "unit": "kWh per capita",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v4.energy.eia.energy_per_capita",
+      "indicatorId": "energy.eia.energy_per_capita",
+      "title": "Energy consumption per capita",
+      "sourceId": "eia",
+      "unit": "million Btu per person",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "share-of-indians-with-electricity",
+      "title": "Share of Indians with electricity",
+      "chartType": "line",
+      "beat": "answer",
+      "window": "full",
+      "indicator": "energy.electricity_access",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The direct answer: how close India is to universal household electricity access."
+    },
+    {
+      "order": 2,
+      "chartId": "access-to-clean-cooking-fuel",
+      "title": "Access to clean cooking fuel",
+      "chartType": "line",
+      "beat": "the-real-gap",
+      "window": "full",
+      "indicator": "energy.clean_cooking_access",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The gap the headline hides: a wired home can still cook on wood or dung."
+    },
+    {
+      "order": 3,
+      "chartId": "electricity-used-per-person",
+      "title": "Electricity used per person",
+      "chartType": "line",
+      "beat": "access-not-usage",
+      "window": "full",
+      "indicator": "energy.electric_power_consumption_pc",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Access is not the same as use: per-person electricity is still low by world standards."
+    },
+    {
+      "order": 4,
+      "chartId": "total-energy-used-per-person",
+      "title": "Total energy used per person",
+      "chartType": "line",
+      "beat": "energy-poverty",
+      "window": "full",
+      "indicator": "energy.eia.energy_per_capita",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The widest frame: all energy per person, the clearest single read on energy poverty."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Access to electricity, latest",
+      "value": 99.5,
+      "displayValue": "99.5%",
+      "date": "2023",
+      "unit": "% of population",
+      "indicatorId": "energy.electricity_access",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Access to electricity, earliest",
+      "value": 50.9,
+      "displayValue": "50.9%",
+      "date": "1993",
+      "unit": "% of population",
+      "indicatorId": "energy.electricity_access",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Access to clean fuels and technologies for cooking, latest",
+      "value": 76.7,
+      "displayValue": "76.7%",
+      "date": "2023",
+      "unit": "% of population",
+      "indicatorId": "energy.clean_cooking_access",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Access to clean fuels and technologies for cooking, earliest",
+      "value": 22.7,
+      "displayValue": "22.7%",
+      "date": "2000",
+      "unit": "% of population",
+      "indicatorId": "energy.clean_cooking_access",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electric power consumption, latest",
+      "value": 1181.63126786529,
+      "displayValue": "1,181.63",
+      "date": "2023",
+      "unit": "kWh per capita",
+      "indicatorId": "energy.electric_power_consumption_pc",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electric power consumption, earliest",
+      "value": 270.904653711417,
+      "displayValue": "270.9",
+      "date": "1990",
+      "unit": "kWh per capita",
+      "indicatorId": "energy.electric_power_consumption_pc",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Energy consumption per capita, latest",
+      "value": 25.838701673216594,
+      "displayValue": "25.84",
+      "date": "2024",
+      "unit": "million Btu per person",
+      "indicatorId": "energy.eia.energy_per_capita",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Energy consumption per capita, earliest",
+      "value": 4.987956867475185,
+      "displayValue": "4.99",
+      "date": "1980",
+      "unit": "million Btu per person",
+      "indicatorId": "energy.eia.energy_per_capita",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
   "lockedNumbers": [
     {
       "label": "Access to electricity, latest",
       "value": 99.5,
+      "displayValue": "99.5%",
       "date": "2023",
       "unit": "% of population",
       "sourceId": "worldbank",
@@ -21,10 +227,65 @@
     {
       "label": "Access to electricity, earliest",
       "value": 50.9,
+      "displayValue": "50.9%",
       "date": "1993",
       "unit": "% of population",
       "sourceId": "worldbank",
       "indicatorId": "energy.electricity_access"
+    },
+    {
+      "label": "Access to clean fuels and technologies for cooking, latest",
+      "value": 76.7,
+      "displayValue": "76.7%",
+      "date": "2023",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.clean_cooking_access"
+    },
+    {
+      "label": "Access to clean fuels and technologies for cooking, earliest",
+      "value": 22.7,
+      "displayValue": "22.7%",
+      "date": "2000",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.clean_cooking_access"
+    },
+    {
+      "label": "Electric power consumption, latest",
+      "value": 1181.63126786529,
+      "displayValue": "1,181.63",
+      "date": "2023",
+      "unit": "kWh per capita",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.electric_power_consumption_pc"
+    },
+    {
+      "label": "Electric power consumption, earliest",
+      "value": 270.904653711417,
+      "displayValue": "270.9",
+      "date": "1990",
+      "unit": "kWh per capita",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.electric_power_consumption_pc"
+    },
+    {
+      "label": "Energy consumption per capita, latest",
+      "value": 25.838701673216594,
+      "displayValue": "25.84",
+      "date": "2024",
+      "unit": "million Btu per person",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.energy_per_capita"
+    },
+    {
+      "label": "Energy consumption per capita, earliest",
+      "value": 4.987956867475185,
+      "displayValue": "4.99",
+      "date": "1980",
+      "unit": "million Btu per person",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.energy_per_capita"
     }
   ],
   "sourceSummaries": [
@@ -49,10 +310,84 @@
         "date": "2023",
         "value": 99.5
       }
+    },
+    {
+      "indicatorId": "energy.clean_cooking_access",
+      "title": "Access to clean fuels and technologies for cooking",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "EG.CFT.ACCS.ZS",
+      "unit": "% of population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "2000",
+        "value": 22.7
+      },
+      "latest": {
+        "date": "2023",
+        "value": 76.7
+      }
+    },
+    {
+      "indicatorId": "energy.electric_power_consumption_pc",
+      "title": "Electric power consumption",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "EG.USE.ELEC.KH.PC",
+      "unit": "kWh per capita",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1990",
+        "value": 270.904653711417
+      },
+      "latest": {
+        "date": "2023",
+        "value": 1181.63126786529
+      }
+    },
+    {
+      "indicatorId": "energy.eia.energy_per_capita",
+      "title": "Energy consumption per capita",
+      "sourceId": "eia",
+      "sourceIndicatorId": "47-33-IND-MBTUPP.annual",
+      "unit": "million Btu per person",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 4.987956867475185
+      },
+      "latest": {
+        "date": "2024",
+        "value": 25.838701673216594
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

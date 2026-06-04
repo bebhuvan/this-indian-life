@@ -1,0 +1,130 @@
+---
+import type { ExplanationArtifact, LockedNumber } from "../data/questions";
+import { formatLockedNumber, inlineMarkdownHtml } from "../data/questions";
+
+type EditorialStory = NonNullable<ExplanationArtifact["editorialStory"]>;
+
+type Props = {
+  story: EditorialStory;
+  lockedNumbers?: LockedNumber[];
+};
+
+const { story, lockedNumbers = [] } = Astro.props;
+
+const lockedByLabel = new Map(lockedNumbers.map((item) => [item.label, item]));
+
+function bodyParagraphs(body: string | string[] | undefined) {
+  if (!body) return [];
+  if (Array.isArray(body)) return body;
+  return String(body).split(/\n{2,}/).map((part) => part.trim()).filter(Boolean);
+}
+
+function numberFor(card: NonNullable<EditorialStory["numberCards"]>[number]) {
+  const locked = card.numberLabel ? lockedByLabel.get(card.numberLabel) : null;
+  const value = locked?.value ?? card.value ?? null;
+  const displayValue = locked ? formatLockedNumber(locked) : card.displayValue;
+  return {
+    label: card.label || locked?.label || card.numberLabel || "Number to know",
+    caption: card.caption || (locked?.date ? `${locked.date} · ${locked.unit}` : card.unit || ""),
+    unit: locked?.unit || card.unit || "",
+    value,
+    displayValue: displayValue || (typeof value === "number" ? value.toLocaleString("en-IN", { maximumFractionDigits: 1 }) : "")
+  };
+}
+
+const numberCards = (story.numberCards || []).map(numberFor).filter((item) => item.displayValue);
+const unitCounts = new Map<string, number>();
+const unitMax = new Map<string, number>();
+for (const item of numberCards) {
+  const unit = item.unit || "mixed";
+  unitCounts.set(unit, (unitCounts.get(unit) || 0) + 1);
+  unitMax.set(unit, Math.max(unitMax.get(unit) || 1, Math.abs(item.value || 0)));
+}
+
+function termsForSection(section: EditorialStory["sections"][number]) {
+  const explicit = new Set((section.jargonTerms || []).map((term) => term.toLowerCase()));
+  const text = `${section.heading} ${bodyParagraphs(section.body).join(" ")}`.toLowerCase();
+  return (story.jargon || []).filter((item) =>
+    explicit.has(item.term.toLowerCase()) || text.includes(item.term.toLowerCase())
+  );
+}
+
+function cardsForSection(section: EditorialStory["sections"][number]) {
+  return (section.numberLabels || [])
+    .map((label) => lockedByLabel.get(label))
+    .filter((item): item is LockedNumber => Boolean(item));
+}
+---
+
+<section class="editorial-story" id="editorial-story">
+  <div class="ed-hero">
+    <p class="lbl">{story.eyebrow || "Editorial story"}</p>
+    <h2 class="serif">{story.title}</h2>
+    {story.dek ? <p class="ed-dek">{story.dek}</p> : null}
+    {story.lede ? <p class="ed-lede" set:html={inlineMarkdownHtml(story.lede)} /> : null}
+  </div>
+
+  {numberCards.length ? (
+    <div class="ed-number-grid" aria-label="Key numbers">
+      {numberCards.map((card) => {
+        const canScale = card.unit && (unitCounts.get(card.unit) || 0) > 1;
+        const width = canScale ? `${Math.max(7, Math.min(100, (Math.abs(card.value || 0) / (unitMax.get(card.unit) || 1)) * 100))}%` : "100%";
+        return (
+          <article class="ed-number">
+            <span class="ed-number-value serif">{card.displayValue}</span>
+            <b>{card.label}</b>
+            {card.caption ? <p>{card.caption}</p> : null}
+            <i style={`width:${width}`}></i>
+          </article>
+        );
+      })}
+    </div>
+  ) : null}
+
+  {(story.pullQuotes || []).length ? (
+    <div class="ed-pulls">
+      {story.pullQuotes!.map((quote) => (
+        <blockquote>
+          <p class="serif">{quote.quote}</p>
+          {quote.context ? <cite>{quote.context}</cite> : null}
+        </blockquote>
+      ))}
+    </div>
+  ) : null}
+
+  <div class="ed-sections">
+    {story.sections.map((section, index) => {
+      const terms = termsForSection(section);
+      const sectionNumbers = cardsForSection(section);
+      return (
+        <section class="ed-section">
+          <span class="ed-index serif">{String(index + 1).padStart(2, "0")}</span>
+          <div class="ed-copy">
+            {section.kicker ? <p class="lbl">{section.kicker}</p> : null}
+            <h3 class="serif">{section.heading}</h3>
+            {bodyParagraphs(section.body).map((paragraph) => <p set:html={inlineMarkdownHtml(paragraph)} />)}
+            {section.pullQuote ? <blockquote class="ed-inline-pull"><p class="serif">{section.pullQuote}</p></blockquote> : null}
+          </div>
+          {(sectionNumbers.length || terms.length) ? (
+            <aside class="ed-aside">
+              {sectionNumbers.map((item) => (
+                <div class="ed-mini-number">
+                  <span class="serif">{formatLockedNumber(item)}</span>
+                  <b>{item.label}</b>
+                  <p>{[item.date, item.unit].filter(Boolean).join(" · ")}</p>
+                </div>
+              ))}
+              {terms.map((item) => (
+                <div class="ed-term">
+                  <b>{item.term}</b>
+                  <p>{item.plainMeaning}</p>
+                  {item.whyItMattersHere ? <small>{item.whyItMattersHere}</small> : null}
+                </div>
+              ))}
+            </aside>
+          ) : null}
+        </section>
+      );
+    })}
+  </div>
+</section>

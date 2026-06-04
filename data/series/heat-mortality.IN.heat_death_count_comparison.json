@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "heat.death_count_comparison",
+  "title": "India heat mortality count comparison",
+  "sourceId": "heat-mortality",
+  "sourceIndicatorId": "curated comparison table",
+  "sourceUrl": "docs/HEAT_MORTALITY_ARTICLE_DRAFT.md",
+  "unit": "mixed; see row",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "sourceFamily",
+    "period",
+    "evidenceType"
+  ],
+  "fetchedAt": "2026-06-03T07:00:31.555Z",
+  "rows": [
+    {
+      "sourceFamily": "Frontiers model",
+      "period": "Single extreme-heat day scenario",
+      "value": 3400,
+      "unit": "excess deaths",
+      "questionAnswered": "How many additional deaths might occur on a nationally extreme heat day?",
+      "evidenceType": "modelled excess mortality",
+      "notAmeasureOf": "registered deaths or medically confirmed heatstroke deaths",
+      "articleUse": "Core disputed estimate; quote only as a modelled scenario",
+      "verificationStatus": "primary article",
+      "sourceUrl": "https://www.frontiersin.org/journals/environmental-health/articles/10.3389/fenvh.2026.1789071/full"
+    },
+    {
+      "sourceFamily": "Frontiers model",
+      "period": "Five-day heatwave scenario",
+      "value": 30000,
+      "unit": "approximately excess deaths",
+      "questionAnswered": "How many additional deaths might occur across a five-day severe heatwave?",
+      "evidenceType": "modelled excess mortality",
+      "notAmeasureOf": "registered deaths or medically confirmed heatstroke deaths",
+      "articleUse": "Shows scale sensitivity when heat exposure persists",
+      "verificationStatus": "primary article",
+      "sourceUrl": "https://www.frontiersin.org/journals/environmental-health/articles/10.3389/fenvh.2026.1789071/full"
+    },
+    {
+      "sourceFamily": "OWID/EM-DAT",
+      "period": "2024",
+      "value": 733,
+      "unit": "reported deaths",
+      "questionAnswered": "How many extreme-temperature disaster deaths were reported for international disaster accounting?",
+      "evidenceType": "reported disaster deaths",
+      "notAmeasureOf": "all heat-attributable mortality",
+      "articleUse": "International reported-disaster comparator",
+      "verificationStatus": "OWID Grapher CSV snapshotted and parsed locally",
+      "sourceUrl": "https://ourworldindata.org/grapher/natural-disasters-deaths"
+    },
+    {
+      "sourceFamily": "OWID/EM-DAT",
+      "period": "2000-2024, non-missing India years",
+      "value": 10398,
+      "unit": "reported deaths",
+      "questionAnswered": "What is the reported extreme-temperature disaster-death total across recent non-missing years?",
+      "evidenceType": "reported disaster deaths",
+      "notAmeasureOf": "all heat-attributable mortality",
+      "articleUse": "Shows how small reported-disaster totals are relative to large excess-mortality scenarios",
+      "verificationStatus": "OWID Grapher CSV snapshotted and parsed locally",
+      "sourceUrl": "https://ourworldindata.org/grapher/natural-disasters-deaths"
+    },
+    {
+      "sourceFamily": "NCRB ADSI",
+      "period": "2023",
+      "value": 804,
+      "unit": "reported deaths",
+      "questionAnswered": "How many deaths were administratively recorded as heat/sunstroke under accidental deaths?",
+      "evidenceType": "administrative cause label",
+      "notAmeasureOf": "excess deaths during heatwaves",
+      "articleUse": "Official Indian administrative count, with narrow cause-label caveat",
+      "verificationStatus": "secondary report of official NCRB report; primary table still to extract",
+      "sourceUrl": "https://indianexpress.com/article/india/natural-forces-lightning-heat-stroke-killed-2023-ncrb-report-10282010/"
+    },
+    {
+      "sourceFamily": "IMD DWE",
+      "period": "2024",
+      "value": 460,
+      "unit": "reported deaths",
+      "questionAnswered": "How many heatwave deaths were compiled in IMD's meteorological disaster-event report?",
+      "evidenceType": "reported meteorological disaster-event deaths",
+      "notAmeasureOf": "medical death registration or all-cause excess mortality",
+      "articleUse": "Best locally parsed official disaster-event death anchor",
+      "verificationStatus": "official PDF parsed locally; Table 2, Table 7, Table 22 and state/month totals reconcile",
+      "sourceUrl": "https://www.imdpune.gov.in/library/public/DWE_2024.pdf"
+    },
+    {
+      "sourceFamily": "NCDC/NHRIDS",
+      "period": "2024, March-July public reporting",
+      "value": 161,
+      "unit": "reported deaths",
+      "questionAnswered": "How many heatstroke deaths were confirmed in the surveillance system by that public-reporting cutoff?",
+      "evidenceType": "facility/surveillance confirmed heatstroke deaths",
+      "notAmeasureOf": "all heat-attributable deaths, deaths outside surveillance, or excess mortality",
+      "articleUse": "Narrow clinical/surveillance comparator",
+      "verificationStatus": "secondary policy article; NCDC aggregate feed not public in this ingest",
+      "sourceUrl": "https://www.teriin.org/index.php/article/silent-disaster-why-india-must-build-stronger-heatwave-resilience"
+    },
+    {
+      "sourceFamily": "NCDC/NHRIDS parliamentary reporting",
+      "period": "2024-03-01 to 2024-07-27",
+      "value": 374,
+      "unit": "reported deaths",
+      "questionAnswered": "How many heatstroke deaths were cited in parliamentary/public reporting up to this cutoff?",
+      "evidenceType": "cutoff-specific surveillance/public reporting",
+      "notAmeasureOf": "all heat-attributable deaths or a full-year excess-mortality estimate",
+      "articleUse": "Shows cutoff and reporting-channel sensitivity within surveillance figures",
+      "verificationStatus": "secondary wire report; primary Lok Sabha answer still to extract",
+      "sourceUrl": "https://www.theweek.in/wire-updates/national/2024/08/02/del32-lsq-health-heatstroke.html"
+    }
+  ],
+  "metadata": {
+    "note": "Comparison table for public article. Rows are intentionally not directly comparable; questionAnswered and notAmeasureOf define each row's boundary."
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "heat.admin_and_model_anchors",
+  "title": "Administrative and modelled heat-mortality anchors for India",
+  "sourceId": "heat-mortality",
+  "sourceIndicatorId": "curated anchors",
+  "sourceUrl": "docs/HEAT_MORTALITY_RESEARCH_DOSSIER.md",
+  "unit": "mixed; see row",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "sourceFamily",
+    "yearOrPeriod",
+    "measure"
+  ],
+  "fetchedAt": "2026-06-03T07:00:31.555Z",
+  "rows": [
+    {
+      "sourceFamily": "Frontiers model",
+      "yearOrPeriod": "2024 population / scenario",
+      "measure": "Single extreme-heat day excess deaths",
+      "value": 3400,
+      "unit": "excess deaths",
+      "sourceUrl": "https://www.frontiersin.org/journals/environmental-health/articles/10.3389/fenvh.2026.1789071/full",
+      "interpretation": "Modelled excess-death scenario, not a direct observed death count",
+      "verificationStatus": "primary article"
+    },
+    {
+      "sourceFamily": "Frontiers model",
+      "yearOrPeriod": "2024 population / scenario",
+      "measure": "Five-day heatwave excess deaths",
+      "value": 30000,
+      "unit": "approximately excess deaths",
+      "sourceUrl": "https://www.frontiersin.org/journals/environmental-health/articles/10.3389/fenvh.2026.1789071/full",
+      "interpretation": "Modelled excess-death scenario, not a direct observed death count",
+      "verificationStatus": "primary article"
+    },
+    {
+      "sourceFamily": "NCRB",
+      "yearOrPeriod": "2023",
+      "measure": "Heat/sunstroke deaths",
+      "value": 804,
+      "unit": "reported deaths",
+      "sourceUrl": "https://indianexpress.com/article/india/natural-forces-lightning-heat-stroke-killed-2023-ncrb-report-10282010/",
+      "interpretation": "Administrative accidental-death cause label",
+      "verificationStatus": "secondary report of official NCRB report; primary table still to extract"
+    },
+    {
+      "sourceFamily": "IMD DWE",
+      "yearOrPeriod": "2024",
+      "measure": "Heatwave deaths",
+      "value": 460,
+      "unit": "reported deaths",
+      "sourceUrl": "https://www.imdpune.gov.in/library/public/DWE_2024.pdf",
+      "interpretation": "Meteorological disaster-event reporting",
+      "verificationStatus": "official PDF parsed locally; Table 2, Table 7, Table 22 and state/month totals reconcile"
+    },
+    {
+      "sourceFamily": "NCDC/NHRIDS",
+      "yearOrPeriod": "2024, March-July public reporting",
+      "measure": "Suspected heatstroke cases",
+      "value": 48000,
+      "unit": "approximately reported cases",
+      "sourceUrl": "https://www.teriin.org/index.php/article/silent-disaster-why-india-must-build-stronger-heatwave-resilience",
+      "interpretation": "Facility/surveillance reporting, not all heat-attributable morbidity",
+      "verificationStatus": "secondary policy article; NCDC aggregate feed not public in this ingest"
+    },
+    {
+      "sourceFamily": "NCDC/NHRIDS",
+      "yearOrPeriod": "2024, March-July public reporting",
+      "measure": "Confirmed heatstroke deaths",
+      "value": 161,
+      "unit": "reported deaths",
+      "sourceUrl": "https://www.teriin.org/index.php/article/silent-disaster-why-india-must-build-stronger-heatwave-resilience",
+      "interpretation": "Confirmed heatstroke deaths, not all heat-attributable deaths",
+      "verificationStatus": "secondary policy article; NCDC aggregate feed not public in this ingest"
+    },
+    {
+      "sourceFamily": "NCDC/NHRIDS parliamentary reporting",
+      "yearOrPeriod": "2024-03-01 to 2024-07-27",
+      "measure": "Heatstroke deaths",
+      "value": 374,
+      "unit": "reported deaths",
+      "sourceUrl": "https://www.theweek.in/wire-updates/national/2024/08/02/del32-lsq-health-heatstroke.html",
+      "interpretation": "Cutoff-specific parliamentary/public reporting",
+      "verificationStatus": "secondary wire report; primary Lok Sabha answer still to extract"
+    },
+    {
+      "sourceFamily": "Lancet Countdown",
+      "yearOrPeriod": "2024",
+      "measure": "Heatwave days per person in India",
+      "value": 19.8,
+      "unit": "days per person",
+      "sourceUrl": "https://lancetcountdown.org/wp-content/uploads/2025/10/India_Lancet-Countdown_2025_Data-Sheet-2.pdf",
+      "interpretation": "Exposure indicator, not deaths",
+      "verificationStatus": "primary data sheet"
+    },
+    {
+      "sourceFamily": "Lancet Countdown",
+      "yearOrPeriod": "2024",
+      "measure": "Potential labour hours lost due to heat exposure",
+      "value": 247000000000,
+      "unit": "potential labour hours",
+      "sourceUrl": "https://lancetcountdown.org/wp-content/uploads/2025/10/India_Lancet-Countdown_2025_Data-Sheet-2.pdf",
+      "interpretation": "Economic/labour exposure impact, not deaths",
+      "verificationStatus": "primary data sheet"
+    }
+  ],
+  "metadata": {
+    "note": "Curated anchors for the article. Use verificationStatus before treating values as fully reproducible."
+  }
+}

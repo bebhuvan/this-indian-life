@@ -3,16 +3,1066 @@
   "questionId": "q.work.force",
   "question": "How many Indians are in the workforce?",
   "priority": "core",
+  "theme": {
+    "id": "society",
+    "label": "Society, work, education, and services",
+    "readerQuestions": [
+      "What basic capability is being measured?",
+      "How many people does the percentage represent?",
+      "Is this access, usage, quality, or outcome?",
+      "Which caveat stops the chart from being overclaimed?"
+    ],
+    "glossaryTerms": [
+      "labour force",
+      "participation rate",
+      "gross enrolment",
+      "basic drinking water",
+      "basic sanitation"
+    ]
+  },
   "requiredIndicatorIds": [
-    "work.labor_force_total"
+    "work.labor_force_total",
+    "work.labor_force_participation_total",
+    "work.unemployment_total"
   ],
   "availableIndicatorIds": [
-    "work.labor_force_total"
+    "work.labor_force_total",
+    "work.labor_force_participation_total",
+    "work.unemployment_total"
+  ],
+  "themeIndicatorIds": [
+    "work.labor_force_total",
+    "work.labor_force_participation_total",
+    "work.unemployment_total",
+    "work.plfs.lfpr_person",
+    "work.plfs.wpr_person",
+    "work.plfs.ur_person",
+    "work.plfs.lfpr_male",
+    "work.plfs.lfpr_female",
+    "work.plfs.ur_youth_person",
+    "work.plfs.ur_youth_male",
+    "work.plfs.ur_youth_female",
+    "work.plfs.ur_edu_not_literate",
+    "work.plfs.ur_edu_secondary",
+    "work.plfs.ur_edu_graduate",
+    "work.plfs.ur_edu_postgraduate",
+    "work.plfs.ur_social_sc",
+    "work.plfs.ur_social_st",
+    "work.plfs.ur_social_obc",
+    "work.plfs.ur_social_others",
+    "work.plfs.status_self_employed",
+    "work.plfs.status_regular_wage",
+    "work.plfs.status_casual",
+    "work.plfs.empshare_agriculture",
+    "work.plfs.empshare_industry",
+    "work.plfs.empshare_services",
+    "compare.lfpr.in",
+    "compare.lfpr.bgd",
+    "compare.lfpr.chn",
+    "compare.lfpr.vnm",
+    "compare.lfpr.idn",
+    "compare.lfpr.wld",
+    "work.neet_youth",
+    "work.idh.jobspeak_total",
+    "work.idh.nrega_person_days_created",
+    "work.plfs.wage_regular_person",
+    "work.plfs.wage_casual_person",
+    "work.plfs.wage_self_employed_person",
+    "people.age_15_64_share"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.work.labor_force_total",
+      "indicatorId": "work.labor_force_total",
+      "title": "Labor force, total",
+      "sourceId": "worldbank",
+      "unit": "people",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.work.labor_force_participation_total",
+      "indicatorId": "work.labor_force_participation_total",
+      "title": "Labor force participation rate, total",
+      "sourceId": "worldbank",
+      "unit": "% ages 15+",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.work.unemployment_total",
+      "indicatorId": "work.unemployment_total",
+      "title": "Unemployment, total",
+      "sourceId": "worldbank",
+      "unit": "% of labor force",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.work.plfs.lfpr_person",
+      "indicatorId": "work.plfs.lfpr_person",
+      "title": "Labour Force Participation Rate — persons (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.work.plfs.wpr_person",
+      "indicatorId": "work.plfs.wpr_person",
+      "title": "Worker Population Ratio — persons (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.work.plfs.ur_person",
+      "indicatorId": "work.plfs.ur_person",
+      "title": "Unemployment Rate — persons (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.work.plfs.lfpr_male",
+      "indicatorId": "work.plfs.lfpr_male",
+      "title": "Labour Force Participation Rate — male (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.work.plfs.lfpr_female",
+      "indicatorId": "work.plfs.lfpr_female",
+      "title": "Labour Force Participation Rate — female (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.work.plfs.ur_youth_person",
+      "indicatorId": "work.plfs.ur_youth_person",
+      "title": "Youth unemployment rate — persons (15–29)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.work.plfs.ur_youth_male",
+      "indicatorId": "work.plfs.ur_youth_male",
+      "title": "Youth unemployment rate — male (15–29)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.work.plfs.ur_youth_female",
+      "indicatorId": "work.plfs.ur_youth_female",
+      "title": "Youth unemployment rate — female (15–29)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.work.plfs.ur_edu_not_literate",
+      "indicatorId": "work.plfs.ur_edu_not_literate",
+      "title": "Unemployment rate — Not literate (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.work.plfs.ur_edu_secondary",
+      "indicatorId": "work.plfs.ur_edu_secondary",
+      "title": "Unemployment rate — Secondary (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.work.plfs.ur_edu_graduate",
+      "indicatorId": "work.plfs.ur_edu_graduate",
+      "title": "Unemployment rate — Graduate (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.work.plfs.ur_edu_postgraduate",
+      "indicatorId": "work.plfs.ur_edu_postgraduate",
+      "title": "Unemployment rate — Postgraduate & above (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.work.plfs.ur_social_sc",
+      "indicatorId": "work.plfs.ur_social_sc",
+      "title": "Unemployment rate — Scheduled Caste (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.work.plfs.ur_social_st",
+      "indicatorId": "work.plfs.ur_social_st",
+      "title": "Unemployment rate — Scheduled Tribe (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.work.plfs.ur_social_obc",
+      "indicatorId": "work.plfs.ur_social_obc",
+      "title": "Unemployment rate — Other Backward Class (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.work.plfs.ur_social_others",
+      "indicatorId": "work.plfs.ur_social_others",
+      "title": "Unemployment rate — Others (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.work.plfs.status_self_employed",
+      "indicatorId": "work.plfs.status_self_employed",
+      "title": "Workers who are self-employed",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v21.work.plfs.status_regular_wage",
+      "indicatorId": "work.plfs.status_regular_wage",
+      "title": "Workers in regular wage/salaried jobs",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v22.work.plfs.status_casual",
+      "indicatorId": "work.plfs.status_casual",
+      "title": "Workers in casual labour",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v23.work.plfs.empshare_agriculture",
+      "indicatorId": "work.plfs.empshare_agriculture",
+      "title": "Workers in agriculture (primary sector)",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v24.work.plfs.empshare_industry",
+      "indicatorId": "work.plfs.empshare_industry",
+      "title": "Workers in industry (secondary sector)",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v25.work.plfs.empshare_services",
+      "indicatorId": "work.plfs.empshare_services",
+      "title": "Workers in services (tertiary sector)",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v26.compare.lfpr.in",
+      "indicatorId": "compare.lfpr.in",
+      "title": "Labour force participation rate — India",
+      "sourceId": "worldbank",
+      "unit": "% of population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v27.compare.lfpr.bgd",
+      "indicatorId": "compare.lfpr.bgd",
+      "title": "Labour force participation rate — Bangladesh",
+      "sourceId": "worldbank",
+      "unit": "% of population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v28.compare.lfpr.chn",
+      "indicatorId": "compare.lfpr.chn",
+      "title": "Labour force participation rate — China",
+      "sourceId": "worldbank",
+      "unit": "% of population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v29.compare.lfpr.vnm",
+      "indicatorId": "compare.lfpr.vnm",
+      "title": "Labour force participation rate — Vietnam",
+      "sourceId": "worldbank",
+      "unit": "% of population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v30.compare.lfpr.idn",
+      "indicatorId": "compare.lfpr.idn",
+      "title": "Labour force participation rate — Indonesia",
+      "sourceId": "worldbank",
+      "unit": "% of population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v31.compare.lfpr.wld",
+      "indicatorId": "compare.lfpr.wld",
+      "title": "Labour force participation rate — World",
+      "sourceId": "worldbank",
+      "unit": "% of population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v32.work.neet_youth",
+      "indicatorId": "work.neet_youth",
+      "title": "Youth not in employment, education or training (NEET)",
+      "sourceId": "worldbank",
+      "unit": "% of youth",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v33.work.idh.jobspeak_total",
+      "indicatorId": "work.idh.jobspeak_total",
+      "title": "Naukri JobSpeak hiring index — total",
+      "sourceId": "indiadatahub",
+      "unit": "index",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v34.work.idh.nrega_person_days_created",
+      "indicatorId": "work.idh.nrega_person_days_created",
+      "title": "Person-days of work created under MGNREGA",
+      "sourceId": "indiadatahub",
+      "unit": "person-days",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v35.work.plfs.wage_regular_person",
+      "indicatorId": "work.plfs.wage_regular_person",
+      "title": "Average monthly earnings — regular wage/salaried",
+      "sourceId": "mospi",
+      "unit": "₹/month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v36.work.plfs.wage_casual_person",
+      "indicatorId": "work.plfs.wage_casual_person",
+      "title": "Average daily wage — casual labour",
+      "sourceId": "mospi",
+      "unit": "₹/day",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v37.work.plfs.wage_self_employed_person",
+      "indicatorId": "work.plfs.wage_self_employed_person",
+      "title": "Average monthly earnings — self-employed",
+      "sourceId": "mospi",
+      "unit": "₹/month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v38.people.age_15_64_share",
+      "indicatorId": "people.age_15_64_share",
+      "title": "Population ages 15-64",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "india-s-labour-force",
+      "title": "India's labour force",
+      "chartType": "line",
+      "beat": "size",
+      "window": "full",
+      "indicator": "work.labor_force_total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The headline count: how many Indians are working or looking for work."
+    },
+    {
+      "order": 2,
+      "chartId": "labour-force-participation-rate-1991-to-today",
+      "title": "Labour force participation rate, 1991 to today",
+      "chartType": "line",
+      "beat": "participation-long",
+      "window": "full",
+      "indicator": "work.labor_force_participation_total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "What share of working-age Indians are in the labour force at all."
+    },
+    {
+      "order": 3,
+      "chartId": "in-the-labour-force-vs-actually-working",
+      "title": "In the labour force vs actually working",
+      "chartType": "multiLine",
+      "beat": "lfpr-vs-wpr",
+      "window": "",
+      "indicator": "work.plfs.lfpr_person",
+      "series": [
+        {
+          "indicator": "work.plfs.lfpr_person",
+          "label": "In the labour force (LFPR)"
+        },
+        {
+          "indicator": "work.plfs.wpr_person",
+          "label": "Actually working (WPR)"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "The gap between wanting work and having it is unemployment."
+    },
+    {
+      "order": 4,
+      "chartId": "the-unemployment-rate-over-time",
+      "title": "The unemployment rate over time",
+      "chartType": "line",
+      "beat": "unemployment",
+      "window": "full",
+      "indicator": "work.unemployment_total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "How hard it is to find work, the number people feel most."
+    },
+    {
+      "order": 5,
+      "chartId": "men-and-women-in-the-labour-force",
+      "title": "Men and women in the labour force",
+      "chartType": "multiLine",
+      "beat": "gender-gap",
+      "window": "",
+      "indicator": "work.plfs.lfpr_male",
+      "series": [
+        {
+          "indicator": "work.plfs.lfpr_male",
+          "label": "Men"
+        },
+        {
+          "indicator": "work.plfs.lfpr_female",
+          "label": "Women"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "The single biggest fact about India's workforce: the gender gap."
+    },
+    {
+      "order": 6,
+      "chartId": "youth-struggle-most-to-find-work",
+      "title": "Youth struggle most to find work",
+      "chartType": "multiLine",
+      "beat": "youth-unemployment",
+      "window": "",
+      "indicator": "work.plfs.ur_youth_person",
+      "series": [
+        {
+          "indicator": "work.plfs.ur_youth_person",
+          "label": "All youth"
+        },
+        {
+          "indicator": "work.plfs.ur_youth_male",
+          "label": "Young men"
+        },
+        {
+          "indicator": "work.plfs.ur_youth_female",
+          "label": "Young women"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "Joblessness is concentrated among the young, not the whole workforce."
+    },
+    {
+      "order": 7,
+      "chartId": "the-more-educated-the-higher-the-unemployment",
+      "title": "The more educated, the higher the unemployment",
+      "chartType": "multiLine",
+      "beat": "educated-unemployment",
+      "window": "",
+      "indicator": "work.plfs.ur_edu_graduate",
+      "series": [
+        {
+          "indicator": "work.plfs.ur_edu_not_literate",
+          "label": "Not literate"
+        },
+        {
+          "indicator": "work.plfs.ur_edu_secondary",
+          "label": "Secondary"
+        },
+        {
+          "indicator": "work.plfs.ur_edu_graduate",
+          "label": "Graduate"
+        },
+        {
+          "indicator": "work.plfs.ur_edu_postgraduate",
+          "label": "Post-graduate"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "India's paradox: unemployment rises with education, not falls."
+    },
+    {
+      "order": 8,
+      "chartId": "unemployment-by-social-group",
+      "title": "Unemployment by social group",
+      "chartType": "multiLine",
+      "beat": "social-group",
+      "window": "",
+      "indicator": "work.plfs.ur_social_sc",
+      "series": [
+        {
+          "indicator": "work.plfs.ur_social_st",
+          "label": "Scheduled tribe"
+        },
+        {
+          "indicator": "work.plfs.ur_social_sc",
+          "label": "Scheduled caste"
+        },
+        {
+          "indicator": "work.plfs.ur_social_obc",
+          "label": "OBC"
+        },
+        {
+          "indicator": "work.plfs.ur_social_others",
+          "label": "Others"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "Whether finding work depends on who you are."
+    },
+    {
+      "order": 9,
+      "chartId": "how-indians-are-employed-the-quality-question",
+      "title": "How Indians are employed: the quality question",
+      "chartType": "multiLine",
+      "beat": "job-quality",
+      "window": "",
+      "indicator": "work.plfs.status_self_employed",
+      "series": [
+        {
+          "indicator": "work.plfs.status_self_employed",
+          "label": "Self-employed"
+        },
+        {
+          "indicator": "work.plfs.status_regular_wage",
+          "label": "Regular wage"
+        },
+        {
+          "indicator": "work.plfs.status_casual",
+          "label": "Casual labour"
+        }
+      ],
+      "unit": "% of workers",
+      "subtitle": "",
+      "whyThisChart": "Having work is not the same as having a good job."
+    },
+    {
+      "order": 10,
+      "chartId": "where-india-works-farm-factory-office",
+      "title": "Where India works: farm, factory, office",
+      "chartType": "multiLine",
+      "beat": "sectors",
+      "window": "",
+      "indicator": "work.plfs.empshare_services",
+      "series": [
+        {
+          "indicator": "work.plfs.empshare_agriculture",
+          "label": "Agriculture"
+        },
+        {
+          "indicator": "work.plfs.empshare_industry",
+          "label": "Industry"
+        },
+        {
+          "indicator": "work.plfs.empshare_services",
+          "label": "Services"
+        }
+      ],
+      "unit": "% of workers",
+      "subtitle": "",
+      "whyThisChart": "The structure of work across the economy."
+    },
+    {
+      "order": 11,
+      "chartId": "how-india-s-participation-compares",
+      "title": "How India's participation compares",
+      "chartType": "multiLine",
+      "beat": "cross-country",
+      "window": "",
+      "indicator": "compare.lfpr.in",
+      "series": [
+        {
+          "indicator": "compare.lfpr.in",
+          "label": "India"
+        },
+        {
+          "indicator": "compare.lfpr.chn",
+          "label": "China"
+        },
+        {
+          "indicator": "compare.lfpr.vnm",
+          "label": "Vietnam"
+        },
+        {
+          "indicator": "compare.lfpr.bgd",
+          "label": "Bangladesh"
+        },
+        {
+          "indicator": "compare.lfpr.idn",
+          "label": "Indonesia"
+        },
+        {
+          "indicator": "compare.lfpr.wld",
+          "label": "World"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "India's participation against its peers and the world."
+    },
+    {
+      "order": 12,
+      "chartId": "young-indians-not-in-work-education-or-training",
+      "title": "Young Indians not in work, education or training",
+      "chartType": "line",
+      "beat": "neet",
+      "window": "full",
+      "indicator": "work.neet_youth",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The disengaged young — neither learning nor earning."
+    },
+    {
+      "order": 13,
+      "chartId": "hiring-momentum-month-by-month",
+      "title": "Hiring momentum, month by month",
+      "chartType": "line",
+      "beat": "hiring",
+      "window": "full",
+      "indicator": "work.idh.jobspeak_total",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "A real-time read on formal hiring, faster than annual surveys."
+    },
+    {
+      "order": 14,
+      "chartId": "demand-for-rural-guaranteed-work",
+      "title": "Demand for rural guaranteed work",
+      "chartType": "line",
+      "beat": "nrega",
+      "window": "full",
+      "indicator": "work.idh.nrega_person_days_created",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "When other work dries up, rural Indians fall back on the NREGA jobs guarantee."
+    },
+    {
+      "order": 15,
+      "chartId": "what-different-kinds-of-work-pay",
+      "title": "What different kinds of work pay",
+      "chartType": "multiLine",
+      "beat": "wages",
+      "window": "",
+      "indicator": "work.plfs.wage_regular_person",
+      "series": [
+        {
+          "indicator": "work.plfs.wage_regular_person",
+          "label": "Regular (monthly)"
+        },
+        {
+          "indicator": "work.plfs.wage_self_employed_person",
+          "label": "Self-employed (monthly)"
+        },
+        {
+          "indicator": "work.plfs.wage_casual_person",
+          "label": "Casual (daily)"
+        }
+      ],
+      "unit": "₹ per month / day",
+      "subtitle": "",
+      "whyThisChart": "Earnings vary hugely by the kind of work."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Labor force, total, latest",
+      "value": 617625336,
+      "displayValue": "61.8 crore",
+      "date": "2025",
+      "unit": "people",
+      "indicatorId": "work.labor_force_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labor force, total, earliest",
+      "value": 307898649,
+      "displayValue": "30.8 crore",
+      "date": "1990",
+      "unit": "people",
+      "indicatorId": "work.labor_force_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labor force participation rate, total, latest",
+      "value": 55.658,
+      "displayValue": "55.7%",
+      "date": "2025",
+      "unit": "% ages 15+",
+      "indicatorId": "work.labor_force_participation_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labor force participation rate, total, earliest",
+      "value": 57.937,
+      "displayValue": "57.9%",
+      "date": "1990",
+      "unit": "% ages 15+",
+      "indicatorId": "work.labor_force_participation_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Unemployment, total, latest",
+      "value": 4.219,
+      "displayValue": "4.2%",
+      "date": "2025",
+      "unit": "% of labor force",
+      "indicatorId": "work.unemployment_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Unemployment, total, earliest",
+      "value": 7.641,
+      "displayValue": "7.6%",
+      "date": "1991",
+      "unit": "% of labor force",
+      "indicatorId": "work.unemployment_total",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — persons (15+), latest",
+      "value": 60.1,
+      "displayValue": "60.1%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — persons (15+), earliest",
+      "value": 49.8,
+      "displayValue": "49.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Worker Population Ratio — persons (15+), latest",
+      "value": 58.2,
+      "displayValue": "58.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.wpr_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Worker Population Ratio — persons (15+), earliest",
+      "value": 46.8,
+      "displayValue": "46.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.wpr_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Unemployment Rate — persons (15+), latest",
+      "value": 3.2,
+      "displayValue": "3.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Unemployment Rate — persons (15+), earliest",
+      "value": 6,
+      "displayValue": "6%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), latest",
+      "value": 78.8,
+      "displayValue": "78.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_male",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), earliest",
+      "value": 75.8,
+      "displayValue": "75.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_male",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — female (15+), latest",
+      "value": 41.7,
+      "displayValue": "41.7%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — female (15+), earliest",
+      "value": 23.3,
+      "displayValue": "23.3%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Youth unemployment rate — persons (15–29), latest",
+      "value": 10.2,
+      "displayValue": "10.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_youth_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Youth unemployment rate — persons (15–29), earliest",
+      "value": 17.8,
+      "displayValue": "17.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_youth_person",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Youth unemployment rate — male (15–29), latest",
+      "value": 9.8,
+      "displayValue": "9.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_youth_male",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Youth unemployment rate — male (15–29), earliest",
+      "value": 17.8,
+      "displayValue": "17.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_youth_male",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Youth unemployment rate — female (15–29), latest",
+      "value": 11,
+      "displayValue": "11%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_youth_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Youth unemployment rate — female (15–29), earliest",
+      "value": 17.9,
+      "displayValue": "17.9%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_youth_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Unemployment rate — Not literate (15+), latest",
+      "value": 0.2,
+      "displayValue": "0.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_edu_not_literate",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Unemployment rate — Not literate (15+), earliest",
+      "value": 1.2,
+      "displayValue": "1.2%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.ur_edu_not_literate",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
   ],
   "lockedNumbers": [
     {
       "label": "Labor force, total, latest",
       "value": 617625336,
+      "displayValue": "61.8 crore",
       "date": "2025",
       "unit": "people",
       "sourceId": "worldbank",
@@ -21,10 +1071,677 @@
     {
       "label": "Labor force, total, earliest",
       "value": 307898649,
+      "displayValue": "30.8 crore",
       "date": "1990",
       "unit": "people",
       "sourceId": "worldbank",
       "indicatorId": "work.labor_force_total"
+    },
+    {
+      "label": "Labor force participation rate, total, latest",
+      "value": 55.658,
+      "displayValue": "55.7%",
+      "date": "2025",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "work.labor_force_participation_total"
+    },
+    {
+      "label": "Labor force participation rate, total, earliest",
+      "value": 57.937,
+      "displayValue": "57.9%",
+      "date": "1990",
+      "unit": "% ages 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "work.labor_force_participation_total"
+    },
+    {
+      "label": "Unemployment, total, latest",
+      "value": 4.219,
+      "displayValue": "4.2%",
+      "date": "2025",
+      "unit": "% of labor force",
+      "sourceId": "worldbank",
+      "indicatorId": "work.unemployment_total"
+    },
+    {
+      "label": "Unemployment, total, earliest",
+      "value": 7.641,
+      "displayValue": "7.6%",
+      "date": "1991",
+      "unit": "% of labor force",
+      "sourceId": "worldbank",
+      "indicatorId": "work.unemployment_total"
+    },
+    {
+      "label": "Labour Force Participation Rate — persons (15+), latest",
+      "value": 60.1,
+      "displayValue": "60.1%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_person"
+    },
+    {
+      "label": "Labour Force Participation Rate — persons (15+), earliest",
+      "value": 49.8,
+      "displayValue": "49.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_person"
+    },
+    {
+      "label": "Worker Population Ratio — persons (15+), latest",
+      "value": 58.2,
+      "displayValue": "58.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wpr_person"
+    },
+    {
+      "label": "Worker Population Ratio — persons (15+), earliest",
+      "value": 46.8,
+      "displayValue": "46.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wpr_person"
+    },
+    {
+      "label": "Unemployment Rate — persons (15+), latest",
+      "value": 3.2,
+      "displayValue": "3.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_person"
+    },
+    {
+      "label": "Unemployment Rate — persons (15+), earliest",
+      "value": 6,
+      "displayValue": "6%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_person"
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), latest",
+      "value": 78.8,
+      "displayValue": "78.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_male"
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), earliest",
+      "value": 75.8,
+      "displayValue": "75.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_male"
+    },
+    {
+      "label": "Labour Force Participation Rate — female (15+), latest",
+      "value": 41.7,
+      "displayValue": "41.7%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female"
+    },
+    {
+      "label": "Labour Force Participation Rate — female (15+), earliest",
+      "value": 23.3,
+      "displayValue": "23.3%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female"
+    },
+    {
+      "label": "Youth unemployment rate — persons (15–29), latest",
+      "value": 10.2,
+      "displayValue": "10.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_person"
+    },
+    {
+      "label": "Youth unemployment rate — persons (15–29), earliest",
+      "value": 17.8,
+      "displayValue": "17.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_person"
+    },
+    {
+      "label": "Youth unemployment rate — male (15–29), latest",
+      "value": 9.8,
+      "displayValue": "9.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_male"
+    },
+    {
+      "label": "Youth unemployment rate — male (15–29), earliest",
+      "value": 17.8,
+      "displayValue": "17.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_male"
+    },
+    {
+      "label": "Youth unemployment rate — female (15–29), latest",
+      "value": 11,
+      "displayValue": "11%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_female"
+    },
+    {
+      "label": "Youth unemployment rate — female (15–29), earliest",
+      "value": 17.9,
+      "displayValue": "17.9%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_female"
+    },
+    {
+      "label": "Unemployment rate — Not literate (15+), latest",
+      "value": 0.2,
+      "displayValue": "0.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_not_literate"
+    },
+    {
+      "label": "Unemployment rate — Not literate (15+), earliest",
+      "value": 1.2,
+      "displayValue": "1.2%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_not_literate"
+    },
+    {
+      "label": "Unemployment rate — Secondary (15+), latest",
+      "value": 1.9,
+      "displayValue": "1.9%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_secondary"
+    },
+    {
+      "label": "Unemployment rate — Secondary (15+), earliest",
+      "value": 5.7,
+      "displayValue": "5.7%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_secondary"
+    },
+    {
+      "label": "Unemployment rate — Graduate (15+), latest",
+      "value": 13,
+      "displayValue": "13%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_graduate"
+    },
+    {
+      "label": "Unemployment rate — Graduate (15+), earliest",
+      "value": 17.2,
+      "displayValue": "17.2%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_graduate"
+    },
+    {
+      "label": "Unemployment rate — Postgraduate & above (15+), latest",
+      "value": 12.4,
+      "displayValue": "12.4%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_postgraduate"
+    },
+    {
+      "label": "Unemployment rate — Postgraduate & above (15+), earliest",
+      "value": 14.6,
+      "displayValue": "14.6%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_edu_postgraduate"
+    },
+    {
+      "label": "Unemployment rate — Scheduled Caste (15+), latest",
+      "value": 3.3,
+      "displayValue": "3.3%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_sc"
+    },
+    {
+      "label": "Unemployment rate — Scheduled Caste (15+), earliest",
+      "value": 6.2,
+      "displayValue": "6.2%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_sc"
+    },
+    {
+      "label": "Unemployment rate — Scheduled Tribe (15+), latest",
+      "value": 1.9,
+      "displayValue": "1.9%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_st"
+    },
+    {
+      "label": "Unemployment rate — Scheduled Tribe (15+), earliest",
+      "value": 4.2,
+      "displayValue": "4.2%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_st"
+    },
+    {
+      "label": "Unemployment rate — Other Backward Class (15+), latest",
+      "value": 3.1,
+      "displayValue": "3.1%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_obc"
+    },
+    {
+      "label": "Unemployment rate — Other Backward Class (15+), earliest",
+      "value": 5.9,
+      "displayValue": "5.9%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_obc"
+    },
+    {
+      "label": "Unemployment rate — Others (15+), latest",
+      "value": 3.8,
+      "displayValue": "3.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_others"
+    },
+    {
+      "label": "Unemployment rate — Others (15+), earliest",
+      "value": 6.7,
+      "displayValue": "6.7%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_social_others"
+    },
+    {
+      "label": "Workers who are self-employed, latest",
+      "value": 58.4,
+      "displayValue": "58.4%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_self_employed"
+    },
+    {
+      "label": "Workers who are self-employed, earliest",
+      "value": 52.2,
+      "displayValue": "52.2%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_self_employed"
+    },
+    {
+      "label": "Workers in regular wage/salaried jobs, latest",
+      "value": 21.7,
+      "displayValue": "21.7%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_regular_wage"
+    },
+    {
+      "label": "Workers in regular wage/salaried jobs, earliest",
+      "value": 22.8,
+      "displayValue": "22.8%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_regular_wage"
+    },
+    {
+      "label": "Workers in casual labour, latest",
+      "value": 19.8,
+      "displayValue": "19.8%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_casual"
+    },
+    {
+      "label": "Workers in casual labour, earliest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_casual"
+    },
+    {
+      "label": "Workers in agriculture (primary sector), latest",
+      "value": 43.5,
+      "displayValue": "43.5%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_agriculture"
+    },
+    {
+      "label": "Workers in agriculture (primary sector), earliest",
+      "value": 42.4,
+      "displayValue": "42.4%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_agriculture"
+    },
+    {
+      "label": "Workers in industry (secondary sector), latest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_industry"
+    },
+    {
+      "label": "Workers in industry (secondary sector), earliest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_industry"
+    },
+    {
+      "label": "Workers in services (tertiary sector), latest",
+      "value": 31.6,
+      "displayValue": "31.6%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_services"
+    },
+    {
+      "label": "Workers in services (tertiary sector), earliest",
+      "value": 32.6,
+      "displayValue": "32.6%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.empshare_services"
+    },
+    {
+      "label": "Labour force participation rate — India, latest",
+      "value": 55.658,
+      "displayValue": "55.7%",
+      "date": "2025",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.in"
+    },
+    {
+      "label": "Labour force participation rate — India, earliest",
+      "value": 57.937,
+      "displayValue": "57.9%",
+      "date": "1990",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.in"
+    },
+    {
+      "label": "Labour force participation rate — Bangladesh, latest",
+      "value": 58.796,
+      "displayValue": "58.8%",
+      "date": "2025",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.bgd"
+    },
+    {
+      "label": "Labour force participation rate — Bangladesh, earliest",
+      "value": 56.777,
+      "displayValue": "56.8%",
+      "date": "1990",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.bgd"
+    },
+    {
+      "label": "Labour force participation rate — China, latest",
+      "value": 64.551,
+      "displayValue": "64.6%",
+      "date": "2025",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.chn"
+    },
+    {
+      "label": "Labour force participation rate — China, earliest",
+      "value": 79.17,
+      "displayValue": "79.2%",
+      "date": "1990",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.chn"
+    },
+    {
+      "label": "Labour force participation rate — Vietnam, latest",
+      "value": 72.778,
+      "displayValue": "72.8%",
+      "date": "2025",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.vnm"
+    },
+    {
+      "label": "Labour force participation rate — Vietnam, earliest",
+      "value": 78.151,
+      "displayValue": "78.2%",
+      "date": "1990",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.vnm"
+    },
+    {
+      "label": "Labour force participation rate — Indonesia, latest",
+      "value": 67.965,
+      "displayValue": "68%",
+      "date": "2025",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.idn"
+    },
+    {
+      "label": "Labour force participation rate — Indonesia, earliest",
+      "value": 66.365,
+      "displayValue": "66.4%",
+      "date": "1990",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.idn"
+    },
+    {
+      "label": "Labour force participation rate — World, latest",
+      "value": 60.9792598100467,
+      "displayValue": "61%",
+      "date": "2025",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.wld"
+    },
+    {
+      "label": "Labour force participation rate — World, earliest",
+      "value": 65.4946086340155,
+      "displayValue": "65.5%",
+      "date": "1990",
+      "unit": "% of population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr.wld"
+    },
+    {
+      "label": "Youth not in employment, education or training (NEET), latest",
+      "value": 24.188,
+      "displayValue": "24.2%",
+      "date": "2024",
+      "unit": "% of youth",
+      "sourceId": "worldbank",
+      "indicatorId": "work.neet_youth"
+    },
+    {
+      "label": "Youth not in employment, education or training (NEET), earliest",
+      "value": 32.646,
+      "displayValue": "32.6%",
+      "date": "1994",
+      "unit": "% of youth",
+      "sourceId": "worldbank",
+      "indicatorId": "work.neet_youth"
+    },
+    {
+      "label": "Naukri JobSpeak hiring index — total, latest",
+      "value": 2836,
+      "displayValue": "2,836",
+      "date": "2026-05-31",
+      "unit": "index",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.jobspeak_total"
+    },
+    {
+      "label": "Naukri JobSpeak hiring index — total, earliest",
+      "value": 902,
+      "displayValue": "902",
+      "date": "2008-08-31",
+      "unit": "index",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.jobspeak_total"
+    },
+    {
+      "label": "Person-days of work created under MGNREGA, latest",
+      "value": 109928366,
+      "displayValue": "109.93 million",
+      "date": "2026-04-30",
+      "unit": "person-days",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.nrega_person_days_created"
+    },
+    {
+      "label": "Person-days of work created under MGNREGA, earliest",
+      "value": 186840321,
+      "displayValue": "186.84 million",
+      "date": "2013-04-30",
+      "unit": "person-days",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.nrega_person_days_created"
+    },
+    {
+      "label": "Average monthly earnings — regular wage/salaried, latest",
+      "value": 20702.3,
+      "displayValue": "₹20,702",
+      "date": "2023-24",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_regular_person"
+    },
+    {
+      "label": "Average monthly earnings — regular wage/salaried, earliest",
+      "value": 16527.3,
+      "displayValue": "₹16,527",
+      "date": "2017-18",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_regular_person"
+    },
+    {
+      "label": "Average daily wage — casual labour, latest",
+      "value": 417.9,
+      "displayValue": "₹418",
+      "date": "2023-24",
+      "unit": "₹/day",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_casual_person"
+    },
+    {
+      "label": "Average daily wage — casual labour, earliest",
+      "value": 255.8,
+      "displayValue": "₹256",
+      "date": "2017-18",
+      "unit": "₹/day",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_casual_person"
+    },
+    {
+      "label": "Average monthly earnings — self-employed, latest",
+      "value": 13278.9,
+      "displayValue": "₹13,279",
+      "date": "2023-24",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_self_employed_person"
+    },
+    {
+      "label": "Average monthly earnings — self-employed, earliest",
+      "value": 12028.6,
+      "displayValue": "₹12,029",
+      "date": "2017-18",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_self_employed_person"
+    },
+    {
+      "label": "Population ages 15-64, latest",
+      "value": 68.2295801537644,
+      "displayValue": "68.2%",
+      "date": "2024",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "people.age_15_64_share"
+    },
+    {
+      "label": "Population ages 15-64, earliest",
+      "value": 56.1178820205874,
+      "displayValue": "56.1%",
+      "date": "1960",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "people.age_15_64_share"
     }
   ],
   "sourceSummaries": [
@@ -49,10 +1766,832 @@
         "date": "2025",
         "value": 617625336
       }
+    },
+    {
+      "indicatorId": "work.labor_force_participation_total",
+      "title": "Labor force participation rate, total",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.ZS",
+      "unit": "% ages 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1990",
+        "value": 57.937
+      },
+      "latest": {
+        "date": "2025",
+        "value": 55.658
+      }
+    },
+    {
+      "indicatorId": "work.unemployment_total",
+      "title": "Unemployment, total",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.UEM.TOTL.ZS",
+      "unit": "% of labor force",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 7.641
+      },
+      "latest": {
+        "date": "2025",
+        "value": 4.219
+      }
+    },
+    {
+      "indicatorId": "work.plfs.lfpr_person",
+      "title": "Labour Force Participation Rate — persons (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "lfpr_person",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 49.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 60.1
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wpr_person",
+      "title": "Worker Population Ratio — persons (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wpr_person",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 46.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 58.2
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_person",
+      "title": "Unemployment Rate — persons (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_person",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 6
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 3.2
+      }
+    },
+    {
+      "indicatorId": "work.plfs.lfpr_male",
+      "title": "Labour Force Participation Rate — male (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "lfpr_male",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 75.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 78.8
+      }
+    },
+    {
+      "indicatorId": "work.plfs.lfpr_female",
+      "title": "Labour Force Participation Rate — female (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "lfpr_female",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 23.3
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 41.7
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_youth_person",
+      "title": "Youth unemployment rate — persons (15–29)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_youth_person",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 17.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 10.2
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_youth_male",
+      "title": "Youth unemployment rate — male (15–29)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_youth_male",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 17.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 9.8
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_youth_female",
+      "title": "Youth unemployment rate — female (15–29)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_youth_female",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 17.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 11
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_edu_not_literate",
+      "title": "Unemployment rate — Not literate (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_edu_not_literate",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 1.2
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 0.2
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_edu_secondary",
+      "title": "Unemployment rate — Secondary (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_edu_secondary",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 5.7
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 1.9
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_edu_graduate",
+      "title": "Unemployment rate — Graduate (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_edu_graduate",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 17.2
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 13
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_edu_postgraduate",
+      "title": "Unemployment rate — Postgraduate & above (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_edu_postgraduate",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 14.6
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 12.4
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_social_sc",
+      "title": "Unemployment rate — Scheduled Caste (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_social_sc",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 6.2
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 3.3
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_social_st",
+      "title": "Unemployment rate — Scheduled Tribe (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_social_st",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 4.2
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 1.9
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_social_obc",
+      "title": "Unemployment rate — Other Backward Class (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_social_obc",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 5.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 3.1
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_social_others",
+      "title": "Unemployment rate — Others (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_social_others",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 6.7
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 3.8
+      }
+    },
+    {
+      "indicatorId": "work.plfs.status_self_employed",
+      "title": "Workers who are self-employed",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "status_self_employed",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 52.2
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 58.4
+      }
+    },
+    {
+      "indicatorId": "work.plfs.status_regular_wage",
+      "title": "Workers in regular wage/salaried jobs",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "status_regular_wage",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 22.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 21.7
+      }
+    },
+    {
+      "indicatorId": "work.plfs.status_casual",
+      "title": "Workers in casual labour",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "status_casual",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 24.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 19.8
+      }
+    },
+    {
+      "indicatorId": "work.plfs.empshare_agriculture",
+      "title": "Workers in agriculture (primary sector)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "empshare_agriculture",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 42.4
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 43.5
+      }
+    },
+    {
+      "indicatorId": "work.plfs.empshare_industry",
+      "title": "Workers in industry (secondary sector)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "empshare_industry",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 24.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 24.9
+      }
+    },
+    {
+      "indicatorId": "work.plfs.empshare_services",
+      "title": "Workers in services (tertiary sector)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "empshare_services",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 32.6
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 31.6
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr.in",
+      "title": "Labour force participation rate — India",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.ZS",
+      "unit": "% of population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 57.937
+      },
+      "latest": {
+        "date": "2025",
+        "value": 55.658
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr.bgd",
+      "title": "Labour force participation rate — Bangladesh",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.ZS",
+      "unit": "% of population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "BGD",
+        "name": "Bangladesh"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 56.777
+      },
+      "latest": {
+        "date": "2025",
+        "value": 58.796
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr.chn",
+      "title": "Labour force participation rate — China",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.ZS",
+      "unit": "% of population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "CHN",
+        "name": "China"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 79.17
+      },
+      "latest": {
+        "date": "2025",
+        "value": 64.551
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr.vnm",
+      "title": "Labour force participation rate — Vietnam",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.ZS",
+      "unit": "% of population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "VNM",
+        "name": "Vietnam"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 78.151
+      },
+      "latest": {
+        "date": "2025",
+        "value": 72.778
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr.idn",
+      "title": "Labour force participation rate — Indonesia",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.ZS",
+      "unit": "% of population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IDN",
+        "name": "Indonesia"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 66.365
+      },
+      "latest": {
+        "date": "2025",
+        "value": 67.965
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr.wld",
+      "title": "Labour force participation rate — World",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.ZS",
+      "unit": "% of population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "WLD",
+        "name": "World"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 65.4946086340155
+      },
+      "latest": {
+        "date": "2025",
+        "value": 60.9792598100467
+      }
+    },
+    {
+      "indicatorId": "work.neet_youth",
+      "title": "Youth not in employment, education or training (NEET)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.UEM.NEET.ZS",
+      "unit": "% of youth",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1994",
+        "value": 32.646
+      },
+      "latest": {
+        "date": "2024",
+        "value": 24.188
+      }
+    },
+    {
+      "indicatorId": "work.idh.jobspeak_total",
+      "title": "Naukri JobSpeak hiring index — total",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LANJSITTOT11M",
+      "unit": "index",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 214,
+      "earliest": {
+        "date": "2008-08-31",
+        "value": 902
+      },
+      "latest": {
+        "date": "2026-05-31",
+        "value": 2836
+      }
+    },
+    {
+      "indicatorId": "work.idh.nrega_person_days_created",
+      "title": "Person-days of work created under MGNREGA",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LAEMNREGPD11M",
+      "unit": "person-days",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 157,
+      "earliest": {
+        "date": "2013-04-30",
+        "value": 186840321
+      },
+      "latest": {
+        "date": "2026-04-30",
+        "value": 109928366
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wage_regular_person",
+      "title": "Average monthly earnings — regular wage/salaried",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wage_regular_person",
+      "unit": "₹/month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 16527.3
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 20702.3
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wage_casual_person",
+      "title": "Average daily wage — casual labour",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wage_casual_person",
+      "unit": "₹/day",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 255.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 417.9
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wage_self_employed_person",
+      "title": "Average monthly earnings — self-employed",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wage_self_employed_person",
+      "unit": "₹/month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 12028.6
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 13278.9
+      }
+    },
+    {
+      "indicatorId": "people.age_15_64_share",
+      "title": "Population ages 15-64",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SP.POP.1564.TO.ZS",
+      "unit": "% of population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 56.1178820205874
+      },
+      "latest": {
+        "date": "2024",
+        "value": 68.2295801537644
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

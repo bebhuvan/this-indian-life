@@ -3,16 +3,783 @@
   "questionId": "q.work.women",
   "question": "Why is women's work participation so low?",
   "priority": "core",
+  "theme": {
+    "id": "society",
+    "label": "Society, work, education, and services",
+    "readerQuestions": [
+      "What basic capability is being measured?",
+      "How many people does the percentage represent?",
+      "Is this access, usage, quality, or outcome?",
+      "Which caveat stops the chart from being overclaimed?"
+    ],
+    "glossaryTerms": [
+      "labour force",
+      "participation rate",
+      "gross enrolment",
+      "basic drinking water",
+      "basic sanitation"
+    ]
+  },
   "requiredIndicatorIds": [
+    "work.plfs.lfpr_female",
+    "work.plfs.lfpr_male",
     "work.labor_force_participation_female"
   ],
   "availableIndicatorIds": [
+    "work.plfs.lfpr_female",
+    "work.plfs.lfpr_male",
     "work.labor_force_participation_female"
   ],
-  "lockedNumbers": [
+  "themeIndicatorIds": [
+    "work.plfs.lfpr_female",
+    "work.plfs.lfpr_male",
+    "work.labor_force_participation_female",
+    "work.plfs.lfpr_female_rural",
+    "work.plfs.lfpr_female_urban",
+    "compare.lfpr_female.in",
+    "compare.lfpr_female.bgd",
+    "compare.lfpr_female.chn",
+    "compare.lfpr_female.vnm",
+    "compare.lfpr_female.idn",
+    "compare.lfpr_female.wld",
+    "work.plfs.wpr_female",
+    "work.plfs.wpr_male",
+    "work.plfs.ur_youth_female",
+    "work.plfs.ur_youth_male",
+    "work.plfs.ur_female",
+    "work.plfs.wage_regular_female",
+    "work.plfs.wage_regular_male",
+    "work.idh.rural_wage_men",
+    "work.idh.rural_wage_women",
+    "work.idh.plfs_monthly_lfpr_female"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.work.plfs.lfpr_female",
+      "indicatorId": "work.plfs.lfpr_female",
+      "title": "Labour Force Participation Rate — female (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.work.plfs.lfpr_male",
+      "indicatorId": "work.plfs.lfpr_male",
+      "title": "Labour Force Participation Rate — male (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.work.labor_force_participation_female",
+      "indicatorId": "work.labor_force_participation_female",
+      "title": "Labor force participation rate, female",
+      "sourceId": "worldbank",
+      "unit": "% ages 15+",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.work.plfs.lfpr_female_rural",
+      "indicatorId": "work.plfs.lfpr_female_rural",
+      "title": "Female LFPR — rural (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.work.plfs.lfpr_female_urban",
+      "indicatorId": "work.plfs.lfpr_female_urban",
+      "title": "Female LFPR — urban (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.compare.lfpr_female.in",
+      "indicatorId": "compare.lfpr_female.in",
+      "title": "Female labour force participation rate — India",
+      "sourceId": "worldbank",
+      "unit": "% of female population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.compare.lfpr_female.bgd",
+      "indicatorId": "compare.lfpr_female.bgd",
+      "title": "Female labour force participation rate — Bangladesh",
+      "sourceId": "worldbank",
+      "unit": "% of female population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.compare.lfpr_female.chn",
+      "indicatorId": "compare.lfpr_female.chn",
+      "title": "Female labour force participation rate — China",
+      "sourceId": "worldbank",
+      "unit": "% of female population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.compare.lfpr_female.vnm",
+      "indicatorId": "compare.lfpr_female.vnm",
+      "title": "Female labour force participation rate — Vietnam",
+      "sourceId": "worldbank",
+      "unit": "% of female population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.compare.lfpr_female.idn",
+      "indicatorId": "compare.lfpr_female.idn",
+      "title": "Female labour force participation rate — Indonesia",
+      "sourceId": "worldbank",
+      "unit": "% of female population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.compare.lfpr_female.wld",
+      "indicatorId": "compare.lfpr_female.wld",
+      "title": "Female labour force participation rate — World",
+      "sourceId": "worldbank",
+      "unit": "% of female population 15+",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.work.plfs.wpr_female",
+      "indicatorId": "work.plfs.wpr_female",
+      "title": "Worker Population Ratio — female (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.work.plfs.wpr_male",
+      "indicatorId": "work.plfs.wpr_male",
+      "title": "Worker Population Ratio — male (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.work.plfs.ur_youth_female",
+      "indicatorId": "work.plfs.ur_youth_female",
+      "title": "Youth unemployment rate — female (15–29)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.work.plfs.ur_youth_male",
+      "indicatorId": "work.plfs.ur_youth_male",
+      "title": "Youth unemployment rate — male (15–29)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.work.plfs.ur_female",
+      "indicatorId": "work.plfs.ur_female",
+      "title": "Unemployment Rate — female (15+)",
+      "sourceId": "mospi",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.work.plfs.wage_regular_female",
+      "indicatorId": "work.plfs.wage_regular_female",
+      "title": "Average monthly earnings — regular wage, female",
+      "sourceId": "mospi",
+      "unit": "₹/month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.work.plfs.wage_regular_male",
+      "indicatorId": "work.plfs.wage_regular_male",
+      "title": "Average monthly earnings — regular wage, male",
+      "sourceId": "mospi",
+      "unit": "₹/month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.work.idh.rural_wage_men",
+      "indicatorId": "work.idh.rural_wage_men",
+      "title": "Daily average rural wage rate, men (blended series)",
+      "sourceId": "indiadatahub",
+      "unit": "₹/day",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.work.idh.rural_wage_women",
+      "indicatorId": "work.idh.rural_wage_women",
+      "title": "Daily average rural wage rate, women (blended series)",
+      "sourceId": "indiadatahub",
+      "unit": "₹/day",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v21.work.idh.plfs_monthly_lfpr_female",
+      "indicatorId": "work.idh.plfs_monthly_lfpr_female",
+      "title": "Female labour force participation rate, all-India (monthly PLFS)",
+      "sourceId": "indiadatahub",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "women-s-participation-in-the-labour-force",
+      "title": "Women's participation in the labour force",
+      "chartType": "line",
+      "beat": "answer",
+      "window": "full",
+      "indicator": "work.plfs.lfpr_female",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The headline: how many working-age women are in the labour force."
+    },
+    {
+      "order": 2,
+      "chartId": "the-gap-between-men-and-women-at-work",
+      "title": "The gap between men and women at work",
+      "chartType": "multiLine",
+      "beat": "gap",
+      "window": "",
+      "indicator": "work.plfs.lfpr_male",
+      "series": [
+        {
+          "indicator": "work.plfs.lfpr_male",
+          "label": "Men"
+        },
+        {
+          "indicator": "work.plfs.lfpr_female",
+          "label": "Women"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "The chasm is the story: men's participation is roughly double women's."
+    },
+    {
+      "order": 3,
+      "chartId": "the-long-view-decline-then-recovery",
+      "title": "The long view: decline, then recovery",
+      "chartType": "line",
+      "beat": "long-arc",
+      "window": "full",
+      "indicator": "work.labor_force_participation_female",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Female participation fell for years before the recent turnaround."
+    },
+    {
+      "order": 4,
+      "chartId": "the-puzzle-urban-women-work-less",
+      "title": "The puzzle: urban women work less",
+      "chartType": "multiLine",
+      "beat": "rural-urban",
+      "window": "",
+      "indicator": "work.plfs.lfpr_female_rural",
+      "series": [
+        {
+          "indicator": "work.plfs.lfpr_female_rural",
+          "label": "Rural women"
+        },
+        {
+          "indicator": "work.plfs.lfpr_female_urban",
+          "label": "Urban women"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "Counter to intuition, rural female participation is higher than urban."
+    },
+    {
+      "order": 5,
+      "chartId": "india-near-the-bottom-of-the-world",
+      "title": "India near the bottom of the world",
+      "chartType": "multiLine",
+      "beat": "cross-country",
+      "window": "",
+      "indicator": "compare.lfpr_female.in",
+      "series": [
+        {
+          "indicator": "compare.lfpr_female.in",
+          "label": "India"
+        },
+        {
+          "indicator": "compare.lfpr_female.bgd",
+          "label": "Bangladesh"
+        },
+        {
+          "indicator": "compare.lfpr_female.vnm",
+          "label": "Vietnam"
+        },
+        {
+          "indicator": "compare.lfpr_female.chn",
+          "label": "China"
+        },
+        {
+          "indicator": "compare.lfpr_female.idn",
+          "label": "Indonesia"
+        },
+        {
+          "indicator": "compare.lfpr_female.wld",
+          "label": "World"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "How far below its neighbours India sits on women's work."
+    },
+    {
+      "order": 6,
+      "chartId": "women-actually-working-vs-men",
+      "title": "Women actually working vs men",
+      "chartType": "multiLine",
+      "beat": "employment",
+      "window": "",
+      "indicator": "work.plfs.wpr_female",
+      "series": [
+        {
+          "indicator": "work.plfs.wpr_male",
+          "label": "Men"
+        },
+        {
+          "indicator": "work.plfs.wpr_female",
+          "label": "Women"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "Not just looking for work — actually employed."
+    },
+    {
+      "order": 7,
+      "chartId": "young-women-struggle-most-to-find-work",
+      "title": "Young women struggle most to find work",
+      "chartType": "multiLine",
+      "beat": "youth",
+      "window": "",
+      "indicator": "work.plfs.ur_youth_female",
+      "series": [
+        {
+          "indicator": "work.plfs.ur_youth_female",
+          "label": "Young women"
+        },
+        {
+          "indicator": "work.plfs.ur_youth_male",
+          "label": "Young men"
+        }
+      ],
+      "unit": "%",
+      "subtitle": "",
+      "whyThisChart": "Where the barrier bites hardest: young women entering the market."
+    },
+    {
+      "order": 8,
+      "chartId": "the-pay-gap-in-regular-jobs",
+      "title": "The pay gap in regular jobs",
+      "chartType": "multiLine",
+      "beat": "pay-gap",
+      "window": "",
+      "indicator": "work.plfs.wage_regular_female",
+      "series": [
+        {
+          "indicator": "work.plfs.wage_regular_male",
+          "label": "Men"
+        },
+        {
+          "indicator": "work.plfs.wage_regular_female",
+          "label": "Women"
+        }
+      ],
+      "unit": "₹ per month",
+      "subtitle": "",
+      "whyThisChart": "Even in regular salaried work, women earn less."
+    },
+    {
+      "order": 9,
+      "chartId": "rural-wages-men-vs-women",
+      "title": "Rural wages: men vs women",
+      "chartType": "multiLine",
+      "beat": "rural-wages",
+      "window": "",
+      "indicator": "work.idh.rural_wage_women",
+      "series": [
+        {
+          "indicator": "work.idh.rural_wage_men",
+          "label": "Men"
+        },
+        {
+          "indicator": "work.idh.rural_wage_women",
+          "label": "Women"
+        }
+      ],
+      "unit": "₹ per day",
+      "subtitle": "",
+      "whyThisChart": "The pay gap shows up in daily rural wages too."
+    },
+    {
+      "order": 10,
+      "chartId": "the-recent-surge-month-by-month",
+      "title": "The recent surge, month by month",
+      "chartType": "line",
+      "beat": "recent",
+      "window": "full",
+      "indicator": "work.idh.plfs_monthly_lfpr_female",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The fast recent rise in female participation, at monthly frequency."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Labour Force Participation Rate — female (15+), latest",
+      "value": 41.7,
+      "displayValue": "41.7%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — female (15+), earliest",
+      "value": 23.3,
+      "displayValue": "23.3%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), latest",
+      "value": 78.8,
+      "displayValue": "78.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_male",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), earliest",
+      "value": 75.8,
+      "displayValue": "75.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_male",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
     {
       "label": "Labor force participation rate, female, latest",
       "value": 32.425,
+      "displayValue": "32.4%",
+      "date": "2025",
+      "unit": "% ages 15+",
+      "indicatorId": "work.labor_force_participation_female",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Labor force participation rate, female, earliest",
+      "value": 30.257,
+      "displayValue": "30.3%",
+      "date": "1990",
+      "unit": "% ages 15+",
+      "indicatorId": "work.labor_force_participation_female",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female LFPR — rural (15+), latest",
+      "value": 47.6,
+      "displayValue": "47.6%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female_rural",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female LFPR — rural (15+), earliest",
+      "value": 24.6,
+      "displayValue": "24.6%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female_rural",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female LFPR — urban (15+), latest",
+      "value": 28,
+      "displayValue": "28%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female_urban",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female LFPR — urban (15+), earliest",
+      "value": 20.4,
+      "displayValue": "20.4%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.lfpr_female_urban",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — India, latest",
+      "value": 32.425,
+      "displayValue": "32.4%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.in",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — India, earliest",
+      "value": 30.257,
+      "displayValue": "30.3%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.in",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — Bangladesh, latest",
+      "value": 38.649,
+      "displayValue": "38.6%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.bgd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — Bangladesh, earliest",
+      "value": 24.207,
+      "displayValue": "24.2%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.bgd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — China, latest",
+      "value": 59.148,
+      "displayValue": "59.1%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.chn",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — China, earliest",
+      "value": 73.09,
+      "displayValue": "73.1%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.chn",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — Vietnam, latest",
+      "value": 68.551,
+      "displayValue": "68.6%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.vnm",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — Vietnam, earliest",
+      "value": 74.736,
+      "displayValue": "74.7%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.vnm",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — Indonesia, latest",
+      "value": 53.72,
+      "displayValue": "53.7%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.idn",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — Indonesia, earliest",
+      "value": 50.49,
+      "displayValue": "50.5%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.idn",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — World, latest",
+      "value": 48.9366751380821,
+      "displayValue": "48.9%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.wld",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Female labour force participation rate — World, earliest",
+      "value": 51.1763408013001,
+      "displayValue": "51.2%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "indicatorId": "compare.lfpr_female.wld",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Worker Population Ratio — female (15+), latest",
+      "value": 40.3,
+      "displayValue": "40.3%",
+      "date": "2023-24",
+      "unit": "%",
+      "indicatorId": "work.plfs.wpr_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Worker Population Ratio — female (15+), earliest",
+      "value": 22,
+      "displayValue": "22%",
+      "date": "2017-18",
+      "unit": "%",
+      "indicatorId": "work.plfs.wpr_female",
+      "sourceId": "mospi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Labour Force Participation Rate — female (15+), latest",
+      "value": 41.7,
+      "displayValue": "41.7%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female"
+    },
+    {
+      "label": "Labour Force Participation Rate — female (15+), earliest",
+      "value": 23.3,
+      "displayValue": "23.3%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female"
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), latest",
+      "value": 78.8,
+      "displayValue": "78.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_male"
+    },
+    {
+      "label": "Labour Force Participation Rate — male (15+), earliest",
+      "value": 75.8,
+      "displayValue": "75.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_male"
+    },
+    {
+      "label": "Labor force participation rate, female, latest",
+      "value": 32.425,
+      "displayValue": "32.4%",
       "date": "2025",
       "unit": "% ages 15+",
       "sourceId": "worldbank",
@@ -21,13 +788,382 @@
     {
       "label": "Labor force participation rate, female, earliest",
       "value": 30.257,
+      "displayValue": "30.3%",
       "date": "1990",
       "unit": "% ages 15+",
       "sourceId": "worldbank",
       "indicatorId": "work.labor_force_participation_female"
+    },
+    {
+      "label": "Female LFPR — rural (15+), latest",
+      "value": 47.6,
+      "displayValue": "47.6%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female_rural"
+    },
+    {
+      "label": "Female LFPR — rural (15+), earliest",
+      "value": 24.6,
+      "displayValue": "24.6%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female_rural"
+    },
+    {
+      "label": "Female LFPR — urban (15+), latest",
+      "value": 28,
+      "displayValue": "28%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female_urban"
+    },
+    {
+      "label": "Female LFPR — urban (15+), earliest",
+      "value": 20.4,
+      "displayValue": "20.4%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.lfpr_female_urban"
+    },
+    {
+      "label": "Female labour force participation rate — India, latest",
+      "value": 32.425,
+      "displayValue": "32.4%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.in"
+    },
+    {
+      "label": "Female labour force participation rate — India, earliest",
+      "value": 30.257,
+      "displayValue": "30.3%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.in"
+    },
+    {
+      "label": "Female labour force participation rate — Bangladesh, latest",
+      "value": 38.649,
+      "displayValue": "38.6%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.bgd"
+    },
+    {
+      "label": "Female labour force participation rate — Bangladesh, earliest",
+      "value": 24.207,
+      "displayValue": "24.2%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.bgd"
+    },
+    {
+      "label": "Female labour force participation rate — China, latest",
+      "value": 59.148,
+      "displayValue": "59.1%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.chn"
+    },
+    {
+      "label": "Female labour force participation rate — China, earliest",
+      "value": 73.09,
+      "displayValue": "73.1%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.chn"
+    },
+    {
+      "label": "Female labour force participation rate — Vietnam, latest",
+      "value": 68.551,
+      "displayValue": "68.6%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.vnm"
+    },
+    {
+      "label": "Female labour force participation rate — Vietnam, earliest",
+      "value": 74.736,
+      "displayValue": "74.7%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.vnm"
+    },
+    {
+      "label": "Female labour force participation rate — Indonesia, latest",
+      "value": 53.72,
+      "displayValue": "53.7%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.idn"
+    },
+    {
+      "label": "Female labour force participation rate — Indonesia, earliest",
+      "value": 50.49,
+      "displayValue": "50.5%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.idn"
+    },
+    {
+      "label": "Female labour force participation rate — World, latest",
+      "value": 48.9366751380821,
+      "displayValue": "48.9%",
+      "date": "2025",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.wld"
+    },
+    {
+      "label": "Female labour force participation rate — World, earliest",
+      "value": 51.1763408013001,
+      "displayValue": "51.2%",
+      "date": "1990",
+      "unit": "% of female population 15+",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.lfpr_female.wld"
+    },
+    {
+      "label": "Worker Population Ratio — female (15+), latest",
+      "value": 40.3,
+      "displayValue": "40.3%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wpr_female"
+    },
+    {
+      "label": "Worker Population Ratio — female (15+), earliest",
+      "value": 22,
+      "displayValue": "22%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wpr_female"
+    },
+    {
+      "label": "Worker Population Ratio — male (15+), latest",
+      "value": 76.3,
+      "displayValue": "76.3%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wpr_male"
+    },
+    {
+      "label": "Worker Population Ratio — male (15+), earliest",
+      "value": 71.2,
+      "displayValue": "71.2%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wpr_male"
+    },
+    {
+      "label": "Youth unemployment rate — female (15–29), latest",
+      "value": 11,
+      "displayValue": "11%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_female"
+    },
+    {
+      "label": "Youth unemployment rate — female (15–29), earliest",
+      "value": 17.9,
+      "displayValue": "17.9%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_female"
+    },
+    {
+      "label": "Youth unemployment rate — male (15–29), latest",
+      "value": 9.8,
+      "displayValue": "9.8%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_male"
+    },
+    {
+      "label": "Youth unemployment rate — male (15–29), earliest",
+      "value": 17.8,
+      "displayValue": "17.8%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_youth_male"
+    },
+    {
+      "label": "Unemployment Rate — female (15+), latest",
+      "value": 3.2,
+      "displayValue": "3.2%",
+      "date": "2023-24",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_female"
+    },
+    {
+      "label": "Unemployment Rate — female (15+), earliest",
+      "value": 5.6,
+      "displayValue": "5.6%",
+      "date": "2017-18",
+      "unit": "%",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.ur_female"
+    },
+    {
+      "label": "Average monthly earnings — regular wage, female, latest",
+      "value": 16497.8,
+      "displayValue": "₹16,498",
+      "date": "2023-24",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_regular_female"
+    },
+    {
+      "label": "Average monthly earnings — regular wage, female, earliest",
+      "value": 13816.9,
+      "displayValue": "₹13,817",
+      "date": "2017-18",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_regular_female"
+    },
+    {
+      "label": "Average monthly earnings — regular wage, male, latest",
+      "value": 22092.3,
+      "displayValue": "₹22,092",
+      "date": "2023-24",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_regular_male"
+    },
+    {
+      "label": "Average monthly earnings — regular wage, male, earliest",
+      "value": 17298.7,
+      "displayValue": "₹17,299",
+      "date": "2017-18",
+      "unit": "₹/month",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.wage_regular_male"
+    },
+    {
+      "label": "Daily average rural wage rate, men (blended series), latest",
+      "value": 453.5132,
+      "displayValue": "₹454",
+      "date": "2025-06-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_men"
+    },
+    {
+      "label": "Daily average rural wage rate, men (blended series), earliest",
+      "value": 72.0859913614955,
+      "displayValue": "₹72",
+      "date": "1998-04-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_men"
+    },
+    {
+      "label": "Daily average rural wage rate, women (blended series), latest",
+      "value": 322.061666666667,
+      "displayValue": "₹322",
+      "date": "2025-06-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_women"
+    },
+    {
+      "label": "Daily average rural wage rate, women (blended series), earliest",
+      "value": 162.784705882353,
+      "displayValue": "₹163",
+      "date": "2013-11-30",
+      "unit": "₹/day",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.rural_wage_women"
+    },
+    {
+      "label": "Female labour force participation rate, all-India (monthly PLFS), latest",
+      "value": 26,
+      "displayValue": "26%",
+      "date": "2026-04-30",
+      "unit": "%",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.plfs_monthly_lfpr_female"
+    },
+    {
+      "label": "Female labour force participation rate, all-India (monthly PLFS), earliest",
+      "value": 26.2,
+      "displayValue": "26.2%",
+      "date": "2025-04-30",
+      "unit": "%",
+      "sourceId": "indiadatahub",
+      "indicatorId": "work.idh.plfs_monthly_lfpr_female"
     }
   ],
   "sourceSummaries": [
+    {
+      "indicatorId": "work.plfs.lfpr_female",
+      "title": "Labour Force Participation Rate — female (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "lfpr_female",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 23.3
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 41.7
+      }
+    },
+    {
+      "indicatorId": "work.plfs.lfpr_male",
+      "title": "Labour Force Participation Rate — male (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "lfpr_male",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 75.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 78.8
+      }
+    },
     {
       "indicatorId": "work.labor_force_participation_female",
       "title": "Labor force participation rate, female",
@@ -49,10 +1185,414 @@
         "date": "2025",
         "value": 32.425
       }
+    },
+    {
+      "indicatorId": "work.plfs.lfpr_female_rural",
+      "title": "Female LFPR — rural (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "lfpr_female_rural",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 24.6
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 47.6
+      }
+    },
+    {
+      "indicatorId": "work.plfs.lfpr_female_urban",
+      "title": "Female LFPR — urban (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "lfpr_female_urban",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 20.4
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 28
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr_female.in",
+      "title": "Female labour force participation rate — India",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% of female population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 30.257
+      },
+      "latest": {
+        "date": "2025",
+        "value": 32.425
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr_female.bgd",
+      "title": "Female labour force participation rate — Bangladesh",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% of female population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "BGD",
+        "name": "Bangladesh"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 24.207
+      },
+      "latest": {
+        "date": "2025",
+        "value": 38.649
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr_female.chn",
+      "title": "Female labour force participation rate — China",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% of female population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "CHN",
+        "name": "China"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 73.09
+      },
+      "latest": {
+        "date": "2025",
+        "value": 59.148
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr_female.vnm",
+      "title": "Female labour force participation rate — Vietnam",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% of female population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "VNM",
+        "name": "Vietnam"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 74.736
+      },
+      "latest": {
+        "date": "2025",
+        "value": 68.551
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr_female.idn",
+      "title": "Female labour force participation rate — Indonesia",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% of female population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IDN",
+        "name": "Indonesia"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 50.49
+      },
+      "latest": {
+        "date": "2025",
+        "value": 53.72
+      }
+    },
+    {
+      "indicatorId": "compare.lfpr_female.wld",
+      "title": "Female labour force participation rate — World",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.TLF.CACT.FE.ZS",
+      "unit": "% of female population 15+",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "WLD",
+        "name": "World"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990",
+        "value": 51.1763408013001
+      },
+      "latest": {
+        "date": "2025",
+        "value": 48.9366751380821
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wpr_female",
+      "title": "Worker Population Ratio — female (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wpr_female",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 22
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 40.3
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wpr_male",
+      "title": "Worker Population Ratio — male (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wpr_male",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 71.2
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 76.3
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_youth_female",
+      "title": "Youth unemployment rate — female (15–29)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_youth_female",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 17.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 11
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_youth_male",
+      "title": "Youth unemployment rate — male (15–29)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_youth_male",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 17.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 9.8
+      }
+    },
+    {
+      "indicatorId": "work.plfs.ur_female",
+      "title": "Unemployment Rate — female (15+)",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "ur_female",
+      "unit": "%",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 5.6
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 3.2
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wage_regular_female",
+      "title": "Average monthly earnings — regular wage, female",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wage_regular_female",
+      "unit": "₹/month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 13816.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 16497.8
+      }
+    },
+    {
+      "indicatorId": "work.plfs.wage_regular_male",
+      "title": "Average monthly earnings — regular wage, male",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "wage_regular_male",
+      "unit": "₹/month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 17298.7
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 22092.3
+      }
+    },
+    {
+      "indicatorId": "work.idh.rural_wage_men",
+      "title": "Daily average rural wage rate, men (blended series)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LAWRAGGAVG13M",
+      "unit": "₹/day",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 327,
+      "earliest": {
+        "date": "1998-04-30",
+        "value": 72.0859913614955
+      },
+      "latest": {
+        "date": "2025-06-30",
+        "value": 453.5132
+      }
+    },
+    {
+      "indicatorId": "work.idh.rural_wage_women",
+      "title": "Daily average rural wage rate, women (blended series)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LAWRWTTAVG13M",
+      "unit": "₹/day",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 140,
+      "earliest": {
+        "date": "2013-11-30",
+        "value": 162.784705882353
+      },
+      "latest": {
+        "date": "2025-06-30",
+        "value": 322.061666666667
+      }
+    },
+    {
+      "indicatorId": "work.idh.plfs_monthly_lfpr_female",
+      "title": "Female labour force participation rate, all-India (monthly PLFS)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "LAPLLPARFA11M",
+      "unit": "%",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 13,
+      "earliest": {
+        "date": "2025-04-30",
+        "value": 26.2
+      },
+      "latest": {
+        "date": "2026-04-30",
+        "value": 26
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

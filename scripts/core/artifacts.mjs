@@ -9,6 +9,10 @@ export function hashObject(value) {
   return createHash("sha256").update(stableJson(value)).digest("hex");
 }
 
+export function hashBytes(value) {
+  return createHash("sha256").update(value).digest("hex");
+}
+
 export function sourceSlug(value) {
   return String(value).replace(/[^A-Za-z0-9_.@-]+/g, "_");
 }
@@ -19,6 +23,16 @@ export async function writeSnapshot(sourceId, name, payload) {
   await mkdir(dir, { recursive: true });
   const path = `${dir}/${sourceSlug(name)}.${hash.slice(0, 12)}.json`;
   await writeFile(path, `${stableJson(payload)}\n`);
+  return { path, hash };
+}
+
+export async function writeRawSnapshot(sourceId, name, body, extension = "bin") {
+  const buffer = Buffer.isBuffer(body) ? body : Buffer.from(body);
+  const hash = hashBytes(buffer);
+  const dir = `data/snapshots/${sourceId}`;
+  await mkdir(dir, { recursive: true });
+  const path = `${dir}/${sourceSlug(name)}.${hash.slice(0, 12)}.${sourceSlug(extension)}`;
+  await writeFile(path, buffer);
   return { path, hash };
 }
 
@@ -34,6 +48,24 @@ export async function writeSourceManifest(sourceId, manifest) {
   const path = `data/catalog/${sourceSlug(sourceId)}-manifest.json`;
   await writeFile(path, `${stableJson(manifest)}\n`);
   return path;
+}
+
+export async function mergeSourceManifest(sourceId, entries, keyFields = ["indicatorId", "sourceIndicatorId"]) {
+  const path = `data/catalog/${sourceSlug(sourceId)}-manifest.json`;
+  let current = [];
+  try {
+    const parsed = JSON.parse(await readFile(path, "utf8"));
+    if (Array.isArray(parsed)) current = parsed;
+  } catch {
+    current = [];
+  }
+  const keyFor = (entry) => keyFields.map((field) => String(entry?.[field] ?? "")).join("\u0000");
+  const incomingKeys = new Set(entries.map(keyFor));
+  const merged = [
+    ...current.filter((entry) => !incomingKeys.has(keyFor(entry))),
+    ...entries
+  ];
+  return writeSourceManifest(sourceId, merged);
 }
 
 export async function readJson(path) {

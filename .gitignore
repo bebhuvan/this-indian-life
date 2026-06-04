@@ -2,6 +2,8 @@ node_modules/
 dist/
 .astro/
 .wrangler/
+# Generated before each build by scripts/build-git-meta.mjs (edit-log dates + diff links)
+data/git-meta.json
 .env
 .env.*
 !.env.example
@@ -9,4 +11,15 @@ npm-debug.log*
 pnpm-lock.yaml
 yarn.lock
 .DS_Store
+
+# Local agent/editor config
+.claude/
+
+# Raw ingestion inputs & intermediate dumps — large, third-party, and NOT needed to
+# build the site (the build reads data/explanations, data/series, data/catalog only).
+# Kept local; not republished. ~1.6 GB across these dirs.
+data/snapshots/
+data/extracted/
+/IMD data/
+/NHFS/
 

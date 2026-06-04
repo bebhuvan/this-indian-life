@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "society.trai.telecom_subscription_summary",
+  "title": "TRAI telecom subscription summary, July 2009",
+  "sourceId": "trai",
+  "sourceIndicatorId": "2009-07",
+  "sourceUrl": "https://www.trai.gov.in/sites/default/files/2024-09/PR-TSD_JULY_20_08_09.pdf",
+  "unit": "mixed",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "section",
+    "metric",
+    "access_type"
+  ],
+  "fetchedAt": "2026-06-02T08:00:10.252Z",
+  "rows": [
+    {
+      "page": 1,
+      "section": "total",
+      "metric": "telephone_subscribers",
+      "label": "Total telephone subscribers from legacy summary prose",
+      "unit": "million",
+      "wireless": 441.66,
+      "wireline": 37.41,
+      "total": 479.04,
+      "extractionMethod": "pdftotext-layout"
+    },
+    {
+      "page": 1,
+      "section": "overall",
+      "metric": "teledensity",
+      "label": "Overall tele-density from legacy summary prose",
+      "unit": "%",
+      "wireless": null,
+      "wireline": null,
+      "total": 41.08,
+      "extractionMethod": "pdftotext-layout"
+    },
+    {
+      "page": 1,
+      "section": "broadband",
+      "metric": "broadband_subscribers",
+      "label": "Broadband subscribers from prose",
+      "unit": "million",
+      "wireless": null,
+      "wireline": null,
+      "total": 6.8,
+      "extractionMethod": "pdftotext-layout"
+    }
+  ],
+  "metadata": {
+    "reportPeriod": {
+      "label": "July 2009",
+      "date": "2009-07"
+    },
+    "pdfPath": "data/snapshots/trai-pdf/PR-TSD_JULY_20_08_09.pdf",
+    "pdfHash": "303b259d0a83f2d1e33013698b68d03bf1bfab34a08ebb16dc12b7409dfb312e",
+    "textHash": "a4756bef82d6d14d4b3683b60827c18cfb581196b919c8059f8903f3a1c3873b",
+    "textSnapshot": "data/snapshots/trai-pdf-text/data_snapshots_trai-pdf_PR-TSD_JULY_20_08_09.pdf.e4bbf95ad5cc.json",
+    "ocrSnapshot": "",
+    "ocrOutputDir": "",
+    "ocrRawJsonPath": "",
+    "extractionMethod": "native_pdf_text_pdftotext_layout",
+    "validation": [
+      {
+        "severity": "warning",
+        "message": "Total check differs by 0.03 for total:telephone_subscribers"
+      }
+    ],
+    "validationProfile": "historical_partial_core_table",
+    "ocrDpi": null,
+    "caveats": [
+      "This extractor uses native embedded PDF text, not OCR.",
+      "TRAI report tables are parsed by profile-specific rules; numbers must be cross-checked when the report layout changes.",
+      "Subscriber counts are connections/subscriptions, not unique people."
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "heat.imd_dwe_2024.heatwave_summary",
+  "title": "IMD DWE 2024 extracted heatwave summary values",
+  "sourceId": "imd",
+  "sourceIndicatorId": "DWE 2024 narrative and event table",
+  "sourceUrl": "https://www.imdpune.gov.in/library/public/DWE_2024.pdf",
+  "unit": "mixed; see row",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "indicatorId",
+    "year"
+  ],
+  "fetchedAt": "2026-06-03T05:00:01.505Z",
+  "rows": [
+    {
+      "indicatorId": "imd_dwe_2024_heatwave_deaths_total",
+      "label": "Heat wave deaths",
+      "value": 460,
+      "unit": "reported deaths",
+      "year": 2024,
+      "interpretation": "IMD meteorological disaster-event count; not all heat-attributable excess mortality"
+    },
+    {
+      "indicatorId": "imd_dwe_2024_total_disastrous_weather_deaths",
+      "label": "Total deaths due to disastrous weather events",
+      "value": 3686,
+      "unit": "reported deaths",
+      "year": 2024,
+      "interpretation": "IMD all-event reported death total"
+    },
+    {
+      "indicatorId": "imd_dwe_2024_heatwave_deaths_may_30",
+      "label": "Heat wave deaths on 30 May",
+      "value": 84,
+      "unit": "reported deaths",
+      "year": 2024,
+      "interpretation": "Single-day reported heatwave deaths in IMD narrative"
+    },
+    {
+      "indicatorId": "imd_dwe_2024_heatwave_deaths_june_1",
+      "label": "Heat wave deaths on 1 June",
+      "value": 65,
+      "unit": "reported deaths",
+      "year": 2024,
+      "interpretation": "Single-day reported heatwave deaths in IMD narrative"
+    },
+    {
+      "indicatorId": "imd_dwe_2024_heatwave_deaths_june_16",
+      "label": "Heat wave deaths on 16 June",
+      "value": 51,
+      "unit": "reported deaths",
+      "year": 2024,
+      "interpretation": "Single-day reported heatwave deaths in IMD narrative"
+    }
+  ],
+  "metadata": {
+    "sourcePdfSnapshot": "data/snapshots/heat-mortality/imd-disastrous-weather-events-2024.pdf.9ca124cf135e.pdf",
+    "extractedTextSnapshot": "data/snapshots/heat-mortality/imd-disastrous-weather-events-2024.extracted.ab0db585db85.txt",
+    "note": "Narrative/table summary values from IMD DWE 2024. These are reported disaster deaths, not excess mortality."
+  }
+}

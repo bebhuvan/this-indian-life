@@ -1,0 +1,1506 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-06-02T03:31:45.356Z",
+  "runMode": "sample",
+  "sources": [
+    {
+      "sourceId": "nada",
+      "name": "MoSPI Microdata Library / NADA",
+      "owner": "MoSPI / NSO",
+      "baseUrl": "https://microdata.gov.in/NADA/index.php",
+      "accessMode": "html_catalog_plus_metadata_json",
+      "articlePotential": [
+        "jobs",
+        "consumption",
+        "industry",
+        "health",
+        "education",
+        "telecom",
+        "time_use",
+        "enterprise",
+        "living_conditions"
+      ],
+      "priority": 1
+    },
+    {
+      "sourceId": "trai",
+      "name": "TRAI Telecom Subscription Reports",
+      "owner": "Telecom Regulatory Authority of India",
+      "baseUrl": "https://www.trai.gov.in/release-publication/reports/telecom-subscriptions-reports",
+      "accessMode": "html_report_listing_pdf_downloads",
+      "articlePotential": [
+        "telecom",
+        "internet",
+        "rural_urban_connectivity",
+        "competition"
+      ],
+      "priority": 1
+    },
+    {
+      "sourceId": "ndap",
+      "name": "National Data Analytics Platform",
+      "owner": "NITI Aayog",
+      "baseUrl": "https://loadqa.ndapapi.com",
+      "accessMode": "json_api_experimental",
+      "articlePotential": [
+        "districts",
+        "schemes",
+        "cross_ministry_indicators"
+      ],
+      "priority": 2
+    },
+    {
+      "sourceId": "data-gov-in",
+      "name": "Open Government Data Platform India",
+      "owner": "MeitY / NIC and publishing ministries",
+      "baseUrl": "https://data.gov.in",
+      "accessMode": "api_key_required_resource_api",
+      "articlePotential": [
+        "broad_government_catalog",
+        "ministry_specific_datasets"
+      ],
+      "priority": 2
+    },
+    {
+      "sourceId": "rbi-dbie",
+      "name": "RBI Database on Indian Economy",
+      "owner": "Reserve Bank of India",
+      "baseUrl": "https://data.rbi.org.in",
+      "accessMode": "web_tables_downloads_needs_endpoint_discovery",
+      "articlePotential": [
+        "banking",
+        "inflation",
+        "monetary_policy",
+        "external_sector",
+        "state_finance"
+      ],
+      "priority": 1
+    },
+    {
+      "sourceId": "nfhs",
+      "name": "NFHS / DHS / IIPS",
+      "owner": "IIPS / Ministry of Health and Family Welfare",
+      "baseUrl": "https://www.nfhsiips.in/",
+      "accessMode": "factsheet_downloads_dhs_api_microdata_registration",
+      "articlePotential": [
+        "health",
+        "fertility",
+        "nutrition",
+        "sanitation",
+        "women",
+        "digital_access"
+      ],
+      "priority": 1
+    },
+    {
+      "sourceId": "census-india",
+      "name": "Census India",
+      "owner": "Office of the Registrar General and Census Commissioner",
+      "baseUrl": "https://censusindia.gov.in",
+      "accessMode": "file_downloads_page_backed",
+      "articlePotential": [
+        "population",
+        "migration",
+        "literacy",
+        "households",
+        "settlements"
+      ],
+      "priority": 1
+    },
+    {
+      "sourceId": "mospi-esankhyiki",
+      "name": "MoSPI / eSankhyiki",
+      "owner": "MoSPI",
+      "baseUrl": "https://www.esankhyiki.mospi.gov.in/",
+      "accessMode": "official_tables_downloads_needs_endpoint_discovery",
+      "articlePotential": [
+        "national_accounts",
+        "prices",
+        "iip",
+        "official_statistics"
+      ],
+      "priority": 1
+    }
+  ],
+  "nada": {
+    "status": "ready",
+    "total": 183,
+    "pagesDiscovered": 2,
+    "records": [
+      {
+        "catalogId": 293,
+        "title": "Annual Survey of Unincorporated Sector Enterprises (ASUSE) : 2025 (January 2025 – December 2025)",
+        "referenceId": "DDI-IND-NSO-ASUSE-Jan2025-Dec2025",
+        "collection": "",
+        "lastModified": "May 06, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/293",
+        "topics": [
+          "enterprise",
+          "informal_economy"
+        ]
+      },
+      {
+        "catalogId": 292,
+        "title": "unit-level data of PLFS for quarterly (Apr-June 2025 to Oct-Dec 2025)",
+        "referenceId": "DDI-IND-NSO-PLFS-Apr-Jun2025-to-Oct-Dec2025",
+        "collection": "",
+        "lastModified": "May 05, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/292",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 291,
+        "title": "unit-level data of PLFS for monthly (April to December 2025)",
+        "referenceId": "DDI-IND-NSO-PLFS-Apr2025-Dec2025",
+        "collection": "",
+        "lastModified": "May 05, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/291",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 290,
+        "title": "Survey on Household Social Consumption:Health(Jan-Dec25)",
+        "referenceId": "DDI-IND-NSO-HSCHealth80R-Jan2025-Dec2025",
+        "collection": "",
+        "lastModified": "Apr 20, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/290",
+        "topics": [
+          "consumption",
+          "poverty",
+          "living_conditions"
+        ]
+      },
+      {
+        "catalogId": 284,
+        "title": "Periodic Labour Force Survey (PLFS),Calendar Year 2025 (Jan-Dec25)",
+        "referenceId": "DDI-IND-NSO-PLFS-Jan2025-Dec2025",
+        "collection": "",
+        "lastModified": "Mar 27, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/284",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 256,
+        "title": "Annual Survey of Industries 2023-24",
+        "referenceId": "DDI-IND-NSO-ASI-2023-24",
+        "collection": "",
+        "lastModified": "Feb 25, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/256",
+        "topics": [
+          "industry",
+          "manufacturing",
+          "firms"
+        ]
+      },
+      {
+        "catalogId": 255,
+        "title": "Comprehensive Modular Survey on Education-NSS 80th Round-2025",
+        "referenceId": "DDI-IND-MOSPI-NSS-CMSE80-2025",
+        "collection": "",
+        "lastModified": "Aug 27, 2025",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/255",
+        "topics": [
+          "education"
+        ]
+      },
+      {
+        "catalogId": 254,
+        "title": "Periodic Labour Force Survey (PLFS), Key Employment Unemployment Indicators for (January 2024 - December 2024)",
+        "referenceId": "DDI-IND-NSO-PLFS-2024-24",
+        "collection": "",
+        "lastModified": "Aug 25, 2025",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/254",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 239,
+        "title": "Comprehensive Modular Survey on Telecom-NSS 80th Round-2025",
+        "referenceId": "DDI-IND-MOSPI-NSS-CMST80-2025",
+        "collection": "",
+        "lastModified": "Apr 17, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/239",
+        "topics": [
+          "digital_access",
+          "telecom",
+          "living_conditions"
+        ]
+      },
+      {
+        "catalogId": 238,
+        "title": "Annual Survey of Unincorporated Sector Enterprises (ASUSE) of 2023-2024",
+        "referenceId": "DDI-IND-MOSPI-NSS-ASUSE23-24",
+        "collection": "",
+        "lastModified": "Jan 21, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/238",
+        "topics": [
+          "enterprise",
+          "informal_economy"
+        ]
+      },
+      {
+        "catalogId": 237,
+        "title": "Household Consumption Expenditure Survey: 2023-24",
+        "referenceId": "DDI-IND-MOSPI-NSS-HCES23-24",
+        "collection": "",
+        "lastModified": "Apr 13, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/237",
+        "topics": [
+          "consumption",
+          "poverty",
+          "living_conditions"
+        ]
+      },
+      {
+        "catalogId": 236,
+        "title": "Time Use Survey (TUS), January 2024-December 2024",
+        "referenceId": "DDI-IND-NSO-TUS-2024-24",
+        "collection": "",
+        "lastModified": "Apr 15, 2025",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/236",
+        "topics": [
+          "time_use",
+          "gender",
+          "work"
+        ]
+      },
+      {
+        "catalogId": 230,
+        "title": "Urban Frame Survey (UFS) Summary Data",
+        "referenceId": "DDI-IND-NSO-UFS",
+        "collection": "",
+        "lastModified": "Apr 09, 2025",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/230",
+        "topics": [
+          "general_survey"
+        ]
+      },
+      {
+        "catalogId": 224,
+        "title": "Household Consumption Expenditure Survey: 2022-23",
+        "referenceId": "DDI-IND-MOSPI-NSSO-HCES22-23",
+        "collection": "",
+        "lastModified": "Dec 20, 2024",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/224",
+        "topics": [
+          "consumption",
+          "poverty",
+          "living_conditions"
+        ]
+      },
+      {
+        "catalogId": 223,
+        "title": "Time Use Survey (TUS), January 2019-December 2019",
+        "referenceId": "DDI-IND-CSO-TUS-2019-19",
+        "collection": "",
+        "lastModified": "Dec 19, 2024",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/223",
+        "topics": [
+          "time_use",
+          "gender",
+          "work"
+        ]
+      },
+      {
+        "catalogId": 222,
+        "title": "Annual Survey of Unincorporated Sector Enterprises (ASUSE) of 2022-2023",
+        "referenceId": "DDI-IND-MOSPI-NSSO-ASUSE2223",
+        "collection": "",
+        "lastModified": "Feb 05, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/222",
+        "topics": [
+          "enterprise",
+          "informal_economy"
+        ]
+      },
+      {
+        "catalogId": 221,
+        "title": "Annual Survey of Unincorporated Sector Enterprises (ASUSE) of 2021-2022",
+        "referenceId": "DDI-IND-MOSPI-NSSO-ASUSE2122",
+        "collection": "",
+        "lastModified": "Feb 13, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/221",
+        "topics": [
+          "enterprise",
+          "informal_economy"
+        ]
+      },
+      {
+        "catalogId": 220,
+        "title": "Comprehensive Annual Modular Survey (CAMS),NSS 79th round: 2022-23",
+        "referenceId": "DDI-IND-MOSPI-NSSO-CAMS22-23",
+        "collection": "",
+        "lastModified": "May 27, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/220",
+        "topics": [
+          "digital_access",
+          "telecom",
+          "living_conditions"
+        ]
+      },
+      {
+        "catalogId": 219,
+        "title": "AYUSH of NSS 79th round: 2022-23",
+        "referenceId": "DDI-IND-MOSPI-NSSO-AYUSH22-23",
+        "collection": "",
+        "lastModified": "Dec 09, 2024",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/219",
+        "topics": [
+          "health"
+        ]
+      },
+      {
+        "catalogId": 218,
+        "title": "Multiple Indicator Survey(MIS), NSS 78th Round",
+        "referenceId": "DDI-IND-CSO-MIS-78-2020",
+        "collection": "",
+        "lastModified": "Dec 09, 2024",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/218",
+        "topics": [
+          "digital_access",
+          "telecom",
+          "living_conditions"
+        ]
+      },
+      {
+        "catalogId": 217,
+        "title": "Periodic Labour Force Survey (PLFS), July 2019-June 2020",
+        "referenceId": "DDI-IND-CSO-PLFS-2019-20",
+        "collection": "",
+        "lastModified": "May 22, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/217",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 216,
+        "title": "Periodic Labour Force Survey (PLFS), July 2018-June 2019",
+        "referenceId": "DDI-IND-CSO-PLFS-2018-19",
+        "collection": "",
+        "lastModified": "Apr 20, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/216",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 214,
+        "title": "Periodic Labour Force Survey (PLFS), July 2021-June 2022",
+        "referenceId": "DDI-IND-CSO-PLFS-2021-22",
+        "collection": "",
+        "lastModified": "May 25, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/214",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 211,
+        "title": "Periodic Labour Force Survey (PLFS), Calendar Year 2022 (Jan22 Dec22)",
+        "referenceId": "DDI-IND-CSO-PLFS-2022-22",
+        "collection": "",
+        "lastModified": "Jan 05, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/211",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 210,
+        "title": "Periodic Labour Force Survey (PLFS), July, 2022- June,2023",
+        "referenceId": "DDI-IND-CSO-PLFS-2022-23",
+        "collection": "",
+        "lastModified": "Nov 08, 2024",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/210",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 209,
+        "title": "Periodic Labour Force Survey (PLFS), Calendar Year 2021 (Jan21 Dec21)",
+        "referenceId": "DDI-IND-CSO-PLFS-2021-21",
+        "collection": "",
+        "lastModified": "May 27, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/209",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 206,
+        "title": "Unit Level Data of Periodic Labour Force Survey (PLFS) July 2020-June 2021",
+        "referenceId": "DDI-IND-CSO-PLFS-2020-21",
+        "collection": "",
+        "lastModified": "Nov 07, 2024",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/206",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 205,
+        "title": "Annual Survey of Industries 2022-23",
+        "referenceId": "DDI-IND-NSO-ASI-2022-23",
+        "collection": "",
+        "lastModified": "Jan 27, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/205",
+        "topics": [
+          "industry",
+          "manufacturing",
+          "firms"
+        ]
+      },
+      {
+        "catalogId": 204,
+        "title": "Periodic Labour Force Survey (PLFS), July 2017-June 2018",
+        "referenceId": "DDI-IND-CSO-PLFS-2017-18",
+        "collection": "",
+        "lastModified": "Oct 28, 2024",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/204",
+        "topics": [
+          "jobs",
+          "work",
+          "labour"
+        ]
+      },
+      {
+        "catalogId": 188,
+        "title": "Annual Survey of Industries 2021-22",
+        "referenceId": "DDI-IND-NSO-ASI-2021-22",
+        "collection": "",
+        "lastModified": "Jan 20, 2026",
+        "access": "public_use_data_files",
+        "url": "https://microdata.gov.in/catalog/188",
+        "topics": [
+          "industry",
+          "manufacturing",
+          "firms"
+        ]
+      }
+    ],
+    "focusDetails": [
+      {
+        "catalogId": 293,
+        "dataDictionary": {
+          "files": []
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/293/download/4983",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/293/download/4984",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/293/download/4985",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/293/download/4987",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/293/download/4988",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/293/download/4989",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/293/download/4990",
+              "fileInfo": ""
+            }
+          ]
+        }
+      },
+      {
+        "catalogId": 292,
+        "dataDictionary": {
+          "files": []
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4970",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4971",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4972",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4973",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4974",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4975",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4976",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4977",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4979",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4980",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4981",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/4978",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/292/download/5012",
+              "fileInfo": ""
+            }
+          ]
+        }
+      },
+      {
+        "catalogId": 291,
+        "dataDictionary": {
+          "files": []
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4956",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4957",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4958",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4959",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4960",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4961",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4962",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4963",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4964",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4965",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4966",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4967",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/291/download/4969",
+              "fileInfo": ""
+            }
+          ]
+        }
+      },
+      {
+        "catalogId": 290,
+        "dataDictionary": {
+          "files": []
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4898",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4899",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4900",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4901",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4902",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4903",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4904",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/290/download/4905",
+              "fileInfo": ""
+            }
+          ]
+        }
+      },
+      {
+        "catalogId": 284,
+        "dataDictionary": {
+          "files": []
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4399",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4400",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4390",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4391",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4392",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4393",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4394",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4395",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4396",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4397",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4398",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4403",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/284/download/4402",
+              "fileInfo": ""
+            }
+          ]
+        }
+      },
+      {
+        "catalogId": 255,
+        "dataDictionary": {
+          "files": [
+            {
+              "name": "CMSE80HH25",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/data-dictionary/F1?file_name=CMSE80HH25",
+              "cases": 52085,
+              "variables": 31
+            },
+            {
+              "name": "CMSE80PER25",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/data-dictionary/F2?file_name=CMSE80PER25",
+              "cases": 221617,
+              "variables": 38
+            },
+            {
+              "name": "CMSE80PERST25",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/data-dictionary/F3?file_name=CMSE80PERST25",
+              "cases": 1675,
+              "variables": 28
+            }
+          ]
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/download/2704",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/download/2705",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/download/2706",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/download/2707",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/download/2708",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/255/download/2709",
+              "fileInfo": ""
+            }
+          ]
+        }
+      },
+      {
+        "catalogId": 254,
+        "dataDictionary": {
+          "files": [
+            {
+              "name": "chhv1",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/data-dictionary/F1?file_name=chhv1",
+              "cases": 101957,
+              "variables": 38
+            },
+            {
+              "name": "cperv1",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/data-dictionary/F2?file_name=cperv1",
+              "cases": 415549,
+              "variables": 140
+            }
+          ]
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2692",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2693",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2694",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2696",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2697",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2698",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2699",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/254/download/2695",
+              "fileInfo": ""
+            }
+          ]
+        }
+      },
+      {
+        "catalogId": 239,
+        "dataDictionary": {
+          "files": [
+            {
+              "name": "CMST80HH",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/data-dictionary/F1?file_name=CMST80HH",
+              "cases": 34950,
+              "variables": 29
+            },
+            {
+              "name": "CMST80PER",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/data-dictionary/F2?file_name=CMST80PER",
+              "cases": 142065,
+              "variables": 40
+            }
+          ]
+        },
+        "relatedMaterials": {
+          "materials": [
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4932",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4933",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4934",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4935",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4936",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4937",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4938",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4939",
+              "fileInfo": ""
+            },
+            {
+              "title": "i class=\"far fa-plus-square icon-expand\" aria-hidden=\"true\">",
+              "url": "https://microdata.gov.in/NADA/index.php/catalog/239/download/4940",
+              "fileInfo": ""
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "trai": {
+    "status": "ready",
+    "pagesDiscovered": 2,
+    "reports": [
+      {
+        "title": "Telecom Subscription Data as on April 2026",
+        "releaseDate": "26/05/2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-05/PR_No.63of2026_0.pdf",
+        "size": "1.34 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/18059"
+      },
+      {
+        "title": "Telecom Subscription Data as on March 2026",
+        "releaseDate": "22/04/2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-04/PR_No.53of2026.pdf",
+        "size": "1.32 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/17859"
+      },
+      {
+        "title": "Telecom Subscription Data as on February 2026",
+        "releaseDate": "01/04/2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-04/PR_No.46of2026_0.pdf",
+        "size": "7.49 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/17670"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st January 2026",
+        "releaseDate": "19/03/2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-03/PR_No.39of2026_0.pdf",
+        "size": "1.22 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/17630"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st December 2025",
+        "releaseDate": "10/02/2026",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2026-02/PR_No.19of2026_0.pdf",
+        "size": "5.71 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/16957"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th November 2025",
+        "releaseDate": "31/12/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-12/English%20Press%20Release%20of%20Telecom%20Subscription%20Data-November-25_English-31.12.2025_1815-sd_0.pdf",
+        "size": "2.42 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/16696"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st, October, 2025",
+        "releaseDate": "28/11/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-11/PR_No.141of2025_0.pdf",
+        "size": "12.52 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/16575"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th, September, 2025",
+        "releaseDate": "27/10/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-10/PR_No.120of2025_0.pdf",
+        "size": "2.13 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/16419"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st August, 2025",
+        "releaseDate": "06/10/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-10/PR_No.104of2025_0.pdf",
+        "size": "2.38 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/16010"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st July, 2025",
+        "releaseDate": "29/08/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-08/PR_No.83of2025_0.pdf",
+        "size": "2.61 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/14208"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th June, 2025",
+        "releaseDate": "29/07/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-07/PR_No.64of2025_0.pdf",
+        "size": "2.59 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/13898"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st May, 2025",
+        "releaseDate": "27/06/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-06/PR_No.51of2025_0.pdf",
+        "size": "2.55 MB",
+        "nodeUrl": "http://www.trai.gov.in/hi/node/13402"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th April, 2025",
+        "releaseDate": "29/05/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-05/PR_No.44of2025_0.pdf",
+        "size": "2.53 MB",
+        "nodeUrl": "http://www.trai.gov.in/node/13348"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st March, 2025",
+        "releaseDate": "07/05/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-05/PR_No.35of2025_0.pdf",
+        "size": "994.65 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/13242"
+      },
+      {
+        "title": "Telecom Subscription Data as on 28th February, 2025",
+        "releaseDate": "24/04/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-04/TSD-Feb_25_English_0.pdf",
+        "size": "1022.85 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/13226"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st January, 2025",
+        "releaseDate": "22/04/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-04/TSD-Jan_25_English_1.pdf",
+        "size": "1020.76 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/13215"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st December, 2024",
+        "releaseDate": "11/03/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-03/PR_No.16of2025_0.pdf",
+        "size": "909.72 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/13144"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th November, 2024",
+        "releaseDate": "22/01/2025",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-01/PR_No.06of2025_0.pdf",
+        "size": "894.79 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/12965"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st, October, 2024",
+        "releaseDate": "23/12/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-12/PR_No.94of2024_0.pdf",
+        "size": "911.58 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/12850"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th, September, 2024",
+        "releaseDate": "21/11/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-11/PR_No.89of2024.pdf",
+        "size": "905.67 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/12724"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st August, 2024",
+        "releaseDate": "15/10/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-01/PR_No.78of2024_0.pdf",
+        "size": "904.32 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/12900"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st July, 2024",
+        "releaseDate": "20/09/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2025-01/PR_No.65of2024.pdf",
+        "size": "894.33 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/12899"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th June, 2024",
+        "releaseDate": "20/08/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/PR_No.54of2024_0_0.pdf",
+        "size": "901.87 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1717"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st May, 2024",
+        "releaseDate": "16/07/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/PR_No.40of2024_0_0.pdf",
+        "size": "883.97 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1786"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th April, 2024",
+        "releaseDate": "19/06/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/3rd.pdf",
+        "size": "893.13 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1796"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st March, 2024",
+        "releaseDate": "03/05/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/4th.pdf",
+        "size": "866.74 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1812"
+      },
+      {
+        "title": "Telecom Subscription Data as on 29th February, 2024",
+        "releaseDate": "08/04/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/5th.pdf",
+        "size": "620.71 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1821"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st January, 2024",
+        "releaseDate": "01/04/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/6th.pdf",
+        "size": "619.71 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1950"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st December, 2023",
+        "releaseDate": "22/02/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-11/PR_No.07of2024_0.pdf",
+        "size": "676.2 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1955"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th November, 2023",
+        "releaseDate": "29/01/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/8t.pdf",
+        "size": "647.61 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1992"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st October, 2023",
+        "releaseDate": "03/01/2024",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/9th.pdf",
+        "size": "673.39 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/1997"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th September, 2023",
+        "releaseDate": "20/12/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/10th.pdf",
+        "size": "887.75 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2000"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st August, 2023",
+        "releaseDate": "16/11/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/11th.pdf",
+        "size": "655.7 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2009"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st July, 2023",
+        "releaseDate": "27/09/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/12th.pdf",
+        "size": "661.78 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2028"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th June, 2023",
+        "releaseDate": "24/08/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/13th.pdf",
+        "size": "879.83 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2030"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st May, 2023",
+        "releaseDate": "01/08/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/14th.pdf",
+        "size": "646.95 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2033"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th April, 2023",
+        "releaseDate": "28/06/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/15th.pdf",
+        "size": "638.33 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2036"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st March, 2023",
+        "releaseDate": "22/05/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/16th.pdf",
+        "size": "664.23 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2038"
+      },
+      {
+        "title": "Telecom Subscription Data as on 28th February, 2023",
+        "releaseDate": "11/05/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/17th.pdf",
+        "size": "668.91 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2040"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st January, 2023",
+        "releaseDate": "31/03/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/18.pdf",
+        "size": "675.33 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2042"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st December, 2022",
+        "releaseDate": "16/02/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/19th.pdf",
+        "size": "669.72 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2048"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th November, 2022",
+        "releaseDate": "27/01/2023",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/20th.pdf",
+        "size": "643.45 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2053"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st October, 2022",
+        "releaseDate": "19/12/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/21th.pdf",
+        "size": "672.62 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2072"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th September, 2022",
+        "releaseDate": "22/11/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/22th.pdf",
+        "size": "874.62 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2076"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st August, 2022",
+        "releaseDate": "18/10/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/23.pdf",
+        "size": "674.47 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2125"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st July, 2022",
+        "releaseDate": "15/09/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/24.pdf",
+        "size": "654.56 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2127"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th June, 2022",
+        "releaseDate": "17/08/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/25.pdf",
+        "size": "659.85 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2130"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st May, 2022",
+        "releaseDate": "19/07/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/26.pdf",
+        "size": "657.87 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2132"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th April, 2022",
+        "releaseDate": "16/06/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/27th.pdf",
+        "size": "643.21 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2133"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st March, 2022",
+        "releaseDate": "12/05/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/28.pdf",
+        "size": "653.41 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2137"
+      },
+      {
+        "title": "Telecom Subscription Data as on 28th February, 2022",
+        "releaseDate": "19/04/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/29.pdf",
+        "size": "631.62 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2139"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st January, 2022",
+        "releaseDate": "30/03/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/30.pdf",
+        "size": "631.49 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2142"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th November, 2021",
+        "releaseDate": "18/01/2022",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/32.pdf",
+        "size": "662.49 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2146"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st October, 2021",
+        "releaseDate": "20/12/2021",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/33.pdf",
+        "size": "593.08 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2149"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30 September, 2021",
+        "releaseDate": "22/11/2021",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/34.pdf",
+        "size": "612.01 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2151"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st August, 2021",
+        "releaseDate": "20/10/2021",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/35.pdf",
+        "size": "619.13 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2154"
+      },
+      {
+        "title": "Telecom Subscription Data as on 31st July, 2021",
+        "releaseDate": "23/09/2021",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/36.pdf",
+        "size": "544.15 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2155"
+      },
+      {
+        "title": "Corrigendum to Press Release No. 35-2021 dated 29th July, 2021",
+        "releaseDate": "17/09/2021",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/38.pdf",
+        "size": "326.02 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2159"
+      },
+      {
+        "title": "Corrigendum to Press Release No. 37-2021 dated 23rd August, 2021",
+        "releaseDate": "17/09/2021",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/37.pdf",
+        "size": "220.99 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2157"
+      },
+      {
+        "title": "Telecom Subscription Data as on 30th June, 2021",
+        "releaseDate": "23/08/2021",
+        "pdfUrl": "https://www.trai.gov.in/sites/default/files/2024-09/39.pdf",
+        "size": "879.93 KB",
+        "nodeUrl": "http://www.trai.gov.in/node/2161"
+      }
+    ]
+  },
+  "ndap": {
+    "status": "ready",
+    "catalogueShape": {
+      "type": "object",
+      "keys": [
+        "Message"
+      ]
+    },
+    "searchShape": {
+      "type": "object",
+      "keys": [
+        "Message"
+      ]
+    }
+  },
+  "dataGovIn": {
+    "status": "api_key_missing",
+    "apiTemplate": "https://api.data.gov.in/resource/{resource_id}?api-key=$DATAGOVIN_API_KEY&format=json&limit=1000&offset=0"
+  },
+  "validation": [
+    {
+      "severity": "warning",
+      "sourceId": "data-gov-in",
+      "message": "DATAGOVIN_API_KEY is not configured; adapter can only document API templates"
+    }
+  ]
+}

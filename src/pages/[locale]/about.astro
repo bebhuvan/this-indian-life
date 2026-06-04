@@ -10,41 +10,142 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 ---
 
-<Base title="About · Indica">
-  <div class="wrap">
+<Base title="About · This Indian Life">
+  <div class="wrap about">
     <Nav locale={locale} />
 
     <header class="domain-head">
-      <span class="lbl">About Indica</span>
-      <h1 class="serif">A living almanac for how India lives.</h1>
+      <span class="lbl">About</span>
+      <h1 class="serif">I just wanted to understand my own country.</h1>
       <p class="muted">
-        Indica turns scattered public statistics into durable, sourced chart pages with clear explanations.
+        This Indian Life is one person's attempt to drag the most important numbers about
+        life in India out of horrible PDFs and ancient government websites, and explain them
+        in plain language. That is the whole pitch.
       </p>
     </header>
 
-    <section class="section mods">
-      <div>
-        <p class="sec-hd">Principles</p>
-        <div class="prose">
-          <p><strong>Numbers come from sources.</strong> RBI, MoSPI, World Bank, OWID, NASA, OpenAQ, WAQI, and other data providers are ingested into normalized artifacts.</p>
-          <p><strong>Prose wraps locked numbers.</strong> LLMs can help write explanations, but they do not invent figures or answer live from memory.</p>
-          <p><strong>The site is static first.</strong> Published pages do not call third-party APIs during a page view.</p>
-        </div>
-      </div>
-      <div class="ask-box">
-        <div class="t">Current build</div>
-        <p class="muted">This first live scaffold uses World Bank India series to prove the full path from ingest to chart page.</p>
+    <section class="section">
+      <p class="sec-hd">The thing that bothered me</p>
+      <div class="prose">
+        <p>For a country this vast, our statistics leave a lot to be desired. A lot of what should be counted isn't, and a lot of what <em>is</em> counted somehow still doesn't count. That is the strange irony of the machinery we use to measure India. It's fine, in a way — we are still a young country — but "young" was never the same as "good enough."</p>
+        <p>Most people don't stop to appreciate this, but it blows my mind every time: India isn't really one country. It is many countries wearing a single name. Some of our states are bigger than most nations on earth; a few are bigger than several countries put together. Uttar Pradesh, all on its own, would rank among the most populous places on the planet.</p>
+        <p>And yet, even in 2026, we still don't have a reliable estimate of something as basic as unemployment. I understand why — the vast majority of the Indian economy is informal, and informal is genuinely hard to count. But hard has never been a good excuse for not trying harder.</p>
       </div>
     </section>
 
     <section class="section">
-      <p class="sec-hd">Next sources</p>
-      <div class="cards">
-        <div class="card dom-economy"><div class="tag">RBI</div><h4>Database on Indian Economy</h4><p class="sub">Monetary, banking, inflation, external sector, and financial-market data.</p></div>
-        <div class="card dom-economy"><div class="tag">MoSPI</div><h4>Official statistics</h4><p class="sub">National accounts, CPI/IIP, surveys, and statistical products.</p></div>
-        <div class="card dom-climate"><div class="tag">Air + climate</div><h4>OpenAQ, WAQI, NASA POWER</h4><p class="sub">Pollution, heat, rainfall, and meteorological exposure.</p></div>
+      <p class="sec-hd">A penance for past-life sins</p>
+      <div class="prose">
+        <p>Most of the numbers that should be common knowledge are instead trapped in dreadful PDFs, buried behind government websites that look like they were designed in 1500 BC and haven't been touched since. I'm fairly sure a child's crayon drawings have better user interfaces than some of these portals.</p>
+        <p>I've spent so many hours fighting these sites — for work, and out of plain curiosity — that I've quietly developed a theory. I'm not a religious man, but I have come to believe that being made to hunt for old PDFs behind broken CAPTCHAs and hostile interfaces is penance for sins I committed in a previous life.</p>
       </div>
+      <p class="bottomline">So if you ever find yourself on a shoddy government website, know that you sinned in a past life. And if you'd rather not come back and do it all again — be a good person. Please.</p>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Why now</p>
+      <div class="prose">
+        <p>This has bothered me for years, and for years I could do nothing about it, because I am not a technical person. Then large language models arrived, and I am delighted to inform the world that I am now an expert developer, programmer, coder, and several other things I don't know the correct word for. I can ship in idli-vada and JavaScript with equal confidence, mostly by talking to my computer.</p>
+        <p>Joking aside: tools like Claude Code and Codex finally let me build the thing I'd always wanted to build and never could.</p>
+        <p>The nudge came from another side project, <a href="https://akshara.ink">Akshara</a>, where I've been digitizing literary and historical works in the public domain. It gave me a front-row view of what these models — especially the vision-capable ones — can actually do. They pulled clean, structured data, tables and all, out of books from the 1800s and 1900s. It genuinely blew my mind. Along the way I met others using the same tools to rescue text from PDFs lurking behind websites that are, frankly, crimes against humanity. I figured the time I'd already sunk into this could help that cause too.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">What this actually is</p>
+      <div class="prose">
+        <p>So I started with the broadest, easiest task first: gathering the high-quality numbers that are already open — Our World in Data, the UN, UNCTAD, the WHO, the World Bank, and the better government archives — before going spelunking into obscure state and municipal sites later.</p>
+        <p>Showing a chart is the easy part. The hard part is that for most normal people, reading a chart is about as intuitive as Greek and Latin. The scholars and academics already know all of this; they don't need me. So instead of just publishing charts, the whole point of This Indian Life is to write genuinely good explainers — to help an ordinary Indian, someone like me, make sense of health, money, the economy, politics, culture, and everything else that goes into living in this delightfully messy, occasionally nightmarish, and genuinely wonderful country.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">An honest disclosure</p>
+      <div class="prose">
+        <p>Full disclosure: I lean on large language models for almost everything here, because I am exactly one person. If I sat down to collate the data and write the explainers for economics and finance alone, it would take me a couple of decades. It simply isn't possible any other way.</p>
+        <p>But leaning on these models is not the same as not knowing what's on the page. Everything here is verified and fact-checked to the best of my ability, and I'm constantly revising, tweaking, and trying to make it better. You'll notice that most of what exists so far is finance and economics — that's the corner I understand best, and I'd rather start where I can vouch for the work.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">On the AI of it all</p>
+      <div class="prose">
+        <p>I know that right now "AI" and "LLM" are practically slurs, and anything touched by them gets treated as tainted goods. I think that's a travesty. Yes, the veins of the internet are steadily clogging with low-effort, low-intent generated slop. But — at the risk of sounding full of myself — that is not what this is.</p>
+        <p>There is a world of difference between mindless slop and actually using the language, vision, and analytical abilities of these models to do something useful. It has become a truism in certain circles that LLMs are just next-token predictors regurgitating the median mediocrity of humanity. I think that's an impoverished view of what they can do. The fact that they can help one person find good data, open it up to the public, and explain it well is, to me, proof of how genuinely remarkable they are. Without them, this project would not exist in any meaningful sense.</p>
+      </div>
+    </section>
+
+    <section class="section mods">
+      <div>
+        <p class="sec-hd">Come help, or just say hi</p>
+        <div class="prose">
+          <p>I'm strong on economics and finance, and genuinely shaky on most things outside it. So if you know high-quality datasets beyond that world, please point me to them. And if you'd like to help build this — or you just have feedback — write to me. Good things, bad things, brickbats, criticism: all of it is welcome.</p>
+          <p>Just don't be a dick about it. The internet is already a hellhole; no need to add to it. Otherwise — I hope you enjoy the site.</p>
+        </div>
+      </div>
+      <div class="ask-box about-contact">
+        <div class="t">Get in touch</div>
+        <ul class="contact-list">
+          <li><span class="k">Email</span><a href="mailto:bhuvan@bebhuvan.com">bhuvan@bebhuvan.com</a></li>
+          <li><span class="k">Twitter</span><a href="https://twitter.com/bebhuvan">@bebhuvan</a></li>
+          <li><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/bebhuvan/">in/bebhuvan</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Elsewhere</p>
+      <p class="muted about-lead">A few other things I tinker with, if you're curious.</p>
+      <div class="project-links">
+        <a href="https://akshara.ink">akshara.ink</a>
+        <a href="https://poeticreveries.com">poeticreveries.com</a>
+        <a href="https://seneca.ink">seneca.ink</a>
+        <a href="https://smallweb.blog">smallweb.blog</a>
+        <a href="https://tipsheet.markets">tipsheet.markets</a>
+        <a href="https://paperlanterns.ink">paperlanterns.ink</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">The roadmap</p>
+      <p class="muted about-lead">Where this is headed, roughly in order. Step one is the work you can see today; the rest is the climb. None of it is a promise — just an honest sketch of the direction.</p>
+      <ol class="roadmap">
+        <li class="roadmap-step done">
+          <span class="roadmap-num">01</span>
+          <div>
+            <h3 class="serif">Explain the open data well<span class="roadmap-tag">Live now</span></h3>
+            <p>Build genuinely good, plain-language explainers on top of the high-quality numbers that are already open — the World Bank, the UN, the WHO, Our World in Data, and the better archives. Most of what exists right now lives here, and the bar is quality, not quantity.</p>
+          </div>
+        </li>
+        <li class="roadmap-step">
+          <span class="roadmap-num">02</span>
+          <div>
+            <h3 class="serif">Liberate the hidden data</h3>
+            <p>Start gathering the lesser-known and barely-announced data releases scattered across central, state, and local government bodies — clean them up, give them a stable shape, and make them openly accessible. This is the long, unglamorous spelunking the whole project is really about.</p>
+          </div>
+        </li>
+        <li class="roadmap-step">
+          <span class="roadmap-num">03</span>
+          <div>
+            <h3 class="serif">Make the visuals better</h3>
+            <p>Sharper, clearer, more honest charts — visuals that do the explaining themselves, instead of needing a paragraph to apologise for them.</p>
+          </div>
+        </li>
+        <li class="roadmap-step">
+          <span class="roadmap-num">04</span>
+          <div>
+            <h3 class="serif">Open it up to others</h3>
+            <p>Crowdsource datasets and article ideas. Plenty of people know corners of India — a sector, a state, a dataset — far better than I do, and this gets much better the moment they can point the way.</p>
+          </div>
+        </li>
+        <li class="roadmap-step">
+          <span class="roadmap-num">05</span>
+          <div>
+            <h3 class="serif">Build a community</h3>
+            <p>A place to discuss, argue, correct the record, and request the next question — so this stops being one person's notebook and becomes something shared.</p>
+          </div>
+        </li>
+      </ol>
     </section>
   </div>
 </Base>
-

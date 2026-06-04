@@ -20,7 +20,7 @@ export function buildUrl(baseUrl, path = "", params = {}) {
 
 export function redactUrl(url) {
   const copy = new URL(url.toString());
-  for (const key of ["api_key", "token", "key"]) {
+  for (const key of ["api_key", "apikey", "token", "key"]) {
     if (copy.searchParams.has(key)) copy.searchParams.set(key, "REDACTED");
   }
   return copy.toString();
@@ -73,6 +73,27 @@ export async function fetchJson(url, options = {}) {
     await wait(retryDelayMs * (attempt + 1));
   }
 
+  throw new Error(`Fetch failed after retries: ${redactUrl(url)}`);
+}
+
+export async function fetchText(url, options = {}) {
+  const { timeoutMs, retries = 2, retryDelayMs = 1200, headers, ...fetchOptions } = options;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        ...fetchOptions,
+        signal: fetchOptions.signal || timeoutSignal(timeoutMs),
+        headers: { "user-agent": "Indica/0.1 data ingest", ...headers }
+      });
+      if (response.ok) return response.text();
+      if (![429, 500, 502, 503, 504].includes(response.status) || attempt === retries) {
+        throw new Error(`Fetch failed ${response.status} ${response.statusText}: ${redactUrl(url)}`);
+      }
+    } catch (error) {
+      if (attempt === retries || error.name === "AbortError" || error.message.startsWith("Fetch failed 4")) throw error;
+    }
+    await wait(retryDelayMs * (attempt + 1));
+  }
   throw new Error(`Fetch failed after retries: ${redactUrl(url)}`);
 }
 

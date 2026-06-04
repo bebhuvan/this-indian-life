@@ -22,6 +22,10 @@ async function fetchIndicator(indicator) {
     .filter((row) => row.date && row.date >= "1960")
     .sort((a, b) => a.date.localeCompare(b.date));
 
+  if (!observations.some((row) => Number.isFinite(row.value))) {
+    throw new Error(`No finite observations returned for ${indicator.sourceIndicatorId}`);
+  }
+
   return {
     raw,
     artifact: createSeriesArtifact({

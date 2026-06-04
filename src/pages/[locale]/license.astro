@@ -1,0 +1,105 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { locales, sources } from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const sourceList = Object.values(sources);
+---
+
+<Base
+  title="License · This Indian Life"
+  description="The original writing and charts on This Indian Life are licensed under Creative Commons Attribution 4.0. Underlying data stays under each provider's own terms."
+>
+  <div class="wrap about">
+    <Nav locale={locale} />
+
+    <header class="domain-head">
+      <span class="lbl">License</span>
+      <h1 class="serif">Take it, use it, just say where it came from.</h1>
+      <p class="muted">
+        Everything original on This Indian Life — the writing, the explainers, and the charts —
+        is shared under a permissive Creative Commons license. The numbers underneath belong to
+        the organisations that collected them, and those keep their own terms.
+      </p>
+    </header>
+
+    <section class="section">
+      <p class="sec-hd">The site's own work — CC BY 4.0</p>
+      <div class="prose">
+        <p>
+          All original text, explainers, and data visualisations created for This Indian Life are
+          licensed under a
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer"><strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong></a>
+          license. In plain terms, you are free to:
+        </p>
+        <ul class="story-list">
+          <li><strong>Share</strong> — copy and redistribute it in any medium or format.</li>
+          <li><strong>Adapt</strong> — remix, transform, and build on it for any purpose, including commercially.</li>
+        </ul>
+        <p>
+          The one condition is <strong>attribution</strong>: give appropriate credit to
+          "This Indian Life", link back to the page or to
+          <a href="https://thisindianlife.today" target="_blank" rel="noreferrer">thisindianlife.today</a>,
+          and indicate if you made changes. You don't need to ask permission first.
+        </p>
+        <p>
+          A simple credit line works well: <em>"Chart/text from This Indian Life (thisindianlife.today),
+          CC BY 4.0."</em>
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">The data underneath is separate</p>
+      <div class="prose">
+        <p>
+          This is the important part. The CC BY 4.0 license above covers <em>our</em> work — the words
+          we wrote and the charts we drew. It does <strong>not</strong> relicense the underlying
+          datasets. Those belong to the institutions that produced them, and each one carries its own
+          license and terms of use. We can't sign those rights away on their behalf, and neither can you.
+        </p>
+        <p>
+          So if you want to reuse the raw numbers themselves — as opposed to our explanation of them —
+          check the terms of the original source. Every article lists its sources, and the main
+          providers in this build are:
+        </p>
+        <ul class="story-list">
+          {sourceList.map((source) => (
+            <li>
+              <a href={source.homepage} target="_blank" rel="noreferrer">{source.name}</a>
+              {" "}— {source.owner}
+            </li>
+          ))}
+        </ul>
+        <p>
+          Most of these (World Bank, Our World in Data, WHO, UN) are themselves open under permissive
+          terms, but the specifics vary, so the source link is always the final word.
+        </p>
+      </div>
+      <p class="bottomline">
+        Short version: our writing and charts are yours under CC BY 4.0 with a credit. The data behind
+        them stays under whoever collected it — follow the source link to be sure.
+      </p>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">How edits are tracked</p>
+      <div class="prose">
+        <p>
+          Because numbers get revised and explainers get rewritten, every article carries an edit log
+          at the foot of the page, and a link to the full version history on
+          <a href="https://github.com/bebhuvan/Indica" target="_blank" rel="noreferrer">GitHub</a>,
+          where you can see the exact changes line by line. Nothing is silently rewritten.
+        </p>
+      </div>
+    </section>
+
+    <Footer locale={locale} />
+  </div>
+</Base>

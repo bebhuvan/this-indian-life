@@ -3,108 +3,750 @@
   "questionId": "q.energy.coal",
   "question": "How dependent is India on coal?",
   "priority": "core",
+  "theme": {
+    "id": "energy",
+    "label": "Energy and electricity",
+    "readerQuestions": [
+      "How much energy or electricity is being used?",
+      "What is the fuel mix?",
+      "Is access different from reliability or consumption?",
+      "Is the system getting cleaner as demand grows?"
+    ],
+    "glossaryTerms": [
+      "TWh",
+      "kWh per capita",
+      "electricity access",
+      "carbon intensity",
+      "generation mix"
+    ]
+  },
   "requiredIndicatorIds": [
     "energy.ember.generation"
   ],
   "availableIndicatorIds": [
     "energy.ember.generation"
   ],
+  "themeIndicatorIds": [
+    "energy.ember.generation",
+    "energy.eia.consumption_coal",
+    "energy.eia.coal_production",
+    "energy.eia.coal_imports",
+    "climate.eia.co2_coal",
+    "energy.ember.emissions",
+    "energy.ember.carbon_intensity"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.energy.ember.generation",
+      "indicatorId": "energy.ember.generation",
+      "title": "Electricity generation by source",
+      "sourceId": "ember",
+      "unit": "TWh",
+      "role": "primary",
+      "recommendedVisualization": "stacked mix bar plus selected source trends",
+      "mobileGuidance": "Use a stacked bar for the latest mix and avoid too many fuel lines on mobile.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.energy.eia.consumption_coal",
+      "indicatorId": "energy.eia.consumption_coal",
+      "title": "Total energy consumption from coal",
+      "sourceId": "eia",
+      "unit": "quadrillion Btu",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v3.energy.eia.coal_production",
+      "indicatorId": "energy.eia.coal_production",
+      "title": "Coal production",
+      "sourceId": "eia",
+      "unit": "1000 metric tons",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v4.energy.eia.coal_imports",
+      "indicatorId": "energy.eia.coal_imports",
+      "title": "Coal imports",
+      "sourceId": "eia",
+      "unit": "1000 metric tons",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.climate.eia.co2_coal",
+      "indicatorId": "climate.eia.co2_coal",
+      "title": "Coal and coke CO2 emissions",
+      "sourceId": "eia",
+      "unit": "million metric tonnes carbon dioxide",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.energy.ember.emissions",
+      "indicatorId": "energy.ember.emissions",
+      "title": "Power-sector emissions",
+      "sourceId": "ember",
+      "unit": "MtCO2",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.energy.ember.carbon_intensity",
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "unit": "gCO2/kWh",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "how-much-of-india-s-electricity-is-coal",
+      "title": "How much of India's electricity is coal",
+      "chartType": "emberShare",
+      "beat": "dependence",
+      "window": "full",
+      "indicator": "energy.ember.generation",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The headline measure of dependence: coal's share of all electricity generated."
+    },
+    {
+      "order": 2,
+      "chartId": "coal-generation-keeps-rising",
+      "title": "Coal generation keeps rising",
+      "chartType": "emberLines",
+      "beat": "share-vs-tonnes",
+      "window": "",
+      "indicator": "energy.ember.generation",
+      "series": [
+        {
+          "indicator": "Coal",
+          "label": "Coal"
+        },
+        {
+          "indicator": "Clean",
+          "label": "Clean sources"
+        }
+      ],
+      "unit": "TWh",
+      "subtitle": "",
+      "whyThisChart": "Why a falling share is not falling coal: in absolute terms, coal generation is still growing."
+    },
+    {
+      "order": 3,
+      "chartId": "coal-home-production-vs-imports",
+      "title": "Coal: home production vs imports",
+      "chartType": "multiLine",
+      "beat": "import-exposure",
+      "window": "",
+      "indicator": "energy.eia.coal_production",
+      "series": [
+        {
+          "indicator": "energy.eia.coal_production",
+          "label": "Domestic production"
+        },
+        {
+          "indicator": "energy.eia.coal_imports",
+          "label": "Imports"
+        }
+      ],
+      "unit": "thousand tonnes",
+      "subtitle": "",
+      "whyThisChart": "Dependence is not only on coal but on imported coal: India mines most of its coal but still buys a large amount abroad."
+    },
+    {
+      "order": 4,
+      "chartId": "total-coal-use-beyond-just-power",
+      "title": "Total coal use, beyond just power",
+      "chartType": "line",
+      "beat": "scale",
+      "window": "full",
+      "indicator": "energy.eia.consumption_coal",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Coal also feeds steel and cement, so total use is larger than the power figure alone."
+    },
+    {
+      "order": 5,
+      "chartId": "the-co-cost-of-coal",
+      "title": "The CO₂ cost of coal",
+      "chartType": "line",
+      "beat": "cost",
+      "window": "full",
+      "indicator": "climate.eia.co2_coal",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The reason coal dependence matters for climate: it is India's single largest source of CO₂."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 23.04,
+      "displayValue": "23.04",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 1.11,
+      "displayValue": "1.11",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Clean): generation_twh",
+      "value": 554.81,
+      "displayValue": "554.81",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Clean): share_of_generation_pct",
+      "value": 26.65,
+      "displayValue": "26.65",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Coal): generation_twh",
+      "value": 1474.15,
+      "displayValue": "1,474.15",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Coal): share_of_generation_pct",
+      "value": 70.82,
+      "displayValue": "70.82",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Demand): generation_twh",
+      "value": 2082.82,
+      "displayValue": "2,082.82",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Demand): share_of_generation_pct",
+      "value": 100.06,
+      "displayValue": "100.06",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Fossil): generation_twh",
+      "value": 1526.79,
+      "displayValue": "1,526.79",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Fossil): share_of_generation_pct",
+      "value": 73.35,
+      "displayValue": "73.35",
+      "date": "2025",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
+      "value": 1.69,
+      "displayValue": "1.69",
+      "date": "2000",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
+      "value": 0.3,
+      "displayValue": "0.3",
+      "date": "2000",
+      "unit": "TWh",
+      "indicatorId": "energy.ember.generation",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Total energy consumption from coal, latest",
+      "value": 21.80409730562206,
+      "displayValue": "21.8",
+      "date": "2024",
+      "unit": "quadrillion Btu",
+      "indicatorId": "energy.eia.consumption_coal",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Total energy consumption from coal, earliest",
+      "value": 1.8244348304264362,
+      "displayValue": "1.82",
+      "date": "1980",
+      "unit": "quadrillion Btu",
+      "indicatorId": "energy.eia.consumption_coal",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Coal production, latest",
+      "value": 1012945.8381122032,
+      "displayValue": "1.01 million",
+      "date": "2024",
+      "unit": "1000 metric tons",
+      "indicatorId": "energy.eia.coal_production",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Coal production, earliest",
+      "value": 110224.86891485262,
+      "displayValue": "1,10,224.87",
+      "date": "1980",
+      "unit": "1000 metric tons",
+      "indicatorId": "energy.eia.coal_production",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Coal imports, latest",
+      "value": 232811.50967304118,
+      "displayValue": "2,32,811.51",
+      "date": "2024",
+      "unit": "1000 metric tons",
+      "indicatorId": "energy.eia.coal_imports",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Coal imports, earliest",
+      "value": 549.9993549840174,
+      "displayValue": "550",
+      "date": "1980",
+      "unit": "1000 metric tons",
+      "indicatorId": "energy.eia.coal_imports",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Coal and coke CO2 emissions, latest",
+      "value": 2117.0586099541656,
+      "displayValue": "2,117.06",
+      "date": "2024",
+      "unit": "million metric tonnes carbon dioxide",
+      "indicatorId": "climate.eia.co2_coal",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Coal and coke CO2 emissions, earliest",
+      "value": 175.17746128050226,
+      "displayValue": "175.18",
+      "date": "1980",
+      "unit": "million metric tonnes carbon dioxide",
+      "indicatorId": "climate.eia.co2_coal",
+      "sourceId": "eia",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Power-sector emissions (Bioenergy): emissions_mtco2",
+      "value": 4.98,
+      "displayValue": "4.98",
+      "date": "2025",
+      "unit": "MtCO2",
+      "indicatorId": "energy.ember.emissions",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Power-sector emissions (Bioenergy): share_of_emissions_pct",
+      "value": 0.36,
+      "displayValue": "0.36",
+      "date": "2025",
+      "unit": "MtCO2",
+      "indicatorId": "energy.ember.emissions",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Power-sector emissions (Clean): emissions_mtco2",
+      "value": 20.52,
+      "displayValue": "20.52",
+      "date": "2025",
+      "unit": "MtCO2",
+      "indicatorId": "energy.ember.emissions",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Power-sector emissions (Clean): share_of_emissions_pct",
+      "value": 1.47,
+      "displayValue": "1.47",
+      "date": "2025",
+      "unit": "MtCO2",
+      "indicatorId": "energy.ember.emissions",
+      "sourceId": "ember",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
   "lockedNumbers": [
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
       "value": 23.04,
+      "displayValue": "23.04",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
       "value": 1.11,
+      "displayValue": "1.11",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Clean): generation_twh",
       "value": 554.81,
+      "displayValue": "554.81",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Clean): share_of_generation_pct",
       "value": 26.65,
+      "displayValue": "26.65",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Coal): generation_twh",
       "value": 1474.15,
+      "displayValue": "1,474.15",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Coal): share_of_generation_pct",
       "value": 70.82,
+      "displayValue": "70.82",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Demand): generation_twh",
       "value": 2082.82,
+      "displayValue": "2,082.82",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Demand): share_of_generation_pct",
       "value": 100.06,
+      "displayValue": "100.06",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Fossil): generation_twh",
       "value": 1526.79,
+      "displayValue": "1,526.79",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Fossil): share_of_generation_pct",
       "value": 73.35,
+      "displayValue": "73.35",
       "date": "2025",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: generation_twh",
+      "label": "Electricity generation by source (Bioenergy): generation_twh",
       "value": 1.69,
+      "displayValue": "1.69",
       "date": "2000",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
     },
     {
-      "label": "Electricity generation by source: share_of_generation_pct",
+      "label": "Electricity generation by source (Bioenergy): share_of_generation_pct",
       "value": 0.3,
+      "displayValue": "0.3",
       "date": "2000",
       "unit": "TWh",
       "sourceId": "ember",
       "indicatorId": "energy.ember.generation"
+    },
+    {
+      "label": "Total energy consumption from coal, latest",
+      "value": 21.80409730562206,
+      "displayValue": "21.8",
+      "date": "2024",
+      "unit": "quadrillion Btu",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.consumption_coal"
+    },
+    {
+      "label": "Total energy consumption from coal, earliest",
+      "value": 1.8244348304264362,
+      "displayValue": "1.82",
+      "date": "1980",
+      "unit": "quadrillion Btu",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.consumption_coal"
+    },
+    {
+      "label": "Coal production, latest",
+      "value": 1012945.8381122032,
+      "displayValue": "1.01 million",
+      "date": "2024",
+      "unit": "1000 metric tons",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.coal_production"
+    },
+    {
+      "label": "Coal production, earliest",
+      "value": 110224.86891485262,
+      "displayValue": "1,10,224.87",
+      "date": "1980",
+      "unit": "1000 metric tons",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.coal_production"
+    },
+    {
+      "label": "Coal imports, latest",
+      "value": 232811.50967304118,
+      "displayValue": "2,32,811.51",
+      "date": "2024",
+      "unit": "1000 metric tons",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.coal_imports"
+    },
+    {
+      "label": "Coal imports, earliest",
+      "value": 549.9993549840174,
+      "displayValue": "550",
+      "date": "1980",
+      "unit": "1000 metric tons",
+      "sourceId": "eia",
+      "indicatorId": "energy.eia.coal_imports"
+    },
+    {
+      "label": "Coal and coke CO2 emissions, latest",
+      "value": 2117.0586099541656,
+      "displayValue": "2,117.06",
+      "date": "2024",
+      "unit": "million metric tonnes carbon dioxide",
+      "sourceId": "eia",
+      "indicatorId": "climate.eia.co2_coal"
+    },
+    {
+      "label": "Coal and coke CO2 emissions, earliest",
+      "value": 175.17746128050226,
+      "displayValue": "175.18",
+      "date": "1980",
+      "unit": "million metric tonnes carbon dioxide",
+      "sourceId": "eia",
+      "indicatorId": "climate.eia.co2_coal"
+    },
+    {
+      "label": "Power-sector emissions (Bioenergy): emissions_mtco2",
+      "value": 4.98,
+      "displayValue": "4.98",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Bioenergy): share_of_emissions_pct",
+      "value": 0.36,
+      "displayValue": "0.36",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Clean): emissions_mtco2",
+      "value": 20.52,
+      "displayValue": "20.52",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Clean): share_of_emissions_pct",
+      "value": 1.47,
+      "displayValue": "1.47",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Coal): emissions_mtco2",
+      "value": 1338.09,
+      "displayValue": "1,338.09",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Coal): share_of_emissions_pct",
+      "value": 95.92,
+      "displayValue": "95.92",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Demand): emissions_mtco2",
+      "value": 1394.95,
+      "displayValue": "1,394.95",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Demand): share_of_emissions_pct",
+      "value": 100,
+      "displayValue": "100",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Fossil): emissions_mtco2",
+      "value": 1374.43,
+      "displayValue": "1,374.43",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Fossil): share_of_emissions_pct",
+      "value": 98.53,
+      "displayValue": "98.53",
+      "date": "2025",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Bioenergy): emissions_mtco2",
+      "value": 0.37,
+      "displayValue": "0.37",
+      "date": "2000",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Power-sector emissions (Bioenergy): share_of_emissions_pct",
+      "value": 0.09,
+      "displayValue": "0.09",
+      "date": "2000",
+      "unit": "MtCO2",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.emissions"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 670.13,
+      "displayValue": "670.13",
+      "date": "2025",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
+    },
+    {
+      "label": "Electricity carbon intensity: emissions_intensity_gco2_per_kwh",
+      "value": 740.04,
+      "displayValue": "740.04",
+      "date": "2000",
+      "unit": "gCO2/kWh",
+      "sourceId": "ember",
+      "indicatorId": "energy.ember.carbon_intensity"
     }
   ],
   "sourceSummaries": [
@@ -232,10 +874,323 @@
           "share_of_generation_pct": 2.59
         }
       ]
+    },
+    {
+      "indicatorId": "energy.eia.consumption_coal",
+      "title": "Total energy consumption from coal",
+      "sourceId": "eia",
+      "sourceIndicatorId": "4411-2-IND-QBTU.annual",
+      "unit": "quadrillion Btu",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 1.8244348304264362
+      },
+      "latest": {
+        "date": "2024",
+        "value": 21.80409730562206
+      }
+    },
+    {
+      "indicatorId": "energy.eia.coal_production",
+      "title": "Coal production",
+      "sourceId": "eia",
+      "sourceIndicatorId": "7-1-IND-MT.annual",
+      "unit": "1000 metric tons",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 110224.86891485262
+      },
+      "latest": {
+        "date": "2024",
+        "value": 1012945.8381122032
+      }
+    },
+    {
+      "indicatorId": "energy.eia.coal_imports",
+      "title": "Coal imports",
+      "sourceId": "eia",
+      "sourceIndicatorId": "7-3-IND-MT.annual",
+      "unit": "1000 metric tons",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 549.9993549840174
+      },
+      "latest": {
+        "date": "2024",
+        "value": 232811.50967304118
+      }
+    },
+    {
+      "indicatorId": "climate.eia.co2_coal",
+      "title": "Coal and coke CO2 emissions",
+      "sourceId": "eia",
+      "sourceIndicatorId": "4002-8-IND-MMTCD.annual",
+      "unit": "million metric tonnes carbon dioxide",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 175.17746128050226
+      },
+      "latest": {
+        "date": "2024",
+        "value": 2117.0586099541656
+      }
+    },
+    {
+      "indicatorId": "energy.ember.emissions",
+      "title": "Power-sector emissions",
+      "sourceId": "ember",
+      "sourceIndicatorId": "power-sector-emissions/yearly",
+      "unit": "MtCO2",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 416,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "series",
+        "is_aggregate_series",
+        "emissions_mtco2",
+        "share_of_emissions_pct"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Bioenergy",
+          "is_aggregate_series": false,
+          "emissions_mtco2": 4.98,
+          "share_of_emissions_pct": 0.36
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Clean",
+          "is_aggregate_series": true,
+          "emissions_mtco2": 20.52,
+          "share_of_emissions_pct": 1.47
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Coal",
+          "is_aggregate_series": false,
+          "emissions_mtco2": 1338.09,
+          "share_of_emissions_pct": 95.92
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Demand",
+          "is_aggregate_series": true,
+          "emissions_mtco2": 1394.95,
+          "share_of_emissions_pct": 100
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Fossil",
+          "is_aggregate_series": true,
+          "emissions_mtco2": 1374.43,
+          "share_of_emissions_pct": 98.53
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Gas",
+          "is_aggregate_series": false,
+          "emissions_mtco2": 33.64,
+          "share_of_emissions_pct": 2.41
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Hydro",
+          "is_aggregate_series": false,
+          "emissions_mtco2": 4.23,
+          "share_of_emissions_pct": 0.3
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Hydro, bioenergy and other renewables",
+          "is_aggregate_series": true,
+          "emissions_mtco2": 9.21,
+          "share_of_emissions_pct": 0.66
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Net imports",
+          "is_aggregate_series": false,
+          "emissions_mtco2": null,
+          "share_of_emissions_pct": null
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "series": "Nuclear",
+          "is_aggregate_series": false,
+          "emissions_mtco2": 0.32,
+          "share_of_emissions_pct": 0.02
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.ember.carbon_intensity",
+      "title": "Electricity carbon intensity",
+      "sourceId": "ember",
+      "sourceIndicatorId": "carbon-intensity/yearly",
+      "unit": "gCO2/kWh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 26,
+      "dimensions": [
+        "entity",
+        "entity_code",
+        "is_aggregate_entity",
+        "date",
+        "emissions_intensity_gco2_per_kwh"
+      ],
+      "latestRows": [
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2025",
+          "emissions_intensity_gco2_per_kwh": 670.13
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2024",
+          "emissions_intensity_gco2_per_kwh": 705.4
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2023",
+          "emissions_intensity_gco2_per_kwh": 713.36
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2022",
+          "emissions_intensity_gco2_per_kwh": 705.75
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2021",
+          "emissions_intensity_gco2_per_kwh": 715.34
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2020",
+          "emissions_intensity_gco2_per_kwh": 709.06
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2019",
+          "emissions_intensity_gco2_per_kwh": 722.66
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2018",
+          "emissions_intensity_gco2_per_kwh": 737.72
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2017",
+          "emissions_intensity_gco2_per_kwh": 743.09
+        },
+        {
+          "entity": "India",
+          "entity_code": "IND",
+          "is_aggregate_entity": false,
+          "date": "2016",
+          "emissions_intensity_gco2_per_kwh": 751.87
+        }
+      ]
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

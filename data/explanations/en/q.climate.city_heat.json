@@ -1,0 +1,1195 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.climate.city_heat",
+  "status": "ready",
+  "short": {
+    "headline": "India's city heat story is mixed. Nights are the warning.",
+    "dek": "Mumbai, Chennai, and Bengaluru have warmer annual averages than in 1940. Chennai's hot nights are the clearest alarm.",
+    "body": "The clean answer is: some cities are clearly warmer, but city heat does not move in one neat line. In Open-Meteo ERA5 data from 1940 to 2025, Mumbai's annual mean rose from 26.18°C to 27.16°C, Chennai's from 27.71°C to 28.54°C, and Bengaluru's from 21.97°C to 23.33°C. Delhi's point series is lower in 2025 than in 1940, so this page should not claim every city warmed by this measure. The stronger lived signal is night heat. Chennai went from 22 hot nights in 1940 to 99 in 2025. Mumbai went from 2 to 14. Hot nights matter because the body gets less time to recover."
+  },
+  "macha": {
+    "heading": "Okay macha, but what does this actually mean for us?",
+    "body": "So yes, big cities are generally getting warmer, but not all in the same way. Chennai and Mumbai are clearly heating up, especially at night – Chennai now has nearly 100 hot nights a year, meaning people don't get relief after sunset. Delhi is a weird case: its average temperature has actually dropped a bit, but it still sees plenty of very hot days. Bengaluru remains the coolest, but even there, the average has gone up by 1.36°C. The big story is that night heat is rising fast, which is tough on health and sleep. The numbers add up to a clear shift: summer nights are becoming more uncomfortable in coastal cities.",
+    "soWhat": "The number to remember: Chennai's hot nights went from 22 to 99 in 85 years."
+  },
+  "article": {
+    "title": "Are India's big cities getting hotter?",
+    "standfirst": "Four city histories show a more useful answer than a simple yes. Annual averages are mixed, while night heat in Chennai and Mumbai is the clearest warning.",
+    "bodyMarkdown": "The tempting answer is a simple yes. Climate change is real, India is warming, and cities trap heat. But a good data page has to respect what its own charts can prove.\n\nFor Delhi, Mumbai, Chennai, and Bengaluru, the Open-Meteo ERA5 point series gives a more careful answer. Mumbai, Chennai, and Bengaluru are warmer on annual average than they were in 1940. Delhi is not, at least in this city-coordinate reanalysis series. Very hot days also do not rise cleanly across all four cities. The most human signal is different: hot nights. Chennai and Mumbai now have many more nights where the temperature does not fall below 28°C.\n\nThat is the story worth telling. City heat is not only about the afternoon peak. It is also about whether the night gives people a break.\n\n## What do annual averages say about city heat?\n\nAnnual average temperature is the cleanest first chart because it uses every day of the year. It is not one heatwave, one monsoon week, or one bad May afternoon. It asks a plain question: if you average the year, has the city become warmer?\n\nFor three cities, the answer is yes. Mumbai rose from 26.18°C in 1940 to 27.16°C in 2025. Chennai rose from 27.71°C to 28.54°C. Bengaluru rose from 21.97°C to 23.33°C. Bengaluru has the largest first-to-latest increase in this set, about 1.36°C.\n\nDelhi is the warning against lazy storytelling. Its series goes from 25.61°C in 1940 to 24.8°C in 2025. That does not mean Delhi is safe from heat. It means this specific city-coordinate annual average is not a straight warming line from the first point to the last. A proper article should say that clearly.\n\nSo the annual-average chart gives a qualified answer: most of these city points warmed, but not all of them by this measure.\n\n## Are very hot days becoming more common?\n\nThe second chart counts very hot days, defined here as days with maximum temperature at or above 35°C. This is closer to what people feel in the afternoon, especially workers outside, children travelling to school, and anyone without cooling.\n\nThe long-run first-to-latest comparison is again mixed, and in this case mostly lower. Delhi had 144 very hot days in 1940 and 87 in 2025. Mumbai went from 3 to 2. Chennai went from 28 to 21. Bengaluru went from 5 to 0.\n\nThat looks surprising. It does not cancel climate change, and it does not prove these cities have become comfortable. It says the fixed 35°C threshold, at these exact coordinates, is not the strongest way to summarize the heat burden across all four cities. A single threshold can fit Delhi differently from Mumbai, Chennai, or Bengaluru. Coastal humidity can make a lower maximum feel brutal. Bengaluru may rarely cross 35°C and still become warmer than its old self.\n\nThis chart is useful because it blocks overclaiming. It tells us not to reduce urban heat to one national slogan or one afternoon threshold.\n\n## Why do hot nights matter so much?\n\nThe third chart is the strongest public-health signal in this article. It counts hot nights, defined here as nights where the minimum temperature stays at or above 28°C. A hot day is hard. A hot night is different because the body gets less time to cool down.\n\nChennai is the clearest case. It had 22 hot nights in 1940 and 99 in 2025. In 2024, the same series reached 113. That is not a small seasonal inconvenience. It is a large part of the year where night offers little relief. Mumbai also moved up, from 2 hot nights in 1940 to 14 in 2025, with a recent high of 39 in 2023.\n\nDelhi does not show the same first-to-latest pattern here: 49 hot nights in 1940 and 37 in 2025. Bengaluru has zero in both years because 28°C nights are rare at that elevation. That is exactly why city-specific thresholds matter.\n\nThe answer is not that every city is hotter in the same way. The answer is that heat is changing differently by place, and hot nights are the danger signal to watch in coastal cities.\n\n## What should a reader take away?\n\nThe city heat story should be honest and useful. Mumbai, Chennai, and Bengaluru are warmer by annual average than in 1940. Delhi's annual-average series does not follow that simple pattern. Very hot days above 35°C are not rising cleanly in this four-city set. Hot nights, especially in Chennai and Mumbai, carry the most worrying signal.\n\nThis also tells us what this page should build next. Four city points are a start, not the full map. Kolkata is excluded here because its local Open-Meteo artifact failed the full-history fetch and only had ten January 2025 daily rows, which would make a false annual chart. The next version should add more cities, station cross-checks where available, humidity or wet-bulb heat, and neighbourhood-level exposure.\n\nFor now, the clean answer is this: India's big-city heat is not one story. It is an annual warming story in some cities, a night-heat story in coastal cities, and a measurement story everywhere. The reader should leave with more caution, not less concern."
+  },
+  "editorialPlan": {
+    "audience": "average Indian reader",
+    "heroDescription": "This article tests whether four Indian city points are getting hotter using Open-Meteo ERA5 annual summaries. It avoids a blanket claim and separates annual average temperature, very hot days, and hot nights.",
+    "selectedDataPoints": [
+      {
+        "label": "Mumbai annual mean temperature, latest",
+        "reason": "Mumbai is warmer in 2025 than in 1940.",
+        "use": "chart"
+      },
+      {
+        "label": "Chennai annual mean temperature, latest",
+        "reason": "Chennai is warmer on average and has the strongest hot-night burden.",
+        "use": "hero"
+      },
+      {
+        "label": "Bengaluru annual mean temperature, latest",
+        "reason": "Bengaluru has the largest first-to-latest annual mean increase in this set.",
+        "use": "chart"
+      },
+      {
+        "label": "Delhi annual mean temperature, latest",
+        "reason": "Delhi prevents a lazy all-cities-warmed claim.",
+        "use": "caveat"
+      },
+      {
+        "label": "Chennai hot nights, latest",
+        "reason": "The clearest lived heat signal in the article.",
+        "use": "pull_quote"
+      },
+      {
+        "label": "Mumbai hot nights, latest",
+        "reason": "Shows night heat rising in another coastal city.",
+        "use": "chart"
+      }
+    ],
+    "pullQuotes": [
+      {
+        "quote": "Chennai had 99 hot nights in 2025, compared with 22 in 1940.",
+        "numberLabel": "Chennai hot nights, latest"
+      },
+      {
+        "quote": "The honest answer is not one India heat story. It is different cities, different kinds of heat.",
+        "numberLabel": "Chennai annual mean temperature, latest"
+      }
+    ],
+    "glossaryBlocks": [
+      {
+        "term": "Annual mean temperature",
+        "plainMeaning": "Imagine adding up the temperature for every day of the year and taking one average. That is the annual mean. It is useful because it smooths out one bad heatwave or one cool spell. It does not tell you how hot the worst afternoon felt. It also hides the difference between day and night heat.",
+        "whyItMattersHere": "The first chart uses annual mean temperature to ask whether the city point has become warmer over the long run. It is the broad signal, not the full lived experience."
+      },
+      {
+        "term": "Very hot day",
+        "plainMeaning": "Here, a very hot day is any day when the maximum temperature reaches at least 35°C. Think of it as an afternoon threshold. It catches high daytime heat, but it does not include humidity, shade, wind, or whether someone is working outdoors.",
+        "whyItMattersHere": "The second chart uses this fixed threshold. It is useful, but it fits each city differently, so it should not be treated as the only measure of danger."
+      },
+      {
+        "term": "Hot night",
+        "plainMeaning": "A hot night is counted here when the minimum temperature stays at or above 28°C. That means the night never cools down enough. A hot night can be worse for health than the number first suggests, because sleep and recovery both suffer.",
+        "whyItMattersHere": "The strongest signal in this article is the rise in hot nights for Chennai and Mumbai. It shows why night-time heat deserves its own chart."
+      },
+      {
+        "term": "ERA5 reanalysis",
+        "plainMeaning": "ERA5 is a weather reconstruction. It blends observations with a model to estimate weather consistently across places and time. It is not the same as a thermometer inside every neighbourhood. It is useful for long histories, but local station checks are still valuable.",
+        "whyItMattersHere": "Open-Meteo serves ERA5 data for these city coordinates. The article should be read as a consistent city-point estimate, not a final neighbourhood-level truth."
+      }
+    ]
+  },
+  "dataSelectionAudit": {
+    "areSelectedDataPointsGood": "yes",
+    "addDataPoints": [],
+    "removeDataPoints": [],
+    "visualizationDecisions": [
+      {
+        "indicatorOrVisual": "annual-average-temperature-in-four-indian-cities",
+        "bestChartType": "line",
+        "timeWindow": "full history",
+        "frequency": "annual",
+        "reason": "Line chart best shows long-term trend; annual frequency smooths noise."
+      },
+      {
+        "indicatorOrVisual": "very-hot-days-each-year",
+        "bestChartType": "line",
+        "timeWindow": "full history",
+        "frequency": "annual",
+        "reason": "Line chart shows fluctuation and trend in extreme day count."
+      },
+      {
+        "indicatorOrVisual": "hot-nights-each-year",
+        "bestChartType": "line",
+        "timeWindow": "full history",
+        "frequency": "annual",
+        "reason": "Line chart highlights increase in night heat over decades."
+      }
+    ]
+  },
+  "chartExplainers": [
+    {
+      "visualId": "annual-average-temperature-in-four-indian-cities",
+      "title": "Annual average temperature in four Indian cities",
+      "takeaway": "Mumbai, Chennai, and Bengaluru are warmer than in 1940, while Delhi is lower in this point series.",
+      "detail": "This chart uses annual mean temperature, so it smooths daily weather into one value per year. Mumbai rises from 26.18°C to 27.16°C. Chennai rises from 27.71°C to 28.54°C. Bengaluru rises from 21.97°C to 23.33°C. Delhi is the exception, falling from 25.61°C to 24.8°C in the first-to-latest comparison.",
+      "whyShowThis": "It gives the broad long-run signal before looking at heat extremes.",
+      "howToRead": "Compare each city line over time, but do not judge the whole story from the first and last dots alone.",
+      "mistakeToAvoid": "Do not claim every city warmed by this annual-average measure. Delhi does not support that claim in this dataset.",
+      "mobileNote": "Keep end labels large and make the Delhi caveat visible."
+    },
+    {
+      "visualId": "very-hot-days-each-year",
+      "title": "Very hot days each year",
+      "takeaway": "The 35°C day threshold does not rise cleanly across these four city points.",
+      "detail": "This chart counts days where the maximum temperature reaches at least 35°C. Delhi falls from 144 such days in 1940 to 87 in 2025. Chennai falls from 28 to 21. Mumbai stays low, from 3 to 2. Bengaluru moves from 5 to 0. The result is useful because it shows that one fixed threshold can miss the lived burden in different city climates.",
+      "whyShowThis": "It tests whether afternoon extremes tell the same story as annual averages.",
+      "howToRead": "Read it as a threshold count, not as the total heat burden.",
+      "mistakeToAvoid": "Do not treat fewer 35°C days as proof that heat risk is gone. Humidity, night heat, and local exposure still matter.",
+      "mobileNote": "Use sparse ticks and label the threshold in the subtitle."
+    },
+    {
+      "visualId": "hot-nights-each-year",
+      "title": "Hot nights each year",
+      "takeaway": "Chennai rose from 22 hot nights in 1940 to 99 in 2025.",
+      "detail": "This chart counts nights where the minimum temperature stays at or above 28°C. Chennai is the clear signal, with 99 hot nights in 2025 and a recent high of 113 in 2024. Mumbai also rises, from 2 in 1940 to 14 in 2025. Delhi is lower in 2025 than in 1940, and Bengaluru stays at zero because this threshold is rare at its elevation.",
+      "whyShowThis": "Night heat is where the lived health risk becomes clearer, especially in coastal cities.",
+      "howToRead": "Look for cities where the line stays high or rises in recent years.",
+      "mistakeToAvoid": "Do not compare Bengaluru to Chennai without remembering that the same 28°C threshold means different things in different climates.",
+      "mobileNote": "Give Chennai enough vertical scale so the rise is readable."
+    }
+  ],
+  "sectionVisualMap": [
+    {
+      "heading": "What do annual averages say about city heat?",
+      "visualId": "annual-average-temperature-in-four-indian-cities"
+    },
+    {
+      "heading": "Are very hot days becoming more common?",
+      "visualId": "very-hot-days-each-year"
+    },
+    {
+      "heading": "Why do hot nights matter so much?",
+      "visualId": "hot-nights-each-year"
+    }
+  ],
+  "sourceNotes": [
+    "Open-Meteo historical weather API, ERA5 daily data, aggregated locally into annual city-coordinate series.",
+    "The annual series now keeps only complete calendar years. Partial 2026 values were removed from the annual charts.",
+    "Kolkata is excluded from this article because the local full-history Open-Meteo fetch failed twice and the previous artifact had only ten January 2025 daily rows."
+  ],
+  "caveats": [
+    "ERA5 is a reanalysis dataset, not a direct station record for every neighbourhood.",
+    "City coordinates do not capture every local heat island, suburb, informal settlement, or workplace exposure.",
+    "Very hot days use a fixed 35°C maximum-temperature threshold; hot nights use a fixed 28°C minimum-temperature threshold. These thresholds fit some cities better than others.",
+    "This article does not include humidity or wet-bulb temperature, so it does not fully measure heat stress."
+  ],
+  "lockedNumbersUsed": [
+    "Delhi annual mean temperature, latest",
+    "Delhi annual mean temperature, earliest",
+    "Mumbai annual mean temperature, latest",
+    "Mumbai annual mean temperature, earliest",
+    "Chennai annual mean temperature, latest",
+    "Chennai annual mean temperature, earliest",
+    "Bengaluru annual mean temperature, latest",
+    "Bengaluru annual mean temperature, earliest",
+    "Delhi very hot days, latest",
+    "Delhi very hot days, earliest",
+    "Mumbai very hot days, latest",
+    "Mumbai very hot days, earliest",
+    "Chennai very hot days, latest",
+    "Chennai very hot days, earliest",
+    "Bengaluru very hot days, latest",
+    "Bengaluru very hot days, earliest",
+    "Delhi hot nights, latest",
+    "Delhi hot nights, earliest",
+    "Mumbai hot nights, latest",
+    "Mumbai hot nights, earliest",
+    "Chennai hot nights, latest",
+    "Chennai hot nights, earliest",
+    "Bengaluru hot nights, latest",
+    "Bengaluru hot nights, earliest"
+  ],
+  "qualityFlags": [
+    "human_edited_after_model_draft",
+    "kolkata_excluded_bad_source_artifact",
+    "partial_2026_removed"
+  ],
+  "generatedAt": "2026-06-02T00:33:37.407Z",
+  "model": "deepseek-v4-flash",
+  "generationPasses": [
+    {
+      "name": "single",
+      "model": "deepseek-v4-flash"
+    }
+  ],
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.climate.city_heat",
+    "question": "Are India's big cities getting hotter?",
+    "priority": "core",
+    "theme": {
+      "id": "climate",
+      "label": "Climate, emissions, and air",
+      "readerQuestions": [
+        "Is this about total scale or per-person exposure?",
+        "Is the chart annual, cumulative, or a latest snapshot?",
+        "What comparison would stop the number from being misread?",
+        "What is outside the measure?"
+      ],
+      "glossaryTerms": [
+        "CO2",
+        "per capita emissions",
+        "cumulative emissions",
+        "AQI",
+        "PM2.5",
+        "ERA5",
+        "daily maximum temperature",
+        "precipitation"
+      ]
+    },
+    "requiredIndicatorIds": [
+      "climate.openmeteo.delhi.mean_temperature",
+      "climate.openmeteo.mumbai.mean_temperature",
+      "climate.openmeteo.chennai.mean_temperature",
+      "climate.openmeteo.bengaluru.mean_temperature"
+    ],
+    "availableIndicatorIds": [
+      "climate.openmeteo.delhi.mean_temperature",
+      "climate.openmeteo.mumbai.mean_temperature",
+      "climate.openmeteo.chennai.mean_temperature",
+      "climate.openmeteo.bengaluru.mean_temperature"
+    ],
+    "themeIndicatorIds": [
+      "climate.openmeteo.delhi.mean_temperature",
+      "climate.openmeteo.mumbai.mean_temperature",
+      "climate.openmeteo.chennai.mean_temperature",
+      "climate.openmeteo.bengaluru.mean_temperature",
+      "climate.openmeteo.delhi.very_hot_days",
+      "climate.openmeteo.mumbai.very_hot_days",
+      "climate.openmeteo.chennai.very_hot_days",
+      "climate.openmeteo.bengaluru.very_hot_days",
+      "climate.openmeteo.delhi.hot_nights",
+      "climate.openmeteo.mumbai.hot_nights",
+      "climate.openmeteo.chennai.hot_nights",
+      "climate.openmeteo.bengaluru.hot_nights"
+    ],
+    "visualPlan": [
+      {
+        "visualId": "v1.climate.openmeteo.delhi.mean_temperature",
+        "indicatorId": "climate.openmeteo.delhi.mean_temperature",
+        "title": "Delhi annual mean temperature",
+        "sourceId": "open-meteo",
+        "unit": "°C",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v2.climate.openmeteo.mumbai.mean_temperature",
+        "indicatorId": "climate.openmeteo.mumbai.mean_temperature",
+        "title": "Mumbai annual mean temperature",
+        "sourceId": "open-meteo",
+        "unit": "°C",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v3.climate.openmeteo.chennai.mean_temperature",
+        "indicatorId": "climate.openmeteo.chennai.mean_temperature",
+        "title": "Chennai annual mean temperature",
+        "sourceId": "open-meteo",
+        "unit": "°C",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v4.climate.openmeteo.bengaluru.mean_temperature",
+        "indicatorId": "climate.openmeteo.bengaluru.mean_temperature",
+        "title": "Bengaluru annual mean temperature",
+        "sourceId": "open-meteo",
+        "unit": "°C",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v5.climate.openmeteo.delhi.very_hot_days",
+        "indicatorId": "climate.openmeteo.delhi.very_hot_days",
+        "title": "Delhi very hot days",
+        "sourceId": "open-meteo",
+        "unit": "days",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v6.climate.openmeteo.mumbai.very_hot_days",
+        "indicatorId": "climate.openmeteo.mumbai.very_hot_days",
+        "title": "Mumbai very hot days",
+        "sourceId": "open-meteo",
+        "unit": "days",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v7.climate.openmeteo.chennai.very_hot_days",
+        "indicatorId": "climate.openmeteo.chennai.very_hot_days",
+        "title": "Chennai very hot days",
+        "sourceId": "open-meteo",
+        "unit": "days",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v8.climate.openmeteo.bengaluru.very_hot_days",
+        "indicatorId": "climate.openmeteo.bengaluru.very_hot_days",
+        "title": "Bengaluru very hot days",
+        "sourceId": "open-meteo",
+        "unit": "days",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v9.climate.openmeteo.delhi.hot_nights",
+        "indicatorId": "climate.openmeteo.delhi.hot_nights",
+        "title": "Delhi hot nights",
+        "sourceId": "open-meteo",
+        "unit": "nights",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v10.climate.openmeteo.mumbai.hot_nights",
+        "indicatorId": "climate.openmeteo.mumbai.hot_nights",
+        "title": "Mumbai hot nights",
+        "sourceId": "open-meteo",
+        "unit": "nights",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v11.climate.openmeteo.chennai.hot_nights",
+        "indicatorId": "climate.openmeteo.chennai.hot_nights",
+        "title": "Chennai hot nights",
+        "sourceId": "open-meteo",
+        "unit": "nights",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v12.climate.openmeteo.bengaluru.hot_nights",
+        "indicatorId": "climate.openmeteo.bengaluru.hot_nights",
+        "title": "Bengaluru hot nights",
+        "sourceId": "open-meteo",
+        "unit": "nights",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      }
+    ],
+    "plannedCharts": [
+      {
+        "order": 1,
+        "chartId": "annual-average-temperature-in-four-indian-cities",
+        "title": "Annual average temperature in four Indian cities",
+        "chartType": "multiLine",
+        "beat": "signal",
+        "window": "full",
+        "whyThisChart": "The cleanest long-run city signal before moving into extremes."
+      },
+      {
+        "order": 2,
+        "chartId": "very-hot-days-each-year",
+        "title": "Very hot days each year",
+        "chartType": "multiLine",
+        "beat": "extreme-days",
+        "window": "full",
+        "whyThisChart": "Averages can hide the days people actually feel as dangerous heat."
+      },
+      {
+        "order": 3,
+        "chartId": "hot-nights-each-year",
+        "title": "Hot nights each year",
+        "chartType": "multiLine",
+        "beat": "night-heat",
+        "window": "full",
+        "whyThisChart": "Night heat matters because it shows when the day does not cool down."
+      }
+    ],
+    "selectedDataPoints": [
+      {
+        "label": "Delhi annual mean temperature, latest",
+        "value": 24.798082191780825,
+        "displayValue": "24.8",
+        "date": "2025",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.delhi.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Delhi annual mean temperature, earliest",
+        "value": 25.608767123287663,
+        "displayValue": "25.61",
+        "date": "1940",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.delhi.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Mumbai annual mean temperature, latest",
+        "value": 27.160273972602756,
+        "displayValue": "27.16",
+        "date": "2025",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.mumbai.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Mumbai annual mean temperature, earliest",
+        "value": 26.177808219178072,
+        "displayValue": "26.18",
+        "date": "1940",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.mumbai.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Chennai annual mean temperature, latest",
+        "value": 28.53972602739726,
+        "displayValue": "28.54",
+        "date": "2025",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.chennai.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Chennai annual mean temperature, earliest",
+        "value": 27.710410958904138,
+        "displayValue": "27.71",
+        "date": "1940",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.chennai.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Bengaluru annual mean temperature, latest",
+        "value": 23.32931506849315,
+        "displayValue": "23.33",
+        "date": "2025",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.bengaluru.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Bengaluru annual mean temperature, earliest",
+        "value": 21.96712328767122,
+        "displayValue": "21.97",
+        "date": "1940",
+        "unit": "°C",
+        "indicatorId": "climate.openmeteo.bengaluru.mean_temperature",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Delhi very hot days, latest",
+        "value": 87,
+        "displayValue": "87",
+        "date": "2025",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.delhi.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Delhi very hot days, earliest",
+        "value": 144,
+        "displayValue": "144",
+        "date": "1940",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.delhi.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Mumbai very hot days, latest",
+        "value": 2,
+        "displayValue": "2",
+        "date": "2025",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.mumbai.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Mumbai very hot days, earliest",
+        "value": 3,
+        "displayValue": "3",
+        "date": "1940",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.mumbai.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Chennai very hot days, latest",
+        "value": 21,
+        "displayValue": "21",
+        "date": "2025",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.chennai.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Chennai very hot days, earliest",
+        "value": 28,
+        "displayValue": "28",
+        "date": "1940",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.chennai.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Bengaluru very hot days, latest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2025",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.bengaluru.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Bengaluru very hot days, earliest",
+        "value": 5,
+        "displayValue": "5",
+        "date": "1940",
+        "unit": "days",
+        "indicatorId": "climate.openmeteo.bengaluru.very_hot_days",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Delhi hot nights, latest",
+        "value": 37,
+        "displayValue": "37",
+        "date": "2025",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.delhi.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Delhi hot nights, earliest",
+        "value": 49,
+        "displayValue": "49",
+        "date": "1940",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.delhi.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Mumbai hot nights, latest",
+        "value": 14,
+        "displayValue": "14",
+        "date": "2025",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.mumbai.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Mumbai hot nights, earliest",
+        "value": 2,
+        "displayValue": "2",
+        "date": "1940",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.mumbai.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Chennai hot nights, latest",
+        "value": 99,
+        "displayValue": "99",
+        "date": "2025",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.chennai.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Chennai hot nights, earliest",
+        "value": 22,
+        "displayValue": "22",
+        "date": "1940",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.chennai.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Bengaluru hot nights, latest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2025",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.bengaluru.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Bengaluru hot nights, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "1940",
+        "unit": "nights",
+        "indicatorId": "climate.openmeteo.bengaluru.hot_nights",
+        "sourceId": "open-meteo",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      }
+    ],
+    "lockedNumbers": [
+      {
+        "label": "Delhi annual mean temperature, latest",
+        "value": 24.798082191780825,
+        "displayValue": "24.8",
+        "date": "2025",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.delhi.mean_temperature"
+      },
+      {
+        "label": "Delhi annual mean temperature, earliest",
+        "value": 25.608767123287663,
+        "displayValue": "25.61",
+        "date": "1940",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.delhi.mean_temperature"
+      },
+      {
+        "label": "Mumbai annual mean temperature, latest",
+        "value": 27.160273972602756,
+        "displayValue": "27.16",
+        "date": "2025",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.mumbai.mean_temperature"
+      },
+      {
+        "label": "Mumbai annual mean temperature, earliest",
+        "value": 26.177808219178072,
+        "displayValue": "26.18",
+        "date": "1940",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.mumbai.mean_temperature"
+      },
+      {
+        "label": "Chennai annual mean temperature, latest",
+        "value": 28.53972602739726,
+        "displayValue": "28.54",
+        "date": "2025",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.chennai.mean_temperature"
+      },
+      {
+        "label": "Chennai annual mean temperature, earliest",
+        "value": 27.710410958904138,
+        "displayValue": "27.71",
+        "date": "1940",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.chennai.mean_temperature"
+      },
+      {
+        "label": "Bengaluru annual mean temperature, latest",
+        "value": 23.32931506849315,
+        "displayValue": "23.33",
+        "date": "2025",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.bengaluru.mean_temperature"
+      },
+      {
+        "label": "Bengaluru annual mean temperature, earliest",
+        "value": 21.96712328767122,
+        "displayValue": "21.97",
+        "date": "1940",
+        "unit": "°C",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.bengaluru.mean_temperature"
+      },
+      {
+        "label": "Delhi very hot days, latest",
+        "value": 87,
+        "displayValue": "87",
+        "date": "2025",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.delhi.very_hot_days"
+      },
+      {
+        "label": "Delhi very hot days, earliest",
+        "value": 144,
+        "displayValue": "144",
+        "date": "1940",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.delhi.very_hot_days"
+      },
+      {
+        "label": "Mumbai very hot days, latest",
+        "value": 2,
+        "displayValue": "2",
+        "date": "2025",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.mumbai.very_hot_days"
+      },
+      {
+        "label": "Mumbai very hot days, earliest",
+        "value": 3,
+        "displayValue": "3",
+        "date": "1940",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.mumbai.very_hot_days"
+      },
+      {
+        "label": "Chennai very hot days, latest",
+        "value": 21,
+        "displayValue": "21",
+        "date": "2025",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.chennai.very_hot_days"
+      },
+      {
+        "label": "Chennai very hot days, earliest",
+        "value": 28,
+        "displayValue": "28",
+        "date": "1940",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.chennai.very_hot_days"
+      },
+      {
+        "label": "Bengaluru very hot days, latest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2025",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.bengaluru.very_hot_days"
+      },
+      {
+        "label": "Bengaluru very hot days, earliest",
+        "value": 5,
+        "displayValue": "5",
+        "date": "1940",
+        "unit": "days",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.bengaluru.very_hot_days"
+      },
+      {
+        "label": "Delhi hot nights, latest",
+        "value": 37,
+        "displayValue": "37",
+        "date": "2025",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.delhi.hot_nights"
+      },
+      {
+        "label": "Delhi hot nights, earliest",
+        "value": 49,
+        "displayValue": "49",
+        "date": "1940",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.delhi.hot_nights"
+      },
+      {
+        "label": "Mumbai hot nights, latest",
+        "value": 14,
+        "displayValue": "14",
+        "date": "2025",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.mumbai.hot_nights"
+      },
+      {
+        "label": "Mumbai hot nights, earliest",
+        "value": 2,
+        "displayValue": "2",
+        "date": "1940",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.mumbai.hot_nights"
+      },
+      {
+        "label": "Chennai hot nights, latest",
+        "value": 99,
+        "displayValue": "99",
+        "date": "2025",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.chennai.hot_nights"
+      },
+      {
+        "label": "Chennai hot nights, earliest",
+        "value": 22,
+        "displayValue": "22",
+        "date": "1940",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.chennai.hot_nights"
+      },
+      {
+        "label": "Bengaluru hot nights, latest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2025",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.bengaluru.hot_nights"
+      },
+      {
+        "label": "Bengaluru hot nights, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "1940",
+        "unit": "nights",
+        "sourceId": "open-meteo",
+        "indicatorId": "climate.openmeteo.bengaluru.hot_nights"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "climate.openmeteo.delhi.mean_temperature",
+        "title": "Delhi annual mean temperature",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "delhi.era5.mean_temperature",
+        "unit": "°C",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "delhi",
+          "name": "Delhi",
+          "latitude": 28.6139,
+          "longitude": 77.209
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 25.608767123287663
+        },
+        "latest": {
+          "date": "2025",
+          "value": 24.798082191780825
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.mumbai.mean_temperature",
+        "title": "Mumbai annual mean temperature",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "mumbai.era5.mean_temperature",
+        "unit": "°C",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "mumbai",
+          "name": "Mumbai",
+          "latitude": 19.076,
+          "longitude": 72.8777
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 26.177808219178072
+        },
+        "latest": {
+          "date": "2025",
+          "value": 27.160273972602756
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.chennai.mean_temperature",
+        "title": "Chennai annual mean temperature",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "chennai.era5.mean_temperature",
+        "unit": "°C",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "chennai",
+          "name": "Chennai",
+          "latitude": 13.0827,
+          "longitude": 80.2707
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 27.710410958904138
+        },
+        "latest": {
+          "date": "2025",
+          "value": 28.53972602739726
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.bengaluru.mean_temperature",
+        "title": "Bengaluru annual mean temperature",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "bengaluru.era5.mean_temperature",
+        "unit": "°C",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "bengaluru",
+          "name": "Bengaluru",
+          "latitude": 12.9716,
+          "longitude": 77.5946
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 21.96712328767122
+        },
+        "latest": {
+          "date": "2025",
+          "value": 23.32931506849315
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.delhi.very_hot_days",
+        "title": "Delhi very hot days",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "delhi.era5.very_hot_days",
+        "unit": "days",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "delhi",
+          "name": "Delhi",
+          "latitude": 28.6139,
+          "longitude": 77.209
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 144
+        },
+        "latest": {
+          "date": "2025",
+          "value": 87
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.mumbai.very_hot_days",
+        "title": "Mumbai very hot days",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "mumbai.era5.very_hot_days",
+        "unit": "days",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "mumbai",
+          "name": "Mumbai",
+          "latitude": 19.076,
+          "longitude": 72.8777
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 3
+        },
+        "latest": {
+          "date": "2025",
+          "value": 2
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.chennai.very_hot_days",
+        "title": "Chennai very hot days",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "chennai.era5.very_hot_days",
+        "unit": "days",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "chennai",
+          "name": "Chennai",
+          "latitude": 13.0827,
+          "longitude": 80.2707
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 28
+        },
+        "latest": {
+          "date": "2025",
+          "value": 21
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.bengaluru.very_hot_days",
+        "title": "Bengaluru very hot days",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "bengaluru.era5.very_hot_days",
+        "unit": "days",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "bengaluru",
+          "name": "Bengaluru",
+          "latitude": 12.9716,
+          "longitude": 77.5946
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 5
+        },
+        "latest": {
+          "date": "2025",
+          "value": 0
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.delhi.hot_nights",
+        "title": "Delhi hot nights",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "delhi.era5.hot_nights",
+        "unit": "nights",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "delhi",
+          "name": "Delhi",
+          "latitude": 28.6139,
+          "longitude": 77.209
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 49
+        },
+        "latest": {
+          "date": "2025",
+          "value": 37
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.mumbai.hot_nights",
+        "title": "Mumbai hot nights",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "mumbai.era5.hot_nights",
+        "unit": "nights",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "mumbai",
+          "name": "Mumbai",
+          "latitude": 19.076,
+          "longitude": 72.8777
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 2
+        },
+        "latest": {
+          "date": "2025",
+          "value": 14
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.chennai.hot_nights",
+        "title": "Chennai hot nights",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "chennai.era5.hot_nights",
+        "unit": "nights",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "chennai",
+          "name": "Chennai",
+          "latitude": 13.0827,
+          "longitude": 80.2707
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 22
+        },
+        "latest": {
+          "date": "2025",
+          "value": 99
+        }
+      },
+      {
+        "indicatorId": "climate.openmeteo.bengaluru.hot_nights",
+        "title": "Bengaluru hot nights",
+        "sourceId": "open-meteo",
+        "sourceIndicatorId": "bengaluru.era5.hot_nights",
+        "unit": "nights",
+        "frequency": "annual",
+        "geography": {
+          "type": "city",
+          "id": "bengaluru",
+          "name": "Bengaluru",
+          "latitude": 12.9716,
+          "longitude": 77.5946
+        },
+        "observations": 86,
+        "earliest": {
+          "date": "1940",
+          "value": 0
+        },
+        "latest": {
+          "date": "2025",
+          "value": 0
+        }
+      }
+    ],
+    "selectionRules": [
+      "Start from the page question, not from the indicator name.",
+      "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+      "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+      "Use one strong pull quote only when the evidence supports it with a number.",
+      "Add glossary blocks for technical terms that normal readers may not know."
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

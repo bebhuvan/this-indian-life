@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.era5.warmnights26_observed",
+  "title": "Observed warm nights (min temperature at or above 26C), ERA5",
+  "sourceId": "era5",
+  "sourceIndicatorId": "ERA5 daily statistics, daily minimum >= 26.0C, India-masked",
+  "sourceUrl": "https://cds.climate.copernicus.eu/datasets/derived-era5-single-levels-daily-statistics",
+  "unit": "days per year",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-03T14:56:50.275127Z",
+  "observations": [
+    {
+      "date": "2015",
+      "value": 73.2
+    },
+    {
+      "date": "2016",
+      "value": 82.8
+    },
+    {
+      "date": "2017",
+      "value": 80.5
+    },
+    {
+      "date": "2018",
+      "value": 73.6
+    },
+    {
+      "date": "2019",
+      "value": 83.4
+    },
+    {
+      "date": "2020",
+      "value": 75.3
+    },
+    {
+      "date": "2021",
+      "value": 67.2
+    },
+    {
+      "date": "2022",
+      "value": 77.1
+    },
+    {
+      "date": "2023",
+      "value": 72.6
+    },
+    {
+      "date": "2024",
+      "value": 85.5
+    },
+    {
+      "date": "2025",
+      "value": 70.3
+    }
+  ],
+  "metadata": {
+    "bbox_NWSE": [
+      37,
+      68,
+      6,
+      98
+    ],
+    "threshold_C": 26.0,
+    "method": "per-cell day count, cosine-latitude-weighted India-polygon mean",
+    "note": "Observed/reanalysis. Levels not directly comparable to CMIP6-based CCKP; shown as its own observed series."
+  }
+}

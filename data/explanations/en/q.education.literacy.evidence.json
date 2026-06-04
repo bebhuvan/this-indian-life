@@ -3,16 +3,105 @@
   "questionId": "q.education.literacy",
   "question": "How literate is India?",
   "priority": "core",
+  "theme": {
+    "id": "society",
+    "label": "Society, work, education, and services",
+    "readerQuestions": [
+      "What basic capability is being measured?",
+      "How many people does the percentage represent?",
+      "Is this access, usage, quality, or outcome?",
+      "Which caveat stops the chart from being overclaimed?"
+    ],
+    "glossaryTerms": [
+      "labour force",
+      "participation rate",
+      "gross enrolment",
+      "basic drinking water",
+      "basic sanitation"
+    ]
+  },
   "requiredIndicatorIds": [
     "education.literacy_adult"
   ],
   "availableIndicatorIds": [
     "education.literacy_adult"
   ],
+  "themeIndicatorIds": [
+    "education.literacy_adult",
+    "education.school_enrollment_secondary"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.education.literacy_adult",
+      "indicatorId": "education.literacy_adult",
+      "title": "Adult literacy rate",
+      "sourceId": "worldbank",
+      "unit": "% ages 15 and above",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.education.school_enrollment_secondary",
+      "indicatorId": "education.school_enrollment_secondary",
+      "title": "School enrollment, secondary",
+      "sourceId": "worldbank",
+      "unit": "% gross",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "Adult literacy rate, latest",
+      "value": 78.1625330351403,
+      "displayValue": "78.2%",
+      "date": "2024",
+      "unit": "% ages 15 and above",
+      "indicatorId": "education.literacy_adult",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Adult literacy rate, earliest",
+      "value": 40.7599983215332,
+      "displayValue": "40.8%",
+      "date": "1981",
+      "unit": "% ages 15 and above",
+      "indicatorId": "education.literacy_adult",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "School enrollment, secondary, latest",
+      "value": 79.594985086469,
+      "displayValue": "79.6%",
+      "date": "2025",
+      "unit": "% gross",
+      "indicatorId": "education.school_enrollment_secondary",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "School enrollment, secondary, earliest",
+      "value": 23.9795207977295,
+      "displayValue": "24%",
+      "date": "1971",
+      "unit": "% gross",
+      "indicatorId": "education.school_enrollment_secondary",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
   "lockedNumbers": [
     {
       "label": "Adult literacy rate, latest",
       "value": 78.1625330351403,
+      "displayValue": "78.2%",
       "date": "2024",
       "unit": "% ages 15 and above",
       "sourceId": "worldbank",
@@ -21,10 +110,29 @@
     {
       "label": "Adult literacy rate, earliest",
       "value": 40.7599983215332,
+      "displayValue": "40.8%",
       "date": "1981",
       "unit": "% ages 15 and above",
       "sourceId": "worldbank",
       "indicatorId": "education.literacy_adult"
+    },
+    {
+      "label": "School enrollment, secondary, latest",
+      "value": 79.594985086469,
+      "displayValue": "79.6%",
+      "date": "2025",
+      "unit": "% gross",
+      "sourceId": "worldbank",
+      "indicatorId": "education.school_enrollment_secondary"
+    },
+    {
+      "label": "School enrollment, secondary, earliest",
+      "value": 23.9795207977295,
+      "displayValue": "24%",
+      "date": "1971",
+      "unit": "% gross",
+      "sourceId": "worldbank",
+      "indicatorId": "education.school_enrollment_secondary"
     }
   ],
   "sourceSummaries": [
@@ -49,10 +157,40 @@
         "date": "2024",
         "value": 78.1625330351403
       }
+    },
+    {
+      "indicatorId": "education.school_enrollment_secondary",
+      "title": "School enrollment, secondary",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SE.SEC.ENRR",
+      "unit": "% gross",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1971",
+        "value": 23.9795207977295
+      },
+      "latest": {
+        "date": "2025",
+        "value": 79.594985086469
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

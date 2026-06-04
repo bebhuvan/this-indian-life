@@ -10,7 +10,7 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 ---
 
-<Base title="Ask Indica · Indica">
+<Base title="Ask · This Indian Life">
   <div class="wrap">
     <Nav locale={locale} />
 
@@ -47,9 +47,8 @@ const { locale } = Astro.params;
       <div>
         <p class="lbl">How this works now</p>
         <p class="muted prose">
-          The launch matcher is deliberately simple: it searches chart titles, descriptions,
-          and aliases in the local catalog. Embeddings can come later when the catalog is large
-          enough to need semantic retrieval.
+          The launch matcher searches the local chart catalog. It is deliberately simple for now,
+          because the useful thing today is getting readers to the right question quickly.
         </p>
       </div>
       <div class="ask-box">
@@ -82,4 +81,3 @@ const { locale } = Astro.params;
     });
   });
 </script>
-

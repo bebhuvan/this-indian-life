@@ -1,0 +1,53 @@
+name: Data Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      group:
+        description: "Ingestion job group to run"
+        required: true
+        default: "production_no_secret"
+  schedule:
+    - cron: "30 2 * * 2"
+
+permissions:
+  contents: read
+
+jobs:
+  run-data-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: List ingestion jobs
+        run: npm run jobs:list
+
+      - name: Run ingestion group
+        env:
+          GROUP: ${{ github.event.inputs.group || 'production_no_secret' }}
+        run: node scripts/run-ingestion-jobs.mjs --group "$GROUP"
+
+      - name: Build site
+        run: npm run build
+
+      - name: Upload generated data artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: indica-data-artifacts
+          retention-days: 14
+          path: |
+            data/catalog/
+            data/series/
+            data/snapshots/
+            dist/

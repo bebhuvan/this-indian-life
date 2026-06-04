@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-06-02T04:05:14.110Z",
+  "source": {
+    "sourceId": "rbi-dbie",
+    "name": "RBI Database on Indian Economy",
+    "owner": "Reserve Bank of India",
+    "homepage": "https://data.rbi.org.in/DBIE/#/dbie/home",
+    "serviceBase": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES",
+    "loginServiceBase": "https://data.rbi.org.in/CIMS_Gateway_LOGIN/GATEWAY/SERVICES",
+    "accessMode": "spa_gateway_reports_downloads",
+    "reliability": "official",
+    "cadence": "daily_monthly_quarterly_annual_mixed"
+  },
+  "home": {
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 50732,
+    "snapshot": "data/snapshots/rbi-dbie/dbie-home-html.a57f795ffa4d.json",
+    "rawHash": "a57f795ffa4d68c6ca460afede0c898261075c7e37295b4ec88820bf58a7a189"
+  },
+  "assets": [
+    {
+      "path": "main.f08c62f71a73addf.js",
+      "type": "javascript",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 9408304,
+      "snapshot": "data/snapshots/rbi-dbie/asset-main.f08c62f71a73addf.js.00baa3d99a83.json",
+      "rawHash": "00baa3d99a83f9848447810e3610c9766df66fabcab29b3323d95cba83cd6959",
+      "endpoints": 116,
+      "serviceRoots": [
+        "/CIMS_Gateway_DBIE/GATEWAY/SERVICES",
+        "/CIMS_Gateway_FRBS/GATEWAY/SERVICES",
+        "/CIMS_Gateway_LOGIN/GATEWAY/SERVICES",
+        "/CIMS_Gateway_RBIDATA/GATEWAY/SERVICES",
+        "/CIMS_Gateway_SAARC/GATEWAY/SERVICES"
+      ]
+    },
+    {
+      "path": "polyfills.173338feba863409.js",
+      "type": "javascript",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 34970,
+      "snapshot": "data/snapshots/rbi-dbie/asset-polyfills.173338feba863409.js.8d7600e6f624.json",
+      "rawHash": "8d7600e6f6244c67e4ddafadca55ce8436f8ad57745ffbba85b2b78885bf369e",
+      "endpoints": 0,
+      "serviceRoots": []
+    },
+    {
+      "path": "runtime.f4c171c72d81d227.js",
+      "type": "javascript",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 2857,
+      "snapshot": "data/snapshots/rbi-dbie/asset-runtime.f4c171c72d81d227.js.5301f8e9022e.json",
+      "rawHash": "5301f8e9022e5957bab23084fa52ce03fb5dbd074c747a4e54529a3526adcc45",
+      "endpoints": 0,
+      "serviceRoots": []
+    },
+    {
+      "path": "scripts.e89467fb77e4d6c3.js",
+      "type": "javascript",
+      "status": 200,
+      "contentType": "application/javascript",
+      "bytes": 183636,
+      "snapshot": "data/snapshots/rbi-dbie/asset-scripts.e89467fb77e4d6c3.js.ba5a6c99333b.json",
+      "rawHash": "ba5a6c99333bb5a940b01682d286d748cdf7f3e9b28f0f4d4e031940e2cb0666",
+      "endpoints": 0,
+      "serviceRoots": []
+    }
+  ],
+  "serviceRoots": [
+    "/CIMS_Gateway_DBIE/GATEWAY/SERVICES",
+    "/CIMS_Gateway_FRBS/GATEWAY/SERVICES",
+    "/CIMS_Gateway_LOGIN/GATEWAY/SERVICES",
+    "/CIMS_Gateway_RBIDATA/GATEWAY/SERVICES",
+    "/CIMS_Gateway_SAARC/GATEWAY/SERVICES"
+  ],
+  "endpoints": [
+    "/dbie_GetFaqDetails",
+    "/dbie_GetLatLongByStateAction",
+    "/dbie_GetPopularReports",
+    "/dbie_GetPopularReportsPortalNew",
+    "/dbie_GetSearchQuestions",
+    "/dbie_cancelUserSubscription",
+    "/dbie_createDDLAction",
+    "/dbie_createDDLActionEnhanced",
+    "/dbie_csvConvert",
+    "/dbie_emailForFeedback",
+    "/dbie_fetchReportFOrDashboardFoodIndex",
+    "/dbie_fetchReportFOrDashboardGenIndex",
+    "/dbie_firstEBRBaseReport",
+    "/dbie_firstEBRBaseReportTabs",
+    "/dbie_foreignExchangeReserves",
+    "/dbie_genericDashboardGraph",
+    "/dbie_getAboutUs",
+    "/dbie_getAlerts",
+    "/dbie_getAllBankOpEntitiesAction",
+    "/dbie_getAllDBIEReports",
+    "/dbie_getAllWhatsNewData",
+    "/dbie_getApiResponse",
+    "/dbie_getAvgCreditAmountperPopulation",
+    "/dbie_getAvgCreditAmountperPopulationByRegion",
+    "/dbie_getAvgDepositAmountperPopulation",
+    "/dbie_getAvgDepositAmountperPopulationByRegion",
+    "/dbie_getBSRDisrictWiseData",
+    "/dbie_getBSRRegionWiseData",
+    "/dbie_getBSRStateWiseData",
+    "/dbie_getBankANDBankGrp",
+    "/dbie_getBankDetailByLatLong",
+    "/dbie_getBankGetData",
+    "/dbie_getBankGetDataCount",
+    "/dbie_getBankGetDataCountByRegion",
+    "/dbie_getBankGetDataCountByState",
+    "/dbie_getBatchJobStatus",
+    "/dbie_getCenterByDistOrSubDist",
+    "/dbie_getCenterByState",
+    "/dbie_getCentersByDistrict",
+    "/dbie_getCodeListAction",
+    "/dbie_getCodeListActionEnhanced",
+    "/dbie_getCommonDimensionsAction",
+    "/dbie_getContactUsData",
+    "/dbie_getCount",
+    "/dbie_getCountry",
+    "/dbie_getDBIERecommendedItems",
+    "/dbie_getDQTopIconsInfoAction",
+    "/dbie_getDashboardReportLink",
+    "/dbie_getDimensionDataQuery",
+    "/dbie_getDisclaimer",
+    "/dbie_getDisclaimerDbie",
+    "/dbie_getEBRApiSubscriptionData",
+    "/dbie_getEBRApiSubscriptionElements",
+    "/dbie_getEcoHeader",
+    "/dbie_getEcoSubHeader",
+    "/dbie_getElementDetailsAction",
+    "/dbie_getElementDetailsActionEnhanced",
+    "/dbie_getElementsDataQuery",
+    "/dbie_getEntityDataQuery",
+    "/dbie_getErupeeReport",
+    "/dbie_getFeedbackType",
+    "/dbie_getFrequencyDataQuery",
+    "/dbie_getHomeBankName",
+    "/dbie_getImpalaDQAction",
+    "/dbie_getImpalaDQActionEnhanced",
+    "/dbie_getLatLongOfFinalResult",
+    "/dbie_getMMIJson",
+    "/dbie_getMMIKey",
+    "/dbie_getOccupation",
+    "/dbie_getPopulationGroup",
+    "/dbie_getPortalDashboardReportDetails",
+    "/dbie_getPortalFooters",
+    "/dbie_getPublicationDataImpala",
+    "/dbie_getPublicationPrintReports",
+    "/dbie_getQuickLinks",
+    "/dbie_getRecentSearches",
+    "/dbie_getRegionCountAction",
+    "/dbie_getRegionLatLong",
+    "/dbie_getRegionWiseCount",
+    "/dbie_getReportLink",
+    "/dbie_getReportsDbie",
+    "/dbie_getSapReportDownload",
+    "/dbie_getSectorAction",
+    "/dbie_getSectorActionEnhanced",
+    "/dbie_getSolrSearchMetadata",
+    "/dbie_getStateAndDistrict",
+    "/dbie_getStateCountByRegionAction",
+    "/dbie_getStateLatLong",
+    "/dbie_getStateWiseCount",
+    "/dbie_getStateWiseCountByRegion",
+    "/dbie_getSubDistrict",
+    "/dbie_getSubDistrictNewAction",
+    "/dbie_getSubDistrictsByDistrict",
+    "/dbie_getSubscribedReportIdsByEmail",
+    "/dbie_getlatLongByState",
+    "/dbie_insertPolicyAction",
+    "/dbie_insertPolicyActionEnhanced",
+    "/dbie_mainMenuList",
+    "/dbie_menuMappingList",
+    "/dbie_noOfDepositAccountPerPopulationByRegion",
+    "/dbie_noOfDepositAccountPerPopulationStateWise",
+    "/dbie_renewSubscriptionEndDate",
+    "/dbie_saveFeedback",
+    "/dbie_startDownloadAllBatchJob",
+    "/dbie_subscribeUserToReport",
+    "/dbie_updateCount",
+    "/dbie_updateMaxCountReport",
+    "/download/dbie_FileDownloadHDFSAction",
+    "/download/dbie_dataQueryFileDownloadHDFS",
+    "/download/dbie_downloadBatchJobFile",
+    "/download/dbie_downloadDQDSDAction",
+    "/download/dbie_downloadDQManualFileAction",
+    "/download/dbie_footerfileDownloadservice",
+    "/download/dbie_getBankingOutletDownloadAll",
+    "/download/dbie_getSDMXExcelData",
+    "/download/dbie_pdfFileDownloadDQAction"
+  ],
+  "endpointProbes": [
+    {
+      "path": "/dbie_mainMenuList",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_mainMenuList",
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "header": {
+        "transactionid": "07j1k01780373120890196",
+        "status": "success"
+      },
+      "bodyKeys": [
+        "menuList"
+      ],
+      "bodyPreview": "{\"header\":{\"transactionid\":\"07j1k01780373120890196\",\"status\":\"success\"},\"body\":{\"menuList\":[{\"reportMenuHi\":null,\"orderNo\":0,\"function\":null,\"reportMenu\":null,\"departmentHi\":null,\"id\":24,\"menuDesc\":\"Subscribe to DBIE Reports\",\"menuDescHi\":\"Subscribe to DBIE Reports\",\"isActive\":\"\\u0000\",\"department\":null,\"url\":\"/dbie/subscription\"},{\"reportMenuHi\":null,\"orderNo\":0,\"function\":null,\"reportMenu\":null,\"departmentHi\":null,\"id\":1,\"menuDesc\":\"Home\",\"menuDescHi\":\"घर\",\"isActive\":\"\\u0000\",\"department\":null"
+    },
+    {
+      "path": "/dbie_getAllDBIEReports",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getAllDBIEReports",
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "header": {
+        "transactionid": "3a1bs01780373120972196",
+        "status": "success"
+      },
+      "bodyKeys": [
+        "response"
+      ],
+      "bodyPreview": "{\"header\":{\"transactionid\":\"3a1bs01780373120972196\",\"status\":\"success\"},\"body\":{\"response\":[{\"frunctionHi\":null,\"hitCount\":null,\"reportName\":\"Statement 1: Growth Rates of the Select Items of the Select Non-Government Non-Banking Financial and Investment (NGNBF&I) Companies - Activity wise\",\"docId\":null,\"timeforcheckDislike\":null,\"reportFreqHi\":\"वार्षिक\",\"dislikeCount\":0,\"section\":null,\"likeCount\":0,\"subSectionHi\":null,\"sectionHi\":null,\"fromdate\":\"31-MAR-2014\",\"reportPeriod\":null,\"reportFreq\":\"An"
+    },
+    {
+      "path": "/dbie_getReportsDbie",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getReportsDbie",
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "header": {
+        "errorMessage": "Internal Server Error Occurred. Please try after some time",
+        "errorCode": "5302",
+        "transactionid": "79qmz01780373122389196",
+        "status": "error"
+      },
+      "bodyKeys": [],
+      "bodyPreview": "{\"header\":{\"errorMessage\":\"Internal Server Error Occurred. Please try after some time\",\"errorCode\":\"5302\",\"transactionid\":\"79qmz01780373122389196\",\"status\":\"error\"}}"
+    },
+    {
+      "path": "/dbie_GetPopularReportsPortalNew",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_GetPopularReportsPortalNew",
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "header": {
+        "errorMessage": "Internal Server Error Occurred. Please try after some time",
+        "errorCode": "5302",
+        "transactionid": "giuwh01780373122468196",
+        "status": "error"
+      },
+      "bodyKeys": [],
+      "bodyPreview": "{\"header\":{\"errorMessage\":\"Internal Server Error Occurred. Please try after some time\",\"errorCode\":\"5302\",\"transactionid\":\"giuwh01780373122468196\",\"status\":\"error\"}}"
+    },
+    {
+      "path": "/dbie_getEcoHeader",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getEcoHeader",
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "header": {
+        "transactionid": "3gsvf01780373122542196",
+        "status": "success"
+      },
+      "bodyKeys": [
+        "listEconomyWatchVO"
+      ],
+      "bodyPreview": "{\"header\":{\"transactionid\":\"3gsvf01780373122542196\",\"status\":\"success\"},\"body\":{\"listEconomyWatchVO\":[{\"economyWatchHeaderHi\":\"बैंकिंग - प्रदर्शन संकेतक\",\"economyWatchHeader\":\"Banking - Performance Indicators\"},{\"economyWatchHeaderHi\":\"बैंकिंग - क्षेत्रीय सांख्यिकी\",\"economyWatchHeader\":\"Banking - Sectoral Statistics\"},{\"economyWatchHeaderHi\":\"केंद्र एवं राज्य सरकार वित्त (संयुक्त)\",\"economyWatchHeader\":\"Central & State Govt. Finance (Combined)\"},{\"economyWatchHeaderHi\":\"मुद्रा प्रबंधन\",\"economy"
+    },
+    {
+      "path": "/dbie_getPublicationDataImpala",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getPublicationDataImpala",
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "header": {
+        "transactionid": "ig8ix01780373122987196",
+        "status": "success"
+      },
+      "bodyKeys": [
+        "result"
+      ],
+      "bodyPreview": "{\"header\":{\"transactionid\":\"ig8ix01780373122987196\",\"status\":\"success\"},\"body\":{\"result\":[{\"currencyDesc\":null,\"rate\":18,\"name\":\"Statutory Liquidity Ratio\",\"timeMonth\":null,\"timeDate\":1586543400000},{\"currencyDesc\":null,\"rate\":3,\"name\":\"Cash Reserve Ratio\",\"timeMonth\":null,\"timeDate\":1764354600000},{\"currencyDesc\":null,\"rate\":5.25,\"name\":\"Policy Repo Rate\",\"timeMonth\":null,\"timeDate\":1764873000000},{\"currencyDesc\":null,\"rate\":3.35,\"name\":\"Reverse Repo Rate\",\"timeMonth\":null,\"timeDate\":1590085800"
+    }
+  ],
+  "sessionProbe": {
+    "generatedAt": "2026-06-02T04:05:20.843Z",
+    "status": 200,
+    "contentType": "application/json; charset=UTF-8",
+    "header": {
+      "transactionid": "m3tjn01780373120810196",
+      "status": "success"
+    },
+    "authorizationHeaderObserved": true
+  },
+  "validation": [
+    {
+      "severity": "warning",
+      "sourceId": "rbi-dbie",
+      "message": "DBIE endpoint discovery is not value ingestion. Endpoints use SPA headers, authorization, and encrypted payloads; promote only reproducible report/table downloads to production adapters."
+    }
+  ],
+  "nextActions": [
+    "Reproduce the DBIE login token and encryptPayload path in a controlled adapter, or prefer public report-download endpoints when available.",
+    "Build a DBIE report inventory: report id, report title, function/menu/department, frequency, download formats, and source URL.",
+    "Promote one narrow table as a proof: policy rates, forex reserves, deposits/credit, or CPI-related RBI series.",
+    "Validate table headings and known latest values before writing normalized artifacts."
+  ],
+  "warnings": [],
+  "summary": {
+    "assets": 4,
+    "serviceRoots": 5,
+    "endpoints": 116,
+    "probes": 6,
+    "warnings": 0
+  }
+}

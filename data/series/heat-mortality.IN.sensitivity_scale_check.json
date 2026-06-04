@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "heat.sensitivity_scale_check",
+  "title": "Illustrative heat mortality sensitivity scale check",
+  "sourceId": "heat-mortality",
+  "sourceIndicatorId": "curated sensitivity model",
+  "sourceUrl": "docs/HEAT_MORTALITY_ARTICLE_DRAFT.md",
+  "unit": "excess deaths per day; see row",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "scenario"
+  ],
+  "fetchedAt": "2026-06-03T07:00:31.555Z",
+  "rows": [
+    {
+      "scenario": "very_low",
+      "exposedPopulationShare": 0.2,
+      "mortalityLiftAmongExposedDeaths": 0.03,
+      "rationale": "Small affected share and small temporary mortality increase",
+      "population": 1450935791,
+      "crudeDeathRatePer1000": 6.6,
+      "baselineDeathsPerDay": 26236,
+      "exposedBaselineDeathsPerDay": 5247,
+      "excessDeathsPerDay": 157,
+      "excessDeathsPerFiveDaysIfConstant": 787,
+      "mortalityLiftAmongExposedDeathsPercent": 3,
+      "exposedPopulationSharePercent": 20,
+      "formula": "population * crudeDeathRatePer1000 / 1000 / 365 * exposedPopulationShare * mortalityLiftAmongExposedDeaths"
+    },
+    {
+      "scenario": "low",
+      "exposedPopulationShare": 0.35,
+      "mortalityLiftAmongExposedDeaths": 0.05,
+      "rationale": "Moderate affected share but still a small heat-mortality lift",
+      "population": 1450935791,
+      "crudeDeathRatePer1000": 6.6,
+      "baselineDeathsPerDay": 26236,
+      "exposedBaselineDeathsPerDay": 9183,
+      "excessDeathsPerDay": 459,
+      "excessDeathsPerFiveDaysIfConstant": 2296,
+      "mortalityLiftAmongExposedDeathsPercent": 5,
+      "exposedPopulationSharePercent": 35,
+      "formula": "population * crudeDeathRatePer1000 / 1000 / 365 * exposedPopulationShare * mortalityLiftAmongExposedDeaths"
+    },
+    {
+      "scenario": "middle",
+      "exposedPopulationShare": 0.5,
+      "mortalityLiftAmongExposedDeaths": 0.1,
+      "rationale": "Half the country materially exposed with a 10% mortality lift among exposed baseline deaths",
+      "population": 1450935791,
+      "crudeDeathRatePer1000": 6.6,
+      "baselineDeathsPerDay": 26236,
+      "exposedBaselineDeathsPerDay": 13118,
+      "excessDeathsPerDay": 1312,
+      "excessDeathsPerFiveDaysIfConstant": 6559,
+      "mortalityLiftAmongExposedDeathsPercent": 10,
+      "exposedPopulationSharePercent": 50,
+      "formula": "population * crudeDeathRatePer1000 / 1000 / 365 * exposedPopulationShare * mortalityLiftAmongExposedDeaths"
+    },
+    {
+      "scenario": "frontiers_scale",
+      "exposedPopulationShare": 0.7,
+      "mortalityLiftAmongExposedDeaths": 0.18513205083292253,
+      "rationale": "One way to reproduce the Frontiers single-day scale under this simple denominator model",
+      "population": 1450935791,
+      "crudeDeathRatePer1000": 6.6,
+      "baselineDeathsPerDay": 26236,
+      "exposedBaselineDeathsPerDay": 18365,
+      "excessDeathsPerDay": 3400,
+      "excessDeathsPerFiveDaysIfConstant": 17000,
+      "mortalityLiftAmongExposedDeathsPercent": 18.5,
+      "exposedPopulationSharePercent": 70,
+      "formula": "population * crudeDeathRatePer1000 / 1000 / 365 * exposedPopulationShare * mortalityLiftAmongExposedDeaths"
+    },
+    {
+      "scenario": "high",
+      "exposedPopulationShare": 0.75,
+      "mortalityLiftAmongExposedDeaths": 0.15,
+      "rationale": "Large affected share and severe but temporary mortality lift",
+      "population": 1450935791,
+      "crudeDeathRatePer1000": 6.6,
+      "baselineDeathsPerDay": 26236,
+      "exposedBaselineDeathsPerDay": 19677,
+      "excessDeathsPerDay": 2952,
+      "excessDeathsPerFiveDaysIfConstant": 14758,
+      "mortalityLiftAmongExposedDeathsPercent": 15,
+      "exposedPopulationSharePercent": 75,
+      "formula": "population * crudeDeathRatePer1000 / 1000 / 365 * exposedPopulationShare * mortalityLiftAmongExposedDeaths"
+    }
+  ],
+  "metadata": {
+    "inputs": {
+      "population2024": 1450935791,
+      "crudeDeathRatePer1000": 6.6,
+      "baselineDeathsPerDay": 26236,
+      "frontiersSingleDayExcessDeaths": 3400,
+      "frontiersEquivalentNationalMortalityLiftPercent": 13,
+      "sourceNotes": [
+        "Population is the World Bank 2024 India value already fetched in this evidence packet.",
+        "Crude death rate is rounded for scale-check modelling; replace with SRS/state/district baselines before any formal estimate.",
+        "The model ignores age, district, humidity, hot nights, exposure duration, harvesting, and lagged mortality."
+      ]
+    },
+    "note": "Illustrative denominator model only. This is not an epidemiological attribution model and must not be described as a validation of the Frontiers estimate."
+  }
+}

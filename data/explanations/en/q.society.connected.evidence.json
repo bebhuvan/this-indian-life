@@ -1,0 +1,1766 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.society.connected",
+  "question": "How connected is India?",
+  "priority": "core",
+  "theme": {
+    "id": "society",
+    "label": "Society, work, education, and services",
+    "readerQuestions": [
+      "What basic capability is being measured?",
+      "How many people does the percentage represent?",
+      "Is this access, usage, quality, or outcome?",
+      "Which caveat stops the chart from being overclaimed?"
+    ],
+    "glossaryTerms": [
+      "labour force",
+      "participation rate",
+      "gross enrolment",
+      "basic drinking water",
+      "basic sanitation"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "society.owid.internet_share"
+  ],
+  "availableIndicatorIds": [
+    "society.owid.internet_share"
+  ],
+  "themeIndicatorIds": [
+    "society.owid.internet_share",
+    "energy.electricity_access",
+    "society.mobile_subscriptions_p100",
+    "society.broadband_subscriptions_p100",
+    "society.fixed_telephone_p100",
+    "society.idh.data_per_user",
+    "society.idh.data_cost",
+    "society.idh.upi_volume",
+    "society.idh.internet_subs_wireless",
+    "society.idh.internet_subs_fixed",
+    "society.trai.telecom_subscribers_total",
+    "society.trai.telecom_subscribers_wireless",
+    "society.trai.telecom_subscribers_wireline",
+    "society.trai.telecom_subscribers_rural_total",
+    "society.trai.telecom_subscribers_urban_total",
+    "society.trai.broadband_subscribers_total",
+    "society.trai.teledensity_total",
+    "society.trai.active_wireless_mobile_subscribers_peak_vlr",
+    "society.trai.mobile_number_portability_requests",
+    "society.internet_users_female",
+    "society.internet_users_male",
+    "compare.society.internet_users"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.society.owid.internet_share",
+      "indicatorId": "society.owid.internet_share",
+      "title": "Individuals using the internet",
+      "sourceId": "owid",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.energy.electricity_access",
+      "indicatorId": "energy.electricity_access",
+      "title": "Access to electricity",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v3.society.mobile_subscriptions_p100",
+      "indicatorId": "society.mobile_subscriptions_p100",
+      "title": "Mobile cellular subscriptions",
+      "sourceId": "worldbank",
+      "unit": "per 100 people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v4.society.broadband_subscriptions_p100",
+      "indicatorId": "society.broadband_subscriptions_p100",
+      "title": "Fixed broadband subscriptions",
+      "sourceId": "worldbank",
+      "unit": "per 100 people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.society.fixed_telephone_p100",
+      "indicatorId": "society.fixed_telephone_p100",
+      "title": "Fixed telephone subscriptions",
+      "sourceId": "worldbank",
+      "unit": "per 100 people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.society.idh.data_per_user",
+      "indicatorId": "society.idh.data_per_user",
+      "title": "Mobile data used per subscriber per month",
+      "sourceId": "indiadatahub",
+      "unit": "GB",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.society.idh.data_cost",
+      "indicatorId": "society.idh.data_cost",
+      "title": "Cost of mobile data",
+      "sourceId": "indiadatahub",
+      "unit": "rupees per GB",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.society.idh.upi_volume",
+      "indicatorId": "society.idh.upi_volume",
+      "title": "UPI transactions",
+      "sourceId": "indiadatahub",
+      "unit": "transactions",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.society.idh.internet_subs_wireless",
+      "indicatorId": "society.idh.internet_subs_wireless",
+      "title": "Internet subscribers, wireless",
+      "sourceId": "indiadatahub",
+      "unit": "subscribers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.society.idh.internet_subs_fixed",
+      "indicatorId": "society.idh.internet_subs_fixed",
+      "title": "Internet subscribers, fixed line",
+      "sourceId": "indiadatahub",
+      "unit": "subscribers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.society.trai.telecom_subscribers_total",
+      "indicatorId": "society.trai.telecom_subscribers_total",
+      "title": "Telecom subscribers, total",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.society.trai.telecom_subscribers_wireless",
+      "indicatorId": "society.trai.telecom_subscribers_wireless",
+      "title": "Telecom subscribers, wireless",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.society.trai.telecom_subscribers_wireline",
+      "indicatorId": "society.trai.telecom_subscribers_wireline",
+      "title": "Telecom subscribers, wireline",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.society.trai.telecom_subscribers_rural_total",
+      "indicatorId": "society.trai.telecom_subscribers_rural_total",
+      "title": "Telecom subscribers, rural",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.society.trai.telecom_subscribers_urban_total",
+      "indicatorId": "society.trai.telecom_subscribers_urban_total",
+      "title": "Telecom subscribers, urban",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.society.trai.broadband_subscribers_total",
+      "indicatorId": "society.trai.broadband_subscribers_total",
+      "title": "Broadband subscribers, total",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.society.trai.teledensity_total",
+      "indicatorId": "society.trai.teledensity_total",
+      "title": "Tele-density, total",
+      "sourceId": "trai",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.society.trai.active_wireless_mobile_subscribers_peak_vlr",
+      "indicatorId": "society.trai.active_wireless_mobile_subscribers_peak_vlr",
+      "title": "Active wireless mobile subscribers on peak VLR date",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.society.trai.mobile_number_portability_requests",
+      "indicatorId": "society.trai.mobile_number_portability_requests",
+      "title": "Mobile Number Portability requests",
+      "sourceId": "trai",
+      "unit": "million",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.society.internet_users_female",
+      "indicatorId": "society.internet_users_female",
+      "title": "Internet use, women",
+      "sourceId": "worldbank",
+      "unit": "% of female population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v21.society.internet_users_male",
+      "indicatorId": "society.internet_users_male",
+      "title": "Internet use, men",
+      "sourceId": "worldbank",
+      "unit": "% of male population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v22.compare.society.internet_users",
+      "indicatorId": "compare.society.internet_users",
+      "title": "Internet use comparison",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "indians-online-of-population",
+      "title": "Indians online, % of population",
+      "chartType": "line",
+      "beat": "level",
+      "window": "full",
+      "indicator": "society.owid.internet_share",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The headline climb from almost nobody to most of the country."
+    },
+    {
+      "order": 2,
+      "chartId": "the-foundation-access-to-electricity",
+      "title": "The foundation: access to electricity",
+      "chartType": "line",
+      "beat": "prerequisite",
+      "window": "full",
+      "indicator": "energy.electricity_access",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "You cannot connect what you cannot power; near-universal electricity came first."
+    },
+    {
+      "order": 3,
+      "chartId": "how-india-connects-mobile-vs-broadband-vs-landline",
+      "title": "How India connects: mobile vs broadband vs landline",
+      "chartType": "multiLine",
+      "beat": "composition",
+      "window": "",
+      "indicator": "society.mobile_subscriptions_p100",
+      "series": [
+        {
+          "indicator": "society.mobile_subscriptions_p100",
+          "label": "Mobile"
+        },
+        {
+          "indicator": "society.broadband_subscriptions_p100",
+          "label": "Fixed broadband"
+        },
+        {
+          "indicator": "society.fixed_telephone_p100",
+          "label": "Landline"
+        }
+      ],
+      "unit": "per 100 people",
+      "subtitle": "World Bank · subscriptions per 100 people",
+      "whyThisChart": "India leapfrogged wires and went straight to mobile."
+    },
+    {
+      "order": 4,
+      "chartId": "mobile-data-used-per-person-each-month",
+      "title": "Mobile data used per person each month",
+      "chartType": "line",
+      "beat": "intensity",
+      "window": "full",
+      "indicator": "society.idh.data_per_user",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The Jio shock: data use exploded after 2016."
+    },
+    {
+      "order": 5,
+      "chartId": "what-a-gigabyte-of-mobile-data-costs",
+      "title": "What a gigabyte of mobile data costs",
+      "chartType": "line",
+      "beat": "driver",
+      "window": "full",
+      "indicator": "society.idh.data_cost",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "The mirror image of the surge: price collapsed."
+    },
+    {
+      "order": 6,
+      "chartId": "upi-transactions-each-month",
+      "title": "UPI transactions each month",
+      "chartType": "line",
+      "beat": "payments",
+      "window": "full",
+      "indicator": "society.idh.upi_volume",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "Being connected reshaped how India pays."
+    },
+    {
+      "order": 7,
+      "chartId": "internet-subscribers-wireless-vs-fixed-line",
+      "title": "Internet subscribers: wireless vs fixed line",
+      "chartType": "multiLine",
+      "beat": "composition",
+      "window": "",
+      "indicator": "society.idh.internet_subs_wireless",
+      "series": [
+        {
+          "indicator": "society.idh.internet_subs_wireless",
+          "label": "Wireless"
+        },
+        {
+          "indicator": "society.idh.internet_subs_fixed",
+          "label": "Fixed line"
+        }
+      ],
+      "unit": "subscribers",
+      "subtitle": "IndiaDataHub · TRAI · internet subscribers",
+      "whyThisChart": "Almost all of India's internet rides on mobile networks."
+    },
+    {
+      "order": 8,
+      "chartId": "rural-vs-urban-telecom-subscribers",
+      "title": "Rural vs urban telecom subscribers",
+      "chartType": "multiLine",
+      "beat": "divide",
+      "window": "",
+      "indicator": "society.trai.telecom_subscribers_rural_total",
+      "series": [
+        {
+          "indicator": "society.trai.telecom_subscribers_rural_total",
+          "label": "Rural"
+        },
+        {
+          "indicator": "society.trai.telecom_subscribers_urban_total",
+          "label": "Urban"
+        }
+      ],
+      "unit": "million subscriptions",
+      "subtitle": "TRAI monthly report PDFs · telephone subscribers",
+      "whyThisChart": "The divide: where the connections actually are."
+    },
+    {
+      "order": 9,
+      "chartId": "tele-density-total",
+      "title": "Tele-density, total",
+      "chartType": "line",
+      "beat": "reach",
+      "window": "",
+      "indicator": "society.trai.teledensity_total",
+      "series": [],
+      "unit": "%",
+      "subtitle": "TRAI monthly report PDFs · telephone connections per population",
+      "whyThisChart": "Subscriber totals need a population lens; tele-density shows the rough reach of phone connections."
+    },
+    {
+      "order": 10,
+      "chartId": "mobile-number-portability-requests",
+      "title": "Mobile number portability requests",
+      "chartType": "line",
+      "beat": "market-behaviour",
+      "window": "",
+      "indicator": "society.trai.mobile_number_portability_requests",
+      "series": [],
+      "unit": "million requests",
+      "subtitle": "TRAI monthly report PDFs · MNP requests",
+      "whyThisChart": "A connected market is also a switchable market; MNP shows how many subscribers ask to move providers while keeping their number."
+    },
+    {
+      "order": 11,
+      "chartId": "the-gender-gap-online",
+      "title": "The gender gap online",
+      "chartType": "latestBars",
+      "beat": "divide",
+      "window": "",
+      "indicator": "society.internet_users_female",
+      "series": [
+        {
+          "indicator": "society.internet_users_female",
+          "label": "Women"
+        },
+        {
+          "indicator": "society.internet_users_male",
+          "label": "Men"
+        }
+      ],
+      "unit": "% who use the internet",
+      "subtitle": "World Bank · internet use by sex, latest available",
+      "whyThisChart": "Connection is not shared equally between men and women."
+    },
+    {
+      "order": 12,
+      "chartId": "india-vs-china-vs-world-internet-use",
+      "title": "India vs China vs world, internet use",
+      "chartType": "compareBars",
+      "beat": "comparison",
+      "window": "latest",
+      "indicator": "compare.society.internet_users",
+      "series": [],
+      "unit": "",
+      "subtitle": "",
+      "whyThisChart": "How India's connection rate stacks up globally."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Individuals using the internet: Share of the population using the Internet",
+      "value": 70,
+      "displayValue": "70%",
+      "date": "2025",
+      "unit": "% of population",
+      "indicatorId": "society.owid.internet_share",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Individuals using the internet: Share of the population using the Internet",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "1990",
+      "unit": "% of population",
+      "indicatorId": "society.owid.internet_share",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Access to electricity, latest",
+      "value": 99.5,
+      "displayValue": "99.5%",
+      "date": "2023",
+      "unit": "% of population",
+      "indicatorId": "energy.electricity_access",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Access to electricity, earliest",
+      "value": 50.9,
+      "displayValue": "50.9%",
+      "date": "1993",
+      "unit": "% of population",
+      "indicatorId": "energy.electricity_access",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mobile cellular subscriptions, latest",
+      "value": 79.3526921826412,
+      "displayValue": "79.35",
+      "date": "2024",
+      "unit": "per 100 people",
+      "indicatorId": "society.mobile_subscriptions_p100",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mobile cellular subscriptions, earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "1960",
+      "unit": "per 100 people",
+      "indicatorId": "society.mobile_subscriptions_p100",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Fixed broadband subscriptions, latest",
+      "value": 3.15046250037677,
+      "displayValue": "3.15",
+      "date": "2024",
+      "unit": "per 100 people",
+      "indicatorId": "society.broadband_subscriptions_p100",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Fixed broadband subscriptions, earliest",
+      "value": 0.00463865535771768,
+      "displayValue": "0",
+      "date": "2001",
+      "unit": "per 100 people",
+      "indicatorId": "society.broadband_subscriptions_p100",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Fixed telephone subscriptions, latest",
+      "value": 2.70417879573832,
+      "displayValue": "2.7",
+      "date": "2024",
+      "unit": "per 100 people",
+      "indicatorId": "society.fixed_telephone_p100",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Fixed telephone subscriptions, earliest",
+      "value": 0.074536515,
+      "displayValue": "0.07",
+      "date": "1960",
+      "unit": "per 100 people",
+      "indicatorId": "society.fixed_telephone_p100",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mobile data used per subscriber per month, latest",
+      "value": 23.846380848343,
+      "displayValue": "23.85",
+      "date": "2025-09-30",
+      "unit": "GB",
+      "indicatorId": "society.idh.data_per_user",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mobile data used per subscriber per month, earliest",
+      "value": 0.0507,
+      "displayValue": "0.05",
+      "date": "2013-12-31",
+      "unit": "GB",
+      "indicatorId": "society.idh.data_per_user",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cost of mobile data, latest",
+      "value": 8.27,
+      "displayValue": "₹8",
+      "date": "2025-09-30",
+      "unit": "rupees per GB",
+      "indicatorId": "society.idh.data_cost",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cost of mobile data, earliest",
+      "value": 200,
+      "displayValue": "₹200",
+      "date": "2016-06-30",
+      "unit": "rupees per GB",
+      "indicatorId": "society.idh.data_cost",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "UPI transactions, latest",
+      "value": 22346800000,
+      "displayValue": "22.35 billion",
+      "date": "2026-04-30",
+      "unit": "transactions",
+      "indicatorId": "society.idh.upi_volume",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "UPI transactions, earliest",
+      "value": 999570000,
+      "displayValue": "999.57 million",
+      "date": "2020-04-30",
+      "unit": "transactions",
+      "indicatorId": "society.idh.upi_volume",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Internet subscribers, wireless, latest",
+      "value": 973390000,
+      "displayValue": "973.39 million",
+      "date": "2025-09-30",
+      "unit": "subscribers",
+      "indicatorId": "society.idh.internet_subs_wireless",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Internet subscribers, wireless, earliest",
+      "value": 143200000,
+      "displayValue": "143.2 million",
+      "date": "2013-03-31",
+      "unit": "subscribers",
+      "indicatorId": "society.idh.internet_subs_wireless",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Internet subscribers, fixed line, latest",
+      "value": 44420000,
+      "displayValue": "44.42 million",
+      "date": "2025-09-30",
+      "unit": "subscribers",
+      "indicatorId": "society.idh.internet_subs_fixed",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Internet subscribers, fixed line, earliest",
+      "value": 21610000,
+      "displayValue": "21.61 million",
+      "date": "2013-03-31",
+      "unit": "subscribers",
+      "indicatorId": "society.idh.internet_subs_fixed",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Telecom subscribers, total, latest",
+      "value": 1337.54,
+      "displayValue": "1,337.54",
+      "date": "2026-04",
+      "unit": "million",
+      "indicatorId": "society.trai.telecom_subscribers_total",
+      "sourceId": "trai",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Telecom subscribers, total, earliest",
+      "value": 1207.08,
+      "displayValue": "1,207.08",
+      "date": "2025-05",
+      "unit": "million",
+      "indicatorId": "society.trai.telecom_subscribers_total",
+      "sourceId": "trai",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Telecom subscribers, wireless, latest",
+      "value": 1288.96,
+      "displayValue": "1,288.96",
+      "date": "2026-04",
+      "unit": "million",
+      "indicatorId": "society.trai.telecom_subscribers_wireless",
+      "sourceId": "trai",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Telecom subscribers, wireless, earliest",
+      "value": 1168.42,
+      "displayValue": "1,168.42",
+      "date": "2025-05",
+      "unit": "million",
+      "indicatorId": "society.trai.telecom_subscribers_wireless",
+      "sourceId": "trai",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Individuals using the internet: Share of the population using the Internet",
+      "value": 70,
+      "displayValue": "70%",
+      "date": "2025",
+      "unit": "% of population",
+      "sourceId": "owid",
+      "indicatorId": "society.owid.internet_share"
+    },
+    {
+      "label": "Individuals using the internet: Share of the population using the Internet",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "1990",
+      "unit": "% of population",
+      "sourceId": "owid",
+      "indicatorId": "society.owid.internet_share"
+    },
+    {
+      "label": "Access to electricity, latest",
+      "value": 99.5,
+      "displayValue": "99.5%",
+      "date": "2023",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.electricity_access"
+    },
+    {
+      "label": "Access to electricity, earliest",
+      "value": 50.9,
+      "displayValue": "50.9%",
+      "date": "1993",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "energy.electricity_access"
+    },
+    {
+      "label": "Mobile cellular subscriptions, latest",
+      "value": 79.3526921826412,
+      "displayValue": "79.35",
+      "date": "2024",
+      "unit": "per 100 people",
+      "sourceId": "worldbank",
+      "indicatorId": "society.mobile_subscriptions_p100"
+    },
+    {
+      "label": "Mobile cellular subscriptions, earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "1960",
+      "unit": "per 100 people",
+      "sourceId": "worldbank",
+      "indicatorId": "society.mobile_subscriptions_p100"
+    },
+    {
+      "label": "Fixed broadband subscriptions, latest",
+      "value": 3.15046250037677,
+      "displayValue": "3.15",
+      "date": "2024",
+      "unit": "per 100 people",
+      "sourceId": "worldbank",
+      "indicatorId": "society.broadband_subscriptions_p100"
+    },
+    {
+      "label": "Fixed broadband subscriptions, earliest",
+      "value": 0.00463865535771768,
+      "displayValue": "0",
+      "date": "2001",
+      "unit": "per 100 people",
+      "sourceId": "worldbank",
+      "indicatorId": "society.broadband_subscriptions_p100"
+    },
+    {
+      "label": "Fixed telephone subscriptions, latest",
+      "value": 2.70417879573832,
+      "displayValue": "2.7",
+      "date": "2024",
+      "unit": "per 100 people",
+      "sourceId": "worldbank",
+      "indicatorId": "society.fixed_telephone_p100"
+    },
+    {
+      "label": "Fixed telephone subscriptions, earliest",
+      "value": 0.074536515,
+      "displayValue": "0.07",
+      "date": "1960",
+      "unit": "per 100 people",
+      "sourceId": "worldbank",
+      "indicatorId": "society.fixed_telephone_p100"
+    },
+    {
+      "label": "Mobile data used per subscriber per month, latest",
+      "value": 23.846380848343,
+      "displayValue": "23.85",
+      "date": "2025-09-30",
+      "unit": "GB",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.data_per_user"
+    },
+    {
+      "label": "Mobile data used per subscriber per month, earliest",
+      "value": 0.0507,
+      "displayValue": "0.05",
+      "date": "2013-12-31",
+      "unit": "GB",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.data_per_user"
+    },
+    {
+      "label": "Cost of mobile data, latest",
+      "value": 8.27,
+      "displayValue": "₹8",
+      "date": "2025-09-30",
+      "unit": "rupees per GB",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.data_cost"
+    },
+    {
+      "label": "Cost of mobile data, earliest",
+      "value": 200,
+      "displayValue": "₹200",
+      "date": "2016-06-30",
+      "unit": "rupees per GB",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.data_cost"
+    },
+    {
+      "label": "UPI transactions, latest",
+      "value": 22346800000,
+      "displayValue": "22.35 billion",
+      "date": "2026-04-30",
+      "unit": "transactions",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.upi_volume"
+    },
+    {
+      "label": "UPI transactions, earliest",
+      "value": 999570000,
+      "displayValue": "999.57 million",
+      "date": "2020-04-30",
+      "unit": "transactions",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.upi_volume"
+    },
+    {
+      "label": "Internet subscribers, wireless, latest",
+      "value": 973390000,
+      "displayValue": "973.39 million",
+      "date": "2025-09-30",
+      "unit": "subscribers",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.internet_subs_wireless"
+    },
+    {
+      "label": "Internet subscribers, wireless, earliest",
+      "value": 143200000,
+      "displayValue": "143.2 million",
+      "date": "2013-03-31",
+      "unit": "subscribers",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.internet_subs_wireless"
+    },
+    {
+      "label": "Internet subscribers, fixed line, latest",
+      "value": 44420000,
+      "displayValue": "44.42 million",
+      "date": "2025-09-30",
+      "unit": "subscribers",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.internet_subs_fixed"
+    },
+    {
+      "label": "Internet subscribers, fixed line, earliest",
+      "value": 21610000,
+      "displayValue": "21.61 million",
+      "date": "2013-03-31",
+      "unit": "subscribers",
+      "sourceId": "indiadatahub",
+      "indicatorId": "society.idh.internet_subs_fixed"
+    },
+    {
+      "label": "Telecom subscribers, total, latest",
+      "value": 1337.54,
+      "displayValue": "1,337.54",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_total"
+    },
+    {
+      "label": "Telecom subscribers, total, earliest",
+      "value": 1207.08,
+      "displayValue": "1,207.08",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_total"
+    },
+    {
+      "label": "Telecom subscribers, wireless, latest",
+      "value": 1288.96,
+      "displayValue": "1,288.96",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_wireless"
+    },
+    {
+      "label": "Telecom subscribers, wireless, earliest",
+      "value": 1168.42,
+      "displayValue": "1,168.42",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_wireless"
+    },
+    {
+      "label": "Telecom subscribers, wireline, latest",
+      "value": 48.58,
+      "displayValue": "48.58",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_wireline"
+    },
+    {
+      "label": "Telecom subscribers, wireline, earliest",
+      "value": 38.66,
+      "displayValue": "38.66",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_wireline"
+    },
+    {
+      "label": "Telecom subscribers, rural, latest",
+      "value": 554.41,
+      "displayValue": "554.41",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_rural_total"
+    },
+    {
+      "label": "Telecom subscribers, rural, earliest",
+      "value": 537.39,
+      "displayValue": "537.39",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_rural_total"
+    },
+    {
+      "label": "Telecom subscribers, urban, latest",
+      "value": 783.12,
+      "displayValue": "783.12",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_urban_total"
+    },
+    {
+      "label": "Telecom subscribers, urban, earliest",
+      "value": 669.69,
+      "displayValue": "669.69",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.telecom_subscribers_urban_total"
+    },
+    {
+      "label": "Broadband subscribers, total, latest",
+      "value": 1073.44,
+      "displayValue": "1,073.44",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.broadband_subscribers_total"
+    },
+    {
+      "label": "Broadband subscribers, total, earliest",
+      "value": 974.87,
+      "displayValue": "974.87",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.broadband_subscribers_total"
+    },
+    {
+      "label": "Tele-density, total, latest",
+      "value": 84.76,
+      "displayValue": "84.8%",
+      "date": "2026-04",
+      "unit": "%",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.teledensity_total"
+    },
+    {
+      "label": "Tele-density, total, earliest",
+      "value": 85.36,
+      "displayValue": "85.4%",
+      "date": "2025-05",
+      "unit": "%",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.teledensity_total"
+    },
+    {
+      "label": "Active wireless mobile subscribers on peak VLR date, latest",
+      "value": 1193.57,
+      "displayValue": "1,193.57",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.active_wireless_mobile_subscribers_peak_vlr"
+    },
+    {
+      "label": "Active wireless mobile subscribers on peak VLR date, earliest",
+      "value": 1080.06,
+      "displayValue": "1,080.06",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.active_wireless_mobile_subscribers_peak_vlr"
+    },
+    {
+      "label": "Mobile Number Portability requests, latest",
+      "value": 14.74,
+      "displayValue": "14.74",
+      "date": "2026-04",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.mobile_number_portability_requests"
+    },
+    {
+      "label": "Mobile Number Portability requests, earliest",
+      "value": 14.03,
+      "displayValue": "14.03",
+      "date": "2025-05",
+      "unit": "million",
+      "sourceId": "trai",
+      "indicatorId": "society.trai.mobile_number_portability_requests"
+    },
+    {
+      "label": "Internet use, women, latest",
+      "value": 63.1,
+      "displayValue": "63.1%",
+      "date": "2025",
+      "unit": "% of female population",
+      "sourceId": "worldbank",
+      "indicatorId": "society.internet_users_female"
+    },
+    {
+      "label": "Internet use, women, earliest",
+      "value": 14.9,
+      "displayValue": "14.9%",
+      "date": "2018",
+      "unit": "% of female population",
+      "sourceId": "worldbank",
+      "indicatorId": "society.internet_users_female"
+    },
+    {
+      "label": "Internet use, men, latest",
+      "value": 76.7,
+      "displayValue": "76.7%",
+      "date": "2025",
+      "unit": "% of male population",
+      "sourceId": "worldbank",
+      "indicatorId": "society.internet_users_male"
+    },
+    {
+      "label": "Internet use, men, earliest",
+      "value": 25,
+      "displayValue": "25%",
+      "date": "2018",
+      "unit": "% of male population",
+      "sourceId": "worldbank",
+      "indicatorId": "society.internet_users_male"
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 70,
+      "displayValue": "70%",
+      "date": "2025",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.internet_users"
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 91.6,
+      "displayValue": "91.6%",
+      "date": "2025",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.internet_users"
+    },
+    {
+      "label": "Internet use comparison: value",
+      "value": 73.6,
+      "displayValue": "73.6%",
+      "date": "2025",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "compare.society.internet_users"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "society.owid.internet_share",
+      "title": "Individuals using the internet",
+      "sourceId": "owid",
+      "sourceIndicatorId": "share-of-individuals-using-the-internet",
+      "unit": "% of population",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 32,
+      "dimensions": [
+        "Entity",
+        "Code",
+        "Year",
+        "Share of the population using the Internet"
+      ],
+      "latestRows": [
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2025",
+          "Share of the population using the Internet": "70"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2022",
+          "Share of the population using the Internet": "55.9"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2020",
+          "Share of the population using the Internet": "43.4054"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2019",
+          "Share of the population using the Internet": "29.5235"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2018",
+          "Share of the population using the Internet": "20.0813"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2017",
+          "Share of the population using the Internet": "18.2"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2016",
+          "Share of the population using the Internet": "16.5"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2015",
+          "Share of the population using the Internet": "14.9"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2014",
+          "Share of the population using the Internet": "13.5"
+        },
+        {
+          "Entity": "India",
+          "Code": "IND",
+          "Year": "2013",
+          "Share of the population using the Internet": "12.3"
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.electricity_access",
+      "title": "Access to electricity",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "EG.ELC.ACCS.ZS",
+      "unit": "% of population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1993",
+        "value": 50.9
+      },
+      "latest": {
+        "date": "2023",
+        "value": 99.5
+      }
+    },
+    {
+      "indicatorId": "society.mobile_subscriptions_p100",
+      "title": "Mobile cellular subscriptions",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "IT.CEL.SETS.P2",
+      "unit": "per 100 people",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 0
+      },
+      "latest": {
+        "date": "2024",
+        "value": 79.3526921826412
+      }
+    },
+    {
+      "indicatorId": "society.broadband_subscriptions_p100",
+      "title": "Fixed broadband subscriptions",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "IT.NET.BBND.P2",
+      "unit": "per 100 people",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "2001",
+        "value": 0.00463865535771768
+      },
+      "latest": {
+        "date": "2024",
+        "value": 3.15046250037677
+      }
+    },
+    {
+      "indicatorId": "society.fixed_telephone_p100",
+      "title": "Fixed telephone subscriptions",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "IT.MLT.MAIN.P2",
+      "unit": "per 100 people",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1960",
+        "value": 0.074536515
+      },
+      "latest": {
+        "date": "2024",
+        "value": 2.70417879573832
+      }
+    },
+    {
+      "indicatorId": "society.idh.data_per_user",
+      "title": "Mobile data used per subscriber per month",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "IFTLDATPSB11Q",
+      "unit": "GB",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 48,
+      "earliest": {
+        "date": "2013-12-31",
+        "value": 0.0507
+      },
+      "latest": {
+        "date": "2025-09-30",
+        "value": 23.846380848343
+      }
+    },
+    {
+      "indicatorId": "society.idh.data_cost",
+      "title": "Cost of mobile data",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "IFTLMDCGSG11Q",
+      "unit": "rupees per GB",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 38,
+      "earliest": {
+        "date": "2016-06-30",
+        "value": 200
+      },
+      "latest": {
+        "date": "2025-09-30",
+        "value": 8.27
+      }
+    },
+    {
+      "indicatorId": "society.idh.upi_volume",
+      "title": "UPI transactions",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "PYVOUPITOT11M",
+      "unit": "transactions",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 73,
+      "earliest": {
+        "date": "2020-04-30",
+        "value": 999570000
+      },
+      "latest": {
+        "date": "2026-04-30",
+        "value": 22346800000
+      }
+    },
+    {
+      "indicatorId": "society.idh.internet_subs_wireless",
+      "title": "Internet subscribers, wireless",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "IFTLINTWLS11Q",
+      "unit": "subscribers",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 51,
+      "earliest": {
+        "date": "2013-03-31",
+        "value": 143200000
+      },
+      "latest": {
+        "date": "2025-09-30",
+        "value": 973390000
+      }
+    },
+    {
+      "indicatorId": "society.idh.internet_subs_fixed",
+      "title": "Internet subscribers, fixed line",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "IFTLINTFLS11Q",
+      "unit": "subscribers",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 51,
+      "earliest": {
+        "date": "2013-03-31",
+        "value": 21610000
+      },
+      "latest": {
+        "date": "2025-09-30",
+        "value": 44420000
+      }
+    },
+    {
+      "indicatorId": "society.trai.telecom_subscribers_total",
+      "title": "Telecom subscribers, total",
+      "sourceId": "trai",
+      "sourceIndicatorId": "telecom_subscribers_total",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 1207.08
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 1337.54
+      }
+    },
+    {
+      "indicatorId": "society.trai.telecom_subscribers_wireless",
+      "title": "Telecom subscribers, wireless",
+      "sourceId": "trai",
+      "sourceIndicatorId": "telecom_subscribers_wireless",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 1168.42
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 1288.96
+      }
+    },
+    {
+      "indicatorId": "society.trai.telecom_subscribers_wireline",
+      "title": "Telecom subscribers, wireline",
+      "sourceId": "trai",
+      "sourceIndicatorId": "telecom_subscribers_wireline",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 38.66
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 48.58
+      }
+    },
+    {
+      "indicatorId": "society.trai.telecom_subscribers_rural_total",
+      "title": "Telecom subscribers, rural",
+      "sourceId": "trai",
+      "sourceIndicatorId": "telecom_subscribers_rural_total",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 537.39
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 554.41
+      }
+    },
+    {
+      "indicatorId": "society.trai.telecom_subscribers_urban_total",
+      "title": "Telecom subscribers, urban",
+      "sourceId": "trai",
+      "sourceIndicatorId": "telecom_subscribers_urban_total",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 669.69
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 783.12
+      }
+    },
+    {
+      "indicatorId": "society.trai.broadband_subscribers_total",
+      "title": "Broadband subscribers, total",
+      "sourceId": "trai",
+      "sourceIndicatorId": "broadband_subscribers_total",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 974.87
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 1073.44
+      }
+    },
+    {
+      "indicatorId": "society.trai.teledensity_total",
+      "title": "Tele-density, total",
+      "sourceId": "trai",
+      "sourceIndicatorId": "teledensity_total",
+      "unit": "%",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 85.36
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 84.76
+      }
+    },
+    {
+      "indicatorId": "society.trai.active_wireless_mobile_subscribers_peak_vlr",
+      "title": "Active wireless mobile subscribers on peak VLR date",
+      "sourceId": "trai",
+      "sourceIndicatorId": "active_wireless_mobile_subscribers_peak_vlr",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 1080.06
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 1193.57
+      }
+    },
+    {
+      "indicatorId": "society.trai.mobile_number_portability_requests",
+      "title": "Mobile Number Portability requests",
+      "sourceId": "trai",
+      "sourceIndicatorId": "mobile_number_portability_requests",
+      "unit": "million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2025-05",
+        "value": 14.03
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 14.74
+      }
+    },
+    {
+      "indicatorId": "society.internet_users_female",
+      "title": "Internet use, women",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "IT.NET.USER.FE.ZS",
+      "unit": "% of female population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "2018",
+        "value": 14.9
+      },
+      "latest": {
+        "date": "2025",
+        "value": 63.1
+      }
+    },
+    {
+      "indicatorId": "society.internet_users_male",
+      "title": "Internet use, men",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "IT.NET.USER.MA.ZS",
+      "unit": "% of male population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "2018",
+        "value": 25
+      },
+      "latest": {
+        "date": "2025",
+        "value": 76.7
+      }
+    },
+    {
+      "indicatorId": "compare.society.internet_users",
+      "title": "Internet use comparison",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "IT.NET.USER.ZS",
+      "unit": "% of population",
+      "geography": {
+        "type": "country-group",
+        "id": "IND-CHN-USA-WLD",
+        "name": "India, China, United States, and world"
+      },
+      "rows": 264,
+      "dimensions": [
+        "date",
+        "countryCode",
+        "countryName",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "date": "2025",
+          "value": 70,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2025",
+          "value": 91.6,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2025",
+          "value": null,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2025",
+          "value": 73.6,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2024",
+          "value": 64.9434967,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2024",
+          "value": 92,
+          "countryCode": "CHN",
+          "countryName": "China"
+        },
+        {
+          "date": "2024",
+          "value": 94.69380188,
+          "countryCode": "USA",
+          "countryName": "United States"
+        },
+        {
+          "date": "2024",
+          "value": 71.2,
+          "countryCode": "WLD",
+          "countryName": "World"
+        },
+        {
+          "date": "2023",
+          "value": 60.25230026,
+          "countryCode": "IND",
+          "countryName": "India"
+        },
+        {
+          "date": "2023",
+          "value": 90.6,
+          "countryCode": "CHN",
+          "countryName": "China"
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

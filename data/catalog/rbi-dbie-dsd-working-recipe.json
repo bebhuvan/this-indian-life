@@ -1,0 +1,37 @@
+{
+  "note": "Captured from live DBIE SDMX Data Query (decrypted with adapter AES key). This is the WORKING request chain that returns non-zero rows. The previous probe returned 0 rows because it sent NO FILTER|IN rules, and had advanceOptions=[], unitMultiplier=1, elementLableDetails=[].",
+  "capturedAt": "2026-06-02",
+  "dsdExample": "LNA_SCB_SR_OCC_BSR1_A_RN (elementId 3046, Stock, Annual - Financial Year, table fact_ebr_lna_scb_sr_occ_bsr1_a_rn)",
+  "chain": ["dbie_getElementDetailsActionEnhanced", "login_CIMSaudit", "dbie_insertPolicyActionEnhanced", "dbie_createDDLActionEnhanced", "dbie_getImpalaDQActionEnhanced"],
+  "policy": {
+    "endpoint": "dbie_insertPolicyActionEnhanced",
+    "shape": "{body:{policyData:{policyName, username:'test_user', polFreq:'YEARLY', department:'test_dept', rules:[...encryptObjectKeysAndValues], elementDetails:{[tableName]:{Element_Frequency, Element_Code, Element_Flow_Type}}}}}",
+    "rules": {
+      "groupBy": "one AGGREGATION/GROUP_BY per dimension column (measure_type_description, occp_gp_item_description, state_code_description, unit_measure_description) with db/table '<ALL_FACT>', elementName=<element label>, dsdList=<dsdCode>",
+      "filterIN": "one or more FILTER/IN per dimension column, attribute_value = comma-joined quoted MEMBER CODES e.g. measure \"'AMT_OUTSD','CRLIM'\", unit \"'INR'\", state \"'ALL_INDIA','N_A'\" + \"'ALLS','UNION_TERT'\" + \"'CR','ER','NHB','NER','NR','SR','WR'\" + (more state rules truncated), occupation \"'T'\" and \"'1'\" (UI only selected top level; node should include ALL occupation codes). db/table '<ALL_FACT>', elementName=<label>, dsdList=<dsdCode>",
+      "sum": "AGGREGATION/SUM on OBS_VALUE, database_name 'EBR_PUBLIC_ELEMENTS', table_name = fact table, elementName 'COMMON', dsdList=<dsdCode>",
+      "timeBarring": "TIME_BARRING FROM_DATE and TO_DATE on TIME_PERIOD_SK, db/table '<ALL_FACT>', attribute_value quoted 'YYYY-MM-DD' e.g. '2021-04-01' / '2024-03-31', elementName 'COMMON', dsdList 'COMMON'"
+    }
+  },
+  "ddl": {
+    "endpoint": "dbie_createDDLActionEnhanced",
+    "body": "{body:{selection:'1', policyName, scrapId:'4', dsdList:'<dsdCode-STRING-not-array>'}}"
+  },
+  "impala": {
+    "endpoint": "dbie_getImpalaDQActionEnhanced",
+    "decryptedDimData": {
+      "dsdCode": "<dsdCode lowercased>",
+      "advanceOptions": "(empty string)",
+      "unitMultiplier": "actuals",
+      "policyName": "<same encrypted policyName ref>",
+      "isFinancialYear": "false",
+      "fromDate": "DD-MM-YYYY e.g. 01-04-2021",
+      "toDate": "DD-MM-YYYY e.g. 31-03-2024",
+      "freqSelected": "YEARLY",
+      "entitySelection": "[{op_level5:''},{op_level4:''},{op_level3:''},{op_level2:''},{op_level1:''},{entity_name:''}] (each key+value encrypted; values empty)",
+      "elementLableDetails": "[{dsdCode:'LNA_SCB_SR_OCC_BSR1_A_RN', elementName:'Loans and Advances of SCBs State and Occupation wise BSR1 Annual', elementId:'3046', elementType:'Stock', elementFrequency:'Annual - Financial Year'}] (keys+values encrypted)",
+      "isAlphaNumeric": false
+    }
+  },
+  "vsProbeDiff": "Probe (0 rows) had: no FILTER rules, advanceOptions=[], unitMultiplier=1, elementLableDetails=[], entitySelection=[], dsdList as array in DDL. Fix all of these."
+}

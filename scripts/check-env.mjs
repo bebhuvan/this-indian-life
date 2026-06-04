@@ -7,6 +7,8 @@ const keys = [
   ["INDIA_DATA_HUB_API_KEY", "India Data Hub feeds"],
   ["FRED_API_KEY", "FRED economic data"],
   ["EMBER_API_KEY", "Ember electricity data"],
+  ["EIA_API_KEY", "EIA international energy data"],
+  ["UN_COMTRADE_API_KEY", "UN Comtrade trade data"],
   ["WAQI_API_KEY", "WAQI/AQICN air quality"],
   ["OPENAQ_API_KEY", "OpenAQ air quality"],
   ["CDSAPI_KEY", "Copernicus CDS"],

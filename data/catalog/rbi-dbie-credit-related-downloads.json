@@ -1,0 +1,582 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-06-02T07:01:45.500Z",
+  "sourceId": "rbi-dbie",
+  "purpose": "Evidence-ready download bundle for currently accessible RBI DBIE credit and credit-related data",
+  "evidenceStatus": "evidence_ready_for_macro_workbook_rows_only",
+  "artifact": "data/series/rbi-dbie.IN.banking.rbi.credit_related_macro.long.json",
+  "snapshot": "data/snapshots/rbi-dbie/credit-related-macro-extraction.5143d401401d.json",
+  "rawWorkbookSources": [
+    {
+      "key": "macro50",
+      "indicatorId": "macro.rbi.dbie_50_indicators",
+      "sourceIndicatorId": "download/dbie_FileDownloadHDFSAction:MacroeconomicIndicators",
+      "artifact": "data/series/rbi-dbie.IN.macro_50_indicators.long.json",
+      "parsedSnapshot": "data/snapshots/rbi-dbie/MacroeconomicIndicators.parsed-summary.8ba75e1174d1.json",
+      "workbookSnapshot": "data/snapshots/rbi-dbie/MacroeconomicIndicators.abea7d7e1ee3.xlsx",
+      "rawHash": "abea7d7e1ee34c7c4827a2ea7bfcd07bdf5d88757bf8fa61d9c6cc49ba8c29ff",
+      "rows": 10736,
+      "fetchedAt": "2026-06-02T07:01:40.449Z",
+      "sourceUrl": "https://data.rbi.org.in/DBIE/#/dbie/home"
+    },
+    {
+      "key": "macroOther",
+      "indicatorId": "macro.rbi.dbie_other_timeseries",
+      "sourceIndicatorId": "download/dbie_FileDownloadHDFSAction:OtherMacroeconomicTimeseriesData",
+      "artifact": "data/series/rbi-dbie.IN.macro_other_timeseries.long.json",
+      "parsedSnapshot": "data/snapshots/rbi-dbie/OtherMacroeconomicTimeseriesData.parsed-summary.33ae18789919.json",
+      "workbookSnapshot": "data/snapshots/rbi-dbie/OtherMacroeconomicTimeseriesData.4a9c6c24e11b.xlsx",
+      "rawHash": "4a9c6c24e11b5a406ed9c663e4961d0917c0bc7ae3515c5b56e06e888d96389b",
+      "rows": 35118,
+      "fetchedAt": "2026-06-02T07:01:40.449Z",
+      "sourceUrl": "https://data.rbi.org.in/DBIE/#/dbie/home"
+    }
+  ],
+  "rows": 27600,
+  "seriesCount": 48,
+  "series": [
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.bank_credit_crore",
+      "indicatorLabel": "Bank Credit (₹ Crore)",
+      "unit": "₹ Crore",
+      "rows": 224,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-15"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.cash_deposit_ratio",
+      "indicatorLabel": "Cash Deposit Ratio (%)",
+      "unit": "Percent",
+      "rows": 203,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2025-08-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.cash_deposit_ratio_including_merger",
+      "indicatorLabel": "Cash-Deposit Ratio(Including merger) (%)",
+      "unit": "Percent",
+      "rows": 210,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2025-11-28"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.credit_deposit_ratio",
+      "indicatorLabel": "Credit Deposit Ratio (%)",
+      "unit": "Percent",
+      "rows": 203,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2025-08-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.credit_deposit_ratio_including_merger",
+      "indicatorLabel": "Credit-Deposit Ratio(Including merger) (%)",
+      "unit": "Percent",
+      "rows": 210,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2025-11-28"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.food_credit_crore",
+      "indicatorLabel": "Food Credit (₹ Crore)",
+      "unit": "₹ Crore",
+      "rows": 224,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-15"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.m3_crore",
+      "indicatorLabel": "M3 (₹ Crore)",
+      "unit": "₹ Crore",
+      "rows": 225,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-15"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Fortnightly",
+      "indicatorKey": "rbi_macro_50_indicators.fortnightly.non_food_credit_crore",
+      "indicatorLabel": "Non Food Credit (₹ Crore)",
+      "unit": "₹ Crore",
+      "rows": 224,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-15"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_50_indicators.monthly.commercial_paper_amount_outstanding_crore",
+      "indicatorLabel": "Commercial Paper (Amount Outstanding) (₹ Crore)",
+      "unit": "₹ Crore",
+      "rows": 103,
+      "firstPeriod": "2017-10",
+      "latestPeriod": "2026-04"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_50_indicators.quarterly.india_s_external_debt_gross_total_us_million",
+      "indicatorLabel": "India's External Debt - Gross Total (US $ Million)",
+      "unit": "US $ Million",
+      "rows": 20,
+      "firstPeriod": "2021-03-31",
+      "latestPeriod": "2025-12-31"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.10_year_g_sec_yield_fbil",
+      "indicatorLabel": "10-Year G-Sec Yield (FBIL) (%)",
+      "unit": "Percent",
+      "rows": 450,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.182_day_treasury_bill_primary_yield",
+      "indicatorLabel": "182-Day Treasury Bill (Primary) Yield (%)",
+      "unit": "Percent",
+      "rows": 444,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.364_day_treasury_bill_primary_yield",
+      "indicatorLabel": "364-Day Treasury Bill (Primary) Yield (%)",
+      "unit": "Percent",
+      "rows": 445,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.91_day_treasury_bill_primary_yield",
+      "indicatorLabel": "91-Day Treasury Bill (Primary) Yield (%)",
+      "unit": "Percent",
+      "rows": 443,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.bank_rate",
+      "indicatorLabel": "Bank Rate (%)",
+      "unit": "Percent",
+      "rows": 450,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.cash_reserve_ratio",
+      "indicatorLabel": "Cash Reserve Ratio (%)",
+      "unit": "Percent",
+      "rows": 450,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.policy_repo_rate",
+      "indicatorLabel": "Policy Repo Rate (%)",
+      "unit": "Percent",
+      "rows": 450,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.reverse_repo_rate",
+      "indicatorLabel": "Reverse Repo Rate (%)",
+      "unit": "Percent",
+      "rows": 450,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.standing_deposit_facility_sdf_rate",
+      "indicatorLabel": "Standing Deposit Facility (SDF) Rate (%)",
+      "unit": "Percent",
+      "rows": 216,
+      "firstPeriod": "2022-04-08",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macro50",
+      "datasetKey": "rbi_macro_50_indicators",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_50_indicators.weekly.statutory_liquidity_ratio",
+      "indicatorLabel": "Statutory Liquidity Ratio (%)",
+      "unit": "Percent",
+      "rows": 450,
+      "firstPeriod": "2017-10-13",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Daily",
+      "indicatorKey": "rbi_macro_other_timeseries.daily.daily_call_money_rate_low",
+      "indicatorLabel": "DAILY CALL MONEY RATE - LOW",
+      "unit": "Per cent",
+      "rows": 3048,
+      "firstPeriod": "2015-05-02",
+      "latestPeriod": "2026-05-27"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Daily",
+      "indicatorKey": "rbi_macro_other_timeseries.daily.daily_call_money_rate_high",
+      "indicatorLabel": "DAILY CALL MONEY RATE -HIGH",
+      "unit": "Per cent",
+      "rows": 3048,
+      "firstPeriod": "2015-05-02",
+      "latestPeriod": "2026-05-27"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Daily",
+      "indicatorKey": "rbi_macro_other_timeseries.daily.repo_rate_overnight",
+      "indicatorLabel": "REPO RATE (OVERNIGHT)",
+      "unit": "Per cent",
+      "rows": 3463,
+      "firstPeriod": "2015-05-01",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Daily",
+      "indicatorKey": "rbi_macro_other_timeseries.daily.reverse_repo_rate_overnight",
+      "indicatorLabel": "REVERSE REPO RATE (OVERNIGHT)",
+      "unit": "Per cent",
+      "rows": 3463,
+      "firstPeriod": "2015-05-01",
+      "latestPeriod": "2026-05-22"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.credit_to_the_commercial_sector_by_the_banking_system",
+      "indicatorLabel": "CREDIT TO THE COMMERCIAL SECTOR BY THE BANKING SYSTEM",
+      "unit": "₹ Crore",
+      "rows": 416,
+      "firstPeriod": "1961-03",
+      "latestPeriod": "2026-05"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.currency_with_the_public",
+      "indicatorLabel": "CURRENCY WITH THE PUBLIC",
+      "unit": "₹ Crore",
+      "rows": 903,
+      "firstPeriod": "1951-03",
+      "latestPeriod": "2026-05"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.demand_deposits_with_the_banks",
+      "indicatorLabel": "DEMAND DEPOSITS WITH THE BANKS",
+      "unit": "₹ Crore",
+      "rows": 903,
+      "firstPeriod": "1951-03",
+      "latestPeriod": "2026-05"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.housing_including_priority_sector_housing_deployment_of_bank_credit_by_major_sectors",
+      "indicatorLabel": "Housing (Including Priority Sector Housing) - DEPLOYMENT OF BANK CREDIT BY MAJOR SECTORS",
+      "unit": "₹ Crore",
+      "rows": 228,
+      "firstPeriod": "2007-04",
+      "latestPeriod": "2026-03"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.m1",
+      "indicatorLabel": "M1",
+      "unit": "₹ Crore",
+      "rows": 901,
+      "firstPeriod": "1951-03",
+      "latestPeriod": "2026-03"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.m3",
+      "indicatorLabel": "M3",
+      "unit": "₹ Crore",
+      "rows": 903,
+      "firstPeriod": "1951-03",
+      "latestPeriod": "2026-05"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.other_deposits_with_reserve_bank",
+      "indicatorLabel": "OTHER DEPOSITS WITH RESERVE BANK",
+      "unit": "₹ Crore",
+      "rows": 903,
+      "firstPeriod": "1951-03",
+      "latestPeriod": "2026-05"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.personal_loans_deployment_of_bank_credit_by_major_sectors",
+      "indicatorLabel": "Personal Loans - DEPLOYMENT OF BANK CREDIT BY MAJOR SECTORS",
+      "unit": "₹ Crore",
+      "rows": 228,
+      "firstPeriod": "2007-04",
+      "latestPeriod": "2026-03"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.rbi_balance_sheet_loans_banks",
+      "indicatorLabel": "RBI BALANCE SHEET-LOANS-BANKS",
+      "unit": "₹ Crore",
+      "rows": 253,
+      "firstPeriod": "2004-07",
+      "latestPeriod": "2026-04"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.rbi_balance_sheet_loans_governments",
+      "indicatorLabel": "RBI BALANCE SHEET-LOANS-GOVERNMENTS",
+      "unit": "₹ Crore",
+      "rows": 244,
+      "firstPeriod": "2004-07",
+      "latestPeriod": "2026-04"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.rbi_balance_sheet_loans_others",
+      "indicatorLabel": "RBI BALANCE SHEET-LOANS-OTHERS",
+      "unit": "₹ Crore",
+      "rows": 262,
+      "firstPeriod": "2004-07",
+      "latestPeriod": "2026-04"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.rbi_balance_sheet_loans_total",
+      "indicatorLabel": "RBI BALANCE SHEET-LOANS-TOTAL",
+      "unit": "₹ Crore",
+      "rows": 262,
+      "firstPeriod": "2004-07",
+      "latestPeriod": "2026-04"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Monthly",
+      "indicatorKey": "rbi_macro_other_timeseries.monthly.sum_of_credit_to_the_government_and_credit_to_the_commercial_sector_by_the_banking_system",
+      "indicatorLabel": "SUM OF CREDIT TO THE GOVERNMENT & CREDIT TO THE COMMERCIAL SECTOR BY THE BANKING SYSTEM",
+      "unit": "₹ Crore",
+      "rows": 324,
+      "firstPeriod": "1999-04",
+      "latestPeriod": "2026-05"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_current_account_credit_inr",
+      "indicatorLabel": "BoP - CURRENT ACCOUNT CREDIT INR",
+      "unit": "₹ Crore",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_current_account_credit_usd",
+      "indicatorLabel": "BoP - CURRENT ACCOUNT CREDIT USD",
+      "unit": "$ Millions",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_merchandise_credit_inr",
+      "indicatorLabel": "BoP - MERCHANDISE - CREDIT INR",
+      "unit": "₹ Crore",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_other_investment_loans_banking_capital_rupee_debt_service_other_capital_net_inr",
+      "indicatorLabel": "BoP - OTHER INVESTMENT (LOANS+BANKING CAPITAL+RUPEE DEBT SERVICE+OTHER CAPITAL) - NET INR",
+      "unit": "₹ Crore",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_other_investment_loans_banking_capital_rupee_debt_service_other_capital_net_usd",
+      "indicatorLabel": "BoP - OTHER INVESTMENT (LOANS+BANKING CAPITAL+RUPEE DEBT SERVICE+OTHER CAPITAL) - NET USD",
+      "unit": "$ Millions",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_transfer_official_credit_inr",
+      "indicatorLabel": "BoP - TRANSFER OFFICIAL,CREDIT INR",
+      "unit": "₹ Crore",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_transfer_official_credit_usd",
+      "indicatorLabel": "BoP - TRANSFER OFFICIAL,CREDIT USD",
+      "unit": "$ Millions",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_transfer_private_credit_inr",
+      "indicatorLabel": "BoP - TRANSFER PRIVATE,CREDIT INR",
+      "unit": "₹ Crore",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Quarterly",
+      "indicatorKey": "rbi_macro_other_timeseries.quarterly.bop_transfer_private_credit_usd",
+      "indicatorLabel": "BoP - TRANSFER PRIVATE,CREDIT USD",
+      "unit": "$ Millions",
+      "rows": 64,
+      "firstPeriod": "2010-Q1",
+      "latestPeriod": "2025-Q4"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_other_timeseries.weekly.call_money_rate_borrowings_high",
+      "indicatorLabel": "CALL MONEY RATE (BORROWINGS) - HIGH",
+      "unit": "Per cent",
+      "rows": 589,
+      "firstPeriod": "2015-01-09",
+      "latestPeriod": "2026-05-01"
+    },
+    {
+      "sourceParentKey": "macroOther",
+      "datasetKey": "rbi_macro_other_timeseries",
+      "frequency": "Weekly",
+      "indicatorKey": "rbi_macro_other_timeseries.weekly.call_money_rate_borrowings_low",
+      "indicatorLabel": "CALL MONEY RATE (BORROWINGS) - LOW",
+      "unit": "Per cent",
+      "rows": 589,
+      "firstPeriod": "2015-01-09",
+      "latestPeriod": "2026-05-01"
+    }
+  ],
+  "excludedSources": {
+    "businessObjectsReports": {
+      "evidenceStatus": "excluded_discovery_only",
+      "reason": "BO/OpenDocument report links currently do not expose a stable raw XLS/CSV/PDF/JSON endpoint in this repo."
+    },
+    "dataQueryBsrDsd": {
+      "evidenceStatus": "excluded_zero_rows",
+      "reason": "LNA_SCB_SR_OCC_BSR1_A_RN policy creation succeeds, but the current Impala payload returns zero rows."
+    }
+  },
+  "nextActions": [
+    "Run npm run ingest:rbi-dbie-macro-timeseries before this extractor when fresh workbook bytes are needed.",
+    "Run npm run derive:rbi-dbie-macro-series after workbook ingest to refresh hand-picked chart series.",
+    "Do not promote BO/BSR split tables until a stable raw download or non-empty Data Query payload is captured and validated."
+  ]
+}

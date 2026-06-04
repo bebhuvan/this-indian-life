@@ -3,16 +3,159 @@
   "questionId": "q.econ.per_person",
   "question": "How rich is the average Indian?",
   "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
   "requiredIndicatorIds": [
+    "econ.idh.per_capita_nominal_gdp",
     "econ.gdp.per_capita_current_usd"
   ],
   "availableIndicatorIds": [
+    "econ.idh.per_capita_nominal_gdp",
     "econ.gdp.per_capita_current_usd"
   ],
-  "lockedNumbers": [
+  "themeIndicatorIds": [
+    "econ.idh.per_capita_nominal_gdp",
+    "econ.gdp.per_capita_current_usd",
+    "econ.idh.nominal_gdp_annual"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.econ.idh.per_capita_nominal_gdp",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "title": "Per capita nominal GDP",
+      "sourceId": "indiadatahub",
+      "unit": "rupees per person",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.econ.gdp.per_capita_current_usd",
+      "indicatorId": "econ.gdp.per_capita_current_usd",
+      "title": "GDP per capita, current US dollars",
+      "sourceId": "worldbank",
+      "unit": "current US$ per person",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.econ.idh.nominal_gdp_annual",
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "title": "Nominal GDP, annual",
+      "sourceId": "indiadatahub",
+      "unit": "rupees",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "Per capita nominal GDP, latest",
+      "value": 251393,
+      "displayValue": "₹2.5 lakh",
+      "date": "2026-03-31",
+      "unit": "rupees per person",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Per capita nominal GDP, earliest",
+      "value": 284.725066681216,
+      "displayValue": "₹285",
+      "date": "1951-03-31",
+      "unit": "rupees per person",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
     {
       "label": "GDP per capita, current US dollars, latest",
       "value": 2694.73780859961,
+      "displayValue": "2,694.74",
+      "date": "2024",
+      "unit": "current US$ per person",
+      "indicatorId": "econ.gdp.per_capita_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "GDP per capita, current US dollars, earliest",
+      "value": 84.9328084793106,
+      "displayValue": "84.93",
+      "date": "1960",
+      "unit": "current US$ per person",
+      "indicatorId": "econ.gdp.per_capita_current_usd",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GDP, annual, latest",
+      "value": 357138860000000,
+      "displayValue": "₹357.1 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Nominal GDP, annual, earliest",
+      "value": 102216298938.557,
+      "displayValue": "₹10,221.6 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Per capita nominal GDP, latest",
+      "value": 251393,
+      "displayValue": "₹2.5 lakh",
+      "date": "2026-03-31",
+      "unit": "rupees per person",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp"
+    },
+    {
+      "label": "Per capita nominal GDP, earliest",
+      "value": 284.725066681216,
+      "displayValue": "₹285",
+      "date": "1951-03-31",
+      "unit": "rupees per person",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.per_capita_nominal_gdp"
+    },
+    {
+      "label": "GDP per capita, current US dollars, latest",
+      "value": 2694.73780859961,
+      "displayValue": "2,694.74",
       "date": "2024",
       "unit": "current US$ per person",
       "sourceId": "worldbank",
@@ -21,13 +164,54 @@
     {
       "label": "GDP per capita, current US dollars, earliest",
       "value": 84.9328084793106,
+      "displayValue": "84.93",
       "date": "1960",
       "unit": "current US$ per person",
       "sourceId": "worldbank",
       "indicatorId": "econ.gdp.per_capita_current_usd"
+    },
+    {
+      "label": "Nominal GDP, annual, latest",
+      "value": 357138860000000,
+      "displayValue": "₹357.1 lakh crore",
+      "date": "2026-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.nominal_gdp_annual"
+    },
+    {
+      "label": "Nominal GDP, annual, earliest",
+      "value": 102216298938.557,
+      "displayValue": "₹10,221.6 crore",
+      "date": "1951-03-31",
+      "unit": "rupees",
+      "sourceId": "indiadatahub",
+      "indicatorId": "econ.idh.nominal_gdp_annual"
     }
   ],
   "sourceSummaries": [
+    {
+      "indicatorId": "econ.idh.per_capita_nominal_gdp",
+      "title": "Per capita nominal GDP",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNPCGDP12A",
+      "unit": "rupees per person",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 284.725066681216
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 251393
+      }
+    },
     {
       "indicatorId": "econ.gdp.per_capita_current_usd",
       "title": "GDP per capita, current US dollars",
@@ -49,10 +233,40 @@
         "date": "2024",
         "value": 2694.73780859961
       }
+    },
+    {
+      "indicatorId": "econ.idh.nominal_gdp_annual",
+      "title": "Nominal GDP, annual",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "NAGDNOMGDP12A",
+      "unit": "rupees",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 102216298938.557
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 357138860000000
+      }
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],

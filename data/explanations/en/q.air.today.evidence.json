@@ -3,16 +3,262 @@
   "questionId": "q.air.today",
   "question": "How bad is India's air today?",
   "priority": "core",
+  "theme": {
+    "id": "climate",
+    "label": "Climate, emissions, and air",
+    "readerQuestions": [
+      "Is this about total scale or per-person exposure?",
+      "Is the chart annual, cumulative, or a latest snapshot?",
+      "What comparison would stop the number from being misread?",
+      "What is outside the measure?"
+    ],
+    "glossaryTerms": [
+      "CO2",
+      "per capita emissions",
+      "cumulative emissions",
+      "AQI",
+      "PM2.5",
+      "ERA5",
+      "daily maximum temperature",
+      "precipitation"
+    ]
+  },
   "requiredIndicatorIds": [
-    "climate.waqi.delhi"
+    "climate.waqi.delhi",
+    "climate.waqi.mumbai",
+    "climate.waqi.kolkata",
+    "climate.waqi.chennai",
+    "climate.waqi.bengaluru"
   ],
   "availableIndicatorIds": [
-    "climate.waqi.delhi"
+    "climate.waqi.delhi",
+    "climate.waqi.mumbai",
+    "climate.waqi.kolkata",
+    "climate.waqi.chennai",
+    "climate.waqi.bengaluru"
+  ],
+  "themeIndicatorIds": [
+    "climate.waqi.delhi",
+    "climate.waqi.mumbai",
+    "climate.waqi.kolkata",
+    "climate.waqi.chennai",
+    "climate.waqi.bengaluru"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.climate.waqi.delhi",
+      "indicatorId": "climate.waqi.delhi",
+      "title": "Delhi air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "primary",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.climate.waqi.mumbai",
+      "indicatorId": "climate.waqi.mumbai",
+      "title": "Mumbai air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "primary",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.climate.waqi.kolkata",
+      "indicatorId": "climate.waqi.kolkata",
+      "title": "Kolkata air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "primary",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.climate.waqi.chennai",
+      "indicatorId": "climate.waqi.chennai",
+      "title": "Chennai air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "primary",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.climate.waqi.bengaluru",
+      "indicatorId": "climate.waqi.bengaluru",
+      "title": "Bengaluru air quality index",
+      "sourceId": "waqi",
+      "unit": "AQI",
+      "role": "primary",
+      "recommendedVisualization": "compact pollutant bars",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [],
+  "selectedDataPoints": [
+    {
+      "label": "Delhi air quality index: aqi",
+      "value": 95,
+      "displayValue": "95",
+      "date": {
+        "s": "2026-06-01 09:00:00",
+        "tz": "+05:30",
+        "v": 1780304400,
+        "iso": "2026-06-01T09:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.delhi",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Delhi air quality index: aqi",
+      "value": 95,
+      "displayValue": "95",
+      "date": {
+        "s": "2026-06-01 09:00:00",
+        "tz": "+05:30",
+        "v": 1780304400,
+        "iso": "2026-06-01T09:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.delhi",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mumbai air quality index: aqi",
+      "value": 156,
+      "displayValue": "156",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.mumbai",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Mumbai air quality index: aqi",
+      "value": 156,
+      "displayValue": "156",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.mumbai",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Kolkata air quality index: aqi",
+      "value": 65,
+      "displayValue": "65",
+      "date": {
+        "s": "2026-05-30 12:00:00",
+        "tz": "+05:30",
+        "v": 1780142400,
+        "iso": "2026-05-30T12:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.kolkata",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Kolkata air quality index: aqi",
+      "value": 65,
+      "displayValue": "65",
+      "date": {
+        "s": "2026-05-30 12:00:00",
+        "tz": "+05:30",
+        "v": 1780142400,
+        "iso": "2026-05-30T12:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.kolkata",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Chennai air quality index: aqi",
+      "value": 73,
+      "displayValue": "73",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.chennai",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Chennai air quality index: aqi",
+      "value": 73,
+      "displayValue": "73",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.chennai",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Bengaluru air quality index: aqi",
+      "value": 58,
+      "displayValue": "58",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.bengaluru",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Bengaluru air quality index: aqi",
+      "value": 58,
+      "displayValue": "58",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "indicatorId": "climate.waqi.bengaluru",
+      "sourceId": "waqi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
   ],
   "lockedNumbers": [
     {
       "label": "Delhi air quality index: aqi",
       "value": 95,
+      "displayValue": "95",
       "date": {
         "s": "2026-06-01 09:00:00",
         "tz": "+05:30",
@@ -26,6 +272,7 @@
     {
       "label": "Delhi air quality index: aqi",
       "value": 95,
+      "displayValue": "95",
       "date": {
         "s": "2026-06-01 09:00:00",
         "tz": "+05:30",
@@ -35,6 +282,118 @@
       "unit": "AQI",
       "sourceId": "waqi",
       "indicatorId": "climate.waqi.delhi"
+    },
+    {
+      "label": "Mumbai air quality index: aqi",
+      "value": 156,
+      "displayValue": "156",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.mumbai"
+    },
+    {
+      "label": "Mumbai air quality index: aqi",
+      "value": 156,
+      "displayValue": "156",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.mumbai"
+    },
+    {
+      "label": "Kolkata air quality index: aqi",
+      "value": 65,
+      "displayValue": "65",
+      "date": {
+        "s": "2026-05-30 12:00:00",
+        "tz": "+05:30",
+        "v": 1780142400,
+        "iso": "2026-05-30T12:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.kolkata"
+    },
+    {
+      "label": "Kolkata air quality index: aqi",
+      "value": 65,
+      "displayValue": "65",
+      "date": {
+        "s": "2026-05-30 12:00:00",
+        "tz": "+05:30",
+        "v": 1780142400,
+        "iso": "2026-05-30T12:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.kolkata"
+    },
+    {
+      "label": "Chennai air quality index: aqi",
+      "value": 73,
+      "displayValue": "73",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.chennai"
+    },
+    {
+      "label": "Chennai air quality index: aqi",
+      "value": 73,
+      "displayValue": "73",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.chennai"
+    },
+    {
+      "label": "Bengaluru air quality index: aqi",
+      "value": 58,
+      "displayValue": "58",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.bengaluru"
+    },
+    {
+      "label": "Bengaluru air quality index: aqi",
+      "value": 58,
+      "displayValue": "58",
+      "date": {
+        "s": "2026-05-30 16:00:00",
+        "tz": "+05:30",
+        "v": 1780156800,
+        "iso": "2026-05-30T16:00:00+05:30"
+      },
+      "unit": "AQI",
+      "sourceId": "waqi",
+      "indicatorId": "climate.waqi.bengaluru"
     }
   ],
   "sourceSummaries": [
@@ -294,10 +653,1055 @@
           "fetchedAt": "2026-06-01T04:27:18.930Z"
         }
       ]
+    },
+    {
+      "indicatorId": "climate.waqi.mumbai",
+      "title": "Mumbai air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "mumbai",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "mumbai",
+        "name": "mumbai"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 156,
+          "idx": 12454,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              19.0863,
+              72.8888
+            ],
+            "name": "Kurla, Mumbai, India",
+            "url": "https://aqicn.org/city/india/mumbai/kurla",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 2.7
+            },
+            "dew": {
+              "v": 25
+            },
+            "h": {
+              "v": 77.72
+            },
+            "no2": {
+              "v": 2.3
+            },
+            "o3": {
+              "v": 11.5
+            },
+            "p": {
+              "v": 1004.7
+            },
+            "pm10": {
+              "v": 88
+            },
+            "pm25": {
+              "v": 156
+            },
+            "so2": {
+              "v": 11.9
+            },
+            "t": {
+              "v": 34
+            },
+            "w": {
+              "v": 42.81
+            },
+            "wg": {
+              "v": 12.8
+            }
+          },
+          "time": {
+            "s": "2026-05-30 16:00:00",
+            "tz": "+05:30",
+            "v": 1780156800,
+            "iso": "2026-05-30T16:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 62,
+                  "day": "2026-05-28",
+                  "max": 65,
+                  "min": 52
+                },
+                {
+                  "avg": 63,
+                  "day": "2026-05-29",
+                  "max": 73,
+                  "min": 58
+                },
+                {
+                  "avg": 54,
+                  "day": "2026-05-30",
+                  "max": 58,
+                  "min": 48
+                },
+                {
+                  "avg": 57,
+                  "day": "2026-05-31",
+                  "max": 73,
+                  "min": 46
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-06-01",
+                  "max": 73,
+                  "min": 65
+                },
+                {
+                  "avg": 78,
+                  "day": "2026-06-02",
+                  "max": 94,
+                  "min": 67
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-06-03",
+                  "max": 112,
+                  "min": 65
+                },
+                {
+                  "avg": 51,
+                  "day": "2026-06-04",
+                  "max": 73,
+                  "min": 46
+                },
+                {
+                  "avg": 48,
+                  "day": "2026-06-05",
+                  "max": 58,
+                  "min": 46
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 109,
+                  "day": "2026-05-28",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 98,
+                  "day": "2026-05-29",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 83,
+                  "day": "2026-05-30",
+                  "max": 108,
+                  "min": 68
+                },
+                {
+                  "avg": 89,
+                  "day": "2026-05-31",
+                  "max": 138,
+                  "min": 68
+                },
+                {
+                  "avg": 105,
+                  "day": "2026-06-01",
+                  "max": 138,
+                  "min": 77
+                },
+                {
+                  "avg": 115,
+                  "day": "2026-06-02",
+                  "max": 157,
+                  "min": 89
+                },
+                {
+                  "avg": 99,
+                  "day": "2026-06-03",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 91,
+                  "day": "2026-06-04",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 94,
+                  "day": "2026-06-05",
+                  "max": 138,
+                  "min": 89
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 2,
+                  "day": "2026-05-28",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-29",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-30",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-02",
+                  "max": 8,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-03",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 0,
+                  "day": "2026-06-04",
+                  "max": 0,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T20:22:38+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.kolkata",
+      "title": "Kolkata air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "kolkata",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "kolkata",
+        "name": "kolkata"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 65,
+          "idx": 12746,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              22.5367507,
+              88.3638022
+            ],
+            "name": "Ballygunge, Kolkata, India",
+            "url": "https://aqicn.org/city/india/kolkata/ballygunge",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 3.1
+            },
+            "dew": {
+              "v": 26
+            },
+            "h": {
+              "v": 47.22
+            },
+            "no2": {
+              "v": 9.6
+            },
+            "o3": {
+              "v": 10.8
+            },
+            "p": {
+              "v": 1006
+            },
+            "pm10": {
+              "v": 48
+            },
+            "pm25": {
+              "v": 65
+            },
+            "so2": {
+              "v": 1.9
+            },
+            "t": {
+              "v": 33
+            },
+            "w": {
+              "v": 0.68
+            },
+            "wg": {
+              "v": 20
+            }
+          },
+          "time": {
+            "s": "2026-05-30 12:00:00",
+            "tz": "+05:30",
+            "v": 1780142400,
+            "iso": "2026-05-30T12:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 58,
+                  "day": "2026-05-28",
+                  "max": 58,
+                  "min": 58
+                },
+                {
+                  "avg": 54,
+                  "day": "2026-05-29",
+                  "max": 58,
+                  "min": 46
+                },
+                {
+                  "avg": 61,
+                  "day": "2026-05-30",
+                  "max": 73,
+                  "min": 46
+                },
+                {
+                  "avg": 68,
+                  "day": "2026-05-31",
+                  "max": 73,
+                  "min": 58
+                },
+                {
+                  "avg": 63,
+                  "day": "2026-06-01",
+                  "max": 73,
+                  "min": 55
+                },
+                {
+                  "avg": 59,
+                  "day": "2026-06-02",
+                  "max": 64,
+                  "min": 53
+                },
+                {
+                  "avg": 64,
+                  "day": "2026-06-03",
+                  "max": 73,
+                  "min": 58
+                },
+                {
+                  "avg": 57,
+                  "day": "2026-06-04",
+                  "max": 65,
+                  "min": 47
+                },
+                {
+                  "avg": 64,
+                  "day": "2026-06-05",
+                  "max": 73,
+                  "min": 51
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 109,
+                  "day": "2026-05-28",
+                  "max": 123,
+                  "min": 95
+                },
+                {
+                  "avg": 121,
+                  "day": "2026-05-29",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 128,
+                  "day": "2026-05-30",
+                  "max": 138,
+                  "min": 106
+                },
+                {
+                  "avg": 141,
+                  "day": "2026-05-31",
+                  "max": 152,
+                  "min": 120
+                },
+                {
+                  "avg": 133,
+                  "day": "2026-06-01",
+                  "max": 138,
+                  "min": 110
+                },
+                {
+                  "avg": 136,
+                  "day": "2026-06-02",
+                  "max": 141,
+                  "min": 110
+                },
+                {
+                  "avg": 146,
+                  "day": "2026-06-03",
+                  "max": 159,
+                  "min": 138
+                },
+                {
+                  "avg": 145,
+                  "day": "2026-06-04",
+                  "max": 159,
+                  "min": 138
+                },
+                {
+                  "avg": 163,
+                  "day": "2026-06-05",
+                  "max": 174,
+                  "min": 138
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 0,
+                  "day": "2026-05-29",
+                  "max": 0,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-30",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 7,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 8,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-02",
+                  "max": 7,
+                  "min": 0
+                },
+                {
+                  "avg": 4,
+                  "day": "2026-06-03",
+                  "max": 7,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T16:23:22+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.chennai",
+      "title": "Chennai air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "chennai",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "chennai",
+        "name": "chennai"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 73,
+          "idx": 13737,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              13.1036,
+              80.2909
+            ],
+            "name": "Royapuram, Chennai, Chennai, India",
+            "url": "https://aqicn.org/city/chennai//royapuram",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 9.7
+            },
+            "dew": {
+              "v": 26
+            },
+            "h": {
+              "v": 66.225
+            },
+            "no2": {
+              "v": 5
+            },
+            "o3": {
+              "v": 12.4
+            },
+            "p": {
+              "v": 731.94
+            },
+            "pm10": {
+              "v": 45
+            },
+            "pm25": {
+              "v": 73
+            },
+            "so2": {
+              "v": 2.4
+            },
+            "t": {
+              "v": 29.505000000000003
+            },
+            "w": {
+              "v": 0.5700000000000001
+            },
+            "wg": {
+              "v": 10.2
+            }
+          },
+          "time": {
+            "s": "2026-05-30 16:00:00",
+            "tz": "+05:30",
+            "v": 1780156800,
+            "iso": "2026-05-30T16:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 49,
+                  "day": "2026-05-28",
+                  "max": 56,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-05-29",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-05-30",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-05-31",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-01",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 48,
+                  "day": "2026-06-02",
+                  "max": 56,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-03",
+                  "max": 46,
+                  "min": 46
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-04",
+                  "max": 46,
+                  "min": 41
+                },
+                {
+                  "avg": 43,
+                  "day": "2026-06-05",
+                  "max": 46,
+                  "min": 28
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 113,
+                  "day": "2026-05-28",
+                  "max": 138,
+                  "min": 72
+                },
+                {
+                  "avg": 101,
+                  "day": "2026-05-29",
+                  "max": 138,
+                  "min": 72
+                },
+                {
+                  "avg": 88,
+                  "day": "2026-05-30",
+                  "max": 89,
+                  "min": 78
+                },
+                {
+                  "avg": 116,
+                  "day": "2026-05-31",
+                  "max": 138,
+                  "min": 72
+                },
+                {
+                  "avg": 125,
+                  "day": "2026-06-01",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 121,
+                  "day": "2026-06-02",
+                  "max": 138,
+                  "min": 89
+                },
+                {
+                  "avg": 107,
+                  "day": "2026-06-03",
+                  "max": 138,
+                  "min": 74
+                },
+                {
+                  "avg": 97,
+                  "day": "2026-06-04",
+                  "max": 124,
+                  "min": 68
+                },
+                {
+                  "avg": 86,
+                  "day": "2026-06-05",
+                  "max": 89,
+                  "min": 68
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 2,
+                  "day": "2026-05-28",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-29",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-30",
+                  "max": 9,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-02",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-03",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 0,
+                  "day": "2026-06-04",
+                  "max": 0,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T20:22:42+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.waqi.bengaluru",
+      "title": "Bengaluru air quality index",
+      "sourceId": "waqi",
+      "sourceIndicatorId": "bengaluru",
+      "unit": "AQI",
+      "geography": {
+        "type": "city",
+        "id": "bengaluru",
+        "name": "bengaluru"
+      },
+      "rows": 1,
+      "dimensions": [
+        "aqi",
+        "idx",
+        "attributions",
+        "city",
+        "dominentpol",
+        "iaqi",
+        "time",
+        "forecast",
+        "debug",
+        "fetchedAt"
+      ],
+      "latestRows": [
+        {
+          "aqi": 58,
+          "idx": 11270,
+          "attributions": [
+            {
+              "url": "http://cpcb.nic.in/",
+              "name": "CPCB - India Central Pollution Control Board",
+              "logo": "India-CPCB.png"
+            },
+            {
+              "url": "https://waqi.info/",
+              "name": "World Air Quality Index Project"
+            }
+          ],
+          "city": {
+            "geo": [
+              12.938539,
+              77.5901
+            ],
+            "name": "Hombegowda Nagar, Bengaluru, India",
+            "url": "https://aqicn.org/city/india/bengaluru/hombegowda-nagar",
+            "location": ""
+          },
+          "dominentpol": "pm25",
+          "iaqi": {
+            "co": {
+              "v": 1.8
+            },
+            "dew": {
+              "v": 22
+            },
+            "h": {
+              "v": 42
+            },
+            "no2": {
+              "v": 9.7
+            },
+            "o3": {
+              "v": 18
+            },
+            "p": {
+              "v": 685
+            },
+            "pm10": {
+              "v": 36
+            },
+            "pm25": {
+              "v": 58
+            },
+            "so2": {
+              "v": 1.3
+            },
+            "t": {
+              "v": 39.5
+            },
+            "w": {
+              "v": 1.1
+            }
+          },
+          "time": {
+            "s": "2026-05-30 16:00:00",
+            "tz": "+05:30",
+            "v": 1780156800,
+            "iso": "2026-05-30T16:00:00+05:30"
+          },
+          "forecast": {
+            "daily": {
+              "pm10": [
+                {
+                  "avg": 46,
+                  "day": "2026-05-28",
+                  "max": 46,
+                  "min": 45
+                },
+                {
+                  "avg": 29,
+                  "day": "2026-05-29",
+                  "max": 45,
+                  "min": 19
+                },
+                {
+                  "avg": 26,
+                  "day": "2026-05-30",
+                  "max": 33,
+                  "min": 19
+                },
+                {
+                  "avg": 30,
+                  "day": "2026-05-31",
+                  "max": 41,
+                  "min": 28
+                },
+                {
+                  "avg": 45,
+                  "day": "2026-06-01",
+                  "max": 46,
+                  "min": 28
+                },
+                {
+                  "avg": 46,
+                  "day": "2026-06-02",
+                  "max": 46,
+                  "min": 45
+                },
+                {
+                  "avg": 29,
+                  "day": "2026-06-03",
+                  "max": 46,
+                  "min": 22
+                },
+                {
+                  "avg": 21,
+                  "day": "2026-06-04",
+                  "max": 27,
+                  "min": 19
+                },
+                {
+                  "avg": 27,
+                  "day": "2026-06-05",
+                  "max": 28,
+                  "min": 19
+                }
+              ],
+              "pm25": [
+                {
+                  "avg": 89,
+                  "day": "2026-05-28",
+                  "max": 89,
+                  "min": 89
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-05-29",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 72,
+                  "day": "2026-05-30",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 84,
+                  "day": "2026-05-31",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 89,
+                  "day": "2026-06-01",
+                  "max": 89,
+                  "min": 89
+                },
+                {
+                  "avg": 89,
+                  "day": "2026-06-02",
+                  "max": 89,
+                  "min": 89
+                },
+                {
+                  "avg": 71,
+                  "day": "2026-06-03",
+                  "max": 89,
+                  "min": 68
+                },
+                {
+                  "avg": 60,
+                  "day": "2026-06-04",
+                  "max": 68,
+                  "min": 42
+                },
+                {
+                  "avg": 64,
+                  "day": "2026-06-05",
+                  "max": 68,
+                  "min": 42
+                }
+              ],
+              "uvi": [
+                {
+                  "avg": 3,
+                  "day": "2026-05-30",
+                  "max": 10,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-05-31",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 2,
+                  "day": "2026-06-01",
+                  "max": 11,
+                  "min": 0
+                },
+                {
+                  "avg": 3,
+                  "day": "2026-06-02",
+                  "max": 12,
+                  "min": 0
+                },
+                {
+                  "avg": 3,
+                  "day": "2026-06-03",
+                  "max": 12,
+                  "min": 0
+                },
+                {
+                  "avg": 0,
+                  "day": "2026-06-04",
+                  "max": 0,
+                  "min": 0
+                }
+              ]
+            }
+          },
+          "debug": {
+            "sync": "2026-05-30T20:23:38+09:00"
+          },
+          "fetchedAt": "2026-06-01T04:27:18.930Z"
+        }
+      ]
     }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
   ],
   "caveats": [
     "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
     "If source coverage is thin, say so directly.",
     "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
   ],
