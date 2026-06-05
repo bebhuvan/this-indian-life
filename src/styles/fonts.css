@@ -8,3 +8,10 @@
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:swap;src:url('/fonts/dm-sans-300.woff2') format('woff2')}
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/dm-sans-400.woff2') format('woff2')}
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/dm-sans-500.woff2') format('woff2')}
+/* The rupee sign (U+20B9) is absent from the Cormorant Garamond and DM Sans
+   latin subsets, so it was falling back to a heavier system serif (Georgia) and
+   reading "arbitrarily bold". Patch just that one codepoint via unicode-range: a
+   Garamond ₹ (from EB Garamond) for serif text, an Inter ₹ for sans. font-weight
+   is a range so the glyph is used at every weight the stacks request. */
+@font-face{font-family:'RupeeSerif';font-style:normal;font-weight:300 600;font-display:swap;src:url('/fonts/rupee-serif.woff2') format('woff2');unicode-range:U+20B9}
+@font-face{font-family:'RupeeSans';font-style:normal;font-weight:300 600;font-display:swap;src:url('/fonts/rupee-sans.woff2') format('woff2');unicode-range:U+20B9}
