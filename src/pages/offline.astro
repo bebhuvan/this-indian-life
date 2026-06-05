@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+// Served by the service worker when a never-visited page is requested offline.
+// Self-contained: the stylesheet is inlined and fonts are cached, so it renders
+// with no network at all.
+---
+
+<Base
+  title="Offline · This Indian Life"
+  description="You appear to be offline."
+  canonicalPath="/offline/"
+>
+  <div class="wrap offline-wrap">
+    <div class="offline-card">
+      <svg class="offline-mark" viewBox="0 0 100 100" aria-hidden="true" width="56" height="56">
+        <rect width="100" height="100" rx="22" fill="#0b0b0b"></rect>
+        <rect x="46.3" y="34" width="7.4" height="39" rx="1.6" fill="#fff"></rect>
+        <rect x="40.5" y="34" width="19" height="5" rx="2.5" fill="#fff"></rect>
+        <rect x="38" y="70" width="24" height="5.4" rx="2.7" fill="#fff"></rect>
+        <circle cx="50" cy="23.5" r="6.2" fill="#db5c97"></circle>
+      </svg>
+      <h1>You’re offline</h1>
+      <p>
+        This page hasn’t been saved for offline reading yet. Pages you’ve already
+        visited are still here — reconnect and try again, or jump back to one you’ve seen.
+      </p>
+      <div class="offline-actions">
+        <button type="button" class="btn" id="offline-retry">Try again</button>
+        <a class="offline-home" href="/">Go to the homepage</a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    document.getElementById("offline-retry")?.addEventListener("click", () => location.reload());
+  </script>
+
+  <style>
+    .offline-wrap { min-height: 76vh; display: grid; place-items: center; padding-block: 64px; }
+    .offline-card { max-width: 30rem; text-align: center; }
+    .offline-mark { margin-bottom: 22px; }
+    .offline-card h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.05; margin-bottom: 14px;
+    }
+    .offline-card p {
+      font-family: var(--serif); font-size: 1.18rem; line-height: 1.6;
+      color: var(--mid); margin: 0 auto 28px; max-width: 26rem;
+    }
+    .offline-actions { display: flex; gap: 22px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .offline-home {
+      font-family: var(--sans); font-size: .8rem; letter-spacing: .04em;
+      color: var(--mid); border-bottom: 1px solid var(--ghost); padding-bottom: 2px;
+      text-decoration: none; transition: color .2s, border-color .2s;
+    }
+    .offline-home:hover { color: var(--ink); border-color: var(--ink); }
+  </style>
+</Base>

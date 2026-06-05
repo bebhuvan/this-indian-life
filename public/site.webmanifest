@@ -1,26 +1,37 @@
 {
+  "id": "/",
   "name": "This Indian Life",
-  "short_name": "This Indian Life",
+  "short_name": "Indian Life",
   "description": "Sourced charts and plain-language explainers about how India lives.",
-  "start_url": "/en/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["news", "education", "reference"],
   "background_color": "#ffffff",
-  "theme_color": "#0b0b0b",
+  "theme_color": "#ffffff",
   "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" }
+  ],
+  "screenshots": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon.svg",
-      "type": "image/svg+xml",
-      "sizes": "any"
+      "src": "/og-default.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "This Indian Life — India, one number at a time"
     }
+  ],
+  "shortcuts": [
+    { "name": "All articles", "short_name": "Articles", "url": "/articles/" },
+    { "name": "Ask a question", "short_name": "Ask", "url": "/ask/" },
+    { "name": "Definitions", "short_name": "Terms", "url": "/definitions/" }
   ]
 }

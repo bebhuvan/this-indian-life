@@ -38,13 +38,22 @@ const graph = jsonLd.length
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="author" content={SITE.author.name} />
-    <meta name="theme-color" content="#0b0b0b" />
+    <!-- Seamless white chrome: status bar / URL bar match the pure-white app surface. -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Installed-app (PWA) -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="This Indian Life" />
+    <meta name="application-name" content="This Indian Life" />
 
     <!-- Icons + manifest -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -82,6 +91,9 @@ const graph = jsonLd.length
     <meta name="twitter:image" content={ogImage} />
 
     {graph && <script type="application/ld+json" set:html={graph} />}
+
+    <!-- PWA: service-worker registration + install / update UX -->
+    <script src="/pwa.js" defer></script>
   </head>
   <body class={bodyClass}>
     <main><slot /></main>

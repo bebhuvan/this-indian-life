@@ -7,6 +7,7 @@
     "dev": "astro dev --host 0.0.0.0",
     "build": "node scripts/build-git-meta.mjs && astro build",
     "build:git-meta": "node scripts/build-git-meta.mjs",
+    "build:pwa-icons": "node scripts/build-pwa-icons.mjs",
     "preview": "astro preview --host 0.0.0.0",
     "deploy": "npm run build && wrangler deploy",
     "env:check": "node scripts/check-env.mjs",
