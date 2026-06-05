@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.openmeteo.dehradun.precipitation_sum",
+  "title": "Dehradun annual rainfall",
+  "sourceId": "open-meteo",
+  "sourceIndicatorId": "dehradun.era5.precipitation_sum",
+  "sourceUrl": "https://open-meteo.com/en/docs/historical-weather-api",
+  "unit": "mm",
+  "frequency": "annual",
+  "geography": {
+    "type": "city",
+    "id": "dehradun",
+    "name": "Dehradun",
+    "latitude": 30.3165,
+    "longitude": 78.0322
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-05T13:57:27.012Z",
+  "observations": [],
+  "metadata": {
+    "model": "era5",
+    "startDate": "1940-01-01",
+    "endDate": "2026-05-29",
+    "derivedFrom": "climate.openmeteo.dehradun.daily",
+    "calculation": "Sum of daily precipitation for each calendar year.",
+    "threshold": null
+  }
+}

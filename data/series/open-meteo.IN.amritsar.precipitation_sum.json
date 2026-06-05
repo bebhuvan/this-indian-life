@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.openmeteo.amritsar.precipitation_sum",
+  "title": "Amritsar annual rainfall",
+  "sourceId": "open-meteo",
+  "sourceIndicatorId": "amritsar.era5.precipitation_sum",
+  "sourceUrl": "https://open-meteo.com/en/docs/historical-weather-api",
+  "unit": "mm",
+  "frequency": "annual",
+  "geography": {
+    "type": "city",
+    "id": "amritsar",
+    "name": "Amritsar",
+    "latitude": 31.634,
+    "longitude": 74.8723
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-05T13:27:23.140Z",
+  "observations": [],
+  "metadata": {
+    "model": "era5",
+    "startDate": "1940-01-01",
+    "endDate": "2026-05-29",
+    "derivedFrom": "climate.openmeteo.amritsar.daily",
+    "calculation": "Sum of daily precipitation for each calendar year.",
+    "threshold": null
+  }
+}

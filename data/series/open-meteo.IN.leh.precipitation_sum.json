@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.openmeteo.leh.precipitation_sum",
+  "title": "Leh annual rainfall",
+  "sourceId": "open-meteo",
+  "sourceIndicatorId": "leh.era5.precipitation_sum",
+  "sourceUrl": "https://open-meteo.com/en/docs/historical-weather-api",
+  "unit": "mm",
+  "frequency": "annual",
+  "geography": {
+    "type": "city",
+    "id": "leh",
+    "name": "Leh",
+    "latitude": 34.1526,
+    "longitude": 77.577
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-05T13:57:27.012Z",
+  "observations": [],
+  "metadata": {
+    "model": "era5",
+    "startDate": "1940-01-01",
+    "endDate": "2026-05-29",
+    "derivedFrom": "climate.openmeteo.leh.daily",
+    "calculation": "Sum of daily precipitation for each calendar year.",
+    "threshold": null
+  }
+}

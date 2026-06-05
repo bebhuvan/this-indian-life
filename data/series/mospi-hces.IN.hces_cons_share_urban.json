@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.inequality.hces_cons_share_urban",
+  "title": "Consumption share by group — urban (HCES 2023-24, computed)",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "HCES Figure 1 urban derived shares",
+  "sourceUrl": "https://www.mospi.gov.in/sites/default/files/press_release/HCES_Press_Note_2023-24_27122024_rev.pdf",
+  "unit": "% of total consumption",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-06-05T08:55:45.944Z",
+  "rows": [
+    {
+      "label": "Poorest 50%",
+      "value": 30.6
+    },
+    {
+      "label": "Middle 40%",
+      "value": 45.8
+    },
+    {
+      "label": "Richest 10%",
+      "value": 23.7
+    },
+    {
+      "label": "Richest 5%",
+      "value": 14.5
+    }
+  ],
+  "metadata": {
+    "provenance": "MoSPI HCES 2023-24 press note (27 Dec 2024)",
+    "method": "Weighted from published fractile average MPCE; consistent with published Gini."
+  }
+}

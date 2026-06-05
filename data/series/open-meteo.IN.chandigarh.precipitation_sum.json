@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.openmeteo.chandigarh.precipitation_sum",
+  "title": "Chandigarh annual rainfall",
+  "sourceId": "open-meteo",
+  "sourceIndicatorId": "chandigarh.era5.precipitation_sum",
+  "sourceUrl": "https://open-meteo.com/en/docs/historical-weather-api",
+  "unit": "mm",
+  "frequency": "annual",
+  "geography": {
+    "type": "city",
+    "id": "chandigarh",
+    "name": "Chandigarh",
+    "latitude": 30.7333,
+    "longitude": 76.7794
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-05T14:07:39.579Z",
+  "observations": [],
+  "metadata": {
+    "model": "era5",
+    "startDate": "1940-01-01",
+    "endDate": "2026-05-29",
+    "derivedFrom": "climate.openmeteo.chandigarh.daily",
+    "calculation": "Sum of daily precipitation for each calendar year.",
+    "threshold": null
+  }
+}

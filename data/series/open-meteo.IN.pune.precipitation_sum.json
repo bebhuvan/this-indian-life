@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.openmeteo.pune.precipitation_sum",
+  "title": "Pune annual rainfall",
+  "sourceId": "open-meteo",
+  "sourceIndicatorId": "pune.era5.precipitation_sum",
+  "sourceUrl": "https://open-meteo.com/en/docs/historical-weather-api",
+  "unit": "mm",
+  "frequency": "annual",
+  "geography": {
+    "type": "city",
+    "id": "pune",
+    "name": "Pune",
+    "latitude": 18.5204,
+    "longitude": 73.8567
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-05T09:08:03.403Z",
+  "observations": [],
+  "metadata": {
+    "model": "era5",
+    "startDate": "1940-01-01",
+    "endDate": "2026-05-29",
+    "derivedFrom": "climate.openmeteo.pune.daily",
+    "calculation": "Sum of daily precipitation for each calendar year.",
+    "threshold": null
+  }
+}

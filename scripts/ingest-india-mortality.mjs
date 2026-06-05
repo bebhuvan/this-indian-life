@@ -78,9 +78,9 @@ async function ingestCrs() {
   return { status: "ready", indicatorId: artifact.indicatorId, sourceIndicatorId: artifact.sourceIndicatorId, artifact: path, snapshot: snapshot.path, rawHash: snapshot.hash, fetchedAt };
 }
 
-// ---- SRS: crude death rate + IMR, 2018-2023 ----
+// ---- SRS: birth/death/IMR + TFR, India national, 2018-2024 ----
 async function ingestSrs() {
-  const data = await readManual("srs-2023.json");
+  const data = await readManual("srs-2024.json");
   const manifest = [];
   for (const item of srsSeries) {
     const series = data.series[item.key];
@@ -88,7 +88,9 @@ async function ingestSrs() {
       manifest.push({ status: "failed", indicatorId: item.id, error: `key ${item.key} missing` });
       continue;
     }
-    const observations = data.years.map((year, i) => ({ date: String(year), value: series.values[i] }));
+    // Each series carries its own year axis (the SRS trend tables span different ranges).
+    const axis = series.years ?? series.periods;
+    const observations = axis.map((period, i) => ({ date: String(period), value: series.values[i] }));
     const artifact = createSeriesArtifact({
       indicatorId: item.id,
       title: item.title,
@@ -102,7 +104,7 @@ async function ingestSrs() {
       metadata: { publisher: data.publisher, sourceFile: data.sourceFile, extractedFrom: data.extractedFrom, note: data.note, label: series.label }
     });
     const path = await writeSeriesArtifact({ sourceId: "srs", name: `srs.IN.${sourceSlug(item.id)}`, artifact });
-    const snapshot = await writeSnapshot("srs", item.key, { source: data.source, years: data.years, values: series.values });
+    const snapshot = await writeSnapshot("srs", item.key, { source: data.source, years: axis, values: series.values });
     const latest = observations.at(-1);
     manifest.push({ status: "ready", indicatorId: item.id, sourceIndicatorId: item.key, artifact, snapshot: snapshot.path, rawHash: snapshot.hash, fetchedAt, observations: observations.length, latestYear: latest.date, latestValue: latest.value });
     console.log(`srs ${sourceSlug(item.id)} ${observations.length} obs · ${latest.date}=${latest.value}`);

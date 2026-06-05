@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.inequality.hces_mpce_by_caste",
+  "title": "Consumption (MPCE) by caste group, 2023-24",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "HCES microdata: MPCE by social group",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/237",
+  "unit": "₹ per person per month",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "gini",
+    "popSharePct",
+    "gapVsOthersPct"
+  ],
+  "fetchedAt": "2026-06-05T08:55:45.944Z",
+  "rows": [
+    {
+      "label": "Others",
+      "value": 6148,
+      "gini": 0.308,
+      "popSharePct": 25.4,
+      "gapVsOthersPct": 0
+    },
+    {
+      "label": "OBC",
+      "value": 5068,
+      "gini": 0.289,
+      "popSharePct": 45.7,
+      "gapVsOthersPct": -18
+    },
+    {
+      "label": "Scheduled Caste",
+      "value": 4277,
+      "gini": 0.26,
+      "popSharePct": 19.3,
+      "gapVsOthersPct": -30
+    },
+    {
+      "label": "Scheduled Tribe",
+      "value": 3614,
+      "gini": 0.295,
+      "popSharePct": 9.7,
+      "gapVsOthersPct": -41
+    }
+  ],
+  "metadata": {
+    "provenance": "Computed from HCES 2023-24 unit-level microdata (NADA), calibrated to published national MPCE; validated vs 18 state means (3.6% MAPE).",
+    "validation": {
+      "stateMAPE": 3.6,
+      "biasNote": "MPCE calibrated to published national rural/urban means; state rank order matches; gaps/Ginis scale-invariant."
+    }
+  }
+}

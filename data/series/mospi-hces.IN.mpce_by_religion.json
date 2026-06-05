@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.inequality.hces_mpce_by_religion",
+  "title": "Consumption (MPCE) by religion, 2023-24",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "HCES microdata: MPCE by religion",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/237",
+  "unit": "₹ per person per month",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "gini",
+    "popSharePct",
+    "gapVsHinduPct"
+  ],
+  "fetchedAt": "2026-06-05T08:55:45.944Z",
+  "rows": [
+    {
+      "label": "Sikh",
+      "value": 6509,
+      "gini": 0.234,
+      "popSharePct": 1.5,
+      "gapVsHinduPct": 28
+    },
+    {
+      "label": "Christian",
+      "value": 6111,
+      "gini": 0.336,
+      "popSharePct": 2.7,
+      "gapVsHinduPct": 20
+    },
+    {
+      "label": "Hindu",
+      "value": 5089,
+      "gini": 0.307,
+      "popSharePct": 81.7,
+      "gapVsHinduPct": 0
+    },
+    {
+      "label": "Buddhist",
+      "value": 4912,
+      "gini": 0.291,
+      "popSharePct": 0.5,
+      "gapVsHinduPct": -3
+    },
+    {
+      "label": "Muslim",
+      "value": 4583,
+      "gini": 0.26,
+      "popSharePct": 13.1,
+      "gapVsHinduPct": -10
+    }
+  ],
+  "metadata": {
+    "provenance": "Computed from HCES 2023-24 unit-level microdata (NADA), calibrated to published national MPCE; validated vs 18 state means (3.6% MAPE).",
+    "validation": {
+      "stateMAPE": 3.6,
+      "biasNote": "MPCE calibrated to published national rural/urban means; state rank order matches; gaps/Ginis scale-invariant."
+    }
+  }
+}

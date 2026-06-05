@@ -15,6 +15,11 @@ yarn.lock
 # Local agent/editor config
 .claude/
 
+# Local caches — never republished (chrome download cache ~160 MB, python bytecode)
+.cache/
+__pycache__/
+*.pyc
+
 # Raw ingestion inputs & intermediate dumps — large, third-party, and NOT needed to
 # build the site (the build reads data/explanations, data/series, data/catalog only).
 # Kept local; not republished. ~1.6 GB across these dirs.

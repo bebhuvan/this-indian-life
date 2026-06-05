@@ -112,6 +112,38 @@ export async function fetchPlfs({
   });
 }
 
+// NAS — National Accounts Statistics. indicator_code 1-22 (annual) / subset
+// (quarterly). base_year "2011-12" | "2022-23"; series "Current" | "Back" (Back
+// back-casts the 2011-12 base to 1950-51); frequency_code 1=Annual, 2=Quarterly
+// (Current only). Each row carries BOTH current_price and constant_price, plus a
+// `revision` (First/Second Advance, Provisional, First/Second/Third Revised,
+// Final) — pick the most-final per year downstream. Some indicators add an
+// `industry`/`subindustry`/`institutional_sector` dimension column.
+export async function fetchNas({
+  indicatorCode,
+  baseYear = "2011-12",
+  series = "Current",
+  frequencyCode = 1,
+  limit = 100000,
+  page = 1
+} = {}) {
+  const url = buildUrl(baseUrl, "/api/nas/getNASData", {
+    indicator_code: indicatorCode,
+    base_year: baseYear,
+    series,
+    frequency_code: frequencyCode,
+    Format: "JSON",
+    limit,
+    page
+  });
+  return fetchJson(url, {
+    headers: { "user-agent": "Mozilla/5.0" },
+    timeoutMs: Number(process.env.MOSPI_TIMEOUT_MS || 120000),
+    retries: 3,
+    dispatcher: mospiDispatcher
+  });
+}
+
 // Normalise raw CPI rows to {date:"YYYY-MM", index:number|null, inflation:number|null}
 // keyed by (group, subgroup, sector). Returns a Map of key -> { meta, points[] }.
 export function groupCpiRows(rows) {

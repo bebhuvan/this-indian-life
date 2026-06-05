@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste",
+  "title": "Women's pay as a share of men's, by caste, 2023-24",
+  "sourceId": "plfs",
+  "sourceIndicatorId": "econ.inequality.plfs_gender_ratio_by_caste",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/PLFS",
+  "unit": "% (female ÷ male regular wage)",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "maleWage",
+    "femaleWage"
+  ],
+  "fetchedAt": "2026-06-05T09:53:33.803Z",
+  "rows": [
+    {
+      "label": "Others",
+      "value": 84,
+      "maleWage": 27004,
+      "femaleWage": 22630
+    },
+    {
+      "label": "OBC",
+      "value": 73,
+      "maleWage": 21094,
+      "femaleWage": 15461
+    },
+    {
+      "label": "Scheduled Caste",
+      "value": 63,
+      "maleWage": 18384,
+      "femaleWage": 11665
+    },
+    {
+      "label": "Scheduled Tribe",
+      "value": 63,
+      "maleWage": 20721,
+      "femaleWage": 12960
+    }
+  ],
+  "metadata": {
+    "provenance": "Computed from PLFS 2023-24 unit-level microdata (NADA); regular wage/salaried monthly earnings (var b6q9), validated vs published ₹21,000.",
+    "validation": {
+      "regularWageAll": 21048,
+      "publishedApprox": 21000,
+      "male": 22520,
+      "female": 16672,
+      "genderRatio": 0.74
+    },
+    "note": "Lower = wider gender pay gap. The gap is widest for the most disadvantaged castes."
+  }
+}

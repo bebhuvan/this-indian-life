@@ -75,6 +75,10 @@ function annualObservations(rows, metric) {
       value = sum(yearRows.map((row) => row.precipitation_sum));
     } else if (metric === "rainy_days") {
       value = yearRows.filter((row) => typeof row.precipitation_sum === "number" && row.precipitation_sum >= 1).length;
+    } else if (metric === "mean_apparent_temperature") {
+      value = average(yearRows.map((row) => row.apparent_temperature_mean));
+    } else if (metric === "humid_heat_days") {
+      value = yearRows.filter((row) => typeof row.apparent_temperature_max === "number" && row.apparent_temperature_max >= 40).length;
     }
     return { date: year, value };
   }).filter((row) => row.value !== null);

@@ -9,7 +9,10 @@ export const defaultDailyVariables = [
   "temperature_2m_mean",
   "temperature_2m_max",
   "temperature_2m_min",
-  "precipitation_sum"
+  "precipitation_sum",
+  "apparent_temperature_max",
+  "apparent_temperature_mean",
+  "relative_humidity_2m_mean"
 ];
 
 export function openMeteoArchiveUrl(params = {}) {

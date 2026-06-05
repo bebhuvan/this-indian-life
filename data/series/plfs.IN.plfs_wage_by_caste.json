@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.inequality.plfs_wage_by_caste",
+  "title": "Regular-salaried monthly wage by caste, 2023-24",
+  "sourceId": "plfs",
+  "sourceIndicatorId": "econ.inequality.plfs_wage_by_caste",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/PLFS",
+  "unit": "₹ per month",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "gapVsOthersPct"
+  ],
+  "fetchedAt": "2026-06-05T09:53:33.803Z",
+  "rows": [
+    {
+      "label": "Others",
+      "value": 25957,
+      "gapVsOthersPct": 0
+    },
+    {
+      "label": "OBC",
+      "value": 19735,
+      "gapVsOthersPct": -24
+    },
+    {
+      "label": "Scheduled Tribe",
+      "value": 18343,
+      "gapVsOthersPct": -29
+    },
+    {
+      "label": "Scheduled Caste",
+      "value": 16516,
+      "gapVsOthersPct": -36
+    }
+  ],
+  "metadata": {
+    "provenance": "Computed from PLFS 2023-24 unit-level microdata (NADA); regular wage/salaried monthly earnings (var b6q9), validated vs published ₹21,000.",
+    "validation": {
+      "regularWageAll": 21048,
+      "publishedApprox": 21000,
+      "male": 22520,
+      "female": 16672,
+      "genderRatio": 0.74
+    }
+  }
+}

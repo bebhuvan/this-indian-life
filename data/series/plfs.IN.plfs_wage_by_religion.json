@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.inequality.plfs_wage_by_religion",
+  "title": "Regular-salaried monthly wage by religion, 2023-24",
+  "sourceId": "plfs",
+  "sourceIndicatorId": "econ.inequality.plfs_wage_by_religion",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/PLFS",
+  "unit": "₹ per month",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-06-05T09:53:33.803Z",
+  "rows": [
+    {
+      "label": "Christian",
+      "value": 25094
+    },
+    {
+      "label": "Jain",
+      "value": 24678
+    },
+    {
+      "label": "Buddhist",
+      "value": 23940
+    },
+    {
+      "label": "Hindu",
+      "value": 21332
+    },
+    {
+      "label": "Muslim",
+      "value": 17671
+    },
+    {
+      "label": "Sikh",
+      "value": 17055
+    }
+  ],
+  "metadata": {
+    "provenance": "Computed from PLFS 2023-24 unit-level microdata (NADA); regular wage/salaried monthly earnings (var b6q9), validated vs published ₹21,000.",
+    "validation": {
+      "regularWageAll": 21048,
+      "publishedApprox": 21000,
+      "male": 22520,
+      "female": 16672,
+      "genderRatio": 0.74
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "note": "Follow-up data for the q.econ.inequality flagship. Freely-fetchable sources are ingested by scripts/ingest-inequality.mjs; the authoritative HCES tables by scripts/ingest-hces-published.mjs (see data/catalog/inequality-manifest.json). The items below need a login, a manual download, or extra processing, so they are listed for later.",
+  "fetchedDirectly": [
+    "World Bank API: consumption Gini, decile/quintile shares, $2.15 poverty",
+    "OWID grapher (World Inequality Database): top 1% / top 10% income share (1922-2022), top 1% / top 10% wealth share, WID-vs-World-Bank top-1% comparison",
+    "OWID grapher (World Bank): consumption distribution bottom-50 / middle-40 / top-10",
+    "HCES 2023-24 press note (PDF snapshot in data/snapshots/mospi-hces/): MPCE levels (with/without imputation), 12-class fractile MPCE distribution, 18-state MPCE rural+urban, Gini 0.237/0.284 — all authoritative published tables; consumption shares computed from official fractile means",
+    "World Inequality Lab WP 2024/09: headline 2022-23 income & wealth distribution (transcribed — VERIFY against paper tables)"
+  ],
+  "gaps": [
+    {
+      "id": "hces-microdata-mpce",
+      "source": "MoSPI HCES 2023-24 unit-level microdata — own MPCE build-up",
+      "status": "DONE for caste & religion. scripts/derive-hces-granular.py builds MPCE with MMRP reference-period scaling (7-day x30/7 for sec 6-7; 365-day x30/365 for education/medical-hosp/clothing/durables; 30-day else), reverse-engineered and confirmed via Table 3.5 (food total reproduces Rs 1,939/2,776 exactly). Validated vs 18 published state means at 3.6% MAPE, correct rank order; calibrated to published national means. Population shares match census (OBC 46%, SC 19%, ST 10%; Hindu 82%, Muslim 13%). Wired as econ.inequality.hces_mpce_by_caste / _by_religion (tableBars charts 11-12). Derived JSON: data/snapshots/mospi-hces/hces_granular_derived.json.",
+      "remaining": "District-level (689 districts computed, MPCE range Rs 1,189-13,701) not charted — needs a state+district code->name map. Finer percentiles also possible. ~11% of MPCE sits in ambiguous sections (pan/tobacco/misc/rent/taxes) so absolute levels carry +/- a few %; gaps & Ginis are robust.",
+      "access": "Already on disk + processed.",
+      "priority": "low"
+    },
+    {
+      "id": "plfs-microdata",
+      "source": "PLFS 2023-24 + quarterly 2025 unit-level data (wages, education, social group)",
+      "status": "DONE. scripts/derive-plfs-wages.py + ingest-plfs-wages.mjs. Earnings field mapped from Stata variable labels (b6q9=regular wage/salaried monthly; b6q10=self-employed). VALIDATED exactly: regular wage Rs 21,048 vs published ~21,000; self-emp 13,363 vs ~13,300; gender ratio 0.74. Joined to hhv1 caste(b3q4)/religion(b3q3) with 0 unmatched. Wired as plfs_wage_by_caste / plfs_gender_ratio_by_caste / plfs_wage_by_religion (charts 13-15).",
+      "access": "Already on disk",
+      "priority": "done"
+    },
+    {
+      "id": "aidis-wealth",
+      "source": "All-India Debt & Investment Survey (AIDIS, NSSO 77th round, 2019)",
+      "access": "microdata.gov.in (NADA) — free login + download",
+      "whyItMatters": "India's only official ASSET survey — the domestic counterpart to the WID wealth estimates, and the honest 'official' wealth-inequality number to set beside the modelled 40.1% top-1% figure.",
+      "priority": "high"
+    },
+    {
+      "id": "wid-bottom50-income",
+      "source": "World Inequality Database — bottom-50% income share time series",
+      "access": "WID.world bulk download or wid R/Stata package (the public REST API returned 403 in this run; OWID has no India-facing grapher slug for it)",
+      "whyItMatters": "Completes the income-distribution picture (we have top 1% and top 10%; the bottom-50 line is the missing third).",
+      "priority": "medium"
+    },
+    {
+      "id": "ubs-wealth-report",
+      "source": "UBS Global Wealth Report 2024/2025 (wealth-per-adult, country inequality ranking)",
+      "access": "Manual PDF download from ubs.com; not an open API; model-based — cite with care",
+      "whyItMatters": "International benchmarking ('India as unequal as the US on wealth') and the millionaires-surge angle.",
+      "priority": "low"
+    },
+    {
+      "id": "forbes-hurun-billionaires",
+      "source": "Forbes / Hurun India rich lists (billionaire count & combined wealth)",
+      "access": "Manual / scrape; licence-sensitive",
+      "whyItMatters": "The top-tail anchor (271 billionaires, +94 in 2023) that makes wealth concentration concrete.",
+      "priority": "low"
+    },
+    {
+      "id": "caste-gender-cuts",
+      "source": "NFHS-5 wealth index by social group; PLFS wage gaps by sex/caste; IHDS",
+      "access": "NFHS-5 already partly in repo (NFHS-6 hub); PLFS microdata via NADA; IHDS via ICPSR/free login",
+      "whyItMatters": "The 'inequalities the Gini hides' act — caste, religion, gender, region — which is Indica's differentiation from generic Gini coverage.",
+      "priority": "low",
+      "status": "PARTLY DONE: PLFS wage gaps by caste+gender+religion shipped (see plfs-microdata). Remaining: NFHS wealth-index by social group, IHDS."
+    },
+    {
+      "id": "interstate-nsdp",
+      "source": "Per-capita Net State Domestic Product (MOSPI eSankhyiki)",
+      "access": "Open MOSPI API (api.mospi.gov.in) — already used elsewhere in repo",
+      "whyItMatters": "Regional inequality — Bihar vs Karnataka per-capita gaps rival country-level differences; a state map/bar would be a strong addition.",
+      "priority": "medium"
+    }
+  ],
+  "verificationTODOs": [
+    "HCES rural/urban Gini values (0.283/0.363 in 2011-12; 0.266/0.314 in 2022-23; 0.237/0.284 in 2023-24) are transcribed from the PIB press factsheet — confirm against the official HCES 2023-24 factsheet PDF before publish.",
+    "WIL headline shares (income: 15 / 27.3 / 57.7 / top1 22.6; wealth: 6.4 / 28.6 / 65 / top1 40.1) are from secondary summaries of WP 2024/09 — confirm against the paper's own tables; the middle-40 wealth share is a residual."
+  ]
+}
