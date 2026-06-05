@@ -179,7 +179,7 @@ export const questionPages: QuestionPage[] = v1Questions
     if (!explanation) return null;
     return {
       id: item.id,
-      slug: slugify(item.question),
+      slug: item.slug ?? slugify(item.question),
       domain: domainForQuestionId(item.id),
       question: item.question,
       indicators: item.indicators,

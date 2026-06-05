@@ -1,0 +1,1458 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.income_tax",
+  "question": "Who actually pays income tax in India?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "tax.itr.zero_tax_share",
+    "tax.itr.returns_total"
+  ],
+  "availableIndicatorIds": [
+    "tax.itr.zero_tax_share",
+    "tax.itr.returns_total"
+  ],
+  "themeIndicatorIds": [
+    "tax.itr.zero_tax_share",
+    "tax.itr.returns_total",
+    "tax.policy.nil_tax_ceiling",
+    "tax.itr.returns_paying",
+    "tax.itr.income_share_top1cr",
+    "tax.itr.tax_share_top1cr",
+    "tax.itr.tax_concentration",
+    "tax.collect.personal",
+    "tax.collect.corporate",
+    "tax.direct_share_of_total",
+    "tax.cost_of_collection",
+    "tax.income.salary",
+    "tax.income.business",
+    "tax.income.ltcg",
+    "tax.intl.tax_to_gdp",
+    "tax.intl.pit_to_gdp"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.tax.itr.zero_tax_share",
+      "indicatorId": "tax.itr.zero_tax_share",
+      "title": "Share of income-tax returns that owe zero tax",
+      "sourceId": "cbdt",
+      "unit": "% of returns",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.tax.itr.returns_total",
+      "indicatorId": "tax.itr.returns_total",
+      "title": "Income-tax returns filed (after consistency rules)",
+      "sourceId": "cbdt",
+      "unit": "returns",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.tax.policy.nil_tax_ceiling",
+      "indicatorId": "tax.policy.nil_tax_ceiling",
+      "title": "Income you can earn before paying any income tax",
+      "sourceId": "finance-acts",
+      "unit": "₹ lakh",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v4.tax.itr.returns_paying",
+      "indicatorId": "tax.itr.returns_paying",
+      "title": "Returns that actually pay income tax (tax payable > 0)",
+      "sourceId": "cbdt",
+      "unit": "returns",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.tax.itr.income_share_top1cr",
+      "indicatorId": "tax.itr.income_share_top1cr",
+      "title": "Share of all declared income held by returns above ₹1 crore",
+      "sourceId": "cbdt",
+      "unit": "% of returned income",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.tax.itr.tax_share_top1cr",
+      "indicatorId": "tax.itr.tax_share_top1cr",
+      "title": "Share of all income tax paid by returns owing above ₹1 crore",
+      "sourceId": "cbdt",
+      "unit": "% of tax payable",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.tax.itr.tax_concentration",
+      "indicatorId": "tax.itr.tax_concentration",
+      "title": "Who pays India's income tax",
+      "sourceId": "cbdt",
+      "unit": "% of all income tax",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.tax.collect.personal",
+      "indicatorId": "tax.collect.personal",
+      "title": "Personal (non-corporate) income tax collected",
+      "sourceId": "cbdt",
+      "unit": "₹ crore",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.tax.collect.corporate",
+      "indicatorId": "tax.collect.corporate",
+      "title": "Corporate tax collected",
+      "sourceId": "cbdt",
+      "unit": "₹ crore",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.tax.direct_share_of_total",
+      "indicatorId": "tax.direct_share_of_total",
+      "title": "Direct taxes as a share of central tax revenue",
+      "sourceId": "cbdt",
+      "unit": "% of total taxes",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.tax.cost_of_collection",
+      "indicatorId": "tax.cost_of_collection",
+      "title": "Cost of collecting ₹100 of direct tax",
+      "sourceId": "cbdt",
+      "unit": "% of collection",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.tax.income.salary",
+      "indicatorId": "tax.income.salary",
+      "title": "Salary income (individuals) declared in returns",
+      "sourceId": "cbdt",
+      "unit": "₹ crore",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.tax.income.business",
+      "indicatorId": "tax.income.business",
+      "title": "Business income (individuals) declared in returns",
+      "sourceId": "cbdt",
+      "unit": "₹ crore",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.tax.income.ltcg",
+      "indicatorId": "tax.income.ltcg",
+      "title": "Long-term capital gains (individuals) declared in returns",
+      "sourceId": "cbdt",
+      "unit": "₹ crore",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.tax.intl.tax_to_gdp",
+      "indicatorId": "tax.intl.tax_to_gdp",
+      "title": "Tax-to-GDP ratio: India vs peers",
+      "sourceId": "ictd",
+      "unit": "% of GDP",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.tax.intl.pit_to_gdp",
+      "indicatorId": "tax.intl.pit_to_gdp",
+      "title": "Personal income tax as % of GDP: India vs peers",
+      "sourceId": "oecd",
+      "unit": "% of GDP",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "most-filers-owe-nothing",
+      "title": "Most filers owe nothing",
+      "chartType": "line",
+      "beat": "level",
+      "window": "full",
+      "indicator": "tax.itr.zero_tax_share",
+      "series": [],
+      "unit": "% of returns",
+      "subtitle": "CBDT Income Tax Return Statistics · assessment year 2012-13 to 2023-24",
+      "whyThisChart": "The single most surprising fact: filing a return and paying tax are very different things."
+    },
+    {
+      "order": 2,
+      "chartId": "the-income-you-can-earn-before-paying-any-tax",
+      "title": "The income you can earn before paying any tax",
+      "chartType": "line",
+      "beat": "policy",
+      "window": "full",
+      "indicator": "tax.policy.nil_tax_ceiling",
+      "series": [],
+      "unit": "₹ lakh",
+      "subtitle": "Section 87A rebate + basic exemption history · by assessment year · general individual, most favourable regime",
+      "whyThisChart": "The zero-tax majority is engineered by policy: Parliament keeps lifting the income at which tax becomes nil."
+    },
+    {
+      "order": 3,
+      "chartId": "returns-filed-vs-returns-that-pay",
+      "title": "Returns filed vs returns that pay",
+      "chartType": "multiLine",
+      "beat": "gap",
+      "window": "",
+      "indicator": "tax.itr.returns_total",
+      "series": [
+        {
+          "indicator": "tax.itr.returns_total",
+          "label": "Returns filed"
+        },
+        {
+          "indicator": "tax.itr.returns_paying",
+          "label": "Returns that pay any tax"
+        }
+      ],
+      "unit": "returns",
+      "subtitle": "CBDT ITR Statistics · assessment year",
+      "whyThisChart": "The true taxpaying base is the lower line — about 3 crore, not the headline ~8 crore filers."
+    },
+    {
+      "order": 4,
+      "chartId": "0-1-of-filers-pay-most-of-the-income-tax",
+      "title": "0.1% of filers pay most of the income tax",
+      "chartType": "tableBars",
+      "beat": "concentration",
+      "window": "",
+      "indicator": "tax.itr.tax_concentration",
+      "series": [],
+      "unit": "% of all income tax",
+      "subtitle": "CBDT ITR Statistics · AY2023-24 · how every rupee of income tax splits",
+      "whyThisChart": "Income tax in India rests on a needle point: a tiny group at the top pays most of it."
+    },
+    {
+      "order": 5,
+      "chartId": "individuals-now-out-pay-companies",
+      "title": "Individuals now out-pay companies",
+      "chartType": "multiLine",
+      "beat": "crossover",
+      "window": "",
+      "indicator": "tax.collect.personal",
+      "series": [
+        {
+          "indicator": "tax.collect.personal",
+          "label": "Personal (non-corporate) tax"
+        },
+        {
+          "indicator": "tax.collect.corporate",
+          "label": "Corporate tax"
+        }
+      ],
+      "unit": "₹ crore",
+      "subtitle": "CBDT Time-Series · financial year · ₹ crore",
+      "whyThisChart": "The quiet structural shift: the personal income tax has overtaken corporate tax."
+    },
+    {
+      "order": 6,
+      "chartId": "how-individuals-income-is-earned",
+      "title": "How individuals' income is earned",
+      "chartType": "multiLine",
+      "beat": "composition",
+      "window": "",
+      "indicator": "tax.income.salary",
+      "series": [
+        {
+          "indicator": "tax.income.salary",
+          "label": "Salary income"
+        },
+        {
+          "indicator": "tax.income.business",
+          "label": "Business income"
+        },
+        {
+          "indicator": "tax.income.ltcg",
+          "label": "Long-term capital gains"
+        }
+      ],
+      "unit": "₹ crore",
+      "subtitle": "CBDT ITR Statistics · individual taxpayers · income by source · assessment year",
+      "whyThisChart": "For individual taxpayers, where does the declared income actually come from?"
+    },
+    {
+      "order": 7,
+      "chartId": "the-system-tilted-toward-direct-taxes",
+      "title": "The system tilted toward direct taxes",
+      "chartType": "line",
+      "beat": "progressivity",
+      "window": "full",
+      "indicator": "tax.direct_share_of_total",
+      "series": [],
+      "unit": "% of total taxes",
+      "subtitle": "CBDT Time-Series · direct as % of central taxes · financial year",
+      "whyThisChart": "Direct taxes (on income) are more progressive than indirect taxes (on spending)."
+    },
+    {
+      "order": 8,
+      "chartId": "among-the-cheapest-tax-systems-to-run",
+      "title": "Among the cheapest tax systems to run",
+      "chartType": "line",
+      "beat": "efficiency",
+      "window": "full",
+      "indicator": "tax.cost_of_collection",
+      "series": [],
+      "unit": "% of collection",
+      "subtitle": "CBDT Time-Series · cost of collection · financial year",
+      "whyThisChart": "How much it costs the state to collect ₹100 of direct tax."
+    },
+    {
+      "order": 9,
+      "chartId": "india-s-tax-to-gdp-is-mid-low",
+      "title": "India's tax-to-GDP is mid-low",
+      "chartType": "tableBars",
+      "beat": "comparison",
+      "window": "",
+      "indicator": "tax.intl.tax_to_gdp",
+      "series": [],
+      "unit": "% of GDP",
+      "subtitle": "UNU-WIDER / ICTD · general government, incl. social contributions · latest year",
+      "whyThisChart": "How much of the economy the state collects in tax, versus peers."
+    },
+    {
+      "order": 10,
+      "chartId": "personal-income-tax-a-narrow-base",
+      "title": "Personal income tax: a narrow base",
+      "chartType": "tableBars",
+      "beat": "comparison",
+      "window": "",
+      "indicator": "tax.intl.pit_to_gdp",
+      "series": [],
+      "unit": "% of GDP",
+      "subtitle": "OECD Revenue Statistics; India from CBDT · personal income tax · % of GDP",
+      "whyThisChart": "The sharpest cross-country cut: how much personal income tax each economy raises."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Share of income-tax returns that owe zero tax, latest",
+      "value": 61.6,
+      "displayValue": "61.6%",
+      "date": "2023",
+      "unit": "% of returns",
+      "indicatorId": "tax.itr.zero_tax_share",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Share of income-tax returns that owe zero tax, earliest",
+      "value": 55.6,
+      "displayValue": "55.6%",
+      "date": "2012",
+      "unit": "% of returns",
+      "indicatorId": "tax.itr.zero_tax_share",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income-tax returns filed (after consistency rules), latest",
+      "value": 79712145,
+      "displayValue": "79.71 million",
+      "date": "2023",
+      "unit": "returns",
+      "indicatorId": "tax.itr.returns_total",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income-tax returns filed (after consistency rules), earliest",
+      "value": 31188609,
+      "displayValue": "31.19 million",
+      "date": "2012",
+      "unit": "returns",
+      "indicatorId": "tax.itr.returns_total",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income you can earn before paying any income tax, latest",
+      "value": 12,
+      "displayValue": "₹12",
+      "date": "2026",
+      "unit": "₹ lakh",
+      "indicatorId": "tax.policy.nil_tax_ceiling",
+      "sourceId": "finance-acts",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income you can earn before paying any income tax, earliest",
+      "value": 2,
+      "displayValue": "₹2",
+      "date": "2013",
+      "unit": "₹ lakh",
+      "indicatorId": "tax.policy.nil_tax_ceiling",
+      "sourceId": "finance-acts",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Returns that actually pay income tax (tax payable > 0), latest",
+      "value": 30574907,
+      "displayValue": "30.57 million",
+      "date": "2023",
+      "unit": "returns",
+      "indicatorId": "tax.itr.returns_paying",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Returns that actually pay income tax (tax payable > 0), earliest",
+      "value": 13837207,
+      "displayValue": "13.84 million",
+      "date": "2012",
+      "unit": "returns",
+      "indicatorId": "tax.itr.returns_paying",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Share of all declared income held by returns above ₹1 crore, latest",
+      "value": 45.4,
+      "displayValue": "45.4%",
+      "date": "2023",
+      "unit": "% of returned income",
+      "indicatorId": "tax.itr.income_share_top1cr",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Share of all declared income held by returns above ₹1 crore, earliest",
+      "value": 57,
+      "displayValue": "57%",
+      "date": "2012",
+      "unit": "% of returned income",
+      "indicatorId": "tax.itr.income_share_top1cr",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Share of all income tax paid by returns owing above ₹1 crore, latest",
+      "value": 58.1,
+      "displayValue": "58.1%",
+      "date": "2023",
+      "unit": "% of tax payable",
+      "indicatorId": "tax.itr.tax_share_top1cr",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Share of all income tax paid by returns owing above ₹1 crore, earliest",
+      "value": 65.9,
+      "displayValue": "65.9%",
+      "date": "2012",
+      "unit": "% of tax payable",
+      "indicatorId": "tax.itr.tax_share_top1cr",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Who pays India's income tax: value",
+      "value": 58.1,
+      "displayValue": "58.1%",
+      "date": "",
+      "unit": "% of all income tax",
+      "indicatorId": "tax.itr.tax_concentration",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Who pays India's income tax: value",
+      "value": 41.9,
+      "displayValue": "41.9%",
+      "date": "",
+      "unit": "% of all income tax",
+      "indicatorId": "tax.itr.tax_concentration",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Personal (non-corporate) income tax collected, latest",
+      "value": 1235161,
+      "displayValue": "₹12.4 lakh",
+      "date": "2024",
+      "unit": "₹ crore",
+      "indicatorId": "tax.collect.personal",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Personal (non-corporate) income tax collected, earliest",
+      "value": 31764,
+      "displayValue": "₹31,764",
+      "date": "2000",
+      "unit": "₹ crore",
+      "indicatorId": "tax.collect.personal",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Corporate tax collected, latest",
+      "value": 986767,
+      "displayValue": "₹9.9 lakh",
+      "date": "2024",
+      "unit": "₹ crore",
+      "indicatorId": "tax.collect.corporate",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Corporate tax collected, earliest",
+      "value": 35696,
+      "displayValue": "₹35,696",
+      "date": "2000",
+      "unit": "₹ crore",
+      "indicatorId": "tax.collect.corporate",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Direct taxes as a share of central tax revenue, latest",
+      "value": 58.81,
+      "displayValue": "58.8%",
+      "date": "2024",
+      "unit": "% of total taxes",
+      "indicatorId": "tax.direct_share_of_total",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Direct taxes as a share of central tax revenue, earliest",
+      "value": 36.31,
+      "displayValue": "36.3%",
+      "date": "2000",
+      "unit": "% of total taxes",
+      "indicatorId": "tax.direct_share_of_total",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cost of collecting ₹100 of direct tax, latest",
+      "value": 0.41,
+      "displayValue": "0.4%",
+      "date": "2024",
+      "unit": "% of collection",
+      "indicatorId": "tax.cost_of_collection",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cost of collecting ₹100 of direct tax, earliest",
+      "value": 1.36,
+      "displayValue": "1.4%",
+      "date": "2000",
+      "unit": "% of collection",
+      "indicatorId": "tax.cost_of_collection",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Salary income (individuals) declared in returns, latest",
+      "value": 3523216.5,
+      "displayValue": "₹35.2 lakh",
+      "date": "2023",
+      "unit": "₹ crore",
+      "indicatorId": "tax.income.salary",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Salary income (individuals) declared in returns, earliest",
+      "value": 833180,
+      "displayValue": "₹8.3 lakh",
+      "date": "2013",
+      "unit": "₹ crore",
+      "indicatorId": "tax.income.salary",
+      "sourceId": "cbdt",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Share of income-tax returns that owe zero tax, latest",
+      "value": 61.6,
+      "displayValue": "61.6%",
+      "date": "2023",
+      "unit": "% of returns",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.zero_tax_share"
+    },
+    {
+      "label": "Share of income-tax returns that owe zero tax, earliest",
+      "value": 55.6,
+      "displayValue": "55.6%",
+      "date": "2012",
+      "unit": "% of returns",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.zero_tax_share"
+    },
+    {
+      "label": "Income-tax returns filed (after consistency rules), latest",
+      "value": 79712145,
+      "displayValue": "79.71 million",
+      "date": "2023",
+      "unit": "returns",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.returns_total"
+    },
+    {
+      "label": "Income-tax returns filed (after consistency rules), earliest",
+      "value": 31188609,
+      "displayValue": "31.19 million",
+      "date": "2012",
+      "unit": "returns",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.returns_total"
+    },
+    {
+      "label": "Income you can earn before paying any income tax, latest",
+      "value": 12,
+      "displayValue": "₹12",
+      "date": "2026",
+      "unit": "₹ lakh",
+      "sourceId": "finance-acts",
+      "indicatorId": "tax.policy.nil_tax_ceiling"
+    },
+    {
+      "label": "Income you can earn before paying any income tax, earliest",
+      "value": 2,
+      "displayValue": "₹2",
+      "date": "2013",
+      "unit": "₹ lakh",
+      "sourceId": "finance-acts",
+      "indicatorId": "tax.policy.nil_tax_ceiling"
+    },
+    {
+      "label": "Returns that actually pay income tax (tax payable > 0), latest",
+      "value": 30574907,
+      "displayValue": "30.57 million",
+      "date": "2023",
+      "unit": "returns",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.returns_paying"
+    },
+    {
+      "label": "Returns that actually pay income tax (tax payable > 0), earliest",
+      "value": 13837207,
+      "displayValue": "13.84 million",
+      "date": "2012",
+      "unit": "returns",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.returns_paying"
+    },
+    {
+      "label": "Share of all declared income held by returns above ₹1 crore, latest",
+      "value": 45.4,
+      "displayValue": "45.4%",
+      "date": "2023",
+      "unit": "% of returned income",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.income_share_top1cr"
+    },
+    {
+      "label": "Share of all declared income held by returns above ₹1 crore, earliest",
+      "value": 57,
+      "displayValue": "57%",
+      "date": "2012",
+      "unit": "% of returned income",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.income_share_top1cr"
+    },
+    {
+      "label": "Share of all income tax paid by returns owing above ₹1 crore, latest",
+      "value": 58.1,
+      "displayValue": "58.1%",
+      "date": "2023",
+      "unit": "% of tax payable",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.tax_share_top1cr"
+    },
+    {
+      "label": "Share of all income tax paid by returns owing above ₹1 crore, earliest",
+      "value": 65.9,
+      "displayValue": "65.9%",
+      "date": "2012",
+      "unit": "% of tax payable",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.tax_share_top1cr"
+    },
+    {
+      "label": "Who pays India's income tax: value",
+      "value": 58.1,
+      "displayValue": "58.1%",
+      "date": "",
+      "unit": "% of all income tax",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.tax_concentration"
+    },
+    {
+      "label": "Who pays India's income tax: value",
+      "value": 41.9,
+      "displayValue": "41.9%",
+      "date": "",
+      "unit": "% of all income tax",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.itr.tax_concentration"
+    },
+    {
+      "label": "Personal (non-corporate) income tax collected, latest",
+      "value": 1235161,
+      "displayValue": "₹12.4 lakh",
+      "date": "2024",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.collect.personal"
+    },
+    {
+      "label": "Personal (non-corporate) income tax collected, earliest",
+      "value": 31764,
+      "displayValue": "₹31,764",
+      "date": "2000",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.collect.personal"
+    },
+    {
+      "label": "Corporate tax collected, latest",
+      "value": 986767,
+      "displayValue": "₹9.9 lakh",
+      "date": "2024",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.collect.corporate"
+    },
+    {
+      "label": "Corporate tax collected, earliest",
+      "value": 35696,
+      "displayValue": "₹35,696",
+      "date": "2000",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.collect.corporate"
+    },
+    {
+      "label": "Direct taxes as a share of central tax revenue, latest",
+      "value": 58.81,
+      "displayValue": "58.8%",
+      "date": "2024",
+      "unit": "% of total taxes",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.direct_share_of_total"
+    },
+    {
+      "label": "Direct taxes as a share of central tax revenue, earliest",
+      "value": 36.31,
+      "displayValue": "36.3%",
+      "date": "2000",
+      "unit": "% of total taxes",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.direct_share_of_total"
+    },
+    {
+      "label": "Cost of collecting ₹100 of direct tax, latest",
+      "value": 0.41,
+      "displayValue": "0.4%",
+      "date": "2024",
+      "unit": "% of collection",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.cost_of_collection"
+    },
+    {
+      "label": "Cost of collecting ₹100 of direct tax, earliest",
+      "value": 1.36,
+      "displayValue": "1.4%",
+      "date": "2000",
+      "unit": "% of collection",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.cost_of_collection"
+    },
+    {
+      "label": "Salary income (individuals) declared in returns, latest",
+      "value": 3523216.5,
+      "displayValue": "₹35.2 lakh",
+      "date": "2023",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.income.salary"
+    },
+    {
+      "label": "Salary income (individuals) declared in returns, earliest",
+      "value": 833180,
+      "displayValue": "₹8.3 lakh",
+      "date": "2013",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.income.salary"
+    },
+    {
+      "label": "Business income (individuals) declared in returns, latest",
+      "value": 1667745.5,
+      "displayValue": "₹16.7 lakh",
+      "date": "2023",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.income.business"
+    },
+    {
+      "label": "Business income (individuals) declared in returns, earliest",
+      "value": 468166,
+      "displayValue": "₹4.7 lakh",
+      "date": "2013",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.income.business"
+    },
+    {
+      "label": "Long-term capital gains (individuals) declared in returns, latest",
+      "value": 254357.08,
+      "displayValue": "₹2.5 lakh",
+      "date": "2023",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.income.ltcg"
+    },
+    {
+      "label": "Long-term capital gains (individuals) declared in returns, earliest",
+      "value": 28686,
+      "displayValue": "₹28,686",
+      "date": "2013",
+      "unit": "₹ crore",
+      "sourceId": "cbdt",
+      "indicatorId": "tax.income.ltcg"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 37.5,
+      "displayValue": "37.5%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 34.9,
+      "displayValue": "34.9%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 32.7,
+      "displayValue": "32.7%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 28.1,
+      "displayValue": "28.1%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 24.8,
+      "displayValue": "24.8%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 22.1,
+      "displayValue": "22.1%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 17.3,
+      "displayValue": "17.3%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 10.3,
+      "displayValue": "10.3%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Tax-to-GDP ratio: India vs peers: value",
+      "value": 7.3,
+      "displayValue": "7.3%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "ictd",
+      "indicatorId": "tax.intl.tax_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 8.186,
+      "displayValue": "8.2%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 5.724,
+      "displayValue": "5.7%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 3.604,
+      "displayValue": "3.6%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 3.74,
+      "displayValue": "3.7%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 3.122,
+      "displayValue": "3.1%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 2.537,
+      "displayValue": "2.5%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 1.142,
+      "displayValue": "1.1%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    },
+    {
+      "label": "Personal income tax as % of GDP: India vs peers: value",
+      "value": 1.108,
+      "displayValue": "1.1%",
+      "date": "",
+      "unit": "% of GDP",
+      "sourceId": "oecd",
+      "indicatorId": "tax.intl.pit_to_gdp"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "tax.itr.zero_tax_share",
+      "title": "Share of income-tax returns that owe zero tax",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: All Taxpayers, Range of Tax Payable",
+      "unit": "% of returns",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2012",
+        "value": 55.6
+      },
+      "latest": {
+        "date": "2023",
+        "value": 61.6
+      }
+    },
+    {
+      "indicatorId": "tax.itr.returns_total",
+      "title": "Income-tax returns filed (after consistency rules)",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: total returns analysed",
+      "unit": "returns",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2012",
+        "value": 31188609
+      },
+      "latest": {
+        "date": "2023",
+        "value": 79712145
+      }
+    },
+    {
+      "indicatorId": "tax.policy.nil_tax_ceiling",
+      "title": "Income you can earn before paying any income tax",
+      "sourceId": "finance-acts",
+      "sourceIndicatorId": "Section 87A rebate + basic exemption history",
+      "unit": "₹ lakh",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 14,
+      "earliest": {
+        "date": "2013",
+        "value": 2
+      },
+      "latest": {
+        "date": "2026",
+        "value": 12
+      }
+    },
+    {
+      "indicatorId": "tax.itr.returns_paying",
+      "title": "Returns that actually pay income tax (tax payable > 0)",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: returns with positive tax payable",
+      "unit": "returns",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2012",
+        "value": 13837207
+      },
+      "latest": {
+        "date": "2023",
+        "value": 30574907
+      }
+    },
+    {
+      "indicatorId": "tax.itr.income_share_top1cr",
+      "title": "Share of all declared income held by returns above ₹1 crore",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: Range of Returned Income",
+      "unit": "% of returned income",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2012",
+        "value": 57
+      },
+      "latest": {
+        "date": "2023",
+        "value": 45.4
+      }
+    },
+    {
+      "indicatorId": "tax.itr.tax_share_top1cr",
+      "title": "Share of all income tax paid by returns owing above ₹1 crore",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: Range of Tax Payable",
+      "unit": "% of tax payable",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 12,
+      "earliest": {
+        "date": "2012",
+        "value": 65.9
+      },
+      "latest": {
+        "date": "2023",
+        "value": 58.1
+      }
+    },
+    {
+      "indicatorId": "tax.itr.tax_concentration",
+      "title": "Who pays India's income tax",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: All Taxpayers, Range of Tax Payable (AY2023-24)",
+      "unit": "% of all income tax",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 2,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "The top 0.1% of filers (~91,000 returns each owing over ₹1 crore in tax)",
+          "value": 58.1
+        },
+        {
+          "label": "Every other taxpayer combined",
+          "value": 41.9
+        }
+      ]
+    },
+    {
+      "indicatorId": "tax.collect.personal",
+      "title": "Personal (non-corporate) income tax collected",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "Time-Series 1.1 Non-Corporate Tax",
+      "unit": "₹ crore",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 24,
+      "earliest": {
+        "date": "2000",
+        "value": 31764
+      },
+      "latest": {
+        "date": "2024",
+        "value": 1235161
+      }
+    },
+    {
+      "indicatorId": "tax.collect.corporate",
+      "title": "Corporate tax collected",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "Time-Series 1.1 Corporate Tax",
+      "unit": "₹ crore",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 24,
+      "earliest": {
+        "date": "2000",
+        "value": 35696
+      },
+      "latest": {
+        "date": "2024",
+        "value": 986767
+      }
+    },
+    {
+      "indicatorId": "tax.direct_share_of_total",
+      "title": "Direct taxes as a share of central tax revenue",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "Time-Series 1.3",
+      "unit": "% of total taxes",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 25,
+      "earliest": {
+        "date": "2000",
+        "value": 36.31
+      },
+      "latest": {
+        "date": "2024",
+        "value": 58.81
+      }
+    },
+    {
+      "indicatorId": "tax.cost_of_collection",
+      "title": "Cost of collecting ₹100 of direct tax",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "Time-Series 1.6",
+      "unit": "% of collection",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 25,
+      "earliest": {
+        "date": "2000",
+        "value": 1.36
+      },
+      "latest": {
+        "date": "2024",
+        "value": 0.41
+      }
+    },
+    {
+      "indicatorId": "tax.income.salary",
+      "title": "Salary income (individuals) declared in returns",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: individual taxpayers, income by source",
+      "unit": "₹ crore",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 10,
+      "earliest": {
+        "date": "2013",
+        "value": 833180
+      },
+      "latest": {
+        "date": "2023",
+        "value": 3523216.5
+      }
+    },
+    {
+      "indicatorId": "tax.income.business",
+      "title": "Business income (individuals) declared in returns",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: individual taxpayers, income by source",
+      "unit": "₹ crore",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 10,
+      "earliest": {
+        "date": "2013",
+        "value": 468166
+      },
+      "latest": {
+        "date": "2023",
+        "value": 1667745.5
+      }
+    },
+    {
+      "indicatorId": "tax.income.ltcg",
+      "title": "Long-term capital gains (individuals) declared in returns",
+      "sourceId": "cbdt",
+      "sourceIndicatorId": "ITR Statistics: individual taxpayers, income by source",
+      "unit": "₹ crore",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 10,
+      "earliest": {
+        "date": "2013",
+        "value": 28686
+      },
+      "latest": {
+        "date": "2023",
+        "value": 254357.08
+      }
+    },
+    {
+      "indicatorId": "tax.intl.tax_to_gdp",
+      "title": "Tax-to-GDP ratio: India vs peers",
+      "sourceId": "ictd",
+      "sourceIndicatorId": "UNU-WIDER/ICTD GRD (general government, incl. social contributions)",
+      "unit": "% of GDP",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 9,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Germany",
+          "value": 37.5
+        },
+        {
+          "label": "United Kingdom",
+          "value": 34.9
+        },
+        {
+          "label": "Brazil",
+          "value": 32.7
+        },
+        {
+          "label": "South Africa",
+          "value": 28.1
+        },
+        {
+          "label": "United States",
+          "value": 24.8
+        },
+        {
+          "label": "China",
+          "value": 22.1
+        },
+        {
+          "label": "India",
+          "value": 17.3
+        },
+        {
+          "label": "Indonesia",
+          "value": 10.3
+        },
+        {
+          "label": "Bangladesh",
+          "value": 7.3
+        }
+      ]
+    },
+    {
+      "indicatorId": "tax.intl.pit_to_gdp",
+      "title": "Personal income tax as % of GDP: India vs peers",
+      "sourceId": "oecd",
+      "sourceIndicatorId": "OECD Revenue Statistics in Asia & Pacific; India from CBDT",
+      "unit": "% of GDP",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "OECD average",
+          "value": 8.186
+        },
+        {
+          "label": "Korea",
+          "value": 5.724
+        },
+        {
+          "label": "Asia-Pacific avg",
+          "value": 3.604
+        },
+        {
+          "label": "India",
+          "value": 3.74
+        },
+        {
+          "label": "Philippines",
+          "value": 3.122
+        },
+        {
+          "label": "Singapore",
+          "value": 2.537
+        },
+        {
+          "label": "China",
+          "value": 1.142
+        },
+        {
+          "label": "Indonesia",
+          "value": 1.108
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

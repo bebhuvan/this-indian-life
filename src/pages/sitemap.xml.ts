@@ -1,4 +1,3 @@
-import { charts, chartUrl } from "../data/site";
 import { questionPages, questionUrl } from "../data/questions";
 
 const staticPaths = [
@@ -26,7 +25,6 @@ export function GET({ site }: { site?: URL }) {
 
   const entries: Entry[] = [
     ...staticPaths.map((path) => ({ path })),
-    ...charts.map((chart) => ({ path: chartUrl(chart, "en") })),
     ...questionPages.map((page) => ({
       path: questionUrl(page, "en"),
       lastmod: isoDate(page.explanation?.generatedAt)

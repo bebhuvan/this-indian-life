@@ -112,6 +112,53 @@ export function barChange(rows, { max, unit = "%", worseSide = 1, signColor = fa
   return svg(W, H, p.join(""), "change");
 }
 
+// MOBILE variant of barChange: a narrow (~360-unit) canvas that renders ~1:1 on a phone,
+// so the same label fonts stay readable and the card fits the screen with NO horizontal
+// scroll. Labels already sit above their bars here, so the layout is naturally portrait.
+export function barChangeM(rows, { max, unit = "%", worseSide = 1, signColor = false } = {}) {
+  const MW = 360, x0 = 2, x1 = MW - 2;
+  const LFS = 14.8, LINEH = 18, BH = 21, GAP = 6;
+  const top = 44;
+  const lim = max ?? nice(Math.max(...rows.flatMap((r) => [r.then, r.now]).filter((v) => v != null)) * 1.08);
+  const sx = (v) => x0 + (x1 - x0) * (v / lim);
+  let yCur = top;
+  const laid = rows.map((r) => {
+    const lines = wrapText(r.label, LFS, MW - 92, 2); // room for the delta chip on line 1
+    const barsTop = lines.length * LINEH + 5;
+    const rowH = barsTop + BH + GAP + BH + 16;
+    const y = yCur; yCur += rowH;
+    return { ...r, lines, barsTop, y };
+  });
+  const plotBot = yCur;
+  const H = plotBot + 24;
+  const p = [];
+  p.push(gridX(sx, lim, top - 8, plotBot, unit, false));
+  p.push(`<g><rect x="${x0}" y="8" width="20" height="11" rx="2" fill="${OLD}"/><text x="${x0 + 26}" y="17" class="lglab">2019-21</text><rect x="${x0 + 120}" y="8" width="20" height="11" rx="2" fill="${JADE}"/><text x="${x0 + 146}" y="17" class="lglab">2023-24</text></g>`);
+  const bar = (v, y, fill, faint) => {
+    if (v == null) return "";
+    const end = sx(v), inside = end > x1 - tw(n1(v) + unit, 13.5) - 26;
+    const valX = inside ? end - 8 : end + 7;
+    return `<rect x="${x0}" y="${y}" width="${(x1 - x0).toFixed(1)}" height="${BH}" rx="3" fill="${TRACK}"/>` +
+      `<rect x="${x0}" y="${y}" width="${Math.max(3, end - x0).toFixed(1)}" height="${BH}" rx="3" fill="${fill}"/>` +
+      `<text x="${valX.toFixed(1)}" y="${y + BH - 6}" class="${inside ? "vIn" : "vOut"}" text-anchor="${inside ? "end" : "start"}" ${inside ? "" : `fill="${faint ? MID : INK}"`}>${n1(v)}${unit}</text>`;
+  };
+  laid.forEach((r) => {
+    const nowC = signColor && r.then != null && r.now != null ? (r.now > r.then ? WORSE : BETTER) : JADE;
+    r.lines.forEach((ln, li) => p.push(`<text x="${x0}" y="${r.y + 13 + li * LINEH}" class="rlab">${esc(ln)}</text>`));
+    if (r.then != null && r.now != null) {
+      const d = +(r.now - r.then).toFixed(1);
+      const ws = r.ws != null ? r.ws : worseSide;
+      const improved = ws === 0 ? null : (ws > 0 ? d < 0 : d > 0);
+      const col = improved == null ? MID : improved ? BETTER : WORSE;
+      const sign = d > 0 ? "+" : d < 0 ? "-" : "";
+      p.push(`<text x="${x1}" y="${r.y + 13}" class="dchip" text-anchor="end" fill="${col}">${sign}${Math.abs(d)} pts</text>`);
+    }
+    p.push(bar(r.then, r.y + r.barsTop, OLD, true));
+    p.push(bar(r.now, r.y + r.barsTop + BH + GAP, nowC, false));
+  });
+  return svg(MW, H, p.join(""), "change nf-m");
+}
+
 // ===== URBAN vs RURAL: two labelled bars + India marker =====================
 export function splitGroup(rows, { max, unit = "%" } = {}) {
   const W = 1000, x0 = 4, rightPad = 128, x1 = W - rightPad;
@@ -260,6 +307,59 @@ export function stackBars(rows, { segLabels = [], colors = [], max, unit = "%" }
   return svg(W, H, p.join(""), "stack");
 }
 
+// ===== SHARED MOBILE ROW RENDERER ============================================
+// The row-style charts (stack/split/ranked/diverging/dumbbell/diststrip) all reduce to
+// "a vertical list of indicators, each label above a full-width body of bar(s)+value(s)".
+// This renders that on a narrow 360-unit canvas (≈1:1 on a phone) so nothing scrolls and the
+// existing label fonts stay readable. Each kind passes a drawBody(row, geom) for its bars.
+// geom = { x0, x1, sx, y (body top), BH }. `valRoom` reserves space at the right for an
+// end-of-bar value; `rightTag` puts a small chip on the label line; `legend` draws a header.
+function rowChartM(rows, { lim, cls, bodyH = 20, gap = 13, valRoom = 0, legend = null, rightTag = null }, drawBody) {
+  const MW = 360, x0 = 2, x1 = MW - 4 - valRoom;
+  const sx = (v) => x0 + (x1 - x0) * (v / lim);
+  const top = legend ? 38 : 24;
+  let yCur = top;
+  const laid = rows.map((r) => {
+    const reserve = rightTag ? tw(rightTag(r) || "", 12.4) + 12 : 0;
+    const lines = wrapText(r.label, 13.5, MW - 4 - reserve, 2);
+    const bodyTop = lines.length * 16 + 4;
+    const y = yCur; yCur += bodyTop + bodyH + gap;
+    return { ...r, lines, y, bodyTop };
+  });
+  const p = [];
+  if (legend) p.push(legend(x0));
+  laid.forEach((r) => {
+    r.lines.forEach((ln, li) => p.push(`<text x="${x0}" y="${r.y + 11 + li * 16}" class="rkName">${esc(ln)}</text>`));
+    if (rightTag) { const t = rightTag(r); if (t) p.push(`<text x="${x1 + valRoom}" y="${r.y + 11}" class="dchip" text-anchor="end" fill="${r.tagColor || MID}">${t}</text>`); }
+    p.push(drawBody(r, { x0, x1, sx, y: r.y + r.bodyTop, BH: bodyH }));
+  });
+  return svg(MW, yCur + 2, p.join(""), cls + " nf-m");
+}
+
+// MOBILE: stacked composition bars (e.g. modern vs traditional methods).
+export function stackBarsM(rows, { segLabels = [], colors = [], max, unit = "%" } = {}) {
+  const maxTot = Math.max(...rows.map((r) => r.values.reduce((a, b) => a + (b || 0), 0)));
+  const lim = Math.max(max ?? 0, nice(maxTot * 1.08)); // never let a total bar exceed the scale
+  const legend = (x0) => {
+    let lx = x0, s = "";
+    segLabels.forEach((sl, i) => { s += `<rect x="${lx}" y="13" width="12" height="12" rx="2" fill="${colors[i]}"/><text x="${lx + 18}" y="23" class="lglab">${esc(sl)}</text>`; lx += 24 + tw(sl, 11.5) + 16; });
+    return s;
+  };
+  return rowChartM(rows, { lim, cls: "stack", bodyH: 24, valRoom: 50, legend }, (r, g) => {
+    let cx = g.x0, tot = 0;
+    let s = `<rect x="${g.x0}" y="${g.y}" width="${(g.x1 - g.x0).toFixed(1)}" height="${g.BH}" rx="3" fill="${TRACK}"/>`;
+    r.values.forEach((v, i) => {
+      if (v == null) return;
+      const w = g.sx(v) - g.x0; tot += v;
+      s += `<rect x="${cx.toFixed(1)}" y="${g.y}" width="${Math.max(1, w).toFixed(1)}" height="${g.BH}" rx="${i === 0 ? "3" : "0"}" fill="${colors[i]}"/>`;
+      if (w > 34) s += `<text x="${(cx + w / 2).toFixed(1)}" y="${g.y + g.BH - 7}" class="vIn" text-anchor="middle">${n1(v)}</text>`;
+      cx += w;
+    });
+    s += `<text x="${(cx + 7).toFixed(1)}" y="${g.y + g.BH - 7}" class="vOut" text-anchor="start" fill="${INK}">${n1(tot)}${unit}</text>`;
+    return s;
+  });
+}
+
 // ===== MOVERS: what changed most — improvements right (jade), worse left ======
 // items: [{label, delta, improved}]  delta = signed pp change (now - then).
 export function moversChart(items, { unit = "%" } = {}) {
@@ -278,10 +378,93 @@ export function moversChart(items, { unit = "%" } = {}) {
     const y = top + i * rowH + (rowH - BH) / 2;
     const mag = sx(Math.abs(d.delta)), col = d.improved ? BETTER : WORSE;
     p.push(`<text x="${gut - 14}" y="${y + BH - 4}" class="rkName" text-anchor="end">${esc(d.label)}</text>`);
-    if (d.improved) { p.push(`<rect x="${cx}" y="${y}" width="${mag.toFixed(1)}" height="${BH}" rx="2" fill="${col}"/>`); p.push(`<text x="${(cx + mag + 8).toFixed(1)}" y="${y + BH - 4}" class="vMov" fill="${col}">+${Math.abs(d.delta)}</text>`); }
-    else { p.push(`<rect x="${(cx - mag).toFixed(1)}" y="${y}" width="${mag.toFixed(1)}" height="${BH}" rx="2" fill="${col}"/>`); p.push(`<text x="${(cx - mag - 8).toFixed(1)}" y="${y + BH - 4}" class="vMov" text-anchor="end" fill="${col}">+${Math.abs(d.delta)}</text>`); }
+    if (d.improved) { p.push(`<rect x="${cx}" y="${y}" width="${mag.toFixed(1)}" height="${BH}" rx="2" fill="${col}"/>`); p.push(`<text x="${(cx + mag + 8).toFixed(1)}" y="${y + BH - 4}" class="vMov" fill="${col}">${Math.abs(d.delta)}</text>`); }
+    else { p.push(`<rect x="${(cx - mag).toFixed(1)}" y="${y}" width="${mag.toFixed(1)}" height="${BH}" rx="2" fill="${col}"/>`); p.push(`<text x="${(cx - mag - 8).toFixed(1)}" y="${y + BH - 4}" class="vMov" text-anchor="end" fill="${col}">${Math.abs(d.delta)}</text>`); }
   });
   return svg(W, H, p.join(""), "movers");
+}
+
+// MOBILE movers: a ranked list (biggest change on top) via the shared row engine. Direction
+// is shown two ways so it's unambiguous: a ▲/▼ arrow (the metric went up or down) and colour
+// (jade = improved, amber = worsened). So "internet ▲ 31" reads good, "overweight ▲ 6.7" reads
+// bad, "stunting ▼ 6.2" reads good — arrow = what happened, colour = whether that's good.
+export function moversM(items, { unit = "%" } = {}) {
+  const sorted = [...items].sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
+  const maxMag = Math.max(...sorted.map((d) => Math.abs(d.delta))) || 1;
+  const legend = (x0) => `<rect x="${x0}" y="12" width="12" height="12" rx="2" fill="${BETTER}"/><text x="${x0 + 18}" y="22" class="lglab">improved</text><rect x="${x0 + 96}" y="12" width="12" height="12" rx="2" fill="${WORSE}"/><text x="${x0 + 114}" y="22" class="lglab">worsened</text>`;
+  return rowChartM(sorted, { lim: maxMag, cls: "movers", bodyH: 17, valRoom: 56, legend }, (d, g) => {
+    const w = Math.max(2, g.sx(Math.abs(d.delta)) - g.x0), col = d.improved ? BETTER : WORSE;
+    const arrow = d.delta >= 0 ? "▲" : "▼";
+    return `<rect x="${g.x0}" y="${g.y}" width="${w.toFixed(1)}" height="${g.BH}" rx="2" fill="${col}"/>` +
+      `<text x="${(g.x0 + w + 7).toFixed(1)}" y="${g.y + g.BH - 3}" class="vMov" fill="${col}">${arrow} ${Math.abs(d.delta)}</text>`;
+  });
+}
+
+// MOBILE ranked state list — used for map / ranked / dotstrip / diststrip (all state data).
+// A compact "abbr · bar · value" row per State/UT, sorted, coloured vs the India average
+// (amber worse / jade better), with the India reference marked. Replaces the tiny tile-map.
+export function rankedBarsM(map, { unit = "%", worseSide = 1 } = {}) {
+  const MW = 360, gut = 140, x0 = gut, x1 = MW - 44, top = 34, rowH = 20, BH = 14;
+  // Full State/UT names (not cryptic abbreviations); ellipsis only the over-long UT names
+  // that no phone gutter can fit.
+  const clipLab = (s) => { let t = String(s); if (tw(t, 12.5) <= gut - 16) return t; while (t.length && tw(t + "…", 12.5) > gut - 16) t = t.slice(0, -1); return t.replace(/\s+$/, "") + "…"; };
+  const cells = map.cells.filter((c) => c.value != null).sort((a, b) => b.value - a.value);
+  const lim = nice(map.max * 1.06);
+  const sx = (v) => x0 + (x1 - x0) * (v / lim);
+  const centre = map.india ?? cells[Math.floor(cells.length / 2)].value;
+  const maxDev = Math.max(...cells.map((c) => Math.abs(c.value - centre))) || 1;
+  const plotBot = top + cells.length * rowH;
+  const H = plotBot + 8;
+  const p = [];
+  if (map.india != null) {
+    const ix = sx(map.india);
+    p.push(`<line x1="${ix.toFixed(1)}" y1="${top - 6}" x2="${ix.toFixed(1)}" y2="${plotBot}" stroke="${INK}" stroke-width="1.2" stroke-dasharray="3 3"/>`);
+    p.push(`<text x="${x0}" y="20" class="ind">India ${n1(map.india)}${unit}</text>`);
+  }
+  cells.forEach((c, i) => {
+    const y = top + i * rowH;
+    const fill = divColor(c.value, centre, maxDev, worseSide);
+    p.push(`<text x="${gut - 10}" y="${y + BH - 2}" class="rkName" text-anchor="end">${esc(clipLab(c.name || c.area || c.abbr))}</text>`);
+    p.push(`<rect x="${x0}" y="${y}" width="${(x1 - x0).toFixed(1)}" height="${BH}" rx="2" fill="${TRACK}"/>`);
+    p.push(`<rect x="${x0}" y="${y}" width="${Math.max(2, sx(c.value) - x0).toFixed(1)}" height="${BH}" rx="2" fill="${fill}"><title>${esc(c.area)}: ${n1(c.value)}${unit}</title></rect>`);
+    p.push(`<text x="${(sx(c.value) + 5).toFixed(1)}" y="${y + BH - 2}" class="rkVal">${n1(c.value)}</text>`);
+  });
+  return svg(MW, H, p.join(""), "ranked nf-m");
+}
+
+// MOBILE urban/rural split — two bars (urban, rural) per indicator with the India avg tagged.
+export function splitGroupM(rows, { max, unit = "%" } = {}) {
+  const lim = max ?? nice(Math.max(...rows.flatMap((r) => [r.urban, r.rural]).filter((v) => v != null)) * 1.08);
+  const URB = JADE, RUR = mix(JADE, "#ffffff", 0.5);
+  const legend = (x0) => `<rect x="${x0}" y="13" width="12" height="12" rx="2" fill="${URB}"/><text x="${x0 + 18}" y="23" class="lglab">Urban</text><rect x="${x0 + 74}" y="13" width="12" height="12" rx="2" fill="${RUR}"/><text x="${x0 + 92}" y="23" class="lglab">Rural</text>`;
+  return rowChartM(rows, { lim, cls: "split", bodyH: 42, valRoom: 54, legend, rightTag: (r) => (r.total != null ? `India ${n1(r.total)}${unit}` : null) }, (r, g) => {
+    const BH = 18, gap = 6;
+    const bar = (v, yy, fill) => v == null ? "" : `<rect x="${g.x0}" y="${yy}" width="${(g.x1 - g.x0).toFixed(1)}" height="${BH}" rx="3" fill="${TRACK}"/><rect x="${g.x0}" y="${yy}" width="${Math.max(3, g.sx(v) - g.x0).toFixed(1)}" height="${BH}" rx="3" fill="${fill}"/><text x="${(g.sx(v) + 7).toFixed(1)}" y="${yy + BH - 5}" class="vOut" text-anchor="start" fill="${INK}">${n1(v)}${unit}</text>`;
+    return bar(r.urban, g.y, URB) + bar(r.rural, g.y + BH + gap, RUR);
+  });
+}
+
+// MOBILE diverging (e.g. the "double burden": underweight vs overweight). Per group: the label
+// centred above a bar that diverges from the middle — left quantity one way, right the other —
+// with values clear of the bars. `half` leaves room so wide values never overflow the canvas.
+export function divergingM(groups, { leftLabel, rightLabel, leftColor = AMBER, rightColor = JADE, max, unit = "%" } = {}) {
+  const MW = 360, cx = MW / 2, half = 120, top = 46, BH = 20, LINEH = 16;
+  const lim = max ?? nice(Math.max(...groups.flatMap((g) => [g.left, g.right]).filter((v) => v != null)) * 1.1);
+  const sx = (v) => (half * v) / lim;
+  let yCur = top;
+  const laid = groups.map((g) => { const lines = wrapText(g.label, 13.5, MW - 8, 1); const bodyTop = lines.length * LINEH + 4; const y = yCur; yCur += bodyTop + BH + 18; return { ...g, lines, y, bodyTop }; });
+  const H = yCur + 2;
+  const p = [];
+  p.push(`<text x="${cx - 10}" y="22" class="dvh" text-anchor="end" fill="${leftColor}">◀ ${esc(leftLabel)}</text>`);
+  p.push(`<text x="${cx + 10}" y="22" class="dvh" text-anchor="start" fill="${rightColor}">${esc(rightLabel)} ▶</text>`);
+  laid.forEach((g) => {
+    g.lines.forEach((ln, li) => p.push(`<text x="${cx}" y="${g.y + 11 + li * LINEH}" class="rkName" text-anchor="middle">${esc(ln)}</text>`));
+    const by = g.y + g.bodyTop;
+    p.push(`<line x1="${cx}" y1="${by - 3}" x2="${cx}" y2="${by + BH + 3}" stroke="${DIM}" stroke-width="1.2"/>`);
+    if (g.left != null) { p.push(`<rect x="${(cx - sx(g.left)).toFixed(1)}" y="${by}" width="${sx(g.left).toFixed(1)}" height="${BH}" rx="3" fill="${leftColor}"/>`); p.push(`<text x="${(cx - sx(g.left) - 7).toFixed(1)}" y="${by + BH - 5}" class="vDiv" text-anchor="end" fill="${leftColor}">${n1(g.left)}${unit}</text>`); }
+    if (g.right != null) { p.push(`<rect x="${cx}" y="${by}" width="${sx(g.right).toFixed(1)}" height="${BH}" rx="3" fill="${rightColor}"/>`); p.push(`<text x="${(cx + sx(g.right) + 7).toFixed(1)}" y="${by + BH - 5}" class="vDiv" text-anchor="start" fill="${rightColor}">${n1(g.right)}${unit}</text>`); }
+  });
+  return svg(MW, H, p.join(""), "diverging nf-m");
 }
 
 // ===== SLOPE: a slopegraph — every indicator's line from 2019-21 to 2023-24 ===

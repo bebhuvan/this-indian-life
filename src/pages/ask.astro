@@ -1,9 +1,41 @@
 ---
 import Base from "../layouts/Base.astro";
 import Nav from "../components/Nav.astro";
-import { charts, chartUrl, formatValue, latestObservation, loadSeries, locales } from "../data/site";
+import { questionPages, questionUrl, statusMeta } from "../data/questions";
 
 const locale = "en";
+
+// Drive Ask off the article catalog, not the old single-chart "snapshot" pages.
+// Every question now resolves to its full /articles/ explainer. Ready articles come
+// first; work-in-progress and needs-data are grouped under "Still building" so the
+// status is honest instead of hidden behind a confident-looking question.
+const order: Record<string, number> = { ready: 0, work_in_progress: 1, needs_data: 2 };
+const sorted = [...questionPages].sort(
+  (a, b) =>
+    (order[a.explanation.status] ?? 9) - (order[b.explanation.status] ?? 9) ||
+    a.question.localeCompare(b.question)
+);
+const ready = sorted.filter((page) => page.explanation.status === "ready");
+const building = sorted.filter((page) => page.explanation.status !== "ready");
+
+const searchText = (page: (typeof questionPages)[number]) =>
+  [
+    page.question,
+    page.explanation.short?.dek,
+    page.explanation.short?.headline,
+    page.explanation.article?.title,
+    ...(page.explanation.editorialPlan?.glossaryBlocks?.map((g) => g.term) ?? [])
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+const suggestions = ready.slice(0, 5);
+
+const groups = [
+  { id: "ready", label: "Ready to read", pages: ready },
+  { id: "building", label: "Still building", pages: building }
+];
 ---
 
 <Base title="Ask · This Indian Life">
@@ -12,38 +44,47 @@ const locale = "en";
 
     <section class="ask-hero">
       <p class="lbl">Ask about India</p>
-      <h1 class="serif ask-title">Find the chart behind the question.</h1>
+      <h1 class="serif ask-title">Find the article behind the question.</h1>
       <div class="ask-field ask-large">
         <input id="askInput" placeholder="Try: how big is India's economy?" />
         <button id="askButton" aria-label="Search">-></button>
       </div>
       <div class="suggest">
-        {charts.slice(0, 5).map((chart) => <button class="sg" data-query={chart.aliases[0]}>{chart.aliases[0]}</button>)}
+        {suggestions.map((page) => <button class="sg" data-query={page.question}>{page.question}</button>)}
       </div>
     </section>
 
-    <section class="section">
-      <p class="sec-hd">Best matches</p>
-      <div id="results">
-        {charts.map((chart) => {
-          const latest = latestObservation(loadSeries(chart.seriesPath))!;
-          return (
-            <a class={`q-row result-row dom-${chart.domain}`} href={chartUrl(chart, locale)} data-text={`${chart.title} ${chart.dek} ${chart.aliases.join(" ")}`.toLowerCase()}>
-              <span class="q-dot" style={`background:var(--${chart.domain})`}></span>
-              <span class="q-txt">{chart.title}</span>
-              <span class="q-ans" style={`color:var(--${chart.domain}-ink)`}>{formatValue(latest.value, chart.valueFormat)}</span>
-              <span class="q-arrow">-></span>
-            </a>
-          );
-        })}
-      </div>
-    </section>
+    {groups.map((group) =>
+      group.pages.length ? (
+        <section class="section qgroup" data-group={group.id}>
+          <p class="sec-hd">{group.label}</p>
+          <div>
+            {group.pages.map((page) => (
+              <a
+                class={`q-row result-row dom-${page.domain}`}
+                href={questionUrl(page, locale)}
+                data-text={searchText(page)}
+              >
+                <span class="q-dot" style={`background:var(--${page.domain})`}></span>
+                <span class="q-txt">{page.question}</span>
+                <span class={`q-ans status ${statusMeta(page.explanation.status).cls}`} style={`color:var(--${page.domain}-ink)`}>
+                  {statusMeta(page.explanation.status).short}
+                </span>
+                <span class="q-arrow">-></span>
+              </a>
+            ))}
+          </div>
+        </section>
+      ) : null
+    )}
+
+    <p class="archive-empty" id="askEmpty" hidden>No question matches that search yet.</p>
 
     <section class="section mods">
       <div>
         <p class="lbl">How this works now</p>
         <p class="muted prose">
-          The launch matcher searches the local chart catalog. It is deliberately simple for now,
+          The launch matcher searches the local article catalog. It is deliberately simple for now,
           because the useful thing today is getting readers to the right question quickly.
         </p>
       </div>
@@ -58,21 +99,30 @@ const locale = "en";
 <script>
   const input = document.getElementById("askInput");
   const button = document.getElementById("askButton");
-  const rows = [...document.querySelectorAll(".result-row")];
+  const empty = document.getElementById("askEmpty");
+  const groups = [...document.querySelectorAll(".qgroup")];
 
   function runSearch() {
     const query = input.value.toLowerCase().trim();
-    rows.forEach((row) => {
-      const score = !query || row.dataset.text.includes(query);
-      row.style.display = score ? "flex" : "none";
+    let total = 0;
+    groups.forEach((group) => {
+      let visibleInGroup = 0;
+      group.querySelectorAll(".result-row").forEach((row) => {
+        const show = !query || row.dataset.text.includes(query);
+        row.style.display = show ? "flex" : "none";
+        if (show) visibleInGroup += 1;
+      });
+      group.hidden = visibleInGroup === 0;
+      total += visibleInGroup;
     });
+    if (empty) empty.hidden = total !== 0;
   }
 
   button.addEventListener("click", runSearch);
   input.addEventListener("input", runSearch);
-  document.querySelectorAll(".sg").forEach((button) => {
-    button.addEventListener("click", () => {
-      input.value = button.dataset.query;
+  document.querySelectorAll(".sg").forEach((suggest) => {
+    suggest.addEventListener("click", () => {
+      input.value = suggest.dataset.query;
       runSearch();
     });
   });

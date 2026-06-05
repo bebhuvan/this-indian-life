@@ -63,11 +63,13 @@ function visualProminence(b: any, index: number, visibleCount = 1) {
       <p class="muted">The sixth National Family Health Survey reached 679,238 households, 716,397 women and 100,977 men across India and every State/UT except Manipur. Read here across eight themes. Every number is locked from the official fact sheets; the prose around each chart is written to those locked numbers.</p>
     </header>
 
-    <nav class="nf-tabs" aria-label="Themes">
-      {tabs.map((t) => (
-        <button class="nf-tab" data-tab={t.id} type="button">{t.label}</button>
-      ))}
-    </nav>
+    <div class="nf-tabs-scroll">
+      <nav class="nf-tabs" aria-label="Themes">
+        {tabs.map((t) => (
+          <button class="nf-tab" data-tab={t.id} type="button">{t.label}</button>
+        ))}
+      </nav>
+    </div>
 
     {tabs.map((t) => (
       <section class="nf-panel" data-panel={t.id} hidden={t.id !== "overview"}>
@@ -181,13 +183,33 @@ function visualProminence(b: any, index: number, visibleCount = 1) {
       const initial = new URL(window.location.href).searchParams.get("theme");
       if (initial && panels.some((p) => p.getAttribute("data-panel") === initial)) show(initial);
       else document.querySelector('.nf-tab[data-tab="overview"]').classList.add("is-active");
+
+      // Toggle the tab-strip edge fades so readers can tell there are more tabs to scroll to.
+      const strip = document.querySelector(".nf-tabs");
+      const wrap = document.querySelector(".nf-tabs-scroll");
+      function fades() {
+        if (!strip || !wrap) return;
+        wrap.classList.toggle("at-start", strip.scrollLeft <= 2);
+        wrap.classList.toggle("at-end", strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2);
+      }
+      strip?.addEventListener("scroll", fades, { passive: true });
+      window.addEventListener("resize", fades);
+      fades();
     })();
   </script>
 
   <style is:global>
     .nf-head { padding: 48px 0 8px; max-width: 760px; }
     .nf-head h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 300; line-height: 1.05; margin: 14px 0 12px; letter-spacing: -0.01em; }
-    .nf-tabs { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; background: #fff; padding: 12px 0; border-bottom: 1px solid var(--line, #ededed); z-index: 20; margin-bottom: 8px; }
+    .nf-tabs-scroll { position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--line, #ededed); z-index: 20; margin-bottom: 8px; }
+    .nf-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 0; }
+    /* Edge fades hint that the tab strip scrolls horizontally on mobile. They auto-hide at
+       each end (and stay hidden on desktop, where the tabs wrap and there is no scroll). */
+    .nf-tabs-scroll::before, .nf-tabs-scroll::after { content: ""; position: absolute; top: 0; bottom: 1px; width: 38px; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 1; }
+    .nf-tabs-scroll::before { left: 0; background: linear-gradient(to left, rgba(255,255,255,0), #fff 70%); }
+    .nf-tabs-scroll::after { right: 0; background: linear-gradient(to right, rgba(255,255,255,0), #fff 70%); }
+    .nf-tabs-scroll:not(.at-end)::after { opacity: 1; }
+    .nf-tabs-scroll:not(.at-start)::before { opacity: 1; }
     .nf-tab { font: 500 0.72rem/1 "DM Sans", sans-serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mid, #5c5c5c); background: none; border: 1px solid var(--ghost, #e7e7e7); border-radius: 2px; padding: 8px 12px; cursor: pointer; transition: all 0.15s; }
     .nf-tab:hover { color: var(--ink, #0b0b0b); border-color: var(--dim, #a6a6a6); }
     .nf-tab.is-active { color: #fff; background: var(--health, #15A382); border-color: var(--health, #15A382); }
@@ -216,6 +238,7 @@ function visualProminence(b: any, index: number, visibleCount = 1) {
     }
     .nf-read { font: 300 1rem/1.66 "DM Sans", sans-serif; color: var(--mid, #5c5c5c); margin: 20px 0 0; max-width: 76ch; }
     .nf-svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .nf-svg.nf-m { display: none; }   /* mobile chart variant — shown only on phones (below) */
     .nf-chart.is-map .nf-svg {
       width: min(100%, 800px);
     }
@@ -343,8 +366,18 @@ function visualProminence(b: any, index: number, visibleCount = 1) {
       .nf-chart { overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
       .nf-chart .nf-svg { min-width: 500px; }
       .nf-chart.is-map .nf-svg { min-width: 480px; }
+      /* Chart kinds with a mobile-native layout (change/crossover/movers): swap the wide
+         desktop SVG for the narrow .nf-m one, which fits the screen with no scroll. Capped
+         so it stays ~1:1 (readable fonts) and never blows up on small tablets. */
+      .nf-chart .nf-d { display: none; }
+      .nf-chart .nf-m { display: block; min-width: 0; max-width: 440px; }
       .nf-chart::-webkit-scrollbar { height: 5px; }
       .nf-chart::-webkit-scrollbar-thumb { background: #d7d7d7; border-radius: 999px; }
+      /* 11 wrapped tabs made a ~160px sticky header that covered a quarter of the phone
+         screen. On mobile, lay them out as a single horizontal-scroll row (~40px tall). */
+      .nf-tabs { flex-wrap: nowrap; overflow-x: auto; gap: 6px; padding: 10px 0; scrollbar-width: none; }
+      .nf-tabs::-webkit-scrollbar { display: none; }
+      .nf-tab { flex: 0 0 auto; white-space: nowrap; }
     }
   </style>
 </Base>

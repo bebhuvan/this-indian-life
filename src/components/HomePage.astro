@@ -12,11 +12,25 @@ const locale = "en";
 const featured = charts.find((chart) => chart.id === "people.population.total")!;
 const featuredSeries = loadSeries(featured.seriesPath);
 const featuredLatest = latestObservation(featuredSeries)!;
+// Resolve the article behind a stat tile. Prefer the exact same-question article (slug
+// match — catches cases like GDP where the chart's indicator differs from the article's),
+// then fall back to any article that charts this indicator (core/context/visualPlan).
+const findArticle = (chart: (typeof charts)[number]) =>
+  questionPages.find((page) => page.slug === chart.slug) ??
+  questionPages.find(
+    (page) =>
+      page.indicators.includes(chart.id) ||
+      (page.core ?? []).includes(chart.id) ||
+      (page.context ?? []).includes(chart.id) ||
+      (page.visualPlan ?? []).some(
+        (entry) => entry.indicator === chart.id || (entry.series ?? []).some((s) => s.indicator === chart.id)
+      )
+  );
 const ledger = charts
   .filter((chart) => ["people.population.total", "econ.gdp.current_usd", "energy.electricity_access", "health.life_expectancy"].includes(chart.id))
   .map((chart) => {
     const latest = latestObservation(loadSeries(chart.seriesPath))!;
-    const article = questionPages.find((page) => page.indicators.includes(chart.id));
+    const article = findArticle(chart);
     return { chart, latest, href: article ? questionUrl(article, locale) : `/articles/` };
   });
 ---
@@ -26,8 +40,7 @@ const ledger = charts
     <Nav active="people" locale={locale} />
 
     <div class="home-kicker">
-      <span class="lbl">India - A Living Almanac</span>
-      <span class="lbl">Sourced charts · plain English</span>
+      <span class="lbl">All our lives, in numbers</span>
     </div>
 
     <section class="dom-people home-hero">
@@ -40,7 +53,7 @@ const ledger = charts
       </div>
       <h1 class="serif home-title">India isn't one country. It's many, wearing a single name.</h1>
       <p class="muted home-dek">
-        The big numbers behind everyday Indian life, sourced with care and explained in plain language.
+        Big questions about how Indians actually live — answered from sourced numbers, in plain language.
       </p>
       <a class="btn dom-people" href="/ask/">Ask a question</a>
     </section>

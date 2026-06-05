@@ -85,13 +85,14 @@ function fmt(value: number, unit = "") {
     if (abs >= 1000) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
   }
   if (/US\$|usd|\$/i.test(unit)) {
-    if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 2 })}T`;
-    if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}B`;
+    if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} trillion`;
+    if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 0 })} billion`;
+    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
   }
-  if (/people/i.test(unit) && abs >= 10_000_000) return `${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} cr`;
-  if (abs >= 1_000_000_000) return `${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}B`;
-  if (abs >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
-  if (abs >= 1000) return `${(value / 1000).toFixed(1)}k`;
+  if (/people/i.test(unit) && abs >= 10_000_000) return `${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} crore`;
+  if (abs >= 1_000_000_000) return `${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} billion`;
+  if (abs >= 1_000_000) return `${(value / 1_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} million`;
+  if (abs >= 1000) return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   if (abs >= 100) return value.toFixed(0);
   return value.toFixed(1);
 }
@@ -433,15 +434,22 @@ function niceScale(lo: number, hi: number, count = 5) {
   return { min: niceMin, max: niceMax, ticks };
 }
 
-function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?: { min?: number; max?: number }) {
+function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?: { min?: number; max?: number }, mobile = false) {
   // The viewBox width is matched to how wide the chart actually renders, so one fixed
   // axis-font size reads consistently: 2-up (leftover grid) charts render ~half width
   // and use a narrow box; section-bound charts render full width and use a wide box.
   // Without this, the same font is tiny on half-width charts and garish on full-width ones.
-  const width = twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000);
+  // On phones every chart renders at ~one column width, so the wide desktop box would shrink
+  // to ~0.3x — sub-7px labels, ~130px tall. The `mobile` variant uses a small, near-square
+  // box that renders close to 1:1: a taller chart with readable labels (see .viz-m CSS).
   const isHero = (visual as { size?: string }).size === "hero";
-  const height = isHero ? 560 : isLead ? 500 : 360;
-  const pad = isLead ? { l: 86, r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 58 } : { l: 58, r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 44 };
+  const width = mobile ? 384 : (twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000));
+  const height = mobile ? (isHero ? 392 : 332) : (isHero ? 560 : isLead ? 500 : 360);
+  const baseLeft = mobile ? 50 : isLead ? 86 : 58;
+  const yFontSize = mobile ? 13 : isLead ? 21 : 17;
+  const padRTB = mobile
+    ? { r: visual.lines.length > 1 ? 64 : 24, t: 20, b: 42 }
+    : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 58 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 44 };
   const all = visual.lines.flatMap((line) => line.points);
   const values = all.map((point) => point.value);
   const useLogScale = visual.title.toLowerCase().includes("gdp per person over time");
@@ -461,6 +469,12 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const min = useLogScale ? Math.log10(logMinRaw) : linear.min;
   const max = useLogScale ? Math.log10(logMaxRaw) : linear.max;
   const span = max - min || 1;
+  const logTicks = [100, 1000, 10000, 100000].filter((tick) => tick >= logMinRaw * 0.9 && tick <= logMaxRaw * 1.1);
+  const ticks = useLogScale && logTicks.length >= 2 ? logTicks : linear.ticks;
+  // Size the left padding to the widest y-axis label so "₹400 lakh cr" / "$10 trillion"
+  // don't overflow off the left edge of the viewBox (which clipped the leading digits).
+  const maxYLabelLen = Math.max(3, ...ticks.map((tick) => fmt(tick, visual.unit).length));
+  const pad = { l: Math.max(baseLeft, Math.round(maxYLabelLen * yFontSize * 0.64) + 12), ...padRTB };
   const plotW = width - pad.l - pad.r;
   // Position points by real time. Monthly series must use the month too; otherwise all
   // twelve YYYY-MM points in a year collapse onto one x-position and render as steps.
@@ -481,8 +495,6 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const px = (point: Point, index: number, count: number) => (dateMode ? xByTime(timeOf(point.date) ?? minTime) : xByIndex(index, count));
   const scaled = (value: number) => useLogScale ? Math.log10(Math.max(1, value)) : value;
   const y = (value: number) => height - pad.b - ((scaled(value) - min) / span) * (height - pad.t - pad.b);
-  const logTicks = [100, 1000, 10000, 100000].filter((tick) => tick >= logMinRaw * 0.9 && tick <= logMaxRaw * 1.1);
-  const ticks = useLogScale && logTicks.length >= 2 ? logTicks : linear.ticks;
   const pathsRaw = visual.lines.map((line, lineIndex) => {
     const d = line.points.map((point, index) => `${index === 0 ? "M" : "L"}${svgCoord(px(point, index, line.points.length))} ${svgCoord(y(point.value))}`).join("");
     const xFirst = px(line.points[0], 0, line.points.length);
@@ -493,7 +505,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     const latestY = latest ? y(latest.value) : 0;
     return { ...line, d, areaD, latest, latestX, latestY, color: colors[lineIndex % colors.length] };
   });
-  const minGap = isLead ? 34 : 24;
+  const minGap = mobile ? 20 : isLead ? 34 : 24;
   const labelTop = pad.t + 14;
   const labelBottom = height - pad.b - 10;
   const sorted = pathsRaw
@@ -512,12 +524,24 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   for (const item of sorted) item.y = Math.max(labelTop, Math.min(labelBottom, item.y));
   const labelY = new Map(sorted.map((item) => [item.index, item.y]));
   const paths = pathsRaw.map((path, index) => ({ ...path, labelY: labelY.get(index) || path.latestY }));
-  const tickCount = isLead ? 5 : 4;
+  const tickCount = mobile ? 4 : isLead ? 5 : 4;
   let axisTicks: Array<{ xPos: number; label: string }>;
   if (dateMode) {
-    axisTicks = niceScale(minTime, maxTime, tickCount).ticks
-      .filter((time) => time >= minTime && time <= maxTime)
-      .map((time) => ({ xPos: xByTime(time), label: String(Math.round(time)) }));
+    // Nice round-year ticks that actually fall INSIDE the data range. niceScale
+    // rounds the domain outward, so filtering its ticks to [min,max] can leave
+    // just one (a 75-year span snapping to a 50-year step shows only "2000").
+    const span = Math.max(1e-6, maxTime - minTime);
+    const niceStep = (rough: number) => {
+      const mag = 10 ** Math.floor(Math.log10(rough));
+      const n = rough / mag;
+      return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * mag;
+    };
+    const countIn = (s: number) => { let c = 0; for (let t = Math.ceil(minTime / s) * s; t <= maxTime + 1e-9; t += s) c += 1; return c; };
+    let step = niceStep(span / tickCount);
+    while (step > 1 && countIn(step) < 3) step = niceStep(step / 2 - 1e-9);
+    const years: number[] = [];
+    for (let t = Math.ceil(minTime / step) * step; t <= maxTime + 1e-9; t += step) years.push(t);
+    axisTicks = years.map((time) => ({ xPos: xByTime(time), label: String(Math.round(time)) }));
   } else {
     const ap = visual.lines[0]?.points || [];
     axisTicks = Array.from({ length: tickCount }, (_, i) => Math.round((i / (tickCount - 1)) * Math.max(0, ap.length - 1)))
@@ -528,17 +552,17 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   return { width, height, pad, ticks, paths, axisTicks, y };
 }
 
-function groupedBarGeometry(visual: GroupedBarVisual) {
-  const width = 1160;
-  const height = 430;
-  const pad = { l: 86, r: 46, t: 34, b: 70 };
+function groupedBarGeometry(visual: GroupedBarVisual, mobile = false) {
+  const width = mobile ? 384 : 1160;
+  const height = mobile ? 360 : 430;
+  const pad = mobile ? { l: 46, r: 12, t: 22, b: 54 } : { l: 86, r: 46, t: 34, b: 70 };
   const values = visual.groups.flatMap((group) => group.values);
   const max = Math.max(...values, 1) * 1.12;
   const plotW = width - pad.l - pad.r;
   const plotH = height - pad.t - pad.b;
   const groupW = plotW / Math.max(1, visual.groups.length);
-  const barGap = 5;
-  const barW = Math.max(8, Math.min(30, (groupW - 18 - barGap) / Math.max(1, visual.series.length)));
+  const barGap = mobile ? 2.5 : 5;
+  const barW = Math.max(mobile ? 5 : 8, Math.min(mobile ? 15 : 30, (groupW - (mobile ? 9 : 18) - barGap) / Math.max(1, visual.series.length)));
   const y = (value: number) => height - pad.b - (value / max) * plotH;
   const ticks = Array.from({ length: 5 }, (_, index) => (max * index) / 4);
   return { width, height, pad, max, groupW, barGap, barW, y, ticks };
@@ -642,6 +666,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           // downscales far smaller than the single-line small charts beside it.
           const isLarge = isLead || size === "feature" || (visualIndex === 0 && leadFirst && !size && visual.lines.length > 1);
           const g = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"));
+          const gm = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"), undefined, true);
           const leadPoint = visual.lines[0]?.points.at(-1);
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
@@ -660,7 +685,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   <p>{leadPoint.date} · latest point</p>
                 </div>
               ) : null}
-              <svg class={isLead ? "viz-svg viz-svg-lead" : "viz-svg"} viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
+              <svg class={isLead ? "viz-svg viz-svg-lead viz-d" : "viz-svg viz-d"} viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
                 {g.ticks.map((tick) => (
                   <g>
                     <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
@@ -686,6 +711,37 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                           <>
                             <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.2" opacity=".4" />
                             <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{fmt(path.latest.value, visual.unit)}</text>
+                          </>
+                        ) : null}
+                      </g>
+                    )}
+                  </>
+                ))}
+              </svg>
+              <svg class={isLead ? "viz-svg viz-svg-lead viz-m" : "viz-svg viz-m"} viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={visual.title}>
+                {gm.ticks.map((tick) => (
+                  <g>
+                    <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke="#ededed" />
+                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, visual.unit)}</text>
+                  </g>
+                ))}
+                {gm.axisTicks.map((tick) => (
+                  <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick.label}</text>
+                ))}
+                {gm.paths.map((path) => (
+                  <>
+                    {isLead && visual.lines.length === 1 ? <path d={path.areaD} fill="var(--c-tint)" /> : null}
+                    <path d={path.d} fill="none" stroke={path.color} stroke-width={isLead ? "3.4" : "2.6"} stroke-linecap="round" stroke-linejoin="round" />
+                    {path.latest && (
+                      <g>
+                        <circle cx={path.latestX} cy={path.latestY} r={isLead ? "5" : "4"} fill="#fff" stroke={path.color} stroke-width={isLead ? "3" : "2.4"} />
+                        {isLead && visual.lines.length === 1 ? (
+                          <text class="end-v" x={path.latestX - 12} y={path.latestY - 12} text-anchor="end">{fmt(path.latest.value, visual.unit)}</text>
+                        ) : null}
+                        {visual.lines.length > 1 ? (
+                          <>
+                            <line x1={path.latestX + 5} y1={path.latestY} x2={path.latestX + 13} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
+                            <text class="end-mini-v" x={path.latestX + 16} y={path.labelY} fill={path.color}>{fmt(path.latest.value, visual.unit)}</text>
                           </>
                         ) : null}
                       </g>
@@ -958,8 +1014,13 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           // Share-strip only for a few big slices; many small slices (e.g. 6 age
           // groups with a 2% tail) render far more legibly as horizontal bars.
           const isStrip = (bar as { share?: boolean }).share === true;
-          const isShare = isStrip || (/%/.test(bar.unit) && bar.bars.length <= 4 && !hasNegative && !isComparison);
           const total = bar.bars.reduce((sum, item) => sum + Math.max(0, item.value), 0) || 1;
+          // A 100% share strip only makes sense when the bars are mutually-exclusive
+          // parts of one whole (they sum to ~100%, e.g. birth order or age structure).
+          // Independent rates that merely happen to be in % (contraception methods,
+          // child-marriage vs teen-pregnancy) must render as plain bars, not a
+          // misleading stacked strip.
+          const isShare = isStrip || (/%/.test(bar.unit) && bar.bars.length <= 4 && Math.abs(total - 100) <= 3 && !hasNegative && !isComparison);
           const groupedBars = [...new Set(bar.bars.map((item) => item.group).filter(Boolean))] as string[];
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
@@ -1049,6 +1110,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (visual.kind === "groupedBar") {
           const grouped = visual as GroupedBarVisual;
           const g = groupedBarGeometry(grouped);
+          const gm = groupedBarGeometry(grouped, true);
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{grouped.title}</h2><p>{cleanSubtitle(grouped.subtitle, source.sourceId)}</p></div><span>{grouped.unit}</span></div>
@@ -1056,7 +1118,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <svg class="viz-svg grouped-bars" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={grouped.title}>
+              <svg class="viz-svg grouped-bars viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={grouped.title}>
                 {g.ticks.map((tick) => (
                   <g>
                     <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
@@ -1094,6 +1156,34 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         );
                       })}
                       <text class="xaxt" x={centerX} y={g.height - g.pad.b + 24} text-anchor="middle">{group.label}</text>
+                    </g>
+                  );
+                })}
+              </svg>
+              <svg class="viz-svg grouped-bars viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={grouped.title}>
+                {gm.ticks.map((tick) => (
+                  <g>
+                    <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke="#ededed" />
+                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, grouped.unit)}</text>
+                  </g>
+                ))}
+                {grouped.groups.map((group, groupIndex) => {
+                  const groupX = gm.pad.l + groupIndex * gm.groupW;
+                  const centerX = groupX + gm.groupW / 2;
+                  const barsW = grouped.series.length * gm.barW + (grouped.series.length - 1) * gm.barGap;
+                  const startX = centerX - barsW / 2;
+                  // Thin to every other year, anchored to the last group so the latest year
+                  // always shows and labels never end up adjacent at the right edge.
+                  const showLabel = (grouped.groups.length - 1 - groupIndex) % 2 === 0;
+                  return (
+                    <g>
+                      {group.values.map((value, valueIndex) => {
+                        const x = startX + valueIndex * (gm.barW + gm.barGap);
+                        const y = gm.y(value);
+                        const h = gm.height - gm.pad.b - y;
+                        return <rect x={x} y={y} width={gm.barW} height={Math.max(1, h)} fill={colors[valueIndex % colors.length]} />;
+                      })}
+                      {showLabel ? <text class="xaxt" x={centerX} y={gm.height - gm.pad.b + 22} text-anchor="middle">{group.label}</text> : null}
                     </g>
                   );
                 })}
@@ -1232,9 +1322,21 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (visual.kind === "sparkGrid") {
           const sg = visual as SparkGridVisual;
           const usuffix = /%/.test(sg.unit) ? "%" : "";
+          // Auto-scale each sparkline to its OWN range, so a 1 deg C trend on a 27 deg C base
+          // reads as a clear slope instead of a flat line crushed against a shared 0-based
+          // ceiling. Colour (from the cross-city min/max) still encodes the absolute level.
+          const cellLoHi = (pts) => {
+            const vs = pts.map((p) => p.value);
+            let lo = Math.min(...vs), hi = Math.max(...vs);
+            if (!(hi > lo)) { hi = lo + 1; lo = lo - 1; }
+            const pad = (hi - lo) * 0.12;
+            return { lo: lo - pad, hi: hi + pad };
+          };
           const sparkPts = (pts) => {
             const n = pts.length;
-            return pts.map((p, i) => `${(n < 2 ? 0 : (i / (n - 1)) * 100).toFixed(1)},${(34 - (sg.max > 0 ? (p.value / sg.max) * 32 : 0)).toFixed(1)}`).join(" ");
+            const { lo, hi } = cellLoHi(pts);
+            const span = hi - lo || 1;
+            return pts.map((p, i) => `${(n < 2 ? 0 : (i / (n - 1)) * 100).toFixed(1)},${(34 - ((p.value - lo) / span) * 32).toFixed(1)}`).join(" ");
           };
           const sparkArea = (pts) => `${sparkPts(pts)} 100,36 0,36`;
           const startYear = sg.cells[0]?.points?.[0]?.date ?? "";
@@ -1246,13 +1348,13 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <p class="spark-scale">Each chart is one city, {startYear}–{endYear}, all on the same scale: bottom = 0, top = {fmt(sg.max, sg.unit)}{usuffix} {sg.unit}. The big number is the {endYear} value.</p>
+              <p class="spark-scale">Each chart is one city, {startYear}–{endYear}, auto-scaled to its own range so the trend is visible — read the <em>slope</em>, not the height. The big number is the {endYear} value; the small coloured number is the change since the {startYear}s (red = warmer, blue = cooler). Colour of the line shows how high the {endYear} value sits across all cities.</p>
               <div class="spark-grid">
                 {sg.cells.map((c) => {
                   const col = choroColor(c.latest ?? 0, sg.min, sg.max);
                   return (
                     <div class="spark-cell">
-                      <div class="spark-head"><b>{c.label}</b><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em></div>
+                      <div class="spark-head"><b>{c.label}</b><span class="spark-nums"><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em>{typeof c.change === "number" ? <i class={`spark-d ${c.change >= 0 ? "pos" : "neg"}`}>{signedFmt(c.change, sg.unit)}</i> : null}</span></div>
                       <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${fmt(c.latest ?? 0, sg.unit)} in ${endYear}`}>
                         <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
                         <polygon points={sparkArea(c.points)} fill={col} fill-opacity="0.14" stroke="none" />
@@ -1281,6 +1383,15 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
 
         if (visual.kind === "rankedChange") {
           const rc = visual as RankedChangeVisual;
+          // When values sit in a high band well above zero (e.g. temperatures 12–30 deg C),
+          // a 0-based bar makes every row look identical. Floor the bars just below the
+          // lowest value so the spread — and each row's baseline→latest gap — is visible.
+          // Count data (hot nights, humid days) starts near 0, so it stays 0-based.
+          const rcLo = (typeof rc.min === "number" && rc.min > rc.max * 0.25)
+            ? rc.min - (rc.max - rc.min) * 0.18
+            : 0;
+          const rcSpan = (rc.max - rcLo) || 1;
+          const rcMaxAbs = Math.max(...rc.rows.map((r) => Math.abs(r.change)), 0.001);
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{rc.title}</h2><p>{cleanSubtitle(rc.subtitle, source.sourceId)}</p></div><span>{rc.unit}</span></div>
@@ -1288,6 +1399,24 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
+              {rc.diverging ? (
+                <div class="ranked-diverge">
+                  <div class="rdiv-head"><span>City</span><span>← cooler · warmer →</span><span>{rc.startLabel}→{rc.endLabel}</span></div>
+                  {rc.rows.map((row) => {
+                    const w = (Math.abs(row.change) / rcMaxAbs) * 50;
+                    return (
+                      <div class="rdiv-row">
+                        <b>{row.label}</b>
+                        <div class="rdiv-track" aria-label={`${row.label} change ${signedFmt(row.change, rc.unit)}`}>
+                          <span class="rdiv-zero"></span>
+                          <i class={`rdiv-bar ${row.change >= 0 ? "pos" : "neg"}`} style={row.change >= 0 ? `left:50%;width:${w}%` : `right:50%;width:${w}%`}></i>
+                        </div>
+                        <em class={row.change >= 0 ? "pos" : "neg"}>{signedFmt(row.change, rc.unit)}</em>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
               <div class="ranked-change">
                 <div class="ranked-change-head">
                   <span>City</span>
@@ -1296,8 +1425,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   <span>Change</span>
                 </div>
                 {rc.rows.map((row) => {
-                  const startW = Math.max(1, (row.start / rc.max) * 100);
-                  const endW = Math.max(1, (row.end / rc.max) * 100);
+                  const startW = Math.max(1, ((row.start - rcLo) / rcSpan) * 100);
+                  const endW = Math.max(1, ((row.end - rcLo) / rcSpan) * 100);
                   return (
                     <div class="ranked-change-row">
                       <b>{row.label}</b>
@@ -1312,6 +1441,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   );
                 })}
               </div>
+              )}
               <div class="chart-note">
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}

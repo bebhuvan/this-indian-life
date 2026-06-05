@@ -1,0 +1,3395 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.inequality",
+  "question": "How unequal is India?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "econ.inequality.gini_consumption",
+    "econ.inequality.income_share_top1_wid",
+    "econ.inequality.wealth_share_top1_wid"
+  ],
+  "availableIndicatorIds": [
+    "econ.inequality.gini_consumption",
+    "econ.inequality.income_share_top1_wid",
+    "econ.inequality.wealth_share_top1_wid"
+  ],
+  "themeIndicatorIds": [
+    "econ.inequality.gini_consumption",
+    "econ.inequality.income_share_top1_wid",
+    "econ.inequality.wealth_share_top1_wid",
+    "econ.inequality.top1_income_wid",
+    "econ.inequality.top1_income_wb",
+    "econ.inequality.income_share_top10_wid",
+    "econ.inequality.wealth_share_top10_wid",
+    "econ.inequality.cons_dist_top10",
+    "econ.inequality.cons_dist_middle40",
+    "econ.inequality.cons_dist_bottom50",
+    "econ.inequality.cons_share_highest20",
+    "econ.inequality.cons_share_lowest20",
+    "econ.inequality.cons_share_highest10",
+    "econ.inequality.cons_share_lowest10",
+    "econ.inequality.hces_gini_rural",
+    "econ.inequality.hces_gini_urban",
+    "econ.inequality.hces_mpce_rural",
+    "econ.inequality.hces_mpce_urban",
+    "econ.inequality.hces_mpce_rural_imputed",
+    "econ.inequality.hces_mpce_urban_imputed",
+    "econ.inequality.hces_fractile_mpce_rural",
+    "econ.inequality.hces_fractile_mpce_urban",
+    "econ.inequality.hces_state_mpce_rural",
+    "econ.inequality.hces_state_mpce_urban",
+    "econ.inequality.hces_cons_share_rural",
+    "econ.inequality.hces_cons_share_urban",
+    "econ.inequality.hces_mpce_by_caste",
+    "econ.inequality.hces_mpce_by_religion",
+    "econ.inequality.plfs_wage_by_caste",
+    "econ.inequality.plfs_gender_ratio_by_caste",
+    "econ.inequality.plfs_wage_by_religion",
+    "econ.inequality.poverty_215",
+    "econ.inequality.wil_headline_2023"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.econ.inequality.gini_consumption",
+      "indicatorId": "econ.inequality.gini_consumption",
+      "title": "Gini index — consumption (World Bank)",
+      "sourceId": "worldbank",
+      "unit": "Gini index (0–100)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.econ.inequality.income_share_top1_wid",
+      "indicatorId": "econ.inequality.income_share_top1_wid",
+      "title": "Income share of the top 1%, before tax (WID)",
+      "sourceId": "owid",
+      "unit": "% of pre-tax national income",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.econ.inequality.wealth_share_top1_wid",
+      "indicatorId": "econ.inequality.wealth_share_top1_wid",
+      "title": "Wealth share of the richest 1% (WID)",
+      "sourceId": "owid",
+      "unit": "% of net personal wealth",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.econ.inequality.top1_income_wid",
+      "indicatorId": "econ.inequality.top1_income_wid",
+      "title": "Top 1% income share — World Inequality Database method",
+      "sourceId": "owid",
+      "unit": "% (pre-tax income)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.econ.inequality.top1_income_wb",
+      "indicatorId": "econ.inequality.top1_income_wb",
+      "title": "Top 1% income share — World Bank (survey) method",
+      "sourceId": "owid",
+      "unit": "% (consumption/income)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.econ.inequality.income_share_top10_wid",
+      "indicatorId": "econ.inequality.income_share_top10_wid",
+      "title": "Income share of the top 10%, before tax (WID)",
+      "sourceId": "owid",
+      "unit": "% of pre-tax national income",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.econ.inequality.wealth_share_top10_wid",
+      "indicatorId": "econ.inequality.wealth_share_top10_wid",
+      "title": "Wealth share of the richest 10% (WID)",
+      "sourceId": "owid",
+      "unit": "% of net personal wealth",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.econ.inequality.cons_dist_top10",
+      "indicatorId": "econ.inequality.cons_dist_top10",
+      "title": "Consumption share of the richest 10% (World Bank distribution)",
+      "sourceId": "owid",
+      "unit": "% of consumption",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.econ.inequality.cons_dist_middle40",
+      "indicatorId": "econ.inequality.cons_dist_middle40",
+      "title": "Consumption share of the middle 40% (World Bank distribution)",
+      "sourceId": "owid",
+      "unit": "% of consumption",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.econ.inequality.cons_dist_bottom50",
+      "indicatorId": "econ.inequality.cons_dist_bottom50",
+      "title": "Consumption share of the poorest 50% (World Bank distribution)",
+      "sourceId": "owid",
+      "unit": "% of consumption",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.econ.inequality.cons_share_highest20",
+      "indicatorId": "econ.inequality.cons_share_highest20",
+      "title": "Consumption share of the richest 20% (World Bank)",
+      "sourceId": "worldbank",
+      "unit": "% of consumption",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.econ.inequality.cons_share_lowest20",
+      "indicatorId": "econ.inequality.cons_share_lowest20",
+      "title": "Consumption share of the poorest 20% (World Bank)",
+      "sourceId": "worldbank",
+      "unit": "% of consumption",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.econ.inequality.cons_share_highest10",
+      "indicatorId": "econ.inequality.cons_share_highest10",
+      "title": "Consumption share of the richest 10% (World Bank)",
+      "sourceId": "worldbank",
+      "unit": "% of consumption",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.econ.inequality.cons_share_lowest10",
+      "indicatorId": "econ.inequality.cons_share_lowest10",
+      "title": "Consumption share of the poorest 10% (World Bank)",
+      "sourceId": "worldbank",
+      "unit": "% of consumption",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.econ.inequality.hces_gini_rural",
+      "indicatorId": "econ.inequality.hces_gini_rural",
+      "title": "Consumption Gini — rural (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "unit": "Gini index (0–100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.econ.inequality.hces_gini_urban",
+      "indicatorId": "econ.inequality.hces_gini_urban",
+      "title": "Consumption Gini — urban (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "unit": "Gini index (0–100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.econ.inequality.hces_mpce_rural",
+      "indicatorId": "econ.inequality.hces_mpce_rural",
+      "title": "Rural average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.econ.inequality.hces_mpce_urban",
+      "indicatorId": "econ.inequality.hces_mpce_urban",
+      "title": "Urban average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.econ.inequality.hces_mpce_rural_imputed",
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed",
+      "title": "Rural average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.econ.inequality.hces_mpce_urban_imputed",
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed",
+      "title": "Urban average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v21.econ.inequality.hces_fractile_mpce_rural",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural",
+      "title": "Rural average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v22.econ.inequality.hces_fractile_mpce_urban",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban",
+      "title": "Urban average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v23.econ.inequality.hces_state_mpce_rural",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural",
+      "title": "Rural average MPCE by major state, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v24.econ.inequality.hces_state_mpce_urban",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban",
+      "title": "Urban average MPCE by major state, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v25.econ.inequality.hces_cons_share_rural",
+      "indicatorId": "econ.inequality.hces_cons_share_rural",
+      "title": "Consumption share by group — rural (HCES 2023-24, computed)",
+      "sourceId": "mospi-hces",
+      "unit": "% of total consumption",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v26.econ.inequality.hces_cons_share_urban",
+      "indicatorId": "econ.inequality.hces_cons_share_urban",
+      "title": "Consumption share by group — urban (HCES 2023-24, computed)",
+      "sourceId": "mospi-hces",
+      "unit": "% of total consumption",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v27.econ.inequality.hces_mpce_by_caste",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste",
+      "title": "Consumption (MPCE) by caste group, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v28.econ.inequality.hces_mpce_by_religion",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion",
+      "title": "Consumption (MPCE) by religion, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v29.econ.inequality.plfs_wage_by_caste",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste",
+      "title": "Regular-salaried monthly wage by caste, 2023-24",
+      "sourceId": "plfs",
+      "unit": "₹ per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v30.econ.inequality.plfs_gender_ratio_by_caste",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste",
+      "title": "Women's pay as a share of men's, by caste, 2023-24",
+      "sourceId": "plfs",
+      "unit": "% (female ÷ male regular wage)",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v31.econ.inequality.plfs_wage_by_religion",
+      "indicatorId": "econ.inequality.plfs_wage_by_religion",
+      "title": "Regular-salaried monthly wage by religion, 2023-24",
+      "sourceId": "plfs",
+      "unit": "₹ per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v32.econ.inequality.poverty_215",
+      "indicatorId": "econ.inequality.poverty_215",
+      "title": "Extreme poverty headcount ($2.15/day, 2017 PPP)",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v33.econ.inequality.wil_headline_2023",
+      "indicatorId": "econ.inequality.wil_headline_2023",
+      "title": "How income and wealth are split, 2022-23 (World Inequality Lab)",
+      "sourceId": "world-inequality-lab",
+      "unit": "% share",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "same-country-two-verdicts-on-inequality",
+      "title": "Same country, two verdicts on inequality",
+      "chartType": "multiLine",
+      "beat": "paradox",
+      "window": "",
+      "indicator": "econ.inequality.top1_income_wid",
+      "series": [
+        {
+          "indicator": "econ.inequality.top1_income_wid",
+          "label": "World Inequality Database method"
+        },
+        {
+          "indicator": "econ.inequality.top1_income_wb",
+          "label": "World Bank survey method"
+        }
+      ],
+      "unit": "% income share of top 1%",
+      "subtitle": "Top 1% income share — World Inequality Database (tax + national accounts) vs World Bank (household survey)",
+      "whyThisChart": "The whole debate fits in one frame: both lines try to measure the share of income going to the richest 1%, and they disagree sharply because they are built differently."
+    },
+    {
+      "order": 2,
+      "chartId": "by-what-people-spend-india-looks-equal-and-more-so",
+      "title": "By what people spend, India looks equal — and more so",
+      "chartType": "line",
+      "beat": "consumption",
+      "window": "full",
+      "indicator": "econ.inequality.gini_consumption",
+      "series": [],
+      "unit": "",
+      "subtitle": "World Bank · Gini index of consumption (0 = total equality, 100 = total inequality)",
+      "whyThisChart": "The 'most equal' headline comes from here: a consumption Gini that fell to 25.5 in 2022-23, among the lowest in the world."
+    },
+    {
+      "order": 3,
+      "chartId": "by-what-people-earn-the-top-is-pulling-away",
+      "title": "By what people earn, the top is pulling away",
+      "chartType": "multiLine",
+      "beat": "income",
+      "window": "",
+      "indicator": "econ.inequality.income_share_top1_wid",
+      "series": [
+        {
+          "indicator": "econ.inequality.income_share_top10_wid",
+          "label": "Top 10%"
+        },
+        {
+          "indicator": "econ.inequality.income_share_top1_wid",
+          "label": "Top 1%"
+        }
+      ],
+      "unit": "% of pre-tax national income",
+      "subtitle": "World Inequality Database · share of pre-tax income going to the top, 1922 to 2023",
+      "whyThisChart": "Income tells the opposite story to consumption: the share captured by the top 10% and top 1% has climbed back to, and past, colonial-era highs."
+    },
+    {
+      "order": 4,
+      "chartId": "by-what-people-own-concentration-is-extreme",
+      "title": "By what people own, concentration is extreme",
+      "chartType": "multiLine",
+      "beat": "wealth",
+      "window": "",
+      "indicator": "econ.inequality.wealth_share_top1_wid",
+      "series": [
+        {
+          "indicator": "econ.inequality.wealth_share_top10_wid",
+          "label": "Top 10%"
+        },
+        {
+          "indicator": "econ.inequality.wealth_share_top1_wid",
+          "label": "Top 1%"
+        }
+      ],
+      "unit": "% of net personal wealth",
+      "subtitle": "World Inequality Database · share of net personal wealth held by the top, 1961 to 2023",
+      "whyThisChart": "Wealth is where inequality is starkest: a small group owns a very large share of everything India has accumulated."
+    },
+    {
+      "order": 5,
+      "chartId": "how-consumption-splits-bottom-half-to-top-tenth",
+      "title": "How consumption splits, bottom half to top tenth",
+      "chartType": "latestBars",
+      "beat": "distribution",
+      "window": "",
+      "indicator": "econ.inequality.cons_dist_bottom50",
+      "series": [
+        {
+          "indicator": "econ.inequality.cons_dist_bottom50",
+          "label": "Poorest 50%"
+        },
+        {
+          "indicator": "econ.inequality.cons_dist_middle40",
+          "label": "Middle 40%"
+        },
+        {
+          "indicator": "econ.inequality.cons_dist_top10",
+          "label": "Richest 10%"
+        }
+      ],
+      "unit": "% of consumption, latest survey",
+      "subtitle": "World Bank · share of total consumption by group, 2022-23",
+      "whyThisChart": "The flip side of a low Gini: even on consumption, the poorest half and the richest tenth spend strikingly different amounts."
+    },
+    {
+      "order": 6,
+      "chartId": "the-richest-fifth-vs-the-poorest-fifth",
+      "title": "The richest fifth vs the poorest fifth",
+      "chartType": "multiLine",
+      "beat": "spread",
+      "window": "",
+      "indicator": "econ.inequality.cons_share_highest20",
+      "series": [
+        {
+          "indicator": "econ.inequality.cons_share_highest20",
+          "label": "Richest 20%"
+        },
+        {
+          "indicator": "econ.inequality.cons_share_lowest20",
+          "label": "Poorest 20%"
+        }
+      ],
+      "unit": "% of consumption",
+      "subtitle": "World Bank · consumption share of the top and bottom 20%",
+      "whyThisChart": "A simple, durable gap: how much of national consumption the top fifth takes versus the bottom fifth, and how little it has moved."
+    },
+    {
+      "order": 7,
+      "chartId": "town-and-country-and-the-survey-behind-the-falling-claim",
+      "title": "Town and country, and the survey behind the 'falling' claim",
+      "chartType": "multiLine",
+      "beat": "rural-urban",
+      "window": "",
+      "indicator": "econ.inequality.hces_gini_rural",
+      "series": [
+        {
+          "indicator": "econ.inequality.hces_gini_urban",
+          "label": "Urban"
+        },
+        {
+          "indicator": "econ.inequality.hces_gini_rural",
+          "label": "Rural"
+        }
+      ],
+      "unit": "Gini index (0–100)",
+      "subtitle": "MoSPI HCES · consumption Gini, rural vs urban, 2011-12 to 2023-24",
+      "whyThisChart": "India's own consumption survey shows the Gini falling in both rural and urban areas — the basis for the 'inequality is declining' story."
+    },
+    {
+      "order": 8,
+      "chartId": "the-spending-ladder-rung-by-rung",
+      "title": "The spending ladder, rung by rung",
+      "chartType": "tableBars",
+      "beat": "fractile-ladder",
+      "window": "",
+      "indicator": "econ.inequality.hces_fractile_mpce_rural",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "MoSPI HCES 2023-24 · average rural MPCE by fractile class (computed from the unit-level survey of 1,54,357 rural households)",
+      "whyThisChart": "The Gini compresses the whole distribution into one number; this shows the actual rungs. The poorest 5% of rural India spends about ₹1,677 per person a month while the richest 5% spends ₹10,137 — on consumption alone, before income or wealth widen the gap."
+    },
+    {
+      "order": 9,
+      "chartId": "spending-is-rising-and-the-town-country-gap-is-narrowing",
+      "title": "Spending is rising, and the town-country gap is narrowing",
+      "chartType": "multiLine",
+      "beat": "mpce-growth",
+      "window": "",
+      "indicator": "econ.inequality.hces_mpce_urban",
+      "series": [
+        {
+          "indicator": "econ.inequality.hces_mpce_urban",
+          "label": "Urban"
+        },
+        {
+          "indicator": "econ.inequality.hces_mpce_rural",
+          "label": "Rural"
+        }
+      ],
+      "unit": "₹ per person per month",
+      "subtitle": "MoSPI HCES · average monthly per-capita consumption, current prices",
+      "whyThisChart": "The reason poverty fell: average consumption rose for both rural and urban India, and the urban-rural gap shrank from 84% in 2011-12 to about 70% in 2023-24."
+    },
+    {
+      "order": 10,
+      "chartId": "which-india-you-live-in-matters-as-much-as-which-class",
+      "title": "Which India you live in matters as much as which class",
+      "chartType": "tableBars",
+      "beat": "regional",
+      "window": "",
+      "indicator": "econ.inequality.hces_state_mpce_rural",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "MoSPI HCES 2023-24 · average rural MPCE by major state (all-India rural average ₹4,122)",
+      "whyThisChart": "A national Gini erases the map. Rural Kerala spends ₹6,611 per person a month — more than twice rural Chhattisgarh's ₹2,739. The gap between Indian states rivals the gap between countries, and it is invisible in any single national number."
+    },
+    {
+      "order": 11,
+      "chartId": "the-consumption-gap-that-runs-along-caste",
+      "title": "The consumption gap that runs along caste",
+      "chartType": "tableBars",
+      "beat": "caste",
+      "window": "",
+      "indicator": "econ.inequality.hces_mpce_by_caste",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "Computed from HCES 2023-24 unit-level microdata · average MPCE by social group of the household head",
+      "whyThisChart": "The factsheet never publishes this, but the microdata does: average consumption falls in a clean caste gradient. A Scheduled Tribe household spends about ₹3,614 per person a month against ₹6,148 for 'Others' — a 41% gap that no single national Gini reveals."
+    },
+    {
+      "order": 12,
+      "chartId": "and-along-religion",
+      "title": "And along religion",
+      "chartType": "tableBars",
+      "beat": "religion",
+      "window": "",
+      "indicator": "econ.inequality.hces_mpce_by_religion",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "Computed from HCES 2023-24 unit-level microdata · average MPCE by religion of the household head",
+      "whyThisChart": "The same microdata splits consumption by religion: Jain and Sikh households spend well above the Hindu average, while Muslim households spend about 10% below it."
+    },
+    {
+      "order": 13,
+      "chartId": "the-same-gap-in-what-a-job-pays",
+      "title": "The same gap in what a job pays",
+      "chartType": "tableBars",
+      "beat": "wage-caste",
+      "window": "",
+      "indicator": "econ.inequality.plfs_wage_by_caste",
+      "series": [],
+      "unit": "₹ per month, regular-salaried",
+      "subtitle": "Computed from PLFS 2023-24 unit-level microdata · average monthly earnings of regular wage/salaried workers (validated against the published ₹21,000)",
+      "whyThisChart": "Consumption is the gap after the fact; wages are where it starts. Among regular salaried workers, a forward-caste ('Others') worker earns about ₹25,957 a month against ₹16,516 for a Scheduled Caste worker — a 36% pay gap inside the same kind of job."
+    },
+    {
+      "order": 14,
+      "chartId": "caste-and-gender-stack-on-top-of-each-other",
+      "title": "Caste and gender stack on top of each other",
+      "chartType": "tableBars",
+      "beat": "gender-caste",
+      "window": "",
+      "indicator": "econ.inequality.plfs_gender_ratio_by_caste",
+      "series": [],
+      "unit": "women's pay as % of men's",
+      "subtitle": "Computed from PLFS 2023-24 unit-level microdata · female regular-salaried wage as a share of male, by caste",
+      "whyThisChart": "The two disadvantages compound. A forward-caste woman earns 84% of what a forward-caste man does; a Scheduled Caste or Scheduled Tribe woman earns just 63% of her male counterpart. The gender pay gap is widest exactly where the caste gap is widest."
+    },
+    {
+      "order": 15,
+      "chartId": "and-wages-split-by-religion-too",
+      "title": "And wages split by religion too",
+      "chartType": "tableBars",
+      "beat": "wage-religion",
+      "window": "",
+      "indicator": "econ.inequality.plfs_wage_by_religion",
+      "series": [],
+      "unit": "₹ per month, regular-salaried",
+      "subtitle": "Computed from PLFS 2023-24 unit-level microdata · average monthly regular-salaried earnings by religion",
+      "whyThisChart": "On the earnings side too, Muslim regular-salaried workers earn about ₹17,700 a month against ₹21,300 for Hindu workers, with Christian and Jain workers higher still."
+    },
+    {
+      "order": 16,
+      "chartId": "the-other-half-extreme-poverty-fell-sharply",
+      "title": "The other half: extreme poverty fell sharply",
+      "chartType": "line",
+      "beat": "poverty",
+      "window": "full",
+      "indicator": "econ.inequality.poverty_215",
+      "series": [],
+      "unit": "",
+      "subtitle": "World Bank · share of people below $2.15/day (2017 PPP)",
+      "whyThisChart": "Rising top-end inequality and falling extreme poverty are both true at once — the bottom rose even as the top pulled away faster."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Gini index — consumption (World Bank), latest",
+      "value": 25.5,
+      "displayValue": "25.5",
+      "date": "2022",
+      "unit": "Gini index (0–100)",
+      "indicatorId": "econ.inequality.gini_consumption",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Gini index — consumption (World Bank), earliest",
+      "value": 29.7,
+      "displayValue": "29.7",
+      "date": "1977",
+      "unit": "Gini index (0–100)",
+      "indicatorId": "econ.inequality.gini_consumption",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income share of the top 1%, before tax (WID), latest",
+      "value": 23.07,
+      "displayValue": "23.1%",
+      "date": "2022",
+      "unit": "% of pre-tax national income",
+      "indicatorId": "econ.inequality.income_share_top1_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income share of the top 1%, before tax (WID), earliest",
+      "value": 15.95,
+      "displayValue": "16%",
+      "date": "1923",
+      "unit": "% of pre-tax national income",
+      "indicatorId": "econ.inequality.income_share_top1_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Wealth share of the richest 1% (WID), latest",
+      "value": 40.14,
+      "displayValue": "40.1%",
+      "date": "2024",
+      "unit": "% of net personal wealth",
+      "indicatorId": "econ.inequality.wealth_share_top1_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Wealth share of the richest 1% (WID), earliest",
+      "value": 19.12,
+      "displayValue": "19.1%",
+      "date": "1820",
+      "unit": "% of net personal wealth",
+      "indicatorId": "econ.inequality.wealth_share_top1_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Top 1% income share — World Inequality Database method, latest",
+      "value": 22.27,
+      "displayValue": "22.3%",
+      "date": "2024",
+      "unit": "% (pre-tax income)",
+      "indicatorId": "econ.inequality.top1_income_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Top 1% income share — World Inequality Database method, earliest",
+      "value": 7.13,
+      "displayValue": "7.1%",
+      "date": "1980",
+      "unit": "% (pre-tax income)",
+      "indicatorId": "econ.inequality.top1_income_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Top 1% income share — World Bank (survey) method, latest",
+      "value": 4.27301861345768,
+      "displayValue": "4.3%",
+      "date": "2022",
+      "unit": "% (consumption/income)",
+      "indicatorId": "econ.inequality.top1_income_wb",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Top 1% income share — World Bank (survey) method, earliest",
+      "value": 5.887534469366074,
+      "displayValue": "5.9%",
+      "date": "1977",
+      "unit": "% (consumption/income)",
+      "indicatorId": "econ.inequality.top1_income_wb",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income share of the top 10%, before tax (WID), latest",
+      "value": 58.89,
+      "displayValue": "58.9%",
+      "date": "2022",
+      "unit": "% of pre-tax national income",
+      "indicatorId": "econ.inequality.income_share_top10_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Income share of the top 10%, before tax (WID), earliest",
+      "value": 51.75,
+      "displayValue": "51.8%",
+      "date": "1923",
+      "unit": "% of pre-tax national income",
+      "indicatorId": "econ.inequality.income_share_top10_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Wealth share of the richest 10% (WID), latest",
+      "value": 65.01,
+      "displayValue": "65%",
+      "date": "2024",
+      "unit": "% of net personal wealth",
+      "indicatorId": "econ.inequality.wealth_share_top10_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Wealth share of the richest 10% (WID), earliest",
+      "value": 52.83,
+      "displayValue": "52.8%",
+      "date": "1820",
+      "unit": "% of net personal wealth",
+      "indicatorId": "econ.inequality.wealth_share_top10_wid",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the richest 10% (World Bank distribution), latest",
+      "value": 22.13224321603775,
+      "displayValue": "22.1%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_dist_top10",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the richest 10% (World Bank distribution), earliest",
+      "value": 25.157931447029114,
+      "displayValue": "25.2%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_dist_top10",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the middle 40% (World Bank distribution), latest",
+      "value": 45.04849389195442,
+      "displayValue": "45%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_dist_middle40",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the middle 40% (World Bank distribution), earliest",
+      "value": 44.463830441236496,
+      "displayValue": "44.5%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_dist_middle40",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the poorest 50% (World Bank distribution), latest",
+      "value": 32.81926140189171,
+      "displayValue": "32.8%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_dist_bottom50",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the poorest 50% (World Bank distribution), earliest",
+      "value": 30.37823960185051,
+      "displayValue": "30.4%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_dist_bottom50",
+      "sourceId": "owid",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the richest 20% (World Bank), latest",
+      "value": 36.1,
+      "displayValue": "36.1%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_share_highest20",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the richest 20% (World Bank), earliest",
+      "value": 39.1,
+      "displayValue": "39.1%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_share_highest20",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the poorest 20% (World Bank), latest",
+      "value": 10.4,
+      "displayValue": "10.4%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_share_lowest20",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Consumption share of the poorest 20% (World Bank), earliest",
+      "value": 9.1,
+      "displayValue": "9.1%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "indicatorId": "econ.inequality.cons_share_lowest20",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Gini index — consumption (World Bank), latest",
+      "value": 25.5,
+      "displayValue": "25.5",
+      "date": "2022",
+      "unit": "Gini index (0–100)",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.gini_consumption"
+    },
+    {
+      "label": "Gini index — consumption (World Bank), earliest",
+      "value": 29.7,
+      "displayValue": "29.7",
+      "date": "1977",
+      "unit": "Gini index (0–100)",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.gini_consumption"
+    },
+    {
+      "label": "Income share of the top 1%, before tax (WID), latest",
+      "value": 23.07,
+      "displayValue": "23.1%",
+      "date": "2022",
+      "unit": "% of pre-tax national income",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.income_share_top1_wid"
+    },
+    {
+      "label": "Income share of the top 1%, before tax (WID), earliest",
+      "value": 15.95,
+      "displayValue": "16%",
+      "date": "1923",
+      "unit": "% of pre-tax national income",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.income_share_top1_wid"
+    },
+    {
+      "label": "Wealth share of the richest 1% (WID), latest",
+      "value": 40.14,
+      "displayValue": "40.1%",
+      "date": "2024",
+      "unit": "% of net personal wealth",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.wealth_share_top1_wid"
+    },
+    {
+      "label": "Wealth share of the richest 1% (WID), earliest",
+      "value": 19.12,
+      "displayValue": "19.1%",
+      "date": "1820",
+      "unit": "% of net personal wealth",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.wealth_share_top1_wid"
+    },
+    {
+      "label": "Top 1% income share — World Inequality Database method, latest",
+      "value": 22.27,
+      "displayValue": "22.3%",
+      "date": "2024",
+      "unit": "% (pre-tax income)",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.top1_income_wid"
+    },
+    {
+      "label": "Top 1% income share — World Inequality Database method, earliest",
+      "value": 7.13,
+      "displayValue": "7.1%",
+      "date": "1980",
+      "unit": "% (pre-tax income)",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.top1_income_wid"
+    },
+    {
+      "label": "Top 1% income share — World Bank (survey) method, latest",
+      "value": 4.27301861345768,
+      "displayValue": "4.3%",
+      "date": "2022",
+      "unit": "% (consumption/income)",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.top1_income_wb"
+    },
+    {
+      "label": "Top 1% income share — World Bank (survey) method, earliest",
+      "value": 5.887534469366074,
+      "displayValue": "5.9%",
+      "date": "1977",
+      "unit": "% (consumption/income)",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.top1_income_wb"
+    },
+    {
+      "label": "Income share of the top 10%, before tax (WID), latest",
+      "value": 58.89,
+      "displayValue": "58.9%",
+      "date": "2022",
+      "unit": "% of pre-tax national income",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.income_share_top10_wid"
+    },
+    {
+      "label": "Income share of the top 10%, before tax (WID), earliest",
+      "value": 51.75,
+      "displayValue": "51.8%",
+      "date": "1923",
+      "unit": "% of pre-tax national income",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.income_share_top10_wid"
+    },
+    {
+      "label": "Wealth share of the richest 10% (WID), latest",
+      "value": 65.01,
+      "displayValue": "65%",
+      "date": "2024",
+      "unit": "% of net personal wealth",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.wealth_share_top10_wid"
+    },
+    {
+      "label": "Wealth share of the richest 10% (WID), earliest",
+      "value": 52.83,
+      "displayValue": "52.8%",
+      "date": "1820",
+      "unit": "% of net personal wealth",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.wealth_share_top10_wid"
+    },
+    {
+      "label": "Consumption share of the richest 10% (World Bank distribution), latest",
+      "value": 22.13224321603775,
+      "displayValue": "22.1%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.cons_dist_top10"
+    },
+    {
+      "label": "Consumption share of the richest 10% (World Bank distribution), earliest",
+      "value": 25.157931447029114,
+      "displayValue": "25.2%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.cons_dist_top10"
+    },
+    {
+      "label": "Consumption share of the middle 40% (World Bank distribution), latest",
+      "value": 45.04849389195442,
+      "displayValue": "45%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.cons_dist_middle40"
+    },
+    {
+      "label": "Consumption share of the middle 40% (World Bank distribution), earliest",
+      "value": 44.463830441236496,
+      "displayValue": "44.5%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.cons_dist_middle40"
+    },
+    {
+      "label": "Consumption share of the poorest 50% (World Bank distribution), latest",
+      "value": 32.81926140189171,
+      "displayValue": "32.8%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.cons_dist_bottom50"
+    },
+    {
+      "label": "Consumption share of the poorest 50% (World Bank distribution), earliest",
+      "value": 30.37823960185051,
+      "displayValue": "30.4%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "sourceId": "owid",
+      "indicatorId": "econ.inequality.cons_dist_bottom50"
+    },
+    {
+      "label": "Consumption share of the richest 20% (World Bank), latest",
+      "value": 36.1,
+      "displayValue": "36.1%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_highest20"
+    },
+    {
+      "label": "Consumption share of the richest 20% (World Bank), earliest",
+      "value": 39.1,
+      "displayValue": "39.1%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_highest20"
+    },
+    {
+      "label": "Consumption share of the poorest 20% (World Bank), latest",
+      "value": 10.4,
+      "displayValue": "10.4%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_lowest20"
+    },
+    {
+      "label": "Consumption share of the poorest 20% (World Bank), earliest",
+      "value": 9.1,
+      "displayValue": "9.1%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_lowest20"
+    },
+    {
+      "label": "Consumption share of the richest 10% (World Bank), latest",
+      "value": 22.1,
+      "displayValue": "22.1%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_highest10"
+    },
+    {
+      "label": "Consumption share of the richest 10% (World Bank), earliest",
+      "value": 25.2,
+      "displayValue": "25.2%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_highest10"
+    },
+    {
+      "label": "Consumption share of the poorest 10% (World Bank), latest",
+      "value": 4.5,
+      "displayValue": "4.5%",
+      "date": "2022",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_lowest10"
+    },
+    {
+      "label": "Consumption share of the poorest 10% (World Bank), earliest",
+      "value": 3.9,
+      "displayValue": "3.9%",
+      "date": "1977",
+      "unit": "% of consumption",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.cons_share_lowest10"
+    },
+    {
+      "label": "Consumption Gini — rural (HCES/NSS), latest",
+      "value": 23.7,
+      "displayValue": "23.7",
+      "date": "2023",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_rural"
+    },
+    {
+      "label": "Consumption Gini — rural (HCES/NSS), earliest",
+      "value": 28.3,
+      "displayValue": "28.3",
+      "date": "2011",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_rural"
+    },
+    {
+      "label": "Consumption Gini — urban (HCES/NSS), latest",
+      "value": 28.4,
+      "displayValue": "28.4",
+      "date": "2023",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_urban"
+    },
+    {
+      "label": "Consumption Gini — urban (HCES/NSS), earliest",
+      "value": 36.3,
+      "displayValue": "36.3",
+      "date": "2011",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_urban"
+    },
+    {
+      "label": "Rural average MPCE (HCES, without imputation), latest",
+      "value": 4122,
+      "displayValue": "₹4,122",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE (HCES, without imputation), earliest",
+      "value": 1430,
+      "displayValue": "₹1,430",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural"
+    },
+    {
+      "label": "Urban average MPCE (HCES, without imputation), latest",
+      "value": 6996,
+      "displayValue": "₹6,996",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE (HCES, without imputation), earliest",
+      "value": 2630,
+      "displayValue": "₹2,630",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban"
+    },
+    {
+      "label": "Rural average MPCE (HCES, with welfare imputation), latest",
+      "value": 4247,
+      "displayValue": "₹4,247",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed"
+    },
+    {
+      "label": "Rural average MPCE (HCES, with welfare imputation), earliest",
+      "value": 1430,
+      "displayValue": "₹1,430",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed"
+    },
+    {
+      "label": "Urban average MPCE (HCES, with welfare imputation), latest",
+      "value": 7078,
+      "displayValue": "₹7,078",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed"
+    },
+    {
+      "label": "Urban average MPCE (HCES, with welfare imputation), earliest",
+      "value": 2630,
+      "displayValue": "₹2,630",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 1677,
+      "displayValue": "₹1,677",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2126,
+      "displayValue": "₹2,126",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2473,
+      "displayValue": "₹2,473",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2833,
+      "displayValue": "₹2,833",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 3162,
+      "displayValue": "₹3,162",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 1677,
+      "displayValue": "₹1,677",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2126,
+      "displayValue": "₹2,126",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2473,
+      "displayValue": "₹2,473",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2833,
+      "displayValue": "₹2,833",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 3162,
+      "displayValue": "₹3,162",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 2376,
+      "displayValue": "₹2,376",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3093,
+      "displayValue": "₹3,093",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3687,
+      "displayValue": "₹3,687",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4353,
+      "displayValue": "₹4,353",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4979,
+      "displayValue": "₹4,979",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 2376,
+      "displayValue": "₹2,376",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3093,
+      "displayValue": "₹3,093",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3687,
+      "displayValue": "₹3,687",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4353,
+      "displayValue": "₹4,353",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4979,
+      "displayValue": "₹4,979",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 6611,
+      "displayValue": "₹6,611",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5817,
+      "displayValue": "₹5,817",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5701,
+      "displayValue": "₹5,701",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5435,
+      "displayValue": "₹5,435",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5377,
+      "displayValue": "₹5,377",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 6611,
+      "displayValue": "₹6,611",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5817,
+      "displayValue": "₹5,817",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5701,
+      "displayValue": "₹5,701",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5435,
+      "displayValue": "₹5,435",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5377,
+      "displayValue": "₹5,377",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8978,
+      "displayValue": "₹8,978",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8428,
+      "displayValue": "₹8,428",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8165,
+      "displayValue": "₹8,165",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8076,
+      "displayValue": "₹8,076",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 7783,
+      "displayValue": "₹7,783",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8978,
+      "displayValue": "₹8,978",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8428,
+      "displayValue": "₹8,428",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8165,
+      "displayValue": "₹8,165",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 8076,
+      "displayValue": "₹8,076",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by major state, 2023-24: value",
+      "value": 7783,
+      "displayValue": "₹7,783",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_urban"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 33.6,
+      "displayValue": "33.6%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 45.7,
+      "displayValue": "45.7%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 20.7,
+      "displayValue": "20.7%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 12.3,
+      "displayValue": "12.3%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption share by group — urban (HCES 2023-24, computed): value",
+      "value": 30.6,
+      "displayValue": "30.6%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_urban"
+    },
+    {
+      "label": "Consumption share by group — urban (HCES 2023-24, computed): value",
+      "value": 45.8,
+      "displayValue": "45.8%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_urban"
+    },
+    {
+      "label": "Consumption share by group — urban (HCES 2023-24, computed): value",
+      "value": 23.7,
+      "displayValue": "23.7%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_urban"
+    },
+    {
+      "label": "Consumption share by group — urban (HCES 2023-24, computed): value",
+      "value": 14.5,
+      "displayValue": "14.5%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_urban"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: value",
+      "value": 6148,
+      "displayValue": "₹6,148",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gini",
+      "value": 0.308,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: popSharePct",
+      "value": 25.4,
+      "displayValue": "₹25",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gapVsOthersPct",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: value",
+      "value": 5068,
+      "displayValue": "₹5,068",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gini",
+      "value": 0.289,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: popSharePct",
+      "value": 45.7,
+      "displayValue": "₹46",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gapVsOthersPct",
+      "value": -18,
+      "displayValue": "₹-18",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: value",
+      "value": 4277,
+      "displayValue": "₹4,277",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gini",
+      "value": 0.26,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: popSharePct",
+      "value": 19.3,
+      "displayValue": "₹19",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gapVsOthersPct",
+      "value": -30,
+      "displayValue": "₹-30",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: value",
+      "value": 6509,
+      "displayValue": "₹6,509",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: gini",
+      "value": 0.234,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: popSharePct",
+      "value": 1.5,
+      "displayValue": "₹2",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: gapVsHinduPct",
+      "value": 28,
+      "displayValue": "₹28",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: value",
+      "value": 6111,
+      "displayValue": "₹6,111",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: gini",
+      "value": 0.336,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: popSharePct",
+      "value": 2.7,
+      "displayValue": "₹3",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: gapVsHinduPct",
+      "value": 20,
+      "displayValue": "₹20",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: value",
+      "value": 5089,
+      "displayValue": "₹5,089",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: gini",
+      "value": 0.307,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: popSharePct",
+      "value": 81.7,
+      "displayValue": "₹82",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Consumption (MPCE) by religion, 2023-24: gapVsHinduPct",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_religion"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: value",
+      "value": 25957,
+      "displayValue": "₹25,957",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: gapVsOthersPct",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: value",
+      "value": 19735,
+      "displayValue": "₹19,735",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: gapVsOthersPct",
+      "value": -24,
+      "displayValue": "₹-24",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: value",
+      "value": 18343,
+      "displayValue": "₹18,343",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: gapVsOthersPct",
+      "value": -29,
+      "displayValue": "₹-29",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: value",
+      "value": 16516,
+      "displayValue": "₹16,516",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by caste, 2023-24: gapVsOthersPct",
+      "value": -36,
+      "displayValue": "₹-36",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: value",
+      "value": 84,
+      "displayValue": "84%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: maleWage",
+      "value": 27004,
+      "displayValue": "27,004%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: femaleWage",
+      "value": 22630,
+      "displayValue": "22,630%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: value",
+      "value": 73,
+      "displayValue": "73%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: maleWage",
+      "value": 21094,
+      "displayValue": "21,094%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: femaleWage",
+      "value": 15461,
+      "displayValue": "15,461%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: value",
+      "value": 63,
+      "displayValue": "63%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: maleWage",
+      "value": 18384,
+      "displayValue": "18,384%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: femaleWage",
+      "value": 11665,
+      "displayValue": "11,665%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: value",
+      "value": 63,
+      "displayValue": "63%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: maleWage",
+      "value": 20721,
+      "displayValue": "20,721%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Women's pay as a share of men's, by caste, 2023-24: femaleWage",
+      "value": 12960,
+      "displayValue": "12,960%",
+      "date": "",
+      "unit": "% (female ÷ male regular wage)",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste"
+    },
+    {
+      "label": "Regular-salaried monthly wage by religion, 2023-24: value",
+      "value": 25094,
+      "displayValue": "₹25,094",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_religion"
+    },
+    {
+      "label": "Regular-salaried monthly wage by religion, 2023-24: value",
+      "value": 24678,
+      "displayValue": "₹24,678",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_religion"
+    },
+    {
+      "label": "Regular-salaried monthly wage by religion, 2023-24: value",
+      "value": 23940,
+      "displayValue": "₹23,940",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_religion"
+    },
+    {
+      "label": "Regular-salaried monthly wage by religion, 2023-24: value",
+      "value": 21332,
+      "displayValue": "₹21,332",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_religion"
+    },
+    {
+      "label": "Regular-salaried monthly wage by religion, 2023-24: value",
+      "value": 17671,
+      "displayValue": "₹17,671",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_religion"
+    },
+    {
+      "label": "Regular-salaried monthly wage by religion, 2023-24: value",
+      "value": 17055,
+      "displayValue": "₹17,055",
+      "date": "",
+      "unit": "₹ per month",
+      "sourceId": "plfs",
+      "indicatorId": "econ.inequality.plfs_wage_by_religion"
+    },
+    {
+      "label": "Extreme poverty headcount ($2.15/day, 2017 PPP), latest",
+      "value": 5.3,
+      "displayValue": "5.3%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.poverty_215"
+    },
+    {
+      "label": "Extreme poverty headcount ($2.15/day, 2017 PPP), earliest",
+      "value": 59.7,
+      "displayValue": "59.7%",
+      "date": "1977",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.inequality.poverty_215"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): incomeSharePct",
+      "value": 15,
+      "displayValue": "15%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): wealthSharePct",
+      "value": 6.4,
+      "displayValue": "6.4%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): incomeSharePct",
+      "value": 27.3,
+      "displayValue": "27.3%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): wealthSharePct",
+      "value": 28.6,
+      "displayValue": "28.6%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): incomeSharePct",
+      "value": 57.7,
+      "displayValue": "57.7%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): wealthSharePct",
+      "value": 65,
+      "displayValue": "65%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): incomeSharePct",
+      "value": 22.6,
+      "displayValue": "22.6%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    },
+    {
+      "label": "How income and wealth are split, 2022-23 (World Inequality Lab): wealthSharePct",
+      "value": 40.1,
+      "displayValue": "40.1%",
+      "date": "",
+      "unit": "% share",
+      "sourceId": "world-inequality-lab",
+      "indicatorId": "econ.inequality.wil_headline_2023"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "econ.inequality.gini_consumption",
+      "title": "Gini index — consumption (World Bank)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.GINI",
+      "unit": "Gini index (0–100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 29.7
+      },
+      "latest": {
+        "date": "2022",
+        "value": 25.5
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.income_share_top1_wid",
+      "title": "Income share of the top 1%, before tax (WID)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "income-share-top-1-before-tax-wid::Share (top 1%, before tax)",
+      "unit": "% of pre-tax national income",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 75,
+      "earliest": {
+        "date": "1923",
+        "value": 15.95
+      },
+      "latest": {
+        "date": "2022",
+        "value": 23.07
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.wealth_share_top1_wid",
+      "title": "Wealth share of the richest 1% (WID)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "wealth-share-richest-1-percent::Share (top 1%, wealth)",
+      "unit": "% of net personal wealth",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 83,
+      "earliest": {
+        "date": "1820",
+        "value": 19.12
+      },
+      "latest": {
+        "date": "2024",
+        "value": 40.14
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.top1_income_wid",
+      "title": "Top 1% income share — World Inequality Database method",
+      "sourceId": "owid",
+      "sourceIndicatorId": "share-richest-1-wid-vs-pip::Share according to the World Inequality Database",
+      "unit": "% (pre-tax income)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 45,
+      "earliest": {
+        "date": "1980",
+        "value": 7.13
+      },
+      "latest": {
+        "date": "2024",
+        "value": 22.27
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.top1_income_wb",
+      "title": "Top 1% income share — World Bank (survey) method",
+      "sourceId": "owid",
+      "sourceIndicatorId": "share-richest-1-wid-vs-pip::Share according to the World Bank",
+      "unit": "% (consumption/income)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 5.887534469366074
+      },
+      "latest": {
+        "date": "2022",
+        "value": 4.27301861345768
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.income_share_top10_wid",
+      "title": "Income share of the top 10%, before tax (WID)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "income-share-top-10-before-tax-wid::Share (top 10%, before tax)",
+      "unit": "% of pre-tax national income",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 75,
+      "earliest": {
+        "date": "1923",
+        "value": 51.75
+      },
+      "latest": {
+        "date": "2022",
+        "value": 58.89
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.wealth_share_top10_wid",
+      "title": "Wealth share of the richest 10% (WID)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "wealth-share-richest-10-percent::Share (top 10%, wealth)",
+      "unit": "% of net personal wealth",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 83,
+      "earliest": {
+        "date": "1820",
+        "value": 52.83
+      },
+      "latest": {
+        "date": "2024",
+        "value": 65.01
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.cons_dist_top10",
+      "title": "Consumption share of the richest 10% (World Bank distribution)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "income-share-distribution-wb::Richest 10%",
+      "unit": "% of consumption",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 25.157931447029114
+      },
+      "latest": {
+        "date": "2022",
+        "value": 22.13224321603775
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.cons_dist_middle40",
+      "title": "Consumption share of the middle 40% (World Bank distribution)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "income-share-distribution-wb::Middle 40%",
+      "unit": "% of consumption",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 44.463830441236496
+      },
+      "latest": {
+        "date": "2022",
+        "value": 45.04849389195442
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.cons_dist_bottom50",
+      "title": "Consumption share of the poorest 50% (World Bank distribution)",
+      "sourceId": "owid",
+      "sourceIndicatorId": "income-share-distribution-wb::Poorest 50%",
+      "unit": "% of consumption",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 30.37823960185051
+      },
+      "latest": {
+        "date": "2022",
+        "value": 32.81926140189171
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.cons_share_highest20",
+      "title": "Consumption share of the richest 20% (World Bank)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.DST.05TH.20",
+      "unit": "% of consumption",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 39.1
+      },
+      "latest": {
+        "date": "2022",
+        "value": 36.1
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.cons_share_lowest20",
+      "title": "Consumption share of the poorest 20% (World Bank)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.DST.FRST.20",
+      "unit": "% of consumption",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 9.1
+      },
+      "latest": {
+        "date": "2022",
+        "value": 10.4
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.cons_share_highest10",
+      "title": "Consumption share of the richest 10% (World Bank)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.DST.10TH.10",
+      "unit": "% of consumption",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 25.2
+      },
+      "latest": {
+        "date": "2022",
+        "value": 22.1
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.cons_share_lowest10",
+      "title": "Consumption share of the poorest 10% (World Bank)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.DST.FRST.10",
+      "unit": "% of consumption",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 3.9
+      },
+      "latest": {
+        "date": "2022",
+        "value": 4.5
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_gini_rural",
+      "title": "Consumption Gini — rural (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Gini rural",
+      "unit": "Gini index (0–100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 28.3
+      },
+      "latest": {
+        "date": "2023",
+        "value": 23.7
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_gini_urban",
+      "title": "Consumption Gini — urban (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Gini urban",
+      "unit": "Gini index (0–100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 36.3
+      },
+      "latest": {
+        "date": "2023",
+        "value": 28.4
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_rural",
+      "title": "Rural average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 1 rural",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 1430
+      },
+      "latest": {
+        "date": "2023",
+        "value": 4122
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_urban",
+      "title": "Urban average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 1 urban",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 2630
+      },
+      "latest": {
+        "date": "2023",
+        "value": 6996
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed",
+      "title": "Rural average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 2 rural",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 1430
+      },
+      "latest": {
+        "date": "2023",
+        "value": 4247
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed",
+      "title": "Urban average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 2 urban",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 2630
+      },
+      "latest": {
+        "date": "2023",
+        "value": 7078
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural",
+      "title": "Rural average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 1 rural",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 12,
+      "dimensions": [
+        "label",
+        "value",
+        "date"
+      ],
+      "latestRows": [
+        {
+          "label": "Poorest 0-5%",
+          "value": 1677,
+          "date": "2023-24"
+        },
+        {
+          "label": "5-10%",
+          "value": 2126,
+          "date": "2023-24"
+        },
+        {
+          "label": "10-20%",
+          "value": 2473,
+          "date": "2023-24"
+        },
+        {
+          "label": "20-30%",
+          "value": 2833,
+          "date": "2023-24"
+        },
+        {
+          "label": "30-40%",
+          "value": 3162,
+          "date": "2023-24"
+        },
+        {
+          "label": "40-50%",
+          "value": 3498,
+          "date": "2023-24"
+        },
+        {
+          "label": "50-60%",
+          "value": 3866,
+          "date": "2023-24"
+        },
+        {
+          "label": "60-70%",
+          "value": 4304,
+          "date": "2023-24"
+        },
+        {
+          "label": "70-80%",
+          "value": 4885,
+          "date": "2023-24"
+        },
+        {
+          "label": "80-90%",
+          "value": 5763,
+          "date": "2023-24"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban",
+      "title": "Urban average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 1 urban",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 12,
+      "dimensions": [
+        "label",
+        "value",
+        "date"
+      ],
+      "latestRows": [
+        {
+          "label": "Poorest 0-5%",
+          "value": 2376,
+          "date": "2023-24"
+        },
+        {
+          "label": "5-10%",
+          "value": 3093,
+          "date": "2023-24"
+        },
+        {
+          "label": "10-20%",
+          "value": 3687,
+          "date": "2023-24"
+        },
+        {
+          "label": "20-30%",
+          "value": 4353,
+          "date": "2023-24"
+        },
+        {
+          "label": "30-40%",
+          "value": 4979,
+          "date": "2023-24"
+        },
+        {
+          "label": "40-50%",
+          "value": 5622,
+          "date": "2023-24"
+        },
+        {
+          "label": "50-60%",
+          "value": 6334,
+          "date": "2023-24"
+        },
+        {
+          "label": "60-70%",
+          "value": 7199,
+          "date": "2023-24"
+        },
+        {
+          "label": "70-80%",
+          "value": 8353,
+          "date": "2023-24"
+        },
+        {
+          "label": "80-90%",
+          "value": 10139,
+          "date": "2023-24"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_state_mpce_rural",
+      "title": "Rural average MPCE by major state, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 2",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "subnational",
+        "id": "IND-states",
+        "name": "India states"
+      },
+      "rows": 18,
+      "dimensions": [
+        "label",
+        "value",
+        "date"
+      ],
+      "latestRows": [
+        {
+          "label": "Kerala",
+          "value": 6611,
+          "date": "2023-24"
+        },
+        {
+          "label": "Punjab",
+          "value": 5817,
+          "date": "2023-24"
+        },
+        {
+          "label": "Tamil Nadu",
+          "value": 5701,
+          "date": "2023-24"
+        },
+        {
+          "label": "Telangana",
+          "value": 5435,
+          "date": "2023-24"
+        },
+        {
+          "label": "Haryana",
+          "value": 5377,
+          "date": "2023-24"
+        },
+        {
+          "label": "Andhra Pradesh",
+          "value": 5327,
+          "date": "2023-24"
+        },
+        {
+          "label": "Karnataka",
+          "value": 4903,
+          "date": "2023-24"
+        },
+        {
+          "label": "Rajasthan",
+          "value": 4510,
+          "date": "2023-24"
+        },
+        {
+          "label": "Maharashtra",
+          "value": 4145,
+          "date": "2023-24"
+        },
+        {
+          "label": "Gujarat",
+          "value": 4116,
+          "date": "2023-24"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_state_mpce_urban",
+      "title": "Urban average MPCE by major state, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 3",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "subnational",
+        "id": "IND-states",
+        "name": "India states"
+      },
+      "rows": 18,
+      "dimensions": [
+        "label",
+        "value",
+        "date"
+      ],
+      "latestRows": [
+        {
+          "label": "Telangana",
+          "value": 8978,
+          "date": "2023-24"
+        },
+        {
+          "label": "Haryana",
+          "value": 8428,
+          "date": "2023-24"
+        },
+        {
+          "label": "Tamil Nadu",
+          "value": 8165,
+          "date": "2023-24"
+        },
+        {
+          "label": "Karnataka",
+          "value": 8076,
+          "date": "2023-24"
+        },
+        {
+          "label": "Kerala",
+          "value": 7783,
+          "date": "2023-24"
+        },
+        {
+          "label": "Maharashtra",
+          "value": 7363,
+          "date": "2023-24"
+        },
+        {
+          "label": "Punjab",
+          "value": 7359,
+          "date": "2023-24"
+        },
+        {
+          "label": "Andhra Pradesh",
+          "value": 7182,
+          "date": "2023-24"
+        },
+        {
+          "label": "Gujarat",
+          "value": 7175,
+          "date": "2023-24"
+        },
+        {
+          "label": "Assam",
+          "value": 6794,
+          "date": "2023-24"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_cons_share_rural",
+      "title": "Consumption share by group — rural (HCES 2023-24, computed)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 1 rural derived shares",
+      "unit": "% of total consumption",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Poorest 50%",
+          "value": 33.6
+        },
+        {
+          "label": "Middle 40%",
+          "value": 45.7
+        },
+        {
+          "label": "Richest 10%",
+          "value": 20.7
+        },
+        {
+          "label": "Richest 5%",
+          "value": 12.3
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_cons_share_urban",
+      "title": "Consumption share by group — urban (HCES 2023-24, computed)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 1 urban derived shares",
+      "unit": "% of total consumption",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Poorest 50%",
+          "value": 30.6
+        },
+        {
+          "label": "Middle 40%",
+          "value": 45.8
+        },
+        {
+          "label": "Richest 10%",
+          "value": 23.7
+        },
+        {
+          "label": "Richest 5%",
+          "value": 14.5
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_by_caste",
+      "title": "Consumption (MPCE) by caste group, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES microdata: MPCE by social group",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value",
+        "gini",
+        "popSharePct",
+        "gapVsOthersPct"
+      ],
+      "latestRows": [
+        {
+          "label": "Others",
+          "value": 6148,
+          "gini": 0.308,
+          "popSharePct": 25.4,
+          "gapVsOthersPct": 0
+        },
+        {
+          "label": "OBC",
+          "value": 5068,
+          "gini": 0.289,
+          "popSharePct": 45.7,
+          "gapVsOthersPct": -18
+        },
+        {
+          "label": "Scheduled Caste",
+          "value": 4277,
+          "gini": 0.26,
+          "popSharePct": 19.3,
+          "gapVsOthersPct": -30
+        },
+        {
+          "label": "Scheduled Tribe",
+          "value": 3614,
+          "gini": 0.295,
+          "popSharePct": 9.7,
+          "gapVsOthersPct": -41
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_by_religion",
+      "title": "Consumption (MPCE) by religion, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES microdata: MPCE by religion",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 5,
+      "dimensions": [
+        "label",
+        "value",
+        "gini",
+        "popSharePct",
+        "gapVsHinduPct"
+      ],
+      "latestRows": [
+        {
+          "label": "Sikh",
+          "value": 6509,
+          "gini": 0.234,
+          "popSharePct": 1.5,
+          "gapVsHinduPct": 28
+        },
+        {
+          "label": "Christian",
+          "value": 6111,
+          "gini": 0.336,
+          "popSharePct": 2.7,
+          "gapVsHinduPct": 20
+        },
+        {
+          "label": "Hindu",
+          "value": 5089,
+          "gini": 0.307,
+          "popSharePct": 81.7,
+          "gapVsHinduPct": 0
+        },
+        {
+          "label": "Buddhist",
+          "value": 4912,
+          "gini": 0.291,
+          "popSharePct": 0.5,
+          "gapVsHinduPct": -3
+        },
+        {
+          "label": "Muslim",
+          "value": 4583,
+          "gini": 0.26,
+          "popSharePct": 13.1,
+          "gapVsHinduPct": -10
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.plfs_wage_by_caste",
+      "title": "Regular-salaried monthly wage by caste, 2023-24",
+      "sourceId": "plfs",
+      "sourceIndicatorId": "econ.inequality.plfs_wage_by_caste",
+      "unit": "₹ per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value",
+        "gapVsOthersPct"
+      ],
+      "latestRows": [
+        {
+          "label": "Others",
+          "value": 25957,
+          "gapVsOthersPct": 0
+        },
+        {
+          "label": "OBC",
+          "value": 19735,
+          "gapVsOthersPct": -24
+        },
+        {
+          "label": "Scheduled Tribe",
+          "value": 18343,
+          "gapVsOthersPct": -29
+        },
+        {
+          "label": "Scheduled Caste",
+          "value": 16516,
+          "gapVsOthersPct": -36
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.plfs_gender_ratio_by_caste",
+      "title": "Women's pay as a share of men's, by caste, 2023-24",
+      "sourceId": "plfs",
+      "sourceIndicatorId": "econ.inequality.plfs_gender_ratio_by_caste",
+      "unit": "% (female ÷ male regular wage)",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value",
+        "maleWage",
+        "femaleWage"
+      ],
+      "latestRows": [
+        {
+          "label": "Others",
+          "value": 84,
+          "maleWage": 27004,
+          "femaleWage": 22630
+        },
+        {
+          "label": "OBC",
+          "value": 73,
+          "maleWage": 21094,
+          "femaleWage": 15461
+        },
+        {
+          "label": "Scheduled Caste",
+          "value": 63,
+          "maleWage": 18384,
+          "femaleWage": 11665
+        },
+        {
+          "label": "Scheduled Tribe",
+          "value": 63,
+          "maleWage": 20721,
+          "femaleWage": 12960
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.plfs_wage_by_religion",
+      "title": "Regular-salaried monthly wage by religion, 2023-24",
+      "sourceId": "plfs",
+      "sourceIndicatorId": "econ.inequality.plfs_wage_by_religion",
+      "unit": "₹ per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Christian",
+          "value": 25094
+        },
+        {
+          "label": "Jain",
+          "value": 24678
+        },
+        {
+          "label": "Buddhist",
+          "value": 23940
+        },
+        {
+          "label": "Hindu",
+          "value": 21332
+        },
+        {
+          "label": "Muslim",
+          "value": 17671
+        },
+        {
+          "label": "Sikh",
+          "value": 17055
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.poverty_215",
+      "title": "Extreme poverty headcount ($2.15/day, 2017 PPP)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.DDAY",
+      "unit": "% of population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 59.7
+      },
+      "latest": {
+        "date": "2022",
+        "value": 5.3
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.wil_headline_2023",
+      "title": "How income and wealth are split, 2022-23 (World Inequality Lab)",
+      "sourceId": "world-inequality-lab",
+      "sourceIndicatorId": "wil.2024.headline_shares",
+      "unit": "% share",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "group",
+        "incomeSharePct",
+        "wealthSharePct"
+      ],
+      "latestRows": [
+        {
+          "group": "Bottom 50%",
+          "incomeSharePct": 15,
+          "wealthSharePct": 6.4
+        },
+        {
+          "group": "Middle 40%",
+          "incomeSharePct": 27.3,
+          "wealthSharePct": 28.6
+        },
+        {
+          "group": "Top 10%",
+          "incomeSharePct": 57.7,
+          "wealthSharePct": 65
+        },
+        {
+          "group": "Top 1%",
+          "incomeSharePct": 22.6,
+          "wealthSharePct": 40.1
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

@@ -441,12 +441,46 @@ function renderChartInner(b) {
   }
 }
 
+// Mobile-native variant for the chart kinds that are unreadable when the wide desktop
+// canvas is shrunk to a phone. Returns "" for kinds without a mobile layout (those keep
+// the desktop SVG with a horizontal-scroll fallback). See barChangeM / moversM.
+function renderChartMobile(b) {
+  switch (b.kind) {
+    case "change": return Chart.barChangeM(trend(b.nums), { max: b.max });
+    case "crossover": return Chart.barChangeM(trend(b.nums), { max: b.max, signColor: true });
+    case "movers": return Chart.moversM(movers(b.nums));
+    case "stack": return Chart.stackBarsM(
+      b.rows.map((r) => ({ label: r.label, values: r.nums.map((n) => (r.period === "nfhs5" ? india(n).nfhs5 : india(n).total)) })),
+      { segLabels: b.segLabels, colors: b.colors, max: b.max });
+    case "split": return Chart.splitGroupM(split(b.nums), { max: b.max });
+    // rows / dumbbell / smallmult all carry the same then→now data shape as `change`, so the
+    // mobile then/now bar list reads them all cleanly.
+    case "rows": return Chart.barChangeM(b.rows.map((r) => ({ label: r.label, then: india(r.num).nfhs5, now: india(r.num).total })), { max: b.max });
+    case "dumbbell": return Chart.barChangeM(trend(b.nums), { max: b.max });
+    case "smallmult": return Chart.barChangeM(trend(b.nums), { max: b.max });
+    case "diverging": return Chart.divergingM(
+      b.groups.map((g) => ({ label: g.label, left: total(g.l), right: total(g.r) })),
+      { leftLabel: b.leftLabel, rightLabel: b.rightLabel, leftColor: b.left, rightColor: b.right || "#D9542B", max: b.max });
+    // Maps and the state league tables all share State/UT data — on a phone they become a
+    // compact, readable ranked list instead of a tiny tile-grid or a shrunk wide table.
+    case "map": case "ranked": case "dotstrip": case "diststrip":
+      return Chart.rankedBarsM(stateMap(b.num), { unit: unitFor(b.num), worseSide: polarityOf(b.num) });
+    default: return "";
+  }
+}
+
 export function renderChart(b) {
   // A definition tooltip only makes sense when the whole chart is one indicator.
   const single = b.num ?? (b.nums && b.nums.length === 1 ? b.nums[0] : null);
   const def = b.def ?? defFor(single);
-  const html = renderChartInner(b);
-  // inject the indicator definition as an SVG <title> (hover tooltip), once
+  let desktop = renderChartInner(b);
+  const mobile = renderChartMobile(b);
+  // When a mobile variant exists, tag the desktop svg so CSS shows one or the other
+  // (.nf-d on wide screens, .nf-m on phones). Kinds without a mobile variant stay untagged
+  // and always render (with the existing horizontal-scroll fallback on mobile).
+  if (mobile && desktop) desktop = desktop.replace('class="nf-svg ', 'class="nf-svg nf-d ');
+  const html = desktop + mobile;
+  // inject the indicator definition as an SVG <title> (hover tooltip) into the first svg
   return def && html ? html.replace(/(<svg\b[^>]*?>)/, (m) => m + Chart.defTitle(def)) : html;
 }
 

@@ -154,16 +154,18 @@ export type SparkGridVisual = {
   source: VisualSource;
   min: number;
   max: number;
-  cells: Array<{ label: string; points: Array<{ date: string; value: number }>; latest: number | null }>;
+  cells: Array<{ label: string; points: Array<{ date: string; value: number }>; latest: number | null; change?: number }>;
 };
 export type RankedChangeVisual = {
   kind: "rankedChange";
+  diverging?: boolean;
   title: string;
   subtitle: string;
   unit: string;
   source: VisualSource;
   startLabel: string;
   endLabel: string;
+  min?: number;
   max: number;
   rows: Array<{ label: string; start: number; end: number; change: number }>;
 };
@@ -1976,6 +1978,7 @@ type PlanEntry = {
   bottomLabel?: string;
   signed?: boolean;
   ramp?: string;
+  diverging?: boolean;
 };
 
 // --- Builders for richer analysis types (reuse existing renderers where possible) ---
@@ -2126,14 +2129,23 @@ function choroplethVisual(artifact: Artifact, title: string, subtitle: string, u
 function sparkGridVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, fromYear?: number): SparkGridVisual | null {
   const clip = (points: LineVisual["lines"][number]["points"]) =>
     fromYear ? points.filter((p) => Number(String(p.date).slice(0, 4)) >= fromYear) : points;
+  // Per-cell change uses decade averages (first 10 vs last 10 points), matching the
+  // ranked chart's method — so the magnitude shown on each sparkline is robust to a
+  // single noisy endpoint year, not first-point-minus-last-point.
+  const decadeMean = (pts: Array<{ value: number }>, end: "first" | "last") => {
+    const slice = end === "first" ? pts.slice(0, 10) : pts.slice(-10);
+    return slice.length ? slice.reduce((s, p) => s + p.value, 0) / slice.length : 0;
+  };
   const cells = (series || [])
     .map((item) => {
       const artifact = artifactById(item.indicator);
       const line = artifact ? lineFor(artifact) : null;
       const points = line && line.lines[0] ? clip(line.lines[0].points) : [];
-      return points.length >= 2 ? { label: item.label, points, latest: points[points.length - 1].value } : null;
+      if (points.length < 2) return null;
+      const change = decadeMean(points, "last") - decadeMean(points, "first");
+      return { label: item.label, points, latest: points[points.length - 1].value, change };
     })
-    .filter((c): c is { label: string; points: Array<{ date: string; value: number }>; latest: number } => Boolean(c));
+    .filter((c): c is { label: string; points: Array<{ date: string; value: number }>; latest: number; change: number } => Boolean(c));
   if (cells.length < 2) return null;
   cells.sort((a, b) => (b.latest ?? 0) - (a.latest ?? 0));
   const all = cells.flatMap((c) => c.points.map((p) => p.value));
@@ -2142,7 +2154,10 @@ function sparkGridVisual(series: Array<{ indicator: string; label: string }>, ti
     kind: "sparkGrid",
     title, subtitle, unit,
     source: first ? sourceFor(first) : { sourceId: "open-meteo", sourceIndicatorId: title },
-    min: 0,
+    // min/max bound the COLOUR ramp across cells (so warmer cities read redder). The
+    // sparkline geometry is auto-scaled per cell at render time, so a 1 deg C trend on a
+    // 27 deg C base is visible instead of a flat line near a shared 0-based ceiling.
+    min: Math.min(...all),
     max: Math.max(...all, 1),
     cells
   };
@@ -2180,7 +2195,7 @@ function linePanelsVisual(panels: NonNullable<PlanEntry["panels"]>, title: strin
   };
 }
 
-function rankedChangeVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, baselineYears = 10, latestYears = 10): RankedChangeVisual | null {
+function rankedChangeVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, baselineYears = 10, latestYears = 10, diverging = false): RankedChangeVisual | null {
   const rows = (series || [])
     .map((item) => {
       const artifact = artifactById(item.indicator);
@@ -2195,7 +2210,8 @@ function rankedChangeVisual(series: Array<{ indicator: string; label: string }>,
     })
     .filter((row): row is RankedChangeVisual["rows"][number] => Boolean(row));
   if (rows.length < 2) return null;
-  rows.sort((a, b) => b.end - a.end);
+  // Diverging mode ranks by the CHANGE itself (warming amount); default ranks by current level.
+  rows.sort((a, b) => diverging ? (b.change - a.change) : (b.end - a.end));
   const first = artifactById(series[0].indicator);
   const firstPoints = first ? lineFor(first)?.lines?.[0]?.points || [] : [];
   const baselineStart = firstPoints.at(0)?.date || "baseline";
@@ -2203,14 +2219,17 @@ function rankedChangeVisual(series: Array<{ indicator: string; label: string }>,
   const latestStart = firstPoints.at(Math.max(0, firstPoints.length - Math.max(1, latestYears)))?.date || "latest";
   const latestEnd = firstPoints.at(-1)?.date || latestStart;
   const max = Math.max(...rows.flatMap((row) => [row.start, row.end]), 1);
+  const min = Math.min(...rows.flatMap((row) => [row.start, row.end]));
   return {
     kind: "rankedChange",
+    diverging,
     title,
     subtitle,
     unit,
     source: first ? sourceFor(first) : { sourceId: "open-meteo", sourceIndicatorId: title },
     startLabel: baselineStart === baselineEnd ? baselineStart : `${baselineStart}-${baselineEnd}`,
     endLabel: latestStart === latestEnd ? latestStart : `${latestStart}-${latestEnd}`,
+    min,
     max,
     rows
   };
@@ -2269,7 +2288,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "rankedChange") {
-    const visual = rankedChangeVisual(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "");
+    const visual = rankedChangeVisual(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", 10, 10, Boolean(entry.diverging));
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "latestBars") {
