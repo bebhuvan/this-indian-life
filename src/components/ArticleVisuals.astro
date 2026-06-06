@@ -112,6 +112,18 @@ function compactBarLabel(value: number, unit = "") {
   return fmt(value, unit);
 }
 
+function bareEndLabel(value: number, unit = "") {
+  // The y-axis already carries the unit, so on the narrow mobile box the end-of-line
+  // labels show just the number (+ any ₹/$ symbol). That keeps them short so the plot
+  // stays wide instead of being squeezed by a big right margin. Tiny suffixes like
+  // "x"/"%" are kept; verbose scale words ("lakh cr", "trillion") are dropped.
+  const full = fmt(value, unit);
+  const m = full.match(/^([₹$]?-?[\d.,]+)(.*)$/);
+  if (!m) return full;
+  const suffix = m[2].trim();
+  return suffix.length <= 2 ? m[1] + suffix : m[1];
+}
+
 function shortLabel(label: string) {
   const dimensions = label.match(/\(([^)]+)\)/)?.[1]
     .split(",")
@@ -451,9 +463,11 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     ? { r: visual.lines.length > 1 ? 64 : 24, t: 20, b: 42 }
     : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 58 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 44 };
   // Multi-line charts print each line's latest value to the RIGHT of its end point
-  // (.end-mini-v, left-anchored at latestX + offset). Size the right pad to the widest
-  // of those labels — the mirror of the dynamic LEFT pad below — so a long unit like
-  // "₹69.6 lakh cr" never clips off a narrow (especially mobile) viewBox.
+  // (.end-mini-v, left-anchored at latestX + offset). Desktop has room for the full
+  // value+unit; the narrow mobile box shows the bare number (axis carries the unit) so
+  // the plot stays wide. Either way, size the right pad to the widest label — the mirror
+  // of the dynamic LEFT pad below — so nothing clips off the viewBox.
+  const endText = (value: number) => (mobile ? bareEndLabel(value, visual.unit) : fmt(value, visual.unit));
   if (visual.lines.length > 1) {
     const endOffset = mobile ? 16 : 22; // label x offset from the end point (see template)
     const endFont = mobile ? 12.5 : 17; // .end-mini-v font-size (see indica.css)
@@ -461,7 +475,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       3,
       ...visual.lines.map((line) => {
         const v = line.points.at(-1)?.value;
-        return v == null ? 0 : fmt(v, visual.unit).length;
+        return v == null ? 0 : endText(v).length;
       })
     );
     padRTB.r = Math.max(padRTB.r, endOffset + Math.round(maxEndLabelLen * endFont * 0.62) + 8);
@@ -519,7 +533,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     const latest = line.points.at(-1);
     const latestX = latest ? xLast : 0;
     const latestY = latest ? y(latest.value) : 0;
-    return { ...line, d, areaD, latest, latestX, latestY, color: colors[lineIndex % colors.length] };
+    return { ...line, d, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: colors[lineIndex % colors.length] };
   });
   const minGap = mobile ? 20 : isLead ? 34 : 24;
   const labelTop = pad.t + 14;
@@ -726,7 +740,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         {visual.lines.length > 1 ? (
                           <>
                             <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.2" opacity=".4" />
-                            <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{fmt(path.latest.value, visual.unit)}</text>
+                            <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{path.endLabelText}</text>
                           </>
                         ) : null}
                       </g>
@@ -757,7 +771,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         {visual.lines.length > 1 ? (
                           <>
                             <line x1={path.latestX + 5} y1={path.latestY} x2={path.latestX + 13} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
-                            <text class="end-mini-v" x={path.latestX + 16} y={path.labelY} fill={path.color}>{fmt(path.latest.value, visual.unit)}</text>
+                            <text class="end-mini-v" x={path.latestX + 16} y={path.labelY} fill={path.color}>{path.endLabelText}</text>
                           </>
                         ) : null}
                       </g>
