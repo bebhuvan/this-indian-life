@@ -11,23 +11,36 @@ import { dataFileFor, githubFileUrl, dataFolderUrl } from "../data/dataManifest"
 type Props = { explanation: ExplanationArtifact };
 const { explanation } = Astro.props;
 
+type DatePoint = string | { date?: string } | undefined;
 type Summary = {
   indicatorId?: string;
   title?: string;
   sourceId?: string;
-  earliest?: string;
-  latest?: string;
+  earliest?: DatePoint;
+  latest?: DatePoint;
   unit?: string;
 };
 const summaries = (explanation.evidence.sourceSummaries ?? []) as Summary[];
 
-const year = (value?: string) => (value ? String(value).slice(0, 4) : "");
+// `earliest`/`latest` are sometimes a bare "2025" and sometimes a {date,value}
+// object, depending on when the article was generated — handle both, or the
+// coverage renders as "[obj".
+const year = (value?: DatePoint) => {
+  const d = value && typeof value === "object" ? value.date : value;
+  return d ? String(d).slice(0, 4) : "";
+};
 const coverage = (s: Summary) => {
   const a = year(s.earliest);
   const b = year(s.latest);
   if (a && b) return a === b ? a : `${a}–${b}`;
   return b || a || "";
 };
+
+// The most recent data point across all of the article's series — the coverage
+// date, distinct from the publish/commit date. Derived from the artifacts at build
+// time, so it is accurate and updates itself on every regeneration.
+const latestYears = summaries.map((s) => Number(year(s.latest))).filter((n) => Number.isFinite(n) && n > 1800);
+const dataThrough = latestYears.length ? String(Math.max(...latestYears)) : "";
 
 // Pin the data-file links to THIS article's last publish commit, so they show the
 // data exactly as it was when the article was built (not whatever main says now).
@@ -73,7 +86,7 @@ const furtherReading = explanation.furtherReading ?? [];
     {seriesCount ? (
       <p class="evidence-count">
         Built from <strong>{seriesCount}</strong> data series across <strong>{sourceCount}</strong>
-        {sourceCount === 1 ? " source" : " sources"}.
+        {sourceCount === 1 ? " source" : " sources"}{dataThrough ? <>, with data through <strong>{dataThrough}</strong></> : ""}.
       </p>
     ) : (
       <p class="evidence-count">Sourced from the institutions listed below.</p>
