@@ -5,7 +5,8 @@
 // plus a native <details> — no JS.
 import type { ExplanationArtifact } from "../data/questions";
 import { sourceLabel, sourceHomepage } from "../data/site";
-import { dataFileFor, DATA_FOLDER_URL } from "../data/dataManifest";
+import { gitMetaFor } from "../data/questions";
+import { dataFileFor, githubFileUrl, dataFolderUrl } from "../data/dataManifest";
 
 type Props = { explanation: ExplanationArtifact };
 const { explanation } = Astro.props;
@@ -28,6 +29,15 @@ const coverage = (s: Summary) => {
   return b || a || "";
 };
 
+// Pin the data-file links to THIS article's last publish commit, so they show the
+// data exactly as it was when the article was built (not whatever main says now).
+// Fall back to `main` on local/dirty builds where no commit is recorded.
+const gmeta = gitMetaFor(explanation.questionId);
+const dataRef = gmeta.history?.[0]?.sha || "main";
+const dataAsOf = gmeta.updated
+  ? new Date(gmeta.updated).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+  : "";
+
 const series = summaries
   .map((s) => {
     const file = dataFileFor(s.indicatorId);
@@ -35,7 +45,7 @@ const series = summaries
       title: s.title || s.indicatorId || "Untitled series",
       source: sourceLabel(s.sourceId || "?"),
       coverage: coverage(s),
-      fileUrl: file?.githubUrl,
+      fileUrl: file ? githubFileUrl(file.file, dataRef) : undefined,
       method: file?.method
     };
   })
@@ -87,7 +97,7 @@ const furtherReading = explanation.furtherReading ?? [];
       <details class="evidence-series">
         <summary>Data &amp; methods · all {seriesCount} series</summary>
         <p class="es-audit-note">
-          Every figure traces to a source file you can open. <a href={DATA_FOLDER_URL} target="_blank" rel="noreferrer">Browse the data folder on GitHub ↗</a>
+          Every figure traces to a source file you can open{dataAsOf ? `, pinned to the data as of ${dataAsOf}` : ""}. <a href={dataFolderUrl(dataRef)} target="_blank" rel="noreferrer">Browse the data folder on GitHub ↗</a>
         </p>
         <ul>
           {series.map((s) => (

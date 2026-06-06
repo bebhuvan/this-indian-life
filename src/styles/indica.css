@@ -563,6 +563,11 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   /* Stacked-bar segment labels clip on narrow slices — drop them on phones; the full
      names + values sit in the table directly below the bar. */
   .viz-seg span{display:none}
+  /* Share-strip: keep only the percentage inside each slice on phones (the long
+     category name would clip); the full names wrap in the legend below.
+     The legend overrides live just after the base rules (see below) so they win
+     on source order. */
+  .share-strip .ss-val em{display:none}
   .viz-m .yaxt,.viz-m .xaxt{font-size:13px}
   .viz-m .end-v{font-size:15px}
   .viz-m .end-mini-v{font-size:12.5px}
@@ -654,11 +659,22 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .viz-seg{height:100%;display:flex;align-items:center;min-width:2px}
 .viz-seg span{color:#fff;font-size:.9rem;font-weight:500;padding-left:14px;white-space:nowrap;overflow:hidden;text-overflow:clip}
 .share-strip{height:72px;display:flex;gap:2px;overflow:hidden;background:var(--paper);margin:8px 0 22px}
-.share-strip div{height:100%;display:flex;align-items:flex-end;min-width:2px;box-sizing:border-box}
-.share-strip span{color:#fff;font-size:.82rem;font-weight:500;padding:0 0 12px 12px;white-space:nowrap;overflow:hidden;text-overflow:clip;text-shadow:0 1px 8px rgba(0,0,0,.22)}
+.share-strip div{height:100%;display:flex;align-items:flex-end;min-width:2px;box-sizing:border-box;overflow:hidden}
+.share-strip .ss-val{display:flex;align-items:baseline;gap:8px;min-width:0;color:#fff;padding:0 0 12px 12px;text-shadow:0 1px 8px rgba(0,0,0,.22)}
+.share-strip .ss-val b{font-weight:600;font-size:1rem;flex:none}
+.share-strip .ss-val em{font-style:normal;font-weight:500;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .strip-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:-12px 0 20px}
-.strip-legend .sl-item{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;color:var(--mid);white-space:nowrap}
+.strip-legend .sl-item{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;color:var(--mid);max-width:100%}
+.strip-legend .sl-item>span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .strip-legend .sl-item i{width:11px;height:11px;border-radius:2px;flex:none}
+/* Phones: stack the legend so each long category name wraps in full instead of
+   truncating. Placed after the base rules above so it wins on source order. */
+@media(max-width:620px){
+  .strip-legend{flex-direction:column;gap:11px}
+  .strip-legend .sl-item{align-items:flex-start}
+  .strip-legend .sl-item>span{white-space:normal;overflow:visible}
+  .strip-legend .sl-item i{margin-top:5px}
+}
 .strip-pair-row{display:grid;grid-template-columns:62px 1fr;gap:16px;align-items:center;margin:12px 0}
 .strip-pair-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-align:right;font-weight:500}
 .strip-pair-row .share-strip{margin:0;height:56px}

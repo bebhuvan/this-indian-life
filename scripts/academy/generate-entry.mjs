@@ -52,6 +52,25 @@ function hardIssues(e) {
   return { lint, emdash, blocked: lint.errors.length > 0 || emdash };
 }
 
+// Deterministic em-dash sanitizer. The model is unreliable at mechanically removing
+// em-dashes even across several focused passes (it keeps reintroducing them), so this
+// guarantees the tell is gone: every "—" becomes a comma. Rephrasing of banned WORDS
+// still goes through the model; only this one mechanical tell is fixed deterministically.
+function deepStripEmDash(obj) {
+  if (typeof obj === "string") {
+    // Horizontal whitespace only — must NOT collapse newlines, or markdown structure
+    // (paragraph breaks, headings, table rows) is destroyed.
+    return obj.replace(/[ \t]*—[ \t]*/g, ", ").replace(/,[ \t]*([.;:,])/g, "$1").replace(/[ \t]{2,}/g, " ");
+  }
+  if (Array.isArray(obj)) return obj.map(deepStripEmDash);
+  if (obj && typeof obj === "object") {
+    const out = {};
+    for (const k of Object.keys(obj)) out[k] = deepStripEmDash(obj[k]);
+    return out;
+  }
+  return obj;
+}
+
 // Derived-number guard. The model cannot reliably audit its own arithmetic, and the
 // self-critique misses invented ratios (e.g. "the economy grew fifty times"). These
 // patterns surface every multiplier/ratio claim so the critique pass must tie it to a
@@ -144,13 +163,22 @@ function checkRichFigures(entry, lockedNumbers) {
 
   // Table cells: any rupee or percent figure should appear in the locked displayValues.
   const tableFigures = (entry.body || "").split("\n").filter((l) => l.trim().startsWith("|") && !l.includes("---"))
-    .flatMap((l) => l.match(/₹[\d.,]+\s*(?:lakh crore|crore|lakh)?|[\d.]+\s*%/g) || []);
+    .flatMap((l) => l.match(/₹[\d.,]+\s*(?:lakh crore|crore|lakh)?|[\d.]+\s*%|[+-]?[\d.]+\s*percentage points?/gi) || []);
   for (const fig of tableFigures) {
     if (!displays.has(normalizeFigure(fig))) {
       warnings.push(`table figure "${fig.trim()}" is not a locked displayValue — verify or fix.`);
     }
   }
   return warnings;
+}
+
+// The macha body must be English (heading may be Hinglish). Catch a romanized-Hindi
+// body even when the model ignores the prompt rule.
+const HINDI_MARKERS = ["hai", "hain", "mein", "ki", "ka", "ke", "ko", "toh", "yaad", "matlab", "kya", "raha", "raha", "hua", "nahi", "nahin", "aur", "yeh", "woh", "jab", "tab", "kuch", "sirf", "rakho", "samjhe", "liye", "hota", "hoti", "karega", "karta"];
+function machaHindiScore(entry) {
+  const body = String(entry.onTheGround?.body || "").toLowerCase();
+  const words = body.split(/[^a-z]+/).filter(Boolean);
+  return words.filter((w) => HINDI_MARKERS.includes(w)).length;
 }
 
 function normalizeFigure(s) {
@@ -190,7 +218,7 @@ function systemPrompt(voice, critique) {
     "LINK ENTITIES: in linkEntities, list the proper names of notable people, events, institutions, laws, or cited reports you actually mention (for example Simon Kuznets, the Great Depression, GST, the Peterson Institute for International Economics). Names only, never URLs. The site resolves and verifies links from a curated map and silently skips any it does not have.",
     "CONTROVERSY / CRITICISM (the moat): when the brief includes a debate (e.g. whether GDP is mis-measured), present ALL sides fairly, attribute each claim to who made it, cite the source, and DO NOT pick a political winner. State the critique, state the rebuttal, state what was subsequently done. A reader on either side must feel the data was handled honestly. The figures in such a section come only from the relevant context cards.",
     "GDP guard: GDP is a measure of production/output, not the country's income and not money people receive. Do not call GDP 'income' or 'earnings'. You may use per-capita GDP as 'if you split output equally', but never imply it is a salary anyone is paid. The macha (onTheGround) block must never contradict the body's teaching.",
-    "Macha (onTheGround) language: write it in English with light Indian-English flavor. The heading may be cheeky Hinglish; the body stays English with at most an occasional Hindi word a non-Hindi reader still follows. Never write the macha body as a full romanized-Hindi paragraph.",
+    "Macha (onTheGround) language (STRICT): the onTheGround.body MUST be written in English. The heading may be a cheeky Hinglish phrase, and you may drop in at most one or two Hindi words a non-Hindi reader still follows (e.g. 'kirana', 'thik hai'). You must NOT write the body as romanized Hindi. A body like 'Jab news mein aata hai ki GDP badha, toh yaad rakho...' is WRONG and will be rejected: a Tamil or Bengali reader must understand every sentence. Write it the way the structural-change example does: an English scene with light flavour.",
     "ACCOUNTING-IDENTITY DISCIPLINE: some locked numbers relate by definitional identities (GDP = NDP + depreciation; GDP = GVA + net product taxes; GNI = GDP minus net income paid abroad). If a DATA INTEGRITY WARNING says specific numbers do not tie (usually a different-year vintage), do NOT present them as an exact subtraction or sum. Use the same-vintage figure provided in the locked numbers (its label says 'same vintage') and keep figures from the same year together. Never compute an identity yourself from numbers of different dates.",
     "",
     "THE CRITIQUE LOOP you will be held to (internalise it while drafting):",
@@ -351,6 +379,9 @@ async function main() {
     cleaned = res.json;
   }
 
+  // Final deterministic guarantee: strip any em-dashes the model left behind.
+  cleaned = deepStripEmDash(cleaned);
+
   const finalLint = lintReport(...fieldsOf(cleaned));
   const finalDerived = derivedReport(...fieldsOf(cleaned));
   const figureWarnings = checkRichFigures(cleaned, lockedForModel);
@@ -358,6 +389,8 @@ async function main() {
   const wordCount = String(cleaned.body || "").split(/\s+/).filter(Boolean).length;
   const thin = brief.depth === "flagship" && wordCount < 1300;
   if (thin) console.log(`[academy]   THIN: flagship body is ${wordCount} words (target ~1500-2000). Deepen the brief (tension, more sectionArc beats, more context cards) and regenerate.`);
+  const machaScore = machaHindiScore(cleaned);
+  if (machaScore >= 4) console.log(`[academy]   MACHA TOO HINDI: onTheGround body has ${machaScore} romanized-Hindi markers; it must be English with light flavour. Rewrite.`);
   const stillBlocked = hardIssues(cleaned).blocked;
   console.log(`[academy] final: ${finalLint.errors.length} lint errors, ${finalLint.warns.length} warns, ${finalDerived.length} derived-number claims, ${wordCount} words, clean=${!stillBlocked}`);
   if (finalDerived.length) console.log(`[academy]   verify derived: ${finalDerived.map((f) => f.match).join(", ")}`);

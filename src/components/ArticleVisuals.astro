@@ -1108,11 +1108,19 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <div class="share-strip">
                   {bar.bars.map((item, index) => {
                     const pct = (item.value / total) * 100;
+                    // The percentage is the hero number and must never clip; the
+                    // category name is secondary (ellipsis on desktop, hidden on
+                    // phones where the full name lives in the legend/table below).
+                    const showPct = pct >= 7;
                     const showLabel = pct >= 11;
-                    const lbl = isStrip ? `${item.label} · ${Math.round(item.value)}%` : item.label;
                     return (
                     <div style={`width:${pct}%;background:${colors[index % colors.length]}`}>
-                      {showLabel ? <span>{lbl}</span> : null}
+                      {showPct ? (
+                        <span class="ss-val">
+                          <b>{Math.round(pct)}%</b>
+                          {showLabel ? <em>{item.label}</em> : null}
+                        </span>
+                      ) : null}
                     </div>
                     );
                   })}
@@ -1121,7 +1129,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               {isStrip ? (
                 <div class="strip-legend">
                   {bar.bars.map((item, index) => (
-                    <span class="sl-item"><i style={`background:${colors[index % colors.length]}`}></i>{item.label} · {Math.round(item.value)}%</span>
+                    <span class="sl-item"><i style={`background:${colors[index % colors.length]}`}></i><span>{item.label} · {Math.round(item.value)}%</span></span>
                   ))}
                 </div>
               ) : null}

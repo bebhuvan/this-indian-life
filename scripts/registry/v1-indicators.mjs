@@ -7,6 +7,308 @@
 // Off-topic indicators are excluded simply by not listing them — no separate exclude list needed.
 export const v1Questions = [
   {
+    id: "q.econ.asia_divergence",
+    slug: "why-india-stayed-poor-while-asia-got-rich",
+    question: "Why did India stay poor while the rest of Asia got rich?",
+    priority: "core",
+    // Flagship comparison: India vs China + the Asian tigers + later-wave peers, organised
+    // as the "integrated East Asian model" causal chain — human capital, then investment,
+    // then manufacturing-led structural transformation, then export sophistication, then
+    // outcomes — with India under-doing each link, and an honest "other side" act. Stance:
+    // confident about WHAT the data shows, humble about WHY; present all sides; never imply
+    // coercion was the necessary price. Maddison is a long-run reconstruction (read as broad
+    // trajectory); measured WB/PWT data carries the modern, precision-mattering comparisons.
+    indicators: ["divergence.gdp_pc_ppp.in"],
+    core: [
+      "divergence.gdp_pc_maddison.in",
+      "divergence.gdp_pc_ppp.in",
+      "divergence.flfp.in",
+      "divergence.gfcf.in",
+      "divergence.mfg_va.in",
+      "divergence.schooling_years.in"
+    ],
+    context: [
+      "divergence.gdp_pc_maddison.chn", "divergence.gdp_pc_maddison.kor", "divergence.gdp_pc_maddison.idn", "divergence.gdp_pc_maddison.bgd",
+      "divergence.gdp_pc_ppp.chn", "divergence.gdp_pc_ppp.kor", "divergence.gdp_pc_ppp.vnm", "divergence.gdp_pc_ppp.bgd", "divergence.gdp_pc_ppp.idn", "divergence.gdp_pc_ppp.wld",
+      "divergence.life_expectancy.in", "divergence.life_expectancy.chn", "divergence.life_expectancy.kor", "divergence.life_expectancy.vnm", "divergence.life_expectancy.bgd", "divergence.life_expectancy.wld",
+      "divergence.under5_mortality.in", "divergence.under5_mortality.chn", "divergence.under5_mortality.kor", "divergence.under5_mortality.vnm", "divergence.under5_mortality.bgd", "divergence.under5_mortality.wld",
+      "divergence.fertility.in", "divergence.fertility.chn", "divergence.fertility.kor", "divergence.fertility.vnm", "divergence.fertility.bgd",
+      "divergence.schooling_years.chn", "divergence.schooling_years.kor", "divergence.schooling_years.twn", "divergence.schooling_years.bgd", "divergence.schooling_years.jpn",
+      "divergence.flfp.chn", "divergence.flfp.kor", "divergence.flfp.vnm", "divergence.flfp.bgd", "divergence.flfp.wld",
+      "divergence.stunting.in", "divergence.stunting.chn", "divergence.stunting.vnm", "divergence.stunting.bgd", "divergence.stunting.idn", "divergence.stunting.pak",
+      "divergence.gfcf.chn", "divergence.gfcf.kor", "divergence.gfcf.vnm", "divergence.gfcf.jpn", "divergence.gfcf.wld",
+      "divergence.gross_savings.chn", "divergence.gross_savings.kor", "divergence.gross_savings.vnm", "divergence.gross_savings.wld", "divergence.gross_savings.in",
+      "divergence.fdi_in.in", "divergence.fdi_in.chn", "divergence.fdi_in.kor", "divergence.fdi_in.vnm", "divergence.fdi_in.bgd",
+      "divergence.mfg_va.kor", "divergence.mfg_va.mys", "divergence.mfg_va.tha", "divergence.mfg_va.bgd",
+      "divergence.agri_va.in", "divergence.industry_va.in", "divergence.services_va.in",
+      "divergence.emp_agriculture.in", "divergence.emp_agriculture.chn", "divergence.emp_agriculture.kor", "divergence.emp_agriculture.vnm", "divergence.emp_agriculture.bgd",
+      "trade.atlas.eci", "trade.atlas.eci_chn", "trade.atlas.eci_kor", "trade.atlas.eci_vnm", "trade.atlas.eci_tha",
+      "divergence.manuf_exports_share.in", "divergence.manuf_exports_share.chn", "divergence.manuf_exports_share.kor", "divergence.manuf_exports_share.vnm", "divergence.manuf_exports_share.bgd",
+      "divergence.productivity_hour.in", "divergence.productivity_hour.chn", "divergence.productivity_hour.kor", "divergence.productivity_hour.twn", "divergence.productivity_hour.vnm", "divergence.productivity_hour.jpn",
+      "divergence.rnd_gdp.in", "divergence.rnd_gdp.chn", "divergence.rnd_gdp.kor", "divergence.rnd_gdp.jpn",
+      "divergence.electric_consumption_pc.in", "divergence.electric_consumption_pc.chn", "divergence.electric_consumption_pc.kor", "divergence.electric_consumption_pc.vnm", "divergence.electric_consumption_pc.wld",
+      "divergence.urban_share.in", "divergence.urban_share.chn", "divergence.urban_share.kor", "divergence.urban_share.vnm", "divergence.urban_share.wld",
+      "divergence.poverty_owid.in", "divergence.poverty_owid.chn", "divergence.poverty_owid.idn", "divergence.poverty_owid.vnm", "divergence.poverty_owid.bgd",
+      "divergence.hdi.in", "divergence.hdi.chn", "divergence.hdi.kor", "divergence.hdi.vnm", "divergence.hdi.bgd",
+      "divergence.democracy.in", "divergence.democracy.chn", "divergence.democracy.kor", "divergence.democracy.twn"
+    ],
+    visualPlan: [
+      // ACT 1 — the same starting line, and the great divergence
+      { chart: "multiLine", title: "The same starting line, and the great divergence", size: "hero", beat: "divergence", unit: "GDP per capita (2011 int-$)", fromYear: 1950,
+        subtitle: "Maddison Project 2023 · GDP per capita in 2011 int-$ · a long-run reconstruction, read as broad trajectory not precise levels",
+        bands: [{ year: 1978, label: "China opens up" }, { year: 1991, label: "India opens up" }],
+        series: [
+          { indicator: "divergence.gdp_pc_maddison.in", label: "India" },
+          { indicator: "divergence.gdp_pc_maddison.chn", label: "China" },
+          { indicator: "divergence.gdp_pc_maddison.kor", label: "S. Korea" },
+          { indicator: "divergence.gdp_pc_maddison.idn", label: "Indonesia" },
+          { indicator: "divergence.gdp_pc_maddison.bgd", label: "Bangladesh" }
+        ],
+        why: "Around 1950 India was no poorer than its Asian peers; this is the gap that opened up afterward.",
+        read: "Each line is one country's average output per person, on a long-run reconstruction. Lines that climb steeply pulled away from India.",
+        watch: "These are reconstructed historical estimates with wide error bars, especially before 1950. Read the shape and the divergence, not the exact value in any single year." },
+      { chart: "multiLine", title: "The income gap, measured", size: "feature", beat: "level", unit: "GDP per capita at PPP (constant 2021 int-$)", fromYear: 1990,
+        subtitle: "World Bank · GDP per capita at purchasing-power parity, constant 2021 international dollars",
+        series: [
+          { indicator: "divergence.gdp_pc_ppp.in", label: "India" },
+          { indicator: "divergence.gdp_pc_ppp.chn", label: "China" },
+          { indicator: "divergence.gdp_pc_ppp.kor", label: "S. Korea" },
+          { indicator: "divergence.gdp_pc_ppp.vnm", label: "Vietnam" },
+          { indicator: "divergence.gdp_pc_ppp.bgd", label: "Bangladesh" },
+          { indicator: "divergence.gdp_pc_ppp.wld", label: "World" }
+        ],
+        why: "The measured, modern version of the gap, on a like-for-like PPP basis.",
+        watch: "PPP adjusts for price differences so a rupee and a dollar buy comparable baskets; it is a modelled price-level adjustment, not a market exchange rate." },
+      // ACT 2 — human capital first
+      { chart: "multiLine", title: "How long people live", size: "feature", beat: "human-capital", unit: "life expectancy at birth (years)", fromYear: 1960,
+        subtitle: "World Bank · life expectancy at birth · 1960 to latest",
+        series: [
+          { indicator: "divergence.life_expectancy.in", label: "India" },
+          { indicator: "divergence.life_expectancy.chn", label: "China" },
+          { indicator: "divergence.life_expectancy.kor", label: "S. Korea" },
+          { indicator: "divergence.life_expectancy.vnm", label: "Vietnam" },
+          { indicator: "divergence.life_expectancy.bgd", label: "Bangladesh" },
+          { indicator: "divergence.life_expectancy.wld", label: "World" }
+        ],
+        why: "East Asia invested in survival first; the life-expectancy gap opened decades before the income gap." },
+      { chart: "multiLine", title: "Children who don't reach five", size: "small", beat: "human-capital", unit: "under-five deaths per 1,000 live births", fromYear: 1960,
+        subtitle: "World Bank · under-five mortality · 1960 to latest",
+        series: [
+          { indicator: "divergence.under5_mortality.in", label: "India" },
+          { indicator: "divergence.under5_mortality.chn", label: "China" },
+          { indicator: "divergence.under5_mortality.kor", label: "S. Korea" },
+          { indicator: "divergence.under5_mortality.vnm", label: "Vietnam" },
+          { indicator: "divergence.under5_mortality.bgd", label: "Bangladesh" }
+        ],
+        why: "A healthy, surviving child is the first input into a future workforce." },
+      { chart: "multiLine", title: "Years of schooling, the long view", size: "feature", beat: "human-capital", unit: "mean years of schooling", fromYear: 1900,
+        subtitle: "Lee-Lee / Barro-Lee via Our World in Data · average years of schooling, adults · the human-capital stock, not just enrolment",
+        series: [
+          { indicator: "divergence.schooling_years.in", label: "India" },
+          { indicator: "divergence.schooling_years.chn", label: "China" },
+          { indicator: "divergence.schooling_years.kor", label: "S. Korea" },
+          { indicator: "divergence.schooling_years.twn", label: "Taiwan" },
+          { indicator: "divergence.schooling_years.bgd", label: "Bangladesh" },
+          { indicator: "divergence.schooling_years.jpn", label: "Japan" }
+        ],
+        why: "Schooling is the human-capital stock a country brings to industrialisation; India started this climb late and slow." },
+      { chart: "multiLine", title: "Where are the women at work?", size: "hero", beat: "female-labour", unit: "female labour-force participation (% of women 15+)", fromYear: 1990,
+        subtitle: "World Bank / ILO modelled estimate · share of women 15+ in the labour force",
+        series: [
+          { indicator: "divergence.flfp.in", label: "India" },
+          { indicator: "divergence.flfp.chn", label: "China" },
+          { indicator: "divergence.flfp.kor", label: "S. Korea" },
+          { indicator: "divergence.flfp.vnm", label: "Vietnam" },
+          { indicator: "divergence.flfp.bgd", label: "Bangladesh" },
+          { indicator: "divergence.flfp.wld", label: "World" }
+        ],
+        why: "India's single most striking outlier: barely a quarter to a third of women are in the measured workforce, far below its Asian peers.",
+        read: "Each line is the share of working-age women in the labour force. Higher means more women earning.",
+        watch: "These are modelled ILO estimates and differ from India's own survey levels; much of women's work in India is unpaid or informal and undercounted." },
+      { chart: "multiLine", title: "How fast families shrank", size: "small", beat: "demography", unit: "births per woman", fromYear: 1960,
+        subtitle: "World Bank · total fertility rate · 1960 to latest",
+        series: [
+          { indicator: "divergence.fertility.in", label: "India" },
+          { indicator: "divergence.fertility.chn", label: "China" },
+          { indicator: "divergence.fertility.kor", label: "S. Korea" },
+          { indicator: "divergence.fertility.vnm", label: "Vietnam" },
+          { indicator: "divergence.fertility.bgd", label: "Bangladesh" }
+        ],
+        why: "Faster fertility decline opened the demographic-dividend window earlier in East Asia." },
+      { chart: "latestBars", title: "Children too short for their age", size: "small", beat: "human-capital", unit: "% of children under 5 stunted",
+        subtitle: "World Bank · child stunting, latest available year per country",
+        series: [
+          { indicator: "divergence.stunting.in", label: "India" },
+          { indicator: "divergence.stunting.pak", label: "Pakistan" },
+          { indicator: "divergence.stunting.bgd", label: "Bangladesh" },
+          { indicator: "divergence.stunting.idn", label: "Indonesia" },
+          { indicator: "divergence.stunting.vnm", label: "Vietnam" },
+          { indicator: "divergence.stunting.chn", label: "China" }
+        ],
+        why: "Stunting is malnutrition written into a child's body and brain; India's rate is high even against much poorer countries.",
+        watch: "Survey years differ by country, so read this as the latest snapshot, not a single common year." },
+      // ACT 3 — the investment engine
+      { chart: "multiLine", title: "How much each country built", size: "feature", beat: "investment", unit: "gross fixed capital formation (% of GDP)", fromYear: 1960,
+        subtitle: "World Bank · gross fixed capital formation as a share of GDP · the investment rate",
+        series: [
+          { indicator: "divergence.gfcf.in", label: "India" },
+          { indicator: "divergence.gfcf.chn", label: "China" },
+          { indicator: "divergence.gfcf.kor", label: "S. Korea" },
+          { indicator: "divergence.gfcf.vnm", label: "Vietnam" },
+          { indicator: "divergence.gfcf.jpn", label: "Japan" },
+          { indicator: "divergence.gfcf.wld", label: "World" }
+        ],
+        why: "The under-told engine of the miracle: East Asia poured a huge share of output into factories, roads and machines.",
+        read: "Each line is the share of GDP spent building productive capacity each year. Higher means more of today's output invested in tomorrow." },
+      { chart: "multiLine", title: "Who saved to pay for it", size: "small", beat: "investment", unit: "gross savings (% of GDP)", fromYear: 1975,
+        subtitle: "World Bank · gross savings as a share of GDP",
+        series: [
+          { indicator: "divergence.gross_savings.in", label: "India" },
+          { indicator: "divergence.gross_savings.chn", label: "China" },
+          { indicator: "divergence.gross_savings.kor", label: "S. Korea" },
+          { indicator: "divergence.gross_savings.vnm", label: "Vietnam" },
+          { indicator: "divergence.gross_savings.wld", label: "World" }
+        ],
+        why: "High investment was financed by high domestic saving; the two move together." },
+      { chart: "multiLine", title: "Foreign money coming in", size: "small", beat: "investment", unit: "FDI net inflows (% of GDP)", fromYear: 1980,
+        subtitle: "World Bank · foreign direct investment, net inflows, as a share of GDP",
+        series: [
+          { indicator: "divergence.fdi_in.in", label: "India" },
+          { indicator: "divergence.fdi_in.chn", label: "China" },
+          { indicator: "divergence.fdi_in.kor", label: "S. Korea" },
+          { indicator: "divergence.fdi_in.vnm", label: "Vietnam" },
+          { indicator: "divergence.fdi_in.bgd", label: "Bangladesh" }
+        ],
+        why: "Foreign factories brought capital, technology and export markets; Vietnam and China pulled in far more, relative to their size." },
+      // ACT 4 — the factory India skipped
+      { chart: "multiLine", title: "The factory escalator India never rode", size: "hero", beat: "structure", unit: "manufacturing value added (% of GDP)", fromYear: 1960,
+        subtitle: "World Bank · manufacturing value added as a share of GDP · India and South Korea have full records; China's WB series starts only in 2004",
+        series: [
+          { indicator: "divergence.mfg_va.in", label: "India" },
+          { indicator: "divergence.mfg_va.kor", label: "S. Korea" },
+          { indicator: "divergence.mfg_va.mys", label: "Malaysia" },
+          { indicator: "divergence.mfg_va.tha", label: "Thailand" },
+          { indicator: "divergence.mfg_va.bgd", label: "Bangladesh" }
+        ],
+        why: "Manufacturing is the escalator out of poverty; Korea's share humped up and stayed, India's never really rose.",
+        read: "Each line is the share of the economy that is factory output. A rising-then-high line is a country that industrialised.",
+        watch: "China is left off this chart because the World Bank's manufacturing series for it only begins in 2004 and would mislead; its industrial rise is discussed in the text." },
+      { chart: "multiLine", title: "India's leap from farm to office", size: "feature", beat: "structure", unit: "share of value added (%)", fromYear: 1960,
+        subtitle: "World Bank · India's value added by sector · the structural leap that skipped the factory",
+        series: [
+          { indicator: "divergence.agri_va.in", label: "Agriculture" },
+          { indicator: "divergence.industry_va.in", label: "Industry" },
+          { indicator: "divergence.mfg_va.in", label: "Manufacturing" },
+          { indicator: "divergence.services_va.in", label: "Services" }
+        ],
+        why: "India's workers and output moved from farms to services, largely skipping the mass-manufacturing stage in between." },
+      { chart: "multiLine", title: "Who left the farm, and when", size: "feature", beat: "structure", unit: "employment in agriculture (% of workers)", fromYear: 1991,
+        subtitle: "World Bank / ILO modelled estimate · share of workers in agriculture",
+        series: [
+          { indicator: "divergence.emp_agriculture.in", label: "India" },
+          { indicator: "divergence.emp_agriculture.chn", label: "China" },
+          { indicator: "divergence.emp_agriculture.kor", label: "S. Korea" },
+          { indicator: "divergence.emp_agriculture.vnm", label: "Vietnam" },
+          { indicator: "divergence.emp_agriculture.bgd", label: "Bangladesh" }
+        ],
+        why: "Development means moving workers off the farm into higher-productivity work; India did this slower than its peers." },
+      { chart: "multiLine", title: "Climbing the complexity ladder", size: "feature", beat: "sophistication", unit: "Economic Complexity Index", fromYear: 1995,
+        subtitle: "Harvard Growth Lab Atlas of Economic Complexity · how diverse and sophisticated each country's exports are",
+        series: [
+          { indicator: "trade.atlas.eci", label: "India" },
+          { indicator: "trade.atlas.eci_chn", label: "China" },
+          { indicator: "trade.atlas.eci_kor", label: "S. Korea" },
+          { indicator: "trade.atlas.eci_vnm", label: "Vietnam" },
+          { indicator: "trade.atlas.eci_tha", label: "Thailand" }
+        ],
+        why: "It is not just how much you export but what: Korea and China climbed to complex, high-value goods while India's basket stayed simpler.",
+        watch: "A higher index means a more diverse, harder-to-imitate export mix; it is a ranking-based measure, so read relative positions, not absolute units." },
+      { chart: "multiLine", title: "Making things to sell the world", size: "small", beat: "sophistication", unit: "manufactures (% of merchandise exports)", fromYear: 1965,
+        subtitle: "World Bank · manufactured goods as a share of merchandise exports",
+        series: [
+          { indicator: "divergence.manuf_exports_share.in", label: "India" },
+          { indicator: "divergence.manuf_exports_share.chn", label: "China" },
+          { indicator: "divergence.manuf_exports_share.kor", label: "S. Korea" },
+          { indicator: "divergence.manuf_exports_share.vnm", label: "Vietnam" },
+          { indicator: "divergence.manuf_exports_share.bgd", label: "Bangladesh" }
+        ],
+        why: "Export-led growth runs on selling manufactures to the world; the peers built that engine, India leaned more on services and commodities." },
+      // ACT 5 — where it left India
+      { chart: "multiLine", title: "How much each worker produces", size: "feature", beat: "outcome", unit: "output per hour worked (int-$)", fromYear: 1970,
+        subtitle: "Penn World Table via Our World in Data · real GDP per hour worked",
+        series: [
+          { indicator: "divergence.productivity_hour.in", label: "India" },
+          { indicator: "divergence.productivity_hour.chn", label: "China" },
+          { indicator: "divergence.productivity_hour.kor", label: "S. Korea" },
+          { indicator: "divergence.productivity_hour.twn", label: "Taiwan" },
+          { indicator: "divergence.productivity_hour.vnm", label: "Vietnam" },
+          { indicator: "divergence.productivity_hour.jpn", label: "Japan" }
+        ],
+        why: "The income gap is, at bottom, a productivity gap: how much value an hour of work creates." },
+      { chart: "multiLine", title: "Spending on inventing the future", size: "small", beat: "capability", unit: "R&D expenditure (% of GDP)", fromYear: 1996,
+        subtitle: "World Bank · gross domestic expenditure on research and development as a share of GDP",
+        series: [
+          { indicator: "divergence.rnd_gdp.in", label: "India" },
+          { indicator: "divergence.rnd_gdp.chn", label: "China" },
+          { indicator: "divergence.rnd_gdp.kor", label: "S. Korea" },
+          { indicator: "divergence.rnd_gdp.jpn", label: "Japan" }
+        ],
+        why: "Korea now spends a world-leading share on R&D; India's has been stuck below one percent for decades." },
+      { chart: "multiLine", title: "The power to run a factory", size: "small", beat: "infrastructure", unit: "electricity use (kWh per capita)", fromYear: 1990,
+        subtitle: "World Bank · electric power consumption per person · a proxy for industrial and household capacity",
+        series: [
+          { indicator: "divergence.electric_consumption_pc.in", label: "India" },
+          { indicator: "divergence.electric_consumption_pc.chn", label: "China" },
+          { indicator: "divergence.electric_consumption_pc.kor", label: "S. Korea" },
+          { indicator: "divergence.electric_consumption_pc.vnm", label: "Vietnam" },
+          { indicator: "divergence.electric_consumption_pc.wld", label: "World" }
+        ],
+        why: "Power per person tracks how industrial and how comfortable a society has become." },
+      { chart: "multiLine", title: "Moving to the city", size: "small", beat: "structure", unit: "urban population (% of total)", fromYear: 1960,
+        subtitle: "World Bank · share of population living in urban areas",
+        series: [
+          { indicator: "divergence.urban_share.in", label: "India" },
+          { indicator: "divergence.urban_share.chn", label: "China" },
+          { indicator: "divergence.urban_share.kor", label: "S. Korea" },
+          { indicator: "divergence.urban_share.vnm", label: "Vietnam" },
+          { indicator: "divergence.urban_share.wld", label: "World" }
+        ],
+        why: "Factories and services cluster in cities; East Asia urbanised fast, India more slowly and messily." },
+      // ACT 6 — the other side
+      { chart: "multiLine", title: "The poverty India did crush", size: "feature", beat: "other-side", unit: "% living under $3 a day", fromYear: 1980,
+        subtitle: "World Bank Poverty and Inequality Platform via Our World in Data · share below the $3-a-day extreme-poverty line",
+        series: [
+          { indicator: "divergence.poverty_owid.in", label: "India" },
+          { indicator: "divergence.poverty_owid.chn", label: "China" },
+          { indicator: "divergence.poverty_owid.idn", label: "Indonesia" },
+          { indicator: "divergence.poverty_owid.vnm", label: "Vietnam" },
+          { indicator: "divergence.poverty_owid.bgd", label: "Bangladesh" }
+        ],
+        why: "India's genuine win: hundreds of millions lifted out of extreme poverty, even without the manufacturing boom.",
+        watch: "India's poverty points are sparse because of gaps between its consumption surveys; read the trend, not every year." },
+      { chart: "multiLine", title: "The all-in human scorecard", size: "small", beat: "other-side", unit: "Human Development Index (0-1)", fromYear: 1990,
+        subtitle: "UNDP via Our World in Data · Human Development Index, combining health, schooling and income",
+        series: [
+          { indicator: "divergence.hdi.in", label: "India" },
+          { indicator: "divergence.hdi.chn", label: "China" },
+          { indicator: "divergence.hdi.kor", label: "S. Korea" },
+          { indicator: "divergence.hdi.vnm", label: "Vietnam" },
+          { indicator: "divergence.hdi.bgd", label: "Bangladesh" }
+        ],
+        why: "A single composite of health, schooling and income, to see the whole gap at once." },
+      { chart: "multiLine", title: "The road not taken: democracy", size: "feature", beat: "other-side", unit: "electoral democracy index (0-1)", fromYear: 1947,
+        subtitle: "V-Dem via Our World in Data · electoral democracy index · India stayed democratic; Korea and Taiwan democratised only after their growth takeoff",
+        series: [
+          { indicator: "divergence.democracy.in", label: "India" },
+          { indicator: "divergence.democracy.chn", label: "China" },
+          { indicator: "divergence.democracy.kor", label: "S. Korea" },
+          { indicator: "divergence.democracy.twn", label: "Taiwan" }
+        ],
+        why: "The honest counterweight: India built its record under continuous democracy, while the East Asian transformations were often coerced and only democratised later.",
+        watch: "The index runs 0 to 1; this is a measure of electoral democracy, not of growth, and the chart makes no claim that either system causes growth." }
+    ]
+  },
+  {
     id: "q.people.total",
     question: "How many people live in India?",
     priority: "core",
