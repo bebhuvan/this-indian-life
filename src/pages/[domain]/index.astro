@@ -13,6 +13,20 @@ const { domain } = Astro.params;
 const locale = "en";
 const current = domainFor(domain as any)!;
 const domainQuestions = questionPages.filter((page) => page.domain === domain);
+
+// Group by readiness so finished pieces aren't mixed in with half-built ones.
+// Mirror the Ask page: "Ready to read" vs "Still building" (work-in-progress and
+// needs-data both live under the latter, honest rather than hidden).
+const statusOrder: Record<string, number> = { ready: 0, work_in_progress: 1, needs_data: 2 };
+const sortedQuestions = [...domainQuestions].sort(
+  (a, b) =>
+    (statusOrder[a.explanation.status] ?? 9) - (statusOrder[b.explanation.status] ?? 9) ||
+    a.question.localeCompare(b.question)
+);
+const questionGroups = [
+  { id: "ready", label: "Ready to read", pages: sortedQuestions.filter((p) => p.explanation.status === "ready") },
+  { id: "building", label: "Still building", pages: sortedQuestions.filter((p) => p.explanation.status !== "ready") }
+];
 const featuredReports = domain === "health"
   ? [
       {
@@ -54,25 +68,50 @@ const featuredReports = domain === "health"
       </section>
     )}
 
-    <section class="section">
-      <p class="sec-hd">{domainQuestions.length} questions</p>
-      <div>
-        {domainQuestions.map((page) => (
-          <a class="q-row" href={questionUrl(page, locale)}>
-            <span class="q-dot" style={`background:var(--${page.domain})`}></span>
-            <span class="q-txt">{page.question}</span>
-            <span class="q-ans" style={`color:var(--${page.domain}-ink)`}>{statusMeta(page.explanation.status).short}</span>
-            <span class="q-arrow">-></span>
-          </a>
-        ))}
-      </div>
-    </section>
+    {questionGroups.map((group) =>
+      group.pages.length ? (
+        <section class="section">
+          <p class="group-hd">{group.label}<span class="sec-count">{group.pages.length}</span></p>
+          <div>
+            {group.pages.map((page) => (
+              <a class="q-row" href={questionUrl(page, locale)}>
+                <span class="q-dot" style={`background:var(--${page.domain})`}></span>
+                <span class="q-txt">{page.question}</span>
+                <span class={`q-ans status ${statusMeta(page.explanation.status).cls}`} style={`color:var(--${page.domain}-ink)`}>{statusMeta(page.explanation.status).short}</span>
+                <span class="q-arrow">-></span>
+              </a>
+            ))}
+          </div>
+        </section>
+      ) : null
+    )}
 
     <Footer locale={locale} />
   </div>
 </Base>
 
 <style>
+  /* Readiness dividers ("Ready to read" / "Still building") are real headings,
+     not the tiny site-wide eyebrow — they organise the whole list. */
+  .group-hd {
+    display: flex;
+    align-items: baseline;
+    gap: 13px;
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink, #0b0b0b);
+    margin-bottom: 26px;
+  }
+  /* Count sits quietly beside the heading, e.g. "Ready to read  5". */
+  .sec-count {
+    font-family: var(--sans, sans-serif);
+    font-size: 0.82rem;
+    color: var(--dim, #737373);
+    letter-spacing: 0.02em;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
   .featured-reports {
     padding-bottom: 8px;
   }
