@@ -183,6 +183,7 @@ function systemPrompt(voice, critique) {
     "Reach into at least one discipline beyond economics using a contextCard, where it genuinely deepens understanding. Do not name-drop; weave the fact in so it earns its place.",
     "Hold a clear view and name the honest caveat. Never hedge into balanced mush.",
     "QUESTION-LED STRUCTURE: write the body as a sequence of '## ' H2 headings, each a real question a reader would ask as they try to understand the concept (the brief gives a sectionArc; follow its arc but phrase headings in your own natural reader-question voice). Each section must genuinely ANSWER its heading, not just describe. Lead a section with a concrete image or scene when it earns its place.",
+    "DEPTH BAR (flagship entries): a flagship is NOT a tidy textbook definition. It is built around the brief's stated TENSION (the human stakes, the surprise, the live argument) and must keep returning to it. Cover the brief's full sectionArc; each section runs roughly 200-320 words and answers its question with a mechanism, a real Indian example, and a stake, not just a definition. Target 1500-2000 words. If your draft is under ~1300 words it is TOO THIN: go deeper using the context cards and locked numbers (more mechanism, the debate, a concrete episode, the consequence for ordinary people), never by padding or repeating. Depth comes from real material, not filler.",
     "PULL QUOTES: supply 1-3 short, punchy pull quotes in the pullQuotes array, each a line that distils a real point and is supported by the evidence (never an invented number, never an editorial aphorism). Set afterHeading to the H2 it should sit beside.",
     "TABLES: whenever you walk through a calculation or a breakdown of locked figures, present it as a markdown table inside the body, not only as a sentence. Header row, then a '| --- |' separator row, then data rows; the result/total on the last row. Every figure must be a locked number's displayValue. This is what makes the page a reference, not a text dump.",
     "VISUALS: if the entry has a composition (parts that sum to roughly 100%, like sector shares of GVA), emit ONE stacked-bar visual in the visuals array. Each segment value MUST equal a locked share number exactly; never invent or recompute a share. Set afterHeading to the exact text of the H2 it sits under. Do not emit a visual when there is no genuine composition.",
@@ -354,8 +355,11 @@ async function main() {
   const finalDerived = derivedReport(...fieldsOf(cleaned));
   const figureWarnings = checkRichFigures(cleaned, lockedForModel);
   const linkCheck = checkLinkEntities(cleaned, resolve(ROOT, "data/academy/links.json"));
+  const wordCount = String(cleaned.body || "").split(/\s+/).filter(Boolean).length;
+  const thin = brief.depth === "flagship" && wordCount < 1300;
+  if (thin) console.log(`[academy]   THIN: flagship body is ${wordCount} words (target ~1500-2000). Deepen the brief (tension, more sectionArc beats, more context cards) and regenerate.`);
   const stillBlocked = hardIssues(cleaned).blocked;
-  console.log(`[academy] final: ${finalLint.errors.length} lint errors, ${finalLint.warns.length} warns, ${finalDerived.length} derived-number claims, clean=${!stillBlocked}`);
+  console.log(`[academy] final: ${finalLint.errors.length} lint errors, ${finalLint.warns.length} warns, ${finalDerived.length} derived-number claims, ${wordCount} words, clean=${!stillBlocked}`);
   if (finalDerived.length) console.log(`[academy]   verify derived: ${finalDerived.map((f) => f.match).join(", ")}`);
   if (figureWarnings.length) { console.log(`[academy]   table/visual figures to verify (${figureWarnings.length}):`); figureWarnings.forEach((w) => console.log(`     ! ${w}`)); }
   if (linkCheck.missing.length) console.log(`[academy]   link entities NOT in vetted map (add verified URLs to links.json to render): ${linkCheck.missing.join(", ")}`);

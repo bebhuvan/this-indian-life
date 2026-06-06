@@ -5,20 +5,24 @@
   "module": "3 — Prices and Valuation",
   "depth": "flagship",
   "evidenceSource": "q.econ.size",
-  "teachingGoal": "Demystify the jargon a reader trips over in every Indian economy headline: GVA, GDP, basic prices, factor cost, market prices, net product taxes. They should understand that GVA is the producers' view and GDP is GVA plus taxes on products minus subsidies, why the same output carries three different price tags, why India switched its headline in 2015, and why a tax change alone can move GDP without anyone producing more.",
+  "tension": "This looks like dry accounting, but it is quietly political. The same output carries three different price tags, and which one a country headlines is a choice. India changed that choice in 2015, the new method showed faster growth than the old one, and that fed directly into a still-live fight over whether India's growth is overstated. On top of that, because GDP includes product taxes and GVA does not, a government can see GDP rise simply by raising GST, with no extra biscuit baked. So the GVA-vs-GDP gap is not pedantry: it is where measurement, taxation, and politics meet.",
+  "teachingGoal": "Demystify the jargon a reader trips over in every Indian economy headline (GVA, GDP, basic prices, factor cost, market prices, net product taxes) AND show why the choice between these numbers is politically loaded, not merely technical. They should understand the GVA-to-GDP bridge, why the same output has three price tags, why India switched its headline in 2015, why that switch became contested, and why a tax change alone can move GDP.",
   "sectionArc": [
-    "GVA, GDP, basic prices, factor cost: what is all this jargon? (plain, grounded intro)",
-    "Why does the same output carry three different price tags? (factor cost vs basic vs market; product taxes and subsidies, with an everyday example like GST on a biscuit packet)",
-    "How do you actually get from GVA to GDP? (the bridge, shown as a table)",
-    "Why did India switch to this system in 2015? (the base-year revision; what changed and why)",
-    "So which number should you actually watch? (when GVA and GDP diverge, e.g. a GST change; what each answers)"
+    "GVA, GDP, basic prices, factor cost: what is all this jargon? (plain, grounded intro built on one product, e.g. a biscuit packet)",
+    "Why does the same output carry three different price tags? (factor cost vs basic vs market; production taxes vs product taxes; an everyday example like GST and the LPG subsidy)",
+    "How do you actually get from GVA to GDP? (the bridge, shown as a table; net product taxes as the wedge)",
+    "Why did India stop saying 'GDP at factor cost' in 2015? (the base-year revision, alignment with the UN System of National Accounts, what the headline became)",
+    "Why did a dry accounting change become political? (the new series showed faster growth than the old for overlapping years, and this fed the wider debate about whether post-2011 growth is overstated; attribute fairly, no winner)",
+    "When has the GVA-GDP gap actually mattered? (a concrete episode: the GST rollout and rate changes, where product taxes moved the GDP print without a matching change in production)",
+    "So which number should you actually watch, and why? (GVA for the pulse of real production, GDP for the full money value; how analysts use both)"
   ],
   "mustTeach": [
     "GVA (gross value added) is output minus the inputs a producer bought from others: the value each producer actually adds",
     "GDP = GVA at basic prices + taxes on products - subsidies on products",
     "the same output can be valued at factor cost, at basic prices, or at market prices, depending on where taxes and subsidies sit",
     "India headlines GVA at basic prices and GDP at market prices, having switched from 'GDP at factor cost' in the 2015 revision",
-    "a change in product taxes (like GST) can move GDP even if real production did not change"
+    "a change in product taxes (like GST) can move GDP even if real production did not change",
+    "the 2015 methodology change is contested and is part of the wider GDP-mis-measurement debate"
   ],
   "featureNumbers": [
     "Gross Value Added (total), nominal, latest",
@@ -26,15 +30,27 @@
     "GDP, nominal, latest",
     "GVA — agriculture, nominal, latest",
     "GVA — industry, nominal, latest",
-    "GVA — services, nominal, latest"
+    "GVA — services, nominal, latest",
+    "Real GVA growth rate, latest",
+    "Real GDP growth rate, latest"
   ],
-  "interdisciplinaryAngles": ["method / national accounts", "policy history"],
-  "connects": ["what-is-gdp", "gva-defined", "basic-prices", "market-prices", "product-taxes-subsidies", "factor-cost-to-basic", "2011-12-revision"],
+  "interdisciplinaryAngles": ["method / national accounts", "policy history", "current policy debate"],
+  "connects": ["what-is-gdp", "gva-defined", "basic-prices", "market-prices", "product-taxes-subsidies", "factor-cost-to-basic", "2011-12-revision", "how-gdp-is-measured"],
   "contextCards": [
     {
       "fact": "Until 2015 India headlined 'GDP at factor cost'. In the January 2015 base-year revision (which also moved the base year from 2004-05 to 2011-12), the National Statistical Office shifted the headline to Gross Value Added at basic prices, with GDP measured at market prices, bringing India in line with the United Nations System of National Accounts. Basic prices include production taxes but exclude product taxes like GST; market prices add those product taxes and subtract product subsidies.",
       "discipline": "method / national accounts",
       "source": "MoSPI / NSO base-year revision, January 2015 (System of National Accounts 2008); standard, uncontested"
+    },
+    {
+      "fact": "The 2015 revision was not just technical. The new 2011-12 series showed faster growth for some overlapping years than the old series did, which surprised many economists because other indicators (bank credit, investment, exports) looked weaker. That mismatch fed a longer, still-unresolved debate about whether India's post-2011 growth has been overstated, most prominently in work by Arvind Subramanian and colleagues at the Peterson Institute for International Economics.",
+      "discipline": "current policy debate",
+      "source": "Widely reported economic debate following the 2015 revision; Subramanian et al., PIIE (2019, 2026)"
+    },
+    {
+      "fact": "India rolled out the Goods and Services Tax (GST) on 1 July 2017, replacing a patchwork of central and state indirect taxes with one product tax. Because product taxes like GST sit inside GDP at market prices but not inside GVA at basic prices, changes in GST (a new rollout, a rate hike, or a rate cut) can move the GDP figure even when the quantity of goods and services produced has not changed. This is why analysts watch GVA growth for a cleaner read on production.",
+      "discipline": "policy history / method",
+      "source": "GST rollout, Government of India, 1 July 2017; national-accounts treatment of product taxes (standard)"
     }
   ]
 }

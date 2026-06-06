@@ -60,6 +60,21 @@ mechanism behind a pattern, a concept a reader needs) is allowed with no new spe
 }
 ```
 
+## The depth bar for flagships (codified 2026-06-06)
+
+A flagship is **built around a tension**, not a tidy definition. Thin entries come from
+thin briefs, so every flagship brief must carry:
+
+- **`tension`** — the human stakes / surprise / live argument the whole entry circles.
+  This is what separates a Quanta piece from a textbook. (e.g. for `gva-vs-gdp`: the
+  accounting choice is *political* — the 2015 switch raised measured growth and fed the
+  GDP-overstatement fight; a tax change can flatter GDP without more production.)
+- **A 6–8 beat `sectionArc`** — history / mechanism / India / a real episode / the
+  debate / the consequence for ordinary people. Five mechanical beats reads thin.
+- **Enough vetted `contextCards`** to support that depth (debate, real episodes, history).
+- **`depth: "flagship"`** → target **1,500–2,000 words**. The generator flags any flagship
+  under ~1,300 words as THIN; deepen the brief and regenerate rather than padding.
+
 ## The rich format (codified 2026-06-06) — what makes an entry, not a text dump
 
 Every flagship is **question-led and visually broken up**. The generator emits, and the

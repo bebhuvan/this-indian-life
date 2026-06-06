@@ -5,6 +5,7 @@
 // plus a native <details> — no JS.
 import type { ExplanationArtifact } from "../data/questions";
 import { sourceLabel, sourceHomepage } from "../data/site";
+import { dataFileFor, DATA_FOLDER_URL } from "../data/dataManifest";
 
 type Props = { explanation: ExplanationArtifact };
 const { explanation } = Astro.props;
@@ -28,11 +29,16 @@ const coverage = (s: Summary) => {
 };
 
 const series = summaries
-  .map((s) => ({
-    title: s.title || s.indicatorId || "Untitled series",
-    source: sourceLabel(s.sourceId || "?"),
-    coverage: coverage(s)
-  }))
+  .map((s) => {
+    const file = dataFileFor(s.indicatorId);
+    return {
+      title: s.title || s.indicatorId || "Untitled series",
+      source: sourceLabel(s.sourceId || "?"),
+      coverage: coverage(s),
+      fileUrl: file?.githubUrl,
+      method: file?.method
+    };
+  })
   .sort((a, b) => a.title.localeCompare(b.title));
 
 // Distinct sources with counts (most-used first).
@@ -79,12 +85,16 @@ const furtherReading = explanation.furtherReading ?? [];
 
     {seriesCount ? (
       <details class="evidence-series">
-        <summary>Browse all {seriesCount} series</summary>
+        <summary>Data &amp; methods · all {seriesCount} series</summary>
+        <p class="es-audit-note">
+          Every figure traces to a source file you can open. <a href={DATA_FOLDER_URL} target="_blank" rel="noreferrer">Browse the data folder on GitHub ↗</a>
+        </p>
         <ul>
           {series.map((s) => (
             <li>
-              <span class="es-title">{s.title}</span>
+              <span class="es-title">{s.title}{s.fileUrl ? <a class="es-file" href={s.fileUrl} target="_blank" rel="noreferrer">data file ↗</a> : null}</span>
               <span class="es-meta">{s.source}{s.coverage ? ` · ${s.coverage}` : ""}</span>
+              {s.method ? <span class="es-method">{s.method}</span> : null}
             </li>
           ))}
         </ul>

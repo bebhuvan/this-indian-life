@@ -315,9 +315,14 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .evidence-series[open] summary::before{content:'\2013'}
 .evidence-series summary:hover{color:var(--ink)}
 .evidence-series ul{list-style:none;max-height:360px;overflow:auto;border-top:1px solid var(--ghost);margin-bottom:6px}
-.evidence-series li{display:flex;justify-content:space-between;gap:18px;align-items:baseline;padding:11px 2px;border-bottom:1px solid var(--line);font-size:.84rem}
+.evidence-series li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 18px;align-items:baseline;padding:11px 2px;border-bottom:1px solid var(--line);font-size:.84rem}
 .es-title{color:var(--ink);flex:1;line-height:1.4}
 .es-meta{color:var(--dim);white-space:nowrap;font-size:.72rem;font-variant-numeric:lining-nums tabular-nums}
+.es-file{margin-left:8px;font-size:.66rem;letter-spacing:.04em;color:var(--c);white-space:nowrap;text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+.es-file:hover{border-bottom-color:var(--c)}
+.es-method{flex-basis:100%;color:var(--dim);font-size:.72rem;line-height:1.45}
+.es-audit-note{font-size:.74rem;color:var(--dim);margin:0 0 4px;line-height:1.5}
+.es-audit-note a{color:var(--c);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
 .evidence-aside{display:grid;gap:28px}
 .evidence-aside>div .lbl{display:block;margin-bottom:14px}
 .evidence-aside ul{list-style:none;display:grid;gap:12px}
