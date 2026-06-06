@@ -5,7 +5,7 @@ const staticPaths = [
   "/about/",
   "/articles/",
   "/ask/",
-  "/definitions/",
+  "/methodology/",
   "/economy/",
   "/people/",
   "/health/",

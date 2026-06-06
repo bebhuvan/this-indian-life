@@ -3,6 +3,12 @@
 /en/*  /:splat  301
 /en/   /        301
 
+# The old "Definitions" page was really a methodology / data-contracts doc, so it moved
+# to /methodology/ (footer, not nav). Interim 301 — when a real reader glossary ships at
+# /definitions/, drop these two lines.
+/definitions/  /methodology/  301
+/definitions   /methodology/  301
+
 # Conventional sitemap filenames (e.g. the @astrojs/sitemap defaults) -> our single sitemap.
 # Catches any crawler or Search Console entry that guesses or has the old paths.
 /sitemap-index.xml  /sitemap.xml  301
