@@ -450,6 +450,22 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const padRTB = mobile
     ? { r: visual.lines.length > 1 ? 64 : 24, t: 20, b: 42 }
     : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 58 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 44 };
+  // Multi-line charts print each line's latest value to the RIGHT of its end point
+  // (.end-mini-v, left-anchored at latestX + offset). Size the right pad to the widest
+  // of those labels — the mirror of the dynamic LEFT pad below — so a long unit like
+  // "₹69.6 lakh cr" never clips off a narrow (especially mobile) viewBox.
+  if (visual.lines.length > 1) {
+    const endOffset = mobile ? 16 : 22; // label x offset from the end point (see template)
+    const endFont = mobile ? 12.5 : 17; // .end-mini-v font-size (see indica.css)
+    const maxEndLabelLen = Math.max(
+      3,
+      ...visual.lines.map((line) => {
+        const v = line.points.at(-1)?.value;
+        return v == null ? 0 : fmt(v, visual.unit).length;
+      })
+    );
+    padRTB.r = Math.max(padRTB.r, endOffset + Math.round(maxEndLabelLen * endFont * 0.62) + 8);
+  }
   const all = visual.lines.flatMap((line) => line.points);
   const values = all.map((point) => point.value);
   const useLogScale = visual.title.toLowerCase().includes("gdp per person over time");
