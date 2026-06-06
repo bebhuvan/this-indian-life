@@ -8,7 +8,7 @@ import ArticleEditLog from "../../components/ArticleEditLog.astro";
 import ArticleEvidence from "../../components/ArticleEvidence.astro";
 import Footer from "../../components/Footer.astro";
 import { locales } from "../../data/site";
-import { inlineMarkdownHtml, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../data/questions";
+import { annotateStorySections, inlineMarkdownHtml, keyGlossaryTerms, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../data/questions";
 import { visualsForQuestion, bindSectionVisuals } from "../../data/viz";
 import { articleGraph } from "../../data/seo";
 
@@ -73,6 +73,14 @@ const explicitMap = Object.fromEntries(
     .map((entry) => [entry.heading, entry.visualId])
 );
 const { bound: boundVisuals, leftover: leftoverVisuals } = bindSectionVisuals(sectionInputs, storyVisuals, explicitMap);
+
+// Inline glossary: define jargon where the reader meets it. Every glossary term
+// gets a tappable popover on first mention; the load-bearing terms (named in the
+// headline/dek) get an inline definition box instead. Chart-binding above still
+// uses the original storySections, so this only changes how prose renders.
+const glossaryBlocks = explanation.editorialPlan?.glossaryBlocks ?? [];
+const keyTerms = keyGlossaryTerms(glossaryBlocks, `${explanation.short.headline} ${explanation.short.dek}`);
+const annotatedSections = annotateStorySections(storySections, glossaryBlocks, keyTerms);
 ---
 
 <Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
@@ -127,17 +135,18 @@ const { bound: boundVisuals, leftover: leftoverVisuals } = bindSectionVisuals(se
               <h2 class="serif">{explanation.article.title}</h2>
               <p class="standfirst">{explanation.article.standfirst}</p>
               <div class="story-flow">
-                {storySections.map((section, index) => (
+                {annotatedSections.map((section, index) => (
                   <section class={`story-step ${(boundVisuals[index] as { size?: string } | null)?.size === "small" ? "story-step--small" : "story-step--feature"}`}>
                     <div class="story-copy longform">
                       <h3>{section.heading}</h3>
                       {section.blocks.map((block) => {
                         if (block.type === "h3") return <h4>{block.text}</h4>;
-                        if (block.type === "p") return <p set:html={inlineMarkdownHtml(block.text)} />;
+                        if (block.type === "defbox") return (<aside class="defbox"><p class="defbox-lbl">Definition</p><p class="defbox-term">{block.item.term}</p><p class="defbox-mean">{block.item.plainMeaning}</p>{block.item.whyItMattersHere ? <p class="defbox-why">{block.item.whyItMattersHere}</p> : null}</aside>);
+                        if (block.type === "p") return <p set:html={block.html ?? inlineMarkdownHtml(block.text)} />;
                         if (block.type === "ul") {
                           return (
                             <ul class="story-list">
-                              {block.items.map((item) => <li set:html={inlineMarkdownHtml(item)} />)}
+                              {(block.htmlItems ?? block.items.map((it) => inlineMarkdownHtml(it))).map((item) => <li set:html={item} />)}
                             </ul>
                           );
                         }
@@ -264,17 +273,18 @@ const { bound: boundVisuals, leftover: leftoverVisuals } = bindSectionVisuals(se
             <h2 class="serif">{explanation.article.title}</h2>
             <p class="standfirst">{explanation.article.standfirst}</p>
             <div class="story-flow">
-              {storySections.map((section, index) => (
+              {annotatedSections.map((section, index) => (
                 <section class={`story-step ${(boundVisuals[index] as { size?: string } | null)?.size === "small" ? "story-step--small" : "story-step--feature"}`}>
                   <div class="story-copy longform">
                     <h3>{section.heading}</h3>
                     {section.blocks.map((block) => {
                       if (block.type === "h3") return <h4>{block.text}</h4>;
-                      if (block.type === "p") return <p set:html={inlineMarkdownHtml(block.text)} />;
+                      if (block.type === "defbox") return (<aside class="defbox"><p class="defbox-lbl">Definition</p><p class="defbox-term">{block.item.term}</p><p class="defbox-mean">{block.item.plainMeaning}</p>{block.item.whyItMattersHere ? <p class="defbox-why">{block.item.whyItMattersHere}</p> : null}</aside>);
+                        if (block.type === "p") return <p set:html={block.html ?? inlineMarkdownHtml(block.text)} />;
                       if (block.type === "ul") {
                         return (
                           <ul class="story-list">
-                            {block.items.map((item) => <li set:html={inlineMarkdownHtml(item)} />)}
+                            {(block.htmlItems ?? block.items.map((it) => inlineMarkdownHtml(it))).map((item) => <li set:html={item} />)}
                           </ul>
                         );
                       }
@@ -356,4 +366,30 @@ const { bound: boundVisuals, leftover: leftoverVisuals } = bindSectionVisuals(se
     <Footer locale={locale} />
     <script src="/article-actions.js" defer></script>
   </div>
+  <script>
+    // Inline glossary terms: tap to toggle the definition popover (touch), with
+    // keyboard support; CSS handles hover/focus on pointer devices.
+    (() => {
+      const closeAll = (except) => document.querySelectorAll('.defterm[aria-expanded="true"]')
+        .forEach((el) => { if (el !== except) el.setAttribute("aria-expanded", "false"); });
+      document.addEventListener("click", (e) => {
+        const term = (e.target instanceof Element) ? e.target.closest(".defterm") : null;
+        closeAll(term);
+        if (term) {
+          const open = term.getAttribute("aria-expanded") === "true";
+          term.setAttribute("aria-expanded", open ? "false" : "true");
+          e.preventDefault();
+        }
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") return closeAll(null);
+        const el = document.activeElement;
+        if (el && el.classList && el.classList.contains("defterm") && (e.key === "Enter" || e.key === " ")) {
+          const open = el.getAttribute("aria-expanded") === "true";
+          el.setAttribute("aria-expanded", open ? "false" : "true");
+          e.preventDefault();
+        }
+      });
+    })();
+  </script>
 </Base>

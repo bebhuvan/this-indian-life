@@ -383,3 +383,110 @@ export function inlineMarkdownHtml(value: string) {
     .replace(/\*([^*]+)\*/g, "<em>$1</em>")
     .replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noreferrer">$1</a>');
 }
+
+/* ── Inline glossary: definition popovers + key-term boxes ──────────────────
+   The LLM already writes per-article glossary blocks (term / plainMeaning /
+   whyItMattersHere). We surface them where the reader meets the word: every
+   term gets a tappable popover on its FIRST mention; the 1-2 load-bearing terms
+   (those named in the headline/dek) instead get an inline definition box right
+   after the paragraph where they first appear. State is shared across the whole
+   article so each term is annotated exactly once. */
+export type GlossaryBlock = { term: string; plainMeaning: string; whyItMattersHere?: string };
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** The word actually searched for in the prose: drop a parenthetical gloss and a
+ *  trailing "index"/"coefficient" (so "Gini index" matches "Gini", "MPCE (…)" → "MPCE").
+ *  Multi-word concept phrases like "Consumption inequality" stay whole, so they only
+ *  match an exact phrase rather than grabbing a generic word. */
+export function glossaryMatchToken(term: string) {
+  return term.split(" (")[0].replace(/\s+(index|coefficient)$/i, "").trim();
+}
+
+function deftermMarkup(word: string, g: GlossaryBlock) {
+  const full = escapeHtml(g.term);
+  const mean = escapeHtml(g.plainMeaning || "");
+  const why = escapeHtml(g.whyItMattersHere || "");
+  const label = escapeHtml(glossaryMatchToken(g.term));
+  return (
+    `<span class="defterm" tabindex="0" role="button" aria-expanded="false" aria-label="Definition of ${label}">${word}` +
+    `<span class="defpop" role="tooltip"><span class="defpop-t">${full}</span><span class="defpop-m">${mean}</span>` +
+    (why ? `<span class="defpop-w">${why}</span>` : "") +
+    `</span></span>`
+  );
+}
+
+/** Annotate one paragraph's HTML: wrap the first not-yet-seen occurrence of each
+ *  term in a popover, OR (for key terms) record a box to render after this block.
+ *  Replacements happen only in text segments outside existing tags/anchors. */
+function annotateParaHtml(rawText: string, glossary: GlossaryBlock[], seen: Set<string>, keyTerms: Set<string>) {
+  let html = inlineMarkdownHtml(rawText);
+  const boxes: GlossaryBlock[] = [];
+  for (const g of glossary) {
+    if (seen.has(g.term)) continue;
+    const token = glossaryMatchToken(g.term);
+    if (!token) continue;
+    const re = new RegExp(`(^|[^\\w])(${escapeRegExp(token)})(?=[^\\w]|$)`, "i");
+    const segs = html.split(/(<[^>]+>)/);
+    let inAnchor = false;
+    let matched = false;
+    for (let i = 0; i < segs.length && !matched; i += 1) {
+      const s = segs[i];
+      if (s.startsWith("<")) {
+        if (/^<a\b/i.test(s)) inAnchor = true;
+        else if (/^<\/a/i.test(s)) inAnchor = false;
+        continue;
+      }
+      if (inAnchor || !re.test(s)) continue;
+      matched = true;
+      if (keyTerms.has(g.term)) {
+        boxes.push(g); // key term → inline box below; leave the word in place
+      } else {
+        segs[i] = s.replace(re, (_m, pre, word) => `${pre}${deftermMarkup(word, g)}`);
+        html = segs.join("");
+      }
+    }
+    if (matched) seen.add(g.term);
+  }
+  return { html, boxes };
+}
+
+type StorySection = { heading: string; blocks: any[] };
+
+/** Pre-process the per-chart story sections, injecting glossary popovers/boxes.
+ *  Paragraph blocks gain `.html`; list blocks gain `.htmlItems`; `defbox` blocks
+ *  are inserted after the paragraph that first mentions a key term. */
+export function annotateStorySections(sections: StorySection[], glossary: GlossaryBlock[], keyTermArr: string[]): StorySection[] {
+  if (!glossary?.length) return sections;
+  const seen = new Set<string>();
+  const keyTerms = new Set(keyTermArr);
+  return sections.map((section) => {
+    const out: any[] = [];
+    for (const block of section.blocks) {
+      if (block.type === "p") {
+        const { html, boxes } = annotateParaHtml(block.text, glossary, seen, keyTerms);
+        out.push({ ...block, html });
+        for (const box of boxes) out.push({ type: "defbox", item: box });
+      } else if (block.type === "ul") {
+        const htmlItems = block.items.map((item: string) => annotateParaHtml(item, glossary, seen, keyTerms).html);
+        out.push({ ...block, htmlItems });
+      } else {
+        out.push(block);
+      }
+    }
+    return { ...section, blocks: out };
+  });
+}
+
+/** The 1-2 load-bearing terms (named in the headline or dek) that earn an inline
+ *  box rather than a popover. Falls back to the first glossary term so a fresh
+ *  article still shows the pattern. */
+export function keyGlossaryTerms(glossary: GlossaryBlock[], lede: string, max = 2): string[] {
+  if (!glossary?.length) return [];
+  const hay = lede.toLowerCase();
+  const inLede = glossary.filter((g) => hay.includes(glossaryMatchToken(g.term).toLowerCase()));
+  const chosen = (inLede.length ? inLede : [glossary[0]]).slice(0, max);
+  return chosen.map((g) => g.term);
+}

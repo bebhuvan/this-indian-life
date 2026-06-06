@@ -996,3 +996,33 @@ html{overscroll-behavior-y:none}
   .pwa-install,.pwa-toast{transition:opacity .2s linear;transform:none}
   .pwa-install:not(.is-in),.pwa-toast:not(.is-in){opacity:0;pointer-events:none}
 }
+
+/* ---------- INLINE GLOSSARY · definition terms + boxes ----------
+   Defines jargon where the reader meets it. Colours come from the active domain
+   ink (--c-ink / --c-tint), set by the .dom-* class on the article. */
+.defterm{position:relative;cursor:help;color:inherit;
+  text-decoration:underline dotted var(--c-ink);text-underline-offset:3px;text-decoration-thickness:1px}
+.defterm:focus-visible{outline:2px solid var(--c-ink);outline-offset:2px;border-radius:2px}
+.defpop{position:absolute;left:0;bottom:calc(100% + 9px);z-index:50;
+  width:min(20rem,80vw);padding:.85rem .95rem;
+  background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--c-ink);
+  border-radius:9px;box-shadow:0 10px 34px rgba(11,11,11,.12);
+  font-family:var(--sans);text-align:left;white-space:normal;
+  opacity:0;visibility:hidden;transform:translateY(4px);pointer-events:none;
+  transition:opacity .16s var(--ease,ease),transform .16s var(--ease,ease),visibility .16s}
+.defterm:hover .defpop,.defterm:focus-visible .defpop,.defterm[aria-expanded="true"] .defpop{
+  opacity:1;visibility:visible;transform:translateY(0)}
+.defpop-t{display:block;font-family:var(--serif);font-size:1.06rem;line-height:1.2;color:var(--c-ink);margin-bottom:.3rem}
+.defpop-m{display:block;font-size:.9rem;line-height:1.5;color:var(--ink)}
+.defpop-w{display:block;font-size:.84rem;line-height:1.45;color:var(--mid);margin-top:.45rem;padding-top:.45rem;border-top:1px solid var(--line)}
+/* Load-bearing terms: a quiet inline note on first mention. Echoes the
+   "Plain English concepts" style — pure white, a hairline accent rule, serif term. */
+.defbox{margin:1.7rem 0;padding:.1rem 0 .1rem 1.3rem;border-left:2px solid var(--c)}
+.defbox-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--c-ink);margin:0 0 .5rem}
+.defbox-term{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.12;color:var(--c);margin:0 0 .4rem}
+.defbox-mean{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#1d1d1d;margin:0;max-width:64ch}
+.defbox-why{font-family:var(--sans);font-size:.86rem;line-height:1.55;color:var(--mid);margin:.55rem 0 0;max-width:64ch}
+@media(max-width:640px){
+  .defpop{position:fixed;left:1rem;right:1rem;bottom:1rem;top:auto;width:auto}
+}
+@media(prefers-reduced-motion:reduce){.defpop{transition:opacity .15s linear;transform:none}}
