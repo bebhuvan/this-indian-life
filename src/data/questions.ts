@@ -7,11 +7,27 @@ export type LockedNumber = {
   label: string;
   value: number;
   displayValue?: string;
-  date?: string;
+  // Usually a bare year ("2026"), but live feeds (e.g. WAQI air quality) store a
+  // timestamp object {s, iso, tz, v}. Coerce with lockedDateText before rendering.
+  date?: string | { iso?: string; s?: string; date?: string };
   unit: string;
   sourceId: string;
   indicatorId: string;
 };
+
+/** A readable date for a locked number, robust to a bare year, a date string, or a
+ *  WAQI-style timestamp object — without it, an object date renders as "[object Object]". */
+export function lockedDateText(date?: LockedNumber["date"]): string {
+  if (!date) return "";
+  const raw = typeof date === "object" ? (date.iso || date.s || date.date || "") : date;
+  const str = String(raw).trim();
+  if (!str) return "";
+  if (/^\d{4}$/.test(str)) return str;
+  const parsed = new Date(str);
+  return Number.isNaN(parsed.getTime())
+    ? str.slice(0, 10)
+    : parsed.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
 
 /** One reader-facing edit-log entry. `commit` deep-links the exact diff on GitHub. */
 export type ChangelogEntry = { date: string; note: string; commit?: string };
@@ -244,8 +260,10 @@ export function macchaExplanation(page: QuestionPage) {
   const locked = page.explanation.evidence.lockedNumbers;
   const top = locked[0];
   const second = locked.find((item) => item.indicatorId !== top?.indicatorId) || locked[1];
-  const topText = top ? `${formatLockedNumber(top)}${top.date ? ` in ${top.date}` : ""}` : "not enough clean evidence yet";
-  const secondText = second ? `${formatLockedNumber(second)}${second.date ? ` in ${second.date}` : ""}` : "";
+  const topDate = lockedDateText(top?.date);
+  const secondDate = lockedDateText(second?.date);
+  const topText = top ? `${formatLockedNumber(top)}${topDate ? ` in ${topDate}` : ""}` : "not enough clean evidence yet";
+  const secondText = second ? `${formatLockedNumber(second)}${secondDate ? ` in ${secondDate}` : ""}` : "";
   const caveat = page.explanation.caveats[0] || "This is a national number, so it can hide big differences across states, cities, class, caste, gender, and age.";
   const sourceCount = page.explanation.evidence.themeIndicatorIds?.length || page.explanation.evidence.availableIndicatorIds.length;
   const statusText = page.explanation.status !== "needs_data"

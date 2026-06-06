@@ -43,6 +43,8 @@ export const v1Questions = [
       "divergence.agri_va.in", "divergence.industry_va.in", "divergence.services_va.in",
       "divergence.emp_agriculture.in", "divergence.emp_agriculture.chn", "divergence.emp_agriculture.kor", "divergence.emp_agriculture.vnm", "divergence.emp_agriculture.bgd",
       "trade.atlas.eci", "trade.atlas.eci_chn", "trade.atlas.eci_kor", "trade.atlas.eci_vnm", "trade.atlas.eci_tha",
+      "divergence.tariff.in", "divergence.tariff.chn", "divergence.tariff.kor", "divergence.tariff.vnm", "divergence.tariff.bgd", "divergence.tariff.idn",
+      "divergence.services_export_share.in", "divergence.services_export_share.chn", "divergence.services_export_share.kor", "divergence.services_export_share.vnm", "divergence.services_export_share.bgd",
       "divergence.manuf_exports_share.in", "divergence.manuf_exports_share.chn", "divergence.manuf_exports_share.kor", "divergence.manuf_exports_share.vnm", "divergence.manuf_exports_share.bgd",
       "divergence.productivity_hour.in", "divergence.productivity_hour.chn", "divergence.productivity_hour.kor", "divergence.productivity_hour.twn", "divergence.productivity_hour.vnm", "divergence.productivity_hour.jpn",
       "divergence.rnd_gdp.in", "divergence.rnd_gdp.chn", "divergence.rnd_gdp.kor", "divergence.rnd_gdp.jpn",
@@ -212,6 +214,17 @@ export const v1Questions = [
           { indicator: "divergence.emp_agriculture.bgd", label: "Bangladesh" }
         ],
         why: "Development means moving workers off the farm into higher-productivity work; India did this slower than its peers." },
+      { chart: "multiLine", title: "The tariff wall India kept up", size: "small", beat: "openness", unit: "applied tariff rate (%)", fromYear: 1988,
+        subtitle: "World Bank · applied tariff rate, weighted mean across all products · how walled-off the economy was",
+        series: [
+          { indicator: "divergence.tariff.in", label: "India" },
+          { indicator: "divergence.tariff.chn", label: "China" },
+          { indicator: "divergence.tariff.kor", label: "S. Korea" },
+          { indicator: "divergence.tariff.vnm", label: "Vietnam" },
+          { indicator: "divergence.tariff.idn", label: "Indonesia" }
+        ],
+        why: "Export-led growth needs an open economy; India taxed imports far more heavily than its peers and opened later.",
+        watch: "Tariffs are only one barrier among many (quotas, licences, red tape); a falling tariff line understates how closed the pre-1991 economy really was." },
       { chart: "multiLine", title: "Climbing the complexity ladder", size: "feature", beat: "sophistication", unit: "Economic Complexity Index", fromYear: 1995,
         subtitle: "Harvard Growth Lab Atlas of Economic Complexity · how diverse and sophisticated each country's exports are",
         series: [
@@ -286,6 +299,17 @@ export const v1Questions = [
         ],
         why: "India's genuine win: hundreds of millions lifted out of extreme poverty, even without the manufacturing boom.",
         watch: "India's poverty points are sparse because of gaps between its consumption surveys; read the trend, not every year." },
+      { chart: "multiLine", title: "India's other escalator: services", size: "feature", beat: "other-side", unit: "services as % of total exports", fromYear: 1975,
+        subtitle: "World Bank balance-of-payments data · services as a share of goods-plus-services exports · India's distinctive tilt toward selling services, not goods",
+        series: [
+          { indicator: "divergence.services_export_share.in", label: "India" },
+          { indicator: "divergence.services_export_share.chn", label: "China" },
+          { indicator: "divergence.services_export_share.kor", label: "S. Korea" },
+          { indicator: "divergence.services_export_share.vnm", label: "Vietnam" },
+          { indicator: "divergence.services_export_share.bgd", label: "Bangladesh" }
+        ],
+        why: "India did build an export engine, but in services (IT, business services) rather than factory goods, a different escalator that lifts fewer low-skilled workers.",
+        watch: "A high services share is not automatically better or worse; it reflects what India sells to the world, and services have so far employed far fewer people than mass manufacturing would." },
       { chart: "multiLine", title: "The all-in human scorecard", size: "small", beat: "other-side", unit: "Human Development Index (0-1)", fromYear: 1990,
         subtitle: "UNDP via Our World in Data · Human Development Index, combining health, schooling and income",
         series: [
@@ -5269,7 +5293,18 @@ export const worldBankIndicators = [
   { id: "trade.wb.fdi_inflows_gdp", sourceIndicatorId: "BX.KLT.DINV.WD.GD.ZS", title: "Foreign direct investment, net inflows", unit: "% of GDP", frequency: "annual" },
   { id: "trade.wb.ict_service_exports_share", sourceIndicatorId: "BX.GSR.CCIS.ZS", title: "ICT service exports", unit: "% of service exports, BoP", frequency: "annual" },
   { id: "trade.wb.high_tech_exports_share", sourceIndicatorId: "TX.VAL.TECH.MF.ZS", title: "High-technology exports", unit: "% of manufactured exports", frequency: "annual" },
-  { id: "trade.wb.remittances_usd", sourceIndicatorId: "BX.TRF.PWKR.CD.DT", title: "Personal remittances received", unit: "current US$", frequency: "annual" }
+  { id: "trade.wb.remittances_usd", sourceIndicatorId: "BX.TRF.PWKR.CD.DT", title: "Personal remittances received", unit: "current US$", frequency: "annual" },
+  // "Water stress in India" flagship — resource base, demand split & access (World Bank, sourced from FAO AQUASTAT).
+  // Note: WB/AQUASTAT per-capita differs slightly from CWC's official India series (1,486 m³ for 2021); lead with CWC, use WB for the long run and international comparability.
+  { id: "water.wb.renewable_internal_pc", sourceIndicatorId: "ER.H2O.INTR.PC", title: "Renewable internal freshwater resources per capita", unit: "cubic metres per person", frequency: "annual" },
+  { id: "water.wb.renewable_internal_total", sourceIndicatorId: "ER.H2O.INTR.K3", title: "Renewable internal freshwater resources, total", unit: "billion cubic metres", frequency: "annual" },
+  { id: "water.wb.withdrawal_share_of_resources", sourceIndicatorId: "ER.H2O.FWTL.ZS", title: "Annual freshwater withdrawals as a share of internal resources", unit: "% of internal resources", frequency: "annual" },
+  { id: "water.wb.withdrawal_total", sourceIndicatorId: "ER.H2O.FWTL.K3", title: "Annual freshwater withdrawals, total", unit: "billion cubic metres", frequency: "annual" },
+  { id: "water.wb.withdrawal_agriculture", sourceIndicatorId: "ER.H2O.FWAG.ZS", title: "Annual freshwater withdrawals, agriculture", unit: "% of total withdrawal", frequency: "annual" },
+  { id: "water.wb.withdrawal_industry", sourceIndicatorId: "ER.H2O.FWIN.ZS", title: "Annual freshwater withdrawals, industry", unit: "% of total withdrawal", frequency: "annual" },
+  { id: "water.wb.withdrawal_domestic", sourceIndicatorId: "ER.H2O.FWDM.ZS", title: "Annual freshwater withdrawals, domestic", unit: "% of total withdrawal", frequency: "annual" },
+  { id: "water.wb.productivity_gdp_per_m3", sourceIndicatorId: "ER.GDP.FWTL.M3.KD", title: "Water productivity (GDP per cubic metre of freshwater withdrawal)", unit: "constant 2015 US$ per m³", frequency: "annual" },
+  { id: "water.wb.drinking_safely_managed", sourceIndicatorId: "SH.H2O.SMDW.ZS", title: "People using safely managed drinking water services", unit: "% of population", frequency: "annual" }
 ];
 
 export const unPopulationIndicators = [
