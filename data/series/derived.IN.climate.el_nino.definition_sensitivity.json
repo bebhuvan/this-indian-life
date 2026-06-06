@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.definition_sensitivity",
+  "title": "How the El Nino verdict depends on the definition",
+  "sourceId": "derived-imd-noaa",
+  "sourceIndicatorId": "enso-iod-imd-monsoon",
+  "sourceUrl": "data/series/derived.IN.climate.enso_iod_imd_monsoon_join.json",
+  "unit": "% mean rainfall departure",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-06T10:38:51.840142Z",
+  "rows": [
+    {
+      "label": "Pacific in El Nino all monsoon (JJAS ONI \u2265 0.5)",
+      "value": -6.8,
+      "years": 17,
+      "below_normal_share": 71.0,
+      "below_minus5_share": 59.0
+    },
+    {
+      "label": "El Nino active any time in the season",
+      "value": -3.2,
+      "years": 26,
+      "below_normal_share": 58.0,
+      "below_minus5_share": 46.0
+    },
+    {
+      "label": "Strong El Nino only (peak ONI \u2265 1.5)",
+      "value": -12.1,
+      "years": 7,
+      "below_normal_share": 86.0,
+      "below_minus5_share": 86.0
+    },
+    {
+      "label": "La Nina years (for contrast)",
+      "value": 6.8,
+      "years": 18,
+      "below_normal_share": 17.0,
+      "below_minus5_share": 11.0
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.climate.el_nino_india",
+    "note": "Average all-India June-September rainfall departure under three ways of labelling an El Nino monsoon, plus La Nina for contrast."
+  }
+}

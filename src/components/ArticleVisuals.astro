@@ -66,7 +66,10 @@ const sourceNames: Record<string, string> = {
   "lancet-countdown": "Lancet Countdown",
   "heat-vulnerability": "CEEW + MoSPI + NITI + HCES + MCCD",
   "heat-work": "MoSPI + ILOSTAT",
-  era5: "Copernicus ERA5"
+  era5: "Copernicus ERA5",
+  noaa: "NOAA",
+  "derived-imd-noaa": "IMD + NOAA",
+  "derived-imd-des-upag": "IMD + DES + UPAg"
 };
 
 function fmt(value: number, unit = "") {
@@ -112,16 +115,32 @@ function compactBarLabel(value: number, unit = "") {
   return fmt(value, unit);
 }
 
-function bareEndLabel(value: number, unit = "") {
-  // The y-axis already carries the unit, so on the narrow mobile box the end-of-line
-  // labels show just the number (+ any ₹/$ symbol). That keeps them short so the plot
-  // stays wide instead of being squeezed by a big right margin. Tiny suffixes like
-  // "x"/"%" are kept; verbose scale words ("lakh cr", "trillion") are dropped.
-  const full = fmt(value, unit);
-  const m = full.match(/^([₹$]?-?[\d.,]+)(.*)$/);
-  if (!m) return full;
-  const suffix = m[2].trim();
-  return suffix.length <= 2 ? m[1] + suffix : m[1];
+function endLabelInScale(value: number, maxAbs: number, unit = "", compact = false) {
+  // Format every line's end label in ONE scale (chosen from the chart's largest value)
+  // so they're comparable AND the unit is obvious — a small line reads "₹0.2 lakh cr",
+  // not fmt()'s per-value "₹22.3k cr" which looks bigger than the "₹7.4 lakh cr" on top.
+  // `compact` swaps verbose scale words for short ones on the narrow mobile box.
+  const n = (v: number, divisor: number) =>
+    (v / divisor).toLocaleString("en-IN", { maximumFractionDigits: 1 });
+  if (/multiple/i.test(unit)) return `${n(value, 1)}x`;
+  if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
+    if (maxAbs >= 100_000) return `₹${n(value, 100_000)} ${compact ? "L cr" : "lakh cr"}`;
+    if (maxAbs >= 1_000) return `₹${n(value, 1_000)}k cr`;
+    return `₹${n(value, 1)} cr`;
+  }
+  if (/rupees|inr|₹/i.test(unit)) {
+    if (maxAbs >= 1e12) return `₹${n(value, 1e12)} ${compact ? "L cr" : "lakh cr"}`;
+    if (maxAbs >= 1e7) return `₹${n(value, 1e7)} cr`;
+    if (maxAbs >= 1e5) return `₹${n(value, 1e5)} lakh`;
+  }
+  if (/US\$|usd|\$/i.test(unit)) {
+    if (maxAbs >= 1e12) return `$${n(value, 1e12)} ${compact ? "T" : "trillion"}`;
+    if (maxAbs >= 1e9) return `$${n(value, 1e9)} ${compact ? "B" : "billion"}`;
+  }
+  if (/people/i.test(unit) && maxAbs >= 1e7) return `${n(value, 1e7)} crore`;
+  if (maxAbs >= 1e9) return `${n(value, 1e9)} ${compact ? "bn" : "billion"}`;
+  if (maxAbs >= 1e6) return `${n(value, 1e6)} ${compact ? "M" : "million"}`;
+  return fmt(value, unit);
 }
 
 function shortLabel(label: string) {
@@ -446,7 +465,7 @@ function niceScale(lo: number, hi: number, count = 5) {
   return { min: niceMin, max: niceMax, ticks };
 }
 
-function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?: { min?: number; max?: number }, mobile = false) {
+function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?: { min?: number; max?: number }, mobile = false, forceEndLabelPad = false) {
   // The viewBox width is matched to how wide the chart actually renders, so one fixed
   // axis-font size reads consistently: 2-up (leftover grid) charts render ~half width
   // and use a narrow box; section-bound charts render full width and use a wide box.
@@ -467,8 +486,9 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // value+unit; the narrow mobile box shows the bare number (axis carries the unit) so
   // the plot stays wide. Either way, size the right pad to the widest label — the mirror
   // of the dynamic LEFT pad below — so nothing clips off the viewBox.
-  const endText = (value: number) => (mobile ? bareEndLabel(value, visual.unit) : fmt(value, visual.unit));
-  if (visual.lines.length > 1) {
+  const endMaxAbs = Math.max(1, ...visual.lines.flatMap((l) => l.points.map((p) => Math.abs(p.value))));
+  const endText = (value: number) => endLabelInScale(value, endMaxAbs, visual.unit, mobile);
+  if (visual.lines.length > 1 || forceEndLabelPad) {
     const endOffset = mobile ? 16 : 22; // label x offset from the end point (see template)
     const endFont = mobile ? 12.5 : 17; // .end-mini-v font-size (see indica.css)
     const maxEndLabelLen = Math.max(
@@ -579,7 +599,24 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       .filter((i) => ap[i])
       .map((i) => ({ xPos: xByIndex(i, ap.length), label: formatAxisLabel(ap[i].date) }));
   }
-  return { width, height, pad, ticks, paths, axisTicks, y };
+  return { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime };
+}
+
+/** Shaded event bands (e.g. El Niño years) for a time-axis line chart. Each band is
+ *  drawn as a 1-year-wide rectangle centred on its year, clipped to the plot box, so
+ *  it only renders where the axis is actually a date axis. */
+function lineBandRects(visual: LineVisual, g: ReturnType<typeof lineGeometry>) {
+  const bands = (visual as LineVisual & { bands?: Array<{ year: number; label?: string }> }).bands;
+  if (!bands?.length || !g.dateMode) return [];
+  const left = g.pad.l;
+  const right = g.width - g.pad.r;
+  return bands
+    .map((b) => {
+      const x0 = Math.max(left, g.xOfTime(b.year - 0.45));
+      const x1 = Math.min(right, g.xOfTime(b.year + 0.55));
+      return x1 > x0 ? { x: x0, w: x1 - x0, label: b.label } : null;
+    })
+    .filter((r): r is { x: number; w: number; label?: string } => Boolean(r));
 }
 
 function groupedBarGeometry(visual: GroupedBarVisual, mobile = false) {
@@ -716,6 +753,11 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 </div>
               ) : null}
               <svg class={isLead ? "viz-svg viz-svg-lead viz-d" : "viz-svg viz-d"} viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
+                {lineBandRects(visual as LineVisual, g).map((b) => (
+                  <rect x={b.x} y={g.pad.t} width={b.w} height={g.height - g.pad.t - g.pad.b} fill="rgba(211,80,58,0.10)">
+                    {b.label ? <title>{b.label}</title> : null}
+                  </rect>
+                ))}
                 {g.ticks.map((tick) => (
                   <g>
                     <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
@@ -749,6 +791,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 ))}
               </svg>
               <svg class={isLead ? "viz-svg viz-svg-lead viz-m" : "viz-svg viz-m"} viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={visual.title}>
+                {lineBandRects(visual as LineVisual, gm).map((b) => (
+                  <rect x={b.x} y={gm.pad.t} width={b.w} height={gm.height - gm.pad.t - gm.pad.b} fill="rgba(211,80,58,0.10)" />
+                ))}
                 {gm.ticks.map((tick) => (
                   <g>
                     <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke="#ededed" />
@@ -822,7 +867,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     source: lp.source,
                     lines: panel.lines
                   } as LineVisual;
-                  const g = lineGeometry(panelVisual, false, false, { min: lp.min, max: lp.max });
+                  const g = lineGeometry(panelVisual, false, false, { min: lp.min, max: lp.max }, false, true);
                   return (
                     <div class="line-panel">
                       <h3>{panel.label}</h3>
@@ -1010,8 +1055,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 })}
               </div>
               <div class="viz-bars">
-                {stack.segments.map((segment) => (
-                  <div class="viz-bar"><span>{segment.label}</span><div><i style={`width:${(segment.value / total) * 100}%`}></i></div><b>{fmt(segment.value, stack.unit)}</b></div>
+                {stack.segments.map((segment, index) => (
+                  <div class="viz-bar"><span>{segment.label}</span><div class="viz-bar-track"><i style={`width:${(segment.value / total) * 100}%;background:${colors[index % colors.length]}`}></i></div><b>{fmt(segment.value, stack.unit)}</b></div>
                 ))}
               </div>
               <div class="chart-note">
@@ -1300,6 +1345,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const bw = w / n;
           const first = stripes.stripes[0];
           const last = stripes.stripes[n - 1];
+          const lowLabel = /rain|monsoon|precip|departure/i.test(`${stripes.title} ${stripes.unit}`) ? "Drier" : "Cooler";
+          const highLabel = /rain|monsoon|precip|departure/i.test(`${stripes.title} ${stripes.unit}`) ? "Wetter" : "Hotter";
           // Year ticks as real HTML below the band (SVG text would be downscaled to ~8px
           // because the 1160-wide viewBox renders at roughly half that). Force-include the
           // last year so the axis ends on the latest point, not a sampled gap.
@@ -1329,8 +1376,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 {tickIdx.map((i) => <span>{formatAxisLabel(stripes.stripes[i].date)}</span>)}
               </div>
               <div class="viz-legend">
-                <span><i style={`background:${stripeColor(stripes.min, stripes.center, spread)}`}></i>Cooler ({fmt(stripes.min, stripes.unit)})</span>
-                <span><i style={`background:${stripeColor(stripes.max, stripes.center, spread)}`}></i>Hotter ({fmt(stripes.max, stripes.unit)})</span>
+                <span><i style={`background:${stripeColor(stripes.min, stripes.center, spread)}`}></i>{lowLabel} ({fmt(stripes.min, stripes.unit)})</span>
+                <span><i style={`background:${stripeColor(stripes.max, stripes.center, spread)}`}></i>{highLabel} ({fmt(stripes.max, stripes.unit)})</span>
                 <span><b>{first.date}</b> → <b>{last.date}</b></span>
               </div>
               <div class="chart-note">
@@ -1543,7 +1590,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const choGradient = `linear-gradient(90deg, ${choroColor(cho.min, cho.min, cho.max, cho.ramp)}, ${choroColor((cho.min + cho.max) / 2, cho.min, cho.max, cho.ramp)}, ${choroColor(cho.max, cho.min, cho.max, cho.ramp)})`;
           const noDataNames = cho.regions.filter((r) => r.value === null || r.value === undefined).map((r) => r.name);
           const svgUrl = `${chartDownloadBase}/${fileName}.svg`;
-          const lazyMap = visualIndex > 0 || !leadFirst;
+          // In `astro dev` the static [chart].svg.ts endpoint is not generated, so the
+          // lazy/noscript map URL 404s and the map renders blank. Inline the SVG in dev
+          // so maps are previewable; keep lazy-loading in production builds for weight.
+          const lazyMap = !import.meta.env.DEV && (visualIndex > 0 || !leadFirst);
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{cho.title}</h2><p>{cleanSubtitle(cho.subtitle, source.sourceId)}</p></div><span>{cho.unit}</span></div>

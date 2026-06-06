@@ -1,0 +1,41 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { academyByModule, academyUrl } from "../../data/academy";
+
+const modules = academyByModule();
+---
+
+<Base title="Academy · This Indian Life" description="A mini academy for understanding economics the way India actually measures it: rigorous, data-rich, rooted in real life." domain="economy">
+  <div class="wrap">
+    <Nav locale="en" />
+
+    <header class="domain-head">
+      <span class="lbl">Academy</span>
+      <h1 class="serif">Understand the economy the way India measures it.</h1>
+      <p class="muted">
+        Short, data-rich explainers that take an economic idea and show how India's own
+        statistics actually count it, what the number means, and what it hides. Built on the
+        same locked-evidence pipeline as the rest of the site, so the writing can only cite
+        figures that came from a real source.
+      </p>
+    </header>
+
+    {modules.map((group) => (
+      <section class="section">
+        <p class="lbl">{group.module}</p>
+        <ul class="academy-list">
+          {group.entries.map((e) => (
+            <li class="academy-list-item">
+              <a class="serif" href={academyUrl(e.slug)}>{e.title}</a>
+              {e.standfirst ? <p class="muted">{e.standfirst}</p> : null}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <Footer locale="en" />
+  </div>
+</Base>

@@ -4,8 +4,8 @@
   "indicatorId": "prices.cpi.headline_annual_long",
   "title": "India's consumer price inflation, 1960 to today",
   "sourceId": "worldbank",
-  "sourceIndicatorId": "FP.CPI.TOTL.ZG + MOSPI splice",
-  "sourceUrl": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=IN",
+  "sourceIndicatorId": "FP.CPI.TOTL.ZG + MOSPI monthly CPI splice",
+  "sourceUrl": "https://api.worldbank.org/v2/country/IN/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
   "unit": "% per year",
   "frequency": "annual",
   "geography": {
@@ -14,7 +14,7 @@
     "name": "India"
   },
   "dimensions": [],
-  "fetchedAt": "2026-06-02T15:09:31.877Z",
+  "fetchedAt": "2026-06-06T05:58:52.110Z",
   "observations": [
     {
       "date": "1960",
@@ -282,13 +282,15 @@
     }
   ],
   "metadata": {
-    "derived": "World Bank annual CPI inflation 1960–2024; year(s) 2025 are the annual mean of MOSPI monthly YoY CPI inflation (Combined), provisional.",
+    "derived": "World Bank annual CPI inflation 1960-2024; 2025 later full-year point(s) from the annual mean of MoSPI monthly YoY CPI inflation (Combined).",
     "splicedYears": [
-      2025
+      "2025"
     ],
     "sources": [
       "worldbank",
       "mospi"
-    ]
+    ],
+    "mospiInput": "data/series/mospi.IN.prices.cpi.combined.general.inflation.json",
+    "caveat": "Use this as a long annual consumer-inflation backbone. Use MoSPI monthly CPI artifacts for modern official monthly and food-component analysis."
   }
 }

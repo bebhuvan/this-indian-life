@@ -391,7 +391,7 @@ export function inlineMarkdownHtml(value: string) {
    (those named in the headline/dek) instead get an inline definition box right
    after the paragraph where they first appear. State is shared across the whole
    article so each term is annotated exactly once. */
-export type GlossaryBlock = { term: string; plainMeaning: string; whyItMattersHere?: string };
+export type GlossaryBlock = { term: string; plainMeaning: string; whyItMattersHere?: string; keyTerm?: boolean };
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -485,8 +485,11 @@ export function annotateStorySections(sections: StorySection[], glossary: Glossa
  *  article still shows the pattern. */
 export function keyGlossaryTerms(glossary: GlossaryBlock[], lede: string, max = 2): string[] {
   if (!glossary?.length) return [];
+  // Terms explicitly flagged keyTerm always earn a box (e.g. a load-bearing caveat
+  // like WPI-is-wholesale-not-retail), regardless of whether they appear in the dek.
+  const forced = glossary.filter((g) => g.keyTerm).map((g) => g.term);
   const hay = lede.toLowerCase();
-  const inLede = glossary.filter((g) => hay.includes(glossaryMatchToken(g.term).toLowerCase()));
-  const chosen = (inLede.length ? inLede : [glossary[0]]).slice(0, max);
-  return chosen.map((g) => g.term);
+  const inLede = glossary.filter((g) => !g.keyTerm && hay.includes(glossaryMatchToken(g.term).toLowerCase()));
+  const auto = (inLede.length ? inLede : forced.length ? [] : [glossary[0]]).slice(0, max).map((g) => g.term);
+  return [...new Set([...forced, ...auto])];
 }

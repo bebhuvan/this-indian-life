@@ -1,0 +1,215 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import { markdownBlocks, inlineMarkdownHtml } from "../../data/questions";
+import { academyEntries, academyBySlug, academyUrl, academyLinks } from "../../data/academy";
+
+export function getStaticPaths() {
+  return academyEntries.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const blocks = markdownBlocks(entry.body || "");
+const connects = (entry.connects || []).map((slug) => ({ slug, entry: academyBySlug[slug] }));
+const description = entry.standfirst || entry.bottomLine || entry.title;
+
+// Group prose into question-led sections by H2 so each reader-question frames its answer.
+type Block = ReturnType<typeof markdownBlocks>[number];
+type Section = { heading: string | null; blocks: Block[] };
+const sections: Section[] = [];
+let cur: Section | null = null;
+for (const block of blocks) {
+  if (block.type === "h2") {
+    if (cur) sections.push(cur);
+    cur = { heading: block.text, blocks: [] };
+  } else if (cur) {
+    cur.blocks.push(block);
+  } else {
+    cur = { heading: null, blocks: [block] };
+  }
+}
+if (cur) sections.push(cur);
+
+// Normalise curly/straight quotes and whitespace so heading matches are robust.
+const norm = (s?: string | null) => (s || "").trim().toLowerCase().replace(/[‘’]/g, "'").replace(/\s+/g, " ");
+const pulls = entry.pullQuotes || [];
+const visuals = entry.visuals || [];
+const headings = sections.map((s) => norm(s.heading)).filter(Boolean);
+const pullsAfter = (h: string | null) => pulls.filter((p) => p.afterHeading && h && norm(p.afterHeading) === norm(h));
+const visualsAfter = (h: string | null) => visuals.filter((v) => v.afterHeading && h && norm(v.afterHeading) === norm(h));
+const trailingPulls = pulls.filter((p) => !p.afterHeading || !headings.includes(norm(p.afterHeading)));
+const trailingVisuals = visuals.filter((v) => !v.afterHeading || !headings.includes(norm(v.afterHeading)));
+
+// Auto-link the first mention of each vetted entity, once per entry, never inside an
+// existing tag and only on word boundaries. URLs come from the verified link map.
+const usedLinks = new Set<string>();
+function findOutsideTag(s: string, phrase: string): number {
+  let from = 0;
+  while (from <= s.length) {
+    const i = s.indexOf(phrase, from);
+    if (i === -1) return -1;
+    const insideTag = s.lastIndexOf("<", i) > s.lastIndexOf(">", i);
+    const prev = s[i - 1] || " ";
+    const next = s[i + phrase.length] || " ";
+    const wordBoundary = !/[A-Za-z0-9]/.test(prev) && !/[A-Za-z0-9]/.test(next);
+    if (!insideTag && wordBoundary) return i;
+    from = i + 1;
+  }
+  return -1;
+}
+function autolink(html: string): string {
+  let out = html;
+  for (const def of academyLinks) {
+    if (usedLinks.has(def.url)) continue;
+    // inlineMarkdownHtml escapes apostrophes to &#39;, so also try the escaped form.
+    const candidates = def.match.flatMap((m) => (m.includes("'") ? [m, m.replace(/'/g, "&#39;")] : [m]));
+    for (const phrase of candidates) {
+      const i = findOutsideTag(out, phrase);
+      if (i === -1) continue;
+      out = out.slice(0, i) + `<a class="wikilink" href="${def.url}" target="_blank" rel="noreferrer">${phrase}</a>` + out.slice(i + phrase.length);
+      usedLinks.add(def.url);
+      break;
+    }
+  }
+  return out;
+}
+const para = (text: string) => autolink(inlineMarkdownHtml(text));
+---
+
+<Base title={`${entry.title} · Academy · This Indian Life`} description={description} domain="economy">
+  <div class="wrap">
+    <Nav locale="en" />
+
+    <header class="domain-head">
+      <span class="lbl">Academy{entry.module ? ` · ${entry.module}` : ""}</span>
+      <h1 class="serif">{entry.title}</h1>
+      {entry.standfirst ? <p class="muted">{entry.standfirst}</p> : null}
+    </header>
+
+    {entry.bottomLine ? (
+      <section class="article-hero single">
+        <div class="explain-card standard">
+          <p class="lbl">Bottom line</p>
+          <p class="serif">{entry.bottomLine}</p>
+        </div>
+      </section>
+    ) : null}
+
+    <article class="article-body academy-article">
+      {sections.map((section) => (
+        <section class="academy-section">
+          {section.heading ? <h2 class="serif academy-q">{section.heading}</h2> : null}
+          <div class="story-copy longform">
+            {section.blocks.map((block) => {
+              if (block.type === "h3") return <h4>{block.text}</h4>;
+              if (block.type === "ul") return (<ul class="story-list">{block.items.map((it) => <li set:html={para(it)} />)}</ul>);
+              if (block.type === "p") return <p set:html={para(block.text)} />;
+              if (block.type === "table") return (
+                <div class="academy-table-wrap">
+                  <table class="academy-table">
+                    <thead><tr>{block.headers.map((h) => <th set:html={inlineMarkdownHtml(h)} />)}</tr></thead>
+                    <tbody>{block.rows.map((row) => <tr>{row.map((cell) => <td set:html={inlineMarkdownHtml(cell)} />)}</tr>)}</tbody>
+                  </table>
+                </div>
+              );
+              return null;
+            })}
+          </div>
+
+          {visualsAfter(section.heading).map((v) => (
+            <figure class="academy-viz">
+              {v.title ? <figcaption class="academy-viz-cap"><span class="academy-viz-title">{v.title}</span>{v.subtitle ? <span class="academy-viz-sub">{v.subtitle}</span> : null}</figcaption> : null}
+              {v.type === "stacked-bar" && v.segments ? (
+                <>
+                  <div class="stacked-bar" role="img" aria-label={`${v.title}: ${v.segments.map((s) => `${s.label} ${s.value}%`).join(", ")}`}>
+                    {v.segments.map((s, i) => <span class={`seg seg-${i + 1}`} style={`width:${s.value}%`}><span class="seg-in">{s.value >= 30 ? `${s.label} ${s.value}%` : `${s.value}%`}</span></span>)}
+                  </div>
+                  <ul class="stacked-legend">
+                    {v.segments.map((s, i) => <li class={`seg-${i + 1}`}><span class="dot"></span>{s.label} <b>{s.value}%</b></li>)}
+                  </ul>
+                </>
+              ) : null}
+              {v.source ? <p class="academy-viz-src">{v.source}</p> : null}
+            </figure>
+          ))}
+
+          {pullsAfter(section.heading).map((p) => (
+            <figure class="academy-pull"><blockquote class="serif">{p.quote}</blockquote></figure>
+          ))}
+        </section>
+      ))}
+
+      {trailingVisuals.map((v) => (
+        <figure class="academy-viz">
+          {v.title ? <figcaption class="academy-viz-cap"><span class="academy-viz-title">{v.title}</span></figcaption> : null}
+          {v.type === "stacked-bar" && v.segments ? (
+            <ul class="stacked-legend">{v.segments.map((s, i) => <li class={`seg-${i + 1}`}><span class="dot"></span>{s.label} <b>{s.value}%</b></li>)}</ul>
+          ) : null}
+        </figure>
+      ))}
+      {trailingPulls.map((p) => (
+        <figure class="academy-pull"><blockquote class="serif">{p.quote}</blockquote></figure>
+      ))}
+
+      {entry.keyTerms?.length ? (
+        <section class="concept-blocks">
+          <p class="lbl">Key terms</p>
+          {entry.keyTerms.map((t) => (
+            <div class="concept-item">
+              <h3 class="serif">{t.term}</h3>
+              <p>{t.plainMeaning}</p>
+            </div>
+          ))}
+        </section>
+      ) : null}
+    </article>
+
+    {entry.onTheGround?.body ? (
+      <section class="macha-block">
+        <p class="lbl">Tell me what this means, bro</p>
+        <h2 class="serif">{entry.onTheGround.heading}</h2>
+        <p class="macha-body">{entry.onTheGround.body}</p>
+      </section>
+    ) : null}
+
+    {(entry.whatPeopleGetWrong || entry.caveat) ? (
+      <section class="section article-meta-section">
+        {entry.whatPeopleGetWrong ? (
+          <div class="card">
+            <p class="lbl">What people get wrong</p>
+            <p>{entry.whatPeopleGetWrong}</p>
+          </div>
+        ) : null}
+        {entry.caveat ? (
+          <div class="card">
+            <p class="lbl">Caveat</p>
+            <p>{entry.caveat}</p>
+          </div>
+        ) : null}
+      </section>
+    ) : null}
+
+    {connects.length ? (
+      <section class="section article-meta-section">
+        <p class="lbl">Connects</p>
+        <p class="academy-connects">
+          {connects.map((c) => (
+            c.entry
+              ? <a class="chip" href={academyUrl(c.slug)}>{c.entry.title}</a>
+              : <span class="chip muted">{c.slug}</span>
+          ))}
+        </p>
+      </section>
+    ) : null}
+
+    {entry.sources?.length ? (
+      <section class="section article-meta-section">
+        <p class="lbl">Sources</p>
+        <p class="muted">{entry.sources.join("; ")}</p>
+      </section>
+    ) : null}
+
+    <Footer locale="en" />
+  </div>
+</Base>

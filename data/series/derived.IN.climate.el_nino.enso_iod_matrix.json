@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.enso_iod_matrix",
+  "title": "Does the Indian Ocean rescue an El Nino monsoon?",
+  "sourceId": "derived-imd-noaa",
+  "sourceIndicatorId": "enso-iod-imd-monsoon",
+  "sourceUrl": "data/series/derived.IN.climate.enso_iod_imd_monsoon_join.json",
+  "unit": "% mean rainfall departure",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-06T10:38:51.840142Z",
+  "rows": [
+    {
+      "label": "with a positive Indian Ocean Dipole",
+      "group": "In an El Nino monsoon",
+      "value": -0.3,
+      "years": 5
+    },
+    {
+      "label": "with a neutral or negative dipole",
+      "group": "In an El Nino monsoon",
+      "value": -3.9,
+      "years": 21
+    },
+    {
+      "label": "All La Nina monsoons",
+      "group": "For comparison",
+      "value": 5.9,
+      "years": 23
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.climate.el_nino_india",
+    "note": "El Nino monsoons that coincided with a positive Indian Ocean Dipole averaged near-normal rainfall; those without averaged a clear deficit. The dipole softens the blow on average - but 1972 was a severe drought despite a positive dipole, so it is a tilt, not a shield."
+  }
+}

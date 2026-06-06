@@ -16,6 +16,7 @@ export type LineVisual = {
   unit: string;
   source: VisualSource;
   lines: Array<{ label: string; points: Point[] }>;
+  bands?: Array<{ year: number; label?: string }>;
 };
 export type LinePanelsVisual = {
   kind: "linePanels";
@@ -1032,7 +1033,8 @@ function multiSeriesLine(
   title: string,
   subtitle: string,
   unit: string,
-  fromYear?: number
+  fromYear?: number,
+  bands?: Array<{ year: number; label?: string }>
 ): LineVisual | null {
   const clip = (points: LineVisual["lines"][number]["points"]) =>
     fromYear ? points.filter((p) => Number(String(p.date).slice(0, 4)) >= fromYear) : points;
@@ -1051,7 +1053,8 @@ function multiSeriesLine(
     subtitle,
     unit,
     source: firstArtifact ? sourceFor(firstArtifact) : { sourceId: "worldbank", sourceIndicatorId: title },
-    lines
+    lines,
+    ...(bands?.length ? { bands } : {})
   };
 }
 
@@ -1968,6 +1971,7 @@ type PlanEntry = {
   rows?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   columns?: Array<{ key: string; label: string }>;
   fromYear?: number;
+  bands?: Array<{ year: number; label?: string }>;
   years?: number[];
   denominator?: string;
   why?: string;
@@ -2276,7 +2280,7 @@ function stripPairVisual(
 
 function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
   if (entry.chart === "multiLine") {
-    const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear);
+    const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands);
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "sparkGrid") {

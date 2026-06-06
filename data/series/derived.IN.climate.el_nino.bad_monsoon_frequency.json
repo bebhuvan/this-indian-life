@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "sourceId": "derived-imd-noaa",
+  "sourceIndicatorId": "enso-iod-imd-monsoon",
+  "sourceUrl": "data/series/derived.IN.climate.enso_iod_imd_monsoon_join.json",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-06T06:23:43.270Z",
+  "dimensions": [],
+  "metadata": {
+    "generatedFor": "q.climate.el_nino_india",
+    "denominatorNote": "El Nino n=26, Neutral n=27, La Nina n=23",
+    "rawCountFields": [
+      "years",
+      "denominator"
+    ]
+  },
+  "indicatorId": "climate.el_nino.bad_monsoon_frequency",
+  "title": "Weak-monsoon frequency by ENSO phase, 1950-2025",
+  "unit": "% of phase years",
+  "rows": [
+    {
+      "label": "El Nino: below normal",
+      "value": 57.7,
+      "years": 15,
+      "denominator": 26
+    },
+    {
+      "label": "El Nino: <= -5%",
+      "value": 46.2,
+      "years": 12,
+      "denominator": 26
+    },
+    {
+      "label": "El Nino: <= -10%",
+      "value": 30.8,
+      "years": 8,
+      "denominator": 26
+    },
+    {
+      "label": "Neutral: below normal",
+      "value": 33.3,
+      "years": 9,
+      "denominator": 27
+    },
+    {
+      "label": "Neutral: <= -5%",
+      "value": 22.2,
+      "years": 6,
+      "denominator": 27
+    },
+    {
+      "label": "Neutral: <= -10%",
+      "value": 7.4,
+      "years": 2,
+      "denominator": 27
+    },
+    {
+      "label": "La Nina: below normal",
+      "value": 17.4,
+      "years": 4,
+      "denominator": 23
+    },
+    {
+      "label": "La Nina: <= -5%",
+      "value": 8.7,
+      "years": 2,
+      "denominator": 23
+    },
+    {
+      "label": "La Nina: <= -10%",
+      "value": 4.3,
+      "years": 1,
+      "denominator": 23
+    }
+  ]
+}

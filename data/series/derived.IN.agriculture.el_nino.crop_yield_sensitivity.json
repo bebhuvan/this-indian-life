@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "agriculture.el_nino.crop_yield_sensitivity",
+  "title": "Which crops El Nino actually hits",
+  "sourceId": "icrisat-dld",
+  "sourceIndicatorId": "dld-apportioned-yield",
+  "sourceUrl": "https://data.icrisat.org/dld/src/crops.html",
+  "unit": "% above or below the crop's recent 5-year normal",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-06T10:04:10.708909Z",
+  "dimensions": [],
+  "rows": [
+    {
+      "label": "Groundnut",
+      "value": -8.3,
+      "years": 10
+    },
+    {
+      "label": "Sorghum (jowar)",
+      "value": -7.3,
+      "years": 10
+    },
+    {
+      "label": "Pearl millet (bajra)",
+      "value": -6.8,
+      "years": 10
+    },
+    {
+      "label": "Pigeonpea (arhar)",
+      "value": -5.1,
+      "years": 10
+    },
+    {
+      "label": "Nine oilseeds",
+      "value": -5.1,
+      "years": 10
+    },
+    {
+      "label": "Maize",
+      "value": -2.4,
+      "years": 10
+    },
+    {
+      "label": "Finger millet (ragi)",
+      "value": -1.7,
+      "years": 10
+    },
+    {
+      "label": "Rice",
+      "value": 0.3,
+      "years": 10
+    },
+    {
+      "label": "Cotton",
+      "value": 1.2,
+      "years": 10
+    },
+    {
+      "label": "Sugarcane",
+      "value": 1.7,
+      "years": 10
+    },
+    {
+      "label": "Chickpea (gram)",
+      "value": 2.6,
+      "years": 10
+    },
+    {
+      "label": "Wheat",
+      "value": 4.9,
+      "years": 10
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.climate.el_nino_india",
+    "method": "ICRISAT District Level Database (apportioned), 1966-2017, joined to the NOAA/IMD El Nino classification. Yield is production-weighted across districts; each El Nino monsoon is a % deviation from the state's prior-5-year mean, then averaged across the 10 strict El Nino monsoons in range.",
+    "note": "Rainfed kharif crops (groundnut, jowar, bajra, pulses, oilseeds) lose the most yield in El Nino years; irrigated and rabi crops (wheat, rice, sugarcane) are insulated or even gain."
+  }
+}

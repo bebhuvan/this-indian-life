@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "topicId": "climate.el_nino_india",
+  "title": "El Nino and India source map",
+  "updatedAt": "2026-06-06",
+  "articleIntent": "A long, data-rich article explaining how El Nino changes India's monsoon risk, what history shows, and where the evidence is uncertain.",
+  "availableNow": [
+    {
+      "evidenceNeed": "ENSO phase and strength history",
+      "sourceId": "noaa-enso",
+      "sourceName": "NOAA Climate Prediction Center",
+      "artifact": "data/series/noaa-enso.global.oni_seasonal.json",
+      "manifest": "data/catalog/noaa-enso-manifest.json",
+      "coverage": "1950-DJF to 2026-MAM",
+      "status": "ready",
+      "notes": "ONI gives seasonal Nino 3.4 SST anomalies. Phase tags in the artifact are mechanical thresholds; official event labels require persistence and coupled atmospheric signals."
+    },
+    {
+      "evidenceNeed": "India annual precipitation context",
+      "sourceId": "owid",
+      "sourceName": "Our World in Data / Copernicus ERA5",
+      "artifact": "data/series/owid.IN.average-precipitation-per-year.json",
+      "coverage": "Existing V1 climate coverage",
+      "status": "ready",
+      "notes": "Useful for broad annual rainfall swings, but not a canonical IMD monsoon rainfall series."
+    },
+    {
+      "evidenceNeed": "Canonical all-India and homogeneous-region southwest monsoon rainfall departure",
+      "sourceId": "imd",
+      "sourceName": "India Meteorological Department, Climate Prediction and Monitoring Group",
+      "artifact": "data/series/imd.IN.climate.imd.monsoon_rainfall_regions.json",
+      "manifest": "data/catalog/imd-monsoon-rainfall-manifest.json",
+      "coverage": "1901 to 2025",
+      "status": "ready",
+      "notes": "Public IMD Pune HTML table parsed by scripts/ingest-imd-monsoon-rainfall.mjs. Includes actual rainfall and percent departure for June, July, August, September, and June-September for all-India and four homogeneous regions."
+    },
+    {
+      "evidenceNeed": "Meteorological-subdivision monthly rainfall history",
+      "sourceId": "imd",
+      "sourceName": "India Meteorological Department, Climate Prediction and Monitoring Group",
+      "artifact": "data/series/imd.IN.climate.imd.subdivision_rainfall.json",
+      "manifest": "data/catalog/imd-subdivision-rainfall-manifest.json",
+      "coverage": "1901 to 2025, with early-year gaps in some subdivisions",
+      "status": "ready",
+      "notes": "Public IMD Pune subdivision rainfall pages parsed by scripts/ingest-imd-subdivision-rainfall.mjs. Includes monthly and annual actual rainfall for 36 meteorological subdivisions, plus 1971-2020 normal values in metadata."
+    },
+    {
+      "evidenceNeed": "City rainfall histories",
+      "sourceId": "open-meteo",
+      "sourceName": "Open-Meteo Historical Weather API / ERA5",
+      "artifactPattern": "data/series/open-meteo.IN.*.precipitation_sum.json",
+      "coverage": "1940 to 2026-05-29 for selected cities",
+      "status": "ready",
+      "notes": "Good for local examples and reader-facing city comparisons. Not a replacement for IMD gridded rainfall."
+    },
+    {
+      "evidenceNeed": "Agriculture exposure",
+      "sourceId": "worldbank",
+      "sourceName": "World Bank WDI / ILO modelled estimates",
+      "artifact": "data/series/worldbank.compare.in.SL_AGR_EMPL_ZS.json",
+      "status": "ready",
+      "notes": "Use for the share of workers in agriculture and why monsoon risk matters."
+    },
+    {
+      "evidenceNeed": "Food price and inflation transmission",
+      "sourceId": "mospi",
+      "sourceName": "MoSPI CPI",
+      "artifactPattern": "data/series/mospi.IN.prices.cpi.*",
+      "status": "ready",
+      "notes": "Use food, vegetables, cereals, pulses, oils, milk, onion, tomato and potato inflation/index series for the economic consequences section."
+    },
+    {
+      "evidenceNeed": "Disastrous weather event case studies",
+      "sourceId": "imd-dwe-local",
+      "sourceName": "IMD Disastrous Weather Events reports",
+      "localFiles": [
+        "IMD data/DWE_2021.pdf",
+        "IMD data/DWE_2022.pdf",
+        "IMD data/DWE_2023.pdf",
+        "IMD data/DWE_2024.pdf"
+      ],
+      "status": "available_local",
+      "notes": "Useful for event narrative and death/damage case studies, not the core ENSO-rainfall relationship."
+    },
+    {
+      "evidenceNeed": "Chart-ready ENSO and Indian monsoon join",
+      "sourceId": "derived",
+      "sourceName": "Derived from NOAA ONI and IMD SW Monsoon Rainfall Data",
+      "artifact": "data/series/derived.IN.climate.enso_imd_monsoon_join.json",
+      "manifest": "data/catalog/enso-imd-monsoon-manifest.json",
+      "coverage": "1950 to 2025",
+      "status": "ready",
+      "notes": "Created by scripts/derive-enso-imd-monsoon.mjs. Joins MJJ/JJA/JAS/ASO ONI metrics and mechanical official-event flags to IMD June-September rainfall and departure for each region."
+    }
+  ],
+  "needsIngestion": [
+    {
+      "evidenceNeed": "Daily gridded rainfall for maps and extremes",
+      "preferredSource": "IMD 0.25 degree daily gridded rainfall",
+      "candidateUrl": "https://imdpune.gov.in/cmpg/Griddata/Rainfall_25_NetCDF.html",
+      "priority": "medium",
+      "status": "transport_tested_needs_storage_policy",
+      "notes": "POSTing RF25=2024 to https://imdpune.gov.in/cmpg/Griddata/RF25.php returned a 25 MB NetCDF file. High-value for maps and district/state rollups, but requires NetCDF parsing, grid masks, and careful storage policy."
+    },
+    {
+      "evidenceNeed": "Indian Ocean Dipole index",
+      "preferredSource": "Bureau of Meteorology or NOAA/PSL",
+      "priority": "high",
+      "status": "needs_source_confirmation",
+      "notes": "Required as a caveat: positive IOD can offset El Nino's drying tendency for India, as in 1997."
+    },
+    {
+      "evidenceNeed": "Reservoir storage and water stress",
+      "preferredSource": "India-WRIS / Central Water Commission",
+      "candidateUrl": "https://indiawris.gov.in/wris/",
+      "priority": "medium",
+      "status": "needs_adapter_or_manual_export",
+      "notes": "Useful for the 'rainfall is not the same as water security' section."
+    },
+    {
+      "evidenceNeed": "Crop production and yield by year/state",
+      "preferredSource": "MoSPI / Ministry of Agriculture",
+      "candidateUrl": "https://www.mospi.gov.in/area-and-production-under-major-crops",
+      "priority": "medium",
+      "status": "needs_adapter",
+      "notes": "Needed for rice, pulses, oilseeds, sugarcane, cotton, and coarse cereals."
+    },
+    {
+      "evidenceNeed": "Historical news and contemporary coverage",
+      "preferredSource": "GDELT, newspaper archives, Factiva/LexisNexis if available, official IMD press releases",
+      "candidateUrl": "https://internal.imd.gov.in/pages/press_release_mausam.php",
+      "priority": "medium",
+      "status": "needs_access_decision",
+      "notes": "For 'what people were told at the time' and policy response timelines. Official press releases are useful; media archives may require subscription access."
+    }
+  ],
+  "articleCharts": [
+    {
+      "chartId": "enso-phase-timeline",
+      "requiredArtifacts": ["data/series/noaa-enso.global.oni_seasonal.json"],
+      "status": "ready"
+    },
+    {
+      "chartId": "el-nino-years-vs-india-monsoon-rainfall",
+      "requiredArtifacts": ["data/series/derived.IN.climate.enso_imd_monsoon_join.json"],
+      "status": "ready"
+    },
+    {
+      "chartId": "regional-monsoon-departures-in-el-nino-years",
+      "requiredArtifacts": ["data/series/derived.IN.climate.enso_imd_monsoon_join.json"],
+      "status": "ready"
+    },
+    {
+      "chartId": "case-study-years",
+      "candidateYears": [1965, 1972, 1982, 1987, 1997, 2002, 2009, 2015, 2023],
+      "status": "needs_case_study_packet"
+    },
+    {
+      "chartId": "monsoon-risk-to-prices",
+      "requiredArtifacts": ["MoSPI CPI food components", "rainfall anomaly series"],
+      "status": "partly_ready"
+    }
+  ]
+}

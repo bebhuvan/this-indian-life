@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "artifactType": "series",
   "indicatorId": "prices.cpi.purchasing_power_1960",
-  "title": "What ₹100 from 1960 buys today",
+  "title": "What Rs 100 from 1960 buys today",
   "sourceId": "worldbank",
-  "sourceIndicatorId": "prices.cpi.purchasing_power_1960",
-  "sourceUrl": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG",
-  "unit": "₹ (1960 rupees)",
+  "sourceIndicatorId": "FP.CPI.TOTL.ZG + MOSPI monthly CPI splice",
+  "sourceUrl": "https://api.worldbank.org/v2/country/IN/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+  "unit": "Rs (1960 rupees)",
   "frequency": "annual",
   "geography": {
     "type": "country",
@@ -14,7 +14,7 @@
     "name": "India"
   },
   "dimensions": [],
-  "fetchedAt": "2026-06-03T00:49:32.673Z",
+  "fetchedAt": "2026-06-06T05:58:52.110Z",
   "observations": [
     {
       "date": "1960",
@@ -282,7 +282,8 @@
     }
   ],
   "metadata": {
-    "derived": "100 / cumulative price multiple",
+    "derived": "100 divided by cumulative price multiple",
+    "backbone": "data/series/worldbank.IN.prices.cpi.headline_annual_long.json",
     "sources": [
       "worldbank",
       "mospi"

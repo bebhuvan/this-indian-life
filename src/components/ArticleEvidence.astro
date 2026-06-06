@@ -48,6 +48,7 @@ const sourceCount = sourceChips.length;
 const glossary = explanation.editorialPlan?.glossaryBlocks ?? [];
 const caveats = explanation.caveats ?? [];
 const sourceNotes = explanation.sourceNotes ?? [];
+const furtherReading = explanation.furtherReading ?? [];
 ---
 
 <div class="evidence-grid">
@@ -112,6 +113,13 @@ const sourceNotes = explanation.sourceNotes ?? [];
       <div>
         <p class="lbl">Source notes</p>
         <ul>{sourceNotes.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
+      </div>
+    ) : null}
+
+    {furtherReading.length ? (
+      <div>
+        <p class="lbl">Further reading</p>
+        <ul>{furtherReading.slice(0, 8).map((item) => <li>{item}</li>)}</ul>
       </div>
     ) : null}
   </aside>

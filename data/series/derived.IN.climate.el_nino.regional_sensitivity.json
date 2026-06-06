@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.regional_sensitivity",
+  "title": "El Nino does not hit every region the same way",
+  "sourceId": "derived-imd-noaa",
+  "sourceIndicatorId": "enso-iod-imd-monsoon",
+  "sourceUrl": "data/series/derived.IN.climate.enso_iod_imd_monsoon_join.json",
+  "unit": "% mean rainfall departure in El Nino monsoons",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-06T10:38:51.840142Z",
+  "rows": [
+    {
+      "label": "Northwest India",
+      "value": -14.2,
+      "years": 17
+    },
+    {
+      "label": "Central India",
+      "value": -9.4,
+      "years": 17
+    },
+    {
+      "label": "South Peninsula",
+      "value": -7.4,
+      "years": 17
+    },
+    {
+      "label": "All India",
+      "value": -6.8,
+      "years": 17
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.climate.el_nino_india",
+    "note": "Average June-September departure in the 17 monsoons when the Pacific was in El Nino all season, by IMD homogeneous region."
+  }
+}

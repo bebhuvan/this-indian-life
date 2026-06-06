@@ -32,6 +32,10 @@ const ogImage = new URL(image, base).toString();
 const graph = jsonLd.length
   ? JSON.stringify({ "@context": "https://schema.org", "@graph": jsonLd })
   : null;
+const cloudflareWebAnalyticsToken = import.meta.env.PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
+const cloudflareBeaconConfig = cloudflareWebAnalyticsToken
+  ? JSON.stringify({ token: cloudflareWebAnalyticsToken })
+  : null;
 ---
 
 <!doctype html>
@@ -97,5 +101,14 @@ const graph = jsonLd.length
   </head>
   <body class={bodyClass}>
     <main><slot /></main>
+    {
+      cloudflareBeaconConfig && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={cloudflareBeaconConfig}
+        />
+      )
+    }
   </body>
 </html>
