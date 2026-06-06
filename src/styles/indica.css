@@ -731,6 +731,15 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .pyr-num-male{text-align:right}
 .pyr-num-female{text-align:left}
 .yaxt,.xaxt,.end-s{font-family:var(--sans);font-size:17px;fill:var(--dim)}
+/* Scatter text: sized in viewBox units. Desktop uses the wide 1160-box; the
+   phone variant (.viz-m) uses a near-square box, so its labels need their own,
+   larger user-unit sizes to stay legible. */
+.point-label{font-family:var(--sans);font-size:16px;font-weight:500;fill:var(--ink)}
+.axis-title{font-family:var(--sans);font-size:17px;fill:var(--mid)}
+.scatter-callout{font-family:var(--sans);font-size:16px;font-weight:600;fill:rgba(211,80,58,.92)}
+.viz-m .point-label{font-size:14px}
+.viz-m .axis-title{font-size:14px}
+.viz-m .scatter-callout{font-size:13px}
 @media(max-width:1050px){
   .story-step{grid-template-columns:1fr;gap:26px}
   .story-copy.longform{max-width:74ch}

@@ -635,10 +635,13 @@ function groupedBarGeometry(visual: GroupedBarVisual, mobile = false) {
   return { width, height, pad, max, groupW, barGap, barW, y, ticks };
 }
 
-function scatterGeometry(visual: ScatterVisual) {
-  const width = 1160;
-  const height = 520;
-  const pad = { l: 94, r: 120, t: 44, b: 86 };
+function scatterGeometry(visual: ScatterVisual, mobile = false) {
+  // Desktop uses a wide 1160-box; phones use a near-square box so the fixed-px
+  // axis titles and point labels don't shrink to nothing (the chart dual-renders
+  // viz-d/viz-m exactly like the line + grouped-bar charts).
+  const width = mobile ? 470 : 1160;
+  const height = mobile ? 500 : 520;
+  const pad = mobile ? { l: 48, r: 54, t: 30, b: 74 } : { l: 94, r: 120, t: 44, b: 86 };
   const plotW = width - pad.l - pad.r;
   const plotH = height - pad.t - pad.b;
   const xSpan = visual.xMax - visual.xMin || 1;
@@ -647,24 +650,26 @@ function scatterGeometry(visual: ScatterVisual) {
   const y = (value: number) => height - pad.b - ((value - visual.yMin) / ySpan) * plotH;
   const sizes = visual.points.map((point) => point.size || 0).filter((value) => value > 0);
   const maxSize = Math.max(...sizes, 1);
-  const r = (value?: number | null) => 5 + Math.sqrt(Math.max(0, value || 0) / maxSize) * 17;
+  const r = (value?: number | null) => (mobile ? 4 : 5) + Math.sqrt(Math.max(0, value || 0) / maxSize) * (mobile ? 11 : 17);
   const ticks = [0, 25, 50, 75, 100];
   const labelExcluded = new Set([
     "Andaman and Nicobar Islands",
     "Chandigarh",
     "Dadra and Nagar Haveli and Daman and Diu"
   ]);
+  // Fewer point labels on the narrow phone box, where collision room is tight.
   const labelledPoints = [...visual.points]
     .filter((point) => !labelExcluded.has(point.label))
     .sort((a, b) => (b.x * b.y * (b.size || 1)) - (a.x * a.y * (a.size || 1)))
-    .slice(0, 5);
+    .slice(0, mobile ? 3 : 5);
   const labelled = new Set(labelledPoints.map((point) => point.label));
+  const labelGap = mobile ? 14 : 24;
   const rawLabels = labelledPoints.map((point) => {
     const cx = x(point.x);
     const cy = y(point.y);
     const radius = r(point.size);
     const side = point.x >= 70 ? "left" : "right";
-    const textX = side === "left" ? cx - radius - 24 : cx + radius + 24;
+    const textX = side === "left" ? cx - radius - labelGap : cx + radius + labelGap;
     return {
       label: point.label,
       text: point.label,
@@ -678,7 +683,7 @@ function scatterGeometry(visual: ScatterVisual) {
   });
   const labelsBySide = ["left", "right"].flatMap((side) => {
     const items = rawLabels.filter((item) => item.side === side).sort((a, b) => a.y - b.y);
-    const minGap = 34;
+    const minGap = mobile ? 26 : 34;
     const top = pad.t + 16;
     const bottom = height - pad.b - 12;
     for (let i = 1; i < items.length; i += 1) {
@@ -868,10 +873,11 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     lines: panel.lines
                   } as LineVisual;
                   const g = lineGeometry(panelVisual, false, false, { min: lp.min, max: lp.max }, false, true);
+                  const gm = lineGeometry(panelVisual, false, false, { min: lp.min, max: lp.max }, true, true);
                   return (
                     <div class="line-panel">
                       <h3>{panel.label}</h3>
-                      <svg class="viz-svg" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
+                      <svg class="viz-svg viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
                         {g.ticks.map((tick) => (
                           <g>
                             <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke="#ededed" />
@@ -889,6 +895,29 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                                 <circle cx={path.latestX} cy={path.latestY} r="4.5" fill="#fff" stroke={path.color} stroke-width="2.7" />
                                 <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.1" opacity=".4" />
                                 <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{fmt(path.latest.value, lp.unit)}</text>
+                              </g>
+                            ) : null}
+                          </>
+                        ))}
+                      </svg>
+                      <svg class="viz-svg viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
+                        {gm.ticks.map((tick) => (
+                          <g>
+                            <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke="#ededed" />
+                            <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, lp.unit)}</text>
+                          </g>
+                        ))}
+                        {gm.axisTicks.map((tick) => (
+                          <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick.label}</text>
+                        ))}
+                        {gm.paths.map((path) => (
+                          <>
+                            <path d={path.d} fill="none" stroke={path.color} stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+                            {path.latest ? (
+                              <g>
+                                <circle cx={path.latestX} cy={path.latestY} r="4" fill="#fff" stroke={path.color} stroke-width="2.4" />
+                                <line x1={path.latestX + 5} y1={path.latestY} x2={path.latestX + 13} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
+                                <text class="end-mini-v" x={path.latestX + 16} y={path.labelY} fill={path.color}>{fmt(path.latest.value, lp.unit)}</text>
                               </g>
                             ) : null}
                           </>
@@ -920,6 +949,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (visual.kind === "scatter") {
           const scatter = visual as ScatterVisual;
           const g = scatterGeometry(scatter);
+          const gm = scatterGeometry(scatter, true);
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{scatter.title}</h2><p>{cleanSubtitle(scatter.subtitle, source.sourceId)}</p></div><span>{scatter.unit}</span></div>
@@ -928,7 +958,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <svg class="viz-svg scatter-plot" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={scatter.title}>
+              <svg class="viz-svg scatter-plot viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={scatter.title}>
                 <rect x={g.x(70)} y={g.pad.t} width={g.width - g.pad.r - g.x(70)} height={g.y(80) - g.pad.t} fill="rgba(211,80,58,0.08)" />
                 {g.ticks.map((tick) => (
                   <g>
@@ -965,6 +995,44 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <text class="axis-title" x={(g.pad.l + g.width - g.pad.r) / 2} y={g.height - 20} text-anchor="middle">{scatter.xLabel}</text>
                 <text class="axis-title" transform={`translate(24 ${(g.pad.t + g.height - g.pad.b) / 2}) rotate(-90)`} text-anchor="middle">{scatter.yLabel}</text>
                 <text class="scatter-callout" x={g.x(72)} y={g.y(80) - 12}>High risk + little cooling</text>
+              </svg>
+              <svg class="viz-svg scatter-plot viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={scatter.title}>
+                <rect x={gm.x(70)} y={gm.pad.t} width={gm.width - gm.pad.r - gm.x(70)} height={gm.y(80) - gm.pad.t} fill="rgba(211,80,58,0.08)" />
+                {gm.ticks.map((tick) => (
+                  <g>
+                    <line x1={gm.x(tick)} y1={gm.pad.t} x2={gm.x(tick)} y2={gm.height - gm.pad.b} stroke="#ededed" />
+                    <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke="#ededed" />
+                    <text class="xaxt" x={gm.x(tick)} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick}%</text>
+                    <text class="yaxt" x={gm.pad.l - 10} y={gm.y(tick) + 4} text-anchor="end">{tick}%</text>
+                  </g>
+                ))}
+                <line x1={gm.x(70)} y1={gm.pad.t} x2={gm.x(70)} y2={gm.height - gm.pad.b} stroke="rgba(211,80,58,0.34)" stroke-dasharray="6 6" />
+                <line x1={gm.pad.l} y1={gm.y(80)} x2={gm.width - gm.pad.r} y2={gm.y(80)} stroke="rgba(211,80,58,0.34)" stroke-dasharray="6 6" />
+                {scatter.points.map((point) => {
+                  const cx = gm.x(point.x);
+                  const cy = gm.y(point.y);
+                  const vulnerable = point.x >= 70 && point.y >= 80;
+                  const radius = gm.r(point.size);
+                  const label = gm.labelled.has(point.label);
+                  const placement = gm.labelPositions.get(point.label);
+                  const mpce = typeof point.meta?.ruralMpce === "number" ? `, rural MPCE ${fmt(point.meta.ruralMpce, "Rs per person per month")}` : "";
+                  return (
+                    <g>
+                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(211,80,58,0.72)" : "rgba(63,131,120,0.62)"} stroke="#fff" stroke-width="1.6">
+                        <title>{`${point.label}: heat risk ${fmt(point.x, "%")}%, without cooling proxy ${fmt(point.y, "%")}%, MPI ${fmt(point.size || 0, "%")}%${mpce}`}</title>
+                      </circle>
+                      {label && placement ? (
+                        <>
+                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#aaa" stroke-width="1" />
+                          <text class="point-label" x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"}>{placement.text}</text>
+                        </>
+                      ) : null}
+                    </g>
+                  );
+                })}
+                <text class="axis-title" x={(gm.pad.l + gm.width - gm.pad.r) / 2} y={gm.height - 16} text-anchor="middle">{scatter.xLabel}</text>
+                <text class="axis-title" transform={`translate(18 ${(gm.pad.t + gm.height - gm.pad.b) / 2}) rotate(-90)`} text-anchor="middle">{scatter.yLabel}</text>
+                <text class="scatter-callout" x={gm.x(70) + 4} y={gm.y(80) - 8}>High risk + little cooling</text>
               </svg>
               <div class="viz-legend">
                 <span><i style="background:rgba(211,80,58,0.72)"></i>High-risk quadrant</span>
