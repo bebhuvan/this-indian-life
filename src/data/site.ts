@@ -224,7 +224,7 @@ const curatedCharts: ChartRecord[] = [
     seriesPath: "data/series/worldbank.IN.NY_GDP_MKTP_CD.json",
     valueFormat: "usd_trillion",
     axisFormat: "usd_trillion",
-    bottomLine: "India is now a nearly $4 trillion economy, but total size and household prosperity are still very different things.",
+    bottomLine: "India is now a roughly $4 trillion economy, but total size and household prosperity are still very different things.",
     explanations: {
       reading: "India's nominal GDP has risen from a small post-independence base to one of the world's largest aggregate economies. This series is in current US dollars, so it combines real output growth, domestic inflation, and exchange-rate movement.",
       plain: "This is the size of everything India produces in a year, converted into US dollars. The line shows a very large rise, but it is not the same as saying every family became equally richer.",

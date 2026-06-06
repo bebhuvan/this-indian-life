@@ -26,10 +26,19 @@ const findArticle = (chart: (typeof charts)[number]) =>
         (entry) => entry.indicator === chart.id || (entry.series ?? []).some((s) => s.indicator === chart.id)
       )
   );
+// The homepage GDP headline shows the IMF WEO (April 2026) figure — India ~$4.15T
+// in 2026, the most current "size of the economy" number — because the World Bank
+// series only runs through 2024 (~$3.91T) and the ingested IMF series stops at the
+// 2025 estimate. The article's 1960→ historical chart still uses World Bank.
+// Source: IMF World Economic Outlook (Apr 2026), NGDPD/IND.
+const GDP_IMF_LATEST = { date: "2026", value: 4.15e12 };
 const ledger = charts
   .filter((chart) => ["people.population.total", "econ.gdp.current_usd", "energy.electricity_access", "health.life_expectancy"].includes(chart.id))
   .map((chart) => {
-    const latest = latestObservation(loadSeries(chart.seriesPath))!;
+    const latest =
+      chart.id === "econ.gdp.current_usd"
+        ? GDP_IMF_LATEST
+        : latestObservation(loadSeries(chart.seriesPath))!;
     const article = findArticle(chart);
     return { chart, latest, href: article ? questionUrl(article, locale) : `/articles/` };
   });
