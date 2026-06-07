@@ -60,6 +60,13 @@ const RAMP_STOPS: Record<string, string[]> = {
   // soft mint -> teal -> deep sea -> midnight
   teal: ["#eef6f2", "#a6dccb", "#56b6a6", "#2a8597", "#1f5278", "#16315a"],
 };
+
+// Diverging palette for maps with a meaningful threshold (passed via `divergeAt`,
+// e.g. fertility's 2.1 replacement line). Below the pivot reads cool, above reads
+// warm, with a near-neutral cream exactly at the pivot — so "above vs below the
+// line" is legible from colour alone, not just the numbers.
+const DIVERGE_LOW = ["#1f5278", "#2a8597", "#56b6a6", "#a6dccb", "#f1ead8"]; // deep teal (min) -> cream (pivot)
+const DIVERGE_HIGH = ["#f1ead8", "#f6c879", "#ef9a4f", "#e16a5f", "#b34a78"]; // cream (pivot) -> rose (max)
 function hexToRgb(h: string): [number, number, number] {
   const n = parseInt(h.slice(1), 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
@@ -73,7 +80,17 @@ function lerpStops(stops: string[], t: number): string {
   return `rgb(${Math.round(r1 + (r2 - r1) * f)},${Math.round(g1 + (g2 - g1) * f)},${Math.round(b1 + (b2 - b1) * f)})`;
 }
 
-export function choroColor(value: number, min: number, max: number, ramp: string = "warm") {
+export function choroColor(value: number, min: number, max: number, ramp: string = "warm", divergeAt?: number) {
+  // Diverging mode: scale each side of the pivot independently so the threshold
+  // always lands on the cream midpoint regardless of how lopsided the data is.
+  if (divergeAt !== undefined && Number.isFinite(divergeAt)) {
+    if (value <= divergeAt) {
+      const tl = divergeAt > min ? Math.max(0, Math.min(1, (value - min) / (divergeAt - min))) : 1;
+      return lerpStops(DIVERGE_LOW, tl);
+    }
+    const th = max > divergeAt ? Math.max(0, Math.min(1, (value - divergeAt) / (max - divergeAt))) : 0;
+    return lerpStops(DIVERGE_HIGH, th);
+  }
   const t = max > min ? Math.max(0, Math.min(1, (value - min) / (max - min))) : 0;
   if (RAMP_STOPS[ramp]) return lerpStops(RAMP_STOPS[ramp], t);
   if (ramp === "cool") {
@@ -96,7 +113,7 @@ export function choroplethValueLabel(visual: ChoroplethVisual, value: number) {
 export function renderChoroplethSvg(visual: ChoroplethVisual) {
   const paths = visual.regions.map((region) => {
     const valueLabel = region.value === null || region.value === undefined ? "no data" : choroplethValueLabel(visual, region.value);
-    const fill = region.value === null || region.value === undefined ? "#efeae4" : choroColor(region.value, visual.min, visual.max, visual.ramp);
+    const fill = region.value === null || region.value === undefined ? "#efeae4" : choroColor(region.value, visual.min, visual.max, visual.ramp, visual.divergeAt);
     return `<path d="${escapeHtml(compactSvgPath(region.path))}" fill="${fill}" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" stroke-linecap="round"><title>${escapeHtml(region.name)}: ${escapeHtml(valueLabel)}</title></path>`;
   }).join("");
   // Soft drop-shadow lifts the whole map off the page; applied once to the group, not per path.

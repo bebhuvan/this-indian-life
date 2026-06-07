@@ -100,6 +100,7 @@ export type ChoroplethVisual = {
   bottomLabel?: string;
   signed?: boolean;
   ramp?: string;
+  divergeAt?: number;
 };
 export type ScatterVisual = {
   kind: "scatter";
@@ -1983,6 +1984,7 @@ type PlanEntry = {
   signed?: boolean;
   ramp?: string;
   diverging?: boolean;
+  divergeAt?: number;
 };
 
 // --- Builders for richer analysis types (reuse existing renderers where possible) ---
@@ -2109,7 +2111,7 @@ function attachMeta(visual: VisualSpec, entry: PlanEntry): VisualSpec {
   return out;
 }
 
-function choroplethVisual(artifact: Artifact, title: string, subtitle: string, unit: string, opts: { rankLabel?: string; bottomLabel?: string; signed?: boolean; ramp?: string } = {}): ChoroplethVisual | null {
+function choroplethVisual(artifact: Artifact, title: string, subtitle: string, unit: string, opts: { rankLabel?: string; bottomLabel?: string; signed?: boolean; ramp?: string; divergeAt?: number } = {}): ChoroplethVisual | null {
   const a = artifact as Artifact & { regions?: Array<{ name: string; value: number | null; path: string }>; viewBox?: string; min?: number; max?: number };
   if (!a.regions || a.regions.length < 2) return null;
   const values = a.regions.map((r) => r.value).filter((v): v is number => v !== null && v !== undefined);
@@ -2126,7 +2128,8 @@ function choroplethVisual(artifact: Artifact, title: string, subtitle: string, u
     rankLabel: opts.rankLabel,
     bottomLabel: opts.bottomLabel,
     signed: opts.signed,
-    ramp: opts.ramp
+    ramp: opts.ramp,
+    divergeAt: opts.divergeAt
   };
 }
 
@@ -2353,7 +2356,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     case "decadeBars": visual = decadeMeanBars(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "decoupleIndex": visual = decoupleIndexVisual(artifact, entry.columns || [], entry.title || artifact.title, entry.subtitle || ""); break;
     case "stripes": visual = warmingStripes(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
-    case "choropleth": visual = choroplethVisual(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit, { rankLabel: entry.rankLabel, bottomLabel: entry.bottomLabel, signed: entry.signed, ramp: entry.ramp }); break;
+    case "choropleth": visual = choroplethVisual(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit, { rankLabel: entry.rankLabel, bottomLabel: entry.bottomLabel, signed: entry.signed, ramp: entry.ramp, divergeAt: entry.divergeAt }); break;
     case "scenarioMaps": visual = scenarioMapsVisual(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "heatDeathCountBars": visual = heatDeathCountBars(artifact, entry.title || artifact.title, entry.subtitle || "Curated sources · rows answer different questions"); break;
     case "deathCertificationFunnelBars": visual = deathCertificationFunnelBars(artifact, entry.title || artifact.title, entry.subtitle || "CRS 2023 death registration + MCCD 2023 medical certification"); break;

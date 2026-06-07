@@ -1663,7 +1663,13 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const top = [...valued].sort((a, b) => b.value - a.value).slice(0, 3);
           const bottom = cho.bottomLabel ? [...valued].sort((a, b) => a.value - b.value).slice(0, 3) : [];
           const vf = (v: number) => choroplethValueLabel(cho, v);
-          const choGradient = `linear-gradient(90deg, ${choroColor(cho.min, cho.min, cho.max, cho.ramp)}, ${choroColor((cho.min + cho.max) / 2, cho.min, cho.max, cho.ramp)}, ${choroColor(cho.max, cho.min, cho.max, cho.ramp)})`;
+          const choDiverge = cho.divergeAt !== undefined && Number.isFinite(cho.divergeAt) && cho.divergeAt > cho.min && cho.divergeAt < cho.max ? cho.divergeAt : null;
+          const choPivotPct = choDiverge !== null ? ((choDiverge - cho.min) / (cho.max - cho.min)) * 100 : null;
+          // When diverging, anchor the cream midpoint at its true position on the bar
+          // (not 50%) so the legend matches the map; otherwise keep the simple 3-stop ramp.
+          const choGradient = choDiverge !== null
+            ? `linear-gradient(90deg, ${choroColor(cho.min, cho.min, cho.max, cho.ramp, choDiverge)} 0%, ${choroColor((cho.min + choDiverge) / 2, cho.min, cho.max, cho.ramp, choDiverge)} ${(choPivotPct as number) / 2}%, ${choroColor(choDiverge, cho.min, cho.max, cho.ramp, choDiverge)} ${choPivotPct}%, ${choroColor((choDiverge + cho.max) / 2, cho.min, cho.max, cho.ramp, choDiverge)} ${(choPivotPct as number) + (100 - (choPivotPct as number)) / 2}%, ${choroColor(cho.max, cho.min, cho.max, cho.ramp, choDiverge)} 100%)`
+            : `linear-gradient(90deg, ${choroColor(cho.min, cho.min, cho.max, cho.ramp)}, ${choroColor((cho.min + cho.max) / 2, cho.min, cho.max, cho.ramp)}, ${choroColor(cho.max, cho.min, cho.max, cho.ramp)})`;
           const noDataNames = cho.regions.filter((r) => r.value === null || r.value === undefined).map((r) => r.name);
           const svgUrl = `${chartDownloadBase}/${fileName}.svg`;
           // In `astro dev` the static [chart].svg.ts endpoint is not generated, so the
@@ -1687,7 +1693,14 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 ) : <Fragment set:html={renderChoroplethSvg(cho)} />}
                 <div class="choro-side">
                   <div class="choro-scale">
-                    <span class="choro-bar" style={`background:${choGradient}`}></span>
+                    {choPivotPct !== null ? (
+                      <div class="choro-barwrap">
+                        <span class="choro-bar" style={`background:${choGradient}`}></span>
+                        <span class="choro-tick" style={`left:${choPivotPct}%`}><em>{vf(cho.divergeAt as number)} replacement</em><b></b></span>
+                      </div>
+                    ) : (
+                      <span class="choro-bar" style={`background:${choGradient}`}></span>
+                    )}
                     <span class="choro-ends"><em>{vf(cho.min)}</em><em>{vf(cho.max)}</em></span>
                     <span class="choro-cap">{cho.unit}</span>
                     {cho.regions.length > valued.length ? <span class="choro-nodata"><i style="background:#efeae4"></i>not surveyed</span> : null}

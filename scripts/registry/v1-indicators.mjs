@@ -560,7 +560,7 @@ export const v1Questions = [
         series: [ { indicator: "people.srs.tfr", label: "All India" }, { indicator: "people.srs.tfr_rural", label: "Rural" }, { indicator: "people.srs.tfr_urban", label: "Urban" } ],
         indicator: "people.srs.tfr",
         why: "India's own current reading: national fertility is below the 2.1 replacement level.", read: "All-India at 1.9, rural about 2.1, urban just 1.5.", watch: "Below replacement is not shrinking yet: the large young generation still has children." },
-      { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "Fertility by state", size: "feature", window: "latest", beat: "geography", rankLabel: "Highest", bottomLabel: "Lowest",
+      { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "Fertility by state", size: "feature", window: "latest", beat: "geography", rankLabel: "Highest", bottomLabel: "Lowest", divergeAt: 2.1,
         why: "Fertility is not one number; it is a north-south map.", read: "Each state shaded by its fertility rate, from about 0.9 in some islands to 2.7 in Bihar.", watch: "The south and west are well below replacement; a band of northern states is still above it." },
       { indicator: "people.nfhs.tfr_state_ranked", chart: "tableBars", title: "Highest and lowest fertility states", size: "feature", beat: "ranking", unit: "births per woman", subtitle: "NFHS-6 (2023-24) · top 5 and bottom 5 of 33 surveyed states/UTs",
         why: "The map, sharpened into a league table.", read: "The five highest-fertility states set against the five lowest.", watch: "Even the highest, Bihar at 2.7, is far below India's past; the lowest sit deep under replacement." },

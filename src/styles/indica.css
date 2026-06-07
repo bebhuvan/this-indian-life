@@ -583,6 +583,10 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .choro-legend i{display:inline-block;width:18px;height:18px;margin-right:10px;vertical-align:-4px;border:1px solid var(--ghost)}
 .choro-scale{display:flex;flex-direction:column;gap:8px;font-family:var(--sans);font-size:.95rem;color:var(--mid);font-variant-numeric:lining-nums tabular-nums}
 .choro-bar{display:block;height:13px;border-radius:2px;border:1px solid var(--ghost)}
+.choro-barwrap{position:relative;padding-top:16px}
+.choro-tick{position:absolute;top:0;transform:translateX(-50%);text-align:center;pointer-events:none}
+.choro-tick em{font-style:normal;font-size:.66rem;font-weight:600;letter-spacing:.01em;color:var(--ink);white-space:nowrap;display:block;line-height:1}
+.choro-tick b{position:absolute;left:50%;top:13px;width:2px;height:19px;background:var(--ink);opacity:.65;transform:translateX(-50%)}
 .choro-ends{display:flex;justify-content:space-between}
 .choro-ends em{font-style:normal;color:var(--ink);font-weight:600}
 .choro-cap{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
