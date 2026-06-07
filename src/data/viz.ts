@@ -15,8 +15,9 @@ export type LineVisual = {
   subtitle: string;
   unit: string;
   source: VisualSource;
-  lines: Array<{ label: string; points: Point[] }>;
+  lines: Array<{ label: string; points: Point[]; color?: string; emphasis?: boolean; dash?: boolean }>;
   bands?: Array<{ year: number; label?: string }>;
+  refLine?: { value: number; label: string };
 };
 export type LinePanelsVisual = {
   kind: "linePanels";
@@ -1030,12 +1031,13 @@ function lineFor(artifact: Artifact): LineVisual | null {
 // Combine several single-indicator series into one multi-line chart — the
 // "composition over time" lens (e.g. the three age-group shares since 1960).
 function multiSeriesLine(
-  series: Array<{ indicator: string; label: string }>,
+  series: Array<{ indicator: string; label: string; color?: string; emphasis?: boolean; dash?: boolean }>,
   title: string,
   subtitle: string,
   unit: string,
   fromYear?: number,
-  bands?: Array<{ year: number; label?: string }>
+  bands?: Array<{ year: number; label?: string }>,
+  refLine?: { value: number; label: string }
 ): LineVisual | null {
   const clip = (points: LineVisual["lines"][number]["points"]) =>
     fromYear ? points.filter((p) => Number(String(p.date).slice(0, 4)) >= fromYear) : points;
@@ -1043,7 +1045,11 @@ function multiSeriesLine(
     .map((item) => {
       const artifact = artifactById(item.indicator);
       const line = artifact ? lineFor(artifact) : null;
-      return line && line.lines[0] ? { label: item.label, points: clip(line.lines[0].points) } : null;
+      // Carry optional per-series styling (colour / emphasis / dash) so a chart can
+      // spotlight one line against a muted field — opt-in; absent fields render as before.
+      return line && line.lines[0]
+        ? { label: item.label, points: clip(line.lines[0].points), ...(item.color ? { color: item.color } : {}), ...(item.emphasis ? { emphasis: true } : {}), ...(item.dash ? { dash: true } : {}) }
+        : null;
     })
     .filter((line): line is LineVisual["lines"][number] => Boolean(line) && line.points.length >= 2);
   if (lines.length < 2) return null;
@@ -1055,7 +1061,8 @@ function multiSeriesLine(
     unit,
     source: firstArtifact ? sourceFor(firstArtifact) : { sourceId: "worldbank", sourceIndicatorId: title },
     lines,
-    ...(bands?.length ? { bands } : {})
+    ...(bands?.length ? { bands } : {}),
+    ...(refLine ? { refLine } : {})
   };
 }
 
@@ -1967,7 +1974,8 @@ type PlanEntry = {
   limit?: number;
   subtitle?: string;
   seriesName?: string;
-  series?: Array<{ indicator: string; label: string }>;
+  series?: Array<{ indicator: string; label: string; color?: string; emphasis?: boolean; dash?: boolean }>;
+  refLine?: { value: number; label: string };
   panels?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   rows?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   columns?: Array<{ key: string; label: string }>;
@@ -2283,7 +2291,7 @@ function stripPairVisual(
 
 function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
   if (entry.chart === "multiLine") {
-    const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands);
+    const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands, entry.refLine);
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "sparkGrid") {

@@ -553,7 +553,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     const latest = line.points.at(-1);
     const latestX = latest ? xLast : 0;
     const latestY = latest ? y(latest.value) : 0;
-    return { ...line, d, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: colors[lineIndex % colors.length] };
+    return { ...line, d, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: line.color ?? colors[lineIndex % colors.length] };
   });
   const minGap = mobile ? 20 : isLead ? 34 : 24;
   const labelTop = pad.t + 14;
@@ -740,6 +740,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const g = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"));
           const gm = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"), undefined, true);
           const leadPoint = visual.lines[0]?.points.at(-1);
+          // Spotlight mode: if any line is flagged `emphasis`, the others render muted
+          // (thin + faded) so one line reads as the focus. Absent → default styling.
+          const lineEmph = (visual as LineVisual).lines.some((l) => l.emphasis);
+          const refLine = (visual as LineVisual).refLine;
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head">
@@ -772,13 +776,19 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 {g.axisTicks.map((tick) => (
                   <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor="middle">{tick.label}</text>
                 ))}
+                {refLine ? (
+                  <g>
+                    <line x1={g.pad.l} y1={g.y(refLine.value)} x2={g.width - g.pad.r} y2={g.y(refLine.value)} stroke="#b8b2a8" stroke-width="1.2" stroke-dasharray="5 4" />
+                    <text class="yaxt" x={g.width - g.pad.r} y={g.y(refLine.value) - 5} text-anchor="end" fill="#8a8597">{refLine.label}</text>
+                  </g>
+                ) : null}
                 {g.paths.map((path) => (
                   <>
                     {isLead && visual.lines.length === 1 ? <path d={path.areaD} fill="var(--c-tint)" /> : null}
-                    <path d={path.d} fill="none" stroke={path.color} stroke-width={isLead ? "5" : "3.5"} stroke-linecap="round" stroke-linejoin="round" />
+                    <path d={path.d} fill="none" stroke={path.color} stroke-width={lineEmph ? (path.emphasis ? "4.5" : "1.7") : (isLead ? "5" : "3.5")} opacity={lineEmph && !path.emphasis ? "0.5" : "1"} stroke-dasharray={path.dash ? "3 3" : undefined} stroke-linecap="round" stroke-linejoin="round" />
                     {path.latest && (
                       <g>
-                        <circle cx={path.latestX} cy={path.latestY} r={isLead ? "7" : "5"} fill="#fff" stroke={path.color} stroke-width={isLead ? "4" : "3"} />
+                        {(!lineEmph || path.emphasis) ? <circle cx={path.latestX} cy={path.latestY} r={isLead ? "7" : "5"} fill="#fff" stroke={path.color} stroke-width={isLead ? "4" : "3"} /> : null}
                         {isLead && visual.lines.length === 1 ? (
                           <>
                             <text class="end-v" x={path.latestX - 18} y={path.latestY - 16} text-anchor="end">{fmt(path.latest.value, visual.unit)}</text>
@@ -808,20 +818,26 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 {gm.axisTicks.map((tick) => (
                   <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick.label}</text>
                 ))}
+                {refLine ? (
+                  <g>
+                    <line x1={gm.pad.l} y1={gm.y(refLine.value)} x2={gm.width - gm.pad.r} y2={gm.y(refLine.value)} stroke="#b8b2a8" stroke-width="1" stroke-dasharray="5 4" />
+                    <text class="yaxt" x={gm.width - gm.pad.r} y={gm.y(refLine.value) - 4} text-anchor="end" fill="#8a8597">{refLine.label}</text>
+                  </g>
+                ) : null}
                 {gm.paths.map((path) => (
                   <>
                     {isLead && visual.lines.length === 1 ? <path d={path.areaD} fill="var(--c-tint)" /> : null}
-                    <path d={path.d} fill="none" stroke={path.color} stroke-width={isLead ? "3.4" : "2.6"} stroke-linecap="round" stroke-linejoin="round" />
+                    <path d={path.d} fill="none" stroke={path.color} stroke-width={lineEmph ? (path.emphasis ? "3.2" : "1.4") : (isLead ? "3.4" : "2.6")} opacity={lineEmph && !path.emphasis ? "0.5" : "1"} stroke-dasharray={path.dash ? "3 3" : undefined} stroke-linecap="round" stroke-linejoin="round" />
                     {path.latest && (
                       <g>
-                        <circle cx={path.latestX} cy={path.latestY} r={isLead ? "5" : "4"} fill="#fff" stroke={path.color} stroke-width={isLead ? "3" : "2.4"} />
+                        {(!lineEmph || path.emphasis) ? <circle cx={path.latestX} cy={path.latestY} r={isLead ? "5" : "4"} fill="#fff" stroke={path.color} stroke-width={isLead ? "3" : "2.4"} /> : null}
                         {isLead && visual.lines.length === 1 ? (
                           <text class="end-v" x={path.latestX - 12} y={path.latestY - 12} text-anchor="end">{fmt(path.latest.value, visual.unit)}</text>
                         ) : null}
                         {visual.lines.length > 1 ? (
                           <>
                             <line x1={path.latestX + 5} y1={path.latestY} x2={path.latestX + 13} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
-                            <text class="end-mini-v" x={path.latestX + 16} y={path.labelY} fill={path.color}>{path.endLabelText}</text>
+                            <text class="end-mini-v" x={path.latestX + 16} y={path.labelY} fill={path.color} font-weight={path.emphasis ? "700" : undefined}>{path.endLabelText}</text>
                           </>
                         ) : null}
                       </g>
@@ -831,7 +847,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               </svg>
               {visual.lines.length > 1 && (
                 <div class="viz-legend">
-                  {visual.lines.map((line, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{line.label}</span>)}
+                  {visual.lines.map((line, index) => <span><i style={`background:${line.color ?? colors[index % colors.length]}`}></i>{line.label}</span>)}
                 </div>
               )}
               <div class="chart-note">
