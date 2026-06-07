@@ -84,7 +84,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
 ---
 
 <Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
-  <div class="wrap">
+  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}`}>
     <Nav active={page.domain} locale={locale} />
 
     <header class="article-head">

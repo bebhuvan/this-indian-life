@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "gold.derived.return_decomposition",
+  "title": "What drives gold's rupee return",
+  "sourceId": "gold-derived",
+  "sourceIndicatorId": "gold.derived.return_decomposition",
+  "sourceUrl": "https://www.gold.org/goldhub/data/gold-prices",
+  "unit": "% per year / share",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "window",
+    "rs_gold_cagr_pct",
+    "usd_gold_cagr_pct",
+    "fx_cagr_pct",
+    "duty_wedge_cagr_pct",
+    "usd_share_pct",
+    "fx_share_pct",
+    "wedge_share_pct"
+  ],
+  "fetchedAt": "2026-06-06T16:28:42.985989+00:00",
+  "rows": [
+    {
+      "window": "2005-2026",
+      "rs_gold_cagr_pct": 16.0,
+      "usd_gold_cagr_pct": 12.0,
+      "fx_cagr_pct": 3.6,
+      "duty_wedge_cagr_pct": -0.0,
+      "usd_share_pct": 76,
+      "fx_share_pct": 24,
+      "wedge_share_pct": 0
+    },
+    {
+      "window": "2010-2026",
+      "rs_gold_cagr_pct": 14.1,
+      "usd_gold_cagr_pct": 8.9,
+      "fx_cagr_pct": 4.5,
+      "duty_wedge_cagr_pct": 0.3,
+      "usd_share_pct": 64,
+      "fx_share_pct": 33,
+      "wedge_share_pct": 2
+    },
+    {
+      "window": "2015-2026",
+      "rs_gold_cagr_pct": 17.3,
+      "usd_gold_cagr_pct": 13.7,
+      "fx_cagr_pct": 3.4,
+      "duty_wedge_cagr_pct": -0.3,
+      "usd_share_pct": 81,
+      "fx_share_pct": 21,
+      "wedge_share_pct": -2
+    }
+  ],
+  "metadata": {
+    "method": "Rs-gold return decomposed into global price (LBMA USD), currency (FRED USD-INR) and duty+premium wedge, multiplicatively (log shares).",
+    "note": "Global price is the majority driver (64-81%); currency is the minority (21-33%); duty is a one-time 2013 level step."
+  }
+}

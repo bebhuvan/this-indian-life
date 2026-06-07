@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "market.digital_gold_upi",
+  "title": "Digital gold bought via UPI (monthly value)",
+  "sourceId": "npci",
+  "sourceIndicatorId": "npci.upi.merchant_category.digital_gold",
+  "sourceUrl": "https://www.npci.org.in/what-we-do/upi/upi-ecosystem-statistics",
+  "unit": "INR crore per month",
+  "frequency": "monthly",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-07T03:48:17.814019+00:00",
+  "observations": [
+    {
+      "date": "2024-04-01",
+      "value": 550
+    },
+    {
+      "date": "2025-04-01",
+      "value": 978
+    },
+    {
+      "date": "2025-08-01",
+      "value": 1184
+    },
+    {
+      "date": "2025-09-01",
+      "value": 1410
+    },
+    {
+      "date": "2025-10-01",
+      "value": 2290
+    }
+  ],
+  "metadata": {
+    "method": "NPCI UPI Merchant Category Classification, 'Digital Gold' category, monthly transaction value. Compiled from NPCI monthly disclosures (via Dataful/press); selected verified waypoints, not every month.",
+    "note": "Volume rose ~377% (21M->100M transactions) Apr-2024 to Aug-2025; digital gold was promoted from 'All Other' to 'Medium Transacting' category in May 2025. A proper full monthly scrape of NPCI is a follow-up."
+  }
+}

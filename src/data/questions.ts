@@ -321,6 +321,12 @@ export function pullQuoteForQuestion(page: QuestionPage) {
       line: "In India, scale is the story. A small-looking change can still mean a city, a state, or a generation."
     };
   }
+  if (page.id === "q.econ.gold") {
+    return {
+      stat: "25,000t",
+      line: "India mines almost no gold, yet households hoard more of it than almost any nation on earth."
+    };
+  }
   if (page.id.startsWith("q.econ.")) {
     return {
       stat: top ? formatLockedNumber(top) : "The average",
@@ -396,7 +402,10 @@ function escapeHtml(value: string) {
 
 export function inlineMarkdownHtml(value: string) {
   return escapeHtml(value)
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
+    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, (_m, text, url) =>
+      url.startsWith("/")
+        ? `<a href="${url}">${text}</a>`
+        : `<a href="${url}" target="_blank" rel="noreferrer">${text}</a>`)
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/\*([^*]+)\*/g, "<em>$1</em>")
     .replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noreferrer">$1</a>');
