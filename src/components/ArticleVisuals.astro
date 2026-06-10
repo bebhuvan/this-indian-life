@@ -41,6 +41,7 @@ const {
 // Coral (domain ink) + near-black lead, then softened, harmonised secondaries so
 // multi-line charts read calm rather than rainbow-loud (riso-ink, bright-but-soft).
 const colors = ["var(--c)", "#0b0b0b", "#3f8378", "#cf9a3f", "#7e6ba6", "#b5765c", "#8c8780"];
+const WATERMARK_TEXT = "thisindianlife.today";
 const sourceNames: Record<string, string> = {
   worldbank: "World Bank",
   "un-population": "UN Population",
@@ -54,6 +55,7 @@ const sourceNames: Record<string, string> = {
   "un-comtrade": "UN Comtrade",
   owid: "Our World in Data",
   waqi: "WAQI",
+  iqair: "IQAir",
   "open-meteo": "Open-Meteo",
   "world-context": "World Bank + Our World in Data",
   trai: "TRAI",
@@ -69,12 +71,48 @@ const sourceNames: Record<string, string> = {
   era5: "Copernicus ERA5",
   noaa: "NOAA",
   "derived-imd-noaa": "IMD + NOAA",
-  "derived-imd-des-upag": "IMD + DES + UPAg"
+  "derived-imd-des-upag": "IMD + DES + UPAg",
+  dst: "DST / NSTMIS",
+  niti: "NITI Aayog",
+  oecd: "OECD",
+  wipo: "WIPO",
+  nsf: "NSF / Scopus",
+  isro: "ISRO / press reports",
+  openbudgets: "Open Budgets India",
+  anrf: "ANRF",
+  research: "Research literature"
 };
+
+function viewBoxSize(viewBox: string) {
+  const parts = viewBox.trim().split(/\s+/).map(Number);
+  return {
+    width: parts[2] && Number.isFinite(parts[2]) ? parts[2] : 740,
+    height: parts[3] && Number.isFinite(parts[3]) ? parts[3] : 820
+  };
+}
+
+function axisTextAnchor(x: number, width: number, pad: { l: number; r: number }) {
+  if (x <= pad.l + 1) return "start";
+  if (x >= width - pad.r - 1) return "end";
+  return "middle";
+}
+
+function shortAxisLabel(label: string) {
+  return label
+    .replace("Districts at high or very high heat risk", "More high-risk districts ->")
+    .replace("Households without AC/cooler protection proxy", "Less household cooling ->");
+}
+
+function choroWrapClass(visual: ChoroplethVisual) {
+  const classes = ["choro-wrap"];
+  if (/warming is not spread evenly/i.test(visual.title)) classes.push("choro-wrap--zoom-mobile");
+  return classes.join(" ");
+}
 
 function fmt(value: number, unit = "") {
   const abs = Math.abs(value);
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
+  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
     if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh cr`;
     if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
@@ -103,6 +141,7 @@ function fmt(value: number, unit = "") {
 function compactBarLabel(value: number, unit = "") {
   const abs = Math.abs(value);
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
+  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
     if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}L cr`;
     if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
@@ -123,6 +162,7 @@ function endLabelInScale(value: number, maxAbs: number, unit = "", compact = fal
   const n = (v: number, divisor: number) =>
     (v / divisor).toLocaleString("en-IN", { maximumFractionDigits: 1 });
   if (/multiple/i.test(unit)) return `${n(value, 1)}x`;
+  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 100 ? 0 : 1 })}%`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
     if (maxAbs >= 100_000) return `₹${n(value, 100_000)} ${compact ? "L cr" : "lakh cr"}`;
     if (maxAbs >= 1_000) return `₹${n(value, 1_000)}k cr`;
@@ -243,6 +283,7 @@ function multiple(start: number, end: number) {
 }
 
 function formatAxisLabel(date: string) {
+  if (/^\d{4}-\d{2}$/.test(String(date))) return String(date);
   const match = String(date).match(/^(\d{4})(?:-(\d{2})-\d{2})?/);
   if (!match) return date;
   return match[1];
@@ -305,7 +346,7 @@ function sourceLabel(source: VisualSpec["source"]) {
   if (source.sourceId === "india-energy-derived") {
     if (id === "ppac-and-tradestat.fuel-import-spend.2025-2026") return "PPAC + TradeStat / DGCI&S · Fuel import spend · 2025-26";
   }
-  return `${sourceName(source.sourceId)} · ${id}`;
+  return id ? `${sourceName(source.sourceId)} · ${id}` : sourceName(source.sourceId);
 }
 
 function cleanSubtitle(value: string, sourceId: string) {
@@ -475,12 +516,12 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // box that renders close to 1:1: a taller chart with readable labels (see .viz-m CSS).
   const isHero = (visual as { size?: string }).size === "hero";
   const width = mobile ? 384 : (twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000));
-  const height = mobile ? (isHero ? 392 : 332) : (isHero ? 560 : isLead ? 500 : 360);
+  const height = mobile ? (isHero ? 406 : 346) : (isHero ? 560 : isLead ? 500 : 360);
   const baseLeft = mobile ? 50 : isLead ? 86 : 58;
   const yFontSize = mobile ? 13 : isLead ? 21 : 17;
   const padRTB = mobile
-    ? { r: visual.lines.length > 1 ? 64 : 24, t: 20, b: 42 }
-    : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 58 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 44 };
+    ? { r: visual.lines.length > 1 ? 64 : 24, t: 20, b: 70 }
+    : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 76 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 78 };
   // Multi-line charts print each line's latest value to the RIGHT of its end point
   // (.end-mini-v, left-anchored at latestX + offset). Desktop has room for the full
   // value+unit; the narrow mobile box shows the bare number (axis carries the unit) so
@@ -502,7 +543,8 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   }
   const all = visual.lines.flatMap((line) => line.points);
   const values = all.map((point) => point.value);
-  const useLogScale = visual.title.toLowerCase().includes("gdp per person over time");
+  const useLogScale = visual.title.toLowerCase().includes("gdp per person over time")
+    || visual.title.toLowerCase().includes("the same starting line");
   const positiveValues = values.filter((value) => value > 0);
   const rawMin = Math.min(...values);
   const rawMax = Math.max(...values);
@@ -577,21 +619,35 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const tickCount = mobile ? 4 : isLead ? 5 : 4;
   let axisTicks: Array<{ xPos: number; label: string }>;
   if (dateMode) {
+    const explicitYears = (visual.xTicks || [])
+      .filter((year) => Number.isFinite(year) && year >= minTime && year <= maxTime)
+      .filter((year, index, arr) => arr.indexOf(year) === index);
+    if (explicitYears.length) {
+      const years = mobile && explicitYears.length > 5
+        ? [
+            explicitYears[0],
+            ...explicitYears.slice(1, -1).filter((year) => year % 10 === 0 && explicitYears.at(-1)! - year > 6),
+            explicitYears.at(-1)!
+          ].filter((year, index, arr) => arr.indexOf(year) === index)
+        : explicitYears;
+      axisTicks = years.map((time) => ({ xPos: xByTime(time), label: String(Math.round(time)) }));
+    } else {
     // Nice round-year ticks that actually fall INSIDE the data range. niceScale
     // rounds the domain outward, so filtering its ticks to [min,max] can leave
     // just one (a 75-year span snapping to a 50-year step shows only "2000").
-    const span = Math.max(1e-6, maxTime - minTime);
-    const niceStep = (rough: number) => {
-      const mag = 10 ** Math.floor(Math.log10(rough));
-      const n = rough / mag;
-      return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * mag;
-    };
-    const countIn = (s: number) => { let c = 0; for (let t = Math.ceil(minTime / s) * s; t <= maxTime + 1e-9; t += s) c += 1; return c; };
-    let step = niceStep(span / tickCount);
-    while (step > 1 && countIn(step) < 3) step = niceStep(step / 2 - 1e-9);
-    const years: number[] = [];
-    for (let t = Math.ceil(minTime / step) * step; t <= maxTime + 1e-9; t += step) years.push(t);
-    axisTicks = years.map((time) => ({ xPos: xByTime(time), label: String(Math.round(time)) }));
+      const span = Math.max(1e-6, maxTime - minTime);
+      const niceStep = (rough: number) => {
+        const mag = 10 ** Math.floor(Math.log10(rough));
+        const n = rough / mag;
+        return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * mag;
+      };
+      const countIn = (s: number) => { let c = 0; for (let t = Math.ceil(minTime / s) * s; t <= maxTime + 1e-9; t += s) c += 1; return c; };
+      let step = niceStep(span / tickCount);
+      while (step > 1 && countIn(step) < 3) step = niceStep(step / 2 - 1e-9);
+      const years: number[] = [];
+      for (let t = Math.ceil(minTime / step) * step; t <= maxTime + 1e-9; t += step) years.push(t);
+      axisTicks = years.map((time) => ({ xPos: xByTime(time), label: String(Math.round(time)) }));
+    }
   } else {
     const ap = visual.lines[0]?.points || [];
     axisTicks = Array.from({ length: tickCount }, (_, i) => Math.round((i / (tickCount - 1)) * Math.max(0, ap.length - 1)))
@@ -641,7 +697,7 @@ function scatterGeometry(visual: ScatterVisual, mobile = false) {
   // viz-d/viz-m exactly like the line + grouped-bar charts).
   const width = mobile ? 470 : 1160;
   const height = mobile ? 500 : 520;
-  const pad = mobile ? { l: 48, r: 54, t: 30, b: 74 } : { l: 94, r: 120, t: 44, b: 86 };
+  const pad = mobile ? { l: 62, r: 54, t: 50, b: 74 } : { l: 94, r: 120, t: 44, b: 86 };
   const plotW = width - pad.l - pad.r;
   const plotH = height - pad.t - pad.b;
   const xSpan = visual.xMax - visual.xMin || 1;
@@ -740,10 +796,21 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const g = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"));
           const gm = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"), undefined, true);
           const leadPoint = visual.lines[0]?.points.at(-1);
+          const showLeadPoint = leadPoint && /^-?\d{3,4}/.test(String(leadPoint.date));
+          const leadPointLabel = leadPoint
+            ? [visual.lines.length > 1 ? visual.lines[0]?.label : "", leadPoint.date, "latest point"].filter(Boolean).join(" · ")
+            : "";
           // Spotlight mode: if any line is flagged `emphasis`, the others render muted
           // (thin + faded) so one line reads as the focus. Absent → default styling.
           const lineEmph = (visual as LineVisual).lines.some((l) => l.emphasis);
           const refLine = (visual as LineVisual).refLine;
+          const refLabelY = (geom: typeof g) => {
+            const nearLine = geom.y(refLine?.value ?? 0) - 7;
+            const topSlot = geom.pad.t + 18;
+            return visual.lines.length === 1
+              ? Math.max(geom.pad.t + 16, Math.min(geom.height - geom.pad.b - 12, nearLine))
+              : topSlot;
+          };
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head">
@@ -755,10 +822,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              {leadPoint ? (
+              {showLeadPoint ? (
                 <div class={isLead ? "viz-lead-number" : "viz-line-number"}>
                   <span>{fmt(leadPoint.value, visual.unit)}</span>
-                  <p>{leadPoint.date} · latest point</p>
+                  <p>{leadPointLabel}</p>
                 </div>
               ) : null}
               <svg class={isLead ? "viz-svg viz-svg-lead viz-d" : "viz-svg viz-d"} viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
@@ -774,12 +841,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   </g>
                 ))}
                 {g.axisTicks.map((tick) => (
-                  <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor="middle">{tick.label}</text>
+                  <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor={axisTextAnchor(tick.xPos, g.width, g.pad)}>{tick.label}</text>
                 ))}
                 {refLine ? (
                   <g>
                     <line x1={g.pad.l} y1={g.y(refLine.value)} x2={g.width - g.pad.r} y2={g.y(refLine.value)} stroke="#b8b2a8" stroke-width="1.2" stroke-dasharray="5 4" />
-                    <text class="yaxt" x={g.width - g.pad.r} y={g.y(refLine.value) - 5} text-anchor="end" fill="#8a8597">{refLine.label}</text>
+                    <text class="ref-label" x={g.pad.l + 12} y={refLabelY(g)} text-anchor="start">{refLine.label}</text>
                   </g>
                 ) : null}
                 {g.paths.map((path) => (
@@ -789,21 +856,22 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     {path.latest && (
                       <g>
                         {(!lineEmph || path.emphasis) ? <circle cx={path.latestX} cy={path.latestY} r={isLead ? "7" : "5"} fill="#fff" stroke={path.color} stroke-width={isLead ? "4" : "3"} /> : null}
-                        {isLead && visual.lines.length === 1 ? (
-                          <>
-                            <text class="end-v" x={path.latestX - 18} y={path.latestY - 16} text-anchor="end">{fmt(path.latest.value, visual.unit)}</text>
-                          </>
-                        ) : null}
+	                        {/*
+	                          Single-line hero charts already show the latest value as the
+	                          large lead number above the plot. Repeating it beside the
+	                          endpoint crowds the marker and looks like a stray axis tick.
+	                        */}
                         {visual.lines.length > 1 ? (
                           <>
                             <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.2" opacity=".4" />
-                            <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{path.endLabelText}</text>
+                            <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color} font-weight={path.emphasis ? "700" : undefined}>{path.endLabelText}</text>
                           </>
                         ) : null}
                       </g>
                     )}
                   </>
                 ))}
+                <text class="chart-watermark" x={g.width - 16} y={g.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               <svg class={isLead ? "viz-svg viz-svg-lead viz-m" : "viz-svg viz-m"} viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={visual.title}>
                 {lineBandRects(visual as LineVisual, gm).map((b) => (
@@ -816,12 +884,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   </g>
                 ))}
                 {gm.axisTicks.map((tick) => (
-                  <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick.label}</text>
+                  <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor={axisTextAnchor(tick.xPos, gm.width, gm.pad)}>{tick.label}</text>
                 ))}
                 {refLine ? (
                   <g>
                     <line x1={gm.pad.l} y1={gm.y(refLine.value)} x2={gm.width - gm.pad.r} y2={gm.y(refLine.value)} stroke="#b8b2a8" stroke-width="1" stroke-dasharray="5 4" />
-                    <text class="yaxt" x={gm.width - gm.pad.r} y={gm.y(refLine.value) - 4} text-anchor="end" fill="#8a8597">{refLine.label}</text>
+                    <text class="ref-label" x={gm.pad.l + 9} y={visual.lines.length === 1 ? Math.max(gm.pad.t + 14, Math.min(gm.height - gm.pad.b - 10, gm.y(refLine.value) - 6)) : gm.pad.t + 16} text-anchor="start">{refLine.label}</text>
                   </g>
                 ) : null}
                 {gm.paths.map((path) => (
@@ -831,9 +899,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     {path.latest && (
                       <g>
                         {(!lineEmph || path.emphasis) ? <circle cx={path.latestX} cy={path.latestY} r={isLead ? "5" : "4"} fill="#fff" stroke={path.color} stroke-width={isLead ? "3" : "2.4"} /> : null}
-                        {isLead && visual.lines.length === 1 ? (
-                          <text class="end-v" x={path.latestX - 12} y={path.latestY - 12} text-anchor="end">{fmt(path.latest.value, visual.unit)}</text>
-                        ) : null}
+	                        {/*
+	                          See desktop note above: the lead number carries the endpoint
+	                          value, so keep the mobile marker clean too.
+	                        */}
                         {visual.lines.length > 1 ? (
                           <>
                             <line x1={path.latestX + 5} y1={path.latestY} x2={path.latestX + 13} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
@@ -844,6 +913,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     )}
                   </>
                 ))}
+                <text class="chart-watermark" x={gm.width - 12} y={gm.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               {visual.lines.length > 1 && (
                 <div class="viz-legend">
@@ -901,7 +971,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                           </g>
                         ))}
                         {g.axisTicks.map((tick) => (
-                          <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor="middle">{tick.label}</text>
+                          <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor={axisTextAnchor(tick.xPos, g.width, g.pad)}>{tick.label}</text>
                         ))}
                         {g.paths.map((path) => (
                           <>
@@ -915,6 +985,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                             ) : null}
                           </>
                         ))}
+                        <text class="chart-watermark" x={g.width - 14} y={g.height - 7} text-anchor="end">{WATERMARK_TEXT}</text>
                       </svg>
                       <svg class="viz-svg viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
                         {gm.ticks.map((tick) => (
@@ -924,7 +995,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                           </g>
                         ))}
                         {gm.axisTicks.map((tick) => (
-                          <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick.label}</text>
+                          <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor={axisTextAnchor(tick.xPos, gm.width, gm.pad)}>{tick.label}</text>
                         ))}
                         {gm.paths.map((path) => (
                           <>
@@ -938,6 +1009,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                             ) : null}
                           </>
                         ))}
+                        <text class="chart-watermark" x={gm.width - 10} y={gm.height - 7} text-anchor="end">{WATERMARK_TEXT}</text>
                       </svg>
                       <div class="viz-legend">
                         {panel.lines.map((line, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{line.label}</span>)}
@@ -976,6 +1048,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               </div>
               <svg class="viz-svg scatter-plot viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={scatter.title}>
                 <rect x={g.x(70)} y={g.pad.t} width={g.width - g.pad.r - g.x(70)} height={g.y(80) - g.pad.t} fill="rgba(211,80,58,0.08)" />
+                <text class="scatter-zone" x={g.x(72)} y={g.y(96)}>Hardest to endure</text>
+                <text class="scatter-zone scatter-zone-muted" x={g.x(4)} y={g.y(96)}>Low heat risk, low cooling</text>
                 {g.ticks.map((tick) => (
                   <g>
                     <line x1={g.x(tick)} y1={g.pad.t} x2={g.x(tick)} y2={g.height - g.pad.b} stroke="#ededed" />
@@ -1008,9 +1082,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     </g>
                   );
                 })}
-                <text class="axis-title" x={(g.pad.l + g.width - g.pad.r) / 2} y={g.height - 20} text-anchor="middle">{scatter.xLabel}</text>
-                <text class="axis-title" transform={`translate(24 ${(g.pad.t + g.height - g.pad.b) / 2}) rotate(-90)`} text-anchor="middle">{scatter.yLabel}</text>
-                <text class="scatter-callout" x={g.x(72)} y={g.y(80) - 12}>High risk + little cooling</text>
+                <text class="axis-title" x={(g.pad.l + g.width - g.pad.r) / 2} y={g.height - 20} text-anchor="middle">More districts in high/very high heat risk -></text>
+                <text class="axis-title" transform={`translate(24 ${(g.pad.t + g.height - g.pad.b) / 2}) rotate(-90)`} text-anchor="middle">More homes without AC or cooler -></text>
+                <text class="scatter-callout" x={g.x(72)} y={g.y(80) - 12}>High heat + little cooling</text>
+                <text class="chart-watermark" x={g.width - 16} y={g.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               <svg class="viz-svg scatter-plot viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={scatter.title}>
                 <rect x={gm.x(70)} y={gm.pad.t} width={gm.width - gm.pad.r - gm.x(70)} height={gm.y(80) - gm.pad.t} fill="rgba(211,80,58,0.08)" />
@@ -1046,12 +1121,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     </g>
                   );
                 })}
-                <text class="axis-title" x={(gm.pad.l + gm.width - gm.pad.r) / 2} y={gm.height - 16} text-anchor="middle">{scatter.xLabel}</text>
-                <text class="axis-title" transform={`translate(18 ${(gm.pad.t + gm.height - gm.pad.b) / 2}) rotate(-90)`} text-anchor="middle">{scatter.yLabel}</text>
-                <text class="scatter-callout" x={gm.x(70) + 4} y={gm.y(80) - 8}>High risk + little cooling</text>
+                <text class="axis-title" x={(gm.pad.l + gm.width - gm.pad.r) / 2} y={gm.height - 16} text-anchor="middle">{shortAxisLabel(scatter.xLabel)}</text>
+                <text class="axis-title" x={gm.pad.l} y={gm.pad.t - 10} text-anchor="start">{shortAxisLabel(scatter.yLabel)}</text>
+                <text class="chart-watermark" x={gm.width - 12} y={gm.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               <div class="viz-legend">
-                <span><i style="background:rgba(211,80,58,0.72)"></i>High-risk quadrant</span>
+                <span><i style="background:rgba(211,80,58,0.72)"></i>High heat risk + little cooling</span>
                 <span><i style="background:rgba(63,131,120,0.62)"></i>Other states</span>
                 {scatter.sizeLabel ? <span>{scatter.sizeLabel}</span> : null}
               </div>
@@ -1198,7 +1273,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     const showPct = pct >= 7;
                     const showLabel = pct >= 11;
                     return (
-                    <div style={`width:${pct}%;background:${colors[index % colors.length]}`}>
+                    <div class={pct < 13 ? "ss-narrow" : undefined} style={`width:${pct}%;background:${colors[index % colors.length]}`}>
                       {showPct ? (
                         <span class="ss-val">
                           <b>{Math.round(pct)}%</b>
@@ -1326,6 +1401,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     </g>
                   );
                 })}
+                <text class="chart-watermark" x={g.width - 16} y={g.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               <svg class="viz-svg grouped-bars viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={grouped.title}>
                 {gm.ticks.map((tick) => (
@@ -1354,6 +1430,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     </g>
                   );
                 })}
+                <text class="chart-watermark" x={gm.width - 12} y={gm.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               <div class="viz-legend">
                 {grouped.series.map((name, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{name}</span>)}
@@ -1528,6 +1605,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
                         <polygon points={sparkArea(c.points)} fill={col} fill-opacity="0.14" stroke="none" />
                         <polyline points={sparkPts(c.points)} fill="none" stroke={col} stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+                        <text class="chart-watermark" x="98" y="34" text-anchor="end">{WATERMARK_TEXT}</text>
                       </svg>
                       <div class="spark-axis"><span>{startYear}</span><span>{endYear}</span></div>
                     </div>
@@ -1629,6 +1707,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
 
         if (visual.kind === "scenarioMaps") {
           const sm = visual as ScenarioMapsVisual;
+          const smBox = viewBoxSize(sm.viewBox);
           const smGradient = `linear-gradient(90deg, ${choroColor(sm.min, sm.min, sm.max)}, ${choroColor((sm.min + sm.max) / 2, sm.min, sm.max)}, ${choroColor(sm.max, sm.min, sm.max)})`;
           const usuffix = /%/.test(sm.unit) ? "%" : /°C|degree/i.test(sm.unit) ? "°C" : "";
           return (
@@ -1648,6 +1727,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                           <title>{r.name}: {r.value === null || r.value === undefined ? "no data" : `${fmt(r.value, sm.unit)}${usuffix}`}</title>
                         </path>
                       ))}
+                      <text class="chart-watermark" x={smBox.width - 12} y={smBox.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
                     </svg>
                   </div>
                 ))}
@@ -1694,13 +1774,13 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const lazyMap = !import.meta.env.DEV && (visualIndex > 0 || !leadFirst);
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{cho.title}</h2><p>{cleanSubtitle(cho.subtitle, source.sourceId)}</p></div><span>{cho.unit}</span></div>
+              <div class="viz-head"><div><h2 class="serif">{cho.title}</h2><p>{cleanSubtitle(cho.subtitle, source.sourceId)}</p></div><span class="choro-unit">{cho.unit}</span></div>
               <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`} data-svg-url={svgUrl}>
                 <button type="button" data-viz-action="svg">SVG</button>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <div class="choro-wrap">
+              <div class={choroWrapClass(cho)}>
                 {lazyMap ? (
                   <>
                     <div class="lazy-svg-frame choro-map-frame" data-lazy-svg={svgUrl} aria-label={cho.title} style={`aspect-ratio:${viewBoxAspectRatio(cho.viewBox)}`}></div>
