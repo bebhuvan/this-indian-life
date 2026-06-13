@@ -719,6 +719,155 @@ export const v1Questions = [
     ]
   },
   {
+    id: "q.econ.motorisation",
+    slug: "seven-times-more-vehicles-still-a-two-wheeler-country",
+    question: "How did India become a motorised country?",
+    priority: "core",
+    // Built Jun 2026. Sources: VAHAN registration dashboard tables (2003-Jun 2026),
+    // MoSPI NAS GDP/per-capita GDP, MoSPI CPI fuel-item indexes, SIAM public
+    // domestic-sales trend and FY 2025-26 press release, IndiaDataHub/RBI vehicle
+    // loan stock, World Bank population, and Ember electricity data.
+    indicators: ["auto.vahan.registrations.total_fy"],
+    core: [
+      "auto.vahan.registrations.total_monthly",
+      "auto.vahan.registrations.total_fy",
+      "auto.vahan.registrations.index_fy_2004_100",
+      "auto.vahan.registrations.growth_fy",
+      "auto.vahan.registrations.per_1000_people",
+      "auto.vahan.registrations.seasonality_recent",
+      "auto.vahan.economy.nominal_gdp_index_fy_2004_100",
+      "auto.vahan.economy.real_gdp_index_fy_2004_100",
+      "auto.vahan.economy.real_pc_gdp_index_fy_2004_100",
+      "auto.vahan.economy.real_gdp_growth_fy",
+      "auto.vahan.economy.real_pc_gdp_growth_fy",
+      "auto.vahan.economy.correlation_summary",
+      "auto.vahan.vehicle.two_wheelers.share_fy",
+      "auto.vahan.vehicle.cars_cabs.share_fy",
+      "auto.vahan.vehicle.three_wheelers.share_fy",
+      "auto.vahan.vehicle.tractors.share_fy",
+      "auto.vahan.vehicle.goods.share_fy",
+      "auto.vahan.vehicle.buses.share_fy",
+      "auto.vahan.fuel.petrol_all.share_fy",
+      "auto.vahan.fuel.diesel_all.share_fy",
+      "auto.vahan.fuel.ev_battery.share_fy",
+      "auto.vahan.fuel.cng_all.share_fy",
+      "auto.vahan.ev_battery.registrations_fy",
+      "auto.vahan.state.registration_gain_2003_2025",
+      "auto.vahan.state.registrations_latest_2025",
+      "auto.fuel_price.petrol_cpi_index",
+      "auto.fuel_price.diesel_cpi_index",
+      "auto.transport_cpi.combined_transport",
+      "auto.transport_cpi.rural_transport",
+      "auto.transport_cpi.urban_transport",
+      "auto.transport_cpi.combined_transport_inflation",
+      "auto.transport_cpi.rural_transport_inflation",
+      "auto.transport_cpi.urban_transport_inflation",
+      "auto.vahan.transport_cpi.correlation_summary",
+      "auto.credit.vehicle_loans_index_2019_100",
+      "auto.vahan.registrations.index_2019_100_monthly",
+      "auto.credit.vehicle_loans_yoy_monthly",
+      "auto.vahan.registrations.yoy_credit_window_monthly",
+      "auto.siam.domestic_sales.mix_fy_2026",
+      "auto.ember.grid.renewables_share",
+      "auto.ember.grid.wind_solar_share",
+      "auto.ember.grid.carbon_intensity"
+    ],
+    context: [
+      "econ.nas.gdp_real",
+      "econ.nas.gdp_nominal",
+      "econ.nas.per_capita_gdp_real",
+      "econ.nas.per_capita_gdp_nominal",
+      "prices.cpi.combined.transport_communication.index",
+      "energy.ember.demand"
+    ],
+    visualPlan: [
+      { indicator: "auto.vahan.registrations.total_monthly", chart: "line", title: "The motorisation curve starts in 2003", size: "hero", window: "full", beat: "scale",
+        why: "The first answer is scale: registrations rose from a few lakh a month to multi-million festival-season months.", read: "Monthly VAHAN registrations from January 2003 to June 2026, all states and vehicle classes combined.", watch: "The 2026 tail is partial through June 13, 2026, so do not read the last point as a full-month or full-year slowdown." },
+      { indicator: "auto.vahan.registrations.total_fy", chart: "line", title: "Seven times more new vehicles a year", size: "feature", window: "full", beat: "fiscal-scale",
+        why: "Fiscal years remove the monthly noise and line up with GDP and SIAM.", read: "VAHAN registrations rose from about 4.4 million in FY 2003-04 to about 30.8 million in FY 2025-26.", watch: "VAHAN is registrations, not production or wholesale sales. It records vehicles entering the road fleet, with dashboard coverage and classification caveats." },
+      { chart: "multiLine", title: "Registrations outran real income, but not nominal India", size: "feature", beat: "income-link", unit: "index, FY 2003-04 = 100",
+        series: [
+          { indicator: "auto.vahan.registrations.index_fy_2004_100", label: "Registrations" },
+          { indicator: "auto.vahan.economy.nominal_gdp_index_fy_2004_100", label: "Nominal GDP" },
+          { indicator: "auto.vahan.economy.real_gdp_index_fy_2004_100", label: "Real GDP" },
+          { indicator: "auto.vahan.economy.real_pc_gdp_index_fy_2004_100", label: "Real GDP/person" }
+        ],
+        why: "This is the careful GDP test: rising income explains the long climb, but the vehicle line has its own cycle.", read: "All series start at 100 in FY 2003-04. By FY 2025-26, VAHAN is about seven times its starting level, real GDP about four times, and real per-capita GDP about three times.", watch: "Nominal GDP includes inflation; real GDP removes it. Use the nominal line for spending capacity in rupees, the real lines for volume growth." },
+      { chart: "multiLine", title: "The year-to-year link is weaker than the level chart", size: "small", beat: "growth-link", unit: "% year-on-year",
+        series: [
+          { indicator: "auto.vahan.registrations.growth_fy", label: "Registrations" },
+          { indicator: "auto.vahan.economy.real_gdp_growth_fy", label: "Real GDP" },
+          { indicator: "auto.vahan.economy.real_pc_gdp_growth_fy", label: "Real GDP/person" }
+        ],
+        why: "A rich-country story would be too simple. Vehicle buying is also credit, prices, supply, policy, and sentiment.", read: "Fiscal-year growth rates move together in big shocks, especially Covid, but not cleanly every year.", watch: "A correlation is not a cause. The Covid collapse and rebound mechanically dominate growth charts unless called out." },
+      { indicator: "auto.vahan.economy.correlation_summary", chart: "tableBars", title: "Correlation is high in levels, modest in growth", size: "small", beat: "correlation", unit: "correlation",
+        why: "This directly answers the GDP question without overclaiming.", read: "Levels correlate strongly because both series trend upward over two decades; growth correlations are lower once Covid years are excluded.", watch: "Level correlations can flatter any two rising series. The growth rows are the more honest test of same-year movement." },
+      { indicator: "auto.vahan.registrations.per_1000_people", chart: "line", title: "Motorisation rose even after population is counted", size: "small", window: "full", beat: "per-capita",
+        why: "India did not merely add vehicles because it added people.", read: "New registrations per 1,000 people rose from about 3.8 in 2003 to about 18.8 in 2024.", watch: "This is new registrations per person, not vehicles owned per person. Scrappage and second-hand transfers are outside the measure." },
+      { chart: "multiLine", title: "Still a two-wheeler country", size: "hero", beat: "vehicle-mix", unit: "% of registrations",
+        series: [
+          { indicator: "auto.vahan.vehicle.two_wheelers.share_fy", label: "Two-wheelers" },
+          { indicator: "auto.vahan.vehicle.cars_cabs.share_fy", label: "Cars & cabs" },
+          { indicator: "auto.vahan.vehicle.three_wheelers.share_fy", label: "Three-wheelers" },
+          { indicator: "auto.vahan.vehicle.tractors.share_fy", label: "Tractors" },
+          { indicator: "auto.vahan.vehicle.goods.share_fy", label: "Goods" },
+          { indicator: "auto.vahan.vehicle.buses.share_fy", label: "Buses" }
+        ],
+        why: "The composition is the punchline: the road filled up, but mostly on two wheels.", read: "Two-wheelers remain around seven in ten registrations, cars and cabs are roughly one-sixth, while three-wheelers rose after the e-rickshaw wave.", watch: "These are registration classes grouped for readability. They do not measure kilometres travelled, seats, emissions, or household ownership." },
+      { chart: "multiLine", title: "Petrol still dominates, diesel fades, EVs arrive", size: "feature", beat: "fuel-mix", unit: "% of registrations",
+        series: [
+          { indicator: "auto.vahan.fuel.petrol_all.share_fy", label: "Petrol" },
+          { indicator: "auto.vahan.fuel.diesel_all.share_fy", label: "Diesel" },
+          { indicator: "auto.vahan.fuel.ev_battery.share_fy", label: "Battery EVs" },
+          { indicator: "auto.vahan.fuel.cng_all.share_fy", label: "CNG" }
+        ],
+        why: "The fuel story is not an EV takeover yet. It is petrol dominance with a visible EV wedge and a diesel retreat.", read: "Battery EVs rose from near zero to about 8.25% of FY 2025-26 registrations; diesel fell to about a tenth.", watch: "EV share by registrations is not the same as EV share of the fleet or vehicle-kilometres. Two- and three-wheelers can move the share quickly." },
+      { indicator: "auto.vahan.ev_battery.registrations_fy", chart: "line", title: "EVs went from footnote to millions", size: "small", window: "full", beat: "ev-scale",
+        why: "A share can hide the absolute jump.", read: "Battery EV registrations crossed the million mark annually after 2022 and kept climbing into FY 2025-26.", watch: "VAHAN fuel categories changed over time; ELECTRIC(BOV) plus PURE EV is the best consistent read, but it is still a registration classification." },
+      { indicator: "auto.vahan.state.registration_gain_2003_2025", chart: "tableBars", title: "Where the extra vehicles came from", size: "feature", beat: "state-geography", unit: "additional registrations",
+        why: "Motorisation is national, but the additions are not evenly spread.", read: "Uttar Pradesh added the most annual registrations between 2003 and 2025; Maharashtra, Gujarat and Tamil Nadu also added large absolute markets.", watch: "This ranks absolute additions, so large states naturally dominate. It is not a per-capita or per-household comparison." },
+      { indicator: "auto.vahan.registrations.seasonality_recent", chart: "monthDecadeLines", title: "The festival spike is real", size: "small", beat: "seasonality", unit: "registrations", decades: ["2019", "2020", "2023", "2024", "2025"],
+        why: "Monthly data adds a behavioural rhythm that annual totals hide.", read: "Recent complete years show October-November spikes, with October 2025 the largest month in the series.", watch: "Festival timing moves between months. 2020 is included as the disruption year, not as a normal seasonal template." },
+      { chart: "multiLine", title: "Transport inflation hit rural India harder", size: "small", beat: "transport-cpi", unit: "index, 2012 = 100",
+        series: [
+          { indicator: "auto.transport_cpi.combined_transport", label: "Combined" },
+          { indicator: "auto.transport_cpi.rural_transport", label: "Rural" },
+          { indicator: "auto.transport_cpi.urban_transport", label: "Urban" }
+        ],
+        why: "A vehicle is not only a purchase. It is a stream of fuel, repair, fare and communication costs.", read: "MoSPI's transport-and-communication CPI rose to 172 for India overall by December 2025, with the rural index higher than the urban index.", watch: "This is a broad CPI subgroup, not only private vehicle running cost. It includes transport services and communication items, so read it as household mobility-cost pressure." },
+      { chart: "multiLine", title: "Petrol and diesel are only one part of that cost", size: "small", beat: "fuel-prices", unit: "index, 2012 = 100",
+        series: [
+          { indicator: "auto.fuel_price.petrol_cpi_index", label: "Petrol" },
+          { indicator: "auto.fuel_price.diesel_cpi_index", label: "Diesel" }
+        ],
+        why: "The cost of using a vehicle matters after the purchase.", read: "MoSPI CPI item indexes show diesel rising faster than petrol since the 2012 base.", watch: "These are consumer price indexes, not pump prices in rupees per litre, and state taxes differ." },
+      { indicator: "auto.vahan.transport_cpi.correlation_summary", chart: "tableBars", title: "Transport CPI is not a simple demand brake", size: "small", beat: "transport-correlation", unit: "correlation",
+        why: "This checks whether the price story actually lines up with registration growth.", read: "Monthly correlations between registration growth and transport or fuel inflation are small, and mostly positive, not strongly negative.", watch: "This is not a causal model. It says expansion years often had both rising registrations and rising mobility prices; it cannot isolate affordability, credit, supply or policy." },
+      { chart: "multiLine", title: "Credit helped keep the engine turning", size: "small", beat: "credit", unit: "index, Jan 2019 = 100",
+        series: [
+          { indicator: "auto.credit.vehicle_loans_index_2019_100", label: "Vehicle-loan stock" },
+          { indicator: "auto.vahan.registrations.index_2019_100_monthly", label: "Registrations" }
+        ],
+        why: "Vehicle buying is partly a credit cycle, not just an income cycle.", read: "Outstanding vehicle loans more than doubled after 2019, while monthly registrations recovered and then set new highs.", watch: "Loan stock is not new loan disbursement. It accumulates old loans and depends on repayments, tenure and interest rates." },
+      { chart: "multiLine", title: "Credit growth and registrations do not move one-for-one", size: "small", beat: "credit-growth", unit: "% year-on-year",
+        series: [
+          { indicator: "auto.credit.vehicle_loans_yoy_monthly", label: "Vehicle-loan stock growth" },
+          { indicator: "auto.vahan.registrations.yoy_credit_window_monthly", label: "Registration growth" }
+        ],
+        why: "The growth-rate comparison is the sharper credit test: it asks whether credit momentum lines up with registration momentum.", read: "Loan-stock growth is steadier than registration growth. Registrations swing hard around Covid and festivals, while outstanding credit moves more slowly.", watch: "Loan-stock growth is not disbursement growth. It reflects new loans, repayments, tenure, loan size and old balances." },
+      { indicator: "auto.siam.domestic_sales.mix_fy_2026", chart: "tableBars", title: "The industry-side check says the same thing", size: "small", beat: "siam-check", unit: "vehicles sold wholesale",
+        why: "SIAM is a different source and a different measure, useful as a sanity check on mix.", read: "In FY 2025-26, two-wheelers dominated domestic wholesale sales, followed by passenger vehicles.", watch: "SIAM reports wholesale domestic sales, not VAHAN registrations. Public SIAM history scraped here has a large gap after FY 2013-14." },
+      { chart: "multiLine", title: "EVs plug into a still-carbon-heavy grid", size: "feature", beat: "grid-context", unit: "% of generation",
+        series: [
+          { indicator: "auto.ember.grid.renewables_share", label: "Renewables" },
+          { indicator: "auto.ember.grid.wind_solar_share", label: "Wind & solar" }
+        ],
+        why: "The EV question cannot stop at the vehicle. It has to ask what powers the charger.", read: "Renewables generated about a quarter of India's electricity in 2025; wind and solar together were about 14%.", watch: "Ember is electricity data, not EV data. This chart gives grid context for EV charging, not a lifecycle-emissions calculation." },
+      { indicator: "auto.ember.grid.carbon_intensity", chart: "line", title: "The grid is cleaner, but still not clean", size: "small", window: "full", beat: "grid-carbon",
+        why: "A cleaner grid makes every future EV kilometre cleaner too.", read: "India's power-sector carbon intensity fell to about 671 gCO2/kWh in 2025, the lowest point in the Ember series.", watch: "Carbon intensity is per unit of electricity generated. It does not include vehicle manufacturing, battery supply chains, or charging-time variation." }
+    ]
+  },
+  {
     id: "q.econ.gold",
     slug: "india-and-gold",
     question: "How much gold does India have, and why can't we stop buying it?",

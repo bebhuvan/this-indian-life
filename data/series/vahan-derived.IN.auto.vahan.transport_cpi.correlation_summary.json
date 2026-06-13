@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "auto.vahan.transport_cpi.correlation_summary",
+  "title": "Do transport prices move with registrations?",
+  "sourceId": "vahan-derived",
+  "sourceIndicatorId": "VAHAN monthly registration growth and MoSPI transport/fuel CPI inflation",
+  "sourceUrl": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml",
+  "unit": "Pearson correlation",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-13T12:12:26Z",
+  "rows": [
+    {
+      "label": "Transport CPI inflation, combined, all overlapping months",
+      "value": 0.137,
+      "months": "2012-01 to 2025-12",
+      "group": "all overlapping months"
+    },
+    {
+      "label": "Transport CPI inflation, combined, excluding 2020-21",
+      "value": 0.231,
+      "months": "2012-01 to 2025-12",
+      "group": "excluding 2020-21"
+    },
+    {
+      "label": "Transport CPI inflation, rural, all overlapping months",
+      "value": 0.158,
+      "months": "2012-01 to 2025-12",
+      "group": "all overlapping months"
+    },
+    {
+      "label": "Transport CPI inflation, rural, excluding 2020-21",
+      "value": 0.21,
+      "months": "2012-01 to 2025-12",
+      "group": "excluding 2020-21"
+    },
+    {
+      "label": "Transport CPI inflation, urban, all overlapping months",
+      "value": 0.121,
+      "months": "2012-01 to 2025-12",
+      "group": "all overlapping months"
+    },
+    {
+      "label": "Transport CPI inflation, urban, excluding 2020-21",
+      "value": 0.24,
+      "months": "2012-01 to 2025-12",
+      "group": "excluding 2020-21"
+    },
+    {
+      "label": "Petrol CPI inflation, all overlapping months",
+      "value": 0.083,
+      "months": "2015-01 to 2025-12",
+      "group": "all overlapping months"
+    },
+    {
+      "label": "Petrol CPI inflation, excluding 2020-21",
+      "value": 0.249,
+      "months": "2015-01 to 2025-12",
+      "group": "excluding 2020-21"
+    },
+    {
+      "label": "Diesel CPI inflation, all overlapping months",
+      "value": 0.031,
+      "months": "2015-01 to 2025-12",
+      "group": "all overlapping months"
+    },
+    {
+      "label": "Diesel CPI inflation, excluding 2020-21",
+      "value": 0.127,
+      "months": "2015-01 to 2025-12",
+      "group": "excluding 2020-21"
+    }
+  ],
+  "metadata": {
+    "method": "Pearson correlations between monthly year-on-year VAHAN registration growth and MoSPI transport/fuel CPI inflation. A negative value means higher transport/fuel inflation coincided with weaker registration growth in the overlapping months; this is an association test, not a causal model."
+  }
+}

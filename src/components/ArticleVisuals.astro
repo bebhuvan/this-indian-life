@@ -1296,7 +1296,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <div class="viz-bar-groups">
                 {groupedBars.map((group) => {
                   const items = bar.bars.filter((item) => item.group === group);
-                  const groupMax = Math.max(100, ...items.map((item) => Math.abs(item.value)));
+                  const groupScaleFloor = /correlation/i.test(bar.unit) ? 1 : /%/.test(bar.unit) ? 100 : 1;
+                  const groupMax = Math.max(groupScaleFloor, ...items.map((item) => Math.abs(item.value)));
                   return (
                     <div class="viz-bar-group">
                       <h3>{group}</h3>
