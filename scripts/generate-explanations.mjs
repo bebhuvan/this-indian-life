@@ -62,6 +62,51 @@ function systemPrompt() {
 }
 
 function articleTemplateFor(evidence) {
+  if (evidence.questionId === "q.econ.motorisation") {
+    const planned = Array.isArray(evidence.plannedCharts) ? evidence.plannedCharts : [];
+    return {
+      purpose: "Answer how India became a motorised country from the beginning of the available VAHAN data in 2003, without turning the piece into either a car story or an EV puff piece. The core argument is: India added vehicles at astonishing scale, from 4.4 million registrations in FY 2003-04 to 30.8 million in FY 2025-26, but the structure of that motorisation stayed Indian: two-wheelers dominate, cars remain a minority, three-wheelers and e-rickshaws matter, petrol still rules, diesel fades, and EVs are now large enough to matter but not large enough to define the system. Use GDP and per-capita GDP as an honest test, not a magic explanation: registrations correlate strongly with income levels because both trend upward, but same-year growth correlations are much weaker once Covid is excluded, so the truthful reading is that income is the background engine while credit, prices, supply, policy, festivals and state-level development shape the year-to-year road. Bring in SIAM only as a wholesale-sales check, not as registrations. Bring in Ember only as electricity-grid context for EVs, not as EV adoption data. Carry the argument forward chart by chart. Write with confidence, but be scrupulous about measurement boundaries. Never narrate the article mechanically, never say 'this chart shows' as a crutch, never use em-dashes, and never pad with generic transport-policy prose.",
+      requiredSections: planned.length
+        ? [
+            ...planned.map((chart) => `A reader-question H2 heading whose section explains and is paired with the chart "${chart.title}" (${chart.beat})`),
+            "A closing reader-question H2, 'How should you read these numbers?', that names the sources and methodology plainly, states what VAHAN can and cannot measure, explains the fiscal-year derivations, notes the 2026 partial-month caveat, separates registrations from sales, separates EV registrations from grid emissions, and avoids false precision."
+          ]
+        : [
+            "How big did India's vehicle market become?",
+            "Did GDP explain the boom?",
+            "Why is India still a two-wheeler country?",
+            "What changed in fuel and EVs?",
+            "Where did the growth happen?",
+            "What do credit, fuel prices and festivals add?",
+            "How should you read these numbers?"
+          ],
+      requiredConcepts: [
+        "The opening fact: VAHAN fiscal-year registrations rose from about 4.4 million in FY 2003-04 to about 30.8 million in FY 2025-26, roughly seven times. Calendar-year registrations rose from about 4.2 million in 2003 to about 29.3 million in 2025. Phrase these as registrations recorded in VAHAN, not vehicles sold, produced, or owned.",
+        "Start the story in 2003 because that is where the VAHAN tables in the repository begin. The latest monthly data in the raw tables runs into June 2026, but 2026 is partial through June 13, 2026. Full-year comparisons should use complete calendar years through 2025 or complete fiscal years through FY 2025-26.",
+        "The GDP test is important and must be honest: registrations and GDP levels have high correlations because both trend upward over two decades. Same-year growth is the harder test. Excluding the Covid collapse and rebound, registration growth correlates with nominal per-capita GDP growth around 0.81, nominal GDP around 0.78, real GDP around 0.54, and real per-capita GDP around 0.46. That means income matters, but does not explain the whole year-to-year pattern.",
+        "Use nominal and real income differently. Nominal GDP and nominal per-capita GDP capture rupee spending capacity, including inflation. Real GDP and real per-capita GDP capture volume growth after inflation. Do not mix them casually. The article may say nominal India expanded faster than VAHAN, while VAHAN outran real income and real per-capita income.",
+        "Per-capita registrations make the scale less population-driven: new registrations per 1,000 people rose from about 3.8 in 2003 to about 18.8 in 2024. That is still registrations per year, not total vehicles per person or vehicle ownership.",
+        "The composition is the most Indian part of the story. Two-wheelers were about 68% of FY 2003-04 registrations and about 72% in FY 2025-26. Cars and cabs were about 18% at the start and about 16% in FY 2025-26. The country motorised mostly on scooters, motorcycles and mopeds, not cars.",
+        "Three-wheelers matter because e-rickshaws changed the bottom of urban and small-town mobility. Three-wheelers rose to about 4% of FY 2025-26 registrations. Treat this as a class shift, not only a fuel shift.",
+        "Fuel story: petrol and petrol-hybrids were about 79% of FY 2025-26 registrations, diesel and diesel-hybrids about 10%, battery EVs about 8.25%, and CNG about 1.6%. The honest EV headline is large enough to matter, not large enough to dominate.",
+        "Battery EV registrations are ELECTRIC(BOV) plus PURE EV in VAHAN fuel tables. That is a registration classification. It is not fleet share, vehicle-kilometres, emissions saved, or charging demand.",
+        "State geography: Uttar Pradesh added the most registrations between calendar 2003 and calendar 2025, followed by Maharashtra, Gujarat and Tamil Nadu. This is an absolute-additions ranking, so big states dominate. Do not present it as per-capita motorisation.",
+        "Seasonality is real and visible. October and November spikes are large in recent years, with October 2025 the largest month in the VAHAN series. But festival timing shifts by year, so do not make one month a permanent seasonal law.",
+        "Credit is a mechanism, but the available vehicle-loan series is outstanding stock from the RBI/IndiaDataHub feed, not new loan originations. It can support the idea that vehicle buying became more financed, but it cannot prove how many registrations were loan-funded.",
+        "Fuel prices are consumer price indexes from MoSPI CPI, not pump prices per litre. Diesel's index rose faster than petrol's after the 2012 base, which changed running-cost economics, but state taxes and vehicle-use patterns are outside this chart.",
+        "Transport-and-communication CPI is the broader household mobility-cost backdrop. It includes transport services and communication, not only private vehicle running costs. The rural transport index reached about 178.5 by December 2025, above the urban index around 166.9, so rural mobility-cost pressure looks higher on this measure.",
+        "Do not write a simplistic 'higher CPI killed vehicle demand' claim. Monthly correlations between year-on-year VAHAN registration growth and transport/fuel CPI inflation are small and mostly positive, roughly 0.1 to 0.25 when Covid years are excluded. The honest interpretation is that expansion years often saw both more registrations and higher mobility prices, while CPI alone cannot isolate affordability, credit, supply or policy.",
+        "SIAM reports domestic wholesale sales by manufacturers, not retail registrations. Use SIAM's FY 2025-26 mix as an industry-side sanity check that the two-wheeler dominance also appears outside VAHAN. The scraped public SIAM trend has a gap from FY 2013-14 to FY 2025-26, so do not turn it into a continuous history.",
+        "Ember is electricity data, not EV India data. It gives the grid context for EV charging: renewables generated about 24% of India's electricity in 2025, wind and solar about 14%, and carbon intensity was about 671 gCO2/kWh. That is not a lifecycle EV emissions calculation.",
+        "Avoid single-cause writing. The article should say income, credit, fuel prices, regulations, road infrastructure, urbanisation, rural incomes, festivals and supply constraints all shape vehicle registrations, but the data here directly measures only registrations and selected context series.",
+        "Methodology must explain derived series: fiscal years are April-to-March sums of VAHAN monthly tables; vehicle classes and fuels are grouped into readable buckets; per-capita registrations divide calendar-year VAHAN totals by World Bank population; GDP indexes are MoSPI NAS series set to FY 2003-04 = 100; correlations are Pearson correlations; growth correlations exclude FY 2020-21 and FY 2021-22 to reduce Covid distortion."
+      ],
+      styleExample: [
+        "## Did India become a car country?",
+        "No. It became a motorised country, and those are not the same thing. The easy image of development is a family graduating from a scooter to a hatchback to an SUV. Some of India did that, especially in richer cities. But the national road tells a less glamorous and more important story: two-wheelers stayed at roughly seven out of every ten new registrations even after two decades of growth. That is not a rounding error. It is the structure of Indian mobility, built around price, parking, congestion, fuel cost, short trips, informal work and the fact that a motorcycle can be both a family vehicle and a livelihood tool. The car arrived. It did not take over."
+      ].join("\n\n")
+    };
+  }
   if (["q.econ.asia_divergence", "q.econ.asia_divergence_engine", "q.econ.asia_divergence_2", "q.econ.asia_divergence_3"].includes(evidence.questionId)) {
     const planned = Array.isArray(evidence.plannedCharts) ? evidence.plannedCharts : [];
     const part = evidence.questionId === "q.econ.asia_divergence_3" ? 4 : evidence.questionId === "q.econ.asia_divergence_2" ? 3 : evidence.questionId === "q.econ.asia_divergence_engine" ? 2 : 1;
