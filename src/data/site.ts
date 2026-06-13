@@ -90,6 +90,12 @@ export const sources = {
     homepage: "https://feeds.indiadatahub.com/documentation?urls.primaryName=Economic%20Monitor",
     api: "https://feeds.indiadatahub.com/openapi.json"
   },
+  mospi: {
+    name: "MoSPI",
+    owner: "Ministry of Statistics and Programme Implementation",
+    homepage: "https://esankhyiki.mospi.gov.in/",
+    api: "https://esankhyiki.mospi.gov.in/"
+  },
   owid: {
     name: "Our World in Data Grapher",
     owner: "Our World in Data",
