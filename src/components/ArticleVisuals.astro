@@ -1709,7 +1709,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const sm = visual as ScenarioMapsVisual;
           const smBox = viewBoxSize(sm.viewBox);
           const smGradient = `linear-gradient(90deg, ${choroColor(sm.min, sm.min, sm.max)}, ${choroColor((sm.min + sm.max) / 2, sm.min, sm.max)}, ${choroColor(sm.max, sm.min, sm.max)})`;
-          const usuffix = /%/.test(sm.unit) ? "%" : /°C|degree/i.test(sm.unit) ? "°C" : "";
+          // fmt() already appends "%" for percent units (but not °C), so usuffix only
+          // needs the degree suffix; adding "%" here would double it.
+          const usuffix = /°C|degree/i.test(sm.unit) ? "°C" : "";
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{sm.title}</h2><p>{cleanSubtitle(sm.subtitle, source.sourceId)}</p></div><span>{sm.unit}</span></div>
@@ -1792,7 +1794,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     {choPivotPct !== null ? (
                       <div class="choro-barwrap">
                         <span class="choro-bar" style={`background:${choGradient}`}></span>
-                        <span class="choro-tick" style={`left:${choPivotPct}%`}><em>{vf(cho.divergeAt as number)} replacement</em><b></b></span>
+                        <span class="choro-tick" style={`left:${choPivotPct}%`}><em>{vf(cho.divergeAt as number)}{cho.pivotLabel ? ` ${cho.pivotLabel}` : ""}</em><b></b></span>
                       </div>
                     ) : (
                       <span class="choro-bar" style={`background:${choGradient}`}></span>
