@@ -155,6 +155,54 @@ export const sources = {
     owner: "United Nations Population Division",
     homepage: "https://population.un.org/dataportal/home",
     api: "https://population.un.org/dataportalapi/index.html"
+  },
+  vahan: {
+    name: "VAHAN Dashboard",
+    owner: "Ministry of Road Transport and Highways",
+    homepage: "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml",
+    api: "https://vahan.parivahan.gov.in/vahan4dashboard/"
+  },
+  "vahan-derived": {
+    name: "VAHAN Dashboard",
+    owner: "Ministry of Road Transport and Highways",
+    homepage: "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml",
+    api: "https://vahan.parivahan.gov.in/vahan4dashboard/"
+  },
+  siam: {
+    name: "SIAM statistics",
+    owner: "Society of Indian Automobile Manufacturers",
+    homepage: "https://www.siam.in/statistics.aspx?mpgid=8&pgidtrail=14",
+    api: "https://www.siam.in/statistics.aspx?mpgid=8&pgidtrail=14"
+  },
+  "siam-derived": {
+    name: "SIAM statistics",
+    owner: "Society of Indian Automobile Manufacturers",
+    homepage: "https://www.siam.in/statistics.aspx?mpgid=8&pgidtrail=14",
+    api: "https://www.siam.in/statistics.aspx?mpgid=8&pgidtrail=14"
+  },
+  "mospi-derived": {
+    name: "MoSPI",
+    owner: "Ministry of Statistics and Programme Implementation",
+    homepage: "https://esankhyiki.mospi.gov.in/",
+    api: "https://esankhyiki.mospi.gov.in/"
+  },
+  "indiadatahub-derived": {
+    name: "IndiaDataHub Economic Monitor",
+    owner: "IndiaDataHub",
+    homepage: "https://feeds.indiadatahub.com/documentation?urls.primaryName=Economic%20Monitor",
+    api: "https://feeds.indiadatahub.com/openapi.json"
+  },
+  "ember-derived": {
+    name: "Ember Energy Data",
+    owner: "Ember",
+    homepage: "https://ember-climate.org/data-catalogue/",
+    api: "https://ember-climate.org/data-catalogue/"
+  },
+  tinbergen: {
+    name: "Tinbergen Institute Discussion Papers",
+    owner: "Tinbergen Institute",
+    homepage: "https://www.tinbergen.nl/discussion-papers",
+    api: "https://papers.tinbergen.nl/"
   }
 };
 
@@ -166,11 +214,20 @@ const SOURCE_LABELS: Record<string, string> = {
   "world-context": "World Bank (context)",
   indiadatahub: "IndiaDataHub",
   mospi: "MoSPI",
+  "mospi-hces": "MoSPI HCES",
+  "planning-commission": "Planning Commission",
   hces: "MoSPI HCES",
   owid: "Our World in Data",
   "who-gho": "WHO",
   "un-population": "UN Population",
   "un-comtrade": "UN Comtrade",
+  vahan: "VAHAN",
+  "vahan-derived": "VAHAN",
+  siam: "SIAM",
+  "siam-derived": "SIAM",
+  "mospi-derived": "MoSPI",
+  "indiadatahub-derived": "IndiaDataHub",
+  "ember-derived": "Ember",
   ember: "Ember",
   eia: "EIA",
   ppac: "PPAC",
@@ -187,6 +244,7 @@ const SOURCE_LABELS: Record<string, string> = {
   "heat-vulnerability": "CEEW + MoSPI + NITI + HCES + MCCD",
   "heat-work": "MoSPI + ILOSTAT",
   "lancet-countdown": "Lancet Countdown",
+  tinbergen: "Tinbergen Institute",
   "undp-hch": "UNDP",
   ilostat: "ILOSTAT",
   nfhs: "NFHS",
@@ -194,7 +252,15 @@ const SOURCE_LABELS: Record<string, string> = {
   srs: "SRS",
   srscod: "SRS (cause of death)",
   mccd: "MCCD",
-  rbi: "RBI"
+  rbi: "RBI",
+  dst: "DST / NSTMIS",
+  oecd: "OECD",
+  wipo: "WIPO",
+  nsf: "NSF / Scopus",
+  isro: "ISRO / press reports",
+  openbudgets: "Open Budgets India",
+  anrf: "ANRF",
+  research: "Research literature"
 };
 
 export function sourceLabel(id: string): string {
