@@ -517,10 +517,10 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const isHero = (visual as { size?: string }).size === "hero";
   const width = mobile ? 384 : (twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000));
   const height = mobile ? (isHero ? 406 : 346) : (isHero ? 560 : isLead ? 500 : 360);
-  const baseLeft = mobile ? 50 : isLead ? 86 : 58;
+  const baseLeft = mobile ? 46 : isLead ? 86 : 58;
   const yFontSize = mobile ? 13 : isLead ? 21 : 17;
   const padRTB = mobile
-    ? { r: visual.lines.length > 1 ? 64 : 24, t: 20, b: 70 }
+    ? { r: visual.lines.length > 1 ? 48 : 12, t: 20, b: 70 }
     : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 76 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 78 };
   // Multi-line charts print each line's latest value to the RIGHT of its end point
   // (.end-mini-v, left-anchored at latestX + offset). Desktop has room for the full
@@ -530,7 +530,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const endMaxAbs = Math.max(1, ...visual.lines.flatMap((l) => l.points.map((p) => Math.abs(p.value))));
   const endText = (value: number) => endLabelInScale(value, endMaxAbs, visual.unit, mobile);
   if (visual.lines.length > 1 || forceEndLabelPad) {
-    const endOffset = mobile ? 16 : 22; // label x offset from the end point (see template)
+    const endOffset = mobile ? 12 : 22; // label x offset from the end point (see template)
     const endFont = mobile ? 12.5 : 17; // .end-mini-v font-size (see indica.css)
     const maxEndLabelLen = Math.max(
       3,
@@ -566,7 +566,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // Size the left padding to the widest y-axis label so "₹400 lakh cr" / "$10 trillion"
   // don't overflow off the left edge of the viewBox (which clipped the leading digits).
   const maxYLabelLen = Math.max(3, ...ticks.map((tick) => fmt(tick, visual.unit).length));
-  const pad = { l: Math.max(baseLeft, Math.round(maxYLabelLen * yFontSize * 0.64) + 12), ...padRTB };
+  const pad = { l: Math.max(baseLeft, Math.round(maxYLabelLen * yFontSize * 0.78) + 18), ...padRTB };
   const plotW = width - pad.l - pad.r;
   // Position points by real time. Monthly series must use the month too; otherwise all
   // twelve YYYY-MM points in a year collapse onto one x-position and render as steps.
@@ -819,6 +819,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               </div>
               <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
                 <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="png">PNG</button>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
@@ -1043,6 +1044,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <div class="viz-head"><div><h2 class="serif">{scatter.title}</h2><p>{cleanSubtitle(scatter.subtitle, source.sourceId)}</p></div><span>{scatter.unit}</span></div>
               <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
                 <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="png">PNG</button>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
@@ -1296,7 +1298,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <div class="viz-bar-groups">
                 {groupedBars.map((group) => {
                   const items = bar.bars.filter((item) => item.group === group);
-                  const groupMax = Math.max(100, ...items.map((item) => Math.abs(item.value)));
+                  const groupScaleFloor = /correlation/i.test(bar.unit) ? 1 : /%/.test(bar.unit) ? 100 : 1;
+                  const groupMax = Math.max(groupScaleFloor, ...items.map((item) => Math.abs(item.value)));
                   return (
                     <div class="viz-bar-group">
                       <h3>{group}</h3>
@@ -1533,6 +1536,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <div class="viz-head"><div><h2 class="serif">{stripes.title}</h2><p>{cleanSubtitle(stripes.subtitle, source.sourceId)}</p></div><span>{stripes.unit}</span></div>
               <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
                 <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="png">PNG</button>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
@@ -1779,6 +1783,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <div class="viz-head"><div><h2 class="serif">{cho.title}</h2><p>{cleanSubtitle(cho.subtitle, source.sourceId)}</p></div><span class="choro-unit">{cho.unit}</span></div>
               <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`} data-svg-url={svgUrl}>
                 <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="png">PNG</button>
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>

@@ -9,7 +9,7 @@
    Updates wait for the page to say SKIP_WAITING (see pwa.js) so we can show a
    "new version — refresh" toast instead of swapping under the user's feet. */
 
-const VERSION = 'til-v1';
+const VERSION = 'til-v2';
 const SHELL = `shell-${VERSION}`;
 const PAGES = `pages-${VERSION}`;
 const ASSETS = `assets-${VERSION}`;

@@ -16,6 +16,7 @@ export type LineVisual = {
   unit: string;
   source: VisualSource;
   lines: Array<{ label: string; points: Point[]; color?: string; emphasis?: boolean; dash?: boolean }>;
+  xTicks?: number[];
   bands?: Array<{ year: number; label?: string }>;
   refLine?: { value: number; label: string };
 };
@@ -1029,6 +1030,19 @@ function lineFor(artifact: Artifact): LineVisual | null {
   return artifact.artifactType === "table" ? tableLineVisual(artifact) : seriesVisual(artifact);
 }
 
+function clipLineFromYear(visual: LineVisual, fromYear?: number): LineVisual {
+  if (!fromYear) return visual;
+  return {
+    ...visual,
+    lines: visual.lines
+      .map((line) => ({
+        ...line,
+        points: line.points.filter((point) => Number(String(point.date).slice(0, 4)) >= fromYear)
+      }))
+      .filter((line) => line.points.length >= 2)
+  };
+}
+
 // Combine several single-indicator series into one multi-line chart — the
 // "composition over time" lens (e.g. the three age-group shares since 1960).
 function multiSeriesLine(
@@ -1981,8 +1995,10 @@ type PlanEntry = {
   rows?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   columns?: Array<{ key: string; label: string }>;
   fromYear?: number;
+  xTicks?: number[];
   bands?: Array<{ year: number; label?: string }>;
   years?: number[];
+  decades?: string[];
   denominator?: string;
   why?: string;
   detail?: string;
@@ -2103,6 +2119,28 @@ function decoupleIndexVisual(artifact: Artifact, columns: Array<{ key: string; l
 }
 
 // Warming stripes: one coloured band per year, blue (cool) to red (hot).
+function monthDecadeLines(artifact: Artifact, decades: string[], title: string, subtitle: string, unit: string): LineVisual | null {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const rows = artifact.rows || [];
+  const columns = decades.length ? decades : ["2020s", "2010s", "2000s", "1990s", "1980s", "1970s", "1960s", "1950s", "1940s"];
+  const lines = columns
+    .map((decade) => {
+      const points = rows
+        .map((row) => {
+          const month = Number(row.Year);
+          const value = numberFrom(row[decade]);
+          return month >= 1 && month <= 12 && value !== null
+            ? { date: months[month - 1], value }
+            : null;
+        })
+        .filter((point): point is Point => Boolean(point));
+      return points.length >= 6 ? { label: decade, points } : null;
+    })
+    .filter((line): line is LineVisual["lines"][number] => Boolean(line));
+  if (lines.length < 2) return null;
+  return { kind: "line", title, subtitle: subtitle || artifact.sourceId, unit, source: sourceFor(artifact), lines };
+}
+
 function warmingStripes(artifact: Artifact, title: string, subtitle: string, unit: string, center?: number): StripeVisual | null {
   const line = lineFor(artifact);
   if (!line || !line.lines[0]) return null;
@@ -2115,7 +2153,11 @@ function warmingStripes(artifact: Artifact, title: string, subtitle: string, uni
 }
 
 function attachMeta(visual: VisualSpec, entry: PlanEntry): VisualSpec {
-  const out = { ...visual, ...(entry.title ? { title: entry.title } : {}) } as VisualSpec & { size?: string; note?: PlanNote };
+  const out = { ...visual, ...(entry.title ? { title: entry.title } : {}) } as VisualSpec & { size?: string; note?: PlanNote; subtitle?: string; unit?: string; xTicks?: number[]; refLine?: { value: number; label: string } };
+  if (entry.subtitle && "subtitle" in out) out.subtitle = entry.subtitle;
+  if (entry.unit && "unit" in out) out.unit = entry.unit;
+  if (entry.xTicks?.length && visual.kind === "line") out.xTicks = entry.xTicks;
+  if (entry.refLine && visual.kind === "line") out.refLine = entry.refLine;
   if (entry.size) out.size = entry.size;
   if (entry.why || entry.detail || entry.read || entry.watch) out.note = { why: entry.why, detail: entry.detail, read: entry.read, watch: entry.watch };
   return out;
@@ -2363,6 +2405,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     case "compareLine": visual = artifact.indicatorId === "econ.compare.gdp_per_capita_current_usd" ? comparisonLineVisual(artifact) : multiCountryLine(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "columnLines": visual = columnLinesVisual(artifact, entry.columns || [], entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit, entry.fromYear); break;
     case "seasonalByYear": visual = seasonalByYear(artifact, entry.years || [], entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
+    case "monthDecadeLines": visual = monthDecadeLines(artifact, entry.decades || [], entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "compositionStack": visual = compositionStackVisual(artifact, entry.columns || [], entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "decadeBars": visual = decadeMeanBars(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "decoupleIndex": visual = decoupleIndexVisual(artifact, entry.columns || [], entry.title || artifact.title, entry.subtitle || ""); break;
@@ -2382,6 +2425,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     case "recentBars": { const line = lineFor(artifact); visual = line ? recentBars(line) : null; break; }
     default: visual = lineFor(artifact);
   }
+  if (visual?.kind === "line") visual = clipLineFromYear(visual, entry.fromYear);
   return visual ? attachMeta(visual, entry) : null;
 }
 

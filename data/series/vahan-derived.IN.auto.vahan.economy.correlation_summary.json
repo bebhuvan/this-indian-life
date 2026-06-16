@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "auto.vahan.economy.correlation_summary",
+  "title": "How tightly registrations move with income",
+  "sourceId": "vahan-derived",
+  "sourceIndicatorId": "VAHAN fiscal registrations and MoSPI NAS income series",
+  "sourceUrl": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml",
+  "unit": "Pearson correlation",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-13T12:12:26Z",
+  "rows": [
+    {
+      "label": "Nominal GDP, level",
+      "value": 0.879,
+      "years": "2004-2026",
+      "group": "levels"
+    },
+    {
+      "label": "Real GDP, level",
+      "value": 0.92,
+      "years": "2004-2026",
+      "group": "levels"
+    },
+    {
+      "label": "Nominal per-capita GDP, level",
+      "value": 0.89,
+      "years": "2004-2026",
+      "group": "levels"
+    },
+    {
+      "label": "Real per-capita GDP, level",
+      "value": 0.929,
+      "years": "2004-2026",
+      "group": "levels"
+    },
+    {
+      "label": "Nominal GDP growth",
+      "value": 0.783,
+      "years": "2005-2026",
+      "group": "growth, Covid excluded"
+    },
+    {
+      "label": "Real GDP growth",
+      "value": 0.544,
+      "years": "2005-2026",
+      "group": "growth, Covid excluded"
+    },
+    {
+      "label": "Nominal per-capita GDP growth",
+      "value": 0.814,
+      "years": "2005-2026",
+      "group": "growth, Covid excluded"
+    },
+    {
+      "label": "Real per-capita GDP growth",
+      "value": 0.461,
+      "years": "2005-2026",
+      "group": "growth, Covid excluded"
+    }
+  ],
+  "metadata": {
+    "method": "Pearson correlations between VAHAN fiscal registrations and MoSPI income measures. Growth correlations exclude FY 2020-21 and FY 2021-22 to avoid the mechanical Covid shock dominating the reading."
+  }
+}
