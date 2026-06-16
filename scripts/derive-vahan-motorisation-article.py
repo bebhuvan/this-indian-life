@@ -22,6 +22,7 @@ SERIES_DIR = ROOT / "data" / "series"
 TABLE_DIR = ROOT / "Vaahan" / "tables"
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 MONTH_NUM = {name: i + 1 for i, name in enumerate(MONTHS)}
+LATEST_COMPLETE_MONTH = "2026-05"
 
 VAHAN_URL = "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
 MOSPI_NAS_URL = "https://esankhyiki.mospi.gov.in/macroindicators?product=nas"
@@ -209,6 +210,10 @@ def monthly_yoy(values: dict[str, float]) -> dict[str, float]:
     return out
 
 
+def calendar_year_total(series: dict[str, int], year: int) -> int:
+    return sum(series.get(f"{year}-{month:02d}", 0) for month in range(1, 13))
+
+
 VEHICLE_BUCKETS = {
     "two_wheelers": {
         "label": "Two-wheelers",
@@ -296,6 +301,20 @@ def main() -> None:
         metadata={"method": "Year-on-year percentage growth from VAHAN fiscal-year registration totals."},
     ))
 
+    complete_monthly = {date: value for date, value in all_monthly.items() if date <= LATEST_COMPLETE_MONTH}
+    complete_monthly_yoy = monthly_yoy({date: float(value) for date, value in complete_monthly.items()})
+    record("vahan-derived.IN.auto.vahan.registrations.yoy_complete_monthly", series_artifact(
+        "auto.vahan.registrations.yoy_complete_monthly",
+        "Vehicle registration growth, complete months only",
+        "vahan-derived",
+        "VAHAN monthly registrations, year-on-year change",
+        VAHAN_URL,
+        "% year-on-year",
+        [{"date": date, "value": round(value, 3)} for date, value in sorted(complete_monthly_yoy.items())],
+        frequency="monthly",
+        metadata={"method": "Year-on-year percentage growth from monthly VAHAN registration totals, excluding the partial June 2026 point in the current raw tables."},
+    ))
+
     record("vahan-derived.IN.auto.vahan.registrations.index_fy_2004_100", series_artifact(
         "auto.vahan.registrations.index_fy_2004_100",
         "Vehicle registration index, FY 2003-04 = 100",
@@ -337,6 +356,60 @@ def main() -> None:
         "% of registrations",
         as_fy_observations({year: other_vehicle_fy[year] / total_fy[year] * 100 for year in total_fy if total_fy[year]}),
         metadata={"method": "Residual share after two-wheelers, cars/cabs, three-wheelers, tractors/tillers, goods vehicles and buses are grouped.", "share": True},
+    ))
+
+    e_rickshaw_monthly = defaultdict(int)
+    for klass in ["E-RICKSHAW(P)", "E-RICKSHAW WITH CART (G)"]:
+        for date, value in vehicle_class_monthly.get(klass, {}).items():
+            e_rickshaw_monthly[date] += value
+    e_rickshaw_fy = monthly_to_fy(e_rickshaw_monthly)
+    record("vahan-derived.IN.auto.vahan.vehicle.e_rickshaw.registrations_fy", series_artifact(
+        "auto.vahan.vehicle.e_rickshaw.registrations_fy",
+        "E-rickshaw registrations recorded in VAHAN",
+        "vahan-derived",
+        "VAHAN vehicle-class tables, E-RICKSHAW(P) plus E-RICKSHAW WITH CART (G)",
+        VAHAN_URL,
+        "registrations",
+        as_fy_observations(e_rickshaw_fy),
+        metadata={"method": "E-rickshaw registrations are E-RICKSHAW(P) plus E-RICKSHAW WITH CART (G) in the VAHAN vehicle-class tables, summed to fiscal years."},
+    ))
+
+    class_addition_specs = [
+        ("Two-wheelers", VEHICLE_BUCKETS["two_wheelers"]["classes"]),
+        ("Cars and cabs", VEHICLE_BUCKETS["cars_cabs"]["classes"]),
+        ("E-rickshaws", {"E-RICKSHAW(P)", "E-RICKSHAW WITH CART (G)"}),
+        ("Other three-wheelers", VEHICLE_BUCKETS["three_wheelers"]["classes"] - {"E-RICKSHAW(P)", "E-RICKSHAW WITH CART (G)"}),
+        ("Tractors and tillers", VEHICLE_BUCKETS["tractors"]["classes"]),
+        ("Goods vehicles", VEHICLE_BUCKETS["goods"]["classes"]),
+        ("Buses", VEHICLE_BUCKETS["buses"]["classes"]),
+    ]
+    class_addition_rows = []
+    assigned_for_additions = set()
+    for label, classes in class_addition_specs:
+        start = sum(calendar_year_total(vehicle_class_monthly.get(klass, {}), 2003) for klass in classes)
+        end = sum(calendar_year_total(vehicle_class_monthly.get(klass, {}), 2025) for klass in classes)
+        assigned_for_additions.update(classes)
+        class_addition_rows.append({"label": label, "value": end - start, "start": start, "end": end})
+    all_class_start = sum(calendar_year_total(series, 2003) for series in vehicle_class_monthly.values())
+    all_class_end = sum(calendar_year_total(series, 2025) for series in vehicle_class_monthly.values())
+    assigned_start = sum(row["start"] for row in class_addition_rows)
+    assigned_end = sum(row["end"] for row in class_addition_rows)
+    class_addition_rows.append({
+        "label": "Other vehicles",
+        "value": (all_class_end - assigned_end) - (all_class_start - assigned_start),
+        "start": all_class_start - assigned_start,
+        "end": all_class_end - assigned_end,
+    })
+    class_addition_rows = sorted(class_addition_rows, key=lambda row: row["value"], reverse=True)
+    record("vahan-derived.IN.auto.vahan.vehicle.class_additions_2003_2025", table_artifact(
+        "auto.vahan.vehicle.class_additions_2003_2025",
+        "Which vehicle types added the most registrations",
+        "vahan-derived",
+        "VAHAN vehicle-class tables, calendar 2003 to calendar 2025",
+        VAHAN_URL,
+        "additional annual registrations",
+        class_addition_rows,
+        metadata={"method": "Calendar-year VAHAN vehicle-class totals. Value is 2025 registrations minus 2003 registrations for readable vehicle buckets; e-rickshaws are separated from other three-wheelers."},
     ))
 
     fuel_bucket_fy: dict[str, dict[int, int]] = {}
@@ -415,6 +488,23 @@ def main() -> None:
         "registrations",
         latest_rows,
         metadata={"method": "Top states and union territories by VAHAN registrations in calendar 2025."},
+    ))
+
+    concentration_obs = []
+    for year in range(2003, 2026):
+        state_values = [values.get(year, 0) for values in state_year.values()]
+        total = sum(state_values)
+        if total:
+            concentration_obs.append({"date": str(year), "value": round(sum(sorted(state_values, reverse=True)[:5]) / total * 100, 3)})
+    record("vahan-derived.IN.auto.vahan.state.top5_share", series_artifact(
+        "auto.vahan.state.top5_share",
+        "Top five states' share of annual VAHAN registrations",
+        "vahan-derived",
+        "VAHAN state tables, top five state share by calendar year",
+        VAHAN_URL,
+        "% of registrations",
+        concentration_obs,
+        metadata={"method": "For each complete calendar year, sum the five largest state/UT VAHAN registration totals and divide by the all-state total."},
     ))
 
     # Economy comparators.
@@ -668,11 +758,11 @@ def main() -> None:
     registration_yoy = monthly_yoy({date: float(value) for date, value in all_monthly.items() if date <= "2025-12"})
     corr_rows = []
     corr_specs = [
-        ("Transport CPI inflation, combined", cpi_monthly_for_corr["combined_transport_inflation"]),
-        ("Transport CPI inflation, rural", cpi_monthly_for_corr["rural_transport_inflation"]),
-        ("Transport CPI inflation, urban", cpi_monthly_for_corr["urban_transport_inflation"]),
-        ("Petrol CPI inflation", monthly_yoy(fuel_for_corr["petrol"])),
-        ("Diesel CPI inflation", monthly_yoy(fuel_for_corr["diesel"])),
+        ("Combined transport CPI", cpi_monthly_for_corr["combined_transport_inflation"]),
+        ("Rural transport CPI", cpi_monthly_for_corr["rural_transport_inflation"]),
+        ("Urban transport CPI", cpi_monthly_for_corr["urban_transport_inflation"]),
+        ("Petrol CPI", monthly_yoy(fuel_for_corr["petrol"])),
+        ("Diesel CPI", monthly_yoy(fuel_for_corr["diesel"])),
     ]
     covid_months = {f"{year}-{month:02d}" for year in (2020, 2021) for month in range(1, 13)}
     for label, cpi_values in corr_specs:
@@ -684,7 +774,7 @@ def main() -> None:
             ys = [cpi_values[m] for m in months]
             corr = pearson(xs, ys)
             if corr is not None:
-                corr_rows.append({"label": f"{label}, {mode}", "value": round(corr, 3), "months": f"{months[0]} to {months[-1]}", "group": mode})
+                corr_rows.append({"label": label, "value": round(corr, 3), "months": f"{months[0]} to {months[-1]}", "group": mode})
     record("vahan-derived.IN.auto.vahan.transport_cpi.correlation_summary", table_artifact(
         "auto.vahan.transport_cpi.correlation_summary",
         "Do transport prices move with registrations?",

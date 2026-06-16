@@ -567,11 +567,11 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .viz-head .choro-unit{display:none}
   .viz-d{display:none}
   .viz-m{display:block}
-  /* Charts go edge-to-edge on phones: reclaim the page+card gutter (22+15=37px each
-     side) so the plot is bigger and the left/right whitespace shrinks. The SVG's own
-     axis padding keeps labels off the screen edge; the caption text keeps its inset. */
-  .story-viz .viz-m{margin-inline:-37px;width:calc(100% + 74px);max-width:none}
-  .story-viz .scatter-plot.viz-m{margin-inline:-24px;width:calc(100% + 48px)}
+  /* Keep mobile chart axes inside the chart card. The SVG geometry now carries
+     enough internal padding, so pulling plots into the card gutter makes labels
+     look like they are leaking out of the visual. */
+  .story-viz .viz-m,
+  .story-viz .scatter-plot.viz-m{margin-inline:0;width:100%;max-width:100%}
   /* Stacked-bar segment labels clip on narrow slices — drop them on phones; the full
      names + values sit in the table directly below the bar. */
   .viz-seg span{display:none}
@@ -704,6 +704,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .viz-bar-group{display:grid;gap:10px}
 .viz-bar-group h3{margin:0;font-family:var(--sans);font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);font-weight:700}
 .viz-bar{display:grid;grid-template-columns:112px minmax(0,1fr) 78px;gap:16px;align-items:center;font-size:.86rem;color:var(--mid)}
+.viz-bar-group .viz-bar{grid-template-columns:minmax(190px,28%) minmax(0,1fr) 64px}
 .viz-bar-track{height:24px;background:var(--paper);overflow:hidden;position:relative}
 .viz-bar-track.bipolar:before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:1px solid rgba(0,0,0,.18)}
 .viz-bar i{display:block;height:100%;background:var(--c)}
@@ -803,6 +804,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .viz-card,.viz-main{padding:22px}
   .viz-lead-number{align-items:flex-start;flex-direction:column;gap:6px}
   .viz-bar{grid-template-columns:86px minmax(0,1fr) 62px}
+  .viz-bar-group .viz-bar{grid-template-columns:minmax(118px,34%) minmax(0,1fr) 54px;gap:10px}
   .trade-note-row{grid-template-columns:1fr}
   .change-row{grid-template-columns:1fr;gap:8px}
   .change-facts{grid-template-columns:1fr}

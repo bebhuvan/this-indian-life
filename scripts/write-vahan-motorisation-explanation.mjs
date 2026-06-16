@@ -9,12 +9,16 @@ const headings = [
   ["How large did the annual market become?", "Seven times more new vehicles a year"],
   ["Did income explain the boom?", "Registrations outran real income, but not nominal India"],
   ["Does GDP explain the year-to-year jumps?", "The year-to-year link is weaker than the level chart"],
+  ["What happened in the latest complete months?", "The latest complete months were still growing"],
   ["So what does the correlation really say?", "Correlation is high in levels, modest in growth"],
   ["Was this just population growth?", "Motorisation rose even after population is counted"],
   ["Did India become a car country?", "Still a two-wheeler country"],
+  ["What actually got added?", "Two-wheelers added most of the new flow"],
+  ["What did e-rickshaws change?", "E-rickshaws became their own mobility story"],
   ["What changed under the tank?", "Petrol still dominates, diesel fades, EVs arrive"],
   ["How big is the EV shift in absolute numbers?", "EVs went from footnote to millions"],
   ["Where did the extra vehicles come from?", "Where the extra vehicles came from"],
+  ["Was the boom concentrated in only a few states?", "The boom was not only a top-five-state story"],
   ["Why do some months suddenly explode?", "The festival spike is real"],
   ["Did transport inflation hit everyone equally?", "Transport inflation hit rural India harder"],
   ["What did petrol and diesel add to the story?", "Petrol and diesel are only one part of that cost"],
@@ -30,13 +34,15 @@ const bodyMarkdown = `## How did the curve begin?
 
 India's motorisation story does not begin with a luxury SUV, a flyover opening, or an EV launch. It begins in the monthly VAHAN tables in 2003, when a country of more than a billion people was registering only a few lakh vehicles a month. The road economy was still early in its mass phase: no app-delivery fleets at national scale, no mainstream EV policy, fewer financed two-wheelers in small towns, and a thinner highway and dealer network than India has today.
 
+Read the word carefully: registrations, not sales. VAHAN is closer to vehicles entering the road system than factory dispatches are, but it is not ownership, kilometres driven, scrappage, household access or company wholesale sales. This article uses registrations as the road-flow backbone and brings SIAM wholesale data only as a separate industry-side check.
+
 By FY 2025-26, VAHAN recorded 30.8 million registrations in a year. That is the headline scale. The more useful story is the shape of the expansion. India did not simply become a car country. It became a motorised country on Indian terms: mostly two-wheelers, a meaningful but still minority car market, more three-wheelers and tractors, a diesel retreat, a visible EV wedge, and a road economy shaped by income, credit, fuel prices, festivals and state-level growth.
 
-In January 2003, VAHAN recorded about 3.45 lakh registrations. By the mid-2020s, ordinary months were often above 20 lakh, and festival months could go much higher. October 2025 crossed 4.1 million registrations, the largest month in this series.
+In January 2003, VAHAN recorded about 3.45 lakh registrations. By the mid-2020s, ordinary months were often above 20 lakh, and festival months could go much higher. October 2025 crossed 4.1 million registrations, the largest complete month in this series.
 
 Read the monthly line as the pulse of the road economy. It shows the long rise in household and business mobility, the late-year festival burst, and the Covid break in the same frame. It also shows why this article uses more than one chart. A single rising line tells us the country motorised. It does not tell us who motorised, what they bought, how they paid, or what the energy consequences were.
 
-The last 2026 point needs care. The raw VAHAN tables run into June 2026, but June is partial through June 13, 2026. That is useful for freshness, not for a full-year conclusion.
+The raw VAHAN tables run into June 2026, but June is partial through June 13, 2026. The chart drops that partial point, so the line ends at May 2026 instead of showing a fake cliff.
 
 ## How large did the annual market become?
 
@@ -68,6 +74,14 @@ That is exactly what we should expect. Vehicle buying is lumpy. It depends on cr
 
 The growth chart is therefore where the development story becomes less tidy and more believable. India got richer, but households and firms did not buy vehicles in a smooth line every year.
 
+## What happened in the latest complete months?
+
+The scary-looking drop at the raw end of the scrape is not a real collapse. It is a partial-month artifact. June 2026 in the raw tables covers only the first 13 days, so it should not sit on the same line as complete months.
+
+If we use only complete months, the recent story is still expansion. Registrations in January 2026 were about 18% above January 2025. February and March were each about 26% higher than the same month a year earlier. April was up about 14%, and May was up about 10%.
+
+That does not mean demand can only rise from here. It means the article should not let a half-month data point pretend to be a downturn. The honest chart is complete-month year-on-year growth, with festival timing and base effects still kept in mind.
+
 ## So what does the correlation really say?
 
 The correlation table stops the article from pretending to be more certain than the data allows. In levels, registrations correlate strongly with GDP and per-capita GDP because India, income and vehicle registrations all rose over the same period. That relationship is meaningful, but it is also partly the mathematics of two upward lines.
@@ -93,6 +107,22 @@ The easy image of development is a family graduating from a scooter to a hatchba
 That is the structure of Indian mobility. A two-wheeler is cheaper to buy, cheaper to run, easier to park, easier to finance, and more useful in congested towns than a car. It can be a family vehicle, a commute vehicle and a livelihood tool. It can connect a village to a bus stand, a worker to an industrial cluster, a student to a college, or a delivery rider to a platform job.
 
 Cars arrived and became more visible in the public imagination. They did not take over the registration base. Any story of Indian motorisation that starts with cars will miss most of the market.
+
+## What actually got added?
+
+Shares tell the structure, but absolute additions tell the road story. Between calendar 2003 and 2025, two-wheelers added about 18.1 million annual registrations. Cars and cabs added about 3.9 million. Tractors and tillers, goods vehicles, other three-wheelers and e-rickshaws all added visible flows, but none came close to the two-wheeler addition.
+
+That is why the article's title should not be shy about two-wheelers. India did not merely keep a high two-wheeler share while everything grew. Most of the extra annual registration flow also came from two-wheelers.
+
+This chart is not the vehicle stock on the road. A vehicle registered in 2003 may no longer exist, and a vehicle registered in 2025 may replace an older one. But as a measure of what was being added to the road system each year, the message is direct: the marginal vehicle was usually still small, cheap and practical.
+
+## What did e-rickshaws change?
+
+E-rickshaws deserve their own line because they are easy to miss inside a broad three-wheeler bucket. VAHAN's e-rickshaw classes were almost invisible in the early years. By FY 2025-26, they were above half a million registrations.
+
+This is not just a technology story. It is a local-mobility story: short trips, feeder routes, neighbourhood transport, small operators and an electric category that grew outside the premium-car frame. It helps explain why EV adoption in India should not be read only through cars.
+
+The caveat is important. This is a vehicle-class label, not a fuel-by-class cross-tab. Do not add it to the battery-EV fuel count as if the two were independent. Use it to see the shape of the three-wheeler transition, not to reconcile the entire EV market.
 
 ## What changed under the tank?
 
@@ -121,6 +151,14 @@ The biggest absolute additions came from the biggest state markets. Uttar Prades
 This is not a per-capita ranking. A large state can add the most vehicles simply because it has more people and more households. But the absolute-additions view is still useful because it tells us where the road system, dealer network, fuel demand, credit demand and registration workload expanded most.
 
 It also shifts the story away from a metro-only reading. The new road economy is visible in large state markets, district towns, rural commuting routes, freight corridors and peri-urban belts. The pressure is practical: more vehicles need roads, parking, enforcement, finance, insurance, repair labour and, increasingly, chargers.
+
+## Was the boom concentrated in only a few states?
+
+Not only. The five largest state markets accounted for about half of annual registrations in 2003. By 2025, the top-five share was about 46%. That is still concentrated, but it is not a story where the biggest few states swallowed the whole boom.
+
+This matters because motorisation is easy to imagine through a few high-income urban markets. The state concentration line says the expansion was broader than that. Uttar Pradesh and Maharashtra are huge, but the road economy also thickened across Gujarat, Tamil Nadu, Karnataka, Madhya Pradesh, Rajasthan, Bihar, Telangana, Haryana, West Bengal and Odisha.
+
+The chart recalculates the top five each year. It is a concentration check, not a fixed club of the same five states. Read it as a test of whether the boom became more geographically narrow. It did not.
 
 ## Why do some months suddenly explode?
 
@@ -168,9 +206,9 @@ That is why credit belongs in the article even though it cannot carry the whole 
 
 ## Did credit growth move with registrations?
 
-The YoY comparison is the sharper version of the credit question. The indexed chart shows that the loan book became much larger after 2019. The growth chart asks whether credit momentum and registration momentum moved together month by month.
+The YoY comparison is the sharper version of the credit question. The indexed chart shows that the loan book became much larger after 2019. The growth chart asks whether credit momentum and registration momentum moved together month by month, using the post-reopening period so the Covid base-effect spikes do not swallow the ordinary trend.
 
-They are related in the broad sense, but not one-for-one. Registration growth swings hard around Covid, recovery months and seasonal bursts. Vehicle-loan stock growth is steadier because it is a balance-sheet measure. It includes new loans, but it also includes repayments, tenures, larger ticket sizes and old loans still sitting on bank books.
+They are related in the broad sense, but not one-for-one. Even after the Covid rebound is out of frame, registration growth swings more than vehicle-loan stock growth. Vehicle-loan stock growth is steadier because it is a balance-sheet measure. It includes new loans, but it also includes repayments, tenures, larger ticket sizes and old loans still sitting on bank books.
 
 That is the useful lesson. Credit is part of the motorisation machine, but outstanding loan growth is not a clean proxy for new vehicle demand. It tells us the financing channel expanded. It does not tell us exactly how many registrations were financed in a given month.
 
@@ -204,13 +242,13 @@ The honest conclusion is conditional. EV registrations are rising. The grid is i
 
 ## How should you read these numbers?
 
-The backbone is VAHAN registration data from January 2003 onward. Fiscal-year series are built by summing monthly VAHAN tables from April to March. Calendar-year state additions use complete calendar years, 2003 and 2025. Vehicle classes and fuel types are grouped into readable buckets: two-wheelers include motorcycles, scooters and mopeds; cars and cabs are grouped together; battery EVs are ELECTRIC(BOV) plus PURE EV.
+The backbone is VAHAN registration data from January 2003 onward. Fiscal-year series are built by summing monthly VAHAN tables from April to March. The opening monthly chart excludes the partial June 2026 point and ends at May 2026. Calendar-year state and vehicle-class additions use complete calendar years, 2003 and 2025. Vehicle classes and fuel types are grouped into readable buckets: two-wheelers include motorcycles, scooters and mopeds; cars and cabs are grouped together; e-rickshaws are E-RICKSHAW(P) plus E-RICKSHAW WITH CART (G); battery EVs are ELECTRIC(BOV) plus PURE EV.
 
 Per-capita registrations divide calendar-year VAHAN totals by World Bank population. GDP and per-capita GDP come from MoSPI NAS. Transport, rural, urban, petrol and diesel CPI series come from MoSPI CPI. Vehicle credit is RBI/IndiaDataHub outstanding loan stock. SIAM is wholesale domestic sales, not registrations. Ember is electricity-grid data, not EV adoption data.
 
 The correlation tables are Pearson correlations. The GDP correlation table uses fiscal-year registrations and MoSPI income series; the growth rows exclude FY 2020-21 and FY 2021-22 so the Covid collapse and rebound do not dominate the answer. The transport CPI table uses monthly year-on-year registration growth against monthly transport or fuel CPI inflation, with a second cut excluding 2020 and 2021.
 
-The caveat is not a footnote. VAHAN measures registrations, not ownership, kilometres, scrappage, emissions, household access or congestion. Correlations are descriptive, not causal. The 2026 monthly tail is partial through June 13, 2026. So the story is strong where it is measured directly: India registered seven times more vehicles, stayed a two-wheeler country, saw diesel fade and EVs arrive, and plugged that transition into a grid that is cleaner than before but still carbon-heavy. Everything beyond that should be read as context, not proof.`;
+The caveat is not a footnote. VAHAN measures registrations, not ownership, kilometres, scrappage, emissions, household access or congestion. Correlations are descriptive, not causal. The raw 2026 monthly tail is partial through June 13, 2026, so the article uses complete months for monthly charts. The story is strongest where it is measured directly: India registered seven times more vehicles, stayed a two-wheeler country, saw diesel fade and EVs arrive, and plugged that transition into a grid that is cleaner than before but still carbon-heavy. Everything beyond that should be read as context, not proof.`;
 
 const explainerRows = [
   [
@@ -219,7 +257,7 @@ const explainerRows = [
     "This is the pulse chart for the whole article. It shows the long climb in new vehicles entering the system, the recurring festival peaks, the Covid break, and the sharp recovery in one view. The chart is monthly, so it preserves the volatility that annual totals hide.",
     "It establishes the basic fact that the road economy became mass-scale after 2003 before the article asks what kind of motorisation India actually got.",
     "Follow the line from left to right and treat every point as registrations in that month, not cumulative fleet size. The tallest spikes are monthly surges, usually clustered around the festive season.",
-    "Do not read the final 2026 point as a full-year signal. The VAHAN source runs through June 13, 2026, so the latest month is partial.",
+    "Do not look for the raw June 2026 cliff here. The article-ready line drops the partial June point and ends at May 2026.",
     "On a phone, ignore exact monthly labels and look for three features: the long rise, the Covid break, and the late-year spikes."
   ],
   [
@@ -250,6 +288,15 @@ const explainerRows = [
     "The Covid swing is visually large. After noticing it, spend a moment on the pre- and post-Covid years."
   ],
   [
+    "The latest complete months were still growing",
+    "The partial June cliff disappears when the chart uses complete months only.",
+    "The raw dashboard tables include June 2026 only through June 13, which creates a false drop in the monthly count. Year-on-year growth through the latest complete month gives a cleaner recent read: January-May 2026 were all above their 2025 counterparts. This is still not seasonally adjusted, but it removes the biggest data-window distortion.",
+    "It fixes the visual cliff in the opening chart and gives the reader recent momentum without treating half a month as a full month.",
+    "Read each point as registrations in that month versus the same month one year earlier.",
+    "Do not treat this as a forecast or a seasonally adjusted demand index. Festival timing, base effects and policy timing can still move monthly growth.",
+    "On mobile, focus on whether the recent points sit above or below zero."
+  ],
+  [
     "Correlation is high in levels, modest in growth",
     "The statistical check weakens the simple GDP story.",
     "Level correlations are high because registrations, GDP and population-linked income all rose over two decades. Growth correlations ask whether the annual changes move together, and those are more modest once Covid years are excluded. Nominal growth lines up better than real growth because vehicle purchases happen in current rupees.",
@@ -277,6 +324,24 @@ const explainerRows = [
     "The two-wheeler line will dominate. Use the smaller lines to see what changed beneath it."
   ],
   [
+    "Two-wheelers added most of the new flow",
+    "The two-wheeler story is even clearer in absolute additions.",
+    "Between calendar 2003 and 2025, two-wheelers added about 18.1 million annual registrations, while cars and cabs added about 3.9 million. That makes the composition claim harder to dismiss as only a percentage story. The physical increase in annual registrations was also overwhelmingly two-wheeler-led.",
+    "It converts the share story into road-scale additions that are easier to understand.",
+    "Each bar is calendar 2025 registrations minus calendar 2003 registrations for that vehicle bucket.",
+    "Do not read the bars as the vehicle stock on the road. They are changes in annual registration flow.",
+    "The large two-wheeler bar is the point; the smaller bars show the rest of the market did grow too."
+  ],
+  [
+    "E-rickshaws became their own mobility story",
+    "E-rickshaws rose from almost nothing to more than half a million annual registrations.",
+    "The broad three-wheeler bucket hides a distinctive transition. VAHAN's e-rickshaw classes went from near-zero annual registrations in the early years to about 564,000 in FY 2025-26. That is a local-mobility and livelihood story as much as a technology story.",
+    "It gives the article one concrete example of a new vehicle category created during the boom.",
+    "Read the line as fiscal-year registrations for E-RICKSHAW(P) plus E-RICKSHAW WITH CART (G).",
+    "Do not add this to the fuel EV line as if they were independent measures. This is a vehicle-class cut, while the EV chart is a fuel cut.",
+    "The early years are tiny. The post-2020 rise is the feature to watch."
+  ],
+  [
     "Petrol still dominates, diesel fades, EVs arrive",
     "The fuel mix changed, but petrol still rules the registration base.",
     "The chart shows three things at once: petrol remains the national base, diesel has lost ground, and battery EVs have become visible. That is a more accurate transition story than either 'nothing changed' or 'EVs took over'.",
@@ -302,6 +367,15 @@ const explainerRows = [
     "Each bar is calendar-year 2025 registrations minus calendar-year 2003 registrations for that state.",
     "Do not read this as a per-capita ranking. Large states naturally have more people and can add more vehicles in absolute terms.",
     "On mobile, read the ranking and the gap between the top states. Exact bar labels are secondary."
+  ],
+  [
+    "The boom was not only a top-five-state story",
+    "The largest state markets still matter, but they did not absorb the whole boom.",
+    "The top five state and UT markets accounted for about half of annual registrations in 2003 and about 46% in 2025. That is still concentrated, but it points to a broadening road economy rather than a boom limited to only the biggest few markets. The top five are recalculated each year.",
+    "It checks whether national growth was becoming geographically narrower.",
+    "Read the line as the share of all registrations accounted for by the five largest state/UT markets in each calendar year.",
+    "Do not assume the same five states are being tracked every year. This is a concentration measure, not a fixed-state panel.",
+    "A flatter line means the boom stayed broad; a sharp rise would mean concentration."
   ],
   [
     "The festival spike is real",
@@ -351,9 +425,9 @@ const explainerRows = [
   [
     "Credit growth and registrations do not move one-for-one",
     "Loan-stock growth is steadier than registration growth.",
-    "This is the growth-rate check behind the credit story. Registrations jump and fall sharply around Covid, recovery months and seasonal demand, while outstanding vehicle-loan growth moves more slowly because it is a stock on bank balance sheets. That contrast is exactly why the article should not treat credit growth as a direct count of financed vehicles.",
+    "This is the growth-rate check behind the credit story, cropped to the post-reopening window so the Covid base-effect spikes do not flatten the ordinary movement. Registrations still jump and fall more sharply than outstanding vehicle-loan growth, which moves more slowly because it is a stock on bank balance sheets. That contrast is exactly why the article should not treat credit growth as a direct count of financed vehicles.",
     "It adds a more honest test than the indexed stock chart: not just whether credit became larger, but whether its momentum matched registrations.",
-    "Both lines are monthly year-on-year growth rates over the overlapping VAHAN and RBI/IndiaDataHub window. Compare direction and volatility, not only the latest value.",
+    "Both lines are monthly year-on-year growth rates from 2023 onward. Compare direction and volatility, not only the latest value.",
     "Do not read loan-stock growth as fresh vehicle-loan disbursement growth. The stock changes with new loans, repayments, loan tenure, interest rates, ticket size and older balances.",
     "On mobile, focus on the smoother credit line versus the more jagged registration line."
   ],
@@ -391,12 +465,16 @@ const detailAdditions = {
   "Seven times more new vehicles a year": "A sevenfold flow is large enough to reshape more than the auto industry. It affects road use, insurance, repair markets, household debt, fuel demand and state administration. This is why registrations are a better backbone for this story than only production or company sales.",
   "Registrations outran real income, but not nominal India": "The gap with real income is the first clue that motorisation was not just a smooth prosperity story. Cheaper vehicle formats, more credit, more dealer reach and the utility of two-wheelers all helped registrations run ahead of real per-person income. The nominal line is useful because the rupee economy, not a constant-price abstraction, is where down payments and EMIs happen.",
   "The year-to-year link is weaker than the level chart": "This is where the story becomes less linear. A household can delay a purchase because fuel is expensive, bring it forward because finance is available, or buy during a festival month even if GDP growth has not changed much. The chart therefore moves the reader from macro trend to vehicle-market behaviour.",
+  "The latest complete months were still growing": "This chart is also a method note in visual form. The raw scrape is fresh through mid-June, but freshness is not the same as comparability. Dropping the partial month keeps the reader focused on real movement in complete months.",
   "Correlation is high in levels, modest in growth": "The split between levels and growth is the whole lesson. In levels, almost every big India series rises together after 2003, so correlation can flatter the story. In growth rates, the relationship survives but weakens, which is a better fit for a market shaped by income plus credit, prices, policy, supply and sentiment.",
   "Motorisation rose even after population is counted": "This does not mean India has become a high-ownership country by global standards. It means the yearly flow of new registrations became much larger relative to the population. That can come from first-time access, replacement demand, households adding another vehicle, or commercial vehicles expanding with local economies.",
   "Still a two-wheeler country": "This chart is the antidote to the SUV-led public image of motorisation. The typical new registered vehicle is still far more likely to be a two-wheeler than a car, which points to affordability, parking, congestion and daily access rather than only status consumption. It also means the EV transition, credit market and fuel-price story have to be read through two-wheelers, not only passenger cars.",
+  "Two-wheelers added most of the new flow": "This bar chart is the bluntest evidence for the title. Even when cars, tractors, goods vehicles and e-rickshaws all grew, two-wheelers supplied most of the additional annual registration flow. That makes the story about mass mobility rather than a simple car-upgrade ladder.",
+  "E-rickshaws became their own mobility story": "Separating e-rickshaws helps the reader see a transition that is both electric and local. These vehicles change short-distance mobility and livelihoods in ways a car-centred EV story would miss. The chart also shows why vehicle class and fuel class are different cuts of the same registration system.",
   "Petrol still dominates, diesel fades, EVs arrive": "The fuel transition is real, but it sits on top of a petrol-heavy base. Diesel's decline changes the story for passenger vehicles and some commercial use, while EV growth is now visible enough to matter for policy and infrastructure. The chart is deliberately about registrations, because the existing fleet will change more slowly than the new-flow mix.",
   "EVs went from footnote to millions": "The absolute count matters because it separates a meaningful transition from a tiny-base percentage story. Millions of annual EV registrations can alter dealer behaviour, charging demand, battery supply chains and city-level transport policy. But it still leaves open the harder questions: vehicle class, kilometres driven, charging time and fuel actually displaced.",
   "Where the extra vehicles came from": "The state ranking shows where the boom became administratively and physically visible. A state adding lakhs or millions of annual registrations also has to absorb more traffic, credit demand, service shops, fuel or charging infrastructure and enforcement work. The chart is intentionally absolute because absolute additions are what hit roads and institutions first.",
+  "The boom was not only a top-five-state story": "This is a useful counterweight to the state-ranking chart. The ranking naturally elevates large states, while concentration asks whether the top markets took a growing share of the pie. The answer is no, or at least not over the full period.",
   "The festival spike is real": "This is demand timing, not just demand level. In India, vehicles are often bought around auspicious dates, discounts, dealer campaigns and family decisions that cluster purchases. That makes monthly registrations partly a cultural and retail calendar, not only an economic indicator.",
   "Transport inflation hit rural India harder": "The rural-urban gap matters because rural mobility is often less optional. When buses are sparse, work sites are far, or health and education access require travel, a two-wheeler can remain necessary even when mobility costs rise. That is why transport CPI can be pressure and motivation at the same time.",
   "Petrol and diesel are only one part of that cost": "Fuel indexes tell us about running-cost pressure after purchase, but they do not map neatly onto one household decision. A tractor, a goods carrier, a taxi, a scooter and a weekend car face different fuel exposure. The chart should therefore be read as a cost backdrop that interacts with vehicle class, use intensity and local taxation.",
@@ -425,9 +503,9 @@ const artifact = {
   status: "ready",
   dataThrough: "VAHAN through 2026-06-13; full fiscal years through FY 2025-26",
   short: {
-    headline: "Seven times more vehicles, still a two-wheeler country",
-    dek: "VAHAN registrations show India motorised at astonishing scale after 2003. But the road filled mostly with two-wheelers, while diesel faded, EVs arrived, and income explained only part of the ride.",
-    body: "India recorded about 4.4 million VAHAN registrations in FY 2003-04. By FY 2025-26, it recorded about 30.8 million. Real income rose too, but the year-to-year link is not tight enough to make GDP the whole explanation. The deeper story is composition: roughly seven in ten registrations are still two-wheelers, petrol still dominates, EVs are now visible but not dominant, and credit, transport costs, festivals and state-level growth shape the pattern."
+    headline: "India's vehicle boom is still a two-wheeler story",
+    dek: "VAHAN registrations show India motorised at astonishing scale after 2003. But registrations are not sales, and the road filled mostly with two-wheelers while diesel faded, EVs arrived and income explained only part of the ride.",
+    body: "India recorded about 4.4 million VAHAN registrations in FY 2003-04. By FY 2025-26, it recorded about 30.8 million. This is registrations data, not ownership or wholesale sales. The deeper story is composition: roughly seven in ten registrations are still two-wheelers, most of the added annual flow came from two-wheelers, petrol still dominates, EVs are now visible but not dominant, and credit, transport costs, festivals and state-level growth shape the pattern."
   },
   macha: {
     heading: "Okay, macha, what does this mean?",
@@ -435,8 +513,8 @@ const artifact = {
     soWhat: "The vehicle boom is a story of access and aspiration, but also of congestion, fuel cost, credit and grid pressure."
   },
   article: {
-    title: "Seven times more vehicles, still a two-wheeler country",
-    standfirst: "From 2003 to today, VAHAN data captures one of India's biggest everyday transformations: the road became dramatically more motorised, but not in the car-first way people often imagine.",
+    title: "India's vehicle boom is still a two-wheeler story",
+    standfirst: "From 2003 to today, VAHAN registrations capture one of India's biggest everyday transformations: the road became dramatically more motorised, but not in the car-first way people often imagine.",
     bodyMarkdown
   },
   editorialPlan: {
@@ -447,11 +525,14 @@ const artifact = {
       { label: "VAHAN registrations, FY 2025-26", reason: "Latest complete fiscal-year scale", use: "lede" },
       { label: "Two-wheeler registration share, FY 2025-26", reason: "Core composition point", use: "hero" },
       { label: "Battery EV registration share, FY 2025-26", reason: "Energy-transition point", use: "chart" },
+      { label: "Two-wheeler registration additions, 2003-2025", reason: "Absolute composition point", use: "chart" },
+      { label: "E-rickshaw registrations, FY 2025-26", reason: "New local-mobility category", use: "chart" },
       { label: "Transport CPI rural vs urban, Dec 2025", reason: "Affordability and rural-urban context", use: "chart" }
     ],
     pullQuotes: [
       { quote: "India registered roughly seven times as many vehicles in FY 2025-26 as in FY 2003-04.", numberLabel: "VAHAN registrations, FY 2025-26" },
-      { quote: "Two-wheelers still account for roughly seven in ten new registrations.", numberLabel: "Two-wheeler registration share, FY 2025-26" }
+      { quote: "Two-wheelers still account for roughly seven in ten new registrations.", numberLabel: "Two-wheeler registration share, FY 2025-26" },
+      { quote: "Two-wheelers added about 18.1 million annual registrations between 2003 and 2025.", numberLabel: "Two-wheeler registration additions, 2003-2025" }
     ],
     glossaryBlocks: [
       { term: "VAHAN registrations", plainMeaning: "Vehicles recorded in the government's registration system.", whyItMattersHere: "This is closer to vehicles entering the road fleet than factory dispatches, but it is not the same as ownership or kilometres driven.", keyTerm: true },
@@ -465,7 +546,7 @@ const artifact = {
   chartExplainers: explainers,
   sectionVisualMap: headings.map(([heading, visualId]) => ({ heading, visualId })),
   sourceNotes: [
-    "VAHAN dashboard tables provide monthly registrations by state, vehicle class and fuel from 2003 into June 2026.",
+    "VAHAN dashboard tables provide monthly registrations by state, vehicle class and fuel from 2003 into June 2026; article charts use complete months where monthly comparability matters.",
     "MoSPI NAS provides GDP and per-capita GDP; MoSPI CPI provides transport, rural, urban, petrol and diesel price indexes.",
     "SIAM public pages and the FY 2025-26 press release provide domestic wholesale sales by category.",
     "IndiaDataHub's RBI banking feed provides outstanding vehicle-loan stock adjusted for mergers.",
@@ -474,7 +555,7 @@ const artifact = {
   ],
   caveats: [
     "VAHAN measures registrations, not total vehicle ownership, vehicle kilometres, scrappage, production or wholesale sales.",
-    "The 2026 VAHAN monthly data is partial through June 13, 2026; full-year comparisons use complete fiscal years through FY 2025-26 or calendar years through 2025.",
+    "The 2026 VAHAN monthly raw data is partial through June 13, 2026; the opening monthly chart excludes that partial June point, and full-year comparisons use complete fiscal years through FY 2025-26 or calendar years through 2025.",
     "Vehicle-class and fuel buckets are derived groupings for readability and do not capture every regulatory nuance.",
     "Correlations are descriptive association tests and do not prove causation.",
     "SIAM is wholesale domestic sales, not registrations; the public scrape has a gap between FY 2013-14 and FY 2025-26.",
@@ -486,6 +567,8 @@ const artifact = {
     "VAHAN registrations rose from 4.4 million in FY 2003-04 to 30.8 million in FY 2025-26.",
     "Battery EVs were about 8.25% of FY 2025-26 registrations.",
     "Two-wheelers were about 72% of FY 2025-26 registrations.",
+    "Two-wheelers added about 18.1 million annual registrations between calendar 2003 and calendar 2025.",
+    "E-rickshaw registrations reached about 564,000 in FY 2025-26.",
     "New registrations per 1,000 people rose from about 3.8 in 2003 to about 18.8 in 2024.",
     "Rural transport-and-communication CPI was about 178.5 in December 2025; urban was about 166.9.",
     "Ember puts India's 2025 electricity carbon intensity at about 671 gCO2/kWh."
@@ -511,6 +594,8 @@ const artifact = {
       { label: "VAHAN registrations, FY 2025-26", value: 30838645, displayValue: "30.8 million", date: "2026-03-31", unit: "registrations", sourceId: "vahan-derived", indicatorId: "auto.vahan.registrations.total_fy" },
       { label: "Two-wheeler share, FY 2025-26", value: 71.867529, displayValue: "about 72%", date: "2026-03-31", unit: "% of registrations", sourceId: "vahan-derived", indicatorId: "auto.vahan.vehicle.two_wheelers.share_fy" },
       { label: "Battery EV share, FY 2025-26", value: 8.253994, displayValue: "8.25%", date: "2026-03-31", unit: "% of registrations", sourceId: "vahan-derived", indicatorId: "auto.vahan.fuel.ev_battery.share_fy" },
+      { label: "Two-wheeler registration additions, 2003-2025", value: 18135260, displayValue: "18.1 million", date: "2025", unit: "additional annual registrations", sourceId: "vahan-derived", indicatorId: "auto.vahan.vehicle.class_additions_2003_2025" },
+      { label: "E-rickshaw registrations, FY 2025-26", value: 564363, displayValue: "about 564,000", date: "2026-03-31", unit: "registrations", sourceId: "vahan-derived", indicatorId: "auto.vahan.vehicle.e_rickshaw.registrations_fy" },
       { label: "Registrations per 1,000 people, 2024", value: 18.772, displayValue: "18.8", date: "2024", unit: "registrations per 1,000 people", sourceId: "vahan-derived", indicatorId: "auto.vahan.registrations.per_1000_people" }
     ],
     sourceSummaries: [],

@@ -9,6 +9,9 @@ from pathlib import Path
 
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 SOURCE_URL = "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+# The committed 2026 dashboard scrape runs through 2026-06-13, so June is useful
+# for audit freshness but misleading as the final point in the monthly chart.
+LATEST_COMPLETE_MONTH = "2026-05"
 
 
 def write_json(path: Path, value) -> None:
@@ -43,6 +46,7 @@ def main() -> int:
     observations = []
     for table in state_tables:
         observations.extend(monthly_totals(table))
+    observations = [row for row in observations if row["date"] <= LATEST_COMPLETE_MONTH]
     observations.sort(key=lambda row: row["date"])
 
     artifact = {
@@ -60,8 +64,8 @@ def main() -> int:
         "fetchedAt": fetched_at,
         "observations": observations,
         "metadata": {
-            "method": "Summed monthly VAHAN dashboard rows where y-axis=State and x-axis=Month Wise, rebuilt from normalized local VAHAN tables.",
-            "caveat": "Registration records, not wholesale sales. Coverage follows VAHAN dashboard offices and historical backfills. 2026 is partial in the current local tables.",
+            "method": "Summed monthly VAHAN dashboard rows where y-axis=State and x-axis=Month Wise, rebuilt from normalized local VAHAN tables. The partial June 2026 point is excluded from the article-ready monthly series.",
+            "caveat": "Registration records, not wholesale sales. Coverage follows VAHAN dashboard offices and historical backfills. Raw 2026 tables include a partial June point through 2026-06-13.",
         },
     }
     out = Path("data/series/vahan.IN.auto.registrations.total_monthly.json")
