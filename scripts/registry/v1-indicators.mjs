@@ -720,7 +720,7 @@ export const v1Questions = [
   },
   {
     id: "q.econ.motorisation",
-    slug: "indias-two-wheeler-boom",
+    slug: "india-vehicle-registrations-two-wheeler-boom",
     question: "What does India's vehicle boom really look like?",
     priority: "core",
     // Built Jun 2026. Sources: VAHAN registration dashboard tables (2003-Jun 2026),
