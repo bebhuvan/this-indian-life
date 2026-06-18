@@ -1,0 +1,153 @@
+---
+// DEV-ONLY chart gallery — the regression harness for the progressive chart-polish
+// program. It walks every published question, runs the real `visualsForQuestion`
+// pipeline, and renders one sample of each *rendering variant* (kind + the flags that
+// change geometry) through the real <ArticleVisuals>. So every chart type shows up
+// with authentic data (including choropleth/scenarioMap region paths), and a single
+// scroll — at desktop width, then resized to a phone width — is the visual diff.
+//
+// Not linked anywhere and 404s in production builds. View at /dev/chart-gallery.
+import Base from "../../layouts/Base.astro";
+import ArticleVisuals from "../../components/ArticleVisuals.astro";
+import { questionPages } from "../../data/questions";
+import { visualsForQuestion } from "../../data/viz";
+import type { VisualSpec } from "../../data/viz";
+
+if (import.meta.env.PROD) {
+  return Astro.redirect("/404");
+}
+
+type Sample = { sig: string; kind: string; from: string; fromTitle: string; visual: VisualSpec; explainers: any[] };
+
+// Grab a couple of real glossary definitions so the definition box (.defbox) is
+// testable here too, not just buried in an article body.
+const defboxSamples: Array<{ term: string; plainMeaning: string; whyItMattersHere: string }> = [];
+
+// A variant signature captures the flags that actually change how a chart renders, so
+// the gallery shows e.g. single- vs multi-line, hero vs feature, log vs linear bars,
+// sequential vs diverging choropleths — not 30 near-identical line charts.
+function signature(v: any): string {
+  switch (v.kind) {
+    case "line":
+      return `line|${v.lines?.length > 1 ? "multi" : "single"}|${v.size || "plain"}|${v.refLine ? "ref" : "-"}|${v.bands?.length ? "bands" : "-"}`;
+    case "bar":
+      return `bar|${v.scale || "lin"}|${v.share ? "share" : "-"}|${v.bars?.some((b: any) => b.value < 0) ? "neg" : "-"}`;
+    case "choropleth":
+      return `choropleth|${v.signed ? "signed" : "-"}|${v.divergeAt != null ? "diverge" : "-"}|${v.ramp || "-"}`;
+    case "rankedChange":
+      return `rankedChange|${v.diverging ? "div" : "-"}`;
+    default:
+      return v.kind;
+  }
+}
+
+const PER_KIND_CAP = 4;
+const seen = new Set<string>();
+const countByKind: Record<string, number> = {};
+const samples: Sample[] = [];
+
+for (const page of questionPages) {
+  const explainers = (page.explanation?.chartExplainers as any[]) || [];
+  const glossary = page.explanation?.editorialPlan?.glossaryBlocks || [];
+  if (glossary.length && defboxSamples.length < 2) defboxSamples.push(glossary[0]);
+  let vis: VisualSpec[] = [];
+  try {
+    vis = visualsForQuestion(page) as VisualSpec[];
+  } catch {
+    continue;
+  }
+  for (const v of vis) {
+    const sig = signature(v);
+    if (seen.has(sig)) continue;
+    if ((countByKind[v.kind] || 0) >= PER_KIND_CAP) continue;
+    seen.add(sig);
+    countByKind[v.kind] = (countByKind[v.kind] || 0) + 1;
+    samples.push({ sig, kind: v.kind, from: page.slug, fromTitle: page.question, visual: v, explainers });
+  }
+}
+
+samples.sort((a, b) => a.kind.localeCompare(b.kind) || a.sig.localeCompare(b.sig));
+
+const kindCounts = Object.entries(countByKind).sort((a, b) => a[0].localeCompare(b[0]));
+const totalKinds = kindCounts.length;
+---
+
+<Base title="Chart gallery (dev)" domain="economy">
+  <div class="wrap">
+    <header class="gallery-head">
+      <p class="lbl">Dev harness</p>
+      <h1 class="serif">Chart gallery</h1>
+      <p class="gallery-note">
+        Every chart-rendering variant, pulled from real articles through the live
+        <code>visualsForQuestion</code> pipeline. {samples.length} samples across {totalKinds} chart kinds.
+        Resize the window to a phone width to check the mobile <code>.viz-m</code> render. Not shipped to production.
+      </p>
+      <div class="gallery-toc">
+        {kindCounts.map(([kind, count]) => (
+          <a href={`#kind-${kind}`}>{kind} <em>{count}</em></a>
+        ))}
+      </div>
+    </header>
+
+    {defboxSamples.length ? (
+      <section class="gallery-item" id="kind-defbox">
+        <div class="gallery-meta">
+          <span class="gallery-kind">defbox</span>
+          <code class="gallery-sig">definition box (glossary)</code>
+        </div>
+        {defboxSamples.map((item) => (
+          <aside class="defbox">
+            <p class="defbox-lbl">Definition</p>
+            <p class="defbox-term">{item.term}</p>
+            <p class="defbox-mean">{item.plainMeaning}</p>
+            {item.whyItMattersHere ? <p class="defbox-why">{item.whyItMattersHere}</p> : null}
+          </aside>
+        ))}
+      </section>
+    ) : null}
+
+    {samples.map((sample, index) => (
+      <section class="gallery-item" id={`kind-${sample.kind}`}>
+        <div class="gallery-meta">
+          <span class="gallery-kind">{sample.kind}</span>
+          <code class="gallery-sig">{sample.sig}</code>
+          <span class="gallery-from">from <a href={`/articles/${sample.from}/`}>{sample.fromTitle}</a></span>
+        </div>
+        <ArticleVisuals
+          visuals={[sample.visual]}
+          chartExplainers={sample.explainers}
+          showKpis={false}
+          leadFirst={false}
+          startIndex={index + 1}
+          sectionLabel=""
+          sectionClass="story-viz gallery-viz"
+        />
+      </section>
+    ))}
+  </div>
+</Base>
+
+<style is:global>
+  .gallery-head { padding: 48px 0 8px; }
+  .gallery-head h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; margin: 4px 0 14px; }
+  .gallery-note { color: var(--mid); max-width: 70ch; line-height: 1.6; font-size: .92rem; }
+  .gallery-note code { font-size: .85em; background: var(--ghost); padding: 1px 5px; border-radius: 3px; }
+  .gallery-toc { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 22px; }
+  .gallery-toc a {
+    font-family: var(--sans); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none; border: 1px solid var(--ghost); padding: 5px 9px; border-radius: 4px;
+  }
+  .gallery-toc a:hover { border-color: var(--c); color: var(--c); }
+  .gallery-toc a em { color: var(--dim); font-style: normal; }
+  .gallery-item { border-top: 1px dashed var(--ghost); margin-top: 40px; }
+  .gallery-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding-top: 22px; }
+  .gallery-kind {
+    font-family: var(--sans); font-size: .66rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: #fff; background: var(--c); padding: 3px 8px; border-radius: 3px;
+  }
+  .gallery-sig { font-size: .72rem; color: var(--dim); }
+  .gallery-from { font-size: .78rem; color: var(--mid); }
+  .gallery-from a { color: var(--mid); }
+  /* The gallery shows charts standalone, so the section's own top padding is redundant. */
+  .gallery-viz.viz-section { padding-top: 8px; }
+</style>
