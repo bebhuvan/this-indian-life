@@ -58,7 +58,7 @@ const series = summaries
       title: s.title || s.indicatorId || "Untitled series",
       source: sourceLabel(s.sourceId || "?"),
       coverage: coverage(s),
-      fileUrl: file ? githubFileUrl(file.file, dataRef) : undefined,
+      fileUrl: file && file.redistributable !== false ? githubFileUrl(file.file, dataRef) : undefined,
       method: file?.method
     };
   })

@@ -576,7 +576,7 @@ export const v1Questions = [
         ],
         indicator: "divergence.fertility.in",
         why: "India's fall is not unique: it has joined the low-fertility world, but sits above every advanced economy and far above East Asia's ultra-low rates.", read: "Each line is a country's births per woman since 1960; India is highlighted, with South Asia in amber, East Asia in teal and the advanced West in green.", watch: "India reached low fertility at a fraction of the income the West or East Asia had when they got there, and unlike Korea or China it has levelled near replacement rather than crashing below it." },
-      { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "Fertility by state", size: "feature", window: "latest", beat: "geography", rankLabel: "Highest", bottomLabel: "Lowest", divergeAt: 2.1,
+      { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "Fertility by state", size: "feature", window: "latest", beat: "geography", rankLabel: "Highest", bottomLabel: "Lowest", divergeAt: 2.1, pivotLabel: "replacement",
         why: "Fertility is not one number; it is a north-south map.", read: "Each state shaded by its fertility rate, from about 0.9 in some islands to 2.7 in Bihar.", watch: "The south and west are well below replacement; a band of northern states is still above it." },
       { indicator: "people.nfhs.tfr_state_ranked", chart: "tableBars", title: "Highest and lowest fertility states", size: "feature", beat: "ranking", unit: "births per woman", subtitle: "NFHS-6 (2023-24) · top 5 and bottom 5 of 33 surveyed states/UTs",
         why: "The map, sharpened into a league table.", read: "The five highest-fertility states set against the five lowest.", watch: "Even the highest, Bihar at 2.7, is far below India's past; the lowest sit deep under replacement." },
@@ -943,7 +943,7 @@ export const v1Questions = [
       { indicator: "gold.derived.import_shares", chart: "columnLines", title: "Gold is India's second-biggest import after oil", size: "small", beat: "import-rank", unit: "% of total imports",
         columns: [ { key: "Crude oil", label: "Crude oil" }, { key: "Gold", label: "Gold" } ],
         why: "Gold's pull on the economy is easier to feel against India's other big imports.", read: "Crude oil and gold as a share of all India's merchandise imports. Oil leads at around a fifth; gold is usually second or third at 5 to 10 percent.", watch: "Both shares move with world prices as much as with volumes, so a rising share is not always more barrels or more grams." },
-      { indicator: "macro.current_account_usd", chart: "line", title: "Gold helped tip India into its 2013 crisis", size: "small", window: "full", beat: "current-account",
+      { indicator: "macro.current_account_usd", chart: "line", title: "Gold helped tip India into its 2013 crisis", size: "small", window: "full", beat: "current-account", subtitle: "India's current-account balance, US$ billion, financial years · MoSPI / RBI",
         why: "Gold imports are paid for in scarce dollars, so they widen the gap between what India earns and spends abroad.", read: "India's current-account balance. The record deficit of 2012-13, when gold and oil imports both surged, is the squeeze that forced the government to act on gold.", watch: "Gold is one driver among several, oil and the global cycle matter too; but the 2013 deficit is precisely what triggered the gold import-duty hikes." },
       { indicator: "gold.comtrade.imports_by_partner", chart: "comtradePartnerBars", title: "Where India's gold comes from", size: "feature", field: "primaryValue", limit: 10, beat: "sources",
         why: "Two refining hubs supply most of it, not the mines.", read: "Top source countries in 2024: Switzerland and the UAE alone are about 60% of the value.", watch: "Switzerland and the UAE are refiners and entrepots; the metal is often mined elsewhere." },
@@ -997,6 +997,103 @@ export const v1Questions = [
           { indicator: "nonFoodSectoral:personal:Education Loans", label: "Education" }
         ],
         why: "Gold is no longer only stored; it is increasingly borrowed against, a fast-rising form of household credit.", read: "Each bar is April 2026 outstanding divided by January 2019. Gold loans have grown about twentyfold, faster than any other retail-loan category.", watch: "Part of the jump is the reclassification of informal lenders into the formal data, but the surge in gold-backed borrowing is real." }
+    ]
+  },
+  {
+    id: "q.econ.foreign_investment",
+    slug: "foreign-investment",
+    question: "Is foreign money really fleeing India? What FDI and FII numbers actually mean.",
+    priority: "core",
+    // Built Jun 2026. Sources: RBI Handbook/SAP_290 (gross/repat/net FDI, monthly+annual),
+    // NSDL FPI net investment (equity/debt/hybrid, reconciled), UNCTAD (India/world/peers
+    // flow+stock), FRED (EM dollar index, US 10Y, Fed funds, VIX, EM-VIX), DPIIT-via-IDH
+    // (FDI by source country). All numbers cross-checked against IndiaDataHub to the dollar.
+    indicators: [
+      "extfin.fdi.net.annual.usd", "extfin.fdi.portfolio_net.annual.usd", "extfin.narrative_anchors.usd",
+      "extfin.fdi.gross_inflows.annual.usd", "extfin.fdi.repatriation.annual.usd",
+      "extfin.fdi.outward.annual.usd", "extfin.fdi.outward_stock.unctad.usd",
+      "extfin.fdi.portfolio_net.monthly.usd",
+      "extfin.fpi.equity_net.annual.inr", "extfin.fpi.debt_net.annual.inr", "extfin.fpi.debt_far_net.annual.inr", "extfin.fpi.recent_split.nsdl.inr",
+      "extfin.driver.usd_em_index", "extfin.driver.us_10y_yield", "extfin.driver.fed_funds_rate",
+      "extfin.driver.vix", "extfin.driver.em_vix", "extfin.fpi.global_sensitivity.corr",
+      "extfin.fdi.source_country.dpiit.usd", "extfin.fdi.sector.dpiit.usd", "extfin.fpi.auc_by_country.nsdl.inr",
+      "extfin.fdi.india_share_world.pct", "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    ],
+    core: [
+      "extfin.fdi.net.annual.usd", "extfin.fdi.portfolio_net.annual.usd", "extfin.narrative_anchors.usd",
+      "extfin.fdi.gross_inflows.annual.usd", "extfin.fdi.repatriation.annual.usd",
+      "extfin.fdi.outward.annual.usd", "extfin.fdi.outward_stock.unctad.usd",
+      "extfin.fdi.portfolio_net.monthly.usd",
+      "extfin.fpi.equity_net.annual.inr", "extfin.fpi.debt_net.annual.inr", "extfin.fpi.debt_far_net.annual.inr", "extfin.fpi.recent_split.nsdl.inr",
+      "extfin.driver.usd_em_index", "extfin.driver.us_10y_yield", "extfin.driver.fed_funds_rate",
+      "extfin.driver.vix", "extfin.driver.em_vix", "extfin.fpi.global_sensitivity.corr",
+      "extfin.fdi.source_country.dpiit.usd", "extfin.fdi.sector.dpiit.usd", "extfin.fpi.auc_by_country.nsdl.inr",
+      "extfin.fdi.india_share_world.pct", "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    ],
+    context: [],
+    visualPlan: [
+      // --- ACT 0: THE SCARY NUMBER ---
+      { indicator: "extfin.fdi.net.annual.usd", chart: "line", title: "The number everyone is panicking about", size: "hero", window: "full", beat: "the-cliff", unit: "US$ million",
+        why: "Net FDI fell from about $43bn (FY20) to under $1bn (FY25). Every headline screams this.", read: "Net foreign direct investment, the figure the panic is built on.", watch: "Real, but the most misread line in Indian macro. The rest of the article is why." },
+      // --- ACT 1: WHAT FDI AND FII EVEN ARE ---
+      { chart: "multiLine", title: "Patient money and hot money", size: "feature", beat: "definitions", unit: "US$ million",
+        indicator: "extfin.fdi.net.annual.usd",
+        series: [ { indicator: "extfin.fdi.net.annual.usd", label: "Net FDI (control, lasting)" }, { indicator: "extfin.fdi.portfolio_net.annual.usd", label: "Net FPI / FII (portfolio, mobile)" } ],
+        why: "The two kinds of foreign money behave completely differently.", read: "FDI buys lasting control of a business; FII (portfolio) buys shares and bonds it can sell tomorrow.", watch: "FDI is steady; the FII line is a rollercoaster. That difference is the whole story." },
+      // --- ACT 2: GROSS VS NET (THE BIG MISREAD) ---
+      { chart: "multiLine", title: "Gross inflows hit a record the year net 'collapsed'", size: "hero", beat: "gross-vs-net", unit: "US$ million",
+        indicator: "extfin.fdi.gross_inflows.annual.usd",
+        series: [ { indicator: "extfin.fdi.gross_inflows.annual.usd", label: "Gross FDI coming in", emphasis: true }, { indicator: "extfin.fdi.net.annual.usd", label: "Net FDI (what the headlines quote)" } ],
+        why: "Foreigners did not stop coming. Gross inflows actually rose to a record ~$81bn.", read: "Gross inflows climbed while net fell, because net subtracts money flowing back out.", watch: "Reading the net line as if it were gross is the core mistake." },
+      { chart: "multiLine", title: "What eats the gap: repatriation and Indians investing abroad", size: "feature", beat: "decomposition", unit: "US$ million",
+        indicator: "extfin.fdi.gross_inflows.annual.usd",
+        series: [ { indicator: "extfin.fdi.gross_inflows.annual.usd", label: "Gross inflows" }, { indicator: "extfin.fdi.repatriation.annual.usd", label: "Repatriation (profits/exits leaving)" }, { indicator: "extfin.fdi.outward.annual.usd", label: "FDI by India (going abroad)" }, { indicator: "extfin.fdi.net.annual.usd", label: "Net FDI (what's left)" } ],
+        why: "Net = gross minus repatriation minus outward FDI. Both subtractions grew.", read: "Repatriation nearly tripled and outward FDI doubled between FY20 and FY25.", watch: "Net near zero is partly maturity, not flight." },
+      // --- ACT 3: WHY MONEY FLOWS BACK OUT ---
+      { indicator: "extfin.fdi.repatriation.annual.usd", chart: "line", title: "Foreign investors are taking profits home", size: "small", window: "full", beat: "repatriation", unit: "US$ million",
+        why: "Repatriation and disinvestment are why a flow turns negative, and they are rising.", read: "Money older foreign investments send back as profit, dividends or on exit.", watch: "A maturing market repatriates more; it is not the same as capital flight." },
+      // --- ACT 4: INDIANS INVEST ABROAD TOO ---
+      { indicator: "extfin.fdi.outward_stock.unctad.usd", chart: "line", title: "India has quietly become a capital exporter", size: "feature", window: "full", beat: "outward-stock", unit: "US$ million",
+        why: "Indian firms now hold a large and growing stock of investments abroad.", read: "India's outward FDI stock grew from about $1.7bn in 2000 to roughly $260bn in 2024 (UNCTAD).", watch: "Two-way capital flows are a sign of a maturing economy, like Korea or China before." },
+      { indicator: "extfin.fdi.outward.annual.usd", chart: "line", title: "And the yearly outflow has doubled", size: "small", window: "full", beat: "outward-flow", unit: "US$ million",
+        why: "The annual pace of Indian investment abroad roughly doubled in five years.", read: "FDI by India (the outward flow), about $13bn in FY20 and $28bn in FY25.", watch: "Includes round-tripping and overseas subsidiary funding, not only greenfield expansion." },
+      // --- ACT 5: THE FII ROLLERCOASTER ---
+      { indicator: "extfin.fdi.portfolio_net.monthly.usd", chart: "line", title: "Hot money, month by month", size: "hero", window: "full", beat: "rollercoaster", unit: "US$ million",
+        why: "Portfolio flows are violent at monthly resolution, which is the point of 'hot money'.", read: "Net monthly FII flows: roughly -$14.6bn in March 2020 (COVID), +$11bn in November 2020.", watch: "A negative month is normal market behaviour, not a verdict on India." },
+      { indicator: "extfin.fdi.portfolio_net.annual.usd", chart: "recentBars", title: "Three wild years in a row", size: "small", window: "full", beat: "fii-annual", unit: "US$ million",
+        why: "Even annually, FII swings between large inflows and outflows.", read: "Net portfolio investment swung from about +$36bn (FY21) to -$17bn (FY22) to +$44bn (FY24).", watch: "These reversals are mostly global, not India-specific (see the drivers act)." },
+      // --- ACT 6: NOT ALL FII IS THE SAME (EQUITY VS DEBT) ---
+      { chart: "multiLine", title: "Equity walked out while debt poured in", size: "feature", beat: "equity-vs-debt", unit: "INR crore",
+        indicator: "extfin.fpi.equity_net.annual.inr",
+        series: [ { indicator: "extfin.fpi.equity_net.annual.inr", label: "Equity" }, { indicator: "extfin.fpi.debt_net.annual.inr", label: "Debt" } ],
+        why: "Lumping 'FII' together hides that equity and debt often move in opposite directions.", read: "In FY25 foreigners sold equities heavily even as they bought Indian bonds.", watch: "Shown in rupees, which reconcile exactly; the dollar series has a one-month source glitch." },
+      { indicator: "extfin.fpi.debt_far_net.annual.inr", chart: "line", title: "The bond-index moment", size: "small", window: "full", beat: "bond-index", unit: "INR crore",
+        why: "A structural event, not sentiment, drove the recent debt inflows.", read: "Debt under the Fully Accessible Route surged after JPMorgan added India to its bond index.", watch: "This debt money follows index mechanics, largely ignoring the dollar (see drivers)." },
+      // --- ACT 7: WHAT ACTUALLY MOVES THIS MONEY (THE FED, NOT DELHI) ---
+      { indicator: "extfin.driver.usd_em_index", chart: "line", title: "The real trigger sits in Washington", size: "feature", window: "full", beat: "dollar", unit: "index (Jan 2006 = 100)",
+        why: "When the dollar strengthens against emerging-market currencies, money leaves India.", read: "The US dollar index versus emerging-market currencies; spikes in 2013 and 2022 line up with FII outflows.", watch: "A global force India does not control, not a referendum on Indian policy." },
+      { chart: "multiLine", title: "The US rate cycle pulls the strings", size: "small", beat: "us-rates", unit: "percent", fromYear: 2011,
+        indicator: "extfin.driver.us_10y_yield",
+        series: [ { indicator: "extfin.driver.us_10y_yield", label: "US 10-year yield" }, { indicator: "extfin.driver.fed_funds_rate", label: "US Fed funds rate" } ],
+        why: "Higher US rates make safe US assets more attractive than emerging-market risk.", read: "The US 10-year Treasury yield and the Fed funds rate, the global price of money.", watch: "FII tilts against these, but the link is a tilt, not a law." },
+      { chart: "multiLine", title: "When the world gets scared, India gets sold", size: "small", beat: "risk-off", unit: "index",
+        indicator: "extfin.driver.vix",
+        series: [ { indicator: "extfin.driver.vix", label: "Global volatility (VIX)" }, { indicator: "extfin.driver.em_vix", label: "Emerging-market volatility" } ],
+        why: "FII is risk-on/risk-off money; spikes in global fear coincide with outflows.", read: "Wall Street's VIX and the emerging-market volatility index, two fear gauges.", watch: "India rides the broad emerging-market tide more than its own news cycle." },
+      { indicator: "extfin.fpi.global_sensitivity.corr", chart: "tableBars", title: "What actually moves FII money", size: "feature", beat: "sensitivity", unit: "correlation with monthly FII equity",
+        why: "Putting the global drivers side by side: all of them pull the same way.", read: "Correlation of monthly FII equity flow with each global factor; the dollar and volatility matter most.", watch: "Magnitudes are moderate (~-0.1 to -0.4): global weather tilts flows, it does not fully decide them. Correlation, not cause." },
+      // --- ACT 8: WHERE THE MONEY COMES FROM (THE TAX-HAVEN PUZZLE) ---
+      { indicator: "extfin.fdi.source_country.dpiit.usd", chart: "tableBars", title: "FDI 'comes from' tiny tax-treaty hubs", size: "feature", beat: "fdi-source", unit: "US$ million (cumulative)",
+        why: "Two small jurisdictions account for nearly half of India's cumulative FDI.", read: "Cumulative FDI equity by source: Mauritius and Singapore together are about 49% (DPIIT).", watch: "These are routing hubs, not ultimate origin; the real money often starts elsewhere." },
+      { indicator: "extfin.fpi.auc_by_country.nsdl.inr", chart: "tableBars", title: "But portfolio money is real American money", size: "feature", beat: "fpi-source", unit: "INR crore",
+        why: "Flip to portfolio holdings and the tax-haven pattern vanishes.", read: "Foreign portfolio assets held in India by source country: the United States alone is about 41%.", watch: "Stock of holdings (assets under custody), not annual flows; treaty routing matters far less here." },
+      { indicator: "extfin.fdi.sector.dpiit.usd", chart: "tableBars", title: "And it goes into services, not factories", size: "feature", beat: "fdi-sector", unit: "US$ million (cumulative)",
+        why: "Where the money lands is as revealing as where it comes from.", read: "Cumulative FDI equity by sector: services and computer software lead, far ahead of manufacturing lines (DPIIT).", watch: "DPIIT equity basis, cumulative since 2000; 'Make in India' aimed at factories, but the money mostly chased services and tech." },
+      // --- ACT 9: THE GLOBAL LENS ---
+      { indicator: "extfin.fdi.india_share_world.pct", chart: "line", title: "India is a small slice of world FDI", size: "small", window: "full", beat: "world-share", unit: "percent",
+        why: "Zoom out and India's recent dip is partly a global FDI slowdown, not just India's.", read: "India's share of total world FDI inflows, usually around 2 to 3 percent.", watch: "A small share means global swings move India's numbers a lot." },
+      { indicator: "extfin.fdi.peers_inward_flow_latest.unctad.usd", chart: "tableBars", title: "Still well behind the leaders", size: "small", beat: "peers", unit: "US$ million",
+        why: "Against peers, India attracts less FDI than its size might suggest.", read: "Inward FDI in the latest year: the US, China and Singapore are far ahead of India.", watch: "One year's flow (volatile); the longer-run trend matters more than any single year." }
     ]
   },
   {
@@ -2090,6 +2187,383 @@ export const v1Questions = [
     ]
   },
   {
+    id: "q.health.transition",
+    slug: "is-india-getting-healthier",
+    question: "Is India getting healthier?",
+    priority: "core",
+    // Flagship merged 2026-06: folds the former q.health.overview into the answerable
+    // "Is India getting healthier?" question. Verdict spine = better / mixed / worse /
+    // the system / a speculative GLP-1 coda. Blends World Bank HNP + wealth quintiles,
+    // NFHS-5/6 (measured), IHME GBD 2023 (modelled burden/causes/risks; non-redistributable
+    // — see metadata.redistributable), National Health Accounts, Indica's NSS 80th-round
+    // tabulation, NHP 2023 (India's own count of facilities/workforce), and press-verified
+    // GLP-1 prices. The three systems disagree by design: GBD models, NFHS measures, NSS asks.
+    indicators: ["health.transition.wb.life_expectancy.ind", "health.transition.wb.life_expectancy.wld", "health.transition.wb.life_expectancy.bgd", "health.transition.wb.life_expectancy.chn", "health.transition.wb.life_expectancy.lka", "health.transition.wb.under5_mortality.ind", "health.transition.wb.under5_mortality.wld", "health.transition.wb.under5_mortality.lmc", "health.transition.wb.under5_mortality.bgd", "health.transition.wb.under5_mortality.pak", "health.transition.wb.under5_mortality.vnm", "health.transition.wb.under5_mortality.idn", "health.transition.wb.maternal_mortality.ind", "health.transition.wb.maternal_mortality.wld", "health.transition.wb.maternal_mortality.lmc", "health.transition.wb.maternal_mortality.bgd", "health.transition.wb.maternal_mortality.pak", "health.transition.wb.maternal_mortality.chn", "health.transition.wb.maternal_mortality.vnm", "health.transition.wb.maternal_mortality.idn", "health.transition.wb.maternal_mortality.lka", "health.transition.wb.measles_immunization.ind", "health.transition.wb.measles_immunization.wld", "health.transition.wb.measles_immunization.lmc", "health.transition.wb.measles_immunization.bgd", "health.transition.wb.measles_immunization.pak", "health.transition.wb.measles_immunization.chn", "health.transition.wb.measles_immunization.vnm", "health.transition.wb.measles_immunization.idn", "health.transition.wb.measles_immunization.lka", "health.transition.wb.stunting.ind", "health.transition.wb.stunting.bgd", "health.transition.wb.stunting.pak", "health.transition.wb.stunting.chn", "health.transition.wb.stunting.vnm", "health.transition.wb.stunting.idn", "health.transition.wb.stunting.lka", "health.transition.wb.wasting.ind", "health.transition.nfhs.institutional_births", "health.transition.nfhs.skilled_birth_attendant", "health.transition.nfhs.anc_4plus", "health.transition.nfhs.ifa_180_days", "health.transition.nfhs.c_section", "health.transition.nfhs.rotavirus", "health.transition.nfhs.insurance_households", "health.transition.nfhs.measles_second_dose", "health.transition.nfhs.early_breastfeeding", "health.transition.nfhs.adequate_diet", "health.transition.nfhs.full_immunisation", "health.transition.nfhs.child_stunting", "health.transition.nfhs.child_wasting", "health.transition.nfhs.child_severe_wasting", "health.transition.nfhs.child_underweight", "health.transition.nfhs.women_overweight", "health.transition.nfhs.men_overweight", "health.transition.nfhs.women_high_sugar", "health.transition.nfhs.men_high_sugar", "health.transition.nfhs.women_high_bp", "health.transition.nfhs.men_high_bp", "health.transition.nfhs.women_thin", "health.transition.nfhs.state_spread", "health.transition.nfhs.rural_urban_gaps", "health.transition.wealth_gaps", "health.gbd.dalys_share_ncd", "health.gbd.dalys_share_cmnn", "health.gbd.dalys_share_injury", "health.gbd.dalys_ncd_share_compare", "health.gbd.diabetes_prevalence_compare", "health.gbd.dalys_cause_cardiovascular", "health.gbd.dalys_cause_mental", "health.gbd.dalys_cause_musculoskeletal", "health.gbd.dalys_cause_diabetes_kidney", "health.gbd.dalys_cause_neonatal", "health.gbd.dalys_cause_respiratory_infections_tb", "health.gbd.dalys_cause_enteric", "health.gbd.dalys_cause_neoplasms", "health.gbd.risk_deaths_air_pollution", "health.gbd.risk_deaths_high_blood_pressure", "health.gbd.risk_deaths_high_blood_sugar", "health.gbd.risk_deaths_smoking", "health.gbd.risk_deaths_diet_low_fruits", "health.gbd.risk_deaths_high_bmi", "health.gbd.risk_deaths_high_ldl", "health.gbd.risk_deaths_unsafe_water", "health.gbd.risk_deaths_household_air_pollution", "health.who.hale_birth", "health.life_expectancy", "health.nfhs.state_double_burden", "health.nfhs.child_stunting", "health.nfhs.child_wasting", "health.nfhs.women_overweight", "health.nfhs.men_overweight", "health.nfhs.women_thin", "health.nha.oope_the_pct", "health.nha.ghe_the_pct", "health.nssladder.hosp_cost_public", "health.nssladder.hosp_cost_private", "health.nssladder.hosp_private_share_rural", "health.nssladder.hosp_private_share_urban", "health.nssladder.insurance_covered_rural", "health.nssladder.insurance_covered_urban", "health.nss80.hosp_finance_sources", "health.nss80.govt_bypass_reasons", "health.nss80.childbirth_by_institution", "health.wb.che_gdp.in", "health.wb.che_gdp.bgd", "health.wb.che_gdp.chn", "health.wb.che_gdp.idn", "health.wb.che_gdp.vnm", "health.wb.che_gdp.lka", "health.wb.che_gdp.nga", "health.wb.che_gdp.usa", "health.wb.che_gdp.wld", "health.wb.physicians.in", "health.wb.physicians.wld", "health.wb.beds.in", "health.wb.beds.wld", "health.nhp.mbbs_seats", "health.nhp.public_facilities", "health.nhp.registered_workforce", "health.nhp.doctors_by_state", "health.glp1.price_ladder", "health.gbd.deaths_cardiovascular", "health.gbd.deaths_chronic_respiratory", "health.gbd.deaths_neoplasms", "health.gbd.deaths_diabetes", "health.gbd.deaths_diarrheal", "health.gbd.deaths_lower_respiratory", "health.gbd.deaths_digestive", "health.gbd.deaths_tuberculosis", "health.gbd.deaths_neonatal", "health.gbd.deaths_road_injuries", "health.nhpcod.cod1719_cardiovascular_male", "health.nhpcod.cod1719_cardiovascular_female", "health.nhpcod.cod1719_road_accidents_male", "health.nhpcod.cod1719_road_accidents_female", "health.nhpcod.cod1719_neoplasms_male", "health.nhpcod.cod1719_neoplasms_female", "health.nhpcod.cod1719_fever_unknown_male", "health.nhpcod.cod1719_fever_unknown_female", "health.nhpcod.cod1719_ill_defined_male", "health.nhpcod.cod1719_ill_defined_female", "health.crsmccd.medically_certified_pct", "health.ncrb.accidental_deaths_total", "health.ncrb.suicides_total", "health.ncrb.suicides_male", "health.ncrb.suicides_female", "health.transition.nfhs.c_section_private", "health.transition.nfhs.c_section_public", "health.transition.nfhs.tobacco_men", "health.transition.nfhs.tobacco_women", "health.transition.nfhs.alcohol_men", "health.transition.nfhs.alcohol_women"],
+    core: ["health.transition.wb.life_expectancy.ind", "health.transition.wb.life_expectancy.wld", "health.transition.wb.life_expectancy.bgd", "health.transition.wb.life_expectancy.chn", "health.transition.wb.life_expectancy.lka", "health.transition.wb.under5_mortality.ind", "health.transition.wb.under5_mortality.wld", "health.transition.wb.under5_mortality.lmc", "health.transition.wb.under5_mortality.bgd", "health.transition.wb.under5_mortality.pak", "health.transition.wb.under5_mortality.vnm", "health.transition.wb.under5_mortality.idn", "health.transition.wb.maternal_mortality.ind", "health.transition.wb.maternal_mortality.wld", "health.transition.wb.maternal_mortality.lmc", "health.transition.wb.maternal_mortality.bgd", "health.transition.wb.maternal_mortality.pak", "health.transition.wb.maternal_mortality.chn", "health.transition.wb.maternal_mortality.vnm", "health.transition.wb.maternal_mortality.idn", "health.transition.wb.maternal_mortality.lka", "health.transition.wb.measles_immunization.ind", "health.transition.wb.measles_immunization.wld", "health.transition.wb.measles_immunization.lmc", "health.transition.wb.measles_immunization.bgd", "health.transition.wb.measles_immunization.pak", "health.transition.wb.measles_immunization.chn", "health.transition.wb.measles_immunization.vnm", "health.transition.wb.measles_immunization.idn", "health.transition.wb.measles_immunization.lka", "health.transition.wb.stunting.ind", "health.transition.wb.stunting.bgd", "health.transition.wb.stunting.pak", "health.transition.wb.stunting.chn", "health.transition.wb.stunting.vnm", "health.transition.wb.stunting.idn", "health.transition.wb.stunting.lka", "health.transition.wb.wasting.ind", "health.transition.nfhs.institutional_births", "health.transition.nfhs.skilled_birth_attendant", "health.transition.nfhs.anc_4plus", "health.transition.nfhs.ifa_180_days", "health.transition.nfhs.c_section", "health.transition.nfhs.rotavirus", "health.transition.nfhs.insurance_households", "health.transition.nfhs.measles_second_dose", "health.transition.nfhs.early_breastfeeding", "health.transition.nfhs.adequate_diet", "health.transition.nfhs.full_immunisation", "health.transition.nfhs.child_stunting", "health.transition.nfhs.child_wasting", "health.transition.nfhs.child_severe_wasting", "health.transition.nfhs.child_underweight", "health.transition.nfhs.women_overweight", "health.transition.nfhs.men_overweight", "health.transition.nfhs.women_high_sugar", "health.transition.nfhs.men_high_sugar", "health.transition.nfhs.women_high_bp", "health.transition.nfhs.men_high_bp", "health.transition.nfhs.women_thin", "health.transition.nfhs.state_spread", "health.transition.nfhs.rural_urban_gaps", "health.transition.wealth_gaps", "health.gbd.dalys_share_ncd", "health.gbd.dalys_share_cmnn", "health.gbd.dalys_share_injury", "health.gbd.dalys_ncd_share_compare", "health.gbd.diabetes_prevalence_compare", "health.gbd.dalys_cause_cardiovascular", "health.gbd.dalys_cause_mental", "health.gbd.dalys_cause_musculoskeletal", "health.gbd.dalys_cause_diabetes_kidney", "health.gbd.dalys_cause_neonatal", "health.gbd.dalys_cause_respiratory_infections_tb", "health.gbd.dalys_cause_enteric", "health.gbd.dalys_cause_neoplasms", "health.gbd.risk_deaths_air_pollution", "health.gbd.risk_deaths_high_blood_pressure", "health.gbd.risk_deaths_high_blood_sugar", "health.gbd.risk_deaths_smoking", "health.gbd.risk_deaths_diet_low_fruits", "health.gbd.risk_deaths_high_bmi", "health.gbd.risk_deaths_high_ldl", "health.gbd.risk_deaths_unsafe_water", "health.gbd.risk_deaths_household_air_pollution", "health.who.hale_birth", "health.life_expectancy", "health.nfhs.state_double_burden", "health.nfhs.child_stunting", "health.nfhs.child_wasting", "health.nfhs.women_overweight", "health.nfhs.men_overweight", "health.nfhs.women_thin", "health.nha.oope_the_pct", "health.nha.ghe_the_pct", "health.nssladder.hosp_cost_public", "health.nssladder.hosp_cost_private", "health.nssladder.hosp_private_share_rural", "health.nssladder.hosp_private_share_urban", "health.nssladder.insurance_covered_rural", "health.nssladder.insurance_covered_urban", "health.nss80.hosp_finance_sources", "health.nss80.govt_bypass_reasons", "health.nss80.childbirth_by_institution", "health.wb.che_gdp.in", "health.wb.che_gdp.bgd", "health.wb.che_gdp.chn", "health.wb.che_gdp.idn", "health.wb.che_gdp.vnm", "health.wb.che_gdp.lka", "health.wb.che_gdp.nga", "health.wb.che_gdp.usa", "health.wb.che_gdp.wld", "health.wb.physicians.in", "health.wb.physicians.wld", "health.wb.beds.in", "health.wb.beds.wld", "health.nhp.mbbs_seats", "health.nhp.public_facilities", "health.nhp.registered_workforce", "health.nhp.doctors_by_state", "health.glp1.price_ladder", "health.gbd.deaths_cardiovascular", "health.gbd.deaths_chronic_respiratory", "health.gbd.deaths_neoplasms", "health.gbd.deaths_diabetes", "health.gbd.deaths_diarrheal", "health.gbd.deaths_lower_respiratory", "health.gbd.deaths_digestive", "health.gbd.deaths_tuberculosis", "health.gbd.deaths_neonatal", "health.gbd.deaths_road_injuries", "health.nhpcod.cod1719_cardiovascular_male", "health.nhpcod.cod1719_cardiovascular_female", "health.nhpcod.cod1719_road_accidents_male", "health.nhpcod.cod1719_road_accidents_female", "health.nhpcod.cod1719_neoplasms_male", "health.nhpcod.cod1719_neoplasms_female", "health.nhpcod.cod1719_fever_unknown_male", "health.nhpcod.cod1719_fever_unknown_female", "health.nhpcod.cod1719_ill_defined_male", "health.nhpcod.cod1719_ill_defined_female", "health.crsmccd.medically_certified_pct", "health.ncrb.accidental_deaths_total", "health.ncrb.suicides_total", "health.ncrb.suicides_male", "health.ncrb.suicides_female", "health.transition.nfhs.c_section_private", "health.transition.nfhs.c_section_public", "health.transition.nfhs.tobacco_men", "health.transition.nfhs.tobacco_women", "health.transition.nfhs.alcohol_men", "health.transition.nfhs.alcohol_women"],
+    context: ["health.transition.wbq.stunting_poorest", "health.transition.wbq.stunting_richest", "health.transition.wbq.wasting_poorest", "health.transition.wbq.wasting_richest", "health.transition.wbq.skilled_birth_poorest", "health.transition.wbq.skilled_birth_richest", "health.transition.wbq.money_barrier_poorest", "health.transition.wbq.money_barrier_richest", "health.transition.wbq.distance_barrier_poorest", "health.transition.wbq.distance_barrier_richest", "health.nhp.medical_colleges"],
+    visualPlan: [
+      // ===== THE VERDICT =====
+      { chart: "multiLine", title: "Indians live much longer than they used to", size: "hero", beat: "survival", unit: "years", fromYear: 1960,
+        indicator: "health.transition.wb.life_expectancy.ind",
+        series: [
+          { indicator: "health.transition.wb.life_expectancy.ind", label: "India", emphasis: true },
+          { indicator: "health.transition.wb.life_expectancy.wld", label: "World" },
+          { indicator: "health.transition.wb.life_expectancy.bgd", label: "Bangladesh" },
+          { indicator: "health.transition.wb.life_expectancy.chn", label: "China" },
+          { indicator: "health.transition.wb.life_expectancy.lka", label: "Sri Lanka" }
+        ],
+        why: "The headline answer is survival: India has climbed close to the world line, but not to the best Asian comparators.", read: "World Bank estimates, 1960 to 2024. India is about 72 years, near the world average but below Bangladesh, Sri Lanka and China.", watch: "A period estimate, not a forecast for one child; small source differences are normal." },
+      { chart: "multiLine", title: "Living longer, but not always in good health", size: "feature", beat: "hale-gap", unit: "years",
+        indicator: "health.who.hale_birth",
+        series: [
+          { indicator: "health.life_expectancy", label: "Life expectancy" },
+          { indicator: "health.who.hale_birth", label: "Healthy life expectancy (HALE)" }
+        ],
+        why: "The extra years are not all healthy years; the gap is time lived in illness.", read: "Life expectancy against WHO healthy life expectancy. The gap is years lost to disease and disability.", watch: "World Bank and WHO differ by fractions of a year; read the gap, not the decimal." },
+
+      // ===== CLEARLY BETTER: survival and infection in retreat =====
+      { chart: "multiLine", title: "The biggest win is children surviving", size: "feature", beat: "child-survival", unit: "deaths per 1,000 live births", fromYear: 1990,
+        indicator: "health.transition.wb.under5_mortality.ind",
+        series: [
+          { indicator: "health.transition.wb.under5_mortality.ind", label: "India", emphasis: true },
+          { indicator: "health.transition.wb.under5_mortality.wld", label: "World" },
+          { indicator: "health.transition.wb.under5_mortality.lmc", label: "Lower middle income" },
+          { indicator: "health.transition.wb.under5_mortality.bgd", label: "Bangladesh" },
+          { indicator: "health.transition.wb.under5_mortality.pak", label: "Pakistan" },
+          { indicator: "health.transition.wb.under5_mortality.vnm", label: "Vietnam" },
+          { indicator: "health.transition.wb.under5_mortality.idn", label: "Indonesia" }
+        ],
+        why: "Falling child deaths explain much of the life-expectancy gain.", read: "Under-5 deaths per 1,000 live births. India is now below the world and lower-middle-income averages, still above Vietnam and Indonesia.", watch: "Modelled estimates built from registration and survey inputs." },
+      { chart: "multiLine", title: "Maternal deaths fell fast, but are still far above the best countries", size: "feature", beat: "mothers", unit: "deaths per 100,000 live births", fromYear: 1985,
+        indicator: "health.transition.wb.maternal_mortality.ind",
+        series: [
+          { indicator: "health.transition.wb.maternal_mortality.ind", label: "India", emphasis: true },
+          { indicator: "health.transition.wb.maternal_mortality.wld", label: "World" },
+          { indicator: "health.transition.wb.maternal_mortality.lmc", label: "Lower middle income" },
+          { indicator: "health.transition.wb.maternal_mortality.bgd", label: "Bangladesh" },
+          { indicator: "health.transition.wb.maternal_mortality.pak", label: "Pakistan" },
+          { indicator: "health.transition.wb.maternal_mortality.chn", label: "China" },
+          { indicator: "health.transition.wb.maternal_mortality.vnm", label: "Vietnam" },
+          { indicator: "health.transition.wb.maternal_mortality.idn", label: "Indonesia" },
+          { indicator: "health.transition.wb.maternal_mortality.lka", label: "Sri Lanka" }
+        ],
+        why: "The path matters more than the rank: India fell sharply, while Sri Lanka and China show how much lower the frontier is.", read: "World Bank estimates since 1985. India fell to around 80 per 100,000, but the best Asian comparators are far lower.", watch: "Modelled; read broad levels and direction, not single-year wiggles." },
+      { chart: "multiLine", title: "The old infectious killers are fading", size: "feature", beat: "old-killers", unit: "DALYs",
+        indicator: "health.gbd.dalys_cause_neonatal",
+        series: [
+          { indicator: "health.gbd.dalys_cause_neonatal", label: "Neonatal disorders" },
+          { indicator: "health.gbd.dalys_cause_enteric", label: "Enteric (diarrhoeal) infections" },
+          { indicator: "health.gbd.dalys_cause_respiratory_infections_tb", label: "Respiratory infections & TB" }
+        ],
+        why: "The diseases of being poor and crowded are falling fast in disease-burden terms.", read: "GBD disease burden from the classic infectious and newborn killers, which have dropped sharply since 1990.", watch: "Absolute DALYs and GBD model estimates; population growth works against the fall, so the decline is real." },
+      { chart: "multiLine", title: "Vaccination went from near-zero to near-universal", size: "feature", beat: "vaccines", unit: "% of children", fromYear: 1985,
+        indicator: "health.transition.wb.measles_immunization.ind",
+        series: [
+          { indicator: "health.transition.wb.measles_immunization.ind", label: "India", emphasis: true },
+          { indicator: "health.transition.wb.measles_immunization.wld", label: "World" },
+          { indicator: "health.transition.wb.measles_immunization.lmc", label: "Lower middle income" },
+          { indicator: "health.transition.wb.measles_immunization.bgd", label: "Bangladesh" },
+          { indicator: "health.transition.wb.measles_immunization.pak", label: "Pakistan" },
+          { indicator: "health.transition.wb.measles_immunization.chn", label: "China" },
+          { indicator: "health.transition.wb.measles_immunization.vnm", label: "Vietnam" },
+          { indicator: "health.transition.wb.measles_immunization.idn", label: "Indonesia" },
+          { indicator: "health.transition.wb.measles_immunization.lka", label: "Sri Lanka" }
+        ],
+        why: "The child-survival gains are backed by a long vaccine build-out.", read: "World Bank measles immunisation, 1985 to 2024. India climbs from near-zero to high coverage, now above the world and lower-middle-income averages.", watch: "Administrative immunisation series can differ from household-survey estimates." },
+      { chart: "multiLine", title: "Care around birth is deepening", size: "feature", beat: "service-reach", unit: "% of births or mothers",
+        categoricalX: true, xLabels: ["NFHS-5", "NFHS-6"], subtitle: "Two survey rounds: NFHS-5 (2019-21) and NFHS-6 (2023-24), not annual data",
+        indicator: "health.transition.nfhs.institutional_births",
+        series: [
+          { indicator: "health.transition.nfhs.institutional_births", label: "Institutional births" },
+          { indicator: "health.transition.nfhs.skilled_birth_attendant", label: "Skilled attendant" },
+          { indicator: "health.transition.nfhs.anc_4plus", label: "4+ antenatal visits" },
+          { indicator: "health.transition.nfhs.ifa_180_days", label: "IFA for 180+ days" },
+          { indicator: "health.transition.nfhs.c_section", label: "C-section births" }
+        ],
+        why: "NFHS shows the service-delivery story directly, including the less comfortable rise in C-sections.", read: "NFHS-5 to NFHS-6 national values. Birth attendance is high; antenatal depth improved; C-sections rose sharply.", watch: "Two survey rounds, not annual data. A fast C-section rise needs scrutiny, not automatic alarm." },
+      { chart: "multiLine", title: "India is training far more doctors than it used to", size: "feature", beat: "training-pipeline", unit: "MBBS seats", fromYear: 2007,
+        indicator: "health.nhp.mbbs_seats",
+        series: [ { indicator: "health.nhp.mbbs_seats", label: "MBBS seats", emphasis: true } ],
+        why: "Capacity to produce doctors has expanded fast, a genuine investment in the future.", read: "NHP 2023 (National Medical Commission). MBBS seats roughly quadrupled from about 25,000 in 2006-07 to about 104,000 in 2022-23, as colleges rose from 262 to 679.", watch: "Seats are training capacity, not doctors in service; many graduates emigrate or leave clinical work." },
+
+      // ===== MIXED: nutrition and the unevenness =====
+      { chart: "multiLine", title: "India's child nutrition improved slowly, and still trails its neighbours", size: "feature", beat: "nutrition-global", unit: "% of children under 5", fromYear: 1989,
+        indicator: "health.transition.wb.stunting.ind",
+        series: [
+          { indicator: "health.transition.wb.stunting.ind", label: "India stunting", emphasis: true },
+          { indicator: "health.transition.wb.wasting.ind", label: "India wasting" },
+          { indicator: "health.transition.wb.stunting.bgd", label: "Bangladesh" },
+          { indicator: "health.transition.wb.stunting.pak", label: "Pakistan" },
+          { indicator: "health.transition.wb.stunting.chn", label: "China" },
+          { indicator: "health.transition.wb.stunting.vnm", label: "Vietnam" },
+          { indicator: "health.transition.wb.stunting.idn", label: "Indonesia" },
+          { indicator: "health.transition.wb.stunting.lka", label: "Sri Lanka" }
+        ],
+        why: "The counterweight to the survival story is the slow grind of nutrition.", read: "World Bank survey-year points. India stunting fell a lot since the late 1980s, but wasting barely improved and better Asian comparators sit much lower.", watch: "Survey-year observations, not smooth annual data; country years differ." },
+      { chart: "multiLine", title: "NFHS says stunting fell, but wasting barely moved", size: "feature", beat: "nutrition-india", unit: "% of children",
+        categoricalX: true, xLabels: ["NFHS-5", "NFHS-6"], subtitle: "Two survey rounds: NFHS-5 (2019-21) and NFHS-6 (2023-24), not annual data",
+        indicator: "health.transition.nfhs.child_stunting",
+        series: [
+          { indicator: "health.transition.nfhs.child_stunting", label: "Child stunting" },
+          { indicator: "health.transition.nfhs.child_wasting", label: "Child wasting" },
+          { indicator: "health.transition.nfhs.child_severe_wasting", label: "Severe wasting" },
+          { indicator: "health.transition.nfhs.child_underweight", label: "Child underweight" },
+          { indicator: "health.transition.nfhs.adequate_diet", label: "Adequate diet, 6-23m" }
+        ],
+        why: "The India-native survey update: the good news is real, but thin.", read: "NFHS-5 to NFHS-6. Stunting fell to 29.3%, but wasting stayed around 19% and adequate diet stays very low.", watch: "NFHS-6 did not measure anaemia; do not use it for current anaemia claims." },
+      { chart: "rankedChange", title: "Between NFHS-5 and NFHS-6, some things improved, some got worse", size: "feature", beat: "mixed-transition", unit: "percentage-point change",
+        series: [
+          { indicator: "health.transition.nfhs.rotavirus", label: "Rotavirus vaccine" },
+          { indicator: "health.transition.nfhs.insurance_households", label: "Health insurance" },
+          { indicator: "health.transition.nfhs.measles_second_dose", label: "Measles second dose" },
+          { indicator: "health.transition.nfhs.ifa_180_days", label: "IFA for 180+ days" },
+          { indicator: "health.transition.nfhs.early_breastfeeding", label: "Early breastfeeding" },
+          { indicator: "health.transition.nfhs.adequate_diet", label: "Adequate diet" },
+          { indicator: "health.transition.nfhs.child_stunting", label: "Child stunting" },
+          { indicator: "health.transition.nfhs.child_wasting", label: "Child wasting" },
+          { indicator: "health.transition.nfhs.c_section", label: "C-section births" },
+          { indicator: "health.transition.nfhs.women_overweight", label: "Women overweight" },
+          { indicator: "health.transition.nfhs.men_high_sugar", label: "Men high blood sugar" },
+          { indicator: "health.transition.nfhs.women_high_bp", label: "Women high BP" }
+        ],
+        diverging: true, baselineYears: 1, latestYears: 1, rowLabel: "Indicator", divergeLabel: "← fell · rose →", startLabel: "NFHS-5", endLabel: "NFHS-6",
+        why: "The honest India-native summary: the newest survey does not move in one direction.", read: "Percentage-point change from NFHS-5 to NFHS-6 across services, nutrition and adult risks.", watch: "A positive change can be good or bad depending on the indicator; rising C-sections and blood sugar are warnings, not progress." },
+      { indicator: "health.nfhs.state_double_burden", chart: "tableBars", title: "Overweight women, state by state", size: "feature", beat: "double-burden-map", unit: "% of women overweight",
+        subtitle: "NFHS-6 (2023-24) · overweight/obese women 15-49, by state · child stunting and thinness carried alongside",
+        why: "The double burden mapped: states where adult overweight and child undernutrition coexist.", read: "Each bar is a state's share of overweight/obese women; the data also carries child stunting and women's thinness.", watch: "One side of the double burden per bar; stunting and thinness sit in the underlying data." },
+      { chart: "multiLine", title: "Children thinner, adults heavier", size: "feature", beat: "double-burden-trend", unit: "% of group",
+        categoricalX: true, xLabels: ["NFHS-5", "NFHS-6"], subtitle: "Two survey rounds: NFHS-5 (2019-21) and NFHS-6 (2023-24), not annual data",
+        indicator: "health.nfhs.women_overweight",
+        series: [
+          { indicator: "health.nfhs.child_stunting", label: "Children stunted" },
+          { indicator: "health.nfhs.women_overweight", label: "Women overweight" },
+          { indicator: "health.nfhs.men_overweight", label: "Men overweight" },
+          { indicator: "health.nfhs.women_thin", label: "Women thin" },
+          { indicator: "health.nfhs.child_wasting", label: "Children wasted" }
+        ],
+        why: "Undernutrition is falling while adult overweight rises: two malnutritions at once.", read: "NFHS-5 to NFHS-6 movement for child stunting and wasting, adult overweight and women's thinness.", watch: "Two survey points; the two trends happen together, not in sequence." },
+      { indicator: "health.transition.wealth_gaps", chart: "tableBars", title: "The poorest child still starts far behind", size: "feature", beat: "wealth-gap", unit: "percentage-point gap",
+        subtitle: "World Bank HNP by wealth quintile · latest India survey year available",
+        why: "The average hides the fairness problem: wealth still changes nutrition, access and survival.", read: "Bars show the gap between the worse-off and better-off wealth quintiles for each measure.", watch: "Survey-year quintile data, mostly 2021; not a live 2026 inequality measure." },
+      { indicator: "health.transition.nfhs.state_spread", chart: "tableBars", title: "The national average hides huge gaps between states", size: "feature", beat: "state-spread", unit: "percentage-point spread",
+        subtitle: "NFHS-6 · highest state or UT minus lowest state or UT",
+        why: "The same indicator can describe very different state realities.", read: "Bars show the range between the highest and lowest state/UT value in NFHS-6.", watch: "A spread, not a ranking. Small-state and UT estimates can be noisy; Manipur is not in the local NFHS-6 artifact." },
+      { indicator: "health.transition.nfhs.rural_urban_gaps", chart: "tableBars", title: "Rural and urban India have different health problems", size: "feature", beat: "rural-urban", unit: "percentage-point gap",
+        subtitle: "NFHS-6 · absolute rural-urban gap in India values",
+        why: "Rural-urban gaps are not a simple backward-forward story.", read: "Bars show the absolute rural-urban gap; metadata records which side is higher.", watch: "A higher value can be good or bad depending on the indicator; read as difference, not deprivation." },
+
+      // ===== GETTING WORSE: the new burden =====
+      { chart: "multiLine", title: "What India dies of has flipped", size: "feature", beat: "the-flip", unit: "% of total DALYs",
+        indicator: "health.gbd.dalys_share_ncd",
+        series: [
+          { indicator: "health.gbd.dalys_share_ncd", label: "Non-communicable (NCDs)" },
+          { indicator: "health.gbd.dalys_share_cmnn", label: "Communicable, maternal, neonatal" },
+          { indicator: "health.gbd.dalys_share_injury", label: "Injuries" }
+        ],
+        why: "The single biggest shift in Indian health: lifestyle disease overtook infection.", read: "Each line is a broad cause group's share of total disease burden (DALYs), 1990 to 2023. The NCD line crosses the communicable line around 2010.", watch: "Shares, not absolute burden; total burden also grew. GBD figures are modelled estimates." },
+      { indicator: "health.gbd.dalys_ncd_share_compare", chart: "compareLine", title: "India's NCD share, against its neighbours", size: "feature", beat: "flip-compare", unit: "% of total DALYs",
+        subtitle: "IHME GBD 2023 · non-communicable share of disease burden · selected countries",
+        why: "Richer and older countries flipped earlier; India flipped while still poor.", read: "NCD share of disease burden over time for India and comparator economies.", watch: "Filtered to contrasting economies; all are GBD model estimates." },
+      { chart: "rankedChange", title: "The diseases that carry India's burden, 1990 vs now", size: "feature", beat: "top-causes", unit: "DALYs",
+        series: [
+          { indicator: "health.gbd.dalys_cause_cardiovascular", label: "Cardiovascular" },
+          { indicator: "health.gbd.dalys_cause_neonatal", label: "Neonatal disorders" },
+          { indicator: "health.gbd.dalys_cause_respiratory_infections_tb", label: "Resp. infections & TB" },
+          { indicator: "health.gbd.dalys_cause_musculoskeletal", label: "Musculoskeletal" },
+          { indicator: "health.gbd.dalys_cause_mental", label: "Mental disorders" },
+          { indicator: "health.gbd.dalys_cause_diabetes_kidney", label: "Diabetes & kidney" },
+          { indicator: "health.gbd.dalys_cause_neoplasms", label: "Cancers" },
+          { indicator: "health.gbd.dalys_cause_enteric", label: "Enteric infections" }
+        ],
+        why: "The leaderboard of disease burden reshuffled: heart disease up, childhood infection down.", read: "Each row is a cause's burden in the baseline decade versus the latest, sorted by today's burden.", watch: "Absolute DALYs, so rising population lifts levels; GBD model estimates." },
+      { chart: "latestBars", title: "What kills the most Indians", size: "feature", beat: "death-counts", unit: "deaths a year (2023)",
+        subtitle: "IHME GBD 2023 · estimated deaths by cause, India, 2023",
+        indicator: "health.gbd.deaths_cardiovascular",
+        series: [
+          { indicator: "health.gbd.deaths_cardiovascular", label: "Cardiovascular" },
+          { indicator: "health.gbd.deaths_chronic_respiratory", label: "Chronic respiratory" },
+          { indicator: "health.gbd.deaths_neoplasms", label: "Cancers" },
+          { indicator: "health.gbd.deaths_diabetes", label: "Diabetes" },
+          { indicator: "health.gbd.deaths_diarrheal", label: "Diarrhoeal disease" },
+          { indicator: "health.gbd.deaths_lower_respiratory", label: "Lower respiratory infections" },
+          { indicator: "health.gbd.deaths_digestive", label: "Digestive disease" },
+          { indicator: "health.gbd.deaths_tuberculosis", label: "Tuberculosis" },
+          { indicator: "health.gbd.deaths_neonatal", label: "Newborn disorders" },
+          { indicator: "health.gbd.deaths_road_injuries", label: "Road injuries" }
+        ],
+        why: "The death-count version of the flip: cardiovascular disease alone kills about 3.1 million Indians a year, roughly as many as the next three causes combined.", read: "Each bar is one cause's estimated deaths in 2023, ranked. Heart disease towers; the old infectious and newborn killers now sit far down the list.", watch: "Counts, not rates, so a growing and ageing population lifts the totals; GBD model estimates, not a death register." },
+      { chart: "latestBars", title: "What men and women die of in India", size: "feature", beat: "death-sex-gap", unit: "% of each sex's deaths",
+        subtitle: "Causes of Death Statistics 2017-19 (Registrar General), via NHP 2023 · share of each sex's deaths",
+        indicator: "health.nhpcod.cod1719_cardiovascular_male",
+        series: [
+          { indicator: "health.nhpcod.cod1719_cardiovascular_male", label: "Cardiovascular (men)" },
+          { indicator: "health.nhpcod.cod1719_cardiovascular_female", label: "Cardiovascular (women)" },
+          { indicator: "health.nhpcod.cod1719_road_accidents_male", label: "Road accidents (men)" },
+          { indicator: "health.nhpcod.cod1719_road_accidents_female", label: "Road accidents (women)" },
+          { indicator: "health.nhpcod.cod1719_neoplasms_male", label: "Cancers (men)" },
+          { indicator: "health.nhpcod.cod1719_neoplasms_female", label: "Cancers (women)" },
+          { indicator: "health.nhpcod.cod1719_fever_unknown_male", label: "Fever, unknown cause (men)" },
+          { indicator: "health.nhpcod.cod1719_fever_unknown_female", label: "Fever, unknown cause (women)" },
+          { indicator: "health.nhpcod.cod1719_ill_defined_male", label: "Ill-defined (men)" },
+          { indicator: "health.nhpcod.cod1719_ill_defined_female", label: "Ill-defined (women)" }
+        ],
+        why: "Men die far more from heart disease and road accidents; women's deaths are far more often logged as 'fever of unknown origin' or 'ill-defined', a sign their causes go less often recorded.", read: "Paired bars for men and women across five causes, as a share of each sex's own deaths. The injury gap and the recording gap are the story.", watch: "Shares of each sex's deaths, not counts, pooled over 2017-19. 'Ill-defined' is not a real disease; it flags deaths whose cause was never established." },
+      { chart: "multiLine", title: "Most Indian deaths still aren't medically certified", size: "feature", beat: "recording", unit: "% of registered deaths",
+        subtitle: "RGI Civil Registration / MCCD, via NHP 2023 · registered deaths with a doctor-certified cause",
+        indicator: "health.crsmccd.medically_certified_pct",
+        series: [
+          { indicator: "health.crsmccd.medically_certified_pct", label: "Medically certified" }
+        ],
+        why: "The share of registered deaths with a doctor-certified cause crept up from 14% in 1995 to about 23% by 2020, which means roughly four in five deaths still have no medically certified cause.", read: "One line, the percentage of registered deaths that were medically certified each year. It rises slowly and then stalls near a fifth.", watch: "Even this counts only registered deaths, and MCCD skews to urban and hospital deaths; it is why nationally representative cause data leans on the SRS survey and on models." },
+      { chart: "multiLine", title: "Accidents are flat, but suicides are climbing", size: "feature", beat: "external-causes", unit: "deaths a year",
+        subtitle: "NCRB, Accidental Deaths & Suicides in India, 2011-2021, via NHP 2023",
+        indicator: "health.ncrb.suicides_total",
+        series: [
+          { indicator: "health.ncrb.accidental_deaths_total", label: "Accidental deaths" },
+          { indicator: "health.ncrb.suicides_total", label: "Suicides" }
+        ],
+        why: "Police-recorded suicides rose from about 1.36 lakh in 2011 to 1.64 lakh in 2021, with the steepest jump in the COVID years, while accidental deaths stayed roughly flat and dipped during the 2020 lockdown.", read: "Two lines of annual counts. Accidental deaths hover near 4 lakh; suicides climb, especially after 2019.", watch: "Police-reported counts, widely held to undercount suicides, so a floor not a true total; counts not rates, so population growth lifts them." },
+      { chart: "multiLine", title: "Adults are getting heavier and more diabetic", size: "feature", beat: "adult-risk", unit: "% of adults",
+        categoricalX: true, xLabels: ["NFHS-5", "NFHS-6"], subtitle: "Two survey rounds: NFHS-5 (2019-21) and NFHS-6 (2023-24), not annual data",
+        indicator: "health.transition.nfhs.women_overweight",
+        series: [
+          { indicator: "health.transition.nfhs.women_overweight", label: "Women overweight" },
+          { indicator: "health.transition.nfhs.men_overweight", label: "Men overweight" },
+          { indicator: "health.transition.nfhs.women_high_sugar", label: "Women high blood sugar" },
+          { indicator: "health.transition.nfhs.men_high_sugar", label: "Men high blood sugar" },
+          { indicator: "health.transition.nfhs.women_high_bp", label: "Women high BP" },
+          { indicator: "health.transition.nfhs.men_high_bp", label: "Men high BP" }
+        ],
+        why: "Measured, not modelled: the household survey caught metabolic risk rising between rounds.", read: "NFHS-5 to NFHS-6 adult measurements. Overweight and high blood sugar rose; blood pressure did not rise the same way.", watch: "Two survey points; field measurements, but one survey cannot prove cause." },
+      { indicator: "health.gbd.diabetes_prevalence_compare", chart: "compareLine", title: "Diabetes across the neighbourhood", size: "feature", beat: "diabetes-compare", unit: "% of adults 20-79",
+        subtitle: "IHME GBD 2023 · diabetes prevalence · selected countries",
+        why: "India's diabetes burden in cross-country context.", read: "Diabetes prevalence among adults for India and comparator economies.", watch: "Few time points per country; model estimates, not survey counts." },
+      { chart: "multiLine", title: "The quiet burden: mental illness and joint disease", size: "feature", beat: "invisible-burden", unit: "DALYs",
+        indicator: "health.gbd.dalys_cause_mental",
+        series: [
+          { indicator: "health.gbd.dalys_cause_mental", label: "Mental disorders" },
+          { indicator: "health.gbd.dalys_cause_musculoskeletal", label: "Musculoskeletal" }
+        ],
+        why: "Conditions that rarely kill but increasingly disable, and are easy to overlook.", read: "Disease burden from mental and musculoskeletal disorders over time.", watch: "Years lived with disability, not death; under-reported and likely understated." },
+      { chart: "latestBars", title: "India's biggest killers, by risk factor", size: "feature", beat: "risk-ranked", unit: "attributed deaths (2023)",
+        series: [
+          { indicator: "health.gbd.risk_deaths_air_pollution", label: "Air pollution (total)" },
+          { indicator: "health.gbd.risk_deaths_high_blood_pressure", label: "High blood pressure" },
+          { indicator: "health.gbd.risk_deaths_high_blood_sugar", label: "High blood sugar" },
+          { indicator: "health.gbd.risk_deaths_smoking", label: "Smoking" },
+          { indicator: "health.gbd.risk_deaths_diet_low_fruits", label: "Diet low in fruit" },
+          { indicator: "health.gbd.risk_deaths_high_bmi", label: "High BMI" },
+          { indicator: "health.gbd.risk_deaths_high_ldl", label: "High LDL cholesterol" },
+          { indicator: "health.gbd.risk_deaths_unsafe_water", label: "Unsafe water" }
+        ],
+        why: "Deaths sorted by the risk factor behind them, India 2023.", read: "Each bar is the deaths GBD attributes to that risk factor in 2023.", watch: "Risk factors overlap, so do not add the bars; modelled attributable-death estimates." },
+      { chart: "latestBars", title: "Tobacco and alcohol are still a male habit", size: "feature", beat: "behaviour-risk", unit: "% of each sex, NFHS-6 (2023-24)",
+        subtitle: "NFHS-6 (2023-24) · share of each sex aged 15+ who use tobacco or alcohol",
+        indicator: "health.transition.nfhs.tobacco_men",
+        series: [
+          { indicator: "health.transition.nfhs.tobacco_men", label: "Tobacco (men)" },
+          { indicator: "health.transition.nfhs.tobacco_women", label: "Tobacco (women)" },
+          { indicator: "health.transition.nfhs.alcohol_men", label: "Alcohol (men)" },
+          { indicator: "health.transition.nfhs.alcohol_women", label: "Alcohol (women)" }
+        ],
+        why: "More than a third of Indian men still use tobacco (36.3%) and nearly a fifth drink alcohol (18.9%), against 8.4% and 1.1% of women, two of the biggest behavioural drivers behind the rising cancer and heart-disease burden.", read: "Each bar is the latest NFHS-6 share for one sex. The gender gap is enormous and the levels among men are stubbornly high.", watch: "Self-reported, so likely undercounts, especially for women; both fell only slightly since NFHS-5 (men's tobacco 38% to 36.3%)." },
+      { chart: "multiLine", title: "Air pollution's toll, household and total", size: "feature", beat: "air-pollution", unit: "attributed deaths",
+        indicator: "health.gbd.risk_deaths_air_pollution",
+        series: [
+          { indicator: "health.gbd.risk_deaths_air_pollution", label: "Air pollution (total)" },
+          { indicator: "health.gbd.risk_deaths_household_air_pollution", label: "Household air pollution" }
+        ],
+        why: "The single largest environmental risk, and how much is indoor smoke.", read: "Attributable deaths from total and from household (indoor) air pollution over time.", watch: "Household pollution sits within the total; both are modelled attribution." },
+
+      // ===== GETTING WORSE: the system and the bill =====
+      { chart: "multiLine", title: "Who pays for Indian healthcare is changing", size: "feature", beat: "who-pays", unit: "% of total health spending",
+        indicator: "health.nha.oope_the_pct",
+        series: [
+          { indicator: "health.nha.oope_the_pct", label: "Out-of-pocket (households)" },
+          { indicator: "health.nha.ghe_the_pct", label: "Government" }
+        ],
+        why: "The most important number in Indian health financing: the out-of-pocket share is finally falling.", read: "Out-of-pocket versus government share of total health expenditure, 2013-14 to 2022-23.", watch: "Shares of total spending, not rupee levels; government health spend is still about 1.4% of GDP." },
+      { chart: "multiLine", title: "What a hospital stay costs, public vs private", size: "feature", beat: "cost-ladder", unit: "Rs per case (current prices)",
+        indicator: "health.nssladder.hosp_cost_private",
+        series: [
+          { indicator: "health.nssladder.hosp_cost_public", label: "Government hospital" },
+          { indicator: "health.nssladder.hosp_cost_private", label: "Private hospital" }
+        ],
+        why: "The price gap between a public and a private bed, across NSS rounds.", read: "Average medical spend per hospitalisation case, public versus private.", watch: "Current rupees, not inflation-adjusted; the earliest figure is total, not just medical, spend." },
+      { chart: "multiLine", title: "Where Indians actually get hospitalised", size: "feature", beat: "private-share", unit: "% of hospitalisations in private",
+        indicator: "health.nssladder.hosp_private_share_rural",
+        series: [
+          { indicator: "health.nssladder.hosp_private_share_rural", label: "Rural" },
+          { indicator: "health.nssladder.hosp_private_share_urban", label: "Urban" }
+        ],
+        why: "The private sector now handles most hospitalisations, even in villages.", read: "Share of hospitalisation cases in private hospitals, rural and urban, across NSS rounds.", watch: "Indica tabulation of NSS unit data; the 2025 round is Indica's own, the official report may differ." },
+      { chart: "multiLine", title: "The insurance revolution", size: "feature", beat: "insurance", unit: "% of persons covered",
+        categoricalX: true, xLabels: ["NSS 2017-18", "NSS 2024"], subtitle: "Two NSS health rounds: 75th (2017-18) and 80th (2024), not annual data",
+        indicator: "health.nssladder.insurance_covered_rural",
+        series: [
+          { indicator: "health.nssladder.insurance_covered_rural", label: "Rural" },
+          { indicator: "health.nssladder.insurance_covered_urban", label: "Urban" }
+        ],
+        why: "Health-scheme coverage roughly tripled, and PMJAY flipped the rural-urban gradient.", read: "Share of persons covered by some health financing scheme, rural and urban.", watch: "NSS persons covered, not NFHS households covered; do not mix the two measures." },
+      { indicator: "health.nss80.hosp_finance_sources", chart: "tableBars", title: "How families pay the hospital bill", size: "feature", beat: "finance-sources", unit: "% of cases",
+        subtitle: "NSS 80th round (2025) · Indica tabulation of unit data · major source of finance",
+        why: "Most stays are paid from savings, but a sizeable share is financed by borrowing.", read: "Each bar is the share of hospitalisation cases funded mainly by that source.", watch: "Indica tabulation of public microdata; excludes childbirth cases." },
+      { indicator: "health.nss80.govt_bypass_reasons", chart: "tableBars", title: "Why patients skip government hospitals", size: "feature", beat: "govt-bypass", unit: "% of non-government cases",
+        subtitle: "NSS 80th round (2025) · Indica tabulation of unit data · reasons for not using a government facility",
+        why: "Free care exists; people still pay private. This is why.", read: "Each bar is a reason given for choosing a non-government hospital.", watch: "Self-reported reasons, Indica tabulation; categories are not mutually ranked." },
+      { chart: "multiLine", title: "India's health spending against the world", size: "feature", beat: "spending-world", unit: "% of GDP",
+        indicator: "health.wb.che_gdp.in",
+        series: [
+          { indicator: "health.wb.che_gdp.in", label: "India" },
+          { indicator: "health.wb.che_gdp.bgd", label: "Bangladesh" },
+          { indicator: "health.wb.che_gdp.chn", label: "China" },
+          { indicator: "health.wb.che_gdp.idn", label: "Indonesia" },
+          { indicator: "health.wb.che_gdp.vnm", label: "Vietnam" },
+          { indicator: "health.wb.che_gdp.lka", label: "Sri Lanka" },
+          { indicator: "health.wb.che_gdp.nga", label: "Nigeria" },
+          { indicator: "health.wb.che_gdp.usa", label: "United States" },
+          { indicator: "health.wb.che_gdp.wld", label: "World" }
+        ],
+        why: "India spends a strikingly small share of GDP on health.", read: "Current health expenditure as a percentage of GDP for India, comparators and the world.", watch: "Includes private out-of-pocket spending; public spend alone is far lower." },
+      { chart: "multiLine", title: "Doctors and beds, India vs the world", size: "feature", beat: "supply-world", unit: "per 1,000 people",
+        indicator: "health.wb.physicians.in",
+        series: [
+          { indicator: "health.wb.physicians.in", label: "Doctors, India" },
+          { indicator: "health.wb.physicians.wld", label: "Doctors, world" },
+          { indicator: "health.wb.beds.in", label: "Beds, India" },
+          { indicator: "health.wb.beds.wld", label: "Beds, world" }
+        ],
+        why: "India has fewer doctors and hospital beds per person than the world average.", read: "Physicians and hospital beds per 1,000 people, India against the world.", watch: "World Bank series have gaps; beds and doctors are reported in different vintages." },
+      { indicator: "health.nss80.childbirth_by_institution", chart: "tableBars", title: "What childbirth costs, by hospital type", size: "feature", beat: "childbirth", unit: "Rs per delivery (medical spend)",
+        subtitle: "NSS 80th round (2025) · Indica tabulation of unit data · average medical spend per delivery; C-section share carried alongside",
+        why: "The cost and the C-section rate both jump in private hospitals.", read: "Each bar is average medical spend per delivery by hospital type; the data also carries the C-section share.", watch: "Current rupees; Indica tabulation, the official report may differ." },
+      { chart: "multiLine", title: "Private hospitals cut far more often", size: "feature", beat: "csection-incentive", unit: "% of births by C-section",
+        categoricalX: true, xLabels: ["NFHS-5", "NFHS-6"], subtitle: "Two survey rounds: NFHS-5 (2019-21) and NFHS-6 (2023-24) · caesarean share by facility type",
+        indicator: "health.transition.nfhs.c_section_private",
+        series: [
+          { indicator: "health.transition.nfhs.c_section_private", label: "Private facility" },
+          { indicator: "health.transition.nfhs.c_section_public", label: "Public facility" }
+        ],
+        why: "By NFHS-6, 54.1% of births in private facilities were by caesarean, against 16.9% in public ones, a roughly threefold gap that points to financial incentives more than medical need.", read: "Two lines across the two survey rounds. Both rose, but the private rate is far higher and climbing faster.", watch: "Two survey rounds, not annual data. The WHO views a population C-section rate above 10-15% as rarely justified on medical grounds alone." },
+
+      // ===== THE SYSTEM, INDIA'S OWN COUNT (NHP 2023) =====
+      { indicator: "health.nhp.public_facilities", chart: "tableBars", title: "How many public health facilities India has", size: "feature", beat: "facility-counts", unit: "facilities",
+        subtitle: "NHP 2023 (CBHI) · Rural Health Statistics, as on 31 March 2023",
+        why: "India's own count of the public scaffolding, from village sub-centre to district hospital.", read: "Each bar is the number of public facilities of that type: 161,829 sub-centres down to 767 district hospitals.", watch: "Counts carry a reporting lag (RHS vintage) and say nothing about whether each facility is staffed or stocked." },
+      { indicator: "health.nhp.registered_workforce", chart: "tableBars", title: "India's health workforce, on paper", size: "feature", beat: "workforce-count", unit: "registered (cumulative)",
+        subtitle: "NHP 2023 (CBHI) · cumulative registrations with professional councils",
+        why: "The official headcount of doctors, nurses and others, with a heavy caveat.", read: "Each bar is the cumulative number registered: about 2.6 million nurses and midwives, 1.3 million allopathic doctors, and so on.", watch: "These are cumulative registrations, NOT active or in-position staff; they overstate the working workforce, and many have retired, emigrated or left clinical work." },
+      { indicator: "health.nhp.doctors_by_state", chart: "tableBars", title: "Doctors cluster in a few states", size: "feature", beat: "doctors-state", unit: "registered doctors",
+        subtitle: "NHP 2023 (CBHI) · MBBS doctors registered with state councils, upto 31.12.2022",
+        why: "Even on paper, registered doctors are concentrated in a handful of states.", read: "Each bar is a state's registered MBBS doctors; the top four states hold a large share of the national total of about 1.35 million.", watch: "Registered, not active; doctors registered in one state may practise in another." },
+
+      // ===== SPECULATIVE CODA: the GLP-1 question =====
+      { indicator: "health.glp1.price_ladder", chart: "tableBars", title: "What a month of GLP-1 costs in India", size: "feature", beat: "glp1-coda", unit: "INR per month",
+        subtitle: "Press-verified retail prices, mid-2026 · representative monthly cost, ranges in the data",
+        why: "Deliberately speculative: after the March 2026 patent cliff, GLP-1 prices fell off a wall, and the effect on India's metabolic burden could be large but is genuinely unknown.", read: "Each bar is a representative monthly cost for a branded or generic GLP-1, with metformin as a baseline. India's core semaglutide patent expired on 20 March 2026; 40-plus firms launched generics around 90% below branded prices, from roughly Rs 1,300 a month down to about Rs 220 a shot. Demand is already surging: Mounjaro became India's top-selling medicine by value in late 2025, GLP-1 sales were up about 178% year-on-year in early 2026, and the market (about 153 million dollars in 2026) is projected past half a billion by 2030, against roughly 101 million Indians with diabetes.", watch: "Reported retail prices, not regulated MRPs; generic prices were still falling. Every population-impact claim here is a scenario, not a measured outcome. Weight returns after stopping, so these are effectively chronic therapy, lean-muscle loss is a concern, India's thin-fat phenotype may not match Western trials, and even the cheapest generic is far above metformin." }
+    ]
+  },
+  {
     id: "q.health.hale",
     question: "How healthy are those extra years?",
     priority: "core",
@@ -2326,6 +2800,72 @@ export const v1Questions = [
         why: "Child survival is the engine behind India's falling overall death rate. The infant mortality rate fell to 25 per 1,000 live births in 2023.", read: "A steadily falling line of infant deaths per 1,000 live births. Each point is India's own SRS estimate.", watch: "Still high by global standards, and the first month of life remains the riskiest. National average hides rural-urban and state gaps." },
       { indicator: "health.un.total_deaths", chart: "line", title: "Total deaths each year", size: "small", window: "full", beat: "level",
         why: "The denominator behind everything else. Total annual deaths have risen even as the death rate has fallen, because the population is larger and older.", read: "Total deaths per year, climbing gently. The rise is demographic arithmetic, not worsening health.", watch: "A rising total alongside a falling rate is the expected pattern for a growing, ageing country. UN estimates through 2024 with projections." }
+    ]
+  },
+  {
+    id: "q.health.dementia",
+    slug: "dementia-in-india",
+    question: "What dementia costs India",
+    priority: "core",
+    // Built 2026-06. India's dementia scale comes from LASI-DAD (Lee et al.,
+    // Alzheimer's & Dementia 2023) — the first nationally representative, clinically
+    // adjudicated estimate. The financial-damage *mechanism* is borrowed, clearly
+    // flagged, from a US study (NBER WP 34659): wealth diverges years before any
+    // diagnosis, driven by impaired decision-making, not overspending. The cost
+    // layer is ADI's World Alzheimer Report 2010 (cost by income group; unpaid-care
+    // share) plus India's own NHA out-of-pocket series. Dollar harm figures are NEVER
+    // converted to rupees; the US charts stay in US units and are labelled US.
+    indicators: [
+      "health.lasidad.prev_by_age",
+      "health.lasidad.prev_gradients",
+      "health.lasidad.prev_by_education",
+      "health.lasidad.cases_projection",
+      "health.lasidad.prev_by_state",
+      "health.gbd.deaths_alzheimers",
+      "ref.us.nber.wealth_gap_by_event_time",
+      "ref.us.nber.assets_cases_vs_controls",
+      "health.adi.cost_per_person_by_income",
+      "health.adi.informal_care_share",
+      "health.nha.oope_the_pct"
+    ],
+    core: [
+      "health.lasidad.prev_by_age",
+      "health.lasidad.prev_gradients",
+      "health.lasidad.prev_by_education",
+      "health.lasidad.cases_projection",
+      "health.lasidad.prev_by_state",
+      "health.gbd.deaths_alzheimers"
+    ],
+    context: [
+      "ref.us.nber.wealth_gap_by_event_time",
+      "ref.us.nber.assets_cases_vs_controls",
+      "health.adi.cost_per_person_by_income",
+      "health.adi.informal_care_share",
+      "health.nha.oope_the_pct"
+    ],
+    visualPlan: [
+      { chart: "tableBars", indicator: "health.lasidad.prev_by_age", title: "Dementia climbs steeply with age", size: "hero", beat: "answer", unit: "% of age group with dementia", subtitle: "LASI-DAD 2018-20 (Lee et al., Alzheimer's & Dementia 2023) · estimated prevalence by age band",
+        why: "The first thing to know: dementia is overwhelmingly a disease of late old age. It jumps from about 3% in the early 60s to a quarter of everyone past 85.", read: "Each bar is the estimated share of that age band living with dementia. The rise is not gradual; it roughly doubles every five years after 70.", watch: "Estimates from a survey of about 2,500 clinically assessed adults, modelled to the 60+ population. Read the shape, not the second decimal." },
+      { chart: "change", indicator: "health.lasidad.cases_projection", title: "8.8 million now, 16.9 million by 2036", size: "feature", beat: "scale", unit: "million people 60+ with dementia", subtitle: "LASI-DAD · estimated cases, 2016 population base and 2036 projection",
+        why: "Because India is ageing fast, the headcount is set to nearly double in twenty years even if the risk at each age stays flat.", read: "Two figures side by side: an estimated 8.8 million adults over 60 with dementia today, and a projected 16.9 million by 2036.", watch: "Both numbers are estimates with wide uncertainty. The projection is demographic arithmetic, more people surviving into old age, not a worsening of the disease." },
+      { chart: "tableBars", indicator: "health.lasidad.prev_gradients", title: "Who carries more: women, and rural India", size: "feature", beat: "gradient", unit: "% of adults 60+ with dementia", subtitle: "LASI-DAD 2018-20 · crude prevalence among adults 60+",
+        why: "Dementia is not spread evenly. Women carry noticeably more of it than men, and rural Indians more than city dwellers.", read: "Two pairs of bars: women versus men, and rural versus urban. In both, the first bar is clearly taller.", watch: "Part of the women's gap is that they live longer and reach the highest-risk ages; part of the rural gap tracks lower schooling. These overlap." },
+      { chart: "tableBars", indicator: "health.lasidad.prev_by_education", title: "Dementia falls sharply with schooling", size: "small", beat: "gradient", unit: "% of adults 60+ with dementia", subtitle: "LASI-DAD 2018-20 · crude prevalence by education",
+        why: "The steepest gradient of all is education: those with no schooling have many times the measured prevalence of those who finished middle school.", read: "Three bars, falling fast from left to right as schooling rises.", watch: "This is association, not a clean cause. Education tracks lifelong income, nutrition and health, and may also change how dementia is detected and reported." },
+      { chart: "choropleth", indicator: "health.lasidad.prev_by_state", title: "Where dementia is most common", size: "feature", beat: "where", unit: "% of adults 60+", rankLabel: "Highest", bottomLabel: "Lowest", subtitle: "LASI-DAD 2018-20 · estimated prevalence among adults 60+, by state",
+        why: "The map runs from about 4.5% in Delhi to roughly 11% in Jammu & Kashmir, with the south and east generally higher than the north-western plains.", read: "Darker states have higher estimated prevalence among the over-60s. Grey states had no separate estimate.", watch: "North-eastern states other than Assam were published only as one group, so they share a single value. Small-state estimates are the least certain." },
+      { chart: "line", indicator: "health.gbd.deaths_alzheimers", title: "Deaths recorded from dementia have risen eightfold", size: "feature", beat: "trend", window: "full", subtitle: "IHME Global Burden of Disease 2023 · estimated annual deaths from Alzheimer's & other dementias, India",
+        why: "As Indians live longer and other killers recede, dementia surfaces in the mortality data: recorded deaths have climbed from about 17,000 in 1980 to over 140,000.", read: "A single line rising steeply, especially after 2000.", watch: "Modelled estimates, and dementia is badly under-recorded as a cause of death, so this is a floor. The jump after 2021 partly reflects a coding change, read the long climb, not the last kink." },
+      { chart: "tableBars", indicator: "ref.us.nber.wealth_gap_by_event_time", title: "America: money trouble starts before the diagnosis", size: "feature", beat: "mechanism", unit: "US$1,000s of net worth vs similar households", subtitle: "NBER WP 34659 (Li et al. 2026) · US Health & Retirement Study · evidence from the United States",
+        why: "This is US data, shown to explain the mechanism, not to put a rupee figure on India. American households heading into dementia fall behind similar households starting about six years before onset, ending roughly $125,000 poorer.", read: "Each bar is the wealth gap versus matched controls at that point in time. It is near zero six years out and sinks steadily, deepening even after diagnosis.", watch: "United States, not India. The dollar amounts do not transfer; what transfers is the timing and the cause, money slips away before anyone has a name for why." },
+      { chart: "tableBars", indicator: "ref.us.nber.assets_cases_vs_controls", title: "America: the gap sits in hard-to-manage assets", size: "feature", beat: "mechanism", unit: "US$1,000s held, two years before onset", subtitle: "NBER WP 34659 · means two years before onset · evidence from the United States",
+        why: "The losses concentrate in stocks, bonds and investment accounts, the assets that need active judgement to manage. Earnings barely differ, and cancer or heart disease show no such gap, which points at decision-making, not spending.", read: "For each asset type, two bars: households developing dementia versus similar households without. The dementia group holds less everywhere, most in investments needing active management.", watch: "United States, 2018 dollars. Most older Indians hold little in stocks or pensions, so this exact channel is smaller here; the lesson is about judgement, not portfolios." },
+      { chart: "tableBars", indicator: "health.adi.cost_per_person_by_income", title: "What a year of dementia care costs", size: "small", beat: "cost", unit: "US$ per person per year (2010)", subtitle: "World Alzheimer Report 2010 (ADI / Wimo & Prince) · societal cost per person, by country income group",
+        why: "On paper, dementia looks far cheaper in poorer countries. India sat in the lower-middle band at about US$3,100 a year per person, against nearly US$33,000 in rich countries.", read: "Four bars rising with country income. India's band is the second from the left.", watch: "Lower is not better. The figure is small mostly because care is unpaid and there are few care homes, not because the illness is lighter. 2010 dollars." },
+      { chart: "tableBars", indicator: "health.adi.informal_care_share", title: "The poorer the country, the more care is unpaid", size: "feature", beat: "cost", unit: "% of dementia cost that is unpaid family care", subtitle: "World Alzheimer Report 2010 (ADI) · share of total cost that is informal (family) care",
+        why: "Here is why India's cost looks low and is in fact hidden: in its income band about two-thirds of the entire cost of dementia is unpaid family labour that never enters any budget.", read: "Three bars: the share of total dementia cost that is unpaid family care is highest in poorer countries and lower in rich ones, where paid services take over.", watch: "Unpaid does not mean free. It is paid in lost wages and lost years, mostly by women, and it simply never shows up as spending." },
+      { chart: "line", indicator: "health.nha.oope_the_pct", title: "Why it lands on families: India pays out of pocket", size: "small", beat: "cost", window: "full", subtitle: "National Health Accounts (MoHFW) · out-of-pocket spending as a share of total health expenditure, India",
+        why: "Even the medical slice of dementia care falls on households, because India funds a large share of all health care straight out of family pockets.", read: "The share of India's total health spending that comes directly out of household pockets, year by year.", watch: "Falling slowly but still high. Dementia care, drugs, doctor visits, attendants, mostly sits inside this out-of-pocket share, on top of the unpaid care at home." }
     ]
   },
   {
@@ -3563,7 +4103,7 @@ export const v1Questions = [
         why: "The heat warning only helps if a worker can act on it. Most Indian workers cannot. PLFS says 58.4% of workers are self-employed and 19.8% are casual labour; only 21.7% have regular wage or salaried jobs. ILOSTAT puts informal employment at 87.2% overall and 98.6% in agriculture. That means no paid heat leave for most workers, no enforceable shade break, and no easy way to skip a dangerous day.",
         read: "Read each bar independently. The first three bars are PLFS worker-status shares; the last two are ILOSTAT informality rates. They describe different dimensions of the same constraint: weak work security during heat.",
         watch: "Do not add the bars. Worker status and informality overlap and come from different systems; the point is not a total, but how little protection sits between heat and income." },
-      { indicator: "heat.work.lancet_labour_loss_sector_shares", chart: "tableBars", title: "Heat is already costing work hours", size: "small", beat: "labour-loss", unit: "% of heat-related labour-hour losses",
+      { indicator: "heat.work.lancet_labour_loss_sector_shares", chart: "tableBars", title: "Heat is already costing work hours", size: "feature", beat: "labour-loss", unit: "% of heat-related labour-hour losses",
         subtitle: "Lancet Countdown India 2025 · sector split of 247 billion potential labour hours lost in 2024",
         why: "The workplace burden is already visible in labour-capacity estimates. Lancet Countdown's India 2025 data sheet estimates heat exposure cost India 247 billion potential labour hours in 2024, 419 hours per person and 124% more than the 1990-1999 average. Agriculture accounts for 66% of those heat-related labour-hour losses, and construction for 20%, which is exactly where work is hardest to pause.",
         read: "Each bar is a sector's share of heat-related labour-hour losses in 2024. Agriculture and construction are directly reported; other sectors are the residual share.",
@@ -3785,14 +4325,77 @@ export const v1Questions = [
     id: "q.climate.impact",
     question: "How is climate change changing India?",
     priority: "core",
-    // Flagship comprehensive climate page. Physical signal (OWID/Copernicus ERA5)
-    // + air (WAQI) + the cause (CO2/Ember) + why India is exposed (agriculture,
-    // population). National layer; state-level warming is Pass B (raw ERA5).
-    indicators: ["climate.temp_anomaly_annual", "climate.precipitation_annual"],
-    core: ["climate.temp_anomaly_annual", "climate.precipitation_annual"],
+    // Flagship comprehensive climate page. Rebuilt around the local ERA5 spine:
+    // long-run warming, regional/state unevenness, hourly-derived heat exposure,
+    // 2026 Jan-May YTD, rainfall/monsoon shifts, emissions, air and household exposure.
+    indicators: [
+      "climate.era5.region.all_india.temp_anomaly_1991_2020",
+      "climate.era5.hourly.region.all_india.warm_nights_26",
+      "climate.era5.ytd.all_india.temp_anomaly_jan_may_1991_2020"
+    ],
+    core: [
+      "climate.era5.region.all_india.temp_anomaly_1991_2020",
+      "compare.climate.warming_since_1940s",
+      "climate.derived.temp_anomaly_era5_1991_2020",
+      "climate.derived.temp_anomaly_owid_1991_2020",
+      "climate.derived.temp_anomaly_berkeley_1991_2020",
+      "climate.era5.region.all_india.temp_anomaly_pre_monsoon_1991_2020",
+      "climate.era5.state_warming",
+      "climate.era5.hourly.region.all_india.hot_days_40",
+      "climate.era5.hourly.region.all_india.warm_nights_26",
+      "climate.era5.hourly.region.all_india.humid_heat_days_40",
+      "climate.era5.region.all_india.precip_anomaly_pct_southwest_monsoon_1991_2020",
+      "climate.era5.hourly_precip.region.all_india.wet_days_1mm",
+      "climate.era5.hourly_precip.region.all_india.heavy_days_50mm",
+      "climate.era5.hourly_precip.region.all_india.max_5day_mm",
+      "climate.era5.ytd.all_india.temp_anomaly_jan_may_1991_2020",
+      "climate.era5.ytd.all_india.precip_anomaly_pct_jan_may_1991_2020"
+    ],
     context: [
-      "climate.surface_temp_monthly",
-      "climate.temp_anomaly_monthly",
+      "climate.temp_anomaly_annual",
+      "climate.precipitation_annual",
+      "climate.berkeley.temp_anomaly",
+      "climate.berkeley.temp_abs",
+      "climate.era5.region.himalayan_belt.temp_anomaly_1991_2020",
+      "climate.era5.region.indo_gangetic_plain.temp_anomaly_1991_2020",
+      "climate.era5.region.west_arid.temp_anomaly_1991_2020",
+      "climate.era5.region.central_deccan.temp_anomaly_1991_2020",
+      "climate.era5.region.south_peninsula.temp_anomaly_1991_2020",
+      "climate.era5.region.northeast_hills.temp_anomaly_1991_2020",
+      "climate.era5.region.all_india.rel_humidity_mean",
+      "climate.era5.hourly.region.indo_gangetic_plain.warm_nights_26",
+      "climate.era5.hourly.region.west_arid.hot_days_40",
+      "climate.era5.hourly.region.south_peninsula.humid_heat_days_40",
+      "climate.era5.hourly.region.central_deccan.humid_heat_days_40",
+      "climate.era5.ytd.indo_gangetic_plain.temp_anomaly_jan_may_1991_2020",
+      "climate.era5.ytd.west_arid.temp_anomaly_jan_may_1991_2020",
+      "climate.era5.ytd.central_deccan.temp_anomaly_jan_may_1991_2020",
+      "climate.era5.ytd.south_peninsula.temp_anomaly_jan_may_1991_2020",
+      "climate.era5.ytd.northeast_hills.temp_anomaly_jan_may_1991_2020",
+      "climate.era5.ytd.himalayan_belt.temp_anomaly_jan_may_1991_2020",
+      "climate.era5.ytd.indo_gangetic_plain.precip_anomaly_pct_jan_may_1991_2020",
+      "climate.era5.ytd.west_arid.precip_anomaly_pct_jan_may_1991_2020",
+      "climate.era5.ytd.central_deccan.precip_anomaly_pct_jan_may_1991_2020",
+      "climate.era5.ytd.south_peninsula.precip_anomaly_pct_jan_may_1991_2020",
+      "climate.era5.ytd.northeast_hills.precip_anomaly_pct_jan_may_1991_2020",
+      "climate.era5.ytd.himalayan_belt.precip_anomaly_pct_jan_may_1991_2020",
+      "climate.era5.hourly_precip.region.central_deccan.wet_days_1mm",
+      "climate.era5.hourly_precip.region.indo_gangetic_plain.wet_days_1mm",
+      "climate.era5.hourly_precip.region.northeast_hills.wet_days_1mm",
+      "climate.era5.hourly_precip.region.south_peninsula.wet_days_1mm",
+      "climate.era5.hourly_precip.region.west_arid.wet_days_1mm",
+      "climate.era5.hourly_precip.region.central_deccan.heavy_days_50mm",
+      "climate.era5.hourly_precip.region.indo_gangetic_plain.heavy_days_50mm",
+      "climate.era5.hourly_precip.region.northeast_hills.heavy_days_50mm",
+      "climate.era5.hourly_precip.region.south_peninsula.heavy_days_50mm",
+      "climate.era5.hourly_precip.region.west_arid.heavy_days_50mm",
+      "climate.era5.hourly_precip.region.central_deccan.max_5day_mm",
+      "climate.era5.hourly_precip.region.indo_gangetic_plain.max_5day_mm",
+      "climate.era5.hourly_precip.region.northeast_hills.max_5day_mm",
+      "climate.era5.hourly_precip.region.south_peninsula.max_5day_mm",
+      "climate.era5.hourly_precip.region.west_arid.max_5day_mm",
+      "climate.era5.hourly_precip.region.all_india.monsoon_share_pct",
+      "climate.el_nino.imd_monsoon_departure_1901_2025",
       "climate.waqi.delhi",
       "climate.waqi.mumbai",
       "climate.waqi.kolkata",
@@ -3813,38 +4416,13 @@ export const v1Questions = [
       "climate.ghg_total",
       "climate.ghg_by_gas",
       "climate.co2_consumption",
-      "climate.pm25_exposure",
+      "climate.pm25_iqair_country",
       "climate.disaster_deaths",
       "compare.climate.co2_per_capita",
       "compare.climate.co2_total",
       "compare.climate.co2_cumulative",
-      "climate.era5.temp_mean",
-      "climate.era5.rel_humidity_mean",
-      "climate.era5.hotdays40_observed",
-      "climate.era5.warmnights26_observed",
       "climate.ghg_by_sector",
       "climate.co2_vs_gdp",
-      "climate.openmeteo.delhi.very_hot_days",
-      "climate.openmeteo.mumbai.very_hot_days",
-      "climate.openmeteo.kolkata.very_hot_days",
-      "climate.openmeteo.chennai.very_hot_days",
-      "climate.openmeteo.bengaluru.very_hot_days",
-      "climate.openmeteo.jodhpur.very_hot_days",
-      "climate.openmeteo.nagpur.very_hot_days",
-      "climate.openmeteo.lucknow.very_hot_days",
-      "climate.openmeteo.patna.very_hot_days",
-      "climate.openmeteo.hyderabad.very_hot_days",
-      "climate.openmeteo.jaipur.very_hot_days",
-      "climate.openmeteo.ahmedabad.very_hot_days",
-      "climate.openmeteo.bhopal.very_hot_days",
-      "climate.openmeteo.varanasi.very_hot_days",
-      "climate.openmeteo.bhubaneswar.very_hot_days",
-      "climate.openmeteo.raipur.very_hot_days",
-      "climate.openmeteo.ranchi.very_hot_days",
-      "climate.openmeteo.srinagar.very_hot_days",
-      "climate.openmeteo.delhi.hot_nights",
-      "climate.openmeteo.mumbai.hot_nights",
-      "climate.openmeteo.chennai.hot_nights",
       "climate.psmsl.mumbai",
       "climate.psmsl.chennai",
       "energy.ember.generation",
@@ -3861,112 +4439,170 @@ export const v1Questions = [
       "climate.cckp.warmnights26_historical",
       "climate.cckp.cdd_historical",
       "climate.cckp.cdd_ssp245",
-      "climate.era5.state_warming"
+      "heat.cooling.ac_all",
+      "heat.cooling.ac_rural",
+      "heat.cooling.ac_urban",
+      "heat.cooling.nfhs5_ac_cooler_all",
+      "heat.cooling.nfhs5_ac_cooler_rural",
+      "heat.cooling.nfhs5_ac_cooler_urban",
+      "heat.cooling.cooler_by_state",
+      "heat.vulnerability.state_risk_cooling_poverty",
+      "heat.work.lancet_labour_loss_sector_shares",
+      "heat.death_count_comparison",
+      "heat.context.agriculture_employment_share",
+      "heat.context.vulnerable_employment_share",
+      "heat.context.population_65plus_share",
+      "heat.context.electricity_access",
+      "water.cgwb.stage_trend_india_national",
+      "water.cgwb.stage_trend_delhi",
+      "water.cgwb.stage_trend_tamil_nadu",
+      "agriculture.el_nino.rainfall_crop_correlations",
+      "agriculture.el_nino.crop_yield_sensitivity",
+      "prices.el_nino.food_wpi_components"
     ],
     visualPlan: [
-      // ACT I — the signal, dissected several ways (line, stripes, diverging decade bars, absolute, projection fan)
-      { indicator: "climate.temp_anomaly_annual", chart: "line", title: "How much hotter India is than normal", size: "hero", window: "full", beat: "signal",
-        why: "The single clearest sign that India's climate is shifting, not just its weather.", read: "Each point is how far that year's average surface temperature sat above or below the 1991-2020 normal. Above zero is a hotter-than-normal year.", watch: "A single cool year does not undo a warming trend. Read the drift of the whole line, not the last dot. This is a national average, so it hides local extremes." },
-      { indicator: "climate.temp_anomaly_annual", chart: "stripes", title: "A century of warming, one stripe per year", size: "feature", window: "full", beat: "signal", unit: "°C vs 1991-2020",
-        why: "The warming trend with no axes to hide behind, the famous climate-stripes view.", read: "Each vertical band is one year, blue for cooler-than-normal, red for hotter. Read left to right: the shift from blue to red is the warming.", watch: "Colour shows rank, not exact degrees. Use the line chart above for precise values." },
-      { indicator: "climate.temp_anomaly_annual", chart: "decadeBars", title: "Each decade hotter than the last", size: "small", beat: "dissection", unit: "°C vs 1991-2020",
-        why: "Smoothing year-to-year noise into decade averages shows the staircase of warming.", read: "Each bar is the average anomaly for that decade. Bars below the line are cooler-than-normal decades, bars above are hotter.", watch: "Decade averages flatten extremes; a calm-looking decade can still contain a record heatwave year." },
-      { indicator: "climate.surface_temp_monthly", chart: "seasonalByYear", title: "Every season is hotter than it used to be", size: "feature", beat: "absolute", unit: "°C", subtitle: "OWID / Copernicus ERA5 · average monthly temperature, selected years",
-        years: [2015, 2000, 1980, 1960, 1940],
-        why: "This is the most direct way to feel the warming: the whole seasonal curve has lifted, decade by decade.", read: "Each line is one year's temperature across the 12 months, low in winter, high before the monsoon. Later years (the coral 2025 line) sit above earlier ones at almost every month.", watch: "These are national monthly averages, so they understate local extremes; the point is the gap between the lines, not any single month's value." },
-      { chart: "multiLine", title: "Where India's heat is headed, to 2100", size: "feature", beat: "projection", unit: "°C", subtitle: "World Bank CCKP · CMIP6 · observed and projected average temperature",
+      // ACT I — what changed physically
+      { indicator: "climate.era5.region.all_india.temp_anomaly_1991_2020", chart: "line", title: "India's climate line has moved", size: "hero", window: "full", beat: "signal", unit: "°C vs 1991-2020",
+        why: "The core answer: the national climate is warmer than the recent normal, not just in one bad summer.", read: "Each point is India's annual mean temperature anomaly from ERA5, compared with the 1991-2020 average. Positive years are hotter than the recent normal.", watch: "This is a national annual average. It smooths out the heat that people feel in particular weeks, cities and worksites." },
+      { chart: "multiLine", title: "Three datasets tell the same warming story", size: "feature", beat: "source-check", unit: "°C vs 1991-2020",
         series: [
-          { indicator: "climate.cckp.temp_historical", label: "Observed" },
-          { indicator: "climate.cckp.temp_ssp126", label: "Low emissions" },
-          { indicator: "climate.cckp.temp_ssp245", label: "Middle road" },
-          { indicator: "climate.cckp.temp_ssp585", label: "High emissions" }
+          { indicator: "climate.derived.temp_anomaly_era5_1991_2020", label: "ERA5" },
+          { indicator: "climate.derived.temp_anomaly_owid_1991_2020", label: "OWID/Copernicus" },
+          { indicator: "climate.derived.temp_anomaly_berkeley_1991_2020", label: "Berkeley Earth" }
         ],
-        indicator: "climate.cckp.temp_ssp245",
-        why: "Today's warming is small next to where the century is heading, and how hot it gets is still a choice.", read: "The observed line runs to 2014, then three projection lines fan out by how much the world keeps emitting, low to high.", watch: "These are model projections, not certainties, and a country-wide average understates the heat in the hottest regions and seasons." },
-      { indicator: "climate.era5.state_warming", chart: "choropleth", title: "The warming is not spread evenly: which states heated most", size: "feature", beat: "regional", unit: "°C warmer", signed: true, rankLabel: "Warmed most", bottomLabel: "Warmed least",
-        why: "A single national number hides the map, and India's warming is sharply uneven, fastest where it is least expected.", read: "Each state is shaded by how much its average temperature rose, comparing 2015-2024 against the 1951-1980 baseline. Darker means more warming.", watch: "The Himalayan states (Ladakh, Sikkim, Himachal) have warmed most, a known mountain-amplification effect, while the warming felt by the most people is in the dense plains. State averages still smooth over local extremes." },
-      // ACT II — how it shows up (humidity/heat stress, rainfall, air today, air over time)
-      { indicator: "climate.era5.rel_humidity_mean", chart: "line", title: "It is not just the heat, it is the humidity", size: "small", window: "full", beat: "heat-stress",
-        why: "Humid heat is what makes warming dangerous for the body; dry heat and wet heat are not the same threat.", read: "Average relative humidity over India from ERA5. Combined with rising heat, higher humidity pushes up the 'feels-like' wet-bulb temperature.", watch: "This is an annual national mean; the deadly combination is high heat and high humidity together, in specific places and weeks." },
-      { indicator: "climate.precipitation_annual", chart: "line", title: "How India's rainfall is swinging", size: "feature", window: "full", beat: "shift",
-        why: "Warming does not just raise heat, it makes rain less predictable, and India runs on the monsoon.", read: "Each point is total rainfall for the year in millimetres. Watch the size of the swings between wet and dry years, not just the average.", watch: "A yearly national total cannot show a late monsoon, a dry spell inside a wet year, or a cloudburst. Timing and intensity matter as much as the annual sum." },
-      { chart: "waqiCompare", title: "What the air feels like across India today", size: "feature", beat: "exposure", unit: "AQI", subtitle: "WAQI · live air quality index · latest reading",
+        indicator: "climate.derived.temp_anomaly_era5_1991_2020",
+        why: "This answers the cherry-picking objection: the warming signal is not a quirk of one dataset.", read: "Three independent India temperature-anomaly series are rebased to the same 1991-2020 normal so the direction can be compared.", watch: "The lines will not match exactly because sources, land masks and methods differ. Agreement on direction matters more than tiny annual gaps." },
+      { indicator: "compare.climate.warming_since_1940s", chart: "tableBars", title: "India has warmed about as much as the world", size: "feature", beat: "comparison", unit: "°C warmer",
+        why: "This answers the 'India is not warming fast' claim with a fair cross-country comparison.", read: "Each bar compares the average annual temperature anomaly in 2016-2025 with the 1940s average for that country or region.", watch: "This is a change in temperature anomaly, not a percent. A roughly one-degree national shift is not small in a hot, humid, populous country." },
+      { chart: "multiLine", title: "Every region is warming, but not the same way", size: "feature", beat: "regional", unit: "°C vs 1991-2020",
         series: [
-          { indicator: "climate.waqi.delhi", label: "Delhi" },
-          { indicator: "climate.waqi.mumbai", label: "Mumbai" },
-          { indicator: "climate.waqi.kolkata", label: "Kolkata" },
-          { indicator: "climate.waqi.chennai", label: "Chennai" },
-          { indicator: "climate.waqi.bengaluru", label: "Bengaluru" }
+          { indicator: "climate.era5.region.himalayan_belt.temp_anomaly_1991_2020", label: "Himalayan belt" },
+          { indicator: "climate.era5.region.indo_gangetic_plain.temp_anomaly_1991_2020", label: "Indo-Gangetic plain" },
+          { indicator: "climate.era5.region.west_arid.temp_anomaly_1991_2020", label: "West and arid India" },
+          { indicator: "climate.era5.region.central_deccan.temp_anomaly_1991_2020", label: "Central and Deccan India" },
+          { indicator: "climate.era5.region.south_peninsula.temp_anomaly_1991_2020", label: "South peninsula" },
+          { indicator: "climate.era5.region.northeast_hills.temp_anomaly_1991_2020", label: "Northeast hills" }
         ],
-        indicator: "climate.waqi.delhi",
-        why: "The same fossil-fuel burning that warms the planet also fills the air people breathe right now.", read: "Each bar is the current air quality index in that city. Higher is worse. It is a live snapshot, not a yearly average.", watch: "AQI is one reading at one moment. It swings hour to hour and season to season, so do not read a single snapshot as the city's permanent air." },
-      { indicator: "climate.pm25_exposure", chart: "line", title: "...and how dirty the air has been, year after year", size: "small", window: "full", beat: "exposure",
-        why: "Today's snapshot means more next to the long run, and India's average exposure sits far above what is considered safe.", read: "Average PM2.5 that the typical Indian breathes each year, in micrograms per cubic metre.", watch: "This is a national population-weighted average. The WHO guideline is 5; most of India lives well above it, but the worst air is concentrated in the north." },
-      { chart: "multiLine", title: "The local heat the national average hides: very hot days", size: "feature", beat: "extremes", unit: "days", subtitle: "Open-Meteo ERA5 · days per year at or above 35°C",
+        indicator: "climate.era5.region.indo_gangetic_plain.temp_anomaly_1991_2020",
+        why: "The national average hides different regional climates and different lived risks.", read: "Each line is a broad Indian region's ERA5 annual temperature anomaly from the same 1991-2020 baseline.", watch: "Regions are broad state groupings. They explain scale better than a national average, but they still hide city and district extremes." },
+      { indicator: "climate.era5.state_warming", chart: "choropleth", title: "The warming map is uneven", size: "feature", beat: "regional", unit: "°C warmer", signed: true, rankLabel: "Warmed most", bottomLabel: "Warmed least",
+        why: "People live in states, not in an all-India average, and warming has not landed evenly.", read: "Each state is shaded by how much its average temperature rose, comparing 2015-2024 against the 1951-1980 baseline. Darker means more warming.", watch: "State averages still smooth over cities, valleys and coastlines. Mountain states often warm faster, but dense plains carry the larger population exposure." },
+      { indicator: "climate.era5.region.all_india.temp_anomaly_pre_monsoon_1991_2020", chart: "line", title: "The pre-monsoon heat window matters most", size: "feature", window: "full", beat: "season",
+        why: "March-May is when heat stress peaks before rain relief arrives, so seasonal warming matters more than annual warming alone.", read: "ERA5 March-May temperature anomaly for all India, compared with 1991-2020.", watch: "A hot pre-monsoon season does not automatically predict the monsoon. It is a heat-exposure measure, not a rainfall forecast." },
+      { chart: "multiLine", title: "2026 so far belongs in its own box", size: "feature", beat: "current-year", unit: "°C vs Jan-May 1991-2020",
         series: [
-          { indicator: "climate.openmeteo.delhi.very_hot_days", label: "Delhi" },
-          { indicator: "climate.openmeteo.mumbai.very_hot_days", label: "Mumbai" },
-          { indicator: "climate.openmeteo.kolkata.very_hot_days", label: "Kolkata" },
-          { indicator: "climate.openmeteo.chennai.very_hot_days", label: "Chennai" },
-          { indicator: "climate.openmeteo.bengaluru.very_hot_days", label: "Bengaluru" }
+          { indicator: "climate.era5.ytd.all_india.temp_anomaly_jan_may_1991_2020", label: "All India" },
+          { indicator: "climate.era5.ytd.indo_gangetic_plain.temp_anomaly_jan_may_1991_2020", label: "Indo-Gangetic plain" },
+          { indicator: "climate.era5.ytd.west_arid.temp_anomaly_jan_may_1991_2020", label: "West and arid India" },
+          { indicator: "climate.era5.ytd.central_deccan.temp_anomaly_jan_may_1991_2020", label: "Central and Deccan India" },
+          { indicator: "climate.era5.ytd.south_peninsula.temp_anomaly_jan_may_1991_2020", label: "South peninsula" }
         ],
-        indicator: "climate.openmeteo.delhi.very_hot_days",
-        why: "A one-degree national rise lands as many more dangerously hot days in specific cities, which is what people actually feel.", read: "Each line counts the days per year a city hit 35°C or more. The level differs hugely by city, and the trend matters more than any single year.", watch: "Bengaluru sits near the bottom on purpose: its altitude keeps it mild, which is the point that the heat is not spread evenly. Coastal Chennai and Mumbai also differ from inland Delhi, so do not read one city as all of India." },
-      { chart: "multiLine", title: "Days that feel dangerously hot, to 2100", size: "feature", beat: "heat-stress", unit: "days", subtitle: "World Bank CCKP · CMIP6 · days with a heat index of 39°C or higher",
+        indicator: "climate.era5.ytd.all_india.temp_anomaly_jan_may_1991_2020",
+        why: "The current year is a live hook, but partial years must be compared only with the same months in earlier years.", read: "Each line compares January-May temperature in every year with the January-May 1991-2020 normal. The latest point is 2026 through May.", watch: "Do not rank 2026 against full calendar years. This is a year-to-date comparison through May only." },
+      // ACT II — how heat is lived
+      { chart: "multiLine", title: "The nights are not cooling like they used to", size: "feature", beat: "lived-heat", unit: "nights per year",
         series: [
-          { indicator: "climate.cckp.heatindex39_historical", label: "Observed" },
-          { indicator: "climate.cckp.heatindex39_ssp126", label: "Low emissions" },
-          { indicator: "climate.cckp.heatindex39_ssp245", label: "Middle road" },
-          { indicator: "climate.cckp.heatindex39_ssp585", label: "High emissions" }
+          { indicator: "climate.era5.hourly.region.all_india.warm_nights_26", label: "All India" },
+          { indicator: "climate.era5.hourly.region.indo_gangetic_plain.warm_nights_26", label: "Indo-Gangetic plain" },
+          { indicator: "climate.era5.hourly.region.central_deccan.warm_nights_26", label: "Central and Deccan India" },
+          { indicator: "climate.era5.hourly.region.south_peninsula.warm_nights_26", label: "South peninsula" }
         ],
-        indicator: "climate.cckp.heatindex39_ssp245",
-        why: "Dry heat is survivable; humid heat is what kills, and the heat index counts the days the air actually feels dangerous, body and all.", read: "Days per year when the heat index, which combines temperature and humidity, reaches 39°C or more. About 5 such days in 1950, 14 by 2014, and tens to dozens more by 2100 depending on emissions.", watch: "This is a national average; coastal and Gangetic-plain humidity makes the lived danger far higher in places. Projections widen by scenario, so the high-emissions path is a choice, not a certainty." },
-      { chart: "multiLine", title: "...and a soaring demand for cooling", size: "feature", beat: "heat-economy", unit: "degree-days", subtitle: "World Bank CCKP · CMIP6 · cooling degree days (base 18°C)",
+        indicator: "climate.era5.hourly.region.all_india.warm_nights_26",
+        why: "Warm nights are what make heat hard to recover from: the body, the house and the city never get a proper reset.", read: "Hourly ERA5 temperatures are converted into daily minimums, then counted as warm nights when the minimum stays at or above 26°C.", watch: "This is region-average exposure. A city neighbourhood or a tin-roofed room can be worse than the grid-cell average." },
+      { chart: "multiLine", title: "The hottest days are a regional story", size: "feature", beat: "lived-heat", unit: "days per year",
         series: [
-          { indicator: "climate.cckp.cdd_historical", label: "Observed" },
-          { indicator: "climate.cckp.cdd_ssp126", label: "Low emissions" },
-          { indicator: "climate.cckp.cdd_ssp245", label: "Middle road" },
-          { indicator: "climate.cckp.cdd_ssp585", label: "High emissions" }
+          { indicator: "climate.era5.hourly.region.all_india.hot_days_40", label: "All India" },
+          { indicator: "climate.era5.hourly.region.west_arid.hot_days_40", label: "West and arid India" },
+          { indicator: "climate.era5.hourly.region.indo_gangetic_plain.hot_days_40", label: "Indo-Gangetic plain" },
+          { indicator: "climate.era5.hourly.region.central_deccan.hot_days_40", label: "Central and Deccan India" }
         ],
-        indicator: "climate.cckp.cdd_ssp245",
-        why: "Heat is not just a health threat, it is an energy and money problem: more heat means more cooling, more power, more strain on the grid.", read: "Cooling degree days measure how much, and how long, temperatures sit above a comfort baseline, the standard proxy for cooling and air-conditioning demand. The line climbs steeply under higher emissions.", watch: "This is potential cooling demand from temperature alone; how much actual electricity it draws depends on who can afford air-conditioning, which is its own inequality." },
-      { chart: "multiLine", title: "And the nights are not cooling down", size: "small", beat: "extremes", unit: "nights", subtitle: "Open-Meteo ERA5 · warm nights per year",
+        indicator: "climate.era5.hourly.region.all_india.hot_days_40",
+        why: "A national annual average cannot tell a farmer in Rajasthan or a street vendor in Delhi how many punishing days they face.", read: "Hourly ERA5 temperatures are converted to daily maximums. Each line counts days when the maximum reached at least 40°C.", watch: "Threshold days can fall in a cooler year if the heat was short and sharp. Use this with the anomaly charts, not instead of them." },
+      { chart: "multiLine", title: "Humidity turns heat into body stress", size: "feature", beat: "lived-heat", unit: "days per year",
         series: [
-          { indicator: "climate.openmeteo.delhi.hot_nights", label: "Delhi" },
-          { indicator: "climate.openmeteo.mumbai.hot_nights", label: "Mumbai" },
-          { indicator: "climate.openmeteo.kolkata.hot_nights", label: "Kolkata" },
-          { indicator: "climate.openmeteo.chennai.hot_nights", label: "Chennai" },
-          { indicator: "climate.openmeteo.bengaluru.hot_nights", label: "Bengaluru" }
+          { indicator: "climate.era5.hourly.region.all_india.humid_heat_days_40", label: "All India" },
+          { indicator: "climate.era5.hourly.region.south_peninsula.humid_heat_days_40", label: "South peninsula" },
+          { indicator: "climate.era5.hourly.region.central_deccan.humid_heat_days_40", label: "Central and Deccan India" },
+          { indicator: "climate.era5.hourly.region.indo_gangetic_plain.humid_heat_days_40", label: "Indo-Gangetic plain" }
         ],
-        indicator: "climate.openmeteo.delhi.hot_nights",
-        why: "Hot nights are a hidden killer: without a cool night the body never recovers from daytime heat.", read: "Warm nights per year by city. Rising night-time heat is one of the clearest fingerprints of warming.", watch: "Bengaluru's line sits flat at zero because its altitude keeps nights cool, so it barely registers here. Humid coastal cities feel hot nights more sharply than the count alone suggests." },
-      { chart: "multiLine", title: "The sea is rising on India's coasts", size: "feature", beat: "impact", unit: "mm vs 1961-1990", subtitle: "PSMSL tide gauges · annual mean sea level",
+        indicator: "climate.era5.hourly.region.all_india.humid_heat_days_40",
+        why: "The danger is not only thermometer heat. Humidity decides whether sweat can cool the body.", read: "Hourly ERA5 temperature and dew point are used to calculate heat index. A day counts when the daily maximum heat index reaches at least 40°C.", watch: "Heat index is a body-stress proxy, not a medical outcome. It says exposure rose, not how many people fell sick." },
+      // ACT III — rain, water and the monsoon
+      { indicator: "climate.era5.region.all_india.precip_anomaly_pct_southwest_monsoon_1991_2020", chart: "line", title: "The monsoon has become a sharper risk", size: "feature", window: "full", beat: "rain", unit: "% vs 1991-2020",
+        why: "India does not live on annual rainfall alone. It lives on whether the monsoon arrives, pauses, dumps or fails.", read: "ERA5 June-September precipitation anomaly for all India, compared with 1991-2020.", watch: "A national monsoon total hides dry spells, floods and regional failures. Timing can hurt even when the season total looks normal." },
+      { chart: "multiLine", title: "Rainy days are not moving together across India", size: "feature", beat: "rain-frequency", unit: "days per year",
+        series: [
+          { indicator: "climate.era5.hourly_precip.region.all_india.wet_days_1mm", label: "All India" },
+          { indicator: "climate.era5.hourly_precip.region.indo_gangetic_plain.wet_days_1mm", label: "Indo-Gangetic plain" },
+          { indicator: "climate.era5.hourly_precip.region.central_deccan.wet_days_1mm", label: "Central and Deccan India" },
+          { indicator: "climate.era5.hourly_precip.region.south_peninsula.wet_days_1mm", label: "South peninsula" },
+          { indicator: "climate.era5.hourly_precip.region.northeast_hills.wet_days_1mm", label: "Northeast hills" }
+        ],
+        indicator: "climate.era5.hourly_precip.region.all_india.wet_days_1mm",
+        why: "Annual rain totals miss whether rain is spread across usable days or squeezed into fewer bursts.", read: "ERA5 hourly precipitation is summed to daily rainfall. A wet day is counted when the regional daily total reaches at least 1 mm.", watch: "This is a regional-average wet-day count. It does not say that every district got rain on the same days." },
+      { chart: "multiLine", title: "Heavy-rain days are the drainage problem", size: "feature", beat: "rain-intensity", unit: "days per year",
+        series: [
+          { indicator: "climate.era5.hourly_precip.region.all_india.heavy_days_50mm", label: "All India" },
+          { indicator: "climate.era5.hourly_precip.region.central_deccan.heavy_days_50mm", label: "Central and Deccan India" },
+          { indicator: "climate.era5.hourly_precip.region.south_peninsula.heavy_days_50mm", label: "South peninsula" },
+          { indicator: "climate.era5.hourly_precip.region.northeast_hills.heavy_days_50mm", label: "Northeast hills" },
+          { indicator: "climate.era5.hourly_precip.region.indo_gangetic_plain.heavy_days_50mm", label: "Indo-Gangetic plain" }
+        ],
+        indicator: "climate.era5.hourly_precip.region.all_india.heavy_days_50mm",
+        why: "The lived rain risk is often an overloaded drain, a flooded road or a crop field waterlogged in one spell.", read: "A heavy-rain day is counted when ERA5-derived daily precipitation reaches at least 50 mm in the regional average.", watch: "A regional average mutes local cloudbursts. District-level flood risk can be worse than this line looks." },
+      { chart: "multiLine", title: "The wettest five-day spell is getting heavier", size: "feature", beat: "rain-intensity", unit: "mm",
+        series: [
+          { indicator: "climate.era5.hourly_precip.region.all_india.max_5day_mm", label: "All India" },
+          { indicator: "climate.era5.hourly_precip.region.central_deccan.max_5day_mm", label: "Central and Deccan India" },
+          { indicator: "climate.era5.hourly_precip.region.south_peninsula.max_5day_mm", label: "South peninsula" },
+          { indicator: "climate.era5.hourly_precip.region.northeast_hills.max_5day_mm", label: "Northeast hills" },
+          { indicator: "climate.era5.hourly_precip.region.indo_gangetic_plain.max_5day_mm", label: "Indo-Gangetic plain" }
+        ],
+        indicator: "climate.era5.hourly_precip.region.all_india.max_5day_mm",
+        why: "Reservoirs, drains and fields feel clustered rain, not just seasonal totals.", read: "For each year, this picks the rainiest five-day stretch in each region from ERA5 hourly-derived daily rainfall.", watch: "The line is an annual maximum, so it is naturally jumpy. Read the decade-level shift, not one spike." },
+      { indicator: "climate.era5.hourly_precip.region.all_india.monsoon_share_pct", chart: "line", title: "The monsoon still carries most of the year's rain", size: "feature", window: "full", beat: "rain-concentration", unit: "%",
+        why: "The monsoon matters because so much of India's annual water arrives in one season.", read: "Share of annual ERA5 hourly-derived precipitation falling in June-September.", watch: "A stable or rising share does not mean the monsoon is safe. Timing, region and intensity still decide damage." },
+      { indicator: "climate.el_nino.imd_monsoon_departure_1901_2025", chart: "line", title: "IMD's long monsoon record shows why averages mislead", size: "feature", window: "full", beat: "rain-check",
+        why: "ERA5 gives the gridded climate layer; IMD's observed monsoon record is the historical reality check.", read: "All-India southwest monsoon rainfall departure from the long-period average, 1901-2025.", watch: "This is all-India rainfall. It does not say which district flooded or failed in a given year." },
+      { chart: "multiLine", title: "2026 is hot and drier so far, but only through May", size: "feature", beat: "current-year", unit: "% vs Jan-May 1991-2020",
+        series: [
+          { indicator: "climate.era5.ytd.all_india.precip_anomaly_pct_jan_may_1991_2020", label: "All India" },
+          { indicator: "climate.era5.ytd.indo_gangetic_plain.precip_anomaly_pct_jan_may_1991_2020", label: "Indo-Gangetic plain" },
+          { indicator: "climate.era5.ytd.west_arid.precip_anomaly_pct_jan_may_1991_2020", label: "West and arid India" },
+          { indicator: "climate.era5.ytd.central_deccan.precip_anomaly_pct_jan_may_1991_2020", label: "Central and Deccan India" },
+          { indicator: "climate.era5.ytd.south_peninsula.precip_anomaly_pct_jan_may_1991_2020", label: "South peninsula" }
+        ],
+        indicator: "climate.era5.ytd.all_india.precip_anomaly_pct_jan_may_1991_2020",
+        why: "The current-year section should show heat and rainfall together, while being explicit that the monsoon is not complete.", read: "Each line compares January-May precipitation with the same-month 1991-2020 normal. The latest point is 2026 through May.", watch: "This is before the full southwest monsoon. It is not a verdict on 2026 rainfall." },
+      { chart: "multiLine", title: "Groundwater stress makes weak rain harder to absorb", size: "feature", beat: "water", unit: "% extraction",
+        series: [
+          { indicator: "water.cgwb.stage_trend_india_national", label: "India" },
+          { indicator: "water.cgwb.stage_trend_delhi", label: "Delhi" },
+          { indicator: "water.cgwb.stage_trend_tamil_nadu", label: "Tamil Nadu" }
+        ],
+        indicator: "water.cgwb.stage_trend_india_national",
+        why: "Climate risk is not only how much rain falls. It is also whether farms and cities have a water buffer when rain fails or arrives badly.", read: "CGWB stage of groundwater extraction compares annual extraction with extractable groundwater resource. Values near or above 100% mean extraction is close to or above the assessed rechargeable resource.", watch: "These are assessment-cycle groundwater accounts, not monthly aquifer levels. They do not capture every local well or urban tanker market." },
+      { chart: "multiLine", title: "The sea is rising on India's coasts", size: "feature", beat: "coast", unit: "mm vs 1961-1990",
         series: [
           { indicator: "climate.psmsl.mumbai", label: "Mumbai" },
           { indicator: "climate.psmsl.chennai", label: "Chennai" }
         ],
         indicator: "climate.psmsl.mumbai",
-        why: "India has a 7,500 km coastline and major coastal cities, so sea-level rise is a direct national exposure.", read: "Annual mean sea level at two long-running tide gauges, in millimetres relative to their 1961-1990 average. The trend is up.", watch: "Tide-gauge records have gaps and reflect local land movement too, so read the long-run rise, not single years." },
-      { chart: "columnLines", title: "The human toll of climate-linked disasters", size: "feature", beat: "impact", unit: "deaths", fromYear: 1990, subtitle: "EM-DAT · recorded deaths by disaster type · since 1990",
-        columns: [
-          { key: "Flood", label: "Floods" },
-          { key: "Storms", label: "Storms & cyclones" },
-          { key: "Extreme temperature", label: "Extreme heat/cold" }
-        ],
-        indicator: "climate.disaster_deaths",
-        why: "Warming loads the dice on the floods, cyclones, and heatwaves that strike India.", read: "Recorded deaths each year by disaster type since 1990, from EM-DAT. The toll is episodic: the 1999 Odisha cyclone and the 2013 Uttarakhand floods stand out.", watch: "Deaths have fallen even as the hazards rise, because cyclone warnings and evacuation have improved, so read this as the falling lethality of better preparedness, not as fewer disasters. The far deadlier early-century cyclones are left off so recent years stay readable." },
-      // ACT III — the cause, broken down (total, gas mix, sector composition, decoupling, grid)
-      { indicator: "owid.co2_total", chart: "line", title: "How much CO2 India now emits each year", size: "feature", window: "full", beat: "cause",
-        why: "To read India's climate fairly you have to see its part in the cause, not just the effect.", read: "Annual carbon dioxide released from fossil fuels and cement, rising steeply in recent decades.", watch: "A large yearly total reflects a large country. The charts that follow, the full gas mix, per person, and history, are what put this number in fair context." },
-      { indicator: "climate.ghg_by_gas", chart: "columnLines", title: "CO2 is not the whole story: the gas mix", size: "hero", beat: "composition", unit: "tonnes CO₂e",
-        columns: [
-          { key: "Carbon dioxide (CO₂)", label: "Carbon dioxide" },
-          { key: "Methane (CH₄)", label: "Methane" },
-          { key: "Nitrous oxide (N₂O)", label: "Nitrous oxide" }
-        ],
-        indicator: "climate.ghg_by_gas",
-        why: "India's farms and livestock make methane and nitrous oxide unusually large, so CO2 alone undercounts.", read: "Three lines, one per gas, all in CO2-equivalent so they can be compared on one axis.", watch: "CO2-equivalent uses a 100-year warming weight; methane is far more potent but shorter-lived, which this single number cannot show." },
-      { indicator: "climate.ghg_by_sector", chart: "compositionStack", title: "Where India's emissions actually come from", size: "feature", beat: "composition", unit: "tonnes CO₂e",
+        why: "For coastal cities, climate change is not only a hot-day problem. Higher seas raise the floor under storm surge, drainage failure and chronic flooding.", read: "Permanent Service for Mean Sea Level tide-gauge series, expressed relative to the 1961-1990 average.", watch: "Tide gauges combine ocean change with local land movement and have gaps. Use the direction and scale, not a single annual point." },
+      { indicator: "agriculture.el_nino.rainfall_crop_correlations", chart: "tableBars", title: "The monsoon still shows up in the harvest", size: "feature", beat: "food", unit: "correlation",
+        why: "The rain story becomes a household story through crops. Even after irrigation and technology gains, monsoon rainfall is still visible in output.", read: "Bars show the correlation between monsoon rainfall and crop output in the DES panel. Higher bars mean crop output tracks the monsoon more closely.", watch: "Correlation is not causation. Crop prices, area, irrigation, procurement, seed technology and heat all move output too." },
+      { indicator: "agriculture.el_nino.crop_yield_sensitivity", chart: "tableBars", title: "Rainfed crops take the climate hit first", size: "feature", beat: "food", unit: "% vs recent 5-year normal",
+        why: "Climate damage is not evenly spread across the plate. Rainfed kharif crops are more exposed than irrigated or winter crops.", read: "Each bar shows how far that crop's national yield ran from its own recent five-year average in El Nino years.", watch: "This uses El Nino years as a stress-test for weak monsoon risk. It is not a full model of every climate pathway." },
+      { indicator: "prices.el_nino.food_wpi_components", chart: "tableBars", title: "Climate shocks reach the plate unevenly", size: "feature", beat: "food", unit: "% post-monsoon WPI inflation",
+        why: "Food inflation is not one number in lived experience. A weak monsoon can leave cereals buffered while pulses, onions or vegetables do the damage.", read: "Bars split post-monsoon wholesale inflation by food group in selected El Nino drought years.", watch: "Prices answer to stocks, imports, procurement and global markets as well as rain. Do not read this as a one-cause inflation model." },
+      // ACT IV — air, cause and transition
+      { indicator: "climate.pm25_iqair_country", chart: "line", title: "PM2.5 is still many times the safe-air guideline", size: "feature", window: "full", beat: "air",
+        why: "The live AQI snapshot needs a recent annual PM2.5 measure beside it, not a stale World Bank series ending in 2020.", read: "IQAir annual country-average PM2.5 concentration, in micrograms per cubic metre, 2018-2025.", watch: "This is monitor-network coverage, not a perfectly population-weighted exposure estimate. Use it for recent national air-quality context, not district-level exposure." },
+      { indicator: "owid.co2_total", chart: "line", title: "India's emissions are rising because development is energy-hungry", size: "feature", window: "full", beat: "cause",
+        why: "The country is both exposed to warming and a growing contributor to the cause.", read: "Annual CO2 emissions from fossil fuels and cement.", watch: "Total emissions are not the fairness number. Use them with per-person and historical comparisons." },
+      { indicator: "compare.climate.co2_per_capita", chart: "compareBars", title: "Per person, India is still far below rich-country emissions", size: "feature", window: "latest", beat: "fairness",
+        why: "A fair climate article has to hold scale and responsibility together.", read: "Latest CO2 per person for India, China, the United States and the world average.", watch: "Per-person emissions do not erase India's rising total, and total emissions do not erase the per-person gap." },
+      { indicator: "climate.ghg_by_sector", chart: "compositionStack", title: "Where the emissions come from", size: "feature", beat: "cause",
         columns: [
           { key: "Electricity and heat", label: "Electricity & heat" },
           { key: "Agriculture", label: "Agriculture" },
@@ -3975,22 +4611,10 @@ export const v1Questions = [
           { key: "Industry", label: "Industry" },
           { key: "Buildings", label: "Buildings" },
           { key: "Fugitive emissions", label: "Fugitive" },
-          { key: "Waste", label: "Waste" },
-          { key: "Other fuel combustion", label: "Other fuel" }
+          { key: "Waste", label: "Waste" }
         ],
-        indicator: "climate.ghg_by_sector",
-        why: "The path to lower emissions depends entirely on which sectors dominate.", read: "The latest-year split of emissions by sector, each block sized by its share. Electricity and agriculture are the big two.", watch: "This is one year's composition, not a trend. Land-use change can be a net sink and is left out of the strip." },
-      { indicator: "climate.co2_vs_gdp", chart: "decoupleIndex", title: "Is India's growth pulling away from its emissions?", size: "small", beat: "decoupling",
-        columns: [
-          { key: "GDP", label: "GDP" },
-          { key: "CO₂ emissions", label: "CO₂ emissions" }
-        ],
-        indicator: "climate.co2_vs_gdp",
-        why: "Whether emissions can fall while incomes rise is the whole development-and-climate question.", read: "Both lines start at 100 in the first year. If GDP climbs faster than CO2, the economy is getting more output per tonne emitted.", watch: "Relative decoupling (emissions rising slower than GDP) is not the same as absolute cuts; the CO2 line is still rising." },
-      { indicator: "energy.ember.carbon_intensity", chart: "line", title: "Is India's electricity getting cleaner?", size: "small", window: "full", beat: "turn",
-        why: "Whether the cause is easing depends on how dirty each unit of power is, not just how much is used.", read: "Grams of CO2 released per unit of electricity generated. A falling line means cleaner power.", watch: "Cleaner per unit does not always mean lower total emissions, because total demand keeps rising at the same time." },
-      // ACT IV — is India bending the curve? the energy transition (generation mix, clean surge, coal reality)
-      { chart: "emberLines", title: "How India makes its electricity, and how it is shifting", size: "feature", beat: "transition", unit: "TWh", subtitle: "Ember · annual electricity generation by source",
+        why: "The solution set depends on the source: power, farms, industry and transport are different problems.", read: "Latest sector composition of greenhouse gas emissions, in CO2-equivalent.", watch: "This is composition, not a policy scorecard. It says where emissions sit, not which intervention is easiest." },
+      { chart: "emberLines", title: "The grid is changing, but coal still does the work", size: "feature", beat: "transition", unit: "TWh",
         field: "generation_twh",
         series: [
           { indicator: "Coal", label: "Coal" },
@@ -4001,33 +4625,41 @@ export const v1Questions = [
           { indicator: "Nuclear", label: "Nuclear" }
         ],
         indicator: "energy.ember.generation",
-        why: "The whole climate question for India is whether clean power can grow faster than rising demand.", read: "Each line is electricity generated from one source per year. Coal still towers, but solar and wind climb steeply from the late 2010s.", watch: "These are generation totals, not capacity; solar makes more per unit of capacity in sunny months, so capacity and generation tell slightly different stories." },
-      { chart: "multiLine", title: "The clean-energy surge: capacity from near zero", size: "feature", beat: "transition", unit: "GW", subtitle: "EIA · installed electricity capacity",
+        why: "India's climate path turns heavily on whether clean electricity grows faster than demand.", read: "Annual electricity generation by source. Coal remains the largest line while solar and wind rise from a low base.", watch: "Generation is not capacity. A gigawatt of solar and a gigawatt of coal do not produce the same annual electricity." },
+      // ACT V — what it means for households and work
+      { chart: "multiLine", title: "Cooling demand rises faster than cooling access", size: "feature", beat: "household",
         series: [
-          { indicator: "energy.eia.electricity_capacity_solar", label: "Solar" },
-          { indicator: "energy.eia.electricity_capacity_wind", label: "Wind" },
-          { indicator: "energy.eia.electricity_capacity_renewable", label: "All renewables" }
+          { indicator: "heat.cooling.ac_all", label: "AC ownership, all households" },
+          { indicator: "heat.cooling.ac_urban", label: "AC ownership, urban" },
+          { indicator: "heat.cooling.ac_rural", label: "AC ownership, rural" },
+          { indicator: "heat.cooling.nfhs5_ac_cooler_all", label: "AC or cooler, NFHS-5" }
         ],
-        indicator: "energy.eia.electricity_capacity_solar",
-        why: "India's solar build-out is one of the fastest energy stories anywhere, and it is recent.", read: "Installed capacity by source over time. Solar runs from almost nothing in 2010 to tens of gigawatts now.", watch: "Capacity is the maximum possible output, not actual generation; real output depends on sun and wind, so capacity overstates day-to-day supply." },
-      { indicator: "energy.ember.generation", chart: "emberShare", seriesName: "Coal", title: "But coal still rules the grid", size: "small", beat: "transition", unit: "% of generation",
-        why: "The surge is real, but the honest headline is that fossil power still does most of the work.", read: "Coal's share of all electricity generated each year. It is easing, but slowly, from a very high base.", watch: "A falling share can still mean rising coal generation if total demand grows faster, so share is not the same as absolute coal use." },
-      // ACT V — responsibility and global comparison (latest bars, history bars, trajectories, share)
-      { indicator: "compare.climate.co2_per_capita", chart: "compareBars", title: "...but how much per person, next to others?", size: "small", window: "latest", beat: "fairness",
-        why: "Per-person emissions are the fairness number, and they only mean something next to China, the US, and the world.", read: "Latest-year CO2 per person for India, China, the US, and the world average, side by side.", watch: "India sits below even the world average, so its large total is a story about population, not lifestyle." },
-      { indicator: "compare.climate.co2_total", chart: "compareBars", title: "Total emissions: big, but in proportion", size: "small", window: "latest", beat: "scale",
-        why: "The headline 'third largest emitter' needs the company it keeps to be read honestly.", read: "Latest-year total CO2 for India, China, the US, and the world.", watch: "Totals scale with population and economy size; this bar is why the per-person and historical charts beside it matter." },
-      { indicator: "compare.climate.co2_cumulative", chart: "compareBars", title: "...and who actually filled the atmosphere?", size: "small", window: "latest", beat: "fairness",
-        why: "Today's warming comes from more than a century of emissions, so historical responsibility is the honest accounting.", read: "Total CO2 added across all of history, India versus China, the US, and the world.", watch: "India holds a small slice of the historical total despite its size, because its emissions came late and stayed low per person." },
-      { indicator: "compare.climate.co2_per_capita", chart: "compareLine", title: "Per-person emissions, four very different paths", size: "hero", window: "full", beat: "fairness",
-        why: "The gap is not new; the trajectories show how differently these economies grew.", read: "Per-person CO2 over time for India, China, the US, and the world. India's line stays low and flat while others climbed long ago.", watch: "Lines can converge or cross; read the latest gap together with the long history, not either alone." },
-      { indicator: "world.share.co2_total", chart: "line", title: "India's slice of the world's emissions", size: "small", window: "full", beat: "scale",
-        why: "Climate is a shared problem, so India's share of the global total frames its responsibility and its leverage.", read: "India's annual CO2 as a percentage of all emissions worldwide.", watch: "A rising share reflects both India growing and other regions slowing. It is a relative number, not a verdict on any one country." },
-      // ACT V — why India is exposed
-      { indicator: "work.employment_agriculture", chart: "line", title: "Why India is so exposed: who works the land", size: "small", window: "full", beat: "exposure",
-        why: "Heat and erratic rain hit hardest where livelihoods depend on the sky, and a huge share of Indians still farm.", read: "The share of all working Indians employed in agriculture.", watch: "Even as the share falls, the absolute number of farming households stays enormous, so exposure to a bad monsoon stays high." },
-      { indicator: "people.population.total", chart: "line", title: "...and how many people face the hotter century", size: "small", window: "full", beat: "exposure",
-        why: "The stakes of every degree are measured in people, and India has more of them than almost anywhere.", read: "India's total population over time.", watch: "This is a head count. It says nothing about who is most exposed, which depends on where and how people live." }
+        indicator: "heat.cooling.ac_all",
+        why: "Heat becomes inequality when the escape route is an appliance most households do not have.", read: "Household cooling ownership measures from NSS/NFHS-derived artifacts.", watch: "These are survey snapshots from different instruments, not a perfect annual time series. Read the rural-urban gap more than tiny differences." },
+      { indicator: "heat.cooling.cooler_by_state", chart: "choropleth", title: "The cooling map does not match the heat map", size: "feature", beat: "household", unit: "% with an air cooler", signed: false, ramp: "cool", rankLabel: "Most air coolers", bottomLabel: "Almost none",
+        why: "The appliance people can afford is not always the appliance the climate needs. Evaporative coolers are common in the dry north and weak in humid heat.", read: "Each state is shaded by the share of households owning an air cooler in NSS 78.", watch: "Coolers are not air conditioners. Low ownership in humid states reflects both affordability and the fact that coolers work poorly in damp air." },
+      { indicator: "heat.vulnerability.state_risk_cooling_poverty", chart: "heatVulnerabilityScatter", title: "Where heat is hardest to survive", size: "feature", beat: "vulnerability", unit: "%",
+        why: "A climate impact article needs to join hazard with the ability to cope. The dangerous zone is high heat risk, low cooling protection and poverty together.", read: "Right means more districts rated high or very high heat risk. Up means more households without the conservative cooling-protection proxy. Bigger bubbles are poorer states.", watch: "This is not a death-risk model. It combines state-level context from different sources, so use it to locate vulnerability, not to rank exact mortality risk." },
+      { chart: "multiLine", title: "Heat hits work before it hits GDP tables", size: "feature", beat: "livelihood",
+        series: [
+          { indicator: "heat.context.agriculture_employment_share", label: "Agriculture employment" },
+          { indicator: "heat.context.vulnerable_employment_share", label: "Vulnerable employment" }
+        ],
+        indicator: "heat.context.agriculture_employment_share",
+        why: "Outdoor and insecure work turns climate from a weather story into an income story.", read: "Shares of employment in agriculture and vulnerable work, both exposed to heat and rainfall disruption.", watch: "These series show exposure, not measured heat damages. They say who is in harm's way, not exactly how much income was lost." },
+      { indicator: "heat.work.lancet_labour_loss_sector_shares", chart: "tableBars", title: "Heat is already costing work hours", size: "feature", beat: "livelihood", unit: "% of heat-related labour-hour losses",
+        why: "This moves from exposure to measured economic loss: heat already cuts labour capacity, especially in outdoor sectors.", read: "Bars split heat-related labour-hour losses by sector in Lancet Countdown's India data sheet.", watch: "These are shares of estimated heat-related labour-hour losses, not observed absences or wages." },
+      { indicator: "heat.death_count_comparison", chart: "heatDeathCountBars", title: "Heat deaths depend on how you count them", size: "feature", beat: "health", unit: "deaths or excess deaths",
+        why: "The mortality record is part of the climate story because official heatstroke counts and modelled excess deaths answer different questions.", read: "Bars compare administrative, disaster, surveillance and modelled estimates on a log scale, using each source's own definition.", watch: "Do not rank these as rival measurements of one fact. The large estimates are modelled excess mortality; the smaller ones are reported or certified counts." },
+      { chart: "multiLine", title: "A hotter century means more cooling load", size: "feature", beat: "household",
+        series: [
+          { indicator: "climate.cckp.cdd_historical", label: "Observed" },
+          { indicator: "climate.cckp.cdd_ssp126", label: "Low emissions" },
+          { indicator: "climate.cckp.cdd_ssp245", label: "Middle road" },
+          { indicator: "climate.cckp.cdd_ssp585", label: "High emissions" }
+        ],
+        indicator: "climate.cckp.cdd_ssp245",
+        why: "Cooling is the bridge between climate, household bills and the power grid.", read: "Cooling degree days estimate how much and how long temperatures exceed a comfort baseline.", watch: "This is potential cooling demand. Actual electricity use depends on income, housing, appliance access and power reliability." }
     ]
   },
   {
@@ -4132,6 +4764,188 @@ export const v1Questions = [
         why: "Connection is not shared equally between men and women.", read: "The share of women versus men using the internet at the latest measured year.", watch: "Two bars are a snapshot, not a trend; the gap may be closing, but at the latest reading men are still clearly ahead." },
       { indicator: "compare.society.internet_users", chart: "compareBars", title: "India vs China vs world, internet use", size: "small", window: "latest", beat: "comparison",
         why: "How India's connection rate stacks up globally.", read: "The share online in India compared with China, the US, and the world average at the latest common year.", watch: "India started later and is catching up fast; a gap today is not a gap forever." }
+    ]
+  },
+  {
+    id: "q.agriculture.edible_oil_imports",
+    slug: "why-india-imports-so-much-edible-oil",
+    question: "Why does India import so much edible oil?",
+    priority: "core",
+    series: "agriculture",
+    indicators: [
+      "trade.edible_oil.import_volume",
+      "trade.edible_oil.import_mix_latest",
+      "agriculture.edible_oil.oilseed_production"
+    ],
+    core: [
+      "trade.edible_oil.import_volume",
+      "trade.edible_oil.import_mix_latest",
+      "agriculture.edible_oil.oilseed_production"
+    ],
+    context: [
+      "trade.edible_oil.import_volume",
+      "trade.edible_oil.export_volume",
+      "trade.edible_oil.import_export_volume",
+      "trade.edible_oil.import_value",
+      "trade.edible_oil.import_mix_latest",
+      "trade.edible_oil.import_partners_latest",
+      "agriculture.edible_oil.oilseed_production",
+      "agriculture.edible_oil.oilseed_area",
+      "agriculture.edible_oil.sowing_progress_latest",
+      "agriculture.edible_oil.oilseed_yield",
+      "agriculture.edible_oil.crop_mix_latest",
+      "agriculture.edible_oil.state_oilseed_production_top",
+      "prices.cpi.combined.oils_fats.inflation",
+      "prices.cpi.item.refined_oil.inflation"
+    ],
+    visualPlan: [
+      {
+        chart: "multiLine",
+        indicator: "trade.edible_oil.import_volume",
+        title: "Edible-oil trade is almost all imports",
+        subtitle: "UN Comtrade · HS 1511, 1507, 1512, 1514 and 1508 · calendar years",
+        size: "hero",
+        window: "full",
+        beat: "answer",
+        unit: "million tonnes",
+        series: [
+          { indicator: "trade.edible_oil.import_volume", label: "Imports" },
+          { indicator: "trade.edible_oil.export_volume", label: "Exports" }
+        ],
+        why: "The dependency is not a balanced trade relationship: imports tower over exports.",
+        read: "Annual net weight of major edible-oil imports and exports, summed across palm, soybean, sunflower/safflower/cottonseed, rapeseed/mustard and groundnut oil.",
+        watch: "This is calendar-year customs trade, not India's crop year. It measures oil trade, not domestic oil production."
+      },
+      {
+        indicator: "trade.edible_oil.import_mix_latest",
+        chart: "tableBars",
+        title: "Three oils explain almost the whole import basket",
+        subtitle: "UN Comtrade · import volume by HS heading · 2024",
+        size: "feature",
+        beat: "composition",
+        unit: "million tonnes",
+        why: "Dependency is concentrated: palm, soybean and sunflower-type oils dominate.",
+        read: "Each bar is the imported volume of an edible-oil category in 2024.",
+        watch: "HS 1512 combines sunflower, safflower and cottonseed oil. Palm is one category, but it includes crude and refined fractions."
+      },
+      {
+        indicator: "trade.edible_oil.import_value",
+        chart: "line",
+        title: "The bill is a world-price shock, not just a volume story",
+        subtitle: "UN Comtrade · current US$ · same HS basket as volume chart",
+        size: "feature",
+        window: "full",
+        beat: "price-exposure",
+        unit: "US$ billions",
+        why: "Even when volumes move gradually, the import bill can spike with global prices.",
+        read: "Current-dollar import value for the same edible-oil basket.",
+        watch: "This is not inflation-adjusted; the 2021-22 jump is a price story as much as a quantity story."
+      },
+      {
+        indicator: "agriculture.edible_oil.oilseed_production",
+        chart: "line",
+        title: "The harvest grew, but seed tonnes are not oil tonnes",
+        subtitle: "UPAg · Total Oil Seeds production · crop years · final estimates to 2024-25, 2025-26 third advance estimate",
+        size: "feature",
+        window: "full",
+        beat: "domestic-supply",
+        unit: "million tonnes of oilseeds",
+        why: "India is not standing still: oilseed output has grown a lot. The import problem survives anyway.",
+        read: "Total oilseed crop production, converted from lakh tonnes to million tonnes.",
+        watch: "Oilseed tonnes are seed tonnes. They are not edible-oil tonnes because crushing recovery differs by crop."
+      },
+      {
+        indicator: "agriculture.edible_oil.oilseed_yield",
+        chart: "line",
+        title: "Yield is improving, but not fast enough to do the job alone",
+        subtitle: "UPAg · Total Oil Seeds yield · kg/ha",
+        size: "feature",
+        window: "full",
+        beat: "productivity",
+        unit: "kg per hectare",
+        why: "Long-run self-reliance depends more on yield than on endlessly adding land.",
+        read: "Average oilseed yield across all oilseed crops.",
+        watch: "This is a blended yield. A shift from one oilseed crop to another can move the average even if crop-specific yields do not improve."
+      },
+      {
+        indicator: "agriculture.edible_oil.oilseed_area",
+        chart: "line",
+        title: "More oilseed land helps until it displaces something else",
+        subtitle: "UPAg · Total Oil Seeds area · crop years",
+        size: "feature",
+        window: "full",
+        beat: "land-constraint",
+        unit: "million hectares",
+        why: "Land is the hard constraint: more oilseeds compete with cereals, pulses, cotton and fodder.",
+        read: "Total area planted under oilseeds, converted from lakh hectares to million hectares.",
+        watch: "Area can rise in a good price year, but it cannot expand indefinitely without displacing something else."
+      },
+      {
+        indicator: "agriculture.edible_oil.sowing_progress_latest",
+        chart: "tableBars",
+        title: "This season's sowing is ahead of last year, but below target",
+        subtitle: "UPAg · progressive crop area sown · Total Oilseeds · All India",
+        size: "feature",
+        beat: "current-season",
+        unit: "million hectares",
+        why: "The live UPAg snapshot adds timing: acreage can improve in the current season without settling the structural import question.",
+        read: "Compare current area sown with last year's coverage, the official target and the normal area.",
+        watch: "This is area coverage, not production or yield. A better sowing snapshot does not automatically become more oil."
+      },
+      {
+        indicator: "agriculture.edible_oil.crop_mix_latest",
+        chart: "tableBars",
+        title: "India grows soybean, mustard and groundnut; imports want palm too",
+        subtitle: "UPAg · oilseed crop production · 2024-25 Final Estimate",
+        size: "feature",
+        beat: "domestic-composition",
+        unit: "million tonnes of oilseeds",
+        why: "The domestic crop mix does not match the import basket perfectly.",
+        read: "Latest oilseed production by crop.",
+        watch: "This is seed production. Sunflower seed output is tiny beside the volume of imported sunflower-type oil."
+      },
+      {
+        indicator: "agriculture.edible_oil.state_oilseed_production_top",
+        chart: "tableBars",
+        title: "The domestic bet rests heavily on four states",
+        subtitle: "UPAg · Total Oil Seeds production by state · 2024-25 Final Estimate",
+        size: "feature",
+        beat: "geography",
+        unit: "million tonnes of oilseeds",
+        why: "Domestic supply is geographically concentrated, so weather and prices in a few states matter nationally.",
+        read: "Top oilseed-producing states by crop output.",
+        watch: "This is crop production, not crushing capacity. A state can grow seed that is processed elsewhere."
+      },
+      {
+        indicator: "trade.edible_oil.import_partners_latest",
+        chart: "comtradePartnerBars",
+        title: "The cooking-oil shelf begins in a few foreign supply chains",
+        subtitle: "UN Comtrade · India edible-oil import value by partner · 2024",
+        size: "feature",
+        beat: "external-sources",
+        field: "primaryValue",
+        limit: 10,
+        unit: "US$ billions",
+        why: "The source-country chart makes the supply chain real: palm from Southeast Asia, soybean oil from South America, sunflower oil from the Black Sea.",
+        read: "Top partner countries by current-dollar import value, summed across major edible-oil HS headings.",
+        watch: "This is a value chart, not tonnes. Expensive oils and price spikes can lift a partner's bar."
+      },
+      {
+        chart: "multiLine",
+        indicator: "prices.cpi.combined.oils_fats.inflation",
+        title: "When imports get costly, the kitchen feels it",
+        subtitle: "MoSPI CPI · oils and fats group + refined oil item · year-on-year inflation",
+        size: "feature",
+        beat: "household-price",
+        unit: "% YoY",
+        series: [
+          { indicator: "prices.cpi.combined.oils_fats.inflation", label: "Oils & fats" },
+          { indicator: "prices.cpi.item.refined_oil.inflation", label: "Refined oil" }
+        ],
+        why: "This is the real-life bridge: import dependence becomes household price volatility.",
+        read: "Retail inflation for the oils-and-fats CPI group and refined oil item.",
+        watch: "CPI is retail price inflation, not import price. Duties, inventories, brands and local margins sit between port prices and the kirana shelf."
+      }
     ]
   },
   {
@@ -5677,7 +6491,304 @@ export const v1Questions = [
       { chart: "tableBars", indicator: "rnd.budget_utilisation", size: "small", unit: "% of budgeted allocation actually spent", subtitle: "Open Budgets India \u00b7 share of the budgeted R&D allocation actually used", title: "The research money that doesn't get spent", why: "Some of India's R&D problem is not too little money but money that never gets out the door.", read: "Bars show the percentage of budgeted allocation actually utilized. Short bars mean unused money.", watch: "Underutilisation doesn't always mean waste; some projects are multi-year, but the chronic pattern suggests systemic bottlenecks." },
       { chart: "tableBars", indicator: "rnd.new_funds", size: "small", unit: "\u20b9 crore", subtitle: "ANRF / RDI Scheme \u00b7 the headline new funding commitments", title: "The new bets on Indian research", why: "India's answer is a set of large new vehicles, betting that private money will finally show up.", read: "Bars show the headline corpus amounts in \u20b9 crore. Note which parts are committed vs aspirational.", watch: "Don't treat the \u20b936,000 crore or \u20b91 lakh crore as committed money. The RDI fund is a financing vehicle, not a grant programme." }
     ]
-  }
+  },
+
+  {
+    id: "q.econ.poverty",
+    slug: "has-india-ended-poverty",
+    question: "Has India ended poverty?",
+    priority: "core",
+    indicators: [
+      "econ.poverty.wb_poverty_300", "econ.poverty.wb_poverty_420", "econ.poverty.wb_poor_300_crore", "econ.poverty.wb_poor_420_crore", "econ.poverty.wb_poor_830_crore", "econ.poverty.wb_gap_300",
+      "econ.poverty.wb_gap_420", "econ.poverty.wb_gap_830", "econ.poverty.wb_poverty_420_rural", "econ.poverty.wb_poverty_420_urban", "econ.poverty.wb_group_poverty_420", "econ.poverty.tendulkar_headcount",
+      "econ.poverty.committee_headcount_2011", "econ.poverty.committee_lines_2011", "econ.poverty.tinbergen_plfs_tendulkar_sfe", "econ.poverty.tinbergen_plfs_tendulkar_state", "econ.poverty.tinbergen_plfs_tendulkar_lasso", "econ.inequality.hces_mpce_urban",
+      "econ.inequality.hces_mpce_rural", "econ.inequality.hces_mpce_rural_imputed", "econ.inequality.hces_mpce_urban_imputed", "econ.inequality.hces_fractile_mpce_rural", "econ.inequality.hces_cons_share_rural", "econ.poverty.hces_cutoff_simulation",
+      "econ.poverty.hces_cutoff_state_3000", "econ.inequality.hces_state_mpce_rural", "econ.poverty.hces_cutoff_social_3000", "econ.inequality.hces_mpce_by_caste", "econ.poverty.niti_mpi_headcount", "econ.poverty.ophi_global_mpi_profile",
+      "econ.poverty.niti_mpi_by_state", "econ.poverty.nfhs_basic_floor_latest", "econ.poverty.nfhs_nutrition_latest", "econ.poverty.wb_mpm_components", "econ.poverty.health_financial_hardship", "work.ilo.working_poverty",
+      "work.ilo.working_poverty_youth", "econ.poverty.pip_peer_420_ind", "econ.poverty.pip_peer_420_chn", "econ.poverty.pip_peer_420_idn", "econ.poverty.pip_peer_420_vnm", "econ.poverty.pip_peer_420_bgd",
+      "econ.poverty.pip_peer_300_ind", "econ.poverty.pip_peer_300_chn", "econ.poverty.pip_peer_300_idn", "econ.poverty.pip_peer_300_vnm", "econ.poverty.pip_peer_300_bgd",
+      "econ.poverty.wb_poverty_830", "econ.poverty.wb_poverty_2800",
+      "econ.poverty.hces_imputation_share_rural", "econ.poverty.real_floor_poorest5_rural", "econ.poverty.real_floor_poorest5_urban"
+    ],
+    visualPlan: [
+      { chart: "multiLine", indicator: "econ.poverty.wb_poverty_300", series: [{ indicator: "econ.poverty.wb_poverty_300", label: "$3/day extreme poverty" }, { indicator: "econ.poverty.wb_poverty_420", label: "$4.20/day lower-middle-income line" }], size: "hero", unit: "% of people below each line", subtitle: "World Bank Poverty and Inequality Platform (PIP) · poverty headcount rates, not dollars · $3/day and $4.20/day in 2021 PPP · survey years 1977-2022", title: "The poverty rate changes when the poverty line changes", why: "The strongest version of the good news is true at the lowest line; the broader poverty line still leaves nearly a quarter of India below it.", read: "Both lines fall across the survey years; the gap between them at any year is the population above bare subsistence but below a fuller minimum. The points are sparse because India's consumption surveys are years apart.", watch: "Do not read the long gap between 2011-12 and 2022-23 as a smooth slide. It spans a missing survey and a comparability break; read the endpoints, not a straight line." },
+      { chart: "latestBars", indicator: "econ.poverty.wb_poor_300_crore", series: [{ indicator: "econ.poverty.wb_poor_300_crore", label: "Below $3/day (~₹58 PPP)" }, { indicator: "econ.poverty.wb_poor_420_crore", label: "Below $4.20/day (~₹82 PPP)" }, { indicator: "econ.poverty.wb_poor_830_crore", label: "Below $8.30/day (~₹162 PPP)" }], size: "feature", unit: "crore people below each line", subtitle: "World Bank Poverty & Equity Brief + WDI/PIP · $3, $4.20 and $8.30 poverty lines in 2021 PPP, 2022-23", title: "The next floor is much more crowded", why: "India-scale turns small percentages into large populations, and the upper-middle-income line shows how far 'secure' is from 'above extreme poverty'.", read: "The bars are counts in crore people below each line, not poverty rates. The parenthetical rupee amounts are 2021 PPP equivalents.", watch: "Do not compare these counts with food-security beneficiaries. They are built for different policy questions." },
+      { chart: "latestBars", indicator: "econ.poverty.wb_gap_300", series: [{ indicator: "econ.poverty.wb_gap_300", label: "$3/day gap" }, { indicator: "econ.poverty.wb_gap_420", label: "$4.20/day gap" }, { indicator: "econ.poverty.wb_gap_830", label: "$8.30/day gap" }], size: "feature", unit: "% poverty gap", subtitle: "World Bank WDI/PIP · poverty gap at $3, $4.20 and $8.30 lines, 2021 PPP · latest 2022", title: "Poverty gaps show depth, not just headcount", why: "A headcount only says how many people are below a line; the poverty gap says how far below the line they are on average.", read: "Compare the bars across poverty lines. Higher bars mean a larger average shortfall from that line.", watch: "Do not read a poverty gap as a share of people. It is a depth measure, not a headcount." },
+      { chart: "multiLine", indicator: "econ.poverty.wb_poverty_420_rural", series: [{ indicator: "econ.poverty.wb_poverty_420_rural", label: "Rural" }, { indicator: "econ.poverty.wb_poverty_420_urban", label: "Urban" }], size: "feature", unit: "% of people below the line", subtitle: "World Bank Poverty & Equity Brief · poverty headcount rate at the lower-middle-income line, 2021 PPP", title: "At the $4.20 line, rural poverty is still higher", why: "Both rural and urban poverty fell, but the rural rate remains nearly twice the urban rate at the broader line.", read: "Both lines fall, but the rural line stays above the urban line throughout.", watch: "Do not read this as a full rural income measure. It is consumption poverty at one international line." },
+      { chart: "tableBars", indicator: "econ.poverty.wb_group_poverty_420", size: "small", unit: "% below the broader line", subtitle: "World Bank Poverty & Equity Brief · group poverty rates at the lower-middle-income line, 2022-23", title: "The broader line is crowded with children and low-education households", why: "The remaining poor are not evenly spread across age and education.", read: "Read each bar as the poverty rate within that group. The groups overlap, so the bars are not parts of a whole.", watch: "Do not add the bars together. A child can live in a rural household, and education categories apply only to adults." },
+      { chart: "multiLine", indicator: "econ.poverty.wb_poverty_300", series: [{ indicator: "econ.poverty.wb_poverty_300", label: "$3/day" }, { indicator: "econ.poverty.wb_poverty_420", label: "$4.20/day" }, { indicator: "econ.poverty.wb_poverty_830", label: "$8.30/day" }, { indicator: "econ.poverty.wb_poverty_2800", label: "$28/day rich-country line" }], size: "feature", unit: "% of people below each line", subtitle: "World Bank Poverty and Inequality Platform (PIP) · poverty headcount at four lines, 2021 PPP · survey years 1977-2022", title: "Raise the line to a rich-country level and the gains fade", why: "The progress is concentrated at the very bottom: at $3 India transformed, but at a rich-country line almost everyone is still below, and barely moved.", read: "Each line is the share of India below that daily line. The $3 and $4.20 lines plunge; the $8.30 line dips modestly; the $28 line sits flat near 100% across the whole period.", watch: "The $28 line is the World Bank's prosperity standard, not a poverty line. It marks a rich-country floor, used here only to show how the headcount behaves as the line rises." },
+      { chart: "line", indicator: "econ.poverty.tendulkar_headcount", size: "small", subtitle: "Planning Commission · official Tendulkar poverty estimates · NSS consumption rounds", title: "India's last official poverty line stopped here", why: "India's last adopted national poverty estimate is still the 2011-12 Tendulkar number: 21.9%. Every newer claim is an estimate under another method.", read: "This is the official historical line, not a current estimate.", watch: "Do not use the 2011-12 endpoint to describe poverty today." },
+      { chart: "tableBars", indicator: "econ.poverty.committee_headcount_2011", size: "small", unit: "% of people below the committee line", subtitle: "Planning Commission press note + Rangarajan Expert Group · poverty headcount rates for the same year, 2011-12", title: "A higher line counted more people as poor", why: "The famous poverty-line fight is not abstract. Rangarajan's higher standard raises the all-India poverty estimate from 21.9% to 29.5% in the same year.", read: "Compare Tendulkar and Rangarajan within the same geography.", watch: "Rangarajan was not adopted as the official line. Treat it as the major alternative benchmark." },
+      { chart: "tableBars", indicator: "econ.poverty.committee_lines_2011", size: "small", unit: "₹ per person per month", subtitle: "Planning Commission press note + Rangarajan Expert Group · monthly per-capita poverty lines, 2011-12", title: "What the old poverty line meant in rupees", why: "The official line was low enough to make the political controversy obvious: about Rs 816 per person per month in rural India and Rs 1,000 in urban India.", read: "Each bar is a monthly per-person poverty line in 2011-12 rupees.", watch: "Do not treat these as current living-cost numbers." },
+      { chart: "multiLine", indicator: "econ.poverty.tinbergen_plfs_tendulkar_sfe", series: [{ indicator: "econ.poverty.tinbergen_plfs_tendulkar_sfe", label: "Sector-wide model" }, { indicator: "econ.poverty.tinbergen_plfs_tendulkar_state", label: "State-level model" }, { indicator: "econ.poverty.tinbergen_plfs_tendulkar_lasso", label: "State LASSO model" }], size: "feature", unit: "% of population", subtitle: "Tinbergen Institute Discussion Paper 2025-069/V · PLFS-imputed Tendulkar-compatible poverty estimates, Table 5", title: "A serious dissent says the post-2011 fall was much slower", why: "This is the strongest methodological counterweight to simple HCES comparisons: it adjusts for survey non-comparability using imputation.", read: "Each line is a different imputation model from the Tinbergen paper's Table 5. Read the range and trend, not one exact point.", watch: "Do not treat this as an official poverty series. It is a research benchmark built to handle survey non-comparability." },
+      { chart: "multiLine", indicator: "econ.inequality.hces_mpce_urban", series: [{ indicator: "econ.inequality.hces_mpce_urban", label: "Urban" }, { indicator: "econ.inequality.hces_mpce_rural", label: "Rural" }], size: "feature", unit: "₹ per person per month", subtitle: "MoSPI HCES · average monthly per-capita consumption, current prices, without imputation", title: "The consumption floor has risen", why: "Rising MPCE is the direct consumption-side reason poverty estimates fell after 2011-12.", read: "The lines are monthly per-person consumption in current rupees.", watch: "Do not read current-rupee gains as full real gains. Inflation matters." },
+      { chart: "multiLine", indicator: "econ.inequality.hces_mpce_rural", series: [{ indicator: "econ.inequality.hces_mpce_rural", label: "Rural without imputation" }, { indicator: "econ.inequality.hces_mpce_rural_imputed", label: "Rural with imputation" }, { indicator: "econ.inequality.hces_mpce_urban", label: "Urban without imputation" }, { indicator: "econ.inequality.hces_mpce_urban_imputed", label: "Urban with imputation" }], size: "feature", unit: "₹ per person per month", subtitle: "MoSPI HCES · average MPCE with imputed value of free welfare items", title: "Free welfare items matter to measured consumption", why: "Free food and other transfers raise what poor households consume, and HCES now counts that value explicitly.", read: "Compare each imputed line with its non-imputed counterpart.", watch: "Counting transfers is not fake, but it changes what the number means." },
+      { chart: "tableBars", indicator: "econ.inequality.hces_fractile_mpce_rural", size: "small", unit: "₹ per person per month", subtitle: "MoSPI HCES 2023-24 · average rural MPCE by fractile class", title: "The bottom rung is still thin", why: "The average can look comfortable while the poorest 5% of rural India spends only Rs 1,677 per person per month.", read: "Move from the poorest fractile to the richest fractile and compare monthly per-person consumption.", watch: "Do not turn household MPCE into individual wellbeing. Intra-household gaps are not shown." },
+      { chart: "tableBars", indicator: "econ.inequality.hces_cons_share_rural", size: "small", unit: "% of rural consumption", subtitle: "MoSPI HCES 2023-24 · rural consumption share by group, computed from HCES tables", title: "The poorest half gets about a third of rural consumption", why: "Poverty is a threshold story; this shows the distribution around it.", read: "Compare the poorest 50%, middle 40% and richest 10% shares. They are shares of total rural consumption, not population shares.", watch: "Do not read consumption shares as income or wealth inequality. Income and asset concentration are usually sharper." },
+      { chart: "tableBars", indicator: "econ.poverty.hces_cutoff_simulation", size: "small", unit: "% of people below the chosen cutoff", subtitle: "Computed from HCES 2023-24 unit-level microdata · nominal monthly MPCE cutoffs, calibrated to published rural/urban means", title: "Choose a monthly MPCE cutoff, get a different headcount", why: "This lets readers test the sensitivity directly: poverty is not a natural fact; it changes with the monthly consumption cutoff we choose.", read: "Each bar is a nominal monthly per-person MPCE cutoff and the share of people below it.", watch: "This is not an official estimate and not a PPP-dollar poverty line. It is a sensitivity check in 2023-24 rupees." },
+      { chart: "tableBars", indicator: "econ.poverty.hces_cutoff_state_3000", size: "small", unit: "% of people below Rs 3,000 MPCE", subtitle: "Computed from HCES 2023-24 unit-level microdata · Rs 3,000 nominal monthly MPCE cutoff", title: "Below Rs 3,000 MPCE, the state ranking changes sharply", why: "The sensitivity test is not evenly distributed: the same rupee floor produces very different headcounts across states.", read: "States are ranked by the share of people below Rs 3,000 per person per month.", watch: "Do not treat this as an official state poverty rate. It does not adjust for state price levels." },
+      { chart: "tableBars", indicator: "econ.inequality.hces_state_mpce_rural", size: "small", unit: "₹ per person per month", subtitle: "MoSPI HCES 2023-24 · average rural MPCE by major state", title: "The map changes the poverty story", why: "Rural Kerala's average MPCE is more than twice rural Chhattisgarh's. A national poverty line hides that regional gap.", read: "States are ranked from higher to lower rural MPCE.", watch: "This is not a state poverty rate. It is an average consumption level." },
+      { chart: "tableBars", indicator: "econ.poverty.hces_cutoff_social_3000", size: "small", unit: "% of people below Rs 3,000 MPCE", subtitle: "Computed from HCES 2023-24 unit-level microdata · Rs 3,000 nominal monthly MPCE cutoff by household-head social group", title: "Below Rs 3,000 MPCE, ST and SC households are most exposed", why: "Average caste gaps become starker when translated into a below-cutoff headcount.", read: "Each bar is the simulated below-cutoff share for people living in households headed by that social group.", watch: "This is descriptive, not causal. It does not isolate caste from region, education, land or occupation." },
+      { chart: "tableBars", indicator: "econ.inequality.hces_mpce_by_caste", size: "small", unit: "₹ per person per month", subtitle: "Computed from HCES 2023-24 unit-level microdata · average MPCE by social group of household head", title: "Poverty risk still runs along caste", why: "The consumption ladder is not socially neutral: Scheduled Tribe and Scheduled Caste households sit far below the 'Others' average.", read: "The bars are group averages by social group of the household head.", watch: "This is not a causal model. It is an observed gap shaped by many channels." },
+      { chart: "line", indicator: "econ.poverty.niti_mpi_headcount", size: "small", subtitle: "NITI Aayog · National MPI headcount · 2005-06 is NFHS-3 baseline; 2013-14 and 2022-23 are estimated points", title: "NITI's MPI is a deprivation index, not a cash poverty line", why: "The non-cash evidence also shows a large fall: deprivation across health, education and living standards has come down sharply.", read: "The line tracks the share of people classified as multidimensionally poor.", watch: "Do not add MPI and consumption poverty together, and do not treat every point as directly surveyed." },
+      { chart: "tableBars", indicator: "econ.poverty.ophi_global_mpi_profile", size: "small", unit: "%", subtitle: "OPHI/UNDP Global MPI Country Briefing 2023 · India, NFHS/DHS 2019-21", title: "The global MPI adds intensity and vulnerability", why: "The global MPI gives extra texture: how deprived the MPI poor are, who is vulnerable, and the rural-urban split.", read: "The bars mix related MPI concepts: headcount, vulnerability, severe poverty and intensity. Use the labels, not just bar height.", watch: "Do not treat this as the same index as NITI's national MPI. The indicator set and purpose differ." },
+      { chart: "tableBars", indicator: "econ.poverty.niti_mpi_by_state", size: "small", unit: "% multidimensionally poor", subtitle: "NITI Aayog National MPI 2023 · state headcount ratios from NFHS-5, 2019-21", title: "MPI by state confirms the geography of deprivation", why: "The regional story is visible outside consumption too: the high-deprivation states are not random.", read: "States and union territories are ranked by MPI headcount.", watch: "Do not compare these directly with 2023-24 HCES consumption cutoffs. They come from a different measure and survey period." },
+      { chart: "tableBars", indicator: "econ.poverty.nfhs_basic_floor_latest", size: "small", unit: "% of relevant households or women", subtitle: "NFHS-6 (2023-24) · latest India totals; denominators differ by indicator", title: "The basic household floor rose, but health cover still lags", why: "A poverty article needs to show what the welfare state and household capabilities have actually built.", read: "Treat the bars as a dashboard of basic capabilities. The denominator changes across indicators.", watch: "Do not compare these as if they were all the same population. Some are household measures, one is for women." },
+      { chart: "tableBars", indicator: "econ.poverty.nfhs_nutrition_latest", size: "small", unit: "% of relevant population", subtitle: "NFHS-6 (2023-24) · selected nutrition indicators, latest India totals", title: "Nutrition is the hard caveat", why: "No poverty article should declare victory while child stunting, wasting, underweight and inadequate diets remain this high.", read: "Each bar is the latest all-India NFHS-6 value for a nutrition indicator.", watch: "Do not treat nutrition as a cash-poverty measure. It is shaped by food, disease, sanitation, care and health services." },
+      { chart: "tableBars", indicator: "econ.poverty.wb_mpm_components", size: "small", unit: "% of population", subtitle: "World Bank Poverty & Equity Brief · multidimensional poverty components, 2022-23", title: "Basic services improved, but deprivation did not vanish", why: "Electricity deprivation is near zero, but sanitation and schooling deprivations still show up at meaningful levels.", read: "Each bar is one deprivation component.", watch: "The World Bank MPM excludes nutrition and health deprivation, so this cannot settle the child-nutrition question." },
+      { chart: "tableBars", indicator: "econ.poverty.health_financial_hardship", size: "small", unit: "% of population", subtitle: "World Bank UHC financial-protection indicators · latest India observations, mostly 2022", title: "A hospital bill can still push households back down", why: "Poverty is not only crossing a line; it is also whether a household can survive a health shock without falling back.", read: "Each bar is a population share affected by out-of-pocket health spending under a World Bank financial-protection indicator.", watch: "Do not treat this as an HCES poverty rate. It is a health-financing vulnerability measure." },
+      { chart: "multiLine", indicator: "work.ilo.working_poverty", series: [{ indicator: "work.ilo.working_poverty", label: "All workers" }, { indicator: "work.ilo.working_poverty_youth", label: "Young workers (15-24)" }], size: "feature", unit: "% of employed", subtitle: "ILOSTAT · working poverty rate, employed people below international poverty line", title: "Having work is not the same as being secure", why: "The last poverty layer is vulnerability: a household can work and still be close to the line.", read: "Compare all workers with young workers over time.", watch: "Modelled ILOSTAT working poverty should be read with PLFS wage and informality data, not alone." },
+      { chart: "multiLine", indicator: "econ.poverty.pip_peer_420_ind", series: [{ indicator: "econ.poverty.pip_peer_420_ind", label: "India" }, { indicator: "econ.poverty.pip_peer_420_chn", label: "China" }, { indicator: "econ.poverty.pip_peer_420_idn", label: "Indonesia" }, { indicator: "econ.poverty.pip_peer_420_vnm", label: "Vietnam" }, { indicator: "econ.poverty.pip_peer_420_bgd", label: "Bangladesh" }], size: "feature", unit: "% of population below the line", subtitle: "World Bank PIP · % below $4.20/day (2021 PPP) · latest survey per country; survey years differ", title: "At $4.20 a day, India is the poorest of these Asian peers", why: "India cleared extreme poverty at roughly its neighbours' pace, but carries the largest group stranded just above it.", read: "Each line is one country's headcount below $4.20/day across its own survey years. Compare the latest end-points; lower is better.", watch: "The countries survey on different calendars, so this is not a same-year race. Read levels and trajectories, not a single shared year." },
+      { chart: "multiLine", indicator: "econ.poverty.pip_peer_300_ind", series: [{ indicator: "econ.poverty.pip_peer_300_ind", label: "India" }, { indicator: "econ.poverty.pip_peer_300_chn", label: "China" }, { indicator: "econ.poverty.pip_peer_300_idn", label: "Indonesia" }, { indicator: "econ.poverty.pip_peer_300_vnm", label: "Vietnam" }, { indicator: "econ.poverty.pip_peer_300_bgd", label: "Bangladesh" }], size: "feature", unit: "% of population below the line", subtitle: "World Bank PIP · % below $3/day (2021 PPP) · latest survey per country; survey years differ", title: "Even at the lowest line, China and Vietnam pulled ahead", why: "At the extreme line India is middling among peers, not exceptional; China and Vietnam are far ahead.", read: "Each line is a country's headcount below $3/day across its survey years. China runs along the floor; India, Indonesia and Bangladesh sit close together near the top.", watch: "China at 0% means below this very low line, not that China has no poverty; its poverty now shows up only at higher lines." },
+      { chart: "tableBars", indicator: "econ.poverty.hces_imputation_share_rural", size: "small", unit: "% of household MPCE", subtitle: "Computed from HCES 2023-24 unit-level microdata · imputed value of free welfare items as a share of consumption, rural deciles", title: "Free welfare items are a bigger slice of the poorest budgets", why: "Free foodgrain and other transfers are worth a near-identical rupee amount to most households, so they are a much larger share of consumption for the poorest.", read: "Each bar is the imputed value of free welfare items as a percentage of that decile's consumption. The share falls steadily from the poorest decile to the richest.", watch: "This is a share, not a rupee amount. In rupees the gift is broadly flat across deciles; it looms larger at the bottom only because the poor consume so little." },
+      { chart: "multiLine", indicator: "econ.poverty.real_floor_poorest5_rural", series: [{ indicator: "econ.poverty.real_floor_poorest5_rural", label: "Rural poorest 5%" }, { indicator: "econ.poverty.real_floor_poorest5_urban", label: "Urban poorest 5%" }], size: "feature", unit: "₹ per person per month (2023-24 prices)", subtitle: "Published bottom-fractile MPCE (NSS Report 555 MMRP; HCES press note) deflated to 2023-24 prices · CES 2011-12, HCES 2022-23, 2023-24", title: "The real floor rose, and is still low", why: "In constant prices the consumption of the poorest 5% rose by about 62% (rural) and 76% (urban) since 2011-12, faster than the median, yet the floor is still only about Rs 1,677 a month in rural India.", read: "Each line is the inflation-adjusted average consumption of the poorest 5%, in today's rupees, across the three survey rounds. Both rise.", watch: "The surveys are not perfectly comparable (recall periods and free-item treatment changed), so part of the measured rise is a methodological lift. Read the direction, not a precise rate." }
+    ]
+  },
+
+  {
+    id: "q.energy.state_transitions",
+    slug: "indias-thirty-electricity-transitions",
+    question: "Is India's electricity getting cleaner, or only in some states?",
+    priority: "core",
+    // Built Jun 2026. Source: Ember India sub-national electricity data (state-level,
+    // compiled from CEA + MNRE), 2019-2024 + monthly, cross-checked against Ember's
+    // national series (2000-2025). Ingest: scripts/ingest-ember-states.mjs +
+    // scripts/derive-ember-states.mjs.
+    indicators: [
+      "energy.ember.state.carbon_intensity_2024",
+      "energy.ember.clean_share_national",
+      "energy.ember.national.gen.coal", "energy.ember.national.gen.solar", "energy.ember.national.gen.wind",
+      "energy.ember.national.gen.hydro", "energy.ember.national.gen.nuclear", "energy.ember.national.gen.gas",
+      "energy.ember.national.capacity_factor",
+      "energy.ember.state.generation_mix_2024",
+      "energy.ember.state.wind_solar_capacity_2024",
+      "energy.ember.state.clean_share_of_growth",
+      "energy.ember.state.emissions_change",
+      "energy.ember.state.power_emissions_2024",
+      "energy.ember.national.monthly.solar", "energy.ember.national.monthly.wind", "energy.ember.national.monthly.hydro"
+    ],
+    visualPlan: [
+      { chart: "choropleth", indicator: "energy.ember.state.carbon_intensity_2024", size: "hero", unit: "gCO2/kWh", divergeAt: 620, pivotLabel: "national average", rankLabel: "Most carbon-heavy", bottomLabel: "Cleanest grids", subtitle: "Ember India electricity data (compiled from CEA + MNRE) \u00b7 carbon intensity of power generation \u00b7 2024", title: "How clean is each state's electricity?", why: "The whole argument in one map: there is no single Indian grid, there are thirty, ranging from near-zero-carbon to almost pure coal.", read: "Each state is shaded by the carbon intensity of the power it generates, from about 24 gCO2/kWh in the hydro-rich states to over 800 in the coal belt. The cream band sits at the national average of about 620.", watch: "This is the carbon intensity of generation inside a state, not of the electricity its people consume; power crosses state lines." },
+      { chart: "line", indicator: "energy.ember.clean_share_national", size: "feature", unit: "% of generation", subtitle: "Ember \u00b7 clean (renewables + nuclear) share of India's electricity generation \u00b7 2000-2025", title: "Nationally, the grid really is getting cleaner", why: "Start with the true national headline before complicating it: the clean share of India's electricity has climbed from about 17% to over a quarter.", read: "The line is the share of India's total generation from clean sources (renewables plus nuclear). It rises unevenly but clearly across two decades.", watch: "A rising share is not falling coal. This is the slice of a growing pie, not the size of the fossil slice." },
+      { chart: "multiLine", indicator: "energy.ember.national.gen.coal", series: [{ indicator: "energy.ember.national.gen.coal", label: "Coal", color: "#1f1d1a" }, { indicator: "energy.ember.national.gen.solar", label: "Solar", color: "#f0a51f" }, { indicator: "energy.ember.national.gen.wind", label: "Wind", color: "#1f9e8a" }, { indicator: "energy.ember.national.gen.hydro", label: "Hydro", color: "#3a6fd0" }, { indicator: "energy.ember.national.gen.nuclear", label: "Nuclear", color: "#9b5de5" }, { indicator: "energy.ember.national.gen.gas", label: "Gas", color: "#b8a99a" }], size: "feature", unit: "TWh generated", subtitle: "Ember \u00b7 electricity generation by source, India \u00b7 2000-2025", title: "But coal kept growing the whole time", why: "The honest twist: a rising clean share hides the fact that coal generation almost quadrupled, because demand grew faster than clean supply.", read: "Each line is absolute generation in terawatt-hours. Coal climbs from about 390 to nearly 1,500 TWh; solar rises from essentially zero, but the gap is still enormous.", watch: "Read the absolute heights, not just the slopes. Solar's steep recent climb is real but starts from a tiny base." },
+      { chart: "tableBars", indicator: "energy.ember.national.capacity_factor", size: "feature", unit: "% capacity factor (2024)", subtitle: "Ember \u00b7 generation as a share of maximum possible output, by source \u00b7 India 2024", title: "Why a megawatt of solar isn't a megawatt of coal", why: "The hidden reason capacity and generation tell different stories: intermittent sources run only a fraction of the time.", read: "Each bar is the capacity factor, the share of the year a source effectively runs flat out. Nuclear and coal run most of the time; solar and wind only about 15 to 19 percent.", watch: "A low capacity factor is not a fault, it is physics. It means you must install far more solar to match the yearly output of one coal plant." },
+      { chart: "scenarioMaps", indicator: "energy.ember.state.generation_mix_2024", size: "feature", unit: "% of generation", subtitle: "Ember \u00b7 share of 2024 generation from each source, by state", title: "Three different ways to run a power grid", why: "Why states diverge so sharply: a clean grid can mean inherited Himalayan hydro or newly-built wind and solar, and these are completely different maps.", read: "Three maps, one scale. Hydro lights up the Himalayas and the northeast; wind and solar light up the western desert and the south; coal owns the east and the Gangetic plain.", watch: "High clean share is not the same as leading the transition. A hydro state was born clean by geography; a solar state built its way there." },
+      { chart: "tableBars", indicator: "energy.ember.state.wind_solar_capacity_2024", size: "feature", unit: "MW installed", subtitle: "Ember \u00b7 installed wind + solar capacity, by state \u00b7 2024", title: "Where India actually built its wind and solar", why: "Strip away the inherited hydro and this is the real transition: a handful of states are doing most of the building.", read: "Each bar is installed wind plus solar capacity in megawatts. Rajasthan and Gujarat lead by a wide margin, with most of it added since 2019, followed by Tamil Nadu, Karnataka and Maharashtra.", watch: "Installed capacity is not generation. Sun and wind are intermittent, so a megawatt of solar produces less over a year than a megawatt of coal." },
+      { chart: "tableBars", indicator: "energy.ember.state.clean_share_of_growth", size: "feature", unit: "% of new generation that was clean", subtitle: "Ember \u00b7 clean share of the rise in generation, 2019 to 2024, by state", title: "Of the new power added since 2019, how much was clean?", why: "The most decisive test of a transition: when a state needed more electricity, did it reach for clean or for coal?", read: "Each bar is the share of a state's 2019-to-2024 generation growth that came from clean sources. Gujarat and Rajasthan met most of their new demand with clean power; Bihar, Odisha and Chhattisgarh met almost none.", watch: "Nationally only about a quarter of the new power added since 2019 was clean. A high clean SHARE of total generation can still hide a dirty MARGIN of new growth." },
+      { chart: "choropleth", indicator: "energy.ember.state.emissions_change", size: "feature", signed: true, divergeAt: 0, pivotLabel: "no change", rankLabel: "Rose the most", bottomLabel: "Actually fell", subtitle: "Ember \u00b7 change in absolute power-sector CO2 emissions, 2019 to 2024", title: "Power emissions are still rising across most of India", why: "The sobering counterpoint to a rising clean share: in absolute tonnes, India's power emissions are still going up almost everywhere.", read: "Each state is shaded by how much its power-sector CO2 rose or fell from 2019 to 2024. Chhattisgarh, Uttar Pradesh and Madhya Pradesh added the most; Gujarat is almost the only state to cut.", watch: "Falling carbon intensity does not mean falling emissions. A state can clean up each unit and still emit more in total because it generates so much more." },
+      { chart: "tableBars", indicator: "energy.ember.state.power_emissions_2024", size: "feature", unit: "ktCO2 (2024)", subtitle: "Ember \u00b7 absolute power-sector CO2 emissions, by state \u00b7 2024", title: "Where India's power emissions actually come from", why: "Intensity tells you how dirty each unit is; this tells you where the tonnes physically come from, which is where decarbonisation has to happen.", read: "Each bar is total CO2 emitted by a state's power sector in 2024. Chhattisgarh, Uttar Pradesh and Madhya Pradesh top the list on sheer volume of coal burnt.", watch: "This is mass, not intensity. A big, coal-heavy state can emit a lot in total while a tiny grid has a higher per-unit intensity." },
+      { chart: "multiLine", indicator: "energy.ember.national.monthly.hydro", series: [{ indicator: "energy.ember.national.monthly.hydro", label: "Hydro", color: "#3a6fd0" }, { indicator: "energy.ember.national.monthly.wind", label: "Wind", color: "#1f9e8a" }, { indicator: "energy.ember.national.monthly.solar", label: "Solar", color: "#f0a51f" }], size: "feature", unit: "GWh per month", subtitle: "Ember \u00b7 monthly generation from each renewable source \u00b7 India 2024", title: "The clean grid runs on the monsoon's calendar", why: "Renewables are not steady: India's clean power has a strong seasonal rhythm that the rest of the grid has to work around.", read: "Each line is monthly generation in 2024. Hydro and wind surge together in the monsoon (wind nearly quadruples and hydro more than triples from their lows) while solar stays comparatively flat.", watch: "This is a single year, so read the seasonal shape, not a trend. The monsoon months are exactly when coal eases off as hydro and wind fill in." }
+    ]
+  },
+
+  {
+    id: "q.states.demographic_finances",
+    slug: "young-states-old-states",
+    question: "What happens to a state's budget when it grows old?",
+    priority: "core",
+    // Built Jun 2026. Sources: RBI e-STATES database (State Finances: A Study of
+    // Budgets of 2025-26), 1990-91..2023-24 actuals; demographic spine from MoHFW
+    // Report of the Technical Group on Population Projections (2020) as published in
+    // the report's Chapter III (Tables III.2 / III.7). Ingest: scripts/ingest-estates.py
+    // + scripts/derive-estates.py. All fiscal comparisons are internal shares.
+    indicators: [
+      "states.demog.share60_scenario",
+      "states.demog.oadr_2026",
+      "states.demog.share60_rise_2011_2036",
+      "states.demog.share60.kerala", "states.demog.share60.bihar", "states.demog.share60.india",
+      "states.demog.oadr.india",
+      "states.fiscal.own_tax_share.youthful", "states.fiscal.own_tax_share.intermediate", "states.fiscal.own_tax_share.ageing",
+      "states.fiscal.central_transfer_share.youthful", "states.fiscal.central_transfer_share.intermediate", "states.fiscal.central_transfer_share.ageing",
+      "states.fiscal.committed_share.youthful", "states.fiscal.committed_share.intermediate", "states.fiscal.committed_share.ageing",
+      "states.fiscal.education_share.youthful", "states.fiscal.education_share.intermediate", "states.fiscal.education_share.ageing",
+      "states.fiscal.health_share.youthful", "states.fiscal.health_share.intermediate", "states.fiscal.health_share.ageing",
+      "states.fiscal.own_tax_share_2024",
+      "states.fiscal.committed_share_2024",
+      "states.fiscal.pension_share_2024",
+      "states.fiscal.own_tax_share.st.kerala", "states.fiscal.own_tax_share.st.tamil_nadu", "states.fiscal.own_tax_share.st.bihar",
+      "states.income.per_capita_2024",
+      "states.gsdp.own_tax_gsdp.youthful", "states.gsdp.own_tax_gsdp.intermediate", "states.gsdp.own_tax_gsdp.ageing",
+      "states.gsdp.rev_exp_gsdp.youthful", "states.gsdp.rev_exp_gsdp.intermediate", "states.gsdp.rev_exp_gsdp.ageing",
+      "states.percap.rev_exp_2024", "states.percap.health_2024"
+    ],
+    visualPlan: [
+      // ACT 1 - India is not ageing as one country
+      { chart: "scenarioMaps", indicator: "states.demog.share60_scenario", size: "hero", unit: "% aged 60+", subtitle: "MoHFW 2020 projections (via RBI) · share of population aged 60 and above · 2011, 2026, 2036", title: "India is ageing, but not all at once", why: "The whole argument in one image: the grey wave reaches the south and west first and the poor northern states last.", read: "Three maps on one scale. In 2011 almost the whole country is pale; by 2026 the south darkens; by 2036 ageing has spread north and west while Bihar and UP are still comparatively young.", watch: "These are projections from 2020, not a census count. Read the pattern and the direction, not any single state's decimal." },
+      { chart: "choropleth", indicator: "states.demog.oadr_2026", size: "feature", unit: "elderly per 100 workers", divergeAt: 17.6, pivotLabel: "national average", rankLabel: "Heaviest load", bottomLabel: "Lightest load", subtitle: "MoHFW 2020 projections (via RBI) · population 60+ per 100 aged 15-59 · 2026", title: "How many elderly each 100 workers must support", why: "Ageing is not abstract: it is how many retired people each working-age person has to carry, and that already varies two-to-one across India.", read: "Each state is shaded by its old-age dependency ratio in 2026. Kerala carries about 30 elderly per 100 workers; Bihar about 14. The cream band sits at the national average of about 18.", watch: "This counts people, not money. A high ratio is a fiscal warning only to the extent the elderly draw on state pensions and health spending." },
+      { chart: "tableBars", indicator: "states.demog.share60_rise_2011_2036", size: "feature", unit: "percentage points", subtitle: "MoHFW 2020 projections (via RBI) · rise in 60+ share, 2011 to 2036", title: "Where the grey wave rises fastest", why: "The states that look young today are not safe; several are ageing faster than the ones already old.", read: "Each bar is the projected increase in a state's 60-plus share between 2011 and 2036. Kerala and Tamil Nadu rise most in level, but West Bengal, Andhra and Karnataka are close behind.", watch: "A big rise from a low base still leaves a young state; a small rise on top of an already-old base, like Kerala, is the harder fiscal problem." },
+      { chart: "multiLine", indicator: "states.demog.share60.india", series: [{ indicator: "states.demog.share60.kerala", label: "Kerala", color: "#c2476b" }, { indicator: "states.demog.share60.india", label: "India", color: "#8a8580" }, { indicator: "states.demog.share60.bihar", label: "Bihar", color: "#1f9e8a" }], size: "feature", unit: "% aged 60+", subtitle: "MoHFW 2020 projections (via RBI) · share of population aged 60+, 2011-2036", title: "A generation apart: Kerala and Bihar", why: "The national average hides a gap of decades: Kerala in 2026 is where Bihar will not be even in 2036.", read: "Three trajectories of the 60-plus share. Kerala is already past the ageing threshold; Bihar is still climbing toward where Kerala began.", watch: "Both lines rise; this is not Bihar staying young forever. It is Bihar getting Kerala's problem later, with less money to meet it." },
+
+      // ACT 2 - Young states and old states run on different fiscal engines
+      { chart: "multiLine", indicator: "states.fiscal.own_tax_share.ageing", series: [{ indicator: "states.fiscal.own_tax_share.ageing", label: "Ageing states", color: "#c2476b" }, { indicator: "states.fiscal.own_tax_share.intermediate", label: "Intermediate states", color: "#d99a1f" }, { indicator: "states.fiscal.own_tax_share.youthful", label: "Youthful states", color: "#1f9e8a" }], size: "feature", unit: "% of total revenue", subtitle: "RBI e-STATES · own-tax revenue as a share of total revenue, by demographic group · 2000-01 to 2023-24", title: "Older states pay their own way; younger states lean on Delhi", why: "Counter-intuitively, the ageing states are the fiscally self-reliant ones: they raise most of their money themselves.", read: "Each line is a group's own taxes as a share of its total revenue. The ageing group raises well over half; the youthful group raises a quarter to a third and depends on central transfers for the rest.", watch: "States are grouped by their 2026 60-plus share; the lines are aggregates, so a single large state can pull a group." },
+      { chart: "multiLine", indicator: "states.fiscal.central_transfer_share.youthful", series: [{ indicator: "states.fiscal.central_transfer_share.ageing", label: "Ageing states", color: "#c2476b" }, { indicator: "states.fiscal.central_transfer_share.intermediate", label: "Intermediate states", color: "#d99a1f" }, { indicator: "states.fiscal.central_transfer_share.youthful", label: "Youthful states", color: "#1f9e8a" }], size: "feature", unit: "% of total revenue", subtitle: "RBI e-STATES · central tax share + grants as a share of total revenue, by group · 2000-01 to 2023-24", title: "The mirror image: who depends on transfers", why: "The flip side of own taxes: the young, poor states get most of their budget from the Centre.", read: "Each line is the share of a group's revenue that comes from central tax devolution plus grants. The youthful group sits highest; the ageing group lowest.", watch: "Dependence on transfers is not failure; it is partly by design, since devolution is meant to equalise. But it makes young states hostage to central decisions." },
+      { chart: "sparkGrid", indicator: "states.fiscal.own_tax_share.st.kerala", series: [{ indicator: "states.fiscal.own_tax_share.st.andhra_pradesh", label: "Andhra Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.assam", label: "Assam" }, { indicator: "states.fiscal.own_tax_share.st.bihar", label: "Bihar" }, { indicator: "states.fiscal.own_tax_share.st.chhattisgarh", label: "Chhattisgarh" }, { indicator: "states.fiscal.own_tax_share.st.delhi", label: "Delhi" }, { indicator: "states.fiscal.own_tax_share.st.gujarat", label: "Gujarat" }, { indicator: "states.fiscal.own_tax_share.st.haryana", label: "Haryana" }, { indicator: "states.fiscal.own_tax_share.st.himachal_pradesh", label: "Himachal Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.jammu_and_kashmir", label: "Jammu and Kashmir" }, { indicator: "states.fiscal.own_tax_share.st.jharkhand", label: "Jharkhand" }, { indicator: "states.fiscal.own_tax_share.st.karnataka", label: "Karnataka" }, { indicator: "states.fiscal.own_tax_share.st.kerala", label: "Kerala" }, { indicator: "states.fiscal.own_tax_share.st.madhya_pradesh", label: "Madhya Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.maharashtra", label: "Maharashtra" }, { indicator: "states.fiscal.own_tax_share.st.odisha", label: "Odisha" }, { indicator: "states.fiscal.own_tax_share.st.punjab", label: "Punjab" }, { indicator: "states.fiscal.own_tax_share.st.rajasthan", label: "Rajasthan" }, { indicator: "states.fiscal.own_tax_share.st.tamil_nadu", label: "Tamil Nadu" }, { indicator: "states.fiscal.own_tax_share.st.telangana", label: "Telangana" }, { indicator: "states.fiscal.own_tax_share.st.uttar_pradesh", label: "Uttar Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.uttarakhand", label: "Uttarakhand" }, { indicator: "states.fiscal.own_tax_share.st.west_bengal", label: "West Bengal" }], size: "feature", unit: "% of total revenue", subtitle: "RBI e-STATES · own-tax revenue as a share of total revenue · each state, 1990-91 to 2023-24", title: "Every state's own-revenue effort, one panel each", why: "Behind the group averages, each state has its own trajectory; this is the whole federation at a glance.", read: "Each mini-panel is one state's own-tax share over three decades, shaded by its latest level. The southern and western states cluster high; the poorest northern and eastern states stay low.", watch: "A flat low line can mean a weak tax base, not laziness; poorer states simply have less to tax." },
+      { chart: "choropleth", indicator: "states.fiscal.own_tax_share_2024", size: "feature", unit: "% of total revenue", divergeAt: 45, pivotLabel: "about 45%", rankLabel: "Most self-reliant", bottomLabel: "Most transfer-dependent", subtitle: "RBI e-STATES · own-tax revenue as a share of total revenue · 2023-24", title: "The self-reliance map", why: "Own-revenue effort mapped: it traces almost the same line as the ageing map, because richer, older states have deeper tax bases.", read: "Each state is shaded by how much of its revenue it raises itself in 2023-24. The south and west are dark and self-funding; the Hindi-belt and the northeast lean on Delhi.", watch: "Special-category and hill states get larger grants by formula, so a low own-tax share there is partly structural, not just a weak economy." },
+
+      // ACT 3 - But how big is all this against the economy?
+      { chart: "choropleth", indicator: "states.income.per_capita_2024", size: "feature", unit: "Rs thousand per person", divergeAt: 150, pivotLabel: "about Rs 1.5 lakh", rankLabel: "Richest", bottomLabel: "Poorest", subtitle: "RBI Handbook of Statistics on Indian States · per-capita net state income (NSDP), current prices · 2023-24", title: "How rich each state actually is", why: "The income map behind the ageing map: the states that grow old first are simply the richer ones.", read: "Each state is shaded by income per person in 2023-24. Kerala, Tamil Nadu, Karnataka and the west run two to five times richer than Bihar, Uttar Pradesh and the eastern states.", watch: "This is income produced per resident, not what households take home, and a few mineral or capital states can look richer than daily life feels." },
+      { chart: "multiLine", indicator: "states.gsdp.own_tax_gsdp.ageing", series: [{ indicator: "states.gsdp.own_tax_gsdp.ageing", label: "Ageing states", color: "#c2476b" }, { indicator: "states.gsdp.own_tax_gsdp.intermediate", label: "Intermediate states", color: "#d99a1f" }, { indicator: "states.gsdp.own_tax_gsdp.youthful", label: "Youthful states", color: "#1f9e8a" }], size: "feature", unit: "% of GSDP", subtitle: "RBI e-STATES over GSDP (Handbook of Statistics on Indian States) · own-tax revenue as a share of state GDP · 2011-12 to 2023-24", title: "Everyone taxes their economy about the same", why: "The myth-buster: measured against the size of the economy, the ageing states do not tax harder, they all take a similar slice.", read: "Each line is a group's own-tax revenue as a share of its GSDP. All three sit close to 6 to 7%, and the ageing group has drifted down to meet the others.", watch: "Similar tax effort with very different own-tax SHARES means the gap in the last act was about how much Delhi sends, not about how hard states tax their own economies." },
+      { chart: "multiLine", indicator: "states.gsdp.rev_exp_gsdp.youthful", series: [{ indicator: "states.gsdp.rev_exp_gsdp.youthful", label: "Youthful states", color: "#1f9e8a" }, { indicator: "states.gsdp.rev_exp_gsdp.intermediate", label: "Intermediate states", color: "#d99a1f" }, { indicator: "states.gsdp.rev_exp_gsdp.ageing", label: "Ageing states", color: "#c2476b" }], size: "feature", unit: "% of GSDP", subtitle: "RBI e-STATES over GSDP · revenue spending as a share of state GDP · 2011-12 to 2023-24", title: "The poorest states run the biggest governments", why: "A second surprise from the GSDP lens: relative to their small economies, the young, poor states spend the most.", read: "Each line is a group's revenue spending as a share of GSDP. The youthful group runs near 17%, well above the intermediate and ageing groups near 12%.", watch: "A bigger government relative to GSDP is partly because the economy is small and central transfers are large, not because the state does more per person, which the next charts show." },
+      { chart: "tableBars", indicator: "states.percap.rev_exp_2024", size: "feature", unit: "Rs per person", subtitle: "RBI e-STATES per derived population · revenue spending per resident · 2023-24", title: "How much government each citizen actually gets", why: "Flip from shares to rupees per person and the picture inverts: the richer states spend far more on each resident.", read: "Each bar is a state's revenue spending divided by its population. A resident of Himachal or the hill and northeastern states gets three to four times the rupees of one in Bihar or Uttar Pradesh.", watch: "Small hill and special-category states sit on top partly because they have few people and large grants; per-person spending is not the same as quality of services." },
+      { chart: "tableBars", indicator: "states.percap.health_2024", size: "feature", unit: "Rs per person", subtitle: "RBI e-STATES per derived population · medical and public-health spending per resident · 2023-24", title: "Same share of the budget, very different rupees", why: "The resolution of the health puzzle: states spend a similar SHARE on health, but in rupees per person the gap is enormous.", read: "Each bar is health spending per resident in 2023-24. The richer and hill states spend multiples of what the poor, populous states manage per person, even though the budget SHARE looked similar.", watch: "Per-person health spending still says nothing about outcomes or the large role of private and out-of-pocket health spending in India." },
+
+      // ACT 4 - The squeeze: ageing locks the budget
+      { chart: "multiLine", indicator: "states.fiscal.committed_share.ageing", series: [{ indicator: "states.fiscal.committed_share.ageing", label: "Ageing states", color: "#c2476b" }, { indicator: "states.fiscal.committed_share.intermediate", label: "Intermediate states", color: "#d99a1f" }, { indicator: "states.fiscal.committed_share.youthful", label: "Youthful states", color: "#1f9e8a" }], size: "feature", unit: "% of revenue spending", subtitle: "RBI e-STATES · interest payments + pensions as a share of revenue expenditure, by group · 2000-01 to 2023-24", title: "How much of the budget is already spoken for", why: "This is the squeeze: in the ageing states a third of every rupee of running spending is locked into interest and pensions before a single new scheme.", read: "Each line is a group's committed spending (interest plus pensions) as a share of revenue expenditure. The youthful group cut its share over two decades; the ageing group stayed stuck near a third.", watch: "Committed spending here is interest plus pensions only; salaries are not separable in this data, so the true rigidity is even higher everywhere." },
+      { chart: "choropleth", indicator: "states.fiscal.committed_share_2024", size: "feature", unit: "% of revenue spending", divergeAt: 28, pivotLabel: "about 28%", rankLabel: "Most locked-in", bottomLabel: "Most flexible", subtitle: "RBI e-STATES · interest + pensions as a share of revenue expenditure · 2023-24", title: "Where the budget is most pre-committed", why: "The committed-spending burden mapped: the older states and the most indebted states light up together.", read: "Each state is shaded by the share of its running budget already promised to interest and pensions in 2023-24. The ageing southern states and the heavily indebted states (Punjab, Kerala, West Bengal) carry the heaviest load.", watch: "High interest is about past borrowing, not ageing; high pensions is about ageing and past hiring. The map mixes both forces." },
+      { chart: "multiLine", indicator: "states.fiscal.education_share.youthful", series: [{ indicator: "states.fiscal.education_share.youthful", label: "Youthful states", color: "#1f9e8a" }, { indicator: "states.fiscal.education_share.intermediate", label: "Intermediate states", color: "#d99a1f" }, { indicator: "states.fiscal.education_share.ageing", label: "Ageing states", color: "#c2476b" }], size: "feature", unit: "% of revenue spending", subtitle: "RBI e-STATES · education spending as a share of revenue expenditure, by group · 2000-01 to 2023-24", title: "Young states still spend more on schooling", why: "Where the money goes follows the age structure: the young states put a bigger slice into education, where their need is.", read: "Each line is a group's education spending as a share of revenue expenditure. The youthful group sits highest, the ageing group lowest, matching where the children are.", watch: "A higher share is not higher quality or even higher rupees per child; young states also have far more children to spread it across." },
+      { chart: "multiLine", indicator: "states.fiscal.health_share.ageing", series: [{ indicator: "states.fiscal.health_share.ageing", label: "Ageing states", color: "#c2476b" }, { indicator: "states.fiscal.health_share.intermediate", label: "Intermediate states", color: "#d99a1f" }, { indicator: "states.fiscal.health_share.youthful", label: "Youthful states", color: "#1f9e8a" }], size: "feature", unit: "% of revenue spending", subtitle: "RBI e-STATES · medical and public-health spending as a share of revenue expenditure, by group · 2000-01 to 2023-24", title: "How much states spend on health", why: "The surprising null result: health budgets barely move with age, which is why pensions, not hospitals, are the real fiscal cost of ageing.", read: "Each line is a group's medical and public-health spending as a share of revenue expenditure. All three sit near 5%, rose together during the pandemic, and by 2023-24 had converged with almost nothing between them.", watch: "State health budgets serve all ages, so demography barely shows up here; do not read the small wiggles as a strong ageing signal." },
+      { chart: "tableBars", indicator: "states.fiscal.pension_share_2024", size: "feature", unit: "% of revenue spending", subtitle: "RBI e-STATES · pensions as a share of revenue expenditure · 2023-24", title: "Where pensions already eat the budget", why: "The single clearest ageing cost: in some states pensions alone are nearly a fifth of all running spending.", read: "Each bar is state pension outgo as a share of revenue expenditure in 2023-24. Himachal, Kerala, Punjab and the hill states top the list.", watch: "This is today's pension bill from past hiring, not future ageing. The shift from the Old Pension Scheme to NPS, and some states reverting, will reshape it." },
+
+      // ACT 5 - The closing window
+      { chart: "line", indicator: "states.demog.oadr.india", size: "feature", unit: "elderly per 100 workers", subtitle: "MoHFW 2020 projections (via RBI) · India's old-age dependency ratio · 2011-2036", title: "The window is one generation wide", why: "Zoom out to the country: the support ratio is set to rise steeply, and the easy years are now.", read: "The line is India's old-age dependency ratio. It drifts up gently to 2021, then climbs faster toward 2036 as the post-1960s cohorts retire.", watch: "Projections compound, so the later years are less certain; but the near-term rise is already baked into people who are alive today." },
+      { chart: "rankedChange", indicator: "states.fiscal.own_tax_share.st.kerala", diverging: true, series: [{ indicator: "states.fiscal.own_tax_share.st.andhra_pradesh", label: "Andhra Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.assam", label: "Assam" }, { indicator: "states.fiscal.own_tax_share.st.bihar", label: "Bihar" }, { indicator: "states.fiscal.own_tax_share.st.chhattisgarh", label: "Chhattisgarh" }, { indicator: "states.fiscal.own_tax_share.st.delhi", label: "Delhi" }, { indicator: "states.fiscal.own_tax_share.st.gujarat", label: "Gujarat" }, { indicator: "states.fiscal.own_tax_share.st.haryana", label: "Haryana" }, { indicator: "states.fiscal.own_tax_share.st.himachal_pradesh", label: "Himachal Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.jammu_and_kashmir", label: "Jammu and Kashmir" }, { indicator: "states.fiscal.own_tax_share.st.jharkhand", label: "Jharkhand" }, { indicator: "states.fiscal.own_tax_share.st.karnataka", label: "Karnataka" }, { indicator: "states.fiscal.own_tax_share.st.kerala", label: "Kerala" }, { indicator: "states.fiscal.own_tax_share.st.madhya_pradesh", label: "Madhya Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.maharashtra", label: "Maharashtra" }, { indicator: "states.fiscal.own_tax_share.st.odisha", label: "Odisha" }, { indicator: "states.fiscal.own_tax_share.st.punjab", label: "Punjab" }, { indicator: "states.fiscal.own_tax_share.st.rajasthan", label: "Rajasthan" }, { indicator: "states.fiscal.own_tax_share.st.tamil_nadu", label: "Tamil Nadu" }, { indicator: "states.fiscal.own_tax_share.st.telangana", label: "Telangana" }, { indicator: "states.fiscal.own_tax_share.st.uttar_pradesh", label: "Uttar Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.uttarakhand", label: "Uttarakhand" }, { indicator: "states.fiscal.own_tax_share.st.west_bengal", label: "West Bengal" }], size: "feature", unit: "% of total revenue", subtitle: "RBI e-STATES · change in own-tax share, first decade vs latest decade", title: "Who built revenue muscle while the window was open", why: "The test for the young states is whether they strengthen their own tax base before they age; this shows who has.", read: "Each row compares a state's own-tax share in its first decade of data with its most recent decade. States to the right strengthened their own revenue; states to the left slid toward more dependence.", watch: "Own-tax share can fall simply because central transfers rose faster, not because tax effort weakened; read it alongside the levels in the map above." }
+    ]
+  },
+
+  {
+    id: "q.econ.rupee",
+    slug: "why-the-rupee-falls",
+    question: "Why does the rupee keep falling, and does it actually make you poorer?",
+    priority: "core",
+    // Built Jun 2026. The biography of a currency: a pegged colonial inheritance,
+    // the 1966 and 1991 devaluations, the 1993 move to a market rate, the
+    // words-vs-deeds intervention era, then the REER reveal and the purchasing-power
+    // counterfactual. Sources: FRED (INR/USD, Brent), BIS (REER/NEER, long CPI,
+    // policy rate), RBI (REER 36c from 1975, deposit rates, intervention + forward
+    // book, FPI, foreign trade), World Bank (remittances), and a verified pre-1973
+    // devaluation chronology. See scripts/ingest-rupee-*.* + derive-rupee-charts.py.
+    indicators: [
+      "IN.fx.inr_usd_long.annual", "derived.IN.reserves.total_usd.monthly",
+      "IN.fx.rbi_net_intervention_usd.monthly", "IN.extfin.net_fpi_usd.monthly",
+      "IN.fx.rbi_forward_book_usd.monthly", "IN.fx.inr_usd_month_high.monthly", "IN.fx.inr_usd_month_low.monthly",
+      "derived.IN.fx.idx_rupee_vs_usd", "derived.IN.fx.idx_neer_broad", "derived.IN.fx.idx_reer_broad",
+      "IN.fx.reer_36c.monthly", "IN.fx.neer_36c.monthly",
+      "IN.fx.inr_usd.monthly", "derived.IN.fx.inr_usd_ppp_implied",
+      "IN.prices.cpi_yoy_bis.monthly", "US.prices.cpi_yoy_bis.monthly",
+      "derived.IN.trade.exports_idx_inr", "derived.IN.trade.exports_idx_usd",
+      "derived.IN.savings.fd_nominal", "derived.IN.savings.cost_of_living", "derived.IN.savings.fd_real",
+      "derived.IN.energy.brent_inr_idx", "derived.IN.energy.brent_usd_idx",
+      "IN.trade.imports_oil_usd.annual", "IN.extfin.remittances_received_usd.annual",
+      "derived.IN.fx.rupee_value_vs_usd", "derived.IN.fx.rupee_value_vs_eur", "derived.IN.fx.rupee_value_vs_gbp", "derived.IN.fx.rupee_value_vs_jpy",
+      "IN.rates.policy_rate.monthly", "IN.extfin.net_fdi_usd.monthly", "extfin.driver.usd_em_index", "derived.IN.fx.regime_volatility",
+      "derived.IN.prices.cpi_cum_in", "derived.IN.prices.cpi_cum_us", "derived.IN.rates.real_deposit_rate",
+      "IN.trade.exports_total_usd.annual", "IN.trade.imports_total_usd.annual",
+      "derived.IN.fx.decade_fall", "derived.IN.fx.peer_fall_vs_usd", "macro.current_account_usd",
+      "IN.extfin.usd_credit_nonbank.quarterly"
+    ],
+    core: [
+      "IN.fx.inr_usd_long.annual", "derived.IN.reserves.total_usd.monthly",
+      "IN.fx.rbi_net_intervention_usd.monthly", "IN.extfin.net_fpi_usd.monthly",
+      "IN.fx.rbi_forward_book_usd.monthly", "IN.fx.inr_usd_month_high.monthly", "IN.fx.inr_usd_month_low.monthly",
+      "derived.IN.fx.idx_rupee_vs_usd", "derived.IN.fx.idx_neer_broad", "derived.IN.fx.idx_reer_broad",
+      "IN.fx.reer_36c.monthly", "IN.fx.neer_36c.monthly",
+      "IN.fx.inr_usd.monthly", "derived.IN.fx.inr_usd_ppp_implied",
+      "IN.prices.cpi_yoy_bis.monthly", "US.prices.cpi_yoy_bis.monthly",
+      "derived.IN.trade.exports_idx_inr", "derived.IN.trade.exports_idx_usd",
+      "derived.IN.savings.fd_nominal", "derived.IN.savings.cost_of_living", "derived.IN.savings.fd_real",
+      "derived.IN.energy.brent_inr_idx", "derived.IN.energy.brent_usd_idx",
+      "IN.trade.imports_oil_usd.annual", "IN.extfin.remittances_received_usd.annual",
+      "derived.IN.fx.rupee_value_vs_usd", "derived.IN.fx.rupee_value_vs_eur", "derived.IN.fx.rupee_value_vs_gbp", "derived.IN.fx.rupee_value_vs_jpy",
+      "IN.rates.policy_rate.monthly", "IN.extfin.net_fdi_usd.monthly", "extfin.driver.usd_em_index", "derived.IN.fx.regime_volatility",
+      "derived.IN.prices.cpi_cum_in", "derived.IN.prices.cpi_cum_us", "derived.IN.rates.real_deposit_rate",
+      "IN.trade.exports_total_usd.annual", "IN.trade.imports_total_usd.annual",
+      "derived.IN.fx.decade_fall", "derived.IN.fx.peer_fall_vs_usd", "macro.current_account_usd",
+      "IN.extfin.usd_credit_nonbank.quarterly"
+    ],
+    context: [],
+    visualPlan: [
+      // --- ACT 1: THE NUMBER EVERYONE MISREADS ---
+      { indicator: "IN.fx.inr_usd_long.annual", chart: "line", title: "From four rupees to ninety", size: "hero", window: "full", beat: "the-number", subtitle: "What one US dollar has cost in rupees since Independence: flat for decades under fixed pegs, then stepping down through each devaluation.",
+        why: "The headline everyone knows and almost everyone misreads: the rupee's long slide against the dollar.", read: "Rupees per US dollar from 1947 to today, pegged and flat for decades, then stepping down through the 1966 and 1991 devaluations before floating.", watch: "Pre-1993 these are fixed-peg par values, not market prices; the flat stretches are policy, not stability of value." },
+      { indicator: "derived.IN.fx.decade_fall", chart: "tableBars", title: "The fall, decade by decade", size: "feature", beat: "decade-fall", subtitle: "How much of its dollar value the rupee gave up in each decade. The losses came in bursts, not a steady slide.", unit: "% of value lost vs the dollar",
+        why: "The slide was never steady; it came in bursts, and naming the decades shows the rupee has been broadly stable against the dollar for long stretches.", read: "How much of its dollar value the rupee lost in each decade. The 1960s devaluation, the 1980s and the 1991 crisis decade did most of the damage; the 2000s were almost flat.", watch: "Pre-1970 decades are fixed pegs, so a near-zero decade is policy holding the line, not a free market judging the rupee strong." },
+      { chart: "multiLine", title: "Did the rupee fall, or did the dollar rise?", size: "feature", beat: "rupee-vs-currencies", subtitle: "The rupee's value against four big currencies since 1999. It slid most against the dollar, far less against the pound and yen.", unit: "value of the rupee (1999 = 100)",
+        series: [ { indicator: "derived.IN.fx.rupee_value_vs_usd", label: "vs US dollar" }, { indicator: "derived.IN.fx.rupee_value_vs_eur", label: "vs euro" }, { indicator: "derived.IN.fx.rupee_value_vs_gbp", label: "vs pound" }, { indicator: "derived.IN.fx.rupee_value_vs_jpy", label: "vs yen" } ],
+        indicator: "derived.IN.fx.rupee_value_vs_usd",
+        why: "The rupee did not weaken evenly against everything; it fell hardest against the dollar and far less against the pound and yen, so much of the 'weakness' is really dollar strength.", read: "The rupee's value against four major currencies since 1999, each set to 100. The dollar line falls the most; against the pound and yen the rupee held up far better.", watch: "These are bilateral pairs, not the trade-weighted average; the yen and pound had their own weak spells, which flatters the rupee here." },
+      { indicator: "derived.IN.fx.peer_fall_vs_usd", chart: "tableBars", title: "The rupee was not alone", size: "feature", beat: "peer-comparison", subtitle: "How far every major currency fell against a strong dollar since 2000. The rupee sits mid-pack, not among the worst.", unit: "% of value lost vs the dollar, 2000-2025",
+        why: "The most freeing chart in the article: a currency's price is relative, and against a strong dollar most currencies lost ground, with the rupee sitting mid-pack among emerging markets, far from the worst.", read: "How far each major currency fell against the dollar since 2000. The Brazilian real, South African rand and Mexican peso fell more than the rupee; several currencies, including the franc, euro, yuan and baht, actually gained. The rupee is a normal emerging-market currency, not an outlier.", watch: "A loss against the dollar is not a loss against everything; the dollar was unusually strong over this period, and these are bilateral dollar pairs, not trade-weighted." },
+      // --- ACT 2: A PEGGED INHERITANCE, AND TWO DEVALUATIONS (1947-1991) ---
+      { indicator: "derived.IN.reserves.total_usd.monthly", chart: "line", title: "From a fortnight of imports to over six hundred billion dollars", size: "feature", window: "full", beat: "reserves-arc", subtitle: "India's stockpile of foreign currency and gold. This buffer shrank to almost nothing in 1991 and now ranks among the world's largest.",
+        why: "The 1991 devaluation was not a choice, it was a near-default: India had almost run out of dollars.", read: "India's total foreign reserves including gold. The 1991 trough is about $1 billion, barely two-three weeks of imports; the modern surge runs past $680 billion.", watch: "Dollar values, so partly the size of the economy; but the 1991 collapse and the modern cushion are both real and enormous." },
+      { indicator: "macro.current_account_usd", chart: "line", title: "The deficit that sets off every crisis", size: "feature", window: "full", beat: "current-account", subtitle: "India's current-account balance, the gap between what the country earns abroad and what it spends. It turns into a dollar squeeze whenever foreign money stops coming.",
+        why: "Behind every rupee crisis is the same trigger: India spending more abroad than it earns, so it must pull in foreign money to bridge the gap, and when that money stops, the rupee breaks.", read: "India's current-account balance since the 1950s. The deficit yawned to a record near $88 billion in 2012-13, just before the rupee's 2013 plunge; it was only near balance before 1991 because imports had been throttled to almost nothing.", watch: "A deficit is normal for a developing economy importing capital; it turns dangerous only when it is large and financed by flighty money. Services exports and remittances shrink it well below the goods gap." },
+      { indicator: "IN.rates.policy_rate.monthly", chart: "line", title: "The price of money, through every regime", size: "small", window: "full", beat: "policy-rate", subtitle: "The RBI's main interest rate over the decades: towering in the controlled era, spiking to defend the rupee in crises, calmer today.",
+        why: "The interest-rate backdrop to the whole story: sky-high in the controlled era, spiking to defend the rupee in crises, low and steadier today.", read: "The RBI's main policy rate since the 1940s. It towered in the 1970s-90s, was hiked hard to defend the rupee in 1998 and 2013, and trended down in the inflation-targeting era.", watch: "The policy rate is one lever among many; a rate spike often signals a currency or inflation scare, it does not by itself set the exchange rate." },
+      // --- ACT 3: LEARNING TO FLOAT, AND WHAT THE RBI ACTUALLY DOES ---
+      { chart: "multiLine", title: "The rupee's monthly trading range", size: "small", beat: "managed-float", subtitle: "The highest and lowest the rupee touched within each month. The band is so tight it reveals how much the RBI smooths the currency.", unit: "INR per USD",
+        series: [ { indicator: "IN.fx.inr_usd_month_high.monthly", label: "Month's weakest" }, { indicator: "IN.fx.inr_usd_month_low.monthly", label: "Month's strongest" } ],
+        indicator: "IN.fx.inr_usd_month_high.monthly",
+        why: "A genuine free float would swing wildly; the rupee's tight monthly band is the fingerprint of management.", read: "The highest and lowest rupee-dollar rate within each month. The gap is usually small, widening only in crisis months.", watch: "A narrow band is partly calm markets and partly RBI smoothing; the two are hard to separate from price alone." },
+      { indicator: "IN.fx.rbi_net_intervention_usd.monthly", chart: "line", title: "What the RBI actually does in the market", size: "feature", window: "full", beat: "intervention", subtitle: "How many dollars the RBI bought or sold each month: buying to hold the rupee down in calm times, selling hard to defend it in a crisis.",
+        why: "The central bank says it only curbs volatility; its dollar buying and selling shows what that means month to month.", read: "Net RBI dollar purchases each month: positive when it buys dollars (selling rupees to stop appreciation), sharply negative when it sells dollars to defend the rupee in a crisis.", watch: "This is spot intervention only; the forward book below is the other, larger, half of the story." },
+      { chart: "multiLine", title: "The tide the central bank leans against", size: "feature", beat: "fpi-vs-intervention", subtitle: "Foreign investors' stock-and-bond flows alongside the RBI's dollar trades. When hot money rushes out, the RBI sells dollars to cushion the fall.", unit: "US$ millions",
+        series: [ { indicator: "IN.extfin.net_fpi_usd.monthly", label: "Net foreign portfolio flows" }, { indicator: "IN.fx.rbi_net_intervention_usd.monthly", label: "RBI net dollar purchases" } ],
+        indicator: "IN.extfin.net_fpi_usd.monthly",
+        why: "RBI research finds the rupee is moved mainly by volatile foreign portfolio flows, not by inflation; intervention leans against that tide.", read: "Net foreign portfolio investment against RBI intervention. When foreigners pull money out (a sharp negative), the RBI sells dollars to cushion the fall.", watch: "Correlation, not proof; but the two move together in every stress episode, exactly as the RBI's own study describes." },
+      { indicator: "IN.fx.rbi_forward_book_usd.monthly", chart: "line", title: "The hundred-billion-dollar shadow defence", size: "small", window: "full", beat: "forward-book", subtitle: "The RBI's hidden forward position: dollars it has promised to deliver later, a way to defend the rupee today without spending visible reserves.",
+        why: "Modern intervention increasingly hides in the forwards market, off the visible spot reserves.", read: "The RBI's outstanding net forward dollar position. Deeply negative by 2026, over $100 billion of dollar sales promised forward to defend the rupee without spending spot reserves yet.", watch: "A forward sale defers the reserve hit; a large negative book is firepower already committed, not free cushion." },
+      { chart: "multiLine", title: "Patient money and hot money", size: "feature", beat: "fdi-vs-fpi", subtitle: "Sticky factory-building investment against fast-moving stock-market money. It is the second kind that whipsaws the rupee.", unit: "US$ millions",
+        series: [ { indicator: "IN.extfin.net_fdi_usd.monthly", label: "Direct investment (patient)" }, { indicator: "IN.extfin.net_fpi_usd.monthly", label: "Portfolio flows (hot)" } ],
+        indicator: "IN.extfin.net_fdi_usd.monthly",
+        why: "Not all foreign money behaves the same: direct investment is sticky and builds factories, portfolio money is fast and can leave in a week, and it is the second kind that whipsaws the rupee.", read: "Net foreign direct investment against net portfolio flows. FDI is relatively steady; portfolio flows swing violently, turning to large outflows in every global scare.", watch: "FDI is lumpy and revised; the point is the contrast in volatility, not any single month's figure." },
+      { chart: "multiLine", title: "What really moves the rupee", size: "small", beat: "global-drivers", subtitle: "When the dollar strengthens against all emerging markets, the rupee falls with the pack. The two lines mirror each other.", unit: "index", fromYear: 2006,
+        series: [ { indicator: "derived.IN.fx.idx_rupee_vs_usd", label: "Rupee vs the dollar (down = weaker)" }, { indicator: "extfin.driver.usd_em_index", label: "Global dollar strength (up = stronger dollar)" } ],
+        indicator: "derived.IN.fx.idx_rupee_vs_usd",
+        why: "The rupee's worst stretches line up with a globally strong dollar, not with India-specific news: when the dollar rises against all emerging markets, the rupee falls with the pack.", read: "The rupee against the dollar alongside a broad index of the dollar's strength versus emerging-market currencies. When the dollar index climbs, the rupee line slides.", watch: "Two different indices on one frame; read the mirror-image shape, not the levels. The dollar is one driver among several." },
+      { chart: "line", title: "How tightly the RBI actually held the rupee", size: "feature", beat: "regime-volatility", unit: "INR per USD", fromYear: 2000,
+        subtitle: "The rupee against the dollar, split into the RBI's unspoken regimes. The labels mark how freely it was allowed to move: the steadier the line, the tighter the grip.",
+        indicator: "IN.fx.inr_usd.monthly",
+        bands: [ { year: 2002, label: "very steady" }, { year: 2005, label: "freer" }, { year: 2010, label: "swung hard" }, { year: 2018, label: "freer" }, { year: 2024, label: "barely moved" } ],
+        why: "The clearest 'words versus deeds' evidence: the RBI never announces how hard it is managing the rupee, but how much the rupee moves in each regime gives it away.", read: "The rupee's climb, marked into the de-facto regimes Sengupta and Shah identify. The volatility label on each stretch shows how freely it was allowed to move: about 2% in the calm early 2000s, near 8% through the 2007-2013 crisis years, and a remarkable 0.9% from late 2023 to end-2024 before it was let loose.", watch: "Volatility is our own calculation from monthly INR/USD; the regime break dates are from Sengupta and Shah. Low volatility can also reflect calm markets, not only intervention." },
+      // --- ACT 4: WHAT THE NUMBER NEVER TOLD YOU (THE REVEAL) ---
+      { chart: "multiLine", title: "The rupee collapsed. Or did it?", size: "hero", beat: "nominal-vs-real", subtitle: "The rupee three ways since 1994: crashing against the dollar, falling less on a trade-weighted basis, and almost flat once inflation is stripped out.", unit: "index (Jan 1994 = 100)",
+        series: [ { indicator: "derived.IN.fx.idx_rupee_vs_usd", label: "Against the US dollar" }, { indicator: "derived.IN.fx.idx_neer_broad", label: "Trade-weighted (nominal)" }, { indicator: "derived.IN.fx.idx_reer_broad", label: "Trade-weighted, inflation-adjusted (REER)" } ],
+        indicator: "derived.IN.fx.idx_reer_broad",
+        why: "The single chart that overturns the panic: against the dollar the rupee fell to a third, but in real trade-weighted terms it barely moved.", read: "All three start at 100 in 1994. The dollar line falls to about 34, the nominal trade-weighted line to about 41, but the inflation-adjusted REER ends near 97, almost exactly where it began.", watch: "REER stability is not the same as the rupee being correctly valued; it means the fall mostly tracked the inflation gap, not lost worth." },
+      { chart: "multiLine", title: "The real rupee across fifty years", size: "feature", beat: "long-reer", subtitle: "The rupee's inflation-adjusted value since 1975: overvalued under the old pegs, sharply corrected in 1991, then broadly stable.", unit: "index (1985 = 100)",
+        series: [ { indicator: "IN.fx.reer_36c.monthly", label: "Real (REER)" }, { indicator: "IN.fx.neer_36c.monthly", label: "Nominal (NEER)" } ],
+        indicator: "IN.fx.reer_36c.monthly",
+        why: "Zoom out to half a century and the real rupee tells a story of correction, not collapse.", read: "The RBI's 36-country REER and NEER from 1975. The real rupee was overvalued in the 1970s-80s, was sharply corrected in 1991, bottomed in the mid-90s, then drifted back to a stable range.", watch: "Post-2020 this 1985-base 36-currency line is chain-linked to RBI's 40-currency successor (RBI discontinued the 36c basket end-2021), so compare the shape across the join, not exact levels against the other indices." },
+      { chart: "multiLine", title: "Why the rupee had to fall", size: "feature", beat: "inflation-gap", subtitle: "The cost of living in India versus the US since 1991. India's climbs far higher, and that gap is roughly what the rupee had to give up.", unit: "index (1991 = 100)",
+        series: [ { indicator: "derived.IN.prices.cpi_cum_in", label: "Cost of living in India" }, { indicator: "derived.IN.prices.cpi_cum_us", label: "Cost of living in the US" } ],
+        indicator: "derived.IN.prices.cpi_cum_in",
+        why: "The engine under the whole story: since 1991 Indian prices have risen far more than American prices, and a currency cannot hold a fixed dollar value while its prices outrun the other country's.", read: "The cost of living in India and the US, both set to 100 in 1991. India's line climbs far higher, and that widening gap is roughly the amount the rupee had to give up against the dollar.", watch: "Cumulative inflation, not the exchange rate; it explains the direction and rough size of the fall, not the month-to-month moves." },
+      { chart: "multiLine", title: "How much of the fall is just inflation?", size: "feature", beat: "ppp", subtitle: "The actual rupee-dollar rate against the rate inflation alone would justify. Inflation explains most of the fall, but the rupee overshoots it.", unit: "INR per USD", fromYear: 1994,
+        series: [ { indicator: "IN.fx.inr_usd.monthly", label: "Actual rate" }, { indicator: "derived.IN.fx.inr_usd_ppp_implied", label: "If only inflation mattered" } ],
+        indicator: "IN.fx.inr_usd.monthly",
+        why: "Inflation differences explain the direction of the fall, but not all of it, and the gap is the honest part of the story.", read: "The actual rupee-dollar rate against the rate implied purely by the India-US inflation gap since 1994. The actual rate falls further: the rupee overshoots pure inflation maths.", watch: "Bilateral PPP is a weak predictor; the overshoot reflects capital flows and dollar strength, which is why the trade-weighted REER, not this line, is the truer gauge." },
+      { chart: "multiLine", title: "Why a higher-inflation currency drifts down", size: "small", beat: "inflation-diff", subtitle: "Year-on-year inflation in India and the US. India's has sat above America's for decades, the gap the rupee keeps having to offset.", unit: "% year-on-year", fromYear: 1954,
+        series: [ { indicator: "IN.prices.cpi_yoy_bis.monthly", label: "India inflation" }, { indicator: "US.prices.cpi_yoy_bis.monthly", label: "US inflation" } ],
+        indicator: "IN.prices.cpi_yoy_bis.monthly",
+        why: "The mechanism under the whole story: India has run higher inflation than the US for decades, so the rupee must fall to keep trade competitive.", read: "Year-on-year inflation in India and the US. India's line sits persistently above the US line, the gap that the exchange rate has to offset over time.", watch: "Year-to-year the link is loose; it is the cumulative gap over decades that drives the currency, not any single year." },
+      { chart: "multiLine", title: "Is the rupee just a number?", size: "feature", beat: "dual-currency-exports", subtitle: "The same Indian exports measured in rupees and in dollars. The rupee line looks like a miracle, and the gap between them is purely the exchange rate.", unit: "index (1970 = 100, log scale)", logScale: true,
+        series: [ { indicator: "derived.IN.trade.exports_idx_inr", label: "Exports measured in rupees" }, { indicator: "derived.IN.trade.exports_idx_usd", label: "Exports measured in dollars" } ],
+        indicator: "derived.IN.trade.exports_idx_inr",
+        why: "The same exports look like a miracle in rupees and a steady climb in dollars; the entire gap is the exchange rate.", read: "India's merchandise exports since 1970, indexed in each currency. The rupee line ends far above the dollar line, and the ratio between them is almost exactly the rupee's depreciation.", watch: "A log scale, so equal vertical steps are equal percentage gains; the gap is a measurement effect, not extra exports." },
+      // --- ACT 5: DID YOU ACTUALLY LOSE MONEY? ---
+      { chart: "multiLine", title: "Did you actually lose money?", size: "hero", beat: "counterfactual", subtitle: "One rupee left in a bank deposit since 1970 against the rising cost of living. The saved rupee stays ahead; cash under the mattress loses almost everything.", unit: "rupees (1970 = 1)",
+        series: [ { indicator: "derived.IN.savings.fd_nominal", label: "One rupee in a bank deposit" }, { indicator: "derived.IN.savings.cost_of_living", label: "Cost of living" }, { indicator: "derived.IN.savings.fd_real", label: "The deposit, after inflation" } ],
+        indicator: "derived.IN.savings.fd_nominal",
+        why: "The reframe that defuses the debasement panic: nobody holds wealth in cash, and a banked rupee kept its purchasing power.", read: "One rupee left in a simple 1-3 year deposit since 1970 against the cost of living. The deposit grows faster than prices and ends ahead in real terms, while cash under a mattress would have lost almost everything.", watch: "The real gain depends on which inflation series you trust, somewhere between about 1.3 and 1.7 times; interest tax would trim it. The point is the direction, not the decimal." },
+      { indicator: "derived.IN.rates.real_deposit_rate", chart: "line", title: "When even the bank lost to inflation", size: "small", window: "full", beat: "real-deposit-rate", subtitle: "What a bank deposit paid after subtracting inflation. Negative through the repression decades, reliably positive only after the 1990s reforms.",
+        why: "The honest other half of the savings story: in the controlled decades the interest a deposit paid was less than inflation, so even the careful saver lost ground, until liberalisation turned real rates positive.", read: "The return on a bank deposit after subtracting inflation. It dips below zero in the 1970s-80s repression years, then turns reliably positive after the 1990s reforms.", watch: "A single representative deposit rate against one inflation series; the level is approximate, the sign and the era-shift are the robust signal." },
+      // --- ACT 6: WHAT IT COSTS YOU ---
+      { chart: "multiLine", title: "Why petrol hurts more here", size: "feature", beat: "oil-two-currencies", subtitle: "The price of crude oil in dollars and in rupees since 2000. The rupee line climbs higher because a weaker currency stacks on top of the world price.", unit: "index (Jan 2000 = 100)",
+        series: [ { indicator: "derived.IN.energy.brent_inr_idx", label: "Oil in rupees" }, { indicator: "derived.IN.energy.brent_usd_idx", label: "Oil in dollars" } ],
+        indicator: "derived.IN.energy.brent_inr_idx",
+        why: "India imports most of its oil in dollars, so a weaker rupee raises the pump price even when world oil is flat.", read: "Brent crude since 2000 in dollars and in rupees. The rupee line sits above the dollar line, the depreciation stacked on top of the world price.", watch: "Retail petrol also carries large taxes and is not a pure passthrough; this is the import-cost channel, not the pump price itself." },
+      { indicator: "IN.trade.imports_oil_usd.annual", chart: "line", title: "The petroleum bill the rupee has to pay", size: "small", window: "full", beat: "oil-bill", subtitle: "India's annual bill for imported oil, its single biggest dollar outflow and the main way a weak rupee feeds straight into inflation.",
+        why: "Oil is India's single biggest import and the main reason a weak rupee feeds straight into inflation.", read: "India's annual oil import bill in dollars, swinging with both the world price and the volume the country burns.", watch: "Driven by the world oil price as much as by the rupee; the currency amplifies the bill, it does not set it." },
+      { indicator: "IN.extfin.usd_credit_nonbank.quarterly", chart: "line", title: "The dollar debt a weak rupee makes heavier", size: "small", window: "full", beat: "dollar-debt", subtitle: "Dollar-denominated debt owed by Indian companies and other non-banks. A weaker rupee raises the rupee cost of repaying it, which is what bit unhedged borrowers in the 2013 panic.",
+        why: "Beyond importers and travellers, a weak rupee squeezes borrowers who owe in dollars: the dollar figure is flat but the rupee bill rises.", read: "BIS data on dollar-denominated credit to Indian non-bank borrowers, from about $14bn in 2005 to a peak near $142bn in 2020, easing to ~$118bn by end-2025.", watch: "This is only the dollar-denominated, non-bank slice of external debt, not government or rupee debt; the level matters less than the fact it must be serviced in dollars." },
+      { indicator: "IN.extfin.remittances_received_usd.annual", chart: "line", title: "The other side: a weak rupee pays the diaspora more", size: "small", window: "full", beat: "remittances", subtitle: "The money Indians abroad send home each year. A falling rupee quietly turns each of those dollars into more rupees for families.",
+        why: "Depreciation is not all cost: India is the world's largest remittance recipient, and every weaker rupee turns each sent dollar into more rupees at home.", read: "Personal remittances received by India each year, climbing past $100 billion, the inflow that a falling rupee quietly makes more valuable to families.", watch: "A weaker rupee lifts the rupee value of remittances but not the dollar amount; senders' wages abroad, not the exchange rate, set the dollars." },
+      { chart: "multiLine", title: "Why India always needs more dollars", size: "small", beat: "trade-gap", subtitle: "India's exports against its imports. The country buys more from the world than it sells, so it is forever in need of dollars.", unit: "US$ millions",
+        series: [ { indicator: "IN.trade.exports_total_usd.annual", label: "Exports" }, { indicator: "IN.trade.imports_total_usd.annual", label: "Imports" } ],
+        indicator: "IN.trade.imports_total_usd.annual",
+        why: "Underneath the currency sits a simple fact: India buys more from the world than it sells, so it constantly needs dollars, which is why capital flows and remittances matter so much.", read: "India's merchandise exports and imports in dollars. Imports run persistently above exports, the goods trade gap that the rupee and the inflows have to cover.", watch: "Goods trade only; India's services exports and remittances offset much of this gap, which is why the rupee has not fallen even faster." }
+    ]
+  },
 
 ];
 

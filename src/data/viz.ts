@@ -17,6 +17,12 @@ export type LineVisual = {
   source: VisualSource;
   lines: Array<{ label: string; points: Point[]; color?: string; emphasis?: boolean; dash?: boolean }>;
   xTicks?: number[];
+  /** Force a categorical x-axis: one tick per actual data point, NOT an interpolated time
+   *  axis. Use for 2-3 point survey-round series (NFHS/NSS) so the chart shows the measured
+   *  rounds instead of faking intervening annual values. */
+  categoricalX?: boolean;
+  /** Per-point x-axis labels (by point index), e.g. ["NFHS-5", "NFHS-6"]. Pairs with categoricalX. */
+  xLabels?: string[];
   bands?: Array<{ year: number; label?: string }>;
   refLine?: { value: number; label: string };
 };
@@ -103,6 +109,7 @@ export type ChoroplethVisual = {
   signed?: boolean;
   ramp?: string;
   divergeAt?: number;
+  pivotLabel?: string;
 };
 export type ScatterVisual = {
   kind: "scatter";
@@ -169,6 +176,8 @@ export type RankedChangeVisual = {
   source: VisualSource;
   startLabel: string;
   endLabel: string;
+  rowLabel?: string;
+  divergeLabel?: string;
   min?: number;
   max: number;
   rows: Array<{ label: string; start: number; end: number; change: number }>;
@@ -1995,6 +2004,8 @@ type PlanEntry = {
   columns?: Array<{ key: string; label: string }>;
   fromYear?: number;
   xTicks?: number[];
+  categoricalX?: boolean;
+  xLabels?: string[];
   bands?: Array<{ year: number; label?: string }>;
   years?: number[];
   decades?: string[];
@@ -2009,6 +2020,7 @@ type PlanEntry = {
   ramp?: string;
   diverging?: boolean;
   divergeAt?: number;
+  pivotLabel?: string;
 };
 
 // --- Builders for richer analysis types (reuse existing renderers where possible) ---
@@ -2066,6 +2078,28 @@ function seasonalByYear(artifact: Artifact, years: number[], title: string, subt
   return { kind: "line", title, subtitle: subtitle || artifact.sourceId, unit, source: sourceFor(artifact), lines };
 }
 
+function monthDecadeLines(artifact: Artifact, decades: string[], title: string, subtitle: string, unit: string): LineVisual | null {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const rows = artifact.rows || [];
+  const columns = decades.length ? decades : ["2020s", "2010s", "2000s", "1990s", "1980s", "1970s", "1960s", "1950s", "1940s"];
+  const lines = columns
+    .map((decade) => {
+      const points = rows
+        .map((row) => {
+          const month = Number(row.Year);
+          const value = numberFrom(row[decade]);
+          return month >= 1 && month <= 12 && value !== null
+            ? { date: months[month - 1], value }
+            : null;
+        })
+        .filter((point): point is Point => Boolean(point));
+      return points.length >= 6 ? { label: decade, points } : null;
+    })
+    .filter((line): line is LineVisual["lines"][number] => Boolean(line));
+  if (lines.length < 2) return null;
+  return { kind: "line", title, subtitle: subtitle || artifact.sourceId, unit, source: sourceFor(artifact), lines };
+}
+
 // Latest row of a wide table -> composition strip (e.g. GHG by sector, this year).
 function compositionStackVisual(artifact: Artifact, columns: Array<{ key: string; label: string }>, title: string, subtitle: string, unit: string): StackVisual | null {
   const rows = artifact.rows || [];
@@ -2117,28 +2151,6 @@ function decoupleIndexVisual(artifact: Artifact, columns: Array<{ key: string; l
 }
 
 // Warming stripes: one coloured band per year, blue (cool) to red (hot).
-function monthDecadeLines(artifact: Artifact, decades: string[], title: string, subtitle: string, unit: string): LineVisual | null {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const rows = artifact.rows || [];
-  const columns = decades.length ? decades : ["2020s", "2010s", "2000s", "1990s", "1980s", "1970s", "1960s", "1950s", "1940s"];
-  const lines = columns
-    .map((decade) => {
-      const points = rows
-        .map((row) => {
-          const month = Number(row.Year);
-          const value = numberFrom(row[decade]);
-          return month >= 1 && month <= 12 && value !== null
-            ? { date: months[month - 1], value }
-            : null;
-        })
-        .filter((point): point is Point => Boolean(point));
-      return points.length >= 6 ? { label: decade, points } : null;
-    })
-    .filter((line): line is LineVisual["lines"][number] => Boolean(line));
-  if (lines.length < 2) return null;
-  return { kind: "line", title, subtitle: subtitle || artifact.sourceId, unit, source: sourceFor(artifact), lines };
-}
-
 function warmingStripes(artifact: Artifact, title: string, subtitle: string, unit: string, center?: number): StripeVisual | null {
   const line = lineFor(artifact);
   if (!line || !line.lines[0]) return null;
@@ -2155,13 +2167,15 @@ function attachMeta(visual: VisualSpec, entry: PlanEntry): VisualSpec {
   if (entry.subtitle && "subtitle" in out) out.subtitle = entry.subtitle;
   if (entry.unit && "unit" in out) out.unit = entry.unit;
   if (entry.xTicks?.length && visual.kind === "line") out.xTicks = entry.xTicks;
+  if (entry.categoricalX && visual.kind === "line") (out as LineVisual).categoricalX = true;
+  if (entry.xLabels?.length && visual.kind === "line") (out as LineVisual).xLabels = entry.xLabels;
   if (entry.refLine && visual.kind === "line") out.refLine = entry.refLine;
   if (entry.size) out.size = entry.size;
   if (entry.why || entry.detail || entry.read || entry.watch) out.note = { why: entry.why, detail: entry.detail, read: entry.read, watch: entry.watch };
   return out;
 }
 
-function choroplethVisual(artifact: Artifact, title: string, subtitle: string, unit: string, opts: { rankLabel?: string; bottomLabel?: string; signed?: boolean; ramp?: string; divergeAt?: number } = {}): ChoroplethVisual | null {
+function choroplethVisual(artifact: Artifact, title: string, subtitle: string, unit: string, opts: { rankLabel?: string; bottomLabel?: string; signed?: boolean; ramp?: string; divergeAt?: number; pivotLabel?: string } = {}): ChoroplethVisual | null {
   const a = artifact as Artifact & { regions?: Array<{ name: string; value: number | null; path: string }>; viewBox?: string; min?: number; max?: number };
   if (!a.regions || a.regions.length < 2) return null;
   const values = a.regions.map((r) => r.value).filter((v): v is number => v !== null && v !== undefined);
@@ -2179,7 +2193,8 @@ function choroplethVisual(artifact: Artifact, title: string, subtitle: string, u
     bottomLabel: opts.bottomLabel,
     signed: opts.signed,
     ramp: opts.ramp,
-    divergeAt: opts.divergeAt
+    divergeAt: opts.divergeAt,
+    pivotLabel: opts.pivotLabel
   };
 }
 
@@ -2252,7 +2267,7 @@ function linePanelsVisual(panels: NonNullable<PlanEntry["panels"]>, title: strin
   };
 }
 
-function rankedChangeVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, baselineYears = 10, latestYears = 10, diverging = false): RankedChangeVisual | null {
+function rankedChangeVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, baselineYears = 10, latestYears = 10, diverging = false, labels: { rowLabel?: string; divergeLabel?: string; startLabel?: string; endLabel?: string } = {}): RankedChangeVisual | null {
   const rows = (series || [])
     .map((item) => {
       const artifact = artifactById(item.indicator);
@@ -2284,8 +2299,10 @@ function rankedChangeVisual(series: Array<{ indicator: string; label: string }>,
     subtitle,
     unit,
     source: first ? sourceFor(first) : { sourceId: "open-meteo", sourceIndicatorId: title },
-    startLabel: baselineStart === baselineEnd ? baselineStart : `${baselineStart}-${baselineEnd}`,
-    endLabel: latestStart === latestEnd ? latestStart : `${latestStart}-${latestEnd}`,
+    startLabel: labels.startLabel || (baselineStart === baselineEnd ? baselineStart : `${baselineStart}-${baselineEnd}`),
+    endLabel: labels.endLabel || (latestStart === latestEnd ? latestStart : `${latestStart}-${latestEnd}`),
+    rowLabel: labels.rowLabel,
+    divergeLabel: labels.divergeLabel,
     min,
     max,
     rows
@@ -2345,7 +2362,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "rankedChange") {
-    const visual = rankedChangeVisual(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", 10, 10, Boolean(entry.diverging));
+    const visual = rankedChangeVisual(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.baselineYears ?? 10, entry.latestYears ?? 10, Boolean(entry.diverging), { rowLabel: entry.rowLabel, divergeLabel: entry.divergeLabel, startLabel: entry.startLabel, endLabel: entry.endLabel });
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "latestBars") {
@@ -2368,7 +2385,16 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
   if (!artifact) return null;
   let visual: VisualSpec | null = null;
   switch (entry.chart) {
-    case "line": visual = lineFor(artifact); break;
+    case "line": {
+      let lv = lineFor(artifact);
+      if (lv) {
+        if (entry.fromYear) lv = clipLineFromYear(lv, entry.fromYear);
+        if (entry.subtitle) lv.subtitle = entry.subtitle;
+        if (entry.bands?.length) (lv as LineVisual & { bands?: Array<{ year: number; label?: string }> }).bands = entry.bands;
+      }
+      visual = lv;
+      break;
+    }
     case "pyramid": visual = pyramidVisual(artifact); break;
     case "ageBands": visual = ageBandBars(artifact); break;
     case "ageStructure": visual = ageStructureShares(artifact); break;
@@ -2407,7 +2433,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     case "decadeBars": visual = decadeMeanBars(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "decoupleIndex": visual = decoupleIndexVisual(artifact, entry.columns || [], entry.title || artifact.title, entry.subtitle || ""); break;
     case "stripes": visual = warmingStripes(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
-    case "choropleth": visual = choroplethVisual(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit, { rankLabel: entry.rankLabel, bottomLabel: entry.bottomLabel, signed: entry.signed, ramp: entry.ramp, divergeAt: entry.divergeAt }); break;
+    case "choropleth": visual = choroplethVisual(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit, { rankLabel: entry.rankLabel, bottomLabel: entry.bottomLabel, signed: entry.signed, ramp: entry.ramp, divergeAt: entry.divergeAt, pivotLabel: entry.pivotLabel }); break;
     case "scenarioMaps": visual = scenarioMapsVisual(artifact, entry.title || artifact.title, entry.subtitle || "", entry.unit || artifact.unit); break;
     case "heatDeathCountBars": visual = heatDeathCountBars(artifact, entry.title || artifact.title, entry.subtitle || "Curated sources · rows answer different questions"); break;
     case "deathCertificationFunnelBars": visual = deathCertificationFunnelBars(artifact, entry.title || artifact.title, entry.subtitle || "CRS 2023 death registration + MCCD 2023 medical certification"); break;

@@ -333,16 +333,28 @@ export function pullQuoteForQuestion(page: QuestionPage) {
       line: "The total number shows national scale. The per-person number is the reality check."
     };
   }
-  if (page.id.startsWith("q.energy.")) {
-    return {
-      stat: top ? formatLockedNumber(top) : "The grid",
-      line: "Energy data is not abstract. It is fans, pumps, factories, trains, and the fuel mix behind them."
-    };
+	  if (page.id.startsWith("q.energy.")) {
+	    return {
+	      stat: top ? formatLockedNumber(top) : "The grid",
+	      line: "Energy data is not abstract. It is fans, pumps, factories, trains, and the fuel mix behind them."
+	    };
+	  }
+	  if (page.id === "q.climate.impact") {
+	    return {
+	      stat: "74 warm nights",
+	      line: "In the latest decade, India averaged roughly 74 warm nights a year. The climate shift is now a sleep, work, water and cooling story."
+	    };
+	  }
+	  if (page.id.startsWith("q.climate.") || page.id.startsWith("q.air.")) {
+	    return {
+	      stat: top ? formatLockedNumber(top) : "The atmosphere",
+	      line: "Climate and air numbers become real when you read them beside exposure, people, and time."
+	    };
   }
-  if (page.id.startsWith("q.climate.") || page.id.startsWith("q.air.")) {
+  if (page.id === "q.health.transition") {
     return {
-      stat: top ? formatLockedNumber(top) : "The atmosphere",
-      line: "Climate and air numbers become real when you read them beside exposure, people, and time."
+      stat: "72 years",
+      line: "Indians live far longer than they used to. But the honest answer splits three ways: clearly better on survival, mixed on nutrition and fairness, and worse on chronic disease and the hospital bill."
     };
   }
   return {
@@ -402,6 +414,10 @@ function escapeHtml(value: string) {
 
 export function inlineMarkdownHtml(value: string) {
   return escapeHtml(value)
+    // Tufte sidenote: ^[text] becomes a margin aside (floats into the right gutter
+    // on wide screens, inline note on mobile). Parsed before links so its [..] isn't
+    // mistaken for a link label.
+    .replace(/\^\[([^\]]+)\]/g, (_m, text) => `<sup class="sn-mark"></sup><span class="sidenote">${text}</span>`)
     .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, (_m, text, url) =>
       url.startsWith("/")
         ? `<a href="${url}">${text}</a>`

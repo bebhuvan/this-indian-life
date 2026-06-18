@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "health.nss80.childbirth_by_institution",
+  "title": "Childbirth hospitalisations: costs and C-section share by hospital type",
+  "sourceId": "nss80-health",
+  "sourceIndicatorId": "NSS 80th round Sch 25.0 unit data",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/DDI-IND-NSO-HSCHealth80R-Jan2025-Dec2025",
+  "unit": "mixed (% and Rs.)",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "institution"
+  ],
+  "fetchedAt": "2026-06-10T13:50:20.048883+00:00",
+  "rows": [
+    {
+      "label": "Government hospital",
+      "value": 2359,
+      "institution": "Government hospital",
+      "delivery_share_pct": 63.8,
+      "avg_medical_exp_rs": 2359,
+      "csection_share_pct": 19.1
+    },
+    {
+      "label": "Charitable/NGO hospital",
+      "value": 20550,
+      "institution": "Charitable/NGO hospital",
+      "delivery_share_pct": 1,
+      "avg_medical_exp_rs": 20550,
+      "csection_share_pct": 47.5
+    },
+    {
+      "label": "Private hospital",
+      "value": 40452,
+      "institution": "Private hospital",
+      "delivery_share_pct": 35.2,
+      "avg_medical_exp_rs": 40452,
+      "csection_share_pct": 61.5
+    }
+  ],
+  "metadata": {
+    "source": "NSS 80th round, Household Social Consumption: Health (Jan-Dec 2025), unit-level data, MoSPI",
+    "method": "Indica tabulation of public microdata; weights = mult/100. Childbirth cases (codes 87-89) admitted in last 365 days; C-section = code 88 share of institutional deliveries."
+  }
+}

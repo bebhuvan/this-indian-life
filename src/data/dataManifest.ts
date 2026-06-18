@@ -10,7 +10,7 @@ import { resolve } from "node:path";
 const dataDir = resolve(process.cwd(), "data/series");
 const REPO = "https://github.com/bebhuvan/this-indian-life";
 
-export type DataFileMeta = { file: string; method?: string; sourceUrl?: string };
+export type DataFileMeta = { file: string; method?: string; sourceUrl?: string; redistributable?: boolean };
 
 /** GitHub blob link for a data file, pinned to `ref` (a commit sha, or "main"). */
 export function githubFileUrl(file: string, ref = "main"): string {
@@ -32,7 +32,11 @@ function build(): Map<string, DataFileMeta> {
     if (!iid || map.has(iid)) continue;
     const md = (d.metadata || {}) as Record<string, unknown>;
     const method = typeof md.method === "string" ? md.method : typeof md.note === "string" ? md.note : undefined;
-    map.set(iid, { file, method, sourceUrl: typeof d.sourceUrl === "string" ? d.sourceUrl : undefined });
+    // A series can opt out of the public data-file download link (e.g. IHME/GBD,
+    // whose licence forbids re-hosting the data for third-party download). The chart
+    // and its source-website link still render; only the GitHub data-file link is dropped.
+    const redistributable = md.redistributable === false ? false : true;
+    map.set(iid, { file, method, sourceUrl: typeof d.sourceUrl === "string" ? d.sourceUrl : undefined, redistributable });
   }
   return map;
 }

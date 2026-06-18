@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "health.transition.nfhs.state_spread",
+  "title": "NFHS-6 state spread in health indicators",
+  "sourceId": "nfhs",
+  "sourceIndicatorId": "NFHS-6 state fact-sheet indicators 7, 38, 68, 69, 70, 72, 76, 83",
+  "sourceUrl": "https://rchiips.org/nfhs/factsheet_NFHS-6.shtml",
+  "unit": "percentage-point spread",
+  "geography": {
+    "type": "subnational",
+    "id": "IN-states",
+    "name": "India states and union territories"
+  },
+  "dimensions": [
+    "indicator",
+    "state"
+  ],
+  "fetchedAt": "2026-06-13T14:25:49.288Z",
+  "rows": [
+    {
+      "label": "Stunting",
+      "value": 20.5,
+      "group": "state spread",
+      "lowArea": "Puducherry",
+      "lowValue": 16.6,
+      "highArea": "Dadra & Nagar Haveli and Daman & Diu",
+      "highValue": 37.1,
+      "unit": "percentage points"
+    },
+    {
+      "label": "Wasting",
+      "value": 16.1,
+      "group": "state spread",
+      "lowArea": "Mizoram",
+      "lowValue": 8.1,
+      "highArea": "Dadra & Nagar Haveli and Daman & Diu",
+      "highValue": 24.2,
+      "unit": "percentage points"
+    },
+    {
+      "label": "Underweight",
+      "value": 30.1,
+      "group": "state spread",
+      "lowArea": "Sikkim",
+      "lowValue": 11.2,
+      "highArea": "Dadra & Nagar Haveli and Daman & Diu",
+      "highValue": 41.3,
+      "unit": "percentage points"
+    },
+    {
+      "label": "Adequate diet",
+      "value": 25.2,
+      "group": "state spread",
+      "lowArea": "Gujarat",
+      "lowValue": 7.8,
+      "highArea": "Goa",
+      "highValue": 33,
+      "unit": "percentage points"
+    },
+    {
+      "label": "C-section births",
+      "value": 55.8,
+      "group": "state spread",
+      "lowArea": "Meghalaya",
+      "lowValue": 6.4,
+      "highArea": "Telangana",
+      "highValue": 62.2,
+      "unit": "percentage points"
+    },
+    {
+      "label": "Women overweight",
+      "value": 37.5,
+      "group": "state spread",
+      "lowArea": "Meghalaya",
+      "lowValue": 13.8,
+      "highArea": "Puducherry",
+      "highValue": 51.3,
+      "unit": "percentage points"
+    },
+    {
+      "label": "Men high blood sugar",
+      "value": 29.5,
+      "group": "state spread",
+      "lowArea": "Meghalaya",
+      "lowValue": 6.8,
+      "highArea": "Goa",
+      "highValue": 36.3,
+      "unit": "percentage points"
+    },
+    {
+      "label": "Health insurance",
+      "value": 87.2,
+      "group": "state spread",
+      "lowArea": "Andaman and Nicobar Islands",
+      "lowValue": 9.1,
+      "highArea": "Jammu and Kashmir",
+      "highValue": 96.3,
+      "unit": "percentage points"
+    }
+  ],
+  "metadata": {
+    "method": "For each selected NFHS-6 indicator, subtract the lowest state/UT total value from the highest state/UT total value. Manipur is not included in the local NFHS-6 artifact."
+  }
+}

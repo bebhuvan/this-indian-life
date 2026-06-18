@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "health.transition.wealth_gaps",
+  "title": "Wealth gaps in child health and access",
+  "sourceId": "worldbank",
+  "sourceIndicatorId": "HNP wealth quintile indicators",
+  "sourceUrl": "https://databank.worldbank.org/source/health-nutrition-and-population-statistics-by-wealth-quintile",
+  "unit": "percentage-point gap",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [
+    "indicator",
+    "wealth quintile"
+  ],
+  "fetchedAt": "2026-06-13T13:54:02.520Z",
+  "rows": [
+    {
+      "label": "Stunting",
+      "value": 23.2,
+      "group": "poorest-richest gap",
+      "highValue": 46.1,
+      "lowValue": 22.9,
+      "highLabel": "poorest",
+      "lowLabel": "richest",
+      "latestYear": "2021",
+      "unit": "pp"
+    },
+    {
+      "label": "Wasting",
+      "value": 6.3,
+      "group": "poorest-richest gap",
+      "highValue": 22.5,
+      "lowValue": 16.2,
+      "highLabel": "poorest",
+      "lowLabel": "richest",
+      "latestYear": "2021",
+      "unit": "pp"
+    },
+    {
+      "label": "Money as barrier to care",
+      "value": 29.4,
+      "group": "poorest-richest gap",
+      "highValue": 37.5,
+      "lowValue": 8.1,
+      "highLabel": "poorest",
+      "lowLabel": "richest",
+      "latestYear": "2021",
+      "unit": "pp"
+    },
+    {
+      "label": "Distance as barrier to care",
+      "value": 27,
+      "group": "poorest-richest gap",
+      "highValue": 37.7,
+      "lowValue": 10.7,
+      "highLabel": "poorest",
+      "lowLabel": "richest",
+      "latestYear": "2021",
+      "unit": "pp"
+    },
+    {
+      "label": "Skilled birth attendance",
+      "value": 15.7,
+      "group": "poorest-richest gap",
+      "highValue": 96.9,
+      "lowValue": 81.2,
+      "highLabel": "richest",
+      "lowLabel": "poorest",
+      "latestYear": "2021",
+      "unit": "pp"
+    }
+  ],
+  "metadata": {
+    "method": "Calculated as the latest available World Bank HNP wealth-quintile value for the worse-off quintile minus the better-off quintile, except skilled birth attendance where the rich-minus-poor service gap is shown. Values are percentage-point gaps and come from survey-year data."
+  }
+}

@@ -54,7 +54,10 @@ async function fetchIndicator(indicator) {
         owidVariableId: indicator.variableId,
         group: indicator.group,
         label: indicator.label,
-        chartSlug: gbdDeathChartSlug
+        chartSlug: gbdDeathChartSlug,
+        // IHME GBD licence forbids re-hosting the data for download; show the chart
+        // + source-website link, but no GitHub data-file link (see ArticleEvidence).
+        redistributable: false
       }
     })
   };
