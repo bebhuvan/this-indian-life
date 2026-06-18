@@ -40,7 +40,7 @@ const {
 
 // Coral (domain ink) + near-black lead, then softened, harmonised secondaries so
 // multi-line charts read calm rather than rainbow-loud (riso-ink, bright-but-soft).
-const colors = ["var(--c)", "#0b0b0b", "#3f8378", "#cf9a3f", "#7e6ba6", "#b5765c", "#8c8780"];
+const colors = ["var(--c)", "#322e29", "#3f8378", "#cf9a3f", "#7e6ba6", "#b5765c", "#8c8780"];
 const WATERMARK_TEXT = "thisindianlife.today";
 const sourceNames: Record<string, string> = {
   worldbank: "World Bank",
@@ -1891,7 +1891,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 </div>
               ))}
             </div>
-            <div class="viz-legend"><span><i style="background:var(--c)"></i>Male</span><span><i style="background:#0b0b0b"></i>Female</span></div>
+            <div class="viz-legend"><span><i style="background:var(--c)"></i>Male</span><span><i style="background:#322e29"></i>Female</span></div>
             <div class="chart-note">
               <p class="cn-take serif">{note.takeaway}</p>
               {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
