@@ -3,7 +3,7 @@ import { createTableArtifact, writeSeriesArtifact, writeSourceManifest } from ".
 
 const fetchedAt = new Date().toISOString();
 const nfhs = JSON.parse(await readFile("data/nfhs6/nfhs6_clean.json", "utf8"));
-const nfhsSourceUrl = "https://rchiips.org/nfhs/factsheet_NFHS-6.shtml";
+const nfhsSourceUrl = "https://www.nfhsiips.in/nfhsuser/index.php";
 
 const stateAreas = Object.entries(nfhs.areas).filter(([area]) => area !== "India");
 

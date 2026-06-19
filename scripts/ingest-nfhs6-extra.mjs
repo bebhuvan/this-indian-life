@@ -4,7 +4,7 @@
 import { writeFile } from "node:fs/promises";
 import { createSeriesArtifact, stableJson } from "./core/artifacts.mjs";
 
-const SRC = "https://rchiips.org/nfhs/factsheet_NFHS-6.shtml";
+const SRC = "https://www.nfhsiips.in/nfhsuser/index.php";
 const FETCHED_AT = new Date().toISOString();
 
 // slug, title, factsheet indicator no, nfhs5, nfhs6, unit
