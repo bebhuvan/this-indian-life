@@ -61,6 +61,11 @@ const sourceNames: Record<string, string> = {
   "open-meteo": "Open-Meteo",
   "world-context": "World Bank + Our World in Data",
   trai: "TRAI",
+  dnr: "Reuters Institute · Digital News Report",
+  iamai: "IAMAI-Kantar ICUBE",
+  ficciey: "FICCI-EY",
+  prgi: "PRGI · Press in India",
+  mospi: "MoSPI",
   "rbi-sibc": "RBI",
   ceew: "CEEW",
   imd: "IMD",
@@ -326,6 +331,10 @@ function sourceName(sourceId: string) {
 
 function sourceLabel(source: VisualSpec["source"]) {
   const id = String(source.sourceIndicatorId || "");
+  // The media/news article's internal indicator ids (e.g. "media.news.iamai_news_users_2024")
+  // are not reader-facing; the chart subtitle carries the dataset detail, so show only the
+  // clean source name. Scoped to "media." ids so other articles are unaffected.
+  if (/^media\./.test(id) || id === "broadband_subscribers_total") return sourceName(source.sourceId);
   if (source.sourceId === "ppac") {
     if (id === "international-prices-crude-oil.indian-basket.$-per-bbl") return "PPAC · Indian crude basket price · $/bbl";
     if (id.startsWith("import-export:2025-2026:reportBy:1")) return "PPAC · Import/export of crude oil and petroleum products, quantity · 2025-26";

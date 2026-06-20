@@ -6790,6 +6790,205 @@ export const v1Questions = [
     ]
   },
 
+
+  {
+    id: "q.media.news_consumption",
+    slug: "how-india-consumes-news",
+    question: "How does India consume news?",
+    priority: "core",
+    // Blended across SIX independent sources, built on a "two Indias" spine. The Reuters Digital
+    // News Report is the survey everyone quotes, but it samples only English-speaking, online users
+    // and says so itself. The honest article puts that surveyed slice next to the India it under-
+    // counts: TRAI/MoSPI/IAMAI on who is actually online (rural>urban, a sharp gender divide),
+    // PRGI on the Hindi-vs-English print reality, and FICCI-EY on where the money went (digital
+    // overtook TV in 2024). Stance: confident about what each source measures, scrupulous about the
+    // gap between the surveyed slice and the 1.4bn. The gap IS the story; never present the DNR slice
+    // as "India".
+    indicators: ["media.news.dnr_trust"],
+    core: [
+      "media.news.dnr_trust",
+      "media.news.dnr_source_tv",
+      "media.news.dnr_source_print",
+      "media.news.dnr_platform_youtube",
+      "media.news.dnr_platform_whatsapp",
+      "society.trai.broadband_subscribers_total",
+      "media.access.mospi_internet_use_gender",
+      "media.news.iamai_news_users_2024",
+      "media.industry.ficci_digital",
+      "media.industry.ficci_television",
+      "media.news.dnr_brand_trust_2026"
+    ],
+    context: [
+      "media.news.dnr_source_online",
+      "media.news.dnr_source_social",
+      "media.news.dnr_platform_instagram",
+      "media.news.dnr_platform_facebook",
+      "media.news.dnr_platform_telegram",
+      "media.news.dnr_smartphone",
+      "media.access.trai_penetration",
+      "media.access.trai_data_gb",
+      "media.access.iamai_aiu",
+      "media.access.iamai_aiu_split_2024",
+      "media.access.mospi_hh_internet",
+      "media.industry.ficci_print",
+      "media.industry.ficci_film",
+      "media.industry.ficci_radio",
+      "media.print.registered_by_language",
+      "media.print.circulation_by_language",
+      "media.print.circ_total",
+      "media.print.circ_hindi",
+      "media.print.circ_english",
+      "media.news.social_media_hours",
+      "media.news.online_news_audience",
+      "media.print.ad_revenue",
+      "media.print.circulation_revenue"
+    ],
+    visualPlan: [
+      // ACT 1 - The survey everyone quotes (the online-English slice)
+      { chart: "line", indicator: "media.news.dnr_trust", size: "hero", beat: "survey", window: "full", unit: "% who trust most news most of the time",
+        subtitle: "Reuters Institute Digital News Report · India · surveyed online, English-speaking users · 2021-2026",
+        title: "Do Indians trust the news?",
+        why: "The single most-quoted number about Indian news, and the one that needs the most context.",
+        read: "Each point is the share of surveyed online Indians who say they trust most news most of the time. It wobbles between 38% and 43% and sits at 39% in 2026, just above the global average.",
+        watch: "This is not 'India'. The DNR samples mainly English-speaking, online users, who are younger, richer and more urban than the country as a whole." },
+      { chart: "multiLine", indicator: "media.news.dnr_platform_youtube", size: "feature", beat: "survey", unit: "% using each platform for news",
+        subtitle: "Reuters DNR · India · platforms used for news in the last week · surveyed online users",
+        title: "How the connected slice gets its news",
+        series: [
+          { indicator: "media.news.dnr_platform_youtube", label: "YouTube" },
+          { indicator: "media.news.dnr_platform_whatsapp", label: "WhatsApp" },
+          { indicator: "media.news.dnr_platform_instagram", label: "Instagram" },
+          { indicator: "media.news.dnr_platform_facebook", label: "Facebook" }
+        ],
+        why: "Among the online slice, news now arrives through video and chat apps, not front pages.",
+        read: "Each line is the share using that platform for news. YouTube leads near 58%, WhatsApp jumps to 56% in 2026, Instagram is rising fast.",
+        watch: "These are platforms used for news, not trusted for it; WhatsApp was also named the biggest source of false information." },
+
+      // ACT 2 - But who got counted? (who is actually online)
+      { chart: "line", indicator: "society.trai.broadband_subscribers_total", size: "feature", beat: "who-online", window: "full", unit: "broadband subscribers (million)",
+        subtitle: "TRAI monthly Telecom Subscription reports · total broadband subscribers · 2008-2026",
+        title: "The India that came online",
+        why: "Before asking how India consumes digital news, see how recently and how fast it got online at all.",
+        read: "Each point is total broadband subscriptions. The line is almost flat until about 2016, then explodes past a billion as cheap 4G data arrives.",
+        watch: "These are subscriptions, not people; one person can hold several, so this overstates unique users." },
+      { chart: "tableBars", indicator: "media.access.mospi_internet_use_gender", size: "feature", beat: "who-online", unit: "% of persons 15+ able to use the internet",
+        subtitle: "MoSPI · NSS Comprehensive Modular Survey: Telecom 2025 · nationally representative",
+        title: "Who can actually use the internet",
+        why: "The official, nationally-representative survey shows the divide the online polls cannot see.",
+        read: "Each bar is the share of people who can use the internet. Urban men lead at 86%; rural women trail at 58%, a near-28-point gap.",
+        watch: "'Able to use' is self-reported capability, not daily use; the gap in actual news-seeking is likely wider still." },
+      { chart: "tableBars", indicator: "media.access.trai_penetration", size: "small", beat: "who-online", unit: "internet subscribers per 100 people",
+        subtitle: "TRAI · internet subscribers per 100 population · end-March 2025",
+        title: "Town and country, online",
+        why: "The connectivity gap between urban and rural India in one ratio.",
+        read: "Urban India has about 111 internet subscriptions per 100 people; rural India has 45. The all-India figure of 69 hides that split.",
+        watch: "Subscriptions can exceed population in cities because of multiple SIMs and work connections; this is supply, not unique users." },
+
+      // ACT 3 - What the connected slice actually does
+      { chart: "multiLine", indicator: "media.news.dnr_source_tv", size: "feature", beat: "what-they-do", unit: "% using each source weekly",
+        subtitle: "Reuters DNR · India · weekly use of TV and print for news · surveyed online users",
+        title: "Even online, TV and print are fading",
+        series: [
+          { indicator: "media.news.dnr_source_tv", label: "Television" },
+          { indicator: "media.news.dnr_source_print", label: "Print" }
+        ],
+        why: "Within the same surveyed slice, the old formats are losing weekly reach year on year.",
+        read: "Both lines slope down: weekly TV use falls from 59% to 44%, print from 50% to 35%, between 2021 and 2026.",
+        watch: "This is decline among online users only; nationally, TV and print reach is far higher and falling more slowly." },
+      { chart: "latestBars", indicator: "media.news.dnr_platform_youtube", size: "feature", beat: "what-they-do", unit: "% using each platform for news (2026)",
+        subtitle: "Reuters DNR · India · share using each platform for news in 2026 · surveyed online users",
+        title: "The 2026 pecking order for news",
+        series: [
+          { indicator: "media.news.dnr_platform_youtube", label: "YouTube" },
+          { indicator: "media.news.dnr_platform_whatsapp", label: "WhatsApp" },
+          { indicator: "media.news.dnr_platform_instagram", label: "Instagram" },
+          { indicator: "media.news.dnr_platform_facebook", label: "Facebook" },
+          { indicator: "media.news.dnr_platform_telegram", label: "Telegram" }
+        ],
+        why: "A snapshot of where the online slice turned for news in the latest year.",
+        read: "Each bar is the 2026 share using that platform for news. YouTube (58%) and WhatsApp (56%) lead; WhatsApp rose 10 points in a single year.",
+        watch: "Closed and video platforms are hard to fact-check and easy to forward, which is why misinformation worries track them." },
+      { chart: "line", indicator: "media.news.dnr_smartphone", size: "small", beat: "what-they-do", window: "full", unit: "% using a smartphone for news",
+        subtitle: "Reuters DNR · India · smartphone as a source for news · surveyed online users",
+        title: "A phone-first newsroom",
+        why: "For the online slice, the news device is overwhelmingly the phone.",
+        read: "Around three in four surveyed users reach news on a smartphone, far ahead of computers.",
+        watch: "Among online users only; but it mirrors the wider fact that India came online on mobile, not desktop." },
+      { chart: "line", indicator: "media.news.social_media_hours", size: "small", beat: "what-they-do", window: "full", unit: "billion hours per quarter",
+        subtitle: "FICCI-EY Media & Entertainment report · time Indians spend on social media, per quarter",
+        title: "The attention is moving to the feed",
+        why: "News is competing for attention inside apps where time spent keeps climbing.",
+        read: "Quarterly hours on social media rose from about 103 billion in early 2022 to about 173 billion by late 2025.",
+        watch: "This is total social-media time, not news time; news is a sliver of it, increasingly delivered inside the same feeds." },
+      { chart: "line", indicator: "media.news.online_news_audience", size: "feature", beat: "what-they-do", window: "full", unit: "online news audience (million)",
+        subtitle: "Comscore (December each year), via FICCI-EY · reach of online news platforms in India",
+        title: "AI just started eating the news audience",
+        why: "For the first time, the online news audience shrank, and the industry blames AI.",
+        read: "The reach of online news platforms rose to about 461 million in 2024, then fell about 9% to 428 million in 2025. Industry stakeholders blame AI search summaries and AI apps answering questions without sending readers on; some say their own reach fell over 30%.",
+        watch: "This is platform reach measured by Comscore, a different lens from survey self-reports; online news still reaches roughly 29% of Indians, so the medium is large even as it dips." },
+
+      // ACT 4 - The India the survey under-counts
+      { chart: "multiLine", indicator: "media.print.circ_total", size: "feature", beat: "undercounted", unit: "claimed circulation (million copies/day)",
+        subtitle: "CSO/MoSPI (2008-2014) + PRGI Press in India (2018-2024) · claimed circulation · gap years not shown",
+        title: "India's print boom, and its recent slip",
+        series: [
+          { indicator: "media.print.circ_total", label: "All languages" },
+          { indicator: "media.print.circ_hindi", label: "Hindi" },
+          { indicator: "media.print.circ_english", label: "English" }
+        ],
+        why: "While Western newspapers were collapsing, Indian print circulation roughly doubled through the 2010s, led by Hindi, and has only recently begun to slip.",
+        read: "Each line is claimed daily circulation. Total copies rose from about 258m (2008) to a peak near 450m in the mid-2010s, then eased to about 379m by 2023-24. English was always a small slice and is now shrinking.",
+        watch: "Claimed circulation is self-declared and unaudited, and depends on how many publishers filed that year; read the broad arc, not single-year values. Early years are CSO/MoSPI, later years PRGI; some years are not plotted." },
+      { chart: "tableBars", indicator: "media.print.circulation_by_language", size: "feature", beat: "undercounted", unit: "claimed circulation (million copies/day)",
+        subtitle: "PRGI · Press in India 2023-24 · self-declared circulation by language",
+        title: "The news India actually reads on paper",
+        why: "The English-online survey misses the language in which most Indians read the news.",
+        read: "Each bar is claimed daily circulation by language. Hindi (187m) and the regional languages dwarf English (40m).",
+        watch: "Circulation here is self-declared by publishers and not verified by PRGI; treat it as indicative and likely inflated." },
+      { chart: "tableBars", indicator: "media.print.registered_by_language", size: "small", beat: "undercounted", unit: "registered periodicals",
+        subtitle: "PRGI · Press in India 2023-24 · registered periodicals by language",
+        title: "...and the titles behind it",
+        why: "The sheer number of vernacular titles shows where the news ecosystem really lives.",
+        read: "Hindi has about 58,600 registered periodicals and English about 20,200; regional languages add tens of thousands more.",
+        watch: "'Registered' is a cumulative stock; only about a quarter of registered titles actually filed a return this year." },
+      { chart: "tableBars", indicator: "media.news.iamai_news_users_2024", size: "feature", beat: "undercounted", unit: "internet users (million)",
+        subtitle: "IAMAI-Kantar ICUBE 2024 · online news users among 886m active internet users",
+        title: "Seeing news vs seeking news",
+        why: "Even among those online, deliberately reading news is far rarer than bumping into it.",
+        read: "About 582m internet users encounter news online (in forwards, feeds, videos), but only 180m consciously seek it out.",
+        watch: "'Encounter' includes passive exposure via WhatsApp forwards and YouTube; it is not the same as following the news." },
+      { chart: "tableBars", indicator: "media.access.iamai_aiu_split_2024", size: "small", beat: "undercounted", unit: "active internet users (million)",
+        subtitle: "IAMAI-Kantar ICUBE 2024 · active internet users by area",
+        title: "The internet's centre of gravity moved to the village",
+        why: "The online India of 2024 is more rural than the English-online survey implies.",
+        read: "Rural India now has more active internet users (488m) than urban India (397m).",
+        watch: "Rural users skew toward video and Indic-language content and are largely invisible to an English online panel." },
+
+      // ACT 5 - Follow the money
+      { chart: "multiLine", indicator: "media.industry.ficci_digital", size: "hero", beat: "money", unit: "industry revenue (INR billion)",
+        subtitle: "FICCI-EY Media & Entertainment report · segment revenue · 2022-2025",
+        title: "The year digital overtook television",
+        series: [
+          { indicator: "media.industry.ficci_digital", label: "Digital" },
+          { indicator: "media.industry.ficci_television", label: "Television" },
+          { indicator: "media.industry.ficci_print", label: "Print" },
+          { indicator: "media.industry.ficci_film", label: "Film" },
+          { indicator: "media.industry.ficci_radio", label: "Radio" }
+        ],
+        why: "Audiences and advertisers move together; the money confirms where attention went.",
+        read: "Digital revenue crossed television in 2024 and kept climbing past a trillion rupees; TV is sliding, print is flat, radio is tiny.",
+        watch: "This is industry revenue, not audience reach; TV and print still reach far more people than their shrinking revenue suggests." },
+
+      // ACT 6 - Who Indians trust + the honesty close
+      { chart: "tableBars", indicator: "media.news.dnr_brand_trust_2026", size: "feature", beat: "trust", unit: "% who trust the brand (2026)",
+        subtitle: "Reuters DNR · India · trust in individual news brands · surveyed online users",
+        title: "Which brands the online slice trusts",
+        why: "When you ask about specific brands, public broadcasters and old print mastheads come out on top.",
+        read: "Legacy newspapers and public broadcasters (Times of India, All India Radio, DD India, BBC) score highest; partisan TV and critical digital-born outlets score lower.",
+        watch: "Low scores can mean a brand is distrusted OR is critical of power and actively disliked by some; this is not a quality ranking." }
+    ]
+  },
+
 ];
 
 export const worldBankIndicators = [

@@ -85,12 +85,15 @@ export type ExplanationArtifact = {
   chartExplainers?: Array<{
     visualId: string;
     title: string;
+    takeaway?: string;
+    detail?: string;
     whyShowThis: string;
     howToRead: string;
     mistakeToAvoid: string;
     mobileNote: string;
   }>;
-  sourceNotes: string[];
+  sourceNotes: Array<string | { label: string; url?: string }>;
+  furtherReading?: Array<string | { label: string; url?: string }>;
   caveats: string[];
   lockedNumbersUsed: string[];
   qualityFlags: string[];
@@ -193,6 +196,10 @@ export const questionPages: QuestionPage[] = v1Questions
   .map((item) => {
     const explanation = readExplanation(item.id);
     if (!explanation) return null;
+    // Curated "Further reading" lives on the question in the registry so it is
+    // durable: it survives explanation regeneration (the generator does not emit it).
+    // The registry value wins over anything in the generated explanation.
+    if (item.furtherReading) explanation.furtherReading = item.furtherReading;
     return {
       id: item.id,
       slug: item.slug ?? slugify(item.question),
@@ -357,9 +364,13 @@ export function pullQuoteForQuestion(page: QuestionPage) {
       line: "Indians live far longer than they used to. But the honest answer splits three ways: clearly better on survival, mixed on nutrition and fairness, and worse on chronic disease and the hospital bill."
     };
   }
+  // Last resort: rather than a generic aphorism, lead with the article's own
+  // first-chart takeaway (always specific to this page) and only fall back to the
+  // boilerplate line if, somehow, no chart takeaway exists.
+  const leadTakeaway = page.explanation.chartExplainers?.find((c) => c && c.takeaway)?.takeaway;
   return {
     stat: top ? formatLockedNumber(top) : "The number",
-    line: "The first number is only the entry point. The shape of the data is where the answer begins."
+    line: leadTakeaway || "The first number is only the entry point. The shape of the data is where the answer begins."
   };
 }
 
@@ -474,15 +485,25 @@ function annotateParaHtml(rawText: string, glossary: GlossaryBlock[], seen: Set<
     const re = new RegExp(`(^|[^\\w])(${escapeRegExp(token)})(?=[^\\w]|$)`, "i");
     const segs = html.split(/(<[^>]+>)/);
     let inAnchor = false;
+    let inDef = false; // inside an already-wrapped glossary term (incl. its popover)
+    let defDepth = 0; // span nesting depth once inside a defterm
     let matched = false;
     for (let i = 0; i < segs.length && !matched; i += 1) {
       const s = segs[i];
       if (s.startsWith("<")) {
         if (/^<a\b/i.test(s)) inAnchor = true;
         else if (/^<\/a/i.test(s)) inAnchor = false;
+        if (inDef) {
+          if (/^<span\b/i.test(s)) defDepth += 1;
+          else if (/^<\/span/i.test(s)) { defDepth -= 1; if (defDepth <= 0) inDef = false; }
+        } else if (/^<span class="defterm"/i.test(s)) {
+          inDef = true;
+          defDepth = 1;
+        }
         continue;
       }
-      if (inAnchor || !re.test(s)) continue;
+      // Never annotate inside a link or inside an existing glossary popover (avoids nested tooltips).
+      if (inAnchor || inDef || !re.test(s)) continue;
       matched = true;
       if (keyTerms.has(g.term)) {
         boxes.push(g); // key term → inline box below; leave the word in place
