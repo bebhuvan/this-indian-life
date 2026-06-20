@@ -268,6 +268,9 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .foot-brand{font-family:var(--serif);font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
 .foot-note{font-size:.72rem;color:var(--dim);margin-top:10px;max-width:64ch;line-height:1.6}
+.foot-sister{font-size:.72rem;color:var(--dim);margin-top:14px;max-width:64ch;line-height:1.6}
+.foot-sister a{color:var(--mid);text-decoration:none;border-bottom:1px solid var(--ghost);padding-bottom:1px;transition:color .2s,border-color .2s}
+.foot-sister a:hover{color:var(--ink);border-color:var(--ink)}
 .foot-pal{display:flex;gap:6px;margin-top:14px}
 .foot-pal i{width:22px;height:5px;display:block}
 .foot-links{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font-size:.74rem}
@@ -684,6 +687,10 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .spark-d{font-style:normal;font-size:.72rem;font-weight:600;font-variant-numeric:lining-nums tabular-nums}
 .spark-d.pos{color:#e95a4f}
 .spark-d.neg{color:#5b8bd0}
+.spark-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:2px 0 8px;font-family:var(--sans);font-size:.84rem;color:var(--mid)}
+.spark-leg{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.spark-leg i{width:13px;height:3px;border-radius:2px;display:inline-block}
+.spark-head .spark-nums{font-size:.72rem;color:var(--dim);font-weight:500;white-space:normal;text-align:right}
 @media(max-width:560px){.spark-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px 20px}.spark-svg{height:54px}.spark-d{font-size:.66rem}}
 /* Diverging change bars (warming amount from a true zero) */
 .ranked-diverge{display:grid;gap:9px;margin:12px 0 4px}
@@ -1013,6 +1020,12 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 
 .about-lead{font-size:1.05rem;margin-bottom:30px;max-width:60ch}
 .project-links{display:flex;flex-wrap:wrap;gap:14px 28px}
+/* Install page — ordered steps + one-click CTA. The global reset strips list
+   padding, so restore indentation and markers here. */
+.about .prose ol{list-style:decimal;margin:.2em 0 0 1.3em;padding:0;display:grid;gap:.55rem}
+.about .prose ol li{padding-left:.2em}
+.install-cta{margin-top:22px}
+.install-note{margin-top:14px;font-size:1rem;max-width:60ch}
 .project-links a{font-size:1.02rem;letter-spacing:.01em;padding-bottom:3px}
 
 .about-contact{background:var(--paper);border-color:var(--line)}
@@ -1097,31 +1110,6 @@ html{overscroll-behavior-y:none}
   }
 }
 
-/* Install banner — a quiet dark card that slides up from the bottom. */
-.pwa-install{
-  position:fixed;z-index:80;
-  left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));
-  bottom:calc(14px + env(safe-area-inset-bottom));
-  max-width:480px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  background:#0b0b0b;color:#fff;border-radius:14px;padding:14px 15px;
-  box-shadow:0 14px 44px rgba(0,0,0,.24);
-  transform:translateY(150%);opacity:0;
-  transition:transform .42s var(--ease),opacity .42s var(--ease)}
-.pwa-install.is-in{transform:none;opacity:1}
-.pwa-install-tx{display:flex;flex-direction:column;gap:3px;min-width:0}
-.pwa-install-tx b{font-family:var(--serif);font-weight:500;font-size:1.08rem;line-height:1.1}
-.pwa-install-tx span{font-family:var(--sans);font-size:.78rem;line-height:1.4;color:#bdbdbd}
-.pwa-install-tx em{font-style:normal;color:#fff}
-.pwa-install-ax{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.pwa-install button{font-family:var(--sans);cursor:pointer;border:none;border-radius:9px;
-  font-size:.79rem;letter-spacing:.01em;padding:10px 15px;transition:.18s}
-.pwa-install [data-act=add]{background:#fff;color:#0b0b0b;font-weight:500}
-.pwa-install [data-act=add]:hover{background:#ededed}
-.pwa-install [data-act=no]{background:none;color:#9a9a9a;padding:10px 8px}
-.pwa-install [data-act=no]:hover{color:#d8d8d8}
-.pwa-install.is-ios>button{font-size:1rem;line-height:1;padding:6px 8px;color:#9a9a9a}
-
 /* Update toast — a centred pill prompting a refresh onto the new version. */
 .pwa-toast{
   position:fixed;z-index:90;left:50%;
@@ -1137,8 +1125,8 @@ html{overscroll-behavior-y:none}
   border:none;border-radius:20px;padding:8px 16px;font-size:.78rem;font-weight:500}
 
 @media(prefers-reduced-motion:reduce){
-  .pwa-install,.pwa-toast{transition:opacity .2s linear;transform:none}
-  .pwa-install:not(.is-in),.pwa-toast:not(.is-in){opacity:0;pointer-events:none}
+  .pwa-toast{transition:opacity .2s linear;transform:none}
+  .pwa-toast:not(.is-in){opacity:0;pointer-events:none}
 }
 
 /* ---------- INLINE GLOSSARY · definition terms + boxes ----------
