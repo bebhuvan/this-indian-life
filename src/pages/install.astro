@@ -1,0 +1,85 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const locale = "en";
+---
+
+<Base
+  title="Install the app · This Indian Life"
+  description="Install This Indian Life as an app on your phone or computer — for a cleaner, full-screen read that also works offline. Step-by-step instructions for Android, iPhone, and desktop."
+>
+  <div class="wrap about">
+    <Nav locale={locale} />
+
+    <header class="domain-head">
+      <span class="lbl">Install the app</span>
+      <h1 class="serif">Keep This Indian Life one tap away.</h1>
+      <p class="muted">
+        This site can be installed as an app — a clean, full-screen version with no browser
+        clutter, that also keeps the pages you've visited readable offline. It's the same
+        site, just nicer to live with. Nothing to download from a store, and no notifications.
+      </p>
+    </header>
+
+    <section class="section">
+      <p class="sec-hd">The quick way</p>
+      <div class="prose">
+        <p>If your browser supports one-click install, the button below will appear. If it
+        doesn't show up, your browser just does it a little differently — the per-device
+        steps further down cover every case.</p>
+      </div>
+      <div class="install-cta">
+        <button class="btn dom-people" id="pwa-install-btn" type="button" hidden>Install the app</button>
+        <p class="muted install-note" id="pwa-install-note"></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">On Android (Chrome)</p>
+      <div class="prose">
+        <ol>
+          <li>Tap the <strong>⋮</strong> menu in the top-right of Chrome.</li>
+          <li>Choose <strong>Add to Home screen</strong> (sometimes shown as <em>Install app</em>).</li>
+          <li>Confirm, and the icon lands on your home screen like any other app.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">On iPhone & iPad (Safari)</p>
+      <div class="prose">
+        <ol>
+          <li>Tap the <strong>Share</strong> button (the square with an upward arrow) at the bottom of Safari.</li>
+          <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
+          <li>Tap <strong>Add</strong> in the top-right. Done.</li>
+        </ol>
+        <p class="muted">iPhones only allow this from Safari, not Chrome or other browsers.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">On a computer (Chrome, Edge, Brave)</p>
+      <div class="prose">
+        <ol>
+          <li>Look for the small <strong>install icon</strong> on the right edge of the address bar (a monitor with a downward arrow).</li>
+          <li>Click it, then click <strong>Install</strong>.</li>
+          <li>The site opens in its own window and shows up alongside your other apps.</li>
+        </ol>
+        <p class="muted">No install icon? Open the browser menu and look for <em>Install This Indian Life…</em>. Firefox and Safari on desktop don't support installing web apps.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="sec-hd">Why bother</p>
+      <div class="prose">
+        <p>Honestly? You don't have to. The website works perfectly in a normal tab and always
+        will. Installing just gives you a faster, full-screen, distraction-free version that
+        survives a patchy connection — handy if you read on the move. That's the whole pitch.</p>
+      </div>
+    </section>
+
+    <Footer locale={locale} />
+  </div>
+</Base>
