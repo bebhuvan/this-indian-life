@@ -10,12 +10,14 @@
   /* surface + neutrals */
   --bg:#ffffff; --ink:#0b0b0b; --mid:#5c5c5c; --dim:#737373;
   --ghost:#e7e7e7; --line:#ededed; --paper:#fafafa;
-  /* domain inks — bright but soft, one family (used for dots, bars, big numbers, charts) */
-  --people:#DB5C97; --economy:#3A5BD0; --energy:#EFA227;
-  --climate:#EE6A4C; --health:#15A382; --society:#7C5AD6; --slate:#b7b7bf;
+  /* domain inks — deep jewel tones, one family (used for dots, bars, big numbers, charts).
+     Refined 2026: deepened + slightly desaturated from the original candy-bright set
+     for a more sophisticated, editorial feel — still colourful, just grown-up. */
+  --people:#C44B7B; --economy:#3349A8; --energy:#C9831A;
+  --climate:#D6573A; --health:#12876B; --society:#6A47BE; --slate:#b7b7bf;
   /* darker text-safe variants — same hue, ≥4.5:1 on white, used only for small colored TEXT */
-  --people-ink:#B23A6E; --economy-ink:#2E49A8; --energy-ink:#9A6700;
-  --climate-ink:#C2492F; --health-ink:#0E7C63; --society-ink:#5E3FB0;
+  --people-ink:#A8356A; --economy-ink:#2A4299; --energy-ink:#8F6000;
+  --climate-ink:#B8442B; --health-ink:#0C745C; --society-ink:#573BA6;
   --c:var(--ink);                 /* active domain ink (set per page/element) */
   --c-ink:var(--ink);             /* text-safe active ink (set per page/element) */
   --c-tint:rgba(11,11,11,.08);
@@ -48,14 +50,14 @@
 }
 
 /* domain helpers: set --c on a container */
-.dom-people{--c:var(--people);--c-ink:var(--people-ink);--c-tint:rgba(219,92,151,.10)}
-.dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(58,91,208,.10)}
+.dom-people{--c:var(--people);--c-ink:var(--people-ink);--c-tint:rgba(196,75,123,.10)}
+.dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(51,73,168,.10)}
 /* per-article gold theme (q.econ.gold) — overrides the economy blue for this one piece */
 .theme-gold{--c:#C8941A;--c-ink:#9A6B00;--c-tint:rgba(200,148,26,.14)}
-.dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(239,162,39,.14)}
-.dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(238,106,76,.12)}
-.dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(21,163,130,.10)}
-.dom-society{--c:var(--society);--c-ink:var(--society-ink);--c-tint:rgba(124,90,214,.10)}
+.dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(201,131,26,.14)}
+.dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(214,87,58,.12)}
+.dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(18,135,107,.10)}
+.dom-society{--c:var(--society);--c-ink:var(--society-ink);--c-tint:rgba(106,71,190,.10)}
 
 /* ---------- BASE ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -142,7 +144,7 @@ a{color:inherit}
 .li+.li{padding-left:42px}
 .li:not(:last-child)::after{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;background:var(--ghost)}
 @media(max-width:880px){.li:nth-child(2n)::after{display:none}.li+.li{padding-left:0}.li:nth-child(odd){padding-right:0}.li{padding-left:0!important}}
-.li-n{font-family:var(--serif);font-weight:300;font-size:var(--t-fig);letter-spacing:-.03em;line-height:1;color:var(--c);display:block;font-variant-numeric:lining-nums tabular-nums}
+.li-n{font-family:var(--serif);font-weight:300;font-size:var(--t-fig);letter-spacing:-.03em;line-height:1;color:var(--c);display:block;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;text-wrap:nowrap}
 .li-n .u{font-size:.34em;color:var(--dim);letter-spacing:0;margin-left:3px}
 .li-lbl{font-size:.6rem;letter-spacing:.17em;text-transform:uppercase;font-weight:500;color:var(--dim);margin:9px 0 18px;display:flex;align-items:center;gap:8px}
 .li-lbl .tk{width:8px;height:8px;border-radius:50%;background:var(--c)}

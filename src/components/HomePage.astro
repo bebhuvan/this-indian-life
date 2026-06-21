@@ -40,7 +40,14 @@ const ledger = charts
         ? GDP_IMF_LATEST
         : latestObservation(loadSeries(chart.seriesPath))!;
     const article = findArticle(chart);
-    return { chart, latest, href: article ? questionUrl(article, locale) : `/articles/` };
+    // Split the formatted value into its leading number and a trailing unit word
+    // ("72.2 years" → "72.2" + "years") so the unit renders small via .li-n .u and
+    // every ledger figure stays on one line instead of wrapping unevenly.
+    const formatted = formatValue(latest.value, chart.valueFormat);
+    const sp = formatted.indexOf(" ");
+    const num = sp < 0 ? formatted : formatted.slice(0, sp);
+    const unit = sp < 0 ? "" : formatted.slice(sp + 1);
+    return { chart, latest, num, unit, href: article ? questionUrl(article, locale) : `/articles/` };
   });
 ---
 
@@ -62,16 +69,16 @@ const ledger = charts
       </div>
       <h1 class="serif home-title">India isn't one country. It's many, wearing a single name.</h1>
       <p class="muted home-dek">
-        Big questions about how Indians actually live — answered from sourced numbers, in plain language.
+        Big questions about how Indians actually live, answered from sourced numbers, in plain language.
       </p>
       <a class="btn dom-people" href="/ask/">Ask a question</a>
     </section>
 
     <section class="section" style="border-bottom:1px solid var(--ghost)">
       <div class="ledger-grid">
-        {ledger.map(({ chart, latest, href }) => (
+        {ledger.map(({ chart, num, unit, href }) => (
           <a class={`li dom-${chart.domain} ledger-link`} href={href}>
-            <span class="li-n">{formatValue(latest.value, chart.valueFormat)}</span>
+            <span class="li-n">{num}{unit && <span class="u">{unit}</span>}</span>
             <p class="li-lbl"><span class="tk"></span>{chart.shortTitle}</p>
             <p class="li-cut">{chart.bottomLine}</p>
           </a>
