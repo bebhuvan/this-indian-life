@@ -132,6 +132,25 @@ export type ScatterVisual = {
     meta?: Record<string, number | string | null>;
   }>;
 };
+// Generic x/y scatter built from a table artifact (rows of {label, x, y, highlight}).
+// Unlike ScatterVisual (bespoke to the heat-vulnerability chart), this carries its own
+// axis ranges/labels and a highlight flag, so any two indicators can be plotted.
+export type ScatterXYVisual = {
+  kind: "scatterXY";
+  title: string;
+  subtitle: string;
+  unit: string;
+  source: VisualSource;
+  xLabel: string;
+  yLabel: string;
+  xMin: number;
+  xMax: number;
+  yMin: number;
+  yMax: number;
+  refX?: { value: number; label: string };
+  refY?: { value: number; label: string };
+  points: Array<{ label: string; x: number; y: number; highlight: boolean }>;
+};
 // Two (or more) 100%-stacked share strips in one block, sharing a legend — for a
 // "then vs now" composition comparison (e.g. the CPI basket in 2012 vs 2024).
 export type StripPairVisual = {
@@ -167,6 +186,26 @@ export type SparkGridVisual = {
   max: number;
   cells: Array<{ label: string; points: Array<{ date: string; value: number }>; latest: number | null; change?: number }>;
 };
+export type StartingGridVisual = {
+  kind: "startingGrid";
+  title: string;
+  subtitle: string;
+  unit: string;
+  source: VisualSource;
+  anchorYear: number;
+  legend: Array<{ label: string; color: string }>;
+  // Each panel is one INDICATOR with its own y-scale and unit, holding the same
+  // set of country lines from the shared anchor year — a small-multiples grid that
+  // shows how countries at a similar starting point diverged across many measures.
+  panels: Array<{
+    label: string;
+    unit: string;
+    min: number;
+    max: number;
+    invert?: boolean;
+    lines: Array<{ label: string; color: string; points: Array<{ date: string; value: number }> }>;
+  }>;
+};
 export type RankedChangeVisual = {
   kind: "rankedChange";
   diverging?: boolean;
@@ -182,7 +221,7 @@ export type RankedChangeVisual = {
   max: number;
   rows: Array<{ label: string; start: number; end: number; change: number }>;
 };
-export type VisualSpec = LineVisual | LinePanelsVisual | StackVisual | BarVisual | GroupedBarVisual | ChangeVisual | PyramidVisual | StripeVisual | ChoroplethVisual | ScatterVisual | StripPairVisual | ScenarioMapsVisual | SparkGridVisual | RankedChangeVisual;
+export type VisualSpec = LineVisual | LinePanelsVisual | StackVisual | BarVisual | GroupedBarVisual | ChangeVisual | PyramidVisual | StripeVisual | ChoroplethVisual | ScatterVisual | ScatterXYVisual | StripPairVisual | ScenarioMapsVisual | SparkGridVisual | StartingGridVisual | RankedChangeVisual;
 type VisualRole = "primary" | "context" | "companion";
 type VisualWithRole = { visual: VisualSpec; role: VisualRole };
 
@@ -1122,6 +1161,41 @@ function latestBarsFromIndicators(series: Array<{ indicator: string; label: stri
   };
 }
 
+function scatterXYFromTable(indicator: string, title: string, subtitle: string, unit: string, refX?: { value: number; label: string }, refY?: { value: number; label: string }): ScatterXYVisual | null {
+  const artifact = artifactById(indicator);
+  if (!artifact?.rows?.length) return null;
+  const points = artifact.rows
+    .map((row) => {
+      const label = typeof row.label === "string" ? row.label : "";
+      const x = Number(row.x);
+      const y = Number(row.y);
+      if (!label || !Number.isFinite(x) || !Number.isFinite(y)) return null;
+      return { label, x, y, highlight: row.highlight === 1 || row.highlight === true };
+    })
+    .filter((point): point is ScatterXYVisual["points"][number] => Boolean(point));
+  if (points.length < 3) return null;
+  const xs = points.map((p) => p.x);
+  const ys = points.map((p) => p.y);
+  const niceMax = (v: number) => Math.ceil(v / 10) * 10;
+  const meta = (artifact.metadata || {}) as Record<string, unknown>;
+  return {
+    kind: "scatterXY",
+    title: title || artifact.title,
+    subtitle: subtitle || artifact.sourceIndicatorId,
+    unit: unit || artifact.unit,
+    source: sourceFor(artifact),
+    xLabel: typeof meta.xLabel === "string" ? meta.xLabel : "x",
+    yLabel: typeof meta.yLabel === "string" ? meta.yLabel : "y",
+    xMin: 0,
+    xMax: niceMax(Math.max(...xs)),
+    yMin: 0,
+    yMax: Math.max(1, Math.ceil(Math.max(...ys))),
+    ...(refX ? { refX } : {}),
+    ...(refY ? { refY } : {}),
+    points
+  };
+}
+
 function barsFromTableRows(indicator: string, title: string, subtitle: string, unit: string): BarVisual | null {
   const artifact = artifactById(indicator);
   if (!artifact?.rows?.length) return null;
@@ -2021,6 +2095,13 @@ type PlanEntry = {
   diverging?: boolean;
   divergeAt?: number;
   pivotLabel?: string;
+  baselineYears?: number;
+  latestYears?: number;
+  startLabel?: string;
+  endLabel?: string;
+  divergeLabel?: string;
+  refX?: { value: number; label: string };
+  refY?: { value: number; label: string };
 };
 
 // --- Builders for richer analysis types (reuse existing renderers where possible) ---
@@ -2267,6 +2348,46 @@ function linePanelsVisual(panels: NonNullable<PlanEntry["panels"]>, title: strin
   };
 }
 
+const STARTING_GRID_COLORS: Record<string, string> = {
+  "India": "#b3245a", "China": "#2a8597", "S. Korea": "#3f7d4f", "South Korea": "#3f7d4f",
+  "Vietnam": "#e08a2b", "Indonesia": "#8a8597", "Japan": "#5a6e8c", "Bangladesh": "#c98a2b"
+};
+
+function startingGridVisual(
+  panels: Array<{ label: string; unit?: string; invert?: boolean; series?: Array<{ indicator: string; label: string }> }>,
+  title: string, subtitle: string, unit: string, fromYear?: number
+): StartingGridVisual | null {
+  const clip = (pts: Point[]) => fromYear ? pts.filter((p) => Number(String(p.date).slice(0, 4)) >= fromYear) : pts;
+  const out = (panels || [])
+    .map((panel) => {
+      const lines = (panel.series || [])
+        .map((item) => {
+          const artifact = artifactById(item.indicator);
+          const line = artifact ? lineFor(artifact) : null;
+          const points = line?.lines?.[0]?.points ? clip(line.lines[0].points) : [];
+          return points.length >= 2 ? { label: item.label, color: STARTING_GRID_COLORS[item.label] || "#8a8597", points } : null;
+        })
+        .filter((l): l is StartingGridVisual["panels"][number]["lines"][number] => Boolean(l));
+      if (!lines.length) return null;
+      const vals = lines.flatMap((l) => l.points.map((p) => p.value));
+      const lo = Math.min(...vals), hi = Math.max(...vals);
+      const pad = (hi - lo) * 0.08 || 1;
+      return { label: panel.label, unit: panel.unit || unit, invert: Boolean(panel.invert), min: lo - pad, max: hi + pad, lines };
+    })
+    .filter((p): p is StartingGridVisual["panels"][number] => Boolean(p));
+  if (out.length < 1) return null;
+  const seen = new Set<string>();
+  const legend: StartingGridVisual["legend"] = [];
+  for (const p of out) for (const l of p.lines) if (!seen.has(l.label)) { seen.add(l.label); legend.push({ label: l.label, color: l.color }); }
+  const firstInd = panels?.[0]?.series?.[0]?.indicator || "";
+  const first = artifactById(firstInd);
+  return {
+    kind: "startingGrid", title, subtitle, unit,
+    source: first ? sourceFor(first) : { sourceId: "worldbank", sourceIndicatorId: title },
+    anchorYear: fromYear || 0, legend, panels: out
+  };
+}
+
 function rankedChangeVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, baselineYears = 10, latestYears = 10, diverging = false, labels: { rowLabel?: string; divergeLabel?: string; startLabel?: string; endLabel?: string } = {}): RankedChangeVisual | null {
   const rows = (series || [])
     .map((item) => {
@@ -2361,6 +2482,10 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     const visual = linePanelsVisual(entry.panels || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear);
     return visual ? attachMeta(visual, entry) : null;
   }
+  if (entry.chart === "startingGrid") {
+    const visual = startingGridVisual((entry.panels as any) || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear);
+    return visual ? attachMeta(visual, entry) : null;
+  }
   if (entry.chart === "rankedChange") {
     const visual = rankedChangeVisual(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.baselineYears ?? 10, entry.latestYears ?? 10, Boolean(entry.diverging), { rowLabel: entry.rowLabel, divergeLabel: entry.divergeLabel, startLabel: entry.startLabel, endLabel: entry.endLabel });
     return visual ? attachMeta(visual, entry) : null;
@@ -2371,6 +2496,10 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
   }
   if (entry.chart === "tableBars") {
     const visual = barsFromTableRows(entry.indicator || "", entry.title || "", entry.subtitle || "", entry.unit || "");
+    return visual ? attachMeta(visual, entry) : null;
+  }
+  if (entry.chart === "scatterXY") {
+    const visual = scatterXYFromTable(entry.indicator || "", entry.title || "", entry.subtitle || "", entry.unit || "", entry.refX, entry.refY);
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "stripPair") {

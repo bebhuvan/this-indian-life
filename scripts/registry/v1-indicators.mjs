@@ -75,7 +75,10 @@ export const v1Questions = [
       "divergence.sanitation.in", "divergence.sanitation.chn", "divergence.sanitation.kor", "divergence.sanitation.vnm", "divergence.sanitation.bgd", "divergence.sanitation.wld",
       "divergence.cereal_yield.in", "divergence.cereal_yield.chn", "divergence.cereal_yield.kor", "divergence.cereal_yield.vnm", "divergence.cereal_yield.idn", "divergence.cereal_yield.wld",
       "divergence.exports_gdp.in", "divergence.exports_gdp.chn", "divergence.exports_gdp.kor", "divergence.exports_gdp.vnm", "divergence.exports_gdp.idn", "divergence.exports_gdp.wld",
-      "divergence.hightech_exports_share.in", "divergence.hightech_exports_share.chn", "divergence.hightech_exports_share.kor", "divergence.hightech_exports_share.vnm", "divergence.hightech_exports_share.idn", "divergence.hightech_exports_share.wld"
+      "divergence.hightech_exports_share.in", "divergence.hightech_exports_share.chn", "divergence.hightech_exports_share.kor", "divergence.hightech_exports_share.vnm", "divergence.hightech_exports_share.idn", "divergence.hightech_exports_share.wld",
+      // — rework 2026-06-21: TiVA forward-GVC + servicification —
+      "divergence.gvc_forward.in", "divergence.gvc_forward.chn", "divergence.gvc_forward.kor", "divergence.gvc_forward.vnm", "divergence.gvc_forward.idn", "divergence.gvc_forward.jpn",
+      "divergence.exports_serv_dva.in", "divergence.exports_serv_dva.chn", "divergence.exports_serv_dva.kor", "divergence.exports_serv_dva.vnm", "divergence.exports_serv_dva.idn", "divergence.exports_serv_dva.jpn"
     ],
     visualPlan: [
       // ACT 1 — the same starting line, and the great divergence
@@ -427,6 +430,19 @@ export const v1Questions = [
         ],
         why: "Modern manufacturing means importing parts, adding value and re-exporting; Vietnam wove itself deep into these chains, India far less so.",
         watch: "A high foreign-value-added share means deep supply-chain integration, not weakness; for a large economy like India some of the low number is just its size and domestic sourcing." },
+      { chart: "multiLine", title: "Selling inputs, not assembling them", size: "small", beat: "sophistication", unit: "domestic value added in intermediate exports (%)", fromYear: 1995,
+        subtitle: "OECD TiVA 2025 · domestic value added in intermediate exports as a share of gross exports · the upstream side of supply chains (forward GVC participation)",
+        series: [
+          { indicator: "divergence.gvc_forward.vnm", label: "Vietnam" },
+          { indicator: "divergence.gvc_forward.kor", label: "S. Korea" },
+          { indicator: "divergence.gvc_forward.in", label: "India" },
+          { indicator: "divergence.gvc_forward.idn", label: "Indonesia" },
+          { indicator: "divergence.gvc_forward.jpn", label: "Japan" },
+          { indicator: "divergence.gvc_forward.chn", label: "China" }
+        ],
+        why: "The mirror image of the backward chart. India is upstream-tilted, supplying domestic inputs that other countries finish and re-export, while Vietnam plugged in downstream as an assembler. India's forward participation (about 41%) runs well above its backward share (26%); Vietnam's forward share fell as its assembly role grew.",
+        read: "Each line is the domestic value added embodied in a country's intermediate exports, the inputs that feed others' production.",
+        watch: "Forward and backward participation are two halves of GVC integration; a high forward share can reflect commodities or upstream services rather than sophistication, which is why commodity-exporting Indonesia ranks highest." },
       { chart: "multiLine", title: "Becoming China's customer", size: "small", beat: "sophistication", unit: "trade with China (current US$ billions)", fromYear: 2000,
         subtitle: "UN Comtrade · India's imports from and exports to China · the trade relationship that ran one way",
         series: [
@@ -581,6 +597,19 @@ export const v1Questions = [
         ],
         why: "India did build an export engine, but in services (IT, business services) rather than factory goods, a different escalator that lifts fewer low-skilled workers.",
         watch: "A high services share is not automatically better or worse; it reflects what India sells to the world, and services have so far employed far fewer people than mass manufacturing would." },
+      { chart: "multiLine", title: "The services hidden inside the exports", size: "small", beat: "other-side", unit: "services value added in exports (%)", fromYear: 1995,
+        subtitle: "OECD TiVA 2025 · domestic services value added as a share of gross exports · the services buried inside everything a country sells, goods included",
+        series: [
+          { indicator: "divergence.exports_serv_dva.in", label: "India" },
+          { indicator: "divergence.exports_serv_dva.jpn", label: "Japan" },
+          { indicator: "divergence.exports_serv_dva.chn", label: "China" },
+          { indicator: "divergence.exports_serv_dva.idn", label: "Indonesia" },
+          { indicator: "divergence.exports_serv_dva.kor", label: "S. Korea" },
+          { indicator: "divergence.exports_serv_dva.vnm", label: "Vietnam" }
+        ],
+        why: "The previous chart counts services sold directly; this counts services value buried inside everything a country exports, goods included. By 2022 about 44% of India's export value was domestically produced services, the highest in the group and still rising, while Vietnam's assembly model had stripped its services content down to 10%.",
+        read: "Each line is the share of a country's gross exports made up of domestic services value added.",
+        watch: "This is a modelled value-added estimate that ends in 2022; it captures design, software, logistics and finance embedded in exports, not services sold across the border, which the previous chart shows." },
       { chart: "multiLine", title: "The all-in human scorecard", size: "small", beat: "other-side", unit: "Human Development Index (0-1)", fromYear: 1990,
         subtitle: "UNDP via Our World in Data · Human Development Index, combining health, schooling and income",
         series: [
