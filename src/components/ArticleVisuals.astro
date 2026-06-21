@@ -1038,7 +1038,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         {g.ticks.map((tick, ti) => (
                           <g>
                             {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                            <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, lp.unit)}</text>
+                            <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, lp.unit)}</text>
                           </g>
                         ))}
                         {g.axisTicks.map((tick) => (
@@ -1062,7 +1062,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         {gm.ticks.map((tick, ti) => (
                           <g>
                             {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                            <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, lp.unit)}</text>
+                            <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, lp.unit)}</text>
                           </g>
                         ))}
                         {gm.axisTicks.map((tick) => (
@@ -1437,7 +1437,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 {g.ticks.map((tick, ti) => (
                   <g>
                     {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, grouped.unit)}</text>
+                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, grouped.unit)}</text>
                   </g>
                 ))}
                 {grouped.groups.map((group, groupIndex) => {
@@ -1480,7 +1480,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 {gm.ticks.map((tick, ti) => (
                   <g>
                     {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, grouped.unit)}</text>
+                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, grouped.unit)}</text>
                   </g>
                 ))}
                 {grouped.groups.map((group, groupIndex) => {
