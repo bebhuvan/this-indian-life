@@ -105,13 +105,14 @@ const ledger = charts
 
     <section class="section">
       <p class="sec-hd">Starter questions</p>
-      <div>
+      <div class="q-showcase">
         {questionPages.slice(0, 10).map((page) => {
+          const st = statusMeta(page.explanation.status);
           return (
-            <a class="q-row" href={questionUrl(page, locale)}>
+            <a class={`q-row dom-${page.domain}`} href={questionUrl(page, locale)}>
               <span class="q-dot" style={`background:var(--${page.domain})`}></span>
               <span class="q-txt">{page.question}</span>
-              <span class="q-ans" style={`color:var(--${page.domain}-ink)`}>{statusMeta(page.explanation.status).short}</span>
+              {st.cls !== "ready" && <span class="q-ans">{st.cls === "wip" ? "Building" : "Soon"}</span>}
               <span class="q-arrow">-></span>
             </a>
           );
