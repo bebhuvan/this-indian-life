@@ -898,7 +898,17 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 ) : null}
                 {g.paths.map((path) => (
                   <>
-                    {isLead && visual.lines.length === 1 ? <path d={path.areaD} fill="var(--c-tint)" /> : null}
+                    {isLead && visual.lines.length === 1 ? (
+                      <>
+                        <defs>
+                          <linearGradient id={`area-${chartId}-d`} x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color={path.color} stop-opacity="0.18" />
+                            <stop offset="78%" stop-color={path.color} stop-opacity="0" />
+                          </linearGradient>
+                        </defs>
+                        <path d={path.areaD} fill={`url(#area-${chartId}-d)`} />
+                      </>
+                    ) : null}
                     <path d={path.d} fill="none" stroke={path.color} stroke-width={(isLead ? g.width * 0.00375 : g.width * 0.003).toFixed(2)} opacity="1" stroke-dasharray={path.dash ? "3 3" : undefined} stroke-linecap="round" stroke-linejoin="round" />
                     {path.latest && (
                       <g>
