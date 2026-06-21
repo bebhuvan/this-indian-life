@@ -406,10 +406,10 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .article-byline{margin-top:14px;font-size:.82rem;color:var(--mid)}
 .article-byline a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 .article-status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:.74rem;color:var(--mid)}
-.status{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ghost);padding:5px 9px;color:var(--ink)}
-.status.ready{border-color:var(--c);color:var(--c-ink)}
-.status.wip{border-color:#e0a23c;color:#9c6b15}
-.status.needs{border-color:var(--dim);color:var(--mid)}
+.status{font-family:var(--sans);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid var(--ghost);border-radius:2px;padding:3px 8px;color:var(--dim);white-space:nowrap}
+.status.ready{border-color:var(--ghost);color:var(--dim)}
+.status.wip{border-color:#e3b063;color:#9c6b15}
+.status.needs{border-color:var(--ghost);color:var(--mid)}
 .article-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);gap:1px;margin:34px 0 58px;border-top:1px solid var(--ghost);background:var(--ghost)}
 .article-hero.single{grid-template-columns:1fr;background:none;border-top:none;margin:30px 0 40px}
 .article-hero.single .explain-card{padding:0}
@@ -827,11 +827,11 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
    accent tick (editorial signature) instead of a heavy black rule. */
 .chart-note{position:relative;border-top:1px solid var(--ghost);padding:26px 0 4px;margin-top:24px}
 .chart-note::before{content:"";position:absolute;top:-1px;left:0;width:46px;height:2px;background:var(--c)}
-.cn-take{font-family:var(--serif);font-weight:500;font-size:var(--t-prose-lead);line-height:1.32;color:#0e0e0e;margin:0 0 14px;max-width:90ch}
+.cn-take{font-family:var(--serif-text);font-weight:500;font-size:var(--t-prose-lead);line-height:1.32;color:#0e0e0e;margin:0 0 14px;max-width:90ch}
 /* Flow the explanation across the full chart width in two balanced columns, so
    it fills the space at a comfortable per-column measure instead of clamping to
    the left. Collapses to a single column on phones (see the 700px block below). */
-.cn-detail{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#222;margin:0 0 22px;columns:2;column-gap:56px}
+.cn-detail{font-family:var(--serif-text);font-size:var(--t-prose);line-height:var(--lh-prose);color:#222;margin:0 0 22px;columns:2;column-gap:56px}
 /* "How to read / watch out" guidance set apart in a soft inset panel with
    dot-kicker labels in the domain ink. */
 .cn-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;margin-top:6px;padding:20px 22px;background:var(--paper);border-radius:14px}
