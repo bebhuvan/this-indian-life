@@ -10,17 +10,20 @@
   /* surface + neutrals */
   --bg:#ffffff; --ink:#0b0b0b; --mid:#5c5c5c; --dim:#737373;
   --ghost:#e7e7e7; --line:#ededed; --paper:#fafafa;
-  /* domain inks — bright but soft, one family (used for dots, bars, big numbers, charts) */
-  --people:#DB5C97; --economy:#3A5BD0; --energy:#EFA227;
-  --climate:#EE6A4C; --health:#15A382; --society:#7C5AD6; --slate:#b7b7bf;
+  /* domain inks — deep jewel tones, one family (used for dots, bars, big numbers, charts).
+     Refined 2026: deepened + slightly desaturated from the original candy-bright set
+     for a more sophisticated, editorial feel — still colourful, just grown-up. */
+  --people:#C44B7B; --economy:#3349A8; --energy:#C9831A;
+  --climate:#D6573A; --health:#12876B; --society:#6A47BE; --slate:#b7b7bf;
   /* darker text-safe variants — same hue, ≥4.5:1 on white, used only for small colored TEXT */
-  --people-ink:#B23A6E; --economy-ink:#2E49A8; --energy-ink:#9A6700;
-  --climate-ink:#C2492F; --health-ink:#0E7C63; --society-ink:#5E3FB0;
+  --people-ink:#A8356A; --economy-ink:#2A4299; --energy-ink:#8F6000;
+  --climate-ink:#B8442B; --health-ink:#0C745C; --society-ink:#573BA6;
   --c:var(--ink);                 /* active domain ink (set per page/element) */
   --c-ink:var(--ink);             /* text-safe active ink (set per page/element) */
   --c-tint:rgba(11,11,11,.08);
   /* type */
-  --serif:'RupeeSerif','Cormorant Garamond',Georgia,serif;
+  --serif:'RupeeSerif','Cormorant Garamond',Georgia,serif;        /* display: hero numbers, headlines */
+  --serif-text:'RupeeSerif','Cormorant Garamond',Georgia,serif;   /* reading body (kept Cormorant; weight 400 + refinements applied) */
   --sans:'RupeeSans','DM Sans',system-ui,sans-serif;
   --deva:'Tiro Devanagari Hindi',serif;
   /* type scale (clamp) */
@@ -48,14 +51,14 @@
 }
 
 /* domain helpers: set --c on a container */
-.dom-people{--c:var(--people);--c-ink:var(--people-ink);--c-tint:rgba(219,92,151,.10)}
-.dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(58,91,208,.10)}
+.dom-people{--c:var(--people);--c-ink:var(--people-ink);--c-tint:rgba(196,75,123,.10)}
+.dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(51,73,168,.10)}
 /* per-article gold theme (q.econ.gold) — overrides the economy blue for this one piece */
 .theme-gold{--c:#C8941A;--c-ink:#9A6B00;--c-tint:rgba(200,148,26,.14)}
-.dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(239,162,39,.14)}
-.dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(238,106,76,.12)}
-.dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(21,163,130,.10)}
-.dom-society{--c:var(--society);--c-ink:var(--society-ink);--c-tint:rgba(124,90,214,.10)}
+.dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(201,131,26,.14)}
+.dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(214,87,58,.12)}
+.dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(18,135,107,.10)}
+.dom-society{--c:var(--society);--c-ink:var(--society-ink);--c-tint:rgba(106,71,190,.10)}
 
 /* ---------- BASE ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -142,7 +145,7 @@ a{color:inherit}
 .li+.li{padding-left:42px}
 .li:not(:last-child)::after{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;background:var(--ghost)}
 @media(max-width:880px){.li:nth-child(2n)::after{display:none}.li+.li{padding-left:0}.li:nth-child(odd){padding-right:0}.li{padding-left:0!important}}
-.li-n{font-family:var(--serif);font-weight:300;font-size:var(--t-fig);letter-spacing:-.03em;line-height:1;color:var(--c);display:block;font-variant-numeric:lining-nums tabular-nums}
+.li-n{font-family:var(--serif);font-weight:300;font-size:var(--t-fig);letter-spacing:-.03em;line-height:1;color:var(--c);display:block;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;text-wrap:nowrap}
 .li-n .u{font-size:.34em;color:var(--dim);letter-spacing:0;margin-left:3px}
 .li-lbl{font-size:.6rem;letter-spacing:.17em;text-transform:uppercase;font-weight:500;color:var(--dim);margin:9px 0 18px;display:flex;align-items:center;gap:8px}
 .li-lbl .tk{width:8px;height:8px;border-radius:50%;background:var(--c)}
@@ -219,13 +222,17 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 @media(max-width:620px){.analogy{grid-template-columns:1fr}}
 
 /* ---------- QUESTION ROWS ---------- */
-.q-row{display:flex;align-items:baseline;gap:18px;padding:20px 0;border-top:1px solid var(--ghost);cursor:pointer}
+.q-row{display:flex;align-items:baseline;gap:18px;padding:20px 0;border-top:1px solid var(--ghost);cursor:pointer;text-decoration:none;color:var(--ink)}
 .q-row:last-child{border-bottom:1px solid var(--ghost)}
 .q-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;align-self:center}
 .q-txt{font-family:var(--serif);font-size:clamp(1.1rem,1.9vw,1.4rem);font-weight:400;line-height:1.25;flex:1}
 .q-ans{font-family:var(--serif);font-size:1.12rem;white-space:nowrap}
 .q-arrow{color:var(--dim);transition:transform .25s,color .25s}
 .q-row:hover .q-arrow{transform:translateX(5px);color:var(--c)}
+/* Homepage question showcase — clean serif lines, no underlines; status shown
+   only for not-yet-ready pages as a quiet uppercase chip (ready = no label). */
+.q-showcase .q-ans{font-family:var(--sans);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--dim);white-space:nowrap;border:1px solid var(--ghost);border-radius:2px;padding:3px 9px;align-self:center}
+.q-showcase .q-row:hover .q-txt{color:var(--c-ink)}
 
 /* ---------- CARDS (catalog) ---------- */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ghost);border:1px solid var(--ghost)}
@@ -399,10 +406,10 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .article-byline{margin-top:14px;font-size:.82rem;color:var(--mid)}
 .article-byline a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 .article-status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:.74rem;color:var(--mid)}
-.status{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ghost);padding:5px 9px;color:var(--ink)}
-.status.ready{border-color:var(--c);color:var(--c-ink)}
-.status.wip{border-color:#e0a23c;color:#9c6b15}
-.status.needs{border-color:var(--dim);color:var(--mid)}
+.status{font-family:var(--sans);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid var(--ghost);border-radius:2px;padding:3px 8px;color:var(--dim);white-space:nowrap}
+.status.ready{border-color:var(--ghost);color:var(--dim)}
+.status.wip{border-color:#e3b063;color:#9c6b15}
+.status.needs{border-color:var(--ghost);color:var(--mid)}
 .article-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);gap:1px;margin:34px 0 58px;border-top:1px solid var(--ghost);background:var(--ghost)}
 .article-hero.single{grid-template-columns:1fr;background:none;border-top:none;margin:30px 0 40px}
 .article-hero.single .explain-card{padding:0}
@@ -477,6 +484,17 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .longform p{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#1d1d1d;margin:0 0 1.1rem;text-wrap:pretty}
 .longform strong{font-weight:600;background:linear-gradient(transparent 66%,var(--c-tint) 0)}
 .longform em{font-style:italic;color:var(--c)}
+/* Reading body uses Cormorant Garamond at its original delicate 300 — that thin
+   elegance is the site's polished look (a heavier 400 reads as "bold" here). The
+   --serif-text token keeps body + chart descriptions on the same reading font. */
+.longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body{font-family:var(--serif-text);font-weight:300}
+/* Reading refinements: kerning + common ligatures for even text colour, balanced
+   wrapping to kill widows, a soft branded text selection, and a quieter link
+   underline that firms up on hover so links stop competing with the prose. */
+.longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body,.story-body>.standfirst{font-kerning:normal;font-variant-ligatures:common-ligatures contextual;text-wrap:pretty}
+::selection{background:color-mix(in srgb,var(--c) 18%,transparent)}
+.longform a,.ed-copy a{text-decoration-color:color-mix(in srgb,var(--c) 36%,transparent);text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-color .15s var(--ease)}
+.longform a:hover,.ed-copy a:hover{text-decoration-color:var(--c)}
 .longform a{color:var(--c);text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
 .story-list{font-family:var(--serif);font-size:var(--t-prose-list);line-height:1.68;color:#1d1d1d;margin:0 0 1.25rem 1.1rem;padding:0;display:grid;gap:.45rem}
 .story-list li::marker{color:var(--c)}
@@ -577,6 +595,13 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .viz-actions{display:flex;gap:7px;justify-content:flex-end;margin:-4px 0 10px;opacity:.78}
 .viz-actions button{background:#fff;border:1px solid var(--ghost);color:var(--dim);font-family:var(--sans);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:7px;cursor:pointer;transition:color .15s var(--ease),border-color .15s var(--ease),background .15s var(--ease)}
 .viz-actions button:hover{border-color:var(--c);color:var(--c-ink);background:var(--c-tint)}
+/* On mouse devices the export controls stay out of the way and fade in only when
+   the chart is hovered or keyboard-focused. Touch devices (no hover) keep them
+   visible so they remain reachable. */
+@media(hover:hover){
+  .viz-actions{opacity:0;transition:opacity .22s var(--ease)}
+  .viz-card:hover .viz-actions,.viz-card:focus-within .viz-actions{opacity:.78}
+}
 /* On phones the SVG/PNG/CSV/Share row wedged between the subtitle and the big
    number looks cramped. Move it to a right-aligned footer toolbar that sits
    directly on top of the source line (orders below keep note -> toolbar ->
@@ -597,7 +622,9 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 /* Give charts more width to breathe on phones: the default 28-30px card padding
    eats a big share of a narrow screen, squeezing the plot. */
 @media(max-width:680px){.story-viz .viz-card,.story-viz .viz-main,.viz-card,.viz-main{padding:16px 14px}}
-.chart-watermark{font:600 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;fill:#8c8780;opacity:.42;pointer-events:none;user-select:none}
+/* Watermark is for shared exports only (article-actions.js re-styles it into the
+   downloaded SVG/PNG). On the page itself it's just noise, so hide it. */
+.chart-watermark{display:none}
 .choro-map .chart-watermark{opacity:.26}
 .spark-svg .chart-watermark{font-size:3.2px;letter-spacing:.05em;opacity:.34}
 .viz-svg-lead{margin-top:4px}
@@ -799,11 +826,11 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
    accent tick (editorial signature) instead of a heavy black rule. */
 .chart-note{position:relative;border-top:1px solid var(--ghost);padding:26px 0 4px;margin-top:24px}
 .chart-note::before{content:"";position:absolute;top:-1px;left:0;width:46px;height:2px;background:var(--c)}
-.cn-take{font-family:var(--serif);font-weight:500;font-size:var(--t-prose-lead);line-height:1.32;color:#0e0e0e;margin:0 0 14px;max-width:90ch}
+.cn-take{font-family:var(--serif-text);font-weight:500;font-size:var(--t-prose-lead);line-height:1.32;color:#0e0e0e;margin:0 0 14px;max-width:90ch}
 /* Flow the explanation across the full chart width in two balanced columns, so
    it fills the space at a comfortable per-column measure instead of clamping to
    the left. Collapses to a single column on phones (see the 700px block below). */
-.cn-detail{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#222;margin:0 0 22px;columns:2;column-gap:56px}
+.cn-detail{font-family:var(--serif-text);font-size:var(--t-prose);line-height:var(--lh-prose);color:#222;margin:0 0 22px;columns:2;column-gap:56px}
 /* "How to read / watch out" guidance set apart in a soft inset panel with
    dot-kicker labels in the domain ink. */
 .cn-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;margin-top:6px;padding:20px 22px;background:var(--paper);border-radius:14px}
@@ -1046,15 +1073,12 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .sec-hd{margin-bottom:32px}
   .domain-head,.chart-head{padding:30px 0 20px}
 
-  /* Nav: brand on its own line, domains become a tidy single-row swipe strip
-     (the right-edge fade hints there's more to scroll). */
-  .nav{gap:13px}
-  .domains{flex-wrap:nowrap;width:100%;overflow-x:auto;gap:22px;padding-bottom:3px;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none;
-    -webkit-mask-image:linear-gradient(90deg,#000 89%,transparent);
-    mask-image:linear-gradient(90deg,#000 89%,transparent)}
-  .domains::-webkit-scrollbar{display:none}
-  .domains a,.domains button{white-space:nowrap;padding-bottom:7px}
+  /* Nav: brand centered on its own line; domains wrap to two tidy centered rows
+     so every item stays visible at once — no swipe strip, nothing hidden. */
+  .nav{gap:15px;align-items:center}
+  .brand{align-self:center}
+  .domains{flex-wrap:wrap;justify-content:center;width:100%;gap:12px 18px}
+  .domains a,.domains button{white-space:nowrap;padding-bottom:6px}
 
   /* Register tabs (The Reading / In Plain English / On the Ground) pack tighter */
   .reg-tab{margin-right:22px}

@@ -77,7 +77,9 @@ const featuredReports = domain === "health"
               <a class="q-row" href={questionUrl(page, locale)}>
                 <span class="q-dot" style={`background:var(--${page.domain})`}></span>
                 <span class="q-txt">{page.question}</span>
-                <span class={`q-ans status ${statusMeta(page.explanation.status).cls}`} style={`color:var(--${page.domain}-ink)`}>{statusMeta(page.explanation.status).short}</span>
+                {statusMeta(page.explanation.status).cls !== "ready" && (
+                  <span class={`status ${statusMeta(page.explanation.status).cls}`}>{statusMeta(page.explanation.status).short}</span>
+                )}
                 <span class="q-arrow">-></span>
               </a>
             ))}

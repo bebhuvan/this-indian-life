@@ -117,6 +117,14 @@ function choroWrapClass(visual: ChoroplethVisual) {
 
 function fmt(value: number, unit = "") {
   const abs = Math.abs(value);
+  // Zero is special: a bare "0.0" on a rupee/dollar axis reads as a glitch.
+  // Give it a clean, unit-appropriate label before the magnitude branches run.
+  if (value === 0) {
+    if (/%|percent/i.test(unit)) return "0%";
+    if (/rupees|inr|₹|rs|crore/i.test(unit)) return "₹0";
+    if (/US\$|usd|\$/i.test(unit)) return "$0";
+    return "0";
+  }
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
   if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
