@@ -8,12 +8,6 @@
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:swap;src:url('/fonts/dm-sans-300.woff2') format('woff2')}
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/dm-sans-400.woff2') format('woff2')}
 @font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/dm-sans-500.woff2') format('woff2')}
-/* Newsreader — screen-built text serif for the reading body. Cormorant Garamond is
-   a display face (kept for hero numbers + headlines); Newsreader carries the long
-   paragraphs, where it reads solid and warm. Variable woff2 (latin subset): one file
-   covers the normal weight range, one the italic range. */
-@font-face{font-family:'Newsreader';font-style:normal;font-weight:400 600;font-display:swap;src:url('/fonts/newsreader.woff2') format('woff2')}
-@font-face{font-family:'Newsreader';font-style:italic;font-weight:400 500;font-display:swap;src:url('/fonts/newsreader-italic.woff2') format('woff2')}
 /* The rupee sign (U+20B9) is absent from the Cormorant Garamond and DM Sans
    latin subsets, so it was falling back to a heavier system serif (Georgia) and
    reading "arbitrarily bold". Patch just that one codepoint via unicode-range: a
