@@ -583,6 +583,13 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .viz-actions{display:flex;gap:7px;justify-content:flex-end;margin:-4px 0 10px;opacity:.78}
 .viz-actions button{background:#fff;border:1px solid var(--ghost);color:var(--dim);font-family:var(--sans);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:7px;cursor:pointer;transition:color .15s var(--ease),border-color .15s var(--ease),background .15s var(--ease)}
 .viz-actions button:hover{border-color:var(--c);color:var(--c-ink);background:var(--c-tint)}
+/* On mouse devices the export controls stay out of the way and fade in only when
+   the chart is hovered or keyboard-focused. Touch devices (no hover) keep them
+   visible so they remain reachable. */
+@media(hover:hover){
+  .viz-actions{opacity:0;transition:opacity .22s var(--ease)}
+  .viz-card:hover .viz-actions,.viz-card:focus-within .viz-actions{opacity:.78}
+}
 /* On phones the SVG/PNG/CSV/Share row wedged between the subtitle and the big
    number looks cramped. Move it to a right-aligned footer toolbar that sits
    directly on top of the source line (orders below keep note -> toolbar ->
@@ -603,7 +610,9 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 /* Give charts more width to breathe on phones: the default 28-30px card padding
    eats a big share of a narrow screen, squeezing the plot. */
 @media(max-width:680px){.story-viz .viz-card,.story-viz .viz-main,.viz-card,.viz-main{padding:16px 14px}}
-.chart-watermark{font:600 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;fill:#8c8780;opacity:.42;pointer-events:none;user-select:none}
+/* Watermark is for shared exports only (article-actions.js re-styles it into the
+   downloaded SVG/PNG). On the page itself it's just noise, so hide it. */
+.chart-watermark{display:none}
 .choro-map .chart-watermark{opacity:.26}
 .spark-svg .chart-watermark{font-size:3.2px;letter-spacing:.05em;opacity:.34}
 .viz-svg-lead{margin-top:4px}
