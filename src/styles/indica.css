@@ -484,11 +484,10 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .longform p{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#1d1d1d;margin:0 0 1.1rem;text-wrap:pretty}
 .longform strong{font-weight:600;background:linear-gradient(transparent 66%,var(--c-tint) 0)}
 .longform em{font-style:italic;color:var(--c)}
-/* Reading body is set in Newsreader (a screen-built text serif) at a solid 400.
-   Cormorant Garamond stays on headlines, leads and the big numbers, where its
-   display delicacy is an asset; here it read thin and anemic across paragraphs. */
-.longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body{font-family:var(--serif-text);font-weight:400}
-.story-body>.standfirst{font-weight:400}
+/* Reading body uses Cormorant Garamond at its original delicate 300 — that thin
+   elegance is the site's polished look (a heavier 400 reads as "bold" here). The
+   --serif-text token keeps body + chart descriptions on the same reading font. */
+.longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body{font-family:var(--serif-text);font-weight:300}
 /* Reading refinements: kerning + common ligatures for even text colour, balanced
    wrapping to kill widows, a soft branded text selection, and a quieter link
    underline that firms up on hover so links stop competing with the prose. */
