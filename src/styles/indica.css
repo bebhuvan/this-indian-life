@@ -219,12 +219,10 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 @media(max-width:620px){.analogy{grid-template-columns:1fr}}
 
 /* ---------- QUESTION ROWS ---------- */
-.q-row{display:flex;align-items:baseline;gap:18px;padding:20px 0;border-top:1px solid var(--ghost);cursor:pointer;transition:padding .25s}
+.q-row{display:flex;align-items:baseline;gap:18px;padding:20px 0;border-top:1px solid var(--ghost);cursor:pointer}
 .q-row:last-child{border-bottom:1px solid var(--ghost)}
-.q-row:hover{padding-left:10px}
 .q-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;align-self:center}
 .q-txt{font-family:var(--serif);font-size:clamp(1.1rem,1.9vw,1.4rem);font-weight:400;line-height:1.25;flex:1}
-.q-row:hover .q-txt{font-style:italic}
 .q-ans{font-family:var(--serif);font-size:1.12rem;white-space:nowrap}
 .q-arrow{color:var(--dim);transition:transform .25s,color .25s}
 .q-row:hover .q-arrow{transform:translateX(5px);color:var(--c)}
