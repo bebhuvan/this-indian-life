@@ -489,6 +489,13 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
    display delicacy is an asset; here it read thin and anemic across paragraphs. */
 .longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body{font-family:var(--serif-text);font-weight:400}
 .story-body>.standfirst{font-weight:400}
+/* Reading refinements: kerning + common ligatures for even text colour, balanced
+   wrapping to kill widows, a soft branded text selection, and a quieter link
+   underline that firms up on hover so links stop competing with the prose. */
+.longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body,.story-body>.standfirst{font-kerning:normal;font-variant-ligatures:common-ligatures contextual;text-wrap:pretty}
+::selection{background:color-mix(in srgb,var(--c) 18%,transparent)}
+.longform a,.ed-copy a{text-decoration-color:color-mix(in srgb,var(--c) 36%,transparent);text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-color .15s var(--ease)}
+.longform a:hover,.ed-copy a:hover{text-decoration-color:var(--c)}
 .longform a{color:var(--c);text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
 .story-list{font-family:var(--serif);font-size:var(--t-prose-list);line-height:1.68;color:#1d1d1d;margin:0 0 1.25rem 1.1rem;padding:0;display:grid;gap:.45rem}
 .story-list li::marker{color:var(--c)}
