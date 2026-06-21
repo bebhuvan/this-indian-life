@@ -155,6 +155,17 @@ function fmt(value: number, unit = "") {
   return value.toFixed(1);
 }
 
+// Y-axis label: show the unit on the top tick only, bare numbers below. Repeating
+// "lakh cr" on every gridline is visual noise; show it once where the eye lands.
+function yTickLabel(tick: number, ti: number, ticks: number[], unit = "") {
+  const full = fmt(tick, unit);
+  if (ti === ticks.length - 1) return full; // topmost tick keeps the full unit
+  const ref = fmt(ticks[ticks.length - 1], unit);
+  const m = ref.match(/^([₹$]?\s?[\d.,]+)(.*)$/);
+  const suffix = m ? m[2] : "";
+  return suffix && full.endsWith(suffix) ? full.slice(0, full.length - suffix.length).trimEnd() : full;
+}
+
 function compactBarLabel(value: number, unit = "") {
   const abs = Math.abs(value);
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
@@ -884,7 +895,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 {g.ticks.map((tick, ti) => (
                   <g>
                     {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, visual.unit)}</text>
+                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, visual.unit)}</text>
                   </g>
                 ))}
                 {g.axisTicks.map((tick) => (
@@ -940,7 +951,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 {gm.ticks.map((tick, ti) => (
                   <g>
                     {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, visual.unit)}</text>
+                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, visual.unit)}</text>
                   </g>
                 ))}
                 {gm.axisTicks.map((tick) => (
