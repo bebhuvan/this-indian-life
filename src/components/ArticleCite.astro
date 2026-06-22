@@ -1,0 +1,112 @@
+---
+// "Cite this article" block for the foot of an article. The site is CC BY 4.0,
+// so attribution is the license condition — this turns "you must attribute" into
+// "copy this". Plain citation is the default (covers most reuse); BibTeX/APA sit
+// behind disclosures for the academic crowd. Pure static HTML + a tiny copy script.
+import { SITE } from "../data/seo";
+import { gitMetaFor, questionUrl } from "../data/questions";
+import type { QuestionPage, ExplanationArtifact } from "../data/questions";
+
+type Props = { page: QuestionPage; explanation: ExplanationArtifact };
+const { page, explanation } = Astro.props;
+
+const title = page.question;
+const author = SITE.author.name;       // "Bhuvanesh"
+const publisher = SITE.name;           // "This Indian Life"
+const url = `${SITE.url}${questionUrl(page)}`;
+
+// Cite the version published on its commit date (distinct from the data-coverage
+// date the evidence block shows). Fall back to the generation date, then build year.
+const gmeta = gitMetaFor(page.id);
+const pub = gmeta.updated || explanation.generatedAt || null;
+const d = pub ? new Date(pub) : null;
+const year = d && !Number.isNaN(d.getTime()) ? d.getFullYear() : new Date().getFullYear();
+const monthYear = d && !Number.isNaN(d.getTime())
+  ? d.toLocaleDateString("en-GB", { month: "long", year: "numeric" })
+  : String(year);
+
+// Titles that already end in terminal punctuation ("...economy?") must not get a
+// second period ("...economy?."). Keep their own mark; add a period otherwise.
+const endsPunct = /[?!.]$/.test(title);
+const plain = `${author}. ${endsPunct ? `“${title}”` : `“${title}.”`} ${publisher}, ${monthYear}. ${url}`;
+const apa = `${author}. (${year}). ${endsPunct ? title : `${title}.`} ${publisher}. ${url}`;
+const bibKey = `tilife-${page.slug.replace(/[^a-z0-9]+/gi, "")}`;
+const bibtex = `@misc{${bibKey},
+  author    = {${author}},
+  title     = {${title}},
+  year      = {${year}},
+  publisher = {${publisher}},
+  url       = {${url}}
+}`;
+---
+
+<div class="cite">
+  <div class="cite-head">
+    <span class="cite-lbl">Cite this article</span>
+    <a class="cite-lic" href="/license/">CC BY 4.0 — reuse with attribution</a>
+  </div>
+
+  <div class="cite-main">
+    <p class="cite-text" id="cite-plain">{plain}</p>
+    <button class="cite-copy" data-copy="#cite-plain" type="button" aria-label="Copy citation">Copy</button>
+  </div>
+
+  <div class="cite-formats">
+    <details class="cite-det">
+      <summary>BibTeX</summary>
+      <div class="cite-block">
+        <pre id="cite-bibtex">{bibtex}</pre>
+        <button class="cite-copy sm" data-copy="#cite-bibtex" type="button" aria-label="Copy BibTeX">Copy</button>
+      </div>
+    </details>
+    <details class="cite-det">
+      <summary>APA</summary>
+      <div class="cite-block">
+        <p id="cite-apa">{apa}</p>
+        <button class="cite-copy sm" data-copy="#cite-apa" type="button" aria-label="Copy APA citation">Copy</button>
+      </div>
+    </details>
+  </div>
+</div>
+
+<style>
+  .cite{max-width:780px}
+  .cite-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+  .cite-lbl{font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--dim)}
+  .cite-lic{font-family:var(--sans);font-size:.72rem;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--ghost);transition:color .2s,border-color .2s}
+  .cite-lic:hover{color:var(--c-ink);border-color:var(--c)}
+  .cite-main{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--ghost);border-radius:3px;padding:15px 16px}
+  .cite-text{margin:0;flex:1;font-size:.92rem;line-height:1.55;color:var(--ink)}
+  .cite-copy{flex:none;cursor:pointer;font-family:var(--sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--dim);background:var(--bg);border:1px solid var(--ghost);border-radius:2px;padding:6px 11px;transition:.18s;white-space:nowrap}
+  .cite-copy:hover{color:var(--c-ink);border-color:var(--c)}
+  .cite-copy.is-done{color:var(--c-ink);border-color:var(--c)}
+  .cite-formats{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .cite-det summary{cursor:pointer;font-family:var(--sans);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);list-style:none;transition:color .2s}
+  .cite-det summary:hover{color:var(--mid)}
+  .cite-det summary::-webkit-details-marker{display:none}
+  .cite-det summary::before{content:'▸';margin-right:8px;font-size:.74em;color:var(--mid)}
+  .cite-det[open] summary::before{content:'▾'}
+  .cite-block{position:relative;margin-top:10px}
+  .cite-block pre,.cite-block p{margin:0;background:var(--paper);border:1px solid var(--ghost);border-radius:3px;padding:14px;line-height:1.5;color:var(--ink)}
+  .cite-block pre{font-size:.78rem;overflow-x:auto;white-space:pre}
+  .cite-block p{font-size:.85rem;padding-right:70px}
+  .cite-block .cite-copy{position:absolute;top:8px;right:8px}
+  @media(max-width:620px){.cite-main{flex-direction:column}.cite-block p{padding-right:14px}.cite-block .cite-copy{position:static;margin-top:10px}}
+</style>
+
+<script>
+  document.querySelectorAll(".cite-copy").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const sel = btn.getAttribute("data-copy");
+      const el = sel ? document.querySelector(sel) : null;
+      if (!el || !el.textContent) return;
+      try {
+        await navigator.clipboard.writeText(el.textContent.trim());
+        const prev = btn.textContent;
+        btn.textContent = "Copied";
+        btn.classList.add("is-done");
+        setTimeout(() => { btn.textContent = prev; btn.classList.remove("is-done"); }, 1600);
+      } catch (e) { /* clipboard blocked; no-op */ }
+    });
+  });
+</script>

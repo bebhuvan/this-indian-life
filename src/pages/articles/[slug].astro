@@ -6,6 +6,7 @@ import ConceptPrimer from "../../components/ConceptPrimer.astro";
 import EditorialStory from "../../components/EditorialStory.astro";
 import ArticleEditLog from "../../components/ArticleEditLog.astro";
 import ArticleEvidence from "../../components/ArticleEvidence.astro";
+import ArticleCite from "../../components/ArticleCite.astro";
 import Footer from "../../components/Footer.astro";
 import { locales } from "../../data/site";
 import { annotateStorySections, inlineMarkdownHtml, keyGlossaryTerms, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../data/questions";
@@ -350,6 +351,10 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
         </section>
       </>
     )}
+
+    <section class="section article-cite-section" id="cite">
+      <ArticleCite page={page} explanation={explanation} />
+    </section>
 
     <section class="section">
       <p class="sec-hd">Related questions</p>
