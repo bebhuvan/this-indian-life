@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "policy.shutdowns.duration",
+  "title": "How long shutdowns last, and how often we simply don't know",
+  "sourceId": "sflc",
+  "sourceIndicatorId": "get-graph-time",
+  "sourceUrl": "https://internetshutdowns.in/",
+  "unit": "shutdowns, 2012-2026",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group"
+  ],
+  "fetchedAt": "2026-06-19T05:12:31.594852+00:00",
+  "metadata": {
+    "note": "Every recorded shutdown, 2012-2026, bucketed by duration (SFLC.in). The single largest bucket is 'never disclosed' (210 of 922, 23%): because orders are rarely published, the length of most blackouts can only be guessed from news reports that seldom say when the internet came back. The opacity is the point."
+  },
+  "rows": [
+    {
+      "label": "Under 24 hours",
+      "value": 353,
+      "group": "All recorded shutdowns"
+    },
+    {
+      "label": "24 to 72 hours",
+      "value": 245,
+      "group": "All recorded shutdowns"
+    },
+    {
+      "label": "Over 72 hours",
+      "value": 114,
+      "group": "All recorded shutdowns"
+    },
+    {
+      "label": "Duration never disclosed",
+      "value": 210,
+      "group": "All recorded shutdowns"
+    }
+  ]
+}
