@@ -100,7 +100,10 @@ function viewBoxSize(viewBox: string) {
 
 function axisTextAnchor(x: number, width: number, pad: { l: number; r: number }) {
   if (x <= pad.l + 1) return "start";
-  if (x >= width - pad.r - 1) return "end";
+  // Anchor "end" near the right edge so a centred label can't overflow the viewBox. The
+  // last time-tick often lands ~1-2px INSIDE the plot edge and so missed the pad.r-based
+  // threshold by a hair — staying "middle"-anchored and clipping (e.g. "2026" 4px past).
+  if (x >= width - pad.r - 1 || x >= width - 24) return "end";
   return "middle";
 }
 
@@ -119,10 +122,13 @@ function fmt(value: number, unit = "") {
   const abs = Math.abs(value);
   // Zero is special: a bare "0.0" on a rupee/dollar axis reads as a glitch.
   // Give it a clean, unit-appropriate label before the magnitude branches run.
+  // Match the SAME conditions the magnitude branches use to emit a currency — a bare
+  // "crore"/"rs" unit (counts, not money) must NOT get "₹0" while its other ticks stay
+  // bare numbers (the mismatch that put "₹0" next to "$20"/"40.0" on non-rupee axes).
   if (value === 0) {
     if (/%|percent/i.test(unit)) return "0%";
-    if (/rupees|inr|₹|rs|crore/i.test(unit)) return "₹0";
     if (/US\$|usd|\$/i.test(unit)) return "$0";
+    if (/rupees|inr|₹/i.test(unit) || (/crore/i.test(unit) && /inr|₹|rs/i.test(unit))) return "₹0";
     return "0";
   }
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
@@ -155,15 +161,35 @@ function fmt(value: number, unit = "") {
   return value.toFixed(1);
 }
 
-// Y-axis label: show the unit on the top tick only, bare numbers below. Repeating
-// "lakh cr" on every gridline is visual noise; show it once where the eye lands.
-function yTickLabel(tick: number, ti: number, ticks: number[], unit = "") {
-  const full = fmt(tick, unit);
-  if (ti === ticks.length - 1) return full; // topmost tick keeps the full unit
-  const ref = fmt(ticks[ticks.length - 1], unit);
+// Split a formatted axis label ("₹400 lakh cr") into its numeric head ("₹400") and
+// unit suffix ("lakh cr"). The suffix is read from the top tick (the only one fmt()
+// always tags with the unit) so every tick splits on the same boundary.
+function splitUnitLabel(full: string, ref: string) {
   const m = ref.match(/^([₹$]?\s?[\d.,]+)(.*)$/);
-  const suffix = m ? m[2] : "";
-  return suffix && full.endsWith(suffix) ? full.slice(0, full.length - suffix.length).trimEnd() : full;
+  const suffix = m && m[2] ? m[2].trim() : "";
+  let bare = suffix && full.endsWith(suffix) ? full.slice(0, full.length - suffix.length).trimEnd() : full;
+  // If the axis's reference (top) tick carries no currency symbol, this axis isn't money
+  // at this magnitude — so strip a stray leading ₹/$ off other ticks. Fixes the zero
+  // special-case emitting "₹0" next to bare "20.0/40.0" on small-value rupee/index axes.
+  if (!/^[₹$]/.test(ref)) bare = bare.replace(/^[₹$]/, "");
+  return { bare, suffix };
+}
+
+// The unit suffix to show ONCE as a caption above the axis (mobile), e.g. "lakh cr".
+function yUnitCaption(ticks: number[], unit = "") {
+  const ref = fmt(ticks[ticks.length - 1], unit);
+  return splitUnitLabel(ref, ref).suffix;
+}
+
+// Y-axis label. Desktop: show the unit on the top tick only, bare numbers below —
+// repeating "lakh cr" on every gridline is visual noise. Mobile (`bareAll`): every
+// tick is a bare number and the unit moves to a caption above the axis (yUnitCaption),
+// so the narrow box doesn't reserve a wide left gutter for one long top label.
+function yTickLabel(tick: number, ti: number, ticks: number[], unit = "", bareAll = false) {
+  const full = fmt(tick, unit);
+  const ref = fmt(ticks[ticks.length - 1], unit);
+  if (!bareAll && ti === ticks.length - 1) return full; // topmost tick keeps the full unit
+  return splitUnitLabel(full, ref).bare;
 }
 
 function compactBarLabel(value: number, unit = "") {
@@ -182,36 +208,40 @@ function compactBarLabel(value: number, unit = "") {
   return fmt(value, unit);
 }
 
-function endLabelInScale(value: number, maxAbs: number, unit = "", compact = false) {
+function endLabelInScale(value: number, maxAbs: number, unit = "", compact = false, bare = false) {
   // Format every line's end label in ONE scale (chosen from the chart's largest value)
   // so they're comparable AND the unit is obvious — a small line reads "₹0.2 lakh cr",
   // not fmt()'s per-value "₹22.3k cr" which looks bigger than the "₹7.4 lakh cr" on top.
   // `compact` swaps verbose scale words for short ones on the narrow mobile box.
+  // `bare` drops the scale word entirely (keeps currency + number) — mobile multi-line
+  // charts carry the unit once in the axis caption, so the end labels stay short and
+  // the plot keeps its width. "%" / "x" attach directly and always survive.
   const n = (v: number, divisor: number) =>
     (v / divisor).toLocaleString("en-IN", { maximumFractionDigits: 1 });
+  const w = (short: string, long: string) => bare ? "" : ` ${compact ? short : long}`;
   if (/multiple/i.test(unit)) return `${n(value, 1)}x`;
   if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 100 ? 0 : 1 })}%`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
-    if (maxAbs >= 100_000) return `₹${n(value, 100_000)} ${compact ? "L cr" : "lakh cr"}`;
-    if (maxAbs >= 1_000) return `₹${n(value, 1_000)}k cr`;
-    return `₹${n(value, 1)} cr`;
+    if (maxAbs >= 100_000) return `₹${n(value, 100_000)}${w("L cr", "lakh cr")}`;
+    if (maxAbs >= 1_000) return `₹${n(value, 1_000)}${bare ? "k" : "k cr"}`;
+    return `₹${n(value, 1)}${w("cr", "cr")}`;
   }
   if (/rupees|inr|₹/i.test(unit)) {
-    if (maxAbs >= 1e12) return `₹${n(value, 1e12)} ${compact ? "L cr" : "lakh cr"}`;
-    if (maxAbs >= 1e7) return `₹${n(value, 1e7)} cr`;
-    if (maxAbs >= 1e5) return `₹${n(value, 1e5)} lakh`;
+    if (maxAbs >= 1e12) return `₹${n(value, 1e12)}${w("L cr", "lakh cr")}`;
+    if (maxAbs >= 1e7) return `₹${n(value, 1e7)}${w("cr", "cr")}`;
+    if (maxAbs >= 1e5) return `₹${n(value, 1e5)}${w("lakh", "lakh")}`;
   }
   if (/US\$|usd|\$/i.test(unit)) {
-    if (maxAbs >= 1e12) return `$${n(value, 1e12)} ${compact ? "T" : "trillion"}`;
-    if (maxAbs >= 1e9) return `$${n(value, 1e9)} ${compact ? "B" : "billion"}`;
+    if (maxAbs >= 1e12) return `$${n(value, 1e12)}${w("T", "trillion")}`;
+    if (maxAbs >= 1e9) return `$${n(value, 1e9)}${w("B", "billion")}`;
   }
   if (/people/i.test(unit)) {
-    if (maxAbs >= 1e7) return `${n(value, 1e7)} crore`;
-    if (maxAbs >= 1e5) return `${n(value, 1e5)} lakh`;
+    if (maxAbs >= 1e7) return `${n(value, 1e7)}${w("crore", "crore")}`;
+    if (maxAbs >= 1e5) return `${n(value, 1e5)}${w("lakh", "lakh")}`;
   }
-  if (maxAbs >= 1e9) return `${n(value, 1e9)} ${compact ? "bn" : "billion"}`;
-  if (maxAbs >= 1e6) return `${n(value, 1e6)} ${compact ? "M" : "million"}`;
-  return fmt(value, unit);
+  if (maxAbs >= 1e9) return `${n(value, 1e9)}${w("bn", "billion")}`;
+  if (maxAbs >= 1e6) return `${n(value, 1e6)}${w("M", "million")}`;
+  return bare ? fmt(value, "") : fmt(value, unit);
 }
 
 function shortLabel(label: string) {
@@ -553,7 +583,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const width = mobile ? 384 : (twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000));
   const height = mobile ? (isHero ? 406 : 346) : (isHero ? 560 : isLead ? 500 : 360);
   const baseLeft = mobile ? 46 : isLead ? 86 : 58;
-  const yFontSize = mobile ? 13 : isLead ? 21 : 17;
+  const yFontSize = mobile ? 14.5 : isLead ? 21 : 17;
   const padRTB = mobile
     ? { r: visual.lines.length > 1 ? 48 : 12, t: 20, b: 70 }
     : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 76 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 78 };
@@ -563,7 +593,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // the plot stays wide. Either way, size the right pad to the widest label — the mirror
   // of the dynamic LEFT pad below — so nothing clips off the viewBox.
   const endMaxAbs = Math.max(1, ...visual.lines.flatMap((l) => l.points.map((p) => Math.abs(p.value))));
-  const endText = (value: number) => endLabelInScale(value, endMaxAbs, visual.unit, mobile);
+  const endText = (value: number) => endLabelInScale(value, endMaxAbs, visual.unit, mobile, mobile);
   if (visual.lines.length > 1 || forceEndLabelPad) {
     const endOffset = mobile ? 12 : 22; // label x offset from the end point (see template)
     const endFont = mobile ? 12.5 : 17; // .end-mini-v font-size (see indica.css)
@@ -574,7 +604,11 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
         return v == null ? 0 : endText(v).length;
       })
     );
-    padRTB.r = Math.max(padRTB.r, endOffset + Math.round(maxEndLabelLen * endFont * 0.62) + 8);
+    // Mobile end-labels are bare (short), so reserve the gutter tighter — 0.62/8 over-sized
+    // it for the now-bare "$17.3", leaving visible empty space between label and card edge.
+    const kerf = mobile ? 0.56 : 0.62;
+    const slack = mobile ? 4 : 8;
+    padRTB.r = Math.max(padRTB.r, endOffset + Math.round(maxEndLabelLen * endFont * kerf) + slack);
   }
   const all = visual.lines.flatMap((line) => line.points);
   const values = all.map((point) => point.value);
@@ -600,10 +634,19 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const ticks = useLogScale && logTicks.length >= 2 ? logTicks : linear.ticks;
   // Size the left padding to the widest y-axis label so "₹400 lakh cr" / "$10 trillion"
   // don't overflow off the left edge of the viewBox (which clipped the leading digits).
-  const maxYLabelLen = Math.max(3, ...ticks.map((tick) => fmt(tick, visual.unit).length));
+  // On mobile the unit moves to a caption above the axis (unitCaption, rendered in the
+  // template) and every tick is a bare number, so the gutter is sized to the bare
+  // labels ("₹400") — not the long unit label — which keeps the narrow plot wide.
+  const refLabel = fmt(ticks[ticks.length - 1], visual.unit);
+  const yLabelText = (tick: number) => mobile ? splitUnitLabel(fmt(tick, visual.unit), refLabel).bare : fmt(tick, visual.unit);
+  const maxYLabelLen = Math.max(3, ...ticks.map((tick) => yLabelText(tick).length));
+  const unitCaption = mobile ? yUnitCaption(ticks, visual.unit) : "";
   // 0.6em/char tracks DM Sans/RupeeSans (light) closely; the old 0.78 over-reserved the
   // left gutter by ~70px on long labels ("40 million"), leaving a visible empty band.
   const pad = { l: Math.max(baseLeft, Math.round(maxYLabelLen * yFontSize * 0.6) + 14), ...padRTB };
+  // The unit caption sits in its own row ABOVE the top tick, so give it headroom — without
+  // it the caption ("lakh cr") collides with the topmost number ("₹400") at the same corner.
+  if (unitCaption) pad.t += 16;
   const plotW = width - pad.l - pad.r;
   // Position points by real time. Monthly series must use the month too; otherwise all
   // twelve YYYY-MM points in a year collapse onto one x-position and render as steps.
@@ -712,7 +755,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       .filter((i) => ap[i])
       .map((i) => ({ xPos: xByIndex(i, ap.length), label: visual.xLabels?.[i] ?? formatAxisLabel(ap[i].date) }));
   }
-  return { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime };
+  return { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime, unitCaption };
 }
 
 /** Shaded event bands (e.g. El Niño years) for a time-axis line chart. Each band is
@@ -948,10 +991,11 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     {b.label ? <text x={b.x + b.w / 2} y={gm.pad.t + 12} text-anchor="middle" font-size="10.5" fill="#b06a4f">{b.label}</text> : null}
                   </g>
                 ))}
+                {gm.unitCaption ? <text class="yaxt" x={2} y={gm.pad.t - 18} style="font-size:12px;letter-spacing:.03em;opacity:.9">{gm.unitCaption}</text> : null}
                 {gm.ticks.map((tick, ti) => (
                   <g>
                     {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, visual.unit)}</text>
+                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, visual.unit, true)}</text>
                   </g>
                 ))}
                 {gm.axisTicks.map((tick) => (
@@ -1059,10 +1103,11 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         <text class="chart-watermark" x={g.width - 14} y={g.height - 7} text-anchor="end">{WATERMARK_TEXT}</text>
                       </svg>
                       <svg class="viz-svg viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
+                        {gm.unitCaption ? <text class="yaxt" x={2} y={gm.pad.t - 18} style="font-size:12px;letter-spacing:.03em;opacity:.9">{gm.unitCaption}</text> : null}
                         {gm.ticks.map((tick, ti) => (
                           <g>
                             {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                            <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, lp.unit)}</text>
+                            <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, lp.unit, true)}</text>
                           </g>
                         ))}
                         {gm.axisTicks.map((tick) => (
@@ -1075,7 +1120,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                               <g>
                                 <circle cx={path.latestX} cy={path.latestY} r="4" fill="#fff" stroke={path.color} stroke-width="2.4" />
                                 <line x1={path.latestX + 4} y1={path.latestY} x2={path.latestX + 10} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
-                                <text class="end-mini-v" x={path.latestX + 12} y={path.labelY} fill={path.color}>{fmt(path.latest.value, lp.unit)}</text>
+                                <text class="end-mini-v" x={path.latestX + 12} y={path.labelY} fill={path.color}>{path.endLabelText || fmt(path.latest.value, lp.unit)}</text>
                               </g>
                             ) : null}
                           </>
