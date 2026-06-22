@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "policy.blocking.dns_by_isp",
+  "title": "How many domains each ISP blocks",
+  "sourceId": "dnsblocks",
+  "sourceIndicatorId": "compiled_blocklist_isp",
+  "sourceUrl": "https://dnsblocks.in/",
+  "unit": "blocked domains",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group"
+  ],
+  "fetchedAt": "2026-06-19T05:12:31.594852+00:00",
+  "metadata": {
+    "note": "The same legal blocking orders are implemented unevenly: each ISP resolves a different set of domains, so what is reachable depends on who your provider is. Counts from dnsblocks.in."
+  },
+  "rows": [
+    {
+      "label": "Airtel",
+      "value": 27647,
+      "group": "Blocked domains"
+    },
+    {
+      "label": "MTNL",
+      "value": 20073,
+      "group": "Blocked domains"
+    },
+    {
+      "label": "Jio",
+      "value": 15240,
+      "group": "Blocked domains"
+    },
+    {
+      "label": "ACT",
+      "value": 14171,
+      "group": "Blocked domains"
+    },
+    {
+      "label": "You Broadband",
+      "value": 14049,
+      "group": "Blocked domains"
+    },
+    {
+      "label": "Connect",
+      "value": 9412,
+      "group": "Blocked domains"
+    }
+  ]
+}

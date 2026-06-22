@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "policy.blocking.app_bans",
+  "title": "India's big app bans",
+  "sourceId": "indica",
+  "sourceIndicatorId": "curated-app-bans",
+  "sourceUrl": "https://www.meity.gov.in/",
+  "unit": "apps blocked",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group",
+    "note"
+  ],
+  "fetchedAt": "2026-06-19T05:12:31.594852+00:00",
+  "metadata": {
+    "note": "Major Indian app/platform blocking actions under Section 69A, curated from government notifications and reporting. The 2020 wave (~224 apps in a year) followed the India-China border clash; the 2026 Telegram block was the first to face a serious court test of whether 69A can lawfully switch off an entire service; the Delhi High Court upheld it in June 2026. Counts are apps affected; the Telegram row is one app but ~150M users.",
+    "sourceUrls": [
+      "https://en.wikipedia.org/wiki/List_of_Chinese_apps_banned_in_India",
+      "https://www.techtimes.com/articles/318541/20260617/telegram-challenges-indias-neet-ban-delhi-high-court-over-section-69a-limits.htm"
+    ]
+  },
+  "rows": [
+    {
+      "label": "Jun 2020: TikTok + 58 Chinese apps",
+      "value": 59,
+      "group": "Apps blocked in one action",
+      "note": "Section 69A, days after the Galwan clash."
+    },
+    {
+      "label": "Jul 2020: 47 clone apps",
+      "value": 47,
+      "group": "Apps blocked in one action",
+      "note": ""
+    },
+    {
+      "label": "Sep 2020: 118 apps (incl. PUBG)",
+      "value": 118,
+      "group": "Apps blocked in one action",
+      "note": ""
+    },
+    {
+      "label": "Feb 2022: 54 more Chinese apps",
+      "value": 54,
+      "group": "Apps blocked in one action",
+      "note": ""
+    },
+    {
+      "label": "Feb 2023: 232 betting & loan apps",
+      "value": 232,
+      "group": "Apps blocked in one action",
+      "note": "138 betting + 94 loan apps, many Chinese-linked (MHA/MeitY)."
+    },
+    {
+      "label": "Apr 2023: 14 messenger apps (J&K)",
+      "value": 14,
+      "group": "Apps blocked in one action",
+      "note": "Blocked over alleged terror use."
+    },
+    {
+      "label": "Jun 2026: Telegram (1 app, ~150M users)",
+      "value": 1,
+      "group": "Apps blocked in one action",
+      "note": "NEET re-exam paper-leak fears; challenged in Delhi HC."
+    }
+  ]
+}

@@ -6988,7 +6988,78 @@ export const v1Questions = [
         watch: "Low scores can mean a brand is distrusted OR is critical of power and actively disliked by some; this is not a quality ranking." }
     ]
   },
+  {
+    id: "q.policy.internet_control",
+    slug: "indias-off-switch",
+    question: "When does India switch off the internet, and does it actually work?",
+    priority: "core",
+    // Built Jun 2026. Trigger: the June 2026 nationwide Telegram block (NEET re-exam
+    // paper-leak fears), now before the Delhi High Court as the first real test of
+    // whether Section 69A can lawfully kill an entire platform. Frame: India's three
+    // distinct off-switches (regional shutdowns under the Telegraph Act / Temporary
+    // Suspension Rules; app/platform bans and URL blocks under IT Act s.69A; ISP-level
+    // DNS blocking). Sources: SFLC.in Internet Shutdowns Tracker (live JSON endpoints,
+    // 2012-2026); dnsblocks.in "Poisoned Wells" blocklist (43,083 domains x 6 ISPs);
+    // Access Now / #KeepItOn STOP dataset (India platform blocks); MeitY s.69A counts
+    // disclosed to Parliament; Top10VPN cost estimates. Ingest: scripts/ingest-offswitch.py.
+    // Honesty spine: the most-invoked justification (stopping violence) is the one the
+    // best evidence (Rydzak 2019) contradicts; most DNS blocking is piracy/vice, not
+    // speech; every count is a documented floor because orders are secret by rule.
+    indicators: [
+      "policy.blocking.app_bans",
+      "policy.shutdowns.annual",
+      "policy.shutdowns.by_state",
+      "policy.shutdowns.state_ranked",
+      "policy.shutdowns.preventive",
+      "policy.shutdowns.reactive",
+      "policy.shutdowns.duration",
+      "policy.blocking.urls_annual",
+      "policy.blocking.dns_by_category",
+      "policy.blocking.dns_by_isp",
+      "policy.shutdowns.cost_usd",
+      "policy.blocking.platform_events",
+      "policy.blocking.urls_by_platform_total",
+      "policy.blocking.authority_split",
+      "policy.blocking.urls_facebook",
+      "policy.blocking.urls_x",
+      "policy.blocking.urls_youtube",
+      "policy.blocking.urls_instagram",
+      "policy.blocking.urls_others"
+    ],
+    // Curated "Further reading" — durable here in the registry so it survives
+    // explanation regeneration (merged into explanation.furtherReading at build time).
+    furtherReading: [
+      { label: "SFLC.in — Internet Shutdowns Tracker (the live database behind this page)", url: "https://internetshutdowns.in/" },
+      { label: "Jan Rydzak, ‘Of Blackouts and Bandhs’ (2019) — the study finding shutdowns track more violence, not less", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3330413" },
+      { label: "Anuradha Bhasin v. Union of India (Supreme Court, 2020) — shutdowns must be temporary, proportionate and published", url: "https://indiankanoon.org/doc/82461587/" },
+      { label: "ICRIER, ‘The Anatomy of an Internet Blackout’ (2018) — the economic-cost study", url: "https://icrier.org/publications/the-anatomy-of-an-internet-blackout-measuring-the-economic-impact-of-internet-shutdowns-in-india/" },
+      { label: "Access Now — #KeepItOn 2024 report (India in global context)", url: "https://www.accessnow.org/internet-shutdowns-2024/" }
+    ],
+    visualPlan: [
+      // ACT 1 - There isn't one ban. There are three.
+      { chart: "tableBars", indicator: "policy.blocking.app_bans", size: "hero", beat: "taxonomy", unit: "apps blocked in one action", subtitle: "Indica, from MeitY notifications + reporting · major Section 69A app/platform blocks · 2020-2026", title: "The apps India has switched off", why: "Telegram in 2026 was not a one-off: India has a standing power to switch off whole apps, and has used it in waves.", read: "Each bar is one blocking action and how many apps it took down. The 2020 surge (about 224 apps in a year) followed the India-China border clash; the 2026 Telegram block is a single app but roughly 150 million users.", watch: "Bars count apps, not users. Telegram is one app yet dwarfs the others in reach, which is exactly why its block went to court." },
 
+      // ACT 2 - How often, and where
+      { chart: "line", indicator: "policy.shutdowns.annual", size: "hero", beat: "scale", unit: "shutdowns per year", subtitle: "SFLC.in Internet Shutdowns Tracker · government-ordered internet suspensions · 2012-2026", title: "How often India goes dark", why: "The simplest measure of the off switch: how many times a year some part of India loses the internet by government order.", read: "Each point is the number of shutdowns recorded in a year. They climb from a handful in 2012 to a peak of 136 in 2018, then fall to 60 in 2024 as courts and scrutiny bit. 2026 is year-to-date.", watch: "A documented floor, not a ceiling: SFLC rebuilds this from news reports because the government rarely publishes shutdown orders. The fall is real but partly reflects fewer, longer blackouts." },
+      { chart: "choropleth", indicator: "policy.shutdowns.by_state", size: "feature", beat: "geography", unit: "shutdowns, 2012-2026", rankLabel: "Goes dark most", bottomLabel: "Never recorded", subtitle: "SFLC.in · cumulative government-ordered shutdowns by state · 2012-2026", title: "Where India goes dark", why: "The national count hides a stark geography: shutdowns are not spread across India, they are concentrated in a few places.", read: "Each state is shaded by its cumulative shutdowns. Jammu & Kashmir alone accounts for 453 of 922 (about half of every shutdown India has ever recorded); most of the country has had almost none.", watch: "These are counts of orders, not their length or severity. A region with many short shutdowns can rank above one with a single months-long blackout." },
+      { chart: "tableBars", indicator: "policy.shutdowns.state_ranked", size: "feature", beat: "geography-ranked", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · top 12 states by cumulative recorded shutdowns · 2012-2026", title: "The states that go dark most", why: "The map sharpened into a league table: a handful of states do nearly all of India's switching-off.", read: "Each bar is a state's cumulative shutdowns. Jammu & Kashmir is in a category of its own; Rajasthan is a distant second; the rest trail far behind.", watch: "Cumulative since 2012, so a long-troubled region dominates even if it is quieter now. This is history, not a snapshot of today." },
+
+      // ACT 3 - Most of it happens before anything does
+      { chart: "multiLine", indicator: "policy.shutdowns.preventive", series: [ { indicator: "policy.shutdowns.preventive", label: "Preventive (before any event)", color: "#c2476b" }, { indicator: "policy.shutdowns.reactive", label: "Reactive (during an event)", color: "#1f9e8a" } ], size: "feature", beat: "preventive", unit: "shutdowns per year", subtitle: "SFLC.in · shutdowns imposed in anticipation vs in response · 2012-2026", title: "Most blackouts are imposed before anything happens", why: "The justification is usually public safety in a crisis, but the data says most shutdowns are pre-emptive, ordered before any trouble has begun.", read: "Two lines: shutdowns imposed in anticipation of an event (an exam, a protest, an anniversary) against those responding to one unfolding. Preventive runs far above reactive for most of the record, peaking near 94-to-6 in 2021.", watch: "Preventive vs reactive is SFLC's classification from the stated reason; the line between anticipating trouble and pre-empting dissent is exactly what is contested." },
+      { chart: "tableBars", indicator: "policy.shutdowns.duration", size: "feature", beat: "opacity", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · every recorded shutdown bucketed by duration · 2012-2026", title: "How long they last, and how often we just don't know", why: "Even basic facts about a shutdown are hidden: for a huge share, nobody outside government knows how long the internet stayed off.", read: "Each bar is a duration bucket across all recorded shutdowns. The single largest bucket is 'never disclosed' (about half), because orders are rarely published and duration is guessed from news reports.", watch: "The opacity is the finding, not a data gap to apologise for. Undisclosed duration means the public cannot check whether a shutdown was as brief or proportionate as claimed." },
+
+      // ACT 4 - The quieter switch: blocking orders
+      { chart: "line", indicator: "policy.blocking.urls_annual", size: "feature", beat: "blocking-orders", unit: "URLs blocked", subtitle: "MeitY answers to Parliament · websites, accounts and URLs blocked under IT Act s.69A · 2017-2023", title: "The quieter off switch: blocking orders", why: "Shutdowns are visible and noisy; URL blocking is silent and far larger, and it has grown.", read: "Each point is the number of websites, accounts and URLs ordered blocked under Section 69A in a year, as disclosed to Parliament. They spike to nearly 9,900 in 2020 and run in the thousands every year.", watch: "These are the government's own figures and do not fully reconcile across answers; the orders themselves are confidential by rule, so the public never learns what was blocked or why. Read the magnitude, not the exact count." },
+      { chart: "tableBars", indicator: "policy.blocking.authority_split", size: "feature", beat: "who-orders", unit: "websites blocked, 2015-2022", subtitle: "SFLC.in 'Finding 404', from RTI replies · India's website blocks by ordering authority · Jan 2015-Sep 2022", title: "Who orders India's website blocks", why: "Blocking is often pictured as judges weighing free speech, but nearly half of it is the executive acting in secret.", read: "Of about 55,580 websites blocked over 2015-22, court orders (mostly copyright) and executive orders under Section 69A are almost neck-and-neck, at roughly 47% each. The executive half is the opaque one: those orders are confidential by rule.", watch: "This is an aggregate split across the whole period, not a year-by-year trend. Court-ordered blocks are dominated by a few large anti-piracy orders that each cover many mirror sites." },
+      { chart: "multiLine", indicator: "policy.blocking.urls_x", size: "feature", beat: "which-platforms", unit: "URLs blocked under s.69A", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · URLs blocked under IT Act s.69A, by platform · 2018-2023 (2023 till Oct)", title: "X overtook Facebook as the most-blocked platform", series: [ { indicator: "policy.blocking.urls_x", label: "X (Twitter)", color: "#111111" }, { indicator: "policy.blocking.urls_facebook", label: "Facebook", color: "#1877f2" }, { indicator: "policy.blocking.urls_youtube", label: "YouTube", color: "#e0245e" }, { indicator: "policy.blocking.urls_instagram", label: "Instagram", color: "#c13584" }, { indicator: "policy.blocking.urls_others", label: "Others", color: "#9aa0a6" } ], why: "The aggregate count hides who actually gets censored, and the answer flipped as the politics did.", read: "Each line is one platform's URLs blocked under Section 69A. Facebook drew the most takedowns in 2018-19; from 2020 X (Twitter) pulled far ahead, peaking near 3,400 a year, even as Facebook stayed high.", watch: "Counts are URLs/accounts/posts, not unique pieces of content, and 2023 is only till October. The crossover tracks contested political moments (farmer protests, 2021) as much as platform size." },
+      { chart: "tableBars", indicator: "policy.blocking.urls_by_platform_total", size: "small", beat: "which-platforms-total", unit: "URLs blocked, 2018-Oct 2023", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · total URLs blocked under s.69A by platform · 2018-Oct 2023", title: "Which platforms India blocks the most", why: "Summed over six years, the league table makes the target plain.", read: "Each bar is a platform's total URLs blocked under Section 69A from 2018 to October 2023. X leads with 13,660, then Facebook (10,197), YouTube (5,759), a catch-all 'others' (4,199) and Instagram (3,023).", watch: "Totals lump together very different years; the same six-year window saw Facebook lead early and X lead late. 'Others' bundles every smaller platform." },
+      { chart: "tableBars", indicator: "policy.blocking.dns_by_category", size: "feature", beat: "what-blocked", unit: "blocked domains", subtitle: "dnsblocks.in 'Poisoned Wells' study · 43,083 DNS-blocked domains across 6 ISPs, by category", title: "What India's ISPs actually block", why: "Before calling all blocking censorship, look at what is on the list: the answer complicates the easy story.", read: "Each bar is how many blocked domains fall in a category, grouped by kind. Piracy and streaming dominate by far; pornography and gambling follow; content tied to speech and access (news, political criticism, government, circumvention tools) is a tiny sliver.", watch: "DNS blocking is one mechanism among several and is trivially bypassed, so this measures intent, not an airtight wall. 'Uncategorised' is large and unclassified." },
+      { chart: "tableBars", indicator: "policy.blocking.dns_by_isp", size: "small", beat: "uneven", unit: "blocked domains", subtitle: "dnsblocks.in · number of domains found DNS-blocked, by internet provider", title: "What you can reach depends on your ISP", why: "The same blocking orders are implemented unevenly, so the open internet you get depends on who you pay for it.", read: "Each bar is how many domains one provider was found to DNS-block. Airtel blocks the most by a wide margin; the lightest providers block under half as many.", watch: "Differences partly reflect how each ISP implements orders and how thoroughly the study could probe it, not just policy zeal." },
+
+      // ACT 5 - What it costs (evidence: Rydzak / does-it-work handled in prose)
+      { chart: "tableBars", indicator: "policy.shutdowns.cost_usd", size: "feature", beat: "cost", unit: "US$ million, 2012-2017", subtitle: "ICRIER, The Anatomy of an Internet Blackout (2018) · economic loss from internet shutdowns · 2012-2017", title: "What switching it off costs", why: "Shutdowns are not free: the most authoritative India study put the loss at about three billion dollars in six years.", read: "The two bars split ICRIER's roughly $3bn estimate by type. Mobile-only shutdowns did about four-fifths of the damage; combined mobile-and-fixed shutdowns the rest.", watch: "This is a macro-econometric estimate over 2012-2017, not exact accounting and not a recent-year figure. More recent annual losses, tracked by the NetBlocks Cost of Shutdown Tool, run in the hundreds of millions a year." }
+    ]
+  },
 ];
 
 export const worldBankIndicators = [

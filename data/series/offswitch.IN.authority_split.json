@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "policy.blocking.authority_split",
+  "title": "Who orders India's website blocks",
+  "sourceId": "sflc",
+  "sourceIndicatorId": "finding-404-2022",
+  "sourceUrl": "https://images.assettype.com/barandbench/2023-01/5b3b5f47-930a-4c78-b425-1109b7f12e08/Finding_404___A_Report_on_Website_Blocking_in_India.pdf",
+  "unit": "websites blocked",
+  "frequency": "cumulative",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group",
+    "note"
+  ],
+  "fetchedAt": "2026-06-22T00:00:00+00:00",
+  "metadata": {
+    "note": "Of 55,580 websites blocked in India between January 2015 and September 2022 (SFLC.in 'Finding 404', built from RTI replies), 47.5% were blocked by the executive under Section 69A (MeitY + MIB) and 46.8% by court orders, mostly for copyright infringement. This is an aggregate split over the whole period, not a year-by-year series."
+  },
+  "rows": [
+    {
+      "label": "Executive (Section 69A)",
+      "value": 26447,
+      "group": "Website blocks, 2015 to Sep 2022",
+      "note": "MeitY and MIB; orders confidential by rule."
+    },
+    {
+      "label": "Court orders",
+      "value": 26024,
+      "group": "Website blocks, 2015 to Sep 2022",
+      "note": "Mostly copyright-infringement blocking."
+    },
+    {
+      "label": "Other / unclassified",
+      "value": 3109,
+      "group": "Website blocks, 2015 to Sep 2022",
+      "note": "Residual; grounds not specified in disclosures."
+    }
+  ]
+}
