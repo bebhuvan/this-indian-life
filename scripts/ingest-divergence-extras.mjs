@@ -35,6 +35,8 @@ const DATASETS = [
   { slug: "mean-years-of-schooling-long-run", metric: "schooling_years", valueColumn: "Average years of schooling", title: "Mean years of schooling", unit: "years", fromYear: 1900, source: "Lee-Lee/Barro-Lee via OWID" },
   { slug: "human-development-index", metric: "hdi", valueColumn: "Human Development Index", title: "Human Development Index", unit: "index (0-1)", fromYear: 1990, source: "UNDP via OWID" },
   { slug: "electoral-democracy-index", metric: "democracy", valueColumn: "Electoral democracy index", title: "Electoral democracy index (V-Dem)", unit: "index (0-1)", fromYear: 1900, source: "V-Dem via OWID" },
+  { slug: "liberal-democracy-index", metric: "liberal_democracy", valueColumn: "Liberal democracy index", title: "Liberal democracy index (V-Dem)", unit: "index (0-1)", fromYear: 1900, source: "V-Dem via OWID" },
+  { slug: "political-corruption-index", metric: "political_corruption", valueColumn: "Political Corruption Index", title: "Political corruption index (V-Dem, higher = more corrupt)", unit: "index (0-1)", fromYear: 1900, source: "V-Dem via OWID" },
   { slug: "labor-productivity-per-hour-pennworldtable", metric: "productivity_hour", valueColumn: "Productivity: output per hour worked", title: "Output per hour worked", unit: "int-$ per hour", fromYear: 1970, source: "Penn World Table via OWID" },
   { slug: "share-of-population-in-extreme-poverty", metric: "poverty_owid", valueColumn: "Share of population in poverty ($3 a day)", title: "Extreme poverty ($3/day)", unit: "% of population", fromYear: 1977, source: "World Bank PIP via OWID" }
 ];
