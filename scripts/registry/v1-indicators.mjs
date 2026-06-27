@@ -7367,7 +7367,7 @@ export const v1Questions = [
   },
   {
     id: "q.work.jobs_challenge",
-    slug: "the-biggest-job-in-the-world",
+    slug: "india-jobs-challenge",
     question: "Does India really have the biggest jobs challenge in the world?",
     priority: "core",
     // Built Jun 2026 off a single authoritative source: the World Bank's "The Global Jobs
