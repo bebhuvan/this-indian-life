@@ -7365,6 +7365,96 @@ export const v1Questions = [
       { chart: "tableBars", indicator: "policy.shutdowns.cost_usd", size: "feature", beat: "cost", unit: "US$ million, 2012-2017", subtitle: "ICRIER, The Anatomy of an Internet Blackout (2018) · economic loss from internet shutdowns · 2012-2017", title: "What switching it off costs", why: "Shutdowns are not free: the most authoritative India study put the loss at about three billion dollars in six years.", read: "The two bars split ICRIER's roughly $3bn estimate by type. Mobile-only shutdowns did about four-fifths of the damage; combined mobile-and-fixed shutdowns the rest.", watch: "This is a macro-econometric estimate over 2012-2017, not exact accounting and not a recent-year figure. More recent annual losses, tracked by the NetBlocks Cost of Shutdown Tool, run in the hundreds of millions a year." }
     ]
   },
+  {
+    id: "q.work.jobs_challenge",
+    slug: "the-biggest-job-in-the-world",
+    question: "Does India really have the biggest jobs challenge in the world?",
+    priority: "core",
+    // Built Jun 2026 off a single authoritative source: the World Bank's "The Global Jobs
+    // Challenge" (2026 advance edition; eds. Chrimes, Kose, Stamm), with global comparisons
+    // for scale. India is #1 of all EMDEs on every absolute measure: ~238m young people
+    // reach working age 2025-35 (youth method, Fig 2.8.A), ~91m net working-age increase by
+    // 2035 and ~132m by 2050 (Figs 2.8.C/D) -- roughly one in five of the entire developing
+    // world's jobs challenge. The honesty spine: (1) these are PROJECTIONS, method-dependent
+    // and uncertain, not measurements; (2) India's challenge is scale, not intensity -- the
+    // most youth-DENSE economies are elsewhere (CAR, Niger, the Pacific); (3) the youth
+    // cohort has already STOPPED growing (growth negative from ~2021, Fig 2.2.C) so this is
+    // the crest of the wave, not a still-opening window; (4) how big the task is hinges on
+    // labour-force participation, above all women's -- the IMF (Alonso-MacDonald 2024) range
+    // the report cites runs 60m-148m jobs by 2030 purely on that assumption (flagged as a
+    // cited study, not the WB's own number). Ingest: scripts/ingest-jobs-challenge.mjs.
+    indicators: [
+      "work.jobs.youth_reaching_wap_top10",
+      "work.jobs.india_vs_regions_youth",
+      "work.jobs.wap_increase_2050_top10",
+      "work.jobs.india_youth_growth",
+      "work.jobs.india_wap_growth",
+      "work.jobs.population_india",
+      "work.jobs.population_china",
+      "work.jobs.lfp_job_scenarios"
+    ],
+    furtherReading: [
+      { label: "World Bank — The Global Jobs Challenge (2026), the report this page is built on", url: "https://www.worldbank.org/en/research/publication/global-jobs-challenge" },
+      { label: "Alonso & MacDonald, ‘Advancing India’s Structural Transformation’ (IMF, 2024) — the 60–148m participation range", url: "https://www.imf.org/en/Publications/WP/Issues/2024/02/02/Advancing-Indias-Structural-Transformation-and-Catch-up-544370" },
+      { label: "Rajan & Lamba, ‘Breaking the Mold: India’s Untraveled Path to Prosperity’ (2024) — the high-skilled-services case", url: "https://press.princeton.edu/books/hardcover/9780691263779/breaking-the-mold" }
+    ],
+    visualPlan: [
+      // ACT 1 - The biggest job in the world
+      { chart: "tableBars", indicator: "work.jobs.youth_reaching_wap_top10", size: "hero", beat: "ranking", unit: "million young people reaching working age, 2025-35",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.A · young people reaching working age, 2025-35 · UN WPP 2024",
+        title: "India tops the developing world's jobs challenge",
+        why: "The single headline finding: of every developing economy, India must absorb the largest wave of new workers this decade.",
+        read: "Each bar is the number of young people who reach working age in that economy over 2025-35. India leads at about 238 million, well ahead of China (169m) and Nigeria (61m).",
+        watch: "These are demographic projections, not a current jobs shortfall: the bar counts people reaching working age, not the unemployed." },
+      { chart: "tableBars", indicator: "work.jobs.india_vs_regions_youth", size: "feature", beat: "scale", unit: "million young people reaching working age, 2025-35",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Figs 2.7.B & 2.8.A · India vs whole EMDE regions · UN WPP 2024",
+        title: "One country, a fifth of the problem",
+        why: "To feel the scale, set India alone against entire world regions rather than other single countries.",
+        read: "India's roughly 238 million is about 86% of all South Asia, around 72% of all Sub-Saharan Africa, and larger than the Middle East, Latin America or Europe-and-Central-Asia regions on their own. Across all developing economies the total is about 1.23 billion, so India is close to one in five.",
+        watch: "India is one country; the bars beside it are whole multi-country regions. That is the point, not an error." },
+
+      // ACT 2 - Count it any way, India still finishes first
+      { chart: "tableBars", indicator: "work.jobs.wap_increase_2050_top10", size: "feature", beat: "robustness", unit: "million net working-age increase, 2025-50",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.D · net working-age (15-64) increase, 2025-50 · UN WPP 2024",
+        title: "Still the biggest a generation out",
+        why: "The headline is not an artefact of one counting method: switch to net working-age growth and stretch to 2050, India still leads.",
+        read: "Each bar is the net rise in the working-age population (15-64) over 2025-50. India tops it at about 132 million, ahead of Nigeria (98m) and Pakistan (89m). India is also #1 over the shorter 2025-35 window, at about 91 million.",
+        watch: "Methods give very different point estimates (the all-EMDE total ranges from 270m to 1.23bn depending on the method); we use them as a consistent ranking, not exact counts." },
+
+      // ACT 3 - The wave has already crested
+      { chart: "line", indicator: "work.jobs.india_youth_growth", size: "feature", beat: "cresting", window: "full", unit: "% annual growth, population aged 15-24",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.2.C (India) · annual growth of the 15-24 population · UN WPP 2024",
+        title: "The wave has already crested",
+        why: "The twist behind the big number: India's youth cohort is no longer growing, even as it stays the largest on earth.",
+        read: "The line is the annual growth rate of India's youth population (aged 15-24). It crosses below zero around 2021 and stays negative: the cohort has stopped expanding. The demographic window is closing, not still opening.",
+        watch: "Negative growth does not mean few young people; it means the number has peaked. The absolute cohort stays enormous for a decade." },
+      { chart: "line", indicator: "work.jobs.india_wap_growth", size: "small", beat: "cresting-broad", window: "full", unit: "% annual growth, population aged 15-64",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.3.B (India) · annual growth of the 15-64 population · UN WPP 2024",
+        title: "Even the working-age pool is flattening",
+        why: "It is not just the youngest cohort: the whole 15-64 pool, the people an economy actually puts to work, is on the same downward path, a beat behind.",
+        read: "The line is the annual growth rate of India's working-age population (aged 15-64). It is still positive but slows steadily, from about 2.5% in 2000 to under 1% by 2030 and roughly zero by 2049. The broad pool is still growing, but its growth has a clear end in sight.",
+        watch: "This still rises while the youth line already falls, because the two cohorts age in sequence; the working-age pool keeps growing for now, just more slowly each year." },
+      { chart: "multiLine", indicator: "work.jobs.population_india", size: "feature", beat: "overtake", window: "full", unit: "billion people",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.1.A · total population · UN WPP 2024",
+        title: "The largest workforce on earth, but cresting",
+        series: [
+          { indicator: "work.jobs.population_india", label: "India", color: "#b3245a" },
+          { indicator: "work.jobs.population_china", label: "China", color: "#8a8597" }
+        ],
+        why: "Context for the workforce story: India overtook China to become the world's most populous economy, but its own population peaks within a generation.",
+        read: "Each line is total population in billions. India passes China around 2022-23 and keeps rising to a peak near 1.70 billion around 2061; China is already in sustained decline.",
+        watch: "Population is not the workforce, but it sets its ceiling. India's edge is a one-time demographic window, not a permanent gap." },
+
+      // ACT 4 - The 60-to-148-million question
+      { chart: "tableBars", indicator: "work.jobs.lfp_job_scenarios", size: "feature", beat: "participation", unit: "million new jobs needed",
+        subtitle: "IMF (Alonso & MacDonald 2024), cited in World Bank, The Global Jobs Challenge (2026) · jobs needed by labour-force-participation assumption",
+        title: "A 60-million job problem, or a 148-million one",
+        why: "How big the task actually is comes down to one variable the report keeps returning to: whether Indians, above all women, join the workforce.",
+        read: "Holding participation at today's rate, India needs about 60 million new jobs by 2030; lifting it toward a target rate pushes that to about 148 million. By 2050 the same lever spans roughly 143 to 324 million.",
+        watch: "This range is from an IMF study the report cites, not the World Bank's own count. It is an illustration of how sensitive the number is to participation, not a precise forecast." }
+    ]
+  },
+
 ];
 
 export const worldBankIndicators = [
