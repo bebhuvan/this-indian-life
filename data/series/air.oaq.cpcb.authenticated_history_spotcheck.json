@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck",
+  "title": "Authenticated OAQ CPCB history spot-check",
+  "sourceId": "oaq",
+  "sourceIndicatorId": "air.oaq.cpcb.authenticated_history_spotcheck",
+  "sourceUrl": "https://oaq.notf.in",
+  "unit": "probes",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-29T11:45:00Z",
+  "rows": [
+    {
+      "label": "CPCB station IDs tested",
+      "value": 5
+    },
+    {
+      "label": "2026 annual aggregate paths returned data",
+      "value": 5
+    },
+    {
+      "label": "2022-2025 annual aggregate paths returned not found",
+      "value": 20
+    },
+    {
+      "label": "Sanjay Palace 2026 monthly aggregate paths returned data",
+      "value": 6
+    },
+    {
+      "label": "Sanjay Palace December 2025 monthly aggregate path returned not found",
+      "value": 1
+    },
+    {
+      "label": "Days in Sanjay Palace 2026 annual aggregate",
+      "value": 123
+    }
+  ],
+  "dimensions": [],
+  "metadata": {
+    "method": "Authenticated OAQ signed-history spot-check using the documented Data Lake handshake. Tested CPCB station IDs 307, 106, 107, 119 and 308. Annual aggregate paths for 2026 returned data from 2026-01-01 to 2026-06-23 for all five tested stations. Annual aggregate paths for 2022, 2023, 2024 and 2025 returned not found for all five tested stations. For station 307, monthly aggregate paths returned data for 2026-01 through 2026-06 and returned not found for 2025-12. API token and signed URLs are not stored."
+  }
+}
