@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "air.cpcb.repository.raw_frequency_file_counts",
+  "title": "CPCB raw repository file listings by public frequency",
+  "sourceId": "cpcb",
+  "sourceIndicatorId": "air.cpcb.repository.raw_frequency_file_counts",
+  "sourceUrl": "https://airquality.cpcb.gov.in/ccr/#/repository/data",
+  "unit": "listed files",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-29T11:23:46.581742Z",
+  "rows": [
+    {
+      "label": "15-minute raw files",
+      "value": 4346,
+      "frequency": "15M",
+      "stationsWithFiles": 559,
+      "firstYear": 2009,
+      "lastYear": 2025
+    },
+    {
+      "label": "Hourly raw files",
+      "value": 4367,
+      "frequency": "1H",
+      "stationsWithFiles": 580,
+      "firstYear": 2009,
+      "lastYear": 2025
+    },
+    {
+      "label": "8-hour raw files",
+      "value": 4396,
+      "frequency": "8H",
+      "stationsWithFiles": 579,
+      "firstYear": 2011,
+      "lastYear": 2025
+    },
+    {
+      "label": "Daily raw files",
+      "value": 4455,
+      "frequency": "1D",
+      "stationsWithFiles": 580,
+      "firstYear": 2009,
+      "lastYear": 2025
+    }
+  ],
+  "dimensions": [],
+  "metadata": {
+    "stationsChecked": 598,
+    "frequenciesChecked": [
+      "15M",
+      "1H",
+      "8H",
+      "1D"
+    ],
+    "method": "Posted each CPCB station_id/station_name pair to the public dataRepository/file-path endpoint for raw data at 15M, 1H, 8H and 1D frequencies, then counted listed file paths. This counts file listings only; it does not validate pollutant cells inside those files."
+  }
+}

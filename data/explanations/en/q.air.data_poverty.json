@@ -1,0 +1,2944 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.air.data_poverty",
+  "status": "ready",
+  "lastReviewed": "2026-06-29",
+  "dataThrough": "CPCB daily files through 2025; OAQ snapshot 2026-06-23; CPCB sub-daily spot-check 2025",
+  "short": {
+    "headline": "What India's AQI can see, and what it can't",
+    "dek": "India's AQI is useful, but the public history underneath it is thinner than the dashboard feels.",
+    "body": "CPCB exposes more than a live AQI card. A verified raw repository endpoint listed 4,455 daily raw files and thousands more 15-minute, hourly and 8-hour files across 598 station records. But a file path is not pollutant evidence. The downloaded daily audit found 916,083 non-missing PM2.5 station-days, 40 stations with no usable PM2.5, and only 200 stations with usable PM2.5 before 2020. The recent archive is much stronger, but it is still monitored India, not all India."
+  },
+  "macha": {
+    "heading": "Okay, so can we trust the AQI?",
+    "body": "Trust it for what it is: a quick public signal from monitors. Do not treat it as a full history of India's air. Under the AQI, CPCB has raw files, rows and pollutant cells. Those layers do not always line up. Some years have files but no PM2.5. Some current station records show no pollutant value in the latest mirror. The newer public archive is useful, but older PM history and unmonitored places need much more caution.",
+    "soWhat": "AQI tells you what monitored places can show now; the raw audit tells you where public history is strong enough to inspect."
+  },
+  "article": {
+    "title": "What India's AQI Can See, And What It Can't",
+    "standfirst": "AQI is a score from a monitored place, not a map of the air everyone breathes. India's public raw archive is real and deeper than the dashboard suggests, but the inspectable PM2.5 history is late, uneven and city-heavy.",
+    "bodyMarkdown": "## AQI is a score, not the air\n\nIndia's AQI is the number most people see first. CPCB's official National AQI material describes it as a score built from pollutant sub-indices. In plain English, each pollutant gets converted into its own index score, then the highest available sub-index becomes the overall AQI. The pollutant behind that highest score is reported as the dominant pollutant. CPCB's public categories run from Good and Satisfactory to Moderate, Poor, Very Poor and Severe.\n\nThat is useful design. A single score is easier to read than a table of PM2.5, PM10, nitrogen dioxide, sulphur dioxide, carbon monoxide, ozone and other pollutants. But it is also a compression. AQI tells you the public signal from a monitor at a place and time. It does not show every pollutant cell, every missing instrument, every station's history, or whether a public file has enough PM2.5 days for trend work.\n\nThis article starts underneath the score. The daily repository audit checked 598 CPCB station records. In 2009, CPCB listed 25 daily station-year files in the audited archive, but only 1 had usable PM2.5. In 2017, there were 504 listed station-year files, but only 80 had usable PM2.5. By 2025, the same audit found 579 listed files and 540 usable PM2.5 station-years. The lesson is simple: files, rows and pollutant cells are different layers of public evidence.\n\n## What raw data can the public download?\n\nCPCB's public raw repository is broader than a daily CSV archive. On 29 June 2026, a direct probe checked 598 station records against the public dataRepository/file-path endpoint for raw data at 15-minute, hourly, 8-hour and daily frequencies. It returned 4,346 listed 15-minute raw files, 4,367 hourly files, 4,396 8-hour files and 4,455 daily files.\n\nThat is a real public surface. It matters because the official system is not only an AQI card on a dashboard. It also exposes file paths that can be reproduced by script. But a listed path is still only a listing. It says CPCB has a raw file path for a station, frequency and year. It does not prove that the CSV has rows. It does not prove PM2.5 or PM10 is present. It does not prove the year is complete enough for a trend.\n\nA narrow spot-check confirmed that sub-daily files are not imaginary. For Sanjay Palace, Agra in 2025, the same public download endpoint returned parseable CSVs at all four frequencies: 35,040 rows at 15-minute frequency, 8,760 hourly rows, 1,095 8-hour rows and 365 daily rows. Each file had PM2.5 and PM10 columns with many non-missing values. Treat that as a proof of access, not a completeness audit for every sub-daily file.\n\nThe AQI repository is a different case. The CPCB interface has a /repository/aqi route and app-code strings for AQI repository listing and Excel export. In this run, I could not reproduce a stable public AQI audit endpoint comparable to the raw file-path call. Several dashboard routes used an encrypted browser proxy. So the raw repository is treated as scriptably verified here. The AQI repository is treated as visible in the official interface, but not used for locked historical numbers.\n\n## How much PM evidence is actually visible?\n\nThe deeper audit downloaded and checked 4,455 daily raw CSVs. Across those files, it found 916,083 non-missing PM2.5 station-days and 872,770 non-missing PM10 station-days. A station-day is one station with one non-missing pollutant value on one date. It is a coverage unit, not a pollution concentration.\n\nThe 2017 spike in listed files is the chart's warning label. CPCB lists 504 daily station-year files for 2017, up from 50 in 2016. But only 80 of the 2017 files have any usable PM2.5, and 424 have zero usable PM2.5. Many are CSV shells with daily timestamp rows and blank particulate columns. They are public files, but not public PM2.5 evidence.\n\nThe inspectable particle record becomes much stronger after 2020. PM2.5 station-days rise from 15,384 in 2017 to 74,169 in 2020, 153,321 in 2023 and 173,983 in 2025. PM10 follows the same broad pattern in the audited daily files. Do not read that as worsening air. It means more public observations are visible in the repository.\n\n## When is a station-year ready for trend work?\n\nA station-year with one PM2.5 day is visible. It is not a serious yearly record. That is why this audit counts four thresholds: any PM2.5 day, 30 or more days, 180 or more days and 300 or more days.\n\nThe distinction is large in the older archive. In 2017, 80 station-years had any PM2.5 day, 76 had at least 30 days, 42 had at least 180 days and only 23 had at least 300 days. By 2025, the four counts were 540, 536, 490 and 444. The gap narrows, but it does not disappear.\n\nThe 300-day line is not an official CPCB standard. It is an audit threshold for readers who want a fuller annual history. The point is practical. A dashboard can show a station. A file list can show a year. A trend analyst still has to ask how many actual pollutant days sit inside that station-year.\n\n## Where does the station map go thin?\n\nThe station network measures monitored India. It does not measure all of urban India. The CPCB/OAQ station hierarchy used here has 335 distinct city names. Census 2011 counts 4,041 statutory towns. On that denominator, about 91.7 percent, or about 92 percent, of statutory towns are outside this station-list comparison.\n\nThis is a place-visibility denominator. It is not a population-exposure estimate. It does not mean 92 percent of Indians lack AQI data. It also does not mean every statutory town needs its own monitor. Some towns are small, some are near larger airsheds, and station-list names do not map perfectly to Census names.\n\nThe narrower finding is still important. AQI is a monitor-based public signal. Before we even ask whether a file has PM2.5 cells, many legally urban places are outside the public station-list frame used in this audit.\n\n## Which cities have the deepest PM2.5 archive?\n\nThe usable PM2.5 archive is city-heavy. New Delhi has 73,348 PM2.5 station-days in this audit across 25 stations with any usable PM2.5. Mumbai has 41,502 across 28 such stations. Delhi has 39,328, Bengaluru 25,311 and Hyderabad 22,663.\n\nThat is not an air-quality ranking. A city can rank high because it has more stations, older stations, fewer missing PM2.5 cells, or all three. A lower-ranked city may be cleaner, dirtier or simply less visible in this public archive.\n\nFor national claims, this concentration matters. The public historical archive is strongest where the monitoring network is dense and older. It is weakest where stations arrived late, publish thin histories, or never appear in the public station list used here.\n\n## When did stations first become usable?\n\nFirst usable PM2.5 year is stricter than first listed file year. It asks when a station first has any non-missing PM2.5 value in the daily repository files.\n\nOnly 200 of the 598 station records had usable PM2.5 before 2020. The recent record is much stronger: 508 station-years had usable PM2.5 in 2023, 524 in 2024 and 540 in 2025. Across the full daily audit, 396 stations had at least 1,000 usable PM2.5 days.\n\nThat makes the archive good for many current comparisons and weaker for long historical panels. A station appearing in an older repository year does not automatically give you a PM2.5 trend from that year. Sometimes the file exists, but the particle cells do not.\n\n## Where do file years outrun PM2.5 years?\n\nSome station histories look long until you count usable PM2.5 years. Airoli in Navi Mumbai has 17 listed daily years but only 5 usable PM2.5 years, a gap of 12. City Railway Station and Sanegurava Halli in Bengaluru have 11 listed years and zero usable PM2.5 years in the audited daily files.\n\nAcross all 598 station records, 40 had no usable PM2.5 in daily files. That splits into 22 records with listed daily files but no usable PM2.5, and 18 records with no listed daily repository file in the audit.\n\nThis does not prove a station failed. It says the public daily repository does not support a PM2.5 history for those station-years. For a public audit, that is the difference that matters.\n\n## What does a file with rows but no PM look like?\n\nSome files are not empty. They still do not help with PM2.5 or PM10 history. The examples in this chart have daily rows and zero usable PM2.5 and PM10 days.\n\nRows are a middle layer of evidence. A file can contain timestamps and gas pollutants such as NO, NO2, SO2, CO or ozone while the PM columns are blank or unusable. For AQI, different pollutants can matter on different days. For a particle-pollution history, PM2.5 and PM10 cells have to be present.\n\nThis is why the article keeps file listing, rows and pollutant cells separate. If those are collapsed into one word, the archive looks cleaner than it is.\n\n## What does OAQ add?\n\nOAQ is useful because it mirrors current CPCB data in a cleaner API shape. The inspected CPCB snapshot was generated on 23 June 2026 at 17:40 IST. It had 598 station records. At that moment, 203 records had at least one of the eight main pollutant fields, 139 had all eight, 185 had PM2.5 and 183 had PM10. The other 395 records had no main pollutant value in that snapshot.\n\nThat is latest visibility, not deep history. It tells you what the mirror saw at one moment. It does not replace the CPCB repository audit of daily historical files.\n\nThe station metadata snapshot also has useful public fields. All 598 records had coordinates, station type, a latest-seen timestamp and an agency or operator suffix in the station name. It did not expose clean commissioning or activation dates. The public can inspect where a station is and who appears to operate it. It cannot cleanly inspect every station's start date from this metadata alone.\n\n## How should you read these numbers?\n\nRead this as a visibility audit, not as a pollution trend. The daily audit used CPCB's public raw repository to list, download and inspect station-year CSVs. The frequency audit counted raw file listings at 15-minute, hourly, 8-hour and daily frequencies. The sub-daily spot-check proved those downloads can work for one station-year. The PM2.5 and PM10 completeness numbers come from downloaded daily files only.\n\nThe public surfaces are different. The all-India AQI portal is the current public signal. Advance search is a human-oriented dashboard and export surface. The CPCB raw repository endpoint is reproducible and audited here. OAQ is a clean latest mirror. The AQI repository is visible in the CPCB interface and app bundle, but a stable public AQI audit endpoint was not reproduced for this article.\n\nThe caveats are real. This audit does not validate calibration, siting, QA flags, monitor downtime or whether a station represents a whole city. The statutory-town comparison is a place denominator, not a population denominator. The 300-day threshold is an audit choice for trend-readiness, not an official rule.\n\nWhat India can say with confidence is that public AQI sits on a real monitoring system, and CPCB exposes more raw public data than casual dashboard browsing suggests. What it cannot honestly say from these files alone is that the public can inspect a long, even, all-India PM2.5 record."
+  },
+  "editorialPlan": {
+    "audience": "Readers who use AQI but want to know what public evidence sits underneath it.",
+    "heroDescription": "Canonical Indica article on India's AQI visibility, CPCB raw repository access, OAQ latest mirror coverage and the limits of public historical PM evidence.",
+    "selectedDataPoints": [
+      {
+        "label": "598 CPCB station records checked.",
+        "use": "article evidence"
+      },
+      {
+        "label": "580 station records had at least one listed daily repository file.",
+        "use": "article evidence"
+      },
+      {
+        "label": "4,455 CPCB daily raw CSVs downloaded and audited.",
+        "use": "article evidence"
+      },
+      {
+        "label": "916,083 non-missing PM2.5 station-days and 872,770 non-missing PM10 station-days in downloaded daily files.",
+        "use": "article evidence"
+      },
+      {
+        "label": "40 stations had no usable PM2.5 in daily files: 22 with listed daily files but no usable PM2.5, and 18 with no listed daily repository file.",
+        "use": "article evidence"
+      },
+      {
+        "label": "396 stations had at least 1,000 usable PM2.5 days.",
+        "use": "article evidence"
+      },
+      {
+        "label": "200 stations had usable PM2.5 before 2020.",
+        "use": "article evidence"
+      },
+      {
+        "label": "2009: 25 listed daily station files, 1 usable PM2.5 station-year, 242 PM2.5 station-days and 24 listed files with zero PM2.5.",
+        "use": "article evidence"
+      },
+      {
+        "label": "2017: 504 listed daily station files, 80 usable PM2.5 station-years, 15,384 PM2.5 station-days and 424 listed files with zero PM2.5.",
+        "use": "article evidence"
+      }
+    ],
+    "pullQuotes": [],
+    "glossaryBlocks": [
+      {
+        "term": "AQI",
+        "plainMeaning": "AQI is a public score that converts several pollutant readings into one number and one category, such as Moderate or Poor.",
+        "whyItMattersHere": "The article asks what that score can show quickly and what it hides about the underlying monitor data.",
+        "keyTerm": true,
+        "whyThisKeyTerm": "Without this distinction, readers can mistake the AQI card for the full air-quality record."
+      },
+      {
+        "term": "pollutant sub-index",
+        "plainMeaning": "A pollutant sub-index is the AQI-style score calculated for one pollutant before CPCB reports the overall AQI.",
+        "whyItMattersHere": "CPCB's overall AQI is driven by the highest available sub-index, so one pollutant can determine the public score."
+      },
+      {
+        "term": "dominant pollutant",
+        "plainMeaning": "The dominant pollutant is the pollutant whose sub-index drives the overall AQI at that place and time.",
+        "whyItMattersHere": "It reminds the reader that the same AQI number can be driven by different pollutants in different cities or seasons."
+      },
+      {
+        "term": "raw repository file",
+        "plainMeaning": "A raw repository file is a downloadable CPCB CSV listed for a station, frequency and year.",
+        "whyItMattersHere": "The article shows why a listed file is only the first layer of evidence. It may still have empty rows or missing PM cells.",
+        "keyTerm": true,
+        "whyThisKeyTerm": "Most of the audit turns on the difference between a listed file and usable pollutant data."
+      },
+      {
+        "term": "non-missing pollutant cell",
+        "plainMeaning": "A non-missing pollutant cell is an actual value in a pollutant column, not a blank, dash or null entry.",
+        "whyItMattersHere": "PM2.5 and PM10 history depends on these cells, not just on whether the CSV exists."
+      },
+      {
+        "term": "station-day",
+        "plainMeaning": "A station-day is one monitoring station with one non-missing pollutant value on one date.",
+        "whyItMattersHere": "Station-days measure how much public observation exists. They do not measure whether pollution rose or fell."
+      },
+      {
+        "term": "station-year",
+        "plainMeaning": "A station-year is one station in one calendar year.",
+        "whyItMattersHere": "The article separates a station-year with any PM2.5 from a station-year with enough days to support trend work."
+      },
+      {
+        "term": "trend-ready",
+        "plainMeaning": "Trend-ready means a station-year has enough non-missing days to be useful for comparing one year with another.",
+        "whyItMattersHere": "The 300-day threshold in this article is an audit rule of thumb, not an official CPCB quality standard."
+      },
+      {
+        "term": "latest mirror",
+        "plainMeaning": "A latest mirror is a current copy of what a data source sees at one time, shaped for easier access.",
+        "whyItMattersHere": "OAQ helps with current CPCB visibility, but it does not replace CPCB's historical repository."
+      },
+      {
+        "term": "statutory town",
+        "plainMeaning": "A statutory town is a legally urban place in the Census frame, such as a municipality or cantonment board.",
+        "whyItMattersHere": "The town comparison is a place-visibility check. It is not a claim about population exposure or where monitors must be placed."
+      }
+    ]
+  },
+  "chartExplainers": [
+    {
+      "visualId": "Listed files and usable PM2.5 history diverge",
+      "takeaway": "The daily repository grows to 579 listed station-year files by 2025, but the usable PM2.5 history catches up much later.",
+      "detail": "This is the article's core chart because it separates three layers: a listed daily file, a station-year with any usable PM2.5, and a listed file with zero PM2.5. The odd 2017 jump is real, but it is a repository-listing finding: CPCB lists 504 daily station-year files, only 80 have any usable PM2.5, and 424 have none. By 2025 the gap is much smaller, with 579 listed files and 540 usable PM2.5 station-years.",
+      "whyShowThis": "It prevents the reader from treating public file availability as public pollutant evidence.",
+      "howToRead": "Read each year vertically. The red line is listed station-year file paths. The dark line is station-years with at least one non-missing PM2.5 daily value. The green line is listed files where PM2.5 is still zero, so a wide red-dark gap means the repository looks deeper than the PM2.5 evidence inside it.",
+      "mistakeToAvoid": "Do not read the red line as operating stations, city coverage or pollution exposure. It is only the count of station-year file paths returned by the repository.",
+      "mobileNote": "Use the legend first. On a small screen, the important move is the red-dark gap in 2017 and the much narrower gap by 2025."
+    },
+    {
+      "visualId": "CPCB's raw archive extends beyond daily files",
+      "takeaway": "CPCB's verified raw endpoint lists thousands of files at 15-minute, hourly, 8-hour and daily frequency.",
+      "detail": "The file-list probe returned 4,346 listed 15-minute raw files, 4,367 hourly files, 4,396 8-hour files and 4,455 daily files across 598 station records. A separate spot-check for Sanjay Palace, Agra in 2025 confirmed that sub-daily files can be downloaded and parsed, but this chart itself counts listings only. It does not validate row completeness or pollutant cells inside every sub-daily file.",
+      "whyShowThis": "It shows that the official public data surface is broader than the dashboard, before the article narrows to the daily PM completeness audit.",
+      "howToRead": "Each bar counts file paths returned by CPCB for one raw frequency. The similar bar lengths mean the repository exposes a comparable number of station-year files across frequencies, not that the files are equally complete.",
+      "mistakeToAvoid": "Do not assume listed 15-minute, hourly or 8-hour files have the same completeness as the daily files audited in detail.",
+      "mobileNote": "The bars are close together. The key note is that these are public file listings, not validated pollutant observations."
+    },
+    {
+      "visualId": "Usable PM observations become broad only after 2020",
+      "takeaway": "The audited daily files contain 916,083 non-missing PM2.5 station-days and 872,770 PM10 station-days, with most depth arriving after 2020.",
+      "detail": "A station-day is one station with one non-missing pollutant value on one date. PM2.5 station-days rise from 15,384 in 2017 to 74,169 in 2020 and 173,983 in 2025. That is a rise in inspectable observations, not a rise in pollution concentration. The same logic applies to PM10, which is plotted beside PM2.5 as a second particle-coverage check.",
+      "whyShowThis": "It shifts the article from file counts to the pollutant cells needed for historical PM analysis.",
+      "howToRead": "Follow the lines over time as counts of non-missing daily PM values. PM2.5 and PM10 move together in recent years, which shows that the public particle record becomes much more usable in the 2020s.",
+      "mistakeToAvoid": "Do not say the line rising means India's air worsened. A coverage line rises when more station-days are visible, even if concentration levels move differently.",
+      "mobileNote": "The unit is station-days. It is not micrograms per cubic metre and not an AQI score."
+    },
+    {
+      "visualId": "Trend-ready PM2.5 years lag basic visibility",
+      "takeaway": "In 2025, 540 PM2.5 station-years had any data, but only 444 had at least 300 non-missing days.",
+      "detail": "This chart separates minimal visibility from fuller annual evidence. In 2017, 80 station-years had any PM2.5, but only 23 reached 300 days. By 2025 the gap is smaller, but it still tells analysts not to treat any-data counts as ready-made trend panels.",
+      "whyShowThis": "It answers the question a file audit alone cannot answer: which station-years are substantial enough to compare across time?",
+      "howToRead": "Each line raises the minimum bar. The top line counts station-years with any PM2.5 day, while the lower lines require 30, 180 or 300 non-missing days. The spread between lines is the difference between seeing a station-year once and having a fuller annual record.",
+      "mistakeToAvoid": "Do not treat 300 days as an official CPCB quality rule. It is an audit threshold chosen to make trend-readiness visible.",
+      "mobileNote": "Compare the top and bottom lines first: any PM2.5 day versus 300 or more PM2.5 days."
+    },
+    {
+      "visualId": "The station list covers only a fraction of urban places",
+      "takeaway": "The CPCB/OAQ hierarchy has 335 city names, while Census 2011 counts 4,041 statutory towns.",
+      "detail": "This chart is a geography warning, not a monitor-siting prescription. It says about 92 percent of statutory towns are outside this station-list comparison, but it does not say 92 percent of Indians lack AQI data. It also does not say every statutory town needs a monitor, because airsheds and settlement size matter.",
+      "whyShowThis": "It stops the article from quietly equating monitored India with all of urban India.",
+      "howToRead": "Compare the smaller station-list city-name bar with the much larger Census statutory-town bar. The gap shows the difference between named places visible in this public station hierarchy and the legal urban frame.",
+      "mistakeToAvoid": "Do not convert this into a population claim or a one-monitor-per-town rule.",
+      "mobileNote": "The big bar is the Census denominator. Read the chart as place visibility, not exposure."
+    },
+    {
+      "visualId": "Deep PM2.5 history is concentrated in a few cities",
+      "takeaway": "New Delhi, Mumbai and Delhi dominate the usable PM2.5 station-day archive.",
+      "detail": "New Delhi has 73,348 usable PM2.5 station-days, Mumbai has 41,502 and Delhi has 39,328 in the audited daily files. These counts combine station density, station age and missing-cell patterns. They tell us where the public historical archive is deepest, not where air is cleanest or dirtiest.",
+      "whyShowThis": "It shows that national PM history is city-heavy and strongest where monitoring is dense and older.",
+      "howToRead": "Bars rank cities by total non-missing daily PM2.5 station-days. A city can rank high because it has many stations, long-running stations, better PM2.5 completeness, or some mix of those factors.",
+      "mistakeToAvoid": "Do not compare these bars as pollution levels. They measure public evidence volume.",
+      "mobileNote": "Long labels may wrap. Compare bar lengths first, then read city names and counts."
+    },
+    {
+      "visualId": "Most station PM2.5 histories begin late",
+      "takeaway": "Only 200 of 598 station records had usable PM2.5 before 2020.",
+      "detail": "First usable year means the first year with any non-missing PM2.5 daily value in the downloaded repository files. It is not the station's commissioning date and not necessarily the first year the station operated. The chart shows why recent PM2.5 comparisons are much easier than long historical panels.",
+      "whyShowThis": "It makes the timing of usable evidence visible, rather than assuming every listed station has a long PM2.5 record.",
+      "howToRead": "Each bar counts stations by the first year in which their daily files contain usable PM2.5. A pile-up in recent years means many stations become inspectable for PM2.5 late in the archive.",
+      "mistakeToAvoid": "Do not assume a late first usable year always means a new station. Earlier files may exist but have missing PM2.5 cells.",
+      "mobileNote": "Read this as the start of usable PM2.5 evidence, not the opening date of the monitor."
+    },
+    {
+      "visualId": "Long file histories can hide short PM2.5 records",
+      "takeaway": "Some stations have long listed file histories but little or no usable PM2.5 history.",
+      "detail": "Airoli in Navi Mumbai has 17 listed daily years but only 5 usable PM2.5 years. City Railway Station and Sanegurava Halli in Bengaluru have 11 listed years and zero usable PM2.5 years in the audited daily files. These are concrete examples of the file-versus-pollutant gap.",
+      "whyShowThis": "It grounds the article's central distinction at station level, where readers can see named examples rather than only national totals.",
+      "howToRead": "Each bar is listed daily years minus years with any non-missing PM2.5 for that station. A larger bar means more years where the public repository listed a daily file but did not provide usable PM2.5 history.",
+      "mistakeToAvoid": "Do not use the gap as proof that a monitor failed. Use it as evidence that the public daily files do not support PM2.5 history for those years.",
+      "mobileNote": "Station labels are long. The bar value is the number of listed years without usable PM2.5."
+    },
+    {
+      "visualId": "Daily rows can exist while PM values are blank",
+      "takeaway": "Some daily files contain rows but zero usable PM2.5 and PM10 days.",
+      "detail": "These representative examples span full-year and partial-year CSVs. A file can contain timestamps and non-PM pollutant columns while both particle columns are blank or unusable. That is why row counts are a middle layer of evidence, not the final answer for PM history.",
+      "whyShowThis": "It makes the missing-cell problem tangible inside actual files, not only in annual summaries.",
+      "howToRead": "Bars count daily rows in selected files where both PM2.5 and PM10 usable day counts are zero. The point is not which example is largest, but that non-empty files can still be useless for particle-history work.",
+      "mistakeToAvoid": "Do not call a file usable for PM history just because it has timestamps or gas-pollutant values.",
+      "mobileNote": "The chart is about row counts in no-PM examples. Other pollutant columns may still exist."
+    },
+    {
+      "visualId": "The latest OAQ mirror is a snapshot, not history",
+      "takeaway": "In the inspected OAQ snapshot, 598 CPCB station records were present, but 395 had no main pollutant value at that moment.",
+      "detail": "OAQ is useful because it mirrors current CPCB data in a cleaner API shape. In the 23 June 2026 snapshot, 203 records had at least one of the eight main pollutant fields and 139 had all eight. That makes OAQ valuable for latest visibility and metadata, but not a replacement for CPCB's historical repository audit.",
+      "whyShowThis": "It separates current mirror access from deep historical evidence.",
+      "howToRead": "Read the bars as one moment in time. The full station-record bar is the denominator; the pollutant bars show how many records had current values in that snapshot; the no-main-pollutant bar shows how sparse a latest mirror can be.",
+      "mistakeToAvoid": "Do not treat a latest snapshot as a complete history, or as proof that a station never reports pollutants.",
+      "mobileNote": "The bars are moment-in-time availability counts, not station histories."
+    }
+  ],
+  "sectionVisualMap": [
+    {
+      "heading": "AQI is a score, not the air",
+      "visualId": "Listed files and usable PM2.5 history diverge"
+    },
+    {
+      "heading": "What raw data can the public download?",
+      "visualId": "CPCB's raw archive extends beyond daily files"
+    },
+    {
+      "heading": "How much PM evidence is actually visible?",
+      "visualId": "Usable PM observations become broad only after 2020"
+    },
+    {
+      "heading": "When is a station-year ready for trend work?",
+      "visualId": "Trend-ready PM2.5 years lag basic visibility"
+    },
+    {
+      "heading": "Where does the station map go thin?",
+      "visualId": "The station list covers only a fraction of urban places"
+    },
+    {
+      "heading": "Which cities have the deepest PM2.5 archive?",
+      "visualId": "Deep PM2.5 history is concentrated in a few cities"
+    },
+    {
+      "heading": "When did stations first become usable?",
+      "visualId": "Most station PM2.5 histories begin late"
+    },
+    {
+      "heading": "Where do file years outrun PM2.5 years?",
+      "visualId": "Long file histories can hide short PM2.5 records"
+    },
+    {
+      "heading": "What does a file with rows but no PM look like?",
+      "visualId": "Daily rows can exist while PM values are blank"
+    },
+    {
+      "heading": "What does OAQ add?",
+      "visualId": "The latest OAQ mirror is a snapshot, not history"
+    }
+  ],
+  "sourceNotes": [
+    "CPCB National Air Quality Index official material: https://cpcb.nic.in/National-Air-Quality-Index/ and the CPCB CCR AQI report linked from the portal.",
+    "CPCB Central Control Room raw repository route inspected at https://airquality.cpcb.gov.in/ccr/#/repository/data; reproducible raw file-list endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/file-path and download endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/download-excel-file.",
+    "CPCB CCR public AQI surfaces inspected at /#/all-india-aqi-portal, /#/caaqm-dashboard-all/advance-search and /#/repository/aqi; several dashboard routes used an encrypted browser proxy, and a stable public AQI audit endpoint was not reproduced.",
+    "OAQ CPCB latest mirror and station hierarchy snapshot inspected through https://oaq.notf.in, generated 2026-06-23T17:40:12+05:30.",
+    "Census 2011 statutory-town count from the Census India urban frame: https://censusindia.gov.in/nada/index.php/catalog/42811."
+  ],
+  "caveats": [
+    "This is a visibility audit, not a pollution trend. More station-days means more public observations, not dirtier air.",
+    "The daily PM2.5 and PM10 completeness audit uses downloaded CPCB daily raw files only. Sub-daily listings are counted separately, and one station-year spot-check only verifies that direct sub-daily downloads can be parsed.",
+    "The raw repository endpoint was reproduced with POST requests. AQI repository routes and export strings were visible in the CPCB SPA, but a stable public AQI audit endpoint was not reproduced.",
+    "Several CPCB dashboard routes use an encrypted browser proxy. They are public interfaces, but they were not treated as clean audit endpoints in this article.",
+    "The statutory-town comparison is a place-visibility denominator, not a population-exposure denominator, and not a claim that every statutory town needs its own monitor.",
+    "The audit does not validate monitor calibration, siting, QA flags, downtime or whether a station represents a whole city or airshed.",
+    "The 300-day threshold is an audit threshold for fuller annual history. It is not an official CPCB completeness standard.",
+    "The OAQ snapshot is a latest/current mirror. It should not be read as a deep historical archive or as proof that a station never reports pollutants."
+  ],
+  "lockedNumbersUsed": [
+    "CPCB official AQI categories: Good, Satisfactory, Moderate, Poor, Very Poor and Severe; overall AQI is the maximum pollutant sub-index and the corresponding pollutant is the dominant pollutant.",
+    "598 CPCB station records checked.",
+    "580 station records had at least one listed daily repository file.",
+    "4,455 CPCB daily raw CSVs downloaded and audited.",
+    "916,083 non-missing PM2.5 station-days and 872,770 non-missing PM10 station-days in downloaded daily files.",
+    "40 stations had no usable PM2.5 in daily files: 22 with listed daily files but no usable PM2.5, and 18 with no listed daily repository file.",
+    "396 stations had at least 1,000 usable PM2.5 days.",
+    "200 stations had usable PM2.5 before 2020.",
+    "2009: 25 listed daily station files, 1 usable PM2.5 station-year, 242 PM2.5 station-days and 24 listed files with zero PM2.5.",
+    "2017: 504 listed daily station files, 80 usable PM2.5 station-years, 15,384 PM2.5 station-days and 424 listed files with zero PM2.5.",
+    "2025: 579 listed daily station files, 540 usable PM2.5 station-years, 173,983 PM2.5 station-days and 39 listed files with zero PM2.5.",
+    "Raw frequency audit: 598 station records, 4 frequencies and 2,392 station-frequency probes on 2026-06-29.",
+    "Raw file listings returned: 4,346 15-minute files, 4,367 hourly files, 4,396 8-hour files and 4,455 daily files.",
+    "PM2.5 trend-readiness counts in 2017: 80 station-years with any PM2.5 day, 76 with 30+ days, 42 with 180+ days and 23 with 300+ days.",
+    "PM2.5 trend-readiness counts in 2025: 540 station-years with any PM2.5 day, 536 with 30+ days, 490 with 180+ days and 444 with 300+ days.",
+    "CPCB/OAQ station hierarchy: 335 distinct city names; Census 2011 statutory towns: 4,041; not-visible share: 91.7%, about 92%.",
+    "City PM2.5 station-days: New Delhi 73,348, Mumbai 41,502, Delhi 39,328, Bengaluru 25,311 and Hyderabad 22,663.",
+    "OAQ latest CPCB snapshot generated 2026-06-23T17:40:12+05:30: 598 station records, 203 with any main pollutant, 139 with all 8 main pollutants, 185 with PM2.5, 183 with PM10, and 395 with no main pollutant value at that moment.",
+    "CPCB sub-daily spot-check for Sanjay Palace, Agra in 2025: 15-minute file 35,040 rows with 30,888 PM2.5 rows; hourly file 8,760 rows with 8,131 PM2.5 rows; 8-hour file 1,095 rows with 1,068 PM2.5 rows; daily file 365 rows with 359 PM2.5 rows.",
+    "Station metadata snapshot: 598 records with coordinates, station type, latest-seen timestamp and agency/operator suffix in station name; 0 with commissioning or activation date in that snapshot."
+  ],
+  "qualityFlags": [],
+  "generatedAt": "2026-06-29T11:16:57.030Z",
+  "model": "manual-codex-gpt-5",
+  "generationPasses": [
+    "Manual rewrite on 2026-06-29 using CPCB official AQI material, CPCB raw repository audit artifacts, OAQ latest snapshot and Census town denominator.",
+    "Added PM2.5/PM10 station-year threshold artifacts and refreshed evidence packet."
+  ],
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.air.data_poverty",
+    "question": "What India's AQI Can See, And What It Can't",
+    "priority": "core",
+    "theme": {
+      "id": "climate",
+      "label": "Climate, emissions, and air",
+      "readerQuestions": [
+        "Is this about total scale or per-person exposure?",
+        "Is the chart annual, cumulative, or a latest snapshot?",
+        "What comparison would stop the number from being misread?",
+        "What is outside the measure?"
+      ],
+      "glossaryTerms": [
+        "CO2",
+        "per capita emissions",
+        "cumulative emissions",
+        "AQI",
+        "PM2.5",
+        "ERA5",
+        "daily maximum temperature",
+        "precipitation"
+      ]
+    },
+    "requiredIndicatorIds": [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days"
+    ],
+    "availableIndicatorIds": [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days"
+    ],
+    "themeIndicatorIds": [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days",
+      "air.cpcb.repository.station_years_with_rows",
+      "air.cpcb.repository.zero_pm25_listed_files",
+      "air.cpcb.repository.pm10_observed_days",
+      "air.cpcb.repository.station_years_with_pm25_1_days",
+      "air.cpcb.repository.station_years_with_pm25_30_days",
+      "air.cpcb.repository.station_years_with_pm25_180_days",
+      "air.cpcb.repository.station_years_with_pm25_300_days",
+      "air.cpcb.repository.station_years_with_pm10_1_days",
+      "air.cpcb.repository.station_years_with_pm10_30_days",
+      "air.cpcb.repository.station_years_with_pm10_180_days",
+      "air.cpcb.repository.station_years_with_pm10_300_days",
+      "air.cpcb.repository.raw_frequency_file_counts",
+      "air.cpcb.repository.station_metadata_visibility",
+      "air.cpcb.repository.city_visibility_vs_census",
+      "air.cpcb.repository.city_pm25_days",
+      "air.cpcb.repository.first_pm25_year",
+      "air.cpcb.repository.file_vs_pm25_years",
+      "air.cpcb.repository.listed_years_missing_pm25",
+      "air.cpcb.repository.rows_without_pm_examples",
+      "air.oaq.cpcb.latest_station_snapshot"
+    ],
+    "visualPlan": [
+      {
+        "visualId": "v1.air.cpcb.repository.listed_station_files",
+        "indicatorId": "air.cpcb.repository.listed_station_files",
+        "title": "Daily repository files listed by CPCB",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v2.air.cpcb.repository.station_years_with_pm25",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25",
+        "title": "Repository station-years with usable PM2.5",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v3.air.cpcb.repository.pm25_observed_days",
+        "indicatorId": "air.cpcb.repository.pm25_observed_days",
+        "title": "Non-missing PM2.5 station-days",
+        "sourceId": "cpcb",
+        "unit": "station-days",
+        "role": "primary",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v4.air.cpcb.repository.station_years_with_rows",
+        "indicatorId": "air.cpcb.repository.station_years_with_rows",
+        "title": "Daily repository files with any rows",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v5.air.cpcb.repository.zero_pm25_listed_files",
+        "indicatorId": "air.cpcb.repository.zero_pm25_listed_files",
+        "title": "Listed files with no usable PM2.5",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v6.air.cpcb.repository.pm10_observed_days",
+        "indicatorId": "air.cpcb.repository.pm10_observed_days",
+        "title": "Non-missing PM10 station-days",
+        "sourceId": "cpcb",
+        "unit": "station-days",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v7.air.cpcb.repository.station_years_with_pm25_1_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_1_days",
+        "title": "Repository station-years with any usable PM2.5",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v8.air.cpcb.repository.station_years_with_pm25_30_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_30_days",
+        "title": "Repository station-years with 30+ days usable PM2.5",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v9.air.cpcb.repository.station_years_with_pm25_180_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_180_days",
+        "title": "Repository station-years with 180+ days usable PM2.5",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v10.air.cpcb.repository.station_years_with_pm25_300_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_300_days",
+        "title": "Repository station-years with 300+ days usable PM2.5",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v11.air.cpcb.repository.station_years_with_pm10_1_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_1_days",
+        "title": "Repository station-years with any usable PM10",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v12.air.cpcb.repository.station_years_with_pm10_30_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_30_days",
+        "title": "Repository station-years with 30+ days usable PM10",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v13.air.cpcb.repository.station_years_with_pm10_180_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_180_days",
+        "title": "Repository station-years with 180+ days usable PM10",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v14.air.cpcb.repository.station_years_with_pm10_300_days",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_300_days",
+        "title": "Repository station-years with 300+ days usable PM10",
+        "sourceId": "cpcb",
+        "unit": "station-years",
+        "role": "context",
+        "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+        "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v15.air.cpcb.repository.raw_frequency_file_counts",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts",
+        "title": "CPCB raw repository file listings by public frequency",
+        "sourceId": "cpcb",
+        "unit": "listed files",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v16.air.cpcb.repository.station_metadata_visibility",
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility",
+        "title": "Public station-list metadata fields in the CPCB/OAQ snapshot",
+        "sourceId": "oaq",
+        "unit": "station records",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v17.air.cpcb.repository.city_visibility_vs_census",
+        "indicatorId": "air.cpcb.repository.city_visibility_vs_census",
+        "title": "CPCB station-list city names versus Census statutory towns",
+        "sourceId": "cpcb-census",
+        "unit": "towns/city names",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v18.air.cpcb.repository.city_pm25_days",
+        "indicatorId": "air.cpcb.repository.city_pm25_days",
+        "title": "Cities with the deepest CPCB PM2.5 archive",
+        "sourceId": "cpcb",
+        "unit": "PM2.5 station-days",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v19.air.cpcb.repository.first_pm25_year",
+        "indicatorId": "air.cpcb.repository.first_pm25_year",
+        "title": "When stations first have usable PM2.5 in the repository",
+        "sourceId": "cpcb",
+        "unit": "stations",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v20.air.cpcb.repository.file_vs_pm25_years",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years",
+        "title": "Repository years listed versus usable PM2.5 years",
+        "sourceId": "cpcb",
+        "unit": "years",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v21.air.cpcb.repository.listed_years_missing_pm25",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25",
+        "title": "Stations with the largest gap between listed years and usable PM2.5 years",
+        "sourceId": "cpcb",
+        "unit": "listed years without PM2.5",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v22.air.cpcb.repository.rows_without_pm_examples",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples",
+        "title": "Daily rows can exist while PM values are blank",
+        "sourceId": "cpcb",
+        "unit": "daily rows",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v23.air.oaq.cpcb.latest_station_snapshot",
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot",
+        "title": "The latest OAQ mirror is a snapshot, not history",
+        "sourceId": "oaq",
+        "unit": "station records",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      }
+    ],
+    "plannedCharts": [
+      {
+        "order": 1,
+        "chartId": "listed-files-and-usable-pm2-5-history-diverge",
+        "title": "Listed files and usable PM2.5 history diverge",
+        "chartType": "multiLine",
+        "beat": "answer",
+        "window": "",
+        "indicator": "",
+        "series": [
+          {
+            "indicator": "air.cpcb.repository.listed_station_files",
+            "label": "Repository files listed"
+          },
+          {
+            "indicator": "air.cpcb.repository.station_years_with_pm25",
+            "label": "Usable PM2.5 station-years"
+          },
+          {
+            "indicator": "air.cpcb.repository.zero_pm25_listed_files",
+            "label": "Listed files with no PM2.5"
+          }
+        ],
+        "unit": "station-years",
+        "subtitle": "CPCB daily raw repository · listed files, usable PM2.5 years and files with no PM2.5 · 2009-2025",
+        "whyThisChart": "The core data-poverty point: file availability, row availability and usable pollutant coverage are not the same thing."
+      },
+      {
+        "order": 2,
+        "chartId": "cpcb-s-raw-archive-extends-beyond-daily-files",
+        "title": "CPCB's raw archive extends beyond daily files",
+        "chartType": "tableBars",
+        "beat": "public-raw-surface",
+        "window": "",
+        "indicator": "air.cpcb.repository.raw_frequency_file_counts",
+        "series": [],
+        "unit": "listed files",
+        "subtitle": "Public raw repository probe · file listings at 15-minute, hourly, 8-hour and daily frequency · 598 station records",
+        "whyThisChart": "CPCB's public repository exposes raw listings at 15-minute, hourly, 8-hour and daily frequencies, but file listings are not the same as audited pollutant coverage."
+      },
+      {
+        "order": 3,
+        "chartId": "usable-pm-observations-become-broad-only-after-2020",
+        "title": "Usable PM observations become broad only after 2020",
+        "chartType": "multiLine",
+        "beat": "usable-depth",
+        "window": "",
+        "indicator": "",
+        "series": [
+          {
+            "indicator": "air.cpcb.repository.pm25_observed_days",
+            "label": "PM2.5 station-days"
+          },
+          {
+            "indicator": "air.cpcb.repository.pm10_observed_days",
+            "label": "PM10 station-days"
+          }
+        ],
+        "unit": "station-days",
+        "subtitle": "Downloaded CPCB daily files · non-missing PM2.5 and PM10 station-days · 2009-2025",
+        "whyThisChart": "Counting non-missing pollutant days shows how much usable measurement the repository actually contains."
+      },
+      {
+        "order": 4,
+        "chartId": "trend-ready-pm2-5-years-lag-basic-visibility",
+        "title": "Trend-ready PM2.5 years lag basic visibility",
+        "chartType": "multiLine",
+        "beat": "trend-readiness",
+        "window": "",
+        "indicator": "",
+        "series": [
+          {
+            "indicator": "air.cpcb.repository.station_years_with_pm25_1_days",
+            "label": "Any PM2.5 day"
+          },
+          {
+            "indicator": "air.cpcb.repository.station_years_with_pm25_30_days",
+            "label": "30+ PM2.5 days"
+          },
+          {
+            "indicator": "air.cpcb.repository.station_years_with_pm25_180_days",
+            "label": "180+ PM2.5 days"
+          },
+          {
+            "indicator": "air.cpcb.repository.station_years_with_pm25_300_days",
+            "label": "300+ PM2.5 days"
+          }
+        ],
+        "unit": "station-years",
+        "subtitle": "Downloaded CPCB daily files · station-years by minimum count of non-missing PM2.5 days · 2009-2025",
+        "whyThisChart": "Trend analysis needs more than one visible PM2.5 day, so this separates minimal visibility from fuller station-years."
+      },
+      {
+        "order": 5,
+        "chartId": "the-station-list-covers-only-a-fraction-of-urban-places",
+        "title": "The station list covers only a fraction of urban places",
+        "chartType": "tableBars",
+        "beat": "city-visibility",
+        "window": "",
+        "indicator": "air.cpcb.repository.city_visibility_vs_census",
+        "series": [],
+        "unit": "towns/city names",
+        "subtitle": "CPCB/OAQ city names compared with Census 2011 statutory towns",
+        "whyThisChart": "The strongest data-poverty statistic is the denominator: most legally urban places do not appear in the station list used for this audit."
+      },
+      {
+        "order": 6,
+        "chartId": "deep-pm2-5-history-is-concentrated-in-a-few-cities",
+        "title": "Deep PM2.5 history is concentrated in a few cities",
+        "chartType": "tableBars",
+        "beat": "geography",
+        "window": "",
+        "indicator": "air.cpcb.repository.city_pm25_days",
+        "series": [],
+        "unit": "PM2.5 station-days",
+        "subtitle": "Downloaded CPCB daily files · non-missing PM2.5 station-days by city · 2009-2025",
+        "whyThisChart": "The archive is not evenly distributed. Delhi and New Delhi dominate the long PM2.5 record."
+      },
+      {
+        "order": 7,
+        "chartId": "most-station-pm2-5-histories-begin-late",
+        "title": "Most station PM2.5 histories begin late",
+        "chartType": "tableBars",
+        "beat": "when-usable",
+        "window": "",
+        "indicator": "air.cpcb.repository.first_pm25_year",
+        "series": [],
+        "unit": "stations",
+        "subtitle": "Downloaded CPCB daily files · first year with any non-missing PM2.5 value, by station",
+        "whyThisChart": "This shows the start date for usable station histories, rather than the first year a station appears in the repository."
+      },
+      {
+        "order": 8,
+        "chartId": "long-file-histories-can-hide-short-pm2-5-records",
+        "title": "Long file histories can hide short PM2.5 records",
+        "chartType": "tableBars",
+        "beat": "diagnostic",
+        "window": "",
+        "indicator": "air.cpcb.repository.listed_years_missing_pm25",
+        "series": [],
+        "unit": "listed years without PM2.5",
+        "subtitle": "Downloaded CPCB daily files · listed file years minus years with any usable PM2.5, by station",
+        "whyThisChart": "This is the audit check behind the article: some stations have long file histories but much shorter usable PM2.5 histories."
+      },
+      {
+        "order": 9,
+        "chartId": "daily-rows-can-exist-while-pm-values-are-blank",
+        "title": "Daily rows can exist while PM values are blank",
+        "chartType": "tableBars",
+        "beat": "case-study",
+        "window": "",
+        "indicator": "air.cpcb.repository.rows_without_pm_examples",
+        "series": [],
+        "unit": "daily rows",
+        "subtitle": "Selected CPCB daily files with rows and zero usable PM2.5 or PM10 values",
+        "whyThisChart": "Concrete examples keep the caveat honest: some files are not empty, yet still have no PM2.5 or PM10."
+      },
+      {
+        "order": 10,
+        "chartId": "the-latest-oaq-mirror-is-a-snapshot-not-history",
+        "title": "The latest OAQ mirror is a snapshot, not history",
+        "chartType": "tableBars",
+        "beat": "mirror",
+        "window": "",
+        "indicator": "air.oaq.cpcb.latest_station_snapshot",
+        "series": [],
+        "unit": "station records",
+        "subtitle": "OAQ CPCB latest snapshot · generated 23 Jun 2026 at 17:40 IST",
+        "whyThisChart": "OAQ is clean for current snapshots, but the latest mirror is not the same as a deep historical archive."
+      }
+    ],
+    "selectedDataPoints": [
+      {
+        "label": "Daily repository files listed by CPCB, latest",
+        "value": 579,
+        "displayValue": "579",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.listed_station_files",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Daily repository files listed by CPCB, earliest",
+        "value": 25,
+        "displayValue": "25",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.listed_station_files",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with usable PM2.5, latest",
+        "value": 540,
+        "displayValue": "540",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Non-missing PM2.5 station-days, latest",
+        "value": 173983,
+        "displayValue": "1,73,983",
+        "date": "2025",
+        "unit": "station-days",
+        "indicatorId": "air.cpcb.repository.pm25_observed_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Non-missing PM2.5 station-days, earliest",
+        "value": 242,
+        "displayValue": "242",
+        "date": "2009",
+        "unit": "station-days",
+        "indicatorId": "air.cpcb.repository.pm25_observed_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Daily repository files with any rows, latest",
+        "value": 572,
+        "displayValue": "572",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_rows",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Daily repository files with any rows, earliest",
+        "value": 15,
+        "displayValue": "15",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_rows",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Listed files with no usable PM2.5, latest",
+        "value": 39,
+        "displayValue": "39",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.zero_pm25_listed_files",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Listed files with no usable PM2.5, earliest",
+        "value": 24,
+        "displayValue": "24",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.zero_pm25_listed_files",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Non-missing PM10 station-days, latest",
+        "value": 173787,
+        "displayValue": "1,73,787",
+        "date": "2025",
+        "unit": "station-days",
+        "indicatorId": "air.cpcb.repository.pm10_observed_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Non-missing PM10 station-days, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-days",
+        "indicatorId": "air.cpcb.repository.pm10_observed_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with any usable PM2.5, latest",
+        "value": 540,
+        "displayValue": "540",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_1_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with any usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_1_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM2.5, latest",
+        "value": 536,
+        "displayValue": "536",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_30_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_30_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 180+ days usable PM2.5, latest",
+        "value": 490,
+        "displayValue": "490",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_180_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 180+ days usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_180_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 300+ days usable PM2.5, latest",
+        "value": 444,
+        "displayValue": "444",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_300_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 300+ days usable PM2.5, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_300_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with any usable PM10, latest",
+        "value": 538,
+        "displayValue": "538",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_1_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with any usable PM10, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_1_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM10, latest",
+        "value": 532,
+        "displayValue": "532",
+        "date": "2025",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_30_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM10, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_30_days",
+        "sourceId": "cpcb",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      }
+    ],
+    "lockedNumbers": [
+      {
+        "label": "Daily repository files listed by CPCB, latest",
+        "value": 579,
+        "displayValue": "579",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_station_files"
+      },
+      {
+        "label": "Daily repository files listed by CPCB, earliest",
+        "value": 25,
+        "displayValue": "25",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_station_files"
+      },
+      {
+        "label": "Repository station-years with usable PM2.5, latest",
+        "value": 540,
+        "displayValue": "540",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25"
+      },
+      {
+        "label": "Repository station-years with usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25"
+      },
+      {
+        "label": "Non-missing PM2.5 station-days, latest",
+        "value": 173983,
+        "displayValue": "1,73,983",
+        "date": "2025",
+        "unit": "station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.pm25_observed_days"
+      },
+      {
+        "label": "Non-missing PM2.5 station-days, earliest",
+        "value": 242,
+        "displayValue": "242",
+        "date": "2009",
+        "unit": "station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.pm25_observed_days"
+      },
+      {
+        "label": "Daily repository files with any rows, latest",
+        "value": 572,
+        "displayValue": "572",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_rows"
+      },
+      {
+        "label": "Daily repository files with any rows, earliest",
+        "value": 15,
+        "displayValue": "15",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_rows"
+      },
+      {
+        "label": "Listed files with no usable PM2.5, latest",
+        "value": 39,
+        "displayValue": "39",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.zero_pm25_listed_files"
+      },
+      {
+        "label": "Listed files with no usable PM2.5, earliest",
+        "value": 24,
+        "displayValue": "24",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.zero_pm25_listed_files"
+      },
+      {
+        "label": "Non-missing PM10 station-days, latest",
+        "value": 173787,
+        "displayValue": "1,73,787",
+        "date": "2025",
+        "unit": "station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.pm10_observed_days"
+      },
+      {
+        "label": "Non-missing PM10 station-days, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.pm10_observed_days"
+      },
+      {
+        "label": "Repository station-years with any usable PM2.5, latest",
+        "value": 540,
+        "displayValue": "540",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_1_days"
+      },
+      {
+        "label": "Repository station-years with any usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_1_days"
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM2.5, latest",
+        "value": 536,
+        "displayValue": "536",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_30_days"
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_30_days"
+      },
+      {
+        "label": "Repository station-years with 180+ days usable PM2.5, latest",
+        "value": 490,
+        "displayValue": "490",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_180_days"
+      },
+      {
+        "label": "Repository station-years with 180+ days usable PM2.5, earliest",
+        "value": 1,
+        "displayValue": "1",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_180_days"
+      },
+      {
+        "label": "Repository station-years with 300+ days usable PM2.5, latest",
+        "value": 444,
+        "displayValue": "444",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_300_days"
+      },
+      {
+        "label": "Repository station-years with 300+ days usable PM2.5, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_300_days"
+      },
+      {
+        "label": "Repository station-years with any usable PM10, latest",
+        "value": 538,
+        "displayValue": "538",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_1_days"
+      },
+      {
+        "label": "Repository station-years with any usable PM10, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_1_days"
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM10, latest",
+        "value": 532,
+        "displayValue": "532",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_30_days"
+      },
+      {
+        "label": "Repository station-years with 30+ days usable PM10, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_30_days"
+      },
+      {
+        "label": "Repository station-years with 180+ days usable PM10, latest",
+        "value": 494,
+        "displayValue": "494",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_180_days"
+      },
+      {
+        "label": "Repository station-years with 180+ days usable PM10, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_180_days"
+      },
+      {
+        "label": "Repository station-years with 300+ days usable PM10, latest",
+        "value": 444,
+        "displayValue": "444",
+        "date": "2025",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_300_days"
+      },
+      {
+        "label": "Repository station-years with 300+ days usable PM10, earliest",
+        "value": 0,
+        "displayValue": "0",
+        "date": "2009",
+        "unit": "station-years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_300_days"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: value",
+        "value": 4346,
+        "displayValue": "4,346",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: stationsWithFiles",
+        "value": 559,
+        "displayValue": "559",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: firstYear",
+        "value": 2009,
+        "displayValue": "2,009",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: lastYear",
+        "value": 2025,
+        "displayValue": "2,025",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: value",
+        "value": 4367,
+        "displayValue": "4,367",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: stationsWithFiles",
+        "value": 580,
+        "displayValue": "580",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: firstYear",
+        "value": 2009,
+        "displayValue": "2,009",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: lastYear",
+        "value": 2025,
+        "displayValue": "2,025",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: value",
+        "value": 4396,
+        "displayValue": "4,396",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: stationsWithFiles",
+        "value": 579,
+        "displayValue": "579",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: firstYear",
+        "value": 2011,
+        "displayValue": "2,011",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "CPCB raw repository file listings by public frequency: lastYear",
+        "value": 2025,
+        "displayValue": "2,025",
+        "date": "",
+        "unit": "listed files",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts"
+      },
+      {
+        "label": "Public station-list metadata fields in the CPCB/OAQ snapshot: value",
+        "value": 598,
+        "displayValue": "598",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility"
+      },
+      {
+        "label": "Public station-list metadata fields in the CPCB/OAQ snapshot: value",
+        "value": 598,
+        "displayValue": "598",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility"
+      },
+      {
+        "label": "Public station-list metadata fields in the CPCB/OAQ snapshot: value",
+        "value": 598,
+        "displayValue": "598",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility"
+      },
+      {
+        "label": "Public station-list metadata fields in the CPCB/OAQ snapshot: value",
+        "value": 598,
+        "displayValue": "598",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility"
+      },
+      {
+        "label": "Public station-list metadata fields in the CPCB/OAQ snapshot: value",
+        "value": 596,
+        "displayValue": "596",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility"
+      },
+      {
+        "label": "Public station-list metadata fields in the CPCB/OAQ snapshot: value",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility"
+      },
+      {
+        "label": "CPCB station-list city names versus Census statutory towns: value",
+        "value": 4041,
+        "displayValue": "4,041",
+        "date": "",
+        "unit": "towns/city names",
+        "sourceId": "cpcb-census",
+        "indicatorId": "air.cpcb.repository.city_visibility_vs_census"
+      },
+      {
+        "label": "CPCB station-list city names versus Census statutory towns: value",
+        "value": 335,
+        "displayValue": "335",
+        "date": "",
+        "unit": "towns/city names",
+        "sourceId": "cpcb-census",
+        "indicatorId": "air.cpcb.repository.city_visibility_vs_census"
+      },
+      {
+        "label": "CPCB station-list city names versus Census statutory towns: value",
+        "value": 3706,
+        "displayValue": "3,706",
+        "date": "",
+        "unit": "towns/city names",
+        "sourceId": "cpcb-census",
+        "indicatorId": "air.cpcb.repository.city_visibility_vs_census"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: value",
+        "value": 73348,
+        "displayValue": "73,348",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: stations",
+        "value": 30,
+        "displayValue": "30",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: stationsWithPm25",
+        "value": 25,
+        "displayValue": "25",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: earliestPm25Year",
+        "value": 2009,
+        "displayValue": "2,009",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: value",
+        "value": 41502,
+        "displayValue": "41,502",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: stations",
+        "value": 28,
+        "displayValue": "28",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: stationsWithPm25",
+        "value": 28,
+        "displayValue": "28",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: earliestPm25Year",
+        "value": 2015,
+        "displayValue": "2,015",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: value",
+        "value": 39328,
+        "displayValue": "39,328",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: stations",
+        "value": 16,
+        "displayValue": "16",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: stationsWithPm25",
+        "value": 14,
+        "displayValue": "14",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "Cities with the deepest CPCB PM2.5 archive: earliestPm25Year",
+        "value": 2011,
+        "displayValue": "2,011",
+        "date": "",
+        "unit": "PM2.5 station-days",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.city_pm25_days"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: label",
+        "value": 2009,
+        "displayValue": "2,009",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: value",
+        "value": 1,
+        "displayValue": "1",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: label",
+        "value": 2011,
+        "displayValue": "2,011",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: value",
+        "value": 4,
+        "displayValue": "4",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: label",
+        "value": 2012,
+        "displayValue": "2,012",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: value",
+        "value": 1,
+        "displayValue": "1",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: label",
+        "value": 2013,
+        "displayValue": "2,013",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: value",
+        "value": 2,
+        "displayValue": "2",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: label",
+        "value": 2015,
+        "displayValue": "2,015",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: value",
+        "value": 22,
+        "displayValue": "22",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: label",
+        "value": 2016,
+        "displayValue": "2,016",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "When stations first have usable PM2.5 in the repository: value",
+        "value": 14,
+        "displayValue": "14",
+        "date": "",
+        "unit": "stations",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.first_pm25_year"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: x",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: y",
+        "value": 15,
+        "displayValue": "15",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: x",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: y",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: x",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: y",
+        "value": 14,
+        "displayValue": "14",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: x",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: y",
+        "value": 14,
+        "displayValue": "14",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: x",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: y",
+        "value": 14,
+        "displayValue": "14",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: x",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Repository years listed versus usable PM2.5 years: y",
+        "value": 13,
+        "displayValue": "13",
+        "date": "",
+        "unit": "years",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: value",
+        "value": 12,
+        "displayValue": "12",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: listedYears",
+        "value": 17,
+        "displayValue": "17",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: usablePm25Years",
+        "value": 5,
+        "displayValue": "5",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: value",
+        "value": 11,
+        "displayValue": "11",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: listedYears",
+        "value": 11,
+        "displayValue": "11",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: usablePm25Years",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: value",
+        "value": 11,
+        "displayValue": "11",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: listedYears",
+        "value": 11,
+        "displayValue": "11",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: usablePm25Years",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: value",
+        "value": 9,
+        "displayValue": "9",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: listedYears",
+        "value": 9,
+        "displayValue": "9",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Stations with the largest gap between listed years and usable PM2.5 years: usablePm25Years",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "listed years without PM2.5",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: value",
+        "value": 365,
+        "displayValue": "365",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm25Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm10Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: value",
+        "value": 365,
+        "displayValue": "365",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm25Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm10Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: value",
+        "value": 306,
+        "displayValue": "306",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm25Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm10Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: value",
+        "value": 306,
+        "displayValue": "306",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm25Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "Daily rows can exist while PM values are blank: pm10Days",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "daily rows",
+        "sourceId": "cpcb",
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples"
+      },
+      {
+        "label": "The latest OAQ mirror is a snapshot, not history: value",
+        "value": 598,
+        "displayValue": "598",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot"
+      },
+      {
+        "label": "The latest OAQ mirror is a snapshot, not history: value",
+        "value": 203,
+        "displayValue": "203",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot"
+      },
+      {
+        "label": "The latest OAQ mirror is a snapshot, not history: value",
+        "value": 139,
+        "displayValue": "139",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot"
+      },
+      {
+        "label": "The latest OAQ mirror is a snapshot, not history: value",
+        "value": 185,
+        "displayValue": "185",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot"
+      },
+      {
+        "label": "The latest OAQ mirror is a snapshot, not history: value",
+        "value": 183,
+        "displayValue": "183",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot"
+      },
+      {
+        "label": "The latest OAQ mirror is a snapshot, not history: value",
+        "value": 395,
+        "displayValue": "395",
+        "date": "",
+        "unit": "station records",
+        "sourceId": "oaq",
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "air.cpcb.repository.listed_station_files",
+        "title": "Daily repository files listed by CPCB",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.listed_station_files",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 25
+        },
+        "latest": {
+          "date": "2025",
+          "value": 579
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25",
+        "title": "Repository station-years with usable PM2.5",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm25",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 1
+        },
+        "latest": {
+          "date": "2025",
+          "value": 540
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.pm25_observed_days",
+        "title": "Non-missing PM2.5 station-days",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.pm25_observed_days",
+        "unit": "station-days",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 242
+        },
+        "latest": {
+          "date": "2025",
+          "value": 173983
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_rows",
+        "title": "Daily repository files with any rows",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_rows",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 15
+        },
+        "latest": {
+          "date": "2025",
+          "value": 572
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.zero_pm25_listed_files",
+        "title": "Listed files with no usable PM2.5",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.zero_pm25_listed_files",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 24
+        },
+        "latest": {
+          "date": "2025",
+          "value": 39
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.pm10_observed_days",
+        "title": "Non-missing PM10 station-days",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.pm10_observed_days",
+        "unit": "station-days",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 0
+        },
+        "latest": {
+          "date": "2025",
+          "value": 173787
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_1_days",
+        "title": "Repository station-years with any usable PM2.5",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm25_1_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 1
+        },
+        "latest": {
+          "date": "2025",
+          "value": 540
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_30_days",
+        "title": "Repository station-years with 30+ days usable PM2.5",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm25_30_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 1
+        },
+        "latest": {
+          "date": "2025",
+          "value": 536
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_180_days",
+        "title": "Repository station-years with 180+ days usable PM2.5",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm25_180_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 1
+        },
+        "latest": {
+          "date": "2025",
+          "value": 490
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm25_300_days",
+        "title": "Repository station-years with 300+ days usable PM2.5",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm25_300_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 0
+        },
+        "latest": {
+          "date": "2025",
+          "value": 444
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_1_days",
+        "title": "Repository station-years with any usable PM10",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm10_1_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 0
+        },
+        "latest": {
+          "date": "2025",
+          "value": 538
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_30_days",
+        "title": "Repository station-years with 30+ days usable PM10",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm10_30_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 0
+        },
+        "latest": {
+          "date": "2025",
+          "value": 532
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_180_days",
+        "title": "Repository station-years with 180+ days usable PM10",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm10_180_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 0
+        },
+        "latest": {
+          "date": "2025",
+          "value": 494
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_years_with_pm10_300_days",
+        "title": "Repository station-years with 300+ days usable PM10",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.station_years_with_pm10_300_days",
+        "unit": "station-years",
+        "frequency": "annual",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "observations": 17,
+        "earliest": {
+          "date": "2009",
+          "value": 0
+        },
+        "latest": {
+          "date": "2025",
+          "value": 444
+        }
+      },
+      {
+        "indicatorId": "air.cpcb.repository.raw_frequency_file_counts",
+        "title": "CPCB raw repository file listings by public frequency",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.raw_frequency_file_counts",
+        "unit": "listed files",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 4,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "15-minute raw files",
+            "value": 4346,
+            "frequency": "15M",
+            "stationsWithFiles": 559,
+            "firstYear": 2009,
+            "lastYear": 2025
+          },
+          {
+            "label": "Hourly raw files",
+            "value": 4367,
+            "frequency": "1H",
+            "stationsWithFiles": 580,
+            "firstYear": 2009,
+            "lastYear": 2025
+          },
+          {
+            "label": "8-hour raw files",
+            "value": 4396,
+            "frequency": "8H",
+            "stationsWithFiles": 579,
+            "firstYear": 2011,
+            "lastYear": 2025
+          },
+          {
+            "label": "Daily raw files",
+            "value": 4455,
+            "frequency": "1D",
+            "stationsWithFiles": 580,
+            "firstYear": 2009,
+            "lastYear": 2025
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.cpcb.repository.station_metadata_visibility",
+        "title": "Public station-list metadata fields in the CPCB/OAQ snapshot",
+        "sourceId": "oaq",
+        "sourceIndicatorId": "air.cpcb.repository.station_metadata_visibility",
+        "unit": "station records",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 6,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "Station records in metadata snapshot",
+            "value": 598
+          },
+          {
+            "label": "Records with latitude and longitude",
+            "value": 598
+          },
+          {
+            "label": "Records with station type",
+            "value": 598
+          },
+          {
+            "label": "Records with latest seen timestamp",
+            "value": 598
+          },
+          {
+            "label": "Records with agency/operator suffix in station name",
+            "value": 596
+          },
+          {
+            "label": "Records with commissioning or activation date",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.cpcb.repository.city_visibility_vs_census",
+        "title": "CPCB station-list city names versus Census statutory towns",
+        "sourceId": "cpcb-census",
+        "sourceIndicatorId": "air.cpcb.repository.city_visibility_vs_census",
+        "unit": "towns/city names",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 3,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "Statutory towns in Census 2011",
+            "value": 4041
+          },
+          {
+            "label": "City names in CPCB/OAQ station list",
+            "value": 335
+          },
+          {
+            "label": "Statutory towns not visible in this station list",
+            "value": 3706
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.cpcb.repository.city_pm25_days",
+        "title": "Cities with the deepest CPCB PM2.5 archive",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.city_pm25_days",
+        "unit": "PM2.5 station-days",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 14,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "New Delhi",
+            "value": 73348,
+            "stations": 30,
+            "stationsWithPm25": 25,
+            "earliestPm25Year": 2009
+          },
+          {
+            "label": "Mumbai",
+            "value": 41502,
+            "stations": 28,
+            "stationsWithPm25": 28,
+            "earliestPm25Year": 2015
+          },
+          {
+            "label": "Delhi",
+            "value": 39328,
+            "stations": 16,
+            "stationsWithPm25": 14,
+            "earliestPm25Year": 2011
+          },
+          {
+            "label": "Bengaluru",
+            "value": 25311,
+            "stations": 13,
+            "stationsWithPm25": 11,
+            "earliestPm25Year": 2015
+          },
+          {
+            "label": "Hyderabad",
+            "value": 22663,
+            "stations": 10,
+            "stationsWithPm25": 10,
+            "earliestPm25Year": 2015
+          },
+          {
+            "label": "Kolkata",
+            "value": 16714,
+            "stations": 7,
+            "stationsWithPm25": 7,
+            "earliestPm25Year": 2016
+          },
+          {
+            "label": "Ahmedabad",
+            "value": 16404,
+            "stations": 10,
+            "stationsWithPm25": 10,
+            "earliestPm25Year": 2015
+          },
+          {
+            "label": "Lucknow",
+            "value": 14792,
+            "stations": 6,
+            "stationsWithPm25": 6,
+            "earliestPm25Year": 2015
+          },
+          {
+            "label": "Patna",
+            "value": 13799,
+            "stations": 6,
+            "stationsWithPm25": 6,
+            "earliestPm25Year": 2015
+          },
+          {
+            "label": "Noida",
+            "value": 13253,
+            "stations": 6,
+            "stationsWithPm25": 5,
+            "earliestPm25Year": 2017
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.cpcb.repository.first_pm25_year",
+        "title": "When stations first have usable PM2.5 in the repository",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.first_pm25_year",
+        "unit": "stations",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 15,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "2009",
+            "value": 1
+          },
+          {
+            "label": "2011",
+            "value": 4
+          },
+          {
+            "label": "2012",
+            "value": 1
+          },
+          {
+            "label": "2013",
+            "value": 2
+          },
+          {
+            "label": "2015",
+            "value": 22
+          },
+          {
+            "label": "2016",
+            "value": 14
+          },
+          {
+            "label": "2017",
+            "value": 40
+          },
+          {
+            "label": "2018",
+            "value": 50
+          },
+          {
+            "label": "2019",
+            "value": 66
+          },
+          {
+            "label": "2020",
+            "value": 52
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.cpcb.repository.file_vs_pm25_years",
+        "title": "Repository years listed versus usable PM2.5 years",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.file_vs_pm25_years",
+        "unit": "years",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 580,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "IHBAS, Dilshad Garden, Delhi - CPCB",
+            "city": "New Delhi",
+            "x": 17,
+            "y": 15,
+            "highlight": true
+          },
+          {
+            "label": "ITO, Delhi - CPCB",
+            "city": "New Delhi",
+            "x": 17,
+            "y": 17,
+            "highlight": true
+          },
+          {
+            "label": "R K Puram, Delhi - DPCC",
+            "city": "New Delhi",
+            "x": 17,
+            "y": 14,
+            "highlight": true
+          },
+          {
+            "label": "Mandir Marg, Delhi - DPCC",
+            "city": "New Delhi",
+            "x": 17,
+            "y": 14,
+            "highlight": true
+          },
+          {
+            "label": "Punjabi Bagh, Delhi - DPCC",
+            "city": "Delhi",
+            "x": 17,
+            "y": 14,
+            "highlight": true
+          },
+          {
+            "label": "Ardhali Bazar, Varanasi - UPPCB",
+            "city": "Varanasi",
+            "x": 17,
+            "y": 13,
+            "highlight": false
+          },
+          {
+            "label": "Nehru Nagar, Kanpur - UPPCB",
+            "city": "Kanpur",
+            "x": 17,
+            "y": 11,
+            "highlight": false
+          },
+          {
+            "label": "Shadipur, Delhi - CPCB",
+            "city": "New Delhi",
+            "x": 17,
+            "y": 11,
+            "highlight": true
+          },
+          {
+            "label": "Anand Vihar, Delhi - DPCC",
+            "city": "Delhi",
+            "x": 17,
+            "y": 13,
+            "highlight": true
+          },
+          {
+            "label": "Velachery Res. Area, Chennai - CPCB",
+            "city": "Chennai",
+            "x": 17,
+            "y": 11,
+            "highlight": false
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.cpcb.repository.listed_years_missing_pm25",
+        "title": "Stations with the largest gap between listed years and usable PM2.5 years",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.listed_years_missing_pm25",
+        "unit": "listed years without PM2.5",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 14,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "Airoli, Navi Mumbai - MPCB",
+            "value": 12,
+            "city": "Navi Mumbai",
+            "listedYears": 17,
+            "usablePm25Years": 5
+          },
+          {
+            "label": "City Railway Station, Bengaluru - KSPCB",
+            "value": 11,
+            "city": "Bengaluru",
+            "listedYears": 11,
+            "usablePm25Years": 0
+          },
+          {
+            "label": "Sanegurava Halli, Bengaluru - KSPCB",
+            "value": 11,
+            "city": "Bengaluru",
+            "listedYears": 11,
+            "usablePm25Years": 0
+          },
+          {
+            "label": "Meelavittan, Thoothukudi - TNPCB",
+            "value": 9,
+            "city": "Thoothukudi",
+            "listedYears": 9,
+            "usablePm25Years": 0
+          },
+          {
+            "label": "Sector- 16A, Faridabad - HSPCB",
+            "value": 7,
+            "city": "Faridabad",
+            "listedYears": 17,
+            "usablePm25Years": 10
+          },
+          {
+            "label": "Sirifort, Delhi - CPCB",
+            "value": 7,
+            "city": "New Delhi",
+            "listedYears": 17,
+            "usablePm25Years": 10
+          },
+          {
+            "label": "BWSSB Kadabesanahalli, Bengaluru - CPCB",
+            "value": 7,
+            "city": "Bengaluru",
+            "listedYears": 16,
+            "usablePm25Years": 9
+          },
+          {
+            "label": "Municipal Corporation Office, Tirunelveli - TNPCB",
+            "value": 7,
+            "city": "Tirunelveli",
+            "listedYears": 9,
+            "usablePm25Years": 2
+          },
+          {
+            "label": "Parisutham Nagar, Thanjavur - TNPCB",
+            "value": 7,
+            "city": "Thanjavur",
+            "listedYears": 9,
+            "usablePm25Years": 2
+          },
+          {
+            "label": "Velippalayam, Nagapattinam - TNPCB",
+            "value": 7,
+            "city": "Nagapattinam",
+            "listedYears": 9,
+            "usablePm25Years": 2
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.cpcb.repository.rows_without_pm_examples",
+        "title": "Daily rows can exist while PM values are blank",
+        "sourceId": "cpcb",
+        "sourceIndicatorId": "air.cpcb.repository.rows_without_pm_examples",
+        "unit": "daily rows",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 9,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "DTU, Delhi, 2009",
+            "value": 365,
+            "city": "New Delhi",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "IHBAS, Dilshad Garden, Delhi, 2009",
+            "value": 365,
+            "city": "New Delhi",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "Alandur Bus Depot, Chennai, 2009",
+            "value": 306,
+            "city": "Arul Nagar",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "BTM Layout, Bengaluru, 2009",
+            "value": 306,
+            "city": "Bengaluru",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "Manali, Chennai, 2009",
+            "value": 245,
+            "city": "manali",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "Airoli, Navi Mumbai, 2009",
+            "value": 184,
+            "city": "Navi Mumbai",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "Sector- 16A, Faridabad, 2010",
+            "value": 122,
+            "city": "Faridabad",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "Ardhali Bazar, Varanasi, 2010",
+            "value": 61,
+            "city": "Varanasi",
+            "pm25Days": 0,
+            "pm10Days": 0
+          },
+          {
+            "label": "Lalbagh, Lucknow, 2010",
+            "value": 61,
+            "city": "Lucknow",
+            "pm25Days": 0,
+            "pm10Days": 0
+          }
+        ]
+      },
+      {
+        "indicatorId": "air.oaq.cpcb.latest_station_snapshot",
+        "title": "The latest OAQ mirror is a snapshot, not history",
+        "sourceId": "oaq",
+        "sourceIndicatorId": "air.oaq.cpcb.latest_station_snapshot",
+        "unit": "station records",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 6,
+        "dimensions": [],
+        "latestRows": [
+          {
+            "label": "CPCB station records in latest OAQ snapshot",
+            "value": 598
+          },
+          {
+            "label": "Records with any main pollutant at that moment",
+            "value": 203
+          },
+          {
+            "label": "Records with all 8 main pollutants",
+            "value": 139
+          },
+          {
+            "label": "Records with PM2.5 at that moment",
+            "value": 185
+          },
+          {
+            "label": "Records with PM10 at that moment",
+            "value": 183
+          },
+          {
+            "label": "Records with no main pollutant at that moment",
+            "value": 395
+          }
+        ]
+      }
+    ],
+    "selectionRules": [
+      "Start from the page question, not from the indicator name.",
+      "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+      "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+      "Use one strong pull quote only when the evidence supports it with a number.",
+      "Add glossary blocks for technical terms that normal readers may not know."
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}
