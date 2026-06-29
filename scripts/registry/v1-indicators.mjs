@@ -28,7 +28,7 @@ export const v1Questions = [
       "divergence.schooling_years.in"
     ],
     context: [
-      "divergence.gdp_pc_maddison.chn", "divergence.gdp_pc_maddison.kor", "divergence.gdp_pc_maddison.idn", "divergence.gdp_pc_maddison.bgd",
+      "divergence.gdp_pc_maddison.chn", "divergence.gdp_pc_maddison.kor", "divergence.gdp_pc_maddison.vnm", "divergence.gdp_pc_maddison.idn", "divergence.gdp_pc_maddison.bgd", "divergence.gdp_pc_maddison.pak",
       "divergence.gdp_pc_ppp.chn", "divergence.gdp_pc_ppp.kor", "divergence.gdp_pc_ppp.vnm", "divergence.gdp_pc_ppp.bgd", "divergence.gdp_pc_ppp.idn", "divergence.gdp_pc_ppp.wld",
       "divergence.life_expectancy.in", "divergence.life_expectancy.chn", "divergence.life_expectancy.kor", "divergence.life_expectancy.vnm", "divergence.life_expectancy.bgd", "divergence.life_expectancy.wld",
       "divergence.under5_mortality.in", "divergence.under5_mortality.chn", "divergence.under5_mortality.kor", "divergence.under5_mortality.vnm", "divergence.under5_mortality.bgd", "divergence.under5_mortality.wld",
@@ -52,7 +52,33 @@ export const v1Questions = [
       "divergence.urban_share.in", "divergence.urban_share.chn", "divergence.urban_share.kor", "divergence.urban_share.vnm", "divergence.urban_share.wld",
       "divergence.poverty_owid.in", "divergence.poverty_owid.chn", "divergence.poverty_owid.idn", "divergence.poverty_owid.vnm", "divergence.poverty_owid.bgd",
       "divergence.hdi.in", "divergence.hdi.chn", "divergence.hdi.kor", "divergence.hdi.vnm", "divergence.hdi.bgd",
-      "divergence.democracy.in", "divergence.democracy.chn", "divergence.democracy.kor", "divergence.democracy.twn"
+      "divergence.democracy.in", "divergence.democracy.chn", "divergence.democracy.kor", "divergence.democracy.twn",
+      // — rework 2026-06: maximal additions —
+      "divergence.learning_score.in", "divergence.learning_score.chn", "divergence.learning_score.kor", "divergence.learning_score.vnm", "divergence.learning_score.idn", "divergence.learning_score.bgd", "divergence.learning_score.jpn",
+      "divergence.credit_private.in", "divergence.credit_private.chn", "divergence.credit_private.kor", "divergence.credit_private.vnm", "divergence.credit_private.jpn", "divergence.credit_private.wld",
+      "divergence.capital_per_worker.in", "divergence.capital_per_worker.chn", "divergence.capital_per_worker.kor", "divergence.capital_per_worker.twn", "divergence.capital_per_worker.vnm", "divergence.capital_per_worker.jpn",
+      "compare.informal_rate.ind", "compare.informal_rate.bgd", "compare.informal_rate.idn", "compare.informal_rate.vnm",
+      "divergence.tariff_ahs.in", "divergence.tariff_ahs.chn", "divergence.tariff_ahs.kor", "divergence.tariff_ahs.vnm", "divergence.tariff_ahs.idn", "divergence.tariff_ahs.bgd",
+      "divergence.tariff_mfn.in", "divergence.tariff_mfn.chn", "divergence.tariff_mfn.kor", "divergence.tariff_mfn.vnm",
+      "divergence.world_export_share.in", "divergence.world_export_share.chn", "divergence.world_export_share.kor", "divergence.world_export_share.vnm", "divergence.world_export_share.jpn",
+      "divergence.gvc_fva.in", "divergence.gvc_fva.chn", "divergence.gvc_fva.kor", "divergence.gvc_fva.vnm", "divergence.gvc_fva.idn", "divergence.gvc_fva.jpn",
+      "divergence.india_china_imports", "divergence.india_china_exports",
+      "divergence.wgi_govt_effectiveness.in", "divergence.wgi_govt_effectiveness.chn", "divergence.wgi_govt_effectiveness.kor", "divergence.wgi_govt_effectiveness.vnm", "divergence.wgi_govt_effectiveness.idn", "divergence.wgi_govt_effectiveness.bgd",
+      "divergence.wgi_rule_of_law.in", "divergence.wgi_voice_accountability.in", "divergence.wgi_control_corruption.in", "divergence.wgi_regulatory_quality.in", "divergence.wgi_political_stability.in", "divergence.wgi_govt_effectiveness.in",
+      "divergence.decade_growth.in", "divergence.decade_growth.chn", "divergence.decade_growth.kor", "divergence.decade_growth.vnm", "divergence.decade_growth.jpn", "divergence.decade_growth.idn",
+      "divergence.tfp_rel_us.in", "divergence.tfp_rel_us.chn", "divergence.tfp_rel_us.kor", "divergence.tfp_rel_us.twn", "divergence.tfp_rel_us.jpn",
+      "divergence.working_age.in", "divergence.working_age.chn", "divergence.working_age.kor", "divergence.working_age.vnm", "divergence.working_age.wld",
+      "divergence.top10_share.in", "divergence.top10_share.chn", "divergence.top10_share.kor", "divergence.top10_share.twn", "divergence.top10_share.idn",
+      "divergence.income_proj.in", "divergence.income_proj.china_today", "divergence.income_proj.korea_today",
+      "divergence.es_obstacles.in",
+      // — rework 2026-06-20: sanitation/land/export-orientation/sophistication additions —
+      "divergence.sanitation.in", "divergence.sanitation.chn", "divergence.sanitation.kor", "divergence.sanitation.vnm", "divergence.sanitation.bgd", "divergence.sanitation.wld",
+      "divergence.cereal_yield.in", "divergence.cereal_yield.chn", "divergence.cereal_yield.kor", "divergence.cereal_yield.vnm", "divergence.cereal_yield.idn", "divergence.cereal_yield.wld",
+      "divergence.exports_gdp.in", "divergence.exports_gdp.chn", "divergence.exports_gdp.kor", "divergence.exports_gdp.vnm", "divergence.exports_gdp.idn", "divergence.exports_gdp.wld",
+      "divergence.hightech_exports_share.in", "divergence.hightech_exports_share.chn", "divergence.hightech_exports_share.kor", "divergence.hightech_exports_share.vnm", "divergence.hightech_exports_share.idn", "divergence.hightech_exports_share.wld",
+      // — rework 2026-06-21: TiVA forward-GVC + servicification —
+      "divergence.gvc_forward.in", "divergence.gvc_forward.chn", "divergence.gvc_forward.kor", "divergence.gvc_forward.vnm", "divergence.gvc_forward.idn", "divergence.gvc_forward.jpn",
+      "divergence.exports_serv_dva.in", "divergence.exports_serv_dva.chn", "divergence.exports_serv_dva.kor", "divergence.exports_serv_dva.vnm", "divergence.exports_serv_dva.idn", "divergence.exports_serv_dva.jpn"
     ],
     visualPlan: [
       // ACT 1 — the same starting line, and the great divergence
@@ -63,10 +89,12 @@ export const v1Questions = [
           { indicator: "divergence.gdp_pc_maddison.in", label: "India" },
           { indicator: "divergence.gdp_pc_maddison.chn", label: "China" },
           { indicator: "divergence.gdp_pc_maddison.kor", label: "S. Korea" },
+          { indicator: "divergence.gdp_pc_maddison.vnm", label: "Vietnam" },
           { indicator: "divergence.gdp_pc_maddison.idn", label: "Indonesia" },
-          { indicator: "divergence.gdp_pc_maddison.bgd", label: "Bangladesh" }
+          { indicator: "divergence.gdp_pc_maddison.bgd", label: "Bangladesh" },
+          { indicator: "divergence.gdp_pc_maddison.pak", label: "Pakistan" }
         ],
-        why: "Around 1950 India was no poorer than its Asian peers; this is the gap that opened up afterward.",
+        why: "Around 1950 India was no poorer than its Asian peers, including a Vietnam about to be torn apart by war; this is the gap that opened afterward. Vietnam has since drawn level with India and edged ahead, while Pakistan, India's twin from 1947, fell further behind, a reminder that East Asia's path was the exception, not the rule.",
         read: "Each line is one country's average output per person, on a long-run reconstruction. Lines that climb steeply pulled away from India.",
         watch: "These are reconstructed historical estimates with wide error bars, especially before 1950. Read the shape and the divergence, not the exact value in any single year." },
       { chart: "multiLine", title: "The income gap, measured", size: "feature", beat: "level", unit: "GDP per capita at PPP (constant 2021 int-$)", fromYear: 1990,
@@ -81,6 +109,28 @@ export const v1Questions = [
         ],
         why: "The measured, modern version of the gap, on a like-for-like PPP basis.",
         watch: "PPP adjusts for price differences so a rupee and a dollar buy comparable baskets; it is a modelled price-level adjustment, not a market exchange rate." },
+      // ACT 1b — same income in 1960, but the people were already on different tracks
+      { chart: "startingGrid", title: "Same income, different starting points", size: "feature", beat: "starting-line", unit: "India · China · South Korea, from 1960", fromYear: 1960,
+        subtitle: "Maddison / World Bank · India, China and South Korea from 1960, when their incomes were close · each panel on its own scale, so read the fan-out, not the heights",
+        panels: [
+          { label: "Income per person", unit: "GDP per capita (2011 int-$)", series: [
+            { indicator: "divergence.gdp_pc_maddison.in", label: "India" }, { indicator: "divergence.gdp_pc_maddison.chn", label: "China" }, { indicator: "divergence.gdp_pc_maddison.kor", label: "S. Korea" } ] },
+          { label: "Years of schooling", unit: "mean years, adults", series: [
+            { indicator: "divergence.schooling_years.in", label: "India" }, { indicator: "divergence.schooling_years.chn", label: "China" }, { indicator: "divergence.schooling_years.kor", label: "S. Korea" } ] },
+          { label: "Life expectancy", unit: "years at birth", series: [
+            { indicator: "divergence.life_expectancy.in", label: "India" }, { indicator: "divergence.life_expectancy.chn", label: "China" }, { indicator: "divergence.life_expectancy.kor", label: "S. Korea" } ] },
+          { label: "Child deaths before five", unit: "per 1,000 live births", invert: true, series: [
+            { indicator: "divergence.under5_mortality.in", label: "India" }, { indicator: "divergence.under5_mortality.chn", label: "China" }, { indicator: "divergence.under5_mortality.kor", label: "S. Korea" } ] },
+          { label: "Births per woman", unit: "fertility rate", invert: true, series: [
+            { indicator: "divergence.fertility.in", label: "India" }, { indicator: "divergence.fertility.chn", label: "China" }, { indicator: "divergence.fertility.kor", label: "S. Korea" } ] },
+          { label: "Investment rate", unit: "% of GDP", series: [
+            { indicator: "divergence.gfcf.in", label: "India" }, { indicator: "divergence.gfcf.chn", label: "China" }, { indicator: "divergence.gfcf.kor", label: "S. Korea" } ] },
+          { label: "Living in cities", unit: "% urban", series: [
+            { indicator: "divergence.urban_share.in", label: "India" }, { indicator: "divergence.urban_share.chn", label: "China" }, { indicator: "divergence.urban_share.kor", label: "S. Korea" } ] }
+        ],
+        why: "The strongest single test of the human-capital-first argument: in 1960 India, China and Korea earned roughly the same, yet Korea already had four times India's schooling and lived eight years longer, and from that shared income line every measure fanned apart.",
+        read: "Each small panel is one measure, with India, China and Korea drawn from 1960 on the panel's own scale. Lines that begin together and spread show a gap opening from a common starting point.",
+        watch: "Incomes in 1960 were close but not identical, and the panels use different axes, so compare the shape of each fan-out, not heights from one panel to another. Schooling is a five-yearly reconstruction." },
       // ACT 2 — human capital first
       { chart: "multiLine", title: "How long people live", size: "feature", beat: "human-capital", unit: "life expectancy at birth (years)", fromYear: 1960,
         subtitle: "World Bank · life expectancy at birth · 1960 to latest",
@@ -114,6 +164,20 @@ export const v1Questions = [
           { indicator: "divergence.schooling_years.jpn", label: "Japan" }
         ],
         why: "Schooling is the human-capital stock a country brings to industrialisation; India started this climb late and slow." },
+      { chart: "latestBars", title: "Years went up; did learning?", size: "feature", beat: "human-capital", unit: "harmonised learning score (TIMSS/PISA-equivalent)",
+        subtitle: "World Bank Human Capital Project · harmonised test scores, latest available · a score of 625 is advanced attainment, 300 is minimum",
+        series: [
+          { indicator: "divergence.learning_score.kor", label: "S. Korea" },
+          { indicator: "divergence.learning_score.jpn", label: "Japan" },
+          { indicator: "divergence.learning_score.chn", label: "China" },
+          { indicator: "divergence.learning_score.vnm", label: "Vietnam" },
+          { indicator: "divergence.learning_score.idn", label: "Indonesia" },
+          { indicator: "divergence.learning_score.in", label: "India" },
+          { indicator: "divergence.learning_score.bgd", label: "Bangladesh" }
+        ],
+        why: "More years in a classroom is not the same as more learning; on harmonised tests an Indian child's measured learning trails Vietnam's and East Asia's by a wide margin.",
+        read: "Each bar is how much children actually learn, put on one comparable scale. Higher means more learned per year of schooling.",
+        watch: "Test coverage and years differ by country, so read the ranking and the size of the gap, not a single decimal. India's score leans on older assessments." },
       { chart: "multiLine", title: "Where are the women at work?", size: "hero", beat: "female-labour", unit: "female labour-force participation (% of women 15+)", fromYear: 1990,
         subtitle: "World Bank / ILO modelled estimate · share of women 15+ in the labour force",
         series: [
@@ -149,6 +213,19 @@ export const v1Questions = [
         ],
         why: "Stunting is malnutrition written into a child's body and brain; India's rate is high even against much poorer countries.",
         watch: "Survey years differ by country, so read this as the latest snapshot, not a single common year." },
+      { chart: "multiLine", title: "The sanitation gap behind the stunting", size: "small", beat: "human-capital", unit: "% using at least basic sanitation", fromYear: 2000,
+        subtitle: "World Bank / WHO-UNICEF JMP · share of population using at least basic sanitation",
+        series: [
+          { indicator: "divergence.sanitation.in", label: "India" },
+          { indicator: "divergence.sanitation.chn", label: "China" },
+          { indicator: "divergence.sanitation.kor", label: "S. Korea" },
+          { indicator: "divergence.sanitation.vnm", label: "Vietnam" },
+          { indicator: "divergence.sanitation.bgd", label: "Bangladesh" },
+          { indicator: "divergence.sanitation.wld", label: "World" }
+        ],
+        why: "The missing piece behind India's stunting puzzle. In 2000 just 15% of Indians had a basic toilet, below Bangladesh and a world away from East Asia, and a generation grew up amid the open defecation that stunts bodies and brains whatever a family earns. India has since closed most of the gap, but the damage to the cohort now of working age was already done.",
+        read: "Each line is the share of people with at least a basic toilet. India starts at the bottom and climbs steeply after 2014.",
+        watch: "Access to a toilet is not the same as use; survey definitions shifted over time and the recent surge tracks a big government push. Read the early gap, not the precise level." },
       // ACT 3 — the investment engine
       { chart: "multiLine", title: "How much each country built", size: "feature", beat: "investment", unit: "gross fixed capital formation (% of GDP)", fromYear: 1960,
         subtitle: "World Bank · gross fixed capital formation as a share of GDP · the investment rate",
@@ -182,6 +259,31 @@ export const v1Questions = [
           { indicator: "divergence.fdi_in.bgd", label: "Bangladesh" }
         ],
         why: "Foreign factories brought capital, technology and export markets; Vietnam and China pulled in far more, relative to their size." },
+      { chart: "multiLine", title: "How deep the banks went", size: "small", beat: "investment", unit: "private credit (% of GDP)", fromYear: 1960,
+        subtitle: "World Bank · domestic credit to the private sector as a share of GDP · how much finance reaches firms and households",
+        series: [
+          { indicator: "divergence.credit_private.in", label: "India" },
+          { indicator: "divergence.credit_private.chn", label: "China" },
+          { indicator: "divergence.credit_private.kor", label: "S. Korea" },
+          { indicator: "divergence.credit_private.vnm", label: "Vietnam" },
+          { indicator: "divergence.credit_private.jpn", label: "Japan" },
+          { indicator: "divergence.credit_private.wld", label: "World" }
+        ],
+        why: "Investment needs finance; East Asia's banks pushed far more credit into private hands, while India's financial system stayed shallow for decades.",
+        watch: "More credit is not always better; credit booms can end in busts. Read this as financial depth, not financial health." },
+      { chart: "multiLine", title: "What each worker has to work with", size: "feature", beat: "investment", unit: "capital stock per worker (2017 US$)", fromYear: 1960,
+        subtitle: "Penn World Table 10.01 · capital stock per worker · the machines, buildings and infrastructure behind each job",
+        series: [
+          { indicator: "divergence.capital_per_worker.in", label: "India" },
+          { indicator: "divergence.capital_per_worker.chn", label: "China" },
+          { indicator: "divergence.capital_per_worker.kor", label: "S. Korea" },
+          { indicator: "divergence.capital_per_worker.twn", label: "Taiwan" },
+          { indicator: "divergence.capital_per_worker.vnm", label: "Vietnam" },
+          { indicator: "divergence.capital_per_worker.jpn", label: "Japan" }
+        ],
+        why: "Decades of higher investment compound into the tools each worker has; an Indian worker today has a small fraction of the capital a Korean worker does.",
+        read: "Each line is the value of the capital stock divided by the number of workers. Higher means more machines, buildings and infrastructure per job.",
+        watch: "This Penn World Table series ends in 2019 and is a modelled estimate; read the gap and the trajectory, not the precise dollar figure." },
       // ACT 4 — the factory India skipped
       { chart: "multiLine", title: "The factory escalator India never rode", size: "hero", beat: "structure", unit: "manufacturing value added (% of GDP)", fromYear: 1960,
         subtitle: "World Bank · manufacturing value added as a share of GDP · India and South Korea have full records; China's WB series starts only in 2004",
@@ -214,17 +316,63 @@ export const v1Questions = [
           { indicator: "divergence.emp_agriculture.bgd", label: "Bangladesh" }
         ],
         why: "Development means moving workers off the farm into higher-productivity work; India did this slower than its peers." },
-      { chart: "multiLine", title: "The tariff wall India kept up", size: "small", beat: "openness", unit: "applied tariff rate (%)", fromYear: 1988,
-        subtitle: "World Bank · applied tariff rate, weighted mean across all products · how walled-off the economy was",
+      { chart: "multiLine", title: "Farms that never caught up", size: "small", beat: "structure", unit: "cereal yield (kg per hectare)", fromYear: 1961,
+        subtitle: "World Bank · cereal yield, kg per hectare · land productivity since 1961",
         series: [
-          { indicator: "divergence.tariff.in", label: "India" },
-          { indicator: "divergence.tariff.chn", label: "China" },
-          { indicator: "divergence.tariff.kor", label: "S. Korea" },
-          { indicator: "divergence.tariff.vnm", label: "Vietnam" },
-          { indicator: "divergence.tariff.idn", label: "Indonesia" }
+          { indicator: "divergence.cereal_yield.in", label: "India" },
+          { indicator: "divergence.cereal_yield.chn", label: "China" },
+          { indicator: "divergence.cereal_yield.kor", label: "S. Korea" },
+          { indicator: "divergence.cereal_yield.vnm", label: "Vietnam" },
+          { indicator: "divergence.cereal_yield.idn", label: "Indonesia" },
+          { indicator: "divergence.cereal_yield.wld", label: "World" }
         ],
-        why: "Export-led growth needs an open economy; India taxed imports far more heavily than its peers and opened later.",
-        watch: "Tariffs are only one barrier among many (quotas, licences, red tape); a falling tariff line understates how closed the pre-1991 economy really was." },
+        why: "How Asia Works begins not with factories but with fields. East Asia's post-war land reforms handed plots to the families that farmed them and pushed yields up fast, throwing off the food surplus and savings that funded industry. India's land reform mostly stayed on paper, and it shows in the soil: a Korean hectare already grew three times the grain an Indian one did in 1961, and even after the Green Revolution India's land yields little more than half what China, Korea or Vietnam now harvest.",
+        read: "Each line is kilograms of cereal harvested per hectare. Higher means more food and income from the same land.",
+        watch: "Yields reflect crop mix, irrigation and climate as well as policy, so read this as one strand of the land-and-agriculture story, not the whole of it." },
+      { chart: "multiLine", title: "The kind of work India made: informal", size: "feature", beat: "structure", unit: "informal employment (% of total employment)", fromYear: 2004,
+        subtitle: "ILOSTAT · share of employment that is informal · jobs without contracts, social security or stable pay",
+        series: [
+          { indicator: "compare.informal_rate.ind", label: "India" },
+          { indicator: "compare.informal_rate.bgd", label: "Bangladesh" },
+          { indicator: "compare.informal_rate.idn", label: "Indonesia" },
+          { indicator: "compare.informal_rate.vnm", label: "Vietnam" }
+        ],
+        why: "The factory job is a formal job with a payslip; the work India created instead was overwhelmingly informal, around nine in ten jobs without contract or security.",
+        read: "Each line is the share of all jobs that are informal. Higher means more workers outside the protected, taxed, measured economy.",
+        watch: "Korea and China are off this chart because ILO does not publish comparable informality rates for them; informality is defined slightly differently across countries." },
+      { chart: "multiLine", title: "The tariff wall India kept up", size: "small", beat: "openness", unit: "effectively-applied tariff (%, simple average)", fromYear: 1989,
+        subtitle: "WITS · effectively-applied tariff, simple average across all products (after trade deals and exemptions) · how walled-off each market stayed",
+        series: [
+          { indicator: "divergence.tariff_ahs.in", label: "India" },
+          { indicator: "divergence.tariff_ahs.chn", label: "China" },
+          { indicator: "divergence.tariff_ahs.kor", label: "S. Korea" },
+          { indicator: "divergence.tariff_ahs.vnm", label: "Vietnam" },
+          { indicator: "divergence.tariff_ahs.idn", label: "Indonesia" }
+        ],
+        why: "Export-led growth needs an open economy; even after decades of liberalisation India still levies the highest effective tariff of the group.",
+        watch: "Tariffs are only one barrier among many (quotas, licences, red tape); a falling line understates how closed the pre-1991 economy really was." },
+      { chart: "multiLine", title: "India's wall, and how much it waives", size: "small", beat: "openness", unit: "tariff (%, simple average)", fromYear: 1990,
+        subtitle: "WITS · India's most-favoured-nation tariff versus its effectively-applied tariff · the gap is the discount given through trade deals and exemptions",
+        series: [
+          { indicator: "divergence.tariff_mfn.in", label: "MFN (headline) tariff" },
+          { indicator: "divergence.tariff_ahs.in", label: "Effectively applied" }
+        ],
+        why: "India's headline tariff overstates its openness: a meaningful slice is waived through preferential deals, but the effective wall is still the group's tallest.",
+        read: "The upper line is the rate India advertises to any WTO member; the lower line is what importers actually pay on average. The gap is preferential access.",
+        watch: "Both are simple averages across products, so a few very high tariff lines can lift them; they say nothing about non-tariff barriers." },
+      { chart: "multiLine", title: "Did India ever become an exporter?", size: "small", beat: "openness", unit: "exports of goods and services (% of GDP)", fromYear: 1960,
+        subtitle: "World Bank · exports of goods and services as a share of GDP · how export-oriented each economy became",
+        series: [
+          { indicator: "divergence.exports_gdp.in", label: "India" },
+          { indicator: "divergence.exports_gdp.chn", label: "China" },
+          { indicator: "divergence.exports_gdp.kor", label: "S. Korea" },
+          { indicator: "divergence.exports_gdp.vnm", label: "Vietnam" },
+          { indicator: "divergence.exports_gdp.idn", label: "Indonesia" },
+          { indicator: "divergence.exports_gdp.wld", label: "World" }
+        ],
+        why: "Lowering tariffs is only half of opening up; the other half is bending the economy to sell to the world. Vietnam built an economy where exports are worth about 90% of GDP and Korea reached 44% at its peak, while India's exports crept to about 21% and drifted sideways. India leaned on its huge home market instead of competing for foreign customers.",
+        read: "Each line is exports as a share of GDP, a rough gauge of how export-oriented an economy is.",
+        watch: "Big economies naturally trade less as a share of GDP than small ones, so part of India's lower ratio is a size effect; the story is the trend and the contrast with Vietnam and Korea, not the exact percentage." },
       { chart: "multiLine", title: "Climbing the complexity ladder", size: "feature", beat: "sophistication", unit: "Economic Complexity Index", fromYear: 1995,
         subtitle: "Harvard Growth Lab Atlas of Economic Complexity · how diverse and sophisticated each country's exports are",
         series: [
@@ -236,6 +384,19 @@ export const v1Questions = [
         ],
         why: "It is not just how much you export but what: Korea and China climbed to complex, high-value goods while India's basket stayed simpler.",
         watch: "A higher index means a more diverse, harder-to-imitate export mix; it is a ranking-based measure, so read relative positions, not absolute units." },
+      { chart: "multiLine", title: "The sophisticated goods India doesn't make", size: "small", beat: "sophistication", unit: "high-tech exports (% of manufactured exports)", fromYear: 2007,
+        subtitle: "World Bank · high-technology exports as a share of manufactured exports",
+        series: [
+          { indicator: "divergence.hightech_exports_share.in", label: "India" },
+          { indicator: "divergence.hightech_exports_share.chn", label: "China" },
+          { indicator: "divergence.hightech_exports_share.kor", label: "S. Korea" },
+          { indicator: "divergence.hightech_exports_share.vnm", label: "Vietnam" },
+          { indicator: "divergence.hightech_exports_share.idn", label: "Indonesia" },
+          { indicator: "divergence.hightech_exports_share.wld", label: "World" }
+        ],
+        why: "A blunter read on sophistication than the complexity index: who sells the genuinely high-technology goods, the electronics and instruments and aircraft parts. Vietnam started below India and rocketed to 44% of its manufactured exports being high-tech by plugging into electronics supply chains; India inched from 10% to 19%.",
+        read: "Each line is the share of a country's manufactured exports that are classed as high-technology.",
+        watch: "The high-tech label tracks the product, not where the hard work happens; much of Vietnam's total is final assembly of imported parts, so it flatters the depth of local capability. Data begins around 2007." },
       { chart: "multiLine", title: "Making things to sell the world", size: "small", beat: "sophistication", unit: "manufactures (% of merchandise exports)", fromYear: 1965,
         subtitle: "World Bank · manufactured goods as a share of merchandise exports",
         series: [
@@ -246,6 +407,50 @@ export const v1Questions = [
           { indicator: "divergence.manuf_exports_share.bgd", label: "Bangladesh" }
         ],
         why: "Export-led growth runs on selling manufactures to the world; the peers built that engine, India leaned more on services and commodities." },
+      { chart: "multiLine", title: "Who captured world trade", size: "feature", beat: "sophistication", unit: "share of world merchandise exports (%)", fromYear: 1960,
+        subtitle: "World Bank / WTO · each country's goods exports as a share of all world goods exports",
+        series: [
+          { indicator: "divergence.world_export_share.in", label: "India" },
+          { indicator: "divergence.world_export_share.chn", label: "China" },
+          { indicator: "divergence.world_export_share.kor", label: "S. Korea" },
+          { indicator: "divergence.world_export_share.vnm", label: "Vietnam" },
+          { indicator: "divergence.world_export_share.jpn", label: "Japan" }
+        ],
+        why: "The clearest single picture of the divergence in trade: China's share of world exports went from around 1% to over 14%, while India's barely moved off 1-2%.",
+        read: "Each line is the country's slice of all the goods the world exports. A rising line is a country winning a bigger share of world trade." },
+      { chart: "multiLine", title: "Plugged into the world's supply chains", size: "small", beat: "sophistication", unit: "foreign value added in exports (%)", fromYear: 1995,
+        subtitle: "OECD TiVA 2025 · foreign value added as a share of gross exports · how plugged-in each country is to global supply chains (backward GVC participation)",
+        series: [
+          { indicator: "divergence.gvc_fva.vnm", label: "Vietnam" },
+          { indicator: "divergence.gvc_fva.kor", label: "S. Korea" },
+          { indicator: "divergence.gvc_fva.in", label: "India" },
+          { indicator: "divergence.gvc_fva.idn", label: "Indonesia" },
+          { indicator: "divergence.gvc_fva.jpn", label: "Japan" },
+          { indicator: "divergence.gvc_fva.chn", label: "China" }
+        ],
+        why: "Modern manufacturing means importing parts, adding value and re-exporting; Vietnam wove itself deep into these chains, India far less so.",
+        watch: "A high foreign-value-added share means deep supply-chain integration, not weakness; for a large economy like India some of the low number is just its size and domestic sourcing." },
+      { chart: "multiLine", title: "Selling inputs, not assembling them", size: "small", beat: "sophistication", unit: "domestic value added in intermediate exports (%)", fromYear: 1995,
+        subtitle: "OECD TiVA 2025 · domestic value added in intermediate exports as a share of gross exports · the upstream side of supply chains (forward GVC participation)",
+        series: [
+          { indicator: "divergence.gvc_forward.vnm", label: "Vietnam" },
+          { indicator: "divergence.gvc_forward.kor", label: "S. Korea" },
+          { indicator: "divergence.gvc_forward.in", label: "India" },
+          { indicator: "divergence.gvc_forward.idn", label: "Indonesia" },
+          { indicator: "divergence.gvc_forward.jpn", label: "Japan" },
+          { indicator: "divergence.gvc_forward.chn", label: "China" }
+        ],
+        why: "The mirror image of the backward chart. India is upstream-tilted, supplying domestic inputs that other countries finish and re-export, while Vietnam plugged in downstream as an assembler. India's forward participation (about 41%) runs well above its backward share (26%); Vietnam's forward share fell as its assembly role grew.",
+        read: "Each line is the domestic value added embodied in a country's intermediate exports, the inputs that feed others' production.",
+        watch: "Forward and backward participation are two halves of GVC integration; a high forward share can reflect commodities or upstream services rather than sophistication, which is why commodity-exporting Indonesia ranks highest." },
+      { chart: "multiLine", title: "Becoming China's customer", size: "small", beat: "sophistication", unit: "trade with China (current US$ billions)", fromYear: 2000,
+        subtitle: "UN Comtrade · India's imports from and exports to China · the trade relationship that ran one way",
+        series: [
+          { indicator: "divergence.india_china_imports", label: "India's imports from China" },
+          { indicator: "divergence.india_china_exports", label: "India's exports to China" }
+        ],
+        why: "As China became the world's factory, India became one of its customers: imports from China exploded while India's exports back stayed flat, a widening deficit.",
+        watch: "These are gross bilateral flows in current dollars, not inflation-adjusted; some goods are re-exported onward and not all final demand is Indian." },
       // ACT 5 — where it left India
       { chart: "multiLine", title: "How much each worker produces", size: "feature", beat: "outcome", unit: "output per hour worked (int-$)", fromYear: 1970,
         subtitle: "Penn World Table via Our World in Data · real GDP per hour worked",
@@ -287,7 +492,89 @@ export const v1Questions = [
           { indicator: "divergence.urban_share.wld", label: "World" }
         ],
         why: "Factories and services cluster in cities; East Asia urbanised fast, India more slowly and messily." },
-      // ACT 6 — the other side
+      // ACT 6 — so why? the state and its institutions
+      { chart: "multiLine", title: "The capable state", size: "feature", beat: "institutions", unit: "government effectiveness (percentile rank, 0-100)", fromYear: 1996,
+        subtitle: "World Bank Worldwide Governance Indicators · government effectiveness, ranked against all countries · the state's capacity to deliver",
+        series: [
+          { indicator: "divergence.wgi_govt_effectiveness.in", label: "India" },
+          { indicator: "divergence.wgi_govt_effectiveness.chn", label: "China" },
+          { indicator: "divergence.wgi_govt_effectiveness.kor", label: "S. Korea" },
+          { indicator: "divergence.wgi_govt_effectiveness.vnm", label: "Vietnam" },
+          { indicator: "divergence.wgi_govt_effectiveness.idn", label: "Indonesia" },
+          { indicator: "divergence.wgi_govt_effectiveness.bgd", label: "Bangladesh" }
+        ],
+        why: "Behind the policy choices sits the machine that carries them out; East Asia built states that could plan, target and deliver, and India's measured effectiveness has stayed middling.",
+        read: "Each line is the country's percentile rank for government effectiveness, from 0 (worst in the world) to 100 (best). Higher means a more capable bureaucracy.",
+        watch: "These are perception-based indices built from surveys and expert ratings, not hard outputs; read the broad standing, not a one-point move." },
+      { chart: "latestBars", title: "Where India scores, and where it doesn't", size: "feature", beat: "institutions", unit: "percentile rank (0-100), latest",
+        subtitle: "World Bank Worldwide Governance Indicators · India's latest percentile rank on each of the six dimensions · India is not uniformly weak",
+        series: [
+          { indicator: "divergence.wgi_voice_accountability.in", label: "Voice & accountability" },
+          { indicator: "divergence.wgi_rule_of_law.in", label: "Rule of law" },
+          { indicator: "divergence.wgi_govt_effectiveness.in", label: "Government effectiveness" },
+          { indicator: "divergence.wgi_regulatory_quality.in", label: "Regulatory quality" },
+          { indicator: "divergence.wgi_control_corruption.in", label: "Control of corruption" },
+          { indicator: "divergence.wgi_political_stability.in", label: "Political stability" }
+        ],
+        why: "India's institutional story is not a flat failure: it ranks respectably on voice and the rule of law, and far lower on the capacity to regulate, deliver and curb corruption.",
+        read: "Each bar is India's world percentile rank on one governance dimension; taller is better.",
+        watch: "These are relative ranks against all countries in one recent year, so a bar reflects India versus the world, not progress over time." },
+      // ACT 7 — the arithmetic of the gap, and catching up
+      { chart: "multiLine", title: "The growth-rate gap behind the income gap", size: "feature", beat: "arithmetic", unit: "real GDP per capita growth (% per year, decade average)", fromYear: 1960,
+        subtitle: "World Bank / Maddison · average annual growth of GDP per capita, by decade · small gaps compound into the income chasm",
+        series: [
+          { indicator: "divergence.decade_growth.in", label: "India" },
+          { indicator: "divergence.decade_growth.chn", label: "China" },
+          { indicator: "divergence.decade_growth.kor", label: "S. Korea" },
+          { indicator: "divergence.decade_growth.vnm", label: "Vietnam" },
+          { indicator: "divergence.decade_growth.jpn", label: "Japan" }
+        ],
+        why: "The income gap is compound interest: East Asia grew its income per head 6-9% a year for decades while India managed 1-2% before 1980, and a few points a year, sustained, becomes everything.",
+        read: "Each point is a decade's average yearly growth in income per person. A line sitting higher for longer pulls permanently ahead.",
+        watch: "Decade averages smooth over crises and booms; the 2010s point predates the pandemic and the most recent years." },
+      { chart: "multiLine", title: "Sweat or smarts?", size: "small", beat: "arithmetic", unit: "total factor productivity (USA = 1)", fromYear: 1960,
+        subtitle: "Penn World Table 10.01 · total factor productivity relative to the United States · efficiency, after counting labour and capital",
+        series: [
+          { indicator: "divergence.tfp_rel_us.in", label: "India" },
+          { indicator: "divergence.tfp_rel_us.chn", label: "China" },
+          { indicator: "divergence.tfp_rel_us.kor", label: "S. Korea" },
+          { indicator: "divergence.tfp_rel_us.twn", label: "Taiwan" },
+          { indicator: "divergence.tfp_rel_us.jpn", label: "Japan" }
+        ],
+        why: "Was the miracle just piling up capital and labour, or using them better? Korea and Taiwan raised efficiency toward the US frontier; India's gain has been slow.",
+        watch: "Total factor productivity is a residual, sensitive to assumptions about depreciation and human capital; read it as a broad pattern, not a precise efficiency number. The series ends in 2019." },
+      { chart: "multiLine", title: "The demographic window, and who used it", size: "small", beat: "arithmetic", unit: "working-age population (% of total, 15-64)", fromYear: 1960,
+        subtitle: "World Bank · share of the population of working age · the dividend window opens when this rises",
+        series: [
+          { indicator: "divergence.working_age.in", label: "India" },
+          { indicator: "divergence.working_age.chn", label: "China" },
+          { indicator: "divergence.working_age.kor", label: "S. Korea" },
+          { indicator: "divergence.working_age.vnm", label: "Vietnam" },
+          { indicator: "divergence.working_age.wld", label: "World" }
+        ],
+        why: "A rising working-age share is a tailwind, but only if those workers find productive jobs; East Asia turned its window into factory work, India's is open now.",
+        watch: "A demographic window is potential, not destiny; without jobs the same bulge becomes unemployment rather than a dividend." },
+      { chart: "multiLine", title: "Did the growth reach everyone?", size: "small", beat: "arithmetic", unit: "top 10% share of pre-tax income (%)", fromYear: 1960,
+        subtitle: "World Inequality Database · share of pre-tax national income going to the top 10% · who captured the gains",
+        series: [
+          { indicator: "divergence.top10_share.in", label: "India" },
+          { indicator: "divergence.top10_share.chn", label: "China" },
+          { indicator: "divergence.top10_share.kor", label: "S. Korea" },
+          { indicator: "divergence.top10_share.idn", label: "Indonesia" }
+        ],
+        why: "Growth and fairness are not the same question; India's top tenth now takes a larger slice of income than in almost any major economy, a sharper rise than its East Asian peers.",
+        watch: "Inequality estimates blend surveys, tax data and assumptions and are revised often; read the trend and the ranking, not the exact percentage." },
+      { chart: "multiLine", title: "So when does India catch up?", size: "feature", beat: "arithmetic", unit: "GDP per capita at PPP (constant 2021 int-$)", fromYear: 1990,
+        subtitle: "Indica projection · India's income per person extended at its recent real growth rate, against where China and South Korea stand today",
+        series: [
+          { indicator: "divergence.income_proj.in", label: "India (projected)" },
+          { indicator: "divergence.income_proj.china_today", label: "China today" },
+          { indicator: "divergence.income_proj.korea_today", label: "S. Korea today" }
+        ],
+        why: "If India keeps growing at its recent pace, it reaches China's current income level only around 2043, and is still short of Korea's by mid-century, a sobering read on how long the gap takes to close.",
+        read: "The rising line is India's income per person, real, projected forward at its 2014-2024 growth rate; the flat lines are where China and Korea sit today.",
+        watch: "This is an illustrative extrapolation, not a forecast: it holds growth constant and freezes China and Korea in place, when in reality all three keep moving. China in particular is slowing hard in the 2020s, with a property crash and a shrinking workforce, so the target India is chasing is itself wobbling." },
+      // ACT 8 — the other side
       { chart: "multiLine", title: "The poverty India did crush", size: "feature", beat: "other-side", unit: "% living under $3 a day", fromYear: 1980,
         subtitle: "World Bank Poverty and Inequality Platform via Our World in Data · share below the $3-a-day extreme-poverty line",
         series: [
@@ -310,6 +597,19 @@ export const v1Questions = [
         ],
         why: "India did build an export engine, but in services (IT, business services) rather than factory goods, a different escalator that lifts fewer low-skilled workers.",
         watch: "A high services share is not automatically better or worse; it reflects what India sells to the world, and services have so far employed far fewer people than mass manufacturing would." },
+      { chart: "multiLine", title: "The services hidden inside the exports", size: "small", beat: "other-side", unit: "services value added in exports (%)", fromYear: 1995,
+        subtitle: "OECD TiVA 2025 · domestic services value added as a share of gross exports · the services buried inside everything a country sells, goods included",
+        series: [
+          { indicator: "divergence.exports_serv_dva.in", label: "India" },
+          { indicator: "divergence.exports_serv_dva.jpn", label: "Japan" },
+          { indicator: "divergence.exports_serv_dva.chn", label: "China" },
+          { indicator: "divergence.exports_serv_dva.idn", label: "Indonesia" },
+          { indicator: "divergence.exports_serv_dva.kor", label: "S. Korea" },
+          { indicator: "divergence.exports_serv_dva.vnm", label: "Vietnam" }
+        ],
+        why: "The previous chart counts services sold directly; this counts services value buried inside everything a country exports, goods included. By 2022 about 44% of India's export value was domestically produced services, the highest in the group and still rising, while Vietnam's assembly model had stripped its services content down to 10%.",
+        read: "Each line is the share of a country's gross exports made up of domestic services value added.",
+        watch: "This is a modelled value-added estimate that ends in 2022; it captures design, software, logistics and finance embedded in exports, not services sold across the border, which the previous chart shows." },
       { chart: "multiLine", title: "The all-in human scorecard", size: "small", beat: "other-side", unit: "Human Development Index (0-1)", fromYear: 1990,
         subtitle: "UNDP via Our World in Data · Human Development Index, combining health, schooling and income",
         series: [
@@ -329,7 +629,12 @@ export const v1Questions = [
           { indicator: "divergence.democracy.twn", label: "Taiwan" }
         ],
         why: "The honest counterweight: India built its record under continuous democracy, while the East Asian transformations were often coerced and only democratised later.",
-        watch: "The index runs 0 to 1; this is a measure of electoral democracy, not of growth, and the chart makes no claim that either system causes growth." }
+        watch: "The index runs 0 to 1; this is a measure of electoral democracy, not of growth, and the chart makes no claim that either system causes growth." },
+      { chart: "tableBars", title: "What India's firms say holds them back", size: "small", beat: "other-side", indicator: "divergence.es_obstacles.in", unit: "% of firms (2014 survey)",
+        subtitle: "World Bank Enterprise Survey, India 2014 · share of firms naming each as their single biggest obstacle · one dated snapshot, read as texture not trend",
+        why: "From the businesses' own mouths: a decade ago Indian firms ranked corruption and unreliable electricity, not labour laws, as their biggest obstacles, a useful corrective to easy assumptions about what holds growth back.",
+        read: "Each bar is the share of firms that named that issue as their single biggest obstacle to doing business.",
+        watch: "This is a single 2014 survey, India's only vintage in this dataset; treat it as one dated snapshot of business sentiment, not a current or trending measure." }
     ]
   },
   {
@@ -576,14 +881,44 @@ export const v1Questions = [
         ],
         indicator: "divergence.fertility.in",
         why: "India's fall is not unique: it has joined the low-fertility world, but sits above every advanced economy and far above East Asia's ultra-low rates.", read: "Each line is a country's births per woman since 1960; India is highlighted, with South Asia in amber, East Asia in teal and the advanced West in green.", watch: "India reached low fertility at a fraction of the income the West or East Asia had when they got there, and unlike Korea or China it has levelled near replacement rather than crashing below it." },
+      { indicator: "people.dfi.tfr_states_vs_developed", chart: "tableBars", title: "Indian states next to the rich world", size: "feature", beat: "states-vs-rich", unit: "births per woman", subtitle: "SRS 2023 (states) and UN World Population Prospects 2024 (countries)",
+        why: "The cleanest way to feel how low Indian fertility has fallen: stand the states beside developed countries.", read: "Indian states and rich countries on one ranked scale of births per woman in 2023.", watch: "Tamil Nadu, West Bengal and several others now sit below Germany, Japan and the United States." },
+      { indicator: "people.wb.fertility_vs_female_lfp", chart: "scatterXY", title: "Low fertility without the jobs", size: "feature", beat: "fertility-work-paradox", unit: "births per woman", subtitle: "World Bank WDI · fertility vs female labour-force participation · latest year",
+        why: "In most countries fertility falls as women enter paid work; India broke that link.", read: "Each dot is a country: female labour-force participation across the bottom, births per woman up the side.", watch: "India's fertility is as low as Vietnam's, but with barely half as many women in the workforce." },
       { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "Fertility by state", size: "feature", window: "latest", beat: "geography", rankLabel: "Highest", bottomLabel: "Lowest", divergeAt: 2.1, pivotLabel: "replacement",
         why: "Fertility is not one number; it is a north-south map.", read: "Each state shaded by its fertility rate, from about 0.9 in some islands to 2.7 in Bihar.", watch: "The south and west are well below replacement; a band of northern states is still above it." },
+      { indicator: "people.ncp.tfr_projection_2035", chart: "choropleth", title: "The same map, projected to 2031-35", size: "feature", window: "latest", beat: "geography-future", divergeAt: 2.1, pivotLabel: "replacement",
+        why: "Where is each state's fertility headed? The government's own projection draws the map of 2035.", read: "Each state shaded by its projected fertility rate for 2031-35, on the same scale as the map above.", watch: "Almost every state settles near 1.5; only Bihar is still projected above replacement, at about 2.4." },
       { indicator: "people.nfhs.tfr_state_ranked", chart: "tableBars", title: "Highest and lowest fertility states", size: "feature", beat: "ranking", unit: "births per woman", subtitle: "NFHS-6 (2023-24) · top 5 and bottom 5 of 33 surveyed states/UTs",
         why: "The map, sharpened into a league table.", read: "The five highest-fertility states set against the five lowest.", watch: "Even the highest, Bihar at 2.7, is far below India's past; the lowest sit deep under replacement." },
+      { chart: "rankedChange", title: "Every state is falling, fast", size: "feature", beat: "state-momentum", unit: "births per woman", baselineYears: 2, latestYears: 2, startLabel: "~2013", endLabel: "2023", rowLabel: "State",
+        subtitle: "SRS · total fertility rate · about 2013 vs 2023",
+        series: [
+          { indicator: "people.srs.tfr_state.bihar", label: "Bihar" }, { indicator: "people.srs.tfr_state.uttar_pradesh", label: "Uttar Pradesh" },
+          { indicator: "people.srs.tfr_state.madhya_pradesh", label: "Madhya Pradesh" }, { indicator: "people.srs.tfr_state.rajasthan", label: "Rajasthan" },
+          { indicator: "people.srs.tfr_state.chhattisgarh", label: "Chhattisgarh" }, { indicator: "people.srs.tfr_state.jharkhand", label: "Jharkhand" },
+          { indicator: "people.srs.tfr_state.assam", label: "Assam" }, { indicator: "people.srs.tfr_state.haryana", label: "Haryana" },
+          { indicator: "people.srs.tfr_state.gujarat", label: "Gujarat" }, { indicator: "people.srs.tfr_state.odisha", label: "Odisha" },
+          { indicator: "people.srs.tfr_state.uttarakhand", label: "Uttarakhand" }, { indicator: "people.srs.tfr_state.himachal_pradesh", label: "Himachal Pradesh" },
+          { indicator: "people.srs.tfr_state.andhra_pradesh", label: "Andhra Pradesh" }, { indicator: "people.srs.tfr_state.jammu_and_kashmir", label: "Jammu & Kashmir" },
+          { indicator: "people.srs.tfr_state.karnataka", label: "Karnataka" }, { indicator: "people.srs.tfr_state.kerala", label: "Kerala" },
+          { indicator: "people.srs.tfr_state.punjab", label: "Punjab" }, { indicator: "people.srs.tfr_state.telangana", label: "Telangana" },
+          { indicator: "people.srs.tfr_state.maharashtra", label: "Maharashtra" }, { indicator: "people.srs.tfr_state.tamil_nadu", label: "Tamil Nadu" },
+          { indicator: "people.srs.tfr_state.west_bengal", label: "West Bengal" }
+        ],
+        why: "The map is a snapshot; this shows the motion. Over a single decade every major state's fertility dropped.", read: "Each state's TFR about a decade ago and in 2023, ranked by where it stands now.", watch: "Even Bihar and Uttar Pradesh, still the highest, have fallen sharply; the question is no longer whether they reach replacement but when." },
       { indicator: "people.srs.asfr", chart: "tableBars", title: "At what age Indian women have children", size: "feature", beat: "timing", unit: "births per 1,000 women", subtitle: "SRS 2024 · age-specific fertility rate",
         why: "Fertility is not just how many, but when.", read: "Births per 1,000 women in each age band, peaking sharply at 25-29.", watch: "Childbearing is concentrated in the twenties; teenage and over-40 births are now rare." },
       { indicator: "people.population.un.mean_age_childbearing", chart: "line", title: "Women are having children later", size: "small", window: "full", beat: "delay",
         why: "Are women delaying childbirth? The trend says yes.", read: "The average age at which women have their children, rising steadily since 2000.", watch: "Later childbearing both reflects more schooling and work and itself nudges fertility down." },
+      { chart: "multiLine", title: "The childbearing window is closing from the top", size: "feature", beat: "narrowing-window", unit: "age in years", subtitle: "NFHS rounds 1-5 · median age at marriage, first birth and last birth",
+        series: [
+          { indicator: "people.nfhs.age_first_marriage", label: "First marriage", color: "#8a8597" },
+          { indicator: "people.nfhs.age_first_birth", label: "First birth", color: "#2a8597", emphasis: true },
+          { indicator: "people.nfhs.age_last_birth", label: "Last birth", color: "#b3245a", emphasis: true }
+        ],
+        indicator: "people.nfhs.age_first_birth",
+        why: "The mechanism behind the fall: not a later start, but a much earlier stop.", read: "Median age at first marriage, first birth and last birth across NFHS rounds since 1992.", watch: "First birth has barely moved, near 21; but last birth has dropped from about 33 to under 28, collapsing the years a woman spends having children." },
       { chart: "latestBars", title: "How India avoids pregnancy, and who carries it", size: "feature", beat: "mechanism", unit: "% of married women 15-49", subtitle: "NFHS-6 (2023-24)",
         series: [ { indicator: "people.nfhs.contraception_any", label: "Any method" }, { indicator: "people.nfhs.contraception_modern", label: "Any modern method" }, { indicator: "people.nfhs.sterilization_female", label: "Female sterilisation" }, { indicator: "people.nfhs.sterilization_male", label: "Male sterilisation" }, { indicator: "people.nfhs.unmet_need", label: "Unmet need" } ],
         indicator: "people.nfhs.sterilization_female",
@@ -2846,8 +3181,8 @@ export const v1Questions = [
     visualPlan: [
       { chart: "tableBars", indicator: "health.lasidad.prev_by_age", title: "Dementia climbs steeply with age", size: "hero", beat: "answer", unit: "% of age group with dementia", subtitle: "LASI-DAD 2018-20 (Lee et al., Alzheimer's & Dementia 2023) · estimated prevalence by age band",
         why: "The first thing to know: dementia is overwhelmingly a disease of late old age. It jumps from about 3% in the early 60s to a quarter of everyone past 85.", read: "Each bar is the estimated share of that age band living with dementia. The rise is not gradual; it roughly doubles every five years after 70.", watch: "Estimates from a survey of about 2,500 clinically assessed adults, modelled to the 60+ population. Read the shape, not the second decimal." },
-      { chart: "change", indicator: "health.lasidad.cases_projection", title: "8.8 million now, 16.9 million by 2036", size: "feature", beat: "scale", unit: "million people 60+ with dementia", subtitle: "LASI-DAD · estimated cases, 2016 population base and 2036 projection",
-        why: "Because India is ageing fast, the headcount is set to nearly double in twenty years even if the risk at each age stays flat.", read: "Two figures side by side: an estimated 8.8 million adults over 60 with dementia today, and a projected 16.9 million by 2036.", watch: "Both numbers are estimates with wide uncertainty. The projection is demographic arithmetic, more people surviving into old age, not a worsening of the disease." },
+      { chart: "change", indicator: "health.lasidad.cases_projection", title: "88 lakh now, 1.69 crore by 2036", size: "feature", beat: "scale", unit: "crore people 60+ with dementia", subtitle: "LASI-DAD · estimated cases, 2016 population base and 2036 projection",
+        why: "Because India is ageing fast, the headcount is set to nearly double in twenty years even if the risk at each age stays flat.", read: "Two figures side by side: an estimated 88 lakh adults over 60 with dementia today, and a projected 1.69 crore by 2036.", watch: "Both numbers are estimates with wide uncertainty. The projection is demographic arithmetic, more people surviving into old age, not a worsening of the disease." },
       { chart: "tableBars", indicator: "health.lasidad.prev_gradients", title: "Who carries more: women, and rural India", size: "feature", beat: "gradient", unit: "% of adults 60+ with dementia", subtitle: "LASI-DAD 2018-20 · crude prevalence among adults 60+",
         why: "Dementia is not spread evenly. Women carry noticeably more of it than men, and rural Indians more than city dwellers.", read: "Two pairs of bars: women versus men, and rural versus urban. In both, the first bar is clearly taller.", watch: "Part of the women's gap is that they live longer and reach the highest-risk ages; part of the rural gap tracks lower schooling. These overlap." },
       { chart: "tableBars", indicator: "health.lasidad.prev_by_education", title: "Dementia falls sharply with schooling", size: "small", beat: "gradient", unit: "% of adults 60+ with dementia", subtitle: "LASI-DAD 2018-20 · crude prevalence by education",
@@ -2855,8 +3190,8 @@ export const v1Questions = [
       { chart: "choropleth", indicator: "health.lasidad.prev_by_state", title: "Where dementia is most common", size: "feature", beat: "where", unit: "% of adults 60+", rankLabel: "Highest", bottomLabel: "Lowest", subtitle: "LASI-DAD 2018-20 · estimated prevalence among adults 60+, by state",
         why: "The map runs from about 4.5% in Delhi to roughly 11% in Jammu & Kashmir, with the south and east generally higher than the north-western plains.", read: "Darker states have higher estimated prevalence among the over-60s. Grey states had no separate estimate.", watch: "North-eastern states other than Assam were published only as one group, so they share a single value. Small-state estimates are the least certain." },
       { chart: "line", indicator: "health.gbd.deaths_alzheimers", title: "Deaths recorded from dementia have risen eightfold", size: "feature", beat: "trend", window: "full", subtitle: "IHME Global Burden of Disease 2023 · estimated annual deaths from Alzheimer's & other dementias, India",
-        why: "As Indians live longer and other killers recede, dementia surfaces in the mortality data: recorded deaths have climbed from about 17,000 in 1980 to over 140,000.", read: "A single line rising steeply, especially after 2000.", watch: "Modelled estimates, and dementia is badly under-recorded as a cause of death, so this is a floor. The jump after 2021 partly reflects a coding change, read the long climb, not the last kink." },
-      { chart: "tableBars", indicator: "ref.us.nber.wealth_gap_by_event_time", title: "America: money trouble starts before the diagnosis", size: "feature", beat: "mechanism", unit: "US$1,000s of net worth vs similar households", subtitle: "NBER WP 34659 (Li et al. 2026) · US Health & Retirement Study · evidence from the United States",
+        why: "As Indians live longer and other killers recede, dementia surfaces in the mortality data: recorded deaths have climbed from about 17,000 in 1980 to over 1.4 lakh.", read: "A single line rising steeply, especially after 2000.", watch: "Modelled estimates, and dementia is badly under-recorded as a cause of death, so this is a floor. The jump after 2021 partly reflects a coding change, read the long climb, not the last kink." },
+      { chart: "tableBars", indicator: "ref.us.nber.wealth_gap_by_event_time", title: "America: money trouble starts before the symptoms", size: "feature", beat: "mechanism", unit: "US$1,000s of net worth vs similar households", subtitle: "NBER WP 34659 (Li et al. 2026) · US Health & Retirement Study · evidence from the United States",
         why: "This is US data, shown to explain the mechanism, not to put a rupee figure on India. American households heading into dementia fall behind similar households starting about six years before onset, ending roughly $125,000 poorer.", read: "Each bar is the wealth gap versus matched controls at that point in time. It is near zero six years out and sinks steadily, deepening even after diagnosis.", watch: "United States, not India. The dollar amounts do not transfer; what transfers is the timing and the cause, money slips away before anyone has a name for why." },
       { chart: "tableBars", indicator: "ref.us.nber.assets_cases_vs_controls", title: "America: the gap sits in hard-to-manage assets", size: "feature", beat: "mechanism", unit: "US$1,000s held, two years before onset", subtitle: "NBER WP 34659 · means two years before onset · evidence from the United States",
         why: "The losses concentrate in stocks, bonds and investment accounts, the assets that need active judgement to manage. Earnings barely differ, and cancer or heart disease show no such gap, which points at decision-making, not spending.", read: "For each asset type, two bars: households developing dementia versus similar households without. The dementia group holds less everywhere, most in investments needing active management.", watch: "United States, 2018 dollars. Most older Indians hold little in stocks or pensions, so this exact channel is smaller here; the lesson is about judgement, not portfolios." },
@@ -3281,12 +3616,115 @@ export const v1Questions = [
     ]
   },
   {
+    id: "q.energy.demand_shape",
+    question: "When does India actually turn the power on?",
+    priority: "core",
+    indicators: ["energy.griddemand.duck_summer"],
+    core: ["energy.griddemand.duck_summer"],
+    // Blended: the intraday duck (demand vs solar vs net) comes from the Mendeley/Grid-India
+    // hourly demand+solar dataset (CC-BY); the multi-year peak-demand context comes from
+    // NITI ICED's loadCurve (Grid-India). Two independent cuts of Grid-India operational data
+    // — the only article in the energy cluster about the SHAPE of a day, not the annual total.
+    context: [
+      "energy.griddemand.day_shape_seasonal",
+      "energy.griddemand.annual_peak"
+    ],
+    visualPlan: [
+      { indicator: "energy.griddemand.duck_summer", chart: "loadCurve", title: "Solar peaks at noon, demand peaks after dark", size: "hero", unit: "GW", beat: "answer",
+        why: "The whole storage argument in one chart: solar slashes midday demand, but the day's peak lands in the evening, when solar has gone to zero.", read: "Electricity demand against solar generation across an average summer day; the teal line is what's left for everything else to meet (demand minus solar).", watch: "Solar's share is near zero at the 7-8pm peak, so adding more solar barely touches the moment the grid is most stretched." },
+      { indicator: "energy.griddemand.day_shape_seasonal", chart: "loadCurve", title: "How the daily peak moves with the season", size: "feature", unit: "GW", beat: "seasonality",
+        why: "The peak is not fixed to one hour: it travels across the day as the seasons turn.", read: "Average hourly demand for a typical summer, monsoon and winter day.", watch: "Winter has a sharper morning shoulder; summer and monsoon stay high into the evening." },
+      { indicator: "energy.griddemand.annual_peak", chart: "line", title: "India's peak demand keeps breaking records", size: "feature", unit: "GW", window: "full", beat: "why-it-matters",
+        why: "Why the shape matters more every year: the single hour the grid has to serve keeps climbing.", read: "The highest hour of all-India demand met, each year from 2017.", watch: "These are instantaneous peaks in gigawatts, not annual energy; one hot evening can set the record." }
+    ]
+  },
+  {
     id: "q.air.today",
     question: "How bad is India's air today?",
     priority: "core",
     indicators: ["climate.waqi.delhi", "climate.waqi.mumbai", "climate.waqi.kolkata", "climate.waqi.chennai", "climate.waqi.bengaluru"],
     core: ["climate.waqi.delhi", "climate.waqi.mumbai", "climate.waqi.kolkata", "climate.waqi.chennai", "climate.waqi.bengaluru"],
     context: []
+  },
+  {
+    id: "q.air.data_poverty",
+    slug: "how-much-air-quality-data-can-india-see",
+    question: "What India's AQI Can See, And What It Can't",
+    priority: "core",
+    indicators: [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days",
+      "air.cpcb.repository.station_years_with_pm25_300_days",
+      "air.cpcb.repository.raw_frequency_file_counts",
+      "air.cpcb.repository.city_visibility_vs_census",
+      "air.cpcb.repository.city_pm25_days",
+      "air.cpcb.repository.first_pm25_year",
+      "air.cpcb.repository.listed_years_missing_pm25",
+      "air.cpcb.repository.rows_without_pm_examples",
+      "air.oaq.cpcb.latest_station_snapshot"
+    ],
+    core: [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days"
+    ],
+    context: [
+      "air.cpcb.repository.station_years_with_rows",
+      "air.cpcb.repository.zero_pm25_listed_files",
+      "air.cpcb.repository.pm10_observed_days",
+      "air.cpcb.repository.station_years_with_pm25_1_days",
+      "air.cpcb.repository.station_years_with_pm25_30_days",
+      "air.cpcb.repository.station_years_with_pm25_180_days",
+      "air.cpcb.repository.station_years_with_pm25_300_days",
+      "air.cpcb.repository.station_years_with_pm10_1_days",
+      "air.cpcb.repository.station_years_with_pm10_30_days",
+      "air.cpcb.repository.station_years_with_pm10_180_days",
+      "air.cpcb.repository.station_years_with_pm10_300_days",
+      "air.cpcb.repository.raw_frequency_file_counts",
+      "air.cpcb.repository.station_metadata_visibility",
+      "air.cpcb.repository.city_visibility_vs_census",
+      "air.cpcb.repository.city_pm25_days",
+      "air.cpcb.repository.first_pm25_year",
+      "air.cpcb.repository.file_vs_pm25_years",
+      "air.cpcb.repository.listed_years_missing_pm25",
+      "air.cpcb.repository.rows_without_pm_examples",
+      "air.oaq.cpcb.latest_station_snapshot"
+    ],
+    visualPlan: [
+      { series: [
+          { indicator: "air.cpcb.repository.listed_station_files", label: "Repository files listed" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25", label: "Usable PM2.5 station-years" },
+          { indicator: "air.cpcb.repository.zero_pm25_listed_files", label: "Listed files with no PM2.5" }
+        ], chart: "multiLine", title: "Listed files and usable PM2.5 history diverge", size: "hero", unit: "station-years", beat: "answer", subtitle: "CPCB daily raw repository · listed files, usable PM2.5 years and files with no PM2.5 · 2009-2025",
+        why: "The core data-poverty point: file availability, row availability and usable pollutant coverage are not the same thing.", read: "Each line counts station-year file paths or usable PM2.5 station-years in CPCB's daily repository. The red line is not operating stations.", watch: "The 2017 jump is a repository-listing spike: 504 listed daily files, but only 80 with any usable PM2.5." },
+      { indicator: "air.cpcb.repository.raw_frequency_file_counts", chart: "tableBars", title: "CPCB's raw archive extends beyond daily files", size: "feature", unit: "listed files", beat: "public-raw-surface", subtitle: "Public raw repository probe · file listings at 15-minute, hourly, 8-hour and daily frequency · 598 station records",
+        why: "CPCB's public repository exposes raw listings at 15-minute, hourly, 8-hour and daily frequencies, but file listings are not the same as audited pollutant coverage.", read: "Bars count file paths returned by CPCB's public raw-data repository endpoint for each frequency.", watch: "This chart counts listed files only; the PM2.5 completeness audit in this article uses downloaded daily files." },
+      { series: [
+          { indicator: "air.cpcb.repository.pm25_observed_days", label: "PM2.5 station-days" },
+          { indicator: "air.cpcb.repository.pm10_observed_days", label: "PM10 station-days" }
+        ], chart: "multiLine", title: "Usable PM observations become broad only after 2020", size: "feature", unit: "station-days", beat: "usable-depth", subtitle: "Downloaded CPCB daily files · non-missing PM2.5 and PM10 station-days · 2009-2025",
+        why: "Counting non-missing pollutant days shows how much usable measurement the repository actually contains.", read: "A station-day is one station with a non-missing daily pollutant value on one date.", watch: "This is coverage, not pollution level; a rising line means more usable observations." },
+      { series: [
+          { indicator: "air.cpcb.repository.station_years_with_pm25_1_days", label: "Any PM2.5 day" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_30_days", label: "30+ PM2.5 days" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_180_days", label: "180+ PM2.5 days" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_300_days", label: "300+ PM2.5 days" }
+        ], chart: "multiLine", title: "Trend-ready PM2.5 years lag basic visibility", size: "feature", unit: "station-years", beat: "trend-readiness", subtitle: "Downloaded CPCB daily files · station-years by minimum count of non-missing PM2.5 days · 2009-2025",
+        why: "Trend analysis needs more than one visible PM2.5 day, so this separates minimal visibility from fuller station-years.", read: "Each line counts station-years meeting a minimum number of non-missing daily PM2.5 values.", watch: "The 300-day line is stricter than official data availability and should be read as an audit threshold, not a CPCB quality standard." },
+      { indicator: "air.cpcb.repository.city_visibility_vs_census", chart: "tableBars", title: "The station list covers only a fraction of urban places", size: "feature", unit: "towns/city names", beat: "city-visibility", subtitle: "CPCB/OAQ city names compared with Census 2011 statutory towns",
+        why: "The strongest data-poverty statistic is the denominator: most legally urban places do not appear in the station list used for this audit.", read: "The comparison uses 4,041 Census 2011 statutory towns and 335 distinct city names in the CPCB/OAQ station hierarchy.", watch: "This is a visibility denominator, not a claim that every town needs its own monitor or that name matching is perfect." },
+      { indicator: "air.cpcb.repository.city_pm25_days", chart: "tableBars", title: "Deep PM2.5 history is concentrated in a few cities", size: "feature", unit: "PM2.5 station-days", beat: "geography", subtitle: "Downloaded CPCB daily files · non-missing PM2.5 station-days by city · 2009-2025",
+        why: "The archive is not evenly distributed. Delhi and New Delhi dominate the long PM2.5 record.", read: "Bars rank cities by total non-missing daily PM2.5 station-days in the downloaded CPCB repository files.", watch: "A city can rank high because it has many stations, long history, or both." },
+      { indicator: "air.cpcb.repository.first_pm25_year", chart: "tableBars", title: "Most station PM2.5 histories begin late", size: "feature", unit: "stations", beat: "when-usable", subtitle: "Downloaded CPCB daily files · first year with any non-missing PM2.5 value, by station",
+        why: "This shows the start date for usable station histories, rather than the first year a station appears in the repository.", read: "Each bar counts stations by their first year with any non-missing PM2.5 daily values.", watch: "A late first year does not always mean a new station; sometimes the station existed but PM2.5 was missing." },
+      { indicator: "air.cpcb.repository.listed_years_missing_pm25", chart: "tableBars", title: "Long file histories can hide short PM2.5 records", size: "feature", unit: "listed years without PM2.5", beat: "diagnostic", subtitle: "Downloaded CPCB daily files · listed file years minus years with any usable PM2.5, by station",
+        why: "This is the audit check behind the article: some stations have long file histories but much shorter usable PM2.5 histories.", read: "Each bar is the gap between years with a listed daily file and years with any non-missing PM2.5 for that station.", watch: "A large gap does not prove the station failed; it shows that the public daily files do not support a PM2.5 trend for those years." },
+      { indicator: "air.cpcb.repository.rows_without_pm_examples", chart: "tableBars", title: "Daily rows can exist while PM values are blank", size: "small", unit: "daily rows", beat: "case-study", subtitle: "Selected CPCB daily files with rows and zero usable PM2.5 or PM10 values",
+        why: "Concrete examples keep the caveat honest: some files are not empty, yet still have no PM2.5 or PM10.", read: "These selected examples span full-year and partial-year files with daily rows and zero usable PM2.5 and PM10 days.", watch: "Other pollutant columns may exist; this chart is about PM coverage only." },
+      { indicator: "air.oaq.cpcb.latest_station_snapshot", chart: "tableBars", title: "The latest OAQ mirror is a snapshot, not history", size: "small", unit: "station records", beat: "mirror", subtitle: "OAQ CPCB latest snapshot · generated 23 Jun 2026 at 17:40 IST",
+        why: "OAQ is clean for current snapshots, but the latest mirror is not the same as a deep historical archive.", read: "Bars compare CPCB station records in the latest OAQ snapshot with records carrying any main pollutant, all main pollutants, PM2.5, PM10 or no main pollutant at that moment.", watch: "A live snapshot is narrower than a repository audit." }
+    ]
   },
   {
     id: "q.climate.city_heat",
@@ -6336,6 +6774,63 @@ export const v1Questions = [
   },
 
   {
+    id: "q.climate.monsoon_2026",
+    slug: "is-the-2026-monsoon-in-trouble",
+    question: "Is India's 2026 monsoon in trouble?",
+    priority: "core",
+    // Built mid-June 2026. A *forecast + context* piece, NOT a season verdict - the
+    // monsoon runs Jun-Sep, so there is no 2026 outcome until October. Leads with IMD's
+    // Long Range Forecast (90% of LPA, El Nino developing), then borrows the historical
+    // base-rate charts from q.climate.el_nino_india and cross-links to it for the deep dive.
+    indicators: [
+      "climate.monsoon_2026.category_probabilities",
+      "climate.monsoon_2026.lrf_evolution",
+      "climate.el_nino.imd_monsoon_departure_1901_2025"
+    ],
+    core: [
+      "climate.monsoon_2026.category_probabilities",
+      "climate.monsoon_2026.lrf_evolution",
+      "climate.el_nino.imd_monsoon_departure_1901_2025"
+    ],
+    context: [
+      "climate.el_nino.bad_monsoon_frequency",
+      "climate.el_nino.exceptions",
+      "climate.el_nino.enso_iod_matrix",
+      "prices.el_nino.food_wpi_postmonsoon",
+      "work.employment_agriculture",
+      "econ.el_nino.agri_gva_share"
+    ],
+    primer: {
+      kicker: "Plain English first",
+      lead: "Every spring the India Meteorological Department puts a number on the coming monsoon, and in 2026 that number is below normal: rainfall of about 90% of the long-period average, with a 60% chance the season ends outright deficient. The reason is El Nino - a warming of the Pacific that tends to weaken the winds pulling the June-September rains inland - which forecasters expect to develop during the season. But a June forecast is a probability, not a verdict. The monsoon delivers about 70% of India's annual rain over four months, and the season has barely begun: it arrived late over Kerala, paused, and will not be settled until October. The honest question is not 'how bad is 2026' but 'what do the forecast and the historical record actually tell us right now'.",
+      myths: [
+        { myth: "A below-normal forecast means a drought is coming.", reality: "No. IMD calls a monsoon normal within about 10% of the long-period average; 90% of LPA is below normal but not a drought, and the forecast carries a model error of several points. The record is full of years that beat or missed their spring forecast." },
+        { myth: "El Nino guarantees a failed monsoon.", reality: "No. It roughly doubles the odds of a weak monsoon, but many El Nino years still finished near or above normal - especially when the Indian Ocean leaned India's way. In 2026 that second ocean is forecast neutral, so the usual rescue is uncertain, not absent." }
+      ]
+    },
+    visualPlan: [
+      // ACT 1 - the forecast (the news hook, the only genuinely-2026 data)
+      { indicator: "climate.monsoon_2026.category_probabilities", chart: "tableBars", title: "IMD's 2026 monsoon forecast: the odds tilt to a shortfall", subtitle: "IMD updated Long Range Forecast probabilities for the season as a whole - issued 29 May 2026", unit: "% forecast probability", size: "hero", beat: "forecast", why: "The news that started the worry: IMD's own probability forecast for the 2026 season, before any historical context.", read: "IMD puts a 60% chance on a deficient season (below 90% of normal) and another 24% on below normal - 84% odds the monsoon finishes below par, against just 16% for normal or wetter.", watch: "These are probabilities for the all-India, four-month total. They say nothing yet about where or when the rain will fall, and a forecast is not an outcome." },
+      { indicator: "climate.monsoon_2026.lrf_evolution", chart: "tableBars", title: "IMD nudged its 2026 forecast down as El Nino firmed up", subtitle: "IMD seasonal forecast as % of the long-period average - April vs May 2026", unit: "% of long-period average", size: "feature", beat: "forecast", why: "Forecasts move. IMD cut its number between April and May as the El Nino signal strengthened - a small change that shifted the mood.", read: "The April forecast was 92% of the long-period average; the May update trimmed it to 90%. Both sit below IMD's 'normal' band of 96-104%.", watch: "A two-point move is well inside the forecast's own error margin. The direction of the revision matters more than the exact figure." },
+
+      // ACT 2 - 125 years of context: below-normal is not rare
+      { indicator: "climate.el_nino.imd_monsoon_departure_1901_2025", chart: "stripes", title: "But the monsoon has never sat still", subtitle: "IMD all-India June-September rainfall departure - 1901-2025", unit: "% rainfall departure", size: "hero", beat: "history", why: "Before reading 2026 as a crisis, see the raw material: 125 monsoons, no two alike, with below-normal years scattered all through the record.", read: "Each stripe is one monsoon - deep blue years fell short, coral years ran wet. Below-normal seasons are common, and they rarely cluster.", watch: "This is the national total only. It hides where the rain fell, when, and the floods and dry spells inside a single season." },
+
+      // ACT 3 - the driver, honestly: risk not destiny
+      { indicator: "climate.el_nino.bad_monsoon_frequency", chart: "tableBars", title: "El Nino roughly doubles the odds of a weak monsoon", subtitle: "Share of each Pacific state's years that finished below normal - 1950-2025", unit: "% of phase years", size: "feature", beat: "driver", why: "Why a developing El Nino moved IMD's forecast down - counted as a frequency, not a slogan.", read: "Each bar is the share of that phase's years that ended below normal. The El Nino bars stand well above neutral and La Nina years.", watch: "The groups are different sizes - 26 El Nino, 27 neutral, 23 La Nina monsoons - so read shares, not raw counts. Higher odds is not certainty." },
+      { indicator: "climate.el_nino.exceptions", chart: "tableBars", title: "Plenty of El Nino years still came out fine", subtitle: "El Nino monsoons that finished near-normal or wet - rainfall departure", unit: "% rainfall departure", size: "feature", beat: "honesty", why: "The honest counterweight to the forecast: if El Nino decided the monsoon on its own, these years could not exist.", read: "Every bar is an El Nino year that ended near or above normal - living proof the Pacific does not settle the season by itself.", watch: "Do not flip this into false comfort. A friendly Indian Ocean or lucky timing helped in these years, and neither is guaranteed in 2026." },
+      { indicator: "climate.el_nino.enso_iod_matrix", chart: "tableBars", title: "The second ocean that usually decides the rescue", subtitle: "Average rainfall in El Nino years, split by the Indian Ocean Dipole - 1950-2025", unit: "% mean rainfall departure", size: "feature", beat: "driver", why: "The 2026 wildcard: El Nino years with a friendly Indian Ocean Dipole held near normal; those without it fell short. In 2026 the dipole is forecast neutral.", read: "El Nino monsoons that came with a positive dipole averaged near-normal rain; those without averaged a clear deficit.", watch: "It is a tilt, not a shield - and 2026's neutral dipole forecast means the usual rescue is uncertain, not ruled out." },
+
+      // ACT 4 - so what: from rain to food, and the human reach
+      { indicator: "prices.el_nino.food_wpi_postmonsoon", chart: "tableBars", title: "A weak monsoon does not automatically mean dearer food", subtitle: "Post-monsoon (Oct-Dec) wholesale food inflation in El Nino years - RBI WPI - 1982-2024", unit: "% food inflation, year-on-year", size: "feature", beat: "consequence", why: "The fear behind the headlines is prices. The record shows the link is real but loose.", read: "There is no clean rule. 2002 had a severe drought yet almost no food inflation; 2009's drought pushed it above 16%.", watch: "Prices answer to stocks, imports, global cycles and policy as much as to rain. Public grain stocks now blunt much of the shock." },
+      { chart: "multiLine", title: "Why the monsoon still matters: two in five jobs", subtitle: "Agriculture's share of India's output and of its workforce - 1951-2025", unit: "% share", size: "feature", beat: "stakes", series: [
+        { indicator: "work.employment_agriculture", label: "Share of India's workers" },
+        { indicator: "econ.el_nino.agri_gva_share", label: "Share of India's output (GVA)" }
+      ], why: "The human stake: how many people a weak monsoon can reach, set against how little it now moves headline GDP.", read: "Farming is about a seventh of output, so a bad year dents GDP far less than in 1965 - but it still employs roughly two in five working Indians.", watch: "The output line is RBI national accounts; the jobs line is the World Bank's modelled estimate. The gap between them is the monsoon's real human reach." }
+    ]
+  },
+
+  {
     id: "q.econ.industrial_policy",
     slug: "india-industrial-policy-surge",
     question: "Has India\u2019s industrial policy surge paid off?",
@@ -6787,6 +7282,367 @@ export const v1Questions = [
         series: [ { indicator: "IN.trade.exports_total_usd.annual", label: "Exports" }, { indicator: "IN.trade.imports_total_usd.annual", label: "Imports" } ],
         indicator: "IN.trade.imports_total_usd.annual",
         why: "Underneath the currency sits a simple fact: India buys more from the world than it sells, so it constantly needs dollars, which is why capital flows and remittances matter so much.", read: "India's merchandise exports and imports in dollars. Imports run persistently above exports, the goods trade gap that the rupee and the inflows have to cover.", watch: "Goods trade only; India's services exports and remittances offset much of this gap, which is why the rupee has not fallen even faster." }
+    ]
+  },
+
+  {
+    id: "q.policy.internet_control",
+    slug: "indias-off-switch",
+    question: "When does India switch off the internet, and does it actually work?",
+    priority: "core",
+    // Built Jun 2026. Trigger: the June 2026 nationwide Telegram block (NEET re-exam
+    // paper-leak fears), now before the Delhi High Court as the first real test of
+    // whether Section 69A can lawfully kill an entire platform. Frame: India's three
+    // distinct off-switches (regional shutdowns under the Telegraph Act / Temporary
+    // Suspension Rules; app/platform bans and URL blocks under IT Act s.69A; ISP-level
+    // DNS blocking). Sources: SFLC.in Internet Shutdowns Tracker (live JSON endpoints,
+    // 2012-2026); dnsblocks.in "Poisoned Wells" blocklist (43,083 domains x 6 ISPs);
+    // Access Now / #KeepItOn STOP dataset (India platform blocks); MeitY s.69A counts
+    // disclosed to Parliament; Top10VPN cost estimates. Ingest: scripts/ingest-offswitch.py.
+    // Honesty spine: the most-invoked justification (stopping violence) is the one the
+    // best evidence (Rydzak 2019) contradicts; most DNS blocking is piracy/vice, not
+    // speech; every count is a documented floor because orders are secret by rule.
+    indicators: [
+      "policy.blocking.app_bans",
+      "policy.shutdowns.annual",
+      "policy.shutdowns.by_state",
+      "policy.shutdowns.state_ranked",
+      "policy.shutdowns.preventive",
+      "policy.shutdowns.reactive",
+      "policy.shutdowns.duration",
+      "policy.blocking.urls_annual",
+      "policy.blocking.dns_by_category",
+      "policy.blocking.dns_by_isp",
+      "policy.shutdowns.cost_usd",
+      "policy.blocking.platform_events",
+      "policy.blocking.urls_by_platform_total",
+      "policy.blocking.authority_split",
+      "policy.blocking.urls_facebook",
+      "policy.blocking.urls_x",
+      "policy.blocking.urls_youtube",
+      "policy.blocking.urls_instagram",
+      "policy.blocking.urls_others"
+    ],
+    // Curated "Further reading" — durable here in the registry so it survives
+    // explanation regeneration (merged into explanation.furtherReading at build time).
+    furtherReading: [
+      { label: "SFLC.in — Internet Shutdowns Tracker (the live database behind this page)", url: "https://internetshutdowns.in/" },
+      { label: "Jan Rydzak, ‘Of Blackouts and Bandhs’ (2019) — the study finding shutdowns track more violence, not less", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3330413" },
+      { label: "Anuradha Bhasin v. Union of India (Supreme Court, 2020) — shutdowns must be temporary, proportionate and published", url: "https://indiankanoon.org/doc/82461587/" },
+      { label: "ICRIER, ‘The Anatomy of an Internet Blackout’ (2018) — the economic-cost study", url: "https://icrier.org/publications/the-anatomy-of-an-internet-blackout-measuring-the-economic-impact-of-internet-shutdowns-in-india/" },
+      { label: "Access Now — #KeepItOn 2024 report (India in global context)", url: "https://www.accessnow.org/internet-shutdowns-2024/" }
+    ],
+    visualPlan: [
+      // ACT 1 - There isn't one ban. There are three.
+      { chart: "tableBars", indicator: "policy.blocking.app_bans", size: "hero", beat: "taxonomy", unit: "apps blocked in one action", subtitle: "Indica, from MeitY notifications + reporting · major Section 69A app/platform blocks · 2020-2026", title: "The apps India has switched off", why: "Telegram in 2026 was not a one-off: India has a standing power to switch off whole apps, and has used it in waves.", read: "Each bar is one blocking action and how many apps it took down. The 2020 surge (about 224 apps in a year) followed the India-China border clash; the 2026 Telegram block is a single app but roughly 150 million users.", watch: "Bars count apps, not users. Telegram is one app yet dwarfs the others in reach, which is exactly why its block went to court." },
+
+      // ACT 2 - How often, and where
+      { chart: "line", indicator: "policy.shutdowns.annual", size: "hero", beat: "scale", unit: "shutdowns per year", subtitle: "SFLC.in Internet Shutdowns Tracker · government-ordered internet suspensions · 2012-2026", title: "How often India goes dark", why: "The simplest measure of the off switch: how many times a year some part of India loses the internet by government order.", read: "Each point is the number of shutdowns recorded in a year. They climb from a handful in 2012 to a peak of 136 in 2018, then fall to 60 in 2024 as courts and scrutiny bit. 2026 is year-to-date.", watch: "A documented floor, not a ceiling: SFLC rebuilds this from news reports because the government rarely publishes shutdown orders. The fall is real but partly reflects fewer, longer blackouts." },
+      { chart: "choropleth", indicator: "policy.shutdowns.by_state", size: "feature", beat: "geography", unit: "shutdowns, 2012-2026", rankLabel: "Goes dark most", bottomLabel: "Never recorded", subtitle: "SFLC.in · cumulative government-ordered shutdowns by state · 2012-2026", title: "Where India goes dark", why: "The national count hides a stark geography: shutdowns are not spread across India, they are concentrated in a few places.", read: "Each state is shaded by its cumulative shutdowns. Jammu & Kashmir alone accounts for 453 of 922 (about half of every shutdown India has ever recorded); most of the country has had almost none.", watch: "These are counts of orders, not their length or severity. A region with many short shutdowns can rank above one with a single months-long blackout." },
+      { chart: "tableBars", indicator: "policy.shutdowns.state_ranked", size: "feature", beat: "geography-ranked", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · top 12 states by cumulative recorded shutdowns · 2012-2026", title: "The states that go dark most", why: "The map sharpened into a league table: a handful of states do nearly all of India's switching-off.", read: "Each bar is a state's cumulative shutdowns. Jammu & Kashmir is in a category of its own; Rajasthan is a distant second; the rest trail far behind.", watch: "Cumulative since 2012, so a long-troubled region dominates even if it is quieter now. This is history, not a snapshot of today." },
+
+      // ACT 3 - Most of it happens before anything does
+      { chart: "multiLine", indicator: "policy.shutdowns.preventive", series: [ { indicator: "policy.shutdowns.preventive", label: "Preventive (before any event)", color: "#c2476b" }, { indicator: "policy.shutdowns.reactive", label: "Reactive (during an event)", color: "#1f9e8a" } ], size: "feature", beat: "preventive", unit: "shutdowns per year", subtitle: "SFLC.in · shutdowns imposed in anticipation vs in response · 2012-2026", title: "Most blackouts are imposed before anything happens", why: "The justification is usually public safety in a crisis, but the data says most shutdowns are pre-emptive, ordered before any trouble has begun.", read: "Two lines: shutdowns imposed in anticipation of an event (an exam, a protest, an anniversary) against those responding to one unfolding. Preventive runs far above reactive for most of the record, peaking near 94-to-6 in 2021.", watch: "Preventive vs reactive is SFLC's classification from the stated reason; the line between anticipating trouble and pre-empting dissent is exactly what is contested." },
+      { chart: "tableBars", indicator: "policy.shutdowns.duration", size: "feature", beat: "opacity", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · every recorded shutdown bucketed by duration · 2012-2026", title: "How long they last, and how often we just don't know", why: "Even basic facts about a shutdown are hidden: for a huge share, nobody outside government knows how long the internet stayed off.", read: "Each bar is a duration bucket across all recorded shutdowns. The single largest bucket is 'never disclosed' (about half), because orders are rarely published and duration is guessed from news reports.", watch: "The opacity is the finding, not a data gap to apologise for. Undisclosed duration means the public cannot check whether a shutdown was as brief or proportionate as claimed." },
+
+      // ACT 4 - The quieter switch: blocking orders
+      { chart: "line", indicator: "policy.blocking.urls_annual", size: "feature", beat: "blocking-orders", unit: "URLs blocked", subtitle: "MeitY answers to Parliament · websites, accounts and URLs blocked under IT Act s.69A · 2017-2023", title: "The quieter off switch: blocking orders", why: "Shutdowns are visible and noisy; URL blocking is silent and far larger, and it has grown.", read: "Each point is the number of websites, accounts and URLs ordered blocked under Section 69A in a year, as disclosed to Parliament. They spike to nearly 9,900 in 2020 and run in the thousands every year.", watch: "These are the government's own figures and do not fully reconcile across answers; the orders themselves are confidential by rule, so the public never learns what was blocked or why. Read the magnitude, not the exact count." },
+      { chart: "tableBars", indicator: "policy.blocking.authority_split", size: "feature", beat: "who-orders", unit: "websites blocked, 2015-2022", subtitle: "SFLC.in 'Finding 404', from RTI replies · India's website blocks by ordering authority · Jan 2015-Sep 2022", title: "Who orders India's website blocks", why: "Blocking is often pictured as judges weighing free speech, but nearly half of it is the executive acting in secret.", read: "Of about 55,580 websites blocked over 2015-22, court orders (mostly copyright) and executive orders under Section 69A are almost neck-and-neck, at roughly 47% each. The executive half is the opaque one: those orders are confidential by rule.", watch: "This is an aggregate split across the whole period, not a year-by-year trend. Court-ordered blocks are dominated by a few large anti-piracy orders that each cover many mirror sites." },
+      { chart: "multiLine", indicator: "policy.blocking.urls_x", size: "feature", beat: "which-platforms", unit: "URLs blocked under s.69A", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · URLs blocked under IT Act s.69A, by platform · 2018-2023 (2023 till Oct)", title: "X overtook Facebook as the most-blocked platform", series: [ { indicator: "policy.blocking.urls_x", label: "X (Twitter)", color: "#111111" }, { indicator: "policy.blocking.urls_facebook", label: "Facebook", color: "#1877f2" }, { indicator: "policy.blocking.urls_youtube", label: "YouTube", color: "#e0245e" }, { indicator: "policy.blocking.urls_instagram", label: "Instagram", color: "#c13584" }, { indicator: "policy.blocking.urls_others", label: "Others", color: "#9aa0a6" } ], why: "The aggregate count hides who actually gets censored, and the answer flipped as the politics did.", read: "Each line is one platform's URLs blocked under Section 69A. Facebook drew the most takedowns in 2018-19; from 2020 X (Twitter) pulled far ahead, peaking near 3,400 a year, even as Facebook stayed high.", watch: "Counts are URLs/accounts/posts, not unique pieces of content, and 2023 is only till October. The crossover tracks contested political moments (farmer protests, 2021) as much as platform size." },
+      { chart: "tableBars", indicator: "policy.blocking.urls_by_platform_total", size: "small", beat: "which-platforms-total", unit: "URLs blocked, 2018-Oct 2023", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · total URLs blocked under s.69A by platform · 2018-Oct 2023", title: "Which platforms India blocks the most", why: "Summed over six years, the league table makes the target plain.", read: "Each bar is a platform's total URLs blocked under Section 69A from 2018 to October 2023. X leads with 13,660, then Facebook (10,197), YouTube (5,759), a catch-all 'others' (4,199) and Instagram (3,023).", watch: "Totals lump together very different years; the same six-year window saw Facebook lead early and X lead late. 'Others' bundles every smaller platform." },
+      { chart: "tableBars", indicator: "policy.blocking.dns_by_category", size: "feature", beat: "what-blocked", unit: "blocked domains", subtitle: "dnsblocks.in 'Poisoned Wells' study · 43,083 DNS-blocked domains across 6 ISPs, by category", title: "What India's ISPs actually block", why: "Before calling all blocking censorship, look at what is on the list: the answer complicates the easy story.", read: "Each bar is how many blocked domains fall in a category, grouped by kind. Piracy and streaming dominate by far; pornography and gambling follow; content tied to speech and access (news, political criticism, government, circumvention tools) is a tiny sliver.", watch: "DNS blocking is one mechanism among several and is trivially bypassed, so this measures intent, not an airtight wall. 'Uncategorised' is large and unclassified." },
+      { chart: "tableBars", indicator: "policy.blocking.dns_by_isp", size: "small", beat: "uneven", unit: "blocked domains", subtitle: "dnsblocks.in · number of domains found DNS-blocked, by internet provider", title: "What you can reach depends on your ISP", why: "The same blocking orders are implemented unevenly, so the open internet you get depends on who you pay for it.", read: "Each bar is how many domains one provider was found to DNS-block. Airtel blocks the most by a wide margin; the lightest providers block under half as many.", watch: "Differences partly reflect how each ISP implements orders and how thoroughly the study could probe it, not just policy zeal." },
+
+      // ACT 5 - What it costs (evidence: Rydzak / does-it-work handled in prose)
+      { chart: "tableBars", indicator: "policy.shutdowns.cost_usd", size: "feature", beat: "cost", unit: "US$ million, 2012-2017", subtitle: "ICRIER, The Anatomy of an Internet Blackout (2018) · economic loss from internet shutdowns · 2012-2017", title: "What switching it off costs", why: "Shutdowns are not free: the most authoritative India study put the loss at about three billion dollars in six years.", read: "The two bars split ICRIER's roughly $3bn estimate by type. Mobile-only shutdowns did about four-fifths of the damage; combined mobile-and-fixed shutdowns the rest.", watch: "This is a macro-econometric estimate over 2012-2017, not exact accounting and not a recent-year figure. More recent annual losses, tracked by the NetBlocks Cost of Shutdown Tool, run in the hundreds of millions a year." }
+    ]
+  },
+
+  {
+    id: "q.media.news_consumption",
+    slug: "how-india-consumes-news",
+    question: "How does India consume news?",
+    priority: "core",
+    // Blended across SIX independent sources, built on a "two Indias" spine. The Reuters Digital
+    // News Report is the survey everyone quotes, but it samples only English-speaking, online users
+    // and says so itself. The honest article puts that surveyed slice next to the India it under-
+    // counts: TRAI/MoSPI/IAMAI on who is actually online (rural>urban, a sharp gender divide),
+    // PRGI on the Hindi-vs-English print reality, and FICCI-EY on where the money went (digital
+    // overtook TV in 2024). Stance: confident about what each source measures, scrupulous about the
+    // gap between the surveyed slice and the 1.4bn. The gap IS the story; never present the DNR slice
+    // as "India".
+    indicators: ["media.news.dnr_trust"],
+    core: [
+      "media.news.dnr_trust",
+      "media.news.dnr_source_tv",
+      "media.news.dnr_source_print",
+      "media.news.dnr_platform_youtube",
+      "media.news.dnr_platform_whatsapp",
+      "society.trai.broadband_subscribers_total",
+      "media.access.mospi_internet_use_gender",
+      "media.news.iamai_news_users_2024",
+      "media.industry.ficci_digital",
+      "media.industry.ficci_television",
+      "media.news.dnr_brand_trust_2026"
+    ],
+    context: [
+      "media.news.dnr_source_online",
+      "media.news.dnr_source_social",
+      "media.news.dnr_platform_instagram",
+      "media.news.dnr_platform_facebook",
+      "media.news.dnr_platform_telegram",
+      "media.news.dnr_smartphone",
+      "media.access.trai_penetration",
+      "media.access.trai_data_gb",
+      "media.access.iamai_aiu",
+      "media.access.iamai_aiu_split_2024",
+      "media.access.mospi_hh_internet",
+      "media.industry.ficci_print",
+      "media.industry.ficci_film",
+      "media.industry.ficci_radio",
+      "media.print.registered_by_language",
+      "media.print.circulation_by_language",
+      "media.print.circ_total",
+      "media.print.circ_hindi",
+      "media.print.circ_english",
+      "media.news.social_media_hours",
+      "media.news.online_news_audience",
+      "media.print.ad_revenue",
+      "media.print.circulation_revenue"
+    ],
+    visualPlan: [
+      // ACT 1 - The survey everyone quotes (the online-English slice)
+      { chart: "line", indicator: "media.news.dnr_trust", size: "hero", beat: "survey", window: "full", unit: "% who trust most news most of the time",
+        subtitle: "Reuters Institute Digital News Report · India · surveyed online, English-speaking users · 2021-2026",
+        title: "Do Indians trust the news?",
+        why: "The single most-quoted number about Indian news, and the one that needs the most context.",
+        read: "Each point is the share of surveyed online Indians who say they trust most news most of the time. It wobbles between 38% and 43% and sits at 39% in 2026, just above the global average.",
+        watch: "This is not 'India'. The DNR samples mainly English-speaking, online users, who are younger, richer and more urban than the country as a whole." },
+      { chart: "multiLine", indicator: "media.news.dnr_platform_youtube", size: "feature", beat: "survey", unit: "% using each platform for news",
+        subtitle: "Reuters DNR · India · platforms used for news in the last week · surveyed online users",
+        title: "How the connected slice gets its news",
+        series: [
+          { indicator: "media.news.dnr_platform_youtube", label: "YouTube" },
+          { indicator: "media.news.dnr_platform_whatsapp", label: "WhatsApp" },
+          { indicator: "media.news.dnr_platform_instagram", label: "Instagram" },
+          { indicator: "media.news.dnr_platform_facebook", label: "Facebook" }
+        ],
+        why: "Among the online slice, news now arrives through video and chat apps, not front pages.",
+        read: "Each line is the share using that platform for news. YouTube leads near 58%, WhatsApp jumps to 56% in 2026, Instagram is rising fast.",
+        watch: "These are platforms used for news, not trusted for it; WhatsApp was also named the biggest source of false information." },
+
+      // ACT 2 - But who got counted? (who is actually online)
+      { chart: "line", indicator: "society.trai.broadband_subscribers_total", size: "feature", beat: "who-online", window: "full", unit: "broadband subscribers (million)",
+        subtitle: "TRAI monthly Telecom Subscription reports · total broadband subscribers · 2008-2026",
+        title: "The India that came online",
+        why: "Before asking how India consumes digital news, see how recently and how fast it got online at all.",
+        read: "Each point is total broadband subscriptions. The line is almost flat until about 2016, then explodes past a billion as cheap 4G data arrives.",
+        watch: "These are subscriptions, not people; one person can hold several, so this overstates unique users." },
+      { chart: "tableBars", indicator: "media.access.mospi_internet_use_gender", size: "feature", beat: "who-online", unit: "% of persons 15+ able to use the internet",
+        subtitle: "MoSPI · NSS Comprehensive Modular Survey: Telecom 2025 · nationally representative",
+        title: "Who can actually use the internet",
+        why: "The official, nationally-representative survey shows the divide the online polls cannot see.",
+        read: "Each bar is the share of people who can use the internet. Urban men lead at 86%; rural women trail at 58%, a near-28-point gap.",
+        watch: "'Able to use' is self-reported capability, not daily use; the gap in actual news-seeking is likely wider still." },
+      { chart: "tableBars", indicator: "media.access.trai_penetration", size: "small", beat: "who-online", unit: "internet subscribers per 100 people",
+        subtitle: "TRAI · internet subscribers per 100 population · end-March 2025",
+        title: "Town and country, online",
+        why: "The connectivity gap between urban and rural India in one ratio.",
+        read: "Urban India has about 111 internet subscriptions per 100 people; rural India has 45. The all-India figure of 69 hides that split.",
+        watch: "Subscriptions can exceed population in cities because of multiple SIMs and work connections; this is supply, not unique users." },
+
+      // ACT 3 - What the connected slice actually does
+      { chart: "multiLine", indicator: "media.news.dnr_source_tv", size: "feature", beat: "what-they-do", unit: "% using each source weekly",
+        subtitle: "Reuters DNR · India · weekly use of TV and print for news · surveyed online users",
+        title: "Even online, TV and print are fading",
+        series: [
+          { indicator: "media.news.dnr_source_tv", label: "Television" },
+          { indicator: "media.news.dnr_source_print", label: "Print" }
+        ],
+        why: "Within the same surveyed slice, the old formats are losing weekly reach year on year.",
+        read: "Both lines slope down: weekly TV use falls from 59% to 44%, print from 50% to 35%, between 2021 and 2026.",
+        watch: "This is decline among online users only; nationally, TV and print reach is far higher and falling more slowly." },
+      { chart: "latestBars", indicator: "media.news.dnr_platform_youtube", size: "feature", beat: "what-they-do", unit: "% using each platform for news (2026)",
+        subtitle: "Reuters DNR · India · share using each platform for news in 2026 · surveyed online users",
+        title: "The 2026 pecking order for news",
+        series: [
+          { indicator: "media.news.dnr_platform_youtube", label: "YouTube" },
+          { indicator: "media.news.dnr_platform_whatsapp", label: "WhatsApp" },
+          { indicator: "media.news.dnr_platform_instagram", label: "Instagram" },
+          { indicator: "media.news.dnr_platform_facebook", label: "Facebook" },
+          { indicator: "media.news.dnr_platform_telegram", label: "Telegram" }
+        ],
+        why: "A snapshot of where the online slice turned for news in the latest year.",
+        read: "Each bar is the 2026 share using that platform for news. YouTube (58%) and WhatsApp (56%) lead; WhatsApp rose 10 points in a single year.",
+        watch: "Closed and video platforms are hard to fact-check and easy to forward, which is why misinformation worries track them." },
+      { chart: "line", indicator: "media.news.dnr_smartphone", size: "small", beat: "what-they-do", window: "full", unit: "% using a smartphone for news",
+        subtitle: "Reuters DNR · India · smartphone as a source for news · surveyed online users",
+        title: "A phone-first newsroom",
+        why: "For the online slice, the news device is overwhelmingly the phone.",
+        read: "Around three in four surveyed users reach news on a smartphone, far ahead of computers.",
+        watch: "Among online users only; but it mirrors the wider fact that India came online on mobile, not desktop." },
+      { chart: "line", indicator: "media.news.social_media_hours", size: "small", beat: "what-they-do", window: "full", unit: "billion hours per quarter",
+        subtitle: "FICCI-EY Media & Entertainment report · time Indians spend on social media, per quarter",
+        title: "The attention is moving to the feed",
+        why: "News is competing for attention inside apps where time spent keeps climbing.",
+        read: "Quarterly hours on social media rose from about 103 billion in early 2022 to about 173 billion by late 2025.",
+        watch: "This is total social-media time, not news time; news is a sliver of it, increasingly delivered inside the same feeds." },
+      { chart: "line", indicator: "media.news.online_news_audience", size: "feature", beat: "what-they-do", window: "full", unit: "online news audience (million)",
+        subtitle: "Comscore (December each year), via FICCI-EY · reach of online news platforms in India",
+        title: "AI just started eating the news audience",
+        why: "For the first time, the online news audience shrank, and the industry blames AI.",
+        read: "The reach of online news platforms rose to about 461 million in 2024, then fell about 9% to 428 million in 2025. Industry stakeholders blame AI search summaries and AI apps answering questions without sending readers on; some say their own reach fell over 30%.",
+        watch: "This is platform reach measured by Comscore, a different lens from survey self-reports; online news still reaches roughly 29% of Indians, so the medium is large even as it dips." },
+
+      // ACT 4 - The India the survey under-counts
+      { chart: "multiLine", indicator: "media.print.circ_total", size: "feature", beat: "undercounted", unit: "claimed circulation (million copies/day)",
+        subtitle: "CSO/MoSPI (2008-2014) + PRGI Press in India (2018-2024) · claimed circulation · gap years not shown",
+        title: "India's print boom, and its recent slip",
+        series: [
+          { indicator: "media.print.circ_total", label: "All languages" },
+          { indicator: "media.print.circ_hindi", label: "Hindi" },
+          { indicator: "media.print.circ_english", label: "English" }
+        ],
+        why: "While Western newspapers were collapsing, Indian print circulation roughly doubled through the 2010s, led by Hindi, and has only recently begun to slip.",
+        read: "Each line is claimed daily circulation. Total copies rose from about 258m (2008) to a peak near 450m in the mid-2010s, then eased to about 379m by 2023-24. English was always a small slice and is now shrinking.",
+        watch: "Claimed circulation is self-declared and unaudited, and depends on how many publishers filed that year; read the broad arc, not single-year values. Early years are CSO/MoSPI, later years PRGI; some years are not plotted." },
+      { chart: "tableBars", indicator: "media.print.circulation_by_language", size: "feature", beat: "undercounted", unit: "claimed circulation (million copies/day)",
+        subtitle: "PRGI · Press in India 2023-24 · self-declared circulation by language",
+        title: "The news India actually reads on paper",
+        why: "The English-online survey misses the language in which most Indians read the news.",
+        read: "Each bar is claimed daily circulation by language. Hindi (187m) and the regional languages dwarf English (40m).",
+        watch: "Circulation here is self-declared by publishers and not verified by PRGI; treat it as indicative and likely inflated." },
+      { chart: "tableBars", indicator: "media.print.registered_by_language", size: "small", beat: "undercounted", unit: "registered periodicals",
+        subtitle: "PRGI · Press in India 2023-24 · registered periodicals by language",
+        title: "...and the titles behind it",
+        why: "The sheer number of vernacular titles shows where the news ecosystem really lives.",
+        read: "Hindi has about 58,600 registered periodicals and English about 20,200; regional languages add tens of thousands more.",
+        watch: "'Registered' is a cumulative stock; only about a quarter of registered titles actually filed a return this year." },
+      { chart: "tableBars", indicator: "media.news.iamai_news_users_2024", size: "feature", beat: "undercounted", unit: "internet users (million)",
+        subtitle: "IAMAI-Kantar ICUBE 2024 · online news users among 886m active internet users",
+        title: "Seeing news vs seeking news",
+        why: "Even among those online, deliberately reading news is far rarer than bumping into it.",
+        read: "About 582m internet users encounter news online (in forwards, feeds, videos), but only 180m consciously seek it out.",
+        watch: "'Encounter' includes passive exposure via WhatsApp forwards and YouTube; it is not the same as following the news." },
+      { chart: "tableBars", indicator: "media.access.iamai_aiu_split_2024", size: "small", beat: "undercounted", unit: "active internet users (million)",
+        subtitle: "IAMAI-Kantar ICUBE 2024 · active internet users by area",
+        title: "The internet's centre of gravity moved to the village",
+        why: "The online India of 2024 is more rural than the English-online survey implies.",
+        read: "Rural India now has more active internet users (488m) than urban India (397m).",
+        watch: "Rural users skew toward video and Indic-language content and are largely invisible to an English online panel." },
+
+      // ACT 5 - Follow the money
+      { chart: "multiLine", indicator: "media.industry.ficci_digital", size: "hero", beat: "money", unit: "industry revenue (INR billion)",
+        subtitle: "FICCI-EY Media & Entertainment report · segment revenue · 2022-2025",
+        title: "The year digital overtook television",
+        series: [
+          { indicator: "media.industry.ficci_digital", label: "Digital" },
+          { indicator: "media.industry.ficci_television", label: "Television" },
+          { indicator: "media.industry.ficci_print", label: "Print" },
+          { indicator: "media.industry.ficci_film", label: "Film" },
+          { indicator: "media.industry.ficci_radio", label: "Radio" }
+        ],
+        why: "Audiences and advertisers move together; the money confirms where attention went.",
+        read: "Digital revenue crossed television in 2024 and kept climbing past a trillion rupees; TV is sliding, print is flat, radio is tiny.",
+        watch: "This is industry revenue, not audience reach; TV and print still reach far more people than their shrinking revenue suggests." },
+
+      // ACT 6 - Who Indians trust + the honesty close
+      { chart: "tableBars", indicator: "media.news.dnr_brand_trust_2026", size: "feature", beat: "trust", unit: "% who trust the brand (2026)",
+        subtitle: "Reuters DNR · India · trust in individual news brands · surveyed online users",
+        title: "Which brands the online slice trusts",
+        why: "When you ask about specific brands, public broadcasters and old print mastheads come out on top.",
+        read: "Legacy newspapers and public broadcasters (Times of India, All India Radio, DD India, BBC) score highest; partisan TV and critical digital-born outlets score lower.",
+        watch: "Low scores can mean a brand is distrusted OR is critical of power and actively disliked by some; this is not a quality ranking." }
+    ]
+  },
+
+  {
+    id: "q.work.jobs_challenge",
+    slug: "the-biggest-job-in-the-world",
+    question: "Does India really have the biggest jobs challenge in the world?",
+    priority: "core",
+    // Built Jun 2026 off a single authoritative source: the World Bank's "The Global Jobs
+    // Challenge" (2026 advance edition; eds. Chrimes, Kose, Stamm), with global comparisons
+    // for scale. India is #1 of all EMDEs on every absolute measure: ~238m young people
+    // reach working age 2025-35 (youth method, Fig 2.8.A), ~91m net working-age increase by
+    // 2035 and ~132m by 2050 (Figs 2.8.C/D) -- roughly one in five of the entire developing
+    // world's jobs challenge. The honesty spine: (1) these are PROJECTIONS, method-dependent
+    // and uncertain, not measurements; (2) India's challenge is scale, not intensity -- the
+    // most youth-DENSE economies are elsewhere (CAR, Niger, the Pacific); (3) the youth
+    // cohort has already STOPPED growing (growth negative from ~2021, Fig 2.2.C) so this is
+    // the crest of the wave, not a still-opening window; (4) how big the task is hinges on
+    // labour-force participation, above all women's -- the IMF (Alonso-MacDonald 2024) range
+    // the report cites runs 60m-148m jobs by 2030 purely on that assumption (flagged as a
+    // cited study, not the WB's own number). Ingest: scripts/ingest-jobs-challenge.mjs.
+    indicators: [
+      "work.jobs.youth_reaching_wap_top10",
+      "work.jobs.india_vs_regions_youth",
+      "work.jobs.wap_increase_2050_top10",
+      "work.jobs.india_youth_growth",
+      "work.jobs.india_wap_growth",
+      "work.jobs.population_india",
+      "work.jobs.population_china",
+      "work.jobs.lfp_job_scenarios"
+    ],
+    furtherReading: [
+      { label: "World Bank — The Global Jobs Challenge (2026), the report this page is built on", url: "https://www.worldbank.org/en/research/publication/global-jobs-challenge" },
+      { label: "Alonso & MacDonald, ‘Advancing India’s Structural Transformation’ (IMF, 2024) — the 60–148m participation range", url: "https://www.imf.org/en/Publications/WP/Issues/2024/02/02/Advancing-Indias-Structural-Transformation-and-Catch-up-544370" },
+      { label: "Rajan & Lamba, ‘Breaking the Mold: India’s Untraveled Path to Prosperity’ (2024) — the high-skilled-services case", url: "https://press.princeton.edu/books/hardcover/9780691263779/breaking-the-mold" }
+    ],
+    visualPlan: [
+      // ACT 1 - The biggest job in the world
+      { chart: "tableBars", indicator: "work.jobs.youth_reaching_wap_top10", size: "hero", beat: "ranking", unit: "million young people reaching working age, 2025-35",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.A · young people reaching working age, 2025-35 · UN WPP 2024",
+        title: "India tops the developing world's jobs challenge",
+        why: "The single headline finding: of every developing economy, India must absorb the largest wave of new workers this decade.",
+        read: "Each bar is the number of young people who reach working age in that economy over 2025-35. India leads at about 238 million, well ahead of China (169m) and Nigeria (61m).",
+        watch: "These are demographic projections, not a current jobs shortfall: the bar counts people reaching working age, not the unemployed." },
+      { chart: "tableBars", indicator: "work.jobs.india_vs_regions_youth", size: "feature", beat: "scale", unit: "million young people reaching working age, 2025-35",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Figs 2.7.B & 2.8.A · India vs whole EMDE regions · UN WPP 2024",
+        title: "One country, a fifth of the problem",
+        why: "To feel the scale, set India alone against entire world regions rather than other single countries.",
+        read: "India's roughly 238 million is about 86% of all South Asia, around 72% of all Sub-Saharan Africa, and larger than the Middle East, Latin America or Europe-and-Central-Asia regions on their own. Across all developing economies the total is about 1.23 billion, so India is close to one in five.",
+        watch: "India is one country; the bars beside it are whole multi-country regions. That is the point, not an error." },
+
+      // ACT 2 - Count it any way, India still finishes first
+      { chart: "tableBars", indicator: "work.jobs.wap_increase_2050_top10", size: "feature", beat: "robustness", unit: "million net working-age increase, 2025-50",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.D · net working-age (15-64) increase, 2025-50 · UN WPP 2024",
+        title: "Still the biggest a generation out",
+        why: "The headline is not an artefact of one counting method: switch to net working-age growth and stretch to 2050, India still leads.",
+        read: "Each bar is the net rise in the working-age population (15-64) over 2025-50. India tops it at about 132 million, ahead of Nigeria (98m) and Pakistan (89m). India is also #1 over the shorter 2025-35 window, at about 91 million.",
+        watch: "Methods give very different point estimates (the all-EMDE total ranges from 270m to 1.23bn depending on the method); we use them as a consistent ranking, not exact counts." },
+
+      // ACT 3 - The wave has already crested
+      { chart: "line", indicator: "work.jobs.india_youth_growth", size: "feature", beat: "cresting", window: "full", unit: "% annual growth, population aged 15-24",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.2.C (India) · annual growth of the 15-24 population · UN WPP 2024",
+        title: "The wave has already crested",
+        why: "The twist behind the big number: India's youth cohort is no longer growing, even as it stays the largest on earth.",
+        read: "The line is the annual growth rate of India's youth population (aged 15-24). It crosses below zero around 2021 and stays negative: the cohort has stopped expanding. The demographic window is closing, not still opening.",
+        watch: "Negative growth does not mean few young people; it means the number has peaked. The absolute cohort stays enormous for a decade." },
+      { chart: "line", indicator: "work.jobs.india_wap_growth", size: "small", beat: "cresting-broad", window: "full", unit: "% annual growth, population aged 15-64",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.3.B (India) · annual growth of the 15-64 population · UN WPP 2024",
+        title: "Even the working-age pool is flattening",
+        why: "It is not just the youngest cohort: the whole 15-64 pool, the people an economy actually puts to work, is on the same downward path, a beat behind.",
+        read: "The line is the annual growth rate of India's working-age population (aged 15-64). It is still positive but slows steadily, from about 2.5% in 2000 to under 1% by 2030 and roughly zero by 2049. The broad pool is still growing, but its growth has a clear end in sight.",
+        watch: "This still rises while the youth line already falls, because the two cohorts age in sequence; the working-age pool keeps growing for now, just more slowly each year." },
+      { chart: "multiLine", indicator: "work.jobs.population_india", size: "feature", beat: "overtake", window: "full", unit: "billion people",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.1.A · total population · UN WPP 2024",
+        title: "The largest workforce on earth, but cresting",
+        series: [
+          { indicator: "work.jobs.population_india", label: "India", color: "#b3245a" },
+          { indicator: "work.jobs.population_china", label: "China", color: "#8a8597" }
+        ],
+        why: "Context for the workforce story: India overtook China to become the world's most populous economy, but its own population peaks within a generation.",
+        read: "Each line is total population in billions. India passes China around 2022-23 and keeps rising to a peak near 1.70 billion around 2061; China is already in sustained decline.",
+        watch: "Population is not the workforce, but it sets its ceiling. India's edge is a one-time demographic window, not a permanent gap." },
+
+      // ACT 4 - The 60-to-148-million question
+      { chart: "tableBars", indicator: "work.jobs.lfp_job_scenarios", size: "feature", beat: "participation", unit: "million new jobs needed",
+        subtitle: "IMF (Alonso & MacDonald 2024), cited in World Bank, The Global Jobs Challenge (2026) · jobs needed by labour-force-participation assumption",
+        title: "A 60-million job problem, or a 148-million one",
+        why: "How big the task actually is comes down to one variable the report keeps returning to: whether Indians, above all women, join the workforce.",
+        read: "Holding participation at today's rate, India needs about 60 million new jobs by 2030; lifting it toward a target rate pushes that to about 148 million. By 2050 the same lever spans roughly 143 to 324 million.",
+        watch: "This range is from an IMF study the report cites, not the World Bank's own count. It is an illustration of how sensitive the number is to participation, not a precise forecast." }
     ]
   },
 

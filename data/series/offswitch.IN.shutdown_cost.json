@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "policy.shutdowns.cost_usd",
+  "title": "The measured economic cost of India's shutdowns",
+  "sourceId": "icrier",
+  "sourceIndicatorId": "anatomy-of-an-internet-blackout",
+  "sourceUrl": "https://icrier.org/pdf/Anatomy_of_an_Internet_Blackout.pdf",
+  "unit": "US$ million, 2012-2017",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group"
+  ],
+  "fetchedAt": "2026-06-19T05:12:31.594852+00:00",
+  "metadata": {
+    "note": "From ICRIER's 2018 study 'The Anatomy of an Internet Blackout' (Kathuria, Kedia and others), the most authoritative India-specific estimate: 16,315 hours of shutdowns over 2012-2017 cost the economy about US$3.04 billion. Mobile-only shutdowns (12,615 hours) did roughly four-fifths of the damage (about $2.37bn); combined mobile-and-fixed shutdowns (3,700 hours) about $678m. Built with a macro-econometric model, so read it as a rigorous estimate, not exact accounting. More recent annual losses are tracked by the NetBlocks / Internet Society Cost of Shutdown Tool (Brookings methodology), which puts recent years in the hundreds of millions of dollars a year.",
+    "total_usd_million": 3048.4,
+    "hours": 16315,
+    "methodology": "ICRIER macro-econometric model (2018)"
+  },
+  "rows": [
+    {
+      "label": "Mobile-internet shutdowns",
+      "value": 2370.0,
+      "group": "Lost output, 2012-2017"
+    },
+    {
+      "label": "Mobile + broadband shutdowns",
+      "value": 678.4,
+      "group": "Lost output, 2012-2017"
+    }
+  ]
+}

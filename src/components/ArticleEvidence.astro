@@ -78,6 +78,14 @@ const glossary = explanation.editorialPlan?.glossaryBlocks ?? [];
 const caveats = explanation.caveats ?? [];
 const sourceNotes = explanation.sourceNotes ?? [];
 const furtherReading = explanation.furtherReading ?? [];
+
+// A source note / further-reading entry is either plain text or { label, url }.
+// Plain strings stay as text (back-compat), unless the whole string is a bare URL.
+function refParts(item: string | { label: string; url?: string }): { label: string; url?: string } {
+  if (typeof item !== "string") return { label: item.label, url: item.url };
+  const m = item.match(/^(https?:\/\/\S+)$/);
+  return m ? { label: item, url: item } : { label: item };
+}
 ---
 
 <div class="evidence-grid">
@@ -145,14 +153,14 @@ const furtherReading = explanation.furtherReading ?? [];
     {sourceNotes.length ? (
       <div>
         <p class="lbl">Source notes</p>
-        <ul>{sourceNotes.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
+        <ul>{sourceNotes.slice(0, 12).map((item) => { const r = refParts(item); return <li>{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{r.label}</a> : r.label}</li>; })}</ul>
       </div>
     ) : null}
 
     {furtherReading.length ? (
       <div>
         <p class="lbl">Further reading</p>
-        <ul>{furtherReading.slice(0, 8).map((item) => <li>{item}</li>)}</ul>
+        <ul>{furtherReading.slice(0, 8).map((item) => { const r = refParts(item); return <li>{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{r.label}</a> : r.label}</li>; })}</ul>
       </div>
     ) : null}
   </aside>

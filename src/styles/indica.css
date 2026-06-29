@@ -10,17 +10,20 @@
   /* surface + neutrals */
   --bg:#ffffff; --ink:#0b0b0b; --mid:#5c5c5c; --dim:#737373;
   --ghost:#e7e7e7; --line:#ededed; --paper:#fafafa;
-  /* domain inks — bright but soft, one family (used for dots, bars, big numbers, charts) */
-  --people:#DB5C97; --economy:#3A5BD0; --energy:#EFA227;
-  --climate:#EE6A4C; --health:#15A382; --society:#7C5AD6; --slate:#b7b7bf;
+  /* domain inks — deep jewel tones, one family (used for dots, bars, big numbers, charts).
+     Refined 2026: deepened + slightly desaturated from the original candy-bright set
+     for a more sophisticated, editorial feel — still colourful, just grown-up. */
+  --people:#C44B7B; --economy:#3349A8; --energy:#C9831A;
+  --climate:#D6573A; --health:#12876B; --society:#6A47BE; --slate:#b7b7bf;
   /* darker text-safe variants — same hue, ≥4.5:1 on white, used only for small colored TEXT */
-  --people-ink:#B23A6E; --economy-ink:#2E49A8; --energy-ink:#9A6700;
-  --climate-ink:#C2492F; --health-ink:#0E7C63; --society-ink:#5E3FB0;
+  --people-ink:#A8356A; --economy-ink:#2A4299; --energy-ink:#8F6000;
+  --climate-ink:#B8442B; --health-ink:#0C745C; --society-ink:#573BA6;
   --c:var(--ink);                 /* active domain ink (set per page/element) */
   --c-ink:var(--ink);             /* text-safe active ink (set per page/element) */
   --c-tint:rgba(11,11,11,.08);
   /* type */
-  --serif:'RupeeSerif','Cormorant Garamond',Georgia,serif;
+  --serif:'RupeeSerif','Cormorant Garamond',Georgia,serif;        /* display: hero numbers, headlines */
+  --serif-text:'RupeeSerif','Cormorant Garamond',Georgia,serif;   /* reading body (kept Cormorant; weight 400 + refinements applied) */
   --sans:'RupeeSans','DM Sans',system-ui,sans-serif;
   --deva:'Tiro Devanagari Hindi',serif;
   /* type scale (clamp) */
@@ -37,7 +40,7 @@
      redefined smaller in the mobile block so the whole reading layer scales at
      once instead of per-element. */
   --t-prose:1.22rem;      /* serif body paragraph (longform, chart detail, concepts) */
-  --lh-prose:1.72;        /* its line-height */
+  --lh-prose:1.66;        /* its line-height */
   --t-prose-lead:1.34rem; /* chart takeaway / mini-lead */
   --t-prose-list:1.18rem; /* bulleted reading lists */
   /* spacing */
@@ -48,14 +51,14 @@
 }
 
 /* domain helpers: set --c on a container */
-.dom-people{--c:var(--people);--c-ink:var(--people-ink);--c-tint:rgba(219,92,151,.10)}
-.dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(58,91,208,.10)}
+.dom-people{--c:var(--people);--c-ink:var(--people-ink);--c-tint:rgba(196,75,123,.10)}
+.dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(51,73,168,.10)}
 /* per-article gold theme (q.econ.gold) — overrides the economy blue for this one piece */
 .theme-gold{--c:#C8941A;--c-ink:#9A6B00;--c-tint:rgba(200,148,26,.14)}
-.dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(239,162,39,.14)}
-.dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(238,106,76,.12)}
-.dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(21,163,130,.10)}
-.dom-society{--c:var(--society);--c-ink:var(--society-ink);--c-tint:rgba(124,90,214,.10)}
+.dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(201,131,26,.14)}
+.dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(214,87,58,.12)}
+.dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(18,135,107,.10)}
+.dom-society{--c:var(--society);--c-ink:var(--society-ink);--c-tint:rgba(106,71,190,.10)}
 
 /* ---------- BASE ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -142,7 +145,7 @@ a{color:inherit}
 .li+.li{padding-left:42px}
 .li:not(:last-child)::after{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;background:var(--ghost)}
 @media(max-width:880px){.li:nth-child(2n)::after{display:none}.li+.li{padding-left:0}.li:nth-child(odd){padding-right:0}.li{padding-left:0!important}}
-.li-n{font-family:var(--serif);font-weight:300;font-size:var(--t-fig);letter-spacing:-.03em;line-height:1;color:var(--c);display:block;font-variant-numeric:lining-nums tabular-nums}
+.li-n{font-family:var(--serif);font-weight:300;font-size:var(--t-fig);letter-spacing:-.03em;line-height:1;color:var(--c);display:block;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;text-wrap:nowrap}
 .li-n .u{font-size:.34em;color:var(--dim);letter-spacing:0;margin-left:3px}
 .li-lbl{font-size:.6rem;letter-spacing:.17em;text-transform:uppercase;font-weight:500;color:var(--dim);margin:9px 0 18px;display:flex;align-items:center;gap:8px}
 .li-lbl .tk{width:8px;height:8px;border-radius:50%;background:var(--c)}
@@ -219,15 +222,17 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 @media(max-width:620px){.analogy{grid-template-columns:1fr}}
 
 /* ---------- QUESTION ROWS ---------- */
-.q-row{display:flex;align-items:baseline;gap:18px;padding:20px 0;border-top:1px solid var(--ghost);cursor:pointer;transition:padding .25s}
+.q-row{display:flex;align-items:baseline;gap:18px;padding:20px 0;border-top:1px solid var(--ghost);cursor:pointer;text-decoration:none;color:var(--ink)}
 .q-row:last-child{border-bottom:1px solid var(--ghost)}
-.q-row:hover{padding-left:10px}
 .q-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;align-self:center}
 .q-txt{font-family:var(--serif);font-size:clamp(1.1rem,1.9vw,1.4rem);font-weight:400;line-height:1.25;flex:1}
-.q-row:hover .q-txt{font-style:italic}
 .q-ans{font-family:var(--serif);font-size:1.12rem;white-space:nowrap}
 .q-arrow{color:var(--dim);transition:transform .25s,color .25s}
 .q-row:hover .q-arrow{transform:translateX(5px);color:var(--c)}
+/* Homepage question showcase — clean serif lines, no underlines; status shown
+   only for not-yet-ready pages as a quiet uppercase chip (ready = no label). */
+.q-showcase .q-ans{font-family:var(--sans);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--dim);white-space:nowrap;border:1px solid var(--ghost);border-radius:2px;padding:3px 9px;align-self:center}
+.q-showcase .q-row:hover .q-txt{color:var(--c-ink)}
 
 /* ---------- CARDS (catalog) ---------- */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ghost);border:1px solid var(--ghost)}
@@ -268,6 +273,9 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .foot-brand{font-family:var(--serif);font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim)}
 .foot-note{font-size:.72rem;color:var(--dim);margin-top:10px;max-width:64ch;line-height:1.6}
+.foot-sister{font-size:.72rem;color:var(--dim);margin-top:14px;max-width:64ch;line-height:1.6}
+.foot-sister a{color:var(--mid);text-decoration:none;border-bottom:1px solid var(--ghost);padding-bottom:1px;transition:color .2s,border-color .2s}
+.foot-sister a:hover{color:var(--ink);border-color:var(--ink)}
 .foot-pal{display:flex;gap:6px;margin-top:14px}
 .foot-pal i{width:22px;height:5px;display:block}
 .foot-links{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;font-size:.74rem}
@@ -395,11 +403,13 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .article-head{padding:42px 0 28px}
 .article-head h1{font-weight:400;font-size:var(--t-h1);line-height:1.06;max-width:21ch;margin-top:16px}
 .article-head p{margin-top:14px;max-width:68ch;font-size:1.05rem}
-.article-status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px;font-size:.74rem;color:var(--mid)}
-.status{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ghost);padding:5px 9px;color:var(--ink)}
-.status.ready{border-color:var(--c);color:var(--c-ink)}
-.status.wip{border-color:#e0a23c;color:#9c6b15}
-.status.needs{border-color:var(--dim);color:var(--mid)}
+.article-byline{margin-top:14px;font-size:.82rem;color:var(--mid)}
+.article-byline a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.article-status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:.74rem;color:var(--mid)}
+.status{font-family:var(--sans);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid var(--ghost);border-radius:2px;padding:3px 8px;color:var(--dim);white-space:nowrap}
+.status.ready{border-color:var(--ghost);color:var(--dim)}
+.status.wip{border-color:#e3b063;color:#9c6b15}
+.status.needs{border-color:var(--ghost);color:var(--mid)}
 .article-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);gap:1px;margin:34px 0 58px;border-top:1px solid var(--ghost);background:var(--ghost)}
 .article-hero.single{grid-template-columns:1fr;background:none;border-top:none;margin:30px 0 40px}
 .article-hero.single .explain-card{padding:0}
@@ -466,14 +476,25 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .article-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:64px;align-items:start}
 .article-story-section{padding-top:54px}
 .article-meta-section{padding-top:44px}
-.article-body h2{font-weight:400;font-size:var(--t-h2);line-height:1.12;margin:12px 0}
+.article-body h2{font-weight:400;font-size:var(--t-h2);line-height:1.12;margin:12px 0;text-wrap:balance}
 .standfirst{font-family:var(--serif);font-size:1.35rem;line-height:1.5;color:var(--mid);max-width:60ch;margin-bottom:28px}
 .longform{max-width:72ch}
-.longform h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.55rem,3vw,1.9rem);line-height:1.18;margin:38px 0 12px}
+.longform h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.55rem,3vw,1.9rem);line-height:1.18;margin:38px 0 12px;text-wrap:balance}
 .longform h4{font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1.25;margin:28px 0 10px}
-.longform p{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#1d1d1d;margin:0 0 1.1rem}
+.longform p{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#1d1d1d;margin:0 0 1.1rem;text-wrap:pretty}
 .longform strong{font-weight:600;background:linear-gradient(transparent 66%,var(--c-tint) 0)}
 .longform em{font-style:italic;color:var(--c)}
+/* Reading body uses Cormorant Garamond at its original delicate 300 — that thin
+   elegance is the site's polished look (a heavier 400 reads as "bold" here). The
+   --serif-text token keeps body + chart descriptions on the same reading font. */
+.longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body{font-family:var(--serif-text);font-weight:300}
+/* Reading refinements: kerning + common ligatures for even text colour, balanced
+   wrapping to kill widows, a soft branded text selection, and a quieter link
+   underline that firms up on hover so links stop competing with the prose. */
+.longform p,.ed-copy p,.concept-item p,.story-list,.longform li,.panel .body,.story-body>.standfirst{font-kerning:normal;font-variant-ligatures:common-ligatures contextual;text-wrap:pretty}
+::selection{background:color-mix(in srgb,var(--c) 18%,transparent)}
+.longform a,.ed-copy a{text-decoration-color:color-mix(in srgb,var(--c) 36%,transparent);text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-color .15s var(--ease)}
+.longform a:hover,.ed-copy a:hover{text-decoration-color:var(--c)}
 .longform a{color:var(--c);text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
 .story-list{font-family:var(--serif);font-size:var(--t-prose-list);line-height:1.68;color:#1d1d1d;margin:0 0 1.25rem 1.1rem;padding:0;display:grid;gap:.45rem}
 .story-list li::marker{color:var(--c)}
@@ -505,6 +526,37 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .story-viz .viz-card,.story-viz .viz-main{padding:28px}
 .story-viz .viz-main,.story-viz .viz-wide{grid-column:auto}
 .story-viz .viz-card{box-shadow:none}
+.theme-climate-canonical .story-body{max-width:1280px}
+.theme-climate-canonical .story-flow{gap:64px}
+.theme-climate-canonical .story-step{gap:28px;padding-top:54px}
+.theme-climate-canonical .story-copy.longform{max-width:76ch}
+.theme-climate-canonical .story-viz .viz-card,
+.theme-climate-canonical .story-viz .viz-main{padding:38px}
+.theme-climate-canonical .viz-head{margin-bottom:24px}
+.theme-climate-canonical .viz-head h2{font-size:clamp(1.7rem,2.2vw,2.45rem);line-height:1.12;max-width:52ch}
+.theme-climate-canonical .viz-head p{font-size:.88rem;line-height:1.5;max-width:72ch}
+.theme-climate-canonical .chart-note{margin-top:28px;padding-top:26px}
+.theme-climate-canonical .cn-take{font-size:clamp(1.42rem,1.88vw,2.02rem);line-height:1.3;max-width:58ch}
+.theme-climate-canonical .cn-detail{font-size:clamp(1.08rem,1.35vw,1.24rem);line-height:1.68;columns:1;max-width:84ch}
+.theme-climate-canonical .cn-meta{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 64px}
+.theme-climate-canonical .cn-meta p{font-size:.94rem;line-height:1.62}
+.theme-climate-canonical .viz-bars{gap:16px}
+.theme-climate-canonical .viz-bar{grid-template-columns:180px minmax(0,1fr) 130px;gap:24px;font-size:.96rem}
+.theme-climate-canonical .viz-bar-track{height:30px}
+.theme-climate-canonical .viz-bar-track.bipolar:before{border-left-color:rgba(0,0,0,.34);z-index:1}
+.theme-climate-canonical .viz-bar b{font-size:1.32rem}
+@media(max-width:680px){
+  .theme-climate-canonical .story-flow{gap:50px}
+  .theme-climate-canonical .story-step{gap:22px;padding-top:40px}
+  .theme-climate-canonical .story-viz .viz-card,
+  .theme-climate-canonical .story-viz .viz-main{padding:16px}
+  .theme-climate-canonical .viz-head h2{font-size:1.58rem;max-width:none}
+  .theme-climate-canonical .cn-take{font-size:1.35rem;max-width:none}
+  .theme-climate-canonical .cn-meta{grid-template-columns:1fr;gap:16px}
+  .theme-climate-canonical .viz-bar{grid-template-columns:96px minmax(0,1fr) 58px;gap:10px;font-size:.84rem}
+  .theme-climate-canonical .viz-bar-track{height:24px}
+  .theme-climate-canonical .viz-bar b{font-size:1.05rem}
+}
 .concept-blocks{max-width:76ch;margin-top:52px;border-top:1px solid var(--ghost);padding-top:28px}
 .concept-blocks>.lbl{margin-bottom:18px}
 .concept-item{display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;border-top:1px solid var(--ghost);padding:24px 0}
@@ -535,19 +587,44 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .viz-head h2{font-size:clamp(1.62rem,2.35vw,2.35rem);font-weight:400;line-height:1.08}
 .viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font-size:1.52rem}
 .viz-head p{font-size:.8rem;color:var(--mid);margin-top:6px}
+/* Rupee article: each chart subtitle is a plain-English subheading doing real
+   explanatory work, so give it more presence than the default faint caption. */
+.theme-rupee .viz-head p{font-size:.92rem;color:#333;line-height:1.5;margin-top:9px;max-width:66ch}
 .viz-head span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
 .viz-bar span{min-width:0;overflow-wrap:anywhere;line-height:1.25}
 .viz-actions{display:flex;gap:7px;justify-content:flex-end;margin:-4px 0 10px;opacity:.78}
-.viz-actions button{background:#fff;border:1px solid var(--ghost);color:var(--mid);font-family:var(--sans);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 8px;cursor:pointer}
-.viz-actions button:hover{border-color:var(--c);color:var(--c)}
+.viz-actions button{background:#fff;border:1px solid var(--ghost);color:var(--dim);font-family:var(--sans);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:7px;cursor:pointer;transition:color .15s var(--ease),border-color .15s var(--ease),background .15s var(--ease)}
+.viz-actions button:hover{border-color:var(--c);color:var(--c-ink);background:var(--c-tint)}
+/* On mouse devices the export controls stay out of the way and fade in only when
+   the chart is hovered or keyboard-focused. Touch devices (no hover) keep them
+   visible so they remain reachable. */
+@media(hover:hover){
+  .viz-actions{opacity:0;transition:opacity .22s var(--ease)}
+  .viz-card:hover .viz-actions,.viz-card:focus-within .viz-actions{opacity:.78}
+}
+/* On phones the SVG/PNG/CSV/Share row wedged between the subtitle and the big
+   number looks cramped. Move it to a right-aligned footer toolbar that sits
+   directly on top of the source line (orders below keep note -> toolbar ->
+   source in that fixed sequence) so it reads as intentional export controls
+   rather than a stray cluster, and the title -> number -> chart flow stays clean. */
+@media(max-width:680px){
+  .viz-actions{order:90;justify-content:flex-end;margin:10px 0 18px;opacity:.72}
+  .chart-note{order:89}
+  .viz-source{order:91}
+}
 .viz-lead-number{display:flex;align-items:flex-end;gap:18px;margin:6px 0 8px}
 .viz-lead-number span{font-family:var(--serif);font-size:clamp(2.4rem,4vw,3.6rem);font-weight:300;line-height:.86;color:var(--c);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.02em}
-.viz-lead-number p{font-size:.8rem;color:var(--mid);max-width:22ch;line-height:1.35;padding-bottom:8px}
+.viz-lead-number p{font-size:.8rem;color:var(--mid);max-width:40ch;line-height:1.35;padding-bottom:8px}
 .viz-line-number{display:flex;align-items:flex-end;gap:12px;margin:2px 0 8px}
 .viz-line-number span{font-family:var(--serif);font-size:clamp(1.9rem,3.1vw,3.05rem);font-weight:300;line-height:.88;color:var(--c);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.015em}
-.viz-line-number p{font-size:.72rem;color:var(--mid);max-width:18ch;line-height:1.3;padding-bottom:6px}
+.viz-line-number p{font-size:.72rem;color:var(--mid);max-width:40ch;line-height:1.3;padding-bottom:6px}
 .viz-svg{width:100%;height:auto;display:block}
-.chart-watermark{font:600 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;fill:#8c8780;opacity:.42;pointer-events:none;user-select:none}
+/* Give charts more width to breathe on phones: the default 28-30px card padding
+   eats a big share of a narrow screen, squeezing the plot. */
+@media(max-width:680px){.story-viz .viz-card,.story-viz .viz-main,.viz-card,.viz-main{padding:16px 14px}}
+/* Watermark is for shared exports only (article-actions.js re-styles it into the
+   downloaded SVG/PNG). On the page itself it's just noise, so hide it. */
+.chart-watermark{display:none}
 .choro-map .chart-watermark{opacity:.26}
 .spark-svg .chart-watermark{font-size:3.2px;letter-spacing:.05em;opacity:.34}
 .viz-svg-lead{margin-top:4px}
@@ -563,8 +640,16 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .viz-head h2{font-size:1.48rem;line-height:1.08}
   .viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font-size:1.48rem}
   .viz-head p{font-size:.78rem;line-height:1.45}
-  .viz-head span{max-width:13ch;overflow:visible;text-overflow:clip;white-space:normal;text-align:right;font-size:.62rem;line-height:1.25;letter-spacing:.11em;flex:0 0 auto}
+  .theme-rupee .viz-head p{font-size:.86rem;line-height:1.48;max-width:none}
+  /* The unit caption recedes on phones: smaller, lighter, capped to two lines so a
+     long unit string can't crowd the title or stack into a four-line block. */
+  /* Mobile: drop the unit tag from the card header. It duplicated the subtitle
+     (which carries the full unit) and clamped mid-word ("°C ABOVE/BELO…"). */
+  .viz-head span{display:none}
   .viz-head .choro-unit{display:none}
+  /* Phones have the full card width for the lead/line number row, so let the descriptor
+     run on one tidy line instead of wrapping and orphaning the "· latest point" middot. */
+  .viz-lead-number p,.viz-line-number p{max-width:none}
   .viz-d{display:none}
   .viz-m{display:block}
   /* Keep mobile chart axes inside the chart card. The SVG geometry now carries
@@ -591,10 +676,10 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .lazy-svg-frame{display:block;background:linear-gradient(90deg,#f6f1ed,#efe7df,#f6f1ed);background-size:220% 100%;animation:lazy-svg-pulse 1.4s ease-in-out infinite;border-radius:6px}
 @keyframes lazy-svg-pulse{0%{background-position:100% 0}100%{background-position:-100% 0}}
 .stripe-axis{display:flex;justify-content:space-between;margin-top:10px;font-family:var(--sans);font-size:.82rem;color:var(--mid);font-variant-numeric:lining-nums tabular-nums;letter-spacing:.02em}
-.choro-wrap{display:flex;gap:48px;align-items:center;justify-content:center;margin:8px 0 4px}
-.viz-svg.choro-map{width:auto;height:600px;max-width:60%;display:block}
-.choro-map-frame{height:600px;max-width:60%;flex:0 1 auto}
-.choro-side{flex:0 0 250px;display:flex;flex-direction:column;gap:28px}
+.choro-wrap{display:grid;grid-template-columns:minmax(360px,1fr) minmax(240px,300px);gap:36px;align-items:center;margin:8px 0 4px}
+.viz-svg.choro-map{width:100%;height:auto;max-height:620px;display:block}
+.choro-map-frame{width:100%;max-height:620px;display:block}
+.choro-side{display:grid;grid-template-columns:1fr;gap:26px;align-content:center}
 .choro-legend{display:flex;flex-direction:column;gap:9px;font-family:var(--sans);font-size:.95rem;color:var(--mid);font-variant-numeric:lining-nums tabular-nums}
 .choro-legend i{display:inline-block;width:18px;height:18px;margin-right:10px;vertical-align:-4px;border:1px solid var(--ghost)}
 .choro-scale{display:flex;flex-direction:column;gap:8px;font-family:var(--sans);font-size:.95rem;color:var(--mid);font-variant-numeric:lining-nums tabular-nums}
@@ -627,6 +712,10 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .spark-d{font-style:normal;font-size:.72rem;font-weight:600;font-variant-numeric:lining-nums tabular-nums}
 .spark-d.pos{color:#e95a4f}
 .spark-d.neg{color:#5b8bd0}
+.spark-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:2px 0 8px;font-family:var(--sans);font-size:.84rem;color:var(--mid)}
+.spark-leg{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.spark-leg i{width:13px;height:3px;border-radius:2px;display:inline-block}
+.spark-head .spark-nums{font-size:.72rem;color:var(--dim);font-weight:500;white-space:normal;text-align:right}
 @media(max-width:560px){.spark-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px 20px}.spark-svg{height:54px}.spark-d{font-size:.66rem}}
 /* Diverging change bars (warming amount from a true zero) */
 .ranked-diverge{display:grid;gap:9px;margin:12px 0 4px}
@@ -666,15 +755,28 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 @media(max-width:720px){.ranked-change-head{display:none}.ranked-change-row{grid-template-columns:1fr 70px;gap:8px 12px;border-top:1px solid var(--ghost);padding-top:10px}.ranked-change-row b{grid-column:1/-1}.ranked-change-bar{grid-column:1/2}.ranked-change-row em{grid-column:2/3;grid-row:3/4;align-self:center}.ranked-change-bar.muted:before,.ranked-change-bar.hot:before{position:absolute;left:7px;top:50%;transform:translateY(-50%);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(0,0,0,.55);z-index:1}.ranked-change-bar.muted:before{content:"Base"}.ranked-change-bar.hot:before{content:"Latest"}}
 .choro-top{display:flex;flex-direction:column;gap:9px;font-family:var(--sans);font-size:.98rem;color:var(--mid);font-variant-numeric:lining-nums tabular-nums}
 .choro-top b{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px;font-weight:600}
-.choro-top span{display:flex;justify-content:space-between;gap:14px}
+.choro-top span{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:baseline}
 .choro-top em{font-style:normal;color:var(--ink)}
-@media(max-width:620px){.choro-wrap{flex-direction:column;align-items:stretch}.viz-svg.choro-map{height:auto;width:100%}.choro-map-frame{height:auto;width:100%;max-width:100%}.choro-wrap--zoom-mobile{overflow:hidden}.choro-wrap--zoom-mobile .viz-svg.choro-map,.choro-wrap--zoom-mobile .choro-map-frame{width:128%;max-width:none;margin-inline:-14%}.choro-side{flex-direction:row;flex-wrap:wrap;gap:30px}}
+@media(max-width:760px){
+  .choro-wrap{grid-template-columns:1fr;gap:24px}
+  .viz-svg.choro-map,.choro-map-frame{width:100%;max-height:430px;margin-inline:auto}
+  .choro-side{grid-template-columns:1fr 1fr;gap:24px 28px}
+  .choro-scale{grid-column:1/-1}
+}
+@media(max-width:460px){
+  .choro-wrap{gap:22px}
+  .viz-svg.choro-map,.choro-map-frame{max-height:360px}
+  .choro-side{grid-template-columns:1fr;gap:24px}
+}
 .viz-legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;font-size:.9rem;color:var(--mid)}
-.viz-legend i{display:inline-block;width:22px;height:4px;margin-right:8px;vertical-align:middle}
-.viz-source{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--ghost);margin-top:auto;padding-top:16px;font-size:.76rem;color:var(--mid)}
-.viz-source span{letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.viz-source a,.viz-source b{font-weight:500;color:var(--ink);text-align:right}
-.viz-source a{text-decoration:underline;text-underline-offset:3px}
+.viz-legend i{display:inline-block;width:20px;height:4px;border-radius:2px;margin-right:8px;vertical-align:middle}
+.viz-source{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--ghost);margin-top:auto;padding-top:14px;font-size:.78rem;color:var(--mid)}
+.viz-source span{display:inline-flex;align-items:center;gap:7px;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;font-weight:600;color:var(--dim)}
+.viz-source span::before{content:"";flex:none;width:11px;height:2px;border-radius:2px;background:var(--c);opacity:.85}
+.viz-source a,.viz-source b{font-family:var(--serif);font-weight:500;font-size:1rem;letter-spacing:.005em;color:var(--c-ink);text-align:right}
+.viz-source a{text-decoration:none;border-bottom:1px solid var(--c-tint);padding-bottom:2px;transition:border-color .16s ease,color .16s ease}
+.viz-source a:hover,.viz-source a:focus-visible{border-bottom-color:var(--c)}
+.viz-source a::after{content:"\2197";margin-left:5px;font-size:.72em;font-family:var(--sans);color:var(--c);opacity:.65;vertical-align:1px}
 .viz-stack{height:76px;display:flex;gap:2px;overflow:hidden;background:var(--paper);margin:10px 0 22px}
 .viz-seg{height:100%;display:flex;align-items:center;min-width:2px}
 .viz-seg span{color:#fff;font-size:.9rem;font-weight:500;padding-left:14px;white-space:nowrap;overflow:hidden;text-overflow:clip}
@@ -698,18 +800,20 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .strip-pair-row{display:grid;grid-template-columns:62px 1fr;gap:16px;align-items:center;margin:12px 0}
 .strip-pair-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-align:right;font-weight:500}
 .strip-pair-row .share-strip{margin:0;height:56px}
+.strip-pair-row .share-strip div{align-items:center}
+.strip-pair-row .share-strip span{color:#fff;font-size:.8rem;font-weight:500;padding:0 10px 0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;text-shadow:0 1px 7px rgba(0,0,0,.3)}
 @media(max-width:560px){.strip-pair-row{grid-template-columns:1fr;gap:5px}.strip-pair-label{text-align:left}}
 .viz-bars{display:grid;gap:14px}
 .viz-bar-groups{display:grid;gap:24px}
 .viz-bar-group{display:grid;gap:10px}
 .viz-bar-group h3{margin:0;font-family:var(--sans);font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);font-weight:700}
-.viz-bar{display:grid;grid-template-columns:112px minmax(0,1fr) 78px;gap:16px;align-items:center;font-size:.86rem;color:var(--mid)}
-.viz-bar-group .viz-bar{grid-template-columns:minmax(190px,28%) minmax(0,1fr) 64px}
+.viz-bar{display:grid;grid-template-columns:112px minmax(0,1fr) auto;gap:16px;align-items:center;font-size:.86rem;color:var(--mid)}
+.viz-bar-group .viz-bar{grid-template-columns:minmax(190px,28%) minmax(0,1fr) auto}
 .viz-bar-track{height:24px;background:var(--paper);overflow:hidden;position:relative}
 .viz-bar-track.bipolar:before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:1px solid rgba(0,0,0,.18)}
 .viz-bar i{display:block;height:100%;background:var(--c)}
-.viz-bar i.neg{background:#0b0b0b}
-.viz-bar b{font-family:var(--serif);font-size:1.1rem;color:var(--ink);font-weight:400;text-align:right}
+.viz-bar i.neg{background:#322e29}
+.viz-bar b{font-family:var(--serif);font-size:1.1rem;color:var(--ink);font-weight:400;text-align:right;white-space:nowrap}
 .grouped-bars rect{rx:0}
 .bar-value-label{font-family:var(--sans);font-size:11px;font-weight:500;fill:#fff;letter-spacing:0;pointer-events:none}
 .trade-note-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 2px}
@@ -718,16 +822,22 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 /* Chart description: the takeaway and the explanation flow naturally at a
    comfortable reading width; How to read / Watch out sit in a quiet full-width
    footer underneath, not squeezed into a side column. */
-.chart-note{border-top:1px solid var(--ink);padding:22px 0 4px;margin-top:22px}
-.cn-take{font-family:var(--serif);font-weight:500;font-size:var(--t-prose-lead);line-height:1.32;color:#0e0e0e;margin:0 0 14px;max-width:90ch}
+/* Explanation box under each chart: a hairline top rule with a short domain-colour
+   accent tick (editorial signature) instead of a heavy black rule. */
+.chart-note{position:relative;border-top:1px solid var(--ghost);padding:26px 0 4px;margin-top:24px}
+.chart-note::before{content:"";position:absolute;top:-1px;left:0;width:46px;height:2px;background:var(--c)}
+.cn-take{font-family:var(--serif-text);font-weight:500;font-size:var(--t-prose-lead);line-height:1.32;color:#0e0e0e;margin:0 0 14px;max-width:90ch}
 /* Flow the explanation across the full chart width in two balanced columns, so
    it fills the space at a comfortable per-column measure instead of clamping to
    the left. Collapses to a single column on phones (see the 700px block below). */
-.cn-detail{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#222;margin:0 0 22px;columns:2;column-gap:56px}
-.cn-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px 56px;border-top:1px solid var(--ghost);padding-top:16px}
-.cn-meta p{margin:0;font-family:var(--sans);font-size:.9rem;line-height:1.55;color:#333}
-.cn-meta b{display:block;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mid);font-weight:600;margin-bottom:5px}
-@media(max-width:700px){.cn-meta{grid-template-columns:1fr}.cn-detail{columns:1}}
+.cn-detail{font-family:var(--serif-text);font-size:var(--t-prose);line-height:var(--lh-prose);color:#222;margin:0 0 22px;columns:2;column-gap:56px}
+/* "How to read / watch out" guidance set apart in a soft inset panel with
+   dot-kicker labels in the domain ink. */
+.cn-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;margin-top:6px;padding:20px 22px;background:var(--paper);border-radius:14px}
+.cn-meta p{margin:0;font-family:var(--sans);font-size:.9rem;line-height:1.58;color:#333}
+.cn-meta b{display:flex;align-items:center;gap:.5em;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--c-ink);font-weight:600;margin-bottom:7px}
+.cn-meta b::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c);flex:0 0 auto}
+@media(max-width:700px){.cn-meta{grid-template-columns:1fr;gap:16px;padding:16px}.cn-detail{columns:1}}
 .change-grid{display:grid;gap:14px}
 .change-row{display:grid;grid-template-columns:230px minmax(0,1fr) 300px;gap:24px;align-items:center;border-top:1px solid var(--ghost);padding-top:18px}
 .change-row:first-child{border-top:0;padding-top:0}
@@ -746,7 +856,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .pyr-side{height:13px;background:var(--paper);position:relative}
 .pyr-side i{display:block;height:100%;position:absolute;top:0}
 .pyr-side.male i{right:0;background:var(--c)}
-.pyr-side.female i{left:0;background:#0b0b0b}
+.pyr-side.female i{left:0;background:#322e29}
 .pyr-row>span{text-align:center;font-size:.82rem;font-weight:500;color:var(--ink)}
 .pyr-num{font-family:var(--sans);font-size:.58rem;font-weight:500;color:var(--dim);line-height:1;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
 .pyr-num-male{text-align:right}
@@ -759,7 +869,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .point-label{font-family:var(--sans);font-size:16px;font-weight:500;fill:var(--ink)}
 .axis-title{font-family:var(--sans);font-size:17px;fill:var(--mid)}
 .scatter-callout{font-family:var(--sans);font-size:16px;font-weight:600;fill:rgba(211,80,58,.92)}
-.scatter-zone{font-family:var(--sans);font-size:16px;font-weight:700;fill:rgba(211,80,58,.88)}
+.scatter-zone{font-family:var(--sans);font-size:16px;font-weight:700;fill:rgba(211,80,58,.88);paint-order:stroke;stroke:#fff;stroke-width:3.5px;stroke-linejoin:round}
 .scatter-zone-muted{font-weight:500;fill:rgba(63,131,120,.72)}
 .viz-m .point-label{font-size:14px}
 .viz-m .axis-title{font-size:14px}
@@ -803,8 +913,8 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .viz-main,.viz-wide{grid-column:auto}
   .viz-card,.viz-main{padding:22px}
   .viz-lead-number{align-items:flex-start;flex-direction:column;gap:6px}
-  .viz-bar{grid-template-columns:86px minmax(0,1fr) 62px}
-  .viz-bar-group .viz-bar{grid-template-columns:minmax(118px,34%) minmax(0,1fr) 54px;gap:10px}
+  .viz-bar{grid-template-columns:86px minmax(0,1fr) auto}
+  .viz-bar-group .viz-bar{grid-template-columns:minmax(118px,34%) minmax(0,1fr) auto;gap:10px}
   .trade-note-row{grid-template-columns:1fr}
   .change-row{grid-template-columns:1fr;gap:8px}
   .change-facts{grid-template-columns:1fr}
@@ -821,8 +931,9 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 @keyframes drw{to{stroke-dashoffset:0}}
 
 /* ---------- HERO CHART (Indica.heroLine) ---------- */
-.yaxt{font-family:var(--sans);font-size:21px;fill:var(--dim)}
-.xaxt{font-family:var(--sans);font-size:21px;fill:var(--mid)}
+/* Axis ticks recede to a soft, unified grey so the data lines are the loudest ink. */
+.yaxt{font-family:var(--sans);font-size:21px;fill:#9c9892}
+.xaxt{font-family:var(--sans);font-size:21px;fill:#9c9892}
 .anno-line{stroke:var(--c);stroke-width:1;stroke-dasharray:2 4;opacity:.45}
 .anno-dot{fill:#fff;stroke:var(--c);stroke-width:2}
 .anno-t{font-family:var(--sans);font-size:11.5px;font-weight:500;fill:var(--ink)}
@@ -934,6 +1045,12 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 
 .about-lead{font-size:1.05rem;margin-bottom:30px;max-width:60ch}
 .project-links{display:flex;flex-wrap:wrap;gap:14px 28px}
+/* Install page — ordered steps + one-click CTA. The global reset strips list
+   padding, so restore indentation and markers here. */
+.about .prose ol{list-style:decimal;margin:.2em 0 0 1.3em;padding:0;display:grid;gap:.55rem}
+.about .prose ol li{padding-left:.2em}
+.install-cta{margin-top:22px}
+.install-note{margin-top:14px;font-size:1rem;max-width:60ch}
 .project-links a{font-size:1.02rem;letter-spacing:.01em;padding-bottom:3px}
 
 .about-contact{background:var(--paper);border-color:var(--line)}
@@ -956,15 +1073,12 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .sec-hd{margin-bottom:32px}
   .domain-head,.chart-head{padding:30px 0 20px}
 
-  /* Nav: brand on its own line, domains become a tidy single-row swipe strip
-     (the right-edge fade hints there's more to scroll). */
-  .nav{gap:13px}
-  .domains{flex-wrap:nowrap;width:100%;overflow-x:auto;gap:22px;padding-bottom:3px;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none;
-    -webkit-mask-image:linear-gradient(90deg,#000 89%,transparent);
-    mask-image:linear-gradient(90deg,#000 89%,transparent)}
-  .domains::-webkit-scrollbar{display:none}
-  .domains a,.domains button{white-space:nowrap;padding-bottom:7px}
+  /* Nav: brand centered on its own line; domains wrap to two tidy centered rows
+     so every item stays visible at once — no swipe strip, nothing hidden. */
+  .nav{gap:15px;align-items:center}
+  .brand{align-self:center}
+  .domains{flex-wrap:wrap;justify-content:center;width:100%;gap:12px 18px}
+  .domains a,.domains button{white-space:nowrap;padding-bottom:6px}
 
   /* Register tabs (The Reading / In Plain English / On the Ground) pack tighter */
   .reg-tab{margin-right:22px}
@@ -1018,31 +1132,6 @@ html{overscroll-behavior-y:none}
   }
 }
 
-/* Install banner — a quiet dark card that slides up from the bottom. */
-.pwa-install{
-  position:fixed;z-index:80;
-  left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));
-  bottom:calc(14px + env(safe-area-inset-bottom));
-  max-width:480px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  background:#0b0b0b;color:#fff;border-radius:14px;padding:14px 15px;
-  box-shadow:0 14px 44px rgba(0,0,0,.24);
-  transform:translateY(150%);opacity:0;
-  transition:transform .42s var(--ease),opacity .42s var(--ease)}
-.pwa-install.is-in{transform:none;opacity:1}
-.pwa-install-tx{display:flex;flex-direction:column;gap:3px;min-width:0}
-.pwa-install-tx b{font-family:var(--serif);font-weight:500;font-size:1.08rem;line-height:1.1}
-.pwa-install-tx span{font-family:var(--sans);font-size:.78rem;line-height:1.4;color:#bdbdbd}
-.pwa-install-tx em{font-style:normal;color:#fff}
-.pwa-install-ax{display:flex;align-items:center;gap:4px;flex-shrink:0}
-.pwa-install button{font-family:var(--sans);cursor:pointer;border:none;border-radius:9px;
-  font-size:.79rem;letter-spacing:.01em;padding:10px 15px;transition:.18s}
-.pwa-install [data-act=add]{background:#fff;color:#0b0b0b;font-weight:500}
-.pwa-install [data-act=add]:hover{background:#ededed}
-.pwa-install [data-act=no]{background:none;color:#9a9a9a;padding:10px 8px}
-.pwa-install [data-act=no]:hover{color:#d8d8d8}
-.pwa-install.is-ios>button{font-size:1rem;line-height:1;padding:6px 8px;color:#9a9a9a}
-
 /* Update toast — a centred pill prompting a refresh onto the new version. */
 .pwa-toast{
   position:fixed;z-index:90;left:50%;
@@ -1058,8 +1147,8 @@ html{overscroll-behavior-y:none}
   border:none;border-radius:20px;padding:8px 16px;font-size:.78rem;font-weight:500}
 
 @media(prefers-reduced-motion:reduce){
-  .pwa-install,.pwa-toast{transition:opacity .2s linear;transform:none}
-  .pwa-install:not(.is-in),.pwa-toast:not(.is-in){opacity:0;pointer-events:none}
+  .pwa-toast{transition:opacity .2s linear;transform:none}
+  .pwa-toast:not(.is-in){opacity:0;pointer-events:none}
 }
 
 /* ---------- INLINE GLOSSARY · definition terms + boxes ----------
@@ -1082,11 +1171,33 @@ html{overscroll-behavior-y:none}
 .defpop-w{display:block;font-size:.84rem;line-height:1.45;color:var(--mid);margin-top:.45rem;padding-top:.45rem;border-top:1px solid var(--line)}
 /* Load-bearing terms: a quiet inline note on first mention. Echoes the
    "Plain English concepts" style — pure white, a hairline accent rule, serif term. */
-.defbox{margin:1.7rem 0;padding:.1rem 0 .1rem 1.3rem;border-left:2px solid var(--c)}
-.defbox-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--c-ink);margin:0 0 .5rem}
-.defbox-term{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.12;color:var(--c);margin:0 0 .4rem}
-.defbox-mean{font-family:var(--serif);font-size:var(--t-prose);line-height:var(--lh-prose);color:#1d1d1d;margin:0;max-width:64ch}
-.defbox-why{font-family:var(--sans);font-size:.86rem;line-height:1.55;color:var(--mid);margin:.55rem 0 0;max-width:64ch}
+/* Definition: an editorial lexicon entry, not a filled callout. White, with the
+   term anchored on a hairline carrying a short domain-colour accent (the same
+   signature as the chart explanation box), so the article system reads as one piece. */
+.defbox{margin:2rem 0}
+.defbox-lbl{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--c-ink);margin:0 0 .5rem}
+.defbox-term{font-family:var(--serif);font-weight:500;font-size:1.62rem;line-height:1.12;letter-spacing:-.01em;color:var(--ink);margin:0;padding-bottom:.55rem;border-bottom:1px solid var(--ghost);position:relative}
+.defbox-term::after{content:"";position:absolute;left:0;bottom:-1px;width:44px;height:2px;background:var(--c)}
+.defbox-mean{font-family:var(--serif);font-size:var(--t-prose);line-height:1.6;color:#1d1d1d;margin:.75rem 0 0;max-width:62ch}
+.defbox-why{font-family:var(--sans);font-size:.85rem;line-height:1.58;color:var(--mid);margin:.7rem 0 0;max-width:62ch}
+/* Tufte sidenote (^[..] in prose): authorial emphasis/aside in the margin, distinct
+   from the inline definition card. Mobile: a small block note set off by an accent
+   rule. Desktop ≥1000px: floats into the already-empty right gutter beside the prose
+   (prose stays normal/left-aligned, so the gutter is wide and stable — no clipping). */
+.sidenote{display:block;font-family:var(--sans);font-size:.84rem;line-height:1.55;color:var(--mid);margin:.85rem 0;padding-left:15px;border-left:2px solid var(--c)}
+/* Auto-numbered marker (CSS counter — numbers run in document order per article,
+   no JS). The in-text ¹ ties the note to its sentence; the note repeats the number. */
+.story-body{counter-reset:sidenote}
+.sn-mark{counter-increment:sidenote}
+.sn-mark::before{content:counter(sidenote);font-size:.62em;font-weight:600;color:var(--c);vertical-align:super;line-height:0}
+.sidenote::before{content:counter(sidenote);font-weight:600;color:var(--c);margin-right:7px}
+@media(min-width:1000px){
+  .story-copy.longform .sidenote{
+    float:right;clear:right;width:216px;
+    margin:.3rem -248px .7rem 0;
+    font-size:.8rem;line-height:1.5;padding-left:14px;border-left:1px solid var(--c)
+  }
+}
 @media(max-width:640px){
   .defpop{position:fixed;left:1rem;right:1rem;bottom:1rem;top:auto;width:auto}
 }

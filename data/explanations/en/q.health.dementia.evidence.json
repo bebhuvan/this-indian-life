@@ -1,0 +1,1285 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.health.dementia",
+  "question": "What dementia costs India",
+  "priority": "core",
+  "theme": {
+    "id": "health",
+    "label": "Health and survival",
+    "readerQuestions": [
+      "What is the survival or health outcome?",
+      "How much has it changed over time?",
+      "Is the measure about death, illness, or healthy years?",
+      "What does the national average hide?"
+    ],
+    "glossaryTerms": [
+      "life expectancy",
+      "healthy life expectancy",
+      "mortality rate",
+      "per 1,000 live births",
+      "age-standardized"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "health.lasidad.prev_by_age",
+    "health.lasidad.prev_gradients",
+    "health.lasidad.prev_by_education",
+    "health.lasidad.cases_projection",
+    "health.lasidad.prev_by_state",
+    "health.gbd.deaths_alzheimers"
+  ],
+  "availableIndicatorIds": [
+    "health.lasidad.prev_by_age",
+    "health.lasidad.prev_gradients",
+    "health.lasidad.prev_by_education",
+    "health.lasidad.cases_projection",
+    "health.lasidad.prev_by_state",
+    "health.gbd.deaths_alzheimers"
+  ],
+  "themeIndicatorIds": [
+    "health.lasidad.prev_by_age",
+    "health.lasidad.prev_gradients",
+    "health.lasidad.prev_by_education",
+    "health.lasidad.cases_projection",
+    "health.lasidad.prev_by_state",
+    "health.gbd.deaths_alzheimers",
+    "ref.us.nber.wealth_gap_by_event_time",
+    "ref.us.nber.assets_cases_vs_controls",
+    "health.adi.cost_per_person_by_income",
+    "health.adi.informal_care_share",
+    "health.nha.oope_the_pct"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.health.lasidad.prev_by_age",
+      "indicatorId": "health.lasidad.prev_by_age",
+      "title": "Dementia prevalence by age, India",
+      "sourceId": "lasidad",
+      "unit": "% of age group with dementia",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.health.lasidad.prev_gradients",
+      "indicatorId": "health.lasidad.prev_gradients",
+      "title": "Who carries more dementia: women, and rural India",
+      "sourceId": "lasidad",
+      "unit": "% of adults 60+ with dementia",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.health.lasidad.prev_by_education",
+      "indicatorId": "health.lasidad.prev_by_education",
+      "title": "Dementia falls sharply with schooling",
+      "sourceId": "lasidad",
+      "unit": "% of adults 60+ with dementia",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.health.lasidad.cases_projection",
+      "indicatorId": "health.lasidad.cases_projection",
+      "title": "Indians aged 60+ living with dementia",
+      "sourceId": "lasidad",
+      "unit": "million people 60+",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.health.lasidad.prev_by_state",
+      "indicatorId": "health.lasidad.prev_by_state",
+      "title": "Dementia prevalence by state",
+      "sourceId": "lasidad",
+      "unit": "% of adults 60+ with dementia",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.health.gbd.deaths_alzheimers",
+      "indicatorId": "health.gbd.deaths_alzheimers",
+      "title": "Deaths from Alzheimer's & other dementias",
+      "sourceId": "gbd",
+      "unit": "deaths",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.ref.us.nber.wealth_gap_by_event_time",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "title": "US: wealth falls behind years before a dementia diagnosis",
+      "sourceId": "nber",
+      "unit": "US$1,000s of net worth vs similar households",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.ref.us.nber.assets_cases_vs_controls",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls",
+      "title": "US: the gap sits in the assets you must actively manage",
+      "sourceId": "nber",
+      "unit": "US$1,000s held, two years before onset",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.health.adi.cost_per_person_by_income",
+      "indicatorId": "health.adi.cost_per_person_by_income",
+      "title": "What a year of dementia care costs, by country income",
+      "sourceId": "adi",
+      "unit": "US$ per person per year (2010)",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.health.adi.informal_care_share",
+      "indicatorId": "health.adi.informal_care_share",
+      "title": "The poorer the country, the more the cost is unpaid family care",
+      "sourceId": "adi",
+      "unit": "% of total dementia cost that is unpaid family care",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.health.nha.oope_the_pct",
+      "indicatorId": "health.nha.oope_the_pct",
+      "title": "Out-of-pocket share of health spending",
+      "sourceId": "nha-nhsrc",
+      "unit": "% of THE",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "dementia-climbs-steeply-with-age",
+      "title": "Dementia climbs steeply with age",
+      "chartType": "tableBars",
+      "beat": "answer",
+      "window": "",
+      "indicator": "health.lasidad.prev_by_age",
+      "series": [],
+      "unit": "% of age group with dementia",
+      "subtitle": "LASI-DAD 2018-20 (Lee et al., Alzheimer's & Dementia 2023) · estimated prevalence by age band",
+      "whyThisChart": "The first thing to know: dementia is overwhelmingly a disease of late old age. It jumps from about 3% in the early 60s to a quarter of everyone past 85."
+    },
+    {
+      "order": 2,
+      "chartId": "8-8-million-now-16-9-million-by-2036",
+      "title": "8.8 million now, 16.9 million by 2036",
+      "chartType": "change",
+      "beat": "scale",
+      "window": "",
+      "indicator": "health.lasidad.cases_projection",
+      "series": [],
+      "unit": "million people 60+ with dementia",
+      "subtitle": "LASI-DAD · estimated cases, 2016 population base and 2036 projection",
+      "whyThisChart": "Because India is ageing fast, the headcount is set to nearly double in twenty years even if the risk at each age stays flat."
+    },
+    {
+      "order": 3,
+      "chartId": "who-carries-more-women-and-rural-india",
+      "title": "Who carries more: women, and rural India",
+      "chartType": "tableBars",
+      "beat": "gradient",
+      "window": "",
+      "indicator": "health.lasidad.prev_gradients",
+      "series": [],
+      "unit": "% of adults 60+ with dementia",
+      "subtitle": "LASI-DAD 2018-20 · crude prevalence among adults 60+",
+      "whyThisChart": "Dementia is not spread evenly. Women carry noticeably more of it than men, and rural Indians more than city dwellers."
+    },
+    {
+      "order": 4,
+      "chartId": "dementia-falls-sharply-with-schooling",
+      "title": "Dementia falls sharply with schooling",
+      "chartType": "tableBars",
+      "beat": "gradient",
+      "window": "",
+      "indicator": "health.lasidad.prev_by_education",
+      "series": [],
+      "unit": "% of adults 60+ with dementia",
+      "subtitle": "LASI-DAD 2018-20 · crude prevalence by education",
+      "whyThisChart": "The steepest gradient of all is education: those with no schooling have many times the measured prevalence of those who finished middle school."
+    },
+    {
+      "order": 5,
+      "chartId": "where-dementia-is-most-common",
+      "title": "Where dementia is most common",
+      "chartType": "choropleth",
+      "beat": "where",
+      "window": "",
+      "indicator": "health.lasidad.prev_by_state",
+      "series": [],
+      "unit": "% of adults 60+",
+      "subtitle": "LASI-DAD 2018-20 · estimated prevalence among adults 60+, by state",
+      "whyThisChart": "The map runs from about 4.5% in Delhi to roughly 11% in Jammu & Kashmir, with the south and east generally higher than the north-western plains."
+    },
+    {
+      "order": 6,
+      "chartId": "deaths-recorded-from-dementia-have-risen-eightfold",
+      "title": "Deaths recorded from dementia have risen eightfold",
+      "chartType": "line",
+      "beat": "trend",
+      "window": "full",
+      "indicator": "health.gbd.deaths_alzheimers",
+      "series": [],
+      "unit": "",
+      "subtitle": "IHME Global Burden of Disease 2023 · estimated annual deaths from Alzheimer's & other dementias, India",
+      "whyThisChart": "As Indians live longer and other killers recede, dementia surfaces in the mortality data: recorded deaths have climbed from about 17,000 in 1980 to over 140,000."
+    },
+    {
+      "order": 7,
+      "chartId": "america-money-trouble-starts-before-the-diagnosis",
+      "title": "America: money trouble starts before the diagnosis",
+      "chartType": "tableBars",
+      "beat": "mechanism",
+      "window": "",
+      "indicator": "ref.us.nber.wealth_gap_by_event_time",
+      "series": [],
+      "unit": "US$1,000s of net worth vs similar households",
+      "subtitle": "NBER WP 34659 (Li et al. 2026) · US Health & Retirement Study · evidence from the United States",
+      "whyThisChart": "This is US data, shown to explain the mechanism, not to put a rupee figure on India. American households heading into dementia fall behind similar households starting about six years before onset, ending roughly $125,000 poorer."
+    },
+    {
+      "order": 8,
+      "chartId": "america-the-gap-sits-in-hard-to-manage-assets",
+      "title": "America: the gap sits in hard-to-manage assets",
+      "chartType": "tableBars",
+      "beat": "mechanism",
+      "window": "",
+      "indicator": "ref.us.nber.assets_cases_vs_controls",
+      "series": [],
+      "unit": "US$1,000s held, two years before onset",
+      "subtitle": "NBER WP 34659 · means two years before onset · evidence from the United States",
+      "whyThisChart": "The losses concentrate in stocks, bonds and investment accounts, the assets that need active judgement to manage. Earnings barely differ, and cancer or heart disease show no such gap, which points at decision-making, not spending."
+    },
+    {
+      "order": 9,
+      "chartId": "what-a-year-of-dementia-care-costs",
+      "title": "What a year of dementia care costs",
+      "chartType": "tableBars",
+      "beat": "cost",
+      "window": "",
+      "indicator": "health.adi.cost_per_person_by_income",
+      "series": [],
+      "unit": "US$ per person per year (2010)",
+      "subtitle": "World Alzheimer Report 2010 (ADI / Wimo & Prince) · societal cost per person, by country income group",
+      "whyThisChart": "On paper, dementia looks far cheaper in poorer countries. India sat in the lower-middle band at about US$3,100 a year per person, against nearly US$33,000 in rich countries."
+    },
+    {
+      "order": 10,
+      "chartId": "the-poorer-the-country-the-more-care-is-unpaid",
+      "title": "The poorer the country, the more care is unpaid",
+      "chartType": "tableBars",
+      "beat": "cost",
+      "window": "",
+      "indicator": "health.adi.informal_care_share",
+      "series": [],
+      "unit": "% of dementia cost that is unpaid family care",
+      "subtitle": "World Alzheimer Report 2010 (ADI) · share of total cost that is informal (family) care",
+      "whyThisChart": "Here is why India's cost looks low and is in fact hidden: in its income band about two-thirds of the entire cost of dementia is unpaid family labour that never enters any budget."
+    },
+    {
+      "order": 11,
+      "chartId": "why-it-lands-on-families-india-pays-out-of-pocket",
+      "title": "Why it lands on families: India pays out of pocket",
+      "chartType": "line",
+      "beat": "cost",
+      "window": "full",
+      "indicator": "health.nha.oope_the_pct",
+      "series": [],
+      "unit": "",
+      "subtitle": "National Health Accounts (MoHFW) · out-of-pocket spending as a share of total health expenditure, India",
+      "whyThisChart": "Even the medical slice of dementia care falls on households, because India funds a large share of all health care straight out of family pockets."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 2.94,
+      "displayValue": "2.9%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "indicatorId": "health.lasidad.prev_by_age",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 4.01,
+      "displayValue": "4%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "indicatorId": "health.lasidad.prev_by_age",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 10.3,
+      "displayValue": "10.3%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "indicatorId": "health.lasidad.prev_by_age",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 13.34,
+      "displayValue": "13.3%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "indicatorId": "health.lasidad.prev_by_age",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 16.25,
+      "displayValue": "16.3%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "indicatorId": "health.lasidad.prev_by_age",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 25.41,
+      "displayValue": "25.4%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "indicatorId": "health.lasidad.prev_by_age",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 9.03,
+      "displayValue": "9%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "indicatorId": "health.lasidad.prev_gradients",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 5.77,
+      "displayValue": "5.8%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "indicatorId": "health.lasidad.prev_gradients",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 8.35,
+      "displayValue": "8.4%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "indicatorId": "health.lasidad.prev_gradients",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 5.34,
+      "displayValue": "5.3%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "indicatorId": "health.lasidad.prev_gradients",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia falls sharply with schooling: value",
+      "value": 10.29,
+      "displayValue": "10.3%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "indicatorId": "health.lasidad.prev_by_education",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia falls sharply with schooling: value",
+      "value": 4.52,
+      "displayValue": "4.5%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "indicatorId": "health.lasidad.prev_by_education",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Dementia falls sharply with schooling: value",
+      "value": 1.54,
+      "displayValue": "1.5%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "indicatorId": "health.lasidad.prev_by_education",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Indians aged 60+ living with dementia, latest",
+      "value": 16.9,
+      "displayValue": "16.9",
+      "date": "2036",
+      "unit": "million people 60+",
+      "indicatorId": "health.lasidad.cases_projection",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Indians aged 60+ living with dementia, earliest",
+      "value": 8.8,
+      "displayValue": "8.8",
+      "date": "2016",
+      "unit": "million people 60+",
+      "indicatorId": "health.lasidad.cases_projection",
+      "sourceId": "lasidad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Deaths from Alzheimer's & other dementias, latest",
+      "value": 140944.47,
+      "displayValue": "1,40,944.47",
+      "date": "2023",
+      "unit": "deaths",
+      "indicatorId": "health.gbd.deaths_alzheimers",
+      "sourceId": "gbd",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Deaths from Alzheimer's & other dementias, earliest",
+      "value": 16701.781,
+      "displayValue": "16,701.78",
+      "date": "1980",
+      "unit": "deaths",
+      "indicatorId": "health.gbd.deaths_alzheimers",
+      "sourceId": "gbd",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "sourceId": "nber",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -16.8,
+      "displayValue": "-16.8",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "sourceId": "nber",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -38.2,
+      "displayValue": "-38.2",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "sourceId": "nber",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -51.2,
+      "displayValue": "-51.2",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "sourceId": "nber",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -69.3,
+      "displayValue": "-69.3",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "sourceId": "nber",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -124.8,
+      "displayValue": "-124.8",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "sourceId": "nber",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "US: the gap sits in the assets you must actively manage: value",
+      "value": 89.4,
+      "displayValue": "89.4",
+      "date": "",
+      "unit": "US$1,000s held, two years before onset",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls",
+      "sourceId": "nber",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 2.94,
+      "displayValue": "2.9%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_age"
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 4.01,
+      "displayValue": "4%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_age"
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 10.3,
+      "displayValue": "10.3%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_age"
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 13.34,
+      "displayValue": "13.3%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_age"
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 16.25,
+      "displayValue": "16.3%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_age"
+    },
+    {
+      "label": "Dementia prevalence by age, India: value",
+      "value": 25.41,
+      "displayValue": "25.4%",
+      "date": "",
+      "unit": "% of age group with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_age"
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 9.03,
+      "displayValue": "9%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_gradients"
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 5.77,
+      "displayValue": "5.8%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_gradients"
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 8.35,
+      "displayValue": "8.4%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_gradients"
+    },
+    {
+      "label": "Who carries more dementia: women, and rural India: value",
+      "value": 5.34,
+      "displayValue": "5.3%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_gradients"
+    },
+    {
+      "label": "Dementia falls sharply with schooling: value",
+      "value": 10.29,
+      "displayValue": "10.3%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_education"
+    },
+    {
+      "label": "Dementia falls sharply with schooling: value",
+      "value": 4.52,
+      "displayValue": "4.5%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_education"
+    },
+    {
+      "label": "Dementia falls sharply with schooling: value",
+      "value": 1.54,
+      "displayValue": "1.5%",
+      "date": "",
+      "unit": "% of adults 60+ with dementia",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.prev_by_education"
+    },
+    {
+      "label": "Indians aged 60+ living with dementia, latest",
+      "value": 16.9,
+      "displayValue": "16.9",
+      "date": "2036",
+      "unit": "million people 60+",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.cases_projection"
+    },
+    {
+      "label": "Indians aged 60+ living with dementia, earliest",
+      "value": 8.8,
+      "displayValue": "8.8",
+      "date": "2016",
+      "unit": "million people 60+",
+      "sourceId": "lasidad",
+      "indicatorId": "health.lasidad.cases_projection"
+    },
+    {
+      "label": "Deaths from Alzheimer's & other dementias, latest",
+      "value": 140944.47,
+      "displayValue": "1,40,944.47",
+      "date": "2023",
+      "unit": "deaths",
+      "sourceId": "gbd",
+      "indicatorId": "health.gbd.deaths_alzheimers"
+    },
+    {
+      "label": "Deaths from Alzheimer's & other dementias, earliest",
+      "value": 16701.781,
+      "displayValue": "16,701.78",
+      "date": "1980",
+      "unit": "deaths",
+      "sourceId": "gbd",
+      "indicatorId": "health.gbd.deaths_alzheimers"
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time"
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -16.8,
+      "displayValue": "-16.8",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time"
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -38.2,
+      "displayValue": "-38.2",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time"
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -51.2,
+      "displayValue": "-51.2",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time"
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -69.3,
+      "displayValue": "-69.3",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time"
+    },
+    {
+      "label": "US: wealth falls behind years before a dementia diagnosis: value",
+      "value": -124.8,
+      "displayValue": "-124.8",
+      "date": "",
+      "unit": "US$1,000s of net worth vs similar households",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time"
+    },
+    {
+      "label": "US: the gap sits in the assets you must actively manage: value",
+      "value": 89.4,
+      "displayValue": "89.4",
+      "date": "",
+      "unit": "US$1,000s held, two years before onset",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls"
+    },
+    {
+      "label": "US: the gap sits in the assets you must actively manage: value",
+      "value": 112.6,
+      "displayValue": "112.6",
+      "date": "",
+      "unit": "US$1,000s held, two years before onset",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls"
+    },
+    {
+      "label": "US: the gap sits in the assets you must actively manage: value",
+      "value": 60,
+      "displayValue": "60",
+      "date": "",
+      "unit": "US$1,000s held, two years before onset",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls"
+    },
+    {
+      "label": "US: the gap sits in the assets you must actively manage: value",
+      "value": 86,
+      "displayValue": "86",
+      "date": "",
+      "unit": "US$1,000s held, two years before onset",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls"
+    },
+    {
+      "label": "US: the gap sits in the assets you must actively manage: value",
+      "value": 34,
+      "displayValue": "34",
+      "date": "",
+      "unit": "US$1,000s held, two years before onset",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls"
+    },
+    {
+      "label": "US: the gap sits in the assets you must actively manage: value",
+      "value": 49.4,
+      "displayValue": "49.4",
+      "date": "",
+      "unit": "US$1,000s held, two years before onset",
+      "sourceId": "nber",
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls"
+    },
+    {
+      "label": "What a year of dementia care costs, by country income: value",
+      "value": 868,
+      "displayValue": "868",
+      "date": "",
+      "unit": "US$ per person per year (2010)",
+      "sourceId": "adi",
+      "indicatorId": "health.adi.cost_per_person_by_income"
+    },
+    {
+      "label": "What a year of dementia care costs, by country income: value",
+      "value": 3109,
+      "displayValue": "3,109",
+      "date": "",
+      "unit": "US$ per person per year (2010)",
+      "sourceId": "adi",
+      "indicatorId": "health.adi.cost_per_person_by_income"
+    },
+    {
+      "label": "What a year of dementia care costs, by country income: value",
+      "value": 6827,
+      "displayValue": "6,827",
+      "date": "",
+      "unit": "US$ per person per year (2010)",
+      "sourceId": "adi",
+      "indicatorId": "health.adi.cost_per_person_by_income"
+    },
+    {
+      "label": "What a year of dementia care costs, by country income: value",
+      "value": 32865,
+      "displayValue": "32,865",
+      "date": "",
+      "unit": "US$ per person per year (2010)",
+      "sourceId": "adi",
+      "indicatorId": "health.adi.cost_per_person_by_income"
+    },
+    {
+      "label": "The poorer the country, the more the cost is unpaid family care: value",
+      "value": 58,
+      "displayValue": "58%",
+      "date": "",
+      "unit": "% of total dementia cost that is unpaid family care",
+      "sourceId": "adi",
+      "indicatorId": "health.adi.informal_care_share"
+    },
+    {
+      "label": "The poorer the country, the more the cost is unpaid family care: value",
+      "value": 65,
+      "displayValue": "65%",
+      "date": "",
+      "unit": "% of total dementia cost that is unpaid family care",
+      "sourceId": "adi",
+      "indicatorId": "health.adi.informal_care_share"
+    },
+    {
+      "label": "The poorer the country, the more the cost is unpaid family care: value",
+      "value": 40,
+      "displayValue": "40%",
+      "date": "",
+      "unit": "% of total dementia cost that is unpaid family care",
+      "sourceId": "adi",
+      "indicatorId": "health.adi.informal_care_share"
+    },
+    {
+      "label": "Out-of-pocket share of health spending, latest",
+      "value": 43.4,
+      "displayValue": "43.4%",
+      "date": "2023-03-31",
+      "unit": "% of THE",
+      "sourceId": "nha-nhsrc",
+      "indicatorId": "health.nha.oope_the_pct"
+    },
+    {
+      "label": "Out-of-pocket share of health spending, earliest",
+      "value": 64.2,
+      "displayValue": "64.2%",
+      "date": "2014-03-31",
+      "unit": "% of THE",
+      "sourceId": "nha-nhsrc",
+      "indicatorId": "health.nha.oope_the_pct"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "health.lasidad.prev_by_age",
+      "title": "Dementia prevalence by age, India",
+      "sourceId": "lasidad",
+      "sourceIndicatorId": "prevalence_by_age_60plus",
+      "unit": "% of age group with dementia",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "60–64",
+          "value": 2.94
+        },
+        {
+          "label": "65–69",
+          "value": 4.01
+        },
+        {
+          "label": "70–74",
+          "value": 10.3
+        },
+        {
+          "label": "75–79",
+          "value": 13.34
+        },
+        {
+          "label": "80–84",
+          "value": 16.25
+        },
+        {
+          "label": "85+",
+          "value": 25.41
+        }
+      ]
+    },
+    {
+      "indicatorId": "health.lasidad.prev_gradients",
+      "title": "Who carries more dementia: women, and rural India",
+      "sourceId": "lasidad",
+      "sourceIndicatorId": "prevalence_sex_residence",
+      "unit": "% of adults 60+ with dementia",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "Women",
+          "value": 9.03,
+          "group": "By sex"
+        },
+        {
+          "label": "Men",
+          "value": 5.77,
+          "group": "By sex"
+        },
+        {
+          "label": "Rural",
+          "value": 8.35,
+          "group": "Where they live"
+        },
+        {
+          "label": "Urban",
+          "value": 5.34,
+          "group": "Where they live"
+        }
+      ]
+    },
+    {
+      "indicatorId": "health.lasidad.prev_by_education",
+      "title": "Dementia falls sharply with schooling",
+      "sourceId": "lasidad",
+      "sourceIndicatorId": "prevalence_by_education",
+      "unit": "% of adults 60+ with dementia",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "No formal schooling",
+          "value": 10.29
+        },
+        {
+          "label": "Primary or less",
+          "value": 4.52
+        },
+        {
+          "label": "Middle school or higher",
+          "value": 1.54
+        }
+      ]
+    },
+    {
+      "indicatorId": "health.lasidad.cases_projection",
+      "title": "Indians aged 60+ living with dementia",
+      "sourceId": "lasidad",
+      "sourceIndicatorId": "cases_millions_projection",
+      "unit": "million people 60+",
+      "frequency": "irregular",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2016",
+        "value": 8.8
+      },
+      "latest": {
+        "date": "2036",
+        "value": 16.9
+      }
+    },
+    {
+      "indicatorId": "health.lasidad.prev_by_state",
+      "title": "Dementia prevalence by state",
+      "sourceId": "lasidad",
+      "sourceIndicatorId": "prevalence_by_state_60plus",
+      "unit": "% of adults 60+ with dementia",
+      "geography": {
+        "type": "subnational",
+        "id": "IND-states",
+        "name": "India states"
+      },
+      "rows": 0,
+      "dimensions": [],
+      "latestRows": []
+    },
+    {
+      "indicatorId": "health.gbd.deaths_alzheimers",
+      "title": "Deaths from Alzheimer's & other dementias",
+      "sourceId": "gbd",
+      "sourceIndicatorId": "1158943",
+      "unit": "deaths",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 44,
+      "earliest": {
+        "date": "1980",
+        "value": 16701.781
+      },
+      "latest": {
+        "date": "2023",
+        "value": 140944.47
+      }
+    },
+    {
+      "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+      "title": "US: wealth falls behind years before a dementia diagnosis",
+      "sourceId": "nber",
+      "sourceIndicatorId": "wealth_gap_event_study_networth",
+      "unit": "US$1,000s of net worth vs similar households",
+      "geography": {
+        "type": "country",
+        "id": "USA",
+        "name": "United States"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "6 yrs before",
+          "value": 0
+        },
+        {
+          "label": "4 yrs before",
+          "value": -16.8
+        },
+        {
+          "label": "2 yrs before",
+          "value": -38.2
+        },
+        {
+          "label": "Diagnosis",
+          "value": -51.2
+        },
+        {
+          "label": "2 yrs after",
+          "value": -69.3
+        },
+        {
+          "label": "4 yrs after",
+          "value": -124.8
+        }
+      ]
+    },
+    {
+      "indicatorId": "ref.us.nber.assets_cases_vs_controls",
+      "title": "US: the gap sits in the assets you must actively manage",
+      "sourceId": "nber",
+      "sourceIndicatorId": "asset_levels_two_years_before",
+      "unit": "US$1,000s held, two years before onset",
+      "geography": {
+        "type": "country",
+        "id": "USA",
+        "name": "United States"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "Developing dementia",
+          "value": 89.4,
+          "group": "Stocks, bonds, mutual funds"
+        },
+        {
+          "label": "Similar, no dementia",
+          "value": 112.6,
+          "group": "Stocks, bonds, mutual funds"
+        },
+        {
+          "label": "Developing dementia",
+          "value": 60,
+          "group": "Checking & savings"
+        },
+        {
+          "label": "Similar, no dementia",
+          "value": 86,
+          "group": "Checking & savings"
+        },
+        {
+          "label": "Developing dementia",
+          "value": 34,
+          "group": "Retirement (IRA)"
+        },
+        {
+          "label": "Similar, no dementia",
+          "value": 49.4,
+          "group": "Retirement (IRA)"
+        }
+      ]
+    },
+    {
+      "indicatorId": "health.adi.cost_per_person_by_income",
+      "title": "What a year of dementia care costs, by country income",
+      "sourceId": "adi",
+      "sourceIndicatorId": "cost_per_person_income_group_2010",
+      "unit": "US$ per person per year (2010)",
+      "geography": {
+        "type": "world",
+        "id": "WLD",
+        "name": "World"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "Low income",
+          "value": 868
+        },
+        {
+          "label": "Lower-middle (India's band)",
+          "value": 3109
+        },
+        {
+          "label": "Upper-middle income",
+          "value": 6827
+        },
+        {
+          "label": "High income",
+          "value": 32865
+        }
+      ]
+    },
+    {
+      "indicatorId": "health.adi.informal_care_share",
+      "title": "The poorer the country, the more the cost is unpaid family care",
+      "sourceId": "adi",
+      "sourceIndicatorId": "informal_care_share_income_group_2010",
+      "unit": "% of total dementia cost that is unpaid family care",
+      "geography": {
+        "type": "world",
+        "id": "WLD",
+        "name": "World"
+      },
+      "rows": 3,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "Low income",
+          "value": 58
+        },
+        {
+          "label": "Lower-middle (India's band)",
+          "value": 65
+        },
+        {
+          "label": "High income",
+          "value": 40
+        }
+      ]
+    },
+    {
+      "indicatorId": "health.nha.oope_the_pct",
+      "title": "Out-of-pocket share of health spending",
+      "sourceId": "nha-nhsrc",
+      "sourceIndicatorId": "Out-of-Pocket Expenditure (OOPE) as % of THE",
+      "unit": "% of THE",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 10,
+      "earliest": {
+        "date": "2014-03-31",
+        "value": 64.2
+      },
+      "latest": {
+        "date": "2023-03-31",
+        "value": 43.4
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}
