@@ -17,7 +17,7 @@
   "article": {
     "title": "What India's AQI Can See, And What It Can't",
     "standfirst": "AQI is a score from a monitored place, not a map of the air everyone breathes. India's public raw archive is real and deeper than the dashboard suggests, but the inspectable PM2.5 history is late, uneven and city-heavy.",
-    "bodyMarkdown": "## AQI is a score, not the air\n\nIndia's AQI is the number most people see first. CPCB's official National AQI material describes it as a score built from pollutant sub-indices. In plain English, each pollutant gets converted into its own index score, then the highest available sub-index becomes the overall AQI. The pollutant behind that highest score is reported as the dominant pollutant. CPCB's public categories run from Good and Satisfactory to Moderate, Poor, Very Poor and Severe.\n\nThat is useful design. A single score is easier to read than a table of PM2.5, PM10, nitrogen dioxide, sulphur dioxide, carbon monoxide, ozone and other pollutants. But it is also a compression. AQI tells you the public signal from a monitor at a place and time. It does not show every pollutant cell, every missing instrument, every station's history, or whether a public file has enough PM2.5 days for trend work.\n\nThis article starts underneath the score. The daily repository audit checked 598 CPCB station records. In 2009, CPCB listed 25 daily station-year files in the audited archive, but only 1 had usable PM2.5. In 2017, there were 504 listed station-year files, but only 80 had usable PM2.5. By 2025, the same audit found 579 listed files and 540 usable PM2.5 station-years. The lesson is simple: files, rows and pollutant cells are different layers of public evidence.\n\n## What raw data can the public download?\n\nCPCB's public raw repository is broader than a daily CSV archive. On 29 June 2026, a direct probe checked 598 station records against the public dataRepository/file-path endpoint for raw data at 15-minute, hourly, 8-hour and daily frequencies. It returned 4,346 listed 15-minute raw files, 4,367 hourly files, 4,396 8-hour files and 4,455 daily files.\n\nThat is a real public surface. It matters because the official system is not only an AQI card on a dashboard. It also exposes file paths that can be reproduced by script. But a listed path is still only a listing. It says CPCB has a raw file path for a station, frequency and year. It does not prove that the CSV has rows. It does not prove PM2.5 or PM10 is present. It does not prove the year is complete enough for a trend.\n\nA narrow spot-check confirmed that sub-daily files are not imaginary. For Sanjay Palace, Agra in 2025, the same public download endpoint returned parseable CSVs at all four frequencies: 35,040 rows at 15-minute frequency, 8,760 hourly rows, 1,095 8-hour rows and 365 daily rows. Each file had PM2.5 and PM10 columns with many non-missing values. Treat that as a proof of access, not a completeness audit for every sub-daily file.\n\nThe AQI repository is a different case. The CPCB interface has a /repository/aqi route and app-code strings for AQI repository listing and Excel export. In this run, I could not reproduce a stable public AQI audit endpoint comparable to the raw file-path call. Several dashboard routes used an encrypted browser proxy. So the raw repository is treated as scriptably verified here. The AQI repository is treated as visible in the official interface, but not used for locked historical numbers.\n\n## How much PM evidence is actually visible?\n\nThe deeper audit downloaded and checked 4,455 daily raw CSVs. Across those files, it found 916,083 non-missing PM2.5 station-days and 872,770 non-missing PM10 station-days. A station-day is one station with one non-missing pollutant value on one date. It is a coverage unit, not a pollution concentration.\n\nThe 2017 spike in listed files is the chart's warning label. CPCB lists 504 daily station-year files for 2017, up from 50 in 2016. But only 80 of the 2017 files have any usable PM2.5, and 424 have zero usable PM2.5. Many are CSV shells with daily timestamp rows and blank particulate columns. They are public files, but not public PM2.5 evidence.\n\nThe inspectable particle record becomes much stronger after 2020. PM2.5 station-days rise from 15,384 in 2017 to 74,169 in 2020, 153,321 in 2023 and 173,983 in 2025. PM10 follows the same broad pattern in the audited daily files. Do not read that as worsening air. It means more public observations are visible in the repository.\n\n## When is a station-year ready for trend work?\n\nA station-year with one PM2.5 day is visible. It is not a serious yearly record. That is why this audit counts four thresholds: any PM2.5 day, 30 or more days, 180 or more days and 300 or more days.\n\nThe distinction is large in the older archive. In 2017, 80 station-years had any PM2.5 day, 76 had at least 30 days, 42 had at least 180 days and only 23 had at least 300 days. By 2025, the four counts were 540, 536, 490 and 444. The gap narrows, but it does not disappear.\n\nThe 300-day line is not an official CPCB standard. It is an audit threshold for readers who want a fuller annual history. The point is practical. A dashboard can show a station. A file list can show a year. A trend analyst still has to ask how many actual pollutant days sit inside that station-year.\n\n## Where does the station map go thin?\n\nThe station network measures monitored India. It does not measure all of urban India. The CPCB/OAQ station hierarchy used here has 335 distinct city names. Census 2011 counts 4,041 statutory towns. On that denominator, about 91.7 percent, or about 92 percent, of statutory towns are outside this station-list comparison.\n\nThis is a place-visibility denominator. It is not a population-exposure estimate. It does not mean 92 percent of Indians lack AQI data. It also does not mean every statutory town needs its own monitor. Some towns are small, some are near larger airsheds, and station-list names do not map perfectly to Census names.\n\nThe narrower finding is still important. AQI is a monitor-based public signal. Before we even ask whether a file has PM2.5 cells, many legally urban places are outside the public station-list frame used in this audit.\n\n## Which cities have the deepest PM2.5 archive?\n\nThe usable PM2.5 archive is city-heavy. New Delhi has 73,348 PM2.5 station-days in this audit across 25 stations with any usable PM2.5. Mumbai has 41,502 across 28 such stations. Delhi has 39,328, Bengaluru 25,311 and Hyderabad 22,663.\n\nThat is not an air-quality ranking. A city can rank high because it has more stations, older stations, fewer missing PM2.5 cells, or all three. A lower-ranked city may be cleaner, dirtier or simply less visible in this public archive.\n\nFor national claims, this concentration matters. The public historical archive is strongest where the monitoring network is dense and older. It is weakest where stations arrived late, publish thin histories, or never appear in the public station list used here.\n\n## When did stations first become usable?\n\nFirst usable PM2.5 year is stricter than first listed file year. It asks when a station first has any non-missing PM2.5 value in the daily repository files.\n\nOnly 200 of the 598 station records had usable PM2.5 before 2020. The recent record is much stronger: 508 station-years had usable PM2.5 in 2023, 524 in 2024 and 540 in 2025. Across the full daily audit, 396 stations had at least 1,000 usable PM2.5 days.\n\nThat makes the archive good for many current comparisons and weaker for long historical panels. A station appearing in an older repository year does not automatically give you a PM2.5 trend from that year. Sometimes the file exists, but the particle cells do not.\n\n## Where do file years outrun PM2.5 years?\n\nSome station histories look long until you count usable PM2.5 years. Airoli in Navi Mumbai has 17 listed daily years but only 5 usable PM2.5 years, a gap of 12. City Railway Station and Sanegurava Halli in Bengaluru have 11 listed years and zero usable PM2.5 years in the audited daily files.\n\nAcross all 598 station records, 40 had no usable PM2.5 in daily files. That splits into 22 records with listed daily files but no usable PM2.5, and 18 records with no listed daily repository file in the audit.\n\nThis does not prove a station failed. It says the public daily repository does not support a PM2.5 history for those station-years. For a public audit, that is the difference that matters.\n\n## What does a file with rows but no PM look like?\n\nSome files are not empty. They still do not help with PM2.5 or PM10 history. The examples in this chart have daily rows and zero usable PM2.5 and PM10 days.\n\nRows are a middle layer of evidence. A file can contain timestamps and gas pollutants such as NO, NO2, SO2, CO or ozone while the PM columns are blank or unusable. For AQI, different pollutants can matter on different days. For a particle-pollution history, PM2.5 and PM10 cells have to be present.\n\nThis is why the article keeps file listing, rows and pollutant cells separate. If those are collapsed into one word, the archive looks cleaner than it is.\n\n## What does OAQ add?\n\nOAQ is useful because it mirrors CPCB data in a cleaner API shape. The inspected latest snapshot was generated on 23 June 2026 at 17:40 IST. It had 598 station records. At that moment, 203 records had at least one of the eight main pollutant fields, 139 had all eight, 185 had PM2.5 and 183 had PM10. The other 395 records had no main pollutant value in that snapshot.\n\nAfter checking OAQ's documentation and signed data-lake access, it is not accurate to call OAQ latest-only. A small authenticated probe found CPCB annual aggregate history for five tested stations in 2026, running from 1 January to 23 June. The same annual paths for 2022, 2023, 2024 and 2025 returned not found for those stations. For Sanjay Palace, Agra, monthly aggregates worked for January through June 2026, while December 2025 returned not found. So OAQ has signed recent history, but it is not the long 2009-2025 public archive audited here.\n\nThe station metadata snapshot also has useful public fields. All 598 records had coordinates, station type, a latest-seen timestamp and an agency or operator suffix in the station name. It did not expose clean commissioning or activation dates. The public can inspect where a station is and who appears to operate it. It cannot cleanly inspect every station's start date from this metadata alone.\n\n## How should you read these numbers?\n\nRead this as a visibility audit, not as a pollution trend. The daily audit used CPCB's public raw repository to list, download and inspect station-year CSVs. The frequency audit counted raw file listings at 15-minute, hourly, 8-hour and daily frequencies. The sub-daily spot-check proved those downloads can work for one station-year. The PM2.5 and PM10 completeness numbers come from downloaded daily files only.\n\nThe public surfaces are different. The all-India AQI portal is the current public signal. Advance search is a human-oriented dashboard and export surface. The CPCB raw repository endpoint is reproducible and audited here. OAQ is a clean latest mirror and, behind signed access, a recent-history surface. In this audit, OAQ history was spot-checked for 2026 only and was not used as the locked long archive. The AQI repository is visible in the CPCB interface and app bundle, but a stable public AQI audit endpoint was not reproduced for this article.\n\nThe caveats are real. This audit does not validate calibration, siting, QA flags, monitor downtime or whether a station represents a whole city. The statutory-town comparison is a place denominator, not a population denominator. The 300-day threshold is an audit choice for trend-readiness, not an official rule.\n\nWhat India can say with confidence is that public AQI sits on a real monitoring system, and CPCB exposes more raw public data than casual dashboard browsing suggests. What it cannot honestly say from these files alone is that the public can inspect a long, even, all-India PM2.5 record."
+    "bodyMarkdown": "## AQI is a score, not the air\n\nIndia's AQI is the number most people see first. CPCB's official National AQI material describes it as a score built from pollutant sub-indices. In plain English, each pollutant gets converted into its own index score, then the highest available sub-index becomes the overall AQI. The pollutant behind that highest score is reported as the dominant pollutant. CPCB's public categories run from Good and Satisfactory to Moderate, Poor, Very Poor and Severe.\n\nThat is useful design. A single score is easier to read than a table of PM2.5, PM10, nitrogen dioxide, sulphur dioxide, carbon monoxide, ozone and other pollutants. But it is also a compression. AQI tells you the public signal from a monitor at a place and time. It does not show every pollutant cell, every missing instrument, every station's history, or whether a public file has enough PM2.5 days for trend work.\n\nThis article starts underneath the score. The daily repository audit checked 598 CPCB station records. In 2009, CPCB listed 25 daily station-year files in the audited archive, but only 1 had usable PM2.5. In 2017, there were 504 listed station-year files, but only 80 had usable PM2.5. By 2025, the same audit found 579 listed files and 540 usable PM2.5 station-years. The lesson is simple: files, rows and pollutant cells are different layers of public evidence.\n\n## What raw data can the public download?\n\nCPCB's public raw repository is broader than a daily CSV archive. On 29 June 2026, a direct probe checked 598 station records against the public dataRepository/file-path endpoint for raw data at 15-minute, hourly, 8-hour and daily frequencies. It returned 4,346 listed 15-minute raw files, 4,367 hourly files, 4,396 8-hour files and 4,455 daily files.\n\nThat is a real public surface. It matters because the official system is not only an AQI card on a dashboard. It also exposes file paths that can be reproduced by script. But a listed path is still only a listing. It says CPCB has a raw file path for a station, frequency and year. It does not prove that the CSV has rows. It does not prove PM2.5 or PM10 is present. It does not prove the year is complete enough for a trend.\n\nA narrow spot-check confirmed that sub-daily files are not imaginary. For Sanjay Palace, Agra in 2025, the same public download endpoint returned parseable CSVs at all four frequencies: 35,040 rows at 15-minute frequency, 8,760 hourly rows, 1,095 8-hour rows and 365 daily rows. Each file had PM2.5 and PM10 columns with many non-missing values. Treat that as a proof of access, not a completeness audit for every sub-daily file.\n\nThe AQI repository is a different case. The CPCB interface has a /repository/aqi route and app-code strings for AQI repository listing and Excel export. In this run, I could not reproduce a stable public AQI audit endpoint comparable to the raw file-path call. Several dashboard routes used an encrypted browser proxy. So the raw repository is treated as scriptably verified here. The AQI repository is treated as visible in the official interface, but not used for locked historical numbers.\n\n## How much PM evidence is actually visible?\n\nThe deeper audit downloaded and checked 4,455 daily raw CSVs. Across those files, it found 916,083 non-missing PM2.5 station-days and 872,770 non-missing PM10 station-days. A station-day is one station with one non-missing pollutant value on one date. It is a coverage unit, not a pollution concentration.\n\nThe 2017 spike in listed files is the chart's warning label. CPCB lists 504 daily station-year files for 2017, up from 50 in 2016. But only 80 of the 2017 files have any usable PM2.5, and 424 have zero usable PM2.5. Many are CSV shells with daily timestamp rows and blank particulate columns. They are public files, but not public PM2.5 evidence.\n\nThe inspectable particle record becomes much stronger after 2020. PM2.5 station-days rise from 15,384 in 2017 to 74,169 in 2020, 153,321 in 2023 and 173,983 in 2025. PM10 follows the same broad pattern in the audited daily files. Do not read that as worsening air. It means more public observations are visible in the repository.\n\n## When is a station-year ready for trend work?\n\nA station-year with one PM2.5 day is visible. It is not a serious yearly record. That is why this audit counts four thresholds: any PM2.5 day, 30 or more days, 180 or more days and 300 or more days.\n\nThe distinction is large in the older archive. In 2017, 80 station-years had any PM2.5 day, 76 had at least 30 days, 42 had at least 180 days and only 23 had at least 300 days. By 2025, the four counts were 540, 536, 490 and 444. The gap narrows, but it does not disappear.\n\nThe 300-day line is not an official CPCB standard. It is an audit threshold for readers who want a fuller annual history. The point is practical. A dashboard can show a station. A file list can show a year. A trend analyst still has to ask how many actual pollutant days sit inside that station-year.\n\n## Where does the station map go thin?\n\nThe station network measures monitored India. It does not measure all of urban India. The CPCB/OAQ station hierarchy used here has 335 distinct city names. Census 2011 counts 4,041 statutory towns. On that denominator, about 91.7 percent, or about 92 percent, of statutory towns are outside this station-list comparison.\n\nThis is a place-visibility denominator. It is not a population-exposure estimate. It does not mean 92 percent of Indians lack AQI data. It also does not mean every statutory town needs its own monitor. Some towns are small, some are near larger airsheds, and station-list names do not map perfectly to Census names.\n\nThe narrower finding is still important. AQI is a monitor-based public signal. Before we even ask whether a file has PM2.5 cells, many legally urban places are outside the public station-list frame used in this audit.\n\n## Which cities have the deepest PM2.5 archive?\n\nThe usable PM2.5 archive is city-heavy. New Delhi has 73,348 PM2.5 station-days in this audit across 25 stations with any usable PM2.5. Mumbai has 41,502 across 28 such stations. Delhi has 39,328, Bengaluru 25,311 and Hyderabad 22,663.\n\nThat is not an air-quality ranking. A city can rank high because it has more stations, older stations, fewer missing PM2.5 cells, or all three. A lower-ranked city may be cleaner, dirtier or simply less visible in this public archive.\n\nFor national claims, this concentration matters. The public historical archive is strongest where the monitoring network is dense and older. It is weakest where stations arrived late, publish thin histories, or never appear in the public station list used here.\n\n## When did stations first become usable?\n\nFirst usable PM2.5 year is stricter than first listed file year. It asks when a station first has any non-missing PM2.5 value in the daily repository files.\n\nOnly 200 of the 598 station records had usable PM2.5 before 2020. The recent record is much stronger: 508 station-years had usable PM2.5 in 2023, 524 in 2024 and 540 in 2025. Across the full daily audit, 396 stations had at least 1,000 usable PM2.5 days.\n\nThat makes the archive good for many current comparisons and weaker for long historical panels. A station appearing in an older repository year does not automatically give you a PM2.5 trend from that year. Sometimes the file exists, but the particle cells do not.\n\n## Where do file years outrun PM2.5 years?\n\nSome station histories look long until you count usable PM2.5 years. Airoli in Navi Mumbai has 17 listed daily years but only 5 usable PM2.5 years, a gap of 12. City Railway Station and Sanegurava Halli in Bengaluru have 11 listed years and zero usable PM2.5 years in the audited daily files.\n\nAcross all 598 station records, 40 had no usable PM2.5 in daily files. That splits into 22 records with listed daily files but no usable PM2.5, and 18 records with no listed daily repository file in the audit.\n\nThis does not prove a station failed. It says the public daily repository does not support a PM2.5 history for those station-years. For a public audit, that is the difference that matters.\n\n## What does a file with rows but no PM look like?\n\nSome files are not empty. They still do not help with PM2.5 or PM10 history. The examples in this chart have daily rows and zero usable PM2.5 and PM10 days.\n\nRows are a middle layer of evidence. A file can contain timestamps and gas pollutants such as NO, NO2, SO2, CO or ozone while the PM columns are blank or unusable. For AQI, different pollutants can matter on different days. For a particle-pollution history, PM2.5 and PM10 cells have to be present.\n\nThis is why the article keeps file listing, rows and pollutant cells separate. If those are collapsed into one word, the archive looks cleaner than it is.\n\n## What does OAQ add?\n\nOAQ is useful because it mirrors CPCB data in a cleaner API shape. The inspected latest snapshot was generated on 23 June 2026 at 17:40 IST. It had 598 station records. At that moment, 203 records had at least one of the eight main pollutant fields, 139 had all eight, 185 had PM2.5 and 183 had PM10. The other 395 records had no main pollutant value in that snapshot.\n\nAfter checking OAQ's documentation and signed data-lake access, it is not accurate to call OAQ latest-only. A broader authenticated probe found CPCB annual aggregate history for 31 old or deep-history station IDs in 2026, running from 1 January to 23 June. The same annual path shape returned not found for every tested pre-2026 year: 2009, 2011, 2013, 2015, 2017, 2019 and every year from 2020 through 2025. Monthly boundary checks on 15 stations worked for January through June 2026, but returned not found for January, June and December 2025. Daily raw checks on 8 stations also found 2026 dates and no tested 2025 dates. So OAQ has signed recent history, but this probe still found no OAQ CPCB history before 2026.\n\nThe station metadata snapshot also has useful public fields. All 598 records had coordinates, station type, a latest-seen timestamp and an agency or operator suffix in the station name. It did not expose clean commissioning or activation dates. The public can inspect where a station is and who appears to operate it. It cannot cleanly inspect every station's start date from this metadata alone.\n\n## How should you read these numbers?\n\nRead this as a visibility audit, not as a pollution trend. The daily audit used CPCB's public raw repository to list, download and inspect station-year CSVs. The frequency audit counted raw file listings at 15-minute, hourly, 8-hour and daily frequencies. The sub-daily spot-check proved those downloads can work for one station-year. The PM2.5 and PM10 completeness numbers come from downloaded daily files only.\n\nThe public surfaces are different. The all-India AQI portal is the current public signal. Advance search is a human-oriented dashboard and export surface. The CPCB raw repository endpoint is reproducible and audited here. OAQ is a clean latest mirror and, behind signed access, a recent-history surface. In this audit, OAQ history was boundary-checked around 2026 and was not used as the locked long archive. The AQI repository is visible in the CPCB interface and app bundle, but a stable public AQI audit endpoint was not reproduced for this article.\n\nThe caveats are real. This audit does not validate calibration, siting, QA flags, monitor downtime or whether a station represents a whole city. The statutory-town comparison is a place denominator, not a population denominator. The 300-day threshold is an audit choice for trend-readiness, not an official rule.\n\nWhat India can say with confidence is that public AQI sits on a real monitoring system, and CPCB exposes more raw public data than casual dashboard browsing suggests. What it cannot honestly say from these files alone is that the public can inspect a long, even, all-India PM2.5 record."
   },
   "editorialPlan": {
     "audience": "Readers who use AQI but want to know what public evidence sits underneath it.",
@@ -109,7 +109,7 @@
       {
         "term": "latest mirror",
         "plainMeaning": "A latest mirror is a current copy of what a data source sees at one time, shaped for easier access.",
-        "whyItMattersHere": "OAQ helps with current CPCB visibility and signed recent history, but the long audit in this article still comes from CPCB's public repository."
+        "whyItMattersHere": "OAQ helps with current CPCB visibility and signed recent history, but the boundary probe did not find tested CPCB history before 2026."
       },
       {
         "term": "statutory town",
@@ -202,11 +202,11 @@
     },
     {
       "visualId": "OAQ adds signed history, but not the long archive",
-      "takeaway": "OAQ's latest CPCB snapshot had 598 station records, and a signed-history spot-check found 2026 aggregates but not older tested years.",
-      "detail": "OAQ is useful because it mirrors CPCB data in a cleaner API shape. In the 23 June 2026 latest snapshot, 203 records had at least one of the eight main pollutant fields and 139 had all eight. A signed OAQ history probe also returned 2026 annual aggregates for five tested CPCB stations, with dates from 1 January to 23 June, while the same annual paths for 2022-2025 returned not found. That makes OAQ a real recent-history surface, but not the source used here for the long 2009-2025 audit.",
+      "takeaway": "OAQ's latest CPCB snapshot had 598 station records, and a signed-history boundary probe found 2026 aggregates but no tested pre-2026 history.",
+      "detail": "OAQ is useful because it mirrors CPCB data in a cleaner API shape. In the 23 June 2026 latest snapshot, 203 records had at least one of the eight main pollutant fields and 139 had all eight. A signed OAQ history probe returned 2026 annual aggregates for 31 old or deep-history CPCB stations, with dates from 1 January to 23 June, while every tested pre-2026 annual path returned not found. That makes OAQ a real recent-history surface, but not the source used here for the long 2009-2025 audit.",
       "whyShowThis": "It separates OAQ's useful current/recent API surface from the longer CPCB repository history used for locked numbers.",
-      "howToRead": "Read the bars as the latest snapshot denominator and pollutant availability at one moment. Read the history claim in the text as a separate authenticated spot-check, not as a full OAQ completeness audit.",
-      "mistakeToAvoid": "Do not say OAQ has no history. Also do not treat the signed 2026 spot-check as a replacement for the CPCB long-history repository audit.",
+      "howToRead": "Read the bars as the latest snapshot denominator and pollutant availability at one moment. Read the history claim in the text as a separate authenticated boundary probe, not as a full OAQ completeness audit.",
+      "mistakeToAvoid": "Do not say OAQ has no history. Also do not treat the signed 2026 boundary probe as a replacement for the CPCB long-history repository audit.",
       "mobileNote": "The bars are moment-in-time availability counts, not station histories."
     }
   ],
@@ -256,7 +256,7 @@
     "CPCB National Air Quality Index official material: https://cpcb.nic.in/National-Air-Quality-Index/ and the CPCB CCR AQI report linked from the portal.",
     "CPCB Central Control Room raw repository route inspected at https://airquality.cpcb.gov.in/ccr/#/repository/data; reproducible raw file-list endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/file-path and download endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/download-excel-file.",
     "CPCB CCR public AQI surfaces inspected at /#/all-india-aqi-portal, /#/caaqm-dashboard-all/advance-search and /#/repository/aqi; several dashboard routes used an encrypted browser proxy, and a stable public AQI audit endpoint was not reproduced.",
-    "OAQ CPCB latest mirror and station hierarchy snapshot inspected through https://oaq.notf.in, generated 2026-06-23T17:40:12+05:30. OAQ signed history paths were spot-checked with authenticated access for five CPCB station IDs; 2026 annual aggregates returned data and 2022-2025 annual aggregate paths returned not found for those tested stations.",
+    "OAQ CPCB latest mirror and station hierarchy snapshot inspected through https://oaq.notf.in, generated 2026-06-23T17:40:12+05:30. OAQ signed history paths were boundary-checked with authenticated access on 2026-06-29: 31 old/deep CPCB station IDs returned 2026 annual aggregates, while every tested pre-2026 annual aggregate path returned not found.",
     "Census 2011 statutory-town count from the Census India urban frame: https://censusindia.gov.in/nada/index.php/catalog/42811."
   ],
   "caveats": [
@@ -267,7 +267,7 @@
     "The statutory-town comparison is a place-visibility denominator, not a population-exposure denominator, and not a claim that every statutory town needs its own monitor.",
     "The audit does not validate monitor calibration, siting, QA flags, downtime or whether a station represents a whole city or airshed.",
     "The 300-day threshold is an audit threshold for fuller annual history. It is not an official CPCB completeness standard.",
-    "OAQ has signed recent-history endpoints, not only latest data. The authenticated spot-check found 2026 CPCB aggregate history for tested stations, but did not find older tested years and was not a full OAQ completeness audit."
+    "OAQ has signed recent-history endpoints, not only latest data. The authenticated boundary probe found 2026 CPCB aggregate history for tested stations, but did not find tested pre-2026 annual, monthly or daily history and was not a full OAQ completeness audit."
   ],
   "lockedNumbersUsed": [
     "CPCB official AQI categories: Good, Satisfactory, Moderate, Poor, Very Poor and Severe; overall AQI is the maximum pollutant sub-index and the corresponding pollutant is the dominant pollutant.",
@@ -290,7 +290,7 @@
     "OAQ latest CPCB snapshot generated 2026-06-23T17:40:12+05:30: 598 station records, 203 with any main pollutant, 139 with all 8 main pollutants, 185 with PM2.5, 183 with PM10, and 395 with no main pollutant value at that moment.",
     "CPCB sub-daily spot-check for Sanjay Palace, Agra in 2025: 15-minute file 35,040 rows with 30,888 PM2.5 rows; hourly file 8,760 rows with 8,131 PM2.5 rows; 8-hour file 1,095 rows with 1,068 PM2.5 rows; daily file 365 rows with 359 PM2.5 rows.",
     "Station metadata snapshot: 598 records with coordinates, station type, latest-seen timestamp and agency/operator suffix in station name; 0 with commissioning or activation date in that snapshot.",
-    "OAQ authenticated history spot-check on 2026-06-29: five CPCB station IDs tested (307, 106, 107, 119, 308); annual aggregate paths for 2026 returned data from 2026-01-01 to 2026-06-23; annual paths for 2022-2025 returned not found for all five tested stations; Sanjay Palace monthly aggregate paths returned data for 2026-01 through 2026-06 and not found for 2025-12."
+    "OAQ authenticated history boundary probe on 2026-06-29: 31 old/deep CPCB station IDs tested against annual aggregate paths; 2026 returned data from 2026-01-01 to 2026-06-23 for all 31; selected pre-2026 annual paths for 2009, 2011, 2013, 2015, 2017, 2019 and 2020-2025 returned not found for all 31; monthly paths for 15 stations returned data for 2026-01 through 2026-06 and not found for tested 2025 months; daily checks on 8 stations found tested 2026 dates and no tested 2025 dates."
   ],
   "qualityFlags": [],
   "generatedAt": "2026-06-29T11:16:57.030Z",
@@ -617,7 +617,7 @@
       {
         "visualId": "v24.air.oaq.cpcb.authenticated_history_spotcheck",
         "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck",
-        "title": "Authenticated OAQ CPCB history spot-check",
+        "title": "Authenticated OAQ CPCB history boundary probe",
         "sourceId": "oaq",
         "unit": "probes",
         "role": "context",
@@ -2076,54 +2076,63 @@
         "indicatorId": "air.oaq.cpcb.latest_station_snapshot"
       },
       {
-        "label": "Authenticated OAQ CPCB history spot-check: value",
-        "value": 5,
-        "displayValue": "5",
+        "label": "Authenticated OAQ CPCB history boundary probe: value",
+        "value": 31,
+        "displayValue": "31",
         "date": "",
         "unit": "probes",
         "sourceId": "oaq",
         "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck"
       },
       {
-        "label": "Authenticated OAQ CPCB history spot-check: value",
-        "value": 5,
-        "displayValue": "5",
+        "label": "Authenticated OAQ CPCB history boundary probe: value",
+        "value": 31,
+        "displayValue": "31",
         "date": "",
         "unit": "probes",
         "sourceId": "oaq",
         "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck"
       },
       {
-        "label": "Authenticated OAQ CPCB history spot-check: value",
-        "value": 20,
-        "displayValue": "20",
+        "label": "Authenticated OAQ CPCB history boundary probe: value",
+        "value": 372,
+        "displayValue": "372",
         "date": "",
         "unit": "probes",
         "sourceId": "oaq",
         "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck"
       },
       {
-        "label": "Authenticated OAQ CPCB history spot-check: value",
-        "value": 6,
-        "displayValue": "6",
+        "label": "Authenticated OAQ CPCB history boundary probe: value",
+        "value": 90,
+        "displayValue": "90",
         "date": "",
         "unit": "probes",
         "sourceId": "oaq",
         "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck"
       },
       {
-        "label": "Authenticated OAQ CPCB history spot-check: value",
-        "value": 1,
-        "displayValue": "1",
+        "label": "Authenticated OAQ CPCB history boundary probe: value",
+        "value": 45,
+        "displayValue": "45",
         "date": "",
         "unit": "probes",
         "sourceId": "oaq",
         "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck"
       },
       {
-        "label": "Authenticated OAQ CPCB history spot-check: value",
-        "value": 123,
-        "displayValue": "123",
+        "label": "Authenticated OAQ CPCB history boundary probe: value",
+        "value": 16,
+        "displayValue": "16",
+        "date": "",
+        "unit": "probes",
+        "sourceId": "oaq",
+        "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck"
+      },
+      {
+        "label": "Authenticated OAQ CPCB history boundary probe: value",
+        "value": 96,
+        "displayValue": "96",
         "date": "",
         "unit": "probes",
         "sourceId": "oaq",
@@ -2990,7 +2999,7 @@
       },
       {
         "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck",
-        "title": "Authenticated OAQ CPCB history spot-check",
+        "title": "Authenticated OAQ CPCB history boundary probe",
         "sourceId": "oaq",
         "sourceIndicatorId": "air.oaq.cpcb.authenticated_history_spotcheck",
         "unit": "probes",
@@ -2999,32 +3008,36 @@
           "id": "IN",
           "name": "India"
         },
-        "rows": 6,
+        "rows": 7,
         "dimensions": [],
         "latestRows": [
           {
-            "label": "CPCB station IDs tested",
-            "value": 5
+            "label": "CPCB station IDs tested against annual paths",
+            "value": 31
           },
           {
             "label": "2026 annual aggregate paths returned data",
-            "value": 5
+            "value": 31
           },
           {
-            "label": "2022-2025 annual aggregate paths returned not found",
-            "value": 20
+            "label": "Selected pre-2026 annual paths returned not found",
+            "value": 372
           },
           {
-            "label": "Sanjay Palace 2026 monthly aggregate paths returned data",
-            "value": 6
+            "label": "2026 monthly aggregate paths returned data",
+            "value": 90
           },
           {
-            "label": "Sanjay Palace December 2025 monthly aggregate path returned not found",
-            "value": 1
+            "label": "Selected 2025 monthly paths returned not found",
+            "value": 45
           },
           {
-            "label": "Days in Sanjay Palace 2026 annual aggregate",
-            "value": 123
+            "label": "Tested 2026 daily raw paths returned data",
+            "value": 16
+          },
+          {
+            "label": "Tested 2025 daily raw paths returned not found",
+            "value": 96
           }
         ]
       }
