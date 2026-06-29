@@ -371,7 +371,7 @@ def main() -> None:
         "air.oaq.cpcb.latest_station_snapshot",
         table_artifact(
             "air.oaq.cpcb.latest_station_snapshot",
-            "The latest OAQ mirror is a snapshot, not history",
+            "OAQ adds signed history, but not the long archive",
             "station records",
             [
                 {"label": "CPCB station records in latest OAQ snapshot", "value": len(oaq_stations)},

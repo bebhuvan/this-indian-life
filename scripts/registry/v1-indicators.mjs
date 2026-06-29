@@ -3632,7 +3632,8 @@ export const v1Questions = [
       "air.cpcb.repository.first_pm25_year",
       "air.cpcb.repository.listed_years_missing_pm25",
       "air.cpcb.repository.rows_without_pm_examples",
-      "air.oaq.cpcb.latest_station_snapshot"
+      "air.oaq.cpcb.latest_station_snapshot",
+      "air.oaq.cpcb.authenticated_history_spotcheck"
     ],
     core: [
       "air.cpcb.repository.listed_station_files",
@@ -3659,7 +3660,8 @@ export const v1Questions = [
       "air.cpcb.repository.file_vs_pm25_years",
       "air.cpcb.repository.listed_years_missing_pm25",
       "air.cpcb.repository.rows_without_pm_examples",
-      "air.oaq.cpcb.latest_station_snapshot"
+      "air.oaq.cpcb.latest_station_snapshot",
+      "air.oaq.cpcb.authenticated_history_spotcheck"
     ],
     visualPlan: [
       { series: [
@@ -3692,8 +3694,8 @@ export const v1Questions = [
         why: "This is the audit check behind the article: some stations have long file histories but much shorter usable PM2.5 histories.", read: "Each bar is the gap between years with a listed daily file and years with any non-missing PM2.5 for that station.", watch: "A large gap does not prove the station failed; it shows that the public daily files do not support a PM2.5 trend for those years." },
       { indicator: "air.cpcb.repository.rows_without_pm_examples", chart: "tableBars", title: "Daily rows can exist while PM values are blank", size: "small", unit: "daily rows", beat: "case-study", subtitle: "Selected CPCB daily files with rows and zero usable PM2.5 or PM10 values",
         why: "Concrete examples keep the caveat honest: some files are not empty, yet still have no PM2.5 or PM10.", read: "These selected examples span full-year and partial-year files with daily rows and zero usable PM2.5 and PM10 days.", watch: "Other pollutant columns may exist; this chart is about PM coverage only." },
-      { indicator: "air.oaq.cpcb.latest_station_snapshot", chart: "tableBars", title: "The latest OAQ mirror is a snapshot, not history", size: "small", unit: "station records", beat: "mirror", subtitle: "OAQ CPCB latest snapshot · generated 23 Jun 2026 at 17:40 IST",
-        why: "OAQ is clean for current snapshots, but the latest mirror is not the same as a deep historical archive.", read: "Bars compare CPCB station records in the latest OAQ snapshot with records carrying any main pollutant, all main pollutants, PM2.5, PM10 or no main pollutant at that moment.", watch: "A live snapshot is narrower than a repository audit." }
+      { indicator: "air.oaq.cpcb.latest_station_snapshot", chart: "tableBars", title: "OAQ adds signed history, but not the long archive", size: "small", unit: "station records", beat: "mirror", subtitle: "OAQ CPCB latest snapshot · generated 23 Jun 2026 at 17:40 IST",
+        why: "OAQ is clean for latest access and signed recent history, but the tested OAQ history does not replace the longer CPCB repository audit.", read: "Bars compare CPCB station records in the latest OAQ snapshot with records carrying any main pollutant, all main pollutants, PM2.5, PM10 or no main pollutant at that moment.", watch: "The history finding comes from an authenticated spot-check: 2026 aggregates worked for tested stations, while 2022-2025 annual aggregate paths returned not found." }
     ]
   },
   {
