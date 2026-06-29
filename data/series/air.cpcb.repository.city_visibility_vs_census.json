@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "air.cpcb.repository.city_visibility_vs_census",
+  "title": "CPCB station-list city names versus Census statutory towns",
+  "sourceId": "cpcb-census",
+  "sourceIndicatorId": "air.cpcb.repository.city_visibility_vs_census",
+  "sourceUrl": "https://censusindia.gov.in/nada/index.php/catalog/42811",
+  "unit": "towns/city names",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-29T11:23:46.581742Z",
+  "rows": [
+    {
+      "label": "Statutory towns in Census 2011",
+      "value": 4041
+    },
+    {
+      "label": "City names in CPCB/OAQ station list",
+      "value": 335
+    },
+    {
+      "label": "Statutory towns not visible in this station list",
+      "value": 3706
+    }
+  ],
+  "dimensions": [],
+  "metadata": {
+    "cpcbCityNames": 335,
+    "censusStatutoryTowns": 4041,
+    "coveredSharePercent": 8.3,
+    "notVisibleSharePercent": 91.7,
+    "method": "Compared distinct city names in the OAQ CPCB station hierarchy used for the CPCB audit with the Census 2011 count of statutory towns. This is a visibility denominator, not a station-siting target."
+  }
+}
