@@ -3586,12 +3586,115 @@ export const v1Questions = [
     ]
   },
   {
+    id: "q.energy.demand_shape",
+    question: "When does India actually turn the power on?",
+    priority: "core",
+    indicators: ["energy.griddemand.duck_summer"],
+    core: ["energy.griddemand.duck_summer"],
+    // Blended: the intraday duck (demand vs solar vs net) comes from the Mendeley/Grid-India
+    // hourly demand+solar dataset (CC-BY); the multi-year peak-demand context comes from
+    // NITI ICED's loadCurve (Grid-India). Two independent cuts of Grid-India operational data
+    // — the only article in the energy cluster about the SHAPE of a day, not the annual total.
+    context: [
+      "energy.griddemand.day_shape_seasonal",
+      "energy.griddemand.annual_peak"
+    ],
+    visualPlan: [
+      { indicator: "energy.griddemand.duck_summer", chart: "loadCurve", title: "Solar peaks at noon, demand peaks after dark", size: "hero", unit: "GW", beat: "answer",
+        why: "The whole storage argument in one chart: solar slashes midday demand, but the day's peak lands in the evening, when solar has gone to zero.", read: "Electricity demand against solar generation across an average summer day; the teal line is what's left for everything else to meet (demand minus solar).", watch: "Solar's share is near zero at the 7-8pm peak, so adding more solar barely touches the moment the grid is most stretched." },
+      { indicator: "energy.griddemand.day_shape_seasonal", chart: "loadCurve", title: "How the daily peak moves with the season", size: "feature", unit: "GW", beat: "seasonality",
+        why: "The peak is not fixed to one hour: it travels across the day as the seasons turn.", read: "Average hourly demand for a typical summer, monsoon and winter day.", watch: "Winter has a sharper morning shoulder; summer and monsoon stay high into the evening." },
+      { indicator: "energy.griddemand.annual_peak", chart: "line", title: "India's peak demand keeps breaking records", size: "feature", unit: "GW", window: "full", beat: "why-it-matters",
+        why: "Why the shape matters more every year: the single hour the grid has to serve keeps climbing.", read: "The highest hour of all-India demand met, each year from 2017.", watch: "These are instantaneous peaks in gigawatts, not annual energy; one hot evening can set the record." }
+    ]
+  },
+  {
     id: "q.air.today",
     question: "How bad is India's air today?",
     priority: "core",
     indicators: ["climate.waqi.delhi", "climate.waqi.mumbai", "climate.waqi.kolkata", "climate.waqi.chennai", "climate.waqi.bengaluru"],
     core: ["climate.waqi.delhi", "climate.waqi.mumbai", "climate.waqi.kolkata", "climate.waqi.chennai", "climate.waqi.bengaluru"],
     context: []
+  },
+  {
+    id: "q.air.data_poverty",
+    slug: "how-much-air-quality-data-can-india-see",
+    question: "What India's AQI Can See, And What It Can't",
+    priority: "core",
+    indicators: [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days",
+      "air.cpcb.repository.station_years_with_pm25_300_days",
+      "air.cpcb.repository.raw_frequency_file_counts",
+      "air.cpcb.repository.city_visibility_vs_census",
+      "air.cpcb.repository.city_pm25_days",
+      "air.cpcb.repository.first_pm25_year",
+      "air.cpcb.repository.listed_years_missing_pm25",
+      "air.cpcb.repository.rows_without_pm_examples",
+      "air.oaq.cpcb.latest_station_snapshot"
+    ],
+    core: [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days"
+    ],
+    context: [
+      "air.cpcb.repository.station_years_with_rows",
+      "air.cpcb.repository.zero_pm25_listed_files",
+      "air.cpcb.repository.pm10_observed_days",
+      "air.cpcb.repository.station_years_with_pm25_1_days",
+      "air.cpcb.repository.station_years_with_pm25_30_days",
+      "air.cpcb.repository.station_years_with_pm25_180_days",
+      "air.cpcb.repository.station_years_with_pm25_300_days",
+      "air.cpcb.repository.station_years_with_pm10_1_days",
+      "air.cpcb.repository.station_years_with_pm10_30_days",
+      "air.cpcb.repository.station_years_with_pm10_180_days",
+      "air.cpcb.repository.station_years_with_pm10_300_days",
+      "air.cpcb.repository.raw_frequency_file_counts",
+      "air.cpcb.repository.station_metadata_visibility",
+      "air.cpcb.repository.city_visibility_vs_census",
+      "air.cpcb.repository.city_pm25_days",
+      "air.cpcb.repository.first_pm25_year",
+      "air.cpcb.repository.file_vs_pm25_years",
+      "air.cpcb.repository.listed_years_missing_pm25",
+      "air.cpcb.repository.rows_without_pm_examples",
+      "air.oaq.cpcb.latest_station_snapshot"
+    ],
+    visualPlan: [
+      { series: [
+          { indicator: "air.cpcb.repository.listed_station_files", label: "Repository files listed" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25", label: "Usable PM2.5 station-years" },
+          { indicator: "air.cpcb.repository.zero_pm25_listed_files", label: "Listed files with no PM2.5" }
+        ], chart: "multiLine", title: "Listed files and usable PM2.5 history diverge", size: "hero", unit: "station-years", beat: "answer", subtitle: "CPCB daily raw repository · listed files, usable PM2.5 years and files with no PM2.5 · 2009-2025",
+        why: "The core data-poverty point: file availability, row availability and usable pollutant coverage are not the same thing.", read: "Each line counts station-year file paths or usable PM2.5 station-years in CPCB's daily repository. The red line is not operating stations.", watch: "The 2017 jump is a repository-listing spike: 504 listed daily files, but only 80 with any usable PM2.5." },
+      { indicator: "air.cpcb.repository.raw_frequency_file_counts", chart: "tableBars", title: "CPCB's raw archive extends beyond daily files", size: "feature", unit: "listed files", beat: "public-raw-surface", subtitle: "Public raw repository probe · file listings at 15-minute, hourly, 8-hour and daily frequency · 598 station records",
+        why: "CPCB's public repository exposes raw listings at 15-minute, hourly, 8-hour and daily frequencies, but file listings are not the same as audited pollutant coverage.", read: "Bars count file paths returned by CPCB's public raw-data repository endpoint for each frequency.", watch: "This chart counts listed files only; the PM2.5 completeness audit in this article uses downloaded daily files." },
+      { series: [
+          { indicator: "air.cpcb.repository.pm25_observed_days", label: "PM2.5 station-days" },
+          { indicator: "air.cpcb.repository.pm10_observed_days", label: "PM10 station-days" }
+        ], chart: "multiLine", title: "Usable PM observations become broad only after 2020", size: "feature", unit: "station-days", beat: "usable-depth", subtitle: "Downloaded CPCB daily files · non-missing PM2.5 and PM10 station-days · 2009-2025",
+        why: "Counting non-missing pollutant days shows how much usable measurement the repository actually contains.", read: "A station-day is one station with a non-missing daily pollutant value on one date.", watch: "This is coverage, not pollution level; a rising line means more usable observations." },
+      { series: [
+          { indicator: "air.cpcb.repository.station_years_with_pm25_1_days", label: "Any PM2.5 day" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_30_days", label: "30+ PM2.5 days" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_180_days", label: "180+ PM2.5 days" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_300_days", label: "300+ PM2.5 days" }
+        ], chart: "multiLine", title: "Trend-ready PM2.5 years lag basic visibility", size: "feature", unit: "station-years", beat: "trend-readiness", subtitle: "Downloaded CPCB daily files · station-years by minimum count of non-missing PM2.5 days · 2009-2025",
+        why: "Trend analysis needs more than one visible PM2.5 day, so this separates minimal visibility from fuller station-years.", read: "Each line counts station-years meeting a minimum number of non-missing daily PM2.5 values.", watch: "The 300-day line is stricter than official data availability and should be read as an audit threshold, not a CPCB quality standard." },
+      { indicator: "air.cpcb.repository.city_visibility_vs_census", chart: "tableBars", title: "The station list covers only a fraction of urban places", size: "feature", unit: "towns/city names", beat: "city-visibility", subtitle: "CPCB/OAQ city names compared with Census 2011 statutory towns",
+        why: "The strongest data-poverty statistic is the denominator: most legally urban places do not appear in the station list used for this audit.", read: "The comparison uses 4,041 Census 2011 statutory towns and 335 distinct city names in the CPCB/OAQ station hierarchy.", watch: "This is a visibility denominator, not a claim that every town needs its own monitor or that name matching is perfect." },
+      { indicator: "air.cpcb.repository.city_pm25_days", chart: "tableBars", title: "Deep PM2.5 history is concentrated in a few cities", size: "feature", unit: "PM2.5 station-days", beat: "geography", subtitle: "Downloaded CPCB daily files · non-missing PM2.5 station-days by city · 2009-2025",
+        why: "The archive is not evenly distributed. Delhi and New Delhi dominate the long PM2.5 record.", read: "Bars rank cities by total non-missing daily PM2.5 station-days in the downloaded CPCB repository files.", watch: "A city can rank high because it has many stations, long history, or both." },
+      { indicator: "air.cpcb.repository.first_pm25_year", chart: "tableBars", title: "Most station PM2.5 histories begin late", size: "feature", unit: "stations", beat: "when-usable", subtitle: "Downloaded CPCB daily files · first year with any non-missing PM2.5 value, by station",
+        why: "This shows the start date for usable station histories, rather than the first year a station appears in the repository.", read: "Each bar counts stations by their first year with any non-missing PM2.5 daily values.", watch: "A late first year does not always mean a new station; sometimes the station existed but PM2.5 was missing." },
+      { indicator: "air.cpcb.repository.listed_years_missing_pm25", chart: "tableBars", title: "Long file histories can hide short PM2.5 records", size: "feature", unit: "listed years without PM2.5", beat: "diagnostic", subtitle: "Downloaded CPCB daily files · listed file years minus years with any usable PM2.5, by station",
+        why: "This is the audit check behind the article: some stations have long file histories but much shorter usable PM2.5 histories.", read: "Each bar is the gap between years with a listed daily file and years with any non-missing PM2.5 for that station.", watch: "A large gap does not prove the station failed; it shows that the public daily files do not support a PM2.5 trend for those years." },
+      { indicator: "air.cpcb.repository.rows_without_pm_examples", chart: "tableBars", title: "Daily rows can exist while PM values are blank", size: "small", unit: "daily rows", beat: "case-study", subtitle: "Selected CPCB daily files with rows and zero usable PM2.5 or PM10 values",
+        why: "Concrete examples keep the caveat honest: some files are not empty, yet still have no PM2.5 or PM10.", read: "These selected examples span full-year and partial-year files with daily rows and zero usable PM2.5 and PM10 days.", watch: "Other pollutant columns may exist; this chart is about PM coverage only." },
+      { indicator: "air.oaq.cpcb.latest_station_snapshot", chart: "tableBars", title: "The latest OAQ mirror is a snapshot, not history", size: "small", unit: "station records", beat: "mirror", subtitle: "OAQ CPCB latest snapshot · generated 23 Jun 2026 at 17:40 IST",
+        why: "OAQ is clean for current snapshots, but the latest mirror is not the same as a deep historical archive.", read: "Bars compare CPCB station records in the latest OAQ snapshot with records carrying any main pollutant, all main pollutants, PM2.5, PM10 or no main pollutant at that moment.", watch: "A live snapshot is narrower than a repository audit." }
+    ]
   },
   {
     id: "q.climate.city_heat",
@@ -7368,6 +7471,96 @@ export const v1Questions = [
   {
     id: "q.work.jobs_challenge",
     slug: "india-jobs-challenge",
+    question: "Does India really have the biggest jobs challenge in the world?",
+    priority: "core",
+    // Built Jun 2026 off a single authoritative source: the World Bank's "The Global Jobs
+    // Challenge" (2026 advance edition; eds. Chrimes, Kose, Stamm), with global comparisons
+    // for scale. India is #1 of all EMDEs on every absolute measure: ~238m young people
+    // reach working age 2025-35 (youth method, Fig 2.8.A), ~91m net working-age increase by
+    // 2035 and ~132m by 2050 (Figs 2.8.C/D) -- roughly one in five of the entire developing
+    // world's jobs challenge. The honesty spine: (1) these are PROJECTIONS, method-dependent
+    // and uncertain, not measurements; (2) India's challenge is scale, not intensity -- the
+    // most youth-DENSE economies are elsewhere (CAR, Niger, the Pacific); (3) the youth
+    // cohort has already STOPPED growing (growth negative from ~2021, Fig 2.2.C) so this is
+    // the crest of the wave, not a still-opening window; (4) how big the task is hinges on
+    // labour-force participation, above all women's -- the IMF (Alonso-MacDonald 2024) range
+    // the report cites runs 60m-148m jobs by 2030 purely on that assumption (flagged as a
+    // cited study, not the WB's own number). Ingest: scripts/ingest-jobs-challenge.mjs.
+    indicators: [
+      "work.jobs.youth_reaching_wap_top10",
+      "work.jobs.india_vs_regions_youth",
+      "work.jobs.wap_increase_2050_top10",
+      "work.jobs.india_youth_growth",
+      "work.jobs.india_wap_growth",
+      "work.jobs.population_india",
+      "work.jobs.population_china",
+      "work.jobs.lfp_job_scenarios"
+    ],
+    furtherReading: [
+      { label: "World Bank — The Global Jobs Challenge (2026), the report this page is built on", url: "https://www.worldbank.org/en/research/publication/global-jobs-challenge" },
+      { label: "Alonso & MacDonald, ‘Advancing India’s Structural Transformation’ (IMF, 2024) — the 60–148m participation range", url: "https://www.imf.org/en/Publications/WP/Issues/2024/02/02/Advancing-Indias-Structural-Transformation-and-Catch-up-544370" },
+      { label: "Rajan & Lamba, ‘Breaking the Mold: India’s Untraveled Path to Prosperity’ (2024) — the high-skilled-services case", url: "https://press.princeton.edu/books/hardcover/9780691263779/breaking-the-mold" }
+    ],
+    visualPlan: [
+      // ACT 1 - The biggest job in the world
+      { chart: "tableBars", indicator: "work.jobs.youth_reaching_wap_top10", size: "hero", beat: "ranking", unit: "million young people reaching working age, 2025-35",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.A · young people reaching working age, 2025-35 · UN WPP 2024",
+        title: "India tops the developing world's jobs challenge",
+        why: "The single headline finding: of every developing economy, India must absorb the largest wave of new workers this decade.",
+        read: "Each bar is the number of young people who reach working age in that economy over 2025-35. India leads at about 238 million, well ahead of China (169m) and Nigeria (61m).",
+        watch: "These are demographic projections, not a current jobs shortfall: the bar counts people reaching working age, not the unemployed." },
+      { chart: "tableBars", indicator: "work.jobs.india_vs_regions_youth", size: "feature", beat: "scale", unit: "million young people reaching working age, 2025-35",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Figs 2.7.B & 2.8.A · India vs whole EMDE regions · UN WPP 2024",
+        title: "One country, a fifth of the problem",
+        why: "To feel the scale, set India alone against entire world regions rather than other single countries.",
+        read: "India's roughly 238 million is about 86% of all South Asia, around 72% of all Sub-Saharan Africa, and larger than the Middle East, Latin America or Europe-and-Central-Asia regions on their own. Across all developing economies the total is about 1.23 billion, so India is close to one in five.",
+        watch: "India is one country; the bars beside it are whole multi-country regions. That is the point, not an error." },
+
+      // ACT 2 - Count it any way, India still finishes first
+      { chart: "tableBars", indicator: "work.jobs.wap_increase_2050_top10", size: "feature", beat: "robustness", unit: "million net working-age increase, 2025-50",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.D · net working-age (15-64) increase, 2025-50 · UN WPP 2024",
+        title: "Still the biggest a generation out",
+        why: "The headline is not an artefact of one counting method: switch to net working-age growth and stretch to 2050, India still leads.",
+        read: "Each bar is the net rise in the working-age population (15-64) over 2025-50. India tops it at about 132 million, ahead of Nigeria (98m) and Pakistan (89m). India is also #1 over the shorter 2025-35 window, at about 91 million.",
+        watch: "Methods give very different point estimates (the all-EMDE total ranges from 270m to 1.23bn depending on the method); we use them as a consistent ranking, not exact counts." },
+
+      // ACT 3 - The wave has already crested
+      { chart: "line", indicator: "work.jobs.india_youth_growth", size: "feature", beat: "cresting", window: "full", unit: "% annual growth, population aged 15-24",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.2.C (India) · annual growth of the 15-24 population · UN WPP 2024",
+        title: "The wave has already crested",
+        why: "The twist behind the big number: India's youth cohort is no longer growing, even as it stays the largest on earth.",
+        read: "The line is the annual growth rate of India's youth population (aged 15-24). It crosses below zero around 2021 and stays negative: the cohort has stopped expanding. The demographic window is closing, not still opening.",
+        watch: "Negative growth does not mean few young people; it means the number has peaked. The absolute cohort stays enormous for a decade." },
+      { chart: "line", indicator: "work.jobs.india_wap_growth", size: "small", beat: "cresting-broad", window: "full", unit: "% annual growth, population aged 15-64",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.3.B (India) · annual growth of the 15-64 population · UN WPP 2024",
+        title: "Even the working-age pool is flattening",
+        why: "It is not just the youngest cohort: the whole 15-64 pool, the people an economy actually puts to work, is on the same downward path, a beat behind.",
+        read: "The line is the annual growth rate of India's working-age population (aged 15-64). It is still positive but slows steadily, from about 2.5% in 2000 to under 1% by 2030 and roughly zero by 2049. The broad pool is still growing, but its growth has a clear end in sight.",
+        watch: "This still rises while the youth line already falls, because the two cohorts age in sequence; the working-age pool keeps growing for now, just more slowly each year." },
+      { chart: "multiLine", indicator: "work.jobs.population_india", size: "feature", beat: "overtake", window: "full", unit: "billion people",
+        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.1.A · total population · UN WPP 2024",
+        title: "The largest workforce on earth, but cresting",
+        series: [
+          { indicator: "work.jobs.population_india", label: "India", color: "#b3245a" },
+          { indicator: "work.jobs.population_china", label: "China", color: "#8a8597" }
+        ],
+        why: "Context for the workforce story: India overtook China to become the world's most populous economy, but its own population peaks within a generation.",
+        read: "Each line is total population in billions. India passes China around 2022-23 and keeps rising to a peak near 1.70 billion around 2061; China is already in sustained decline.",
+        watch: "Population is not the workforce, but it sets its ceiling. India's edge is a one-time demographic window, not a permanent gap." },
+
+      // ACT 4 - The 60-to-148-million question
+      { chart: "tableBars", indicator: "work.jobs.lfp_job_scenarios", size: "feature", beat: "participation", unit: "million new jobs needed",
+        subtitle: "IMF (Alonso & MacDonald 2024), cited in World Bank, The Global Jobs Challenge (2026) · jobs needed by labour-force-participation assumption",
+        title: "A 60-million job problem, or a 148-million one",
+        why: "How big the task actually is comes down to one variable the report keeps returning to: whether Indians, above all women, join the workforce.",
+        read: "Holding participation at today's rate, India needs about 60 million new jobs by 2030; lifting it toward a target rate pushes that to about 148 million. By 2050 the same lever spans roughly 143 to 324 million.",
+        watch: "This range is from an IMF study the report cites, not the World Bank's own count. It is an illustration of how sensitive the number is to participation, not a precise forecast." }
+    ]
+  },
+
+  {
+    id: "q.work.jobs_challenge",
+    slug: "the-biggest-job-in-the-world",
     question: "Does India really have the biggest jobs challenge in the world?",
     priority: "core",
     // Built Jun 2026 off a single authoritative source: the World Bank's "The Global Jobs

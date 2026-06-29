@@ -62,6 +62,46 @@ function systemPrompt() {
 }
 
 function articleTemplateFor(evidence) {
+  if (evidence.questionId === "q.air.data_poverty") {
+    const planned = Array.isArray(evidence.plannedCharts) ? evidence.plannedCharts : [];
+    return {
+      purpose: "Make this the canonical Indica article on India's AQI and air-quality data visibility, not only a CPCB data-poverty audit. Answer four linked questions: what India's AQI system actually shows, what raw pollutant evidence sits underneath it, how much of that evidence the public can inspect historically, and where official visibility breaks down. The spine is: AQI is a public score built from monitor readings; PM2.5 and PM10 are the analytical backbone for historical particle-pollution work; CPCB exposes a real public raw archive at 15-minute, hourly, 8-hour and daily frequencies; but file listings, rows in files and non-missing pollutant cells are separate levels of evidence. Keep CPCB repository history separate from OAQ history: OAQ is clean for latest snapshots, while CPCB's own repository is where the messy long archive lives. Keep the city-visibility statistic separate from population exposure: the CPCB/OAQ station hierarchy has 335 city names against 4,041 Census 2011 statutory towns, but this is a place denominator, not a claim that 92% of Indians lack AQI data. The article must never imply that rising PM station-days mean worsening pollution. It means more usable observations. Mention that the CPCB all-India AQI portal and CAAQMS advance-search dashboard were inspected as official interfaces, but locked historical numbers should come from the reproducible repository file-path and CSV download audit. Never use em-dashes.",
+      requiredSections: planned.length
+        ? [
+            ...planned.map((chart) => `A reader-question H2 heading whose section explains and is paired with the chart "${chart.title}" (${chart.beat})`),
+            "A closing methodology and caveats section that states this is a coverage audit, not a pollution trend; names CPCB repository and OAQ plainly; says dashboard exports were inspected but not used as locked historical numbers; and lists the limits: no QA flag validation, no hourly completeness check, no calibration or siting validation, and no population weighting."
+          ]
+        : [
+            "Is there history before 2026?",
+            "How much usable PM data is there?",
+            "How many cities are missing from the map?",
+            "Which cities can we study best?",
+            "When did stations first become usable?",
+            "Why is a file listing not enough?",
+            "What do missing PM rows look like?",
+            "What does OAQ add?",
+            "How should you read these numbers?"
+          ],
+      requiredConcepts: [
+        "Explain AQI plainly from CPCB's official National AQI material: it is a public score/category built from pollutant sub-indices, not the air itself. CPCB's public AQI categories are Good, Satisfactory, Moderate, Poor, Very Poor and Severe. CPCB's AQI method uses the maximum pollutant sub-index as the overall AQI and names that pollutant as the dominant/responsible pollutant; an AQI is calculated only when enough pollutant data are available, including at least one particulate pollutant. Use PM2.5 and PM10 as the analytical backbone for this article because historical particle-pollution analysis requires repeated pollutant cells, not just public AQI categories.",
+        "Keep public surfaces distinct: the all-India AQI portal is a current public signal, advance search is a human-oriented dashboard/export surface, the CPCB raw repository file-path endpoint is reproducible and audited here, OAQ is a clean latest/current mirror, and the AQI repository route is visible in the CPCB SPA but a stable public audit endpoint was not reproduced. Do not claim AQI repository files are scriptably downloadable unless a reproducible endpoint has been verified.",
+        "The raw-frequency audit numbers: 598 CPCB station records checked against the public dataRepository/file-path endpoint for raw data at 15M, 1H, 8H and 1D frequencies; 2,392 station-frequency probes on 2026-06-29; returned 4,346 listed 15-minute raw files, 4,367 hourly raw files, 4,396 8-hour raw files and 4,455 daily raw files. Say these are file listings only, not pollutant completeness. A narrow sub-daily spot-check for Sanjay Palace, Agra in 2025 confirmed the public download endpoint returned parseable CSVs at 15-minute, hourly, 8-hour and daily frequencies, with PM2.5 and PM10 columns; do not generalize this into sub-daily completeness for all stations.",
+        "The locked daily audit numbers: 598 CPCB station records checked, 580 with at least one listed daily repository file, 4,455 daily raw CSVs downloaded and audited, 916,083 non-missing PM2.5 station-days, 872,770 non-missing PM10 station-days, 40 stations with no usable PM2.5 in daily files, 396 stations with at least 1,000 usable PM2.5 days, and 200 stations with usable PM2.5 before 2020.",
+        "The trend-readiness audit: PM2.5 station-years are counted at four thresholds: any non-missing PM2.5 day, 30+ days, 180+ days and 300+ days. In 2025 the counts were 540, 536, 490 and 444 station-years respectively. In 2017 they were 80, 76, 42 and 23. Say the 300-day line is an audit threshold for fuller annual history, not a CPCB quality standard.",
+        "The station metadata inspection: the CPCB/OAQ station metadata snapshot used here had 598 records with coordinates, station type, latest-seen timestamp and agency/operator suffixes in station names; it did not expose commissioning or activation dates in that snapshot. Treat this as a metadata visibility finding, not a station-quality finding.",
+        "Clarify the 40-station denominator: 22 stations had listed daily files but no usable PM2.5, and 18 station records had no listed daily repository file in the audited years.",
+        "The city-visibility denominator: the CPCB/OAQ station hierarchy used for the audit has 335 city names, while Census 2011 counts 4,041 statutory towns. Say about 92% of statutory towns are not visible in this station list, but do not say 92% of Indians lack AQI data.",
+        "The early archive gap: in 2009 CPCB listed 25 daily station files, but only 1 station-year had usable PM2.5 and 24 listed files had zero PM2.5.",
+        "The recent archive improvement: by 2025 CPCB listed 579 station files, 540 station-years had usable PM2.5 and the audit counted 173,983 PM2.5 station-days.",
+        "The city concentration: New Delhi, Mumbai, Delhi, Bengaluru and Hyderabad have the deepest PM2.5 station-day coverage, but this is coverage, not pollution level.",
+        "The OAQ distinction: OAQ's inspected CPCB latest snapshot had 598 station records generated on 2026-06-23 at 17:40 IST; 203 had any main pollutant, 139 had all 8 main pollutants, 185 had PM2.5, 183 had PM10, and 395 had no main pollutant value at that moment. Treat it as latest mirror coverage, not historical depth."
+      ],
+      styleExample: [
+        "## AQI is a score, not the air",
+        "India's AQI is the public-facing number. It is useful because one score is easy to read. But the evidence underneath is station-level pollutant measurement, and the public history becomes much thinner when you ask which PM2.5 cells can actually be inspected over time."
+      ].join("\n\n")
+    };
+  }
   if (evidence.questionId === "q.work.jobs_challenge") {
     const planned = Array.isArray(evidence.plannedCharts) ? evidence.plannedCharts : [];
     return {
