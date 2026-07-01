@@ -6746,6 +6746,102 @@ export const v1Questions = [
   },
 
   {
+    id: "q.climate.methane",
+    slug: "indias-methane-problem",
+    question: "How much methane is India actually releasing, and who is responsible for it?",
+    priority: "core",
+    // Built Jul 2026. First Indica use of Climate TRACE (satellite-informed, largely
+    // bottom-up per-source emissions, api.climatetrace.org, no key needed) and Climate
+    // Watch (climatewatchdata.org, a modelled/gap-filled CH4-by-sector reconstruction,
+    // CAIT/PIK lineage). India's own official position (BUR-3, submitted 20 Feb 2021,
+    // inventory year 2016; BUR-4, submitted 30 Dec 2024, inventory year 2020) is a sparse,
+    // multi-year-lagged snapshot, not a queryable time series - cited in prose/caveats as
+    // anchor facts, not charted directly. Waste has no Climate Watch equivalent for India,
+    // so that sector's official-vs-independent comparison rests on the BUR anchors alone.
+    // Ingest: ingest-climatetrace-country.mjs, ingest-climatetrace-assets.mjs,
+    // ingest-climatetrace-global-methane.mjs, ingest-climatewatch-methane.mjs.
+    // Derive: derive-climatetrace-methane.mjs (composition, tracewatch_gap x3, top sources).
+    // Honesty spine: the two independent methane estimates broadly agree and have
+    // converged over time (national gap ran -6.7% in 2015, +0.4% by 2023) - this is not
+    // a "India is hiding methane" story. The genuinely open question is waste, where
+    // Climate TRACE's landfill-and-wastewater estimate runs several times above BUR-4's
+    // reported 2020 figure and there is no second independent series to referee it.
+    // Asset-level Climate TRACE data is co2e_100yr only (no per-gas split), so the named
+    // "biggest sources" ranking is a co2e proxy, not literal CH4 tonnes - stated as such.
+    indicators: [
+      "climate.climatetrace.emissions_by_sector.total",
+      "climate.climatetrace.emissions_by_sector.agriculture",
+      "climate.climatetrace.emissions_by_sector.waste",
+      "climate.climatetrace.emissions_by_sector.fossil_fuel_operations",
+      "climate.climatetrace.top_methane_emitters",
+      "derived.IN.climate.methane.sector_composition",
+      "derived.IN.climate.methane.top_sources",
+      "derived.IN.climate.methane.top_waste_sources",
+      "derived.IN.climate.methane.tracewatch_gap.total",
+      "derived.IN.climate.methane.tracewatch_gap.agriculture",
+      "derived.IN.climate.methane.tracewatch_gap.fossil_fuel_operations"
+    ],
+    context: [],
+    furtherReading: [
+      { label: "Climate TRACE — India country and asset-level emissions data", url: "https://climatetrace.org/" },
+      { label: "Climate Watch (World Resources Institute) — historical GHG emissions by sector", url: "https://www.climatewatchdata.org/" },
+      { label: "India's Third Biennial Update Report to the UNFCCC (2016 inventory, submitted 2021)", url: "https://unfccc.int/documents/268470" },
+      { label: "India's Fourth Biennial Update Report to the UNFCCC (2020 inventory, submitted 2024)", url: "https://unfccc.int/sites/default/files/resource/India%20BUR-4.pdf" }
+    ],
+    visualPlan: [
+      // ACT 1 - the scale
+      { indicator: "climate.climatetrace.emissions_by_sector.total", chart: "columnLines", title: "India's methane is rising, not falling", subtitle: "Climate TRACE · India's all-sector methane emissions · 2015-2024", unit: "tonnes CH4", size: "hero", beat: "scale",
+        columns: [{ key: "ch4_t", label: "Methane (CH4)" }],
+        why: "Before any breakdown, the headline trend: is India's methane going up or down.", read: "Satellite-informed estimates put India's methane at about 31 million tonnes in 2015, climbing past 35-36 million tonnes by 2023-2024 - a rising line, not a falling one.", watch: "This is one estimate (Climate TRACE); Act 4 shows how it compares to a second, independently built one." },
+      { indicator: "climate.climatetrace.top_methane_emitters", chart: "tableBars", title: "India is the world's third-biggest methane emitter", subtitle: "Climate TRACE · methane emissions, selected countries · 2023", unit: "tonnes CH4", size: "feature", beat: "rank",
+        why: "Scale means little without company: where does India actually sit next to the other big emitters.", read: "China leads by a wide margin, the United States is second; India is third, ahead of Russia, Brazil and Indonesia.", watch: "A six-country selection, not a full world ranking - chosen because they are the other largest emitters, not a curated flattering set." },
+
+      // ACT 2 - where it comes from, and how that's shifting
+      { indicator: "derived.IN.climate.methane.sector_composition", chart: "compositionStack", title: "Livestock and rice still dominate, but their share is shrinking", subtitle: "Climate TRACE · India's methane by sector, latest year", unit: "tonnes CH4", size: "feature", beat: "composition-now",
+        columns: [
+          { key: "agriculture_ch4_t", label: "Agriculture" },
+          { key: "waste_ch4_t", label: "Waste" },
+          { key: "fossil_fuel_operations_ch4_t", label: "Fossil-fuel ops" },
+          { key: "other_sectors_ch4_t", label: "Other" }
+        ],
+        why: "Solutions depend on the source: a cattle-and-rice problem needs different fixes than a coal-mine or landfill problem.", read: "Agriculture is still by far the largest slice (livestock and rice), with waste (landfills, wastewater) and fossil-fuel operations (coal, oil and gas) well behind.", watch: "This is one year's snapshot. The next chart shows it has been quietly moving." },
+      { indicator: "derived.IN.climate.methane.sector_composition", chart: "columnLines", title: "Fossil-fuel methane's share has grown fastest", subtitle: "Climate TRACE · sector shares of India's methane · 2015-2024", unit: "%", size: "feature", beat: "composition-trend",
+        columns: [
+          { key: "agriculture_share_pct", label: "Agriculture" },
+          { key: "waste_share_pct", label: "Waste" },
+          { key: "fossil_fuel_operations_share_pct", label: "Fossil-fuel operations" }
+        ],
+        why: "A composition snapshot hides which slice is actually growing fastest - and it isn't agriculture.", read: "Agriculture's share of India's methane slipped from about 75% in 2015 to 71% in 2023, while fossil-fuel operations rose from roughly 8% to over 10% and waste crept up too.", watch: "Shares moving a few points over a decade is a real shift, not noise, but agriculture still towers over the other two in absolute tonnes." },
+
+      // ACT 3 - who, by name
+      { indicator: "derived.IN.climate.methane.top_sources", chart: "tableBars", title: "India's named methane hotspots are almost all coal mines", subtitle: "Climate TRACE asset-level data · top 15 named waste and fossil-fuel point sources", unit: "tonnes CO2e (100yr)", size: "hero", beat: "who",
+        why: "Sector totals are abstract; naming the actual sites makes the story concrete.", read: "Two Gujarat and Assam onshore oil-and-gas basins aside, the list is dominated by Coal India subsidiaries' opencast mines - Dipka, Nigahi, Gevra, Kusmunda and others - each individually larger than any single landfill.", watch: "Asset-level Climate TRACE data reports a blended co2e_100yr figure, not raw CH4 tonnes, so this ranks point sources by total climate impact, not pure methane - refineries are excluded because their emissions are mostly CO2 from combustion, not fugitive methane." },
+      { indicator: "derived.IN.climate.methane.top_waste_sources", chart: "tableBars", title: "The landfills you'd actually recognise", subtitle: "Climate TRACE asset-level data · top 10 named landfill and wastewater sites", unit: "tonnes CO2e (100yr)", size: "small", beat: "named-waste",
+        why: "Landfills rarely crack a combined ranking against coal mines by raw tonnage, but Ghazipur and Pirana are the household names of India's waste-methane problem and deserve their own frame.", read: "Surat, Ahmedabad and Delhi's own Ghazipur landfill lead a list of named dumps and wastewater plants.", watch: "These are individually smaller than the big coal mines in Act 3's combined list - the waste sector's weight comes from thousands of smaller sites nationwide, not a handful of giants." },
+
+      // ACT 4 - two independent estimates, checked against each other
+      { indicator: "derived.IN.climate.methane.tracewatch_gap.total", chart: "columnLines", title: "Two different ways of counting India's methane now roughly agree", subtitle: "Climate TRACE (satellite-based) vs. Climate Watch (modelled reconstruction) · India, all sectors", unit: "million tonnes CH4", size: "hero", beat: "reconcile-total",
+        columns: [
+          { key: "climatetrace_ch4_mt", label: "Climate TRACE (satellite-based)" },
+          { key: "climatewatch_ch4_mt", label: "Climate Watch (inventory reconstruction)" }
+        ],
+        why: "One estimate alone invites doubt. Does a second, differently-built one land anywhere close?", read: "The two lines started about 7% apart in 2015 (Climate TRACE lower) and have converged to within half a percent by 2023.", watch: "Climate Watch's figure is itself a model (CAIT/PIK lineage, gap-filled between India's own sparse UNFCCC submissions), not a direct transcription of what India reported - convergence between two models is reassuring, not proof either matches India's official inventory exactly." },
+      { indicator: "derived.IN.climate.methane.tracewatch_gap.agriculture", chart: "columnLines", title: "Agriculture methane: the two estimates track closely", subtitle: "Climate TRACE vs. Climate Watch · India agriculture-sector methane", unit: "million tonnes CH4", size: "feature", beat: "reconcile-agriculture",
+        columns: [
+          { key: "climatetrace_ch4_mt", label: "Climate TRACE (satellite-based)" },
+          { key: "climatewatch_ch4_mt", label: "Climate Watch (inventory reconstruction)" }
+        ],
+        why: "Agriculture is the biggest slice, so it is the most important sector to see cross-checked.", read: "Climate TRACE runs consistently above Climate Watch, by a margin that has bounced between roughly 3.5% and 8.6% across the decade with no clear trend, given how differently the two are built.", watch: "A persistent but non-trending gap suggests a methodology offset (e.g. livestock-count or emission-factor assumptions), not a fast-changing real-world divergence." },
+      { indicator: "derived.IN.climate.methane.tracewatch_gap.fossil_fuel_operations", chart: "columnLines", title: "Fossil-fuel methane: the smallest gap of all", subtitle: "Climate TRACE (fossil-fuel operations) vs. Climate Watch (fugitive emissions) · India", unit: "million tonnes CH4", size: "feature", beat: "reconcile-fossil",
+        columns: [
+          { key: "climatetrace_ch4_mt", label: "Climate TRACE (satellite-based)" },
+          { key: "climatewatch_ch4_mt", label: "Climate Watch (inventory reconstruction)" }
+        ],
+        why: "Coal-mine and oil-and-gas fugitive methane is the sector growing fastest in share (Act 2) - worth checking it isn't an artifact of one model.", read: "The two lines sit within a few percent of each other throughout, including in the most recent years.", watch: "Climate TRACE's 'fossil-fuel operations' and Climate Watch's 'Fugitive Emissions' are closely related but not identically defined categories." }
+    ]
+  },
+
+  {
     id: "q.econ.industrial_policy",
     slug: "india-industrial-policy-surge",
     question: "Has India\u2019s industrial policy surge paid off?",
@@ -7823,6 +7919,26 @@ export const eiaInternationalSeries = [
   { id: "climate.eia.co2_coal", productId: "4002", activityId: "8", eiaUnit: "MMTCD", title: "Coal and coke CO2 emissions", unit: "million metric tonnes carbon dioxide" },
   { id: "climate.eia.co2_petroleum", productId: "4006", activityId: "8", eiaUnit: "MMTCD", title: "Petroleum and other liquids CO2 emissions", unit: "million metric tonnes carbon dioxide" },
   { id: "climate.eia.co2_gas", productId: "3002", activityId: "8", eiaUnit: "MMTCD", title: "Natural gas CO2 emissions", unit: "million metric tonnes carbon dioxide" }
+];
+
+export const climateTraceSectors = [
+  { id: "climate.climatetrace.emissions_by_sector.total", sector: undefined, title: "India greenhouse gas emissions, all sectors" },
+  { id: "climate.climatetrace.emissions_by_sector.agriculture", sector: "agriculture", title: "India agriculture-sector emissions" },
+  { id: "climate.climatetrace.emissions_by_sector.waste", sector: "waste", title: "India waste-sector emissions" },
+  { id: "climate.climatetrace.emissions_by_sector.fossil_fuel_operations", sector: "fossil-fuel-operations", title: "India fossil-fuel-operations emissions" }
+];
+
+export const climateTraceAssetSectors = [
+  { id: "climate.climatetrace.assets.agriculture", sector: "agriculture", title: "India agriculture-sector emitting assets" },
+  { id: "climate.climatetrace.assets.waste", sector: "waste", title: "India waste-sector emitting assets" },
+  { id: "climate.climatetrace.assets.fossil_fuel_operations", sector: "fossil-fuel-operations", title: "India fossil-fuel-operations emitting assets" }
+];
+
+export const climateWatchMethaneSectors = [
+  { id: "climate.climatewatch.methane.total", sector: "Total excluding LULUCF", title: "India methane emissions, all sectors (Climate Watch reconstruction)" },
+  { id: "climate.climatewatch.methane.agriculture", sector: "Agriculture", title: "India agriculture-sector methane (Climate Watch reconstruction)" },
+  { id: "climate.climatewatch.methane.fugitive_emissions", sector: "Fugitive Emissions", title: "India fugitive-emissions methane (Climate Watch reconstruction)" },
+  { id: "climate.climatewatch.methane.energy", sector: "Energy", title: "India energy-sector methane (Climate Watch reconstruction)" }
 ];
 
 export const ppacDatasets = [
