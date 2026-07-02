@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "derived.IN.climate.methane.tracewatch_gap.agriculture",
+  "title": "Agriculture methane: two independent estimates",
+  "sourceId": "climatetrace-derived",
+  "sourceIndicatorId": "methane/tracewatch-gap/agriculture",
+  "sourceUrl": "https://climatetrace.org/",
+  "unit": "million tonnes CH4",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "climatetrace_ch4_mt",
+    "climatewatch_ch4_mt",
+    "gap_mt",
+    "gap_pct_of_climatewatch"
+  ],
+  "fetchedAt": "2026-07-02T08:15:48.304Z",
+  "rows": [
+    {
+      "date": "2015",
+      "climatetrace_ch4_mt": 23.26,
+      "climatewatch_ch4_mt": 21.97,
+      "gap_mt": 1.28,
+      "gap_pct_of_climatewatch": 5.8
+    },
+    {
+      "date": "2016",
+      "climatetrace_ch4_mt": 22.92,
+      "climatewatch_ch4_mt": 22.16,
+      "gap_mt": 0.77,
+      "gap_pct_of_climatewatch": 3.5
+    },
+    {
+      "date": "2017",
+      "climatetrace_ch4_mt": 23.49,
+      "climatewatch_ch4_mt": 22.25,
+      "gap_mt": 1.25,
+      "gap_pct_of_climatewatch": 5.6
+    },
+    {
+      "date": "2018",
+      "climatetrace_ch4_mt": 23.82,
+      "climatewatch_ch4_mt": 22.41,
+      "gap_mt": 1.41,
+      "gap_pct_of_climatewatch": 6.3
+    },
+    {
+      "date": "2019",
+      "climatetrace_ch4_mt": 24.38,
+      "climatewatch_ch4_mt": 22.45,
+      "gap_mt": 1.93,
+      "gap_pct_of_climatewatch": 8.6
+    },
+    {
+      "date": "2020",
+      "climatetrace_ch4_mt": 24.55,
+      "climatewatch_ch4_mt": 22.87,
+      "gap_mt": 1.69,
+      "gap_pct_of_climatewatch": 7.4
+    },
+    {
+      "date": "2021",
+      "climatetrace_ch4_mt": 24.21,
+      "climatewatch_ch4_mt": 23.1,
+      "gap_mt": 1.11,
+      "gap_pct_of_climatewatch": 4.8
+    },
+    {
+      "date": "2022",
+      "climatetrace_ch4_mt": 24.95,
+      "climatewatch_ch4_mt": 23.37,
+      "gap_mt": 1.58,
+      "gap_pct_of_climatewatch": 6.8
+    },
+    {
+      "date": "2023",
+      "climatetrace_ch4_mt": 25.1,
+      "climatewatch_ch4_mt": 23.53,
+      "gap_mt": 1.57,
+      "gap_pct_of_climatewatch": 6.7
+    }
+  ],
+  "metadata": {
+    "method": "Climate Watch reports CH4 in MtCO2e using an AR4 100-year GWP of 25; we divide by 25 to recover an implied raw CH4 tonnage comparable to Climate TRACE's native CH4 figures. Climate TRACE uses a satellite-observation-informed, largely bottom-up per-source methodology; Climate Watch's figure is a modelled, gap-filled reconstruction (CAIT/PIK lineage), not a line-by-line transcription of India's own UNFCCC submissions. Waste has no Climate Watch equivalent sector for India, so no gap series exists for it here — see the sparse official BUR anchors for that sector instead.",
+    "climateWatchGwp100Ch4": 25
+  }
+}

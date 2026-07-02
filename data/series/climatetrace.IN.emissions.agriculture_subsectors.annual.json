@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.climatetrace.emissions_by_subsector.agriculture",
+  "title": "India agriculture-sector methane by subsector",
+  "sourceId": "climatetrace",
+  "sourceIndicatorId": "country/emissions/subsectors/agriculture",
+  "sourceUrl": "https://climatetrace.org/",
+  "unit": "tonnes",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "enteric_fermentation_cattle_operation_ch4_t",
+    "enteric_fermentation_cattle_pasture_ch4_t",
+    "enteric_fermentation_other_ch4_t",
+    "rice_cultivation_ch4_t"
+  ],
+  "fetchedAt": "2026-07-02T08:12:26.045Z",
+  "rows": [
+    {
+      "date": "2015",
+      "enteric_fermentation_cattle_operation_ch4_t": 3443286.6299999976,
+      "enteric_fermentation_cattle_pasture_ch4_t": 8301059.1019171635,
+      "enteric_fermentation_other_ch4_t": 7176552.699999999,
+      "rice_cultivation_ch4_t": 3276044.1282970216
+    },
+    {
+      "date": "2016",
+      "enteric_fermentation_cattle_operation_ch4_t": 3586363.7099999995,
+      "enteric_fermentation_cattle_pasture_ch4_t": 8249160.577557406,
+      "enteric_fermentation_other_ch4_t": 7188483.699999999,
+      "rice_cultivation_ch4_t": 2806252.492608647
+    },
+    {
+      "date": "2017",
+      "enteric_fermentation_cattle_operation_ch4_t": 3716078.8699999996,
+      "enteric_fermentation_cattle_pasture_ch4_t": 8222894.391302053,
+      "enteric_fermentation_other_ch4_t": 7190913.899999999,
+      "rice_cultivation_ch4_t": 3275233.2697615065
+    },
+    {
+      "date": "2018",
+      "enteric_fermentation_cattle_operation_ch4_t": 3857452.1299999994,
+      "enteric_fermentation_cattle_pasture_ch4_t": 8195539.049787309,
+      "enteric_fermentation_other_ch4_t": 7189500.899999999,
+      "rice_cultivation_ch4_t": 3458859.872536043
+    },
+    {
+      "date": "2019",
+      "enteric_fermentation_cattle_operation_ch4_t": 3970798.280999998,
+      "enteric_fermentation_cattle_pasture_ch4_t": 8192749.4661229635,
+      "enteric_fermentation_other_ch4_t": 7186453.299999998,
+      "rice_cultivation_ch4_t": 3956562.09516814
+    },
+    {
+      "date": "2020",
+      "enteric_fermentation_cattle_operation_ch4_t": 4203743.616999998,
+      "enteric_fermentation_cattle_pasture_ch4_t": 8091993.9141277885,
+      "enteric_fermentation_other_ch4_t": 7185333.499999996,
+      "rice_cultivation_ch4_t": 3990737.547932493
+    },
+    {
+      "date": "2021",
+      "enteric_fermentation_cattle_operation_ch4_t": 4351867.99,
+      "enteric_fermentation_cattle_pasture_ch4_t": 7880552.236849993,
+      "enteric_fermentation_other_ch4_t": 7295402.999999997,
+      "rice_cultivation_ch4_t": 3596814.214483757
+    },
+    {
+      "date": "2022",
+      "enteric_fermentation_cattle_operation_ch4_t": 4421045.71,
+      "enteric_fermentation_cattle_pasture_ch4_t": 7869761.918789998,
+      "enteric_fermentation_other_ch4_t": 7318917.899999999,
+      "rice_cultivation_ch4_t": 4248923.073270385
+    },
+    {
+      "date": "2023",
+      "enteric_fermentation_cattle_operation_ch4_t": 4642520.410000001,
+      "enteric_fermentation_cattle_pasture_ch4_t": 7710480.023299997,
+      "enteric_fermentation_other_ch4_t": 7343918.899999996,
+      "rice_cultivation_ch4_t": 4310478.5195585275
+    },
+    {
+      "date": "2024",
+      "enteric_fermentation_cattle_operation_ch4_t": 4642520.41,
+      "enteric_fermentation_cattle_pasture_ch4_t": 7721959.372729996,
+      "enteric_fermentation_other_ch4_t": 7343918.899999996,
+      "rice_cultivation_ch4_t": 4338587.783411757
+    }
+  ],
+  "metadata": {
+    "subsectors": [
+      "enteric_fermentation_cattle_operation",
+      "enteric_fermentation_cattle_pasture",
+      "enteric_fermentation_other",
+      "rice_cultivation"
+    ],
+    "since": 2015,
+    "to": 2024,
+    "method": "Each subsector queried individually via country/emissions?subsectors=<subsector> (the API returns a single blended figure if multiple subsectors are passed at once)."
+  }
+}

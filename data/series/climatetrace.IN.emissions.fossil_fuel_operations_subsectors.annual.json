@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.climatetrace.emissions_by_subsector.fossil_fuel_operations",
+  "title": "India fossil-fuel-operations methane by subsector",
+  "sourceId": "climatetrace",
+  "sourceIndicatorId": "country/emissions/subsectors/fossil_fuel_operations",
+  "sourceUrl": "https://climatetrace.org/",
+  "unit": "tonnes",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "coal_mining_ch4_t",
+    "oil_and_gas_production_ch4_t",
+    "oil_and_gas_transport_ch4_t",
+    "oil_and_gas_refining_ch4_t"
+  ],
+  "fetchedAt": "2026-07-02T08:12:26.045Z",
+  "rows": [
+    {
+      "date": "2015",
+      "coal_mining_ch4_t": 1334854.5775052414,
+      "oil_and_gas_production_ch4_t": 894460.1107343421,
+      "oil_and_gas_transport_ch4_t": 20352.048396501945,
+      "oil_and_gas_refining_ch4_t": 2902.14890876073
+    },
+    {
+      "date": "2016",
+      "coal_mining_ch4_t": 1334854.5775052414,
+      "oil_and_gas_production_ch4_t": 863282.2229648349,
+      "oil_and_gas_transport_ch4_t": 17088.145821819737,
+      "oil_and_gas_refining_ch4_t": 3154.475098390503
+    },
+    {
+      "date": "2017",
+      "coal_mining_ch4_t": 1334854.5775052416,
+      "oil_and_gas_production_ch4_t": 861792.6123113631,
+      "oil_and_gas_transport_ch4_t": 14054.02564430276,
+      "oil_and_gas_refining_ch4_t": 3292.7309317627482
+    },
+    {
+      "date": "2018",
+      "coal_mining_ch4_t": 1388497.0283444272,
+      "oil_and_gas_production_ch4_t": 843748.8607527876,
+      "oil_and_gas_transport_ch4_t": 13067.864235827248,
+      "oil_and_gas_refining_ch4_t": 3199.0353494442966
+    },
+    {
+      "date": "2019",
+      "coal_mining_ch4_t": 1383053.728325787,
+      "oil_and_gas_production_ch4_t": 820338.5973710957,
+      "oil_and_gas_transport_ch4_t": 10941.397875902727,
+      "oil_and_gas_refining_ch4_t": 3221.513464480319
+    },
+    {
+      "date": "2020",
+      "coal_mining_ch4_t": 1378865.4776509716,
+      "oil_and_gas_production_ch4_t": 751589.1801274929,
+      "oil_and_gas_transport_ch4_t": 7357.2429446646975,
+      "oil_and_gas_refining_ch4_t": 2845.8130811641986
+    },
+    {
+      "date": "2021",
+      "coal_mining_ch4_t": 1463917.56922474,
+      "oil_and_gas_production_ch4_t": 811173.475666023,
+      "oil_and_gas_transport_ch4_t": 25281.488345325197,
+      "oil_and_gas_refining_ch4_t": 3039.9147879665165
+    },
+    {
+      "date": "2022",
+      "coal_mining_ch4_t": 1621920.3092043218,
+      "oil_and_gas_production_ch4_t": 815508.2634519902,
+      "oil_and_gas_transport_ch4_t": 33142.58454829612,
+      "oil_and_gas_refining_ch4_t": 3214.8346722875376
+    },
+    {
+      "date": "2023",
+      "coal_mining_ch4_t": 1753160.7216373172,
+      "oil_and_gas_production_ch4_t": 909573.1206671492,
+      "oil_and_gas_transport_ch4_t": 46510.487596184044,
+      "oil_and_gas_refining_ch4_t": 3345.7674013116352
+    },
+    {
+      "date": "2024",
+      "coal_mining_ch4_t": 1754098.340491535,
+      "oil_and_gas_production_ch4_t": 1245913.6519232083,
+      "oil_and_gas_transport_ch4_t": 80206.27439502119,
+      "oil_and_gas_refining_ch4_t": 3359.3409836432
+    }
+  ],
+  "metadata": {
+    "subsectors": [
+      "coal_mining",
+      "oil_and_gas_production",
+      "oil_and_gas_transport",
+      "oil_and_gas_refining"
+    ],
+    "since": 2015,
+    "to": 2024,
+    "method": "Each subsector queried individually via country/emissions?subsectors=<subsector> (the API returns a single blended figure if multiple subsectors are passed at once)."
+  }
+}
