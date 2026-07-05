@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "derived.IN.fx.peer_fall_vs_usd",
+  "title": "How far each currency fell against the dollar, 2000-2025",
+  "sourceId": "rupee-derived",
+  "sourceIndicatorId": "derived.IN.fx.peer_fall_vs_usd",
+  "sourceUrl": "https://fred.stlouisfed.org/categories/94",
+  "unit": "% of value lost vs USD",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group"
+  ],
+  "fetchedAt": "2026-07-05T07:00:30.974091+00:00",
+  "rows": [
+    {
+      "label": "Brazil (real)",
+      "value": 67.3,
+      "group": "Emerging"
+    },
+    {
+      "label": "South Africa (rand)",
+      "value": 61.1,
+      "group": "Emerging"
+    },
+    {
+      "label": "Mexico (peso)",
+      "value": 50.7,
+      "group": "Emerging"
+    },
+    {
+      "label": "India (rupee)",
+      "value": 48.4,
+      "group": "Emerging"
+    },
+    {
+      "label": "Japan (yen)",
+      "value": 27.9,
+      "group": "Developed"
+    },
+    {
+      "label": "South Korea (won)",
+      "value": 20.4,
+      "group": "Emerging"
+    },
+    {
+      "label": "UK (pound)",
+      "value": 13.0,
+      "group": "Developed"
+    },
+    {
+      "label": "Malaysia (ringgit)",
+      "value": 11.2,
+      "group": "Emerging"
+    },
+    {
+      "label": "Canada (dollar)",
+      "value": -6.3,
+      "group": "Developed"
+    },
+    {
+      "label": "Australia (dollar)",
+      "value": -10.9,
+      "group": "Developed"
+    },
+    {
+      "label": "China (yuan)",
+      "value": -15.2,
+      "group": "Emerging"
+    },
+    {
+      "label": "Thailand (baht)",
+      "value": -22.4,
+      "group": "Emerging"
+    },
+    {
+      "label": "Euro area (euro)",
+      "value": -22.5,
+      "group": "Developed"
+    },
+    {
+      "label": "Switzerland (franc)",
+      "value": -103.5,
+      "group": "Developed"
+    }
+  ],
+  "metadata": {
+    "derived": "annual-avg FRED bilateral USD rates; loss = 1 - (value_2025/value_2000); positive = weakened vs USD"
+  }
+}
