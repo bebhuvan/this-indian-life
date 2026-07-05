@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "derived.IN.fx.crisis_scorecard",
+  "title": "Rupee stress episodes, scored by pressure markers",
+  "sourceId": "rupee-derived",
+  "sourceIndicatorId": "derived.IN.fx.crisis_scorecard",
+  "sourceUrl": "https://www.rbi.org.in/scripts/FS_Overview.aspx?fn=5",
+  "unit": "stress score, 0-10",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "period",
+    "mainStress",
+    "rupeeMove",
+    "externalGap",
+    "reserves",
+    "flowsDollarOil",
+    "policyResponse",
+    "dataCoverage"
+  ],
+  "fetchedAt": "2026-07-05T07:39:18.940Z",
+  "rows": [
+    {
+      "label": "1991 BoP crisis",
+      "value": 10,
+      "period": "1990-1993",
+      "mainStress": "Reserve exhaustion, gold pledge, two-step devaluation",
+      "rupeeMove": "roughly 18-19% devaluation in July 1991, then market unification near Rs 31-32/$ by 1993",
+      "externalGap": "BoP financing crisis, import compression, very low usable reserves",
+      "reserves": "only a few weeks of imports before the rescue package",
+      "flowsDollarOil": "external borrowing dried up; Gulf war oil shock added pressure",
+      "policyResponse": "gold pledge, IMF support, LERMS, then 1993 market-linked rate",
+      "dataCoverage": "historical event data plus RBI reserve/BOP history"
+    },
+    {
+      "label": "2013 taper tantrum",
+      "value": 8.5,
+      "period": "2012-2014",
+      "mainStress": "Record current-account deficit plus global dollar/rate shock",
+      "rupeeMove": "rupee hit 68.85/$ on 28 Aug 2013",
+      "externalGap": "current-account deficit near $88bn in 2012-13",
+      "reserves": "reserve drawdown and emergency dollar funding measures",
+      "flowsDollarOil": "foreign money left EMs after the Fed taper signal",
+      "policyResponse": "rate/liquidity tightening, import curbs and FCNR(B) deposit window",
+      "dataCoverage": "RBI BOP/intervention/FPI plus FRED/BIS market series"
+    },
+    {
+      "label": "2008 global crisis",
+      "value": 7.5,
+      "period": "2008-2009",
+      "mainStress": "Global funding shock and portfolio outflows",
+      "rupeeMove": "sharp depreciation as global risk appetite collapsed",
+      "externalGap": "external financing pressure, not a 1991-style current-account collapse",
+      "reserves": "large reserve drawdown from the pre-crisis peak",
+      "flowsDollarOil": "risk-off dollar demand and FII outflows",
+      "policyResponse": "RBI sold dollars, eased liquidity and cut rates as growth slowed",
+      "dataCoverage": "monthly RBI/FPI/reserve data available"
+    },
+    {
+      "label": "1966 devaluation",
+      "value": 7,
+      "period": "1965-1967",
+      "mainStress": "Peg became hard to defend after war, drought and aid stress",
+      "rupeeMove": "official rate moved from 4.76 to 7.50 per dollar",
+      "externalGap": "aid suspension, food imports and foreign-exchange shortage",
+      "reserves": "pre-modern reserve data are patchier than post-1990 series",
+      "flowsDollarOil": "not a portfolio-flow crisis; this was a pegged-rate and financing crisis",
+      "policyResponse": "one-time official devaluation under Bretton Woods",
+      "dataCoverage": "historical event sources; not comparable monthly market data"
+    },
+    {
+      "label": "2022 Fed-oil-dollar shock",
+      "value": 6.5,
+      "period": "2022",
+      "mainStress": "Fed hikes, strong dollar, expensive oil and RBI defence",
+      "rupeeMove": "rupee weakened through the year while the dollar surged globally",
+      "externalGap": "oil import bill and wider goods deficit raised dollar demand",
+      "reserves": "reserves fell as the RBI sold dollars and valuation effects hit",
+      "flowsDollarOil": "global dollar strength plus high crude after Russia's invasion of Ukraine",
+      "policyResponse": "spot intervention, rate hikes and liquidity management",
+      "dataCoverage": "monthly RBI/FRED/BIS data available"
+    },
+    {
+      "label": "2025-26 forward defence",
+      "value": 6,
+      "period": "2025-2026",
+      "mainStress": "FPI outflows and heavy forward-market defence despite large reserves",
+      "rupeeMove": "rupee moved near Rs 95/$ by June 2026",
+      "externalGap": "current-account deficit modest versus past crisis years",
+      "reserves": "monthly reserves near $686bn in May 2026, weekly total near $667bn by 26 Jun",
+      "flowsDollarOil": "FPI outflows of about $13.3bn in Mar 2026 and $7.3bn in Apr",
+      "policyResponse": "spot dollar sales and a net forward book near -$100bn",
+      "dataCoverage": "latest RBI DBIE workbooks through Apr-Jun 2026 depending on series"
+    },
+    {
+      "label": "1997-98 Asia/sanctions",
+      "value": 5.5,
+      "period": "1997-1998",
+      "mainStress": "Asian crisis, sanctions, capital-flow caution",
+      "rupeeMove": "rupee weakened, but avoided an East-Asia-style collapse",
+      "externalGap": "current-account pressure was present but not the main rupture",
+      "reserves": "reserves provided more room than in 1991",
+      "flowsDollarOil": "regional contagion and risk aversion mattered more than oil",
+      "policyResponse": "managed depreciation, intervention and tighter liquidity",
+      "dataCoverage": "post-1993 market data available, but early FPI detail is thinner"
+    },
+    {
+      "label": "2018 oil-EM selloff",
+      "value": 5,
+      "period": "2018",
+      "mainStress": "Oil price rise, Fed tightening and emerging-market selloff",
+      "rupeeMove": "rupee weakened, but without a 1991 or 2013 funding break",
+      "externalGap": "oil and imports widened external pressure",
+      "reserves": "RBI used reserves to smooth the move",
+      "flowsDollarOil": "higher crude and stronger dollar drove the stress",
+      "policyResponse": "rate increases and intervention",
+      "dataCoverage": "monthly RBI/FRED/BIS data available"
+    }
+  ],
+  "metadata": {
+    "derived": true,
+    "method": "Curated crisis scorecard. Score is an editorial severity marker, not a statistical model: higher values indicate more simultaneous stress across rupee fall/devaluation, external deficit, reserve pressure, hot-money or dollar shock, oil shock and policy/intervention stress.",
+    "sourceUrls": [
+      "https://www.rbi.org.in/scripts/FS_Overview.aspx?fn=5",
+      "https://fred.stlouisfed.org/series/EXINUS",
+      "https://fred.stlouisfed.org/series/DCOILBRENTEU",
+      "https://data.bis.org/",
+      "https://dbie.rbi.org.in/"
+    ],
+    "caveat": "Early episodes are historical event rows with patchier monthly data. Post-1993 episodes are more directly comparable because market INR/USD, reserves, FPI and intervention data are available."
+  }
+}
