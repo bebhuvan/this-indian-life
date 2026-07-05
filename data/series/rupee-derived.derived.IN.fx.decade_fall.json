@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "derived.IN.fx.decade_fall",
+  "title": "How much the rupee lost against the dollar, by decade",
+  "sourceId": "rupee-derived",
+  "sourceIndicatorId": "derived.IN.fx.decade_fall",
+  "sourceUrl": "https://fred.stlouisfed.org/series/EXINUS",
+  "unit": "% of value lost vs USD",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-07-05T07:00:30.974091+00:00",
+  "rows": [
+    {
+      "label": "1950s",
+      "value": 0.0
+    },
+    {
+      "label": "1960s",
+      "value": 36.5
+    },
+    {
+      "label": "1970s",
+      "value": 4.9
+    },
+    {
+      "label": "1980s",
+      "value": 54.9
+    },
+    {
+      "label": "1990s",
+      "value": 61.1
+    },
+    {
+      "label": "2000s",
+      "value": 1.4
+    },
+    {
+      "label": "2010s",
+      "value": 38.4
+    },
+    {
+      "label": "2020s",
+      "value": 15.0
+    }
+  ],
+  "metadata": {
+    "derived": "(1 - rate_start/rate_end)*100 on the long INR/USD series; 2020s is 2020-2025 (partial)",
+    "note": "1960s = the 1966 devaluation; pre-1970 are par-value pegs"
+  }
+}
