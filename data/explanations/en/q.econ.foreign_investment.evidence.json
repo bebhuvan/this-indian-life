@@ -1,0 +1,2982 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.foreign_investment",
+  "question": "Is foreign money really fleeing India? What FDI and FII numbers actually mean.",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "extfin.fdi.net.annual.usd",
+    "extfin.fdi.portfolio_net.annual.usd",
+    "extfin.narrative_anchors.usd",
+    "extfin.fdi.gross_inflows.annual.usd",
+    "extfin.fdi.repatriation.annual.usd",
+    "extfin.fdi.outward.annual.usd",
+    "extfin.fdi.outward_stock.unctad.usd",
+    "extfin.fdi.portfolio_net.monthly.usd",
+    "extfin.fpi.equity_net.annual.inr",
+    "extfin.fpi.debt_net.annual.inr",
+    "extfin.fpi.debt_far_net.annual.inr",
+    "extfin.fpi.recent_split.nsdl.inr",
+    "extfin.driver.usd_em_index",
+    "extfin.driver.us_10y_yield",
+    "extfin.driver.fed_funds_rate",
+    "extfin.driver.vix",
+    "extfin.driver.em_vix",
+    "extfin.fpi.global_sensitivity.corr",
+    "extfin.fdi.source_country.dpiit.usd",
+    "extfin.fdi.sector.dpiit.usd",
+    "extfin.fpi.auc_by_country.nsdl.inr",
+    "extfin.fdi.india_share_world.pct",
+    "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+  ],
+  "availableIndicatorIds": [
+    "extfin.fdi.net.annual.usd",
+    "extfin.fdi.portfolio_net.annual.usd",
+    "extfin.narrative_anchors.usd",
+    "extfin.fdi.gross_inflows.annual.usd",
+    "extfin.fdi.repatriation.annual.usd",
+    "extfin.fdi.outward.annual.usd",
+    "extfin.fdi.outward_stock.unctad.usd",
+    "extfin.fdi.portfolio_net.monthly.usd",
+    "extfin.fpi.equity_net.annual.inr",
+    "extfin.fpi.debt_net.annual.inr",
+    "extfin.fpi.debt_far_net.annual.inr",
+    "extfin.fpi.recent_split.nsdl.inr",
+    "extfin.driver.usd_em_index",
+    "extfin.driver.us_10y_yield",
+    "extfin.driver.fed_funds_rate",
+    "extfin.driver.vix",
+    "extfin.driver.em_vix",
+    "extfin.fpi.global_sensitivity.corr",
+    "extfin.fdi.source_country.dpiit.usd",
+    "extfin.fdi.sector.dpiit.usd",
+    "extfin.fpi.auc_by_country.nsdl.inr",
+    "extfin.fdi.india_share_world.pct",
+    "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+  ],
+  "themeIndicatorIds": [
+    "extfin.fdi.net.annual.usd",
+    "extfin.fdi.portfolio_net.annual.usd",
+    "extfin.narrative_anchors.usd",
+    "extfin.fdi.gross_inflows.annual.usd",
+    "extfin.fdi.repatriation.annual.usd",
+    "extfin.fdi.outward.annual.usd",
+    "extfin.fdi.outward_stock.unctad.usd",
+    "extfin.fdi.portfolio_net.monthly.usd",
+    "extfin.fpi.equity_net.annual.inr",
+    "extfin.fpi.debt_net.annual.inr",
+    "extfin.fpi.debt_far_net.annual.inr",
+    "extfin.fpi.recent_split.nsdl.inr",
+    "extfin.driver.usd_em_index",
+    "extfin.driver.us_10y_yield",
+    "extfin.driver.fed_funds_rate",
+    "extfin.driver.vix",
+    "extfin.driver.em_vix",
+    "extfin.fpi.global_sensitivity.corr",
+    "extfin.fdi.source_country.dpiit.usd",
+    "extfin.fdi.sector.dpiit.usd",
+    "extfin.fpi.auc_by_country.nsdl.inr",
+    "extfin.fdi.india_share_world.pct",
+    "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.extfin.fdi.net.annual.usd",
+      "indicatorId": "extfin.fdi.net.annual.usd",
+      "title": "Net foreign direct investment (annual, US$ mn)",
+      "sourceId": "rbi",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.extfin.fdi.portfolio_net.annual.usd",
+      "indicatorId": "extfin.fdi.portfolio_net.annual.usd",
+      "title": "Net portfolio investment (FII/FPI), BoP basis (annual, US$ mn)",
+      "sourceId": "rbi",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.extfin.narrative_anchors.usd",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "title": "Key FDI/FII reference points (RBI)",
+      "sourceId": "rbi",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.extfin.fdi.gross_inflows.annual.usd",
+      "indicatorId": "extfin.fdi.gross_inflows.annual.usd",
+      "title": "Gross FDI inflows to India (annual, US$ mn)",
+      "sourceId": "rbi",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.extfin.fdi.repatriation.annual.usd",
+      "indicatorId": "extfin.fdi.repatriation.annual.usd",
+      "title": "Repatriation / disinvestment of FDI (annual, US$ mn)",
+      "sourceId": "rbi",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.extfin.fdi.outward.annual.usd",
+      "indicatorId": "extfin.fdi.outward.annual.usd",
+      "title": "FDI by India (outward direct investment) (annual, US$ mn)",
+      "sourceId": "rbi",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.extfin.fdi.outward_stock.unctad.usd",
+      "indicatorId": "extfin.fdi.outward_stock.unctad.usd",
+      "title": "Outward FDI stock of India (UNCTAD)",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v8.extfin.fdi.portfolio_net.monthly.usd",
+      "indicatorId": "extfin.fdi.portfolio_net.monthly.usd",
+      "title": "Net portfolio investment (FII/FPI) (monthly, US$ mn)",
+      "sourceId": "rbi",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v9.extfin.fpi.equity_net.annual.inr",
+      "indicatorId": "extfin.fpi.equity_net.annual.inr",
+      "title": "Net FPI investment in equity (annual, ₹ cr)",
+      "sourceId": "nsdl",
+      "unit": "INR crore",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v10.extfin.fpi.debt_net.annual.inr",
+      "indicatorId": "extfin.fpi.debt_net.annual.inr",
+      "title": "Net FPI investment in debt (annual, ₹ cr)",
+      "sourceId": "nsdl",
+      "unit": "INR crore",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v11.extfin.fpi.debt_far_net.annual.inr",
+      "indicatorId": "extfin.fpi.debt_far_net.annual.inr",
+      "title": "Net FPI debt under Fully Accessible Route (FAR) (annual, ₹ cr)",
+      "sourceId": "nsdl",
+      "unit": "INR crore",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v12.extfin.fpi.recent_split.nsdl.inr",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr",
+      "title": "Recent FPI net investment by instrument (NSDL)",
+      "sourceId": "nsdl",
+      "unit": "INR crore",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v13.extfin.driver.usd_em_index",
+      "indicatorId": "extfin.driver.usd_em_index",
+      "title": "US dollar index vs emerging-market currencies (nominal)",
+      "sourceId": "fred",
+      "unit": "index (Jan 2006 = 100)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v14.extfin.driver.us_10y_yield",
+      "indicatorId": "extfin.driver.us_10y_yield",
+      "title": "US 10-year Treasury yield",
+      "sourceId": "fred",
+      "unit": "percent",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v15.extfin.driver.fed_funds_rate",
+      "indicatorId": "extfin.driver.fed_funds_rate",
+      "title": "US federal funds rate",
+      "sourceId": "fred",
+      "unit": "percent",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v16.extfin.driver.vix",
+      "indicatorId": "extfin.driver.vix",
+      "title": "CBOE Volatility Index (VIX)",
+      "sourceId": "fred",
+      "unit": "index",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v17.extfin.driver.em_vix",
+      "indicatorId": "extfin.driver.em_vix",
+      "title": "CBOE Emerging-Markets ETF Volatility Index",
+      "sourceId": "fred",
+      "unit": "index",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v18.extfin.fpi.global_sensitivity.corr",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr",
+      "title": "What moves FII money: correlation of monthly equity flows with global conditions",
+      "sourceId": "derived",
+      "unit": "correlation coefficient",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v19.extfin.fdi.source_country.dpiit.usd",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd",
+      "title": "Cumulative FDI equity inflow by source country (DPIIT)",
+      "sourceId": "indiadatahub",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v20.extfin.fdi.sector.dpiit.usd",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd",
+      "title": "Cumulative FDI equity inflow by sector (DPIIT)",
+      "sourceId": "indiadatahub",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v21.extfin.fpi.auc_by_country.nsdl.inr",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr",
+      "title": "FPI assets under custody by source country (NSDL, May 2026)",
+      "sourceId": "nsdl",
+      "unit": "INR crore",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v22.extfin.fdi.india_share_world.pct",
+      "indicatorId": "extfin.fdi.india_share_world.pct",
+      "title": "India's share of world FDI inflows",
+      "sourceId": "unctad",
+      "unit": "percent",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v23.extfin.fdi.peers_inward_flow_latest.unctad.usd",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd",
+      "title": "FDI inflows: India vs peers (2024)",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "the-number-everyone-is-panicking-about",
+      "title": "The number everyone is panicking about",
+      "chartType": "line",
+      "beat": "the-cliff",
+      "window": "full",
+      "indicator": "extfin.fdi.net.annual.usd",
+      "series": [],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Net FDI fell from about $43bn (FY20) to under $1bn (FY25). Every headline screams this."
+    },
+    {
+      "order": 2,
+      "chartId": "patient-money-and-hot-money",
+      "title": "Patient money and hot money",
+      "chartType": "multiLine",
+      "beat": "definitions",
+      "window": "",
+      "indicator": "extfin.fdi.net.annual.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.net.annual.usd",
+          "label": "Net FDI (control, lasting)"
+        },
+        {
+          "indicator": "extfin.fdi.portfolio_net.annual.usd",
+          "label": "Net FPI / FII (portfolio, mobile)"
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "The two kinds of foreign money behave completely differently."
+    },
+    {
+      "order": 3,
+      "chartId": "gross-inflows-hit-a-record-the-year-net-collapsed",
+      "title": "Gross inflows hit a record the year net 'collapsed'",
+      "chartType": "multiLine",
+      "beat": "gross-vs-net",
+      "window": "",
+      "indicator": "extfin.fdi.gross_inflows.annual.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.gross_inflows.annual.usd",
+          "label": "Gross FDI coming in",
+          "emphasis": true
+        },
+        {
+          "indicator": "extfin.fdi.net.annual.usd",
+          "label": "Net FDI (what the headlines quote)"
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Foreigners did not stop coming. Gross inflows actually rose to a record ~$81bn."
+    },
+    {
+      "order": 4,
+      "chartId": "what-eats-the-gap-repatriation-and-indians-investing-abroad",
+      "title": "What eats the gap: repatriation and Indians investing abroad",
+      "chartType": "multiLine",
+      "beat": "decomposition",
+      "window": "",
+      "indicator": "extfin.fdi.gross_inflows.annual.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.gross_inflows.annual.usd",
+          "label": "Gross inflows"
+        },
+        {
+          "indicator": "extfin.fdi.repatriation.annual.usd",
+          "label": "Repatriation (profits/exits leaving)"
+        },
+        {
+          "indicator": "extfin.fdi.outward.annual.usd",
+          "label": "FDI by India (going abroad)"
+        },
+        {
+          "indicator": "extfin.fdi.net.annual.usd",
+          "label": "Net FDI (what's left)"
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Net = gross minus repatriation minus outward FDI. Both subtractions grew."
+    },
+    {
+      "order": 5,
+      "chartId": "foreign-investors-are-taking-profits-home",
+      "title": "Foreign investors are taking profits home",
+      "chartType": "line",
+      "beat": "repatriation",
+      "window": "full",
+      "indicator": "extfin.fdi.repatriation.annual.usd",
+      "series": [],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Repatriation and disinvestment are why a flow turns negative, and they are rising."
+    },
+    {
+      "order": 6,
+      "chartId": "india-has-quietly-become-a-capital-exporter",
+      "title": "India has quietly become a capital exporter",
+      "chartType": "line",
+      "beat": "outward-stock",
+      "window": "full",
+      "indicator": "extfin.fdi.outward_stock.unctad.usd",
+      "series": [],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Indian firms now hold a large and growing stock of investments abroad."
+    },
+    {
+      "order": 7,
+      "chartId": "and-the-yearly-outflow-has-doubled",
+      "title": "And the yearly outflow has doubled",
+      "chartType": "line",
+      "beat": "outward-flow",
+      "window": "full",
+      "indicator": "extfin.fdi.outward.annual.usd",
+      "series": [],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "The annual pace of Indian investment abroad roughly doubled in five years."
+    },
+    {
+      "order": 8,
+      "chartId": "hot-money-month-by-month",
+      "title": "Hot money, month by month",
+      "chartType": "line",
+      "beat": "rollercoaster",
+      "window": "full",
+      "indicator": "extfin.fdi.portfolio_net.monthly.usd",
+      "series": [],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Portfolio flows are violent at monthly resolution, which is the point of 'hot money'."
+    },
+    {
+      "order": 9,
+      "chartId": "three-wild-years-in-a-row",
+      "title": "Three wild years in a row",
+      "chartType": "recentBars",
+      "beat": "fii-annual",
+      "window": "full",
+      "indicator": "extfin.fdi.portfolio_net.annual.usd",
+      "series": [],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Even annually, FII swings between large inflows and outflows."
+    },
+    {
+      "order": 10,
+      "chartId": "equity-walked-out-while-debt-poured-in",
+      "title": "Equity walked out while debt poured in",
+      "chartType": "multiLine",
+      "beat": "equity-vs-debt",
+      "window": "",
+      "indicator": "extfin.fpi.equity_net.annual.inr",
+      "series": [
+        {
+          "indicator": "extfin.fpi.equity_net.annual.inr",
+          "label": "Equity"
+        },
+        {
+          "indicator": "extfin.fpi.debt_net.annual.inr",
+          "label": "Debt"
+        }
+      ],
+      "unit": "INR crore",
+      "subtitle": "",
+      "whyThisChart": "Lumping 'FII' together hides that equity and debt often move in opposite directions."
+    },
+    {
+      "order": 11,
+      "chartId": "the-bond-index-moment",
+      "title": "The bond-index moment",
+      "chartType": "line",
+      "beat": "bond-index",
+      "window": "full",
+      "indicator": "extfin.fpi.debt_far_net.annual.inr",
+      "series": [],
+      "unit": "INR crore",
+      "subtitle": "",
+      "whyThisChart": "A structural event, not sentiment, drove the recent debt inflows."
+    },
+    {
+      "order": 12,
+      "chartId": "the-real-trigger-sits-in-washington",
+      "title": "The real trigger sits in Washington",
+      "chartType": "line",
+      "beat": "dollar",
+      "window": "full",
+      "indicator": "extfin.driver.usd_em_index",
+      "series": [],
+      "unit": "index (Jan 2006 = 100)",
+      "subtitle": "",
+      "whyThisChart": "When the dollar strengthens against emerging-market currencies, money leaves India."
+    },
+    {
+      "order": 13,
+      "chartId": "the-us-rate-cycle-pulls-the-strings",
+      "title": "The US rate cycle pulls the strings",
+      "chartType": "multiLine",
+      "beat": "us-rates",
+      "window": "",
+      "indicator": "extfin.driver.us_10y_yield",
+      "series": [
+        {
+          "indicator": "extfin.driver.us_10y_yield",
+          "label": "US 10-year yield"
+        },
+        {
+          "indicator": "extfin.driver.fed_funds_rate",
+          "label": "US Fed funds rate"
+        }
+      ],
+      "unit": "percent",
+      "subtitle": "",
+      "whyThisChart": "Higher US rates make safe US assets more attractive than emerging-market risk."
+    },
+    {
+      "order": 14,
+      "chartId": "when-the-world-gets-scared-india-gets-sold",
+      "title": "When the world gets scared, India gets sold",
+      "chartType": "multiLine",
+      "beat": "risk-off",
+      "window": "",
+      "indicator": "extfin.driver.vix",
+      "series": [
+        {
+          "indicator": "extfin.driver.vix",
+          "label": "Global volatility (VIX)"
+        },
+        {
+          "indicator": "extfin.driver.em_vix",
+          "label": "Emerging-market volatility"
+        }
+      ],
+      "unit": "index",
+      "subtitle": "",
+      "whyThisChart": "FII is risk-on/risk-off money; spikes in global fear coincide with outflows."
+    },
+    {
+      "order": 15,
+      "chartId": "what-actually-moves-fii-money",
+      "title": "What actually moves FII money",
+      "chartType": "tableBars",
+      "beat": "sensitivity",
+      "window": "",
+      "indicator": "extfin.fpi.global_sensitivity.corr",
+      "series": [],
+      "unit": "correlation with monthly FII equity",
+      "subtitle": "",
+      "whyThisChart": "Putting the global drivers side by side: all of them pull the same way."
+    },
+    {
+      "order": 16,
+      "chartId": "fdi-comes-from-tiny-tax-treaty-hubs",
+      "title": "FDI 'comes from' tiny tax-treaty hubs",
+      "chartType": "tableBars",
+      "beat": "fdi-source",
+      "window": "",
+      "indicator": "extfin.fdi.source_country.dpiit.usd",
+      "series": [],
+      "unit": "US$ million (cumulative)",
+      "subtitle": "",
+      "whyThisChart": "Two small jurisdictions account for nearly half of India's cumulative FDI."
+    },
+    {
+      "order": 17,
+      "chartId": "but-portfolio-money-is-real-american-money",
+      "title": "But portfolio money is real American money",
+      "chartType": "tableBars",
+      "beat": "fpi-source",
+      "window": "",
+      "indicator": "extfin.fpi.auc_by_country.nsdl.inr",
+      "series": [],
+      "unit": "INR crore",
+      "subtitle": "",
+      "whyThisChart": "Flip to portfolio holdings and the tax-haven pattern vanishes."
+    },
+    {
+      "order": 18,
+      "chartId": "and-it-goes-into-services-not-factories",
+      "title": "And it goes into services, not factories",
+      "chartType": "tableBars",
+      "beat": "fdi-sector",
+      "window": "",
+      "indicator": "extfin.fdi.sector.dpiit.usd",
+      "series": [],
+      "unit": "US$ million (cumulative)",
+      "subtitle": "",
+      "whyThisChart": "Where the money lands is as revealing as where it comes from."
+    },
+    {
+      "order": 19,
+      "chartId": "india-is-a-small-slice-of-world-fdi",
+      "title": "India is a small slice of world FDI",
+      "chartType": "line",
+      "beat": "world-share",
+      "window": "full",
+      "indicator": "extfin.fdi.india_share_world.pct",
+      "series": [],
+      "unit": "percent",
+      "subtitle": "",
+      "whyThisChart": "Zoom out and India's recent dip is partly a global FDI slowdown, not just India's."
+    },
+    {
+      "order": 20,
+      "chartId": "still-well-behind-the-leaders",
+      "title": "Still well behind the leaders",
+      "chartType": "tableBars",
+      "beat": "peers",
+      "window": "",
+      "indicator": "extfin.fdi.peers_inward_flow_latest.unctad.usd",
+      "series": [],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Against peers, India attracts less FDI than its size might suggest."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Net foreign direct investment (annual, US$ mn), latest",
+      "value": 958.896,
+      "displayValue": "958.9",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.net.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net foreign direct investment (annual, US$ mn), earliest",
+      "value": 3272,
+      "displayValue": "3,272",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.net.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI), BoP basis (annual, US$ mn), latest",
+      "value": 3564.133,
+      "displayValue": "3,564.13",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.portfolio_net.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI), BoP basis (annual, US$ mn), earliest",
+      "value": 2590,
+      "displayValue": "2,590",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.portfolio_net.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 43013,
+      "displayValue": "43,013",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 74390,
+      "displayValue": "74,390",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 18384,
+      "displayValue": "18,384",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 12993,
+      "displayValue": "12,993",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 36137,
+      "displayValue": "36,137",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": -16777,
+      "displayValue": "-16,777",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 44081,
+      "displayValue": "44,081",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": -14635,
+      "displayValue": "-14,635",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 10929,
+      "displayValue": "10,929",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Gross FDI inflows to India (annual, US$ mn), latest",
+      "value": 80615.161,
+      "displayValue": "80,615.16",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.gross_inflows.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Gross FDI inflows to India (annual, US$ mn), earliest",
+      "value": 4031,
+      "displayValue": "4,031",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.gross_inflows.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Repatriation / disinvestment of FDI (annual, US$ mn), latest",
+      "value": 51485.617,
+      "displayValue": "51,485.62",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.repatriation.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Repatriation / disinvestment of FDI (annual, US$ mn), earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.repatriation.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI by India (outward direct investment) (annual, US$ mn), latest",
+      "value": 28170.647,
+      "displayValue": "28,170.65",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.outward.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI by India (outward direct investment) (annual, US$ mn), earliest",
+      "value": 759,
+      "displayValue": "759",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.outward.annual.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Outward FDI stock of India (UNCTAD), latest",
+      "value": 260275.26961,
+      "displayValue": "2,60,275.27",
+      "date": "2024-12-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.outward_stock.unctad.usd",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Outward FDI stock of India (UNCTAD), earliest",
+      "value": 124.07079,
+      "displayValue": "124.07",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.outward_stock.unctad.usd",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI) (monthly, US$ mn), latest",
+      "value": -13342.59,
+      "displayValue": "-13,342.59",
+      "date": "2026-03-30",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.portfolio_net.monthly.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI) (monthly, US$ mn), earliest",
+      "value": -609,
+      "displayValue": "-609",
+      "date": "2011-03-30",
+      "unit": "USD million",
+      "indicatorId": "extfin.fdi.portfolio_net.monthly.usd",
+      "sourceId": "rbi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net FPI investment in equity (annual, ₹ cr), latest",
+      "value": -180832,
+      "displayValue": "₹-1.8 lakh",
+      "date": "2026-03-31",
+      "unit": "INR crore",
+      "indicatorId": "extfin.fpi.equity_net.annual.inr",
+      "sourceId": "nsdl",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Net foreign direct investment (annual, US$ mn), latest",
+      "value": 958.896,
+      "displayValue": "958.9",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.net.annual.usd"
+    },
+    {
+      "label": "Net foreign direct investment (annual, US$ mn), earliest",
+      "value": 3272,
+      "displayValue": "3,272",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.net.annual.usd"
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI), BoP basis (annual, US$ mn), latest",
+      "value": 3564.133,
+      "displayValue": "3,564.13",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.portfolio_net.annual.usd"
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI), BoP basis (annual, US$ mn), earliest",
+      "value": 2590,
+      "displayValue": "2,590",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.portfolio_net.annual.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 43013,
+      "displayValue": "43,013",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 74390,
+      "displayValue": "74,390",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 18384,
+      "displayValue": "18,384",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 12993,
+      "displayValue": "12,993",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 36137,
+      "displayValue": "36,137",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": -16777,
+      "displayValue": "-16,777",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 44081,
+      "displayValue": "44,081",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": -14635,
+      "displayValue": "-14,635",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Key FDI/FII reference points (RBI): value",
+      "value": 10929,
+      "displayValue": "10,929",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.narrative_anchors.usd"
+    },
+    {
+      "label": "Gross FDI inflows to India (annual, US$ mn), latest",
+      "value": 80615.161,
+      "displayValue": "80,615.16",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.gross_inflows.annual.usd"
+    },
+    {
+      "label": "Gross FDI inflows to India (annual, US$ mn), earliest",
+      "value": 4031,
+      "displayValue": "4,031",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.gross_inflows.annual.usd"
+    },
+    {
+      "label": "Repatriation / disinvestment of FDI (annual, US$ mn), latest",
+      "value": 51485.617,
+      "displayValue": "51,485.62",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.repatriation.annual.usd"
+    },
+    {
+      "label": "Repatriation / disinvestment of FDI (annual, US$ mn), earliest",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.repatriation.annual.usd"
+    },
+    {
+      "label": "FDI by India (outward direct investment) (annual, US$ mn), latest",
+      "value": 28170.647,
+      "displayValue": "28,170.65",
+      "date": "2025-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.outward.annual.usd"
+    },
+    {
+      "label": "FDI by India (outward direct investment) (annual, US$ mn), earliest",
+      "value": 759,
+      "displayValue": "759",
+      "date": "2001-03-31",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.outward.annual.usd"
+    },
+    {
+      "label": "Outward FDI stock of India (UNCTAD), latest",
+      "value": 260275.26961,
+      "displayValue": "2,60,275.27",
+      "date": "2024-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.outward_stock.unctad.usd"
+    },
+    {
+      "label": "Outward FDI stock of India (UNCTAD), earliest",
+      "value": 124.07079,
+      "displayValue": "124.07",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.outward_stock.unctad.usd"
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI) (monthly, US$ mn), latest",
+      "value": -13342.59,
+      "displayValue": "-13,342.59",
+      "date": "2026-03-30",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.portfolio_net.monthly.usd"
+    },
+    {
+      "label": "Net portfolio investment (FII/FPI) (monthly, US$ mn), earliest",
+      "value": -609,
+      "displayValue": "-609",
+      "date": "2011-03-30",
+      "unit": "USD million",
+      "sourceId": "rbi",
+      "indicatorId": "extfin.fdi.portfolio_net.monthly.usd"
+    },
+    {
+      "label": "Net FPI investment in equity (annual, ₹ cr), latest",
+      "value": -180832,
+      "displayValue": "₹-1.8 lakh",
+      "date": "2026-03-31",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.equity_net.annual.inr"
+    },
+    {
+      "label": "Net FPI investment in equity (annual, ₹ cr), earliest",
+      "value": 13,
+      "displayValue": "₹13",
+      "date": "1993-03-31",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.equity_net.annual.inr"
+    },
+    {
+      "label": "Net FPI investment in debt (annual, ₹ cr), latest",
+      "value": 25807,
+      "displayValue": "₹25,807",
+      "date": "2026-03-31",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.debt_net.annual.inr"
+    },
+    {
+      "label": "Net FPI investment in debt (annual, ₹ cr), earliest",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "1993-03-31",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.debt_net.annual.inr"
+    },
+    {
+      "label": "Net FPI debt under Fully Accessible Route (FAR) (annual, ₹ cr), latest",
+      "value": 15449,
+      "displayValue": "₹15,449",
+      "date": "2026-03-31",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.debt_far_net.annual.inr"
+    },
+    {
+      "label": "Net FPI debt under Fully Accessible Route (FAR) (annual, ₹ cr), earliest",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "1993-03-31",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.debt_far_net.annual.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): inr_crore",
+      "value": 208212,
+      "displayValue": "₹2.1 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): value",
+      "value": 208212,
+      "displayValue": "₹2.1 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): inr_crore",
+      "value": 118087,
+      "displayValue": "₹1.2 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): value",
+      "value": 118087,
+      "displayValue": "₹1.2 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): inr_crore",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): value",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): inr_crore",
+      "value": -127041,
+      "displayValue": "₹-1.3 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): value",
+      "value": -127041,
+      "displayValue": "₹-1.3 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): inr_crore",
+      "value": 143162,
+      "displayValue": "₹1.4 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): value",
+      "value": 143162,
+      "displayValue": "₹1.4 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): inr_crore",
+      "value": 80691,
+      "displayValue": "₹80,691",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "Recent FPI net investment by instrument (NSDL): value",
+      "value": 80691,
+      "displayValue": "₹80,691",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr"
+    },
+    {
+      "label": "US dollar index vs emerging-market currencies (nominal), latest",
+      "value": 128.62872000000002,
+      "displayValue": "128.63",
+      "date": "2026-06-01",
+      "unit": "index (Jan 2006 = 100)",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.usd_em_index"
+    },
+    {
+      "label": "US dollar index vs emerging-market currencies (nominal), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "2006-01-01",
+      "unit": "index (Jan 2006 = 100)",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.usd_em_index"
+    },
+    {
+      "label": "US 10-year Treasury yield, latest",
+      "value": 4.5042857142857144,
+      "displayValue": "4.5",
+      "date": "2026-06-01",
+      "unit": "percent",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.us_10y_yield"
+    },
+    {
+      "label": "US 10-year Treasury yield, earliest",
+      "value": 3.7331578947368427,
+      "displayValue": "3.73",
+      "date": "2010-01-01",
+      "unit": "percent",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.us_10y_yield"
+    },
+    {
+      "label": "US federal funds rate, latest",
+      "value": 3.63,
+      "displayValue": "3.63",
+      "date": "2026-05-01",
+      "unit": "percent",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.fed_funds_rate"
+    },
+    {
+      "label": "US federal funds rate, earliest",
+      "value": 0.11,
+      "displayValue": "0.11",
+      "date": "2010-01-01",
+      "unit": "percent",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.fed_funds_rate"
+    },
+    {
+      "label": "CBOE Volatility Index (VIX), latest",
+      "value": 17.654285714285713,
+      "displayValue": "17.65",
+      "date": "2026-06-01",
+      "unit": "index",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.vix"
+    },
+    {
+      "label": "CBOE Volatility Index (VIX), earliest",
+      "value": 20.643157894736845,
+      "displayValue": "20.64",
+      "date": "2010-01-01",
+      "unit": "index",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.vix"
+    },
+    {
+      "label": "CBOE Emerging-Markets ETF Volatility Index, latest",
+      "value": 36.67285714285714,
+      "displayValue": "36.67",
+      "date": "2026-06-01",
+      "unit": "index",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.em_vix"
+    },
+    {
+      "label": "CBOE Emerging-Markets ETF Volatility Index, earliest",
+      "value": 25.989999999999995,
+      "displayValue": "25.99",
+      "date": "2011-03-01",
+      "unit": "index",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.em_vix"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: correlation",
+      "value": -0.37,
+      "displayValue": "-0.37",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: n",
+      "value": 184,
+      "displayValue": "184",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: value",
+      "value": -0.37,
+      "displayValue": "-0.37",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: correlation",
+      "value": -0.34,
+      "displayValue": "-0.34",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: n",
+      "value": 182,
+      "displayValue": "182",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: value",
+      "value": -0.34,
+      "displayValue": "-0.34",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: correlation",
+      "value": -0.33,
+      "displayValue": "-0.33",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: n",
+      "value": 184,
+      "displayValue": "184",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: value",
+      "value": -0.33,
+      "displayValue": "-0.33",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: correlation",
+      "value": -0.12,
+      "displayValue": "-0.12",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: n",
+      "value": 184,
+      "displayValue": "184",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "What moves FII money: correlation of monthly equity flows with global conditions: value",
+      "value": -0.12,
+      "displayValue": "-0.12",
+      "date": "",
+      "unit": "correlation coefficient",
+      "sourceId": "derived",
+      "indicatorId": "extfin.fpi.global_sensitivity.corr"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): cumulative_fdi_usd_million",
+      "value": 180190.5,
+      "displayValue": "1,80,190.5",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): share_pct",
+      "value": 24.7,
+      "displayValue": "24.7",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): value",
+      "value": 180190.5,
+      "displayValue": "1,80,190.5",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): cumulative_fdi_usd_million",
+      "value": 174885.8,
+      "displayValue": "1,74,885.8",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): share_pct",
+      "value": 24,
+      "displayValue": "24",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): value",
+      "value": 174885.8,
+      "displayValue": "1,74,885.8",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): cumulative_fdi_usd_million",
+      "value": 70650.5,
+      "displayValue": "70,650.5",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): share_pct",
+      "value": 9.7,
+      "displayValue": "9.7",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): value",
+      "value": 70650.5,
+      "displayValue": "70,650.5",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): cumulative_fdi_usd_million",
+      "value": 53302.3,
+      "displayValue": "53,302.3",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): share_pct",
+      "value": 7.3,
+      "displayValue": "7.3",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by source country (DPIIT): value",
+      "value": 53302.3,
+      "displayValue": "53,302.3",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): cumulative_fdi_usd_million",
+      "value": 118843.3,
+      "displayValue": "1,18,843.3",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): share_pct",
+      "value": 16.3,
+      "displayValue": "16.3",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): value",
+      "value": 118843.3,
+      "displayValue": "1,18,843.3",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): cumulative_fdi_usd_million",
+      "value": 110698.1,
+      "displayValue": "1,10,698.1",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): share_pct",
+      "value": 15.2,
+      "displayValue": "15.2",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): value",
+      "value": 110698.1,
+      "displayValue": "1,10,698.1",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): cumulative_fdi_usd_million",
+      "value": 47571.6,
+      "displayValue": "47,571.6",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): share_pct",
+      "value": 6.5,
+      "displayValue": "6.5",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): value",
+      "value": 47571.6,
+      "displayValue": "47,571.6",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): cumulative_fdi_usd_million",
+      "value": 40072,
+      "displayValue": "40,072",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): share_pct",
+      "value": 5.5,
+      "displayValue": "5.5",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "Cumulative FDI equity inflow by sector (DPIIT): value",
+      "value": 40072,
+      "displayValue": "40,072",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "indiadatahub",
+      "indicatorId": "extfin.fdi.sector.dpiit.usd"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): equity_inr_cr",
+      "value": 3003335,
+      "displayValue": "₹30 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): debt_inr_cr",
+      "value": 66449,
+      "displayValue": "₹66,449",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): hybrid_inr_cr",
+      "value": 12698,
+      "displayValue": "₹12,698",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): mutual_funds_inr_cr",
+      "value": 6,
+      "displayValue": "₹6",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): aif_inr_cr",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): total_inr_cr",
+      "value": 3082487,
+      "displayValue": "₹30.8 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): share_pct",
+      "value": 41.2,
+      "displayValue": "₹41",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): value",
+      "value": 3082487,
+      "displayValue": "₹30.8 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): equity_inr_cr",
+      "value": 405809,
+      "displayValue": "₹4.1 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): debt_inr_cr",
+      "value": 124189,
+      "displayValue": "₹1.2 lakh",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): hybrid_inr_cr",
+      "value": 20821,
+      "displayValue": "₹20,821",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "FPI assets under custody by source country (NSDL, May 2026): mutual_funds_inr_cr",
+      "value": 932,
+      "displayValue": "₹932",
+      "date": "",
+      "unit": "INR crore",
+      "sourceId": "nsdl",
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr"
+    },
+    {
+      "label": "India's share of world FDI inflows, latest",
+      "value": 1.826377877061468,
+      "displayValue": "1.83",
+      "date": "2024-12-31",
+      "unit": "percent",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.india_share_world.pct"
+    },
+    {
+      "label": "India's share of world FDI inflows, earliest",
+      "value": 0.11552181823669656,
+      "displayValue": "0.12",
+      "date": "1990-12-31",
+      "unit": "percent",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.india_share_world.pct"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): inward_flow_usd_million",
+      "value": 278848,
+      "displayValue": "2,78,848",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): value",
+      "value": 278848,
+      "displayValue": "2,78,848",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): inward_flow_usd_million",
+      "value": 143352.24471,
+      "displayValue": "1,43,352.24",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): value",
+      "value": 143352.24471,
+      "displayValue": "1,43,352.24",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): inward_flow_usd_million",
+      "value": 116237.7,
+      "displayValue": "1,16,237.7",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): value",
+      "value": 116237.7,
+      "displayValue": "1,16,237.7",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): inward_flow_usd_million",
+      "value": 59178.0342,
+      "displayValue": "59,178.03",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): value",
+      "value": 59178.0342,
+      "displayValue": "59,178.03",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): inward_flow_usd_million",
+      "value": 36872.42195,
+      "displayValue": "36,872.42",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): value",
+      "value": 36872.42195,
+      "displayValue": "36,872.42",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): inward_flow_usd_million",
+      "value": 278848,
+      "displayValue": "2,78,848",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    },
+    {
+      "label": "FDI inflows: India vs peers (2024): value",
+      "value": 278848,
+      "displayValue": "2,78,848",
+      "date": 2024,
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "extfin.fdi.net.annual.usd",
+      "title": "Net foreign direct investment (annual, US$ mn)",
+      "sourceId": "rbi",
+      "sourceIndicatorId": "extfin.fdi.net.annual.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 25,
+      "earliest": {
+        "date": "2001-03-31",
+        "value": 3272
+      },
+      "latest": {
+        "date": "2025-03-31",
+        "value": 958.896
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.portfolio_net.annual.usd",
+      "title": "Net portfolio investment (FII/FPI), BoP basis (annual, US$ mn)",
+      "sourceId": "rbi",
+      "sourceIndicatorId": "extfin.fdi.portfolio_net.annual.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 25,
+      "earliest": {
+        "date": "2001-03-31",
+        "value": 2590
+      },
+      "latest": {
+        "date": "2025-03-31",
+        "value": 3564.133
+      }
+    },
+    {
+      "indicatorId": "extfin.narrative_anchors.usd",
+      "title": "Key FDI/FII reference points (RBI)",
+      "sourceId": "rbi",
+      "sourceIndicatorId": "extfin.narrative_anchors.usd",
+      "unit": "USD million",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 9,
+      "dimensions": [
+        {
+          "id": "anchor",
+          "label": "Reference point"
+        }
+      ],
+      "latestRows": [
+        {
+          "anchor": "Net FDI peak, FY2019-20 (US$ mn)",
+          "label": "Net FDI, 2019-20",
+          "value": 43013
+        },
+        {
+          "anchor": "Gross FDI inflows, FY2019-20 (US$ mn)",
+          "label": "Gross FDI inflows, 2019-20",
+          "value": 74390
+        },
+        {
+          "anchor": "Repatriation, FY2019-20 (US$ mn)",
+          "label": "Repatriation, 2019-20",
+          "value": 18384
+        },
+        {
+          "anchor": "Outward FDI, FY2019-20 (US$ mn)",
+          "label": "FDI by India, 2019-20",
+          "value": 12993
+        },
+        {
+          "anchor": "Net FPI, FY2020-21 (US$ mn)",
+          "label": "Net FPI, 2020-21",
+          "value": 36137
+        },
+        {
+          "anchor": "Net FPI, FY2021-22 (US$ mn)",
+          "label": "Net FPI, 2021-22",
+          "value": -16777
+        },
+        {
+          "anchor": "Net FPI, FY2023-24 (US$ mn)",
+          "label": "Net FPI, 2023-24",
+          "value": 44081
+        },
+        {
+          "anchor": "Worst FII month: March 2020 (US$ mn)",
+          "label": "Net FPI, March 2020 (COVID)",
+          "value": -14635
+        },
+        {
+          "anchor": "Best FII month: November 2020 (US$ mn)",
+          "label": "Net FPI, November 2020",
+          "value": 10929
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fdi.gross_inflows.annual.usd",
+      "title": "Gross FDI inflows to India (annual, US$ mn)",
+      "sourceId": "rbi",
+      "sourceIndicatorId": "extfin.fdi.gross_inflows.annual.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 25,
+      "earliest": {
+        "date": "2001-03-31",
+        "value": 4031
+      },
+      "latest": {
+        "date": "2025-03-31",
+        "value": 80615.161
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.repatriation.annual.usd",
+      "title": "Repatriation / disinvestment of FDI (annual, US$ mn)",
+      "sourceId": "rbi",
+      "sourceIndicatorId": "extfin.fdi.repatriation.annual.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 25,
+      "earliest": {
+        "date": "2001-03-31",
+        "value": 0
+      },
+      "latest": {
+        "date": "2025-03-31",
+        "value": 51485.617
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.outward.annual.usd",
+      "title": "FDI by India (outward direct investment) (annual, US$ mn)",
+      "sourceId": "rbi",
+      "sourceIndicatorId": "extfin.fdi.outward.annual.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 25,
+      "earliest": {
+        "date": "2001-03-31",
+        "value": 759
+      },
+      "latest": {
+        "date": "2025-03-31",
+        "value": 28170.647
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.outward_stock.unctad.usd",
+      "title": "Outward FDI stock of India (UNCTAD)",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.outward_stock.unctad.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 35,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 124.07079
+      },
+      "latest": {
+        "date": "2024-12-31",
+        "value": 260275.26961
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.portfolio_net.monthly.usd",
+      "title": "Net portfolio investment (FII/FPI) (monthly, US$ mn)",
+      "sourceId": "rbi",
+      "sourceIndicatorId": "extfin.fdi.portfolio_net.monthly.usd",
+      "unit": "USD million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 181,
+      "earliest": {
+        "date": "2011-03-30",
+        "value": -609
+      },
+      "latest": {
+        "date": "2026-03-30",
+        "value": -13342.59
+      }
+    },
+    {
+      "indicatorId": "extfin.fpi.equity_net.annual.inr",
+      "title": "Net FPI investment in equity (annual, ₹ cr)",
+      "sourceId": "nsdl",
+      "sourceIndicatorId": "extfin.fpi.equity_net.annual.inr",
+      "unit": "INR crore",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 34,
+      "earliest": {
+        "date": "1993-03-31",
+        "value": 13
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": -180832
+      }
+    },
+    {
+      "indicatorId": "extfin.fpi.debt_net.annual.inr",
+      "title": "Net FPI investment in debt (annual, ₹ cr)",
+      "sourceId": "nsdl",
+      "sourceIndicatorId": "extfin.fpi.debt_net.annual.inr",
+      "unit": "INR crore",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 34,
+      "earliest": {
+        "date": "1993-03-31",
+        "value": 0
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 25807
+      }
+    },
+    {
+      "indicatorId": "extfin.fpi.debt_far_net.annual.inr",
+      "title": "Net FPI debt under Fully Accessible Route (FAR) (annual, ₹ cr)",
+      "sourceId": "nsdl",
+      "sourceIndicatorId": "extfin.fpi.debt_far_net.annual.inr",
+      "unit": "INR crore",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 34,
+      "earliest": {
+        "date": "1993-03-31",
+        "value": 0
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 15449
+      }
+    },
+    {
+      "indicatorId": "extfin.fpi.recent_split.nsdl.inr",
+      "title": "Recent FPI net investment by instrument (NSDL)",
+      "sourceId": "nsdl",
+      "sourceIndicatorId": "extfin.fpi.recent_split.nsdl.inr",
+      "unit": "INR crore",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 9,
+      "dimensions": [
+        {
+          "id": "fiscal_year",
+          "label": "Fiscal year"
+        },
+        {
+          "id": "instrument",
+          "label": "Instrument"
+        }
+      ],
+      "latestRows": [
+        {
+          "fiscal_year": "2023-24",
+          "instrument": "Equity",
+          "inr_crore": 208212,
+          "label": "Net FPI equity, 2023-24",
+          "value": 208212
+        },
+        {
+          "fiscal_year": "2023-24",
+          "instrument": "Debt",
+          "inr_crore": 118087,
+          "label": "Net FPI debt, 2023-24",
+          "value": 118087
+        },
+        {
+          "fiscal_year": "2023-24",
+          "instrument": "Debt via FAR",
+          "inr_crore": 0,
+          "label": "Net FPI debt via FAR, 2023-24",
+          "value": 0
+        },
+        {
+          "fiscal_year": "2024-25",
+          "instrument": "Equity",
+          "inr_crore": -127041,
+          "label": "Net FPI equity, 2024-25",
+          "value": -127041
+        },
+        {
+          "fiscal_year": "2024-25",
+          "instrument": "Debt",
+          "inr_crore": 143162,
+          "label": "Net FPI debt, 2024-25",
+          "value": 143162
+        },
+        {
+          "fiscal_year": "2024-25",
+          "instrument": "Debt via FAR",
+          "inr_crore": 80691,
+          "label": "Net FPI debt via FAR, 2024-25",
+          "value": 80691
+        },
+        {
+          "fiscal_year": "2025-26",
+          "instrument": "Equity",
+          "inr_crore": -180832,
+          "label": "Net FPI equity, 2025-26",
+          "value": -180832
+        },
+        {
+          "fiscal_year": "2025-26",
+          "instrument": "Debt",
+          "inr_crore": 25807,
+          "label": "Net FPI debt, 2025-26",
+          "value": 25807
+        },
+        {
+          "fiscal_year": "2025-26",
+          "instrument": "Debt via FAR",
+          "inr_crore": 15449,
+          "label": "Net FPI debt via FAR, 2025-26",
+          "value": 15449
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.driver.usd_em_index",
+      "title": "US dollar index vs emerging-market currencies (nominal)",
+      "sourceId": "fred",
+      "sourceIndicatorId": "DTWEXEMEGS",
+      "unit": "index (Jan 2006 = 100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "global",
+        "id": "GLOBAL",
+        "name": "Global"
+      },
+      "observations": 246,
+      "earliest": {
+        "date": "2006-01-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-06-01",
+        "value": 128.62872000000002
+      }
+    },
+    {
+      "indicatorId": "extfin.driver.us_10y_yield",
+      "title": "US 10-year Treasury yield",
+      "sourceId": "fred",
+      "sourceIndicatorId": "DGS10",
+      "unit": "percent",
+      "frequency": "monthly",
+      "geography": {
+        "type": "global",
+        "id": "GLOBAL",
+        "name": "Global"
+      },
+      "observations": 198,
+      "earliest": {
+        "date": "2010-01-01",
+        "value": 3.7331578947368427
+      },
+      "latest": {
+        "date": "2026-06-01",
+        "value": 4.5042857142857144
+      }
+    },
+    {
+      "indicatorId": "extfin.driver.fed_funds_rate",
+      "title": "US federal funds rate",
+      "sourceId": "fred",
+      "sourceIndicatorId": "FEDFUNDS",
+      "unit": "percent",
+      "frequency": "monthly",
+      "geography": {
+        "type": "global",
+        "id": "GLOBAL",
+        "name": "Global"
+      },
+      "observations": 197,
+      "earliest": {
+        "date": "2010-01-01",
+        "value": 0.11
+      },
+      "latest": {
+        "date": "2026-05-01",
+        "value": 3.63
+      }
+    },
+    {
+      "indicatorId": "extfin.driver.vix",
+      "title": "CBOE Volatility Index (VIX)",
+      "sourceId": "fred",
+      "sourceIndicatorId": "VIXCLS",
+      "unit": "index",
+      "frequency": "monthly",
+      "geography": {
+        "type": "global",
+        "id": "GLOBAL",
+        "name": "Global"
+      },
+      "observations": 198,
+      "earliest": {
+        "date": "2010-01-01",
+        "value": 20.643157894736845
+      },
+      "latest": {
+        "date": "2026-06-01",
+        "value": 17.654285714285713
+      }
+    },
+    {
+      "indicatorId": "extfin.driver.em_vix",
+      "title": "CBOE Emerging-Markets ETF Volatility Index",
+      "sourceId": "fred",
+      "sourceIndicatorId": "VXEEMCLS",
+      "unit": "index",
+      "frequency": "monthly",
+      "geography": {
+        "type": "global",
+        "id": "GLOBAL",
+        "name": "Global"
+      },
+      "observations": 184,
+      "earliest": {
+        "date": "2011-03-01",
+        "value": 25.989999999999995
+      },
+      "latest": {
+        "date": "2026-06-01",
+        "value": 36.67285714285714
+      }
+    },
+    {
+      "indicatorId": "extfin.fpi.global_sensitivity.corr",
+      "title": "What moves FII money: correlation of monthly equity flows with global conditions",
+      "sourceId": "derived",
+      "sourceIndicatorId": "extfin.fpi.global_sensitivity.corr",
+      "unit": "correlation coefficient",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 5,
+      "dimensions": [
+        {
+          "id": "factor",
+          "label": "Global factor"
+        }
+      ],
+      "latestRows": [
+        {
+          "factor": "Dollar (vs EM currencies)",
+          "basis": "month-over-month change",
+          "correlation": -0.37,
+          "n": 184,
+          "label": "Dollar (vs EM currencies)",
+          "value": -0.37
+        },
+        {
+          "factor": "Emerging-market volatility",
+          "basis": "month-over-month change",
+          "correlation": -0.34,
+          "n": 182,
+          "label": "Emerging-market volatility",
+          "value": -0.34
+        },
+        {
+          "factor": "Global volatility (VIX)",
+          "basis": "month-over-month change",
+          "correlation": -0.33,
+          "n": 184,
+          "label": "Global volatility (VIX)",
+          "value": -0.33
+        },
+        {
+          "factor": "US 10-year yield",
+          "basis": "month-over-month change",
+          "correlation": -0.12,
+          "n": 184,
+          "label": "US 10-year yield",
+          "value": -0.12
+        },
+        {
+          "factor": "US Fed funds rate",
+          "basis": "level",
+          "correlation": -0.11,
+          "n": 184,
+          "label": "US Fed funds rate",
+          "value": -0.11
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fdi.source_country.dpiit.usd",
+      "title": "Cumulative FDI equity inflow by source country (DPIIT)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "EXFIDIP*11A",
+      "unit": "USD million",
+      "geography": {
+        "type": "multi",
+        "id": "MULTI",
+        "name": "Selected source countries"
+      },
+      "rows": 13,
+      "dimensions": [
+        {
+          "id": "country",
+          "label": "Source country"
+        }
+      ],
+      "latestRows": [
+        {
+          "country": "Mauritius",
+          "code": "EXFIDIPMAU11A",
+          "cumulative_fdi_usd_million": 180190.5,
+          "as_of": "2025-03-31",
+          "share_pct": 24.7,
+          "label": "Mauritius",
+          "value": 180190.5
+        },
+        {
+          "country": "Singapore",
+          "code": "EXFIDIPSIG11A",
+          "cumulative_fdi_usd_million": 174885.8,
+          "as_of": "2025-03-31",
+          "share_pct": 24,
+          "label": "Singapore",
+          "value": 174885.8
+        },
+        {
+          "country": "United States",
+          "code": "EXFIDIPUSA11A",
+          "cumulative_fdi_usd_million": 70650.5,
+          "as_of": "2025-03-31",
+          "share_pct": 9.7,
+          "label": "United States",
+          "value": 70650.5
+        },
+        {
+          "country": "Netherlands",
+          "code": "EXFIDIPNET11A",
+          "cumulative_fdi_usd_million": 53302.3,
+          "as_of": "2025-03-31",
+          "share_pct": 7.3,
+          "label": "Netherlands",
+          "value": 53302.3
+        },
+        {
+          "country": "Japan",
+          "code": "EXFIDIPJAP11A",
+          "cumulative_fdi_usd_million": 44395.9,
+          "as_of": "2025-03-31",
+          "share_pct": 6.1,
+          "label": "Japan",
+          "value": 44395.9
+        },
+        {
+          "country": "United Kingdom",
+          "code": "EXFIDIPUKG11A",
+          "cumulative_fdi_usd_million": 35886.7,
+          "as_of": "2025-03-31",
+          "share_pct": 4.9,
+          "label": "United Kingdom",
+          "value": 35886.7
+        },
+        {
+          "country": "UAE",
+          "code": "EXFIDIPUAE11A",
+          "cumulative_fdi_usd_million": 22847.6,
+          "as_of": "2025-03-31",
+          "share_pct": 3.1,
+          "label": "UAE",
+          "value": 22847.6
+        },
+        {
+          "country": "Cayman Islands",
+          "code": "EXFIDIPCAY11A",
+          "cumulative_fdi_usd_million": 15637.5,
+          "as_of": "2025-03-31",
+          "share_pct": 2.1,
+          "label": "Cayman Islands",
+          "value": 15637.5
+        },
+        {
+          "country": "Germany",
+          "code": "EXFIDIPGER11A",
+          "cumulative_fdi_usd_million": 15112.1,
+          "as_of": "2025-03-31",
+          "share_pct": 2.1,
+          "label": "Germany",
+          "value": 15112.1
+        },
+        {
+          "country": "Cyprus",
+          "code": "EXFIDIPCYP11A",
+          "cumulative_fdi_usd_million": 14653.1,
+          "as_of": "2025-03-31",
+          "share_pct": 2,
+          "label": "Cyprus",
+          "value": 14653.1
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fdi.sector.dpiit.usd",
+      "title": "Cumulative FDI equity inflow by sector (DPIIT)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "EXFIDIP*11A (sector)",
+      "unit": "USD million",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 12,
+      "dimensions": [
+        {
+          "id": "sector",
+          "label": "Sector"
+        }
+      ],
+      "latestRows": [
+        {
+          "sector": "Services (finance, banking, insurance, etc.)",
+          "code": "EXFIDIPOSV11A",
+          "cumulative_fdi_usd_million": 118843.3,
+          "as_of": "2025-03-31",
+          "share_pct": 16.3,
+          "label": "Services (finance, banking, insurance, etc.)",
+          "value": 118843.3
+        },
+        {
+          "sector": "Computer software & hardware",
+          "code": "EXFIDIPCSH11A",
+          "cumulative_fdi_usd_million": 110698.1,
+          "as_of": "2025-03-31",
+          "share_pct": 15.2,
+          "label": "Computer software & hardware",
+          "value": 110698.1
+        },
+        {
+          "sector": "Trading",
+          "code": "EXFIDIPTRA11A",
+          "cumulative_fdi_usd_million": 47571.6,
+          "as_of": "2025-03-31",
+          "share_pct": 6.5,
+          "label": "Trading",
+          "value": 47571.6
+        },
+        {
+          "sector": "Telecommunications",
+          "code": "EXFIDIPTEL11A",
+          "cumulative_fdi_usd_million": 40072,
+          "as_of": "2025-03-31",
+          "share_pct": 5.5,
+          "label": "Telecommunications",
+          "value": 40072
+        },
+        {
+          "sector": "Automobile industry",
+          "code": "EXFIDIPAUT11A",
+          "cumulative_fdi_usd_million": 37854.4,
+          "as_of": "2025-03-31",
+          "share_pct": 5.2,
+          "label": "Automobile industry",
+          "value": 37854.4
+        },
+        {
+          "sector": "Infrastructure construction",
+          "code": "EXFIDIPINC11A",
+          "cumulative_fdi_usd_million": 36162.6,
+          "as_of": "2025-03-31",
+          "share_pct": 5,
+          "label": "Infrastructure construction",
+          "value": 36162.6
+        },
+        {
+          "sector": "Construction (other)",
+          "code": "EXFIDIPOCO11A",
+          "cumulative_fdi_usd_million": 27139.2,
+          "as_of": "2025-03-31",
+          "share_pct": 3.7,
+          "label": "Construction (other)",
+          "value": 27139.2
+        },
+        {
+          "sector": "Drugs & pharmaceuticals",
+          "code": "EXFIDIPDRU11A",
+          "cumulative_fdi_usd_million": 23419.4,
+          "as_of": "2025-03-31",
+          "share_pct": 3.2,
+          "label": "Drugs & pharmaceuticals",
+          "value": 23419.4
+        },
+        {
+          "sector": "Chemicals (excl. fertilizers)",
+          "code": "EXFIDIPCHE11A",
+          "cumulative_fdi_usd_million": 23206.9,
+          "as_of": "2025-03-31",
+          "share_pct": 3.2,
+          "label": "Chemicals (excl. fertilizers)",
+          "value": 23206.9
+        },
+        {
+          "sector": "Non-conventional energy",
+          "code": "EXFIDIPNCE11A",
+          "cumulative_fdi_usd_million": 21899.6,
+          "as_of": "2025-03-31",
+          "share_pct": 3,
+          "label": "Non-conventional energy",
+          "value": 21899.6
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fpi.auc_by_country.nsdl.inr",
+      "title": "FPI assets under custody by source country (NSDL, May 2026)",
+      "sourceId": "nsdl",
+      "sourceIndicatorId": "extfin.fpi.auc_by_country.nsdl.inr",
+      "unit": "INR crore",
+      "geography": {
+        "type": "multi",
+        "id": "MULTI",
+        "name": "Selected countries"
+      },
+      "rows": 12,
+      "dimensions": [
+        {
+          "id": "country",
+          "label": "Country"
+        }
+      ],
+      "latestRows": [
+        {
+          "country": "UNITED STATES OF AMERICA",
+          "equity_inr_cr": 3003335,
+          "debt_inr_cr": 66449,
+          "hybrid_inr_cr": 12698,
+          "mutual_funds_inr_cr": 6,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 3082487,
+          "share_pct": 41.2,
+          "label": "UNITED STATES OF AMERICA",
+          "value": 3082487
+        },
+        {
+          "country": "SINGAPORE",
+          "equity_inr_cr": 405809,
+          "debt_inr_cr": 124189,
+          "hybrid_inr_cr": 20821,
+          "mutual_funds_inr_cr": 932,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 551751,
+          "share_pct": 7.4,
+          "label": "SINGAPORE",
+          "value": 551751
+        },
+        {
+          "country": "LUXEMBOURG",
+          "equity_inr_cr": 478860,
+          "debt_inr_cr": 48656,
+          "hybrid_inr_cr": 2544,
+          "mutual_funds_inr_cr": 0,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 530060,
+          "share_pct": 7.1,
+          "label": "LUXEMBOURG",
+          "value": 530060
+        },
+        {
+          "country": "IRELAND",
+          "equity_inr_cr": 462402,
+          "debt_inr_cr": 44834,
+          "hybrid_inr_cr": 1608,
+          "mutual_funds_inr_cr": 0,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 508844,
+          "share_pct": 6.8,
+          "label": "IRELAND",
+          "value": 508844
+        },
+        {
+          "country": "MAURITIUS",
+          "equity_inr_cr": 288007,
+          "debt_inr_cr": 45643,
+          "hybrid_inr_cr": 3525,
+          "mutual_funds_inr_cr": 7841,
+          "aif_inr_cr": 26,
+          "total_inr_cr": 345043,
+          "share_pct": 4.6,
+          "label": "MAURITIUS",
+          "value": 345043
+        },
+        {
+          "country": "UNITED KINGDOM",
+          "equity_inr_cr": 301180,
+          "debt_inr_cr": 15513,
+          "hybrid_inr_cr": 1956,
+          "mutual_funds_inr_cr": 0,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 318649,
+          "share_pct": 4.3,
+          "label": "UNITED KINGDOM",
+          "value": 318649
+        },
+        {
+          "country": "NORWAY",
+          "equity_inr_cr": 265624,
+          "debt_inr_cr": 646,
+          "hybrid_inr_cr": 1641,
+          "mutual_funds_inr_cr": 0,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 267911,
+          "share_pct": 3.6,
+          "label": "NORWAY",
+          "value": 267911
+        },
+        {
+          "country": "CANADA",
+          "equity_inr_cr": 195327,
+          "debt_inr_cr": 27121,
+          "hybrid_inr_cr": 4829,
+          "mutual_funds_inr_cr": 184,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 227460,
+          "share_pct": 3,
+          "label": "CANADA",
+          "value": 227460
+        },
+        {
+          "country": "JAPAN",
+          "equity_inr_cr": 196218,
+          "debt_inr_cr": 26948,
+          "hybrid_inr_cr": 605,
+          "mutual_funds_inr_cr": 0,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 223772,
+          "share_pct": 3,
+          "label": "JAPAN",
+          "value": 223772
+        },
+        {
+          "country": "FRANCE",
+          "equity_inr_cr": 149867,
+          "debt_inr_cr": 10506,
+          "hybrid_inr_cr": 876,
+          "mutual_funds_inr_cr": 161,
+          "aif_inr_cr": 0,
+          "total_inr_cr": 161409,
+          "share_pct": 2.2,
+          "label": "FRANCE",
+          "value": 161409
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fdi.india_share_world.pct",
+      "title": "India's share of world FDI inflows",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.india_share_world.pct",
+      "unit": "percent",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 35,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 0.11552181823669656
+      },
+      "latest": {
+        "date": "2024-12-31",
+        "value": 1.826377877061468
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd",
+      "title": "FDI inflows: India vs peers (2024)",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.peers_inward_flow_latest.unctad.usd",
+      "unit": "USD million",
+      "geography": {
+        "type": "multi",
+        "id": "MULTI",
+        "name": "Selected economies"
+      },
+      "rows": 11,
+      "dimensions": [
+        {
+          "id": "economy",
+          "label": "Economy"
+        }
+      ],
+      "latestRows": [
+        {
+          "economy": "United States",
+          "year": 2024,
+          "inward_flow_usd_million": 278848,
+          "label": "United States",
+          "value": 278848
+        },
+        {
+          "economy": "Singapore",
+          "year": 2024,
+          "inward_flow_usd_million": 143352.24471,
+          "label": "Singapore",
+          "value": 143352.24471
+        },
+        {
+          "economy": "China",
+          "year": 2024,
+          "inward_flow_usd_million": 116237.7,
+          "label": "China",
+          "value": 116237.7
+        },
+        {
+          "economy": "Brazil",
+          "year": 2024,
+          "inward_flow_usd_million": 59178.0342,
+          "label": "Brazil",
+          "value": 59178.0342
+        },
+        {
+          "economy": "Mexico",
+          "year": 2024,
+          "inward_flow_usd_million": 36872.42195,
+          "label": "Mexico",
+          "value": 36872.42195
+        },
+        {
+          "economy": "India",
+          "year": 2024,
+          "inward_flow_usd_million": 27556.45044,
+          "label": "India",
+          "value": 27556.45044
+        },
+        {
+          "economy": "Indonesia",
+          "year": 2024,
+          "inward_flow_usd_million": 24212.26,
+          "label": "Indonesia",
+          "value": 24212.26
+        },
+        {
+          "economy": "Viet Nam",
+          "year": 2024,
+          "inward_flow_usd_million": 20170,
+          "label": "Viet Nam",
+          "value": 20170
+        },
+        {
+          "economy": "Republic of Korea",
+          "year": 2024,
+          "inward_flow_usd_million": 15225.8,
+          "label": "Republic of Korea",
+          "value": 15225.8
+        },
+        {
+          "economy": "Japan",
+          "year": 2024,
+          "inward_flow_usd_million": 13356.57171,
+          "label": "Japan",
+          "value": 13356.57171
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

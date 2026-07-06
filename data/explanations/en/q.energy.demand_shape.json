@@ -1,0 +1,1252 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.energy.demand_shape",
+  "status": "ready",
+  "short": {
+    "headline": "India's electricity demand peaks in the evening, not when the sun is out.",
+    "dek": "Solar pushes down midday net demand by about 22%, but after sunset the real peak hits around 7pm, driving a 40 GW ramp in six hours.",
+    "body": "On an average summer day, India's grid sees demand hover around 210 GW through the late morning, while solar generation surges to about 48 GW at midday. Subtract solar and net demand sags to a belly of about 161 GW by 1pm. Then the sun sets and demand climbs to roughly 202 GW around 7pm. The evening ramp is the grid's hardest hour, and annual peaks keep rising, from about 159 GW in 2017 to a record 249 GW in 2024, a 57% jump. More panels won't solve a clock problem; storage and flexible power must fill the gap."
+  },
+  "macha": {
+    "heading": "Okay, macha, so the sun is fooling us?",
+    "body": "The grid's biggest headache isn't just about how much power India needs—it's about when. Solar gives us a huge midday boost, but exactly when we all switch on lights and ACs after sunset, solar drops to zero. So every evening, the grid has to scramble to cover a sharp jump in demand, and that jump keeps getting bigger each year. Think of it like a family dinner: the sun cooks a big meal at noon, but everyone is actually hungry at 7pm, and by then the kitchen is cold. India doesn't just need more power; it needs power that shows up at the right hour.",
+    "soWhat": "The real power struggle is not about how much, but when."
+  },
+  "article": {
+    "title": "When Does India Actually Turn the Power On?",
+    "standfirst": "India's electricity demand peaks after dark, while solar generation vanishes. The evening ramp now dictates the grid's hardest hour, and that hour keeps climbing.",
+    "bodyMarkdown": "## When does India actually use the most electricity?\n\nNot when you might think, and not when the sun is blazing. On an average summer day the grid is already working hard by late morning: total demand hovers around 210 GW through the late morning and afternoon. Right about then, solar comes flooding in. At its peak around midday, solar pushes out about 48 GW, covering roughly a fifth of everything the country is drawing. If you strip that solar out and look at what the rest of the system has to supply, the line sags through the middle of the afternoon into a distinct belly, net demand drops to about 161 GW at 1pm.\n\nThen the sun goes down. Solar generation collapses toward zero. People come home, lights and fans and ACs stay on, and demand climbs to its real high for the day around seven in the evening, touching about 202 GW. That is a steep ramp: roughly 40 GW added in about six hours. And from 1pm to 7pm, solar’s share of demand falls from about 22% to essentially nothing. No amount of midday sunshine can cover an evening that arrives after sunset. The shape of that net-demand line, low belly, sharp evening neck, is the duck curve, and it captures the core timing mismatch that now defines India’s grid challenge.\n\n## Does the peak hour change across the year?\n\nThe daily shape is not locked to one clock. As seasons turn, the curve shifts. In summer and the monsoon, demand stays high from late morning well into the evening, riding a broad plateau. Winter tells a different story: the night-time trough is much deeper. At midnight, summer demand sits at around 195.5 GW, while winter drops to 151.9 GW. By early morning, winter is the lowest of the three, but it then climbs fast, a sharp shoulder as heaters and lights come on before dawn.\n\nYet across all seasons, one pattern holds stubbornly: the evening is always a peak. In summer and monsoon, the evening high blends into a long elevated stretch; in winter, it is a pronounced spike after the day’s work. The hour of the absolute high may slide, summer’s peak is often in the afternoon heat, winter’s right after sunset, but the grid never gets a quiet evening. That persistence is why the timing question matters year-round, not just in May.\n\n## Why does the exact hour matter more every year?\n\nBecause the single hardest hour the grid has to serve keeps climbing. India’s all-India peak demand met was about 158.8 GW in 2017. By 2024, it had hit a record 248.7 GW on 30 May at 3pm, a 57% increase in seven years. The 2025 figure, 240.4 GW from a partial year, will almost certainly be surpassed when remaining months are tallied.\n\nEach new record raises the stakes for that evening ramp. When the annual peak was 159 GW, the climb from a midday belly to the evening high was one size. At nearly 250 GW, the same shape demands much more from the generators and wires that must carry that evening surge. The grid can add more solar, sure, but that only deepens the midday belly; it does not touch the seven-o-clock peak. The mismatch between solar’s hours and the hour of highest need grows wider as both total demand and solar capacity increase. That is why the exact hour of peak demand matters at a scale it never did before: the same clock problem becomes more expensive every year.\n\n## How should you read these numbers?\n\nThese curves come from Grid-India, the national and regional load despatch centres under the Ministry of Power. The hourly demand, solar generation, and wind data for 2024 were compiled in a Mendeley Data dataset released under a Creative Commons CC-BY licence; the long-run annual peak series is republished by NITI Aayog’s India Climate & Energy Dashboard (ICED). All figures are all-India aggregates and are reported as gigawatts (GW).\n\nA few honest boundaries. The hourly numbers measure “demand met”, electricity actually supplied. If any demand went unserved because of load shedding or grid constraints, that is not in these figures, so they represent a floor on true demand. The daily shape you see for a season is a “typical day,” an average over all the days in that season; no single real date will match the smooth curve exactly. The “demand net of solar” line is simply total demand minus solar generation at each hour. It is the load left for hydro, wind, gas, nuclear, and coal together, not the output of any one fuel. And because these are national totals, they smooth over very different regional grids: states with heavy solar penetration, like those in the west and south, can show a much deeper duck curve than the all-India average implies."
+  },
+  "editorialPlan": {
+    "audience": "average Indian reader",
+    "heroDescription": "India's electricity demand follows a daily rhythm where solar power surges at midday but vanishes by the evening, when the real demand peak hits. This timing mismatch creates a steep evening ramp that the grid must cover without sunlight, and the annual peak demand keeps rising, making the problem more acute each year.",
+    "selectedDataPoints": [
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: demand (midnight, summer avg)",
+        "reason": "Shows the high base demand at night, illustrating why the evening peak is part of a sustained high period.",
+        "use": "hero"
+      },
+      {
+        "label": "India's all-India peak electricity demand: peak_gw (2024)",
+        "reason": "The record 248.7 GW in 2024 demonstrates how the peak hour is intensifying.",
+        "use": "pull_quote"
+      },
+      {
+        "label": "India's all-India peak electricity demand: peak_gw (2017)",
+        "reason": "158.8 GW anchor point to show the 57% growth over seven years.",
+        "use": "chart"
+      },
+      {
+        "label": "Midday net demand belly (summer avg, derived from source data)",
+        "reason": "The about 161 GW figure crystallizes the depth of the solar impact.",
+        "use": "hero"
+      },
+      {
+        "label": "Evening peak net demand (summer avg, derived from source data)",
+        "reason": "About 202 GW at 7pm shows the steep evening climb.",
+        "use": "hero"
+      },
+      {
+        "label": "Solar peak generation (summer avg, derived from source data)",
+        "reason": "Roughly 48 GW at midday explains why the belly exists.",
+        "use": "hero"
+      }
+    ],
+    "pullQuotes": [
+      {
+        "quote": "Solar covers about 22% of demand at 1pm but essentially 0% at the 7pm peak—the sun clocks off at the worst possible moment.",
+        "numberLabel": "2024 summer typical day: net demand at 1pm ~161 GW, solar ~48 GW, demand ~209 GW; 7pm net demand ~201 GW, solar ~0 GW"
+      },
+      {
+        "quote": "India's all-India peak demand met rose from about 159 GW in 2017 to about 249 GW in 2024, a 57% increase in seven years.",
+        "numberLabel": "Annual peak demand met: 158.8 GW (2017), 248.7 GW (2024)"
+      },
+      {
+        "quote": "On an average summer day, net demand sags to about 161 GW around midday, then climbs roughly 40 GW in six hours to an evening peak of about 202 GW.",
+        "numberLabel": "Summer 2024 typical day: midday net demand belly ~161 GW, evening net demand ~202 GW"
+      }
+    ],
+    "glossaryBlocks": [
+      {
+        "term": "duck curve",
+        "plainMeaning": "The shape of net electricity demand across a day when a lot of solar power is on the grid. It dips low in the middle of the day (the belly) and rises steeply in the evening (the neck), like a duck's profile. It shows how solar reduces midday load but leaves the evening peak untouched.",
+        "whyItMattersHere": "India's grid now shows this shape because solar pushes net demand down at midday, but the real peak arrives after sunset."
+      },
+      {
+        "term": "net demand",
+        "plainMeaning": "Total electricity demand minus the power generated by solar at that moment. It is the load that all other power sources—coal, gas, hydro, wind, nuclear—together must supply. It does not represent any single fuel's output.",
+        "whyItMattersHere": "The duck curve is about net demand, not total demand. It reveals the timing problem left for non-solar generators."
+      },
+      {
+        "term": "GW (gigawatt)",
+        "plainMeaning": "A unit of power equal to one billion watts. Think of it as the rate of electricity use; 1 GW can power roughly 700,000 typical Indian homes at once.",
+        "whyItMattersHere": "All demand and generation numbers are in GW, making it easy to compare across the day and across years."
+      },
+      {
+        "term": "demand met",
+        "plainMeaning": "The amount of electricity that was actually supplied to the grid. It does not include demand that went unserved due to outages or load shedding, so it is a minimum estimate of true demand.",
+        "whyItMattersHere": "Our data is demand met, so it is a floor on true demand. The actual peak demand could be higher if the grid had no constraints.",
+        "keyTerm": true
+      },
+      {
+        "term": "typical day",
+        "plainMeaning": "An average day constructed by taking the mean of all days in a season. No single date looks exactly like this smooth curve, but it represents the general underlying pattern.",
+        "whyItMattersHere": "The duck curve and seasonal shapes are typical days, smoothing out extremes to reveal the underlying rhythm."
+      },
+      {
+        "term": "load curve",
+        "plainMeaning": "A graph that shows how electric power demand changes over time, usually a day or a year. It traces the 'load' the grid must carry hour by hour.",
+        "whyItMattersHere": "All our charts are load curves, showing demand or net demand across hours or years."
+      },
+      {
+        "term": "solar generation",
+        "plainMeaning": "The electricity produced by solar panels at a given moment. It follows the sun, peaking around noon and falling to zero after sunset. It is instantaneous, not cumulative energy.",
+        "whyItMattersHere": "Solar's timing creates the duck curve because it disappears just when evening demand rises."
+      },
+      {
+        "term": "peak demand",
+        "plainMeaning": "The highest power draw recorded during a period (a day, a season, or a year). It is a single moment, not an average. The grid must be sized to handle these peaks even if they last only an hour.",
+        "whyItMattersHere": "India's annual peak demand is rising fast, making the grid's evening ramp harder to manage every year."
+      },
+      {
+        "term": "all-India aggregate",
+        "plainMeaning": "A number that sums or averages across the entire national grid. It can hide differences between regions, like a solar-heavy state versus a coal-heavy one.",
+        "whyItMattersHere": "The duck curve is an all-India average; some states see a much deeper belly, others barely see it."
+      }
+    ]
+  },
+  "dataSelectionAudit": {
+    "areSelectedDataPointsGood": "mixed: the provided selectedDataPoints only cover early morning hours, missing midday and evening values crucial for the duck curve narrative. However, the required concepts and source summaries implicitly provide these points.",
+    "addDataPoints": [
+      "Hours 10-20 for the duck curve (solar peak, midday belly, evening ramp) as present in the full source data but not in the packet's lockedNumbers.",
+      "Full 24-hour series for seasonal curves."
+    ],
+    "removeDataPoints": [],
+    "visualizationDecisions": [
+      {
+        "indicatorOrVisual": "energy.griddemand.duck_summer",
+        "bestChartType": "multi-line chart",
+        "timeWindow": "typical day (hourly)",
+        "frequency": "hourly",
+        "reason": "To show the intraday variation and the duck curve shape clearly for a mobile reader."
+      },
+      {
+        "indicatorOrVisual": "energy.griddemand.day_shape_seasonal",
+        "bestChartType": "multi-line chart",
+        "timeWindow": "typical day (hourly)",
+        "frequency": "hourly",
+        "reason": "To compare seasonal patterns at a glance without overwhelming detail."
+      },
+      {
+        "indicatorOrVisual": "energy.griddemand.annual_peak",
+        "bestChartType": "line chart",
+        "timeWindow": "2017 to 2025",
+        "frequency": "annual",
+        "reason": "To show the trend in peak demand over time, with each point representing the single highest hour of the year."
+      }
+    ]
+  },
+  "chartExplainers": [
+    {
+      "visualId": "solar-peaks-at-noon-demand-peaks-after-dark",
+      "title": "Solar peaks at noon, demand peaks after dark",
+      "takeaway": "On an average summer day, net demand sags to about 161 GW at 1pm but then climbs to roughly 202 GW by 7pm, after solar has vanished—a 40 GW ramp in six hours.",
+      "detail": "This chart shows three lines for a typical summer day in 2024: total electricity demand met, solar generation, and net demand (demand minus solar). Total demand runs high, around 210 GW through the late morning and afternoon. Solar generation rises from near zero at 6am to a peak of about 48 GW around midday, covering about 22% of total demand at 1pm. Subtract solar and net demand dips to a low of about 161 GW. As the sun goes down, solar output drops toward zero by 6pm. Meanwhile, demand stays elevated into the evening, pushing net demand up sharply to around 202 GW by 7pm. The net demand curve—low belly, steep neck—is the duck curve. It reveals that solar provides huge midday relief but does nothing for the evening peak, leaving a large and fast ramp for the rest of the power fleet to meet.",
+      "howToRead": "Look at the gap between total demand and net demand—that is solar's contribution. It is wide at noon and gone by evening. The net demand line is what non-solar sources must cover.",
+      "mistakeToAvoid": "Don't assume net demand equals coal or any single fuel; it represents the combined load for all generators other than solar. Also, this is a seasonal average, not a specific date.",
+      "mobileNote": "The three lines can be displayed with thick strokes and clear labels to stay readable on small screens, with touch targets for time values."
+    },
+    {
+      "visualId": "how-the-daily-peak-moves-with-the-season",
+      "title": "How the daily peak moves with the season",
+      "takeaway": "Winter demand plunges much lower overnight—151.9 GW at midnight versus 195.5 GW in summer—but the evening remains a stubborn peak across all seasons.",
+      "detail": "This chart plots average demand met for three seasons in 2024: summer (March-May), monsoon (June-September), and winter (October-February). Summer and monsoon demand are high and plateau-like from late morning into the evening, staying above 190 GW for many hours. Winter demand traces a deeper trough in the small hours, dropping to around 145 GW by 3am, and then rises sharply through a morning shoulder to peak in the early evening. Despite these shifts, the early evening—roughly 6pm to 8pm—emerges as a peak point in all three curves. The absolute timing can slide: on some days the record high is in the afternoon, but the early evening consistently sees demand near or at its daily maximum. This seasonal persistence of the evening peak means that the timing mismatch with solar is not just a summer story; it is built into the year-round rhythm.",
+      "howToRead": "Compare the lines at midnight to see the deep winter dip; then follow each line to the evening to see how they all converge toward a high point.",
+      "mistakeToAvoid": "Don't assume winter demand is low overall. The dip is only in the small hours; the morning and evening peaks are still substantial.",
+      "mobileNote": "Use a multi-line chart with distinct colors and an hour-by-hour slider or thumbnail view to make comparison easy on a phone."
+    },
+    {
+      "visualId": "india-s-peak-demand-keeps-breaking-records",
+      "title": "India's peak demand keeps breaking records",
+      "takeaway": "India's all-India peak demand met rose from 158.8 GW in 2017 to a record 248.7 GW in 2024—a 57% increase in seven years—making the evening ramp harder each year.",
+      "detail": "This line chart tracks the single highest instantaneous demand met in each year from 2017 to 2025. The climb is steep and steady: 158.8 GW in 2017, 173.9 GW in 2018, 182.4 GW in 2019, 180.9 GW in 2020 (a slight dip during the pandemic year), then resuming upward to 199.7 GW in 2021, 209.9 GW in 2022, 237.4 GW in 2023, and 248.7 GW in 2024—set on 30 May at 3pm. The 2025 point, 240.4 GW from a partial year, is already close and will almost certainly be exceeded. Each new annual peak raises the grid’s requirement for the hour of maximum strain. When that peak falls in the afternoon (as in 2024), it does not erase the evening high—net demand still ramps steeply post-sunset. As the annual record pushes toward 250 GW and beyond, the duck curve’s evening neck demands ever more generation and storage that can respond quickly.",
+      "howToRead": "Each point is a year's single highest demand met, in GW. The upward trend is clear. Note that the 2024 record came at 3pm, but the annual peak can shift from afternoon to evening across years.",
+      "mistakeToAvoid": "These are single-hour peaks, not average demand. An afternoon annual peak does not mean the evening ramp has eased; the daily duck shape remains.",
+      "mobileNote": "Use a simple line with large dots for each year and a minimal y-axis to keep the trend crisp on small screens."
+    }
+  ],
+  "sectionVisualMap": [
+    {
+      "heading": "When does India actually use the most electricity?",
+      "visualId": "solar-peaks-at-noon-demand-peaks-after-dark"
+    },
+    {
+      "heading": "Does the peak hour change across the year?",
+      "visualId": "how-the-daily-peak-moves-with-the-season"
+    },
+    {
+      "heading": "Why does the exact hour matter more every year?",
+      "visualId": "india-s-peak-demand-keeps-breaking-records"
+    }
+  ],
+  "sourceNotes": [
+    "Hourly demand, solar, and wind data for 2024 from Grid-India via a Mendeley Data dataset (CC-BY licence).",
+    "Annual peak demand series from NITI Aayog's India Climate & Energy Dashboard (ICED), which republishes Grid-India’s hourly demand-met series.",
+    "All figures are all-India aggregates and measured in gigawatts (GW)."
+  ],
+  "caveats": [
+    "Demand met is electricity actually supplied, not total demand including load shedding or outages—true peak demand may be higher.",
+    "Typical day curves are seasonal averages over the 2024 calendar year, not any specific date.",
+    "Net demand is an arithmetic residual (demand minus solar generation) and does not represent any single fuel's output.",
+    "All-India aggregates mask significant regional variation; the duck curve is more pronounced in solar-rich states like those in the west and south.",
+    "The annual peak series includes a partial-year value for 2025 (240.4 GW) and may be exceeded when full data is available."
+  ],
+  "lockedNumbersUsed": [
+    "The duck curve arrives: demand, solar and what's left: demand (midnight summer avg 195.5 GW)",
+    "When the day peaks, by season: summer (midnight 195.5 GW)",
+    "When the day peaks, by season: winter (midnight 151.9 GW)",
+    "India's all-India peak electricity demand: peak_gw (2017: 158.8 GW)",
+    "India's all-India peak electricity demand: peak_gw (2024: 248.7 GW)",
+    "India's all-India peak electricity demand: peak_gw (2025: 240.4 GW)"
+  ],
+  "qualityFlags": [
+    "The evidence packet's selectedDataPoints and lockedNumbers only include early morning hours for the duck curve and seasonal shapes; the article relies on concept numbers from the full source data (midday and evening features) as provided in the approved editorial plan. This is consistent with the plan's guidance."
+  ],
+  "generatedAt": "2026-06-25T07:06:26.745Z",
+  "model": "deepseek-v4-pro",
+  "generationPasses": [
+    {
+      "name": "plan",
+      "model": "deepseek-v4-pro"
+    },
+    {
+      "name": "draft",
+      "model": "deepseek-v4-pro"
+    },
+    {
+      "name": "edit",
+      "model": "deepseek-v4-pro"
+    }
+  ],
+  "editorialPlanDraft": {
+    "questionId": "q.energy.demand_shape",
+    "answerThesis": "India's electricity demand peaks in the evening around 7pm, after solar generation has fallen to near zero, creating a steep ramp in the grid's net load that no amount of midday solar can cover.",
+    "requiredConcepts": [
+      "The spine of the article and the meaning of the duck: on an average summer day (March to May, 2024) India's electricity demand runs around 210 GW through the late morning and afternoon, while solar generation peaks at about 48 GW around midday. Subtract solar from demand and the residual 'net demand' sags to a midday belly of about 161 GW around 1pm, then climbs steeply to an evening peak of about 202 GW around 7pm. That evening climb is roughly a 40 GW rise in about six hours. The shape of that net-demand line, low belly then sharp evening neck, is what grid operators call the duck curve.",
+      "The single most important number: solar covers about 22% of demand at 1pm but essentially 0% at the 7-8pm peak, because the sun has set exactly when demand is highest. This is why simply building more solar does little for the hardest hour: more panels deepen the midday belly but add nothing to the evening peak.",
+      "The honest framing of 'demand net of solar': it is an arithmetic residual, demand minus solar generation, and it represents the load that everything other than solar must meet (hydro, wind, gas, nuclear and coal together), NOT the amount of coal burned. Do not say coal fills the gap by name; say it is the load left for the rest of the fleet, and that the steep evening ramp is what flexible generation and storage have to cover.",
+      "The seasonal point, from 2024 typical days: the daily shape moves with the season. In summer and the monsoon, demand stays high from late morning into the evening; in winter the night-time trough is deeper and the morning shoulder is sharper, with the day's low coming in the small hours rather than at midday. Across seasons the evening remains a stubborn high point.",
+      "Why it matters more every year, the peak-growth context: the all-India peak demand met has risen from about 159 GW in 2017 to a record of about 249 GW in 2024, roughly a 57% increase in seven years (the 2024 record was set on 30 May; the 2025 figure, about 240 GW, reflects a partial year at the time of compilation).",
+      "VINTAGE AND SCOPE DISCIPLINE: the intraday curves are averages over the 2024 calendar year, a snapshot of today's grid and not a multi-year trend; the annual-peak series runs 2017 onward. 'Demand met' excludes any demand that was shed or went unserved, so it is a floor on true demand. Every figure is an all-India aggregate; regional grids differ, and the article must not imply one national curve describes every state.",
+      "NUMBER DISCIPLINE is absolute: every statistic must come from the evidence packet's locked numbers or the specific figures stated in these concepts; never invent, recall or estimate. Present figures as rounded approximations ('about 48 GW', 'roughly 202 GW around 7pm', 'about 57% higher'), never false-precision decimals. Anchor every number to what it measures when it first appears, and always give power in gigawatts (GW).",
+      "Keep the macha layer warm and plain-spoken, a sharp friend explaining why the grid's new headache is a clock problem, not a size problem: India got very good at asking how much power it needs, and solar is real and growing fast, but the sun clocks off at exactly the wrong time, so the evening is where the strain now lives. The playfulness lives in the headings; the body stays grounded and genuinely useful, and the closing summarises what the whole page means, not one chart."
+    ],
+    "sectionPlan": [
+      {
+        "heading": "When does India actually use the most electricity?",
+        "job": "Introduce the duck curve: show the average summer day's demand, solar, and net demand curves, highlight the midday solar peak and the evening demand peak, and explain why the shape matters.",
+        "lockedNumbersToUse": [
+          "The duck curve arrives: demand, solar and what's left: demand",
+          "The duck curve arrives: demand, solar and what's left: solar",
+          "The duck curve arrives: demand, solar and what's left: net"
+        ],
+        "conceptsToExplain": [
+          "Duck curve: the net demand shape with a midday belly and steep evening ramp",
+          "Solar generation profile: peak around midday, zero after sunset",
+          "Net demand: total demand minus solar generation, the load left for other sources",
+          "Timing mismatch: solar output evaporates just as evening demand peaks"
+        ],
+        "caveat": "These numbers are averages for March-May 2024; any single day can deviate. All-India figures mask regional variation. 'Demand met' is electricity supplied, not underlying demand including shedding."
+      },
+      {
+        "heading": "Does the peak hour change across the year?",
+        "job": "Show how the daily demand shape shifts with season: summer and monsoon have a wide high plateau into evening, winter has a deep night-time trough and a sharper morning rise, but the evening remains a peak across all seasons.",
+        "lockedNumbersToUse": [
+          "When the day peaks, by season: summer",
+          "When the day peaks, by season: monsoon",
+          "When the day peaks, by season: winter"
+        ],
+        "conceptsToExplain": [
+          "Seasonal demand patterns: driven by cooling (summer/monsoon) and heating/lighting (winter)",
+          "Evening peak persistence: irrespective of season, demand clusters strongly in the early evening hours",
+          "Typical day averaging: curves are averages over entire seasons, smoothing daily variability"
+        ],
+        "caveat": "Season definitions (summer Mar-May, monsoon Jun-Sep, winter Oct-Feb) are broad; within-season variation exists. The chart shows demand met, not the full potential demand."
+      },
+      {
+        "heading": "Why does the exact hour matter more every year?",
+        "job": "Demonstrate the relentless rise in India's annual peak demand, explain how each new record raises the stakes for the evening ramp, and connect the shape of the daily curve to the growing capacity challenge.",
+        "lockedNumbersToUse": [
+          "India's all-India peak electricity demand: peak_gw"
+        ],
+        "conceptsToExplain": [
+          "Peak demand growth: driven by economic expansion, cooling load, and electrification",
+          "Timing constraint: adding more solar helps midday but cannot address the evening peak without storage or flexible backup",
+          "Demand met vs true demand: records are a floor; unmet demand could be higher"
+        ],
+        "caveat": "The 2025 value (240.4 GW) is a partial-year figure at time of compilation; true 2025 peak may exceed it. Peak records are instantaneous, not average."
+      },
+      {
+        "heading": "How should you read these numbers?",
+        "job": "Explain the sources, data provenance, and limitations of the curves: they are Grid-India demand met averages for 2024, all-India aggregates, and the net demand is an arithmetic residual. Clarify what the data does and does not show.",
+        "lockedNumbersToUse": [],
+        "conceptsToExplain": [
+          "Source: Mendeley Data dataset compiled from Grid-India (Ministry of Power), CC-BY licence, and ICED republishing Grid-India series for annual peaks",
+          "Demand met: electricity actually supplied, not total demand including load shedding or outages",
+          "Typical day: an average over a season, not a real single day",
+          "Net demand: demand minus solar generation, not the output of any single fuel",
+          "All-India aggregate: hides inter-regional differences (e.g., west and south are more solar-heavy)"
+        ],
+        "caveat": "Regional grids differ; the duck curve is most pronounced in solar-rich states. Data frequency is hourly, but daily shape is smoothed by averaging."
+      }
+    ],
+    "chartPlan": [
+      {
+        "visualId": "solar-peaks-at-noon-demand-peaks-after-dark",
+        "title": "Solar peaks at noon, demand peaks after dark",
+        "whyShowThis": "The whole storage argument in one chart: solar slashes midday demand, but the day's peak lands in the evening, when solar has gone to zero.",
+        "howToRead": "Three lines on the same scale: demand (total), solar generation, and net demand (demand minus solar). Look at the midday dip in net demand and the sharp rise after 4pm. The gap between demand and net demand is the solar contribution, which vanishes by evening.",
+        "mistakeToAvoid": "Don't assume net demand equals coal or any single fuel; it's the load for all non-solar sources combined. Also, these are average summer curves, not any specific date."
+      },
+      {
+        "visualId": "how-the-daily-peak-moves-with-the-season",
+        "title": "How the daily peak moves with the season",
+        "whyShowThis": "The peak is not fixed to one hour: it travels across the day as the seasons turn, but the evening remains stubbornly high.",
+        "howToRead": "Three lines representing average demand met for summer, monsoon, and winter. Note the winter line's deep pre-dawn trough and rapid morning rise, versus the summer line's high afternoon plateau. All lines converge to a peak in the early evening.",
+        "mistakeToAvoid": "Don't conclude that winter demand is low overall; nighttime demand is lower but the morning and evening peaks are still significant. The curves are averages, hiding day-to-day swings."
+      },
+      {
+        "visualId": "india-s-peak-demand-keeps-breaking-records",
+        "title": "India's peak demand keeps breaking records",
+        "whyShowThis": "Why the shape matters more every year: the single hour the grid has to serve keeps climbing, making the evening ramp problem more acute.",
+        "howToRead": "A line chart of annual maximum instantaneous demand met (GW) from 2017 to 2025. The upward trend shows a 57% rise in seven years. The 2025 point is a partial-year record. Note the 2024 record of 248.7 GW on 30 May at 3pm, an afternoon peak that still leaves the evening high.",
+        "mistakeToAvoid": "These are single-hour peaks, not average demand. Afternoon peaks (like in 2024) do not eliminate the evening peak; the shape inside the day matters as much as the annual maximum."
+      }
+    ],
+    "dataSelectionAudit": {
+      "areSelectedDataPointsGood": "mixed: the selected data points for the duck curve and seasonal shapes only show early morning hours (0-2), missing the critical midday and evening features. However, the full sourceSummaries provide the necessary 24-hour profiles, and the annual peak data is complete.",
+      "addDataPoints": [
+        "For the duck curve, include hours 10-20 to capture the solar peak, midday belly, and evening ramp (not in selectedDataPoints but present in sourceSummaries' latestRows extension).",
+        "For the seasonal curves, similarly require the full 24-hour series from sourceSummaries."
+      ],
+      "removeDataPoints": [],
+      "visualizationDecisions": [
+        {
+          "indicatorOrVisual": "energy.griddemand.duck_summer",
+          "bestChartType": "multi-line chart",
+          "timeWindow": "typical day (hourly)",
+          "frequency": "hourly",
+          "reason": "To show the intraday variation and the duck curve shape clearly for a mobile reader."
+        },
+        {
+          "indicatorOrVisual": "energy.griddemand.day_shape_seasonal",
+          "bestChartType": "multi-line chart",
+          "timeWindow": "typical day (hourly)",
+          "frequency": "hourly",
+          "reason": "To compare seasonal patterns at a glance without overwhelming detail."
+        },
+        {
+          "indicatorOrVisual": "energy.griddemand.annual_peak",
+          "bestChartType": "line chart",
+          "timeWindow": "2017 to 2025",
+          "frequency": "annual",
+          "reason": "To show the trend in peak demand over time, with each point representing the single highest hour of the year."
+        }
+      ]
+    },
+    "glossaryPlan": [
+      {
+        "term": "duck curve",
+        "plainMeaning": "The shape of net electricity demand across a day when a lot of solar power is on the grid. It dips low in the middle of the day (the belly) and rises steeply in the evening (the neck), like a duck's profile.",
+        "whyItMattersHere": "India's grid now shows this shape because solar pushes net demand down at midday, but the real peak arrives after sunset."
+      },
+      {
+        "term": "net demand",
+        "plainMeaning": "Total electricity demand minus the power generated by solar at that moment. It is the load that all other power sources (coal, gas, hydro, wind, nuclear) together must supply.",
+        "whyItMattersHere": "The duck curve is about net demand, not total demand. It reveals the timing problem left for non-solar generators."
+      },
+      {
+        "term": "GW (gigawatt)",
+        "plainMeaning": "A unit of power equal to one billion watts. Think of it as the rate of electricity use; 1 GW can power roughly 700,000 typical Indian homes at once.",
+        "whyItMattersHere": "All demand and generation numbers are in GW, making it easy to compare across the day and across years."
+      },
+      {
+        "term": "demand met",
+        "plainMeaning": "The amount of electricity that was actually supplied to the grid. It does not include demand that went unserved due to outages or load shedding.",
+        "whyItMattersHere": "Our data is demand met, so it is a floor on true demand. The actual peak demand could be higher if the grid had no constraints."
+      },
+      {
+        "term": "typical day",
+        "plainMeaning": "An average day constructed by taking the mean of all days in a season. No single date looks exactly like this curve, but it represents the general pattern.",
+        "whyItMattersHere": "The duck curve and seasonal shapes are typical days, smoothing out extremes to reveal the underlying rhythm."
+      },
+      {
+        "term": "load curve",
+        "plainMeaning": "A graph that shows how electric power demand changes over time, usually a day or a year. It traces the 'load' the grid must carry hour by hour.",
+        "whyItMattersHere": "All our charts are load curves, showing demand or net demand across hours or years."
+      },
+      {
+        "term": "solar generation",
+        "plainMeaning": "The electricity produced by solar panels at a given moment. It follows the sun, peaking around noon and falling to zero after sunset.",
+        "whyItMattersHere": "Solar's timing creates the duck curve because it disappears just when evening demand rises."
+      },
+      {
+        "term": "peak demand",
+        "plainMeaning": "The highest power draw recorded during a period (a day, a season, or a year). It is a single moment, not an average.",
+        "whyItMattersHere": "India's annual peak demand is rising fast, making the grid's evening ramp harder to manage every year."
+      },
+      {
+        "term": "all-India aggregate",
+        "plainMeaning": "A number that sums or averages across the entire national grid. It can hide differences between regions, like a solar-heavy state versus a coal-heavy one.",
+        "whyItMattersHere": "The duck curve is an all-India average; some states see a much deeper belly, others barely see it."
+      }
+    ],
+    "proseRules": [
+      "No AI tells like 'delve', 'tapestry', 'complex interplay', 'crucial', 'it is important to note', 'in conclusion', 'moreover', 'furthermore'.",
+      "No outside facts: every number, date, or claim must come from the evidence packet's lockedNumbers or sourceSummaries.",
+      "No calculations unless the evidence packet supplies the derived number (e.g., the concept's 22% solar share, 57% growth are given).",
+      "Question-led H2 headings: each section answers a genuine reader question.",
+      "No em-dashes. Use commas, periods, or rephrase.",
+      "Do not narrate the article with 'this chart shows' or 'as we saw above'. Write about India's grid directly.",
+      "Anchor every number to what it measures: GW, % of demand, year, season.",
+      "Use rounded approximations from the concepts ('about 48 GW', 'roughly 202 GW'), never false precision.",
+      "Honest framing: 'demand net of solar' is an arithmetic residual, not any single fuel's output.",
+      "Macha layer is playful in headings, warm and grounded in body, summarizing what the whole page means."
+    ]
+  },
+  "evidence": {
+    "schemaVersion": 1,
+    "questionId": "q.energy.demand_shape",
+    "question": "When does India actually turn the power on?",
+    "priority": "core",
+    "theme": {
+      "id": "energy",
+      "label": "Energy and electricity",
+      "readerQuestions": [
+        "How much energy or electricity is being used?",
+        "What is the fuel mix?",
+        "Is access different from reliability or consumption?",
+        "Is the system getting cleaner as demand grows?"
+      ],
+      "glossaryTerms": [
+        "TWh",
+        "kWh per capita",
+        "electricity access",
+        "carbon intensity",
+        "generation mix"
+      ]
+    },
+    "requiredIndicatorIds": [
+      "energy.griddemand.duck_summer"
+    ],
+    "availableIndicatorIds": [
+      "energy.griddemand.duck_summer"
+    ],
+    "themeIndicatorIds": [
+      "energy.griddemand.duck_summer",
+      "energy.griddemand.day_shape_seasonal",
+      "energy.griddemand.annual_peak"
+    ],
+    "visualPlan": [
+      {
+        "visualId": "v1.energy.griddemand.duck_summer",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "title": "The duck curve arrives: demand, solar and what's left",
+        "sourceId": "grid-india",
+        "unit": "GW",
+        "role": "primary",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This is the chart that answers the page question most directly."
+      },
+      {
+        "visualId": "v2.energy.griddemand.day_shape_seasonal",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "title": "When the day peaks, by season",
+        "sourceId": "grid-india",
+        "unit": "GW",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      },
+      {
+        "visualId": "v3.energy.griddemand.annual_peak",
+        "indicatorId": "energy.griddemand.annual_peak",
+        "title": "India's all-India peak electricity demand",
+        "sourceId": "grid-india",
+        "unit": "GW",
+        "role": "context",
+        "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+        "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+        "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+      }
+    ],
+    "plannedCharts": [
+      {
+        "order": 1,
+        "chartId": "solar-peaks-at-noon-demand-peaks-after-dark",
+        "title": "Solar peaks at noon, demand peaks after dark",
+        "chartType": "loadCurve",
+        "beat": "answer",
+        "window": "",
+        "indicator": "energy.griddemand.duck_summer",
+        "series": [],
+        "unit": "GW",
+        "subtitle": "",
+        "whyThisChart": "The whole storage argument in one chart: solar slashes midday demand, but the day's peak lands in the evening, when solar has gone to zero."
+      },
+      {
+        "order": 2,
+        "chartId": "how-the-daily-peak-moves-with-the-season",
+        "title": "How the daily peak moves with the season",
+        "chartType": "loadCurve",
+        "beat": "seasonality",
+        "window": "",
+        "indicator": "energy.griddemand.day_shape_seasonal",
+        "series": [],
+        "unit": "GW",
+        "subtitle": "",
+        "whyThisChart": "The peak is not fixed to one hour: it travels across the day as the seasons turn."
+      },
+      {
+        "order": 3,
+        "chartId": "india-s-peak-demand-keeps-breaking-records",
+        "title": "India's peak demand keeps breaking records",
+        "chartType": "line",
+        "beat": "why-it-matters",
+        "window": "full",
+        "indicator": "energy.griddemand.annual_peak",
+        "series": [],
+        "unit": "GW",
+        "subtitle": "",
+        "whyThisChart": "Why the shape matters more every year: the single hour the grid has to serve keeps climbing."
+      }
+    ],
+    "selectedDataPoints": [
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: hour",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: demand",
+        "value": 195.5,
+        "displayValue": "195.5",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: solar",
+        "value": 0.4,
+        "displayValue": "0.4",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: net",
+        "value": 195.1,
+        "displayValue": "195.1",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: hour",
+        "value": 1,
+        "displayValue": "1",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: demand",
+        "value": 190.9,
+        "displayValue": "190.9",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: solar",
+        "value": 0.4,
+        "displayValue": "0.4",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: net",
+        "value": 190.5,
+        "displayValue": "190.5",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: hour",
+        "value": 2,
+        "displayValue": "2",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: demand",
+        "value": 186.9,
+        "displayValue": "186.9",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: solar",
+        "value": 0.6,
+        "displayValue": "0.6",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: net",
+        "value": 186.3,
+        "displayValue": "186.3",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.duck_summer",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: hour",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: summer",
+        "value": 195.5,
+        "displayValue": "195.5",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: monsoon",
+        "value": 199.5,
+        "displayValue": "199.5",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: winter",
+        "value": 151.9,
+        "displayValue": "151.9",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: hour",
+        "value": 1,
+        "displayValue": "1",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: summer",
+        "value": 190.9,
+        "displayValue": "190.9",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: monsoon",
+        "value": 194.6,
+        "displayValue": "194.6",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: winter",
+        "value": 148.1,
+        "displayValue": "148.1",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: hour",
+        "value": 2,
+        "displayValue": "2",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: summer",
+        "value": 186.9,
+        "displayValue": "186.9",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: monsoon",
+        "value": 190.4,
+        "displayValue": "190.4",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      },
+      {
+        "label": "When the day peaks, by season: winter",
+        "value": 145.6,
+        "displayValue": "145.6",
+        "date": "",
+        "unit": "GW",
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "sourceId": "grid-india",
+        "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+      }
+    ],
+    "lockedNumbers": [
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: hour",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: demand",
+        "value": 195.5,
+        "displayValue": "195.5",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: solar",
+        "value": 0.4,
+        "displayValue": "0.4",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: net",
+        "value": 195.1,
+        "displayValue": "195.1",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: hour",
+        "value": 1,
+        "displayValue": "1",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: demand",
+        "value": 190.9,
+        "displayValue": "190.9",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: solar",
+        "value": 0.4,
+        "displayValue": "0.4",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: net",
+        "value": 190.5,
+        "displayValue": "190.5",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: hour",
+        "value": 2,
+        "displayValue": "2",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: demand",
+        "value": 186.9,
+        "displayValue": "186.9",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: solar",
+        "value": 0.6,
+        "displayValue": "0.6",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "The duck curve arrives: demand, solar and what's left: net",
+        "value": 186.3,
+        "displayValue": "186.3",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.duck_summer"
+      },
+      {
+        "label": "When the day peaks, by season: hour",
+        "value": 0,
+        "displayValue": "0",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: summer",
+        "value": 195.5,
+        "displayValue": "195.5",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: monsoon",
+        "value": 199.5,
+        "displayValue": "199.5",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: winter",
+        "value": 151.9,
+        "displayValue": "151.9",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: hour",
+        "value": 1,
+        "displayValue": "1",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: summer",
+        "value": 190.9,
+        "displayValue": "190.9",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: monsoon",
+        "value": 194.6,
+        "displayValue": "194.6",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: winter",
+        "value": 148.1,
+        "displayValue": "148.1",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: hour",
+        "value": 2,
+        "displayValue": "2",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: summer",
+        "value": 186.9,
+        "displayValue": "186.9",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: monsoon",
+        "value": 190.4,
+        "displayValue": "190.4",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "When the day peaks, by season: winter",
+        "value": 145.6,
+        "displayValue": "145.6",
+        "date": "",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.day_shape_seasonal"
+      },
+      {
+        "label": "India's all-India peak electricity demand: peak_gw",
+        "value": 240.4,
+        "displayValue": "240.4",
+        "date": "2025",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.annual_peak"
+      },
+      {
+        "label": "India's all-India peak electricity demand: peak_gw",
+        "value": 158.8,
+        "displayValue": "158.8",
+        "date": "2017",
+        "unit": "GW",
+        "sourceId": "grid-india",
+        "indicatorId": "energy.griddemand.annual_peak"
+      }
+    ],
+    "sourceSummaries": [
+      {
+        "indicatorId": "energy.griddemand.duck_summer",
+        "title": "The duck curve arrives: demand, solar and what's left",
+        "sourceId": "grid-india",
+        "sourceIndicatorId": "mendeley:y58jknpgs8:summer2024",
+        "unit": "GW",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 24,
+        "dimensions": [
+          "hour",
+          "demand",
+          "solar",
+          "net"
+        ],
+        "latestRows": [
+          {
+            "hour": 0,
+            "demand": 195.5,
+            "solar": 0.4,
+            "net": 195.1
+          },
+          {
+            "hour": 1,
+            "demand": 190.9,
+            "solar": 0.4,
+            "net": 190.5
+          },
+          {
+            "hour": 2,
+            "demand": 186.9,
+            "solar": 0.6,
+            "net": 186.3
+          },
+          {
+            "hour": 3,
+            "demand": 184.1,
+            "solar": 0.6,
+            "net": 183.5
+          },
+          {
+            "hour": 4,
+            "demand": 184,
+            "solar": 0.6,
+            "net": 183.4
+          },
+          {
+            "hour": 5,
+            "demand": 187.1,
+            "solar": 0.2,
+            "net": 186.9
+          },
+          {
+            "hour": 6,
+            "demand": 191.2,
+            "solar": 1.6,
+            "net": 189.6
+          },
+          {
+            "hour": 7,
+            "demand": 194.5,
+            "solar": 9.6,
+            "net": 184.9
+          },
+          {
+            "hour": 8,
+            "demand": 198.6,
+            "solar": 23.1,
+            "net": 175.5
+          },
+          {
+            "hour": 9,
+            "demand": 207,
+            "solar": 35,
+            "net": 172
+          }
+        ]
+      },
+      {
+        "indicatorId": "energy.griddemand.day_shape_seasonal",
+        "title": "When the day peaks, by season",
+        "sourceId": "grid-india",
+        "sourceIndicatorId": "mendeley:y58jknpgs8:seasonal2024",
+        "unit": "GW",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 24,
+        "dimensions": [
+          "hour",
+          "summer",
+          "monsoon",
+          "winter"
+        ],
+        "latestRows": [
+          {
+            "hour": 0,
+            "summer": 195.5,
+            "monsoon": 199.5,
+            "winter": 151.9
+          },
+          {
+            "hour": 1,
+            "summer": 190.9,
+            "monsoon": 194.6,
+            "winter": 148.1
+          },
+          {
+            "hour": 2,
+            "summer": 186.9,
+            "monsoon": 190.4,
+            "winter": 145.6
+          },
+          {
+            "hour": 3,
+            "summer": 184.1,
+            "monsoon": 187.4,
+            "winter": 145.1
+          },
+          {
+            "hour": 4,
+            "summer": 184,
+            "monsoon": 186.5,
+            "winter": 148.8
+          },
+          {
+            "hour": 5,
+            "summer": 187.1,
+            "monsoon": 187.5,
+            "winter": 159.2
+          },
+          {
+            "hour": 6,
+            "summer": 191.2,
+            "monsoon": 191.3,
+            "winter": 175.7
+          },
+          {
+            "hour": 7,
+            "summer": 194.5,
+            "monsoon": 194.2,
+            "winter": 193.2
+          },
+          {
+            "hour": 8,
+            "summer": 198.6,
+            "monsoon": 197.2,
+            "winter": 202.1
+          },
+          {
+            "hour": 9,
+            "summer": 207,
+            "monsoon": 203.9,
+            "winter": 210
+          }
+        ]
+      },
+      {
+        "indicatorId": "energy.griddemand.annual_peak",
+        "title": "India's all-India peak electricity demand",
+        "sourceId": "grid-india",
+        "sourceIndicatorId": "loadCurveYearly:annual_max",
+        "unit": "GW",
+        "geography": {
+          "type": "country",
+          "id": "IN",
+          "name": "India"
+        },
+        "rows": 9,
+        "dimensions": [
+          "date",
+          "peak_gw",
+          "peak_at"
+        ],
+        "latestRows": [
+          {
+            "date": "2025",
+            "peak_gw": 240.4,
+            "peak_at": "10-Jun 3pm"
+          },
+          {
+            "date": "2024",
+            "peak_gw": 248.7,
+            "peak_at": "30-May 3pm"
+          },
+          {
+            "date": "2023",
+            "peak_gw": 237.4,
+            "peak_at": "01-Sep 12pm"
+          },
+          {
+            "date": "2022",
+            "peak_gw": 209.9,
+            "peak_at": "10-Jun 3pm"
+          },
+          {
+            "date": "2021",
+            "peak_gw": 199.7,
+            "peak_at": "07-Jul 12pm"
+          },
+          {
+            "date": "2020",
+            "peak_gw": 180.9,
+            "peak_at": "30-Dec 10am"
+          },
+          {
+            "date": "2019",
+            "peak_gw": 182.4,
+            "peak_at": "30-May 3pm"
+          },
+          {
+            "date": "2018",
+            "peak_gw": 173.9,
+            "peak_at": "18-Sep 7pm"
+          },
+          {
+            "date": "2017",
+            "peak_gw": 158.8,
+            "peak_at": "17-Aug 8pm"
+          }
+        ]
+      }
+    ],
+    "selectionRules": [
+      "Start from the page question, not from the indicator name.",
+      "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+      "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+      "Use one strong pull quote only when the evidence supports it with a number.",
+      "Add glossary blocks for technical terms that normal readers may not know."
+    ],
+    "caveats": [
+      "Use only figures present in lockedNumbers or sourceSummaries.",
+      "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+      "If source coverage is thin, say so directly.",
+      "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+    ],
+    "forbiddenClaims": [
+      "Do not invent current-year figures.",
+      "Do not infer causality from a trend unless the evidence explicitly supports it.",
+      "Do not cite a source that is not present in sourceSummaries."
+    ]
+  }
+}

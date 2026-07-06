@@ -1,0 +1,5560 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.poverty",
+  "question": "Has India ended poverty?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "econ.poverty.wb_poverty_300",
+    "econ.poverty.wb_poverty_420",
+    "econ.poverty.wb_poverty_830",
+    "econ.poverty.tendulkar_headcount",
+    "econ.inequality.hces_mpce_rural",
+    "econ.inequality.hces_mpce_urban",
+    "econ.poverty.niti_mpi_headcount"
+  ],
+  "availableIndicatorIds": [
+    "econ.poverty.wb_poverty_300",
+    "econ.poverty.wb_poverty_420",
+    "econ.poverty.wb_poverty_830",
+    "econ.poverty.tendulkar_headcount",
+    "econ.inequality.hces_mpce_rural",
+    "econ.inequality.hces_mpce_urban",
+    "econ.poverty.niti_mpi_headcount"
+  ],
+  "themeIndicatorIds": [
+    "econ.poverty.wb_poverty_300",
+    "econ.poverty.wb_poverty_420",
+    "econ.poverty.wb_poverty_830",
+    "econ.poverty.tendulkar_headcount",
+    "econ.inequality.hces_mpce_rural",
+    "econ.inequality.hces_mpce_urban",
+    "econ.poverty.niti_mpi_headcount",
+    "econ.poverty.wb_poor_300",
+    "econ.poverty.wb_poor_420",
+    "econ.poverty.wb_poor_300_crore",
+    "econ.poverty.wb_poor_420_crore",
+    "econ.poverty.wb_poor_830_crore",
+    "econ.poverty.ppp_rupee_equivalents_2021",
+    "econ.poverty.wb_gap_300",
+    "econ.poverty.wb_gap_420",
+    "econ.poverty.wb_gap_830",
+    "econ.poverty.wb_societal_headcount",
+    "econ.poverty.wb_prosperity_gap",
+    "econ.poverty.wb_mpm_headcount",
+    "econ.poverty.wb_mpm_headcount_brief_2025",
+    "econ.poverty.undp_mpi_headcount",
+    "econ.poverty.learning_poverty",
+    "econ.poverty.ophi_global_mpi_profile",
+    "econ.poverty.wb_poverty_420_rural",
+    "econ.poverty.wb_poverty_420_urban",
+    "econ.poverty.wb_group_poverty_420",
+    "econ.poverty.wb_mpm_components",
+    "econ.poverty.committee_headcount_2011",
+    "econ.poverty.committee_lines_2011",
+    "econ.poverty.tinbergen_plfs_tendulkar_sfe",
+    "econ.poverty.tinbergen_plfs_tendulkar_state",
+    "econ.poverty.tinbergen_plfs_tendulkar_lasso",
+    "econ.poverty.tinbergen_estimates_2022",
+    "econ.poverty.hces_cutoff_simulation",
+    "econ.poverty.hces_cutoff_simulation_sector",
+    "econ.poverty.hces_cutoff_state_3000",
+    "econ.poverty.hces_cutoff_social_3000",
+    "econ.inequality.hces_mpce_rural_imputed",
+    "econ.inequality.hces_mpce_urban_imputed",
+    "econ.inequality.hces_fractile_mpce_rural",
+    "econ.inequality.hces_fractile_mpce_urban",
+    "econ.inequality.hces_cons_share_rural",
+    "econ.inequality.hces_gini_rural",
+    "econ.inequality.hces_gini_urban",
+    "econ.inequality.hces_state_mpce_rural",
+    "econ.inequality.hces_mpce_by_caste",
+    "econ.poverty.niti_mpi_by_state",
+    "econ.poverty.nfhs_basic_floor_latest",
+    "econ.poverty.nfhs_nutrition_latest",
+    "econ.poverty.health_financial_hardship",
+    "work.ilo.working_poverty",
+    "work.ilo.working_poverty_youth",
+    "work.plfs.status_self_employed",
+    "work.plfs.status_casual",
+    "work.plfs.status_regular_wage",
+    "work.vulnerable_employment"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.econ.poverty.wb_poverty_300",
+      "indicatorId": "econ.poverty.wb_poverty_300",
+      "title": "Poverty headcount at $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.econ.poverty.wb_poverty_420",
+      "indicatorId": "econ.poverty.wb_poverty_420",
+      "title": "Poverty headcount at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.econ.poverty.wb_poverty_830",
+      "indicatorId": "econ.poverty.wb_poverty_830",
+      "title": "Poverty headcount at $8.30/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.econ.poverty.tendulkar_headcount",
+      "indicatorId": "econ.poverty.tendulkar_headcount",
+      "title": "Official poverty headcount, Tendulkar methodology",
+      "sourceId": "planning-commission",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.econ.inequality.hces_mpce_rural",
+      "indicatorId": "econ.inequality.hces_mpce_rural",
+      "title": "Rural average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.econ.inequality.hces_mpce_urban",
+      "indicatorId": "econ.inequality.hces_mpce_urban",
+      "title": "Urban average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.econ.poverty.niti_mpi_headcount",
+      "indicatorId": "econ.poverty.niti_mpi_headcount",
+      "title": "National multidimensional poverty headcount",
+      "sourceId": "niti",
+      "unit": "% multidimensionally poor",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v8.econ.poverty.wb_poor_300",
+      "indicatorId": "econ.poverty.wb_poor_300",
+      "title": "People below $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "million people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.econ.poverty.wb_poor_420",
+      "indicatorId": "econ.poverty.wb_poor_420",
+      "title": "People below $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "million people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.econ.poverty.wb_poor_300_crore",
+      "indicatorId": "econ.poverty.wb_poor_300_crore",
+      "title": "People below $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "crore people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.econ.poverty.wb_poor_420_crore",
+      "indicatorId": "econ.poverty.wb_poor_420_crore",
+      "title": "People below $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "crore people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.econ.poverty.wb_poor_830_crore",
+      "indicatorId": "econ.poverty.wb_poor_830_crore",
+      "title": "People below $8.30/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "crore people",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.econ.poverty.ppp_rupee_equivalents_2021",
+      "indicatorId": "econ.poverty.ppp_rupee_equivalents_2021",
+      "title": "Rupee equivalents of World Bank poverty lines, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "₹ per person per day, 2021 PPP",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.econ.poverty.wb_gap_300",
+      "indicatorId": "econ.poverty.wb_gap_300",
+      "title": "Poverty gap at $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% poverty gap",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.econ.poverty.wb_gap_420",
+      "indicatorId": "econ.poverty.wb_gap_420",
+      "title": "Poverty gap at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% poverty gap",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.econ.poverty.wb_gap_830",
+      "indicatorId": "econ.poverty.wb_gap_830",
+      "title": "Poverty gap at $8.30/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% poverty gap",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.econ.poverty.wb_societal_headcount",
+      "indicatorId": "econ.poverty.wb_societal_headcount",
+      "title": "Poverty headcount at societal poverty line",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.econ.poverty.wb_prosperity_gap",
+      "indicatorId": "econ.poverty.wb_prosperity_gap",
+      "title": "Prosperity gap",
+      "sourceId": "worldbank",
+      "unit": "average shortfall from $28/day standard",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.econ.poverty.wb_mpm_headcount",
+      "indicatorId": "econ.poverty.wb_mpm_headcount",
+      "title": "World Bank multidimensional poverty headcount",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v20.econ.poverty.wb_mpm_headcount_brief_2025",
+      "indicatorId": "econ.poverty.wb_mpm_headcount_brief_2025",
+      "title": "World Bank multidimensional poverty headcount, October 2025 brief",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v21.econ.poverty.undp_mpi_headcount",
+      "indicatorId": "econ.poverty.undp_mpi_headcount",
+      "title": "UNDP multidimensional poverty headcount",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v22.econ.poverty.learning_poverty",
+      "indicatorId": "econ.poverty.learning_poverty",
+      "title": "Learning poverty",
+      "sourceId": "worldbank",
+      "unit": "% of end-of-primary-age children",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v23.econ.poverty.ophi_global_mpi_profile",
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile",
+      "title": "Global MPI profile for India, 2019-21",
+      "sourceId": "ophi-undp",
+      "unit": "%",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v24.econ.poverty.wb_poverty_420_rural",
+      "indicatorId": "econ.poverty.wb_poverty_420_rural",
+      "title": "Rural poverty at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% of rural population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v25.econ.poverty.wb_poverty_420_urban",
+      "indicatorId": "econ.poverty.wb_poverty_420_urban",
+      "title": "Urban poverty at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "unit": "% of urban population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v26.econ.poverty.wb_group_poverty_420",
+      "indicatorId": "econ.poverty.wb_group_poverty_420",
+      "title": "Poverty by group at $4.20/day, 2022-23",
+      "sourceId": "worldbank",
+      "unit": "% below $4.20/day",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v27.econ.poverty.wb_mpm_components",
+      "indicatorId": "econ.poverty.wb_mpm_components",
+      "title": "World Bank multidimensional poverty components, 2022-23",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v28.econ.poverty.committee_headcount_2011",
+      "indicatorId": "econ.poverty.committee_headcount_2011",
+      "title": "Tendulkar vs Rangarajan poverty headcount, 2011-12",
+      "sourceId": "planning-commission",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v29.econ.poverty.committee_lines_2011",
+      "indicatorId": "econ.poverty.committee_lines_2011",
+      "title": "Tendulkar vs Rangarajan poverty lines, 2011-12",
+      "sourceId": "planning-commission",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v30.econ.poverty.tinbergen_plfs_tendulkar_sfe",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_sfe",
+      "title": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, sector-wide model",
+      "sourceId": "tinbergen",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v31.econ.poverty.tinbergen_plfs_tendulkar_state",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_state",
+      "title": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state-level model",
+      "sourceId": "tinbergen",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v32.econ.poverty.tinbergen_plfs_tendulkar_lasso",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_lasso",
+      "title": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state LASSO model",
+      "sourceId": "tinbergen",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v33.econ.poverty.tinbergen_estimates_2022",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022",
+      "title": "Alternative poverty estimates for India, 2022-23",
+      "sourceId": "tinbergen",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v34.econ.poverty.hces_cutoff_simulation",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation",
+      "title": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "% of people below cutoff",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v35.econ.poverty.hces_cutoff_simulation_sector",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector",
+      "title": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "% of people below cutoff",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v36.econ.poverty.hces_cutoff_state_3000",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000",
+      "title": "HCES simulated poverty below Rs 3,000/month by state, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "% of people below cutoff",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v37.econ.poverty.hces_cutoff_social_3000",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000",
+      "title": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "% of people below cutoff",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v38.econ.inequality.hces_mpce_rural_imputed",
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed",
+      "title": "Rural average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v39.econ.inequality.hces_mpce_urban_imputed",
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed",
+      "title": "Urban average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v40.econ.inequality.hces_fractile_mpce_rural",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural",
+      "title": "Rural average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v41.econ.inequality.hces_fractile_mpce_urban",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban",
+      "title": "Urban average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v42.econ.inequality.hces_cons_share_rural",
+      "indicatorId": "econ.inequality.hces_cons_share_rural",
+      "title": "Consumption share by group — rural (HCES 2023-24, computed)",
+      "sourceId": "mospi-hces",
+      "unit": "% of total consumption",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v43.econ.inequality.hces_gini_rural",
+      "indicatorId": "econ.inequality.hces_gini_rural",
+      "title": "Consumption Gini — rural (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "unit": "Gini index (0–100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v44.econ.inequality.hces_gini_urban",
+      "indicatorId": "econ.inequality.hces_gini_urban",
+      "title": "Consumption Gini — urban (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "unit": "Gini index (0–100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v45.econ.inequality.hces_state_mpce_rural",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural",
+      "title": "Rural average MPCE by major state, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v46.econ.inequality.hces_mpce_by_caste",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste",
+      "title": "Consumption (MPCE) by caste group, 2023-24",
+      "sourceId": "mospi-hces",
+      "unit": "₹ per person per month",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v47.econ.poverty.niti_mpi_by_state",
+      "indicatorId": "econ.poverty.niti_mpi_by_state",
+      "title": "NITI National MPI headcount by state, 2019-21",
+      "sourceId": "niti",
+      "unit": "% multidimensionally poor",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v48.econ.poverty.nfhs_basic_floor_latest",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest",
+      "title": "Basic household capability indicators, NFHS-5 to NFHS-6",
+      "sourceId": "nfhs",
+      "unit": "% of relevant households or women",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v49.econ.poverty.nfhs_nutrition_latest",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest",
+      "title": "Nutrition deprivation indicators, NFHS-5 to NFHS-6",
+      "sourceId": "nfhs",
+      "unit": "% of relevant population",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v50.econ.poverty.health_financial_hardship",
+      "indicatorId": "econ.poverty.health_financial_hardship",
+      "title": "Financial hardship from out-of-pocket health spending",
+      "sourceId": "worldbank",
+      "unit": "% of population",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v51.work.ilo.working_poverty",
+      "indicatorId": "work.ilo.working_poverty",
+      "title": "Working poverty rate (employed below US$3.65/day PPP)",
+      "sourceId": "ilostat",
+      "unit": "% of employed",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v52.work.ilo.working_poverty_youth",
+      "indicatorId": "work.ilo.working_poverty_youth",
+      "title": "Working poverty rate, youth (15–24)",
+      "sourceId": "ilostat",
+      "unit": "% of employed youth",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v53.work.plfs.status_self_employed",
+      "indicatorId": "work.plfs.status_self_employed",
+      "title": "Workers who are self-employed",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v54.work.plfs.status_casual",
+      "indicatorId": "work.plfs.status_casual",
+      "title": "Workers in casual labour",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v55.work.plfs.status_regular_wage",
+      "indicatorId": "work.plfs.status_regular_wage",
+      "title": "Workers in regular wage/salaried jobs",
+      "sourceId": "mospi",
+      "unit": "% of workers",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v56.work.vulnerable_employment",
+      "indicatorId": "work.vulnerable_employment",
+      "title": "Vulnerable employment",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "the-poverty-rate-changes-when-the-poverty-line-changes",
+      "title": "The poverty rate changes when the poverty line changes",
+      "chartType": "multiLine",
+      "beat": "answer",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "econ.poverty.wb_poverty_300",
+          "label": "$3/day extreme poverty"
+        },
+        {
+          "indicator": "econ.poverty.wb_poverty_420",
+          "label": "$4.20/day lower-middle-income line"
+        }
+      ],
+      "unit": "% of people below each line",
+      "subtitle": "World Bank Poverty and Inequality Platform (PIP) · poverty headcount rates, not dollars · $3/day and $4.20/day in 2021 PPP · survey years 1977-2022",
+      "whyThisChart": "The strongest version of the good news is true at the lowest line; the broader poverty line still leaves nearly a quarter of India below it."
+    },
+    {
+      "order": 2,
+      "chartId": "the-next-floor-is-much-more-crowded",
+      "title": "The next floor is much more crowded",
+      "chartType": "latestBars",
+      "beat": "scale",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "econ.poverty.wb_poor_300_crore",
+          "label": "Below $3/day (~₹58 PPP)"
+        },
+        {
+          "indicator": "econ.poverty.wb_poor_420_crore",
+          "label": "Below $4.20/day (~₹82 PPP)"
+        },
+        {
+          "indicator": "econ.poverty.wb_poor_830_crore",
+          "label": "Below $8.30/day (~₹162 PPP)"
+        }
+      ],
+      "unit": "crore people below each line",
+      "subtitle": "World Bank Poverty & Equity Brief + WDI/PIP · $3, $4.20 and $8.30 poverty lines in 2021 PPP, 2022-23",
+      "whyThisChart": "India-scale turns small percentages into large populations, and the upper-middle-income line shows how far 'secure' is from 'above extreme poverty'."
+    },
+    {
+      "order": 3,
+      "chartId": "poverty-gaps-show-depth-not-just-headcount",
+      "title": "Poverty gaps show depth, not just headcount",
+      "chartType": "latestBars",
+      "beat": "poverty-depth",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "econ.poverty.wb_gap_300",
+          "label": "$3/day gap"
+        },
+        {
+          "indicator": "econ.poverty.wb_gap_420",
+          "label": "$4.20/day gap"
+        },
+        {
+          "indicator": "econ.poverty.wb_gap_830",
+          "label": "$8.30/day gap"
+        }
+      ],
+      "unit": "% poverty gap",
+      "subtitle": "World Bank WDI/PIP · poverty gap at $3, $4.20 and $8.30 lines, 2021 PPP · latest 2022",
+      "whyThisChart": "A headcount only says how many people are below a line; the poverty gap says how far below the line they are on average."
+    },
+    {
+      "order": 4,
+      "chartId": "at-the-4-20-line-rural-poverty-is-still-higher",
+      "title": "At the $4.20 line, rural poverty is still higher",
+      "chartType": "multiLine",
+      "beat": "rural-urban",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "econ.poverty.wb_poverty_420_rural",
+          "label": "Rural"
+        },
+        {
+          "indicator": "econ.poverty.wb_poverty_420_urban",
+          "label": "Urban"
+        }
+      ],
+      "unit": "% of people below the line",
+      "subtitle": "World Bank Poverty & Equity Brief · poverty headcount rate at the lower-middle-income line, 2021 PPP",
+      "whyThisChart": "Both rural and urban poverty fell, but the rural rate remains nearly twice the urban rate at the broader line."
+    },
+    {
+      "order": 5,
+      "chartId": "the-broader-line-is-crowded-with-children-and-low-education-households",
+      "title": "The broader line is crowded with children and low-education households",
+      "chartType": "tableBars",
+      "beat": "group-risk",
+      "window": "",
+      "indicator": "econ.poverty.wb_group_poverty_420",
+      "series": [],
+      "unit": "% below the broader line",
+      "subtitle": "World Bank Poverty & Equity Brief · group poverty rates at the lower-middle-income line, 2022-23",
+      "whyThisChart": "The remaining poor are not evenly spread across age and education."
+    },
+    {
+      "order": 6,
+      "chartId": "india-s-last-official-poverty-line-stopped-here",
+      "title": "India's last official poverty line stopped here",
+      "chartType": "line",
+      "beat": "official-line",
+      "window": "full",
+      "indicator": "econ.poverty.tendulkar_headcount",
+      "series": [],
+      "unit": "",
+      "subtitle": "Planning Commission · official Tendulkar poverty estimates · NSS consumption rounds",
+      "whyThisChart": "India's last adopted national poverty estimate is still the 2011-12 Tendulkar number: 21.9%. Every newer claim is an estimate under another method."
+    },
+    {
+      "order": 7,
+      "chartId": "a-higher-line-counted-more-people-as-poor",
+      "title": "A higher line counted more people as poor",
+      "chartType": "tableBars",
+      "beat": "line-controversy",
+      "window": "",
+      "indicator": "econ.poverty.committee_headcount_2011",
+      "series": [],
+      "unit": "% of people below the committee line",
+      "subtitle": "Planning Commission press note + Rangarajan Expert Group · poverty headcount rates for the same year, 2011-12",
+      "whyThisChart": "The famous poverty-line fight is not abstract. Rangarajan's higher standard raises the all-India poverty estimate from 21.9% to 29.5% in the same year."
+    },
+    {
+      "order": 8,
+      "chartId": "what-the-old-poverty-line-meant-in-rupees",
+      "title": "What the old poverty line meant in rupees",
+      "chartType": "tableBars",
+      "beat": "line-rupees",
+      "window": "",
+      "indicator": "econ.poverty.committee_lines_2011",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "Planning Commission press note + Rangarajan Expert Group · monthly per-capita poverty lines, 2011-12",
+      "whyThisChart": "The official line was low enough to make the political controversy obvious: about Rs 816 per person per month in rural India and Rs 1,000 in urban India."
+    },
+    {
+      "order": 9,
+      "chartId": "a-serious-dissent-says-the-post-2011-fall-was-much-slower",
+      "title": "A serious dissent says the post-2011 fall was much slower",
+      "chartType": "multiLine",
+      "beat": "comparability-dissent",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "econ.poverty.tinbergen_plfs_tendulkar_sfe",
+          "label": "Sector-wide model"
+        },
+        {
+          "indicator": "econ.poverty.tinbergen_plfs_tendulkar_state",
+          "label": "State-level model"
+        },
+        {
+          "indicator": "econ.poverty.tinbergen_plfs_tendulkar_lasso",
+          "label": "State LASSO model"
+        }
+      ],
+      "unit": "% of population",
+      "subtitle": "Tinbergen Institute Discussion Paper 2025-069/V · PLFS-imputed Tendulkar-compatible poverty estimates, Table 5",
+      "whyThisChart": "This is the strongest methodological counterweight to simple HCES comparisons: it adjusts for survey non-comparability using imputation."
+    },
+    {
+      "order": 10,
+      "chartId": "the-consumption-floor-has-risen",
+      "title": "The consumption floor has risen",
+      "chartType": "multiLine",
+      "beat": "consumption-rise",
+      "window": "",
+      "indicator": "econ.inequality.hces_mpce_urban",
+      "series": [
+        {
+          "indicator": "econ.inequality.hces_mpce_urban",
+          "label": "Urban"
+        },
+        {
+          "indicator": "econ.inequality.hces_mpce_rural",
+          "label": "Rural"
+        }
+      ],
+      "unit": "₹ per person per month",
+      "subtitle": "MoSPI HCES · average monthly per-capita consumption, current prices, without imputation",
+      "whyThisChart": "Rising MPCE is the direct consumption-side reason poverty estimates fell after 2011-12."
+    },
+    {
+      "order": 11,
+      "chartId": "free-welfare-items-matter-to-measured-consumption",
+      "title": "Free welfare items matter to measured consumption",
+      "chartType": "multiLine",
+      "beat": "welfare-imputation",
+      "window": "",
+      "indicator": "econ.inequality.hces_mpce_rural_imputed",
+      "series": [
+        {
+          "indicator": "econ.inequality.hces_mpce_rural",
+          "label": "Rural without imputation"
+        },
+        {
+          "indicator": "econ.inequality.hces_mpce_rural_imputed",
+          "label": "Rural with imputation"
+        },
+        {
+          "indicator": "econ.inequality.hces_mpce_urban",
+          "label": "Urban without imputation"
+        },
+        {
+          "indicator": "econ.inequality.hces_mpce_urban_imputed",
+          "label": "Urban with imputation"
+        }
+      ],
+      "unit": "₹ per person per month",
+      "subtitle": "MoSPI HCES · average MPCE with imputed value of free welfare items",
+      "whyThisChart": "Free food and other transfers raise what poor households consume, and HCES now counts that value explicitly."
+    },
+    {
+      "order": 12,
+      "chartId": "the-bottom-rung-is-still-thin",
+      "title": "The bottom rung is still thin",
+      "chartType": "tableBars",
+      "beat": "distribution",
+      "window": "",
+      "indicator": "econ.inequality.hces_fractile_mpce_rural",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "MoSPI HCES 2023-24 · average rural MPCE by fractile class",
+      "whyThisChart": "The average can look comfortable while the poorest 5% of rural India spends only Rs 1,677 per person per month."
+    },
+    {
+      "order": 13,
+      "chartId": "the-poorest-half-gets-about-a-third-of-rural-consumption",
+      "title": "The poorest half gets about a third of rural consumption",
+      "chartType": "tableBars",
+      "beat": "distribution-share",
+      "window": "",
+      "indicator": "econ.inequality.hces_cons_share_rural",
+      "series": [],
+      "unit": "% of rural consumption",
+      "subtitle": "MoSPI HCES 2023-24 · rural consumption share by group, computed from HCES tables",
+      "whyThisChart": "Poverty is a threshold story; this shows the distribution around it."
+    },
+    {
+      "order": 14,
+      "chartId": "choose-a-monthly-mpce-cutoff-get-a-different-headcount",
+      "title": "Choose a monthly MPCE cutoff, get a different headcount",
+      "chartType": "tableBars",
+      "beat": "cutoff-simulation",
+      "window": "",
+      "indicator": "econ.poverty.hces_cutoff_simulation",
+      "series": [],
+      "unit": "% of people below the chosen cutoff",
+      "subtitle": "Computed from HCES 2023-24 unit-level microdata · nominal monthly MPCE cutoffs, calibrated to published rural/urban means",
+      "whyThisChart": "This lets readers test the sensitivity directly: poverty is not a natural fact; it changes with the monthly consumption cutoff we choose."
+    },
+    {
+      "order": 15,
+      "chartId": "below-rs-3-000-mpce-the-state-ranking-changes-sharply",
+      "title": "Below Rs 3,000 MPCE, the state ranking changes sharply",
+      "chartType": "tableBars",
+      "beat": "cutoff-geography",
+      "window": "",
+      "indicator": "econ.poverty.hces_cutoff_state_3000",
+      "series": [],
+      "unit": "% of people below Rs 3,000 MPCE",
+      "subtitle": "Computed from HCES 2023-24 unit-level microdata · Rs 3,000 nominal monthly MPCE cutoff",
+      "whyThisChart": "The sensitivity test is not evenly distributed: the same rupee floor produces very different headcounts across states."
+    },
+    {
+      "order": 16,
+      "chartId": "the-map-changes-the-poverty-story",
+      "title": "The map changes the poverty story",
+      "chartType": "tableBars",
+      "beat": "geography",
+      "window": "",
+      "indicator": "econ.inequality.hces_state_mpce_rural",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "MoSPI HCES 2023-24 · average rural MPCE by major state",
+      "whyThisChart": "Rural Kerala's average MPCE is more than twice rural Chhattisgarh's. A national poverty line hides that regional gap."
+    },
+    {
+      "order": 17,
+      "chartId": "below-rs-3-000-mpce-st-and-sc-households-are-most-exposed",
+      "title": "Below Rs 3,000 MPCE, ST and SC households are most exposed",
+      "chartType": "tableBars",
+      "beat": "cutoff-social-group",
+      "window": "",
+      "indicator": "econ.poverty.hces_cutoff_social_3000",
+      "series": [],
+      "unit": "% of people below Rs 3,000 MPCE",
+      "subtitle": "Computed from HCES 2023-24 unit-level microdata · Rs 3,000 nominal monthly MPCE cutoff by household-head social group",
+      "whyThisChart": "Average caste gaps become starker when translated into a below-cutoff headcount."
+    },
+    {
+      "order": 18,
+      "chartId": "poverty-risk-still-runs-along-caste",
+      "title": "Poverty risk still runs along caste",
+      "chartType": "tableBars",
+      "beat": "social-group",
+      "window": "",
+      "indicator": "econ.inequality.hces_mpce_by_caste",
+      "series": [],
+      "unit": "₹ per person per month",
+      "subtitle": "Computed from HCES 2023-24 unit-level microdata · average MPCE by social group of household head",
+      "whyThisChart": "The consumption ladder is not socially neutral: Scheduled Tribe and Scheduled Caste households sit far below the 'Others' average."
+    },
+    {
+      "order": 19,
+      "chartId": "niti-s-mpi-is-a-deprivation-index-not-a-cash-poverty-line",
+      "title": "NITI's MPI is a deprivation index, not a cash poverty line",
+      "chartType": "line",
+      "beat": "multidimensional",
+      "window": "full",
+      "indicator": "econ.poverty.niti_mpi_headcount",
+      "series": [],
+      "unit": "",
+      "subtitle": "NITI Aayog · National MPI headcount · 2005-06 is NFHS-3 baseline; 2013-14 and 2022-23 are estimated points",
+      "whyThisChart": "The non-cash evidence also shows a large fall: deprivation across health, education and living standards has come down sharply."
+    },
+    {
+      "order": 20,
+      "chartId": "the-global-mpi-adds-intensity-and-vulnerability",
+      "title": "The global MPI adds intensity and vulnerability",
+      "chartType": "tableBars",
+      "beat": "global-mpi",
+      "window": "",
+      "indicator": "econ.poverty.ophi_global_mpi_profile",
+      "series": [],
+      "unit": "%",
+      "subtitle": "OPHI/UNDP Global MPI Country Briefing 2023 · India, NFHS/DHS 2019-21",
+      "whyThisChart": "The global MPI gives extra texture: how deprived the MPI poor are, who is vulnerable, and the rural-urban split."
+    },
+    {
+      "order": 21,
+      "chartId": "mpi-by-state-confirms-the-geography-of-deprivation",
+      "title": "MPI by state confirms the geography of deprivation",
+      "chartType": "tableBars",
+      "beat": "multidimensional-geography",
+      "window": "",
+      "indicator": "econ.poverty.niti_mpi_by_state",
+      "series": [],
+      "unit": "% multidimensionally poor",
+      "subtitle": "NITI Aayog National MPI 2023 · state headcount ratios from NFHS-5, 2019-21",
+      "whyThisChart": "The regional story is visible outside consumption too: the high-deprivation states are not random."
+    },
+    {
+      "order": 22,
+      "chartId": "the-basic-household-floor-rose-but-health-cover-still-lags",
+      "title": "The basic household floor rose, but health cover still lags",
+      "chartType": "tableBars",
+      "beat": "basic-floor",
+      "window": "",
+      "indicator": "econ.poverty.nfhs_basic_floor_latest",
+      "series": [],
+      "unit": "% of relevant households or women",
+      "subtitle": "NFHS-6 (2023-24) · latest India totals; denominators differ by indicator",
+      "whyThisChart": "A poverty article needs to show what the welfare state and household capabilities have actually built."
+    },
+    {
+      "order": 23,
+      "chartId": "nutrition-is-the-hard-caveat",
+      "title": "Nutrition is the hard caveat",
+      "chartType": "tableBars",
+      "beat": "nutrition",
+      "window": "",
+      "indicator": "econ.poverty.nfhs_nutrition_latest",
+      "series": [],
+      "unit": "% of relevant population",
+      "subtitle": "NFHS-6 (2023-24) · selected nutrition indicators, latest India totals",
+      "whyThisChart": "No poverty article should declare victory while child stunting, wasting, underweight and inadequate diets remain this high."
+    },
+    {
+      "order": 24,
+      "chartId": "basic-services-improved-but-deprivation-did-not-vanish",
+      "title": "Basic services improved, but deprivation did not vanish",
+      "chartType": "tableBars",
+      "beat": "services",
+      "window": "",
+      "indicator": "econ.poverty.wb_mpm_components",
+      "series": [],
+      "unit": "% of population",
+      "subtitle": "World Bank Poverty & Equity Brief · multidimensional poverty components, 2022-23",
+      "whyThisChart": "Electricity deprivation is near zero, but sanitation and schooling deprivations still show up at meaningful levels."
+    },
+    {
+      "order": 25,
+      "chartId": "a-hospital-bill-can-still-push-households-back-down",
+      "title": "A hospital bill can still push households back down",
+      "chartType": "tableBars",
+      "beat": "health-shock",
+      "window": "",
+      "indicator": "econ.poverty.health_financial_hardship",
+      "series": [],
+      "unit": "% of population",
+      "subtitle": "World Bank UHC financial-protection indicators · latest India observations, mostly 2022",
+      "whyThisChart": "Poverty is not only crossing a line; it is also whether a household can survive a health shock without falling back."
+    },
+    {
+      "order": 26,
+      "chartId": "having-work-is-not-the-same-as-being-secure",
+      "title": "Having work is not the same as being secure",
+      "chartType": "multiLine",
+      "beat": "work-vulnerability",
+      "window": "",
+      "indicator": "work.ilo.working_poverty",
+      "series": [
+        {
+          "indicator": "work.ilo.working_poverty",
+          "label": "All workers"
+        },
+        {
+          "indicator": "work.ilo.working_poverty_youth",
+          "label": "Young workers (15-24)"
+        }
+      ],
+      "unit": "% of employed",
+      "subtitle": "ILOSTAT · working poverty rate, employed people below international poverty line",
+      "whyThisChart": "The last poverty layer is vulnerability: a household can work and still be close to the line."
+    },
+    {
+      "chartType": "multiLine",
+      "beat": "other-side",
+      "window": "",
+      "indicator": "",
+      "unit": "% of population below the line",
+      "order": 27,
+      "chartId": "at-420-a-day-india-is-the-poorest-of-these-asian-peers",
+      "title": "At $4.20 a day, India is the poorest of these Asian peers",
+      "series": [
+        {
+          "indicator": "econ.poverty.pip_peer_420_ind",
+          "label": "India"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_420_chn",
+          "label": "China"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_420_idn",
+          "label": "Indonesia"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_420_vnm",
+          "label": "Vietnam"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_420_bgd",
+          "label": "Bangladesh"
+        }
+      ],
+      "subtitle": "World Bank PIP · % below $4.20/day (2021 PPP) · latest survey per country; survey years differ",
+      "whyThisChart": "India cleared extreme poverty at roughly its neighbours' pace, but carries the largest group stranded just above it."
+    },
+    {
+      "chartType": "multiLine",
+      "beat": "other-side",
+      "window": "",
+      "indicator": "",
+      "unit": "% of population below the line",
+      "order": 28,
+      "chartId": "even-at-the-lowest-line-china-and-vietnam-pulled-ahead",
+      "title": "Even at the lowest line, China and Vietnam pulled ahead",
+      "series": [
+        {
+          "indicator": "econ.poverty.pip_peer_300_ind",
+          "label": "India"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_300_chn",
+          "label": "China"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_300_idn",
+          "label": "Indonesia"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_300_vnm",
+          "label": "Vietnam"
+        },
+        {
+          "indicator": "econ.poverty.pip_peer_300_bgd",
+          "label": "Bangladesh"
+        }
+      ],
+      "subtitle": "World Bank PIP · % below $3/day (2021 PPP) · latest survey per country; survey years differ",
+      "whyThisChart": "At the extreme line India is middling among peers, not exceptional; China and Vietnam are far ahead."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Poverty headcount at $3/day, 2021 PPP, latest",
+      "value": 5.3,
+      "displayValue": "5.3%",
+      "date": "2022",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.wb_poverty_300",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcount at $3/day, 2021 PPP, earliest",
+      "value": 27.1,
+      "displayValue": "27.1%",
+      "date": "2011",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.wb_poverty_300",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcount at $4.20/day, 2021 PPP, latest",
+      "value": 23.9,
+      "displayValue": "23.9%",
+      "date": "2022",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.wb_poverty_420",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcount at $4.20/day, 2021 PPP, earliest",
+      "value": 57.7,
+      "displayValue": "57.7%",
+      "date": "2011",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.wb_poverty_420",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcount at $8.30/day, 2021 PPP, latest",
+      "value": 82.1,
+      "displayValue": "82.1%",
+      "date": "2022",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.wb_poverty_830",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcount at $8.30/day, 2021 PPP, earliest",
+      "value": 97.4,
+      "displayValue": "97.4%",
+      "date": "1977",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.wb_poverty_830",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Official poverty headcount, Tendulkar methodology, latest",
+      "value": 21.9,
+      "displayValue": "21.9%",
+      "date": "2011",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.tendulkar_headcount",
+      "sourceId": "planning-commission",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Official poverty headcount, Tendulkar methodology, earliest",
+      "value": 45.3,
+      "displayValue": "45.3%",
+      "date": "1993",
+      "unit": "% of population",
+      "indicatorId": "econ.poverty.tendulkar_headcount",
+      "sourceId": "planning-commission",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rural average MPCE (HCES, without imputation), latest",
+      "value": 4122,
+      "displayValue": "₹4,122",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "indicatorId": "econ.inequality.hces_mpce_rural",
+      "sourceId": "mospi-hces",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rural average MPCE (HCES, without imputation), earliest",
+      "value": 1430,
+      "displayValue": "₹1,430",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "indicatorId": "econ.inequality.hces_mpce_rural",
+      "sourceId": "mospi-hces",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Urban average MPCE (HCES, without imputation), latest",
+      "value": 6996,
+      "displayValue": "₹6,996",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "indicatorId": "econ.inequality.hces_mpce_urban",
+      "sourceId": "mospi-hces",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Urban average MPCE (HCES, without imputation), earliest",
+      "value": 2630,
+      "displayValue": "₹2,630",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "indicatorId": "econ.inequality.hces_mpce_urban",
+      "sourceId": "mospi-hces",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "National multidimensional poverty headcount, latest",
+      "value": 11.28,
+      "displayValue": "11.3%",
+      "date": "2022-23",
+      "unit": "% multidimensionally poor",
+      "indicatorId": "econ.poverty.niti_mpi_headcount",
+      "sourceId": "niti",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "National multidimensional poverty headcount, earliest",
+      "value": 55.34,
+      "displayValue": "55.3%",
+      "date": "2005-06",
+      "unit": "% multidimensionally poor",
+      "indicatorId": "econ.poverty.niti_mpi_headcount",
+      "sourceId": "niti",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, latest",
+      "value": 75.24,
+      "displayValue": "75.24",
+      "date": "2022",
+      "unit": "million people",
+      "indicatorId": "econ.poverty.wb_poor_300",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, earliest",
+      "value": 75.24,
+      "displayValue": "75.24",
+      "date": "2022",
+      "unit": "million people",
+      "indicatorId": "econ.poverty.wb_poor_300",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, latest",
+      "value": 342.32,
+      "displayValue": "342.32",
+      "date": "2022",
+      "unit": "million people",
+      "indicatorId": "econ.poverty.wb_poor_420",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, earliest",
+      "value": 342.32,
+      "displayValue": "342.32",
+      "date": "2022",
+      "unit": "million people",
+      "indicatorId": "econ.poverty.wb_poor_420",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, latest",
+      "value": 7.52,
+      "displayValue": "7.52",
+      "date": "2022",
+      "unit": "crore people",
+      "indicatorId": "econ.poverty.wb_poor_300_crore",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, earliest",
+      "value": 7.52,
+      "displayValue": "7.52",
+      "date": "2022",
+      "unit": "crore people",
+      "indicatorId": "econ.poverty.wb_poor_300_crore",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, latest",
+      "value": 34.23,
+      "displayValue": "34.23",
+      "date": "2022",
+      "unit": "crore people",
+      "indicatorId": "econ.poverty.wb_poor_420_crore",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, earliest",
+      "value": 34.23,
+      "displayValue": "34.23",
+      "date": "2022",
+      "unit": "crore people",
+      "indicatorId": "econ.poverty.wb_poor_420_crore",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $8.30/day, 2021 PPP, latest",
+      "value": 117,
+      "displayValue": "117",
+      "date": "2022",
+      "unit": "crore people",
+      "indicatorId": "econ.poverty.wb_poor_830_crore",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "People below $8.30/day, 2021 PPP, earliest",
+      "value": 62.4,
+      "displayValue": "62.4",
+      "date": "1977",
+      "unit": "crore people",
+      "indicatorId": "econ.poverty.wb_poor_830_crore",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Poverty headcount at $3/day, 2021 PPP, latest",
+      "value": 5.3,
+      "displayValue": "5.3%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_300"
+    },
+    {
+      "label": "Poverty headcount at $3/day, 2021 PPP, earliest",
+      "value": 27.1,
+      "displayValue": "27.1%",
+      "date": "2011",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_300"
+    },
+    {
+      "label": "Poverty headcount at $4.20/day, 2021 PPP, latest",
+      "value": 23.9,
+      "displayValue": "23.9%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_420"
+    },
+    {
+      "label": "Poverty headcount at $4.20/day, 2021 PPP, earliest",
+      "value": 57.7,
+      "displayValue": "57.7%",
+      "date": "2011",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_420"
+    },
+    {
+      "label": "Poverty headcount at $8.30/day, 2021 PPP, latest",
+      "value": 82.1,
+      "displayValue": "82.1%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_830"
+    },
+    {
+      "label": "Poverty headcount at $8.30/day, 2021 PPP, earliest",
+      "value": 97.4,
+      "displayValue": "97.4%",
+      "date": "1977",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_830"
+    },
+    {
+      "label": "Official poverty headcount, Tendulkar methodology, latest",
+      "value": 21.9,
+      "displayValue": "21.9%",
+      "date": "2011",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.tendulkar_headcount"
+    },
+    {
+      "label": "Official poverty headcount, Tendulkar methodology, earliest",
+      "value": 45.3,
+      "displayValue": "45.3%",
+      "date": "1993",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.tendulkar_headcount"
+    },
+    {
+      "label": "Rural average MPCE (HCES, without imputation), latest",
+      "value": 4122,
+      "displayValue": "₹4,122",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE (HCES, without imputation), earliest",
+      "value": 1430,
+      "displayValue": "₹1,430",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural"
+    },
+    {
+      "label": "Urban average MPCE (HCES, without imputation), latest",
+      "value": 6996,
+      "displayValue": "₹6,996",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE (HCES, without imputation), earliest",
+      "value": 2630,
+      "displayValue": "₹2,630",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban"
+    },
+    {
+      "label": "National multidimensional poverty headcount, latest",
+      "value": 11.28,
+      "displayValue": "11.3%",
+      "date": "2022-23",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_headcount"
+    },
+    {
+      "label": "National multidimensional poverty headcount, earliest",
+      "value": 55.34,
+      "displayValue": "55.3%",
+      "date": "2005-06",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_headcount"
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, latest",
+      "value": 75.24,
+      "displayValue": "75.24",
+      "date": "2022",
+      "unit": "million people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_300"
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, earliest",
+      "value": 75.24,
+      "displayValue": "75.24",
+      "date": "2022",
+      "unit": "million people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_300"
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, latest",
+      "value": 342.32,
+      "displayValue": "342.32",
+      "date": "2022",
+      "unit": "million people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_420"
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, earliest",
+      "value": 342.32,
+      "displayValue": "342.32",
+      "date": "2022",
+      "unit": "million people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_420"
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, latest",
+      "value": 7.52,
+      "displayValue": "7.52",
+      "date": "2022",
+      "unit": "crore people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_300_crore"
+    },
+    {
+      "label": "People below $3/day, 2021 PPP, earliest",
+      "value": 7.52,
+      "displayValue": "7.52",
+      "date": "2022",
+      "unit": "crore people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_300_crore"
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, latest",
+      "value": 34.23,
+      "displayValue": "34.23",
+      "date": "2022",
+      "unit": "crore people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_420_crore"
+    },
+    {
+      "label": "People below $4.20/day, 2021 PPP, earliest",
+      "value": 34.23,
+      "displayValue": "34.23",
+      "date": "2022",
+      "unit": "crore people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_420_crore"
+    },
+    {
+      "label": "People below $8.30/day, 2021 PPP, latest",
+      "value": 117,
+      "displayValue": "117",
+      "date": "2022",
+      "unit": "crore people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_830_crore"
+    },
+    {
+      "label": "People below $8.30/day, 2021 PPP, earliest",
+      "value": 62.4,
+      "displayValue": "62.4",
+      "date": "1977",
+      "unit": "crore people",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poor_830_crore"
+    },
+    {
+      "label": "Rupee equivalents of World Bank poverty lines, 2021 PPP, latest",
+      "value": 162,
+      "displayValue": "₹162",
+      "date": "$8.30/day",
+      "unit": "₹ per person per day, 2021 PPP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.ppp_rupee_equivalents_2021"
+    },
+    {
+      "label": "Rupee equivalents of World Bank poverty lines, 2021 PPP, earliest",
+      "value": 58,
+      "displayValue": "₹58",
+      "date": "$3/day",
+      "unit": "₹ per person per day, 2021 PPP",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.ppp_rupee_equivalents_2021"
+    },
+    {
+      "label": "Poverty gap at $3/day, 2021 PPP, latest",
+      "value": 0.8,
+      "displayValue": "0.8%",
+      "date": "2022",
+      "unit": "% poverty gap",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_gap_300"
+    },
+    {
+      "label": "Poverty gap at $3/day, 2021 PPP, earliest",
+      "value": 18.3,
+      "displayValue": "18.3%",
+      "date": "1977",
+      "unit": "% poverty gap",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_gap_300"
+    },
+    {
+      "label": "Poverty gap at $4.20/day, 2021 PPP, latest",
+      "value": 4.4,
+      "displayValue": "4.4%",
+      "date": "2022",
+      "unit": "% poverty gap",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_gap_420"
+    },
+    {
+      "label": "Poverty gap at $4.20/day, 2021 PPP, earliest",
+      "value": 33.9,
+      "displayValue": "33.9%",
+      "date": "1977",
+      "unit": "% poverty gap",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_gap_420"
+    },
+    {
+      "label": "Poverty gap at $8.30/day, 2021 PPP, latest",
+      "value": 31.1,
+      "displayValue": "31.1%",
+      "date": "2022",
+      "unit": "% poverty gap",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_gap_830"
+    },
+    {
+      "label": "Poverty gap at $8.30/day, 2021 PPP, earliest",
+      "value": 63.2,
+      "displayValue": "63.2%",
+      "date": "1977",
+      "unit": "% poverty gap",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_gap_830"
+    },
+    {
+      "label": "Poverty headcount at societal poverty line, latest",
+      "value": 21.3,
+      "displayValue": "21.3%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_societal_headcount"
+    },
+    {
+      "label": "Poverty headcount at societal poverty line, earliest",
+      "value": 59.7,
+      "displayValue": "59.7%",
+      "date": "1977",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_societal_headcount"
+    },
+    {
+      "label": "Prosperity gap, latest",
+      "value": 5.4,
+      "displayValue": "5.4",
+      "date": "2022",
+      "unit": "average shortfall from $28/day standard",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_prosperity_gap"
+    },
+    {
+      "label": "Prosperity gap, earliest",
+      "value": 11.4,
+      "displayValue": "11.4",
+      "date": "1977",
+      "unit": "average shortfall from $28/day standard",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_prosperity_gap"
+    },
+    {
+      "label": "World Bank multidimensional poverty headcount, latest",
+      "value": 17.7,
+      "displayValue": "17.7%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_headcount"
+    },
+    {
+      "label": "World Bank multidimensional poverty headcount, earliest",
+      "value": 17.7,
+      "displayValue": "17.7%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_headcount"
+    },
+    {
+      "label": "World Bank multidimensional poverty headcount, October 2025 brief, latest",
+      "value": 15.5,
+      "displayValue": "15.5%",
+      "date": "2022-23",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_headcount_brief_2025"
+    },
+    {
+      "label": "World Bank multidimensional poverty headcount, October 2025 brief, earliest",
+      "value": 15.5,
+      "displayValue": "15.5%",
+      "date": "2022-23",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_headcount_brief_2025"
+    },
+    {
+      "label": "UNDP multidimensional poverty headcount, latest",
+      "value": 16.4,
+      "displayValue": "16.4%",
+      "date": "2019",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.undp_mpi_headcount"
+    },
+    {
+      "label": "UNDP multidimensional poverty headcount, earliest",
+      "value": 16.4,
+      "displayValue": "16.4%",
+      "date": "2019",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.undp_mpi_headcount"
+    },
+    {
+      "label": "Learning poverty, latest",
+      "value": 56.0705604553222,
+      "displayValue": "56.1%",
+      "date": "2017",
+      "unit": "% of end-of-primary-age children",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.learning_poverty"
+    },
+    {
+      "label": "Learning poverty, earliest",
+      "value": 56.0705604553222,
+      "displayValue": "56.1%",
+      "date": "2017",
+      "unit": "% of end-of-primary-age children",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.learning_poverty"
+    },
+    {
+      "label": "Global MPI profile for India, 2019-21: value",
+      "value": 16.4,
+      "displayValue": "16.4%",
+      "date": "",
+      "unit": "%",
+      "sourceId": "ophi-undp",
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile"
+    },
+    {
+      "label": "Global MPI profile for India, 2019-21: value",
+      "value": 18.7,
+      "displayValue": "18.7%",
+      "date": "",
+      "unit": "%",
+      "sourceId": "ophi-undp",
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile"
+    },
+    {
+      "label": "Global MPI profile for India, 2019-21: value",
+      "value": 4.2,
+      "displayValue": "4.2%",
+      "date": "",
+      "unit": "%",
+      "sourceId": "ophi-undp",
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile"
+    },
+    {
+      "label": "Global MPI profile for India, 2019-21: value",
+      "value": 21.2,
+      "displayValue": "21.2%",
+      "date": "",
+      "unit": "%",
+      "sourceId": "ophi-undp",
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile"
+    },
+    {
+      "label": "Global MPI profile for India, 2019-21: value",
+      "value": 5.5,
+      "displayValue": "5.5%",
+      "date": "",
+      "unit": "%",
+      "sourceId": "ophi-undp",
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile"
+    },
+    {
+      "label": "Global MPI profile for India, 2019-21: value",
+      "value": 42,
+      "displayValue": "42%",
+      "date": "",
+      "unit": "%",
+      "sourceId": "ophi-undp",
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile"
+    },
+    {
+      "label": "Rural poverty at $4.20/day, 2021 PPP, latest",
+      "value": 27.7,
+      "displayValue": "27.7%",
+      "date": "2022",
+      "unit": "% of rural population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_420_rural"
+    },
+    {
+      "label": "Rural poverty at $4.20/day, 2021 PPP, earliest",
+      "value": 64.9,
+      "displayValue": "64.9%",
+      "date": "2011",
+      "unit": "% of rural population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_420_rural"
+    },
+    {
+      "label": "Urban poverty at $4.20/day, 2021 PPP, latest",
+      "value": 14.3,
+      "displayValue": "14.3%",
+      "date": "2022",
+      "unit": "% of urban population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_420_urban"
+    },
+    {
+      "label": "Urban poverty at $4.20/day, 2021 PPP, earliest",
+      "value": 39.7,
+      "displayValue": "39.7%",
+      "date": "2011",
+      "unit": "% of urban population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_poverty_420_urban"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 31.2,
+      "displayValue": "31.2%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 30.2,
+      "displayValue": "30.2%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 27.7,
+      "displayValue": "27.7%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 25,
+      "displayValue": "25%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 24.5,
+      "displayValue": "24.5%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 23.3,
+      "displayValue": "23.3%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 21.7,
+      "displayValue": "21.7%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 19.4,
+      "displayValue": "19.4%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 14.3,
+      "displayValue": "14.3%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "Poverty by group at $4.20/day, 2022-23: value",
+      "value": 8.7,
+      "displayValue": "8.7%",
+      "date": "",
+      "unit": "% below $4.20/day",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_group_poverty_420"
+    },
+    {
+      "label": "World Bank multidimensional poverty components, 2022-23: value",
+      "value": 29.9,
+      "displayValue": "29.9%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_components"
+    },
+    {
+      "label": "World Bank multidimensional poverty components, 2022-23: value",
+      "value": 13.8,
+      "displayValue": "13.8%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_components"
+    },
+    {
+      "label": "World Bank multidimensional poverty components, 2022-23: value",
+      "value": 11.2,
+      "displayValue": "11.2%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_components"
+    },
+    {
+      "label": "World Bank multidimensional poverty components, 2022-23: value",
+      "value": 5.3,
+      "displayValue": "5.3%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_components"
+    },
+    {
+      "label": "World Bank multidimensional poverty components, 2022-23: value",
+      "value": 1,
+      "displayValue": "1%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.wb_mpm_components"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty headcount, 2011-12: value",
+      "value": 21.9,
+      "displayValue": "21.9%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_headcount_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty headcount, 2011-12: value",
+      "value": 29.5,
+      "displayValue": "29.5%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_headcount_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty headcount, 2011-12: value",
+      "value": 25.7,
+      "displayValue": "25.7%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_headcount_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty headcount, 2011-12: value",
+      "value": 30.9,
+      "displayValue": "30.9%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_headcount_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty headcount, 2011-12: value",
+      "value": 13.7,
+      "displayValue": "13.7%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_headcount_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty headcount, 2011-12: value",
+      "value": 26.4,
+      "displayValue": "26.4%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_headcount_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty lines, 2011-12: value",
+      "value": 816,
+      "displayValue": "₹816",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_lines_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty lines, 2011-12: value",
+      "value": 1000,
+      "displayValue": "₹1,000",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_lines_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty lines, 2011-12: value",
+      "value": 972,
+      "displayValue": "₹972",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_lines_2011"
+    },
+    {
+      "label": "Tendulkar vs Rangarajan poverty lines, 2011-12: value",
+      "value": 1407,
+      "displayValue": "₹1,407",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "planning-commission",
+      "indicatorId": "econ.poverty.committee_lines_2011"
+    },
+    {
+      "label": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, sector-wide model, latest",
+      "value": 19.9,
+      "displayValue": "19.9%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_sfe"
+    },
+    {
+      "label": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, sector-wide model, earliest",
+      "value": 19.5,
+      "displayValue": "19.5%",
+      "date": "2017",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_sfe"
+    },
+    {
+      "label": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state-level model, latest",
+      "value": 17.5,
+      "displayValue": "17.5%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_state"
+    },
+    {
+      "label": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state-level model, earliest",
+      "value": 18,
+      "displayValue": "18%",
+      "date": "2017",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_state"
+    },
+    {
+      "label": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state LASSO model, latest",
+      "value": 18.3,
+      "displayValue": "18.3%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_lasso"
+    },
+    {
+      "label": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state LASSO model, earliest",
+      "value": 18.4,
+      "displayValue": "18.4%",
+      "date": "2017",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_lasso"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 7.2,
+      "displayValue": "7.2%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 11.3,
+      "displayValue": "11.3%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 13.6,
+      "displayValue": "13.6%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 17.5,
+      "displayValue": "17.5%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 17.5,
+      "displayValue": "17.5%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 19.9,
+      "displayValue": "19.9%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 23.3,
+      "displayValue": "23.3%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "Alternative poverty estimates for India, 2022-23: value",
+      "value": 25.9,
+      "displayValue": "25.9%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "tinbergen",
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: cutoffRsPerPersonMonth",
+      "value": 1500,
+      "displayValue": "1,500%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: value",
+      "value": 0.8,
+      "displayValue": "0.8%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: cutoffRsPerPersonMonth",
+      "value": 2000,
+      "displayValue": "2,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: value",
+      "value": 4,
+      "displayValue": "4%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: cutoffRsPerPersonMonth",
+      "value": 2500,
+      "displayValue": "2,500%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: value",
+      "value": 11.6,
+      "displayValue": "11.6%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: value",
+      "value": 22.7,
+      "displayValue": "22.7%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3500,
+      "displayValue": "3,500%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: value",
+      "value": 34.9,
+      "displayValue": "34.9%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: cutoffRsPerPersonMonth",
+      "value": 4000,
+      "displayValue": "4,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24: value",
+      "value": 46.2,
+      "displayValue": "46.2%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: cutoffRsPerPersonMonth",
+      "value": 1500,
+      "displayValue": "1,500%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: value",
+      "value": 1.1,
+      "displayValue": "1.1%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: cutoffRsPerPersonMonth",
+      "value": 1500,
+      "displayValue": "1,500%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: value",
+      "value": 0.1,
+      "displayValue": "0.1%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: cutoffRsPerPersonMonth",
+      "value": 1500,
+      "displayValue": "1,500%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: value",
+      "value": 0.8,
+      "displayValue": "0.8%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: cutoffRsPerPersonMonth",
+      "value": 2000,
+      "displayValue": "2,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: value",
+      "value": 5.5,
+      "displayValue": "5.5%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: cutoffRsPerPersonMonth",
+      "value": 2000,
+      "displayValue": "2,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: value",
+      "value": 0.6,
+      "displayValue": "0.6%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: cutoffRsPerPersonMonth",
+      "value": 2000,
+      "displayValue": "2,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24: value",
+      "value": 4,
+      "displayValue": "4%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: value",
+      "value": 60.1,
+      "displayValue": "60.1%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: value",
+      "value": 52,
+      "displayValue": "52%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: value",
+      "value": 43.4,
+      "displayValue": "43.4%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: value",
+      "value": 37.3,
+      "displayValue": "37.3%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: value",
+      "value": 34.4,
+      "displayValue": "34.4%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by state, 2023-24: value",
+      "value": 29.8,
+      "displayValue": "29.8%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: value",
+      "value": 46.8,
+      "displayValue": "46.8%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: value",
+      "value": 28.4,
+      "displayValue": "28.4%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: value",
+      "value": 20.8,
+      "displayValue": "20.8%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: cutoffRsPerPersonMonth",
+      "value": 3000,
+      "displayValue": "3,000%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24: value",
+      "value": 12.7,
+      "displayValue": "12.7%",
+      "date": "",
+      "unit": "% of people below cutoff",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000"
+    },
+    {
+      "label": "Rural average MPCE (HCES, with welfare imputation), latest",
+      "value": 4247,
+      "displayValue": "₹4,247",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed"
+    },
+    {
+      "label": "Rural average MPCE (HCES, with welfare imputation), earliest",
+      "value": 1430,
+      "displayValue": "₹1,430",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed"
+    },
+    {
+      "label": "Urban average MPCE (HCES, with welfare imputation), latest",
+      "value": 7078,
+      "displayValue": "₹7,078",
+      "date": "2023",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed"
+    },
+    {
+      "label": "Urban average MPCE (HCES, with welfare imputation), earliest",
+      "value": 2630,
+      "displayValue": "₹2,630",
+      "date": "2011",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 1677,
+      "displayValue": "₹1,677",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2126,
+      "displayValue": "₹2,126",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2473,
+      "displayValue": "₹2,473",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2833,
+      "displayValue": "₹2,833",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 3162,
+      "displayValue": "₹3,162",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 1677,
+      "displayValue": "₹1,677",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2126,
+      "displayValue": "₹2,126",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2473,
+      "displayValue": "₹2,473",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 2833,
+      "displayValue": "₹2,833",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by fractile class, 2023-24: value",
+      "value": 3162,
+      "displayValue": "₹3,162",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 2376,
+      "displayValue": "₹2,376",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3093,
+      "displayValue": "₹3,093",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3687,
+      "displayValue": "₹3,687",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4353,
+      "displayValue": "₹4,353",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4979,
+      "displayValue": "₹4,979",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 2376,
+      "displayValue": "₹2,376",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3093,
+      "displayValue": "₹3,093",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 3687,
+      "displayValue": "₹3,687",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4353,
+      "displayValue": "₹4,353",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Urban average MPCE by fractile class, 2023-24: value",
+      "value": 4979,
+      "displayValue": "₹4,979",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 33.6,
+      "displayValue": "33.6%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 45.7,
+      "displayValue": "45.7%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 20.7,
+      "displayValue": "20.7%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption share by group — rural (HCES 2023-24, computed): value",
+      "value": 12.3,
+      "displayValue": "12.3%",
+      "date": "",
+      "unit": "% of total consumption",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_cons_share_rural"
+    },
+    {
+      "label": "Consumption Gini — rural (HCES/NSS), latest",
+      "value": 23.7,
+      "displayValue": "23.7",
+      "date": "2023",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_rural"
+    },
+    {
+      "label": "Consumption Gini — rural (HCES/NSS), earliest",
+      "value": 28.3,
+      "displayValue": "28.3",
+      "date": "2011",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_rural"
+    },
+    {
+      "label": "Consumption Gini — urban (HCES/NSS), latest",
+      "value": 28.4,
+      "displayValue": "28.4",
+      "date": "2023",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_urban"
+    },
+    {
+      "label": "Consumption Gini — urban (HCES/NSS), earliest",
+      "value": 36.3,
+      "displayValue": "36.3",
+      "date": "2011",
+      "unit": "Gini index (0–100)",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_gini_urban"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 6611,
+      "displayValue": "₹6,611",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5817,
+      "displayValue": "₹5,817",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5701,
+      "displayValue": "₹5,701",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5435,
+      "displayValue": "₹5,435",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5377,
+      "displayValue": "₹5,377",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 6611,
+      "displayValue": "₹6,611",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5817,
+      "displayValue": "₹5,817",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5701,
+      "displayValue": "₹5,701",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5435,
+      "displayValue": "₹5,435",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Rural average MPCE by major state, 2023-24: value",
+      "value": 5377,
+      "displayValue": "₹5,377",
+      "date": "2023-24",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_state_mpce_rural"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: value",
+      "value": 6148,
+      "displayValue": "₹6,148",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gini",
+      "value": 0.308,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: popSharePct",
+      "value": 25.4,
+      "displayValue": "₹25",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gapVsOthersPct",
+      "value": 0,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: value",
+      "value": 5068,
+      "displayValue": "₹5,068",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gini",
+      "value": 0.289,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: popSharePct",
+      "value": 45.7,
+      "displayValue": "₹46",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gapVsOthersPct",
+      "value": -18,
+      "displayValue": "₹-18",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: value",
+      "value": 4277,
+      "displayValue": "₹4,277",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gini",
+      "value": 0.26,
+      "displayValue": "₹0",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: popSharePct",
+      "value": 19.3,
+      "displayValue": "₹19",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "Consumption (MPCE) by caste group, 2023-24: gapVsOthersPct",
+      "value": -30,
+      "displayValue": "₹-30",
+      "date": "",
+      "unit": "₹ per person per month",
+      "sourceId": "mospi-hces",
+      "indicatorId": "econ.inequality.hces_mpce_by_caste"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 33.76,
+      "displayValue": "33.8%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 28.81,
+      "displayValue": "28.8%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 27.79,
+      "displayValue": "27.8%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 22.93,
+      "displayValue": "22.9%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 20.63,
+      "displayValue": "20.6%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 19.35,
+      "displayValue": "19.4%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 16.37,
+      "displayValue": "16.4%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 15.68,
+      "displayValue": "15.7%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 15.43,
+      "displayValue": "15.4%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "NITI National MPI headcount by state, 2019-21: value",
+      "value": 15.31,
+      "displayValue": "15.3%",
+      "date": "",
+      "unit": "% multidimensionally poor",
+      "sourceId": "niti",
+      "indicatorId": "econ.poverty.niti_mpi_by_state"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: nfhs5",
+      "value": 96.8,
+      "displayValue": "96.8%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: value",
+      "value": 98.3,
+      "displayValue": "98.3%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: urban",
+      "value": 99.5,
+      "displayValue": "99.5%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: rural",
+      "value": 97.8,
+      "displayValue": "97.8%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: nfhs5",
+      "value": 95.9,
+      "displayValue": "95.9%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: value",
+      "value": 96.5,
+      "displayValue": "96.5%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: urban",
+      "value": 99.1,
+      "displayValue": "99.1%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: rural",
+      "value": 95.4,
+      "displayValue": "95.4%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: nfhs5",
+      "value": 95.7,
+      "displayValue": "95.7%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: value",
+      "value": 98.2,
+      "displayValue": "98.2%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: urban",
+      "value": 97.3,
+      "displayValue": "97.3%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Basic household capability indicators, NFHS-5 to NFHS-6: rural",
+      "value": 98.6,
+      "displayValue": "98.6%",
+      "date": "",
+      "unit": "% of relevant households or women",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: nfhs5",
+      "value": 35.5,
+      "displayValue": "35.5%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: value",
+      "value": 29.3,
+      "displayValue": "29.3%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: urban",
+      "value": 23.9,
+      "displayValue": "23.9%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: rural",
+      "value": 30.9,
+      "displayValue": "30.9%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: nfhs5",
+      "value": 32.1,
+      "displayValue": "32.1%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: value",
+      "value": 31.8,
+      "displayValue": "31.8%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: urban",
+      "value": 25.3,
+      "displayValue": "25.3%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: rural",
+      "value": 33.8,
+      "displayValue": "33.8%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: nfhs5",
+      "value": 19.3,
+      "displayValue": "19.3%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: value",
+      "value": 19,
+      "displayValue": "19%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: urban",
+      "value": 16.5,
+      "displayValue": "16.5%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Nutrition deprivation indicators, NFHS-5 to NFHS-6: rural",
+      "value": 19.8,
+      "displayValue": "19.8%",
+      "date": "",
+      "unit": "% of relevant population",
+      "sourceId": "nfhs",
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest"
+    },
+    {
+      "label": "Financial hardship from out-of-pocket health spending: value",
+      "value": 30.94,
+      "displayValue": "30.9%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.health_financial_hardship"
+    },
+    {
+      "label": "Financial hardship from out-of-pocket health spending: value",
+      "value": 22.27,
+      "displayValue": "22.3%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.health_financial_hardship"
+    },
+    {
+      "label": "Financial hardship from out-of-pocket health spending: value",
+      "value": 8.67,
+      "displayValue": "8.7%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.health_financial_hardship"
+    },
+    {
+      "label": "Financial hardship from out-of-pocket health spending: value",
+      "value": 30.94,
+      "displayValue": "30.9%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.health_financial_hardship"
+    },
+    {
+      "label": "Financial hardship from out-of-pocket health spending: value",
+      "value": 22.27,
+      "displayValue": "22.3%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.health_financial_hardship"
+    },
+    {
+      "label": "Financial hardship from out-of-pocket health spending: value",
+      "value": 8.67,
+      "displayValue": "8.7%",
+      "date": "2022",
+      "unit": "% of population",
+      "sourceId": "worldbank",
+      "indicatorId": "econ.poverty.health_financial_hardship"
+    },
+    {
+      "label": "Working poverty rate (employed below US$3.65/day PPP), latest",
+      "value": 3.562,
+      "displayValue": "3.6%",
+      "date": "2025",
+      "unit": "% of employed",
+      "sourceId": "ilostat",
+      "indicatorId": "work.ilo.working_poverty"
+    },
+    {
+      "label": "Working poverty rate (employed below US$3.65/day PPP), earliest",
+      "value": 44.188,
+      "displayValue": "44.2%",
+      "date": "2000",
+      "unit": "% of employed",
+      "sourceId": "ilostat",
+      "indicatorId": "work.ilo.working_poverty"
+    },
+    {
+      "label": "Working poverty rate, youth (15–24), latest",
+      "value": 8.323,
+      "displayValue": "8.3%",
+      "date": "2023",
+      "unit": "% of employed youth",
+      "sourceId": "ilostat",
+      "indicatorId": "work.ilo.working_poverty_youth"
+    },
+    {
+      "label": "Working poverty rate, youth (15–24), earliest",
+      "value": 46.516,
+      "displayValue": "46.5%",
+      "date": "2000",
+      "unit": "% of employed youth",
+      "sourceId": "ilostat",
+      "indicatorId": "work.ilo.working_poverty_youth"
+    },
+    {
+      "label": "Workers who are self-employed, latest",
+      "value": 58.4,
+      "displayValue": "58.4%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_self_employed"
+    },
+    {
+      "label": "Workers who are self-employed, earliest",
+      "value": 52.2,
+      "displayValue": "52.2%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_self_employed"
+    },
+    {
+      "label": "Workers in casual labour, latest",
+      "value": 19.8,
+      "displayValue": "19.8%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_casual"
+    },
+    {
+      "label": "Workers in casual labour, earliest",
+      "value": 24.9,
+      "displayValue": "24.9%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_casual"
+    },
+    {
+      "label": "Workers in regular wage/salaried jobs, latest",
+      "value": 21.7,
+      "displayValue": "21.7%",
+      "date": "2023-24",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_regular_wage"
+    },
+    {
+      "label": "Workers in regular wage/salaried jobs, earliest",
+      "value": 22.8,
+      "displayValue": "22.8%",
+      "date": "2017-18",
+      "unit": "% of workers",
+      "sourceId": "mospi",
+      "indicatorId": "work.plfs.status_regular_wage"
+    },
+    {
+      "label": "Vulnerable employment, latest",
+      "value": 71.583962506186,
+      "displayValue": "71.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.vulnerable_employment"
+    },
+    {
+      "label": "Vulnerable employment, earliest",
+      "value": 85.9256839852897,
+      "displayValue": "85.9%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.vulnerable_employment"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "econ.poverty.wb_poverty_300",
+      "title": "Poverty headcount at $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: $3 poverty rate",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2011",
+        "value": 27.1
+      },
+      "latest": {
+        "date": "2022",
+        "value": 5.3
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poverty_420",
+      "title": "Poverty headcount at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: LMIC poverty rate",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2011",
+        "value": 57.7
+      },
+      "latest": {
+        "date": "2022",
+        "value": 23.9
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poverty_830",
+      "title": "Poverty headcount at $8.30/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.UMIC",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 97.4
+      },
+      "latest": {
+        "date": "2022",
+        "value": 82.1
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.tendulkar_headcount",
+      "title": "Official poverty headcount, Tendulkar methodology",
+      "sourceId": "planning-commission",
+      "sourceIndicatorId": "Poverty Estimates 2011-12: all-India poverty ratio",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 4,
+      "earliest": {
+        "date": "1993",
+        "value": 45.3
+      },
+      "latest": {
+        "date": "2011",
+        "value": 21.9
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_rural",
+      "title": "Rural average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 1 rural",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 1430
+      },
+      "latest": {
+        "date": "2023",
+        "value": 4122
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_urban",
+      "title": "Urban average MPCE (HCES, without imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 1 urban",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 2630
+      },
+      "latest": {
+        "date": "2023",
+        "value": 6996
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.niti_mpi_headcount",
+      "title": "National multidimensional poverty headcount",
+      "sourceId": "niti",
+      "sourceIndicatorId": "Multidimensional Poverty in India since 2005-06",
+      "unit": "% multidimensionally poor",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 5,
+      "earliest": {
+        "date": "2005-06",
+        "value": 55.34
+      },
+      "latest": {
+        "date": "2022-23",
+        "value": 11.28
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poor_300",
+      "title": "People below $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: $3 number of poor",
+      "unit": "million people",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2022",
+        "value": 75.24
+      },
+      "latest": {
+        "date": "2022",
+        "value": 75.24
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poor_420",
+      "title": "People below $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: LMIC number of poor",
+      "unit": "million people",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2022",
+        "value": 342.32
+      },
+      "latest": {
+        "date": "2022",
+        "value": 342.32
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poor_300_crore",
+      "title": "People below $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Derived from Poverty & Equity Brief October 2025: $3 number of poor",
+      "unit": "crore people",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2022",
+        "value": 7.52
+      },
+      "latest": {
+        "date": "2022",
+        "value": 7.52
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poor_420_crore",
+      "title": "People below $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Derived from Poverty & Equity Brief October 2025: LMIC number of poor",
+      "unit": "crore people",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2022",
+        "value": 34.23
+      },
+      "latest": {
+        "date": "2022",
+        "value": 34.23
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poor_830_crore",
+      "title": "People below $8.30/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.UMIC x SP.POP.TOTL",
+      "unit": "crore people",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 62.4
+      },
+      "latest": {
+        "date": "2022",
+        "value": 117
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.ppp_rupee_equivalents_2021",
+      "title": "Rupee equivalents of World Bank poverty lines, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "World Bank 2021 PPP line update; PA.NUS.PRVT.PP",
+      "unit": "₹ per person per day, 2021 PPP",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "$3/day",
+        "value": 58
+      },
+      "latest": {
+        "date": "$8.30/day",
+        "value": 162
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_gap_300",
+      "title": "Poverty gap at $3/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.GAPS",
+      "unit": "% poverty gap",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 18.3
+      },
+      "latest": {
+        "date": "2022",
+        "value": 0.8
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_gap_420",
+      "title": "Poverty gap at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.LMIC.GP",
+      "unit": "% poverty gap",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 33.9
+      },
+      "latest": {
+        "date": "2022",
+        "value": 4.4
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_gap_830",
+      "title": "Poverty gap at $8.30/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.UMIC.GP",
+      "unit": "% poverty gap",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 63.2
+      },
+      "latest": {
+        "date": "2022",
+        "value": 31.1
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_societal_headcount",
+      "title": "Poverty headcount at societal poverty line",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.SOPO",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 59.7
+      },
+      "latest": {
+        "date": "2022",
+        "value": 21.3
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_prosperity_gap",
+      "title": "Prosperity gap",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.SPR.PGAP",
+      "unit": "average shortfall from $28/day standard",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 8,
+      "earliest": {
+        "date": "1977",
+        "value": 11.4
+      },
+      "latest": {
+        "date": "2022",
+        "value": 5.4
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_mpm_headcount",
+      "title": "World Bank multidimensional poverty headcount",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.MPWB",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2022",
+        "value": 17.7
+      },
+      "latest": {
+        "date": "2022",
+        "value": 17.7
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_mpm_headcount_brief_2025",
+      "title": "World Bank multidimensional poverty headcount, October 2025 brief",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: Multidimensional Poverty Measure",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2022-23",
+        "value": 15.5
+      },
+      "latest": {
+        "date": "2022-23",
+        "value": 15.5
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.undp_mpi_headcount",
+      "title": "UNDP multidimensional poverty headcount",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SI.POV.MPUN",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2019",
+        "value": 16.4
+      },
+      "latest": {
+        "date": "2019",
+        "value": 16.4
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.learning_poverty",
+      "title": "Learning poverty",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SE.LPV.PRIM",
+      "unit": "% of end-of-primary-age children",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 1,
+      "earliest": {
+        "date": "2017",
+        "value": 56.0705604553222
+      },
+      "latest": {
+        "date": "2017",
+        "value": 56.0705604553222
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.ophi_global_mpi_profile",
+      "title": "Global MPI profile for India, 2019-21",
+      "sourceId": "ophi-undp",
+      "sourceIndicatorId": "OPHI Global MPI Country Briefing 2023: India, Table 1",
+      "unit": "%",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value",
+        "denominator",
+        "note"
+      ],
+      "latestRows": [
+        {
+          "label": "MPI poor, national",
+          "value": 16.4,
+          "denominator": "population",
+          "note": "Headcount H"
+        },
+        {
+          "label": "Vulnerable to MPI poverty",
+          "value": 18.7,
+          "denominator": "population",
+          "note": "Deprived in 20-33.33% of weighted indicators"
+        },
+        {
+          "label": "Severe MPI poverty",
+          "value": 4.2,
+          "denominator": "population",
+          "note": "Deprived in at least 50% of weighted indicators"
+        },
+        {
+          "label": "MPI poor, rural",
+          "value": 21.2,
+          "denominator": "rural population",
+          "note": "Rural headcount H"
+        },
+        {
+          "label": "MPI poor, urban",
+          "value": 5.5,
+          "denominator": "urban population",
+          "note": "Urban headcount H"
+        },
+        {
+          "label": "Intensity among MPI poor",
+          "value": 42,
+          "denominator": "MPI poor",
+          "note": "Average weighted deprivation score among poor people"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poverty_420_rural",
+      "title": "Rural poverty at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: rural LMIC poverty",
+      "unit": "% of rural population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2011",
+        "value": 64.9
+      },
+      "latest": {
+        "date": "2022",
+        "value": 27.7
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_poverty_420_urban",
+      "title": "Urban poverty at $4.20/day, 2021 PPP",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: urban LMIC poverty",
+      "unit": "% of urban population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2011",
+        "value": 39.7
+      },
+      "latest": {
+        "date": "2022",
+        "value": 14.3
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.wb_group_poverty_420",
+      "title": "Poverty by group at $4.20/day, 2022-23",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: Poverty by Group",
+      "unit": "% below $4.20/day",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 10,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Children 0-14",
+          "value": 31.2
+        },
+        {
+          "label": "No education (16+)",
+          "value": 30.2
+        },
+        {
+          "label": "Rural population",
+          "value": 27.7
+        },
+        {
+          "label": "Primary education (16+)",
+          "value": 25
+        },
+        {
+          "label": "Females",
+          "value": 24.5
+        },
+        {
+          "label": "Males",
+          "value": 23.3
+        },
+        {
+          "label": "Working age 15-64",
+          "value": 21.7
+        },
+        {
+          "label": "Secondary education (16+)",
+          "value": 19.4
+        },
+        {
+          "label": "Urban population",
+          "value": 14.3
+        },
+        {
+          "label": "Tertiary/post-secondary (16+)",
+          "value": 8.7
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.wb_mpm_components",
+      "title": "World Bank multidimensional poverty components, 2022-23",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "Poverty & Equity Brief October 2025: MPM components",
+      "unit": "% of population",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 5,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "No limited-standard sanitation",
+          "value": 29.9
+        },
+        {
+          "label": "No adult completed primary education",
+          "value": 13.8
+        },
+        {
+          "label": "No limited-standard drinking water",
+          "value": 11.2
+        },
+        {
+          "label": "Daily consumption below $3",
+          "value": 5.3
+        },
+        {
+          "label": "No electricity",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.committee_headcount_2011",
+      "title": "Tendulkar vs Rangarajan poverty headcount, 2011-12",
+      "sourceId": "planning-commission",
+      "sourceIndicatorId": "Tendulkar press note and Rangarajan Expert Group report",
+      "unit": "% of population",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Tendulkar: all India",
+          "value": 21.9
+        },
+        {
+          "label": "Rangarajan: all India",
+          "value": 29.5
+        },
+        {
+          "label": "Tendulkar: rural",
+          "value": 25.7
+        },
+        {
+          "label": "Rangarajan: rural",
+          "value": 30.9
+        },
+        {
+          "label": "Tendulkar: urban",
+          "value": 13.7
+        },
+        {
+          "label": "Rangarajan: urban",
+          "value": 26.4
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.committee_lines_2011",
+      "title": "Tendulkar vs Rangarajan poverty lines, 2011-12",
+      "sourceId": "planning-commission",
+      "sourceIndicatorId": "Tendulkar press note and Rangarajan Expert Group report",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Tendulkar rural",
+          "value": 816
+        },
+        {
+          "label": "Tendulkar urban",
+          "value": 1000
+        },
+        {
+          "label": "Rangarajan rural",
+          "value": 972
+        },
+        {
+          "label": "Rangarajan urban",
+          "value": 1407
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_sfe",
+      "title": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, sector-wide model",
+      "sourceId": "tinbergen",
+      "sourceIndicatorId": "Table 5: Economic Reasoning + SFE, total",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 6,
+      "earliest": {
+        "date": "2017",
+        "value": 19.5
+      },
+      "latest": {
+        "date": "2022",
+        "value": 19.9
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_state",
+      "title": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state-level model",
+      "sourceId": "tinbergen",
+      "sourceIndicatorId": "Table 5: Economic Reasoning imputed at state level, total",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 6,
+      "earliest": {
+        "date": "2017",
+        "value": 18
+      },
+      "latest": {
+        "date": "2022",
+        "value": 17.5
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.tinbergen_plfs_tendulkar_lasso",
+      "title": "Tinbergen PLFS-imputed poverty, Tendulkar-compatible, state LASSO model",
+      "sourceId": "tinbergen",
+      "sourceIndicatorId": "Table 5: Individual model per state, total",
+      "unit": "% of population",
+      "frequency": "survey years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 6,
+      "earliest": {
+        "date": "2017",
+        "value": 18.4
+      },
+      "latest": {
+        "date": "2022",
+        "value": 18.3
+      }
+    },
+    {
+      "indicatorId": "econ.poverty.tinbergen_estimates_2022",
+      "title": "Alternative poverty estimates for India, 2022-23",
+      "sourceId": "tinbergen",
+      "sourceIndicatorId": "Tinbergen Institute Discussion Paper 2025-069/V",
+      "unit": "% of population",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Naive HCES direct comparison, Rangarajan",
+          "value": 7.2
+        },
+        {
+          "label": "CES imputation, Tendulkar, lowest model",
+          "value": 11.3
+        },
+        {
+          "label": "CES imputation, Tendulkar, highest model",
+          "value": 13.6
+        },
+        {
+          "label": "CES imputation, Rangarajan/MMRP",
+          "value": 17.5
+        },
+        {
+          "label": "PLFS imputation, Tendulkar, lowest model",
+          "value": 17.5
+        },
+        {
+          "label": "PLFS imputation, Tendulkar, highest model",
+          "value": 19.9
+        },
+        {
+          "label": "PLFS imputation, Rangarajan/MMRP, middle model",
+          "value": 23.3
+        },
+        {
+          "label": "PLFS imputation, Rangarajan/MMRP, highest model",
+          "value": 25.9
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.hces_cutoff_simulation",
+      "title": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES 2023-24 unit-level microdata: MPCE cutoff simulation",
+      "unit": "% of people below cutoff",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 11,
+      "dimensions": [
+        "label",
+        "cutoffRsPerPersonMonth",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Rs 1,500/month",
+          "cutoffRsPerPersonMonth": 1500,
+          "value": 0.8
+        },
+        {
+          "label": "Rs 2,000/month",
+          "cutoffRsPerPersonMonth": 2000,
+          "value": 4
+        },
+        {
+          "label": "Rs 2,500/month",
+          "cutoffRsPerPersonMonth": 2500,
+          "value": 11.6
+        },
+        {
+          "label": "Rs 3,000/month",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 22.7
+        },
+        {
+          "label": "Rs 3,500/month",
+          "cutoffRsPerPersonMonth": 3500,
+          "value": 34.9
+        },
+        {
+          "label": "Rs 4,000/month",
+          "cutoffRsPerPersonMonth": 4000,
+          "value": 46.2
+        },
+        {
+          "label": "Rs 4,500/month",
+          "cutoffRsPerPersonMonth": 4500,
+          "value": 55.9
+        },
+        {
+          "label": "Rs 5,000/month",
+          "cutoffRsPerPersonMonth": 5000,
+          "value": 63.9
+        },
+        {
+          "label": "Rs 6,000/month",
+          "cutoffRsPerPersonMonth": 6000,
+          "value": 75.9
+        },
+        {
+          "label": "Rs 7,000/month",
+          "cutoffRsPerPersonMonth": 7000,
+          "value": 83.8
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.hces_cutoff_simulation_sector",
+      "title": "HCES poverty-rate simulation by monthly MPCE cutoff and sector, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES 2023-24 unit-level microdata: MPCE cutoff simulation",
+      "unit": "% of people below cutoff",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 33,
+      "dimensions": [
+        "label",
+        "sector",
+        "cutoffRsPerPersonMonth",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Rural Rs 1,500/month",
+          "sector": "Rural",
+          "cutoffRsPerPersonMonth": 1500,
+          "value": 1.1
+        },
+        {
+          "label": "Urban Rs 1,500/month",
+          "sector": "Urban",
+          "cutoffRsPerPersonMonth": 1500,
+          "value": 0.1
+        },
+        {
+          "label": "All India Rs 1,500/month",
+          "sector": "All India",
+          "cutoffRsPerPersonMonth": 1500,
+          "value": 0.8
+        },
+        {
+          "label": "Rural Rs 2,000/month",
+          "sector": "Rural",
+          "cutoffRsPerPersonMonth": 2000,
+          "value": 5.5
+        },
+        {
+          "label": "Urban Rs 2,000/month",
+          "sector": "Urban",
+          "cutoffRsPerPersonMonth": 2000,
+          "value": 0.6
+        },
+        {
+          "label": "All India Rs 2,000/month",
+          "sector": "All India",
+          "cutoffRsPerPersonMonth": 2000,
+          "value": 4
+        },
+        {
+          "label": "Rural Rs 2,500/month",
+          "sector": "Rural",
+          "cutoffRsPerPersonMonth": 2500,
+          "value": 15.6
+        },
+        {
+          "label": "Urban Rs 2,500/month",
+          "sector": "Urban",
+          "cutoffRsPerPersonMonth": 2500,
+          "value": 2.1
+        },
+        {
+          "label": "All India Rs 2,500/month",
+          "sector": "All India",
+          "cutoffRsPerPersonMonth": 2500,
+          "value": 11.6
+        },
+        {
+          "label": "Rural Rs 3,000/month",
+          "sector": "Rural",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 30
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.hces_cutoff_state_3000",
+      "title": "HCES simulated poverty below Rs 3,000/month by state, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES 2023-24 unit-level microdata: MPCE cutoff simulation",
+      "unit": "% of people below cutoff",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 36,
+      "dimensions": [
+        "label",
+        "cutoffRsPerPersonMonth",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Chhattisgarh",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 60.1
+        },
+        {
+          "label": "Jharkhand",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 52
+        },
+        {
+          "label": "Odisha",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 43.4
+        },
+        {
+          "label": "Madhya Pradesh",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 37.3
+        },
+        {
+          "label": "Uttar Pradesh",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 34.4
+        },
+        {
+          "label": "Bihar",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 29.8
+        },
+        {
+          "label": "West Bengal",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 28.4
+        },
+        {
+          "label": "Assam",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 28
+        },
+        {
+          "label": "Meghalaya",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 25.8
+        },
+        {
+          "label": "Rajasthan",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 18.7
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.hces_cutoff_social_3000",
+      "title": "HCES simulated poverty below Rs 3,000/month by social group, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES 2023-24 unit-level microdata: MPCE cutoff simulation",
+      "unit": "% of people below cutoff",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "cutoffRsPerPersonMonth",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Scheduled Tribe",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 46.8
+        },
+        {
+          "label": "Scheduled Caste",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 28.4
+        },
+        {
+          "label": "OBC",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 20.8
+        },
+        {
+          "label": "Others",
+          "cutoffRsPerPersonMonth": 3000,
+          "value": 12.7
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_rural_imputed",
+      "title": "Rural average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 2 rural",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 1430
+      },
+      "latest": {
+        "date": "2023",
+        "value": 4247
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_urban_imputed",
+      "title": "Urban average MPCE (HCES, with welfare imputation)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Table 2 urban",
+      "unit": "₹ per person per month",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 2630
+      },
+      "latest": {
+        "date": "2023",
+        "value": 7078
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_fractile_mpce_rural",
+      "title": "Rural average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 1 rural",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 12,
+      "dimensions": [
+        "label",
+        "value",
+        "date"
+      ],
+      "latestRows": [
+        {
+          "label": "Poorest 0-5%",
+          "value": 1677,
+          "date": "2023-24"
+        },
+        {
+          "label": "5-10%",
+          "value": 2126,
+          "date": "2023-24"
+        },
+        {
+          "label": "10-20%",
+          "value": 2473,
+          "date": "2023-24"
+        },
+        {
+          "label": "20-30%",
+          "value": 2833,
+          "date": "2023-24"
+        },
+        {
+          "label": "30-40%",
+          "value": 3162,
+          "date": "2023-24"
+        },
+        {
+          "label": "40-50%",
+          "value": 3498,
+          "date": "2023-24"
+        },
+        {
+          "label": "50-60%",
+          "value": 3866,
+          "date": "2023-24"
+        },
+        {
+          "label": "60-70%",
+          "value": 4304,
+          "date": "2023-24"
+        },
+        {
+          "label": "70-80%",
+          "value": 4885,
+          "date": "2023-24"
+        },
+        {
+          "label": "80-90%",
+          "value": 5763,
+          "date": "2023-24"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_fractile_mpce_urban",
+      "title": "Urban average MPCE by fractile class, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 1 urban",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 12,
+      "dimensions": [
+        "label",
+        "value",
+        "date"
+      ],
+      "latestRows": [
+        {
+          "label": "Poorest 0-5%",
+          "value": 2376,
+          "date": "2023-24"
+        },
+        {
+          "label": "5-10%",
+          "value": 3093,
+          "date": "2023-24"
+        },
+        {
+          "label": "10-20%",
+          "value": 3687,
+          "date": "2023-24"
+        },
+        {
+          "label": "20-30%",
+          "value": 4353,
+          "date": "2023-24"
+        },
+        {
+          "label": "30-40%",
+          "value": 4979,
+          "date": "2023-24"
+        },
+        {
+          "label": "40-50%",
+          "value": 5622,
+          "date": "2023-24"
+        },
+        {
+          "label": "50-60%",
+          "value": 6334,
+          "date": "2023-24"
+        },
+        {
+          "label": "60-70%",
+          "value": 7199,
+          "date": "2023-24"
+        },
+        {
+          "label": "70-80%",
+          "value": 8353,
+          "date": "2023-24"
+        },
+        {
+          "label": "80-90%",
+          "value": 10139,
+          "date": "2023-24"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_cons_share_rural",
+      "title": "Consumption share by group — rural (HCES 2023-24, computed)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 1 rural derived shares",
+      "unit": "% of total consumption",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Poorest 50%",
+          "value": 33.6
+        },
+        {
+          "label": "Middle 40%",
+          "value": 45.7
+        },
+        {
+          "label": "Richest 10%",
+          "value": 20.7
+        },
+        {
+          "label": "Richest 5%",
+          "value": 12.3
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_gini_rural",
+      "title": "Consumption Gini — rural (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Gini rural",
+      "unit": "Gini index (0–100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 28.3
+      },
+      "latest": {
+        "date": "2023",
+        "value": 23.7
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_gini_urban",
+      "title": "Consumption Gini — urban (HCES/NSS)",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Gini urban",
+      "unit": "Gini index (0–100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 3,
+      "earliest": {
+        "date": "2011",
+        "value": 36.3
+      },
+      "latest": {
+        "date": "2023",
+        "value": 28.4
+      }
+    },
+    {
+      "indicatorId": "econ.inequality.hces_state_mpce_rural",
+      "title": "Rural average MPCE by major state, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES Figure 2",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "subnational",
+        "id": "IND-states",
+        "name": "India states"
+      },
+      "rows": 18,
+      "dimensions": [
+        "label",
+        "value",
+        "date"
+      ],
+      "latestRows": [
+        {
+          "label": "Kerala",
+          "value": 6611,
+          "date": "2023-24"
+        },
+        {
+          "label": "Punjab",
+          "value": 5817,
+          "date": "2023-24"
+        },
+        {
+          "label": "Tamil Nadu",
+          "value": 5701,
+          "date": "2023-24"
+        },
+        {
+          "label": "Telangana",
+          "value": 5435,
+          "date": "2023-24"
+        },
+        {
+          "label": "Haryana",
+          "value": 5377,
+          "date": "2023-24"
+        },
+        {
+          "label": "Andhra Pradesh",
+          "value": 5327,
+          "date": "2023-24"
+        },
+        {
+          "label": "Karnataka",
+          "value": 4903,
+          "date": "2023-24"
+        },
+        {
+          "label": "Rajasthan",
+          "value": 4510,
+          "date": "2023-24"
+        },
+        {
+          "label": "Maharashtra",
+          "value": 4145,
+          "date": "2023-24"
+        },
+        {
+          "label": "Gujarat",
+          "value": 4116,
+          "date": "2023-24"
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.inequality.hces_mpce_by_caste",
+      "title": "Consumption (MPCE) by caste group, 2023-24",
+      "sourceId": "mospi-hces",
+      "sourceIndicatorId": "HCES microdata: MPCE by social group",
+      "unit": "₹ per person per month",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [
+        "label",
+        "value",
+        "gini",
+        "popSharePct",
+        "gapVsOthersPct"
+      ],
+      "latestRows": [
+        {
+          "label": "Others",
+          "value": 6148,
+          "gini": 0.308,
+          "popSharePct": 25.4,
+          "gapVsOthersPct": 0
+        },
+        {
+          "label": "OBC",
+          "value": 5068,
+          "gini": 0.289,
+          "popSharePct": 45.7,
+          "gapVsOthersPct": -18
+        },
+        {
+          "label": "Scheduled Caste",
+          "value": 4277,
+          "gini": 0.26,
+          "popSharePct": 19.3,
+          "gapVsOthersPct": -30
+        },
+        {
+          "label": "Scheduled Tribe",
+          "value": 3614,
+          "gini": 0.295,
+          "popSharePct": 9.7,
+          "gapVsOthersPct": -41
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.niti_mpi_by_state",
+      "title": "NITI National MPI headcount by state, 2019-21",
+      "sourceId": "niti",
+      "sourceIndicatorId": "National Multidimensional Poverty Index 2023: state headcount ratios",
+      "unit": "% multidimensionally poor",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 34,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Bihar",
+          "value": 33.76
+        },
+        {
+          "label": "Jharkhand",
+          "value": 28.81
+        },
+        {
+          "label": "Meghalaya",
+          "value": 27.79
+        },
+        {
+          "label": "Uttar Pradesh",
+          "value": 22.93
+        },
+        {
+          "label": "Madhya Pradesh",
+          "value": 20.63
+        },
+        {
+          "label": "Assam",
+          "value": 19.35
+        },
+        {
+          "label": "Chhattisgarh",
+          "value": 16.37
+        },
+        {
+          "label": "Odisha",
+          "value": 15.68
+        },
+        {
+          "label": "Nagaland",
+          "value": 15.43
+        },
+        {
+          "label": "Rajasthan",
+          "value": 15.31
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.nfhs_basic_floor_latest",
+      "title": "Basic household capability indicators, NFHS-5 to NFHS-6",
+      "sourceId": "nfhs",
+      "sourceIndicatorId": "NFHS-6 India factsheet basic household indicators",
+      "unit": "% of relevant households or women",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 5,
+      "dimensions": [
+        "label",
+        "indicator",
+        "nfhs5",
+        "value",
+        "urban",
+        "rural"
+      ],
+      "latestRows": [
+        {
+          "label": "Electricity at home",
+          "indicator": "Population living in households with electricity (%)",
+          "nfhs5": 96.8,
+          "value": 98.3,
+          "urban": 99.5,
+          "rural": 97.8
+        },
+        {
+          "label": "Improved drinking water",
+          "indicator": "Population living in households with an improved drinking-water source¹ (%)",
+          "nfhs5": 95.9,
+          "value": 96.5,
+          "urban": 99.1,
+          "rural": 95.4
+        },
+        {
+          "label": "Household bank account",
+          "indicator": "Households with any usual member having a bank account/post office account (%)",
+          "nfhs5": 95.7,
+          "value": 98.2,
+          "urban": 97.3,
+          "rural": 98.6
+        },
+        {
+          "label": "Household health insurance",
+          "indicator": "Households with any usual member covered under a health insurance/financing scheme (%)",
+          "nfhs5": 41,
+          "value": 60.2,
+          "urban": 56.4,
+          "rural": 62
+        },
+        {
+          "label": "Women who ever attended school",
+          "indicator": "Female population age 6 years and above who ever attended school (%)",
+          "nfhs5": 71.8,
+          "value": 73.7,
+          "urban": 84.3,
+          "rural": 69.2
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.nfhs_nutrition_latest",
+      "title": "Nutrition deprivation indicators, NFHS-5 to NFHS-6",
+      "sourceId": "nfhs",
+      "sourceIndicatorId": "NFHS-6 India factsheet nutrition indicators",
+      "unit": "% of relevant population",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "indicator",
+        "nfhs5",
+        "value",
+        "urban",
+        "rural"
+      ],
+      "latestRows": [
+        {
+          "label": "Child stunting",
+          "indicator": "Children under 5 years who are stunted (height-for-age)¹² (%)",
+          "nfhs5": 35.5,
+          "value": 29.3,
+          "urban": 23.9,
+          "rural": 30.9
+        },
+        {
+          "label": "Child underweight",
+          "indicator": "Children under 5 years who are underweight (weight-for-age)¹² (%)",
+          "nfhs5": 32.1,
+          "value": 31.8,
+          "urban": 25.3,
+          "rural": 33.8
+        },
+        {
+          "label": "Child wasting",
+          "indicator": "Children under 5 years who are wasted (weight-for-height)¹² (%)",
+          "nfhs5": 19.3,
+          "value": 19,
+          "urban": 16.5,
+          "rural": 19.8
+        },
+        {
+          "label": "Child severe wasting",
+          "indicator": "Children under 5 years who are severely wasted (weight-for-height)¹³ (%)",
+          "nfhs5": 7.7,
+          "value": 5.2,
+          "urban": 4.6,
+          "rural": 5.4
+        },
+        {
+          "label": "Adequate diet, 6-23 months",
+          "indicator": "Total children age 6-23 months receiving an adequate diet10, 11 (%)",
+          "nfhs5": 11,
+          "value": 15.3,
+          "urban": 16.2,
+          "rural": 15
+        },
+        {
+          "label": "Women underweight",
+          "indicator": "Women whose Body Mass Index (BMI) is below normal (BMI <18.5 kg/m²)¹⁵ (%)",
+          "nfhs5": 18.7,
+          "value": 19.7,
+          "urban": 13.2,
+          "rural": 22.5
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.poverty.health_financial_hardship",
+      "title": "Financial hardship from out-of-pocket health spending",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SH_UHC_FH40, SH_UHC_FH40_IMPOV, SH_UHC_FH40_LARGE",
+      "unit": "% of population",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [
+        "label",
+        "indicator",
+        "code",
+        "date",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "Financial hardship from OOP health spending",
+          "indicator": "Facing financial hardship from health spending",
+          "code": "SH_UHC_FH40",
+          "date": "2022",
+          "value": 30.94
+        },
+        {
+          "label": "Impoverishing OOP health spending",
+          "indicator": "Facing impoverishing health spending",
+          "code": "SH_UHC_FH40_IMPOV",
+          "date": "2022",
+          "value": 22.27
+        },
+        {
+          "label": "Large non-impoverishing OOP health spending",
+          "indicator": "Large but non-impoverishing health spending",
+          "code": "SH_UHC_FH40_LARGE",
+          "date": "2022",
+          "value": 8.67
+        }
+      ]
+    },
+    {
+      "indicatorId": "work.ilo.working_poverty",
+      "title": "Working poverty rate (employed below US$3.65/day PPP)",
+      "sourceId": "ilostat",
+      "sourceIndicatorId": "SDG_0111_SEX_AGE_RT_A",
+      "unit": "% of employed",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 26,
+      "earliest": {
+        "date": "2000",
+        "value": 44.188
+      },
+      "latest": {
+        "date": "2025",
+        "value": 3.562
+      }
+    },
+    {
+      "indicatorId": "work.ilo.working_poverty_youth",
+      "title": "Working poverty rate, youth (15–24)",
+      "sourceId": "ilostat",
+      "sourceIndicatorId": "SDG_0111_SEX_AGE_RT_A",
+      "unit": "% of employed youth",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 24,
+      "earliest": {
+        "date": "2000",
+        "value": 46.516
+      },
+      "latest": {
+        "date": "2023",
+        "value": 8.323
+      }
+    },
+    {
+      "indicatorId": "work.plfs.status_self_employed",
+      "title": "Workers who are self-employed",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "status_self_employed",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 52.2
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 58.4
+      }
+    },
+    {
+      "indicatorId": "work.plfs.status_casual",
+      "title": "Workers in casual labour",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "status_casual",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 24.9
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 19.8
+      }
+    },
+    {
+      "indicatorId": "work.plfs.status_regular_wage",
+      "title": "Workers in regular wage/salaried jobs",
+      "sourceId": "mospi",
+      "sourceIndicatorId": "status_regular_wage",
+      "unit": "% of workers",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 7,
+      "earliest": {
+        "date": "2017-18",
+        "value": 22.8
+      },
+      "latest": {
+        "date": "2023-24",
+        "value": 21.7
+      }
+    },
+    {
+      "indicatorId": "work.vulnerable_employment",
+      "title": "Vulnerable employment",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.EMP.VULN.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 85.9256839852897
+      },
+      "latest": {
+        "date": "2025",
+        "value": 71.583962506186
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}
