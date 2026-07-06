@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "trade.edible_oil.import_mix_latest",
+  "title": "Edible-oil import mix by oil type",
+  "sourceId": "un-comtrade",
+  "sourceIndicatorId": "UN Comtrade edible oil import mix 2024",
+  "sourceUrl": "https://comtradeplus.un.org/",
+  "unit": "million tonnes",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group",
+    "fullLabel",
+    "valueUsdBillion"
+  ],
+  "fetchedAt": "2026-06-13T13:39:02.013Z",
+  "rows": [
+    {
+      "label": "Palm",
+      "value": 8.620364520885,
+      "group": "Import volume",
+      "fullLabel": "Palm oil",
+      "valueUsdBillion": 8.521671691312001
+    },
+    {
+      "label": "Soybean",
+      "value": 4.147673283,
+      "group": "Import volume",
+      "fullLabel": "Soybean oil",
+      "valueUsdBillion": 4.131219705661
+    },
+    {
+      "label": "Sunflower/safflower",
+      "value": 3.740483533662,
+      "group": "Import volume",
+      "fullLabel": "Sunflower, safflower and cottonseed oil",
+      "valueUsdBillion": 3.643426649754
+    },
+    {
+      "label": "Rapeseed/mustard",
+      "value": 0.007082211,
+      "group": "Import volume",
+      "fullLabel": "Rapeseed, colza and mustard oil",
+      "valueUsdBillion": 0.008117662831000001
+    },
+    {
+      "label": "Groundnut",
+      "value": 0.000041738519999999995,
+      "group": "Import volume",
+      "fullLabel": "Groundnut oil",
+      "valueUsdBillion": 0.000211803416
+    }
+  ],
+  "metadata": {
+    "method": "Grouped UN Comtrade 2024 India import net weight by HS oil category and converted kilograms to million tonnes.",
+    "note": "HS 1512 combines sunflower, safflower and cottonseed oil; labels shorten it for chart readability."
+  }
+}

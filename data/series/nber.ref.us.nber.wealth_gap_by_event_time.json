@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "ref.us.nber.wealth_gap_by_event_time",
+  "title": "US: wealth falls behind years before dementia sets in",
+  "sourceId": "nber",
+  "sourceIndicatorId": "wealth_gap_event_study_networth",
+  "sourceUrl": "https://www.nber.org/papers/w34659",
+  "unit": "US$1,000s of net worth vs similar households",
+  "geography": {
+    "type": "country",
+    "id": "USA",
+    "name": "United States"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group"
+  ],
+  "fetchedAt": "2026-06-16T06:46:41.709Z",
+  "rows": [
+    {
+      "label": "6 yrs before",
+      "value": 0
+    },
+    {
+      "label": "4 yrs before",
+      "value": -16.8
+    },
+    {
+      "label": "2 yrs before",
+      "value": -38.2
+    },
+    {
+      "label": "Onset",
+      "value": -51.2
+    },
+    {
+      "label": "2 yrs after",
+      "value": -69.3
+    },
+    {
+      "label": "4 yrs after",
+      "value": -124.8
+    }
+  ],
+  "metadata": {
+    "source": "NBER WP 34659 (Li, McGarry, Nicholas, Skinner 2026), Table A1, net worth column. US Health & Retirement Study, 2018 USD.",
+    "note": "Event-study marginal effect on household net worth relative to 6 years before dementia onset, vs propensity-matched controls. The gap opens about 6 years before onset and widens to roughly $125,000 below similar households four years after. US evidence — shown to illustrate the mechanism, not as an India figure. Onset here is the study's research measure (cognitive score crossing a threshold), not a clinical diagnosis; most cases were never formally diagnosed."
+  }
+}

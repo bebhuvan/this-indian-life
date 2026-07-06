@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.health_financial_hardship",
+  "title": "Financial hardship from out-of-pocket health spending",
+  "sourceId": "worldbank",
+  "sourceIndicatorId": "SH_UHC_FH40, SH_UHC_FH40_IMPOV, SH_UHC_FH40_LARGE",
+  "sourceUrl": "https://data.worldbank.org/indicator/SH_UHC_FH40",
+  "unit": "% of population",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "indicator",
+    "code",
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-07T15:21:30.844Z",
+  "rows": [
+    {
+      "label": "Financial hardship from OOP health spending",
+      "indicator": "Facing financial hardship from health spending",
+      "code": "SH_UHC_FH40",
+      "date": "2022",
+      "value": 30.94
+    },
+    {
+      "label": "Impoverishing OOP health spending",
+      "indicator": "Facing impoverishing health spending",
+      "code": "SH_UHC_FH40_IMPOV",
+      "date": "2022",
+      "value": 22.27
+    },
+    {
+      "label": "Large non-impoverishing OOP health spending",
+      "indicator": "Large but non-impoverishing health spending",
+      "code": "SH_UHC_FH40_LARGE",
+      "date": "2022",
+      "value": 8.67
+    }
+  ],
+  "metadata": {
+    "provenance": "World Bank World Development Indicators / Universal Health Coverage financial protection indicators, fetched from the World Bank API.",
+    "method": "Each row uses the latest finite India observation for that indicator. The indicators measure population shares affected by out-of-pocket health spending under the World Bank societal-poverty-line financial-protection framework.",
+    "sourceUrls": [
+      "https://api.worldbank.org/v2/country/IND/indicator/SH_UHC_FH40?format=json&per_page=20000",
+      "https://api.worldbank.org/v2/country/IND/indicator/SH_UHC_FH40_IMPOV?format=json&per_page=20000",
+      "https://api.worldbank.org/v2/country/IND/indicator/SH_UHC_FH40_LARGE?format=json&per_page=20000"
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.nfhs_basic_floor_latest",
+  "title": "Basic household capability indicators, NFHS-5 to NFHS-6",
+  "sourceId": "nfhs",
+  "sourceIndicatorId": "NFHS-6 India factsheet basic household indicators",
+  "sourceUrl": "https://www.nfhsiips.in/nfhsuser/nfhs6.php",
+  "unit": "% of relevant households or women",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "indicator",
+    "nfhs5",
+    "value",
+    "urban",
+    "rural"
+  ],
+  "fetchedAt": "2026-06-07T14:47:13.532Z",
+  "rows": [
+    {
+      "label": "Electricity at home",
+      "indicator": "Population living in households with electricity (%)",
+      "nfhs5": 96.8,
+      "value": 98.3,
+      "urban": 99.5,
+      "rural": 97.8
+    },
+    {
+      "label": "Improved drinking water",
+      "indicator": "Population living in households with an improved drinking-water source¹ (%)",
+      "nfhs5": 95.9,
+      "value": 96.5,
+      "urban": 99.1,
+      "rural": 95.4
+    },
+    {
+      "label": "Household bank account",
+      "indicator": "Households with any usual member having a bank account/post office account (%)",
+      "nfhs5": 95.7,
+      "value": 98.2,
+      "urban": 97.3,
+      "rural": 98.6
+    },
+    {
+      "label": "Household health insurance",
+      "indicator": "Households with any usual member covered under a health insurance/financing scheme (%)",
+      "nfhs5": 41,
+      "value": 60.2,
+      "urban": 56.4,
+      "rural": 62
+    },
+    {
+      "label": "Women who ever attended school",
+      "indicator": "Female population age 6 years and above who ever attended school (%)",
+      "nfhs5": 71.8,
+      "value": 73.7,
+      "urban": 84.3,
+      "rural": 69.2
+    }
+  ],
+  "metadata": {
+    "provenance": "Transcribed from NFHS-6 (2023-24) and NFHS-5 (2019-21) India factsheet values in data/nfhs6/nfhs6_clean.json.",
+    "method": "Latest value is NFHS-6 total; nfhs5 is the prior India factsheet value where available. Denominators differ by indicator, so read this as a capability dashboard rather than one comparable rate."
+  }
+}

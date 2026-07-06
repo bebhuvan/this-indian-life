@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "econ.poverty.real_floor_poorest5_rural",
+  "title": "Real MPCE of the poorest 5%, rural India (2023-24 prices)",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "Real bottom-5% MPCE, Rural, CES 2011-12 / HCES 2022-23 / 2023-24, deflated to 2023-24 prices",
+  "sourceUrl": "https://www.mospi.gov.in/sites/default/files/press_release/HCES_Press_Note_2023-24_27122024_rev.pdf",
+  "unit": "₹ per person per month (2023-24 prices)",
+  "frequency": "survey rounds",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-12T16:15:37.001Z",
+  "observations": [
+    {
+      "date": "2011-12",
+      "value": 1034
+    },
+    {
+      "date": "2022-23",
+      "value": 1448
+    },
+    {
+      "date": "2023-24",
+      "value": 1677
+    }
+  ],
+  "metadata": {
+    "provenance": "Published bottom-fractile MPCE: NSS Report 555 Table T3 (MMRP) for 2011-12; MoSPI HCES Press Note 27-Dec-2024 Figure 1 (with imputation) for 2022-23 and 2023-24. Deflated by MoSPI CPI 2012=100 (sector-specific, survey-window mean) to 2023-24 prices.",
+    "method": "Average MPCE of the poorest 5% per round, deflated to a common 2023-24 price base. A distributional measure of the real consumption floor, not a poverty headcount.",
+    "caveat": "The three surveys are not cleanly comparable: 2011-12 is MMRP; HCES 2022-23/2023-24 use three visits, an expanded item list and impute free welfare items. Part of the measured real rise at the floor is this methodological lift, not pure improvement in living standards."
+  }
+}

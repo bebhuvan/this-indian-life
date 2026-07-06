@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "water.cgwb.contamination_share",
+  "title": "Groundwater samples exceeding safe limits (2024)",
+  "sourceId": "cgwb-quality",
+  "sourceIndicatorId": "cgwb.quality.share",
+  "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2109942",
+  "unit": "% of tested samples above limit",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "contaminant"
+  ],
+  "fetchedAt": "2026-06-07T06:20:43.887Z",
+  "rows": [
+    {
+      "contaminant": "Nitrate (>45 mg/L)",
+      "value": 19.8
+    },
+    {
+      "contaminant": "Fluoride (>1.5 mg/L)",
+      "value": 9.04
+    },
+    {
+      "contaminant": "Arsenic (>10 ppb)",
+      "value": 3.1
+    }
+  ],
+  "metadata": {
+    "collection": "CGWB Annual Ground Water Quality Report 2024 (15,259 sites)",
+    "note": "Arsenic is 3.1% in the parliamentary answer (PIB 2109942) vs ~3.5% in the full report — cite source explicitly."
+  }
+}

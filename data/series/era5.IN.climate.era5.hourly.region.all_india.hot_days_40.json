@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.era5.hourly.region.all_india.hot_days_40",
+  "title": "All India hot days with hourly maximum temperature at or above 40C (ERA5 hourly-derived)",
+  "sourceId": "era5",
+  "sourceIndicatorId": "ERA5 hourly t2m+d2m, hot_days_40",
+  "sourceUrl": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+  "unit": "days per year",
+  "frequency": "annual",
+  "geography": {
+    "type": "region",
+    "id": "IND-all_india",
+    "name": "All India"
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-13T06:44:02.777118+00:00",
+  "observations": [
+    {
+      "date": "1980",
+      "value": 24.7
+    },
+    {
+      "date": "1981",
+      "value": 19.3
+    },
+    {
+      "date": "1982",
+      "value": 9.6
+    },
+    {
+      "date": "1983",
+      "value": 15.0
+    },
+    {
+      "date": "1984",
+      "value": 21.7
+    },
+    {
+      "date": "1985",
+      "value": 18.8
+    },
+    {
+      "date": "1986",
+      "value": 16.9
+    },
+    {
+      "date": "1987",
+      "value": 18.9
+    },
+    {
+      "date": "1988",
+      "value": 21.9
+    },
+    {
+      "date": "1989",
+      "value": 16.8
+    },
+    {
+      "date": "1990",
+      "value": 12.5
+    },
+    {
+      "date": "1991",
+      "value": 19.4
+    },
+    {
+      "date": "1992",
+      "value": 18.2
+    },
+    {
+      "date": "1993",
+      "value": 20.9
+    },
+    {
+      "date": "1994",
+      "value": 17.2
+    },
+    {
+      "date": "1995",
+      "value": 19.5
+    },
+    {
+      "date": "1996",
+      "value": 19.0
+    },
+    {
+      "date": "1997",
+      "value": 10.1
+    },
+    {
+      "date": "1998",
+      "value": 22.6
+    },
+    {
+      "date": "1999",
+      "value": 19.2
+    },
+    {
+      "date": "2000",
+      "value": 16.0
+    },
+    {
+      "date": "2001",
+      "value": 13.0
+    },
+    {
+      "date": "2002",
+      "value": 22.3
+    },
+    {
+      "date": "2003",
+      "value": 23.0
+    },
+    {
+      "date": "2004",
+      "value": 18.1
+    },
+    {
+      "date": "2005",
+      "value": 21.6
+    },
+    {
+      "date": "2006",
+      "value": 13.9
+    },
+    {
+      "date": "2007",
+      "value": 17.9
+    },
+    {
+      "date": "2008",
+      "value": 13.6
+    },
+    {
+      "date": "2009",
+      "value": 24.6
+    },
+    {
+      "date": "2010",
+      "value": 32.5
+    },
+    {
+      "date": "2011",
+      "value": 13.1
+    },
+    {
+      "date": "2012",
+      "value": 22.3
+    },
+    {
+      "date": "2013",
+      "value": 17.8
+    },
+    {
+      "date": "2014",
+      "value": 19.2
+    },
+    {
+      "date": "2015",
+      "value": 19.1
+    },
+    {
+      "date": "2016",
+      "value": 24.4
+    },
+    {
+      "date": "2017",
+      "value": 25.2
+    },
+    {
+      "date": "2018",
+      "value": 21.6
+    },
+    {
+      "date": "2019",
+      "value": 28.6
+    },
+    {
+      "date": "2020",
+      "value": 13.6
+    },
+    {
+      "date": "2021",
+      "value": 8.9
+    },
+    {
+      "date": "2022",
+      "value": 25.3
+    },
+    {
+      "date": "2023",
+      "value": 13.2
+    },
+    {
+      "date": "2024",
+      "value": 20.1
+    },
+    {
+      "date": "2025",
+      "value": 12.7
+    }
+  ],
+  "metadata": {
+    "bbox_NWSE": [
+      37,
+      68,
+      6,
+      98
+    ],
+    "states": null,
+    "threshold_C": 40.0,
+    "method": "Hourly ERA5 2m temperature and dew point, daily extremes computed locally, per-cell threshold day count, cosine-latitude-weighted dissolved state/UT polygons.",
+    "heatIndexFormula": "NOAA Rothfusz regression, falling back to air temperature outside usual heat-index range.",
+    "wetBulbFormula": "Stull 2011 approximation from hourly 2m temperature and relative humidity derived from dew point.",
+    "note": "This avoids CDS post-processed daily max/min products because CDS flagged that product family as affected by a known issue on 2026-06-11."
+  }
+}

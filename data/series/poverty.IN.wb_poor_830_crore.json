@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "econ.poverty.wb_poor_830_crore",
+  "title": "People below $8.30/day, 2021 PPP",
+  "sourceId": "worldbank",
+  "sourceIndicatorId": "PIP $8.30/day headcount x WDI SP.POP.TOTL",
+  "sourceUrl": "https://api.worldbank.org/pip/v1/pip?country=IND&povline=8.30&fill_gaps=false&version=20250930_2021_01_02_PROD&format=json",
+  "unit": "crore people",
+  "frequency": "survey years",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-11T14:43:10.762Z",
+  "observations": [
+    {
+      "date": "1977",
+      "value": 62.4
+    },
+    {
+      "date": "1983",
+      "value": 71.7
+    },
+    {
+      "date": "1987",
+      "value": 78.5
+    },
+    {
+      "date": "1993",
+      "value": 89.7
+    },
+    {
+      "date": "2004",
+      "value": 109.4
+    },
+    {
+      "date": "2009",
+      "value": 116.4
+    },
+    {
+      "date": "2011",
+      "value": 116.7
+    },
+    {
+      "date": "2022",
+      "value": 117
+    }
+  ],
+  "metadata": {
+    "provenance": "Derived from the PIP $8.30/day (2021 PPP) headcount and WDI population.",
+    "method": "Count in crore = million people / 10. The upper-middle-income line count uses WDI SI.POV.UMIC headcount multiplied by WDI SP.POP.TOTL and divided by 1 crore.",
+    "note": "Original million-person counts are retained in the source artifacts and article prose.",
+    "lineUpdate": "The World Bank updated the previous $6.85/day line in 2017 PPP to $8.30/day in 2021 PPP."
+  }
+}

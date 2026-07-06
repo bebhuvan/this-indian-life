@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.era5.hourly.region.all_india.warm_nights_26",
+  "title": "All India warm nights with hourly minimum temperature at or above 26C (ERA5 hourly-derived)",
+  "sourceId": "era5",
+  "sourceIndicatorId": "ERA5 hourly t2m+d2m, warm_nights_26",
+  "sourceUrl": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+  "unit": "nights per year",
+  "frequency": "annual",
+  "geography": {
+    "type": "region",
+    "id": "IND-all_india",
+    "name": "All India"
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-13T06:44:02.777118+00:00",
+  "observations": [
+    {
+      "date": "1980",
+      "value": 44.4
+    },
+    {
+      "date": "1981",
+      "value": 38.8
+    },
+    {
+      "date": "1982",
+      "value": 43.9
+    },
+    {
+      "date": "1983",
+      "value": 49.3
+    },
+    {
+      "date": "1984",
+      "value": 44.7
+    },
+    {
+      "date": "1985",
+      "value": 46.9
+    },
+    {
+      "date": "1986",
+      "value": 44.9
+    },
+    {
+      "date": "1987",
+      "value": 59.0
+    },
+    {
+      "date": "1988",
+      "value": 56.0
+    },
+    {
+      "date": "1989",
+      "value": 44.0
+    },
+    {
+      "date": "1990",
+      "value": 44.7
+    },
+    {
+      "date": "1991",
+      "value": 53.4
+    },
+    {
+      "date": "1992",
+      "value": 46.8
+    },
+    {
+      "date": "1993",
+      "value": 54.6
+    },
+    {
+      "date": "1994",
+      "value": 48.1
+    },
+    {
+      "date": "1995",
+      "value": 53.7
+    },
+    {
+      "date": "1996",
+      "value": 49.1
+    },
+    {
+      "date": "1997",
+      "value": 42.0
+    },
+    {
+      "date": "1998",
+      "value": 65.1
+    },
+    {
+      "date": "1999",
+      "value": 50.0
+    },
+    {
+      "date": "2000",
+      "value": 49.7
+    },
+    {
+      "date": "2001",
+      "value": 49.7
+    },
+    {
+      "date": "2002",
+      "value": 60.1
+    },
+    {
+      "date": "2003",
+      "value": 55.2
+    },
+    {
+      "date": "2004",
+      "value": 56.1
+    },
+    {
+      "date": "2005",
+      "value": 56.4
+    },
+    {
+      "date": "2006",
+      "value": 56.3
+    },
+    {
+      "date": "2007",
+      "value": 59.6
+    },
+    {
+      "date": "2008",
+      "value": 47.7
+    },
+    {
+      "date": "2009",
+      "value": 65.3
+    },
+    {
+      "date": "2010",
+      "value": 72.5
+    },
+    {
+      "date": "2011",
+      "value": 55.9
+    },
+    {
+      "date": "2012",
+      "value": 62.6
+    },
+    {
+      "date": "2013",
+      "value": 56.3
+    },
+    {
+      "date": "2014",
+      "value": 63.8
+    },
+    {
+      "date": "2015",
+      "value": 70.9
+    },
+    {
+      "date": "2016",
+      "value": 80.2
+    },
+    {
+      "date": "2017",
+      "value": 77.9
+    },
+    {
+      "date": "2018",
+      "value": 71.2
+    },
+    {
+      "date": "2019",
+      "value": 80.7
+    },
+    {
+      "date": "2020",
+      "value": 72.9
+    },
+    {
+      "date": "2021",
+      "value": 65.0
+    },
+    {
+      "date": "2022",
+      "value": 74.5
+    },
+    {
+      "date": "2023",
+      "value": 70.4
+    },
+    {
+      "date": "2024",
+      "value": 82.8
+    },
+    {
+      "date": "2025",
+      "value": 68.1
+    }
+  ],
+  "metadata": {
+    "bbox_NWSE": [
+      37,
+      68,
+      6,
+      98
+    ],
+    "states": null,
+    "threshold_C": 26.0,
+    "method": "Hourly ERA5 2m temperature and dew point, daily extremes computed locally, per-cell threshold day count, cosine-latitude-weighted dissolved state/UT polygons.",
+    "heatIndexFormula": "NOAA Rothfusz regression, falling back to air temperature outside usual heat-index range.",
+    "wetBulbFormula": "Stull 2011 approximation from hourly 2m temperature and relative humidity derived from dew point.",
+    "note": "This avoids CDS post-processed daily max/min products because CDS flagged that product family as affected by a known issue on 2026-06-11."
+  }
+}

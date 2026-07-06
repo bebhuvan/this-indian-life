@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.tinbergen_estimates_2022",
+  "title": "Alternative poverty estimates for India, 2022-23",
+  "sourceId": "tinbergen",
+  "sourceIndicatorId": "Tinbergen Institute Discussion Paper 2025-069/V",
+  "sourceUrl": "https://papers.tinbergen.nl/25069.pdf",
+  "unit": "% of population",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-06-11T14:43:06.995Z",
+  "rows": [
+    {
+      "label": "Naive HCES direct comparison, Rangarajan",
+      "value": 7.2
+    },
+    {
+      "label": "CES imputation, Tendulkar, lowest model",
+      "value": 11.3
+    },
+    {
+      "label": "CES imputation, Tendulkar, highest model",
+      "value": 13.6
+    },
+    {
+      "label": "CES imputation, Rangarajan/MMRP",
+      "value": 17.5
+    },
+    {
+      "label": "PLFS imputation, Tendulkar, lowest model",
+      "value": 17.5
+    },
+    {
+      "label": "PLFS imputation, Tendulkar, highest model",
+      "value": 19.9
+    },
+    {
+      "label": "PLFS imputation, Rangarajan/MMRP, middle model",
+      "value": 23.3
+    },
+    {
+      "label": "PLFS imputation, Rangarajan/MMRP, highest model",
+      "value": 25.9
+    }
+  ],
+  "metadata": {
+    "provenance": "Himanshu, Peter Lanjouw and Philipp Schirmer, 'Has Poverty Decline in India Faltered Since 2011/12?', Tinbergen Institute Discussion Paper 2025-069/V.",
+    "method": "Selected national poverty estimates reported in Tables 1, 3, 4, 5 and 6. The paper uses survey-to-survey imputation to address non-comparability between 2011-12 and 2022-23 consumption surveys.",
+    "caveat": "Rows mix different definitions and methods and should be read as a controversy map, not as one internally comparable official series."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "health.nss80.outpatient_by_provider",
+  "title": "Outpatient care: where people go and what it costs",
+  "sourceId": "nss80-health",
+  "sourceIndicatorId": "NSS 80th round Sch 25.0 unit data",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/DDI-IND-NSO-HSCHealth80R-Jan2025-Dec2025",
+  "unit": "mixed (% and Rs.)",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "provider"
+  ],
+  "fetchedAt": "2026-06-10T13:50:20.048883+00:00",
+  "rows": [
+    {
+      "provider": "Government hospital",
+      "spell_share_pct": 30.9,
+      "avg_medical_exp_rs": 301
+    },
+    {
+      "provider": "Charitable/NGO hospital",
+      "spell_share_pct": 0.6,
+      "avg_medical_exp_rs": 1392
+    },
+    {
+      "provider": "Private hospital",
+      "spell_share_pct": 25.2,
+      "avg_medical_exp_rs": 1530
+    },
+    {
+      "provider": "Private doctor/clinic",
+      "spell_share_pct": 40.5,
+      "avg_medical_exp_rs": 962
+    },
+    {
+      "provider": "Informal provider",
+      "spell_share_pct": 2.7,
+      "avg_medical_exp_rs": 457
+    }
+  ],
+  "metadata": {
+    "source": "NSS 80th round, Household Social Consumption: Health (Jan-Dec 2025), unit-level data, MoSPI",
+    "method": "Indica tabulation of public microdata; weights = mult/100. Treated ailment spells in last 15 days; avg medical expenditure per spell (b9i16)."
+  }
+}

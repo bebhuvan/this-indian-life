@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "IN.fx.regime_events",
+  "title": "Rupee devaluations and exchange-rate regime changes (1947-1994)",
+  "sourceId": "rupee-chronology",
+  "sourceIndicatorId": "IN.fx.regime_events",
+  "sourceUrl": "https://www.rbi.org.in/scripts/FS_Overview.aspx?fn=5",
+  "unit": "INR per USD / event",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "event",
+    "rate_before",
+    "rate_after",
+    "pct_vs_usd",
+    "regime",
+    "note",
+    "confidence",
+    "source"
+  ],
+  "fetchedAt": "2026-07-05T07:00:30.847Z",
+  "rows": [
+    {
+      "date": "1947",
+      "event": "Independence: inherited sterling peg",
+      "rate_before": null,
+      "rate_after": 3.3,
+      "pct_vs_usd": null,
+      "regime": "Fixed sterling peg",
+      "note": "£1=₹13.33; ≈₹3.30/US$ (IMF par value, Dec 1946). NOT ₹4.76 — that came after 1949.",
+      "confidence": "high",
+      "source": "https://www.epw.in/system/files/pdf/1949_1/40/devaluation_of_the_rupee.pdf"
+    },
+    {
+      "date": "1949-09-19",
+      "event": "Sterling devaluation, rupee follows",
+      "rate_before": 3.3,
+      "rate_after": 4.76,
+      "pct_vs_usd": -30.5,
+      "regime": "Fixed sterling peg",
+      "note": "Par value cut 30.23→21.00 US cents; rupee held ₹13.33/£ as sterling fell $4.03→$2.80.",
+      "confidence": "high",
+      "source": "https://www.epw.in/system/files/pdf/1949_1/40/devaluation_of_the_rupee.pdf"
+    },
+    {
+      "date": "1966-06-06",
+      "event": "Major devaluation",
+      "rate_before": 4.76,
+      "rate_after": 7.5,
+      "pct_vs_usd": -36.5,
+      "regime": "Bretton Woods par-value peg",
+      "note": "-36.5% in foreign-currency terms = +57.5% in rupee terms (same move). BoP crisis, 1965 war, drought, aid suspension, IMF conditionality.",
+      "confidence": "high",
+      "source": "https://www.elibrary.imf.org/display/book/9781451971477/ch023.xml"
+    },
+    {
+      "date": "1971-12",
+      "event": "Bretton Woods collapse; re-pegged to sterling",
+      "rate_before": 7.5,
+      "rate_after": 7.5,
+      "pct_vs_usd": 0,
+      "regime": "Fixed peg to pound sterling",
+      "note": "After Nixon shock/Smithsonian, rupee linked to sterling £1=₹18.9677 (±2.25% band). [₹18.9677 well-attested-secondary, not primary-confirmed]",
+      "confidence": "medium",
+      "source": "https://mospi.gov.in/sites/default/files/Statistical_year_book_india_chapters/Exchange.pdf"
+    },
+    {
+      "date": "1975-09",
+      "event": "De-linked from sterling → basket peg",
+      "rate_before": null,
+      "rate_after": null,
+      "pct_vs_usd": null,
+      "regime": "Managed float vs undisclosed basket",
+      "note": "Late Sept 1975 (24-25th). ~5-currency basket, weights confidential; sterling kept as intervention currency. Rupee had drifted ~20% down with weak sterling 1971-75.",
+      "confidence": "high",
+      "source": "https://mospi.gov.in/sites/default/files/Statistical_year_book_india_chapters/Exchange.pdf"
+    },
+    {
+      "date": "1991-07-01",
+      "event": "Devaluation, step 1 (\"hop\")",
+      "rate_before": 21.1,
+      "rate_after": 23.1,
+      "pct_vs_usd": -9,
+      "regime": "End of sterling-anchored peg",
+      "note": "~9% vs sterling (the intervention currency). Venkitaramanan Governor; Rangarajan (Dep. Gov.) executed; Manmohan Singh FM. BoP crisis, ~2-3 weeks of reserves.",
+      "confidence": "high",
+      "source": "https://www.rbi.org.in/upload/Publications/PDFs/56513.pdf"
+    },
+    {
+      "date": "1991-07-03",
+      "event": "Devaluation, step 2 (\"jump\")",
+      "rate_before": 23.1,
+      "rate_after": 26,
+      "pct_vs_usd": -19,
+      "regime": "End of sterling-anchored peg",
+      "note": "~11% vs sterling; cumulative ≈18-19% vs US$ (RBI: ~18%). \"9%/11%\" are STERLING-leg, not dollar-leg.",
+      "confidence": "high",
+      "source": "https://www.rbi.org.in/commonman/english/history/Scripts/Chron1991to2000.aspx"
+    },
+    {
+      "date": "1992-03-01",
+      "event": "LERMS (dual exchange rate)",
+      "rate_before": null,
+      "rate_after": null,
+      "pct_vs_usd": null,
+      "regime": "Transitional dual rate",
+      "note": "40% of FX receipts surrendered to RBI at official rate, 60% at market rate.",
+      "confidence": "high",
+      "source": "https://www.rbi.org.in/scripts/FS_Overview.aspx?fn=5"
+    },
+    {
+      "date": "1993-03-01",
+      "event": "Unification to market-determined rate",
+      "rate_before": null,
+      "rate_after": 31.4,
+      "pct_vs_usd": null,
+      "regime": "Single market-determined / managed float",
+      "note": "Dual rates merged; ≈₹31-31.5/US$ at unification [secondary-sourced; use a range].",
+      "confidence": "medium",
+      "source": "https://www.rbi.org.in/scripts/FS_Overview.aspx?fn=5"
+    },
+    {
+      "date": "1994-08-20",
+      "event": "Current-account convertibility (IMF Art. VIII)",
+      "rate_before": null,
+      "rate_after": null,
+      "pct_vs_usd": null,
+      "regime": "Managed float, current-acct convertible",
+      "note": "India accepted IMF Article VIII obligations; capital account stayed controlled.",
+      "confidence": "high",
+      "source": "https://www.rbi.org.in/scripts/FS_Overview.aspx?fn=5"
+    }
+  ],
+  "metadata": {
+    "curated": true,
+    "method": "verified research pass with per-row citations + confidence flags",
+    "note": "pre-1993 ₹/US$ are implied par values (rupee pegged to sterling)"
+  }
+}

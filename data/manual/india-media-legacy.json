@@ -1,0 +1,54 @@
+{
+  "note": "Legacy-media scale and the money-follows-attention story. FICCI-EY M&E (industry revenue by segment, INR billion, actuals 2022-2025; verified from the report PDF) and PRGI 'Press in India 2023-24' (registered print titles + self-declared claimed circulation by language; verified from the report PDF).",
+
+  "ficci_ey": {
+    "sourceUrl": "https://www.ey.com/en_in/insights/media-entertainment",
+    "vintage": "FICCI-EY 'Stories, scale and impact' (latest edition; actuals 2022-2025, INR billion). Digital overtook television in 2024.",
+    "unit": "INR billion",
+    "segments": {
+      "digital":    [ { "date": "2022", "value": 571 }, { "date": "2023", "value": 686 }, { "date": "2024", "value": 851 }, { "date": "2025", "value": 1110 } ],
+      "television": [ { "date": "2022", "value": 726 }, { "date": "2023", "value": 711 }, { "date": "2024", "value": 679 }, { "date": "2025", "value": 617 } ],
+      "print":      [ { "date": "2022", "value": 250 }, { "date": "2023", "value": 259 }, { "date": "2024", "value": 257 }, { "date": "2025", "value": 259 } ],
+      "film":       [ { "date": "2022", "value": 172 }, { "date": "2023", "value": 197 }, { "date": "2024", "value": 187 }, { "date": "2025", "value": 205 } ],
+      "radio":      [ { "date": "2022", "value": 21 }, { "date": "2023", "value": 23 }, { "date": "2024", "value": 25 }, { "date": "2025", "value": 23 } ]
+    },
+    "digital_advertising_2025": { "value": 947, "unit": "INR billion", "note": "Digital advertising rose 26% to INR947 billion in 2025, about 63% of all advertising spend." },
+    "tv_households_2024": { "value": 190, "unit": "million", "note": "TV households, 2024 (FICCI-EY)." }
+  },
+
+  "prgi": {
+    "sourceUrl": "https://prgi.gov.in/sites/default/files/2026-04/press_in_india_2023-24_vol_i_compressed_0.pdf",
+    "vintage": "Press Registrar General of India, 'Press in India 2023-24' (as on 31 March 2024).",
+    "caveat": "Circulation is SELF-DECLARED by publishers and explicitly NOT verified by PRGI. 'Registered' is a cumulative stock; of 1,51,474 registered periodicals only 36,358 (~24%) actually filed an annual statement, on which the circulation analysis rests. Treat circulation as indicative and likely inflated.",
+    "totals": {
+      "registered_periodicals": 151474,
+      "filed_annual_statements": 36358,
+      "filed_share_pct": 24,
+      "total_claimed_circulation_million": 378.5
+    },
+    "registered_by_language": {
+      "label": "Registered periodicals by language, 2023-24",
+      "rows": [
+        { "language": "Hindi", "value": 58603 },
+        { "language": "English", "value": 20204 },
+        { "language": "Marathi", "value": 11052 },
+        { "language": "Urdu", "value": 7035 },
+        { "language": "Telugu", "value": 6473 },
+        { "language": "Tamil", "value": 6290 },
+        { "language": "Bengali", "value": 5113 }
+      ]
+    },
+    "claimed_circulation_by_language_million": {
+      "label": "Claimed circulation by language, 2023-24 (self-declared, copies per publishing day)",
+      "rows": [
+        { "language": "Hindi", "value": 187.3 },
+        { "language": "English", "value": 39.5 },
+        { "language": "Marathi", "value": 29.7 },
+        { "language": "Urdu", "value": 26.7 },
+        { "language": "Telugu", "value": 22.6 },
+        { "language": "Gujarati", "value": 17.3 },
+        { "language": "Tamil", "value": 9.1 }
+      ]
+    }
+  }
+}

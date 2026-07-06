@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "energy.griddemand.duck_summer",
+  "title": "The duck curve arrives: demand, solar and what's left",
+  "sourceId": "grid-india",
+  "sourceIndicatorId": "mendeley:y58jknpgs8:summer2024",
+  "sourceUrl": "https://data.mendeley.com/datasets/y58jknpgs8/2",
+  "unit": "GW",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "hour",
+    "demand",
+    "solar",
+    "net"
+  ],
+  "fetchedAt": "2026-06-25T06:55:19.312994Z",
+  "rows": [
+    {
+      "hour": 0,
+      "demand": 195.5,
+      "solar": 0.4,
+      "net": 195.1
+    },
+    {
+      "hour": 1,
+      "demand": 190.9,
+      "solar": 0.4,
+      "net": 190.5
+    },
+    {
+      "hour": 2,
+      "demand": 186.9,
+      "solar": 0.6,
+      "net": 186.3
+    },
+    {
+      "hour": 3,
+      "demand": 184.1,
+      "solar": 0.6,
+      "net": 183.5
+    },
+    {
+      "hour": 4,
+      "demand": 184.0,
+      "solar": 0.6,
+      "net": 183.4
+    },
+    {
+      "hour": 5,
+      "demand": 187.1,
+      "solar": 0.2,
+      "net": 186.9
+    },
+    {
+      "hour": 6,
+      "demand": 191.2,
+      "solar": 1.6,
+      "net": 189.6
+    },
+    {
+      "hour": 7,
+      "demand": 194.5,
+      "solar": 9.6,
+      "net": 184.9
+    },
+    {
+      "hour": 8,
+      "demand": 198.6,
+      "solar": 23.1,
+      "net": 175.5
+    },
+    {
+      "hour": 9,
+      "demand": 207.0,
+      "solar": 35.0,
+      "net": 172.0
+    },
+    {
+      "hour": 10,
+      "demand": 211.1,
+      "solar": 43.1,
+      "net": 168.0
+    },
+    {
+      "hour": 11,
+      "demand": 212.1,
+      "solar": 47.0,
+      "net": 165.1
+    },
+    {
+      "hour": 12,
+      "demand": 210.2,
+      "solar": 47.6,
+      "net": 162.6
+    },
+    {
+      "hour": 13,
+      "demand": 207.0,
+      "solar": 46.1,
+      "net": 160.9
+    },
+    {
+      "hour": 14,
+      "demand": 210.2,
+      "solar": 42.0,
+      "net": 168.2
+    },
+    {
+      "hour": 15,
+      "demand": 210.9,
+      "solar": 34.2,
+      "net": 176.7
+    },
+    {
+      "hour": 16,
+      "demand": 205.3,
+      "solar": 23.7,
+      "net": 181.6
+    },
+    {
+      "hour": 17,
+      "demand": 197.4,
+      "solar": 11.6,
+      "net": 185.8
+    },
+    {
+      "hour": 18,
+      "demand": 195.4,
+      "solar": 2.8,
+      "net": 192.6
+    },
+    {
+      "hour": 19,
+      "demand": 202.1,
+      "solar": 0.5,
+      "net": 201.6
+    },
+    {
+      "hour": 20,
+      "demand": 199.8,
+      "solar": 0.5,
+      "net": 199.3
+    },
+    {
+      "hour": 21,
+      "demand": 199.8,
+      "solar": 0.4,
+      "net": 199.4
+    },
+    {
+      "hour": 22,
+      "demand": 201.5,
+      "solar": 0.3,
+      "net": 201.2
+    },
+    {
+      "hour": 23,
+      "demand": 200.2,
+      "solar": 0.5,
+      "net": 199.7
+    }
+  ],
+  "metadata": {
+    "series": [
+      {
+        "key": "demand",
+        "label": "Electricity demand",
+        "emphasis": true
+      },
+      {
+        "key": "solar",
+        "label": "Solar generation",
+        "color": "#cf9a3f",
+        "area": true
+      },
+      {
+        "key": "net",
+        "label": "Demand net of solar",
+        "color": "#3f8378"
+      }
+    ],
+    "gap": {
+      "fromHour": 18,
+      "toHour": 22,
+      "label": "Evening peak, solar gone"
+    },
+    "peakHour": 19,
+    "season": "Summer (Mar-May) 2024 average day",
+    "originalSource": "Grid-India (Load Despatch Centres), via Mendeley Data CC-BY 4.0"
+  }
+}

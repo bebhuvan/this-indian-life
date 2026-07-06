@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "water.cwc.per_capita_availability",
+  "title": "Average annual per-capita water availability",
+  "sourceId": "cwc",
+  "sourceIndicatorId": "cwc.percapita",
+  "sourceUrl": "https://www.cwc.gov.in/water-resource-estimation",
+  "unit": "cubic metres per person per year",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-07T06:20:43.887Z",
+  "observations": [
+    {
+      "date": "2001",
+      "value": 1816
+    },
+    {
+      "date": "2011",
+      "value": 1545
+    },
+    {
+      "date": "2021",
+      "value": 1486
+    },
+    {
+      "date": "2031",
+      "value": 1367
+    }
+  ],
+  "metadata": {
+    "collection": "CWC Reassessment of Water Availability in India using Space Inputs, 2019",
+    "sourceDetail": "Min. of Jal Shakti / CWC; per PIB PRID 1604871 & 2002726",
+    "thresholds": "Falkenmark (Min. Jal Shakti): <1700 m3 = water-stressed; <1000 m3 = water-scarce",
+    "note": "2031 is a projection. India crossed below the 1700 m3 stress line between 2001 and 2011."
+  }
+}

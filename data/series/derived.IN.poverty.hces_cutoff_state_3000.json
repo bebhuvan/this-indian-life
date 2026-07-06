@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.hces_cutoff_state_3000",
+  "title": "HCES simulated poverty below Rs 3,000/month by state, 2023-24",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "HCES 2023-24 unit-level microdata: MPCE cutoff simulation",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/237",
+  "unit": "% of people below cutoff",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-07T14:05:00.064214+00:00",
+  "rows": [
+    {
+      "label": "Chhattisgarh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 60.1
+    },
+    {
+      "label": "Jharkhand",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 52.0
+    },
+    {
+      "label": "Odisha",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 43.4
+    },
+    {
+      "label": "Madhya Pradesh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 37.3
+    },
+    {
+      "label": "Uttar Pradesh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 34.4
+    },
+    {
+      "label": "Bihar",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 29.8
+    },
+    {
+      "label": "West Bengal",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 28.4
+    },
+    {
+      "label": "Assam",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 28.0
+    },
+    {
+      "label": "Meghalaya",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 25.8
+    },
+    {
+      "label": "Rajasthan",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 18.7
+    },
+    {
+      "label": "Maharashtra",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 17.5
+    },
+    {
+      "label": "Gujarat",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 15.3
+    },
+    {
+      "label": "Ladakh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 12.5
+    },
+    {
+      "label": "Jammu & Kashmir",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 11.9
+    },
+    {
+      "label": "Manipur",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 11.5
+    },
+    {
+      "label": "Karnataka",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 10.2
+    },
+    {
+      "label": "Uttarakhand",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 10.0
+    },
+    {
+      "label": "Daman & Diu",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 8.0
+    },
+    {
+      "label": "Nagaland",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 7.8
+    },
+    {
+      "label": "Arunachal Pradesh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 7.6
+    },
+    {
+      "label": "Andhra Pradesh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 6.1
+    },
+    {
+      "label": "Himachal Pradesh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 5.8
+    },
+    {
+      "label": "Andaman & Nicobar",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 4.9
+    },
+    {
+      "label": "Mizoram",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 4.4
+    },
+    {
+      "label": "Lakshadweep",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 4.3
+    },
+    {
+      "label": "Haryana",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 4.2
+    },
+    {
+      "label": "Tamil Nadu",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 3.0
+    },
+    {
+      "label": "Kerala",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 2.4
+    },
+    {
+      "label": "Telangana",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 2.2
+    },
+    {
+      "label": "Punjab",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 1.8
+    },
+    {
+      "label": "Puducherry",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 1.5
+    },
+    {
+      "label": "Tripura",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 1.4
+    },
+    {
+      "label": "Sikkim",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 1.3
+    },
+    {
+      "label": "Goa",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 1.1
+    },
+    {
+      "label": "Delhi",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 1.0
+    },
+    {
+      "label": "Chandigarh",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 0.0
+    }
+  ],
+  "dimensions": [
+    "label",
+    "cutoffRsPerPersonMonth",
+    "value"
+  ],
+  "metadata": {
+    "provenance": "Computed from HCES 2023-24 unit-level microdata, calibrated to published national rural and urban average MPCE.",
+    "method": "For each cutoff, compute the population-weighted share of people living in households with reconstructed MPCE below the monthly rupee cutoff. This is a sensitivity simulation, not an official poverty estimate.",
+    "caveat": "Cutoffs are nominal 2023-24 rupees per person per month. Results depend on MPCE reconstruction, reference-period scaling and calibration."
+  }
+}
