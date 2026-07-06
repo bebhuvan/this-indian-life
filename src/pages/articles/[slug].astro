@@ -6,11 +6,12 @@ import ConceptPrimer from "../../components/ConceptPrimer.astro";
 import EditorialStory from "../../components/EditorialStory.astro";
 import ArticleEditLog from "../../components/ArticleEditLog.astro";
 import ArticleEvidence from "../../components/ArticleEvidence.astro";
+import ArticleCite from "../../components/ArticleCite.astro";
 import Footer from "../../components/Footer.astro";
 import { locales } from "../../data/site";
 import { annotateStorySections, inlineMarkdownHtml, keyGlossaryTerms, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../data/questions";
 import { visualsForQuestion, bindSectionVisuals } from "../../data/viz";
-import { articleGraph } from "../../data/seo";
+import { articleGraph, SITE } from "../../data/seo";
 
 export function getStaticPaths() {
   return questionPages.map((page) => ({
@@ -84,13 +85,14 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
 ---
 
 <Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
-  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}`}>
+  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}${page.slug === "how-is-climate-change-changing-india" ? " theme-climate-canonical" : ""}${page.slug === "why-the-rupee-falls" ? " theme-rupee" : ""}${page.slug === "when-does-india-actually-turn-the-power-on" ? " theme-grid" : ""}`}>
     <Nav active={page.domain} locale={locale} />
 
     <header class="article-head">
       <span class="domain-chip"><span class="tk"></span><span>{page.domain} · V1 question</span></span>
       <h1 class="serif">{page.question}</h1>
       <p class="muted">{explanation.short.dek}</p>
+      <p class="article-byline">By <a href={SITE.author.url} rel="author">{SITE.author.name}</a></p>
       <div class="article-status">
         <span class={`status ${status.cls}`}>{status.label}</span>
         {explanation.lastReviewed
@@ -334,6 +336,18 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
                 />
               ) : null}
             </div>
+            {explanation.editorialPlan?.glossaryBlocks?.length ? (
+              <section class="concept-blocks">
+                <p class="lbl">Plain English concepts</p>
+                {explanation.editorialPlan.glossaryBlocks.map((item) => (
+                  <div class="concept-item">
+                    <h3 class="serif">{item.term}</h3>
+                    <p>{item.plainMeaning}</p>
+                    <p class="concept-why">{item.whyItMattersHere}</p>
+                  </div>
+                ))}
+              </section>
+            ) : null}
           </article>
         </section>
 
@@ -349,6 +363,10 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
         </section>
       </>
     )}
+
+    <section class="section article-cite-section" id="cite">
+      <ArticleCite page={page} explanation={explanation} />
+    </section>
 
     <section class="section">
       <p class="sec-hd">Related questions</p>

@@ -221,7 +221,28 @@ export type RankedChangeVisual = {
   max: number;
   rows: Array<{ label: string; start: number; end: number; change: number }>;
 };
-export type VisualSpec = LineVisual | LinePanelsVisual | StackVisual | BarVisual | GroupedBarVisual | ChangeVisual | PyramidVisual | StripeVisual | ChoroplethVisual | ScatterVisual | ScatterXYVisual | StripPairVisual | ScenarioMapsVisual | SparkGridVisual | StartingGridVisual | RankedChangeVisual;
+// A 24-hour load/demand curve: hourly values on a cyclical 00:00 -> 24:00 x-axis,
+// with one or more overlaid series (e.g. demand vs solar generation), an optional
+// area fill per series, a shaded "gap" window (the evening peak storage must fill),
+// and an optional peak-hour marker. Distinct from `line`, which assumes a calendar
+// x-axis and labels a single latest endpoint — here the x-axis is hour-of-day and
+// every series shares it. Built for the duck-curve story (q.energy.demand_shape).
+export type LoadCurveVisual = {
+  kind: "loadCurve";
+  title: string;
+  subtitle: string;
+  unit: string;
+  source: VisualSource;
+  // Each series is hourly: values[0] = 00:00 ... values[23] = 23:00. All series share
+  // the same hour axis; lengths should match (24 for a full day).
+  series: Array<{ label: string; values: number[]; color?: string; emphasis?: boolean; area?: boolean }>;
+  yMax?: number;
+  // Optional shaded vertical window highlighting a span of hours (e.g. the evening gap).
+  gap?: { fromHour: number; toHour: number; label?: string };
+  // Optional marker at the daily peak hour.
+  peakHour?: number;
+};
+export type VisualSpec = LineVisual | LinePanelsVisual | StackVisual | BarVisual | GroupedBarVisual | ChangeVisual | PyramidVisual | StripeVisual | ChoroplethVisual | ScatterVisual | ScatterXYVisual | StripPairVisual | ScenarioMapsVisual | SparkGridVisual | StartingGridVisual | RankedChangeVisual | LoadCurveVisual;
 type VisualRole = "primary" | "context" | "companion";
 type VisualWithRole = { visual: VisualSpec; role: VisualRole };
 
@@ -2252,6 +2273,7 @@ function attachMeta(visual: VisualSpec, entry: PlanEntry): VisualSpec {
   if (entry.xLabels?.length && visual.kind === "line") (out as LineVisual).xLabels = entry.xLabels;
   if (entry.refLine && visual.kind === "line") out.refLine = entry.refLine;
   if (entry.size) out.size = entry.size;
+  if ((entry as { logScale?: boolean }).logScale) (out as { logScale?: boolean }).logScale = true;
   if (entry.why || entry.detail || entry.read || entry.watch) out.note = { why: entry.why, detail: entry.detail, read: entry.read, watch: entry.watch };
   return out;
 }
@@ -2469,7 +2491,62 @@ function stripPairVisual(
   };
 }
 
+// Build a 24-hour load curve from a table artifact. Expected shape (to be produced by
+// the Grid-India / POSOCO hourly ingest): one row per hour with an `hour` field (0-23)
+// plus one numeric column per series, and `metadata.series` listing the columns to plot
+// as { key, label, color?, area?, emphasis? }, with optional `metadata.gap`,
+// `metadata.peakHour`, `metadata.yMax`. Returns null until that artifact exists, so
+// adding `chart: "loadCurve"` to a visualPlan before the data lands fails soft (the
+// chart is simply dropped) rather than crashing the build.
+function loadCurveFromTable(indicator: string, title: string, subtitle: string, unit: string): LoadCurveVisual | null {
+  const artifact = artifactById(indicator);
+  if (!artifact?.rows?.length) return null;
+  const meta = (artifact.metadata || {}) as Record<string, unknown>;
+  const specs = Array.isArray(meta.series) ? (meta.series as Array<Record<string, unknown>>) : [];
+  if (!specs.length) return null;
+  const byHour = new Map<number, Record<string, unknown>>();
+  for (const row of artifact.rows) {
+    const h = Number(row.hour);
+    if (Number.isFinite(h)) byHour.set(h, row);
+  }
+  const hours = Array.from({ length: 24 }, (_, h) => h);
+  const series = specs.map((s) => {
+    const key = String(s.key ?? "");
+    const values = hours.map((h) => {
+      const row = byHour.get(h);
+      const v = row ? Number(row[key]) : NaN;
+      return Number.isFinite(v) ? v : 0;
+    });
+    return {
+      label: typeof s.label === "string" ? s.label : key,
+      values,
+      ...(typeof s.color === "string" ? { color: s.color } : {}),
+      area: s.area === true,
+      emphasis: s.emphasis === true
+    };
+  }).filter((s) => s.values.some((v) => v !== 0));
+  if (!series.length) return null;
+  const gap = meta.gap && typeof meta.gap === "object"
+    ? (meta.gap as { fromHour: number; toHour: number; label?: string })
+    : undefined;
+  return {
+    kind: "loadCurve",
+    title: title || artifact.title,
+    subtitle: subtitle || artifact.sourceIndicatorId,
+    unit: unit || artifact.unit,
+    source: sourceFor(artifact),
+    series,
+    ...(typeof meta.yMax === "number" ? { yMax: meta.yMax } : {}),
+    ...(gap ? { gap } : {}),
+    ...(typeof meta.peakHour === "number" ? { peakHour: meta.peakHour } : {})
+  };
+}
+
 function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
+  if (entry.chart === "loadCurve") {
+    const visual = loadCurveFromTable(entry.indicator || "", entry.title || "", entry.subtitle || "", entry.unit || "");
+    return visual ? attachMeta(visual, entry) : null;
+  }
   if (entry.chart === "multiLine") {
     const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands, entry.refLine);
     return visual ? attachMeta(visual, entry) : null;
