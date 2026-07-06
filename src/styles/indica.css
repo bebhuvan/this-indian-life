@@ -55,6 +55,7 @@
 .dom-economy{--c:var(--economy);--c-ink:var(--economy-ink);--c-tint:rgba(51,73,168,.10)}
 /* per-article gold theme (q.econ.gold) — overrides the economy blue for this one piece */
 .theme-gold{--c:#C8941A;--c-ink:#9A6B00;--c-tint:rgba(200,148,26,.14)}
+.theme-grid{--c:#2f5fa3;--c-ink:#234a82;--c-tint:rgba(47,95,163,.14)}
 .dom-energy{--c:var(--energy);--c-ink:var(--energy-ink);--c-tint:rgba(201,131,26,.14)}
 .dom-climate{--c:var(--climate);--c-ink:var(--climate-ink);--c-tint:rgba(214,87,58,.12)}
 .dom-health{--c:var(--health);--c-ink:var(--health-ink);--c-tint:rgba(18,135,107,.10)}
@@ -401,14 +402,16 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .source-table{border-top:1px solid var(--ghost)}
 .source-row{display:grid;grid-template-columns:minmax(190px,.9fr) minmax(220px,1.5fr) minmax(120px,.7fr) minmax(90px,.45fr);gap:16px;padding:11px 0;border-bottom:1px solid var(--ghost);font-size:.82rem;align-items:baseline}
 .article-head{padding:42px 0 28px}
-.article-head h1{font-weight:400;font-size:var(--t-h1);line-height:1.06;max-width:21ch;margin-top:16px}
+.article-head h1{font-weight:400;font-size:var(--t-h1);line-height:1.06;max-width:26ch;text-wrap:balance;margin-top:16px}
 .article-head p{margin-top:14px;max-width:68ch;font-size:1.05rem}
 .article-byline{margin-top:14px;font-size:.82rem;color:var(--mid)}
-.article-byline a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.article-byline a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ghost);text-decoration-color:color-mix(in srgb,var(--c) 45%,transparent);text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-color .2s,color .2s}
+.article-byline a:hover{color:var(--c-ink);text-decoration-color:var(--c)}
 .article-status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:.74rem;color:var(--mid)}
-.status{font-family:var(--sans);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid var(--ghost);border-radius:2px;padding:3px 8px;color:var(--dim);white-space:nowrap}
+.status{font-family:var(--sans);font-size:.54rem;line-height:1;letter-spacing:.1em;text-transform:uppercase;font-weight:500;display:inline-flex;align-items:center;border:1px solid var(--ghost);border-radius:2px;padding:3px 8px;color:var(--dim);white-space:nowrap}
 .status.ready{border-color:var(--ghost);color:var(--dim)}
-.status.wip{border-color:#e3b063;color:#9c6b15}
+.status.wip{border-color:transparent;background:#f9ecd4;color:#8f6213}
+.status.wip::before{content:'';width:5px;height:5px;border-radius:50%;background:#d2962a;margin-right:7px;flex:none}
 .status.needs{border-color:var(--ghost);color:var(--mid)}
 .article-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.78fr);gap:1px;margin:34px 0 58px;border-top:1px solid var(--ghost);background:var(--ghost)}
 .article-hero.single{grid-template-columns:1fr;background:none;border-top:none;margin:30px 0 40px}
@@ -668,7 +671,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   /* Slices too narrow to fit even the % on a phone become clean colour blocks;
      their name + value are read from the legend below. */
   .share-strip div.ss-narrow .ss-val{display:none}
-  .viz-m .yaxt,.viz-m .xaxt{font-size:13px}
+  .viz-m .yaxt,.viz-m .xaxt{font-size:14.5px}
   .viz-m .end-v{font-size:15px}
   .viz-m .end-mini-v{font-size:12.5px}
   .viz-m .chart-watermark{font-size:7.2px;letter-spacing:.05em;opacity:.11}

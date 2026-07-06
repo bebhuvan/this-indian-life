@@ -12,6 +12,13 @@ function svgCoord(value: number, precision = 1) {
   return Number(value.toFixed(precision)).toString();
 }
 
+function watermarkSvg(viewBox: string) {
+  const parts = viewBox.trim().split(/\s+/).map(Number);
+  const width = parts[2] && Number.isFinite(parts[2]) ? parts[2] : 740;
+  const height = parts[3] && Number.isFinite(parts[3]) ? parts[3] : 820;
+  return `<text class="chart-watermark" x="${svgCoord(width - 12)}" y="${svgCoord(height - 10)}" text-anchor="end" font-family="DM Sans, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1.1" text-transform="uppercase" fill="#8c8780" opacity="0.42">thisindianlife.today</text>`;
+}
+
 export function compactSvgPath(path: string) {
   return path
     .replace(/-?\d+(?:\.\d+)?/g, (match) => svgCoord(Number(match), 1))
@@ -117,7 +124,7 @@ export function renderChoroplethSvg(visual: ChoroplethVisual) {
     return `<path d="${escapeHtml(compactSvgPath(region.path))}" fill="${fill}" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" stroke-linecap="round"><title>${escapeHtml(region.name)}: ${escapeHtml(valueLabel)}</title></path>`;
   }).join("");
   // Soft drop-shadow lifts the whole map off the page; applied once to the group, not per path.
-  return `<svg class="viz-svg choro-map" viewBox="${escapeHtml(visual.viewBox)}" role="img" aria-label="${escapeHtml(visual.title)}"><defs><filter id="choroLift" x="-6%" y="-6%" width="112%" height="116%"><feDropShadow dx="0" dy="1.5" stdDeviation="2.4" flood-color="#241f3a" flood-opacity="0.16"/></filter></defs><g filter="url(#choroLift)">${paths}</g></svg>`;
+  return `<svg class="viz-svg choro-map" viewBox="${escapeHtml(visual.viewBox)}" role="img" aria-label="${escapeHtml(visual.title)}"><defs><filter id="choroLift" x="-6%" y="-6%" width="112%" height="116%"><feDropShadow dx="0" dy="1.5" stdDeviation="2.4" flood-color="#241f3a" flood-opacity="0.16"/></filter></defs><g filter="url(#choroLift)">${paths}</g>${watermarkSvg(visual.viewBox)}</svg>`;
 }
 
 export function viewBoxAspectRatio(viewBox: string) {

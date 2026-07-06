@@ -17,11 +17,12 @@ const BETTER = "#159A82";
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const n1 = (v) => (v == null ? "—" : Number.isInteger(v) ? String(v) : v.toFixed(1));
 const tw = (s, fs) => String(s).length * fs * 0.56;
+const watermark = (w, h) => `<text class="wm" x="${w - 12}" y="${Math.round(h) - 8}" text-anchor="end">thisindianlife.today</text>`;
 
 function hx(c) { let m = c.replace("#", ""); if (m.length === 3) m = m.split("").map((x) => x + x).join(""); return [0, 2, 4].map((i) => parseInt(m.slice(i, i + 2), 16)); }
 function mix(a, b, t) { const [ar, ag, ab] = hx(a), [br, bg, bb] = hx(b); return `rgb(${Math.round(ar + (br - ar) * t)},${Math.round(ag + (bg - ag) * t)},${Math.round(ab + (bb - ab) * t)})`; }
 const nice = (m) => (m <= 5 ? 5 : m <= 10 ? 10 : m <= 20 ? 20 : m <= 25 ? 25 : m <= 50 ? 50 : m <= 75 ? 75 : 100);
-function svg(w, h, inner, cls = "") { return `<svg viewBox="0 0 ${w} ${Math.round(h)}" class="nf-svg ${cls}" role="img" preserveAspectRatio="xMidYMid meet">${inner}</svg>`; }
+function svg(w, h, inner, cls = "") { return `<svg viewBox="0 0 ${w} ${Math.round(h)}" class="nf-svg ${cls}" role="img" preserveAspectRatio="xMidYMid meet">${inner}${watermark(w, h)}</svg>`; }
 
 // Evenly spaced axis ticks 0..lim (n+1 of them).
 const ticks = (lim, n = 4) => Array.from({ length: n + 1 }, (_, i) => +(lim * i / n).toFixed(2));

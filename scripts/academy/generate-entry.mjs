@@ -161,12 +161,18 @@ function checkRichFigures(entry, lockedNumbers) {
     }
   }
 
-  // Table cells: any rupee or percent figure should appear in the locked displayValues.
-  const tableFigures = (entry.body || "").split("\n").filter((l) => l.trim().startsWith("|") && !l.includes("---"))
-    .flatMap((l) => l.match(/₹[\d.,]+\s*(?:lakh crore|crore|lakh)?|[\d.]+\s*%|[+-]?[\d.]+\s*percentage points?/gi) || []);
-  for (const fig of tableFigures) {
-    if (!displays.has(normalizeFigure(fig))) {
-      warnings.push(`table figure "${fig.trim()}" is not a locked displayValue — verify or fix.`);
+  // Figures in TABLES and BULLET lists (where the model packs index/inflation numbers)
+  // should each appear in the locked displayValues. Prose bullets were a blind spot.
+  const figureLines = (entry.body || "").split("\n").filter((l) => {
+    const t = l.trim();
+    return (t.startsWith("|") && !l.includes("---")) || t.startsWith("- ") || t.startsWith("* ");
+  });
+  const FIG = /₹[\d.,]+\s*(?:lakh crore|crore|lakh)?|-?\d[\d.,]*\s*%|[+-]?[\d.]+\s*percentage points?|\bindex\s+-?\d[\d.,]*/gi;
+  for (const line of figureLines) {
+    for (const fig of line.match(FIG) || []) {
+      if (!displays.has(normalizeFigure(fig.replace(/index\s+/i, "")))) {
+        warnings.push(`figure "${fig.trim()}" is not a locked displayValue — verify or fix.`);
+      }
     }
   }
   return warnings;
@@ -182,7 +188,7 @@ function machaHindiScore(entry) {
 }
 
 function normalizeFigure(s) {
-  return String(s || "").toLowerCase().replace(/minus|−|-/g, "").replace(/\s+/g, "").replace(/₹/g, "").trim();
+  return String(s || "").toLowerCase().replace(/minus|−|-/g, "").replace(/\.0+(?=%|$)/g, "").replace(/\s+/g, "").replace(/₹/g, "").trim();
 }
 
 // Link entities the model named that are NOT yet in the vetted map will not render —
@@ -347,12 +353,14 @@ async function main() {
       { role: "user", content: critiqueUserPrompt({ draft, lint, derived: derivedReport(...fieldsOf(draft)), brief }) }
     ]
   });
-  let cleaned = revRes.json;
+  // Strip em-dashes deterministically up front. The model is unreliable at removing
+  // them and the cleanup loop used to burn ~3 model calls per entry fighting them; now
+  // the loop only spends calls on genuine banned-word tells that need rephrasing.
+  let cleaned = deepStripEmDash(revRes.json);
 
-  // Hard gate: do NOT trust the model's self-report. Loop until the prose is
-  // actually clean (zero lint errors AND zero em-dash characters anywhere), or we
-  // give up after a few focused edit passes.
-  for (let round = 1; round <= 3; round += 1) {
+  // Hard gate: do NOT trust the model's self-report. Loop on genuine lint errors
+  // (banned words / causality tells), re-stripping em-dashes each round, capped tight.
+  for (let round = 1; round <= 2; round += 1) {
     const issues = hardIssues(cleaned);
     if (!issues.blocked) break;
     console.log(`[academy] clean-up round ${round}: ${issues.lint.errors.length} lint errors, em-dash=${issues.emdash}`);
@@ -376,10 +384,10 @@ async function main() {
         ].join("\n") }
       ]
     });
-    cleaned = res.json;
+    cleaned = deepStripEmDash(res.json);
   }
 
-  // Final deterministic guarantee: strip any em-dashes the model left behind.
+  // Final deterministic guarantee (also covers anything a cleanup round reintroduced).
   cleaned = deepStripEmDash(cleaned);
 
   const finalLint = lintReport(...fieldsOf(cleaned));

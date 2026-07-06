@@ -8,7 +8,7 @@ import { readFile } from "node:fs/promises";
 import { createSeriesArtifact, createTableArtifact, writeSeriesArtifact, writeSnapshot, writeSourceManifest } from "./core/artifacts.mjs";
 
 const fetchedAt = new Date().toISOString();
-const sourceUrl = "https://rchiips.org/nfhs/factsheet_NFHS-6.shtml";
+const sourceUrl = "https://www.nfhsiips.in/nfhsuser/index.php";
 const YEAR = "2024"; // NFHS-6 fieldwork 2023-24
 
 const nfhs = JSON.parse(await readFile("NHFS/nfhs6_clean.json", "utf8"));

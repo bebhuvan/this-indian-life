@@ -1,0 +1,95 @@
+# Why does everything keep getting more expensive?
+*Your money is quietly dying, and that’s not a bug. It’s a feature. Here’s how inflation eats the rupee, why a little is kept alive on purpose, and who’s at the wheel.*
+
+**Bottom line.** Inflation is the sustained, general rise in the overall price level that shrinks what each rupee buys; India deliberately targets 4% a year to keep the economy from stalling, but the average hides sharp differences in what you actually pay.
+
+## What is inflation, exactly?
+
+Inflation is a sustained, broad rise in prices across the economy. When you hear that inflation is 1.3%, as India’s combined Consumer Price Index (CPI) was in December 2025, it means the basket of goods and services an average Indian household buys cost about 1.3% more than it did a year earlier. But a single month’s number can be volatile; over 2024 as a whole, consumer prices rose by 5%. The point is not the precise number: each rupee you hold steadily buys less.
+
+Look at it this way. The CPI index, which tracks the overall price level, stood at 198 in December 2025, with 2012 set as 100. What ₹100 bought in 2012 now costs roughly ₹198. Flip that around, and ₹100 from 2012 can buy only about ₹51 worth of the same things today. That erosion, slow and relentless, is what inflation does to your savings. It is a tax that nobody votes for.
+
+## How much has the rupee really shrunk over the decades?
+
+Zoom out, and the numbers get harsh. In 1960, the general price level in India was 100 on the World Bank’s index. By 2025, that index had climbed to 9,209. Prices have multiplied about 92 times over 65 years. A ₹100 note from 1960 would get you barely ₹1 worth of what it once could. If your grandparents had tucked away a few thousand rupees under the mattress in the 1960s, that stash is now near worthless.
+
+Inflation has not been steady. During the 1960s, prices rose at an average pace of 5.9% per year. So far in the 2020s, the average is 5.2%. These annual percentages seem small, but compounded over decades, they create the near-100-fold rise we see. The rupee’s story is one of slow decay. Spikes do happen: in January 2012, at the start of the current CPI series, inflation touched 6.3%. But the long arc is clear. Your money, left still, gets taken by time.
+
+## Why do prices rise at all, and is it bad?
+
+Prices can rise because too many rupees are chasing too few goods. Picture a festival season: everyone wants new clothes and sweets, but if sellers can’t ramp up supply fast enough, prices get bid up. That is demand-pull inflation. Or think of a poor monsoon that pushes up tomato prices: the cost of a key ingredient rises, the sabziwala charges more, and soon your dosa costs extra. That is cost-push inflation.
+
+Central banks don’t aim for zero inflation. A little inflation is actually healthier, and its opposite, deflation, a sustained fall in prices, is far more dangerous. Deflation makes people delay purchases (why buy today when it will be cheaper tomorrow?), which cuts demand, leading to lower production, job cuts, and a spiral down. So central banks target a mild, steady rate. It greases the wheels: it lets real wages adjust without employers cutting nominal pay, and it gives the central bank room to cut interest rates in a downturn without hitting zero. Since 2016, India’s framework targets inflation at 4%, enough to avoid deflation, not so much that it steals purchasing power too fast.
+
+## Who decides how fast prices rise?
+
+Since 2016, the answer is clear: the Reserve Bank of India (RBI). The Finance Act 2016 amended the RBI Act, making price stability its primary goal and setting a clear target: keep Consumer Price Index inflation at 4%, within a band of 2% to 6%. A six-member Monetary Policy Committee (MPC), three from the RBI, including the Governor, and three appointed by the government, decides the policy repo rate, the interest rate at which the RBI lends to banks.
+
+The repo rate is the economy’s brake and accelerator. When inflation threatens to breach 6%, the MPC raises the repo rate (as of mid-2026, it stands at 5.25%). Higher repo rates make borrowing costlier for banks, which then charge higher interest on loans. If you have a floating-rate home loan, your EMI could rise within months. Businesses borrow less, consumers buy fewer cars and homes on credit, demand cools, and price pressures ease. When inflation is too low, or growth falters, the RBI cuts the rate, making money cheaper and spurring spending. This is the delicate, and often politically charged, dance the RBI must perform.
+
+## Is India’s inflation high or low by world standards?
+
+In 2024, India’s consumer price inflation stood at 5%. That is moderate by global standards. The United States, after its own inflation scare in 2022, saw inflation at 2.9% in 2024. China, weighed down by a property slump and weak demand, recorded just 0.2%, flirting with deflation. Brazil, a country that has historically grappled with runaway prices, reported 4.4% in 2024.
+
+| Country | CPI Inflation Rate (2024) |
+| --- | --- |
+| India | 5% |
+| United States | 2.9% |
+| China | 0.2% |
+| Brazil | 4.4% |
+
+But Brazil’s past is a reminder of how bad inflation can get. In 1981, its CPI inflation hit 101.7%, prices more than doubled in a year. That kind of hyperinflation wipes out savings, destroys contracts, and makes everyday life a scramble. Countries tame such extremes only with drastic institutional reforms. India has never had hyperinflation, but the cautionary tales underscore why the RBI guards its target so closely.
+
+## Why does the official number so often feel wrong?
+
+The CPI is an average of a fixed basket of goods and services that the average Indian household is supposed to consume. No household is exactly average. The basket, designed using a 2012 survey, weights food and beverages at 45.9% of the index, followed by a miscellaneous category (including services like education, health, transport) at 28.3%, housing at 10.1%, fuel and light at 6.8%, clothing and footwear at 6.5%, and pan, tobacco and intoxicants at 2.4%. Your personal inflation may look nothing like this.
+
+A household spending heavily on education and healthcare, where inflation ran at 3.4% each in December 2025, will feel inflation quite differently from one weighed down by food costs, which actually fell, with food and beverages inflation at -1.9% that month. If you consume a lot of personal care items (up 28.2% year-on-year) or gold (up 68.7%), you would feel inflation far more. And if you ride a bike, petrol prices matter: the petrol index was 140.2, up from 100 in 2012.
+
+The official number is a smoothing device. It hides the spikes in onions (48.1% cheaper than a year ago in December 2025) and the surges in tomatoes (up 14.4%). It is useful for policy, but for your wallet, the real inflation is the one you pay. (This is why we have separate deep dives on whose inflation, the basket, and food versus core inflation; see below.)
+
+## So what does inflation actually do to you, and what can you do about it?
+
+Inflation is the reason cash under the mattress is a slow drain. That ₹100 note will buy less tomorrow than it does today. The only way to protect yourself is to earn a return that outpaces it.
+
+Take a typical bank fixed deposit: in mid-2026, the term deposit rate was about 6.6%. If inflation runs at, say, the recent 1.3%, your real return is positive. You gain purchasing power. In December 2025, the real return on an FD was about 5.35 percentage points. But that is a recent and unusually benign moment. There have been long stretches, such as in March 2013, when the real return was negative: at -1.25, meaning even FD savers lost out. Gold, which Indians love, has often been a hedge: in December 2025, gold prices were up 68.7% from a year earlier, but gold too can slump. It fell 7.4% year-on-year in January 2015.
+
+The lesson is not ‘buy this or that,’ but to be aware. Inflation is not a distant statistic; it is the rate at which your uninvested money evaporates. Think of a forgotten savings account: the number of rupees stays the same, but the number of things it buys shrinks year by year. Read the headline, understand your own basket, and make sure what you earn, whether salary, interest, or gains, actually stays ahead. Not all inflation is bad, but ignoring it always is.
+
+### Key terms
+- **Inflation** — Like paying more for the same plate of idli you ate last year, a sustained, general rise in the price of most things, so each rupee buys less. Not the same as a one-time price jump in a single item.
+- **CPI** — Consumer Price Index. A number that tracks the average price of a fixed basket of goods and services a typical household buys. The change in that number over 12 months is the inflation rate you see in headlines.
+- **Repo rate** — The interest rate at which the RBI lends to banks. Think of it as the main knob the central bank turns: raise it to cool down demand and bring inflation back in line, lower it to boost spending when things are sluggish. It is not the rate you pay on your home loan directly, but it pushes that rate up or down.
+- **Purchasing power** — How many real things your money can buy. When prices double, your purchasing power halves. It’s why ₹100 today can’t get you what it got your parents in college. Not the same as your salary number. That’s nominal, not real.
+- **Deflation** — The opposite of inflation: a sustained, broad fall in prices. While a lower price for your morning chai sounds good, if prices keep falling, people stop buying, businesses shut, and wages drop, a much scarier spiral than moderate inflation.
+
+### Toh, what’s the scene, bro?
+So here’s the deal. Every year, slowly, the things you buy get a little more expensive. That ₹10 you paid for a cup of tea a decade ago might be ₹20 today. That’s inflation at work, your money loses its punch. It’s not a glitch; it’s actually meant to happen a little bit so the economy doesn’t stall. But too much of it, and your salary can’t keep up. The RBI tries to keep it at 4% a year. If prices start rising too fast, they raise the repo rate, basically making loans more expensive so people spend less. When inflation is low, they cut rates to get things moving. The official number is an average, though. If you spend more on rent and school fees than on onions, your inflation might feel higher. Bottom line: don’t just let your cash sit. Try to earn more than inflation, whether through a decent FD, gold, or whatever works for you, or your money quietly shrinks while you aren’t looking.
+
+### What people get wrong
+Many assume inflation means every single thing gets equally more expensive, and that the government should aim for zero inflation. In reality, some prices fall dramatically (onions were 48% cheaper) while others surge (gold up 69%). And a little inflation, around 4%, is the deliberate target. Deflation would be far more ruinous.
+
+### Caveat
+This entry’s numbers come from national averages and a basket fixed in 2012. Your own cost of living may move differently based on where you live, what you consume, and how you earn. Inflation also doesn’t capture improvements in quality (a phone today is not the same device as a decade ago) or the arrival of entirely new products.
+
+---
+**Connects:** cpi-vs-wpi, inside-the-basket, food-inflation, core-vs-headline, whose-inflation, nominal-gdp
+**Sources:** Ministry of Statistics and Programme Implementation (MoSPI); World Bank; IndiaDataHub; Reserve Bank of India Database (RBIdBI)
+**Locked numbers used:** What ₹100 from 2012 buys today, latest; CPI inflation, General (Combined), latest; Inflation, consumer prices, latest; CPI index, General (Combined), latest; What ₹100 from 1960 buys today, latest; India price level since 1960, latest; How many times prices have risen since 1960, latest; Average inflation by decade, earliest; Average inflation by decade, latest; CPI inflation, General (Combined), earliest; RBI policy repo rate, latest; CPI inflation, IND, latest; CPI inflation, USA, latest; CPI inflation, CHN, latest; CPI inflation, BRA, latest; CPI inflation, BRA, earliest; CPI basket weight, Food & beverages, latest; CPI basket weight, Miscellaneous, latest; CPI basket weight, Housing, latest; CPI basket weight, Fuel & light, latest; CPI basket weight, Clothing & footwear, latest; CPI basket weight, Pan, tobacco, intoxicants, latest; CPI inflation, Miscellaneous: Education (Combined), latest; CPI inflation, Miscellaneous: Health (Combined), latest; CPI inflation, Food and Beverages (Combined), latest; CPI inflation, Miscellaneous: Personal Care and Effects (Combined), latest; Price inflation, Gold, latest; Price index, Petrol, latest; Price inflation, Onion, latest; Price inflation, Tomato, latest; Real return on a fixed deposit (after inflation), latest; Bank term-deposit (FD) rate, all SCBs, latest; Real return on a fixed deposit (after inflation), earliest; Price inflation, Gold, earliest
+**Context cards used:** In 2016, India adopted a formal flexible inflation-targeting framework (Finance Act 2016 / RBI Act amendment); Central banks deliberately aim for low, steady inflation rather than zero, because mild inflation greases the economy and prevents deflation
+**Status:** ready
+
+### Self-critique
+- **Wrong:** Claimed 'double-digit inflation of the early 2010s' without evidence; the earliest CPI combined inflation in the series is 6.3% in Jan 2012, not double-digit. Corrected by removing that claim and sticking to the locked number.
+- **Missing:** Concrete Indian grounding for demand-pull and cost-push; repo rate impact on personal loans like home EMIs. Added festival-season and monsoon-tomato examples, and linked repo rate directly to a floating-rate home loan EMI change.
+- **To add:** Festival-season demand-pull and monsoon cost-push examples; repo rate and EMI connection; a closing image of a forgotten savings account shrinking in real terms.
+- **Relevance:** 
+- **AI smell:** Removed all em-dashes, rewrote the rhetorical pivot 'why don’t central banks aim for zero? The answer is...' into a direct statement, varied sentence length throughout, and cut hedge phrases like 'At the simplest level'.
+- **Better how:** Tightened opening to state the erosion directly, ended with a sharper image of forgotten savings shrinking, and cut the early-2010s slip entirely. The piece now leads and closes with concrete, personal stakes.
+
+### Linter (final)
+_clean_
+
+### Derived-number claims to verify (human)
+- "92 times" "92 times" is a multiplier or ratio. Verify it equals a comparison stated in the locked numbers, otherwise remove it. Never compute a ratio from memory.
+- "doubled" "doubled" is a multiplier or ratio. Verify it equals a comparison stated in the locked numbers, otherwise remove it. Never compute a ratio from memory.

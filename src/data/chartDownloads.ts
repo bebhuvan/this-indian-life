@@ -38,6 +38,16 @@ export function visualPayload(visual: VisualSpec) {
       )
     };
   }
+  if (visual.kind === "loadCurve") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.series.flatMap((s) =>
+        s.values.map((value, hour) => ({ series: s.label, hour, value }))
+      )
+    };
+  }
   if (visual.kind === "stack") {
     return {
       title: visual.title,

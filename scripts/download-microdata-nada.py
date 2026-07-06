@@ -348,33 +348,80 @@ def api_get_json(path: str) -> dict:
 
 def api_discover(args: argparse.Namespace) -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    manifest = json.loads(MANIFEST_PATH.read_text()) if MANIFEST_PATH.exists() else {"downloads": []}
-    target_downloads = [item for item in manifest.get("downloads", []) if item.get("source") == "get-microdata"]
-    if args.only_remaining:
-        completed = set()
-        results_path = OUT_DIR / "download-results.jsonl"
-        if results_path.exists():
-            for line in results_path.read_text(encoding="utf-8").splitlines():
-                if not line.strip():
-                    continue
-                record = json.loads(line)
-                if record.get("downloaded") and record.get("url"):
-                    completed.add(record["url"])
-        target_downloads = [item for item in target_downloads if item.get("url") not in completed]
+    seen_idnos = []
+    if args.all_studies:
+        print("Fetching all datasets from API...", flush=True)
+        headers = api_headers()
+        page = 1
+        total = None
+        while total is None or len(seen_idnos) < total:
+            url = f"{BASE}/api/listdatasets"
+            try:
+                response = requests.get(url, params={"page": page}, headers=headers, timeout=60)
+                response.raise_for_status()
+                data = response.json()
+                result = data.get("result", {})
+                total = int(result.get("total", 0))
+                rows = result.get("rows", [])
+                if not rows:
+                    break
+                for row in rows:
+                    idno = row.get("idno")
+                    if idno and idno not in seen_idnos:
+                        seen_idnos.append(idno)
+                page += 1
+            except Exception as e:
+                print(f"Error fetching dataset list page {page}: {e}")
+                break
+        if not seen_idnos:
+            print("Failed to fetch any datasets (likely rate limit). Aborting to preserve cache.")
+            return
+        print(f"Discovered {len(seen_idnos)} studies from API.")
+    else:
+        manifest = json.loads(MANIFEST_PATH.read_text()) if MANIFEST_PATH.exists() else {"downloads": []}
+        target_downloads = [item for item in manifest.get("downloads", []) if item.get("source") == "get-microdata"]
+        if args.only_remaining:
+            completed = set()
+            results_path = OUT_DIR / "download-results.jsonl"
+            if results_path.exists():
+                for line in results_path.read_text(encoding="utf-8").splitlines():
+                    if not line.strip():
+                        continue
+                    record = json.loads(line)
+                    if record.get("downloaded") and record.get("url"):
+                        completed.add(record["url"])
+            target_downloads = [item for item in target_downloads if item.get("url") not in completed]
+
+        for item in target_downloads:
+            idno = item.get("idno")
+            if idno and idno not in seen_idnos:
+                seen_idnos.append(idno)
 
     api_files = []
-    seen_idnos = []
-    for item in target_downloads:
-        idno = item.get("idno")
-        if idno and idno not in seen_idnos:
-            seen_idnos.append(idno)
-
-    for idno in seen_idnos:
-        print(f"API fileslist {idno}", flush=True)
-        data = api_get_json(f"/api/datasets/{idno}/fileslist")
-        api_files.append({"idno": idno, "response": data})
-
+    existing_fileslist = {}
     path = OUT_DIR / "api-fileslist.json"
+    if args.only_remaining and path.exists():
+        try:
+            old_data = json.loads(path.read_text(encoding="utf-8"))
+            for entry in old_data:
+                if entry.get("idno") and "response" in entry:
+                    existing_fileslist[entry["idno"]] = entry["response"]
+        except Exception:
+            pass
+
+    for index, idno in enumerate(seen_idnos, start=1):
+        if idno in existing_fileslist:
+            print(f"[{index}/{len(seen_idnos)}] API fileslist {idno} (cached)", flush=True)
+            api_files.append({"idno": idno, "response": existing_fileslist[idno]})
+            continue
+        print(f"[{index}/{len(seen_idnos)}] API fileslist {idno}", flush=True)
+        try:
+            data = api_get_json(f"/api/datasets/{idno}/fileslist")
+            api_files.append({"idno": idno, "response": data})
+        except Exception as e:
+            print(f"Error fetching fileslist for {idno}: {e}")
+        time.sleep(args.delay)
+
     path.write_text(json.dumps(api_files, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"wrote {path}")
 
@@ -443,20 +490,38 @@ def api_download(args: argparse.Namespace) -> None:
         for base in (OUT_DIR / "files", OUT_DIR / "api-files"):
             if base.exists():
                 existing_names.update(path.name for path in base.rglob("*") if path.is_file() and not path.name.endswith(".part"))
+    completed = set()
+    if args.only_remaining:
+        results_path = OUT_DIR / "api-download-results.jsonl"
+        if results_path.exists():
+            for line in results_path.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                try:
+                    record = json.loads(line)
+                    if record.get("downloaded") and record.get("idno") and record.get("file_no"):
+                        completed.add((record["idno"], record["file_no"]))
+                except Exception:
+                    continue
     for entry in entries:
         idno = entry["idno"]
         for file_record in iter_api_files(entry["response"]):
             file_no = api_file_no(file_record)
             if not file_no:
                 continue
+            if args.only_remaining and (idno, file_no) in completed:
+                continue
             if args.skip_existing_names and str(file_record.get("name") or "") in existing_names:
                 continue
             if args.data_archives_only:
                 name = str(file_record.get("name") or "")
-                size = str(file_record.get("size") or "")
-                if not re.search(r"\.(zip|rar)$", name, re.I):
+                if not re.search(r"\.(zip|rar|7z)$", name, re.I):
                     continue
                 if not re.search(r"(data|HCES_Data|PLFS|txt2csv)", name, re.I):
+                    continue
+            elif args.all_archives:
+                name = str(file_record.get("name") or "")
+                if not re.search(r"\.(zip|rar|7z)$", name, re.I):
                     continue
             candidates.append((idno, file_no, api_file_label(file_record), file_record))
     if args.limit_files:
@@ -617,6 +682,7 @@ def main() -> None:
 
     api_discover_parser = subparsers.add_parser("api-discover")
     api_discover_parser.add_argument("--only-remaining", action="store_true")
+    api_discover_parser.add_argument("--all-studies", action="store_true")
     api_discover_parser.add_argument("--limit-files", type=int)
     api_discover_parser.add_argument("--delay", type=float, default=1.0)
 
@@ -625,6 +691,7 @@ def main() -> None:
     api_download_parser.add_argument("--limit-files", type=int)
     api_download_parser.add_argument("--delay", type=float, default=1.0)
     api_download_parser.add_argument("--data-archives-only", action="store_true")
+    api_download_parser.add_argument("--all-archives", action="store_true")
     api_download_parser.add_argument("--skip-existing-names", action="store_true")
 
     args = parser.parse_args()

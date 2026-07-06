@@ -4,6 +4,7 @@ import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import { markdownBlocks, inlineMarkdownHtml } from "../../data/questions";
 import { academyEntries, academyBySlug, academyUrl, academyLinks } from "../../data/academy";
+import { resolveChartSeries, renderLineChartSvg } from "../../data/academy-charts";
 
 export function getStaticPaths() {
   return academyEntries.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
@@ -40,6 +41,18 @@ const pullsAfter = (h: string | null) => pulls.filter((p) => p.afterHeading && h
 const visualsAfter = (h: string | null) => visuals.filter((v) => v.afterHeading && h && norm(v.afterHeading) === norm(h));
 const trailingPulls = pulls.filter((p) => !p.afterHeading || !headings.includes(norm(p.afterHeading)));
 const trailingVisuals = visuals.filter((v) => !v.afterHeading || !headings.includes(norm(v.afterHeading)));
+
+// Pre-render line/area charts (build-time SVG from sourced data/series time-series).
+const lineCharts = new Map<typeof visuals[number], { svg: string; legend: { label: string; color: string }[] }>();
+for (const v of visuals) {
+  if (v.type === "line" || v.type === "area") {
+    const rs = resolveChartSeries(v.series || []);
+    if (rs.length) lineCharts.set(v, {
+      svg: renderLineChartSvg(rs, { yUnit: v.yUnit, zeroLine: v.zeroLine, area: v.type === "area" }),
+      legend: rs.map((s) => ({ label: s.label, color: s.color }))
+    });
+  }
+}
 
 // Auto-link the first mention of each vetted entity, once per entry, never inside an
 // existing tag and only on word boundaries. URLs come from the verified link map.
@@ -79,7 +92,7 @@ const para = (text: string) => autolink(inlineMarkdownHtml(text));
 
 <Base title={`${entry.title} · Academy · This Indian Life`} description={description} domain="economy">
   <div class="wrap">
-    <Nav locale="en" />
+    <Nav locale="en" active="academy" />
 
     <header class="domain-head">
       <span class="lbl">Academy{entry.module ? ` · ${entry.module}` : ""}</span>
@@ -123,11 +136,17 @@ const para = (text: string) => autolink(inlineMarkdownHtml(text));
               {v.type === "stacked-bar" && v.segments ? (
                 <>
                   <div class="stacked-bar" role="img" aria-label={`${v.title}: ${v.segments.map((s) => `${s.label} ${s.value}%`).join(", ")}`}>
-                    {v.segments.map((s, i) => <span class={`seg seg-${i + 1}`} style={`width:${s.value}%`}><span class="seg-in">{s.value >= 30 ? `${s.label} ${s.value}%` : `${s.value}%`}</span></span>)}
+                    {v.segments.map((s, i) => <span class={`seg seg-${i + 1}`} style={`width:${s.value}%`}><span class="seg-in">{s.value >= 30 ? `${s.label} ${s.value}%` : (s.value >= 10 ? `${s.value}%` : "")}</span></span>)}
                   </div>
                   <ul class="stacked-legend">
                     {v.segments.map((s, i) => <li class={`seg-${i + 1}`}><span class="dot"></span>{s.label} <b>{s.value}%</b></li>)}
                   </ul>
+                </>
+              ) : null}
+              {(v.type === "line" || v.type === "area") && lineCharts.get(v) ? (
+                <>
+                  <div class="academy-linechart" set:html={lineCharts.get(v)!.svg}></div>
+                  <ul class="stacked-legend">{lineCharts.get(v)!.legend.map((s) => <li><span class="dot" style={`background:${s.color}`}></span>{s.label}</li>)}</ul>
                 </>
               ) : null}
               {v.source ? <p class="academy-viz-src">{v.source}</p> : null}
@@ -142,10 +161,17 @@ const para = (text: string) => autolink(inlineMarkdownHtml(text));
 
       {trailingVisuals.map((v) => (
         <figure class="academy-viz">
-          {v.title ? <figcaption class="academy-viz-cap"><span class="academy-viz-title">{v.title}</span></figcaption> : null}
+          {v.title ? <figcaption class="academy-viz-cap"><span class="academy-viz-title">{v.title}</span>{v.subtitle ? <span class="academy-viz-sub">{v.subtitle}</span> : null}</figcaption> : null}
           {v.type === "stacked-bar" && v.segments ? (
             <ul class="stacked-legend">{v.segments.map((s, i) => <li class={`seg-${i + 1}`}><span class="dot"></span>{s.label} <b>{s.value}%</b></li>)}</ul>
           ) : null}
+          {(v.type === "line" || v.type === "area") && lineCharts.get(v) ? (
+            <>
+              <div class="academy-linechart" set:html={lineCharts.get(v)!.svg}></div>
+              <ul class="stacked-legend">{lineCharts.get(v)!.legend.map((s) => <li><span class="dot" style={`background:${s.color}`}></span>{s.label}</li>)}</ul>
+            </>
+          ) : null}
+          {v.source ? <p class="academy-viz-src">{v.source}</p> : null}
         </figure>
       ))}
       {trailingPulls.map((p) => (
