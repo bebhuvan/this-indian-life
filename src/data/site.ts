@@ -313,6 +313,7 @@ const SOURCE_LABELS: Record<string, string> = {
   gbd: "IHME · GBD",
   nhp: "CBHI · NHP 2023",
   srs: "SRS",
+  dataforindia: "Data For India",
   srscod: "SRS (cause of death)",
   mccd: "MCCD",
   ncrb: "NCRB · ADSI",

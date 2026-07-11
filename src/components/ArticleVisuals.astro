@@ -43,6 +43,7 @@ const {
 const colors = ["var(--c)", "#322e29", "#3f8378", "#cf9a3f", "#7e6ba6", "#b5765c", "#8c8780"];
 const WATERMARK_TEXT = "thisindianlife.today";
 const sourceNames: Record<string, string> = {
+  dataforindia: "Data For India",
   worldbank: "World Bank",
   "un-population": "UN Population",
   "who-gho": "WHO GHO",
@@ -910,13 +911,22 @@ function scatterXYGeometry(visual: ScatterXYVisual, mobile = false) {
       const cx = x(point.x);
       const radius = mobile ? 4.5 : 6;
       const side = point.x > (visual.xMin + visual.xMax) / 2 ? "left" : "right";
-      return { label: point.label, side, anchorY: y(point.y), x: side === "left" ? cx - radius - labelGap : cx + radius + labelGap, y: y(point.y) - radius - 4 };
+      return { label: point.label, side, anchorX: cx, anchorY: y(point.y), x: side === "left" ? cx - radius - labelGap : cx + radius + labelGap, y: y(point.y) - radius - 4 };
     });
+  // Relax overlapping labels around their own centroid (push half up, half down)
+  // instead of only cascading downward, so a tight cluster doesn't fling its
+  // labels far below the points into empty space.
   ["left", "right"].forEach((side) => {
     const items = raw.filter((item) => item.side === side).sort((a, b) => a.y - b.y);
+    if (items.length < 2) return;
     for (let i = 1; i < items.length; i += 1) {
       if (items[i].y - items[i - 1].y < minGap) items[i].y = items[i - 1].y + minGap;
     }
+    // Re-center the stack on the mean anchor so displacement is shared up and down.
+    const meanAnchor = items.reduce((s, it) => s + it.anchorY, 0) / items.length;
+    const meanLabel = items.reduce((s, it) => s + it.y, 0) / items.length;
+    const shift = meanAnchor - meanLabel;
+    for (const it of items) it.y += shift;
   });
   const labelPositions = new Map(raw.map((item) => [item.label, item]));
   return { width, height, pad, x, y, xTicks, yTicks, labelPositions };
@@ -1488,8 +1498,15 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 const radius = isIndia ? (mobile ? 6 : 8) : point.highlight ? (mobile ? 4.5 : 6) : (mobile ? 2.6 : 3.4);
                 const fill = isIndia ? "#b3245a" : point.highlight ? "rgba(179,36,90,0.5)" : "rgba(138,133,151,0.4)";
                 const placement = point.highlight ? geo.labelPositions.get(point.label) : null;
+                // Draw a faint leader line when the label sits noticeably off its dot,
+                // so a displaced label reads as attached rather than floating in space.
+                const labelAnchorX = placement ? (placement.side === "left" ? placement.x + 3 : placement.x - 3) : 0;
+                const showLeader = placement ? (Math.abs(placement.y - cy) > 14 || Math.abs(labelAnchorX - cx) > 40) : false;
                 return (
                   <g>
+                    {placement && showLeader ? (
+                      <line x1={cx} y1={cy} x2={labelAnchorX} y2={placement.y - 3} stroke="rgba(138,133,151,0.55)" stroke-width="0.8" />
+                    ) : null}
                     <circle cx={cx} cy={cy} r={radius} fill={fill} stroke="#fff" stroke-width={isIndia ? 2 : 1.2}>
                       <title>{`${point.label}: ${scatterValue(point.x, sc.xLabel)} ${sc.xLabel}, ${scatterValue(point.y, sc.yLabel)} ${sc.yLabel}`}</title>
                     </circle>
@@ -1517,8 +1534,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               {renderPlot(gm, true)}
               <div class="viz-legend">
                 {hasIndiaPoint ? <span><i style="background:#b3245a"></i>India</span> : null}
-                <span><i style="background:rgba(179,36,90,0.5)"></i>{hasIndiaPoint ? "Selected comparators" : "Highlighted stations"}</span>
-                <span><i style="background:rgba(138,133,151,0.4)"></i>{hasIndiaPoint ? "Other countries" : "Other stations"}</span>
+                <span><i style="background:rgba(179,36,90,0.5)"></i>{hasIndiaPoint ? "Selected comparators" : `Highlighted ${sc.entityNoun}`}</span>
+                <span><i style="background:rgba(138,133,151,0.4)"></i>{hasIndiaPoint ? "Other countries" : `Other ${sc.entityNoun}`}</span>
               </div>
               <div class="chart-note">
                 <p class="cn-take serif">{note.takeaway}</p>
@@ -1965,6 +1982,11 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (visual.kind === "sparkGrid") {
           const sg = visual as SparkGridVisual;
           const usuffix = /%/.test(sg.unit) ? "%" : "";
+          // The spark grid was built for climate (temperature). For non-temperature
+          // series the "red = warmer / blue = cooler" change colour is meaningless and
+          // clashes with the level colour, so drop the diverging change colour and use
+          // a neutral caption. Climate (deg C/F) keeps its original behaviour.
+          const isTemp = /°[CF]/.test(sg.unit);
           // Auto-scale each sparkline to its OWN range, so a 1 deg C trend on a 27 deg C base
           // reads as a clear slope instead of a flat line crushed against a shared 0-based
           // ceiling. Colour (from the cross-city min/max) still encodes the absolute level.
@@ -1991,17 +2013,26 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <p class="spark-scale">Each chart is one city, {startYear}–{endYear}, auto-scaled to its own range so the trend is visible — read the <em>slope</em>, not the height. The big number is the {endYear} value; the small coloured number is the change since the {startYear}s (red = warmer, blue = cooler). Colour of the line shows how high the {endYear} value sits across all cities.</p>
+              <p class="spark-scale">{isTemp
+                ? <Fragment>Each chart is one city, {startYear}–{endYear}, auto-scaled to its own range so the trend is visible — read the <em>slope</em>, not the height. The big number is the {endYear} value; the small coloured number is the change since the {startYear}s (red = warmer, blue = cooler). Colour of the line shows how high the {endYear} value sits across all cities.</Fragment>
+                : <Fragment>Each small chart is one panel, {startYear}–{endYear}, auto-scaled to its own range so the trend is visible — read the <em>slope</em>, not the height. The two numbers are the {startYear} value and the {endYear} value (start → latest).</Fragment>}</p>
               <div class="spark-grid">
                 {sg.cells.map((c) => {
                   const col = choroColor(c.latest ?? 0, sg.min, sg.max);
+                  // Non-temp: colour-by-latest-level washes every panel out when the
+                  // whole point is that the series all converged low (e.g. fertility).
+                  // Draw the line in a solid, legible tone; keep the level cue in the
+                  // number badge only. Climate keeps its level-coloured line.
+                  const lineCol = isTemp ? col : "#a8123f";
                   return (
                     <div class="spark-cell">
-                      <div class="spark-head"><b>{c.label}</b><span class="spark-nums"><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em>{typeof c.change === "number" ? <i class={`spark-d ${c.change >= 0 ? "pos" : "neg"}`}>{signedFmt(c.change, sg.unit)}</i> : null}</span></div>
+                      <div class="spark-head"><b>{c.label}</b><span class="spark-nums">{isTemp
+                        ? <Fragment><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em>{typeof c.change === "number" ? <i class={`spark-d ${c.change >= 0 ? "pos" : "neg"}`}>{signedFmt(c.change, sg.unit)}</i> : null}</Fragment>
+                        : <Fragment><i class="spark-d" style="color:#9a938a">{fmt(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:#a8123f">{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
                       <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${fmt(c.latest ?? 0, sg.unit)} in ${endYear}`}>
                         <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
-                        <polygon points={sparkArea(c.points)} fill={col} fill-opacity="0.14" stroke="none" />
-                        <polyline points={sparkPts(c.points)} fill="none" stroke={col} stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+                        <polygon points={sparkArea(c.points)} fill={lineCol} fill-opacity={isTemp ? 0.14 : 0.10} stroke="none" />
+                        <polyline points={sparkPts(c.points)} fill="none" stroke={lineCol} stroke-width={isTemp ? 1.6 : 2} stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
                         <text class="chart-watermark" x="98" y="34" text-anchor="end">{WATERMARK_TEXT}</text>
                       </svg>
                       <div class="spark-axis"><span>{startYear}</span><span>{endYear}</span></div>

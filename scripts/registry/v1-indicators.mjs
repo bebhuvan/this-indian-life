@@ -966,6 +966,103 @@ export const v1Questions = [
     ]
   },
   {
+    id: "q.people.fertility_divergence",
+    slug: "why-indian-states-have-different-birth-rates",
+    question: "Why is India two countries when it comes to birth rates?",
+    priority: "core",
+    // The economic and political story of fertility DIVERGENCE across states.
+    // Distinct from q.people.population (the demographic overview): this article
+    // is about why the map splits, and what it costs. Spine = income and female
+    // education explain the gap (education more cleanly than income, and far more
+    // cleanly than female labour-force participation). Payload = the states that
+    // cut fertility earliest now grow slowest, so any seat reallocation by
+    // population shifts power north (delimitation, frozen on 1971 population until
+    // at least 2026) and the fiscal burden of ageing lands first in the south.
+    // Blends SRS state TFR 1971-2023 (via DataForIndia), RBI DBIE per-capita NSDP
+    // 1980-2024 (verified vs MOSPI + IDH), NFHS-6 female schooling, MOSPI PLFS
+    // female LFP, RBI e-STATES population + committed spending, NCP projections.
+    indicators: ["econ.state.income_vs_tfr", "people.education_vs_tfr", "people.srs.tfr_long.kerala", "people.srs.tfr_long.bihar", "people.nfhs.tfr_by_state"],
+    core: ["econ.state.income_vs_tfr", "people.education_vs_tfr", "people.lfp_vs_tfr", "people.state_population.growth_bars", "people.nfhs.tfr_by_state", "people.ncp.tfr_projection_2035"],
+    context: [
+      "people.srs.tfr_long.kerala", "people.srs.tfr_long.tamil_nadu", "people.srs.tfr_long.andhra_pradesh",
+      "people.srs.tfr_long.karnataka", "people.srs.tfr_long.maharashtra", "people.srs.tfr_long.punjab",
+      "people.srs.tfr_long.bihar", "people.srs.tfr_long.uttar_pradesh", "people.srs.tfr_long.rajasthan",
+      "people.srs.tfr_long.madhya_pradesh", "people.srs.tfr_long.west_bengal", "people.srs.tfr_long.gujarat",
+      "people.srs.tfr_long.odisha", "people.srs.tfr_long.haryana", "people.srs.tfr_long.assam",
+      "people.fertility", "people.nfhs5.tfr_by_education",
+      "people.replacement_crossing_year", "people.states_span_world", "people.tfr_convergence_gap",
+      "people.srs.tfr_long_rural.india", "people.srs.tfr_long_urban.india", "people.srs.tfr_long_urban.bihar"
+    ],
+    visualPlan: [
+      { chart: "multiLine", title: "One country, two fertility histories", size: "hero", beat: "divergence", unit: "births per woman", window: "full", refLine: { value: 2.1, label: "replacement" },
+        subtitle: "SRS · total fertility rate by state · 1971 to 2023",
+        series: [
+          { indicator: "people.srs.tfr_long.kerala", label: "Kerala", color: "#137a74", emphasis: true },
+          { indicator: "people.srs.tfr_long.tamil_nadu", label: "Tamil Nadu", color: "#2f9e8f" },
+          { indicator: "people.srs.tfr_long.andhra_pradesh", label: "Andhra Pradesh", color: "#6f9d3a" },
+          { indicator: "people.srs.tfr_long.maharashtra", label: "Maharashtra", color: "#c79a1e" },
+          { indicator: "people.srs.tfr_long.rajasthan", label: "Rajasthan", color: "#e07a2b" },
+          { indicator: "people.srs.tfr_long.uttar_pradesh", label: "Uttar Pradesh", color: "#c1436b" },
+          { indicator: "people.srs.tfr_long.bihar", label: "Bihar", color: "#93123f", emphasis: true }
+        ],
+        indicator: "people.srs.tfr_long.kerala",
+        why: "The whole article in one chart: the south hit replacement in the 1980s-90s; the north is only getting there now.", read: "Each line is one state's births per woman since 1971, seven states from the earliest to the latest to fall, cool colours for the south, warm for the north.", watch: "Kerala and Tamil Nadu crossed the replacement line decades before Uttar Pradesh and Bihar even began falling fast: a 30-year gap between states of the same country." },
+      { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "The fertility map of India", size: "feature", window: "latest", beat: "geography", divergeAt: 2.1, pivotLabel: "replacement", rankLabel: "Highest", bottomLabel: "Lowest",
+        why: "The divergence, drawn as a map.", read: "Each state shaded by its fertility rate.", watch: "A clean north-south split: the south and west deep below replacement, a northern band still above it." },
+      { indicator: "people.replacement_crossing_year", chart: "tableBars", title: "A thirty-year head start, measured in years", size: "feature", beat: "the-lag", unit: "years below replacement by 2023", subtitle: "SRS · years each state has spent at or below 2.1 births per woman · states with data since 1981 or earlier",
+        why: "The lag, made into a length: how long each state has already lived below replacement.", read: "For each long-tracked state, the number of years its fertility has been at or below 2.1 as of 2023, longest at the top.", watch: "Kerala has been below replacement for about 35 years and Tamil Nadu for 30; Bihar, Uttar Pradesh, Madhya Pradesh and Rajasthan sit at zero, still not there in 2023. That distance is a full generation of divergence." },
+      { indicator: "people.tfr_convergence_gap", chart: "line", title: "The gap held for a generation, then began to close", size: "feature", window: "full", beat: "the-gap", unit: "births per woman (gap)", subtitle: "SRS via Data For India · distance between the highest and lowest major state's fertility · one number per year",
+        why: "The whole article in one line: the spread between states, not any single state's level.", read: "Each year's value is the difference in births per woman between the highest- and lowest-fertility big state. It sat near 3 through the 1980s and 90s, then started falling after 2000.", watch: "The gap peaked around 3.5 in the mid-1980s, when Bihar was near 5.9 and Kerala 2.4; by 2023 it is down to about 1.5, Bihar 2.8 against Tamil Nadu 1.3. The states diverged for a generation and are now converging, though the gap that remains is still more than a full child." },
+      { indicator: "people.states_span_world", chart: "tableBars", title: "India's states span the world", size: "feature", beat: "how-low", unit: "births per woman", subtitle: "SRS 2023 (Indian states) and World Bank 2024 (countries) · one fertility scale",
+        why: "One country holds nearly the whole planet's range of fertility, from above the world average to East-Asia low.", read: "Indian states and countries ranked together on births per woman; states are marked (India).", watch: "Bihar sits above the world average, below only Pakistan; Tamil Nadu and West Bengal sit below Germany, near Japan. The same country spans almost the entire global spectrum." },
+      { indicator: "people.fertility", chart: "line", title: "India as a whole slipped below replacement", size: "feature", window: "full", beat: "national", refLine: { value: 2.1, label: "replacement" },
+        why: "Before the states, the headline: the national average is now below 2.1.", read: "India's births per woman since 1960, falling from near six to about two.", watch: "The national number hides everything this article is about: it is an average of states a full generation apart." },
+      { indicator: "econ.state.income_vs_tfr", chart: "scatterXY", title: "Richer states, fewer children", size: "feature", beat: "income", unit: "births per woman", subtitle: "RBI DBIE per-capita income (2023) vs SRS fertility (2023) · by state",
+        why: "The first suspect: money. Plot each state's income against its fertility.", read: "Each dot is a state: per-capita income across the bottom, births per woman up the side.", watch: "The line slopes down: richer states have fewer children. But Kerala sits far left of its fertility, having got there poor." },
+      { indicator: "people.education_vs_tfr", chart: "scatterXY", title: "But girls' schooling explains it better", size: "feature", beat: "education", unit: "births per woman", subtitle: "NFHS-6 women with 10+ years schooling vs SRS fertility (2023) · by state",
+        why: "Swap income for female education and the dots line up tighter.", read: "Share of women with 10+ years of schooling across the bottom, fertility up the side.", watch: "Kerala, the income outlier, falls right into line on education: schooling, not income, is what the states really share." },
+      { indicator: "people.lfp_vs_tfr", chart: "scatterXY", title: "It is not women working", size: "small", beat: "lfp-paradox", unit: "births per woman", subtitle: "MOSPI PLFS female LFP (2023-24) vs SRS fertility (2023) · by state",
+        why: "The usual global explanation, jobs for women, breaks down inside India.", read: "Female labour-force participation across the bottom, fertility up the side.", watch: "No clean pattern: Haryana has the lowest female work rate yet low fertility; the link that holds across countries does not hold across these states." },
+      { indicator: "people.nfhs5.tfr_by_education", chart: "tableBars", title: "The same lever, at the household level", size: "small", beat: "gradient", unit: "births per woman", subtitle: "NFHS-5 (2019-21) · TFR by years of schooling",
+        why: "What the state scatter shows across places, this shows across women.", read: "Fertility by a woman's years of schooling.", watch: "No schooling averages 2.8 children; 12+ years, 1.8: the same gradient that separates Bihar from Kerala." },
+      { chart: "multiLine", title: "The other divide: village and city", size: "feature", beat: "rural-urban", unit: "births per woman", window: "full", refLine: { value: 2.1, label: "replacement" }, subtitle: "SRS · urban vs rural total fertility rate · 1971 to 2023",
+        series: [
+          { indicator: "people.srs.tfr_long_urban.india", label: "India, urban", color: "#2a8597", emphasis: true },
+          { indicator: "people.srs.tfr_long_rural.india", label: "India, rural", color: "#b3245a" },
+          { indicator: "people.srs.tfr_long_urban.bihar", label: "Bihar, urban", color: "#e08a2b", emphasis: true }
+        ],
+        indicator: "people.srs.tfr_long_urban.india",
+        why: "The divide is not only north-south; it is village-city, and it runs inside every state.", read: "Urban and rural fertility for India, plus urban Bihar for contrast.", watch: "India's cities are already below replacement while its villages sit at about 2.1; even Bihar's cities, at about 2.2, are far below its villages at about 2.9, though still just above the line." },
+      { indicator: "people.state_population.growth_bars", chart: "tableBars", title: "The states that cut fertility grow slowest", size: "feature", beat: "population-divergence", unit: "% growth 2011-2024", subtitle: "RBI Handbook · population growth 2011-2024 · by state",
+        why: "Here is where fertility becomes politics.", read: "Each state's population growth from 2011 to 2024.", watch: "Bihar grew more than three times faster than Tamil Nadu: the south's share of the country is shrinking, which is why delimitation, frozen on 1971 population, is so charged." },
+      { indicator: "people.ncp.tfr_projection_2035", chart: "choropleth", title: "Where each state is heading, 2031-35", size: "feature", window: "latest", beat: "future", divergeAt: 2.1, pivotLabel: "replacement",
+        why: "The government's own projection of the map a decade out.", read: "Each state shaded by its projected fertility for 2031-35.", watch: "The map narrows to a band, about 1.5 in the south to 2.4 in Bihar, the only state still above replacement, with the national rate near 1.7. The gap shrinks, but the consequences of the gap are only beginning." },
+      { indicator: "people.projections.un_tfr_median", chart: "line", title: "And the country as a whole: below replacement for good", size: "feature", window: "full", beat: "country-projection", unit: "births per woman", subtitle: "UN World Population Prospects 2024 · total fertility rate · median variant · estimates to 2023, projection to 2100",
+        refLine: { value: 2.1, label: "replacement" }, bands: [{ year: 2024, label: "projection ->" }],
+        why: "The state map projects a decade out; this is the whole country projected to 2100, from a second, independent source (the UN, not the government).", read: "India's national fertility rate, measured to 2023 and projected by the UN to 2100. It fell below the 2.1 replacement line around 2020 and the UN median has it easing to about 1.7 and staying there.", watch: "This is the median path; the UN's own 80% range for 2100 is wide, roughly 1.25 to 2.13, so the level is uncertain even if the direction is not. The line does not climb back to replacement in any decade this century." },
+      { chart: "sparkGrid", title: "Every big state's fertility fall, one panel each", size: "feature", beat: "browse-all", window: "full", unit: "births per woman", subtitle: "SRS · total fertility rate · one small chart per state · major states with long records",
+        indicator: "people.srs.tfr_long.kerala",
+        series: [
+          { indicator: "people.srs.tfr_long.kerala", label: "Kerala" },
+          { indicator: "people.srs.tfr_long.tamil_nadu", label: "Tamil Nadu" },
+          { indicator: "people.srs.tfr_long.west_bengal", label: "West Bengal" },
+          { indicator: "people.srs.tfr_long.maharashtra", label: "Maharashtra" },
+          { indicator: "people.srs.tfr_long.andhra_pradesh", label: "Andhra Pradesh" },
+          { indicator: "people.srs.tfr_long.karnataka", label: "Karnataka" },
+          { indicator: "people.srs.tfr_long.punjab", label: "Punjab" },
+          { indicator: "people.srs.tfr_long.gujarat", label: "Gujarat" },
+          { indicator: "people.srs.tfr_long.odisha", label: "Odisha" },
+          { indicator: "people.srs.tfr_long.haryana", label: "Haryana" },
+          { indicator: "people.srs.tfr_long.assam", label: "Assam" },
+          { indicator: "people.srs.tfr_long.rajasthan", label: "Rajasthan" },
+          { indicator: "people.srs.tfr_long.madhya_pradesh", label: "Madhya Pradesh" },
+          { indicator: "people.srs.tfr_long.uttar_pradesh", label: "Uttar Pradesh" },
+          { indicator: "people.srs.tfr_long.bihar", label: "Bihar" }
+        ],
+        why: "The whole country at a glance: find your state and see its own fifty-year fall.", read: "Each mini-panel is one state's fertility since the 1970s, auto-scaled to its own range so the shape of its fall is visible; the big number is its 2023 value.", watch: "Every panel points down, but read the slope, not the height: the southern states flattened out near 1.5 years ago, while the northern panels are still descending." }
+    ]
+  },
+  {
     id: "q.econ.size",
     question: "How big is India's economy?",
     priority: "core",

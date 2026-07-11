@@ -149,6 +149,9 @@ export type ScatterXYVisual = {
   yMax: number;
   refX?: { value: number; label: string };
   refY?: { value: number; label: string };
+  // Noun for the plotted entity, used in the legend ("Highlighted states" / "Other states").
+  // Defaults to "states"; a country-level scatter can set "countries" via table metadata.
+  entityNoun: string;
   points: Array<{ label: string; x: number; y: number; highlight: boolean }>;
 };
 // Two (or more) 100%-stacked share strips in one block, sharing a legend — for a
@@ -1197,7 +1200,14 @@ function scatterXYFromTable(indicator: string, title: string, subtitle: string, 
   if (points.length < 3) return null;
   const xs = points.map((p) => p.x);
   const ys = points.map((p) => p.y);
-  const niceMax = (v: number) => Math.ceil(v / 10) * 10;
+  // Round the axis top up with a step equal to the data's own order of magnitude, not
+  // always to the nearest 10. A lakh-scale max of 4.6 gives 5 (points fill the plot),
+  // while a percentage max of 68 gives 70 and 87 gives 90 (unchanged from before).
+  const niceMax = (v: number) => {
+    if (!(v > 0)) return 1;
+    const pow = Math.pow(10, Math.floor(Math.log10(v)));
+    return Math.ceil(v / pow) * pow;
+  };
   const meta = (artifact.metadata || {}) as Record<string, unknown>;
   return {
     kind: "scatterXY",
@@ -1211,6 +1221,7 @@ function scatterXYFromTable(indicator: string, title: string, subtitle: string, 
     xMax: niceMax(Math.max(...xs)),
     yMin: 0,
     yMax: Math.max(1, Math.ceil(Math.max(...ys))),
+    entityNoun: typeof meta.entityNoun === "string" ? meta.entityNoun : "states",
     ...(refX ? { refX } : {}),
     ...(refY ? { refY } : {}),
     points
