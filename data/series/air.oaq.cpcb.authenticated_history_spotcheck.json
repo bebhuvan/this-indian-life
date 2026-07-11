@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "air.oaq.cpcb.authenticated_history_spotcheck",
+  "title": "Authenticated OAQ CPCB history boundary probe",
+  "sourceId": "oaq",
+  "sourceIndicatorId": "air.oaq.cpcb.authenticated_history_spotcheck",
+  "sourceUrl": "https://oaq.notf.in",
+  "unit": "probes",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-29T11:45:00Z",
+  "rows": [
+    {
+      "label": "CPCB station IDs tested against annual paths",
+      "value": 31
+    },
+    {
+      "label": "2026 annual aggregate paths returned data",
+      "value": 31
+    },
+    {
+      "label": "Selected pre-2026 annual paths returned not found",
+      "value": 372
+    },
+    {
+      "label": "2026 monthly aggregate paths returned data",
+      "value": 90
+    },
+    {
+      "label": "Selected 2025 monthly paths returned not found",
+      "value": 45
+    },
+    {
+      "label": "Tested 2026 daily raw paths returned data",
+      "value": 16
+    },
+    {
+      "label": "Tested 2025 daily raw paths returned not found",
+      "value": 96
+    }
+  ],
+  "dimensions": [],
+  "metadata": {
+    "method": "Authenticated OAQ signed-history boundary probe using the documented Data Lake handshake. Tested 31 old/deep CPCB station IDs against annual aggregate paths for 2009, 2011, 2013, 2015, 2017, 2019 and every year from 2020 through 2026. Annual 2026 returned data from 2026-01-01 to 2026-06-23 for all 31 tested stations; every tested pre-2026 annual path returned not found. For 15 stations, monthly aggregate paths returned data for 2026-01 through 2026-06 and returned not found for tested 2025 months. For 8 stations, daily raw checks returned data for tested 2026 dates and did not find tested 2025 dates; plain numeric IDs worked, while site_ prefixed IDs did not. API token and signed URLs are not stored."
+  }
+}

@@ -179,7 +179,38 @@ function fmt(value: number, unit = "") {
   if (abs >= 1_000_000) return `${(value / 1_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} million`;
   if (abs >= 1000) return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   if (abs >= 100) return value.toFixed(0);
-  return value.toFixed(1);
+  return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
+}
+
+// Split a formatted axis label ("₹400 lakh cr") into its numeric head ("₹400") and
+// unit suffix ("lakh cr"). The suffix is read from the top tick (the only one fmt()
+// always tags with the unit) so every tick splits on the same boundary.
+function splitUnitLabel(full: string, ref: string) {
+  const m = ref.match(/^([₹$]?\s?[\d.,]+)(.*)$/);
+  const suffix = m && m[2] ? m[2].trim() : "";
+  let bare = suffix && full.endsWith(suffix) ? full.slice(0, full.length - suffix.length).trimEnd() : full;
+  // If the axis's reference (top) tick carries no currency symbol, this axis isn't money
+  // at this magnitude — so strip a stray leading ₹/$ off other ticks. Fixes the zero
+  // special-case emitting "₹0" next to bare "20.0/40.0" on small-value rupee/index axes.
+  if (!/^[₹$]/.test(ref)) bare = bare.replace(/^[₹$]/, "");
+  return { bare, suffix };
+}
+
+// The unit suffix to show ONCE as a caption above the axis (mobile), e.g. "lakh cr".
+function yUnitCaption(ticks: number[], unit = "") {
+  const ref = fmt(ticks[ticks.length - 1], unit);
+  return splitUnitLabel(ref, ref).suffix;
+}
+
+// Y-axis label. Desktop: show the unit on the top tick only, bare numbers below —
+// repeating "lakh cr" on every gridline is visual noise. Mobile (`bareAll`): every
+// tick is a bare number and the unit moves to a caption above the axis (yUnitCaption),
+// so the narrow box doesn't reserve a wide left gutter for one long top label.
+function yTickLabel(tick: number, ti: number, ticks: number[], unit = "", bareAll = false) {
+  const full = fmt(tick, unit);
+  const ref = fmt(ticks[ticks.length - 1], unit);
+  if (!bareAll && ti === ticks.length - 1) return full; // topmost tick keeps the full unit
+  return splitUnitLabel(full, ref).bare;
 }
 
 // Split a formatted axis label ("₹400 lakh cr") into its numeric head ("₹400") and

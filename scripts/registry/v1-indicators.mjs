@@ -3713,12 +3713,117 @@ export const v1Questions = [
     ]
   },
   {
+    id: "q.energy.demand_shape",
+    question: "When does India actually turn the power on?",
+    priority: "core",
+    indicators: ["energy.griddemand.duck_summer"],
+    core: ["energy.griddemand.duck_summer"],
+    // Blended: the intraday duck (demand vs solar vs net) comes from the Mendeley/Grid-India
+    // hourly demand+solar dataset (CC-BY); the multi-year peak-demand context comes from
+    // NITI ICED's loadCurve (Grid-India). Two independent cuts of Grid-India operational data
+    // — the only article in the energy cluster about the SHAPE of a day, not the annual total.
+    context: [
+      "energy.griddemand.day_shape_seasonal",
+      "energy.griddemand.annual_peak"
+    ],
+    visualPlan: [
+      { indicator: "energy.griddemand.duck_summer", chart: "loadCurve", title: "Solar peaks at noon, demand peaks after dark", size: "hero", unit: "GW", beat: "answer",
+        why: "The whole storage argument in one chart: solar slashes midday demand, but the day's peak lands in the evening, when solar has gone to zero.", read: "Electricity demand against solar generation across an average summer day; the teal line is what's left for everything else to meet (demand minus solar).", watch: "Solar's share is near zero at the 7-8pm peak, so adding more solar barely touches the moment the grid is most stretched." },
+      { indicator: "energy.griddemand.day_shape_seasonal", chart: "loadCurve", title: "How the daily peak moves with the season", size: "feature", unit: "GW", beat: "seasonality",
+        why: "The peak is not fixed to one hour: it travels across the day as the seasons turn.", read: "Average hourly demand for a typical summer, monsoon and winter day.", watch: "Winter has a sharper morning shoulder; summer and monsoon stay high into the evening." },
+      { indicator: "energy.griddemand.annual_peak", chart: "line", title: "India's peak demand keeps breaking records", size: "feature", unit: "GW", window: "full", beat: "why-it-matters",
+        why: "Why the shape matters more every year: the single hour the grid has to serve keeps climbing.", read: "The highest hour of all-India demand met, each year from 2017.", watch: "These are instantaneous peaks in gigawatts, not annual energy; one hot evening can set the record." }
+    ]
+  },
+  {
     id: "q.air.today",
     question: "How bad is India's air today?",
     priority: "core",
     indicators: ["climate.waqi.delhi", "climate.waqi.mumbai", "climate.waqi.kolkata", "climate.waqi.chennai", "climate.waqi.bengaluru"],
     core: ["climate.waqi.delhi", "climate.waqi.mumbai", "climate.waqi.kolkata", "climate.waqi.chennai", "climate.waqi.bengaluru"],
     context: []
+  },
+  {
+    id: "q.air.data_poverty",
+    slug: "how-much-air-quality-data-can-india-see",
+    question: "What India's AQI Can See, And What It Can't",
+    priority: "core",
+    indicators: [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days",
+      "air.cpcb.repository.station_years_with_pm25_300_days",
+      "air.cpcb.repository.raw_frequency_file_counts",
+      "air.cpcb.repository.city_visibility_vs_census",
+      "air.cpcb.repository.city_pm25_days",
+      "air.cpcb.repository.first_pm25_year",
+      "air.cpcb.repository.listed_years_missing_pm25",
+      "air.cpcb.repository.rows_without_pm_examples",
+      "air.oaq.cpcb.latest_station_snapshot",
+      "air.oaq.cpcb.authenticated_history_spotcheck"
+    ],
+    core: [
+      "air.cpcb.repository.listed_station_files",
+      "air.cpcb.repository.station_years_with_pm25",
+      "air.cpcb.repository.pm25_observed_days"
+    ],
+    context: [
+      "air.cpcb.repository.station_years_with_rows",
+      "air.cpcb.repository.zero_pm25_listed_files",
+      "air.cpcb.repository.pm10_observed_days",
+      "air.cpcb.repository.station_years_with_pm25_1_days",
+      "air.cpcb.repository.station_years_with_pm25_30_days",
+      "air.cpcb.repository.station_years_with_pm25_180_days",
+      "air.cpcb.repository.station_years_with_pm25_300_days",
+      "air.cpcb.repository.station_years_with_pm10_1_days",
+      "air.cpcb.repository.station_years_with_pm10_30_days",
+      "air.cpcb.repository.station_years_with_pm10_180_days",
+      "air.cpcb.repository.station_years_with_pm10_300_days",
+      "air.cpcb.repository.raw_frequency_file_counts",
+      "air.cpcb.repository.station_metadata_visibility",
+      "air.cpcb.repository.city_visibility_vs_census",
+      "air.cpcb.repository.city_pm25_days",
+      "air.cpcb.repository.first_pm25_year",
+      "air.cpcb.repository.file_vs_pm25_years",
+      "air.cpcb.repository.listed_years_missing_pm25",
+      "air.cpcb.repository.rows_without_pm_examples",
+      "air.oaq.cpcb.latest_station_snapshot",
+      "air.oaq.cpcb.authenticated_history_spotcheck"
+    ],
+    visualPlan: [
+      { series: [
+          { indicator: "air.cpcb.repository.listed_station_files", label: "Repository files listed" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25", label: "Usable PM2.5 station-years" },
+          { indicator: "air.cpcb.repository.zero_pm25_listed_files", label: "Listed files with no PM2.5" }
+        ], chart: "multiLine", title: "Listed files and usable PM2.5 history diverge", size: "hero", unit: "station-years", beat: "answer", subtitle: "CPCB daily raw repository · listed files, usable PM2.5 years and files with no PM2.5 · 2009-2025",
+        why: "The core data-poverty point: file availability, row availability and usable pollutant coverage are not the same thing.", read: "Each line counts station-year file paths or usable PM2.5 station-years in CPCB's daily repository. The red line is not operating stations.", watch: "The 2017 jump is a repository-listing spike: 504 listed daily files, but only 80 with any usable PM2.5." },
+      { indicator: "air.cpcb.repository.raw_frequency_file_counts", chart: "tableBars", title: "CPCB's raw archive extends beyond daily files", size: "feature", unit: "listed files", beat: "public-raw-surface", subtitle: "Public raw repository probe · file listings at 15-minute, hourly, 8-hour and daily frequency · 598 station records",
+        why: "CPCB's public repository exposes raw listings at 15-minute, hourly, 8-hour and daily frequencies, but file listings are not the same as audited pollutant coverage.", read: "Bars count file paths returned by CPCB's public raw-data repository endpoint for each frequency.", watch: "This chart counts listed files only; the PM2.5 completeness audit in this article uses downloaded daily files." },
+      { series: [
+          { indicator: "air.cpcb.repository.pm25_observed_days", label: "PM2.5 station-days" },
+          { indicator: "air.cpcb.repository.pm10_observed_days", label: "PM10 station-days" }
+        ], chart: "multiLine", title: "Usable PM observations become broad only after 2020", size: "feature", unit: "station-days", beat: "usable-depth", subtitle: "Downloaded CPCB daily files · non-missing PM2.5 and PM10 station-days · 2009-2025",
+        why: "Counting non-missing pollutant days shows how much usable measurement the repository actually contains.", read: "A station-day is one station with a non-missing daily pollutant value on one date.", watch: "This is coverage, not pollution level; a rising line means more usable observations." },
+      { series: [
+          { indicator: "air.cpcb.repository.station_years_with_pm25_1_days", label: "Any PM2.5 day" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_30_days", label: "30+ PM2.5 days" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_180_days", label: "180+ PM2.5 days" },
+          { indicator: "air.cpcb.repository.station_years_with_pm25_300_days", label: "300+ PM2.5 days" }
+        ], chart: "multiLine", title: "Trend-ready PM2.5 years lag basic visibility", size: "feature", unit: "station-years", beat: "trend-readiness", subtitle: "Downloaded CPCB daily files · station-years by minimum count of non-missing PM2.5 days · 2009-2025",
+        why: "Trend analysis needs more than one visible PM2.5 day, so this separates minimal visibility from fuller station-years.", read: "Each line counts station-years meeting a minimum number of non-missing daily PM2.5 values.", watch: "The 300-day line is stricter than official data availability and should be read as an audit threshold, not a CPCB quality standard." },
+      { indicator: "air.cpcb.repository.city_visibility_vs_census", chart: "tableBars", title: "The station list covers only a fraction of urban places", size: "feature", unit: "towns/city names", beat: "city-visibility", subtitle: "CPCB/OAQ city names compared with Census 2011 statutory towns",
+        why: "The strongest data-poverty statistic is the denominator: most legally urban places do not appear in the station list used for this audit.", read: "The comparison uses 4,041 Census 2011 statutory towns and 335 distinct city names in the CPCB/OAQ station hierarchy.", watch: "This is a visibility denominator, not a claim that every town needs its own monitor or that name matching is perfect." },
+      { indicator: "air.cpcb.repository.city_pm25_days", chart: "tableBars", title: "Deep PM2.5 history is concentrated in a few cities", size: "feature", unit: "PM2.5 station-days", beat: "geography", subtitle: "Downloaded CPCB daily files · non-missing PM2.5 station-days by city · 2009-2025",
+        why: "The archive is not evenly distributed. Delhi and New Delhi dominate the long PM2.5 record.", read: "Bars rank cities by total non-missing daily PM2.5 station-days in the downloaded CPCB repository files.", watch: "A city can rank high because it has many stations, long history, or both." },
+      { indicator: "air.cpcb.repository.first_pm25_year", chart: "tableBars", title: "Most station PM2.5 histories begin late", size: "feature", unit: "stations", beat: "when-usable", subtitle: "Downloaded CPCB daily files · first year with any non-missing PM2.5 value, by station",
+        why: "This shows the start date for usable station histories, rather than the first year a station appears in the repository.", read: "Each bar counts stations by their first year with any non-missing PM2.5 daily values.", watch: "A late first year does not always mean a new station; sometimes the station existed but PM2.5 was missing." },
+      { indicator: "air.cpcb.repository.listed_years_missing_pm25", chart: "tableBars", title: "Long file histories can hide short PM2.5 records", size: "feature", unit: "listed years without PM2.5", beat: "diagnostic", subtitle: "Downloaded CPCB daily files · listed file years minus years with any usable PM2.5, by station",
+        why: "This is the audit check behind the article: some stations have long file histories but much shorter usable PM2.5 histories.", read: "Each bar is the gap between years with a listed daily file and years with any non-missing PM2.5 for that station.", watch: "A large gap does not prove the station failed; it shows that the public daily files do not support a PM2.5 trend for those years." },
+      { indicator: "air.cpcb.repository.rows_without_pm_examples", chart: "tableBars", title: "Daily rows can exist while PM values are blank", size: "small", unit: "daily rows", beat: "case-study", subtitle: "Selected CPCB daily files with rows and zero usable PM2.5 or PM10 values",
+        why: "Concrete examples keep the caveat honest: some files are not empty, yet still have no PM2.5 or PM10.", read: "These selected examples span full-year and partial-year files with daily rows and zero usable PM2.5 and PM10 days.", watch: "Other pollutant columns may exist; this chart is about PM coverage only." },
+      { indicator: "air.oaq.cpcb.latest_station_snapshot", chart: "tableBars", title: "OAQ adds signed history, but not the long archive", size: "small", unit: "station records", beat: "mirror", subtitle: "OAQ CPCB latest snapshot · generated 23 Jun 2026 at 17:40 IST",
+        why: "OAQ is clean for latest access and signed recent history, but the tested OAQ history does not replace the longer CPCB repository audit.", read: "Bars compare CPCB station records in the latest OAQ snapshot with records carrying any main pollutant, all main pollutants, PM2.5, PM10 or no main pollutant at that moment.", watch: "The history finding comes from an authenticated spot-check: 2026 aggregates worked for tested stations, while 2022-2025 annual aggregate paths returned not found." }
+    ]
   },
   {
     id: "q.climate.city_heat",
@@ -7725,6 +7830,26 @@ export const eiaInternationalSeries = [
   { id: "climate.eia.co2_coal", productId: "4002", activityId: "8", eiaUnit: "MMTCD", title: "Coal and coke CO2 emissions", unit: "million metric tonnes carbon dioxide" },
   { id: "climate.eia.co2_petroleum", productId: "4006", activityId: "8", eiaUnit: "MMTCD", title: "Petroleum and other liquids CO2 emissions", unit: "million metric tonnes carbon dioxide" },
   { id: "climate.eia.co2_gas", productId: "3002", activityId: "8", eiaUnit: "MMTCD", title: "Natural gas CO2 emissions", unit: "million metric tonnes carbon dioxide" }
+];
+
+export const climateTraceSectors = [
+  { id: "climate.climatetrace.emissions_by_sector.total", sector: undefined, title: "India greenhouse gas emissions, all sectors" },
+  { id: "climate.climatetrace.emissions_by_sector.agriculture", sector: "agriculture", title: "India agriculture-sector emissions" },
+  { id: "climate.climatetrace.emissions_by_sector.waste", sector: "waste", title: "India waste-sector emissions" },
+  { id: "climate.climatetrace.emissions_by_sector.fossil_fuel_operations", sector: "fossil-fuel-operations", title: "India fossil-fuel-operations emissions" }
+];
+
+export const climateTraceAssetSectors = [
+  { id: "climate.climatetrace.assets.agriculture", sector: "agriculture", title: "India agriculture-sector emitting assets" },
+  { id: "climate.climatetrace.assets.waste", sector: "waste", title: "India waste-sector emitting assets" },
+  { id: "climate.climatetrace.assets.fossil_fuel_operations", sector: "fossil-fuel-operations", title: "India fossil-fuel-operations emitting assets" }
+];
+
+export const climateWatchMethaneSectors = [
+  { id: "climate.climatewatch.methane.total", sector: "Total excluding LULUCF", title: "India methane emissions, all sectors (Climate Watch reconstruction)" },
+  { id: "climate.climatewatch.methane.agriculture", sector: "Agriculture", title: "India agriculture-sector methane (Climate Watch reconstruction)" },
+  { id: "climate.climatewatch.methane.fugitive_emissions", sector: "Fugitive Emissions", title: "India fugitive-emissions methane (Climate Watch reconstruction)" },
+  { id: "climate.climatewatch.methane.energy", sector: "Energy", title: "India energy-sector methane (Climate Watch reconstruction)" }
 ];
 
 export const ppacDatasets = [
