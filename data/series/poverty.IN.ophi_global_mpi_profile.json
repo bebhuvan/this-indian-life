@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.ophi_global_mpi_profile",
+  "title": "Global MPI profile for India, 2019-21",
+  "sourceId": "ophi-undp",
+  "sourceIndicatorId": "OPHI Global MPI Country Briefing 2023: India, Table 1",
+  "sourceUrl": "https://ophi.org.uk/sites/default/files/2024-01/CB_IND_2023.pdf",
+  "unit": "%",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "denominator",
+    "note"
+  ],
+  "fetchedAt": "2026-06-11T14:43:08.603Z",
+  "rows": [
+    {
+      "label": "MPI poor, national",
+      "value": 16.4,
+      "denominator": "population",
+      "note": "Headcount H"
+    },
+    {
+      "label": "Vulnerable to MPI poverty",
+      "value": 18.7,
+      "denominator": "population",
+      "note": "Deprived in 20-33.33% of weighted indicators"
+    },
+    {
+      "label": "Severe MPI poverty",
+      "value": 4.2,
+      "denominator": "population",
+      "note": "Deprived in at least 50% of weighted indicators"
+    },
+    {
+      "label": "MPI poor, rural",
+      "value": 21.2,
+      "denominator": "rural population",
+      "note": "Rural headcount H"
+    },
+    {
+      "label": "MPI poor, urban",
+      "value": 5.5,
+      "denominator": "urban population",
+      "note": "Urban headcount H"
+    },
+    {
+      "label": "Intensity among MPI poor",
+      "value": 42,
+      "denominator": "MPI poor",
+      "note": "Average weighted deprivation score among poor people"
+    }
+  ],
+  "metadata": {
+    "provenance": "OPHI Global MPI Country Briefing 2023 for India, based on DHS/NFHS 2019-21.",
+    "method": "Global MPI identifies people deprived in at least one third of weighted indicators across health, education and living standards. Intensity is the average deprivation score among the MPI poor.",
+    "caveat": "This is the global MPI, not NITI's national MPI. It uses a different indicator set and should not be treated as directly interchangeable with India's national MPI."
+  }
+}

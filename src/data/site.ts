@@ -78,6 +78,36 @@ export const domains: Array<{ id: DomainId; label: string; line: string }> = [
 ];
 
 export const sources = {
+  sflc: {
+    name: "SFLC.in Internet Shutdowns Tracker",
+    owner: "Software Freedom Law Center, India",
+    homepage: "https://internetshutdowns.in/",
+    api: "https://internetshutdowns.in/"
+  },
+  dnsblocks: {
+    name: "Poisoned Wells: DNS Censorship in India",
+    owner: "dnsblocks.in",
+    homepage: "https://dnsblocks.in/",
+    api: "https://dnsblocks.in/data/compiled_blocklist.csv"
+  },
+  accessnow: {
+    name: "Access Now / #KeepItOn",
+    owner: "Access Now",
+    homepage: "https://www.accessnow.org/keepiton/",
+    api: "https://www.accessnow.org/keepiton-data-spreadsheet"
+  },
+  icrier: {
+    name: "The Anatomy of an Internet Blackout (2018)",
+    owner: "ICRIER",
+    homepage: "https://icrier.org/",
+    api: "https://icrier.org/pdf/Anatomy_of_an_Internet_Blackout.pdf"
+  },
+  meity: {
+    name: "Blocking orders under IT Act Section 69A",
+    owner: "Ministry of Electronics and IT, Government of India",
+    homepage: "https://www.meity.gov.in/",
+    api: "https://www.meity.gov.in/"
+  },
   worldbank: {
     name: "World Bank Indicators API",
     owner: "World Bank",
@@ -150,6 +180,24 @@ export const sources = {
     homepage: "https://waqi.info/",
     api: "https://aqicn.org/api/"
   },
+  cpcb: {
+    name: "CPCB Central Control Room",
+    owner: "Central Pollution Control Board",
+    homepage: "https://airquality.cpcb.gov.in/ccr/",
+    api: "https://airquality.cpcb.gov.in/ccr/#/repository/data"
+  },
+  "cpcb-census": {
+    name: "CPCB/OAQ station hierarchy + Census 2011",
+    owner: "Central Pollution Control Board / Census of India",
+    homepage: "https://airquality.cpcb.gov.in/ccr/",
+    api: "https://censusindia.gov.in/nada/index.php/catalog/42811"
+  },
+  oaq: {
+    name: "Open Air Quality Data Lake",
+    owner: "OpenAQ data mirror",
+    homepage: "https://oaq.notf.in/",
+    api: "https://oaq.notf.in/"
+  },
   "open-meteo": {
     name: "Open-Meteo Historical Weather API",
     owner: "Open-Meteo",
@@ -216,6 +264,11 @@ export const sources = {
 // of these (state/health/climate sources) aren't in the `sources` map above, which
 // only tracks ingestion endpoints. Unknown IDs fall back to a tidy title-case.
 const SOURCE_LABELS: Record<string, string> = {
+  sflc: "SFLC.in",
+  dnsblocks: "dnsblocks.in",
+  accessnow: "Access Now",
+  icrier: "ICRIER",
+  meity: "MeitY",
   worldbank: "World Bank",
   "world-context": "World Bank (context)",
   indiadatahub: "IndiaDataHub",
@@ -240,6 +293,9 @@ const SOURCE_LABELS: Record<string, string> = {
   tradestat: "DGCI&S",
   trai: "TRAI",
   waqi: "WAQI",
+  cpcb: "CPCB",
+  "cpcb-census": "CPCB/OAQ + Census",
+  oaq: "OAQ",
   "open-meteo": "Open-Meteo",
   era5: "ERA5 · Copernicus",
   cckp: "World Bank CCKP",
@@ -257,6 +313,7 @@ const SOURCE_LABELS: Record<string, string> = {
   gbd: "IHME · GBD",
   nhp: "CBHI · NHP 2023",
   srs: "SRS",
+  dataforindia: "Data For India",
   srscod: "SRS (cause of death)",
   mccd: "MCCD",
   ncrb: "NCRB · ADSI",

@@ -21,6 +21,7 @@ const { active, locale = "en" } = Astro.props;
         {domain.label}
       </a>
     ))}
+    <a data-d="reference" class={active === "academy" ? "on" : ""} href={`/academy/`}>Academy</a>
     <a data-d="reference" href={`/articles/`}>Articles</a>
     <a data-d="reference" href={`/about/`}>About</a>
   </div>

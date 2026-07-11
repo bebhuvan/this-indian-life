@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.hces_cutoff_simulation",
+  "title": "HCES poverty-rate simulation by monthly MPCE cutoff, 2023-24",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "HCES 2023-24 unit-level microdata: MPCE cutoff simulation",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/237",
+  "unit": "% of people below cutoff",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-07T14:04:59.996344+00:00",
+  "rows": [
+    {
+      "label": "Rs 1,500/month",
+      "cutoffRsPerPersonMonth": 1500,
+      "value": 0.8
+    },
+    {
+      "label": "Rs 2,000/month",
+      "cutoffRsPerPersonMonth": 2000,
+      "value": 4.0
+    },
+    {
+      "label": "Rs 2,500/month",
+      "cutoffRsPerPersonMonth": 2500,
+      "value": 11.6
+    },
+    {
+      "label": "Rs 3,000/month",
+      "cutoffRsPerPersonMonth": 3000,
+      "value": 22.7
+    },
+    {
+      "label": "Rs 3,500/month",
+      "cutoffRsPerPersonMonth": 3500,
+      "value": 34.9
+    },
+    {
+      "label": "Rs 4,000/month",
+      "cutoffRsPerPersonMonth": 4000,
+      "value": 46.2
+    },
+    {
+      "label": "Rs 4,500/month",
+      "cutoffRsPerPersonMonth": 4500,
+      "value": 55.9
+    },
+    {
+      "label": "Rs 5,000/month",
+      "cutoffRsPerPersonMonth": 5000,
+      "value": 63.9
+    },
+    {
+      "label": "Rs 6,000/month",
+      "cutoffRsPerPersonMonth": 6000,
+      "value": 75.9
+    },
+    {
+      "label": "Rs 7,000/month",
+      "cutoffRsPerPersonMonth": 7000,
+      "value": 83.8
+    },
+    {
+      "label": "Rs 8,000/month",
+      "cutoffRsPerPersonMonth": 8000,
+      "value": 88.9
+    }
+  ],
+  "dimensions": [
+    "label",
+    "cutoffRsPerPersonMonth",
+    "value"
+  ],
+  "metadata": {
+    "provenance": "Computed from HCES 2023-24 unit-level microdata, calibrated to published national rural and urban average MPCE.",
+    "method": "For each cutoff, compute the population-weighted share of people living in households with reconstructed MPCE below the monthly rupee cutoff. This is a sensitivity simulation, not an official poverty estimate.",
+    "caveat": "Cutoffs are nominal 2023-24 rupees per person per month. Results depend on MPCE reconstruction, reference-period scaling and calibration."
+  }
+}

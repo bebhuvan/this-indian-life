@@ -144,6 +144,73 @@ export async function fetchNas({
   });
 }
 
+// TUS — Time Use Survey. indicator_code is a long descriptive string, not a number.
+// Fetches paginated results; returns { data: [...rows], meta_data: {...} }.
+// Each row has: year, state, indicator, sector, gender, age_group, icatus_activity,
+// day_of_week, value, unit (and optionally other dimension columns).
+export async function fetchTus({
+  indicatorCode,
+  stateCode = "99",
+  limit = 100000,
+  page = 1
+} = {}) {
+  const url = buildUrl(baseUrl, "/api/tus/getTusRecords", {
+    indicator_code: indicatorCode,
+    state_code: stateCode,
+    Format: "JSON",
+    limit,
+    page
+  });
+  return fetchJson(url, {
+    headers: { "user-agent": "Mozilla/5.0" },
+    timeoutMs: Number(process.env.MOSPI_TIMEOUT_MS || 120000),
+    retries: 3,
+    dispatcher: mospiDispatcher
+  });
+}
+
+// GENDER — Gender Statistics. indicator_code is a numeric code (1-147).
+export async function fetchGender({
+  indicatorCode,
+  limit = 100000,
+  page = 1
+} = {}) {
+  const url = buildUrl(baseUrl, "/api/gender/getGenderRecords", {
+    indicator_code: indicatorCode,
+    Format: "JSON",
+    limit,
+    page
+  });
+  return fetchJson(url, {
+    headers: { "user-agent": "Mozilla/5.0" },
+    timeoutMs: Number(process.env.MOSPI_TIMEOUT_MS || 120000),
+    retries: 3,
+    dispatcher: mospiDispatcher
+  });
+}
+
+// AISHE — All India Survey on Higher Education. Returns { data: [...], ... }.
+export async function fetchAishe({
+  indicatorCode,
+  stateCode = 37,
+  limit = 100000,
+  page = 1
+} = {}) {
+  const url = buildUrl(baseUrl, "/api/aishe/getAisheRecords", {
+    indicator_code: indicatorCode,
+    state_code: stateCode,
+    Format: "JSON",
+    limit,
+    page
+  });
+  return fetchJson(url, {
+    headers: { "user-agent": "Mozilla/5.0" },
+    timeoutMs: Number(process.env.MOSPI_TIMEOUT_MS || 120000),
+    retries: 3,
+    dispatcher: mospiDispatcher
+  });
+}
+
 // Normalise raw CPI rows to {date:"YYYY-MM", index:number|null, inflation:number|null}
 // keyed by (group, subgroup, sector). Returns a Map of key -> { meta, points[] }.
 export function groupCpiRows(rows) {

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.hces_cutoff_social_4000",
+  "title": "HCES simulated poverty below Rs 4,000/month by social group, 2023-24",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "HCES 2023-24 unit-level microdata: MPCE cutoff simulation",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/237",
+  "unit": "% of people below cutoff",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-06-07T14:05:00.331107+00:00",
+  "rows": [
+    {
+      "label": "Scheduled Tribe",
+      "cutoffRsPerPersonMonth": 4000,
+      "value": 70.9
+    },
+    {
+      "label": "Scheduled Caste",
+      "cutoffRsPerPersonMonth": 4000,
+      "value": 54.9
+    },
+    {
+      "label": "OBC",
+      "cutoffRsPerPersonMonth": 4000,
+      "value": 45.4
+    },
+    {
+      "label": "Others",
+      "cutoffRsPerPersonMonth": 4000,
+      "value": 31.8
+    }
+  ],
+  "dimensions": [
+    "label",
+    "cutoffRsPerPersonMonth",
+    "value"
+  ],
+  "metadata": {
+    "provenance": "Computed from HCES 2023-24 unit-level microdata, calibrated to published national rural and urban average MPCE.",
+    "method": "For each cutoff, compute the population-weighted share of people living in households with reconstructed MPCE below the monthly rupee cutoff. This is a sensitivity simulation, not an official poverty estimate.",
+    "caveat": "Cutoffs are nominal 2023-24 rupees per person per month. Results depend on MPCE reconstruction, reference-period scaling and calibration."
+  }
+}

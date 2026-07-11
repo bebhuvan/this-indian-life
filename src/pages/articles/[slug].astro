@@ -85,7 +85,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
 ---
 
 <Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
-  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}${page.slug === "how-is-climate-change-changing-india" ? " theme-climate-canonical" : ""}${page.slug === "why-the-rupee-falls" ? " theme-rupee" : ""}`}>
+  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}${page.slug === "how-is-climate-change-changing-india" ? " theme-climate-canonical" : ""}${page.slug === "why-the-rupee-falls" ? " theme-rupee" : ""}${page.slug === "when-does-india-actually-turn-the-power-on" ? " theme-grid" : ""}`}>
     <Nav active={page.domain} locale={locale} />
 
     <header class="article-head">
@@ -336,6 +336,18 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
                 />
               ) : null}
             </div>
+            {explanation.editorialPlan?.glossaryBlocks?.length ? (
+              <section class="concept-blocks">
+                <p class="lbl">Plain English concepts</p>
+                {explanation.editorialPlan.glossaryBlocks.map((item) => (
+                  <div class="concept-item">
+                    <h3 class="serif">{item.term}</h3>
+                    <p>{item.plainMeaning}</p>
+                    <p class="concept-why">{item.whyItMattersHere}</p>
+                  </div>
+                ))}
+              </section>
+            ) : null}
           </article>
         </section>
 

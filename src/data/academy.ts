@@ -9,12 +9,16 @@ import { resolve } from "node:path";
 export type AcademyKeyTerm = { term: string; plainMeaning: string };
 export type AcademyPullQuote = { quote: string; afterHeading?: string };
 export type AcademyVisualSegment = { label: string; value: number };
+export type AcademyVisualLineSeries = { label: string; seriesId: string; color?: string };
 export type AcademyVisual = {
-  type: string;
+  type: string;                 // "stacked-bar" | "line" | "area"
   title?: string;
   subtitle?: string;
   afterHeading?: string;
-  segments?: AcademyVisualSegment[];
+  segments?: AcademyVisualSegment[];        // stacked-bar
+  series?: AcademyVisualLineSeries[];        // line/area (each references a data/series id)
+  yUnit?: string;
+  zeroLine?: boolean;
   source?: string;
 };
 export type AcademyLink = { match: string[]; url: string };

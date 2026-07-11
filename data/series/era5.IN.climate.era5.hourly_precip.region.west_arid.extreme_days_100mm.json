@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "climate.era5.hourly_precip.region.west_arid.extreme_days_100mm",
+  "title": "West and arid India extreme-rain days with precipitation at or above 100 mm (ERA5 hourly-derived)",
+  "sourceId": "era5",
+  "sourceIndicatorId": "ERA5 hourly total_precipitation, extreme_days_100mm",
+  "sourceUrl": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+  "unit": "days per year",
+  "frequency": "annual",
+  "geography": {
+    "type": "region",
+    "id": "IND-west_arid",
+    "name": "West and arid India"
+  },
+  "dimensions": [
+    "date",
+    "value"
+  ],
+  "fetchedAt": "2026-06-13T17:42:56.627958+00:00",
+  "observations": [
+    {
+      "date": "1980",
+      "value": 0.2
+    },
+    {
+      "date": "1981",
+      "value": 0.2
+    },
+    {
+      "date": "1982",
+      "value": 0.3
+    },
+    {
+      "date": "1983",
+      "value": 0.3
+    },
+    {
+      "date": "1984",
+      "value": 0.3
+    },
+    {
+      "date": "1985",
+      "value": 0.1
+    },
+    {
+      "date": "1986",
+      "value": 0.1
+    },
+    {
+      "date": "1987",
+      "value": 0.0
+    },
+    {
+      "date": "1988",
+      "value": 0.5
+    },
+    {
+      "date": "1989",
+      "value": 0.1
+    },
+    {
+      "date": "1990",
+      "value": 0.5
+    },
+    {
+      "date": "1991",
+      "value": 0.2
+    },
+    {
+      "date": "1992",
+      "value": 0.3
+    },
+    {
+      "date": "1993",
+      "value": 0.3
+    },
+    {
+      "date": "1994",
+      "value": 0.4
+    },
+    {
+      "date": "1995",
+      "value": 0.1
+    },
+    {
+      "date": "1996",
+      "value": 0.3
+    },
+    {
+      "date": "1997",
+      "value": 0.3
+    },
+    {
+      "date": "1998",
+      "value": 0.2
+    },
+    {
+      "date": "1999",
+      "value": 0.2
+    },
+    {
+      "date": "2000",
+      "value": 0.2
+    },
+    {
+      "date": "2001",
+      "value": 0.3
+    },
+    {
+      "date": "2002",
+      "value": 0.2
+    },
+    {
+      "date": "2003",
+      "value": 0.2
+    },
+    {
+      "date": "2004",
+      "value": 0.4
+    },
+    {
+      "date": "2005",
+      "value": 0.3
+    },
+    {
+      "date": "2006",
+      "value": 0.5
+    },
+    {
+      "date": "2007",
+      "value": 0.6
+    },
+    {
+      "date": "2008",
+      "value": 0.4
+    },
+    {
+      "date": "2009",
+      "value": 0.4
+    },
+    {
+      "date": "2010",
+      "value": 0.4
+    },
+    {
+      "date": "2011",
+      "value": 0.4
+    },
+    {
+      "date": "2012",
+      "value": 0.2
+    },
+    {
+      "date": "2013",
+      "value": 0.4
+    },
+    {
+      "date": "2014",
+      "value": 0.2
+    },
+    {
+      "date": "2015",
+      "value": 0.5
+    },
+    {
+      "date": "2016",
+      "value": 0.2
+    },
+    {
+      "date": "2017",
+      "value": 0.6
+    },
+    {
+      "date": "2018",
+      "value": 0.1
+    },
+    {
+      "date": "2019",
+      "value": 0.4
+    },
+    {
+      "date": "2020",
+      "value": 0.4
+    },
+    {
+      "date": "2021",
+      "value": 0.3
+    },
+    {
+      "date": "2022",
+      "value": 0.2
+    },
+    {
+      "date": "2023",
+      "value": 0.5
+    },
+    {
+      "date": "2024",
+      "value": 0.6
+    },
+    {
+      "date": "2025",
+      "value": 0.4
+    }
+  ],
+  "metadata": {
+    "bbox_NWSE": [
+      37,
+      68,
+      6,
+      98
+    ],
+    "states": [
+      "Rajasthan",
+      "Gujarat",
+      "Dadra and Nagar Haveli and Daman and Diu"
+    ],
+    "method": "Hourly ERA5 total precipitation summed to daily totals, then cosine-latitude-weighted across dissolved Indian state/UT polygons.",
+    "threshold_mm": 100.0,
+    "note": "Precipitation is a gridded reanalysis estimate, not a rain-gauge station series. Use IMD rainfall alongside it where station-observed rainfall is needed."
+  }
+}

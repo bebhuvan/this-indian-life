@@ -1,0 +1,97 @@
+# Why your inflation isn't the official number
+*The 1.3% inflation you hear about is an average of a basket that isn’t yours. Here’s why your real number might be higher.*
+
+**Bottom line.** Your personal inflation differs because the CPI is a weighted average of a fixed basket meant for an ‘average’ Indian, and no one is average.
+
+## Why does the official number feel wrong?
+
+In December 2025, headline inflation was **1.3%**, but your wallet probably told a different story. That’s because the Consumer Price Index (CPI) doesn’t track your household. It follows a fixed set of **358** goods and services, from rice to rent, from cinema tickets to chemotherapy, with weights that mirror the spending of an average Indian. If your spending doesn’t match those weights, your personal inflation will differ.
+
+That same month, while food prices overall dropped **-1.9%** (vegetable prices crashed **-18.5%** and onion prices fell **-48.1%**), other items surged. Gold shot up **68.7%**. Your doctor’s fee, captured by an index that rose from **117** to **223.6** since 2014, still climbed. If your spending tilts toward these non-food items, you feel pressure even when the headline is low. The average hides the extremes.
+
+## Whose basket is it, anyway?
+
+The CPI basket is no one’s actual shopping list. It’s built from the Household Consumption Expenditure Survey (HCES) of 2023-24, which asks thousands of families what they buy. MoSPI, the statistics office, then averages the responses to create a “representative” household. On **12 February 2026**, India launched a new CPI series with **2024** as the base year, using **358 items**, expanding coverage to include e-commerce prices, OTT subscriptions and telecom data plans.
+
+The biggest shift from the old 2012 basket: food’s weight fell from **45.86%** to **36.75%**, a textbook case of Engel’s law. As people get richer, they spend a smaller share on food. Housing, water, electricity and fuels now account for **17.66%**, transport and communication **12.41%**, and health **6.1%**. But these are still averages. A family paying ₹35,000 monthly rent in Mumbai might spend 40% of its budget on housing, not 17.66%. A daily-wager in Bihar spending 60% on food is equally unrepresentative. The basket is a compromise. The moment you deviate from it, your inflation diverges.
+
+| Category | 2012 basket weight | 2024 basket weight |
+| --- | --- | --- |
+| Food and beverages | 45.86% | 36.75% |
+| Housing (2012) / Housing, water, electricity, fuels (2024) | 10.07% | 17.66% |
+| Transport and communication | – (in misc.) | 12.41% |
+| Health | – (in misc.) | 6.1% |
+
+## Rural and urban: why two different inflations?
+
+India publishes separate CPI for rural and urban areas because their spending baskets differ. In December 2025, rural inflation was **0.8%** while urban inflation was **2%**, a gap of 1.2 percentage points. Rural households devote a larger share to food, so they benefited more from food deflation (rural food inflation was **-2.3%** versus urban **-1.1%**). Urban households spend more on services, education and transport, which have been rising. For instance, the health index stood at **204.8**, and education at **196.1**, both pushing urban inflation above rural.
+
+Even within food, the composition differs: rural families eat more cereals and pulses, while urban diets include more processed foods and restaurant meals. The basket weights reflect these differences. So when the news says “inflation fell,” it might have fallen harder for the villager than for the city dweller, or the other way around.
+
+## Why can Kerala have 9.5% inflation while Telangana sits at 1.8%?
+
+In December 2025, Kerala’s retail inflation hit **9.5%** while neighbouring Telangana managed just **1.8%**, a spread wider than the all-India headline itself (1.3%). States diverge because their consumption baskets and local conditions differ. Kerala has a long history of higher inflation, partly because of high demand for services, heavy gold consumption (gold inflation was **68.7%**), and remittance-driven spending from the Gulf. Telangana’s inflation is tempered by lower food price pressures and a different mix of spending.
+
+State-level CPI data shows that “India’s inflation” is a statistical abstraction. When you live in Thiruvananthapuram, paying for a doctor’s visit and watching gold prices soar, your inflation is closer to 9%. In Hyderabad, with its own food supply chains and lower service costs, it’s closer to 1.8%. The national number smooths these regional realities.
+
+## Why do the poor and the rich feel different inflations?
+
+This is Engel’s law in action. The poor allocate a much larger share of their budget to food. When food prices rise, their true inflation is higher than the headline; when they fall, they get more relief than the average. In December 2025, with food deflation at **-1.9%**, a poor household might have seen their expenditure actually shrink, even as the rich faced rising tuition fees (**3.4%**), doctor’s fees (index up to **223.6**), and petrol costs.
+
+For the better-off, services dominate. The “miscellaneous” category, which includes health, education, transport and recreation, contributed **1.75** percentage points to the headline inflation of 1.3%, more than offsetting food’s negative contribution of **-0.85** points. Meanwhile, core inflation, which strips out volatile food and fuel, was **4.6%** in December 2025, far above the headline. That core figure better captures the steady price rises that salaried urban families face. So while the average Indian saw near-flat prices, the professional in a metro felt the persistent creep of fees, fuel and rent.
+
+## Why your personal inflation can run much higher than 1.3%
+
+The headline is built on spending shares that may not match yours. If you’re sending two children to private school, tuition fees are probably a large chunk of your budget, and the tuition index hit **204.7**, up from **111.9** in 2014. If you have a chronic condition, doctor’s fees and medicine (index **203**) push your costs up. If you commute by car, petrol and diesel indices are at **140.2** and **189.1**. And if you rent, housing inflation was **2.9%** nationally, but in cities it can be much higher.
+
+Now imagine a household that spends 30% on rent, 20% on education, 15% on health and only 20% on food, with the rest scattered across transport and other items. Using December 2025 component inflation rates: housing **2.9%**, education **3.4%**, health **3.4%**, transport and communication **0.8%**, and food **-1.9%**. A rough weighted average gives about 2.3%, already higher than 1.3%. Tweak the composition further towards education or health, and personal inflation easily exceeds 4%. The CPI basket weights these categories at 17.66%, 3.33%, 6.1%, 12.41% and 36.75%, a very different distribution. Your inflation is the weighted average of your actual spending, not the nation’s.
+
+## So is the official number wrong?
+
+It is not wrong; it is a faithful average. The CPI methodology is sound: price collectors visit shops, hospitals, schools across India every month, tracking the same **358** items. The problem is that an average hides the spread. When onion prices crash and gold soars, the average looks moderate because the two cancel out. But no single household buys exactly the average basket.
+
+A fixed basket also lags reality. When tomato prices double, people switch to cheaper vegetables, but the basket still tracks tomato at the old weight. The 2024 update improved timeliness by adding online prices, but it still assumes a fixed spending pattern between revisions. So the official number is essential for interest-rate decisions, but as a personal gauge, it is nearly always off.
+
+## How to read inflation as if it’s about you
+
+1. Identify your three biggest spending categories. For most Indians, that’s food, transport and housing.
+2. Track the component indices MoSPI releases monthly, like “CPI, Vegetables,” “CPI, Petrol,” or “CPI, Health.” They’re available on the ministry’s website.
+3. Weight them by your actual spending shares, not the national weights. If you spend 40% on rent, 20% on food and 10% on petrol, use those.
+4. If you are poorer, watch food and fuel; if you are urban and better-off, watch health, education and transport.
+
+The official number tells you what’s happening to the country’s price level. To know what’s happening to yours, build your own index, with your own weights and your own items. That is the difference between a statistic and your monthly budget.
+
+### Key terms
+- **CPI (Consumer Price Index)** — A basket of everyday items and services whose price changes are tracked to measure inflation. It’s an average of what a ‘representative’ household spends, not your personal bill.
+- **Inflation** — The rate at which the general price level rises, so your rupee buys less. It’s not a one-time spike in a single item like onion, but a sustained, broad increase.
+- **Basket (CPI basket)** — The fixed set of goods and services, each with a weight, that statisticians use to calculate the average price change. It’s a statistical construct, not anyone’s actual shopping list.
+
+### Accha, but what's my number then?
+When the news says ‘inflation is 5%’, but your monthly kharcha is screaming something else, don’t assume they’re cooking up numbers. The official CPI is an average of a basket that mixes atta, Netflix and rent, weighted for an average Indian who doesn’t exist. Your basket is different. If you’re a student surviving on Maggi and chai, your inflation is mostly food inflation. If you’re a family with EMIs, school fees and a car, your personal inflation is almost certainly higher. So next time, look at the item-level numbers MoSPI puts out, onion, petrol, tuition, and do the math yourself. The headline is for the RBI. Your wallet needs its own index.
+
+### What people get wrong
+That the official CPI is deliberately understated or that it should match their personal experience. It’s a statistical average, not a lie; the mismatch is because your consumption differs from the average.
+
+### Caveat
+CPI measures the average price change of a fixed basket of goods and services; it does not capture changes in quality, new products immediately, or your individual spending pattern. It is a macro indicator, not a personal inflation tracker.
+
+---
+**Connects:** inside-the-basket, food-inflation, what-is-inflation, cpi-vs-wpi, core-vs-headline
+**Sources:** MoSPI (Ministry of Statistics and Programme Implementation); World Bank; Indiadatahub; RBI Database on Indian Economy
+**Locked numbers used:** CPI inflation, General (Combined), latest; CPI inflation, General (Rural), latest; CPI inflation, General (Urban), latest; CPI inflation, Food and Beverages (Combined), latest; CPI inflation, Food and Beverages (Rural), latest; CPI inflation, Food and Beverages (Urban), latest; CPI inflation, Miscellaneous: Health (Combined), latest; CPI inflation, Miscellaneous: Education (Combined), latest; Price inflation, Gold, latest; CPI 2024 weight, Food and beverages; CPI 2024 weight, Housing, water, electricity and fuels; CPI 2024 weight, Transport and communication; CPI 2024 weight, Health; CPI 2024 headline inflation, January 2026; CPI 2024 number of items in basket; CPI 2024 weight, Food and beverages, OLD 2012 basket (for comparison); CPI 2012 weight (precise), Housing; CPI inflation, General, Kerala, latest; CPI inflation, General, Telangana, latest; CPI core inflation (excluding food and fuel), latest; Price inflation, Onion, latest; Price inflation, Tomato, latest; Price inflation, Potato, latest; Price index, Tuition fees, latest; Price index, Doctor's fee, latest; Price index, Medicine, latest; Price index, Petrol, latest; Price index, Diesel, latest; Price index, Gold, latest; Price index, Tuition fees, earliest; Price index, Doctor's fee, earliest; Price index, Medicine, earliest; Contribution to CPI inflation, Food & beverages, latest; Contribution to CPI inflation, Miscellaneous, latest; CPI inflation, Food and Beverages: Vegetables (Combined), latest; CPI inflation, Miscellaneous: Transport and Communication (Combined), latest; CPI inflation, Housing (Combined), latest
+**Context cards used:** Engel's law: poorer households spend a larger share of their income on food. (inequality / development economics); On 12 February 2026 India launched a new Consumer Price Index series with base year 2024 (replacing 2012)... (statistics / method (current)); Inflation is far from uniform across India. State-level CPI data shows wide gaps... (statistics / regional economics)
+**Status:** ready
+
+### Self-critique
+- **Wrong:** No factual errors; the 'halved' phrase for onion price decline is slightly imprecise (48.1% drop, not exactly half), and the linter flagged two em-dashes and 'Moreover'. I will fix those.
+- **Missing:** Could include core inflation (4.6%) to show underlying inflation is higher, which helps explain why urban/professional inflation feels higher. Also, a concrete personal-inflation calculation example would make the abstraction tangible.
+- **To add:** Add the core inflation number (4.6%) in the discussion of why the poor/rich feel different inflations or when addressing whether the official number is wrong. Add a short bullet list or table showing how different weightings produce different personal inflation rates, using component inflation rates from locked numbers.
+- **Relevance:** Replace the vague 'your personal inflation can run much higher' with a step‑by‑step example: for a household spending X% on rent (using housing inflation 2.9%), Y% on health (3.4%), etc., compute a weighted average and compare to 1.3%. Use only locked numbers for the component inflations. This grounds it.
+- **AI smell:** Remove 'Moreover', replace em‑dashes with commas/parentheses. Break uniform sentence lengths; vary rhythm. Ensure no other tells like 'crucial', 'vital', etc. The draft does not have those, but check for any 'it's important to note' etc. It's clean.
+- **Better how:** The opening could be sharper: start with a specific, relatable item like the doctor's fee or tuition fee, showing the increase vs. headline. The close could be more memorable: maybe end with 'The headline is for the RBI; your wallet needs its own index.' I'll refine the opening to mention a specific price change and contrast with headline.
+
+### Linter (final)
+_clean_
+
+### Derived-number claims to verify (human)
+_none detected_

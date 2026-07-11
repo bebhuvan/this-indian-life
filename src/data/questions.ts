@@ -334,6 +334,12 @@ export function pullQuoteForQuestion(page: QuestionPage) {
       line: "India mines almost no gold, yet households hoard more of it than almost any nation on earth."
     };
   }
+  if (page.id === "q.econ.asia_divergence") {
+    return {
+      stat: "5×",
+      line: "Around 1950, India was no poorer than China or South Korea. Today a South Korean earns about five times as much."
+    };
+  }
   if (page.id.startsWith("q.econ.")) {
     return {
       stat: top ? formatLockedNumber(top) : "The average",

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "water.cgwb.contamination_districts",
+  "title": "Districts with groundwater contamination (2023)",
+  "sourceId": "cgwb-quality",
+  "sourceIndicatorId": "cgwb.quality.districts",
+  "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2109942",
+  "unit": "number of districts (parts of) affected",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "contaminant"
+  ],
+  "fetchedAt": "2026-06-07T06:20:43.887Z",
+  "rows": [
+    {
+      "contaminant": "Nitrate (>45 mg/L)",
+      "value": 443,
+      "statesUTs": 23
+    },
+    {
+      "contaminant": "Fluoride (>1.5 mg/L)",
+      "value": 263,
+      "statesUTs": 20
+    },
+    {
+      "contaminant": "Uranium (>30 ppb)",
+      "value": 132,
+      "statesUTs": 13
+    },
+    {
+      "contaminant": "Arsenic (>10 ppb)",
+      "value": 118,
+      "statesUTs": 20
+    }
+  ],
+  "metadata": {
+    "collection": "CGWB Annual Ground Water Quality Report 2024 (Year-2023 data); also data.gov.in",
+    "note": "'Parts of' districts — contamination is localised within a district, not district-wide."
+  }
+}

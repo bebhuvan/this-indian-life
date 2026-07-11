@@ -26,6 +26,28 @@ export function visualPayload(visual: VisualSpec) {
       )
     };
   }
+  if (visual.kind === "startingGrid") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.panels.flatMap((panel) =>
+        panel.lines.flatMap((line) =>
+          line.points.map((point) => ({ measure: panel.label, unit: panel.unit, series: line.label, date: point.date, value: point.value }))
+        )
+      )
+    };
+  }
+  if (visual.kind === "loadCurve") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.series.flatMap((s) =>
+        s.values.map((value, hour) => ({ series: s.label, hour, value }))
+      )
+    };
+  }
   if (visual.kind === "stack") {
     return {
       title: visual.title,
@@ -101,6 +123,18 @@ export function visualPayload(visual: VisualSpec) {
         y: point.y,
         size: point.size,
         ...(point.meta || {})
+      }))
+    };
+  }
+  if (visual.kind === "scatterXY") {
+    return {
+      title: visual.title,
+      unit: visual.unit,
+      source,
+      rows: visual.points.map((point) => ({
+        label: point.label,
+        x: point.x,
+        y: point.y
       }))
     };
   }

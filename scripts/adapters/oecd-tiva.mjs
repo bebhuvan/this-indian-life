@@ -11,8 +11,10 @@ loadEnv();
 const baseUrl = process.env.OECD_TIVA_BASE_URL || "https://sdmx.oecd.org/sti-public/rest/data";
 const dataflow = "OECD.STI.PIE,DSD_TIVA_MAINSH@DF_MAINSH,1.1";
 
-export async function fetchTivaIndia(measures = ["EXGR_DVA", "EXGR_FVA", "EXGR_INT_DVA"]) {
-  const key = `${measures.join("+")}.IND._T.W.PT_EXGR.A`;
+// KEY order: MEASURE.REF_AREA.ACTIVITY.COUNTERPART_AREA.UNIT_MEASURE.FREQ
+// REF_AREA is the reporter country (SDMX uses ISO3 alpha-3, e.g. IND, CHN, KOR, VNM, IDN, JPN).
+export async function fetchTiva(refArea = "IND", measures = ["EXGR_DVA", "EXGR_FVA", "EXGR_INT_DVA"]) {
+  const key = `${measures.join("+")}.${refArea}._T.W.PT_EXGR.A`;
   const url = `${baseUrl}/${dataflow}/${key}?startPeriod=1995&format=csvfile`;
   const text = await fetchText(url, {
     timeoutMs: Number(process.env.OECD_FETCH_TIMEOUT_MS || 90000),
@@ -22,4 +24,8 @@ export async function fetchTivaIndia(measures = ["EXGR_DVA", "EXGR_FVA", "EXGR_I
     headers: { accept: "text/csv", "accept-language": "en" }
   });
   return { rows: parseCsv(text), url };
+}
+
+export async function fetchTivaIndia(measures = ["EXGR_DVA", "EXGR_FVA", "EXGR_INT_DVA"]) {
+  return fetchTiva("IND", measures);
 }

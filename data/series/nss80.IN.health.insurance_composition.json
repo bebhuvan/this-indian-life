@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "health.nss80.insurance_composition",
+  "title": "Health financing coverage by scheme",
+  "sourceId": "nss80-health",
+  "sourceIndicatorId": "NSS 80th round Sch 25.0 unit data",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/DDI-IND-NSO-HSCHealth80R-Jan2025-Dec2025",
+  "unit": "% of persons",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "scheme"
+  ],
+  "fetchedAt": "2026-06-10T13:50:20.048883+00:00",
+  "rows": [
+    {
+      "scheme": "AB-PMJAY",
+      "share_pct": 23.99
+    },
+    {
+      "scheme": "State health insurance scheme",
+      "share_pct": 17.06
+    },
+    {
+      "scheme": "ESIS/ESIC",
+      "share_pct": 0.62
+    },
+    {
+      "scheme": "CGHS/central govt schemes",
+      "share_pct": 0.71
+    },
+    {
+      "scheme": "State govt employee reimbursement",
+      "share_pct": 0.78
+    },
+    {
+      "scheme": "PSU employer",
+      "share_pct": 0.18
+    },
+    {
+      "scheme": "Other employer insurance",
+      "share_pct": 0.91
+    },
+    {
+      "scheme": "Private commercial insurance",
+      "share_pct": 2.14
+    },
+    {
+      "scheme": "Not covered",
+      "share_pct": 53.56
+    },
+    {
+      "scheme": "Any coverage (Rural)",
+      "share_pct": 47.38
+    },
+    {
+      "scheme": "Any coverage (Urban)",
+      "share_pct": 44.31
+    }
+  ],
+  "metadata": {
+    "source": "NSS 80th round, Household Social Consumption: Health (Jan-Dec 2025), unit-level data, MoSPI",
+    "method": "Indica tabulation of public microdata; weights = mult/100. Block 3 col 17; persons can report one (major) scheme."
+  }
+}

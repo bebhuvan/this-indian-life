@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "ipp.policy_drivers_india",
+  "title": "India: sector characteristics predicting more protective IP, 2022-25",
+  "sourceId": "worldbank",
+  "sourceIndicatorId": "SAEU April 2026",
+  "sourceUrl": "https://www.worldbank.org/en/region/sar/publication/south-asia-economic-update",
+  "unit": "regression coefficient",
+  "geography": {
+    "type": "multi-country",
+    "id": "SAR",
+    "name": "South Asia"
+  },
+  "dimensions": [
+    "factor",
+    "coefficient",
+    "ci",
+    "note"
+  ],
+  "fetchedAt": "2026-06-09T10:54:59.000Z",
+  "rows": [
+    {
+      "factor": "Import share (+1 pp)",
+      "coefficient": 0.47,
+      "ci": 0.14,
+      "note": "Higher import penetration strongly predicts more protection"
+    },
+    {
+      "factor": "Export share (+1 pp)",
+      "coefficient": 0.39,
+      "ci": 0.13,
+      "note": "Export-oriented sectors also get more IP (dual-purpose)"
+    },
+    {
+      "factor": "Hourly wage (+10%) \u2014 mfg",
+      "coefficient": 0.24,
+      "ci": 0.15,
+      "note": "In manufacturing, higher-wage sectors get more protection"
+    },
+    {
+      "factor": "Firm employment (+10%)",
+      "coefficient": 0.21,
+      "ci": 0.12,
+      "note": "Sectors with larger firms get more protection"
+    },
+    {
+      "factor": "Firm productivity (+10%)",
+      "coefficient": 0.15,
+      "ci": null,
+      "note": "More productive sectors get more protection (India)"
+    }
+  ],
+  "metadata": {
+    "note": "Regression of sector share of new IP on lagged characteristics. WB SAEU April 2026 Figs 2.6-2.7."
+  }
+}

@@ -881,14 +881,44 @@ export const v1Questions = [
         ],
         indicator: "divergence.fertility.in",
         why: "India's fall is not unique: it has joined the low-fertility world, but sits above every advanced economy and far above East Asia's ultra-low rates.", read: "Each line is a country's births per woman since 1960; India is highlighted, with South Asia in amber, East Asia in teal and the advanced West in green.", watch: "India reached low fertility at a fraction of the income the West or East Asia had when they got there, and unlike Korea or China it has levelled near replacement rather than crashing below it." },
+      { indicator: "people.dfi.tfr_states_vs_developed", chart: "tableBars", title: "Indian states next to the rich world", size: "feature", beat: "states-vs-rich", unit: "births per woman", subtitle: "SRS 2023 (states) and UN World Population Prospects 2024 (countries)",
+        why: "The cleanest way to feel how low Indian fertility has fallen: stand the states beside developed countries.", read: "Indian states and rich countries on one ranked scale of births per woman in 2023.", watch: "Tamil Nadu, West Bengal and several others now sit below Germany, Japan and the United States." },
+      { indicator: "people.wb.fertility_vs_female_lfp", chart: "scatterXY", title: "Low fertility without the jobs", size: "feature", beat: "fertility-work-paradox", unit: "births per woman", subtitle: "World Bank WDI · fertility vs female labour-force participation · latest year",
+        why: "In most countries fertility falls as women enter paid work; India broke that link.", read: "Each dot is a country: female labour-force participation across the bottom, births per woman up the side.", watch: "India's fertility is as low as Vietnam's, but with barely half as many women in the workforce." },
       { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "Fertility by state", size: "feature", window: "latest", beat: "geography", rankLabel: "Highest", bottomLabel: "Lowest", divergeAt: 2.1, pivotLabel: "replacement",
         why: "Fertility is not one number; it is a north-south map.", read: "Each state shaded by its fertility rate, from about 0.9 in some islands to 2.7 in Bihar.", watch: "The south and west are well below replacement; a band of northern states is still above it." },
+      { indicator: "people.ncp.tfr_projection_2035", chart: "choropleth", title: "The same map, projected to 2031-35", size: "feature", window: "latest", beat: "geography-future", divergeAt: 2.1, pivotLabel: "replacement",
+        why: "Where is each state's fertility headed? The government's own projection draws the map of 2035.", read: "Each state shaded by its projected fertility rate for 2031-35, on the same scale as the map above.", watch: "Almost every state settles near 1.5; only Bihar is still projected above replacement, at about 2.4." },
       { indicator: "people.nfhs.tfr_state_ranked", chart: "tableBars", title: "Highest and lowest fertility states", size: "feature", beat: "ranking", unit: "births per woman", subtitle: "NFHS-6 (2023-24) · top 5 and bottom 5 of 33 surveyed states/UTs",
         why: "The map, sharpened into a league table.", read: "The five highest-fertility states set against the five lowest.", watch: "Even the highest, Bihar at 2.7, is far below India's past; the lowest sit deep under replacement." },
+      { chart: "rankedChange", title: "Every state is falling, fast", size: "feature", beat: "state-momentum", unit: "births per woman", baselineYears: 2, latestYears: 2, startLabel: "~2013", endLabel: "2023", rowLabel: "State",
+        subtitle: "SRS · total fertility rate · about 2013 vs 2023",
+        series: [
+          { indicator: "people.srs.tfr_state.bihar", label: "Bihar" }, { indicator: "people.srs.tfr_state.uttar_pradesh", label: "Uttar Pradesh" },
+          { indicator: "people.srs.tfr_state.madhya_pradesh", label: "Madhya Pradesh" }, { indicator: "people.srs.tfr_state.rajasthan", label: "Rajasthan" },
+          { indicator: "people.srs.tfr_state.chhattisgarh", label: "Chhattisgarh" }, { indicator: "people.srs.tfr_state.jharkhand", label: "Jharkhand" },
+          { indicator: "people.srs.tfr_state.assam", label: "Assam" }, { indicator: "people.srs.tfr_state.haryana", label: "Haryana" },
+          { indicator: "people.srs.tfr_state.gujarat", label: "Gujarat" }, { indicator: "people.srs.tfr_state.odisha", label: "Odisha" },
+          { indicator: "people.srs.tfr_state.uttarakhand", label: "Uttarakhand" }, { indicator: "people.srs.tfr_state.himachal_pradesh", label: "Himachal Pradesh" },
+          { indicator: "people.srs.tfr_state.andhra_pradesh", label: "Andhra Pradesh" }, { indicator: "people.srs.tfr_state.jammu_and_kashmir", label: "Jammu & Kashmir" },
+          { indicator: "people.srs.tfr_state.karnataka", label: "Karnataka" }, { indicator: "people.srs.tfr_state.kerala", label: "Kerala" },
+          { indicator: "people.srs.tfr_state.punjab", label: "Punjab" }, { indicator: "people.srs.tfr_state.telangana", label: "Telangana" },
+          { indicator: "people.srs.tfr_state.maharashtra", label: "Maharashtra" }, { indicator: "people.srs.tfr_state.tamil_nadu", label: "Tamil Nadu" },
+          { indicator: "people.srs.tfr_state.west_bengal", label: "West Bengal" }
+        ],
+        why: "The map is a snapshot; this shows the motion. Over a single decade every major state's fertility dropped.", read: "Each state's TFR about a decade ago and in 2023, ranked by where it stands now.", watch: "Even Bihar and Uttar Pradesh, still the highest, have fallen sharply; the question is no longer whether they reach replacement but when." },
       { indicator: "people.srs.asfr", chart: "tableBars", title: "At what age Indian women have children", size: "feature", beat: "timing", unit: "births per 1,000 women", subtitle: "SRS 2024 · age-specific fertility rate",
         why: "Fertility is not just how many, but when.", read: "Births per 1,000 women in each age band, peaking sharply at 25-29.", watch: "Childbearing is concentrated in the twenties; teenage and over-40 births are now rare." },
       { indicator: "people.population.un.mean_age_childbearing", chart: "line", title: "Women are having children later", size: "small", window: "full", beat: "delay",
         why: "Are women delaying childbirth? The trend says yes.", read: "The average age at which women have their children, rising steadily since 2000.", watch: "Later childbearing both reflects more schooling and work and itself nudges fertility down." },
+      { chart: "multiLine", title: "The childbearing window is closing from the top", size: "feature", beat: "narrowing-window", unit: "age in years", subtitle: "NFHS rounds 1-5 · median age at marriage, first birth and last birth",
+        series: [
+          { indicator: "people.nfhs.age_first_marriage", label: "First marriage", color: "#8a8597" },
+          { indicator: "people.nfhs.age_first_birth", label: "First birth", color: "#2a8597", emphasis: true },
+          { indicator: "people.nfhs.age_last_birth", label: "Last birth", color: "#b3245a", emphasis: true }
+        ],
+        indicator: "people.nfhs.age_first_birth",
+        why: "The mechanism behind the fall: not a later start, but a much earlier stop.", read: "Median age at first marriage, first birth and last birth across NFHS rounds since 1992.", watch: "First birth has barely moved, near 21; but last birth has dropped from about 33 to under 28, collapsing the years a woman spends having children." },
       { chart: "latestBars", title: "How India avoids pregnancy, and who carries it", size: "feature", beat: "mechanism", unit: "% of married women 15-49", subtitle: "NFHS-6 (2023-24)",
         series: [ { indicator: "people.nfhs.contraception_any", label: "Any method" }, { indicator: "people.nfhs.contraception_modern", label: "Any modern method" }, { indicator: "people.nfhs.sterilization_female", label: "Female sterilisation" }, { indicator: "people.nfhs.sterilization_male", label: "Male sterilisation" }, { indicator: "people.nfhs.unmet_need", label: "Unmet need" } ],
         indicator: "people.nfhs.sterilization_female",
@@ -933,6 +963,103 @@ export const v1Questions = [
         series: [ { indicator: "people.projections.un_median", label: "UN (median)" }, { indicator: "people.projections.ihme_reference", label: "IHME (reference)" } ],
         indicator: "people.projections.un_median",
         why: "How confident can we be about the peak? Compare the two most-cited models.", read: "The UN peaks about 2061 near 1.70 billion and eases to 1.51 billion; IHME peaks earlier, around 2048, and falls much further, to about 1.09 billion by 2100.", watch: "IHME assumes faster fertility decline, so it is the low outlier; the US Census and Wittgenstein models sit closer to the UN." }
+    ]
+  },
+  {
+    id: "q.people.fertility_divergence",
+    slug: "why-indian-states-have-different-birth-rates",
+    question: "Why is India two countries when it comes to birth rates?",
+    priority: "core",
+    // The economic and political story of fertility DIVERGENCE across states.
+    // Distinct from q.people.population (the demographic overview): this article
+    // is about why the map splits, and what it costs. Spine = income and female
+    // education explain the gap (education more cleanly than income, and far more
+    // cleanly than female labour-force participation). Payload = the states that
+    // cut fertility earliest now grow slowest, so any seat reallocation by
+    // population shifts power north (delimitation, frozen on 1971 population until
+    // at least 2026) and the fiscal burden of ageing lands first in the south.
+    // Blends SRS state TFR 1971-2023 (via DataForIndia), RBI DBIE per-capita NSDP
+    // 1980-2024 (verified vs MOSPI + IDH), NFHS-6 female schooling, MOSPI PLFS
+    // female LFP, RBI e-STATES population + committed spending, NCP projections.
+    indicators: ["econ.state.income_vs_tfr", "people.education_vs_tfr", "people.srs.tfr_long.kerala", "people.srs.tfr_long.bihar", "people.nfhs.tfr_by_state"],
+    core: ["econ.state.income_vs_tfr", "people.education_vs_tfr", "people.lfp_vs_tfr", "people.state_population.growth_bars", "people.nfhs.tfr_by_state", "people.ncp.tfr_projection_2035"],
+    context: [
+      "people.srs.tfr_long.kerala", "people.srs.tfr_long.tamil_nadu", "people.srs.tfr_long.andhra_pradesh",
+      "people.srs.tfr_long.karnataka", "people.srs.tfr_long.maharashtra", "people.srs.tfr_long.punjab",
+      "people.srs.tfr_long.bihar", "people.srs.tfr_long.uttar_pradesh", "people.srs.tfr_long.rajasthan",
+      "people.srs.tfr_long.madhya_pradesh", "people.srs.tfr_long.west_bengal", "people.srs.tfr_long.gujarat",
+      "people.srs.tfr_long.odisha", "people.srs.tfr_long.haryana", "people.srs.tfr_long.assam",
+      "people.fertility", "people.nfhs5.tfr_by_education",
+      "people.replacement_crossing_year", "people.states_span_world", "people.tfr_convergence_gap",
+      "people.srs.tfr_long_rural.india", "people.srs.tfr_long_urban.india", "people.srs.tfr_long_urban.bihar"
+    ],
+    visualPlan: [
+      { chart: "multiLine", title: "One country, two fertility histories", size: "hero", beat: "divergence", unit: "births per woman", window: "full", refLine: { value: 2.1, label: "replacement" },
+        subtitle: "SRS · total fertility rate by state · 1971 to 2023",
+        series: [
+          { indicator: "people.srs.tfr_long.kerala", label: "Kerala", color: "#137a74", emphasis: true },
+          { indicator: "people.srs.tfr_long.tamil_nadu", label: "Tamil Nadu", color: "#2f9e8f" },
+          { indicator: "people.srs.tfr_long.andhra_pradesh", label: "Andhra Pradesh", color: "#6f9d3a" },
+          { indicator: "people.srs.tfr_long.maharashtra", label: "Maharashtra", color: "#c79a1e" },
+          { indicator: "people.srs.tfr_long.rajasthan", label: "Rajasthan", color: "#e07a2b" },
+          { indicator: "people.srs.tfr_long.uttar_pradesh", label: "Uttar Pradesh", color: "#c1436b" },
+          { indicator: "people.srs.tfr_long.bihar", label: "Bihar", color: "#93123f", emphasis: true }
+        ],
+        indicator: "people.srs.tfr_long.kerala",
+        why: "The whole article in one chart: the south hit replacement in the 1980s-90s; the north is only getting there now.", read: "Each line is one state's births per woman since 1971, seven states from the earliest to the latest to fall, cool colours for the south, warm for the north.", watch: "Kerala and Tamil Nadu crossed the replacement line decades before Uttar Pradesh and Bihar even began falling fast: a 30-year gap between states of the same country." },
+      { indicator: "people.nfhs.tfr_by_state", chart: "choropleth", title: "The fertility map of India", size: "feature", window: "latest", beat: "geography", divergeAt: 2.1, pivotLabel: "replacement", rankLabel: "Highest", bottomLabel: "Lowest",
+        why: "The divergence, drawn as a map.", read: "Each state shaded by its fertility rate.", watch: "A clean north-south split: the south and west deep below replacement, a northern band still above it." },
+      { indicator: "people.replacement_crossing_year", chart: "tableBars", title: "A thirty-year head start, measured in years", size: "feature", beat: "the-lag", unit: "years below replacement by 2023", subtitle: "SRS · years each state has spent at or below 2.1 births per woman · states with data since 1981 or earlier",
+        why: "The lag, made into a length: how long each state has already lived below replacement.", read: "For each long-tracked state, the number of years its fertility has been at or below 2.1 as of 2023, longest at the top.", watch: "Kerala has been below replacement for about 35 years and Tamil Nadu for 30; Bihar, Uttar Pradesh, Madhya Pradesh and Rajasthan sit at zero, still not there in 2023. That distance is a full generation of divergence." },
+      { indicator: "people.tfr_convergence_gap", chart: "line", title: "The gap held for a generation, then began to close", size: "feature", window: "full", beat: "the-gap", unit: "births per woman (gap)", subtitle: "SRS via Data For India · distance between the highest and lowest major state's fertility · one number per year",
+        why: "The whole article in one line: the spread between states, not any single state's level.", read: "Each year's value is the difference in births per woman between the highest- and lowest-fertility big state. It sat near 3 through the 1980s and 90s, then started falling after 2000.", watch: "The gap peaked around 3.5 in the mid-1980s, when Bihar was near 5.9 and Kerala 2.4; by 2023 it is down to about 1.5, Bihar 2.8 against Tamil Nadu 1.3. The states diverged for a generation and are now converging, though the gap that remains is still more than a full child." },
+      { indicator: "people.states_span_world", chart: "tableBars", title: "India's states span the world", size: "feature", beat: "how-low", unit: "births per woman", subtitle: "SRS 2023 (Indian states) and World Bank 2024 (countries) · one fertility scale",
+        why: "One country holds nearly the whole planet's range of fertility, from above the world average to East-Asia low.", read: "Indian states and countries ranked together on births per woman; states are marked (India).", watch: "Bihar sits above the world average, below only Pakistan; Tamil Nadu and West Bengal sit below Germany, near Japan. The same country spans almost the entire global spectrum." },
+      { indicator: "people.fertility", chart: "line", title: "India as a whole slipped below replacement", size: "feature", window: "full", beat: "national", refLine: { value: 2.1, label: "replacement" },
+        why: "Before the states, the headline: the national average is now below 2.1.", read: "India's births per woman since 1960, falling from near six to about two.", watch: "The national number hides everything this article is about: it is an average of states a full generation apart." },
+      { indicator: "econ.state.income_vs_tfr", chart: "scatterXY", title: "Richer states, fewer children", size: "feature", beat: "income", unit: "births per woman", subtitle: "RBI DBIE per-capita income (2023) vs SRS fertility (2023) · by state",
+        why: "The first suspect: money. Plot each state's income against its fertility.", read: "Each dot is a state: per-capita income across the bottom, births per woman up the side.", watch: "The line slopes down: richer states have fewer children. But Kerala sits far left of its fertility, having got there poor." },
+      { indicator: "people.education_vs_tfr", chart: "scatterXY", title: "But girls' schooling explains it better", size: "feature", beat: "education", unit: "births per woman", subtitle: "NFHS-6 women with 10+ years schooling vs SRS fertility (2023) · by state",
+        why: "Swap income for female education and the dots line up tighter.", read: "Share of women with 10+ years of schooling across the bottom, fertility up the side.", watch: "Kerala, the income outlier, falls right into line on education: schooling, not income, is what the states really share." },
+      { indicator: "people.lfp_vs_tfr", chart: "scatterXY", title: "It is not women working", size: "small", beat: "lfp-paradox", unit: "births per woman", subtitle: "MOSPI PLFS female LFP (2023-24) vs SRS fertility (2023) · by state",
+        why: "The usual global explanation, jobs for women, breaks down inside India.", read: "Female labour-force participation across the bottom, fertility up the side.", watch: "No clean pattern: Haryana has the lowest female work rate yet low fertility; the link that holds across countries does not hold across these states." },
+      { indicator: "people.nfhs5.tfr_by_education", chart: "tableBars", title: "The same lever, at the household level", size: "small", beat: "gradient", unit: "births per woman", subtitle: "NFHS-5 (2019-21) · TFR by years of schooling",
+        why: "What the state scatter shows across places, this shows across women.", read: "Fertility by a woman's years of schooling.", watch: "No schooling averages 2.8 children; 12+ years, 1.8: the same gradient that separates Bihar from Kerala." },
+      { chart: "multiLine", title: "The other divide: village and city", size: "feature", beat: "rural-urban", unit: "births per woman", window: "full", refLine: { value: 2.1, label: "replacement" }, subtitle: "SRS · urban vs rural total fertility rate · 1971 to 2023",
+        series: [
+          { indicator: "people.srs.tfr_long_urban.india", label: "India, urban", color: "#2a8597", emphasis: true },
+          { indicator: "people.srs.tfr_long_rural.india", label: "India, rural", color: "#b3245a" },
+          { indicator: "people.srs.tfr_long_urban.bihar", label: "Bihar, urban", color: "#e08a2b", emphasis: true }
+        ],
+        indicator: "people.srs.tfr_long_urban.india",
+        why: "The divide is not only north-south; it is village-city, and it runs inside every state.", read: "Urban and rural fertility for India, plus urban Bihar for contrast.", watch: "India's cities are already below replacement while its villages sit at about 2.1; even Bihar's cities, at about 2.2, are far below its villages at about 2.9, though still just above the line." },
+      { indicator: "people.state_population.growth_bars", chart: "tableBars", title: "The states that cut fertility grow slowest", size: "feature", beat: "population-divergence", unit: "% growth 2011-2024", subtitle: "RBI Handbook · population growth 2011-2024 · by state",
+        why: "Here is where fertility becomes politics.", read: "Each state's population growth from 2011 to 2024.", watch: "Bihar grew more than three times faster than Tamil Nadu: the south's share of the country is shrinking, which is why delimitation, frozen on 1971 population, is so charged." },
+      { indicator: "people.ncp.tfr_projection_2035", chart: "choropleth", title: "Where each state is heading, 2031-35", size: "feature", window: "latest", beat: "future", divergeAt: 2.1, pivotLabel: "replacement",
+        why: "The government's own projection of the map a decade out.", read: "Each state shaded by its projected fertility for 2031-35.", watch: "The map narrows to a band, about 1.5 in the south to 2.4 in Bihar, the only state still above replacement, with the national rate near 1.7. The gap shrinks, but the consequences of the gap are only beginning." },
+      { indicator: "people.projections.un_tfr_median", chart: "line", title: "And the country as a whole: below replacement for good", size: "feature", window: "full", beat: "country-projection", unit: "births per woman", subtitle: "UN World Population Prospects 2024 · total fertility rate · median variant · estimates to 2023, projection to 2100",
+        refLine: { value: 2.1, label: "replacement" }, bands: [{ year: 2024, label: "projection ->" }],
+        why: "The state map projects a decade out; this is the whole country projected to 2100, from a second, independent source (the UN, not the government).", read: "India's national fertility rate, measured to 2023 and projected by the UN to 2100. It fell below the 2.1 replacement line around 2020 and the UN median has it easing to about 1.7 and staying there.", watch: "This is the median path; the UN's own 80% range for 2100 is wide, roughly 1.25 to 2.13, so the level is uncertain even if the direction is not. The line does not climb back to replacement in any decade this century." },
+      { chart: "sparkGrid", title: "Every big state's fertility fall, one panel each", size: "feature", beat: "browse-all", window: "full", unit: "births per woman", subtitle: "SRS · total fertility rate · one small chart per state · major states with long records",
+        indicator: "people.srs.tfr_long.kerala",
+        series: [
+          { indicator: "people.srs.tfr_long.kerala", label: "Kerala" },
+          { indicator: "people.srs.tfr_long.tamil_nadu", label: "Tamil Nadu" },
+          { indicator: "people.srs.tfr_long.west_bengal", label: "West Bengal" },
+          { indicator: "people.srs.tfr_long.maharashtra", label: "Maharashtra" },
+          { indicator: "people.srs.tfr_long.andhra_pradesh", label: "Andhra Pradesh" },
+          { indicator: "people.srs.tfr_long.karnataka", label: "Karnataka" },
+          { indicator: "people.srs.tfr_long.punjab", label: "Punjab" },
+          { indicator: "people.srs.tfr_long.gujarat", label: "Gujarat" },
+          { indicator: "people.srs.tfr_long.odisha", label: "Odisha" },
+          { indicator: "people.srs.tfr_long.haryana", label: "Haryana" },
+          { indicator: "people.srs.tfr_long.assam", label: "Assam" },
+          { indicator: "people.srs.tfr_long.rajasthan", label: "Rajasthan" },
+          { indicator: "people.srs.tfr_long.madhya_pradesh", label: "Madhya Pradesh" },
+          { indicator: "people.srs.tfr_long.uttar_pradesh", label: "Uttar Pradesh" },
+          { indicator: "people.srs.tfr_long.bihar", label: "Bihar" }
+        ],
+        why: "The whole country at a glance: find your state and see its own fifty-year fall.", read: "Each mini-panel is one state's fertility since the 1970s, auto-scaled to its own range so the shape of its fall is visible; the big number is its 2023 value.", watch: "Every panel points down, but read the slope, not the height: the southern states flattened out near 1.5 years ago, while the northern panels are still descending." }
     ]
   },
   {
@@ -3151,8 +3278,8 @@ export const v1Questions = [
     visualPlan: [
       { chart: "tableBars", indicator: "health.lasidad.prev_by_age", title: "Dementia climbs steeply with age", size: "hero", beat: "answer", unit: "% of age group with dementia", subtitle: "LASI-DAD 2018-20 (Lee et al., Alzheimer's & Dementia 2023) · estimated prevalence by age band",
         why: "The first thing to know: dementia is overwhelmingly a disease of late old age. It jumps from about 3% in the early 60s to a quarter of everyone past 85.", read: "Each bar is the estimated share of that age band living with dementia. The rise is not gradual; it roughly doubles every five years after 70.", watch: "Estimates from a survey of about 2,500 clinically assessed adults, modelled to the 60+ population. Read the shape, not the second decimal." },
-      { chart: "change", indicator: "health.lasidad.cases_projection", title: "8.8 million now, 16.9 million by 2036", size: "feature", beat: "scale", unit: "million people 60+ with dementia", subtitle: "LASI-DAD · estimated cases, 2016 population base and 2036 projection",
-        why: "Because India is ageing fast, the headcount is set to nearly double in twenty years even if the risk at each age stays flat.", read: "Two figures side by side: an estimated 8.8 million adults over 60 with dementia today, and a projected 16.9 million by 2036.", watch: "Both numbers are estimates with wide uncertainty. The projection is demographic arithmetic, more people surviving into old age, not a worsening of the disease." },
+      { chart: "change", indicator: "health.lasidad.cases_projection", title: "88 lakh now, 1.69 crore by 2036", size: "feature", beat: "scale", unit: "crore people 60+ with dementia", subtitle: "LASI-DAD · estimated cases, 2016 population base and 2036 projection",
+        why: "Because India is ageing fast, the headcount is set to nearly double in twenty years even if the risk at each age stays flat.", read: "Two figures side by side: an estimated 88 lakh adults over 60 with dementia today, and a projected 1.69 crore by 2036.", watch: "Both numbers are estimates with wide uncertainty. The projection is demographic arithmetic, more people surviving into old age, not a worsening of the disease." },
       { chart: "tableBars", indicator: "health.lasidad.prev_gradients", title: "Who carries more: women, and rural India", size: "feature", beat: "gradient", unit: "% of adults 60+ with dementia", subtitle: "LASI-DAD 2018-20 · crude prevalence among adults 60+",
         why: "Dementia is not spread evenly. Women carry noticeably more of it than men, and rural Indians more than city dwellers.", read: "Two pairs of bars: women versus men, and rural versus urban. In both, the first bar is clearly taller.", watch: "Part of the women's gap is that they live longer and reach the highest-risk ages; part of the rural gap tracks lower schooling. These overlap." },
       { chart: "tableBars", indicator: "health.lasidad.prev_by_education", title: "Dementia falls sharply with schooling", size: "small", beat: "gradient", unit: "% of adults 60+ with dementia", subtitle: "LASI-DAD 2018-20 · crude prevalence by education",
@@ -3160,8 +3287,8 @@ export const v1Questions = [
       { chart: "choropleth", indicator: "health.lasidad.prev_by_state", title: "Where dementia is most common", size: "feature", beat: "where", unit: "% of adults 60+", rankLabel: "Highest", bottomLabel: "Lowest", subtitle: "LASI-DAD 2018-20 · estimated prevalence among adults 60+, by state",
         why: "The map runs from about 4.5% in Delhi to roughly 11% in Jammu & Kashmir, with the south and east generally higher than the north-western plains.", read: "Darker states have higher estimated prevalence among the over-60s. Grey states had no separate estimate.", watch: "North-eastern states other than Assam were published only as one group, so they share a single value. Small-state estimates are the least certain." },
       { chart: "line", indicator: "health.gbd.deaths_alzheimers", title: "Deaths recorded from dementia have risen eightfold", size: "feature", beat: "trend", window: "full", subtitle: "IHME Global Burden of Disease 2023 · estimated annual deaths from Alzheimer's & other dementias, India",
-        why: "As Indians live longer and other killers recede, dementia surfaces in the mortality data: recorded deaths have climbed from about 17,000 in 1980 to over 140,000.", read: "A single line rising steeply, especially after 2000.", watch: "Modelled estimates, and dementia is badly under-recorded as a cause of death, so this is a floor. The jump after 2021 partly reflects a coding change, read the long climb, not the last kink." },
-      { chart: "tableBars", indicator: "ref.us.nber.wealth_gap_by_event_time", title: "America: money trouble starts before the diagnosis", size: "feature", beat: "mechanism", unit: "US$1,000s of net worth vs similar households", subtitle: "NBER WP 34659 (Li et al. 2026) · US Health & Retirement Study · evidence from the United States",
+        why: "As Indians live longer and other killers recede, dementia surfaces in the mortality data: recorded deaths have climbed from about 17,000 in 1980 to over 1.4 lakh.", read: "A single line rising steeply, especially after 2000.", watch: "Modelled estimates, and dementia is badly under-recorded as a cause of death, so this is a floor. The jump after 2021 partly reflects a coding change, read the long climb, not the last kink." },
+      { chart: "tableBars", indicator: "ref.us.nber.wealth_gap_by_event_time", title: "America: money trouble starts before the symptoms", size: "feature", beat: "mechanism", unit: "US$1,000s of net worth vs similar households", subtitle: "NBER WP 34659 (Li et al. 2026) · US Health & Retirement Study · evidence from the United States",
         why: "This is US data, shown to explain the mechanism, not to put a rupee figure on India. American households heading into dementia fall behind similar households starting about six years before onset, ending roughly $125,000 poorer.", read: "Each bar is the wealth gap versus matched controls at that point in time. It is near zero six years out and sinks steadily, deepening even after diagnosis.", watch: "United States, not India. The dollar amounts do not transfer; what transfers is the timing and the cause, money slips away before anyone has a name for why." },
       { chart: "tableBars", indicator: "ref.us.nber.assets_cases_vs_controls", title: "America: the gap sits in hard-to-manage assets", size: "feature", beat: "mechanism", unit: "US$1,000s held, two years before onset", subtitle: "NBER WP 34659 · means two years before onset · evidence from the United States",
         why: "The losses concentrate in stocks, bonds and investment accounts, the assets that need active judgement to manage. Earnings barely differ, and cancer or heart disease show no such gap, which points at decision-making, not spending.", read: "For each asset type, two bars: households developing dementia versus similar households without. The dementia group holds less everywhere, most in investments needing active management.", watch: "United States, 2018 dollars. Most older Indians hold little in stocks or pensions, so this exact channel is smaller here; the lesson is about judgement, not portfolios." },
@@ -6746,98 +6873,59 @@ export const v1Questions = [
   },
 
   {
-    id: "q.climate.methane",
-    slug: "indias-methane-problem",
-    question: "How much methane is India actually releasing, and who is responsible for it?",
+    id: "q.climate.monsoon_2026",
+    slug: "is-the-2026-monsoon-in-trouble",
+    question: "Is India's 2026 monsoon in trouble?",
     priority: "core",
-    // Built Jul 2026. First Indica use of Climate TRACE (satellite-informed, largely
-    // bottom-up per-source emissions, api.climatetrace.org, no key needed) and Climate
-    // Watch (climatewatchdata.org, a modelled/gap-filled CH4-by-sector reconstruction,
-    // CAIT/PIK lineage). India's own official position (BUR-3, submitted 20 Feb 2021,
-    // inventory year 2016; BUR-4, submitted 30 Dec 2024, inventory year 2020) is a sparse,
-    // multi-year-lagged snapshot, not a queryable time series - cited in prose/caveats as
-    // anchor facts, not charted directly. Waste has no Climate Watch equivalent for India,
-    // so that sector's official-vs-independent comparison rests on the BUR anchors alone.
-    // Ingest: ingest-climatetrace-country.mjs, ingest-climatetrace-assets.mjs,
-    // ingest-climatetrace-global-methane.mjs, ingest-climatewatch-methane.mjs.
-    // Derive: derive-climatetrace-methane.mjs (composition, tracewatch_gap x3, top sources).
-    // Honesty spine: the two independent methane estimates broadly agree and have
-    // converged over time (national gap ran -6.7% in 2015, +0.4% by 2023) - this is not
-    // a "India is hiding methane" story. The genuinely open question is waste, where
-    // Climate TRACE's landfill-and-wastewater estimate runs several times above BUR-4's
-    // reported 2020 figure and there is no second independent series to referee it.
-    // Asset-level Climate TRACE data is co2e_100yr only (no per-gas split), so the named
-    // "biggest sources" ranking is a co2e proxy, not literal CH4 tonnes - stated as such.
+    // Built mid-June 2026. A *forecast + context* piece, NOT a season verdict - the
+    // monsoon runs Jun-Sep, so there is no 2026 outcome until October. Leads with IMD's
+    // Long Range Forecast (90% of LPA, El Nino developing), then borrows the historical
+    // base-rate charts from q.climate.el_nino_india and cross-links to it for the deep dive.
     indicators: [
-      "climate.climatetrace.emissions_by_sector.total",
-      "climate.climatetrace.emissions_by_sector.agriculture",
-      "climate.climatetrace.emissions_by_sector.waste",
-      "climate.climatetrace.emissions_by_sector.fossil_fuel_operations",
-      "climate.climatetrace.top_methane_emitters",
-      "derived.IN.climate.methane.sector_composition",
-      "derived.IN.climate.methane.top_sources",
-      "derived.IN.climate.methane.top_waste_sources",
-      "derived.IN.climate.methane.tracewatch_gap.total",
-      "derived.IN.climate.methane.tracewatch_gap.agriculture",
-      "derived.IN.climate.methane.tracewatch_gap.fossil_fuel_operations"
+      "climate.monsoon_2026.category_probabilities",
+      "climate.monsoon_2026.lrf_evolution",
+      "climate.el_nino.imd_monsoon_departure_1901_2025"
     ],
-    context: [],
-    furtherReading: [
-      { label: "Climate TRACE — India country and asset-level emissions data", url: "https://climatetrace.org/" },
-      { label: "Climate Watch (World Resources Institute) — historical GHG emissions by sector", url: "https://www.climatewatchdata.org/" },
-      { label: "India's Third Biennial Update Report to the UNFCCC (2016 inventory, submitted 2021)", url: "https://unfccc.int/documents/268470" },
-      { label: "India's Fourth Biennial Update Report to the UNFCCC (2020 inventory, submitted 2024)", url: "https://unfccc.int/sites/default/files/resource/India%20BUR-4.pdf" }
+    core: [
+      "climate.monsoon_2026.category_probabilities",
+      "climate.monsoon_2026.lrf_evolution",
+      "climate.el_nino.imd_monsoon_departure_1901_2025"
     ],
+    context: [
+      "climate.el_nino.bad_monsoon_frequency",
+      "climate.el_nino.exceptions",
+      "climate.el_nino.enso_iod_matrix",
+      "prices.el_nino.food_wpi_postmonsoon",
+      "work.employment_agriculture",
+      "econ.el_nino.agri_gva_share"
+    ],
+    primer: {
+      kicker: "Plain English first",
+      lead: "Every spring the India Meteorological Department puts a number on the coming monsoon, and in 2026 that number is below normal: rainfall of about 90% of the long-period average, with a 60% chance the season ends outright deficient. The reason is El Nino - a warming of the Pacific that tends to weaken the winds pulling the June-September rains inland - which forecasters expect to develop during the season. But a June forecast is a probability, not a verdict. The monsoon delivers about 70% of India's annual rain over four months, and the season has barely begun: it arrived late over Kerala, paused, and will not be settled until October. The honest question is not 'how bad is 2026' but 'what do the forecast and the historical record actually tell us right now'.",
+      myths: [
+        { myth: "A below-normal forecast means a drought is coming.", reality: "No. IMD calls a monsoon normal within about 10% of the long-period average; 90% of LPA is below normal but not a drought, and the forecast carries a model error of several points. The record is full of years that beat or missed their spring forecast." },
+        { myth: "El Nino guarantees a failed monsoon.", reality: "No. It roughly doubles the odds of a weak monsoon, but many El Nino years still finished near or above normal - especially when the Indian Ocean leaned India's way. In 2026 that second ocean is forecast neutral, so the usual rescue is uncertain, not absent." }
+      ]
+    },
     visualPlan: [
-      // ACT 1 - the scale
-      { indicator: "climate.climatetrace.emissions_by_sector.total", chart: "columnLines", title: "India's methane is rising, not falling", subtitle: "Climate TRACE · India's all-sector methane emissions · 2015-2024", unit: "tonnes CH4", size: "hero", beat: "scale",
-        columns: [{ key: "ch4_t", label: "Methane (CH4)" }],
-        why: "Before any breakdown, the headline trend: is India's methane going up or down.", read: "Satellite-informed estimates put India's methane at about 31 million tonnes in 2015, climbing past 35-36 million tonnes by 2023-2024 - a rising line, not a falling one.", watch: "This is one estimate (Climate TRACE); Act 4 shows how it compares to a second, independently built one." },
-      { indicator: "climate.climatetrace.top_methane_emitters", chart: "tableBars", title: "India is the world's third-biggest methane emitter", subtitle: "Climate TRACE · methane emissions, selected countries · 2023", unit: "tonnes CH4", size: "feature", beat: "rank",
-        why: "Scale means little without company: where does India actually sit next to the other big emitters.", read: "China leads by a wide margin, the United States is second; India is third, ahead of Russia, Brazil and Indonesia.", watch: "A six-country selection, not a full world ranking - chosen because they are the other largest emitters, not a curated flattering set." },
+      // ACT 1 - the forecast (the news hook, the only genuinely-2026 data)
+      { indicator: "climate.monsoon_2026.category_probabilities", chart: "tableBars", title: "IMD's 2026 monsoon forecast: the odds tilt to a shortfall", subtitle: "IMD updated Long Range Forecast probabilities for the season as a whole - issued 29 May 2026", unit: "% forecast probability", size: "hero", beat: "forecast", why: "The news that started the worry: IMD's own probability forecast for the 2026 season, before any historical context.", read: "IMD puts a 60% chance on a deficient season (below 90% of normal) and another 24% on below normal - 84% odds the monsoon finishes below par, against just 16% for normal or wetter.", watch: "These are probabilities for the all-India, four-month total. They say nothing yet about where or when the rain will fall, and a forecast is not an outcome." },
+      { indicator: "climate.monsoon_2026.lrf_evolution", chart: "tableBars", title: "IMD nudged its 2026 forecast down as El Nino firmed up", subtitle: "IMD seasonal forecast as % of the long-period average - April vs May 2026", unit: "% of long-period average", size: "feature", beat: "forecast", why: "Forecasts move. IMD cut its number between April and May as the El Nino signal strengthened - a small change that shifted the mood.", read: "The April forecast was 92% of the long-period average; the May update trimmed it to 90%. Both sit below IMD's 'normal' band of 96-104%.", watch: "A two-point move is well inside the forecast's own error margin. The direction of the revision matters more than the exact figure." },
 
-      // ACT 2 - where it comes from, and how that's shifting
-      { indicator: "derived.IN.climate.methane.sector_composition", chart: "compositionStack", title: "Livestock and rice still dominate, but their share is shrinking", subtitle: "Climate TRACE · India's methane by sector, latest year", unit: "tonnes CH4", size: "feature", beat: "composition-now",
-        columns: [
-          { key: "agriculture_ch4_t", label: "Agriculture" },
-          { key: "waste_ch4_t", label: "Waste" },
-          { key: "fossil_fuel_operations_ch4_t", label: "Fossil-fuel ops" },
-          { key: "other_sectors_ch4_t", label: "Other" }
-        ],
-        why: "Solutions depend on the source: a cattle-and-rice problem needs different fixes than a coal-mine or landfill problem.", read: "Agriculture is still by far the largest slice (livestock and rice), with waste (landfills, wastewater) and fossil-fuel operations (coal, oil and gas) well behind.", watch: "This is one year's snapshot. The next chart shows it has been quietly moving." },
-      { indicator: "derived.IN.climate.methane.sector_composition", chart: "columnLines", title: "Fossil-fuel methane's share has grown fastest", subtitle: "Climate TRACE · sector shares of India's methane · 2015-2024", unit: "%", size: "feature", beat: "composition-trend",
-        columns: [
-          { key: "agriculture_share_pct", label: "Agriculture" },
-          { key: "waste_share_pct", label: "Waste" },
-          { key: "fossil_fuel_operations_share_pct", label: "Fossil-fuel operations" }
-        ],
-        why: "A composition snapshot hides which slice is actually growing fastest - and it isn't agriculture.", read: "Agriculture's share of India's methane slipped from about 75% in 2015 to 71% in 2023, while fossil-fuel operations rose from roughly 8% to over 10% and waste crept up too.", watch: "Shares moving a few points over a decade is a real shift, not noise, but agriculture still towers over the other two in absolute tonnes." },
+      // ACT 2 - 125 years of context: below-normal is not rare
+      { indicator: "climate.el_nino.imd_monsoon_departure_1901_2025", chart: "stripes", title: "But the monsoon has never sat still", subtitle: "IMD all-India June-September rainfall departure - 1901-2025", unit: "% rainfall departure", size: "hero", beat: "history", why: "Before reading 2026 as a crisis, see the raw material: 125 monsoons, no two alike, with below-normal years scattered all through the record.", read: "Each stripe is one monsoon - deep blue years fell short, coral years ran wet. Below-normal seasons are common, and they rarely cluster.", watch: "This is the national total only. It hides where the rain fell, when, and the floods and dry spells inside a single season." },
 
-      // ACT 3 - who, by name
-      { indicator: "derived.IN.climate.methane.top_sources", chart: "tableBars", title: "India's named methane hotspots are almost all coal mines", subtitle: "Climate TRACE asset-level data · top 15 named waste and fossil-fuel point sources", unit: "tonnes CO2e (100yr)", size: "hero", beat: "who",
-        why: "Sector totals are abstract; naming the actual sites makes the story concrete.", read: "Two Gujarat and Assam onshore oil-and-gas basins aside, the list is dominated by Coal India subsidiaries' opencast mines - Dipka, Nigahi, Gevra, Kusmunda and others - each individually larger than any single landfill.", watch: "Asset-level Climate TRACE data reports a blended co2e_100yr figure, not raw CH4 tonnes, so this ranks point sources by total climate impact, not pure methane - refineries are excluded because their emissions are mostly CO2 from combustion, not fugitive methane." },
-      { indicator: "derived.IN.climate.methane.top_waste_sources", chart: "tableBars", title: "The landfills you'd actually recognise", subtitle: "Climate TRACE asset-level data · top 10 named landfill and wastewater sites", unit: "tonnes CO2e (100yr)", size: "small", beat: "named-waste",
-        why: "Landfills rarely crack a combined ranking against coal mines by raw tonnage, but Ghazipur and Pirana are the household names of India's waste-methane problem and deserve their own frame.", read: "Surat, Ahmedabad and Delhi's own Ghazipur landfill lead a list of named dumps and wastewater plants.", watch: "These are individually smaller than the big coal mines in Act 3's combined list - the waste sector's weight comes from thousands of smaller sites nationwide, not a handful of giants." },
+      // ACT 3 - the driver, honestly: risk not destiny
+      { indicator: "climate.el_nino.bad_monsoon_frequency", chart: "tableBars", title: "El Nino roughly doubles the odds of a weak monsoon", subtitle: "Share of each Pacific state's years that finished below normal - 1950-2025", unit: "% of phase years", size: "feature", beat: "driver", why: "Why a developing El Nino moved IMD's forecast down - counted as a frequency, not a slogan.", read: "Each bar is the share of that phase's years that ended below normal. The El Nino bars stand well above neutral and La Nina years.", watch: "The groups are different sizes - 26 El Nino, 27 neutral, 23 La Nina monsoons - so read shares, not raw counts. Higher odds is not certainty." },
+      { indicator: "climate.el_nino.exceptions", chart: "tableBars", title: "Plenty of El Nino years still came out fine", subtitle: "El Nino monsoons that finished near-normal or wet - rainfall departure", unit: "% rainfall departure", size: "feature", beat: "honesty", why: "The honest counterweight to the forecast: if El Nino decided the monsoon on its own, these years could not exist.", read: "Every bar is an El Nino year that ended near or above normal - living proof the Pacific does not settle the season by itself.", watch: "Do not flip this into false comfort. A friendly Indian Ocean or lucky timing helped in these years, and neither is guaranteed in 2026." },
+      { indicator: "climate.el_nino.enso_iod_matrix", chart: "tableBars", title: "The second ocean that usually decides the rescue", subtitle: "Average rainfall in El Nino years, split by the Indian Ocean Dipole - 1950-2025", unit: "% mean rainfall departure", size: "feature", beat: "driver", why: "The 2026 wildcard: El Nino years with a friendly Indian Ocean Dipole held near normal; those without it fell short. In 2026 the dipole is forecast neutral.", read: "El Nino monsoons that came with a positive dipole averaged near-normal rain; those without averaged a clear deficit.", watch: "It is a tilt, not a shield - and 2026's neutral dipole forecast means the usual rescue is uncertain, not ruled out." },
 
-      // ACT 4 - two independent estimates, checked against each other
-      { indicator: "derived.IN.climate.methane.tracewatch_gap.total", chart: "columnLines", title: "Two different ways of counting India's methane now roughly agree", subtitle: "Climate TRACE (satellite-based) vs. Climate Watch (modelled reconstruction) · India, all sectors", unit: "million tonnes CH4", size: "hero", beat: "reconcile-total",
-        columns: [
-          { key: "climatetrace_ch4_mt", label: "Climate TRACE (satellite-based)" },
-          { key: "climatewatch_ch4_mt", label: "Climate Watch (inventory reconstruction)" }
-        ],
-        why: "One estimate alone invites doubt. Does a second, differently-built one land anywhere close?", read: "The two lines started about 7% apart in 2015 (Climate TRACE lower) and have converged to within half a percent by 2023.", watch: "Climate Watch's figure is itself a model (CAIT/PIK lineage, gap-filled between India's own sparse UNFCCC submissions), not a direct transcription of what India reported - convergence between two models is reassuring, not proof either matches India's official inventory exactly." },
-      { indicator: "derived.IN.climate.methane.tracewatch_gap.agriculture", chart: "columnLines", title: "Agriculture methane: the two estimates track closely", subtitle: "Climate TRACE vs. Climate Watch · India agriculture-sector methane", unit: "million tonnes CH4", size: "feature", beat: "reconcile-agriculture",
-        columns: [
-          { key: "climatetrace_ch4_mt", label: "Climate TRACE (satellite-based)" },
-          { key: "climatewatch_ch4_mt", label: "Climate Watch (inventory reconstruction)" }
-        ],
-        why: "Agriculture is the biggest slice, so it is the most important sector to see cross-checked.", read: "Climate TRACE runs consistently above Climate Watch, by a margin that has bounced between roughly 3.5% and 8.6% across the decade with no clear trend, given how differently the two are built.", watch: "A persistent but non-trending gap suggests a methodology offset (e.g. livestock-count or emission-factor assumptions), not a fast-changing real-world divergence." },
-      { indicator: "derived.IN.climate.methane.tracewatch_gap.fossil_fuel_operations", chart: "columnLines", title: "Fossil-fuel methane: the smallest gap of all", subtitle: "Climate TRACE (fossil-fuel operations) vs. Climate Watch (fugitive emissions) · India", unit: "million tonnes CH4", size: "feature", beat: "reconcile-fossil",
-        columns: [
-          { key: "climatetrace_ch4_mt", label: "Climate TRACE (satellite-based)" },
-          { key: "climatewatch_ch4_mt", label: "Climate Watch (inventory reconstruction)" }
-        ],
-        why: "Coal-mine and oil-and-gas fugitive methane is the sector growing fastest in share (Act 2) - worth checking it isn't an artifact of one model.", read: "The two lines sit within a few percent of each other throughout, including in the most recent years.", watch: "Climate TRACE's 'fossil-fuel operations' and Climate Watch's 'Fugitive Emissions' are closely related but not identically defined categories." }
+      // ACT 4 - so what: from rain to food, and the human reach
+      { indicator: "prices.el_nino.food_wpi_postmonsoon", chart: "tableBars", title: "A weak monsoon does not automatically mean dearer food", subtitle: "Post-monsoon (Oct-Dec) wholesale food inflation in El Nino years - RBI WPI - 1982-2024", unit: "% food inflation, year-on-year", size: "feature", beat: "consequence", why: "The fear behind the headlines is prices. The record shows the link is real but loose.", read: "There is no clean rule. 2002 had a severe drought yet almost no food inflation; 2009's drought pushed it above 16%.", watch: "Prices answer to stocks, imports, global cycles and policy as much as to rain. Public grain stocks now blunt much of the shock." },
+      { chart: "multiLine", title: "Why the monsoon still matters: two in five jobs", subtitle: "Agriculture's share of India's output and of its workforce - 1951-2025", unit: "% share", size: "feature", beat: "stakes", series: [
+        { indicator: "work.employment_agriculture", label: "Share of India's workers" },
+        { indicator: "econ.el_nino.agri_gva_share", label: "Share of India's output (GVA)" }
+      ], why: "The human stake: how many people a weak monsoon can reach, set against how little it now moves headline GDP.", read: "Farming is about a seventh of output, so a bad year dents GDP far less than in 1965 - but it still employs roughly two in five working Indians.", watch: "The output line is RBI national accounts; the jobs line is the World Bank's modelled estimate. The gap between them is the monsoon's real human reach." }
     ]
   },
 
@@ -7298,6 +7386,78 @@ export const v1Questions = [
     ]
   },
 
+  {
+    id: "q.policy.internet_control",
+    slug: "indias-off-switch",
+    question: "When does India switch off the internet, and does it actually work?",
+    priority: "core",
+    // Built Jun 2026. Trigger: the June 2026 nationwide Telegram block (NEET re-exam
+    // paper-leak fears), now before the Delhi High Court as the first real test of
+    // whether Section 69A can lawfully kill an entire platform. Frame: India's three
+    // distinct off-switches (regional shutdowns under the Telegraph Act / Temporary
+    // Suspension Rules; app/platform bans and URL blocks under IT Act s.69A; ISP-level
+    // DNS blocking). Sources: SFLC.in Internet Shutdowns Tracker (live JSON endpoints,
+    // 2012-2026); dnsblocks.in "Poisoned Wells" blocklist (43,083 domains x 6 ISPs);
+    // Access Now / #KeepItOn STOP dataset (India platform blocks); MeitY s.69A counts
+    // disclosed to Parliament; Top10VPN cost estimates. Ingest: scripts/ingest-offswitch.py.
+    // Honesty spine: the most-invoked justification (stopping violence) is the one the
+    // best evidence (Rydzak 2019) contradicts; most DNS blocking is piracy/vice, not
+    // speech; every count is a documented floor because orders are secret by rule.
+    indicators: [
+      "policy.blocking.app_bans",
+      "policy.shutdowns.annual",
+      "policy.shutdowns.by_state",
+      "policy.shutdowns.state_ranked",
+      "policy.shutdowns.preventive",
+      "policy.shutdowns.reactive",
+      "policy.shutdowns.duration",
+      "policy.blocking.urls_annual",
+      "policy.blocking.dns_by_category",
+      "policy.blocking.dns_by_isp",
+      "policy.shutdowns.cost_usd",
+      "policy.blocking.platform_events",
+      "policy.blocking.urls_by_platform_total",
+      "policy.blocking.authority_split",
+      "policy.blocking.urls_facebook",
+      "policy.blocking.urls_x",
+      "policy.blocking.urls_youtube",
+      "policy.blocking.urls_instagram",
+      "policy.blocking.urls_others"
+    ],
+    // Curated "Further reading" — durable here in the registry so it survives
+    // explanation regeneration (merged into explanation.furtherReading at build time).
+    furtherReading: [
+      { label: "SFLC.in — Internet Shutdowns Tracker (the live database behind this page)", url: "https://internetshutdowns.in/" },
+      { label: "Jan Rydzak, ‘Of Blackouts and Bandhs’ (2019) — the study finding shutdowns track more violence, not less", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3330413" },
+      { label: "Anuradha Bhasin v. Union of India (Supreme Court, 2020) — shutdowns must be temporary, proportionate and published", url: "https://indiankanoon.org/doc/82461587/" },
+      { label: "ICRIER, ‘The Anatomy of an Internet Blackout’ (2018) — the economic-cost study", url: "https://icrier.org/publications/the-anatomy-of-an-internet-blackout-measuring-the-economic-impact-of-internet-shutdowns-in-india/" },
+      { label: "Access Now — #KeepItOn 2024 report (India in global context)", url: "https://www.accessnow.org/internet-shutdowns-2024/" }
+    ],
+    visualPlan: [
+      // ACT 1 - There isn't one ban. There are three.
+      { chart: "tableBars", indicator: "policy.blocking.app_bans", size: "hero", beat: "taxonomy", unit: "apps blocked in one action", subtitle: "Indica, from MeitY notifications + reporting · major Section 69A app/platform blocks · 2020-2026", title: "The apps India has switched off", why: "Telegram in 2026 was not a one-off: India has a standing power to switch off whole apps, and has used it in waves.", read: "Each bar is one blocking action and how many apps it took down. The 2020 surge (about 224 apps in a year) followed the India-China border clash; the 2026 Telegram block is a single app but roughly 150 million users.", watch: "Bars count apps, not users. Telegram is one app yet dwarfs the others in reach, which is exactly why its block went to court." },
+
+      // ACT 2 - How often, and where
+      { chart: "line", indicator: "policy.shutdowns.annual", size: "hero", beat: "scale", unit: "shutdowns per year", subtitle: "SFLC.in Internet Shutdowns Tracker · government-ordered internet suspensions · 2012-2026", title: "How often India goes dark", why: "The simplest measure of the off switch: how many times a year some part of India loses the internet by government order.", read: "Each point is the number of shutdowns recorded in a year. They climb from a handful in 2012 to a peak of 136 in 2018, then fall to 60 in 2024 as courts and scrutiny bit. 2026 is year-to-date.", watch: "A documented floor, not a ceiling: SFLC rebuilds this from news reports because the government rarely publishes shutdown orders. The fall is real but partly reflects fewer, longer blackouts." },
+      { chart: "choropleth", indicator: "policy.shutdowns.by_state", size: "feature", beat: "geography", unit: "shutdowns, 2012-2026", rankLabel: "Goes dark most", bottomLabel: "Never recorded", subtitle: "SFLC.in · cumulative government-ordered shutdowns by state · 2012-2026", title: "Where India goes dark", why: "The national count hides a stark geography: shutdowns are not spread across India, they are concentrated in a few places.", read: "Each state is shaded by its cumulative shutdowns. Jammu & Kashmir alone accounts for 453 of 922 (about half of every shutdown India has ever recorded); most of the country has had almost none.", watch: "These are counts of orders, not their length or severity. A region with many short shutdowns can rank above one with a single months-long blackout." },
+      { chart: "tableBars", indicator: "policy.shutdowns.state_ranked", size: "feature", beat: "geography-ranked", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · top 12 states by cumulative recorded shutdowns · 2012-2026", title: "The states that go dark most", why: "The map sharpened into a league table: a handful of states do nearly all of India's switching-off.", read: "Each bar is a state's cumulative shutdowns. Jammu & Kashmir is in a category of its own; Rajasthan is a distant second; the rest trail far behind.", watch: "Cumulative since 2012, so a long-troubled region dominates even if it is quieter now. This is history, not a snapshot of today." },
+
+      // ACT 3 - Most of it happens before anything does
+      { chart: "multiLine", indicator: "policy.shutdowns.preventive", series: [ { indicator: "policy.shutdowns.preventive", label: "Preventive (before any event)", color: "#c2476b" }, { indicator: "policy.shutdowns.reactive", label: "Reactive (during an event)", color: "#1f9e8a" } ], size: "feature", beat: "preventive", unit: "shutdowns per year", subtitle: "SFLC.in · shutdowns imposed in anticipation vs in response · 2012-2026", title: "Most blackouts are imposed before anything happens", why: "The justification is usually public safety in a crisis, but the data says most shutdowns are pre-emptive, ordered before any trouble has begun.", read: "Two lines: shutdowns imposed in anticipation of an event (an exam, a protest, an anniversary) against those responding to one unfolding. Preventive runs far above reactive for most of the record, peaking near 94-to-6 in 2021.", watch: "Preventive vs reactive is SFLC's classification from the stated reason; the line between anticipating trouble and pre-empting dissent is exactly what is contested." },
+      { chart: "tableBars", indicator: "policy.shutdowns.duration", size: "feature", beat: "opacity", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · every recorded shutdown bucketed by duration · 2012-2026", title: "How long they last, and how often we just don't know", why: "Even basic facts about a shutdown are hidden: for a huge share, nobody outside government knows how long the internet stayed off.", read: "Each bar is a duration bucket across all recorded shutdowns. The single largest bucket is 'never disclosed' (about half), because orders are rarely published and duration is guessed from news reports.", watch: "The opacity is the finding, not a data gap to apologise for. Undisclosed duration means the public cannot check whether a shutdown was as brief or proportionate as claimed." },
+
+      // ACT 4 - The quieter switch: blocking orders
+      { chart: "line", indicator: "policy.blocking.urls_annual", size: "feature", beat: "blocking-orders", unit: "URLs blocked", subtitle: "MeitY answers to Parliament · websites, accounts and URLs blocked under IT Act s.69A · 2017-2023", title: "The quieter off switch: blocking orders", why: "Shutdowns are visible and noisy; URL blocking is silent and far larger, and it has grown.", read: "Each point is the number of websites, accounts and URLs ordered blocked under Section 69A in a year, as disclosed to Parliament. They spike to nearly 9,900 in 2020 and run in the thousands every year.", watch: "These are the government's own figures and do not fully reconcile across answers; the orders themselves are confidential by rule, so the public never learns what was blocked or why. Read the magnitude, not the exact count." },
+      { chart: "tableBars", indicator: "policy.blocking.authority_split", size: "feature", beat: "who-orders", unit: "websites blocked, 2015-2022", subtitle: "SFLC.in 'Finding 404', from RTI replies · India's website blocks by ordering authority · Jan 2015-Sep 2022", title: "Who orders India's website blocks", why: "Blocking is often pictured as judges weighing free speech, but nearly half of it is the executive acting in secret.", read: "Of about 55,580 websites blocked over 2015-22, court orders (mostly copyright) and executive orders under Section 69A are almost neck-and-neck, at roughly 47% each. The executive half is the opaque one: those orders are confidential by rule.", watch: "This is an aggregate split across the whole period, not a year-by-year trend. Court-ordered blocks are dominated by a few large anti-piracy orders that each cover many mirror sites." },
+      { chart: "multiLine", indicator: "policy.blocking.urls_x", size: "feature", beat: "which-platforms", unit: "URLs blocked under s.69A", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · URLs blocked under IT Act s.69A, by platform · 2018-2023 (2023 till Oct)", title: "X overtook Facebook as the most-blocked platform", series: [ { indicator: "policy.blocking.urls_x", label: "X (Twitter)", color: "#111111" }, { indicator: "policy.blocking.urls_facebook", label: "Facebook", color: "#1877f2" }, { indicator: "policy.blocking.urls_youtube", label: "YouTube", color: "#e0245e" }, { indicator: "policy.blocking.urls_instagram", label: "Instagram", color: "#c13584" }, { indicator: "policy.blocking.urls_others", label: "Others", color: "#9aa0a6" } ], why: "The aggregate count hides who actually gets censored, and the answer flipped as the politics did.", read: "Each line is one platform's URLs blocked under Section 69A. Facebook drew the most takedowns in 2018-19; from 2020 X (Twitter) pulled far ahead, peaking near 3,400 a year, even as Facebook stayed high.", watch: "Counts are URLs/accounts/posts, not unique pieces of content, and 2023 is only till October. The crossover tracks contested political moments (farmer protests, 2021) as much as platform size." },
+      { chart: "tableBars", indicator: "policy.blocking.urls_by_platform_total", size: "small", beat: "which-platforms-total", unit: "URLs blocked, 2018-Oct 2023", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · total URLs blocked under s.69A by platform · 2018-Oct 2023", title: "Which platforms India blocks the most", why: "Summed over six years, the league table makes the target plain.", read: "Each bar is a platform's total URLs blocked under Section 69A from 2018 to October 2023. X leads with 13,660, then Facebook (10,197), YouTube (5,759), a catch-all 'others' (4,199) and Instagram (3,023).", watch: "Totals lump together very different years; the same six-year window saw Facebook lead early and X lead late. 'Others' bundles every smaller platform." },
+      { chart: "tableBars", indicator: "policy.blocking.dns_by_category", size: "feature", beat: "what-blocked", unit: "blocked domains", subtitle: "dnsblocks.in 'Poisoned Wells' study · 43,083 DNS-blocked domains across 6 ISPs, by category", title: "What India's ISPs actually block", why: "Before calling all blocking censorship, look at what is on the list: the answer complicates the easy story.", read: "Each bar is how many blocked domains fall in a category, grouped by kind. Piracy and streaming dominate by far; pornography and gambling follow; content tied to speech and access (news, political criticism, government, circumvention tools) is a tiny sliver.", watch: "DNS blocking is one mechanism among several and is trivially bypassed, so this measures intent, not an airtight wall. 'Uncategorised' is large and unclassified." },
+      { chart: "tableBars", indicator: "policy.blocking.dns_by_isp", size: "small", beat: "uneven", unit: "blocked domains", subtitle: "dnsblocks.in · number of domains found DNS-blocked, by internet provider", title: "What you can reach depends on your ISP", why: "The same blocking orders are implemented unevenly, so the open internet you get depends on who you pay for it.", read: "Each bar is how many domains one provider was found to DNS-block. Airtel blocks the most by a wide margin; the lightest providers block under half as many.", watch: "Differences partly reflect how each ISP implements orders and how thoroughly the study could probe it, not just policy zeal." },
+
+      // ACT 5 - What it costs (evidence: Rydzak / does-it-work handled in prose)
+      { chart: "tableBars", indicator: "policy.shutdowns.cost_usd", size: "feature", beat: "cost", unit: "US$ million, 2012-2017", subtitle: "ICRIER, The Anatomy of an Internet Blackout (2018) · economic loss from internet shutdowns · 2012-2017", title: "What switching it off costs", why: "Shutdowns are not free: the most authoritative India study put the loss at about three billion dollars in six years.", read: "The two bars split ICRIER's roughly $3bn estimate by type. Mobile-only shutdowns did about four-fifths of the damage; combined mobile-and-fixed shutdowns the rest.", watch: "This is a macro-econometric estimate over 2012-2017, not exact accounting and not a recent-year figure. More recent annual losses, tracked by the NetBlocks Cost of Shutdown Tool, run in the hundreds of millions a year." }
+    ]
+  },
 
   {
     id: "q.media.news_consumption",
@@ -7494,257 +7654,6 @@ export const v1Questions = [
         why: "When you ask about specific brands, public broadcasters and old print mastheads come out on top.",
         read: "Legacy newspapers and public broadcasters (Times of India, All India Radio, DD India, BBC) score highest; partisan TV and critical digital-born outlets score lower.",
         watch: "Low scores can mean a brand is distrusted OR is critical of power and actively disliked by some; this is not a quality ranking." }
-    ]
-  },
-  {
-    id: "q.policy.internet_control",
-    slug: "indias-off-switch",
-    question: "When does India switch off the internet, and does it actually work?",
-    priority: "core",
-    // Built Jun 2026. Trigger: the June 2026 nationwide Telegram block (NEET re-exam
-    // paper-leak fears), now before the Delhi High Court as the first real test of
-    // whether Section 69A can lawfully kill an entire platform. Frame: India's three
-    // distinct off-switches (regional shutdowns under the Telegraph Act / Temporary
-    // Suspension Rules; app/platform bans and URL blocks under IT Act s.69A; ISP-level
-    // DNS blocking). Sources: SFLC.in Internet Shutdowns Tracker (live JSON endpoints,
-    // 2012-2026); dnsblocks.in "Poisoned Wells" blocklist (43,083 domains x 6 ISPs);
-    // Access Now / #KeepItOn STOP dataset (India platform blocks); MeitY s.69A counts
-    // disclosed to Parliament; Top10VPN cost estimates. Ingest: scripts/ingest-offswitch.py.
-    // Honesty spine: the most-invoked justification (stopping violence) is the one the
-    // best evidence (Rydzak 2019) contradicts; most DNS blocking is piracy/vice, not
-    // speech; every count is a documented floor because orders are secret by rule.
-    indicators: [
-      "policy.blocking.app_bans",
-      "policy.shutdowns.annual",
-      "policy.shutdowns.by_state",
-      "policy.shutdowns.state_ranked",
-      "policy.shutdowns.preventive",
-      "policy.shutdowns.reactive",
-      "policy.shutdowns.duration",
-      "policy.blocking.urls_annual",
-      "policy.blocking.dns_by_category",
-      "policy.blocking.dns_by_isp",
-      "policy.shutdowns.cost_usd",
-      "policy.blocking.platform_events",
-      "policy.blocking.urls_by_platform_total",
-      "policy.blocking.authority_split",
-      "policy.blocking.urls_facebook",
-      "policy.blocking.urls_x",
-      "policy.blocking.urls_youtube",
-      "policy.blocking.urls_instagram",
-      "policy.blocking.urls_others"
-    ],
-    // Curated "Further reading" — durable here in the registry so it survives
-    // explanation regeneration (merged into explanation.furtherReading at build time).
-    furtherReading: [
-      { label: "SFLC.in — Internet Shutdowns Tracker (the live database behind this page)", url: "https://internetshutdowns.in/" },
-      { label: "Jan Rydzak, ‘Of Blackouts and Bandhs’ (2019) — the study finding shutdowns track more violence, not less", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3330413" },
-      { label: "Anuradha Bhasin v. Union of India (Supreme Court, 2020) — shutdowns must be temporary, proportionate and published", url: "https://indiankanoon.org/doc/82461587/" },
-      { label: "ICRIER, ‘The Anatomy of an Internet Blackout’ (2018) — the economic-cost study", url: "https://icrier.org/publications/the-anatomy-of-an-internet-blackout-measuring-the-economic-impact-of-internet-shutdowns-in-india/" },
-      { label: "Access Now — #KeepItOn 2024 report (India in global context)", url: "https://www.accessnow.org/internet-shutdowns-2024/" }
-    ],
-    visualPlan: [
-      // ACT 1 - There isn't one ban. There are three.
-      { chart: "tableBars", indicator: "policy.blocking.app_bans", size: "hero", beat: "taxonomy", unit: "apps blocked in one action", subtitle: "Indica, from MeitY notifications + reporting · major Section 69A app/platform blocks · 2020-2026", title: "The apps India has switched off", why: "Telegram in 2026 was not a one-off: India has a standing power to switch off whole apps, and has used it in waves.", read: "Each bar is one blocking action and how many apps it took down. The 2020 surge (about 224 apps in a year) followed the India-China border clash; the 2026 Telegram block is a single app but roughly 150 million users.", watch: "Bars count apps, not users. Telegram is one app yet dwarfs the others in reach, which is exactly why its block went to court." },
-
-      // ACT 2 - How often, and where
-      { chart: "line", indicator: "policy.shutdowns.annual", size: "hero", beat: "scale", unit: "shutdowns per year", subtitle: "SFLC.in Internet Shutdowns Tracker · government-ordered internet suspensions · 2012-2026", title: "How often India goes dark", why: "The simplest measure of the off switch: how many times a year some part of India loses the internet by government order.", read: "Each point is the number of shutdowns recorded in a year. They climb from a handful in 2012 to a peak of 136 in 2018, then fall to 60 in 2024 as courts and scrutiny bit. 2026 is year-to-date.", watch: "A documented floor, not a ceiling: SFLC rebuilds this from news reports because the government rarely publishes shutdown orders. The fall is real but partly reflects fewer, longer blackouts." },
-      { chart: "choropleth", indicator: "policy.shutdowns.by_state", size: "feature", beat: "geography", unit: "shutdowns, 2012-2026", rankLabel: "Goes dark most", bottomLabel: "Never recorded", subtitle: "SFLC.in · cumulative government-ordered shutdowns by state · 2012-2026", title: "Where India goes dark", why: "The national count hides a stark geography: shutdowns are not spread across India, they are concentrated in a few places.", read: "Each state is shaded by its cumulative shutdowns. Jammu & Kashmir alone accounts for 453 of 922 (about half of every shutdown India has ever recorded); most of the country has had almost none.", watch: "These are counts of orders, not their length or severity. A region with many short shutdowns can rank above one with a single months-long blackout." },
-      { chart: "tableBars", indicator: "policy.shutdowns.state_ranked", size: "feature", beat: "geography-ranked", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · top 12 states by cumulative recorded shutdowns · 2012-2026", title: "The states that go dark most", why: "The map sharpened into a league table: a handful of states do nearly all of India's switching-off.", read: "Each bar is a state's cumulative shutdowns. Jammu & Kashmir is in a category of its own; Rajasthan is a distant second; the rest trail far behind.", watch: "Cumulative since 2012, so a long-troubled region dominates even if it is quieter now. This is history, not a snapshot of today." },
-
-      // ACT 3 - Most of it happens before anything does
-      { chart: "multiLine", indicator: "policy.shutdowns.preventive", series: [ { indicator: "policy.shutdowns.preventive", label: "Preventive (before any event)", color: "#c2476b" }, { indicator: "policy.shutdowns.reactive", label: "Reactive (during an event)", color: "#1f9e8a" } ], size: "feature", beat: "preventive", unit: "shutdowns per year", subtitle: "SFLC.in · shutdowns imposed in anticipation vs in response · 2012-2026", title: "Most blackouts are imposed before anything happens", why: "The justification is usually public safety in a crisis, but the data says most shutdowns are pre-emptive, ordered before any trouble has begun.", read: "Two lines: shutdowns imposed in anticipation of an event (an exam, a protest, an anniversary) against those responding to one unfolding. Preventive runs far above reactive for most of the record, peaking near 94-to-6 in 2021.", watch: "Preventive vs reactive is SFLC's classification from the stated reason; the line between anticipating trouble and pre-empting dissent is exactly what is contested." },
-      { chart: "tableBars", indicator: "policy.shutdowns.duration", size: "feature", beat: "opacity", unit: "shutdowns, 2012-2026", subtitle: "SFLC.in · every recorded shutdown bucketed by duration · 2012-2026", title: "How long they last, and how often we just don't know", why: "Even basic facts about a shutdown are hidden: for a huge share, nobody outside government knows how long the internet stayed off.", read: "Each bar is a duration bucket across all recorded shutdowns. The single largest bucket is 'never disclosed' (about half), because orders are rarely published and duration is guessed from news reports.", watch: "The opacity is the finding, not a data gap to apologise for. Undisclosed duration means the public cannot check whether a shutdown was as brief or proportionate as claimed." },
-
-      // ACT 4 - The quieter switch: blocking orders
-      { chart: "line", indicator: "policy.blocking.urls_annual", size: "feature", beat: "blocking-orders", unit: "URLs blocked", subtitle: "MeitY answers to Parliament · websites, accounts and URLs blocked under IT Act s.69A · 2017-2023", title: "The quieter off switch: blocking orders", why: "Shutdowns are visible and noisy; URL blocking is silent and far larger, and it has grown.", read: "Each point is the number of websites, accounts and URLs ordered blocked under Section 69A in a year, as disclosed to Parliament. They spike to nearly 9,900 in 2020 and run in the thousands every year.", watch: "These are the government's own figures and do not fully reconcile across answers; the orders themselves are confidential by rule, so the public never learns what was blocked or why. Read the magnitude, not the exact count." },
-      { chart: "tableBars", indicator: "policy.blocking.authority_split", size: "feature", beat: "who-orders", unit: "websites blocked, 2015-2022", subtitle: "SFLC.in 'Finding 404', from RTI replies · India's website blocks by ordering authority · Jan 2015-Sep 2022", title: "Who orders India's website blocks", why: "Blocking is often pictured as judges weighing free speech, but nearly half of it is the executive acting in secret.", read: "Of about 55,580 websites blocked over 2015-22, court orders (mostly copyright) and executive orders under Section 69A are almost neck-and-neck, at roughly 47% each. The executive half is the opaque one: those orders are confidential by rule.", watch: "This is an aggregate split across the whole period, not a year-by-year trend. Court-ordered blocks are dominated by a few large anti-piracy orders that each cover many mirror sites." },
-      { chart: "multiLine", indicator: "policy.blocking.urls_x", size: "feature", beat: "which-platforms", unit: "URLs blocked under s.69A", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · URLs blocked under IT Act s.69A, by platform · 2018-2023 (2023 till Oct)", title: "X overtook Facebook as the most-blocked platform", series: [ { indicator: "policy.blocking.urls_x", label: "X (Twitter)", color: "#111111" }, { indicator: "policy.blocking.urls_facebook", label: "Facebook", color: "#1877f2" }, { indicator: "policy.blocking.urls_youtube", label: "YouTube", color: "#e0245e" }, { indicator: "policy.blocking.urls_instagram", label: "Instagram", color: "#c13584" }, { indicator: "policy.blocking.urls_others", label: "Others", color: "#9aa0a6" } ], why: "The aggregate count hides who actually gets censored, and the answer flipped as the politics did.", read: "Each line is one platform's URLs blocked under Section 69A. Facebook drew the most takedowns in 2018-19; from 2020 X (Twitter) pulled far ahead, peaking near 3,400 a year, even as Facebook stayed high.", watch: "Counts are URLs/accounts/posts, not unique pieces of content, and 2023 is only till October. The crossover tracks contested political moments (farmer protests, 2021) as much as platform size." },
-      { chart: "tableBars", indicator: "policy.blocking.urls_by_platform_total", size: "small", beat: "which-platforms-total", unit: "URLs blocked, 2018-Oct 2023", subtitle: "Rajya Sabha Unstarred Q732 (08.12.2023) · total URLs blocked under s.69A by platform · 2018-Oct 2023", title: "Which platforms India blocks the most", why: "Summed over six years, the league table makes the target plain.", read: "Each bar is a platform's total URLs blocked under Section 69A from 2018 to October 2023. X leads with 13,660, then Facebook (10,197), YouTube (5,759), a catch-all 'others' (4,199) and Instagram (3,023).", watch: "Totals lump together very different years; the same six-year window saw Facebook lead early and X lead late. 'Others' bundles every smaller platform." },
-      { chart: "tableBars", indicator: "policy.blocking.dns_by_category", size: "feature", beat: "what-blocked", unit: "blocked domains", subtitle: "dnsblocks.in 'Poisoned Wells' study · 43,083 DNS-blocked domains across 6 ISPs, by category", title: "What India's ISPs actually block", why: "Before calling all blocking censorship, look at what is on the list: the answer complicates the easy story.", read: "Each bar is how many blocked domains fall in a category, grouped by kind. Piracy and streaming dominate by far; pornography and gambling follow; content tied to speech and access (news, political criticism, government, circumvention tools) is a tiny sliver.", watch: "DNS blocking is one mechanism among several and is trivially bypassed, so this measures intent, not an airtight wall. 'Uncategorised' is large and unclassified." },
-      { chart: "tableBars", indicator: "policy.blocking.dns_by_isp", size: "small", beat: "uneven", unit: "blocked domains", subtitle: "dnsblocks.in · number of domains found DNS-blocked, by internet provider", title: "What you can reach depends on your ISP", why: "The same blocking orders are implemented unevenly, so the open internet you get depends on who you pay for it.", read: "Each bar is how many domains one provider was found to DNS-block. Airtel blocks the most by a wide margin; the lightest providers block under half as many.", watch: "Differences partly reflect how each ISP implements orders and how thoroughly the study could probe it, not just policy zeal." },
-
-      // ACT 5 - What it costs (evidence: Rydzak / does-it-work handled in prose)
-      { chart: "tableBars", indicator: "policy.shutdowns.cost_usd", size: "feature", beat: "cost", unit: "US$ million, 2012-2017", subtitle: "ICRIER, The Anatomy of an Internet Blackout (2018) · economic loss from internet shutdowns · 2012-2017", title: "What switching it off costs", why: "Shutdowns are not free: the most authoritative India study put the loss at about three billion dollars in six years.", read: "The two bars split ICRIER's roughly $3bn estimate by type. Mobile-only shutdowns did about four-fifths of the damage; combined mobile-and-fixed shutdowns the rest.", watch: "This is a macro-econometric estimate over 2012-2017, not exact accounting and not a recent-year figure. More recent annual losses, tracked by the NetBlocks Cost of Shutdown Tool, run in the hundreds of millions a year." }
-    ]
-  },
-  {
-    id: "q.work.jobs_challenge",
-    slug: "india-jobs-challenge",
-    question: "Does India really have the biggest jobs challenge in the world?",
-    priority: "core",
-    // Built Jun 2026 off a single authoritative source: the World Bank's "The Global Jobs
-    // Challenge" (2026 advance edition; eds. Chrimes, Kose, Stamm), with global comparisons
-    // for scale. India is #1 of all EMDEs on every absolute measure: ~238m young people
-    // reach working age 2025-35 (youth method, Fig 2.8.A), ~91m net working-age increase by
-    // 2035 and ~132m by 2050 (Figs 2.8.C/D) -- roughly one in five of the entire developing
-    // world's jobs challenge. The honesty spine: (1) these are PROJECTIONS, method-dependent
-    // and uncertain, not measurements; (2) India's challenge is scale, not intensity -- the
-    // most youth-DENSE economies are elsewhere (CAR, Niger, the Pacific); (3) the youth
-    // cohort has already STOPPED growing (growth negative from ~2021, Fig 2.2.C) so this is
-    // the crest of the wave, not a still-opening window; (4) how big the task is hinges on
-    // labour-force participation, above all women's -- the IMF (Alonso-MacDonald 2024) range
-    // the report cites runs 60m-148m jobs by 2030 purely on that assumption (flagged as a
-    // cited study, not the WB's own number). Ingest: scripts/ingest-jobs-challenge.mjs.
-    indicators: [
-      "work.jobs.youth_reaching_wap_top10",
-      "work.jobs.india_vs_regions_youth",
-      "work.jobs.wap_increase_2050_top10",
-      "work.jobs.india_youth_growth",
-      "work.jobs.india_wap_growth",
-      "work.jobs.population_india",
-      "work.jobs.population_china",
-      "work.jobs.lfp_job_scenarios"
-    ],
-    furtherReading: [
-      { label: "World Bank — The Global Jobs Challenge (2026), the report this page is built on", url: "https://www.worldbank.org/en/research/publication/global-jobs-challenge" },
-      { label: "Alonso & MacDonald, ‘Advancing India’s Structural Transformation’ (IMF, 2024) — the 60–148m participation range", url: "https://www.imf.org/en/Publications/WP/Issues/2024/02/02/Advancing-Indias-Structural-Transformation-and-Catch-up-544370" },
-      { label: "Rajan & Lamba, ‘Breaking the Mold: India’s Untraveled Path to Prosperity’ (2024) — the high-skilled-services case", url: "https://press.princeton.edu/books/hardcover/9780691263779/breaking-the-mold" }
-    ],
-    visualPlan: [
-      // ACT 1 - The biggest job in the world
-      { chart: "tableBars", indicator: "work.jobs.youth_reaching_wap_top10", size: "hero", beat: "ranking", unit: "million young people reaching working age, 2025-35",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.A · young people reaching working age, 2025-35 · UN WPP 2024",
-        title: "India tops the developing world's jobs challenge",
-        why: "The single headline finding: of every developing economy, India must absorb the largest wave of new workers this decade.",
-        read: "Each bar is the number of young people who reach working age in that economy over 2025-35. India leads at about 238 million, well ahead of China (169m) and Nigeria (61m).",
-        watch: "These are demographic projections, not a current jobs shortfall: the bar counts people reaching working age, not the unemployed." },
-      { chart: "tableBars", indicator: "work.jobs.india_vs_regions_youth", size: "feature", beat: "scale", unit: "million young people reaching working age, 2025-35",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Figs 2.7.B & 2.8.A · India vs whole EMDE regions · UN WPP 2024",
-        title: "One country, a fifth of the problem",
-        why: "To feel the scale, set India alone against entire world regions rather than other single countries.",
-        read: "India's roughly 238 million is about 86% of all South Asia, around 72% of all Sub-Saharan Africa, and larger than the Middle East, Latin America or Europe-and-Central-Asia regions on their own. Across all developing economies the total is about 1.23 billion, so India is close to one in five.",
-        watch: "India is one country; the bars beside it are whole multi-country regions. That is the point, not an error." },
-
-      // ACT 2 - Count it any way, India still finishes first
-      { chart: "tableBars", indicator: "work.jobs.wap_increase_2050_top10", size: "feature", beat: "robustness", unit: "million net working-age increase, 2025-50",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.D · net working-age (15-64) increase, 2025-50 · UN WPP 2024",
-        title: "Still the biggest a generation out",
-        why: "The headline is not an artefact of one counting method: switch to net working-age growth and stretch to 2050, India still leads.",
-        read: "Each bar is the net rise in the working-age population (15-64) over 2025-50. India tops it at about 132 million, ahead of Nigeria (98m) and Pakistan (89m). India is also #1 over the shorter 2025-35 window, at about 91 million.",
-        watch: "Methods give very different point estimates (the all-EMDE total ranges from 270m to 1.23bn depending on the method); we use them as a consistent ranking, not exact counts." },
-
-      // ACT 3 - The wave has already crested
-      { chart: "line", indicator: "work.jobs.india_youth_growth", size: "feature", beat: "cresting", window: "full", unit: "% annual growth, population aged 15-24",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.2.C (India) · annual growth of the 15-24 population · UN WPP 2024",
-        title: "The wave has already crested",
-        why: "The twist behind the big number: India's youth cohort is no longer growing, even as it stays the largest on earth.",
-        read: "The line is the annual growth rate of India's youth population (aged 15-24). It crosses below zero around 2021 and stays negative: the cohort has stopped expanding. The demographic window is closing, not still opening.",
-        watch: "Negative growth does not mean few young people; it means the number has peaked. The absolute cohort stays enormous for a decade." },
-      { chart: "line", indicator: "work.jobs.india_wap_growth", size: "small", beat: "cresting-broad", window: "full", unit: "% annual growth, population aged 15-64",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.3.B (India) · annual growth of the 15-64 population · UN WPP 2024",
-        title: "Even the working-age pool is flattening",
-        why: "It is not just the youngest cohort: the whole 15-64 pool, the people an economy actually puts to work, is on the same downward path, a beat behind.",
-        read: "The line is the annual growth rate of India's working-age population (aged 15-64). It is still positive but slows steadily, from about 2.5% in 2000 to under 1% by 2030 and roughly zero by 2049. The broad pool is still growing, but its growth has a clear end in sight.",
-        watch: "This still rises while the youth line already falls, because the two cohorts age in sequence; the working-age pool keeps growing for now, just more slowly each year." },
-      { chart: "multiLine", indicator: "work.jobs.population_india", size: "feature", beat: "overtake", window: "full", unit: "billion people",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.1.A · total population · UN WPP 2024",
-        title: "The largest workforce on earth, but cresting",
-        series: [
-          { indicator: "work.jobs.population_india", label: "India", color: "#b3245a" },
-          { indicator: "work.jobs.population_china", label: "China", color: "#8a8597" }
-        ],
-        why: "Context for the workforce story: India overtook China to become the world's most populous economy, but its own population peaks within a generation.",
-        read: "Each line is total population in billions. India passes China around 2022-23 and keeps rising to a peak near 1.70 billion around 2061; China is already in sustained decline.",
-        watch: "Population is not the workforce, but it sets its ceiling. India's edge is a one-time demographic window, not a permanent gap." },
-
-      // ACT 4 - The 60-to-148-million question
-      { chart: "tableBars", indicator: "work.jobs.lfp_job_scenarios", size: "feature", beat: "participation", unit: "million new jobs needed",
-        subtitle: "IMF (Alonso & MacDonald 2024), cited in World Bank, The Global Jobs Challenge (2026) · jobs needed by labour-force-participation assumption",
-        title: "A 60-million job problem, or a 148-million one",
-        why: "How big the task actually is comes down to one variable the report keeps returning to: whether Indians, above all women, join the workforce.",
-        read: "Holding participation at today's rate, India needs about 60 million new jobs by 2030; lifting it toward a target rate pushes that to about 148 million. By 2050 the same lever spans roughly 143 to 324 million.",
-        watch: "This range is from an IMF study the report cites, not the World Bank's own count. It is an illustration of how sensitive the number is to participation, not a precise forecast." }
-    ]
-  },
-
-  {
-    id: "q.work.jobs_challenge",
-    slug: "the-biggest-job-in-the-world",
-    question: "Does India really have the biggest jobs challenge in the world?",
-    priority: "core",
-    // Built Jun 2026 off a single authoritative source: the World Bank's "The Global Jobs
-    // Challenge" (2026 advance edition; eds. Chrimes, Kose, Stamm), with global comparisons
-    // for scale. India is #1 of all EMDEs on every absolute measure: ~238m young people
-    // reach working age 2025-35 (youth method, Fig 2.8.A), ~91m net working-age increase by
-    // 2035 and ~132m by 2050 (Figs 2.8.C/D) -- roughly one in five of the entire developing
-    // world's jobs challenge. The honesty spine: (1) these are PROJECTIONS, method-dependent
-    // and uncertain, not measurements; (2) India's challenge is scale, not intensity -- the
-    // most youth-DENSE economies are elsewhere (CAR, Niger, the Pacific); (3) the youth
-    // cohort has already STOPPED growing (growth negative from ~2021, Fig 2.2.C) so this is
-    // the crest of the wave, not a still-opening window; (4) how big the task is hinges on
-    // labour-force participation, above all women's -- the IMF (Alonso-MacDonald 2024) range
-    // the report cites runs 60m-148m jobs by 2030 purely on that assumption (flagged as a
-    // cited study, not the WB's own number). Ingest: scripts/ingest-jobs-challenge.mjs.
-    indicators: [
-      "work.jobs.youth_reaching_wap_top10",
-      "work.jobs.india_vs_regions_youth",
-      "work.jobs.wap_increase_2050_top10",
-      "work.jobs.india_youth_growth",
-      "work.jobs.india_wap_growth",
-      "work.jobs.population_india",
-      "work.jobs.population_china",
-      "work.jobs.lfp_job_scenarios"
-    ],
-    furtherReading: [
-      { label: "World Bank — The Global Jobs Challenge (2026), the report this page is built on", url: "https://www.worldbank.org/en/research/publication/global-jobs-challenge" },
-      { label: "Alonso & MacDonald, ‘Advancing India’s Structural Transformation’ (IMF, 2024) — the 60–148m participation range", url: "https://www.imf.org/en/Publications/WP/Issues/2024/02/02/Advancing-Indias-Structural-Transformation-and-Catch-up-544370" },
-      { label: "Rajan & Lamba, ‘Breaking the Mold: India’s Untraveled Path to Prosperity’ (2024) — the high-skilled-services case", url: "https://press.princeton.edu/books/hardcover/9780691263779/breaking-the-mold" }
-    ],
-    visualPlan: [
-      // ACT 1 - The biggest job in the world
-      { chart: "tableBars", indicator: "work.jobs.youth_reaching_wap_top10", size: "hero", beat: "ranking", unit: "million young people reaching working age, 2025-35",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.A · young people reaching working age, 2025-35 · UN WPP 2024",
-        title: "India tops the developing world's jobs challenge",
-        why: "The single headline finding: of every developing economy, India must absorb the largest wave of new workers this decade.",
-        read: "Each bar is the number of young people who reach working age in that economy over 2025-35. India leads at about 238 million, well ahead of China (169m) and Nigeria (61m).",
-        watch: "These are demographic projections, not a current jobs shortfall: the bar counts people reaching working age, not the unemployed." },
-      { chart: "tableBars", indicator: "work.jobs.india_vs_regions_youth", size: "feature", beat: "scale", unit: "million young people reaching working age, 2025-35",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Figs 2.7.B & 2.8.A · India vs whole EMDE regions · UN WPP 2024",
-        title: "One country, a fifth of the problem",
-        why: "To feel the scale, set India alone against entire world regions rather than other single countries.",
-        read: "India's roughly 238 million is about 86% of all South Asia, around 72% of all Sub-Saharan Africa, and larger than the Middle East, Latin America or Europe-and-Central-Asia regions on their own. Across all developing economies the total is about 1.23 billion, so India is close to one in five.",
-        watch: "India is one country; the bars beside it are whole multi-country regions. That is the point, not an error." },
-
-      // ACT 2 - Count it any way, India still finishes first
-      { chart: "tableBars", indicator: "work.jobs.wap_increase_2050_top10", size: "feature", beat: "robustness", unit: "million net working-age increase, 2025-50",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.8.D · net working-age (15-64) increase, 2025-50 · UN WPP 2024",
-        title: "Still the biggest a generation out",
-        why: "The headline is not an artefact of one counting method: switch to net working-age growth and stretch to 2050, India still leads.",
-        read: "Each bar is the net rise in the working-age population (15-64) over 2025-50. India tops it at about 132 million, ahead of Nigeria (98m) and Pakistan (89m). India is also #1 over the shorter 2025-35 window, at about 91 million.",
-        watch: "Methods give very different point estimates (the all-EMDE total ranges from 270m to 1.23bn depending on the method); we use them as a consistent ranking, not exact counts." },
-
-      // ACT 3 - The wave has already crested
-      { chart: "line", indicator: "work.jobs.india_youth_growth", size: "feature", beat: "cresting", window: "full", unit: "% annual growth, population aged 15-24",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.2.C (India) · annual growth of the 15-24 population · UN WPP 2024",
-        title: "The wave has already crested",
-        why: "The twist behind the big number: India's youth cohort is no longer growing, even as it stays the largest on earth.",
-        read: "The line is the annual growth rate of India's youth population (aged 15-24). It crosses below zero around 2021 and stays negative: the cohort has stopped expanding. The demographic window is closing, not still opening.",
-        watch: "Negative growth does not mean few young people; it means the number has peaked. The absolute cohort stays enormous for a decade." },
-      { chart: "line", indicator: "work.jobs.india_wap_growth", size: "small", beat: "cresting-broad", window: "full", unit: "% annual growth, population aged 15-64",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.3.B (India) · annual growth of the 15-64 population · UN WPP 2024",
-        title: "Even the working-age pool is flattening",
-        why: "It is not just the youngest cohort: the whole 15-64 pool, the people an economy actually puts to work, is on the same downward path, a beat behind.",
-        read: "The line is the annual growth rate of India's working-age population (aged 15-64). It is still positive but slows steadily, from about 2.5% in 2000 to under 1% by 2030 and roughly zero by 2049. The broad pool is still growing, but its growth has a clear end in sight.",
-        watch: "This still rises while the youth line already falls, because the two cohorts age in sequence; the working-age pool keeps growing for now, just more slowly each year." },
-      { chart: "multiLine", indicator: "work.jobs.population_india", size: "feature", beat: "overtake", window: "full", unit: "billion people",
-        subtitle: "World Bank, The Global Jobs Challenge (2026), Fig 2.1.A · total population · UN WPP 2024",
-        title: "The largest workforce on earth, but cresting",
-        series: [
-          { indicator: "work.jobs.population_india", label: "India", color: "#b3245a" },
-          { indicator: "work.jobs.population_china", label: "China", color: "#8a8597" }
-        ],
-        why: "Context for the workforce story: India overtook China to become the world's most populous economy, but its own population peaks within a generation.",
-        read: "Each line is total population in billions. India passes China around 2022-23 and keeps rising to a peak near 1.70 billion around 2061; China is already in sustained decline.",
-        watch: "Population is not the workforce, but it sets its ceiling. India's edge is a one-time demographic window, not a permanent gap." },
-
-      // ACT 4 - The 60-to-148-million question
-      { chart: "tableBars", indicator: "work.jobs.lfp_job_scenarios", size: "feature", beat: "participation", unit: "million new jobs needed",
-        subtitle: "IMF (Alonso & MacDonald 2024), cited in World Bank, The Global Jobs Challenge (2026) · jobs needed by labour-force-participation assumption",
-        title: "A 60-million job problem, or a 148-million one",
-        why: "How big the task actually is comes down to one variable the report keeps returning to: whether Indians, above all women, join the workforce.",
-        read: "Holding participation at today's rate, India needs about 60 million new jobs by 2030; lifting it toward a target rate pushes that to about 148 million. By 2050 the same lever spans roughly 143 to 324 million.",
-        watch: "This range is from an IMF study the report cites, not the World Bank's own count. It is an illustration of how sensitive the number is to participation, not a precise forecast." }
     ]
   },
 

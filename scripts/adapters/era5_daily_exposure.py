@@ -14,6 +14,11 @@ comparable to CCKP (different grid/method), so it is presented as its own observ
 
 Range via ERA5X_START / ERA5X_END (default 2015..2025). Fetches year by year so a partial
 run still writes the years that succeeded.
+
+Important: as of 2026-06-11, CDS warns that some ERA5 post-processed daily maximum/minimum
+products should not be used. This script is kept for provenance and old artifacts, but it
+refuses new runs unless ERA5X_ALLOW_KNOWN_ISSUE=1 is set. For canonical article work, compute
+daily extremes directly from hourly ERA5/ERA5-Land instead of this post-processed product.
 """
 import os, json, datetime, tempfile
 import cdsapi
@@ -113,6 +118,13 @@ def write_artifact(indicator_id, title, obs, threshold, stat_desc):
 
 
 def main():
+    if os.environ.get("ERA5X_ALLOW_KNOWN_ISSUE") != "1":
+        raise SystemExit(
+            "Refusing to use CDS post-processed ERA5 daily max/min statistics because CDS "
+            "currently flags this product family as affected by a known issue. Use an "
+            "hourly-derived ERA5 adapter, or set ERA5X_ALLOW_KNOWN_ISSUE=1 only for audit/provenance."
+        )
+
     hot, warm = [], []
     for y in range(START, END + 1):
         try:

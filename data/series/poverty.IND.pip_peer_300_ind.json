@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "econ.poverty.pip_peer_300_ind",
+  "title": "Poverty headcount at $3/day, India",
+  "sourceId": "worldbank",
+  "sourceIndicatorId": "PIP: India poverty headcount, $3.00/day (2021 PPP)",
+  "sourceUrl": "https://api.worldbank.org/pip/v1/pip?country=IND&povline=3.00&fill_gaps=false&version=20250930_2021_01_02_PROD&format=json",
+  "unit": "% of population",
+  "frequency": "survey years",
+  "geography": {
+    "type": "country",
+    "id": "IND",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-11T14:43:02.974Z",
+  "observations": [
+    {
+      "date": "1977",
+      "value": 59.7
+    },
+    {
+      "date": "1983",
+      "value": 50.9
+    },
+    {
+      "date": "1987",
+      "value": 51.8
+    },
+    {
+      "date": "1993",
+      "value": 47.5
+    },
+    {
+      "date": "2004",
+      "value": 46.4
+    },
+    {
+      "date": "2009",
+      "value": 34.6
+    },
+    {
+      "date": "2011",
+      "value": 27.1
+    },
+    {
+      "date": "2022",
+      "value": 5.3
+    }
+  ],
+  "metadata": {
+    "provenance": "World Bank Poverty and Inequality Platform (PIP), version 20250930 (2021 PPP), India national survey-year estimates.",
+    "method": "Survey-year poverty headcount at the $3.00/day line (2021 PPP), fill_gaps=false. Cross-country panel: each country surveys on its own calendar, so the survey years differ between countries and are sparse.",
+    "pipVersion": "20250930_2021_01_02_PROD",
+    "caveat": "Survey-year points on different national calendars; read as trajectories, not a same-year comparison. The India-vs-Asia divergence article covers this in depth."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "health.nss80.hosp_by_institution",
+  "title": "Hospitalisation cases and costs by type of hospital",
+  "sourceId": "nss80-health",
+  "sourceIndicatorId": "NSS 80th round Sch 25.0 unit data",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/DDI-IND-NSO-HSCHealth80R-Jan2025-Dec2025",
+  "unit": "mixed (% and Rs.)",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "institution"
+  ],
+  "fetchedAt": "2026-06-10T13:50:20.048883+00:00",
+  "rows": [
+    {
+      "institution": "Government hospital",
+      "case_share_pct": 36.7,
+      "avg_medical_exp_rs": 6937,
+      "avg_total_exp_rs": 9815
+    },
+    {
+      "institution": "Charitable/NGO hospital",
+      "case_share_pct": 3.0,
+      "avg_medical_exp_rs": 43730,
+      "avg_total_exp_rs": 48185
+    },
+    {
+      "institution": "Private hospital",
+      "case_share_pct": 60.3,
+      "avg_medical_exp_rs": 56215,
+      "avg_total_exp_rs": 60209
+    },
+    {
+      "institution": "All institutions",
+      "case_share_pct": 100.0,
+      "avg_medical_exp_rs": 37758,
+      "avg_total_exp_rs": 41356
+    }
+  ],
+  "metadata": {
+    "source": "NSS 80th round, Household Social Consumption: Health (Jan-Dec 2025), unit-level data, MoSPI",
+    "method": "Indica tabulation of public microdata; weights = mult/100. Cases admitted in last 365 days, excluding childbirth. Medical exp = b7i12; total exp adds transport/other (b7i15)."
+  }
+}

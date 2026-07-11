@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "health.nss80.untreated_reasons",
+  "title": "Why people skip treatment",
+  "sourceId": "nss80-health",
+  "sourceIndicatorId": "NSS 80th round Sch 25.0 unit data",
+  "sourceUrl": "https://microdata.gov.in/NADA/index.php/catalog/DDI-IND-NSO-HSCHealth80R-Jan2025-Dec2025",
+  "unit": "% of untreated spells",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "reason"
+  ],
+  "fetchedAt": "2026-06-10T13:50:20.048883+00:00",
+  "rows": [
+    {
+      "reason": "No facility in the neighbourhood",
+      "share_pct": 4.8
+    },
+    {
+      "reason": "Facility too expensive",
+      "share_pct": 3.1
+    },
+    {
+      "reason": "Cannot afford to wait",
+      "share_pct": 3.3
+    },
+    {
+      "reason": "Ailment not considered serious",
+      "share_pct": 73.1
+    },
+    {
+      "reason": "Familial/religious belief",
+      "share_pct": 5.2
+    },
+    {
+      "reason": "Others",
+      "share_pct": 10.6
+    }
+  ],
+  "metadata": {
+    "source": "NSS 80th round, Household Social Consumption: Health (Jan-Dec 2025), unit-level data, MoSPI",
+    "method": "Indica tabulation of public microdata; weights = mult/100. Reference period: last 15 days."
+  }
+}

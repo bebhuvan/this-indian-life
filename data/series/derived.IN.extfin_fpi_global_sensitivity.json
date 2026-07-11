@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "extfin.fpi.global_sensitivity.corr",
+  "title": "What moves FII money: correlation of monthly equity flows with global conditions",
+  "sourceId": "derived",
+  "sourceIndicatorId": "extfin.fpi.global_sensitivity.corr",
+  "sourceUrl": "https://fred.stlouisfed.org/",
+  "unit": "correlation coefficient",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    {
+      "id": "factor",
+      "label": "Global factor"
+    }
+  ],
+  "fetchedAt": "2026-06-11T13:15:42.579Z",
+  "rows": [
+    {
+      "factor": "Dollar (vs EM currencies)",
+      "basis": "month-over-month change",
+      "correlation": -0.37,
+      "n": 184,
+      "label": "Dollar (vs EM currencies)",
+      "value": -0.37
+    },
+    {
+      "factor": "Emerging-market volatility",
+      "basis": "month-over-month change",
+      "correlation": -0.34,
+      "n": 182,
+      "label": "Emerging-market volatility",
+      "value": -0.34
+    },
+    {
+      "factor": "Global volatility (VIX)",
+      "basis": "month-over-month change",
+      "correlation": -0.33,
+      "n": 184,
+      "label": "Global volatility (VIX)",
+      "value": -0.33
+    },
+    {
+      "factor": "US 10-year yield",
+      "basis": "month-over-month change",
+      "correlation": -0.12,
+      "n": 184,
+      "label": "US 10-year yield",
+      "value": -0.12
+    },
+    {
+      "factor": "US Fed funds rate",
+      "basis": "level",
+      "correlation": -0.11,
+      "n": 184,
+      "label": "US Fed funds rate",
+      "value": -0.11
+    }
+  ],
+  "metadata": {
+    "method": "Pearson correlation of NSDL monthly net FPI equity flow (USD) with each global factor, 2011-2026; level series use month-over-month change (flows respond to changes, not levels).",
+    "sources": [
+      "FRED DTWEXEMEGS/DGS10/FEDFUNDS/VIXCLS/VXEEMCLS",
+      "NSDL FPI net investment (monthly)"
+    ],
+    "note": "All correlations are negative: tighter global conditions (stronger dollar, higher US rates, more fear) pull FII money out. Moderate magnitudes (~-0.1 to -0.4) mean global weather tilts flows, it does not fully determine them.",
+    "caveat": "Correlation, not causation; USDINR was excluded as partly circular (FII selling itself weakens the rupee)."
+  }
+}

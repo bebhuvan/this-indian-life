@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "water.cgwb.category_national",
+  "title": "Assessment units by category, India (2025)",
+  "sourceId": "cgwb-ingres",
+  "sourceIndicatorId": "water.cgwb.category_national",
+  "sourceUrl": "https://ingres.iith.ac.in/api/gec/getGISComparisonDataOpen",
+  "unit": "number of assessment units",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "category"
+  ],
+  "fetchedAt": "2026-06-07T05:38:28.360Z",
+  "rows": [
+    {
+      "category": "safe",
+      "count": 4949,
+      "share": 73.16
+    },
+    {
+      "category": "semi_critical",
+      "count": 758,
+      "share": 11.2
+    },
+    {
+      "category": "critical",
+      "count": 201,
+      "share": 2.97
+    },
+    {
+      "category": "over_exploited",
+      "count": 730,
+      "share": 10.79
+    },
+    {
+      "category": "salinity",
+      "count": 127,
+      "share": 1.88
+    }
+  ],
+  "metadata": {
+    "collection": "CGWB Dynamic Ground Water Resource Assessment",
+    "note": "CGWB INGRES (getGISComparisonDataOpen). State UUIDs re-enumerated per cycle. Stage from COUNTRY call; category counts summed from per-state block-equivalent units.",
+    "assessmentYear": "2025",
+    "totalUnits": 6765
+  }
+}

@@ -1,0 +1,3327 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.rupee",
+  "question": "Why does the rupee keep falling, and does it actually make you poorer?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "IN.fx.inr_usd_long.annual",
+    "derived.IN.reserves.total_usd.monthly",
+    "IN.fx.rbi_net_intervention_usd.monthly",
+    "IN.extfin.net_fpi_usd.monthly",
+    "IN.fx.rbi_forward_book_usd.monthly",
+    "IN.fx.inr_usd_month_high.monthly",
+    "IN.fx.inr_usd_month_low.monthly",
+    "derived.IN.fx.idx_rupee_vs_usd",
+    "derived.IN.fx.idx_neer_broad",
+    "derived.IN.fx.idx_reer_broad",
+    "IN.fx.reer_36c.monthly",
+    "IN.fx.neer_36c.monthly",
+    "IN.fx.inr_usd.monthly",
+    "derived.IN.fx.inr_usd_ppp_implied",
+    "IN.prices.cpi_yoy_bis.monthly",
+    "US.prices.cpi_yoy_bis.monthly",
+    "derived.IN.trade.exports_idx_inr",
+    "derived.IN.trade.exports_idx_usd",
+    "derived.IN.savings.fd_nominal",
+    "derived.IN.savings.cost_of_living",
+    "derived.IN.savings.fd_real",
+    "derived.IN.energy.brent_inr_idx",
+    "derived.IN.energy.brent_usd_idx",
+    "IN.trade.imports_oil_usd.annual",
+    "IN.extfin.remittances_received_usd.annual",
+    "derived.IN.fx.rupee_value_vs_usd",
+    "derived.IN.fx.rupee_value_vs_eur",
+    "derived.IN.fx.rupee_value_vs_gbp",
+    "derived.IN.fx.rupee_value_vs_jpy",
+    "IN.rates.policy_rate.monthly",
+    "IN.extfin.net_fdi_usd.monthly",
+    "extfin.driver.usd_em_index",
+    "derived.IN.fx.regime_volatility",
+    "derived.IN.prices.cpi_cum_in",
+    "derived.IN.prices.cpi_cum_us",
+    "derived.IN.rates.real_deposit_rate",
+    "IN.trade.exports_total_usd.annual",
+    "IN.trade.imports_total_usd.annual",
+    "derived.IN.fx.decade_fall",
+    "derived.IN.fx.peer_fall_vs_usd",
+    "macro.current_account_usd",
+    "IN.extfin.usd_credit_nonbank.quarterly"
+  ],
+  "availableIndicatorIds": [
+    "IN.fx.inr_usd_long.annual",
+    "derived.IN.reserves.total_usd.monthly",
+    "IN.fx.rbi_net_intervention_usd.monthly",
+    "IN.extfin.net_fpi_usd.monthly",
+    "IN.fx.rbi_forward_book_usd.monthly",
+    "IN.fx.inr_usd_month_high.monthly",
+    "IN.fx.inr_usd_month_low.monthly",
+    "derived.IN.fx.idx_rupee_vs_usd",
+    "derived.IN.fx.idx_neer_broad",
+    "derived.IN.fx.idx_reer_broad",
+    "IN.fx.reer_36c.monthly",
+    "IN.fx.neer_36c.monthly",
+    "IN.fx.inr_usd.monthly",
+    "derived.IN.fx.inr_usd_ppp_implied",
+    "IN.prices.cpi_yoy_bis.monthly",
+    "US.prices.cpi_yoy_bis.monthly",
+    "derived.IN.trade.exports_idx_inr",
+    "derived.IN.trade.exports_idx_usd",
+    "derived.IN.savings.fd_nominal",
+    "derived.IN.savings.cost_of_living",
+    "derived.IN.savings.fd_real",
+    "derived.IN.energy.brent_inr_idx",
+    "derived.IN.energy.brent_usd_idx",
+    "IN.trade.imports_oil_usd.annual",
+    "IN.extfin.remittances_received_usd.annual",
+    "derived.IN.fx.rupee_value_vs_usd",
+    "derived.IN.fx.rupee_value_vs_eur",
+    "derived.IN.fx.rupee_value_vs_gbp",
+    "derived.IN.fx.rupee_value_vs_jpy",
+    "IN.rates.policy_rate.monthly",
+    "IN.extfin.net_fdi_usd.monthly",
+    "extfin.driver.usd_em_index",
+    "derived.IN.fx.regime_volatility",
+    "derived.IN.prices.cpi_cum_in",
+    "derived.IN.prices.cpi_cum_us",
+    "derived.IN.rates.real_deposit_rate",
+    "IN.trade.exports_total_usd.annual",
+    "IN.trade.imports_total_usd.annual",
+    "derived.IN.fx.decade_fall",
+    "derived.IN.fx.peer_fall_vs_usd",
+    "macro.current_account_usd",
+    "IN.extfin.usd_credit_nonbank.quarterly"
+  ],
+  "themeIndicatorIds": [
+    "IN.fx.inr_usd_long.annual",
+    "derived.IN.reserves.total_usd.monthly",
+    "IN.fx.rbi_net_intervention_usd.monthly",
+    "IN.extfin.net_fpi_usd.monthly",
+    "IN.fx.rbi_forward_book_usd.monthly",
+    "IN.fx.inr_usd_month_high.monthly",
+    "IN.fx.inr_usd_month_low.monthly",
+    "derived.IN.fx.idx_rupee_vs_usd",
+    "derived.IN.fx.idx_neer_broad",
+    "derived.IN.fx.idx_reer_broad",
+    "IN.fx.reer_36c.monthly",
+    "IN.fx.neer_36c.monthly",
+    "IN.fx.inr_usd.monthly",
+    "derived.IN.fx.inr_usd_ppp_implied",
+    "IN.prices.cpi_yoy_bis.monthly",
+    "US.prices.cpi_yoy_bis.monthly",
+    "derived.IN.trade.exports_idx_inr",
+    "derived.IN.trade.exports_idx_usd",
+    "derived.IN.savings.fd_nominal",
+    "derived.IN.savings.cost_of_living",
+    "derived.IN.savings.fd_real",
+    "derived.IN.energy.brent_inr_idx",
+    "derived.IN.energy.brent_usd_idx",
+    "IN.trade.imports_oil_usd.annual",
+    "IN.extfin.remittances_received_usd.annual",
+    "derived.IN.fx.rupee_value_vs_usd",
+    "derived.IN.fx.rupee_value_vs_eur",
+    "derived.IN.fx.rupee_value_vs_gbp",
+    "derived.IN.fx.rupee_value_vs_jpy",
+    "IN.rates.policy_rate.monthly",
+    "IN.extfin.net_fdi_usd.monthly",
+    "extfin.driver.usd_em_index",
+    "derived.IN.fx.regime_volatility",
+    "derived.IN.prices.cpi_cum_in",
+    "derived.IN.prices.cpi_cum_us",
+    "derived.IN.rates.real_deposit_rate",
+    "IN.trade.exports_total_usd.annual",
+    "IN.trade.imports_total_usd.annual",
+    "derived.IN.fx.decade_fall",
+    "derived.IN.fx.peer_fall_vs_usd",
+    "macro.current_account_usd",
+    "IN.extfin.usd_credit_nonbank.quarterly"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.IN.fx.inr_usd_long.annual",
+      "indicatorId": "IN.fx.inr_usd_long.annual",
+      "title": "INR per USD, long annual series (1947-2026)",
+      "sourceId": "rupee-chronology",
+      "unit": "INR per USD",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.derived.IN.reserves.total_usd.monthly",
+      "indicatorId": "derived.IN.reserves.total_usd.monthly",
+      "title": "India total foreign-exchange reserves including gold (US$)",
+      "sourceId": "rupee-derived",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.IN.fx.rbi_net_intervention_usd.monthly",
+      "indicatorId": "IN.fx.rbi_net_intervention_usd.monthly",
+      "title": "RBI net USD intervention, spot (US$ billion)",
+      "sourceId": "rbi-fx",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.IN.extfin.net_fpi_usd.monthly",
+      "indicatorId": "IN.extfin.net_fpi_usd.monthly",
+      "title": "Net portfolio (FPI) flows into India (US$ billion)",
+      "sourceId": "rbi-fpi",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.IN.fx.rbi_forward_book_usd.monthly",
+      "indicatorId": "IN.fx.rbi_forward_book_usd.monthly",
+      "title": "RBI outstanding net forward book (US$ billion)",
+      "sourceId": "rbi-fx",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.IN.fx.inr_usd_month_high.monthly",
+      "indicatorId": "IN.fx.inr_usd_month_high.monthly",
+      "title": "INR per USD, month high (RBI reference rate)",
+      "sourceId": "rbi-fx",
+      "unit": "INR per USD",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.IN.fx.inr_usd_month_low.monthly",
+      "indicatorId": "IN.fx.inr_usd_month_low.monthly",
+      "title": "INR per USD, month low (RBI reference rate)",
+      "sourceId": "rbi-fx",
+      "unit": "INR per USD",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v8.derived.IN.fx.idx_rupee_vs_usd",
+      "indicatorId": "derived.IN.fx.idx_rupee_vs_usd",
+      "title": "Rupee's value against the US dollar (Jan 1994 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index Jan 1994=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v9.derived.IN.fx.idx_neer_broad",
+      "indicatorId": "derived.IN.fx.idx_neer_broad",
+      "title": "Rupee's trade-weighted nominal value, NEER (Jan 1994 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index Jan 1994=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v10.derived.IN.fx.idx_reer_broad",
+      "indicatorId": "derived.IN.fx.idx_reer_broad",
+      "title": "Rupee's trade-weighted REAL value, REER (Jan 1994 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index Jan 1994=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v11.IN.fx.reer_36c.monthly",
+      "indicatorId": "IN.fx.reer_36c.monthly",
+      "title": "India REER, 36-currency basket, 1985=100 (RBI)",
+      "sourceId": "rbi-reer",
+      "unit": "1985=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v12.IN.fx.neer_36c.monthly",
+      "indicatorId": "IN.fx.neer_36c.monthly",
+      "title": "India NEER, 36-currency basket, 1985=100 (RBI)",
+      "sourceId": "rbi-reer",
+      "unit": "1985=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v13.IN.fx.inr_usd.monthly",
+      "indicatorId": "IN.fx.inr_usd.monthly",
+      "title": "Indian rupees per US dollar (monthly)",
+      "sourceId": "fred",
+      "unit": "INR per USD",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v14.derived.IN.fx.inr_usd_ppp_implied",
+      "indicatorId": "derived.IN.fx.inr_usd_ppp_implied",
+      "title": "INR/USD implied by India-US inflation differential",
+      "sourceId": "rupee-derived",
+      "unit": "INR per USD",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v15.IN.prices.cpi_yoy_bis.monthly",
+      "indicatorId": "IN.prices.cpi_yoy_bis.monthly",
+      "title": "India CPI inflation, year-on-year (BIS long CPI)",
+      "sourceId": "bis",
+      "unit": "percent YoY",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v16.US.prices.cpi_yoy_bis.monthly",
+      "indicatorId": "US.prices.cpi_yoy_bis.monthly",
+      "title": "US CPI inflation, year-on-year (BIS long CPI)",
+      "sourceId": "bis",
+      "unit": "percent YoY",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v17.derived.IN.trade.exports_idx_inr",
+      "indicatorId": "derived.IN.trade.exports_idx_inr",
+      "title": "India's exports in ₹ (1970-71 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index 1990=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v18.derived.IN.trade.exports_idx_usd",
+      "indicatorId": "derived.IN.trade.exports_idx_usd",
+      "title": "India's exports in US$ (1970-71 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index 1970=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v19.derived.IN.savings.fd_nominal",
+      "indicatorId": "derived.IN.savings.fd_nominal",
+      "title": "Re.1 in a bank deposit since 1970 (nominal)",
+      "sourceId": "rupee-derived",
+      "unit": "rupees (1970 = 1)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v20.derived.IN.savings.cost_of_living",
+      "indicatorId": "derived.IN.savings.cost_of_living",
+      "title": "Cost of living since 1970 (CPI)",
+      "sourceId": "rupee-derived",
+      "unit": "index (1970 = 1)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v21.derived.IN.savings.fd_real",
+      "indicatorId": "derived.IN.savings.fd_real",
+      "title": "Re.1 in a bank deposit, after inflation",
+      "sourceId": "rupee-derived",
+      "unit": "rupees of 1970 purchasing power",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v22.derived.IN.energy.brent_inr_idx",
+      "indicatorId": "derived.IN.energy.brent_inr_idx",
+      "title": "Brent crude in rupees (Jan 2000 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index Jan 2000=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v23.derived.IN.energy.brent_usd_idx",
+      "indicatorId": "derived.IN.energy.brent_usd_idx",
+      "title": "Brent crude in US dollars (Jan 2000 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index Jan 2000=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v24.IN.trade.imports_oil_usd.annual",
+      "indicatorId": "IN.trade.imports_oil_usd.annual",
+      "title": "Oil imports (the petroleum bill) (US$)",
+      "sourceId": "rbi-trade",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v25.IN.extfin.remittances_received_usd.annual",
+      "indicatorId": "IN.extfin.remittances_received_usd.annual",
+      "title": "Personal remittances received, India (current US$)",
+      "sourceId": "worldbank",
+      "unit": "current US$",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v26.derived.IN.fx.rupee_value_vs_usd",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_usd",
+      "title": "Rupee's value against the US dollar (base = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index (1999-01=100)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v27.derived.IN.fx.rupee_value_vs_eur",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_eur",
+      "title": "Rupee's value against the euro (base = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index (1999-01=100)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v28.derived.IN.fx.rupee_value_vs_gbp",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_gbp",
+      "title": "Rupee's value against the pound (base = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index (1999-01=100)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v29.derived.IN.fx.rupee_value_vs_jpy",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_jpy",
+      "title": "Rupee's value against the yen (base = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index (1999-01=100)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v30.IN.rates.policy_rate.monthly",
+      "indicatorId": "IN.rates.policy_rate.monthly",
+      "title": "India central bank policy rate (BIS)",
+      "sourceId": "bis",
+      "unit": "percent per annum",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v31.IN.extfin.net_fdi_usd.monthly",
+      "indicatorId": "IN.extfin.net_fdi_usd.monthly",
+      "title": "Net foreign direct investment into India (US$ billion)",
+      "sourceId": "rbi-fpi",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v32.extfin.driver.usd_em_index",
+      "indicatorId": "extfin.driver.usd_em_index",
+      "title": "US dollar index vs emerging-market currencies (nominal)",
+      "sourceId": "fred",
+      "unit": "index (Jan 2006 = 100)",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v33.derived.IN.fx.regime_volatility",
+      "indicatorId": "derived.IN.fx.regime_volatility",
+      "title": "How tightly the RBI actually held the rupee, by regime",
+      "sourceId": "rupee-derived",
+      "unit": "annualised volatility (% per year)",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v34.derived.IN.prices.cpi_cum_in",
+      "indicatorId": "derived.IN.prices.cpi_cum_in",
+      "title": "India cost of living since 1991 (1991 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index 1991=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v35.derived.IN.prices.cpi_cum_us",
+      "indicatorId": "derived.IN.prices.cpi_cum_us",
+      "title": "US cost of living since 1991 (1991 = 100)",
+      "sourceId": "rupee-derived",
+      "unit": "index 1991=100",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v36.derived.IN.rates.real_deposit_rate",
+      "indicatorId": "derived.IN.rates.real_deposit_rate",
+      "title": "Real return on a bank deposit (rate minus inflation)",
+      "sourceId": "rupee-derived",
+      "unit": "percent per annum",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v37.IN.trade.exports_total_usd.annual",
+      "indicatorId": "IN.trade.exports_total_usd.annual",
+      "title": "Merchandise exports (US$)",
+      "sourceId": "rbi-trade",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v38.IN.trade.imports_total_usd.annual",
+      "indicatorId": "IN.trade.imports_total_usd.annual",
+      "title": "Merchandise imports (US$)",
+      "sourceId": "rbi-trade",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v39.derived.IN.fx.decade_fall",
+      "indicatorId": "derived.IN.fx.decade_fall",
+      "title": "How much the rupee lost against the dollar, by decade",
+      "sourceId": "rupee-derived",
+      "unit": "% of value lost vs USD",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v40.derived.IN.fx.peer_fall_vs_usd",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd",
+      "title": "How far each currency fell against the dollar, 2000-2025",
+      "sourceId": "rupee-derived",
+      "unit": "% of value lost vs USD",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v41.macro.current_account_usd",
+      "indicatorId": "macro.current_account_usd",
+      "title": "India's current account balance, US$ billion",
+      "sourceId": "rbi-bop",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v42.IN.extfin.usd_credit_nonbank.quarterly",
+      "indicatorId": "IN.extfin.usd_credit_nonbank.quarterly",
+      "title": "US-dollar credit to Indian non-bank borrowers",
+      "sourceId": "bis",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "from-four-rupees-to-ninety",
+      "title": "From four rupees to ninety",
+      "chartType": "line",
+      "beat": "the-number",
+      "window": "full",
+      "indicator": "IN.fx.inr_usd_long.annual",
+      "series": [],
+      "unit": "",
+      "subtitle": "What one US dollar has cost in rupees since Independence: flat for decades under fixed pegs, then stepping down through each devaluation.",
+      "whyThisChart": "The headline everyone knows and almost everyone misreads: the rupee's long slide against the dollar."
+    },
+    {
+      "order": 2,
+      "chartId": "the-fall-decade-by-decade",
+      "title": "The fall, decade by decade",
+      "chartType": "tableBars",
+      "beat": "decade-fall",
+      "window": "",
+      "indicator": "derived.IN.fx.decade_fall",
+      "series": [],
+      "unit": "% of value lost vs the dollar",
+      "subtitle": "How much of its dollar value the rupee gave up in each decade. The losses came in bursts, not a steady slide.",
+      "whyThisChart": "The slide was never steady; it came in bursts, and naming the decades shows the rupee has been broadly stable against the dollar for long stretches."
+    },
+    {
+      "order": 3,
+      "chartId": "did-the-rupee-fall-or-did-the-dollar-rise",
+      "title": "Did the rupee fall, or did the dollar rise?",
+      "chartType": "multiLine",
+      "beat": "rupee-vs-currencies",
+      "window": "",
+      "indicator": "derived.IN.fx.rupee_value_vs_usd",
+      "series": [
+        {
+          "indicator": "derived.IN.fx.rupee_value_vs_usd",
+          "label": "vs US dollar"
+        },
+        {
+          "indicator": "derived.IN.fx.rupee_value_vs_eur",
+          "label": "vs euro"
+        },
+        {
+          "indicator": "derived.IN.fx.rupee_value_vs_gbp",
+          "label": "vs pound"
+        },
+        {
+          "indicator": "derived.IN.fx.rupee_value_vs_jpy",
+          "label": "vs yen"
+        }
+      ],
+      "unit": "value of the rupee (1999 = 100)",
+      "subtitle": "The rupee's value against four big currencies since 1999. It slid most against the dollar, far less against the pound and yen.",
+      "whyThisChart": "The rupee did not weaken evenly against everything; it fell hardest against the dollar and far less against the pound and yen, so much of the 'weakness' is really dollar strength."
+    },
+    {
+      "order": 4,
+      "chartId": "the-rupee-was-not-alone",
+      "title": "The rupee was not alone",
+      "chartType": "tableBars",
+      "beat": "peer-comparison",
+      "window": "",
+      "indicator": "derived.IN.fx.peer_fall_vs_usd",
+      "series": [],
+      "unit": "% of value lost vs the dollar, 2000-2025",
+      "subtitle": "How far every major currency fell against a strong dollar since 2000. The rupee sits mid-pack, not among the worst.",
+      "whyThisChart": "The most freeing chart in the article: a currency's price is relative, and against a strong dollar most currencies lost ground, with the rupee sitting mid-pack among emerging markets, far from the worst."
+    },
+    {
+      "order": 5,
+      "chartId": "from-a-fortnight-of-imports-to-over-six-hundred-billion-dollars",
+      "title": "From a fortnight of imports to over six hundred billion dollars",
+      "chartType": "line",
+      "beat": "reserves-arc",
+      "window": "full",
+      "indicator": "derived.IN.reserves.total_usd.monthly",
+      "series": [],
+      "unit": "",
+      "subtitle": "India's stockpile of foreign currency and gold. This buffer shrank to almost nothing in 1991 and now ranks among the world's largest.",
+      "whyThisChart": "The 1991 devaluation was not a choice, it was a near-default: India had almost run out of dollars."
+    },
+    {
+      "order": 6,
+      "chartId": "the-deficit-that-sets-off-every-crisis",
+      "title": "The deficit that sets off every crisis",
+      "chartType": "line",
+      "beat": "current-account",
+      "window": "full",
+      "indicator": "macro.current_account_usd",
+      "series": [],
+      "unit": "",
+      "subtitle": "India's current-account balance, the gap between what the country earns abroad and what it spends. It turns into a dollar squeeze whenever foreign money stops coming.",
+      "whyThisChart": "Behind every rupee crisis is the same trigger: India spending more abroad than it earns, so it must pull in foreign money to bridge the gap, and when that money stops, the rupee breaks."
+    },
+    {
+      "order": 7,
+      "chartId": "the-price-of-money-through-every-regime",
+      "title": "The price of money, through every regime",
+      "chartType": "line",
+      "beat": "policy-rate",
+      "window": "full",
+      "indicator": "IN.rates.policy_rate.monthly",
+      "series": [],
+      "unit": "",
+      "subtitle": "The RBI's main interest rate over the decades: towering in the controlled era, spiking to defend the rupee in crises, calmer today.",
+      "whyThisChart": "The interest-rate backdrop to the whole story: sky-high in the controlled era, spiking to defend the rupee in crises, low and steadier today."
+    },
+    {
+      "order": 8,
+      "chartId": "the-rupee-s-monthly-trading-range",
+      "title": "The rupee's monthly trading range",
+      "chartType": "multiLine",
+      "beat": "managed-float",
+      "window": "",
+      "indicator": "IN.fx.inr_usd_month_high.monthly",
+      "series": [
+        {
+          "indicator": "IN.fx.inr_usd_month_high.monthly",
+          "label": "Month's weakest"
+        },
+        {
+          "indicator": "IN.fx.inr_usd_month_low.monthly",
+          "label": "Month's strongest"
+        }
+      ],
+      "unit": "INR per USD",
+      "subtitle": "The highest and lowest the rupee touched within each month. The band is so tight it reveals how much the RBI smooths the currency.",
+      "whyThisChart": "A genuine free float would swing wildly; the rupee's tight monthly band is the fingerprint of management."
+    },
+    {
+      "order": 9,
+      "chartId": "what-the-rbi-actually-does-in-the-market",
+      "title": "What the RBI actually does in the market",
+      "chartType": "line",
+      "beat": "intervention",
+      "window": "full",
+      "indicator": "IN.fx.rbi_net_intervention_usd.monthly",
+      "series": [],
+      "unit": "",
+      "subtitle": "How many dollars the RBI bought or sold each month: buying to hold the rupee down in calm times, selling hard to defend it in a crisis.",
+      "whyThisChart": "The central bank says it only curbs volatility; its dollar buying and selling shows what that means month to month."
+    },
+    {
+      "order": 10,
+      "chartId": "the-tide-the-central-bank-leans-against",
+      "title": "The tide the central bank leans against",
+      "chartType": "multiLine",
+      "beat": "fpi-vs-intervention",
+      "window": "",
+      "indicator": "IN.extfin.net_fpi_usd.monthly",
+      "series": [
+        {
+          "indicator": "IN.extfin.net_fpi_usd.monthly",
+          "label": "Net foreign portfolio flows"
+        },
+        {
+          "indicator": "IN.fx.rbi_net_intervention_usd.monthly",
+          "label": "RBI net dollar purchases"
+        }
+      ],
+      "unit": "US$ millions",
+      "subtitle": "Foreign investors' stock-and-bond flows alongside the RBI's dollar trades. When hot money rushes out, the RBI sells dollars to cushion the fall.",
+      "whyThisChart": "RBI research finds the rupee is moved mainly by volatile foreign portfolio flows, not by inflation; intervention leans against that tide."
+    },
+    {
+      "order": 11,
+      "chartId": "the-hundred-billion-dollar-shadow-defence",
+      "title": "The hundred-billion-dollar shadow defence",
+      "chartType": "line",
+      "beat": "forward-book",
+      "window": "full",
+      "indicator": "IN.fx.rbi_forward_book_usd.monthly",
+      "series": [],
+      "unit": "",
+      "subtitle": "The RBI's hidden forward position: dollars it has promised to deliver later, a way to defend the rupee today without spending visible reserves.",
+      "whyThisChart": "Modern intervention increasingly hides in the forwards market, off the visible spot reserves."
+    },
+    {
+      "order": 12,
+      "chartId": "patient-money-and-hot-money",
+      "title": "Patient money and hot money",
+      "chartType": "multiLine",
+      "beat": "fdi-vs-fpi",
+      "window": "",
+      "indicator": "IN.extfin.net_fdi_usd.monthly",
+      "series": [
+        {
+          "indicator": "IN.extfin.net_fdi_usd.monthly",
+          "label": "Direct investment (patient)"
+        },
+        {
+          "indicator": "IN.extfin.net_fpi_usd.monthly",
+          "label": "Portfolio flows (hot)"
+        }
+      ],
+      "unit": "US$ millions",
+      "subtitle": "Sticky factory-building investment against fast-moving stock-market money. It is the second kind that whipsaws the rupee.",
+      "whyThisChart": "Not all foreign money behaves the same: direct investment is sticky and builds factories, portfolio money is fast and can leave in a week, and it is the second kind that whipsaws the rupee."
+    },
+    {
+      "order": 13,
+      "chartId": "what-really-moves-the-rupee",
+      "title": "What really moves the rupee",
+      "chartType": "multiLine",
+      "beat": "global-drivers",
+      "window": "",
+      "indicator": "derived.IN.fx.idx_rupee_vs_usd",
+      "series": [
+        {
+          "indicator": "derived.IN.fx.idx_rupee_vs_usd",
+          "label": "Rupee vs the dollar (down = weaker)"
+        },
+        {
+          "indicator": "extfin.driver.usd_em_index",
+          "label": "Global dollar strength (up = stronger dollar)"
+        }
+      ],
+      "unit": "index",
+      "subtitle": "When the dollar strengthens against all emerging markets, the rupee falls with the pack. The two lines mirror each other.",
+      "whyThisChart": "The rupee's worst stretches line up with a globally strong dollar, not with India-specific news: when the dollar rises against all emerging markets, the rupee falls with the pack."
+    },
+    {
+      "order": 14,
+      "chartId": "how-tightly-the-rbi-actually-held-the-rupee",
+      "title": "How tightly the RBI actually held the rupee",
+      "chartType": "line",
+      "beat": "regime-volatility",
+      "window": "",
+      "indicator": "IN.fx.inr_usd.monthly",
+      "series": [],
+      "unit": "INR per USD",
+      "subtitle": "The rupee against the dollar, split into the RBI's unspoken regimes. The labels mark how freely it was allowed to move: the steadier the line, the tighter the grip.",
+      "whyThisChart": "The clearest 'words versus deeds' evidence: the RBI never announces how hard it is managing the rupee, but how much the rupee moves in each regime gives it away."
+    },
+    {
+      "order": 15,
+      "chartId": "the-rupee-collapsed-or-did-it",
+      "title": "The rupee collapsed. Or did it?",
+      "chartType": "multiLine",
+      "beat": "nominal-vs-real",
+      "window": "",
+      "indicator": "derived.IN.fx.idx_reer_broad",
+      "series": [
+        {
+          "indicator": "derived.IN.fx.idx_rupee_vs_usd",
+          "label": "Against the US dollar"
+        },
+        {
+          "indicator": "derived.IN.fx.idx_neer_broad",
+          "label": "Trade-weighted (nominal)"
+        },
+        {
+          "indicator": "derived.IN.fx.idx_reer_broad",
+          "label": "Trade-weighted, inflation-adjusted (REER)"
+        }
+      ],
+      "unit": "index (Jan 1994 = 100)",
+      "subtitle": "The rupee three ways since 1994: crashing against the dollar, falling less on a trade-weighted basis, and almost flat once inflation is stripped out.",
+      "whyThisChart": "The single chart that overturns the panic: against the dollar the rupee fell to a third, but in real trade-weighted terms it barely moved."
+    },
+    {
+      "order": 16,
+      "chartId": "the-real-rupee-across-fifty-years",
+      "title": "The real rupee across fifty years",
+      "chartType": "multiLine",
+      "beat": "long-reer",
+      "window": "",
+      "indicator": "IN.fx.reer_36c.monthly",
+      "series": [
+        {
+          "indicator": "IN.fx.reer_36c.monthly",
+          "label": "Real (REER)"
+        },
+        {
+          "indicator": "IN.fx.neer_36c.monthly",
+          "label": "Nominal (NEER)"
+        }
+      ],
+      "unit": "index (1985 = 100)",
+      "subtitle": "The rupee's inflation-adjusted value since 1975: overvalued under the old pegs, sharply corrected in 1991, then broadly stable.",
+      "whyThisChart": "Zoom out to half a century and the real rupee tells a story of correction, not collapse."
+    },
+    {
+      "order": 17,
+      "chartId": "why-the-rupee-had-to-fall",
+      "title": "Why the rupee had to fall",
+      "chartType": "multiLine",
+      "beat": "inflation-gap",
+      "window": "",
+      "indicator": "derived.IN.prices.cpi_cum_in",
+      "series": [
+        {
+          "indicator": "derived.IN.prices.cpi_cum_in",
+          "label": "Cost of living in India"
+        },
+        {
+          "indicator": "derived.IN.prices.cpi_cum_us",
+          "label": "Cost of living in the US"
+        }
+      ],
+      "unit": "index (1991 = 100)",
+      "subtitle": "The cost of living in India versus the US since 1991. India's climbs far higher, and that gap is roughly what the rupee had to give up.",
+      "whyThisChart": "The engine under the whole story: since 1991 Indian prices have risen far more than American prices, and a currency cannot hold a fixed dollar value while its prices outrun the other country's."
+    },
+    {
+      "order": 18,
+      "chartId": "how-much-of-the-fall-is-just-inflation",
+      "title": "How much of the fall is just inflation?",
+      "chartType": "multiLine",
+      "beat": "ppp",
+      "window": "",
+      "indicator": "IN.fx.inr_usd.monthly",
+      "series": [
+        {
+          "indicator": "IN.fx.inr_usd.monthly",
+          "label": "Actual rate"
+        },
+        {
+          "indicator": "derived.IN.fx.inr_usd_ppp_implied",
+          "label": "If only inflation mattered"
+        }
+      ],
+      "unit": "INR per USD",
+      "subtitle": "The actual rupee-dollar rate against the rate inflation alone would justify. Inflation explains most of the fall, but the rupee overshoots it.",
+      "whyThisChart": "Inflation differences explain the direction of the fall, but not all of it, and the gap is the honest part of the story."
+    },
+    {
+      "order": 19,
+      "chartId": "why-a-higher-inflation-currency-drifts-down",
+      "title": "Why a higher-inflation currency drifts down",
+      "chartType": "multiLine",
+      "beat": "inflation-diff",
+      "window": "",
+      "indicator": "IN.prices.cpi_yoy_bis.monthly",
+      "series": [
+        {
+          "indicator": "IN.prices.cpi_yoy_bis.monthly",
+          "label": "India inflation"
+        },
+        {
+          "indicator": "US.prices.cpi_yoy_bis.monthly",
+          "label": "US inflation"
+        }
+      ],
+      "unit": "% year-on-year",
+      "subtitle": "Year-on-year inflation in India and the US. India's has sat above America's for decades, the gap the rupee keeps having to offset.",
+      "whyThisChart": "The mechanism under the whole story: India has run higher inflation than the US for decades, so the rupee must fall to keep trade competitive."
+    },
+    {
+      "order": 20,
+      "chartId": "is-the-rupee-just-a-number",
+      "title": "Is the rupee just a number?",
+      "chartType": "multiLine",
+      "beat": "dual-currency-exports",
+      "window": "",
+      "indicator": "derived.IN.trade.exports_idx_inr",
+      "series": [
+        {
+          "indicator": "derived.IN.trade.exports_idx_inr",
+          "label": "Exports measured in rupees"
+        },
+        {
+          "indicator": "derived.IN.trade.exports_idx_usd",
+          "label": "Exports measured in dollars"
+        }
+      ],
+      "unit": "index (1970 = 100, log scale)",
+      "subtitle": "The same Indian exports measured in rupees and in dollars. The rupee line looks like a miracle, and the gap between them is purely the exchange rate.",
+      "whyThisChart": "The same exports look like a miracle in rupees and a steady climb in dollars; the entire gap is the exchange rate."
+    },
+    {
+      "order": 21,
+      "chartId": "did-you-actually-lose-money",
+      "title": "Did you actually lose money?",
+      "chartType": "multiLine",
+      "beat": "counterfactual",
+      "window": "",
+      "indicator": "derived.IN.savings.fd_nominal",
+      "series": [
+        {
+          "indicator": "derived.IN.savings.fd_nominal",
+          "label": "One rupee in a bank deposit"
+        },
+        {
+          "indicator": "derived.IN.savings.cost_of_living",
+          "label": "Cost of living"
+        },
+        {
+          "indicator": "derived.IN.savings.fd_real",
+          "label": "The deposit, after inflation"
+        }
+      ],
+      "unit": "rupees (1970 = 1)",
+      "subtitle": "One rupee left in a bank deposit since 1970 against the rising cost of living. The saved rupee stays ahead; cash under the mattress loses almost everything.",
+      "whyThisChart": "The reframe that defuses the debasement panic: nobody holds wealth in cash, and a banked rupee kept its purchasing power."
+    },
+    {
+      "order": 22,
+      "chartId": "when-even-the-bank-lost-to-inflation",
+      "title": "When even the bank lost to inflation",
+      "chartType": "line",
+      "beat": "real-deposit-rate",
+      "window": "full",
+      "indicator": "derived.IN.rates.real_deposit_rate",
+      "series": [],
+      "unit": "",
+      "subtitle": "What a bank deposit paid after subtracting inflation. Negative through the repression decades, reliably positive only after the 1990s reforms.",
+      "whyThisChart": "The honest other half of the savings story: in the controlled decades the interest a deposit paid was less than inflation, so even the careful saver lost ground, until liberalisation turned real rates positive."
+    },
+    {
+      "order": 23,
+      "chartId": "why-petrol-hurts-more-here",
+      "title": "Why petrol hurts more here",
+      "chartType": "multiLine",
+      "beat": "oil-two-currencies",
+      "window": "",
+      "indicator": "derived.IN.energy.brent_inr_idx",
+      "series": [
+        {
+          "indicator": "derived.IN.energy.brent_inr_idx",
+          "label": "Oil in rupees"
+        },
+        {
+          "indicator": "derived.IN.energy.brent_usd_idx",
+          "label": "Oil in dollars"
+        }
+      ],
+      "unit": "index (Jan 2000 = 100)",
+      "subtitle": "The price of crude oil in dollars and in rupees since 2000. The rupee line climbs higher because a weaker currency stacks on top of the world price.",
+      "whyThisChart": "India imports most of its oil in dollars, so a weaker rupee raises the pump price even when world oil is flat."
+    },
+    {
+      "order": 24,
+      "chartId": "the-petroleum-bill-the-rupee-has-to-pay",
+      "title": "The petroleum bill the rupee has to pay",
+      "chartType": "line",
+      "beat": "oil-bill",
+      "window": "full",
+      "indicator": "IN.trade.imports_oil_usd.annual",
+      "series": [],
+      "unit": "",
+      "subtitle": "India's annual bill for imported oil, its single biggest dollar outflow and the main way a weak rupee feeds straight into inflation.",
+      "whyThisChart": "Oil is India's single biggest import and the main reason a weak rupee feeds straight into inflation."
+    },
+    {
+      "order": 25,
+      "chartId": "the-dollar-debt-a-weak-rupee-makes-heavier",
+      "title": "The dollar debt a weak rupee makes heavier",
+      "chartType": "line",
+      "beat": "dollar-debt",
+      "window": "full",
+      "indicator": "IN.extfin.usd_credit_nonbank.quarterly",
+      "series": [],
+      "unit": "",
+      "subtitle": "Dollar-denominated debt owed by Indian companies and other non-banks. A weaker rupee raises the rupee cost of repaying it, which is what bit unhedged borrowers in the 2013 panic.",
+      "whyThisChart": "Beyond importers and travellers, a weak rupee squeezes borrowers who owe in dollars: the dollar figure is flat but the rupee bill rises."
+    },
+    {
+      "order": 26,
+      "chartId": "the-other-side-a-weak-rupee-pays-the-diaspora-more",
+      "title": "The other side: a weak rupee pays the diaspora more",
+      "chartType": "line",
+      "beat": "remittances",
+      "window": "full",
+      "indicator": "IN.extfin.remittances_received_usd.annual",
+      "series": [],
+      "unit": "",
+      "subtitle": "The money Indians abroad send home each year. A falling rupee quietly turns each of those dollars into more rupees for families.",
+      "whyThisChart": "Depreciation is not all cost: India is the world's largest remittance recipient, and every weaker rupee turns each sent dollar into more rupees at home."
+    },
+    {
+      "order": 27,
+      "chartId": "why-india-always-needs-more-dollars",
+      "title": "Why India always needs more dollars",
+      "chartType": "multiLine",
+      "beat": "trade-gap",
+      "window": "",
+      "indicator": "IN.trade.imports_total_usd.annual",
+      "series": [
+        {
+          "indicator": "IN.trade.exports_total_usd.annual",
+          "label": "Exports"
+        },
+        {
+          "indicator": "IN.trade.imports_total_usd.annual",
+          "label": "Imports"
+        }
+      ],
+      "unit": "US$ millions",
+      "subtitle": "India's exports against its imports. The country buys more from the world than it sells, so it is forever in need of dollars.",
+      "whyThisChart": "Underneath the currency sits a simple fact: India buys more from the world than it sells, so it constantly needs dollars, which is why capital flows and remittances matter so much."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "INR per USD, long annual series (1947-2026), latest",
+      "value": 92.7,
+      "displayValue": "₹93",
+      "date": "2026",
+      "unit": "INR per USD",
+      "indicatorId": "IN.fx.inr_usd_long.annual",
+      "sourceId": "rupee-chronology",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "INR per USD, long annual series (1947-2026), earliest",
+      "value": 3.3,
+      "displayValue": "₹3",
+      "date": "1947",
+      "unit": "INR per USD",
+      "indicatorId": "IN.fx.inr_usd_long.annual",
+      "sourceId": "rupee-chronology",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India total foreign-exchange reserves including gold (US$), latest",
+      "value": 683.18,
+      "displayValue": "683.18",
+      "date": "2026-05",
+      "unit": "US$ billion",
+      "indicatorId": "derived.IN.reserves.total_usd.monthly",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India total foreign-exchange reserves including gold (US$), earliest",
+      "value": 1.95,
+      "displayValue": "1.95",
+      "date": "1951-12",
+      "unit": "US$ billion",
+      "indicatorId": "derived.IN.reserves.total_usd.monthly",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "RBI net USD intervention, spot (US$ billion), latest",
+      "value": -8.944,
+      "displayValue": "-8.94",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "indicatorId": "IN.fx.rbi_net_intervention_usd.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "RBI net USD intervention, spot (US$ billion), earliest",
+      "value": 0.036,
+      "displayValue": "0.04",
+      "date": "1995-06",
+      "unit": "US$ billion",
+      "indicatorId": "IN.fx.rbi_net_intervention_usd.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net portfolio (FPI) flows into India (US$ billion), latest",
+      "value": -7.255,
+      "displayValue": "-7.26",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "indicatorId": "IN.extfin.net_fpi_usd.monthly",
+      "sourceId": "rbi-fpi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Net portfolio (FPI) flows into India (US$ billion), earliest",
+      "value": 0.021,
+      "displayValue": "0.02",
+      "date": "1997-11",
+      "unit": "US$ billion",
+      "indicatorId": "IN.extfin.net_fpi_usd.monthly",
+      "sourceId": "rbi-fpi",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "RBI outstanding net forward book (US$ billion), latest",
+      "value": -95.304,
+      "displayValue": "-95.3",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "indicatorId": "IN.fx.rbi_forward_book_usd.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "RBI outstanding net forward book (US$ billion), earliest",
+      "value": -0.02,
+      "displayValue": "-0.02",
+      "date": "1995-10",
+      "unit": "US$ billion",
+      "indicatorId": "IN.fx.rbi_forward_book_usd.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "INR per USD, month high (RBI reference rate), latest",
+      "value": 95.7795,
+      "displayValue": "₹96",
+      "date": "2026-06",
+      "unit": "INR per USD",
+      "indicatorId": "IN.fx.inr_usd_month_high.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "INR per USD, month high (RBI reference rate), earliest",
+      "value": 40.46,
+      "displayValue": "₹40",
+      "date": "2008-04",
+      "unit": "INR per USD",
+      "indicatorId": "IN.fx.inr_usd_month_high.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "INR per USD, month low (RBI reference rate), latest",
+      "value": 94.2795,
+      "displayValue": "₹94",
+      "date": "2026-06",
+      "unit": "INR per USD",
+      "indicatorId": "IN.fx.inr_usd_month_low.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "INR per USD, month low (RBI reference rate), earliest",
+      "value": 39.89,
+      "displayValue": "₹40",
+      "date": "2008-04",
+      "unit": "INR per USD",
+      "indicatorId": "IN.fx.inr_usd_month_low.monthly",
+      "sourceId": "rbi-fx",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rupee's value against the US dollar (Jan 1994 = 100), latest",
+      "value": 32.91,
+      "displayValue": "32.91",
+      "date": "2026-05",
+      "unit": "index Jan 1994=100",
+      "indicatorId": "derived.IN.fx.idx_rupee_vs_usd",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rupee's value against the US dollar (Jan 1994 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1994-01",
+      "unit": "index Jan 1994=100",
+      "indicatorId": "derived.IN.fx.idx_rupee_vs_usd",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rupee's trade-weighted nominal value, NEER (Jan 1994 = 100), latest",
+      "value": 40.36,
+      "displayValue": "40.36",
+      "date": "2026-05",
+      "unit": "index Jan 1994=100",
+      "indicatorId": "derived.IN.fx.idx_neer_broad",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rupee's trade-weighted nominal value, NEER (Jan 1994 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1994-01",
+      "unit": "index Jan 1994=100",
+      "indicatorId": "derived.IN.fx.idx_neer_broad",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rupee's trade-weighted REAL value, REER (Jan 1994 = 100), latest",
+      "value": 95.09,
+      "displayValue": "95.09",
+      "date": "2026-05",
+      "unit": "index Jan 1994=100",
+      "indicatorId": "derived.IN.fx.idx_reer_broad",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Rupee's trade-weighted REAL value, REER (Jan 1994 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1994-01",
+      "unit": "index Jan 1994=100",
+      "indicatorId": "derived.IN.fx.idx_reer_broad",
+      "sourceId": "rupee-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India REER, 36-currency basket, 1985=100 (RBI), latest",
+      "value": 101.1627,
+      "displayValue": "101.16",
+      "date": "2026-05",
+      "unit": "1985=100",
+      "indicatorId": "IN.fx.reer_36c.monthly",
+      "sourceId": "rbi-reer",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India REER, 36-currency basket, 1985=100 (RBI), earliest",
+      "value": 120.35,
+      "displayValue": "120.35",
+      "date": "1975-01",
+      "unit": "1985=100",
+      "indicatorId": "IN.fx.reer_36c.monthly",
+      "sourceId": "rbi-reer",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India NEER, 36-currency basket, 1985=100 (RBI), latest",
+      "value": 57.7845,
+      "displayValue": "57.78",
+      "date": "2026-05",
+      "unit": "1985=100",
+      "indicatorId": "IN.fx.neer_36c.monthly",
+      "sourceId": "rbi-reer",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India NEER, 36-currency basket, 1985=100 (RBI), earliest",
+      "value": 103.35,
+      "displayValue": "103.35",
+      "date": "1975-01",
+      "unit": "1985=100",
+      "indicatorId": "IN.fx.neer_36c.monthly",
+      "sourceId": "rbi-reer",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "INR per USD, long annual series (1947-2026), latest",
+      "value": 92.7,
+      "displayValue": "₹93",
+      "date": "2026",
+      "unit": "INR per USD",
+      "sourceId": "rupee-chronology",
+      "indicatorId": "IN.fx.inr_usd_long.annual"
+    },
+    {
+      "label": "INR per USD, long annual series (1947-2026), earliest",
+      "value": 3.3,
+      "displayValue": "₹3",
+      "date": "1947",
+      "unit": "INR per USD",
+      "sourceId": "rupee-chronology",
+      "indicatorId": "IN.fx.inr_usd_long.annual"
+    },
+    {
+      "label": "India total foreign-exchange reserves including gold (US$), latest",
+      "value": 683.18,
+      "displayValue": "683.18",
+      "date": "2026-05",
+      "unit": "US$ billion",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.reserves.total_usd.monthly"
+    },
+    {
+      "label": "India total foreign-exchange reserves including gold (US$), earliest",
+      "value": 1.95,
+      "displayValue": "1.95",
+      "date": "1951-12",
+      "unit": "US$ billion",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.reserves.total_usd.monthly"
+    },
+    {
+      "label": "RBI net USD intervention, spot (US$ billion), latest",
+      "value": -8.944,
+      "displayValue": "-8.94",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.rbi_net_intervention_usd.monthly"
+    },
+    {
+      "label": "RBI net USD intervention, spot (US$ billion), earliest",
+      "value": 0.036,
+      "displayValue": "0.04",
+      "date": "1995-06",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.rbi_net_intervention_usd.monthly"
+    },
+    {
+      "label": "Net portfolio (FPI) flows into India (US$ billion), latest",
+      "value": -7.255,
+      "displayValue": "-7.26",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fpi",
+      "indicatorId": "IN.extfin.net_fpi_usd.monthly"
+    },
+    {
+      "label": "Net portfolio (FPI) flows into India (US$ billion), earliest",
+      "value": 0.021,
+      "displayValue": "0.02",
+      "date": "1997-11",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fpi",
+      "indicatorId": "IN.extfin.net_fpi_usd.monthly"
+    },
+    {
+      "label": "RBI outstanding net forward book (US$ billion), latest",
+      "value": -95.304,
+      "displayValue": "-95.3",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.rbi_forward_book_usd.monthly"
+    },
+    {
+      "label": "RBI outstanding net forward book (US$ billion), earliest",
+      "value": -0.02,
+      "displayValue": "-0.02",
+      "date": "1995-10",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.rbi_forward_book_usd.monthly"
+    },
+    {
+      "label": "INR per USD, month high (RBI reference rate), latest",
+      "value": 95.7795,
+      "displayValue": "₹96",
+      "date": "2026-06",
+      "unit": "INR per USD",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.inr_usd_month_high.monthly"
+    },
+    {
+      "label": "INR per USD, month high (RBI reference rate), earliest",
+      "value": 40.46,
+      "displayValue": "₹40",
+      "date": "2008-04",
+      "unit": "INR per USD",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.inr_usd_month_high.monthly"
+    },
+    {
+      "label": "INR per USD, month low (RBI reference rate), latest",
+      "value": 94.2795,
+      "displayValue": "₹94",
+      "date": "2026-06",
+      "unit": "INR per USD",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.inr_usd_month_low.monthly"
+    },
+    {
+      "label": "INR per USD, month low (RBI reference rate), earliest",
+      "value": 39.89,
+      "displayValue": "₹40",
+      "date": "2008-04",
+      "unit": "INR per USD",
+      "sourceId": "rbi-fx",
+      "indicatorId": "IN.fx.inr_usd_month_low.monthly"
+    },
+    {
+      "label": "Rupee's value against the US dollar (Jan 1994 = 100), latest",
+      "value": 32.91,
+      "displayValue": "32.91",
+      "date": "2026-05",
+      "unit": "index Jan 1994=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.idx_rupee_vs_usd"
+    },
+    {
+      "label": "Rupee's value against the US dollar (Jan 1994 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1994-01",
+      "unit": "index Jan 1994=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.idx_rupee_vs_usd"
+    },
+    {
+      "label": "Rupee's trade-weighted nominal value, NEER (Jan 1994 = 100), latest",
+      "value": 40.36,
+      "displayValue": "40.36",
+      "date": "2026-05",
+      "unit": "index Jan 1994=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.idx_neer_broad"
+    },
+    {
+      "label": "Rupee's trade-weighted nominal value, NEER (Jan 1994 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1994-01",
+      "unit": "index Jan 1994=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.idx_neer_broad"
+    },
+    {
+      "label": "Rupee's trade-weighted REAL value, REER (Jan 1994 = 100), latest",
+      "value": 95.09,
+      "displayValue": "95.09",
+      "date": "2026-05",
+      "unit": "index Jan 1994=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.idx_reer_broad"
+    },
+    {
+      "label": "Rupee's trade-weighted REAL value, REER (Jan 1994 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1994-01",
+      "unit": "index Jan 1994=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.idx_reer_broad"
+    },
+    {
+      "label": "India REER, 36-currency basket, 1985=100 (RBI), latest",
+      "value": 101.1627,
+      "displayValue": "101.16",
+      "date": "2026-05",
+      "unit": "1985=100",
+      "sourceId": "rbi-reer",
+      "indicatorId": "IN.fx.reer_36c.monthly"
+    },
+    {
+      "label": "India REER, 36-currency basket, 1985=100 (RBI), earliest",
+      "value": 120.35,
+      "displayValue": "120.35",
+      "date": "1975-01",
+      "unit": "1985=100",
+      "sourceId": "rbi-reer",
+      "indicatorId": "IN.fx.reer_36c.monthly"
+    },
+    {
+      "label": "India NEER, 36-currency basket, 1985=100 (RBI), latest",
+      "value": 57.7845,
+      "displayValue": "57.78",
+      "date": "2026-05",
+      "unit": "1985=100",
+      "sourceId": "rbi-reer",
+      "indicatorId": "IN.fx.neer_36c.monthly"
+    },
+    {
+      "label": "India NEER, 36-currency basket, 1985=100 (RBI), earliest",
+      "value": 103.35,
+      "displayValue": "103.35",
+      "date": "1975-01",
+      "unit": "1985=100",
+      "sourceId": "rbi-reer",
+      "indicatorId": "IN.fx.neer_36c.monthly"
+    },
+    {
+      "label": "Indian rupees per US dollar (monthly), latest",
+      "value": 94.96,
+      "displayValue": "₹95",
+      "date": "2026-06",
+      "unit": "INR per USD",
+      "sourceId": "fred",
+      "indicatorId": "IN.fx.inr_usd.monthly"
+    },
+    {
+      "label": "Indian rupees per US dollar (monthly), earliest",
+      "value": 8.0041,
+      "displayValue": "₹8",
+      "date": "1973-01",
+      "unit": "INR per USD",
+      "sourceId": "fred",
+      "indicatorId": "IN.fx.inr_usd.monthly"
+    },
+    {
+      "label": "INR/USD implied by India-US inflation differential, latest",
+      "value": 79.06,
+      "displayValue": "₹79",
+      "date": "2026-03",
+      "unit": "INR per USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.inr_usd_ppp_implied"
+    },
+    {
+      "label": "INR/USD implied by India-US inflation differential, earliest",
+      "value": 31.44,
+      "displayValue": "₹31",
+      "date": "1994-01",
+      "unit": "INR per USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.inr_usd_ppp_implied"
+    },
+    {
+      "label": "India CPI inflation, year-on-year (BIS long CPI), latest",
+      "value": 3.402702,
+      "displayValue": "3.4",
+      "date": "2026-03",
+      "unit": "percent YoY",
+      "sourceId": "bis",
+      "indicatorId": "IN.prices.cpi_yoy_bis.monthly"
+    },
+    {
+      "label": "India CPI inflation, year-on-year (BIS long CPI), earliest",
+      "value": 1.9,
+      "displayValue": "1.9",
+      "date": "1954-04",
+      "unit": "percent YoY",
+      "sourceId": "bis",
+      "indicatorId": "IN.prices.cpi_yoy_bis.monthly"
+    },
+    {
+      "label": "US CPI inflation, year-on-year (BIS long CPI), latest",
+      "value": 4.248674,
+      "displayValue": "4.25",
+      "date": "2026-05",
+      "unit": "percent YoY",
+      "sourceId": "bis",
+      "indicatorId": "US.prices.cpi_yoy_bis.monthly"
+    },
+    {
+      "label": "US CPI inflation, year-on-year (BIS long CPI), earliest",
+      "value": 2.040816,
+      "displayValue": "2.04",
+      "date": "1914-01",
+      "unit": "percent YoY",
+      "sourceId": "bis",
+      "indicatorId": "US.prices.cpi_yoy_bis.monthly"
+    },
+    {
+      "label": "India's exports in ₹ (1970-71 = 100), latest",
+      "value": 254291.7,
+      "displayValue": "2,54,291.7",
+      "date": "2025",
+      "unit": "index 1990=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.trade.exports_idx_inr"
+    },
+    {
+      "label": "India's exports in ₹ (1970-71 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1970",
+      "unit": "index 1990=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.trade.exports_idx_inr"
+    },
+    {
+      "label": "India's exports in US$ (1970-71 = 100), latest",
+      "value": 21746.2,
+      "displayValue": "21,746.2",
+      "date": "2025",
+      "unit": "index 1970=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.trade.exports_idx_usd"
+    },
+    {
+      "label": "India's exports in US$ (1970-71 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1970",
+      "unit": "index 1970=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.trade.exports_idx_usd"
+    },
+    {
+      "label": "Re.1 in a bank deposit since 1970 (nominal), latest",
+      "value": 62.618,
+      "displayValue": "₹63",
+      "date": "2024",
+      "unit": "rupees (1970 = 1)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.savings.fd_nominal"
+    },
+    {
+      "label": "Re.1 in a bank deposit since 1970 (nominal), earliest",
+      "value": 1,
+      "displayValue": "₹1",
+      "date": "1970",
+      "unit": "rupees (1970 = 1)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.savings.fd_nominal"
+    },
+    {
+      "label": "Cost of living since 1970 (CPI), latest",
+      "value": 38.059,
+      "displayValue": "38.06",
+      "date": "2024",
+      "unit": "index (1970 = 1)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.savings.cost_of_living"
+    },
+    {
+      "label": "Cost of living since 1970 (CPI), earliest",
+      "value": 1,
+      "displayValue": "1",
+      "date": "1970",
+      "unit": "index (1970 = 1)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.savings.cost_of_living"
+    },
+    {
+      "label": "Re.1 in a bank deposit, after inflation, latest",
+      "value": 1.645,
+      "displayValue": "₹2",
+      "date": "2024",
+      "unit": "rupees of 1970 purchasing power",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.savings.fd_real"
+    },
+    {
+      "label": "Re.1 in a bank deposit, after inflation, earliest",
+      "value": 1,
+      "displayValue": "₹1",
+      "date": "1970",
+      "unit": "rupees of 1970 purchasing power",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.savings.fd_real"
+    },
+    {
+      "label": "Brent crude in rupees (Jan 2000 = 100), latest",
+      "value": 908.8,
+      "displayValue": "908.8",
+      "date": "2026-05",
+      "unit": "index Jan 2000=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.energy.brent_inr_idx"
+    },
+    {
+      "label": "Brent crude in rupees (Jan 2000 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "2000-01",
+      "unit": "index Jan 2000=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.energy.brent_inr_idx"
+    },
+    {
+      "label": "Brent crude in US dollars (Jan 2000 = 100), latest",
+      "value": 414.7,
+      "displayValue": "414.7",
+      "date": "2026-05",
+      "unit": "index Jan 2000=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.energy.brent_usd_idx"
+    },
+    {
+      "label": "Brent crude in US dollars (Jan 2000 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "2000-01",
+      "unit": "index Jan 2000=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.energy.brent_usd_idx"
+    },
+    {
+      "label": "Oil imports (the petroleum bill) (US$), latest",
+      "value": 173.942,
+      "displayValue": "173.94",
+      "date": "2025",
+      "unit": "US$ billion",
+      "sourceId": "rbi-trade",
+      "indicatorId": "IN.trade.imports_oil_usd.annual"
+    },
+    {
+      "label": "Oil imports (the petroleum bill) (US$), earliest",
+      "value": 0.18,
+      "displayValue": "0.18",
+      "date": "1970",
+      "unit": "US$ billion",
+      "sourceId": "rbi-trade",
+      "indicatorId": "IN.trade.imports_oil_usd.annual"
+    },
+    {
+      "label": "Personal remittances received, India (current US$), latest",
+      "value": 137674533895.686,
+      "displayValue": "137.67 billion",
+      "date": "2024",
+      "unit": "current US$",
+      "sourceId": "worldbank",
+      "indicatorId": "IN.extfin.remittances_received_usd.annual"
+    },
+    {
+      "label": "Personal remittances received, India (current US$), earliest",
+      "value": 429883697.5,
+      "displayValue": "429.88 million",
+      "date": "1975",
+      "unit": "current US$",
+      "sourceId": "worldbank",
+      "indicatorId": "IN.extfin.remittances_received_usd.annual"
+    },
+    {
+      "label": "Rupee's value against the US dollar (base = 100), latest",
+      "value": 44.8,
+      "displayValue": "44.8",
+      "date": "2026-06",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_usd"
+    },
+    {
+      "label": "Rupee's value against the US dollar (base = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1999-01",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_usd"
+    },
+    {
+      "label": "Rupee's value against the euro (base = 100), latest",
+      "value": 45,
+      "displayValue": "45",
+      "date": "2026-06",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_eur"
+    },
+    {
+      "label": "Rupee's value against the euro (base = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1999-01",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_eur"
+    },
+    {
+      "label": "Rupee's value against the pound (base = 100), latest",
+      "value": 55.4,
+      "displayValue": "55.4",
+      "date": "2026-06",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_gbp"
+    },
+    {
+      "label": "Rupee's value against the pound (base = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1999-01",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_gbp"
+    },
+    {
+      "label": "Rupee's value against the yen (base = 100), latest",
+      "value": 63.5,
+      "displayValue": "63.5",
+      "date": "2026-06",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_jpy"
+    },
+    {
+      "label": "Rupee's value against the yen (base = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1999-01",
+      "unit": "index (1999-01=100)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.rupee_value_vs_jpy"
+    },
+    {
+      "label": "India central bank policy rate (BIS), latest",
+      "value": 5.25,
+      "displayValue": "5.25",
+      "date": "2026-05",
+      "unit": "percent per annum",
+      "sourceId": "bis",
+      "indicatorId": "IN.rates.policy_rate.monthly"
+    },
+    {
+      "label": "India central bank policy rate (BIS), earliest",
+      "value": 3,
+      "displayValue": "3",
+      "date": "1946-01",
+      "unit": "percent per annum",
+      "sourceId": "bis",
+      "indicatorId": "IN.rates.policy_rate.monthly"
+    },
+    {
+      "label": "Net foreign direct investment into India (US$ billion), latest",
+      "value": 6.575,
+      "displayValue": "6.58",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fpi",
+      "indicatorId": "IN.extfin.net_fdi_usd.monthly"
+    },
+    {
+      "label": "Net foreign direct investment into India (US$ billion), earliest",
+      "value": 0.244,
+      "displayValue": "0.24",
+      "date": "2011-03",
+      "unit": "US$ billion",
+      "sourceId": "rbi-fpi",
+      "indicatorId": "IN.extfin.net_fdi_usd.monthly"
+    },
+    {
+      "label": "US dollar index vs emerging-market currencies (nominal), latest",
+      "value": 128.62872000000002,
+      "displayValue": "128.63",
+      "date": "2026-06-01",
+      "unit": "index (Jan 2006 = 100)",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.usd_em_index"
+    },
+    {
+      "label": "US dollar index vs emerging-market currencies (nominal), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "2006-01-01",
+      "unit": "index (Jan 2006 = 100)",
+      "sourceId": "fred",
+      "indicatorId": "extfin.driver.usd_em_index"
+    },
+    {
+      "label": "How tightly the RBI actually held the rupee, by regime: value",
+      "value": 2.1,
+      "displayValue": "2.1%",
+      "date": "",
+      "unit": "annualised volatility (% per year)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.regime_volatility"
+    },
+    {
+      "label": "How tightly the RBI actually held the rupee, by regime: value",
+      "value": 4.2,
+      "displayValue": "4.2%",
+      "date": "",
+      "unit": "annualised volatility (% per year)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.regime_volatility"
+    },
+    {
+      "label": "How tightly the RBI actually held the rupee, by regime: value",
+      "value": 8.1,
+      "displayValue": "8.1%",
+      "date": "",
+      "unit": "annualised volatility (% per year)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.regime_volatility"
+    },
+    {
+      "label": "How tightly the RBI actually held the rupee, by regime: value",
+      "value": 4.3,
+      "displayValue": "4.3%",
+      "date": "",
+      "unit": "annualised volatility (% per year)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.regime_volatility"
+    },
+    {
+      "label": "How tightly the RBI actually held the rupee, by regime: value",
+      "value": 0.9,
+      "displayValue": "0.9%",
+      "date": "",
+      "unit": "annualised volatility (% per year)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.regime_volatility"
+    },
+    {
+      "label": "How tightly the RBI actually held the rupee, by regime: value",
+      "value": 3.3,
+      "displayValue": "3.3%",
+      "date": "",
+      "unit": "annualised volatility (% per year)",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.regime_volatility"
+    },
+    {
+      "label": "India cost of living since 1991 (1991 = 100), latest",
+      "value": 711,
+      "displayValue": "711",
+      "date": "2026",
+      "unit": "index 1991=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.prices.cpi_cum_in"
+    },
+    {
+      "label": "India cost of living since 1991 (1991 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1991",
+      "unit": "index 1991=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.prices.cpi_cum_in"
+    },
+    {
+      "label": "US cost of living since 1991 (1991 = 100), latest",
+      "value": 241.4,
+      "displayValue": "241.4",
+      "date": "2026",
+      "unit": "index 1991=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.prices.cpi_cum_us"
+    },
+    {
+      "label": "US cost of living since 1991 (1991 = 100), earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "1991",
+      "unit": "index 1991=100",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.prices.cpi_cum_us"
+    },
+    {
+      "label": "Real return on a bank deposit (rate minus inflation), latest",
+      "value": 4.66,
+      "displayValue": "4.66",
+      "date": "2025",
+      "unit": "percent per annum",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.rates.real_deposit_rate"
+    },
+    {
+      "label": "Real return on a bank deposit (rate minus inflation), earliest",
+      "value": 1.28,
+      "displayValue": "1.28",
+      "date": "1970",
+      "unit": "percent per annum",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.rates.real_deposit_rate"
+    },
+    {
+      "label": "Merchandise exports (US$), latest",
+      "value": 441.73,
+      "displayValue": "441.73",
+      "date": "2025",
+      "unit": "US$ billion",
+      "sourceId": "rbi-trade",
+      "indicatorId": "IN.trade.exports_total_usd.annual"
+    },
+    {
+      "label": "Merchandise exports (US$), earliest",
+      "value": 2.031,
+      "displayValue": "2.03",
+      "date": "1970",
+      "unit": "US$ billion",
+      "sourceId": "rbi-trade",
+      "indicatorId": "IN.trade.exports_total_usd.annual"
+    },
+    {
+      "label": "Merchandise imports (US$), latest",
+      "value": 774.978,
+      "displayValue": "774.98",
+      "date": "2025",
+      "unit": "US$ billion",
+      "sourceId": "rbi-trade",
+      "indicatorId": "IN.trade.imports_total_usd.annual"
+    },
+    {
+      "label": "Merchandise imports (US$), earliest",
+      "value": 2.162,
+      "displayValue": "2.16",
+      "date": "1970",
+      "unit": "US$ billion",
+      "sourceId": "rbi-trade",
+      "indicatorId": "IN.trade.imports_total_usd.annual"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 36.5,
+      "displayValue": "36.5%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 4.9,
+      "displayValue": "4.9%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 54.9,
+      "displayValue": "54.9%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 61.1,
+      "displayValue": "61.1%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 1.4,
+      "displayValue": "1.4%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 38.4,
+      "displayValue": "38.4%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How much the rupee lost against the dollar, by decade: value",
+      "value": 15,
+      "displayValue": "15%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.decade_fall"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 67.3,
+      "displayValue": "67.3%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 61.1,
+      "displayValue": "61.1%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 50.7,
+      "displayValue": "50.7%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 48.4,
+      "displayValue": "48.4%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 27.9,
+      "displayValue": "27.9%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 20.4,
+      "displayValue": "20.4%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 13,
+      "displayValue": "13%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": 11.2,
+      "displayValue": "11.2%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": -6.3,
+      "displayValue": "-6.3%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "How far each currency fell against the dollar, 2000-2025: value",
+      "value": -10.9,
+      "displayValue": "-10.9%",
+      "date": "",
+      "unit": "% of value lost vs USD",
+      "sourceId": "rupee-derived",
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd"
+    },
+    {
+      "label": "India's current account balance, US$ billion, latest",
+      "value": -25.365,
+      "displayValue": "-25.37",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-bop",
+      "indicatorId": "macro.current_account_usd"
+    },
+    {
+      "label": "India's current account balance, US$ billion, earliest",
+      "value": 0.081,
+      "displayValue": "0.08",
+      "date": "1951-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-bop",
+      "indicatorId": "macro.current_account_usd"
+    },
+    {
+      "label": "US-dollar credit to Indian non-bank borrowers, latest",
+      "value": 118.226,
+      "displayValue": "118.23",
+      "date": "2025-12",
+      "unit": "US$ billion",
+      "sourceId": "bis",
+      "indicatorId": "IN.extfin.usd_credit_nonbank.quarterly"
+    },
+    {
+      "label": "US-dollar credit to Indian non-bank borrowers, earliest",
+      "value": 13.562,
+      "displayValue": "13.56",
+      "date": "2005-03",
+      "unit": "US$ billion",
+      "sourceId": "bis",
+      "indicatorId": "IN.extfin.usd_credit_nonbank.quarterly"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "IN.fx.inr_usd_long.annual",
+      "title": "INR per USD, long annual series (1947-2026)",
+      "sourceId": "rupee-chronology",
+      "sourceIndicatorId": "IN.fx.inr_usd_long.annual",
+      "unit": "INR per USD",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 80,
+      "earliest": {
+        "date": "1947",
+        "value": 3.3
+      },
+      "latest": {
+        "date": "2026",
+        "value": 92.7
+      }
+    },
+    {
+      "indicatorId": "derived.IN.reserves.total_usd.monthly",
+      "title": "India total foreign-exchange reserves including gold (US$)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.reserves.total_usd.monthly",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 839,
+      "earliest": {
+        "date": "1951-12",
+        "value": 1.95
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 683.18
+      }
+    },
+    {
+      "indicatorId": "IN.fx.rbi_net_intervention_usd.monthly",
+      "title": "RBI net USD intervention, spot (US$ billion)",
+      "sourceId": "rbi-fx",
+      "sourceIndicatorId": "IN.fx.rbi_net_intervention_usd.monthly",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 338,
+      "earliest": {
+        "date": "1995-06",
+        "value": 0.036
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": -8.944
+      }
+    },
+    {
+      "indicatorId": "IN.extfin.net_fpi_usd.monthly",
+      "title": "Net portfolio (FPI) flows into India (US$ billion)",
+      "sourceId": "rbi-fpi",
+      "sourceIndicatorId": "IN.extfin.net_fpi_usd.monthly",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 342,
+      "earliest": {
+        "date": "1997-11",
+        "value": 0.021
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": -7.255
+      }
+    },
+    {
+      "indicatorId": "IN.fx.rbi_forward_book_usd.monthly",
+      "title": "RBI outstanding net forward book (US$ billion)",
+      "sourceId": "rbi-fx",
+      "sourceIndicatorId": "IN.fx.rbi_forward_book_usd.monthly",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 318,
+      "earliest": {
+        "date": "1995-10",
+        "value": -0.02
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": -95.304
+      }
+    },
+    {
+      "indicatorId": "IN.fx.inr_usd_month_high.monthly",
+      "title": "INR per USD, month high (RBI reference rate)",
+      "sourceId": "rbi-fx",
+      "sourceIndicatorId": "IN.fx.inr_usd_month_high.monthly",
+      "unit": "INR per USD",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 219,
+      "earliest": {
+        "date": "2008-04",
+        "value": 40.46
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 95.7795
+      }
+    },
+    {
+      "indicatorId": "IN.fx.inr_usd_month_low.monthly",
+      "title": "INR per USD, month low (RBI reference rate)",
+      "sourceId": "rbi-fx",
+      "sourceIndicatorId": "IN.fx.inr_usd_month_low.monthly",
+      "unit": "INR per USD",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 219,
+      "earliest": {
+        "date": "2008-04",
+        "value": 39.89
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 94.2795
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.idx_rupee_vs_usd",
+      "title": "Rupee's value against the US dollar (Jan 1994 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.idx_rupee_vs_usd",
+      "unit": "index Jan 1994=100",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 389,
+      "earliest": {
+        "date": "1994-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 32.91
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.idx_neer_broad",
+      "title": "Rupee's trade-weighted nominal value, NEER (Jan 1994 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.idx_neer_broad",
+      "unit": "index Jan 1994=100",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 389,
+      "earliest": {
+        "date": "1994-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 40.36
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.idx_reer_broad",
+      "title": "Rupee's trade-weighted REAL value, REER (Jan 1994 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.idx_reer_broad",
+      "unit": "index Jan 1994=100",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 389,
+      "earliest": {
+        "date": "1994-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 95.09
+      }
+    },
+    {
+      "indicatorId": "IN.fx.reer_36c.monthly",
+      "title": "India REER, 36-currency basket, 1985=100 (RBI)",
+      "sourceId": "rbi-reer",
+      "sourceIndicatorId": "IN.fx.reer_36c.monthly",
+      "unit": "1985=100",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 615,
+      "earliest": {
+        "date": "1975-01",
+        "value": 120.35
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 101.1627
+      }
+    },
+    {
+      "indicatorId": "IN.fx.neer_36c.monthly",
+      "title": "India NEER, 36-currency basket, 1985=100 (RBI)",
+      "sourceId": "rbi-reer",
+      "sourceIndicatorId": "IN.fx.neer_36c.monthly",
+      "unit": "1985=100",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 615,
+      "earliest": {
+        "date": "1975-01",
+        "value": 103.35
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 57.7845
+      }
+    },
+    {
+      "indicatorId": "IN.fx.inr_usd.monthly",
+      "title": "Indian rupees per US dollar (monthly)",
+      "sourceId": "fred",
+      "sourceIndicatorId": "EXINUS",
+      "unit": "INR per USD",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 642,
+      "earliest": {
+        "date": "1973-01",
+        "value": 8.0041
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 94.96
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.inr_usd_ppp_implied",
+      "title": "INR/USD implied by India-US inflation differential",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.inr_usd_ppp_implied",
+      "unit": "INR per USD",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 386,
+      "earliest": {
+        "date": "1994-01",
+        "value": 31.44
+      },
+      "latest": {
+        "date": "2026-03",
+        "value": 79.06
+      }
+    },
+    {
+      "indicatorId": "IN.prices.cpi_yoy_bis.monthly",
+      "title": "India CPI inflation, year-on-year (BIS long CPI)",
+      "sourceId": "bis",
+      "sourceIndicatorId": "WS_LONG_CPI/M.IN.771",
+      "unit": "percent YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 864,
+      "earliest": {
+        "date": "1954-04",
+        "value": 1.9
+      },
+      "latest": {
+        "date": "2026-03",
+        "value": 3.402702
+      }
+    },
+    {
+      "indicatorId": "US.prices.cpi_yoy_bis.monthly",
+      "title": "US CPI inflation, year-on-year (BIS long CPI)",
+      "sourceId": "bis",
+      "sourceIndicatorId": "WS_LONG_CPI/M.US.771",
+      "unit": "percent YoY",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "US",
+        "name": "United States"
+      },
+      "observations": 1349,
+      "earliest": {
+        "date": "1914-01",
+        "value": 2.040816
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 4.248674
+      }
+    },
+    {
+      "indicatorId": "derived.IN.trade.exports_idx_inr",
+      "title": "India's exports in ₹ (1970-71 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.trade.exports_idx_inr",
+      "unit": "index 1990=100",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 55,
+      "earliest": {
+        "date": "1970",
+        "value": 100
+      },
+      "latest": {
+        "date": "2025",
+        "value": 254291.7
+      }
+    },
+    {
+      "indicatorId": "derived.IN.trade.exports_idx_usd",
+      "title": "India's exports in US$ (1970-71 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.trade.exports_idx_usd",
+      "unit": "index 1970=100",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970",
+        "value": 100
+      },
+      "latest": {
+        "date": "2025",
+        "value": 21746.2
+      }
+    },
+    {
+      "indicatorId": "derived.IN.savings.fd_nominal",
+      "title": "Re.1 in a bank deposit since 1970 (nominal)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.savings.fd_nominal",
+      "unit": "rupees (1970 = 1)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 55,
+      "earliest": {
+        "date": "1970",
+        "value": 1
+      },
+      "latest": {
+        "date": "2024",
+        "value": 62.618
+      }
+    },
+    {
+      "indicatorId": "derived.IN.savings.cost_of_living",
+      "title": "Cost of living since 1970 (CPI)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.savings.cost_of_living",
+      "unit": "index (1970 = 1)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 55,
+      "earliest": {
+        "date": "1970",
+        "value": 1
+      },
+      "latest": {
+        "date": "2024",
+        "value": 38.059
+      }
+    },
+    {
+      "indicatorId": "derived.IN.savings.fd_real",
+      "title": "Re.1 in a bank deposit, after inflation",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.savings.fd_real",
+      "unit": "rupees of 1970 purchasing power",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 55,
+      "earliest": {
+        "date": "1970",
+        "value": 1
+      },
+      "latest": {
+        "date": "2024",
+        "value": 1.645
+      }
+    },
+    {
+      "indicatorId": "derived.IN.energy.brent_inr_idx",
+      "title": "Brent crude in rupees (Jan 2000 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.energy.brent_inr_idx",
+      "unit": "index Jan 2000=100",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 317,
+      "earliest": {
+        "date": "2000-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 908.8
+      }
+    },
+    {
+      "indicatorId": "derived.IN.energy.brent_usd_idx",
+      "title": "Brent crude in US dollars (Jan 2000 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.energy.brent_usd_idx",
+      "unit": "index Jan 2000=100",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 317,
+      "earliest": {
+        "date": "2000-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 414.7
+      }
+    },
+    {
+      "indicatorId": "IN.trade.imports_oil_usd.annual",
+      "title": "Oil imports (the petroleum bill) (US$)",
+      "sourceId": "rbi-trade",
+      "sourceIndicatorId": "IN.trade.imports_oil_usd.annual",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970",
+        "value": 0.18
+      },
+      "latest": {
+        "date": "2025",
+        "value": 173.942
+      }
+    },
+    {
+      "indicatorId": "IN.extfin.remittances_received_usd.annual",
+      "title": "Personal remittances received, India (current US$)",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "BX.TRF.PWKR.CD.DT",
+      "unit": "current US$",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 50,
+      "earliest": {
+        "date": "1975",
+        "value": 429883697.5
+      },
+      "latest": {
+        "date": "2024",
+        "value": 137674533895.686
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.rupee_value_vs_usd",
+      "title": "Rupee's value against the US dollar (base = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.rupee_value_vs_usd",
+      "unit": "index (1999-01=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 330,
+      "earliest": {
+        "date": "1999-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 44.8
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.rupee_value_vs_eur",
+      "title": "Rupee's value against the euro (base = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.rupee_value_vs_eur",
+      "unit": "index (1999-01=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 330,
+      "earliest": {
+        "date": "1999-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 45
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.rupee_value_vs_gbp",
+      "title": "Rupee's value against the pound (base = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.rupee_value_vs_gbp",
+      "unit": "index (1999-01=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 330,
+      "earliest": {
+        "date": "1999-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 55.4
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.rupee_value_vs_jpy",
+      "title": "Rupee's value against the yen (base = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.rupee_value_vs_jpy",
+      "unit": "index (1999-01=100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 330,
+      "earliest": {
+        "date": "1999-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 63.5
+      }
+    },
+    {
+      "indicatorId": "IN.rates.policy_rate.monthly",
+      "title": "India central bank policy rate (BIS)",
+      "sourceId": "bis",
+      "sourceIndicatorId": "WS_CBPOL/M.IN",
+      "unit": "percent per annum",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 965,
+      "earliest": {
+        "date": "1946-01",
+        "value": 3
+      },
+      "latest": {
+        "date": "2026-05",
+        "value": 5.25
+      }
+    },
+    {
+      "indicatorId": "IN.extfin.net_fdi_usd.monthly",
+      "title": "Net foreign direct investment into India (US$ billion)",
+      "sourceId": "rbi-fpi",
+      "sourceIndicatorId": "IN.extfin.net_fdi_usd.monthly",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 182,
+      "earliest": {
+        "date": "2011-03",
+        "value": 0.244
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 6.575
+      }
+    },
+    {
+      "indicatorId": "extfin.driver.usd_em_index",
+      "title": "US dollar index vs emerging-market currencies (nominal)",
+      "sourceId": "fred",
+      "sourceIndicatorId": "DTWEXEMEGS",
+      "unit": "index (Jan 2006 = 100)",
+      "frequency": "monthly",
+      "geography": {
+        "type": "global",
+        "id": "GLOBAL",
+        "name": "Global"
+      },
+      "observations": 246,
+      "earliest": {
+        "date": "2006-01-01",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026-06-01",
+        "value": 128.62872000000002
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.regime_volatility",
+      "title": "How tightly the RBI actually held the rupee, by regime",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.regime_volatility",
+      "unit": "annualised volatility (% per year)",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "Jan 2000 – Mar 2004",
+          "value": 2.1,
+          "group": "Tightly managed"
+        },
+        {
+          "label": "Mar 2004 – Mar 2007",
+          "value": 4.2,
+          "group": "More flexible"
+        },
+        {
+          "label": "Mar 2007 – Dec 2013",
+          "value": 8.1,
+          "group": "More flexible"
+        },
+        {
+          "label": "Dec 2013 – Sep 2023",
+          "value": 4.3,
+          "group": "More flexible"
+        },
+        {
+          "label": "Sep 2023 – Dec 2024",
+          "value": 0.9,
+          "group": "Tightly managed"
+        },
+        {
+          "label": "Dec 2024 – present",
+          "value": 3.3,
+          "group": "More flexible"
+        }
+      ]
+    },
+    {
+      "indicatorId": "derived.IN.prices.cpi_cum_in",
+      "title": "India cost of living since 1991 (1991 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.prices.cpi_cum_in",
+      "unit": "index 1991=100",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026",
+        "value": 711
+      }
+    },
+    {
+      "indicatorId": "derived.IN.prices.cpi_cum_us",
+      "title": "US cost of living since 1991 (1991 = 100)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.prices.cpi_cum_us",
+      "unit": "index 1991=100",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1991",
+        "value": 100
+      },
+      "latest": {
+        "date": "2026",
+        "value": 241.4
+      }
+    },
+    {
+      "indicatorId": "derived.IN.rates.real_deposit_rate",
+      "title": "Real return on a bank deposit (rate minus inflation)",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.rates.real_deposit_rate",
+      "unit": "percent per annum",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970",
+        "value": 1.28
+      },
+      "latest": {
+        "date": "2025",
+        "value": 4.66
+      }
+    },
+    {
+      "indicatorId": "IN.trade.exports_total_usd.annual",
+      "title": "Merchandise exports (US$)",
+      "sourceId": "rbi-trade",
+      "sourceIndicatorId": "IN.trade.exports_total_usd.annual",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970",
+        "value": 2.031
+      },
+      "latest": {
+        "date": "2025",
+        "value": 441.73
+      }
+    },
+    {
+      "indicatorId": "IN.trade.imports_total_usd.annual",
+      "title": "Merchandise imports (US$)",
+      "sourceId": "rbi-trade",
+      "sourceIndicatorId": "IN.trade.imports_total_usd.annual",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970",
+        "value": 2.162
+      },
+      "latest": {
+        "date": "2025",
+        "value": 774.978
+      }
+    },
+    {
+      "indicatorId": "derived.IN.fx.decade_fall",
+      "title": "How much the rupee lost against the dollar, by decade",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.decade_fall",
+      "unit": "% of value lost vs USD",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [
+        "label",
+        "value"
+      ],
+      "latestRows": [
+        {
+          "label": "1950s",
+          "value": 0
+        },
+        {
+          "label": "1960s",
+          "value": 36.5
+        },
+        {
+          "label": "1970s",
+          "value": 4.9
+        },
+        {
+          "label": "1980s",
+          "value": 54.9
+        },
+        {
+          "label": "1990s",
+          "value": 61.1
+        },
+        {
+          "label": "2000s",
+          "value": 1.4
+        },
+        {
+          "label": "2010s",
+          "value": 38.4
+        },
+        {
+          "label": "2020s",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "indicatorId": "derived.IN.fx.peer_fall_vs_usd",
+      "title": "How far each currency fell against the dollar, 2000-2025",
+      "sourceId": "rupee-derived",
+      "sourceIndicatorId": "derived.IN.fx.peer_fall_vs_usd",
+      "unit": "% of value lost vs USD",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 14,
+      "dimensions": [
+        "label",
+        "value",
+        "group"
+      ],
+      "latestRows": [
+        {
+          "label": "Brazil (real)",
+          "value": 67.3,
+          "group": "Emerging"
+        },
+        {
+          "label": "South Africa (rand)",
+          "value": 61.1,
+          "group": "Emerging"
+        },
+        {
+          "label": "Mexico (peso)",
+          "value": 50.7,
+          "group": "Emerging"
+        },
+        {
+          "label": "India (rupee)",
+          "value": 48.4,
+          "group": "Emerging"
+        },
+        {
+          "label": "Japan (yen)",
+          "value": 27.9,
+          "group": "Developed"
+        },
+        {
+          "label": "South Korea (won)",
+          "value": 20.4,
+          "group": "Emerging"
+        },
+        {
+          "label": "UK (pound)",
+          "value": 13,
+          "group": "Developed"
+        },
+        {
+          "label": "Malaysia (ringgit)",
+          "value": 11.2,
+          "group": "Emerging"
+        },
+        {
+          "label": "Canada (dollar)",
+          "value": -6.3,
+          "group": "Developed"
+        },
+        {
+          "label": "Australia (dollar)",
+          "value": -10.9,
+          "group": "Developed"
+        }
+      ]
+    },
+    {
+      "indicatorId": "macro.current_account_usd",
+      "title": "India's current account balance, US$ billion",
+      "sourceId": "rbi-bop",
+      "sourceIndicatorId": "macro.current_account_usd",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951-03-31",
+        "value": 0.081
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": -25.365
+      }
+    },
+    {
+      "indicatorId": "IN.extfin.usd_credit_nonbank.quarterly",
+      "title": "US-dollar credit to Indian non-bank borrowers",
+      "sourceId": "bis",
+      "sourceIndicatorId": "WS_GLI",
+      "unit": "US$ billion",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 84,
+      "earliest": {
+        "date": "2005-03",
+        "value": 13.562
+      },
+      "latest": {
+        "date": "2025-12",
+        "value": 118.226
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

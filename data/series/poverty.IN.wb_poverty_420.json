@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "econ.poverty.wb_poverty_420",
+  "title": "Poverty headcount at $4.20/day, 2021 PPP",
+  "sourceId": "worldbank",
+  "sourceIndicatorId": "PIP: poverty headcount, $4.20/day (2021 PPP)",
+  "sourceUrl": "https://api.worldbank.org/pip/v1/pip?country=IND&povline=4.20&fill_gaps=false&version=20250930_2021_01_02_PROD&format=json",
+  "unit": "% of population",
+  "frequency": "survey years",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-06-11T14:43:06.995Z",
+  "observations": [
+    {
+      "date": "1977",
+      "value": 82.9
+    },
+    {
+      "date": "1983",
+      "value": 78
+    },
+    {
+      "date": "1987",
+      "value": 78.7
+    },
+    {
+      "date": "1993",
+      "value": 76.2
+    },
+    {
+      "date": "2004",
+      "value": 74.5
+    },
+    {
+      "date": "2009",
+      "value": 66.1
+    },
+    {
+      "date": "2011",
+      "value": 57.7
+    },
+    {
+      "date": "2022",
+      "value": 23.9
+    }
+  ],
+  "metadata": {
+    "provenance": "World Bank Poverty and Inequality Platform (PIP), version 20250930 (2021 PPP), India national survey-year estimates.",
+    "method": "Survey-year headcount at the $4.20/day line (2021 PPP), pulled with fill_gaps=false so only real survey points are kept, not interpolated or projected years. This is the canonical PIP series; the WDI SI.POV.* codes are a rounded snapshot of it and the Poverty & Equity Brief is a hand-readable extract.",
+    "pipVersion": "20250930_2021_01_02_PROD",
+    "caveat": "PIP serves India at national level only; rural/urban splits and the brief's group cuts are not available here and remain sourced from the October 2025 Poverty & Equity Brief. PIP and the WDI API can differ by a rounding step because WDI lags PIP."
+  }
+}

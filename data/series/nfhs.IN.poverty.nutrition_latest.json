@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.poverty.nfhs_nutrition_latest",
+  "title": "Nutrition deprivation indicators, NFHS-5 to NFHS-6",
+  "sourceId": "nfhs",
+  "sourceIndicatorId": "NFHS-6 India factsheet nutrition indicators",
+  "sourceUrl": "https://www.nfhsiips.in/nfhsuser/nfhs6.php",
+  "unit": "% of relevant population",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "indicator",
+    "nfhs5",
+    "value",
+    "urban",
+    "rural"
+  ],
+  "fetchedAt": "2026-06-07T13:58:01.613Z",
+  "rows": [
+    {
+      "label": "Child stunting",
+      "indicator": "Children under 5 years who are stunted (height-for-age)¹² (%)",
+      "nfhs5": 35.5,
+      "value": 29.3,
+      "urban": 23.9,
+      "rural": 30.9
+    },
+    {
+      "label": "Child underweight",
+      "indicator": "Children under 5 years who are underweight (weight-for-age)¹² (%)",
+      "nfhs5": 32.1,
+      "value": 31.8,
+      "urban": 25.3,
+      "rural": 33.8
+    },
+    {
+      "label": "Child wasting",
+      "indicator": "Children under 5 years who are wasted (weight-for-height)¹² (%)",
+      "nfhs5": 19.3,
+      "value": 19,
+      "urban": 16.5,
+      "rural": 19.8
+    },
+    {
+      "label": "Child severe wasting",
+      "indicator": "Children under 5 years who are severely wasted (weight-for-height)¹³ (%)",
+      "nfhs5": 7.7,
+      "value": 5.2,
+      "urban": 4.6,
+      "rural": 5.4
+    },
+    {
+      "label": "Adequate diet, 6-23 months",
+      "indicator": "Total children age 6-23 months receiving an adequate diet10, 11 (%)",
+      "nfhs5": 11,
+      "value": 15.3,
+      "urban": 16.2,
+      "rural": 15
+    },
+    {
+      "label": "Women underweight",
+      "indicator": "Women whose Body Mass Index (BMI) is below normal (BMI <18.5 kg/m²)¹⁵ (%)",
+      "nfhs5": 18.7,
+      "value": 19.7,
+      "urban": 13.2,
+      "rural": 22.5
+    }
+  ],
+  "metadata": {
+    "provenance": "Transcribed from NFHS-6 (2023-24) and NFHS-5 (2019-21) India factsheet values in data/nfhs6/nfhs6_clean.json.",
+    "method": "Latest value is NFHS-6 total; nfhs5 is the prior India factsheet value where available. These are nutrition and feeding indicators, not consumption poverty."
+  }
+}

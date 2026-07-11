@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "agriculture.edible_oil.sowing_progress_latest",
+  "title": "Oilseed sowing progress",
+  "sourceId": "upag",
+  "sourceIndicatorId": "UPAg progressive crop area sown Total Oilseeds",
+  "sourceUrl": "https://dash.upag.gov.in/progressivecropareasown",
+  "unit": "million hectares",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group",
+    "metric",
+    "year"
+  ],
+  "fetchedAt": "2026-06-13T14:24:44.902Z",
+  "rows": [
+    {
+      "label": "Area sown, 2025-26",
+      "value": 11.04,
+      "group": "Area",
+      "metric": "Area Sown",
+      "year": "2025-26"
+    },
+    {
+      "label": "Area sown, 2024-25",
+      "value": 9.58,
+      "group": "Area",
+      "metric": "Area Sown",
+      "year": "2024-25"
+    },
+    {
+      "label": "Target area",
+      "value": 12.43,
+      "group": "Area",
+      "metric": "Target Area",
+      "year": null
+    },
+    {
+      "label": "Normal area",
+      "value": 8.4,
+      "group": "Area",
+      "metric": "Normal (DA&FW)",
+      "year": null
+    }
+  ],
+  "metadata": {
+    "method": "Filtered UPAg progressive crop area sown rows to category = Oilseeds and crop = Total Oilseeds. Values are read as million hectares from the source table.",
+    "note": "This is a live/current-season area-coverage snapshot, not a final crop-year production estimate."
+  }
+}

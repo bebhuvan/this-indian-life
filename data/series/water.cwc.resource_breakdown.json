@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "water.cwc.resource_breakdown",
+  "title": "India's water resource: total vs usable (BCM/year)",
+  "sourceId": "cwc",
+  "sourceIndicatorId": "cwc.resourcebreakdown",
+  "sourceUrl": "https://www.cwc.gov.in/water-resource-estimation",
+  "unit": "billion cubic metres per year",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "component"
+  ],
+  "fetchedAt": "2026-06-07T06:20:43.887Z",
+  "rows": [
+    {
+      "component": "Total average annual water resource",
+      "value": 1999.2,
+      "kind": "resource"
+    },
+    {
+      "component": "Total utilizable water",
+      "value": 1137,
+      "kind": "usable"
+    },
+    {
+      "component": "Utilizable surface water",
+      "value": 690,
+      "kind": "usable-part"
+    },
+    {
+      "component": "Replenishable groundwater",
+      "value": 447,
+      "kind": "usable-part"
+    }
+  ],
+  "metadata": {
+    "collection": "CWC water-resource estimation (post-2019 vintage)",
+    "note": "Resource (1999.20) and utilizable (1137 = 690 surface + 447 groundwater) must not be conflated."
+  }
+}
