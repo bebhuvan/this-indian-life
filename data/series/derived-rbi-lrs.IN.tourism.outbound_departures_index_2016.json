@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "tourism.outbound_departures_index_2016",
+  "title": "Indian-national departures, calendar-year index",
+  "sourceId": "derived-rbi-lrs-context",
+  "sourceIndicatorId": "RBI LRS Table 36 + Ministry of Tourism Table 3.1.1",
+  "sourceUrl": "https://data.tourism.gov.in/mrd/Uploads/tourism_data/India%20Tourism%20Data%20Compendium%202025_1.pdf",
+  "unit": "index (2016=100)",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-07-16T03:22:10.118178+00:00",
+  "observations": [
+    {
+      "date": "2016",
+      "value": 100.0
+    },
+    {
+      "date": "2017",
+      "value": 109.468556
+    },
+    {
+      "date": "2018",
+      "value": 120.229014
+    },
+    {
+      "date": "2019",
+      "value": 123.05706
+    },
+    {
+      "date": "2020",
+      "value": 33.351169
+    },
+    {
+      "date": "2021",
+      "value": 39.097097
+    },
+    {
+      "date": "2022",
+      "value": 98.768923
+    },
+    {
+      "date": "2023",
+      "value": 127.458149
+    },
+    {
+      "date": "2024",
+      "value": 141.208189
+    }
+  ],
+  "metadata": {
+    "inputs": [
+      "extfin.lrs.travel.monthly",
+      "tourism.outbound_departures.annual"
+    ],
+    "method": "Sum monthly RBI Travel remittances by calendar year; index both that total and Indian-national departures to 2016=100 over the common 2016-2024 window.",
+    "unit": "index (2016=100)",
+    "rounding": "six decimal places in the artifact; human rounding in prose",
+    "assumptions": "The two lines are contextual, not a per-trip identity. Departures count movements, not unique leisure travellers; RBI Travel includes multiple purposes and payment types.",
+    "underlyingSourceUrls": [
+      "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=24281",
+      "https://data.tourism.gov.in/mrd/Uploads/tourism_data/India%20Tourism%20Data%20Compendium%202025_1.pdf"
+    ],
+    "measure": "Indian-national departures"
+  }
+}

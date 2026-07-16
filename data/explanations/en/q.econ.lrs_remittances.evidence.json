@@ -1,0 +1,3186 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.lrs_remittances",
+  "question": "How much money did Indians send abroad under RBI's LRS?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "extfin.lrs.total.fy",
+    "extfin.lrs.travel.fy",
+    "extfin.lrs.relatives.fy",
+    "extfin.lrs.gift.fy",
+    "extfin.lrs.studies.fy",
+    "extfin.lrs.asset_building.fy",
+    "extfin.lrs.investment.fy",
+    "extfin.lrs.property.fy",
+    "extfin.lrs.deposit.fy",
+    "extfin.lrs.purpose.latest",
+    "extfin.lrs.deposit.monthly",
+    "extfin.lrs.property.monthly",
+    "extfin.lrs.investment.monthly",
+    "extfin.lrs.gift.monthly",
+    "extfin.lrs.donations.monthly",
+    "extfin.lrs.travel.monthly",
+    "extfin.lrs.relatives.monthly",
+    "extfin.lrs.medical.monthly",
+    "extfin.lrs.studies.monthly",
+    "extfin.lrs.others.monthly",
+    "extfin.lrs.purpose.latest_vs_own_peak",
+    "extfin.lrs.deposit.peak_change",
+    "extfin.lrs.property.peak_change",
+    "extfin.lrs.investment.peak_change",
+    "extfin.lrs.gift.peak_change",
+    "extfin.lrs.donations.peak_change",
+    "extfin.lrs.travel.peak_change",
+    "extfin.lrs.relatives.peak_change",
+    "extfin.lrs.medical.peak_change",
+    "extfin.lrs.studies.peak_change",
+    "extfin.lrs.others.peak_change",
+    "extfin.lrs.travel_split.mar_apr_2026",
+    "extfin.lrs.total.monthly"
+  ],
+  "availableIndicatorIds": [
+    "extfin.lrs.total.fy",
+    "extfin.lrs.travel.fy",
+    "extfin.lrs.relatives.fy",
+    "extfin.lrs.gift.fy",
+    "extfin.lrs.studies.fy",
+    "extfin.lrs.asset_building.fy",
+    "extfin.lrs.investment.fy",
+    "extfin.lrs.property.fy",
+    "extfin.lrs.deposit.fy",
+    "extfin.lrs.purpose.latest",
+    "extfin.lrs.deposit.monthly",
+    "extfin.lrs.property.monthly",
+    "extfin.lrs.investment.monthly",
+    "extfin.lrs.gift.monthly",
+    "extfin.lrs.donations.monthly",
+    "extfin.lrs.travel.monthly",
+    "extfin.lrs.relatives.monthly",
+    "extfin.lrs.medical.monthly",
+    "extfin.lrs.studies.monthly",
+    "extfin.lrs.others.monthly",
+    "extfin.lrs.purpose.latest_vs_own_peak",
+    "extfin.lrs.deposit.peak_change",
+    "extfin.lrs.property.peak_change",
+    "extfin.lrs.investment.peak_change",
+    "extfin.lrs.gift.peak_change",
+    "extfin.lrs.donations.peak_change",
+    "extfin.lrs.travel.peak_change",
+    "extfin.lrs.relatives.peak_change",
+    "extfin.lrs.medical.peak_change",
+    "extfin.lrs.studies.peak_change",
+    "extfin.lrs.others.peak_change",
+    "extfin.lrs.travel_split.mar_apr_2026",
+    "extfin.lrs.total.monthly"
+  ],
+  "themeIndicatorIds": [
+    "extfin.lrs.total.fy",
+    "extfin.lrs.travel.fy",
+    "extfin.lrs.relatives.fy",
+    "extfin.lrs.gift.fy",
+    "extfin.lrs.studies.fy",
+    "extfin.lrs.asset_building.fy",
+    "extfin.lrs.investment.fy",
+    "extfin.lrs.property.fy",
+    "extfin.lrs.deposit.fy",
+    "extfin.lrs.purpose.latest",
+    "extfin.lrs.deposit.monthly",
+    "extfin.lrs.property.monthly",
+    "extfin.lrs.investment.monthly",
+    "extfin.lrs.gift.monthly",
+    "extfin.lrs.donations.monthly",
+    "extfin.lrs.travel.monthly",
+    "extfin.lrs.relatives.monthly",
+    "extfin.lrs.medical.monthly",
+    "extfin.lrs.studies.monthly",
+    "extfin.lrs.others.monthly",
+    "extfin.lrs.purpose.latest_vs_own_peak",
+    "extfin.lrs.deposit.peak_change",
+    "extfin.lrs.property.peak_change",
+    "extfin.lrs.investment.peak_change",
+    "extfin.lrs.gift.peak_change",
+    "extfin.lrs.donations.peak_change",
+    "extfin.lrs.travel.peak_change",
+    "extfin.lrs.relatives.peak_change",
+    "extfin.lrs.medical.peak_change",
+    "extfin.lrs.studies.peak_change",
+    "extfin.lrs.others.peak_change",
+    "extfin.lrs.travel_split.mar_apr_2026",
+    "extfin.lrs.total.monthly",
+    "extfin.lrs.limit_history",
+    "extfin.lrs.travel_index_2016",
+    "tourism.outbound_departures_index_2016",
+    "extfin.lrs.tcs_oct_2023",
+    "IN.fx.inr_usd.monthly"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.extfin.lrs.total.fy",
+      "indicatorId": "extfin.lrs.total.fy",
+      "title": "LRS outward remittances: Total, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.extfin.lrs.travel.fy",
+      "indicatorId": "extfin.lrs.travel.fy",
+      "title": "LRS outward remittances: Travel, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.extfin.lrs.relatives.fy",
+      "indicatorId": "extfin.lrs.relatives.fy",
+      "title": "LRS outward remittances: Maintenance of close relatives, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.extfin.lrs.gift.fy",
+      "indicatorId": "extfin.lrs.gift.fy",
+      "title": "LRS outward remittances: Gift, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.extfin.lrs.studies.fy",
+      "indicatorId": "extfin.lrs.studies.fy",
+      "title": "LRS outward remittances: Studies abroad, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.extfin.lrs.asset_building.fy",
+      "indicatorId": "extfin.lrs.asset_building.fy",
+      "title": "LRS outward remittances: Clearly asset-building purposes, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.extfin.lrs.investment.fy",
+      "indicatorId": "extfin.lrs.investment.fy",
+      "title": "LRS outward remittances: Investment in equity/debt, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v8.extfin.lrs.property.fy",
+      "indicatorId": "extfin.lrs.property.fy",
+      "title": "LRS outward remittances: Purchase of immovable property, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v9.extfin.lrs.deposit.fy",
+      "indicatorId": "extfin.lrs.deposit.fy",
+      "title": "LRS outward remittances: Deposit, fiscal year",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v10.extfin.lrs.purpose.latest",
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "title": "LRS outward remittances by purpose, FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v11.extfin.lrs.deposit.monthly",
+      "indicatorId": "extfin.lrs.deposit.monthly",
+      "title": "LRS outward remittances: Deposit, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v12.extfin.lrs.property.monthly",
+      "indicatorId": "extfin.lrs.property.monthly",
+      "title": "LRS outward remittances: Purchase of immovable property, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v13.extfin.lrs.investment.monthly",
+      "indicatorId": "extfin.lrs.investment.monthly",
+      "title": "LRS outward remittances: Investment in equity/debt, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v14.extfin.lrs.gift.monthly",
+      "indicatorId": "extfin.lrs.gift.monthly",
+      "title": "LRS outward remittances: Gift, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v15.extfin.lrs.donations.monthly",
+      "indicatorId": "extfin.lrs.donations.monthly",
+      "title": "LRS outward remittances: Donations, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v16.extfin.lrs.travel.monthly",
+      "indicatorId": "extfin.lrs.travel.monthly",
+      "title": "LRS outward remittances: Travel, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v17.extfin.lrs.relatives.monthly",
+      "indicatorId": "extfin.lrs.relatives.monthly",
+      "title": "LRS outward remittances: Maintenance of close relatives, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v18.extfin.lrs.medical.monthly",
+      "indicatorId": "extfin.lrs.medical.monthly",
+      "title": "LRS outward remittances: Medical treatment, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v19.extfin.lrs.studies.monthly",
+      "indicatorId": "extfin.lrs.studies.monthly",
+      "title": "LRS outward remittances: Studies abroad, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v20.extfin.lrs.others.monthly",
+      "indicatorId": "extfin.lrs.others.monthly",
+      "title": "LRS outward remittances: Others, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v21.extfin.lrs.purpose.latest_vs_own_peak",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak",
+      "title": "Latest LRS purpose value as a share of its own fiscal-year peak",
+      "sourceId": "derived-rbi-lrs",
+      "unit": "% of each purpose's own peak",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v22.extfin.lrs.deposit.peak_change",
+      "indicatorId": "extfin.lrs.deposit.peak_change",
+      "title": "LRS Deposit: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v23.extfin.lrs.property.peak_change",
+      "indicatorId": "extfin.lrs.property.peak_change",
+      "title": "LRS Purchase of immovable property: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v24.extfin.lrs.investment.peak_change",
+      "indicatorId": "extfin.lrs.investment.peak_change",
+      "title": "LRS Investment in equity/debt: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v25.extfin.lrs.gift.peak_change",
+      "indicatorId": "extfin.lrs.gift.peak_change",
+      "title": "LRS Gift: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v26.extfin.lrs.donations.peak_change",
+      "indicatorId": "extfin.lrs.donations.peak_change",
+      "title": "LRS Donations: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v27.extfin.lrs.travel.peak_change",
+      "indicatorId": "extfin.lrs.travel.peak_change",
+      "title": "LRS Travel: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v28.extfin.lrs.relatives.peak_change",
+      "indicatorId": "extfin.lrs.relatives.peak_change",
+      "title": "LRS Maintenance of close relatives: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v29.extfin.lrs.medical.peak_change",
+      "indicatorId": "extfin.lrs.medical.peak_change",
+      "title": "LRS Medical treatment: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v30.extfin.lrs.studies.peak_change",
+      "indicatorId": "extfin.lrs.studies.peak_change",
+      "title": "LRS Studies abroad: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v31.extfin.lrs.others.peak_change",
+      "indicatorId": "extfin.lrs.others.peak_change",
+      "title": "LRS Others: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v32.extfin.lrs.travel_split.mar_apr_2026",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026",
+      "title": "What RBI's Travel category contained in March-April 2026",
+      "sourceId": "rbi-lrs",
+      "unit": "percent of Travel",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v33.extfin.lrs.total.monthly",
+      "indicatorId": "extfin.lrs.total.monthly",
+      "title": "Total outward remittances under LRS, monthly",
+      "sourceId": "rbi-lrs",
+      "unit": "US$ billion",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v34.extfin.lrs.limit_history",
+      "indicatorId": "extfin.lrs.limit_history",
+      "title": "LRS limit revisions since the scheme began",
+      "sourceId": "rbi-lrs-policy",
+      "unit": "US$ thousand per resident individual",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v35.extfin.lrs.travel_index_2016",
+      "indicatorId": "extfin.lrs.travel_index_2016",
+      "title": "LRS Travel remittances, calendar-year index",
+      "sourceId": "derived-rbi-lrs-context",
+      "unit": "index (2016=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v36.tourism.outbound_departures_index_2016",
+      "indicatorId": "tourism.outbound_departures_index_2016",
+      "title": "Indian-national departures, calendar-year index",
+      "sourceId": "derived-rbi-lrs-context",
+      "unit": "index (2016=100)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v37.extfin.lrs.tcs_oct_2023",
+      "indicatorId": "extfin.lrs.tcs_oct_2023",
+      "title": "October 2023 TCS change for LRS remittances",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "unit": "mixed",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v38.IN.fx.inr_usd.monthly",
+      "indicatorId": "IN.fx.inr_usd.monthly",
+      "title": "Indian rupees per US dollar (monthly)",
+      "sourceId": "fred",
+      "unit": "INR per USD",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "lrs-remittances-eased-to-29-billion-after-a-31-7-billion-peak",
+      "title": "LRS remittances eased to $29 billion after a $31.7 billion peak",
+      "chartType": "line",
+      "beat": "scale",
+      "window": "full",
+      "indicator": "extfin.lrs.total.fy",
+      "series": [],
+      "unit": "US$ billion",
+      "subtitle": "Money sent abroad under LRS by people resident in India · each financial year from FY2009-10 to FY2025-26",
+      "whyThisChart": "The headline scale grew from about $1 billion to nearly $29 billion a year."
+    },
+    {
+      "order": 2,
+      "chartId": "the-legal-lrs-ceiling-moved-from-25-000-to-250-000",
+      "title": "The legal LRS ceiling moved from $25,000 to $250,000",
+      "chartType": "tableBars",
+      "beat": "policy-limit",
+      "window": "",
+      "indicator": "extfin.lrs.limit_history",
+      "series": [],
+      "unit": "US$ thousand per resident individual",
+      "subtitle": "The maximum one resident could send abroad under LRS in a financial year · seven rule changes since 2004",
+      "whyThisChart": "The scheme itself changed repeatedly before settling at today's ceiling."
+    },
+    {
+      "order": 3,
+      "chartId": "travel-dominated-lrs-except-during-the-pandemic-year",
+      "title": "Travel dominated LRS except during the pandemic year",
+      "chartType": "multiLine",
+      "beat": "composition-over-time",
+      "window": "",
+      "indicator": "extfin.lrs.travel.fy",
+      "series": [
+        {
+          "indicator": "extfin.lrs.travel.fy",
+          "label": "Travel",
+          "emphasis": true
+        },
+        {
+          "indicator": "extfin.lrs.relatives.fy",
+          "label": "Maintenance of relatives"
+        },
+        {
+          "indicator": "extfin.lrs.gift.fy",
+          "label": "Gifts"
+        },
+        {
+          "indicator": "extfin.lrs.studies.fy",
+          "label": "Studies abroad"
+        },
+        {
+          "indicator": "extfin.lrs.asset_building.fy",
+          "label": "Deposits, property and investments"
+        }
+      ],
+      "unit": "US$ billion",
+      "subtitle": "Annual amounts sent for Travel, family support, gifts, studies, deposits, property and investments · FY2009-10 to FY2025-26",
+      "whyThisChart": "The total changed because the purpose mix changed, especially after current-account travel entered LRS."
+    },
+    {
+      "order": 4,
+      "chartId": "the-full-monthly-record-one-lrs-purpose-at-a-time",
+      "title": "The full monthly record, one LRS purpose at a time",
+      "chartType": "sparkGrid",
+      "beat": "browse-all-monthly",
+      "window": "",
+      "indicator": "extfin.lrs.travel.monthly",
+      "series": [
+        {
+          "indicator": "extfin.lrs.travel.monthly",
+          "label": "Travel"
+        },
+        {
+          "indicator": "extfin.lrs.relatives.monthly",
+          "label": "Maintenance of relatives"
+        },
+        {
+          "indicator": "extfin.lrs.investment.monthly",
+          "label": "Equity/debt investment"
+        },
+        {
+          "indicator": "extfin.lrs.gift.monthly",
+          "label": "Gifts"
+        },
+        {
+          "indicator": "extfin.lrs.studies.monthly",
+          "label": "Studies Abroad"
+        },
+        {
+          "indicator": "extfin.lrs.deposit.monthly",
+          "label": "Deposits"
+        },
+        {
+          "indicator": "extfin.lrs.property.monthly",
+          "label": "Property purchases"
+        },
+        {
+          "indicator": "extfin.lrs.others.monthly",
+          "label": "Others"
+        },
+        {
+          "indicator": "extfin.lrs.medical.monthly",
+          "label": "Medical treatment"
+        },
+        {
+          "indicator": "extfin.lrs.donations.monthly",
+          "label": "Donations"
+        }
+      ],
+      "unit": "US$ billion",
+      "subtitle": "Monthly amount sent for each of RBI's ten main LRS purposes · full available record, April 2008 to April 2026",
+      "whyThisChart": "Annual sums hide timing, spikes and categories too small to survive on a shared scale; the small multiples expose every published top-level value in the workbook."
+    },
+    {
+      "order": 5,
+      "chartId": "travel-led-all-ten-lrs-purposes-in-fy2025-26",
+      "title": "Travel led all ten LRS purposes in FY2025-26",
+      "chartType": "tableBars",
+      "beat": "composition-now",
+      "window": "",
+      "indicator": "extfin.lrs.purpose.latest",
+      "series": [],
+      "unit": "US$ billion",
+      "subtitle": "Where the $28.98 billion total went across RBI's ten main purposes · FY2025-26",
+      "whyThisChart": "The full latest breakdown stops property or investment from being mistaken for the whole story."
+    },
+    {
+      "order": 6,
+      "chartId": "investment-rose-even-as-total-lrs-remittances-fell-from-the-peak",
+      "title": "Investment rose even as total LRS remittances fell from the peak",
+      "chartType": "rankedChange",
+      "beat": "change-from-peak",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "extfin.lrs.travel.peak_change",
+          "label": "Travel"
+        },
+        {
+          "indicator": "extfin.lrs.relatives.peak_change",
+          "label": "Maintenance of relatives"
+        },
+        {
+          "indicator": "extfin.lrs.studies.peak_change",
+          "label": "Studies abroad"
+        },
+        {
+          "indicator": "extfin.lrs.gift.peak_change",
+          "label": "Gifts"
+        },
+        {
+          "indicator": "extfin.lrs.investment.peak_change",
+          "label": "Equity/debt investment"
+        },
+        {
+          "indicator": "extfin.lrs.deposit.peak_change",
+          "label": "Deposits"
+        },
+        {
+          "indicator": "extfin.lrs.property.peak_change",
+          "label": "Property"
+        },
+        {
+          "indicator": "extfin.lrs.others.peak_change",
+          "label": "Others"
+        },
+        {
+          "indicator": "extfin.lrs.medical.peak_change",
+          "label": "Medical treatment"
+        },
+        {
+          "indicator": "extfin.lrs.donations.peak_change",
+          "label": "Donations"
+        }
+      ],
+      "unit": "US$ billion",
+      "subtitle": "Change in the annual amount for each purpose between the overall peak and the latest year · FY2023-24 to FY2025-26",
+      "whyThisChart": "A lower total hid opposite movements inside the table."
+    },
+    {
+      "order": 7,
+      "chartId": "each-purpose-peaked-in-a-different-year",
+      "title": "Each purpose peaked in a different year",
+      "chartType": "tableBars",
+      "beat": "own-peak",
+      "window": "",
+      "indicator": "extfin.lrs.purpose.latest_vs_own_peak",
+      "series": [],
+      "unit": "% of its own peak",
+      "subtitle": "Latest annual amount divided by that purpose's own record · 100% means FY2025-26 is a new high",
+      "whyThisChart": "The overall LRS peak is not every category's peak; this tests each purpose against the most relevant high-water mark in its own history."
+    },
+    {
+      "order": 8,
+      "chartId": "equity-and-debt-investment-pulled-away-from-deposits-and-property",
+      "title": "Equity and debt investment pulled away from deposits and property",
+      "chartType": "multiLine",
+      "beat": "asset-shift",
+      "window": "",
+      "indicator": "extfin.lrs.investment.fy",
+      "series": [
+        {
+          "indicator": "extfin.lrs.investment.fy",
+          "label": "Equity or debt investment",
+          "emphasis": true
+        },
+        {
+          "indicator": "extfin.lrs.deposit.fy",
+          "label": "Bank deposits"
+        },
+        {
+          "indicator": "extfin.lrs.property.fy",
+          "label": "Property purchases"
+        }
+      ],
+      "unit": "US$ billion",
+      "subtitle": "Annual LRS amount used for overseas equity or debt, bank deposits and property · FY2009-10 to FY2025-26",
+      "whyThisChart": "The combined asset-building line hides a sharp rise in securities investment, a smaller property increase and a deposit series that has fallen from its peak."
+    },
+    {
+      "order": 9,
+      "chartId": "education-made-up-about-40-of-rbi-s-new-travel-breakdown",
+      "title": "Education made up about 40% of RBI's new Travel breakdown",
+      "chartType": "tableBars",
+      "beat": "travel-inside",
+      "window": "",
+      "indicator": "extfin.lrs.travel_split.mar_apr_2026",
+      "series": [],
+      "unit": "percent of Travel",
+      "subtitle": "Share of Travel remittances assigned to RBI's five new subcategories · March and April 2026, the only months available",
+      "whyThisChart": "The new subcategories show that the word Travel is broader than foreign holidays."
+    },
+    {
+      "order": 10,
+      "chartId": "lrs-travel-grew-much-faster-than-indian-national-departures",
+      "title": "LRS Travel grew much faster than Indian-national departures",
+      "chartType": "multiLine",
+      "beat": "outside-comparison",
+      "window": "",
+      "indicator": "extfin.lrs.travel_index_2016",
+      "series": [
+        {
+          "indicator": "extfin.lrs.travel_index_2016",
+          "label": "LRS Travel remittances",
+          "emphasis": true
+        },
+        {
+          "indicator": "tourism.outbound_departures_index_2016",
+          "label": "Indian-national departures"
+        }
+      ],
+      "unit": "index (2016=100)",
+      "subtitle": "Growth in LRS Travel remittances compared with departures by Indian nationals · both set to 100 in 2016 · through 2024",
+      "whyThisChart": "Departure counts rose, but not at the pace of the recorded Travel remittance series."
+    },
+    {
+      "order": 11,
+      "chartId": "two-2023-spikes-line-up-with-the-original-and-deferred-tcs-dates",
+      "title": "Two 2023 spikes line up with the original and deferred TCS dates",
+      "chartType": "line",
+      "beat": "monthly-timing",
+      "window": "",
+      "indicator": "extfin.lrs.total.monthly",
+      "series": [],
+      "unit": "US$ billion",
+      "subtitle": "Monthly total sent abroad under LRS by people resident in India · sum of RBI's ten main purposes · January 2022 to April 2026",
+      "whyThisChart": "Annual totals hide the June and September 2023 timing spikes and the quieter months after them."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "LRS outward remittances: Total, fiscal year, latest",
+      "value": 28.979346198,
+      "displayValue": "28.98",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.total.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Total, fiscal year, earliest",
+      "value": 0.9829,
+      "displayValue": "0.98",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.total.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Travel, fiscal year, latest",
+      "value": 16.437989306,
+      "displayValue": "16.44",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.travel.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Travel, fiscal year, earliest",
+      "value": 0.0174,
+      "displayValue": "0.02",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.travel.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Maintenance of close relatives, fiscal year, latest",
+      "value": 3.539038172,
+      "displayValue": "3.54",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.relatives.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Maintenance of close relatives, fiscal year, earliest",
+      "value": 0.1709,
+      "displayValue": "0.17",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.relatives.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Gift, fiscal year, latest",
+      "value": 2.594813481,
+      "displayValue": "2.59",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.gift.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Gift, fiscal year, earliest",
+      "value": 0.1599,
+      "displayValue": "0.16",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.gift.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Studies abroad, fiscal year, latest",
+      "value": 2.309743807,
+      "displayValue": "2.31",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.studies.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Studies abroad, fiscal year, earliest",
+      "value": 0.2178,
+      "displayValue": "0.22",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.studies.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Clearly asset-building purposes, fiscal year, latest",
+      "value": 3.933793434,
+      "displayValue": "3.93",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.asset_building.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Clearly asset-building purposes, fiscal year, earliest",
+      "value": 0.2915,
+      "displayValue": "0.29",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.asset_building.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Investment in equity/debt, fiscal year, latest",
+      "value": 2.652011197,
+      "displayValue": "2.65",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.investment.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Investment in equity/debt, fiscal year, earliest",
+      "value": 0.2065,
+      "displayValue": "0.21",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.investment.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Purchase of immovable property, fiscal year, latest",
+      "value": 0.528698142,
+      "displayValue": "0.53",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.property.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Purchase of immovable property, fiscal year, earliest",
+      "value": 0.0476,
+      "displayValue": "0.05",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.property.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Deposit, fiscal year, latest",
+      "value": 0.753084096,
+      "displayValue": "0.75",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.deposit.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances: Deposit, fiscal year, earliest",
+      "value": 0.0374,
+      "displayValue": "0.04",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.deposit.fy",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 16.437989306,
+      "displayValue": "16.44",
+      "date": "",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 56.723,
+      "displayValue": "56.72",
+      "date": "",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 3.539038172,
+      "displayValue": "3.54",
+      "date": "",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 12.212,
+      "displayValue": "12.21",
+      "date": "",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 2.652011197,
+      "displayValue": "2.65",
+      "date": "",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 9.151,
+      "displayValue": "9.15",
+      "date": "",
+      "unit": "US$ billion",
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "sourceId": "rbi-lrs",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "LRS outward remittances: Total, fiscal year, latest",
+      "value": 28.979346198,
+      "displayValue": "28.98",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.total.fy"
+    },
+    {
+      "label": "LRS outward remittances: Total, fiscal year, earliest",
+      "value": 0.9829,
+      "displayValue": "0.98",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.total.fy"
+    },
+    {
+      "label": "LRS outward remittances: Travel, fiscal year, latest",
+      "value": 16.437989306,
+      "displayValue": "16.44",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel.fy"
+    },
+    {
+      "label": "LRS outward remittances: Travel, fiscal year, earliest",
+      "value": 0.0174,
+      "displayValue": "0.02",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel.fy"
+    },
+    {
+      "label": "LRS outward remittances: Maintenance of close relatives, fiscal year, latest",
+      "value": 3.539038172,
+      "displayValue": "3.54",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.relatives.fy"
+    },
+    {
+      "label": "LRS outward remittances: Maintenance of close relatives, fiscal year, earliest",
+      "value": 0.1709,
+      "displayValue": "0.17",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.relatives.fy"
+    },
+    {
+      "label": "LRS outward remittances: Gift, fiscal year, latest",
+      "value": 2.594813481,
+      "displayValue": "2.59",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.gift.fy"
+    },
+    {
+      "label": "LRS outward remittances: Gift, fiscal year, earliest",
+      "value": 0.1599,
+      "displayValue": "0.16",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.gift.fy"
+    },
+    {
+      "label": "LRS outward remittances: Studies abroad, fiscal year, latest",
+      "value": 2.309743807,
+      "displayValue": "2.31",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.studies.fy"
+    },
+    {
+      "label": "LRS outward remittances: Studies abroad, fiscal year, earliest",
+      "value": 0.2178,
+      "displayValue": "0.22",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.studies.fy"
+    },
+    {
+      "label": "LRS outward remittances: Clearly asset-building purposes, fiscal year, latest",
+      "value": 3.933793434,
+      "displayValue": "3.93",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.asset_building.fy"
+    },
+    {
+      "label": "LRS outward remittances: Clearly asset-building purposes, fiscal year, earliest",
+      "value": 0.2915,
+      "displayValue": "0.29",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.asset_building.fy"
+    },
+    {
+      "label": "LRS outward remittances: Investment in equity/debt, fiscal year, latest",
+      "value": 2.652011197,
+      "displayValue": "2.65",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.investment.fy"
+    },
+    {
+      "label": "LRS outward remittances: Investment in equity/debt, fiscal year, earliest",
+      "value": 0.2065,
+      "displayValue": "0.21",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.investment.fy"
+    },
+    {
+      "label": "LRS outward remittances: Purchase of immovable property, fiscal year, latest",
+      "value": 0.528698142,
+      "displayValue": "0.53",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.property.fy"
+    },
+    {
+      "label": "LRS outward remittances: Purchase of immovable property, fiscal year, earliest",
+      "value": 0.0476,
+      "displayValue": "0.05",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.property.fy"
+    },
+    {
+      "label": "LRS outward remittances: Deposit, fiscal year, latest",
+      "value": 0.753084096,
+      "displayValue": "0.75",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.deposit.fy"
+    },
+    {
+      "label": "LRS outward remittances: Deposit, fiscal year, earliest",
+      "value": 0.0374,
+      "displayValue": "0.04",
+      "date": "2010-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.deposit.fy"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 16.437989306,
+      "displayValue": "16.44",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 56.723,
+      "displayValue": "56.72",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 3.539038172,
+      "displayValue": "3.54",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 12.212,
+      "displayValue": "12.21",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 2.652011197,
+      "displayValue": "2.65",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 9.151,
+      "displayValue": "9.15",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 2.594813481,
+      "displayValue": "2.59",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 8.954,
+      "displayValue": "8.95",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 2.309743807,
+      "displayValue": "2.31",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 7.97,
+      "displayValue": "7.97",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: value",
+      "value": 0.753084096,
+      "displayValue": "0.75",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances by purpose, FY2025-26: sharePercent",
+      "value": 2.599,
+      "displayValue": "2.6",
+      "date": "",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest"
+    },
+    {
+      "label": "LRS outward remittances: Deposit, monthly, latest",
+      "value": 0.094785875,
+      "displayValue": "0.09",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.deposit.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Deposit, monthly, earliest",
+      "value": 0.0034,
+      "displayValue": "0",
+      "date": "2008-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.deposit.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Purchase of immovable property, monthly, latest",
+      "value": 0.049213379,
+      "displayValue": "0.05",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.property.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Purchase of immovable property, monthly, earliest",
+      "value": 0.0077,
+      "displayValue": "0.01",
+      "date": "2008-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.property.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Investment in equity/debt, monthly, latest",
+      "value": 0.238634037,
+      "displayValue": "0.24",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.investment.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Investment in equity/debt, monthly, earliest",
+      "value": 0.0133,
+      "displayValue": "0.01",
+      "date": "2008-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.investment.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Gift, monthly, latest",
+      "value": 0.270443362,
+      "displayValue": "0.27",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.gift.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Gift, monthly, earliest",
+      "value": 0.0088,
+      "displayValue": "0.01",
+      "date": "2008-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.gift.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Donations, monthly, latest",
+      "value": 0.000819728,
+      "displayValue": "0",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.donations.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Donations, monthly, earliest",
+      "value": 0.0002,
+      "displayValue": "0",
+      "date": "2008-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.donations.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Travel, monthly, latest",
+      "value": 1.157908206,
+      "displayValue": "1.16",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Travel, monthly, earliest",
+      "value": 0.0014,
+      "displayValue": "0",
+      "date": "2009-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Maintenance of close relatives, monthly, latest",
+      "value": 0.328733243,
+      "displayValue": "0.33",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.relatives.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Maintenance of close relatives, monthly, earliest",
+      "value": 0.0105,
+      "displayValue": "0.01",
+      "date": "2009-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.relatives.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Medical treatment, monthly, latest",
+      "value": 0.003369286,
+      "displayValue": "0",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.medical.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Medical treatment, monthly, earliest",
+      "value": 0.0013,
+      "displayValue": "0",
+      "date": "2009-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.medical.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Studies abroad, monthly, latest",
+      "value": 0.134746714,
+      "displayValue": "0.13",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.studies.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Studies abroad, monthly, earliest",
+      "value": 0.0061,
+      "displayValue": "0.01",
+      "date": "2009-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.studies.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Others, monthly, latest",
+      "value": 0.007935781,
+      "displayValue": "0.01",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.others.monthly"
+    },
+    {
+      "label": "LRS outward remittances: Others, monthly, earliest",
+      "value": 0.0171,
+      "displayValue": "0.02",
+      "date": "2008-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.others.monthly"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: value",
+      "value": 26.897,
+      "displayValue": "26.9%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: latestUSDBillion",
+      "value": 0.093300466,
+      "displayValue": "0.1%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: peakUSDBillion",
+      "value": 0.346886044,
+      "displayValue": "0.3%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: gapUSDBillion",
+      "value": -0.253585578,
+      "displayValue": "-0.3%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: value",
+      "value": 44.716,
+      "displayValue": "44.7%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: latestUSDBillion",
+      "value": 2.309743807,
+      "displayValue": "2.3%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: peakUSDBillion",
+      "value": 5.165329146,
+      "displayValue": "5.2%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: gapUSDBillion",
+      "value": -2.855585339,
+      "displayValue": "-2.9%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: value",
+      "value": 54.279,
+      "displayValue": "54.3%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: latestUSDBillion",
+      "value": 0.012119255,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: peakUSDBillion",
+      "value": 0.02232758,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "Latest LRS purpose value as a share of its own fiscal-year peak: gapUSDBillion",
+      "value": -0.010208325,
+      "displayValue": "-0%",
+      "date": "",
+      "unit": "% of each purpose's own peak",
+      "sourceId": "derived-rbi-lrs",
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak"
+    },
+    {
+      "label": "LRS Deposit: FY2023-24 peak versus FY2025-26, latest",
+      "value": 0.753084096,
+      "displayValue": "0.75",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.deposit.peak_change"
+    },
+    {
+      "label": "LRS Deposit: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 0.916450089,
+      "displayValue": "0.92",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.deposit.peak_change"
+    },
+    {
+      "label": "LRS Purchase of immovable property: FY2023-24 peak versus FY2025-26, latest",
+      "value": 0.528698142,
+      "displayValue": "0.53",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.property.peak_change"
+    },
+    {
+      "label": "LRS Purchase of immovable property: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 0.24251342,
+      "displayValue": "0.24",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.property.peak_change"
+    },
+    {
+      "label": "LRS Investment in equity/debt: FY2023-24 peak versus FY2025-26, latest",
+      "value": 2.652011197,
+      "displayValue": "2.65",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.investment.peak_change"
+    },
+    {
+      "label": "LRS Investment in equity/debt: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 1.510889736,
+      "displayValue": "1.51",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.investment.peak_change"
+    },
+    {
+      "label": "LRS Gift: FY2023-24 peak versus FY2025-26, latest",
+      "value": 2.594813481,
+      "displayValue": "2.59",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.gift.peak_change"
+    },
+    {
+      "label": "LRS Gift: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 3.580270803,
+      "displayValue": "3.58",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.gift.peak_change"
+    },
+    {
+      "label": "LRS Donations: FY2023-24 peak versus FY2025-26, latest",
+      "value": 0.012119255,
+      "displayValue": "0.01",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.donations.peak_change"
+    },
+    {
+      "label": "LRS Donations: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 0.011305058,
+      "displayValue": "0.01",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.donations.peak_change"
+    },
+    {
+      "label": "LRS Travel: FY2023-24 peak versus FY2025-26, latest",
+      "value": 16.437989306,
+      "displayValue": "16.44",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel.peak_change"
+    },
+    {
+      "label": "LRS Travel: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 17.006274573,
+      "displayValue": "17.01",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel.peak_change"
+    },
+    {
+      "label": "LRS Maintenance of close relatives: FY2023-24 peak versus FY2025-26, latest",
+      "value": 3.539038172,
+      "displayValue": "3.54",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.relatives.peak_change"
+    },
+    {
+      "label": "LRS Maintenance of close relatives: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 4.611529191,
+      "displayValue": "4.61",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.relatives.peak_change"
+    },
+    {
+      "label": "LRS Medical treatment: FY2023-24 peak versus FY2025-26, latest",
+      "value": 0.058548275,
+      "displayValue": "0.06",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.medical.peak_change"
+    },
+    {
+      "label": "LRS Medical treatment: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 0.079615911,
+      "displayValue": "0.08",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.medical.peak_change"
+    },
+    {
+      "label": "LRS Studies abroad: FY2023-24 peak versus FY2025-26, latest",
+      "value": 2.309743807,
+      "displayValue": "2.31",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.studies.peak_change"
+    },
+    {
+      "label": "LRS Studies abroad: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 3.478646614,
+      "displayValue": "3.48",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.studies.peak_change"
+    },
+    {
+      "label": "LRS Others: FY2023-24 peak versus FY2025-26, latest",
+      "value": 0.093300466,
+      "displayValue": "0.09",
+      "date": "2026-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.others.peak_change"
+    },
+    {
+      "label": "LRS Others: FY2023-24 peak versus FY2025-26, earliest",
+      "value": 0.298233271,
+      "displayValue": "0.3",
+      "date": "2024-03-31",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.others.peak_change"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: value",
+      "value": 58.144,
+      "displayValue": "58.14",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: usdBillion",
+      "value": 1.309701391,
+      "displayValue": "1.31",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: value",
+      "value": 39.489,
+      "displayValue": "39.49",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: usdBillion",
+      "value": 0.889502849,
+      "displayValue": "0.89",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: value",
+      "value": 1.158,
+      "displayValue": "1.16",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: usdBillion",
+      "value": 0.026081366,
+      "displayValue": "0.03",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: value",
+      "value": 0.881,
+      "displayValue": "0.88",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: usdBillion",
+      "value": 0.019855805,
+      "displayValue": "0.02",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: value",
+      "value": 0.327,
+      "displayValue": "0.33",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "What RBI's Travel category contained in March-April 2026: usdBillion",
+      "value": 0.007364795,
+      "displayValue": "0.01",
+      "date": "",
+      "unit": "percent of Travel",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026"
+    },
+    {
+      "label": "Total outward remittances under LRS, monthly, latest",
+      "value": 2.286589612,
+      "displayValue": "2.29",
+      "date": "2026-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.total.monthly"
+    },
+    {
+      "label": "Total outward remittances under LRS, monthly, earliest",
+      "value": 0.0505,
+      "displayValue": "0.05",
+      "date": "2008-04",
+      "unit": "US$ billion",
+      "sourceId": "rbi-lrs",
+      "indicatorId": "extfin.lrs.total.monthly"
+    },
+    {
+      "label": "LRS limit revisions since the scheme began: value",
+      "value": 25,
+      "displayValue": "25",
+      "date": "",
+      "unit": "US$ thousand per resident individual",
+      "sourceId": "rbi-lrs-policy",
+      "indicatorId": "extfin.lrs.limit_history"
+    },
+    {
+      "label": "LRS limit revisions since the scheme began: value",
+      "value": 50,
+      "displayValue": "50",
+      "date": "",
+      "unit": "US$ thousand per resident individual",
+      "sourceId": "rbi-lrs-policy",
+      "indicatorId": "extfin.lrs.limit_history"
+    },
+    {
+      "label": "LRS limit revisions since the scheme began: value",
+      "value": 100,
+      "displayValue": "100",
+      "date": "",
+      "unit": "US$ thousand per resident individual",
+      "sourceId": "rbi-lrs-policy",
+      "indicatorId": "extfin.lrs.limit_history"
+    },
+    {
+      "label": "LRS limit revisions since the scheme began: value",
+      "value": 200,
+      "displayValue": "200",
+      "date": "",
+      "unit": "US$ thousand per resident individual",
+      "sourceId": "rbi-lrs-policy",
+      "indicatorId": "extfin.lrs.limit_history"
+    },
+    {
+      "label": "LRS limit revisions since the scheme began: value",
+      "value": 75,
+      "displayValue": "75",
+      "date": "",
+      "unit": "US$ thousand per resident individual",
+      "sourceId": "rbi-lrs-policy",
+      "indicatorId": "extfin.lrs.limit_history"
+    },
+    {
+      "label": "LRS limit revisions since the scheme began: value",
+      "value": 125,
+      "displayValue": "125",
+      "date": "",
+      "unit": "US$ thousand per resident individual",
+      "sourceId": "rbi-lrs-policy",
+      "indicatorId": "extfin.lrs.limit_history"
+    },
+    {
+      "label": "LRS limit revisions since the scheme began: value",
+      "value": 250,
+      "displayValue": "250",
+      "date": "",
+      "unit": "US$ thousand per resident individual",
+      "sourceId": "rbi-lrs-policy",
+      "indicatorId": "extfin.lrs.limit_history"
+    },
+    {
+      "label": "LRS Travel remittances, calendar-year index, latest",
+      "value": 734.933054,
+      "displayValue": "734.93",
+      "date": "2024",
+      "unit": "index (2016=100)",
+      "sourceId": "derived-rbi-lrs-context",
+      "indicatorId": "extfin.lrs.travel_index_2016"
+    },
+    {
+      "label": "LRS Travel remittances, calendar-year index, earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "2016",
+      "unit": "index (2016=100)",
+      "sourceId": "derived-rbi-lrs-context",
+      "indicatorId": "extfin.lrs.travel_index_2016"
+    },
+    {
+      "label": "Indian-national departures, calendar-year index, latest",
+      "value": 141.208189,
+      "displayValue": "141.21",
+      "date": "2024",
+      "unit": "index (2016=100)",
+      "sourceId": "derived-rbi-lrs-context",
+      "indicatorId": "tourism.outbound_departures_index_2016"
+    },
+    {
+      "label": "Indian-national departures, calendar-year index, earliest",
+      "value": 100,
+      "displayValue": "100",
+      "date": "2016",
+      "unit": "index (2016=100)",
+      "sourceId": "derived-rbi-lrs-context",
+      "indicatorId": "tourism.outbound_departures_index_2016"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: thresholdInr",
+      "value": 700000,
+      "displayValue": "7,00,000",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateBeforePercent",
+      "value": 5,
+      "displayValue": "5",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateFromDatePercent",
+      "value": 20,
+      "displayValue": "20",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: thresholdInr",
+      "value": 700000,
+      "displayValue": "7,00,000",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateBeforePercent",
+      "value": 5,
+      "displayValue": "5",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateFromDatePercent",
+      "value": 5,
+      "displayValue": "5",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: thresholdInr",
+      "value": 700000,
+      "displayValue": "7,00,000",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateBeforePercent",
+      "value": 5,
+      "displayValue": "5",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateFromDatePercent",
+      "value": 20,
+      "displayValue": "20",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: thresholdInr",
+      "value": 700000,
+      "displayValue": "7,00,000",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateBeforePercent",
+      "value": 5,
+      "displayValue": "5",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "October 2023 TCS change for LRS remittances: rateFromDatePercent",
+      "value": 5,
+      "displayValue": "5",
+      "date": "2023-10-01",
+      "unit": "mixed",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "indicatorId": "extfin.lrs.tcs_oct_2023"
+    },
+    {
+      "label": "Indian rupees per US dollar (monthly), latest",
+      "value": 94.96,
+      "displayValue": "₹95",
+      "date": "2026-06",
+      "unit": "INR per USD",
+      "sourceId": "fred",
+      "indicatorId": "IN.fx.inr_usd.monthly"
+    },
+    {
+      "label": "Indian rupees per US dollar (monthly), earliest",
+      "value": 8.0041,
+      "displayValue": "₹8",
+      "date": "1973-01",
+      "unit": "INR per USD",
+      "sourceId": "fred",
+      "indicatorId": "IN.fx.inr_usd.monthly"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "extfin.lrs.total.fy",
+      "title": "LRS outward remittances: Total, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.9829
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 28.979346198
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.travel.fy",
+      "title": "LRS outward remittances: Travel, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.0174
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 16.437989306
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.relatives.fy",
+      "title": "LRS outward remittances: Maintenance of close relatives, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.1709
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 3.539038172
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.gift.fy",
+      "title": "LRS outward remittances: Gift, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.1599
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 2.594813481
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.studies.fy",
+      "title": "LRS outward remittances: Studies abroad, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.2178
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 2.309743807
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.asset_building.fy",
+      "title": "LRS outward remittances: Clearly asset-building purposes, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.2915
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 3.933793434
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.investment.fy",
+      "title": "LRS outward remittances: Investment in equity/debt, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.2065
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 2.652011197
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.property.fy",
+      "title": "LRS outward remittances: Purchase of immovable property, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.0476
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 0.528698142
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.deposit.fy",
+      "title": "LRS outward remittances: Deposit, fiscal year",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 17,
+      "earliest": {
+        "date": "2010-03-31",
+        "value": 0.0374
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 0.753084096
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.purpose.latest",
+      "title": "LRS outward remittances by purpose, FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 10,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Travel",
+          "value": 16.437989306,
+          "sharePercent": 56.723,
+          "group": "other reported purpose"
+        },
+        {
+          "label": "Maintenance of close relatives",
+          "value": 3.539038172,
+          "sharePercent": 12.212,
+          "group": "other reported purpose"
+        },
+        {
+          "label": "Investment in equity/debt",
+          "value": 2.652011197,
+          "sharePercent": 9.151,
+          "group": "clearly asset-building"
+        },
+        {
+          "label": "Gift",
+          "value": 2.594813481,
+          "sharePercent": 8.954,
+          "group": "other reported purpose"
+        },
+        {
+          "label": "Studies abroad",
+          "value": 2.309743807,
+          "sharePercent": 7.97,
+          "group": "other reported purpose"
+        },
+        {
+          "label": "Deposit",
+          "value": 0.753084096,
+          "sharePercent": 2.599,
+          "group": "clearly asset-building"
+        },
+        {
+          "label": "Purchase of immovable property",
+          "value": 0.528698142,
+          "sharePercent": 1.824,
+          "group": "clearly asset-building"
+        },
+        {
+          "label": "Others",
+          "value": 0.093300466,
+          "sharePercent": 0.322,
+          "group": "other reported purpose"
+        },
+        {
+          "label": "Medical treatment",
+          "value": 0.058548275,
+          "sharePercent": 0.202,
+          "group": "other reported purpose"
+        },
+        {
+          "label": "Donations",
+          "value": 0.012119255,
+          "sharePercent": 0.042,
+          "group": "other reported purpose"
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.lrs.deposit.monthly",
+      "title": "LRS outward remittances: Deposit, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 217,
+      "earliest": {
+        "date": "2008-04",
+        "value": 0.0034
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.094785875
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.property.monthly",
+      "title": "LRS outward remittances: Purchase of immovable property, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 217,
+      "earliest": {
+        "date": "2008-04",
+        "value": 0.0077
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.049213379
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.investment.monthly",
+      "title": "LRS outward remittances: Investment in equity/debt, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 217,
+      "earliest": {
+        "date": "2008-04",
+        "value": 0.0133
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.238634037
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.gift.monthly",
+      "title": "LRS outward remittances: Gift, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 217,
+      "earliest": {
+        "date": "2008-04",
+        "value": 0.0088
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.270443362
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.donations.monthly",
+      "title": "LRS outward remittances: Donations, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 214,
+      "earliest": {
+        "date": "2008-04",
+        "value": 0.0002
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.000819728
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.travel.monthly",
+      "title": "LRS outward remittances: Travel, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 205,
+      "earliest": {
+        "date": "2009-04",
+        "value": 0.0014
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 1.157908206
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.relatives.monthly",
+      "title": "LRS outward remittances: Maintenance of close relatives, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 205,
+      "earliest": {
+        "date": "2009-04",
+        "value": 0.0105
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.328733243
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.medical.monthly",
+      "title": "LRS outward remittances: Medical treatment, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 205,
+      "earliest": {
+        "date": "2009-04",
+        "value": 0.0013
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.003369286
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.studies.monthly",
+      "title": "LRS outward remittances: Studies abroad, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 205,
+      "earliest": {
+        "date": "2009-04",
+        "value": 0.0061
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.134746714
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.others.monthly",
+      "title": "LRS outward remittances: Others, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 217,
+      "earliest": {
+        "date": "2008-04",
+        "value": 0.0171
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 0.007935781
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak",
+      "title": "Latest LRS purpose value as a share of its own fiscal-year peak",
+      "sourceId": "derived-rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36, monthly purpose values aggregated to fiscal years",
+      "unit": "% of each purpose's own peak",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 10,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Others · peak FY2022-23",
+          "value": 26.897,
+          "purpose": "Others",
+          "latestUSDBillion": 0.093300466,
+          "peakUSDBillion": 0.346886044,
+          "peakFiscalYear": "FY2022-23",
+          "gapUSDBillion": -0.253585578
+        },
+        {
+          "label": "Studies Abroad · peak FY2021-22",
+          "value": 44.716,
+          "purpose": "Studies Abroad",
+          "latestUSDBillion": 2.309743807,
+          "peakUSDBillion": 5.165329146,
+          "peakFiscalYear": "FY2021-22",
+          "gapUSDBillion": -2.855585339
+        },
+        {
+          "label": "Donations · peak FY2019-20",
+          "value": 54.279,
+          "purpose": "Donations",
+          "latestUSDBillion": 0.012119255,
+          "peakUSDBillion": 0.02232758,
+          "peakFiscalYear": "FY2019-20",
+          "gapUSDBillion": -0.010208325
+        },
+        {
+          "label": "Medical treatment · peak FY2024-25",
+          "value": 72.116,
+          "purpose": "Medical treatment",
+          "latestUSDBillion": 0.058548275,
+          "peakUSDBillion": 0.08118584,
+          "peakFiscalYear": "FY2024-25",
+          "gapUSDBillion": -0.022637565
+        },
+        {
+          "label": "Gifts · peak FY2023-24",
+          "value": 72.475,
+          "purpose": "Gifts",
+          "latestUSDBillion": 2.594813481,
+          "peakUSDBillion": 3.580270803,
+          "peakFiscalYear": "FY2023-24",
+          "gapUSDBillion": -0.985457322
+        },
+        {
+          "label": "Deposits · peak FY2022-23",
+          "value": 74.484,
+          "purpose": "Deposits",
+          "latestUSDBillion": 0.753084096,
+          "peakUSDBillion": 1.011066334,
+          "peakFiscalYear": "FY2022-23",
+          "gapUSDBillion": -0.257982238
+        },
+        {
+          "label": "Maintenance of relatives · peak FY2023-24",
+          "value": 76.743,
+          "purpose": "Maintenance of relatives",
+          "latestUSDBillion": 3.539038172,
+          "peakUSDBillion": 4.611529191,
+          "peakFiscalYear": "FY2023-24",
+          "gapUSDBillion": -1.072491019
+        },
+        {
+          "label": "Travel · peak FY2023-24",
+          "value": 96.658,
+          "purpose": "Travel",
+          "latestUSDBillion": 16.437989306,
+          "peakUSDBillion": 17.006274573,
+          "peakFiscalYear": "FY2023-24",
+          "gapUSDBillion": -0.568285267
+        },
+        {
+          "label": "Property purchases · peak FY2025-26",
+          "value": 100,
+          "purpose": "Property purchases",
+          "latestUSDBillion": 0.528698142,
+          "peakUSDBillion": 0.528698142,
+          "peakFiscalYear": "FY2025-26",
+          "gapUSDBillion": 0
+        },
+        {
+          "label": "Equity or debt investment · peak FY2025-26",
+          "value": 100,
+          "purpose": "Equity or debt investment",
+          "latestUSDBillion": 2.652011197,
+          "peakUSDBillion": 2.652011197,
+          "peakFiscalYear": "FY2025-26",
+          "gapUSDBillion": 0
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.lrs.deposit.peak_change",
+      "title": "LRS Deposit: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 0.916450089
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 0.753084096
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.property.peak_change",
+      "title": "LRS Purchase of immovable property: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 0.24251342
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 0.528698142
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.investment.peak_change",
+      "title": "LRS Investment in equity/debt: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 1.510889736
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 2.652011197
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.gift.peak_change",
+      "title": "LRS Gift: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 3.580270803
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 2.594813481
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.donations.peak_change",
+      "title": "LRS Donations: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 0.011305058
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 0.012119255
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.travel.peak_change",
+      "title": "LRS Travel: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 17.006274573
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 16.437989306
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.relatives.peak_change",
+      "title": "LRS Maintenance of close relatives: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 4.611529191
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 3.539038172
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.medical.peak_change",
+      "title": "LRS Medical treatment: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 0.079615911
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 0.058548275
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.studies.peak_change",
+      "title": "LRS Studies abroad: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 3.478646614
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 2.309743807
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.others.peak_change",
+      "title": "LRS Others: FY2023-24 peak versus FY2025-26",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 2,
+      "earliest": {
+        "date": "2024-03-31",
+        "value": 0.298233271
+      },
+      "latest": {
+        "date": "2026-03-31",
+        "value": 0.093300466
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.travel_split.mar_apr_2026",
+      "title": "What RBI's Travel category contained in March-April 2026",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "percent of Travel",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 5,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Other travel",
+          "value": 58.144,
+          "usdBillion": 1.309701391
+        },
+        {
+          "label": "Travel for education",
+          "value": 39.489,
+          "usdBillion": 0.889502849
+        },
+        {
+          "label": "Business travel",
+          "value": 1.158,
+          "usdBillion": 0.026081366
+        },
+        {
+          "label": "Travel for pilgrimage",
+          "value": 0.881,
+          "usdBillion": 0.019855805
+        },
+        {
+          "label": "Travel for medical treatment",
+          "value": 0.327,
+          "usdBillion": 0.007364795
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.lrs.total.monthly",
+      "title": "Total outward remittances under LRS, monthly",
+      "sourceId": "rbi-lrs",
+      "sourceIndicatorId": "RBI Bulletin Table 36",
+      "unit": "US$ billion",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 217,
+      "earliest": {
+        "date": "2008-04",
+        "value": 0.0505
+      },
+      "latest": {
+        "date": "2026-04",
+        "value": 2.286589612
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.limit_history",
+      "title": "LRS limit revisions since the scheme began",
+      "sourceId": "rbi-lrs-policy",
+      "sourceIndicatorId": "RBI Master Direction on LRS, paragraph 2",
+      "unit": "US$ thousand per resident individual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 7,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Feb 2004",
+          "value": 25
+        },
+        {
+          "label": "Dec 2006",
+          "value": 50
+        },
+        {
+          "label": "May 2007",
+          "value": 100
+        },
+        {
+          "label": "Sep 2007",
+          "value": 200
+        },
+        {
+          "label": "Aug 2013",
+          "value": 75
+        },
+        {
+          "label": "Jun 2014",
+          "value": 125
+        },
+        {
+          "label": "May 2015",
+          "value": 250
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.lrs.travel_index_2016",
+      "title": "LRS Travel remittances, calendar-year index",
+      "sourceId": "derived-rbi-lrs-context",
+      "sourceIndicatorId": "RBI LRS Table 36 + Ministry of Tourism Table 3.1.1",
+      "unit": "index (2016=100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 9,
+      "earliest": {
+        "date": "2016",
+        "value": 100
+      },
+      "latest": {
+        "date": "2024",
+        "value": 734.933054
+      }
+    },
+    {
+      "indicatorId": "tourism.outbound_departures_index_2016",
+      "title": "Indian-national departures, calendar-year index",
+      "sourceId": "derived-rbi-lrs-context",
+      "sourceIndicatorId": "RBI LRS Table 36 + Ministry of Tourism Table 3.1.1",
+      "unit": "index (2016=100)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 9,
+      "earliest": {
+        "date": "2016",
+        "value": 100
+      },
+      "latest": {
+        "date": "2024",
+        "value": 141.208189
+      }
+    },
+    {
+      "indicatorId": "extfin.lrs.tcs_oct_2023",
+      "title": "October 2023 TCS change for LRS remittances",
+      "sourceId": "finance-ministry-lrs-tcs",
+      "sourceIndicatorId": "Ministry of Finance press release, June 28, 2023",
+      "unit": "mixed",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 2,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "date": "2023-10-01",
+          "purpose": "LRS purposes other than education or medical treatment",
+          "thresholdInr": 700000,
+          "rateBeforePercent": 5,
+          "rateFromDatePercent": 20
+        },
+        {
+          "date": "2023-10-01",
+          "purpose": "Education or medical treatment, other than education financed by specified loan",
+          "thresholdInr": 700000,
+          "rateBeforePercent": 5,
+          "rateFromDatePercent": 5
+        }
+      ]
+    },
+    {
+      "indicatorId": "IN.fx.inr_usd.monthly",
+      "title": "Indian rupees per US dollar (monthly)",
+      "sourceId": "fred",
+      "sourceIndicatorId": "EXINUS",
+      "unit": "INR per USD",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 642,
+      "earliest": {
+        "date": "1973-01",
+        "value": 8.0041
+      },
+      "latest": {
+        "date": "2026-06",
+        "value": 94.96
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

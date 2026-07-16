@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "extfin.lrs.tcs_oct_2023",
+  "title": "October 2023 TCS change for LRS remittances",
+  "sourceId": "finance-ministry-lrs-tcs",
+  "sourceIndicatorId": "Ministry of Finance press release, June 28, 2023",
+  "sourceUrl": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1936105",
+  "unit": "mixed",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-07-16T03:22:10.118178+00:00",
+  "rows": [
+    {
+      "date": "2023-10-01",
+      "purpose": "LRS purposes other than education or medical treatment",
+      "thresholdInr": 700000,
+      "rateBeforePercent": 5,
+      "rateFromDatePercent": 20
+    },
+    {
+      "date": "2023-10-01",
+      "purpose": "Education or medical treatment, other than education financed by specified loan",
+      "thresholdInr": 700000,
+      "rateBeforePercent": 5,
+      "rateFromDatePercent": 5
+    }
+  ],
+  "metadata": {
+    "kind": "policy event",
+    "method": "Transcribed from the Finance Ministry's June 28, 2023 implementation table.",
+    "interpretation": "TCS is tax collected at source and normally available as tax credit. It can create an upfront cash-flow cost, but it is not automatically the remitter's final tax liability.",
+    "honestyRule": "The event date can be aligned with monthly LRS data, but the alignment does not identify a causal effect."
+  }
+}

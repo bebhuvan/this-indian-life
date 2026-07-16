@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "extfin.lrs.purpose.latest_vs_own_peak",
+  "title": "Latest LRS purpose value as a share of its own fiscal-year peak",
+  "sourceId": "derived-rbi-lrs",
+  "sourceIndicatorId": "RBI Bulletin Table 36, monthly purpose values aggregated to fiscal years",
+  "sourceUrl": "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=24281",
+  "unit": "% of each purpose's own peak",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-07-16T03:22:10.118178+00:00",
+  "rows": [
+    {
+      "label": "Others \u00b7 peak FY2022-23",
+      "value": 26.897,
+      "purpose": "Others",
+      "latestUSDBillion": 0.093300466,
+      "peakUSDBillion": 0.346886044,
+      "peakFiscalYear": "FY2022-23",
+      "gapUSDBillion": -0.253585578
+    },
+    {
+      "label": "Studies Abroad \u00b7 peak FY2021-22",
+      "value": 44.716,
+      "purpose": "Studies Abroad",
+      "latestUSDBillion": 2.309743807,
+      "peakUSDBillion": 5.165329146,
+      "peakFiscalYear": "FY2021-22",
+      "gapUSDBillion": -2.855585339
+    },
+    {
+      "label": "Donations \u00b7 peak FY2019-20",
+      "value": 54.279,
+      "purpose": "Donations",
+      "latestUSDBillion": 0.012119255,
+      "peakUSDBillion": 0.02232758,
+      "peakFiscalYear": "FY2019-20",
+      "gapUSDBillion": -0.010208325
+    },
+    {
+      "label": "Medical treatment \u00b7 peak FY2024-25",
+      "value": 72.116,
+      "purpose": "Medical treatment",
+      "latestUSDBillion": 0.058548275,
+      "peakUSDBillion": 0.08118584,
+      "peakFiscalYear": "FY2024-25",
+      "gapUSDBillion": -0.022637565
+    },
+    {
+      "label": "Gifts \u00b7 peak FY2023-24",
+      "value": 72.475,
+      "purpose": "Gifts",
+      "latestUSDBillion": 2.594813481,
+      "peakUSDBillion": 3.580270803,
+      "peakFiscalYear": "FY2023-24",
+      "gapUSDBillion": -0.985457322
+    },
+    {
+      "label": "Deposits \u00b7 peak FY2022-23",
+      "value": 74.484,
+      "purpose": "Deposits",
+      "latestUSDBillion": 0.753084096,
+      "peakUSDBillion": 1.011066334,
+      "peakFiscalYear": "FY2022-23",
+      "gapUSDBillion": -0.257982238
+    },
+    {
+      "label": "Maintenance of relatives \u00b7 peak FY2023-24",
+      "value": 76.743,
+      "purpose": "Maintenance of relatives",
+      "latestUSDBillion": 3.539038172,
+      "peakUSDBillion": 4.611529191,
+      "peakFiscalYear": "FY2023-24",
+      "gapUSDBillion": -1.072491019
+    },
+    {
+      "label": "Travel \u00b7 peak FY2023-24",
+      "value": 96.658,
+      "purpose": "Travel",
+      "latestUSDBillion": 16.437989306,
+      "peakUSDBillion": 17.006274573,
+      "peakFiscalYear": "FY2023-24",
+      "gapUSDBillion": -0.568285267
+    },
+    {
+      "label": "Property purchases \u00b7 peak FY2025-26",
+      "value": 100.0,
+      "purpose": "Property purchases",
+      "latestUSDBillion": 0.528698142,
+      "peakUSDBillion": 0.528698142,
+      "peakFiscalYear": "FY2025-26",
+      "gapUSDBillion": 0.0
+    },
+    {
+      "label": "Equity or debt investment \u00b7 peak FY2025-26",
+      "value": 100.0,
+      "purpose": "Equity or debt investment",
+      "latestUSDBillion": 2.652011197,
+      "peakUSDBillion": 2.652011197,
+      "peakFiscalYear": "FY2025-26",
+      "gapUSDBillion": 0.0
+    }
+  ],
+  "metadata": {
+    "kind": "derived comparison",
+    "inputs": [
+      "extfin.lrs.deposit.fy",
+      "extfin.lrs.property.fy",
+      "extfin.lrs.investment.fy",
+      "extfin.lrs.gift.fy",
+      "extfin.lrs.donations.fy",
+      "extfin.lrs.travel.fy",
+      "extfin.lrs.relatives.fy",
+      "extfin.lrs.medical.fy",
+      "extfin.lrs.studies.fy",
+      "extfin.lrs.others.fy"
+    ],
+    "method": "For each of the ten top-level purposes, find its maximum complete fiscal-year sum from FY2009-10 to FY2025-26 and divide the FY2025-26 value by that maximum.",
+    "interpretation": "A value of 100 means the purpose is at its own series peak. Values below 100 show how far the latest fiscal year sits below that purpose-specific high-water mark.",
+    "coverageRule": "Travel children are excluded because they are nested under Travel and have only two populated months."
+  }
+}

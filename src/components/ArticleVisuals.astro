@@ -166,6 +166,9 @@ function fmt(value: number, unit = "") {
     if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh`;
     if (abs >= 1000) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
   }
+  if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
+    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 10 ? 1 : 2 })}bn`;
+  }
   if (/US\$|usd|\$/i.test(unit)) {
     if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} trillion`;
     if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 0 })} billion`;
@@ -180,6 +183,21 @@ function fmt(value: number, unit = "") {
   if (abs >= 1000) return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   if (abs >= 100) return value.toFixed(0);
   return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
+}
+
+// Spark-grid endpoints need more precision than ordinary axis ticks. Monthly
+// series stored in US$ billion are often below 1, where fmt() intentionally
+// rounds to a whole axis label and would turn real values into "$0". Switch
+// those endpoints to millions until they reach a billion.
+function sparkEndpoint(value: number, unit = "") {
+  const abs = Math.abs(value);
+  const sign = value < 0 ? "-" : "";
+  if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
+    if (abs === 0) return "$0";
+    if (abs >= 1) return `${sign}$${abs.toLocaleString("en-IN", { maximumFractionDigits: 2 })}bn`;
+    return `${sign}$${(abs * 1_000).toLocaleString("en-IN", { maximumFractionDigits: abs < 0.01 ? 1 : 0 })}m`;
+  }
+  return fmt(value, unit);
 }
 
 // Split a formatted axis label ("₹400 lakh cr") into its numeric head ("₹400") and
@@ -285,6 +303,9 @@ function endLabelInScale(value: number, maxAbs: number, unit = "", compact = fal
     if (maxAbs >= 1e12) return `₹${n(value, 1e12)}${w("L cr", "lakh cr")}`;
     if (maxAbs >= 1e7) return `₹${n(value, 1e7)}${w("cr", "cr")}`;
     if (maxAbs >= 1e5) return `₹${n(value, 1e5)}${w("lakh", "lakh")}`;
+  }
+  if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
+    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 10 ? 1 : 2 })}${w("bn", "billion")}`;
   }
   if (/US\$|usd|\$/i.test(unit)) {
     if (maxAbs >= 1e12) return `$${n(value, 1e12)}${w("T", "trillion")}`;
@@ -2035,8 +2056,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
             return pts.map((p, i) => `${(n < 2 ? 0 : (i / (n - 1)) * 100).toFixed(1)},${(34 - ((p.value - lo) / span) * 32).toFixed(1)}`).join(" ");
           };
           const sparkArea = (pts) => `${sparkPts(pts)} 100,36 0,36`;
-          const startYear = sg.cells[0]?.points?.[0]?.date ?? "";
-          const endYear = sg.cells[0]?.points?.[sg.cells[0].points.length - 1]?.date ?? "";
+          const allDates = sg.cells.flatMap((cell) => cell.points.map((point) => point.date)).sort();
+          const startYear = allDates[0] ?? "";
+          const endYear = allDates[allDates.length - 1] ?? "";
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{sg.title}</h2><p>{cleanSubtitle(sg.subtitle, source.sourceId)}</p></div><span>{sg.unit}</span></div>
@@ -2050,6 +2072,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <div class="spark-grid">
                 {sg.cells.map((c) => {
                   const col = choroColor(c.latest ?? 0, sg.min, sg.max);
+                  const cellStart = c.points[0]?.date ?? startYear;
+                  const cellEnd = c.points[c.points.length - 1]?.date ?? endYear;
                   // Non-temp: colour-by-latest-level washes every panel out when the
                   // whole point is that the series all converged low (e.g. fertility).
                   // Draw the line in a solid, legible tone; keep the level cue in the
@@ -2059,14 +2083,14 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     <div class="spark-cell">
                       <div class="spark-head"><b>{c.label}</b><span class="spark-nums">{isTemp
                         ? <Fragment><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em>{typeof c.change === "number" ? <i class={`spark-d ${c.change >= 0 ? "pos" : "neg"}`}>{signedFmt(c.change, sg.unit)}</i> : null}</Fragment>
-                        : <Fragment><i class="spark-d" style="color:#9a938a">{fmt(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:#a8123f">{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
-                      <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${fmt(c.latest ?? 0, sg.unit)} in ${endYear}`}>
+                        : <Fragment><i class="spark-d" style="color:#9a938a">{sparkEndpoint(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:#a8123f">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
+                      <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${sparkEndpoint(c.latest ?? 0, sg.unit)} in ${cellEnd}`}>
                         <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
                         <polygon points={sparkArea(c.points)} fill={lineCol} fill-opacity={isTemp ? 0.14 : 0.10} stroke="none" />
                         <polyline points={sparkPts(c.points)} fill="none" stroke={lineCol} stroke-width={isTemp ? 1.6 : 2} stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
                         <text class="chart-watermark" x="98" y="34" text-anchor="end">{WATERMARK_TEXT}</text>
                       </svg>
-                      <div class="spark-axis"><span>{startYear}</span><span>{endYear}</span></div>
+                      <div class="spark-axis"><span>{cellStart}</span><span>{cellEnd}</span></div>
                     </div>
                   );
                 })}

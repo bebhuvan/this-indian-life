@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "extfin.lrs.travel_index_2016",
+  "title": "LRS Travel remittances, calendar-year index",
+  "sourceId": "derived-rbi-lrs-context",
+  "sourceIndicatorId": "RBI LRS Table 36 + Ministry of Tourism Table 3.1.1",
+  "sourceUrl": "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=24281",
+  "unit": "index (2016=100)",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-07-16T03:22:10.118178+00:00",
+  "observations": [
+    {
+      "date": "2016",
+      "value": 100.0
+    },
+    {
+      "date": "2017",
+      "value": 155.111885
+    },
+    {
+      "date": "2018",
+      "value": 201.56988
+    },
+    {
+      "date": "2019",
+      "value": 294.632308
+    },
+    {
+      "date": "2020",
+      "value": 166.693001
+    },
+    {
+      "date": "2021",
+      "value": 227.529843
+    },
+    {
+      "date": "2022",
+      "value": 558.404819
+    },
+    {
+      "date": "2023",
+      "value": 752.806039
+    },
+    {
+      "date": "2024",
+      "value": 734.933054
+    }
+  ],
+  "metadata": {
+    "inputs": [
+      "extfin.lrs.travel.monthly",
+      "tourism.outbound_departures.annual"
+    ],
+    "method": "Sum monthly RBI Travel remittances by calendar year; index both that total and Indian-national departures to 2016=100 over the common 2016-2024 window.",
+    "unit": "index (2016=100)",
+    "rounding": "six decimal places in the artifact; human rounding in prose",
+    "assumptions": "The two lines are contextual, not a per-trip identity. Departures count movements, not unique leisure travellers; RBI Travel includes multiple purposes and payment types.",
+    "underlyingSourceUrls": [
+      "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=24281",
+      "https://data.tourism.gov.in/mrd/Uploads/tourism_data/India%20Tourism%20Data%20Compendium%202025_1.pdf"
+    ],
+    "measure": "RBI LRS Travel remittances"
+  }
+}

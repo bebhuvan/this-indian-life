@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "extfin.lrs.others.peak_change",
+  "title": "LRS Others: FY2023-24 peak versus FY2025-26",
+  "sourceId": "rbi-lrs",
+  "sourceIndicatorId": "RBI Bulletin Table 36",
+  "sourceUrl": "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=24281",
+  "unit": "US$ billion",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-07-16T01:31:54.081101+00:00",
+  "metadata": {
+    "rbiTable": "RBI Bulletin Table 36",
+    "rawWorkbook": "RBIB Table No. 36 _ Outward Remittances under the Liberalised Remittance Scheme for Resident Individuals (2).xlsx",
+    "rawHash": "2e95a3bee628188636d78b7f8e1f1f0604dba0f0d98fd73893df1fc07cc59282",
+    "snapshotPath": "data/snapshots/rbi-lrs/rbi-lrs-table-36.2e95a3bee628.xlsx",
+    "rawUnit": "US$ crore",
+    "conversion": "raw workbook value divided by 100 to obtain US$ billion",
+    "kind": "administrative measurement of gross outward flows reported under LRS",
+    "geographyDefinition": "resident individuals in India; no destination geography",
+    "footerNotes": [
+      "Source : Reserve Bank of India",
+      "** Include items such as subscription to journals, maintenance of investment abroad, student loan repayments and credit card payments."
+    ],
+    "dashPolicy": "Literal dashes are preserved as null. Sparse top-level dashes contribute no published amount to the reconciled headline sum; historic travel-child dashes mean the breakdown was not published.",
+    "coverageBreak": "From May 26, 2015, RBI subsumed several current-account facilities, including private and business travel, under the common LRS limit. Pre-break totals are not directly comparable with later totals.",
+    "othersInterpretation": "The workbook footer makes Others a heterogeneous residual spanning journals, maintenance of investments abroad, student-loan repayments and credit-card payments. It must not be treated as a single behaviour.",
+    "travelClassificationNote": "The detailed travel children are published only for March and April 2026. RBI's June 2026 bulletin distinguishes travel for education or medical care from remotely purchased education or medical services in the separate Studies Abroad and Medical Treatment rows.",
+    "method": "Two-point extract of fiscal-year sums, comparing FY2023-24 with FY2025-26.",
+    "purpose": "Others"
+  },
+  "observations": [
+    {
+      "date": "2024-03-31",
+      "value": 0.298233271
+    },
+    {
+      "date": "2026-03-31",
+      "value": 0.093300466
+    }
+  ]
+}
