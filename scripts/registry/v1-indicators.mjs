@@ -1530,7 +1530,7 @@ export const v1Questions = [
   },
   {
     id: "q.econ.lrs_remittances",
-    slug: "rbi-lrs-outward-remittances-by-purpose",
+    slug: "how-much-money-did-indians-send-abroad",
     question: "How much money did Indians send abroad under RBI's LRS?",
     priority: "core",
     // RBI Bulletin Table 36, audited field by field against the raw workbook and
