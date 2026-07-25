@@ -1917,13 +1917,13 @@ export const v1Questions = [
     // MOSPI PLFS (official survey, granular by gender/sector/age/education/caste),
     // blended with World Bank (long arc + cross-country peers), OWID (working
     // hours, output-per-hour, Maddison long run) and IndiaDataHub (MGNREGA demand,
-    // EPFO payroll, rural wages, Naukri hiring). Thesis: India has the world's
+    // EPFO payroll, rural wages). Thesis: India has the world's
     // largest, youngest workforce, but the way it works defies the development
     // script. See memory: indica-how-india-works-flagship.
     indicators: ["work.plfs.lfpr_person", "work.plfs.ur_person", "work.plfs.status_self_employed"],
     core: [
       "work.plfs.lfpr_person",
-      "work.plfs.ur_person",
+      "work.plfs.ur_person", "work.plfs.ur_person_us_cy", "work.plfs.ur_person_cws_cy",
       "work.plfs.lfpr_female",
       "work.plfs.status_self_employed",
       "work.plfs.ur_edu_graduate",
@@ -1949,7 +1949,7 @@ export const v1Questions = [
       "compare.youth_unemployment.in", "compare.youth_unemployment.chn", "compare.youth_unemployment.bgd", "compare.youth_unemployment.vnm", "compare.youth_unemployment.idn", "compare.youth_unemployment.wld",
       "work.plfs.ur_social_st", "work.plfs.ur_social_sc", "work.plfs.ur_social_obc", "work.plfs.ur_social_others",
       "work.idh.plfs_monthly_ur",
-      "work.idh.nrega_person_days_created", "work.idh.nrega_active_workers", "work.idh.jobspeak_total",
+      "work.idh.nrega_person_days_created", "work.idh.nrega_active_workers",
       "work.ilo.informal_rate_total", "work.ilo.informal_rate_agriculture", "work.ilo.informal_rate_industry", "work.ilo.informal_rate_services",
       "compare.informal_rate.ind", "compare.informal_rate.bgd", "compare.informal_rate.vnm", "compare.informal_rate.idn",
       "work.ilo.neet_youth", "work.ilo.neet_youth_female", "work.ilo.neet_youth_male",
@@ -1971,6 +1971,10 @@ export const v1Questions = [
       { indicator: "work.plfs.ur_person", chart: "line", title: "The unemployment rate is low — and that is the puzzle", size: "feature", window: "full", beat: "unemployment", unit: "%",
         subtitle: "PLFS · unemployment rate, usual status, 15+",
         why: "India's headline joblessness is strikingly low for a poor country, which is itself the central paradox of how India works.", read: "The share of the labour force that wants work but cannot find it.", watch: "A low rate here does not mean plentiful good jobs; with little unemployment insurance, most people cannot afford to be openly unemployed, so they take whatever work exists." },
+      { chart: "multiLine", indicator: "work.plfs.ur_person_us_cy", title: "Count the same joblessness two ways, get two answers", size: "small", window: "full", beat: "measurement", unit: "%",
+        subtitle: "PLFS · unemployment rate, usual vs current weekly status, 15+ · calendar year",
+        series: [ { indicator: "work.plfs.ur_person_us_cy", label: "Usual status (over a year)" }, { indicator: "work.plfs.ur_person_cws_cy", label: "Current weekly status (past week)" } ],
+        why: "The reassuringly low headline unemployment rate depends heavily on how you count; a weekly lens tells a harsher story.", read: "The same joblessness measured two ways: usual status over a full year, and current weekly status over the past week.", watch: "The weekly line sits above the yearly one every year, because casual and intermittent work leaves people jobless in any given week even if they worked at some point in the year. Calendar-year basis, not the survey rounds used elsewhere." },
       { chart: "multiLine", indicator: "compare.lfpr.in", title: "India works less than its neighbours", size: "feature", window: "full", beat: "comparison", unit: "% of population 15+",
         subtitle: "World Bank (modelled ILO) · labour force participation · 1990 to today",
         series: [ { indicator: "compare.lfpr.in", label: "India" }, { indicator: "compare.lfpr.chn", label: "China" }, { indicator: "compare.lfpr.bgd", label: "Bangladesh" }, { indicator: "compare.lfpr.vnm", label: "Vietnam" }, { indicator: "compare.lfpr.idn", label: "Indonesia" }, { indicator: "compare.lfpr.wld", label: "World" } ],
@@ -2077,10 +2081,7 @@ export const v1Questions = [
       { chart: "multiLine", indicator: "work.idh.nrega_person_days_created", title: "The rural safety valve, in days of work", size: "small", window: "full", beat: "safety-net-detail",
         subtitle: "IndiaDataHub · MGNREGA · monthly",
         series: [ { indicator: "work.idh.nrega_person_days_created", label: "Person-days of work created" }, { indicator: "work.idh.nrega_active_workers", label: "Active workers" } ],
-        why: "Behind the demand figure sits the actual work delivered — days of employment created when nothing else is available.", read: "Person-days of work generated and the number of active workers on the rolls.", watch: "The scheme guarantees up to 100 days a year per household — a floor against destitution, not a route into better jobs." },
-      { indicator: "work.idh.jobspeak_total", chart: "line", title: "What the hiring market is signalling next", size: "small", window: "full", beat: "coda",
-        subtitle: "IndiaDataHub · Naukri JobSpeak white-collar hiring index · monthly",
-        why: "To close, a forward-looking read: the private hiring market for the formal, white-collar jobs that India's graduates are waiting for.", read: "An index of white-collar job postings, rising and falling with employer appetite.", watch: "This tracks the narrow formal-sector top of the labour market — the destination most graduates want, and the bottleneck the rest of this story keeps running into." }
+        why: "Behind the demand figure sits the actual work delivered — days of employment created when nothing else is available.", read: "Person-days of work generated and the number of active workers on the rolls.", watch: "The scheme guarantees up to 100 days a year per household — a floor against destitution, not a route into better jobs." }
     ]
   },
   {
@@ -3604,7 +3605,7 @@ export const v1Questions = [
     // Comprehensive jobs page. Blended: World Bank/ILO for the long backbone
     // (labour force size, LFPR, unemployment, 1991→), MOSPI PLFS for the rich
     // recent breakdowns (gender, youth, education, social group, status, sector),
-    // IndiaDataHub for high-frequency signals (JobSpeak hiring, NREGA demand).
+    // IndiaDataHub for high-frequency signals (NREGA demand, monthly PLFS).
     indicators: ["work.labor_force_total", "work.labor_force_participation_total", "work.unemployment_total"],
     core: ["work.labor_force_total", "work.labor_force_participation_total", "work.unemployment_total"],
     context: [
@@ -3616,7 +3617,7 @@ export const v1Questions = [
       "work.plfs.status_self_employed", "work.plfs.status_regular_wage", "work.plfs.status_casual",
       "work.plfs.empshare_agriculture", "work.plfs.empshare_industry", "work.plfs.empshare_services",
       "compare.lfpr.in", "compare.lfpr.bgd", "compare.lfpr.chn", "compare.lfpr.vnm", "compare.lfpr.idn", "compare.lfpr.wld",
-      "work.neet_youth", "work.idh.jobspeak_total", "work.idh.nrega_person_days_created",
+      "work.neet_youth", "work.idh.nrega_person_days_created",
       "work.plfs.wage_regular_person", "work.plfs.wage_casual_person", "work.plfs.wage_self_employed_person",
       "people.age_15_64_share"
     ],
@@ -3661,8 +3662,6 @@ export const v1Questions = [
         why: "India's participation against its peers and the world.", read: "Labour force participation across countries (ILO modelled).", watch: "India sits below the world average, dragged down mainly by low female participation." },
       { indicator: "work.neet_youth", chart: "line", title: "Young Indians not in work, education or training", size: "small", window: "full", beat: "neet",
         why: "The disengaged young — neither learning nor earning.", read: "Share of youth who are NEET (not in employment, education or training).", watch: "A high NEET share, especially among young women, signals wasted potential." },
-      { indicator: "work.idh.jobspeak_total", chart: "line", title: "Hiring momentum, month by month", size: "small", window: "full", beat: "hiring",
-        why: "A real-time read on formal hiring, faster than annual surveys.", read: "The Naukri JobSpeak white-collar hiring index, monthly.", watch: "This is formal/white-collar hiring only — a small, visible slice of the job market." },
       { indicator: "work.idh.nrega_person_days_created", chart: "line", title: "Demand for rural guaranteed work", size: "small", window: "full", beat: "nrega",
         why: "When other work dries up, rural Indians fall back on the NREGA jobs guarantee.", read: "Person-days of work created under MGNREGA each month.", watch: "Spikes signal rural distress (e.g. the 2020 lockdown), not a healthy job market." },
       { chart: "multiLine", indicator: "work.plfs.wage_regular_person", title: "What different kinds of work pay", size: "small", unit: "₹ per month / day",
