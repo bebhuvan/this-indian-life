@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "work.plfs.ur_person_us_cy",
+  "title": "Unemployment Rate — persons (15+), usual status, calendar year",
+  "sourceId": "mospi",
+  "sourceIndicatorId": "ur_person_us_cy",
+  "sourceUrl": "https://api.mospi.gov.in/api/plfs/getData?indicator_code=3&frequency_code=1&gender_code=3&age_code=1&sector_code=3&weekly_status_code=1&state_code=99&year_type=2&Format=JSON",
+  "unit": "%",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-07-24T15:13:26.234Z",
+  "observations": [
+    {
+      "date": "2022",
+      "value": 3.6
+    },
+    {
+      "date": "2023",
+      "value": 3.1
+    },
+    {
+      "date": "2024",
+      "value": 3.2
+    },
+    {
+      "date": "2025",
+      "value": 3.1
+    }
+  ],
+  "metadata": {
+    "dataset": "PLFS",
+    "yearType": "Calendar Year",
+    "ind": 3,
+    "weeklyStatus": "PS+SS",
+    "note": "All India, persons 15+, PS+SS sector rural+urban; calendar-year basis (not the survey-round series)."
+  }
+}

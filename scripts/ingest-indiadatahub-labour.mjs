@@ -1,7 +1,7 @@
 // Ingest IndiaDataHub "Labour Market" series for the "How India Works" flagship:
 // NREGA (rural employment-guarantee demand — the labour market's shock absorber),
-// EPFO payroll (formal-job creation), high-frequency monthly PLFS, rural wages,
-// and the Naukri JobSpeak private-hiring index. Series codes discovered via
+// EPFO payroll (formal-job creation), high-frequency monthly PLFS, rural wages.
+// Series codes discovered via
 // /economy/filter_category. See memory: indica-how-india-works-flagship.
 import { fetchIndiaEconomySeries } from "./adapters/indiadatahub.mjs";
 import { createSeriesArtifact, sourceSlug, writeSeriesArtifact, writeSnapshot, writeSourceManifest } from "./core/artifacts.mjs";
@@ -24,9 +24,7 @@ const indicators = [
   { id: "work.idh.plfs_monthly_lfpr_female", sourceIndicatorId: "LAPLLPARFA11M", title: "Female labour force participation rate, all-India (monthly PLFS)", unit: "%", frequency: "monthly", sub: "Monthly PLFS" },
   // Rural wages
   { id: "work.idh.rural_wage_men", sourceIndicatorId: "LAWRAGGAVG13M", title: "Daily average rural wage rate, men (blended series)", unit: "₹/day", frequency: "monthly", sub: "Rural Wages" },
-  { id: "work.idh.rural_wage_women", sourceIndicatorId: "LAWRWTTAVG13M", title: "Daily average rural wage rate, women (blended series)", unit: "₹/day", frequency: "monthly", sub: "Rural Wages" },
-  // JobSpeak — private white-collar hiring
-  { id: "work.idh.jobspeak_total", sourceIndicatorId: "LANJSITTOT11M", title: "Naukri JobSpeak hiring index — total", unit: "index", frequency: "monthly", sub: "JobSpeak Index" }
+  { id: "work.idh.rural_wage_women", sourceIndicatorId: "LAWRWTTAVG13M", title: "Daily average rural wage rate, women (blended series)", unit: "₹/day", frequency: "monthly", sub: "Rural Wages" }
 ];
 
 function rowsFromPayload(raw) {

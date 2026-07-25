@@ -1,0 +1,361 @@
+{
+  "_description": "MOSPI PLFS API code dictionary: query-parameter codes and the 8 indicators for https://api.mospi.gov.in/api/plfs/getData",
+  "_sourceWorkbook": "PLFS Metadata.xlsx (supplied by MoSPI)",
+  "_endpoint": "https://api.mospi.gov.in/api/plfs/getData",
+  "_notes": [
+    "All India is state_code 99.",
+    "year_type has only Agriculture Year (1) and Calendar Year (2); the API no longer serves the Financial-Year survey rounds (2017-18..2023-24) that the frozen mospi.IN.plfs.* series use.",
+    "Default page size is 10; responses paginate (meta_data.totalPages). Pass limit=1000 and page=N.",
+    "The host requires legacy TLS renegotiation; see memory plfs-api-tls-and-calendar-year.",
+    "religion in the API is only all/Hindu/Islam/Christian/Sikh (no Buddhist/Jain)."
+  ],
+  "dimensions": {
+    "age": {
+      "header": [
+        "age_code",
+        "description"
+      ],
+      "codes": {
+        "1": "15 years and above",
+        "2": "15-29 years",
+        "3": "15-59 years",
+        "4": "all"
+      }
+    },
+    "broad_industry_work": {
+      "header": [
+        "broad_industry_work_code",
+        "description"
+      ],
+      "codes": {
+        "1": "primary sector (Div. 01-03 of NIC 2008)",
+        "2": "secondary sector (Div. 05-43 of NIC 2008)",
+        "3": "tertiary sector (Div. 45-99 of NIC 2008)",
+        "4": "all"
+      }
+    },
+    "broad_status_employment": {
+      "header": [
+        "broad_status_employment_code",
+        "description"
+      ],
+      "codes": {
+        "1": "1.self-employed: own account worker, employer",
+        "2": "2.self-employed: helper in household enterprise",
+        "3": "3.all self employed",
+        "4": "4.regular wage/salary",
+        "5": "5.casual labour",
+        "6": "all"
+      }
+    },
+    "education": {
+      "header": [
+        "education_code",
+        "description"
+      ],
+      "codes": {
+        "0": "all",
+        "1": "1.not literate",
+        "2": "2.literate & upto primary",
+        "3": "3.middle",
+        "4": "4.secondary",
+        "5": "5.higher secondary",
+        "6": "6.diploma/ certificate course",
+        "7": "7.graduate",
+        "8": "8.post graduate & above",
+        "9": "9.secondary & above"
+      }
+    },
+    "employee_contract": {
+      "header": [
+        "employee_contract_code",
+        "description"
+      ],
+      "codes": {
+        "1": "1.with no written job contract",
+        "2": "2.not eligible for paid leave",
+        "3": "3.without any social security benefit",
+        "4": "4.not eligible for paid leave, w.o. written job contract and w.o. any SSB",
+        "5": "all"
+      }
+    },
+    "enterprise_size": {
+      "header": [
+        "enterprise_size_code",
+        "description"
+      ],
+      "codes": {
+        "1": "1-5",
+        "2": "6-9",
+        "3": "10-19",
+        "4": ">=20",
+        "5": "not known",
+        "6": "all"
+      }
+    },
+    "enterprise_type": {
+      "header": [
+        "enterprise_type_code",
+        "description"
+      ],
+      "codes": {
+        "1": "1.proprietary and partnership",
+        "2": "2.govt./local body/ public sector enterprises",
+        "3": "3.autonomous bodies",
+        "4": "4.public/ private limited company",
+        "5": "5.cooperative societies",
+        "6": "6.trust/ other non profit inst",
+        "7": "7.employer’s households",
+        "8": "8.others",
+        "9": "all"
+      }
+    },
+    "frequency": {
+      "header": [
+        "frequency_code",
+        "description"
+      ],
+      "codes": {
+        "1": "Annually",
+        "2": "Quarterly",
+        "3": "Monthly"
+      }
+    },
+    "gender": {
+      "header": [
+        "gender_code",
+        "description"
+      ],
+      "codes": {
+        "1": "male",
+        "2": "female",
+        "3": "person"
+      }
+    },
+    "indicator": {
+      "header": [
+        "indicator_code",
+        "description",
+        "unit"
+      ],
+      "codes": {
+        "1": "LFPR (Labour Force Participation Rate, in per cent)",
+        "2": "WPR (Worker Population Ratio, in per cent)",
+        "3": "UR (Unemployment Rate, in per cent)",
+        "4": "Percentage distribution of workers",
+        "5": "Percentage of regular wage/ salaried employees with employment condition as",
+        "6": "Average wage/salary earnings (Rs. 0.00) during the preceding calendar month from regular wage/salaried employment",
+        "7": "Average wage earnings (Rs. 0.00) per day from casual labour work other than public works",
+        "8": "Average gross earnings (Rs. 0.00) during last 30 days from self-employment"
+      }
+    },
+    "industry_section": {
+      "header": [
+        "industry_section_code",
+        "description"
+      ],
+      "codes": {
+        "1": "All",
+        "2": "A_Agriculture, forestry and fishing",
+        "3": "B_Mining and quarrying",
+        "4": "C_Manufacturing",
+        "5": "D_Electricity, gas, steam and air conditioning supply",
+        "6": "E_Water supply; sewerage, waste management and remediation activities",
+        "7": "F_Construction",
+        "8": "G_Wholesale and retail trade; repair of motor vehicles and motorcycles",
+        "9": "H_Transportation and storage",
+        "10": "I_Accommodation and Food service activities",
+        "11": "J_Information and communication",
+        "12": "K_Financial and insurance activities",
+        "13": "L_Real estate activities",
+        "14": "M_Professional, scientific and technical activities",
+        "15": "N_Administrative and support service activities",
+        "16": "O_Public administration and defence compulsory social security",
+        "17": "P_Education",
+        "18": "Q_Human health and social work activities",
+        "19": "R_Arts, entertainment and recreation",
+        "20": "S_Other service activities",
+        "21": "T_Activities of hhds as employers, undiff goods services prod actvs of hhds for own use",
+        "22": "U_Activities of extraterritorial organizations and bodies"
+      }
+    },
+    "month": {
+      "header": [
+        "month_code",
+        "description"
+      ],
+      "codes": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      }
+    },
+    "nco_division": {
+      "header": [
+        "nco_division_code",
+        "description"
+      ],
+      "codes": {
+        "1": "all",
+        "2": "NCO Division 1: LEGISLATORS, SENIOR OFFICIALS AND MANAGERS",
+        "3": "NCO Division 2: PROFESSIONALS",
+        "4": "NCO Division 3: TECHNICIANS AND ASSOCIATE PROFESSIONALS",
+        "5": "NCO Division 4: CLERKS",
+        "6": "NCO Division 5: SERVICE WORKERS AND SHOP & MARKET SALES WORKERS",
+        "7": "NCO Division 6: SKILLED AGRICULTURAL AND FISHERY WORKERS",
+        "8": "NCO Division 7: CRAFT AND RELATED TRADES WORKERS",
+        "9": "NCO Division 8: PLANT AND MACHINE OPERATORS AND ASSEMBLERS",
+        "10": "NCO Division 9: ELEMENTARY OCCUPATIONS",
+        "11": "NCO Division X: WORKERS NOT CLASSIFIED BY OCCUPATIONS"
+      }
+    },
+    "nic_group": {
+      "header": [
+        "nic_group_code",
+        "description"
+      ],
+      "codes": {
+        "1": "all",
+        "2": "industry: (05-99)",
+        "3": "industry: (014, 016, 017 , 02-99)",
+        "4": "01-03 (agriculture)",
+        "5": "05-09 (mining & quarrying)",
+        "6": "10-33 (manufacturing)",
+        "7": "35-39 (electricity and water supply)",
+        "8": "41-43 (construction)",
+        "9": "05-43 (secondary)",
+        "10": "45-47 (trade)",
+        "11": "49-53( transport)",
+        "12": "55-56 (accommodation & food services",
+        "13": "58-99 (other services)",
+        "14": "45-99 (tertiary)"
+      }
+    },
+    "quarter": {
+      "header": [
+        "quarter_code",
+        "description"
+      ],
+      "codes": {
+        "1": "all",
+        "2": "JUL-SEP",
+        "3": "OCT-DEC",
+        "4": "JAN-MAR",
+        "5": "APR-JUN"
+      }
+    },
+    "religion": {
+      "header": [
+        "religion_code",
+        "description"
+      ],
+      "codes": {
+        "1": "all",
+        "2": "Hinduism",
+        "3": "Islam",
+        "4": "Christianity",
+        "5": "Sikhism"
+      }
+    },
+    "sector": {
+      "header": [
+        "sector_code",
+        "description"
+      ],
+      "codes": {
+        "1": "rural",
+        "2": "urban",
+        "3": "rural + urban"
+      }
+    },
+    "social_category": {
+      "header": [
+        "social_category_code",
+        "description"
+      ],
+      "codes": {
+        "1": "all",
+        "2": "scheduled tribe",
+        "3": "scheduled caste",
+        "4": "other backward class",
+        "5": "others"
+      }
+    },
+    "state": {
+      "header": [
+        "state_code",
+        "description"
+      ],
+      "codes": {
+        "1": "Andhra Pradesh",
+        "2": "Arunachal Pradesh",
+        "3": "Assam",
+        "4": "Bihar",
+        "5": "Chhattisgarh",
+        "6": "Delhi",
+        "7": "Goa",
+        "8": "Gujarat",
+        "9": "Haryana",
+        "10": "Himachal Pradesh",
+        "11": "Jammu & Kashmir",
+        "12": "Jharkhand",
+        "13": "Karnataka",
+        "14": "Kerala",
+        "15": "Madhya Pradesh",
+        "16": "Maharashtra",
+        "17": "Manipur",
+        "18": "Meghalaya",
+        "19": "Mizoram",
+        "20": "Nagaland",
+        "21": "Odisha",
+        "22": "Punjab",
+        "23": "Rajasthan",
+        "24": "Sikkim",
+        "25": "Tamil Nadu",
+        "26": "Telangana",
+        "27": "Tripura",
+        "28": "Uttarakhand",
+        "29": "Uttar Pradesh",
+        "30": "West Bengal",
+        "31": "Andaman & Nicobar Islands",
+        "32": "Chandigarh",
+        "33": "Dadra & Nagar Haveli",
+        "34": "Daman & Diu",
+        "35": "Lakshadweep",
+        "36": "Puducherry",
+        "37": "Ladakh",
+        "38": "Dadra & Nagar Haveli & Daman & Diu",
+        "99": "All India"
+      }
+    },
+    "weekly_status": {
+      "header": [
+        "weekly_status_code",
+        "description"
+      ],
+      "codes": {
+        "1": "PS+SS",
+        "2": "CWS"
+      }
+    },
+    "year_type": {
+      "header": [
+        "year_type_code",
+        "description"
+      ],
+      "codes": {
+        "1": "Agriculture Year",
+        "2": "Calendar Year"
+      }
+    }
+  }
+}
