@@ -52,7 +52,7 @@ function extractTableRows(html) {
   return rows;
 }
 
-export function parseCommodityAllCountries(html, { hsCode, fiscalYear, report = "2", tradeFlow = "import" } = {}) {
+export function parseCommodityAllCountriesImport(html, { hsCode, fiscalYear, report = "2" } = {}) {
   const commodityText = textFromHtml(String(html).match(/Commodity:\s*[\s\S]*?<\/p>/i)?.[0] || "");
   const rows = extractTableRows(html)
     .map((cells) => ({
@@ -70,20 +70,13 @@ export function parseCommodityAllCountries(html, { hsCode, fiscalYear, report = 
     hsCode,
     fiscalYear,
     report,
-    tradeFlow,
     commodityText,
     rows
   };
 }
 
-export function parseCommodityAllCountriesImport(html, options = {}) {
-  return parseCommodityAllCountries(html, { ...options, tradeFlow: "import" });
-}
-
-export async function fetchTradeStatCommodityAllCountries({ hsCode, fiscalYear = "2025", report = "2", tradeFlow = "import" }) {
-  if (!["import", "export"].includes(tradeFlow)) throw new Error(`Unsupported TradeStat tradeFlow: ${tradeFlow}`);
-  const suffix = tradeFlow === "import" ? "cmaci" : "cmace";
-  const path = `/eidb/commodity_wise_all_countries_${tradeFlow}`;
+export async function fetchTradeStatCommodityAllCountriesImport({ hsCode, fiscalYear = "2025", report = "2" }) {
+  const path = "/eidb/commodity_wise_all_countries_import";
   const url = buildUrl(baseUrl, path);
   const getResponse = await fetch(url, {
     signal: timeoutSignal(Number(process.env.TRADESTAT_FETCH_TIMEOUT_MS || 90000)),
@@ -97,11 +90,11 @@ export async function fetchTradeStatCommodityAllCountries({ hsCode, fiscalYear =
   const token = extractToken(formHtml);
   const cookie = extractCookie(getResponse.headers);
   const body = new URLSearchParams({
-    _token: token
+    _token: token,
+    Eidbhscode_cmaci: String(hsCode),
+    EidbYear_cmaci: String(fiscalYear),
+    EidbReport_cmaci: String(report)
   });
-  body.set(`Eidbhscode_${suffix}`, String(hsCode));
-  body.set(`EidbYear_${suffix}`, String(fiscalYear));
-  body.set(`EidbReport_${suffix}`, String(report));
   const postResponse = await fetch(url, {
     method: "POST",
     signal: timeoutSignal(Number(process.env.TRADESTAT_FETCH_TIMEOUT_MS || 90000)),
@@ -118,10 +111,6 @@ export async function fetchTradeStatCommodityAllCountries({ hsCode, fiscalYear =
   const html = await postResponse.text();
   return {
     html,
-    parsed: parseCommodityAllCountries(html, { hsCode, fiscalYear, report, tradeFlow })
+    parsed: parseCommodityAllCountriesImport(html, { hsCode, fiscalYear, report })
   };
-}
-
-export async function fetchTradeStatCommodityAllCountriesImport(options) {
-  return fetchTradeStatCommodityAllCountries({ ...options, tradeFlow: "import" });
 }

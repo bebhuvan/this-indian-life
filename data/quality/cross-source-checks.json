@@ -36,33 +36,5 @@
     },
     "maxYearGap": 2,
     "maxAbsDiff": 3
-  },
-  {
-    "id": "extfin.lrs.workbook_vs_rbi_published_fy2025_26",
-    "description": "The fiscal-year total reconstructed from the RBI monthly workbook must reconcile with the annual total displayed in RBI's June 2026 bulletin table.",
-    "left": {
-      "type": "series",
-      "artifact": "data/series/rbi-lrs.IN.extfin.lrs.total.fy.json"
-    },
-    "right": {
-      "type": "series",
-      "artifact": "data/series/rbi-bulletin-lrs.IN.extfin.lrs.total.fy.published.json"
-    },
-    "maxYearGap": 0,
-    "maxAbsDiff": 0.00002
-  },
-  {
-    "id": "econ.income_classification.worldbank_vs_mospi_gni",
-    "description": "World Bank calendar-year current-price GNI and MoSPI fiscal-year current-price GNI should remain broadly aligned. The one-year period mismatch is intentional and documented.",
-    "left": {
-      "type": "series",
-      "artifact": "data/series/worldbank-income-classifications.india-gni-current-lcu.json"
-    },
-    "right": {
-      "type": "series",
-      "artifact": "data/series/mospi.IN.econ.nas.gni_nominal.json"
-    },
-    "maxYearGap": 1,
-    "maxAbsDiff": 15000000000000
   }
 ]

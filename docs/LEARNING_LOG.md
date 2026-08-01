@@ -1,6 +1,6 @@
 # Indica Learning Log
 
-Last updated: 2026-07-16
+Last updated: 2026-06-01
 
 This log captures product, design, data, and architecture lessons learned while building the first real Indica article pages.
 
@@ -170,19 +170,6 @@ Likely adapter categories:
 
 For sources like NDAP that may not expose a clean public API, build an adapter only after confirming that the underlying data endpoints are stable and allowed to use.
 
-IMF SDMX 3.0 has four source-specific traps:
-
-- The Swagger portal requires sign-in, but the public structure and data endpoints
-  worked without a key during the July 2026 audit.
-- Some cubes return a complete period grid with blank `OBS_VALUE` cells. Count
-  only non-blank finite observations, never response rows.
-- Resolve the current flow version and dimension order from the data structure
-  before building a key. DataMapper and SDMX indicator codes can differ even
-  when the underlying values match.
-- WEO dates alone do not identify forecasts. Request `attributes=all` and read
-  `PUBLICATION_DATE` plus `LATEST_ACTUAL_ANNUAL_DATA` before separating actuals
-  from estimates and projections.
-
 ## Dataset Scope
 
 The V1 dataset set is sufficient to start building real pages.
@@ -258,3 +245,4 @@ The preferred direction is:
 - A few high-quality text explainer boxes between chart clusters.
 - Pull-quotes for genuinely important takeaways.
 - Keep the prose, but make the data the star.
+

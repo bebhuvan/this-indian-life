@@ -34,15 +34,11 @@ node scripts/discover-india-gov-sources.mjs --deep
 | MoSPI Microdata Library / NADA | Working discovery adapter | Catalog records, titles, IDs, modified dates, public-use access flags, metadata JSON endpoint, data-dictionary file lists, related-material download links | Jobs, consumption, industry, education, health, telecom, time use, informal enterprise |
 | TRAI telecom reports | Working discovery adapter | Monthly telecom-subscription report titles, release dates, PDF URLs, file sizes where exposed | Connectivity, internet infrastructure, rural/urban subscriptions, telecom market structure |
 | NDAP | Probe only | Experimental search/catalog endpoint shape | District/state cross-ministry indicators after endpoint stabilization |
-| data.gov.in / AGMARKNET | Production adapter, key-gated | Paginated current mandi prices with state, district, market and commodity filters; missing-key status is explicit | Food prices, spatial price gaps, farm-to-market context |
+| data.gov.in | Key-gated template only | API URL template; blocked without valid API key in this environment | Broad ministry datasets after `DATAGOVIN_API_KEY` |
 | RBI DBIE | Partial production adapter plus discovery | Weekly forex reserves JSON, official macro workbook snapshots, curated derived macro series, report inventory | Banking, inflation, credit, deposits, monetary policy, money markets, payments, external sector, public finance, national accounts, housing |
 | NFHS / DHS / IIPS | Registry item plus local NFHS artifacts | Factsheet/microdata path, already partially represented in repo | Health, fertility, nutrition, sanitation, women's lives, digital access |
 | Census India | Registry item | File/page-backed path | Population, literacy, migration, households, settlement structure |
 | MoSPI / eSankhyiki | Registry item | Official table/download source; endpoint discovery pending | National accounts, prices, IIP, official macro statistics |
-| UPAg Dash | Production browser-grid adapter | APY plus nine open district, price, market, trade, procurement and stock grids; CWWG registry metadata | Crops, prices, markets, procurement, weather-report discovery |
-| TradeStat | Production form adapter | Partner-level import and export tables by HS code and fiscal year | Agricultural trade, import dependence, export destinations |
-| DES agriculture | Production PDF adapter | Six long-run all-India APY tables with raw PDF provenance | Yield growth, crop mix, long-run production |
-| DFPD / FCI | Production PDF adapter | Monthly Central Pool stock and state/agency stock tables from pinned bulletin | Buffer stocks, food security, spatial concentration |
 
 ## NADA Is The First Big Win
 
@@ -145,17 +141,7 @@ Every source adapter should follow the existing project contract:
 5. **CMST/CAMS adapter**: digital access, mobile/internet use, digital payments, who is disconnected.
 6. **TRAI PDF extraction**: infrastructure series for the connectivity article family.
 7. **RBI DBIE table expansion**: the core forex/macro path is live; add one report/table adapter at a time only after stable downloadable or JSON evidence and table-specific validation are confirmed.
-8. **data.gov.in expansion** once `DATAGOVIN_API_KEY` is available. AGMARKNET is already wired and records a blocked manifest until then.
-
-## Agriculture Open-Data Stack
-
-The implemented source map and reproducible commands are documented in [AGRICULTURE_OPEN_DATA.md](./AGRICULTURE_OPEN_DATA.md). Run the whole currently supported stack with:
-
-```bash
-npm run ingest:agriculture-open
-```
-
-The aggregate command treats a missing AGMARKNET key as a documented blocked source. Other parser, schema, row-count, or reconciliation failures remain fatal.
+8. **data.gov.in authenticated discovery** once `DATAGOVIN_API_KEY` is available.
 
 ## Article Generation Implication
 

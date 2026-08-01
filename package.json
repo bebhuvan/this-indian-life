@@ -23,7 +23,6 @@
     "ingest:ppac-price-and-fuel-spend": "node scripts/ingest-ppac-price-and-fuel-spend.mjs",
     "ingest:ppac-history-local": "node scripts/ingest-ppac-history-local.mjs",
     "ingest:tradestat-energy": "node scripts/ingest-tradestat-energy.mjs",
-    "ingest:tradestat-agriculture": "node scripts/ingest-tradestat-agriculture.mjs",
     "ingest:tradestat-crude-history": "node scripts/ingest-tradestat-crude-partner-history.mjs",
     "ingest:un-comtrade-energy": "node scripts/ingest-un-comtrade-energy.mjs",
     "ingest:wto-trade": "node scripts/ingest-wto-trade.mjs",
@@ -102,10 +101,6 @@
     "ingest:unctad-lsci": "node scripts/ingest-unctad-lsci.mjs",
     "ingest:des-agri-apy": "node scripts/ingest-des-agri-apy-glance.mjs",
     "ingest:upag-dash-apy": "python3 scripts/ingest-upag-dash-apy.py",
-    "ingest:upag-dash-open": "python3 scripts/ingest-upag-dash-open-data.py",
-    "ingest:agmarknet-mandi": "node scripts/ingest-agmarknet-mandi.mjs",
-    "ingest:dfpd-foodgrain": "node scripts/ingest-dfpd-foodgrain-bulletin.mjs",
-    "ingest:agriculture-open": "npm run ingest:des-agri-apy && npm run ingest:upag-dash-apy && npm run ingest:upag-dash-open && npm run ingest:tradestat-agriculture && npm run ingest:dfpd-foodgrain && npm run ingest:agmarknet-mandi",
     "derive:monsoon-food-inflation-panel": "node scripts/derive-monsoon-food-inflation-panel.mjs",
     "derive:rainfall-crop-panel": "node scripts/derive-rainfall-crop-panel.mjs"
   },

@@ -207,17 +207,7 @@
 
   async function fetchText(url) {
     const response = await fetch(url);
-    if (response.ok) return response.text();
-
-    // Astro's dev server canonicalises prerendered extension routes with a
-    // trailing slash, while the static build emits a real `.csv`/`.svg` file.
-    // Keep production URLs file-like and retry the dev-server form only when
-    // the canonical request misses.
-    if (!url.endsWith("/")) {
-      const devResponse = await fetch(`${url}/`);
-      if (devResponse.ok) return devResponse.text();
-    }
-    return "";
+    return response.ok ? response.text() : "";
   }
 
   async function loadLazySvg(frame) {
