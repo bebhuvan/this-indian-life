@@ -81,12 +81,15 @@ function insertOnce(label, marker, anchor, block) {
 
 // --- 2. the markdown heading bug -------------------------------------------
 // Must run before anything that matches across that boundary.
-swap(
-  "heading-blank-line",
-  "They are rarely the last.\n## If farming is now just a fraction",
-  "They are rarely the last.\n\n## If farming is now just a fraction"
-);
-
+// Idempotency cannot key off the repaired text here, because insertOnce later drops a
+// whole section between "They are rarely the last." and this heading, which breaks the
+// contiguity swap() relies on. Key off the BROKEN pattern instead: if it is absent there
+// is nothing to do. Any edit whose anchor region can later be split needs this shape.
+const BROKEN_HEADING = "They are rarely the last.\n## If farming is now just a fraction";
+if (doc.article.bodyMarkdown.includes(BROKEN_HEADING)) {
+  doc.article.bodyMarkdown = doc.article.bodyMarkdown.replace(BROKEN_HEADING, BROKEN_HEADING.replace("\n##", "\n\n##"));
+  applied += 1;
+}
 // --- 4. the 0.01C rank flip -------------------------------------------------
 
 // --- 5. the long-period average --------------------------------------------
@@ -270,6 +273,32 @@ for (const [label, sentence] of breaks) {
   swap(`break-${label}`, ` ${sentence}`, `\n\n${sentence}`);
 }
 
+// --- 10. the second channel onto the winter crop ---------------------------
+// The peak-timing act establishes that this event lands on rabi rather than kharif, and
+// then describes that risk purely as water: reservoirs, groundwater, sowing. There is a
+// second channel, and on our own ERA5 data it is the better-evidenced one. Inserted
+// after the peak-timing section, which is where the rabi argument already lives.
+const HEAT_SECTION = `## Does a warmer winter come with it?
+
+It does, and this is the part that gets left out.
+
+Take India's temperature through the winter crop season, October to February, and measure each year against its own decade rather than against a fixed baseline. That last step matters: El Niño years are scattered through a warming record, so without it any group containing more recent years looks hotter for reasons that have nothing to do with the Pacific.
+
+Do that, and the winter after an El Niño monsoon runs about 0.3°C above its own decade. The winter after a La Niña runs about 0.24°C below. After a strong El Niño it is 0.44°C. That is a gap of roughly half a degree between the two ends, and unlike several other relationships in this piece it is comfortably distinguishable from noise.
+
+Half a degree sounds like very little. For wheat it is not nothing. Indian wheat is more vulnerable to heat than to drought once it has irrigation, because warm nights late in the season cut the grain-filling short. So the winter crop is facing two things at once from the same event: reservoirs that a weak monsoon failed to fill, and a season that tends to run warm.
+
+One honesty note, because it cuts against the neat version of this. The narrow window that actually decides a wheat yield, the fortnight or so of grain filling in late February and March, is too noisy in this record to separate from chance. The season is a real signal. The critical fortnight is not something we can show.
+
+`;
+
+insertOnce(
+  "insert-heat-section",
+  "## Does a warmer winter come with it?",
+  "## If farming is now just a fraction of the economy, why does a bad monsoon still matter?",
+  HEAT_SECTION
+);
+
 // --- 8. a physics claim that is backwards ----------------------------------
 // "that extra Pacific warmth pumps moisture into the Bay of Bengal, feeding the
 // retreating monsoon and tropical cyclones."
@@ -415,6 +444,7 @@ const CHART_ORDER = [
   "after-a-drought-food-prices-do-not-move-as-one",
   "same-el-nino-opposite-signs-india-has-two-monsoons",
   "el-nino-peaks-after-the-kharif-harvest-is-decided",
+  "el-nino-does-not-just-take-the-water-it-brings-the-heat",
   "a-shrinking-share-of-the-economy-but-still-two-in-five-jobs"
 ];
 
@@ -554,6 +584,22 @@ const NEW_EXPLAINERS = [
       "Reading a lead in July as a lead at the finish. 1997 and 2015 both climbed hard through the autumn, long past where 2026's line currently stops. The era adjustment is also our approximation of NOAA's centred-base convention rather than a NOAA product, and these are monthly means of a noisier weekly series.",
     mobileNote:
       "Find July on the axis and read straight up: 2026 is the top line there."
+  },
+  {
+    visualId: "el-nino-does-not-just-take-the-water-it-brings-the-heat",
+    title: "El Nino does not just take the water. It brings the heat.",
+    takeaway:
+      "India's winter crop season runs about 0.3°C above its own decade after an El Niño monsoon, and about 0.24°C below after a La Niña one.",
+    detail:
+      "All-India temperature in two windows, grouped by the state of the Pacific during that year's monsoon, with every year measured against the average of the eleven years centred on it. That detrending is what makes the comparison mean anything: El Niño years sit scattered through a warming record, so a raw comparison would mostly be measuring the trend. The gap between the El Niño and La Niña ends of the winter window is roughly half a degree, and it survives a significance test comfortably. The monsoon season itself shows the same direction but a smaller gap.",
+    whyShowThis:
+      "The article has already established that this event peaks after the summer harvest is settled, so what it lands on is the winter crop. That risk was described here purely as a water story. This is the second channel, and on this data it is the better-evidenced one: less water and a warmer season, arriving together on a crop that is more heat-sensitive than drought-sensitive once irrigated.",
+    howToRead:
+      "Zero means normal for that year's own decade, not normal for the twentieth century. Compare the top and bottom bars within each group.",
+    mistakeToAvoid:
+      "Treating this as a forecast for one winter. It is an average across 17 El Niño seasons and any single year can sit anywhere in the spread. And the narrow February-to-March grain-filling window, which is what actually decides a wheat yield, cannot be separated from noise in this record. The season is a signal; the critical fortnight is not.",
+    mobileNote:
+      "Two groups. The winter one is where the gap between El Niño and La Niña is widest."
   },
   {
     visualId: "when-noaa-expects-this-el-nino-to-cross-the-strong-line",

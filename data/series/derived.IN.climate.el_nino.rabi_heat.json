@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.rabi_heat",
+  "title": "El Nino does not just take the water. It also brings the heat.",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.rabi_heat",
+  "sourceUrl": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means",
+  "unit": "°C above or below normal for its own decade",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "group",
+    "value",
+    "years"
+  ],
+  "fetchedAt": "2026-08-01T13:04:52.773Z",
+  "rows": [
+    {
+      "label": "After a La Nina monsoon",
+      "group": "The winter crop season (Oct-Feb)",
+      "value": -0.24,
+      "years": 18
+    },
+    {
+      "label": "After a neutral monsoon",
+      "group": "The winter crop season (Oct-Feb)",
+      "value": -0.04,
+      "years": 39
+    },
+    {
+      "label": "After an El Nino monsoon",
+      "group": "The winter crop season (Oct-Feb)",
+      "value": 0.3,
+      "years": 17
+    },
+    {
+      "label": "After a strong El Nino monsoon",
+      "group": "The winter crop season (Oct-Feb)",
+      "value": 0.44,
+      "years": 7
+    },
+    {
+      "label": "After a La Nina monsoon",
+      "group": "The monsoon itself (Jun-Sep)",
+      "value": -0.12,
+      "years": 18
+    },
+    {
+      "label": "After a neutral monsoon",
+      "group": "The monsoon itself (Jun-Sep)",
+      "value": -0.03,
+      "years": 40
+    },
+    {
+      "label": "After an El Nino monsoon",
+      "group": "The monsoon itself (Jun-Sep)",
+      "value": 0.17,
+      "years": 17
+    },
+    {
+      "label": "After a strong El Nino monsoon",
+      "group": "The monsoon itself (Jun-Sep)",
+      "value": 0.27,
+      "years": 7
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.climate.el_nino_2026",
+    "method": "All-India ERA5 temperature anomalies against a 1991-2020 base, detrended by expressing each year against the mean of the 11-year window centred on it, then grouped by the ENSO phase of that year's monsoon. The winter-crop window is Oct-Dec plus the following Jan-Feb, assembled from two existing seasonal artifacts.",
+    "whyDetrended": "El Nino years sit scattered through a warming record. Without detrending, any subset weighted towards recent years looks hotter for reasons unrelated to the Pacific, and the comparison means nothing.",
+    "significanceTest": {
+      "rabi": {
+        "t": 4.12,
+        "df": 28.8,
+        "p": 0.0003,
+        "elNino": 0.3,
+        "laNina": -0.24,
+        "strongElNino": 0.44,
+        "n": {
+          "elNino": 17,
+          "laNina": 18,
+          "strong": 7
+        }
+      },
+      "monsoon": {
+        "t": 2.64,
+        "df": 30,
+        "p": 0.0129,
+        "elNino": 0.17,
+        "laNina": -0.12,
+        "strongElNino": 0.27,
+        "n": {
+          "elNino": 17,
+          "laNina": 18,
+          "strong": 7
+        }
+      }
+    },
+    "headline": "India's winter crop season runs about 0.3C above its own decade after an El Nino monsoon and -0.24C below after a La Nina one, a gap of 0.54C (p = 0.0003). The monsoon season itself shows a smaller gap.",
+    "crossCheck": "Our World in Data's per-country ERA5 series, used as an independent check only and not ingested, gives +0.49C for a November-to-March window against +0.54C here for October-to-February.",
+    "honestyRules": [
+      "A correlation across 17 El Nino seasons, not a causal attribution for any single year.",
+      "The narrower grain-filling window (Feb-Mar), which is what actually decides a wheat yield, is NOT separable from noise (p about 0.10 on the monthly series). Report the season, never the critical fortnight.",
+      "ERA5 is a reanalysis, a model-observation blend, not a station record.",
+      "This window approximates the rabi growing season. It is not a sowing-to-harvest window for any particular crop or state.",
+      "The heat signal is the SECOND channel onto the winter crop. The first is water, and the article should not let this one crowd it out."
+    ]
+  }
+}

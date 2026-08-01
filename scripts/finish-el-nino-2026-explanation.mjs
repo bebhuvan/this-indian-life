@@ -45,6 +45,10 @@ const SOURCE_NOTES = [
   // nine-season distribution and states the index and base period it is verified against.
   { label: "NOAA Climate Prediction Center's official ENSO strength probabilities (issued July 2026), the single forecast quoted in this piece, verified against the trend-adjusted RONI on a 1991-2020 base and re-issued every month.", url: "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" },
   { label: "NOAA Physical Sciences Laboratory, for the Dipole Mode Index behind the Indian Ocean Dipole (raw data file, HadISST, 1870 onward).", url: "https://psl.noaa.gov/gcos_wgsp/Timeseries/Data/dmi.had.long.data" },
+  // ERA5 via the Copernicus CDS, our own ingest. Copernicus asks for the "Contains
+  // modified Copernicus Climate Change Service information" form of words, which is why
+  // the label reads the way it does.
+  { label: "Contains modified Copernicus Climate Change Service information: ERA5 monthly reanalysis, for the all-India temperature anomalies behind the winter-heat comparison.", url: "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means" },
   { label: "India Meteorological Department, for all-India and subdivisional monthly rainfall from 1901 to 2025, which underlies every rainfall departure in this piece.", url: "https://imdpune.gov.in/cmpg/Product/Rainfall_Data.html" },
   { label: "ICRISAT's district-level database, for the crop yield comparisons, which run from 1966 to 2017.", url: "http://data.icrisat.org/dld/" },
   { label: "Reserve Bank of India, for wholesale food prices and for the national accounts behind agriculture's share of output.", url: "https://data.rbi.org.in/DBIE/" },
