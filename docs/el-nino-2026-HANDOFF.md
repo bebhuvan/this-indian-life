@@ -90,16 +90,67 @@ ingested or quoted.** Only its forecast probabilities are used, and those cross-
 exactly against the strengths table (both give 81% for OND). Worth resolving with CPC if
 anyone wants to use the discussion text as a source later.
 
+## Validator checks added
+
+`scripts/core/chart-card-lint.mjs`, wired into `explain:v1:validate`:
+
+- **`sectionVisualMap` binding** (warning). A mapped heading that no longer matches the
+  prose makes `[slug].astro` fall back SILENTLY to token-overlap matching, so charts sit
+  under the wrong prose with a green build. It found **four articles already in that
+  state**, none of them this one, none fixed: `q.climate.heat_mortality`, `q.econ.borrow`,
+  `q.health.life`, `q.policy.internet_control`. Promote the check to a failure once they
+  are cleared.
+- **Two card-level numeric checks that are deliberately NOT gated.** Measured across the
+  site they carry too many false positives (586 -> 39 after two rounds of tightening, and
+  the residue is still mostly cards writing "jowar" where the artifact says "Sorghum
+  (jowar)"). Opt in with `INDICA_CARD_LINT=1 npm run explain:v1:validate` when reviewing a
+  single article. The module header records what would be needed to make them gate-worthy.
+
+## Deliberately not done
+
+An adversarial read by three independent reviewers produced more than was actioned. Still
+open, in rough value order:
+
+- Sections 16-18 make one argument three times: the "rainfall map is not the yield map"
+  idea appears five times across body and cards. They should merge down to one or two.
+- Seven consecutive sections (14-20) open on the same shape, abstract subject plus present
+  verb. Break at least four by opening on a number or a place.
+- The cumulative-hedging problem. Roughly fifteen sections end by qualifying the number
+  they just gave. Each hedge is individually right; together they teach the reader not to
+  retain anything. Worth thinning the weakest third.
+- `whyShowThis` uses a "Without this chart, a reader might assume..." template on nine
+  cards; `mobileNote` opens "On a small screen..." on thirteen.
+- The macha layer still reads as an imitation in places.
+
 ## What exists
 
 Article `q.climate.el_nino_2026`, slug `el-nino-2026-what-it-means-for-india`. Built,
-fact-checked and rendering: ~5,700 words, 24 sections, 23 charts, validator clean,
-`npm run build` exit 0. Two older El Nino articles (`q.climate.el_nino_india`,
+fact-checked and rendering: ~6,300 words, 25 sections, 24 charts, validator clean,
+`npm run build` exit 0 (102 pages). Two older El Nino articles (`q.climate.el_nino_india`,
 `q.climate.monsoon_2026`) are deliberately left untouched.
 
-Committed on branch `article/el-nino-2026-escalation-fork`, not pushed. Only El Nino files
-are in those commits; ~300 unrelated in-progress files were deliberately left uncommitted in
-the working tree. Deploy is Cloudflare on push to `main`, so nothing ships until that merge.
+Committed on **`article/el-nino-2026`**, which sits directly on top of current `main`, not
+pushed. Deploy is Cloudflare on push to `main`, so nothing ships until that merge; pushing
+the branch itself is safe.
+
+The earlier branch `article/el-nino-2026-escalation-fork` is superseded. It was based on
+`article/two-countries-birth-rates` and carried 12 unrelated inherited commits;
+`backup/el-nino-pre-rebase` preserves that state if anything needs recovering.
+
+**Two things the rebase turned up, both worth knowing:**
+
+1. `main` already contains `q.work.jobs_challenge`, restored to fix a live 404. The old
+   branch did not. Resolving `v1-indicators.mjs` by taking the branch version wholesale
+   would have reintroduced that 404, so the file was resolved surgically: main's registry
+   with only the `q.climate.el_nino_2026` block grafted in. Check `india-jobs-challenge`
+   still builds after any future merge of this file.
+2. Several commits on the old branch used `git add -u`, which stages every tracked
+   modification rather than the ones belonging to the change. About thirty files of other
+   people's in-progress work rode along: the World Bank poverty-line correction and its
+   inequality article, the Asia divergence series, des-agri APY, several ingest scripts,
+   three docs and `package.json`. All reverted on the rebased branch. **The poverty-line
+   correction is a real fix with its own changelog entry and still needs to ship on its own
+   branch.** Use explicit paths with `git add`, never `-u`, in a working tree this dirty.
 
 ## THE THING THAT WAS WRONG, and must not come back
 
