@@ -61,12 +61,16 @@ const failures = [];
  */
 function swap(label, from, to) {
   const body = doc.article.bodyMarkdown;
-  if (body.includes(to)) return; // already applied
+  // A deletion (to === "") cannot use the already-applied test, because every string
+  // contains the empty string, so the guard fired every time and the edit silently never
+  // ran while reporting success. For a deletion, "target absent" IS already-applied.
+  if (to !== "" && body.includes(to)) return;
   if (body.includes(from)) {
     doc.article.bodyMarkdown = body.replace(from, to);
     applied += 1;
     return;
   }
+  if (to === "") return;
   failures.push(label);
 }
 
@@ -189,7 +193,9 @@ One detail is worth pausing on. CPC's strength probabilities are verified agains
 
 insertOnce(
   "insert-forecast-section",
-  "## And what do the forecasters actually say?",
+  // Marker must be the FINAL heading text: the "actually" is stripped by a later swap,
+  // so keying off the original makes this look uninserted on every re-run.
+  "## And what do the forecasters say?",
   "## What actually happened to the monsoon the last times a strong El Niño coincided with the season?",
   FORECAST_SECTION
 );
@@ -416,7 +422,7 @@ swap(
 swap(
   "methodology-absent",
   "Finally, what is absent. The 2026 season is unfinished, and this piece deliberately carries no figures for rainfall so far, reservoir storage or sown area. Those numbers exist and they move week to week, but they are not in the evidence behind this article, so no estimate of them has been made here.",
-  "Finally, what is absent, which in this piece matters as much as what is present. The 2026 season is unfinished, and this article carries no figures for rainfall so far, reservoir storage or sown area. Those numbers exist and they move week to week, but they are not in the evidence behind this article, so no estimate of them is made here.\n\nAn earlier draft of this piece asserted, with no source at all, that a crossing of the strong threshold during the monsoon was widely anticipated, and used that to apply the harshest of the three base rates. No forecast product was among its sources. That sentence is gone, and in its place is the actual CPC outlook, named, dated and linked below. The difference matters more than it might look: one was a confident sentence about the future, the other is a published distribution that can be checked and that will be revised next month."
+  "Finally, what is absent, which in this piece matters as much as what is present. The 2026 season is unfinished, and this article carries no figures for rainfall so far, reservoir storage or sown area. Those numbers exist and they move week to week, but they are not in the evidence behind this article, so no estimate of them is made here."
 );
 
 
@@ -861,6 +867,63 @@ if (failures.length) {
   for (const f of failures) console.error(`  - ${f}`);
   process.exit(1);
 }
+
+
+// --- 17. the second tier from the audits ----------------------------------
+// Runs after every other text edit, so nothing downstream can chain off it.
+const FINAL_FIXES = [
+  // The article's own forecast section puts escalation at 73-90% by September. Calling
+  // it "the less likely branch" on the historical record alone, without saying the
+  // forecasters disagree, is a contradiction on the central number.
+  ["less-likely-branch",
+   "What it means is that the alarming reference class, the one carrying the 12% average deficit, is the less likely of the two branches from where this season currently stands.",
+   "So on the record alone, the alarming reference class is the less likely of the two branches. Hold that lightly, though. The record cannot see the ocean, and the forecasters can; what they currently expect is three sections from here, and it is a good deal less comfortable than this."],
+
+  // The last substantive section still put the risk on the summer crop, which undoes
+  // the whole restructure in the reader's final impression.
+  ["kharif-to-rabi-close",
+   "A strong El Niño hitting the kharif season may not cause a 1965-style economic contraction, but the damage flows through households rather than headline numbers.",
+   "A strong El Niño landing where this one is expected to, on the winter crop and the water behind it, will not cause a 1965-style contraction. The damage flows through households instead: a smaller area sown for rabi, fewer days of work on it, and a wheat harvest that pays less."],
+
+  // The trajectory figure is our own era-adjustment of NOAA's weekly file, not a NOAA
+  // product. The methodology claimed every Pacific figure was NOAA's.
+  ["pacific-figure-provenance",
+   "Every Pacific figure here comes from the NOAA Climate Prediction Center, and the single most important thing to know about them is that they are not interchangeable.",
+   "Every Pacific figure here comes from the NOAA Climate Prediction Center, with one exception noted below, and the single most important thing to know about them is that they are not interchangeable."],
+  ["pacific-figure-exception",
+   "When a figure appears in this piece it is labelled, because an unlabelled one is close to meaningless.",
+   "When a figure appears in this piece it is labelled, because an unlabelled one is close to meaningless. The exception is the trajectory chart, where each year is adjusted for the warming of its own era so that decades can be compared at the same date. That adjustment is ours, an approximation of NOAA's convention rather than a NOAA product, and it is the only Pacific number here we compute rather than read."],
+
+  // You cannot conclude "does not separate" from a sample with no contrast group. The
+  // methodology section already says this correctly; the section itself overclaimed.
+  ["flavour-null-overclaim",
+   "So even within this eastern-leaning set, outcomes ranged from disastrous to near-normal. The location of the warming simply does not separate the damaging years from the benign ones. That means if 2026’s warmth is concentrated in the eastern Pacific, it offers no reliable comfort.",
+   "So even within this eastern-leaning set, outcomes ranged from disastrous to near-normal. Note what that does and does not show. With no central-Pacific case among the seven, these events cannot test the hypothesis at all, which is different from refuting it. What they can do is close off the reassurance: if 2026's warmth sits in the eastern Pacific, there is nothing here that says India is spared."],
+
+  // Chickpea, a rabi pulse, gained 2.6%. "Pulses" as a class is not down 5.1%.
+  ["pulses-attribution",
+   "Groundnut yields fell 8.3 percent below their recent normal, jowar 7.3 percent, bajra 6.8 percent, and both pulses and oilseeds 5.1 percent.",
+   "Groundnut yields fell 8.3 percent below their recent normal, jowar 7.3 percent, bajra 6.8 percent, and pigeonpea and the oilseed basket 5.1 percent each. Chickpea, which is sown in winter, actually gained."],
+
+  // The 1972 positive-IOD exception is the spine of the IOD section two sections later,
+  // where it lands harder. Told twice, it is just a fact repeated.
+  ["1972-iod-dedupe",
+   " The 1972 event coincided with a positive Indian Ocean Dipole, often invoked as a protective force, proving that even a favourable second ocean cannot guarantee safe passage.",
+   ""],
+
+  // The methodology closed on a confession about a draft the reader never saw. The
+  // discipline belongs in the repo, not in the article.
+
+  // "actually" was doing tic duty in six of twenty-five headings.
+  ["hd1", "## How fast is this one actually moving?", "## How fast is this one moving?"],
+  ["hd2", "## And what do the forecasters actually say?", "## And what do the forecasters say?"],
+  ["hd3", "## What actually happened to the monsoon the last times a strong El Niño coincided with the season?", "## Six dry monsoons out of seven, and one that got away"],
+  ["hd4", "## Which part of India actually loses the most rain?", "## The northwest loses twice what the country does"],
+  ["hd5", "## Which crops actually bear the brunt of an El Niño?", "## Groundnut, jowar, bajra: the crops with no backup"],
+  ["hd6", "## When does an El Niño actually peak?", "## Almost never during the monsoon"]
+];
+for (const [label, from, to] of FINAL_FIXES) swap(label, from, to);
+
 
 // NOTE ON ORDER: this runs LAST, after every text edit above.
 // It was previously placed near the top, which meant sectionVisualMap was built from
