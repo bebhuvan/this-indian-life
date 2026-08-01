@@ -63,6 +63,15 @@ const SOURCE_NOTES = [
   // earlier draft got backwards: it finds Bay of Bengal Oct-Dec accumulated cyclone
   // energy NEGATIVELY correlated with Nino3.4, so El Nino suppresses post-monsoon
   // cyclone activity rather than feeding it, as the draft said.
+  // NOT LISTED, deliberately: the Central Water Commission's reservoir bulletin. The
+  // body names it as the thing to watch next and says plainly that this article does not
+  // carry it. Putting it in sourceNotes would tell a scanning reader we used reservoir
+  // data, which is the exact fabrication the guard below exists to catch.
+  //
+  // The premise of the winter-heat section. Cited because the article makes an
+  // agronomic claim it does not itself test: our data is a seasonal mean, Lobell's
+  // finding is about the count of days above ~34C inside that season. The prose says so.
+  { label: "Lobell, Sibley and Ortiz-Monasterio, 'Extreme heat effects on wheat senescence in India', Nature Climate Change 2 (2012), for the finding that days above about 34°C accelerate wheat ageing and shorten grain filling.", url: "https://doi.org/10.1038/nclimate1356" },
   { label: "Kumar, Rajagopalan, Hoerling, Bates and Cane, 'Unraveling the Mystery of Indian Monsoon Failure During El Nino', Science 314 (2006), for the central-Pacific hypothesis this piece tests.", url: "https://doi.org/10.1126/science.1131152" },
   { label: "Girishkumar and Ravichandran, 'The influences of ENSO on tropical cyclone activity in the Bay of Bengal during October-December', Journal of Geophysical Research: Oceans 117 (2012), for the finding that El Nino suppresses post-monsoon cyclone energy in the Bay.", url: "https://doi.org/10.1029/2011JC007417" },
   // Open access, and the source of the actual figures quoted in the northeast-monsoon

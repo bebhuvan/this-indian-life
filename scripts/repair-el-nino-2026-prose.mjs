@@ -6,6 +6,14 @@
 // place, and the script exits non-zero if any edit cannot be applied. Run it after any
 // regeneration, alongside scripts/finish-el-nino-2026-explanation.mjs.
 //
+// HAZARD, hit three times while writing this: do NOT let one swap edit text that an
+// earlier swap produced. swap() tests idempotency by looking for its own `to` string,
+// and a later edit inside that string makes it unfindable, so the script fails on every
+// re-run. Symptoms are a "FAILED to apply" list that only appears on the SECOND run.
+// The fix is always the same: collapse the chain into a single original-to-final swap.
+// Anything that can move or rename a heading must also run BEFORE the sectionVisualMap
+// rebuild near the end, or the map silently describes a body that no longer exists.
+//
 // WHAT IT FIXES, and why each one mattered:
 //
 //  1. THE UNSOURCED FORECAST. The draft pivoted on "forecasters expect 2026 to cross
@@ -367,7 +375,7 @@ swap(
 swap(
   "rolling-corr-physics",
   "However, a rolling correlation is sensitive to its endpoints, and a few extreme years can swing it. The underlying physics has not shifted. So this is not proof that the relationship is permanently locked, but it does caution against the easy narrative that El Niño no longer matters. At least for now, the Pacific’s shout is as loud as ever.",
-  "However, a rolling correlation is a weak instrument for this question. It is sensitive to its endpoints, a few extreme years can swing it, and a correlation can move without anything in the underlying physics changing. What the line can support is narrow: it gives no comfort to the idea that El Niño has stopped mattering to the monsoon. Whether the connection is genuinely stronger now than in 1960 is not something 56 overlapping windows can settle.\n\nThe published research does not agree either, and it is more honest to say so than to pick the study that suits. Several papers report the link fraying after about 1980. At least one recent one reports it strengthening. Climate models pushed to high carbon dioxide mostly project further weakening, and their reason is the interesting part. As the Indian Ocean warms into a pattern that looks like a permanent positive dipole, El Niño and a positive dipole increasingly turn up in the same year, and the second ocean cancels part of what the first one does. That is the tilt described in the section above, projected forward and made routine. Note what it would mean. A weaker link is not a safer monsoon. It is a less predictable one, because it removes the earliest warning India gets."
+  "However, a rolling correlation is a weak instrument for this question. It is sensitive to its endpoints, a few extreme years can swing it, and a correlation can move without anything in the underlying physics changing. What the line can support is narrow: it gives no comfort to the idea that El Niño has stopped mattering to the monsoon. Whether the connection is genuinely stronger now than in 1960 is not something 56 overlapping windows can settle.\n\nThe published research does not agree either, and it is more honest to say so than to pick the study that suits. Several papers report the link fraying after about 1980. At least one recent one reports it strengthening. Climate models pushed to high carbon dioxide mostly project further weakening, and their reason is the interesting part. As the Indian Ocean warms into a pattern that looks like a permanent positive dipole, El Niño and a positive dipole increasingly turn up in the same year, and the second ocean cancels part of what the first one does. That is the tilt described in the section above, projected forward and made routine. Note what it would mean. That would leave India with the same monsoon risk and less warning of it, because the Pacific is the earliest signal there is."
 );
 
 // --- 6. the repeated irrigation mechanism ----------------------------------
@@ -375,7 +383,7 @@ swap(
 swap(
   "dedupe-regional",
   "This geography matters because the northwest relies heavily on irrigation from canals and tubewells, so less rain does not automatically mean crop failure. But it does mean groundwater is not recharged, reservoirs are not topped up, and the cost of pumping rises. In contrast, rainfed regions farther east can be devastated by the same percentage drop. The national average can mask the true stress on particular communities.",
-  "But a rainfall map is not a damage map, and the next few charts take apart why. The northwest loses the most rain and yet its irrigated rice comes out ahead, while the rainfed cereals grown beside that same rice fall further than any crop in any other region. The shortfall is regional; the harm is not. What a map of departures cannot show you is who actually gets hurt."
+  "But a rainfall map is not a damage map, and the next few charts take apart why. The northwest loses the most rain and yet its irrigated rice comes out ahead, while the rainfed cereals grown beside that same rice fall further than any crop in any other region. Northwest rice does fine on canal water while the bajra in the next field fails. A map of missing rain cannot show you that."
 );
 
 // Rice section: keep the observed contrast, drop the mechanism (it belongs to the
@@ -418,53 +426,6 @@ swap(
   "Finally, what is absent, which in this piece matters as much as what is present.",
   "One forecast is quoted, and only one. The Climate Prediction Center's probabilistic strength outlook is an official product, re-issued on the second Thursday of every month, and the figures here are from the July 2026 edition. It is a distribution rather than a prediction, its probabilities are verified against the trend-adjusted index on a 1991 to 2020 baseline, and it will have moved by the time you read this. Every other number about 2026 in this piece is an observation, not a projection.\n\nFinally, what is absent, which in this piece matters as much as what is present."
 );
-// --- section-to-chart binding ----------------------------------------------
-// Two sections were inserted, so every binding after the definitions chart shifts.
-// Rebuilt from the section order rather than patched, per the CLAUDE.md gotcha.
-const CHART_ORDER = [
-  "five-official-numbers-for-the-same-ocean",
-  "change-the-index-and-the-record-holder-changes",
-  "the-measuring-stick-moved",
-  "a-century-and-a-quarter-of-monsoons-that-never-sit-still",
-  "how-strictly-you-define-an-el-nino-year-changes-the-answer",
-  "monsoons-that-began-where-this-one-begins",
-  "the-fork-not-the-forecast",
-  "this-el-nino-is-climbing-faster-than-the-ones-it-is-compared-to",
-  "when-noaa-expects-this-el-nino-to-cross-the-strong-line",
-  "a-bigger-el-nino-is-not-a-worse-monsoon",
-  "where-the-pacific-warmed-does-not-settle-it-either",
-  "does-the-indian-ocean-rescue-an-el-nino-monsoon",
-  "has-the-pacific-s-grip-on-the-monsoon-loosened",
-  "el-nino-hits-the-northwest-hardest",
-  "when-in-the-season-the-rain-goes-missing",
-  "where-el-nino-actually-cuts-the-rice-harvest",
-  "why-the-rainfall-map-is-not-the-yield-map",
-  "which-crops-el-nino-actually-hits",
-  "a-weak-monsoon-does-not-automatically-mean-dearer-food",
-  "after-a-drought-food-prices-do-not-move-as-one",
-  "same-el-nino-opposite-signs-india-has-two-monsoons",
-  "el-nino-peaks-after-the-kharif-harvest-is-decided",
-  "el-nino-does-not-just-take-the-water-it-brings-the-heat",
-  "a-shrinking-share-of-the-economy-but-still-two-in-five-jobs"
-];
-
-const headings = [...doc.article.bodyMarkdown.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
-// The closing methodology section is prose-only and takes no chart.
-const chartBearing = headings.filter((h) => !/^How to read these numbers$/i.test(h));
-if (chartBearing.length !== CHART_ORDER.length) {
-  failures.push(`sectionVisualMap: ${chartBearing.length} chart-bearing sections but ${CHART_ORDER.length} charts`);
-} else {
-  // The key MUST be `heading`. src/pages/articles/[slug].astro builds its explicit map
-  // with Object.fromEntries(entries.map(e => [e.heading, e.visualId])), so any other
-  // key name yields a map of `undefined` and the page silently falls back to a
-  // token-overlap heuristic that mis-binds most of the article. Nothing errors; the
-  // charts just quietly end up under the wrong prose.
-  doc.sectionVisualMap = headings.map((heading) => {
-    const index = chartBearing.indexOf(heading);
-    return { heading, visualId: index === -1 ? null : CHART_ORDER[index] };
-  });
-  applied += 1;
-}
 
 // --- title, standfirst, summary cards --------------------------------------
 // The page <h1> is the registry's `question`, not article.title. The evidence block
@@ -660,6 +621,49 @@ patchExplainer(
   "If 2026 escalates into strong-event territory, this is the group it joins, and the group's record is harsh:"
 );
 
+// --- 13. the opening, rewritten so the article starts where the reader is --
+// A cold read found that the words "monsoon", "rain", "crop" and "farmer" did not
+// appear for 632 words, that the mechanism by which a warm Pacific dries India arrived
+// at word 4,166 of 5,900, and that El Nino itself was never defined anywhere. The piece
+// opened on the metrology of a thing it had not introduced, and the reader most likely
+// to leave was the one who came to find out whether the monsoon would fail.
+//
+// This does not add a section. It rewrites the first one so the mechanism and the thesis
+// are both in view before the index arithmetic starts, and keeps the five-numbers point
+// as the pay-off rather than the premise. The chart binding is unchanged.
+swap(
+  "opening-rewrite",
+  "## Why do official agencies report five different temperatures for the same ocean?\n\nRight now, five official NOAA figures describe the same patch of the equatorial Pacific. Each says how much warmer than usual that water is. They range from 0.47°C to 2.2°C. All five are correct. They differ because each answers a slightly different question.",
+  "## What is happening in the Pacific, and why should India care?\n\nEvery few years a band of the equatorial Pacific, thousands of kilometres from India and roughly on the far side of the world, runs warmer than usual. That is an El Niño. When it happens, the great loop of rising and sinking air that sits over the tropics shifts east, following the warm water. The rising air that pulls the monsoon inland over India goes with it, and India's June-to-September rains tend to weaken.\n\nOne is under way now, and the forecasts are for a big one. But the timing is the part almost nobody reports, and it is the reason this article exists: the event is expected to reach full strength around October, by which point India's summer crop is already in the ground and largely decided. The risk is real. It lands later, and somewhere other than where the headlines are pointing.\n\nStart with the ocean itself, because even that is not a single number. Five official NOAA figures currently describe the same patch of Pacific. Each says how much warmer than usual that water is. They range from 0.47°C to 2.2°C. All five are correct. They differ because each answers a slightly different question."
+);
+
+// The heat section's three edits (gap ordering, the wheat-yield reconciliation, and
+// the Lobell citation) all touched the same passage, so as separate swaps they chained
+// and broke idempotency. One swap, original to final.
+swap(
+  "heat-section-rewrite",
+  "Do that, and the winter after an El Niño monsoon runs about 0.3°C above its own decade. The winter after a La Niña runs about 0.24°C below. After a strong El Niño it is 0.44°C. That is a gap of roughly half a degree between the two ends, and unlike several other relationships in this piece it is comfortably distinguishable from noise.\n\nHalf a degree sounds like very little. For wheat it is not nothing. Indian wheat is more vulnerable to heat than to drought once it has irrigation, because warm nights late in the season cut the grain-filling short. So the winter crop is facing two things at once from the same event: reservoirs that a weak monsoon failed to fill, and a season that tends to run warm.",
+  "Do that, and the winter after an El Niño monsoon runs about 0.3°C above its own decade, while the winter after a La Niña runs about 0.24°C below. That is a gap of a little over half a degree between the two ends, and unlike several other relationships in this piece it is comfortably distinguishable from noise. Narrow it to the strong events only and the El Niño side rises to 0.44°C.\n\nSet against that, the article's own crop record is not alarming. Across ten El Niño years wheat yields ran 4.9% above their own recent normal, carried by irrigation. What the heat channel offers is a reason that record might not hold, not evidence that it has already broken.\n\nHalf a degree is also, on its own, very little. What makes heat matter for Indian wheat is not the seasonal average but the extremes buried inside it. Satellite work on northern India's wheat by Lobell and colleagues found that days above about 34°C sharply accelerate the crop's ageing, shortening the grain-filling window by as much as eight days and cutting yields by more than the standard crop models expect.\n\nBe careful with the join, though. What this piece measures is a seasonal mean; what damages wheat is the count of extreme days inside that season. A warmer average makes those days likelier. It does not deliver them. That link is well established in the literature and untested here."
+);
+
+// --- 14. two load-bearing claims that had no source at all -----------------
+// Both were carrying the winter-crop argument, which is the article's thesis, and
+// neither had a citation or a series behind it.
+
+// The heat section's premise. Lobell, Sibley and Ortiz-Monasterio (Nature Climate
+// Change 2:186-189, 2012) is the standard reference, and it is about EXTREME heat days
+// above 34C, not a 0.3C shift in a seasonal mean. Citing it without saying so would be
+// borrowing its authority for a different claim, so the gap is stated in the prose.
+
+// The reservoir claim is the pivot the whole restructure turns on, and the article
+// deliberately carries no reservoir series. Rather than bolt on a trade-press citation,
+// name the standard indicator, point at it, and say plainly that we do not carry it.
+swap(
+  "reservoir-source",
+  "What it lands on instead is water and the winter crop. Reservoir levels going into October decide how much land can be sown for rabi, the winter season that produces most of India's wheat. Groundwater that a weak monsoon failed to recharge has to be pumped harder and deeper.",
+  "What it lands on instead is water and the winter crop. How full the reservoirs are in October shapes how much land goes under rabi, the winter season that produces most of India's wheat, and groundwater that a weak monsoon failed to recharge has to be pumped harder and deeper. The Central Water Commission publishes the storage figures every week and they are the standard thing to watch from here. This article does not carry them, so treat that link as the well-established expectation it is rather than as something demonstrated above."
+);
+
 // --- 12. errors introduced by the restructures, found by a cold read -------
 // Almost all of these are mine, added while the article was being rebuilt around the
 // forecast. Each one was wrong on the page.
@@ -702,11 +706,6 @@ swap(
 // The heat section worried about the winter crop without acknowledging that the
 // article's OWN crop data says wheat gained 4.9% in El Nino years. Leaving that
 // unreconciled is the kind of gap a reader who has been paying attention will catch.
-swap(
-  "wheat-reconcile",
-  "Half a degree sounds like very little. For wheat it is not nothing.",
-  "Set against this, the article's own crop record is not alarming: across ten El Niño years wheat yields ran 4.9% above their own recent normal, because irrigation and a cooler-than-usual start have historically carried it. What the heat channel adds is a reason that record might not hold, not evidence that it has already broken.\n\nHalf a degree still sounds like very little. For wheat it is not nothing."
-);
 
 // The northeast-monsoon result is NOT statistically significant, and the source
 // artifact's honestyRules say in capitals not to present the phase means as a finding.
@@ -725,11 +724,6 @@ swap(
 
 // Putting the strong-El-Nino figure between the two ends and the gap made "half a
 // degree" read as 0.44 against -0.24, which is 0.68. The gap is 0.30 against -0.24.
-swap(
-  "heat-gap-ordering",
-  "Do that, and the winter after an El Niño monsoon runs about 0.3°C above its own decade. The winter after a La Niña runs about 0.24°C below. After a strong El Niño it is 0.44°C. That is a gap of roughly half a degree between the two ends, and unlike several other relationships in this piece it is comfortably distinguishable from noise.",
-  "Do that, and the winter after an El Niño monsoon runs about 0.3°C above its own decade, while the winter after a La Niña runs about 0.24°C below. That is a gap of a little over half a degree between the two ends, and unlike several other relationships in this piece it is comfortably distinguishable from noise. Narrow it to the strong events only and the El Niño side rises to 0.44°C."
-);
 
 // The price act (two sections earlier) measures October-to-December inflation in the
 // SAME year as the monsoon. Ruling out "this winter" contradicts the window the article
@@ -868,6 +862,90 @@ if (failures.length) {
   process.exit(1);
 }
 
+// NOTE ON ORDER: this runs LAST, after every text edit above.
+// It was previously placed near the top, which meant sectionVisualMap was built from
+// headings captured BEFORE the opening section was rewritten. The map then carried a
+// heading that no longer existed in the body, and [slug].astro silently fell back to
+// its token-overlap heuristic - the same invisible mis-binding failure documented in
+// AGENTS.md. Any edit that can change a heading must run before this block.
+
+// --- 16. one section moved, so the monsoon arrives before the arithmetic ---
+// After the opening rewrite the reader meets the mechanism and the thesis in section 1,
+// but then hits two consecutive sections of index construction before the monsoon is
+// discussed on its own terms. The variability section is the natural second beat: it
+// sets the noise floor that every later claim has to clear, and it is the section that
+// actually puts rainfall in front of the reader. Moving it from fourth to second costs
+// nothing, because it depends on nothing before it.
+//
+// Reordering is done on the section blocks, and sectionVisualMap is rebuilt from the
+// heading order afterwards, so the chart binding follows automatically.
+{
+  const MOVE = "How wildly does India's monsoon rainfall swing from year to year, even without El Niño?";
+  const BEFORE = "Which past El Niño should India measure this one against?";
+  const parts = doc.article.bodyMarkdown.split("\n## ");
+  const from = parts.findIndex((p) => p.startsWith(MOVE));
+  const to = parts.findIndex((p) => p.startsWith(BEFORE));
+  if (from > -1 && to > -1 && from > to) {
+    const [block] = parts.splice(from, 1);
+    parts.splice(to, 0, block);
+    doc.article.bodyMarkdown = parts.join("\n## ");
+    applied += 1;
+  } else if (from === -1) {
+    failures.push("section-move: variability section not found");
+  }
+}
+
+
+// --- section-to-chart binding ----------------------------------------------
+// Two sections were inserted, so every binding after the definitions chart shifts.
+// Rebuilt from the section order rather than patched, per the CLAUDE.md gotcha.
+const CHART_ORDER = [
+  "five-official-numbers-for-the-same-ocean",
+  "a-century-and-a-quarter-of-monsoons-that-never-sit-still",
+  "change-the-index-and-the-record-holder-changes",
+  "the-measuring-stick-moved",
+  "how-strictly-you-define-an-el-nino-year-changes-the-answer",
+  "monsoons-that-began-where-this-one-begins",
+  "the-fork-not-the-forecast",
+  "this-el-nino-is-climbing-faster-than-the-ones-it-is-compared-to",
+  "when-noaa-expects-this-el-nino-to-cross-the-strong-line",
+  "a-bigger-el-nino-is-not-a-worse-monsoon",
+  "where-the-pacific-warmed-does-not-settle-it-either",
+  "does-the-indian-ocean-rescue-an-el-nino-monsoon",
+  "has-the-pacific-s-grip-on-the-monsoon-loosened",
+  "el-nino-hits-the-northwest-hardest",
+  "when-in-the-season-the-rain-goes-missing",
+  "where-el-nino-actually-cuts-the-rice-harvest",
+  "why-the-rainfall-map-is-not-the-yield-map",
+  "which-crops-el-nino-actually-hits",
+  "a-weak-monsoon-does-not-automatically-mean-dearer-food",
+  "after-a-drought-food-prices-do-not-move-as-one",
+  "same-el-nino-opposite-signs-india-has-two-monsoons",
+  "el-nino-peaks-after-the-kharif-harvest-is-decided",
+  "el-nino-does-not-just-take-the-water-it-brings-the-heat",
+  "a-shrinking-share-of-the-economy-but-still-two-in-five-jobs"
+];
+
+const headings = [...doc.article.bodyMarkdown.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
+// The closing methodology section is prose-only and takes no chart.
+const chartBearing = headings.filter((h) => !/^How to read these numbers$/i.test(h));
+if (chartBearing.length !== CHART_ORDER.length) {
+  failures.push(`sectionVisualMap: ${chartBearing.length} chart-bearing sections but ${CHART_ORDER.length} charts`);
+} else {
+  // The key MUST be `heading`. src/pages/articles/[slug].astro builds its explicit map
+  // with Object.fromEntries(entries.map(e => [e.heading, e.visualId])), so any other
+  // key name yields a map of `undefined` and the page silently falls back to a
+  // token-overlap heuristic that mis-binds most of the article. Nothing errors; the
+  // charts just quietly end up under the wrong prose.
+  doc.sectionVisualMap = headings.map((heading) => {
+    const index = chartBearing.indexOf(heading);
+    return { heading, visualId: index === -1 ? null : CHART_ORDER[index] };
+  });
+  applied += 1;
+}
+
+
+
 // --- structural assertions before writing ----------------------------------
 const body = doc.article.bodyMarkdown;
 const headingCount = (body.match(/^## /gm) || []).length;
@@ -940,6 +1018,46 @@ if (fcard) {
     process.exit(1);
   }
 }
+
+
+// --- 15. the fake-pivot, thinned out ---------------------------------------
+// VOICE.md bans "It is not X, it is Y" by name. A review found the shape closing 15 of
+// 25 sections. Individually each is a decent sentence; fifteen of them is a machine
+// writing to a formula. Three are kept, because in those three the antithesis IS the
+// claim: the thesis line in the escalation section, the close of the timing act, and
+// the national-accounts-versus-village-ledger line. The rest are rewritten, mostly by
+// replacing the shape with something concrete, which is VOICE.md's actual one rule.
+const PIVOTS = [
+  ["pivot-open",
+   "When the Pacific shouts, it does not speak in one voice, and the number you listen to shapes the story you tell.",
+   "Quote 2.2°C and you have a record on your hands. Quote 0.47°C and you have almost nothing. Both are NOAA, both are this month."],
+  ["pivot-discipline",
+   " The trend adjustment does not make the event smaller; it reframes which past season offers the most honest comparison. It disciplines the history we consult.",
+   " The trend adjustment does not make the event smaller. It changes which past summer you should be reading about."],
+  ["pivot-noise",
+   " Understanding what El Niño can and cannot tell India begins with appreciating this background noise, against which any signal must be measured.",
+   " Any El Niño signal has to be big enough to show up against that."],
+  ["pivot-race",
+   "This shows the race so far. It does not show the finish.",
+   "1997 and 2015 both kept climbing hard through the autumn, long past the point where 2026's line currently stops."],
+  ["pivot-roni-forecast",
+   "So the adjustment this piece spent three sections explaining is not a way of talking the event down. The forecaster uses it, and still expects something close to a record.",
+   "So the adjustment this piece spent three sections explaining is the one the forecaster uses, and they still expect something close to a record."],
+  ["pivot-script",
+   " No past season writes the script for this one.",
+   " Seven seasons is a thin basis for expecting any particular one of them to repeat."],
+      ["pivot-fear",
+   " So a weak monsoon shifts the odds toward higher food inflation, but it does not seal the outcome. The fear is legitimate, but not a rule.",
+   " So a weak monsoon shifts the odds toward higher food inflation without settling them. Two of the three worst price years here followed perfectly ordinary rainfall."],
+  ["pivot-chapatis",
+   "Headline food inflation often hides a quiet story in the chapatis and a screaming one in the dal.",
+   "Cereal prices moved 3.1% because the godowns were full. Nothing was holding up tur dal."],
+  ["pivot-fortnight",
+   "The season is a real signal. The critical fortnight is not something we can show.",
+   "Call the season a signal. The fortnight is beyond what this record can see."]
+];
+for (const [label, from, to] of PIVOTS) swap(label, from, to);
+
 
 // --- guard: every number on a chart card must come from THAT chart ---------
 // The article-wide numeric audit only asks whether a figure exists somewhere in some
