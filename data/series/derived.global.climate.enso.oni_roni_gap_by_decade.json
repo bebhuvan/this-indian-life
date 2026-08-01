@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.enso.oni_roni_gap_by_decade",
+  "title": "How far the raw index now runs above the trend-adjusted one",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.enso.oni_roni_gap_by_decade",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "unit": "°C gap between the two indices",
+  "geography": {
+    "type": "region",
+    "id": "nino34",
+    "name": "Nino 3.4 region"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "category",
+    "seasons_counted"
+  ],
+  "fetchedAt": "2026-08-01T07:19:43.189Z",
+  "rows": [
+    {
+      "label": "1950s",
+      "value": -0.116,
+      "category": "1950s average gap",
+      "seasons_counted": 120
+    },
+    {
+      "label": "1960s",
+      "value": -0.056,
+      "category": "1960s average gap",
+      "seasons_counted": 120
+    },
+    {
+      "label": "1970s",
+      "value": -0.179,
+      "category": "1970s average gap",
+      "seasons_counted": 120
+    },
+    {
+      "label": "1980s",
+      "value": -0.024,
+      "category": "1980s average gap",
+      "seasons_counted": 120
+    },
+    {
+      "label": "1990s",
+      "value": -0.127,
+      "category": "1990s average gap",
+      "seasons_counted": 120
+    },
+    {
+      "label": "2000s",
+      "value": 0.005,
+      "category": "2000s average gap",
+      "seasons_counted": 120
+    },
+    {
+      "label": "2010s",
+      "value": 0.233,
+      "category": "2010s average gap",
+      "seasons_counted": 120
+    },
+    {
+      "label": "2020s",
+      "value": 0.442,
+      "category": "2020s average gap",
+      "seasons_counted": 77
+    }
+  ],
+  "metadata": {
+    "note": "Mean ONI minus RONI per decade. It fluctuates unsignedly around zero before 2000 (-0.18 to +0.01, so NOT a monotone trend across the whole record), then rises sharply: +0.23 in the 2010s and +0.44 in the 2020s - the raw Nino 3.4 anomaly increasingly overstates the RELATIVE Pacific gradient as the whole tropical ocean warms. This is why comparing 2026's raw number with 1972's or 1997's is not apples-to-apples.",
+    "caveat": "The 2020s bucket is a partial decade.",
+    "readWith": "climate.enso.oni_vs_roni"
+  }
+}

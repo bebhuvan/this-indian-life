@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.enso.index_ladder_2026",
+  "title": "Five official numbers for the same ocean",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.enso.index_ladder_2026",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "unit": "°C warmer than normal",
+  "geography": {
+    "type": "region",
+    "id": "nino34",
+    "name": "Nino 3.4 region"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "group",
+    "category"
+  ],
+  "fetchedAt": "2026-08-01T07:19:43.174Z",
+  "rows": [
+    {
+      "label": "One week, unsmoothed (22 Jul)",
+      "value": 2.2,
+      "group": "Raw Nino 3.4",
+      "category": "One week, unsmoothed (22 Jul)"
+    },
+    {
+      "label": "One month, averaged (Jun 2026)",
+      "value": 1.55,
+      "group": "Raw Nino 3.4",
+      "category": "One month, averaged (Jun 2026)"
+    },
+    {
+      "label": "Same month, other dataset (Jun 2026)",
+      "value": 1.44,
+      "group": "Raw Nino 3.4",
+      "category": "Same month, other dataset (Jun 2026)"
+    },
+    {
+      "label": "Three months averaged, the official index (AMJ)",
+      "value": 0.98,
+      "group": "Official and adjusted",
+      "category": "Three months averaged, the official index (AMJ)"
+    },
+    {
+      "label": "Same three months, tropical warming removed (AMJ)",
+      "value": 0.47,
+      "group": "Official and adjusted",
+      "category": "Same three months, tropical warming removed (AMJ)"
+    }
+  ],
+  "metadata": {
+    "recipePerRow": [
+      {
+        "label": "One week, unsmoothed (22 Jul)",
+        "value": 2.2,
+        "group": "Raw Nino 3.4",
+        "product": "OISST",
+        "measuredOver": "week centred 2026-07-22",
+        "basePeriod": "fixed 1991-2020",
+        "smoothing": "none"
+      },
+      {
+        "label": "One month, averaged (Jun 2026)",
+        "value": 1.55,
+        "group": "Raw Nino 3.4",
+        "product": "OISST",
+        "measuredOver": "2026-06",
+        "basePeriod": "fixed 1991-2020",
+        "smoothing": "monthly mean"
+      },
+      {
+        "label": "Same month, other dataset (Jun 2026)",
+        "value": 1.44,
+        "group": "Raw Nino 3.4",
+        "product": "ERSSTv5",
+        "measuredOver": "2026-06",
+        "basePeriod": "fixed 1991-2020",
+        "smoothing": "monthly mean"
+      },
+      {
+        "label": "Three months averaged, the official index (AMJ)",
+        "value": 0.98,
+        "group": "Official and adjusted",
+        "product": "ERSSTv5",
+        "measuredOver": "2026-AMJ",
+        "basePeriod": "centred 30-year",
+        "smoothing": "3-month running mean"
+      },
+      {
+        "label": "Same three months, tropical warming removed (AMJ)",
+        "value": 0.47,
+        "group": "Official and adjusted",
+        "product": "ERSSTv5 minus tropical-mean SST",
+        "measuredOver": "2026-AMJ",
+        "basePeriod": "centred 30-year",
+        "smoothing": "3-month running mean"
+      }
+    ],
+    "spread": {
+      "min": 0.47,
+      "max": 2.2,
+      "range": 1.73
+    },
+    "whyTheyDiffer": {
+      "roniVsOni": "The substantive gap. RONI removes the tropical-mean SST trend, on the reasoning that convection responds to the Pacific's warmth relative to the rest of the tropics rather than to absolute local warmth.",
+      "ersstVsOisst": "A product difference of roughly 0.1 C for the same month. Honest noise, not a finding.",
+      "weeklyVsSeasonal": "Mostly TIMING AND SMOOTHING, not method: the weekly value is unsmoothed and later in the year, while the seasonal ONI is a three-month mean centred earlier, during which the Pacific genuinely warmed. Do not present this gap as an artefact of index choice."
+    },
+    "honestyRule": "Every row must be rendered with its product, period and base period visible. Presented bare, this table would itself be the misleading comparison the article criticises.",
+    "doNotCompareTo": "Hausfather's peak-monthly RONI figures, which apply the L'Heureux et al. (2024) variance-restoration scaling. Ours are unscaled."
+  }
+}

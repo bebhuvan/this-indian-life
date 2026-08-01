@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.strong_event_outcomes",
+  "title": "The strong El Nino monsoons, and what India got",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.strong_event_outcomes",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "unit": "% above or below normal rainfall",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "x",
+    "y",
+    "highlight",
+    "category",
+    "iod_phase"
+  ],
+  "fetchedAt": "2026-08-01T07:19:43.199Z",
+  "rows": [
+    {
+      "label": "1965",
+      "value": -18.6,
+      "x": 1.85,
+      "y": -18.6,
+      "highlight": 0,
+      "category": "1965: peak ONI 1.85, monsoon -18.6%",
+      "iod_phase": "Neutral"
+    },
+    {
+      "label": "1972",
+      "value": -22.3,
+      "x": 1.58,
+      "y": -22.3,
+      "highlight": 0,
+      "category": "1972: peak ONI 1.58, monsoon -22.3%",
+      "iod_phase": "Positive IOD"
+    },
+    {
+      "label": "1982",
+      "value": -11.4,
+      "x": 1.58,
+      "y": -11.4,
+      "highlight": 0,
+      "category": "1982: peak ONI 1.58, monsoon -11.4%",
+      "iod_phase": "Neutral"
+    },
+    {
+      "label": "1987",
+      "value": -14.3,
+      "x": 1.7,
+      "y": -14.3,
+      "highlight": 0,
+      "category": "1987: peak ONI 1.7, monsoon -14.3%",
+      "iod_phase": "Neutral"
+    },
+    {
+      "label": "1997",
+      "value": 0.2,
+      "x": 2.14,
+      "y": 0.2,
+      "highlight": 1,
+      "category": "1997: peak ONI 2.14, monsoon +0.2%",
+      "iod_phase": "Positive IOD"
+    },
+    {
+      "label": "2015",
+      "value": -12.7,
+      "x": 2.21,
+      "y": -12.7,
+      "highlight": 1,
+      "category": "2015: peak ONI 2.21, monsoon -12.7%",
+      "iod_phase": "Neutral"
+    },
+    {
+      "label": "2023",
+      "value": -5.3,
+      "x": 1.6,
+      "y": -5.3,
+      "highlight": 0,
+      "category": "2023: peak ONI 1.6, monsoon -5.3%",
+      "iod_phase": "Positive IOD"
+    }
+  ],
+  "metadata": {
+    "xLabel": "Peak Pacific warmth during the monsoon (°C above normal)",
+    "yLabel": "India's monsoon rainfall, % above or below normal",
+    "entityNoun": "monsoons",
+    "definition": "Monsoons in which the ONI reached +1.5 or above at some point during June-September. This is peak ONI DURING THE MONSOON, not the event's calendar peak - many events peak later, in OND-DJF.",
+    "summary": {
+      "events": 7,
+      "below_normal": 0,
+      "below_minus_5": 0,
+      "below_minus_10": 0,
+      "mean_departure_pct": null
+    },
+    "referenceClassLadder": {
+      "note": "The point of this artifact. The same record gives very different answers depending on how strictly an El Nino monsoon is defined - so the definition must be stated whenever a number is quoted.",
+      "sustained_el_nino_jjas": {
+        "events": 17,
+        "mean_departure_pct": -6.8
+      },
+      "strong_only": {
+        "events": 7,
+        "mean_departure_pct": null
+      }
+    },
+    "honestyRules": [
+      "n is 7. Say so every time this is quoted. Do not dress a 7-case base rate as a forecast.",
+      "1997 is the lone escape AND had the highest peak ONI of the seven - amplitude does not rank the damage.",
+      "1972 pairs a positive IOD with the worst monsoon in the record, so a positive dipole is a tilt, not a shield.",
+      "2026 has not yet cleared +1.5 on either index; it is where the forecast points, not where the season currently sits."
+    ]
+  }
+}

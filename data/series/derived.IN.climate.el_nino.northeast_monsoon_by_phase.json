@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.northeast_monsoon_by_phase",
+  "title": "El Nino and the northeast monsoon: the sign flips",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.northeast_monsoon_by_phase",
+  "sourceUrl": "https://imdpune.gov.in/cmpg/Product/Rainfall_Data.html",
+  "unit": "% above or below normal Oct-Dec rainfall",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "category",
+    "tamil_nadu_mean_departure_pct",
+    "years_counted",
+    "above_normal_share_pct"
+  ],
+  "fetchedAt": "2026-08-01T06:56:06.187Z",
+  "rows": [
+    {
+      "label": "El Nino",
+      "value": 3.7,
+      "category": "El Nino seasons, northeast-monsoon belt mean",
+      "tamil_nadu_mean_departure_pct": 5.1,
+      "years_counted": 27,
+      "above_normal_share_pct": 52
+    },
+    {
+      "label": "Neutral",
+      "value": 1.1,
+      "category": "Neutral seasons, northeast-monsoon belt mean",
+      "tamil_nadu_mean_departure_pct": -3,
+      "years_counted": 22,
+      "above_normal_share_pct": 45
+    },
+    {
+      "label": "La Nina",
+      "value": -2.1,
+      "category": "La Nina seasons, northeast-monsoon belt mean",
+      "tamil_nadu_mean_departure_pct": -0.7,
+      "years_counted": 27,
+      "above_normal_share_pct": 37
+    }
+  ],
+  "metadata": {
+    "method": "Oct+Nov+Dec rainfall per IMD subdivision, expressed as a percentage departure from that subdivision's own 1971-2020 OND normal. The region figure is the UNWEIGHTED MEAN of subdivision departures, not an area-weighted total, because subdivision areas are not in the dataset. It therefore answers \"how anomalous was the season across the belt\", not \"how much rain fell\".",
+    "subdivisionsUsed": [
+      "Tamil Nadu, Puducherry and Karaikal",
+      "Coastal Andhra Pradesh and Yanam",
+      "Rayalaseema",
+      "South Interior Karnataka",
+      "Kerala and Mahe"
+    ],
+    "subdivisionsMissing": "none",
+    "ondNormalsMm": {
+      "Andaman & Nicobar Islands": 661.6,
+      "Arunachal Pradesh": 225.1,
+      "Assam and Meghalaya": 186,
+      "Nagaland, Manipur, Mizoram and Tripura": 210.3,
+      "Sub Himalayan West Bengal and Sikkim": 168,
+      "Gangetic West Bengal": 151.9,
+      "Odisha": 137.8,
+      "Jharkhand": 92.9,
+      "Bihar": 69.6,
+      "East Uttar Pradesh": 43.9,
+      "West Uttar Pradesh": 29.8,
+      "Uttarakhand": 52.1,
+      "Haryana, Chandigarh, Delhi": 19.4,
+      "Punjab": 24.1,
+      "Himachal Pradesh": 79.6,
+      "Jammu and Kashmir": 123.1,
+      "West Rajasthan": 11,
+      "East Rajasthan": 22.9,
+      "West Madhya Pradesh": 43.8,
+      "East Madhya Pradesh": 52.9,
+      "Gujarat Region": 30.4,
+      "Saurashtra and Kutch": 27.3,
+      "Konkan and Goa": 140.8,
+      "Madhya Maharashtra": 102.6,
+      "Marathwada": 97.2,
+      "Vidarbha": 75.5,
+      "Chhattisgarh": 76.1,
+      "Coastal Andhra Pradesh and Yanam": 322.1,
+      "Telangana": 119.4,
+      "Rayalaseema": 230.1,
+      "Tamil Nadu, Puducherry and Karaikal": 438.8,
+      "Coastal Karnataka": 258.5,
+      "North Interior Karnataka": 131.2,
+      "South Interior Karnataka": 194.2,
+      "Kerala and Mahe": 477.8,
+      "Lakshadweep": 336
+    },
+    "ensoSeasonUsed": "OND ONI - the season contemporaneous with the northeast monsoon itself, not the JJAS value used for the southwest monsoon.",
+    "sourceNote": "IMD subdivisional monthly rainfall, 1901-2025, already ingested for this repo.",
+    "headline": "El Nino OND seasons average +3.7% across the northeast-monsoon belt and -2.1% in La Nina seasons - the OPPOSITE ordering to the southwest monsoon. BUT SEE significanceTest: that ordering is NOT distinguishable from noise in this record.",
+    "significanceTest": {
+      "meanA": 3.7,
+      "meanB": -2.1,
+      "differencePp": 5.8,
+      "sdA": 24.4,
+      "sdB": 32.5,
+      "nA": 27,
+      "nB": 27,
+      "t": 0.74,
+      "df": 48,
+      "pApprox": 0.46,
+      "verdict": "NOT SIGNIFICANT. The means order as the literature predicts, but the spread within each phase dwarfs the gap between them, so this record cannot confirm the effect.",
+      "howToWriteIt": "Report the direction as consistent with published work on the northeast monsoon, and state plainly that our own data cannot separate it from noise. Do NOT present the phase means as a finding. The contrast with the southwest monsoon, where the same test is overwhelming, is the honest way to show what a real signal looks like.",
+      "contrastSouthwestMonsoon": "El Nino -6.8% against La Nina +6.8%, a 13.6pp gap, t about -4.1, p below 0.0001."
+    },
+    "whyItMatters": "The 2026-27 event is forecast to peak in OND, after the kharif season closes. For the south peninsula that is the season El Nino tends to help, so the article must not present El Nino as uniformly dry for India.",
+    "honestyRules": [
+      "THE HEADLINE CLAIM IS NOT STATISTICALLY SUPPORTED BY THIS RECORD. See significanceTest. The direction matches published work, but with about 27 seasons per phase and standard deviations of 24 to 32 percentage points, a difference of roughly 6 points cannot be separated from noise.",
+      "This is a tendency across decades, not a forecast for any single season. The spread within each phase is wide.",
+      "More rain is not automatically good news: the northeast monsoon delivers much of its total in intense spells, so a wet El Nino OND can mean flooding in Chennai rather than a comfortable harvest.",
+      "Unweighted mean of subdivision departures - see method."
+    ]
+  }
+}

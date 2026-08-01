@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.escalation_odds",
+  "title": "The fork, not the forecast",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.escalation_odds",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "unit": "average % above or below normal June-September rainfall",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "group",
+    "value",
+    "years_counted",
+    "below_normal"
+  ],
+  "fetchedAt": "2026-08-01T08:05:36.661Z",
+  "rows": [
+    {
+      "label": "Grew past +1.5 during the monsoon (5 of 13)",
+      "group": "What happened next",
+      "value": -12.1,
+      "years_counted": 5,
+      "below_normal": 4
+    },
+    {
+      "label": "Stayed below +1.5 (8 of 13)",
+      "group": "What happened next",
+      "value": 6.8,
+      "years_counted": 8,
+      "below_normal": 2
+    },
+    {
+      "label": "Every monsoon since 1950, for comparison",
+      "group": "Background",
+      "value": 1.4,
+      "years_counted": 76,
+      "below_normal": 28
+    }
+  ],
+  "metadata": {
+    "method": "Every year from 1950 whose April-June ONI fell between +0.6 and +1.4, the band around 2026's AMJ reading of 0.98. Each is then split by whether the ONI reached +1.5 in any three-month window overlapping June-September (MJJ, JJA, JAS, ASO), and paired with IMD's all-India June-September rainfall departure for that year.",
+    "currentReading": {
+      "year": 2026,
+      "amjOni": 0.98,
+      "amjOniClass": "weak, per CPC's own strength labelling on this artifact",
+      "amjRoni": 0.47,
+      "amjRoniClass": "neutral",
+      "note": "This is the latest observation on disk, not a forecast. The article must not assert what the event will become."
+    },
+    "peakDefinition": "Peak ONI reached during the monsoon window only, NOT the event's calendar peak. Most El Nino events peak in OND or NDJ, so the JJAS peak is the lower and more relevant number for the kharif season. Consistent with climate.el_nino.strong_event_outcomes.",
+    "bandSensitivity": [
+      {
+        "band": "0.5 to 1.5",
+        "n": 14,
+        "escalated": 6,
+        "escalationRatePct": 43,
+        "escalatedMeanDeparturePct": -11,
+        "stayedMeanDeparturePct": 6.8
+      },
+      {
+        "band": "0.6 to 1.4",
+        "n": 13,
+        "escalated": 5,
+        "escalationRatePct": 38,
+        "escalatedMeanDeparturePct": -12.1,
+        "stayedMeanDeparturePct": 6.8
+      },
+      {
+        "band": "0.7 to 1.3",
+        "n": 9,
+        "escalated": 3,
+        "escalationRatePct": 33,
+        "escalatedMeanDeparturePct": -8.9,
+        "stayedMeanDeparturePct": 6.5
+      },
+      {
+        "band": "0.8 to 1.2",
+        "n": 5,
+        "escalated": 2,
+        "escalationRatePct": 40,
+        "escalatedMeanDeparturePct": -13.5,
+        "stayedMeanDeparturePct": 4
+      }
+    ],
+    "escapedFromBelow": [
+      {
+        "year": 1965,
+        "amj": 0.46,
+        "peak": 1.85,
+        "departure": -18.6
+      },
+      {
+        "year": 2023,
+        "amj": 0.57,
+        "peak": 1.6,
+        "departure": -5.3
+      }
+    ],
+    "sourceNote": "NOAA CPC ONI (ERSSTv5, three-month running means) and IMD Pune all-India June-September rainfall departures, both already ingested for this repo.",
+    "generatedFor": "q.climate.el_nino_2026",
+    "note": "The same cohort collapsed to branch means, with every monsoon since 1950 as the background rate. The point of the third bar is that the branch which did not escalate was not merely average, it was wetter than average.",
+    "honestyRules": [
+      "SMALL SAMPLE. n=13 in total, split 5 against 8. Read as a rough guide to the odds and never as a forecast.",
+      "PARTLY DEFINITIONAL. A year that escalates lands in the strong-event set by construction, so the low mean of that branch is not an independent discovery. The non-circular content is (a) the escalation RATE and (b) the outcome of the branch that did NOT escalate, which is where the genuinely new information sits.",
+      "NOT EXCLUSIVE. 1965 and 2023 reached strong intensity during the monsoon from an AMJ reading BELOW this band. A low reading today is not safety either.",
+      "DO NOT WRITE THIS AS A FORECAST FOR 2026. The claim is about what the record does and does not settle at this point in the season, not about what the Pacific will do next.",
+      "The article must not restore any sentence of the form 'forecasters expect 2026 to...' unless a forecast artifact is actually ingested and cited."
+    ]
+  }
+}

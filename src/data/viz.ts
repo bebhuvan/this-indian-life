@@ -187,6 +187,7 @@ export type SparkGridVisual = {
   source: VisualSource;
   min: number;
   max: number;
+  latestPeriodLabel?: boolean;
   cells: Array<{ label: string; points: Array<{ date: string; value: number }>; latest: number | null; change?: number }>;
 };
 export type StartingGridVisual = {
@@ -1208,6 +1209,47 @@ function scatterXYFromTable(indicator: string, title: string, subtitle: string, 
     const pow = Math.pow(10, Math.floor(Math.log10(v)));
     return Math.ceil(v / pow) * pow;
   };
+  // Axis floor. This builder used to hardcode xMin/yMin to 0, which silently dropped every
+  // negative point off the canvas: a scatter of rainfall departures (-22.3% to +0.2%)
+  // rendered a 0-to-1 y-axis with a single visible dot. Keep the zero baseline when the
+  // data is entirely positive, since that is right for share/rate scatters, and only
+  // extend below zero when the data actually goes there.
+  const niceMin = (v: number) => {
+    if (v >= 0) return 0;
+    const pow = Math.pow(10, Math.floor(Math.log10(Math.abs(v))));
+    return -Math.ceil(Math.abs(v) / pow) * pow;
+  };
+  // Zero is the right floor for most positive scatters, but not when the data sits far
+  // from it. The strong-El-Nino chart spans 1.58 to 2.21 on x by construction (every
+  // point is a >=1.5 event), so a 0-to-3 axis squeezed all seven points into the left
+  // third and made a cloud that is supposed to show "no relationship" read as a
+  // vertical line. When the span is smaller than the distance from zero, the zero
+  // baseline costs more resolution than it adds context.
+  //
+  // niceMax alone is also too coarse between 1 and 10, where it rounds to the next
+  // whole number: a max of 2.21 became 3.0 and 3.16 became 4.0, wasting a third of the
+  // canvas even after the floor was fixed. So bounds are chosen together, with a step
+  // picked from the 1/2/2.5/5 ladder scaled to the range, targeting 5 to 7 intervals.
+  const niceStep = (rough: number) => {
+    if (!(rough > 0)) return 1;
+    const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+    const mult = [1, 2, 2.5, 5, 10].find((m) => rough <= m * pow) ?? 10;
+    return mult * pow;
+  };
+  const axisBounds = (min: number, max: number) => {
+    const span = max - min;
+    // Anchor at zero for all-positive data that starts near it (share and rate
+    // scatters), and for anything crossing zero use the negative-aware floor.
+    const anchorZero = min >= 0 && (span <= 0 || min <= span);
+    if (span <= 0) return { lo: anchorZero ? 0 : niceMin(min), hi: niceMax(max) || 1 };
+    const lo0 = anchorZero ? 0 : min < 0 ? niceMin(min) : min - span * 0.1;
+    const hi0 = max + span * 0.1;
+    const step = niceStep((hi0 - lo0) / 6);
+    const lo = anchorZero || min < 0 ? lo0 : Math.floor(lo0 / step) * step;
+    const hi = Math.ceil(hi0 / step) * step;
+    // Guard against float dust like 2.4000000000000004 reaching the tick labels.
+    return { lo: Number(lo.toFixed(6)), hi: Number(hi.toFixed(6)) };
+  };
   const meta = (artifact.metadata || {}) as Record<string, unknown>;
   return {
     kind: "scatterXY",
@@ -1217,10 +1259,10 @@ function scatterXYFromTable(indicator: string, title: string, subtitle: string, 
     source: sourceFor(artifact),
     xLabel: typeof meta.xLabel === "string" ? meta.xLabel : "x",
     yLabel: typeof meta.yLabel === "string" ? meta.yLabel : "y",
-    xMin: 0,
-    xMax: niceMax(Math.max(...xs)),
-    yMin: 0,
-    yMax: Math.max(1, Math.ceil(Math.max(...ys))),
+    xMin: axisBounds(Math.min(...xs), Math.max(...xs)).lo,
+    xMax: axisBounds(Math.min(...xs), Math.max(...xs)).hi,
+    yMin: niceMin(Math.min(...ys)),
+    yMax: Math.max(...ys) > 0 ? niceMax(Math.max(...ys)) : 0,
     entityNoun: typeof meta.entityNoun === "string" ? meta.entityNoun : "states",
     ...(refX ? { refX } : {}),
     ...(refY ? { refY } : {}),
@@ -2109,6 +2151,7 @@ type PlanEntry = {
   rows?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   columns?: Array<{ key: string; label: string }>;
   fromYear?: number;
+  latestPeriodLabel?: boolean;
   xTicks?: number[];
   categoricalX?: boolean;
   xLabels?: string[];
@@ -2312,7 +2355,7 @@ function choroplethVisual(artifact: Artifact, title: string, subtitle: string, u
   };
 }
 
-function sparkGridVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, fromYear?: number): SparkGridVisual | null {
+function sparkGridVisual(series: Array<{ indicator: string; label: string }>, title: string, subtitle: string, unit: string, fromYear?: number, latestPeriodLabel = false): SparkGridVisual | null {
   const clip = (points: LineVisual["lines"][number]["points"]) =>
     fromYear ? points.filter((p) => Number(String(p.date).slice(0, 4)) >= fromYear) : points;
   // Per-cell change uses decade averages (first 10 vs last 10 points), matching the
@@ -2345,6 +2388,7 @@ function sparkGridVisual(series: Array<{ indicator: string; label: string }>, ti
     // 27 deg C base is visible instead of a flat line near a shared 0-based ceiling.
     min: Math.min(...all),
     max: Math.max(...all, 1),
+    latestPeriodLabel,
     cells
   };
 }
@@ -2563,7 +2607,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "sparkGrid") {
-    const visual = sparkGridVisual(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear);
+    const visual = sparkGridVisual(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.latestPeriodLabel);
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "linePanels") {
@@ -2848,6 +2892,37 @@ export function bindSectionVisuals(
       used.add(nextUnused);
     }
   }
+
+  const leftover = visuals.filter((_, index) => !used.has(index));
+  return { bound, leftover };
+}
+
+/**
+ * Bind one or more explicitly named visuals to each story section. This is the
+ * opt-in flagship path for articles whose argument groups related charts under a
+ * single reader question. The older one-chart-per-section binder above remains
+ * unchanged for every existing article.
+ */
+export function bindSectionVisualGroups(
+  sections: BoundSection[],
+  visuals: VisualSpec[],
+  explicitMap: Record<string, string[]>
+) {
+  const used = new Set<number>();
+  const bound: VisualSpec[][] = sections.map((section) => {
+    const ids = explicitMap[section.heading] || [];
+    const group: VisualSpec[] = [];
+    for (const id of ids) {
+      const pick = visuals.findIndex(
+        (visual, index) => !used.has(index) && visualMatchesId(visual, id)
+      );
+      if (pick >= 0) {
+        used.add(pick);
+        group.push(visuals[pick]);
+      }
+    }
+    return group;
+  });
 
   const leftover = visuals.filter((_, index) => !used.has(index));
   return { bound, leftover };

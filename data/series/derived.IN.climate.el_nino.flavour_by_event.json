@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.flavour_by_event",
+  "title": "Where the Pacific warmed, and whether it predicted India's monsoon",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.flavour_by_event",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "unit": "% above or below normal rainfall",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "x",
+    "y",
+    "highlight",
+    "category",
+    "flavour",
+    "fits_kumar_hypothesis"
+  ],
+  "fetchedAt": "2026-08-01T07:19:43.201Z",
+  "rows": [
+    {
+      "label": "1965",
+      "value": 0.97,
+      "x": 0.97,
+      "y": -18.6,
+      "highlight": 0,
+      "category": "1965: leaned eastern-Pacific by 0.97, monsoon -18.6%",
+      "flavour": "eastern Pacific",
+      "fits_kumar_hypothesis": false
+    },
+    {
+      "label": "1972",
+      "value": 1.78,
+      "x": 1.78,
+      "y": -22.3,
+      "highlight": 0,
+      "category": "1972: leaned eastern-Pacific by 1.78, monsoon -22.3%",
+      "flavour": "eastern Pacific",
+      "fits_kumar_hypothesis": false
+    },
+    {
+      "label": "1982",
+      "value": 0.43,
+      "x": 0.43,
+      "y": -11.4,
+      "highlight": 0,
+      "category": "1982: leaned eastern-Pacific by 0.43, monsoon -11.4%",
+      "flavour": "eastern Pacific",
+      "fits_kumar_hypothesis": false
+    },
+    {
+      "label": "1987",
+      "value": 0.42,
+      "x": 0.42,
+      "y": -14.3,
+      "highlight": 0,
+      "category": "1987: leaned eastern-Pacific by 0.42, monsoon -14.3%",
+      "flavour": "eastern Pacific",
+      "fits_kumar_hypothesis": false
+    },
+    {
+      "label": "1997",
+      "value": 3.16,
+      "x": 3.16,
+      "y": 0.2,
+      "highlight": 1,
+      "category": "1997: leaned eastern-Pacific by 3.16, monsoon +0.2%",
+      "flavour": "eastern Pacific",
+      "fits_kumar_hypothesis": true
+    },
+    {
+      "label": "2015",
+      "value": 1.2,
+      "x": 1.2,
+      "y": -12.7,
+      "highlight": 0,
+      "category": "2015: leaned eastern-Pacific by 1.2, monsoon -12.7%",
+      "flavour": "eastern Pacific",
+      "fits_kumar_hypothesis": false
+    },
+    {
+      "label": "2023",
+      "value": 1.96,
+      "x": 1.96,
+      "y": -5.3,
+      "highlight": 0,
+      "category": "2023: leaned eastern-Pacific by 1.96, monsoon -5.3%",
+      "flavour": "eastern Pacific",
+      "fits_kumar_hypothesis": true
+    }
+  ],
+  "metadata": {
+    "xLabel": "How far the warmth leaned to the eastern Pacific (Nino 1+2 minus Nino 4, °C)",
+    "yLabel": "India's monsoon rainfall, % above or below normal",
+    "entityNoun": "monsoons",
+    "hypothesis": "Kumar et al., Science, 2006 (doi:10.1126/science.1131152): El Nino events with the warmest anomalies in the CENTRAL equatorial Pacific focus drought-producing subsidence over India more effectively than eastern-Pacific events.",
+    "proxy": "JJAS-mean Nino 1+2 anomaly minus JJAS-mean Nino 4 anomaly. Positive means eastern-Pacific-leaning, negative central-Pacific-leaning. This is a CRUDE proxy - Kumar et al. use a composite/regression decomposition.",
+    "result": {
+      "testable_events": 7,
+      "consistent": 2,
+      "verdict": "CANNOT BE TESTED on this subset, and does not explain it. Every one of the seven strong-event monsoons is eastern-Pacific-leaning on this proxy - there is not a single central-Pacific case among them (2002, the clearest central-Pacific event, peaked at only +1.01 during JJAS and so falls outside the strong subset). So flavour cannot account for variation WITHIN the strong events: 5 of the 7 eastern-Pacific events still produced monsoons worse than -10%, while 1997 and 2023 did not. The hypothesis is not refuted; it simply has no discriminating power here."
+    },
+    "howToUseThis": "Report it as an honest negative result, and be precise about WHY it is negative: the strong-event subset contains no central-Pacific events, so there is nothing for the flavour contrast to discriminate between. Explain flavour as a mechanism the literature supports, show that it has no purchase on these seven cases, and state plainly that 2026 being eastern-Pacific-leaning therefore CANNOT be used to reassure anyone. This is not a refutation of Kumar et al. - the proxy is crude, n is small, and their composite decomposition is a different instrument.",
+    "current2026Jjas": {
+      "n12": 2.82,
+      "n4": 1.22,
+      "diff": 1.6,
+      "months": 1,
+      "note": "Partial season - only the months available so far. 2026 leans strongly eastern-Pacific, like 1997 and 2023, but per the result above that licenses no monsoon inference."
+    }
+  }
+}

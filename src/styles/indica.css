@@ -338,6 +338,11 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .evidence-aside>div .lbl{display:block;margin-bottom:14px}
 .evidence-aside ul{list-style:none;display:grid;gap:12px}
 .evidence-aside li{font-size:.82rem;line-height:1.55;color:var(--mid);border-top:1px solid var(--ghost);padding-top:12px}
+/* Source notes and further reading are { label, url } pairs, so they render as links.
+   Without this they inherit the list colour (a{color:inherit}) and carry only a browser
+   default underline, which reads as plain text in this design. Matches .es-audit-note a. */
+.evidence-aside a{color:var(--c);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--c) 35%,transparent);transition:border-color .2s}
+.evidence-aside a:hover{border-bottom-color:var(--c)}
 @media(max-width:560px){.es-meta{font-size:.68rem}}
 
 /* ---------- ROADMAP (about) ---------- */
@@ -587,9 +592,12 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .viz-main{grid-column:1/-1}
 .viz-wide{grid-column:1/-1}
 .viz-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
-.viz-head h2{font-size:clamp(1.62rem,2.35vw,2.35rem);font-weight:400;line-height:1.08}
+.viz-head>div{min-width:0;flex:1 1 auto}
+.viz-head h2{font-size:clamp(1.62rem,2.35vw,2.35rem);font-weight:400;line-height:1.08;max-width:none;overflow:visible;text-overflow:clip;white-space:normal;overflow-wrap:anywhere}
 .viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font-size:1.52rem}
 .viz-head p{font-size:.8rem;color:var(--mid);margin-top:6px}
+.theme-income-classification .viz-head p{font-size:.88rem;line-height:1.48;max-width:none}
+.theme-income-classification .viz-head>span{display:none}
 /* Rupee article: each chart subtitle is a plain-English subheading doing real
    explanatory work, so give it more presence than the default faint caption. */
 .theme-rupee .viz-head p{font-size:.92rem;color:#333;line-height:1.5;margin-top:9px;max-width:66ch}
@@ -643,6 +651,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .viz-head h2{font-size:1.48rem;line-height:1.08}
   .viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font-size:1.48rem}
   .viz-head p{font-size:.78rem;line-height:1.45}
+  .theme-income-classification .viz-head p{font-size:.82rem;line-height:1.48;max-width:none}
   .theme-rupee .viz-head p{font-size:.86rem;line-height:1.48;max-width:none}
   /* The unit caption recedes on phones: smaller, lighter, capped to two lines so a
      long unit string can't crowd the title or stack into a four-line block. */
@@ -675,6 +684,24 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
   .viz-m .end-v{font-size:15px}
   .viz-m .end-mini-v{font-size:12.5px}
   .viz-m .chart-watermark{font-size:7.2px;letter-spacing:.05em;opacity:.11}
+}
+
+/* The income-classification flagship groups several related charts under one
+   reader question. Keep complete titles visible and keep each card intact when
+   the article is printed or saved as PDF. */
+@media print{
+  .theme-income-classification .viz-card{
+    break-inside:avoid-page;
+    page-break-inside:avoid;
+  }
+  .theme-income-classification .viz-head>div{min-width:0}
+  .theme-income-classification .viz-head h2{
+    max-width:none;
+    overflow:visible;
+    text-overflow:clip;
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
 }
 .lazy-svg-frame{display:block;background:linear-gradient(90deg,#f6f1ed,#efe7df,#f6f1ed);background-size:220% 100%;animation:lazy-svg-pulse 1.4s ease-in-out infinite;border-radius:6px}
 @keyframes lazy-svg-pulse{0%{background-position:100% 0}100%{background-position:-100% 0}}
@@ -719,6 +746,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .spark-leg{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .spark-leg i{width:13px;height:3px;border-radius:2px;display:inline-block}
 .spark-head .spark-nums{font-size:.72rem;color:var(--dim);font-weight:500;white-space:normal;text-align:right}
+.spark-period{font-style:normal;font-size:.68rem;color:var(--dim);font-weight:600;white-space:nowrap}
 @media(max-width:560px){.spark-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px 20px}.spark-svg{height:54px}.spark-d{font-size:.66rem}}
 /* Diverging change bars (warming amount from a true zero) */
 .ranked-diverge{display:grid;gap:9px;margin:12px 0 4px}
@@ -834,13 +862,24 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
    it fills the space at a comfortable per-column measure instead of clamping to
    the left. Collapses to a single column on phones (see the 700px block below). */
 .cn-detail{font-family:var(--serif-text);font-size:var(--t-prose);line-height:var(--lh-prose);color:#222;margin:0 0 22px;columns:2;column-gap:56px}
-/* "How to read / watch out" guidance set apart in a soft inset panel with
-   dot-kicker labels in the domain ink. */
+/* "Why this chart / how to read / watch out" guidance set apart in a soft inset
+   panel with dot-kicker labels in the domain ink. */
 .cn-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;margin-top:6px;padding:20px 22px;background:var(--paper);border-radius:14px}
 .cn-meta p{margin:0;font-family:var(--sans);font-size:.9rem;line-height:1.58;color:#333}
 .cn-meta b{display:flex;align-items:center;gap:.5em;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--c-ink);font-weight:600;margin-bottom:7px}
 .cn-meta b::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c);flex:0 0 auto}
-@media(max-width:700px){.cn-meta{grid-template-columns:1fr;gap:16px;padding:16px}.cn-detail{columns:1}}
+/* "Why this chart" answers a question that precedes the other two, so it spans the
+   full width above them rather than competing for a column. */
+.cn-meta .cn-why{grid-column:1/-1;border-bottom:1px solid var(--ghost);padding-bottom:16px}
+/* The mobile note is written for readers on a narrow screen and is noise on a wide
+   one, so it is the one card field that is genuinely viewport-conditional. */
+.cn-meta .cn-mobile{display:none}
+@media(max-width:700px){
+  .cn-meta{grid-template-columns:1fr;gap:16px;padding:16px}
+  .cn-detail{columns:1}
+  .cn-meta .cn-why{padding-bottom:0;border-bottom:0}
+  .cn-meta .cn-mobile{display:block}
+}
 .change-grid{display:grid;gap:14px}
 .change-row{display:grid;grid-template-columns:230px minmax(0,1fr) 300px;gap:24px;align-items:center;border-top:1px solid var(--ghost);padding-top:18px}
 .change-row:first-child{border-top:0;padding-top:0}
@@ -870,11 +909,15 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
    phone variant (.viz-m) uses a near-square box, so its labels need their own,
    larger user-unit sizes to stay legible. */
 .point-label{font-family:var(--sans);font-size:16px;font-weight:500;fill:var(--ink)}
+/* Small scatters label every point. The unhighlighted ones are set back so the
+   highlighted cases still read first, without leaving the rest anonymous. */
+.point-label-muted{font-size:13px;font-weight:400;fill:var(--muted,#6b6675)}
 .axis-title{font-family:var(--sans);font-size:17px;fill:var(--mid)}
 .scatter-callout{font-family:var(--sans);font-size:16px;font-weight:600;fill:rgba(211,80,58,.92)}
 .scatter-zone{font-family:var(--sans);font-size:16px;font-weight:700;fill:rgba(211,80,58,.88);paint-order:stroke;stroke:#fff;stroke-width:3.5px;stroke-linejoin:round}
 .scatter-zone-muted{font-weight:500;fill:rgba(63,131,120,.72)}
 .viz-m .point-label{font-size:14px}
+.viz-m .point-label-muted{font-size:11px}
 .viz-m .axis-title{font-size:14px}
   .viz-m .scatter-callout{font-size:13px}
   .viz-m .scatter-zone{font-size:12px}

@@ -1,9 +1,20 @@
 import { mkdir, writeFile } from "node:fs/promises";
+import { readFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { createDeepSeekJsonCompletion } from "./adapters/deepseek.mjs";
 import { buildEvidencePacket } from "./core/evidence.mjs";
 import { listJsonFiles, readJson, stableJson } from "./core/artifacts.mjs";
 import { lintExplanation, findingsToInstruction } from "./core/prose-lint.mjs";
+import { hardIssuesFromTexts, deepStripEmDash, derivedReport } from "./core/prose-guards.mjs";
+import { checkRichFigures, extractFigureLines } from "./core/rich-figures.mjs";
+import { checkNumberConsistency } from "./core/number-consistency.mjs";
+import { checkNasIdentities } from "./core/accounting-identities.mjs";
 import { v1Questions } from "./registry/v1-indicators.mjs";
+
+// The main article path runs on deepseek-v4-pro (the stronger model). We pass it
+// explicitly rather than changing the adapter default, so other callers that rely on
+// the cheaper default (and the academy, which sets its own) are unaffected.
+const MODEL = process.env.INDICA_EXPLANATION_MODEL || "deepseek-v4-pro";
 
 function parseArgs(argv) {
   const args = { dryRun: false, limit: Infinity, questions: null, singlePass: false };
@@ -838,6 +849,45 @@ function articleTemplateFor(evidence) {
       ].join("\n\n")
     };
   }
+  if (evidence.questionId === "q.climate.el_nino_2026") {
+    const planned2026 = Array.isArray(evidence.plannedCharts) ? evidence.plannedCharts : [];
+    return {
+      purpose: "Answer what the 2026 El Nino can and cannot tell India, in the voice of someone who knows monsoon science and Indian agricultural economics cold, and who is more interested in disciplining a number than in scaring anyone with it. This is a canonical piece written from inside a live event, so it must stay useful in December and in March 2027, not just this week. The through-line, repeated until unmissable, is that the Pacific is shouting and that tells us the odds have moved, not what will happen, and that by the time it shouts loudest the monsoon will already be over. Walk the argument in deliberate order: (1) open on the measurement problem, because five official NOAA numbers describe this one ocean and they disagree wildly, so any single figure is a choice; (2) place the event among the El Ninos on record, and show that the measuring stick itself has drifted as the tropics warm; (3) establish the right reference class, which for 2026 is the small set of strong events and is far harsher than the all-El-Nino average most coverage quotes; (4) then dismantle the easy explanations, honestly reporting that the where-the-Pacific-warmed hypothesis does not discriminate on these cases and that the Indian Ocean is a tilt rather than a shield; (5) break the national average apart by region, by month and by crop, because India does not eat an average and irrigation decides who is actually hurt; (6) trace rain to prices, and be clear that the link is real but loose; (7) then make the argument nobody else makes, that this event peaks after the kharif season closes and that for southern India the sign of the effect reverses, which moves the real risk to reservoirs, the winter crop and prices in 2027; and (8) close on the human stake. Carry the argument forward section by section and never treat the charts as a list. Never narrate the article itself ('this chart shows', 'as we saw above'); write about India, the ocean and the monsoon, and let each chart sit beside the prose that discusses it. Never use em-dashes.",
+      requiredSections: planned2026.length
+        ? [
+            ...planned2026.map((chart) => `A reader-question H2 heading whose section explains and is paired with the chart "${chart.title}" (${chart.beat})`),
+            "A short closing H2, 'How to read these numbers', that names the sources (NOAA CPC for the ENSO indices, IMD for Indian rainfall, ICRISAT district yields, RBI wholesale prices, World Bank and RBI national accounts) and states the method plainly: each index carries its own product, averaging period and baseline and they are not interchangeable; the strong-event base rate rests on seven cases; correlations are descriptive and not causal; and 2026 is a live, unfinished season. This is the methodology disclosure and must be the last section."
+          ]
+        : [
+            "How big is this El Nino, really?",
+            "Which El Ninos should 2026 be compared with?",
+            "Why does the same El Nino sometimes spare India?",
+            "Who actually gets hurt when the monsoon is weak?",
+            "Does a weak monsoon mean dearer food?",
+            "What happens after the monsoon ends?",
+            "How to read these numbers"
+          ],
+      requiredConcepts: [
+        "El Nino in plain English, defined before any statistic: a recurring warming of the central and eastern equatorial Pacific. It matters to India because it shifts the tropical rising air eastward, weakening the large-scale ascent that pulls the June-September monsoon inland, so the rains tend to be lighter. La Nina is the cool mirror image and tends to favour a strong monsoon",
+        "The Oceanic Nino Index (ONI) in plain English: the temperature anomaly of a patch of the equatorial Pacific, averaged over three months. Above +0.5C is El Nino, below -0.5C is La Nina",
+        "THE CENTRAL DISCIPLINE OF THIS ARTICLE. Five official NOAA numbers currently describe this same ocean and they span roughly +0.47C to +2.20C. They differ for three separate reasons which must never be blurred together: the PRODUCT (ERSSTv5 against OISST, worth about 0.1C for the same month, honest noise), the PERIOD AND SMOOTHING (an unsmoothed weekly value late in July against a three-month seasonal mean centred earlier, during which the Pacific genuinely warmed, so much of that gap is timing and not method), and the BASELINE (a fixed 1991-2020 climatology against NOAA's shifting centred 30-year one, and separately the trend adjustment in RONI). Whenever a number appears, its product, period and baseline must appear with it. Presented bare, that spread would itself be the misleading comparison this article criticises",
+        "RONI, the relative index, and the correction that matters most. RONI subtracts the tropical-mean sea-surface-temperature trend, on the reasoning that convection responds to the Pacific's warmth relative to the rest of the tropics rather than to absolute local warmth. As the whole tropical ocean warms, the raw index drifts upward for the same relative gradient: the gap between the two indices sat near zero before 2000 and has widened to roughly +0.23C in the 2010s and +0.44C in the 2020s. What RONI changes is WHICH PAST EVENT IS THE BENCHMARK. On the raw index 2014-16 is the strongest event on record; on RONI, 1982-83 is. CRITICAL HONESTY RULE: RONI does NOT mean this event is smaller than it looks. Forecasts in RONI terms still project a record event. Never let the trend adjustment be written up as deflation or reassurance, and never compare our seasonal, unscaled RONI figures with the peak-monthly, variance-restoration-scaled figures published elsewhere",
+        "The reference-class problem, which is the article's core analytical move. The same IMD record gives three very different answers depending on how strictly an El Nino monsoon is defined: about -3.2% averaged over 26 monsoons touched by El Nino at any point, about -6.8% over the 17 where the Pacific stayed in El Nino through the season, and about -12.1% over the 7 where the ONI reached +1.5 or above during June-September. If the 2026 forecast holds, 2026 belongs to that third group, not the first. Every quoted average must carry its definition and its number of cases",
+        "The strong-event base rate, quoted precisely and never inflated: of those seven monsoons, six finished below normal and five finished more than 10% below, averaging about -12%. Three caveats travel with it every single time it is used. Seven cases is a small base and must never be dressed up as a forecast. The threshold is peak ONI DURING the monsoon, not the event's calendar peak, and many events peak later. And 2026 has not yet crossed +1.5 on either index, so this is where the forecast points, not where the season currently sits",
+        "Amplitude does not rank the damage, and this is the single most counter-intuitive fact in the piece. Among the strong events the two largest sit at opposite ends of the outcome range: 2015 delivered a 12.7% deficit while 1997, whose peak was comparable and which was one of the largest events ever measured, finished at plus 0.2%, essentially a normal monsoon. So the coming wave of 'biggest El Nino on record' coverage invites exactly the wrong inference",
+        "An honest negative result, reported rather than buried. The best-supported scientific explanation for why some large El Ninos spare India is where the Pacific warms: central-Pacific events focus drought-producing subsidence over India more effectively than eastern-Pacific ones (Kumar and colleagues, Science, 2006). Tested on the seven strong monsoon events with a simple eastern-minus-central warmth measure, it cannot discriminate, for a specific and stateable reason: all seven lean eastern-Pacific, so there is no central-Pacific case among them to contrast against. Five of those seven eastern-Pacific events still produced monsoons worse than -10%. State plainly that this is not a refutation of the research, because the measure is crude and seven cases cannot settle it, and state equally plainly that 2026 leaning eastern-Pacific is therefore NOT grounds for reassurance",
+        "The Indian Ocean Dipole is a tilt, not a shield. El Nino monsoons that coincided with a positive dipole averaged near-normal rain and those without it averaged a clear deficit, but 1972 paired a positive dipole with the worst monsoon in the record. And in 2026 the dipole is only just approaching positive territory rather than established there, so the article must NOT tell readers the second ocean has already turned in India's favour",
+        "The sign flip, which is the article's most under-covered contribution. El Nino moves rain as well as removing it. In El Nino conditions the June-September monsoon averages a national deficit of about -3%, while the October-December northeast monsoon over the southern belt averages about +4%, and Tamil Nadu on its own about +5%. The ordering of the three Pacific states reverses completely between the two seasons. Two honesty rules: this is a modest tilt in the odds and not a rule, with roughly half of El Nino years above normal against about a third of La Nina years; and more rain is not automatically good news, because the northeast monsoon delivers much of its total in intense spells, so a wet El Nino autumn can mean flooding in Chennai rather than a comfortable harvest",
+        "Seasonal phase-locking, and why it changes where the risk sits. Every strong El Nino since 1950 has peaked between October and January, with the two-year 1986-88 event the lone exception. So this event is expected to reach its maximum AFTER the kharif harvest is already decided. That migrates the real exposure away from the summer crop and toward reservoir carryover, the winter rabi sowing, the northeast monsoon, and food prices in early 2027. Frame 2027 explicitly rather than leaving the story to end in September",
+        "What the models can and cannot be trusted on. Forecast systems have real demonstrated skill at this lead time for ordinary events, but no ensemble has ever been verified against an event of the size now projected, because one has never happened. Model agreement is not the same thing as model skill, and this caveat must appear wherever the forecast is discussed",
+        "Ground the percentages so a reader can feel them. The monsoon delivers roughly 70% of India's annual rain in one June-to-September burst, and the long-period average is about 88 cm. IMD calls a season normal within about 10% of that, and deficient once it falls more than 10% short, which is the line people loosely call a drought year. So a headline figure of -3% is, by IMD's own yardstick, still a normal monsoon; the damage lives in the tail. When citing an average, say which side of that line it sits on",
+        "Explain how a deficit reaches the ground, not just the spreadsheet: the monsoon arrives late or breaks mid-season, reservoirs and groundwater do not refill, farmers delay or re-sow, kharif yields slip, rural wage work shrinks, and food prices can climb months later. Irrigation is the shield and it is distributed unevenly, which is why the rainfall map and the harvest map are not the same picture and why rainfed millets and pulses carry damage that irrigated rice does not",
+        "EVIDENCE DISCIPLINE, absolute. Use only numbers present in the evidence packet. This pass does NOT include 2026 in-season rainfall totals, reservoir storage levels, or kharif sowing area, so the article must not quote figures for any of them, must not estimate them, and must not imply it knows how the season is going in millimetres or hectares. It is entirely legitimate to say the season is under way and unfinished. Present estimates as ranges rather than false precision, round like a human, and never invent a figure to complete a sentence"
+      ],
+      styleExample: "There is no such thing as the size of an El Nino. There is a weekly number and a monthly number and a seasonal one, a version measured against a fixed thirty-year window and a version measured against a window that moves, and a version that subtracts the warming of every other tropical ocean before it tells you anything at all. Right now those numbers run from a little under half a degree to a little over two. All of them are official. All of them are NOAA's. They are not disagreeing about the ocean; they are answering slightly different questions about it, and the answer you get depends on which question you happened to ask."
+    };
+  }
+
   if (evidence.questionId === "q.climate.el_nino_india") {
     const elNinoPlanned = Array.isArray(evidence.plannedCharts) ? evidence.plannedCharts : [];
     return {
@@ -1298,7 +1348,7 @@ function articleTemplateFor(evidence) {
         "What does the number not tell us?",
         "What should the reader remember?"
       ];
-  return {
+  const generic = {
     purpose: "Answer the page question fully, not just describe the charts.",
     requiredSections,
     requiredConcepts: [
@@ -1313,6 +1363,34 @@ function articleTemplateFor(evidence) {
       "Start with the plain meaning. Then explain the unit. Then use the locked number. Do not make the reader infer the concept from the chart."
     ].join("\n\n")
   };
+
+  // A question without a bespoke in-code brief may supply one as DATA at
+  // data/briefs/<questionId>.json ({ purpose, tension, requiredConcepts[],
+  // requiredSections?[], styleExample? }). This is the quality lever for the tail:
+  // enrich a thin article's brief without editing this generator. Missing fields fall
+  // back to the generic shape; requiredSections defaults to one-per-chart above.
+  const external = loadExternalBrief(evidence.questionId);
+  if (!external) return generic;
+  const purpose = [external.purpose, external.tension ? `The tension the article circles: ${external.tension}` : ""]
+    .filter(Boolean)
+    .join(" ");
+  return {
+    purpose: purpose || generic.purpose,
+    requiredSections: Array.isArray(external.requiredSections) && external.requiredSections.length ? external.requiredSections : requiredSections,
+    requiredConcepts: Array.isArray(external.requiredConcepts) && external.requiredConcepts.length ? external.requiredConcepts : generic.requiredConcepts,
+    styleExample: external.styleExample || generic.styleExample
+  };
+}
+
+function loadExternalBrief(questionId) {
+  const path = `data/briefs/${questionId}.json`;
+  if (!existsSync(path)) return null;
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch (error) {
+    console.warn(`brief file ${path} is unreadable, using the generic template: ${error.message}`);
+    return null;
+  }
 }
 
 function planPrompt(evidence) {
@@ -1538,7 +1616,10 @@ function validateExplanation(document, questionId) {
   if (absent.length) throw new Error(`Explanation ${questionId} is missing required concept(s): ${absent.join(", ")}`);
 }
 
-function sanitizeText(text) {
+// Deterministic vocabulary swaps for common AI tells. Em-dash handling is delegated to
+// the shared deepStripEmDash (horizontal-whitespace-only, so it never collapses the
+// newlines that hold markdown structure — the old /\s*—\s*/ regex could).
+function sanitizeVocab(text) {
   return String(text)
     .replace(/\bit is important to note that\b/gi, "the caveat is that")
     .replace(/\bit is important to note\b/gi, "the caveat matters")
@@ -1547,25 +1628,128 @@ function sanitizeText(text) {
     .replace(/\bdelve\b/gi, "examine")
     .replace(/\btapestry\b/gi, "pattern")
     .replace(/\bcomplex interplay\b/gi, "relationship")
-    .replace(/\bin conclusion\b/gi, "overall")
-    // Em-dash is a strong AI tell; replace with a comma. (En-dash, used in age
-    // ranges like 0–14, is intentionally left alone.)
-    .replace(/\s*—\s*/g, ", ");
+    .replace(/\bin conclusion\b/gi, "overall");
 }
 
+function sanitizeText(text) {
+  return deepStripEmDash(sanitizeVocab(text));
+}
+
+// Every reader-facing prose field of an explanation, so the gate and warn-guards see all
+// of them (the old build lint only covered short + article). Titles/slugs/ids are NOT
+// prose and are excluded so the em-dash sweep never mangles a chartId or indicator slug.
+function explanationFields(doc) {
+  const out = [];
+  const s = doc.short || {};
+  out.push(s.headline, s.dek, s.body);
+  const a = doc.article || {};
+  out.push(a.title, a.standfirst, a.bodyMarkdown);
+  const m = doc.macha || {};
+  out.push(m.heading, m.body, m.soWhat);
+  for (const c of doc.chartExplainers || []) {
+    out.push(c.takeaway, c.detail, c.howToRead, c.mistakeToAvoid, c.mobileNote);
+  }
+  for (const cav of doc.caveats || []) out.push(cav);
+  return out.filter((x) => typeof x === "string");
+}
+
+// Apply the deterministic sanitizer to every prose field of a document (clone). Replaces
+// the old short+article-only sweep, closing the macha / chartExplainers / caveats gap.
 function sanitizeExplanation(document) {
-  const copy = structuredClone(document);
-  if (copy.short) {
-    copy.short.headline = sanitizeText(copy.short.headline || "");
-    copy.short.dek = sanitizeText(copy.short.dek || "");
-    copy.short.body = sanitizeText(copy.short.body || "");
+  const d = structuredClone(document);
+  const t = (x) => (typeof x === "string" ? sanitizeText(x) : x);
+  if (d.short) {
+    d.short.headline = t(d.short.headline);
+    d.short.dek = t(d.short.dek);
+    d.short.body = t(d.short.body);
   }
-  if (copy.article) {
-    copy.article.title = sanitizeText(copy.article.title || "");
-    copy.article.standfirst = sanitizeText(copy.article.standfirst || "");
-    copy.article.bodyMarkdown = sanitizeText(copy.article.bodyMarkdown || "");
+  if (d.article) {
+    d.article.title = t(d.article.title);
+    d.article.standfirst = t(d.article.standfirst);
+    d.article.bodyMarkdown = t(d.article.bodyMarkdown);
   }
-  return copy;
+  if (d.macha) {
+    d.macha.heading = t(d.macha.heading);
+    d.macha.body = t(d.macha.body);
+    d.macha.soWhat = t(d.macha.soWhat);
+  }
+  if (Array.isArray(d.chartExplainers)) {
+    for (const c of d.chartExplainers) {
+      c.takeaway = t(c.takeaway);
+      c.detail = t(c.detail);
+      c.howToRead = t(c.howToRead);
+      c.mistakeToAvoid = t(c.mistakeToAvoid);
+      c.mobileNote = t(c.mobileNote);
+    }
+  }
+  if (Array.isArray(d.caveats)) d.caveats = d.caveats.map(t);
+  return d;
+}
+
+// Post-generation gate shared by every path (single / multi / batched). Runs the
+// deterministic sanitize, then a loop-until-clean lint gate (fixes residual banned-word /
+// em-dash tells the model introduced), then warn-level guards whose findings are recorded
+// in qualityFlags. It never throws and never blocks a write: full automation means a
+// residual tell becomes a flag, not a failed generation. The build gate
+// (validate-explanations) is what stops a bad page from deploying.
+async function finishExplanation(document, evidence, question) {
+  let doc = sanitizeExplanation(document);
+  const maxRounds = Number(process.env.INDICA_CLEANUP_ROUNDS || 2);
+  const cleanupPasses = [];
+  for (let round = 1; round <= maxRounds; round += 1) {
+    const issues = hardIssuesFromTexts(explanationFields(doc));
+    if (!issues.blocked) break;
+    const completion = await createDeepSeekJsonCompletion({
+      model: MODEL,
+      messages: [
+        { role: "system", content: systemPrompt() },
+        {
+          role: "user",
+          content: [
+            "Fix ONLY the listed defects in this explanation JSON. Return the SAME JSON object, unchanged except for those fixes. Do not rewrite content, do not add or remove ideas, and do not change any numeric value, only how a tell is worded.",
+            findingsToInstruction(issues.lint.findings),
+            issues.emdash ? "Also remove every em-dash character (—); replace each with a comma, or a period and a capital letter." : "",
+            "EXPLANATION JSON:",
+            stableJson(doc),
+          ].join("\n\n"),
+        },
+      ],
+      maxTokens: Number(process.env.INDICA_EXPLANATION_MAX_TOKENS || 16000),
+      temperature: 0,
+    });
+    doc = sanitizeExplanation(normalizeCompletion(completion.json));
+    cleanupPasses.push({ name: `cleanup-${round}`, model: completion.payload.model });
+  }
+
+  // Warn-level guards -> qualityFlags (never block).
+  const texts = explanationFields(doc);
+  const figureLines = extractFigureLines(doc.article?.bodyMarkdown).concat(
+    (doc.chartExplainers || []).flatMap((c) => extractFigureLines(c.detail))
+  );
+  const chartCount = (evidence.plannedCharts || []).filter((c) => c.indicator || (c.series && c.series.length)).length;
+  const words = String(doc.article?.bodyMarkdown || "").split(/\s+/).filter(Boolean).length;
+  const explainerCount = (doc.chartExplainers || []).length;
+
+  const flags = Array.isArray(doc.qualityFlags) ? [...doc.qualityFlags] : [];
+  const residual = hardIssuesFromTexts(texts);
+  if (residual.blocked) {
+    flags.push({ type: "lint-residual", detail: residual.lint.errors.map((f) => f.match).join("; "), emdash: residual.emdash });
+  }
+  for (const f of derivedReport(...texts)) flags.push({ type: "derived-number", match: f.match, hint: f.hint });
+  for (const f of checkNumberConsistency(texts)) flags.push({ type: "number-inconsistency", match: f.match, hint: f.hint });
+  for (const w of checkRichFigures({ lockedNumbers: evidence.lockedNumbers || [], figureLines, segments: [] })) {
+    flags.push({ type: "rich-figure", detail: w });
+  }
+  // National-accounts identities (GDP = NDP + depreciation, etc.) must tie on the same
+  // vintage; only fires when the relevant econ.nas.* numbers are present (GDP pages).
+  for (const w of checkNasIdentities(evidence.lockedNumbers || []).warnings) {
+    flags.push({ type: "accounting-identity", detail: w });
+  }
+  if (chartCount > 0 && (words < 120 * chartCount || explainerCount !== chartCount)) {
+    flags.push({ type: "thin", detail: `body ${words} words for ${chartCount} charts; chartExplainers ${explainerCount}/${chartCount}` });
+  }
+  doc.qualityFlags = flags;
+  return { document: doc, cleanupPasses };
 }
 
 function plannedIndicatorIdsFor(question) {
@@ -1620,6 +1804,7 @@ async function loadArtifacts() {
 async function createSinglePassExplanation(evidence, question) {
   try {
     const completion = await createDeepSeekJsonCompletion({
+      model: MODEL,
       messages: [
         { role: "system", content: systemPrompt() },
         { role: "user", content: userPrompt(evidence) }
@@ -1636,6 +1821,7 @@ async function createSinglePassExplanation(evidence, question) {
     const compactEvidence = compactEvidenceForGeneration(evidence, question);
     console.warn(`single-pass generation failed for ${evidence.questionId}; retrying with compact evidence: ${error.message}`);
     const completion = await createDeepSeekJsonCompletion({
+      model: MODEL,
       messages: [
         { role: "system", content: systemPrompt() },
         {
@@ -1663,9 +1849,178 @@ async function createSinglePassExplanation(evidence, question) {
   }
 }
 
+// Whether an article is big enough to overflow the model's output ceiling in one pass
+// and should be generated chart-by-chart. Normal pages (< ~12 charts) keep the multi-pass
+// path; only the flagships (20+ charts) route to batching.
+function isBig(evidence) {
+  const chartCount = (evidence.plannedCharts || []).filter((c) => c.indicator || (c.series && c.series.length)).length;
+  return chartCount >= Number(process.env.INDICA_BATCH_THRESHOLD || 14);
+}
+
+// Compact system prompt for the batched path. It carries the same discipline as the full
+// systemPrompt() but omits the "return the whole explanation JSON object" mandate, because
+// each batched call returns a small shape ({sections:[...]} / {explainers:[...]} / meta).
+function batchedSystemPrompt() {
+  return [
+    "You write for Indica, a public data almanac about India, in the voice of a sharp editor explaining a chart to a smart friend who has limited time.",
+    "Return only valid JSON in exactly the shape the user asks for. No markdown fences, no commentary.",
+    "NUMBER DISCIPLINE IS ABSOLUTE: every number, rate, share, rupee figure, and date-as-a-fact must come from the numbers you are given. Never invent, estimate, or recall a figure from memory. Use a locked number's displayValue verbatim. You MAY add uncontested textbook framing (a mechanism, a concept the reader needs) but NO new numbers, dates, named people, or studies.",
+    "Write clean Indian English. Short sentences, concrete nouns, one idea per sentence, define jargon the instant it appears. Round like a human ('about 5 lakh crore', 'around 880 tonnes', 'roughly 12%').",
+    "Never use em-dashes (use a comma, period, or rephrase). Do not use the 'not just X, it is Y' construction, the 'Imagine…'/'Picture this:' opener, or end on an editorial aphorism.",
+    "Do not narrate the article ('this chart shows', 'as we saw above'). Write about India; let each section answer its own question with the mechanism and the reason, not a description of the chart's shape.",
+    "Each H2 section heading is a real reader question; the body (120-200 words) genuinely ANSWERS it. Do not claim a cause the numbers do not prove; say 'one visible pattern in this data is'.",
+  ].join("\n");
+}
+
+function batchChartNote(entry, locked) {
+  const inds = [entry.indicator, ...(entry.series || []).map((s) => s.indicator)].filter(Boolean);
+  const nums = (locked || [])
+    .filter((n) => inds.includes(n.indicatorId))
+    .slice(0, 8)
+    .map((n) => `${n.label}: ${n.displayValue ?? n.value} ${n.unit || ""}`.trim());
+  return [
+    `CHART: "${entry.title}"`,
+    `  shows: ${entry.read || ""}`,
+    `  why it matters: ${entry.why || ""}`,
+    `  caveat: ${entry.watch || ""}`,
+    nums.length ? `  numbers you MAY use (no others): ${nums.join("; ")}` : "  (no locked numbers for this chart; use only established framing)",
+  ].join("\n");
+}
+
+const slugifyTitle = (value) => String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+// Built-in batched generation for big articles. Reuses buildEvidencePacket output and runs
+// the SAME finish gate as every other path (applied by the driver loop). Replaces the old
+// per-flagship generate-*-batched.mjs / -explainers.mjs forks, which were copy-pasted per QID
+// and skipped every gate.
+async function createBatchedExplanation(evidence, question) {
+  const locked = evidence.lockedNumbers || [];
+  const charts = (question.visualPlan || []).filter((v) => v.indicator || (v.series && v.series.length));
+  const bodyBatch = Number(process.env.INDICA_BATCH_SIZE || 6);
+  const explainerBatch = Number(process.env.INDICA_EXPLAINER_BATCH_SIZE || 4);
+  // Per-call output budgets. These MUST leave room for reasoning: deepseek-v4-pro is a
+  // reasoning model, so reasoning_tokens are charged against max_tokens. The original
+  // hardcoded 7000 was enough for the visible JSON but not for reasoning on top of a long
+  // requiredConcepts block, and the model then returns HTTP 200 with EMPTY content rather
+  // than an error - which surfaces as "DeepSeek completion returned no message content".
+  // Raising a max_tokens ceiling is safe: it is an upper bound, not a target, so articles
+  // that already generate cleanly are unaffected.
+  const thesisTokens = Number(process.env.INDICA_BATCH_THESIS_MAX_TOKENS || 4000);
+  const bodyTokens = Number(process.env.INDICA_BATCH_BODY_MAX_TOKENS || 16000);
+  const explainerTokens = Number(process.env.INDICA_BATCH_EXPLAINER_MAX_TOKENS || 16000);
+  const metaTokens = Number(process.env.INDICA_BATCH_META_MAX_TOKENS || 8000);
+  const passes = [];
+  const call = async (messages, maxTokens, temperature = 0.32) => {
+    const c = await createDeepSeekJsonCompletion({ model: MODEL, messages, maxTokens, temperature });
+    passes.push({ name: "batch", model: c.payload.model });
+    return normalizeCompletion(c.json);
+  };
+
+  // Honour the hand-authored editorial brief (this is the quality lever the old forks
+  // lacked): its purpose is the through-line, its requiredConcepts carry the locked facts
+  // and honesty rules. A question with only the generic fallback brief still works.
+  const template = articleTemplateFor(evidence);
+  const conceptsBlock = (template.requiredConcepts || []).length
+    ? `Facts and honesty rules you MUST honour (do not contradict, do not add numbers beyond these and the chart notes):\n${(template.requiredConcepts || []).map((c) => `- ${c}`).join("\n")}`
+    : "";
+
+  // 1. Through-line thesis. Use the brief's purpose when it is substantial; otherwise
+  // generate one so cross-batch sections stay coherent.
+  let thesis = typeof template.purpose === "string" && template.purpose.length > 140 ? template.purpose : "";
+  if (!thesis) {
+    const thesisJson = await call([
+      { role: "system", content: batchedSystemPrompt() },
+      { role: "user", content: [
+        `Write the through-line for the article that answers: "${question.question}".`,
+        "Return JSON: {\"thesis\":\"one paragraph (60-100 words) stating the article's single answer and the arc of the argument, using only established framing (NO new numbers)\"}.",
+        conceptsBlock,
+        "The ordered charts, each of which becomes one section:",
+        charts.map((c) => `- ${c.title}`).join("\n"),
+      ].filter(Boolean).join("\n\n") }], thesisTokens, 0.3);
+    thesis = String(thesisJson.thesis || "");
+  }
+
+  // 2. Body sections, in batches, each told the through-line and the headings already written.
+  const sections = [];
+  for (let i = 0; i < charts.length; i += bodyBatch) {
+    const batch = charts.slice(i, i + bodyBatch);
+    const priorHeadings = sections.length ? sections.map((s) => `- ${s.heading}`).join("\n") : "(none yet; this is the opening batch, so open by answering the page question)";
+    const out = await call([
+      { role: "system", content: batchedSystemPrompt() },
+      { role: "user", content: [
+        `Article question: "${question.question}".`,
+        `Through-line to stay consistent with: ${thesis}`,
+        conceptsBlock,
+        `Sections already written (continue the thread, do not repeat them):\n${priorHeadings}`,
+        `Write one H2 reader-question section for EACH chart below, in order (${batch.length} sections). Heading is a real question with no "##" prefix; body 120-200 words that answers it with the mechanism, using only the given numbers.`,
+        batch.map((c) => batchChartNote(c, locked)).join("\n\n"),
+        `Return JSON exactly: {"sections":[{"heading":"a question","body":"..."}]}`,
+      ].filter(Boolean).join("\n\n") }], bodyTokens);
+    if (Array.isArray(out.sections)) sections.push(...out.sections);
+  }
+  const bodyMarkdown = sections
+    .map((s) => `## ${String(s.heading || "").replace(/^#+\s*/, "")}\n\n${s.body || ""}`)
+    .join("\n\n");
+
+  // 3. Chart explainers, in batches; visualId aligned to the chartId (slug of the title).
+  const explainers = [];
+  for (let i = 0; i < charts.length; i += explainerBatch) {
+    const batch = charts.slice(i, i + explainerBatch);
+    const out = await call([
+      { role: "system", content: batchedSystemPrompt() },
+      { role: "user", content: [
+        "For EACH chart below, write a rich explainer. Return JSON exactly:",
+        // whyShowThis is REQUIRED. It was missing from this schema until 2026-07-30, so every
+        // article generated through the batched path lacked it and the reader-facing box fell
+        // back to the thin one-line `why` hint from the visualPlan. The retired per-flagship
+        // forks did request it, which is why older flagships have it and newer ones did not.
+        `{"explainers":[{"visualId":"<exact chart TITLE>","title":"<chart title>","takeaway":"one vivid sentence with the key number","detail":"4-7 plain sentences: what it shows, the numbers and trend, what drives it, what it means for the reader","whyShowThis":"2-3 sentences on why this chart earns its place in the argument and what the reader would misunderstand without it","howToRead":"one or two concrete lines on how to read it","mistakeToAvoid":"the single most important misreading","mobileNote":"a short small-screen note"}]}`,
+        "One per chart, same order.",
+        batch.map((c) => batchChartNote(c, locked)).join("\n\n---\n\n"),
+      ].join("\n\n") }], explainerTokens);
+    if (Array.isArray(out.explainers)) explainers.push(...out.explainers);
+  }
+  for (let i = 0; i < explainers.length; i += 1) {
+    const title = charts[i]?.title;
+    if (title) { explainers[i].visualId = slugifyTitle(title); explainers[i].title = title; }
+  }
+
+  // 4. sectionVisualMap: walk the body headings in order, bind each to its chart's chartId.
+  const headings = bodyMarkdown.split("\n").map((l) => l.match(/^## (.+)/)).filter(Boolean).map((m) => m[1].trim());
+  const sectionVisualMap = headings.slice(0, charts.length).map((heading, i) => ({ heading, visualId: slugifyTitle(charts[i]?.title || "") }));
+
+  // 5. Meta: title, standfirst, short, macha, caveats, sourceNotes.
+  const meta = await call([
+    { role: "system", content: batchedSystemPrompt() },
+    { role: "user", content: [
+      `For the article answering "${question.question}", return JSON:`,
+      `{"title":"the article title","standfirst":"a 1-2 sentence dek","short":{"headline":"a punchy one-liner","dek":"one sentence","body":"a 90-150 word plain-language summary"},"macha":{"heading":"a cheeky Indian-English question","body":"a warm 80-120 word plain explanation of what the whole page means for a layperson","soWhat":"one sentence on why it matters"},"caveats":["4-6 honest caveats: estimate vs measurement, survey vintage, what the data cannot show"],"sourceNotes":["name every source plainly"]}`,
+      `Through-line: ${thesis}`,
+      "Introduce NO new numbers beyond those already in the body.",
+    ].join("\n\n") }], metaTokens, 0.3);
+
+  const document = {
+    schemaVersion: 1,
+    questionId: question.id,
+    status: "ready",
+    short: meta.short || { headline: "", dek: "", body: "" },
+    macha: meta.macha || { heading: "", body: "", soWhat: "" },
+    article: { title: meta.title || question.question, standfirst: meta.standfirst || "", bodyMarkdown },
+    editorialPlan: { audience: "Curious Indian general reader", heroDescription: "", selectedDataPoints: [], pullQuotes: [], glossaryBlocks: [] },
+    chartExplainers: explainers,
+    sectionVisualMap,
+    sourceNotes: meta.sourceNotes || [],
+    caveats: meta.caveats || [],
+    lockedNumbersUsed: [],
+    qualityFlags: [],
+  };
+  return { document, model: MODEL, passes: [...passes, { name: "batched" }], plan: null };
+}
+
 async function createMultiPassExplanation(evidence, question) {
   const generationEvidence = compactEvidenceForGeneration(evidence, question);
   const planCompletion = await createDeepSeekJsonCompletion({
+    model: MODEL,
     messages: [
       { role: "system", content: systemPrompt() },
       { role: "user", content: planPrompt(generationEvidence) }
@@ -1676,6 +2031,7 @@ async function createMultiPassExplanation(evidence, question) {
   const plan = normalizeCompletion(planCompletion.json);
 
   const draftCompletion = await createDeepSeekJsonCompletion({
+    model: MODEL,
     messages: [
       { role: "system", content: systemPrompt() },
       { role: "user", content: draftPrompt(generationEvidence, plan) }
@@ -1686,6 +2042,7 @@ async function createMultiPassExplanation(evidence, question) {
   const draft = sanitizeExplanation(normalizeCompletion(draftCompletion.json));
 
   const editCompletion = await createDeepSeekJsonCompletion({
+    model: MODEL,
     messages: [
       { role: "system", content: systemPrompt() },
       { role: "user", content: editPrompt(generationEvidence, plan, draft) }
@@ -1720,37 +2077,49 @@ async function createMultiPassExplanation(evidence, question) {
   };
 }
 
-const args = parseArgs(process.argv.slice(2));
-const artifacts = await loadArtifacts();
-const questions = v1Questions
-  .filter((question) => !args.questions || args.questions.has(question.id))
-  .slice(0, args.limit);
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const artifacts = await loadArtifacts();
+  const questions = v1Questions
+    .filter((question) => !args.questions || args.questions.has(question.id))
+    .slice(0, args.limit);
 
-await mkdir("data/explanations/en", { recursive: true });
+  await mkdir("data/explanations/en", { recursive: true });
 
-for (const question of questions) {
-  const evidence = buildEvidencePacket({ question, artifacts });
-  const outputPath = `data/explanations/en/${question.id}.json`;
+  for (const question of questions) {
+    const evidence = buildEvidencePacket({ question, artifacts });
+    const outputPath = `data/explanations/en/${question.id}.json`;
 
-  if (args.dryRun) {
-    await writeFile(outputPath.replace(/\.json$/, ".evidence.json"), `${stableJson(evidence)}\n`);
-    console.log(`dry-run evidence ${question.id}: ${evidence.themeIndicatorIds.length} selected artifact(s), ${evidence.lockedNumbers.length} locked number(s)`);
-    continue;
+    if (args.dryRun) {
+      await writeFile(outputPath.replace(/\.json$/, ".evidence.json"), `${stableJson(evidence)}\n`);
+      console.log(`dry-run evidence ${question.id}: ${evidence.themeIndicatorIds.length} selected artifact(s), ${evidence.lockedNumbers.length} locked number(s)`);
+      continue;
+    }
+
+    const generatedResult = args.singlePass
+      ? await createSinglePassExplanation(evidence, question)
+      : isBig(evidence)
+        ? await createBatchedExplanation(evidence, question)
+        : await createMultiPassExplanation(evidence, question);
+    const { document: gated, cleanupPasses } = await finishExplanation(generatedResult.document, evidence, question);
+    validateExplanation(gated, question.id);
+    const document = {
+      ...gated,
+      generatedAt: new Date().toISOString(),
+      model: generatedResult.model,
+      generationPasses: [...generatedResult.passes, ...cleanupPasses, { name: "finish-gate" }],
+      editorialPlanDraft: generatedResult.plan,
+      evidence
+    };
+    await writeFile(outputPath, `${stableJson(document)}\n`);
+    const flagNote = document.qualityFlags?.length ? ` (${document.qualityFlags.length} qualityFlag(s))` : "";
+    console.log(`wrote explanation ${question.id}${flagNote}`);
   }
+}
 
-  const generatedResult = args.singlePass
-    ? await createSinglePassExplanation(evidence, question)
-    : await createMultiPassExplanation(evidence, question);
-  const generated = generatedResult.document;
-  validateExplanation(generated, question.id);
-  const document = {
-    ...generated,
-    generatedAt: new Date().toISOString(),
-    model: generatedResult.model,
-    generationPasses: generatedResult.passes,
-    editorialPlanDraft: generatedResult.plan,
-    evidence
-  };
-  await writeFile(outputPath, `${stableJson(document)}\n`);
-  console.log(`wrote explanation ${question.id}`);
+// Exported for testing; guarded so importing this module does not run the generator.
+export { finishExplanation, explanationFields, sanitizeExplanation, sanitizeText, articleTemplateFor, loadExternalBrief };
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  await main();
 }

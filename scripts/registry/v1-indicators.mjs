@@ -7210,6 +7210,160 @@ export const v1Questions = [
   },
 
   {
+    id: "q.climate.el_nino_2026",
+    slug: "el-nino-2026-what-it-means-for-india",
+    question: "An El Nino is under way. What can it actually tell India?",
+    priority: "core",
+    // Built late July 2026, mid-season. Full build brief: docs/el-nino-2026-canonical-brief.md
+    //
+    // NOT a duplicate of q.climate.el_nino_india (the mechanism piece) or
+    // q.climate.monsoon_2026 (the pre-season forecast piece). Both of those stay live and
+    // untouched. This one exists for three reasons the others cannot cover:
+    //   1. Which reference class 2026 belongs to is NOT YET DECIDED, and that is the story.
+    //      An earlier draft asserted "forecasters expect 2026 to cross 1.5C during the
+    //      monsoon" and used it to select the 7-event STRONG subset (mean -12.1%). No
+    //      forecast was ever in the evidence packet, and the article's own data says the
+    //      AMJ 2026 ONI is 0.98 (CPC label: weak) with RONI at 0.47 (neutral). Replaced
+    //      with climate.el_nino.escalation_fork, which asks the checkable question: of the
+    //      13 monsoons that opened where this one opened, 5 escalated past +1.5 and
+    //      averaged -12.1%, while 8 did not and averaged +6.8% (Welch p = 0.003).
+    //      DO NOT reinstate any "forecasters expect" sentence without a forecast artifact.
+    //   2. Five official NOAA numbers describe this one ocean and they span +0.47 to +2.20.
+    //      Which index you pick does enormous work, and switching to the trend-adjusted
+    //      RONI re-ranks the historical record (1982-83, not 2015-16, is the benchmark).
+    //   3. The event peaks in OND, AFTER the kharif season closes - and for the south
+    //      peninsula the sign of the effect reverses. Neither existing article covers this.
+    //
+    // Honesty ledger is section 8 of the brief and is mirrored into requiredConcepts.
+    // Deferred to a later pass (needs new viz.ts builders, no existing contract fits a
+    // 45-series spaghetti or a two-column single-table line): the year-trajectory chart
+    // (climate.enso.nino34_year_trajectories) and the ONI-vs-RONI record
+    // (climate.enso.oni_vs_roni). Both artifacts are built and validated already.
+    indicators: [
+      "climate.enso.index_ladder_2026",
+      "climate.el_nino.strong_event_outcomes",
+      "climate.el_nino.event_rank_by_index"
+    ],
+    core: [
+      "climate.enso.index_ladder_2026",
+      "climate.el_nino.strong_event_outcomes",
+      "climate.el_nino.event_rank_by_index"
+    ],
+    context: [
+      "climate.enso.oni_roni_gap_by_decade",
+      "climate.el_nino.imd_monsoon_departure_1901_2025",
+      "climate.el_nino.definition_sensitivity",
+      "climate.el_nino.escalation_fork",
+      "climate.el_nino.escalation_odds",
+      "climate.enso.forecast_strong_threshold",
+      "climate.enso.cpc_strength_forecast",
+      "climate.enso.trajectory_compare",
+      "climate.el_nino.flavour_by_event",
+      "climate.el_nino.enso_iod_matrix",
+      "climate.el_nino.enso_monsoon_rolling_corr",
+      "climate.el_nino.regional_sensitivity",
+      "climate.el_nino.subseasonal_composite",
+      "agriculture.el_nino.rice_yield_anomaly_state",
+      "agriculture.el_nino.irrigation_yield_split",
+      "agriculture.el_nino.crop_yield_sensitivity",
+      "prices.el_nino.food_wpi_postmonsoon",
+      "prices.el_nino.food_wpi_components",
+      "climate.el_nino.monsoon_sign_flip",
+      "climate.el_nino.event_peak_timing",
+      "climate.el_nino.rabi_heat",
+      "econ.el_nino.agri_gva_share",
+      "work.employment_agriculture"
+    ],
+    primer: {
+      kicker: "Plain English first",
+      lead: "El Nino is a warming of the Pacific that recurs every few years and tends to weaken India's monsoon. One is under way now. But there is no single number for how big it is: NOAA publishes five, and right now they range from half a degree to over two. The official three-month index still reads weak, and El Nino events usually peak in October, after the kharif harvest is already decided.",
+      myths: [
+        { myth: "The bigger the El Nino, the worse the monsoon.", reality: "No. Among the strongest events on record the two largest sit at opposite ends: 2015 brought a 12.7% rainfall deficit, while 1997, a comparably huge event, finished essentially normal. Amplitude does not rank the damage." },
+        { myth: "El Nino means drought everywhere in India.", reality: "No. Irrigation decides who is actually hurt. In a weak monsoon irrigated rice barely moves, while rainfed millets and pulses can fall by a tenth or more. The damage sorts by crop and by region, not by the national rainfall figure." },
+        { myth: "Once El Nino is declared, a bad monsoon is close to a certainty.", reality: "Not from where this season stands. Thirteen monsoons since 1950 opened with the Pacific reading what it reads now. Five grew into strong events and averaged 12% below normal; the other eight averaged 7% above. The declaration is not the fork - the escalation is, and it happens after the season starts." }
+      ]
+    },
+    visualPlan: [
+      // ACT 1 - the measurement problem, before any claim about India
+      { indicator: "climate.enso.index_ladder_2026", chart: "tableBars", title: "Five official numbers for the same ocean", subtitle: "NOAA Nino 3.4 measures for 2026, by product, period and baseline", unit: "°C warmer than normal", size: "hero", beat: "measurement", why: "Open on the measurement problem rather than a scare number: one ocean, five official NOAA figures, spanning roughly +0.5 to +2.2.", read: "Each bar is a real, current, official measure of the same patch of Pacific. They disagree because they use different products, averaging periods and baselines.", watch: "Read the label on every bar. The weekly figure is unsmoothed and later in the year; the seasonal ones are three-month means centred earlier. Part of this spread is timing, not method." },
+      // Was climate.el_nino.event_peak_intensity, a 24-row chronological table with eight
+      // columns. The generator read its FIRST rows as though they were the largest events
+      // and wrote up 1951-52 and 1953-54 as "the giants". Replaced with this focused,
+      // magnitude-sorted, two-group chart: fewer rows, one comparison, no ambiguity about
+      // which rows matter. The full 24-event table remains as a series for reference.
+      { indicator: "climate.el_nino.event_rank_by_index", chart: "tableBars", title: "Change the index and the record holder changes", subtitle: "The eight strongest El Nino events since 1950, each measured on the raw index and on the trend-adjusted one - peak seasonal anomaly", unit: "°C above normal, at the event's peak", size: "feature", beat: "history", why: "The payoff of the measuring-stick argument: which event counts as the benchmark depends on which index you use.", read: "Each event appears twice. On the raw index 2014-16 is the strongest on record; on the trend-adjusted index 1982-83 takes the top spot and 2014-16 slips to third.", watch: "These are peak SEASONAL values and are unscaled, so they run lower than the peak monthly figures most coverage quotes and are not comparable with scaled RONI numbers published elsewhere." },
+      { indicator: "climate.enso.oni_roni_gap_by_decade", chart: "tableBars", title: "The measuring stick moved", subtitle: "Average gap between the raw index and the trend-adjusted one (ONI minus RONI), by decade", unit: "°C gap between the two indices", size: "feature", beat: "measurement", why: "The deepest reason old and new El Ninos are hard to compare: as the whole tropical ocean warms, the raw index drifts upward for the same relative Pacific gradient.", read: "Before 2000 the two indices sit within a couple of hundredths of each other. Since then the raw one has pulled ahead, by about 0.23 deg C in the 2010s and 0.44 deg C in the 2020s.", watch: "This is not a smooth trend across the whole record - it wobbles either side of zero before 2000. The 2020s bar is a partial decade." },
+
+      // ACT 2 - the right reference class
+      { indicator: "climate.el_nino.imd_monsoon_departure_1901_2025", chart: "stripes", title: "A century and a quarter of monsoons that never sit still", subtitle: "IMD all-India June-September rainfall departure - 1901-2025", unit: "% above or below normal rainfall", size: "hero", beat: "climate-history", why: "Before conditioning on anything, show the raw material: 125 monsoons, no two alike.", read: "Each vertical stripe is one monsoon. Deep blue years fell well short; coral years ran wet.", watch: "This is the national June-September total only. It hides where the rain fell, when it fell, and the floods and dry spells inside a single season." },
+      { indicator: "climate.el_nino.definition_sensitivity", chart: "tableBars", title: "How strictly you define an El Nino year changes the answer", subtitle: "Average all-India rainfall departure under three definitions - 1950-2025", unit: "average % above or below normal rainfall", size: "feature", beat: "method", why: "The reassuring headline number and the alarming one come from the same record. The difference is the definition, which most coverage hides.", read: "Counting any brush with El Nino gives about minus 3%. Requiring the Pacific to stay in El Nino all season doubles the deficit. Restricting to strong events triples it.", watch: "None of these is wrong. But a number quoted without its definition is close to meaningless, and the loosest one is the most quoted." },
+      // The pivot of the whole article, and the answer to the chart above it: of those
+      // three definitions, which one is 2026? The honest answer is that the season has not
+      // decided yet, and the record says the fork is roughly one-in-three. This chart
+      // exists specifically to replace an unsourced forecast assertion - see the note at
+      // the head of this question, and the honestyRules in the artifact metadata.
+      { indicator: "climate.el_nino.escalation_fork", chart: "tableBars", title: "Monsoons that began where this one begins", subtitle: "Every year since 1950 whose April-June Pacific reading sat where 2026's does, and the monsoon each one delivered", unit: "% above or below normal rainfall", size: "hero", beat: "the-fork", why: "The previous chart gives three answers depending on the definition. This one asks which definition 2026 actually belongs to, and shows that the season has not yet decided.", read: "Thirteen years opened with the Pacific where it is now. The five that grew into strong events during the monsoon are the dry cluster; the eight that did not are almost all wet.", watch: "Thirteen cases, split five against eight. The dry half is partly definitional - a year that escalates lands in the strong-event set by construction - so the new information is the escalation rate and the fate of the branch that did NOT escalate." },
+      { indicator: "climate.el_nino.escalation_odds", chart: "tableBars", title: "The fork, not the forecast", subtitle: "The same thirteen monsoons collapsed to their two branches, against the average of every monsoon since 1950", unit: "average % above or below normal rainfall", size: "feature", beat: "the-fork", why: "The takeaway a skimming reader needs: the branch that did not escalate was not merely normal, it was wetter than a typical monsoon.", read: "Escalate and the average is a 12% deficit. Do not escalate and the average is a 7% surplus, against a background of about +1% across all years since 1950.", watch: "These are branch averages over five and eight years. The spread inside each branch is wide, and no single season is obliged to sit near its branch mean." },
+      // The history says how often seasons like this one escalated. This says what the
+      // forecaster actually expects, which is the question the two charts above raise
+      // and cannot answer. Deliberately placed after them: the base rate is the honest
+      // anchor, the forecast is the update, and putting the forecast first would let it
+      // swamp a reader's sense of how wide the outcomes still are.
+      // Deliberately five lines, not the 45-line overlay several climate dashboards run.
+      // Forty-five faint trajectories say "ENSO varies", which the reader already knows,
+      // and bury the one comparison that matters. The full 45-year table stays on disk as
+      // climate.enso.nino34_year_trajectories. Era-adjusted, or the warming trend alone
+      // would make every recent year look bigger than every older one.
+      { indicator: "climate.enso.trajectory_compare", chart: "multiLineTable", title: "This El Nino is climbing faster than the ones it is compared to", subtitle: "Nino 3.4 by month, era-adjusted so decades are comparable - 2026 against the three benchmark events and the median of all other years since 1982", unit: "°C above normal", size: "hero", beat: "the-fork", refLine: { value: 1.5, label: "the strong threshold" }, why: "The forecast says the escalation is steep. This shows how steep, against the only yardstick that means anything: where the big events sat on the same date.", read: "Every line is one year, January to December, on a shared axis. In July 2026 sits near 2.1, above 1997 and 2015 at the same point and above every other year since 1982.", watch: "Highest at this date is not highest at the peak: 1997 and 2015 both kept climbing long after July. The era adjustment is our approximation of NOAA's centred-base convention, and these are monthly means of a noisier weekly series." },
+      { indicator: "climate.enso.forecast_strong_threshold", chart: "tableBars", title: "When NOAA expects this El Nino to cross the strong line", subtitle: "CPC's official probability of reaching +1.5°C or above, by season, issued July 2026 - the first three seasons overlap the monsoon", unit: "% chance of reaching +1.5°C or above", size: "feature", beat: "the-fork", why: "The article's base rates all key off the +1.5 threshold, so the single most useful forecast number is the chance of crossing it, season by season. It shows the escalation arriving late.", read: "About a one-in-four chance during June to August, rising to roughly three-in-four by July to September and near-certain after the monsoon ends.", watch: "A forecast, not an observation, and a distribution rather than a number. It is re-issued on the second Thursday of each month and moves. CPC also notes that the strength of an event does not necessarily match the strength of its impact." },
+      // Scatter, not bars: the claim is that Pacific amplitude does NOT rank the monsoon
+      // damage, and a bar chart of departures by year cannot show the absence of a
+      // relationship. On a scatter the points form a cloud with no slope, and the two
+      // strongest events sit at opposite ends of the outcome range.
+      { indicator: "climate.el_nino.strong_event_outcomes", chart: "scatterXY", title: "A bigger El Nino is not a worse monsoon", subtitle: "The seven monsoons in which the ONI reached +1.5 or above during June-September - peak Pacific warmth against India's rainfall departure", unit: "% above or below normal rainfall", size: "feature", beat: "answer", refY: { value: 0, label: "normal monsoon" }, why: "This is the reference class 2026 enters only if the Pacific escalates, and it kills the intuition that a bigger anomaly means a worse monsoon.", read: "Each dot is one strong El Nino monsoon: peak Pacific warmth across the bottom, India's rainfall departure up the side. The dots scatter with no slope.", watch: "The two strongest events on the right, 1997 and 2015, land at opposite extremes: one finished essentially normal, the other more than 12% short. Seven cases is a small base, and this is peak ONI during the monsoon, not the event's calendar peak." },
+
+      // ACT 3 - what does not explain the difference
+      // Also a scatter, and for the same reason: the finding here is the ABSENCE of a
+      // relationship. There is a house precedent for using a scatter to show that a
+      // widely-believed link does not hold (see "It is not women working" in
+      // q.people.fertility_divergence).
+      { indicator: "climate.el_nino.flavour_by_event", chart: "scatterXY", title: "Where the Pacific warmed does not settle it either", subtitle: "Eastern minus central Pacific warmth (Nino 1+2 minus Nino 4, June-September mean) against India's rainfall departure - the seven strong events", unit: "% above or below normal rainfall", size: "feature", beat: "honest-negative", refY: { value: 0, label: "normal monsoon" }, why: "The leading scientific explanation for why some big El Ninos spare India is WHERE the Pacific warms. Tested on these seven events it does not discriminate, which is worth showing rather than hiding.", read: "Each dot is one strong El Nino monsoon: how far the warmth leaned to the eastern Pacific across the bottom, India's rainfall departure up the side. Again there is no pattern.", watch: "All seven lean eastern-Pacific, so there is no central-Pacific case among them to contrast against. This is a crude proxy rather than the decomposition the research uses, and seven cases cannot settle it. The narrow point: 2026 leaning eastern-Pacific is not grounds for reassurance." },
+      { indicator: "climate.el_nino.enso_iod_matrix", chart: "tableBars", title: "Does the Indian Ocean rescue an El Nino monsoon?", subtitle: "Average rainfall in El Nino years, split by the Indian Ocean Dipole - 1950-2025", unit: "average % above or below normal rainfall", size: "feature", beat: "climate-drivers", why: "The second ocean is the most cited reason an El Nino monsoon can come out fine. It works, but only as a tilt.", read: "El Nino monsoons that came with a positive dipole averaged near-normal rain; those without averaged a clear deficit.", watch: "1972 had a positive dipole and produced the worst monsoon in the record. A tilt is not a shield, and the dipole has been sliding back toward neutral through 2026, not building." },
+      { indicator: "climate.el_nino.enso_monsoon_rolling_corr", chart: "line", title: "Has the Pacific's grip on the monsoon loosened?", subtitle: "21-year rolling correlation between Pacific warmth and India's monsoon rainfall - centred years 1960-2015", unit: "correlation", size: "feature", beat: "science-debate", why: "Scientists have argued since the late 1990s that the link is fraying. Track it rather than assert it either way.", read: "A more negative line means a tighter El-Nino-equals-weak-monsoon bond. It loosened to its weakest around the late 1990s, then tightened again.", watch: "A rolling window leans on recent decades at the end of the line, and a correlation can wobble without the underlying physics changing." },
+
+      // ACT 4 - where a weak monsoon actually lands
+      { indicator: "climate.el_nino.regional_sensitivity", chart: "tableBars", title: "El Nino hits the northwest hardest", subtitle: "Average rainfall departure in El Nino monsoons, by IMD region", unit: "% above or below normal rainfall", size: "feature", beat: "distribution", why: "The national average hides the geography that decides crops and incomes.", read: "Northwest India, the wheat-and-pulses belt, loses roughly double the all-India shortfall.", watch: "Less rain does not translate one-for-one into more harm. Irrigation cover and crop choice differ sharply by region, as the next charts show." },
+      { indicator: "climate.el_nino.subseasonal_composite", chart: "tableBars", title: "When in the season the rain goes missing", subtitle: "Average monthly rainfall departure, El Nino monsoons against a typical year - all-India", unit: "% above or below normal rainfall", size: "feature", beat: "timing", why: "Timing decides damage: a dry July at sowing hurts far more than a dry September after the crop is set.", read: "El Nino monsoons tend to be driest at the two ends - a weak June onset and a faltering September - while August holds up best.", watch: "These are averages across many events. Any single year fails on its own schedule, and a composite cannot tell you which month 2026 will lose." },
+      { indicator: "agriculture.el_nino.rice_yield_anomaly_state", chart: "choropleth", title: "Where El Nino actually cuts the rice harvest", subtitle: "Average kharif rice yield change in El Nino monsoons, by state - ICRISAT district data - 1966-2017", unit: "% above or below the recent 5-year yield", size: "feature", beat: "yield-geography", signed: true, rankLabel: "Rice yields rose", bottomLabel: "Rice yields fell", why: "The rainfall map and the harvest map are not the same picture.", read: "The eastern rainfed belt loses the most yield, while irrigated Punjab and Haryana actually rise.", watch: "This is yield, not total output, and ICRISAT covers 20 major farming states - blank states are simply not in the dataset." },
+      { indicator: "agriculture.el_nino.irrigation_yield_split", chart: "tableBars", title: "Why the rainfall map is not the yield map", subtitle: "El Nino-year yield against the crop's own prior 5-year average: irrigated rice vs rainfed coarse cereals, by region - ICRISAT - 1966-2017", unit: "% above or below the recent 5-year normal", size: "feature", beat: "irrigation", why: "The northwest loses the most rain yet its rice barely flinches. Splitting an irrigated crop from a rainfed one shows why.", read: "In the rain-starved northwest, irrigated rice ran above its own normal while rainfed coarse cereals fell well below theirs.", watch: "Crop mix and irrigation cover differ by region, so this contrast is sharpest in the northwest and muted elsewhere." },
+      { indicator: "agriculture.el_nino.crop_yield_sensitivity", chart: "tableBars", title: "Which crops El Nino actually hits", subtitle: "Average El Nino-year yield against the crop's own prior 5-year normal, all-India - ICRISAT - 1966-2017", unit: "% above or below the crop's recent 5-year normal", size: "feature", beat: "crop-sensitivity", why: "If irrigation is the shield, the damage should sort cleanly by crop. It does, which is what makes the irrigated/rainfed split predictive rather than merely descriptive.", read: "The rainfed kharif crops - groundnut, jowar, bajra, pulses, oilseeds - take the hit, while irrigated and winter crops like wheat, rice and sugarcane are flat or even gain.", watch: "These are national averages. A rainfed crop can fail badly in one region while the all-India figure looks mild." },
+
+      // ACT 5 - from rain to prices
+      { indicator: "prices.el_nino.food_wpi_postmonsoon", chart: "tableBars", title: "A weak monsoon does not automatically mean dearer food", subtitle: "Post-monsoon (Oct-Dec) wholesale food inflation in El Nino years - RBI WPI - 1982-2024", unit: "% food inflation, year-on-year", size: "feature", beat: "prices", why: "The fear behind the headlines is prices. The longest record we have shows the link is real but loose.", read: "There is no clean rule. 2002 had a severe drought yet almost no food inflation; 2009's drought pushed it above 16%.", watch: "Prices answer to stocks, imports, global cycles and policy as much as to rain. Public grain stocks now blunt much of the shock." },
+      { indicator: "prices.el_nino.food_wpi_components", chart: "tableBars", title: "After a drought, food prices do not move as one", subtitle: "Post-monsoon wholesale inflation by food group, four El Nino droughts - RBI WPI", unit: "% inflation, year-on-year", size: "feature", beat: "prices", why: "Food inflation is a bundle of separate shocks. Splitting it shows which foods carry the pain.", read: "Pulses and onions can spike enormously after a drought while cereals barely budge, shielded by large public grain stocks.", watch: "The same drought year can show falling prices in one food and a price explosion in another." },
+
+      // ACT 6 - after the monsoon: the part nobody covers
+      { indicator: "climate.el_nino.monsoon_sign_flip", chart: "tableBars", title: "Same El Nino, opposite signs: India has two monsoons", subtitle: "Average rainfall departure in El Nino conditions - southwest monsoon (all India) against northeast monsoon (southern belt)", unit: "average % above or below normal rainfall", size: "feature", beat: "sign-flip", why: "The single most under-covered fact about El Nino in India: it moves rain as well as removing it, and the 2026 event peaks in the season where the sign reverses.", read: "In El Nino conditions the June-September monsoon averages a national deficit, while the October-December northeast monsoon over the southern belt averages a surplus.", watch: "Different seasons over different regions, so the magnitudes are not comparable - only the reversal of sign is the claim. And more rain is not automatically good news: the northeast monsoon delivers much of its total in intense spells." },
+      // Replaces climate.el_nino.northeast_monsoon_by_phase. That chart asserted the
+      // northeast-monsoon ordering, which our own Welch test cannot separate from noise
+      // (p about 0.46), and it largely duplicated the sign-flip chart above it - two charts
+      // for one unproven fact. This one carries the same act on something the record does
+      // establish: El Nino peaks months after the kharif harvest is settled.
+      { indicator: "climate.el_nino.event_peak_timing", chart: "tableBars", title: "El Nino peaks after the kharif harvest is decided", subtitle: "Every El Nino event since 1950, grouped by the three-month window in which the Pacific reached its maximum", unit: "number of events", size: "feature", beat: "timing-forward", why: "The fact that moves the risk into 2027: the event is loudest long after the summer crop is settled.", read: "Events pile up in the Oct-Dec and Nov-Jan windows. Of the ten strongest since 1950, nine peaked between September and February.", watch: "The lone exception is the unusual two-year 1986-88 event, which peaked in mid-1987. Peak here means the highest three-month average, and events differ in how long they hold near it." },
+      // The peak-timing chart says WHEN the event lands. This says what it lands ON, and
+      // adds the second channel: until now the rabi risk in this piece was purely about
+      // water. Detrended, or a warming record would make any recent-weighted subset look
+      // hot for reasons that have nothing to do with the Pacific.
+      { indicator: "climate.el_nino.rabi_heat", chart: "tableBars", title: "El Nino does not just take the water. It brings the heat.", subtitle: "All-India temperature against each year's own decade, by the ENSO phase of that year's monsoon - ERA5, detrended", unit: "°C above or below normal for its own decade", size: "feature", beat: "timing-forward", why: "The winter crop is where this event actually lands, and it faces two things at once: emptier reservoirs and a warmer season. The heat channel turns out to be the better-evidenced of the two.", read: "After an El Nino monsoon the October-to-February window runs about 0.3°C above its own decade, and after a La Nina about 0.24°C below. The gap is roughly half a degree.", watch: "Detrended, so this is not the global warming trend. But it is a correlation across 17 seasons, not an attribution for any one year, and the narrower February-March grain-filling window that actually decides a wheat yield cannot be separated from noise." },
+
+      // ACT 7 - the human stake
+      { chart: "multiLine", title: "A shrinking share of the economy, but still two in five jobs", subtitle: "Agriculture's share of India's output and of its workforce - 1951-2025", unit: "% share", size: "feature", beat: "macro-context", series: [
+        { indicator: "work.employment_agriculture", label: "Share of India's workers" },
+        { indicator: "econ.el_nino.agri_gva_share", label: "Share of India's output (GVA)" }
+      ], why: "The human heart of the question: how many people a bad rain year can reach, set against how little it now moves headline GDP.", read: "Farming has fallen to about a seventh of output, so a drought dents GDP far less than in 1965. But it still employs roughly two in five working Indians, and the gap between the lines is the monsoon's real human reach.", watch: "The output line is RBI national accounts; the jobs line is the World Bank's modelled estimate. Both fall over time, but the jobs line stays far higher, which is the point." }
+    ]
+  },
+  {
     id: "q.econ.industrial_policy",
     slug: "india-industrial-policy-surge",
     question: "Has India\u2019s industrial policy surge paid off?",

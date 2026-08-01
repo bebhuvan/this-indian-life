@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.event_peak_timing",
+  "title": "El Nino peaks after the kharif harvest is decided",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.event_peak_timing",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "unit": "number of events",
+  "geography": {
+    "type": "region",
+    "id": "nino34",
+    "name": "Nino 3.4 region"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "category",
+    "strong_events"
+  ],
+  "fetchedAt": "2026-07-31T05:52:46.011Z",
+  "rows": [
+    {
+      "label": "Jul-Sep",
+      "value": 2,
+      "category": "El Nino events peaking in Jul-Sep",
+      "strong_events": 1
+    },
+    {
+      "label": "Sep-Nov",
+      "value": 4,
+      "category": "El Nino events peaking in Sep-Nov",
+      "strong_events": 1
+    },
+    {
+      "label": "Oct-Dec",
+      "value": 7,
+      "category": "El Nino events peaking in Oct-Dec",
+      "strong_events": 1
+    },
+    {
+      "label": "Nov-Jan",
+      "value": 7,
+      "category": "El Nino events peaking in Nov-Jan",
+      "strong_events": 5
+    },
+    {
+      "label": "Dec-Feb",
+      "value": 3,
+      "category": "El Nino events peaking in Dec-Feb",
+      "strong_events": 2
+    },
+    {
+      "label": "Jan-Mar",
+      "value": 1,
+      "category": "El Nino events peaking in Jan-Mar",
+      "strong_events": 0
+    }
+  ],
+  "metadata": {
+    "note": "Every El Nino event since 1950, grouped by the three-month window in which its ONI peaked. Events cluster heavily in autumn and early winter, months after India's June-September monsoon has finished.",
+    "strongEvents": {
+      "total": 10,
+      "peakingSeptemberToFebruary": 9,
+      "exception": [
+        "1986-88 (peaked 1987-JAS)"
+      ],
+      "list": [
+        "1957-58: peaks 1958-DJF, ONI 1.81",
+        "1965-66: peaks 1965-SON, ONI 1.98",
+        "1972-73: peaks 1972-NDJ, ONI 2.12",
+        "1982-83: peaks 1982-NDJ, ONI 2.23",
+        "1986-88: peaks 1987-JAS, ONI 1.7",
+        "1991-92: peaks 1992-DJF, ONI 1.71",
+        "1997-98: peaks 1997-OND, ONI 2.4",
+        "2009-10: peaks 2009-NDJ, ONI 1.56",
+        "2014-16: peaks 2015-NDJ, ONI 2.75",
+        "2023-24: peaks 2023-NDJ, ONI 2.06"
+      ]
+    },
+    "whyItMatters": "The kharif crop is largely settled by the end of September. If the Pacific does not reach its maximum until Oct-Jan, the loudest part of the event lands on reservoir carryover, the winter rabi sowing and food prices in the following year, rather than on the summer harvest everyone is watching.",
+    "caveat": "Peak here means the highest SEASONAL ONI value, using the three-month running mean. Events also vary in how long they hold near their peak, which this count does not show."
+  }
+}

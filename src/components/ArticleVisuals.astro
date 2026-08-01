@@ -182,6 +182,13 @@ function fmt(value: number, unit = "") {
   if (abs >= 1_000_000) return `${(value / 1_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} million`;
   if (abs >= 1000) return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   if (abs >= 100) return value.toFixed(0);
+  // Sub-unit values need more than one decimal or the rounding invents a story. A chart of
+  // ONI-minus-RONI gaps rendered -0.116 and -0.056 as an identical "-0.1", flattening a
+  // two-fold difference and contradicting prose that correctly quoted -0.12 and -0.06.
+  // Values at or above 1 are unchanged, and toLocaleString drops trailing zeros, so this
+  // only ever ADDS a digit where one is meaningful.
+  if (abs < 0.01) return value.toLocaleString("en-IN", { maximumFractionDigits: 3 });
+  if (abs < 10) return value.toLocaleString("en-IN", { maximumFractionDigits: 2 });
   return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
 }
 
@@ -426,6 +433,13 @@ function formatAxisLabel(date: string) {
   return match[1];
 }
 
+function compactPeriodLabel(date: string) {
+  const match = String(date).match(/^(\d{4})-(\d{2})$/);
+  if (!match) return String(date);
+  const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Number(match[2]) - 1];
+  return month ? `${month} ${match[1]}` : String(date);
+}
+
 function svgCoord(value: number, precision = 1) {
   return Number(value.toFixed(precision)).toString();
 }
@@ -597,7 +611,14 @@ function explainerForVisual(visual: VisualSpec, index: number) {
     detail: note?.detail || generated?.detail || generated?.whyShowThis || note?.read || insightForVisual(visual),
     howToRead: generated?.howToRead || note?.read || insightForVisual(visual),
     mistakeToAvoid: generated?.mistakeToAvoid || note?.watch || "Do not turn one line into the whole story. Check the unit, the source, and the companion charts.",
-    mobileNote: generated?.mobileNote || "Keep the chart simple on phones: fewer ticks, short labels, and one clear takeaway."
+    // Both of these render, so they fall back to nothing rather than to boilerplate.
+    // The old mobileNote fallback ("fewer ticks, short labels") was an instruction to
+    // whoever builds the chart, not something a reader should ever have been shown -
+    // it only stayed invisible because neither field was wired into the markup.
+    // whyShowThis is suppressed when it already supplied takeaway or detail above,
+    // so the same sentence never appears twice in one card.
+    whyShowThis: generated?.whyShowThis && generated?.takeaway && (note?.detail || generated?.detail) ? generated.whyShowThis : "",
+    mobileNote: generated?.mobileNote || ""
   };
 }
 
@@ -954,17 +975,23 @@ function scatterXYGeometry(visual: ScatterXYVisual, mobile = false) {
   };
   const xTicks = axisTicks(visual.xMin, visual.xMax, 5);
   const yTicks = axisTicks(visual.yMin, visual.yMax, mobile ? 4 : 5);
-  // Stack highlighted-point labels so they don't overlap.
+  // Stack point labels so they don't overlap.
   const labelGap = mobile ? 6 : 10;
   const minGap = mobile ? 16 : 20;
-  const raw = visual.points
-    .filter((point) => point.highlight)
-    .map((point) => {
-      const cx = x(point.x);
-      const radius = mobile ? 4.5 : 6;
-      const side = point.x > (visual.xMin + visual.xMax) / 2 ? "left" : "right";
-      return { label: point.label, side, anchorX: cx, anchorY: y(point.y), x: side === "left" ? cx - radius - labelGap : cx + radius + labelGap, y: y(point.y) - radius - 4 };
-    });
+  // Label EVERY point on a small scatter, not just the highlighted ones. These charts
+  // exist to argue that a relationship is absent, and the prose names individual cases
+  // ("in 1965 the warmth leaned east by 0.97, and the monsoon still came in 18.6%
+  // short"). With only the two highlighted points labelled, a reader could not find
+  // 1965 on the chart at all: it was one of five identical grey dots. Above the
+  // threshold the labels would collide into noise, so fall back to highlights only.
+  const LABEL_ALL_MAX = mobile ? 8 : 12;
+  const labelled = visual.points.length <= LABEL_ALL_MAX ? visual.points : visual.points.filter((point) => point.highlight);
+  const raw = labelled.map((point) => {
+    const cx = x(point.x);
+    const radius = point.highlight ? (mobile ? 4.5 : 6) : (mobile ? 2.6 : 3.4);
+    const side = point.x > (visual.xMin + visual.xMax) / 2 ? "left" : "right";
+    return { label: point.label, side, highlight: Boolean(point.highlight), anchorX: cx, anchorY: y(point.y), x: side === "left" ? cx - radius - labelGap : cx + radius + labelGap, y: y(point.y) - radius - 4 };
+  });
   // Relax overlapping labels around their own centroid (push half up, half down)
   // instead of only cascading downward, so a tight cluster doesn't fling its
   // labels far below the points into empty space.
@@ -1207,8 +1234,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1295,8 +1324,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1394,8 +1425,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1506,8 +1539,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1549,7 +1584,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 const isIndia = point.label === "India";
                 const radius = isIndia ? (mobile ? 6 : 8) : point.highlight ? (mobile ? 4.5 : 6) : (mobile ? 2.6 : 3.4);
                 const fill = isIndia ? "#b3245a" : point.highlight ? "rgba(179,36,90,0.5)" : "rgba(138,133,151,0.4)";
-                const placement = point.highlight ? geo.labelPositions.get(point.label) : null;
+                const placement = geo.labelPositions.get(point.label) || null;
                 // Draw a faint leader line when the label sits noticeably off its dot,
                 // so a displaced label reads as attached rather than floating in space.
                 const labelAnchorX = placement ? (placement.side === "left" ? placement.x + 3 : placement.x - 3) : 0;
@@ -1563,7 +1598,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                       <title>{`${point.label}: ${scatterValue(point.x, sc.xLabel)} ${sc.xLabel}, ${scatterValue(point.y, sc.yLabel)} ${sc.yLabel}`}</title>
                     </circle>
                     {placement ? (
-                      <text class="point-label" x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"} style={isIndia ? "font-weight:600" : ""}>{placement.label}</text>
+                      <text class={`point-label${point.highlight || isIndia ? "" : " point-label-muted"}`} x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"} style={isIndia ? "font-weight:600" : ""}>{placement.label}</text>
                     ) : null}
                   </g>
                 );
@@ -1593,8 +1628,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1643,8 +1680,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
                 <div class="viz-source"><span>Source</span>{source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}</div>
               </div>
@@ -1682,8 +1721,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1802,8 +1843,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1909,8 +1952,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -1959,8 +2004,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -2019,8 +2066,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -2068,7 +2117,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               </div>
               <p class="spark-scale">{isTemp
                 ? <Fragment>Each chart is one city, {startYear}–{endYear}, auto-scaled to its own range so the trend is visible — read the <em>slope</em>, not the height. The big number is the {endYear} value; the small coloured number is the change since the {startYear}s (red = warmer, blue = cooler). Colour of the line shows how high the {endYear} value sits across all cities.</Fragment>
-                : <Fragment>Each small chart is one panel, {startYear}–{endYear}, auto-scaled to its own range so the trend is visible — read the <em>slope</em>, not the height. The two numbers are the {startYear} value and the {endYear} value (start → latest).</Fragment>}</p>
+                : sg.latestPeriodLabel
+                  ? <Fragment>Each panel plots individual monthly observations from {startYear} to {endYear} and uses its own vertical scale. Read the <em>slope</em>, not the height. The dated red figure is the latest month only, not a financial-year total.</Fragment>
+                  : <Fragment>Each panel plots individual observations from {startYear} to {endYear} and uses its own vertical scale. Read the <em>slope</em>, not the height. The two figures are the first published observation and the latest observation. They are not totals for the full period.</Fragment>}</p>
               <div class="spark-grid">
                 {sg.cells.map((c) => {
                   const col = choroColor(c.latest ?? 0, sg.min, sg.max);
@@ -2083,7 +2134,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     <div class="spark-cell">
                       <div class="spark-head"><b>{c.label}</b><span class="spark-nums">{isTemp
                         ? <Fragment><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em>{typeof c.change === "number" ? <i class={`spark-d ${c.change >= 0 ? "pos" : "neg"}`}>{signedFmt(c.change, sg.unit)}</i> : null}</Fragment>
-                        : <Fragment><i class="spark-d" style="color:#9a938a">{sparkEndpoint(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:#a8123f">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
+                        : sg.latestPeriodLabel
+                          ? <Fragment><i class="spark-period">{compactPeriodLabel(cellEnd)} only</i><em style="color:#a8123f">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>
+                          : <Fragment><i class="spark-d" style="color:#9a938a">{sparkEndpoint(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:#a8123f">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
                       <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${sparkEndpoint(c.latest ?? 0, sg.unit)} in ${cellEnd}`}>
                         <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
                         <polygon points={sparkArea(c.points)} fill={lineCol} fill-opacity={isTemp ? 0.14 : 0.10} stroke="none" />
@@ -2099,8 +2152,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -2148,8 +2203,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -2225,8 +2282,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -2275,8 +2334,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -2355,8 +2416,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <p class="cn-take serif">{note.takeaway}</p>
                 {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
                 <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                   <p><b>How to read</b><span>{note.howToRead}</span></p>
                   <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
                 </div>
               </div>
               <div class="viz-source">
@@ -2392,8 +2455,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <p class="cn-take serif">{note.takeaway}</p>
               {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
               <div class="cn-meta">
+                {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
                 <p><b>How to read</b><span>{note.howToRead}</span></p>
                 <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
               </div>
             </div>
             <div class="viz-source">

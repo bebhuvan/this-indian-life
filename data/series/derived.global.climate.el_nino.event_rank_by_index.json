@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.event_rank_by_index",
+  "title": "Change the index and the record holder changes",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.event_rank_by_index",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+  "unit": "°C above normal, at the event's peak",
+  "geography": {
+    "type": "region",
+    "id": "nino34",
+    "name": "Nino 3.4 region"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "category"
+  ],
+  "fetchedAt": "2026-08-01T07:19:43.195Z",
+  "rows": [
+    {
+      "label": "1982-83 (raw 2.23)",
+      "value": 2.52,
+      "category": "1982-83, trend-adjusted peak (its raw peak was 2.23)"
+    },
+    {
+      "label": "1997-98 (raw 2.40)",
+      "value": 2.38,
+      "category": "1997-98, trend-adjusted peak (its raw peak was 2.40)"
+    },
+    {
+      "label": "2014-16 (raw 2.75)",
+      "value": 2.37,
+      "category": "2014-16, trend-adjusted peak (its raw peak was 2.75)"
+    },
+    {
+      "label": "1991-92 (raw 1.71)",
+      "value": 2.32,
+      "category": "1991-92, trend-adjusted peak (its raw peak was 1.71)"
+    },
+    {
+      "label": "1972-73 (raw 2.12)",
+      "value": 2.27,
+      "category": "1972-73, trend-adjusted peak (its raw peak was 2.12)"
+    },
+    {
+      "label": "1965-66 (raw 1.98)",
+      "value": 2.04,
+      "category": "1965-66, trend-adjusted peak (its raw peak was 1.98)"
+    },
+    {
+      "label": "1957-58 (raw 1.81)",
+      "value": 2.02,
+      "category": "1957-58, trend-adjusted peak (its raw peak was 1.81)"
+    },
+    {
+      "label": "1986-88 (raw 1.70)",
+      "value": 1.56,
+      "category": "1986-88, trend-adjusted peak (its raw peak was 1.70)"
+    }
+  ],
+  "metadata": {
+    "note": "The eight strongest El Nino events since 1950, ranked by the TREND-ADJUSTED index (RONI), with each event's RAW index peak shown in its label. Read the ordering against those raw figures: 1982-83 tops this ranking at 2.52 even though its raw peak (2.23) is lower than 2014-16's (2.75), which falls to third at 2.37. That reordering is the point - accounting for a warming tropics changes which event counts as the benchmark.",
+    "perEvent": [
+      {
+        "event": "1982-83",
+        "peak_oni_c": 2.23,
+        "peak_roni_c": 2.52
+      },
+      {
+        "event": "1997-98",
+        "peak_oni_c": 2.4,
+        "peak_roni_c": 2.38
+      },
+      {
+        "event": "2014-16",
+        "peak_oni_c": 2.75,
+        "peak_roni_c": 2.37
+      },
+      {
+        "event": "1991-92",
+        "peak_oni_c": 1.71,
+        "peak_roni_c": 2.32
+      },
+      {
+        "event": "1972-73",
+        "peak_oni_c": 2.12,
+        "peak_roni_c": 2.27
+      },
+      {
+        "event": "1965-66",
+        "peak_oni_c": 1.98,
+        "peak_roni_c": 2.04
+      },
+      {
+        "event": "1957-58",
+        "peak_oni_c": 1.81,
+        "peak_roni_c": 2.02
+      },
+      {
+        "event": "1986-88",
+        "peak_oni_c": 1.7,
+        "peak_roni_c": 1.56
+      }
+    ],
+    "barValueIs": "peak RONI. The number in brackets in each label is peak ONI.",
+    "topFiveByOni": [
+      "2014-16 2.75",
+      "1997-98 2.4",
+      "1982-83 2.23",
+      "1972-73 2.12",
+      "1965-66 1.98"
+    ],
+    "topFiveByRoni": [
+      "1982-83 2.52",
+      "1997-98 2.38",
+      "2014-16 2.37",
+      "1991-92 2.32",
+      "1972-73 2.27"
+    ],
+    "caveat": "Peak SEASONAL values, unscaled. These run lower than the peak MONTHLY figures quoted in most coverage, and are not comparable with variance-restoration-scaled RONI figures published elsewhere."
+  }
+}

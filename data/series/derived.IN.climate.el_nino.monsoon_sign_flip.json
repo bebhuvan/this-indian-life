@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.el_nino.monsoon_sign_flip",
+  "title": "Same El Nino, opposite signs: two monsoons",
+  "sourceId": "derived",
+  "sourceIndicatorId": "derived.climate.el_nino.monsoon_sign_flip",
+  "sourceUrl": "https://imdpune.gov.in/cmpg/Product/Rainfall_Data.html",
+  "unit": "average % above or below normal rainfall",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "label",
+    "value",
+    "category"
+  ],
+  "fetchedAt": "2026-08-01T06:56:06.191Z",
+  "rows": [
+    {
+      "label": "Southwest monsoon (Jun-Sep), all India",
+      "value": -3.2,
+      "category": "Southwest monsoon, all India, El Nino years"
+    },
+    {
+      "label": "Northeast monsoon (Oct-Dec), south peninsula",
+      "value": 3.7,
+      "category": "Northeast monsoon, southern belt, El Nino years"
+    },
+    {
+      "label": "Northeast monsoon (Oct-Dec), Tamil Nadu",
+      "value": 5.1,
+      "category": "Northeast monsoon, Tamil Nadu, El Nino years"
+    }
+  ],
+  "metadata": {
+    "method": "Oct+Nov+Dec rainfall per IMD subdivision, expressed as a percentage departure from that subdivision's own 1971-2020 OND normal. The region figure is the UNWEIGHTED MEAN of subdivision departures, not an area-weighted total, because subdivision areas are not in the dataset. It therefore answers \"how anomalous was the season across the belt\", not \"how much rain fell\".",
+    "subdivisionsUsed": [
+      "Tamil Nadu, Puducherry and Karaikal",
+      "Coastal Andhra Pradesh and Yanam",
+      "Rayalaseema",
+      "South Interior Karnataka",
+      "Kerala and Mahe"
+    ],
+    "subdivisionsMissing": "none",
+    "ondNormalsMm": {
+      "Andaman & Nicobar Islands": 661.6,
+      "Arunachal Pradesh": 225.1,
+      "Assam and Meghalaya": 186,
+      "Nagaland, Manipur, Mizoram and Tripura": 210.3,
+      "Sub Himalayan West Bengal and Sikkim": 168,
+      "Gangetic West Bengal": 151.9,
+      "Odisha": 137.8,
+      "Jharkhand": 92.9,
+      "Bihar": 69.6,
+      "East Uttar Pradesh": 43.9,
+      "West Uttar Pradesh": 29.8,
+      "Uttarakhand": 52.1,
+      "Haryana, Chandigarh, Delhi": 19.4,
+      "Punjab": 24.1,
+      "Himachal Pradesh": 79.6,
+      "Jammu and Kashmir": 123.1,
+      "West Rajasthan": 11,
+      "East Rajasthan": 22.9,
+      "West Madhya Pradesh": 43.8,
+      "East Madhya Pradesh": 52.9,
+      "Gujarat Region": 30.4,
+      "Saurashtra and Kutch": 27.3,
+      "Konkan and Goa": 140.8,
+      "Madhya Maharashtra": 102.6,
+      "Marathwada": 97.2,
+      "Vidarbha": 75.5,
+      "Chhattisgarh": 76.1,
+      "Coastal Andhra Pradesh and Yanam": 322.1,
+      "Telangana": 119.4,
+      "Rayalaseema": 230.1,
+      "Tamil Nadu, Puducherry and Karaikal": 438.8,
+      "Coastal Karnataka": 258.5,
+      "North Interior Karnataka": 131.2,
+      "South Interior Karnataka": 194.2,
+      "Kerala and Mahe": 477.8,
+      "Lakshadweep": 336
+    },
+    "ensoSeasonUsed": "OND ONI - the season contemporaneous with the northeast monsoon itself, not the JJAS value used for the southwest monsoon.",
+    "sourceNote": "IMD subdivisional monthly rainfall, 1901-2025, already ingested for this repo.",
+    "note": "The southwest-monsoon figure is the all-India El Nino mean from climate.el_nino.phase_rain_summary (JJAS, IMD). The northeast-monsoon figures are OND departures for the southern belt. Both rest on the same IMD record.",
+    "caveat": "Southwest figure read from the existing phase summary.",
+    "doNotMisread": "These are different seasons over different regions. The chart's claim is that the sign of El Nino's effect reverses between them, not that the magnitudes are comparable."
+  }
+}

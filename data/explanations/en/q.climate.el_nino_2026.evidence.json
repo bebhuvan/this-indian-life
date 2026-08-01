@@ -1,0 +1,3205 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.climate.el_nino_2026",
+  "question": "El Nino is shouting. What can it actually tell India?",
+  "priority": "core",
+  "theme": {
+    "id": "climate",
+    "label": "Climate, emissions, and air",
+    "readerQuestions": [
+      "Is this about total scale or per-person exposure?",
+      "Is the chart annual, cumulative, or a latest snapshot?",
+      "What comparison would stop the number from being misread?",
+      "What is outside the measure?"
+    ],
+    "glossaryTerms": [
+      "CO2",
+      "per capita emissions",
+      "cumulative emissions",
+      "AQI",
+      "PM2.5",
+      "ERA5",
+      "daily maximum temperature",
+      "precipitation"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "climate.enso.index_ladder_2026",
+    "climate.el_nino.strong_event_outcomes",
+    "climate.el_nino.event_rank_by_index"
+  ],
+  "availableIndicatorIds": [
+    "climate.enso.index_ladder_2026",
+    "climate.el_nino.strong_event_outcomes",
+    "climate.el_nino.event_rank_by_index"
+  ],
+  "themeIndicatorIds": [
+    "climate.enso.index_ladder_2026",
+    "climate.el_nino.strong_event_outcomes",
+    "climate.el_nino.event_rank_by_index",
+    "climate.enso.oni_roni_gap_by_decade",
+    "climate.el_nino.imd_monsoon_departure_1901_2025",
+    "climate.el_nino.definition_sensitivity",
+    "climate.el_nino.flavour_by_event",
+    "climate.el_nino.enso_iod_matrix",
+    "climate.el_nino.enso_monsoon_rolling_corr",
+    "climate.el_nino.regional_sensitivity",
+    "climate.el_nino.subseasonal_composite",
+    "agriculture.el_nino.irrigation_yield_split",
+    "agriculture.el_nino.crop_yield_sensitivity",
+    "prices.el_nino.food_wpi_postmonsoon",
+    "prices.el_nino.food_wpi_components",
+    "climate.el_nino.monsoon_sign_flip",
+    "climate.el_nino.event_peak_timing",
+    "econ.el_nino.agri_gva_share",
+    "work.employment_agriculture"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.climate.enso.index_ladder_2026",
+      "indicatorId": "climate.enso.index_ladder_2026",
+      "title": "Five official numbers for the same ocean",
+      "sourceId": "derived",
+      "unit": "degrees C anomaly",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.climate.el_nino.strong_event_outcomes",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "title": "The strong El Nino monsoons, and what India got",
+      "sourceId": "derived",
+      "unit": "% rainfall departure",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.climate.el_nino.event_rank_by_index",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "title": "Change the index and the record holder changes",
+      "sourceId": "derived",
+      "unit": "deg C peak seasonal anomaly",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.climate.enso.oni_roni_gap_by_decade",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade",
+      "title": "How far the raw index now runs above the trend-adjusted one",
+      "sourceId": "derived",
+      "unit": "degrees C (ONI minus RONI)",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v5.climate.el_nino.imd_monsoon_departure_1901_2025",
+      "indicatorId": "climate.el_nino.imd_monsoon_departure_1901_2025",
+      "title": "All-India southwest monsoon rainfall departure, 1901-2025",
+      "sourceId": "imd",
+      "unit": "% rainfall departure",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v6.climate.el_nino.definition_sensitivity",
+      "indicatorId": "climate.el_nino.definition_sensitivity",
+      "title": "How the El Nino verdict depends on the definition",
+      "sourceId": "derived-imd-noaa",
+      "unit": "% mean rainfall departure",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v7.climate.el_nino.flavour_by_event",
+      "indicatorId": "climate.el_nino.flavour_by_event",
+      "title": "Where the Pacific warmed, and whether it predicted India's monsoon",
+      "sourceId": "derived",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.climate.el_nino.enso_iod_matrix",
+      "indicatorId": "climate.el_nino.enso_iod_matrix",
+      "title": "Does the Indian Ocean rescue an El Nino monsoon?",
+      "sourceId": "derived-imd-noaa",
+      "unit": "% mean rainfall departure",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.climate.el_nino.enso_monsoon_rolling_corr",
+      "indicatorId": "climate.el_nino.enso_monsoon_rolling_corr",
+      "title": "Has the Pacific's grip on the monsoon loosened?",
+      "sourceId": "derived-imd-noaa",
+      "unit": "21-year rolling correlation (ONI vs rainfall)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.climate.el_nino.regional_sensitivity",
+      "indicatorId": "climate.el_nino.regional_sensitivity",
+      "title": "El Nino does not hit every region the same way",
+      "sourceId": "derived-imd-noaa",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.climate.el_nino.subseasonal_composite",
+      "indicatorId": "climate.el_nino.subseasonal_composite",
+      "title": "When in the season El Nino bites",
+      "sourceId": "imd",
+      "unit": "% mean rainfall departure",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.agriculture.el_nino.irrigation_yield_split",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split",
+      "title": "Why El Nino's harvest hit depends on irrigation, not just rainfall",
+      "sourceId": "icrisat-dld",
+      "unit": "% mean yield deviation in El Nino years",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.agriculture.el_nino.crop_yield_sensitivity",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity",
+      "title": "Which crops El Nino actually hits",
+      "sourceId": "icrisat-dld",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.prices.el_nino.food_wpi_postmonsoon",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon",
+      "title": "Food prices after an El Nino monsoon, 1982-2024",
+      "sourceId": "rbi-dbie",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v15.prices.el_nino.food_wpi_components",
+      "indicatorId": "prices.el_nino.food_wpi_components",
+      "title": "After an El Nino monsoon, food prices do not move as one",
+      "sourceId": "rbi-dbie",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v16.climate.el_nino.monsoon_sign_flip",
+      "indicatorId": "climate.el_nino.monsoon_sign_flip",
+      "title": "Same El Nino, opposite signs: two monsoons",
+      "sourceId": "derived",
+      "unit": "% mean rainfall departure in El Nino conditions",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v17.climate.el_nino.event_peak_timing",
+      "indicatorId": "climate.el_nino.event_peak_timing",
+      "title": "El Nino peaks after the kharif harvest is decided",
+      "sourceId": "derived",
+      "unit": "number of events",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v18.econ.el_nino.agri_gva_share",
+      "indicatorId": "econ.el_nino.agri_gva_share",
+      "title": "Why an identical drought hurts the economy less than it used to",
+      "sourceId": "rbi-dbie",
+      "unit": "% agriculture share of GVA (constant prices)",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v19.work.employment_agriculture",
+      "indicatorId": "work.employment_agriculture",
+      "title": "Employment in agriculture",
+      "sourceId": "worldbank",
+      "unit": "% of total employment",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "five-official-numbers-for-the-same-ocean",
+      "title": "Five official numbers for the same ocean",
+      "chartType": "tableBars",
+      "beat": "measurement",
+      "window": "",
+      "indicator": "climate.enso.index_ladder_2026",
+      "series": [],
+      "unit": "deg C anomaly",
+      "subtitle": "NOAA Nino 3.4 measures for 2026, by product, period and baseline",
+      "whyThisChart": "Open on the measurement problem rather than a scare number: one ocean, five official NOAA figures, spanning roughly +0.5 to +2.2."
+    },
+    {
+      "order": 2,
+      "chartId": "change-the-index-and-the-record-holder-changes",
+      "title": "Change the index and the record holder changes",
+      "chartType": "tableBars",
+      "beat": "history",
+      "window": "",
+      "indicator": "climate.el_nino.event_rank_by_index",
+      "series": [],
+      "unit": "deg C peak anomaly",
+      "subtitle": "The eight strongest El Nino events since 1950, each measured on the raw index and on the trend-adjusted one - peak seasonal anomaly",
+      "whyThisChart": "The payoff of the measuring-stick argument: which event counts as the benchmark depends on which index you use."
+    },
+    {
+      "order": 3,
+      "chartId": "the-measuring-stick-moved",
+      "title": "The measuring stick moved",
+      "chartType": "tableBars",
+      "beat": "measurement",
+      "window": "",
+      "indicator": "climate.enso.oni_roni_gap_by_decade",
+      "series": [],
+      "unit": "deg C",
+      "subtitle": "Average gap between the raw index and the trend-adjusted one (ONI minus RONI), by decade",
+      "whyThisChart": "The deepest reason old and new El Ninos are hard to compare: as the whole tropical ocean warms, the raw index drifts upward for the same relative Pacific gradient."
+    },
+    {
+      "order": 4,
+      "chartId": "a-century-and-a-quarter-of-monsoons-that-never-sit-still",
+      "title": "A century and a quarter of monsoons that never sit still",
+      "chartType": "stripes",
+      "beat": "climate-history",
+      "window": "",
+      "indicator": "climate.el_nino.imd_monsoon_departure_1901_2025",
+      "series": [],
+      "unit": "% rainfall departure",
+      "subtitle": "IMD all-India June-September rainfall departure - 1901-2025",
+      "whyThisChart": "Before conditioning on anything, show the raw material: 125 monsoons, no two alike."
+    },
+    {
+      "order": 5,
+      "chartId": "how-strictly-you-define-an-el-nino-year-changes-the-answer",
+      "title": "How strictly you define an El Nino year changes the answer",
+      "chartType": "tableBars",
+      "beat": "method",
+      "window": "",
+      "indicator": "climate.el_nino.definition_sensitivity",
+      "series": [],
+      "unit": "% mean rainfall departure",
+      "subtitle": "Average all-India rainfall departure under three definitions - 1950-2025",
+      "whyThisChart": "The reassuring headline number and the alarming one come from the same record. The difference is the definition, which most coverage hides."
+    },
+    {
+      "order": 6,
+      "chartId": "a-bigger-el-nino-is-not-a-worse-monsoon",
+      "title": "A bigger El Nino is not a worse monsoon",
+      "chartType": "scatterXY",
+      "beat": "answer",
+      "window": "",
+      "indicator": "climate.el_nino.strong_event_outcomes",
+      "series": [],
+      "unit": "% rainfall departure",
+      "subtitle": "The seven monsoons in which the ONI reached +1.5 or above during June-September - peak Pacific warmth against India's rainfall departure",
+      "whyThisChart": "This is the reference class 2026 belongs to if the forecast holds, and it kills the intuition that a bigger Pacific anomaly means a worse monsoon."
+    },
+    {
+      "order": 7,
+      "chartId": "where-the-pacific-warmed-does-not-settle-it-either",
+      "title": "Where the Pacific warmed does not settle it either",
+      "chartType": "scatterXY",
+      "beat": "honest-negative",
+      "window": "",
+      "indicator": "climate.el_nino.flavour_by_event",
+      "series": [],
+      "unit": "% rainfall departure",
+      "subtitle": "Eastern minus central Pacific warmth (Nino 1+2 minus Nino 4, June-September mean) against India's rainfall departure - the seven strong events",
+      "whyThisChart": "The leading scientific explanation for why some big El Ninos spare India is WHERE the Pacific warms. Tested on these seven events it does not discriminate, which is worth showing rather than hiding."
+    },
+    {
+      "order": 8,
+      "chartId": "does-the-indian-ocean-rescue-an-el-nino-monsoon",
+      "title": "Does the Indian Ocean rescue an El Nino monsoon?",
+      "chartType": "tableBars",
+      "beat": "climate-drivers",
+      "window": "",
+      "indicator": "climate.el_nino.enso_iod_matrix",
+      "series": [],
+      "unit": "% mean rainfall departure",
+      "subtitle": "Average rainfall in El Nino years, split by the Indian Ocean Dipole - 1950-2025",
+      "whyThisChart": "The second ocean is the most cited reason an El Nino monsoon can come out fine. It works, but only as a tilt."
+    },
+    {
+      "order": 9,
+      "chartId": "has-the-pacific-s-grip-on-the-monsoon-loosened",
+      "title": "Has the Pacific's grip on the monsoon loosened?",
+      "chartType": "line",
+      "beat": "science-debate",
+      "window": "",
+      "indicator": "climate.el_nino.enso_monsoon_rolling_corr",
+      "series": [],
+      "unit": "correlation",
+      "subtitle": "21-year rolling correlation between Pacific warmth and India's monsoon rainfall - centred years 1960-2015",
+      "whyThisChart": "Scientists have argued since the late 1990s that the link is fraying. Track it rather than assert it either way."
+    },
+    {
+      "order": 10,
+      "chartId": "el-nino-hits-the-northwest-hardest",
+      "title": "El Nino hits the northwest hardest",
+      "chartType": "tableBars",
+      "beat": "distribution",
+      "window": "",
+      "indicator": "climate.el_nino.regional_sensitivity",
+      "series": [],
+      "unit": "% rainfall departure",
+      "subtitle": "Average rainfall departure in El Nino monsoons, by IMD region",
+      "whyThisChart": "The national average hides the geography that decides crops and incomes."
+    },
+    {
+      "order": 11,
+      "chartId": "when-in-the-season-the-rain-goes-missing",
+      "title": "When in the season the rain goes missing",
+      "chartType": "tableBars",
+      "beat": "timing",
+      "window": "",
+      "indicator": "climate.el_nino.subseasonal_composite",
+      "series": [],
+      "unit": "% rainfall departure",
+      "subtitle": "Average monthly rainfall departure, El Nino monsoons against a typical year - all-India",
+      "whyThisChart": "Timing decides damage: a dry July at sowing hurts far more than a dry September after the crop is set."
+    },
+    {
+      "order": 12,
+      "chartId": "where-el-nino-actually-cuts-the-rice-harvest",
+      "title": "Where El Nino actually cuts the rice harvest",
+      "chartType": "choropleth",
+      "beat": "yield-geography",
+      "window": "",
+      "indicator": "agriculture.el_nino.rice_yield_anomaly_state",
+      "series": [],
+      "unit": "% yield vs prior 5-year mean",
+      "subtitle": "Average kharif rice yield change in El Nino monsoons, by state - ICRISAT district data - 1966-2017",
+      "whyThisChart": "The rainfall map and the harvest map are not the same picture."
+    },
+    {
+      "order": 13,
+      "chartId": "why-the-rainfall-map-is-not-the-yield-map",
+      "title": "Why the rainfall map is not the yield map",
+      "chartType": "tableBars",
+      "beat": "irrigation",
+      "window": "",
+      "indicator": "agriculture.el_nino.irrigation_yield_split",
+      "series": [],
+      "unit": "% above or below the recent 5-year normal",
+      "subtitle": "El Nino-year yield against the crop's own prior 5-year average: irrigated rice vs rainfed coarse cereals, by region - ICRISAT - 1966-2017",
+      "whyThisChart": "The northwest loses the most rain yet its rice barely flinches. Splitting an irrigated crop from a rainfed one shows why."
+    },
+    {
+      "order": 14,
+      "chartId": "which-crops-el-nino-actually-hits",
+      "title": "Which crops El Nino actually hits",
+      "chartType": "tableBars",
+      "beat": "crop-sensitivity",
+      "window": "",
+      "indicator": "agriculture.el_nino.crop_yield_sensitivity",
+      "series": [],
+      "unit": "% above or below the crop's recent 5-year normal",
+      "subtitle": "Average El Nino-year yield against the crop's own prior 5-year normal, all-India - ICRISAT - 1966-2017",
+      "whyThisChart": "If irrigation is the shield, the damage should sort cleanly by crop. It does - and the 2026 sowing figures are sorting the same way in real time."
+    },
+    {
+      "order": 15,
+      "chartId": "a-weak-monsoon-does-not-automatically-mean-dearer-food",
+      "title": "A weak monsoon does not automatically mean dearer food",
+      "chartType": "tableBars",
+      "beat": "prices",
+      "window": "",
+      "indicator": "prices.el_nino.food_wpi_postmonsoon",
+      "series": [],
+      "unit": "% food inflation, year-on-year",
+      "subtitle": "Post-monsoon (Oct-Dec) wholesale food inflation in El Nino years - RBI WPI - 1982-2024",
+      "whyThisChart": "The fear behind the headlines is prices. The longest record we have shows the link is real but loose."
+    },
+    {
+      "order": 16,
+      "chartId": "after-a-drought-food-prices-do-not-move-as-one",
+      "title": "After a drought, food prices do not move as one",
+      "chartType": "tableBars",
+      "beat": "prices",
+      "window": "",
+      "indicator": "prices.el_nino.food_wpi_components",
+      "series": [],
+      "unit": "% inflation, year-on-year",
+      "subtitle": "Post-monsoon wholesale inflation by food group, four El Nino droughts - RBI WPI",
+      "whyThisChart": "Food inflation is a bundle of separate shocks. Splitting it shows which foods carry the pain."
+    },
+    {
+      "order": 17,
+      "chartId": "same-el-nino-opposite-signs-india-has-two-monsoons",
+      "title": "Same El Nino, opposite signs: India has two monsoons",
+      "chartType": "tableBars",
+      "beat": "sign-flip",
+      "window": "",
+      "indicator": "climate.el_nino.monsoon_sign_flip",
+      "series": [],
+      "unit": "% mean rainfall departure",
+      "subtitle": "Average rainfall departure in El Nino conditions - southwest monsoon (all India) against northeast monsoon (southern belt)",
+      "whyThisChart": "The single most under-covered fact about El Nino in India: it moves rain as well as removing it, and the 2026 event peaks in the season where the sign reverses."
+    },
+    {
+      "order": 18,
+      "chartId": "el-nino-peaks-after-the-kharif-harvest-is-decided",
+      "title": "El Nino peaks after the kharif harvest is decided",
+      "chartType": "tableBars",
+      "beat": "timing-forward",
+      "window": "",
+      "indicator": "climate.el_nino.event_peak_timing",
+      "series": [],
+      "unit": "number of events",
+      "subtitle": "Every El Nino event since 1950, grouped by the three-month window in which the Pacific reached its maximum",
+      "whyThisChart": "The fact that moves the risk into 2027: the event is loudest long after the summer crop is settled."
+    },
+    {
+      "order": 19,
+      "chartId": "a-shrinking-share-of-the-economy-but-still-two-in-five-jobs",
+      "title": "A shrinking share of the economy, but still two in five jobs",
+      "chartType": "multiLine",
+      "beat": "macro-context",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "work.employment_agriculture",
+          "label": "Share of India's workers"
+        },
+        {
+          "indicator": "econ.el_nino.agri_gva_share",
+          "label": "Share of India's output (GVA)"
+        }
+      ],
+      "unit": "% share",
+      "subtitle": "Agriculture's share of India's output and of its workforce - 1951-2025",
+      "whyThisChart": "The human heart of the question: how many people a bad rain year can reach, set against how little it now moves headline GDP."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Five official numbers for the same ocean (One week, unsmoothed (22 Jul)): value",
+      "value": 2.2,
+      "displayValue": "2.2",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "indicatorId": "climate.enso.index_ladder_2026",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Five official numbers for the same ocean (One month, averaged (Jun 2026)): value",
+      "value": 1.55,
+      "displayValue": "1.55",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "indicatorId": "climate.enso.index_ladder_2026",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Five official numbers for the same ocean (Same month, other dataset (Jun 2026)): value",
+      "value": 1.44,
+      "displayValue": "1.44",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "indicatorId": "climate.enso.index_ladder_2026",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Five official numbers for the same ocean (Three months averaged, the official index (AMJ)): value",
+      "value": 0.98,
+      "displayValue": "0.98",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "indicatorId": "climate.enso.index_ladder_2026",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Five official numbers for the same ocean (Same three months, tropical warming removed (AMJ)): value",
+      "value": 0.47,
+      "displayValue": "0.47",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "indicatorId": "climate.enso.index_ladder_2026",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): label",
+      "value": 1965,
+      "displayValue": "1,965%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): value",
+      "value": -18.6,
+      "displayValue": "-18.6%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): x",
+      "value": 1.85,
+      "displayValue": "1.9%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): y",
+      "value": -18.6,
+      "displayValue": "-18.6%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): highlight",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): label",
+      "value": 1972,
+      "displayValue": "1,972%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): value",
+      "value": -22.3,
+      "displayValue": "-22.3%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): x",
+      "value": 1.58,
+      "displayValue": "1.6%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): y",
+      "value": -22.3,
+      "displayValue": "-22.3%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): highlight",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1982: peak ONI 1.58, monsoon -11.4%): label",
+      "value": 1982,
+      "displayValue": "1,982%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1982: peak ONI 1.58, monsoon -11.4%): value",
+      "value": -11.4,
+      "displayValue": "-11.4%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Change the index and the record holder changes (1982-83, trend-adjusted peak (its raw peak was 2.23)): value",
+      "value": 2.52,
+      "displayValue": "2.52",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Change the index and the record holder changes (1997-98, trend-adjusted peak (its raw peak was 2.40)): value",
+      "value": 2.38,
+      "displayValue": "2.38",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Change the index and the record holder changes (2014-16, trend-adjusted peak (its raw peak was 2.75)): value",
+      "value": 2.37,
+      "displayValue": "2.37",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Change the index and the record holder changes (1991-92, trend-adjusted peak (its raw peak was 1.71)): value",
+      "value": 2.32,
+      "displayValue": "2.32",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Change the index and the record holder changes (1972-73, trend-adjusted peak (its raw peak was 2.12)): value",
+      "value": 2.27,
+      "displayValue": "2.27",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Change the index and the record holder changes (1965-66, trend-adjusted peak (its raw peak was 1.98)): value",
+      "value": 2.04,
+      "displayValue": "2.04",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Change the index and the record holder changes (1957-58, trend-adjusted peak (its raw peak was 1.81)): value",
+      "value": 2.02,
+      "displayValue": "2.02",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "sourceId": "derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Five official numbers for the same ocean (One week, unsmoothed (22 Jul)): value",
+      "value": 2.2,
+      "displayValue": "2.2",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.index_ladder_2026"
+    },
+    {
+      "label": "Five official numbers for the same ocean (One month, averaged (Jun 2026)): value",
+      "value": 1.55,
+      "displayValue": "1.55",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.index_ladder_2026"
+    },
+    {
+      "label": "Five official numbers for the same ocean (Same month, other dataset (Jun 2026)): value",
+      "value": 1.44,
+      "displayValue": "1.44",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.index_ladder_2026"
+    },
+    {
+      "label": "Five official numbers for the same ocean (Three months averaged, the official index (AMJ)): value",
+      "value": 0.98,
+      "displayValue": "0.98",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.index_ladder_2026"
+    },
+    {
+      "label": "Five official numbers for the same ocean (Same three months, tropical warming removed (AMJ)): value",
+      "value": 0.47,
+      "displayValue": "0.47",
+      "date": "",
+      "unit": "degrees C anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.index_ladder_2026"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): label",
+      "value": 1965,
+      "displayValue": "1,965%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): value",
+      "value": -18.6,
+      "displayValue": "-18.6%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): x",
+      "value": 1.85,
+      "displayValue": "1.9%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): y",
+      "value": -18.6,
+      "displayValue": "-18.6%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1965: peak ONI 1.85, monsoon -18.6%): highlight",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): label",
+      "value": 1972,
+      "displayValue": "1,972%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): value",
+      "value": -22.3,
+      "displayValue": "-22.3%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): x",
+      "value": 1.58,
+      "displayValue": "1.6%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): y",
+      "value": -22.3,
+      "displayValue": "-22.3%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1972: peak ONI 1.58, monsoon -22.3%): highlight",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1982: peak ONI 1.58, monsoon -11.4%): label",
+      "value": 1982,
+      "displayValue": "1,982%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "The strong El Nino monsoons, and what India got (1982: peak ONI 1.58, monsoon -11.4%): value",
+      "value": -11.4,
+      "displayValue": "-11.4%",
+      "date": "",
+      "unit": "% rainfall departure",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.strong_event_outcomes"
+    },
+    {
+      "label": "Change the index and the record holder changes (1982-83, trend-adjusted peak (its raw peak was 2.23)): value",
+      "value": 2.52,
+      "displayValue": "2.52",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "Change the index and the record holder changes (1997-98, trend-adjusted peak (its raw peak was 2.40)): value",
+      "value": 2.38,
+      "displayValue": "2.38",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "Change the index and the record holder changes (2014-16, trend-adjusted peak (its raw peak was 2.75)): value",
+      "value": 2.37,
+      "displayValue": "2.37",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "Change the index and the record holder changes (1991-92, trend-adjusted peak (its raw peak was 1.71)): value",
+      "value": 2.32,
+      "displayValue": "2.32",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "Change the index and the record holder changes (1972-73, trend-adjusted peak (its raw peak was 2.12)): value",
+      "value": 2.27,
+      "displayValue": "2.27",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "Change the index and the record holder changes (1965-66, trend-adjusted peak (its raw peak was 1.98)): value",
+      "value": 2.04,
+      "displayValue": "2.04",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "Change the index and the record holder changes (1957-58, trend-adjusted peak (its raw peak was 1.81)): value",
+      "value": 2.02,
+      "displayValue": "2.02",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "Change the index and the record holder changes (1986-88, trend-adjusted peak (its raw peak was 1.70)): value",
+      "value": 1.56,
+      "displayValue": "1.56",
+      "date": "",
+      "unit": "deg C peak seasonal anomaly",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_rank_by_index"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1950s average gap): value",
+      "value": -0.116,
+      "displayValue": "-0.12",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1950s average gap): seasons_counted",
+      "value": 120,
+      "displayValue": "120",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1960s average gap): value",
+      "value": -0.056,
+      "displayValue": "-0.06",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1960s average gap): seasons_counted",
+      "value": 120,
+      "displayValue": "120",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1970s average gap): value",
+      "value": -0.179,
+      "displayValue": "-0.18",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1970s average gap): seasons_counted",
+      "value": 120,
+      "displayValue": "120",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1980s average gap): value",
+      "value": -0.024,
+      "displayValue": "-0.02",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1980s average gap): seasons_counted",
+      "value": 120,
+      "displayValue": "120",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1990s average gap): value",
+      "value": -0.127,
+      "displayValue": "-0.13",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (1990s average gap): seasons_counted",
+      "value": 120,
+      "displayValue": "120",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (2000s average gap): value",
+      "value": 0.005,
+      "displayValue": "0.01",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "How far the raw index now runs above the trend-adjusted one (2000s average gap): seasons_counted",
+      "value": 120,
+      "displayValue": "120",
+      "date": "",
+      "unit": "degrees C (ONI minus RONI)",
+      "sourceId": "derived",
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade"
+    },
+    {
+      "label": "All-India southwest monsoon rainfall departure, 1901-2025, latest",
+      "value": 7.8,
+      "displayValue": "7.8%",
+      "date": "2025",
+      "unit": "% rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.imd_monsoon_departure_1901_2025"
+    },
+    {
+      "label": "All-India southwest monsoon rainfall departure, 1901-2025, minimum (1972)",
+      "value": -22.3,
+      "displayValue": "-22.3%",
+      "date": "1972",
+      "unit": "% rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.imd_monsoon_departure_1901_2025"
+    },
+    {
+      "label": "All-India southwest monsoon rainfall departure, 1901-2025, maximum (1917)",
+      "value": 26.6,
+      "displayValue": "26.6%",
+      "date": "1917",
+      "unit": "% rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.imd_monsoon_departure_1901_2025"
+    },
+    {
+      "label": "All-India southwest monsoon rainfall departure, 1901-2025, earliest",
+      "value": -13.8,
+      "displayValue": "-13.8%",
+      "date": "1901",
+      "unit": "% rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.imd_monsoon_departure_1901_2025"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: value",
+      "value": -6.8,
+      "displayValue": "-6.8%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: years",
+      "value": 17,
+      "displayValue": "17%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: below_normal_share",
+      "value": 71,
+      "displayValue": "71%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: below_minus5_share",
+      "value": 59,
+      "displayValue": "59%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: value",
+      "value": -3.2,
+      "displayValue": "-3.2%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: years",
+      "value": 26,
+      "displayValue": "26%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: below_normal_share",
+      "value": 58,
+      "displayValue": "58%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: below_minus5_share",
+      "value": 46,
+      "displayValue": "46%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: value",
+      "value": -12.1,
+      "displayValue": "-12.1%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: years",
+      "value": 7,
+      "displayValue": "7%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: below_normal_share",
+      "value": 86,
+      "displayValue": "86%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "How the El Nino verdict depends on the definition: below_minus5_share",
+      "value": 86,
+      "displayValue": "86%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.definition_sensitivity"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1965: leaned eastern-Pacific by 0.97, monsoon undefined%): label",
+      "value": 1965,
+      "displayValue": "1,965",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1965: leaned eastern-Pacific by 0.97, monsoon undefined%): value",
+      "value": 0.97,
+      "displayValue": "0.97",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1965: leaned eastern-Pacific by 0.97, monsoon undefined%): x",
+      "value": 0.97,
+      "displayValue": "0.97",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1965: leaned eastern-Pacific by 0.97, monsoon undefined%): highlight",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1972: leaned eastern-Pacific by 1.78, monsoon undefined%): label",
+      "value": 1972,
+      "displayValue": "1,972",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1972: leaned eastern-Pacific by 1.78, monsoon undefined%): value",
+      "value": 1.78,
+      "displayValue": "1.78",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1972: leaned eastern-Pacific by 1.78, monsoon undefined%): x",
+      "value": 1.78,
+      "displayValue": "1.78",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1972: leaned eastern-Pacific by 1.78, monsoon undefined%): highlight",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1982: leaned eastern-Pacific by 0.43, monsoon undefined%): label",
+      "value": 1982,
+      "displayValue": "1,982",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1982: leaned eastern-Pacific by 0.43, monsoon undefined%): value",
+      "value": 0.43,
+      "displayValue": "0.43",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1982: leaned eastern-Pacific by 0.43, monsoon undefined%): x",
+      "value": 0.43,
+      "displayValue": "0.43",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Where the Pacific warmed, and whether it predicted India's monsoon (1982: leaned eastern-Pacific by 0.43, monsoon undefined%): highlight",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.flavour_by_event"
+    },
+    {
+      "label": "Does the Indian Ocean rescue an El Nino monsoon?: value",
+      "value": -0.3,
+      "displayValue": "-0.3%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_iod_matrix"
+    },
+    {
+      "label": "Does the Indian Ocean rescue an El Nino monsoon?: years",
+      "value": 5,
+      "displayValue": "5%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_iod_matrix"
+    },
+    {
+      "label": "Does the Indian Ocean rescue an El Nino monsoon?: value",
+      "value": -3.9,
+      "displayValue": "-3.9%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_iod_matrix"
+    },
+    {
+      "label": "Does the Indian Ocean rescue an El Nino monsoon?: years",
+      "value": 21,
+      "displayValue": "21%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_iod_matrix"
+    },
+    {
+      "label": "Does the Indian Ocean rescue an El Nino monsoon?: value",
+      "value": 5.9,
+      "displayValue": "5.9%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_iod_matrix"
+    },
+    {
+      "label": "Does the Indian Ocean rescue an El Nino monsoon?: years",
+      "value": 23,
+      "displayValue": "23%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_iod_matrix"
+    },
+    {
+      "label": "Has the Pacific's grip on the monsoon loosened?, latest",
+      "value": -0.641,
+      "displayValue": "-0.64",
+      "date": "2015",
+      "unit": "21-year rolling correlation (ONI vs rainfall)",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_monsoon_rolling_corr"
+    },
+    {
+      "label": "Has the Pacific's grip on the monsoon loosened?, minimum (2012)",
+      "value": -0.705,
+      "displayValue": "-0.71",
+      "date": "2012",
+      "unit": "21-year rolling correlation (ONI vs rainfall)",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_monsoon_rolling_corr"
+    },
+    {
+      "label": "Has the Pacific's grip on the monsoon loosened?, maximum (1999)",
+      "value": -0.257,
+      "displayValue": "-0.26",
+      "date": "1999",
+      "unit": "21-year rolling correlation (ONI vs rainfall)",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_monsoon_rolling_corr"
+    },
+    {
+      "label": "Has the Pacific's grip on the monsoon loosened?, earliest",
+      "value": -0.532,
+      "displayValue": "-0.53",
+      "date": "1960",
+      "unit": "21-year rolling correlation (ONI vs rainfall)",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.enso_monsoon_rolling_corr"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: value",
+      "value": -14.2,
+      "displayValue": "-14.2%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: years",
+      "value": 17,
+      "displayValue": "17%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: value",
+      "value": -9.4,
+      "displayValue": "-9.4%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: years",
+      "value": 17,
+      "displayValue": "17%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: value",
+      "value": -7.4,
+      "displayValue": "-7.4%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: years",
+      "value": 17,
+      "displayValue": "17%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: value",
+      "value": -6.8,
+      "displayValue": "-6.8%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "El Nino does not hit every region the same way: years",
+      "value": 17,
+      "displayValue": "17%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "sourceId": "derived-imd-noaa",
+      "indicatorId": "climate.el_nino.regional_sensitivity"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": -10.3,
+      "displayValue": "-10.3%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": -6.1,
+      "displayValue": "-6.1%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": -2.7,
+      "displayValue": "-2.7%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": -10.8,
+      "displayValue": "-10.8%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": 0.9,
+      "displayValue": "0.9%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": 3.6,
+      "displayValue": "3.6%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": 1,
+      "displayValue": "1%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "When in the season El Nino bites: value",
+      "value": 3.2,
+      "displayValue": "3.2%",
+      "date": "",
+      "unit": "% mean rainfall departure",
+      "sourceId": "imd",
+      "indicatorId": "climate.el_nino.subseasonal_composite"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: value",
+      "value": 7.3,
+      "displayValue": "7.3%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: value",
+      "value": -3.1,
+      "displayValue": "-3.1%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: value",
+      "value": 2.8,
+      "displayValue": "2.8%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: value",
+      "value": -0.4,
+      "displayValue": "-0.4%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: value",
+      "value": -11.8,
+      "displayValue": "-11.8%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: value",
+      "value": -1.2,
+      "displayValue": "-1.2%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Why El Nino's harvest hit depends on irrigation, not just rainfall: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% mean yield deviation in El Nino years",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split"
+    },
+    {
+      "label": "Which crops El Nino actually hits: value",
+      "value": -8.3,
+      "displayValue": "-8.3%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: value",
+      "value": -7.3,
+      "displayValue": "-7.3%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: value",
+      "value": -6.8,
+      "displayValue": "-6.8%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: value",
+      "value": -5.1,
+      "displayValue": "-5.1%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: value",
+      "value": -5.1,
+      "displayValue": "-5.1%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: value",
+      "value": -2.4,
+      "displayValue": "-2.4%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Which crops El Nino actually hits: years",
+      "value": 10,
+      "displayValue": "10%",
+      "date": "",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "sourceId": "icrisat-dld",
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: label",
+      "value": 1987,
+      "displayValue": "1,987%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: value",
+      "value": 8.8,
+      "displayValue": "8.8%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: monsoon_departure_pct",
+      "value": -14.3,
+      "displayValue": "-14.3%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: label",
+      "value": 1991,
+      "displayValue": "1,991%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: value",
+      "value": 23.1,
+      "displayValue": "23.1%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: monsoon_departure_pct",
+      "value": -1.4,
+      "displayValue": "-1.4%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: label",
+      "value": 1997,
+      "displayValue": "1,997%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: value",
+      "value": 1.1,
+      "displayValue": "1.1%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: monsoon_departure_pct",
+      "value": 0.2,
+      "displayValue": "0.2%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: label",
+      "value": 2002,
+      "displayValue": "2,002%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: value",
+      "value": 0.9,
+      "displayValue": "0.9%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "Food prices after an El Nino monsoon, 1982-2024: monsoon_departure_pct",
+      "value": -20.9,
+      "displayValue": "-20.9%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: group",
+      "value": 2002,
+      "displayValue": "2,002%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: value",
+      "value": 3.1,
+      "displayValue": "3.1%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: group",
+      "value": 2002,
+      "displayValue": "2,002%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: value",
+      "value": -5.3,
+      "displayValue": "-5.3%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: group",
+      "value": 2002,
+      "displayValue": "2,002%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: value",
+      "value": -13.3,
+      "displayValue": "-13.3%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: group",
+      "value": 2002,
+      "displayValue": "2,002%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: value",
+      "value": -4.9,
+      "displayValue": "-4.9%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: group",
+      "value": 2009,
+      "displayValue": "2,009%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: value",
+      "value": 14.5,
+      "displayValue": "14.5%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: group",
+      "value": 2009,
+      "displayValue": "2,009%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "After an El Nino monsoon, food prices do not move as one: value",
+      "value": 32.6,
+      "displayValue": "32.6%",
+      "date": "",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "prices.el_nino.food_wpi_components"
+    },
+    {
+      "label": "Same El Nino, opposite signs: two monsoons (Southwest monsoon, all India, El Nino years): value",
+      "value": -3.2,
+      "displayValue": "-3.2%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino conditions",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.monsoon_sign_flip"
+    },
+    {
+      "label": "Same El Nino, opposite signs: two monsoons (Northeast monsoon, southern belt, El Nino years): value",
+      "value": 3.7,
+      "displayValue": "3.7%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino conditions",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.monsoon_sign_flip"
+    },
+    {
+      "label": "Same El Nino, opposite signs: two monsoons (Northeast monsoon, Tamil Nadu, El Nino years): value",
+      "value": 5.1,
+      "displayValue": "5.1%",
+      "date": "",
+      "unit": "% mean rainfall departure in El Nino conditions",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.monsoon_sign_flip"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Jul-Sep): value",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Jul-Sep): strong_events",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Sep-Nov): value",
+      "value": 4,
+      "displayValue": "4",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Sep-Nov): strong_events",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Oct-Dec): value",
+      "value": 7,
+      "displayValue": "7",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Oct-Dec): strong_events",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Nov-Jan): value",
+      "value": 7,
+      "displayValue": "7",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Nov-Jan): strong_events",
+      "value": 5,
+      "displayValue": "5",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Dec-Feb): value",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Dec-Feb): strong_events",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Jan-Mar): value",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "El Nino peaks after the kharif harvest is decided (El Nino events peaking in Jan-Mar): strong_events",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "number of events",
+      "sourceId": "derived",
+      "indicatorId": "climate.el_nino.event_peak_timing"
+    },
+    {
+      "label": "Why an identical drought hurts the economy less than it used to, latest",
+      "value": 13.8,
+      "displayValue": "13.8%",
+      "date": "2026",
+      "unit": "% agriculture share of GVA (constant prices)",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "econ.el_nino.agri_gva_share"
+    },
+    {
+      "label": "Why an identical drought hurts the economy less than it used to, minimum (2026)",
+      "value": 13.8,
+      "displayValue": "13.8%",
+      "date": "2026",
+      "unit": "% agriculture share of GVA (constant prices)",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "econ.el_nino.agri_gva_share"
+    },
+    {
+      "label": "Why an identical drought hurts the economy less than it used to, maximum (1954)",
+      "value": 62.3,
+      "displayValue": "62.3%",
+      "date": "1954",
+      "unit": "% agriculture share of GVA (constant prices)",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "econ.el_nino.agri_gva_share"
+    },
+    {
+      "label": "Why an identical drought hurts the economy less than it used to, earliest",
+      "value": 61.7,
+      "displayValue": "61.7%",
+      "date": "1951",
+      "unit": "% agriculture share of GVA (constant prices)",
+      "sourceId": "rbi-dbie",
+      "indicatorId": "econ.el_nino.agri_gva_share"
+    },
+    {
+      "label": "Employment in agriculture, latest",
+      "value": 41.6251280877573,
+      "displayValue": "41.6%",
+      "date": "2025",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    },
+    {
+      "label": "Employment in agriculture, minimum (2019)",
+      "value": 40.6518149993227,
+      "displayValue": "40.7%",
+      "date": "2019",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    },
+    {
+      "label": "Employment in agriculture, maximum (1991)",
+      "value": 63.1283195373591,
+      "displayValue": "63.1%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    },
+    {
+      "label": "Employment in agriculture, earliest",
+      "value": 63.1283195373591,
+      "displayValue": "63.1%",
+      "date": "1991",
+      "unit": "% of total employment",
+      "sourceId": "worldbank",
+      "indicatorId": "work.employment_agriculture"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "climate.enso.index_ladder_2026",
+      "title": "Five official numbers for the same ocean",
+      "sourceId": "derived",
+      "sourceIndicatorId": "derived.climate.enso.index_ladder_2026",
+      "unit": "degrees C anomaly",
+      "geography": {
+        "type": "region",
+        "id": "nino34",
+        "name": "Nino 3.4 region"
+      },
+      "rows": 5,
+      "dimensions": [
+        "label",
+        "value",
+        "group",
+        "category"
+      ],
+      "latestRows": [
+        {
+          "label": "One week, unsmoothed (22 Jul)",
+          "value": 2.2,
+          "group": "Raw Nino 3.4",
+          "category": "One week, unsmoothed (22 Jul)"
+        },
+        {
+          "label": "One month, averaged (Jun 2026)",
+          "value": 1.55,
+          "group": "Raw Nino 3.4",
+          "category": "One month, averaged (Jun 2026)"
+        },
+        {
+          "label": "Same month, other dataset (Jun 2026)",
+          "value": 1.44,
+          "group": "Raw Nino 3.4",
+          "category": "Same month, other dataset (Jun 2026)"
+        },
+        {
+          "label": "Three months averaged, the official index (AMJ)",
+          "value": 0.98,
+          "group": "Official and adjusted",
+          "category": "Three months averaged, the official index (AMJ)"
+        },
+        {
+          "label": "Same three months, tropical warming removed (AMJ)",
+          "value": 0.47,
+          "group": "Official and adjusted",
+          "category": "Same three months, tropical warming removed (AMJ)"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.strong_event_outcomes",
+      "title": "The strong El Nino monsoons, and what India got",
+      "sourceId": "derived",
+      "sourceIndicatorId": "derived.climate.el_nino.strong_event_outcomes",
+      "unit": "% rainfall departure",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 7,
+      "dimensions": [
+        "label",
+        "value",
+        "x",
+        "y",
+        "highlight",
+        "category",
+        "iod_phase"
+      ],
+      "latestRows": [
+        {
+          "label": "1965",
+          "value": -18.6,
+          "x": 1.85,
+          "y": -18.6,
+          "highlight": 0,
+          "category": "1965: peak ONI 1.85, monsoon -18.6%",
+          "iod_phase": "Neutral"
+        },
+        {
+          "label": "1972",
+          "value": -22.3,
+          "x": 1.58,
+          "y": -22.3,
+          "highlight": 0,
+          "category": "1972: peak ONI 1.58, monsoon -22.3%",
+          "iod_phase": "Positive IOD"
+        },
+        {
+          "label": "1982",
+          "value": -11.4,
+          "x": 1.58,
+          "y": -11.4,
+          "highlight": 0,
+          "category": "1982: peak ONI 1.58, monsoon -11.4%",
+          "iod_phase": "Neutral"
+        },
+        {
+          "label": "1987",
+          "value": -14.3,
+          "x": 1.7,
+          "y": -14.3,
+          "highlight": 0,
+          "category": "1987: peak ONI 1.7, monsoon -14.3%",
+          "iod_phase": "Neutral"
+        },
+        {
+          "label": "1997",
+          "value": 0.2,
+          "x": 2.14,
+          "y": 0.2,
+          "highlight": 1,
+          "category": "1997: peak ONI 2.14, monsoon +0.2%",
+          "iod_phase": "Positive IOD"
+        },
+        {
+          "label": "2015",
+          "value": -12.7,
+          "x": 2.21,
+          "y": -12.7,
+          "highlight": 1,
+          "category": "2015: peak ONI 2.21, monsoon -12.7%",
+          "iod_phase": "Neutral"
+        },
+        {
+          "label": "2023",
+          "value": -5.3,
+          "x": 1.6,
+          "y": -5.3,
+          "highlight": 0,
+          "category": "2023: peak ONI 1.6, monsoon -5.3%",
+          "iod_phase": "Positive IOD"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.event_rank_by_index",
+      "title": "Change the index and the record holder changes",
+      "sourceId": "derived",
+      "sourceIndicatorId": "derived.climate.el_nino.event_rank_by_index",
+      "unit": "deg C peak seasonal anomaly",
+      "geography": {
+        "type": "region",
+        "id": "nino34",
+        "name": "Nino 3.4 region"
+      },
+      "rows": 8,
+      "dimensions": [
+        "label",
+        "value",
+        "category"
+      ],
+      "latestRows": [
+        {
+          "label": "1982-83 (raw 2.23)",
+          "value": 2.52,
+          "category": "1982-83, trend-adjusted peak (its raw peak was 2.23)"
+        },
+        {
+          "label": "1997-98 (raw 2.40)",
+          "value": 2.38,
+          "category": "1997-98, trend-adjusted peak (its raw peak was 2.40)"
+        },
+        {
+          "label": "2014-16 (raw 2.75)",
+          "value": 2.37,
+          "category": "2014-16, trend-adjusted peak (its raw peak was 2.75)"
+        },
+        {
+          "label": "1991-92 (raw 1.71)",
+          "value": 2.32,
+          "category": "1991-92, trend-adjusted peak (its raw peak was 1.71)"
+        },
+        {
+          "label": "1972-73 (raw 2.12)",
+          "value": 2.27,
+          "category": "1972-73, trend-adjusted peak (its raw peak was 2.12)"
+        },
+        {
+          "label": "1965-66 (raw 1.98)",
+          "value": 2.04,
+          "category": "1965-66, trend-adjusted peak (its raw peak was 1.98)"
+        },
+        {
+          "label": "1957-58 (raw 1.81)",
+          "value": 2.02,
+          "category": "1957-58, trend-adjusted peak (its raw peak was 1.81)"
+        },
+        {
+          "label": "1986-88 (raw 1.70)",
+          "value": 1.56,
+          "category": "1986-88, trend-adjusted peak (its raw peak was 1.70)"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.enso.oni_roni_gap_by_decade",
+      "title": "How far the raw index now runs above the trend-adjusted one",
+      "sourceId": "derived",
+      "sourceIndicatorId": "derived.climate.enso.oni_roni_gap_by_decade",
+      "unit": "degrees C (ONI minus RONI)",
+      "geography": {
+        "type": "region",
+        "id": "nino34",
+        "name": "Nino 3.4 region"
+      },
+      "rows": 8,
+      "dimensions": [
+        "label",
+        "value",
+        "category",
+        "seasons_counted"
+      ],
+      "latestRows": [
+        {
+          "label": "1950s",
+          "value": -0.116,
+          "category": "1950s average gap",
+          "seasons_counted": 120
+        },
+        {
+          "label": "1960s",
+          "value": -0.056,
+          "category": "1960s average gap",
+          "seasons_counted": 120
+        },
+        {
+          "label": "1970s",
+          "value": -0.179,
+          "category": "1970s average gap",
+          "seasons_counted": 120
+        },
+        {
+          "label": "1980s",
+          "value": -0.024,
+          "category": "1980s average gap",
+          "seasons_counted": 120
+        },
+        {
+          "label": "1990s",
+          "value": -0.127,
+          "category": "1990s average gap",
+          "seasons_counted": 120
+        },
+        {
+          "label": "2000s",
+          "value": 0.005,
+          "category": "2000s average gap",
+          "seasons_counted": 120
+        },
+        {
+          "label": "2010s",
+          "value": 0.233,
+          "category": "2010s average gap",
+          "seasons_counted": 120
+        },
+        {
+          "label": "2020s",
+          "value": 0.442,
+          "category": "2020s average gap",
+          "seasons_counted": 77
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.imd_monsoon_departure_1901_2025",
+      "title": "All-India southwest monsoon rainfall departure, 1901-2025",
+      "sourceId": "imd",
+      "sourceIndicatorId": "imd-pune-southwest-monsoon-all-india-rainfall",
+      "unit": "% rainfall departure",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 125,
+      "earliest": {
+        "date": "1901",
+        "value": -13.8
+      },
+      "latest": {
+        "date": "2025",
+        "value": 7.8
+      }
+    },
+    {
+      "indicatorId": "climate.el_nino.definition_sensitivity",
+      "title": "How the El Nino verdict depends on the definition",
+      "sourceId": "derived-imd-noaa",
+      "sourceIndicatorId": "enso-iod-imd-monsoon",
+      "unit": "% mean rainfall departure",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Pacific in El Nino all monsoon (JJAS ONI ≥ 0.5)",
+          "value": -6.8,
+          "years": 17,
+          "below_normal_share": 71,
+          "below_minus5_share": 59
+        },
+        {
+          "label": "El Nino active any time in the season",
+          "value": -3.2,
+          "years": 26,
+          "below_normal_share": 58,
+          "below_minus5_share": 46
+        },
+        {
+          "label": "Strong El Nino only (peak ONI ≥ 1.5)",
+          "value": -12.1,
+          "years": 7,
+          "below_normal_share": 86,
+          "below_minus5_share": 86
+        },
+        {
+          "label": "La Nina years (for contrast)",
+          "value": 6.8,
+          "years": 18,
+          "below_normal_share": 17,
+          "below_minus5_share": 11
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.flavour_by_event",
+      "title": "Where the Pacific warmed, and whether it predicted India's monsoon",
+      "sourceId": "derived",
+      "sourceIndicatorId": "derived.climate.el_nino.flavour_by_event",
+      "unit": "degrees C (Nino 1+2 minus Nino 4, JJAS mean)",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 7,
+      "dimensions": [
+        "label",
+        "value",
+        "x",
+        "y",
+        "highlight",
+        "category",
+        "flavour",
+        "fits_kumar_hypothesis"
+      ],
+      "latestRows": [
+        {
+          "label": "1965",
+          "value": 0.97,
+          "x": 0.97,
+          "highlight": 0,
+          "category": "1965: leaned eastern-Pacific by 0.97, monsoon undefined%",
+          "flavour": "eastern Pacific",
+          "fits_kumar_hypothesis": false
+        },
+        {
+          "label": "1972",
+          "value": 1.78,
+          "x": 1.78,
+          "highlight": 0,
+          "category": "1972: leaned eastern-Pacific by 1.78, monsoon undefined%",
+          "flavour": "eastern Pacific",
+          "fits_kumar_hypothesis": false
+        },
+        {
+          "label": "1982",
+          "value": 0.43,
+          "x": 0.43,
+          "highlight": 0,
+          "category": "1982: leaned eastern-Pacific by 0.43, monsoon undefined%",
+          "flavour": "eastern Pacific",
+          "fits_kumar_hypothesis": false
+        },
+        {
+          "label": "1987",
+          "value": 0.42,
+          "x": 0.42,
+          "highlight": 0,
+          "category": "1987: leaned eastern-Pacific by 0.42, monsoon undefined%",
+          "flavour": "eastern Pacific",
+          "fits_kumar_hypothesis": false
+        },
+        {
+          "label": "1997",
+          "value": 3.16,
+          "x": 3.16,
+          "highlight": 1,
+          "category": "1997: leaned eastern-Pacific by 3.16, monsoon undefined%",
+          "flavour": "eastern Pacific",
+          "fits_kumar_hypothesis": false
+        },
+        {
+          "label": "2015",
+          "value": 1.2,
+          "x": 1.2,
+          "highlight": 0,
+          "category": "2015: leaned eastern-Pacific by 1.2, monsoon undefined%",
+          "flavour": "eastern Pacific",
+          "fits_kumar_hypothesis": false
+        },
+        {
+          "label": "2023",
+          "value": 1.96,
+          "x": 1.96,
+          "highlight": 0,
+          "category": "2023: leaned eastern-Pacific by 1.96, monsoon undefined%",
+          "flavour": "eastern Pacific",
+          "fits_kumar_hypothesis": false
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.enso_iod_matrix",
+      "title": "Does the Indian Ocean rescue an El Nino monsoon?",
+      "sourceId": "derived-imd-noaa",
+      "sourceIndicatorId": "enso-iod-imd-monsoon",
+      "unit": "% mean rainfall departure",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "with a positive Indian Ocean Dipole",
+          "group": "In an El Nino monsoon",
+          "value": -0.3,
+          "years": 5
+        },
+        {
+          "label": "with a neutral or negative dipole",
+          "group": "In an El Nino monsoon",
+          "value": -3.9,
+          "years": 21
+        },
+        {
+          "label": "All La Nina monsoons",
+          "group": "For comparison",
+          "value": 5.9,
+          "years": 23
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.enso_monsoon_rolling_corr",
+      "title": "Has the Pacific's grip on the monsoon loosened?",
+      "sourceId": "derived-imd-noaa",
+      "sourceIndicatorId": "enso-iod-imd-monsoon",
+      "unit": "21-year rolling correlation (ONI vs rainfall)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1960",
+        "value": -0.532
+      },
+      "latest": {
+        "date": "2015",
+        "value": -0.641
+      }
+    },
+    {
+      "indicatorId": "climate.el_nino.regional_sensitivity",
+      "title": "El Nino does not hit every region the same way",
+      "sourceId": "derived-imd-noaa",
+      "sourceIndicatorId": "enso-iod-imd-monsoon",
+      "unit": "% mean rainfall departure in El Nino monsoons",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Northwest India",
+          "value": -14.2,
+          "years": 17
+        },
+        {
+          "label": "Central India",
+          "value": -9.4,
+          "years": 17
+        },
+        {
+          "label": "South Peninsula",
+          "value": -7.4,
+          "years": 17
+        },
+        {
+          "label": "All India",
+          "value": -6.8,
+          "years": 17
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.subseasonal_composite",
+      "title": "When in the season El Nino bites",
+      "sourceId": "imd",
+      "sourceIndicatorId": "imd-monsoon-rainfall",
+      "unit": "% mean rainfall departure",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "June",
+          "group": "In El Nino monsoons",
+          "value": -10.3
+        },
+        {
+          "label": "July",
+          "group": "In El Nino monsoons",
+          "value": -6.1
+        },
+        {
+          "label": "August",
+          "group": "In El Nino monsoons",
+          "value": -2.7
+        },
+        {
+          "label": "September",
+          "group": "In El Nino monsoons",
+          "value": -10.8
+        },
+        {
+          "label": "June",
+          "group": "In a typical year",
+          "value": 0.9
+        },
+        {
+          "label": "July",
+          "group": "In a typical year",
+          "value": 3.6
+        },
+        {
+          "label": "August",
+          "group": "In a typical year",
+          "value": 1
+        },
+        {
+          "label": "September",
+          "group": "In a typical year",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "indicatorId": "agriculture.el_nino.irrigation_yield_split",
+      "title": "Why El Nino's harvest hit depends on irrigation, not just rainfall",
+      "sourceId": "icrisat-dld",
+      "sourceIndicatorId": "dld-apportioned-yield",
+      "unit": "% mean yield deviation in El Nino years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Northwest",
+          "group": "Rice (more irrigated)",
+          "value": 7.3,
+          "years": 10
+        },
+        {
+          "label": "Central",
+          "group": "Rice (more irrigated)",
+          "value": -3.1,
+          "years": 10
+        },
+        {
+          "label": "South Peninsula",
+          "group": "Rice (more irrigated)",
+          "value": 2.8,
+          "years": 10
+        },
+        {
+          "label": "East & NE",
+          "group": "Rice (more irrigated)",
+          "value": -0.4,
+          "years": 10
+        },
+        {
+          "label": "Northwest",
+          "group": "Coarse cereals (rainfed)",
+          "value": -11.8,
+          "years": 10
+        },
+        {
+          "label": "Central",
+          "group": "Coarse cereals (rainfed)",
+          "value": -1.2,
+          "years": 10
+        },
+        {
+          "label": "South Peninsula",
+          "group": "Coarse cereals (rainfed)",
+          "value": 2.3,
+          "years": 10
+        },
+        {
+          "label": "East & NE",
+          "group": "Coarse cereals (rainfed)",
+          "value": 2.4,
+          "years": 10
+        }
+      ]
+    },
+    {
+      "indicatorId": "agriculture.el_nino.crop_yield_sensitivity",
+      "title": "Which crops El Nino actually hits",
+      "sourceId": "icrisat-dld",
+      "sourceIndicatorId": "dld-apportioned-yield",
+      "unit": "% above or below the crop's recent 5-year normal",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 12,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Groundnut",
+          "value": -8.3,
+          "years": 10
+        },
+        {
+          "label": "Sorghum (jowar)",
+          "value": -7.3,
+          "years": 10
+        },
+        {
+          "label": "Pearl millet (bajra)",
+          "value": -6.8,
+          "years": 10
+        },
+        {
+          "label": "Pigeonpea (arhar)",
+          "value": -5.1,
+          "years": 10
+        },
+        {
+          "label": "Nine oilseeds",
+          "value": -5.1,
+          "years": 10
+        },
+        {
+          "label": "Maize",
+          "value": -2.4,
+          "years": 10
+        },
+        {
+          "label": "Finger millet (ragi)",
+          "value": -1.7,
+          "years": 10
+        },
+        {
+          "label": "Rice",
+          "value": 0.3,
+          "years": 10
+        },
+        {
+          "label": "Cotton",
+          "value": 1.2,
+          "years": 10
+        },
+        {
+          "label": "Sugarcane",
+          "value": 1.7,
+          "years": 10
+        }
+      ]
+    },
+    {
+      "indicatorId": "prices.el_nino.food_wpi_postmonsoon",
+      "title": "Food prices after an El Nino monsoon, 1982-2024",
+      "sourceId": "rbi-dbie",
+      "sourceIndicatorId": "WHOLE_PRICE_INDEX_RN",
+      "unit": "% post-monsoon (Oct-Dec) WPI food inflation, year-on-year",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "1987",
+          "value": 8.8,
+          "monsoon_departure_pct": -14.3
+        },
+        {
+          "label": "1991",
+          "value": 23.1,
+          "monsoon_departure_pct": -1.4
+        },
+        {
+          "label": "1997",
+          "value": 1.1,
+          "monsoon_departure_pct": 0.2
+        },
+        {
+          "label": "2002",
+          "value": 0.9,
+          "monsoon_departure_pct": -20.9
+        },
+        {
+          "label": "2004",
+          "value": 2.8,
+          "monsoon_departure_pct": -9.6
+        },
+        {
+          "label": "2009",
+          "value": 16.9,
+          "monsoon_departure_pct": -18.3
+        },
+        {
+          "label": "2015",
+          "value": 4.5,
+          "monsoon_departure_pct": -12.7
+        },
+        {
+          "label": "2023",
+          "value": 7.1,
+          "monsoon_departure_pct": -5.3
+        }
+      ]
+    },
+    {
+      "indicatorId": "prices.el_nino.food_wpi_components",
+      "title": "After an El Nino monsoon, food prices do not move as one",
+      "sourceId": "rbi-dbie",
+      "sourceIndicatorId": "WHOLE_PRICE_INDEX_RN",
+      "unit": "% post-monsoon (Oct-Dec) WPI inflation, year-on-year",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 16,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Cereals",
+          "group": "2002",
+          "value": 3.1
+        },
+        {
+          "label": "Pulses",
+          "group": "2002",
+          "value": -5.3
+        },
+        {
+          "label": "Vegetables",
+          "group": "2002",
+          "value": -13.3
+        },
+        {
+          "label": "Onion",
+          "group": "2002",
+          "value": -4.9
+        },
+        {
+          "label": "Cereals",
+          "group": "2009",
+          "value": 14.5
+        },
+        {
+          "label": "Pulses",
+          "group": "2009",
+          "value": 32.6
+        },
+        {
+          "label": "Vegetables",
+          "group": "2009",
+          "value": 13.7
+        },
+        {
+          "label": "Onion",
+          "group": "2009",
+          "value": 29.2
+        },
+        {
+          "label": "Cereals",
+          "group": "2015",
+          "value": 1.3
+        },
+        {
+          "label": "Pulses",
+          "group": "2015",
+          "value": 51.6
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.monsoon_sign_flip",
+      "title": "Same El Nino, opposite signs: two monsoons",
+      "sourceId": "derived",
+      "sourceIndicatorId": "derived.climate.el_nino.monsoon_sign_flip",
+      "unit": "% mean rainfall departure in El Nino conditions",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [
+        "label",
+        "value",
+        "category"
+      ],
+      "latestRows": [
+        {
+          "label": "Southwest monsoon (Jun-Sep), all India",
+          "value": -3.2,
+          "category": "Southwest monsoon, all India, El Nino years"
+        },
+        {
+          "label": "Northeast monsoon (Oct-Dec), south peninsula",
+          "value": 3.7,
+          "category": "Northeast monsoon, southern belt, El Nino years"
+        },
+        {
+          "label": "Northeast monsoon (Oct-Dec), Tamil Nadu",
+          "value": 5.1,
+          "category": "Northeast monsoon, Tamil Nadu, El Nino years"
+        }
+      ]
+    },
+    {
+      "indicatorId": "climate.el_nino.event_peak_timing",
+      "title": "El Nino peaks after the kharif harvest is decided",
+      "sourceId": "derived",
+      "sourceIndicatorId": "derived.climate.el_nino.event_peak_timing",
+      "unit": "number of events",
+      "geography": {
+        "type": "region",
+        "id": "nino34",
+        "name": "Nino 3.4 region"
+      },
+      "rows": 6,
+      "dimensions": [
+        "label",
+        "value",
+        "category",
+        "strong_events"
+      ],
+      "latestRows": [
+        {
+          "label": "Jul-Sep",
+          "value": 2,
+          "category": "El Nino events peaking in Jul-Sep",
+          "strong_events": 1
+        },
+        {
+          "label": "Sep-Nov",
+          "value": 4,
+          "category": "El Nino events peaking in Sep-Nov",
+          "strong_events": 1
+        },
+        {
+          "label": "Oct-Dec",
+          "value": 7,
+          "category": "El Nino events peaking in Oct-Dec",
+          "strong_events": 1
+        },
+        {
+          "label": "Nov-Jan",
+          "value": 7,
+          "category": "El Nino events peaking in Nov-Jan",
+          "strong_events": 5
+        },
+        {
+          "label": "Dec-Feb",
+          "value": 3,
+          "category": "El Nino events peaking in Dec-Feb",
+          "strong_events": 2
+        },
+        {
+          "label": "Jan-Mar",
+          "value": 1,
+          "category": "El Nino events peaking in Jan-Mar",
+          "strong_events": 0
+        }
+      ]
+    },
+    {
+      "indicatorId": "econ.el_nino.agri_gva_share",
+      "title": "Why an identical drought hurts the economy less than it used to",
+      "sourceId": "rbi-dbie",
+      "sourceIndicatorId": "ANN_GDP_FACT_CST_RN",
+      "unit": "% agriculture share of GVA (constant prices)",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 76,
+      "earliest": {
+        "date": "1951",
+        "value": 61.7
+      },
+      "latest": {
+        "date": "2026",
+        "value": 13.8
+      }
+    },
+    {
+      "indicatorId": "work.employment_agriculture",
+      "title": "Employment in agriculture",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "SL.AGR.EMPL.ZS",
+      "unit": "% of total employment",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 66,
+      "earliest": {
+        "date": "1991",
+        "value": 63.1283195373591
+      },
+      "latest": {
+        "date": "2025",
+        "value": 41.6251280877573
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

@@ -140,6 +140,28 @@ function lockedNumbersFromSeries(artifact) {
       indicatorId: artifact.indicatorId
     });
   }
+  // Min and max matter as much as the endpoints. Without them a long series arrives as
+  // just "earliest" and "latest", and a writer asked about the record's range will
+  // reasonably present those two as the extremes. That is exactly how a 125-year rainfall
+  // series came to be described with 1901's -13.8% as "the driest year on record" when
+  // the true minimum is 1972 at -22.3%.
+  const points = (Array.isArray(artifact.observations) ? artifact.observations : [])
+    .filter((point) => isFiniteNumber(point?.value));
+  if (points.length > 2) {
+    const lowest = points.reduce((best, point) => (point.value < best.value ? point : best), points[0]);
+    const highest = points.reduce((best, point) => (point.value > best.value ? point : best), points[0]);
+    for (const [point, kind] of [[lowest, "minimum"], [highest, "maximum"]]) {
+      numbers.push({
+        label: `${artifact.title}, ${kind} (${point.date})`,
+        value: point.value,
+        displayValue: displayValue(point.value, artifact.unit),
+        date: point.date,
+        unit: artifact.unit,
+        sourceId: artifact.sourceId,
+        indicatorId: artifact.indicatorId
+      });
+    }
+  }
   if (summary.earliest && isFiniteNumber(summary.earliest.value)) {
     numbers.push({
       label: `${artifact.title}, earliest`,
