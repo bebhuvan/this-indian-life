@@ -62,6 +62,23 @@ function swap(label, from, to) {
   failures.push(label);
 }
 
+
+/**
+ * Insert `block` immediately before `anchor`, once.
+ *
+ * swap() cannot do this safely. Its already-applied test looks for block+anchor
+ * contiguously, and a LATER insertion at the same anchor pushes itself between them, so
+ * the earlier block stops matching and gets inserted a second time on every re-run.
+ * Keying idempotency to a marker unique to the block itself is immune to that.
+ */
+function insertOnce(label, marker, anchor, block) {
+  const body = doc.article.bodyMarkdown;
+  if (body.includes(marker)) return; // already inserted
+  if (!body.includes(anchor)) return failures.push(label);
+  doc.article.bodyMarkdown = body.replace(anchor, `${block}${anchor}`);
+  applied += 1;
+}
+
 // --- 2. the markdown heading bug -------------------------------------------
 // Must run before anything that matches across that boundary.
 swap(
@@ -71,18 +88,8 @@ swap(
 );
 
 // --- 4. the 0.01C rank flip -------------------------------------------------
-swap(
-  "roni-rank-precision",
-  "Now 1982-83 tops the list at 2.52°C, while 2014-16 drops to 2.37°C, slipping to third place behind 1997-98 as well.",
-  "Now 1982-83 tops the list at 2.52°C, while 2014-16 drops to 2.37°C. It also slips behind 1997-98, but by a hundredth of a degree, a gap far too small to carry any meaning. It is worth noticing only because it shows how tightly the top of this list bunches together once the trend is taken out."
-);
 
 // --- 5. the long-period average --------------------------------------------
-swap(
-  "lpa-87cm",
-  "The long-period average is about 88 centimetres",
-  "The long-period average is about 87 centimetres"
-);
 
 // --- 1a. strip the forecast assertion from the definitions section ----------
 swap(
@@ -124,12 +131,12 @@ That is what the past says. It is a base rate, not a forecast, and it is deliber
 
 `;
 
-swap(
+insertOnce(
   "insert-fork-sections",
+  "## So which kind of El Niño year is this one?",
   "## What actually happened to the monsoon the last times a strong El Niño coincided with the season?",
-  `${FORK_SECTIONS}## What actually happened to the monsoon the last times a strong El Niño coincided with the season?`
+  FORK_SECTIONS
 );
-
 // --- 1b-ii. the forecast, now that there is a real one to cite --------------
 // The original sin was an unsourced "forecasters expect 2026 to cross that 1.5C mark".
 // The fix was to remove it. The better fix, once scripts/ingest-cpc-enso-forecast.mjs
@@ -169,12 +176,12 @@ One detail is worth pausing on. CPC's strength probabilities are verified agains
 
 `;
 
-swap(
+insertOnce(
   "insert-forecast-section",
+  "## And what do the forecasters actually say?",
   "## What actually happened to the monsoon the last times a strong El Niño coincided with the season?",
-  `${FORECAST_SECTION}## What actually happened to the monsoon the last times a strong El Niño coincided with the season?`
+  FORECAST_SECTION
 );
-
 // --- 1c. downgrade the remaining forecast-conditional claims ----------------
 swap(
   "strong-events-reference-class",
@@ -182,11 +189,6 @@ swap(
   "If this event does escalate, India enters a reference class with a deeply uncomfortable track record, but the range of outcomes inside it, from near-normal to calamitous, remains wide."
 );
 
-swap(
-  "record-holder-forecast",
-  "When forecasters say the developing 2026 El Niño could rival or exceed past records, they are implicitly choosing an index.",
-  "When anyone says a developing El Niño could rival or exceed past records, they are implicitly choosing an index."
-);
 
 swap(
   "rainfall-swing-forecast",
@@ -200,6 +202,73 @@ swap(
   "For 2026, the IOD is only now approaching positive territory; it is not firmly established. Counting on it to shield the monsoon would be premature.",
   "For 2026, the dipole is not building. It reached positive territory briefly in February, at 0.53, and has slipped every month since, reading 0.15 by May, which is squarely neutral. Counting on it to shield this monsoon would mean counting on something that is currently moving the wrong way."
 );
+
+// --- 9. readability: break the inherited wall-of-text sections -------------
+// The sections written during the rebuild run 60-140 words a paragraph. The ones
+// inherited from the original generator are single blocks of 150-330 words, several of
+// them carrying ten or more numbers. Measured across the article, every paragraph over
+// 150 words was an inherited one. These edits split them at their natural pivots and
+// thin the number load where a figure was decorating rather than doing work. No claim,
+// caveat or figure that carries meaning is dropped.
+
+// 218 words, 16 numbers, and the reader has only just arrived. The mechanism (why the
+// raw index drifts) matters more than the four decimal rankings, so the rankings get one
+// paragraph and the meaning gets another.
+swap(
+  "readability-index-ranking",
+  "The answer changes depending on the yardstick. On the raw Oceanic Niño Index (ONI), the 2014-16 event holds the record, with a peak seasonal anomaly of 2.75°C. The 1982-83 episode, by the same measure, peaked lower at 2.23°C. Switch to the trend-adjusted Relative Niño Index (RONI), which removes the tropical-wide ocean warming trend to isolate the Pacific’s heating relative to its surroundings, and the ranking flips. Now 1982-83 tops the list at 2.52°C, while 2014-16 drops to 2.37°C, slipping to third place behind 1997-98 as well. This is not an academic detail. The raw index has been drifting upward as the entire tropical ocean warms, so it amplifies recent events. The adjusted index resets the baseline, making older events like 1982-83 look stronger relative to their own cooler era. When forecasters say the developing 2026 El Niño could rival or exceed past records, they are implicitly choosing an index. Which benchmark we inherit, the raw record holder or the adjusted one, determines which historical monsoon outcomes India should study as possible analogues. Neither index is wrong, but they point to different past summers.",
+  "It depends which yardstick you pick, and there are two.\n\nOn the raw index, the official one, the 2015-16 event is the biggest on record at 2.75°C. 1982-83 comes in well below it at 2.23°C. Now switch to the adjusted index, which strips out the warming of the tropical ocean as a whole and leaves only the Pacific's heat relative to its surroundings. The order reverses. 1982-83 goes top at 2.52°C and 2015-16 drops to 2.37°C.\n\nIt also slips behind 1997-98, but by a hundredth of a degree, which is far too small a gap to mean anything. It is worth noticing only because it shows how tightly the top of this list bunches once the trend is taken out.\n\nThe reason is not a technicality. The raw index has been creeping upward for decades because the whole ocean it sits in has been warming, so it flatters recent events simply for happening recently. The adjusted version resets that, which makes an older event look as big as it felt at the time.\n\nSo when anyone says a developing El Niño could rival the records, they have already chosen an index, whether or not they say so. And the choice decides which past summers India should be studying. Neither is wrong. They just point at different years."
+);
+// 202 words, 10 numbers. The four decade gaps are the evidence; the apples-and-oranges
+// image is the point. They should not be in the same breath.
+swap(
+  "readability-measuring-stick",
+  "Because the measuring stick itself has drifted. Subtract the trend-adjusted RONI from the raw ONI, and the gap is a measure of how much background warming is inflating the raw index. In the 1950s and 1960s, the two indices sat close together, with differences of just -0.12°C and -0.06°C respectively. They wobbled either side of zero before the turn of the century. Since 2000, the tropical ocean has warmed markedly, and the raw ONI now runs consistently above the adjusted figure. By the 2010s, the average gap had widened to roughly 0.23°C. So far in the 2020s, it has reached about 0.44°C. So the same real warming reads differently in different eras.",
+  "Because the measuring stick itself has drifted.\n\nSubtract one index from the other and the gap tells you how much background warming is inflating the raw number. Through the 1950s and 1960s the two sat almost on top of each other, wobbling either side of zero. Since 2000 they have pulled apart: a gap of roughly 0.23°C through the 2010s, and about 0.44°C so far in the 2020s.\n\nSo the same real warming reads differently depending on the decade it happens in."
+);
+
+
+swap(
+  "readability-crops",
+  "These are mainly dryland crops that depend on the June-September rainfall. Irrigated crops like rice and sugarcane, and winter-sown wheat that grows after the monsoon, were largely flat or even gained. The reason is structural. Canal networks, groundwater pumps, and large reservoirs decouple the water supply for irrigated fields from the current season’s rainfall, at least for a while. Rainfed fields have no such buffer. National averages hide regional collapse.",
+  "These are mainly dryland crops that depend on the June-September rainfall. Irrigated crops like rice and sugarcane, and winter-sown wheat that grows after the monsoon, were largely flat or even gained.\n\nThe pattern is the same one the previous chart set out, now sorted by crop rather than by region, which is the form in which it reaches a household: what you grow decides what a dry year costs you. National averages hide regional collapse."
+);
+// 171 words, 12 numbers, and it is the article's calmest and most important idea:
+// the monsoon is wild before El Nino is even mentioned.
+swap(
+  "readability-monsoon-swings",
+  "Look at the 125-year record of June-to-September monsoon rainfall over India, and no two summers are alike. The long-period average is about 88 centimetres, but individual years swing far from that mark. The driest year on record, 1972, came in 22.3% below average; the wettest, 1917, ran 26.6% above. That is a spread of nearly 50 percentage points. The most recent season, 2025, finished 7.8% above normal. This seesaw is the natural rhythm of the monsoon, driven by a mix of Pacific conditions, Indian Ocean dynamics, Atlantic influences, and internal atmospheric chaos. It means that El Niño is only one of many hands on the steering wheel.",
+  "Look at 125 years of June-to-September rainfall and no two summers are alike. A normal monsoon delivers about 87 centimetres. The driest year on record, 1972, came in 22.3% below that. The wettest, 1917, ran 26.6% above. Last year finished 7.8% wet.\n\nThat swing is the monsoon's natural rhythm, driven by the Pacific, the Indian Ocean, the Atlantic and plain atmospheric chaos all at once. El Niño is one hand on the steering wheel, not the only one."
+);
+// Break-only edits: no wording changes, just a paragraph break at a genuine turn in
+// the argument. Each of these was a single block of 145-200 words. Splitting at the
+// pivot is lower-risk than rewriting prose that is already doing its job, and it is
+// where a reader's eye needs somewhere to rest.
+const breaks = [
+  // [9] the strong-event record: the roll-call of disasters, then the exception
+  ["strong-events", "But the small sample of seven also contains 1997,"],
+  // [10] flavour: the eastern-leaning cases, then what they fail to show
+  ["flavour", "Yet 1997, the most lopsidedly eastern event of all at 3.16, finished essentially normal."],
+  // [11] IOD: the evidence, then the caveat that 1972 blows it open
+  ["iod", "But this is a tilt, not a guarantee."],
+  // [12] rolling correlation: the fall, then the reversal
+  ["rolling-corr", "But the trend reversed."],
+  // [14] subseasonal: the month-by-month walk, then why timing matters to a farmer
+  ["subseasonal", "This timing matters enormously for farmers."],
+  // [16] irrigation split: the numbers, then the mechanism
+  ["irrigation", "The mechanism is straightforward."],
+  // [18] food prices: the three counter-examples, then why the link is loose
+  ["prices-loose", "The link is real but loose, because rain is only one of the things that sets a price."],
+  // [19] price components: the split, then the policy reason for it
+  ["prices-split", "The divergence happens because different foods have different exposure to rain"],
+  // [22] agriculture's share: then vs now
+  ["agri-share", "Today, agriculture contributes only about 14% of gross value added"],
+  // [23] methodology: the base-rate caveats, then the definitional ones
+  ["methodology-split", "That threshold also uses the peak index value reached during June to September,"]
+];
+for (const [label, sentence] of breaks) {
+  swap(`break-${label}`, ` ${sentence}`, `\n\n${sentence}`);
+}
 
 // --- 8. a physics claim that is backwards ----------------------------------
 // "that extra Pacific warmth pumps moisture into the Bay of Bengal, feeding the
@@ -223,10 +292,22 @@ swap(
 // (down 5%). Rounded to "a quarter" and "a fifth" per the house rule on false precision.
 // These are the article's only figures not derived from its own artifacts, so both
 // papers are cited in sourceNotes.
+
+
+// These two run AFTER the cyclone correction above, because they split paragraphs
+// that only contain the corrected sentence once that swap has applied.
+// 326 words in a single paragraph, the longest in the article by 100 words, and it
+// carries three separate claims: the sign flip, the cyclone correction, and the
+// significance caveat. One each.
 swap(
-  "bay-of-bengal-cyclones",
-  "Later in the year, as the sun moves south, that extra Pacific warmth pumps moisture into the Bay of Bengal, feeding the retreating monsoon and tropical cyclones.",
-  "Later in the year, as the sun moves south and the winds reverse, those same easterlies cross the warm Bay of Bengal and pick up the moisture that falls on the southern coast. One thing El Niño does not feed, though, is cyclones. Over the four decades to 2020, El Niño autumns brought roughly a quarter fewer cyclones to the Bay than a normal year and La Niña autumns about a fifth more, and almost the whole of that gap sits in the storms that form nearest the equator. The rain tilts one way and the storms tilt the other, so neither is a safe proxy for the other."
+  "readability-northeast-monsoon",
+  "Later in the year, as the sun moves south, that extra Pacific warmth pumps moisture into the Bay of Bengal, feeding the retreating monsoon and tropical cyclones. So the same ocean warmth that starves Gujarat in July can soak Chennai in November. The reversal is a tilt in the odds, not a guarantee. It is also much weaker evidence than the summer picture.",
+  "Later in the year, as the sun moves south and the winds reverse, those same easterlies cross the warm Bay of Bengal and pick up the moisture that falls on the southern coast. So the same ocean warmth that starves Gujarat in July can soak Chennai in November.\n\nOne thing it does not feed, though, is cyclones. Over the four decades to 2020, El Niño autumns brought roughly a quarter fewer cyclones to the Bay of Bengal than a normal year, and La Niña autumns about a fifth more. Almost all of that gap sits in the storms forming nearest the equator. The rain tilts one way and the storms tilt the other, so neither is a safe stand-in for the other.\n\nNow the caveat, and it is a large one. The reversal is a tilt in the odds, not a guarantee, and it rests on much weaker evidence than the summer picture."
+);
+swap(
+  "readability-northeast-significance",
+  "On average, El Niño autumns run about 6 percentage points wetter than La Niña autumns. But individual autumns swing enormously, by 24 and 33 points either side of their own averages. The noise is four or five times larger than the signal. With numbers that scattered, this record simply cannot tell the two groups apart. The direction matches what published research on the northeast monsoon reports. Our own figures cannot confirm it. And a wetter northeast monsoon does not mean a comfortable harvest. It can arrive in violent bursts that flood the city rather than gently refill the parched reservoirs of Rayalaseema.",
+  "On average, El Niño autumns run about 6 percentage points wetter than La Niña ones. But individual autumns swing by 24 and 33 points either side of their own averages, so the noise is four or five times bigger than the signal. With numbers that scattered, this record cannot actually tell the two groups apart. The direction matches what published research reports. Our own figures cannot confirm it.\n\nAnd more rain is not the same as a good year. The northeast monsoon tends to arrive in violent bursts, which flood Chennai rather than gently refilling the parched reservoirs of Rayalaseema."
 );
 
 // --- 7. three factual errors found on the final read -----------------------
@@ -277,12 +358,9 @@ swap(
 );
 
 // Crop section: drop the third restatement of the same structural explanation.
-swap(
-  "dedupe-crops",
-  "These are mainly dryland crops that depend on the June-September rainfall. Irrigated crops like rice and sugarcane, and winter-sown wheat that grows after the monsoon, were largely flat or even gained. The reason is structural. Canal networks, groundwater pumps, and large reservoirs decouple the water supply for irrigated fields from the current season’s rainfall, at least for a while. Rainfed fields have no such buffer. National averages hide regional collapse.",
-  "These are mainly dryland crops that depend on the June-September rainfall. Irrigated crops like rice and sugarcane, and winter-sown wheat that grows after the monsoon, were largely flat or even gained. The pattern is the same one the previous chart set out, now sorted by crop rather than by region, which is the form in which it reaches a household: what you grow decides what a dry year costs you. National averages hide regional collapse.",
-);
 
+
+// Runs after dedupe-crops, which is the swap that writes this sentence.
 // --- methodology section: the honesty ledger has to match the new spine -----
 swap(
   "methodology-forecast-note",
@@ -377,12 +455,47 @@ doc.article.title = "The El Nino Is Coming Late, and That Changes Who It Hurts";
 doc.article.standfirst =
   "NOAA now puts an 81% chance on a very strong El Niño by December. But the forecast for the monsoon months is far softer, and the event is expected to peak after India's summer crop is already in the ground. The risk is real. It is just not where the headlines are pointing.";
 
+// This is the summary card, the first thing most readers will actually read, and it had
+// become the densest paragraph on the page: nine numbers, three unexplained technical
+// terms (the "three-month index", the "trend-adjusted" version, the "strong threshold"),
+// an unexpanded CPC, and three overlapping season windows. The precision belongs in the
+// body, where the charts and the glossary support it. Here the job is the shape of the
+// story. House length for short.body is roughly 90-140 words; this is about 120, with
+// three numbers instead of nine and no acronym beyond NOAA.
 doc.short = {
-  headline: "The El Niño is forecast to arrive late. That moves the risk off the kharif crop and onto water, wheat and 2027.",
-  dek: "NOAA gives it about a one-in-four chance of being strong during June to August, three-in-four by September, and 81% very strong by December.",
+  headline: "This El Niño is running late, and that decides who it hurts.",
+  dek: "It is forecast to peak around October, after India's summer crop is already harvested. The rains it could still spoil are the ones falling now.",
   body:
-    "The official three-month index currently reads 0.98°C, which NOAA calls weak, and the trend-adjusted version reads 0.47°C, neutral. The forecast is for that to change, but late: CPC puts the chance of crossing the strong threshold at about 25% for June to August, 73% for July to September, and forecasts an 81% chance of a very strong event by October to December. History agrees on the shape. Of the thirteen monsoons since 1950 that opened where this one opened, five escalated during the season and averaged 12% below normal, while the eight that did not averaged 7% above. So the summer crop faces a real but unsettled risk, and the loudest part of the event lands after it is harvested, on reservoirs, on the winter wheat sowing, and on food prices in 2027."
+    "An El Niño has begun in the Pacific and it is strengthening fast. For India the question is not whether, but when. NOAA expects it to become a major event only around October, by which time the rice, pulses and millets sown with the June rains are largely decided. Through the monsoon months themselves the odds are much softer, roughly one in four. History says the same thing from the other direction: of the thirteen monsoons that began where this one began, five turned dry and eight ended up wetter than usual. So the crop in the ground now faces a real risk that is genuinely unsettled. What the event lands on at full strength is water: how full the reservoirs are in October, how much wheat gets sown after that, and what food costs in 2027."
 };
+
+// No glossary blocks existed at all, so "kharif" appeared in the old headline with
+// nothing to support it and the body's index vocabulary had no safety net. These give
+// the precise terms somewhere to be explained, which is what lets the body stay precise.
+doc.editorialPlan = doc.editorialPlan || {};
+doc.editorialPlan.glossaryBlocks = [
+  {
+    term: "kharif",
+    plainMeaning: "The summer crop, sown with the arrival of the monsoon in June and harvested from about September. Rice, maize, pulses, groundnut, bajra and jowar are the main ones.",
+    whyItMattersHere: "It is the crop growing right now, and the one the monsoon rains decide. Almost everything in this piece about a bad monsoon is about kharif."
+  },
+  {
+    term: "rabi",
+    plainMeaning: "The winter crop, sown from about October and harvested in spring. Wheat is the big one, and it depends far more on stored water than on rain falling at the time.",
+    whyItMattersHere: "Because this El Niño is expected to peak after the kharif harvest, rabi is where its full force actually lands, through reservoir levels and groundwater."
+  },
+  {
+    term: "Oceanic Niño Index",
+    plainMeaning: "The official measure of El Niño: how much warmer than normal a patch of the equatorial Pacific has been, averaged over three months. Above 0.5°C is an El Niño; above 1.5°C counts as strong.",
+    whyItMattersHere: "It averages three months, so it lags a fast-moving ocean. That is why the official index can read weak while this week's reading looks alarming.",
+    keyTerm: true
+  },
+  {
+    term: "long-period average",
+    plainMeaning: "India's normal monsoon rainfall, about 87 centimetres over June to September, measured across a long run of years. Every rainfall figure here is a departure from it.",
+    whyItMattersHere: "A season within about 10% of it counts as normal. That is the line separating 'below normal' from 'deficient'."
+  }
+];
 
 doc.macha = {
   heading: "So should I start stocking up on onions now?",

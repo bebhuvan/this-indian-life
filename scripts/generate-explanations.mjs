@@ -509,7 +509,7 @@ function articleTemplateFor(evidence) {
         "The World Inequality Lab method combines tax tabulations, national accounts and rich lists to estimate the full distribution including the top tail; this captures capital income surveys miss, but it is a MODELLED estimate, not a direct observation, and has been contested",
         "The Bhalla–Bhasin critique (2024) argues the World Inequality Lab does not observe the same individuals' income and wealth and instead imputes the full distribution, which they say overstates top concentration; present this as a genuine expert disagreement, not a settled question",
         "India's HCES (Household Consumption Expenditure Survey) 2022-23 and 2023-24 show the consumption Gini falling in both rural and urban areas; but part of the 2023-24 fall reflects a methodology change — newly imputing the value of free government rations and welfare into consumption — so it partly reflects a real rise in the floor and partly a change in what is being measured",
-        "Falling extreme poverty and rising top-end inequality are both true at the same time: the floor rose (fewer people below $2.15/day) even as the ceiling rose faster, so 'poverty fell' is not evidence that 'inequality fell'",
+        "Falling extreme poverty and rising top-end inequality are both true at the same time: the floor rose (fewer people below $3.00/day in 2021 PPP) even as the ceiling rose faster, so 'poverty fell' is not evidence that 'inequality fell'",
         "These are national figures and hide large gaps by state, caste, religion and gender that this page's data does not fully capture; wealth-survey gaps (AIDIS) and unit-level microdata are follow-ups, so be honest about what is and is not shown"
       ],
       styleExample: [

@@ -28,6 +28,23 @@ for (const file of files) {
     console.warn(`warn ${file}: ready article is shorter than target (${words} words)`);
     warnings += 1;
   }
+  // Source notes and further reading must carry a URL. ArticleEvidence.astro renders a
+  // { label, url } object as a hyperlink and a bare string as dead text, so an unlinked
+  // note is a source the reader is asked to trust but cannot check.
+  //
+  // Deliberately a WARNING rather than a failure: 349 of 373 notes across the site are
+  // still bare strings, so failing here would turn the gate red for almost every article
+  // and bury the real errors. Same call the repo already made for validate:data. Once the
+  // backlog is cleared, promote this to `failures`.
+  for (const [field, items] of [["sourceNotes", doc.sourceNotes], ["furtherReading", doc.furtherReading]]) {
+    const unlinked = (items || []).filter((item) => !item || typeof item === "string" ? !/^https?:\/\/\S+$/.test(String(item || "")) : !item.url);
+    if (unlinked.length) {
+      const first = typeof unlinked[0] === "string" ? unlinked[0] : unlinked[0].label || "";
+      console.warn(`warn ${file}: ${field} ${unlinked.length}/${(items || []).length} entries have no URL — "${String(first).slice(0, 60)}"`);
+      warnings += 1;
+    }
+  }
+
   for (const finding of lintExplanation(doc)) {
     if (finding.severity === "error") {
       console.error(`fail ${file}: ${finding.field} ${finding.rule} — "${finding.match}"`);

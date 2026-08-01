@@ -358,6 +358,16 @@ export function pullQuoteForQuestion(page: QuestionPage) {
 	      line: "In the latest decade, India averaged roughly 74 warm nights a year. The climate shift is now a sleep, work, water and cooling story."
 	    };
 	  }
+	  // Article-scoped, placed ahead of the q.climate.* branch. The generic domain line
+	  // ("Climate and air numbers become real when you read them beside exposure, people,
+	  // and time") is boilerplate that says nothing, and the domain branches below
+	  // short-circuit the smarter chart-takeaway fallback at the end of this function.
+	  if (page.id === "q.climate.el_nino_2026") {
+	    return {
+	      stat: "0.47 to 2.2",
+	      line: "Five official NOAA measures describe the same patch of Pacific right now, and they disagree by more than fourfold. Which one gets quoted decides whether this reads as a record or a shrug."
+	    };
+	  }
 	  if (page.id.startsWith("q.climate.") || page.id.startsWith("q.air.")) {
 	    return {
 	      stat: top ? formatLockedNumber(top) : "The atmosphere",

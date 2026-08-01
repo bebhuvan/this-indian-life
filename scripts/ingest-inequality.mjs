@@ -51,7 +51,7 @@ const worldBankSeries = [
   { id: "econ.inequality.cons_share_lowest10", code: "SI.DST.FRST.10", title: "Consumption share of the poorest 10% (World Bank)", unit: "% of consumption" },
   { id: "econ.inequality.cons_share_highest20", code: "SI.DST.05TH.20", title: "Consumption share of the richest 20% (World Bank)", unit: "% of consumption" },
   { id: "econ.inequality.cons_share_lowest20", code: "SI.DST.FRST.20", title: "Consumption share of the poorest 20% (World Bank)", unit: "% of consumption" },
-  { id: "econ.inequality.poverty_215", code: "SI.POV.DDAY", title: "Extreme poverty headcount ($2.15/day, 2017 PPP)", unit: "% of population" }
+  { id: "econ.inequality.poverty_300", code: "SI.POV.DDAY", title: "Extreme poverty headcount ($3.00/day, 2021 PPP)", unit: "% of population" }
 ];
 
 for (const s of worldBankSeries) {

@@ -4,20 +4,22 @@ import hashlib
 import json
 import re
 import sys
-import time
-import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-from selenium import webdriver
-from selenium.common.exceptions import JavascriptException, TimeoutException, WebDriverException
-from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException, WebDriverException
+
+from adapters.upag_dash import (
+    DASH_BASE_URL,
+    REPORT_REGISTRY_URL,
+    chrome_driver,
+    extract_grid_rows,
+    fetch_json,
+    normalize_rows,
+)
 
 
 SOURCE_ID = "upag-dash"
-REPORT_REGISTRY_URL = "https://api-prd.upag.gov.in/v1/upagapi/authorize/getdynamicjson?tabnames=REPORTS"
-DASH_BASE_URL = "https://dash.upag.gov.in"
-
 REPORTS = [
     {
         "slug": "allindiaapy",
@@ -109,34 +111,6 @@ def write_snapshot(source_id, name, payload):
     return {"path": str(path), "hash": digest}
 
 
-def fetch_json(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "Indica research data ingester"})
-    with urllib.request.urlopen(req, timeout=30) as response:
-        return json.loads(response.read().decode("utf-8"))
-
-
-def normalize_key(key):
-    key = str(key).strip().replace("&", "and")
-    key = re.sub(r"[^0-9A-Za-z]+", "_", key)
-    key = re.sub(r"_+", "_", key).strip("_").lower()
-    return key or "value"
-
-
-def normalize_value(value):
-    if isinstance(value, dict):
-        return {normalize_key(k): normalize_value(v) for k, v in value.items()}
-    if isinstance(value, list):
-        return [normalize_value(v) for v in value]
-    return value
-
-
-def normalize_rows(rows):
-    normalized = []
-    for row in rows:
-        normalized.append({normalize_key(k): normalize_value(v) for k, v in row.items()})
-    return normalized
-
-
 def year_start_from_crop_year(value):
     match = re.match(r"^(\d{4})", str(value or ""))
     return int(match.group(1)) if match else None
@@ -161,48 +135,6 @@ def summarize_rows(rows):
         "cropCount": len(crops),
         "stateCount": len(states),
     }
-
-
-def chrome_driver():
-    options = Options()
-    options.add_argument("--headless=new")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1600,1200")
-    return webdriver.Chrome(options=options)
-
-
-def extract_grid_rows(driver, slug, grid_key, wait_seconds):
-    url = f"{DASH_BASE_URL}/{slug}"
-    driver.get(url)
-    deadline = time.time() + wait_seconds
-    last_state = None
-    script = """
-      const key = arguments[0];
-      const grid = window[key];
-      const result = {ready: Boolean(grid && grid.api), rows: [], displayed: null, error: null};
-      if (!result.ready) return result;
-      try {
-        result.displayed = grid.api.getDisplayedRowCount ? grid.api.getDisplayedRowCount() : null;
-        grid.api.forEachNode(node => { if (node && node.data) result.rows.push(node.data); });
-      } catch (error) {
-        result.error = String(error);
-      }
-      return result;
-    """
-
-    while time.time() < deadline:
-        try:
-            state = driver.execute_script(script, grid_key)
-            last_state = state
-            if state.get("ready") and len(state.get("rows") or []) > 0:
-                return url, state
-        except JavascriptException as error:
-            last_state = {"ready": False, "rows": [], "error": str(error)}
-        time.sleep(1)
-
-    return url, last_state or {"ready": False, "rows": [], "error": "timed out before grid initialized"}
 
 
 def create_artifact(config, source_url, fetched_at, rows, raw_rows, row_hash):

@@ -79,7 +79,7 @@ const METRICS = [
   // — Outcomes: income, productivity, poverty —
   { slug: "gdp_pc_ppp", code: "NY.GDP.PCAP.PP.KD", title: "GDP per capita (PPP)", unit: "constant 2021 PPP $", group: "outcomes" },
   { slug: "productivity", code: "SL.GDP.PCAP.EM.KD", title: "GDP per person employed", unit: "constant 2021 PPP $", group: "outcomes" },
-  { slug: "poverty_215", code: "SI.POV.DDAY", title: "Extreme poverty ($2.15/day)", unit: "% of population", group: "outcomes" }
+  { slug: "poverty_300", code: "SI.POV.DDAY", title: "Extreme poverty ($3.00/day, 2021 PPP)", unit: "% of population", group: "outcomes" }
 ];
 
 const manifest = [];

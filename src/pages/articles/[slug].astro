@@ -10,7 +10,7 @@ import ArticleCite from "../../components/ArticleCite.astro";
 import Footer from "../../components/Footer.astro";
 import { locales } from "../../data/site";
 import { annotateStorySections, inlineMarkdownHtml, keyGlossaryTerms, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../data/questions";
-import { visualsForQuestion, bindSectionVisuals } from "../../data/viz";
+import { visualsForQuestion, bindSectionVisuals, bindSectionVisualGroups } from "../../data/viz";
 import { articleGraph, SITE } from "../../data/seo";
 
 export function getStaticPaths() {
@@ -69,11 +69,38 @@ const sectionInputs = storySections.map((section) => ({
   heading: section.heading,
   text: section.blocks.filter((block) => block.type === "p").map((block) => block.text).join(" ")
 }));
-const explicitMap = Object.fromEntries(
-  ((explanation as { sectionVisualMap?: Array<{ heading: string; visualId: string }> }).sectionVisualMap || [])
-    .map((entry) => [entry.heading, entry.visualId])
+type SectionVisualEntry = { heading: string; visualId?: string; visualIds?: string[] };
+const sectionVisualEntries = ((explanation as { sectionVisualMap?: SectionVisualEntry[] }).sectionVisualMap || []);
+const groupedExplicitMap = Object.fromEntries(
+  sectionVisualEntries
+    .filter((entry) => Array.isArray(entry.visualIds))
+    .map((entry) => [entry.heading, entry.visualIds || []])
 );
-const { bound: boundVisuals, leftover: leftoverVisuals } = bindSectionVisuals(sectionInputs, storyVisuals, explicitMap);
+const hasGroupedMap = Object.keys(groupedExplicitMap).length > 0;
+const explicitMap = Object.fromEntries(
+  sectionVisualEntries
+    .filter((entry) => entry.visualId)
+    .map((entry) => [entry.heading, entry.visualId as string])
+);
+const groupedBinding = hasGroupedMap
+  ? bindSectionVisualGroups(sectionInputs, storyVisuals, groupedExplicitMap)
+  : null;
+const singleBinding = hasGroupedMap
+  ? null
+  : bindSectionVisuals(sectionInputs, storyVisuals, explicitMap);
+const boundVisualGroups = groupedBinding?.bound || singleBinding!.bound.map((visual) => visual ? [visual] : []);
+const leftoverVisuals = groupedBinding?.leftover || singleBinding!.leftover;
+const visualStartIndexes: number[] = [];
+let visualCursor = 0;
+for (const group of boundVisualGroups) {
+  visualStartIndexes.push(visualCursor);
+  visualCursor += group.length;
+}
+const chartLabel = (index: number) => {
+  const count = boundVisualGroups[index]?.length || 0;
+  const start = visualStartIndexes[index] + 1;
+  return count > 1 ? `Charts ${start}-${start + count - 1}` : `Chart ${start}`;
+};
 
 // Inline glossary: define jargon where the reader meets it. Every glossary term
 // gets a tappable popover on first mention; the load-bearing terms (named in the
@@ -85,7 +112,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
 ---
 
 <Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
-  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}${page.slug === "how-is-climate-change-changing-india" ? " theme-climate-canonical" : ""}${page.slug === "why-the-rupee-falls" ? " theme-rupee" : ""}${page.slug === "when-does-india-actually-turn-the-power-on" ? " theme-grid" : ""}`}>
+  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}${page.slug === "how-is-climate-change-changing-india" ? " theme-climate-canonical" : ""}${page.slug === "why-the-rupee-falls" ? " theme-rupee" : ""}${page.slug === "when-does-india-actually-turn-the-power-on" ? " theme-grid" : ""}${page.id === "q.econ.income_classification" ? " theme-income-classification" : ""}`}>
     <Nav active={page.domain} locale={locale} />
 
     <header class="article-head">
@@ -138,7 +165,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
               <p class="standfirst">{explanation.article.standfirst}</p>
               <div class="story-flow">
                 {annotatedSections.map((section, index) => (
-                  <section class={`story-step ${(boundVisuals[index] as { size?: string } | null)?.size === "small" ? "story-step--small" : "story-step--feature"}`}>
+                  <section class={`story-step ${boundVisualGroups[index]?.some((visual) => (visual as { size?: string }).size === "small") ? "story-step--small" : "story-step--feature"}`}>
                     <div class="story-copy longform">
                       <h3>{section.heading}</h3>
                       {section.blocks.map((block) => {
@@ -171,15 +198,15 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
                         return null;
                       })}
                     </div>
-                    {boundVisuals[index] ? (
+                    {boundVisualGroups[index]?.length ? (
                       <ArticleVisuals
-                        visuals={[boundVisuals[index]]}
+                        visuals={boundVisualGroups[index]}
                         lockedNumbers={explanation.evidence.lockedNumbers}
                         chartExplainers={explanation.chartExplainers}
                         showKpis={false}
                         leadFirst={false}
-                        startIndex={index}
-                        sectionLabel={`Chart ${index + 1}`}
+                        startIndex={visualStartIndexes[index]}
+                        sectionLabel={chartLabel(index)}
                         sectionClass="story-viz"
                       />
                     ) : null}
@@ -192,7 +219,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
                     chartExplainers={explanation.chartExplainers}
                     showKpis={false}
                     leadFirst={false}
-                    startIndex={storySections.length + 1}
+                    startIndex={visualCursor}
                     sectionLabel="More from the data"
                     sectionClass="story-viz story-leftover"
                   />
@@ -276,7 +303,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
             <p class="standfirst">{explanation.article.standfirst}</p>
             <div class="story-flow">
               {annotatedSections.map((section, index) => (
-                <section class={`story-step ${(boundVisuals[index] as { size?: string } | null)?.size === "small" ? "story-step--small" : "story-step--feature"}`}>
+                <section class={`story-step ${boundVisualGroups[index]?.some((visual) => (visual as { size?: string }).size === "small") ? "story-step--small" : "story-step--feature"}`}>
                   <div class="story-copy longform">
                     <h3>{section.heading}</h3>
                     {section.blocks.map((block) => {
@@ -309,15 +336,15 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
                       return null;
                     })}
                   </div>
-                  {boundVisuals[index] ? (
+                  {boundVisualGroups[index]?.length ? (
                     <ArticleVisuals
-                      visuals={[boundVisuals[index]]}
+                      visuals={boundVisualGroups[index]}
                       lockedNumbers={explanation.evidence.lockedNumbers}
                       chartExplainers={explanation.chartExplainers}
                       showKpis={false}
                       leadFirst={false}
-                      startIndex={index}
-                      sectionLabel={`Chart ${index + 1}`}
+                      startIndex={visualStartIndexes[index]}
+                      sectionLabel={chartLabel(index)}
                       sectionClass="story-viz"
                     />
                   ) : null}
@@ -330,7 +357,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
                   chartExplainers={explanation.chartExplainers}
                   showKpis={false}
                   leadFirst={false}
-                  startIndex={storySections.length + 1}
+                  startIndex={visualCursor}
                   sectionLabel="More from the data"
                   sectionClass="story-viz story-leftover"
                 />
