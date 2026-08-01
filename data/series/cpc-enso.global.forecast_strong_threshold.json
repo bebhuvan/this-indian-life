@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "climate.enso.forecast_strong_threshold",
+  "title": "When NOAA expects this El Nino to cross the strong line",
+  "sourceId": "cpc-enso-forecast",
+  "sourceIndicatorId": "cpc.enso.strength_probabilities.threshold",
+  "sourceUrl": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/",
+  "unit": "% chance of reaching +1.5C or above",
+  "geography": {
+    "type": "region",
+    "id": "PACIFIC",
+    "name": "Equatorial Pacific"
+  },
+  "dimensions": [
+    "label",
+    "group",
+    "value",
+    "very_strong_pct"
+  ],
+  "fetchedAt": "2026-08-01T11:06:58.317Z",
+  "rows": [
+    {
+      "label": "JJA (Jun Jul Aug)",
+      "group": "During the monsoon",
+      "value": 25,
+      "very_strong_pct": 0
+    },
+    {
+      "label": "JAS (Jul Aug Sep)",
+      "group": "During the monsoon",
+      "value": 73,
+      "very_strong_pct": 16
+    },
+    {
+      "label": "ASO (Aug Sep Oct)",
+      "group": "During the monsoon",
+      "value": 90,
+      "very_strong_pct": 48
+    },
+    {
+      "label": "SON (Sep Oct Nov)",
+      "group": "After the monsoon",
+      "value": 96,
+      "very_strong_pct": 71
+    },
+    {
+      "label": "OND (Oct Nov Dec)",
+      "group": "After the monsoon",
+      "value": 97,
+      "very_strong_pct": 81
+    },
+    {
+      "label": "NDJ (Nov Dec Jan)",
+      "group": "After the monsoon",
+      "value": 95,
+      "very_strong_pct": 75
+    },
+    {
+      "label": "DJF (Dec Jan Feb)",
+      "group": "After the monsoon",
+      "value": 86,
+      "very_strong_pct": 54
+    },
+    {
+      "label": "JFM (Jan Feb Mar)",
+      "group": "After the monsoon",
+      "value": 67,
+      "very_strong_pct": 28
+    },
+    {
+      "label": "FMA (Feb Mar Apr)",
+      "group": "After the monsoon",
+      "value": 36,
+      "very_strong_pct": 7
+    }
+  ],
+  "metadata": {
+    "index": "RONI (Relative Oceanic Nino Index), NOT the raw ONI",
+    "basePeriod": "1991-2020",
+    "thresholds": "Categories are 0.5C increments of the Nino-3.4 departure: weak 0.5-1.0, moderate 1.0-1.5, strong 1.5-2.0, very strong >= 2.0",
+    "issued": "July 2026",
+    "discussionDate": "9 July 2026",
+    "alertStatus": "El Niño Advisory",
+    "synopsis": "El Niño continues and will strengthen through the end of the year, with a 97% chance it will persist through early spring 2027.",
+    "nextUpdate": "13 August 2026",
+    "cadence": "Updated the second Thursday of each month, with the ENSO Diagnostic Discussion.",
+    "method": "CPC's official outlook, set by a team of about ten forecasters from multi-model ensembles (including NMME and NCEP CFSv2), reanalysis, in situ and satellite observations.",
+    "whyRoniMatters": "NOAA's own official strength probabilities are expressed in RONI, the trend-adjusted index. Switching to RONI is therefore not a way of making this event look smaller: the forecaster uses it and still projects a very strong event.",
+    "timingForIndia": "Chance of reaching the +1.5 strong threshold: JJA 25%, JAS 73%, ASO 90%. The escalation is forecast to arrive late in the monsoon and peak after it, which is the article's timing argument stated by the forecaster rather than inferred from past peak dates.",
+    "honestyRules": [
+      "This is a FORECAST, not an observation. Label it as such every time. Observed values in this article come from the CPC weekly and seasonal data files, never from here.",
+      "It is a probability distribution, not a number. Do not collapse '81% chance of very strong in OND' into 'a very strong El Nino is coming'.",
+      "The forecast is re-issued monthly and moves. Quote its issue date alongside it.",
+      "Strength is not impact. CPC states plainly that the strength of an event does not necessarily correspond with the strength of its influence.",
+      "DO NOT use the observed Nino-3.4 values quoted in the Diagnostic Discussion text: they disagree with CPC's own weekly data file by about 0.7-0.8C across all three Nino regions, and the reason is not established. See the header of this script."
+    ],
+    "note": "Chance of the RONI reaching +1.5C or above, which is the threshold every strong-event base rate in this article uses. The first three seasons overlap the June-September monsoon."
+  }
+}

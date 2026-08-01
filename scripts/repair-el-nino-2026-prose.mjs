@@ -100,7 +100,7 @@ swap(
 // --- 1b. the two new sections, built on climate.el_nino.escalation_fork -----
 const FORK_SECTIONS = `## So which kind of El Niño year is this one?
 
-Nobody knows yet. That is not evasion, and it is not a gap in the reporting. It is the most useful thing this record has to say in early August.
+Not yet decided, and that is the honest answer rather than an evasive one. The forecasts come a few paragraphs from here. Start with the record, because it is the thing that says how much a forecast at this stage of the season is worth.
 
 Start with where the Pacific actually is, rather than where the headlines put it. The official three-month index for April to June reads 0.98°C, and NOAA's own labelling calls that a weak El Niño. The trend-adjusted index reads 0.47°C, which it calls neutral. Whatever the weekly spikes suggest, the seasonal measures that every base rate in this piece is built from have not reached the strong threshold that would place 2026 in the harshest group.
 
@@ -120,12 +120,49 @@ The other branch is worth saying out loud, because it almost never gets said. Th
 
 Two cautions, both real. The dry branch is partly true by construction: a year that escalates becomes a strong-event year by definition, so its poor average is not an independent discovery. The genuinely new information is the escalation rate itself, and the fate of the branch that stalled. And a modest reading now is not safety. Both 1965 and 2023 sat below this band in April to June and still reached strong intensity once the monsoon was under way. The Pacific can accelerate from lower down than this.
 
+That is what the past says. It is a base rate, not a forecast, and it is deliberately blind to everything the forecasters can currently see in the ocean. So it is worth asking them.
+
 `;
 
 swap(
   "insert-fork-sections",
   "## What actually happened to the monsoon the last times a strong El Niño coincided with the season?",
   `${FORK_SECTIONS}## What actually happened to the monsoon the last times a strong El Niño coincided with the season?`
+);
+
+// --- 1b-ii. the forecast, now that there is a real one to cite --------------
+// The original sin was an unsourced "forecasters expect 2026 to cross that 1.5C mark".
+// The fix was to remove it. The better fix, once scripts/ingest-cpc-enso-forecast.mjs
+// exists, is to say what is ACTUALLY forecast, with a date and a source. CPC's official
+// probabilistic strength outlook (issued July 2026, verified in RONI on a 1991-2020
+// base) gives the chance of reaching +1.5C as 25% for JJA, 73% for JAS, 90% for ASO and
+// 81% very strong by OND, with a 97% chance the event persists into early spring 2027.
+//
+// Two things make this worth a section of its own rather than a clause:
+//   1. It CONVERGES with the historical fork. The record says 38% of comparable seasons
+//      escalated during the monsoon; the models say 25% by JJA rising to 73% by JAS.
+//      Two independent methods, same neighbourhood, and neither is a certainty.
+//   2. It is expressed in RONI. That kills the reading, available to anyone who has
+//      followed the article this far, that the trend-adjusted index is a way of talking
+//      the event down. NOAA forecasts in RONI and still projects a record-scale event.
+const FORECAST_SECTION = `## And what do the forecasters actually say?
+
+Now there is something to quote, which there was not a few paragraphs ago. NOAA's Climate Prediction Center publishes an official probabilistic outlook, re-issued on the second Thursday of every month. The July 2026 edition carries an El Niño Advisory and puts a 97% chance on the event lasting into early spring 2027.
+
+The number that matters for India is narrower: the chance of crossing that same +1.5°C line the base rates use. For June to August it is about one in four. For July to September it rises to roughly three in four. By August to October it is nine in ten, and by October to December the forecast is for a very strong event, at 81%, which would put it among the largest since 1950.
+
+Read that sequence slowly, because the shape of it is the story. The escalation is not forecast to arrive at the start of the monsoon. It is forecast to arrive at the end of it, and to peak after it is over.
+
+Set the two methods side by side. The historical record says 38% of seasons that opened here went on to cross the line during the monsoon. The models say 25% by August, three-quarters by September. Those are different instruments answering slightly different questions, and they land in the same neighbourhood: escalation is likely, it is not certain, and it is late.
+
+One detail is worth pausing on. CPC's strength probabilities are verified against the relative index, the trend-adjusted one, on a 1991 to 2020 baseline. So the adjustment this piece spent three sections explaining is not a way of talking the event down. The forecaster uses it, and still expects something close to a record.
+
+`;
+
+swap(
+  "insert-forecast-section",
+  "## What actually happened to the monsoon the last times a strong El Niño coincided with the season?",
+  `${FORECAST_SECTION}## What actually happened to the monsoon the last times a strong El Niño coincided with the season?`
 );
 
 // --- 1c. downgrade the remaining forecast-conditional claims ----------------
@@ -243,12 +280,27 @@ swap(
   "The rainfall departures are IMD's, measured against each series' own long-period average. The base rate for strong events rests on seven monsoons, and the escalation split earlier in the piece on thirteen, of which five sit in one branch and eight in the other. Those are small enough numbers that they should be read as rough guides to the odds and never as forecasts. The escalation split also carries one circularity worth naming: a year that escalates is a strong-event year by definition, so the poor average of that branch restates the base rate rather than confirming it independently. The parts that stand on their own are the escalation rate and the outcome of the branch that did not escalate."
 );
 
+// The peak-timing act previously rested entirely on a histogram of past events. CPC's
+// own forecast now says the same thing about THIS event, which is much stronger.
+swap(
+  "peak-timing-forecast-confirms",
+  "This is the fact that moves the story into 2027. India's kharif crop, sown with the June rains, is largely settled by the end of September. If the Pacific does not reach full volume until December, the loudest part of the event arrives after the summer harvest has already been decided, one way or the other.",
+  "This is the fact that moves the story into 2027, and it is not only a pattern from the past. It is what NOAA forecasts for this event: 81% odds of a very strong El Niño in October to December, against about one chance in four of even reaching the strong threshold during June to August. India's kharif crop, sown with the June rains, is largely settled by the end of September. The loudest part of this event is expected to arrive after the summer harvest has already been decided, one way or the other."
+);
+
 swap(
   "methodology-absent",
   "Finally, what is absent. The 2026 season is unfinished, and this piece deliberately carries no figures for rainfall so far, reservoir storage or sown area. Those numbers exist and they move week to week, but they are not in the evidence behind this article, so no estimate of them has been made here.",
-  "Finally, what is absent, which in this piece matters as much as what is present. The 2026 season is unfinished, and this article carries no figures for rainfall so far, reservoir storage or sown area. Those numbers exist and they move week to week, but they are not in the evidence behind this article, so no estimate of them is made here.\n\nNor does it carry a forecast. An earlier draft of this piece asserted that the Pacific was widely projected to cross the strong threshold during the monsoon, and used that to apply the harshest of the three base rates. No forecast product was ever among the sources listed below, so that sentence has been removed rather than sourced after the fact. Everything here about 2026 is an observation already on the record: an April to June index of 0.98°C, a trend-adjusted 0.47°C, and a dipole that has been sliding towards neutral since February. What the Pacific does between now and October is not something this article claims to know."
+  "Finally, what is absent, which in this piece matters as much as what is present. The 2026 season is unfinished, and this article carries no figures for rainfall so far, reservoir storage or sown area. Those numbers exist and they move week to week, but they are not in the evidence behind this article, so no estimate of them is made here.\n\nAn earlier draft of this piece asserted, with no source at all, that a crossing of the strong threshold during the monsoon was widely anticipated, and used that to apply the harshest of the three base rates. No forecast product was among its sources. That sentence is gone, and in its place is the actual CPC outlook, named, dated and linked below. The difference matters more than it might look: one was a confident sentence about the future, the other is a published distribution that can be checked and that will be revised next month."
 );
 
+
+// Runs AFTER methodology-absent, because it anchors on text that swap creates.
+swap(
+  "methodology-forecast-vintage",
+  "Finally, what is absent, which in this piece matters as much as what is present.",
+  "One forecast is quoted, and only one. The Climate Prediction Center's probabilistic strength outlook is an official product, re-issued on the second Thursday of every month, and the figures here are from the July 2026 edition. It is a distribution rather than a prediction, its probabilities are verified against the trend-adjusted index on a 1991 to 2020 baseline, and it will have moved by the time you read this. Every other number about 2026 in this piece is an observation, not a projection.\n\nFinally, what is absent, which in this piece matters as much as what is present."
+);
 // --- section-to-chart binding ----------------------------------------------
 // Two sections were inserted, so every binding after the definitions chart shifts.
 // Rebuilt from the section order rather than patched, per the CLAUDE.md gotcha.
@@ -260,6 +312,7 @@ const CHART_ORDER = [
   "how-strictly-you-define-an-el-nino-year-changes-the-answer",
   "monsoons-that-began-where-this-one-begins",
   "the-fork-not-the-forecast",
+  "when-noaa-expects-this-el-nino-to-cross-the-strong-line",
   "a-bigger-el-nino-is-not-a-worse-monsoon",
   "where-the-pacific-warmed-does-not-settle-it-either",
   "does-the-indian-ocean-rescue-an-el-nino-monsoon",
@@ -306,26 +359,26 @@ if (doc.evidence?.question) doc.evidence.question = "An El Nino is under way. Wh
 // more here than on most articles: the July weekly values average +2.0, so MJJ lands
 // near 1.45 and JJA will very likely cross the +1.5 escalation threshold. When CPC
 // publishes those, the framing needs revisiting. See the hold plan in the handoff.
-doc.dataThrough = "22 July 2026";
+doc.dataThrough = "22 July 2026 (observations); CPC forecast issued July 2026";
 doc.lastReviewed = "2026-08-01";
 
-doc.article.title = "What the Pacific Has Not Told India Yet";
+doc.article.title = "The El Nino Is Coming Late, and That Changes Who It Hurts";
 doc.article.standfirst =
-  "An El Niño is under way and the alarm has already started. But the official index still reads weak, and of the thirteen monsoons that opened exactly here, eight finished wetter than normal. What happens to India's rain depends on something that has not happened yet.";
+  "NOAA now puts an 81% chance on a very strong El Niño by December. But the forecast for the monsoon months is far softer, and the event is expected to peak after India's summer crop is already in the ground. The risk is real. It is just not where the headlines are pointing.";
 
 doc.short = {
-  headline: "The monsoon is not waiting on El Niño. It is waiting on whether El Niño grows.",
-  dek: "A strong El Niño makes a dry monsoon far more likely. This one is not strong yet, and most events at this stage never got there.",
+  headline: "The El Niño is forecast to arrive late. That moves the risk off the kharif crop and onto water, wheat and 2027.",
+  dek: "NOAA gives it about a one-in-four chance of being strong during June to August, three-in-four by September, and 81% very strong by December.",
   body:
-    "The tropical Pacific is warmer than usual and an El Niño is under way, but the official three-month index reads 0.98°C, which NOAA calls weak, and the trend-adjusted version reads 0.47°C, which it calls neutral. Thirteen monsoons since 1950 opened at this reading. Five escalated past the strong threshold during the season and averaged 12% below normal; the eight that did not averaged 7% above. So the fork is the escalation, not the declaration, and it has not happened yet. Beyond that, the national average is the least interesting number in the story: irrigation decides who is actually hurt, El Niño usually peaks in October after the summer harvest is settled, and the price consequences of a bad season land the following year."
+    "The official three-month index currently reads 0.98°C, which NOAA calls weak, and the trend-adjusted version reads 0.47°C, neutral. The forecast is for that to change, but late: CPC puts the chance of crossing the strong threshold at about 25% for June to August, 73% for July to September, and forecasts an 81% chance of a very strong event by October to December. History agrees on the shape. Of the thirteen monsoons since 1950 that opened where this one opened, five escalated during the season and averaged 12% below normal, while the eight that did not averaged 7% above. So the summer crop faces a real but unsettled risk, and the loudest part of the event lands after it is harvested, on reservoirs, on the winter wheat sowing, and on food prices in 2027."
 };
 
 doc.macha = {
   heading: "So should I start stocking up on onions now?",
   body:
-    "Arre, not yet, and possibly not at all. El Niño is like a doctor telling you your cholesterol is borderline. It raises the risk; it does not book the hospital bed. Right now the Pacific is at the borderline reading, and historically about two in three years like this one never became the dangerous kind. If it does escalate, the damage shows up in your dal and vegetables rather than your rice and atta, because the government sits on huge grain stocks but nobody stockpiles tur dal. And it shows up late, next year, not next month. The people who need to plan now are farmers without irrigation and the officials watching reservoir levels in October. Your kitchen budget can wait for actual news.",
+    "Arre, not this week. Here is the timing, which is the whole thing. The Pacific is warming up and NOAA thinks it gets seriously big by December. But your kharif rice and dal are being grown right now, in June to September, and for those months the forecast is much softer, roughly a one-in-four chance of the dangerous level. The monster shows up after that harvest is mostly decided. What it actually hits is the water in the reservoirs in October, which decides how much wheat gets planted for winter, and that shows up in prices somewhere in 2027. So: farmers without irrigation and officials watching reservoir levels should be paying attention now. Your kitchen budget has time.",
   soWhat:
-    "Because the scary number everyone is quoting applies to a kind of El Niño this one has not become yet, and might not."
+    "Because the scary number is a December number, and what it lands on is next year's wheat and water, not this month's vegetables."
 };
 
 // --- caveats: replace the two that overstated, add the escalation caveat ----
@@ -361,6 +414,22 @@ const NEW_EXPLAINERS = [
       "Reading the dry group as a discovery. A year that escalates becomes a strong-event year by definition, so that group's poor average restates the base rate rather than confirming it. The parts that stand on their own are the one-in-three escalation rate and the wetness of the group that stalled. Thirteen cases is also a thin base, and 1965 and 2023 both escalated from below this band, so a modest reading now is not safety.",
     mobileNote:
       "If you read only one thing here, count the bars: five in the dry group, eight in the wet one."
+  },
+  {
+    visualId: "when-noaa-expects-this-el-nino-to-cross-the-strong-line",
+    title: "When NOAA expects this El Nino to cross the strong line",
+    takeaway:
+      "The escalation is forecast to arrive late: about one chance in four during June to August, three in four by July to September, and near-certain once the monsoon is over.",
+    detail:
+      "CPC's official probability of the index reaching +1.5°C or above, the same threshold every base rate in this article uses, for each of nine overlapping three-month seasons. The first three overlap the monsoon. The shape is what matters: the event is not forecast to be strong while the crop is being sown, but to become strong as the season closes and to peak afterwards, when the forecast is for a very strong event at 81% for October to December. Issued July 2026 and re-issued monthly.",
+    whyShowThis:
+      "The two charts above establish how often seasons like this one escalated in the past. They cannot say what will happen this time. This is the one place the article quotes a forecast rather than a base rate, and it is worth quoting because it converges with the history: the record says 38%, the models say 25% by August rising to 73% by September.",
+    howToRead:
+      "Each bar is one three-month season, in order. The height is the chance of reaching the strong threshold, not the chance of any El Niño at all, which is close to certain throughout.",
+    mistakeToAvoid:
+      "Reading a probability as a plan. An 81% chance of a very strong event in October to December is not a statement that one will happen, and CPC itself notes that the strength of an event does not necessarily match the strength of its impact. This forecast is re-issued on the second Thursday of every month and moves.",
+    mobileNote:
+      "Follow the bars left to right: the line is crossed late, not early."
   },
   {
     visualId: "the-fork-not-the-forecast",
@@ -465,13 +534,28 @@ for (const e of doc.chartExplainers) {
 }
 // No forward-looking claim about 2026 anywhere in the card text. The explainers are
 // where an invented forecast is hardest to notice, because nobody re-reads 21 cards.
+// Since climate.enso.forecast_strong_threshold exists, forecast language is legitimate
+// ON THAT CARD ONLY, where it is sourced to a dated CPC product. Everywhere else it is
+// still the unsourced-assertion smell that started all of this, so the guard stays.
+const FORECAST_CARD = "when-noaa-expects-this-el-nino-to-cross-the-strong-line";
 const FORECAST_PREMISE = /\b(as forecast|forecast holds|is forecast to|are forecast to|forecast to (?:cross|reach|peak|be)|expected to (?:cross|reach|be)|projected to (?:cross|reach|be))\b/i;
 for (const e of doc.chartExplainers) {
+  if (e.visualId === FORECAST_CARD) continue;
   for (const [field, value] of Object.entries(e)) {
     if (typeof value === "string" && FORECAST_PREMISE.test(value)) {
       console.error(`forecast premise in explainer ${e.visualId}.${field}: ${value.slice(0, 140)}`);
       process.exit(1);
     }
+  }
+}
+// The forecast card itself must name its source and its vintage, or it is just another
+// confident sentence about the future.
+const fcard = doc.chartExplainers.find((e) => e.visualId === FORECAST_CARD);
+if (fcard) {
+  const blob = Object.values(fcard).join(" ");
+  if (!/CPC|Climate Prediction Center/.test(blob) || !/2026/.test(blob)) {
+    console.error("the forecast card must name CPC and its issue date");
+    process.exit(1);
   }
 }
 

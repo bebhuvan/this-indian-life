@@ -40,6 +40,10 @@ const SOURCE_NOTES = [
   // /gcos_wgsp/Timeseries/DMI/, returns 200 but serves an AMO SST page, and the index
   // pages list no DMI entry. The raw data file is the correct source, so link that and
   // tell the reader it is a data file rather than sending them somewhere wrong.
+  // The only forecast the article quotes. Linked to the product itself rather than to
+  // the monthly discussion that summarises it, because the product carries the full
+  // nine-season distribution and states the index and base period it is verified against.
+  { label: "NOAA Climate Prediction Center's official ENSO strength probabilities (issued July 2026), the single forecast quoted in this piece, verified against the trend-adjusted RONI on a 1991-2020 base and re-issued every month.", url: "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" },
   { label: "NOAA Physical Sciences Laboratory, for the Dipole Mode Index behind the Indian Ocean Dipole (raw data file, HadISST, 1870 onward).", url: "https://psl.noaa.gov/gcos_wgsp/Timeseries/Data/dmi.had.long.data" },
   { label: "India Meteorological Department, for all-India and subdivisional monthly rainfall from 1901 to 2025, which underlies every rainfall departure in this piece.", url: "https://imdpune.gov.in/cmpg/Product/Rainfall_Data.html" },
   { label: "ICRISAT's district-level database, for the crop yield comparisons, which run from 1966 to 2017.", url: "http://data.icrisat.org/dld/" },

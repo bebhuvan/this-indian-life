@@ -8,62 +8,79 @@ I'm continuing work on a data-journalism article in this repo (Indica / "This In
 Read `CLAUDE.md` first, then `docs/el-nino-2026-canonical-brief.md`, which is the full build
 brief and method trail for this article.
 
-## STATUS: BUILT, VERIFIED, DELIBERATELY NOT PUBLISHED
+## STATUS: READY TO PUBLISH, with a monthly refresh obligation
 
-**Do not publish this as-is.** It is finished and correct, and it is being held on purpose.
+An earlier pass held this article back because its spine was "the Pacific has not decided
+yet", and the observed data was about to overtake that framing: July's weekly Nino 3.4
+averaged +2.00, putting MJJ near 1.45 and JJA over the +1.5 threshold the article uses.
 
-The article's spine is "this El Nino has not escalated yet, and here is the base rate from
-where we stand". That rests on the published AMJ 2026 ONI of **0.98, which CPC labels
-weak**, and on RONI at 0.47, neutral. Both were current as of 1 August 2026.
+That hold is lifted, because the article no longer rests on not knowing. It now quotes
+**CPC's official probabilistic strength forecast** (`scripts/ingest-cpc-enso-forecast.mjs`),
+which resolves the tension rather than being broken by it. The forecast says the escalation
+is real but LATE, and that reframes the whole piece around timing:
 
-But the ocean is escalating fast, and the next data release will very likely contradict the
-framing:
-
-| | Nino 3.4 anomaly |
+| Season | Chance of reaching +1.5C |
 |---|---|
-| June 2026 weekly mean | +1.57 |
-| **July 2026 weekly mean (all four weeks)** | **+2.00** |
-| Published AMJ ONI | 0.98 (weak) |
-| **MJJ, essentially locked by observed data** | **~1.45** |
-| **JJA, if August holds near July** | **~1.8** |
+| JJA | 25% |
+| JAS | 73% |
+| ASO | 90% |
+| OND | 97% (81% very strong) |
 
-The article's escalation threshold is ONI >= 1.5 in any of MJJ/JJA/JAS/ASO. **MJJ lands a
-whisker under it; JJA crosses it comfortably unless the Pacific cools sharply.** CPC updates
-the ONI in the first half of each month, so MJJ was due within days of this being written
-and JJA in early September.
+So the summer crop faces a real but unsettled risk, and the loudest part of the event lands
+after the kharif harvest is decided, on reservoirs, rabi sowing and 2027 food prices. The
+historical fork (38% of comparable seasons escalated during the monsoon) and the models
+(25% by August, 73% by September) converge, which is now said explicitly in the prose.
 
-### The plan when JJA publishes
+**Two things about this forecast that earn their place in the article:**
 
-This makes the article stronger, not obsolete. The escalation-fork chart already told the
-reader this was a roughly one-in-three branch and named exactly what to watch, so the piece
-converts cleanly from "the fork is pending" to "the fork resolved". Steps:
+1. It is verified against **RONI**, the trend-adjusted index, on a 1991-2020 base. NOAA's
+   own official strength product uses the adjusted index and still projects a record-scale
+   event, which settles the "is RONI just talking it down" question the opening act raises.
+2. It is a distribution, re-issued on the **second Thursday of every month**. The article
+   labels it as a forecast every time and carries its issue date.
 
-1. `node scripts/ingest-noaa-enso.mjs` to pull the new seasonal values.
-2. `node scripts/derive-enso-escalation-fork.mjs`. It reads `CURRENT_YEAR`'s AMJ reading
-   and rebuilds the cohort automatically, and its metadata records the live reading, so it
-   does not need editing. **Check the band**: `BAND_LO`/`BAND_HI` are drawn around the AMJ
-   value and should stay as they are, because the point of the chart is where the season
-   *opened*, not where it ended up.
-3. Rewrite two sections in `scripts/repair-el-nino-2026-prose.mjs`: "So which kind of El
-   Nino year is this one?" and "What are the odds of that, then?". They currently answer
-   "nobody knows yet". They should answer "it escalated, and here is the branch it entered".
-   The five escalators and their -12.1% mean are already in the artifact.
-4. Update `doc.dataThrough`, the standfirst, `short`, and `macha`, all of which lean on
-   "not strong yet".
-5. Re-run the repair + finish scripts, rebuild, re-read.
+### The refresh obligation
 
-**Do not** delete the escalation-fork chart when this happens. A reader arriving after the
-event still needs to know the branch was not preordained, and that eight of thirteen
-comparable seasons went the other way. That is the article's whole contribution.
+The forecast moves monthly. **The next CPC issue is 13 August 2026.** When it lands:
+
+```bash
+node scripts/ingest-cpc-enso-forecast.mjs   # re-pulls probabilities + snapshots the pages
+node scripts/ingest-noaa-enso.mjs           # new seasonal ONI/RONI values
+node scripts/derive-enso-escalation-fork.mjs
+node scripts/repair-el-nino-2026-prose.mjs
+node scripts/finish-el-nino-2026-explanation.mjs
+```
+
+Then update the probability figures in the "And what do the forecasters actually say?"
+section, the standfirst, `short`, `macha` and `dataThrough`. The ingest script **fails
+loudly** if the issue date on the strengths page disagrees with the discussion date, which
+catches both a stale cache and the commented-out-date trap described in its header.
+
+Once JJA publishes and 2026 is formally in the escalated branch, the escalation-fork chart
+should STAY. A reader arriving after the event still needs to know the branch was not
+preordained and that eight of thirteen comparable seasons went the other way.
+
+### One unresolved discrepancy, deliberately unused
+
+The 9 July Diagnostic Discussion quotes "the latest weekly Nino-3.4 index value was +1.2C",
+with Nino-4 at +0.5 and Nino-1+2 at +2.7. CPC's own weekly file gives +2.0, +1.2 and +3.4
+for the week centred 8 July. All three run about 0.7-0.8C lower in the discussion text, a
+uniform offset roughly the size of the tropical-mean warming RONI removes. That is a
+plausible explanation, not a confirmed one. **No observed value from the discussion text is
+ingested or quoted.** Only its forecast probabilities are used, and those cross-check
+exactly against the strengths table (both give 81% for OND). Worth resolving with CPC if
+anyone wants to use the discussion text as a source later.
 
 ## What exists
 
 Article `q.climate.el_nino_2026`, slug `el-nino-2026-what-it-means-for-india`. Built,
-fact-checked and rendering: ~4,800 words, 22 sections, 21 charts, validator clean,
+fact-checked and rendering: ~5,500 words, 23 sections, 22 charts, validator clean,
 `npm run build` exit 0. Two older El Nino articles (`q.climate.el_nino_india`,
 `q.climate.monsoon_2026`) are deliberately left untouched.
 
-**Nothing is committed.** Run `git status` to see the full change set.
+Committed on branch `article/el-nino-2026-escalation-fork`, not pushed. Only El Nino files
+are in those commits; ~300 unrelated in-progress files were deliberately left uncommitted in
+the working tree. Deploy is Cloudflare on push to `main`, so nothing ships until that merge.
 
 ## THE THING THAT WAS WRONG, and must not come back
 
@@ -92,14 +109,15 @@ not safety either. The dry branch is partly definitional and the artifact metada
 Two new sections carry it ("So which kind of El Niño year is this one?" and "What are the
 odds of that, then?"), and the article's spine is now *the fork, not the forecast*.
 
-`scripts/repair-el-nino-2026-prose.mjs` **fails the build if `forecasters expect` reappears
-in the body, or if any explainer card contains forecast-premise language.**
+`scripts/repair-el-nino-2026-prose.mjs` **fails if `forecasters expect` reappears in the
+body, or if forecast-premise language appears on any explainer card other than the one
+bound to the CPC forecast chart, which must itself name CPC and its issue date.**
 
 ## MUST RUN after any regeneration
 
 ```bash
 node scripts/generate-explanations.mjs --questions=q.climate.el_nino_2026
-node scripts/repair-el-nino-2026-prose.mjs      # <- 20 prose repairs + structural guards
+node scripts/repair-el-nino-2026-prose.mjs      # <- 24 prose repairs + structural guards
 node scripts/finish-el-nino-2026-explanation.mjs # <- source notes, caveats, methodology
 ```
 
