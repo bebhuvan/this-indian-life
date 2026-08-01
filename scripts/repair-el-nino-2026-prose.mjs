@@ -227,7 +227,7 @@ swap(
 swap(
   "readability-measuring-stick",
   "Because the measuring stick itself has drifted. Subtract the trend-adjusted RONI from the raw ONI, and the gap is a measure of how much background warming is inflating the raw index. In the 1950s and 1960s, the two indices sat close together, with differences of just -0.12°C and -0.06°C respectively. They wobbled either side of zero before the turn of the century. Since 2000, the tropical ocean has warmed markedly, and the raw ONI now runs consistently above the adjusted figure. By the 2010s, the average gap had widened to roughly 0.23°C. So far in the 2020s, it has reached about 0.44°C. So the same real warming reads differently in different eras.",
-  "Because the measuring stick itself has drifted.\n\nSubtract one index from the other and the gap tells you how much background warming is inflating the raw number. Through the 1950s and 1960s the two sat almost on top of each other, wobbling either side of zero. Since 2000 they have pulled apart: a gap of roughly 0.23°C through the 2010s, and about 0.44°C so far in the 2020s.\n\nSo the same real warming reads differently depending on the decade it happens in."
+  "Because the measuring stick itself has drifted.\n\nSubtract one index from the other and the gap tells you how much background warming is inflating the raw number. For the whole second half of the twentieth century the two sat close together, and if anything the raw index ran slightly the cooler of the two. Since 2000 they have pulled apart the other way: a gap of roughly 0.23°C through the 2010s, and about 0.44°C so far in the 2020s.\n\nSo the same real warming reads differently depending on the decade it happens in."
 );
 
 
@@ -496,7 +496,7 @@ doc.short = {
   headline: "This El Niño is running late, and that decides who it hurts.",
   dek: "It is forecast to peak around October, after India's summer crop is already harvested. The rains it could still spoil are the ones falling now.",
   body:
-    "An El Niño has begun in the Pacific and it is strengthening fast. For India the question is not whether, but when. NOAA expects it to become a major event only around October, by which time the rice, pulses and millets sown with the June rains are largely decided. Through the monsoon months themselves the odds are much softer, roughly one in four. History says the same thing from the other direction: of the thirteen monsoons that began where this one began, five turned dry and eight ended up wetter than usual. So the crop in the ground now faces a real risk that is genuinely unsettled. What the event lands on at full strength is water: how full the reservoirs are in October, how much wheat gets sown after that, and what food costs in 2027."
+    "An El Niño has begun in the Pacific and it is strengthening fast. For India the question is not whether, but when. NOAA expects it to become a major event only around October, by which time the rice, pulses and millets sown with the June rains are largely decided. Through the monsoon months the odds are softer, about one in four for June to August, rising to three in four by September. History points the same way: of the thirteen monsoons that began where this one began, five went on to escalate and four of those five turned dry, while six of the other eight ended up wetter than usual. So the crop in the ground now faces a real risk that is genuinely unsettled. What the event lands on at full strength is water: how full the reservoirs are in October, how much wheat gets sown after that, and what food costs in 2027."
 };
 
 // No glossary blocks existed at all, so "kharif" appeared in the old headline with
@@ -530,7 +530,7 @@ doc.editorialPlan.glossaryBlocks = [
 doc.macha = {
   heading: "So should I start stocking up on onions now?",
   body:
-    "Arre, not this week. Here is the timing, which is the whole thing. The Pacific is warming up and NOAA thinks it gets seriously big by December. But your kharif rice and dal are being grown right now, in June to September, and for those months the forecast is much softer, roughly a one-in-four chance of the dangerous level. The monster shows up after that harvest is mostly decided. What it actually hits is the water in the reservoirs in October, which decides how much wheat gets planted for winter, and that shows up in prices somewhere in 2027. So: farmers without irrigation and officials watching reservoir levels should be paying attention now. Your kitchen budget has time.",
+    "Not this week, no. The Pacific is warming and NOAA thinks it gets seriously big around October to December. But the rice and tur dal are in the field right now, June to September, and the odds of it turning dangerous during those months run from about one in four early on to three in four by September. The monster shows up after that harvest is mostly decided. What it actually hits is the water in the reservoirs in October, which decides how much wheat gets planted for winter, and that shows up in prices somewhere in 2027. So: farmers without irrigation and officials watching reservoir levels should be paying attention now. Your kitchen budget has time.",
   soWhat:
     "Because the scary number is a December number, and what it lands on is next year's wheat and water, not this month's vegetables."
 };
@@ -660,6 +660,202 @@ patchExplainer(
   "If 2026 escalates into strong-event territory, this is the group it joins, and the group's record is harsh:"
 );
 
+// --- 12. errors introduced by the restructures, found by a cold read -------
+// Almost all of these are mine, added while the article was being rebuilt around the
+// forecast. Each one was wrong on the page.
+
+// The 81% is P(RONI >= 2.0), a DIFFERENT threshold from the 25/73/90 sequence it was
+// spliced into, which is P(>= 1.5). Splicing them understated the OND figure: the
+// chance of merely reaching strong by then is 97%, not 81%.
+swap(
+  "forecast-threshold-mixup",
+  "By August to October it is nine in ten, and by October to December the forecast is for a very strong event, at 81%, which would put it among the largest since 1950.",
+  "By August to October it is nine in ten. By October to December, crossing that line is all but certain at 97%, and the chance of the season averaging *very* strong, which is a higher bar again at +2.0°C, is 81%. That would put it among the largest events since 1950."
+);
+
+// "The monsoon" is June to September. 25% is the June-August figure alone; by July to
+// September it is 73%. Quoting the lowest overlapping season as the whole-monsoon
+// number is exactly the selective framing this article criticises in others.
+swap(
+  "forecast-monsoon-window",
+  "For June to August it is about one in four. For July to September it rises to roughly three in four.",
+  "For June to August it is about one in four. But the monsoon does not end in August, and for July to September it is already roughly three in four."
+);
+
+// The escalation section's own counts: of the five escalators four finished dry (1997
+// came in at +0.2%), and of the eight stallers six ran wet, not eight.
+swap(
+  "rolling-corr-now",
+  "The latest window shows a correlation of -0.64, meaning the bond is tighter now than when the series begins.",
+  "The most recent complete window, centred in the mid-2010s, shows -0.64, tighter than when the series begins."
+);
+
+// West Bengal (+4.5%) and Uttar Pradesh (+2.8%) GAINED rice yield in El Nino years.
+// The genuine losers are Jharkhand (-13.7), Maharashtra (-11.6), Bihar (-8.6) and
+// Chhattisgarh (-8.4). Naming two gainers as losers inverts the chart underneath it.
+swap(
+  "rice-belt-states",
+  "In India's eastern rainfed belt, Bihar, West Bengal, eastern Uttar Pradesh, rice yields tumble during El Niño monsoons because the crop depends directly on timely, ample rain.",
+  "In the rainfed belt running through Jharkhand, Chhattisgarh and Bihar, rice yields tumble during El Niño monsoons because the crop depends directly on timely, ample rain."
+);
+
+// The heat section worried about the winter crop without acknowledging that the
+// article's OWN crop data says wheat gained 4.9% in El Nino years. Leaving that
+// unreconciled is the kind of gap a reader who has been paying attention will catch.
+swap(
+  "wheat-reconcile",
+  "Half a degree sounds like very little. For wheat it is not nothing.",
+  "Set against this, the article's own crop record is not alarming: across ten El Niño years wheat yields ran 4.9% above their own recent normal, because irrigation and a cooler-than-usual start have historically carried it. What the heat channel adds is a reason that record might not hold, not evidence that it has already broken.\n\nHalf a degree still sounds like very little. For wheat it is not nothing."
+);
+
+// The northeast-monsoon result is NOT statistically significant, and the source
+// artifact's honestyRules say in capitals not to present the phase means as a finding.
+// The heading asserted it as fact and the opening stated it flatly, three paragraphs
+// before any hedge. A reader who stops early never meets the caveat.
+swap(
+  "northeast-heading",
+  "## Why does El Niño hurt the summer monsoon but help the winter one?",
+  "## Does El Niño really help the winter monsoon, as is often said?"
+);
+swap(
+  "northeast-hedge-upfront",
+  "El Niño moves rain as well as removing it. Across 26 El Niño monsoons, the June-September rains averaged a 3.2 percent deficit.",
+  "It is widely said that it does, and the direction of our own figures agrees. They are also, in this record, indistinguishable from noise, so take what follows as the shape of a claim rather than a finding. Across 26 El Niño monsoons, the June-September rains averaged a 3.2 percent deficit."
+);
+
+// Putting the strong-El-Nino figure between the two ends and the gap made "half a
+// degree" read as 0.44 against -0.24, which is 0.68. The gap is 0.30 against -0.24.
+swap(
+  "heat-gap-ordering",
+  "Do that, and the winter after an El Niño monsoon runs about 0.3°C above its own decade. The winter after a La Niña runs about 0.24°C below. After a strong El Niño it is 0.44°C. That is a gap of roughly half a degree between the two ends, and unlike several other relationships in this piece it is comfortably distinguishable from noise.",
+  "Do that, and the winter after an El Niño monsoon runs about 0.3°C above its own decade, while the winter after a La Niña runs about 0.24°C below. That is a gap of a little over half a degree between the two ends, and unlike several other relationships in this piece it is comfortably distinguishable from noise. Narrow it to the strong events only and the El Niño side rises to 0.44°C."
+);
+
+// The price act (two sections earlier) measures October-to-December inflation in the
+// SAME year as the monsoon. Ruling out "this winter" contradicts the window the article
+// itself just spent two sections analysing.
+swap(
+  "price-lag-window",
+  "And food prices respond to all of this with a lag of months, which is why the price consequences of a 2026 El Niño would show up in 2027 rather than this winter.",
+  "Food prices then respond with a lag. Some of it lands quickly: the price series earlier in this piece measures the October-to-December window straight after each monsoon, and that one is already in play. The rabi-linked effects, which run through sowing and the spring harvest, take a further year and land in 2027."
+);
+
+// The caveat was written before the forecast section existed and now denies the
+// article's own centrepiece.
+doc.caveats = doc.caveats.map((c) =>
+  c.startsWith("This article carries no forecast.")
+    ? "This article quotes exactly one forecast, CPC's July 2026 strength outlook, which is re-issued monthly and will have moved by the time you read this. Every other 2026 figure in it is an observation already on the record."
+    : c
+);
+
+// --- 11. three chart cards that misread their own charts -------------------
+// Found by a cold read of the rendered page, not by any automated check, and that is
+// the point: the numeric audit this article passes only verifies that a number EXISTS
+// somewhere in some artifact. It cannot tell that the number is the WRONG one for the
+// claim. All three of these passed that audit while being flatly wrong on the page.
+//
+// These are the inherited generator-written cards. The equivalent errors in the BODY
+// were fixed earlier; nobody re-read the cards.
+const CARD_FIXES = [
+  {
+    // Invented food groups. The 2002 artifact rows are Cereals +3.1, Pulses -5.3,
+    // Vegetables -13.3, Onion -4.9. There is no fruit series and no oilseeds series.
+    visualId: "after-a-drought-food-prices-do-not-move-as-one",
+    takeaway: "After the 2002 drought, cereal prices rose 3.1% while vegetables fell 13.3%. The same monsoon, opposite directions.",
+    detail: "Post-monsoon wholesale inflation by food group after four El Nino droughts. Take 2002, the worst rainfall year in this price record at 20.9% below normal: cereals rose 3.1%, shielded by the public grain stocks the government sits on, while pulses fell 5.3%, onion 4.9% and vegetables 13.3%. The groups scatter because their exposure to rain and their policy protection are completely different. Rice and wheat are procured, stored and distributed at scale. Nobody stockpiles onions. A single headline food-inflation number averages these into something that describes no actual household."
+  },
+  {
+    // "Early 2026 sowing figures are already tracing this pattern" is an unsourced live
+    // claim about data the article explicitly says it does not carry. Deleted, not softened.
+    visualId: "which-crops-el-nino-actually-hits",
+    takeaway: "Across 10 El Nino years groundnut lost 8.3% of its yield, jowar 7.3% and bajra 6.8%, while irrigated rice and wheat were flat or gained.",
+    detail: "Kharif crops ranked by how far their yield fell in El Nino years against each crop's own prior five-year average. The rainfed crops cluster at the bottom: groundnut down 8.3%, jowar 7.3%, bajra 6.8%, pigeonpea and the oilseed basket 5.1% each. The irrigated and winter-sown crops sit at the other end, with wheat up 4.9% and chickpea up 2.6%. The split is not about which crop is hardier. It is about which crop has a tubewell behind it, which is why the mix of crops a district actually grows decides how much a weak monsoon costs it."
+  },
+  {
+    // "Other years not shown in the provided data repeat the pattern" is generator
+    // scaffolding admitting it is describing data it cannot see. "With record public
+    // grain reserves today" is an unsourced present-tense claim about FCI stocks.
+    visualId: "a-weak-monsoon-does-not-automatically-mean-dearer-food",
+    takeaway: "In 1987 a 14.3% rainfall deficit produced 8.8% food inflation. In 1991 a 1.4% deficit produced 23.1%. The link is real but loose.",
+    detail: "Each El Nino year's rainfall departure against the wholesale food inflation that followed it in October to December, from 1982 to 2024. The points scatter rather than lining up. 1987 lost 14.3% of its rain and saw 8.8% food inflation; 1991 lost 1.4% and saw 23.1%; 1997 saw 1.1% despite an El Nino running. Rain is one input into a price among several, and the others move independently: how much grain the government is holding, what imports cost, where world commodity prices are, and what the state decides to buy, sell or ban."
+  },
+  {
+    // The northeast-monsoon result is NOT significant. This card stated it as fact
+    // ("boosts", "a complete sign reversal", "the most under-reported fact"), and added
+    // a rabi-sowing benefit the body explicitly denies. The source artifact's
+    // honestyRules say in capitals not to present the phase means as a finding.
+    visualId: "same-el-nino-opposite-signs-india-has-two-monsoons",
+    takeaway: "The summer and winter monsoons appear to move in opposite directions under El Nino, but this record cannot tell the two groups apart.",
+    detail: "Average rainfall departure in El Nino conditions for the June-September monsoon across India, against the October-December northeast monsoon over the southern belt. The southwest figure is a 3.2% deficit and the northeast a 3.7% surplus, with Tamil Nadu at 5.1%. The ordering matches what published work on the northeast monsoon reports. Our own figures cannot confirm it: individual autumns swing by 24 and 33 points either side of their own averages, four or five times the size of the gap being claimed, so a formal test cannot separate the phases. Note also that the two bars use different year sets, 26 monsoon-classified years against 27 autumn-classified ones."
+  },
+  {
+    // The evidence packet used to hand the writer only the earliest and latest points of
+    // a series, so it read 1901 (-13.8%, the FIRST row) as the record low and 2025
+    // (+7.8%, the LAST row) as the high. The true extremes are 1972 at -22.3% and 1917
+    // at +26.6%. This is the exact bug that prompted the min/max fix in
+    // scripts/core/evidence.mjs; the body was corrected, the card was not.
+    visualId: "a-century-and-a-quarter-of-monsoons-that-never-sit-still",
+    takeaway: "Over 125 years the monsoon has run anywhere from 22.3% short to 26.6% wet, and no two seasons look alike.",
+    detail: "Each vertical stripe is one monsoon, 1901 through 2025, deep blue for a deficit and coral for a surplus. The driest was 1972, at 22.3% below the long-period average; the wettest was 1917, at 26.6% above. Last season finished 7.8% wet. Almost every departure in between has happened at some point. The useful thing this chart does is set the noise floor: it shows how wide the monsoon's ordinary range is before El Niño is brought into the question at all, which is the range any claimed signal has to beat."
+  },
+  {
+    // The card reported the northwest's coarse-cereal figure as -3.1%. That is central
+    // India's RICE figure, two bars away. The northwest coarse-cereal number is -11.8%,
+    // which the body has correct. Getting this wrong inverts the chart's whole point,
+    // because the size of the northwest gap IS the argument.
+    visualId: "why-the-rainfall-map-is-not-the-yield-map",
+    takeaway: "In the rain-starved northwest, irrigated rice ran 7.3% above its own normal in El Nino years while rainfed coarse cereals fell 11.8% below theirs.",
+    detail: "Crop yields in El Nino years against each crop's own prior five-year average, split by region and by whether the crop is mostly irrigated. The northwest is the case that matters: it loses more monsoon rain than any other region, and yet its irrigated rice comes out ahead while the rainfed cereals grown alongside it fall further than any crop in any other region. Elsewhere the gap narrows sharply, with central India's rice down 3.1% against coarse cereals down 1.2%, and in the south peninsula both edge up. Irrigation is what separates the two, which is why a map of missing rain is not a map of lost harvest."
+  },
+  {
+    // The worst of the three. The card describes fortnights ("early June", "late August",
+    // "late September") that do not exist in the artifact, which holds four months in two
+    // groups. Worse, its "3.6% surplus" and "3.2% surplus" are the JULY and SEPTEMBER
+    // values from the "In a typical year" comparison group, reported as El Nino surpluses,
+    // and its "July is mildly down at 2.7%" is August's El Nino figure. Every number in
+    // the original card was attached to the wrong thing.
+    visualId: "when-in-the-season-the-rain-goes-missing",
+    takeaway: "El Nino monsoons fail at the two ends: about 10% of the rain missing in June and again in September, while August holds up.",
+    detail: "Average monthly rainfall departure across the 17 El Nino monsoons, against what a typical year delivers in the same month. June comes in 10.3% short and September 10.8% short, the two ends of the season. July is down 6.1% and August only 2.7%, so the core of the monsoon holds up better than its opening and its close. The comparison bars show a typical year running slightly wet in every month, which is what makes the El Nino shortfall at the bookends stand out. Timing matters as much as the total here: a weak June delays sowing and forces re-sowing, while a weak September lands after much of the kharif crop is already set."
+  }
+];
+for (const fix of CARD_FIXES) {
+  const card = doc.chartExplainers.find((e) => e.visualId === fix.visualId);
+  if (!card) { failures.push(`card-fix ${fix.visualId}`); continue; }
+  if (card.takeaway === fix.takeaway && card.detail === fix.detail) continue;
+  card.takeaway = fix.takeaway;
+  card.detail = fix.detail;
+  applied += 1;
+}
+
+
+// Belt-and-braces: any card still asserting a live 2026 condition, or admitting it is
+// describing data it cannot see, is a fabrication. The article says in its methodology
+// that it carries no 2026 sowing, reservoir or stock figures.
+const FABRICATIONS = [
+  "Early 2026 sowing figures are already tracing this pattern, with rainfed pulses and coarse cereals lagging while rice holds steady.",
+  "With record public grain reserves today, the old knee-jerk link has become even less dependable.",
+  "Other years not shown in the provided data repeat the pattern"
+];
+for (const card of doc.chartExplainers) {
+  for (const [k, v] of Object.entries(card)) {
+    if (typeof v !== "string") continue;
+    for (const bad of FABRICATIONS) {
+      if (v.includes(bad)) { card[k] = v.replace(bad, "").replace(/\s{2,}/g, " ").replace(/\s+([.,])/g, "$1").trim(); applied += 1; }
+    }
+  }
+}
+// Guard: nothing may claim knowledge of 2026 conditions on the ground.
+const LIVE_2026 = /(2026 sowing|sown area (?:so far|this year)|reservoir (?:levels|storage) (?:today|now|currently)|reserves today|not shown in the provided data)/i;
+for (const card of doc.chartExplainers) {
+  for (const [k, v] of Object.entries(card)) {
+    if (typeof v === "string" && LIVE_2026.test(v)) {
+      console.error(`card ${card.visualId}.${k} asserts a live 2026 condition the article does not carry: ${v.slice(0, 120)}`);
+      process.exit(1);
+    }
+  }
+}
+
 for (const explainer of NEW_EXPLAINERS) {
   const at = doc.chartExplainers.findIndex((e) => e.visualId === explainer.visualId);
   if (at === -1) doc.chartExplainers.push(explainer);
@@ -742,6 +938,64 @@ if (fcard) {
   if (!/CPC|Climate Prediction Center/.test(blob) || !/2026/.test(blob)) {
     console.error("the forecast card must name CPC and its issue date");
     process.exit(1);
+  }
+}
+
+// --- guard: every number on a chart card must come from THAT chart ---------
+// The article-wide numeric audit only asks whether a figure exists somewhere in some
+// artifact. That is far too weak, and three cards shipped past it while being wrong:
+// the stripes card called 1901's -13.8% "the driest year on record" (it is the first
+// row; the true minimum is 1972 at -22.3%), the irrigation card reported central
+// India's rice figure as the northwest's coarse-cereal figure, and the subseasonal card
+// quoted the comparison group's values as El Nino surpluses. Every one of those numbers
+// existed in an artifact. None belonged to the claim it was attached to.
+//
+// This checks each card's numbers against ITS OWN indicator's rows. Warns rather than
+// fails, because legitimate prose carries derived figures (a difference, a rounded
+// share) that will not appear literally in the source rows.
+{
+  const { v1Questions } = await import("./registry/v1-indicators.mjs");
+  const question = v1Questions.find((q) => q.id === "q.climate.el_nino_2026");
+  const slugify = (v) => String(v).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const byCard = new Map((question?.visualPlan || []).map((v) => [slugify(v.title), v.indicator]));
+  const suspicious = [];
+  for (const card of doc.chartExplainers) {
+    const indicator = byCard.get(card.visualId);
+    if (!indicator) continue;
+    let artifact;
+    try {
+      const file = `data/series/${(await import("node:fs/promises")).readdirSync ? "" : ""}`;
+      void file;
+      const { readdir } = await import("node:fs/promises");
+      const files = await readdir("data/series");
+      const match = files.find((f) => {
+        try { return JSON.parse(require_cache[f] ??= "") ; } catch { return false; }
+      });
+      void match;
+      // Resolve by indicatorId, which is how dataManifest binds series to charts.
+      for (const f of files) {
+        const parsed = JSON.parse(await readFile(`data/series/${f}`, "utf8"));
+        if (parsed.indicatorId === indicator) { artifact = parsed; break; }
+      }
+    } catch { continue; }
+    if (!artifact) continue;
+    // Compare against the artifact's ENTIRE json text, not just its numeric row values.
+    // Thresholds, sample sizes and branch means legitimately live in metadata and in row
+    // labels, and flagging those buries the real hits. The bug this is hunting is a card
+    // quoting a figure that belongs to a DIFFERENT chart, and such a figure will not
+    // appear anywhere in this artifact's text.
+    const haystack = JSON.stringify(artifact);
+    const text = [card.takeaway, card.detail].filter(Boolean).join(" ");
+    for (const m of text.matchAll(/(?<![\w.])(\d+\.\d)(?=\s*(?:°C|%|\b))/g)) {
+      // "Nino 3.4" and "Nino 1+2" are region names, not measurements.
+      const before = text.slice(Math.max(0, m.index - 6), m.index);
+      if (/Ni[nñ]o\s*$/i.test(before)) continue;
+      if (!haystack.includes(m[1])) suspicious.push(`${card.visualId}: ${m[1]} appears nowhere in ${indicator}`);
+    }
+  }
+  if (suspicious.length) {
+    console.warn("  warn: decimal figures on a chart card that do not appear in that chart's own data:");
+    for (const s of suspicious) console.warn(`    ${s}`);
   }
 }
 
