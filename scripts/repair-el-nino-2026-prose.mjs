@@ -436,7 +436,7 @@ swap(
 // --- title, standfirst, summary cards --------------------------------------
 // The page <h1> is the registry's `question`, not article.title. The evidence block
 // keeps its own stale copy, so sync it to avoid the two disagreeing in the artifact.
-if (doc.evidence?.question) doc.evidence.question = "An El Nino is under way. What can it actually tell India?";
+if (doc.evidence?.question) doc.evidence.question = "El Niño is coming. Is India watching the right season?";
 
 // Data vintage, rendered by [slug].astro as "Data through ...". Was null, so a piece
 // whose entire argument is "as of right now the Pacific has not decided" displayed no
@@ -448,7 +448,15 @@ if (doc.evidence?.question) doc.evidence.question = "An El Nino is under way. Wh
 doc.dataThrough = "22 July 2026 (observations); CPC forecast issued July 2026";
 doc.lastReviewed = "2026-08-01";
 
-doc.article.title = "The El Nino Is Coming Late, and That Changes Who It Hurts";
+// Published as work-in-progress on purpose. The CPC forecast this article quotes is
+// re-issued on the second Thursday of every month, so between refreshes its central
+// probabilities are going stale in public. The status chip says so rather than letting
+// the page imply a currency it does not have.
+doc.status = "work_in_progress";
+
+// Tilde throughout. The body has always used "El Niño"; the title and several chart
+// titles dropped it, which a review flagged as the piece not deciding.
+doc.article.title = "El Niño Is Running Late, and That Changes Who It Hurts";
 doc.article.standfirst =
   "NOAA now puts an 81% chance on a very strong El Niño by December. But the forecast for the monsoon months is far softer, and the event is expected to peak after India's summer crop is already in the ground. The risk is real. It is just not where the headlines are pointing.";
 

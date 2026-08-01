@@ -7211,8 +7211,8 @@ export const v1Questions = [
 
   {
     id: "q.climate.el_nino_2026",
-    slug: "el-nino-2026-what-it-means-for-india",
-    question: "An El Nino is under way. What can it actually tell India?",
+    slug: "el-nino-arrives-after-the-harvest",
+    question: "El Niño is coming. Is India watching the right season?",
     priority: "core",
     // Built late July 2026, mid-season. Full build brief: docs/el-nino-2026-canonical-brief.md
     //

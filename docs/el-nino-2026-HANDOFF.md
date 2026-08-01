@@ -124,7 +124,7 @@ open, in rough value order:
 
 ## What exists
 
-Article `q.climate.el_nino_2026`, slug `el-nino-2026-what-it-means-for-india`. Built,
+Article `q.climate.el_nino_2026`, slug `el-nino-arrives-after-the-harvest`. Built,
 fact-checked and rendering: ~6,300 words, 25 sections, 24 charts, validator clean,
 `npm run build` exit 0 (102 pages). Two older El Nino articles (`q.climate.el_nino_india`,
 `q.climate.monsoon_2026`) are deliberately left untouched.
