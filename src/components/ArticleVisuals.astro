@@ -813,7 +813,18 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       }).filter((year, index, arr) => arr.indexOf(year) === index);
       return years.map((time) => ({ xPos: xByTime(time), label: String(time) }));
     };
-    if (mobile) {
+    if (visual.monthAxis) {
+      // Several calendar years overlaid on one Jan-Dec axis share a pseudo-year, so the
+      // tick VALUE is meaningless and only its month position matters. Every other
+      // branch here prints Math.round(time), which would render "2000, 2000, 2001".
+      const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const baseYear = Math.floor(minTime);
+      const step = mobile ? 3 : 1;
+      axisTicks = MONTH_ABBR
+        .map((label, i) => ({ i, label, time: baseYear + i / 12 }))
+        .filter(({ i, time }) => i % step === 0 && time >= minTime - 1e-9 && time <= maxTime + 1e-9)
+        .map(({ label, time }) => ({ xPos: xByTime(time), label }));
+    } else if (mobile) {
       axisTicks = mobileEndpointTicks();
     } else if (explicitYears.length) {
       const years = mobile && explicitYears.length > 5

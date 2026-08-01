@@ -23,6 +23,11 @@ export type LineVisual = {
   categoricalX?: boolean;
   /** Per-point x-axis labels (by point index), e.g. ["NFHS-5", "NFHS-6"]. Pairs with categoricalX. */
   xLabels?: string[];
+  /** Label the x-axis by month name instead of by year. For charts that overlay several
+   *  calendar years on a shared Jan-Dec axis by giving every row the same pseudo-year:
+   *  without this the axis prints that pseudo-year ("2000", "2000", "2001") which is
+   *  meaningless to a reader and actively misleading. */
+  monthAxis?: boolean;
   bands?: Array<{ year: number; label?: string }>;
   refLine?: { value: number; label: string };
 };
@@ -1150,6 +1155,60 @@ function multiSeriesLine(
     lines,
     ...(bands?.length ? { bands } : {}),
     ...(refLine ? { refLine } : {})
+  };
+}
+
+// One table -> many lines, grouped by a `series` column. Every other line builder maps
+// one indicator to one line, which cannot express "the same measurement for several
+// years overlaid on a shared axis". The rows carry their own `date`, so a chart can
+// overlay calendar years by giving every row the same pseudo-year (see
+// derive-enso-trajectory-compare.mjs) or plot genuinely different periods.
+//
+// Styling is data-driven via an optional `role` column: "subject" emphasises,
+// "reference" dashes and mutes, anything else renders as a normal line. That keeps the
+// registry entry free of per-line colour lists that would drift from the data.
+function multiLineFromTable(indicator: string, title: string, subtitle: string, unit: string, refLine?: { value: number; label: string }): LineVisual | null {
+  const artifact = artifactById(indicator);
+  if (!artifact?.rows?.length) return null;
+  const order: string[] = [];
+  const grouped = new Map<string, { label: string; role?: string; points: Point[] }>();
+  for (const row of artifact.rows) {
+    const key = typeof row.series === "string" ? row.series : typeof row.label === "string" ? row.label : "";
+    const date = typeof row.date === "string" ? row.date : "";
+    const value = Number(row.value);
+    if (!key || !date || !Number.isFinite(value)) continue;
+    if (!grouped.has(key)) {
+      grouped.set(key, { label: typeof row.label === "string" ? row.label : key, role: typeof row.role === "string" ? row.role : undefined, points: [] });
+      order.push(key);
+    }
+    grouped.get(key)!.points.push({ date, value });
+  }
+  const lines = order
+    .map((key) => {
+      const g = grouped.get(key)!;
+      const points = g.points.slice().sort((a, b) => a.date.localeCompare(b.date));
+      if (points.length < 2) return null;
+      return {
+        label: g.label,
+        points,
+        ...(g.role === "subject" ? { emphasis: true } : {}),
+        ...(g.role === "reference" ? { dash: true } : {})
+      };
+    })
+    .filter((l): l is LineVisual["lines"][number] => Boolean(l));
+  if (lines.length < 2) return null;
+  const meta = (artifact.metadata || {}) as Record<string, unknown>;
+  return {
+    kind: "line",
+    title: title || artifact.title,
+    subtitle: subtitle || artifact.sourceIndicatorId,
+    unit: unit || artifact.unit,
+    source: sourceFor(artifact),
+    lines,
+    // Rows built by an overlay derive carry a shared pseudo-year, so the axis must be
+    // labelled by month or it prints that pseudo-year at the reader.
+    ...(lines.every((l) => l.points.every((p) => String(p.date).startsWith("2000-"))) ? { monthAxis: true } : {}),
+    ...(refLine ? { refLine } : typeof meta.refLine === "object" && meta.refLine ? { refLine: meta.refLine as { value: number; label: string } } : {})
   };
 }
 
@@ -2604,6 +2663,10 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
   }
   if (entry.chart === "multiLine") {
     const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands, entry.refLine);
+    return visual ? attachMeta(visual, entry) : null;
+  }
+  if (entry.chart === "multiLineTable") {
+    const visual = multiLineFromTable(entry.indicator || "", entry.title || "", entry.subtitle || "", entry.unit || "", entry.refLine);
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "sparkGrid") {

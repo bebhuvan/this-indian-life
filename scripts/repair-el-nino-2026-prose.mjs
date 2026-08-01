@@ -145,7 +145,17 @@ swap(
 //   2. It is expressed in RONI. That kills the reading, available to anyone who has
 //      followed the article this far, that the trend-adjusted index is a way of talking
 //      the event down. NOAA forecasts in RONI and still projects a record-scale event.
-const FORECAST_SECTION = `## And what do the forecasters actually say?
+const FORECAST_SECTION = `## How fast is this one actually moving?
+
+Faster than any of them, at this point in the year.
+
+Line 2026 up against the events it keeps being compared to, on a shared January-to-December axis, and adjust each one for the warming of its own era so the decades are on equal terms. Through July, 2026 sits near 2.1°C. At the same point in the calendar, 1997 was at about 1.4 and 2015 at about 1.4. No year since 1982 has been higher in July.
+
+That sounds like it contradicts the reading two sections ago, where the official index was a weak 0.98. It does not. The official index averages three months, so the April-to-June figure is still carrying April, when the Pacific was barely above normal. The weekly ocean has since run away from the seasonal average that describes it. Both numbers are correct, and the gap between them is the same measurement problem this article opened with, now visible as a moving target rather than a list.
+
+One caution, and it is the whole reason this chart is not a prediction. Being ahead in July is not the same as finishing highest. Both 1997 and 2015 kept climbing hard through the autumn, well after the point where 2026's line currently stops. This shows the race so far. It does not show the finish.
+
+## And what do the forecasters actually say?
 
 Now there is something to quote, which there was not a few paragraphs ago. NOAA's Climate Prediction Center publishes an official probabilistic outlook, re-issued on the second Thursday of every month. The July 2026 edition carries an El Niño Advisory and puts a 97% chance on the event lasting into early spring 2027.
 
@@ -312,6 +322,7 @@ const CHART_ORDER = [
   "how-strictly-you-define-an-el-nino-year-changes-the-answer",
   "monsoons-that-began-where-this-one-begins",
   "the-fork-not-the-forecast",
+  "this-el-nino-is-climbing-faster-than-the-ones-it-is-compared-to",
   "when-noaa-expects-this-el-nino-to-cross-the-strong-line",
   "a-bigger-el-nino-is-not-a-worse-monsoon",
   "where-the-pacific-warmed-does-not-settle-it-either",
@@ -414,6 +425,22 @@ const NEW_EXPLAINERS = [
       "Reading the dry group as a discovery. A year that escalates becomes a strong-event year by definition, so that group's poor average restates the base rate rather than confirming it. The parts that stand on their own are the one-in-three escalation rate and the wetness of the group that stalled. Thirteen cases is also a thin base, and 1965 and 2023 both escalated from below this band, so a modest reading now is not safety.",
     mobileNote:
       "If you read only one thing here, count the bars: five in the dry group, eight in the wet one."
+  },
+  {
+    visualId: "this-el-nino-is-climbing-faster-than-the-ones-it-is-compared-to",
+    title: "This El Nino is climbing faster than the ones it is compared to",
+    takeaway:
+      "Through July, 2026 sits near 2.1°C, above where 1997 and 2015 were on the same date, and above every other year since 1982.",
+    detail:
+      "Each line is one year's Niño 3.4 anomaly by month, on a shared January-to-December axis, so years can be compared at the same point in the calendar rather than at their own peaks. Every line is era-adjusted, which removes the warming of the base period: without it every recent year would look larger than every older one for reasons that have nothing to do with El Niño. 2026 crosses the strong threshold on this measure in June and keeps going. The dashed line is the median of the other 41 years, which is what an unremarkable year looks like.",
+    whyShowThis:
+      "The forecast in the next chart says the escalation is steep. This is the only place the reader can see how steep, measured against the yardstick that actually means something: where the record-holders sat on the same date. It also explains why a weak-sounding seasonal index and an alarming weekly one are both correct.",
+    howToRead:
+      "Follow 2026 from January. Compare its height in any month to the other lines in that same month, not to their eventual peaks, which come later in the year.",
+    mistakeToAvoid:
+      "Reading a lead in July as a lead at the finish. 1997 and 2015 both climbed hard through the autumn, long past where 2026's line currently stops. The era adjustment is also our approximation of NOAA's centred-base convention rather than a NOAA product, and these are monthly means of a noisier weekly series.",
+    mobileNote:
+      "Find July on the axis and read straight up: 2026 is the top line there."
   },
   {
     visualId: "when-noaa-expects-this-el-nino-to-cross-the-strong-line",

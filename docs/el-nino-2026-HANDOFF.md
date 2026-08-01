@@ -60,6 +60,25 @@ Once JJA publishes and 2026 is formally in the escalated branch, the escalation-
 should STAY. A reader arriving after the event still needs to know the branch was not
 preordained and that eight of thirteen comparable seasons went the other way.
 
+### On data licensing for the ENSO visuals
+
+The trajectory chart takes its FORM from a convention used on several climate dashboards
+(a year-overlay of Nino 3.4), but none of its data. Every input is NOAA CPC:
+`wksst9120.for`, ERSSTv5 monthly and the published ONI, pulled directly by
+`scripts/ingest-noaa-enso.mjs`. Works of the US federal government are not subject to
+copyright (17 U.S.C. 105), so NOAA/CPC output is public domain and needs no licence or
+permission. The same applies to the CPC strength probabilities.
+
+Nothing was scraped from, or reproduced out of, any third-party dashboard. A chart form
+is not copyrightable, and the year-overlay is a standard climatological presentation that
+long predates any particular dashboard. Our version is also deliberately different: five
+labelled lines rather than a 45-line spaghetti, monthly rather than daily, and
+era-adjusted, which most versions are not.
+
+If a third-party figure is ever reproduced rather than rebuilt from source, that WOULD
+need permission and attribution. Do not do it: the artifacts here can rebuild any of
+these charts from the public-domain originals.
+
 ### One unresolved discrepancy, deliberately unused
 
 The 9 July Diagnostic Discussion quotes "the latest weekly Nino-3.4 index value was +1.2C",
@@ -74,7 +93,7 @@ anyone wants to use the discussion text as a source later.
 ## What exists
 
 Article `q.climate.el_nino_2026`, slug `el-nino-2026-what-it-means-for-india`. Built,
-fact-checked and rendering: ~5,500 words, 23 sections, 22 charts, validator clean,
+fact-checked and rendering: ~5,700 words, 24 sections, 23 charts, validator clean,
 `npm run build` exit 0. Two older El Nino articles (`q.climate.el_nino_india`,
 `q.climate.monsoon_2026`) are deliberately left untouched.
 
