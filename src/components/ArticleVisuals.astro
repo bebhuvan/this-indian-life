@@ -56,6 +56,18 @@ const sourceNames: Record<string, string> = {
   "edible-oil-derived": "UPAg + UN Comtrade",
   "india-energy-derived": "PPAC + TradeStat / DGCI&S",
   "un-comtrade": "UN Comtrade",
+  unctad: "UNCTAD",
+  "unctad-wir": "UNCTAD",
+  rbi: "RBI",
+  nsdl: "NSDL",
+  fred: "FRED",
+  vahan: "MoRTH VAHAN",
+  "vahan-derived": "MoRTH VAHAN",
+  "mospi-derived": "MoSPI",
+  "ember-derived": "Ember",
+  "siam-derived": "SIAM",
+  "indiadatahub-derived": "IndiaDataHub",
+  derived: "Indica calculation",
   owid: "Our World in Data",
   waqi: "WAQI",
   cpcb: "CPCB Central Control Room",
@@ -476,6 +488,19 @@ function sourceLabel(source: VisualSpec["source"]) {
   // are not reader-facing; the chart subtitle carries the dataset detail, so show only the
   // clean source name. Scoped to "media." ids so other articles are unaffected.
   if (/^media\./.test(id) || id === "broadband_subscribers_total") return sourceName(source.sourceId);
+  // Many artifacts set sourceIndicatorId to our own internal indicatorId, which then printed
+  // as a reader-facing byline: "unctad · extfin.fdi.dev.gfcf_share.IND.pct", "plfs · lfpr_male".
+  // Upstream codes worth showing carry uppercase (SL.AGR.EMPL.ZS, DGS10, EXFIDIP*11A) and human
+  // descriptors carry spaces; both survive this. Only all-lowercase dotted or underscored
+  // internal ids are dropped, leaving the source name and the chart subtitle to do the work.
+  // Upstream dotted codes are all-uppercase segments (SL.AGR.EMPL.ZS, SP.DYN.LE00.IN) and are
+  // worth printing. Ours mix in lowercase segments (extfin.fdi.dev.gfcf_share.IND.pct,
+  // macro.current_account_usd) and are not. Human descriptors contain spaces and are kept.
+  const looksInternal = !/\s/.test(id) && (
+    (id.includes(".") && id.split(".").some((seg) => seg && seg === seg.toLowerCase() && /[a-z]/.test(seg))) ||
+    /^[a-z0-9]+_[a-z0-9_]+$/.test(id)
+  );
+  if (looksInternal) return sourceName(source.sourceId);
   if (source.sourceId === "ppac") {
     if (id === "international-prices-crude-oil.indian-basket.$-per-bbl") return "PPAC · Indian crude basket price · $/bbl";
     if (id.startsWith("import-export:2025-2026:reportBy:1")) return "PPAC · Import/export of crude oil and petroleum products, quantity · 2025-26";
