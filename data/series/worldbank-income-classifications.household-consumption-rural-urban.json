@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.household_consumption_rural_urban",
+  "title": "Rural and urban monthly consumption across India's fractile ladder",
+  "sourceId": "mospi-hces",
+  "sourceIndicatorId": "HCES Figure 1 rural and urban",
+  "sourceUrl": "https://www.mospi.gov.in/sites/default/files/press_release/HCES_Press_Note_2023-24_27122024_rev.pdf",
+  "unit": "₹ per person per month",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [
+    "date",
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "Poorest 0-5% · rural",
+      "value": 1677,
+      "date": "2023-24"
+    },
+    {
+      "label": "Poorest 0-5% · urban",
+      "value": 2376,
+      "date": "2023-24"
+    },
+    {
+      "label": "5-10% · rural",
+      "value": 2126,
+      "date": "2023-24"
+    },
+    {
+      "label": "5-10% · urban",
+      "value": 3093,
+      "date": "2023-24"
+    },
+    {
+      "label": "10-20% · rural",
+      "value": 2473,
+      "date": "2023-24"
+    },
+    {
+      "label": "10-20% · urban",
+      "value": 3687,
+      "date": "2023-24"
+    },
+    {
+      "label": "20-30% · rural",
+      "value": 2833,
+      "date": "2023-24"
+    },
+    {
+      "label": "20-30% · urban",
+      "value": 4353,
+      "date": "2023-24"
+    },
+    {
+      "label": "30-40% · rural",
+      "value": 3162,
+      "date": "2023-24"
+    },
+    {
+      "label": "30-40% · urban",
+      "value": 4979,
+      "date": "2023-24"
+    },
+    {
+      "label": "40-50% · rural",
+      "value": 3498,
+      "date": "2023-24"
+    },
+    {
+      "label": "40-50% · urban",
+      "value": 5622,
+      "date": "2023-24"
+    },
+    {
+      "label": "50-60% · rural",
+      "value": 3866,
+      "date": "2023-24"
+    },
+    {
+      "label": "50-60% · urban",
+      "value": 6334,
+      "date": "2023-24"
+    },
+    {
+      "label": "60-70% · rural",
+      "value": 4304,
+      "date": "2023-24"
+    },
+    {
+      "label": "60-70% · urban",
+      "value": 7199,
+      "date": "2023-24"
+    },
+    {
+      "label": "70-80% · rural",
+      "value": 4885,
+      "date": "2023-24"
+    },
+    {
+      "label": "70-80% · urban",
+      "value": 8353,
+      "date": "2023-24"
+    },
+    {
+      "label": "80-90% · rural",
+      "value": 5763,
+      "date": "2023-24"
+    },
+    {
+      "label": "80-90% · urban",
+      "value": 10139,
+      "date": "2023-24"
+    },
+    {
+      "label": "90-95% · rural",
+      "value": 6929,
+      "date": "2023-24"
+    },
+    {
+      "label": "90-95% · urban",
+      "value": 12817,
+      "date": "2023-24"
+    },
+    {
+      "label": "Richest 95-100% · rural",
+      "value": 10137,
+      "date": "2023-24"
+    },
+    {
+      "label": "Richest 95-100% · urban",
+      "value": 20310,
+      "date": "2023-24"
+    }
+  ],
+  "metadata": {
+    "release": "MoSPI HCES 2023-24, press note revised 27 December 2024",
+    "method": "Pair the published rural and urban average MPCE values for each population fractile. No conversion to income or GNI is attempted.",
+    "warning": "MPCE is surveyed consumption, not income, GNI or wealth. Rural and urban price levels also differ.",
+    "inputs": [
+      "data/series/mospi-hces.IN.hces_fractile_mpce_rural.json",
+      "data/series/mospi-hces.IN.hces_fractile_mpce_urban.json"
+    ]
+  }
+}

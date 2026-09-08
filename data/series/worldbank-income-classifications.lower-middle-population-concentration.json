@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.lower_middle_population_concentration",
+  "title": "Share of the population living in lower-middle-income economies",
+  "sourceId": "worldbank-income-classifications",
+  "sourceIndicatorId": "Historical analytical classification + SP.POP.TOTL",
+  "sourceUrl": "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+  "unit": "% of lower-middle-income population",
+  "geography": {
+    "type": "global",
+    "id": "WORLD",
+    "name": "World"
+  },
+  "dimensions": [
+    "date",
+    "label",
+    "populationMillions",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "India",
+      "value": 49.7,
+      "populationMillions": 1463.9,
+      "date": "2025"
+    },
+    {
+      "label": "Pakistan",
+      "value": 8.7,
+      "populationMillions": 255.2,
+      "date": "2025"
+    },
+    {
+      "label": "Nigeria",
+      "value": 8.1,
+      "populationMillions": 237.5,
+      "date": "2025"
+    },
+    {
+      "label": "Bangladesh",
+      "value": 6.0,
+      "populationMillions": 175.7,
+      "date": "2025"
+    },
+    {
+      "label": "Egypt, Arab Rep.",
+      "value": 4.0,
+      "populationMillions": 118.4,
+      "date": "2025"
+    },
+    {
+      "label": "Other lower-middle-income economies",
+      "value": 23.6,
+      "populationMillions": 694.6,
+      "date": "2025"
+    }
+  ],
+  "metadata": {
+    "release": "World Bank 2025 estimates published July 2026",
+    "estimate": true,
+    "revisionWarning": "The 2025 values are estimates and may be revised.",
+    "rounding": "Displayed values should be rounded; derived ratios retain one decimal place.",
+    "share": true,
+    "method": "Population of each economy classified lower middle income in 2025 divided by the population of all classified lower-middle-income economies with population data.",
+    "inputs": [
+      "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+      "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=20000&date=1987:2025"
+    ]
+  }
+}

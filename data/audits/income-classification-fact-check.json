@@ -1,0 +1,2829 @@
+{
+  "articleId": "q.econ.income_classification",
+  "generatedAt": "2026-07-17T05:55:51.851348Z",
+  "status": "pass",
+  "summary": {
+    "checks": 110,
+    "passed": 110,
+    "failed": 0,
+    "rawSnapshotsVerified": 15
+  },
+  "scope": [
+    "raw snapshot hashes",
+    "official workbook values and ranks",
+    "classification and lending labels",
+    "historical thresholds",
+    "independent recomputation of the main derived charts",
+    "HCES rural-urban pairing",
+    "World Bank versus MoSPI national-accounts reconciliation",
+    "high-risk prose claims and caveat retention"
+  ],
+  "checks": [
+    {
+      "name": "snapshot hash: history",
+      "status": "pass",
+      "actual": "9a85a3d3d5a1b16ae7ecf25d7344387f2dede3931875163d4157bf7f2fd25810",
+      "expected": "9a85a3d3d5a1b16ae7ecf25d7344387f2dede3931875163d4157bf7f2fd25810"
+    },
+    {
+      "name": "snapshot hash: current_groups",
+      "status": "pass",
+      "actual": "2896f7c57b92835b00acd114c03dfd75bf84208e931b446b3f1b15f412bcb969",
+      "expected": "2896f7c57b92835b00acd114c03dfd75bf84208e931b446b3f1b15f412bcb969"
+    },
+    {
+      "name": "snapshot hash: gni",
+      "status": "pass",
+      "actual": "37760903ab07011c98b1c398c4cbda41613e2e2682b17da6814bb1afcc9a7994",
+      "expected": "37760903ab07011c98b1c398c4cbda41613e2e2682b17da6814bb1afcc9a7994"
+    },
+    {
+      "name": "snapshot hash: gnipc",
+      "status": "pass",
+      "actual": "e5a56fd89b6136590a4f4fc6d333fd79c8fa4596330c694d2c18cc0b90d74fcc",
+      "expected": "e5a56fd89b6136590a4f4fc6d333fd79c8fa4596330c694d2c18cc0b90d74fcc"
+    },
+    {
+      "name": "snapshot hash: gdp",
+      "status": "pass",
+      "actual": "215cecd6f6f248f4db9c5f758bf061f618e07afaf868103b33feaa1d40c3ef6d",
+      "expected": "215cecd6f6f248f4db9c5f758bf061f618e07afaf868103b33feaa1d40c3ef6d"
+    },
+    {
+      "name": "snapshot hash: gdp_ppp",
+      "status": "pass",
+      "actual": "b23f0bf6f81c4f23cb1af8a3989306ff2240b81bb4ff0e63f918fd09876e4b55",
+      "expected": "b23f0bf6f81c4f23cb1af8a3989306ff2240b81bb4ff0e63f918fd09876e4b55"
+    },
+    {
+      "name": "snapshot hash: population",
+      "status": "pass",
+      "actual": "6bd6674bfaff39e3e336baa11794e9e9d483730f8c95ec4ffc6268dd9d6c6236",
+      "expected": "6bd6674bfaff39e3e336baa11794e9e9d483730f8c95ec4ffc6268dd9d6c6236"
+    },
+    {
+      "name": "snapshot hash: blog",
+      "status": "pass",
+      "actual": "bd65f7ded358ff74223a76dbcea5d2f06452c30a7d8561cc1a2a4e1a200d572d",
+      "expected": "bd65f7ded358ff74223a76dbcea5d2f06452c30a7d8561cc1a2a4e1a200d572d"
+    },
+    {
+      "name": "snapshot hash: country_groups",
+      "status": "pass",
+      "actual": "f41ad818585f43bdcd2f162cd6fae63cf179d14c04f9af5306d0058efb3d19df",
+      "expected": "f41ad818585f43bdcd2f162cd6fae63cf179d14c04f9af5306d0058efb3d19df"
+    },
+    {
+      "name": "snapshot hash: atlas_method",
+      "status": "pass",
+      "actual": "341413ffe98afa7b3831b877de0bdd8617700cd129cf323ce392faf651741f0c",
+      "expected": "341413ffe98afa7b3831b877de0bdd8617700cd129cf323ce392faf651741f0c"
+    },
+    {
+      "name": "snapshot hash: wdi_gni_pc",
+      "status": "pass",
+      "actual": "b3a575695bdeb8a7767dbd703985406c8bf1e1eacef72a8ef184e59f8dc4f94d",
+      "expected": "b3a575695bdeb8a7767dbd703985406c8bf1e1eacef72a8ef184e59f8dc4f94d"
+    },
+    {
+      "name": "snapshot hash: wdi_population",
+      "status": "pass",
+      "actual": "8325d050f989115d01bbe6fa1d1b66f3313f158e41a37c94144a6f83b64a369b",
+      "expected": "8325d050f989115d01bbe6fa1d1b66f3313f158e41a37c94144a6f83b64a369b"
+    },
+    {
+      "name": "snapshot hash: wdi_gni_lcu",
+      "status": "pass",
+      "actual": "d68f7b825ba6f0a7c1d8d6f58f34c68147a0043d4ff2b457b469c7d95d70f6a9",
+      "expected": "d68f7b825ba6f0a7c1d8d6f58f34c68147a0043d4ff2b457b469c7d95d70f6a9"
+    },
+    {
+      "name": "snapshot hash: wdi_under5",
+      "status": "pass",
+      "actual": "e59ae8df707da43b44512f6e2bc4d1c8a3a4c658b78b8c647de44d21dfa4e32a",
+      "expected": "e59ae8df707da43b44512f6e2bc4d1c8a3a4c658b78b8c647de44d21dfa4e32a"
+    },
+    {
+      "name": "snapshot hash: wdi_manufacturing",
+      "status": "pass",
+      "actual": "ef6ae4b29eb3693fac40f9c103afc87b32ace6dd5736eff569657a9b5cc73f7e",
+      "expected": "ef6ae4b29eb3693fac40f9c103afc87b32ace6dd5736eff569657a9b5cc73f7e"
+    },
+    {
+      "name": "World Bank mover article contains: six countries moved",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "World Bank mover article contains: nearly 10% larger",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "World Bank mover article contains: 11.7%",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "Atlas method states three-year moving average",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "India PPP GNI per-person rank",
+      "status": "pass",
+      "actual": 132,
+      "expected": 132
+    },
+    {
+      "name": "India Atlas GNI per-person rank",
+      "status": "pass",
+      "actual": 156,
+      "expected": 156
+    },
+    {
+      "name": "India total PPP GDP rank",
+      "status": "pass",
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "name": "India total market GDP rank",
+      "status": "pass",
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "name": "PPP GNI per-person ranked universe",
+      "status": "pass",
+      "actual": 196,
+      "expected": 196
+    },
+    {
+      "name": "Atlas GNI per-person ranked universe",
+      "status": "pass",
+      "actual": 200,
+      "expected": 200
+    },
+    {
+      "name": "PPP GDP ranked universe",
+      "status": "pass",
+      "actual": 197,
+      "expected": 197
+    },
+    {
+      "name": "market GDP ranked universe",
+      "status": "pass",
+      "actual": 204,
+      "expected": 204
+    },
+    {
+      "name": "India PPP GNI per person",
+      "status": "pass",
+      "actual": 11600.0,
+      "expected": 11600.0
+    },
+    {
+      "name": "India Atlas GNI per person",
+      "status": "pass",
+      "actual": 2760.0,
+      "expected": 2760.0
+    },
+    {
+      "name": "India Atlas GNI, million US dollars",
+      "status": "pass",
+      "actual": 4036219,
+      "expected": 4036219
+    },
+    {
+      "name": "India market GDP, million US dollars",
+      "status": "pass",
+      "actual": 3956067,
+      "expected": 3956067
+    },
+    {
+      "name": "India PPP GDP, million international dollars",
+      "status": "pass",
+      "actual": 17197369,
+      "expected": 17197369
+    },
+    {
+      "name": "India population, thousands",
+      "status": "pass",
+      "actual": 1463866,
+      "expected": 1463866
+    },
+    {
+      "name": "2025 lower-middle entry",
+      "status": "pass",
+      "actual": 1176.0,
+      "expected": 1176.0
+    },
+    {
+      "name": "2025 low-income ceiling",
+      "status": "pass",
+      "actual": 1175.0,
+      "expected": 1175.0
+    },
+    {
+      "name": "2025 upper-middle entry",
+      "status": "pass",
+      "actual": 4636.0,
+      "expected": 4636.0
+    },
+    {
+      "name": "2025 high-income entry",
+      "status": "pass",
+      "actual": 14375.0,
+      "expected": 14375.0
+    },
+    {
+      "name": "2025 IDA allocation ceiling",
+      "status": "pass",
+      "actual": 1365.0,
+      "expected": 1365.0
+    },
+    {
+      "name": "2025 IBRD graduation discussion threshold",
+      "status": "pass",
+      "actual": 8105.0,
+      "expected": 8105.0
+    },
+    {
+      "name": "India classification, 2025",
+      "status": "pass",
+      "actual": "LM",
+      "expected": "LM"
+    },
+    {
+      "name": "India first lower-middle year",
+      "status": "pass",
+      "actual": 2007,
+      "expected": 2007
+    },
+    {
+      "name": "India current income-group label",
+      "status": "pass",
+      "actual": "Lower middle income",
+      "expected": "Lower middle income"
+    },
+    {
+      "name": "India current lending category",
+      "status": "pass",
+      "actual": "IBRD",
+      "expected": "IBRD"
+    },
+    {
+      "name": "India progress ratio, 2025",
+      "status": "pass",
+      "actual": 59.5,
+      "expected": 59.5
+    },
+    {
+      "name": "India progress artifact endpoint",
+      "status": "pass",
+      "actual": 59.5,
+      "expected": 59.5
+    },
+    {
+      "name": "rank artifact universes",
+      "status": "pass",
+      "actual": [
+        197,
+        204,
+        196,
+        200
+      ],
+      "expected": [
+        197,
+        204,
+        196,
+        200
+      ]
+    },
+    {
+      "name": "full progress series: IND",
+      "status": "pass",
+      "actual": [
+        {
+          "date": "1987",
+          "value": 18.5
+        },
+        {
+          "date": "1988",
+          "value": 18.2
+        },
+        {
+          "date": "1989",
+          "value": 16.7
+        },
+        {
+          "date": "1990",
+          "value": 15.8
+        },
+        {
+          "date": "1991",
+          "value": 13.7
+        },
+        {
+          "date": "1992",
+          "value": 13.0
+        },
+        {
+          "date": "1993",
+          "value": 11.8
+        },
+        {
+          "date": "1994",
+          "value": 11.7
+        },
+        {
+          "date": "1995",
+          "value": 12.2
+        },
+        {
+          "date": "1996",
+          "value": 12.8
+        },
+        {
+          "date": "1997",
+          "value": 13.1
+        },
+        {
+          "date": "1998",
+          "value": 13.5
+        },
+        {
+          "date": "1999",
+          "value": 14.7
+        },
+        {
+          "date": "2000",
+          "value": 14.7
+        },
+        {
+          "date": "2001",
+          "value": 15.1
+        },
+        {
+          "date": "2002",
+          "value": 15.7
+        },
+        {
+          "date": "2003",
+          "value": 16.8
+        },
+        {
+          "date": "2004",
+          "value": 18.7
+        },
+        {
+          "date": "2005",
+          "value": 20.2
+        },
+        {
+          "date": "2006",
+          "value": 21.7
+        },
+        {
+          "date": "2007",
+          "value": 24.6
+        },
+        {
+          "date": "2008",
+          "value": 25.7
+        },
+        {
+          "date": "2009",
+          "value": 28.1
+        },
+        {
+          "date": "2010",
+          "value": 30.4
+        },
+        {
+          "date": "2011",
+          "value": 33.4
+        },
+        {
+          "date": "2012",
+          "value": 35.7
+        },
+        {
+          "date": "2013",
+          "value": 36.4
+        },
+        {
+          "date": "2014",
+          "value": 37.3
+        },
+        {
+          "date": "2015",
+          "value": 39.1
+        },
+        {
+          "date": "2016",
+          "value": 42.2
+        },
+        {
+          "date": "2017",
+          "value": 45.9
+        },
+        {
+          "date": "2018",
+          "value": 49.3
+        },
+        {
+          "date": "2019",
+          "value": 51.2
+        },
+        {
+          "date": "2020",
+          "value": 46.4
+        },
+        {
+          "date": "2021",
+          "value": 51.0
+        },
+        {
+          "date": "2022",
+          "value": 52.8
+        },
+        {
+          "date": "2023",
+          "value": 55.1
+        },
+        {
+          "date": "2024",
+          "value": 56.7
+        },
+        {
+          "date": "2025",
+          "value": 59.5
+        }
+      ],
+      "expected": [
+        {
+          "date": "1987",
+          "value": 18.5
+        },
+        {
+          "date": "1988",
+          "value": 18.2
+        },
+        {
+          "date": "1989",
+          "value": 16.7
+        },
+        {
+          "date": "1990",
+          "value": 15.8
+        },
+        {
+          "date": "1991",
+          "value": 13.7
+        },
+        {
+          "date": "1992",
+          "value": 13.0
+        },
+        {
+          "date": "1993",
+          "value": 11.8
+        },
+        {
+          "date": "1994",
+          "value": 11.7
+        },
+        {
+          "date": "1995",
+          "value": 12.2
+        },
+        {
+          "date": "1996",
+          "value": 12.8
+        },
+        {
+          "date": "1997",
+          "value": 13.1
+        },
+        {
+          "date": "1998",
+          "value": 13.5
+        },
+        {
+          "date": "1999",
+          "value": 14.7
+        },
+        {
+          "date": "2000",
+          "value": 14.7
+        },
+        {
+          "date": "2001",
+          "value": 15.1
+        },
+        {
+          "date": "2002",
+          "value": 15.7
+        },
+        {
+          "date": "2003",
+          "value": 16.8
+        },
+        {
+          "date": "2004",
+          "value": 18.7
+        },
+        {
+          "date": "2005",
+          "value": 20.2
+        },
+        {
+          "date": "2006",
+          "value": 21.7
+        },
+        {
+          "date": "2007",
+          "value": 24.6
+        },
+        {
+          "date": "2008",
+          "value": 25.7
+        },
+        {
+          "date": "2009",
+          "value": 28.1
+        },
+        {
+          "date": "2010",
+          "value": 30.4
+        },
+        {
+          "date": "2011",
+          "value": 33.4
+        },
+        {
+          "date": "2012",
+          "value": 35.7
+        },
+        {
+          "date": "2013",
+          "value": 36.4
+        },
+        {
+          "date": "2014",
+          "value": 37.3
+        },
+        {
+          "date": "2015",
+          "value": 39.1
+        },
+        {
+          "date": "2016",
+          "value": 42.2
+        },
+        {
+          "date": "2017",
+          "value": 45.9
+        },
+        {
+          "date": "2018",
+          "value": 49.3
+        },
+        {
+          "date": "2019",
+          "value": 51.2
+        },
+        {
+          "date": "2020",
+          "value": 46.4
+        },
+        {
+          "date": "2021",
+          "value": 51.0
+        },
+        {
+          "date": "2022",
+          "value": 52.8
+        },
+        {
+          "date": "2023",
+          "value": 55.1
+        },
+        {
+          "date": "2024",
+          "value": 56.7
+        },
+        {
+          "date": "2025",
+          "value": 59.5
+        }
+      ]
+    },
+    {
+      "name": "full progress series: CHN",
+      "status": "pass",
+      "actual": [
+        {
+          "date": "1987",
+          "value": 16.5
+        },
+        {
+          "date": "1988",
+          "value": 15.0
+        },
+        {
+          "date": "1989",
+          "value": 13.7
+        },
+        {
+          "date": "1990",
+          "value": 13.4
+        },
+        {
+          "date": "1991",
+          "value": 14.1
+        },
+        {
+          "date": "1992",
+          "value": 14.8
+        },
+        {
+          "date": "1993",
+          "value": 15.1
+        },
+        {
+          "date": "1994",
+          "value": 16.2
+        },
+        {
+          "date": "1995",
+          "value": 17.8
+        },
+        {
+          "date": "1996",
+          "value": 21.2
+        },
+        {
+          "date": "1997",
+          "value": 24.3
+        },
+        {
+          "date": "1998",
+          "value": 26.4
+        },
+        {
+          "date": "1999",
+          "value": 28.7
+        },
+        {
+          "date": "2000",
+          "value": 31.7
+        },
+        {
+          "date": "2001",
+          "value": 34.3
+        },
+        {
+          "date": "2002",
+          "value": 38.5
+        },
+        {
+          "date": "2003",
+          "value": 42.8
+        },
+        {
+          "date": "2004",
+          "value": 47.0
+        },
+        {
+          "date": "2005",
+          "value": 51.6
+        },
+        {
+          "date": "2006",
+          "value": 58.1
+        },
+        {
+          "date": "2007",
+          "value": 68.8
+        },
+        {
+          "date": "2008",
+          "value": 81.4
+        },
+        {
+          "date": "2009",
+          "value": 94.8
+        },
+        {
+          "date": "2010",
+          "value": 110.9
+        },
+        {
+          "date": "2011",
+          "value": 127.1
+        },
+        {
+          "date": "2012",
+          "value": 147.1
+        },
+        {
+          "date": "2013",
+          "value": 166.3
+        },
+        {
+          "date": "2014",
+          "value": 184.2
+        },
+        {
+          "date": "2015",
+          "value": 199.2
+        },
+        {
+          "date": "2016",
+          "value": 211.3
+        },
+        {
+          "date": "2017",
+          "value": 226.6
+        },
+        {
+          "date": "2018",
+          "value": 243.2
+        },
+        {
+          "date": "2019",
+          "value": 259.8
+        },
+        {
+          "date": "2020",
+          "value": 262.2
+        },
+        {
+          "date": "2021",
+          "value": 287.1
+        },
+        {
+          "date": "2022",
+          "value": 294.9
+        },
+        {
+          "date": "2023",
+          "value": 304.5
+        },
+        {
+          "date": "2024",
+          "value": 303.8
+        },
+        {
+          "date": "2025",
+          "value": 306.9
+        }
+      ],
+      "expected": [
+        {
+          "date": "1987",
+          "value": 16.5
+        },
+        {
+          "date": "1988",
+          "value": 15.0
+        },
+        {
+          "date": "1989",
+          "value": 13.7
+        },
+        {
+          "date": "1990",
+          "value": 13.4
+        },
+        {
+          "date": "1991",
+          "value": 14.1
+        },
+        {
+          "date": "1992",
+          "value": 14.8
+        },
+        {
+          "date": "1993",
+          "value": 15.1
+        },
+        {
+          "date": "1994",
+          "value": 16.2
+        },
+        {
+          "date": "1995",
+          "value": 17.8
+        },
+        {
+          "date": "1996",
+          "value": 21.2
+        },
+        {
+          "date": "1997",
+          "value": 24.3
+        },
+        {
+          "date": "1998",
+          "value": 26.4
+        },
+        {
+          "date": "1999",
+          "value": 28.7
+        },
+        {
+          "date": "2000",
+          "value": 31.7
+        },
+        {
+          "date": "2001",
+          "value": 34.3
+        },
+        {
+          "date": "2002",
+          "value": 38.5
+        },
+        {
+          "date": "2003",
+          "value": 42.8
+        },
+        {
+          "date": "2004",
+          "value": 47.0
+        },
+        {
+          "date": "2005",
+          "value": 51.6
+        },
+        {
+          "date": "2006",
+          "value": 58.1
+        },
+        {
+          "date": "2007",
+          "value": 68.8
+        },
+        {
+          "date": "2008",
+          "value": 81.4
+        },
+        {
+          "date": "2009",
+          "value": 94.8
+        },
+        {
+          "date": "2010",
+          "value": 110.9
+        },
+        {
+          "date": "2011",
+          "value": 127.1
+        },
+        {
+          "date": "2012",
+          "value": 147.1
+        },
+        {
+          "date": "2013",
+          "value": 166.3
+        },
+        {
+          "date": "2014",
+          "value": 184.2
+        },
+        {
+          "date": "2015",
+          "value": 199.2
+        },
+        {
+          "date": "2016",
+          "value": 211.3
+        },
+        {
+          "date": "2017",
+          "value": 226.6
+        },
+        {
+          "date": "2018",
+          "value": 243.2
+        },
+        {
+          "date": "2019",
+          "value": 259.8
+        },
+        {
+          "date": "2020",
+          "value": 262.2
+        },
+        {
+          "date": "2021",
+          "value": 287.1
+        },
+        {
+          "date": "2022",
+          "value": 294.9
+        },
+        {
+          "date": "2023",
+          "value": 304.5
+        },
+        {
+          "date": "2024",
+          "value": 303.8
+        },
+        {
+          "date": "2025",
+          "value": 306.9
+        }
+      ]
+    },
+    {
+      "name": "full progress series: IDN",
+      "status": "pass",
+      "actual": [
+        {
+          "date": "1987",
+          "value": 25.8
+        },
+        {
+          "date": "1988",
+          "value": 23.2
+        },
+        {
+          "date": "1989",
+          "value": 22.3
+        },
+        {
+          "date": "1990",
+          "value": 22.7
+        },
+        {
+          "date": "1991",
+          "value": 23.5
+        },
+        {
+          "date": "1992",
+          "value": 24.1
+        },
+        {
+          "date": "1993",
+          "value": 26.2
+        },
+        {
+          "date": "1994",
+          "value": 29.0
+        },
+        {
+          "date": "1995",
+          "value": 31.9
+        },
+        {
+          "date": "1996",
+          "value": 34.3
+        },
+        {
+          "date": "1997",
+          "value": 34.5
+        },
+        {
+          "date": "1998",
+          "value": 21.1
+        },
+        {
+          "date": "1999",
+          "value": 18.7
+        },
+        {
+          "date": "2000",
+          "value": 19.0
+        },
+        {
+          "date": "2001",
+          "value": 23.5
+        },
+        {
+          "date": "2002",
+          "value": 26.6
+        },
+        {
+          "date": "2003",
+          "value": 29.0
+        },
+        {
+          "date": "2004",
+          "value": 32.6
+        },
+        {
+          "date": "2005",
+          "value": 34.6
+        },
+        {
+          "date": "2006",
+          "value": 37.5
+        },
+        {
+          "date": "2007",
+          "value": 42.4
+        },
+        {
+          "date": "2008",
+          "value": 49.3
+        },
+        {
+          "date": "2009",
+          "value": 53.5
+        },
+        {
+          "date": "2010",
+          "value": 62.6
+        },
+        {
+          "date": "2011",
+          "value": 73.3
+        },
+        {
+          "date": "2012",
+          "value": 86.1
+        },
+        {
+          "date": "2013",
+          "value": 88.9
+        },
+        {
+          "date": "2014",
+          "value": 86.5
+        },
+        {
+          "date": "2015",
+          "value": 84.0
+        },
+        {
+          "date": "2016",
+          "value": 85.2
+        },
+        {
+          "date": "2017",
+          "value": 89.6
+        },
+        {
+          "date": "2018",
+          "value": 95.3
+        },
+        {
+          "date": "2019",
+          "value": 99.4
+        },
+        {
+          "date": "2020",
+          "value": 94.0
+        },
+        {
+          "date": "2021",
+          "value": 97.0
+        },
+        {
+          "date": "2022",
+          "value": 101.2
+        },
+        {
+          "date": "2023",
+          "value": 106.5
+        },
+        {
+          "date": "2024",
+          "value": 109.4
+        },
+        {
+          "date": "2025",
+          "value": 110.4
+        }
+      ],
+      "expected": [
+        {
+          "date": "1987",
+          "value": 25.8
+        },
+        {
+          "date": "1988",
+          "value": 23.2
+        },
+        {
+          "date": "1989",
+          "value": 22.3
+        },
+        {
+          "date": "1990",
+          "value": 22.7
+        },
+        {
+          "date": "1991",
+          "value": 23.5
+        },
+        {
+          "date": "1992",
+          "value": 24.1
+        },
+        {
+          "date": "1993",
+          "value": 26.2
+        },
+        {
+          "date": "1994",
+          "value": 29.0
+        },
+        {
+          "date": "1995",
+          "value": 31.9
+        },
+        {
+          "date": "1996",
+          "value": 34.3
+        },
+        {
+          "date": "1997",
+          "value": 34.5
+        },
+        {
+          "date": "1998",
+          "value": 21.1
+        },
+        {
+          "date": "1999",
+          "value": 18.7
+        },
+        {
+          "date": "2000",
+          "value": 19.0
+        },
+        {
+          "date": "2001",
+          "value": 23.5
+        },
+        {
+          "date": "2002",
+          "value": 26.6
+        },
+        {
+          "date": "2003",
+          "value": 29.0
+        },
+        {
+          "date": "2004",
+          "value": 32.6
+        },
+        {
+          "date": "2005",
+          "value": 34.6
+        },
+        {
+          "date": "2006",
+          "value": 37.5
+        },
+        {
+          "date": "2007",
+          "value": 42.4
+        },
+        {
+          "date": "2008",
+          "value": 49.3
+        },
+        {
+          "date": "2009",
+          "value": 53.5
+        },
+        {
+          "date": "2010",
+          "value": 62.6
+        },
+        {
+          "date": "2011",
+          "value": 73.3
+        },
+        {
+          "date": "2012",
+          "value": 86.1
+        },
+        {
+          "date": "2013",
+          "value": 88.9
+        },
+        {
+          "date": "2014",
+          "value": 86.5
+        },
+        {
+          "date": "2015",
+          "value": 84.0
+        },
+        {
+          "date": "2016",
+          "value": 85.2
+        },
+        {
+          "date": "2017",
+          "value": 89.6
+        },
+        {
+          "date": "2018",
+          "value": 95.3
+        },
+        {
+          "date": "2019",
+          "value": 99.4
+        },
+        {
+          "date": "2020",
+          "value": 94.0
+        },
+        {
+          "date": "2021",
+          "value": 97.0
+        },
+        {
+          "date": "2022",
+          "value": 101.2
+        },
+        {
+          "date": "2023",
+          "value": 106.5
+        },
+        {
+          "date": "2024",
+          "value": 109.4
+        },
+        {
+          "date": "2025",
+          "value": 110.4
+        }
+      ]
+    },
+    {
+      "name": "full progress series: VNM",
+      "status": "pass",
+      "actual": [
+        {
+          "date": "1989",
+          "value": 9.4
+        },
+        {
+          "date": "1990",
+          "value": 5.3
+        },
+        {
+          "date": "1991",
+          "value": 4.3
+        },
+        {
+          "date": "1992",
+          "value": 5.2
+        },
+        {
+          "date": "1993",
+          "value": 6.1
+        },
+        {
+          "date": "1994",
+          "value": 6.9
+        },
+        {
+          "date": "1995",
+          "value": 8.6
+        },
+        {
+          "date": "1996",
+          "value": 9.9
+        },
+        {
+          "date": "1997",
+          "value": 11.2
+        },
+        {
+          "date": "1998",
+          "value": 11.9
+        },
+        {
+          "date": "1999",
+          "value": 12.3
+        },
+        {
+          "date": "2000",
+          "value": 13.0
+        },
+        {
+          "date": "2001",
+          "value": 13.8
+        },
+        {
+          "date": "2002",
+          "value": 14.6
+        },
+        {
+          "date": "2003",
+          "value": 15.8
+        },
+        {
+          "date": "2004",
+          "value": 16.9
+        },
+        {
+          "date": "2005",
+          "value": 18.8
+        },
+        {
+          "date": "2006",
+          "value": 20.6
+        },
+        {
+          "date": "2007",
+          "value": 23.2
+        },
+        {
+          "date": "2008",
+          "value": 25.9
+        },
+        {
+          "date": "2009",
+          "value": 28.4
+        },
+        {
+          "date": "2010",
+          "value": 34.5
+        },
+        {
+          "date": "2011",
+          "value": 40.4
+        },
+        {
+          "date": "2012",
+          "value": 48.5
+        },
+        {
+          "date": "2013",
+          "value": 53.3
+        },
+        {
+          "date": "2014",
+          "value": 57.9
+        },
+        {
+          "date": "2015",
+          "value": 61.0
+        },
+        {
+          "date": "2016",
+          "value": 64.7
+        },
+        {
+          "date": "2017",
+          "value": 68.8
+        },
+        {
+          "date": "2018",
+          "value": 75.6
+        },
+        {
+          "date": "2019",
+          "value": 81.3
+        },
+        {
+          "date": "2020",
+          "value": 83.0
+        },
+        {
+          "date": "2021",
+          "value": 83.2
+        },
+        {
+          "date": "2022",
+          "value": 89.1
+        },
+        {
+          "date": "2023",
+          "value": 91.7
+        },
+        {
+          "date": "2024",
+          "value": 99.9
+        },
+        {
+          "date": "2025",
+          "value": 107.2
+        }
+      ],
+      "expected": [
+        {
+          "date": "1989",
+          "value": 9.4
+        },
+        {
+          "date": "1990",
+          "value": 5.3
+        },
+        {
+          "date": "1991",
+          "value": 4.3
+        },
+        {
+          "date": "1992",
+          "value": 5.2
+        },
+        {
+          "date": "1993",
+          "value": 6.1
+        },
+        {
+          "date": "1994",
+          "value": 6.9
+        },
+        {
+          "date": "1995",
+          "value": 8.6
+        },
+        {
+          "date": "1996",
+          "value": 9.9
+        },
+        {
+          "date": "1997",
+          "value": 11.2
+        },
+        {
+          "date": "1998",
+          "value": 11.9
+        },
+        {
+          "date": "1999",
+          "value": 12.3
+        },
+        {
+          "date": "2000",
+          "value": 13.0
+        },
+        {
+          "date": "2001",
+          "value": 13.8
+        },
+        {
+          "date": "2002",
+          "value": 14.6
+        },
+        {
+          "date": "2003",
+          "value": 15.8
+        },
+        {
+          "date": "2004",
+          "value": 16.9
+        },
+        {
+          "date": "2005",
+          "value": 18.8
+        },
+        {
+          "date": "2006",
+          "value": 20.6
+        },
+        {
+          "date": "2007",
+          "value": 23.2
+        },
+        {
+          "date": "2008",
+          "value": 25.9
+        },
+        {
+          "date": "2009",
+          "value": 28.4
+        },
+        {
+          "date": "2010",
+          "value": 34.5
+        },
+        {
+          "date": "2011",
+          "value": 40.4
+        },
+        {
+          "date": "2012",
+          "value": 48.5
+        },
+        {
+          "date": "2013",
+          "value": 53.3
+        },
+        {
+          "date": "2014",
+          "value": 57.9
+        },
+        {
+          "date": "2015",
+          "value": 61.0
+        },
+        {
+          "date": "2016",
+          "value": 64.7
+        },
+        {
+          "date": "2017",
+          "value": 68.8
+        },
+        {
+          "date": "2018",
+          "value": 75.6
+        },
+        {
+          "date": "2019",
+          "value": 81.3
+        },
+        {
+          "date": "2020",
+          "value": 83.0
+        },
+        {
+          "date": "2021",
+          "value": 83.2
+        },
+        {
+          "date": "2022",
+          "value": 89.1
+        },
+        {
+          "date": "2023",
+          "value": 91.7
+        },
+        {
+          "date": "2024",
+          "value": 99.9
+        },
+        {
+          "date": "2025",
+          "value": 107.2
+        }
+      ]
+    },
+    {
+      "name": "full progress series: BGD",
+      "status": "pass",
+      "actual": [
+        {
+          "date": "1987",
+          "value": 12.9
+        },
+        {
+          "date": "1988",
+          "value": 12.3
+        },
+        {
+          "date": "1989",
+          "value": 12.0
+        },
+        {
+          "date": "1990",
+          "value": 11.8
+        },
+        {
+          "date": "1991",
+          "value": 11.7
+        },
+        {
+          "date": "1992",
+          "value": 11.1
+        },
+        {
+          "date": "1993",
+          "value": 10.8
+        },
+        {
+          "date": "1994",
+          "value": 10.4
+        },
+        {
+          "date": "1995",
+          "value": 10.5
+        },
+        {
+          "date": "1996",
+          "value": 11.2
+        },
+        {
+          "date": "1997",
+          "value": 11.8
+        },
+        {
+          "date": "1998",
+          "value": 12.9
+        },
+        {
+          "date": "1999",
+          "value": 13.4
+        },
+        {
+          "date": "2000",
+          "value": 13.7
+        },
+        {
+          "date": "2001",
+          "value": 14.1
+        },
+        {
+          "date": "2002",
+          "value": 14.3
+        },
+        {
+          "date": "2003",
+          "value": 14.5
+        },
+        {
+          "date": "2004",
+          "value": 15.0
+        },
+        {
+          "date": "2005",
+          "value": 15.3
+        },
+        {
+          "date": "2006",
+          "value": 15.3
+        },
+        {
+          "date": "2007",
+          "value": 15.7
+        },
+        {
+          "date": "2008",
+          "value": 16.6
+        },
+        {
+          "date": "2009",
+          "value": 17.7
+        },
+        {
+          "date": "2010",
+          "value": 19.6
+        },
+        {
+          "date": "2011",
+          "value": 21.6
+        },
+        {
+          "date": "2012",
+          "value": 23.3
+        },
+        {
+          "date": "2013",
+          "value": 24.5
+        },
+        {
+          "date": "2014",
+          "value": 26.2
+        },
+        {
+          "date": "2015",
+          "value": 29.7
+        },
+        {
+          "date": "2016",
+          "value": 35.4
+        },
+        {
+          "date": "2017",
+          "value": 42.1
+        },
+        {
+          "date": "2018",
+          "value": 50.6
+        },
+        {
+          "date": "2019",
+          "value": 54.9
+        },
+        {
+          "date": "2020",
+          "value": 56.6
+        },
+        {
+          "date": "2021",
+          "value": 61.1
+        },
+        {
+          "date": "2022",
+          "value": 63.8
+        },
+        {
+          "date": "2023",
+          "value": 63.8
+        },
+        {
+          "date": "2024",
+          "value": 62.7
+        },
+        {
+          "date": "2025",
+          "value": 61.3
+        }
+      ],
+      "expected": [
+        {
+          "date": "1987",
+          "value": 12.9
+        },
+        {
+          "date": "1988",
+          "value": 12.3
+        },
+        {
+          "date": "1989",
+          "value": 12.0
+        },
+        {
+          "date": "1990",
+          "value": 11.8
+        },
+        {
+          "date": "1991",
+          "value": 11.7
+        },
+        {
+          "date": "1992",
+          "value": 11.1
+        },
+        {
+          "date": "1993",
+          "value": 10.8
+        },
+        {
+          "date": "1994",
+          "value": 10.4
+        },
+        {
+          "date": "1995",
+          "value": 10.5
+        },
+        {
+          "date": "1996",
+          "value": 11.2
+        },
+        {
+          "date": "1997",
+          "value": 11.8
+        },
+        {
+          "date": "1998",
+          "value": 12.9
+        },
+        {
+          "date": "1999",
+          "value": 13.4
+        },
+        {
+          "date": "2000",
+          "value": 13.7
+        },
+        {
+          "date": "2001",
+          "value": 14.1
+        },
+        {
+          "date": "2002",
+          "value": 14.3
+        },
+        {
+          "date": "2003",
+          "value": 14.5
+        },
+        {
+          "date": "2004",
+          "value": 15.0
+        },
+        {
+          "date": "2005",
+          "value": 15.3
+        },
+        {
+          "date": "2006",
+          "value": 15.3
+        },
+        {
+          "date": "2007",
+          "value": 15.7
+        },
+        {
+          "date": "2008",
+          "value": 16.6
+        },
+        {
+          "date": "2009",
+          "value": 17.7
+        },
+        {
+          "date": "2010",
+          "value": 19.6
+        },
+        {
+          "date": "2011",
+          "value": 21.6
+        },
+        {
+          "date": "2012",
+          "value": 23.3
+        },
+        {
+          "date": "2013",
+          "value": 24.5
+        },
+        {
+          "date": "2014",
+          "value": 26.2
+        },
+        {
+          "date": "2015",
+          "value": 29.7
+        },
+        {
+          "date": "2016",
+          "value": 35.4
+        },
+        {
+          "date": "2017",
+          "value": 42.1
+        },
+        {
+          "date": "2018",
+          "value": 50.6
+        },
+        {
+          "date": "2019",
+          "value": 54.9
+        },
+        {
+          "date": "2020",
+          "value": 56.6
+        },
+        {
+          "date": "2021",
+          "value": 61.1
+        },
+        {
+          "date": "2022",
+          "value": 63.8
+        },
+        {
+          "date": "2023",
+          "value": 63.8
+        },
+        {
+          "date": "2024",
+          "value": 62.7
+        },
+        {
+          "date": "2025",
+          "value": 61.3
+        }
+      ]
+    },
+    {
+      "name": "full progress series: LKA",
+      "status": "pass",
+      "actual": [
+        {
+          "date": "1987",
+          "value": 23.2
+        },
+        {
+          "date": "1988",
+          "value": 21.8
+        },
+        {
+          "date": "1989",
+          "value": 20.1
+        },
+        {
+          "date": "1990",
+          "value": 19.9
+        },
+        {
+          "date": "1991",
+          "value": 20.7
+        },
+        {
+          "date": "1992",
+          "value": 21.5
+        },
+        {
+          "date": "1993",
+          "value": 22.6
+        },
+        {
+          "date": "1994",
+          "value": 23.1
+        },
+        {
+          "date": "1995",
+          "value": 23.7
+        },
+        {
+          "date": "1996",
+          "value": 24.4
+        },
+        {
+          "date": "1997",
+          "value": 25.9
+        },
+        {
+          "date": "1998",
+          "value": 26.7
+        },
+        {
+          "date": "1999",
+          "value": 27.7
+        },
+        {
+          "date": "2000",
+          "value": 28.7
+        },
+        {
+          "date": "2001",
+          "value": 27.2
+        },
+        {
+          "date": "2002",
+          "value": 27.9
+        },
+        {
+          "date": "2003",
+          "value": 30.0
+        },
+        {
+          "date": "2004",
+          "value": 31.6
+        },
+        {
+          "date": "2005",
+          "value": 33.8
+        },
+        {
+          "date": "2006",
+          "value": 36.7
+        },
+        {
+          "date": "2007",
+          "value": 40.5
+        },
+        {
+          "date": "2008",
+          "value": 45.1
+        },
+        {
+          "date": "2009",
+          "value": 49.4
+        },
+        {
+          "date": "2010",
+          "value": 59.4
+        },
+        {
+          "date": "2011",
+          "value": 70.1
+        },
+        {
+          "date": "2012",
+          "value": 81.7
+        },
+        {
+          "date": "2013",
+          "value": 88.0
+        },
+        {
+          "date": "2014",
+          "value": 92.3
+        },
+        {
+          "date": "2015",
+          "value": 97.1
+        },
+        {
+          "date": "2016",
+          "value": 101.6
+        },
+        {
+          "date": "2017",
+          "value": 108.3
+        },
+        {
+          "date": "2018",
+          "value": 108.9
+        },
+        {
+          "date": "2019",
+          "value": 104.3
+        },
+        {
+          "date": "2020",
+          "value": 94.7
+        },
+        {
+          "date": "2021",
+          "value": 94.2
+        },
+        {
+          "date": "2022",
+          "value": 81.1
+        },
+        {
+          "date": "2023",
+          "value": 78.6
+        },
+        {
+          "date": "2024",
+          "value": 86.1
+        },
+        {
+          "date": "2025",
+          "value": 100.7
+        }
+      ],
+      "expected": [
+        {
+          "date": "1987",
+          "value": 23.2
+        },
+        {
+          "date": "1988",
+          "value": 21.8
+        },
+        {
+          "date": "1989",
+          "value": 20.1
+        },
+        {
+          "date": "1990",
+          "value": 19.9
+        },
+        {
+          "date": "1991",
+          "value": 20.7
+        },
+        {
+          "date": "1992",
+          "value": 21.5
+        },
+        {
+          "date": "1993",
+          "value": 22.6
+        },
+        {
+          "date": "1994",
+          "value": 23.1
+        },
+        {
+          "date": "1995",
+          "value": 23.7
+        },
+        {
+          "date": "1996",
+          "value": 24.4
+        },
+        {
+          "date": "1997",
+          "value": 25.9
+        },
+        {
+          "date": "1998",
+          "value": 26.7
+        },
+        {
+          "date": "1999",
+          "value": 27.7
+        },
+        {
+          "date": "2000",
+          "value": 28.7
+        },
+        {
+          "date": "2001",
+          "value": 27.2
+        },
+        {
+          "date": "2002",
+          "value": 27.9
+        },
+        {
+          "date": "2003",
+          "value": 30.0
+        },
+        {
+          "date": "2004",
+          "value": 31.6
+        },
+        {
+          "date": "2005",
+          "value": 33.8
+        },
+        {
+          "date": "2006",
+          "value": 36.7
+        },
+        {
+          "date": "2007",
+          "value": 40.5
+        },
+        {
+          "date": "2008",
+          "value": 45.1
+        },
+        {
+          "date": "2009",
+          "value": 49.4
+        },
+        {
+          "date": "2010",
+          "value": 59.4
+        },
+        {
+          "date": "2011",
+          "value": 70.1
+        },
+        {
+          "date": "2012",
+          "value": 81.7
+        },
+        {
+          "date": "2013",
+          "value": 88.0
+        },
+        {
+          "date": "2014",
+          "value": 92.3
+        },
+        {
+          "date": "2015",
+          "value": 97.1
+        },
+        {
+          "date": "2016",
+          "value": 101.6
+        },
+        {
+          "date": "2017",
+          "value": 108.3
+        },
+        {
+          "date": "2018",
+          "value": 108.9
+        },
+        {
+          "date": "2019",
+          "value": 104.3
+        },
+        {
+          "date": "2020",
+          "value": 94.7
+        },
+        {
+          "date": "2021",
+          "value": 94.2
+        },
+        {
+          "date": "2022",
+          "value": 81.1
+        },
+        {
+          "date": "2023",
+          "value": 78.6
+        },
+        {
+          "date": "2024",
+          "value": 86.1
+        },
+        {
+          "date": "2025",
+          "value": 100.7
+        }
+      ]
+    },
+    {
+      "name": "global population-by-class chart",
+      "status": "pass",
+      "actual": [
+        61.2,
+        13.0,
+        8.6,
+        17.2,
+        9.4,
+        36.0,
+        37.6,
+        17.1
+      ],
+      "expected": [
+        61.2,
+        13.0,
+        8.6,
+        17.2,
+        9.4,
+        36.0,
+        37.6,
+        17.1
+      ]
+    },
+    {
+      "name": "lower-middle population concentration chart",
+      "status": "pass",
+      "actual": [
+        49.7,
+        8.7,
+        8.1,
+        6.0,
+        4.0,
+        23.6
+      ],
+      "expected": [
+        49.7,
+        8.7,
+        8.1,
+        6.0,
+        4.0,
+        23.6
+      ]
+    },
+    {
+      "name": "full crossing cohort size",
+      "status": "pass",
+      "actual": 67,
+      "expected": 67
+    },
+    {
+      "name": "full crossing cohort events",
+      "status": "pass",
+      "actual": 41,
+      "expected": 41
+    },
+    {
+      "name": "Kaplan-Meier crossing chart",
+      "status": "pass",
+      "actual": [
+        13.3,
+        29.2,
+        48.0,
+        64.3
+      ],
+      "expected": [
+        13.3,
+        29.2,
+        48.0,
+        64.3
+      ]
+    },
+    {
+      "name": "selected Asian completed transitions",
+      "status": "pass",
+      "actual": {
+        "China": 4,
+        "Sri Lanka": 8,
+        "Indonesia": 9,
+        "Vietnam": 11,
+        "Philippines": 15,
+        "Thailand": 21
+      },
+      "expected": {
+        "China": 4,
+        "Sri Lanka": 8,
+        "Indonesia": 9,
+        "Vietnam": 11,
+        "Philippines": 15,
+        "Thailand": 21
+      }
+    },
+    {
+      "name": "observed first crossers",
+      "status": "pass",
+      "actual": 76,
+      "expected": 76
+    },
+    {
+      "name": "crossing outcome counts",
+      "status": "pass",
+      "actual": {
+        "never": 54,
+        "recovered": 16,
+        "below": 6
+      },
+      "expected": {
+        "never": 54,
+        "recovered": 16,
+        "below": 6
+      }
+    },
+    {
+      "name": "Bangladesh Atlas lead",
+      "status": "pass",
+      "actual": 2.9,
+      "expected": 2.9
+    },
+    {
+      "name": "India PPP lead",
+      "status": "pass",
+      "actual": 8.3,
+      "expected": 8.3
+    },
+    {
+      "name": "India PPP-to-Atlas multiple",
+      "status": "pass",
+      "actual": 4.2,
+      "expected": 4.2
+    },
+    {
+      "name": "India-Bangladesh ruler-swap chart",
+      "status": "pass",
+      "actual": [
+        2.9,
+        8.3
+      ],
+      "expected": [
+        2.9,
+        8.3
+      ]
+    },
+    {
+      "name": "PPP-to-Atlas multiple chart",
+      "status": "pass",
+      "actual": {
+        "Pakistan": 4.3,
+        "India": 4.2,
+        "Bangladesh": 3.8,
+        "Sri Lanka": 3.6,
+        "Vietnam": 3.5,
+        "Indonesia": 3.4,
+        "Thailand": 3.3,
+        "Malaysia": 3.2,
+        "Philippines": 3.0,
+        "China": 2.0,
+        "South Korea": 1.7,
+        "United States": 1.0
+      },
+      "expected": {
+        "India": 4.2,
+        "Bangladesh": 3.8,
+        "Pakistan": 4.3,
+        "Sri Lanka": 3.6,
+        "Vietnam": 3.5,
+        "Philippines": 3.0,
+        "Indonesia": 3.4,
+        "China": 2.0,
+        "Thailand": 3.3,
+        "Malaysia": 3.2,
+        "South Korea": 1.7,
+        "United States": 1.0
+      }
+    },
+    {
+      "name": "2025 mover GNI-per-person changes",
+      "status": "pass",
+      "actual": {
+        "Sri Lanka": 20.7,
+        "Vietnam": 10.7,
+        "Togo": 10.7,
+        "Philippines": 8.5,
+        "Jordan": 7.8,
+        "Micronesia, Fed. Sts.": 6.0
+      },
+      "expected": {
+        "Vietnam": 10.7,
+        "Philippines": 8.5,
+        "Sri Lanka": 20.7,
+        "Micronesia, Fed. Sts.": 6.0,
+        "Jordan": 7.8,
+        "Togo": 10.7
+      }
+    },
+    {
+      "name": "2025 mover mechanism labels",
+      "status": "pass",
+      "actual": {
+        "Sri Lanka": "Economic recovery",
+        "Vietnam": "Growth and exports",
+        "Togo": "Population revision",
+        "Philippines": "Broad-based growth",
+        "Jordan": "GDP rebasing",
+        "Micronesia, Fed. Sts.": "Post-Covid recovery"
+      },
+      "expected": {
+        "Vietnam": "Growth and exports",
+        "Philippines": "Broad-based growth",
+        "Sri Lanka": "Economic recovery",
+        "Micronesia, Fed. Sts.": "Post-Covid recovery",
+        "Jordan": "GDP rebasing",
+        "Togo": "Population revision"
+      }
+    },
+    {
+      "name": "analytical and lending ladder",
+      "status": "pass",
+      "actual": [
+        1365.0,
+        2760.0,
+        4636.0,
+        8105.0,
+        14375.0
+      ],
+      "expected": [
+        1365.0,
+        2760.0,
+        4636.0,
+        8105.0,
+        14375.0
+      ]
+    },
+    {
+      "name": "India accounting bridge",
+      "status": "pass",
+      "actual": [
+        39.1,
+        98.1,
+        89.0,
+        68.4,
+        59.5
+      ],
+      "expected": [
+        39.1,
+        98.1,
+        89.0,
+        68.4,
+        59.5
+      ]
+    },
+    {
+      "name": "crossing scenario waits",
+      "status": "pass",
+      "actual": [
+        [
+          11,
+          2036
+        ],
+        [
+          12,
+          2037
+        ],
+        [
+          13,
+          2038
+        ],
+        [
+          21,
+          2046
+        ]
+      ],
+      "expected": [
+        [
+          11,
+          2036
+        ],
+        [
+          12,
+          2037
+        ],
+        [
+          13,
+          2038
+        ],
+        [
+          21,
+          2046
+        ]
+      ]
+    },
+    {
+      "name": "under-five mortality milestone chart",
+      "status": "pass",
+      "actual": {
+        "India": 26.6,
+        "China": 15.7,
+        "Indonesia": 21.8,
+        "Vietnam": 17.3,
+        "Philippines": 26.5,
+        "Sri Lanka": 7.6,
+        "Thailand": 14.1,
+        "Malaysia": 15.1
+      },
+      "expected": {
+        "India": 26.6,
+        "China": 15.7,
+        "Indonesia": 21.8,
+        "Vietnam": 17.3,
+        "Philippines": 26.5,
+        "Sri Lanka": 7.6,
+        "Thailand": 14.1,
+        "Malaysia": 15.1
+      }
+    },
+    {
+      "name": "manufacturing milestone chart",
+      "status": "pass",
+      "actual": {
+        "India": 13.5,
+        "China": 31.1,
+        "Indonesia": 19.7,
+        "Vietnam": 24.5,
+        "Philippines": 15.3,
+        "Sri Lanka": 15.0,
+        "Thailand": 30.9,
+        "Malaysia": 25.8
+      },
+      "expected": {
+        "India": 13.5,
+        "China": 31.1,
+        "Indonesia": 19.7,
+        "Vietnam": 24.5,
+        "Philippines": 15.3,
+        "Sri Lanka": 15.0,
+        "Thailand": 30.9,
+        "Malaysia": 25.8
+      }
+    },
+    {
+      "name": "rural-urban HCES paired chart",
+      "status": "pass",
+      "actual": [
+        1677,
+        2376,
+        2126,
+        3093,
+        2473,
+        3687,
+        2833,
+        4353,
+        3162,
+        4979,
+        3498,
+        5622,
+        3866,
+        6334,
+        4304,
+        7199,
+        4885,
+        8353,
+        5763,
+        10139,
+        6929,
+        12817,
+        10137,
+        20310
+      ],
+      "expected": [
+        1677,
+        2376,
+        2126,
+        3093,
+        2473,
+        3687,
+        2833,
+        4353,
+        3162,
+        4979,
+        3498,
+        5622,
+        3866,
+        6334,
+        4304,
+        7199,
+        4885,
+        8353,
+        5763,
+        10139,
+        6929,
+        12817,
+        10137,
+        20310
+      ]
+    },
+    {
+      "name": "MoSPI HCES primary PDF contains 1,677",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "MoSPI HCES primary PDF contains 2,376",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "MoSPI HCES primary PDF contains 10,137",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "MoSPI HCES primary PDF contains 20,310",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "World Bank versus MoSPI GNI latest-year gap within tolerance",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "World Bank versus MoSPI GNI value gap within ₹15tn tolerance",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: ranked 132nd among 196 estimates",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: ranked 156th among 200",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: 49.7% live in India",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: 67 economies",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: 29.2% within ten years",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: It is not India's probability",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: 22 of 76 observed first crossers",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: Only the first and last bars are observed",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: not a forecast",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: These figures are not an alternative estimate of GNI",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "prose contains: Every 2025 World Bank value is an estimate and may be revised",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "curated chart count",
+      "status": "pass",
+      "actual": 15,
+      "expected": 15
+    },
+    {
+      "name": "reader-question section count",
+      "status": "pass",
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "name": "grouped section-to-visual map count",
+      "status": "pass",
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "name": "all grouped visuals mapped",
+      "status": "pass",
+      "actual": 15,
+      "expected": 15
+    },
+    {
+      "name": "chart explainer 1 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 2 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 3 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 4 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 5 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 6 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 7 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 8 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 9 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 10 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 11 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 12 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 13 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 14 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "chart explainer 15 has all rich fields",
+      "status": "pass",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "all prose numeric tokens trace to audited data or declared constants",
+      "status": "pass",
+      "actual": [],
+      "expected": []
+    }
+  ]
+}

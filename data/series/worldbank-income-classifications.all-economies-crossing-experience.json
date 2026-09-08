@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.all_economies_crossing_experience",
+  "title": "How often economies at India's relative position crossed the upper-middle line",
+  "sourceId": "worldbank-income-classifications",
+  "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical classifications and thresholds",
+  "sourceUrl": "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+  "unit": "% crossing at least once",
+  "geography": {
+    "type": "global",
+    "id": "WORLD",
+    "name": "World"
+  },
+  "dimensions": [
+    "date",
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "Within 5 years",
+      "value": 13.3,
+      "date": "2025"
+    },
+    {
+      "label": "Within 10 years",
+      "value": 29.2,
+      "date": "2025"
+    },
+    {
+      "label": "Within 15 years",
+      "value": 48.0,
+      "date": "2025"
+    },
+    {
+      "label": "Within 20 years",
+      "value": 64.3,
+      "date": "2025"
+    }
+  ],
+  "metadata": {
+    "release": "World Bank 2025 estimates published July 2026",
+    "estimate": true,
+    "revisionWarning": "The 2025 values are estimates and may be revised.",
+    "rounding": "Displayed values should be rounded; derived ratios retain one decimal place.",
+    "method": "Kaplan-Meier cumulative first-crossing estimate. Entry is the first observed post-1987 lower-middle-income year at 55-65% of the upper-middle threshold; economies not crossing by 2025 are right-censored.",
+    "cohortSize": 67,
+    "events": 41,
+    "censored": 26,
+    "warning": "This is historical experience across heterogeneous economies, not India's probability or forecast.",
+    "inputs": [
+      "https://api.worldbank.org/v2/country/all/indicator/NY.GNP.PCAP.CD?format=json&per_page=20000&date=1987:2025",
+      "https://ddh-openapi.worldbank.org/resources/DR0095334/download"
+    ]
+  }
+}

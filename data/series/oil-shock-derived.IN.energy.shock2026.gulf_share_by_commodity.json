@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+  "title": "India could replace the barrel. It could not replace the cooking gas.",
+  "sourceId": "oil-shock-derived",
+  "sourceIndicatorId": "energy.shock2026.gulf_share_by_commodity",
+  "sourceUrl": "https://comtradeplus.un.org/",
+  "unit": "% of import value from the Gulf, 2025",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-08-28T04:00:57.596885+00:00",
+  "rows": [
+    {
+      "label": "LPG (cooking gas)",
+      "value": 91.4,
+      "importsUsdBn": 14.1
+    },
+    {
+      "label": "LNG",
+      "value": 60.8,
+      "importsUsdBn": 13.4
+    },
+    {
+      "label": "Crude oil",
+      "value": 47.9,
+      "importsUsdBn": 138.9
+    },
+    {
+      "label": "DAP fertiliser",
+      "value": 41.7,
+      "importsUsdBn": 4.9
+    },
+    {
+      "label": "Refined fuels",
+      "value": 27.2,
+      "importsUsdBn": 9.8
+    },
+    {
+      "label": "Urea",
+      "value": 20.9,
+      "importsUsdBn": 4.7
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.econ.oil_shock_2026",
+    "method": "Gulf import value divided by Comtrade's own reported World total, calendar 2025.",
+    "gulfDefinition": "Bahrain, Iran, Iraq, Kuwait, Qatar, Saudi Arabia and the UAE - the Middle East grouping used in GEP June 2026 figure 2.1.D. Oman is EXCLUDED because its ports lie outside the strait.",
+    "caveat": "Gulf share is an upper bound on Hormuz exposure. Saudi Arabia and the UAE have partial pipeline bypasses to the Red Sea and Fujairah, though both are crude lines and neither moves LPG at scale. Calendar 2025 is pre-shock, which is the intended use, but it is the LOW mark of a 91.5-97.3% band for LPG since 2021 (2024 was 97.3%), so do not call it the structural level. Excluding Oman is decisive for urea specifically: Oman alone is 18.7% of India's urea imports, so Gulf-plus-Oman would be 39.7%, not 20.9%.",
+    "singleSourced": "These shares rest entirely on India's own declarations. A mirror check is structurally impossible: no Gulf state publishes partner-level LPG exports for 2025 (Kuwait and Saudi Arabia report only to 'Areas, nes'; the rest report nothing). The one proxy available contradicts India - Saudi Arabia's declared 2024 LPG exports to the WORLD are 26% smaller than what India says it imported from Saudi Arabia alone. Russia, at a third of India's crude, has not reported to Comtrade since 2022 and is likewise unverifiable."
+  }
+}

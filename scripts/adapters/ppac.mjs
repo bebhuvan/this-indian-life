@@ -43,6 +43,45 @@ function numberOrNull(value) {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+// As of August 2026 the PPAC AJAX endpoints ship a Kint/PHP debug bar appended
+// after the JSON body ("...}<script id="debugbar_loader"...>"), so response.json()
+// throws on trailing content. Cut the response at the end of the first balanced
+// JSON object instead. Harmless once they turn the debug bar back off.
+function parseJsonPrefix(text, url) {
+  const start = text.indexOf("{");
+  if (start === -1) throw new Error(`PPAC response from ${url} contained no JSON object`);
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let i = start; i < text.length; i += 1) {
+    const ch = text[i];
+    if (escaped) { escaped = false; continue; }
+    if (ch === "\\") { escaped = true; continue; }
+    if (ch === '"') { inString = !inString; continue; }
+    if (inString) continue;
+    if (ch === "{") depth += 1;
+    else if (ch === "}") {
+      depth -= 1;
+      if (depth === 0) return JSON.parse(text.slice(start, i + 1));
+    }
+  }
+  throw new Error(`PPAC response from ${url} ended mid-object`);
+}
+
+async function ppacPostJson(path, body) {
+  const url = resolveUrl(path);
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      "user-agent": "Indica/0.1 data ingest"
+    },
+    body: new URLSearchParams(body)
+  });
+  if (!response.ok) throw new Error(`PPAC fetch failed ${response.status} ${response.statusText} (${url})`);
+  return parseJsonPrefix(await response.text(), url);
+}
+
 function execFileJson(command, args, options = {}) {
   return new Promise((resolve, reject) => {
     execFile(command, args, { ...options, maxBuffer: 20 * 1024 * 1024 }, (error, stdout, stderr) => {
@@ -126,16 +165,11 @@ export async function writePpacBinarySnapshot(name, buffer, extension = "xlsx") 
 }
 
 export async function fetchPpacCurrentImportExport({ financialYear = "2025-2026", reportBy = "1", pageId = "14" } = {}) {
-  const response = await fetch(resolveUrl("/AjaxController/getImportExports"), {
-    method: "POST",
-    headers: {
-      "content-type": "application/x-www-form-urlencoded",
-      "user-agent": "Indica/0.1 data ingest"
-    },
-    body: new URLSearchParams({ financialYear, reportBy: String(reportBy), pageId: String(pageId) })
+  return ppacPostJson("/AjaxController/getImportExports", {
+    financialYear,
+    reportBy: String(reportBy),
+    pageId: String(pageId)
   });
-  if (!response.ok) throw new Error(`PPAC current import/export fetch failed ${response.status} ${response.statusText}`);
-  return response.json();
 }
 
 export function parsePpacCurrentImportExport(raw, { financialYear = "2025-2026", reportBy = "1" } = {}) {
@@ -188,16 +222,11 @@ export function parsePpacCurrentImportExport(raw, { financialYear = "2025-2026",
 }
 
 export async function fetchPpacInternationalCrudeOil({ financialYear = "2025-2026", reportBy = "4", pageId = "30" } = {}) {
-  const response = await fetch(resolveUrl("/AjaxController/getInternationalPricesCrudeOil"), {
-    method: "POST",
-    headers: {
-      "content-type": "application/x-www-form-urlencoded",
-      "user-agent": "Indica/0.1 data ingest"
-    },
-    body: new URLSearchParams({ financialYear, reportBy: String(reportBy), pageId: String(pageId) })
+  return ppacPostJson("/AjaxController/getInternationalPricesCrudeOil", {
+    financialYear,
+    reportBy: String(reportBy),
+    pageId: String(pageId)
   });
-  if (!response.ok) throw new Error(`PPAC crude basket fetch failed ${response.status} ${response.statusText}`);
-  return response.json();
 }
 
 export function parsePpacInternationalCrudeOil(raw, { requestedFinancialYear = "", reportBy = "4" } = {}) {

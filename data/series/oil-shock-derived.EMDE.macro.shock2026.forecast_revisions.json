@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "macro.shock2026.forecast_revisions",
+  "title": "The World Bank cut 93 of 146 forecasts. India's went up.",
+  "sourceId": "worldbank-gep",
+  "sourceIndicatorId": "macro.shock2026.forecast_revisions",
+  "sourceUrl": "https://www.worldbank.org/en/publication/global-economic-prospects",
+  "unit": "number of 2026 growth forecasts",
+  "geography": {
+    "type": "region",
+    "id": "EMDE",
+    "name": "Emerging market and developing economies"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-08-28T04:00:57.596885+00:00",
+  "rows": [
+    {
+      "label": "Cut since January",
+      "value": 93
+    },
+    {
+      "label": "Raised since January",
+      "value": 39
+    },
+    {
+      "label": "Unchanged",
+      "value": 14
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.econ.oil_shock_2026",
+    "indiaRevision": "+0.1pp for FY2026/27 and +0.6pp for FY2027/28.",
+    "countsIncludingSubAggregates": {
+      "upgraded": 43,
+      "unchanged": 15,
+      "downgraded": 114,
+      "total": 172
+    },
+    "caveat": "These are individual economies. The GEP's regional tables also carry 26 sub-aggregates (GCC, Central Asia, SAR excluding India and so on) that double count their own members; counting those too gives 114 cut of 172. India reports on an April-March fiscal year, so its 2026 column is FY2026/27 while most others are calendar-year. Most other upgrades are commodity exporters or very small economies, but 14 commodity importers were upgraded too, the largest Jamaica at +1.3."
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "series",
+  "indicatorId": "fiscal.state_budgets.budget_realisation.capital_outlay_actual_to_budget",
+  "title": "Capital outlay actual as share of Budget Estimate",
+  "sourceId": "rbi-state-finances",
+  "sourceIndicatorId": "capital_outlay_actual_to_budget, All States/UT",
+  "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+  "unit": "% of Budget Estimate",
+  "frequency": "annual",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "fetchedAt": "2026-07-08T03:39:35.746710+00:00",
+  "metadata": {
+    "publication": "RBI State Finances: A Study of Budgets, 2025-26",
+    "sourcePageUrl": "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=State+Finances+%3A+A+Study+of+Budgets",
+    "sourceWorkbookUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "method": "Derived from RBI e-STATES Appendix rows. Account is treated as actual, Revised as revised estimate, and Budget as budget estimate.",
+    "caveats": [
+      "All States/UT aggregate has a scope break: UTs are excluded from 1990-91 to 2016-17, except NCT Delhi is included from 2000-01 to 2004-05; from 2017-18 it covers all states and UTs.",
+      "2023-24 Account is the latest full actual year in the workbook. 2024-25 is Revised Estimate and 2025-26 is Budget Estimate.",
+      "Rupee values are nominal."
+    ],
+    "transform": "Account divided by Budget Estimate for the same fiscal year. Values begin in 2014-15 for the article window."
+  },
+  "observations": [
+    {
+      "date": "2015",
+      "value": 80.86
+    },
+    {
+      "date": "2016",
+      "value": 90.61
+    },
+    {
+      "date": "2017",
+      "value": 88.38
+    },
+    {
+      "date": "2018",
+      "value": 82.29
+    },
+    {
+      "date": "2019",
+      "value": 81.87
+    },
+    {
+      "date": "2020",
+      "value": 71.97
+    },
+    {
+      "date": "2021",
+      "value": 69.15
+    },
+    {
+      "date": "2022",
+      "value": 79.81
+    },
+    {
+      "date": "2023",
+      "value": 79.34
+    },
+    {
+      "date": "2024",
+      "value": 86.13
+    }
+  ]
+}

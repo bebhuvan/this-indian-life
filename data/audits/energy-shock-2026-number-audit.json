@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "audit",
+  "title": "Number audit: India and the 2026 energy shock",
+  "generatedAt": "2026-09-08T05:00:31.794798+00:00",
+  "conflictStart": "2026-02-27",
+  "asOf": "2026-08-27",
+  "statusCounts": {
+    "VERIFIED": 6,
+    "DERIVED": 4,
+    "SUSPECT": 1,
+    "UNAVAILABLE": 1
+  },
+  "claims": [
+    {
+      "id": "hormuz_collapse",
+      "status": "DERIVED",
+      "claim": "Traffic through the Strait of Hormuz collapsed in March 2026 and had not recovered by late May.",
+      "value": {
+        "febDailyMean": 3.8,
+        "marDailyMean": 0.1,
+        "mayDailyMean": 0.2,
+        "febToMarPercent": -97.4,
+        "monthlyMeans": {
+          "2026-01": 3.1,
+          "2026-02": 3.8,
+          "2026-03": 0.1,
+          "2026-04": 0.2,
+          "2026-05": 0.2
+        }
+      },
+      "sources": [
+        "GEP June 2026 figure 1.10.B (upstream: IMF PortWatch)"
+      ],
+      "crossCheck": "No independent source pulled. Series ends 2026-05-24.",
+      "caveat": "The unit IS published: the y-axis of figure 1.10.B reads 'Millions of metric tons'. That panel is a raster image, so the label never reaches the PDF text layer and an earlier version of this audit wrongly recorded that the GEP stated no unit. Note also that the February-to-March fall is 97% on the DAILY series but 87% on the seven-day average that the article charts, because early-March windows still contain pre-conflict days; April-vs-February is about 95% on both and is the safe comparison."
+    },
+    {
+      "id": "brent_peak",
+      "status": "VERIFIED",
+      "claim": "Brent peaked at $138.2 a barrel in April 2026, from about $63 in December 2025.",
+      "value": {
+        "peakDaily": 138.21,
+        "peakDate": "2026-04-07",
+        "dec2025Monthly": 62.7,
+        "apr2026Monthly": 120.4
+      },
+      "sources": [
+        "GEP June 2026 figure 1.4.A (daily, upstream EIA)",
+        "World Bank Pink Sheet monthly via IndiaDataHub (CPWBBRENTO11M)"
+      ],
+      "crossCheck": "GEP daily means vs Pink Sheet monthly agree within $3.11 across 2025-06..2026-05. The GEP daily series ends 2026-05-24, so its May mean is partial.",
+      "caveat": "Quote the daily peak from the GEP series and monthly averages from the Pink Sheet; do not mix them."
+    },
+    {
+      "id": "india_realised_crude_price",
+      "status": "DERIVED",
+      "claim": "What India actually paid for crude peaked at $118.6 a barrel in MAY 2026, up 81% on February.",
+      "value": {
+        "peakMonth": "2026-05",
+        "peakUsdPerBbl": 118.570992135766,
+        "feb2026": 65.5911147105653,
+        "percentAboveFeb": 80.8,
+        "path": {
+          "2026-01": 61.4966073804367,
+          "2026-02": 65.5911147105653,
+          "2026-03": 95.7284010579953,
+          "2026-04": 115.293761295781,
+          "2026-05": 118.570992135766,
+          "2026-06": 101.408285330489,
+          "2026-07": 87.4241582466233
+        }
+      },
+      "sources": [
+        "IndiaDataHub ENPTAECRPR11M, India average crude oil import price (PPAC/MoPNG)"
+      ],
+      "crossCheck": "Reproduced from PPAC's own monthly volume and value tables: (import value / tonnes) / 7.33 gives 115.3, 118.6, 101.4, 87.4 for Apr-Jul 2026, matching the published series exactly. This is an EXTRACTION check, not independent corroboration - IndiaDataHub is redistributing PPAC, so both sides of the comparison have the same origin. 24 of 28 months agree within 0.1%, but March 2026 is off by 2.0% ($93.81 implied vs $95.73 published) and that month is quoted in the prose.",
+      "caveat": "This is NOT the Indian basket price. The basket is an FOB reference price and peaked a month earlier, in April; the import price is the realised landed cost and is the correct series for the import bill and the current account."
+    },
+    {
+      "id": "indian_basket_march_2026",
+      "status": "SUSPECT",
+      "claim": "PPAC's March 2026 Indian basket print of $113.49 cannot be reproduced from its stated methodology.",
+      "value": {
+        "basketMar2026": 113.49,
+        "brentMar2026": 103.7,
+        "dubaiMar2026": 91.9,
+        "explanation": "The basket is a weighted blend of Brent Dated and the Oman/Dubai average. With Brent at 103.7 and Dubai at 91.9, no weighting can produce 113.5."
+      },
+      "sources": [
+        "PPAC international prices of crude oil",
+        "World Bank Pink Sheet Brent and Dubai Fateh"
+      ],
+      "crossCheck": "PPAC pull and IndiaDataHub restatement agree exactly (mismatched months: none), so this is PPAC's own number, not an extraction error.",
+      "caveat": "Do not quote the March 2026 basket figure. It does not affect the import bill, which comes from separate volume and value tables."
+    },
+    {
+      "id": "same_barrels_bigger_bill",
+      "status": "VERIFIED",
+      "claim": "India imported essentially the same volume of crude in April-July 2026 as a year earlier and paid $22.8bn more for it.",
+      "value": {
+        "months": "April-July",
+        "volume2025Kt": 81518,
+        "volume2026Kt": 81886,
+        "volumeChangePercent": 0.45,
+        "value2025UsdBn": 40.55,
+        "value2026UsdBn": 63.37,
+        "valueChangePercent": 56.3,
+        "extraUsdBn": 22.82,
+        "value2025InrCrore": 348093,
+        "value2026InrCrore": 594133,
+        "extraInrCrore": 246040
+      },
+      "sources": [
+        "PPAC import/export of crude oil and petroleum products, monthly, reports 1 (volume), 2 (rupees), 3 (dollars)"
+      ],
+      "crossCheck": "Volume and value come from the same PPAC table, so the ratio is internally consistent: implied $/tonne divided by basket $/bbl has median 7.28 against a theoretical 7.33. The realised landed cost derived this way matches an independent import-price series to the cent for April-July 2026.",
+      "caveat": "April-July 2026 PPAC figures are provisional and get revised. Volume is thousand metric tonnes, not barrels. Do not divide the four-month value by the four-month simple-average basket price - FOB price and CIF value are not synchronised month to month."
+    },
+    {
+      "id": "lpg_volume_collapse",
+      "status": "VERIFIED",
+      "claim": "India's LPG imports fell by almost half in April-July 2026 while the price it paid rose by nearly 60%.",
+      "value": {
+        "volume2025Kt": 7079,
+        "volume2026Kt": 3703,
+        "volumeChangePercent": -47.7,
+        "monthly": {
+          "2025-11": 1816,
+          "2025-12": 1996,
+          "2026-01": 2172,
+          "2026-02": 1700,
+          "2026-03": 807,
+          "2026-04": 678,
+          "2026-05": 1131,
+          "2026-06": 1024,
+          "2026-07": 870
+        },
+        "priceFeb2026UsdPerTonne": 533.932496758641,
+        "pricePeakMonth": "2026-05",
+        "pricePeakUsdPerTonne": 851.523117655017,
+        "pricePeakPercentAboveFeb": 59.5
+      },
+      "sources": [
+        "PPAC import/export monthly, LPG line",
+        "IndiaDataHub ENPTAIPLPG11M, India average LPG import price"
+      ],
+      "crossCheck": "Volume and price are separate series from separate tables and move as the mechanism predicts: the collapse begins in March 2026, the first full month after the 27 February conflict start.",
+      "caveat": "Volumes are imports, not consumption. Domestic production and stock draw are not captured here."
+    },
+    {
+      "id": "hormuz_exposure_gradient",
+      "status": "VERIFIED",
+      "claim": "India's Gulf dependence is not uniform: 91.5% of its LPG comes from the Gulf but only 47.9% of its crude.",
+      "value": {
+        "lpg": {
+          "gulfSharePercent": 91.4,
+          "totalImportsUsdBn": 14.12,
+          "partnerCoveragePercent": 100.0,
+          "recomputedGulfShare": 91.4
+        },
+        "lng": {
+          "gulfSharePercent": 60.8,
+          "totalImportsUsdBn": 13.42,
+          "partnerCoveragePercent": 100.0,
+          "recomputedGulfShare": 60.8
+        },
+        "crude_oil": {
+          "gulfSharePercent": 47.9,
+          "totalImportsUsdBn": 138.86,
+          "partnerCoveragePercent": 100.0,
+          "recomputedGulfShare": 47.9
+        },
+        "dap": {
+          "gulfSharePercent": 41.7,
+          "totalImportsUsdBn": 4.91,
+          "partnerCoveragePercent": 100.0,
+          "recomputedGulfShare": 41.7
+        },
+        "petroleum_products": {
+          "gulfSharePercent": 27.2,
+          "totalImportsUsdBn": 9.78,
+          "partnerCoveragePercent": 100.0,
+          "recomputedGulfShare": 27.2
+        },
+        "urea": {
+          "gulfSharePercent": 20.9,
+          "totalImportsUsdBn": 4.69,
+          "partnerCoveragePercent": 100.0,
+          "recomputedGulfShare": 20.9
+        }
+      },
+      "sources": [
+        "UN Comtrade, India as reporter, calendar 2025, HS 271112+271113 (LPG), 270900 (crude), 271111 (LNG), 310530 (DAP), 2710 (products), 310210 (urea)"
+      ],
+      "crossCheck": "Partner rows sum to Comtrade's own reported World total at 100% coverage for every commodity, so the shares are not distorted by suppressed partners.",
+      "caveat": "Gulf here is the GEP's own seven-economy Middle East grouping and EXCLUDES Oman, whose ports lie outside the strait. Gulf share is an UPPER BOUND on Hormuz exposure: Saudi Arabia and the UAE have partial pipeline bypasses, though neither carries LPG at scale. Calendar 2025 is pre-shock and structural, which is the intended use."
+    },
+    {
+      "id": "muted_consumer_passthrough",
+      "status": "DERIVED",
+      "claim": "The shock barely reached the shelf: India's crude import price rose 81% but retail petrol inflation was 7.5% in July 2026.",
+      "value": {
+        "july2026Inflation": {
+          "general": 4.44,
+          "item_petrol": 7.5,
+          "item_diesel": 8.4,
+          "item_lpg": 4.99,
+          "item_kerosene": 3.47,
+          "transport_fuels_lubricants": 7.55,
+          "food_beverages": 5.24
+        },
+        "crudeImportPricePercentAboveFeb": 80.8
+      },
+      "sources": [
+        "IndiaDataHub 2024-base CPI (MOSPI), index levels; year-on-year computed here"
+      ],
+      "crossCheck": "No independent cross-check pulled for the 2024-base CPI.",
+      "caveat": "MOSPI rebased the CPI to 2024 from January 2026. The 2012-base series under data/series/mospi.IN.prices.cpi.* ENDS IN DECEMBER 2025 and is NOT splice-compatible: different basket, weights and classification tree. Year-on-year is computable only from December 2025 because the new index starts December 2024. These are inflation rates, not a measure of pass-through; a proper pass-through estimate needs pump prices and tax rates."
+    },
+    {
+      "id": "fiscal_landing",
+      "status": "DERIVED",
+      "claim": "The shock hit the budget through foregone excise (-22.4%) and the fertiliser subsidy (+68.2%), NOT through a petroleum subsidy.",
+      "value": {
+        "excise": {
+          "aprJun2025Crore": 55605,
+          "aprJun2026Crore": 43149,
+          "changePercent": -22.4
+        },
+        "customs": {
+          "aprJun2025Crore": 42414,
+          "aprJun2026Crore": 57741,
+          "changePercent": 36.1
+        },
+        "urea_subsidy": {
+          "aprJun2025Crore": 31523,
+          "aprJun2026Crore": 53034,
+          "changePercent": 68.2
+        },
+        "nutrient_based_subsidy": {
+          "aprJun2025Crore": 9499,
+          "aprJun2026Crore": 11632,
+          "changePercent": 22.5
+        },
+        "petroleum_subsidy": {
+          "aprJun2025Crore": 255,
+          "aprJun2026Crore": 282,
+          "changePercent": 10.4
+        },
+        "major_subsidies": {
+          "aprJun2025Crore": 83554,
+          "aprJun2026Crore": 114812,
+          "changePercent": 37.4
+        }
+      },
+      "sources": [
+        "Comptroller General of Accounts monthly accounts via IndiaDataHub"
+      ],
+      "crossCheck": "No independent cross-check against CGA's own published monthly report.",
+      "caveat": "April posts as a near-zero or negative month for excise in the CGA accounts every year (2025-04 was MINUS Rs 39 crore) in every year since 2003, though not in 2000-2002, so only April-June TOTALS are comparable. Union excise post-GST is overwhelmingly petroleum, and the GEP corroborates a fuel tax cut in India, so that attribution is sound. Customs covers ALL imports and India levies little basic customs duty on crude - do NOT attribute its 36% rise to oil. Excise and customs together were roughly flat, +2.9%."
+    },
+    {
+      "id": "forecast_unchanged_composition_changed",
+      "status": "VERIFIED",
+      "claim": "The World Bank RAISED India's 2026/27 forecast by 0.1pp in the same edition that cut 112 of 170 EMDE forecasts.",
+      "value": {
+        "indiaFyGrowth": {
+          "2023-24": 7.2,
+          "2024-25": 7.1,
+          "2025-26": 7.7,
+          "2026-27": 6.6,
+          "2027-28": 7.2,
+          "2028-29": 7.0
+        },
+        "revisionVsJanuary": {
+          "2026-27": 0.1,
+          "2027-28": 0.6
+        },
+        "januaryImplied": {
+          "2026-27": 6.5,
+          "2027-28": 6.6
+        },
+        "emdeRevisionCounts": {
+          "upgraded": 39,
+          "unchanged": 14,
+          "downgraded": 93,
+          "total": 146
+        },
+        "indiaRow": {
+          "economy": "India",
+          "region": "SAR",
+          "growth2025e": 7.7,
+          "growth2026f": 6.6,
+          "revision2026": 0.1,
+          "revision2027": 0.6,
+          "isSubAggregate": false
+        }
+      },
+      "sources": [
+        "GEP June 2026 Table 1.1 and Table 2.10",
+        "GEP June 2026 chapter 2 regional forecast tables"
+      ],
+      "crossCheck": "India's row reconciles across Table 1.1, Table 2.10 and the statistical annex, all giving 7.7 / 6.6 / +0.1.",
+      "caveat": "India reports on an April-March fiscal year, so its '2026' column is FY2026/27, while most economies in the same table are calendar-year. The 170 entries include some regional sub-aggregates, not only individual economies. India still DECELERATES from 7.7% to 6.6%; the upgrade is against the January forecast, not against last year."
+    },
+    {
+      "id": "sar_most_exposed_region",
+      "status": "VERIFIED",
+      "claim": "South Asia is the EMDE region most dependent on Middle East energy imports.",
+      "value": {
+        "rows": [
+          {
+            "region": "SAR",
+            "oil": 50.0,
+            "naturalGas": 33.3
+          },
+          {
+            "region": "MNA",
+            "oil": 42.9,
+            "naturalGas": 14.3
+          },
+          {
+            "region": "EAP",
+            "oil": 35.3,
+            "naturalGas": 0.0
+          },
+          {
+            "region": "ECA",
+            "oil": 11.8,
+            "naturalGas": 0.0
+          },
+          {
+            "region": "SSA",
+            "oil": 5.4,
+            "naturalGas": 0.0
+          },
+          {
+            "region": "LAC",
+            "oil": 0.0,
+            "naturalGas": 0.0
+          }
+        ],
+        "sar": {
+          "region": "SAR",
+          "oil": 50.0,
+          "naturalGas": 33.3
+        }
+      },
+      "sources": [
+        "GEP June 2026 figure 2.1.D"
+      ],
+      "crossCheck": "SAR tops both the oil and the natural gas column among all six EMDE regions.",
+      "caveat": "This measures the SHARE OF ECONOMIES in a region sourcing over 30% of imports from the Middle East - it is not a volume share, and with only six South Asian economies in the sample the 50% figure means three of six. It is not an India-specific statistic."
+    },
+    {
+      "id": "current_account_impact",
+      "status": "UNAVAILABLE",
+      "claim": "The current-account impact of the shock CANNOT yet be measured.",
+      "value": {
+        "latestQuarterPublished": "2026-03 (Jan-Mar 2026)",
+        "note": "RBI publishes balance of payments with roughly a quarter's lag. The conflict began 27 February 2026, so only one month of the latest published quarter is affected, and that quarter recorded a $7.1bn SURPLUS. The first shock quarter, April-June 2026, was not published as of 27 August 2026."
+      },
+      "sources": [
+        "IndiaDataHub EXBPNIDCUR11Q (RBI balance of payments, BPM6)"
+      ],
+      "crossCheck": "The four quarters of FY2025-26 sum to -$25.3bn, matching the -$25.365bn annual figure in data/series/mospi-esankhyiki.IN.macro.current_account_usd.json - the two series agree and differ only in frequency.",
+      "caveat": "Any current-account claim about the shock must be flagged as INFERRED from monthly merchandise trade, not measured. Do not write that the current account widened."
+    }
+  ]
+}

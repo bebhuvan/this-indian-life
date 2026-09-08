@@ -1,12 +1,24 @@
 // MOSPI eSankhyiki open REST API — CPI. No auth. See memory:
 // indica-mospi-esankhyiki-api. Base years 2010/2012/2024; series Current|Back.
 import { Agent } from "undici";
+import { constants } from "node:crypto";
 import { buildUrl, fetchJson } from "../lib/source-http.mjs";
 
-// api.mospi.gov.in serves an incomplete cert chain (SELF_SIGNED_CERT_IN_CHAIN).
-// Rather than disable TLS globally, relax verification for THIS host only via a
-// scoped undici dispatcher; every other request in the process keeps full TLS.
-const mospiDispatcher = new Agent({ connect: { rejectUnauthorized: false } });
+// api.mospi.gov.in needs two TLS concessions, both scoped to THIS host via a
+// dedicated undici dispatcher so every other request in the process keeps full TLS:
+//   1. It has served an incomplete cert chain (SELF_SIGNED_CERT_IN_CHAIN) in the past.
+//   2. Since ~mid-2026 it also requires unsafe legacy TLS renegotiation, which
+//      Node/undici and modern curl reject by default
+//      (ERR_SSL_UNSAFE_LEGACY_RENEGOTIATION_DISABLED). Without the flag below every
+//      MOSPI ingest dies with a bare "fetch failed".
+// A global preload dispatcher does NOT fix this, because the per-request dispatcher
+// passed here takes precedence over the global one.
+const mospiDispatcher = new Agent({
+  connect: {
+    rejectUnauthorized: false,
+    secureOptions: constants.SSL_OP_LEGACY_SERVER_CONNECT
+  }
+});
 
 const baseUrl = process.env.MOSPI_BASE_URL || "https://api.mospi.gov.in";
 

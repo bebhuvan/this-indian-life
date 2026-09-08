@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.global_population_by_class",
+  "title": "Share of assessed population by World Bank income group",
+  "sourceId": "worldbank-income-classifications",
+  "sourceIndicatorId": "Historical analytical classification + SP.POP.TOTL",
+  "sourceUrl": "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+  "unit": "% of assessed population",
+  "geography": {
+    "type": "global",
+    "id": "WORLD",
+    "name": "World"
+  },
+  "dimensions": [
+    "date",
+    "group",
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "Low income",
+      "value": 61.2,
+      "group": "1987",
+      "date": "1987"
+    },
+    {
+      "label": "Lower middle income",
+      "value": 13.0,
+      "group": "1987",
+      "date": "1987"
+    },
+    {
+      "label": "Upper middle income",
+      "value": 8.6,
+      "group": "1987",
+      "date": "1987"
+    },
+    {
+      "label": "High income",
+      "value": 17.2,
+      "group": "1987",
+      "date": "1987"
+    },
+    {
+      "label": "Low income",
+      "value": 9.4,
+      "group": "2025",
+      "date": "2025"
+    },
+    {
+      "label": "Lower middle income",
+      "value": 36.0,
+      "group": "2025",
+      "date": "2025"
+    },
+    {
+      "label": "Upper middle income",
+      "value": 37.6,
+      "group": "2025",
+      "date": "2025"
+    },
+    {
+      "label": "High income",
+      "value": 17.1,
+      "group": "2025",
+      "date": "2025"
+    }
+  ],
+  "metadata": {
+    "release": "World Bank 2025 estimates published July 2026",
+    "estimate": true,
+    "revisionWarning": "The 2025 values are estimates and may be revised.",
+    "rounding": "Displayed values should be rounded; derived ratios retain one decimal place.",
+    "method": "Country populations summed within each year's analytical income class, divided by the population of classified economies with population data.",
+    "inputs": [
+      "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+      "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=20000&date=1987:2025"
+    ]
+  }
+}

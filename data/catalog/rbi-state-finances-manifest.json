@@ -1,0 +1,422 @@
+[
+  {
+    "status": "ready",
+    "indicatorId": "fiscal.rbi_state_finances.selected_budget_heads",
+    "artifact": "data/series/rbi-state-finances.IN.selected_budget_heads.json",
+    "snapshot": "data/snapshots/rbi-state-finances/state-finances-2025-26-estates.3e73054c1a90.xlsx",
+    "rawHash": "3e73054c1a901f7117b98e00fafbd4e7202638ffb5e6572497d548d69bee761d",
+    "rows": 44928,
+    "fetchedAt": "2026-07-08T03:38:48.516688+00:00",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX"
+  },
+  {
+    "status": "ready",
+    "indicatorId": "fiscal.rbi_state_finances.fiscal_room_metrics",
+    "artifact": "data/series/rbi-state-finances.IN.fiscal_room_metrics.json",
+    "snapshot": "data/snapshots/rbi-state-finances/state-finances-2025-26-estates.3e73054c1a90.xlsx",
+    "rawHash": "3e73054c1a901f7117b98e00fafbd4e7202638ffb5e6572497d548d69bee761d",
+    "rows": 55296,
+    "fetchedAt": "2026-07-08T03:38:48.516688+00:00",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX"
+  },
+  {
+    "status": "ready",
+    "indicatorId": "fiscal.rbi_state_finances.denominator_metrics",
+    "artifact": "data/series/rbi-state-finances.IN.denominator_metrics.json",
+    "inputs": [
+      "data/series/rbi-state-finances.IN.selected_budget_heads.json",
+      "data/snapshots/estates/rbi_handbook_states.json"
+    ],
+    "rows": 4788,
+    "fetchedAt": "2026-07-08T03:39:33.760184+00:00",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "secondarySourceUrl": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.total_revenue_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "total_revenue Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.total_revenue_lakh_crore.json",
+    "title": "Total revenue, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.revenue_expenditure_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "total_expenditure Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.revenue_expenditure_lakh_crore.json",
+    "title": "Revenue expenditure, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.capital_outlay_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "capital_outlay Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.capital_outlay_lakh_crore.json",
+    "title": "Capital outlay, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.developmental_expenditure_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "developmental_expenditure Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.developmental_expenditure_lakh_crore.json",
+    "title": "Developmental revenue expenditure, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.non_developmental_expenditure_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "non_developmental_expenditure Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.non_developmental_expenditure_lakh_crore.json",
+    "title": "Non-developmental revenue expenditure, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.grants_in_aid_contributions_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "grants_in_aid_contributions Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.grants_in_aid_contributions_lakh_crore.json",
+    "title": "Grants-in-aid and contributions, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.education_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "education Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.education_lakh_crore.json",
+    "title": "Education revenue expenditure, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.medical_public_health_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "medical_public_health Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.medical_public_health_lakh_crore.json",
+    "title": "Medical and public health revenue expenditure, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.family_welfare_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "family_welfare Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.family_welfare_lakh_crore.json",
+    "title": "Family welfare revenue expenditure, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.interest_payments_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "interest_payments Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.interest_payments_lakh_crore.json",
+    "title": "Interest payments, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.pensions_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "pensions Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.pensions_lakh_crore.json",
+    "title": "Pensions, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.grants_from_centre_lakh_crore",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "grants_from_centre Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.grants_from_centre_lakh_crore.json",
+    "title": "Grants from Centre, all states and UTs",
+    "unit": "Rs lakh crore"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.own_revenue_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "own_revenue_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.own_revenue_share.json",
+    "title": "Own revenue share, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.central_transfer_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "central_transfer_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.central_transfer_share.json",
+    "title": "Central transfer share, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.interest_pensions_revenue_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "interest_pensions_revenue_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.interest_pensions_revenue_share.json",
+    "title": "Interest plus pensions share of revenue, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.capital_outlay_aggregate_spending_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "capital_outlay_aggregate_spending_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.capital_outlay_aggregate_spending_share.json",
+    "title": "Capital outlay share of revenue expenditure plus capital outlay, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.revenue_expenditure_aggregate_spending_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "revenue_expenditure_aggregate_spending_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.revenue_expenditure_aggregate_spending_share.json",
+    "title": "Revenue expenditure share of revenue expenditure plus capital outlay, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.education_expenditure_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "education_expenditure_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.education_expenditure_share.json",
+    "title": "Education share of revenue expenditure, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.health_family_welfare_expenditure_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "health_family_welfare_expenditure_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.health_family_welfare_expenditure_share.json",
+    "title": "Health plus family welfare share of revenue expenditure, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.revenue_balance_revenue_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "revenue_balance_revenue_share, actual, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.revenue_balance_revenue_share.json",
+    "title": "Revenue balance as share of total revenue, all states and UTs",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.developmental_expenditure_revenue_expenditure_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "developmental_expenditure Account divided by total_expenditure Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.developmental_expenditure_revenue_expenditure_share.json",
+    "title": "Developmental revenue expenditure as share of revenue expenditure",
+    "unit": "% of revenue expenditure"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.non_developmental_expenditure_revenue_expenditure_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "non_developmental_expenditure Account divided by total_expenditure Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.non_developmental_expenditure_revenue_expenditure_share.json",
+    "title": "Non-developmental revenue expenditure as share of revenue expenditure",
+    "unit": "% of revenue expenditure"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.grants_in_aid_contributions_revenue_expenditure_share",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "grants_in_aid_contributions Account divided by total_expenditure Account, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.grants_in_aid_contributions_revenue_expenditure_share.json",
+    "title": "Grants-in-aid and contributions as share of revenue expenditure",
+    "unit": "% of revenue expenditure"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.total_revenue_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "total_revenue_actual_to_budget, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.total_revenue_actual_to_budget.json",
+    "title": "Revenue actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.total_expenditure_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "total_expenditure_actual_to_budget, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.total_expenditure_actual_to_budget.json",
+    "title": "Revenue expenditure actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.capital_outlay_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "capital_outlay_actual_to_budget, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.capital_outlay_actual_to_budget.json",
+    "title": "Capital outlay actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.interest_payments_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "interest_payments_actual_to_budget, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.interest_payments_actual_to_budget.json",
+    "title": "Interest payments actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.pensions_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "pensions_actual_to_budget, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.pensions_actual_to_budget.json",
+    "title": "Pensions actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.grants_from_centre_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "grants_from_centre_actual_to_budget, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.grants_from_centre_actual_to_budget.json",
+    "title": "Grants from Centre actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.education_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "education Account divided by Budget Estimate, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.education_actual_to_budget.json",
+    "title": "Education actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.budget_realisation.health_family_welfare_actual_to_budget",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "medical_public_health+family_welfare Account divided by Budget Estimate, All States/UT",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.budget_realisation.health_family_welfare_actual_to_budget.json",
+    "title": "Health and family welfare actual as share of Budget Estimate",
+    "unit": "% of Budget Estimate"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.capital_outlay_composition_2024",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "selected capital outlay components as share of total capital outlay, 2023-24 Account",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.capital_outlay_composition_2024.json",
+    "title": "What capital outlay is spent on",
+    "unit": "% of capital outlay"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.central_transfer_share_2024",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "RBI State Finances · central tax share plus grants as share of total revenue · 2023-24 Account",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.central_transfer_share_2024.json",
+    "title": "States most dependent on central transfers",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.interest_pensions_revenue_share_2024",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "RBI State Finances · interest payments plus pensions as share of total revenue · 2023-24 Account",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.interest_pensions_revenue_share_2024.json",
+    "title": "Where interest and pensions take the most revenue",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.capital_outlay_aggregate_share_2024",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "RBI State Finances · capital outlay divided by revenue expenditure plus capital outlay · 2023-24 Account",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.capital_outlay_aggregate_share_2024.json",
+    "title": "Capital outlay as a share of direct state spending",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.revenue_expenditure_per_person_2024",
+    "sourceId": "rbi-state-finances+rbi-handbook-states",
+    "sourceIndicatorId": "RBI State Finances with RBI Handbook denominators · revenue expenditure per derived resident · 2023-24 Account",
+    "sourceUrl": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.revenue_expenditure_per_person_2024.json",
+    "title": "Revenue expenditure per resident",
+    "unit": "Rs per person"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.education_per_person_2024",
+    "sourceId": "rbi-state-finances+rbi-handbook-states",
+    "sourceIndicatorId": "RBI State Finances with RBI Handbook denominators · education revenue expenditure per derived resident · 2023-24 Account",
+    "sourceUrl": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.education_per_person_2024.json",
+    "title": "Education expenditure per resident",
+    "unit": "Rs per person"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.health_per_person_2024",
+    "sourceId": "rbi-state-finances+rbi-handbook-states",
+    "sourceIndicatorId": "RBI State Finances with RBI Handbook denominators · medical, public health and family welfare per derived resident · 2023-24 Account",
+    "sourceUrl": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.health_per_person_2024.json",
+    "title": "Health and family welfare expenditure per resident",
+    "unit": "Rs per person"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.revenue_expenditure_gsdp_2024",
+    "sourceId": "rbi-state-finances+rbi-handbook-states",
+    "sourceIndicatorId": "RBI State Finances with RBI Handbook denominators · revenue expenditure as share of current-price GSDP · 2023-24 Account",
+    "sourceUrl": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.revenue_expenditure_gsdp_2024.json",
+    "title": "Revenue expenditure against state economy",
+    "unit": "% of GSDP"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.revenue_balance_gsdp_2024",
+    "sourceId": "rbi-state-finances+rbi-handbook-states",
+    "sourceIndicatorId": "RBI State Finances with RBI Handbook denominators · revenue balance as share of current-price GSDP · 2023-24 Account",
+    "sourceUrl": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.revenue_balance_gsdp_2024.json",
+    "title": "Revenue balance against state economy",
+    "unit": "% of GSDP"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.capital_outlay_gsdp_2024",
+    "sourceId": "rbi-state-finances+rbi-handbook-states",
+    "sourceIndicatorId": "RBI State Finances with RBI Handbook denominators · capital outlay as share of current-price GSDP · 2023-24 Account",
+    "sourceUrl": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.capital_outlay_gsdp_2024.json",
+    "title": "Capital outlay against state economy",
+    "unit": "% of GSDP"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.state.fiscal_room_scatter_2024",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "interest plus pensions vs capital outlay share, 2023-24 Account",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.state.fiscal_room_scatter_2024.json",
+    "title": "Locked-in bills versus capital outlay",
+    "unit": "%"
+  },
+  {
+    "indicatorId": "fiscal.state_budgets.tax_basket_2017_2018_2024",
+    "sourceId": "rbi-state-finances",
+    "sourceIndicatorId": "selected own-tax components as share of own tax revenue",
+    "sourceUrl": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCS/ESTATES23012026AB138FB463474EBFBCC03A8FC878C45A.XLSX",
+    "artifactPath": "data/series/rbi-state-finances.chart.fiscal.state_budgets.tax_basket_2017_2018_2024.json",
+    "title": "GST rewired the states' own-tax basket",
+    "unit": "% of own tax revenue"
+  }
+]

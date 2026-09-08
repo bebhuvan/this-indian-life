@@ -1,0 +1,316 @@
+{
+  "sourceId": "worldbank-income-classifications",
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "release": "2025 estimates published July 2026",
+  "revisionWarning": "The 2025 GNI, GNI per capita, GDP, GDP PPP, and population values are estimates and may be revised.",
+  "sourceUrls": {
+    "history": "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+    "current_groups": "https://ddh-openapi.worldbank.org/resources/DR0095333/download",
+    "gni": "https://datacatalogfiles.worldbank.org/ddh-published/0038127/DR0046430/GNI.xlsx",
+    "gnipc": "https://datacatalogfiles.worldbank.org/ddh-published/0038128/DR0046433/GNIPC.xlsx",
+    "gdp": "https://datacatalogfiles.worldbank.org/ddh-published/0038130/DR0046439/GDP.xlsx",
+    "gdp_ppp": "https://datacatalogfiles.worldbank.org/ddh-published/0038129/DR0046436/GDP_PPP.xlsx",
+    "population": "https://datacatalogfiles.worldbank.org/ddh-published/0038126/DR0046427/POP.xlsx",
+    "blog": "https://blogs.worldbank.org/en/opendata/who-moves-up-and-why--a-closer-look-at-the-new-world-bank-group-",
+    "country_groups": "https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups",
+    "atlas_method": "https://datahelpdesk.worldbank.org/knowledgebase/articles/77933-what-is-the-world-bank-atlas-method"
+  },
+  "snapshots": {
+    "history": {
+      "path": "data/snapshots/worldbank-income-classifications/history.9a85a3d3d5a1.xlsx",
+      "sha256": "9a85a3d3d5a1b16ae7ecf25d7344387f2dede3931875163d4157bf7f2fd25810"
+    },
+    "current_groups": {
+      "path": "data/snapshots/worldbank-income-classifications/current_groups.2896f7c57b92.xlsx",
+      "sha256": "2896f7c57b92835b00acd114c03dfd75bf84208e931b446b3f1b15f412bcb969"
+    },
+    "gni": {
+      "path": "data/snapshots/worldbank-income-classifications/gni.37760903ab07.xlsx",
+      "sha256": "37760903ab07011c98b1c398c4cbda41613e2e2682b17da6814bb1afcc9a7994"
+    },
+    "gnipc": {
+      "path": "data/snapshots/worldbank-income-classifications/gnipc.e5a56fd89b61.xlsx",
+      "sha256": "e5a56fd89b6136590a4f4fc6d333fd79c8fa4596330c694d2c18cc0b90d74fcc"
+    },
+    "gdp": {
+      "path": "data/snapshots/worldbank-income-classifications/gdp.215cecd6f6f2.xlsx",
+      "sha256": "215cecd6f6f248f4db9c5f758bf061f618e07afaf868103b33feaa1d40c3ef6d"
+    },
+    "gdp_ppp": {
+      "path": "data/snapshots/worldbank-income-classifications/gdp_ppp.b23f0bf6f81c.xlsx",
+      "sha256": "b23f0bf6f81c4f23cb1af8a3989306ff2240b81bb4ff0e63f918fd09876e4b55"
+    },
+    "population": {
+      "path": "data/snapshots/worldbank-income-classifications/population.6bd6674bfaff.xlsx",
+      "sha256": "6bd6674bfaff39e3e336baa11794e9e9d483730f8c95ec4ffc6268dd9d6c6236"
+    },
+    "blog": {
+      "path": "data/snapshots/worldbank-income-classifications/blog.bd65f7ded358.html",
+      "sha256": "bd65f7ded358ff74223a76dbcea5d2f06452c30a7d8561cc1a2a4e1a200d572d"
+    },
+    "country_groups": {
+      "path": "data/snapshots/worldbank-income-classifications/country_groups.f41ad818585f.html",
+      "sha256": "f41ad818585f43bdcd2f162cd6fae63cf179d14c04f9af5306d0058efb3d19df"
+    },
+    "atlas_method": {
+      "path": "data/snapshots/worldbank-income-classifications/atlas_method.341413ffe98a.html",
+      "sha256": "341413ffe98afa7b3831b877de0bdd8617700cd129cf323ce392faf651741f0c"
+    },
+    "wdi_gni_pc": {
+      "path": "data/snapshots/worldbank-income-classifications/wdi.NY.GNP.PCAP.CD.all.1987-2025.b3a575695bde.json",
+      "sha256": "b3a575695bdeb8a7767dbd703985406c8bf1e1eacef72a8ef184e59f8dc4f94d"
+    },
+    "wdi_population": {
+      "path": "data/snapshots/worldbank-income-classifications/wdi.SP.POP.TOTL.all.1987-2025.8325d050f989.json",
+      "sha256": "8325d050f989115d01bbe6fa1d1b66f3313f158e41a37c94144a6f83b64a369b"
+    },
+    "wdi_gni_lcu": {
+      "path": "data/snapshots/worldbank-income-classifications/wdi.NY.GNP.MKTP.CN.IND.2015-2025.d68f7b825ba6.json",
+      "sha256": "d68f7b825ba6f0a7c1d8d6f58f34c68147a0043d4ff2b457b469c7d95d70f6a9"
+    },
+    "wdi_under5": {
+      "path": "data/snapshots/worldbank-income-classifications/wdi.SH.DYN.MORT.IND_CHN_IDN_VNM_PHL_LKA_THA_MYS.1987-2025.e59ae8df707d.json",
+      "sha256": "e59ae8df707da43b44512f6e2bc4d1c8a3a4c658b78b8c647de44d21dfa4e32a"
+    },
+    "wdi_manufacturing": {
+      "path": "data/snapshots/worldbank-income-classifications/wdi.NV.IND.MANF.ZS.IND_CHN_IDN_VNM_PHL_LKA_THA_MYS.1987-2025.ef6ae4b29eb3.json",
+      "sha256": "ef6ae4b29eb3693fac40f9c103afc87b32ace6dd5736eff569657a9b5cc73f7e"
+    }
+  },
+  "artifacts": [
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_atlas_gni_total",
+      "sourceIndicatorId": "GNI 2025",
+      "artifact": "data/series/worldbank-income-classifications.india-atlas-gni-total.json",
+      "records": 1,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_gdp_market_total",
+      "sourceIndicatorId": "GDP 2025",
+      "artifact": "data/series/worldbank-income-classifications.india-gdp-market-total.json",
+      "records": 1,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_gdp_ppp_total",
+      "sourceIndicatorId": "GDP_PPP 2025",
+      "artifact": "data/series/worldbank-income-classifications.india-gdp-ppp-total.json",
+      "records": 1,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_population",
+      "sourceIndicatorId": "POP 2025",
+      "artifact": "data/series/worldbank-income-classifications.india-population.json",
+      "records": 1,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_total_and_per_person_ranks",
+      "sourceIndicatorId": "GDP, GDP_PPP and GNIPC 2025 workbook rankings",
+      "artifact": "data/series/worldbank-income-classifications.india-total-and-per-person-ranks.json",
+      "records": 4,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.atlas_and_ppp_gni_per_capita",
+      "sourceIndicatorId": "GNIPC 2025 Atlas and PPP",
+      "artifact": "data/series/worldbank-income-classifications.atlas-and-ppp-gni-per-capita.json",
+      "records": 12,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.progress_to_upper_middle.ind",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical thresholds",
+      "artifact": "data/series/worldbank-income-classifications.progress-to-upper-middle.ind.json",
+      "records": 39,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.progress_to_upper_middle.chn",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical thresholds",
+      "artifact": "data/series/worldbank-income-classifications.progress-to-upper-middle.chn.json",
+      "records": 39,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.progress_to_upper_middle.idn",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical thresholds",
+      "artifact": "data/series/worldbank-income-classifications.progress-to-upper-middle.idn.json",
+      "records": 39,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.progress_to_upper_middle.vnm",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical thresholds",
+      "artifact": "data/series/worldbank-income-classifications.progress-to-upper-middle.vnm.json",
+      "records": 37,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.progress_to_upper_middle.bgd",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical thresholds",
+      "artifact": "data/series/worldbank-income-classifications.progress-to-upper-middle.bgd.json",
+      "records": 39,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.progress_to_upper_middle.lka",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical thresholds",
+      "artifact": "data/series/worldbank-income-classifications.progress-to-upper-middle.lka.json",
+      "records": 39,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.progress_to_upper_middle.threshold",
+      "sourceIndicatorId": "Historical analytical upper-middle-income threshold",
+      "artifact": "data/series/worldbank-income-classifications.progress-to-upper-middle.threshold.json",
+      "records": 39,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.global_population_by_class",
+      "sourceIndicatorId": "Historical analytical classification + SP.POP.TOTL",
+      "artifact": "data/series/worldbank-income-classifications.global-population-by-class.json",
+      "records": 8,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.lower_middle_population_concentration",
+      "sourceIndicatorId": "Historical analytical classification + SP.POP.TOTL",
+      "artifact": "data/series/worldbank-income-classifications.lower-middle-population-concentration.json",
+      "records": 6,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.years_from_india_position_to_crossing",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical classifications and thresholds",
+      "artifact": "data/series/worldbank-income-classifications.years-from-india-position-to-crossing.json",
+      "records": 6,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.all_economies_crossing_experience",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical analytical classifications and thresholds",
+      "artifact": "data/series/worldbank-income-classifications.all-economies-crossing-experience.json",
+      "records": 4,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.upper_middle_crossing_reversals",
+      "sourceIndicatorId": "Historical analytical classifications, 1987-2025",
+      "artifact": "data/series/worldbank-income-classifications.upper-middle-crossing-reversals.json",
+      "records": 3,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_bangladesh_ruler_swap",
+      "sourceIndicatorId": "GNIPC 2025 Atlas and PPP",
+      "artifact": "data/series/worldbank-income-classifications.india-bangladesh-ruler-swap.json",
+      "records": 2,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.ppp_atlas_multiple",
+      "sourceIndicatorId": "GNIPC 2025 Atlas and PPP",
+      "artifact": "data/series/worldbank-income-classifications.ppp-atlas-multiple.json",
+      "records": 12,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.movers_gni_pc_change",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + World Bank mover analysis",
+      "artifact": "data/series/worldbank-income-classifications.movers-gni-pc-change.json",
+      "records": 6,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.classification_and_lending_ladder",
+      "sourceIndicatorId": "2025 analytical and operational thresholds",
+      "artifact": "data/series/worldbank-income-classifications.classification-and-lending-ladder.json",
+      "records": 5,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_crossing_arithmetic",
+      "sourceIndicatorId": "NY.GNP.PCAP.CD + historical upper-middle-income threshold",
+      "artifact": "data/series/worldbank-income-classifications.india-crossing-arithmetic.json",
+      "records": 4,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_progress_accounting_bridge",
+      "sourceIndicatorId": "NY.GNP.MKTP.CN + NY.GNP.PCAP.CD + SP.POP.TOTL + historical thresholds",
+      "artifact": "data/series/worldbank-income-classifications.india-progress-accounting-bridge.json",
+      "records": 5,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.under5_at_upper_middle_crossing",
+      "sourceIndicatorId": "SH.DYN.MORT + historical analytical classifications",
+      "artifact": "data/series/worldbank-income-classifications.under5-at-upper-middle-crossing.json",
+      "records": 8,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.manufacturing_at_upper_middle_crossing",
+      "sourceIndicatorId": "NV.IND.MANF.ZS + historical analytical classifications",
+      "artifact": "data/series/worldbank-income-classifications.manufacturing-at-upper-middle-crossing.json",
+      "records": 8,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.india_gni_current_lcu",
+      "sourceIndicatorId": "NY.GNP.MKTP.CN",
+      "artifact": "data/series/worldbank-income-classifications.india-gni-current-lcu.json",
+      "records": 11,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    },
+    {
+      "status": "ready",
+      "indicatorId": "econ.income_classification.household_consumption_rural_urban",
+      "sourceIndicatorId": "HCES Figure 1 rural and urban",
+      "artifact": "data/series/worldbank-income-classifications.household-consumption-rural-urban.json",
+      "records": 24,
+      "fetchedAt": "2026-07-17T05:07:35.255235Z"
+    }
+  ],
+  "releaseChecks": {
+    "indiaAtlasGniPerCapita": 2760.0,
+    "indiaPppGniPerCapita": 11600.0,
+    "indiaAtlasGniMillionUsd": 4036219.06183314,
+    "indiaGdpMillionUsd": 3956067.11577163,
+    "indiaGdpPppMillionInternationalUsd": 17197369.286822,
+    "indiaPopulationThousand": 1463865.525,
+    "upperMiddleEntry": 4636.0,
+    "highIncomeEntry": 14375.0
+  }
+}

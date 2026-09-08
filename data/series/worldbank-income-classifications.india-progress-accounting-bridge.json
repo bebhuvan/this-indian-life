@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.india_progress_accounting_bridge",
+  "title": "An accounting bridge from India's 2015 position to its 2025 position",
+  "sourceId": "worldbank-income-classifications",
+  "sourceIndicatorId": "NY.GNP.MKTP.CN + NY.GNP.PCAP.CD + SP.POP.TOTL + historical thresholds",
+  "sourceUrl": "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+  "unit": "% of upper-middle-income threshold",
+  "geography": {
+    "type": "global",
+    "id": "WORLD",
+    "name": "World"
+  },
+  "dimensions": [
+    "date",
+    "label",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "Starting position, 2015",
+      "value": 39.1,
+      "date": "2015"
+    },
+    {
+      "label": "After local-currency GNI growth",
+      "value": 98.1,
+      "date": "2025"
+    },
+    {
+      "label": "After population growth",
+      "value": 89.0,
+      "date": "2025"
+    },
+    {
+      "label": "After Atlas conversion changed",
+      "value": 68.4,
+      "date": "2025"
+    },
+    {
+      "label": "Observed position after threshold moved",
+      "value": 59.5,
+      "date": "2025"
+    }
+  ],
+  "metadata": {
+    "release": "World Bank 2025 estimates published July 2026",
+    "estimate": true,
+    "revisionWarning": "The 2025 values are estimates and may be revised.",
+    "rounding": "Displayed values should be rounded; derived ratios retain one decimal place.",
+    "method": "Start with India's 2015 Atlas GNI-per-capita ratio, then sequentially apply growth in local-currency GNI, inverse population growth, the inverse change in the implicit Atlas conversion factor, and the inverse change in the upper-middle threshold. The factors multiply exactly to the 2025 ratio.",
+    "assumptions": "The middle bars are an ordered accounting bridge, not causal counterfactuals. Reordering the factors changes intermediate levels but not the final result.",
+    "implicitAtlasFactorLcuPerUsd": {
+      "2015": 64.87,
+      "2025": 84.44
+    },
+    "inputs": [
+      "https://api.worldbank.org/v2/country/IND/indicator/NY.GNP.MKTP.CN?format=json&per_page=20000&date=2015:2025",
+      "https://api.worldbank.org/v2/country/all/indicator/NY.GNP.PCAP.CD?format=json&per_page=20000&date=1987:2025",
+      "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=20000&date=1987:2025",
+      "https://ddh-openapi.worldbank.org/resources/DR0095334/download"
+    ]
+  }
+}

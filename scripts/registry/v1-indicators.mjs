@@ -1529,6 +1529,146 @@ export const v1Questions = [
     ]
   },
   {
+    id: "q.econ.fdi_development",
+    slug: "did-foreign-money-build-india",
+    question: "Did foreign money build India? What 56 years of FDI data show.",
+    priority: "core",
+    // Built Aug 2026 from UNCTAD WIR 2026. Deliberately NOT the same story as
+    // q.econ.foreign_investment, which answers "is money fleeing?" on RBI gross/net
+    // arithmetic. This one answers "did FDI ever build the place?" on the denominator
+    // UNCTAD publishes and RBI does not: FDI as a share of gross fixed capital formation.
+    // Sources: UNCTADstat US.FdiFlowsStock (WIR 2026 vintage, updated 2026-08-10),
+    // UNCTADstat US.PopTotal, World Bank BX.KLT.DINV.WD.GD.ZS (1970-2025, independent
+    // of UNCTAD; the two agree on India to 0.115pp max, 0.033pp mean), and WIR 2026
+    // annex table 14 for announced greenfield. Series live in the extfin.fdi.dev.*
+    // namespace because the older extfin.fdi.*.unctad.* series are a 2024 vintage
+    // owned by q.econ.foreign_investment — same source, different vintage, never mix.
+    indicators: [
+      "extfin.fdi.dev.gfcf_share.IND.pct", "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "extfin.fdi.dev.gfcf_share.CHN.pct", "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "extfin.fdi.dev.gfcf_share.POL.pct",
+      "extfin.fdi.dev.gdp_share_wb.IND.pct", "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+      "extfin.fdi.dev.gdp_share_wb.LCN.pct", "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+      "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+      "extfin.fdi.dev.world_rank.IN", "extfin.fdi.dev.cumulative_per_person.usd",
+      "extfin.fdi.dev.inward_flow.SEA.usd", "extfin.fdi.dev.inward_flow.CHN.usd",
+      "extfin.fdi.dev.inward_flow.IND.usd", "extfin.fdi.dev.india_share_developing.pct",
+      "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+      "extfin.fdi.dev.greenfield_announced.IN.usd", "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+      "extfin.fdi.dev.era_summary.usd",
+      "extfin.fdi.dev.inward_stock.IN.usd", "extfin.fdi.dev.outward_stock.IN.usd",
+      "extfin.fdi.dev.gfcf_share.PAK.pct", "extfin.fdi.dev.gfcf_share.BGD.pct",
+      "extfin.fdi.dev.gfcf_share.LKA.pct", "extfin.fdi.dev.mna_sales.IN.usd",
+      "extfin.fdi.dev.greenfield_outward.IN.usd", "extfin.fdi.dev.top100_mne_home_economy.count"
+    ],
+    core: [
+      "extfin.fdi.dev.gfcf_share.IND.pct", "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "extfin.fdi.dev.gfcf_share.CHN.pct", "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "extfin.fdi.dev.gfcf_share.POL.pct",
+      "extfin.fdi.dev.gdp_share_wb.IND.pct", "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+      "extfin.fdi.dev.gdp_share_wb.LCN.pct", "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+      "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+      "extfin.fdi.dev.world_rank.IN", "extfin.fdi.dev.cumulative_per_person.usd",
+      "extfin.fdi.dev.inward_flow.SEA.usd", "extfin.fdi.dev.inward_flow.CHN.usd",
+      "extfin.fdi.dev.inward_flow.IND.usd", "extfin.fdi.dev.india_share_developing.pct",
+      "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+      "extfin.fdi.dev.greenfield_announced.IN.usd", "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+      "extfin.fdi.dev.era_summary.usd",
+      "extfin.fdi.dev.inward_stock.IN.usd", "extfin.fdi.dev.outward_stock.IN.usd",
+      "extfin.fdi.dev.gfcf_share.PAK.pct", "extfin.fdi.dev.gfcf_share.BGD.pct",
+      "extfin.fdi.dev.gfcf_share.LKA.pct", "extfin.fdi.dev.mna_sales.IN.usd",
+      "extfin.fdi.dev.greenfield_outward.IN.usd", "extfin.fdi.dev.top100_mne_home_economy.count"
+    ],
+    context: [],
+    visualPlan: [
+      // --- ACT 0: THE ANSWER, STATED AS A SHARE ---
+      { indicator: "extfin.fdi.dev.gfcf_share.IND.pct", chart: "line", title: "How much of what India builds is paid for by foreigners", size: "hero", window: "full", beat: "answer", unit: "percent of gross fixed capital formation",
+        why: "The whole article in one line: FDI has never financed more than about a tenth of Indian capital formation.", read: "Inward FDI as a share of gross fixed capital formation, the money India spends each year on factories, machines and buildings.", watch: "Peak 10.3% in 2008, 8.3% in 2020, 3.1% in 2025. A dollar figure hides this; the share is the honest measure." },
+      // --- ACT 1: THE LONG ARC, ON A SECOND SOURCE ---
+      { chart: "multiLine", title: "Fifty-six years, and India is almost always the bottom line", size: "hero", beat: "long-arc", unit: "percent of GDP",
+        indicator: "extfin.fdi.dev.gdp_share_wb.IND.pct",
+        series: [
+          { indicator: "extfin.fdi.dev.gdp_share_wb.IND.pct", label: "India", emphasis: true },
+          { indicator: "extfin.fdi.dev.gdp_share_wb.LCN.pct", label: "Latin America & Caribbean" },
+          { indicator: "extfin.fdi.dev.gdp_share_wb.EAS.pct", label: "East Asia & Pacific" },
+          { indicator: "extfin.fdi.dev.gdp_share_wb.SSF.pct", label: "Sub-Saharan Africa" },
+          { indicator: "extfin.fdi.dev.gdp_share_wb.WLD.pct", label: "World" }
+        ],
+        why: "World Bank data starts in 1970 and covers the closed decades UNCTAD's series cannot reach.", read: "FDI net inflows as a share of GDP for India and the developing regions, 1970 to 2025.", watch: "India has never once beaten Latin America across 56 years, has beaten Sub-Saharan Africa in five, and East Asia in three. An independent source from the rest of this page." },
+      { indicator: "extfin.fdi.dev.world_rank.IN", chart: "line", title: "India did climb, and the climb was real", size: "feature", window: "full", beat: "rank", unit: "rank among reporting economies",
+        why: "The success story is genuine and has to be told before it is qualified.", read: "India's rank by FDI received among the 170 to 203 economies reporting each year.", watch: "43rd in 1990, 7th in 2020, 12th in 2025. Lower is better. The 2008-09 leap partly reflects richer recipients collapsing faster." },
+      // --- ACT 2: TWO WAYS TO DEVELOP ---
+      { chart: "multiLine", title: "Two different ways to build a country", size: "hero", beat: "models", unit: "percent of gross fixed capital formation",
+        indicator: "extfin.fdi.dev.gfcf_share.IND.pct",
+        series: [
+          { indicator: "extfin.fdi.dev.gfcf_share.IND.pct", label: "India", emphasis: true },
+          { indicator: "extfin.fdi.dev.gfcf_share.VNM.pct", label: "Viet Nam" },
+          { indicator: "extfin.fdi.dev.gfcf_share.POL.pct", label: "Poland" },
+          { indicator: "extfin.fdi.dev.gfcf_share.CHN.pct", label: "China" },
+          { indicator: "extfin.fdi.dev.gfcf_share.KOR.pct", label: "Korea" }
+        ],
+        why: "The FDI-led model and the domestic-capital model, on one axis.", read: "Share of each country's capital formation financed by foreign direct investment.", watch: "Viet Nam has not been below 13.8% since 2011; India averaged 4.9% over the same years, nearer Korea's 2.6% than Viet Nam's 15.0%." },
+      { chart: "multiLine", title: "India is the South Asian norm, not the exception", size: "feature", beat: "south-asia", unit: "percent of gross fixed capital formation",
+        indicator: "extfin.fdi.dev.gfcf_share.IND.pct",
+        series: [
+          { indicator: "extfin.fdi.dev.gfcf_share.IND.pct", label: "India", emphasis: true },
+          { indicator: "extfin.fdi.dev.gfcf_share.PAK.pct", label: "Pakistan" },
+          { indicator: "extfin.fdi.dev.gfcf_share.LKA.pct", label: "Sri Lanka" },
+          { indicator: "extfin.fdi.dev.gfcf_share.BGD.pct", label: "Bangladesh" }
+        ],
+        why: "The obvious objection is that a low share is an Indian failure. The neighbours say it is a regional pattern.", read: "Share of each country's capital formation financed by foreign investment.", watch: "Pakistan has beaten India in 23 of 36 years and in each of the last three; Sri Lanka in 22, including the last four. Their capital formation is small and recently crisis-hit, so a modest dollar figure is a large share of it." },
+      { indicator: "extfin.fdi.dev.cumulative_per_person.usd", chart: "tableBars", title: "Thirty-six years of foreign investment, per Indian", size: "feature", beat: "per-person", unit: "US$ per person (1990-2025 cumulative)",
+        why: "Scale intuition: India's total is large only because India is large.", read: "Every dollar of FDI an economy received from 1990 to 2025, divided by its 2025 population.", watch: "India $547, China $2,243, Viet Nam $2,652, even Sri Lanka $813. A 36-year flow over a one-year population, so a rough intuition and not a precise ratio; Singapore and Ireland are conduits as much as destinations." },
+      // --- ACT 3: THE REALLOCATION THAT PASSED INDIA BY ---
+      { chart: "multiLine", title: "Where the factories actually went", size: "hero", beat: "reallocation", unit: "US$ million",
+        indicator: "extfin.fdi.dev.inward_flow.IND.usd",
+        series: [
+          { indicator: "extfin.fdi.dev.inward_flow.SEA.usd", label: "Southeast Asia" },
+          { indicator: "extfin.fdi.dev.inward_flow.CHN.usd", label: "China" },
+          { indicator: "extfin.fdi.dev.inward_flow.IND.usd", label: "India", emphasis: true }
+        ],
+        why: "The China-plus-one reallocation is the central economic event of the last decade, and the data says where it landed.", read: "Annual FDI inflows to Southeast Asia, China and India.", watch: "India averaged $38.2bn a year in 2013-17 and $37.6bn in 2021-25. Southeast Asia went from $126bn to $219bn. UNCTAD's Southeast Asia aggregate includes Singapore, much of whose inflow is booked rather than built." },
+      { indicator: "extfin.fdi.dev.india_share_developing.pct", chart: "line", title: "India's slice of the developing world's investment", size: "small", window: "full", beat: "share", unit: "percent",
+        why: "The share tells you whether India is gaining ground on its actual competitors, not on the world.", read: "India's share of all FDI flowing to developing economies.", watch: "Peaked above 10% in the pandemic year when everyone else stopped, then fell back to 4.3%." },
+      // --- ACT 4: WHAT IS ACTUALLY HERE ---
+      { indicator: "extfin.fdi.dev.inward_stock_gdp_peers.pct", chart: "tableBars", title: "How much of the economy foreigners actually own", size: "feature", beat: "stock", unit: "percent of GDP",
+        why: "Flows are noisy; the accumulated stock is what decades of policy actually produced.", read: "Inward FDI stock as a share of GDP in 2025.", watch: "India 13.5%, Viet Nam 55%, Thailand 67%. Book value and preliminary for 2025." },
+      { chart: "multiLine", title: "Building something new, or buying something old", size: "feature", beat: "build-vs-buy", unit: "US$ million",
+        indicator: "extfin.fdi.dev.inward_flow.IND.usd",
+        series: [
+          { indicator: "extfin.fdi.dev.inward_flow.IND.usd", label: "FDI recorded" },
+          { indicator: "extfin.fdi.dev.mna_sales.IN.usd", label: "Foreign purchases of Indian companies" }
+        ],
+        why: "Foreign money either builds new capacity or changes the nameplate on capacity that already exists. Only one of those adds to capital formation.", read: "Recorded FDI against the net value of foreign acquisitions of Indian companies.", watch: "2018 was the Walmart-Flipkart year: $33.6bn of acquisitions against $42.2bn of FDI. In 2024 and 2025 the acquisition line is negative, meaning foreign firms were net sellers. Deal values are compiled differently from balance-of-payments FDI and are not a subset of it, so read the shape and never the difference." },
+      { chart: "multiLine", title: "What gets announced, and what turns up", size: "feature", beat: "announcement-gap", unit: "US$ million",
+        indicator: "extfin.fdi.dev.greenfield_announced.IN.usd",
+        series: [
+          { indicator: "extfin.fdi.dev.greenfield_announced.IN.usd", label: "Announced greenfield projects" },
+          { indicator: "extfin.fdi.dev.inward_flow_recorded.IN.usd", label: "FDI recorded in the balance of payments" }
+        ],
+        why: "India announced a record project pipeline in the same year it booked its smallest inflow in a decade.", read: "Announced greenfield project value against FDI actually recorded, 2003 to 2025.", watch: "Different concepts on different clocks: an announcement is an intention that takes years to build or quietly lapses, and it comes from a commercial project database, not official statistics. The gap is suggestive, not arithmetic." },
+      // --- ACT 5: THE ERAS, AND THE MATURITY READING ---
+      { indicator: "extfin.fdi.dev.era_summary.usd", chart: "tableBars", title: "India's FDI, era by era", size: "feature", beat: "eras", unit: "US$ billion received over the period",
+        why: "Five distinct policy eras, and the best one is not the most recent.", read: "Total FDI received in each era, with the average share of capital formation it financed.", watch: "2015-2020 was India's genuine best: $285bn and 6.3% of capital formation. 2021-2025: $188bn and 3.3%." },
+      { chart: "multiLine", title: "Indian firms announce projects abroad too", size: "small", beat: "outward-greenfield", unit: "US$ million",
+        indicator: "extfin.fdi.dev.greenfield_announced.IN.usd",
+        series: [
+          { indicator: "extfin.fdi.dev.greenfield_announced.IN.usd", label: "Announced into India" },
+          { indicator: "extfin.fdi.dev.greenfield_outward.IN.usd", label: "Announced abroad by Indian firms" }
+        ],
+        why: "The maturity story shows up in announced projects as well as in the accumulated stock.", read: "Announced greenfield project value in both directions.", watch: "Indian firms announced $25.3bn of overseas projects in 2025 and $42.3bn in 2022. Both lines are intentions, not recorded money." },
+      { chart: "multiLine", title: "Two stakes converging", size: "feature", beat: "maturity", unit: "US$ million",
+        indicator: "extfin.fdi.dev.inward_stock.IN.usd",
+        series: [
+          { indicator: "extfin.fdi.dev.inward_stock.IN.usd", label: "What foreigners own in India" },
+          { indicator: "extfin.fdi.dev.outward_stock.IN.usd", label: "What India owns abroad" }
+        ],
+        why: "The closing gap is the sign of a maturing economy, not a crisis, and it is where this article hands off.", read: "Accumulated FDI stock in each direction, at book value.", watch: "13.4 times in 1990, 1.9 times in 2025. Why net FDI has collapsed is a separate question, answered in the foreign-investment article." },
+      { indicator: "extfin.fdi.dev.top100_mne_home_economy.count", chart: "tableBars", title: "Where the developing world's biggest firms come from", size: "small", beat: "mnes", unit: "number of firms in the top 100",
+        why: "A country that does not build multinationals stays a destination for other people's capital rather than a source of its own.", read: "Home economies of the 100 largest non-financial multinationals from developing and transition economies, ranked by foreign assets.", watch: "China 41, India 4. In the separate list of the world's 100 largest multinationals India has none, while Korea has three and China nine." }
+    ]
+  },
+  {
     id: "q.econ.lrs_remittances",
     slug: "how-much-money-did-indians-send-abroad",
     question: "How much money did Indians send abroad under RBI's LRS?",
@@ -1735,6 +1875,258 @@ export const v1Questions = [
     indicators: ["econ.idh.per_capita_nominal_gdp", "econ.gdp.per_capita_current_usd"],
     core: ["econ.idh.per_capita_nominal_gdp", "econ.gdp.per_capita_current_usd"],
     context: ["econ.idh.nominal_gdp_annual"]
+  },
+  {
+    id: "q.econ.income_classification",
+    slug: "is-india-really-a-lower-middle-income-country",
+    question: "What does India's lower-middle-income label really measure?",
+    priority: "core",
+    // World Bank 2025 income-classification release, published July 2026.
+    // The historical ratios divide Atlas GNI per capita by each year's moving
+    // upper-middle-income threshold. Scenario dates are arithmetic continuations,
+    // never forecasts. MoSPI HCES supplies the independent household reality check.
+    indicators: [
+      "econ.income_classification.progress_to_upper_middle.ind",
+      "econ.income_classification.global_population_by_class",
+      "econ.income_classification.classification_and_lending_ladder"
+    ],
+    core: [
+      "econ.income_classification.progress_to_upper_middle.ind",
+      "econ.income_classification.progress_to_upper_middle.threshold",
+      "econ.income_classification.india_total_and_per_person_ranks",
+      "econ.income_classification.progress_to_upper_middle.chn",
+      "econ.income_classification.progress_to_upper_middle.idn",
+      "econ.income_classification.progress_to_upper_middle.vnm",
+      "econ.income_classification.progress_to_upper_middle.bgd",
+      "econ.income_classification.progress_to_upper_middle.lka",
+      "econ.income_classification.global_population_by_class",
+      "econ.income_classification.lower_middle_population_concentration",
+      "econ.income_classification.all_economies_crossing_experience",
+      "econ.income_classification.upper_middle_crossing_reversals",
+      "econ.income_classification.ppp_atlas_multiple",
+      "econ.income_classification.india_progress_accounting_bridge",
+      "econ.income_classification.movers_gni_pc_change",
+      "econ.income_classification.classification_and_lending_ladder",
+      "econ.income_classification.india_crossing_arithmetic",
+      "econ.income_classification.under5_at_upper_middle_crossing",
+      "econ.income_classification.manufacturing_at_upper_middle_crossing",
+      "econ.income_classification.household_consumption_rural_urban"
+    ],
+    context: [
+      "econ.gdp.per_capita_current_usd",
+      "econ.nas.gni_nominal",
+      "econ.income_classification.india_gni_current_lcu",
+      "econ.income_classification.india_atlas_gni_total",
+      "econ.income_classification.india_gdp_market_total",
+      "econ.income_classification.india_gdp_ppp_total",
+      "econ.income_classification.india_population",
+      "econ.income_classification.atlas_and_ppp_gni_per_capita"
+    ],
+    furtherReading: [
+      { label: "World Bank, who moved up in the 2025 income classifications and why", url: "https://blogs.worldbank.org/en/opendata/who-moves-up-and-why--a-closer-look-at-the-new-world-bank-group-" },
+      { label: "World Bank country and lending groups for fiscal year 2027", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups" },
+      { label: "How the World Bank Atlas method works", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/77933-what-is-the-world-bank-atlas-method" },
+      { label: "Why the World Bank uses GNI per capita for income classification", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/378831-why-use-gni-per-capita-to-classify-economies-into" },
+      { label: "International Development Association graduates, including India's fiscal year 2014 graduation", url: "https://ida.worldbank.org/en/about/borrowing-countries/ida-graduates" },
+      { label: "World Development Report 2024 on the middle-income trap", url: "https://www.worldbank.org/en/publication/wdr2024" }
+    ],
+    visualPlan: [
+      {
+        indicator: "econ.income_classification.progress_to_upper_middle.ind",
+        chart: "multiLine",
+        title: "India has reached three-fifths of the next income line",
+        size: "hero",
+        window: "full",
+        beat: "headline",
+        unit: "% of that year's upper-middle-income threshold",
+        subtitle: "Atlas-method GNI per person as a share of each year's upper-middle entry threshold · 1987-2025 · 2025 is an estimate",
+        series: [
+          { indicator: "econ.income_classification.progress_to_upper_middle.ind", label: "India", emphasis: true },
+          { indicator: "econ.income_classification.progress_to_upper_middle.threshold", label: "Upper-middle entry", color: "#8d8d8d", dash: true }
+        ],
+        why: "The label is easier to understand as a moving race between India's Atlas income and the threshold it must clear.",
+        read: "India reached 59.5% of the upper-middle entry line in 2025, up from 24.6% when it first became lower middle income in 2007.",
+        watch: "Both the numerator and the threshold move. This is progress relative to the line, not a fixed-dollar journey."
+      },
+      {
+        indicator: "econ.income_classification.india_total_and_per_person_ranks",
+        chart: "tableBars",
+        title: "India ranks 3rd in PPP output, 132nd in PPP income per person",
+        size: "feature",
+        beat: "size-versus-per-person",
+        unit: "World Bank workbook rank · 1 is highest",
+        subtitle: "World Bank 2025 release ranks · PPP GDP among 197 economies; PPP GNI per person among 196 · market GDP among 204; Atlas GNI per person among 200",
+        why: "The apparent contradiction disappears when total output and income per person are placed beside each other.",
+        read: "India ranks 3rd or 6th by the size of the whole economy, but 132nd or 156th after national income is divided by population.",
+        watch: "A shorter bar is a higher rank. The ranked universe is economies with a published estimate in each workbook."
+      },
+      {
+        indicator: "econ.income_classification.ppp_atlas_multiple",
+        chart: "tableBars",
+        title: "PPP lifts India's per-person figure more than fourfold",
+        size: "feature",
+        beat: "purchasing-power-gap",
+        unit: "PPP-to-Atlas multiple",
+        subtitle: "PPP GNI per person divided by Atlas GNI per person · India and 11 selected economies · World Bank 2025 estimates",
+        why: "The gap between the two rulers is systematic, not an India-only quirk.",
+        read: "Divide PPP GNI per person by Atlas GNI per person. India's purchasing-power figure is about 4.2 times its classification figure.",
+        watch: "A large multiple does not mean the economy has hidden dollars. It means local prices are lower than prices implicit in market exchange rates."
+      },
+      {
+        indicator: "econ.income_classification.global_population_by_class",
+        chart: "tableBars",
+        title: "The world moved from low income into the middle",
+        size: "feature",
+        beat: "world-shift",
+        unit: "% of assessed population",
+        subtitle: "Share of people in economies with both a World Bank classification and population estimate · 1987 and 2025",
+        why: "The biggest global change since 1987 is the migration of billions into the two middle-income groups.",
+        read: "Compare the four population shares in 1987 with the same four shares in 2025.",
+        watch: "The bars cover economies that had both a classification and population data in that year. This is population, not a count of countries."
+      },
+      {
+        indicator: "econ.income_classification.lower_middle_population_concentration",
+        chart: "tableBars",
+        title: "Half the lower-middle-income population lives in India",
+        size: "feature",
+        beat: "group-concentration",
+        unit: "% of lower-middle-income population",
+        subtitle: "Population share within economies classified lower middle income in 2025 · 47 economies with population data",
+        why: "The label sounds like a club of similar countries, but its population is dominated by one very large member.",
+        read: "India accounts for 49.7% of people living in lower-middle-income economies; the next four largest members together account for about 26.8%.",
+        watch: "This is population concentration inside the category, not India's share of the number of lower-middle-income economies."
+      },
+      {
+        indicator: "econ.income_classification.progress_to_upper_middle.ind",
+        chart: "multiLine",
+        title: "One income label, six very different journeys",
+        size: "feature",
+        beat: "peer-journeys",
+        unit: "% of that year's upper-middle-income threshold",
+        subtitle: "Atlas GNI per person divided by each year's upper-middle threshold · India and five Asian comparators · 1987-2025",
+        fromYear: 1987,
+        refLine: { value: 100, label: "upper-middle entry" },
+        series: [
+          { indicator: "econ.income_classification.progress_to_upper_middle.ind", label: "India", emphasis: true },
+          { indicator: "econ.income_classification.progress_to_upper_middle.chn", label: "China" },
+          { indicator: "econ.income_classification.progress_to_upper_middle.idn", label: "Indonesia" },
+          { indicator: "econ.income_classification.progress_to_upper_middle.vnm", label: "Vietnam" },
+          { indicator: "econ.income_classification.progress_to_upper_middle.bgd", label: "Bangladesh" },
+          { indicator: "econ.income_classification.progress_to_upper_middle.lka", label: "Sri Lanka" }
+        ],
+        why: "Countries can accelerate, stall, cross, or fall back even when they once shared the same category.",
+        read: "Each line is a country's Atlas GNI per person divided by that year's upper-middle threshold. Crossing 100 means entering the upper-middle group.",
+        watch: "This is not a growth-rate chart. Exchange rates, inflation, rebasing and population revisions can move the ratio too."
+      },
+      {
+        indicator: "econ.income_classification.all_economies_crossing_experience",
+        chart: "tableBars",
+        title: "Fewer than three in ten peers crossed within a decade",
+        size: "feature",
+        beat: "full-historical-cohort",
+        unit: "% crossing at least once",
+        subtitle: "67 post-1987 lower-middle-income economies first observed at 55-65% of the line · Kaplan-Meier estimate retaining 26 unfinished journeys",
+        why: "The full cohort corrects the success bias created by looking only at Asian economies that completed the transition.",
+        read: "About 13.3% crossed within five years, 29.2% within ten, 48.0% within fifteen and 64.3% within twenty.",
+        watch: "This handles right-censoring, but it is still heterogeneous world history, not India's probability or forecast."
+      },
+      {
+        indicator: "econ.income_classification.upper_middle_crossing_reversals",
+        chart: "tableBars",
+        title: "Crossing did not stick for 29% of observed movers",
+        size: "feature",
+        beat: "reversals",
+        unit: "% of observed first crossers",
+        subtitle: "Outcome after 76 first observed moves from low or lower middle into upper middle or high income · 1987-2025 history window",
+        why: "A global count shows that Indonesia and Sri Lanka are examples of a wider pattern rather than curiosities.",
+        read: "Of 76 observed first crossers, 54 never fell below upper middle, 16 fell and recovered, and 6 were below the line in 2025.",
+        watch: "The history begins in 1987, so these are observed transitions within the workbook window, not every transition ever."
+      },
+      {
+        indicator: "econ.income_classification.india_progress_accounting_bridge",
+        chart: "tableBars",
+        title: "India's GNI rose fast; population, conversion and the threshold absorbed much of it",
+        size: "hero",
+        beat: "india-mechanics",
+        unit: "% of upper-middle-income threshold",
+        subtitle: "Sequential accounting identity for India's position relative to the upper-middle line · local-currency GNI, population, Atlas conversion and threshold · 2015-2025",
+        why: "The bridge opens India's own classification machinery instead of relying only on stories about countries that moved this year.",
+        read: "India starts at 39.1% in 2015. Applying local-currency GNI growth lifts the bridge to 98.1%, before population, the Atlas conversion and the rising threshold bring the observed result to 59.5%.",
+        watch: "Only the first and last bars are observed positions. Intermediate bars are ordered accounting steps; changing the order changes them but not the final identity."
+      },
+      {
+        indicator: "econ.income_classification.movers_gni_pc_change",
+        chart: "tableBars",
+        title: "Some countries moved because the measurement changed",
+        size: "feature",
+        beat: "classification-mechanics",
+        unit: "% change from 2024",
+        subtitle: "One-year change in Atlas GNI per person for the six 2025 upward movers · mechanism identified in the World Bank release",
+        why: "The 2025 movers expose how growth, recovery, rebasing and population revisions can all change GNI per person.",
+        read: "The bars show the one-year change in Atlas GNI per person; the labels identify the mechanism highlighted by the World Bank.",
+        watch: "The percentage change is not a causal decomposition. Exchange rates and revisions can sit beside real economic change."
+      },
+      {
+        indicator: "econ.income_classification.classification_and_lending_ladder",
+        chart: "tableBars",
+        title: "An upper-middle label would not end World Bank lending",
+        size: "feature",
+        beat: "what-changes",
+        unit: "Atlas GNI per person, US$",
+        subtitle: "India's Atlas GNI per person beside 2025 analytical income boundaries and separate IDA and IBRD operational thresholds",
+        why: "Crossing into upper middle income does not automatically end World Bank borrowing or trigger graduation.",
+        read: "Place India's $2,760 beside the analytical income lines and the separate IDA and IBRD operational thresholds.",
+        watch: "Operational lending decisions use more than income. Creditworthiness, policy and institutional judgments also matter."
+      },
+      {
+        indicator: "econ.income_classification.india_crossing_arithmetic",
+        chart: "tableBars",
+        title: "India's past gives a 2036-2046 range, not a forecast",
+        size: "feature",
+        beat: "when",
+        unit: "years after 2025",
+        subtitle: "Years implied by continuing four historical growth rates in India's ratio to the moving threshold · arithmetic scenarios from 2025",
+        why: "Several historical windows reveal how sensitive the crossing date is to the pace one chooses.",
+        read: "Continue each window's growth in India's ratio to the threshold until it reaches 100%. The implied dates run from about 2036 to 2046.",
+        watch: "These are arithmetic continuations, not forecasts. Future growth, inflation, exchange rates, revisions and thresholds will differ."
+      },
+      {
+        indicator: "econ.income_classification.under5_at_upper_middle_crossing",
+        chart: "tableBars",
+        title: "The income line does not set a child-survival standard",
+        size: "feature",
+        beat: "social-outcomes",
+        unit: "under-five deaths per 1,000 live births",
+        subtitle: "Under-five deaths per 1,000 live births · India 2024 UN IGME estimate versus seven Asian peers in their first upper-middle year",
+        why: "A national income label does not guarantee a common level of basic human outcomes.",
+        read: "India is shown at its latest modelled observation while still lower middle income; each peer is shown in its own first-crossing year.",
+        watch: "This is not a same-year ranking. WDI publishes UN IGME model estimates, not India's official SRS series; data years and definitions must not be treated as identical."
+      },
+      {
+        indicator: "econ.income_classification.manufacturing_at_upper_middle_crossing",
+        chart: "tableBars",
+        title: "India has a smaller factory base than most Asian crossers",
+        size: "feature",
+        beat: "economic-structure",
+        unit: "manufacturing value added, % of GDP",
+        subtitle: "Manufacturing value added as a share of GDP · India latest available year versus seven Asian peers at first upper-middle classification",
+        why: "The route to the same income threshold can rest on very different production structures.",
+        read: "Compare India's latest manufacturing share with each peer's share at its first upper-middle classification.",
+        watch: "Manufacturing is one part of a development model, not a single-cause explanation for income mobility."
+      },
+      {
+        indicator: "econ.income_classification.household_consumption_rural_urban",
+        chart: "tableBars",
+        title: "'Lower middle income' does not describe a typical household",
+        size: "hero",
+        beat: "household-reality",
+        unit: "₹ per person per month",
+        subtitle: "Average monthly consumption per person across rural and urban fractile classes · MoSPI HCES 2023-24 · consumption, not income",
+        why: "The national average must end by meeting the distribution it hides.",
+        read: "The poorest 5% average ₹1,677 in rural India and ₹2,376 in urban India; the richest 5% average ₹10,137 and ₹20,310 respectively.",
+        watch: "Consumption is not GNI, income or wealth, and rural and urban prices differ. The point is the spread inside India, not a conversion between the measures."
+      }
+    ]
   },
   {
     id: "q.econ.inflation",
@@ -7671,6 +8063,184 @@ export const v1Questions = [
       { chart: "rankedChange", indicator: "states.fiscal.own_tax_share.st.kerala", diverging: true, series: [{ indicator: "states.fiscal.own_tax_share.st.andhra_pradesh", label: "Andhra Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.assam", label: "Assam" }, { indicator: "states.fiscal.own_tax_share.st.bihar", label: "Bihar" }, { indicator: "states.fiscal.own_tax_share.st.chhattisgarh", label: "Chhattisgarh" }, { indicator: "states.fiscal.own_tax_share.st.delhi", label: "Delhi" }, { indicator: "states.fiscal.own_tax_share.st.gujarat", label: "Gujarat" }, { indicator: "states.fiscal.own_tax_share.st.haryana", label: "Haryana" }, { indicator: "states.fiscal.own_tax_share.st.himachal_pradesh", label: "Himachal Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.jammu_and_kashmir", label: "Jammu and Kashmir" }, { indicator: "states.fiscal.own_tax_share.st.jharkhand", label: "Jharkhand" }, { indicator: "states.fiscal.own_tax_share.st.karnataka", label: "Karnataka" }, { indicator: "states.fiscal.own_tax_share.st.kerala", label: "Kerala" }, { indicator: "states.fiscal.own_tax_share.st.madhya_pradesh", label: "Madhya Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.maharashtra", label: "Maharashtra" }, { indicator: "states.fiscal.own_tax_share.st.odisha", label: "Odisha" }, { indicator: "states.fiscal.own_tax_share.st.punjab", label: "Punjab" }, { indicator: "states.fiscal.own_tax_share.st.rajasthan", label: "Rajasthan" }, { indicator: "states.fiscal.own_tax_share.st.tamil_nadu", label: "Tamil Nadu" }, { indicator: "states.fiscal.own_tax_share.st.telangana", label: "Telangana" }, { indicator: "states.fiscal.own_tax_share.st.uttar_pradesh", label: "Uttar Pradesh" }, { indicator: "states.fiscal.own_tax_share.st.uttarakhand", label: "Uttarakhand" }, { indicator: "states.fiscal.own_tax_share.st.west_bengal", label: "West Bengal" }], size: "feature", unit: "% of total revenue", subtitle: "RBI e-STATES · change in own-tax share, first decade vs latest decade", title: "Who built revenue muscle while the window was open", why: "The test for the young states is whether they strengthen their own tax base before they age; this shows who has.", read: "Each row compares a state's own-tax share in its first decade of data with its most recent decade. States to the right strengthened their own revenue; states to the left slid toward more dependence.", watch: "Own-tax share can fall simply because central transfers rose faster, not because tax effort weakened; read it alongside the levels in the map above." }
     ]
   },
+  {
+    id: "q.econ.state_finances",
+    slug: "how-much-room-state-budgets-have",
+    question: "How much room do Indian states really have in their budgets?",
+    priority: "core",
+    // RBI State Finances story built from the 2025-26 e-STATES workbook, with
+    // RBI Handbook GSDP/population denominators where raw rupees would mislead.
+    indicators: [
+      "fiscal.state_budgets.revenue_expenditure_lakh_crore",
+      "fiscal.state_budgets.capital_outlay_lakh_crore",
+      "fiscal.state_budgets.capital_outlay_composition_2024",
+      "fiscal.state_budgets.own_revenue_share",
+      "fiscal.state_budgets.central_transfer_share",
+      "fiscal.state_budgets.interest_pensions_revenue_share",
+      "fiscal.state_budgets.capital_outlay_aggregate_spending_share",
+      "fiscal.state_budgets.revenue_balance_revenue_share",
+      "fiscal.state_budgets.developmental_expenditure_revenue_expenditure_share",
+      "fiscal.state_budgets.non_developmental_expenditure_revenue_expenditure_share",
+      "fiscal.state_budgets.grants_in_aid_contributions_revenue_expenditure_share",
+      "fiscal.state_budgets.education_expenditure_share",
+      "fiscal.state_budgets.health_family_welfare_expenditure_share",
+      "fiscal.state_budgets.budget_realisation.capital_outlay_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.interest_payments_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.grants_from_centre_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.education_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.health_family_welfare_actual_to_budget",
+      "fiscal.state_budgets.state.central_transfer_share_2024",
+      "fiscal.state_budgets.state.interest_pensions_revenue_share_2024",
+      "fiscal.state_budgets.state.capital_outlay_aggregate_share_2024",
+      "fiscal.state_budgets.state.fiscal_room_scatter_2024",
+      "fiscal.state_budgets.state.revenue_expenditure_per_person_2024",
+      "fiscal.state_budgets.state.education_per_person_2024",
+      "fiscal.state_budgets.state.health_per_person_2024",
+      "fiscal.state_budgets.state.capital_outlay_gsdp_2024",
+      "fiscal.state_budgets.state.revenue_balance_gsdp_2024",
+      "fiscal.state_budgets.tax_basket_2017_2018_2024"
+    ],
+    core: [
+      "fiscal.state_budgets.revenue_expenditure_lakh_crore",
+      "fiscal.state_budgets.capital_outlay_lakh_crore",
+      "fiscal.state_budgets.capital_outlay_composition_2024",
+      "fiscal.state_budgets.own_revenue_share",
+      "fiscal.state_budgets.central_transfer_share",
+      "fiscal.state_budgets.interest_pensions_revenue_share",
+      "fiscal.state_budgets.capital_outlay_aggregate_spending_share",
+      "fiscal.state_budgets.revenue_balance_revenue_share",
+      "fiscal.state_budgets.developmental_expenditure_revenue_expenditure_share",
+      "fiscal.state_budgets.non_developmental_expenditure_revenue_expenditure_share",
+      "fiscal.state_budgets.grants_in_aid_contributions_revenue_expenditure_share",
+      "fiscal.state_budgets.education_expenditure_share",
+      "fiscal.state_budgets.health_family_welfare_expenditure_share",
+      "fiscal.state_budgets.budget_realisation.capital_outlay_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.interest_payments_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.grants_from_centre_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.education_actual_to_budget",
+      "fiscal.state_budgets.budget_realisation.health_family_welfare_actual_to_budget",
+      "fiscal.state_budgets.state.central_transfer_share_2024",
+      "fiscal.state_budgets.state.interest_pensions_revenue_share_2024",
+      "fiscal.state_budgets.state.capital_outlay_aggregate_share_2024",
+      "fiscal.state_budgets.state.fiscal_room_scatter_2024",
+      "fiscal.state_budgets.state.revenue_expenditure_per_person_2024",
+      "fiscal.state_budgets.state.education_per_person_2024",
+      "fiscal.state_budgets.state.health_per_person_2024",
+      "fiscal.state_budgets.state.capital_outlay_gsdp_2024",
+      "fiscal.state_budgets.state.revenue_balance_gsdp_2024",
+      "fiscal.state_budgets.tax_basket_2017_2018_2024"
+    ],
+    context: [],
+    visualPlan: [
+      { chart: "multiLine", title: "State budgets are mostly running money", size: "hero", beat: "running-money", unit: "Rs lakh crore", subtitle: "RBI State Finances e-STATES · All States/UT Account values · fiscal year ending 1991 to 2024",
+        series: [
+          { indicator: "fiscal.state_budgets.revenue_expenditure_lakh_crore", label: "Revenue expenditure" },
+          { indicator: "fiscal.state_budgets.capital_outlay_lakh_crore", label: "Capital outlay" }
+        ],
+        why: "The first scale check: in 2023-24, states spent about Rs 40.24 lakh crore on revenue expenditure and Rs 7.47 lakh crore on capital outlay.",
+        read: "Revenue expenditure is the running budget. Capital outlay is the asset-building line. Compare levels, not growth rates.",
+        watch: "Do not call this total state spending. The workbook structure used here combines revenue expenditure with capital outlay for a narrow direct-spending lens." },
+      { chart: "multiLine", title: "Where the money comes from", size: "feature", beat: "revenue-mix", unit: "% of total revenue", subtitle: "RBI State Finances e-STATES · own revenue vs central tax share plus grants · All States/UT Account values",
+        series: [
+          { indicator: "fiscal.state_budgets.own_revenue_share", label: "Own revenue" },
+          { indicator: "fiscal.state_budgets.central_transfer_share", label: "Central transfers" }
+        ],
+        why: "A large part of state budgets is not raised by the states themselves.",
+        read: "The two lines add to 100%. Central transfers are tax devolution plus grants from the Centre.",
+        watch: "A high transfer share can be equalisation by design, not proof of bad state effort." },
+      { chart: "line", indicator: "fiscal.state_budgets.interest_pensions_revenue_share", title: "A quarter of revenue is already spoken for", size: "feature", beat: "committed-spending", unit: "% of total revenue", subtitle: "RBI State Finances e-STATES · interest payments plus pensions as share of total revenue · All States/UT Account values",
+        why: "Interest and pensions are the visible rigid bills in this workbook.",
+        read: "The line is interest payments plus pensions divided by total revenue. In 2023-24 it was about 25.4%.",
+        watch: "This is not all committed spending. Salaries are not separable in the same clean way here." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.capital_outlay_composition_2024", title: "What capital outlay is spent on", size: "feature", beat: "capital-outlay-composition", unit: "% of capital outlay", subtitle: "RBI State Finances e-STATES · selected Appendix-4 capital outlay heads as share of total capital outlay · 2023-24 Account",
+        why: "Capital outlay is not one generic investment bucket; the raw workbook shows the asset-building mix.",
+        read: "Each named bar is a non-overlapping capital-outlay component divided by total capital outlay. Other capital outlay is the residual.",
+        watch: "This is not completed infrastructure or asset quality. It is an accounting flow by budget head." },
+      { chart: "line", indicator: "fiscal.state_budgets.capital_outlay_aggregate_spending_share", title: "Capital outlay is smaller than the speech version", size: "feature", beat: "investment-share", unit: "% of revenue expenditure plus capital outlay", subtitle: "RBI State Finances e-STATES · capital outlay divided by revenue expenditure plus capital outlay · All States/UT Account values",
+        why: "The investment line looks larger when it is divided only by revenue expenditure; this chart uses a direct-spending denominator.",
+        read: "In 2023-24 capital outlay was about 15.7% of revenue expenditure plus capital outlay.",
+        watch: "If you use capital outlay divided by revenue expenditure, the 2023-24 figure is 18.6%. Label the denominator." },
+      { chart: "line", indicator: "fiscal.state_budgets.revenue_balance_revenue_share", title: "The running account is still in deficit", size: "feature", beat: "revenue-balance", unit: "% of total revenue", subtitle: "RBI State Finances e-STATES · revenue balance as share of total revenue · All States/UT Account values",
+        why: "Fiscal room shrinks when the running budget itself is not covered by revenue.",
+        read: "Values below zero are revenue deficits: revenue expenditure exceeds revenue receipts. In 2023-24 the all-state revenue balance was about -2.4% of revenue.",
+        watch: "Revenue balance excludes the capital account. It is not the same as the overall fiscal deficit." },
+      { chart: "multiLine", title: "Budgets promise capital outlay, accounts trim it", size: "feature", beat: "budget-realisation", unit: "% of Budget Estimate", subtitle: "RBI State Finances e-STATES · Account value divided by Budget Estimate · All States/UT, 2014-15 to 2023-24",
+        series: [
+          { indicator: "fiscal.state_budgets.budget_realisation.capital_outlay_actual_to_budget", label: "Capital outlay" },
+          { indicator: "fiscal.state_budgets.budget_realisation.interest_payments_actual_to_budget", label: "Interest payments" },
+          { indicator: "fiscal.state_budgets.budget_realisation.grants_from_centre_actual_to_budget", label: "Grants from Centre" }
+        ],
+        why: "The flexible line gets cut more often than the contractual line.",
+        read: "Values below 100 mean actuals came in below the Budget Estimate for that year.",
+        watch: "This is not a blame chart. Revenue shocks and central grants can force cuts after budgets are passed." },
+      { chart: "multiLine", title: "Education and health are not fully protected either", size: "feature", beat: "social-budget-realisation", unit: "% of Budget Estimate", subtitle: "RBI State Finances e-STATES · Account value divided by Budget Estimate · All States/UT, 2014-15 to 2023-24",
+        series: [
+          { indicator: "fiscal.state_budgets.budget_realisation.education_actual_to_budget", label: "Education" },
+          { indicator: "fiscal.state_budgets.budget_realisation.health_family_welfare_actual_to_budget", label: "Health + family welfare" },
+          { indicator: "fiscal.state_budgets.budget_realisation.capital_outlay_actual_to_budget", label: "Capital outlay" }
+        ],
+        why: "The human budget should not be treated as a slogan; accounts show whether planned education and health outlays were actually spent.",
+        read: "Values below 100 mean actual spending came in below the Budget Estimate for that same fiscal year.",
+        watch: "Health can jump above 100 in shock years. Do not read one pandemic-era point as a permanent spending commitment." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.central_transfer_share_2024", title: "States most dependent on transfers", size: "feature", beat: "state-transfer-ranking", unit: "% of total revenue", subtitle: "RBI State Finances e-STATES · central tax share plus grants as share of total revenue · 2023-24 Account",
+        why: "Transfer dependence is highly uneven across the federation.",
+        read: "Each bar is one state or UT with legislature. Higher means a larger share of revenue came from the Centre.",
+        watch: "Hill and northeastern states are structurally different; grants are partly meant to equalise geography and fiscal capacity." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.interest_pensions_revenue_share_2024", title: "Where interest and pensions lock the budget", size: "feature", beat: "state-lock-ranking", unit: "% of total revenue", subtitle: "RBI State Finances e-STATES · interest payments plus pensions as share of total revenue · 2023-24 Account",
+        why: "The squeeze is not spread evenly. Punjab, Kerala and Himachal sit at a very different starting point from Odisha or Delhi.",
+        read: "Each bar is interest plus pensions divided by total revenue in 2023-24.",
+        watch: "Interest reflects past borrowing; pensions reflect past hiring and pension rules. The chart deliberately mixes the two rigid lines." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.capital_outlay_aggregate_share_2024", title: "Where capital outlay gets squeezed", size: "feature", beat: "state-capital-ranking", unit: "% of revenue expenditure plus capital outlay", subtitle: "RBI State Finances e-STATES · capital outlay share of revenue expenditure plus capital outlay · 2023-24 Account",
+        why: "A state can have a big budget and still put little of this direct-spending lens into capital outlay.",
+        read: "The chart shows the lowest and highest states or UTs with legislatures by capital-outlay share.",
+        watch: "Capital outlay is not completed infrastructure. A high share can still hide project delays or low asset quality." },
+      { chart: "scatterXY", indicator: "fiscal.state_budgets.state.fiscal_room_scatter_2024", title: "Locked bills versus capital outlay", size: "feature", beat: "room-scatter", unit: "%", subtitle: "RBI State Finances e-STATES · interest plus pensions vs capital outlay share · 2023-24 Account",
+        why: "The article's central idea is visible state by state: some budgets carry heavy old bills and little capital outlay.",
+        read: "Rightward means more revenue tied up in interest and pensions. Upward means more direct spending is capital outlay.",
+        watch: "A scatter is not a causal model. It tells you where to ask harder questions." },
+      { chart: "multiLine", title: "Developmental spending still dominates, but less than before", size: "feature", beat: "developmental-composition", unit: "% of revenue expenditure", subtitle: "RBI State Finances e-STATES · revenue expenditure split by broad accounting category · All States/UT Account values",
+        series: [
+          { indicator: "fiscal.state_budgets.developmental_expenditure_revenue_expenditure_share", label: "Developmental" },
+          { indicator: "fiscal.state_budgets.non_developmental_expenditure_revenue_expenditure_share", label: "Non-developmental" },
+          { indicator: "fiscal.state_budgets.grants_in_aid_contributions_revenue_expenditure_share", label: "Grants-in-aid" }
+        ],
+        why: "The running budget is not one blob. Its broad accounting mix shows whether the squeeze is taking over the whole revenue side.",
+        read: "The three lines divide revenue expenditure into developmental, non-developmental, and grants-in-aid/contributions. They should be read as accounting categories.",
+        watch: "Developmental does not mean effective, and non-developmental does not mean waste. These are budget classifications, not outcome measures." },
+      { chart: "multiLine", title: "Education's slice has drifted down; health stays small", size: "feature", beat: "education-health-shares", unit: "% of revenue expenditure", subtitle: "RBI State Finances e-STATES · education and health plus family welfare as share of revenue expenditure · All States/UT Account values",
+        series: [
+          { indicator: "fiscal.state_budgets.education_expenditure_share", label: "Education" },
+          { indicator: "fiscal.state_budgets.health_family_welfare_expenditure_share", label: "Health + family welfare" }
+        ],
+        why: "A state budget story without education and health is incomplete; these are the everyday public services people look for.",
+        read: "Education was about 16.9% of revenue expenditure in 2023-24, down from about 21.6% in 1990-91. Health plus family welfare was about 6.1%.",
+        watch: "Shares are not rupees per student or patient, and they say nothing by themselves about learning or health outcomes." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.revenue_expenditure_per_person_2024", title: "How much government each resident gets", size: "feature", beat: "per-person-state", unit: "Rs per person", subtitle: "RBI State Finances e-STATES plus RBI Handbook denominators · revenue expenditure per derived resident · 2023-24 Account",
+        why: "Raw state totals mostly tell you population size. Per-person spending tells a more useful story.",
+        read: "The chart shows the lowest and highest states or UTs with legislatures by revenue expenditure per derived resident.",
+        watch: "Small states can rank high because fixed administrative costs and grants are spread over fewer residents." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.education_per_person_2024", title: "Education rupees per resident are thin in the big states", size: "feature", beat: "education-per-person", unit: "Rs per person", subtitle: "RBI State Finances e-STATES plus RBI Handbook denominators · education revenue expenditure per derived resident · 2023-24 Account",
+        why: "Education's budget share is not enough; rupees per resident show the scale behind each state.",
+        read: "The chart shows the lowest and highest states or UTs with legislatures by education revenue expenditure per derived resident.",
+        watch: "This is per resident, not per child or per student. It is a fiscal-capacity lens, not an education-outcome metric." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.health_per_person_2024", title: "Health rupees per resident are not equal", size: "feature", beat: "health-per-person", unit: "Rs per person", subtitle: "RBI State Finances e-STATES plus RBI Handbook denominators · medical, public health and family welfare per derived resident · 2023-24 Account",
+        why: "A similar budget share can hide very different rupees per resident.",
+        read: "The chart combines medical and public health with family welfare, then divides by derived population.",
+        watch: "This is not total health spending. Private and out-of-pocket health spending are outside it." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.capital_outlay_gsdp_2024", title: "Capital outlay against state economy", size: "feature", beat: "capex-gsdp", unit: "% of GSDP", subtitle: "RBI State Finances e-STATES plus RBI Handbook denominators · capital outlay as share of current-price GSDP · 2023-24 Account",
+        why: "A capital-outlay share of the budget is not the same as investment intensity against the state economy.",
+        read: "Low and high groups are shown together. Each bar is State Finances capital outlay divided by current-price GSDP.",
+        watch: "This is not completed infrastructure or asset quality. Small economies and lumpy projects can produce very high ratios." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.state.revenue_balance_gsdp_2024", title: "Who runs a revenue deficit before capital spending", size: "feature", beat: "state-revenue-balance", unit: "% of GSDP", subtitle: "RBI State Finances e-STATES plus RBI Handbook denominators · revenue balance as share of current-price GSDP · 2023-24 Account",
+        why: "Revenue deficit is a direct warning sign: the running account is short before asset-building is considered.",
+        read: "Negative bars are revenue deficits; positive bars are revenue surpluses. The chart shows the deepest deficits and largest surpluses in 2023-24.",
+        watch: "This is not the fiscal deficit. It excludes the capital account and borrowing flows." },
+      { chart: "tableBars", indicator: "fiscal.state_budgets.tax_basket_2017_2018_2024", title: "GST rewired the states' own-tax basket", size: "feature", beat: "gst-tax-basket", unit: "% of own tax revenue", subtitle: "RBI State Finances e-STATES · selected own-tax components as share of own tax revenue · 2016-17, 2017-18 and 2023-24 Account",
+        why: "The own-revenue line itself changed after GST.",
+        read: "Each group is a fiscal year. SGST appears after GST, while sales tax and VAT shrink as a share of own tax revenue.",
+        watch: "These are selected components, not the entire own-tax basket. Do not add them and expect exactly 100." }
+    ]
+  },
 
   {
     id: "q.econ.rupee",
@@ -7817,6 +8387,97 @@ export const v1Questions = [
         series: [ { indicator: "IN.trade.exports_total_usd.annual", label: "Exports" }, { indicator: "IN.trade.imports_total_usd.annual", label: "Imports" } ],
         indicator: "IN.trade.imports_total_usd.annual",
         why: "The goods trade gap is the structural dollar need underneath the rupee debate.", read: "In 2025, merchandise exports were about $442 billion and imports about $775 billion, leaving a goods gap of roughly $333 billion.", watch: "Goods trade only. Services exports and remittances offset much of this, which is why the current-account deficit is smaller than the goods deficit." }
+    ]
+  },
+  {
+    id: "q.econ.oil_shock_2026",
+    slug: "what-the-2026-oil-shock-cost-india",
+    question: "The Gulf shut. What did the 2026 oil shock actually cost India?",
+    priority: "core",
+    // Built late Aug 2026, mid-shock. The Middle East conflict that began 27 Feb 2026
+    // near-closed the Strait of Hormuz; the World Bank's June 2026 GEP cut global growth
+    // to 2.5% and 112 of 170 EMDE forecasts, and RAISED India's.
+    //
+    // The thesis is NOT "India was immune". It is that the shock was real and large, and
+    // that India could substitute the barrel but not the cooking gas, so the cost showed
+    // up as a $22.8bn import bill and foregone excise rather than at the pump.
+    //
+    // Number discipline for this article lives in data/audits/energy-shock-2026-number-audit.json
+    // (re-run scripts/audit-energy-shock-2026-numbers.py). Three hard rules from it:
+    //   1. Quote the IMPORT PRICE (energy.prices.india_crude_import_price_monthly), never the
+    //      Indian basket, for "what India paid". Realised peak $118.6/bbl in MAY, not April.
+    //   2. PPAC's March 2026 basket print of $113.49 is SUSPECT - it exceeds both Brent and
+    //      Dubai that month and cannot come from its stated blend. Never quote it.
+    //   3. The current account impact CANNOT be stated. RBI publishes BoP a quarter late; the
+    //      first shock quarter was unpublished as of 27 Aug 2026.
+    indicators: [
+      "energy.shock2026.gulf_share_by_commodity",
+      "energy.prices.india_crude_import_price_monthly",
+      "energy.shock2026.crude_bill_apr_jul"
+    ],
+    core: [
+      "energy.shock2026.gulf_share_by_commodity",
+      "energy.shock2026.crude_bill_apr_jul",
+      "energy.shock2026.lpg_volume_apr_jul",
+      "energy.prices.india_crude_import_price_monthly",
+      "energy.shock2026.consumer_price_passthrough",
+      "energy.shock2026.fiscal_impact"
+    ],
+    context: [
+      "trade.gep.hormuz_transits_7dma",
+      "energy.gep.shock_index_brent",
+      "energy.shock2026.middle_east_dependence",
+      "energy.shock2026.crude_partners_2025",
+      "energy.shock2026.lpg_partners_2025",
+      "macro.shock2026.forecast_revisions",
+      "macro.shock2026.india_growth_vs_january",
+      "macro.gep.india_gdp_growth_quarterly"
+    ],
+    primer: {
+      kicker: "Plain English first",
+      lead: "On 27 February 2026 a conflict in the Middle East effectively closed the Strait of Hormuz, the sea lane that carries most of the Gulf's oil and gas. Cargo through it fell from about 3.7 million tonnes a day in February to about 0.2 million in April, and had not recovered three months later. Brent crude averaged about $63 a barrel in December 2025 and printed a daily high of $138 on 7 April 2026. India buys about 89% of the crude it burns, so this should have been an emergency. It half was. India kept importing almost exactly the same volume of crude and paid about $22.8 billion more for it over four months, most likely because Russia and the United States could sell it barrels that never touch the strait. Cooking gas was different: more than nine-tenths of the LPG India imports comes from the Gulf, and imports nearly halved. What did not happen is a price shock at the pump, because the government gave up fuel tax revenue instead. The cost was real. It just landed on the import bill and the exchequer rather than the household.",
+      myths: [
+        { myth: "India escaped the oil shock.", reality: "No. India paid about $22.8 billion more for the same four months of crude, its LPG imports nearly halved, and its urea subsidy bill rose 68%. The shock landed; it just did not land on retail prices." },
+        { myth: "The World Bank raising India's forecast means the shock did not hurt.", reality: "No. India still slows from 7.7% to 6.6%. The upgrade is against the January 2026 forecast, not against last year, and it mostly reflects US tariff relief and new trade agreements offsetting the energy hit." }
+      ]
+    },
+    visualPlan: [
+      // ACT 1 - the strait shuts
+      { chart: "multiLine", title: "The Gulf's shipping lane emptied in a fortnight", subtitle: "Cargo carried through the Strait of Hormuz, seven-day moving average · IMF PortWatch via World Bank", unit: "million metric tons per day", size: "hero", beat: "answer", series: [
+        { indicator: "trade.gep.hormuz_transits_7dma", label: "2026" },
+        { indicator: "trade.gep.hormuz_transits_7dma_prior_year", label: "A year earlier" }
+      ], why: "Everything in this article starts here. One sea lane carries most of the Gulf's oil and gas, and at the end of February 2026 it effectively stopped.", read: "About 3.7 million tonnes a day moved through the strait in February. By April it was about 0.2 million, and the line stays on the floor. The comparison line is the same weeks a year earlier, running at 3 to 4 million tonnes throughout.", watch: "This is a seven-day average, so the first days of March still average in pre-conflict traffic and the fall looks slightly gentler than it was. The comparison line carries 2025 volumes plotted against 2026 dates, which is the World Bank's overlay convention. The series ends 24 May 2026." },
+      { chart: "multiLine", title: "Four prices that all run through one strait", subtitle: "Daily prices indexed to 27 February 2026, the last market day before the conflict · World Bank", unit: "index, 27 Feb 2026 = 100", size: "feature", beat: "mechanism", series: [
+        { indicator: "energy.gep.shock_index_brent", label: "Brent crude" },
+        { indicator: "energy.gep.shock_index_asian_lng", label: "Asian LNG" },
+        { indicator: "energy.gep.shock_index_urea", label: "Urea" },
+        { indicator: "energy.gep.shock_index_eu_gas", label: "European gas" }
+      ], why: "Oil is the headline, but the same strait carries the gas that heats Europe and the urea that feeds Indian wheat. Watching them together shows the shock was never only about petrol.", read: "Every line more than doubles or comes close. Brent peaks around 204 on the index, roughly double its pre-conflict level; urea reaches about 185.", watch: "Brent and European gas are daily; urea is weekly, which is why its line is stepped. An index shows the shape of the move, not the level of the price." },
+
+      // ACT 2 - why India, specifically
+      { indicator: "energy.shock2026.middle_east_dependence", chart: "tableBars", title: "South Asia is the region most exposed to Gulf energy", subtitle: "Share of economies in each region sourcing over 30% of their oil imports from the Middle East, 2023 · World Bank", unit: "% of economies in the region", size: "feature", beat: "comparison", why: "Before asking what the shock did to India, establish that India sits in the most exposed neighbourhood on earth.", read: "South Asia tops the table on oil and on gas. Latin America is at zero: the same shock reaches different regions with completely different force.", watch: "This counts economies above a threshold, not volumes, and the World Bank does not publish the per-region sample sizes. It is a regional statistic, not an Indian one." },
+      { indicator: "energy.shock2026.gulf_share_by_commodity", chart: "tableBars", title: "India could replace the barrel. It could not replace the cooking gas.", subtitle: "Share of India's 2025 import value sourced from the seven Gulf economies · UN Comtrade", unit: "% of import value from the Gulf", size: "hero", beat: "mechanism", why: "This single chart explains why the shock hit India so unevenly. The exposure is not one number, it is a gradient, and the top and bottom of it behaved completely differently.", read: "More than nine-tenths of India's LPG comes from the Gulf, against less than half its crude. Crude had somewhere else to come from. Cooking gas did not.", watch: "Gulf share is an upper bound on strait exposure: Saudi Arabia and the UAE have partial pipeline bypasses, though neither moves LPG at scale. Oman is excluded because its ports sit outside the strait. This is 2025, before the shock, which is the point: it is the structure India walked in with." },
+      { indicator: "energy.shock2026.crude_partners_2025", chart: "tableBars", title: "Where India's crude actually comes from", subtitle: "Share of India's 2025 crude oil import value, by supplier · UN Comtrade", unit: "% of crude import value", size: "feature", beat: "mechanism", why: "The reason crude volumes held: India spent the years after 2022 rebuilding its supplier list around a country that does not ship through Hormuz.", read: "Russia alone is about a third of India's crude, and the United States another twentieth. Iraq, Saudi Arabia and the UAE together are still large, but they are no longer the only option.", watch: "Suppliers below 1% of import value are omitted, so the bars do not sum to 100. This is value, not volume, and discounted Russian crude buys more barrels per dollar than the share implies." },
+      { indicator: "energy.shock2026.lpg_partners_2025", chart: "tableBars", title: "Where India's cooking gas comes from", subtitle: "Share of India's 2025 LPG import value, by supplier · UN Comtrade", unit: "% of LPG import value", size: "feature", beat: "mechanism", why: "The same chart for LPG, and the contrast with crude is the whole argument.", read: "Four Gulf states supply about nine-tenths of it. There is no Russia on this list, because LPG moves on pressurised carriers with no pipeline route around the strait.", watch: "Suppliers below 1% are omitted. India also produces LPG domestically, so this is the imported share only, not total supply." },
+
+      // ACT 3 - the bill
+      { chart: "multiLine", title: "What India actually paid for a barrel", subtitle: "Monthly average, India's realised crude import price against the reference benchmarks · PPAC and World Bank", unit: "US$ per barrel", size: "feature", beat: "answer", fromYear: 2024, series: [
+        { indicator: "energy.prices.india_crude_import_price_monthly", label: "What India paid on landing" },
+        { indicator: "energy.prices.indian_basket_monthly", label: "Indian basket (reference price)" },
+        { indicator: "energy.prices.brent_monthly", label: "Brent" },
+        { indicator: "energy.prices.dubai_fateh_monthly", label: "Dubai Fateh" }
+      ], why: "There are two Indian oil prices and the difference matters enormously during a shock. One is a reference quote; the other is the money that actually left the country.", read: "The realised import price peaked at $118.6 a barrel in May 2026, a month after the reference basket did, because cargoes are priced weeks before they land. Against February's $65.6, that is a rise of about 81%.", watch: "Quote the landed price, not the basket. PPAC's March 2026 basket figure of $113.49 sits above both Brent and Dubai that month and cannot come from its stated blend of the two, so it should not be used." },
+      { indicator: "energy.shock2026.crude_bill_apr_jul", chart: "tableBars", title: "The same barrels, a $22.8 billion bigger bill", subtitle: "Spending on crude oil imports, April to July of each year · PPAC", unit: "US$ billion", size: "hero", beat: "answer", why: "This is the cleanest measure of what the shock cost, because the volume barely moved. Almost the entire difference is price.", read: "India imported 81.9 million tonnes of crude between April and July 2026 against 81.5 million a year earlier, a rise of under half a percent, and paid $63.4 billion instead of $40.5 billion.", watch: "2026 figures are provisional and get revised. This is crude alone; it excludes LPG, LNG and refined products, and India earns some of it back by exporting refined fuel." },
+      { indicator: "energy.shock2026.lpg_volume_apr_jul", chart: "tableBars", title: "Cooking gas was the thing India could not buy", subtitle: "LPG imports, April to July of each year · PPAC", unit: "million tonnes", size: "feature", beat: "distribution", why: "Crude was a price problem. LPG was a quantity problem, and quantity problems reach kitchens.", read: "LPG imports fell from 7.08 million tonnes in April-July 2025 to 3.70 million in 2026, a drop of nearly half, while the price India paid per tonne rose about 59% to a May peak.", watch: "These are imports, not consumption. Domestic production and drawn-down stocks filled part of the gap, so this is not the shortfall households faced." },
+
+      // ACT 4 - where the cost went
+      { indicator: "energy.shock2026.consumer_price_passthrough", chart: "tableBars", title: "The shock barely reached the shelf", subtitle: "Year-on-year consumer price inflation, July 2026 · MOSPI 2024-base CPI", unit: "% year on year", size: "feature", beat: "caveat", why: "If a landed crude price rises 81%, you would expect the pump to follow. It did not, and where that gap went is the rest of the story.", read: "Retail petrol inflation was 7.5% and diesel 8.4% in July 2026, against an 81% rise in what India paid for crude at the May peak. Headline inflation was 4.4%.", watch: "MOSPI rebased the CPI to 2024 in January 2026, so these are not continuous with the older series and year-on-year figures only begin in December 2025. These are inflation rates, not a pass-through estimate, which would need pump prices and tax rates." },
+      { indicator: "energy.shock2026.fiscal_impact", chart: "tableBars", title: "It went to the exchequer instead", subtitle: "Change in central government revenue and subsidy lines, April-June 2026 against a year earlier · Comptroller General of Accounts", unit: "% change year on year", size: "feature", beat: "answer", why: "The money that did not come out of household budgets came out of the government's. This is where to look for it.", read: "Union excise, which post-GST is almost entirely fuel taxes, fell 22%. The urea subsidy rose 68%. The petroleum subsidy line did not move, because India held pump prices down by giving up tax revenue rather than by paying a subsidy.", watch: "April posts as a near-zero month for excise in these accounts every year, so only April-June totals are comparable. Customs covers all imports and India levies little basic duty on crude, so its rise should not be read as an oil effect. Excise and customs together were roughly flat." },
+
+      // ACT 5 - the forecast that did not move
+      { indicator: "macro.shock2026.forecast_revisions", chart: "tableBars", title: "The World Bank cut 93 of 146 forecasts. India's went up.", subtitle: "How 2026 growth forecasts moved between the January and June 2026 Global Economic Prospects", unit: "number of economies", size: "feature", beat: "comparison", why: "The oddity that makes this story worth telling: the edition that downgraded two-thirds of the developing world nudged India upward.", read: "Of 146 developing economies carrying a revision, 93 were cut and 39 raised. India is one of the 39, at plus 0.1 percentage point for its 2026-27 fiscal year.", watch: "Most other upgrades are commodity exporters that gain from expensive oil, or very small economies, but fourteen commodity importers were upgraded too. These are individual economies; counting the regional sub-aggregates as well would give 114 cut of 172." },
+      { indicator: "macro.shock2026.india_growth_vs_january", chart: "tableBars", title: "Same number, completely different reasons", subtitle: "World Bank forecast for India's real GDP growth, by fiscal year · June 2026 edition", unit: "% real GDP growth", size: "feature", beat: "answer", why: "India's 2026-27 forecast moved by a tenth of a point between January and June. Everything behind it was replaced.", read: "In January the expected drag was American tariffs. By June the tariffs had been struck down and trade deals signed with the EU and the UK, while an energy shock arrived to take their place. The number survived; the reasoning did not.", watch: "India still decelerates hard, from 7.7% to 6.6%. The upgrade is against January's forecast, not against last year. Fiscal years run April to March." },
+      { indicator: "macro.gep.india_gdp_growth_quarterly", chart: "line", title: "India went into the shock accelerating", subtitle: "Real GDP growth, year on year, by calendar quarter · World Bank", unit: "% year on year", size: "feature", beat: "context", why: "Part of why the shock did less damage than it might have is simply when it arrived. India hit it with momentum.", read: "Growth ran 6.8% in the second quarter of 2025 and 8.3% in the third, and was still estimated at 7.8% in the first quarter of 2026, the quarter the conflict began.", watch: "The last point is an estimate, and only the final month of that quarter is affected by the conflict. Quarterly figures are calendar quarters, unlike the fiscal-year forecasts." }
     ]
   },
 

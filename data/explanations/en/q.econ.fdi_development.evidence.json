@@ -1,0 +1,3123 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.fdi_development",
+  "question": "Did foreign money build India? What 56 years of FDI data show.",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "extfin.fdi.dev.gfcf_share.IND.pct",
+    "extfin.fdi.dev.gfcf_share.VNM.pct",
+    "extfin.fdi.dev.gfcf_share.CHN.pct",
+    "extfin.fdi.dev.gfcf_share.KOR.pct",
+    "extfin.fdi.dev.gfcf_share.POL.pct",
+    "extfin.fdi.dev.gdp_share_wb.IND.pct",
+    "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+    "extfin.fdi.dev.gdp_share_wb.LCN.pct",
+    "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+    "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+    "extfin.fdi.dev.world_rank.IN",
+    "extfin.fdi.dev.cumulative_per_person.usd",
+    "extfin.fdi.dev.inward_flow.SEA.usd",
+    "extfin.fdi.dev.inward_flow.CHN.usd",
+    "extfin.fdi.dev.inward_flow.IND.usd",
+    "extfin.fdi.dev.india_share_developing.pct",
+    "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+    "extfin.fdi.dev.greenfield_announced.IN.usd",
+    "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+    "extfin.fdi.dev.era_summary.usd",
+    "extfin.fdi.dev.inward_stock.IN.usd",
+    "extfin.fdi.dev.outward_stock.IN.usd",
+    "extfin.fdi.dev.gfcf_share.PAK.pct",
+    "extfin.fdi.dev.gfcf_share.BGD.pct",
+    "extfin.fdi.dev.gfcf_share.LKA.pct",
+    "extfin.fdi.dev.mna_sales.IN.usd",
+    "extfin.fdi.dev.greenfield_outward.IN.usd",
+    "extfin.fdi.dev.top100_mne_home_economy.count"
+  ],
+  "availableIndicatorIds": [
+    "extfin.fdi.dev.gfcf_share.IND.pct",
+    "extfin.fdi.dev.gfcf_share.VNM.pct",
+    "extfin.fdi.dev.gfcf_share.CHN.pct",
+    "extfin.fdi.dev.gfcf_share.KOR.pct",
+    "extfin.fdi.dev.gfcf_share.POL.pct",
+    "extfin.fdi.dev.gdp_share_wb.IND.pct",
+    "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+    "extfin.fdi.dev.gdp_share_wb.LCN.pct",
+    "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+    "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+    "extfin.fdi.dev.world_rank.IN",
+    "extfin.fdi.dev.cumulative_per_person.usd",
+    "extfin.fdi.dev.inward_flow.SEA.usd",
+    "extfin.fdi.dev.inward_flow.CHN.usd",
+    "extfin.fdi.dev.inward_flow.IND.usd",
+    "extfin.fdi.dev.india_share_developing.pct",
+    "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+    "extfin.fdi.dev.greenfield_announced.IN.usd",
+    "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+    "extfin.fdi.dev.era_summary.usd",
+    "extfin.fdi.dev.inward_stock.IN.usd",
+    "extfin.fdi.dev.outward_stock.IN.usd",
+    "extfin.fdi.dev.gfcf_share.PAK.pct",
+    "extfin.fdi.dev.gfcf_share.BGD.pct",
+    "extfin.fdi.dev.gfcf_share.LKA.pct",
+    "extfin.fdi.dev.mna_sales.IN.usd",
+    "extfin.fdi.dev.greenfield_outward.IN.usd",
+    "extfin.fdi.dev.top100_mne_home_economy.count"
+  ],
+  "themeIndicatorIds": [
+    "extfin.fdi.dev.gfcf_share.IND.pct",
+    "extfin.fdi.dev.gfcf_share.VNM.pct",
+    "extfin.fdi.dev.gfcf_share.CHN.pct",
+    "extfin.fdi.dev.gfcf_share.KOR.pct",
+    "extfin.fdi.dev.gfcf_share.POL.pct",
+    "extfin.fdi.dev.gdp_share_wb.IND.pct",
+    "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+    "extfin.fdi.dev.gdp_share_wb.LCN.pct",
+    "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+    "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+    "extfin.fdi.dev.world_rank.IN",
+    "extfin.fdi.dev.cumulative_per_person.usd",
+    "extfin.fdi.dev.inward_flow.SEA.usd",
+    "extfin.fdi.dev.inward_flow.CHN.usd",
+    "extfin.fdi.dev.inward_flow.IND.usd",
+    "extfin.fdi.dev.india_share_developing.pct",
+    "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+    "extfin.fdi.dev.greenfield_announced.IN.usd",
+    "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+    "extfin.fdi.dev.era_summary.usd",
+    "extfin.fdi.dev.inward_stock.IN.usd",
+    "extfin.fdi.dev.outward_stock.IN.usd",
+    "extfin.fdi.dev.gfcf_share.PAK.pct",
+    "extfin.fdi.dev.gfcf_share.BGD.pct",
+    "extfin.fdi.dev.gfcf_share.LKA.pct",
+    "extfin.fdi.dev.mna_sales.IN.usd",
+    "extfin.fdi.dev.greenfield_outward.IN.usd",
+    "extfin.fdi.dev.top100_mne_home_economy.count"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.extfin.fdi.dev.gfcf_share.IND.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "title": "FDI as a share of gross fixed capital formation — India",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.extfin.fdi.dev.gfcf_share.VNM.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "title": "FDI as a share of gross fixed capital formation — Viet Nam",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.extfin.fdi.dev.gfcf_share.CHN.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct",
+      "title": "FDI as a share of gross fixed capital formation — China",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.extfin.fdi.dev.gfcf_share.KOR.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "title": "FDI as a share of gross fixed capital formation — Korea",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.extfin.fdi.dev.gfcf_share.POL.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct",
+      "title": "FDI as a share of gross fixed capital formation — Poland",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "title": "FDI net inflows as a share of GDP — India",
+      "sourceId": "worldbank",
+      "unit": "percent of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.extfin.fdi.dev.gdp_share_wb.EAS.pct",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+      "title": "FDI net inflows as a share of GDP — East Asia & Pacific",
+      "sourceId": "worldbank",
+      "unit": "percent of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v8.extfin.fdi.dev.gdp_share_wb.LCN.pct",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.LCN.pct",
+      "title": "FDI net inflows as a share of GDP — Latin America & Caribbean",
+      "sourceId": "worldbank",
+      "unit": "percent of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v9.extfin.fdi.dev.gdp_share_wb.SSF.pct",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+      "title": "FDI net inflows as a share of GDP — Sub-Saharan Africa",
+      "sourceId": "worldbank",
+      "unit": "percent of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v10.extfin.fdi.dev.gdp_share_wb.WLD.pct",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+      "title": "FDI net inflows as a share of GDP — World",
+      "sourceId": "worldbank",
+      "unit": "percent of GDP",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v11.extfin.fdi.dev.world_rank.IN",
+      "indicatorId": "extfin.fdi.dev.world_rank.IN",
+      "title": "India's world rank for FDI received",
+      "sourceId": "unctad",
+      "unit": "rank among reporting economies",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v12.extfin.fdi.dev.cumulative_per_person.usd",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd",
+      "title": "Total FDI received per person, 1990-2025",
+      "sourceId": "unctad",
+      "unit": "US$ per person (36-year cumulative)",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v13.extfin.fdi.dev.inward_flow.SEA.usd",
+      "indicatorId": "extfin.fdi.dev.inward_flow.SEA.usd",
+      "title": "FDI inflows — Southeast Asia",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v14.extfin.fdi.dev.inward_flow.CHN.usd",
+      "indicatorId": "extfin.fdi.dev.inward_flow.CHN.usd",
+      "title": "FDI inflows — China",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v15.extfin.fdi.dev.inward_flow.IND.usd",
+      "indicatorId": "extfin.fdi.dev.inward_flow.IND.usd",
+      "title": "FDI inflows — India",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v16.extfin.fdi.dev.india_share_developing.pct",
+      "indicatorId": "extfin.fdi.dev.india_share_developing.pct",
+      "title": "India's share of all FDI going to developing economies",
+      "sourceId": "unctad",
+      "unit": "percent",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v17.extfin.fdi.dev.inward_stock_gdp_peers.pct",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+      "title": "Accumulated foreign ownership as a share of GDP, 2025",
+      "sourceId": "unctad",
+      "unit": "percent of GDP",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v18.extfin.fdi.dev.greenfield_announced.IN.usd",
+      "indicatorId": "extfin.fdi.dev.greenfield_announced.IN.usd",
+      "title": "Announced greenfield project value — India",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v19.extfin.fdi.dev.inward_flow_recorded.IN.usd",
+      "indicatorId": "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+      "title": "FDI actually recorded in India's balance of payments",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v20.extfin.fdi.dev.era_summary.usd",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd",
+      "title": "India's FDI by era, 1991-2025",
+      "sourceId": "unctad",
+      "unit": "USD billion received over the period",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v21.extfin.fdi.dev.inward_stock.IN.usd",
+      "indicatorId": "extfin.fdi.dev.inward_stock.IN.usd",
+      "title": "What foreigners own in India (FDI stock)",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v22.extfin.fdi.dev.outward_stock.IN.usd",
+      "indicatorId": "extfin.fdi.dev.outward_stock.IN.usd",
+      "title": "What India owns abroad (FDI stock)",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v23.extfin.fdi.dev.gfcf_share.PAK.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.PAK.pct",
+      "title": "FDI as a share of gross fixed capital formation — Pakistan",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v24.extfin.fdi.dev.gfcf_share.BGD.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.BGD.pct",
+      "title": "FDI as a share of gross fixed capital formation — Bangladesh",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v25.extfin.fdi.dev.gfcf_share.LKA.pct",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.LKA.pct",
+      "title": "FDI as a share of gross fixed capital formation — Sri Lanka",
+      "sourceId": "unctad",
+      "unit": "percent of gross fixed capital formation",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v26.extfin.fdi.dev.mna_sales.IN.usd",
+      "indicatorId": "extfin.fdi.dev.mna_sales.IN.usd",
+      "title": "Foreign purchases of Indian companies (net cross-border M&A sales)",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v27.extfin.fdi.dev.greenfield_outward.IN.usd",
+      "indicatorId": "extfin.fdi.dev.greenfield_outward.IN.usd",
+      "title": "Greenfield projects announced abroad by Indian firms",
+      "sourceId": "unctad",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v28.extfin.fdi.dev.top100_mne_home_economy.count",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count",
+      "title": "Firms in the top 100 multinationals from developing economies, by home economy",
+      "sourceId": "unctad",
+      "unit": "number of firms",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "how-much-of-what-india-builds-is-paid-for-by-foreigners",
+      "title": "How much of what India builds is paid for by foreigners",
+      "chartType": "line",
+      "beat": "answer",
+      "window": "full",
+      "indicator": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "series": [],
+      "unit": "percent of gross fixed capital formation",
+      "subtitle": "",
+      "whyThisChart": "The whole article in one line: FDI has never financed more than about a tenth of Indian capital formation."
+    },
+    {
+      "order": 2,
+      "chartId": "fifty-six-years-and-india-is-almost-always-the-bottom-line",
+      "title": "Fifty-six years, and India is almost always the bottom line",
+      "chartType": "multiLine",
+      "beat": "long-arc",
+      "window": "",
+      "indicator": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+          "label": "India",
+          "emphasis": true
+        },
+        {
+          "indicator": "extfin.fdi.dev.gdp_share_wb.LCN.pct",
+          "label": "Latin America & Caribbean"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+          "label": "East Asia & Pacific"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+          "label": "Sub-Saharan Africa"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+          "label": "World"
+        }
+      ],
+      "unit": "percent of GDP",
+      "subtitle": "",
+      "whyThisChart": "World Bank data starts in 1970 and covers the closed decades UNCTAD's series cannot reach."
+    },
+    {
+      "order": 3,
+      "chartId": "india-did-climb-and-the-climb-was-real",
+      "title": "India did climb, and the climb was real",
+      "chartType": "line",
+      "beat": "rank",
+      "window": "full",
+      "indicator": "extfin.fdi.dev.world_rank.IN",
+      "series": [],
+      "unit": "rank among reporting economies",
+      "subtitle": "",
+      "whyThisChart": "The success story is genuine and has to be told before it is qualified."
+    },
+    {
+      "order": 4,
+      "chartId": "two-different-ways-to-build-a-country",
+      "title": "Two different ways to build a country",
+      "chartType": "multiLine",
+      "beat": "models",
+      "window": "",
+      "indicator": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.IND.pct",
+          "label": "India",
+          "emphasis": true
+        },
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.VNM.pct",
+          "label": "Viet Nam"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.POL.pct",
+          "label": "Poland"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.CHN.pct",
+          "label": "China"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.KOR.pct",
+          "label": "Korea"
+        }
+      ],
+      "unit": "percent of gross fixed capital formation",
+      "subtitle": "",
+      "whyThisChart": "The FDI-led model and the domestic-capital model, on one axis."
+    },
+    {
+      "order": 5,
+      "chartId": "india-is-the-south-asian-norm-not-the-exception",
+      "title": "India is the South Asian norm, not the exception",
+      "chartType": "multiLine",
+      "beat": "south-asia",
+      "window": "",
+      "indicator": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.IND.pct",
+          "label": "India",
+          "emphasis": true
+        },
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.PAK.pct",
+          "label": "Pakistan"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.LKA.pct",
+          "label": "Sri Lanka"
+        },
+        {
+          "indicator": "extfin.fdi.dev.gfcf_share.BGD.pct",
+          "label": "Bangladesh"
+        }
+      ],
+      "unit": "percent of gross fixed capital formation",
+      "subtitle": "",
+      "whyThisChart": "The obvious objection is that a low share is an Indian failure. The neighbours say it is a regional pattern."
+    },
+    {
+      "order": 6,
+      "chartId": "thirty-six-years-of-foreign-investment-per-indian",
+      "title": "Thirty-six years of foreign investment, per Indian",
+      "chartType": "tableBars",
+      "beat": "per-person",
+      "window": "",
+      "indicator": "extfin.fdi.dev.cumulative_per_person.usd",
+      "series": [],
+      "unit": "US$ per person (1990-2025 cumulative)",
+      "subtitle": "",
+      "whyThisChart": "Scale intuition: India's total is large only because India is large."
+    },
+    {
+      "order": 7,
+      "chartId": "where-the-factories-actually-went",
+      "title": "Where the factories actually went",
+      "chartType": "multiLine",
+      "beat": "reallocation",
+      "window": "",
+      "indicator": "extfin.fdi.dev.inward_flow.IND.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.inward_flow.SEA.usd",
+          "label": "Southeast Asia"
+        },
+        {
+          "indicator": "extfin.fdi.dev.inward_flow.CHN.usd",
+          "label": "China"
+        },
+        {
+          "indicator": "extfin.fdi.dev.inward_flow.IND.usd",
+          "label": "India",
+          "emphasis": true
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "The China-plus-one reallocation is the central economic event of the last decade, and the data says where it landed."
+    },
+    {
+      "order": 8,
+      "chartId": "india-s-slice-of-the-developing-world-s-investment",
+      "title": "India's slice of the developing world's investment",
+      "chartType": "line",
+      "beat": "share",
+      "window": "full",
+      "indicator": "extfin.fdi.dev.india_share_developing.pct",
+      "series": [],
+      "unit": "percent",
+      "subtitle": "",
+      "whyThisChart": "The share tells you whether India is gaining ground on its actual competitors, not on the world."
+    },
+    {
+      "order": 9,
+      "chartId": "how-much-of-the-economy-foreigners-actually-own",
+      "title": "How much of the economy foreigners actually own",
+      "chartType": "tableBars",
+      "beat": "stock",
+      "window": "",
+      "indicator": "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+      "series": [],
+      "unit": "percent of GDP",
+      "subtitle": "",
+      "whyThisChart": "Flows are noisy; the accumulated stock is what decades of policy actually produced."
+    },
+    {
+      "order": 10,
+      "chartId": "building-something-new-or-buying-something-old",
+      "title": "Building something new, or buying something old",
+      "chartType": "multiLine",
+      "beat": "build-vs-buy",
+      "window": "",
+      "indicator": "extfin.fdi.dev.inward_flow.IND.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.inward_flow.IND.usd",
+          "label": "FDI recorded"
+        },
+        {
+          "indicator": "extfin.fdi.dev.mna_sales.IN.usd",
+          "label": "Foreign purchases of Indian companies"
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "Foreign money either builds new capacity or changes the nameplate on capacity that already exists. Only one of those adds to capital formation."
+    },
+    {
+      "order": 11,
+      "chartId": "what-gets-announced-and-what-turns-up",
+      "title": "What gets announced, and what turns up",
+      "chartType": "multiLine",
+      "beat": "announcement-gap",
+      "window": "",
+      "indicator": "extfin.fdi.dev.greenfield_announced.IN.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.greenfield_announced.IN.usd",
+          "label": "Announced greenfield projects"
+        },
+        {
+          "indicator": "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+          "label": "FDI recorded in the balance of payments"
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "India announced a record project pipeline in the same year it booked its smallest inflow in a decade."
+    },
+    {
+      "order": 12,
+      "chartId": "india-s-fdi-era-by-era",
+      "title": "India's FDI, era by era",
+      "chartType": "tableBars",
+      "beat": "eras",
+      "window": "",
+      "indicator": "extfin.fdi.dev.era_summary.usd",
+      "series": [],
+      "unit": "US$ billion received over the period",
+      "subtitle": "",
+      "whyThisChart": "Five distinct policy eras, and the best one is not the most recent."
+    },
+    {
+      "order": 13,
+      "chartId": "indian-firms-announce-projects-abroad-too",
+      "title": "Indian firms announce projects abroad too",
+      "chartType": "multiLine",
+      "beat": "outward-greenfield",
+      "window": "",
+      "indicator": "extfin.fdi.dev.greenfield_announced.IN.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.greenfield_announced.IN.usd",
+          "label": "Announced into India"
+        },
+        {
+          "indicator": "extfin.fdi.dev.greenfield_outward.IN.usd",
+          "label": "Announced abroad by Indian firms"
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "The maturity story shows up in announced projects as well as in the accumulated stock."
+    },
+    {
+      "order": 14,
+      "chartId": "two-stakes-converging",
+      "title": "Two stakes converging",
+      "chartType": "multiLine",
+      "beat": "maturity",
+      "window": "",
+      "indicator": "extfin.fdi.dev.inward_stock.IN.usd",
+      "series": [
+        {
+          "indicator": "extfin.fdi.dev.inward_stock.IN.usd",
+          "label": "What foreigners own in India"
+        },
+        {
+          "indicator": "extfin.fdi.dev.outward_stock.IN.usd",
+          "label": "What India owns abroad"
+        }
+      ],
+      "unit": "US$ million",
+      "subtitle": "",
+      "whyThisChart": "The closing gap is the sign of a maturing economy, not a crisis, and it is where this article hands off."
+    },
+    {
+      "order": 15,
+      "chartId": "where-the-developing-world-s-biggest-firms-come-from",
+      "title": "Where the developing world's biggest firms come from",
+      "chartType": "tableBars",
+      "beat": "mnes",
+      "window": "",
+      "indicator": "extfin.fdi.dev.top100_mne_home_economy.count",
+      "series": [],
+      "unit": "number of firms in the top 100",
+      "subtitle": "",
+      "whyThisChart": "A country that does not build multinationals stays a destination for other people's capital rather than a source of its own."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, latest",
+      "value": 3.13,
+      "displayValue": "3.13",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, minimum (1991-12-31)",
+      "value": 0.1,
+      "displayValue": "0.1",
+      "date": "1991-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, maximum (2008-12-31)",
+      "value": 10.31,
+      "displayValue": "10.31",
+      "date": "2008-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, earliest",
+      "value": 0.28,
+      "displayValue": "0.28",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, latest",
+      "value": 14.72,
+      "displayValue": "14.72",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, minimum (2004-12-31)",
+      "value": 10.66,
+      "displayValue": "10.66",
+      "date": "2004-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, maximum (1994-12-31)",
+      "value": 49.22,
+      "displayValue": "49.22",
+      "date": "1994-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, earliest",
+      "value": 21.42,
+      "displayValue": "21.42",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, latest",
+      "value": 1.4,
+      "displayValue": "1.4",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, minimum (2025-12-31)",
+      "value": 1.4,
+      "displayValue": "1.4",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, maximum (1994-12-31)",
+      "value": 16.93,
+      "displayValue": "16.93",
+      "date": "1994-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, earliest",
+      "value": 3.6,
+      "displayValue": "3.6",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, latest",
+      "value": 2.81,
+      "displayValue": "2.81",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, minimum (1993-12-31)",
+      "value": 0.57,
+      "displayValue": "0.57",
+      "date": "1993-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, maximum (1999-12-31)",
+      "value": 7.04,
+      "displayValue": "7.04",
+      "date": "1999-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, earliest",
+      "value": 0.97,
+      "displayValue": "0.97",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, latest",
+      "value": 9,
+      "displayValue": "9",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, minimum (1990-12-31)",
+      "value": 0.68,
+      "displayValue": "0.68",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, maximum (2022-12-31)",
+      "value": 31.03,
+      "displayValue": "31.03",
+      "date": "2022-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, earliest",
+      "value": 0.68,
+      "displayValue": "0.68",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct",
+      "sourceId": "unctad",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, latest",
+      "value": 0.988,
+      "displayValue": "0.99",
+      "date": "2025-12-31",
+      "unit": "percent of GDP",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, minimum (1977-12-31)",
+      "value": -0.03,
+      "displayValue": "-0.03",
+      "date": "1977-12-31",
+      "unit": "percent of GDP",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, maximum (2008-12-31)",
+      "value": 3.621,
+      "displayValue": "3.62",
+      "date": "2008-12-31",
+      "unit": "percent of GDP",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, earliest",
+      "value": 0.073,
+      "displayValue": "0.07",
+      "date": "1970-12-31",
+      "unit": "percent of GDP",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, latest",
+      "value": 3.13,
+      "displayValue": "3.13",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, minimum (1991-12-31)",
+      "value": 0.1,
+      "displayValue": "0.1",
+      "date": "1991-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, maximum (2008-12-31)",
+      "value": 10.31,
+      "displayValue": "10.31",
+      "date": "2008-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — India, earliest",
+      "value": 0.28,
+      "displayValue": "0.28",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, latest",
+      "value": 14.72,
+      "displayValue": "14.72",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, minimum (2004-12-31)",
+      "value": 10.66,
+      "displayValue": "10.66",
+      "date": "2004-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, maximum (1994-12-31)",
+      "value": 49.22,
+      "displayValue": "49.22",
+      "date": "1994-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Viet Nam, earliest",
+      "value": 21.42,
+      "displayValue": "21.42",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, latest",
+      "value": 1.4,
+      "displayValue": "1.4",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, minimum (2025-12-31)",
+      "value": 1.4,
+      "displayValue": "1.4",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, maximum (1994-12-31)",
+      "value": 16.93,
+      "displayValue": "16.93",
+      "date": "1994-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — China, earliest",
+      "value": 3.6,
+      "displayValue": "3.6",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, latest",
+      "value": 2.81,
+      "displayValue": "2.81",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, minimum (1993-12-31)",
+      "value": 0.57,
+      "displayValue": "0.57",
+      "date": "1993-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, maximum (1999-12-31)",
+      "value": 7.04,
+      "displayValue": "7.04",
+      "date": "1999-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Korea, earliest",
+      "value": 0.97,
+      "displayValue": "0.97",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, latest",
+      "value": 9,
+      "displayValue": "9",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, minimum (1990-12-31)",
+      "value": 0.68,
+      "displayValue": "0.68",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, maximum (2022-12-31)",
+      "value": 31.03,
+      "displayValue": "31.03",
+      "date": "2022-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Poland, earliest",
+      "value": 0.68,
+      "displayValue": "0.68",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, latest",
+      "value": 0.988,
+      "displayValue": "0.99",
+      "date": "2025-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, minimum (1977-12-31)",
+      "value": -0.03,
+      "displayValue": "-0.03",
+      "date": "1977-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, maximum (2008-12-31)",
+      "value": 3.621,
+      "displayValue": "3.62",
+      "date": "2008-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — India, earliest",
+      "value": 0.073,
+      "displayValue": "0.07",
+      "date": "1970-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — East Asia & Pacific, latest",
+      "value": 1.273,
+      "displayValue": "1.27",
+      "date": "2025-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.EAS.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — East Asia & Pacific, minimum (1979-12-31)",
+      "value": 0.28,
+      "displayValue": "0.28",
+      "date": "1979-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.EAS.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — East Asia & Pacific, maximum (2007-12-31)",
+      "value": 3.177,
+      "displayValue": "3.18",
+      "date": "2007-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.EAS.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — East Asia & Pacific, earliest",
+      "value": 0.598,
+      "displayValue": "0.6",
+      "date": "1970-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.EAS.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Latin America & Caribbean, latest",
+      "value": 2.684,
+      "displayValue": "2.68",
+      "date": "2025-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.LCN.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Latin America & Caribbean, minimum (1972-12-31)",
+      "value": 0.453,
+      "displayValue": "0.45",
+      "date": "1972-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.LCN.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Latin America & Caribbean, maximum (2015-12-31)",
+      "value": 5.021,
+      "displayValue": "5.02",
+      "date": "2015-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.LCN.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Latin America & Caribbean, earliest",
+      "value": 0.881,
+      "displayValue": "0.88",
+      "date": "1970-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.LCN.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Sub-Saharan Africa, latest",
+      "value": 2.252,
+      "displayValue": "2.25",
+      "date": "2024-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.SSF.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Sub-Saharan Africa, minimum (1980-12-31)",
+      "value": 0.086,
+      "displayValue": "0.09",
+      "date": "1980-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.SSF.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Sub-Saharan Africa, maximum (2001-12-31)",
+      "value": 3.797,
+      "displayValue": "3.8",
+      "date": "2001-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.SSF.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — Sub-Saharan Africa, earliest",
+      "value": 1.307,
+      "displayValue": "1.31",
+      "date": "1970-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.SSF.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — World, latest",
+      "value": 1.263,
+      "displayValue": "1.26",
+      "date": "2025-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.WLD.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — World, minimum (1976-12-31)",
+      "value": 0.345,
+      "displayValue": "0.35",
+      "date": "1976-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.WLD.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — World, maximum (2007-12-31)",
+      "value": 5.273,
+      "displayValue": "5.27",
+      "date": "2007-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.WLD.pct"
+    },
+    {
+      "label": "FDI net inflows as a share of GDP — World, earliest",
+      "value": 0.498,
+      "displayValue": "0.5",
+      "date": "1970-12-31",
+      "unit": "percent of GDP",
+      "sourceId": "worldbank",
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.WLD.pct"
+    },
+    {
+      "label": "India's world rank for FDI received, latest",
+      "value": 12,
+      "displayValue": "12",
+      "date": "2025-12-31",
+      "unit": "rank among reporting economies",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.world_rank.IN"
+    },
+    {
+      "label": "India's world rank for FDI received, minimum (2020-12-31)",
+      "value": 7,
+      "displayValue": "7",
+      "date": "2020-12-31",
+      "unit": "rank among reporting economies",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.world_rank.IN"
+    },
+    {
+      "label": "India's world rank for FDI received, maximum (1991-12-31)",
+      "value": 72,
+      "displayValue": "72",
+      "date": "1991-12-31",
+      "unit": "rank among reporting economies",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.world_rank.IN"
+    },
+    {
+      "label": "India's world rank for FDI received, earliest",
+      "value": 43,
+      "displayValue": "43",
+      "date": "1990-12-31",
+      "unit": "rank among reporting economies",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.world_rank.IN"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: value",
+      "value": 292344,
+      "displayValue": "2,92,344",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: cumulative_fdi_usd_billion",
+      "value": 1716,
+      "displayValue": "1,716",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: population_2025_million",
+      "value": 6,
+      "displayValue": "6",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: value",
+      "value": 132690,
+      "displayValue": "1,32,690",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: cumulative_fdi_usd_billion",
+      "value": 704,
+      "displayValue": "704",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: population_2025_million",
+      "value": 5,
+      "displayValue": "5",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: value",
+      "value": 10689,
+      "displayValue": "10,689",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: cumulative_fdi_usd_billion",
+      "value": 408,
+      "displayValue": "408",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: population_2025_million",
+      "value": 38,
+      "displayValue": "38",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: value",
+      "value": 7127,
+      "displayValue": "7,127",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: cumulative_fdi_usd_billion",
+      "value": 256,
+      "displayValue": "256",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "Total FDI received per person, 1990-2025: population_2025_million",
+      "value": 36,
+      "displayValue": "36",
+      "date": "",
+      "unit": "US$ per person (36-year cumulative)",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd"
+    },
+    {
+      "label": "FDI inflows — Southeast Asia, latest",
+      "value": 244164.78,
+      "displayValue": "2,44,164.78",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.SEA.usd"
+    },
+    {
+      "label": "FDI inflows — Southeast Asia, minimum (1992-12-31)",
+      "value": 12739.08,
+      "displayValue": "12,739.08",
+      "date": "1992-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.SEA.usd"
+    },
+    {
+      "label": "FDI inflows — Southeast Asia, maximum (2025-12-31)",
+      "value": 244164.78,
+      "displayValue": "2,44,164.78",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.SEA.usd"
+    },
+    {
+      "label": "FDI inflows — Southeast Asia, earliest",
+      "value": 12820.85,
+      "displayValue": "12,820.85",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.SEA.usd"
+    },
+    {
+      "label": "FDI inflows — China, latest",
+      "value": 104659,
+      "displayValue": "1,04,659",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.CHN.usd"
+    },
+    {
+      "label": "FDI inflows — China, minimum (1990-12-31)",
+      "value": 3487.11,
+      "displayValue": "3,487.11",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.CHN.usd"
+    },
+    {
+      "label": "FDI inflows — China, maximum (2022-12-31)",
+      "value": 189132.41,
+      "displayValue": "1,89,132.41",
+      "date": "2022-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.CHN.usd"
+    },
+    {
+      "label": "FDI inflows — China, earliest",
+      "value": 3487.11,
+      "displayValue": "3,487.11",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.CHN.usd"
+    },
+    {
+      "label": "FDI inflows — India, latest",
+      "value": 38891.33,
+      "displayValue": "38,891.33",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.IND.usd"
+    },
+    {
+      "label": "FDI inflows — India, minimum (1991-12-31)",
+      "value": 75,
+      "displayValue": "75",
+      "date": "1991-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.IND.usd"
+    },
+    {
+      "label": "FDI inflows — India, maximum (2020-12-31)",
+      "value": 64072.24,
+      "displayValue": "64,072.24",
+      "date": "2020-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.IND.usd"
+    },
+    {
+      "label": "FDI inflows — India, earliest",
+      "value": 236.69,
+      "displayValue": "236.69",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow.IND.usd"
+    },
+    {
+      "label": "India's share of all FDI going to developing economies, latest",
+      "value": 4.32,
+      "displayValue": "4.32",
+      "date": "2025-12-31",
+      "unit": "percent",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.india_share_developing.pct"
+    },
+    {
+      "label": "India's share of all FDI going to developing economies, minimum (1991-12-31)",
+      "value": 0.2,
+      "displayValue": "0.2",
+      "date": "1991-12-31",
+      "unit": "percent",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.india_share_developing.pct"
+    },
+    {
+      "label": "India's share of all FDI going to developing economies, maximum (2020-12-31)",
+      "value": 10.18,
+      "displayValue": "10.18",
+      "date": "2020-12-31",
+      "unit": "percent",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.india_share_developing.pct"
+    },
+    {
+      "label": "India's share of all FDI going to developing economies, earliest",
+      "value": 0.7,
+      "displayValue": "0.7",
+      "date": "1990-12-31",
+      "unit": "percent",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.india_share_developing.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 66.48,
+      "displayValue": "66.48",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 56.81,
+      "displayValue": "56.81",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 55.13,
+      "displayValue": "55.13",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 50.67,
+      "displayValue": "50.67",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 44.53,
+      "displayValue": "44.53",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 66.48,
+      "displayValue": "66.48",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 56.81,
+      "displayValue": "56.81",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 55.13,
+      "displayValue": "55.13",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 50.67,
+      "displayValue": "50.67",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Accumulated foreign ownership as a share of GDP, 2025: value",
+      "value": 44.53,
+      "displayValue": "44.53",
+      "date": 2025,
+      "unit": "percent of GDP",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct"
+    },
+    {
+      "label": "Announced greenfield project value — India, latest",
+      "value": 74116.31,
+      "displayValue": "74,116.31",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_announced.IN.usd"
+    },
+    {
+      "label": "Announced greenfield project value — India, minimum (2003-12-31)",
+      "value": 16247.3,
+      "displayValue": "16,247.3",
+      "date": "2003-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_announced.IN.usd"
+    },
+    {
+      "label": "Announced greenfield project value — India, maximum (2024-12-31)",
+      "value": 111134.54,
+      "displayValue": "1,11,134.54",
+      "date": "2024-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_announced.IN.usd"
+    },
+    {
+      "label": "Announced greenfield project value — India, earliest",
+      "value": 16247.3,
+      "displayValue": "16,247.3",
+      "date": "2003-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_announced.IN.usd"
+    },
+    {
+      "label": "FDI actually recorded in India's balance of payments, latest",
+      "value": 38891.33,
+      "displayValue": "38,891.33",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow_recorded.IN.usd"
+    },
+    {
+      "label": "FDI actually recorded in India's balance of payments, minimum (2003-12-31)",
+      "value": 4321.08,
+      "displayValue": "4,321.08",
+      "date": "2003-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow_recorded.IN.usd"
+    },
+    {
+      "label": "FDI actually recorded in India's balance of payments, maximum (2020-12-31)",
+      "value": 64072.24,
+      "displayValue": "64,072.24",
+      "date": "2020-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow_recorded.IN.usd"
+    },
+    {
+      "label": "FDI actually recorded in India's balance of payments, earliest",
+      "value": 4321.08,
+      "displayValue": "4,321.08",
+      "date": "2003-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_flow_recorded.IN.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: value",
+      "value": 19,
+      "displayValue": "19",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: received_usd_billion",
+      "value": 19,
+      "displayValue": "19",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: sent_out_usd_billion",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: net_usd_billion",
+      "value": 17,
+      "displayValue": "17",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: avg_pct_of_capital_formation",
+      "value": 1.77,
+      "displayValue": "1.77",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: value",
+      "value": 122,
+      "displayValue": "122",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: received_usd_billion",
+      "value": 122,
+      "displayValue": "122",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: sent_out_usd_billion",
+      "value": 63,
+      "displayValue": "63",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: net_usd_billion",
+      "value": 59,
+      "displayValue": "59",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: avg_pct_of_capital_formation",
+      "value": 4.69,
+      "displayValue": "4.69",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: value",
+      "value": 186,
+      "displayValue": "186",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "India's FDI by era, 1991-2025: received_usd_billion",
+      "value": 186,
+      "displayValue": "186",
+      "date": "",
+      "unit": "USD billion received over the period",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.era_summary.usd"
+    },
+    {
+      "label": "What foreigners own in India (FDI stock), latest",
+      "value": 558998.02,
+      "displayValue": "5,58,998.02",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock.IN.usd"
+    },
+    {
+      "label": "What foreigners own in India (FDI stock), minimum (1990-12-31)",
+      "value": 1656.81,
+      "displayValue": "1,656.81",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock.IN.usd"
+    },
+    {
+      "label": "What foreigners own in India (FDI stock), maximum (2025-12-31)",
+      "value": 558998.02,
+      "displayValue": "5,58,998.02",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock.IN.usd"
+    },
+    {
+      "label": "What foreigners own in India (FDI stock), earliest",
+      "value": 1656.81,
+      "displayValue": "1,656.81",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.inward_stock.IN.usd"
+    },
+    {
+      "label": "What India owns abroad (FDI stock), latest",
+      "value": 296446.39,
+      "displayValue": "2,96,446.39",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.outward_stock.IN.usd"
+    },
+    {
+      "label": "What India owns abroad (FDI stock), minimum (1991-12-31)",
+      "value": 113.07,
+      "displayValue": "113.07",
+      "date": "1991-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.outward_stock.IN.usd"
+    },
+    {
+      "label": "What India owns abroad (FDI stock), maximum (2025-12-31)",
+      "value": 296446.39,
+      "displayValue": "2,96,446.39",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.outward_stock.IN.usd"
+    },
+    {
+      "label": "What India owns abroad (FDI stock), earliest",
+      "value": 124.07,
+      "displayValue": "124.07",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.outward_stock.IN.usd"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Pakistan, latest",
+      "value": 4.31,
+      "displayValue": "4.31",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.PAK.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Pakistan, minimum (2000-12-31)",
+      "value": 2.19,
+      "displayValue": "2.19",
+      "date": "2000-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.PAK.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Pakistan, maximum (2007-12-31)",
+      "value": 19.08,
+      "displayValue": "19.08",
+      "date": "2007-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.PAK.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Pakistan, earliest",
+      "value": 3.27,
+      "displayValue": "3.27",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.PAK.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Bangladesh, latest",
+      "value": 1.34,
+      "displayValue": "1.34",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.BGD.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Bangladesh, minimum (1991-12-31)",
+      "value": 0.03,
+      "displayValue": "0.03",
+      "date": "1991-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.BGD.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Bangladesh, maximum (1997-12-31)",
+      "value": 6.74,
+      "displayValue": "6.74",
+      "date": "1997-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.BGD.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Bangladesh, earliest",
+      "value": 0.06,
+      "displayValue": "0.06",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.BGD.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Sri Lanka, latest",
+      "value": 5.5,
+      "displayValue": "5.5",
+      "date": "2025-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.LKA.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Sri Lanka, minimum (1995-12-31)",
+      "value": 1.87,
+      "displayValue": "1.87",
+      "date": "1995-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.LKA.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Sri Lanka, maximum (1997-12-31)",
+      "value": 10.54,
+      "displayValue": "10.54",
+      "date": "1997-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.LKA.pct"
+    },
+    {
+      "label": "FDI as a share of gross fixed capital formation — Sri Lanka, earliest",
+      "value": 2.53,
+      "displayValue": "2.53",
+      "date": "1990-12-31",
+      "unit": "percent of gross fixed capital formation",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.gfcf_share.LKA.pct"
+    },
+    {
+      "label": "Foreign purchases of Indian companies (net cross-border M&A sales), latest",
+      "value": -3345.51,
+      "displayValue": "-3,345.51",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.mna_sales.IN.usd"
+    },
+    {
+      "label": "Foreign purchases of Indian companies (net cross-border M&A sales), minimum (2025-12-31)",
+      "value": -3345.51,
+      "displayValue": "-3,345.51",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.mna_sales.IN.usd"
+    },
+    {
+      "label": "Foreign purchases of Indian companies (net cross-border M&A sales), maximum (2018-12-31)",
+      "value": 33596.19,
+      "displayValue": "33,596.19",
+      "date": "2018-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.mna_sales.IN.usd"
+    },
+    {
+      "label": "Foreign purchases of Indian companies (net cross-border M&A sales), earliest",
+      "value": 5,
+      "displayValue": "5",
+      "date": "1990-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.mna_sales.IN.usd"
+    },
+    {
+      "label": "Greenfield projects announced abroad by Indian firms, latest",
+      "value": 25293.42,
+      "displayValue": "25,293.42",
+      "date": "2025-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_outward.IN.usd"
+    },
+    {
+      "label": "Greenfield projects announced abroad by Indian firms, minimum (2020-12-31)",
+      "value": 7251.28,
+      "displayValue": "7,251.28",
+      "date": "2020-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_outward.IN.usd"
+    },
+    {
+      "label": "Greenfield projects announced abroad by Indian firms, maximum (2022-12-31)",
+      "value": 42340.96,
+      "displayValue": "42,340.96",
+      "date": "2022-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_outward.IN.usd"
+    },
+    {
+      "label": "Greenfield projects announced abroad by Indian firms, earliest",
+      "value": 8717.25,
+      "displayValue": "8,717.25",
+      "date": "2003-12-31",
+      "unit": "USD million",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.greenfield_outward.IN.usd"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: value",
+      "value": 41,
+      "displayValue": "41",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: world_top100",
+      "value": 9,
+      "displayValue": "9",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: value",
+      "value": 9,
+      "displayValue": "9",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: world_top100",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: value",
+      "value": 8,
+      "displayValue": "8",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: world_top100",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: value",
+      "value": 8,
+      "displayValue": "8",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: world_top100",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: value",
+      "value": 5,
+      "displayValue": "5",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: world_top100",
+      "value": 2,
+      "displayValue": "2",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: value",
+      "value": 5,
+      "displayValue": "5",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    },
+    {
+      "label": "Firms in the top 100 multinationals from developing economies, by home economy: world_top100",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "number of firms",
+      "sourceId": "unctad",
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "title": "FDI as a share of gross fixed capital formation — India",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.IND.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 0.28
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 3.13
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "title": "FDI as a share of gross fixed capital formation — Viet Nam",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.VNM.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "VNM",
+        "name": "Viet Nam"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 21.42
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 14.72
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct",
+      "title": "FDI as a share of gross fixed capital formation — China",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.CHN.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "CHN",
+        "name": "China"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 3.6
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 1.4
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "title": "FDI as a share of gross fixed capital formation — Korea",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.KOR.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "KOR",
+        "name": "Korea"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 0.97
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 2.81
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.POL.pct",
+      "title": "FDI as a share of gross fixed capital formation — Poland",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.POL.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "POL",
+        "name": "Poland"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 0.68
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 9
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "title": "FDI net inflows as a share of GDP — India",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "extfin.fdi.dev.gdp_share_wb.IND.pct",
+      "unit": "percent of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970-12-31",
+        "value": 0.073
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 0.988
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+      "title": "FDI net inflows as a share of GDP — East Asia & Pacific",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "extfin.fdi.dev.gdp_share_wb.EAS.pct",
+      "unit": "percent of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "region",
+        "id": "EAS",
+        "name": "East Asia & Pacific"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970-12-31",
+        "value": 0.598
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 1.273
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.LCN.pct",
+      "title": "FDI net inflows as a share of GDP — Latin America & Caribbean",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "extfin.fdi.dev.gdp_share_wb.LCN.pct",
+      "unit": "percent of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "region",
+        "id": "LCN",
+        "name": "Latin America & Caribbean"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970-12-31",
+        "value": 0.881
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 2.684
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+      "title": "FDI net inflows as a share of GDP — Sub-Saharan Africa",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "extfin.fdi.dev.gdp_share_wb.SSF.pct",
+      "unit": "percent of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "region",
+        "id": "SSF",
+        "name": "Sub-Saharan Africa"
+      },
+      "observations": 55,
+      "earliest": {
+        "date": "1970-12-31",
+        "value": 1.307
+      },
+      "latest": {
+        "date": "2024-12-31",
+        "value": 2.252
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+      "title": "FDI net inflows as a share of GDP — World",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "extfin.fdi.dev.gdp_share_wb.WLD.pct",
+      "unit": "percent of GDP",
+      "frequency": "annual",
+      "geography": {
+        "type": "region",
+        "id": "WLD",
+        "name": "World"
+      },
+      "observations": 56,
+      "earliest": {
+        "date": "1970-12-31",
+        "value": 0.498
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 1.263
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.world_rank.IN",
+      "title": "India's world rank for FDI received",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.world_rank.IN",
+      "unit": "rank among reporting economies",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 43
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 12
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.cumulative_per_person.usd",
+      "title": "Total FDI received per person, 1990-2025",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.cumulative_per_person.usd",
+      "unit": "US$ per person (36-year cumulative)",
+      "geography": {
+        "type": "multi",
+        "id": "MULTI",
+        "name": "Selected economies"
+      },
+      "rows": 17,
+      "dimensions": [
+        {
+          "id": "economy",
+          "label": "Economy"
+        }
+      ],
+      "latestRows": [
+        {
+          "economy": "Singapore",
+          "label": "Singapore",
+          "value": 292344,
+          "cumulative_fdi_usd_billion": 1716,
+          "population_2025_million": 6
+        },
+        {
+          "economy": "Ireland",
+          "label": "Ireland",
+          "value": 132690,
+          "cumulative_fdi_usd_billion": 704,
+          "population_2025_million": 5
+        },
+        {
+          "economy": "Poland",
+          "label": "Poland",
+          "value": 10689,
+          "cumulative_fdi_usd_billion": 408,
+          "population_2025_million": 38
+        },
+        {
+          "economy": "Malaysia",
+          "label": "Malaysia",
+          "value": 7127,
+          "cumulative_fdi_usd_billion": 256,
+          "population_2025_million": 36
+        },
+        {
+          "economy": "Mexico",
+          "label": "Mexico",
+          "value": 6554,
+          "cumulative_fdi_usd_billion": 865,
+          "population_2025_million": 132
+        },
+        {
+          "economy": "Korea",
+          "label": "Korea",
+          "value": 6517,
+          "cumulative_fdi_usd_billion": 337,
+          "population_2025_million": 52
+        },
+        {
+          "economy": "Brazil",
+          "label": "Brazil",
+          "value": 6444,
+          "cumulative_fdi_usd_billion": 1371,
+          "population_2025_million": 213
+        },
+        {
+          "economy": "Thailand",
+          "label": "Thailand",
+          "value": 3319,
+          "cumulative_fdi_usd_billion": 238,
+          "population_2025_million": 72
+        },
+        {
+          "economy": "Viet Nam",
+          "label": "Viet Nam",
+          "value": 2652,
+          "cumulative_fdi_usd_billion": 269,
+          "population_2025_million": 102
+        },
+        {
+          "economy": "China",
+          "label": "China",
+          "value": 2243,
+          "cumulative_fdi_usd_billion": 3177,
+          "population_2025_million": 1416
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.inward_flow.SEA.usd",
+      "title": "FDI inflows — Southeast Asia",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.inward_flow.SEA.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "region",
+        "id": "SEA",
+        "name": "Southeast Asia"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 12820.85
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 244164.78
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.inward_flow.CHN.usd",
+      "title": "FDI inflows — China",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.inward_flow.CHN.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "CHN",
+        "name": "China"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 3487.11
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 104659
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.inward_flow.IND.usd",
+      "title": "FDI inflows — India",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.inward_flow.IND.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 236.69
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 38891.33
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.india_share_developing.pct",
+      "title": "India's share of all FDI going to developing economies",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.india_share_developing.pct",
+      "unit": "percent",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 0.7
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 4.32
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+      "title": "Accumulated foreign ownership as a share of GDP, 2025",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.inward_stock_gdp_peers.pct",
+      "unit": "percent of GDP",
+      "geography": {
+        "type": "multi",
+        "id": "MULTI",
+        "name": "Selected economies"
+      },
+      "rows": 10,
+      "dimensions": [
+        {
+          "id": "economy",
+          "label": "Economy"
+        }
+      ],
+      "latestRows": [
+        {
+          "economy": "Thailand",
+          "label": "Thailand",
+          "value": 66.48,
+          "year": 2025
+        },
+        {
+          "economy": "Malaysia",
+          "label": "Malaysia",
+          "value": 56.81,
+          "year": 2025
+        },
+        {
+          "economy": "Viet Nam",
+          "label": "Viet Nam",
+          "value": 55.13,
+          "year": 2025
+        },
+        {
+          "economy": "Brazil",
+          "label": "Brazil",
+          "value": 50.67,
+          "year": 2025
+        },
+        {
+          "economy": "Mexico",
+          "label": "Mexico",
+          "value": 44.53,
+          "year": 2025
+        },
+        {
+          "economy": "Poland",
+          "label": "Poland",
+          "value": 40.64,
+          "year": 2025
+        },
+        {
+          "economy": "Indonesia",
+          "label": "Indonesia",
+          "value": 23.81,
+          "year": 2025
+        },
+        {
+          "economy": "China",
+          "label": "China",
+          "value": 19.25,
+          "year": 2025
+        },
+        {
+          "economy": "India",
+          "label": "India",
+          "value": 13.53,
+          "year": 2025
+        },
+        {
+          "economy": "Bangladesh",
+          "label": "Bangladesh",
+          "value": 4.32,
+          "year": 2025
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.greenfield_announced.IN.usd",
+      "title": "Announced greenfield project value — India",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.greenfield_announced.IN.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 23,
+      "earliest": {
+        "date": "2003-12-31",
+        "value": 16247.3
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 74116.31
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+      "title": "FDI actually recorded in India's balance of payments",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.inward_flow_recorded.IN.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 23,
+      "earliest": {
+        "date": "2003-12-31",
+        "value": 4321.08
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 38891.33
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.era_summary.usd",
+      "title": "India's FDI by era, 1991-2025",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.era_summary.usd",
+      "unit": "USD billion received over the period",
+      "geography": {
+        "type": "multi",
+        "id": "MULTI",
+        "name": "Selected economies"
+      },
+      "rows": 5,
+      "dimensions": [
+        {
+          "id": "era",
+          "label": "Era"
+        }
+      ],
+      "latestRows": [
+        {
+          "era": "1991-2000",
+          "label": "1991-2000",
+          "value": 19,
+          "received_usd_billion": 19,
+          "sent_out_usd_billion": 1,
+          "net_usd_billion": 17,
+          "avg_pct_of_capital_formation": 1.77
+        },
+        {
+          "era": "2001-2008",
+          "label": "2001-2008",
+          "value": 122,
+          "received_usd_billion": 122,
+          "sent_out_usd_billion": 63,
+          "net_usd_billion": 59,
+          "avg_pct_of_capital_formation": 4.69
+        },
+        {
+          "era": "2009-2014",
+          "label": "2009-2014",
+          "value": 186,
+          "received_usd_billion": 186,
+          "sent_out_usd_billion": 66,
+          "net_usd_billion": 120,
+          "avg_pct_of_capital_formation": 5.14
+        },
+        {
+          "era": "2015-2020",
+          "label": "2015-2020",
+          "value": 285,
+          "received_usd_billion": 285,
+          "sent_out_usd_billion": 59,
+          "net_usd_billion": 226,
+          "avg_pct_of_capital_formation": 6.31
+        },
+        {
+          "era": "2021-2025",
+          "label": "2021-2025",
+          "value": 188,
+          "received_usd_billion": 188,
+          "sent_out_usd_billion": 106,
+          "net_usd_billion": 83,
+          "avg_pct_of_capital_formation": 3.33
+        }
+      ]
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.inward_stock.IN.usd",
+      "title": "What foreigners own in India (FDI stock)",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.inward_stock.IN.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 1656.81
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 558998.02
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.outward_stock.IN.usd",
+      "title": "What India owns abroad (FDI stock)",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.outward_stock.IN.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 124.07
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 296446.39
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.PAK.pct",
+      "title": "FDI as a share of gross fixed capital formation — Pakistan",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.PAK.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "PAK",
+        "name": "Pakistan"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 3.27
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 4.31
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.BGD.pct",
+      "title": "FDI as a share of gross fixed capital formation — Bangladesh",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.BGD.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "BGD",
+        "name": "Bangladesh"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 0.06
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 1.34
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.gfcf_share.LKA.pct",
+      "title": "FDI as a share of gross fixed capital formation — Sri Lanka",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.gfcf_share.LKA.pct",
+      "unit": "percent of gross fixed capital formation",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "LKA",
+        "name": "Sri Lanka"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 2.53
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 5.5
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.mna_sales.IN.usd",
+      "title": "Foreign purchases of Indian companies (net cross-border M&A sales)",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.mna_sales.IN.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 36,
+      "earliest": {
+        "date": "1990-12-31",
+        "value": 5
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": -3345.51
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.greenfield_outward.IN.usd",
+      "title": "Greenfield projects announced abroad by Indian firms",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.greenfield_outward.IN.usd",
+      "unit": "USD million",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 23,
+      "earliest": {
+        "date": "2003-12-31",
+        "value": 8717.25
+      },
+      "latest": {
+        "date": "2025-12-31",
+        "value": 25293.42
+      }
+    },
+    {
+      "indicatorId": "extfin.fdi.dev.top100_mne_home_economy.count",
+      "title": "Firms in the top 100 multinationals from developing economies, by home economy",
+      "sourceId": "unctad",
+      "sourceIndicatorId": "extfin.fdi.dev.top100_mne_home_economy.count",
+      "unit": "number of firms",
+      "geography": {
+        "type": "multi",
+        "id": "MULTI",
+        "name": "Selected economies"
+      },
+      "rows": 12,
+      "dimensions": [
+        {
+          "id": "economy",
+          "label": "Home economy"
+        }
+      ],
+      "latestRows": [
+        {
+          "economy": "China",
+          "label": "China",
+          "value": 41,
+          "world_top100": 9
+        },
+        {
+          "economy": "Hong Kong, China",
+          "label": "Hong Kong, China",
+          "value": 9,
+          "world_top100": 1
+        },
+        {
+          "economy": "Taiwan Province of China",
+          "label": "Taiwan Province of China",
+          "value": 8,
+          "world_top100": 1
+        },
+        {
+          "economy": "Singapore",
+          "label": "Singapore",
+          "value": 8,
+          "world_top100": 1
+        },
+        {
+          "economy": "Malaysia",
+          "label": "Malaysia",
+          "value": 5,
+          "world_top100": 2
+        },
+        {
+          "economy": "Thailand",
+          "label": "Thailand",
+          "value": 5,
+          "world_top100": 0
+        },
+        {
+          "economy": "India",
+          "label": "India",
+          "value": 4,
+          "world_top100": 0
+        },
+        {
+          "economy": "Mexico",
+          "label": "Mexico",
+          "value": 4,
+          "world_top100": 0
+        },
+        {
+          "economy": "South Africa",
+          "label": "South Africa",
+          "value": 3,
+          "world_top100": 1
+        },
+        {
+          "economy": "United Arab Emirates",
+          "label": "United Arab Emirates",
+          "value": 3,
+          "world_top100": 0
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

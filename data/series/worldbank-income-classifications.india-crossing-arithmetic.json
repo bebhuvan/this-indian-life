@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.india_crossing_arithmetic",
+  "title": "When India would cross if past relative catch-up rates continued",
+  "sourceId": "worldbank-income-classifications",
+  "sourceIndicatorId": "NY.GNP.PCAP.CD + historical upper-middle-income threshold",
+  "sourceUrl": "https://ddh-openapi.worldbank.org/resources/DR0095334/download",
+  "unit": "years after 2025",
+  "geography": {
+    "type": "global",
+    "id": "WORLD",
+    "name": "World"
+  },
+  "dimensions": [
+    "date",
+    "label",
+    "projectedYear",
+    "relativeCatchupRate",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "2007-2025 pace",
+      "value": 11,
+      "projectedYear": 2036,
+      "relativeCatchupRate": 5.04,
+      "date": "2025"
+    },
+    {
+      "label": "2015-2025 pace",
+      "value": 12,
+      "projectedYear": 2037,
+      "relativeCatchupRate": 4.28,
+      "date": "2025"
+    },
+    {
+      "label": "2021-2025 pace",
+      "value": 13,
+      "projectedYear": 2038,
+      "relativeCatchupRate": 3.95,
+      "date": "2025"
+    },
+    {
+      "label": "2019-2025 pace",
+      "value": 21,
+      "projectedYear": 2046,
+      "relativeCatchupRate": 2.56,
+      "date": "2025"
+    }
+  ],
+  "metadata": {
+    "release": "World Bank 2025 estimates published July 2026",
+    "estimate": true,
+    "revisionWarning": "The 2025 values are estimates and may be revised.",
+    "rounding": "Displayed values should be rounded; derived ratios retain one decimal place.",
+    "method": "Compound annual growth in India's ratio to the upper-middle threshold over each start-year window, continued until the ratio reaches 100%.",
+    "warning": "These are arithmetic continuations, not forecasts. Growth, inflation, exchange rates, revisions, and the threshold itself will change.",
+    "inputs": [
+      "https://api.worldbank.org/v2/country/all/indicator/NY.GNP.PCAP.CD?format=json&per_page=20000&date=1987:2025",
+      "https://ddh-openapi.worldbank.org/resources/DR0095334/download"
+    ]
+  }
+}

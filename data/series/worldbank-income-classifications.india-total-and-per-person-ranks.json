@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.india_total_and_per_person_ranks",
+  "title": "India's total-economy and per-person ranks in the World Bank 2025 workbooks",
+  "sourceId": "worldbank-income-classifications",
+  "sourceIndicatorId": "GDP, GDP_PPP and GNIPC 2025 workbook rankings",
+  "sourceUrl": "https://blogs.worldbank.org/en/opendata/who-moves-up-and-why--a-closer-look-at-the-new-world-bank-group-",
+  "unit": "rank, 1 is highest",
+  "geography": {
+    "type": "global",
+    "id": "WORLD",
+    "name": "World"
+  },
+  "dimensions": [
+    "date",
+    "group",
+    "label",
+    "universe",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "PPP GDP, total",
+      "value": 3,
+      "universe": 197,
+      "group": "Whole economy",
+      "date": "2025"
+    },
+    {
+      "label": "GDP at market rates, total",
+      "value": 6,
+      "universe": 204,
+      "group": "Whole economy",
+      "date": "2025"
+    },
+    {
+      "label": "PPP GNI per person",
+      "value": 132,
+      "universe": 196,
+      "group": "Per person",
+      "date": "2025"
+    },
+    {
+      "label": "Atlas GNI per person",
+      "value": 156,
+      "universe": 200,
+      "group": "Per person",
+      "date": "2025"
+    }
+  ],
+  "metadata": {
+    "release": "World Bank 2025 estimates published July 2026",
+    "estimate": true,
+    "revisionWarning": "The 2025 values are estimates and may be revised.",
+    "rounding": "Displayed values should be rounded; derived ratios retain one decimal place.",
+    "method": "Ranks transcribed from the 2025 World Bank GDP, GDP PPP and GNI-per-capita release workbooks.",
+    "warning": "Each rank covers economies with a published estimate in that workbook. Total-economy and per-person ranks answer different questions.",
+    "rankedUniverses": {
+      "gdpMarket": 204,
+      "gdpPpp": 197,
+      "gniAtlasPerPerson": 200,
+      "gniPppPerPerson": 196
+    },
+    "inputs": [
+      "https://datacatalogfiles.worldbank.org/ddh-published/0038130/DR0046439/GDP.xlsx",
+      "https://datacatalogfiles.worldbank.org/ddh-published/0038129/DR0046436/GDP_PPP.xlsx",
+      "https://datacatalogfiles.worldbank.org/ddh-published/0038128/DR0046433/GNIPC.xlsx"
+    ]
+  }
+}

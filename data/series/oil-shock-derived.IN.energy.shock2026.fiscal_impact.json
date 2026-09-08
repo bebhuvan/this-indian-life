@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "energy.shock2026.fiscal_impact",
+  "title": "It went to the exchequer instead",
+  "sourceId": "oil-shock-derived",
+  "sourceIndicatorId": "energy.shock2026.fiscal_impact",
+  "sourceUrl": "https://cga.nic.in/MonthDashboardReport/Published/list.aspx",
+  "unit": "% change, April-June 2026 against April-June 2025",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-08-28T04:00:57.596885+00:00",
+  "rows": [
+    {
+      "label": "Urea subsidy",
+      "value": 68.2,
+      "actualPercentChange": 68.2,
+      "negligible": false,
+      "aprJun2025Crore": 31523,
+      "aprJun2026Crore": 53034
+    },
+    {
+      "label": "Customs collections",
+      "value": 36.1,
+      "actualPercentChange": 36.1,
+      "negligible": false,
+      "aprJun2025Crore": 42414,
+      "aprJun2026Crore": 57741
+    },
+    {
+      "label": "Other fertiliser subsidy",
+      "value": 22.5,
+      "actualPercentChange": 22.5,
+      "negligible": false,
+      "aprJun2025Crore": 9499,
+      "aprJun2026Crore": 11632
+    },
+    {
+      "label": "Petroleum subsidy",
+      "value": 0.0,
+      "actualPercentChange": 10.4,
+      "negligible": true,
+      "aprJun2025Crore": 255,
+      "aprJun2026Crore": 282
+    },
+    {
+      "label": "Union excise (fuel taxes)",
+      "value": -22.4,
+      "actualPercentChange": -22.4,
+      "negligible": false,
+      "aprJun2025Crore": 55605,
+      "aprJun2026Crore": 43149
+    }
+  ],
+  "metadata": {
+    "generatedFor": "q.econ.oil_shock_2026",
+    "method": "Comptroller General of Accounts monthly flows summed over April to June and compared year on year.",
+    "aprilCaveat": "April posts as a near-zero or negative month for excise in the CGA accounts every year (April 2025 was MINUS 39 crore), so only April-June TOTALS are comparable. Never compare a single month against April.",
+    "caveat": "Union excise post-GST is overwhelmingly petroleum, and the GEP records a fuel tax cut in India, so that attribution is sound. Customs covers ALL imports and India levies little basic customs duty on crude, so do NOT attribute its rise to oil. Excise and customs together were roughly flat, +2.9%. The petroleum subsidy line stayed near nil throughout: there was no fuel subsidy surge."
+  }
+}

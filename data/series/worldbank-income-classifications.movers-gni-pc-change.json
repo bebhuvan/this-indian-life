@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "econ.income_classification.movers_gni_pc_change",
+  "title": "Change in Atlas GNI per capita for the economies that moved up in 2025",
+  "sourceId": "worldbank-income-classifications",
+  "sourceIndicatorId": "NY.GNP.PCAP.CD + World Bank mover analysis",
+  "sourceUrl": "https://blogs.worldbank.org/en/opendata/who-moves-up-and-why--a-closer-look-at-the-new-world-bank-group-",
+  "unit": "% change from 2024",
+  "geography": {
+    "type": "global",
+    "id": "WORLD",
+    "name": "World"
+  },
+  "dimensions": [
+    "date",
+    "from",
+    "group",
+    "label",
+    "to",
+    "value"
+  ],
+  "fetchedAt": "2026-07-17T05:07:35.255235Z",
+  "rows": [
+    {
+      "label": "Sri Lanka",
+      "value": 20.7,
+      "group": "Economic recovery",
+      "from": 3870.0,
+      "to": 4670.0,
+      "date": "2025"
+    },
+    {
+      "label": "Vietnam",
+      "value": 10.7,
+      "group": "Growth and exports",
+      "from": 4490.0,
+      "to": 4970.0,
+      "date": "2025"
+    },
+    {
+      "label": "Togo",
+      "value": 10.7,
+      "group": "Population revision",
+      "from": 1220.0,
+      "to": 1350.0,
+      "date": "2025"
+    },
+    {
+      "label": "Philippines",
+      "value": 8.5,
+      "group": "Broad-based growth",
+      "from": 4470.0,
+      "to": 4850.0,
+      "date": "2025"
+    },
+    {
+      "label": "Jordan",
+      "value": 7.8,
+      "group": "GDP rebasing",
+      "from": 4880.0,
+      "to": 5260.0,
+      "date": "2025"
+    },
+    {
+      "label": "Micronesia, Fed. Sts.",
+      "value": 6.0,
+      "group": "Post-Covid recovery",
+      "from": 4490.0,
+      "to": 4760.0,
+      "date": "2025"
+    }
+  ],
+  "metadata": {
+    "release": "World Bank 2025 estimates published July 2026",
+    "estimate": true,
+    "revisionWarning": "The 2025 values are estimates and may be revised.",
+    "rounding": "Displayed values should be rounded; derived ratios retain one decimal place.",
+    "method": "Percentage change in Atlas-method GNI per capita from 2024 to 2025.",
+    "mechanisms": {
+      "VNM": "Growth and exports",
+      "PHL": "Broad-based growth",
+      "LKA": "Economic recovery",
+      "FSM": "Post-Covid recovery",
+      "JOR": "GDP rebasing",
+      "TGO": "Population revision"
+    },
+    "warning": "Classification changes can reflect growth, exchange rates, rebasing, population revisions, or recovery. The bars are not a causal decomposition."
+  }
+}

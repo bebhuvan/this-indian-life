@@ -1,0 +1,2057 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.oil_shock_2026",
+  "question": "The Gulf shut. What did the 2026 oil shock actually cost India?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "energy.shock2026.gulf_share_by_commodity",
+    "energy.shock2026.crude_bill_apr_jul",
+    "energy.shock2026.lpg_volume_apr_jul",
+    "energy.prices.india_crude_import_price_monthly",
+    "energy.shock2026.consumer_price_passthrough",
+    "energy.shock2026.fiscal_impact"
+  ],
+  "availableIndicatorIds": [
+    "energy.shock2026.gulf_share_by_commodity",
+    "energy.shock2026.crude_bill_apr_jul",
+    "energy.shock2026.lpg_volume_apr_jul",
+    "energy.prices.india_crude_import_price_monthly",
+    "energy.shock2026.consumer_price_passthrough",
+    "energy.shock2026.fiscal_impact"
+  ],
+  "themeIndicatorIds": [
+    "energy.shock2026.gulf_share_by_commodity",
+    "energy.shock2026.crude_bill_apr_jul",
+    "energy.shock2026.lpg_volume_apr_jul",
+    "energy.prices.india_crude_import_price_monthly",
+    "energy.shock2026.consumer_price_passthrough",
+    "energy.shock2026.fiscal_impact",
+    "trade.gep.hormuz_transits_7dma",
+    "energy.gep.shock_index_brent",
+    "energy.shock2026.middle_east_dependence",
+    "energy.shock2026.crude_partners_2025",
+    "energy.shock2026.lpg_partners_2025",
+    "macro.shock2026.forecast_revisions",
+    "macro.shock2026.india_growth_vs_january",
+    "macro.gep.india_gdp_growth_quarterly"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.energy.shock2026.gulf_share_by_commodity",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "title": "India could replace the barrel. It could not replace the cooking gas.",
+      "sourceId": "oil-shock-derived",
+      "unit": "% of import value from the Gulf, 2025",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.energy.shock2026.crude_bill_apr_jul",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "title": "The same barrels, a $22.8 billion bigger bill",
+      "sourceId": "oil-shock-derived",
+      "unit": "US$ billion spent on crude oil imports",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.energy.shock2026.lpg_volume_apr_jul",
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul",
+      "title": "Cooking gas imports nearly halved",
+      "sourceId": "oil-shock-derived",
+      "unit": "million tonnes of LPG imported",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.energy.prices.india_crude_import_price_monthly",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly",
+      "title": "India's average crude oil import price, monthly (realised landed cost)",
+      "sourceId": "indiadatahub",
+      "unit": "US$ per barrel",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v5.energy.shock2026.consumer_price_passthrough",
+      "indicatorId": "energy.shock2026.consumer_price_passthrough",
+      "title": "The shock barely reached the shelf",
+      "sourceId": "oil-shock-derived",
+      "unit": "% year-on-year inflation, July 2026",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v6.energy.shock2026.fiscal_impact",
+      "indicatorId": "energy.shock2026.fiscal_impact",
+      "title": "It went to the exchequer instead",
+      "sourceId": "oil-shock-derived",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v7.trade.gep.hormuz_transits_7dma",
+      "indicatorId": "trade.gep.hormuz_transits_7dma",
+      "title": "Shipping through the Strait of Hormuz, seven-day moving average",
+      "sourceId": "worldbank-gep",
+      "unit": "million metric tons per day",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v8.energy.gep.shock_index_brent",
+      "indicatorId": "energy.gep.shock_index_brent",
+      "title": "Brent crude since the Middle East conflict began (27 Feb 2026 = 100)",
+      "sourceId": "worldbank-gep",
+      "unit": "index, 27 Feb 2026 = 100",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v9.energy.shock2026.middle_east_dependence",
+      "indicatorId": "energy.shock2026.middle_east_dependence",
+      "title": "South Asia is the region most exposed to Gulf energy",
+      "sourceId": "worldbank-gep",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v10.energy.shock2026.crude_partners_2025",
+      "indicatorId": "energy.shock2026.crude_partners_2025",
+      "title": "Where India's crude actually comes from",
+      "sourceId": "oil-shock-derived",
+      "unit": "% of import value, 2025",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v11.energy.shock2026.lpg_partners_2025",
+      "indicatorId": "energy.shock2026.lpg_partners_2025",
+      "title": "Where India's cooking gas comes from",
+      "sourceId": "oil-shock-derived",
+      "unit": "% of import value, 2025",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v12.macro.shock2026.forecast_revisions",
+      "indicatorId": "macro.shock2026.forecast_revisions",
+      "title": "The World Bank cut 93 of 146 forecasts. India's went up.",
+      "sourceId": "worldbank-gep",
+      "unit": "number of 2026 growth forecasts",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v13.macro.shock2026.india_growth_vs_january",
+      "indicatorId": "macro.shock2026.india_growth_vs_january",
+      "title": "India's growth forecast barely moved",
+      "sourceId": "worldbank-gep",
+      "unit": "% real GDP growth, fiscal years",
+      "role": "context",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    },
+    {
+      "visualId": "v14.macro.gep.india_gdp_growth_quarterly",
+      "indicatorId": "macro.gep.india_gdp_growth_quarterly",
+      "title": "India real GDP growth, year on year, by quarter",
+      "sourceId": "worldbank-gep",
+      "unit": "percent",
+      "role": "context",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This chart adds context, structure, change, or a caveat to the headline answer."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "the-gulf-s-shipping-lane-emptied-in-a-fortnight",
+      "title": "The Gulf's shipping lane emptied in a fortnight",
+      "chartType": "multiLine",
+      "beat": "answer",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "trade.gep.hormuz_transits_7dma",
+          "label": "2026"
+        },
+        {
+          "indicator": "trade.gep.hormuz_transits_7dma_prior_year",
+          "label": "A year earlier"
+        }
+      ],
+      "unit": "million metric tons per day",
+      "subtitle": "Cargo carried through the Strait of Hormuz, seven-day moving average · IMF PortWatch via World Bank",
+      "whyThisChart": "Everything in this article starts here. One sea lane carries most of the Gulf's oil and gas, and at the end of February 2026 it effectively stopped."
+    },
+    {
+      "order": 2,
+      "chartId": "four-prices-that-all-run-through-one-strait",
+      "title": "Four prices that all run through one strait",
+      "chartType": "multiLine",
+      "beat": "mechanism",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "energy.gep.shock_index_brent",
+          "label": "Brent crude"
+        },
+        {
+          "indicator": "energy.gep.shock_index_asian_lng",
+          "label": "Asian LNG"
+        },
+        {
+          "indicator": "energy.gep.shock_index_urea",
+          "label": "Urea"
+        },
+        {
+          "indicator": "energy.gep.shock_index_eu_gas",
+          "label": "European gas"
+        }
+      ],
+      "unit": "index, 27 Feb 2026 = 100",
+      "subtitle": "Daily prices indexed to 27 February 2026, the last market day before the conflict · World Bank",
+      "whyThisChart": "Oil is the headline, but the same strait carries the gas that heats Europe and the urea that feeds Indian wheat. Watching them together shows the shock was never only about petrol."
+    },
+    {
+      "order": 3,
+      "chartId": "south-asia-is-the-region-most-exposed-to-gulf-energy",
+      "title": "South Asia is the region most exposed to Gulf energy",
+      "chartType": "tableBars",
+      "beat": "comparison",
+      "window": "",
+      "indicator": "energy.shock2026.middle_east_dependence",
+      "series": [],
+      "unit": "% of economies in the region",
+      "subtitle": "Share of economies in each region sourcing over 30% of their oil imports from the Middle East, 2023 · World Bank",
+      "whyThisChart": "Before asking what the shock did to India, establish that India sits in the most exposed neighbourhood on earth."
+    },
+    {
+      "order": 4,
+      "chartId": "india-could-replace-the-barrel-it-could-not-replace-the-cooking-gas",
+      "title": "India could replace the barrel. It could not replace the cooking gas.",
+      "chartType": "tableBars",
+      "beat": "mechanism",
+      "window": "",
+      "indicator": "energy.shock2026.gulf_share_by_commodity",
+      "series": [],
+      "unit": "% of import value from the Gulf",
+      "subtitle": "Share of India's 2025 import value sourced from the seven Gulf economies · UN Comtrade",
+      "whyThisChart": "This single chart explains why the shock hit India so unevenly. The exposure is not one number, it is a gradient, and the top and bottom of it behaved completely differently."
+    },
+    {
+      "order": 5,
+      "chartId": "where-india-s-crude-actually-comes-from",
+      "title": "Where India's crude actually comes from",
+      "chartType": "tableBars",
+      "beat": "mechanism",
+      "window": "",
+      "indicator": "energy.shock2026.crude_partners_2025",
+      "series": [],
+      "unit": "% of crude import value",
+      "subtitle": "Share of India's 2025 crude oil import value, by supplier · UN Comtrade",
+      "whyThisChart": "The reason crude volumes held: India spent the years after 2022 rebuilding its supplier list around a country that does not ship through Hormuz."
+    },
+    {
+      "order": 6,
+      "chartId": "where-india-s-cooking-gas-comes-from",
+      "title": "Where India's cooking gas comes from",
+      "chartType": "tableBars",
+      "beat": "mechanism",
+      "window": "",
+      "indicator": "energy.shock2026.lpg_partners_2025",
+      "series": [],
+      "unit": "% of LPG import value",
+      "subtitle": "Share of India's 2025 LPG import value, by supplier · UN Comtrade",
+      "whyThisChart": "The same chart for LPG, and the contrast with crude is the whole argument."
+    },
+    {
+      "order": 7,
+      "chartId": "what-india-actually-paid-for-a-barrel",
+      "title": "What India actually paid for a barrel",
+      "chartType": "multiLine",
+      "beat": "answer",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "energy.prices.india_crude_import_price_monthly",
+          "label": "What India paid on landing"
+        },
+        {
+          "indicator": "energy.prices.indian_basket_monthly",
+          "label": "Indian basket (reference price)"
+        },
+        {
+          "indicator": "energy.prices.brent_monthly",
+          "label": "Brent"
+        },
+        {
+          "indicator": "energy.prices.dubai_fateh_monthly",
+          "label": "Dubai Fateh"
+        }
+      ],
+      "unit": "US$ per barrel",
+      "subtitle": "Monthly average, India's realised crude import price against the reference benchmarks · PPAC and World Bank",
+      "whyThisChart": "There are two Indian oil prices and the difference matters enormously during a shock. One is a reference quote; the other is the money that actually left the country."
+    },
+    {
+      "order": 8,
+      "chartId": "the-same-barrels-a-22-8-billion-bigger-bill",
+      "title": "The same barrels, a $22.8 billion bigger bill",
+      "chartType": "tableBars",
+      "beat": "answer",
+      "window": "",
+      "indicator": "energy.shock2026.crude_bill_apr_jul",
+      "series": [],
+      "unit": "US$ billion",
+      "subtitle": "Spending on crude oil imports, April to July of each year · PPAC",
+      "whyThisChart": "This is the cleanest measure of what the shock cost, because the volume barely moved. Almost the entire difference is price."
+    },
+    {
+      "order": 9,
+      "chartId": "cooking-gas-was-the-thing-india-could-not-buy",
+      "title": "Cooking gas was the thing India could not buy",
+      "chartType": "tableBars",
+      "beat": "distribution",
+      "window": "",
+      "indicator": "energy.shock2026.lpg_volume_apr_jul",
+      "series": [],
+      "unit": "million tonnes",
+      "subtitle": "LPG imports, April to July of each year · PPAC",
+      "whyThisChart": "Crude was a price problem. LPG was a quantity problem, and quantity problems reach kitchens."
+    },
+    {
+      "order": 10,
+      "chartId": "the-shock-barely-reached-the-shelf",
+      "title": "The shock barely reached the shelf",
+      "chartType": "tableBars",
+      "beat": "caveat",
+      "window": "",
+      "indicator": "energy.shock2026.consumer_price_passthrough",
+      "series": [],
+      "unit": "% year on year",
+      "subtitle": "Year-on-year consumer price inflation, July 2026 · MOSPI 2024-base CPI",
+      "whyThisChart": "If a landed crude price rises 81%, you would expect the pump to follow. It did not, and where that gap went is the rest of the story."
+    },
+    {
+      "order": 11,
+      "chartId": "it-went-to-the-exchequer-instead",
+      "title": "It went to the exchequer instead",
+      "chartType": "tableBars",
+      "beat": "answer",
+      "window": "",
+      "indicator": "energy.shock2026.fiscal_impact",
+      "series": [],
+      "unit": "% change year on year",
+      "subtitle": "Change in central government revenue and subsidy lines, April-June 2026 against a year earlier · Comptroller General of Accounts",
+      "whyThisChart": "The money that did not come out of household budgets came out of the government's. This is where to look for it."
+    },
+    {
+      "order": 12,
+      "chartId": "the-world-bank-cut-93-of-146-forecasts-india-s-went-up",
+      "title": "The World Bank cut 93 of 146 forecasts. India's went up.",
+      "chartType": "tableBars",
+      "beat": "comparison",
+      "window": "",
+      "indicator": "macro.shock2026.forecast_revisions",
+      "series": [],
+      "unit": "number of economies",
+      "subtitle": "How 2026 growth forecasts moved between the January and June 2026 Global Economic Prospects",
+      "whyThisChart": "The oddity that makes this story worth telling: the edition that downgraded two-thirds of the developing world nudged India upward."
+    },
+    {
+      "order": 13,
+      "chartId": "same-number-completely-different-reasons",
+      "title": "Same number, completely different reasons",
+      "chartType": "tableBars",
+      "beat": "answer",
+      "window": "",
+      "indicator": "macro.shock2026.india_growth_vs_january",
+      "series": [],
+      "unit": "% real GDP growth",
+      "subtitle": "World Bank forecast for India's real GDP growth, by fiscal year · June 2026 edition",
+      "whyThisChart": "India's 2026-27 forecast moved by a tenth of a point between January and June. Everything behind it was replaced."
+    },
+    {
+      "order": 14,
+      "chartId": "india-went-into-the-shock-accelerating",
+      "title": "India went into the shock accelerating",
+      "chartType": "line",
+      "beat": "context",
+      "window": "",
+      "indicator": "macro.gep.india_gdp_growth_quarterly",
+      "series": [],
+      "unit": "% year on year",
+      "subtitle": "Real GDP growth, year on year, by calendar quarter · World Bank",
+      "whyThisChart": "Part of why the shock did less damage than it might have is simply when it arrived. India hit it with momentum."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 91.4,
+      "displayValue": "91.4%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 14.1,
+      "displayValue": "14.1%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 60.8,
+      "displayValue": "60.8%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 13.4,
+      "displayValue": "13.4%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 47.9,
+      "displayValue": "47.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 138.9,
+      "displayValue": "138.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 41.7,
+      "displayValue": "41.7%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 4.9,
+      "displayValue": "4.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 27.2,
+      "displayValue": "27.2%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 9.8,
+      "displayValue": "9.8%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 20.9,
+      "displayValue": "20.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 4.7,
+      "displayValue": "4.7%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: value",
+      "value": 49,
+      "displayValue": "49",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: volumeMt",
+      "value": 81.7,
+      "displayValue": "81.7",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: value",
+      "value": 40.5,
+      "displayValue": "40.5",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: volumeMt",
+      "value": 81.5,
+      "displayValue": "81.5",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: value",
+      "value": 63.4,
+      "displayValue": "63.4",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: volumeMt",
+      "value": 81.9,
+      "displayValue": "81.9",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cooking gas imports nearly halved: value",
+      "value": 6.17,
+      "displayValue": "6.17",
+      "date": "",
+      "unit": "million tonnes of LPG imported",
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cooking gas imports nearly halved: value",
+      "value": 7.08,
+      "displayValue": "7.08",
+      "date": "",
+      "unit": "million tonnes of LPG imported",
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Cooking gas imports nearly halved: value",
+      "value": 3.7,
+      "displayValue": "3.7",
+      "date": "",
+      "unit": "million tonnes of LPG imported",
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul",
+      "sourceId": "oil-shock-derived",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's average crude oil import price, monthly (realised landed cost), latest",
+      "value": 87.4241582466233,
+      "displayValue": "87.42",
+      "date": "2026-07",
+      "unit": "US$ per barrel",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's average crude oil import price, monthly (realised landed cost), minimum (2020-05)",
+      "value": 21.1229937863419,
+      "displayValue": "21.12",
+      "date": "2020-05",
+      "unit": "US$ per barrel",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's average crude oil import price, monthly (realised landed cost), maximum (2012-03)",
+      "value": 121.121760956922,
+      "displayValue": "121.12",
+      "date": "2012-03",
+      "unit": "US$ per barrel",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly",
+      "sourceId": "indiadatahub",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 91.4,
+      "displayValue": "91.4%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 14.1,
+      "displayValue": "14.1%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 60.8,
+      "displayValue": "60.8%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 13.4,
+      "displayValue": "13.4%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 47.9,
+      "displayValue": "47.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 138.9,
+      "displayValue": "138.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 41.7,
+      "displayValue": "41.7%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 4.9,
+      "displayValue": "4.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 27.2,
+      "displayValue": "27.2%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 9.8,
+      "displayValue": "9.8%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: value",
+      "value": 20.9,
+      "displayValue": "20.9%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "India could replace the barrel. It could not replace the cooking gas.: importsUsdBn",
+      "value": 4.7,
+      "displayValue": "4.7%",
+      "date": "",
+      "unit": "% of import value from the Gulf, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity"
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: value",
+      "value": 49,
+      "displayValue": "49",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul"
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: volumeMt",
+      "value": 81.7,
+      "displayValue": "81.7",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul"
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: value",
+      "value": 40.5,
+      "displayValue": "40.5",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul"
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: volumeMt",
+      "value": 81.5,
+      "displayValue": "81.5",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul"
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: value",
+      "value": 63.4,
+      "displayValue": "63.4",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul"
+    },
+    {
+      "label": "The same barrels, a $22.8 billion bigger bill: volumeMt",
+      "value": 81.9,
+      "displayValue": "81.9",
+      "date": "",
+      "unit": "US$ billion spent on crude oil imports",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul"
+    },
+    {
+      "label": "Cooking gas imports nearly halved: value",
+      "value": 6.17,
+      "displayValue": "6.17",
+      "date": "",
+      "unit": "million tonnes of LPG imported",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul"
+    },
+    {
+      "label": "Cooking gas imports nearly halved: value",
+      "value": 7.08,
+      "displayValue": "7.08",
+      "date": "",
+      "unit": "million tonnes of LPG imported",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul"
+    },
+    {
+      "label": "Cooking gas imports nearly halved: value",
+      "value": 3.7,
+      "displayValue": "3.7",
+      "date": "",
+      "unit": "million tonnes of LPG imported",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul"
+    },
+    {
+      "label": "India's average crude oil import price, monthly (realised landed cost), latest",
+      "value": 87.4241582466233,
+      "displayValue": "87.42",
+      "date": "2026-07",
+      "unit": "US$ per barrel",
+      "sourceId": "indiadatahub",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly"
+    },
+    {
+      "label": "India's average crude oil import price, monthly (realised landed cost), minimum (2020-05)",
+      "value": 21.1229937863419,
+      "displayValue": "21.12",
+      "date": "2020-05",
+      "unit": "US$ per barrel",
+      "sourceId": "indiadatahub",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly"
+    },
+    {
+      "label": "India's average crude oil import price, monthly (realised landed cost), maximum (2012-03)",
+      "value": 121.121760956922,
+      "displayValue": "121.12",
+      "date": "2012-03",
+      "unit": "US$ per barrel",
+      "sourceId": "indiadatahub",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly"
+    },
+    {
+      "label": "India's average crude oil import price, monthly (realised landed cost), earliest",
+      "value": 117.13418639594,
+      "displayValue": "117.13",
+      "date": "2011-04",
+      "unit": "US$ per barrel",
+      "sourceId": "indiadatahub",
+      "indicatorId": "energy.prices.india_crude_import_price_monthly"
+    },
+    {
+      "label": "The shock barely reached the shelf: value",
+      "value": 8.4,
+      "displayValue": "8.4%",
+      "date": "",
+      "unit": "% year-on-year inflation, July 2026",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.consumer_price_passthrough"
+    },
+    {
+      "label": "The shock barely reached the shelf: value",
+      "value": 7.5,
+      "displayValue": "7.5%",
+      "date": "",
+      "unit": "% year-on-year inflation, July 2026",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.consumer_price_passthrough"
+    },
+    {
+      "label": "The shock barely reached the shelf: value",
+      "value": 6.23,
+      "displayValue": "6.2%",
+      "date": "",
+      "unit": "% year-on-year inflation, July 2026",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.consumer_price_passthrough"
+    },
+    {
+      "label": "The shock barely reached the shelf: value",
+      "value": 5.24,
+      "displayValue": "5.2%",
+      "date": "",
+      "unit": "% year-on-year inflation, July 2026",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.consumer_price_passthrough"
+    },
+    {
+      "label": "The shock barely reached the shelf: value",
+      "value": 4.99,
+      "displayValue": "5%",
+      "date": "",
+      "unit": "% year-on-year inflation, July 2026",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.consumer_price_passthrough"
+    },
+    {
+      "label": "The shock barely reached the shelf: value",
+      "value": 4.44,
+      "displayValue": "4.4%",
+      "date": "",
+      "unit": "% year-on-year inflation, July 2026",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.consumer_price_passthrough"
+    },
+    {
+      "label": "It went to the exchequer instead: value",
+      "value": 68.2,
+      "displayValue": "68.2%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: actualPercentChange",
+      "value": 68.2,
+      "displayValue": "68.2%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: aprJun2025Crore",
+      "value": 31523,
+      "displayValue": "31,523%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: aprJun2026Crore",
+      "value": 53034,
+      "displayValue": "53,034%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: value",
+      "value": 36.1,
+      "displayValue": "36.1%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: actualPercentChange",
+      "value": 36.1,
+      "displayValue": "36.1%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: aprJun2025Crore",
+      "value": 42414,
+      "displayValue": "42,414%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: aprJun2026Crore",
+      "value": 57741,
+      "displayValue": "57,741%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: value",
+      "value": 22.5,
+      "displayValue": "22.5%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: actualPercentChange",
+      "value": 22.5,
+      "displayValue": "22.5%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: aprJun2025Crore",
+      "value": 9499,
+      "displayValue": "9,499%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "It went to the exchequer instead: aprJun2026Crore",
+      "value": 11632,
+      "displayValue": "11,632%",
+      "date": "",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.fiscal_impact"
+    },
+    {
+      "label": "Shipping through the Strait of Hormuz, seven-day moving average, latest",
+      "value": 0.278,
+      "displayValue": "0.28",
+      "date": "2026-05-24",
+      "unit": "million metric tons per day",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "trade.gep.hormuz_transits_7dma"
+    },
+    {
+      "label": "Shipping through the Strait of Hormuz, seven-day moving average, minimum (2026-05-06)",
+      "value": 0.037,
+      "displayValue": "0.04",
+      "date": "2026-05-06",
+      "unit": "million metric tons per day",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "trade.gep.hormuz_transits_7dma"
+    },
+    {
+      "label": "Shipping through the Strait of Hormuz, seven-day moving average, maximum (2026-02-25)",
+      "value": 4.229,
+      "displayValue": "4.23",
+      "date": "2026-02-25",
+      "unit": "million metric tons per day",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "trade.gep.hormuz_transits_7dma"
+    },
+    {
+      "label": "Shipping through the Strait of Hormuz, seven-day moving average, earliest",
+      "value": 3.396,
+      "displayValue": "3.4",
+      "date": "2026-01-01",
+      "unit": "million metric tons per day",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "trade.gep.hormuz_transits_7dma"
+    },
+    {
+      "label": "Brent crude since the Middle East conflict began (27 Feb 2026 = 100), latest",
+      "value": 146.4,
+      "displayValue": "146.4",
+      "date": "2026-05-26",
+      "unit": "index, 27 Feb 2026 = 100",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.gep.shock_index_brent"
+    },
+    {
+      "label": "Brent crude since the Middle East conflict began (27 Feb 2026 = 100), minimum (2026-02-02)",
+      "value": 96.9,
+      "displayValue": "96.9",
+      "date": "2026-02-02",
+      "unit": "index, 27 Feb 2026 = 100",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.gep.shock_index_brent"
+    },
+    {
+      "label": "Brent crude since the Middle East conflict began (27 Feb 2026 = 100), maximum (2026-04-07)",
+      "value": 204,
+      "displayValue": "204",
+      "date": "2026-04-07",
+      "unit": "index, 27 Feb 2026 = 100",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.gep.shock_index_brent"
+    },
+    {
+      "label": "Brent crude since the Middle East conflict began (27 Feb 2026 = 100), earliest",
+      "value": 96.9,
+      "displayValue": "96.9",
+      "date": "2026-02-02",
+      "unit": "index, 27 Feb 2026 = 100",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.gep.shock_index_brent"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: value",
+      "value": 50,
+      "displayValue": "50%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: naturalGas",
+      "value": 33.3,
+      "displayValue": "33.3%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: value",
+      "value": 42.9,
+      "displayValue": "42.9%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: naturalGas",
+      "value": 14.3,
+      "displayValue": "14.3%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: value",
+      "value": 35.3,
+      "displayValue": "35.3%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: naturalGas",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: value",
+      "value": 11.8,
+      "displayValue": "11.8%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: naturalGas",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: value",
+      "value": 5.4,
+      "displayValue": "5.4%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: naturalGas",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: value",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "South Asia is the region most exposed to Gulf energy: naturalGas",
+      "value": 0,
+      "displayValue": "0%",
+      "date": "",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "energy.shock2026.middle_east_dependence"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 32.68,
+      "displayValue": "32.7%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 18.24,
+      "displayValue": "18.2%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 14.55,
+      "displayValue": "14.6%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 10.78,
+      "displayValue": "10.8%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 5.72,
+      "displayValue": "5.7%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 3.14,
+      "displayValue": "3.1%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 3.06,
+      "displayValue": "3.1%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's crude actually comes from: value",
+      "value": 2.21,
+      "displayValue": "2.2%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.crude_partners_2025"
+    },
+    {
+      "label": "Where India's cooking gas comes from: value",
+      "value": 37.01,
+      "displayValue": "37%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_partners_2025"
+    },
+    {
+      "label": "Where India's cooking gas comes from: value",
+      "value": 21.34,
+      "displayValue": "21.3%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_partners_2025"
+    },
+    {
+      "label": "Where India's cooking gas comes from: value",
+      "value": 16.54,
+      "displayValue": "16.5%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_partners_2025"
+    },
+    {
+      "label": "Where India's cooking gas comes from: value",
+      "value": 14.35,
+      "displayValue": "14.4%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_partners_2025"
+    },
+    {
+      "label": "Where India's cooking gas comes from: value",
+      "value": 5.89,
+      "displayValue": "5.9%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_partners_2025"
+    },
+    {
+      "label": "Where India's cooking gas comes from: value",
+      "value": 1.8,
+      "displayValue": "1.8%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_partners_2025"
+    },
+    {
+      "label": "Where India's cooking gas comes from: value",
+      "value": 1.36,
+      "displayValue": "1.4%",
+      "date": "",
+      "unit": "% of import value, 2025",
+      "sourceId": "oil-shock-derived",
+      "indicatorId": "energy.shock2026.lpg_partners_2025"
+    },
+    {
+      "label": "The World Bank cut 93 of 146 forecasts. India's went up.: value",
+      "value": 93,
+      "displayValue": "93",
+      "date": "",
+      "unit": "number of 2026 growth forecasts",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.forecast_revisions"
+    },
+    {
+      "label": "The World Bank cut 93 of 146 forecasts. India's went up.: value",
+      "value": 39,
+      "displayValue": "39",
+      "date": "",
+      "unit": "number of 2026 growth forecasts",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.forecast_revisions"
+    },
+    {
+      "label": "The World Bank cut 93 of 146 forecasts. India's went up.: value",
+      "value": 14,
+      "displayValue": "14",
+      "date": "",
+      "unit": "number of 2026 growth forecasts",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.forecast_revisions"
+    },
+    {
+      "label": "India's growth forecast barely moved: value",
+      "value": 7.2,
+      "displayValue": "7.2%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India's growth forecast barely moved: value",
+      "value": 7.1,
+      "displayValue": "7.1%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India's growth forecast barely moved: value",
+      "value": 7.7,
+      "displayValue": "7.7%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India's growth forecast barely moved: value",
+      "value": 6.6,
+      "displayValue": "6.6%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India's growth forecast barely moved: januaryForecast",
+      "value": 6.5,
+      "displayValue": "6.5%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India's growth forecast barely moved: value",
+      "value": 7.2,
+      "displayValue": "7.2%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India's growth forecast barely moved: januaryForecast",
+      "value": 6.6,
+      "displayValue": "6.6%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India's growth forecast barely moved: value",
+      "value": 7,
+      "displayValue": "7%",
+      "date": "",
+      "unit": "% real GDP growth, fiscal years",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.shock2026.india_growth_vs_january"
+    },
+    {
+      "label": "India real GDP growth, year on year, by quarter, latest",
+      "value": 7.8,
+      "displayValue": "7.8",
+      "date": "2026-Q1",
+      "unit": "percent",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.gep.india_gdp_growth_quarterly"
+    },
+    {
+      "label": "India real GDP growth, year on year, by quarter, minimum (2025-Q2)",
+      "value": 6.8,
+      "displayValue": "6.8",
+      "date": "2025-Q2",
+      "unit": "percent",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.gep.india_gdp_growth_quarterly"
+    },
+    {
+      "label": "India real GDP growth, year on year, by quarter, maximum (2025-Q3)",
+      "value": 8.3,
+      "displayValue": "8.3",
+      "date": "2025-Q3",
+      "unit": "percent",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.gep.india_gdp_growth_quarterly"
+    },
+    {
+      "label": "India real GDP growth, year on year, by quarter, earliest",
+      "value": 7.4,
+      "displayValue": "7.4",
+      "date": "2024-Q4",
+      "unit": "percent",
+      "sourceId": "worldbank-gep",
+      "indicatorId": "macro.gep.india_gdp_growth_quarterly"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "title": "India could replace the barrel. It could not replace the cooking gas.",
+      "sourceId": "oil-shock-derived",
+      "sourceIndicatorId": "energy.shock2026.gulf_share_by_commodity",
+      "unit": "% of import value from the Gulf, 2025",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "LPG (cooking gas)",
+          "value": 91.4,
+          "importsUsdBn": 14.1
+        },
+        {
+          "label": "LNG",
+          "value": 60.8,
+          "importsUsdBn": 13.4
+        },
+        {
+          "label": "Crude oil",
+          "value": 47.9,
+          "importsUsdBn": 138.9
+        },
+        {
+          "label": "DAP fertiliser",
+          "value": 41.7,
+          "importsUsdBn": 4.9
+        },
+        {
+          "label": "Refined fuels",
+          "value": 27.2,
+          "importsUsdBn": 9.8
+        },
+        {
+          "label": "Urea",
+          "value": 20.9,
+          "importsUsdBn": 4.7
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "title": "The same barrels, a $22.8 billion bigger bill",
+      "sourceId": "oil-shock-derived",
+      "sourceIndicatorId": "energy.shock2026.crude_bill_apr_jul",
+      "unit": "US$ billion spent on crude oil imports",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "April-July 2024",
+          "value": 49,
+          "volumeMt": 81.7
+        },
+        {
+          "label": "April-July 2025",
+          "value": 40.5,
+          "volumeMt": 81.5
+        },
+        {
+          "label": "April-July 2026",
+          "value": 63.4,
+          "volumeMt": 81.9
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.shock2026.lpg_volume_apr_jul",
+      "title": "Cooking gas imports nearly halved",
+      "sourceId": "oil-shock-derived",
+      "sourceIndicatorId": "energy.shock2026.lpg_volume_apr_jul",
+      "unit": "million tonnes of LPG imported",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "April-July 2024",
+          "value": 6.17
+        },
+        {
+          "label": "April-July 2025",
+          "value": 7.08
+        },
+        {
+          "label": "April-July 2026",
+          "value": 3.7
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.prices.india_crude_import_price_monthly",
+      "title": "India's average crude oil import price, monthly (realised landed cost)",
+      "sourceId": "indiadatahub",
+      "sourceIndicatorId": "ENPTAECRPR11M",
+      "unit": "US$ per barrel",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 184,
+      "earliest": {
+        "date": "2011-04",
+        "value": 117.13418639594
+      },
+      "latest": {
+        "date": "2026-07",
+        "value": 87.4241582466233
+      }
+    },
+    {
+      "indicatorId": "energy.shock2026.consumer_price_passthrough",
+      "title": "The shock barely reached the shelf",
+      "sourceId": "oil-shock-derived",
+      "sourceIndicatorId": "energy.shock2026.consumer_price_passthrough",
+      "unit": "% year-on-year inflation, July 2026",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Diesel",
+          "value": 8.4
+        },
+        {
+          "label": "Petrol",
+          "value": 7.5
+        },
+        {
+          "label": "CNG",
+          "value": 6.23
+        },
+        {
+          "label": "Food and drink",
+          "value": 5.24
+        },
+        {
+          "label": "LPG cylinder",
+          "value": 4.99
+        },
+        {
+          "label": "Everything (headline CPI)",
+          "value": 4.44
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.shock2026.fiscal_impact",
+      "title": "It went to the exchequer instead",
+      "sourceId": "oil-shock-derived",
+      "sourceIndicatorId": "energy.shock2026.fiscal_impact",
+      "unit": "% change, April-June 2026 against April-June 2025",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 5,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Urea subsidy",
+          "value": 68.2,
+          "actualPercentChange": 68.2,
+          "negligible": false,
+          "aprJun2025Crore": 31523,
+          "aprJun2026Crore": 53034
+        },
+        {
+          "label": "Customs collections",
+          "value": 36.1,
+          "actualPercentChange": 36.1,
+          "negligible": false,
+          "aprJun2025Crore": 42414,
+          "aprJun2026Crore": 57741
+        },
+        {
+          "label": "Other fertiliser subsidy",
+          "value": 22.5,
+          "actualPercentChange": 22.5,
+          "negligible": false,
+          "aprJun2025Crore": 9499,
+          "aprJun2026Crore": 11632
+        },
+        {
+          "label": "Petroleum subsidy",
+          "value": 0,
+          "actualPercentChange": 10.4,
+          "negligible": true,
+          "aprJun2025Crore": 255,
+          "aprJun2026Crore": 282
+        },
+        {
+          "label": "Union excise (fuel taxes)",
+          "value": -22.4,
+          "actualPercentChange": -22.4,
+          "negligible": false,
+          "aprJun2025Crore": 55605,
+          "aprJun2026Crore": 43149
+        }
+      ]
+    },
+    {
+      "indicatorId": "trade.gep.hormuz_transits_7dma",
+      "title": "Shipping through the Strait of Hormuz, seven-day moving average",
+      "sourceId": "worldbank-gep",
+      "sourceIndicatorId": "GEP-June-2026:figure-1.10.B",
+      "unit": "million metric tons per day",
+      "frequency": "daily",
+      "geography": {
+        "type": "country",
+        "id": "WLD",
+        "name": "World"
+      },
+      "observations": 144,
+      "earliest": {
+        "date": "2026-01-01",
+        "value": 3.396
+      },
+      "latest": {
+        "date": "2026-05-24",
+        "value": 0.278
+      }
+    },
+    {
+      "indicatorId": "energy.gep.shock_index_brent",
+      "title": "Brent crude since the Middle East conflict began (27 Feb 2026 = 100)",
+      "sourceId": "worldbank-gep",
+      "sourceIndicatorId": "GEP-June-2026:figure-1.1.B",
+      "unit": "index, 27 Feb 2026 = 100",
+      "frequency": "daily",
+      "geography": {
+        "type": "country",
+        "id": "WLD",
+        "name": "World"
+      },
+      "observations": 82,
+      "earliest": {
+        "date": "2026-02-02",
+        "value": 96.9
+      },
+      "latest": {
+        "date": "2026-05-26",
+        "value": 146.4
+      }
+    },
+    {
+      "indicatorId": "energy.shock2026.middle_east_dependence",
+      "title": "South Asia is the region most exposed to Gulf energy",
+      "sourceId": "worldbank-gep",
+      "sourceIndicatorId": "energy.shock2026.middle_east_dependence",
+      "unit": "% of economies in the region sourcing over 30% of oil imports from the Middle East",
+      "geography": {
+        "type": "region",
+        "id": "EMDE-regions",
+        "name": "EMDE regions"
+      },
+      "rows": 6,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "South Asia",
+          "value": 50,
+          "naturalGas": 33.3
+        },
+        {
+          "label": "Middle East and North Africa",
+          "value": 42.9,
+          "naturalGas": 14.3
+        },
+        {
+          "label": "East Asia and Pacific",
+          "value": 35.3,
+          "naturalGas": 0
+        },
+        {
+          "label": "Europe and Central Asia",
+          "value": 11.8,
+          "naturalGas": 0
+        },
+        {
+          "label": "Sub-Saharan Africa",
+          "value": 5.4,
+          "naturalGas": 0
+        },
+        {
+          "label": "Latin America",
+          "value": 0,
+          "naturalGas": 0
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.shock2026.crude_partners_2025",
+      "title": "Where India's crude actually comes from",
+      "sourceId": "oil-shock-derived",
+      "sourceIndicatorId": "energy.shock2026.crude_partners_2025",
+      "unit": "% of import value, 2025",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 8,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Russian Federation",
+          "value": 32.68,
+          "gulf": false
+        },
+        {
+          "label": "Iraq",
+          "value": 18.24,
+          "gulf": true
+        },
+        {
+          "label": "Saudi Arabia",
+          "value": 14.55,
+          "gulf": true
+        },
+        {
+          "label": "United Arab Emirates",
+          "value": 10.78,
+          "gulf": true
+        },
+        {
+          "label": "USA",
+          "value": 5.72,
+          "gulf": false
+        },
+        {
+          "label": "Kuwait",
+          "value": 3.14,
+          "gulf": true
+        },
+        {
+          "label": "Nigeria",
+          "value": 3.06,
+          "gulf": false
+        },
+        {
+          "label": "Angola",
+          "value": 2.21,
+          "gulf": false
+        }
+      ]
+    },
+    {
+      "indicatorId": "energy.shock2026.lpg_partners_2025",
+      "title": "Where India's cooking gas comes from",
+      "sourceId": "oil-shock-derived",
+      "sourceIndicatorId": "energy.shock2026.lpg_partners_2025",
+      "unit": "% of import value, 2025",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 7,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "United Arab Emirates",
+          "value": 37.01,
+          "gulf": true
+        },
+        {
+          "label": "Qatar",
+          "value": 21.34,
+          "gulf": true
+        },
+        {
+          "label": "Kuwait",
+          "value": 16.54,
+          "gulf": true
+        },
+        {
+          "label": "Saudi Arabia",
+          "value": 14.35,
+          "gulf": true
+        },
+        {
+          "label": "USA",
+          "value": 5.89,
+          "gulf": false
+        },
+        {
+          "label": "Oman",
+          "value": 1.8,
+          "gulf": false
+        },
+        {
+          "label": "Iraq",
+          "value": 1.36,
+          "gulf": true
+        }
+      ]
+    },
+    {
+      "indicatorId": "macro.shock2026.forecast_revisions",
+      "title": "The World Bank cut 93 of 146 forecasts. India's went up.",
+      "sourceId": "worldbank-gep",
+      "sourceIndicatorId": "macro.shock2026.forecast_revisions",
+      "unit": "number of 2026 growth forecasts",
+      "geography": {
+        "type": "region",
+        "id": "EMDE",
+        "name": "Emerging market and developing economies"
+      },
+      "rows": 3,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Cut since January",
+          "value": 93
+        },
+        {
+          "label": "Raised since January",
+          "value": 39
+        },
+        {
+          "label": "Unchanged",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "indicatorId": "macro.shock2026.india_growth_vs_january",
+      "title": "India's growth forecast barely moved",
+      "sourceId": "worldbank-gep",
+      "sourceIndicatorId": "macro.shock2026.india_growth_vs_january",
+      "unit": "% real GDP growth, fiscal years",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "2023-24",
+          "value": 7.2,
+          "januaryForecast": null
+        },
+        {
+          "label": "2024-25",
+          "value": 7.1,
+          "januaryForecast": null
+        },
+        {
+          "label": "2025-26",
+          "value": 7.7,
+          "januaryForecast": null
+        },
+        {
+          "label": "2026-27",
+          "value": 6.6,
+          "januaryForecast": 6.5
+        },
+        {
+          "label": "2027-28",
+          "value": 7.2,
+          "januaryForecast": 6.6
+        },
+        {
+          "label": "2028-29",
+          "value": 7,
+          "januaryForecast": null
+        }
+      ]
+    },
+    {
+      "indicatorId": "macro.gep.india_gdp_growth_quarterly",
+      "title": "India real GDP growth, year on year, by quarter",
+      "sourceId": "worldbank-gep",
+      "sourceIndicatorId": "GEP-June-2026:statistical-annex",
+      "unit": "percent",
+      "frequency": "quarterly",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 6,
+      "earliest": {
+        "date": "2024-Q4",
+        "value": 7.4
+      },
+      "latest": {
+        "date": "2026-Q1",
+        "value": 7.8
+      }
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}
