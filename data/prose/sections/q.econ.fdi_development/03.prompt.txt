@@ -1,0 +1,323 @@
+You are writing ONE section of a data-journalism article for Indica, an Indian
+data-journalism site. Article: "Did foreign money build India? What 56 years of FDI data show."
+
+# VOICE — how the academy is written (and how it must never sound)
+
+This file governs every academy entry. The generator reads it; the human editor
+enforces it. If a sentence violates this file, it is wrong even if it is "correct."
+
+The promise of this product is judgment. AI prose has no judgment — it has an
+average. The whole job is to sound like a specific, well-read Indian who has
+actually read the MoSPI methodology and is explaining it to a smart friend who
+hasn't. Not a textbook. Not a brand. A person.
+
+---
+
+## 0a. The mandate — Quanta for India
+
+The target is **Quanta Magazine's spirit, for India's economy and society**: as
+rigorous, as data-rich, as carefully reported, and as *interdisciplinary* as Quanta
+is for science — but rooted in lived Indian reality, not the abstract world of the
+economics seminar. An entry on GDP is allowed, even expected, to reach into history
+(who invented the number, and why, and what India counted before), geography (where
+production actually happens), sociology (whose work the number erases), institutions
+and politics (who computes it, who fights over it). Economics is the spine; it is not
+the whole body.
+
+**The hard constraint that makes this safe:** interdisciplinary facts are *facts*, and
+this product never invents facts. So cross-disciplinary context does not come from the
+model's memory. It comes from **vetted context cards** in the evidence packet —
+sourced, uncontested, hand-checked — exactly like locked numbers. The model may use a
+context card; it may not add its own dates, named people, or studies. If a piece of
+history is worth telling, someone vetted it first. (See `ENTRY-SPEC.md`.)
+
+So: roam widely, but only across ground that has been checked. The breadth is the
+product; the discipline is what lets us be broad without lying.
+
+## 0. The one rule
+
+**Specificity kills the AI smell. Genericness is the smell.**
+
+AI writing is smooth because it is generic; human writing is lumpy because it is
+specific. The fix is rarely stylistic — it is factual. A named person, a real town,
+a price you would actually pay, a number that surprises. Every fix below is
+downstream of this one.
+
+- Not "a vendor" → "a sabziwala in Azadpur mandi."
+- Not "rising food prices" → "arhar dal at ₹180 a kilo in mid-2024."
+- Not "many informal workers" → the PLFS figure, with the round.
+- Not "a worker" → "a Zomato rider in Indiranagar," not "a barista at Starbucks."
+
+**Rule of thumb: at least one concrete, sourced, Indian particular per paragraph.**
+A paragraph with a real number in it almost never reads as machine-written.
+
+---
+
+## 1. Banned constructions (syntactic tells — never use these shapes)
+
+- **The fake-pivot:** "It's not just X, it's Y." / "It's not about X. It's about Y." / "More than just a number…"
+- **The rule of three:** "clear, concise, and compelling." Triads everywhere are a tell. Use one adjective, or four, or an awkward two. Never the tidy three by reflex.
+- **The rhetorical-question-then-answer:** "So what does this mean? It means…" Just say the thing.
+- **The reveal:** "But here's the thing:" / "Here's the kicker:" / "And that's where it gets interesting."
+- **The summary-sentence ending** every paragraph with a tidy restatement of its own topic sentence.
+- **The announce-then-do intro:** "In this piece, we'll explore…" / "Let's break it down." / "Let's take a closer look." Start with the content.
+- **The wrap-up:** "In conclusion," / "Ultimately," / "At the end of the day," / "The bottom line is…" followed by a moral.
+- **The sweep:** "From the bustling streets of Mumbai to the quiet villages of Bihar…" / "From X to Y" as a way to fake scope.
+- **Mechanical signposting:** "First… Second… Finally." Number things only when order genuinely matters.
+- **Faux-balance scaffolding:** "On one hand… on the other hand…" / "While it's true that X, it's also worth considering Y." Have a view.
+- **"Not only… but also."**
+- **The imagine-opener:** "Imagine a world where…" / "Picture this:"
+- **Manufactured contrarianism:** "Conventional wisdom says X. The data says otherwise." unless the data genuinely says otherwise and you show it.
+- **Performative fragments for "voice":** "And that changes everything." / "Simple as that." Used to fake punch.
+- **Anaphora for fake rhythm:** three sentences in a row starting with the same word.
+
+## 2. Banned & flagged lexicon (Ctrl-F these out)
+
+**Hard-banned (never appropriate here):**
+delve, dive in, deep dive, unpack, navigate / navigating the complexities, landscape (figurative), realm, "the world of", sphere, tapestry, intricate, intricacies, testament / "a testament to", showcase, underscore, underpin, leverage (verb), utilize, harness, foster, facilitate, streamline, robust, holistic, seamless, scalable, vibrant, bustling, myriad, plethora, "a host of", "a wealth of", boasts / boasting, nestled, ever-evolving, ever-changing, fast-paced, game-changer / game-changing, cutting-edge, state-of-the-art, next-level, elevate, empower, unlock, unleash, supercharge, revolutionize, "treasure trove", "paints a picture", "speaks volumes", "shed light on", "a stark reminder", "needless to say", "the rise of", "the dawn of", "lies at the heart of", "at its core", resonate, "double-edged sword", "the perfect blend of", "stands as", "serves as", "plays a crucial role", "in the grand scheme of things".
+
+**Flagged (allowed only with a concrete reason, almost never):**
+crucial, vital, pivotal, paramount, key (adj.), essential, significant, substantial, considerable, notable, remarkable, vast, comprehensive, dynamic, "it's worth noting", "it's important to note", "it's important to remember", notably, importantly, arguably, "when it comes to", "that said", "having said that", "the fact that".
+
+**Replace vague intensifiers with a number.** "Prices rose significantly" → "prices rose 9%." If you can't put a number on it, you probably shouldn't claim it.
+
+## 3. Punctuation & rhythm tells
+
+- **Em-dash addiction.** AI sprinkles em-dashes—like this—everywhere. Use them sparingly. Prefer a full stop. A comma. Sometimes a colon. Never more than one em-dash per paragraph, rarely that.
+- **The triad list** "X, Y, and Z" on repeat. Break the pattern.
+- **Uniform sentence length.** AI sentences are all medium. Write a three-word sentence next to a long messy one. Let the rhythm be uneven. Read it aloud — if it lulls, it's wrong.
+- **Colon-then-list** as a default sentence shape. Vary it.
+- **Bolded key terms** scattered to look authoritative. Bold a term once, on first definition, then stop.
+
+## 4. Structural tells
+
+- **No intro that describes the article.** First sentence does work — a fact, a number, a scene.
+- **No conclusion that restates the article.** End on the sharpest concrete point, or a genuine open question. Stop when you're done; don't land the plane twice.
+- **No listicle reflex.** Prose by default. A list only when the items are genuinely parallel and discrete.
+- **Asymmetry is good.** Real explanations are lumpy: one idea takes four paragraphs, the next takes one line. AI makes every section the same size. Don't.
+- **No "key takeaways" box** of three bullets at the end. If it mattered, it's in the prose.
+
+## 5. Tonal tells
+
+- **No relentless positivity.** Allow friction. Say when the data is bad, the method is dodgy, the politics are ugly.
+- **No fake enthusiasm.** No "fascinating," "incredible," "remarkable," "interestingly."
+- **No moralising closer.** "At the end of the day, it's about people." Delete on sight.
+- **No faux-profundity.** No sentences that sound deep and mean nothing.
+- **Have a view, hold the caveat.** Opinionated *and* honest about uncertainty are not opposites. State the take, then state what would change it.
+- **No customer-service warmth.** You're explaining, not onboarding.
+
+## 6. The Indian-context rules (where the genericness actually dies)
+
+- **Default examples are Indian and current.** Replace any Western or generic default with a specific Indian one. Kirana, not "a grocery store." Hamali/mathadi, not "a porter." Ola/Uber/Rapido, Swiggy/Zomato, not "an app."
+- **Every number carries provenance and vintage.** "(PLFS 2023-24, Usual Status)" — not a floating statistic.
+- **No tourist-brochure register.** Not "the vibrant, diverse culture of India." This is statistics, written plainly.
+- **Translate jargon on first use, in the sentence, not a glossary aside.** "GVA — what's left after you subtract the inputs a business bought from others — …"
+- **Round like a human speaks.** "About ₹3.3 lakh crore," not "₹3,30,142 crore," unless the precision is the point. Use the Indian numbering system (lakh/crore) in prose; keep raw figures in the data.
+
+## 7. What the voice IS (not just what it isn't)
+
+- **Plain, declarative, confident.** Short words. Active verbs. The reader never feels stupid and never feels managed.
+- **Grounded.** Concepts live in real situations — a mandi, a payslip, a monsoon, a GST slab — before they live in a formula.
+- **A little fun, never cute.** Dry wit is fine. Jokes-for-jokes'-sake aren't. One good aside beats three.
+- **Honest.** When the number is shaky, say so plainly and explain why. The honesty *is* the brand.
+- **The "On the Ground" / macha register** from the main site is the closest existing model: warm, grounded, "tell me what this actually means, bro," without slipping into slang cosplay. **Language policy (locked): English with light Indian-English flavor.** The heading may be cheeky Hinglish ("Thik hai, but what does it mean for me?"); the body stays in English with at most an occasional Hindi word a non-Hindi reader can still follow. Never write the block as a full romanized-Hindi paragraph: the site is English-locale, and a Tamil or Bengali reader must get every line. Keep the dosa-and-roti texture, lose the full Hindi.
+
+## 8. The generation strategy (so we don't fight slop after the fact)
+
+- **Never prompt for "engaging," "compelling," or "vivid" writing.** Those words summon the slop. Prompt for *plain, specific, declarative* prose.
+- **Feed the model the locked evidence packet + 2–3 voice exemplars + this file's ban lists.** Constrain, don't inspire.
+- **Numbers come from the packet only.** Prose can never introduce a figure that isn't in the evidence.
+- **The model drafts; a human does the texture pass.** The editing pass below is not optional and is not automatable — it's where the AI smell actually dies.
+
+## 9. The editing checklist (run on every draft, in order)
+
+1. **Read it aloud.** Anything that lulls, sounds like a brochure, or you'd never say to a friend — cut or rewrite.
+2. **Ctrl-F the Section 2 lists.** Delete every hit. Find a plainer word or a number.
+3. **Hunt em-dashes.** Keep at most one per paragraph. Replace the rest.
+4. **Kill the first and last sentence of each section.** If the section is better without them (it usually is), leave them dead.
+5. **One concrete Indian particular per paragraph.** If a paragraph has none, add a real number/name/place or merge it.
+6. **Break the triads.** Any tidy "X, Y, and Z" — make it two, or four, or recast.
+7. **Cut every adverb,** then restore only the ones that survive being missed.
+8. **Check the rhythm.** Is there a short sentence near a long one? If every sentence is the same length, vary them.
+9. **Find the opinion.** If the piece has no view, it's a definition, not an explainer. Add the take and its caveat.
+
+## 10. Before / after (the smell, and its cure)
+
+**AI-slop (everything wrong):**
+> In today's rapidly evolving economic landscape, GDP stands as a crucial barometer
+> of a nation's health. It's not just a number — it's a testament to the collective
+> output of millions. From bustling metros to quiet villages, India's economy boasts
+> a rich tapestry of activity. Let's delve into what this pivotal metric truly tells
+> us. Ultimately, understanding GDP empowers us to navigate the complexities of the
+> modern world.
+
+**Rewritten (the voice):**
+> India's GDP for 2023-24 came to about ₹296 lakh crore. That's the total value of
+> everything the country produced in a year — every haircut in Madurai, every tonne
+> of steel in Jamshedpur, every quarter of rent you pay yourself for living in a flat
+> you own. It is one number doing an impossible job. It is also, as we'll see, blind
+> to who got the money, what it cost the air, and whether the woman who cooked three
+> meals and raised two children produced anything at all. By the official count, she
+> didn't.
+
+The second one is specific, has a real figure with a vintage, holds a view, names
+real places, ends on a sharp point instead of a moral, and uses exactly zero banned
+words. That's the target.
+
+
+============ PURPOSE ============
+Answer one question directly and then qualify it honestly: did foreign direct investment build India? The answer is no, and the article must earn that without turning into a declinist rant. Write in the voice of someone who has read the UNCTAD annex tables themselves and is faintly irritated that everyone quotes the dollar figure and nobody quotes the denominator. Walk the evidence in this order: (1) state the answer as a share, not a level, because FDI has never financed more than about a tenth of Indian capital formation and now finances about a thirtieth; (2) widen to fifty-six years and the developing regions on World Bank data, including the closed decades before 1991; (3) concede the climb, which is real, because India genuinely went from 43rd to 12th; (4) show that there are two development models and India is in the domestic-capital camp with Korea, not the FDI-led camp with Viet Nam; (5) convert to per person so the reader feels the scale; (6) show that the China-plus-one reallocation, the one event that could have changed this, went to Southeast Asia; (7) show what three decades actually accumulated as a stock; (8) show the announcement-versus-arrival gap without overclaiming it; (9) rank the eras and admit 2015-2020 was the best of them; (10) close on the converging stocks and the maturity reading. Land the verdict as QUALIFIED, not direct: India was never an FDI-led economy, did not need to be, and financed its own capital formation out of its own savings the way Korea and Japan did. That is a defensible development path, not a failure. What is genuinely open is whether the terms have now changed against India, because the investment that is being competed for has moved to subsidy-backed strategic sectors that reward deep pockets. Do not resolve that; state it as the live question it is.
+
+============ TENSION ============
+India spent thirty-five years building an apparatus to attract foreign investment - liberalisation, special economic zones, Make in India, production-linked incentives - and foreign investment has never financed more than 6.3 per cent of what the country actually builds in any era, and financed 3.1 per cent of it last year. Then the one thing India had waited for finally happened: multinationals started leaving China. The capital went to Vietnam, Malaysia and Indonesia. India's average annual FDI in 2021-25 was slightly lower than in 2013-17. The uncomfortable possibility the article has to sit with is not that India is failing to attract capital now, but that it may never have been an FDI story at all, and that the policy conversation has spent three decades watching a number that was never going to be the one that mattered.
+
+============ LOCKED CONCEPTS (facts and honesty rules for the whole article) ============
+1. OPEN WITH THE DIRECT ANSWER, STATED AS A SHARE. Foreign direct investment financed 3.1% of India's gross fixed capital formation in 2025. The highest it has ever reached is 10.3%, in 2008. It was 8.3% in 2020 and 0.3% in 1990. Gross fixed capital formation is the money a country actually spends in a year on factories, machines, roads and buildings, so this ratio is the direct answer to 'did foreign money build the place'.
+
+2. THE DENOMINATOR IS THE POINT OF THE ARTICLE. Say plainly that a dollar figure means nothing on its own for a $4.1 trillion economy, and that UNCTAD publishes the share of capital formation while most coverage quotes only the level. This is the one methodological move the whole piece rests on; make it explicit early rather than assuming the reader sees it.
+
+3. THE COMPARISON THAT DOES THE WORK. Viet Nam has not been below 13.8% of capital formation in any year since 2011, and was 14.7% in 2025. Period averages for FDI as a share of capital formation: Viet Nam 19.3% in 1995-2010 and 15.0% in 2011-2025; Poland 15.7% then 15.4%; Malaysia 14.2% then 13.3%; China 9.4% then 2.5%; India 4.1% then 4.9%; Korea 3.5% then 2.6%. India sits with Korea, not with Viet Nam.
+
+4. KOREA IS THE HONEST FOIL, AND THE DIFFERENCE IS INTENT. Korea reached a similar low share deliberately: it restricted foreign ownership for decades, directed domestic credit to the chaebols, and licensed technology rather than letting it arrive with an owner attached. India arrived at the same share by a different road. Do not claim India chose this strategy; the honest formulation is that India ended up in the domestic-capital camp without ever deciding to be there, while spending three decades trying to leave it.
+
+5. THE FIFTY-SIX-YEAR VIEW COMES FROM A SECOND, INDEPENDENT SOURCE. The World Bank series (FDI net inflows as a share of GDP, indicator BX.KLT.DINV.WD.GD.ZS) starts in 1970, twenty years before UNCTAD's. Through the 1970s and 1980s India's FDI never once exceeded 0.09% of GDP, and was negative in 1975, 1976 and 1977 - more foreign capital left than entered. Those were the years the Foreign Exchange Regulation Act forced multinationals to dilute their equity, and IBM and Coca-Cola left rather than comply. State the negative years as a data fact and the FERA context as history; do not assert that FERA alone caused the negative flows.
+
+6. THE VERIFIED REGIONAL CLAIMS, AND ONLY THESE. Across the 56 years the World Bank covers, India has never once taken in a larger share of its GDP than Latin America and the Caribbean. It has exceeded Sub-Saharan Africa in only five of those years. It has exceeded East Asia and the Pacific in exactly three: 2008, 2009 and 2020, each a year when everyone else was falling faster. Do not generalise beyond these three verified statements.
+
+7. CONCEDE THE CLIMB PROPERLY. India ranked 43rd in the world for FDI received in 1990, behind Pakistan, Saudi Arabia, Colombia and the Philippines. It reached 27th in 2001, 9th in 2008, 7th in 2020 (a hair behind Germany, and ahead of the United Kingdom, Brazil, Mexico and Canada), fell to 16th in 2023, and was 12th in 2025. In dollar terms: $237 million in 1990, $47.1bn in 2008, $64.1bn in 2020, $38.9bn in 2025. The 2025 figure was up 44% on 2024. This is a real achievement and the article must say so before qualifying it.
+
+8. THE PER-PERSON NUMBER IS THE SCALE INTUITION. Total FDI received 1990-2025 divided by 2025 population: India $547, Nigeria $485, Pakistan $227, Bangladesh $202, Sri Lanka $813, Indonesia $1,214, China $2,243, Viet Nam $2,652, Thailand $3,319, Malaysia $7,127. In absolute terms India has received about $800bn over 36 years, which ranks 16th in the world; Singapore has received about $1,716bn. Always attach the caveat that this divides a 36-year flow by a single-year population, so it is a rough intuition rather than a precise ratio, and that Singapore and Ireland are conduit economies as much as destinations.
+
+9. THE REALLOCATION IS THE STRONGEST SECTION AND MUST BE STATED CAREFULLY. India's average annual FDI was $38.2bn in 2013-17 and $37.6bn in 2021-25, a fall of about 2% before adjusting for anything, not even inflation. UNCTAD's developing Southeast Asia aggregate went from $126bn to $219bn over the same comparison, a rise of 73%. China went from $132bn to $151bn. In 2015 Southeast Asia received 2.6 times India's FDI; in 2025 it received 6.3 times. China's share of developing-economy inflows fell from 23.7% in 2020 to 11.6% in 2025. Southeast Asia's share rose from 15.5% in 2015 to 27.1% in 2025 while India's fell from 6.0% to 4.3%.
+
+10. DO NOT CLAIM TO KNOW WHY THE REALLOCATION MISSED INDIA. The data shows where the money went, not why. Land costs, labour law, tariff policy, logistics, the pace of clearances and the depth of component supply chains are all live candidates and this dataset arbitrates none of them. Say that plainly. Also note that UNCTAD's Southeast Asia aggregate includes Singapore, a large share of whose inflows are booked rather than built there, so the level is flattered even though the trend is not.
+
+11. THE ACCUMULATED STOCK IS WHAT POLICY ACTUALLY PRODUCED. Inward FDI stock as a share of GDP in 2025: India 13.5%, China 19.3%, Indonesia 23.8%, Poland 40.6%, Mexico 44.5%, Brazil 50.7%, Viet Nam 55.1%, Malaysia 56.8%, Thailand 66.5%, Bangladesh 4.3%. Stock is measured at book value and 2025 is preliminary.
+
+12. THE ANNOUNCEMENT GAP IS SUGGESTIVE, NOT ARITHMETIC. India's announced greenfield project value was $89.5bn in 2023, a record $111.1bn in 2024 and $74.1bn in 2025, against recorded FDI of $28.1bn, $27.1bn and $38.9bn. India announced its largest ever pipeline in the same year it booked its smallest inflow in a decade. But announcements and balance-of-payments flows are different concepts on different clocks: an announcement is an intention that takes years to build or quietly lapses, and it is compiled from a commercial project database rather than official statistics. Never subtract one from the other or present a shortfall figure.
+
+13. THE ERAS, WITH THE BEST ONE NAMED HONESTLY. FDI received and the average share of capital formation it financed: 1991-2000 $18.5bn and 1.8%; 2001-2008 $122bn and 4.7%; 2009-2014 $186bn and 5.1%; 2015-2020 $285bn and 6.3%; 2021-2025 $188bn and 3.3%. The Make in India years were genuinely India's best stretch on this measure. Say so; the article loses credibility if it cannot credit the era it is implicitly critiquing.
+
+14. CLOSE ON MATURITY, AND HAND OFF RATHER THAN REPEAT. India's inward FDI stock was 13.4 times its outward stock in 1990, 2.1 times in 2010 and 1.9 times in 2025 ($559bn against $296bn). Frame this as what a maturing economy looks like, the way Korea and Japan looked at a similar stage. Do NOT retell the net-FDI-collapse story or the gross-versus-net arithmetic: that is the subject of the separate foreign-investment article, which uses RBI's gross, repatriation and net decomposition. Refer the reader there in one sentence and move on.
+
+15. UNITS AND DEFINITIONS THE PROSE MUST RESPECT. Every FDI figure here is UNCTAD's net balance-of-payments concept: equity plus reinvested earnings plus intra-company loans, net of divestment and repatriation, on a calendar year. This is NOT DPIIT's gross 'FDI equity inflows', which is the larger number Indian newspapers usually quote and runs on fiscal years. Never quote a DPIIT figure in this article, and say once, explicitly, that the numbers here will look smaller than the ones the reader has seen elsewhere, and why.
+
+16. OTHER HONESTY RULES. A large share of India's inflows is routed through Mauritius, Singapore and the Netherlands, so source-country attribution is not economic ownership and some of it is Indian money returning. Outward FDI is not all real overseas expansion; some is redomiciling and holding structures. Regional aggregates exclude Caribbean financial centres and special-purpose entities, so regional sums will not match naive country totals. The 2025 figures are preliminary and will be revised in the 2027 report. The World Bank and UNCTAD series rest on different compilations and must not be mixed inside a single chart or sentence, though they agree on India to within 0.12 percentage points in every year since 1990.
+
+17. PRESENT THE TWO SOURCES AS A STRENGTH, ONCE. India's inflow series was checked line by line against the World Investment Report 2026 annex table 01 and matches exactly, and the UNCTAD and World Bank estimates of India's FDI as a share of GDP agree to within 0.12 percentage points in every year since 1990. Mention this once, in the methodology section, as a reason to trust the figures - not as a boast repeated through the piece.
+
+18. SOUTH ASIA IS THE FAIR TEST, AND IT CUTS BOTH WAYS. Averaged over 2011 to 2025, FDI financed 4.9 per cent of India's capital formation, 4.6 per cent of Pakistan's, 3.9 per cent of Sri Lanka's and 2.2 per cent of Bangladesh's. Pakistan has beaten India in 23 of the last 36 years including each of the last three; Sri Lanka in 22 including each of the last four. In 2024: India 2.2, Sri Lanka 4.0, Pakistan 6.2. ALWAYS attach the denominator caveat immediately: Pakistan and Sri Lanka have small capital formation and spent part of this period in balance-of-payments crises that shrank it, so Pakistan's 6.2 per cent is $2.7bn against India's $27.1bn. The point is that a low share is a regional pattern, not an Indian anomaly. Never imply Pakistan is out-competing India for factories.
+
+19. BUILD VERSUS BUY IS THE ARTICLE'S OWN QUESTION IN MINIATURE. Greenfield investment adds capacity; an acquisition changes the name on the share register and builds nothing. Net foreign acquisitions of Indian companies were $33.6bn in 2018 (Walmart-Flipkart) against $42.2bn of recorded FDI, and $21.8bn in 2020 against the $64.1bn peak. In 2024 the figure was minus $1.4bn and in 2025 minus $3.3bn, meaning foreign firms sold more Indian assets than they bought in the two years that produced the 44 per cent rebound. HARD RULE: never subtract the M&A line from the FDI line or quote a share. Deal values and balance-of-payments flows come from different sources on different timing conventions and the first is not a component of the second. Read shape only.
+
+20. INDIA AS AN OUTWARD INVESTOR IN PROJECT TERMS. Indian firms announced $25.3bn of greenfield projects overseas in 2025 and $42.3bn in 2022, against $74.1bn announced into India in 2025. Both lines are intentions. Note that outbound projects routed through holding companies can be attributed elsewhere, and the reverse also happens.
+
+21. THE MISSING MULTINATIONALS. Of the top 100 non-financial MNEs from developing and transition economies, ranked by foreign assets: China 41, Hong Kong 9, Taiwan 8, Singapore 8, Malaysia 5, Thailand 5, India 4 (Tata Motors, Hindalco, ONGC, Bharti Airtel), level with Mexico. On the separate world top 100, Korea has 3 and India none. Frame it as the other half of the low-FDI story: Korea ran a domestic-capital model and got Samsung, Hyundai and LG out of it. Caveat that ranking by foreign assets undercounts software exporters, so India's services strength is under-represented, but the gap to China is too large to be a measurement artefact.
+
+22. DO NOT ASSERT WHAT THIS DATA CANNOT SHOW. Labour costs relative to China, the size of the reallocation relative to history, and the employment intensity of data centres are all outside these datasets. Where they are useful as context, attribute them ('widely reported as') or drop them.
+
+============ STYLE TARGET ============
+## How much of India did foreigners actually pay for?
+
+About three per cent of it, last year.
+
+That is the number almost nobody quotes. The one everybody quotes is $38.9 billion, which is what India received in foreign direct investment in 2025, up 44 per cent on the year before, good enough for twelfth in the world. It made every front page in July.
+
+But $38.9 billion is a number without a denominator, and India is a $4.1 trillion economy. The question worth asking is not how many dollars arrived. It is how much of what India built last year was paid for by someone abroad. UNCTAD publishes exactly that ratio, and has since 1990: foreign direct investment as a share of gross fixed capital formation, which is the money a country spends in a year on factories, machines, roads and buildings.
+
+On that measure, foreign money has never built India. The highest the share has ever been was 10.3 per cent, in 2008, for one year, on the way into a global crash. In 2020 it reached 8.3. In 2025 it was 3.1.
+
+The rest of it - the ninety-seven per cent - India paid for itself.
+
+============ ALL SECTIONS (write only the one marked) ============
+1. How much of India did foreigners actually pay for?
+2. Where does India sit among the developing regions, over fifty-six years?
+3. Did India climb at all?   <<< WRITE THIS ONE
+4. Is there more than one way to build a country?
+5. Is India unusual in its own neighbourhood?
+6. What does all of it add up to, per Indian?
+7. When the factories left China, where did they go?
+8. Is India gaining on its actual competitors?
+9. How much of the economy do foreigners own?
+10. Did that money build anything, or just buy it?
+11. Why do the announcements not match the arrivals?
+12. Which era actually worked?
+13. Do Indian firms build abroad?
+14. What does it mean that India now invests abroad too?
+15. Where are the Indian multinationals?
+16. How to read these numbers: methodology and caveats
+
+============ ALREADY DEFINED EARLIER, DO NOT RE-EXPLAIN ============
+  - gross fixed capital formation: Section 1 defines it. Later sections must use the term bare.
+  - the UNCTAD net balance-of-payments measure vs DPIIT gross equity: Section 1 explains the difference. Do not re-explain it.
+  - FDI as a share of GDP, the World Bank series from 1970: Section 2 introduces it.
+
+============ THIS SECTION ============
+## Did India climb at all?
+
+The chart under this section is titled "India did climb, and the climb was real"
+Its subtitle, already written, reads: "India's rank by inward FDI received, among the 170 to 203 economies reporting a value in a given year · 1990-2025 · UNCTAD"
+So the reader is ALREADY told what is plotted. Do not repeat it.
+
+COMPLETE DATA BEHIND THIS CHART:
+  India's world rank for FDI received
+  unit: rank among reporting economies | source: unctad
+  definition: Rank by inward FDI flow among the 170-203 individual economies reporting a value that year; regional and grouping aggregates excluded.
+  dataset: UNCTADstat US.FdiFlowsStock
+  every observation:
+    1990-12=43  1991-12=72  1992-12=49  1993-12=46  1994-12=40  1995-12=31  1996-12=32  1997-12=31  1998-12=38  1999-12=38  2000-12=36  2001-12=27  2002-12=22  2003-12=27  2004-12=25  2005-12=32  2006-12=19  2007-12=23  2008-12=9  2009-12=9  2010-12=18  2011-12=15  2012-12=18  2013-12=16  2014-12=13  2015-12=13  2016-12=13  2017-12=12  2018-12=11  2019-12=11  2020-12=7  2021-12=10  2022-12=10  2023-12=16  2024-12=15  2025-12=12
+
+============ LOCKED NUMBERS ============
+  - India's world rank for FDI received, latest: 12 rank among reporting economies (2025-12-31)
+  - India's world rank for FDI received, minimum (2020-12-31): 7 rank among reporting economies (2020-12-31)
+  - India's world rank for FDI received, maximum (1991-12-31): 72 rank among reporting economies (1991-12-31)
+  - India's world rank for FDI received, earliest: 43 rank among reporting economies (1990-12-31)
+
+============ ARTICLE-LEVEL CAVEATS AND FORBIDDEN CLAIMS ============
+  - Use only figures present in lockedNumbers or sourceSummaries.
+  - If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.
+  - If source coverage is thin, say so directly.
+  - Do not compare states, districts, or cities unless the evidence packet contains those geographies.
+  - FORBIDDEN: Do not invent current-year figures.
+  - FORBIDDEN: Do not infer causality from a trend unless the evidence explicitly supports it.
+  - FORBIDDEN: Do not cite a source that is not present in sourceSummaries.
+
+HARD RULES. A draft breaking any of these is discarded.
+
+NUMBERS
+1. Use only figures from the DATA below, the LOCKED NUMBERS, or the LOCKED CONCEPTS. Do not
+   compute new ratios. Every numeral you write is checked against that packet.
+2. You have the complete series. Pick the years that carry the argument. Do not list a series
+   year by year, and do not settle for first/last/peak if a better year makes the point.
+
+FLUFF, which sank the previous attempt
+3. NEVER narrate the measure. The chart sits under your section with a subtitle already
+   naming the parameter, period and source. Sentences like these are banned outright:
+     "To understand whether foreign money built the country, one must look at the share..."
+     "To see the long view, one has to look at FDI as a share of GDP."
+     "This shifts the denominator to the entire size of the economy."
+     "But these comparisons require an immediate look at the denominator."
+     "On this measure, foreign money has never built India."
+     "In dollar terms, the inflows for 2025 stood at..."
+     "From that trough, the trajectory shifted."
+   Do not tell the reader what to look at, what the chart measures, what you are about to do,
+   or what the previous sentence meant. Report the finding and move.
+4. EVERY SENTENCE EARNS ITS PLACE. It carries a figure, a named actor, a mechanism, or a
+   limit on what the data can show. If a sentence does none of those, delete it. Fewer than
+   three in ten of your sentences may lack both a figure and a proper noun.
+5. NO VAGUE QUANTIFIER WHERE A NUMBER EXISTS. Banned: significant, substantial, modest, vast,
+   dramatic, a trickle, tens of billions, a hair behind, far more. You have the data. Use it.
+6. Do not restate your opening line at the end of the section.
+
+STYLE
+7. NO EM-DASHES. Not one.
+8. Third person. Never "we", "our", "us", "I".
+9. Do not rank the sources. UNCTAD net and DPIIT gross measure different things; neither is
+   better, more rigorous or more honest.
+10. No invented colour. No headlines, ministers, factory floors or press reaction unless the
+    packet contains it.
+11. British spelling. "$38.9 billion", never "$38.9bn".
+12. Open with a direct answer to the heading in one short line, then earn it.
+13. Output ONLY the markdown for this section, starting with the exact H2. No code fences.
+
+Length: 200 to 340 words. Write it now.

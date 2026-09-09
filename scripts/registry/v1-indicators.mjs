@@ -1625,11 +1625,11 @@ export const v1Questions = [
     context: [],
     visualPlan: [
       // --- ACT 0: THE ANSWER, STATED AS A SHARE ---
-      { indicator: "extfin.fdi.dev.gfcf_share.IND.pct", chart: "line", title: "How much of what India builds is paid for by foreigners",
+      { indicator: "extfin.fdi.dev.gfcf_share.IND.pct", chart: "line", title: "Foreign money has never paid for more than a tenth of what India builds",
         subtitle: "Inward FDI flows, net of divestment and repatriation, as a share of India's gross fixed capital formation · 1990-2025 · UNCTAD", size: "hero", window: "full", beat: "answer", unit: "percent of gross fixed capital formation",
         why: "The whole article in one line: FDI has never financed more than about a tenth of Indian capital formation.", read: "Inward FDI as a share of gross fixed capital formation, the money India spends each year on factories, machines and buildings.", watch: "Peak 10.3% in 2008, 8.3% in 2020, 3.1% in 2025. A dollar figure hides this; the share is the honest measure." },
       // --- ACT 1: THE LONG ARC, ON A SECOND SOURCE ---
-      { chart: "multiLine", title: "Fifty-six years, and India is almost always the bottom line",
+      { chart: "multiLine", title: "In fifty-six years India has never out-raised Latin America",
         subtitle: "FDI net inflows as a share of GDP · India against three developing regions and the world · 1970-2025, Sub-Saharan Africa to 2024 · World Bank", size: "hero", beat: "long-arc", unit: "percent of GDP",
         indicator: "extfin.fdi.dev.gdp_share_wb.IND.pct",
         series: [
@@ -1640,11 +1640,11 @@ export const v1Questions = [
           { indicator: "extfin.fdi.dev.gdp_share_wb.WLD.pct", label: "World" }
         ],
         why: "World Bank data starts in 1970 and covers the closed decades UNCTAD's series cannot reach.", read: "FDI net inflows as a share of GDP for India and the developing regions, 1970 to 2025.", watch: "India has never once beaten Latin America across 56 years, has beaten Sub-Saharan Africa in five, and East Asia in three. An independent source from the rest of this page." },
-      { indicator: "extfin.fdi.dev.world_rank.IN", chart: "line", title: "India did climb, and the climb was real",
+      { indicator: "extfin.fdi.dev.world_rank.IN", chart: "line", title: "From 43rd in the world in 1990 to 12th in 2025",
         subtitle: "India's rank by inward FDI received, among the 170 to 203 economies reporting a value in a given year · 1990-2025 · UNCTAD", size: "feature", window: "full", beat: "rank", unit: "rank among reporting economies",
         why: "The success story is genuine and has to be told before it is qualified.", read: "India's rank by FDI received among the 170 to 203 economies reporting each year.", watch: "43rd in 1990, 7th in 2020, 12th in 2025. Lower is better. The 2008-09 leap partly reflects richer recipients collapsing faster." },
       // --- ACT 2: TWO WAYS TO DEVELOP ---
-      { chart: "multiLine", title: "Two different ways to build a country",
+      { chart: "multiLine", title: "Viet Nam builds with foreign money. India, like Korea, does not.",
         subtitle: "Inward FDI flows as a share of gross fixed capital formation · India, Viet Nam, Poland, China and Korea · 1990-2025 · UNCTAD", size: "hero", beat: "models", unit: "percent of gross fixed capital formation",
         indicator: "extfin.fdi.dev.gfcf_share.IND.pct",
         series: [
@@ -1655,7 +1655,7 @@ export const v1Questions = [
           { indicator: "extfin.fdi.dev.gfcf_share.KOR.pct", label: "Korea" }
         ],
         why: "The FDI-led model and the domestic-capital model, on one axis.", read: "Share of each country's capital formation financed by foreign direct investment.", watch: "Viet Nam has not been below 13.8% since 2011; India averaged 4.9% over the same years, nearer Korea's 2.6% than Viet Nam's 15.0%." },
-      { chart: "multiLine", title: "India is the South Asian norm, not the exception",
+      { chart: "multiLine", title: "Pakistan has out-raised India in 23 of the last 36 years",
         subtitle: "Inward FDI flows as a share of gross fixed capital formation · India, Pakistan, Sri Lanka and Bangladesh · 1990-2025 · UNCTAD", size: "feature", beat: "south-asia", unit: "percent of gross fixed capital formation",
         indicator: "extfin.fdi.dev.gfcf_share.IND.pct",
         series: [
@@ -1665,11 +1665,11 @@ export const v1Questions = [
           { indicator: "extfin.fdi.dev.gfcf_share.BGD.pct", label: "Bangladesh" }
         ],
         why: "The obvious objection is that a low share is an Indian failure. The neighbours say it is a regional pattern.", read: "Share of each country's capital formation financed by foreign investment.", watch: "Pakistan has beaten India in 23 of 36 years and in each of the last three; Sri Lanka in 22, including the last four. Their capital formation is small and recently crisis-hit, so a modest dollar figure is a large share of it." },
-      { indicator: "extfin.fdi.dev.cumulative_per_person.usd", chart: "tableBars", title: "Thirty-six years of foreign investment, per Indian",
+      { indicator: "extfin.fdi.dev.cumulative_per_person.usd", chart: "tableBars", title: "$547 per Indian, against $2,243 per Chinese",
         subtitle: "Inward FDI received 1990-2025, summed in current dollars and divided by 2025 population · 17 selected economies · UNCTAD", size: "feature", beat: "per-person", unit: "US$ per person (1990-2025 cumulative)",
         why: "Scale intuition: India's total is large only because India is large.", read: "Every dollar of FDI an economy received from 1990 to 2025, divided by its 2025 population.", watch: "India $547, China $2,243, Viet Nam $2,652, even Sri Lanka $813. A 36-year flow over a one-year population, so a rough intuition and not a precise ratio; Singapore and Ireland are conduits as much as destinations." },
       // --- ACT 3: THE REALLOCATION THAT PASSED INDIA BY ---
-      { chart: "multiLine", title: "Where the factories actually went",
+      { chart: "multiLine", title: "Southeast Asia took 6.3 times India's inflow in 2025",
         subtitle: "Annual inward FDI flows · Southeast Asia (UNCTAD's aggregate, which includes Singapore), China and India · 1990-2025 · UNCTAD", size: "hero", beat: "reallocation", unit: "US$ million",
         indicator: "extfin.fdi.dev.inward_flow.IND.usd",
         series: [
@@ -1678,14 +1678,14 @@ export const v1Questions = [
           { indicator: "extfin.fdi.dev.inward_flow.IND.usd", label: "India", emphasis: true }
         ],
         why: "The China-plus-one reallocation is the central economic event of the last decade, and the data says where it landed.", read: "Annual FDI inflows to Southeast Asia, China and India.", watch: "India averaged $38.2bn a year in 2013-17 and $37.6bn in 2021-25. Southeast Asia went from $126bn to $219bn. UNCTAD's Southeast Asia aggregate includes Singapore, much of whose inflow is booked rather than built." },
-      { indicator: "extfin.fdi.dev.india_share_developing.pct", chart: "line", title: "India's slice of the developing world's investment",
+      { indicator: "extfin.fdi.dev.india_share_developing.pct", chart: "line", title: "India's slice of developing-world investment fell from 10.2% to 4.3%",
         subtitle: "India's share of all FDI flowing to developing economies, a denominator that excludes Caribbean financial centres and special-purpose entities · 1990-2025 · UNCTAD", size: "small", window: "full", beat: "share", unit: "percent",
         why: "The share tells you whether India is gaining ground on its actual competitors, not on the world.", read: "India's share of all FDI flowing to developing economies.", watch: "Peaked above 10% in the pandemic year when everyone else stopped, then fell back to 4.3%." },
       // --- ACT 4: WHAT IS ACTUALLY HERE ---
-      { indicator: "extfin.fdi.dev.inward_stock_gdp_peers.pct", chart: "tableBars", title: "How much of the economy foreigners actually own",
+      { indicator: "extfin.fdi.dev.inward_stock_gdp_peers.pct", chart: "tableBars", title: "Foreigners own the equivalent of 13.5% of one year's output",
         subtitle: "Accumulated inward FDI stock at book value as a share of GDP · 10 selected economies · 2025, preliminary · UNCTAD", size: "feature", beat: "stock", unit: "percent of GDP",
         why: "Flows are noisy; the accumulated stock is what decades of policy actually produced.", read: "Inward FDI stock as a share of GDP in 2025.", watch: "India 13.5%, Viet Nam 55%, Thailand 67%. Book value and preliminary for 2025." },
-      { chart: "multiLine", title: "Building something new, or buying something old",
+      { chart: "multiLine", title: "In 2024 and 2025, foreign firms were net sellers of Indian companies",
         subtitle: "Recorded inward FDI flows against the net value of foreign acquisitions of Indian companies · 1990-2025 · UNCTAD. Compiled on different bases; the two lines cannot be subtracted.", size: "feature", beat: "build-vs-buy", unit: "US$ million",
         indicator: "extfin.fdi.dev.inward_flow.IND.usd",
         series: [
@@ -1693,7 +1693,7 @@ export const v1Questions = [
           { indicator: "extfin.fdi.dev.mna_sales.IN.usd", label: "Foreign purchases of Indian companies" }
         ],
         why: "Foreign money either builds new capacity or changes the nameplate on capacity that already exists. Only one of those adds to capital formation.", read: "Recorded FDI against the net value of foreign acquisitions of Indian companies.", watch: "2018 was the Walmart-Flipkart year: $33.6bn of acquisitions against $42.2bn of FDI. In 2024 and 2025 the acquisition line is negative, meaning foreign firms were net sellers. Deal values are compiled differently from balance-of-payments FDI and are not a subset of it, so read the shape and never the difference." },
-      { chart: "multiLine", title: "What gets announced, and what turns up",
+      { chart: "multiLine", title: "India announced $111 billion of projects in 2024 and recorded $27 billion",
         subtitle: "Announced greenfield project values against FDI actually recorded in the balance of payments · India, 2003-2025 · UNCTAD. Announcements are intentions from a commercial project database.", size: "feature", beat: "announcement-gap", unit: "US$ million",
         indicator: "extfin.fdi.dev.greenfield_announced.IN.usd",
         series: [
@@ -1702,10 +1702,10 @@ export const v1Questions = [
         ],
         why: "India announced a record project pipeline in the same year it booked its smallest inflow in a decade.", read: "Announced greenfield project value against FDI actually recorded, 2003 to 2025.", watch: "Different concepts on different clocks: an announcement is an intention that takes years to build or quietly lapses, and it comes from a commercial project database, not official statistics. The gap is suggestive, not arithmetic." },
       // --- ACT 5: THE ERAS, AND THE MATURITY READING ---
-      { indicator: "extfin.fdi.dev.era_summary.usd", chart: "tableBars", title: "India's FDI, era by era",
+      { indicator: "extfin.fdi.dev.era_summary.usd", chart: "tableBars", title: "The Make in India years were the best era, at 6.3% of capital formation",
         subtitle: "Total inward FDI received in each policy era, with the average share of capital formation it financed · five eras, 1991-2025 · UNCTAD", size: "feature", beat: "eras", unit: "US$ billion received over the period",
         why: "Five distinct policy eras, and the best one is not the most recent.", read: "Total FDI received in each era, with the average share of capital formation it financed.", watch: "2015-2020 was India's genuine best: $285bn and 6.3% of capital formation. 2021-2025: $188bn and 3.3%." },
-      { chart: "multiLine", title: "Indian firms announce projects abroad too",
+      { chart: "multiLine", title: "One dollar announced abroad for every three announced at home",
         subtitle: "Announced greenfield project values into India against those announced abroad by Indian companies · 2003-2025 · UNCTAD. Both are intentions, not recorded flows.", size: "small", beat: "outward-greenfield", unit: "US$ million",
         indicator: "extfin.fdi.dev.greenfield_announced.IN.usd",
         series: [
@@ -1713,7 +1713,7 @@ export const v1Questions = [
           { indicator: "extfin.fdi.dev.greenfield_outward.IN.usd", label: "Announced abroad by Indian firms" }
         ],
         why: "The maturity story shows up in announced projects as well as in the accumulated stock.", read: "Announced greenfield project value in both directions.", watch: "Indian firms announced $25.3bn of overseas projects in 2025 and $42.3bn in 2022. Both lines are intentions, not recorded money." },
-      { chart: "multiLine", title: "Two stakes converging",
+      { chart: "multiLine", title: "Foreign holdings were 13 times Indian holdings abroad in 1990. Now 1.9.",
         subtitle: "Accumulated inward FDI stock held in India against Indian-owned FDI stock abroad, both at book value · 1990-2025 · UNCTAD", size: "feature", beat: "maturity", unit: "US$ million",
         indicator: "extfin.fdi.dev.inward_stock.IN.usd",
         series: [
@@ -1721,7 +1721,7 @@ export const v1Questions = [
           { indicator: "extfin.fdi.dev.outward_stock.IN.usd", label: "What India owns abroad" }
         ],
         why: "The closing gap is the sign of a maturing economy, not a crisis, and it is where this article hands off.", read: "Accumulated FDI stock in each direction, at book value.", watch: "13.4 times in 1990, 1.9 times in 2025. Why net FDI has collapsed is a separate question, answered in the foreign-investment article." },
-      { indicator: "extfin.fdi.dev.top100_mne_home_economy.count", chart: "tableBars", title: "Where the developing world's biggest firms come from",
+      { indicator: "extfin.fdi.dev.top100_mne_home_economy.count", chart: "tableBars", title: "China has 41 of the developing world's 100 biggest firms. India has 4.",
         subtitle: "Home economies of the 100 largest non-financial multinationals from developing and transition economies, ranked by foreign assets · World Investment Report 2026, 2024 list · UNCTAD", size: "small", beat: "mnes", unit: "number of firms in the top 100",
         why: "A country that does not build multinationals stays a destination for other people's capital rather than a source of its own.", read: "Home economies of the 100 largest non-financial multinationals from developing and transition economies, ranked by foreign assets.", watch: "China 41, India 4. In the separate list of the world's 100 largest multinationals India has none, while Korea has three and China nine." }
     ]
