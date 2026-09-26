@@ -10,7 +10,7 @@ QID='q.health.pedestrian_safety_2024'
 BODY=ROOT/f'data/prose/{QID}.md'
 OUT=ROOT/f'data/explanations/en/{QID}.json'
 MORTH='https://data.opencity.in/dataset/33d29ab0-f9e8-4fc7-b404-c93c1ed8e1b8/resource/30af828c-3513-4c74-a919-8daa708f077d/download/road-accidents-in-india-2024.pdf'
-WHO='https://www.who.int/publications/b/65858'
+WHO='https://www.who.int/publications/i/item/9789240072497/'
 COURT='https://api.sci.gov.in/supremecourt/2024/42514/42514_2024_3_1501_71888_Judgement_19-Jun-2026.pdf'
 CHARTS=[
  ('road-safety-2024.road_users.2024','One in five recorded road deaths was a pedestrian',

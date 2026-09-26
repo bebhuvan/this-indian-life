@@ -29,7 +29,7 @@ def main():
   'eight_chart_notes':len(page.select('.chart-note'))==8,
   'morth_original_pdf_linked':any('road-accidents-in-india-2024.pdf' in x for x in links),
   'supreme_court_original_pdf_linked':any('api.sci.gov.in/supremecourt/2024/42514/' in x and x.endswith('.pdf') for x in links),
-  'who_manual_linked':any('who.int/publications/b/65858' in x for x in links),
+  'who_manual_linked':any('who.int/publications/i/item/9789240072497/' in x for x in links),
   'fundamental_right_and_duty_visible':'fundamental right' in text and 'panchayats' in text and 'demarcated footpaths' in text,
   'judgment_postdates_data_visible':'2024 figures describe deaths recorded' in text and 'before the 2026 ruling' in text,
   'each_opening_names_ministry_and_report':all(source_name in opening and report_title in opening for opening in openings),
