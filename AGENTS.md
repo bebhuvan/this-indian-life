@@ -9,6 +9,9 @@ read the same playbook.
 > **Building a whole story? Follow `docs/STORY_PLAYBOOK.md`** — the ordered, end-to-end
 > lifecycle (question → data → charts → brief → prose → validate → publish), with the
 > data-reading checklist and quality gates in-line.
+> The compact project skill `.agents/skills/indica-evidence-pipeline/SKILL.md` points
+> to that playbook for source-to-publication work. Keep article-specific audit rules
+> with the article rather than growing the skill into a second manual.
 >
 > Deep docs (read the relevant one before starting): `docs/ARCHITECTURE.md`,
 > `docs/EXPLANATION_PIPELINE.md`, `docs/DATA_SOURCES.md`,
@@ -145,6 +148,8 @@ python3 scripts/derive-<x>.py           # derived/computed series
 node scripts/generate-explanations.mjs --questions=q.<id>   # prose (multi-pass)
 #   big articles auto-route through the built-in batched path (see Gotchas)
 npm run explain:v1:validate             # lint prose (AI-phrase / false-precision checks)
+node scripts/validate-explanations.mjs --question=q.<id>  # focused article gate
+node scripts/validate-data-artifacts.mjs --manifest=data/catalog/<story>-manifest.json  # focused artifact gate
 npm run build                           # static build (a missing explanation => question dropped)
 npm run dev                             # local preview (restart after data-file changes)
 ```

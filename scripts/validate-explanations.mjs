@@ -2,9 +2,13 @@ import { readdir, readFile } from "node:fs/promises";
 import { lintExplanation } from "./core/prose-lint.mjs";
 import { lintSectionBinding, lintChartCards } from "./core/chart-card-lint.mjs";
 
+const questionArg = process.argv.slice(2).find((arg) => arg.startsWith("--question="));
+const selectedQuestion = questionArg?.slice("--question=".length);
 const files = (await readdir("data/explanations/en"))
   .filter((file) => file.endsWith(".json") && !file.endsWith(".evidence.json"))
+  .filter((file) => !selectedQuestion || file === `${selectedQuestion}.json`)
   .sort();
+if (selectedQuestion && files.length !== 1) throw new Error(`Explanation not found: ${selectedQuestion}`);
 
 let failures = 0;
 let warnings = 0;

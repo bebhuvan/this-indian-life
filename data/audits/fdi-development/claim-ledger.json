@@ -1,0 +1,102 @@
+{
+  "article": "q.econ.fdi_development",
+  "vintage": "World Investment Report 2026",
+  "note": "Section-level source map for material quantitative and interpretive claims. Exact artifact values are reconciled cell by cell in source-cell-audit.json; report claims were checked against the frozen chapter PDFs. The map does not certify future revisions.",
+  "sections": [
+    {
+      "heading": "How large was foreign investment beside India's own investment?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; Economy Label=India, Flow Label=Flow, Direction Label=Inward, Percentage of gross Fixed Capital Formation and Millions of US$; 1990-2025",
+      "interpretationLimit": "FDI/GFCF compares two aggregate flows and does not allocate finance to assets."
+    },
+    {
+      "heading": "Where does India sit among the developing regions, over fifty-six years?",
+      "sourceRowsOrPages": "World Bank BX.KLT.DINV.WD.GD.ZS.json; countryiso3code IND, LCN, EAS, SSF; 1970-2025",
+      "interpretationLimit": "Regional values are weighted aggregates; national source data overlap with UNCTAD."
+    },
+    {
+      "heading": "Did India climb at all?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; all individual economies, Flow/Inward/Millions of US$; 1990-2025; exclude 16 Caribbean financial centres listed in audit-sources.py; compare WIR 2026 chapter I figure I.4",
+      "interpretationLimit": "Rank depends on reporting set and exclusions; 2025 report lists India 11th."
+    },
+    {
+      "heading": "How does India compare with countries that drew more FDI?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; India, Viet Nam, Poland, China, Republic of Korea; Flow/Inward/Percentage of gross Fixed Capital Formation",
+      "interpretationLimit": "Ratio is a scale comparison, not an attribution of fixed investment to FDI."
+    },
+    {
+      "heading": "Is India unusual in its own neighbourhood?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; India, Pakistan, Sri Lanka, Bangladesh; Flow/Inward/Percentage of gross Fixed Capital Formation; 1990-2025",
+      "interpretationLimit": "Small or crisis-hit denominators can raise the ratio."
+    },
+    {
+      "heading": "What does all of it add up to, per Indian?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; sum each economy's 1990-2025 Flow/Inward/Millions of US$; US_PopTotal.csv 2025 population",
+      "interpretationLimit": "A 36-year cumulative flow divided by one-year population is a scale comparison, not a lifetime receipt."
+    },
+    {
+      "heading": "Did the shift toward Southeast Asia lift India's FDI?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; Developing economies: South-eastern Asia, China, India; Flow/Inward/Millions of US$; compare 2013-2017 with 2021-2025; WIR 2026 chapter I, pp. 28-29",
+      "interpretationLimit": "FDI totals cannot trace factory relocations; aggregate includes Singapore."
+    },
+    {
+      "heading": "Is India gaining on its actual competitors?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; India and Developing economies; Flow/Inward/Millions of US$; India divided by aggregate for each year",
+      "interpretationLimit": "Denominator excludes Caribbean financial centres but includes Singapore and other routing hubs."
+    },
+    {
+      "heading": "How large is India's accumulated FDI stock?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; selected economy rows, Stock/Inward/Percentage of gross Domestic Product; 2025",
+      "interpretationLimit": "Stock/GDP is a book-value-to-output ratio, not an asset ownership fraction."
+    },
+    {
+      "heading": "What do the acquisition figures add?",
+      "sourceRowsOrPages": "WIR 2026 annex table 05, India seller economy row, 1990-2025; US_FdiFlowsStock.csv, India Flow/Inward/Millions of US$",
+      "interpretationLimit": "Cross-border acquisitions can contribute to FDI, but deal values and balance-of-payments flows use different compilation and timing; do not subtract the two series or use them to decompose annual FDI."
+    },
+    {
+      "heading": "Why do the announcements not match the arrivals?",
+      "sourceRowsOrPages": "WIR 2026 annex tables 14 and 17, India destination row, 2003-2025; WIR 2026 chapter I, box I.4 p. 28; US_FdiFlowsStock.csv, India Flow/Inward/Millions of US$",
+      "interpretationLimit": "Project announcements are intentions; Google/Hynfra and manufacturing announcement values do not explain recorded FDI."
+    },
+    {
+      "heading": "Which era actually worked?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; India Flow/Inward and Flow/Outward/Millions of US$, plus annual Percentage of gross Fixed Capital Formation; editorial periods 1991-2000, 2001-2008, 2009-2014, 2015-2020, 2021-2025",
+      "interpretationLimit": "Sum flows but average annual ratios without weighting; boundaries are editorial, not causal policy periods."
+    },
+    {
+      "heading": "Do Indian firms build abroad?",
+      "sourceRowsOrPages": "WIR 2026 annex tables 13 and 14, India source and destination rows, 2003-2025",
+      "interpretationLimit": "Both measures are announced greenfield projects, not completed investments."
+    },
+    {
+      "heading": "What does it mean that India now invests abroad too?",
+      "sourceRowsOrPages": "US_FdiFlowsStock.csv; India Stock/Inward and Stock/Outward/Millions of US$; 1990, 2010, 2025",
+      "interpretationLimit": "Stock values are book values and cannot distinguish overseas operations from holding structures."
+    },
+    {
+      "heading": "Where are the Indian multinationals?",
+      "sourceRowsOrPages": "WIR 2026 annex tables 19 and 20, Home economy column; 2024 list",
+      "interpretationLimit": "Counts are from foreign-asset rankings, not a census of multinationals or exports."
+    },
+    {
+      "heading": "How to read these numbers: methodology and caveats",
+      "sourceRowsOrPages": "WIR 2026 chapter I, box I.1 pp. 6-7; US_FdiFlowsStock metadata; World Bank indicator BX.KLT.DINV.WD.GD.ZS metadata",
+      "interpretationLimit": "Definitions and source-vintage limitations apply to all preceding sections."
+    }
+  ],
+  "releaseChecks": {
+    "sourceFilesHashed": 37,
+    "sourceValuesChecked": 1124,
+    "sourceMismatches": 0,
+    "sourceGaps": 0,
+    "fdiArtifactsValidated": 29,
+    "explanationFailures": 0,
+    "explanationWarnings": 0,
+    "renderedSections": 16,
+    "renderedCharts": 15,
+    "renderedBindingErrors": 0,
+    "buildPages": 106,
+    "desktopAndMobileReviewed": true,
+    "cheapModelReview": "DeepSeek completed; findings checked against sources and corrections applied. MiMo substantive passes timed out; no assurance inferred from them."
+  }
+}

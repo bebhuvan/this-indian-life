@@ -304,24 +304,31 @@ for (const dir of ["Inward", "Outward"]) {
       note: "Book value, revised often; the ratio between the two is more reliable than either level." } });
 }
 
-// India's world rank among individual economies (aggregates have 4-digit codes).
+// Match WIR's recipient ranking by excluding Caribbean financial centres.
+// Source: UNCTAD Handbook of Statistics 2021, regional aggregate footnote.
 const isEconomy = (code) => /^\d{1,3}$/.test(code);
+const caribbeanFinancialCentres = new Set([
+  "Anguilla", "Antigua and Barbuda", "Aruba", "Bahamas", "Barbados",
+  "British Virgin Islands", "Cayman Islands", "Curaçao", "Dominica",
+  "Grenada", "Montserrat", "Saint Kitts and Nevis", "Saint Lucia",
+  "Saint Vincent and the Grenadines", "Sint Maarten", "Turks and Caicos Islands",
+]);
 const rankObs = [];
 for (let y = YMIN; y <= YMAX; y++) {
   const rows = fdi.filter((r) => r.year === y && r.kind === "Flow" && r.dir === "Inward"
-    && isEconomy(r.code) && r.usd !== null).sort((a, b) => b.usd - a.usd);
+    && isEconomy(r.code) && !caribbeanFinancialCentres.has(r.econ) && r.usd !== null).sort((a, b) => b.usd - a.usd);
   const i = rows.findIndex((r) => r.econ === "India");
   if (i >= 0) rankObs.push({ date: yearEnd(y), value: i + 1 });
 }
 assert(rankObs.find((o) => o.date === "1990-12-31").value === 43, "India 1990 rank is not 43");
 assert(rankObs.find((o) => o.date === "2020-12-31").value === 7, "India 2020 rank is not 7");
-assert(rankObs.find((o) => o.date === "2025-12-31").value === 12, "India 2025 rank is not 12");
+assert(rankObs.find((o) => o.date === "2025-12-31").value === 11, "India 2025 rank is not 11");
 await series({ ...U, id: "extfin.fdi.dev.world_rank.IN",
   title: "India's world rank for FDI received", unit: "rank among reporting economies", obs: rankObs,
   geography: { type: "country", id: "IND", name: "India" },
   name: "unctad-wir.IND.extfin_fdi_dev_world_rank",
   metadata: { dataset: "UNCTADstat US.FdiFlowsStock",
-    definition: "Rank by inward FDI flow among the 170-203 individual economies reporting a value that year; regional and grouping aggregates excluded." } });
+    definition: "Rank by inward FDI flow among reporting individual economies, excluding regional aggregates and 16 Caribbean financial centres, consistent with WIR 2026's 2025 recipient ranking." } });
 
 const devTotal = new Map(pick("Developing economies", "Flow", "Inward").map((r) => [r.year, r.usd]));
 const shareObs = indIn.filter((r) => r.usd !== null && devTotal.get(r.year))
@@ -383,8 +390,8 @@ const eraRows = ERAS.map(([label, a, b]) => {
   const out = indOut.filter((r) => r.year >= a && r.year <= b);
   const sum = (arr, k) => arr.reduce((s, r) => s + (r[k] ?? 0), 0);
   const meanGfcf = win.reduce((s, r) => s + (r.gfcf ?? 0), 0) / win.length;
-  return { era: label, label, value: Math.round(sum(win, "usd") / 1000),
-    received_usd_billion: Math.round(sum(win, "usd") / 1000),
+  return { era: label, label, value: r2(sum(win, "usd") / 1000),
+    received_usd_billion: r2(sum(win, "usd") / 1000),
     sent_out_usd_billion: Math.round(sum(out, "usd") / 1000),
     net_usd_billion: Math.round((sum(win, "usd") - sum(out, "usd")) / 1000),
     avg_pct_of_capital_formation: r2(meanGfcf) };

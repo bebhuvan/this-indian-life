@@ -45,8 +45,9 @@ downstream of this one.
 - Not "many informal workers" → the PLFS figure, with the round.
 - Not "a worker" → "a Zomato rider in Indiranagar," not "a barista at Starbucks."
 
-**Rule of thumb: at least one concrete, sourced, Indian particular per paragraph.**
-A paragraph with a real number in it almost never reads as machine-written.
+**Rule of thumb: use concrete, sourced Indian particulars where they explain the
+point.** A paragraph may instead do the connecting work between two facts. Do not
+invent an example or crowd every paragraph with a number to satisfy a quota.
 
 ---
 
@@ -80,7 +81,8 @@ crucial, vital, pivotal, paramount, key (adj.), essential, significant, substant
 
 ## 3. Punctuation & rhythm tells
 
-- **Em-dash addiction.** AI sprinkles em-dashes—like this—everywhere. Use them sparingly. Prefer a full stop. A comma. Sometimes a colon. Never more than one em-dash per paragraph, rarely that.
+- **Em-dash addiction.** Use a full stop, comma or colon instead. The project
+  article rule is no em dashes.
 - **The triad list** "X, Y, and Z" on repeat. Break the pattern.
 - **Uniform sentence length.** AI sentences are all medium. Write a three-word sentence next to a long messy one. Let the rhythm be uneven. Read it aloud — if it lulls, it's wrong.
 - **Colon-then-list** as a default sentence shape. Vary it.
@@ -131,10 +133,13 @@ crucial, vital, pivotal, paramount, key (adj.), essential, significant, substant
 1. **Read it aloud.** Anything that lulls, sounds like a brochure, or you'd never say to a friend — cut or rewrite.
 2. **Ctrl-F the Section 2 lists.** Delete every hit. Find a plainer word or a number.
 3. **Hunt em-dashes.** Keep at most one per paragraph. Replace the rest.
-4. **Kill the first and last sentence of each section.** If the section is better without them (it usually is), leave them dead.
-5. **One concrete Indian particular per paragraph.** If a paragraph has none, add a real number/name/place or merge it.
+4. **Challenge the first and last sentence of each section.** Keep them if they
+   carry the answer or a necessary qualification; cut them if they announce or
+   restate what the section already says.
+5. **Use concrete Indian particulars where they help.** Source every number,
+   name and example. Do not add one just to break a prose pattern.
 6. **Break the triads.** Any tidy "X, Y, and Z" — make it two, or four, or recast.
-7. **Cut every adverb,** then restore only the ones that survive being missed.
+7. **Cut empty intensifiers.** Keep adverbs that change the factual meaning.
 8. **Check the rhythm.** Is there a short sentence near a long one? If every sentence is the same length, vary them.
 9. **Find the opinion.** If the piece has no view, it's a definition, not an explainer. Add the take and its caveat.
 

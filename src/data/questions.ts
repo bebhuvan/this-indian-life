@@ -340,6 +340,12 @@ export function pullQuoteForQuestion(page: QuestionPage) {
       line: "Around 1950, India was no poorer than China or South Korea. Today a South Korean earns about five times as much."
     };
   }
+  if (page.id === "q.econ.fdi_development") {
+    return {
+      stat: "3.1%",
+      line: "Inward FDI in 2025, measured against India's fixed investment that year. The ratio does not identify which assets it financed."
+    };
+  }
   if (page.id.startsWith("q.econ.")) {
     return {
       stat: top ? formatLockedNumber(top) : "The average",

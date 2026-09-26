@@ -3,6 +3,8 @@ import { readdir, readFile, stat } from "node:fs/promises";
 
 const args = new Set(process.argv.slice(2));
 const strict = args.has("--strict");
+const manifestArg = [...args].find((arg) => arg.startsWith("--manifest="));
+const selectedManifest = manifestArg?.slice("--manifest=".length);
 
 const findings = [];
 
@@ -361,15 +363,22 @@ async function validateCrossSourceChecks() {
   }
 }
 
-for (const path of await listJsonFiles("data/series")) {
+const catalogFiles = selectedManifest ? [selectedManifest] : await listJsonFiles("data/catalog");
+const seriesFiles = selectedManifest
+  ? [...new Set(((await readJson(selectedManifest)) || [])
+      .filter((entry) => entry?.status === "ready" && entry.artifact)
+      .map((entry) => entry.artifact))].sort()
+  : await listJsonFiles("data/series");
+
+for (const path of seriesFiles) {
   await validateArtifact(path);
 }
 
-for (const path of await listJsonFiles("data/catalog")) {
+for (const path of catalogFiles) {
   await validateManifest(path);
 }
 
-await validateCrossSourceChecks();
+if (!selectedManifest) await validateCrossSourceChecks();
 
 const errors = findings.filter((finding) => finding.severity === "error");
 const warnings = findings.filter((finding) => finding.severity === "warning");
@@ -377,8 +386,8 @@ const result = {
   ok: errors.length === 0 && (!strict || warnings.length === 0),
   strict,
   checked: {
-    seriesArtifacts: (await listJsonFiles("data/series")).length,
-    catalogFiles: (await listJsonFiles("data/catalog")).length
+    seriesArtifacts: seriesFiles.length,
+    catalogFiles: catalogFiles.length
   },
   errors: errors.length,
   warnings: warnings.length,
