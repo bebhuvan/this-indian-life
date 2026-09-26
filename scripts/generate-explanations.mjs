@@ -73,6 +73,29 @@ function systemPrompt() {
 }
 
 function articleTemplateFor(evidence) {
+  if (evidence.questionId === "q.health.pedestrian_safety_2024") {
+    return {
+      purpose: "Answer how safe it is to walk on India’s roads with MoRTH’s 2024 police-recorded pedestrian deaths. Explain the death burden, recent direction, age and sex distributions, impacting vehicles, state totals and national-highway split. State plainly that a per-walking-journey risk cannot be computed without walking exposure. Use WHO's 2023 manual only for general evidence on street design and speed, never as a measurement of India’s 2024 infrastructure or the cause of a specific death.",
+      requiredSections: [
+        "How many pedestrians are killed on India's roads?", "Is the pedestrian toll falling?",
+        "How old were the pedestrians who died?", "Are older road victims more often pedestrians?",
+        "Were the pedestrians killed mostly men?", "What vehicles were recorded in pedestrian deaths?",
+        "Where are the largest pedestrian death totals?", "Is this only a national-highway problem?",
+        "What would make a walk safer?", "How should you read these figures?"
+      ],
+      requiredConcepts: [
+        "MoRTH: 36,526 pedestrians killed in 2024, 20.6% of 177,175 recorded road deaths; 35,221 in 2023. The report changed victim-category collection from 2019.",
+        "Annexure 33: 29,055 male and 7,471 female pedestrian victims; 6,160 victims aged 60 and over.",
+        "The share of road deaths involving a pedestrian within each age band is pedestrian deaths divided by all road deaths in that band. At 60 and over it is 41.7%; this is not per-walk risk.",
+        "Table 4.5: impacting vehicles are police-coded collision counterparts, not legal assignments of fault.",
+        "Annexure 29(a): state totals are raw counts, not walking-risk rankings.",
+        "Table 2.11: 11,386 pedestrian deaths on national highways; remaining 25,140 on all other roads combined. No road-type exposure denominator.",
+        "WHO 2023 pedestrian-safety manual offers general evidence on sidewalks, intersections and speed management, not India-specific causal measurement."
+      ],
+      styleExample: "## How many pedestrians are killed on India's roads?\n\nMoRTH recorded 36,526 pedestrian deaths in 2024. That is about 100 people a day. The count does not tell us the risk of a walk, because the report does not count walking journeys."
+    };
+  }
+
   if (evidence.questionId === "q.health.road_safety_2024") {
     return {
       purpose: "Explain MoRTH's 2024 road-death report across victims, impacting vehicles, age, trend, rural and urban areas, road classes, states, collision classifications, protective devices and timing. Keep accident counts separate from fatalities. Treat WHO's 2021 estimate as a same-year measurement comparison, never as a 2024 adjustment. No raw-count risk ranking or causal claim from a police label.",

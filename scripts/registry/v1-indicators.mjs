@@ -8845,6 +8845,34 @@ export const v1Questions = [
     ]
   },
 
+  {
+    id: "q.health.pedestrian_safety_2024",
+    slug: "how-safe-is-it-to-walk-in-india",
+    question: "How safe is it to walk on India’s roads?",
+    priority: "core",
+    indicators: ["road.safety.road_users.2024", "road.pedestrian.deaths.2023_2024", "road.pedestrian.ages.2024", "road.pedestrian.share_of_age_deaths.2024", "road.pedestrian.sex.2024", "road.safety.pedestrian_impact.2024", "road.pedestrian.states_top_ten.2024", "road.pedestrian.national_highways.2024"],
+    core: ["road.safety.road_users.2024", "road.pedestrian.deaths.2023_2024", "road.pedestrian.ages.2024", "road.pedestrian.share_of_age_deaths.2024"],
+    context: ["road.pedestrian.sex.2024", "road.safety.pedestrian_impact.2024", "road.pedestrian.states_top_ten.2024", "road.pedestrian.national_highways.2024"],
+    visualPlan: [
+      { indicator: "road.safety.road_users.2024", chart: "tableBars", title: "One in five recorded road deaths was a pedestrian", size: "hero", beat: "scale", unit: "people killed", subtitle: "MoRTH · victim road-user categories · India, 2024",
+        why: "Start with the pedestrian share of the national death record.", read: "Each bar counts people killed in a road-user group.", watch: "The groups describe victims, not responsibility or per-trip risk." },
+      { indicator: "road.pedestrian.deaths.2023_2024", chart: "tableBars", title: "Pedestrian deaths rose again in 2024", size: "feature", beat: "change", unit: "people killed", subtitle: "MoRTH · police-recorded pedestrian deaths · India, 2023–2024",
+        why: "The short comparison shows recent direction without forcing a long, fragile series.", read: "Compare the two calendar-year counts.", watch: "A two-year increase is not a change in risk per walking journey." },
+      { indicator: "road.pedestrian.ages.2024", chart: "tableBars", title: "Deaths of pedestrians span every age group", size: "feature", beat: "age", unit: "people killed", subtitle: "MoRTH · pedestrian victims by age · India, 2024",
+        why: "The pedestrian toll reaches children and older adults.", read: "Published age groups partition pedestrian deaths; unknown age remains.", watch: "Counts by age are not walking-risk rates." },
+      { indicator: "road.pedestrian.share_of_age_deaths.2024", chart: "tableBars", title: "Walking victims make up a larger share of road deaths at older ages", size: "feature", beat: "age comparison", unit: "% of road deaths in age band", subtitle: "MoRTH · pedestrian deaths ÷ all road deaths in each age band · India, 2024",
+        why: "A same-age denominator changes the reading of the age chart.", read: "Each percentage divides pedestrian deaths by all road deaths for that age band.", watch: "This is a share among people killed, not the chance of dying while walking." },
+      { indicator: "road.pedestrian.sex.2024", chart: "tableBars", title: "Four in five recorded pedestrian victims were men", size: "feature", beat: "sex", unit: "people killed", subtitle: "MoRTH · pedestrian victims by sex · India, 2024",
+        why: "Sex adds another victim lens without implying an exposure-adjusted risk.", read: "Male and female counts sum to the national pedestrian total.", watch: "The table does not measure how far men or women walked." },
+      { indicator: "road.safety.pedestrian_impact.2024", chart: "tableBars", title: "Two-wheelers and cars figure prominently in pedestrian deaths", size: "feature", beat: "impacting vehicle", unit: "people killed", subtitle: "MoRTH · police-coded impacting vehicle in pedestrian fatalities · India, 2024",
+        why: "The collision record names the other vehicle involved.", read: "The eight police categories add to all recorded pedestrian deaths.", watch: "Impacting vehicle is not a legal finding of fault; the mixed Others group is large." },
+      { indicator: "road.pedestrian.states_top_ten.2024", chart: "tableBars", title: "Ten states account for three-quarters of pedestrian deaths", size: "feature", beat: "states", unit: "people killed", subtitle: "MoRTH · ten largest pedestrian death totals · states, 2024",
+        why: "Large state totals show where local investigation would matter.", read: "The chart selects the ten largest counts; other states are omitted.", watch: "Raw state totals cannot rank the safety of a walking trip." },
+      { indicator: "road.pedestrian.national_highways.2024", chart: "tableBars", title: "Most pedestrian deaths were recorded off national highways", size: "feature", beat: "road class", unit: "people killed", subtitle: "MoRTH · national highways versus all other roads combined · India, 2024",
+        why: "The pedestrian problem extends well beyond national highways.", read: "The second bar is total pedestrians minus national-highway pedestrians.", watch: "Other roads combines state highways and local roads; neither bar is exposure-adjusted." }
+    ]
+  },
+
 ];
 
 export const worldBankIndicators = [

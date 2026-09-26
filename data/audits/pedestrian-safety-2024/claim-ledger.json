@@ -1,0 +1,99 @@
+{
+  "article": "q.health.pedestrian_safety_2024",
+  "status": "locally reviewed; no push or deployment",
+  "sourceVintage": {
+    "morth": "Road Accidents in India 2024, calendar-year police returns, with direct 2023 comparisons",
+    "who": "Pedestrian safety: a road safety manual for decision-makers and practitioners, 2023; general prevention guidance"
+  },
+  "evidenceBundle": {
+    "sourceManifest": "data/raw/pedestrian-safety-2024/manifest.json",
+    "artifactCatalog": "data/catalog/pedestrian-safety-2024-manifest.json",
+    "repositoryFiles": [
+      ".gitattributes",
+      "data/audits/pedestrian-safety-2024/claim-ledger.json",
+      "data/audits/pedestrian-safety-2024/rendered-audit.json",
+      "data/audits/pedestrian-safety-2024/source-cell-audit.csv",
+      "data/audits/pedestrian-safety-2024/source-cell-audit.json",
+      "data/explanations/en/q.health.pedestrian_safety_2024.json",
+      "data/prose/q.health.pedestrian_safety_2024.md",
+      "data/series/road-safety-2024.road_users.2024.json",
+      "data/series/road-safety-2024.pedestrian_impact.2024.json",
+      "scripts/generate-explanations.mjs",
+      "scripts/registry/v1-indicators.mjs",
+      "scripts/stories/pedestrian-safety-2024/README.md",
+      "scripts/stories/pedestrian-safety-2024/audit-rendered.py",
+      "scripts/stories/pedestrian-safety-2024/audit.py",
+      "scripts/stories/pedestrian-safety-2024/build-explanation.py",
+      "scripts/stories/pedestrian-safety-2024/ingest.py"
+    ]
+  },
+  "sections": [
+    {
+      "heading": "How many pedestrians are killed on India's roads?",
+      "sourceRowsOrPages": "MoRTH Table 4.4, PDF p98; victim-category rows and national 2024 death total.",
+      "interpretationLimit": "A share of deaths is not the risk per walking trip; victim category does not assign fault."
+    },
+    {
+      "heading": "Is the pedestrian toll falling?",
+      "sourceRowsOrPages": "MoRTH Table 4.4, PDF p98, 2023 and 2024 pedestrian rows; victim-category format note, PDF p96.",
+      "interpretationLimit": "Two reported years do not establish a long trend; pre-2019 road-user labels differ."
+    },
+    {
+      "heading": "How old were the pedestrians who died?",
+      "sourceRowsOrPages": "MoRTH Annexure 33, PDF p222; age and unknown-age rows checked against original scan.",
+      "interpretationLimit": "Age-band death counts are not risks per person or per distance walked."
+    },
+    {
+      "heading": "Are older road victims more often pedestrians?",
+      "sourceRowsOrPages": "MoRTH Annexure 33, PDF p222, pedestrian age rows, divided by Table 4.2, PDF p92, all road deaths in matching age bands.",
+      "interpretationLimit": "Within-age victim mix is not the probability of dying on a walk; no walking-exposure denominator."
+    },
+    {
+      "heading": "Were the pedestrians killed mostly men?",
+      "sourceRowsOrPages": "MoRTH Annexure 33, PDF p222, male and female pedestrian totals; narrative cross-check, PDF p97.",
+      "interpretationLimit": "Victim sex is not a measure of individual risk or behaviour."
+    },
+    {
+      "heading": "What vehicles were recorded in pedestrian deaths?",
+      "sourceRowsOrPages": "MoRTH Table 4.5, PDF p100; source-audited road-safety artifact reused.",
+      "interpretationLimit": "An impacting-vehicle classification is not a legal fault verdict; Others mixes classifications."
+    },
+    {
+      "heading": "Where are the largest pedestrian death totals?",
+      "sourceRowsOrPages": "MoRTH Annexure 29(a), PDF p210; ten displayed state cells visually locked; all 36 state totals reconciled with Annexure 33, PDF p222.",
+      "interpretationLimit": "Raw state counts cannot rank risk without comparable walking exposure and reporting quality."
+    },
+    {
+      "heading": "Is this only a national-highway problem?",
+      "sourceRowsOrPages": "MoRTH Table 2.11, PDF p68, national-highway pedestrian deaths; Table 4.4, PDF p98, national total; remainder calculated by subtraction.",
+      "interpretationLimit": "All other roads is a combined remainder; road-class counts are not per-walk risks."
+    },
+    {
+      "heading": "What would make a walk safer?",
+      "sourceRowsOrPages": "WHO 2023 Pedestrian safety manual, publisher page and archived HTML; MoRTH national tabulations used by this story.",
+      "interpretationLimit": "WHO guidance is general and does not measure the effect of an intervention in India's 2024 police data."
+    },
+    {
+      "heading": "How should you read these figures?",
+      "sourceRowsOrPages": "MoRTH Tables 2.11, 4.2, 4.4, 4.5 and Annexures 29(a), 33; original PDF and source-cell audit.",
+      "interpretationLimit": "Police returns may miss deaths; full-report SpaceBunny transcription is a reading aid, not the source of record."
+    }
+  ],
+  "releaseChecks": {
+    "sourceHashesChecked": 11,
+    "plottedCellsChecked": 47,
+    "calculationInputsChecked": 14,
+    "crossChecks": 41,
+    "sourceMismatches": 0,
+    "explanationFailures": 0,
+    "explanationWarnings": 0,
+    "focusedArtifactErrors": 0,
+    "focusedArtifactWarnings": 0,
+    "builtPages": 108,
+    "renderedSections": 10,
+    "renderedCharts": 8,
+    "renderedBindingErrors": 0,
+    "desktopAndMobileReviewed": true,
+    "publicationDecision": "Local draft ready for editorial review; no push or deployment."
+  }
+}

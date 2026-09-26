@@ -1,0 +1,146 @@
+#!/usr/bin/env python3
+"""Build the pedestrian article from its durable edited Markdown and audited artifacts."""
+import json
+import re
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[3]
+QID='q.health.pedestrian_safety_2024'
+BODY=ROOT/f'data/prose/{QID}.md'
+OUT=ROOT/f'data/explanations/en/{QID}.json'
+MORTH='https://data.opencity.in/dataset/33d29ab0-f9e8-4fc7-b404-c93c1ed8e1b8/resource/30af828c-3513-4c74-a919-8daa708f077d/download/road-accidents-in-india-2024.pdf'
+WHO='https://www.who.int/publications/b/65858'
+CHARTS=[
+ ('road-safety-2024.road_users.2024','One in five recorded road deaths was a pedestrian',
+  'Pedestrians account for 36,526 of 177,175 recorded deaths in 2024.',
+  'Only two-wheeler users have a larger count. Road-user groups identify the people killed; they do not identify the person responsible for a collision.',
+  'The reader needs to see the pedestrian toll within the full road-death record.',
+  'Each bar is a victim road-user group, all for India in 2024.',
+  'A death share is not the chance of dying on a journey.',
+  'Long road-user names wrap; the count stays beside each bar.'),
+ ('pedestrian-safety-2024.deaths.2023_2024','Pedestrian deaths rose again in 2024',
+  'The police count rose from 35,221 to 36,526 in one year.',
+  'That is 1,305 additional recorded deaths, or 3.7 per cent. The two years use the same victim-category definition in this report.',
+  'The direct comparison tests whether the toll was falling at the latest point.',
+  'Read the two calendar-year bars together; they are counts of people, not crashes.',
+  'Two annual counts cannot establish a long-run trend or per-trip risk.',
+  'Both years have a printed value alongside the bar.'),
+ ('pedestrian-safety-2024.ages.2024','Deaths of pedestrians span every age group',
+  'The 45–60 band records 8,436 pedestrian deaths, and 6,160 victims were 60 or older.',
+  'The report also records 1,888 victims under 18 and 792 whose age was unknown. The published bands sum to all pedestrian victims.',
+  'Age gives the toll a human distribution before any attempt at comparison.',
+  'Read each published age band as a count of pedestrians killed; unknown age remains separate.',
+  'A count by age does not measure the risk of a walk for that age.',
+  'Keep the Age unknown row visible when comparing the other bars.'),
+ ('pedestrian-safety-2024.share_of_age_deaths.2024','Walking victims make up a larger share of road deaths at older ages',
+  'Pedestrians were 41.7 per cent of road victims aged 60 and over, compared with 12.7 per cent at 18–25.',
+  'Each bar divides pedestrian deaths by all road deaths in the same published age band. The denominator changes with age; no walking exposure is measured.',
+  'This same-age comparison asks a different question from the raw age counts.',
+  'Values are percentages of road deaths within each age band, not percentages of all pedestrians.',
+  'The chart does not give the chance of dying while walking.',
+  'Read the unit in the heading: per cent of road deaths in that age band.'),
+ ('pedestrian-safety-2024.sex.2024','Four in five recorded pedestrian victims were men',
+  'Police recorded 29,055 male and 7,471 female pedestrian deaths in 2024.',
+  'The two groups sum to the national pedestrian total and match the report narrative. Sex is a description of victims, not a measure of how often each group walked.',
+  'The sex split adds another dimension to the people behind the total.',
+  'Both bars count people killed in the report’s male and female categories.',
+  'Do not infer comparative walking risk or carefulness without travel exposure.',
+  'Both bars use a zero baseline and have direct values.'),
+ ('road-safety-2024.pedestrian_impact.2024','Two-wheelers and cars figure prominently in pedestrian deaths',
+  'Two-wheelers appear in 10,378 pedestrian deaths and cars, taxis, vans and LMVs in 9,302.',
+  'The mixed Others group contains 7,857 deaths, so a large part of the police classification remains vague. Impacting vehicle is a police field, not a legal finding of fault.',
+  'The other vehicle involved is a different question from the victim’s road-user type.',
+  'Eight impacting-vehicle categories partition the 36,526 pedestrian victims.',
+  'The bars cannot rank vehicles by danger per kilometre driven or assign blame.',
+  'The long car and Others labels wrap; their counts remain visible.'),
+ ('pedestrian-safety-2024.states_top_ten.2024','Ten states account for three-quarters of pedestrian deaths',
+  'The ten displayed state totals add to 27,354 pedestrian deaths, or 74.9 per cent nationally.',
+  'Tamil Nadu records 4,712 and Bihar 4,149. The chart selects the ten largest counts from Annexure 29(a); other states and union territories are omitted.',
+  'The state lens shows where a large local evidence task would sit.',
+  'These are selected raw totals, not rates; they do not partition the entire national toll.',
+  'Without walking journeys or distance, a state ranking is not a safety ranking.',
+  'Long state names wrap and every bar keeps its value.'),
+ ('pedestrian-safety-2024.national_highways.2024','Most pedestrian deaths were recorded off national highways',
+  'National highways account for 11,386 pedestrian deaths, leaving 25,140 on all other roads combined.',
+  'The remainder is the national pedestrian total minus the national-highway pedestrian row. It mixes state highways and other road classes because this source does not split the pedestrian remainder here.',
+  'The road-class split prevents a highway-only reading of the pedestrian toll.',
+  'The two bars partition the 2024 pedestrian deaths into national highways and every other road.',
+  'No road category has a matched walking-exposure denominator.',
+  'The second label means all non-national-highway roads combined.'),
+]
+HEADINGS=[
+ "How many pedestrians are killed on India's roads?",'Is the pedestrian toll falling?',
+ 'How old were the pedestrians who died?','Are older road victims more often pedestrians?',
+ 'Were the pedestrians killed mostly men?','What vehicles were recorded in pedestrian deaths?',
+ 'Where are the largest pedestrian death totals?','Is this only a national-highway problem?',
+ 'What would make a walk safer?','How should you read these figures?'
+]
+
+
+def load(key):
+ return json.loads((ROOT/f'data/series/{key}.json').read_text())
+
+
+def main():
+ body=BODY.read_text().strip();headings=re.findall(r'^## (.+)$',body,re.M)
+ if headings!=HEADINGS or body.count('\n## ')!=len(headings)-1:raise ValueError('Article section order or heading structure changed')
+ docs=[load(key) for key,*_ in CHARTS]
+ pedestrian=36526
+ if docs[1]['rows'][-1]['value']!=pedestrian or sum(x['value'] for x in docs[2]['rows'])!=pedestrian or sum(x['value'] for x in docs[4]['rows'])!=pedestrian or sum(x['value'] for x in docs[5]['rows'])!=pedestrian or sum(x['value'] for x in docs[7]['rows'])!=pedestrian:raise ValueError('Locked pedestrian partitions changed')
+ if sum(x['value'] for x in docs[6]['rows'])!=27354:raise ValueError('Top ten sum changed')
+ cards=[]
+ for key,title,takeaway,detail,why,how,mistake,mobile in CHARTS:
+  cards.append({'visualId':title,'title':title,'takeaway':takeaway,'detail':detail,
+                'whyShowThis':why,'howToRead':how,'mistakeToAvoid':mistake,'mobileNote':mobile})
+ summaries=[]
+ for doc in docs:
+  date='2023' if doc['indicatorId']=='road.pedestrian.deaths.2023_2024' else '2024'
+  summaries.append({'indicatorId':doc['indicatorId'],'title':doc['title'],'sourceId':doc['sourceId'],
+                    'earliest':date,'latest':'2024','unit':doc['unit']})
+ locks=[
+ {'label':'Police-recorded pedestrian deaths, 2024','value':36526,'displayValue':'36,526','date':'2024','unit':'people','sourceId':'morth-road-accidents-2024','indicatorId':'road.pedestrian.deaths.2023_2024'},
+ {'label':'Pedestrian deaths, 2023','value':35221,'displayValue':'35,221','date':'2023','unit':'people','sourceId':'morth-road-accidents-2024','indicatorId':'road.pedestrian.deaths.2023_2024'},
+ {'label':'Pedestrian share of road deaths aged 60 and over, 2024','value':41.7,'displayValue':'41.7%','date':'2024','unit':'percent','sourceId':'morth-road-accidents-2024','indicatorId':'road.pedestrian.share_of_age_deaths.2024'},
+ {'label':'Pedestrian deaths on national highways, 2024','value':11386,'displayValue':'11,386','date':'2024','unit':'people','sourceId':'morth-road-accidents-2024','indicatorId':'road.pedestrian.national_highways.2024'}]
+ evidence={'schemaVersion':1,'questionId':QID,'question':'How safe is it to walk on India’s roads?',
+ 'priority':'core','theme':'health','requiredIndicatorIds':[d['indicatorId'] for d in docs],
+ 'availableIndicatorIds':[d['indicatorId'] for d in docs],'themeIndicatorIds':[],
+ 'visualPlan':[],'plannedCharts':[],'selectedDataPoints':[],'lockedNumbers':locks,
+ 'sourceSummaries':summaries,'selectionRules':[],'caveats':[],'forbiddenClaims':[]}
+ out={'schemaVersion':1,'questionId':QID,'status':'ready','dataThrough':'MoRTH 2024; WHO pedestrian-safety guidance 2023',
+ 'short':{'headline':'About 100 pedestrians a day were recorded as killed in 2024',
+          'dek':'The annual report counts 36,526 pedestrian deaths. It maps the victims and collisions but cannot measure the danger of a walking journey.',
+          'body':'Pedestrians were one in five people recorded as killed on India’s roads in 2024. The police count rose 3.7 per cent from 2023. Older victims were more often pedestrians within their age group’s road-death total, but no national data here count the walking trips needed for a per-journey risk rate.'},
+ 'macha':{'heading':'Okay, macha, how risky is a walk?',
+          'body':'The police recorded 36,526 pedestrian deaths in 2024. That is about 100 people a day. The report tells us their ages, where the largest state totals were and what vehicles were recorded in their collisions. It cannot tell you the chance of dying on your next walk, because it never counts how much walking people did.',
+          'soWhat':'Treat the death count as a map for investigation. A walking-risk rate needs walking journeys or distance and better linked crash records.'},
+ 'article':{'title':'How safe is it to walk on India’s roads?',
+            'standfirst':'About 100 pedestrians a day were recorded as killed in 2024. MoRTH’s tables reveal who they were and what struck them. They still cannot tell us the risk of a walking journey.',
+            'bodyMarkdown':body},
+ 'editorialPlan':{'audience':'Indian readers who walk and want a careful answer about pedestrian safety',
+                  'heroDescription':'Source-checked pedestrian deaths in the 2024 police returns.',
+                  'selectedDataPoints':[],'pullQuotes':[],
+                  'glossaryBlocks':[
+                   {'term':'Pedestrian','plainMeaning':'A person recorded as walking when involved in the road crash. It describes the victim’s road use, not who caused the collision.','whyItMattersHere':'The same death can also appear in a table by impacting vehicle.','keyTerm':True},
+                   {'term':'Walking exposure','plainMeaning':'How many walking journeys people made, or how far they walked.','whyItMattersHere':'Without this, a death count cannot become a risk per trip.','keyTerm':True},
+                   {'term':'Impacting vehicle','plainMeaning':'The vehicle police recorded as the collision counterpart to a victim.','whyItMattersHere':'This administrative label is not a court finding of fault.'}]},
+ 'chartExplainers':cards,'sectionVisualMap':[{'heading':h,'visualId':c[1]} for h,c in zip(HEADINGS,CHARTS)],
+ 'sourceNotes':[
+  {'label':'MoRTH, Road Accidents in India 2024: Tables 2.11, 4.2, 4.4 and 4.5; Annexures 29(a) and 33.','url':MORTH},
+  {'label':'WHO, Pedestrian safety manual, second edition (2023): evidence on safer pedestrian facilities and speed management.','url':WHO}],
+ 'caveats':[
+  'MoRTH counts are compiled from police returns and may miss deaths that are not linked back from care to the crash record.',
+  'Neither MoRTH nor the WHO manual supplies a national 2024 count of walking journeys or kilometres walked.',
+  'The age-composition percentages divide pedestrian deaths by all road deaths in each age band; they are not walking-risk rates.',
+  'Raw state totals and road-category counts are not adjusted for walking or vehicle exposure.',
+  'Impacting-vehicle categories describe police coding, not legal responsibility.',
+  'The report changed its victim road-user classification format in 2019; this article shows only its direct 2023–24 comparison.'],
+ 'lockedNumbersUsed':['36,526 pedestrian deaths in 2024','35,221 pedestrian deaths in 2023','41.7% of recorded road deaths aged 60 and over were pedestrians','11,386 pedestrian deaths on national highways'],
+ 'qualityFlags':[],'generatedAt':datetime.now(timezone.utc).isoformat(),
+ 'model':'editorially authored from locked source packet','generationPasses':[{'pass':'authored','source':BODY.relative_to(ROOT).as_posix()}],
+ 'evidence':evidence}
+ OUT.write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n')
+ print(f'Wrote {len(cards)} chart explainers, {len(headings)} sections and {len(body.split())} body words')
+
+if __name__=='__main__':main()
