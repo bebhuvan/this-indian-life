@@ -120,7 +120,9 @@ requires every file named by the source manifest, artifact catalog and ledger to
 be in Git's index, unchanged in the working tree, and (for raw files) hash-matched.
 Fix omissions before committing. A later prose or chart edit must rerun the relevant
 audits and be committed with any evidence it changes. Avoid `git add -A` in this
-repository because unrelated work may be present.
+repository because unrelated work may be present. The deploy workflow also runs
+`python3 scripts/check-story-evidence-commit.py --all` against every ledger with an
+`evidenceBundle`, so an incomplete bundle cannot be published by a normal push.
 
 ### Wiki links (internal cross-links) — curated, sparingly
 - Use a **controlled `term → slug` map**; link only to **live, substantial** articles or academy entries. **Never auto-NLP-link** every term (wrong links, dead links, visual noise).

@@ -28,6 +28,9 @@ jobs:
           # commit dates for the per-article edit log (shallow clones break it).
           fetch-depth: 0
 
+      - name: Check committed story evidence
+        run: python3 scripts/check-story-evidence-commit.py --all
+
       - uses: actions/setup-node@v5
         with:
           node-version: 22

@@ -25,11 +25,8 @@ def git(*args):
     ).returncode
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("ledger", help="Claim ledger with an evidenceBundle entry")
-    args = parser.parse_args()
-    ledger_path = repo_path(args.ledger)
+def check_ledger(ledger_path):
+    ledger_path = repo_path(ledger_path)
     ledger = json.loads((ROOT / ledger_path).read_text())
     bundle = ledger["evidenceBundle"]
     raw_manifest_path = repo_path(bundle["sourceManifest"])
@@ -77,10 +74,30 @@ def main():
         for error in errors:
             print(f"  {error}", file=sys.stderr)
         return 1
-    print(f"Evidence commit check passed: {len(required)} indexed files, "
+    print(f"{ledger_path}: {len(required)} indexed files, "
           f"{len(raw_files)} source hashes, "
           f"{sum(item.get('status') == 'ready' for item in artifact_catalog)} artifacts")
     return 0
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--all", action="store_true", help="Check every ledger with an evidenceBundle")
+    group.add_argument("ledger", nargs="?", help="Claim ledger with an evidenceBundle entry")
+    args = parser.parse_args()
+    if args.all:
+        ledgers = [
+            path.relative_to(ROOT).as_posix()
+            for path in sorted((ROOT / "data/audits").glob("*/claim-ledger.json"))
+            if "evidenceBundle" in json.loads(path.read_text())
+        ]
+        if not ledgers:
+            print("No evidence bundles found", file=sys.stderr)
+            return 1
+    else:
+        ledgers = [args.ledger]
+    return int(any(check_ledger(path) for path in ledgers))
 
 
 if __name__ == "__main__":
