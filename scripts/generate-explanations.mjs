@@ -75,7 +75,7 @@ function systemPrompt() {
 function articleTemplateFor(evidence) {
   if (evidence.questionId === "q.health.pedestrian_safety_2024") {
     return {
-      purpose: "Answer how safe it is to walk on India’s roads with MoRTH’s 2024 police-recorded pedestrian deaths. Connect the burden to the Supreme Court's 19 June 2026 recognition of the fundamental right to walk on demarcated footpaths, without implying that 2024 deaths measure compliance with a later judgment. Explain the death burden, recent direction, age and sex distributions, impacting vehicles, state totals and national-highway split. State plainly that a per-walking-journey risk cannot be computed without walking exposure. Use WHO's 2023 manual only for general evidence on street design and speed, never as a measurement of India’s 2024 infrastructure or the cause of a specific death.",
+      purpose: "Answer how safe it is to walk on India’s roads with the Ministry of Road Transport and Highways (MoRTH) report Road Accidents in India 2024, compiled from state and union-territory police returns. Name the ministry and exact report at first mention in the body and each separately rendered opening surface; do not lead with an unexplained acronym or an unnamed 'report'. Connect the burden to the Supreme Court's 19 June 2026 recognition of the fundamental right to walk on demarcated footpaths, without implying that 2024 deaths measure compliance with a later judgment. Explain the death burden, recent direction, age and sex distributions, impacting vehicles, state totals and national-highway split. State plainly that a per-walking-journey risk cannot be computed without walking exposure. Use WHO's 2023 manual only for general evidence on street design and speed, never as a measurement of India’s 2024 infrastructure or the cause of a specific death.",
       requiredSections: [
         "How many pedestrians are killed on India's roads?", "Is the pedestrian toll falling?",
         "How old were the pedestrians who died?", "Are older road victims more often pedestrians?",
@@ -94,7 +94,7 @@ function articleTemplateFor(evidence) {
         "Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), pp. 12–13: walking is a fundamental right that includes demarcated footpaths; urban development authorities, municipal bodies and panchayats have corresponding duties. The ruling postdates the 2024 death data and does not measure footpath provision.",
         "The report's urban-rural, junction, weather and time-of-day tables are for all road casualties or crashes, not pedestrian deaths cross-tabulated by these fields. The article covers fatalities, not nonfatal harm or perceived safety."
       ],
-      styleExample: "## How many pedestrians are killed on India's roads?\n\nMoRTH recorded 36,526 pedestrian deaths in 2024. That is about 100 people a day. The count does not tell us the risk of a walk, because the report does not count walking journeys."
+      styleExample: "## How many pedestrians are killed on India's roads?\n\nThe Ministry of Road Transport and Highways (MoRTH) counted 36,526 pedestrian deaths in its Road Accidents in India 2024 report. That is about 100 people a day. The count comes from police returns; it cannot tell us the risk of a walk because those returns do not count walking journeys."
     };
   }
 
