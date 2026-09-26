@@ -75,26 +75,26 @@ function systemPrompt() {
 function articleTemplateFor(evidence) {
   if (evidence.questionId === "q.health.road_safety_2024") {
     return {
-      purpose: "Explain who appears in India's 2024 police-recorded road death toll, how that count has moved, and what its measurement limits mean. Treat the WHO's 2021 modelled estimate as an independent measurement comparison for 2021 only. Never infer fault from victim category, risk from raw counts, or a 2024 undercount factor from the WHO 2021 ratio.",
+      purpose: "Explain MoRTH's 2024 road-death report across victims, impacting vehicles, age, trend, rural and urban areas, road classes, states, collision classifications, protective devices and timing. Keep accident counts separate from fatalities. Treat WHO's 2021 estimate as a same-year measurement comparison, never as a 2024 adjustment. No raw-count risk ranking or causal claim from a police label.",
       requiredSections: [
-        "Who is being killed on India's roads?",
-        "Is the recorded toll falling?",
-        "How old were the people who died?",
-        "Where are the deaths recorded?",
-        "How complete is the police record?",
-        "What can these figures say about prevention?",
-        "How to read these numbers: methodology and caveats"
+        "Who is being killed on India's roads?", "What struck pedestrians?", "How old were the people who died?",
+        "Is the recorded toll falling?", "Is this mainly an urban toll?", "Which kinds of roads carry the toll?",
+        "Which states account for the largest totals?", "How were fatal crashes classified?",
+        "What does the report say about helmets and seatbelts?", "When are crashes recorded during the day?",
+        "Does the annual total hide a monthly pattern?", "How complete is the police record?",
+        "What can these figures say about prevention?", "How to read these numbers: methodology and caveats"
       ],
       requiredConcepts: [
-        "MoRTH 2024: 487,707 accidents, 177,175 deaths, 471,441 injured; fatalities up 2.5% from 172,890 in 2023.",
-        "Victim categories: two-wheeler users 81,780, pedestrians 36,526, bicyclists 4,161; combined 122,467 or 69.1% of recorded deaths. These identify the victim, not the person at fault or risk per trip.",
-        "Age 18–45 deaths sum to 117,026 or 66.1%; age unknown 4,705. No age-specific exposure denominator or joint age-by-mode distribution is present in the selected tables.",
-        "National highways 64,772 deaths, state highways 39,277, other roads 73,126; highway sum 104,049 or 58.7%. Road length is dated March 2022 and is not traffic exposure.",
-        "WHO India profile: 2021 reported fatalities 153,972, estimated fatalities 216,618, 95% CI 193,271–239,965. Do not extrapolate to 2024.",
-        "MoRTH 2024 is based on consolidated police reporting, with West Bengal data recast using e-DAR aggregates; the ministry notes hospital linkage and police reporting gaps.",
-        "End with source vintages, exact table numbers, operations, denominators, and limits. No unsourced single-cause explanation."
+        "MoRTH 2024: 487,707 reported accidents and 177,175 recorded deaths; fatalities up 2.5% from 2023.",
+        "Two-wheeler users 81,780, pedestrians 36,526 and bicyclists 4,161 are victim categories, not fault assignments.",
+        "The impacting-vehicle table is police-coded; it cannot determine legal responsibility.",
+        "Rural deaths 125,422 and urban deaths 51,753 do not establish risk per resident or per journey.",
+        "Highway and state totals are raw counts without matched travel exposure.",
+        "Collision type, protective-device non-use and time-of-day tables have different meanings and units; no single-cause prevention claim follows.",
+        "WHO India 2021: reported 153,972, modelled estimate 216,618, 95% interval 193,271–239,965; no extrapolation to 2024.",
+        "End with exact table numbers, source vintages, denominators and reporting limits."
       ],
-      styleExample: "## Who is being killed on India's roads?\n\nThe largest group in the police record is people on two-wheelers. The category describes the person who died. It does not tell us who caused the crash, or how dangerous a two-wheeler trip is compared with a car trip."
+      styleExample: "## What struck pedestrians?\n\nA police table looks at the same pedestrian deaths from another side: the vehicle recorded in the collision. It does not decide who was at fault."
     };
   }
   if (evidence.questionId === "q.media.news_consumption") {

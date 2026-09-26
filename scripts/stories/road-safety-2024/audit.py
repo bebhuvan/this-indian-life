@@ -36,7 +36,7 @@ def main():
         if actual != expected:
             raise ValueError(f"Raw file changed: {filename}")
     pdf = pymupdf.open(RAW / "road-accidents-in-india-2024.pdf")
-    source = {n: pdf[n - 1].get_text(sort=True).splitlines() for n in [30, 35, 54, 92, 98, 161, 162]}
+    source = {n: pdf[n - 1].get_text(sort=True).splitlines() for n in [30, 35, 40, 54, 77, 92, 98, 100, 110, 138, 141, 142, 161, 162]}
     annual = artifact("fatalities.2020_2024")
     for item in annual["observations"]:
         year = item["date"]
@@ -47,11 +47,18 @@ def main():
         ("road_users.2024", 98, "4.4", 3, 1),
         ("ages.2024", 92, "4.2", 3, 1),
         ("road_categories.2024", 54, "2.1", 9, 4),
+        ("collision_types.2024", 40, "1.5", 9, 4),
+        ("safety_devices.2024", 77, "3.3", 4, 0),
+        ("states_top_five.2024", 110, "5.6", 11, 4),
+        ("rural_urban.2024", 138, "7.1", 9, 4),
+        ("pedestrian_impact.2024", 100, "4.5", 9, 0),
+        ("time_of_day_accidents.2024", 142, "7.3", 10, 8),
+        ("monthly_deaths.2024", 141, "7.2", 10, 9),
     ]:
         doc = artifact(slug)
         for item in doc["rows"]:
             label = item["sourceRow"]
-            expected = int(row(source[page], label, width, page, table)[index])
+            expected = int(row(source[page], label, width, page, table)[item.get("sourceColumn", index)])
             check(doc["indicatorId"], item["label"], item["value"], expected,
                   f"MoRTH Table {table}, PDF p{page}, {label}, 2024 deaths")
     who = artifact("who_reported_estimated.2021")
@@ -65,10 +72,15 @@ def main():
         check(who["indicatorId"], item["label"], item["value"], expected,
               "WHO India country profile, PDF p1, Burden, 2021")
     death = annual["observations"][-1]["value"]
-    for slug in ["road_users.2024", "ages.2024", "road_categories.2024"]:
+    partitions = ["road_users.2024", "ages.2024", "road_categories.2024", "collision_types.2024", "rural_urban.2024", "monthly_deaths.2024"]
+    for slug in partitions:
         doc = artifact(slug)
         check(doc["indicatorId"], "2024 category sum", sum(r["value"] for r in doc["rows"]), death,
               "MoRTH Table 1.1, PDF p35, 2024 fatalities")
+    impact = artifact("pedestrian_impact.2024")
+    check(impact["indicatorId"], "pedestrian partition", sum(r["value"] for r in impact["rows"]), 36526, "MoRTH Tables 4.4 and 4.5, PDF pp98, 100")
+    times = artifact("time_of_day_accidents.2024")
+    check(times["indicatorId"], "2024 accidents by time sum", sum(r["value"] for r in times["rows"]), 487707, "MoRTH Table 1.1, PDF p35, 2024 accidents")
     method_text = "\n".join(source[161] + source[162])
     method_checks = {
         "West Bengal recast": "recast" in "\n".join(source[30]),
@@ -81,11 +93,11 @@ def main():
     OUT.mkdir(exist_ok=True)
     with (OUT / "source-cell-audit.csv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=results[0].keys(), lineterminator="\n"); w.writeheader(); w.writerows(results)
-    report = {"sourceFilesHashed": len(HASHES), "plottedCellsChecked": len(results) - 3,
-              "totalCrossChecks": 3, "mismatches": sum(not r["match"] for r in results),
+    report = {"sourceFilesHashed": len(HASHES), "plottedCellsChecked": len(results) - len(partitions) - 2,
+              "totalCrossChecks": len(partitions) + 2, "mismatches": sum(not r["match"] for r in results),
               "methodologySourceChecks": method_checks,
               "whoEstimate95Interval2021": [int(re.sub(r"\s", "", estimate.group(2))), int(re.sub(r"\s", "", estimate.group(3)))],
-              "scope": "Every plotted observation in five story artifacts plus three partition totals; no claim of validating the full MoRTH report."}
+              "scope": "Every plotted observation in the selected story artifacts plus partition totals; no claim of validating the full MoRTH report."}
     (OUT / "source-cell-audit.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
     if report["mismatches"]:

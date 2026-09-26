@@ -1,140 +1,117 @@
 #!/usr/bin/env python3
-"""Build the authored explanation from the durable, source-checked Markdown."""
-
+"""Build a source-locked explanation from the edited article and checked chart artifacts."""
 import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[3]
 QID = "q.health.road_safety_2024"
 BODY = ROOT / f"data/prose/{QID}.md"
 OUT = ROOT / f"data/explanations/en/{QID}.json"
-SOURCE_MORTH = "https://data.opencity.in/dataset/33d29ab0-f9e8-4fc7-b404-c93c1ed8e1b8/resource/30af828c-3513-4c74-a919-8daa708f077d/download/road-accidents-in-india-2024.pdf"
-SOURCE_WHO = "https://cdn.who.int/media/docs/default-source/country-profiles/road-safety/road-safety-2023-ind.pdf?download=true&sfvrsn=b4fb5a5c_3"
-
-
-def load(indicator):
-    return json.loads((ROOT / f"data/series/road-safety-2024.{indicator}.json").read_text())
-
-
-def card(title, takeaway, detail, why, read, mistake, mobile):
-    return {"visualId": title, "title": title, "takeaway": takeaway,
-            "detail": detail, "whyShowThis": why, "howToRead": read,
-            "mistakeToAvoid": mistake, "mobileNote": mobile}
+MORTH = "https://data.opencity.in/dataset/33d29ab0-f9e8-4fc7-b404-c93c1ed8e1b8/resource/30af828c-3513-4c74-a919-8daa708f077d/download/road-accidents-in-india-2024.pdf"
+WHO = "https://cdn.who.int/media/docs/default-source/country-profiles/road-safety/road-safety-2023-ind.pdf?download=true&sfvrsn=b4fb5a5c_3"
+CHARTS = [
+    ("road_users.2024", "Two-wheeler users account for almost half of recorded deaths", "The victim category describes the person killed. The report has no mode-specific journeys or distance, so these bars cannot rank the risk of a trip."),
+    ("pedestrian_impact.2024", "Two-wheelers are the largest recorded impacting group in pedestrian deaths", "Two-wheelers were recorded in 10,378 pedestrian deaths; 7,857 cases have an 'Others' impacting-vehicle label. Impacting vehicle is a police classification, not a finding of fault."),
+    ("ages.2024", "Most recorded victims were between 18 and 45", "The three published age bands from 18 to 45 sum to 117,026 deaths. Age is unknown for 4,705 people and stays in the display."),
+    ("fatalities.2020_2024", "The recorded death toll is still climbing", "The police count rose from 172,890 in 2023 to 177,175 in 2024. The 2020 starting point was affected by Covid restrictions, and the line is not adjusted for traffic volume."),
+    ("rural_urban.2024", "Rural areas account for seven in ten recorded deaths", "Rural areas account for 125,422 recorded deaths and urban areas 51,753. Area of crash is not residence, and these totals do not measure risk per journey."),
+    ("road_categories.2024", "National and state highways account for nearly six in ten deaths", "The two highway categories add to 104,049 deaths. Road length is not a measure of traffic carried, so the bars cannot compare the danger of a kilometre travelled."),
+    ("states_top_five.2024", "Five states account for nearly half the recorded toll", "The five displayed totals add to 85,463 deaths, or 48.2 per cent of India's police-recorded toll. These are the five largest counts, not a safety ranking of all states."),
+    ("collision_types.2024", "Rear impacts and hit-and-run cases are prominent in the police record", "The report records 37,404 deaths in rear-impact cases and 34,030 in hit-and-run cases. One label describes geometry while the other describes a post-crash circumstance; neither establishes a single cause."),
+    ("safety_devices.2024", "Police recorded 54,122 deaths without a helmet", "The published helmet and seatbelt rows separate drivers from passengers. Non-use was recorded among victims, but the table does not estimate how many deaths each device would have prevented."),
+    ("time_of_day_accidents.2024", "The 6–9 pm window has the most reported crashes", "The 6–9 pm window contains 102,897 accidents. These are crash events rather than deaths, and there is no traffic-by-hour denominator."),
+    ("monthly_deaths.2024", "The 2024 death count fluctuates across months", "December records 16,007 deaths and August 12,959. One year of monthly counts cannot establish a seasonal cause without comparable exposure and more years."),
+    ("who_reported_estimated.2021", "WHO estimates a higher 2021 toll than police recorded", "WHO's 2021 estimate is 216,618, with a 95 per cent interval of 193,271 to 239,965, against 153,972 reported deaths. This does not supply a correction factor for 2024."),
+]
+READING = [
+    ("Start with the people, because the report also contains vehicle and collision tables that answer different questions.", "Each bar counts victims in one published road-user group.", "A victim category does not identify the person at fault."),
+    ("This separates pedestrian victims by the other vehicle recorded in their collision.", "The eight bars add to the 36,526 pedestrian deaths.", "An impacting-vehicle label is not a legal finding about blame."),
+    ("Age shows how widely the human cost reaches beyond a vehicle category.", "Compare the published age bands and keep the unknown group in view.", "Counts by age are not risk for a comparable trip."),
+    ("A short series places the 2024 headline against recent police returns.", "Read 2023 and 2024 together; treat 2020 as a disrupted traffic year.", "The line has no adjustment for journeys or distance travelled."),
+    ("The rural and urban split locates recorded deaths by crash setting.", "The two bars partition the 2024 national total.", "Place of crash is not the victim's place of residence."),
+    ("Road class is another location lens that complements the rural split.", "Three road categories add to the 2024 death total.", "Road length alone cannot measure risk per journey."),
+    ("State totals show where large reporting and prevention workloads fall.", "These are the five largest state counts, with the rest omitted from the display.", "A raw state ranking is not a safety ranking."),
+    ("The police collision labels reveal what kinds of incidents enter the fatality record.", "The nine published groups partition the 2024 deaths.", "The labels mix collision geometry with post-crash circumstances."),
+    ("Protective-device records add detail about victims beyond their vehicle type.", "Read helmet and seatbelt rows separately, each split between driver and passenger.", "Recorded non-use does not count individually preventable deaths."),
+    ("A crash-event clock answers a different timing question from monthly deaths.", "Each bar is a three-hour interval; unknown time remains visible.", "These are crashes, not fatalities, and lack hourly traffic exposure."),
+    ("Monthly deaths reveal variation concealed by one annual total.", "The twelve calendar months sum to 177,175 deaths.", "One year does not establish a seasonal cause."),
+    ("A same-year external estimate tests how complete the police count might be.", "Compare the two 2021 point values and read WHO's interval in the text.", "Do not apply the 2021 gap as a multiplier to 2024."),
+]
 
 
 def main():
     body = BODY.read_text().strip()
     headings = re.findall(r"^## (.+)$", body, re.M)
-    expected = [
-        "Who is being killed on India's roads?", "Is the recorded toll falling?",
-        "How old were the people who died?", "Where are the deaths recorded?",
-        "How complete is the police record?", "What can these figures say about prevention?",
-        "How to read these numbers: methodology and caveats",
+    if len(headings) != len(CHARTS) + 2 or body.count("\n## ") != len(headings) - 1:
+        raise ValueError("Expected one chart section per chart, then prevention and methodology")
+    docs = [json.loads((ROOT / f"data/series/road-safety-2024.{slug}.json").read_text()) for slug, _, _ in CHARTS]
+    death = next(x["value"] for x in docs[3]["observations"] if x["date"] == "2024")
+    if death != 177175 or sum(x["value"] for x in docs[0]["rows"]) != death:
+        raise ValueError("Locked national count changed; review prose")
+    old = json.loads(OUT.read_text())
+    cards = []
+    mobile_notes = [
+        "Long road-user labels wrap; read the value beside each bar.",
+        "Keep the mixed Other group visible when reading pedestrian collisions.",
+        "Do not lose the Age unknown row at the bottom.",
+        "Read the labelled 2023 and 2024 points together.",
+        "Both area bars use the same count scale.",
+        "The three road classes use one shared scale.",
+        "Long state names may wrap; the counts stay aligned.",
+        "The mixed Others collision group remains visible.",
+        "Helmet and belt rows refer to different vehicle situations.",
+        "Time labels use a 24-hour clock; unknown time is shown.",
+        "Months are in calendar order, not ranked by size.",
+        "The uncertainty interval is stated in the adjoining text.",
     ]
-    if headings != expected or body.count("\n## ") != len(expected) - 1:
-        raise ValueError("Section order or Markdown heading structure changed")
-    fatal = load("fatalities.2020_2024")
-    users = load("road_users.2024")
-    ages = load("ages.2024")
-    roads = load("road_categories.2024")
-    who = load("who_reported_estimated.2021")
-    death = next(o["value"] for o in fatal["observations"] if o["date"] == "2024")
-    values = {x["label"]: x["value"] for x in users["rows"]}
-    if death != 177175 or sum(values.values()) != death or sum(x["value"] for x in ages["rows"]) != death or sum(x["value"] for x in roads["rows"]) != death:
-        raise ValueError("Article input totals have changed; rereview the prose")
-    if [x["value"] for x in who["rows"]] != [153972, 216618]:
-        raise ValueError("WHO source values changed; rereview the prose")
-    titles = [
-        "Two-wheeler users account for almost half of recorded road deaths",
-        "The recorded death toll is still climbing",
-        "Most recorded victims were between 18 and 45",
-        "National and state highways account for nearly six in ten deaths",
+    for (slug, title, detail), doc, (why, how, mistake), mobile in zip(CHARTS, docs, READING, mobile_notes):
+        values = [x["value"] for x in doc.get("rows", doc.get("observations", []))]
+        if not values:
+            raise ValueError(f"Empty chart: {slug}")
+        takeaway, _, rest = detail.partition(". ")
+        cards.append({"visualId": title, "title": title, "takeaway": takeaway + ".",
+            "detail": rest, "whyShowThis": why, "howToRead": how,
+            "mistakeToAvoid": mistake, "mobileNote": mobile})
+    old["short"] = {
+        "headline": "India's road-death record is larger and more complicated than one headline number",
+        "dek": "A close reading of MoRTH's 2024 report shows who was killed, where crashes occurred, and what its police returns still cannot tell us.",
+        "body": "Police returns counted 177,175 road deaths in 2024, up 2.5 per cent from 2023. Two-wheeler users, pedestrians and bicyclists made up 69.1 per cent of recorded victims. Rural areas accounted for 70.8 per cent. Those are counts of reported harm, not per-trip risk or a complete mortality census."
+    }
+    old["macha"] = {"heading": "Okay, macha, what does this mean?",
+        "body": "The 2024 report says much more than '1.77 lakh deaths'. It shows that two-wheeler users and pedestrians carry a large share of the loss, most recorded deaths occur in rural areas, and evening has the most reported crashes. But the tables mix people, crash events and police labels. The WHO's higher estimate for 2021 also warns us that the police count may be incomplete.",
+        "soWhat": "Use each chart to ask a more precise question. Do not turn raw counts into risk rankings or police categories into proven causes."}
+    old["article"] = {"title": "What do India's road-death figures reveal?",
+        "standfirst": "MoRTH's 2024 report records 177,175 road deaths. Twelve source-checked views of the report reveal who bears the toll, where it is recorded, and what the police data cannot settle.", "bodyMarkdown": body}
+    old["chartExplainers"] = cards
+    old["sectionVisualMap"] = [{"heading": h, "visualId": title} for h, (_, title, _) in zip(headings, CHARTS)]
+    old["sourceNotes"] = [
+        {"label": "MoRTH, Road Accidents in India 2024: Tables 1.1, 1.5, 2.1, 3.3, 4.2, 4.4, 4.5, 5.6, 7.1, 7.2 and 7.3; Section 10 reporting method.", "url": MORTH},
+        {"label": "WHO, India road safety country profile: reported and estimated 2021 road deaths with uncertainty interval.", "url": WHO},
     ]
-    cards = [
-        card(titles[0], "Of 177,175 recorded deaths in 2024, 81,780 were two-wheeler users and 36,526 were pedestrians.",
-             "Add 4,161 bicyclists and the three groups make up 122,467 deaths, or 69.1 per cent. The mixed 'Other' row has 11,890 deaths and is left visible. These are categories of the people killed, not of the vehicle or person responsible for a crash.",
-             "The article begins with the people most often found in the official death count.",
-             "Each bar is a count of people killed in India in 2024, grouped by the victim's road-user category.",
-             "Do not read a large bar as a high chance of death per trip; the report supplies no mode-specific travel denominator.",
-             "Keep the full 'Other or unclassified' label and value readable so the residual category is not hidden."),
-        card(titles[1], "The police-recorded total rose from 172,890 in 2023 to 177,175 in 2024.",
-             "The increase is 4,285 deaths, or 2.5 per cent after rounding. The series begins at 138,383 in 2020, when Covid restrictions affected traffic, so the endpoints are not a controlled test of road safety.",
-             "A recent time series shows whether the headline count was moving up or down.",
-             "Each point is a calendar-year count of people killed in road accidents in the police returns.",
-             "The line is not adjusted for kilometres travelled, journeys or vehicle use. Its slope cannot establish a change in per-trip risk.",
-             "Label 2023 and 2024 directly; keep the Covid-era start legible without making it the benchmark."),
-        card(titles[2], "The published 18–45 age bands add to 117,026 deaths, 66.1 per cent of the recorded total.",
-             "Age was unknown for 4,705 victims. Those deaths remain in their own bar. The categories give the ages of people who died, not the age of a driver at fault or risk among all people of that age.",
-             "Age changes the human reading of the toll without pretending to measure age-specific risk.",
-             "Bars reproduce the report's age bands and retain the unknown-age category.",
-             "Do not combine these shares with road-user shares: the same person belongs to an age group and a mode group.",
-             "Show 'Age unknown' rather than dropping it from the chart or the denominator."),
-        card(titles[3], "National and state highways together account for 104,049 recorded deaths, 58.7 per cent of the total.",
-             "National highways alone account for 64,772; state highways for 39,277; other roads for 73,126. The road-length percentages cited in the report are dated March 2022 and cannot stand in for traffic exposure in 2024.",
-             "The geographic setting changes the question from who dies to where the deaths are recorded.",
-             "The three bars partition 2024 reported deaths by road category.",
-             "A large share of deaths on highways is not a death rate per journey or kilometre driven, and does not prove why the deaths occurred.",
-             "Keep the three categories and their values on one scale starting at zero."),
+    old["caveats"] = [
+        "MoRTH compiles police returns; deaths after a crash may not be fully linked from hospitals into the police record.",
+        "Victim, impacting-vehicle and collision labels do not determine fault or isolate a cause.",
+        "The time-of-day chart counts accidents; most other charts count deaths. Do not compare their heights as if they share a unit.",
+        "Counts lack matched travel exposure and cannot rank per-trip or per-kilometre risk.",
+        "The WHO estimate refers to 2021 and cannot be applied as a multiplier to 2024.",
     ]
     summaries = []
-    for d in [users, fatal, ages, roads, who]:
-        annual = d["artifactType"] == "series"
-        earliest = d["observations"][0]["date"] if annual else ("2021" if d["sourceId"].startswith("who") else "2024")
-        latest = d["observations"][-1]["date"] if annual else earliest
-        summaries.append({"indicatorId": d["indicatorId"], "title": d["title"], "sourceId": d["sourceId"],
-                          "earliest": earliest, "latest": latest, "unit": d["unit"]})
-    locks = [
-        {"label": "Police-recorded road deaths, 2024", "value": death, "displayValue": "1,77,175", "date": "2024", "unit": "people", "sourceId": "morth-road-accidents-2024", "indicatorId": fatal["indicatorId"]},
-        {"label": "Two-wheeler users killed, 2024", "value": values["Two-wheeler users"], "displayValue": "81,780", "date": "2024", "unit": "people", "sourceId": "morth-road-accidents-2024", "indicatorId": users["indicatorId"]},
-        {"label": "WHO-estimated road deaths, 2021", "value": 216618, "displayValue": "about 2.17 lakh", "date": "2021", "unit": "people", "sourceId": "who-road-safety-2023", "indicatorId": who["indicatorId"]},
-    ]
-    evidence = {"schemaVersion": 1, "questionId": QID, "question": "Who dies on India's roads?", "priority": "core", "theme": "health",
-                "requiredIndicatorIds": [d["indicatorId"] for d in [users, fatal, ages, roads, who]],
-                "availableIndicatorIds": [d["indicatorId"] for d in [users, fatal, ages, roads, who]],
-                "themeIndicatorIds": [], "visualPlan": [], "plannedCharts": [],
-                "selectedDataPoints": [], "lockedNumbers": locks, "sourceSummaries": summaries,
-                "selectionRules": [], "caveats": [], "forbiddenClaims": []}
-    out = {
-        "schemaVersion": 1, "questionId": QID, "status": "ready", "dataThrough": "MoRTH 2024; WHO 2021 estimate",
-        "short": {"headline": "Most recorded road deaths in India are people on two-wheelers or on foot",
-                  "dek": "MoRTH counted 1.77 lakh deaths in 2024. A close reading of who died, where, and how the count is assembled shows both the scale of the loss and the limits of the official record.",
-                  "body": "Police returns recorded 177,175 road deaths in India in 2024. Two-wheeler users, pedestrians and bicyclists made up 69.1 per cent of them. The count rose 2.5 per cent from 2023. WHO's modelled estimate for 2021 was materially higher than that year's police count, so the official number needs to be read as a recorded toll, not a complete census."},
-        "macha": {"heading": "Okay, macha, what does this mean?",
-                  "body": "If someone says 'road accident deaths', it is easy to picture a car crash. The official 2024 count looks different. Nearly half the people recorded as killed were on two-wheelers; about one in five were pedestrians. These labels tell us who was lost, not who caused a crash. And the police count itself may miss deaths that never make it back from the hospital into the accident record.",
-                  "soWhat": "Use the figures to ask where protection and reporting need scrutiny. Do not use raw death counts to rank the danger of a journey."},
-        "article": {"title": "Who dies on India's roads?", "standfirst": "In 2024, police recorded 177,175 road deaths. Nearly seven in ten victims were two-wheeler users, pedestrians or bicyclists. The official count reveals who bears the toll, and its limits leave a harder measurement question open.", "bodyMarkdown": body},
-        "editorialPlan": {"audience": "Indian readers who want to understand the road-death count and its limits",
-                          "heroDescription": "A source-checked 2024 victim profile with 2021 WHO measurement context.",
-                          "selectedDataPoints": [], "pullQuotes": [],
-                          "glossaryBlocks": [
-                              {"term": "Police-recorded deaths", "plainMeaning": "Road deaths included in the accident returns supplied by state and union-territory police departments.", "whyItMattersHere": "The count can miss people whose deaths never reach or update the police record.", "keyTerm": True},
-                              {"term": "Exposure", "plainMeaning": "How much people use a road or mode, such as journeys or kilometres travelled.", "whyItMattersHere": "Without it, a death count cannot tell us the risk of a comparable trip."},
-                              {"term": "Modelled estimate", "plainMeaning": "A statistical estimate produced from multiple data inputs rather than a direct list of recorded deaths.", "whyItMattersHere": "WHO's 2021 figure has an uncertainty interval and cannot be transferred to 2024."}
-                          ]},
-        "chartExplainers": cards,
-        "sectionVisualMap": [{"heading": h, "visualId": t} for h, t in zip(expected[:4], titles)],
-        "sourceNotes": [
-            {"label": "MoRTH, Road Accidents in India 2024: Tables 1.1 (national series), 2.1 (road category), 4.2 (age), 4.4 (victim road-user category), and Section 10 (reporting method).", "url": SOURCE_MORTH},
-            {"label": "WHO, India road safety country profile, published April 2024: reported and estimated road deaths for 2021, with uncertainty interval.", "url": SOURCE_WHO}
-        ],
-        "caveats": [
-            "MoRTH's figures are compiled from police returns; they are not a census of all road-traffic deaths.",
-            "Road-user categories identify the victim, not the person or vehicle responsible for a crash.",
-            "Counts by age, mode and road category have no matched exposure denominator here and cannot rank per-trip risk.",
-            "The WHO estimate and uncertainty interval refer to 2021. They cannot be used to correct the 2024 police count.",
-            "The national 2020–24 series includes traffic disruption during Covid restrictions."
-        ],
-        "lockedNumbersUsed": ["177,175 MoRTH-recorded deaths in 2024", "81,780 two-wheeler users killed in 2024", "122,467 two-wheeler users, pedestrians and bicyclists killed in 2024", "216,618 WHO-estimated deaths in 2021"],
-        "qualityFlags": [], "generatedAt": datetime.now(timezone.utc).isoformat(), "model": "editorially authored from locked source packet",
-        "generationPasses": [{"pass": "authored", "source": BODY.relative_to(ROOT).as_posix()}],
-        "evidence": evidence,
-    }
-    OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n")
-    print(f"Wrote {OUT.relative_to(ROOT)} with {len(body.split())} body words and {len(cards)} chart explainers")
-
+    for doc in docs:
+        annual = doc["artifactType"] == "series"
+        start = doc["observations"][0]["date"] if annual else ("2021" if doc["sourceId"].startswith("who") else "2024")
+        end = doc["observations"][-1]["date"] if annual else start
+        summaries.append({"indicatorId": doc["indicatorId"], "title": doc["title"], "sourceId": doc["sourceId"],
+            "earliest": start, "latest": end, "unit": doc["unit"]})
+    old["evidence"]["question"] = old["article"]["title"]
+    old["evidence"]["requiredIndicatorIds"] = [d["indicatorId"] for d in docs]
+    old["evidence"]["availableIndicatorIds"] = [d["indicatorId"] for d in docs]
+    old["evidence"]["sourceSummaries"] = summaries
+    old["editorialPlan"]["audience"] = "Indian readers seeking a careful account of the 2024 road-death record and its limits"
+    old["generatedAt"] = datetime.now(timezone.utc).isoformat()
+    OUT.write_text(json.dumps(old, indent=2, ensure_ascii=False) + "\n")
+    print(f"Wrote {len(CHARTS)} chart explainers, {len(headings)} sections, {len(body.split())} body words")
 
 if __name__ == "__main__":
     main()

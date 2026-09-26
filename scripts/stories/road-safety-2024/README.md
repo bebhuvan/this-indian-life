@@ -2,11 +2,11 @@
 
 Article: `q.health.road_safety_2024`, route `/articles/who-dies-on-indias-roads/`.
 
-This is a one-year, victim-focused article. It uses MoRTH's police returns for 2024 and the WHO India profile's separate 2021 modelled mortality estimate to explain the limits of the administrative count. It does not build a long historical database or apply WHO's 2021 difference to 2024.
+This article reads one report year in depth across 12 views: victims, pedestrian collisions, age, annual trend, rural and urban areas, road class, states, collision types, helmet and seatbelt non-use, time of day, month, and a separate WHO measurement comparison. MoRTH supplies 2024 police returns and the 2020–24 trend; WHO supplies an independent modelled estimate for **2021 only**. There is no long historical database or 2024 WHO adjustment.
 
 ## Reproduce
 
-Use a Python environment with PyMuPDF and Node 22 or newer:
+Use Python with PyMuPDF and BeautifulSoup, plus Node 22 or newer:
 
 ```bash
 python scripts/stories/road-safety-2024/ingest.py
@@ -18,15 +18,14 @@ npm run build
 python scripts/stories/road-safety-2024/audit-rendered.py
 ```
 
-The original PDFs and retrieval/hash manifest are in `data/raw/road-safety-2024/`. The text files there are reading aids extracted from those PDFs, not independent sources. The ingest reads PDF rows directly and creates five focused data artifacts. The separate audit then reopens the **saved artifacts** and checks all 26 plotted observations against the frozen PDFs, plus three category total reconciliations. The earlier full-report SpaceBunny transcription remains a draft in the sibling parser project; the article does not ingest its model-generated cells.
+The original PDFs and retrieval/hash manifest are in `data/raw/road-safety-2024/`. Text files there are reading aids from the PDFs, not independent sources. The ingest creates 12 focused chart artifacts. A separate audit reopens every saved artifact and checks **75 plotted observations** against frozen PDF rows, plus **eight** total reconciliations; no mismatches were found. The full-report SpaceBunny transcription remains a draft in the sibling parser project. Its model-generated cells are not used for this article.
 
-## Current release record, 26 September 2026
+## Release record, 26 September 2026
 
-- Sources: MoRTH *Road Accidents in India 2024*, PDF SHA256 `b45b0e4d8e14a8d4653790f9080a01b9b95b79008359ba93dc12497064be69b2`; WHO India country profile, PDF SHA256 `6ff205c38001a5d800864b1b0b8fdc1026a4ba97ab252267bc336ef8ec0847fc`.
-- Article source-cell audit: 26 plotted values and 3 partition totals checked, zero mismatches. Four methodology statements checked against MoRTH source pages.
-- Focused data-artifact validator: zero errors and warnings. Focused explanation validator: zero failures and warnings.
-- Node 22 build: 107 pages, including the road-safety route. The rendered audit checks seven prose sections, four chart cards, correct section/chart order, the WHO interval and two linked primary sources. Desktop page and mobile first chart visually reviewed.
-- A DeepSeek Flash and SpaceBunny bounded critique each returned an empty response. No clean bill of health was inferred from either. The source, artifact, prose and rendered-page checks above remain the release evidence.
-- Publication status: local draft for editorial review. No push or deploy has been made. The evidence-commit checker runs with only this story's reviewed paths staged before the local evidence commit.
+- Frozen source hashes and precise URLs are in `data/raw/road-safety-2024/manifest.json`.
+- Focused data-artifact validator: zero errors or warnings; focused explanation validator: zero failures or warnings.
+- Node 22 static build: 107 pages including the article. Rendered audit: 14 prose sections, 12 chart cards, correct section/chart order and two linked primary sources.
+- Desktop and 390px mobile layouts visually reviewed on the built page, including state and timing panels.
+- Publication status: local draft for editorial review. No push or deploy has been made.
 
-Key interpretation limits: road-user categories classify the victim, not fault; raw age and mode counts are not per-trip risk; road length is not traffic exposure; WHO's 2021 estimate cannot be transferred to 2024; 2020 was affected by Covid restrictions. See `data/audits/road-safety-2024/claim-ledger.json` for section-level source pages and calculations.
+Interpretation limits are central to the story: victim and impacting-vehicle labels do not assign fault; time-of-day bars are accidents, not deaths; recorded non-use of a protective device is not an individually preventable-death estimate; no count is divided by matched travel exposure; and WHO's modelled 2021 estimate cannot be transferred to 2024. The section-level source ledger is `data/audits/road-safety-2024/claim-ledger.json`.

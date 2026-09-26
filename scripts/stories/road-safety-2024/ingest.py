@@ -37,7 +37,8 @@ def row(lines, label, width, page, table):
         matches = [(i, source_numbers(lines[i + 1])) for i, line in enumerate(lines[:-1])
                    if line.lstrip().startswith("Others (other motor vehicles")]
     else:
-        pattern = re.compile(r"^\s*" + re.escape(label) + r"\s{2,}(.+)$", re.I)
+        prefix = r"(?:\d+\s+)?" if table == "5.6" else ""
+        pattern = re.compile(r"^\s*" + prefix + re.escape(label) + r"\s{2,}(.+)$", re.I)
         matches = [(i, source_numbers(match.group(1))) for i, line in enumerate(lines)
                    if (match := pattern.match(line))]
     matches = [(i, v) for i, v in matches if len(v) == width]
@@ -86,7 +87,7 @@ def main():
     SERIES.mkdir(exist_ok=True)
     AUDIT.mkdir(exist_ok=True)
     morth = pymupdf.open(MORTH)
-    texts = {p: morth[p - 1].get_text(sort=True).splitlines() for p in [35, 54, 92, 98]}
+    texts = {p: morth[p - 1].get_text(sort=True).splitlines() for p in [35, 40, 54, 77, 92, 98, 100, 110, 138, 141, 142]}
     files = []
 
     national = {year: row(texts[35], str(year), 6, 35, "1.1") for year in range(2020, 2025)}
@@ -132,6 +133,55 @@ def main():
     files.append(artifact("road_categories.2024", "Road deaths by category of road, 2024", "morth", "2.1", 54,
                           rows=class_rows, note="Share of recorded deaths by road category, not deaths per kilometre travelled or per journey. Road-length context in the report is dated March 2022."))
 
+    def rows_from_table(slug, title, table, page, width, index, labels, note, unit="persons"):
+        items = []
+        for display, source_label in labels:
+            value = int(row(texts[page], source_label, width, page, table)[index])
+            items.append({"label": display, "value": value, "sourceRow": source_label})
+            check(f"{slug} {display}", value, value, f"MoRTH Table {table}, PDF p{page}, {source_label}, column {index + 1}")
+        files.append(artifact(slug, title, "morth", table, page, rows=items, note=note, unit=unit))
+        return items
+
+    collisions = rows_from_table("collision_types.2024", "Deaths by recorded collision type, 2024", "1.5", 40, 9, 4,
+        [(x, x) for x in ["Hit from back", "Hit and run", "Head on collision", "Others", "Hit from side", "Run off the road", "Vehicle overturn", "Fixed object", "With parked vehicle"]],
+        "Police collision labels; 'hit and run' describes a circumstance, while others describe geometry or an object. These categories should not be read as causes.")
+    devices = rows_from_table("safety_devices.2024", "Deaths recorded without a helmet or seatbelt, 2024", "3.3", 77, 4, 0,
+        [("No helmet, driver", "Driver"), ("No helmet, passenger", "Passenger")],
+        "Helmet non-use counts among killed drivers and passengers. The source does not show the counterfactual number who would have survived if protected.")
+    for item, source_label in zip(devices, ["Driver", "Passenger"]):
+        seatbelt = int(row(texts[77], source_label, 4, 77, "3.3")[2])
+        devices.append({"label": f"No seatbelt, {source_label.lower()}", "value": seatbelt, "sourceRow": source_label, "sourceColumn": 2})
+        check(f"safety_devices.2024 seatbelt {source_label}", seatbelt, seatbelt, f"MoRTH Table 3.3, PDF p77, {source_label}, persons killed without seatbelt")
+    # Append above mutates the same list already placed in the artifact; rewrite the final table.
+    files[-1][1]["rows"] = devices
+    (ROOT / files[-1][0]).write_text(json.dumps(files[-1][1], indent=2, ensure_ascii=False) + "\n")
+
+    states = rows_from_table("states_top_five.2024", "Five states with the largest recorded road-death totals, 2024", "5.6", 110, 11, 4,
+        [(x, x) for x in ["Uttar Pradesh", "Tamil Nadu", "Maharashtra", "Madhya Pradesh", "Karnataka"]],
+        "Five largest state death totals, not a safety or per-trip-risk ranking. All five rows are on PDF page 110.")
+    rural = rows_from_table("rural_urban.2024", "Deaths in rural and urban areas, 2024", "7.1", 138, 9, 4,
+        [("Rural areas", "2024")], "Rural fatalities from the 2024 row; urban count is a separate column in the same row.")
+    urban = int(row(texts[138], "2024", 9, 138, "7.1")[1])
+    rural.append({"label": "Urban areas", "value": urban, "sourceRow": "2024", "sourceColumn": 1})
+    files[-1][1]["rows"] = rural
+    (ROOT / files[-1][0]).write_text(json.dumps(files[-1][1], indent=2, ensure_ascii=False) + "\n")
+    check("rural_urban.2024 urban", urban, urban, "MoRTH Table 7.1, PDF p138, 2024, urban deaths")
+
+    pedestrian = row(texts[100], "Pedestrians", 9, 100, "4.5")
+    impact_labels = ["Bicycles", "Two-wheelers", "Auto-rickshaws", "Cars, taxis, vans and LMVs", "Trucks and lorries", "Buses", "Other non-motor vehicles", "Other or unclassified"]
+    impact_rows = [{"label": name, "value": int(value), "sourceRow": "Pedestrians", "sourceColumn": i} for i, (name, value) in enumerate(zip(impact_labels, pedestrian))]
+    files.append(artifact("pedestrian_impact.2024", "Pedestrian deaths by recorded impacting vehicle, 2024", "morth", "4.5", 100,
+        rows=impact_rows, note="Impacting or 'crime' vehicle as coded by police, not a legal assignment of fault. The eight categories sum to pedestrian victims; 'Others' is a mixed residual."))
+    for i, item in enumerate(impact_rows):
+        check(f"pedestrian impacting {item['label']}", item["value"], pedestrian[i], f"MoRTH Table 4.5, PDF p100, Pedestrians, impacting-vehicle column {i + 1}")
+
+    time_labels = [("06–09", "06:.00 to 9:00 hrs (Day)"), ("09–12", "09:00 to 12:00 hrs (Day)"), ("12–15", "12:00 to 15:00 hrs (Day)"), ("15–18", "15:00 to 18:00 hrs (Day)"), ("18–21", "18:00 to 21:00 hrs (Night)"), ("21–24", "21:00 to 24:00 hrs (Night)"), ("00–03", "00:00 to 03:00 hrs (Night)"), ("03–06", "03:00 to 06:00 hrs (Night)"), ("Unknown", "Unknown Time")]
+    time_rows = rows_from_table("time_of_day_accidents.2024", "Reported accidents by time of day, 2024", "7.3", 142, 10, 8, time_labels,
+        "Accident counts, not fatality counts. Time windows are three hours; unknown time is retained. No denominator for traffic by hour.", unit="accidents")
+    months = rows_from_table("monthly_deaths.2024", "Reported road deaths by month, 2024", "7.2", 141, 10, 9,
+        [(x, x) for x in ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]],
+        "Calendar-month fatalities. This single-year profile cannot establish a stable seasonal cause.")
+
     who_text = pymupdf.open(WHO)[0].get_text(sort=True)
     reported = re.search(r"Reported fatalities \(year\)\s+([\d ]+) \(2021\)", who_text)
     estimated = re.search(r"WHO estimated road traffic fatalities \(95% CI\) \(year\)\s+([\d ]+) \(95% CI ([\d ]+) - ([\d ]+)\) \(2021\)", who_text)
@@ -148,8 +198,10 @@ def main():
         check(f"WHO {item['label']}", item["value"], rep if item["label"] == "Reported fatalities" else est, "WHO India country profile, PDF p1, Burden, 2021")
 
     total = int(national[2024][2])
-    for name, items in [("road users", user_rows), ("ages", age_rows), ("road categories", class_rows)]:
+    for name, items in [("road users", user_rows), ("ages", age_rows), ("road categories", class_rows), ("collision types", collisions), ("rural urban", rural), ("monthly deaths", months)]:
         check(f"{name} sum", sum(x["value"] for x in items), total, "MoRTH Table 1.1, PDF p35, 2024 fatalities")
+    check("pedestrian impact sum", sum(x["value"] for x in impact_rows), next(x["value"] for x in user_rows if x["label"] == "Pedestrians"), "MoRTH Tables 4.4 and 4.5, PDF pp98 and 100")
+    check("time of day accident sum", sum(x["value"] for x in time_rows), int(national[2024][0]), "MoRTH Table 1.1, PDF p35, 2024 accidents")
     manifest = [{"indicatorId": d["indicatorId"], "sourceIndicatorId": d["sourceIndicatorId"],
                  "artifact": p, "status": "ready", "source": d["sourceUrl"],
                  "fetchedAt": d["fetchedAt"]} for p, d in files]
