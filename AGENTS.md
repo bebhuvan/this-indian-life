@@ -3,8 +3,8 @@
 This is the entry point for any agent (Claude Code, Gemini, Codex, or otherwise) writing
 or editing a data-journalism article on Indica. Keep it lean; it is an **index + the
 conventions and gotchas**, not a replacement for the detailed docs it points to.
-`CLAUDE.md` and `GEMINI.md` are symlinks to this file — edit this one; all three agents
-read the same playbook.
+`CLAUDE.md` and `GEMINI.md` are symlinks to this file. Edit this one so all three
+agents read the same playbook.
 
 > **Building a whole story? Follow `docs/STORY_PLAYBOOK.md`** — the ordered, end-to-end
 > lifecycle (question → data → charts → brief → prose → validate → publish), with the
@@ -68,6 +68,10 @@ Close with a **"How to read these / methodology & caveats"** section, and popula
 
 ### Source linking (hyperlinks wherever possible)
 The per-chart **SOURCE line auto-links** to `series.sourceUrl`. So:
+- In the article's bottom **Sources** block, name the publication vintage and link
+  the original table, report or dataset used for each material claim. Link directly
+  to an annex workbook when one supplied the numbers; a report landing page alone
+  is too broad. Keep labels short enough to scan, with table number and measure.
 - Give every series a **precise, clean** `sourceUrl` (no trailing text — `"https://x/" (note)` breaks the href).
 - **Derived series must point to their underlying source** (they default to none → no link).
 - **Every `sourceNotes` and `furtherReading` entry MUST be a linked object, not a bare string.**
@@ -99,6 +103,24 @@ The per-chart **SOURCE line auto-links** to `series.sourceUrl`. So:
   for the pattern: it hard-codes the verified list and **exits non-zero if any note lacks a
   URL**, so a regeneration cannot silently drop the links.
 - The evidence block already links every figure to its **GitHub data file**, pinned to the publish commit.
+
+### Evidence commits
+Commit the complete reproducibility bundle with each data article: unchanged raw
+downloads, a URL/date/hash manifest, calculation and ingest code, generated chart
+artifacts, source-cell audit code and result, claim ledger, article source and built
+explanation. Keep these in the existing `data/raw/<story>/`, `data/catalog/`,
+`data/audits/<story>/`, `data/series/`, `data/prose/` and `scripts/stories/<story>/`
+locations. Do not commit temporary extracts, model transcripts, caches or duplicate
+write-ups. Record which source vintage and audit result the article uses.
+
+Before a release commit, stage only the story's reviewed paths, run
+`python3 scripts/check-story-evidence-commit.py data/audits/<story>/claim-ledger.json`,
+and inspect `git diff --cached --stat` and `git diff --cached --check`. The checker
+requires every file named by the source manifest, artifact catalog and ledger to
+be in Git's index, unchanged in the working tree, and (for raw files) hash-matched.
+Fix omissions before committing. A later prose or chart edit must rerun the relevant
+audits and be committed with any evidence it changes. Avoid `git add -A` in this
+repository because unrelated work may be present.
 
 ### Wiki links (internal cross-links) — curated, sparingly
 - Use a **controlled `term → slug` map**; link only to **live, substantial** articles or academy entries. **Never auto-NLP-link** every term (wrong links, dead links, visual noise).

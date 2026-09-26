@@ -57,11 +57,16 @@ article-specific evidence and audit results in the story's own folder.
    desktop/mobile visual review. Record exact commands, output counts and gaps.
    Global repository failures should be reported separately from this story's
    failures; they must not be represented as a clean global build.
-10. **Publish.** Proceed only when the story has zero unresolved factual claims or
-    cell mismatches and the current rendered artifact has been reviewed. Record
-    source vintage and the publish commit. If a source cannot be recovered or a
-    claim cannot be checked, remove that claim or hold publication. Never promise
-    mathematical certainty from a finite audit.
+10. **Commit and publish.** Proceed only when the story has zero unresolved
+    factual claims or cell mismatches and the current rendered artifact has been
+    reviewed. Put the raw manifest, artifact catalog and other release paths in
+    the claim ledger's `evidenceBundle`. Stage those paths explicitly and run
+    `python3 scripts/check-story-evidence-commit.py data/audits/<story>/claim-ledger.json`
+    before committing. The article footer must link each original dataset or
+    annex workbook used, with its measure and vintage. Record the publish commit.
+    If a source cannot be recovered or a claim cannot be checked, remove that
+    claim or hold publication. Never promise mathematical certainty from a
+    finite audit.
 
 For the FDI article, source files are in `data/raw/unctad-wir/`, its source audit is
 `scripts/stories/fdi-development/audit-sources.py`, its explanation source is
