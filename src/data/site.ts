@@ -78,6 +78,16 @@ export const domains: Array<{ id: DomainId; label: string; line: string }> = [
 ];
 
 export const sources = {
+  "morth-road-accidents-2024": {
+    name: "Road Accidents in India 2024",
+    owner: "Ministry of Road Transport and Highways",
+    homepage: "https://data.opencity.in/dataset/road-accidents-in-india-2024"
+  },
+  "who-road-safety-2023": {
+    name: "India road safety country profile",
+    owner: "World Health Organization",
+    homepage: "https://www.who.int/publications/m/item/road-safety-ind-2023-country-profile"
+  },
   sflc: {
     name: "SFLC.in Internet Shutdowns Tracker",
     owner: "Software Freedom Law Center, India",
@@ -264,6 +274,8 @@ export const sources = {
 // of these (state/health/climate sources) aren't in the `sources` map above, which
 // only tracks ingestion endpoints. Unknown IDs fall back to a tidy title-case.
 const SOURCE_LABELS: Record<string, string> = {
+  "morth-road-accidents-2024": "MoRTH",
+  "who-road-safety-2023": "WHO",
   sflc: "SFLC.in",
   dnsblocks: "dnsblocks.in",
   accessnow: "Access Now",

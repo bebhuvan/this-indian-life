@@ -8809,6 +8809,25 @@ export const v1Questions = [
         watch: "Low scores can mean a brand is distrusted OR is critical of power and actively disliked by some; this is not a quality ranking." }
     ]
   },
+  {
+    id: "q.health.road_safety_2024",
+    slug: "who-dies-on-indias-roads",
+    question: "Who dies on India's roads?",
+    priority: "core",
+    indicators: ["road.safety.road_users.2024", "road.safety.fatalities.2020_2024"],
+    core: ["road.safety.road_users.2024", "road.safety.fatalities.2020_2024"],
+    context: ["road.safety.ages.2024", "road.safety.road_categories.2024", "road.safety.who_reported_estimated.2021"],
+    visualPlan: [
+      { indicator: "road.safety.road_users.2024", chart: "tableBars", title: "Two-wheeler users account for almost half of recorded road deaths", size: "hero", beat: "victims", unit: "people killed", subtitle: "MoRTH · police-recorded road fatalities by victim road-user category · India, 2024",
+        why: "The victim profile is the centre of the article.", read: "Each bar is the number of people killed in that road-user category.", watch: "This records the person killed, not which driver or vehicle caused the crash; 'Other' mixes distinct groups." },
+      { indicator: "road.safety.fatalities.2020_2024", chart: "line", title: "The recorded death toll is still climbing", size: "feature", beat: "trend", unit: "people killed", subtitle: "MoRTH · annual police-recorded road deaths · India, 2020–2024",
+        why: "The 2024 count sits in a short recent series.", read: "Read the 2023-to-2024 change and the longer climb separately.", watch: "Covid restrictions affected traffic in 2020 and 2021; this is a count, not a death rate per journey." },
+      { indicator: "road.safety.ages.2024", chart: "tableBars", title: "Most recorded victims were between 18 and 45", size: "feature", beat: "age", unit: "people killed", subtitle: "MoRTH · police-recorded road fatalities by victim age · India, 2024",
+        why: "The toll falls heavily on younger adults.", read: "Bars are published age bands; age unknown remains visible.", watch: "These are shares of victims, not age-specific risk. Age and road-user categories overlap." },
+      { indicator: "road.safety.road_categories.2024", chart: "tableBars", title: "National and state highways account for nearly six in ten deaths", size: "feature", beat: "road", unit: "people killed", subtitle: "MoRTH · police-recorded road fatalities by road category · India, 2024",
+        why: "Where the reported toll occurs, without claiming a road-risk rate.", read: "Three categories partition the 2024 deaths.", watch: "Road length is not traffic exposure. These bars cannot establish which road is riskier per trip or kilometre travelled." }
+    ]
+  },
 
 ];
 

@@ -73,6 +73,30 @@ function systemPrompt() {
 }
 
 function articleTemplateFor(evidence) {
+  if (evidence.questionId === "q.health.road_safety_2024") {
+    return {
+      purpose: "Explain who appears in India's 2024 police-recorded road death toll, how that count has moved, and what its measurement limits mean. Treat the WHO's 2021 modelled estimate as an independent measurement comparison for 2021 only. Never infer fault from victim category, risk from raw counts, or a 2024 undercount factor from the WHO 2021 ratio.",
+      requiredSections: [
+        "Who is being killed on India's roads?",
+        "Is the recorded toll falling?",
+        "How old were the people who died?",
+        "Where are the deaths recorded?",
+        "How complete is the police record?",
+        "What can these figures say about prevention?",
+        "How to read these numbers: methodology and caveats"
+      ],
+      requiredConcepts: [
+        "MoRTH 2024: 487,707 accidents, 177,175 deaths, 471,441 injured; fatalities up 2.5% from 172,890 in 2023.",
+        "Victim categories: two-wheeler users 81,780, pedestrians 36,526, bicyclists 4,161; combined 122,467 or 69.1% of recorded deaths. These identify the victim, not the person at fault or risk per trip.",
+        "Age 18–45 deaths sum to 117,026 or 66.1%; age unknown 4,705. No age-specific exposure denominator or joint age-by-mode distribution is present in the selected tables.",
+        "National highways 64,772 deaths, state highways 39,277, other roads 73,126; highway sum 104,049 or 58.7%. Road length is dated March 2022 and is not traffic exposure.",
+        "WHO India profile: 2021 reported fatalities 153,972, estimated fatalities 216,618, 95% CI 193,271–239,965. Do not extrapolate to 2024.",
+        "MoRTH 2024 is based on consolidated police reporting, with West Bengal data recast using e-DAR aggregates; the ministry notes hospital linkage and police reporting gaps.",
+        "End with source vintages, exact table numbers, operations, denominators, and limits. No unsourced single-cause explanation."
+      ],
+      styleExample: "## Who is being killed on India's roads?\n\nThe largest group in the police record is people on two-wheelers. The category describes the person who died. It does not tell us who caused the crash, or how dangerous a two-wheeler trip is compared with a car trip."
+    };
+  }
   if (evidence.questionId === "q.media.news_consumption") {
     const newsPlanned = Array.isArray(evidence.plannedCharts) ? evidence.plannedCharts : [];
     return {

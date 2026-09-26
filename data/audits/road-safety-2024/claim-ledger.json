@@ -1,0 +1,96 @@
+{
+  "article": "q.health.road_safety_2024",
+  "status": "locally reviewed; no push or deployment",
+  "sourceVintage": {
+    "morth": "Road Accidents in India 2024, calendar-year police returns",
+    "who": "Global status report on road safety 2023, India country profile, released 30 April 2024; mortality values for 2021"
+  },
+  "evidenceBundle": {
+    "sourceManifest": "data/raw/road-safety-2024/manifest.json",
+    "artifactCatalog": "data/catalog/road-safety-2024-manifest.json",
+    "repositoryFiles": [
+      "data/audits/road-safety-2024/claim-ledger.json",
+      "data/audits/road-safety-2024/rendered-audit.json",
+      "data/audits/road-safety-2024/source-cell-audit.csv",
+      "data/audits/road-safety-2024/source-cell-audit.json",
+      "data/explanations/en/q.health.road_safety_2024.json",
+      "data/prose/q.health.road_safety_2024.md",
+      "data/raw/road-safety-2024/reading-aid-morth-p0030.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0034.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0035.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0054.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0092.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0098.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0160.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0161.txt",
+      "data/raw/road-safety-2024/reading-aid-morth-p0162.txt",
+      "data/raw/road-safety-2024/reading-aid-who-p0001.txt",
+      "data/series/road-safety-2024.ages.2024.json",
+      "data/series/road-safety-2024.fatalities.2020_2024.json",
+      "data/series/road-safety-2024.road_categories.2024.json",
+      "data/series/road-safety-2024.road_users.2024.json",
+      "data/series/road-safety-2024.who_reported_estimated.2021.json",
+      "scripts/generate-explanations.mjs",
+      "scripts/registry/v1-indicators.mjs",
+      "scripts/stories/road-safety-2024/README.md",
+      "scripts/stories/road-safety-2024/audit-rendered.py",
+      "scripts/stories/road-safety-2024/audit.py",
+      "scripts/stories/road-safety-2024/build-explanation.py",
+      "scripts/stories/road-safety-2024/ingest.py",
+      "src/data/site.ts"
+    ]
+  },
+  "sections": [
+    {
+      "heading": "Who is being killed on India's roads?",
+      "sourceRowsOrPages": "MoRTH Table 4.4, PDF p98, all 2024 victim road-user rows and total; 81,780 two-wheeler users, 36,526 pedestrians, 4,161 bicyclists; derived sum 122,467 and share 122,467 / 177,175 = 69.1%.",
+      "interpretationLimit": "Victim road-user category says nothing about fault or exposure-adjusted risk. 'Others' is a mixed residual."
+    },
+    {
+      "heading": "Is the recorded toll falling?",
+      "sourceRowsOrPages": "MoRTH Table 1.1, PDF p35, 2020\u201324 accidents, deaths and injuries; deaths 172,890 in 2023 and 177,175 in 2024; derived increase 4,285 and 2.48% before rounding. MoRTH section 1.4, PDF p34, explains the Covid lockdown effect on 2020.",
+      "interpretationLimit": "A count has no travel-exposure denominator; the 2020 endpoint is affected by restrictions."
+    },
+    {
+      "heading": "How old were the people who died?",
+      "sourceRowsOrPages": "MoRTH Table 4.2, PDF p92, all 2024 age rows; 18\u201325 + 25\u201335 + 35\u201345 = 117,026 = 66.1% of 177,175; age unknown 4,705.",
+      "interpretationLimit": "Published bands are treated as mutually exclusive despite shared endpoints in their labels. No age-specific risk or age-by-mode intersection is inferred."
+    },
+    {
+      "heading": "Where are the deaths recorded?",
+      "sourceRowsOrPages": "MoRTH Table 2.1, PDF p54, 2024 road categories: national 64,772, state 39,277, other 73,126; derived highway total 104,049 / 177,175 = 58.7%. Same PDF page gives March 2022 national-highway length share 2.14%. MoRTH PDF p35 narrative names Uttar Pradesh for most deaths and Tamil Nadu for most accidents.",
+      "interpretationLimit": "Road length is not travel exposure; the length and death vintages differ. State raw totals are not a safety ranking."
+    },
+    {
+      "heading": "How complete is the police record?",
+      "sourceRowsOrPages": "WHO India 2023 country profile, PDF p1 Burden: reported 2021 fatalities 153,972; estimated 2021 fatalities 216,618, 95% interval 193,271\u2013239,965. MoRTH Table 1.1 PDF p35 confirms the 2021 reported count. MoRTH section 10 PDF pp160\u2013162 discusses police and hospital linkage limits and says 2024 national publication was not prepared from e-DAR data; MoRTH PDF p30 describes the West Bengal recast.",
+      "interpretationLimit": "WHO estimate is modelled, not an identified missing-person list or a 2024 adjustment factor."
+    },
+    {
+      "heading": "What can these figures say about prevention?",
+      "sourceRowsOrPages": "MoRTH Tables 4.4 and 2.1, PDF pp98 and 54, identify victim and road-category concentrations. Section 10, PDF pp160\u2013162, documents reporting limits.",
+      "interpretationLimit": "Aggregate concentration motivates inquiry; no particular intervention or cause is identified by these tables."
+    },
+    {
+      "heading": "How to read these numbers: methodology and caveats",
+      "sourceRowsOrPages": "Raw-file SHA256 values in data/raw/road-safety-2024/manifest.json; exact source-to-artifact comparisons in data/audits/road-safety-2024/source-cell-audit.csv and .json; MoRTH Tables 1.1, 2.1, 4.2 and 4.4; WHO India profile PDF p1.",
+      "interpretationLimit": "Only the selected article observations are validated. The full SpaceBunny report transcription remains a draft."
+    }
+  ],
+  "releaseChecks": {
+    "rawPdfFilesHashed": 2,
+    "plottedCellsChecked": 26,
+    "partitionTotalsChecked": 3,
+    "sourceMismatches": 0,
+    "explanationFailures": 0,
+    "explanationWarnings": 0,
+    "focusedArtifactErrors": 0,
+    "focusedArtifactWarnings": 0,
+    "builtPages": 107,
+    "renderedSections": 7,
+    "renderedCharts": 4,
+    "renderedBindingErrors": 0,
+    "desktopAndMobileReviewed": true,
+    "publicationDecision": "Local draft ready for editorial review; no push or deployment."
+  }
+}
