@@ -85,6 +85,10 @@ def main():
     old["article"] = {"title": "What do India's road-death figures reveal?",
         "standfirst": "The Ministry of Road Transport and Highways' Road Accidents in India 2024 records 177,175 road deaths from police returns. The tables show who died and where the deaths were recorded, while leaving the risk of a journey and the causes of individual crashes unresolved.", "bodyMarkdown": body}
     old["chartExplainers"] = cards
+    old["editorialPlan"]["pullQuotes"] = [{
+        "numberLabel": "Police-recorded road deaths, 2024",
+        "quote": "People killed in road crashes in India in 2024, according to police records. That was 4,285 more than in 2023."
+    }]
     old["sectionVisualMap"] = [{"heading": h, "visualId": title} for h, (_, title, _) in zip(headings, CHARTS)]
     old["sourceNotes"] = [
         {"label": "Ministry of Road Transport and Highways, Road Accidents in India 2024: Tables 1.1, 1.5, 1.6, 2.1, 3.3, 4.2, 4.3, 4.4, 5.6, 7.1 and 7.3; Section 10 reporting method.", "url": MORTH},

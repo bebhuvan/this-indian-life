@@ -41,3 +41,7 @@ The 2024 crash figures predate the 2026 judgment. They cannot show whether any a
 A second state chart divides pedestrian deaths by all road deaths within each of the ten states selected for the raw-count chart. Annexure 29(a) supplies visually checked numerators; Table 5.6 supplies denominators. The new source audit independently recomputes the ten percentages and checks West Bengal’s reporting-recast note. These shares describe victim mix, not walking risk.
 
 The September adversarial MiMo pass confirmed the new state shares, selection rule and West Bengal caveat. It caught a legal wording nuance: the Supreme Court said authorities “must endeavour” to provide pedestrian infrastructure. The article now follows that wording, and the original judgment audit checks it. MiMo saw a bounded packet; the original-page audit remains the check for the scanned age and state cells.
+
+## Point-card clarity revision
+
+The opening “The point” card now labels 36,526 as pedestrians killed in police-recorded road crashes in India in 2024 and gives their 20.6% share of all road deaths. The authored pull quote lives in build-explanation.py so regeneration retains the wording.

@@ -22,6 +22,7 @@ def main():
     relevant = [x for x in headings if x in sections or x in charts]
     expected = [v for pair in zip(sections[:len(charts)], charts) for v in pair] + sections[len(charts):]
     links = [x.get("href", "") for x in page.select(".evidence-grid a")]
+    point = page.select_one(".data-pull")
     openings = [explanation["short"]["dek"], explanation["short"]["body"],
                 explanation["macha"]["body"], explanation["article"]["standfirst"]]
     first_body_paragraph = explanation["article"]["bodyMarkdown"].split("\n\n", 2)[1]
@@ -40,6 +41,7 @@ def main():
         "first_body_paragraph_names_ministry_and_report": ministry in first_body_paragraph and report in first_body_paragraph,
         "first_body_acronym_expanded": bool(re.search(r"Ministry of Road Transport and Highways \(MoRTH\)", first_body_paragraph)),
         "who_chart_subtitle_expands_name": "World Health Organization (WHO)" in page.get_text(" ", strip=True),
+        "point_card_names_measure_place_year": point is not None and "1,77,175" in point.get_text(" ", strip=True) and "People killed in road crashes in India in 2024" in point.get_text(" ", strip=True),
     }
     result = {"page": PAGE.relative_to(ROOT).as_posix(), "checks": checks,
               "sectionCount": len(sections), "chartCount": len(charts),

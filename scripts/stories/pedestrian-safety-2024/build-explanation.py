@@ -129,7 +129,8 @@ def main():
             'bodyMarkdown':body},
  'editorialPlan':{'audience':'Indian readers who walk and want a careful answer about pedestrian safety',
                   'heroDescription':'Source-checked pedestrian deaths in the 2024 police returns.',
-                  'selectedDataPoints':[],'pullQuotes':[],
+                  'selectedDataPoints':[],'pullQuotes':[{'numberLabel':'Police-recorded pedestrian deaths, 2024',
+                   'quote':'Pedestrians killed in road crashes in India in 2024, according to police records. They were 20.6% of all road deaths.'}],
                   'glossaryBlocks':[
                    {'term':'Pedestrian','plainMeaning':'A person recorded as walking when involved in the road crash. It describes the victim’s road use, not who caused the collision.','whyItMattersHere':'The same death can also appear in a table by impacting vehicle.','keyTerm':True},
                    {'term':'Walking exposure','plainMeaning':'How many walking journeys people made, or how far they walked.','whyItMattersHere':'Without this, a death count cannot become a risk per trip.','keyTerm':True},

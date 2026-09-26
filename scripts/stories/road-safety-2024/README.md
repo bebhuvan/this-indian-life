@@ -37,3 +37,7 @@ Interpretation limits are central to the story: victim and impacting-vehicle lab
 The article now opens with the annual toll, adds the 2005–24 reported-crash severity series from Table 1.6 and the 2024 sex split from Table 4.3, and sends pedestrian-impact detail to the separate walking article. The one-year monthly chart was removed from the article. Severity is people killed per 100 reported crash events, not the proportion of crashes that were fatal. The source audit independently recomputes all 20 severity points and checks both sex cells.
 
 The September adversarial MiMo pass confirmed the new severity and sex figures. It prompted a 2021 peak and the separate 33.7% fatal-accident share from Table 1.6. A questioned rounding pair was checked against exact scanned Annexure 33 counts and was correct. MiMo saw a bounded source packet; the independent PDF-cell audit covers the remaining chart values.
+
+## Point-card clarity revision
+
+The opening “The point” card now labels 1,77,175 as people killed in police-recorded road crashes in India in 2024, with the 4,285 increase over 2023. The authored pull quote lives in build-explanation.py so regeneration retains the wording.

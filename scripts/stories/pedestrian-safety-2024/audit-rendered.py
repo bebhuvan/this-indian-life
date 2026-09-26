@@ -20,6 +20,7 @@ def main():
  expected=[v for pair in zip(sections[:len(charts)],charts) for v in pair]+sections[len(charts):]
  text=page.get_text(' ',strip=True)
  links=[x.get('href','') for x in page.select('.evidence-grid a')]
+ point=page.select_one('.data-pull')
  openings=[e['short']['dek'],e['short']['body'],e['macha']['body'],e['article']['standfirst']]
  first_body_paragraph=e['article']['bodyMarkdown'].split('\n\n',2)[1]
  source_name='Ministry of Road Transport and Highways'
@@ -46,6 +47,7 @@ def main():
   'state_top_count_visible':'Tamil Nadu reports 4,712' in text,
   'state_share_and_limit_visible':'Bihar recorded 4,149 pedestrian deaths out of 9,347' in text and 'West Bengal' in text and 'not the risk of a walking trip' in text,
   'other_roads_derivation_visible':'25,140' in text,
+  'point_card_names_measure_place_year':point is not None and '36,526' in point.get_text(' ',strip=True) and 'Pedestrians killed in road crashes in India in 2024' in point.get_text(' ',strip=True),
  }
  result={'page':PAGE.relative_to(ROOT).as_posix(),'checks':checks,
          'sectionCount':len(sections),'chartCount':len(charts),
