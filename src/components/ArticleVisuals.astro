@@ -839,16 +839,31 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       .filter((year) => Number.isFinite(year) && year >= minTime && year <= maxTime)
       .filter((year, index, arr) => arr.indexOf(year) === index);
     const mobileEndpointTicks = () => {
-      const start = Math.round(minTime);
-      const end = Math.round(maxTime);
-      const count = Math.min(4, Math.max(2, tickCount));
-      const years = Array.from({ length: count }, (_, i) => {
-        if (i === 0) return start;
-        if (i === count - 1) return end;
-        const raw = minTime + (i / (count - 1)) * (maxTime - minTime);
-        const rounded = Math.round(raw / 5) * 5;
-        return Math.max(start + 1, Math.min(end - 1, rounded));
-      }).filter((year, index, arr) => arr.indexOf(year) === index);
+      const start = Math.ceil(minTime);
+      const end = Math.floor(maxTime);
+      const maxLabels = Math.max(2, Math.min(5, Math.floor(plotW / 58)));
+      if (end <= start) {
+        const firstMonth = Math.ceil(minTime * 12 - 1e-9);
+        const lastMonth = Math.floor(maxTime * 12 + 1e-9);
+        const monthStep = niceNum((lastMonth - firstMonth) / (maxLabels - 1), false);
+        const months = [firstMonth];
+        for (let month = Math.ceil((firstMonth + 1) / monthStep) * monthStep; month < lastMonth; month += monthStep) months.push(month);
+        if (lastMonth > firstMonth) months.push(lastMonth);
+        return months.map((month) => ({
+          xPos: xByTime(month / 12),
+          label: `${MONTH_ABBR[month % 12]} ${String(Math.floor(month / 12)).slice(-2)}`
+        }));
+      }
+      const step = niceNum((end - start) / (maxLabels - 1), false);
+      const minGapYears = ((maxTime - minTime) * 48) / plotW;
+      const years = [start];
+      // Use a step suited to the span: every year on a short series, five-year
+      // marks on a roughly twenty-year series. Keep the endpoints and omit any
+      // interior mark too close to either end to fit a four-digit label.
+      for (let year = Math.ceil((start + 1) / step) * step; year < end; year += step) {
+        if (year - start >= minGapYears && end - year >= minGapYears) years.push(year);
+      }
+      if (end > start) years.push(end);
       return years.map((time) => ({ xPos: xByTime(time), label: String(time) }));
     };
     if (visual.monthAxis) {
