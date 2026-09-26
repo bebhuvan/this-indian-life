@@ -22,7 +22,7 @@ CHARTS = [
     ("collision_types.2024", "Rear impacts and hit-and-run cases are prominent in the police record", "The report records 37,404 deaths in rear-impact cases and 34,030 in hit-and-run cases. One label describes geometry while the other describes a post-crash circumstance; neither establishes a single cause."),
     ("safety_devices.2024", "Police recorded 54,122 deaths without a helmet", "The published helmet and seatbelt rows separate drivers from passengers. Non-use was recorded among victims, but the table does not estimate how many deaths each device would have prevented."),
     ("time_of_day_accidents.2024", "The 6–9 pm window has the most reported crashes", "The 6–9 pm window contains 102,897 accidents. These are crash events rather than deaths; the report does not count the journeys made in each time window."),
-    ("monthly_deaths.2024", "The 2024 death count fluctuates across months", "December records 16,007 deaths and August 12,959. One year of monthly counts cannot establish a seasonal cause without comparable exposure and more years."),
+    ("monthly_deaths.2024", "The 2024 death count fluctuates across months", "May had the highest monthly toll at 16,070 deaths; September had the lowest at 12,841. One year of monthly counts cannot establish a seasonal cause without comparable exposure and more years."),
     ("who_reported_estimated.2021", "World Health Organization's 2021 road-death estimate exceeds the police count", "The World Health Organization (WHO) estimated 216,618 road deaths in India in 2021, with a 95 per cent interval from 193,271 to 239,965; police recorded 153,972. The 2021 gap cannot be applied to the 2024 police count."),
 ]
 READING = [

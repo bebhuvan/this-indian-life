@@ -2,7 +2,7 @@
 
 The Ministry of Road Transport and Highways (MoRTH) records 177,175 people killed on India's roads in 2024 in *Road Accidents in India 2024*. Its figures come from state and union-territory police returns. People riding two-wheelers were the largest victim group: 81,780 deaths, or 46.2 per cent of the total. The report also records 36,526 pedestrians and 4,161 bicyclists. Together, these three groups account for 122,467 deaths, or 69.1 per cent of the police-recorded toll.
 
-This table describes the person who died. It does not say who caused the collision. The shares also cannot tell us the chance of dying on a given trip, because that would require knowing how far or how often each group travels. A high death count can come from frequent travel, greater danger per trip, or both. The report's 11,890 deaths in the "Other" victim category also show that the classification of the people killed is incomplete.
+This table describes the person who died. It does not say who caused the collision. The shares also cannot tell us the chance of dying on a given trip, because that would require knowing how far or how often each group travels. A high death count can come from frequent travel, greater danger per trip, or both. The report's "Other" category groups 11,890 deaths across several unlike road users, including people in animal-drawn vehicles, cycle rickshaws and hand carts. The summary does not separate them.
 
 ## What struck pedestrians?
 
@@ -20,7 +20,7 @@ The age distribution shows the human reach of the loss, including many people in
 
 No. MoRTH reports 177,175 deaths in 2024, up from 172,890 in 2023. That is 4,285 more, an increase of 2.5 per cent after rounding. The police also recorded 487,707 accidents and 471,441 injured people in 2024. An accident is a crash event, while a death is a person, and a single event can kill more than one person.
 
-The five-year line starts at 138,383 deaths in 2020. Traffic was disrupted by Covid restrictions that year, so the rise from that base is not a clean measure of worsening safety. Even the 2023–24 comparison is a count, not a death rate per journey. More traffic, longer travel, more severe crashes and changes in reporting could each move the annual total, and the report does not provide the exposure series needed to separate them. What the data does show is that the police-recorded death count rose again.
+The five-year line starts at 138,383 deaths in 2020. Traffic was disrupted by Covid restrictions that year, so the rise from that base is not a clean measure of worsening safety. Even the 2023–24 comparison is a count, not a death rate per journey. More traffic, longer travel, more severe crashes and changes in reporting could each move the annual total. The report gives rates relative to population and registered vehicles, but not the number of journeys or kilometres travelled needed to separate those explanations. What the data does show is that the police-recorded death count rose again.
 
 ## Is this mainly an urban toll?
 
@@ -60,7 +60,7 @@ These are **accident counts**. They do not count deaths, and the report does not
 
 ## Does the annual total hide a monthly pattern?
 
-The twelve monthly death counts for 2024 vary within the year. November records 15,922 deaths and December 16,007, against 13,033 in July and 12,959 in August, while March and April are also above 15,600. The twelve monthly figures add up to the annual total of 177,175, so they are a breakdown of those same deaths rather than an additional toll.
+The monthly toll was highest in May, at 16,070 deaths, followed by December (16,007) and November (15,922). March (15,809) and April (15,683) were also above 15,600. September had the lowest count, at 12,841, followed by August (12,959) and July (13,033). The twelve monthly figures add up to the annual total of 177,175, so they are a breakdown of those same deaths rather than an additional toll.
 
 It is easy to attach a seasonal story to those differences, and one year is not enough to settle it. Months differ in length, traffic volume, festivals, weather and reporting practice, and the source does not separate these influences. Because the report covers the Covid-era years, a five-year monthly average taken uncritically would be especially misleading. The 2024 profile shows variation that an annual total hides. It does not show that monsoon weather, a particular festival or any one seasonal factor caused the change. A fuller seasonal analysis would require several comparable years and matching data on how much people travelled.
 
@@ -82,4 +82,4 @@ The main source is MoRTH's *Road Accidents in India 2024*, compiled from calenda
 
 Unless stated otherwise, percentages in the death charts divide each group by the 177,175 people recorded as killed in 2024. The time-of-day chart divides accident counts by 487,707 reported accidents; it does not count deaths. The selected top-five state chart leaves out every other state and union territory. Published age bands are treated as separate categories even though they share endpoints in print, and unknown ages remain unknown.
 
-The WHO comparison comes from its [India country profile](https://www.who.int/publications/m/item/road-safety-ind-2023-country-profile), released in April 2024, and refers only to 2021. The report does not pair its death counts with the number of journeys or kilometres travelled. None of these tables establishes a single cause for a crash or a death.
+The WHO comparison comes from its [India country profile](https://www.who.int/publications/m/item/road-safety-ind-2023-country-profile) in the *Global status report on road safety 2023* and refers only to 2021. MoRTH's Table 1.8 gives rates relative to population and registered vehicles, but the report does not pair its death counts with the number of journeys or kilometres travelled. None of these tables establishes a single cause for a crash or a death.
