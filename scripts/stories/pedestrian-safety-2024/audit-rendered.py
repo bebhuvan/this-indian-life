@@ -30,6 +30,8 @@ def main():
   'pedestrian_toll_visible':'36,526' in text,
   'age_composition_visible':'41.7' in text,
   'sex_composition_visible':'29.6' in text and '19.1' in text and '25,225' in text and '151,950' in text,
+  'age_sex_intersection_visible':'56.7' in text and '37.9' in text and 'every published age band' in text,
+  'fatal_crash_scope_visible':'This is an account of fatal crashes' in text and 'cannot tell us where or when pedestrian deaths occurred' in text,
   'walking_risk_limit_visible':'chance of dying on your next walk' in text,
   'state_top_count_visible':'Tamil Nadu 4,712' in text,
   'other_roads_derivation_visible':'25,140' in text,

@@ -128,13 +128,14 @@ def main():
                    {'term':'Impacting vehicle','plainMeaning':'The vehicle police recorded as the collision counterpart to a victim.','whyItMattersHere':'This administrative label is not a court finding of fault.'}]},
  'chartExplainers':cards,'sectionVisualMap':[{'heading':h,'visualId':c[1]} for h,c in zip(HEADINGS,CHARTS)],
  'sourceNotes':[
-  {'label':'MoRTH, Road Accidents in India 2024: Tables 2.11, 4.2–4.5; Annexures 29(a) and 33.','url':MORTH},
+  {'label':'MoRTH, Road Accidents in India 2024: Tables 2.11, 3.6, 3.8, 4.2–4.5, 7.1 and 7.3; Annexures 29(a) and 33.','url':MORTH},
   {'label':'Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), especially conclusions at pp. 12–13.','url':COURT},
   {'label':'WHO, Pedestrian safety manual, second edition (2023): evidence on safer pedestrian facilities and speed management.','url':WHO}],
  'caveats':[
   'MoRTH counts are compiled from police returns and may miss deaths that are not linked back from care to the crash record.',
   'Neither MoRTH nor the WHO manual supplies a national 2024 count of walking journeys or kilometres walked.',
   'The age and sex composition percentages divide pedestrian deaths by all road deaths within the same recorded group; they are not walking-risk rates.',
+  'The report’s rural–urban, junction, weather and time-of-day tables cannot be read as pedestrian-specific deaths.',
   'Raw state totals and road-category counts are not adjusted for walking or vehicle exposure.',
   'Impacting-vehicle categories describe police coding, not legal responsibility.',
   'The 2024 police data predate the June 2026 Supreme Court ruling and cannot measure compliance with it or the availability of footpaths.',

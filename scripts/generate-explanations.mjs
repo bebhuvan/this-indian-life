@@ -85,13 +85,14 @@ function articleTemplateFor(evidence) {
       ],
       requiredConcepts: [
         "MoRTH: 36,526 pedestrians killed in 2024, 20.6% of 177,175 recorded road deaths; 35,221 in 2023. The report changed victim-category collection from 2019.",
-        "Annexure 33: 29,055 male and 7,471 female pedestrian victims; 6,160 victims aged 60 and over. Table 4.3: 151,950 male and 25,225 female road deaths in total. Pedestrians are 19.1% and 29.6% of those respective groups; this compares victim mix, not risk per walk.",
+        "Annexure 33: 29,055 male and 7,471 female pedestrian victims; 6,160 victims aged 60 and over. Table 4.3: 151,950 male and 25,225 female road deaths in total. Pedestrians are 19.1% and 29.6% of those respective groups; within every reported age band the female share is higher. This compares victim mix, not risk per walk.",
         "The share of road deaths involving a pedestrian within each age band is pedestrian deaths divided by all road deaths in that band. At 60 and over it is 41.7%; this is not per-walk risk.",
         "Table 4.5: impacting vehicles are police-coded collision counterparts, not legal assignments of fault.",
         "Annexure 29(a): state totals are raw counts, not walking-risk rankings.",
         "Table 2.11: 11,386 pedestrian deaths on national highways; remaining 25,140 on all other roads combined. No road-type exposure denominator.",
         "WHO 2023 pedestrian-safety manual offers general evidence on sidewalks, intersections and speed management, not India-specific causal measurement.",
-        "Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), pp. 12–13: walking is a fundamental right that includes demarcated footpaths; urban development authorities, municipal bodies and panchayats have corresponding duties. The ruling postdates the 2024 death data and does not measure footpath provision."
+        "Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), pp. 12–13: walking is a fundamental right that includes demarcated footpaths; urban development authorities, municipal bodies and panchayats have corresponding duties. The ruling postdates the 2024 death data and does not measure footpath provision.",
+        "The report's urban-rural, junction, weather and time-of-day tables are for all road casualties or crashes, not pedestrian deaths cross-tabulated by these fields. The article covers fatalities, not nonfatal harm or perceived safety."
       ],
       styleExample: "## How many pedestrians are killed on India's roads?\n\nMoRTH recorded 36,526 pedestrian deaths in 2024. That is about 100 people a day. The count does not tell us the risk of a walk, because the report does not count walking journeys."
     };

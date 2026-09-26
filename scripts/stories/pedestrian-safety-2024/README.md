@@ -4,6 +4,8 @@ Article: `q.health.pedestrian_safety_2024`, route `/articles/how-safe-is-it-to-w
 
 This is a separate, pedestrian-focused companion to the wider 2024 road-death article. Eight charts examine the national toll, the direct 2023 comparison, victim ages, pedestrians' share of road deaths within each age and sex group, impacting vehicles, the ten largest state totals, and national highways versus all other roads. The gender comparison uses all male and female road deaths from Table 4.3 as denominators, alongside pedestrian deaths from Annexure 33. It describes victim mix, not risk per walking trip. MoRTH's *Road Accidents in India 2024* is the numerical source. The article connects that toll to the Supreme Court's 19 June 2026 ruling in *Maniyar Iliyaz v. P. Ayyappan*, which recognised walking on demarcated footpaths as a fundamental right and set out local-authority duties. The WHO pedestrian-safety manual supplies general intervention evidence, not an India-specific observation or risk denominator.
 
+The final source-angle inventory is `data/audits/pedestrian-safety-2024/angle-review.md`. It records candidate dimensions omitted because the national tables do not cross-tabulate pedestrian victims, lack walking exposure, or would repeat an existing chart. The age-by-sex review in `source-cell-audit.json` verifies the within-age gender sentence against Table 4.3 and Annexure 33.
+
 ## Reproduce
 
 Use Python with PyMuPDF and BeautifulSoup, plus Node 22 or newer:

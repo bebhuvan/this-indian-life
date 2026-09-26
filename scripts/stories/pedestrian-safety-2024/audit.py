@@ -82,6 +82,19 @@ def main():
   check(sex_shares['indicatorId'],item['label']+' denominator',item['allRoadDeaths'],all_deaths,
         'MoRTH Table 4.3 PDF p93',kind='calculation')
  if tuple(map(int,all_sex[2:4]))!=(151950,25225):raise ValueError('All-road sex totals changed')
+ age_sex_review=[]
+ for i,label in enumerate(['Less than 18','18-25','25-35','35-45','45-60','60 and above']):
+  row=pdf_row(text[93],label,6)
+  male_ped,female_ped=PDF_VISUAL_AGE[2*i:2*i+2]
+  male_all,female_all=map(int,row[2:4])
+  male_share=round(100*male_ped/male_all,1)
+  female_share=round(100*female_ped/female_all,1)
+  if female_share<=male_share:raise ValueError(f'Age-sex comparison changed: {label}')
+  age_sex_review.append({'ageBand':label,'malePedestrianDeaths':male_ped,'maleAllRoadDeaths':male_all,
+                         'malePedestrianSharePercent':male_share,'femalePedestrianDeaths':female_ped,
+                         'femaleAllRoadDeaths':female_all,'femalePedestrianSharePercent':female_share,
+                         'source':'MoRTH Table 4.3 PDF p93; original scan Annexure 33 PDF p222'})
+ if (age_sex_review[-1]['malePedestrianSharePercent'],age_sex_review[-1]['femalePedestrianSharePercent'])!=(37.9,56.7):raise ValueError('Older age-sex article claim changed')
  shares=artifact('pedestrian-safety-2024.share_of_age_deaths.2024')
  for item,age,all_label in zip(shares['rows'],expected_age,['Less than 18','18-25','25-35','35-45','45-60','Above 60','Age not known']):
   all_deaths=int(pdf_row(text[92],all_label,3)[1])
@@ -130,6 +143,7 @@ def main():
          'mismatches':sum(not x['match'] for x in RESULTS),
          'legalSourceReview':{'officialPdfPages':len(ruling),'caseIdentityChecked':True,'holdingCheckedOnPdfPages':[12,13],
                               'scope':'2026 legal holding, not evidence for 2024 death counts or footpath prevalence'},
+         'ageSexReview':{'femalePedestrianShareHigherInEachPublishedAgeBand':True,'rows':age_sex_review},
          'scannedSourceReview':{
           'annexure29aPdfPage':210,'annexure33PdfPage':222,'visuallyLockedTopStateCells':len(PDF_VISUAL_TOP),
           'visuallyLockedAgeSexCells':len(PDF_VISUAL_AGE),
