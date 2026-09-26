@@ -75,13 +75,13 @@ function systemPrompt() {
 function articleTemplateFor(evidence) {
   if (evidence.questionId === "q.health.pedestrian_safety_2024") {
     return {
-      purpose: "Answer how safe it is to walk on India’s roads with MoRTH’s 2024 police-recorded pedestrian deaths. Explain the death burden, recent direction, age and sex distributions, impacting vehicles, state totals and national-highway split. State plainly that a per-walking-journey risk cannot be computed without walking exposure. Use WHO's 2023 manual only for general evidence on street design and speed, never as a measurement of India’s 2024 infrastructure or the cause of a specific death.",
+      purpose: "Answer how safe it is to walk on India’s roads with MoRTH’s 2024 police-recorded pedestrian deaths. Connect the burden to the Supreme Court's 19 June 2026 recognition of the fundamental right to walk on demarcated footpaths, without implying that 2024 deaths measure compliance with a later judgment. Explain the death burden, recent direction, age and sex distributions, impacting vehicles, state totals and national-highway split. State plainly that a per-walking-journey risk cannot be computed without walking exposure. Use WHO's 2023 manual only for general evidence on street design and speed, never as a measurement of India’s 2024 infrastructure or the cause of a specific death.",
       requiredSections: [
         "How many pedestrians are killed on India's roads?", "Is the pedestrian toll falling?",
         "How old were the pedestrians who died?", "Are older road victims more often pedestrians?",
         "Were the pedestrians killed mostly men?", "What vehicles were recorded in pedestrian deaths?",
         "Where are the largest pedestrian death totals?", "Is this only a national-highway problem?",
-        "What would make a walk safer?", "How should you read these figures?"
+        "What does the right to walk require?", "How should you read these figures?"
       ],
       requiredConcepts: [
         "MoRTH: 36,526 pedestrians killed in 2024, 20.6% of 177,175 recorded road deaths; 35,221 in 2023. The report changed victim-category collection from 2019.",
@@ -90,7 +90,8 @@ function articleTemplateFor(evidence) {
         "Table 4.5: impacting vehicles are police-coded collision counterparts, not legal assignments of fault.",
         "Annexure 29(a): state totals are raw counts, not walking-risk rankings.",
         "Table 2.11: 11,386 pedestrian deaths on national highways; remaining 25,140 on all other roads combined. No road-type exposure denominator.",
-        "WHO 2023 pedestrian-safety manual offers general evidence on sidewalks, intersections and speed management, not India-specific causal measurement."
+        "WHO 2023 pedestrian-safety manual offers general evidence on sidewalks, intersections and speed management, not India-specific causal measurement.",
+        "Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), pp. 12–13: walking is a fundamental right that includes demarcated footpaths; urban development authorities, municipal bodies and panchayats have corresponding duties. The ruling postdates the 2024 death data and does not measure footpath provision."
       ],
       styleExample: "## How many pedestrians are killed on India's roads?\n\nMoRTH recorded 36,526 pedestrian deaths in 2024. That is about 100 people a day. The count does not tell us the risk of a walk, because the report does not count walking journeys."
     };

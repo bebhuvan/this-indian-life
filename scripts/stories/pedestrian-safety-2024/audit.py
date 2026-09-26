@@ -49,6 +49,12 @@ def main():
   if hashlib.sha256(file.read_bytes()).hexdigest()!=item['sha256']:raise ValueError(f'Raw hash differs: {item["path"]}')
  who=(RAW/'who-pedestrian-safety-manual-page.html').read_text()
  if not all(x in who for x in ['sidewalks','Speed management','separating pedestrians']):raise ValueError('WHO guidance snapshot content changed')
+ ruling=pymupdf.open(RAW/'supreme-court-right-to-walk-2026.pdf')
+ if len(ruling)!=13:raise ValueError('Supreme Court judgment page count changed')
+ ruling_open=ruling[0].get_text()
+ ruling_holding=' '.join((ruling[11].get_text()+ruling[12].get_text()).split())
+ if not all(x in ruling_open for x in ['MANIYAR ILIYAZ', 'P. AYYAPPAN']):raise ValueError('Supreme Court judgment identity differs')
+ if not all(x in ruling_holding for x in ['right to walk is a fundamental right', 'right to demarcated footpaths', 'panchayats', 'restitution and compensation', 'June 19, 2026']):raise ValueError('Supreme Court judgment holding differs')
  pdf=pymupdf.open(RAW/'road-accidents-in-india-2024.pdf')
  text={n:pdf[n-1].get_text(sort=True) for n in [68,92,96,98,100]}
  ped=pdf_row(text[98],'Pedestrians',3)
@@ -111,7 +117,10 @@ def main():
  report={'sourceHashesChecked':len(manifest['files']),'plottedCellsChecked':sum(x['checkKind']=='plotted' for x in RESULTS),
          'calculationInputsChecked':sum(x['checkKind']=='calculation' for x in RESULTS),
          'crossChecks':sum(x['checkKind']=='cross-check' for x in RESULTS),
-         'mismatches':sum(not x['match'] for x in RESULTS),'scannedSourceReview':{
+         'mismatches':sum(not x['match'] for x in RESULTS),
+         'legalSourceReview':{'officialPdfPages':len(ruling),'caseIdentityChecked':True,'holdingCheckedOnPdfPages':[12,13],
+                              'scope':'2026 legal holding, not evidence for 2024 death counts or footpath prevalence'},
+         'scannedSourceReview':{
           'annexure29aPdfPage':210,'annexure33PdfPage':222,'visuallyLockedTopStateCells':len(PDF_VISUAL_TOP),
           'visuallyLockedAgeSexCells':len(PDF_VISUAL_AGE),
           'fullStateTotalReconciliations':len(scan29),

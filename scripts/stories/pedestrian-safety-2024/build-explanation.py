@@ -11,6 +11,7 @@ BODY=ROOT/f'data/prose/{QID}.md'
 OUT=ROOT/f'data/explanations/en/{QID}.json'
 MORTH='https://data.opencity.in/dataset/33d29ab0-f9e8-4fc7-b404-c93c1ed8e1b8/resource/30af828c-3513-4c74-a919-8daa708f077d/download/road-accidents-in-india-2024.pdf'
 WHO='https://www.who.int/publications/b/65858'
+COURT='https://api.sci.gov.in/supremecourt/2024/42514/42514_2024_3_1501_71888_Judgement_19-Jun-2026.pdf'
 CHARTS=[
  ('road-safety-2024.road_users.2024','One in five recorded road deaths was a pedestrian',
   'Pedestrians account for 36,526 of 177,175 recorded deaths in 2024.',
@@ -74,7 +75,7 @@ HEADINGS=[
  'How old were the pedestrians who died?','Are older road victims more often pedestrians?',
  'Were the pedestrians killed mostly men?','What vehicles were recorded in pedestrian deaths?',
  'Where are the largest pedestrian death totals?','Is this only a national-highway problem?',
- 'What would make a walk safer?','How should you read these figures?'
+ 'What does the right to walk require?','How should you read these figures?'
 ]
 
 
@@ -108,15 +109,15 @@ def main():
  'availableIndicatorIds':[d['indicatorId'] for d in docs],'themeIndicatorIds':[],
  'visualPlan':[],'plannedCharts':[],'selectedDataPoints':[],'lockedNumbers':locks,
  'sourceSummaries':summaries,'selectionRules':[],'caveats':[],'forbiddenClaims':[]}
- out={'schemaVersion':1,'questionId':QID,'status':'ready','dataThrough':'MoRTH 2024; WHO pedestrian-safety guidance 2023',
+ out={'schemaVersion':1,'questionId':QID,'status':'ready','dataThrough':'MoRTH 2024; Supreme Court judgment 2026; WHO pedestrian-safety guidance 2023',
  'short':{'headline':'About 100 pedestrians a day were recorded as killed in 2024',
-          'dek':'The annual report counts 36,526 pedestrian deaths. It maps the victims and collisions but cannot measure the danger of a walking journey.',
-          'body':'Pedestrians were one in five people recorded as killed on India’s roads in 2024. The police count rose 3.7 per cent from 2023. Older victims were more often pedestrians within their age group’s road-death total, but no national data here count the walking trips needed for a per-journey risk rate.'},
+          'dek':'MoRTH counted 36,526 pedestrian deaths in 2024. A later Supreme Court ruling recognised walking on demarcated footpaths as a fundamental right.',
+          'body':'Pedestrians were one in five people recorded as killed on India’s roads in 2024. The police count rose 3.7 per cent from 2023. In June 2026, the Supreme Court said the right to walk includes demarcated footpaths and places duties on local authorities. The national report still cannot measure the danger of a walking journey without data on how much people walk.'},
  'macha':{'heading':'Okay, macha, how risky is a walk?',
           'body':'The police recorded 36,526 pedestrian deaths in 2024. That is about 100 people a day. The report tells us their ages, where the largest state totals were and what vehicles were recorded in their collisions. It cannot tell you the chance of dying on your next walk, because it never counts how much walking people did.',
           'soWhat':'Treat the death count as a map for investigation. A walking-risk rate needs walking journeys or distance and better linked crash records.'},
  'article':{'title':'How safe is it to walk on India’s roads?',
-            'standfirst':'About 100 pedestrians a day were recorded as killed in 2024. MoRTH’s tables reveal who they were and what struck them. They still cannot tell us the risk of a walking journey.',
+            'standfirst':'About 100 pedestrians a day were recorded as killed in 2024. The Supreme Court has since recognised walking on demarcated footpaths as a fundamental right. The death record shows the toll, but has no footpath inventory or per-walk risk.',
             'bodyMarkdown':body},
  'editorialPlan':{'audience':'Indian readers who walk and want a careful answer about pedestrian safety',
                   'heroDescription':'Source-checked pedestrian deaths in the 2024 police returns.',
@@ -128,6 +129,7 @@ def main():
  'chartExplainers':cards,'sectionVisualMap':[{'heading':h,'visualId':c[1]} for h,c in zip(HEADINGS,CHARTS)],
  'sourceNotes':[
   {'label':'MoRTH, Road Accidents in India 2024: Tables 2.11, 4.2, 4.4 and 4.5; Annexures 29(a) and 33.','url':MORTH},
+  {'label':'Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), especially conclusions at pp. 12–13.','url':COURT},
   {'label':'WHO, Pedestrian safety manual, second edition (2023): evidence on safer pedestrian facilities and speed management.','url':WHO}],
  'caveats':[
   'MoRTH counts are compiled from police returns and may miss deaths that are not linked back from care to the crash record.',
@@ -135,6 +137,7 @@ def main():
   'The age-composition percentages divide pedestrian deaths by all road deaths in each age band; they are not walking-risk rates.',
   'Raw state totals and road-category counts are not adjusted for walking or vehicle exposure.',
   'Impacting-vehicle categories describe police coding, not legal responsibility.',
+  'The 2024 police data predate the June 2026 Supreme Court ruling and cannot measure compliance with it or the availability of footpaths.',
   'The report changed its victim road-user classification format in 2019; this article shows only its direct 2023–24 comparison.'],
  'lockedNumbersUsed':['36,526 pedestrian deaths in 2024','35,221 pedestrian deaths in 2023','41.7% of recorded road deaths aged 60 and over were pedestrians','11,386 pedestrian deaths on national highways'],
  'qualityFlags':[],'generatedAt':datetime.now(timezone.utc).isoformat(),
