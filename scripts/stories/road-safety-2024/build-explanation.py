@@ -21,9 +21,9 @@ CHARTS = [
     ("states_top_five.2024", "Five states account for nearly half the recorded toll", "The five displayed totals add to 85,463 deaths, or 48.2 per cent of India's police-recorded toll. These are the five largest counts, not a safety ranking of all states."),
     ("collision_types.2024", "Rear impacts and hit-and-run cases are prominent in the police record", "The report records 37,404 deaths in rear-impact cases and 34,030 in hit-and-run cases. One label describes geometry while the other describes a post-crash circumstance; neither establishes a single cause."),
     ("safety_devices.2024", "Police recorded 54,122 deaths without a helmet", "The published helmet and seatbelt rows separate drivers from passengers. Non-use was recorded among victims, but the table does not estimate how many deaths each device would have prevented."),
-    ("time_of_day_accidents.2024", "The 6–9 pm window has the most reported crashes", "The 6–9 pm window contains 102,897 accidents. These are crash events rather than deaths, and there is no traffic-by-hour denominator."),
+    ("time_of_day_accidents.2024", "The 6–9 pm window has the most reported crashes", "The 6–9 pm window contains 102,897 accidents. These are crash events rather than deaths; the report does not count the journeys made in each time window."),
     ("monthly_deaths.2024", "The 2024 death count fluctuates across months", "December records 16,007 deaths and August 12,959. One year of monthly counts cannot establish a seasonal cause without comparable exposure and more years."),
-    ("who_reported_estimated.2021", "WHO estimates a higher 2021 toll than police recorded", "WHO's 2021 estimate is 216,618, with a 95 per cent interval of 193,271 to 239,965, against 153,972 reported deaths. This does not supply a correction factor for 2024."),
+    ("who_reported_estimated.2021", "World Health Organization's 2021 road-death estimate exceeds the police count", "The World Health Organization (WHO) estimated 216,618 road deaths in India in 2021, with a 95 per cent interval from 193,271 to 239,965; police recorded 153,972. The 2021 gap cannot be applied to the 2024 police count."),
 ]
 READING = [
     ("Start with the people, because the report also contains vehicle and collision tables that answer different questions.", "Each bar counts victims in one published road-user group.", "A victim category does not identify the person at fault."),
@@ -37,7 +37,7 @@ READING = [
     ("Protective-device records add detail about victims beyond their vehicle type.", "Read helmet and seatbelt rows separately, each split between driver and passenger.", "Recorded non-use does not count individually preventable deaths."),
     ("A crash-event clock answers a different timing question from monthly deaths.", "Each bar is a three-hour interval; unknown time remains visible.", "These are crashes, not fatalities, and lack hourly traffic exposure."),
     ("Monthly deaths reveal variation concealed by one annual total.", "The twelve calendar months sum to 177,175 deaths.", "One year does not establish a seasonal cause."),
-    ("A same-year external estimate tests how complete the police count might be.", "Compare the two 2021 point values and read WHO's interval in the text.", "Do not apply the 2021 gap as a multiplier to 2024."),
+    ("A same-year external estimate tests how complete the police count might be.", "Compare the two 2021 values and read the estimated range in the text.", "Do not apply the 2021 gap as a multiplier to 2024."),
 ]
 
 
@@ -75,27 +75,27 @@ def main():
             "detail": rest, "whyShowThis": why, "howToRead": how,
             "mistakeToAvoid": mistake, "mobileNote": mobile})
     old["short"] = {
-        "headline": "India's road-death record is larger and more complicated than one headline number",
-        "dek": "A close reading of MoRTH's 2024 report shows who was killed, where crashes occurred, and what its police returns still cannot tell us.",
-        "body": "Police returns counted 177,175 road deaths in 2024, up 2.5 per cent from 2023. Two-wheeler users, pedestrians and bicyclists made up 69.1 per cent of recorded victims. Rural areas accounted for 70.8 per cent. Those are counts of reported harm, not per-trip risk or a complete mortality census."
+        "headline": "Two-wheeler users account for almost half of recorded road deaths",
+        "dek": "The Ministry of Road Transport and Highways' Road Accidents in India 2024 counts 177,175 road deaths from police returns. It shows who died, where those deaths were recorded, and what the figures cannot explain.",
+        "body": "The Ministry of Road Transport and Highways' Road Accidents in India 2024 records 177,175 road deaths in 2024 from state and union-territory police returns, up 2.5 per cent from 2023. Two-wheeler users, pedestrians and bicyclists made up 69.1 per cent of recorded victims; rural areas accounted for 70.8 per cent. These are counts of reported deaths, not the risk of a journey or a complete count of everyone who died."
     }
     old["macha"] = {"heading": "Okay, macha, what does this mean?",
-        "body": "The 2024 report says much more than '1.77 lakh deaths'. It shows that two-wheeler users and pedestrians carry a large share of the loss, most recorded deaths occur in rural areas, and evening has the most reported crashes. But the tables mix people, crash events and police labels. The WHO's higher estimate for 2021 also warns us that the police count may be incomplete.",
-        "soWhat": "Use each chart to ask a more precise question. Do not turn raw counts into risk rankings or police categories into proven causes."}
+        "body": "The Ministry of Road Transport and Highways' Road Accidents in India 2024 records 177,175 road deaths. People on two-wheelers and on foot make up a large share of those deaths, and most recorded deaths occurred in rural areas. The busiest three-hour period for reported crashes was 6 pm to 9 pm; that table counts crashes, not deaths. The World Health Organization's estimate for 2021 is higher than that year's police count, a warning that the police record may be incomplete.",
+        "soWhat": "Read each figure for what it counts: a person killed, a crash event or a police category. The report does not count journeys, so it cannot tell us the risk of a trip or prove what caused an individual death."}
     old["article"] = {"title": "What do India's road-death figures reveal?",
-        "standfirst": "MoRTH's 2024 report records 177,175 road deaths. Twelve source-checked views of the report reveal who bears the toll, where it is recorded, and what the police data cannot settle.", "bodyMarkdown": body}
+        "standfirst": "The Ministry of Road Transport and Highways' Road Accidents in India 2024 records 177,175 road deaths from police returns. The tables show who died and where the deaths were recorded, while leaving the risk of a journey and the causes of individual crashes unresolved.", "bodyMarkdown": body}
     old["chartExplainers"] = cards
     old["sectionVisualMap"] = [{"heading": h, "visualId": title} for h, (_, title, _) in zip(headings, CHARTS)]
     old["sourceNotes"] = [
-        {"label": "MoRTH, Road Accidents in India 2024: Tables 1.1, 1.5, 2.1, 3.3, 4.2, 4.4, 4.5, 5.6, 7.1, 7.2 and 7.3; Section 10 reporting method.", "url": MORTH},
-        {"label": "WHO, India road safety country profile: reported and estimated 2021 road deaths with uncertainty interval.", "url": WHO},
+        {"label": "Ministry of Road Transport and Highways, Road Accidents in India 2024: Tables 1.1, 1.5, 2.1, 3.3, 4.2, 4.4, 4.5, 5.6, 7.1, 7.2 and 7.3; Section 10 reporting method.", "url": MORTH},
+        {"label": "World Health Organization, India road safety country profile: reported and estimated 2021 road deaths with uncertainty interval.", "url": WHO},
     ]
     old["caveats"] = [
-        "MoRTH compiles police returns; deaths after a crash may not be fully linked from hospitals into the police record.",
+        "The Ministry of Road Transport and Highways compiles police returns; deaths after a crash may not be fully linked from hospitals into the police record.",
         "Victim, impacting-vehicle and collision labels do not determine fault or isolate a cause.",
         "The time-of-day chart counts accidents; most other charts count deaths. Do not compare their heights as if they share a unit.",
         "Counts lack matched travel exposure and cannot rank per-trip or per-kilometre risk.",
-        "The WHO estimate refers to 2021 and cannot be applied as a multiplier to 2024.",
+        "The World Health Organization estimate refers to 2021 and cannot be applied as a multiplier to 2024.",
     ]
     summaries = []
     for doc in docs:
@@ -109,6 +109,9 @@ def main():
     old["evidence"]["availableIndicatorIds"] = [d["indicatorId"] for d in docs]
     old["evidence"]["sourceSummaries"] = summaries
     old["editorialPlan"]["audience"] = "Indian readers seeking a careful account of the 2024 road-death record and its limits"
+    for block in old["editorialPlan"].get("glossaryBlocks", []):
+        if block.get("term") == "Modelled estimate":
+            block["whyItMattersHere"] = "The World Health Organization's 2021 figure has an uncertainty interval and cannot be transferred to 2024."
     old["generatedAt"] = datetime.now(timezone.utc).isoformat()
     OUT.write_text(json.dumps(old, indent=2, ensure_ascii=False) + "\n")
     print(f"Wrote {len(CHARTS)} chart explainers, {len(headings)} sections, {len(body.split())} body words")

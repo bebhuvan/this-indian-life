@@ -8840,7 +8840,7 @@ export const v1Questions = [
         why: "Evening has the largest crash count.", read: "The bars count accidents, including unknown time.", watch: "The table does not count deaths by hour or measure traffic by hour." },
       { indicator: "road.safety.monthly_deaths.2024", chart: "tableBars", title: "The 2024 death count fluctuates across months", size: "feature", beat: "months", unit: "people killed", subtitle: "MoRTH · Calendar-month fatalities · India, 2024",
         why: "Monthly changes complicate a flat annual average.", read: "The twelve months sum to the annual total.", watch: "One year cannot establish a stable seasonal mechanism." },
-      { indicator: "road.safety.who_reported_estimated.2021", chart: "tableBars", title: "WHO estimates a higher 2021 toll than police recorded", size: "feature", beat: "measurement", unit: "people killed", subtitle: "WHO · reported and modelled road deaths · India, 2021",
+      { indicator: "road.safety.who_reported_estimated.2021", chart: "tableBars", title: "World Health Organization's 2021 road-death estimate exceeds the police count", size: "feature", beat: "measurement", unit: "people killed", subtitle: "World Health Organization (WHO) · reported and modelled road deaths · India, 2021",
         why: "The modelled estimate exceeds the police-reported total for the same year.", read: "Two 2021 measures are shown on one scale.", watch: "The WHO uncertainty interval must be read in prose; the chart does not show it. No 2024 correction is inferred." }
     ]
   },

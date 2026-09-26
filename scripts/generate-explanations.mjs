@@ -100,7 +100,7 @@ function articleTemplateFor(evidence) {
 
   if (evidence.questionId === "q.health.road_safety_2024") {
     return {
-      purpose: "Explain MoRTH's 2024 road-death report across victims, impacting vehicles, age, trend, rural and urban areas, road classes, states, collision classifications, protective devices and timing. Keep accident counts separate from fatalities. Treat WHO's 2021 estimate as a same-year measurement comparison, never as a 2024 adjustment. No raw-count risk ranking or causal claim from a police label.",
+      purpose: "Explain the Ministry of Road Transport and Highways (MoRTH) publication Road Accidents in India 2024, compiled from state and union-territory police returns, across victims, impacting vehicles, age, trend, rural and urban areas, road classes, states, collision classifications, protective devices and timing. Name the ministry and exact report before using MoRTH or 'the report' in the body and every separately rendered opening. Give the direct finding before describing the article or its method. Keep accident counts separate from fatalities. Treat the World Health Organization's (WHO) 2021 estimate as a same-year measurement comparison, never as a 2024 adjustment. No raw-count risk ranking or causal claim from a police label.",
       requiredSections: [
         "Who is being killed on India's roads?", "What struck pedestrians?", "How old were the people who died?",
         "Is the recorded toll falling?", "Is this mainly an urban toll?", "Which kinds of roads carry the toll?",

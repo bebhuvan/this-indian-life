@@ -2,6 +2,7 @@
 """Check the built page's prose/chart pairing and visible source evidence."""
 
 import json
+import re
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -21,6 +22,11 @@ def main():
     relevant = [x for x in headings if x in sections or x in charts]
     expected = [v for pair in zip(sections[:len(charts)], charts) for v in pair] + sections[len(charts):]
     links = [x.get("href", "") for x in page.select(".evidence-grid a")]
+    openings = [explanation["short"]["dek"], explanation["short"]["body"],
+                explanation["macha"]["body"], explanation["article"]["standfirst"]]
+    first_body_paragraph = explanation["article"]["bodyMarkdown"].split("\n\n", 2)[1]
+    ministry = "Ministry of Road Transport and Highways"
+    report = "Road Accidents in India 2024"
     checks = {
         "sections_and_charts_in_order": relevant == expected,
         "chart_notes_complete": len(page.select(".chart-note")) == len(charts),
@@ -29,6 +35,11 @@ def main():
         "road_user_figure_visible": "Two-wheeler users 81,780" in page.get_text(" ", strip=True),
         "who_interval_visible": "193,271 to 239,965" in page.get_text(" ", strip=True),
         "accident_unit_visible": "reported accidents" in page.get_text(" ", strip=True).lower(),
+        "each_opening_names_ministry_and_report": all(ministry in opening and report in opening for opening in openings),
+        "no_literal_markdown_in_openings": all("*" not in opening for opening in openings),
+        "first_body_paragraph_names_ministry_and_report": ministry in first_body_paragraph and report in first_body_paragraph,
+        "first_body_acronym_expanded": bool(re.search(r"Ministry of Road Transport and Highways \(MoRTH\)", first_body_paragraph)),
+        "who_chart_subtitle_expands_name": "World Health Organization (WHO)" in page.get_text(" ", strip=True),
     }
     result = {"page": PAGE.relative_to(ROOT).as_posix(), "checks": checks,
               "sectionCount": len(sections), "chartCount": len(charts),
