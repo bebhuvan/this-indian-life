@@ -87,7 +87,7 @@ def main():
     SERIES.mkdir(exist_ok=True)
     AUDIT.mkdir(exist_ok=True)
     morth = pymupdf.open(MORTH)
-    texts = {p: morth[p - 1].get_text(sort=True).splitlines() for p in [35, 40, 54, 77, 92, 98, 100, 110, 138, 141, 142]}
+    texts = {p: morth[p - 1].get_text(sort=True).splitlines() for p in [35, 40, 42, 43, 54, 77, 92, 93, 98, 100, 110, 138, 141, 142]}
     files = []
 
     national = {year: row(texts[35], str(year), 6, 35, "1.1") for year in range(2020, 2025)}
@@ -96,6 +96,20 @@ def main():
                           observations=observations, note="Table 1.1 fatalities column; calendar years. 2020 and 2021 were affected by Covid restrictions."))
     for year, vals in national.items():
         check(f"annual deaths {year}", next(o["value"] for o in observations if o["date"] == str(year)), vals[2], f"MoRTH Table 1.1, PDF p35, row {year}, fatalities")
+
+    severity = []
+    for year in range(2005, 2025):
+        page = 42 if year <= 2014 else 43
+        values = row(texts[page], str(year), 6, page, "1.6")
+        accidents, deaths, published = int(values[0]), int(values[3]), values[5]
+        if round(100 * deaths / accidents, 1) != published:
+            raise ValueError(f"Table 1.6 severity arithmetic differs in {year}")
+        severity.append({"date": str(year), "value": published})
+        check(f"reported-crash severity {year}", published, values[5],
+              f"MoRTH Table 1.6, PDF p{page}, {year}, deaths per 100 reported accidents")
+    files.append(artifact("severity.2005_2024", "People killed per 100 reported accidents, 2005–2024", "morth", "1.6", "42–43",
+                          observations=severity, unit="people killed per 100 reported accidents",
+                          note="Published severity = people killed divided by police-reported accidents, times 100. Not deaths per journey or the share of accidents that were fatal; reporting practices can change."))
 
     road_users = [
         ("Two-wheeler users", "Two-wheelers"), ("Pedestrians", "Pedestrians"),
@@ -113,6 +127,17 @@ def main():
         check(f"road user {display}", v, row(texts[98], label, 3, 98, "4.4")[1], f"MoRTH Table 4.4, PDF p98, {label}, 2024")
     files.append(artifact("road_users.2024", "Road deaths by victim road-user category, 2024", "morth", "4.4", 98,
                           rows=user_rows, note="Victim category of the person killed; not the vehicle responsible. The 'Other' row combines several distinct and unclassified groups."))
+
+    sex_values = row(texts[93], "Total", 6, 93, "4.3")
+    sex_rows = [{"label": label, "value": int(sex_values[index]), "sourceRow": "Total", "sourceColumn": index}
+                for label, index in [("Male", 2), ("Female", 3)]]
+    if sum(item["value"] for item in sex_rows) != int(national[2024][2]):
+        raise ValueError("Table 4.3 sex totals do not reconcile with national fatalities")
+    files.append(artifact("sex.2024", "Road deaths by recorded sex, 2024", "morth", "4.3", 93,
+                          rows=sex_rows, note="Victim sex as recorded in the police return. The table publishes male and female categories only; counts are not per-trip risk."))
+    for item in sex_rows:
+        check(f"road victim sex {item['label']}", item["value"], sex_values[item["sourceColumn"]],
+              f"MoRTH Table 4.3, PDF p93, Total, 2024 {item['label'].lower()} deaths")
 
     ages = [("Under 18", "Less than 18"), ("18–25", "18-25"), ("25–35", "25-35"),
             ("35–45", "35-45"), ("45–60", "45-60"), ("Over 60", "Above 60"), ("Age unknown", "Age not known")]
@@ -198,7 +223,7 @@ def main():
         check(f"WHO {item['label']}", item["value"], rep if item["label"] == "Reported fatalities" else est, "WHO India country profile, PDF p1, Burden, 2021")
 
     total = int(national[2024][2])
-    for name, items in [("road users", user_rows), ("ages", age_rows), ("road categories", class_rows), ("collision types", collisions), ("rural urban", rural), ("monthly deaths", months)]:
+    for name, items in [("road users", user_rows), ("sex", sex_rows), ("ages", age_rows), ("road categories", class_rows), ("collision types", collisions), ("rural urban", rural), ("monthly deaths", months)]:
         check(f"{name} sum", sum(x["value"] for x in items), total, "MoRTH Table 1.1, PDF p35, 2024 fatalities")
     check("pedestrian impact sum", sum(x["value"] for x in impact_rows), next(x["value"] for x in user_rows if x["label"] == "Pedestrians"), "MoRTH Tables 4.4 and 4.5, PDF pp98 and 100")
     check("time of day accident sum", sum(x["value"] for x in time_rows), int(national[2024][0]), "MoRTH Table 1.1, PDF p35, 2024 accidents")

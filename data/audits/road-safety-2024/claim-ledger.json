@@ -3,7 +3,7 @@
   "status": "approved for publication on main",
   "sourceVintage": {
     "morth": "Road Accidents in India 2024, calendar-year police returns",
-    "who": "Global status report on road safety 2023, India country profile, released 30 April 2024; mortality values for 2021"
+    "who": "Global status report on road safety 2023, India country profile; mortality values for 2021"
   },
   "evidenceBundle": {
     "sourceManifest": "data/raw/road-safety-2024/manifest.json",
@@ -41,6 +41,8 @@
       "data/series/road-safety-2024.road_users.2024.json",
       "data/series/road-safety-2024.rural_urban.2024.json",
       "data/series/road-safety-2024.safety_devices.2024.json",
+      "data/series/road-safety-2024.severity.2005_2024.json",
+      "data/series/road-safety-2024.sex.2024.json",
       "data/series/road-safety-2024.states_top_five.2024.json",
       "data/series/road-safety-2024.time_of_day_accidents.2024.json",
       "data/series/road-safety-2024.who_reported_estimated.2021.json",
@@ -56,24 +58,29 @@
   },
   "sections": [
     {
+      "heading": "Is the recorded toll falling?",
+      "sourceRowsOrPages": "MoRTH Road Accidents in India 2024, Table 1.1, PDF p35; exact plotted rows are in the source-cell audit and fatalities.2020_2024 artifact.",
+      "interpretationLimit": "2020 traffic affected by Covid; counts are not per-journey risk."
+    },
+    {
+      "heading": "How many people die per reported accident?",
+      "sourceRowsOrPages": "MoRTH Table 1.6, original PDF pp42–43, accidents, fatal accidents, fatalities and published severity for 2005–2024. The 2024 fatal-accident share (164,378/487,707=33.7%) and all 20 severity points were independently recomputed.",
+      "interpretationLimit": "People killed per 100 police-reported crash events is not the share of crashes that were fatal or per-trip risk; nonfatal reporting and Covid-era traffic can affect the series."
+    },
+    {
       "heading": "Who is being killed on India's roads?",
       "sourceRowsOrPages": "MoRTH Road Accidents in India 2024, Table 4.4, PDF p98; exact plotted rows are in the source-cell audit and road_users.2024 artifact.",
       "interpretationLimit": "Victim category, not fault or risk per trip."
     },
     {
-      "heading": "What struck pedestrians?",
-      "sourceRowsOrPages": "MoRTH Road Accidents in India 2024, Table 4.5, PDF p100; exact plotted rows are in the source-cell audit and pedestrian_impact.2024 artifact.",
-      "interpretationLimit": "Recorded impacting vehicle does not assign blame; no vehicle exposure denominator."
+      "heading": "How do deaths differ for women and men?",
+      "sourceRowsOrPages": "MoRTH Table 4.3, original PDF p93, Total row male 151,950 and female 25,225; Annexure 33 PDF p222 for pedestrian cross-reference.",
+      "interpretationLimit": "Recorded victim sex counts and within-sex pedestrian shares do not measure per-trip risk; report has two sex categories."
     },
     {
       "heading": "How old were the people who died?",
       "sourceRowsOrPages": "MoRTH Road Accidents in India 2024, Table 4.2, PDF p92; exact plotted rows are in the source-cell audit and ages.2024 artifact.",
       "interpretationLimit": "Age distribution is not age-specific risk; unknown ages retained."
-    },
-    {
-      "heading": "Is the recorded toll falling?",
-      "sourceRowsOrPages": "MoRTH Road Accidents in India 2024, Table 1.1, PDF p35; exact plotted rows are in the source-cell audit and fatalities.2020_2024 artifact.",
-      "interpretationLimit": "2020 traffic affected by Covid; counts are not per-journey risk."
     },
     {
       "heading": "Is this mainly an urban toll?",
@@ -106,11 +113,6 @@
       "interpretationLimit": "Accident counts, not deaths; unknown time retained; no hourly exposure."
     },
     {
-      "heading": "Does the annual total hide a monthly pattern?",
-      "sourceRowsOrPages": "MoRTH Road Accidents in India 2024, Table 7.2, PDF p141; exact plotted rows are in the source-cell audit and monthly_deaths.2024 artifact.",
-      "interpretationLimit": "One year does not establish a stable seasonal cause."
-    },
-    {
       "heading": "How complete is the police record?",
       "sourceRowsOrPages": "WHO Global status report on road safety 2023, India country profile, Burden: road traffic fatalities, PDF p1; exact plotted rows are in the source-cell audit and who_reported_estimated.2021 artifact.",
       "interpretationLimit": "Modelled 2021 estimate is not an identified missing-death list or 2024 multiplier."
@@ -128,8 +130,8 @@
   ],
   "releaseChecks": {
     "rawPdfFilesHashed": 2,
-    "plottedCellsChecked": 75,
-    "partitionTotalsChecked": 8,
+    "plottedCellsChecked": 77,
+    "partitionTotalsChecked": 9,
     "sourceMismatches": 0,
     "explanationFailures": 0,
     "explanationWarnings": 0,
@@ -141,8 +143,10 @@
     "renderedBindingErrors": 0,
     "desktopAndMobileReviewed": true,
     "publicationDecision": "Approved for the authorised push to main; deployment is verified after the workflow completes.",
-    "independentFactCheck": "MiMo 2.6 Flash via OpenCode Go read the original MoRTH and WHO PDFs without claim ledgers or generated series. It confirmed numerical claims, found misleading monthly extremes, and challenged the WHO release month, travel-exposure wording and mixed Other label. Corrections were applied to prose and generated explanation; its live-link and internal-process checks were out of scope.",
+    "independentFactCheck": "MiMo 2.6 Flash via OpenCode Go adversarially reviewed the revised article against original PDF pp35, 42–43 and 93. It confirmed the 2005–24 severity arithmetic and 2024 sex split, suggested stating the 2021 severity peak and distinguishing fatal-accident share, and questioned a borderline rounding pair. The original Annexure 33 counts give exactly 7,471/36,526=20.4539% and 7,471/25,225=29.6174%, correctly rounded to 20.5% and 29.6%. Other article cells remain covered by the independent source-cell audit, because the MiMo packet did not contain every source page.",
     "proseReview": "MiMo 2.6 Flash via OpenCode Go, followed by source-checked editorial revision; standalone openings name the ministry and Road Accidents in India 2024.",
-    "readerProseAuditFindings": 0
+    "readerProseAuditFindings": 0,
+    "sourceCellsChecked": 97,
+    "preparedUnplottedCellsChecked": 20
   }
 }

@@ -65,7 +65,7 @@ def main():
     if hashlib.sha256((RAW/'road-accidents-in-india-2024.pdf').read_bytes()).hexdigest()!=HASH:raise ValueError('MoRTH PDF hash changed')
     SERIES.mkdir(exist_ok=True);AUDIT.mkdir(exist_ok=True)
     pdf=pymupdf.open(RAW/'road-accidents-in-india-2024.pdf')
-    text={p:pdf[p-1].get_text(sort=True).splitlines() for p in [68,92,93,96,98,100]}
+    text={p:pdf[p-1].get_text(sort=True).splitlines() for p in [68,92,93,96,98,100,109,110]}
     ped=source_row(text[98],'Pedestrians',3,98,'4.4')
     if [int(x) for x in ped[:2]] != [35221,36526]:raise ValueError('Pedestrian annual values changed')
     total=int(ped[1]);files=[]
@@ -117,6 +117,21 @@ def main():
     states=[{'label':name,'value':value,'sourceRow':name} for name,value in LOCKED_TOP_STATES.items()]
     files.append(doc('states_top_ten.2024','Ten states with the most recorded pedestrian deaths, 2024','Annexure 29(a)',210,states,
         note='Selected top ten of 36 states and union territories; original scanned cells visually checked and full state totals reconciled to Annexure 33. Raw counts are not walking risk.'))
+    state_share=[]
+    for name,pedestrian_deaths in LOCKED_TOP_STATES.items():
+        page=109 if name in ('Andhra Pradesh','Bihar') else 110
+        match=re.compile(r'^\s*\d+\s+'+re.escape(name)+r'\s{2,}(.+)$',re.I)
+        candidates=[nums(m.group(1)) for line in text[page] if (m:=match.match(line))]
+        candidates=[values for values in candidates if len(values)==11]
+        if len(candidates)!=1:raise ValueError(f'Table 5.6 PDF p{page}, {name}: {len(candidates)} rows')
+        all_deaths=int(candidates[0][4])
+        if pedestrian_deaths>all_deaths:raise ValueError(f'Pedestrian deaths exceed total: {name}')
+        state_share.append({'label':name,'value':round(100*pedestrian_deaths/all_deaths,1),
+            'pedestrianDeaths':pedestrian_deaths,'allRoadDeaths':all_deaths,
+            'sourceRow':name,'sourcePage':page})
+    files.append(doc('share_of_state_deaths.2024','Pedestrian share of road deaths in ten high-count states, 2024',
+        'Annexure 29(a) + Table 5.6','109–110, 210',state_share,unit='percent',
+        note='For the ten states selected by raw pedestrian deaths, divide each pedestrian count by that state’s all-road death total. This is victim mix, not per-walk risk. West Bengal totals were recast from e-DAR aggregates.'))
     nh=int(source_row(text[68],'Pedestrians',6,68,'2.11')[3])
     if nh!=11386:raise ValueError('National-highway pedestrian deaths changed')
     roads=[{'label':'National highways','value':nh,'sourceRow':'Pedestrians'},

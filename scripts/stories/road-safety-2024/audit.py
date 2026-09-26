@@ -36,13 +36,29 @@ def main():
         if actual != expected:
             raise ValueError(f"Raw file changed: {filename}")
     pdf = pymupdf.open(RAW / "road-accidents-in-india-2024.pdf")
-    source = {n: pdf[n - 1].get_text(sort=True).splitlines() for n in [30, 35, 40, 54, 77, 92, 98, 100, 110, 138, 141, 142, 161, 162]}
+    source = {n: pdf[n - 1].get_text(sort=True).splitlines() for n in [30, 35, 40, 42, 43, 54, 77, 92, 93, 98, 100, 110, 138, 141, 142, 161, 162]}
     annual = artifact("fatalities.2020_2024")
     for item in annual["observations"]:
         year = item["date"]
         expected = int(row(source[35], year, 6, 35, "1.1")[2])
         check(annual["indicatorId"], year, item["value"], expected,
               f"MoRTH Table 1.1, PDF p35, {year}, fatalities")
+    severity = artifact("severity.2005_2024")
+    for item in severity["observations"]:
+        year = int(item["date"]); page = 42 if year <= 2014 else 43
+        cells = row(source[page], str(year), 6, page, "1.6")
+        expected = round(100 * cells[3] / cells[0], 1)
+        if expected != cells[5]: raise ValueError(f"Source severity formula differs for {year}")
+        check(severity["indicatorId"], str(year), item["value"], expected,
+              f"MoRTH Table 1.6, PDF p{page}, {year}, deaths / reported accidents × 100")
+    severity_2024 = row(source[43], "2024", 6, 43, "1.6")
+    if (int(severity_2024[0]), int(severity_2024[1]), severity_2024[2]) != (487707, 164378, 33.7) or round(100 * severity_2024[1] / severity_2024[0], 1) != 33.7:
+        raise ValueError("2024 fatal-accident share in prose differs from Table 1.6")
+    sex = artifact("sex.2024")
+    sex_source = row(source[93], "Total", 6, 93, "4.3")
+    for item, column in zip(sex["rows"], [2, 3]):
+        check(sex["indicatorId"], item["label"], item["value"], int(sex_source[column]),
+              f"MoRTH Table 4.3, PDF p93, Total, 2024 {item['label']} deaths")
     for slug, page, table, width, index in [
         ("road_users.2024", 98, "4.4", 3, 1),
         ("ages.2024", 92, "4.2", 3, 1),
@@ -72,7 +88,7 @@ def main():
         check(who["indicatorId"], item["label"], item["value"], expected,
               "WHO India country profile, PDF p1, Burden, 2021")
     death = annual["observations"][-1]["value"]
-    partitions = ["road_users.2024", "ages.2024", "road_categories.2024", "collision_types.2024", "rural_urban.2024", "monthly_deaths.2024"]
+    partitions = ["road_users.2024", "sex.2024", "ages.2024", "road_categories.2024", "collision_types.2024", "rural_urban.2024", "monthly_deaths.2024"]
     for slug in partitions:
         doc = artifact(slug)
         check(doc["indicatorId"], "2024 category sum", sum(r["value"] for r in doc["rows"]), death,
@@ -93,10 +109,14 @@ def main():
     OUT.mkdir(exist_ok=True)
     with (OUT / "source-cell-audit.csv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=results[0].keys(), lineterminator="\n"); w.writeheader(); w.writerows(results)
-    report = {"sourceFilesHashed": len(HASHES), "plottedCellsChecked": len(results) - len(partitions) - 2,
+    source_cells = len(results) - len(partitions) - 2
+    report = {"sourceFilesHashed": len(HASHES), "sourceCellsChecked": source_cells,
+              "plottedCellsChecked": source_cells - len(artifact("pedestrian_impact.2024")["rows"]) - len(artifact("monthly_deaths.2024")["rows"]),
+              "preparedUnplottedCellsChecked": len(artifact("pedestrian_impact.2024")["rows"]) + len(artifact("monthly_deaths.2024")["rows"]),
               "totalCrossChecks": len(partitions) + 2, "mismatches": sum(not r["match"] for r in results),
               "methodologySourceChecks": method_checks,
               "whoEstimate95Interval2021": [int(re.sub(r"\s", "", estimate.group(2))), int(re.sub(r"\s", "", estimate.group(3)))],
+              "fatalAccidentShare2024": {"fatalAccidents": 164378, "reportedAccidents": 487707, "percent": 33.7, "source": "MoRTH Table 1.6, PDF p43"},
               "scope": "Every plotted observation in the selected story artifacts plus partition totals; no claim of validating the full MoRTH report."}
     (OUT / "source-cell-audit.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))

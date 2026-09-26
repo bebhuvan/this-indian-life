@@ -54,9 +54,12 @@ def main():
  ruling_open=ruling[0].get_text()
  ruling_holding=' '.join((ruling[11].get_text()+ruling[12].get_text()).split())
  if not all(x in ruling_open for x in ['MANIYAR ILIYAZ', 'P. AYYAPPAN']):raise ValueError('Supreme Court judgment identity differs')
- if not all(x in ruling_holding for x in ['right to walk is a fundamental right', 'right to demarcated footpaths', 'panchayats', 'restitution and compensation', 'June 19, 2026']):raise ValueError('Supreme Court judgment holding differs')
+ if not all(x in ruling_open for x in ['five-year-', 'tanker', 'neither a footpath nor a pedestrian']):raise ValueError('Supreme Court judgment case facts differ')
+ if 'statutory framework' not in ruling[6].get_text():raise ValueError('Supreme Court proposed framework absent from PDF p7')
+ if not all(x in ruling_holding for x in ['right to walk is a fundamental right', 'right to demarcated footpaths', 'panchayats', 'must endeavour to demarcate', 'restitution and compensation', 'June 19, 2026']):raise ValueError('Supreme Court judgment holding differs')
  pdf=pymupdf.open(RAW/'road-accidents-in-india-2024.pdf')
- text={n:pdf[n-1].get_text(sort=True) for n in [68,92,93,96,98,100]}
+ text={n:pdf[n-1].get_text(sort=True) for n in [68,92,93,96,98,99,100,109,110,160]}
+ if not all(x in text[99] for x in ['A new format has been introduced from 2019', 'Crime Vehicle']):raise ValueError('Victim-format or impacting-vehicle definition changed')
  ped=pdf_row(text[98],'Pedestrians',3)
  total=int(ped[1]);trend=artifact('pedestrian-safety-2024.deaths.2023_2024')
  for i,item in enumerate(trend['rows']):check(trend['indicatorId'],item['label'],item['value'],int(ped[i]),'MoRTH Table 4.4, PDF p98, Pedestrians, '+item['label'])
@@ -117,6 +120,22 @@ def main():
   expected=scan29[item['label'].lower()][-1]
   if PDF_VISUAL_TOP[item['label']]!=expected:raise ValueError('Visually checked state source cell differs from scan transcription')
   check(states['indicatorId'],item['label'],item['value'],expected,'MoRTH Annexure 29(a), original scan PDF p210, state total')
+ state_shares=artifact('pedestrian-safety-2024.share_of_state_deaths.2024')
+ if [x['label'] for x in state_shares['rows']] != [x['label'] for x in states['rows']]:raise ValueError('Share chart selection differs from top-count states')
+ for item in state_shares['rows']:
+  name=item['label'];page=109 if name in ('Andhra Pradesh','Bihar') else 110
+  pattern=re.compile(r'^\s*\d+\s+'+re.escape(name)+r'\s{2,}(.+)$',re.I)
+  matches=[]
+  for line in text[page].splitlines():
+   if (m:=pattern.match(line)):
+    values=[float(v.replace(',','')) for v in re.findall(r'(?<![\w-])-?\d[\d,]*(?:\.\d+)?(?!\w)',m.group(1))]
+    if len(values)==11:matches.append(values)
+  if len(matches)!=1:raise ValueError(f'MoRTH Table 5.6 PDF p{page}, {name}: {len(matches)} matches')
+  numerator=PDF_VISUAL_TOP[name];denominator=int(matches[0][4])
+  check(state_shares['indicatorId'],name,item['value'],round(100*numerator/denominator,1),f'MoRTH Annexure 29(a) PDF p210 / Table 5.6 PDF p{page}')
+  check(state_shares['indicatorId'],name+' numerator',item['pedestrianDeaths'],numerator,'MoRTH Annexure 29(a) original scan PDF p210',kind='calculation')
+  check(state_shares['indicatorId'],name+' denominator',item['allRoadDeaths'],denominator,f'MoRTH Table 5.6 PDF p{page}',kind='calculation')
+ if 'recast' not in text[160].lower() or 'West Bengal' not in text[160]:raise ValueError('West Bengal reporting caveat absent from source page')
  roads=artifact('pedestrian-safety-2024.national_highways.2024')
  nh=int(pdf_row(text[68],'Pedestrians',6)[3])
  for item,expected,ref in zip(roads['rows'],[nh,total-nh],['MoRTH Table 2.11, PDF p68, Pedestrians, 2024 deaths','MoRTH Table 4.4 PDF p98 minus Table 2.11 PDF p68']):check(roads['indicatorId'],item['label'],item['value'],expected,ref)
@@ -137,11 +156,15 @@ def main():
  OUT.mkdir(exist_ok=True)
  with (OUT/'source-cell-audit.csv').open('w',newline='') as f:
   w=csv.DictWriter(f,fieldnames=RESULTS[0].keys(),lineterminator='\n');w.writeheader();w.writerows(RESULTS)
- report={'sourceHashesChecked':len(manifest['files']),'plottedCellsChecked':sum(x['checkKind']=='plotted' for x in RESULTS),
+ source_cells=sum(x['checkKind']=='plotted' for x in RESULTS)
+ report={'sourceHashesChecked':len(manifest['files']),'sourceCellsChecked':source_cells,
+         'plottedCellsChecked':source_cells-len(sex['rows']),
+         'preparedUnplottedCellsChecked':len(sex['rows']),
          'calculationInputsChecked':sum(x['checkKind']=='calculation' for x in RESULTS),
          'crossChecks':sum(x['checkKind']=='cross-check' for x in RESULTS),
          'mismatches':sum(not x['match'] for x in RESULTS),
-         'legalSourceReview':{'officialPdfPages':len(ruling),'caseIdentityChecked':True,'holdingCheckedOnPdfPages':[12,13],
+         'legalSourceReview':{'officialPdfPages':len(ruling),'caseIdentityChecked':True,'caseFactsCheckedOnPdfPage':1,
+                              'frameworkCheckedOnPdfPage':7,'holdingCheckedOnPdfPages':[12,13],
                               'scope':'2026 legal holding, not evidence for 2024 death counts or footpath prevalence'},
          'ageSexReview':{'femalePedestrianShareHigherInEachPublishedAgeBand':True,'rows':age_sex_review},
          'scannedSourceReview':{

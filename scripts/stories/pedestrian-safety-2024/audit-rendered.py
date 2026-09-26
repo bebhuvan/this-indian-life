@@ -25,12 +25,13 @@ def main():
  source_name='Ministry of Road Transport and Highways'
  report_title='Road Accidents in India 2024'
  checks={
-  'ten_sections_eight_charts_in_order':relevant==expected,
-  'eight_chart_notes':len(page.select('.chart-note'))==8,
+  'eleven_sections_nine_charts_in_order':relevant==expected and len(sections)==11 and len(charts)==9,
+  'nine_chart_notes':len(page.select('.chart-note'))==9,
   'morth_original_pdf_linked':any('road-accidents-in-india-2024.pdf' in x for x in links),
   'supreme_court_original_pdf_linked':any('api.sci.gov.in/supremecourt/2024/42514/' in x and x.endswith('.pdf') for x in links),
   'who_manual_linked':any('who.int/publications/i/item/9789240072497/' in x for x in links),
   'fundamental_right_and_duty_visible':'fundamental right' in text and 'panchayats' in text and 'demarcated footpaths' in text,
+  'court_duty_uses_endeavour_wording':'must endeavour to demarcate' in text,
   'judgment_postdates_data_visible':'2024 figures describe deaths recorded' in text and 'before the 2026 ruling' in text,
   'each_opening_names_ministry_and_report':all(source_name in opening and report_title in opening for opening in openings),
   'no_literal_markdown_in_openings':all('*' not in opening for opening in openings),
@@ -43,6 +44,7 @@ def main():
   'fatal_crash_scope_visible':'account of fatal crashes' in text and 'cannot tell us where or when pedestrian deaths occurred' in text,
   'walking_risk_limit_visible':'chance of dying on a walk' in text,
   'state_top_count_visible':'Tamil Nadu reports 4,712' in text,
+  'state_share_and_limit_visible':'Bihar recorded 4,149 pedestrian deaths out of 9,347' in text and 'West Bengal' in text and 'not the risk of a walking trip' in text,
   'other_roads_derivation_visible':'25,140' in text,
  }
  result={'page':PAGE.relative_to(ROOT).as_posix(),'checks':checks,

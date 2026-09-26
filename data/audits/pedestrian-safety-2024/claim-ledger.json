@@ -11,15 +11,16 @@
     "artifactCatalog": "data/catalog/pedestrian-safety-2024-manifest.json",
     "repositoryFiles": [
       ".gitattributes",
-      "data/audits/pedestrian-safety-2024/claim-ledger.json",
       "data/audits/pedestrian-safety-2024/angle-review.md",
+      "data/audits/pedestrian-safety-2024/claim-ledger.json",
       "data/audits/pedestrian-safety-2024/rendered-audit.json",
       "data/audits/pedestrian-safety-2024/source-cell-audit.csv",
       "data/audits/pedestrian-safety-2024/source-cell-audit.json",
       "data/explanations/en/q.health.pedestrian_safety_2024.json",
       "data/prose/q.health.pedestrian_safety_2024.md",
-      "data/series/road-safety-2024.road_users.2024.json",
+      "data/series/pedestrian-safety-2024.share_of_state_deaths.2024.json",
       "data/series/road-safety-2024.pedestrian_impact.2024.json",
+      "data/series/road-safety-2024.road_users.2024.json",
       "scripts/generate-explanations.mjs",
       "scripts/registry/v1-indicators.mjs",
       "scripts/stories/pedestrian-safety-2024/README.md",
@@ -66,6 +67,11 @@
       "interpretationLimit": "Raw state counts cannot rank risk without comparable walking exposure and reporting quality."
     },
     {
+      "heading": "Among the highest-count states, how much of the road toll involves pedestrians?",
+      "sourceRowsOrPages": "MoRTH Annexure 29(a), original scanned PDF p210, ten visually checked pedestrian totals; Table 5.6 PDF pp109–110, all-road death totals for the same states; West Bengal recast caveat PDF p160. Each percentage independently recomputed.",
+      "interpretationLimit": "The ten states are selected by raw pedestrian toll, not percentage; within-state share of road deaths is victim mix, not risk per walking journey. West Bengal reporting was recast from e-DAR aggregates."
+    },
+    {
       "heading": "Is this only a national-highway problem?",
       "sourceRowsOrPages": "MoRTH Table 2.11, PDF p68, national-highway pedestrian deaths; Table 4.4, PDF p98, national total; remainder calculated by subtraction.",
       "interpretationLimit": "All other roads is a combined remainder; road-class counts are not per-walk risks."
@@ -77,7 +83,7 @@
     },
     {
       "heading": "How should you read these figures?",
-      "sourceRowsOrPages": "MoRTH Tables 2.11, 3.6, 3.8, 4.2–4.5, 7.1 and 7.3 and Annexures 29(a), 33; original PDF and source-cell audit. Supreme Court official judgment PDF pp12–13.",
+      "sourceRowsOrPages": "MoRTH Tables 2.11, 4.2–4.5 and 5.6; Annexures 29(a) and 33; original PDF and source-cell audit. Supreme Court official judgment PDF pp1, 7, 12–13.",
       "interpretationLimit": "All-road place and time tables do not identify pedestrian fatalities. Police returns may miss deaths; full-report SpaceBunny transcription is a reading aid, not the source of record. The 2026 judgment is a legal source, not a 2024 statistical source."
     }
   ],
@@ -85,11 +91,12 @@
     "sourceHashesChecked": 12,
     "legalJudgmentPdfPagesChecked": [
       1,
+      7,
       12,
       13
     ],
-    "plottedCellsChecked": 49,
-    "calculationInputsChecked": 18,
+    "plottedCellsChecked": 57,
+    "calculationInputsChecked": 38,
     "crossChecks": 41,
     "sourceMismatches": 0,
     "explanationFailures": 0,
@@ -97,14 +104,16 @@
     "focusedArtifactErrors": 0,
     "focusedArtifactWarnings": 0,
     "builtPages": 108,
-    "renderedSections": 10,
-    "renderedCharts": 8,
+    "renderedSections": 11,
+    "renderedCharts": 9,
     "renderedBindingErrors": 0,
     "desktopAndMobileReviewed": true,
     "publicationDecision": "Approved for the authorised push to main; deployment is verified after the workflow completes.",
-    "independentFactCheck": "MiMo 2.6 Flash via OpenCode Go independently checked original MoRTH page extracts and the Supreme Court judgment: no error in checkable counts, denominators or legal holding. It could not read the scanned state and age-by-sex annexure cells with OCR. Those cells remain covered by the separate original-page visual audit and state-total reconciliation. The judgment's opening and statutory-framework discussion, and the 2019 victim-format note, were checked separately against the original PDFs.",
+    "independentFactCheck": "MiMo 2.6 Flash via OpenCode Go adversarially reviewed the revised article against original MoRTH Table 4.3, Table 5.6, Annexure 29(a), methodology p160 and Supreme Court conclusions pp12–13. It confirmed the ten-state arithmetic, selection caveat and West Bengal recast. It caught the Court’s narrower phrase “must endeavour”; the article now uses it. Claims absent from MiMo’s bounded packet were separately checked in the full original-PDF source audit and judgment pp1–7.",
     "proseReview": "MiMo 2.6 Flash via OpenCode Go, followed by source-checked editorial revision; all standalone openings name the ministry and Road Accidents in India 2024.",
     "readerProseAuditFindings": 0,
-    "whoManualLinkContentChecked": "Canonical WHO second-edition manual page, ISBN 978-92-4-007249-7; replaced generic digital-publications URL in the article and source note."
+    "whoManualLinkContentChecked": "Canonical WHO second-edition manual page, ISBN 978-92-4-007249-7; replaced generic digital-publications URL in the article and source note.",
+    "sourceCellsChecked": 59,
+    "preparedUnplottedCellsChecked": 2
   }
 }

@@ -62,6 +62,13 @@ CHARTS=[
   'These are selected raw totals, not rates; they do not partition the entire national toll.',
   'Without walking journeys or distance, a state ranking is not a safety ranking.',
   'Long state names wrap and every bar keeps its value.'),
+ ('pedestrian-safety-2024.share_of_state_deaths.2024','Pedestrians make up different shares of road deaths across high-count states',
+  'Bihar records 44.4% and Uttar Pradesh 8.8% among the ten states with the most pedestrian deaths.',
+  'Each percentage divides a state’s pedestrian deaths by all its road deaths. The selection is by pedestrian count, not percentage. West Bengal’s source totals were recast from electronic aggregates.',
+  'The within-state comparison tests whether high overall tolls have the same victim mix.',
+  'Each bar is the pedestrian share of road deaths in one of the ten selected states.',
+  'This is not walking risk, and West Bengal has a specific reporting caveat.',
+  'State names can wrap; percentage values remain beside the bars.'),
  ('pedestrian-safety-2024.national_highways.2024','Most pedestrian deaths were recorded off national highways',
   'National highways account for 11,386 pedestrian deaths, leaving 25,140 on all other roads combined.',
   'The remainder is the national pedestrian total minus the national-highway pedestrian row. It mixes state highways and other road classes because this source does not split the pedestrian remainder here.',
@@ -74,7 +81,8 @@ HEADINGS=[
  "How many pedestrians are killed on India's roads?",'Is the pedestrian toll falling?',
  'How old were the pedestrians who died?','Are older road victims more often pedestrians?',
  'How does the pedestrian toll differ for women and men?','What vehicles were recorded in pedestrian deaths?',
- 'Where are the largest pedestrian death totals?','Is this only a national-highway problem?',
+ 'Where are the largest pedestrian death totals?',
+ 'Among the highest-count states, how much of the road toll involves pedestrians?','Is this only a national-highway problem?',
  'What does the right to walk require?','How should you read these figures?'
 ]
 
@@ -88,7 +96,7 @@ def main():
  if headings!=HEADINGS or body.count('\n## ')!=len(headings)-1:raise ValueError('Article section order or heading structure changed')
  docs=[load(key) for key,*_ in CHARTS]
  pedestrian=36526
- if docs[1]['rows'][-1]['value']!=pedestrian or sum(x['value'] for x in docs[2]['rows'])!=pedestrian or sum(x['pedestrianDeaths'] for x in docs[4]['rows'])!=pedestrian or sum(x['value'] for x in docs[5]['rows'])!=pedestrian or sum(x['value'] for x in docs[7]['rows'])!=pedestrian:raise ValueError('Locked pedestrian partitions changed')
+ if docs[1]['rows'][-1]['value']!=pedestrian or sum(x['value'] for x in docs[2]['rows'])!=pedestrian or sum(x['pedestrianDeaths'] for x in docs[4]['rows'])!=pedestrian or sum(x['value'] for x in docs[5]['rows'])!=pedestrian or sum(x['value'] for x in docs[8]['rows'])!=pedestrian:raise ValueError('Locked pedestrian partitions changed')
  if sum(x['value'] for x in docs[6]['rows'])!=27354:raise ValueError('Top ten sum changed')
  cards=[]
  for key,title,takeaway,detail,why,how,mistake,mobile in CHARTS:
@@ -128,7 +136,7 @@ def main():
                    {'term':'Impacting vehicle','plainMeaning':'The vehicle police recorded as the collision counterpart to a victim.','whyItMattersHere':'This administrative label is not a court finding of fault.'}]},
  'chartExplainers':cards,'sectionVisualMap':[{'heading':h,'visualId':c[1]} for h,c in zip(HEADINGS,CHARTS)],
  'sourceNotes':[
-  {'label':'Ministry of Road Transport and Highways, Road Accidents in India 2024: Tables 2.11, 3.6, 3.8, 4.2–4.5, 7.1 and 7.3; Annexures 29(a) and 33.','url':MORTH},
+  {'label':'Ministry of Road Transport and Highways, Road Accidents in India 2024: Tables 2.11, 4.2–4.5 and 5.6; Annexures 29(a) and 33.','url':MORTH},
   {'label':'Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), especially conclusions at pp. 12–13.','url':COURT},
   {'label':'WHO, Pedestrian safety manual, second edition (2023): evidence on safer pedestrian facilities and speed management.','url':WHO}],
  'caveats':[

@@ -1,26 +1,32 @@
+## Is the recorded toll falling?
+
+No. The Ministry of Road Transport and Highways (MoRTH) reports 177,175 deaths in 2024 in *Road Accidents in India 2024*, up from 172,890 in 2023. That is 4,285 more, an increase of 2.5 per cent after rounding. The police also recorded 487,707 accidents and 471,441 injured people in 2024. An accident is a crash event, while a death is a person, and a single event can kill more than one person.
+
+The five-year line starts at 138,383 deaths in 2020. Traffic was disrupted by Covid restrictions that year, so the rise from that base is not a clean measure of worsening safety. Even the 2023–24 comparison is a count, not a death rate per journey. More traffic, longer travel, more severe crashes and changes in reporting could each move the annual total. The report gives rates relative to population and registered vehicles, but not the number of journeys or kilometres travelled needed to separate those explanations. What the data does show is that the police-recorded death count rose again.
+
+## How many people die per reported accident?
+
+MoRTH recorded 21.6 people killed for every 100 reported road accidents in 2005. It peaked at 37.3 in 2021 and was 36.3 in 2024. The ministry calls this *accident severity*. It divides the number of people killed by the number of police-reported crash events, then multiplies by 100. In 2024, that meant 177,175 people killed across 487,707 reported accidents.
+
+The 20-year line shows that the recorded death toll grew faster than the number of accidents entering this measure. It does not mean 36.3 per cent of accidents were fatal: one crash can kill more than one person. Table 1.6 separately puts the share of reported accidents that were fatal at 33.7 per cent in 2024. Neither measure is the chance of dying on a journey. Changes in whether nonfatal crashes reach the police record can alter the ratio. The 2020 and 2021 values also sit within disrupted Covid-era travel. The measure raises a serious question about the severity of reported crashes without identifying its cause.
+
 ## Who is being killed on India's roads?
 
-The Ministry of Road Transport and Highways (MoRTH) records 177,175 people killed on India's roads in 2024 in *Road Accidents in India 2024*. Its figures come from state and union-territory police returns. People riding two-wheelers were the largest victim group: 81,780 deaths, or 46.2 per cent of the total. The report also records 36,526 pedestrians and 4,161 bicyclists. Together, these three groups account for 122,467 deaths, or 69.1 per cent of the police-recorded toll.
+Among the people MoRTH recorded as killed in 2024, two-wheeler users were the largest victim group: 81,780 deaths, or 46.2 per cent of the total. The report also records 36,526 pedestrians and 4,161 bicyclists. Together, these three groups account for 122,467 deaths, or 69.1 per cent of the police-recorded toll.
 
 This table describes the person who died. It does not say who caused the collision. The shares also cannot tell us the chance of dying on a given trip, because that would require knowing how far or how often each group travels. A high death count can come from frequent travel, greater danger per trip, or both. The report's "Other" category groups 11,890 deaths across several unlike road users, including people in animal-drawn vehicles, cycle rickshaws and hand carts. The summary does not separate them.
 
-## What struck pedestrians?
+## How do deaths differ for women and men?
 
-A separate MoRTH table lists the *impacting vehicle* in crashes where a pedestrian died. Two-wheelers are the largest identified group, recorded in 10,378 of the 36,526 pedestrian deaths. Cars, taxis, vans and light motor vehicles follow with 9,302, and trucks and lorries with 5,165. A further 7,857 deaths sit in an "Others" group that this national table does not break down.
+MoRTH records 151,950 male and 25,225 female road deaths in 2024. Men account for 85.8 per cent of the police-recorded total. Those are victim counts: they do not tell us how many women and men travelled, how they travelled, or how far.
 
-This is a second view of the same 36,526 deaths. In one table the pedestrian is the victim; in the other, the vehicle involved in the collision is recorded. Neither table is a court finding about fault. Nor does a count of pedestrians struck by two-wheelers show which vehicles are more dangerous per kilometre travelled, because the number of vehicles and the distance they travel differ. The practical question is where conflicts between people walking and moving vehicles actually happen. These national counts point to the collisions worth investigating; they cannot reconstruct the street, speed or conduct in each case.
+The split matters when reading the pedestrian figures. Women made up 20.5 per cent of pedestrians killed, even though they were 14.2 per cent of all road deaths. In the [walking article](/articles/how-safe-is-it-to-walk-in-india/), we compare pedestrians with all road deaths *within each recorded sex*: 29.6 per cent of female road victims were pedestrians, against 19.1 per cent of male victims. That is a difference in the mix of people killed, not proof that walking is more dangerous for women. The report publishes only male and female categories.
 
 ## How old were the people who died?
 
 The 18–25, 25–35 and 35–45 age bands hold 117,026 deaths between them, or 66.1 per cent of the total. The report records 10,117 deaths of people younger than 18. It could not identify the age of 4,705 people, so that category remains in the chart. Dropping the unknowns quietly would make the other shares look more certain than they are.
 
 The age distribution shows the human reach of the loss, including many people in the years when they may be studying, working or caring for family. It is still a distribution of *deaths*, not a comparison of risk between age groups. Population size, travel habits and road use differ across ages. A child in the table could have been a passenger, a pedestrian or a cyclist. The age share cannot be multiplied by a road-user share to estimate that overlap, because the separate national summaries do not contain that information.
-
-## Is the recorded toll falling?
-
-No. MoRTH reports 177,175 deaths in 2024, up from 172,890 in 2023. That is 4,285 more, an increase of 2.5 per cent after rounding. The police also recorded 487,707 accidents and 471,441 injured people in 2024. An accident is a crash event, while a death is a person, and a single event can kill more than one person.
-
-The five-year line starts at 138,383 deaths in 2020. Traffic was disrupted by Covid restrictions that year, so the rise from that base is not a clean measure of worsening safety. Even the 2023–24 comparison is a count, not a death rate per journey. More traffic, longer travel, more severe crashes and changes in reporting could each move the annual total. The report gives rates relative to population and registered vehicles, but not the number of journeys or kilometres travelled needed to separate those explanations. What the data does show is that the police-recorded death count rose again.
 
 ## Is this mainly an urban toll?
 
@@ -58,12 +64,6 @@ The largest three-hour window is 6 pm to 9 pm: police recorded 102,897 accidents
 
 These are **accident counts**. They do not count deaths, and the report does not say that 6 pm to 9 pm was the deadliest period for people killed. The table also does not measure vehicles on the road by hour. A busy interval could record many crashes even if the chance of a crash per journey were unchanged. Daylight, commuter traffic and road conditions may be relevant, and this national time table cannot divide their effects. It does tell an investigator where to ask for finer local crash, traffic and lighting data.
 
-## Does the annual total hide a monthly pattern?
-
-The monthly toll was highest in May, at 16,070 deaths, followed by December (16,007) and November (15,922). March (15,809) and April (15,683) were also above 15,600. September had the lowest count, at 12,841, followed by August (12,959) and July (13,033). The twelve monthly figures add up to the annual total of 177,175, so they are a breakdown of those same deaths rather than an additional toll.
-
-It is easy to attach a seasonal story to those differences, and one year is not enough to settle it. Months differ in length, traffic volume, festivals, weather and reporting practice, and the source does not separate these influences. Because the report covers the Covid-era years, a five-year monthly average taken uncritically would be especially misleading. The 2024 profile shows variation that an annual total hides. It does not show that monsoon weather, a particular festival or any one seasonal factor caused the change. A fuller seasonal analysis would require several comparable years and matching data on how much people travelled.
-
 ## How complete is the police record?
 
 The World Health Organization (WHO) offers an independent check for 2021, not 2024. Its India country profile reports 153,972 police-recorded road deaths for that year, matching the figure in MoRTH's annual series. WHO's modelled estimate for the same year is 216,618 deaths, with a 95 per cent uncertainty interval running from 193,271 to 239,965. The lower end of that interval still exceeds the police count.
@@ -72,14 +72,14 @@ The comparison points to substantial incompleteness in the police record. But th
 
 ## What can these figures say about prevention?
 
-The report is detailed enough to direct sharper questions. Why are so many of the victims people on two-wheelers or on foot? What is happening on the roads where rural deaths are recorded? Why do some police categories contain so many cases? The official tables establish scale and location, but they do not establish which intervention would have prevented a particular death. The "impacting vehicle" is a police description, not a legal finding. A recorded traffic violation alone does not prove what caused a death. Nor does helmet non-use prove that every death in that group was preventable.
+The report is detailed enough to direct sharper questions. Why are so many of the victims people on two-wheelers or on foot? What is happening on the roads where rural deaths are recorded? Why do some police categories contain so many cases? The official tables establish scale and location, but they do not establish which intervention would have prevented a particular death. A recorded traffic violation alone does not prove what caused a death. Nor does helmet non-use prove that every death in that group was preventable.
 
 Better measurement is part of the response. Linking crash, hospital and death records would clarify how many people die after the initial police report. Counting journeys or kilometres by road user and road type would allow risk to be compared on a common exposure base. Local records could join age, victim type, vehicle, road design and injury outcome instead of being inferred from separate national margins. Until then, the annual report is a detailed map of police-recorded harm with important blank spaces.
 
 ## How to read these numbers: methodology and caveats
 
-The main source is MoRTH's *Road Accidents in India 2024*, compiled from calendar-year returns of state and union-territory police. Every observation plotted here was checked against rows in the original PDF, and the published category totals were reconciled. Tables 1.1, 1.5, 2.1, 3.3, 4.2, 4.4, 4.5, 5.6, 7.1, 7.2 and 7.3 supply the chart data. The complete model-generated transcription of the 260-plus-page report remains a draft; the cells selected for this article have their own source audit.
+The main source is MoRTH's *Road Accidents in India 2024*, compiled from calendar-year returns of state and union-territory police. Every observation plotted here was checked against rows in the original PDF, and the published category totals were reconciled. Tables 1.1, 1.5, 1.6, 2.1, 3.3, 4.2, 4.3, 4.4, 5.6, 7.1 and 7.3 supply the chart data. The complete model-generated transcription of the 260-plus-page report remains a draft; the cells selected for this article have their own source audit.
 
-Unless stated otherwise, percentages in the death charts divide each group by the 177,175 people recorded as killed in 2024. The time-of-day chart divides accident counts by 487,707 reported accidents; it does not count deaths. The selected top-five state chart leaves out every other state and union territory. Published age bands are treated as separate categories even though they share endpoints in print, and unknown ages remain unknown.
+Unless stated otherwise, percentages in the death charts divide each group by the 177,175 people recorded as killed in 2024. The severity line divides deaths by reported accidents in each year and multiplies by 100. The separate 33.7 per cent fatal-accident share divides 164,378 fatal crashes by all 487,707 reported crashes in 2024. The time-of-day chart divides accident counts by 487,707 reported accidents; it does not count deaths. The rural accident share uses reported crash events as its denominator; the 2.14 per cent national-highway road-length share uses road kilometres as of March 2022. Neither is a travel-exposure rate. The selected top-five state chart leaves out every other state and union territory. Published age bands are treated as separate categories even though they share endpoints in print, and unknown ages remain unknown.
 
 The WHO comparison comes from its [India country profile](https://www.who.int/publications/m/item/road-safety-ind-2023-country-profile) in the *Global status report on road safety 2023* and refers only to 2021. MoRTH's Table 1.8 gives rates relative to population and registered vehicles, but the report does not pair its death counts with the number of journeys or kilometres travelled. None of these tables establishes a single cause for a crash or a death.
