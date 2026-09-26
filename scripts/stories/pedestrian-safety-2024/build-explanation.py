@@ -41,13 +41,13 @@ CHARTS=[
   'Values are percentages of road deaths within each age band, not percentages of all pedestrians.',
   'The chart does not give the chance of dying while walking.',
   'Read the unit in the heading: per cent of road deaths in that age band.'),
- ('pedestrian-safety-2024.sex.2024','Four in five recorded pedestrian victims were men',
-  'Police recorded 29,055 male and 7,471 female pedestrian deaths in 2024.',
-  'The two groups sum to the national pedestrian total and match the report narrative. Sex is a description of victims, not a measure of how often each group walked.',
-  'The sex split adds another dimension to the people behind the total.',
-  'Both bars count people killed in the report’s male and female categories.',
-  'Do not infer comparative walking risk or carefulness without travel exposure.',
-  'Both bars use a zero baseline and have direct values.'),
+ ('pedestrian-safety-2024.share_of_sex_deaths.2024','Walking was a larger share of female road deaths',
+  'Pedestrians made up 29.6% of female road victims, against 19.1% of male road victims.',
+  'The chart divides 7,471 female pedestrian deaths by 25,225 female road deaths, and 29,055 male pedestrian deaths by 151,950 male road deaths. It compares victim mix, not danger per walking trip.',
+  'The within-sex comparison adds meaning to the raw male and female pedestrian counts.',
+  'Each bar shows pedestrian deaths as a share of all road deaths of that same recorded sex.',
+  'Do not read the higher female share as a higher risk per walk; walking exposure is missing.',
+  'The percentage unit remains visible beside both direct values.'),
  ('road-safety-2024.pedestrian_impact.2024','Two-wheelers and cars figure prominently in pedestrian deaths',
   'Two-wheelers appear in 10,378 pedestrian deaths and cars, taxis, vans and LMVs in 9,302.',
   'The mixed Others group contains 7,857 deaths, so a large part of the police classification remains vague. Impacting vehicle is a police field, not a legal finding of fault.',
@@ -73,7 +73,7 @@ CHARTS=[
 HEADINGS=[
  "How many pedestrians are killed on India's roads?",'Is the pedestrian toll falling?',
  'How old were the pedestrians who died?','Are older road victims more often pedestrians?',
- 'Were the pedestrians killed mostly men?','What vehicles were recorded in pedestrian deaths?',
+ 'How does the pedestrian toll differ for women and men?','What vehicles were recorded in pedestrian deaths?',
  'Where are the largest pedestrian death totals?','Is this only a national-highway problem?',
  'What does the right to walk require?','How should you read these figures?'
 ]
@@ -88,7 +88,7 @@ def main():
  if headings!=HEADINGS or body.count('\n## ')!=len(headings)-1:raise ValueError('Article section order or heading structure changed')
  docs=[load(key) for key,*_ in CHARTS]
  pedestrian=36526
- if docs[1]['rows'][-1]['value']!=pedestrian or sum(x['value'] for x in docs[2]['rows'])!=pedestrian or sum(x['value'] for x in docs[4]['rows'])!=pedestrian or sum(x['value'] for x in docs[5]['rows'])!=pedestrian or sum(x['value'] for x in docs[7]['rows'])!=pedestrian:raise ValueError('Locked pedestrian partitions changed')
+ if docs[1]['rows'][-1]['value']!=pedestrian or sum(x['value'] for x in docs[2]['rows'])!=pedestrian or sum(x['pedestrianDeaths'] for x in docs[4]['rows'])!=pedestrian or sum(x['value'] for x in docs[5]['rows'])!=pedestrian or sum(x['value'] for x in docs[7]['rows'])!=pedestrian:raise ValueError('Locked pedestrian partitions changed')
  if sum(x['value'] for x in docs[6]['rows'])!=27354:raise ValueError('Top ten sum changed')
  cards=[]
  for key,title,takeaway,detail,why,how,mistake,mobile in CHARTS:
@@ -128,13 +128,13 @@ def main():
                    {'term':'Impacting vehicle','plainMeaning':'The vehicle police recorded as the collision counterpart to a victim.','whyItMattersHere':'This administrative label is not a court finding of fault.'}]},
  'chartExplainers':cards,'sectionVisualMap':[{'heading':h,'visualId':c[1]} for h,c in zip(HEADINGS,CHARTS)],
  'sourceNotes':[
-  {'label':'MoRTH, Road Accidents in India 2024: Tables 2.11, 4.2, 4.4 and 4.5; Annexures 29(a) and 33.','url':MORTH},
+  {'label':'MoRTH, Road Accidents in India 2024: Tables 2.11, 4.2–4.5; Annexures 29(a) and 33.','url':MORTH},
   {'label':'Supreme Court of India, Maniyar Iliyaz v. P. Ayyappan (19 June 2026), especially conclusions at pp. 12–13.','url':COURT},
   {'label':'WHO, Pedestrian safety manual, second edition (2023): evidence on safer pedestrian facilities and speed management.','url':WHO}],
  'caveats':[
   'MoRTH counts are compiled from police returns and may miss deaths that are not linked back from care to the crash record.',
   'Neither MoRTH nor the WHO manual supplies a national 2024 count of walking journeys or kilometres walked.',
-  'The age-composition percentages divide pedestrian deaths by all road deaths in each age band; they are not walking-risk rates.',
+  'The age and sex composition percentages divide pedestrian deaths by all road deaths within the same recorded group; they are not walking-risk rates.',
   'Raw state totals and road-category counts are not adjusted for walking or vehicle exposure.',
   'Impacting-vehicle categories describe police coding, not legal responsibility.',
   'The 2024 police data predate the June 2026 Supreme Court ruling and cannot measure compliance with it or the availability of footpaths.',

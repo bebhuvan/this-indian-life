@@ -65,7 +65,7 @@ def main():
     if hashlib.sha256((RAW/'road-accidents-in-india-2024.pdf').read_bytes()).hexdigest()!=HASH:raise ValueError('MoRTH PDF hash changed')
     SERIES.mkdir(exist_ok=True);AUDIT.mkdir(exist_ok=True)
     pdf=pymupdf.open(RAW/'road-accidents-in-india-2024.pdf')
-    text={p:pdf[p-1].get_text(sort=True).splitlines() for p in [68,92,96,98,100]}
+    text={p:pdf[p-1].get_text(sort=True).splitlines() for p in [68,92,93,96,98,100]}
     ped=source_row(text[98],'Pedestrians',3,98,'4.4')
     if [int(x) for x in ped[:2]] != [35221,36526]:raise ValueError('Pedestrian annual values changed')
     total=int(ped[1]);files=[]
@@ -86,6 +86,16 @@ def main():
         [{'label':'Male','value':men,'sourceRow':'Total','sourceColumns':'male'},
          {'label':'Female','value':women,'sourceRow':'Total','sourceColumns':'female'}],
         note='Summed scanned Annexure 33 total row; reconciles to PDF p96 narrative. Sex of victims, not exposure-adjusted risk.'))
+    all_sex=source_row(text[93],'Total',6,93,'4.3')
+    all_men,all_women=map(int,all_sex[2:4])
+    if (all_men,all_women)!=(151950,25225) or all_men+all_women!=177175:raise ValueError('All-road sex totals changed')
+    sex_share=[{'label':label,'value':round(100*pedestrian/all_road,1),
+                'pedestrianDeaths':pedestrian,'allRoadDeaths':all_road,
+                'sourceRow':'Total','sourceColumns':label.lower()}
+               for label,pedestrian,all_road in [('Male',men,all_men),('Female',women,all_women)]]
+    files.append(doc('share_of_sex_deaths.2024','Pedestrian share of road deaths within each sex, 2024',
+        'Table 4.3 + Annexure 33',93,sex_share,unit='percent',
+        note='Pedestrian deaths of each recorded sex divided by all road deaths of the same sex, times 100. This is victim mix, not per-walk risk.'))
     age_labels=['Less than 18','18-25','25-35','35-45','45-60','Above 60','Age not known']
     all_age=[int(source_row(text[92],name,3,92,'4.2')[1]) for name in age_labels]
     share_rows=[{'label':name,'value':round(100*age['value']/all_deaths,1),

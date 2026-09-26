@@ -56,7 +56,7 @@ def main():
  if not all(x in ruling_open for x in ['MANIYAR ILIYAZ', 'P. AYYAPPAN']):raise ValueError('Supreme Court judgment identity differs')
  if not all(x in ruling_holding for x in ['right to walk is a fundamental right', 'right to demarcated footpaths', 'panchayats', 'restitution and compensation', 'June 19, 2026']):raise ValueError('Supreme Court judgment holding differs')
  pdf=pymupdf.open(RAW/'road-accidents-in-india-2024.pdf')
- text={n:pdf[n-1].get_text(sort=True) for n in [68,92,96,98,100]}
+ text={n:pdf[n-1].get_text(sort=True) for n in [68,92,93,96,98,100]}
  ped=pdf_row(text[98],'Pedestrians',3)
  total=int(ped[1]);trend=artifact('pedestrian-safety-2024.deaths.2023_2024')
  for i,item in enumerate(trend['rows']):check(trend['indicatorId'],item['label'],item['value'],int(ped[i]),'MoRTH Table 4.4, PDF p98, Pedestrians, '+item['label'])
@@ -72,6 +72,16 @@ def main():
  for item,expected in zip(sex['rows'],expected_sex):check(sex['indicatorId'],item['label'],item['value'],expected,'MoRTH Annexure 33, original scan PDF p222, total row')
  narrative=text[96]
  if not ('29,055' in narrative and '7,471' in narrative):raise ValueError('MoRTH PDF p96 narrative sex totals absent')
+ sex_shares=artifact('pedestrian-safety-2024.share_of_sex_deaths.2024')
+ all_sex=pdf_row(text[93],'Total',6)
+ for item,pedestrian,all_deaths in zip(sex_shares['rows'],expected_sex,map(int,all_sex[2:4])):
+  check(sex_shares['indicatorId'],item['label'],item['value'],round(100*pedestrian/all_deaths,1),
+        'MoRTH Annexure 33 PDF p222 numerator; Table 4.3 PDF p93 denominator')
+  check(sex_shares['indicatorId'],item['label']+' numerator',item['pedestrianDeaths'],pedestrian,
+        'MoRTH Annexure 33 PDF p222',kind='calculation')
+  check(sex_shares['indicatorId'],item['label']+' denominator',item['allRoadDeaths'],all_deaths,
+        'MoRTH Table 4.3 PDF p93',kind='calculation')
+ if tuple(map(int,all_sex[2:4]))!=(151950,25225):raise ValueError('All-road sex totals changed')
  shares=artifact('pedestrian-safety-2024.share_of_age_deaths.2024')
  for item,age,all_label in zip(shares['rows'],expected_age,['Less than 18','18-25','25-35','35-45','45-60','Above 60','Age not known']):
   all_deaths=int(pdf_row(text[92],all_label,3)[1])

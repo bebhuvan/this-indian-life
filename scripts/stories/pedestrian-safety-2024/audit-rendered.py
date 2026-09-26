@@ -29,6 +29,7 @@ def main():
   'judgment_postdates_data_visible':'2024 figures describe deaths recorded before the 2026 ruling' in text,
   'pedestrian_toll_visible':'36,526' in text,
   'age_composition_visible':'41.7' in text,
+  'sex_composition_visible':'29.6' in text and '19.1' in text and '25,225' in text and '151,950' in text,
   'walking_risk_limit_visible':'chance of dying on your next walk' in text,
   'state_top_count_visible':'Tamil Nadu 4,712' in text,
   'other_roads_derivation_visible':'25,140' in text,

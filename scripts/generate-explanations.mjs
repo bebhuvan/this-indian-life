@@ -79,13 +79,13 @@ function articleTemplateFor(evidence) {
       requiredSections: [
         "How many pedestrians are killed on India's roads?", "Is the pedestrian toll falling?",
         "How old were the pedestrians who died?", "Are older road victims more often pedestrians?",
-        "Were the pedestrians killed mostly men?", "What vehicles were recorded in pedestrian deaths?",
+        "How does the pedestrian toll differ for women and men?", "What vehicles were recorded in pedestrian deaths?",
         "Where are the largest pedestrian death totals?", "Is this only a national-highway problem?",
         "What does the right to walk require?", "How should you read these figures?"
       ],
       requiredConcepts: [
         "MoRTH: 36,526 pedestrians killed in 2024, 20.6% of 177,175 recorded road deaths; 35,221 in 2023. The report changed victim-category collection from 2019.",
-        "Annexure 33: 29,055 male and 7,471 female pedestrian victims; 6,160 victims aged 60 and over.",
+        "Annexure 33: 29,055 male and 7,471 female pedestrian victims; 6,160 victims aged 60 and over. Table 4.3: 151,950 male and 25,225 female road deaths in total. Pedestrians are 19.1% and 29.6% of those respective groups; this compares victim mix, not risk per walk.",
         "The share of road deaths involving a pedestrian within each age band is pedestrian deaths divided by all road deaths in that band. At 60 and over it is 41.7%; this is not per-walk risk.",
         "Table 4.5: impacting vehicles are police-coded collision counterparts, not legal assignments of fault.",
         "Annexure 29(a): state totals are raw counts, not walking-risk rankings.",
