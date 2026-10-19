@@ -171,3 +171,46 @@ financial-year axis, the number formatting rules) is the foundation and is not c
 - `src/data/chartSvg.ts`: phone dot strip under maps.
 - `src/styles/indica.css`, `almanac.css`: warm ground and neutrals as tokens.
 - The reference set and before/after sheets are listed in `docs/DESIGN_REFINEMENT_LOG.md` from row 87.
+
+## The reference pass (October 2026)
+
+Implemented in the renderers, never per chart; 19 reference charts were screenshotted before and after at 412 and
+1440 px, covering every family:
+
+| Family | Reference chart | Article |
+|---|---|---|
+| Single line, peak | FDI equalled 3.1% of Indian fixed investment in 2025 | did-foreign-money-build-india |
+| Single line, rank | From 43rd in the world in 1990 to 11th in 2025 | did-foreign-money-build-india |
+| Single line, trend | India's average temperature has climbed about 1°C since the 1940s | are-indias-big-cities-getting-hotter |
+| Lines, protagonist and rival | Pakistan's FDI ratio exceeded India's in 23 of 36 years | did-foreign-money-build-india |
+| Lines, rival above throughout | Viet Nam's FDI ratio has stayed well above India's | did-foreign-money-build-india |
+| Lines, peers to small multiples | The cities where the night stopped cooling | are-indias-big-cities-getting-hotter |
+| Lines, fixed inks | At the $4.20 line, rural poverty is still higher | has-india-ended-poverty |
+| Bars, outlier and named rows | $547 per Indian, against $2,243 per Chinese | did-foreign-money-build-india |
+| Bars, grouped | Who carries more: women, and rural India | dementia-in-india |
+| Bars, diverging | Almost every city is warmer, except two neighbours | are-indias-big-cities-getting-hotter |
+| Ranked change | Hot nights are rising in almost every city | are-indias-big-cities-getting-hotter |
+| Change card | 88 lakh now, 1.69 crore by 2036 | dementia-in-india |
+| Share strip | Where India's electricity came from last year | how-does-india-generate-electricity |
+| Map and strip | Where dementia is most common | dementia-in-india |
+| Stripes | India's warming, one stripe per year since 1817 | are-indias-big-cities-getting-hotter |
+| Pyramid | Population pyramid, 2025 | how-many-people-live-in-india |
+| Parade | The spending ladder, rung by rung | how-unequal-is-india |
+| Heat strip | One country, two fertility histories | why-indian-states-have-different-birth-rates |
+| Scatter | Richer states, fewer children | why-indian-states-have-different-birth-rates |
+
+The rules apply site-wide wherever their conditions hold (about 230 figures changed their inks or form). The share strip,
+parade, heat strip, stripes and scatter changed only with the paper and neutrals: they already followed the direction.
+
+## Rollout, next
+
+1. Rewrite the 36 explainers that name line colours (19 in how-does-india-work), so those charts can take story inks.
+2. Replace the four 38-panel own-scale grids on are-indias-big-cities-getting-hotter with one heat strip of cities by
+   year, coloured by change from each city's first decade, sorted by warming.
+3. Use the Almanac forms by rule: two survey rounds of many units become dumbbells; two years of a handful of units
+   become slopes; composition over time becomes stacked areas (GVA by sector, generation mix).
+4. Extend the trend rule beyond climate where a title claims a trend over noisy annual data, and the peak rule to
+   lines whose title names a year.
+5. Editorial notes per chart (an event on the line: 1991, 2008, 2020) as a registry field, for the charts where the
+   event is the point.
+6. Share strips: direct labels with leader ticks above the strip instead of a swatch key.

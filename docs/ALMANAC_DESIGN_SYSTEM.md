@@ -1,6 +1,6 @@
 # The Almanac: design system and chart forms
 
-The house style since October 2026. White paper and black ink; Newsreader to read in,
+The house style since October 2026. Warm paper and black ink; Newsreader to read in,
 Schibsted Grotesk to count in; five data inks named after Indian dyes; hairline rules;
 figures that leave the page whole.
 
@@ -28,7 +28,8 @@ figures that leave the page whole.
 
 ## Colour
 
-- Ink `#121212`, mid `#4f4f4f`, dim `#737373` (text and axis numbers), grid `#ededed`, rule `#dadada`.
+- Paper `#faf8f3` (`--bg`), ink `#121212`, mid `#4a4640`, dim `#6e6961` (text and axis numbers), grid `#e9e4da`, rule `#d5cec2`.
+  The neutrals are warm, to sit on the paper. White halos, rings and knock-outs in a figure follow `--bg`, in exports too.
 - Data inks: neel `#33489a`, sindoor `#c24a2e`, hara `#008a6e`, haldi `#b98014`, jamun `#7b4790`.
 - Each domain borrows one ink as `--c` (people sindoor, economy hara, energy haldi, climate `#1f6f8b`, health jamun, society neel).
   Chart series follow `--c`, then ink black (`--s2`), then the three inks the domain does not use (`--s3..--s5`), then grey.
@@ -38,9 +39,20 @@ Registry entries that hard-code `color` on a series still win over the palette. 
 
 - Text-safe inks: neel `#2e418c`, sindoor `#a63d24`, hara `#00735c`, haldi `#8a5f0a`, jamun `#6a3c7d` (tokens `--neel-ink`
   and so on, and `--s2-ink..--s6-ink` per domain). Any word set in a series colour goes through `textInk()`; marks never do.
-- Axis numbers are `#737373`.
+- Axis numbers are `#6e6961`.
 - No ink repeats within a chart: past the palette, series are grey.
 - India, as one of several countries, always wears `--c`.
+- **Story inks** (`lineRoles` in `ArticleVisuals.astro`; `barsSvg` in `figures.ts`). A chart is about something. In a line
+  chart of three or more lines, the protagonist (the plan's `emphasis`, else India, else the line the title names) wears
+  `--c` at 2.8 units, cased in the paper; the first rival the title or takeaway names is ink black at 2, a second the next
+  data ink; every other line is context, warm grey `#b9b2a6` at 1.25, its name and value in `#7a746a`. Phones write
+  values for the protagonist and rivals only, and name the context lines once in the key under a single grey swatch.
+  Rural/urban keep their fixed inks; men/women lines are never context. Bars: the national row and rows the title names
+  (demonyms count: "per Chinese" names China) take `--c` then ink, the rest warm grey `#cfc8bb`, when they are at most a
+  third of the rows. Three or four lines with no subject keep the palette. A chart whose explainer names its colours keeps
+  the palette until the prose is rewritten (`namesColours`).
+- **The annotation voice** is Newsreader italic (`note()` in `almanac.ts`), for what a chart says about itself: a gap's
+  count, a trend's name. Values and names stay in the grotesque.
 
 ## The forms
 
@@ -74,10 +86,16 @@ The older kinds still render through `ArticleVisuals.astro`, redesigned rather t
   point and a long single series also names its first value; multi-series charts name each line
   at its end in its own ink (a key appears only on phones or past seven lines); the y-axis is
   tightened to the data (`tightScale`); emphasised series are heavier than context series; a
-  reference line is named beside itself; a soft wash sits under single series only when the axis
-  starts at zero. Every line chart has a hover crosshair (`initHover` in `public/article-actions.js`)
+  reference line is named beside itself; no wash under a single line. The scale stops at the last gridline the data
+  reach when they pass it by under a fifth of a step. A unit naming a rank runs with 1 at the top. A single line's
+  highest or lowest point is marked with its value and date when it stands more than a fifth of the plot from the end
+  (`peakMark`). A single annual climate series (temperature, departure or rain) of 40 or more noisy years draws its years
+  as a fine trace under a centred 11-year average, named in the annotation voice (`trendOf`). When the title names the
+  protagonist and one rival, the gap between them is shaded where the rival leads, with the count of years written in
+  the plot (`gapBand`). Five or more peer lines (no protagonist, none named, annual) become small multiples on one
+  scale, each panel's line over the others as ghosts (`linePeersFigure`). Every line chart has a hover crosshair (`initHover` in `public/article-actions.js`)
   fed by a `data-hover` attribute built at compile time.
-  Context lines are 1.25 px at 60% when a series is emphasised, and the emphasised line is cased in the ground
+  Among peers with an emphasised line, the others are 1.25 px at 60% (a story's context is grey instead), and the emphasised line is cased in the ground
   colour. A single series' first value is set lighter than its latest. A second line with the same fixed meaning is
   dashed with butt caps at a length scaled to its weight. On a phone, five or more lines with a protagonist write
   only the protagonist's value; the key and tooltip carry the rest. Otherwise, when phone end values would have to
@@ -90,9 +108,11 @@ The older kinds still render through `ArticleVisuals.astro`, redesigned rather t
   dashes break noise into specks. Set it from the source's own note (UN WPP 2024: estimates to
   2023; MoHFW 2020: Census 2011 then projected), never by eye.
   A projected stretch is never thinner than 1.6 px; a line projected throughout keeps its full ink.
-- **Bars**: thin bars with the value at each bar's end, no grey tracks; groups with negatives
+- **Bars**: solid close-set bars (12 to 18 units, no rules between rows) with the value at each bar's end at weight
+  500, the story's rows at 700; a bar three times the next is cut with a slanted break, its value written; no grey tracks; groups with negatives
   diverge from a zero line.
-- **Maps** (`renderChoroplethSvg`, `renderChoroplethStrip` in `chartSvg.ts`): hairline borders, no
+- **Maps** (`renderChoroplethSvg`, `renderChoroplethStrip`, `renderChoroplethDots` in `chartSvg.ts`): on phones the ranked
+  strip becomes one row of dots on the colour scale with the three highest and two lowest named. Hairline borders, no
   shadow, values printed inside regions big enough to hold them, and a ranked strip of every region
   beside the map whose header is the legend, with any pivot (such as replacement) marked.
 - **Stripes**: drawn by the Almanac `stripes` form; rain runs dry haldi to wet hara, temperature
@@ -143,11 +163,11 @@ Other rules the renderers keep:
 - X ticks are evenly spaced in time: round years at the finest step that fits, months on the calendar step,
   financial years stepped back from the latest. A crowded axis is thinned to every second (third...) tick from the
   last, never by dropping the one tick that collided.
-- A line the card names (title, subtitle or takeaway), or the other side of India against one place, is never drawn
-  as context: full ink, at least 2 units. No data line is under 1.75 units.
-- Phone y labels sit flush left above their gridlines. One a line or dot runs through slides right along its own
-  gridline (at most 24 units; the base label on the heavy line across the left half); failing that it is left out.
-  The top label, which carries the unit, always stays.
+- A line the card names (title or takeaway; the subtitle only lists what is plotted), or the other side of India against
+  one place, is never drawn as context: full ink, at least 2 units. Only context lines are under 1.75 units.
+- Phone y labels sit in a gutter as narrow as the bare labels, right-aligned beside their gridlines, as on desktop;
+  the unit sits in its own row above the plot. (They once sat above the gridlines and slid into the plot, or were left
+  out, where a line ran past.)
 - No label sits across a line or a dot anywhere in the plot: early line ends, reference names, band and mark labels
   and scatter names are each tried in several places, and a name with nowhere clear goes to the key or the tooltip.
 - Phone text is at least 11 px as rendered on a 412 px phone (the line-chart box is drawn at 384 and shown at about

@@ -97,7 +97,9 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   // Solid, close-set bars: a bar is a quantity to compare, not a rule under a label.
   const labSize = phone ? 13 : 13.5, valSize = phone ? 12.5 : 13.5, few = rows.length <= 6;
   // On a phone, labels go above their bars only when they are too long to sit beside them.
-  const m = phone && Math.max(...rows.map((r) => labelTextW(r.label, labSize))) > W * 0.36;
+  // Beside them whenever the longest fits in two fifths of the width: 38 cities set above their
+  // bars ran three screens because one name (Thiruvananthapuram) was a few units too long.
+  const m = phone && Math.max(...rows.map((r) => labelTextW(r.label, labSize))) > W * 0.4;
   const barH = m ? (few ? 12 : 9) : phone ? (few ? 15 : 12) : few ? 18 : rows.length <= 12 ? 15 : 12;
   const vals = rows.map((r) => r.value), lo = Math.min(0, ...vals);
   let hi = Math.max(0, ...vals);
@@ -141,7 +143,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   // shrinks to the widest line actually set: sized before wrapping, "Chronic respiratory"
   // kept the whole column at its one-line width and left every label 17 px in from the edge.
   // A label that fits stays on one line ("Scheduled / Caste" wrapped needlessly once).
-  const capW = Math.min(W * 0.36, Math.ceil(longest) + 14);
+  const capW = Math.min(W * (phone ? 0.42 : 0.36), Math.ceil(longest) + 14);
   const wrapAt = (s: string, chars: number) => wrap(s, Math.max(6, Math.floor(chars * (s.length * labSize * 0.54) / Math.max(1, labelTextW(s, labSize)))), 2);
   const linesFor = (s: string) => (labelTextW(s, labSize) <= capW - 12 ? [s] : wrapAt(s, Math.floor((capW - 16) / (labSize * 0.58))));
   const labelW = m ? 0 : Math.min(capW, Math.ceil(Math.max(...rows.map((r) => Math.max(...linesFor(r.label).map((l) => labelTextW(l, labSize, isNational(r.label) ? 600 : 400)))))) + 14);
@@ -368,7 +370,8 @@ function pyramidSvg(v: PyramidVisual, o: { width: number; mobile: boolean }) {
     const wm = (r.male / max) * half, wf = (r.female / max) * half;
     b += `<g class="mk"${tip(`Age ${r.age}`, `Men ${fmt(r.male, v.unit)}`, `Women ${fmt(r.female, v.unit)}`)} tabindex="0"><rect x="0" y="${r1(y)}" width="${W}" height="${rowH}" fill="transparent"/>`;
     b += `<rect x="${r1(ml - wm)}" y="${r1(y + gap / 2)}" width="${r1(Math.max(0.8, wm))}" height="${r1(bh)}" fill="var(--c)"/>`;
-    b += `<rect x="${r1(fr)}" y="${r1(y + gap / 2)}" width="${r1(Math.max(0.8, wf))}" height="${r1(bh)}" fill="${INK.ink2}"/>`;
+    // Two sides of equal standing, two inks of equal weight: near-black women outweighed the men.
+    b += `<rect x="${r1(fr)}" y="${r1(y + gap / 2)}" width="${r1(Math.max(0.8, wf))}" height="${r1(bh)}" fill="var(--s3)"/>`;
     b += txt(cx, y + rowH / 2 + 4, r.age, { size: m ? 11 : 12, fill: INK.ink, anchor: "middle" });
     const showVal = !m || i % 2 === 0 || i === rows.length - 1;
     if (showVal) {
