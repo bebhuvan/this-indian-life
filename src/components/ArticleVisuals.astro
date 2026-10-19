@@ -885,12 +885,23 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
   const plotB = height - pad.b, plotR = width - pad.r;
   let b = "";
   let lastBandLabel = -Infinity;
-  for (const band of lineBandRects(visual, g)) {
+  const bands = lineBandRects(visual, g);
+  // A few single-year marks ("1991: India opens up") are drawn as annotations: a hairline at
+  // the year and a short label beside it. Many marks (El Nino years) stay as pale shaded bands.
+  const asNotes = bands.length <= 3;
+  for (const band of bands) {
     const showLabel = band.label && band.x - lastBandLabel > (m ? 70 : 110);
     if (showLabel) lastBandLabel = band.x;
+    if (asNotes) {
+      const bx = band.x + band.w / 2, right = bx > (pad.l + plotR) / 2 + (plotR - pad.l) * 0.25;
+      b += `<line x1="${svgCoord(bx)}" y1="${pad.t}" x2="${svgCoord(bx)}" y2="${svgCoord(plotB)}" stroke="#121212" stroke-width="0.75" stroke-dasharray="2 3">${band.label ? `<title>${band.label}</title>` : ""}</line>`;
+      if (showLabel) b += almHalo(right ? bx - 6 : bx + 6, pad.t + 12, band.label!, { size: m ? 10.5 : 12, fill: "#4f4f4f", anchor: right ? "end" : "start" });
+      continue;
+    }
     b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
     if (showLabel) b += almTxt(band.x + band.w / 2, pad.t + 12, band.label!, { size: m ? 10.5 : 11.5, fill: "#a63d24", anchor: "middle" });
   }
+  void asNotes;
   if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
   g.ticks.forEach((tick, ti) => {
     const yy = g.y(tick), base = g.ticks.includes(0) ? tick === 0 : ti === 0;

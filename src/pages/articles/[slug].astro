@@ -143,6 +143,7 @@ const railItems = annotatedSections
       </nav>
     ) : null}
 
+    <div class={`opening${!(pullQuote as { generic?: boolean }).generic ? " has-point" : ""}`}>
     <section class="article-hero single">
       <div class="explain-card standard">
         <p class="lbl">Short answer</p>
@@ -160,6 +161,7 @@ const railItems = annotatedSections
       </div>
     </section>
     ) : null}
+    </div>
 
     {page.primer ? <ConceptPrimer primer={page.primer} domain={page.domain} /> : null}
 

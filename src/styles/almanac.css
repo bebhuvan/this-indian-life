@@ -432,3 +432,20 @@ svg[data-hover]{touch-action:pan-y}
 .story-viz .viz-main .viz-head p{font-size:.98rem}
 .story-viz .viz-main .cn-take{font-size:clamp(1.25rem,1.9vw,1.45rem)}
 .viz-head h2{text-wrap:balance}
+
+/* ---------- the opening: one band, not a stack of summaries ---------- */
+/* On wide screens "the point" sits in the left margin beside the short answer, set as a
+   figure with its line beneath, so the first chart arrives a screen sooner. */
+.opening{max-width:1040px;margin:34px auto 0}
+.opening .article-hero.single{margin-top:0}
+@media(min-width:1100px){
+  .opening.has-point{display:grid;grid-template-columns:minmax(0,1fr) 660px minmax(0,1fr);column-gap:36px;align-items:start}
+  .opening.has-point .article-hero.single{grid-column:2;grid-row:1;max-width:none;margin:0}
+  .opening.has-point .data-pull{grid-column:1;grid-row:1;margin:0;max-width:none;padding-top:18px;border-top:1px solid var(--ink)}
+  .opening.has-point .data-pull div{display:block}
+  .opening.has-point .data-pull span{display:block;font-size:clamp(3rem,4.4vw,4.1rem);line-height:.9;margin:10px 0 14px}
+  .opening.has-point .data-pull p:not(.lbl){font-size:1.02rem;line-height:1.45;color:#2e2e2e;padding:0}
+}
+.article-story-section{padding-top:24px}
+.story-body>h2.story-title{margin-top:40px;font-size:clamp(1.6rem,2.6vw,2.05rem)}
+.story-body>.standfirst{font-size:1.18rem;color:#4a4a4a;margin-bottom:34px}
