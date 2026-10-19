@@ -995,7 +995,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     if (labelled.length >= 2 && labelled.some((p: any) => Math.abs(p.labelY - p.latestY) > (mobile ? 9 : 24))) {
       const keyed = lineGeometry(visual, isLead, twoUp, bounds, mobile, forceEndLabelPad, true, true);
       const order = geom.paths.map((p: any, i: number) => ({ i, y: p.latest ? p.latestY : Infinity })).sort((a, b) => a.y - b.y).map((o) => o.i);
-      return { ...keyed, keyValues: geom.paths.map((p: any) => String(p.endLabelRaw || "").replace(/^-/, "−")), keyOrder: order };
+      return { ...keyed, keyValues: geom.paths.map((p: any) => String((/\.\d{3,}/.test(String(p.endLabelText)) ? p.endLabelRaw : p.endLabelText) || "").replace(/^-/, "−")), keyOrder: order };
     }
   }
   return geom;
