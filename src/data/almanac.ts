@@ -65,12 +65,21 @@ const GLYPH_W: Record<400 | 600 | 700, number[]> = {
   600: [620,380,590,590,610,600,610,550,600,610,580,610,570,610,590,360,570,590,270,290,590,280,900,600,610,610,610,440,530,360,600,580,850,590,590,530,720,670,710,720,600,580,730,740,400,570,700,570,910,750,770,650,770,670,630,670,700,700,980,700,650,620],
   700: [630,400,600,600,630,620,620,570,610,620,600,630,580,630,600,370,580,600,280,300,610,300,910,620,610,630,630,460,540,380,620,600,880,610,610,540,740,680,720,740,610,580,730,750,430,590,730,580,940,770,770,670,770,690,650,690,720,710,1010,740,660,630],
 };
+/** Advances of the punctuation labels carry, measured the same way (regular, semibold, bold):
+ *  brackets, ampersands and slashes were counted as a full-stop or a 0.6 em letter. */
+const PUNCT: Record<string, [number, number, number]> = {
+  "(": [0.309, 0.333, 0.348], ")": [0.309, 0.333, 0.348], "[": [0.31, 0.342, 0.362], "]": [0.31, 0.342, 0.362],
+  "&": [0.686, 0.691, 0.695], "/": [0.444, 0.466, 0.48], "+": [0.635, 0.635, 0.635], "×": [0.635, 0.635, 0.635],
+  "?": [0.529, 0.551, 0.564], "!": [0.24, 0.265, 0.281], "'": [0.199, 0.213, 0.221], "\u2019": [0.265, 0.282, 0.292],
+  "\u2018": [0.265, 0.282, 0.292], "\u201c": [0.463, 0.506, 0.533], "\u201d": [0.463, 0.506, 0.533], "\"": [0.353, 0.382, 0.4],
+  "°": [0.434, 0.451, 0.462], "→": [1, 1, 1], "#": [0.654, 0.694, 0.719], "*": [0.443, 0.42, 0.406], "é": [0.573, 0.587, 0.597],
+};
 export function textWidth(s: string, size: number, weight = 400) {
   const wt = weight >= 700 ? 700 : weight >= 600 ? 600 : 400, a = ADV[wt], g = GLYPH_W[wt];
   let w = 0;
   for (const ch of String(s)) {
     const k = GLYPHS.indexOf(ch);
-    w += k >= 0 ? g[k] / 1000 : ch === " " ? a.space
+    w += k >= 0 ? g[k] / 1000 : PUNCT[ch] ? PUNCT[ch][wt === 400 ? 0 : wt === 600 ? 1 : 2] : ch === " " ? a.space
       : /[.,:;'()·|]/.test(ch) ? a.narrow : ch === "%" ? a.pct : /[₹$€£]/.test(ch) ? a.cur : ch === "-" ? a.dash : ch === "−" ? a.minus : ch === "\u2014" ? 0.92 : ch === "\u2013" ? 0.55 : 0.6;
   }
   return w * size;
@@ -106,6 +115,16 @@ export function rowLabel(x: number, cy: number, s: string, maxW: number, o: Text
  *  scaled; diagonal lines (a fit) keep their anti-aliasing. */
 export const line = (x1: number, y1: number, x2: number, y2: number, c: string = INK.grid, w = 1, dash?: string) =>
   `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}" stroke="${c}" stroke-width="${w}"${dash ? ` stroke-dasharray="${dash}"` : ""}${r1(x1) === r1(x2) || r1(y1) === r1(y2) ? ` shape-rendering="crispEdges"` : ""}/>`;
+/** Whether any polyline (screen-space vertices) passes through a box [x0, y0, x1, y1]. */
+export function boxCrossesPolys(bx: [number, number, number, number], polys: Array<Array<[number, number]>>) {
+  for (const pts of polys) for (let i = 1; i < pts.length; i++) {
+    const [x1, y1] = pts[i - 1], [x2, y2] = pts[i];
+    if (Math.max(x1, x2) < bx[0] || Math.min(x1, x2) > bx[2] || Math.max(y1, y2) < bx[1] || Math.min(y1, y2) > bx[3]) continue;
+    const n = Math.max(2, Math.ceil(Math.hypot(x2 - x1, y2 - y1) / 1.5));
+    for (let k = 0; k <= n; k++) { const px = x1 + ((x2 - x1) * k) / n, py = y1 + ((y2 - y1) * k) / n; if (px > bx[0] && px < bx[2] && py > bx[1] && py < bx[3]) return true; }
+  }
+  return false;
+}
 export const dot = (cx: number, cy: number, r: number, fill: string, ring = 1.5) =>
   `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r}" fill="${fill}" stroke="#ffffff" stroke-width="${ring}"/>`;
 export const svg = (w: number, h: number, body: string, label: string, cls = "viz-svg alm") =>
@@ -178,7 +197,7 @@ export function scaleLegend(x0: number, y0: number, w: number, stops: Stops, opt
   for (const v of opts.ticks) {
     const mark = opts.mark && Math.abs(v - opts.mark.value) < 1e-9, x = pos(v);
     b += line(x, mark ? y0 - 3 : y0 + 7, x, y0 + 11, mark ? INK.ink : INK.ink3, mark ? 1 : 0.75);
-    b += txt(x, y0 + 23, mark ? `${fmt(v)} ${opts.mark!.label}` : fmt(v), { size: 10.5, fill: mark ? INK.ink : INK.ink2, anchor: "middle", weight: mark ? 600 : undefined });
+    b += txt(x, y0 + 23, mark ? `${fmt(v)} ${opts.mark!.label}` : fmt(v), { size: 11, fill: mark ? INK.ink : INK.ink2, anchor: "middle", weight: mark ? 600 : undefined });
   }
   return b;
 }
@@ -336,10 +355,16 @@ export function stripes(points: Array<{ year: number; value: number; flag?: bool
 /** A small colour key for a continuous scale, labelled at chosen values. */
 export function scaleKey(stops: Stops, ticks: Array<[number, string]>, width = 220) {
   // Inset the bar so end labels centred on the extremes stay inside the box.
-  const col = ramp(stops), lo = stops[0][0], hi = stops[stops.length - 1][0], pad = 22, bw = width - 2 * pad;
+  // The bar starts at the figure's left edge, on the title's edge; a label at either end that
+  // would run past the bar is anchored inward instead (an inset bar left the key 9 px in).
+  const col = ramp(stops), lo = stops[0][0], hi = stops[stops.length - 1][0], pad = 0, bw = width - 2 * pad;
   let b = "";
   for (let i = 0; i < 60; i++) { const v = lo + ((hi - lo) * (i + 0.5)) / 60; b += `<rect x="${r1(pad + (i * bw) / 60)}" y="0" width="${r1(bw / 60 + 0.5)}" height="7" fill="${col(v)}"/>`; }
-  for (const [v, s] of ticks) { const x = pad + ((v - lo) / (hi - lo)) * bw; b += line(x, 7, x, 11, INK.ink3, 0.75) + txt(x, 24, s, { size: 11.5, fill: INK.ink2, anchor: "middle" }); }
+  for (const [v, s] of ticks) {
+    const x = pad + ((v - lo) / (hi - lo)) * bw, w = textWidth(s, 11.5);
+    const anchor = x - w / 2 < 0 ? "start" : x + w / 2 > width ? "end" : "middle";
+    b += line(x, 7, x, 11, INK.ink3, 0.75) + txt(anchor === "start" ? Math.max(0, x - 2) : anchor === "end" ? Math.min(width, x + 2) : x, 24, s, { size: 11.5, fill: INK.ink2, anchor });
+  }
   return svg(width, 28, b, "Colour key", "alm-key");
 }
 
@@ -382,6 +407,9 @@ export function scatterFit(pts: ScatterPoint[], o: {
   if (o.under) b += o.under(x, y);
   if (o.refY) b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3");
   let stats: { r: number; n: number; slope: number } | null = null;
+  // Lines a label must not cross: the fit and the reference line.
+  const segs: Array<[number, number, number, number]> = [];
+  if (o.refY) segs.push([ml, y(o.refY.value), W - mr, y(o.refY.value)]);
   if (o.fit !== false && pts.length > 3) {
     // Unweighted least squares: each unit counts once. The band is the 95% interval
     // for the fitted mean, drawn only across the observed range.
@@ -395,39 +423,55 @@ export function scatterFit(pts: ScatterPoint[], o: {
     b += `<defs><clipPath id="${cid}"><rect x="${ml}" y="${mt}" width="${W - ml - mr}" height="${r1(y(o.y[0]) - mt)}"/></clipPath></defs>`;
     b += `<path d="${pathOf(band(1), x, y)}${pathOf(band(-1).reverse(), x, y).replace("M", "L")}Z" fill="${INK.ink}" fill-opacity="0.055" clip-path="url(#${cid})"/>`;
     b += `<g clip-path="url(#${cid})">${line(x(x0), y(ic + sl * x0), x(x1), y(ic + sl * x1), INK.ink2, 1)}</g>`;
+    segs.push([x(x0), y(ic + sl * x0), x(x1), y(ic + sl * x1)]);
     stats = { r: sxy / Math.sqrt(sxx * syy), n, slope: sl };
   }
   const tipA = (p: ScatterPoint) => (o.tipOf ? o.tipOf(p) : [p.label, `${o.xTitle}: ${xf(p.x)}`, `${o.yTitle}: ${yf(p.y)}`]).join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   for (const p of [...pts].sort((a, c) => (c.size ?? 0) - (a.size ?? 0)))
     b += `<circle class="mk" cx="${r1(x(p.x))}" cy="${r1(y(p.y))}" r="${r1(rad(p.size))}" fill="${o.colorOf ? o.colorOf(p) : p.hot ? INK.sindoor : INK.neel}" fill-opacity="${sized ? 0.82 : 1}" stroke="#ffffff" stroke-width="1.25" data-tip="${tipA(p)}"/>`;
-  if (o.refY) b += halo(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" });
-  // Labels: each named point tries its preferred side, then the other three, and takes the
-  // first that touches no dot, no other label, the reference label or the size key. The
-  // biggest points are placed first. On a phone a label with no free side is left to the
-  // tooltip; on the desk it keeps its preferred side.
+  // The reference line is named at its right end, or further left where a dot sits there.
+  let refAt: [number, number] | null = null;
+  if (o.refY) {
+    const rw = textWidth(o.refY.label, 11.5), ry = y(o.refY.value);
+    for (let xr = W - mr; xr - rw >= ml && !refAt; xr -= 8) for (const ty of [ry - 7, ry + 15]) {
+      const bx: [number, number, number, number] = [xr - rw - 2, ty - 11, xr, ty + 3];
+      if (!refAt && !pts.some((p) => { const cx = x(p.x), cy = y(p.y), r = rad(p.size); return cx + r > bx[0] && cx - r < bx[2] && cy + r > bx[1] && cy - r < bx[3]; })) refAt = [xr, ty];
+    }
+    refAt ??= [W - mr, ry - 7];
+    b += halo(refAt[0], refAt[1], o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" });
+  }
+  // Labels: each named point tries its preferred side, then the other three, then the same
+  // sides a step further out, and takes the first that touches no dot, no line (the fit, the
+  // reference), no other label, the reference label or the size key. The biggest points are
+  // placed first. A label with nowhere clear is left to the tooltip.
   const fs = sm ? 11 : 12;
-  const textW = (t: string, size: number) => t.length * size * 0.56;
+  const textW = (t: string, size: number) => textWidth(t, size);
+  // Whether a segment passes through a box (sampled finely enough for a text line).
+  const crosses = (bx: [number, number, number, number]) => segs.some(([x1, y1, x2, y2]) => {
+    const n = Math.max(2, Math.ceil(Math.hypot(x2 - x1, y2 - y1) / 2));
+    for (let i = 0; i <= n; i++) { const px = x1 + ((x2 - x1) * i) / n, py = y1 + ((y2 - y1) * i) / n; if (px > bx[0] && px < bx[2] && py > bx[1] + 1 && py < bx[3] - 1) return true; }
+    return false;
+  });
   type Box = [number, number, number, number];
   const hit = (a: Box, c: Box) => a[0] < c[2] && a[2] > c[0] && a[1] < c[3] && a[3] > c[1];
   const blocked: Box[] = [];
-  if (o.refY) { const ty = y(o.refY.value) - 7, w = textW(o.refY.label, 11.5); blocked.push([W - mr - w - 2, ty - 11, W - mr, ty + 3]); }
+  if (o.refY && refAt) { const w = textW(o.refY.label, 11.5); blocked.push([refAt[0] - w - 2, refAt[1] - 11, refAt[0], refAt[1] + 3]); }
   if (sized && o.sizeKey && !keyBelow) blocked.push([W - 262, mt - 18, W, mt + 34 + rMax + 22]);
   const dots = pts.map((p) => ({ p, cx: x(p.x), cy: y(p.y), r: rad(p.size) }));
   const named = dots.filter((d) => d.p.place).sort((a, c) => (c.p.size ?? 0) - (a.p.size ?? 0) || Number(!!c.p.hot) - Number(!!a.p.hot));
   for (const d of named) {
-    const text = sm ? d.p.short ?? d.p.label : d.p.label, w = textW(text, fs), rr = d.r + 4;
+    const text = sm ? d.p.short ?? d.p.label : d.p.label, w = textW(text, fs);
     const pref = d.p.place as "r" | "l" | "t" | "b";
     const order = [pref, ...(["r", "l", "t", "b"] as const).filter((k) => k !== pref)];
-    const at = (k: "r" | "l" | "t" | "b") => {
+    const at = (k: "r" | "l" | "t" | "b", rr: number) => {
       const [tx, ty, an] = k === "r" ? [d.cx + rr, d.cy + 4, "start"] : k === "l" ? [d.cx - rr, d.cy + 4, "end"] : k === "t" ? [d.cx, d.cy - rr - 1, "middle"] : [d.cx, d.cy + rr + 10, "middle"];
       const x0 = an === "start" ? tx : an === "end" ? tx - w : tx - w / 2;
       return { tx, ty, an, box: [x0 - 1, ty - fs + 2, x0 + w + 1, ty + 3] as Box };
     };
     const free = (bx: Box) => bx[0] >= 0 && bx[2] <= W && bx[1] >= mt - 14 && bx[3] <= y(o.y[0]) - 2
-      && !blocked.some((c) => hit(bx, c))
-      && !dots.some((q) => q !== d && hit(bx, [q.cx - q.r, q.cy - q.r, q.cx + q.r, q.cy + q.r]));
-    // Desk fallback: a side that may graze a dot but never another label.
-    const pick = order.map(at).find((c) => free(c.box)) ?? (sm ? null : order.map(at).find((c) => c.box[0] >= 0 && c.box[2] <= W && !blocked.some((q) => hit(c.box, q))) ?? null);
+      && !blocked.some((c) => hit(bx, c)) && !crosses(bx)
+      && !dots.some((q) => hit(bx, [q.cx - q.r, q.cy - q.r, q.cx + q.r, q.cy + q.r]));
+    const pick = [4, 9, 15].flatMap((gap) => order.map((k) => at(k, d.r + gap))).find((c) => free(c.box)) ?? null;
     if (!pick) continue;
     blocked.push(pick.box);
     b += halo(pick.tx, pick.ty, text, { size: fs, fill: INK.ink, anchor: pick.an as TextOpts["anchor"] });
@@ -435,11 +479,11 @@ export function scatterFit(pts: ScatterPoint[], o: {
   if (sized && o.sizeKey) {
     const kx = keyBelow ? ml : sm ? W - 150 : W - 250, ky = keyBelow ? y(o.y[0]) + 92 + (xT.length - 1) * 14 : mt + 34;
     b += txt(kx, ky - 30, o.sizeTitle ?? "Size", { size: 11.5, fill: INK.ink2, weight: 500 });
-    const offs = sm ? [6, 48, 108] : [8, 50, 116];
+    const offs = sm ? [6, 48, 108] : [8, 54, 122];
     o.sizeKey.forEach(([v, s], i) => {
       const rr = Math.max(sm ? 2.5 : 3.5, rMax * Math.sqrt(v / pMax)), cx = kx + (offs[i] ?? i * 50);
       b += `<circle cx="${r1(cx)}" cy="${r1(ky + rMax - rr)}" r="${r1(rr)}" fill="none" stroke="${INK.ink3}" stroke-width="1"/>`;
-      b += txt(cx, ky + rMax + 16, s, { size: 10.5, fill: INK.ink2, anchor: "middle" });
+      b += txt(cx, ky + rMax + 16, s, { size: sm ? 10.5 : 11.5, fill: INK.ink2, anchor: "middle" });
     });
   }
   return { svg: svg(W, H, b, o.label), stats };
@@ -549,9 +593,12 @@ export function parade(series: ParadeSeries[], o: {
   note?: { at: number; value: number; title: string; body: string; y: number }; bare?: boolean; label: string;
 }) {
   const W = o.width ?? 1040, H = o.height ?? 400, sm = W < 700, bare = !!o.bare;
-  const ml = bare ? 0 : 54, mr = bare ? 0 : sm ? 70 : 96, mt = bare ? 4 : 22, mb = bare ? 1 : 46;
-  const x = scale(0, 100, ml, W - mr), y = scale(0, o.yMax, H - mb, mt);
   const yf = o.yFmt ?? ((v: number) => `₹${fmtIN(v)}`);
+  // Gutters as wide as the labels they hold: the y labels at the left, each series' name and
+  // last value at the right (fixed gutters left 30 to 45 px of blank paper).
+  const endW = Math.max(...series.map((s) => Math.max(textWidth(s.label, 12.5, 600), textWidth(yf(s.values[s.values.length - 1]), 11.5))));
+  const ml = bare ? 0 : Math.ceil(Math.max(...o.yTicks.map((v) => textWidth(yf(v), 11.5)))) + 10, mr = bare ? 0 : Math.ceil(endW) + 14, mt = bare ? 4 : 22, mb = bare ? 1 : 46;
+  const x = scale(0, 100, ml, W - mr), y = scale(0, o.yMax, H - mb, mt);
   const step = (vals: number[]) => { let c = 0, d = ""; vals.forEach((v, i) => { d += `${i ? "L" : "M"}${r1(x(c))} ${r1(y(v))}H${r1(x(c + o.widths[i]))}`; c += o.widths[i]; }); return d; };
   let b = "";
   if (!bare) for (const v of o.yTicks) { b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
@@ -647,9 +694,11 @@ export function sensitivity(curves: Curve[], o: {
   highlight?: { curve: string; at: [number, number]; title: string; body: [string, string] }; xTitle?: string; width?: number; height?: number; bare?: boolean; label: string;
 }) {
   const W = o.width ?? 1040, H = o.height ?? 380, sm = W < 700, bare = !!o.bare;
-  const ml = bare ? 0 : 34, mr = bare ? 0 : sm ? 66 : 84, mt = bare ? 4 : 14, mb = bare ? 2 : 46;
-  const x = scale(o.x[0], o.x[1], ml, W - mr), y = scale(0, 100, H - mb, mt);
   const xf = o.xFmt ?? ((v: number) => `₹${fmtIN(v)}`), yf = o.yFmt ?? ((v: number) => `${v}%`);
+  // Gutters sized to the y labels and the curve names they hold.
+  const ml = bare ? 0 : Math.ceil(Math.max(...o.yTicks.map((v) => textWidth(v ? yf(v) : "0", 11.5)))) + 10;
+  const mr = bare ? 0 : Math.ceil(Math.max(...curves.map((c) => textWidth(c.label, 12.5, 600)))) + 14, mt = bare ? 4 : 14, mb = bare ? 2 : 46;
+  const x = scale(o.x[0], o.x[1], ml, W - mr), y = scale(0, 100, H - mb, mt);
   let b = o.band ? `<rect x="${r1(x(o.band[0]))}" y="${mt}" width="${r1(x(o.band[1]) - x(o.band[0]))}" height="${r1(y(0) - mt)}" fill="${INK.band}"/>` : "";
   if (!bare) {
     for (const v of o.yTicks) { if (v) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, v ? yf(v) : "0", AX); }
@@ -664,7 +713,15 @@ export function sensitivity(curves: Curve[], o: {
     const c = curves.find((q) => q.label === o.highlight!.curve)!, at = o.highlight.at;
     const v0 = c.points.find((p) => p[0] === at[0])![1], v1 = c.points.find((p) => p[0] === at[1])![1];
     b += dot(x(at[0]), y(v0), 4, INK.ink) + dot(x(at[1]), y(v1), 4, INK.ink);
-    b += txt(x(at[1]) + 10, y(v1) + 18, `${Math.round(v1)}%`, { size: 12.5, fill: INK.ink, weight: 600 }) + txt(x(at[0]) + 8, y(v0) + 18, `${Math.round(v0)}%`, { size: 12.5, fill: INK.ink, weight: 600 });
+    // Each value beside its dot on the first side no curve runs through (below right first).
+    const polys = curves.map((q) => q.points.map(([a, v]) => [x(a), y(v)] as [number, number]));
+    const valueAt = (cx: number, cy: number, t: string) => {
+      const w = textWidth(t, 12.5, 600);
+      const spots: Array<[number, number, "start" | "end"]> = [[cx + 8, cy + 18, "start"], [cx - 8, cy - 9, "end"], [cx + 8, cy - 9, "start"], [cx - 8, cy + 18, "end"], [cx + 12, cy + 4, "start"], [cx - 12, cy + 4, "end"]];
+      const ok = spots.find(([tx, ty, an]) => { const x0 = an === "start" ? tx : tx - w; return x0 >= 0 && x0 + w <= W && !boxCrossesPolys([x0 - 1, ty - 10, x0 + w + 1, ty + 1], polys); }) ?? spots[0];
+      return txt(ok[0], ok[1], t, { size: 12.5, fill: INK.ink, weight: 600, anchor: ok[2] });
+    };
+    b += valueAt(x(at[1]), y(v1), `${Math.round(v1)}%`) + valueAt(x(at[0]), y(v0), `${Math.round(v0)}%`);
     const ax = sm ? x((o.x[0] + o.x[1]) / 2) : x(at[0]) - 10, ay = sm ? Math.min(y(13), y(0) - 42) : y(96), an = sm ? "start" : "end";
     // The note's three lines end clear of the x axis, with a halo where they cross a curve.
     b += halo(ax, ay, o.highlight.title, { size: 12.5, fill: INK.ink, weight: 600, anchor: an }) + halo(ax, ay + 16, o.highlight.body[0], { size: 12.5, fill: INK.ink2, anchor: an }) + halo(ax, ay + 32, o.highlight.body[1], { size: 12.5, fill: INK.ink2, anchor: an });

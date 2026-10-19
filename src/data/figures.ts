@@ -121,13 +121,19 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const wrapAt = (s: string, chars: number) => wrap(s, Math.max(6, Math.floor(chars * (s.length * labSize * 0.54) / Math.max(1, labelTextW(s, labSize)))), 2);
   const linesFor = (s: string) => (labelTextW(s, labSize) <= capW - 12 ? [s] : wrapAt(s, Math.floor((capW - 16) / (labSize * 0.58))));
   const labelW = m ? 0 : Math.min(capW, Math.ceil(Math.max(...rows.map((r) => Math.max(...linesFor(r.label).map((l) => labelTextW(l, labSize, isNational(r.label) ? 600 : 400)))))) + 14);
-  const x0 = labelW + negValW, x1 = W - posValW - 2;
+  const x0 = labelW + negValW;
+  let x1 = W - posValW - 2;
   let xs: (v: number) => number;
   let logTicks: number[] = [];
   if (o.log) {
     const pos = vals.filter((v) => v > 0), lmin = Math.log10(Math.min(...pos)), lmax = Math.log10(Math.max(...pos));
     const a = Math.floor(lmin), b = Math.ceil(lmax);
     for (let e = a; e <= b; e++) logTicks.push(10 ** e);
+    // The scale runs to the next power of ten, past the longest bar, so the room reserved for
+    // values beyond it went unused (30 px of blank paper on a phone). The last gridline goes to
+    // the edge, as far as every value still fits after its bar.
+    const fr = (v: number) => (Math.log10(Math.max(v, 10 ** a)) - a) / Math.max(1e-9, b - a);
+    x1 = Math.min(W - 1, ...rows.filter((r) => r.value > 0 && fr(r.value) > 0).map((r) => x0 + (W - 8 - textWidth(rowTxt(r), valSize, 600) - x0) / fr(r.value)));
     xs = (v) => x0 + ((Math.log10(Math.max(v, 10 ** a)) - a) / Math.max(1e-9, b - a)) * (x1 - x0);
   } else {
     xs = (v) => x0 + ((v - lo) / Math.max(1e-9, hi - lo)) * (x1 - x0);
@@ -313,9 +319,13 @@ function pyramidSvg(v: PyramidVisual, o: { width: number; mobile: boolean }) {
   const n = v.rows.length, rowH = m ? 15 : 21, gap = m ? 2 : 4, top = 30;
   const max = Math.max(...v.rows.flatMap((r) => [r.male, r.female]), 1);
   const pv = (x: number) => (m ? fmt(x, v.unit).replace(" crore", " cr") : fmt(x, v.unit));
-  // The value gutter is as wide as the longest value printed, not a fixed allowance.
-  const valW = Math.max(...v.rows.flatMap((r) => [r.male, r.female]).map((x) => textW(pv(x), valSize))) + 10;
-  const half = (W - mid) / 2 - valW;
+  // Each side is as long as lets every printed value end at the figure's edge: the row whose bar
+  // and value together run furthest sets the scale (a gutter for the longest value, wherever
+  // its bar ended, left 33 px of blank paper beside a phone pyramid).
+  const ordered = /^0|^0-4/.test(v.rows[0]?.age ?? "") ? [...v.rows].reverse() : v.rows;
+  const shown = ordered.filter((_, i) => !m || i % 2 === 0 || i === ordered.length - 1);
+  const room = (W - mid) / 2 - 6;
+  const half = Math.min(room, ...shown.flatMap((r) => [r.male, r.female].filter((x) => x > 0).map((x) => (room - textWidth(pv(x), valSize)) / (x / max))));
   const cx = W / 2;
   const ml = cx - mid / 2, fr = cx + mid / 2;
   let b = txt(ml, 14, "Men", { size: m ? 12 : 13, fill: INK.ink, weight: 600, anchor: "end" }) + txt(fr, 14, "Women", { size: m ? 12 : 13, fill: INK.ink, weight: 600 });

@@ -185,7 +185,7 @@ export function renderChoroplethStrip(visual: ChoroplethVisual) {
   const pivot = visual.divergeAt !== undefined && visual.divergeAt > visual.min && visual.divergeAt < visual.max ? visual.divergeAt : null;
   if (pivot !== null) {
     b += `<line x1="${svgCoord(x(pivot))}" y1="6" x2="${svgCoord(x(pivot))}" y2="${top + rows.length * rowH}" stroke="#121212" stroke-width="0.8" stroke-dasharray="2 2"/>`;
-    b += `<text x="${svgCoord(x(pivot))}" y="4" ${F} font-size="10.5" font-weight="600" fill="#121212" text-anchor="middle">${visual.pivotLabel && /\d/.test(visual.pivotLabel) ? escapeHtml(visual.pivotLabel) : `${escapeHtml(choroplethValueLabel(visual, pivot))}${visual.pivotLabel ? ` ${escapeHtml(visual.pivotLabel)}` : ""}`}</text>`;
+    b += `<text x="${svgCoord(x(pivot))}" y="4" ${F} font-size="11" font-weight="600" fill="#121212" text-anchor="middle">${visual.pivotLabel && /\d/.test(visual.pivotLabel) ? escapeHtml(visual.pivotLabel) : `${escapeHtml(choroplethValueLabel(visual, pivot))}${visual.pivotLabel ? ` ${escapeHtml(visual.pivotLabel)}` : ""}`}</text>`;
   }
   rows.forEach((r, i) => {
     const v = r.value as number, cy = top + i * rowH + rowH / 2;

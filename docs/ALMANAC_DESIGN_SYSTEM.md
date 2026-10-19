@@ -135,8 +135,32 @@ Other rules the renderers keep:
   labels they print (long series names wrap onto two lines), and bar labels that fit their column stay on one line.
 - Horizontal and vertical rules snap to the pixel grid (crispEdges). White halos, dot rings and cut gaps follow
   the page ground (`--bg`).
+- One left edge: the title, subtitle, key, the figure's leftmost text and the note all start on one x. Desktop y
+  labels start on it (the gutter is the widest label plus the gap); bar labels and keys are flush left.
+- Gutters are sized to the labels as printed: after `harmoniseDecimals`, after `typeset` (a minus is wider than the
+  hyphen it replaces), at the size drawn, bold where the line is emphasised. A right gutter is the gap to the label,
+  the label and a unit; nothing more.
+- X ticks are evenly spaced in time: round years at the finest step that fits, months on the calendar step,
+  financial years stepped back from the latest. A crowded axis is thinned to every second (third...) tick from the
+  last, never by dropping the one tick that collided.
+- A line the card names (title, subtitle or takeaway), or the other side of India against one place, is never drawn
+  as context: full ink, at least 2 units. No data line is under 1.75 units.
+- Phone y labels sit flush left above their gridlines. One a line or dot runs through slides right along its own
+  gridline (at most 24 units; the base label on the heavy line across the left half); failing that it is left out.
+  The top label, which carries the unit, always stays.
+- No label sits across a line or a dot anywhere in the plot: early line ends, reference names, band and mark labels
+  and scatter names are each tried in several places, and a name with nowhere clear goes to the key or the tooltip.
 - Phone text is at least 11 px as rendered on a 412 px phone (the line-chart box is drawn at 384 and shown at about
   368, so its smallest text is set at 11.5).
+
+## The layout audit
+
+`scripts/audit-charts.mjs` checks every figure on the built site at 412 and 1440 px (run it after `npm run build`;
+see its header for the command). Besides overlaps, spills, small text, ladders and gutters it counts six rules: one
+left edge, the plot uses the width, even ticks, no demoted comparison sides, text on marks, notes align. It exits 1
+on any count above zero. Allowed exceptions are listed in the script and reported apart: centred pyramids, a map
+strip beside its map, the climate theme's padded cards and the library's samples. `--rule=<name>` lists one rule's
+figures. A new layout problem found by eye becomes a rule here, not a one-chart fix.
 
 ## Statistics the figures compute
 
