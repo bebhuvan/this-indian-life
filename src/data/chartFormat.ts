@@ -1,5 +1,9 @@
 // Number formatting and axis scales shared by every figure renderer.
 // Moved out of ArticleVisuals.astro so the SVG renderers in figures.ts can use them.
+
+/** A rupee unit whose values are already in lakh crore ("Rs lakh crore", "INR lakh crore").
+ *  The crore branches would read 40.24 as ₹40.2 crore, a lakh times too small. */
+const LAKH_CRORE = (unit: string) => /lakh[\s-]*cr/i.test(unit) && /inr|₹|rs\b/i.test(unit);
 export function fmt(value: number, unit = "") {
   const abs = Math.abs(value);
   // Zero is special: a bare "0.0" on a rupee/dollar axis reads as a glitch.
@@ -21,6 +25,7 @@ export function fmt(value: number, unit = "") {
   if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
     return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   }
+  if (LAKH_CRORE(unit)) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })} lakh cr`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
     if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh cr`;
     if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
@@ -119,6 +124,7 @@ export function compactBarLabel(value: number, unit = "") {
   if (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit)) return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
   if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
+  if (LAKH_CRORE(unit)) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}L cr`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
     if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}L cr`;
     if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
@@ -154,6 +160,7 @@ export function endLabelInScale(value: number, maxAbs: number, unit = "", compac
   if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
     return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   }
+  if (LAKH_CRORE(unit)) return `₹${n(value, 1)}${w("L cr", "lakh cr")}`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
     if (maxAbs >= 100_000) return `₹${n(value, 100_000)}${w("L cr", "lakh cr")}`;
     if (maxAbs >= 1_000) return `₹${n(value, 1_000)}${bare ? "k" : "k cr"}`;

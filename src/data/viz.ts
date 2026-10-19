@@ -401,10 +401,17 @@ function numericKey(row: Record<string, unknown>) {
   return Object.keys(row).find((key) => !metadata.has(key.toLowerCase()) && numberFrom(row[key]) !== null);
 }
 
+/** Dates in order. Plain numbers (event time: -4 to 4 years around a policy) compare as
+ *  numbers; sorted as text they ran -1, -2, -3, -4, 0, 1 and the line was drawn out of order. */
+function compareDates(a: unknown, b: unknown) {
+  const x = String(a), y = String(b), num = /^-?\d+(\.\d+)?$/;
+  return num.test(x) && num.test(y) ? Number(x) - Number(y) : x.localeCompare(y);
+}
+
 function sortPoints(points: Point[]) {
   return points
     .filter((point) => point.date && Number.isFinite(point.value))
-    .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+    .sort((a, b) => compareDates(a.date, b.date));
 }
 
 function seriesVisual(artifact: Artifact): LineVisual | null {
@@ -1193,7 +1200,7 @@ function multiLineFromTable(indicator: string, title: string, subtitle: string, 
   const lines = order
     .map((key) => {
       const g = grouped.get(key)!;
-      const points = g.points.slice().sort((a, b) => a.date.localeCompare(b.date));
+      const points = g.points.slice().sort((a, b) => compareDates(a.date, b.date));
       if (points.length < 2) return null;
       return {
         label: g.label,

@@ -393,7 +393,13 @@ function changeText(v: ChangeVisual) {
   const facts = (it: ChangeVisual["items"][number]) => {
     const yrs = yearSpan(it.start.date, it.end.date);
     const growth = Math.abs(it.pctChange) >= 1000 && it.start.value > 0 ? `${(it.end.value / it.start.value).toLocaleString("en-IN", { maximumFractionDigits: it.end.value / it.start.value >= 100 ? 0 : 1 })} times the starting value` : `${pct(it.pctChange)} on the starting value`;
-    return [growth, yrs ? `${chg(it.change / yrs)} a year on average` : ""].filter(Boolean).join("  ·  ");
+    // A slow yearly pace keeps two significant figures: rounded to one decimal it printed
+    // "+0 points a year".
+    const perYear = yrs ? it.change / yrs : 0;
+    const pace = !yrs ? "" : isPct && Math.abs(perYear) < 0.95 && perYear !== 0
+      ? `${perYear > 0 ? "+" : "−"}${Math.abs(perYear).toLocaleString("en-IN", { maximumSignificantDigits: 2 })} points a year on average`
+      : `${chg(perYear)} a year on average`;
+    return [growth, pace].filter(Boolean).join("  ·  ");
   };
   return { val, chg, facts };
 }

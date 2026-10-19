@@ -529,6 +529,8 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .story-step .story-viz{width:100%}
 /* Charts the narrative didn't reference: a compact 2-up grid of small cards. */
 .story-viz.story-leftover .viz-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+/* A wide form, or the odd card out, takes the full row (fullRow in ArticleVisuals). */
+.story-viz.story-leftover .viz-grid>.viz-span{grid-column:1/-1}
 @media (max-width:760px){.story-viz.story-leftover .viz-grid{grid-template-columns:1fr}}
 .story-viz{padding:0;border-top:0}
 .story-viz .layers-top{display:none}
