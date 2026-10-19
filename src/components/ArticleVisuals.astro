@@ -648,7 +648,9 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     // Desktop end labels read "Kerala 1.5" (name and value); phones show the value only
     // and name the series in a key below the chart, so the narrow plot stays wide.
     const endOffset = mobile ? 9 : 12;
-    const endFont = mobile ? 12 : 13.5;
+    // A single line's latest value is set as a headline figure, so its gutter is wider.
+    const one = visual.lines.length === 1;
+    const endFont = mobile ? (one ? 14 : 12) : one ? (isLead ? 19 : 17) : 13.5;
     const maxEndLabelLen = Math.max(
       3,
       ...visual.lines.map((line) => {
@@ -892,7 +894,7 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
   if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
   g.ticks.forEach((tick, ti) => {
     const yy = g.y(tick), base = g.ticks.includes(0) ? tick === 0 : ti === 0;
-    b += almLine(pad.l, yy, plotR, yy, base ? "#121212" : "#ededed", base ? 1 : 1);
+    b += almLine(pad.l, yy, plotR, yy, base ? "#121212" : "#efefef", 1);
     b += `<text class="yaxt" x="${svgCoord(pad.l - 10)}" y="${svgCoord(yy + 4)}" text-anchor="end">${yTickLabel(tick, ti, g.ticks, visual.unit, m)}</text>`;
   });
   for (const t of g.axisTicks) {
@@ -908,16 +910,23 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
     }
   }
   // context series first, emphasised series on top
+  // In a comparison of three or more places, India is the protagonist unless the plan
+  // says otherwise: drawn heavier and on top, the others finer and a little quieter.
+  // Each line keeps its own ink, so a colour named in the prose still holds.
+  if (n >= 3 && !g.paths.some((p) => p.emphasis)) {
+    const india = g.paths.find((p) => /^india\b/i.test(String(p.label).trim()));
+    if (india) (india as { emphasis?: boolean }).emphasis = true;
+  }
   const order = g.paths.map((p, i) => ({ p, i })).sort((a, z) => Number(Boolean(a.p.emphasis)) - Number(Boolean(z.p.emphasis)));
   const hasEmph = g.paths.some((p) => p.emphasis);
   for (const { p, i } of order) {
-    const w = single ? (o.isLead ? 2.6 : 2.2) : p.emphasis ? 2.6 : hasEmph || n > 3 ? 1.6 : 2;
+    const w = single ? (o.isLead ? 2.5 : 2.2) : p.emphasis ? 3 : hasEmph ? 1.35 : n > 3 ? 1.6 : 2;
     // A wash under a single series, only when the axis starts at zero so the area means something.
     if (single && g.ticks[0] === 0 && p.points.length > 2) {
-      const gid = `ga-${o.chartId}-${m ? "m" : "d"}`;
-      b += `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p.color}" stop-opacity="0.14"/><stop offset="1" stop-color="${p.color}" stop-opacity="0.01"/></linearGradient></defs><path d="${p.areaD}" fill="url(#${gid})"/>`;
+      // A flat, quiet tint: it says "this much", where a gradient only decorates.
+      b += `<path d="${p.areaD}" fill="${p.color}" fill-opacity="0.07"/>`;
     }
-    b += `<path d="${p.d}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"${p.dash ? ` stroke-dasharray="4 3"` : ""}${!single && hasEmph && !p.emphasis ? ` stroke-opacity="0.85"` : ""}><title>${p.label}</title></path>`;
+    b += `<path d="${p.d}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"${p.dash ? ` stroke-dasharray="4 3"` : ""}${!single && hasEmph && !p.emphasis ? ` stroke-opacity="0.7"` : ""}><title>${p.label}</title></path>`;
     void i;
   }
   for (const p of g.paths) {
@@ -926,8 +935,8 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
     if (single) {
       // the latest value, written beside its point
       const lx = p.latestX + (m ? 8 : 10);
-      b += almTxt(lx, p.latestY + 5, p.endLabelText, { size: m ? 13 : 15, fill: "#121212", weight: 600 });
-      b += almTxt(lx, p.latestY + (m ? 19 : 22), pointDateLabel(p.latest.date, p.points), { size: m ? 10.5 : 11.5, fill: "#8a8a8a" });
+      b += almTxt(lx, p.latestY + (m ? 5 : 6), p.endLabelText, { size: m ? 14 : o.isLead ? 19 : 17, fill: "#121212", weight: 600 });
+      b += almTxt(lx, p.latestY + (m ? 20 : 25), pointDateLabel(p.latest.date, p.points), { size: m ? 10.5 : 12, fill: "#8a8a8a" });
       const first = p.points[0];
       if (first && p.points.length > 5 && g.dateMode) {
         const fx = pad.l + 2, fy = g.y(first.value);

@@ -66,8 +66,11 @@ const fmtU = (v: number, unit: string) => compactBarLabel(v, unit);
 // =====================================================================
 type BarRow = { label: string; value: number; group?: string };
 function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: string; log?: boolean; label: string; groups?: string[]; anomaly?: [string, string] }) {
-  const W = o.width, m = o.mobile, unit = o.unit;
-  const labSize = 13, valSize = m ? 12.5 : 13, few = rows.length <= 6, barH = m ? (few ? 14 : 10) : few ? 18 : rows.length <= 12 ? 14 : 12;
+  const W = o.width, phone = o.mobile, unit = o.unit;
+  // Fine bars with room between them: a figure, not a wall of ink. The values carry the weight.
+  const labSize = phone ? 13 : 13.5, valSize = phone ? 12.5 : 13.5, few = rows.length <= 6, barH = phone ? (few ? 11 : 8) : few ? 13 : rows.length <= 12 ? 10 : 8;
+  // On a phone, labels go above their bars only when they are too long to sit beside them.
+  const m = phone && Math.max(...rows.map((r) => r.label.length)) * labSize * 0.54 > W * 0.36;
   const vals = rows.map((r) => r.value), lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
   const neg = lo < 0;
   // One precision per group: groups often come from different sources (World Bank to two
@@ -116,7 +119,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     for (const r of items) {
       const lines = wrap(strip ? r.label.slice(0, -strip.length) : r.label, chars, 2);
       const nat = isNational(r.label);
-      const rowH = m ? 16 + lines.length * 15 + barH : Math.max(barH + 14, lines.length * 15 + 10);
+      const rowH = m ? 16 + lines.length * 15 + barH : Math.max(barH + (few ? 22 : 16), lines.length * 15 + 12);
       const by = m ? y + lines.length * 15 + 4 : y + rowH / 2 - barH / 2;
       const xa = o.log ? x0 : Math.min(xs(r.value), zx), xb = o.log ? xs(r.value) : Math.max(xs(r.value), zx);
       // An anomaly (departure from a normal) diverges in the house colours: below normal
