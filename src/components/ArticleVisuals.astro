@@ -254,8 +254,10 @@ function viewBoxSize(viewBox: string) {
   };
 }
 
-function axisTextAnchor(x: number, width: number, pad: { l: number; r: number }) {
-  if (x <= pad.l + 1) return "start";
+function axisTextAnchor(x: number, width: number, pad: { l: number; r: number }, labelW = 0) {
+  // A centred label that would run past either edge of the figure is anchored to it.
+  if (x <= pad.l + 1 || x - labelW / 2 < 0) return "start";
+  if (labelW && x + labelW / 2 > width) return "end";
   // Anchor "end" near the right edge so a centred label can't overflow the viewBox. The
   // last time-tick often lands ~1-2px INSIDE the plot edge and so missed the pad.r-based
   // threshold by a hair — staying "middle"-anchored and clipping (e.g. "2026" 4px past).
@@ -746,12 +748,16 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const bareTop = /^-?[\d.,]+$/.test(refLabel);
   const unitWord = bareTop ? cleanUnit(visual.unit) : "";
   const unitCaption = mobile ? (yUnitCaption(ticks, visual.unit) || unitWord) : unitWord;
-  // The y gutter is as wide as the widest tick label as the font sets it, plus the 10-unit gap
-  // to the plot: a fixed 34-unit floor left a third of it empty beside "0", "2", "4".
-  const pad = { l: Math.max(16, Math.ceil(Math.max(...ticks.map((tick, ti) => textWidth(typeset(`>${yTickLabel(tick, ti, ticks, visual.unit, mobile)}<`).slice(1, -1), yFontSize)))) + 16), ...padRTB };
+  // Desktop: a y gutter as wide as the widest tick label as printed, plus the gap to the plot.
+  // Phone: no gutter. Each y label sits flush left just above its gridline (the FT / Economist
+  // layout), so the plot takes the full width; a right-aligned column sized for "1,000" left
+  // space beside every shorter label on every phone chart.
+  const pad = { l: mobile ? 5 : Math.max(16, Math.ceil(Math.max(...ticks.map((tick, ti) => textWidth(typeset(`>${yTickLabel(tick, ti, ticks, visual.unit, mobile)}<`).slice(1, -1), yFontSize)))) + 16), ...padRTB };
   // The unit caption sits in its own row ABOVE the top tick, so give it headroom — without
   // it the caption ("lakh cr") collides with the topmost number ("₹400") at the same corner.
-  if (unitCaption) pad.t += 16;
+  // On a phone the caption joins the top y label instead ("150 crore"), which already sits
+  // above its gridline; a separate row stacked "crore" over "150" in the corner.
+  if (unitCaption && !mobile) pad.t += 16;
   const plotW = width - pad.l - pad.r;
   // Position points by real time. Monthly series must use the month too; otherwise all
   // twelve YYYY-MM points in a year collapse onto one x-position and render as steps.
@@ -981,7 +987,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     // into "2022-23"; a centred-label test missed that).
     const axisFont = mobile ? 12.5 : 13, gapMin = mobile ? 14 : 10;
     const span = (t: { xPos: number; label: string }) => {
-      const w = textWidth(String(t.label), axisFont), an = axisTextAnchor(t.xPos, width, pad);
+      const w = textWidth(String(t.label), axisFont), an = axisTextAnchor(t.xPos, width, pad, textWidth(String(t.label), axisFont));
       return an === "start" ? [t.xPos, t.xPos + w] : an === "end" ? [t.xPos - w, t.xPos] : [t.xPos - w / 2, t.xPos + w / 2];
     };
     const clear = (a: { xPos: number; label: string }, b: { xPos: number; label: string }) => span(b)[0] - span(a)[1] >= gapMin;
@@ -1171,15 +1177,25 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     if (showLabel) b += almTxt(bcx, pad.t + 12, band.label!, { size: 11.5, fill: "#a63d24", anchor: "middle" });
   }
   void asNotes;
-  if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
+  if (g.unitCaption && !m) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
+  // Gridlines run to the figure's edge, under the end labels, so the values sit inside the
+  // chart's frame instead of hanging in a blank margin past the last gridline.
+  const yTickBoxes: Array<[number, number, number, number]> = [];
+  // Phone y labels are drawn last, over the lines, so a line starting at the left edge never hides one.
+  let yLabelsTop = "";
   g.ticks.forEach((tick, ti) => {
     const yy = g.y(tick), base = g.ticks.includes(0) ? tick === 0 : ti === 0;
-    b += almLine(pad.l, yy, plotR, yy, base ? "#121212" : "#efefef", 1);
-    b += `<text class="yaxt" x="${svgCoord(pad.l - 10)}" y="${svgCoord(yy + 4)}" text-anchor="end">${yTickLabel(tick, ti, g.ticks, visual.unit, m)}</text>`;
+    const label = yTickLabel(tick, ti, g.ticks, visual.unit, m) + (m && g.unitCaption && ti === g.ticks.length - 1 ? ` ${g.unitCaption}` : "");
+    b += almLine(m ? 0 : pad.l, yy, width - 2, yy, base ? "#121212" : "#efefef", 1);
+    if (m) {
+      // Phone: flush left, just above the gridline, haloed where a line passes behind it.
+      yLabelsTop += `<text class="yaxt" x="0" y="${svgCoord(yy - 5)}" stroke="#fff" stroke-width="3" stroke-linejoin="round" paint-order="stroke">${label}</text>`;
+      yTickBoxes.push([0, yy - 5 - 10, textWidth(typeset(`>${label}<`).slice(1, -1), 12) + 3, yy - 2]);
+    } else b += `<text class="yaxt" x="${svgCoord(pad.l - 10)}" y="${svgCoord(yy + 4)}" text-anchor="end">${label}</text>`;
   });
   for (const t of g.axisTicks) {
     b += almLine(t.xPos, plotB, t.xPos, plotB + 5, "#121212", 1);
-    b += `<text class="xaxt" x="${svgCoord(t.xPos)}" y="${svgCoord(plotB + (m ? 19 : 21))}" text-anchor="${axisTextAnchor(t.xPos, width, pad)}">${t.label}</text>`;
+    b += `<text class="xaxt" x="${svgCoord(t.xPos)}" y="${svgCoord(plotB + (m ? 19 : 21))}" text-anchor="${axisTextAnchor(t.xPos, width, pad, textWidth(String(t.label), m ? 12.5 : 13))}">${t.label}</text>`;
   }
   const ref = visual.refLine;
   if (ref) {
@@ -1197,6 +1213,9 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     const india = g.paths.find((p) => /^india\b/i.test(String(p.label).trim()));
     if (india) (india as { emphasis?: boolean }).emphasis = true;
   }
+  // A rural or urban line is one side of the comparison, never context: with urban lines
+  // emphasised, rural India was drawn as a faint hairline beside them.
+  if (g.paths.some((p) => p.emphasis)) for (const p of g.paths) if (/\b(rural|urban)\b/i.test(String(p.label))) (p as { emphasis?: boolean }).emphasis = true;
   const order = g.paths.map((p, i) => ({ p, i })).sort((a, z) => Number(Boolean(a.p.emphasis)) - Number(Boolean(z.p.emphasis)));
   const hasEmph = g.paths.some((p) => p.emphasis);
   for (const { p, i } of order) {
@@ -1286,7 +1305,8 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
           .filter((yy) => yy - fs > pad.t - 4 && yy < plotB - 4);
         // A dense series with nowhere clear (monthly NREGA spikes) keeps the dot and leaves the
         // value to the tooltip: text laid across a thicket of lines reads as neither.
-        const fly = tries.find((yy) => !boxHitsLines(polys, fx + 4, fx + 8 + lw, yy - fs * 0.8, yy + fs * 0.2));
+        const fly = tries.find((yy) => !boxHitsLines(polys, fx + 4, fx + 8 + lw, yy - fs * 0.8, yy + fs * 0.2)
+          && !yTickBoxes.some(([a, t, c, d]) => fx + 4 < c && fx + 8 + lw > a && yy - fs * 0.8 < d && yy + fs * 0.2 > t));
         // The starting point is context, the latest is the news: the first value is set
         // lighter and in mid grey so the end label leads.
         if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#4f4f4f", weight: 500 });
@@ -1324,7 +1344,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     }),
   };
   const hoverAttr = JSON.stringify(hover).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-  return `<svg class="${o.cls}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${visual.title.replace(/"/g, "&quot;")}" data-hover="${hoverAttr}">${b}</svg>`;
+  return `<svg class="${o.cls}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${visual.title.replace(/"/g, "&quot;")}" data-hover="${hoverAttr}">${b}${yLabelsTop}</svg>`;
 }
 
 /** Shaded event bands (e.g. El Niño years) for a time-axis line chart. Each band is

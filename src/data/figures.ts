@@ -137,7 +137,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   // run past the right one), then on a log scale the note and the gridline values, each on
   // its own row so none of the three can run into another.
   const capU = cleanUnit(unit), capSize = m ? 11.5 : 12, note = "Log scale: each gridline is ten times the last", noteSize = m ? 11 : 11.5;
-  const capX = o.log || m || (capU && textW(capU, capSize) > W - labelW) ? 0 : labelW;
+  // The unit starts at the card edge, like the labels under it.
+  const capX = 0;
   const capLines = !capU ? [] : textW(capU, capSize) > W - capX ? wrap(capU, Math.floor((W - capX) / (capSize * 0.56)), 3) : [capU];
   const capBase = capLines.length ? 12 + (capLines.length - 1) * 14 : 0;
   const noteInline = o.log && capLines.length <= 1 && capX + (capLines[0] ? textW(capLines[0], capSize) : 0) + 24 + textW(note, noteSize) < W;
@@ -178,7 +179,9 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       let row = `<rect x="0" y="${r1(y)}" width="${W}" height="${r1(rowH)}" fill="transparent"/>`;
       row += m
         ? multiText(0, y + 12, lines, { size: labSize, fill: INK.ink, weight: nat ? 600 : undefined, lh: 15 })
-        : multiText(labelW - 12, y + rowH / 2 + 4.5 - (lines.length - 1) * 7.5, lines, { size: labSize, fill: INK.ink, anchor: "end", weight: nat ? 600 : undefined, lh: 15 });
+        // Flush left at the card edge, in line with the title: right-aligned, every label
+        // shorter than the longest started in from the edge.
+        : multiText(0, y + rowH / 2 + 4.5 - (lines.length - 1) * 7.5, lines, { size: labSize, fill: INK.ink, weight: nat ? 600 : undefined, lh: 15 });
       row += `<rect class="mk-bar" x="${r1(xa)}" y="${r1(by)}" width="${r1(Math.max(1.5, xb - xa))}" height="${barH}" fill="${fill}"/>`;
       const vx = r.value < 0 && !o.log ? xa - 6 : xb + 6;
       row += txt(vx, by + barH / 2 + valSize * 0.36, rowTxt(r), { size: valSize, fill: INK.ink, weight: 600, anchor: r.value < 0 && !o.log ? "end" : "start" });
