@@ -274,28 +274,33 @@
     }
   });
 
-  // Crosshair for Almanac line charts. Each svg[data-hover] carries its series as
-  // viewBox points; on pointer move we find each series' point nearest the cursor's x,
-  // draw a hairline and dots, and show one small tooltip with the date and values.
+  // Crosshair for line charts and small multiples. Each svg[data-hover] carries its
+  // series as viewBox points, either as one plot ({plot, series}) or as several
+  // ({panels: [{plot, series}]}). On pointer move we find the panel under the cursor,
+  // each series' point nearest the cursor's x, draw a hairline and dots, and show one
+  // small tooltip with the date and values.
   function initHover() {
     const NS = "http://www.w3.org/2000/svg";
     document.querySelectorAll("svg[data-hover]").forEach((svg) => {
+      if (svg.dataset.hoverReady) return;
+      svg.dataset.hoverReady = "1";
       let data;
       try { data = JSON.parse(svg.getAttribute("data-hover")); } catch (e) { return; }
-      if (!data?.series?.length) return;
+      const panels = (data?.panels || [data]).filter((p) => p?.series?.length);
+      if (!panels.length) return;
       const card = svg.closest(".viz-card") || svg.parentElement;
-      card.style.position = card.style.position || "relative";
+      if (getComputedStyle(card).position === "static") card.style.position = "relative";
       const layer = document.createElementNS(NS, "g");
       layer.setAttribute("class", "hov-layer");
       layer.style.display = "none";
       layer.style.pointerEvents = "none";
       const rule = document.createElementNS(NS, "line");
       rule.setAttribute("stroke", "#121212"); rule.setAttribute("stroke-width", "0.75"); rule.setAttribute("stroke-dasharray", "2 2");
-      rule.setAttribute("y1", data.plot[1]); rule.setAttribute("y2", data.plot[3]);
       layer.append(rule);
-      const dots = data.series.map((s) => {
+      const maxSeries = Math.max(...panels.map((p) => p.series.length));
+      const dots = Array.from({ length: maxSeries }, () => {
         const c = document.createElementNS(NS, "circle");
-        c.setAttribute("r", "4.5"); c.setAttribute("fill", s.color); c.setAttribute("stroke", "#fff"); c.setAttribute("stroke-width", "2");
+        c.setAttribute("r", "4.5"); c.setAttribute("stroke", "#fff"); c.setAttribute("stroke-width", "2");
         layer.append(c); return c;
       });
       svg.append(layer);
@@ -315,20 +320,30 @@
       const hide = () => { layer.style.display = "none"; tip.hidden = true; };
       const move = (evt) => {
         const p = toLocal(evt);
-        if (!p || p.x < data.plot[0] - 6 || p.x > data.plot[2] + 6) return hide();
-        const hits = data.series.map((s) => nearest(s.pts, p.x));
+        if (!p) return hide();
+        const panel = panels.find((q) => p.x >= q.plot[0] - 6 && p.x <= q.plot[2] + 6 && p.y >= q.plot[1] - 24 && p.y <= q.plot[3] + 16);
+        if (!panel) return hide();
+        const hits = panel.series.map((s) => nearest(s.pts, p.x));
         const lead = hits.reduce((a, b) => (Math.abs(b[0] - p.x) < Math.abs(a[0] - p.x) ? b : a));
         rule.setAttribute("x1", lead[0]); rule.setAttribute("x2", lead[0]);
-        hits.forEach((h, i) => { const on = Math.abs(h[0] - lead[0]) < 1.5; dots[i].style.display = on ? "" : "none"; dots[i].setAttribute("cx", h[0]); dots[i].setAttribute("cy", h[1]); });
+        rule.setAttribute("y1", panel.plot[1]); rule.setAttribute("y2", panel.plot[3]);
+        dots.forEach((d, i) => {
+          const h = hits[i];
+          const on = h && Math.abs(h[0] - lead[0]) < 1.5;
+          d.style.display = on ? "" : "none";
+          if (on) { d.setAttribute("cx", h[0]); d.setAttribute("cy", h[1]); d.setAttribute("fill", panel.series[i].color); }
+        });
         layer.style.display = "";
-        const rows = data.series.map((s, i) => (Math.abs(hits[i][0] - lead[0]) < 1.5 ? `<span><i style="background:${s.color}"></i>${data.series.length > 1 ? escapeXml(s.label) + " " : ""}<b>${escapeXml(hits[i][2])}</b></span>` : "")).join("");
-        tip.innerHTML = `<em>${escapeXml(lead[3])}</em>${rows}`;
+        const many = panel.series.length > 1;
+        const rows = panel.series.map((s, i) => (Math.abs(hits[i][0] - lead[0]) < 1.5 ? `<span><i style="background:${s.color}"></i>${many ? escapeXml(s.label) + " " : ""}<b>${escapeXml(hits[i][2])}</b></span>` : "")).join("");
+        const title = panels.length > 1 && !many ? `${escapeXml(panel.series[0].label)} · ` : "";
+        tip.innerHTML = `<em>${title}${escapeXml(lead[3])}</em>${rows}`;
         tip.hidden = false;
         const box = card.getBoundingClientRect(), sb = svg.getBoundingClientRect();
         const scale = sb.width / svg.viewBox.baseVal.width;
         let left = sb.left - box.left + lead[0] * scale + 12, top = sb.top - box.top + Math.min(...hits.map((h) => h[1])) * scale - 10;
         if (left + tip.offsetWidth > box.width) left -= tip.offsetWidth + 24;
-        tip.style.left = `${Math.max(0, left)}px`; tip.style.top = `${Math.max(0, top)}px`;
+        tip.style.left = `${Math.max(0, left)}px`; tip.style.top = `${Math.max(0, top - tip.offsetHeight / 2)}px`;
       };
       svg.addEventListener("pointermove", move);
       svg.addEventListener("pointerdown", move);
@@ -336,7 +351,80 @@
     });
   }
 
-  const ready = () => { initLazySvgs(); initHover(); };
+  // Tooltips for every other mark. A mark carries data-tip="Heading|line|line"; any
+  // <title> inside a figure is promoted to the same tooltip so maps, cells and dots
+  // drawn by the Almanac engine answer too. Hover, tap and keyboard focus all work.
+  function initTips() {
+    document.querySelectorAll(".viz-card svg title, .alm-fig svg title").forEach((t) => {
+      const host = t.parentElement;
+      if (!host || host.hasAttribute("data-tip")) { t.remove(); return; }
+      const text = (t.textContent || "").trim();
+      const i = text.lastIndexOf(": ");
+      host.setAttribute("data-tip", i > 0 ? `${text.slice(0, i)}|${text.slice(i + 2)}` : text);
+      if (!host.getAttribute("aria-label")) host.setAttribute("aria-label", text);
+      t.remove();
+    });
+    // Keyboard: figures with a readable number of marks can be walked with Tab.
+    document.querySelectorAll(".viz-card svg").forEach((svg) => {
+      const marks = svg.querySelectorAll("[data-tip]");
+      if (marks.length && marks.length <= 60) marks.forEach((m) => { if (!m.hasAttribute("tabindex")) m.setAttribute("tabindex", "0"); });
+      else marks.forEach((m) => m.removeAttribute("tabindex"));
+      marks.forEach((m) => { if (!m.getAttribute("aria-label")) m.setAttribute("aria-label", m.getAttribute("data-tip").split("|").join(", ")); });
+    });
+    let tip = null, hot = null;
+    const hide = () => { if (tip) tip.hidden = true; if (hot) hot.classList.remove("is-hot"); hot = null; };
+    const show = (mark, x, y) => {
+      const card = mark.closest(".viz-card, .alm-fig");
+      if (!card) return;
+      if (getComputedStyle(card).position === "static") card.style.position = "relative";
+      if (!tip || tip.parentElement !== card) { tip?.remove(); tip = document.createElement("div"); tip.className = "hov-tip"; card.append(tip); }
+      const [head, ...lines] = mark.getAttribute("data-tip").split("|");
+      tip.innerHTML = `<em>${escapeXml(head)}</em>${lines.map((l) => `<b>${escapeXml(l)}</b>`).join("")}`;
+      tip.hidden = false;
+      if (hot !== mark) { hot?.classList.remove("is-hot"); hot = mark; mark.classList.add("is-hot"); }
+      const box = card.getBoundingClientRect();
+      let left = x - box.left + 14, top = y - box.top - tip.offsetHeight - 12;
+      if (left + tip.offsetWidth > box.width) left = x - box.left - tip.offsetWidth - 14;
+      if (top < 0) top = y - box.top + 18;
+      tip.style.left = `${Math.max(0, left)}px`; tip.style.top = `${top}px`;
+    };
+    const markOf = (el) => (el instanceof Element ? el.closest("[data-tip]") : null);
+    document.addEventListener("pointermove", (e) => {
+      const m = markOf(e.target);
+      if (m && !m.closest("svg[data-hover]")) show(m, e.clientX, e.clientY);
+      else if (hot && !(e.target instanceof Element && e.target.closest(".hov-tip"))) hide();
+    }, { passive: true });
+    document.addEventListener("pointerdown", (e) => {
+      const m = markOf(e.target);
+      if (m && !m.closest("svg[data-hover]")) show(m, e.clientX, e.clientY); else hide();
+    }, { passive: true });
+    document.addEventListener("focusin", (e) => {
+      const m = markOf(e.target);
+      if (!m) return;
+      const r = m.getBoundingClientRect();
+      show(m, r.left + r.width / 2, r.top + r.height / 2);
+    });
+    document.addEventListener("focusout", hide);
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
+  }
+
+  // Lazy maps arrive after load; give their regions tooltips when they land.
+  const observeLazy = () => {
+    if (!("MutationObserver" in window)) return;
+    new MutationObserver((list) => { if (list.some((r) => [...r.addedNodes].some((n) => n.nodeName === "svg"))) promoteTitles(); }).observe(document.body, { childList: true, subtree: true });
+  };
+  function promoteTitles() {
+    document.querySelectorAll(".viz-card svg title").forEach((t) => {
+      const host = t.parentElement;
+      if (!host || host.hasAttribute("data-tip")) { t.remove(); return; }
+      const text = (t.textContent || "").trim();
+      const i = text.lastIndexOf(": ");
+      host.setAttribute("data-tip", i > 0 ? `${text.slice(0, i)}|${text.slice(i + 2)}` : text);
+      t.remove();
+    });
+  }
+
+  const ready = () => { initLazySvgs(); initHover(); initTips(); observeLazy(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ready);
   else ready();
 })();

@@ -3,6 +3,9 @@ import type { VisualSpec, LineVisual, LinePanelsVisual, StackVisual, BarVisual, 
 import type { LockedNumber } from "../data/questions";
 import { formatLockedNumber } from "../data/questions";
 import { fileSafe } from "../data/chartDownloads";
+import FigureCard from "./FigureCard.astro";
+import { renderFigure, cleanUnit } from "../data/figures";
+import { fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
 import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, viewBoxAspectRatio } from "../data/chartSvg";
 import { txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
 
@@ -107,7 +110,62 @@ const sourceNames: Record<string, string> = {
   isro: "ISRO / press reports",
   openbudgets: "Open Budgets India",
   anrf: "ANRF",
-  research: "Research literature"
+  research: "Research literature",
+  plfs: "MoSPI PLFS",
+  gbd: "IHME Global Burden of Disease",
+  ihme: "IHME",
+  "rbi-estates": "RBI e-STATES",
+  "rbi-dbie": "RBI DBIE",
+  dbie: "RBI DBIE",
+  imf: "IMF",
+  "rbi-lrs": "RBI",
+  "rbi-reer": "RBI",
+  "rbi-fx": "RBI",
+  "rbi-fpi": "RBI",
+  "rbi-bop": "RBI",
+  "rbi-interest-rates": "RBI",
+  "rbi-state-finances": "RBI State Finances",
+  srscod: "Sample Registration System, causes of death",
+  "oecd-tiva": "OECD TiVA",
+  "worldbank-income-classifications": "World Bank",
+  "worldbank-gep": "World Bank",
+  wto: "WTO",
+  wits: "World Bank WITS",
+  cckp: "World Bank Climate Change Knowledge Portal",
+  "nha-nhsrc": "National Health Accounts",
+  pwt: "Penn World Table",
+  "ember-states": "Ember",
+  ilostat: "ILOSTAT",
+  cbdt: "CBDT",
+  "cgwb-ingres": "CGWB",
+  "cgwb-quality": "CGWB",
+  mccd: "MCCD",
+  bis: "BIS",
+  climatetrace: "Climate TRACE",
+  "upag-dash": "UPAg",
+  wgc: "World Gold Council",
+  goldhub: "World Gold Council",
+  "harvard-atlas": "Harvard Growth Lab",
+  "dpiit-fdi": "DPIIT",
+  ncrb: "NCRB",
+  dgcis: "DGCI&S",
+  climatewatch: "Climate Watch",
+  "planning-commission": "Planning Commission",
+  "mospi-esankhyiki": "MoSPI",
+  "grid-india": "Grid-India",
+  berkeley: "Berkeley Earth",
+  amfi: "AMFI",
+  "world-inequality-lab": "World Inequality Lab",
+  jjm: "Jal Jeevan Mission",
+  npci: "NPCI",
+  "noaa-iod": "NOAA",
+  "noaa-enso": "NOAA",
+  "cpc-enso-forecast": "NOAA Climate Prediction Center",
+  niftyindices: "NSE Indices",
+  "imd-temperature": "IMD",
+  cwc: "CWC",
+  psmsl: "PSMSL",
+  "ophi-undp": "OPHI and UNDP"
 };
 
 function viewBoxSize(viewBox: string) {
@@ -152,196 +210,6 @@ function choroWrapClass(visual: ChoroplethVisual) {
   return classes.join(" ");
 }
 
-function fmt(value: number, unit = "") {
-  const abs = Math.abs(value);
-  // Zero is special: a bare "0.0" on a rupee/dollar axis reads as a glitch.
-  // Give it a clean, unit-appropriate label before the magnitude branches run.
-  // Match the SAME conditions the magnitude branches use to emit a currency — a bare
-  // "crore"/"rs" unit (counts, not money) must NOT get "₹0" while its other ticks stay
-  // bare numbers (the mismatch that put "₹0" next to "$20"/"40.0" on non-rupee axes).
-  if (value === 0) {
-    if (/%|percent/i.test(unit)) return "0%";
-    if (/US\$|usd|\$/i.test(unit)) return "$0";
-    if (/rupees|inr|₹/i.test(unit) || (/crore/i.test(unit) && /inr|₹|rs/i.test(unit))) return "₹0";
-    return "0";
-  }
-  if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
-  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
-  if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
-    return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
-  }
-  if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
-    if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh cr`;
-    if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
-    return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })} cr`;
-  }
-  if (/rupees|inr|₹/i.test(unit)) {
-    if (abs >= 1_000_000_000_000) return `₹${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh cr`;
-    if (abs >= 10_000_000_000) return `₹${(value / 10_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
-    if (abs >= 10_000_000) return `₹${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} cr`;
-    if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh`;
-    if (abs >= 1000) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
-  }
-  if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
-    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 10 ? 1 : 2 })}bn`;
-  }
-  if (/US\$|usd|\$/i.test(unit)) {
-    if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} trillion`;
-    if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 0 })} billion`;
-    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
-  }
-  if (/people/i.test(unit)) {
-    if (abs >= 10_000_000) return `${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} crore`;
-    if (abs >= 100_000) return `${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh`;
-  }
-  if (abs >= 1_000_000_000) return `${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} billion`;
-  if (abs >= 1_000_000) return `${(value / 1_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} million`;
-  if (abs >= 1000) return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
-  if (abs >= 100) return value.toFixed(0);
-  // Sub-unit values need more than one decimal or the rounding invents a story. A chart of
-  // ONI-minus-RONI gaps rendered -0.116 and -0.056 as an identical "-0.1", flattening a
-  // two-fold difference and contradicting prose that correctly quoted -0.12 and -0.06.
-  // Values at or above 1 are unchanged, and toLocaleString drops trailing zeros, so this
-  // only ever ADDS a digit where one is meaningful.
-  if (abs < 0.01) return value.toLocaleString("en-IN", { maximumFractionDigits: 3 });
-  if (abs < 10) return value.toLocaleString("en-IN", { maximumFractionDigits: 2 });
-  return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
-}
-
-// Spark-grid endpoints need more precision than ordinary axis ticks. Monthly
-// series stored in US$ billion are often below 1, where fmt() intentionally
-// rounds to a whole axis label and would turn real values into "$0". Switch
-// those endpoints to millions until they reach a billion.
-function sparkEndpoint(value: number, unit = "") {
-  const abs = Math.abs(value);
-  const sign = value < 0 ? "-" : "";
-  if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
-    if (abs === 0) return "$0";
-    if (abs >= 1) return `${sign}$${abs.toLocaleString("en-IN", { maximumFractionDigits: 2 })}bn`;
-    return `${sign}$${(abs * 1_000).toLocaleString("en-IN", { maximumFractionDigits: abs < 0.01 ? 1 : 0 })}m`;
-  }
-  return fmt(value, unit);
-}
-
-// Split a formatted axis label ("₹400 lakh cr") into its numeric head ("₹400") and
-// unit suffix ("lakh cr"). The suffix is read from the top tick (the only one fmt()
-// always tags with the unit) so every tick splits on the same boundary.
-function splitUnitLabel(full: string, ref: string) {
-  const m = ref.match(/^([₹$]?\s?[\d.,]+)(.*)$/);
-  const suffix = m && m[2] ? m[2].trim() : "";
-  let bare = suffix && full.endsWith(suffix) ? full.slice(0, full.length - suffix.length).trimEnd() : full;
-  // If the axis's reference (top) tick carries no currency symbol, this axis isn't money
-  // at this magnitude — so strip a stray leading ₹/$ off other ticks. Fixes the zero
-  // special-case emitting "₹0" next to bare "20.0/40.0" on small-value rupee/index axes.
-  if (!/^[₹$]/.test(ref)) bare = bare.replace(/^[₹$]/, "");
-  return { bare, suffix };
-}
-
-// The unit suffix to show ONCE as a caption above the axis (mobile), e.g. "lakh cr".
-function yUnitCaption(ticks: number[], unit = "") {
-  const ref = fmt(ticks[ticks.length - 1], unit);
-  return splitUnitLabel(ref, ref).suffix;
-}
-
-// Y-axis label. Desktop: show the unit on the top tick only, bare numbers below —
-// repeating "lakh cr" on every gridline is visual noise. Mobile (`bareAll`): every
-// tick is a bare number and the unit moves to a caption above the axis (yUnitCaption),
-// so the narrow box doesn't reserve a wide left gutter for one long top label.
-function yTickLabel(tick: number, ti: number, ticks: number[], unit = "", bareAll = false) {
-  const full = fmt(tick, unit);
-  const ref = fmt(ticks[ticks.length - 1], unit);
-  if (!bareAll && ti === ticks.length - 1) return full; // topmost tick keeps the full unit
-  return splitUnitLabel(full, ref).bare;
-}
-
-// Split a formatted axis label ("₹400 lakh cr") into its numeric head ("₹400") and
-// unit suffix ("lakh cr"). The suffix is read from the top tick (the only one fmt()
-// always tags with the unit) so every tick splits on the same boundary.
-function splitUnitLabel(full: string, ref: string) {
-  const m = ref.match(/^([₹$]?\s?[\d.,]+)(.*)$/);
-  const suffix = m && m[2] ? m[2].trim() : "";
-  let bare = suffix && full.endsWith(suffix) ? full.slice(0, full.length - suffix.length).trimEnd() : full;
-  // If the axis's reference (top) tick carries no currency symbol, this axis isn't money
-  // at this magnitude — so strip a stray leading ₹/$ off other ticks. Fixes the zero
-  // special-case emitting "₹0" next to bare "20.0/40.0" on small-value rupee/index axes.
-  if (!/^[₹$]/.test(ref)) bare = bare.replace(/^[₹$]/, "");
-  return { bare, suffix };
-}
-
-// The unit suffix to show ONCE as a caption above the axis (mobile), e.g. "lakh cr".
-function yUnitCaption(ticks: number[], unit = "") {
-  const ref = fmt(ticks[ticks.length - 1], unit);
-  return splitUnitLabel(ref, ref).suffix;
-}
-
-// Y-axis label. Desktop: show the unit on the top tick only, bare numbers below —
-// repeating "lakh cr" on every gridline is visual noise. Mobile (`bareAll`): every
-// tick is a bare number and the unit moves to a caption above the axis (yUnitCaption),
-// so the narrow box doesn't reserve a wide left gutter for one long top label.
-function yTickLabel(tick: number, ti: number, ticks: number[], unit = "", bareAll = false) {
-  const full = fmt(tick, unit);
-  const ref = fmt(ticks[ticks.length - 1], unit);
-  if (!bareAll && ti === ticks.length - 1) return full; // topmost tick keeps the full unit
-  return splitUnitLabel(full, ref).bare;
-}
-
-function compactBarLabel(value: number, unit = "") {
-  const abs = Math.abs(value);
-  if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
-  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
-  if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
-    if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}L cr`;
-    if (abs >= 1_000) return `₹${(value / 1_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}k cr`;
-    return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })} cr`;
-  }
-  if (/rupees|inr|₹/i.test(unit)) {
-    if (abs >= 1_000_000_000_000) return `₹${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}L cr`;
-    if (abs >= 10_000_000) return `₹${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} cr`;
-  }
-  return fmt(value, unit);
-}
-
-function endLabelInScale(value: number, maxAbs: number, unit = "", compact = false, bare = false) {
-  // Format every line's end label in ONE scale (chosen from the chart's largest value)
-  // so they're comparable AND the unit is obvious — a small line reads "₹0.2 lakh cr",
-  // not fmt()'s per-value "₹22.3k cr" which looks bigger than the "₹7.4 lakh cr" on top.
-  // `compact` swaps verbose scale words for short ones on the narrow mobile box.
-  // `bare` drops the scale word entirely (keeps currency + number) — mobile multi-line
-  // charts carry the unit once in the axis caption, so the end labels stay short and
-  // the plot keeps its width. "%" / "x" attach directly and always survive.
-  const n = (v: number, divisor: number) =>
-    (v / divisor).toLocaleString("en-IN", { maximumFractionDigits: 1 });
-  const w = (short: string, long: string) => bare ? "" : ` ${compact ? short : long}`;
-  if (/multiple/i.test(unit)) return `${n(value, 1)}x`;
-  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 100 ? 0 : 1 })}%`;
-  if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
-    return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
-  }
-  if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
-    if (maxAbs >= 100_000) return `₹${n(value, 100_000)}${w("L cr", "lakh cr")}`;
-    if (maxAbs >= 1_000) return `₹${n(value, 1_000)}${bare ? "k" : "k cr"}`;
-    return `₹${n(value, 1)}${w("cr", "cr")}`;
-  }
-  if (/rupees|inr|₹/i.test(unit)) {
-    if (maxAbs >= 1e12) return `₹${n(value, 1e12)}${w("L cr", "lakh cr")}`;
-    if (maxAbs >= 1e7) return `₹${n(value, 1e7)}${w("cr", "cr")}`;
-    if (maxAbs >= 1e5) return `₹${n(value, 1e5)}${w("lakh", "lakh")}`;
-  }
-  if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
-    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 10 ? 1 : 2 })}${w("bn", "billion")}`;
-  }
-  if (/US\$|usd|\$/i.test(unit)) {
-    if (maxAbs >= 1e12) return `$${n(value, 1e12)}${w("T", "trillion")}`;
-    if (maxAbs >= 1e9) return `$${n(value, 1e9)}${w("B", "billion")}`;
-  }
-  if (/people/i.test(unit)) {
-    if (maxAbs >= 1e7) return `${n(value, 1e7)}${w("crore", "crore")}`;
-    if (maxAbs >= 1e5) return `${n(value, 1e5)}${w("lakh", "lakh")}`;
-  }
-  if (maxAbs >= 1e9) return `${n(value, 1e9)}${w("bn", "billion")}`;
-  if (maxAbs >= 1e6) return `${n(value, 1e6)}${w("M", "million")}`;
-  return bare ? fmt(value, "") : fmt(value, unit);
-}
 
 function shortLabel(label: string) {
   const dimensions = label.match(/\(([^)]+)\)/)?.[1]
@@ -418,29 +286,6 @@ function kpiValue(item: LockedNumber) {
   return fmt(item.value, item.unit);
 }
 
-function pct(value: number | null) {
-  if (value === null || !Number.isFinite(value)) return "n/a";
-  const sign = value > 0 ? "+" : "";
-  return `${sign}${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}%`;
-}
-
-function signedFmt(value: number, unit = "") {
-  const sign = value > 0 ? "+" : value < 0 ? "-" : "";
-  return `${sign}${fmt(Math.abs(value), unit)}`;
-}
-
-function yearSpan(start: string, end: string) {
-  const startYear = Number(start);
-  const endYear = Number(end);
-  if (!Number.isFinite(startYear) || !Number.isFinite(endYear)) return null;
-  const span = endYear - startYear;
-  return span > 0 ? span : null;
-}
-
-function multiple(start: number, end: number) {
-  if (!start || !Number.isFinite(start) || !Number.isFinite(end)) return "n/a";
-  return `${(end / start).toLocaleString("en-IN", { maximumFractionDigits: 2 })}x`;
-}
 
 const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -502,7 +347,7 @@ function sourceLabel(source: VisualSpec["source"]) {
   // macro.current_account_usd) and are not. Human descriptors contain spaces and are kept.
   const looksInternal = !/\s/.test(id) && (
     (id.includes(".") && id.split(".").some((seg) => seg && seg === seg.toLowerCase() && /[a-z]/.test(seg))) ||
-    /^[a-z0-9]+_[a-z0-9_]+$/.test(id)
+    /^[a-z0-9]+_[a-z0-9_]+$/.test(id) || isMachineId(id)
   );
   if (looksInternal) return sourceName(source.sourceId);
   if (source.sourceId === "ppac") {
@@ -535,11 +380,23 @@ function sourceLabel(source: VisualSpec["source"]) {
   return id ? `${sourceName(source.sourceId)} · ${id}` : sourceName(source.sourceId);
 }
 
+/** Ids that mean something to the pipeline and nothing to a reader: dataset keys with
+ *  colons ("mendeley:y58jknpgs8:summer2024"), snake_case field names ("peak_gw",
+ *  "2m_temperature state warming" keeps its words), camelCase keys and bare numbers. */
+function isMachineId(seg: string) {
+  const s = seg.trim();
+  if (!s || /\s/.test(s)) return false;
+  return /:/.test(s) || /^\d+$/.test(s) || /_/.test(s) || /^[a-z]+[A-Z][A-Za-z]*(:\w+)?$/.test(s) || /^derived:/.test(s);
+}
+
 function cleanSubtitle(value: string, sourceId: string) {
   return value
     .replace(sourceId, sourceName(sourceId))
     .replace(" · value", "")
-    .replace(" · NumericValue", "");
+    .replace(" · NumericValue", "")
+    .split(" · ")
+    .filter((seg) => !isMachineId(seg))
+    .join(" · ");
 }
 
 function insightForVisual(visual: VisualSpec) {
@@ -565,9 +422,18 @@ function insightForVisual(visual: VisualSpec) {
   if (title.includes("pyramid")) return "The widest bands show where demographic pressure sits today. A rectangular shape would mean an older, slower-growing population.";
   if (title.includes("5-year age")) return "This is the granular version of the age story. It shows which cohorts are largest instead of compressing everyone into three buckets.";
   if (title.includes("by sex")) return "The male and female lines move together, but their gap is visible. Use this with the pyramid for the age-specific picture.";
-  if (title.includes("change by decade")) return "This breaks the big rise into periods, so the reader can see when the population added more or less in absolute terms.";
-  if (title.includes("how much changed")) return "Read this as the extra population added, not the latest population repeated. The decade chart above shows how that addition was distributed over time.";
+  if (title.includes("change by decade") && /people|population/i.test(visual.unit + " " + (visual.subtitle || ""))) return "This breaks the big rise into periods, so the reader can see when the population added more or less in absolute terms.";
+  if (title.includes("how much changed") && /people|population/i.test(visual.unit + " " + (visual.subtitle || ""))) return "Read this as the extra population added, not the latest population repeated. The decade chart above shows how that addition was distributed over time.";
   return "Use this chart as one view of the evidence, then read it beside the neighbouring charts before drawing a conclusion.";
+}
+
+// The title-matched notes above are specific; the last line of insightForVisual is a
+// generic sentence that said nothing about the chart in front of the reader, so a
+// chart without an explainer now shows no note rather than boilerplate.
+const GENERIC_INSIGHT = "Use this chart as one view of the evidence, then read it beside the neighbouring charts before drawing a conclusion.";
+function specificInsight(visual: VisualSpec) {
+  const s = insightForVisual(visual);
+  return s === GENERIC_INSIGHT ? "" : s;
 }
 
 function indicatorIdForVisual(visual: VisualSpec) {
@@ -638,10 +504,10 @@ function explainerForVisual(visual: VisualSpec, index: number) {
     index: index + 1,
     title: generated?.title || visual.title,
     // takeaway = the one-line point; detail = a fuller plain-language paragraph.
-    takeaway: generated?.takeaway || note?.why || generated?.whyShowThis || "What this chart is telling you.",
-    detail: note?.detail || generated?.detail || generated?.whyShowThis || note?.read || insightForVisual(visual),
-    howToRead: generated?.howToRead || note?.read || insightForVisual(visual),
-    mistakeToAvoid: generated?.mistakeToAvoid || note?.watch || "Do not turn one line into the whole story. Check the unit, the source, and the companion charts.",
+    takeaway: generated?.takeaway || note?.why || generated?.whyShowThis || "",
+    detail: note?.detail || generated?.detail || generated?.whyShowThis || note?.read || specificInsight(visual),
+    howToRead: generated?.howToRead || note?.read || specificInsight(visual),
+    mistakeToAvoid: generated?.mistakeToAvoid || note?.watch || "",
     // Both of these render, so they fall back to nothing rather than to boilerplate.
     // The old mobileNote fallback ("fewer ticks, short labels") was an instruction to
     // whoever builds the chart, not something a reader should ever have been shown -
@@ -655,56 +521,6 @@ function explainerForVisual(visual: VisualSpec, index: number) {
 
 const chartDownloadBase = `${Astro.url.pathname.replace(/\/$/, "")}/charts`;
 
-// Cool->hot "temperature" ramp (blue -> marigold -> coral) for severity-graded bars.
-function tempColor(t: number) {
-  t = Math.max(0, Math.min(1, t));
-  const stops: Array<[number, number, number, number]> = [[0, 108, 143, 214], [0.5, 239, 162, 39], [1, 232, 96, 76]];
-  let a = stops[0], b = stops[stops.length - 1];
-  for (let i = 0; i < stops.length - 1; i++) { if (t >= stops[i][0] && t <= stops[i + 1][0]) { a = stops[i]; b = stops[i + 1]; break; } }
-  const f = b[0] > a[0] ? (t - a[0]) / (b[0] - a[0]) : 0;
-  return `rgb(${Math.round(a[1] + (b[1] - a[1]) * f)},${Math.round(a[2] + (b[2] - a[2]) * f)},${Math.round(a[3] + (b[3] - a[3]) * f)})`;
-}
-
-// Diverging blue->white->red colour for a value relative to a centre and spread.
-function stripeColor(value: number, center: number, spread: number) {
-  const t = Math.max(-1, Math.min(1, spread > 0 ? (value - center) / spread : 0));
-  if (t >= 0) {
-    // white -> red
-    const r = 200, g = Math.round(200 - 168 * t), b = Math.round(200 - 168 * t);
-    return `rgb(${r},${Math.max(28, g)},${Math.max(36, b)})`;
-  }
-  // white -> blue
-  const a = -t;
-  return `rgb(${Math.round(200 - 150 * a)},${Math.round(200 - 70 * a)},${Math.round(200 + 40 * a)})`;
-}
-
-// Round axis bounds and ticks to "nice" values (1/2/5 x 10^n), the d3-style algorithm,
-// so a chart reads 0 / 1B / 2B / 3B instead of 0 / 835.1M / 1.7B / 2.5B.
-function niceNum(range: number, round: boolean) {
-  if (!(range > 0) || !Number.isFinite(range)) return 1;
-  const exp = Math.floor(Math.log10(range));
-  const frac = range / Math.pow(10, exp);
-  const nf = round
-    ? (frac < 1.5 ? 1 : frac < 3 ? 2 : frac < 7 ? 5 : 10)
-    : (frac <= 1 ? 1 : frac <= 2 ? 2 : frac <= 5 ? 5 : 10);
-  return nf * Math.pow(10, exp);
-}
-/** Like niceScale, but picks the tick count (4 to 6) that leaves the least empty
- *  headroom above the data, so a series that tops out at 6.6 gets an axis to 7, not 8. */
-function tightScale(lo: number, hi: number) {
-  const options = [4, 5, 6].map((count) => niceScale(lo, hi, count)).filter((s) => s.ticks.length >= 3 && s.ticks.length <= 8);
-  const waste = (s: { min: number; max: number }) => (s.max - hi) / Math.max(1e-9, s.max - s.min) + (lo - s.min) / Math.max(1e-9, s.max - s.min);
-  return options.sort((a, b) => waste(a) - waste(b))[0] ?? niceScale(lo, hi, 5);
-}
-function niceScale(lo: number, hi: number, count = 5) {
-  if (!(hi > lo)) hi = lo + 1;
-  const step = niceNum(niceNum(hi - lo, false) / Math.max(1, count - 1), true);
-  const niceMin = Math.floor(lo / step) * step;
-  const niceMax = Math.ceil(hi / step) * step;
-  const ticks: number[] = [];
-  for (let v = niceMin; v <= niceMax + step * 0.5; v += step) ticks.push(Number(v.toPrecision(12)));
-  return { min: niceMin, max: niceMax, ticks };
-}
 
 function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?: { min?: number; max?: number }, mobile = false, forceEndLabelPad = false) {
   // The viewBox width is matched to how wide the chart actually renders, so one fixed
@@ -739,7 +555,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       3,
       ...visual.lines.map((line) => {
         const v = line.points.at(-1)?.value;
-        return v == null ? 0 : endText(v).length + (mobile ? 0 : line.label.length + 1);
+        return v == null ? 0 : endText(v).length + (mobile || visual.lines.length === 1 ? 0 : line.label.length + 1);
       })
     );
     // Mobile end-labels are bare (short), so reserve the gutter tighter — 0.62/8 over-sized
@@ -779,7 +595,11 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const refLabel = fmt(ticks[ticks.length - 1], visual.unit);
   const yLabelText = (tick: number) => mobile ? splitUnitLabel(fmt(tick, visual.unit), refLabel).bare : fmt(tick, visual.unit);
   const maxYLabelLen = Math.max(3, ...ticks.map((tick) => yLabelText(tick).length));
-  const unitCaption = mobile ? yUnitCaption(ticks, visual.unit) : "";
+  // The unit, once, over the y axis: the scale word on phones ("lakh cr"), or the measure
+  // itself ("births per woman") wherever the tick labels are bare numbers.
+  const bareTop = /^-?[\d.,]+$/.test(fmt(ticks[ticks.length - 1], visual.unit));
+  const unitWord = bareTop ? cleanUnit(visual.unit) : "";
+  const unitCaption = mobile ? (yUnitCaption(ticks, visual.unit) || unitWord) : unitWord;
   // 0.6em/char tracks Schibsted Grotesk closely; the old 0.78 over-reserved the
   // left gutter by ~70px on long labels ("40 million"), leaving a visible empty band.
   const pad = { l: Math.max(baseLeft, Math.round(maxYLabelLen * yFontSize * 0.6) + 14), ...padRTB };
@@ -969,9 +789,9 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
     b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
     if (showLabel) b += almTxt(band.x + band.w / 2, pad.t + 12, band.label!, { size: m ? 10.5 : 11.5, fill: "#a63d24", anchor: "middle" });
   }
-  if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: 11.5, fill: "#8a8a8a" });
+  if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
   g.ticks.forEach((tick, ti) => {
-    const yy = g.y(tick), base = ti === 0;
+    const yy = g.y(tick), base = g.ticks.includes(0) ? tick === 0 : ti === 0;
     b += almLine(pad.l, yy, plotR, yy, base ? "#121212" : "#ededed", base ? 1 : 1);
     b += `<text class="yaxt" x="${svgCoord(pad.l - 10)}" y="${svgCoord(yy + 4)}" text-anchor="end">${yTickLabel(tick, ti, g.ticks, visual.unit, m)}</text>`;
   });
@@ -1058,187 +878,8 @@ function lineBandRects(visual: LineVisual, g: ReturnType<typeof lineGeometry>) {
     .filter((r): r is { x: number; w: number; label?: string } => Boolean(r));
 }
 
-function groupedBarGeometry(visual: GroupedBarVisual, mobile = false) {
-  const width = mobile ? 384 : 1160;
-  const height = mobile ? 360 : 430;
-  const pad = mobile ? { l: 46, r: 12, t: 22, b: 54 } : { l: 86, r: 46, t: 34, b: 70 };
-  const values = visual.groups.flatMap((group) => group.values);
-  const max = Math.max(...values, 1) * 1.12;
-  const plotW = width - pad.l - pad.r;
-  const plotH = height - pad.t - pad.b;
-  const groupW = plotW / Math.max(1, visual.groups.length);
-  const barGap = mobile ? 2.5 : 5;
-  const barW = Math.max(mobile ? 5 : 8, Math.min(mobile ? 15 : 30, (groupW - (mobile ? 9 : 18) - barGap) / Math.max(1, visual.series.length)));
-  const y = (value: number) => height - pad.b - (value / max) * plotH;
-  const ticks = Array.from({ length: 5 }, (_, index) => (max * index) / 4);
-  return { width, height, pad, max, groupW, barGap, barW, y, ticks };
-}
-
-function scatterGeometry(visual: ScatterVisual, mobile = false) {
-  // Desktop uses a wide 1160-box; phones use a near-square box so the fixed-px
-  // axis titles and point labels don't shrink to nothing (the chart dual-renders
-  // viz-d/viz-m exactly like the line + grouped-bar charts).
-  const width = mobile ? 470 : 1160;
-  const height = mobile ? 500 : 520;
-  const pad = mobile ? { l: 62, r: 54, t: 50, b: 74 } : { l: 94, r: 120, t: 44, b: 86 };
-  const plotW = width - pad.l - pad.r;
-  const plotH = height - pad.t - pad.b;
-  const xSpan = visual.xMax - visual.xMin || 1;
-  const ySpan = visual.yMax - visual.yMin || 1;
-  const x = (value: number) => pad.l + ((value - visual.xMin) / xSpan) * plotW;
-  const y = (value: number) => height - pad.b - ((value - visual.yMin) / ySpan) * plotH;
-  const sizes = visual.points.map((point) => point.size || 0).filter((value) => value > 0);
-  const maxSize = Math.max(...sizes, 1);
-  const r = (value?: number | null) => (mobile ? 4 : 5) + Math.sqrt(Math.max(0, value || 0) / maxSize) * (mobile ? 11 : 17);
-  const ticks = [0, 25, 50, 75, 100];
-  const labelExcluded = new Set([
-    "Andaman and Nicobar Islands",
-    "Chandigarh",
-    "Dadra and Nagar Haveli and Daman and Diu"
-  ]);
-  // Fewer point labels on the narrow phone box, where collision room is tight.
-  const labelledPoints = [...visual.points]
-    .filter((point) => !labelExcluded.has(point.label))
-    .sort((a, b) => (b.x * b.y * (b.size || 1)) - (a.x * a.y * (a.size || 1)))
-    .slice(0, mobile ? 3 : 5);
-  const labelled = new Set(labelledPoints.map((point) => point.label));
-  const labelGap = mobile ? 14 : 24;
-  const rawLabels = labelledPoints.map((point) => {
-    const cx = x(point.x);
-    const cy = y(point.y);
-    const radius = r(point.size);
-    const side = point.x >= 70 ? "left" : "right";
-    const textX = side === "left" ? cx - radius - labelGap : cx + radius + labelGap;
-    return {
-      label: point.label,
-      text: point.label,
-      side,
-      x: textX,
-      y: cy - radius - 5,
-      lineX1: side === "left" ? cx - radius * 0.65 : cx + radius * 0.65,
-      lineY1: cy - radius * 0.65,
-      lineX2: side === "left" ? textX + 5 : textX - 5
-    };
-  });
-  const labelsBySide = ["left", "right"].flatMap((side) => {
-    const items = rawLabels.filter((item) => item.side === side).sort((a, b) => a.y - b.y);
-    const minGap = mobile ? 26 : 34;
-    const top = pad.t + 16;
-    const bottom = height - pad.b - 12;
-    for (let i = 1; i < items.length; i += 1) {
-      if (items[i].y - items[i - 1].y < minGap) items[i].y = items[i - 1].y + minGap;
-    }
-    const overflow = items.at(-1) ? Math.max(0, items.at(-1)!.y - bottom) : 0;
-    if (overflow) for (const item of items) item.y -= overflow;
-    for (let i = items.length - 2; i >= 0; i -= 1) {
-      if (items[i + 1].y - items[i].y < minGap) items[i].y = items[i + 1].y - minGap;
-    }
-    const underflow = items[0] ? Math.max(0, top - items[0].y) : 0;
-    if (underflow) for (const item of items) item.y += underflow;
-    return items;
-  });
-  const labelPositions = new Map(labelsBySide.map((item) => [item.label, item]));
-  return { width, height, pad, x, y, r, ticks, labelled, labelPositions };
-}
-
-// Generic x/y scatter geometry — axis ranges and ticks come from the data, not the
-// fixed 0-100% scale the heat-vulnerability scatter assumes. Labels only the
-// highlighted points, stacked to avoid collisions.
-function scatterXYGeometry(visual: ScatterXYVisual, mobile = false) {
-  const width = mobile ? 470 : 1160;
-  const height = mobile ? 500 : 520;
-  const pad = mobile ? { l: 58, r: 24, t: 30, b: 72 } : { l: 88, r: 120, t: 36, b: 84 };
-  const plotW = width - pad.l - pad.r;
-  const plotH = height - pad.t - pad.b;
-  const xSpan = visual.xMax - visual.xMin || 1;
-  const ySpan = visual.yMax - visual.yMin || 1;
-  const x = (value: number) => pad.l + ((value - visual.xMin) / xSpan) * plotW;
-  const y = (value: number) => height - pad.b - ((value - visual.yMin) / ySpan) * plotH;
-  const axisTicks = (min: number, max: number, count: number) => {
-    const step = (max - min) / count;
-    return Array.from({ length: count + 1 }, (_, i) => Math.round((min + i * step) * 100) / 100);
-  };
-  const xTicks = axisTicks(visual.xMin, visual.xMax, 5);
-  const yTicks = axisTicks(visual.yMin, visual.yMax, mobile ? 4 : 5);
-  // Stack point labels so they don't overlap.
-  const labelGap = mobile ? 6 : 10;
-  const minGap = mobile ? 16 : 20;
-  // Label EVERY point on a small scatter, not just the highlighted ones. These charts
-  // exist to argue that a relationship is absent, and the prose names individual cases
-  // ("in 1965 the warmth leaned east by 0.97, and the monsoon still came in 18.6%
-  // short"). With only the two highlighted points labelled, a reader could not find
-  // 1965 on the chart at all: it was one of five identical grey dots. Above the
-  // threshold the labels would collide into noise, so fall back to highlights only.
-  const LABEL_ALL_MAX = mobile ? 8 : 12;
-  const labelled = visual.points.length <= LABEL_ALL_MAX ? visual.points : visual.points.filter((point) => point.highlight);
-  const raw = labelled.map((point) => {
-    const cx = x(point.x);
-    const radius = point.highlight ? (mobile ? 4.5 : 6) : (mobile ? 2.6 : 3.4);
-    const side = point.x > (visual.xMin + visual.xMax) / 2 ? "left" : "right";
-    return { label: point.label, side, highlight: Boolean(point.highlight), anchorX: cx, anchorY: y(point.y), x: side === "left" ? cx - radius - labelGap : cx + radius + labelGap, y: y(point.y) - radius - 4 };
-  });
-  // Relax overlapping labels around their own centroid (push half up, half down)
-  // instead of only cascading downward, so a tight cluster doesn't fling its
-  // labels far below the points into empty space.
-  ["left", "right"].forEach((side) => {
-    const items = raw.filter((item) => item.side === side).sort((a, b) => a.y - b.y);
-    if (items.length < 2) return;
-    for (let i = 1; i < items.length; i += 1) {
-      if (items[i].y - items[i - 1].y < minGap) items[i].y = items[i - 1].y + minGap;
-    }
-    // Re-center the stack on the mean anchor so displacement is shared up and down.
-    const meanAnchor = items.reduce((s, it) => s + it.anchorY, 0) / items.length;
-    const meanLabel = items.reduce((s, it) => s + it.y, 0) / items.length;
-    const shift = meanAnchor - meanLabel;
-    for (const it of items) it.y += shift;
-  });
-  const labelPositions = new Map(raw.map((item) => [item.label, item]));
-  return { width, height, pad, x, y, xTicks, yTicks, labelPositions };
-}
-
-// 24-hour load-curve geometry. The x-axis is hour-of-day (0..23), NOT a calendar
-// axis, so it carries its own linear hour scale and HH:00 ticks. Y starts at 0 and
-// rounds up to a "nice" max. Each series becomes a smooth-ish polyline plus an
-// optional area path to the baseline (for the solar fill / demand envelope).
-function loadCurveGeometry(visual: LoadCurveVisual, mobile = false) {
-  const width = mobile ? 470 : 1160;
-  const height = mobile ? 430 : 520;
-  const pad = mobile ? { l: 50, r: 18, t: 30, b: 54 } : { l: 76, r: 44, t: 40, b: 62 };
-  const plotW = width - pad.l - pad.r;
-  const plotH = height - pad.t - pad.b;
-  const lastHour = 23;
-  const x = (hour: number) => pad.l + (hour / lastHour) * plotW;
-  const rawMax = visual.yMax ?? Math.max(1, ...visual.series.flatMap((s) => s.values));
-  const niceMax = (v: number) => {
-    const pow = Math.pow(10, Math.floor(Math.log10(v)));
-    const f = v / pow;
-    const nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10;
-    return nf * pow;
-  };
-  const yMax = niceMax(rawMax);
-  const y = (value: number) => height - pad.b - (Math.max(0, value) / yMax) * plotH;
-  const yTicks = Array.from({ length: 5 }, (_, i) => (yMax / 4) * i);
-  const xTickHours = mobile ? [0, 6, 12, 18, 23] : [0, 3, 6, 9, 12, 15, 18, 21, 23];
-  const lineFor = (vals: number[]) => vals.map((v, h) => `${h === 0 ? "M" : "L"}${x(h).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-  const areaFor = (vals: number[]) => `${lineFor(vals)} L${x(lastHour).toFixed(1)},${y(0).toFixed(1)} L${x(0).toFixed(1)},${y(0).toFixed(1)} Z`;
-  const paths = visual.series.map((s, i) => ({
-    label: s.label,
-    color: s.color ?? colors[i % colors.length],
-    emphasis: Boolean(s.emphasis),
-    area: Boolean(s.area),
-    d: lineFor(s.values),
-    areaD: areaFor(s.values),
-    latestX: x(lastHour),
-    latestY: y(s.values[lastHour] ?? s.values.at(-1) ?? 0)
-  }));
-  const gapRect = visual.gap
-    ? { x: x(visual.gap.fromHour), w: x(visual.gap.toHour) - x(visual.gap.fromHour), label: visual.gap.label }
-    : null;
-  const peakX = typeof visual.peakHour === "number" ? x(visual.peakHour) : null;
-  return { width, height, pad, x, y, yMax, yTicks, xTickHours, paths, gapRect, peakX, plotTop: pad.t, plotBottom: height - pad.b };
-}
-
 const selectedKpis = kpisToShow(lockedNumbers);
+const narrow = sectionClass.includes("story-leftover");
 const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, index + startIndex));
 ---
 
@@ -1266,37 +907,24 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         const fileName = fileSafe(visual.title);
         const chartId = `viz-${fileName}-${visualIndex + 1}`;
         const note = chartNotes[visualIndex];
+        const base = cardClass(visualIndex, visual, leadFirst);
+        const card = {
+          title: visual.title,
+          subtitle: cleanSubtitle(visual.subtitle || "", source.sourceId),
+          unit: visual.kind === "pyramid" ? (visual as PyramidVisual).year : visual.unit,
+          chartId,
+          fileName,
+          csvUrl: `${chartDownloadBase}/${fileName}.csv`,
+          note,
+          sourceText,
+          sourceUrl: source.sourceUrl
+        };
         if (visual.kind === "almanac") {
           return (
-            <article class={`${cardClass(visualIndex, visual, leadFirst)} alm-card alm-${visual.form}`}>
-              <div class="viz-head">
-                <div><h2 class="serif">{visual.title}</h2>{visual.subtitle ? <p>{cleanSubtitle(visual.subtitle, source.sourceId)}</p> : null}</div>
-                <span>{visual.unit}</span>
-              </div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="svg">SVG</button>
-                <button type="button" data-viz-action="png">PNG</button>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
+            <FigureCard cls={`${base} alm-card alm-${visual.form}`} {...card} figNote={visual.stat}>
               <Fragment set:html={visual.svg} />
               <Fragment set:html={visual.svgM} />
-              {visual.stat ? <p class="alm-stat">{visual.stat}</p> : null}
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
+            </FigureCard>
           );
         }
         if (visual.kind === "line") {
@@ -1306,20 +934,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           // multi-line card must NOT use the 1160-wide geometry, or its axis text
           // downscales far smaller than the single-line small charts beside it.
           const isLarge = isLead || size === "feature" || (visualIndex === 0 && leadFirst && !size && visual.lines.length > 1);
-          const g = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"));
-          const gm = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"), undefined, true);
+          const g = lineGeometry(visual as LineVisual, isLarge, narrow);
+          const gm = lineGeometry(visual as LineVisual, isLarge, narrow, undefined, true);
           return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head">
-                <div><h2 class="serif">{visual.title}</h2><p>{cleanSubtitle(visual.subtitle, source.sourceId)}</p></div>
-                <span>{visual.unit}</span>
-              </div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="svg">SVG</button>
-                <button type="button" data-viz-action="png">PNG</button>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
+            <FigureCard cls={base} {...card}>
               <Fragment set:html={renderLineSvg(visual as LineVisual, g, { isLead, mobile: false, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-d alm-line" : "viz-svg viz-d alm-line" })} />
               <Fragment set:html={renderLineSvg(visual as LineVisual, gm, { isLead, mobile: true, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-m alm-line" : "viz-svg viz-m alm-line" })} />
               {visual.lines.length > 1 && (
@@ -1329,1150 +947,36 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   {visual.lines.map((line, index) => <span><i style={`background:${line.color ?? colors[index % colors.length]}`}></i>{line.label}</span>)}
                 </div>
               )}
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
+            </FigureCard>
           );
         }
-
-        if (visual.kind === "loadCurve") {
-          const lc = visual as LoadCurveVisual;
-          const g = loadCurveGeometry(lc);
-          const gm = loadCurveGeometry(lc, true);
-          const hourLabel = (h: number) => `${String(h).padStart(2, "0")}:00`;
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head">
-                <div><h2 class="serif">{lc.title}</h2><p>{cleanSubtitle(lc.subtitle, source.sourceId)}</p></div>
-                <span>{lc.unit}</span>
-              </div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="svg">SVG</button>
-                <button type="button" data-viz-action="png">PNG</button>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <svg class="viz-svg viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={lc.title}>
-                {g.gapRect ? (
-                  <g>
-                    <rect x={g.gapRect.x} y={g.plotTop} width={g.gapRect.w} height={g.plotBottom - g.plotTop} fill="rgba(194,74,46,0.08)" />
-                    {g.gapRect.label ? <text x={g.gapRect.x + g.gapRect.w / 2} y={g.plotTop + 14} text-anchor="middle" font-size="12.5" fill="#a63d24">{g.gapRect.label}</text> : null}
-                  </g>
-                ) : null}
-                {g.yTicks.map((tick, ti) => (
-                  <g>
-                    <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} />
-                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, lc.unit)}</text>
-                  </g>
-                ))}
-                {g.xTickHours.map((h) => (
-                  <text class="xaxt" x={g.x(h)} y={g.height - g.pad.b + 24} text-anchor="middle">{hourLabel(h)}</text>
-                ))}
-                {g.peakX !== null ? <line x1={g.peakX} y1={g.plotTop} x2={g.peakX} y2={g.plotBottom} stroke="#8a8a8a" stroke-width="1.2" stroke-dasharray="5 4" /> : null}
-                {g.paths.map((path) => (
-                  <>
-                    {path.area ? <path d={path.areaD} fill={path.color} opacity="0.12" /> : null}
-                    <path d={path.d} fill="none" stroke={path.color} stroke-width={path.emphasis ? "3.6" : "2.7"} stroke-linecap="round" stroke-linejoin="round" />
-                    <circle cx={path.latestX} cy={path.latestY} r="5" fill="#fff" stroke={path.color} stroke-width="3" />
-                  </>
-                ))}
-                <text class="chart-watermark" x={g.width - 16} y={g.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
-              <svg class="viz-svg viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={lc.title}>
-                {gm.gapRect ? (
-                  <g>
-                    <rect x={gm.gapRect.x} y={gm.plotTop} width={gm.gapRect.w} height={gm.plotBottom - gm.plotTop} fill="rgba(194,74,46,0.08)" />
-                    {gm.gapRect.label ? <text x={gm.gapRect.x + gm.gapRect.w / 2} y={gm.plotTop + 12} text-anchor="middle" font-size="10.5" fill="#a63d24">{gm.gapRect.label}</text> : null}
-                  </g>
-                ) : null}
-                {gm.yTicks.map((tick, ti) => (
-                  <g>
-                    <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} />
-                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, lc.unit)}</text>
-                  </g>
-                ))}
-                {gm.xTickHours.map((h) => (
-                  <text class="xaxt" x={gm.x(h)} y={gm.height - gm.pad.b + 22} text-anchor="middle">{hourLabel(h)}</text>
-                ))}
-                {gm.peakX !== null ? <line x1={gm.peakX} y1={gm.plotTop} x2={gm.peakX} y2={gm.plotBottom} stroke="#8a8a8a" stroke-width="1" stroke-dasharray="5 4" /> : null}
-                {gm.paths.map((path) => (
-                  <>
-                    {path.area ? <path d={path.areaD} fill={path.color} opacity="0.12" /> : null}
-                    <path d={path.d} fill="none" stroke={path.color} stroke-width={path.emphasis ? "3" : "2.4"} stroke-linecap="round" stroke-linejoin="round" />
-                    <circle cx={path.latestX} cy={path.latestY} r="4" fill="#fff" stroke={path.color} stroke-width="2.4" />
-                  </>
-                ))}
-                <text class="chart-watermark" x={gm.width - 12} y={gm.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
-              <div class="viz-legend">
-                {g.paths.map((path) => <span><i style={`background:${path.color}`}></i>{path.label}</span>)}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "linePanels") {
-          const lp = visual as LinePanelsVisual;
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head">
-                <div><h2 class="serif">{lp.title}</h2><p>{cleanSubtitle(lp.subtitle, source.sourceId)}</p></div>
-                <span>{lp.unit}</span>
-              </div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={chartDownloadBase + "/" + fileName + ".csv"}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <div class="line-panels">
-                {lp.panels.map((panel) => {
-                  const panelVisual = {
-                    kind: "line",
-                    title: `${lp.title}: ${panel.label}`,
-                    subtitle: lp.subtitle,
-                    unit: lp.unit,
-                    source: lp.source,
-                    lines: panel.lines
-                  } as LineVisual;
-                  const g = lineGeometry(panelVisual, false, false, { min: lp.min, max: lp.max }, false, true);
-                  const gm = lineGeometry(panelVisual, false, false, { min: lp.min, max: lp.max }, true, true);
-                  return (
-                    <div class="line-panel">
-                      <h3>{panel.label}</h3>
-                      <svg class="viz-svg viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
-                        {g.ticks.map((tick, ti) => (
-                          <g>
-                            {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                            <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, lp.unit)}</text>
-                          </g>
-                        ))}
-                        {g.axisTicks.map((tick) => (
-                          <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor={axisTextAnchor(tick.xPos, g.width, g.pad)}>{tick.label}</text>
-                        ))}
-                        {g.paths.map((path) => (
-                          <>
-                            <path d={path.d} fill="none" stroke={path.color} stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
-                            {path.latest ? (
-                              <g>
-                                <circle cx={path.latestX} cy={path.latestY} r="4.5" fill="#fff" stroke={path.color} stroke-width="2.7" />
-                                <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.1" opacity=".4" />
-                                <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color}>{fmt(path.latest.value, lp.unit)}</text>
-                              </g>
-                            ) : null}
-                          </>
-                        ))}
-                        <text class="chart-watermark" x={g.width - 14} y={g.height - 7} text-anchor="end">{WATERMARK_TEXT}</text>
-                      </svg>
-                      <svg class="viz-svg viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
-                        {gm.unitCaption ? <text class="yaxt" x={2} y={gm.pad.t - 18} style="font-size:12px;letter-spacing:.03em;opacity:.9">{gm.unitCaption}</text> : null}
-                        {gm.ticks.map((tick, ti) => (
-                          <g>
-                            {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                            <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, lp.unit, true)}</text>
-                          </g>
-                        ))}
-                        {gm.axisTicks.map((tick) => (
-                          <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor={axisTextAnchor(tick.xPos, gm.width, gm.pad)}>{tick.label}</text>
-                        ))}
-                        {gm.paths.map((path) => (
-                          <>
-                            <path d={path.d} fill="none" stroke={path.color} stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-                            {path.latest ? (
-                              <g>
-                                <circle cx={path.latestX} cy={path.latestY} r="4" fill="#fff" stroke={path.color} stroke-width="2.4" />
-                                <line x1={path.latestX + 4} y1={path.latestY} x2={path.latestX + 10} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
-                                <text class="end-mini-v" x={path.latestX + 12} y={path.labelY} fill={path.color}>{path.endLabelText || fmt(path.latest.value, lp.unit)}</text>
-                              </g>
-                            ) : null}
-                          </>
-                        ))}
-                        <text class="chart-watermark" x={gm.width - 10} y={gm.height - 7} text-anchor="end">{WATERMARK_TEXT}</text>
-                      </svg>
-                      <div class="viz-legend">
-                        {panel.lines.map((line, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{line.label}</span>)}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "scatter") {
-          const scatter = visual as ScatterVisual;
-          const g = scatterGeometry(scatter);
-          const gm = scatterGeometry(scatter, true);
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{scatter.title}</h2><p>{cleanSubtitle(scatter.subtitle, source.sourceId)}</p></div><span>{scatter.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="svg">SVG</button>
-                <button type="button" data-viz-action="png">PNG</button>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <svg class="viz-svg scatter-plot viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={scatter.title}>
-                <rect x={g.x(70)} y={g.pad.t} width={g.width - g.pad.r - g.x(70)} height={g.y(80) - g.pad.t} fill="rgba(194,74,46,0.07)" />
-                <text class="scatter-zone" x={g.x(72)} y={g.y(96)}>Hardest to endure</text>
-                <text class="scatter-zone scatter-zone-muted" x={g.x(4)} y={g.y(96)}>Low heat risk, low cooling</text>
-                {g.ticks.map((tick, ti) => (
-                  <g>
-                    {ti < g.ticks.length - 1 ? <line x1={g.x(tick)} y1={g.pad.t} x2={g.x(tick)} y2={g.height - g.pad.b} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                    {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                    <text class="xaxt" x={g.x(tick)} y={g.height - g.pad.b + 24} text-anchor="middle">{tick}%</text>
-                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{tick}%</text>
-                  </g>
-                ))}
-                <line x1={g.x(70)} y1={g.pad.t} x2={g.x(70)} y2={g.height - g.pad.b} stroke="rgba(194,74,46,0.4)" stroke-dasharray="7 7" />
-                <line x1={g.pad.l} y1={g.y(80)} x2={g.width - g.pad.r} y2={g.y(80)} stroke="rgba(194,74,46,0.4)" stroke-dasharray="7 7" />
-                {scatter.points.map((point) => {
-                  const cx = g.x(point.x);
-                  const cy = g.y(point.y);
-                  const vulnerable = point.x >= 70 && point.y >= 80;
-                  const radius = g.r(point.size);
-                  const label = g.labelled.has(point.label);
-                  const placement = g.labelPositions.get(point.label);
-                  const mpce = typeof point.meta?.ruralMpce === "number" ? `, rural MPCE ${fmt(point.meta.ruralMpce, "Rs per person per month")}` : "";
-                  return (
-                    <g>
-                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(194,74,46,0.78)" : "rgba(51,72,154,0.62)"} stroke="#fff" stroke-width="2">
-                        <title>{`${point.label}: heat risk ${fmt(point.x, "%")}%, without cooling proxy ${fmt(point.y, "%")}%, MPI ${fmt(point.size || 0, "%")}%${mpce}`}</title>
-                      </circle>
-                      {label && placement ? (
-                        <>
-                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#9a9a9a" stroke-width="1" />
-                          <text class="point-label" x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"}>{placement.text}</text>
-                        </>
-                      ) : null}
-                    </g>
-                  );
-                })}
-                <text class="axis-title" x={(g.pad.l + g.width - g.pad.r) / 2} y={g.height - 20} text-anchor="middle">More districts in high/very high heat risk -></text>
-                <text class="axis-title" transform={`translate(24 ${(g.pad.t + g.height - g.pad.b) / 2}) rotate(-90)`} text-anchor="middle">More homes without AC or cooler -></text>
-                <text class="chart-watermark" x={g.width - 16} y={g.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
-              <svg class="viz-svg scatter-plot viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={scatter.title}>
-                <rect x={gm.x(70)} y={gm.pad.t} width={gm.width - gm.pad.r - gm.x(70)} height={gm.y(80) - gm.pad.t} fill="rgba(194,74,46,0.07)" />
-                {gm.ticks.map((tick, ti) => (
-                  <g>
-                    {ti < gm.ticks.length - 1 ? <line x1={gm.x(tick)} y1={gm.pad.t} x2={gm.x(tick)} y2={gm.height - gm.pad.b} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                    {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                    <text class="xaxt" x={gm.x(tick)} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick}%</text>
-                    <text class="yaxt" x={gm.pad.l - 10} y={gm.y(tick) + 4} text-anchor="end">{tick}%</text>
-                  </g>
-                ))}
-                <line x1={gm.x(70)} y1={gm.pad.t} x2={gm.x(70)} y2={gm.height - gm.pad.b} stroke="rgba(194,74,46,0.4)" stroke-dasharray="6 6" />
-                <line x1={gm.pad.l} y1={gm.y(80)} x2={gm.width - gm.pad.r} y2={gm.y(80)} stroke="rgba(194,74,46,0.4)" stroke-dasharray="6 6" />
-                {scatter.points.map((point) => {
-                  const cx = gm.x(point.x);
-                  const cy = gm.y(point.y);
-                  const vulnerable = point.x >= 70 && point.y >= 80;
-                  const radius = gm.r(point.size);
-                  const label = gm.labelled.has(point.label);
-                  const placement = gm.labelPositions.get(point.label);
-                  const mpce = typeof point.meta?.ruralMpce === "number" ? `, rural MPCE ${fmt(point.meta.ruralMpce, "Rs per person per month")}` : "";
-                  return (
-                    <g>
-                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(194,74,46,0.78)" : "rgba(51,72,154,0.62)"} stroke="#fff" stroke-width="1.6">
-                        <title>{`${point.label}: heat risk ${fmt(point.x, "%")}%, without cooling proxy ${fmt(point.y, "%")}%, MPI ${fmt(point.size || 0, "%")}%${mpce}`}</title>
-                      </circle>
-                      {label && placement ? (
-                        <>
-                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#9a9a9a" stroke-width="1" />
-                          <text class="point-label" x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"}>{placement.text}</text>
-                        </>
-                      ) : null}
-                    </g>
-                  );
-                })}
-                <text class="axis-title" x={(gm.pad.l + gm.width - gm.pad.r) / 2} y={gm.height - 16} text-anchor="middle">{shortAxisLabel(scatter.xLabel)}</text>
-                <text class="axis-title" x={gm.pad.l} y={gm.pad.t - 10} text-anchor="start">{shortAxisLabel(scatter.yLabel)}</text>
-                <text class="chart-watermark" x={gm.width - 12} y={gm.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
-              <div class="viz-legend">
-                <span><i style="background:rgba(194,74,46,0.78)"></i>High heat risk + little cooling</span>
-                <span><i style="background:rgba(51,72,154,0.62)"></i>Other states</span>
-                {scatter.sizeLabel ? <span>{scatter.sizeLabel}</span> : null}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "scatterXY") {
-          const sc = visual as ScatterXYVisual;
-          const g = scatterXYGeometry(sc);
-          const gm = scatterXYGeometry(sc, true);
-          const hasIndiaPoint = sc.points.some((point) => point.label === "India");
-          const renderPlot = (geo, mobile) => (
-            <svg class={`viz-svg scatter-plot ${mobile ? "viz-m" : "viz-d"}`} viewBox={`0 0 ${geo.width} ${geo.height}`} role="img" aria-label={sc.title}>
-              {geo.xTicks.map((tick, ti) => (
-                <g>
-                  <line x1={geo.x(tick)} y1={geo.pad.t} x2={geo.x(tick)} y2={geo.height - geo.pad.b} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} />
-                  <text class="xaxt" x={geo.x(tick)} y={geo.height - geo.pad.b + (mobile ? 20 : 24)} text-anchor="middle">{scatterTick(tick, sc.xLabel)}</text>
-                </g>
-              ))}
-              {geo.yTicks.map((tick) => (
-                <g>
-                  <line x1={geo.pad.l} y1={geo.y(tick)} x2={geo.width - geo.pad.r} y2={geo.y(tick)} stroke="#ededed" />
-                  <text class="yaxt" x={geo.pad.l - 10} y={geo.y(tick) + 4} text-anchor="end">{scatterTick(tick, sc.yLabel)}</text>
-                </g>
-              ))}
-              {sc.refY ? (
-                <>
-                  <line x1={geo.pad.l} y1={geo.y(sc.refY.value)} x2={geo.width - geo.pad.r} y2={geo.y(sc.refY.value)} stroke="rgba(40,133,151,0.5)" stroke-dasharray="6 6" />
-                  {!mobile ? <text class="scatter-zone scatter-zone-muted" x={geo.width - geo.pad.r - 4} y={geo.y(sc.refY.value) - 6} text-anchor="end">{sc.refY.label}</text> : null}
-                </>
-              ) : null}
-              {sc.points.map((point) => {
-                const cx = geo.x(point.x);
-                const cy = geo.y(point.y);
-                const isIndia = point.label === "India";
-                const radius = isIndia ? (mobile ? 6 : 8) : point.highlight ? (mobile ? 4.5 : 6) : (mobile ? 2.6 : 3.4);
-                const fill = isIndia ? "var(--sindoor)" : point.highlight ? "rgba(194,74,46,0.5)" : "rgba(138,138,138,0.45)";
-                const placement = geo.labelPositions.get(point.label) || null;
-                // Draw a faint leader line when the label sits noticeably off its dot,
-                // so a displaced label reads as attached rather than floating in space.
-                const labelAnchorX = placement ? (placement.side === "left" ? placement.x + 3 : placement.x - 3) : 0;
-                const showLeader = placement ? (Math.abs(placement.y - cy) > 14 || Math.abs(labelAnchorX - cx) > 40) : false;
-                return (
-                  <g>
-                    {placement && showLeader ? (
-                      <line x1={cx} y1={cy} x2={labelAnchorX} y2={placement.y - 3} stroke="rgba(138,133,151,0.55)" stroke-width="0.8" />
-                    ) : null}
-                    <circle cx={cx} cy={cy} r={radius} fill={fill} stroke="#fff" stroke-width={isIndia ? 2 : 1.2}>
-                      <title>{`${point.label}: ${scatterValue(point.x, sc.xLabel)} ${sc.xLabel}, ${scatterValue(point.y, sc.yLabel)} ${sc.yLabel}`}</title>
-                    </circle>
-                    {placement ? (
-                      <text class={`point-label${point.highlight || isIndia ? "" : " point-label-muted"}`} x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"} style={isIndia ? "font-weight:600" : ""}>{placement.label}</text>
-                    ) : null}
-                  </g>
-                );
-              })}
-              <text class="axis-title" x={(geo.pad.l + geo.width - geo.pad.r) / 2} y={geo.height - (mobile ? 14 : 18)} text-anchor="middle">{mobile ? shortAxisLabel(sc.xLabel) : `${sc.xLabel} ->`}</text>
-              <text class="axis-title" transform={`translate(${mobile ? 16 : 22} ${(geo.pad.t + geo.height - geo.pad.b) / 2}) rotate(-90)`} text-anchor="middle">{mobile ? shortAxisLabel(sc.yLabel) : sc.yLabel}</text>
-              <text class="chart-watermark" x={geo.width - (mobile ? 12 : 16)} y={geo.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
-            </svg>
-          );
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{sc.title}</h2><p>{cleanSubtitle(sc.subtitle, source.sourceId)}</p></div><span>{sc.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="svg">SVG</button>
-                <button type="button" data-viz-action="png">PNG</button>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              {renderPlot(g, false)}
-              {renderPlot(gm, true)}
-              <div class="viz-legend">
-                {hasIndiaPoint ? <span><i style="background:var(--sindoor)"></i>India</span> : null}
-                <span><i style="background:rgba(194,74,46,0.5)"></i>{hasIndiaPoint ? "Selected comparators" : `Highlighted ${sc.entityNoun}`}</span>
-                <span><i style="background:rgba(138,138,138,0.45)"></i>{hasIndiaPoint ? "Other countries" : `Other ${sc.entityNoun}`}</span>
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "stripPair") {
-          const sp = visual as StripPairVisual;
-          return (
-            <article class="viz-card viz-wide">
-              <div class="viz-head"><div><h2 class="serif">{sp.title}</h2><p>{cleanSubtitle(sp.subtitle, source.sourceId)}</p></div><span>{sp.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              {sp.rows.map((row) => {
-                const tot = row.segments.reduce((s, x) => s + x.value, 0) || 1;
-                return (
-                  <div class="strip-pair-row">
-                    <span class="strip-pair-label">{row.label}</span>
-                    <div class="share-strip">
-                      {row.segments.map((seg, index) => {
-                        const pct = (seg.value / tot) * 100;
-                        const showLabel = pct >= 11;
-                        const lbl = `${seg.label} · ${Math.round(seg.value)}%`;
-                        return (
-                          <div style={`width:${pct}%;background:${colors[index % colors.length]}`}>
-                            {showLabel ? <span>{lbl}</span> : null}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-              <div class="strip-legend">
-                {sp.rows[0].segments.map((seg, index) => (
-                  <span class="sl-item"><i style={`background:${colors[index % colors.length]}`}></i>{seg.label}</span>
-                ))}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-                <div class="viz-source"><span>Source</span>{source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}</div>
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "stack") {
-          const stack = visual as StackVisual;
-          const total = stack.segments.reduce((sum, item) => sum + item.value, 0) || 1;
-          const maxSegment = Math.max(...stack.segments.map((item) => item.value), 1);
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{stack.title}</h2><p>{cleanSubtitle(stack.subtitle, source.sourceId)}</p></div><span>{stack.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <div class="viz-stack">
-                {stack.segments.map((segment, index) => {
-                  const segPct = (segment.value / total) * 100;
-                  return (
-                    <div class="viz-seg" style={`width:${segPct}%;background:${colors[index % colors.length]}`}>
-                      {segPct >= 9 ? <span>{segment.label}</span> : null}
-                    </div>
-                  );
-                })}
-              </div>
-              <div class="viz-bars">
-                {stack.segments.map((segment, index) => (
-                  <div class="viz-bar viz-bar-inline"><span>{segment.label}</span><div class="viz-bar-track"><i style={`width:${(segment.value / maxSegment) * 100}%;background:${colors[index % colors.length]}`}></i><b>{fmt(segment.value, stack.unit)}</b></div></div>
-                ))}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "bar") {
-          const bar = visual as BarVisual;
-          const max = Math.max(...bar.bars.map((item) => Math.abs(item.value)), 1);
-          const isLog = (bar as { scale?: string }).scale === "log";
-          const logVals = bar.bars.map((b) => b.value).filter((v) => v > 0);
-          const logMin = isLog && logVals.length ? Math.log(Math.min(...logVals)) : 0;
-          const logSpan = (isLog && logVals.length ? Math.log(Math.max(...logVals)) : 1) - logMin || 1;
-          const logW = (v: number) => v > 0 ? 4 + ((Math.log(v) - logMin) / logSpan) * 95 : 2;
-          const logColor = (v: number) => tempColor(v > 0 ? (Math.log(v) - logMin) / logSpan : 0);
-          const hasNegative = bar.bars.some((item) => item.value < 0);
-          const isComparison = Boolean(source.indicatorId?.startsWith("compare.") || source.indicatorId?.startsWith("econ.compare."));
-          // Share-strip only for a few big slices; many small slices (e.g. 6 age
-          // groups with a 2% tail) render far more legibly as horizontal bars.
-          const isStrip = (bar as { share?: boolean }).share === true;
-          const total = bar.bars.reduce((sum, item) => sum + Math.max(0, item.value), 0) || 1;
-          // A 100% share strip only makes sense when the bars are mutually-exclusive
-          // parts of one whole (they sum to ~100%, e.g. birth order or age structure).
-          // Independent rates that merely happen to be in % (contraception methods,
-          // child-marriage vs teen-pregnancy) must render as plain bars, not a
-          // misleading stacked strip.
-          const isShare = isStrip || (/%/.test(bar.unit) && bar.bars.length <= 4 && Math.abs(total - 100) <= 3 && !hasNegative && !isComparison);
-          const groupedBars = [...new Set(bar.bars.map((item) => item.group).filter(Boolean))] as string[];
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{bar.title}</h2><p>{cleanSubtitle(bar.subtitle, source.sourceId)}</p></div><span>{bar.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              {isShare ? (
-                <div class="share-strip">
-                  {bar.bars.map((item, index) => {
-                    const pct = (item.value / total) * 100;
-                    // The percentage is the hero number and must never clip; the
-                    // category name is secondary (ellipsis on desktop, hidden on
-                    // phones where the full name lives in the legend/table below).
-                    const showPct = pct >= 7;
-                    const showLabel = pct >= 11;
-                    return (
-                    <div class={pct < 13 ? "ss-narrow" : undefined} style={`width:${pct}%;background:${colors[index % colors.length]}`}>
-                      {showPct ? (
-                        <span class="ss-val">
-                          <b>{Math.round(pct)}%</b>
-                          {showLabel ? <em>{item.label}</em> : null}
-                        </span>
-                      ) : null}
-                    </div>
-                    );
-                  })}
-                </div>
-              ) : null}
-              {isStrip ? (
-                <div class="strip-legend">
-                  {bar.bars.map((item, index) => (
-                    <span class="sl-item"><i style={`background:${colors[index % colors.length]}`}></i><span>{item.label} · {Math.round(item.value)}%</span></span>
-                  ))}
-                </div>
-              ) : null}
-              {!isStrip && groupedBars.length ? (
-              <div class="viz-bar-groups">
-                {groupedBars.map((group) => {
-                  const items = bar.bars.filter((item) => item.group === group);
-                  // Scale every group to one shared max (the largest bar across the whole
-                  // chart) so the groups stay comparable and the bars actually fill the
-                  // track, instead of wasting space against a fixed 100. Correlation keeps
-                  // a floor of 1, since a correlation of 1 is its meaningful ceiling.
-                  const groupScaleFloor = /correlation/i.test(bar.unit) ? 1 : 0;
-                  const groupMax = Math.max(groupScaleFloor, 1, ...bar.bars.map((item) => Math.abs(item.value)));
-                  const groupNeg = bar.bars.some((item) => item.value < 0);
-                  return (
-                    <div class="viz-bar-group">
-                      <h3>{group}</h3>
-                      <div class="viz-bars">
-                        {items.map((item) => (
-                          groupNeg ? (
-                            <div class="viz-bar">
-                              <span>{item.label}</span>
-                              <div class="viz-bar-track bipolar">
-                                <i class={item.value < 0 ? "neg" : ""} style={`width:${Math.max(1, (Math.abs(item.value) / groupMax) * 50)}%;margin-left:${item.value < 0 ? 50 - (Math.abs(item.value) / groupMax) * 50 : 50}%;`}></i>
-                              </div>
-                              <b>{fmt(item.value, bar.unit)}</b>
-                            </div>
-                          ) : (
-                            <div class="viz-bar viz-bar-inline">
-                              <span>{item.label}</span>
-                              <div class="viz-bar-track">
-                                <i style={`width:${(item.value / groupMax) * 100}%`}></i>
-                                <b>{fmt(item.value, bar.unit)}</b>
-                              </div>
-                            </div>
-                          )
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              ) : !isStrip ? (
-              <div class="viz-bars">
-                {bar.bars.map((item) => (
-                  <div class={hasNegative ? "viz-bar" : "viz-bar viz-bar-inline"}>
-                    <span>{item.label}</span>
-                    <div class={hasNegative ? "viz-bar-track bipolar" : "viz-bar-track"}>
-                      <i class={item.value < 0 ? "neg" : ""} style={hasNegative
-                        ? `width:${Math.max(2, (Math.abs(item.value) / max) * 50)}%;margin-left:${item.value < 0 ? 50 - (Math.abs(item.value) / max) * 50 : 50}%;`
-                        : isLog
-                        ? `width:${logW(item.value)}%;background:${logColor(item.value)}`
-                        : `width:${isShare ? item.value : (item.value / max) * 100}%`}
-                      ></i>
-                      {!hasNegative ? <b>{fmt(item.value, bar.unit)}</b> : null}
-                    </div>
-                    {hasNegative ? <b>{fmt(item.value, bar.unit)}</b> : null}
-                  </div>
-                ))}
-              </div>
-              ) : null}
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "groupedBar") {
-          const grouped = visual as GroupedBarVisual;
-          const g = groupedBarGeometry(grouped);
-          const gm = groupedBarGeometry(grouped, true);
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{grouped.title}</h2><p>{cleanSubtitle(grouped.subtitle, source.sourceId)}</p></div><span>{grouped.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <svg class="viz-svg grouped-bars viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={grouped.title}>
-                {g.ticks.map((tick, ti) => (
-                  <g>
-                    {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, grouped.unit)}</text>
-                  </g>
-                ))}
-                {grouped.groups.map((group, groupIndex) => {
-                  const groupX = g.pad.l + groupIndex * g.groupW;
-                  const centerX = groupX + g.groupW / 2;
-                  const barsW = grouped.series.length * g.barW + (grouped.series.length - 1) * g.barGap;
-                  const startX = centerX - barsW / 2;
-                  return (
-                    <g>
-                      {group.values.map((value, valueIndex) => {
-                        const x = startX + valueIndex * (g.barW + g.barGap);
-                        const y = g.y(value);
-                        const h = g.height - g.pad.b - y;
-                        const labelX = x + g.barW / 2;
-                        const labelY = g.height - g.pad.b - 10;
-                        return (
-                          <>
-                            <rect x={x} y={y} width={g.barW} height={Math.max(1, h)} fill={colors[valueIndex % colors.length]} />
-                            {h > 58 ? (
-                              <text
-                                class="bar-value-label"
-                                x={labelX}
-                                y={labelY}
-                                text-anchor="start"
-                                transform={`rotate(-90 ${labelX} ${labelY})`}
-                              >
-                                {compactBarLabel(value, grouped.unit)}
-                              </text>
-                            ) : null}
-                          </>
-                        );
-                      })}
-                      <text class="xaxt" x={centerX} y={g.height - g.pad.b + 24} text-anchor="middle">{group.label}</text>
-                    </g>
-                  );
-                })}
-                <text class="chart-watermark" x={g.width - 16} y={g.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
-              <svg class="viz-svg grouped-bars viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={grouped.title}>
-                {gm.ticks.map((tick, ti) => (
-                  <g>
-                    {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
-                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, grouped.unit)}</text>
-                  </g>
-                ))}
-                {grouped.groups.map((group, groupIndex) => {
-                  const groupX = gm.pad.l + groupIndex * gm.groupW;
-                  const centerX = groupX + gm.groupW / 2;
-                  const barsW = grouped.series.length * gm.barW + (grouped.series.length - 1) * gm.barGap;
-                  const startX = centerX - barsW / 2;
-                  // Thin to every other year, anchored to the last group so the latest year
-                  // always shows and labels never end up adjacent at the right edge.
-                  const showLabel = (grouped.groups.length - 1 - groupIndex) % 2 === 0;
-                  return (
-                    <g>
-                      {group.values.map((value, valueIndex) => {
-                        const x = startX + valueIndex * (gm.barW + gm.barGap);
-                        const y = gm.y(value);
-                        const h = gm.height - gm.pad.b - y;
-                        return <rect x={x} y={y} width={gm.barW} height={Math.max(1, h)} fill={colors[valueIndex % colors.length]} />;
-                      })}
-                      {showLabel ? <text class="xaxt" x={centerX} y={gm.height - gm.pad.b + 22} text-anchor="middle">{group.label}</text> : null}
-                    </g>
-                  );
-                })}
-                <text class="chart-watermark" x={gm.width - 12} y={gm.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
-              <div class="viz-legend">
-                {grouped.series.map((name, index) => <span><i style={`background:${colors[index % colors.length]}`}></i>{name}</span>)}
-              </div>
-              <div class="trade-note-row">
-                {grouped.groups.slice(-3).map((group) => (
-                  <span><b>{group.label}</b>{typeof group.net === "number" ? signedFmt(group.net, grouped.unit) : "n/a"} net exports</span>
-                ))}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "change") {
-          const change = visual as ChangeVisual;
-          const max = Math.max(...change.items.map((item) => Math.abs(item.change)), 1);
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head">
-                <div><h2 class="serif">{change.title}</h2><p>{cleanSubtitle(change.subtitle, source.sourceId)}</p></div>
-                <span>{change.unit}</span>
-              </div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <div class="change-grid">
-                {change.items.slice(0, 4).map((item, index) => (
-                  <div class="change-row">
-                    <div class="change-main">
-                      <span>{shortLabel(item.label)}</span>
-                      <b>{signedFmt(item.change, change.unit)}</b>
-                      <small>Added from {item.start.date} to {item.end.date}</small>
-                    </div>
-                    <div class="change-track" aria-label={`${shortLabel(item.label)} changed by ${signedFmt(item.change, change.unit)}`}>
-                      <i style={`width:${Math.max(5, (Math.abs(item.change) / max) * 100)}%;background:${colors[index % colors.length]}`}></i>
-                    </div>
-                    <div class="change-facts">
-                      <span><b>{pct(item.pctChange)}</b><small>Total growth</small></span>
-                      <span><b>{multiple(item.start.value, item.end.value)}</b><small>End vs start</small></span>
-                      {yearSpan(item.start.date, item.end.date) ? (
-                        <span><b>{signedFmt(item.change / (yearSpan(item.start.date, item.end.date) || 1), change.unit)}</b><small>Per year avg</small></span>
-                      ) : null}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
         if (visual.kind === "stripes") {
           const stripes = visual as StripeVisual;
           const spread = Math.max(Math.abs(stripes.max - stripes.center), Math.abs(stripes.center - stripes.min)) || 1;
-          const n = stripes.stripes.length;
-          const w = 1160, h = 200;
-          const bw = w / n;
-          const first = stripes.stripes[0];
-          const last = stripes.stripes[n - 1];
-          const lowLabel = /rain|monsoon|precip|departure/i.test(`${stripes.title} ${stripes.unit}`) ? "Drier" : "Cooler";
-          const highLabel = /rain|monsoon|precip|departure/i.test(`${stripes.title} ${stripes.unit}`) ? "Wetter" : "Hotter";
-          // Year ticks as real HTML below the band (SVG text would be downscaled to ~8px
-          // because the 1160-wide viewBox renders at roughly half that). Force-include the
-          // last year so the axis ends on the latest point, not a sampled gap.
-          const step = Math.max(1, Math.round((n - 1) / 7));
-          const tickIdx: number[] = [];
-          for (let i = 0; i < n; i += step) tickIdx.push(i);
-          // End cleanly on the latest year: replace a near-final tick rather than crowd it.
-          const lastTick = tickIdx[tickIdx.length - 1];
-          if (lastTick !== n - 1) {
-            if (n - 1 - lastTick < step / 2) tickIdx[tickIdx.length - 1] = n - 1;
-            else tickIdx.push(n - 1);
-          }
+          const isRain = /rain|monsoon|precip|departure/i.test(`${stripes.title} ${stripes.unit}`);
+          const lowLabel = isRain ? "Drier" : "Cooler";
+          const highLabel = isRain ? "Wetter" : "Hotter";
           // Rain runs dry haldi to wet hara; everything else (temperature) cool neel to hot
           // sindoor. Both centre on the series' own normal with a grey middle, and both arms
           // span the same distance so equal departures get equal colour.
-          const isRain = /rain|monsoon|precip|departure/i.test(`${stripes.title} ${stripes.unit}`);
           const stripeStops: AlmStops = isRain
             ? ALM_SCALES.rain.map(([v, c]) => [stripes.center + (v / 22) * spread, c] as [number, string])
             : ([[-1, "#24387f"], [-0.6, "#6a7bc0"], [-0.25, "#c9d0ea"], [0, "#ededed"], [0.25, "#f1cbba"], [0.6, "#cc6849"], [1, "#7a2816"]] as AlmStops).map(([v, c]) => [stripes.center + v * spread, c] as [number, string]);
           const stripeFmt = (v: number) => { const d = v - stripes.center, t = fmt(Math.abs(d), stripes.unit); return isRain ? `${d > 0 ? "+" : d < 0 ? "−" : ""}${t}` : fmt(v, stripes.unit); };
           const stripeYears = stripes.stripes.map((st) => ({ year: Number(String(st.date).slice(0, 4)), value: st.value }));
           return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{stripes.title}</h2><p>{cleanSubtitle(stripes.subtitle, source.sourceId)}</p></div><span>{stripes.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="svg">SVG</button>
-                <button type="button" data-viz-action="png">PNG</button>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: 1040, height: 210, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-d alm"')} />
-              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: 350, height: 170, compact: true, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-m alm"')} />
+            <FigureCard cls={base} {...card}>
+              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: narrow ? 508 : 1040, height: 210, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-d alm"')} />
+              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: 346, height: 170, compact: true, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-m alm"')} />
               <div class="alm-stripe-key">
                 <Fragment set:html={almScaleKey(stripeStops, [[stripeStops[0][0], lowLabel], [stripes.center, "Normal"], [stripeStops[stripeStops.length - 1][0], highLabel]], 300)} />
               </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
+            </FigureCard>
           );
         }
-
-        if (visual.kind === "sparkGrid") {
-          const sg = visual as SparkGridVisual;
-          const usuffix = /%/.test(sg.unit) ? "%" : "";
-          // The spark grid was built for climate (temperature). For non-temperature
-          // series the "red = warmer / blue = cooler" change colour is meaningless and
-          // clashes with the level colour, so drop the diverging change colour and use
-          // a neutral caption. Climate (deg C/F) keeps its original behaviour.
-          const isTemp = /°[CF]/.test(sg.unit);
-          // Auto-scale each sparkline to its OWN range, so a 1 deg C trend on a 27 deg C base
-          // reads as a clear slope instead of a flat line crushed against a shared 0-based
-          // ceiling. Colour (from the cross-city min/max) still encodes the absolute level.
-          const cellLoHi = (pts) => {
-            const vs = pts.map((p) => p.value);
-            let lo = Math.min(...vs), hi = Math.max(...vs);
-            if (!(hi > lo)) { hi = lo + 1; lo = lo - 1; }
-            const pad = (hi - lo) * 0.12;
-            return { lo: lo - pad, hi: hi + pad };
-          };
-          const sparkPts = (pts) => {
-            const n = pts.length;
-            const { lo, hi } = cellLoHi(pts);
-            const span = hi - lo || 1;
-            return pts.map((p, i) => `${(n < 2 ? 0 : (i / (n - 1)) * 100).toFixed(1)},${(34 - ((p.value - lo) / span) * 32).toFixed(1)}`).join(" ");
-          };
-          const sparkArea = (pts) => `${sparkPts(pts)} 100,36 0,36`;
-          const allDates = sg.cells.flatMap((cell) => cell.points.map((point) => point.date)).sort();
-          const startYear = allDates[0] ?? "";
-          const endYear = allDates[allDates.length - 1] ?? "";
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{sg.title}</h2><p>{cleanSubtitle(sg.subtitle, source.sourceId)}</p></div><span>{sg.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <p class="spark-scale">{isTemp
-                ? <Fragment>Each chart is one city, {startYear}–{endYear}, auto-scaled to its own range so the trend is visible — read the <em>slope</em>, not the height. The big number is the {endYear} value; the small coloured number is the change since the {startYear}s (red = warmer, blue = cooler). Colour of the line shows how high the {endYear} value sits across all cities.</Fragment>
-                : sg.latestPeriodLabel
-                  ? <Fragment>Each panel plots individual monthly observations from {startYear} to {endYear} and uses its own vertical scale. Read the <em>slope</em>, not the height. The dated red figure is the latest month only, not a financial-year total.</Fragment>
-                  : <Fragment>Each panel plots individual observations from {startYear} to {endYear} and uses its own vertical scale. Read the <em>slope</em>, not the height. The two figures are the first published observation and the latest observation. They are not totals for the full period.</Fragment>}</p>
-              <div class="spark-grid">
-                {sg.cells.map((c) => {
-                  const col = choroColor(c.latest ?? 0, sg.min, sg.max);
-                  const cellStart = c.points[0]?.date ?? startYear;
-                  const cellEnd = c.points[c.points.length - 1]?.date ?? endYear;
-                  // Non-temp: colour-by-latest-level washes every panel out when the
-                  // whole point is that the series all converged low (e.g. fertility).
-                  // Draw the line in a solid, legible tone; keep the level cue in the
-                  // number badge only. Climate keeps its level-coloured line.
-                  const lineCol = isTemp ? col : "var(--sindoor)";
-                  return (
-                    <div class="spark-cell">
-                      <div class="spark-head"><b>{c.label}</b><span class="spark-nums">{isTemp
-                        ? <Fragment><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em>{typeof c.change === "number" ? <i class={`spark-d ${c.change >= 0 ? "pos" : "neg"}`}>{signedFmt(c.change, sg.unit)}</i> : null}</Fragment>
-                        : sg.latestPeriodLabel
-                          ? <Fragment><i class="spark-period">{compactPeriodLabel(cellEnd)} only</i><em style="color:var(--sindoor)">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>
-                          : <Fragment><i class="spark-d" style="color:#8a8a8a">{sparkEndpoint(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:var(--sindoor)">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
-                      <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${sparkEndpoint(c.latest ?? 0, sg.unit)} in ${cellEnd}`}>
-                        <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e4e4e4" stroke-width="1" vector-effect="non-scaling-stroke" />
-                        <polygon points={sparkArea(c.points)} fill={lineCol} fill-opacity={isTemp ? 0.14 : 0.10} stroke="none" />
-                        <polyline points={sparkPts(c.points)} fill="none" stroke={lineCol} stroke-width={isTemp ? 1.6 : 2} stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
-                        <text class="chart-watermark" x="98" y="34" text-anchor="end">{WATERMARK_TEXT}</text>
-                      </svg>
-                      <div class="spark-axis"><span>{cellStart}</span><span>{cellEnd}</span></div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "startingGrid") {
-          const sgr = visual as StartingGridVisual;
-          // One mini multi-line panel per indicator, each auto-scaled to its own range,
-          // sharing the country colours/legend, all from the common anchor year.
-          const gridPts = (pts, panel) => {
-            const n = pts.length;
-            const span = (panel.max - panel.min) || 1;
-            return pts.map((p, i) => `${(n < 2 ? 0 : (i / (n - 1)) * 100).toFixed(1)},${(38 - ((p.value - panel.min) / span) * 36).toFixed(1)}`).join(" ");
-          };
-          const firstLine = sgr.panels[0]?.lines[0]?.points ?? [];
-          const endYear = firstLine.length ? firstLine[firstLine.length - 1].date : "";
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{sgr.title}</h2><p>{cleanSubtitle(sgr.subtitle, source.sourceId)}</p></div><span>{sgr.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <p class="spark-legend">{sgr.legend.map((l) => (<span class="spark-leg"><i style={`background:${l.color}`}></i>{l.label}</span>))}</p>
-              <p class="spark-scale">Each panel is one measure, every country drawn from {sgr.anchorYear || "the same start"} on its own scale, so read the <em>fan-out</em>: lines that start close and spread apart show a gap opening at a shared starting point. Lines sit on different axes, so compare each panel's shape, not heights across panels.</p>
-              <div class="spark-grid">
-                {sgr.panels.map((panel) => (
-                  <div class="spark-cell">
-                    <div class="spark-head"><b>{panel.label}</b><span class="spark-nums">{panel.unit}</span></div>
-                    <svg class="spark-svg" viewBox="0 0 100 40" preserveAspectRatio="none" role="img" aria-label={panel.label}>
-                      <line x1="0" y1="38.5" x2="100" y2="38.5" stroke="#e4e4e4" stroke-width="1" vector-effect="non-scaling-stroke" />
-                      {panel.lines.map((line) => (<polyline points={gridPts(line.points, panel)} fill="none" stroke={line.color} stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />))}
-                      <text class="chart-watermark" x="98" y="37" text-anchor="end">{WATERMARK_TEXT}</text>
-                    </svg>
-                    <div class="spark-axis"><span>{sgr.anchorYear || ""}</span><span>{endYear}</span></div>
-                  </div>
-                ))}
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "rankedChange") {
-          const rc = visual as RankedChangeVisual;
-          // When values sit in a high band well above zero (e.g. temperatures 12–30 deg C),
-          // a 0-based bar makes every row look identical. Floor the bars just below the
-          // lowest value so the spread — and each row's baseline→latest gap — is visible.
-          // Count data (hot nights, humid days) starts near 0, so it stays 0-based.
-          const rcLo = (typeof rc.min === "number" && rc.min > rc.max * 0.25)
-            ? rc.min - (rc.max - rc.min) * 0.18
-            : 0;
-          const rcSpan = (rc.max - rcLo) || 1;
-          const rcMaxAbs = Math.max(...rc.rows.map((r) => Math.abs(r.change)), 0.001);
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{rc.title}</h2><p>{cleanSubtitle(rc.subtitle, source.sourceId)}</p></div><span>{rc.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              {rc.diverging ? (
-                <div class="ranked-diverge">
-                  <div class="rdiv-head"><span>{rc.rowLabel || "City"}</span><span>{rc.divergeLabel || "← cooler · warmer →"}</span><span>{rc.startLabel}→{rc.endLabel}</span></div>
-                  {rc.rows.map((row) => {
-                    const w = (Math.abs(row.change) / rcMaxAbs) * 50;
-                    return (
-                      <div class="rdiv-row">
-                        <b>{row.label}</b>
-                        <div class="rdiv-track" aria-label={`${row.label} change ${signedFmt(row.change, rc.unit)}`}>
-                          <span class="rdiv-zero"></span>
-                          <i class={`rdiv-bar ${row.change >= 0 ? "pos" : "neg"}`} style={row.change >= 0 ? `left:50%;width:${w}%` : `right:50%;width:${w}%`}></i>
-                        </div>
-                        <em class={row.change >= 0 ? "pos" : "neg"}>{signedFmt(row.change, rc.unit)}</em>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-              <div class="ranked-change">
-                <div class="ranked-change-head">
-                  <span>{rc.rowLabel || "City"}</span>
-                  <span>{rc.startLabel} avg</span>
-                  <span>{rc.endLabel}</span>
-                  <span>Change</span>
-                </div>
-                {rc.rows.map((row) => {
-                  const startW = Math.max(1, ((row.start - rcLo) / rcSpan) * 100);
-                  const endW = Math.max(1, ((row.end - rcLo) / rcSpan) * 100);
-                  return (
-                    <div class="ranked-change-row">
-                      <b>{row.label}</b>
-                      <div class="ranked-change-bar muted" aria-label={`${row.label} baseline ${fmt(row.start, rc.unit)}`}>
-                        <i style={`width:${startW}%`}></i><span>{fmt(row.start, rc.unit)}</span>
-                      </div>
-                      <div class="ranked-change-bar hot" aria-label={`${row.label} latest ${fmt(row.end, rc.unit)}`}>
-                        <i style={`width:${endW}%`}></i><span>{fmt(row.end, rc.unit)}</span>
-                      </div>
-                      <em class={row.change >= 0 ? "pos" : "neg"}>{signedFmt(row.change, rc.unit)}</em>
-                    </div>
-                  );
-                })}
-              </div>
-              )}
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
-        if (visual.kind === "scenarioMaps") {
-          const sm = visual as ScenarioMapsVisual;
-          const smBox = viewBoxSize(sm.viewBox);
-          const smGradient = `linear-gradient(90deg, ${choroColor(sm.min, sm.min, sm.max)}, ${choroColor((sm.min + sm.max) / 2, sm.min, sm.max)}, ${choroColor(sm.max, sm.min, sm.max)})`;
-          // fmt() already appends "%" for percent units (but not °C), so usuffix
-          // only needs to add the degree suffix; adding "%" here would double it.
-          const usuffix = /°C|degree/i.test(sm.unit) ? "°C" : "";
-          return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{sm.title}</h2><p>{cleanSubtitle(sm.subtitle, source.sourceId)}</p></div><span>{sm.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <div class="scenmap-row">
-                {sm.panels.map((p) => (
-                  <div class="scenmap-cell">
-                    <b class="scenmap-label">{p.label}</b>
-                    <svg class="viz-svg scenmap-svg" viewBox={sm.viewBox} role="img" aria-label={`${sm.title}: ${p.label}`}>
-                      {p.regions.map((r) => (
-                        <path d={compactSvgPath(r.path)} fill={r.value === null || r.value === undefined ? "#f2f2f2" : choroColor(r.value, sm.min, sm.max)} stroke="#fff" stroke-width="0.7" stroke-linejoin="round">
-                          <title>{r.name}: {r.value === null || r.value === undefined ? "no data" : `${fmt(r.value, sm.unit)}${usuffix}`}</title>
-                        </path>
-                      ))}
-                      <text class="chart-watermark" x={smBox.width - 12} y={smBox.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
-                    </svg>
-                  </div>
-                ))}
-              </div>
-              <div class="scenmap-legend">
-                <span class="choro-bar" style={`background:${smGradient}`}></span>
-                <span class="choro-ends"><em>{fmt(sm.min, sm.unit)}{usuffix}</em><em>{fmt(sm.max, sm.unit)}{usuffix}</em></span>
-                <span class="choro-cap">{sm.unit}</span>
-              </div>
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
-          );
-        }
-
         if (visual.kind === "choropleth") {
           const cho = visual as ChoroplethVisual;
-          const valued = cho.regions.filter((r): r is { name: string; value: number; path: string } => r.value !== null && r.value !== undefined);
-          const top = [...valued].sort((a, b) => b.value - a.value).slice(0, 3);
-          const bottom = cho.bottomLabel ? [...valued].sort((a, b) => a.value - b.value).slice(0, 3) : [];
-          const vf = (v: number) => choroplethValueLabel(cho, v);
-          const choDiverge = cho.divergeAt !== undefined && Number.isFinite(cho.divergeAt) && cho.divergeAt > cho.min && cho.divergeAt < cho.max ? cho.divergeAt : null;
-          const choPivotPct = choDiverge !== null ? ((choDiverge - cho.min) / (cho.max - cho.min)) * 100 : null;
-          // When diverging, anchor the cream midpoint at its true position on the bar
-          // (not 50%) so the legend matches the map; otherwise keep the simple 3-stop ramp.
-          const choGradient = choDiverge !== null
-            ? `linear-gradient(90deg, ${choroColor(cho.min, cho.min, cho.max, cho.ramp, choDiverge)} 0%, ${choroColor((cho.min + choDiverge) / 2, cho.min, cho.max, cho.ramp, choDiverge)} ${(choPivotPct as number) / 2}%, ${choroColor(choDiverge, cho.min, cho.max, cho.ramp, choDiverge)} ${choPivotPct}%, ${choroColor((choDiverge + cho.max) / 2, cho.min, cho.max, cho.ramp, choDiverge)} ${(choPivotPct as number) + (100 - (choPivotPct as number)) / 2}%, ${choroColor(cho.max, cho.min, cho.max, cho.ramp, choDiverge)} 100%)`
-            : `linear-gradient(90deg, ${choroColor(cho.min, cho.min, cho.max, cho.ramp)}, ${choroColor((cho.min + cho.max) / 2, cho.min, cho.max, cho.ramp)}, ${choroColor(cho.max, cho.min, cho.max, cho.ramp)})`;
+          const valued = cho.regions.filter((r) => r.value !== null && r.value !== undefined);
           const noDataNames = cho.regions.filter((r) => r.value === null || r.value === undefined).map((r) => r.name);
           const svgUrl = `${chartDownloadBase}/${fileName}.svg`;
           // In `astro dev` the static [chart].svg.ts endpoint is not generated, so the
@@ -2480,15 +984,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           // so maps are previewable; keep lazy-loading in production builds for weight.
           const lazyMap = !import.meta.env.DEV && (visualIndex > 0 || !leadFirst);
           return (
-            <article class={cardClass(visualIndex, visual, leadFirst)}>
-              <div class="viz-head"><div><h2 class="serif">{cho.title}</h2><p>{cleanSubtitle(cho.subtitle, source.sourceId)}</p></div><span class="choro-unit">{cho.unit}</span></div>
-              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`} data-svg-url={svgUrl}>
-                <button type="button" data-viz-action="svg">SVG</button>
-                <button type="button" data-viz-action="png">PNG</button>
-                <button type="button" data-viz-action="csv">CSV</button>
-                <button type="button" data-viz-action="share">Share</button>
-              </div>
-              <div class={choroWrapClass(cho)}>
+            <FigureCard cls={base} {...card} svgUrl={svgUrl}>
+              <div class="choro-wrap">
                 {lazyMap ? (
                   <>
                     <div class="lazy-svg-frame choro-map-frame" data-lazy-svg={svgUrl} aria-label={cho.title} style={`aspect-ratio:${viewBoxAspectRatio(cho.viewBox)}`}></div>
@@ -2503,60 +1000,16 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               {noDataNames.length ? (
                 <p class="choro-foot">Outlined states ({noDataNames.join(", ")}) were not covered by the survey sample, so no estimate exists for them. They are left uncoloured rather than counted as zero.</p>
               ) : null}
-              <div class="chart-note">
-                <p class="cn-take serif">{note.takeaway}</p>
-                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-                <div class="cn-meta">
-                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                  <p><b>How to read</b><span>{note.howToRead}</span></p>
-                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-                </div>
-              </div>
-              <div class="viz-source">
-                <span>Source</span>
-                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-              </div>
-            </article>
+            </FigureCard>
           );
         }
-
-        const pyramid = visual as PyramidVisual;
-        const max = Math.max(...pyramid.rows.flatMap((row) => [row.male, row.female]), 1);
+        const fig = renderFigure(visual, { narrow, chartId });
+        if (!fig) return null;
         return (
-          <article class={cardClass(visualIndex, visual, leadFirst)}>
-            <div class="viz-head"><div><h2 class="serif">{pyramid.title}</h2><p>{cleanSubtitle(pyramid.subtitle, source.sourceId)}</p></div><span>{pyramid.year}</span></div>
-            <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
-              <button type="button" data-viz-action="csv">CSV</button>
-              <button type="button" data-viz-action="share">Share</button>
-            </div>
-            <div class="pyramid">
-              {pyramid.rows.map((row) => (
-                <div class="pyr-row">
-                  <b class="pyr-num pyr-num-male">{fmt(row.male, pyramid.unit)}</b>
-                  <div class="pyr-side male"><i style={`width:${(row.male / max) * 100}%`}></i></div>
-                  <span>{row.age}</span>
-                  <div class="pyr-side female"><i style={`width:${(row.female / max) * 100}%`}></i></div>
-                  <b class="pyr-num pyr-num-female">{fmt(row.female, pyramid.unit)}</b>
-                </div>
-              ))}
-            </div>
-            <div class="viz-legend"><span><i style="background:var(--c)"></i>Male</span><span><i style="background:#322e29"></i>Female</span></div>
-            <div class="chart-note">
-              <p class="cn-take serif">{note.takeaway}</p>
-              {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-              <div class="cn-meta">
-                {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-                <p><b>How to read</b><span>{note.howToRead}</span></p>
-                <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
-                {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
-              </div>
-            </div>
-            <div class="viz-source">
-              <span>Source</span>
-              {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-            </div>
-          </article>
+          <FigureCard cls={`${base} alm-card fig-card fig-${visual.kind}`} {...card} figNote={fig.note}>
+            <Fragment set:html={fig.svg} />
+            <Fragment set:html={fig.svgM} />
+          </FigureCard>
         );
       })}
     </div>

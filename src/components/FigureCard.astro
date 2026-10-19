@@ -1,0 +1,49 @@
+---
+// One figure: Fig. N, the title that states the finding, the measure, the chart
+// (slot), how to read it, then the source and the downloads. Every chart kind on an
+// article renders through this card so the anatomy never drifts.
+type Note = { takeaway?: string; detail?: string; whyShowThis?: string; howToRead?: string; mistakeToAvoid?: string };
+type Props = {
+  cls: string;
+  title: string;
+  subtitle?: string;
+  unit?: string;
+  chartId: string;
+  fileName: string;
+  csvUrl: string;
+  svgUrl?: string;
+  image?: boolean;
+  figNote?: string;
+  note: Note;
+  sourceText: string;
+  sourceUrl?: string;
+};
+const { cls, title, subtitle, unit, chartId, fileName, csvUrl, svgUrl, image = true, figNote, note, sourceText, sourceUrl } = Astro.props;
+---
+<article class={cls}>
+  <div class="viz-head">
+    <div><h2 class="serif">{title}</h2>{subtitle ? <p>{subtitle}</p> : null}</div>
+    <span>{unit}</span>
+  </div>
+  <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={csvUrl} data-svg-url={svgUrl}>
+    {image ? <button type="button" data-viz-action="svg">SVG</button> : null}
+    {image ? <button type="button" data-viz-action="png">PNG</button> : null}
+    <button type="button" data-viz-action="csv">CSV</button>
+    <button type="button" data-viz-action="share">Share</button>
+  </div>
+  <slot />
+  {figNote ? <p class="alm-stat">{figNote}</p> : null}
+  <div class="chart-note">
+    {note.takeaway ? <p class="cn-take serif">{note.takeaway}</p> : null}
+    {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+    <div class="cn-meta">
+      {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
+      {note.howToRead ? <p><b>How to read</b><span>{note.howToRead}</span></p> : null}
+      {note.mistakeToAvoid ? <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p> : null}
+    </div>
+  </div>
+  <div class="viz-source">
+    <span>Source</span>
+    {sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+  </div>
+</article>

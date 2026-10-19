@@ -312,3 +312,15 @@ svg[data-hover]{touch-action:pan-y}
 .viz-bar-group .viz-bar:not(.viz-bar-inline){grid-template-columns:minmax(150px,28%) minmax(0,1fr) auto}
 .viz-bar-track.bipolar{height:14px}
 .viz-bar-track.bipolar i{height:14px}
+
+/* ---------- figures drawn by src/data/figures.ts ---------- */
+/* One tooltip layer for every mark with a data-tip (article-actions.js). The hovered
+   mark gets a hairline ink outline; a hovered row gets a faint band behind it. */
+.viz-svg [data-tip]{outline:none}
+.viz-svg g.mk.is-hot>rect:first-child,.viz-svg g.mk:focus-visible>rect:first-child{fill:#f3f3f3}
+.viz-svg [data-tip].is-hot:not(g),.viz-svg [data-tip]:focus-visible:not(g){stroke:#121212;stroke-width:1.5px;paint-order:stroke}
+.viz-svg g.mk:focus-visible{outline:none}
+.hov-tip{max-width:min(300px,82vw);white-space:normal}
+.hov-tip>b{display:block;font-weight:600}
+.hov-tip>b+b{font-weight:400;color:var(--mid)}
+.fig-card .alm-stat{max-width:72ch}

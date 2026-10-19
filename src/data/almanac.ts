@@ -11,9 +11,9 @@ export const INK = {
   neel: "#33489a", sindoor: "#c24a2e", hara: "#008a6e", haldi: "#b98014", jamun: "#7b4790",
 } as const;
 
-const F = "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif";
+export const F = "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif";
 export const r1 = (v: number) => Math.round(v * 10) / 10;
-const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+export const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 type TextOpts = { size?: number; fill?: string; anchor?: "start" | "middle" | "end"; weight?: number };
 export const txt = (x: number, y: number, s: string | number, o: TextOpts = {}) =>
@@ -211,7 +211,9 @@ export function stripes(points: Array<{ year: number; value: number; flag?: bool
   stops: Stops; width?: number; height?: number; compact?: boolean; marks?: Record<number, string>; label: string; valueFmt?: (v: number) => string; tickStep?: number;
 }) {
   const W = o.width ?? 1160, H = o.height ?? 230, sm = !!o.compact, col = ramp(o.stops);
-  const y0 = points[0].year, top = sm ? 44 : 52, bh = H - top - (sm ? 54 : 46), sw = W / points.length;
+  // Stripes are placed by year, so a gap in the record stays a gap (and the last year
+  // still lands at the right edge) instead of every later stripe sliding left.
+  const y0 = points[0].year, top = sm ? 44 : 52, bh = H - top - (sm ? 54 : 46), sw = W / (points[points.length - 1].year - y0 + 1);
   const xOf = (yr: number) => (yr - y0) * sw;
   const fmt = o.valueFmt ?? ((v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(Math.round(v))}%`);
   let b = "";
@@ -249,6 +251,12 @@ export type ScatterPoint = { label: string; short?: string; x: number; y: number
 export function scatterFit(pts: ScatterPoint[], o: {
   x: [number, number]; y: [number, number]; xTicks: number[]; yTicks: number[]; xFmt?: (v: number) => string; yFmt?: (v: number) => string;
   xTitle: string; yTitle: string; width?: number; height?: number; refY?: { value: number; label: string }; fit?: boolean; sizeKey?: Array<[number, string]>; sizeTitle?: string; label: string;
+  /** Colour per point (default: sindoor when hot, else neel). */
+  colorOf?: (p: ScatterPoint) => string;
+  /** Extra marks drawn under the points, given the scales (zones, guides). */
+  under?: (x: (v: number) => number, y: (v: number) => number) => string;
+  /** Tooltip lines per point (default: label, x, y). */
+  tipOf?: (p: ScatterPoint) => string[];
 }) {
   const W = o.width ?? 1040, H = o.height ?? 460, sm = W < 700;
   const ml = 30, mr = 10, mt = 30, mb = 50;
@@ -260,9 +268,10 @@ export function scatterFit(pts: ScatterPoint[], o: {
   let b = "";
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
-  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: "middle" }); }
+  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
   b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
   b += txt(0, 12, `${o.yTitle} ↑`, { size: 11.5, fill: INK.ink2 });
+  if (o.under) b += o.under(x, y);
   if (o.refY) { b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3"); b += txt(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" }); }
   let stats: { r: number; n: number; slope: number } | null = null;
   if (o.fit !== false && pts.length > 3) {
@@ -280,8 +289,9 @@ export function scatterFit(pts: ScatterPoint[], o: {
     b += `<g clip-path="url(#${cid})">${line(x(x0), y(ic + sl * x0), x(x1), y(ic + sl * x1), INK.ink2, 1)}</g>`;
     stats = { r: sxy / Math.sqrt(sxx * syy), n, slope: sl };
   }
+  const tipA = (p: ScatterPoint) => (o.tipOf ? o.tipOf(p) : [p.label, `${o.xTitle}: ${xf(p.x)}`, `${o.yTitle}: ${yf(p.y)}`]).join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   for (const p of [...pts].sort((a, c) => (c.size ?? 0) - (a.size ?? 0)))
-    b += `<circle cx="${r1(x(p.x))}" cy="${r1(y(p.y))}" r="${r1(rad(p.size))}" fill="${p.hot ? INK.sindoor : INK.neel}" fill-opacity="${sized ? 0.82 : 1}" stroke="#ffffff" stroke-width="1.25"><title>${esc(p.label)}: ${xf(p.x)}, ${yf(p.y)}</title></circle>`;
+    b += `<circle class="mk" cx="${r1(x(p.x))}" cy="${r1(y(p.y))}" r="${r1(rad(p.size))}" fill="${o.colorOf ? o.colorOf(p) : p.hot ? INK.sindoor : INK.neel}" fill-opacity="${sized ? 0.82 : 1}" stroke="#ffffff" stroke-width="1.25" data-tip="${tipA(p)}"/>`;
   for (const p of pts) if (p.place) {
     const rr = rad(p.size) + 5, cx = x(p.x), cy = y(p.y);
     const [tx, ty, an] = p.place === "r" ? [cx + rr, cy + 4, "start"] : p.place === "l" ? [cx - rr, cy + 4, "end"] : p.place === "t" ? [cx, cy - rr - 1, "middle"] : [cx, cy + rr + 10, "middle"];
@@ -649,7 +659,7 @@ export function connectedScatter(paths: Path2D[], o: { x: [number, number]; y: [
   let b = "";
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
-  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: "middle" }); }
+  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
   b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 }) + txt(0, 12, `${o.yTitle} ↑`, { size: 11.5, fill: INK.ink2 });
   if (o.refY) { b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3"); b += halo(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" }); }
   // End labels are stacked so none overlap: sort by end y, push apart by a minimum gap.
