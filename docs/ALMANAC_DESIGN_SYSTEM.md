@@ -28,13 +28,19 @@ figures that leave the page whole.
 
 ## Colour
 
-- Ink `#121212`, mid `#4f4f4f`, dim `#737373` (text) / `#8a8a8a` (axis labels), grid `#ededed`, rule `#dadada`.
+- Ink `#121212`, mid `#4f4f4f`, dim `#737373` (text and axis numbers), grid `#ededed`, rule `#dadada`.
 - Data inks: neel `#33489a`, sindoor `#c24a2e`, hara `#008a6e`, haldi `#b98014`, jamun `#7b4790`.
 - Each domain borrows one ink as `--c` (people sindoor, economy hara, energy haldi, climate `#1f6f8b`, health jamun, society neel).
   Chart series follow `--c`, then ink black (`--s2`), then the three inks the domain does not use (`--s3..--s5`), then grey.
 - Continuous scales are interpolated in OKLab between named stops (`SCALES` in `almanac.ts`). Diverging scales have a grey middle, never a hue.
 
 Registry entries that hard-code `color` on a series still win over the palette. When you touch such an entry, prefer the named inks.
+
+- Text-safe inks: neel `#2e418c`, sindoor `#a63d24`, hara `#00735c`, haldi `#8a5f0a`, jamun `#6a3c7d` (tokens `--neel-ink`
+  and so on, and `--s2-ink..--s6-ink` per domain). Any word set in a series colour goes through `textInk()`; marks never do.
+- Axis numbers are `#737373`.
+- No ink repeats within a chart: past the palette, series are grey.
+- India, as one of several countries, always wears `--c`.
 
 ## The forms
 
@@ -71,12 +77,17 @@ The older kinds still render through `ArticleVisuals.astro`, redesigned rather t
   reference line is named beside itself; a soft wash sits under single series only when the axis
   starts at zero. Every line chart has a hover crosshair (`initHover` in `public/article-actions.js`)
   fed by a `data-hover` attribute built at compile time.
+  Context lines are 1.25 px at 60% when a series is emphasised, and the emphasised line is cased in the ground
+  colour. A single series' first value is set lighter than its latest. A second line with the same fixed meaning is
+  dashed with butt caps at a length scaled to its weight. On a phone, five or more lines with a protagonist write
+  only the protagonist's value; the key and tooltip carry the rest.
 - **Projections** (`projectedAfter` on a `line` or `multiLine` plan entry, or on one `series` item):
   the year of the last measured point. After it the line is drawn dashed in the same ink and
   weight, the plot behind it takes a faint ground, and a dotted hairline marked "projected ->"
   stands at the split. A jagged model run (CMIP6 scenarios) stays solid inside that ground, since
   dashes break noise into specks. Set it from the source's own note (UN WPP 2024: estimates to
   2023; MoHFW 2020: Census 2011 then projected), never by eye.
+  A projected stretch is never thinner than 1.6 px; a line projected throughout keeps its full ink.
 - **Bars**: thin bars with the value at each bar's end, no grey tracks; groups with negatives
   diverge from a zero line.
 - **Maps** (`renderChoroplethSvg`, `renderChoroplethStrip` in `chartSvg.ts`): hairline borders, no
@@ -120,6 +131,8 @@ Other rules the renderers keep:
 - A line that stops short of the others is named just before its own end, not after it among the lines that carry on.
 - A figure fills its column: a single change card reads across the full width, line-chart gutters are sized to the
   labels they print (long series names wrap onto two lines), and bar labels that fit their column stay on one line.
+- Horizontal and vertical rules snap to the pixel grid (crispEdges). White halos, dot rings and cut gaps follow
+  the page ground (`--bg`).
 - Phone text is at least 11 px as rendered on a 412 px phone (the line-chart box is drawn at 384 and shown at about
   368, so its smallest text is set at 11.5).
 

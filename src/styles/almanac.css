@@ -449,3 +449,24 @@ svg[data-hover]{touch-action:pan-y}
 .article-story-section{padding-top:24px}
 .story-body>h2.story-title{margin-top:40px;font-size:clamp(1.6rem,2.6vw,2.05rem)}
 .story-body>.standfirst{font-size:1.18rem;color:#4a4a4a;margin-bottom:34px}
+
+/* ---------- Chart type and ink ---------- */
+/* Marks take the data ink; words set in a series colour take its text-safe shade
+   (textInk() in almanac.ts maps var(--sN) to var(--sN-ink)). Haldi is 3:1 on white,
+   too pale for an 11px label; its ink is 5.6:1. Each domain points its series slots
+   at the matching ink, as indica.css points --s3..--s5 at the inks. */
+:root{
+  --neel-ink:#2e418c;--sindoor-ink:#a63d24;--hara-ink:#00735c;--haldi-ink:#8a5f0a;--jamun-ink:#6a3c7d;
+  --s2-ink:#121212;--s3-ink:var(--neel-ink);--s4-ink:var(--hara-ink);--s5-ink:var(--haldi-ink);--s6-ink:#6f6f6f;
+}
+.dom-people{--s3-ink:var(--neel-ink);--s4-ink:var(--hara-ink);--s5-ink:var(--haldi-ink)}
+.dom-economy{--s3-ink:var(--neel-ink);--s4-ink:var(--sindoor-ink);--s5-ink:var(--haldi-ink)}
+.dom-energy{--s3-ink:var(--neel-ink);--s4-ink:var(--sindoor-ink);--s5-ink:var(--hara-ink)}
+.dom-climate{--s3-ink:var(--sindoor-ink);--s4-ink:var(--haldi-ink);--s5-ink:var(--jamun-ink)}
+.dom-health{--s3-ink:var(--neel-ink);--s4-ink:var(--sindoor-ink);--s5-ink:var(--hara-ink)}
+.dom-society{--s3-ink:var(--sindoor-ink);--s4-ink:var(--hara-ink);--s5-ink:var(--haldi-ink)}
+/* Axis numbers sit at the house dim (#737373, 4.7:1 on white), not a paler grey. */
+.yaxt,.xaxt,.end-s,.alm-line .yaxt,.alm-line .xaxt{fill:#737373}
+/* Halos, dot rings and the gaps cut between marks are drawn in white; they follow the
+   page ground, so the figures stay seamless if the ground is ever toned. */
+.viz-svg [stroke="#fff"],.viz-svg [stroke="#ffffff"]{stroke:var(--bg)}

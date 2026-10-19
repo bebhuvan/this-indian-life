@@ -151,13 +151,13 @@
   <style>
     ${fontCss}
     text{font-family:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;font-variant-numeric:lining-nums}
-    :where(text:not([fill])){fill:#8a8a8a}
+    :where(text:not([fill])){fill:#737373}
     .serif,.export-title,.export-brand{font-family:"Newsreader",Georgia,serif}
     .export-title{font-size:${titleSize}px;font-weight:500;fill:#121212}
     .export-subtitle{font-size:${subSize}px;fill:#4f4f4f}
     .export-source{font-size:${Math.max(11, Math.round(subSize * 0.85))}px;fill:#4f4f4f}
     .export-brand{font-size:${Math.round(subSize * 1.3)}px;font-weight:500;fill:#121212}
-    .yaxt,.xaxt,.end-s{font-size:14px;fill:#8a8a8a}
+    .yaxt,.xaxt,.end-s{font-size:14px;fill:#737373}
     .ref-label{font-size:14px;fill:#4f4f4f}
     .end-mini-v{font-size:15px;font-weight:600}
     .point-label{font-size:14px;font-weight:500;fill:#121212}

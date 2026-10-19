@@ -7,7 +7,7 @@ import FigureCard from "./FigureCard.astro";
 import { renderFigure, cleanUnit } from "../data/figures";
 import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, axisFmt, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
 import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, viewBoxAspectRatio } from "../data/chartSvg";
-import { typeset, wrapWords, txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
+import { typeset, wrapWords, txt as almTxt, halo as almHalo, line as almLine, textInk, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
 
 type ChartExplainer = {
   visualId: string;
@@ -44,7 +44,8 @@ const {
 
 // Series order: the domain ink, then ink black, then the three named data inks the
 // domain does not already use (set per domain as --s3..--s5 in indica.css), then grey.
-// A seventh series folds into a light grey rather than inventing a hue.
+// A seventh series folds into a light grey rather than inventing a hue, and so does every
+// series after it: cycling back to the domain ink would give two lines the same colour.
 const colors = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b3b3b3"];
 
 /** The ink of every line in a chart. Fixed meanings win over the palette and over colours
@@ -58,11 +59,17 @@ function lineInks(lines: Array<{ label: string; color?: string; dash?: boolean }
   let k = 0;
   // With rural/urban present, the domain ink could repeat hara or neel, so the others start at ink black.
   const rest = anyFixed ? ["#121212", "#b98014", "#7b4790", "#c24a2e", "#8a8a8a", "#b3b3b3"] : colors;
+  // India among other countries always wears the domain ink, as it does when it is listed
+  // first, so its colour holds from chart to chart within an article: when it sits later in
+  // the plan it trades inks with the first line. Registry colours still win.
+  const ix = anyFixed ? -1 : lines.findIndex((l) => /^india$/i.test(String(l.label).trim()));
+  const swap = ix > 0 && !lines[ix].color && !lines[0].color;
+  const order = (i: number) => (swap && i === ix ? 0 : swap && i === 0 ? ix : i);
   return lines.map((l, i) => {
     const f = fixed(l.label);
     if (f) { const dash = seen.has(f) || !!l.dash; seen.add(f); return { color: f, dash }; }
-    if (!anyFixed) return { color: l.color ?? colors[i % colors.length], dash: !!l.dash };
-    return { color: rest[k++ % rest.length], dash: !!l.dash };
+    if (!anyFixed) return { color: l.color ?? colors[Math.min(order(i), colors.length - 1)], dash: !!l.dash };
+    return { color: rest[Math.min(k++, rest.length - 1)], dash: !!l.dash };
   });
 }
 const WATERMARK_TEXT = "thisindianlife.today";
@@ -656,6 +663,11 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // printed "999.6" under a "billion" caption.
   const endMaxAbs = mobile ? Math.max(dataMaxAbs, Math.abs(tightScale(0, typeof bounds?.max === "number" ? bounds.max : dataMaxAbs).max)) : dataMaxAbs;
   const endText = (value: number) => endLabelInScale(value, endMaxAbs, visual.unit, mobile, mobile);
+  // On a phone, five or more lines end in a ladder of unnamed values on leaders, which the
+  // key below cannot untangle. With a protagonist (the emphasised line, or India among
+  // three or more), only its value is written; the others keep their end dots and tooltips.
+  const onlyIdx = mobile && visual.lines.length >= 5 ? protagonistIndex(visual.lines) : -1;
+  const quiet = (index: number) => onlyIdx >= 0 && index !== onlyIdx;
   {
     void forceEndLabelPad;
     // Desktop end labels read "Kerala 1.5" (name and value); phones show the value only
@@ -669,9 +681,9 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     const maxEndLabelLen = Math.max(
       3,
       dateLen,
-      ...visual.lines.map((line) => {
+      ...visual.lines.map((line, index) => {
         const v = line.points.at(-1)?.value;
-        if (v == null) return 0;
+        if (v == null || quiet(index)) return 0;
         if (mobile || visual.lines.length === 1) return endText(v).length;
         const names = endNameLines(line.label, endText(v));
         return Math.max(...names.slice(0, -1).map((l) => l.length), names.at(-1)!.length + 1 + endText(v).length);
@@ -794,9 +806,9 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       const turns = tail.slice(2).filter((point, index) => Math.sign(point.value - tail[index + 1].value) * Math.sign(tail[index + 1].value - tail[index].value) < 0).length;
       if (dProj && tail.length > 12 && turns / tail.length > 0.25) [dSolid, dProj] = [d, ""];
     }
-    const endLabelText = latest ? endText(latest.value) : "";
+    const endLabelText = latest && !quiet(lineIndex) ? endText(latest.value) : "";
     const nameLines = mobile || visual.lines.length === 1 ? [line.label] : endNameLines(line.label, endLabelText);
-    return { ...line, d, dSolid, dProj, areaD, latest, latestX, latestY, endLabelText, nameLines, color: inks[lineIndex].color, dash: inks[lineIndex].dash };
+    return { ...line, d, dSolid, dProj, areaD, latest, latestX, latestY, endLabelText, nameLines, quiet: quiet(lineIndex), color: inks[lineIndex].color, dash: inks[lineIndex].dash };
   });
   const minGap = mobile ? 15 : 18;
   // A wrapped name runs down from its first baseline, so the label under it starts lower.
@@ -805,6 +817,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const labelBottom = height - pad.b - 10;
   const sorted = pathsRaw
     .map((path, index) => ({ index, y: path.latestY }))
+    .filter((item) => !pathsRaw[item.index].quiet)
     .sort((a, b) => a.y - b.y);
   const need = (i: number) => minGap + extra(sorted[i - 1].index);
   for (let i = 1; i < sorted.length; i += 1) {
@@ -988,6 +1001,13 @@ const fyLabel = (year: number) => `${year}-${String((year + 1) % 100).padStart(2
 /** A month step a calendar reader expects (1, 2, 3, 6 or 12 months, then whole years), at
  *  least `raw`: an 8-month step ran Jan 24, Sep 24, May 25. */
 const niceMonths = (raw: number) => [1, 2, 3, 6, 12, 24, 36, 60].find((s) => s >= raw - 1e-9) ?? 12 * Math.ceil(raw / 12);
+/** The line a comparison is about: the one the plan emphasises, else India among three or
+ *  more lines (renderLineSvg draws the same line heavier). -1 when there is none. */
+function protagonistIndex(lines: Array<{ label: string; emphasis?: boolean }>) {
+  const e = lines.findIndex((l) => (l as { emphasis?: boolean }).emphasis);
+  if (e >= 0) return e;
+  return lines.length >= 3 ? lines.findIndex((l) => /^india\b/i.test(String(l.label).trim())) : -1;
+}
 /** A desktop end label's name, on one line when "Name value" is short, else wrapped onto two
  *  lines of about half its length with the value after the last. A long name on one line
  *  ("World Inequality Database method 22.3%") made the right gutter a third of the figure. */
@@ -1028,7 +1048,7 @@ function placeEndLabelsInside(g: LineGeometry, single: boolean) {
   const result: Array<{ x: number; y: number; below: boolean } | null> = [];
   for (let i = 0; i < g.paths.length; i += 1) {
     const p = g.paths[i];
-    if (!p.latest) { result.push(null); continue; }
+    if (!p.latest || p.quiet) { result.push(null); continue; }
     const w = String(p.endLabelText).length * (single ? 14 : 12) * 0.6 + 4;
     const h = single ? 30 : 13;
     const xb = p.latestX + 4, xa = xb - w;
@@ -1133,17 +1153,26 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   const order = g.paths.map((p, i) => ({ p, i })).sort((a, z) => Number(Boolean(a.p.emphasis)) - Number(Boolean(z.p.emphasis)));
   const hasEmph = g.paths.some((p) => p.emphasis);
   for (const { p, i } of order) {
-    const w = single ? (o.isLead ? 2.5 : 2.2) : p.emphasis ? 3 : hasEmph ? 1.35 : n > 3 ? 1.6 : 2;
+    const w = single ? (o.isLead ? 2.5 : 2.2) : p.emphasis ? 3 : hasEmph ? 1.25 : n > 3 ? 1.6 : 2;
     // A wash under a single series, only when the axis starts at zero so the area means something.
     if (single && g.ticks[0] === 0 && p.points.length > 2) {
       // A flat, quiet tint: it says "this much", where a gradient only decorates.
       b += `<path d="${p.areaD}" fill="${p.color}" fill-opacity="0.07"/>`;
     }
-    const op = !single && hasEmph && !p.emphasis ? ` stroke-opacity="0.7"` : "";
-    if (p.dSolid) b += `<path d="${p.dSolid}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"${p.dash ? ` stroke-dasharray="4 3"` : ""}${op}><title>${p.label}</title></path>`;
+    // Context lines step back (finer, lighter) so the emphasised one reads first; the
+    // emphasised line is cased in the ground colour so it lifts cleanly off the lines it crosses.
+    const op = !single && hasEmph && !p.emphasis ? ` stroke-opacity="0.6"` : "";
+    if (!single && p.emphasis && p.dSolid && !p.dash) b += `<path d="${p.dSolid}" fill="none" stroke="#ffffff" stroke-width="${w + 3}" stroke-linejoin="round" stroke-linecap="round"/>`;
+    // A dashed series (a second line with the same fixed meaning) has butt caps and a dash
+    // scaled to its weight: round caps on a "4 3" dash closed the gaps, so it read as solid.
+    if (p.dSolid) b += `<path d="${p.dSolid}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="${p.dash ? "butt" : "round"}"${p.dash ? ` stroke-dasharray="${svgCoord(Math.max(5, w * 2.8))} ${svgCoord(Math.max(3, w * 1.6))}"` : ""}${op}><title>${p.label}</title></path>`;
     // The projected part: the same ink and weight, dashed, so it reads as the same series
     // carried forward rather than another one.
-    if (p.dProj) b += `<path d="${p.dProj}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="butt" stroke-dasharray="${svgCoord(w * 2.4)} ${svgCoord(w * 1.8)}"${op}><title>${p.label}, projected</title></path>`;
+    // A dash breaks a line into pieces, so a projected line keeps at least 1.6, and a line that
+    // is projected all the way keeps its full ink; thinner and lighter it dissolved into a
+    // dotted hairline. One measured in part keeps the opacity of its measured run.
+    const wp = Math.max(w, 1.6);
+    if (p.dProj) b += `<path d="${p.dProj}" fill="none" stroke="${p.color}" stroke-width="${wp}" stroke-linejoin="round" stroke-linecap="butt" stroke-dasharray="${svgCoord(wp * 2.4)} ${svgCoord(wp * 1.8)}"${p.dSolid ? op : ""}><title>${p.label}, projected</title></path>`;
     void i;
   }
   // End labels for lines that stop short of the right edge, placed before the loop so each
@@ -1153,7 +1182,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   if (!single) {
     const polys = linePolys(g), placed: Array<[number, number, number, number]> = [];
     for (const p of g.paths) {
-      if (!p.latest || g.inside?.[g.paths.indexOf(p)] || p.latestX >= plotR - 40) continue;
+      if (!p.latest || p.quiet || g.inside?.[g.paths.indexOf(p)] || p.latestX >= plotR - 40) continue;
       const text = m ? String(p.endLabelText) : `${(p.nameLines as string[]).join(" ")} ${p.endLabelText}`;
       const w = text.length * labSize * 0.58, xr = p.latestX - 6;
       if (xr - w < pad.l + 4) continue;
@@ -1170,6 +1199,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   for (const p of g.paths) {
     if (!p.latest) continue;
     b += `<circle cx="${svgCoord(p.latestX)}" cy="${svgCoord(p.latestY)}" r="${single ? (m ? 4 : 4.5) : m ? 3 : 3.5}" fill="${p.color}" stroke="#fff" stroke-width="${m ? 1.5 : 2}"/>`;
+    if (p.quiet) continue;
     const inside = g.inside?.[g.paths.indexOf(p)];
     if (single) {
       // the latest value, written beside its point (on a phone, inside the plot when it fits)
@@ -1202,24 +1232,26 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
         // A dense series with nowhere clear (monthly NREGA spikes) keeps the dot and leaves the
         // value to the tooltip: text laid across a thicket of lines reads as neither.
         const fly = tries.find((yy) => !boxHitsLines(polys, fx + 4, fx + 8 + lw, yy - fs * 0.8, yy + fs * 0.2));
-        if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#121212", weight: 600 });
+        // The starting point is context, the latest is the news: the first value is set
+        // lighter and in mid grey so the end label leads.
+        if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#4f4f4f", weight: 500 });
       }
     } else if (inside) {
-      b += almHalo(inside.x, inside.y + 10.5, p.endLabelText, { size: labSize, fill: p.color, weight: 600, anchor: "end" });
+      b += almHalo(inside.x, inside.y + 10.5, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600, anchor: "end" });
     } else if (early.has(p)) {
       // A line that stops well short of the others (observations ending where the projections
       // begin) is named just before its own end, above or below it, clear of every line;
       // set after its end it would sit among the lines that carry on.
       const { xr, ly } = early.get(p)!, names = m ? [] : (p.nameLines as string[]);
       b += m
-        ? almHalo(xr, ly, p.endLabelText, { size: labSize, fill: p.color, weight: 600, anchor: "end" })
-        : `<text x="${svgCoord(xr)}" y="${svgCoord(ly)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${names.join(" ")}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
+        ? almHalo(xr, ly, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600, anchor: "end" })
+        : `<text x="${svgCoord(xr)}" y="${svgCoord(ly)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : 600}">${names.join(" ")}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
     } else {
       const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + (m ? 9 : 12);
       if (moved) b += `<path d="M${svgCoord(p.latestX + 4)} ${svgCoord(p.latestY)}L${svgCoord(lx - 3)} ${svgCoord(ly - 4)}" fill="none" stroke="${p.color}" stroke-width="0.8" stroke-opacity="0.6"/>`;
       b += m
-        ? almHalo(lx, ly, p.endLabelText, { size: labSize, fill: p.color, weight: 600 })
-        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${(p.nameLines as string[]).map((name, k) => `<tspan${k ? ` x="${svgCoord(lx)}" dy="15"` : ""} fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${name}</tspan>`).join("")}<tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
+        ? almHalo(lx, ly, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600 })
+        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${(p.nameLines as string[]).map((name, k) => `<tspan${k ? ` x="${svgCoord(lx)}" dy="15"` : ""} fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : 600}">${name}</tspan>`).join("")}<tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
     }
   }
   void axisSize;

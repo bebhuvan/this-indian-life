@@ -7,11 +7,26 @@
 //   one meaning per colour, and every number set in the grotesque.
 
 export const INK = {
-  ink: "#121212", ink2: "#4f4f4f", ink3: "#8a8a8a", grid: "#ededed", rule: "#cfcfcf", band: "#f4f4f4", paper: "#ffffff",
+  ink: "#121212", ink2: "#4f4f4f", ink3: "#737373", grid: "#ededed", rule: "#cfcfcf", band: "#f4f4f4", paper: "#ffffff",
   neel: "#33489a", sindoor: "#c24a2e", hara: "#008a6e", haldi: "#b98014", jamun: "#7b4790",
 } as const;
 
 export const F = "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif";
+
+/** Marks take the ink; words take its text-safe shade. A label set in the same ink as its
+ *  line reads as that line, but haldi (3:1 on white) and the light greys are too pale for
+ *  type, so every name or value written in a series colour goes through this. Same hue,
+ *  darker; the domain and series variables have matching -ink tokens in almanac.css. */
+const TEXT_INK: Record<string, string> = {
+  "#33489a": "#2e418c", "#c24a2e": "#a63d24", "#008a6e": "#00735c", "#b98014": "#8a5f0a", "#7b4790": "#6a3c7d",
+  "#1f6f8b": "#1a5d75", "#8a8a8a": "#6f6f6f", "#b3b3b3": "#7d7d7d", "#bdbdbd": "#7d7d7d",
+};
+export const textInk = (c: string) => {
+  const k = String(c ?? "").trim().toLowerCase();
+  if (TEXT_INK[k]) return TEXT_INK[k];
+  const v = k.match(/^var\(--(c|s[2-6])\)$/);
+  return v ? `var(--${v[1]}-ink)` : c;
+};
 export const r1 = (v: number) => Math.round(v * 10) / 10;
 export const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -33,7 +48,7 @@ export const typeset = (svg: string) =>
     .replace(/>([^<]+)</g, (_m, t: string) => `>${minus(t)}<`)
     .replace(/data-tip="([^"]*)"/g, (_m, t: string) => `data-tip="${minus(t)}"`);
 
-type TextOpts = { size?: number; fill?: string; anchor?: "start" | "middle" | "end"; weight?: number };
+type TextOpts = { size?: number; fill?: string; anchor?: "start" | "middle" | "end"; weight?: number; track?: number };
 /** Words into lines of at most `chars` characters. */
 export function wrapWords(s: string, chars: number) {
   const out: string[] = [];
@@ -45,7 +60,7 @@ export function wrapWords(s: string, chars: number) {
   return out;
 }
 export const txt = (x: number, y: number, s: string | number, o: TextOpts = {}) =>
-  `<text x="${r1(x)}" y="${r1(y)}" font-family="${F}" font-size="${o.size ?? 12}" fill="${o.fill ?? INK.ink2}"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}${o.weight ? ` font-weight="${o.weight}"` : ""}>${esc(s)}</text>`;
+  `<text x="${r1(x)}" y="${r1(y)}" font-family="${F}" font-size="${o.size ?? 12}" fill="${o.fill ?? INK.ink2}"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}${o.weight ? ` font-weight="${o.weight}"` : ""}${o.track ? ` letter-spacing="${o.track}em"` : ""}>${esc(s)}</text>`;
 /** Text with a white halo so it stays legible where it crosses marks. */
 export const halo = (x: number, y: number, s: string | number, o: TextOpts = {}) =>
   `<text x="${r1(x)}" y="${r1(y)}" font-family="${F}" font-size="${o.size ?? 12}" fill="none" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}${o.weight ? ` font-weight="${o.weight}"` : ""}>${esc(s)}</text>` + txt(x, y, s, o);
@@ -58,8 +73,11 @@ export function rowLabel(x: number, cy: number, s: string, maxW: number, o: Text
   const a = words.slice(0, cut).join(" "), b = words.slice(cut).join(" ");
   return `<text x="${r1(x)}" y="${r1(cy - size * 0.28)}" font-family="${F}" font-size="${size}" fill="${o.fill ?? INK.ink2}" text-anchor="end"${o.weight ? ` font-weight="${o.weight}"` : ""}><tspan x="${r1(x)}">${esc(a)}</tspan><tspan x="${r1(x)}" dy="${r1(size * 1.15)}">${esc(b)}</tspan></text>`;
 }
+/** A rule. Axis-aligned rules (grid, axes, ticks, zero lines) snap to the pixel grid, so a
+ *  hairline prints as one sharp pixel instead of a two-pixel grey smear when the figure is
+ *  scaled; diagonal lines (a fit) keep their anti-aliasing. */
 export const line = (x1: number, y1: number, x2: number, y2: number, c: string = INK.grid, w = 1, dash?: string) =>
-  `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}" stroke="${c}" stroke-width="${w}"${dash ? ` stroke-dasharray="${dash}"` : ""}/>`;
+  `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}" stroke="${c}" stroke-width="${w}"${dash ? ` stroke-dasharray="${dash}"` : ""}${r1(x1) === r1(x2) || r1(y1) === r1(y2) ? ` shape-rendering="crispEdges"` : ""}/>`;
 export const dot = (cx: number, cy: number, r: number, fill: string, ring = 1.5) =>
   `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r}" fill="${fill}" stroke="#ffffff" stroke-width="${ring}"/>`;
 export const svg = (w: number, h: number, body: string, label: string, cls = "viz-svg alm") =>
@@ -513,7 +531,7 @@ export function parade(series: ParadeSeries[], o: {
   b += txt(0, y(0) + 4, "0", AX);
   for (let p = 0; p <= 100; p += sm ? 25 : 10) { b += line(x(p), y(0), x(p), y(0) + 5, INK.ink, 1); b += txt(x(p), y(0) + 20, p, { ...AX, anchor: "middle" }); }
   if (o.xTitle) b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
-  for (const s of series) { const last = s.values[s.values.length - 1]; b += txt(W - mr + 10, y(last) + 4, s.label, { size: 12.5, fill: s.color, weight: 600 }) + txt(W - mr + 10, y(last) + 19, yf(last), { size: 11.5, fill: INK.ink2 }); }
+  for (const s of series) { const last = s.values[s.values.length - 1]; b += txt(W - mr + 10, y(last) + 4, s.label, { size: 12.5, fill: textInk(s.color), weight: 600 }) + txt(W - mr + 10, y(last) + 19, yf(last), { size: 11.5, fill: INK.ink2 }); }
   if (o.note) {
     const mx = x(o.note.at);
     b += dot(mx, y(o.note.value), 3.5, INK.ink) + line(mx, y(o.note.value) - 6, mx, y(o.note.y), INK.ink, 0.75) + line(mx - 4, y(o.note.y), mx, y(o.note.y), INK.ink, 0.75);
@@ -610,7 +628,7 @@ export function sensitivity(curves: Curve[], o: {
   b += line(ml, y(0), W - mr, y(0), INK.ink, 1);
   for (const c of curves) b += `<path d="${pathOf(c.points, x, y)}" fill="none" stroke="${c.color}" stroke-width="${c.width ?? (bare ? 1.75 : 2)}" stroke-linejoin="round" stroke-linecap="round"/>`;
   if (bare) return svg(W, H, b, o.label);
-  for (const c of curves) { const p = c.points[c.points.length - 1]; b += txt(x(p[0]) + 10, y(p[1]) + 4, c.label, { size: 12.5, fill: c.color, weight: 600 }); }
+  for (const c of curves) { const p = c.points[c.points.length - 1]; b += txt(x(p[0]) + 10, y(p[1]) + 4, c.label, { size: 12.5, fill: textInk(c.color), weight: 600 }); }
   if (o.highlight) {
     const c = curves.find((q) => q.label === o.highlight!.curve)!, at = o.highlight.at;
     const v0 = c.points.find((p) => p[0] === at[0])![1], v1 = c.points.find((p) => p[0] === at[1])![1];
@@ -774,7 +792,7 @@ export function connectedScatter(paths: Path2D[], o: { x: [number, number]; y: [
     b += dot(x(z.x), y(z.y), sm ? 3.5 : 4.5, p.color, 1.5);
     const ly = endY.get(p.label)!, lx = Math.max(...paths.map((q) => x(q.points[q.points.length - 1].x))) + 10;
     if (Math.abs(ly - 4 - y(z.y)) > 2 || lx - x(z.x) > 12) b += line(x(z.x) + 5, y(z.y), lx - 3, ly - 4, p.color, 0.75);
-    b += halo(lx, ly, `${p.label} ${z.t}`, { size: sm ? 11 : 12.5, fill: p.color, weight: 600 });
+    b += halo(lx, ly, `${p.label} ${z.t}`, { size: sm ? 11 : 12.5, fill: textInk(p.color), weight: 600 });
   }
   return svg(W, H, b, o.label);
 }

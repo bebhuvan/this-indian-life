@@ -5,7 +5,7 @@
 // Every mark that carries a number has a `data-tip` ("Head|line|line"), which the
 // tooltip layer in public/article-actions.js shows on hover, tap and keyboard focus.
 import type { BarVisual, StackVisual, StripPairVisual, PyramidVisual, RankedChangeVisual, ChangeVisual, SparkGridVisual, StartingGridVisual, LinePanelsVisual, LoadCurveVisual, ScatterVisual, ScatterXYVisual, ScenarioMapsVisual, GroupedBarVisual, VisualSpec } from "./viz";
-import { INK, F, esc, r1, txt, halo, line, scatterFit, type ScatterPoint } from "./almanac";
+import { INK, F, esc, r1, txt, halo, line, scatterFit, textInk, type ScatterPoint } from "./almanac";
 import { countFmt, harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
 import { choroColor, compactSvgPath } from "./chartSvg";
 
@@ -141,7 +141,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     const items = g === undefined ? rows : rows.filter((r) => r.group === g);
     if (g !== undefined) {
       y += y > top ? 14 : 0;
-      b += txt(0, y + 10, g.toUpperCase(), { size: 11, fill: INK.ink, weight: 600 });
+      // A group head is a quiet kicker, tracked like the "Fig." line above the title.
+      b += txt(0, y + 10, g.toUpperCase(), { size: 11, fill: INK.ink2, weight: 600, track: 0.07 });
       b += line(0, y - 2, W, y - 2, INK.rule, 1);
       y += 22;
     }
@@ -591,7 +592,7 @@ function linePanelsFigure(v: LinePanelsVisual, ctx: FigureContext): Figure {
     const groups = v.panels.map((p, i) => `${i === 0 ? `the first ${p.lines.length}` : i === v.panels.length - 1 ? `the last ${p.lines.length}` : `the next ${p.lines.length}`} are ${p.label.toLowerCase()}`).join("; ");
     return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note: `One panel for each line, every panel on the same scale, so heights compare directly; the figure is the latest year. In order, ${groups}.` };
   }
-  const panels: Panel[] = v.panels.map((p) => ({ label: p.label, lines: p.lines.map((l, i) => ({ label: l.label, color: l.color ?? SERIES[i % SERIES.length], points: l.points })) }));
+  const panels: Panel[] = v.panels.map((p) => ({ label: p.label, lines: p.lines.map((l, i) => ({ label: l.label, color: l.color ?? SERIES[Math.min(i, SERIES.length - 1)], points: l.points })) }));
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 120 : 170, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, panelKeys: true });
   return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 1 : 2), svgM: mk(W_M, true, 1) };
 }
@@ -611,7 +612,7 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
   // On a phone the unit sits just above the plot, so it starts where the plot does, clear of the top tick.
   let b = unitCaption(m ? padL : 0, m ? top - 6 : 12, v.unit, m ? 11.5 : 12);
   // Phones print values only at the line ends, so the series are named in a key above.
-  if (m) v.series.forEach((s, i) => { const kx = (i % 2) * (W / 2), ky = 12 + Math.floor(i / 2) * 20, c = s.color ?? SERIES[i % SERIES.length]; b += line(kx, ky - 4, kx + 16, ky - 4, c, 2.5) + txt(kx + 22, ky, s.label, { size: 12, fill: INK.ink2 }); });
+  if (m) v.series.forEach((s, i) => { const kx = (i % 2) * (W / 2), ky = 12 + Math.floor(i / 2) * 20, c = s.color ?? SERIES[Math.min(i, SERIES.length - 1)]; b += line(kx, ky - 4, kx + 16, ky - 4, c, 2.5) + txt(kx + 22, ky, s.label, { size: 12, fill: INK.ink2 }); });
   if (v.gap) {
     b += `<rect x="${r1(x(v.gap.fromHour))}" y="${top}" width="${r1(x(v.gap.toHour) - x(v.gap.fromHour))}" height="${r1(H - top - bot)}" fill="rgba(194,74,46,0.07)"/>`;
     // The band is narrow on a phone, so its name sits above the plot, flush right.
@@ -623,7 +624,7 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
     b += txt(x(h), H - bot + 20, h === 23 ? "23:00" : `${String(h).padStart(2, "0")}:00`, { size: m ? 12 : 12.5, fill: INK.ink3, anchor: h === 23 ? "end" : h === 0 ? "start" : "middle" });
   }
   if (typeof v.peakHour === "number") b += line(x(v.peakHour), top, x(v.peakHour), H - bot, INK.ink2, 0.9, "4 3");
-  const paths = v.series.map((s, i) => ({ s, color: s.color ?? SERIES[i % SERIES.length], d: s.values.map((val, h) => `${h ? "L" : "M"}${r1(x(h))} ${r1(y(val))}`).join("") }));
+  const paths = v.series.map((s, i) => ({ s, color: s.color ?? SERIES[Math.min(i, SERIES.length - 1)], d: s.values.map((val, h) => `${h ? "L" : "M"}${r1(x(h))} ${r1(y(val))}`).join("") }));
   for (const p of paths) {
     if (p.s.area) b += `<path d="${p.d}L${r1(x(p.s.values.length - 1))} ${r1(y(0))}L${r1(x(0))} ${r1(y(0))}Z" fill="${p.color}" fill-opacity="0.1"/>`;
     b += `<path d="${p.d}" fill="none" stroke="${p.color}" stroke-width="${p.s.emphasis ? 2.6 : 2}" stroke-linejoin="round" stroke-linecap="round"/>`;
@@ -634,8 +635,8 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
   for (const e of ends) {
     const lx = x(e.p.s.values.length - 1);
     b += `<circle cx="${r1(lx)}" cy="${r1(y(e.p.s.values.at(-1) ?? 0))}" r="3.5" fill="${e.p.color}" stroke="#fff" stroke-width="1.5"/>`;
-    b += m ? txt(lx + 8, e.y + 4, endTxt(e.p.s), { size: labelSize, fill: e.p.color, weight: 600 })
-      : `<text x="${r1(lx + 10)}" y="${r1(e.y + 4)}" font-family="${F}" font-size="${labelSize}"><tspan fill="${e.p.color}" font-weight="600">${esc(e.p.s.label)}</tspan><tspan fill="${INK.ink2}" dx="5">${esc(fmt(e.p.s.values.at(-1) ?? 0, v.unit))}</tspan></text>`;
+    b += m ? txt(lx + 8, e.y + 4, endTxt(e.p.s), { size: labelSize, fill: textInk(e.p.color), weight: 600 })
+      : `<text x="${r1(lx + 10)}" y="${r1(e.y + 4)}" font-family="${F}" font-size="${labelSize}"><tspan fill="${textInk(e.p.color)}" font-weight="600">${esc(e.p.s.label)}</tspan><tspan fill="${INK.ink2}" dx="5">${esc(fmt(e.p.s.values.at(-1) ?? 0, v.unit))}</tspan></text>`;
   }
   const hover = { plot: [padL, top, W - padR, H - bot], series: paths.map((p) => ({ label: p.s.label, color: p.color, pts: p.s.values.map((val, h) => [r1(x(h)), r1(y(val)), fmt(val, v.unit), `${String(h).padStart(2, "0")}:00`]) })) };
   return svgDoc("fig-load", W, H, b, v.title, ` data-hover="${JSON.stringify(hover).replace(/&/g, "&amp;").replace(/"/g, "&quot;")}"`);
@@ -740,10 +741,10 @@ function groupedSvg(v: GroupedBarVisual, o: { width: number; mobile: boolean }) 
   let b = unitCaption(0, 12, v.unit, 12);
   sc.ticks.forEach((t, i) => { b += line(padL, y(t), W, y(t), i ? INK.grid : INK.ink, 1); b += txt(padL - 8, y(t) + 4, fmt(t, v.unit), { size: 12, fill: INK.ink3, anchor: "end" }); });
   let kx = padL;
-  v.series.forEach((s, i) => { b += `<rect x="${kx}" y="${18}" width="10" height="10" fill="${SERIES[i % SERIES.length]}"/>` + txt(kx + 15, 27, s, { size: 12 }); kx += textW(s, 12) + 34; });
+  v.series.forEach((s, i) => { b += `<rect x="${kx}" y="${18}" width="10" height="10" fill="${SERIES[Math.min(i, SERIES.length - 1)]}"/>` + txt(kx + 15, 27, s, { size: 12 }); kx += textW(s, 12) + 34; });
   v.groups.forEach((g, gi) => {
     const cx = padL + gi * gw + gw / 2;
-    g.values.forEach((val, si) => { const x = cx - (ns * (bw + 2)) / 2 + si * (bw + 2); b += `<rect class="mk" x="${r1(x)}" y="${r1(y(val))}" width="${r1(bw)}" height="${r1(Math.max(1, y(0) - y(val)))}" fill="${SERIES[si % SERIES.length]}"${tip(`${g.label} · ${v.series[si]}`, fmt(val, v.unit))}/>`; });
+    g.values.forEach((val, si) => { const x = cx - (ns * (bw + 2)) / 2 + si * (bw + 2); b += `<rect class="mk" x="${r1(x)}" y="${r1(y(val))}" width="${r1(bw)}" height="${r1(Math.max(1, y(0) - y(val)))}" fill="${SERIES[Math.min(si, SERIES.length - 1)]}"${tip(`${g.label} · ${v.series[si]}`, fmt(val, v.unit))}/>`; });
     if (!m || (v.groups.length - 1 - gi) % 2 === 0) b += txt(cx, H - bot + 18, g.label, { size: 12, fill: INK.ink3, anchor: "middle" });
   });
   return svgDoc("fig-grouped", W, H, b, v.title);
@@ -771,17 +772,17 @@ function renderRaw(visual: VisualSpec, ctx: FigureContext): Figure | null {
       const total = v.bars.reduce((s, b) => s + Math.max(0, b.value), 0);
       const isComparison = Boolean(v.source.indicatorId?.startsWith("compare.") || v.source.indicatorId?.startsWith("econ.compare."));
       const isShare = v.share === true || (/%/.test(v.unit) && v.bars.length <= 4 && Math.abs(total - 100) <= 3 && !hasNeg && !isComparison);
-      if (isShare) return both((o) => shareSvg([{ segs: v.bars.map((b, i) => ({ label: b.label, value: b.value, color: SERIES[i % SERIES.length] })) }], { ...o, label: v.title }));
+      if (isShare) return both((o) => shareSvg([{ segs: v.bars.map((b, i) => ({ label: b.label, value: b.value, color: SERIES[Math.min(i, SERIES.length - 1)] })) }], { ...o, label: v.title }));
       const groups = [...new Set(v.bars.map((b) => b.group).filter(Boolean))] as string[];
       return both((o) => barsSvg(v.bars, { ...o, unit: v.unit, log: v.scale === "log", label: v.title, groups, anomaly: v.bars.some((b) => b.value < 0) ? anomalyInks(v.unit, v.title) : undefined }));
     }
     case "stack": {
       const v = visual as StackVisual;
-      return both((o) => shareSvg([{ segs: v.segments.map((s, i) => ({ label: s.label, value: s.value, color: SERIES[i % SERIES.length], detail: fmt(s.value, v.unit) })) }], { ...o, label: v.title }));
+      return both((o) => shareSvg([{ segs: v.segments.map((s, i) => ({ label: s.label, value: s.value, color: SERIES[Math.min(i, SERIES.length - 1)], detail: fmt(s.value, v.unit) })) }], { ...o, label: v.title }));
     }
     case "stripPair": {
       const v = visual as StripPairVisual;
-      return both((o) => shareSvg(v.rows.map((r) => ({ label: r.label, segs: r.segments.map((s, i) => ({ label: s.label, value: s.value, color: SERIES[i % SERIES.length] })) })), { ...o, label: v.title, key: true }));
+      return both((o) => shareSvg(v.rows.map((r) => ({ label: r.label, segs: r.segments.map((s, i) => ({ label: s.label, value: s.value, color: SERIES[Math.min(i, SERIES.length - 1)] })) })), { ...o, label: v.title, key: true }));
     }
     case "pyramid": return both((o) => pyramidSvg(visual as PyramidVisual, o));
     case "rankedChange": { const v = visual as RankedChangeVisual; return both((o) => (v.diverging ? rankedDivergeSvg(v, o) : rankedSvg(v, o))); }
