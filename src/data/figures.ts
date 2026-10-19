@@ -112,9 +112,15 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textWidth(rowTxt(r), valSize, 600))) + 10 : 0;
   // Label column on desktop: wide enough for the longest label (wrapped to two lines past ~30 chars).
   const longest = Math.max(...rows.map((r) => labelTextW(r.label.slice(0, 34), labSize, isNational(r.label) ? 600 : 400)));
-  // A phone column is only as wide as its labels: four-digit years need no 80-unit gutter.
-  // The label column is as wide as the longest label plus the 12-unit gap to the bars.
-  const labelW = m ? 0 : Math.min(W * 0.36, Math.ceil(longest) + 14);
+  // The label column is as wide as its widest line plus the 12-unit gap to the bars. A label
+  // longer than the column's cap (36% of the figure) wraps onto two lines, and the column then
+  // shrinks to the widest line actually set: sized before wrapping, "Chronic respiratory"
+  // kept the whole column at its one-line width and left every label 17 px in from the edge.
+  // A label that fits stays on one line ("Scheduled / Caste" wrapped needlessly once).
+  const capW = Math.min(W * 0.36, Math.ceil(longest) + 14);
+  const wrapAt = (s: string, chars: number) => wrap(s, Math.max(6, Math.floor(chars * (s.length * labSize * 0.54) / Math.max(1, labelTextW(s, labSize)))), 2);
+  const linesFor = (s: string) => (labelTextW(s, labSize) <= capW - 12 ? [s] : wrapAt(s, Math.floor((capW - 16) / (labSize * 0.58))));
+  const labelW = m ? 0 : Math.min(capW, Math.ceil(Math.max(...rows.map((r) => Math.max(...linesFor(r.label).map((l) => labelTextW(l, labSize, isNational(r.label) ? 600 : 400)))))) + 14);
   const x0 = labelW + negValW, x1 = W - posValW - 2;
   let xs: (v: number) => number;
   let logTicks: number[] = [];
@@ -161,11 +167,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     const strip = common && items.every((r) => r.label.endsWith(common)) ? common : "";
     for (const r of items) {
       const own = strip ? r.label.slice(0, -strip.length) : r.label;
-      // Capitals run wider, so an all-caps label wraps sooner.
-      // A label that fits its column stays on one line: the column was sized to it, and a
-      // needless wrap ("Scheduled / Caste") left the column's left half empty.
-      const fitsOne = !m && labelTextW(own, labSize) <= labelW - 12;
-      const lines = fitsOne ? [own] : wrap(own, Math.max(6, Math.floor(chars * (own.length * labSize * 0.54) / Math.max(1, labelTextW(own, labSize)))), 2);
+      const lines = m ? wrapAt(own, chars) : linesFor(own);
       const nat = isNational(r.label);
       const rowH = m ? 16 + lines.length * 15 + barH : Math.max(barH + (few ? 22 : 16), lines.length * 15 + 12);
       const by = m ? y + lines.length * 15 + 4 : y + rowH / 2 - barH / 2;

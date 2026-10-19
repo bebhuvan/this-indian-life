@@ -353,6 +353,9 @@ svg[data-hover]{touch-action:pan-y}
 .data-pull{margin-top:36px;padding-top:14px}
 .data-pull div{grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end}
 .data-pull span{color:var(--c-ink);font-size:clamp(3rem,5.4vw,4.4rem)}
+/* On a phone the figure and its sentence stack, both on the column's left edge: side by side the
+   sentence was squeezed into a third of the width beside a number floating at the bottom. */
+@media(max-width:620px){.data-pull div{grid-template-columns:1fr;gap:12px;align-items:start}.data-pull p:not(.lbl){max-width:none;padding-bottom:0}}
 .data-pull p:not(.lbl){font-size:clamp(1.2rem,1.8vw,1.42rem);line-height:1.35;max-width:none}
 .story-body>h2.story-title{border-top:2px solid var(--ink);padding-top:22px;margin-top:56px;font-size:clamp(1.75rem,3vw,2.3rem);line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
 .story-body>.standfirst{font-size:1.28rem;line-height:1.55;color:#3a3a3a;margin:14px auto 40px}
@@ -424,9 +427,11 @@ svg[data-hover]{touch-action:pan-y}
 .viz-head>div::before{font-size:.7rem;letter-spacing:.11em;margin-bottom:14px}
 .viz-head p{font-size:.9rem;color:#5e5e5e;margin-top:10px}
 .chart-note{padding-top:22px;margin-top:10px}
-.cn-take{position:relative;padding-left:16px;font-size:clamp(1.15rem,1.6vw,1.28rem);line-height:1.4;max-width:62ch}
-.cn-take::before{content:"";position:absolute;left:0;top:.28em;bottom:.22em;width:2px;background:var(--c)}
-.cn-detail{font-size:1.05rem;line-height:1.62;max-width:66ch;margin-top:12px;padding-left:16px;color:#333}
+/* One left edge for the whole note: the takeaway, the paragraph under it, the labels and the
+   source all start where the chart title does; the takeaway's rule hangs in the margin. */
+.cn-take{position:relative;padding-left:0;font-size:clamp(1.15rem,1.6vw,1.28rem);line-height:1.4;max-width:62ch}
+.cn-take::before{content:"";position:absolute;left:-14px;top:.28em;bottom:.22em;width:2px;background:var(--c)}
+.cn-detail{font-size:1.05rem;line-height:1.62;max-width:66ch;margin-top:12px;padding-left:0;color:#333}
 .cn-meta{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 32px;margin-top:20px;padding:16px 0 0;border-top:1px solid var(--line);background:none;border-radius:0}
 .cn-meta .cn-why{grid-column:auto;border-bottom:0;padding-bottom:0}
 .cn-meta p{font-size:.84rem;line-height:1.55;color:#555}
@@ -438,7 +443,7 @@ svg[data-hover]{touch-action:pan-y}
 .viz-foot .viz-actions button{color:var(--mid)}
 .viz-foot .viz-actions button:hover{color:var(--c-ink)}
 @media(max-width:900px){.cn-meta{grid-template-columns:1fr;gap:12px}}
-@media(max-width:680px){.cn-take,.cn-detail{padding-left:12px}.viz-foot .viz-actions{width:100%}}
+@media(max-width:680px){.cn-take::before{left:-11px}.viz-foot .viz-actions{width:100%}}
 
 /* the lead figure: more presence, more air */
 .story-viz .viz-main{padding-top:16px;border-top-width:2px}
