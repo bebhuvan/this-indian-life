@@ -20,16 +20,10 @@ type Props = {
 };
 const { cls, title, subtitle, unit, chartId, fileName, csvUrl, svgUrl, image = true, figNote, note, sourceText, sourceUrl } = Astro.props;
 ---
-<article class={cls}>
+<article class={cls} id={chartId}>
   <div class="viz-head">
     <div><h2 class="serif">{title}</h2>{subtitle ? <p>{subtitle}</p> : null}</div>
     <span>{unit}</span>
-  </div>
-  <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={csvUrl} data-svg-url={svgUrl}>
-    {image ? <button type="button" data-viz-action="svg">SVG</button> : null}
-    {image ? <button type="button" data-viz-action="png">PNG</button> : null}
-    <button type="button" data-viz-action="csv">CSV</button>
-    <button type="button" data-viz-action="share">Share</button>
   </div>
   <slot />
   {figNote ? <p class="alm-stat">{figNote}</p> : null}
@@ -42,8 +36,16 @@ const { cls, title, subtitle, unit, chartId, fileName, csvUrl, svgUrl, image = t
       {note.mistakeToAvoid ? <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p> : null}
     </div>
   </div>
-  <div class="viz-source">
-    <span>Source</span>
-    {sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
-  </div>
+  <footer class="viz-foot">
+    <div class="viz-source">
+      <span>Source</span>
+      {sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+    </div>
+    <div class="viz-actions" data-file={fileName} data-csv-url={csvUrl} data-svg-url={svgUrl}>
+      {image ? <button type="button" data-viz-action="svg">SVG</button> : null}
+      {image ? <button type="button" data-viz-action="png">PNG</button> : null}
+      <button type="button" data-viz-action="csv">CSV</button>
+      <button type="button" data-viz-action="share">Share</button>
+    </div>
+  </footer>
 </article>

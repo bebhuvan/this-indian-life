@@ -347,7 +347,7 @@ function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
 // =====================================================================
 type Panel = { label: string; lines: Array<{ label: string; color: string; points: Array<{ date: string; value: number }> }>; head?: string; headColor?: string; sub?: string; unit?: string; min?: number; max?: number };
 const yearOf = (d: string) => { const m = String(d).match(/^(\d{4})(?:-(\d{2}))?/); return m ? Number(m[1]) + (m[2] ? (Number(m[2]) - 1) / 12 : 0) : NaN; };
-function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; cols: number; ph: number; label: string; shared?: { min: number; max: number }; ticks?: boolean; unit: string; valueFmt: (v: number) => string; firstLast?: boolean; chartId: string; key?: Array<{ label: string; color: string }>; panelKeys?: boolean }) {
+function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; cols: number; ph: number; label: string; shared?: { min: number; max: number }; ticks?: boolean; unit: string; valueFmt: (v: number) => string; firstLast?: boolean; chartId: string; key?: Array<{ label: string; color: string }>; panelKeys?: boolean; tickCount?: number }) {
   const W = o.width, m = o.mobile, cols = o.cols, gx = m ? 14 : 22, gy = m ? 22 : 30;
   const pw = (W - gx * (cols - 1)) / cols, ph = o.ph;
   // Panels with several lines carry their own key under the name (series differ by panel).
@@ -368,7 +368,7 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
     const vals = all.map((q) => q.value);
     let lo = o.shared ? o.shared.min : p.min ?? Math.min(...vals), hi = o.shared ? o.shared.max : p.max ?? Math.max(...vals);
     if (!(hi > lo)) { hi = lo + 1; lo -= 1; }
-    const sc = o.ticks ? niceScale(lo, hi, 3) : { min: lo - (hi - lo) * 0.08, max: hi + (hi - lo) * 0.08, ticks: [] as number[] };
+    const sc = o.ticks ? niceScale(lo, hi, o.tickCount ?? 3) : { min: lo - (hi - lo) * 0.08, max: hi + (hi - lo) * 0.08, ticks: [] as number[] };
     const ts = all.map((q) => yearOf(q.date)).filter(Number.isFinite);
     const t0 = Math.min(...ts), t1 = Math.max(...ts);
     const padL = o.ticks ? (m ? 26 : 32) : 0, padR = 4;
@@ -450,9 +450,23 @@ function startingGridFigure(v: StartingGridVisual, ctx: FigureContext): Figure {
 }
 
 function linePanelsFigure(v: LinePanelsVisual, ctx: FigureContext): Figure {
-  const panels: Panel[] = v.panels.map((p) => ({ label: p.label, lines: p.lines.map((l, i) => ({ label: l.label, color: l.color ?? SERIES[i % SERIES.length], points: l.points })) }));
   const f = (x: number) => fmt(x, v.unit);
-  const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 120 : 170, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared: { min: v.min, max: v.max }, ticks: true, panelKeys: true });
+  // The shared scale is fitted to the data, not to a padded bound, so no panel is half empty.
+  const all = v.panels.flatMap((p) => p.lines.flatMap((l) => l.points.map((q) => q.value)));
+  const shared = { min: Math.min(v.min, ...all), max: Math.max(...all) };
+  // Four or more lines in a panel is a tangle. Each line then gets its own small panel on
+  // the shared scale, captioned with the group it came from and its latest value.
+  if (v.panels.some((p) => p.lines.length >= 4)) {
+    const panels: Panel[] = v.panels.flatMap((p) => p.lines.map((l) => ({
+      label: l.label, head: f(l.points.at(-1)?.value ?? 0),
+      lines: [{ label: l.label, color: "var(--c)", points: l.points }],
+    })));
+    const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 60 : 78, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, tickCount: 4, firstLast: true });
+    const groups = v.panels.map((p, i) => `${i === 0 ? `the first ${p.lines.length}` : i === v.panels.length - 1 ? `the last ${p.lines.length}` : `the next ${p.lines.length}`} are ${p.label.toLowerCase()}`).join("; ");
+    return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note: `One panel for each line, every panel on the same scale, so heights compare directly; the figure is the latest year. In order, ${groups}.` };
+  }
+  const panels: Panel[] = v.panels.map((p) => ({ label: p.label, lines: p.lines.map((l, i) => ({ label: l.label, color: l.color ?? SERIES[i % SERIES.length], points: l.points })) }));
+  const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 120 : 170, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, panelKeys: true });
   return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 1 : 2), svgM: mk(W_M, true, 1) };
 }
 

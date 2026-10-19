@@ -945,7 +945,11 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
         // In the chart's scale unless that would round the first value away ("₹0 lakh"),
         // in which case it is written in its own.
         const firstText = endLabelInScale(first.value, Math.abs(first.value) / maxAbs < 0.05 ? Math.abs(first.value) : maxAbs, visual.unit, m, m);
-        b += almHalo(fx + 6, Math.max(pad.t + 10, fy - 10), `${firstText} in ${pointDateLabel(first.date, p.points)}`, { size: m ? 11.5 : 13, fill: "#121212", weight: 600 });
+        // Set the label on the side the line leaves from: under the point when the line rises.
+        const ahead = p.points[Math.min(p.points.length - 1, Math.max(3, Math.round(p.points.length / 12)))];
+        const rising = ahead && g.y(ahead.value) < fy - 4;
+        const fly = rising && fy + 20 < plotB - 4 ? fy + 20 : Math.max(pad.t + 10, fy - 10);
+        b += almHalo(fx + 6, fly, `${firstText} in ${pointDateLabel(first.date, p.points)}`, { size: m ? 11.5 : 13, fill: "#121212", weight: 600 });
       }
     } else {
       const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + (m ? 9 : 12);

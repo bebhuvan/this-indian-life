@@ -265,7 +265,7 @@
     }
 
     if (action === "share") {
-      const anchor = actions?.id;
+      const anchor = card.id || actions?.id;
       const url = `${location.origin}${location.pathname}${anchor ? `#${anchor}` : ""}`;
       if (navigator.share) await navigator.share({ title: document.title, url });
       else await navigator.clipboard.writeText(url);

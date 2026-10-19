@@ -100,7 +100,9 @@ export function choroColor(value: number, min: number, max: number, rampName: st
 
 export function choroplethValueLabel(visual: ChoroplethVisual, value: number) {
   const suffix = /%/.test(visual.unit) ? "%" : /°C|degree/i.test(visual.unit) ? "°C" : "";
-  return `${visual.signed ? signedFmt(value, visual.unit) : fmt(value, visual.unit)}${suffix}`;
+  const out = `${visual.signed ? signedFmt(value, visual.unit) : fmt(value, visual.unit)}${suffix}`;
+  // A scale that runs into the hundreds is read in whole numbers: "97" beside "459", not "97.0".
+  return !suffix && Math.max(Math.abs(visual.min), Math.abs(visual.max)) >= 100 ? out.replace(/(\d)\.0(?!\d)/, "$1") : out;
 }
 
 // Area-weighted centroid and area of a region's largest ring, in viewBox units.

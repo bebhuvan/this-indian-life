@@ -400,3 +400,35 @@ svg[data-hover]{touch-action:pan-y}
 .editlog-diff:hover{color:var(--c-ink);text-decoration-color:var(--c)}
 .editlog-history{font-family:var(--sans);font-size:.82rem;color:var(--ink);border:0;text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px}
 .article-cite-section .sec-hd{display:none}
+
+/* ---------- the figure frame, refined ---------- */
+/* A figure reads in four bands: the label and finding; the chart; the note (the point in
+   Newsreader, the detail, then three short reading aids side by side); and one footer line
+   with the source on the left and the downloads on the right. */
+.viz-card{scroll-margin-top:24px}
+.viz-head{margin-bottom:22px}
+.viz-head>div::before{font-size:.7rem;letter-spacing:.11em;margin-bottom:14px}
+.viz-head p{font-size:.9rem;color:#5e5e5e;margin-top:10px}
+.chart-note{padding-top:22px;margin-top:10px}
+.cn-take{position:relative;padding-left:16px;font-size:clamp(1.15rem,1.6vw,1.28rem);line-height:1.4;max-width:62ch}
+.cn-take::before{content:"";position:absolute;left:0;top:.28em;bottom:.22em;width:2px;background:var(--c)}
+.cn-detail{font-size:1.05rem;line-height:1.62;max-width:66ch;margin-top:12px;padding-left:16px;color:#333}
+.cn-meta{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 32px;margin-top:20px;padding:16px 0 0;border-top:1px solid var(--line);background:none;border-radius:0}
+.cn-meta .cn-why{grid-column:auto;border-bottom:0;padding-bottom:0}
+.cn-meta p{font-size:.84rem;line-height:1.55;color:#555}
+.cn-meta b{display:block;font-size:.66rem;letter-spacing:.1em;color:var(--ink);margin-bottom:5px}
+.cn-meta b::before{display:none}
+.viz-foot{order:89;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 28px;border-top:1px solid var(--rule);margin-top:22px;padding-top:11px}
+.viz-foot .viz-source{order:0;border:0;margin:0;padding:0;flex:1 1 auto;min-width:0}
+.viz-foot .viz-actions,.viz-card:hover .viz-foot .viz-actions{order:0;margin:0;gap:16px;flex:none}
+.viz-foot .viz-actions button{color:var(--mid)}
+.viz-foot .viz-actions button:hover{color:var(--c-ink)}
+@media(max-width:900px){.cn-meta{grid-template-columns:1fr;gap:12px}}
+@media(max-width:680px){.cn-take,.cn-detail{padding-left:12px}.viz-foot .viz-actions{width:100%}}
+
+/* the lead figure: more presence, more air */
+.story-viz .viz-main{padding-top:16px;border-top-width:2px}
+.story-viz .viz-main .viz-head h2{font-size:clamp(1.75rem,3vw,2.45rem);line-height:1.1;letter-spacing:-.012em;max-width:30ch;text-wrap:balance}
+.story-viz .viz-main .viz-head p{font-size:.98rem}
+.story-viz .viz-main .cn-take{font-size:clamp(1.25rem,1.9vw,1.45rem)}
+.viz-head h2{text-wrap:balance}
