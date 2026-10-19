@@ -293,8 +293,8 @@ export function stripes(points: Array<{ year: number; value: number; flag?: bool
     const cx = xOf(yr) + sw / 2, near = keys.find((k) => k !== yr && Math.abs(k - yr) <= 2);
     const anchor = near === undefined ? "middle" : near > yr ? "end" : "start";
     b += line(cx, top - 14, cx, top - 3, INK.ink, 0.75);
-    b += txt(cx, top - 20, marks[yr], { size: sm ? 10.5 : 11.5, fill: INK.ink, weight: 600, anchor });
-    b += txt(cx, top - 34, fmt(p.value), { size: sm ? 10 : 11, fill: INK.ink2, anchor });
+    b += txt(cx, top - 20, marks[yr], { size: 11.5, fill: INK.ink, weight: 600, anchor });
+    b += txt(cx, top - 34, fmt(p.value), { size: 11, fill: INK.ink2, anchor });
   }
   for (const p of points) if (p.flag) b += `<rect x="${r1(xOf(p.year) + sw / 2 - 2)}" y="${top + bh + 5}" width="4" height="4" fill="${INK.sindoor}"/>`;
   const ay = top + bh + 26, st = o.tickStep ?? (sm ? 30 : 10);
@@ -305,11 +305,11 @@ export function stripes(points: Array<{ year: number; value: number; flag?: bool
 /** A small colour key for a continuous scale, labelled at chosen values. */
 export function scaleKey(stops: Stops, ticks: Array<[number, string]>, width = 220) {
   // Inset the bar so end labels centred on the extremes stay inside the box.
-  const col = ramp(stops), lo = stops[0][0], hi = stops[stops.length - 1][0], pad = 16, bw = width - 2 * pad;
+  const col = ramp(stops), lo = stops[0][0], hi = stops[stops.length - 1][0], pad = 22, bw = width - 2 * pad;
   let b = "";
   for (let i = 0; i < 60; i++) { const v = lo + ((hi - lo) * (i + 0.5)) / 60; b += `<rect x="${r1(pad + (i * bw) / 60)}" y="0" width="${r1(bw / 60 + 0.5)}" height="7" fill="${col(v)}"/>`; }
-  for (const [v, s] of ticks) { const x = pad + ((v - lo) / (hi - lo)) * bw; b += line(x, 7, x, 11, INK.ink3, 0.75) + txt(x, 23, s, { size: 10.5, fill: INK.ink2, anchor: "middle" }); }
-  return svg(width, 26, b, "Colour key", "alm-key");
+  for (const [v, s] of ticks) { const x = pad + ((v - lo) / (hi - lo)) * bw; b += line(x, 7, x, 11, INK.ink3, 0.75) + txt(x, 24, s, { size: 11.5, fill: INK.ink2, anchor: "middle" }); }
+  return svg(width, 28, b, "Colour key", "alm-key");
 }
 
 // =====================================================================

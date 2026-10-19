@@ -176,7 +176,7 @@ export function renderChoroplethStrip(visual: ChoroplethVisual) {
     const v = visual.min + ((visual.max - visual.min) * (i + 0.5)) / N;
     b += `<rect x="${svgCoord(x0 + ((x1 - x0) * i) / N)}" y="10" width="${svgCoord((x1 - x0) / N + 0.4)}" height="7" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}"/>`;
   }
-  b += `<text x="${x0}" y="31" ${F} font-size="10.5" fill="#4f4f4f">${escapeHtml(choroplethValueLabel(visual, visual.min))}</text><text x="${x1}" y="31" ${F} font-size="10.5" fill="#4f4f4f" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, visual.max))}</text>`;
+  b += `<text x="${x0}" y="31" ${F} font-size="11.5" fill="#4f4f4f">${escapeHtml(choroplethValueLabel(visual, visual.min))}</text><text x="${x1}" y="31" ${F} font-size="11.5" fill="#4f4f4f" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, visual.max))}</text>`;
   const pivot = visual.divergeAt !== undefined && visual.divergeAt > visual.min && visual.divergeAt < visual.max ? visual.divergeAt : null;
   if (pivot !== null) {
     b += `<line x1="${svgCoord(x(pivot))}" y1="6" x2="${svgCoord(x(pivot))}" y2="${top + rows.length * rowH}" stroke="#121212" stroke-width="0.8" stroke-dasharray="2 2"/>`;

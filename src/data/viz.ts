@@ -2745,7 +2745,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     case "ageBands": visual = ageBandBars(artifact); break;
     case "ageStructure": visual = ageStructureShares(artifact); break;
     case "broadShares": visual = genericBarForLatestRows(artifact); break;
-    case "dependencyLine": visual = dependencyLine(artifact); break;
+    case "dependencyLine": { const dl = dependencyLine(artifact); if (dl && entry.projectedAfter) dl.projectedAfter = entry.projectedAfter; visual = dl; break; }
     case "scenarioSpread": visual = variantBars(artifact); break;
     case "stack": visual = latestStack(artifact); break;
     case "emberShare": visual = emberSourceShare(artifact, entry.seriesName || "", entry.title || ""); break;

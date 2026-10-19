@@ -71,8 +71,13 @@ const PARTNER_NAMES: Record<string, string> = {
   "U K": "United Kingdom", "CHINA P RP": "China", "SAUDI ARAB": "Saudi Arabia", "RUSSIA": "Russia", "NETHERLAND": "Netherlands",
 };
 const SMALL_WORDS = new Set(["of", "and", "the", "for", "in", "on", "to"]);
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 function readableLabel(label: string) {
   const s = String(label).trim();
+  // A category that is a raw date reads as the period it stands for: 31 December is the
+  // calendar year, 31 March the financial year that ends on it, any other day its month.
+  const d = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (d) return d[2] === "12" && d[3] === "31" ? d[1] : d[2] === "03" && d[3] === "31" ? `${Number(d[1]) - 1}-${d[1].slice(2)}` : `${MONTHS[Number(d[2]) - 1]} ${d[1]}`;
   if (PARTNER_NAMES[s]) return PARTNER_NAMES[s];
   if (!/[A-Z]{2}/.test(s) || /[a-z]/.test(s) || s.replace(/[^A-Z]/g, "").length <= 4) return s;
   return s.toLowerCase().split(/(\s+|-|\/)/).map((w, i) => (i && SMALL_WORDS.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1))).join("");
@@ -616,7 +621,6 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
   if (v.gap) {
     b += `<rect x="${r1(x(v.gap.fromHour))}" y="${top}" width="${r1(x(v.gap.toHour) - x(v.gap.fromHour))}" height="${r1(H - top - bot)}" fill="rgba(194,74,46,0.07)"/>`;
     // The band is narrow on a phone, so its name sits above the plot, flush right.
-    if (v.gap.label) b += m ? txt(W - padR, top - 6, v.gap.label, { size: 11, fill: "#a63d24", anchor: "end" }) : txt(x(v.gap.fromHour) + 6, top + 14, v.gap.label, { size: 12, fill: "#a63d24" });
   }
   sc.ticks.forEach((t, i) => { b += line(padL, y(t), W - padR, y(t), i === 0 ? INK.ink : INK.grid, 1); b += txt(padL - 8, y(t) + 4, fmt(t, ""), { size: m ? 12 : 12.5, fill: INK.ink3, anchor: "end" }); });
   for (const h of m ? [0, 6, 12, 18] : [0, 3, 6, 9, 12, 15, 18, 21, 23]) {
@@ -624,6 +628,8 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
     b += txt(x(h), H - bot + 20, h === 23 ? "23:00" : `${String(h).padStart(2, "0")}:00`, { size: m ? 12 : 12.5, fill: INK.ink3, anchor: h === 23 ? "end" : h === 0 ? "start" : "middle" });
   }
   if (typeof v.peakHour === "number") b += line(x(v.peakHour), top, x(v.peakHour), H - bot, INK.ink2, 0.9, "4 3");
+  // The band's name goes over the peak hairline, haloed, so the dashes never strike through it.
+  if (v.gap?.label) b += m ? txt(W - padR, top - 6, v.gap.label, { size: 11.5, fill: "#a63d24", anchor: "end" }) : halo(x(v.gap.fromHour) + 6, top + 14, v.gap.label, { size: 12, fill: "#a63d24" });
   const paths = v.series.map((s, i) => ({ s, color: s.color ?? SERIES[Math.min(i, SERIES.length - 1)], d: s.values.map((val, h) => `${h ? "L" : "M"}${r1(x(h))} ${r1(y(val))}`).join("") }));
   for (const p of paths) {
     if (p.s.area) b += `<path d="${p.d}L${r1(x(p.s.values.length - 1))} ${r1(y(0))}L${r1(x(0))} ${r1(y(0))}Z" fill="${p.color}" fill-opacity="0.1"/>`;

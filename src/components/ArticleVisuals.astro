@@ -437,7 +437,9 @@ function sourceName(sourceId: string) {
 }
 
 function sourceLabel(source: VisualSpec["source"]) {
-  const id = String(source.sourceIndicatorId || "");
+  // Our World in Data ids carry the grapher slug before "::" and the column's own name after
+  // it ("share-richest-1-wid-vs-pip::Share according to the World Inequality Database").
+  const id = String(source.sourceIndicatorId || "").replace(/^[a-z0-9-]+::(?=\S)/, "");
   // The media/news article's internal indicator ids (e.g. "media.news.iamai_news_users_2024")
   // are not reader-facing; the chart subtitle carries the dataset detail, so show only the
   // clean source name. Scoped to "media." ids so other articles are unaffected.
@@ -1218,7 +1220,10 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
         const maxAbs = Math.max(1e-9, ...p.points.map((q) => Math.abs(q.value)));
         // In the chart's scale unless that would round the first value away ("₹0 lakh"),
         // in which case it is written in its own.
-        const firstText = endLabelInScale(first.value, Math.abs(first.value) / maxAbs < 0.05 ? Math.abs(first.value) : maxAbs, visual.unit, m, m);
+        // Written in its own scale it must carry its scale word even on a phone: bare, "₹710" sat
+        // under a "lakh cr" caption for ₹710 crore.
+        const ownScale = Math.abs(first.value) / maxAbs < 0.05;
+        const firstText = endLabelInScale(first.value, ownScale ? Math.abs(first.value) : maxAbs, visual.unit, m, m && !ownScale);
         // Set the label on the side the line leaves from: under the point when the line rises.
         const ahead = p.points[Math.min(p.points.length - 1, Math.max(3, Math.round(p.points.length / 12)))];
         const rising = ahead && g.y(ahead.value) < fy - 4;
