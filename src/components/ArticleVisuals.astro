@@ -4,10 +4,10 @@ import type { LockedNumber } from "../data/questions";
 import { formatLockedNumber } from "../data/questions";
 import { fileSafe } from "../data/chartDownloads";
 import FigureCard from "./FigureCard.astro";
-import { renderFigure, cleanUnit } from "../data/figures";
+import { renderFigure, cleanUnit, linePeersFigure, tagFigure } from "../data/figures";
 import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, axisFmt, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
-import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, viewBoxAspectRatio } from "../data/chartSvg";
-import { typeset, wrapWords, textWidth, txt as almTxt, halo as almHalo, line as almLine, textInk, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
+import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, renderChoroplethDots, viewBoxAspectRatio } from "../data/chartSvg";
+import { typeset, wrapWords, textWidth, namedIn, note as almNote, noteWidth, CONTEXT, CONTEXT_INK, SERIF, txt as almTxt, halo as almHalo, line as almLine, textInk, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
 
 type ChartExplainer = {
   visualId: string;
@@ -46,19 +46,64 @@ const {
 // domain does not already use (set per domain as --s3..--s5 in indica.css), then grey.
 // A seventh series folds into a light grey rather than inventing a hue, and so does every
 // series after it: cycling back to the domain ink would give two lines the same colour.
-const colors = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b3b3b3"];
+const colors = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b9b2a6"];
 
 /** The ink of every line in a chart. Fixed meanings win over the palette and over colours
  *  hard-coded in the registry: rural is always hara, urban always neel. When two lines
  *  share a meaning ("Rural, with imputation" and "Rural, without"), the second is dashed.
  *  The other lines take the palette in order, skipping inks a fixed meaning has used. */
-function lineInks(lines: Array<{ label: string; color?: string; dash?: boolean }>) {
+type Role = "lead" | "rival" | "named" | "context" | "peer";
+const KEEP_PALETTE = "\u0000keep-palette";
+/** Whether prose names a line by its colour: "(blue)", "(red line)", "the green line". */
+const namesColours = (prose: string) => /\((?:the )?(?:blue|red|green|black|orange|gold|golden|purple|teal|grey|gray|yellow|brown)(?: line| bars?)?\)|\b(?:the )?(?:blue|red|green|black|orange|purple|teal|yellow|brown) (?:line|lines|bar|bars)\b/i.test(prose);
+/** Which line is the story. The protagonist is the line the plan emphasises, else India among
+ *  other places; rivals are the other lines the title (or takeaway) names. In a chart of three
+ *  or more lines that has a protagonist, or that names some of its lines, everything else is
+ *  context: drawn in a warm grey, finer, its name in grey. Three or four lines with no subject
+ *  are peers and keep the palette. Rural and urban keep their fixed inks and are never context. */
+function lineRoles(lines: Array<{ label: string; emphasis?: boolean }>, mention = ""): Role[] {
+  const n = lines.length;
+  // A chart whose explainer walks through its lines by colour ("Industry (red)") keeps its
+  // palette until that prose is rewritten (listed in docs/DESIGN_REFINEMENT_LOG.md, row 87).
+  if (mention.includes(KEEP_PALETTE)) return lines.map(() => "peer");
+  if (n < 3 || lines.some((l) => /\b(rural|urban)\b/i.test(String(l.label)))) return lines.map(() => "peer");
+  const lead0 = lines.findIndex((l) => (l as { emphasis?: boolean }).emphasis);
+  const india = lines.findIndex((l) => /^india\b/i.test(String(l.label).trim()));
+  const named = lines.map((l) => namedIn(String(l.label), mention));
+  const lead = lead0 >= 0 ? lead0 : india >= 0 ? india : named.indexOf(true);
+  if (lead < 0) return lines.map(() => "peer");
+  let rivals = 0;
+  // One side of a men/women (boys/girls) comparison is never context: at worst a named grey.
+  const sex = (l: { label: string }) => /\b(male|female|men|women|boys|girls)\b/i.test(String(l.label));
+  return lines.map((l, i) => (i === lead ? "lead" : named[i] ? (rivals++ < 2 ? "rival" : "named") : sex(l) ? "named" : "context"));
+}
+/** Five or more lines with no protagonist and none named: peers, better as small multiples. */
+/** Not when the lines are years overlaid on one calendar (the point is the same month across
+ *  years), survey rounds on a categorical axis, or too short to have a shape. */
+const peerPanels = (v: LineVisual, mention = "", lines = v.lines) =>
+  !v.monthAxis && !v.categoricalX && lines.every((l) => l.points.length >= 8 && l.points.every((q) => /^\d{4}/.test(String(q.date)))) &&
+  lines.length >= 5 && !mention.includes(KEEP_PALETTE) && lineRoles(lines, mention).every((r) => r === "peer") && !lines.some((l) => /\b(rural|urban)\b/i.test(String(l.label)));
+
+function lineInks(lines: Array<{ label: string; color?: string; dash?: boolean; emphasis?: boolean }>, mention = "") {
+  const roles = lineRoles(lines, mention);
+  if (roles.some((r) => r !== "peer")) {
+    // The story in ink: the protagonist in the domain ink, the first rival ink black, a second
+    // rival the next data ink, any further named line a darker grey, the rest context grey.
+    let k = 0;
+    return lines.map((l, i) => ({
+      color: roles[i] === "lead" ? (l.color ?? colors[0]) : roles[i] === "rival" ? (k++ === 0 ? "#121212" : "var(--s3)") : roles[i] === "named" ? "#857f75" : CONTEXT,
+      dash: !!l.dash, role: roles[i],
+    }));
+  }
+  return lineInksPalette(lines).map((x) => ({ ...x, role: "peer" as Role }));
+}
+function lineInksPalette(lines: Array<{ label: string; color?: string; dash?: boolean }>) {
   const fixed = (label: string) => (/\brural\b/i.test(label) ? "#008a6e" : /\burban\b/i.test(label) ? "#33489a" : null);
   const anyFixed = lines.some((l) => fixed(l.label));
   const seen = new Set<string>();
   let k = 0;
   // With rural/urban present, the domain ink could repeat hara or neel, so the others start at ink black.
-  const rest = anyFixed ? ["#121212", "#b98014", "#7b4790", "#c24a2e", "#8a8a8a", "#b3b3b3"] : colors;
+  const rest = anyFixed ? ["#121212", "#b98014", "#7b4790", "#c24a2e", "#857f75", "#b9b2a6"] : colors;
   // India among other countries always wears the domain ink, as it does when it is listed
   // first, so its colour holds from chart to chart within an article: when it sits later in
   // the plan it trades inks with the first line. Registry colours still win.
@@ -509,6 +554,8 @@ function cleanSubtitle(value: string, sourceId: string) {
     .replace(" · value", "")
     .replace(" · NumericValue", "")
     .split(" · ")
+    // The source by name repeats the source line under the figure ("... · 1990-2025 · UNCTAD").
+    .filter((seg, i, all) => !(i > 0 && i === all.length - 1 && seg.trim().toLowerCase() === sourceName(sourceId).trim().toLowerCase()))
     // Upstream codes (SP.POP.TOTL, NY.GDP.PCAP.CD) belong in the source line, not the subtitle.
     // So do database series keys: IndiaDataHub's "IFTLDATPSB11Q", EIA's "47-33-IND-MBTUPP.annual".
     .filter((seg) => !isMachineId(seg) && !/^[A-Z0-9]+(\.[A-Z0-9]+){1,}$/.test(seg.trim())
@@ -679,8 +726,12 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // On a phone, five or more lines end in a ladder of unnamed values on leaders, which the
   // key below cannot untangle. With a protagonist (the emphasised line, or India among
   // three or more), only its value is written; the others keep their end dots and tooltips.
+  const mention = String((visual as { mention?: string }).mention ?? visual.title);
+  const roles = lineRoles(visual.lines, mention);
   const onlyIdx = mobile && visual.lines.length >= 5 ? protagonistIndex(visual.lines) : -1;
-  const quiet = (index: number) => keyValues || (onlyIdx >= 0 && index !== onlyIdx);
+  // Context lines are the chart's ground: on a phone they keep their dots and tooltips, and the
+  // key names them once, in grey; only the protagonist and its rivals write values.
+  const quiet = (index: number) => keyValues || (mobile && (roles[index] === "context" || roles[index] === "named")) || (onlyIdx >= 0 && index !== onlyIdx && roles[index] === "peer");
   // A line whose data stop a year or more before the others' is named at its own end, inside
   // the plot (renderLineSvg), so it claims no gutter. One rule for the geometry and the render.
   const yearOfDate = (d: unknown) => Number(String(d).slice(0, 4));
@@ -698,7 +749,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     // widths (textWidth): a single line's value (and the date under it, in a smaller size), a
     // phone's bare values, or a desktop "Name value" with the name in semibold (bold for the
     // protagonist) and wrapped onto two lines when long.
-    const emph = emphasised(visual.lines);
+    const emph = emphasised(visual.lines, mention);
     const dateW = one ? textWidth(pointDateLabel(String(visual.lines[0].points.at(-1)?.date ?? ""), visual.lines[0].points), mobile ? 11.5 : 12) : 0;
     // Measured as printed: the values after harmoniseDecimals, which turned a measured "30%" into
     // a printed "30.0%" and ran the label off the figure.
@@ -742,7 +793,20 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // or the lines compress into a thin band; magnitude data (range >> min, e.g. emissions,
   // population) keeps a 0 floor so area height stays meaningful.
   const tight = !bounded && rawMin > 0 && (rawMax - rawMin) < rawMin;
-  const linear = tightScale(scaleMin < 0 ? scaleMin : tight ? scaleMin : 0, scaleMax || 1);
+  const linear0 = tightScale(scaleMin < 0 ? scaleMin : tight ? scaleMin : 0, scaleMax || 1);
+  // A rank runs with 1 at the top: drawn the other way, a climb from 43rd to 11th fell.
+  const rank = /\brank\b/i.test(String(visual.unit));
+  // The scale stops at the last gridline the data reach: a line may rise a little above it,
+  // rather than leave the top third of the plot empty for a tick nothing reaches (10.3% under
+  // a 15% gridline).
+  const linear = (() => {
+    const t = linear0.ticks;
+    if (bounded || rank || t.length < 4) return linear0;
+    const prev = t[t.length - 2], stepT = t[1] - t[0];
+    if (rawMax > prev && rawMax - prev <= stepT * 0.22) return { min: linear0.min, max: rawMax, ticks: t.slice(0, -1) };
+    return linear0;
+  })();
+  if (rank) { linear.ticks = linear.ticks.map((t) => (t === 0 ? 1 : t)); linear.min = 1; }
   const min = useLogScale ? Math.log10(logMinRaw) : linear.min;
   const max = useLogScale ? Math.log10(logMaxRaw) : linear.max;
   const span = max - min || 1;
@@ -765,12 +829,15 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // space beside every shorter label on every phone chart.
   // The widest label starts at the figure's left edge, on the title's edge, and ends 10 units
   // short of the plot.
-  const pad = { l: mobile ? 5 : Math.max(16, Math.ceil(Math.max(...ticks.map((tick, ti) => textWidth(typeset(`>${yTickLabel(tick, ti, ticks, visual.unit, mobile)}<`).slice(1, -1), yFontSize)))) + 10), ...padRTB };
+  // Phones too: a gutter as narrow as the bare labels, so no label is ever moved into the plot
+  // or left out where a line runs past it (labels set above their gridlines slid into the data,
+  // and 146 phone charts dropped one).
+  const pad = { l: Math.max(mobile ? 12 : 16, Math.ceil(Math.max(...ticks.map((tick, ti) => textWidth(typeset(`>${yTickLabel(tick, ti, ticks, visual.unit, mobile)}<`).slice(1, -1), yFontSize)))) + (mobile ? 6 : 10)), ...padRTB };
   // The unit caption sits in its own row ABOVE the top tick, so give it headroom — without
   // it the caption ("lakh cr") collides with the topmost number ("₹400") at the same corner.
   // On a phone the caption joins the top y label instead ("150 crore"), which already sits
   // above its gridline; a separate row stacked "crore" over "150" in the corner.
-  if (unitCaption && !mobile) pad.t += 16;
+  if (unitCaption) pad.t += mobile ? 14 : 16;
   const plotW = width - pad.l - pad.r;
   // Position points by real time. Monthly series must use the month too; otherwise all
   // twelve YYYY-MM points in a year collapse onto one x-position and render as steps.
@@ -803,7 +870,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     }
     return time;
   };
-  const inks = lineInks(visual.lines);
+  const inks = lineInks(visual.lines, mention);
   const totalPoints = visual.lines.reduce((n, l) => n + l.points.length, 0);
   const timesAll = visual.lines.flatMap((line) => line.points.map((p) => timeOf(p.date))).filter((v): v is number => v !== null);
   const dateMode = !visual.categoricalX && timesAll.length === totalPoints && timesAll.length > 0 && Math.max(...timesAll) > Math.min(...timesAll);
@@ -813,7 +880,9 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const xByIndex = (index: number, count: number) => pad.l + (index / Math.max(1, count - 1)) * plotW;
   const px = (point: Point, index: number, count: number) => (dateMode ? xByTime(timeOf(point.date) ?? minTime) : xByIndex(index, count));
   const scaled = (value: number) => useLogScale ? Math.log10(Math.max(1, value)) : value;
-  const y = (value: number) => height - pad.b - ((scaled(value) - min) / span) * (height - pad.t - pad.b);
+  const y = (value: number) => rank
+    ? pad.t + ((scaled(value) - min) / span) * (height - pad.t - pad.b)
+    : height - pad.b - ((scaled(value) - min) / span) * (height - pad.t - pad.b);
   const pathsRaw = visual.lines.map((line, lineIndex) => {
     const d = line.points.map((point, index) => `${index === 0 ? "M" : "L"}${svgCoord(px(point, index, line.points.length))} ${svgCoord(y(point.value))}`).join("");
     const xFirst = px(line.points[0], 0, line.points.length);
@@ -1019,7 +1088,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     }
     axisTicks = kept;
   }
-  const geom: LineGeometry = { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime, unitCaption, endFont: mobile ? (visual.lines.length === 1 ? 14 : 12) : visual.lines.length === 1 ? (isLead ? 19 : 17) : 13.5 };
+  const geom: LineGeometry = { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime, unitCaption, rank, roles, endFont: mobile ? (visual.lines.length === 1 ? 14 : 12) : visual.lines.length === 1 ? (isLead ? 19 : 17) : 13.5 };
   if (!tightRight) {
     // On a phone the right gutter for the end values costs an eighth of the plot. Try the
     // values inside the plot beside each line's end; keep the gutter if any would collide.
@@ -1052,6 +1121,10 @@ type LineGeometry = {
   ticks: number[]; paths: Array<any>; axisTicks: Array<{ xPos: number; label: string }>;
   y: (value: number) => number; xOfTime: (time: number) => number; dateMode: boolean;
   minTime: number; maxTime: number; unitCaption: string;
+  /** A rank axis, drawn with 1 at the top. */
+  rank?: boolean;
+  /** Each line's part in the story (lineRoles). */
+  roles?: Role[];
   /** The end label's size, as the gutter was measured for it. */
   endFont: number;
   /** Phone end values set inside the plot: per path, the anchor point and side. */
@@ -1087,10 +1160,11 @@ function protagonistIndex(lines: Array<{ label: string; emphasis?: boolean }>) {
  *  or more places; and, beside any emphasised line, every rural or urban line, which is one side
  *  of the comparison, never context (rural India was once a faint hairline beside urban lines).
  *  lineGeometry sizes the labels with it, renderLineSvg draws with it. */
-function emphasised(lines: Array<{ label: string; emphasis?: boolean }>) {
+function emphasised(lines: Array<{ label: string; emphasis?: boolean }>, mention = "") {
   const out = lines.map((l) => Boolean((l as { emphasis?: boolean }).emphasis));
   if (lines.length >= 3 && !out.some(Boolean)) {
-    const i = lines.findIndex((l) => /^india\b/i.test(String(l.label).trim()));
+    // the story's protagonist (India among places, else the line the title names first)
+    const i = lineRoles(lines, mention).indexOf("lead");
     if (i >= 0) out[i] = true;
   }
   if (out.some(Boolean)) lines.forEach((l, i) => { if (/\b(rural|urban)\b/i.test(String(l.label))) out[i] = true; });
@@ -1247,7 +1321,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       b += `<line x1="${svgCoord(bx)}" y1="${pad.t}" x2="${svgCoord(bx)}" y2="${svgCoord(plotB)}" stroke="#121212" stroke-width="0.75" stroke-dasharray="2 3">${band.label ? `<title>${band.label}</title>` : ""}</line>`;
       const fs = m ? 11.5 : 12.5, nx = right ? bx - 6 - bw : bx + 6;
       const ly = [ly0, pad.t + 12, pad.t + 26, pad.t + 40, plotB - 8].find((yy) => clearAt(nx, nx + bw, yy, fs));
-      if (showLabel && ly !== undefined) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: fs, fill: "#4f4f4f", anchor: right ? "end" : "start" });
+      if (showLabel && ly !== undefined) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: fs, fill: "#4a4640", anchor: right ? "end" : "start" });
       continue;
     }
     b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
@@ -1256,41 +1330,17 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     if (showLabel && by !== undefined) b += almTxt(bcx, by, band.label!, { size: bandSize, fill: "#a63d24", anchor: "middle" });
   }
   void asNotes;
-  if (g.unitCaption && !m) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
+  if (g.unitCaption) b += almTxt(0, pad.t - (m ? 16 : 18), g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#6e6961" });
   // Gridlines run to the figure's edge, under the end labels, so the values sit inside the
   // chart's frame instead of hanging in a blank margin past the last gridline.
   const yTickBoxes: Array<[number, number, number, number]> = [];
-  // Phone y labels are drawn last, over the lines, so a line starting at the left edge never hides one.
-  let yLabelsTop = "";
-  // A phone y label sits flush left above its gridline unless a line or a dot passes through it
-  // there; then it slides right along its own gridline, at most 24 units (further in, a "3" in
-  // the middle of the lines read as a stray value, not an axis), and failing that it is left out.
-  // The top label carries the unit and stays; the base label (zero, on the heavy line) may slide
-  // across the left half, since the heavy line it sits on cannot be mistaken for another. Haloed over the lines, "60" and "$0" were struck
-  // through on 230 phone charts.
-  const polysY = m ? linePolys(g) : [];
-  const dotsY: Array<[number, number]> = m ? g.paths.flatMap((p: any) => [
-    ...(p.latest ? [[p.latestX, p.latestY] as [number, number]] : []),
-    ...(single && g.dateMode && p.points.length > 5 ? [[pad.l, g.y(p.points[0].value)] as [number, number]] : []),
-  ]) : [];
-  const yLabelAt = (w: number, base: number, reach = 24) => {
-    for (let x = 0; x <= reach; x += 4) {
-      if (!boxHitsLines(polysY, x - 1, x + w + 1, base - 9, base) && !dotsY.some(([dx, dy]) => dx > x - 6 && dx < x + w + 6 && dy > base - 15 && dy < base + 5)) return x;
-    }
-    return null;
-  };
+  // Phone labels were drawn last, over the lines; with a gutter on every width they never meet one.
+  const yLabelsTop = "";
   g.ticks.forEach((tick, ti) => {
-    const yy = g.y(tick), base = g.ticks.includes(0) ? tick === 0 : ti === 0;
-    const label = yTickLabel(tick, ti, g.ticks, visual.unit, m) + (m && g.unitCaption && ti === g.ticks.length - 1 ? ` ${g.unitCaption}` : "");
-    b += almLine(m ? 0 : pad.l, yy, width - 2, yy, base ? "#121212" : "#efefef", 1);
-    if (m) {
-      // Phone: flush left, just above the gridline (see yLabelAt).
-      const lw = textWidth(typeset(`>${label}<`).slice(1, -1), 12), top = ti === g.ticks.length - 1;
-      const lx = yLabelAt(lw, yy - 5, base ? (width - pad.r) * 0.5 : 24) ?? (top ? 0 : null);
-      if (lx === null) return;
-      yLabelsTop += `<text class="yaxt" x="${svgCoord(lx)}" y="${svgCoord(yy - 5)}" stroke="#fff" stroke-width="3" stroke-linejoin="round" paint-order="stroke">${label}</text>`;
-      yTickBoxes.push([lx, yy - 5 - 10, lx + lw + 3, yy - 2]);
-    } else b += `<text class="yaxt" x="${svgCoord(pad.l - 10)}" y="${svgCoord(yy + 4)}" text-anchor="end">${label}</text>`;
+    const yy = g.y(tick), base = g.rank ? ti === g.ticks.length - 1 : g.ticks.includes(0) ? tick === 0 : ti === 0;
+    const label = yTickLabel(tick, ti, g.ticks, visual.unit, m);
+    b += almLine(pad.l, yy, width - 2, yy, base ? "#121212" : "#e9e4da", 1);
+    b += `<text class="yaxt" x="${svgCoord(pad.l - (m ? 6 : 10))}" y="${svgCoord(yy + 4)}" text-anchor="end">${label}</text>`;
   });
   for (const t of g.axisTicks) {
     b += almLine(t.xPos, plotB, t.xPos, plotB + 5, "#121212", 1);
@@ -1300,7 +1350,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   if (ref) {
     const ry = g.y(ref.value);
     if (ry >= pad.t && ry <= plotB) {
-      b += almLine(pad.l, ry, plotR, ry, "#4f4f4f", 0.9, "4 3");
+      b += almLine(pad.l, ry, plotR, ry, "#4a4640", 0.9, "4 3");
       // Named beside itself at the left, or further along where a line runs through that spot.
       const fs = m ? 11.5 : 12.5, rw = textWidth(ref.label, fs);
       let at: [number, number] | undefined;
@@ -1308,51 +1358,70 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
         const yy = [Math.max(pad.t + 12, ry - 7), ry + 15].find((v) => v < plotB - 2 && clearAt(x, x + rw, v, fs));
         if (yy !== undefined) at = [x, yy];
       }
-      if (at) b += almHalo(at[0], at[1], ref.label, { size: fs, fill: "#4f4f4f" });
+      if (at) b += almHalo(at[0], at[1], ref.label, { size: fs, fill: "#4a4640" });
     }
   }
   // context series first, emphasised series on top
   // In a comparison of three or more places, India is the protagonist unless the plan
   // says otherwise: drawn heavier and on top, the others finer and a little quieter.
   // Each line keeps its own ink, so a colour named in the prose still holds.
-  emphasised(g.paths).forEach((e, i) => { if (e) (g.paths[i] as { emphasis?: boolean }).emphasis = true; });
-  const order = g.paths.map((p, i) => ({ p, i })).sort((a, z) => Number(Boolean(a.p.emphasis)) - Number(Boolean(z.p.emphasis)));
+  const mention = String(o.mention || "");
+  emphasised(g.paths, mention).forEach((e, i) => { if (e) (g.paths[i] as { emphasis?: boolean }).emphasis = true; });
+  const roles = g.roles ?? g.paths.map(() => "peer" as Role);
+  const story = roles.some((r) => r !== "peer");
+  const rankOf: Record<Role, number> = { context: 0, named: 1, peer: 2, rival: 3, lead: 4 };
+  const order = g.paths.map((p, i) => ({ p, i })).sort((a, z) => (rankOf[roles[a.i]] - rankOf[roles[z.i]]) || Number(Boolean(a.p.emphasis)) - Number(Boolean(z.p.emphasis)));
   const hasEmph = g.paths.some((p) => p.emphasis);
-  // A line the card names (in its title, subtitle or takeaway), or the other side of India
-  // against one place, is part of the comparison: it keeps full ink and at least 2 units even
-  // beside an emphasised line. Faded to context, "Viet Nam's ratio stayed above India's" was
-  // told with Viet Nam as a grey hairline.
-  const mention = String(o.mention || "").toLowerCase();
+  // Among peers (no protagonist), a line the card names or the other side of India against one
+  // place keeps full ink and at least 2 units beside an emphasised line.
   const side = (p: any) => {
-    const label = String(p.label).trim().toLowerCase();
     if (n === 2 && g.paths.some((q) => /^india\b/i.test(String(q.label).trim()))) return true;
-    return label.length > 1 && new RegExp(`(^|[^\\p{L}])${label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\p{L}]|$)`, "u").test(mention);
+    return namedIn(String(p.label), mention);
   };
+  b += gapBand(visual, g, roles, m, clearAt);
+  // Climate measures only, for now: a year's temperature or rain is weather, the trend is the
+  // climate the title is about. (An economic series' single years are often the story.)
+  const climate = /°C|anomal|departure|\brain|monsoon|precip/i.test(`${visual.unit} ${visual.title} ${visual.subtitle ?? ""}`);
+  const trend = single && climate ? trendOf(g.paths[0], g) : null;
   for (const { p, i } of order) {
-    // 1.75 units is the thinnest line that still draws at 1.5 px when a wide figure is scaled down.
+    const role = roles[i];
+    // 1.75 units is the thinnest a line the story needs may be; context lines are the ground,
+    // fine and grey, and carry no meaning a reader must find.
     const named = !single && hasEmph && !p.emphasis && side(p);
-    const w = single ? (o.isLead ? 2.5 : 2.2) : p.emphasis ? 3 : named ? 2 : hasEmph ? 1.25 : n > 3 ? 1.75 : 2;
-    // A wash under a single series, only when the axis starts at zero so the area means something.
-    if (single && g.ticks[0] === 0 && p.points.length > 2) {
-      // A flat, quiet tint: it says "this much", where a gradient only decorates.
-      b += `<path d="${p.areaD}" fill="${p.color}" fill-opacity="0.07"/>`;
-    }
-    // Context lines step back (finer, lighter) so the emphasised one reads first; the
-    // emphasised line is cased in the ground colour so it lifts cleanly off the lines it crosses.
-    const op = !single && hasEmph && !p.emphasis && !named ? ` stroke-opacity="0.6"` : "";
+    const w = single ? (trend ? 1.1 : o.isLead ? 2.5 : 2.3)
+      : story ? (role === "lead" ? 2.8 : role === "rival" ? 2 : role === "named" ? 1.75 : 1.25)
+      : p.emphasis ? 2.8 : named ? 2 : hasEmph ? 1.25 : n > 3 ? 1.75 : 2;
+    // Among peers with an emphasised line, the others step back; a story's context is already grey.
+    const op = trend ? ` stroke-opacity="0.5"` : !story && !single && hasEmph && !p.emphasis && !named ? ` stroke-opacity="0.6"` : "";
+    // The protagonist is cased in the ground colour so it lifts cleanly off the lines it crosses.
     if (!single && p.emphasis && p.dSolid && !p.dash) b += `<path d="${p.dSolid}" fill="none" stroke="#ffffff" stroke-width="${w + 3}" stroke-linejoin="round" stroke-linecap="round"/>`;
     // A dashed series (a second line with the same fixed meaning) has butt caps and a dash
     // scaled to its weight: round caps on a "4 3" dash closed the gaps, so it read as solid.
     if (p.dSolid) b += `<path d="${p.dSolid}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="${p.dash ? "butt" : "round"}"${p.dash ? ` stroke-dasharray="${svgCoord(Math.max(5, w * 2.8))} ${svgCoord(Math.max(3, w * 1.6))}"` : ""}${op}><title>${p.label}</title></path>`;
     // The projected part: the same ink and weight, dashed, so it reads as the same series
-    // carried forward rather than another one.
-    // A dash breaks a line into pieces, so a projected line keeps at least 1.6, and a line that
-    // is projected all the way keeps its full ink; thinner and lighter it dissolved into a
-    // dotted hairline. One measured in part keeps the opacity of its measured run.
-    const wp = Math.max(w, 1.75);
+    // carried forward rather than another one. At least 1.6 units, so the dashes hold together.
+    const wp = Math.max(w, role === "context" ? 1.25 : 1.75);
     if (p.dProj) b += `<path d="${p.dProj}" fill="none" stroke="${p.color}" stroke-width="${wp}" stroke-linejoin="round" stroke-linecap="butt" stroke-dasharray="${svgCoord(wp * 2.4)} ${svgCoord(wp * 1.8)}"${p.dSolid ? op : ""}><title>${p.label}, projected</title></path>`;
-    void i;
   }
+  if (trend) {
+    // A noisy annual series: the years recede to a fine trace and a centred average carries the
+    // trend the title is about, named in the annotation voice where it ends.
+    const p = g.paths[0];
+    b += `<path d="${trend.d}" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+    b += `<path d="${trend.d}" fill="none" stroke="${p.color}" stroke-width="${m ? 2.6 : 2.8}" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const fs = m ? 13 : 14.5, t = `${trend.window}-year average`, tw = noteWidth(t, fs);
+    // Beside the average's last stretch, above or below it, stepping back along it and a little
+    // further off until clear of the years' trace.
+    const spots: Array<[number, number, "start" | "end"]> = [];
+    for (const dy of [-14, 24, -26, 38, 52, -40]) for (const dx of [0, -40, -80, -120, -160]) spots.push([trend.x1 + dx, trend.y1 + dy, "end"]);
+    const at = spots.find(([x, yy, an]) => { const xa = an === "end" ? x - tw : x; return yy - fs > pad.t - 6 && yy < plotB - 4 && xa > pad.l && xa + tw < width - pad.r && clearAt(xa, xa + tw, yy, fs); });
+    if (at) {
+      b += almNote(at[0], at[1], t, { size: fs, fill: textInk(p.color), anchor: at[2] });
+      const xa = at[2] === "end" ? at[0] - tw : at[0];
+      yTickBoxes.push([xa - 4, at[1] - fs - 2, xa + tw + 4, at[1] + 4]);
+    }
+  }
+  if (single && !trend) b += peakMark(visual, g, m, clearAt, yTickBoxes);
   // End labels for lines that stop short of the right edge, placed before the loop so each
   // can be tested against the others as well as against every line.
   const early = single ? new Map<any, { xr: number; ly: number }>() : placeEarlyLabels(g, m).placed;
@@ -1365,14 +1434,14 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       // the latest value, written beside its point (on a phone, inside the plot when it fits)
       if (inside) {
         b += almHalo(inside.x, inside.y + 12, p.endLabelText, { size: 14, fill: "#121212", weight: 600, anchor: "end" });
-        b += almHalo(inside.x, inside.y + 26, pointDateLabel(p.latest.date, p.points), { size: 11.5, fill: "#8a8a8a", anchor: "end" });
+        b += almHalo(inside.x, inside.y + 26, pointDateLabel(p.latest.date, p.points), { size: 11.5, fill: "#857f75", anchor: "end" });
       } else {
       const lx = p.latestX + (m ? 8 : 10);
       // The date under the value must stay above the axis: a line ending near the bottom lifts
       // the pair, so "2023-24" never lands on the "2022-23" tick below it.
       const lift = Math.min(0, plotB - 6 - (p.latestY + (m ? 20 : 25)));
       b += almTxt(lx, p.latestY + (m ? 5 : 6) + lift, p.endLabelText, { size: g.endFont, fill: "#121212", weight: 600 });
-      b += almTxt(lx, p.latestY + (m ? 20 : 25) + lift, pointDateLabel(p.latest.date, p.points), { size: m ? 11.5 : 12, fill: "#8a8a8a" });
+      b += almTxt(lx, p.latestY + (m ? 20 : 25) + lift, pointDateLabel(p.latest.date, p.points), { size: m ? 11.5 : 12, fill: "#857f75" });
       }
       const first = p.points[0];
       if (first && p.points.length > 5 && g.dateMode) {
@@ -1393,7 +1462,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
         // a label set across a steep first stretch ("43 in 1990" over a spike) is unreadable.
         const lw = firstLabel.length * fs * 0.58, polys = linePolys(g);
         const below = (k: number) => fy + 20 + k, above = (k: number) => fy - 10 - k;
-        const tries = (rising ? [below(0), above(0), below(10), above(10), below(20), above(20)] : [above(0), below(0), above(10), below(10), above(20), below(20)])
+        const tries = (rising ? [below(0), above(0), below(10), above(10), below(20), above(20), above(34)] : [above(0), below(0), above(10), below(10), above(20), below(20), below(34)])
           .filter((yy) => yy - fs > pad.t - 4 && yy < plotB - 4);
         // A dense series with nowhere clear (monthly NREGA spikes) keeps the dot and leaves the
         // value to the tooltip: text laid across a thicket of lines reads as neither.
@@ -1401,7 +1470,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
           && !yTickBoxes.some(([a, t, c, d]) => fx + 4 < c && fx + 8 + lw > a && yy - fs * 0.8 < d && yy + fs * 0.2 > t));
         // The starting point is context, the latest is the news: the first value is set
         // lighter and in mid grey so the end label leads.
-        if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#4f4f4f", weight: 500 });
+        if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#4a4640", weight: 500 });
       }
     } else if (inside) {
       b += almHalo(inside.x, inside.y + 10.5, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600, anchor: "end" });
@@ -1412,13 +1481,13 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       const { xr, ly } = early.get(p)!, names = m ? [] : (p.nameLines as string[]);
       b += m
         ? almHalo(xr, ly, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600, anchor: "end" })
-        : `<text x="${svgCoord(xr)}" y="${svgCoord(ly)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : 600}">${names.join(" ")}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
+        : `<text x="${svgCoord(xr)}" y="${svgCoord(ly)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : roles[g.paths.indexOf(p)] === "context" ? 500 : 600}">${names.join(" ")}</tspan><tspan fill="${roles[g.paths.indexOf(p)] === "context" ? CONTEXT_INK : "#4a4640"}" dx="5">${p.endLabelText}</tspan></text>`;
     } else {
       const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + 9;
       if (moved) b += `<path d="M${svgCoord(p.latestX + 4)} ${svgCoord(p.latestY)}L${svgCoord(lx - 3)} ${svgCoord(ly - 4)}" fill="none" stroke="${p.color}" stroke-width="0.8" stroke-opacity="0.6"/>`;
       b += m
         ? almHalo(lx, ly, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600 })
-        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${(p.nameLines as string[]).map((name, k) => `<tspan${k ? ` x="${svgCoord(lx)}" dy="15"` : ""} fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : 600}">${name}</tspan>`).join("")}<tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
+        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${(p.nameLines as string[]).map((name, k) => `<tspan${k ? ` x="${svgCoord(lx)}" dy="15"` : ""} fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : roles[g.paths.indexOf(p)] === "context" ? 500 : 600}">${name}</tspan>`).join("")}<tspan fill="${roles[g.paths.indexOf(p)] === "context" ? CONTEXT_INK : "#4a4640"}" dx="5">${p.endLabelText}</tspan></text>`;
     }
   }
   void axisSize;
@@ -1437,6 +1506,111 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   };
   const hoverAttr = JSON.stringify(hover).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
   return `<svg class="${o.cls}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${visual.title.replace(/"/g, "&quot;")}" data-hover="${hoverAttr}">${b}${yLabelsTop}</svg>`;
+}
+
+/** Whether a series is a run of years (one point a year, every gap a whole year). */
+const yearly = (points: Array<{ date: string }>) => {
+  const ys = points.map((q) => Number(String(q.date).slice(0, 4)));
+  return ys.length > 2 && ys.every((y, i) => i === 0 || y - ys[i - 1] === 1) && new Set(points.map((q) => String(q.date).slice(4))).size === 1;
+};
+
+/** The gap the title is about. When a chart's title names both its protagonist and one rival
+ *  ("Pakistan's FDI ratio exceeded India's in 23 of 36 years"), the space between the two lines
+ *  is shaded wherever the rival is ahead, and the count of those years is written in the plot. */
+function gapBand(visual: LineVisual, g: LineGeometry, roles: Role[], m: boolean, clearAt?: (xa: number, xb: number, base: number, size: number) => boolean) {
+  if (!g.dateMode || g.rank) return "";
+  // The rival the title names (a takeaway may name others; the band is the title's claim).
+  const inTitle = g.paths.map((p: any, i: number) => (roles[i] === "rival" || roles[i] === "named") && namedIn(String(p.label), visual.title) ? i : -1).filter((i: number) => i >= 0);
+  let li = roles.indexOf("lead"), ri = inTitle.length === 1 ? inTitle[0] : -1;
+  if (g.paths.length === 2) { li = /^india\b/i.test(String(g.paths[1].label).trim()) ? 1 : 0; ri = 1 - li; }
+  if (li < 0 || ri < 0) return "";
+  const L = g.paths[li], R = g.paths[ri];
+  if (!namedIn(String(L.label), visual.title) || !namedIn(String(R.label), visual.title)) return "";
+  const polys = linePolys(g);
+  const at = (k: number) => new Map(g.paths[k].points.map((q: any, i: number) => [String(q.date), { v: q.value as number, x: polys[k][i]?.[0], y: polys[k][i]?.[1] }]));
+  const ml = at(li), mr = at(ri);
+  const common = g.paths[li].points.map((q: any) => String(q.date)).filter((d: string) => mr.has(d) && Number.isFinite(ml.get(d)!.x));
+  if (common.length < 4) return "";
+  // Runs where the rival is ahead, split at each crossing (interpolated along both lines).
+  const runs: Array<Array<[number, number, number]>> = [];
+  let cur: Array<[number, number, number]> | null = null;
+  for (let i = 0; i < common.length; i += 1) {
+    const a = ml.get(common[i])!, r = mr.get(common[i])!, d0 = r.v - a.v;
+    if (d0 > 0) { cur ??= []; cur.push([a.x, a.y, r.y]); }
+    const nx = common[i + 1];
+    if (!nx) break;
+    const a1 = ml.get(nx)!, r1v = mr.get(nx)!, d1 = r1v.v - a1.v;
+    if ((d0 > 0) !== (d1 > 0) && d0 !== d1) {
+      const t = d0 / (d0 - d1), x = a.x + t * (a1.x - a.x), y = a.y + t * (a1.y - a.y);
+      if (d0 > 0) { cur!.push([x, y, y]); runs.push(cur!); cur = null; } else { cur = [[x, y, y]]; }
+    }
+  }
+  if (cur) runs.push(cur);
+  if (!runs.length) return "";
+  const k = common.filter((d: string) => mr.get(d)!.v > ml.get(d)!.v).length, N = common.length;
+  const fill = R.color === "#121212" ? `fill="#121212" fill-opacity="0.075"` : `fill="${R.color}" fill-opacity="0.11"`;
+  let out = runs.map((run) => `<path d="M${run.map(([x, , yr]) => `${svgCoord(x)} ${svgCoord(yr)}`).join("L")}L${[...run].reverse().map(([x, ya]) => `${svgCoord(x)} ${svgCoord(ya)}`).join("L")}Z" ${fill}/>`).join("");
+  // The count, in the annotation voice, where it is clear of every line.
+  const years = yearly(g.paths[li].points.filter((q: any) => mr.has(String(q.date))));
+  if (years && clearAt) {
+    const text = k === N ? `${R.label} above ${L.label} in every year` : `${R.label} above ${L.label} in ${k} of ${N} years`;
+    const fs = m ? 13 : 14.5, tw = noteWidth(text, fs), plotB = g.height - g.pad.b, plotR = g.width - g.pad.r;
+    let spot: [number, number] | undefined;
+    for (let yy = g.pad.t + fs + 2; yy < plotB - 6 && !spot; yy += 14) for (let x = g.pad.l + 8; x + tw < plotR - 4 && !spot; x += 16) if (clearAt(x, x + tw, yy, fs)) spot = [x, yy];
+    if (spot) out += `<g>${`<rect x="${svgCoord(spot[0])}" y="${svgCoord(spot[1] - fs * 0.62)}" width="9" height="9" ${fill.replace(/0\.\d+"$/, (o) => `${Math.min(0.3, Number(o.slice(0, -1)) * 2.4).toFixed(2)}"`)}/>`}${almNote(spot[0] + 14, spot[1], text, { size: fs, fill: "#4a4640" })}</g>`;
+  }
+  return out;
+}
+
+/** A centred average for a long, noisy run of years (an annual temperature): drawn over the
+ *  years so the trend reads and the noise recedes. Null for anything else. */
+function trendOf(p: any, g: LineGeometry) {
+  if (!g.dateMode || p.dProj || p.points.length < 40 || !yearly(p.points)) return null;
+  const v = p.points.map((q: any) => q.value as number);
+  const turns = v.slice(2).filter((x: number, i: number) => Math.sign(x - v[i + 1]) * Math.sign(v[i + 1] - v[i]) < 0).length;
+  if (turns / v.length < 0.4) return null;
+  const half = 5, xy = [...String(p.d).matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map((mm) => [Number(mm[1]), Number(mm[2])]);
+  const pts: Array<[number, number]> = [];
+  for (let i = half; i < v.length - half; i += 1) {
+    const w = v.slice(i - half, i + half + 1);
+    pts.push([xy[i][0], g.y(w.reduce((s: number, x: number) => s + x, 0) / w.length)]);
+  }
+  if (pts.length < 2) return null;
+  return { d: pts.map(([x, y], i) => `${i ? "L" : "M"}${svgCoord(x)} ${svgCoord(y)}`).join(""), x0: pts[0][0], y0: pts[0][1], x1: pts.at(-1)![0], y1: pts.at(-1)![1], window: 2 * half + 1 };
+}
+
+/** The turn a single line's story hangs on: its highest point (or lowest), when it stands well
+ *  clear of where the line ends, marked with its value and date in the voice of the first value.
+ *  Its box joins `boxes`, so the first value's label keeps clear of it. */
+function peakMark(visual: LineVisual, g: LineGeometry, m: boolean, clearAt: (xa: number, xb: number, base: number, size: number) => boolean, boxes: Array<[number, number, number, number]>) {
+  const p = g.paths[0];
+  if (!g.dateMode || !p.latest || p.points.length < 8 || p.dProj) return "";
+  const xy = linePolys(g)[0], N = p.points.length, h = g.height - g.pad.b - g.pad.t;
+  if (xy.length !== N) return "";
+  const top = Math.min(...xy.map((q) => q[1])), bottom = Math.max(...xy.map((q) => q[1]));
+  let hi = -1, lo = -1;
+  for (let i = 2; i < N - 2; i += 1) { if (hi < 0 || xy[i][1] < xy[hi][1]) hi = i; if (lo < 0 || xy[i][1] > xy[lo][1]) lo = i; }
+  if (hi < 0) return "";
+  const yl = xy[N - 1][1];
+  const up = xy[hi][1] <= top + 0.5 ? yl - xy[hi][1] : 0, down = xy[lo][1] >= bottom - 0.5 ? xy[lo][1] - yl : 0;
+  if (Math.max(up, down) < 0.22 * h) return "";
+  const k = up >= down ? hi : lo, above = up >= down;
+  const q = p.points[k], [px, py] = xy[k];
+  const maxAbs = Math.max(1e-9, ...p.points.map((z: any) => Math.abs(z.value)));
+  const label = `${endLabelInScale(q.value, maxAbs, visual.unit, m, m)} in ${pointDateLabel(q.date, p.points)}`;
+  const fs = m ? 11.5 : 13, lw = textWidth(typeset(`>${label}<`).slice(1, -1), fs, 500);
+  const plotR = g.width - g.pad.r;
+  const tries: Array<[number, number]> = above
+    ? [[px - lw / 2, py - 10], [px + 9, py + 4], [px - 9 - lw, py + 4], [px - lw / 2, py - 22]]
+    : [[px - lw / 2, py + 20], [px + 9, py + 4], [px - 9 - lw, py + 4], [px - lw / 2, py + 32]];
+  // The top margin is free above a peak that reaches the last gridline (the unit caption excepted).
+  if (g.unitCaption) boxes.push([0, 0, textWidth(g.unitCaption, 12.5) + 6, g.pad.t - 12]);
+  const ok = tries.find(([x, yy]) => x > g.pad.l + 2 && x + lw < plotR - 2 && yy - fs > 2 && yy < g.height - g.pad.b - 3 && clearAt(x, x + lw, yy, fs)
+    && !boxes.some(([a, t, c, d]) => x < c && x + lw > a && yy - fs < d && yy > t));
+  if (!ok) return "";
+  boxes.push([ok[0] - 4, ok[1] - fs - 2, ok[0] + lw + 4, ok[1] + 4]);
+  return `<circle cx="${svgCoord(px)}" cy="${svgCoord(py)}" r="${m ? 3 : 3.5}" fill="#ffffff" stroke="${p.color}" stroke-width="1.6"/>`
+    + almHalo(ok[0], ok[1], label, { size: fs, fill: "#4a4640", weight: 500 });
 }
 
 /** Shaded event bands (e.g. El Niño years) for a time-axis line chart. Each band is
@@ -1528,9 +1702,25 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           // multi-line card must NOT use the 1160-wide geometry, or its axis text
           // downscales far smaller than the single-line small charts beside it.
           const isLarge = isLead || size === "feature" || (visualIndex === 0 && leadFirst && !size && visual.lines.length > 1);
+          // The story is read from the title and the takeaway; the subtitle lists what is plotted
+          // ("India, Pakistan, Sri Lanka and Bangladesh") and names no side.
+          const mention = [visual.title, note?.takeaway].join(" ") + (namesColours([note?.takeaway, note?.detail, note?.howToRead, note?.mistakeToAvoid].join(" ")) ? KEEP_PALETTE : "");
+          (visual as { mention?: string }).mention = mention;
+          // Five or more peers, none the subject: one small panel each, the others as ghosts.
+          if (peerPanels(visual as LineVisual, mention)) {
+            const fig = tagFigure(linePeersFigure(visual as LineVisual, { narrow, chartId }))!;
+            return (
+              <FigureCard cls={`${base} alm-card fig-card fig-linePeers`} {...card} figNote={fig.note}>
+                <Fragment set:html={typeset(fig.svg)} />
+                <Fragment set:html={typeset(fig.svgM)} />
+              </FigureCard>
+            );
+          }
           const g = lineGeometry(visual as LineVisual, isLarge, narrow);
           const gm = lineGeometry(visual as LineVisual, isLarge, narrow, undefined, true);
-          const mention = [visual.title, card.subtitle, note?.takeaway].join(" ");
+          const inksK = lineInks(visual.lines, mention);
+          // Context lines share one grey swatch in the key, named together after the story's lines.
+          const ctxNames = visual.lines.filter((_, i) => inksK[i].role === "context").map((l) => l.label);
           return (
             <FigureCard cls={base} {...card}>
               <Fragment set:html={typeset(renderLineSvg(visual as LineVisual, g, { isLead, mobile: false, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-d alm-line" : "viz-svg viz-d alm-line", mention }))} />
@@ -1542,7 +1732,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 // the line ends, in the order those lines end.
                 [{ geo: gm, cls: "viz-legend-m" }, { geo: g, cls: visual.lines.length > 7 || g.keyValues ? "viz-legend-d" : "" }].filter((k) => k.cls).map(({ geo, cls }) => (
                   <div class={`viz-legend ${cls}${geo.keyValues ? " viz-legend-kv" : ""}`}>
-                    {(geo.keyOrder ?? visual.lines.map((_, index) => index)).map((index) => <span><i style={`background:${lineInks(visual.lines)[index].color}`}></i>{visual.lines[index].label}{geo.keyValues?.[index] && <b class="kv">{geo.keyValues[index]}</b>}</span>)}
+                    {(geo.keyOrder ?? visual.lines.map((_, index) => index)).filter((index) => inksK[index].role !== "context").map((index) => <span class={inksK[index].role === "lead" ? "k-lead" : ""}><i style={`background:${inksK[index].color}`}></i>{visual.lines[index].label}{geo.keyValues?.[index] && <b class="kv">{geo.keyValues[index]}</b>}</span>)}
+                    {ctxNames.length ? <span class="k-ctx"><i style={`background:${CONTEXT}`}></i>{ctxNames.join(", ")}</span> : null}
                   </div>
                 ))
               )}
@@ -1560,7 +1751,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           // span the same distance so equal departures get equal colour.
           const stripeStops: AlmStops = isRain
             ? ALM_SCALES.rain.map(([v, c]) => [stripes.center + (v / 22) * spread, c] as [number, string])
-            : ([[-1, "#24387f"], [-0.6, "#6a7bc0"], [-0.25, "#c9d0ea"], [0, "#ededed"], [0.25, "#f1cbba"], [0.6, "#cc6849"], [1, "#7a2816"]] as AlmStops).map(([v, c]) => [stripes.center + v * spread, c] as [number, string]);
+            : ([[-1, "#24387f"], [-0.6, "#6a7bc0"], [-0.25, "#c9d0ea"], [0, "#e9e4da"], [0.25, "#f1cbba"], [0.6, "#cc6849"], [1, "#7a2816"]] as AlmStops).map(([v, c]) => [stripes.center + v * spread, c] as [number, string]);
           // A stripe's tooltip prints the published value. Only an absolute rain series
           // (mm, not a departure) is written as its distance from the normal, and says so.
           const stripeFmt = (v: number) => {
@@ -1599,6 +1790,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 ) : <Fragment set:html={typeset(renderChoroplethSvg(cho))} />}
                 <div class="choro-side">
                   <Fragment set:html={typeset(renderChoroplethStrip(cho))} />
+                  <Fragment set:html={typeset(renderChoroplethDots(cho))} />
                   {cho.regions.length > valued.length ? <span class="choro-nodata"><i></i>Outlined: not surveyed</span> : null}
                 </div>
               </div>

@@ -58,6 +58,8 @@
     const faces = [
       { f: "Newsreader", w: "300 700", u: "/fonts/newsreader-latin.woff2" },
       { f: "Newsreader", w: "300 700", u: "/fonts/newsreader-latin-ext.woff2", r: "U+0100-02BA,U+20A0-20C0" },
+      // the italic carries a chart's own notes (a gap, a trend)
+      { f: "Newsreader", w: "300 700", u: "/fonts/newsreader-latin-italic.woff2", s: "italic" },
       { f: "Schibsted Grotesk", w: "400 800", u: "/fonts/schibsted-grotesk-latin.woff2" },
       { f: "Schibsted Grotesk", w: "400 800", u: "/fonts/schibsted-grotesk-latin-ext.woff2", r: "U+0100-02BA,U+20A0-20C0" },
     ];
@@ -69,7 +71,7 @@
         for (let i = 0; i < bytes.length; i += 1) bin += String.fromCharCode(bytes[i]);
         const b64 = btoa(bin);
         const range = face.r ? `;unicode-range:${face.r}` : "";
-        return `@font-face{font-family:'${face.f}';font-weight:${face.w};font-style:normal;src:url(data:font/woff2;base64,${b64}) format('woff2')${range}}`;
+        return `@font-face{font-family:'${face.f}';font-weight:${face.w};font-style:${face.s || "normal"};src:url(data:font/woff2;base64,${b64}) format('woff2')${range}}`;
       } catch (e) {
         return "";
       }
@@ -141,7 +143,9 @@
     clone.removeAttribute("role");
     clone.removeAttribute("aria-label");
     clone.querySelectorAll("script, foreignObject").forEach((node) => { node.remove(); });
-    const inner = resolveVars(clone.innerHTML, card);
+    // The figure prints on the page's paper: halos, rings and knock-outs drawn in white follow it.
+    const paper = oneLine(getComputedStyle(document.body).getPropertyValue("--bg")) || "#faf8f3";
+    const inner = resolveVars(clone.innerHTML, card).replace(/(stroke|fill)="#fff(?:fff)?"/g, `$1="${paper}"`);
     const titleText = titleLines.map((line, index) => `<tspan x="${pad}" dy="${index === 0 ? 0 : Math.round(titleSize * 1.15)}">${escapeXml(line)}</tspan>`).join("");
     const subtitleText = subtitleLines.map((line, index) => `<tspan x="${pad}" dy="${index === 0 ? 0 : Math.round(subSize * 1.4)}">${escapeXml(line)}</tspan>`).join("");
     const ruleY = header + height + Math.round(pad * 0.7);
@@ -151,26 +155,26 @@
   <style>
     ${fontCss}
     text{font-family:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;font-variant-numeric:lining-nums}
-    :where(text:not([fill])){fill:#737373}
+    :where(text:not([fill])){fill:#6e6961}
     .serif,.export-title,.export-brand{font-family:"Newsreader",Georgia,serif}
     .export-title{font-size:${titleSize}px;font-weight:500;fill:#121212}
-    .export-subtitle{font-size:${subSize}px;fill:#4f4f4f}
-    .export-source{font-size:${Math.max(11, Math.round(subSize * 0.85))}px;fill:#4f4f4f}
+    .export-subtitle{font-size:${subSize}px;fill:#4a4640}
+    .export-source{font-size:${Math.max(11, Math.round(subSize * 0.85))}px;fill:#4a4640}
     .export-brand{font-size:${Math.round(subSize * 1.3)}px;font-weight:500;fill:#121212}
-    .yaxt,.xaxt,.end-s{font-size:14px;fill:#737373}
-    .ref-label{font-size:14px;fill:#4f4f4f}
+    .yaxt,.xaxt,.end-s{font-size:14px;fill:#6e6961}
+    .ref-label{font-size:14px;fill:#4a4640}
     .end-mini-v{font-size:15px;font-weight:600}
     .point-label{font-size:14px;font-weight:500;fill:#121212}
-    .axis-title{font-size:14px;fill:#4f4f4f}
+    .axis-title{font-size:14px;fill:#4a4640}
     .bar-value-label{font-size:11px;font-weight:500}
     .chart-watermark{display:none}
   </style>
-  <rect width="${width}" height="${exportHeight}" fill="#ffffff"/>
+  <rect width="${width}" height="${exportHeight}" fill="${paper}"/>
   <rect width="${width}" height="6" fill="${primary}"/>
   <text class="export-title" x="${pad}" y="${titleY}">${titleText}</text>
   ${meta.subtitle ? `<text class="export-subtitle" x="${pad}" y="${Math.round(subY)}">${subtitleText}</text>` : ""}
   <svg x="${pad}" y="${header}" width="${chartW}" height="${height}" viewBox="${escapeXml(viewBox.raw)}" overflow="visible">${inner}</svg>
-  <rect x="${pad}" y="${ruleY}" width="${width - 2 * pad}" height="1" fill="#dadada"/>
+  <rect x="${pad}" y="${ruleY}" width="${width - 2 * pad}" height="1" fill="#d5cec2"/>
   ${source ? `<text class="export-source" x="${pad}" y="${footY}">${escapeXml(source)}</text>` : ""}
   <text class="export-brand" x="${width - pad}" y="${footY}" text-anchor="end">This Indian Life</text>
 </svg>`;
@@ -195,7 +199,7 @@
       canvas.width = Math.round(viewBox.width * scale);
       canvas.height = Math.round(viewBox.height * scale);
       const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--bg").trim() || "#faf8f3";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       const pngBlob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png", 0.92));

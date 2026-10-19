@@ -13,15 +13,16 @@
 //                       on one x: a figure starting more than 6 px in, or a subtitle, key or
 //                       title more than 2 px off it
 //   2 plot uses width   line charts: right gutter no wider than the widest end label + 16 px,
-//                       desktop left gutter no wider than the widest y label + 16 px, no phone
-//                       y gutter, gridlines to the figure's edge; other figures reach the
+//                       desktop left gutter no wider than the widest y label + 16 px, phone
+//                       y gutter no wider than its widest label + 10 px, gridlines to the
+//                       figure's edge; other figures reach the
 //                       card's right edge within 24 px
 //   3 even ticks        x ticks evenly spaced in time, the last on the last period when the
 //                       data end on a step, no two labels within 10 px, no fractional years,
 //                       financial-year data ticked as financial years
-//   4 no demoted sides  no line under 1.5 px or 0.7 opacity that the card names (title,
-//                       subtitle, takeaway) or that is one side of a rural/urban, male/female
-//                       or India-against-one comparison
+//   4 no demoted sides  in a chart of two or more series, no line under 1.5 px or 0.7 opacity
+//                       that the card names (title or takeaway) or that is one side of a
+//                       rural/urban, male/female or India-against-one comparison
 //   5 text on marks     no phone text under 11 px; no label crossing a line or a dot
 //   6 notes align       .chart-note, .cn-take, .cn-detail, .cn-meta, .viz-foot start on the
 //                       title's x; The Point stacks on phones
@@ -103,7 +104,9 @@ function probe() {
     const contentR = cr.right - parseFloat(cs.paddingRight) - parseFloat(cs.borderRightWidth);
     const titleX = textLeft(card.querySelector("h2,h3")) ?? contentL;
     const climate = !!card.closest(".theme-climate-canonical"), lib = card.matches(".lib-item");
-    const hay = words([card.querySelector("h2,h3")?.textContent, card.querySelector(".viz-head p")?.textContent, card.querySelector(".cn-take")?.textContent].join(" "));
+    // The title and the takeaway name a chart's sides. The subtitle lists what is plotted
+    // ("India, Pakistan, Sri Lanka and Bangladesh") and names none (row 87).
+    const hay = words([card.querySelector("h2,h3")?.textContent, card.querySelector(".cn-take")?.textContent].join(" "));
     const cardEx = lib ? "library sample" : climate ? "climate theme card" : "";
 
     // Rule 1 (HTML parts) and rule 6: one left edge for title, subtitle, legend and the note.
@@ -172,9 +175,12 @@ function probe() {
           const yw = Math.max(...ylabs.map((b) => b.width)), lg = gridL - contentL;
           if (lg > yw + 16) wide.push(`left gutter ${Math.round(lg)} > y label ${Math.round(yw)}+16`);
         }
-        if (phone && gridL - contentL > 2) wide.push(`phone y gutter ${Math.round(gridL - contentL)}`);
+        // Phones keep a y gutter as narrow as their labels (row 87): no wider than the widest label + 10.
+        if (phone && ylabs.length) {
+          const yw = Math.max(...ylabs.map((b) => b.width)), lg = gridL - contentL;
+          if (lg > yw + 10) wide.push(`phone y gutter ${Math.round(lg)} > y label ${Math.round(yw)}+10`);
+        }
         if (edgeR - gridR > 4) wide.push(`grid stops ${Math.round(edgeR - gridR)} short`);
-        if (phone && gridL - contentL > 2) wide.push(`grid starts ${Math.round(gridL - contentL)} in`);
 
         // Rule 3: even ticks.
         let hover = null; try { hover = JSON.parse(s.dataset.hover || "null"); } catch { hover = null; }
@@ -213,6 +219,8 @@ function probe() {
         // Rule 4: no demoted comparison sides.
         const labels = [...new Set(dataPaths.map(seriesName))];
         const india2 = labels.length === 2 && labels.some((l) => /^india\b/i.test(l));
+        // A single series has no sides to demote (its years may recede behind a trend).
+        if (labels.length < 2) dataPaths.length = 0;
         for (const p of dataPaths) {
           const label = seriesName(p);
           const sw = parseFloat(p.getAttribute("stroke-width") || "1") * scale, op = parseFloat(p.getAttribute("stroke-opacity") || "1");
