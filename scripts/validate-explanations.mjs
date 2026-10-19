@@ -53,18 +53,38 @@ for (const file of files) {
   }
   // Source notes and further reading must carry a URL. ArticleEvidence.astro renders a
   // { label, url } object as a hyperlink and a bare string as dead text, so an unlinked
-  // note is a source the reader is asked to trust but cannot check.
-  //
-  // Deliberately a WARNING rather than a failure: 349 of 373 notes across the site are
-  // still bare strings, so failing here would turn the gate red for almost every article
-  // and bury the real errors. Same call the repo already made for validate:data. Once the
-  // backlog is cleared, promote this to `failures`.
-  for (const [field, items] of [["sourceNotes", doc.sourceNotes], ["furtherReading", doc.furtherReading]]) {
-    const unlinked = (items || []).filter((item) => !item || typeof item === "string" ? !/^https?:\/\/\S+$/.test(String(item || "")) : !item.url);
+  // note is a source the reader is asked to trust but cannot check. This is a FAILURE:
+  // the backlog was cleared in October 2026, when every article's verified list was
+  // pinned in the registry (scripts/registry/source-notes.mjs). Check what actually
+  // RENDERS, i.e. the registry list where one is pinned (src/data/questions.ts merges it
+  // over the explanation), else the explanation's own list. Explanations with no
+  // registry question are not built, but are held to the same rule.
+  const question = v1Questions.find((q) => q.id === doc.questionId);
+  for (const field of ["sourceNotes", "furtherReading"]) {
+    const items = question?.[field] ?? doc[field];
+    // A url is absolute http(s), or a root-relative link to another Indica page.
+    const isUrl = (v) => /^(https?:\/\/\S+|\/[^\s/]\S*)$/.test(String(v || ""));
+    const unlinked = (items || []).filter((item) => !item || typeof item === "string" ? !/^https?:\/\/\S+$/.test(String(item || "")) : !isUrl(item.url) || !String(item.label || "").trim());
     if (unlinked.length) {
-      const first = typeof unlinked[0] === "string" ? unlinked[0] : unlinked[0].label || "";
-      console.warn(`warn ${file}: ${field} ${unlinked.length}/${(items || []).length} entries have no URL — "${String(first).slice(0, 60)}"`);
-      warnings += 1;
+      const first = typeof unlinked[0] === "string" ? unlinked[0] : unlinked[0]?.label || "";
+      console.error(`fail ${file}: ${field} ${unlinked.length}/${(items || []).length} entries have no URL — "${String(first).slice(0, 60)}"`);
+      failures += 1;
+    }
+    // House style: no em dashes in reader-facing labels.
+    const dashed = (items || []).filter((item) => /—/.test(typeof item === "string" ? item : item?.label || ""));
+    if (dashed.length) {
+      const sample = typeof dashed[0] === "string" ? dashed[0] : dashed[0].label;
+      console.error(`fail ${file}: ${field} ${dashed.length} label(s) contain an em dash: "${String(sample).slice(0, 60)}"`);
+      failures += 1;
+    }
+    // The explanation file should carry the same list the page renders, so anyone reading
+    // the JSON (or a downstream export) sees the linked version.
+    if (question?.[field] && doc[field]) {
+      const plain = (list) => JSON.stringify(list.map((e) => (typeof e === "string" ? e : { label: e.label, url: e.url })));
+      if (plain(question[field]) !== plain(doc[field])) {
+        console.warn(`warn ${file}: ${field} differs from the registry's pinned list (run python3 scripts/apply-pinned-references.py)`);
+        warnings += 1;
+      }
     }
   }
 

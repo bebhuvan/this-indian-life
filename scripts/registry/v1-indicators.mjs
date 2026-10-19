@@ -5,6 +5,15 @@
 //   context: [] means "lock to core only".
 //   indicators = legacy field, kept for backward compatibility (sidebar tags etc.); always equals core.
 // Off-topic indicators are excluded simply by not listing them — no separate exclude list needed.
+//
+// sourceNotes / furtherReading: the reader-facing Sources and Further reading lists. They
+// are pinned here, not left to the generated explanation, because the prose generator
+// emits plain strings and invents attributions. Each entry is { label, url } and every URL
+// was checked by content. A question may declare them inline; otherwise they come from
+// ./source-notes.mjs (attached at the bottom of this file). src/data/questions.ts merges
+// them over the explanation at build time, and validate-explanations.mjs fails the gate
+// on any rendered entry without a URL.
+import { pinnedReferences } from "./source-notes.mjs";
 export const v1Questions = [
   {
     id: "q.econ.asia_divergence",
@@ -1994,12 +2003,12 @@ export const v1Questions = [
       "econ.income_classification.atlas_and_ppp_gni_per_capita"
     ],
     furtherReading: [
-      { label: "World Bank, who moved up in the 2025 income classifications and why", url: "https://blogs.worldbank.org/en/opendata/who-moves-up-and-why--a-closer-look-at-the-new-world-bank-group-" },
-      { label: "World Bank country and lending groups for fiscal year 2027", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups" },
-      { label: "How the World Bank Atlas method works", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/77933-what-is-the-world-bank-atlas-method" },
-      { label: "Why the World Bank uses GNI per capita for income classification", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/378831-why-use-gni-per-capita-to-classify-economies-into" },
-      { label: "International Development Association graduates, including India's fiscal year 2014 graduation", url: "https://ida.worldbank.org/en/about/borrowing-countries/ida-graduates" },
-      { label: "World Development Report 2024 on the middle-income trap", url: "https://www.worldbank.org/en/publication/wdr2024" }
+      { label: "World Bank, who moved up in the 2025 income classifications and why", url: "https://blogs.worldbank.org/en/opendata/who-moves-up-and-why--a-closer-look-at-the-new-world-bank-group-", check: "Who moves up" },
+      { label: "World Bank country and lending groups for fiscal year 2027", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups", check: "lending groups" },
+      { label: "How the World Bank Atlas method works", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/77933-what-is-the-world-bank-atlas-method", check: "Atlas method" },
+      { label: "Why the World Bank uses GNI per capita for income classification", url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/378831-why-use-gni-per-capita-to-classify-economies-into", check: "GNI per capita" },
+      { label: "International Development Association graduates, including India's fiscal year 2014 graduation", url: "https://ida.worldbank.org/en/about/borrowing-countries/ida-graduates", check: "IDA Graduates" },
+      { label: "World Development Report 2024 on the middle-income trap", url: "https://www.worldbank.org/en/publication/wdr2024", check: "middle-income trap" }
     ],
     visualPlan: [
       {
@@ -2714,9 +2723,9 @@ export const v1Questions = [
       "work.jobs.lfp_job_scenarios"
     ],
     furtherReading: [
-      { label: "World Bank — The Global Jobs Challenge (2026), the report this page is built on", url: "https://www.worldbank.org/en/research/publication/global-jobs-challenge" },
-      { label: "Alonso & MacDonald, ‘Advancing India’s Structural Transformation’ (IMF, 2024) — the 60–148m participation range", url: "https://www.imf.org/en/Publications/WP/Issues/2024/02/02/Advancing-Indias-Structural-Transformation-and-Catch-up-544370" },
-      { label: "Rajan & Lamba, ‘Breaking the Mold: India’s Untraveled Path to Prosperity’ (2024) — the high-skilled-services case", url: "https://press.princeton.edu/books/hardcover/9780691263779/breaking-the-mold" }
+      { label: "World Bank, The Global Jobs Challenge (2026), the report this page is built on", url: "https://www.worldbank.org/en/research/publication/global-jobs-challenge", check: "Global Jobs Challenge" },
+      { label: "Alonso and MacDonald, ‘Advancing India’s Structural Transformation and Catch-up to the Technology Frontier’ (IMF Working Paper 2024/138), the study the report cites for the 60-148 million range", url: "https://doi.org/10.5089/9798400281617.001", check: "Technology Frontier" },
+      { label: "Rajan and Lamba, ‘Breaking the Mold: India’s Untraveled Path to Prosperity’ (Princeton, 2024), the case for high-skilled services", url: "https://press.princeton.edu/books/hardcover/9780691263632/breaking-the-mold", check: "Breaking the Mold" }
     ],
     visualPlan: [
       // ACT 1 - The biggest job in the world
@@ -8595,11 +8604,11 @@ export const v1Questions = [
     // Curated "Further reading" — durable here in the registry so it survives
     // explanation regeneration (merged into explanation.furtherReading at build time).
     furtherReading: [
-      { label: "SFLC.in — Internet Shutdowns Tracker (the live database behind this page)", url: "https://internetshutdowns.in/" },
-      { label: "Jan Rydzak, ‘Of Blackouts and Bandhs’ (2019) — the study finding shutdowns track more violence, not less", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3330413" },
-      { label: "Anuradha Bhasin v. Union of India (Supreme Court, 2020) — shutdowns must be temporary, proportionate and published", url: "https://indiankanoon.org/doc/82461587/" },
-      { label: "ICRIER, ‘The Anatomy of an Internet Blackout’ (2018) — the economic-cost study", url: "https://icrier.org/publications/the-anatomy-of-an-internet-blackout-measuring-the-economic-impact-of-internet-shutdowns-in-india/" },
-      { label: "Access Now — #KeepItOn 2024 report (India in global context)", url: "https://www.accessnow.org/internet-shutdowns-2024/" }
+      { label: "SFLC.in Internet Shutdowns Tracker, the live database behind this page", url: "https://internetshutdowns.in/", check: "Shutdown" },
+      { label: "Jan Rydzak, ‘Of Blackouts and Bandhs’ (2019), the study finding shutdowns track more violence, not less", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3330413", check: "Blackouts and Bandhs", manual: "SSRN refuses automated clients; title, author and abstract confirmed via search, October 2026" },
+      { label: "Anuradha Bhasin v. Union of India (Supreme Court, 2020): shutdowns must be temporary, proportionate and published", url: "https://indiankanoon.org/doc/82461587/", check: "Anuradha Bhasin" },
+      { label: "ICRIER, ‘The Anatomy of an Internet Blackout’ (2018), the economic-cost study", url: "https://icrier.org/publications/the-anatomy-of-an-internet-blackout-measuring-the-economic-impact-of-internet-shutdowns-in-india/", check: "Anatomy of an Internet Blackout" },
+      { label: "Access Now, #KeepItOn 2024 report, for India in global context", url: "https://www.accessnow.org/internet-shutdowns-2024/", check: "KeepItOn" }
     ],
     visualPlan: [
       // ACT 1 - There isn't one ban. There are three.
@@ -9629,3 +9638,12 @@ export const openMeteoDerivedIndicators = [
     calculation: "Count of days in each calendar year where the daily maximum apparent ('feels-like') temperature is at or above 40°C — a humidity-aware measure of oppressive heat."
   }
 ];
+
+// Attach the verified, linked source lists (see the note at the top of this file).
+// An inline sourceNotes/furtherReading on a question wins over the pinned copy.
+for (const question of v1Questions) {
+  const pinned = pinnedReferences[question.id];
+  if (!pinned) continue;
+  if (pinned.sourceNotes && !question.sourceNotes) question.sourceNotes = pinned.sourceNotes;
+  if (pinned.furtherReading && !question.furtherReading) question.furtherReading = pinned.furtherReading;
+}

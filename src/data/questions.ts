@@ -186,6 +186,9 @@ export function domainForQuestionId(id: string): DomainId {
   return domainByPrefix[id.split(".")[1]] || "society";
 }
 
+type RefEntry = string | { label: string; url?: string; check?: string | string[] };
+const refOnly = (entry: RefEntry) => (typeof entry === "string" ? entry : { label: entry.label, url: entry.url });
+
 function readExplanation(questionId: string): ExplanationArtifact | null {
   const path = resolve(process.cwd(), `data/explanations/en/${questionId}.json`);
   if (!existsSync(path)) return null;
@@ -196,10 +199,14 @@ export const questionPages: QuestionPage[] = v1Questions
   .map((item) => {
     const explanation = readExplanation(item.id);
     if (!explanation) return null;
-    // Curated "Further reading" lives on the question in the registry so it is
-    // durable: it survives explanation regeneration (the generator does not emit it).
-    // The registry value wins over anything in the generated explanation.
-    if (item.furtherReading) explanation.furtherReading = item.furtherReading;
+    // Curated "Sources" and "Further reading" live on the question in the registry
+    // (inline, or pinned via scripts/registry/source-notes.mjs) so they are durable:
+    // they survive explanation regeneration, which emits unlinked and sometimes invented
+    // attributions. The registry value wins over anything in the generated explanation.
+    // Only label and url render; the registry's `check` term is for link verification.
+    const pinned = item as unknown as { sourceNotes?: RefEntry[]; furtherReading?: RefEntry[] };
+    if (pinned.sourceNotes) explanation.sourceNotes = pinned.sourceNotes.map(refOnly);
+    if (pinned.furtherReading) explanation.furtherReading = pinned.furtherReading.map(refOnly);
     return {
       id: item.id,
       slug: item.slug ?? slugify(item.question),
