@@ -385,7 +385,7 @@ function compactPeriodLabel(date: string) {
  *  financial years ("2025-26"); other annual series are years; monthly ones "Mar 2026". */
 function pointDateLabel(date: string, points: Array<{ date: string }>) {
   const d = String(date);
-  if (isFySeries(points.map((q) => String(q.date)))) return d;
+  if (isFySeries(points.map((q) => String(q.date)))) return /^\d{4}-\d{2}$/.test(d) ? d : fyLabel(fyStartOf(d));
   const m = d.match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/);
   if (!m) return d.slice(0, 10);
   const tails = new Set(points.map((q) => String(q.date).slice(4)));
@@ -765,7 +765,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const tailSet = new Set(allDates.map((d) => d.slice(4)));
   const annualStamp = !fyMode && tailSet.size === 1 && /^-\d{2}(?:-\d{2})?$/.test([...tailSet][0] ?? "");
   const timeOf = (d: string) => {
-    if (fyMode) return Number(String(d).slice(0, 4)) + 0.25;
+    if (fyMode) return fyStartOf(d) + 0.25;
     if (annualStamp) return Number(String(d).slice(0, 4));
     // Accepts YYYY, YYYY-MM, YYYY-MM-DD and YYYY-Qn. Both the quarter and the DAY matter:
     // without the quarter branch all four quarters of a year stacked on one x-position, and
@@ -964,15 +964,12 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   }
   if (fyMode && dateMode && !visual.xTicks?.length) {
     // Ticks on the years themselves, written as financial years, evenly spaced.
-    const starts = [...new Set(visual.lines.flatMap((line) => line.points.map((p) => Number(String(p.date).slice(0, 4)))))].sort((a, b) => a - b);
+    const starts = [...new Set(visual.lines.flatMap((line) => line.points.map((p) => fyStartOf(String(p.date)))))].sort((a, b) => a - b);
     const fit = Math.max(2, Math.floor(plotW / (mobile ? 84 : 96)) + 1);
     const step = Math.max(1, Math.ceil((starts.length - 1) / (fit - 1)));
-    const picks = starts.filter((_, i) => i % step === 0);
-    const last = starts.at(-1)!;
-    if (picks.at(-1) !== last) {
-      if (picks.length > 1 && (last - picks.at(-1)!) < step * 0.6) picks.pop();
-      picks.push(last);
-    }
+    // Counted back from the latest year, so the ticks are evenly spaced and end on it; counted
+    // forward from the first, the last step came up short and its tick was crowded out.
+    const picks = starts.filter((_, i) => (starts.length - 1 - i) % step === 0);
     axisTicks = picks.map((year) => ({ xPos: xByTime(year + 0.25), label: fyLabel(year) }));
   }
   // Whatever chose the ticks, no two labels may touch: keep the first and the last, and drop
@@ -1033,13 +1030,18 @@ type LineGeometry = {
   keyValues?: string[]; keyOrder?: number[];
 };
 
-/** Every date reads as a financial year: "2017-18", the second part the following year. */
+/** Every date reads as a financial year: "2017-18" (the second part the following year), or a
+ *  year-end stamp of 31 March ("2026-03-31" is FY 2025-26). Read as calendar years, a 31 March
+ *  series ran its axis "2010 ... 2025" with the line ending past the last tick. */
 function isFySeries(dates: string[]) {
+  if (dates.length > 1 && dates.every((d) => /^\d{4}-03-31$/.test(d))) return true;
   return dates.length > 0 && dates.every((d) => {
     const m = d.match(/^(\d{4})-(\d{2})$/);
     return !!m && (Number(m[1]) + 1) % 100 === Number(m[2]);
   });
 }
+/** The first calendar year of a financial-year date ("2017-18" or "2018-03-31" both give 2017). */
+const fyStartOf = (d: string) => (/^\d{4}-03-31$/.test(String(d)) ? Number(String(d).slice(0, 4)) - 1 : Number(String(d).slice(0, 4)));
 const fyLabel = (year: number) => `${year}-${String((year + 1) % 100).padStart(2, "0")}`;
 /** A month step a calendar reader expects (1, 2, 3, 6 or 12 months, then whole years), at
  *  least `raw`: an 8-month step ran Jan 24, Sep 24, May 25. */
