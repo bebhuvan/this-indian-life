@@ -98,8 +98,24 @@ export function choroColor(value: number, min: number, max: number, rampName: st
   return (SEQUENTIAL[rampName] ?? SEQUENTIAL.warm)(t);
 }
 
+// A map whose every value is a whole number prints whole numbers ("97", not "97.0").
+const wholeMaps = new WeakMap<ChoroplethVisual, boolean>();
+function isWholeMap(visual: ChoroplethVisual) {
+  let w = wholeMaps.get(visual);
+  if (w === undefined) {
+    const vals = visual.regions.map((r) => r.value).filter((v): v is number => typeof v === "number");
+    w = vals.length > 0 && vals.every((v) => Number.isInteger(v));
+    wholeMaps.set(visual, w);
+  }
+  return w;
+}
+
 export function choroplethValueLabel(visual: ChoroplethVisual, value: number) {
   const suffix = /%/.test(visual.unit) ? "%" : /°C|degree/i.test(visual.unit) ? "°C" : "";
+  if (isWholeMap(visual) && Number.isInteger(value) && Math.abs(value) < 1000) {
+    const sign = visual.signed && value > 0 ? "+" : value < 0 ? "-" : "";
+    return `${sign}${Math.abs(value)}${suffix}`;
+  }
   return `${visual.signed ? signedFmt(value, visual.unit) : fmt(value, visual.unit)}${suffix}`;
 }
 

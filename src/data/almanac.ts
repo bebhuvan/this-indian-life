@@ -837,12 +837,13 @@ export function stackedArea(layers: AreaLayer[], o: {
   const yMax = o.share ? 100 : Math.max(...years.map((_, k) => layers.reduce((s, l) => s + val(l, k), 0)));
   const ticks = o.yTicks ?? (() => { const st = [1, 2, 2.5, 5, 10].map((m) => m * 10 ** Math.floor(Math.log10(yMax / 4))).find((s) => yMax / s <= 5)!; const t: number[] = []; for (let v = 0; v <= yMax + st * 0.01; v += st) t.push(v); if (t[t.length - 1] < yMax) t.push(t[t.length - 1] + st); return t; })();
   const top = ticks[ticks.length - 1];
-  const ml = Math.max(...ticks.map((v) => (o.share ? `${v}%` : f(v)).length * 11.5 * 0.58)) + 10;
+  const ml = Math.max(...ticks.map((v) => (o.share ? `${v}%` : f(v)).length * AX.size! * 0.64)) + 12;
   const y = (v: number) => H - mb - (v / (top || 1)) * (H - mb - mt);
   let b = "";
   for (const v of ticks) { b += line(ml, y(v), W - mr, y(v), v === 0 ? INK.ink : INK.grid, 1); b += txt(ml - 6, y(v) + 4, o.share ? `${v}%` : f(v), { ...AX, anchor: "end" }); }
   const step = sm ? 10 : 5;
-  const gapPx = 34;
+  // An end year is anchored at its edge, a middle one centred: they clear at 1.5 label widths.
+  const gapPx = 4 * AX.size! * 0.64 * 1.5 + 6;
   for (const t of years) if (t % step === 0 || t === t0 || t === t1) {
     if (t !== t0 && t !== t1 && (x(t) - x(t0) < gapPx || x(t1) - x(t) < gapPx)) continue;
     b += txt(x(t), H - mb + 17, t, { ...AX, anchor: t === t0 ? "start" : t === t1 ? "end" : "middle" });
