@@ -13,7 +13,7 @@ export const SURVEY = "NFHS-6 (2023-24)";
 export const PREV = "NFHS-5 (2019-21)";
 export const indicators = bundle.indicators;
 export const areas = bundle.areas;
-export const HEALTH = "#15A382";
+export const HEALTH = "#7b4790";
 
 export function india(num) {
   return areas.India?.[String(num)] ?? { urban: null, rural: null, total: null, nfhs5: null };
@@ -115,7 +115,7 @@ const SHORT_AREA = {
 export const shortArea = (a) => SHORT_AREA[a] || a;
 
 // Polarity: +1 = higher is worse, -1 = higher is better, 0 = neutral. Drives
-// the "better/worse" verdict on change charts and amber/jade direction on maps.
+// the "better/worse" verdict on change charts and sindoor/hara direction on maps.
 const BAD_HIGH = new Set([16, 17, 19, 25, 26, 27, 57, 58, 59, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 95, 96, 97, 98, 99, 100, 101, 38, 39, 40]);
 const NEUTRAL = new Set([1, 2, 3, 18, 20, 21, 22, 23, 24, 36, 55, 56]);
 export const polarityOf = (num) => (NEUTRAL.has(num) ? 0 : BAD_HIGH.has(num) ? 1 : -1);
@@ -246,7 +246,7 @@ export const TABS = [
       { id: "ff-tfr-strip", h: "The fertility spread", kind: "ranked", num: 18 },
       {
         id: "ff-method-mix", h: "Modern methods lose ground", kind: "stack",
-        segLabels: ["Modern methods", "Traditional methods"], colors: ["#15A382", "#EFA227"], max: 80,
+        segLabels: ["Modern methods", "Traditional methods"], colors: ["#7b4790", "#b98014"], max: 80,
         rows: [
           { label: "2019-21", nums: [21, 22], period: "nfhs5" },
           { label: "2023-24", nums: [21, 22], period: "now" },
@@ -333,7 +333,7 @@ export const TABS = [
     blocks: [
       { id: "db-children", h: "Stunting fell; wasting barely moved", kind: "change", nums: [69, 72, 70, 71, 73], max: 40 },
       { id: "db-stunting-map", h: "The stunting map", kind: "map", num: 69 },
-      { id: "db-diverging", h: "Underweight and overweight now coexist", kind: "diverging", leftLabel: "Underweight", rightLabel: "Overweight / obese", left: "#EFA227", groups: [{ label: "Women", l: 74, r: 76 }, { label: "Men", l: 75, r: 77 }], max: 40 },
+      { id: "db-diverging", h: "Underweight and overweight now coexist", kind: "diverging", leftLabel: "Underweight", rightLabel: "Overweight / obese", left: "#b98014", groups: [{ label: "Women", l: 74, r: 76 }, { label: "Men", l: 75, r: 77 }], max: 40 },
       { id: "db-underweight-map", h: "Where women still go hungry", kind: "map", num: 74 },
       { id: "db-obesity-map", h: "Women overweight or obese, by state", kind: "map", num: 76 },
       { id: "db-obesity-men-map", h: "Men overweight or obese, by state", kind: "map", num: 77 },
@@ -355,7 +355,7 @@ export const TABS = [
       { id: "se-diabetes", h: "High blood sugar rose fast", kind: "change", nums: [80, 83], max: 25 },
       {
         id: "se-severity", h: "Most of the rise is in the danger zone", kind: "stack",
-        segLabels: ["High (141-160 mg/dl)", "Very high (>160 mg/dl)"], colors: ["#EFA227", "#C23B22"], max: 25,
+        segLabels: ["High (141-160 mg/dl)", "Very high (>160 mg/dl)"], colors: ["#e39c81", "#c24a2e"], max: 25,
         rows: [
           { label: "Women · 2019-21", nums: [78, 79], period: "nfhs5" },
           { label: "Women · 2023-24", nums: [78, 79], period: "now" },
@@ -369,7 +369,7 @@ export const TABS = [
       { id: "se-bp", h: "Blood pressure moved the other way", kind: "change", nums: [86, 89], max: 25 },
       {
         id: "se-bp-severity", h: "Blood pressure, by severity", kind: "stack",
-        segLabels: ["Mildly elevated", "Moderate/severe"], colors: ["#EFA227", "#C23B22"], max: 20,
+        segLabels: ["Mildly elevated", "Moderate/severe"], colors: ["#e39c81", "#c24a2e"], max: 20,
         rows: [
           { label: "Women · 2019-21", nums: [84, 85], period: "nfhs5" },
           { label: "Women · 2023-24", nums: [84, 85], period: "now" },
@@ -430,7 +430,7 @@ function renderChartInner(b) {
     case "diststrip": return Chart.distStrip(stateMap(b.num), { unit: unitFor(b.num), worseSide: polarityOf(b.num) });
     case "diverging": return Chart.diverging(
       b.groups.map((g) => ({ label: g.label, left: total(g.l), right: total(g.r) })),
-      { leftLabel: b.leftLabel, rightLabel: b.rightLabel, leftColor: b.left, rightColor: b.right || "#D9542B", max: b.max });
+      { leftLabel: b.leftLabel, rightLabel: b.rightLabel, leftColor: b.left, rightColor: b.right || "#c24a2e", max: b.max });
     case "rows": return Chart.barRows(b.rows.map((r) => ({ label: r.label, then: india(r.num).nfhs5, now: india(r.num).total, ws: 0 })), { max: b.max });
     case "stack": return Chart.stackBars(
       b.rows.map((r) => ({ label: r.label, values: r.nums.map((n) => (r.period === "nfhs5" ? india(n).nfhs5 : india(n).total)) })),
@@ -460,7 +460,7 @@ function renderChartMobile(b) {
     case "smallmult": return Chart.barChangeM(trend(b.nums), { max: b.max });
     case "diverging": return Chart.divergingM(
       b.groups.map((g) => ({ label: g.label, left: total(g.l), right: total(g.r) })),
-      { leftLabel: b.leftLabel, rightLabel: b.rightLabel, leftColor: b.left, rightColor: b.right || "#D9542B", max: b.max });
+      { leftLabel: b.leftLabel, rightLabel: b.rightLabel, leftColor: b.left, rightColor: b.right || "#c24a2e", max: b.max });
     // Maps and the state league tables all share State/UT data — on a phone they become a
     // compact, readable ranked list instead of a tiny tile-grid or a shrunk wide table.
     case "map": case "ranked": case "dotstrip": case "diststrip":

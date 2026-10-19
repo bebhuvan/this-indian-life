@@ -28,6 +28,11 @@ For any quantitative question, walk this list and include each lens that applies
 | 10 | **Normalized** | The per-capita / per-1,000 reality check? | line |
 | 11 | **Snapshot** | The single most current number? | stat / latest bar |
 
+## Forms
+
+The full catalogue of chart forms, what data shape each serves and when to avoid it, is in
+`docs/ALMANAC_DESIGN_SYSTEM.md`.
+
 ## Rules
 
 1. **Each lens at most once.** Two charts showing the same fact = delete one.

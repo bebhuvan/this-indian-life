@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { QuestionPage } from "./questions";
+import { ALMANAC_FORMS, buildAlmanacVisual, type AlmanacArtifact, type AlmanacEntry, type AlmanacVisual } from "./almanac-visuals";
 
 export type Point = { date: string; value: number };
 export type VisualSource = {
@@ -251,7 +252,8 @@ export type LoadCurveVisual = {
   // Optional marker at the daily peak hour.
   peakHour?: number;
 };
-export type VisualSpec = LineVisual | LinePanelsVisual | StackVisual | BarVisual | GroupedBarVisual | ChangeVisual | PyramidVisual | StripeVisual | ChoroplethVisual | ScatterVisual | ScatterXYVisual | StripPairVisual | ScenarioMapsVisual | SparkGridVisual | StartingGridVisual | RankedChangeVisual | LoadCurveVisual;
+export type { AlmanacVisual };
+export type VisualSpec = LineVisual | LinePanelsVisual | StackVisual | BarVisual | GroupedBarVisual | ChangeVisual | PyramidVisual | StripeVisual | ChoroplethVisual | ScatterVisual | ScatterXYVisual | StripPairVisual | ScenarioMapsVisual | SparkGridVisual | StartingGridVisual | RankedChangeVisual | LoadCurveVisual | AlmanacVisual;
 type VisualRole = "primary" | "context" | "companion";
 type VisualWithRole = { visual: VisualSpec; role: VisualRole };
 
@@ -2485,8 +2487,8 @@ function linePanelsVisual(panels: NonNullable<PlanEntry["panels"]>, title: strin
 }
 
 const STARTING_GRID_COLORS: Record<string, string> = {
-  "India": "#b3245a", "China": "#2a8597", "S. Korea": "#3f7d4f", "South Korea": "#3f7d4f",
-  "Vietnam": "#e08a2b", "Indonesia": "#8a8597", "Japan": "#5a6e8c", "Bangladesh": "#c98a2b"
+  "India": "#c24a2e", "China": "#33489a", "S. Korea": "#008a6e", "South Korea": "#008a6e",
+  "Vietnam": "#b98014", "Indonesia": "#8a8a8a", "Japan": "#7b4790", "Bangladesh": "#b3b3b3"
 };
 
 function startingGridVisual(
@@ -2501,7 +2503,7 @@ function startingGridVisual(
           const artifact = artifactById(item.indicator);
           const line = artifact ? lineFor(artifact) : null;
           const points = line?.lines?.[0]?.points ? clip(line.lines[0].points) : [];
-          return points.length >= 2 ? { label: item.label, color: STARTING_GRID_COLORS[item.label] || "#8a8597", points } : null;
+          return points.length >= 2 ? { label: item.label, color: STARTING_GRID_COLORS[item.label] || "#8a8a8a", points } : null;
         })
         .filter((l): l is StartingGridVisual["panels"][number]["lines"][number] => Boolean(l));
       if (!lines.length) return null;
@@ -2657,6 +2659,12 @@ function loadCurveFromTable(indicator: string, title: string, subtitle: string, 
 }
 
 function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
+  // The Almanac forms (heat strip, tile map, fitted scatter, parade, sensitivity curves,
+  // dumbbell, rank slope, beeswarm, day ribbon, unit chart) build their own SVG.
+  if (ALMANAC_FORMS.includes(entry.chart)) {
+    const visual = buildAlmanacVisual(entry as unknown as AlmanacEntry, (id) => artifactById(id) as unknown as AlmanacArtifact | undefined);
+    return visual ? attachMeta(visual, entry) : null;
+  }
   if (entry.chart === "loadCurve") {
     const visual = loadCurveFromTable(entry.indicator || "", entry.title || "", entry.subtitle || "", entry.unit || "");
     return visual ? attachMeta(visual, entry) : null;

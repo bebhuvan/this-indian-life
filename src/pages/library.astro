@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { library } from "../data/almanac-library";
+---
+
+<Base title="The chart library · This Indian Life" description="Every chart form This Indian Life uses, each drawn from real data, with the data shape it serves and when to avoid it.">
+  <div class="wrap lib">
+    <Nav locale="en" />
+    <header class="lib-head">
+      <p class="lib-kick">This Indian Life · Chart library</p>
+      <h1>{library.length} forms, each for a shape of data</h1>
+      <p class="lib-dek">Every chart on the site is one of these. Each is chosen by the shape of the data and the question, never for novelty, and every example below is drawn from data already on the site. All of them download as SVG, PNG and CSV.</p>
+    </header>
+    <div class="lib-grid">
+      {library.map((e, i) => (
+        <section class="lib-item" id={e.key}>
+          <p class="lib-n">{String(i + 1).padStart(2, "0")}</p>
+          <h2>{e.name}</h2>
+          <dl>
+            <dt>Data shape</dt><dd>{e.shape}</dd>
+            <dt>Use it for</dt><dd>{e.use}</dd>
+            <dt>Avoid when</dt><dd>{e.avoid}</dd>
+          </dl>
+          <div class="lib-fig">
+            <Fragment set:html={e.svg} />
+            <Fragment set:html={e.svgM} />
+          </div>
+          <p class="lib-note">{e.note} · {e.source}</p>
+        </section>
+      ))}
+    </div>
+    <Footer locale="en" />
+  </div>
+</Base>
+
+<style>
+  .lib-head{padding:64px 0 48px;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:64px;align-items:end;border-bottom:1px solid var(--ink)}
+  .lib-kick{grid-column:1/-1;font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;margin-bottom:18px}
+  .lib-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.8rem,6vw,5rem);line-height:1;letter-spacing:-.03em}
+  .lib-dek{font-family:var(--serif);font-size:1.2rem;line-height:1.55;color:#2e2e2e}
+  .lib-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:72px;row-gap:88px;padding-top:56px}
+  .lib-item{border-top:1px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+  .lib-n{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--dim)}
+  .lib-item h2{font-family:var(--serif);font-weight:500;font-size:1.9rem;line-height:1.1}
+  .lib-item dl{display:grid;grid-template-columns:110px minmax(0,1fr);row-gap:4px;font-family:var(--sans);font-size:.875rem;margin:4px 0 14px}
+  .lib-item dt{color:var(--dim)}
+  .lib-item dd{color:var(--ink)}
+  .lib-fig :global(svg){display:block;width:100%;height:auto;overflow:visible}
+  .lib-fig :global(.viz-m){display:none}
+  #unitChart .lib-fig{max-width:300px}
+  .lib-note{font-family:var(--sans);font-size:.82rem;line-height:1.5;color:var(--mid);border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
+  @media(max-width:980px){.lib-grid{grid-template-columns:minmax(0,1fr)}.lib-head{grid-template-columns:minmax(0,1fr);row-gap:20px}}
+  @media(max-width:620px){.lib-fig :global(.viz-d){display:none}.lib-fig :global(.viz-m){display:block}.lib-item dl{grid-template-columns:90px minmax(0,1fr)}}
+</style>

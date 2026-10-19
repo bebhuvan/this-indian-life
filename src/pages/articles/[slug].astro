@@ -8,7 +8,7 @@ import ArticleEditLog from "../../components/ArticleEditLog.astro";
 import ArticleEvidence from "../../components/ArticleEvidence.astro";
 import ArticleCite from "../../components/ArticleCite.astro";
 import Footer from "../../components/Footer.astro";
-import { locales } from "../../data/site";
+import { domains, locales } from "../../data/site";
 import { annotateStorySections, inlineMarkdownHtml, keyGlossaryTerms, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, statusMeta } from "../../data/questions";
 import { visualsForQuestion, bindSectionVisuals, bindSectionVisualGroups } from "../../data/viz";
 import { articleGraph, SITE } from "../../data/seo";
@@ -116,7 +116,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
     <Nav active={page.domain} locale={locale} />
 
     <header class="article-head">
-      <span class="domain-chip"><span class="tk"></span><span>{page.domain} · V1 question</span></span>
+      <span class="domain-chip"><span class="tk"></span><span>{domains.find((d) => d.id === page.domain)?.label ?? page.domain}</span></span>
       <h1 class="serif">{page.question}</h1>
       <p class="muted">{explanation.short.dek}</p>
       <p class="article-byline">By <a href={SITE.author.url} rel="author">{SITE.author.name}</a></p>
@@ -395,8 +395,8 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
       <ArticleCite page={page} explanation={explanation} />
     </section>
 
-    <section class="section">
-      <p class="sec-hd">Related questions</p>
+    <section class="section article-related">
+      <p class="sec-hd">Keep reading</p>
       {related.map((item) => (
         <a class="q-row" href={questionUrl(item, locale)}>
           <span class="q-dot" style={`background:var(--${item.domain})`}></span>

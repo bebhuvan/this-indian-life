@@ -1,5 +1,6 @@
 ---
 import "../styles/indica.css";
+import "../styles/almanac.css";
 import { SITE } from "../data/seo";
 
 type Props = {
@@ -72,8 +73,8 @@ const cloudflareBeaconConfig = cloudflareWebAnalyticsToken
     {markdownUrl && <link rel="alternate" type="text/markdown" href={markdownUrl} title="Markdown version" />}
 
     <!-- Self-hosted fonts: preload the two used above the fold -->
-    <link rel="preload" href="/fonts/dm-sans-300.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/cormorant-garamond-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />

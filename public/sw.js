@@ -9,7 +9,7 @@
    Updates wait for the page to say SKIP_WAITING (see pwa.js) so we can show a
    "new version — refresh" toast instead of swapping under the user's feet. */
 
-const VERSION = 'til-v2';
+const VERSION = 'til-v3';
 const SHELL = `shell-${VERSION}`;
 const PAGES = `pages-${VERSION}`;
 const ASSETS = `assets-${VERSION}`;
@@ -26,9 +26,10 @@ const PRECACHE = [
   '/favicon.svg',
   '/icon-192.png',
   '/icon-512.png',
-  '/fonts/dm-sans-300.woff2',
-  '/fonts/dm-sans-400.woff2',
-  '/fonts/cormorant-garamond-400.woff2',
+  '/fonts/newsreader-latin.woff2',
+  '/fonts/newsreader-latin-ext.woff2',
+  '/fonts/schibsted-grotesk-latin.woff2',
+  '/fonts/schibsted-grotesk-latin-ext.woff2',
 ];
 
 self.addEventListener('install', (event) => {

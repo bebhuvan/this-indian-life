@@ -10,7 +10,7 @@
 (function(global){
   const NS = {};
   const PAD = {l:54,r:24,t:30,b:38};
-  const GRID = '#ededed', AXIS = '#a6a6a6';
+  const GRID = '#ededed', AXIS = '#8a8a8a';
 
   function niceMax(v){ // simple nice ceiling
     const p=Math.pow(10,Math.floor(Math.log10(v)));
@@ -100,14 +100,14 @@
          annotations:[{i,t,s}], endLabel, endSub, w,h,pad} */
   NS.heroLine=function(svg,o){
     const W=o.w||960,H=o.h||520,pad=Object.assign({l:56,r:104,t:48,b:50},o.pad||{});
-    const d=o.data,x=o.x,C=o.color||'#3A5BD0',ticks=o.ticks||4,uid=++_uid;
+    const d=o.data,x=o.x,C=o.color||'#33489a',ticks=o.ticks||4,uid=++_uid;
     const min=o.min!=null?o.min:Math.min(0,...d), max=o.max!=null?o.max:niceMax(Math.max(...d)*1.08);
     const X=i=>pad.l+(i/(x.length-1))*(W-pad.l-pad.r);
     const Y=v=>H-pad.b-((v-min)/(max-min))*(H-pad.t-pad.b);
     const zeroY=Math.max(pad.t,Math.min(H-pad.b,Y(0)));
     let g=`<defs><linearGradient id="ik-area-${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C}" stop-opacity=".30"/><stop offset=".55" stop-color="${C}" stop-opacity=".07"/><stop offset="1" stop-color="${C}" stop-opacity="0"/></linearGradient><filter id="ik-glow-${uid}" x="-10%" y="-30%" width="120%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="${C}" flood-opacity=".22"/></filter></defs>`;
     for(let k=0;k<=ticks;k++){const v=min+(max-min)*k/ticks,y=Y(v),z=Math.abs(v)<1e-6;
-      g+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${z?'#cfcfcf':'#f1f1f1'}" stroke-width="${z?1.2:1}"/>`;
+      g+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="${z?'#dadada':'#ededed'}" stroke-width="${z?1.2:1}"/>`;
       g+=`<text class="yaxt" x="${pad.l-12}" y="${y+4}" text-anchor="end">${o.ylab?o.ylab(v):(+v.toFixed(2))}</text>`;}
     x.forEach((lab,i)=>{if(o.everyX?(i%o.everyX===0||i===x.length-1):true)g+=`<text class="xaxt" x="${X(i)}" y="${H-pad.b+24}" text-anchor="middle">${lab}</text>`;});
     const pts=d.map((v,i)=>[X(i),Y(v)]);const line=smooth(pts);
@@ -117,7 +117,7 @@
       g+=`<g class="anno-grp"><line class="anno-line" x1="${ax}" y1="${ay-7}" x2="${ax}" y2="${ly+6}"/><circle class="anno-dot" cx="${ax}" cy="${ay}" r="4.5"/><text class="anno-t" x="${ax}" y="${ly}" text-anchor="${anc}">${a.t}</text><text class="anno-s" x="${ax}" y="${ly+13}" text-anchor="${anc}">${a.s}</text></g>`;});
     if(o.endLabel){const ex=X(x.length-1),ey=Y(d[d.length-1]);
       g+=`<g class="anno-grp"><line x1="${ex}" y1="${ey}" x2="${W-pad.r+12}" y2="${ey}" stroke="${C}" stroke-width="1" stroke-dasharray="2 4" opacity=".4"/><circle cx="${ex}" cy="${ey}" r="6" fill="${C}"/><circle cx="${ex}" cy="${ey}" r="11" fill="none" stroke="${C}" stroke-width="1" opacity=".35"/><text class="end-v" x="${W-pad.r+16}" y="${ey-2}" style="fill:${C}">${o.endLabel}</text>${o.endSub?`<text class="end-s" x="${W-pad.r+16}" y="${ey+13}">${o.endSub}</text>`:''}</g>`;}
-    g+=`<g class="ik-hg" opacity="0"><line class="ik-hl" y1="${pad.t}" y2="${H-pad.b}" stroke="#999" stroke-width="1" stroke-dasharray="3 3"/><circle class="ik-hc" r="5.5" fill="#fff" stroke="${C}" stroke-width="2.6"/></g>`;
+    g+=`<g class="ik-hg" opacity="0"><line class="ik-hl" y1="${pad.t}" y2="${H-pad.b}" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/><circle class="ik-hc" r="5.5" fill="#fff" stroke="${C}" stroke-width="2.6"/></g>`;
     g+=`<rect class="ik-cap" x="${pad.l}" y="${pad.t}" width="${W-pad.l-pad.r}" height="${H-pad.t-pad.b}" fill="transparent" style="cursor:crosshair"/>`;
     svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.innerHTML=g;
     return {W,H,pad,X,Y,px:x.map((_,i)=>X(i)),data:d};

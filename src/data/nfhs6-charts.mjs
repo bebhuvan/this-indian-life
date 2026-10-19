@@ -1,18 +1,18 @@
 // SSR-SVG chart kit for the NFHS-6 hub. Designed for a layperson: every chart
 // reads in one glance. Change = two labelled bars (then vs now). Geography =
-// diverging colour anchored on the national average (amber worse / jade better)
+// diverging colour anchored on the national average (sindoor worse / hara better)
 // so the map is never a "sea of green". Every number is LOCKED (from nfhs6.mjs).
 
-const INK = "#0b0b0b";
-const MID = "#5c5c5c";
-const DIM = "#a6a6a6";
-const LINE = "#e9e9ec";
-const TRACK = "#f3f3f5";
-const OLD = "#b9c0c4"; // muted grey = the earlier survey
-const JADE = "#159A82"; // better / good direction
-const AMBER = "#D8894D"; // worse / concerning direction
-const WORSE = "#C9553F";
-const BETTER = "#159A82";
+const INK = "#121212";
+const MID = "#4f4f4f";
+const DIM = "#8a8a8a";
+const LINE = "#ededed";
+const TRACK = "#f4f4f4";
+const OLD = "#b3b3b3"; // light grey = the earlier survey
+const NOW = "#7b4790"; // the current survey, neutral measures (jamun, the health ink)
+const AMBER = "#c24a2e"; // worse / concerning direction (sindoor)
+const WORSE = "#c24a2e";
+const BETTER = "#008a6e"; // better / good direction (hara)
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const n1 = (v) => (v == null ? "—" : Number.isInteger(v) ? String(v) : v.toFixed(1));
@@ -58,15 +58,15 @@ function gridX(sx, lim, yTop, yBot, unit, lines = true) {
 // Diverging colour relative to a centre (the India value). `worseSide` says which
 // direction is the concerning one: +1 high-is-bad, -1 high-is-good, 0 neutral.
 function divColor(v, centre, maxDev, worseSide) {
-  if (v == null) return "#fafafb";
+  if (v == null) return "#f4f4f4";
   const d = (v - centre) / (maxDev || 1); // -1..1
   const mag = Math.min(1, Math.abs(d));
-  if (worseSide === 0) return mix("#eaf6f2", JADE, 0.12 + mag * 0.88); // neutral: sequential jade
+  if (worseSide === 0) return mix("#f1ebf3", NOW, 0.12 + mag * 0.88); // neutral: sequential jamun
   const isWorse = worseSide > 0 ? v > centre : v < centre;
-  return mix("#ffffff", isWorse ? AMBER : JADE, 0.12 + mag * 0.88);
+  return mix("#e4e4e4", isWorse ? AMBER : BETTER, 0.12 + mag * 0.88); // grey at the India value
 }
 
-// ===== CHANGE: two labelled bars, then (grey) vs now (jade) ==================
+// ===== CHANGE: two labelled bars, then (grey) vs now (jamun) ==================
 // rows: [{label, then, now}].  opts.worseSide drives the better/worse verdict.
 export function barChange(rows, { max, unit = "%", worseSide = 1, signColor = false } = {}) {
   const W = 1000, x0 = 4, x1 = W - 70;         // bar plot; right strip holds outside values
@@ -87,7 +87,7 @@ export function barChange(rows, { max, unit = "%", worseSide = 1, signColor = fa
   const H = plotBot + 30;
   const p = [];
   p.push(gridX(sx, lim, top - 10, plotBot, unit, false));
-  p.push(`<g><rect x="${x0}" y="8" width="26" height="13" rx="2" fill="${OLD}"/><text x="${x0 + 32}" y="19" class="lglab">2019-21 (NFHS-5)</text><rect x="${x0 + 186}" y="8" width="26" height="13" rx="2" fill="${JADE}"/><text x="${x0 + 218}" y="19" class="lglab">2023-24 (NFHS-6)</text></g>`);
+  p.push(`<g><rect x="${x0}" y="8" width="26" height="13" rx="2" fill="${OLD}"/><text x="${x0 + 32}" y="19" class="lglab">2019-21 (NFHS-5)</text><rect x="${x0 + 186}" y="8" width="26" height="13" rx="2" fill="${NOW}"/><text x="${x0 + 218}" y="19" class="lglab">2023-24 (NFHS-6)</text></g>`);
   const bar = (v, y, fill, faint) => {
     if (v == null) return "";
     const end = sx(v), inside = end > x1 - tw(n1(v) + unit, 13.5) - 14;
@@ -97,7 +97,7 @@ export function barChange(rows, { max, unit = "%", worseSide = 1, signColor = fa
       `<text x="${valX.toFixed(1)}" y="${y + BH - 7}" class="${inside ? "vIn" : "vOut"}" text-anchor="${inside ? "end" : "start"}" ${inside ? "" : `fill="${faint ? MID : INK}"`}>${n1(v)}${unit}</text>`;
   };
   laid.forEach((r) => {
-    const nowC = signColor && r.then != null && r.now != null ? (r.now > r.then ? WORSE : BETTER) : JADE;
+    const nowC = signColor && r.then != null && r.now != null ? (r.now > r.then ? WORSE : BETTER) : NOW;
     r.lines.forEach((ln, li) => p.push(`<text x="${x0}" y="${r.y + 13 + li * LINEH}" class="rlab">${esc(ln)}</text>`));
     if (r.then != null && r.now != null) {
       const d = +(r.now - r.then).toFixed(1);
@@ -134,7 +134,7 @@ export function barChangeM(rows, { max, unit = "%", worseSide = 1, signColor = f
   const H = plotBot + 24;
   const p = [];
   p.push(gridX(sx, lim, top - 8, plotBot, unit, false));
-  p.push(`<g><rect x="${x0}" y="8" width="20" height="11" rx="2" fill="${OLD}"/><text x="${x0 + 26}" y="17" class="lglab">2019-21</text><rect x="${x0 + 120}" y="8" width="20" height="11" rx="2" fill="${JADE}"/><text x="${x0 + 146}" y="17" class="lglab">2023-24</text></g>`);
+  p.push(`<g><rect x="${x0}" y="8" width="20" height="11" rx="2" fill="${OLD}"/><text x="${x0 + 26}" y="17" class="lglab">2019-21</text><rect x="${x0 + 120}" y="8" width="20" height="11" rx="2" fill="${NOW}"/><text x="${x0 + 146}" y="17" class="lglab">2023-24</text></g>`);
   const bar = (v, y, fill, faint) => {
     if (v == null) return "";
     const end = sx(v), inside = end > x1 - tw(n1(v) + unit, 13.5) - 26;
@@ -144,7 +144,7 @@ export function barChangeM(rows, { max, unit = "%", worseSide = 1, signColor = f
       `<text x="${valX.toFixed(1)}" y="${y + BH - 6}" class="${inside ? "vIn" : "vOut"}" text-anchor="${inside ? "end" : "start"}" ${inside ? "" : `fill="${faint ? MID : INK}"`}>${n1(v)}${unit}</text>`;
   };
   laid.forEach((r) => {
-    const nowC = signColor && r.then != null && r.now != null ? (r.now > r.then ? WORSE : BETTER) : JADE;
+    const nowC = signColor && r.then != null && r.now != null ? (r.now > r.then ? WORSE : BETTER) : NOW;
     r.lines.forEach((ln, li) => p.push(`<text x="${x0}" y="${r.y + 13 + li * LINEH}" class="rlab">${esc(ln)}</text>`));
     if (r.then != null && r.now != null) {
       const d = +(r.now - r.then).toFixed(1);
@@ -166,7 +166,7 @@ export function splitGroup(rows, { max, unit = "%" } = {}) {
   const top = 50, rowH = 96, BH = 25, GAP = 7;
   const lim = max ?? nice(Math.max(...rows.flatMap((r) => [r.urban, r.rural]).filter((v) => v != null)) * 1.08);
   const sx = (v) => x0 + (x1 - x0) * (v / lim);
-  const URB = JADE, RUR = mix(JADE, "#ffffff", 0.5);
+  const URB = "#33489a", RUR = "#008a6e"; // urban neel, rural hara (site-wide)
   const plotBot = top + rows.length * rowH;
   const H = plotBot + 38;
   const p = [];
@@ -194,7 +194,7 @@ export function splitGroup(rows, { max, unit = "%" } = {}) {
 }
 
 // ===== DIVERGING: two opposed quantities from a centre (the double burden) ===
-export function diverging(groups, { leftLabel, rightLabel, leftColor = AMBER, rightColor = JADE, max, unit = "%" } = {}) {
+export function diverging(groups, { leftLabel, rightLabel, leftColor = AMBER, rightColor = BETTER, max, unit = "%" } = {}) {
   const W = 1000, top = 46, rowH = 84, cx = W / 2, half = W / 2 - 130, BH = 28;
   const lim = max ?? nice(Math.max(...groups.flatMap((g) => [g.left, g.right]).filter((v) => v != null)) * 1.1);
   const sx = (v) => (half * v) / lim;
@@ -263,11 +263,11 @@ export function tileMap(map, { unit = "%", rows = 7, cols = 10, worseSide = 1 } 
   // diverging legend: worse <- India -> better (or sequential for neutral)
   const ly = padTop + rows * (cell + gap) + 18, lw = 300, lx = padX + 2, seg = 40;
   if (worseSide === 0) {
-    const stops = [0, .5, 1].map((s) => `<stop offset="${s * 100}%" stop-color="${mix("#eaf6f2", JADE, 0.12 + s * 0.88)}"/>`).join("");
+    const stops = [0, .5, 1].map((s) => `<stop offset="${s * 100}%" stop-color="${mix("#f1ebf3", NOW, 0.12 + s * 0.88)}"/>`).join("");
     p.push(`<defs><linearGradient id="rmp${map.num}">${stops}</linearGradient></defs><rect x="${lx}" y="${ly}" width="${lw}" height="13" rx="2" fill="url(#rmp${map.num})" stroke="rgba(0,0,0,.08)"/>`);
     p.push(`<text x="${lx}" y="${ly + 30}" class="ax">${n1(map.min)}${unit}</text><text x="${lx + lw}" y="${ly + 30}" class="ax" text-anchor="end">${n1(map.max)}${unit}</text>`);
   } else {
-    const worseC = AMBER, betterC = JADE;
+    const worseC = AMBER, betterC = BETTER;
     p.push(`<rect x="${lx}" y="${ly}" width="${lw / 2}" height="13" fill="${mix("#fff", betterC, 0.85)}"/><rect x="${lx + lw / 2}" y="${ly}" width="${lw / 2}" height="13" fill="${mix("#fff", worseC, 0.85)}"/><rect x="${lx}" y="${ly}" width="${lw}" height="13" fill="none" stroke="rgba(0,0,0,.08)"/>`);
     p.push(`<line x1="${lx + lw / 2}" y1="${ly - 3}" x2="${lx + lw / 2}" y2="${ly + 16}" stroke="${INK}" stroke-width="1.5"/>`);
     p.push(`<text x="${lx}" y="${ly + 30}" class="ax" fill="${betterC}">◀ better than India</text>`);
@@ -361,7 +361,7 @@ export function stackBarsM(rows, { segLabels = [], colors = [], max, unit = "%" 
   });
 }
 
-// ===== MOVERS: what changed most — improvements right (jade), worse left ======
+// ===== MOVERS: what changed most — improvements right (hara), worse left ======
 // items: [{label, delta, improved}]  delta = signed pp change (now - then).
 export function moversChart(items, { unit = "%" } = {}) {
   const W = 1000, gut = 270, plotL = gut, plotR = W - 26, cx = (plotL + plotR) / 2, half = (plotR - plotL) / 2;
@@ -387,7 +387,7 @@ export function moversChart(items, { unit = "%" } = {}) {
 
 // MOBILE movers: a ranked list (biggest change on top) via the shared row engine. Direction
 // is shown two ways so it's unambiguous: a ▲/▼ arrow (the metric went up or down) and colour
-// (jade = improved, amber = worsened). So "internet ▲ 31" reads good, "overweight ▲ 6.7" reads
+// (hara = improved, sindoor = worsened). So "internet ▲ 31" reads good, "overweight ▲ 6.7" reads
 // bad, "stunting ▼ 6.2" reads good — arrow = what happened, colour = whether that's good.
 export function moversM(items, { unit = "%" } = {}) {
   const sorted = [...items].sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
@@ -403,7 +403,7 @@ export function moversM(items, { unit = "%" } = {}) {
 
 // MOBILE ranked state list — used for map / ranked / dotstrip / diststrip (all state data).
 // A compact "abbr · bar · value" row per State/UT, sorted, coloured vs the India average
-// (amber worse / jade better), with the India reference marked. Replaces the tiny tile-map.
+// (sindoor worse / hara better), with the India reference marked. Replaces the tiny tile-map.
 export function rankedBarsM(map, { unit = "%", worseSide = 1 } = {}) {
   const MW = 360, gut = 140, x0 = gut, x1 = MW - 44, top = 34, rowH = 20, BH = 14;
   // Full State/UT names (not cryptic abbreviations); ellipsis only the over-long UT names
@@ -436,7 +436,7 @@ export function rankedBarsM(map, { unit = "%", worseSide = 1 } = {}) {
 // MOBILE urban/rural split — two bars (urban, rural) per indicator with the India avg tagged.
 export function splitGroupM(rows, { max, unit = "%" } = {}) {
   const lim = max ?? nice(Math.max(...rows.flatMap((r) => [r.urban, r.rural]).filter((v) => v != null)) * 1.08);
-  const URB = JADE, RUR = mix(JADE, "#ffffff", 0.5);
+  const URB = "#33489a", RUR = "#008a6e"; // urban neel, rural hara (site-wide)
   const legend = (x0) => `<rect x="${x0}" y="13" width="12" height="12" rx="2" fill="${URB}"/><text x="${x0 + 18}" y="23" class="lglab">Urban</text><rect x="${x0 + 74}" y="13" width="12" height="12" rx="2" fill="${RUR}"/><text x="${x0 + 92}" y="23" class="lglab">Rural</text>`;
   return rowChartM(rows, { lim, cls: "split", bodyH: 42, valRoom: 54, legend, rightTag: (r) => (r.total != null ? `India ${n1(r.total)}${unit}` : null) }, (r, g) => {
     const BH = 18, gap = 6;
@@ -448,7 +448,7 @@ export function splitGroupM(rows, { max, unit = "%" } = {}) {
 // MOBILE diverging (e.g. the "double burden": underweight vs overweight). Per group: the label
 // centred above a bar that diverges from the middle — left quantity one way, right the other —
 // with values clear of the bars. `half` leaves room so wide values never overflow the canvas.
-export function divergingM(groups, { leftLabel, rightLabel, leftColor = AMBER, rightColor = JADE, max, unit = "%" } = {}) {
+export function divergingM(groups, { leftLabel, rightLabel, leftColor = AMBER, rightColor = BETTER, max, unit = "%" } = {}) {
   const MW = 360, cx = MW / 2, half = 120, top = 46, BH = 20, LINEH = 16;
   const lim = max ?? nice(Math.max(...groups.flatMap((g) => [g.left, g.right]).filter((v) => v != null)) * 1.1);
   const sx = (v) => (half * v) / lim;
@@ -469,7 +469,7 @@ export function divergingM(groups, { leftLabel, rightLabel, leftColor = AMBER, r
 }
 
 // ===== SLOPE: a slopegraph — every indicator's line from 2019-21 to 2023-24 ===
-// rows: [{label, then, now, ws}].  Lines coloured by improvement (jade) / worse
+// rows: [{label, then, now, ws}].  Lines coloured by improvement (hara) / worse
 // (red); flat = grey. Reads as "everything moved this way, at once".
 export function slope(rows, { unit = "%", worseSide = 1 } = {}) {
   const data = rows.filter((r) => r.then != null && r.now != null);
@@ -539,7 +539,7 @@ export function dumbbell(rows, { unit = "%", max, worseSide = 1 } = {}) {
   const H = plotBot + 30;
   const p = [];
   p.push(gridX(sx, lim, top - 10, plotBot, unit, false));
-  p.push(`<g><circle cx="${x0 + 6}" cy="14" r="5.5" fill="${OLD}"/><text x="${x0 + 18}" y="18" class="lglab">2019-21</text><circle cx="${x0 + 122}" cy="14" r="5.5" fill="${JADE}"/><text x="${x0 + 134}" y="18" class="lglab">2023-24</text></g>`);
+  p.push(`<g><circle cx="${x0 + 6}" cy="14" r="5.5" fill="${OLD}"/><text x="${x0 + 18}" y="18" class="lglab">2019-21</text><circle cx="${x0 + 122}" cy="14" r="5.5" fill="${NOW}"/><text x="${x0 + 134}" y="18" class="lglab">2023-24</text></g>`);
   scored.forEach((r, i) => {
     const y = top + i * rowH + rowH / 2;
     const col = r.improved == null ? MID : r.improved ? BETTER : WORSE;
@@ -618,7 +618,7 @@ export function smallMultiples(series, { unit = "%", max, cols = 3, worseSide = 
   const lim = max ?? nice(Math.max(...data.flatMap((r) => [r.then, r.now]).filter((v) => v != null)) * 1.1);
   const labelPad = 62, plotW = cellW - labelPad; // reserve room so value labels never clip
   const p = [];
-  p.push(`<g><rect x="0" y="4" width="24" height="12" rx="2" fill="${OLD}"/><text x="31" y="14" class="lglab">2019-21</text><rect x="116" y="4" width="24" height="12" rx="2" fill="${JADE}"/><text x="147" y="14" class="lglab">2023-24</text></g>`);
+  p.push(`<g><rect x="0" y="4" width="24" height="12" rx="2" fill="${OLD}"/><text x="31" y="14" class="lglab">2019-21</text><rect x="116" y="4" width="24" height="12" rx="2" fill="${NOW}"/><text x="147" y="14" class="lglab">2023-24</text></g>`);
   data.forEach((r, i) => {
     const cx = (i % cols) * (cellW + gap), cy = top + Math.floor(i / cols) * (cellH + gap);
     const lines = wrapText(r.label, 13, cellW - 60, 2); // keep clear of the change chip
@@ -635,7 +635,7 @@ export function smallMultiples(series, { unit = "%", max, cols = 3, worseSide = 
         `<text x="${tx.toFixed(1)}" y="${y + BH - 6}" class="${inside ? "vIn" : "smV"}" text-anchor="${inside ? "end" : "start"}"${inside ? "" : ` fill="${faint ? MID : INK}"`}>${lab}</text>`;
     };
     if (r.then != null) p.push(drawBar(r.then, yT, OLD, false, true));
-    p.push(drawBar(r.now, yN, JADE, true, false));
+    p.push(drawBar(r.now, yN, NOW, true, false));
     if (r.then != null) {
       const d = +(r.now - r.then).toFixed(1);
       const improved = ws === 0 ? null : ws > 0 ? d < 0 : d > 0;

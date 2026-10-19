@@ -74,7 +74,6 @@ const sourceChips = [...counts.entries()]
 const seriesCount = series.length;
 const sourceCount = sourceChips.length;
 
-const glossary = explanation.editorialPlan?.glossaryBlocks ?? [];
 const caveats = explanation.caveats ?? [];
 const sourceNotes = explanation.sourceNotes ?? [];
 const furtherReading = explanation.furtherReading ?? [];
@@ -88,80 +87,62 @@ function refParts(item: string | { label: string; url?: string }): { label: stri
 }
 ---
 
-<div class="evidence-grid">
-  <div class="evidence-main">
-    <p class="lbl">The data behind this article</p>
-    {seriesCount ? (
-      <p class="evidence-count">
-        Built from <strong>{seriesCount}</strong> data series across <strong>{sourceCount}</strong>
-        {sourceCount === 1 ? " source" : " sources"}{dataThrough ? <>, with data through <strong>{dataThrough}</strong></> : ""}.
+<div class="evidence-col">
+  <p class="lbl">The data behind this article</p>
+  {seriesCount ? (
+    <p class="evidence-count">
+      Built from <strong>{seriesCount}</strong> data series across <strong>{sourceCount}</strong>
+      {sourceCount === 1 ? " source" : " sources"}{dataThrough ? <>, with data through <strong>{dataThrough}</strong></> : ""}.
+    </p>
+  ) : (
+    <p class="evidence-count">Sourced from the institutions listed below.</p>
+  )}
+  {sourceChips.length ? (
+    <p class="evidence-sources">
+      {sourceChips.map((chip) =>
+        chip.href
+          ? <a href={chip.href} target="_blank" rel="noreferrer">{chip.label}<span class="evidence-src-count">{chip.count}</span></a>
+          : <span>{chip.label}<span class="evidence-src-count">{chip.count}</span></span>
+      )}
+    </p>
+  ) : null}
+
+  {sourceNotes.length ? (
+    <section class="ev-block">
+      <h3>Sources</h3>
+      <ol class="ev-sources">{sourceNotes.map((item) => { const r = refParts(item); return <li>{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{r.label}</a> : r.label}</li>; })}</ol>
+    </section>
+  ) : null}
+
+  <section class="ev-block">
+    <h3>What these numbers cannot show</h3>
+    {caveats.length ? (
+      <ul class="ev-caveats">{caveats.map((item) => <li>{item}</li>)}</ul>
+    ) : <p class="muted">No caveats recorded.</p>}
+  </section>
+
+  {furtherReading.length ? (
+    <section class="ev-block">
+      <h3>Further reading</h3>
+      <ul class="ev-reading">{furtherReading.map((item) => { const r = refParts(item); return <li>{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{r.label}</a> : r.label}</li>; })}</ul>
+    </section>
+  ) : null}
+
+  {seriesCount ? (
+    <details class="evidence-series">
+      <summary>Every data series behind this article ({seriesCount})</summary>
+      <p class="es-audit-note">
+        Every figure traces to a source file you can open{dataAsOf ? `, pinned to the data as of ${dataAsOf}` : ""}. <a href={dataFolderUrl(dataRef)} target="_blank" rel="noreferrer">Browse the data folder on GitHub ↗</a>
       </p>
-    ) : (
-      <p class="evidence-count">Sourced from the institutions listed below.</p>
-    )}
-
-    {sourceChips.length ? (
-      <div class="evidence-sources">
-        {sourceChips.map((chip) =>
-          chip.href ? (
-            <a href={chip.href} target="_blank" rel="noreferrer">
-              {chip.label}<span class="evidence-src-count">{chip.count}</span>
-            </a>
-          ) : (
-            <span>{chip.label}<span class="evidence-src-count">{chip.count}</span></span>
-          )
-        )}
-      </div>
-    ) : null}
-
-    {seriesCount ? (
-      <details class="evidence-series">
-        <summary>Data &amp; methods · all {seriesCount} series</summary>
-        <p class="es-audit-note">
-          Every figure traces to a source file you can open{dataAsOf ? `, pinned to the data as of ${dataAsOf}` : ""}. <a href={dataFolderUrl(dataRef)} target="_blank" rel="noreferrer">Browse the data folder on GitHub ↗</a>
-        </p>
-        <ul>
-          {series.map((s) => (
-            <li>
-              <span class="es-title">{s.title}{s.fileUrl ? <a class="es-file" href={s.fileUrl} target="_blank" rel="noreferrer">data file ↗</a> : null}</span>
-              <span class="es-meta">{s.source}{s.coverage ? ` · ${s.coverage}` : ""}</span>
-              {s.method ? <span class="es-method">{s.method}</span> : null}
-            </li>
-          ))}
-        </ul>
-      </details>
-    ) : null}
-  </div>
-
-  <aside class="evidence-aside">
-    {glossary.length ? (
-      <div>
-        <p class="lbl">Concepts</p>
-        <div class="def-tags">
-          {glossary.map((item) => <span>{item.term}</span>)}
-        </div>
-      </div>
-    ) : null}
-
-    <div>
-      <p class="lbl">Caveats</p>
-      {caveats.length ? (
-        <ul>{caveats.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
-      ) : <p class="muted">No caveats recorded.</p>}
-    </div>
-
-    {sourceNotes.length ? (
-      <div>
-        <p class="lbl">Source notes</p>
-        <ul>{sourceNotes.slice(0, 12).map((item) => { const r = refParts(item); return <li>{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{r.label}</a> : r.label}</li>; })}</ul>
-      </div>
-    ) : null}
-
-    {furtherReading.length ? (
-      <div>
-        <p class="lbl">Further reading</p>
-        <ul>{furtherReading.slice(0, 8).map((item) => { const r = refParts(item); return <li>{r.url ? <a href={r.url} target="_blank" rel="noreferrer">{r.label}</a> : r.label}</li>; })}</ul>
-      </div>
-    ) : null}
-  </aside>
+      <ul>
+        {series.map((s) => (
+          <li>
+            <span class="es-title">{s.title}{s.fileUrl ? <a class="es-file" href={s.fileUrl} target="_blank" rel="noreferrer">data file ↗</a> : null}</span>
+            <span class="es-meta">{s.source}{s.coverage ? ` · ${s.coverage}` : ""}</span>
+            {s.method ? <span class="es-method">{s.method}</span> : null}
+          </li>
+        ))}
+      </ul>
+    </details>
+  ) : null}
 </div>

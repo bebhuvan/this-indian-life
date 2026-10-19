@@ -43,7 +43,7 @@ function niceTicks(min: number, max: number, count = 4): number[] {
 }
 
 const round = (n: number) => Number(n.toFixed(1)).toString();
-const WATERMARK = `<text x="746" y="312" text-anchor="end" font-family="DM Sans, Arial, sans-serif" font-size="10" font-weight="600" letter-spacing="1" text-transform="uppercase" fill="#8c8780" opacity="0.42">thisindianlife.today</text>`;
+const WATERMARK = `<text x="746" y="312" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="10" font-weight="600" letter-spacing="1" text-transform="uppercase" fill="#8a8a8a" opacity="0.42">thisindianlife.today</text>`;
 
 // Render a multi-series line (or single-series area) chart as an inline SVG string.
 export function renderLineChartSvg(

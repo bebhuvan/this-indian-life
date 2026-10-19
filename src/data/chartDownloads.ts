@@ -154,6 +154,10 @@ export function visualPayload(visual: VisualSpec) {
       rows: visual.cells.flatMap((cell) => cell.points.map((point) => ({ city: cell.label, date: point.date, value: point.value })))
     };
   }
+  if (visual.kind === "almanac") {
+    // Almanac figures carry the exact rows they were drawn from.
+    return { title: visual.title, unit: visual.unit, source, rows: visual.rows };
+  }
   if (visual.kind === "rankedChange") {
     return {
       title: visual.title,

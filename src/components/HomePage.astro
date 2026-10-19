@@ -5,134 +5,242 @@ import Footer from "./Footer.astro";
 import { charts, domains, formatValue, latestObservation, loadSeries } from "../data/site";
 import { questionPages, questionUrl, statusMeta } from "../data/questions";
 import { homeGraph } from "../data/seo";
+import { hero, leadStrip, leadStripM, leadFacts, ledger, thumbs, cardFacts } from "../data/almanac-home";
 
 type Props = { canonicalPath?: string };
 const { canonicalPath } = Astro.props;
 const locale = "en";
-const featured = charts.find((chart) => chart.id === "people.population.total")!;
-const featuredSeries = loadSeries(featured.seriesPath);
-const featuredLatest = latestObservation(featuredSeries)!;
-// Resolve the article behind a stat tile. Prefer the exact same-question article (slug
-// match — catches cases like GDP where the chart's indicator differs from the article's),
-// then fall back to any article that charts this indicator (core/context/visualPlan).
-const findArticle = (chart: (typeof charts)[number]) =>
-  questionPages.find((page) => page.slug === chart.slug) ??
-  questionPages.find(
-    (page) =>
-      page.indicators.includes(chart.id) ||
-      (page.core ?? []).includes(chart.id) ||
-      (page.context ?? []).includes(chart.id) ||
-      (page.visualPlan ?? []).some(
-        (entry) => entry.indicator === chart.id || (entry.series ?? []).some((s) => s.indicator === chart.id)
-      )
-  );
-// The homepage GDP headline shows the IMF WEO (April 2026) figure — India ~$4.15T
-// in 2026, the most current "size of the economy" number — because the World Bank
-// series only runs through 2024 (~$3.91T) and the ingested IMF series stops at the
-// 2025 estimate. The article's 1960→ historical chart still uses World Bank.
-// Source: IMF World Economic Outlook (Apr 2026), NGDPD/IND.
-const GDP_IMF_LATEST = { date: "2026", value: 4.15e12 };
-const ledger = charts
-  .filter((chart) => ["people.population.total", "econ.gdp.current_usd", "energy.electricity_access", "health.life_expectancy"].includes(chart.id))
-  .map((chart) => {
-    const latest =
-      chart.id === "econ.gdp.current_usd"
-        ? GDP_IMF_LATEST
-        : latestObservation(loadSeries(chart.seriesPath))!;
-    const article = findArticle(chart);
-    // Split the formatted value into its leading number and a trailing unit word
-    // ("72.2 years" → "72.2" + "years") so the unit renders small via .li-n .u and
-    // every ledger figure stays on one line instead of wrapping unevenly.
-    const formatted = formatValue(latest.value, chart.valueFormat);
-    const sp = formatted.indexOf(" ");
-    const num = sp < 0 ? formatted : formatted.slice(0, sp);
-    const unit = sp < 0 ? "" : formatted.slice(sp + 1);
-    return { chart, latest, num, unit, href: article ? questionUrl(article, locale) : `/articles/` };
-  });
+const byId = (id: string) => questionPages.find((page) => page.id === id);
+const href = (id: string) => { const page = byId(id); return page ? questionUrl(page, locale) : "/articles/"; };
+const status = (id: string) => { const page = byId(id); return page ? statusMeta(page.explanation.status) : null; };
+
+const population = charts.find((chart) => chart.id === "people.population.total")!;
+const popLatest = latestObservation(loadSeries(population.seriesPath))!;
+const popText = formatValue(popLatest.value, population.valueFormat).replace(" bn", " billion");
+
+const lead = byId("q.people.fertility_divergence");
+const words = leadFacts.numberWord;
+const leadDek = `Kerala reached two children per woman in ${leadFacts.keralaYear}. India as a whole got there in ${leadFacts.indiaYear}. ${words(leadFacts.stillAbove).replace(/^./, (c) => c.toUpperCase())} large states in the north and centre still have not.`;
+
+// Story cards: each pairs a question with a chart drawn from its own data.
+const wide = [
+  { id: "q.work.women", tag: "Work", color: "var(--sindoor)", thumb: thumbs.ribbon, text: cardFacts.ribbon },
+  { id: "q.econ.inequality", tag: "Money", color: "var(--hara)", thumb: thumbs.parade, text: cardFacts.parade },
+  { id: "q.econ.poverty", tag: "Money", color: "var(--hara)", thumb: thumbs.cutoff, text: cardFacts.cutoff },
+];
+const pairs = [
+  { id: "q.society.connected", tag: "Society", color: "var(--neel)", thumb: thumbs.dumbbell, text: cardFacts.dumbbell },
+  { id: "q.econ.per_person", tag: "Money", color: "var(--hara)", thumb: thumbs.slope, text: cardFacts.slope },
+];
+
+// Every question, grouped by subject; ready pages first, at most six per subject.
+const rank = (page: (typeof questionPages)[number]) => (statusMeta(page.explanation.status).cls === "ready" ? 0 : 1);
+const index = domains.map((domain) => {
+  const pages = questionPages.filter((page) => page.domain === domain.id);
+  return { domain, total: pages.length, pages: [...pages].sort((a, b) => rank(a) - rank(b)).slice(0, 6) };
+}).filter((group) => group.total > 0);
 ---
 
 <Base jsonLd={homeGraph()} canonicalPath={canonicalPath}>
-  <div class="wrap">
-    <Nav active="people" locale={locale} />
+  <div class="wrap home">
+    <Nav locale={locale} />
 
-    <div class="home-kicker">
-      <span class="lbl">All our lives, in numbers</span>
-    </div>
-
-    <section class="dom-people home-hero">
-      <div class="hero-num-row">
-        <span class="hero-num">{formatValue(featuredLatest.value, featured.valueFormat).replace(" bn", "")}<span class="u"> bn</span></span>
-        <div class="hero-aside">
-          <span class="lbl">People · {featuredLatest.date}</span>
-          <span class="cat serif">A country large enough to bend every average</span>
-        </div>
+    <section class="h-hero">
+      <h1 class="h-title">How does <br /><em>India</em> live?</h1>
+      <div class="h-pitch">
+        <p class="h-lede">How long we live and what we die of. What a family spends in a month, and where a woman’s day goes. Whether the rains came, and whether the lights stayed on.</p>
+        <p class="h-sub">This Indian Life answers plain questions about {popText} people with the government’s own surveys, and gives you every chart and every number to take away.</p>
+        <p class="h-links"><a class="btn" href="#questions">Start with a question</a><a href="/methodology/">How we work</a></p>
       </div>
-      <h1 class="serif home-title">India isn't one country. It's many, wearing a single name.</h1>
-      <p class="muted home-dek">
-        Big questions about Indian life, answered from the official data. One person, digging the
-        numbers out of bad government PDFs and writing the explainer that should already exist.
-      </p>
-      <a class="btn dom-people" href="/ask/">Browse the questions</a>
     </section>
 
-    <section class="section" style="border-bottom:1px solid var(--ghost)">
-      <div class="ledger-grid">
-        {ledger.map(({ chart, num, unit, href }) => (
-          <a class={`li dom-${chart.domain} ledger-link`} href={href}>
-            <span class="li-n">{num}{unit && <span class="u">{unit}</span>}</span>
-            <p class="li-lbl"><span class="tk"></span>{chart.shortTitle}</p>
-            <p class="li-cut">{chart.bottomLine}</p>
+    <figure class="h-band">
+      <div class="h-band-d" set:html={hero.svg} />
+      <div class="h-band-m" set:html={hero.svgM} />
+      <figcaption>
+        <div>
+          <p class="h-band-title">Every monsoon since {hero.first}, one stripe each. <a href={href("q.climate.el_nino_india")}>What does El Niño do to India? →</a></p>
+          <p class="h-band-note">All-India June to September rainfall against the long-period average. {hero.sentence}, marked <i class="h-flag"></i>. Source: India Meteorological Department; NOAA Oceanic Niño Index.</p>
+        </div>
+        <div class="h-key" set:html={hero.key} />
+      </figcaption>
+    </figure>
+
+    {lead ? (
+      <section class="h-lead dom-people">
+        <div class="h-lead-copy">
+          <p class="h-kick"><span>The lead explainer</span><span class="c">People · Fertility</span></p>
+          <h2><a href={questionUrl(lead, locale)}>{lead.question}</a></h2>
+          <p class="h-lead-dek">{leadDek} {words(leadFacts.years).replace(/^./, (c) => c.toUpperCase())} years of sample-registration data, state by state.</p>
+          <p class="h-lead-meta"><a class="btn" href={questionUrl(lead, locale)}>Read the explainer</a><span>SRS {leadFacts.from}–{leadFacts.to} · NFHS-6</span></p>
+        </div>
+        <figure class="h-lead-fig">
+          <figcaption>Births per woman, by state and year</figcaption>
+          <div class="h-lead-d" set:html={leadStrip} />
+          <div class="h-lead-m" set:html={leadStripM} />
+        </figure>
+      </section>
+    ) : null}
+
+    <section class="h-sec">
+      <p class="sec-hd h-sec-hd"><span>Four numbers from an ordinary Indian life</span><span class="h-aside">Each one links to its explainer →</span></p>
+      <div class="h-ledger">
+        {ledger.map((item) => (
+          <a href={href(item.question)}>
+            <span class="h-num" style={`color:${item.color}`}>{item.value}</span>
+            <span class="h-mini" set:html={item.mini} />
+            <span class="h-ledger-t">{item.text}</span>
+            <span class="h-meta">{item.source}</span>
           </a>
         ))}
       </div>
     </section>
 
-    <section class="section">
-      <p class="sec-hd">Browse by domain</p>
-      <div class="cards">
-        {domains.map((domain) => {
-          const count = questionPages.filter((page) => page.domain === domain.id).length;
+    <section class="h-sec">
+      <p class="sec-hd">New and revised</p>
+      <div class="h-cards">
+        {wide.map((card) => {
+          const page = byId(card.id); if (!page) return null;
+          const st = status(card.id);
           return (
-            <a class={`card dom-${domain.id}`} href={`/${domain.id}/`}>
-              <div class="tag">{domain.label}</div>
-              <h2>{domain.line}</h2>
-              <p class="sub">{count} independent question page{count === 1 ? "" : "s"}</p>
-              <span class="arrow">-></span>
+            <a class="h-card" href={questionUrl(page, locale)}>
+              <span class="h-thumb" set:html={card.thumb} />
+              <span class="h-tag" style={`color:${card.color}`}>{card.tag}{st && st.cls !== "ready" ? <em>In progress</em> : null}</span>
+              <span class="h-card-q">{page.question}</span>
+              <span class="h-card-t">{card.text}</span>
+            </a>
+          );
+        })}
+      </div>
+      <div class="h-pairs">
+        {pairs.map((card) => {
+          const page = byId(card.id); if (!page) return null;
+          const st = status(card.id);
+          return (
+            <a class="h-pair" href={questionUrl(page, locale)}>
+              <span class="h-pair-copy">
+                <span class="h-tag" style={`color:${card.color}`}>{card.tag}{st && st.cls !== "ready" ? <em>In progress</em> : null}</span>
+                <span class="h-card-q">{page.question}</span>
+                <span class="h-card-t">{card.text}</span>
+              </span>
+              <span class="h-pair-thumb" set:html={card.thumb} />
             </a>
           );
         })}
       </div>
     </section>
 
-    <section class="section">
-      <p class="sec-hd">Starter questions</p>
-      <div class="q-showcase">
-        {questionPages.slice(0, 10).map((page) => {
-          const st = statusMeta(page.explanation.status);
-          return (
-            <a class={`q-row dom-${page.domain}`} href={questionUrl(page, locale)}>
-              <span class="q-dot" style={`background:var(--${page.domain})`}></span>
-              <span class="q-txt">{page.question}</span>
-              {st.cls !== "ready" && <span class="q-ans">{st.cls === "wip" ? "Building" : "Soon"}</span>}
-              <span class="q-arrow">-></span>
-            </a>
-          );
-        })}
+    <section class="h-sec" id="questions">
+      <p class="sec-hd h-sec-hd"><span>Every question, by subject</span><a class="h-aside" href="/articles/">All explainers →</a></p>
+      <div class="h-index">
+        {index.map(({ domain, total, pages }) => (
+          <div class={`dom-${domain.id}`}>
+            <p class="h-index-d"><a href={`/${domain.id}/`}>{domain.label}</a></p>
+            {pages.map((page) => {
+              const st = statusMeta(page.explanation.status);
+              return <a class="h-index-q" href={questionUrl(page, locale)}>{page.question}{st.cls !== "ready" ? <em>In progress</em> : null}</a>;
+            })}
+            {total > pages.length ? <a class="h-index-more" href={`/${domain.id}/`}>All {total} on {domain.label.toLowerCase()} →</a> : null}
+          </div>
+        ))}
       </div>
     </section>
 
-    <section class="section">
-      <p class="sec-hd">Sister project</p>
-      <div class="cards" style="grid-template-columns:1fr">
-        <a class="card atlas-card" href="https://measure.thisindianlife.today/">
-          <div class="tag">Measure of India</div>
-          <h2>India's economy, in numbers</h2>
-          <p class="sub">Guides to prices, jobs, growth, money and trade, and a profile of every state, built from official statistics and checked against the printed source.</p>
-          <span class="arrow">-></span>
-        </a>
-      </div>
+    <section class="h-sec h-promises">
+      <div><b>Every number has a source</b><p>Linked to the exact table it came from, with the vintage and the date we pulled it.</p></div>
+      <div><b>Every chart comes with its data</b><p>SVG for print, PNG for slides, CSV for your own analysis. Free to reuse with credit.</p></div>
+      <div><b>Estimates come as ranges</b><p>When a figure depends on a choice, like where to draw a poverty line, we show the choice.</p></div>
+    </section>
+
+    <section class="h-sec h-sister">
+      <a href="https://measure.thisindianlife.today/"><span class="h-tag">Sister project · Measure of India</span><span class="h-card-q">India’s economy, in numbers</span><span class="h-card-t">Guides to prices, jobs, growth, money and trade, and a profile of every state, built from official statistics and checked against the printed source.</span></a>
     </section>
 
     <Footer locale={locale} />
   </div>
 </Base>
+
+<style>
+  .home .nav{margin-bottom:0}
+  .h-hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:64px;align-items:end;padding:72px 0 44px}
+  .h-title{font-family:var(--serif);font-weight:300;font-size:clamp(4rem,8.6vw,7.4rem);line-height:.94;letter-spacing:-.035em;margin:0}
+  .h-title em{font-style:italic}
+  .h-pitch{display:flex;flex-direction:column;gap:22px;padding-bottom:8px}
+  .h-lede{font-family:var(--serif);font-size:1.45rem;line-height:1.5;color:#1f1f1f}
+  .h-sub{font-family:var(--serif);font-size:1.13rem;line-height:1.55;color:var(--mid)}
+  .h-links{display:flex;gap:22px;align-items:center;font-family:var(--sans);font-size:.875rem}
+  .h-links a:not(.btn){color:var(--mid);text-decoration:none}
+  .h-band{margin:0 0 80px;display:flex;flex-direction:column;gap:14px}
+  .h-band :global(svg){display:block;width:100%;height:auto}
+  .h-band-m{display:none}
+  .h-band figcaption{display:grid;grid-template-columns:minmax(0,1fr) 220px;column-gap:48px;border-top:1px solid var(--rule);padding-top:14px}
+  .h-band-title{font-family:var(--serif);font-size:1.3rem;line-height:1.3;font-weight:500}
+  .h-band-title a{color:var(--hara);text-decoration:none}
+  .h-band-note{font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--mid);margin-top:6px}
+  .h-flag{display:inline-block;width:7px;height:7px;background:var(--sindoor);vertical-align:1px}
+  .h-key{padding-top:6px;max-width:220px}
+  .h-lead-m{display:none}
+  .h-lead{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:72px;border-top:2px solid var(--ink);padding:28px 0 80px}
+  .h-lead-copy{display:flex;flex-direction:column;gap:22px}
+  .h-kick{display:flex;gap:10px;font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+  .h-kick .c{color:var(--sindoor)}
+  .h-lead h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,4vw,3.4rem);line-height:1.03;letter-spacing:-.02em;margin:0}
+  .h-lead h2 a{text-decoration:none;color:inherit}
+  .h-lead-dek{font-family:var(--serif);font-size:1.3rem;line-height:1.5;color:#2e2e2e}
+  .h-lead-meta{display:flex;gap:20px;align-items:center;font-family:var(--sans);font-size:.85rem;color:var(--dim)}
+  .h-lead-fig{margin:0;display:flex;flex-direction:column;gap:12px}
+  .h-lead-fig figcaption{font-family:var(--sans);font-size:.875rem;font-weight:600}
+  .h-lead-fig :global(svg){display:block;width:100%;height:auto}
+  .h-sec{padding-bottom:88px}
+  .h-sec-hd{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+  .h-aside{font-family:var(--sans);font-size:.82rem;letter-spacing:0;text-transform:none;font-weight:400;color:var(--mid);text-decoration:none}
+  .h-ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:40px}
+  .h-ledger a{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit}
+  .h-num{font-family:var(--sans);font-size:2.6rem;line-height:1;font-weight:500;letter-spacing:-.03em;white-space:nowrap}
+  .h-mini{display:block;margin:6px 0 4px}
+  .h-mini :global(svg),.h-thumb :global(svg),.h-pair-thumb :global(svg){display:block;width:100%;height:auto}
+  .h-ledger-t{font-family:var(--serif);font-size:1.06rem;line-height:1.4}
+  .h-meta{font-family:var(--sans);font-size:.8rem;color:var(--dim)}
+  .h-ledger a:hover .h-ledger-t{color:var(--c-ink, #121212);text-decoration:underline;text-decoration-color:#bdbdbd;text-underline-offset:3px}
+  .h-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;row-gap:56px}
+  .h-card,.h-pair,.h-sister a{display:flex;flex-direction:column;gap:14px;text-decoration:none;color:inherit}
+  .h-thumb{height:150px;display:flex;align-items:flex-end}
+  .h-thumb :global(svg){max-height:150px}
+  .h-tag{font-family:var(--sans);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;display:flex;gap:10px}
+  .h-tag em,.h-index-q em{font-style:normal;color:var(--dim);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:.66rem;font-family:var(--sans)}
+  .h-card-q{font-family:var(--serif);font-weight:500;font-size:1.55rem;line-height:1.18;letter-spacing:-.005em}
+  .h-card-t{font-family:var(--serif);font-size:1.06rem;line-height:1.5;color:#3a3a3a}
+  .h-card:hover .h-card-q,.h-pair:hover .h-card-q,.h-sister a:hover .h-card-q{text-decoration:underline;text-decoration-color:#bdbdbd;text-underline-offset:4px;text-decoration-thickness:1px}
+  .h-pairs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;margin-top:64px;padding-top:40px;border-top:1px solid var(--line)}
+  .h-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:28px;align-items:start}
+  .h-pair-copy{display:flex;flex-direction:column;gap:12px}
+  .h-index{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;row-gap:48px}
+  .h-index-d{font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;padding-bottom:12px}
+  .h-index-d a{color:var(--c-ink);text-decoration:none}
+  .h-index-q{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-family:var(--serif);font-size:1.2rem;line-height:1.3;padding:11px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink)}
+  .h-index-q:hover{color:var(--c-ink)}
+  .h-index-more{display:block;font-family:var(--sans);font-size:.85rem;color:var(--mid);text-decoration:none;padding-top:12px;border-top:1px solid var(--line)}
+  .h-promises{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;border-top:1px solid var(--ink);padding-top:28px}
+  .h-promises b{display:block;font-family:var(--sans);font-size:.95rem;font-weight:600;margin-bottom:8px}
+  .h-promises p{font-family:var(--serif);font-size:1.06rem;line-height:1.5;color:#3a3a3a}
+  .h-sister a{border-top:1px solid var(--rule);padding-top:20px;max-width:760px;gap:10px}
+  .h-sister .h-tag{color:var(--mid)}
+  @media(max-width:1000px){
+    .h-hero,.h-lead{grid-template-columns:minmax(0,1fr);row-gap:36px}
+    .h-ledger{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}
+    .h-cards,.h-index{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media(max-width:680px){
+    .h-hero{padding:40px 0 32px}
+    .h-title{font-size:clamp(3.2rem,15vw,4.4rem)}
+    .h-lede{font-size:1.25rem}
+    .h-band-d,.h-lead-d{display:none}
+    .h-band-m,.h-lead-m{display:block}
+    .h-pair-thumb{max-width:300px}
+    .h-band figcaption{grid-template-columns:1fr;row-gap:14px}
+    .h-ledger,.h-cards,.h-pairs,.h-index,.h-promises{grid-template-columns:minmax(0,1fr);row-gap:40px}
+    .h-pair{grid-template-columns:minmax(0,1fr);row-gap:16px}
+    .h-num{font-size:2.3rem}
+    .h-sec{padding-bottom:64px}
+  }
+</style>

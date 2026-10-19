@@ -3,7 +3,8 @@ import type { VisualSpec, LineVisual, LinePanelsVisual, StackVisual, BarVisual, 
 import type { LockedNumber } from "../data/questions";
 import { formatLockedNumber } from "../data/questions";
 import { fileSafe } from "../data/chartDownloads";
-import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, viewBoxAspectRatio } from "../data/chartSvg";
+import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, viewBoxAspectRatio } from "../data/chartSvg";
+import { txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
 
 type ChartExplainer = {
   visualId: string;
@@ -38,9 +39,10 @@ const {
   sectionClass = ""
 } = Astro.props;
 
-// Coral (domain ink) + near-black lead, then softened, harmonised secondaries so
-// multi-line charts read calm rather than rainbow-loud (riso-ink, bright-but-soft).
-const colors = ["var(--c)", "#322e29", "#3f8378", "#cf9a3f", "#7e6ba6", "#b5765c", "#8c8780"];
+// Series order: the domain ink, then ink black, then the three named data inks the
+// domain does not already use (set per domain as --s3..--s5 in indica.css), then grey.
+// A seventh series folds into a light grey rather than inventing a hue.
+const colors = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b3b3b3"];
 const WATERMARK_TEXT = "thisindianlife.today";
 const sourceNames: Record<string, string> = {
   dataforindia: "Data For India",
@@ -88,6 +90,8 @@ const sourceNames: Record<string, string> = {
   nfhs: "NFHS",
   mospi: "MoSPI",
   hces: "MoSPI HCES",
+  "mospi-hces": "MoSPI HCES",
+  srs: "Sample Registration System",
   "lancet-countdown": "Lancet Countdown",
   "heat-vulnerability": "CEEW + MoSPI + NITI + HCES + MCCD",
   "heat-work": "MoSPI + ILOSTAT",
@@ -685,6 +689,13 @@ function niceNum(range: number, round: boolean) {
     : (frac <= 1 ? 1 : frac <= 2 ? 2 : frac <= 5 ? 5 : 10);
   return nf * Math.pow(10, exp);
 }
+/** Like niceScale, but picks the tick count (4 to 6) that leaves the least empty
+ *  headroom above the data, so a series that tops out at 6.6 gets an axis to 7, not 8. */
+function tightScale(lo: number, hi: number) {
+  const options = [4, 5, 6].map((count) => niceScale(lo, hi, count)).filter((s) => s.ticks.length >= 3 && s.ticks.length <= 8);
+  const waste = (s: { min: number; max: number }) => (s.max - hi) / Math.max(1e-9, s.max - s.min) + (lo - s.min) / Math.max(1e-9, s.max - s.min);
+  return options.sort((a, b) => waste(a) - waste(b))[0] ?? niceScale(lo, hi, 5);
+}
 function niceScale(lo: number, hi: number, count = 5) {
   if (!(hi > lo)) hi = lo + 1;
   const step = niceNum(niceNum(hi - lo, false) / Math.max(1, count - 1), true);
@@ -706,11 +717,11 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const isHero = (visual as { size?: string }).size === "hero";
   const width = mobile ? 384 : (twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000));
   const height = mobile ? (isHero ? 406 : 346) : (isHero ? 560 : isLead ? 500 : 360);
-  const baseLeft = mobile ? 46 : isLead ? 86 : 58;
-  const yFontSize = mobile ? 14.5 : isLead ? 21 : 17;
+  const baseLeft = mobile ? 34 : 44;
+  const yFontSize = mobile ? 12 : 13;
   const padRTB = mobile
-    ? { r: visual.lines.length > 1 ? 48 : 12, t: 20, b: 70 }
-    : isLead ? { r: visual.lines.length > 1 ? 156 : 88, t: 38, b: 76 } : { r: visual.lines.length > 1 ? 118 : 48, t: 28, b: 78 };
+    ? { r: visual.lines.length > 1 ? 48 : 40, t: 22, b: 40 }
+    : isLead ? { r: visual.lines.length > 1 ? 156 : 76, t: 34, b: 48 } : { r: visual.lines.length > 1 ? 118 : 64, t: 26, b: 46 };
   // Multi-line charts print each line's latest value to the RIGHT of its end point
   // (.end-mini-v, left-anchored at latestX + offset). Desktop has room for the full
   // value+unit; the narrow mobile box shows the bare number (axis carries the unit) so
@@ -718,20 +729,23 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // of the dynamic LEFT pad below — so nothing clips off the viewBox.
   const endMaxAbs = Math.max(1, ...visual.lines.flatMap((l) => l.points.map((p) => Math.abs(p.value))));
   const endText = (value: number) => endLabelInScale(value, endMaxAbs, visual.unit, mobile, mobile);
-  if (visual.lines.length > 1 || forceEndLabelPad) {
-    const endOffset = mobile ? 12 : 22; // label x offset from the end point (see template)
-    const endFont = mobile ? 12.5 : 17; // .end-mini-v font-size (see indica.css)
+  {
+    void forceEndLabelPad;
+    // Desktop end labels read "Kerala 1.5" (name and value); phones show the value only
+    // and name the series in a key below the chart, so the narrow plot stays wide.
+    const endOffset = mobile ? 9 : 12;
+    const endFont = mobile ? 12 : 13.5;
     const maxEndLabelLen = Math.max(
       3,
       ...visual.lines.map((line) => {
         const v = line.points.at(-1)?.value;
-        return v == null ? 0 : endText(v).length;
+        return v == null ? 0 : endText(v).length + (mobile ? 0 : line.label.length + 1);
       })
     );
     // Mobile end-labels are bare (short), so reserve the gutter tighter — 0.62/8 over-sized
     // it for the now-bare "$17.3", leaving visible empty space between label and card edge.
-    const kerf = mobile ? 0.56 : 0.62;
-    const slack = mobile ? 4 : 8;
+    const kerf = 0.56;
+    const slack = mobile ? 4 : 6;
     padRTB.r = Math.max(padRTB.r, endOffset + Math.round(maxEndLabelLen * endFont * kerf) + slack);
   }
   const all = visual.lines.flatMap((line) => line.points);
@@ -751,7 +765,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // or the lines compress into a thin band; magnitude data (range >> min, e.g. emissions,
   // population) keeps a 0 floor so area height stays meaningful.
   const tight = !bounded && rawMin > 0 && (rawMax - rawMin) < rawMin;
-  const linear = niceScale(scaleMin < 0 ? scaleMin : tight ? scaleMin : 0, scaleMax || 1, 5);
+  const linear = tightScale(scaleMin < 0 ? scaleMin : tight ? scaleMin : 0, scaleMax || 1);
   const min = useLogScale ? Math.log10(logMinRaw) : linear.min;
   const max = useLogScale ? Math.log10(logMaxRaw) : linear.max;
   const span = max - min || 1;
@@ -766,7 +780,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const yLabelText = (tick: number) => mobile ? splitUnitLabel(fmt(tick, visual.unit), refLabel).bare : fmt(tick, visual.unit);
   const maxYLabelLen = Math.max(3, ...ticks.map((tick) => yLabelText(tick).length));
   const unitCaption = mobile ? yUnitCaption(ticks, visual.unit) : "";
-  // 0.6em/char tracks DM Sans/RupeeSans (light) closely; the old 0.78 over-reserved the
+  // 0.6em/char tracks Schibsted Grotesk closely; the old 0.78 over-reserved the
   // left gutter by ~70px on long labels ("40 million"), leaving a visible empty band.
   const pad = { l: Math.max(baseLeft, Math.round(maxYLabelLen * yFontSize * 0.6) + 14), ...padRTB };
   // The unit caption sits in its own row ABOVE the top tick, so give it headroom — without
@@ -813,7 +827,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     const latestY = latest ? y(latest.value) : 0;
     return { ...line, d, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: line.color ?? colors[lineIndex % colors.length] };
   });
-  const minGap = mobile ? 22 : isLead ? 38 : 28;
+  const minGap = mobile ? 15 : 18;
   const labelTop = pad.t + 14;
   const labelBottom = height - pad.b - 10;
   const sorted = pathsRaw
@@ -937,6 +951,94 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       .map((i) => ({ xPos: xByIndex(i, ap.length), label: visual.xLabels?.[i] ?? formatAxisLabel(ap[i].date) }));
   }
   return { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime, unitCaption };
+}
+
+/** The Almanac line chart. Values are written on the lines (no floating headline
+ *  number), series are named at their ends in their own ink, gridlines are hairlines,
+ *  emphasised series are heavier than context series, and a reference line is named
+ *  beside itself. Returns the full <svg> as a string for set:html. */
+function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o: { isLead: boolean; mobile: boolean; chartId: string; cls: string }) {
+  const { width, height, pad } = g, m = o.mobile, n = visual.lines.length, single = n === 1;
+  const axisSize = m ? 12 : 13, labSize = m ? 12 : 13.5;
+  const plotB = height - pad.b, plotR = width - pad.r;
+  let b = "";
+  let lastBandLabel = -Infinity;
+  for (const band of lineBandRects(visual, g)) {
+    const showLabel = band.label && band.x - lastBandLabel > (m ? 70 : 110);
+    if (showLabel) lastBandLabel = band.x;
+    b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
+    if (showLabel) b += almTxt(band.x + band.w / 2, pad.t + 12, band.label!, { size: m ? 10.5 : 11.5, fill: "#a63d24", anchor: "middle" });
+  }
+  if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: 11.5, fill: "#8a8a8a" });
+  g.ticks.forEach((tick, ti) => {
+    const yy = g.y(tick), base = ti === 0;
+    b += almLine(pad.l, yy, plotR, yy, base ? "#121212" : "#ededed", base ? 1 : 1);
+    b += `<text class="yaxt" x="${svgCoord(pad.l - 10)}" y="${svgCoord(yy + 4)}" text-anchor="end">${yTickLabel(tick, ti, g.ticks, visual.unit, m)}</text>`;
+  });
+  for (const t of g.axisTicks) {
+    b += almLine(t.xPos, plotB, t.xPos, plotB + 5, "#121212", 1);
+    b += `<text class="xaxt" x="${svgCoord(t.xPos)}" y="${svgCoord(plotB + (m ? 19 : 21))}" text-anchor="${axisTextAnchor(t.xPos, width, pad)}">${t.label}</text>`;
+  }
+  const ref = visual.refLine;
+  if (ref) {
+    const ry = g.y(ref.value);
+    if (ry >= pad.t && ry <= plotB) {
+      b += almLine(pad.l, ry, plotR, ry, "#4f4f4f", 0.9, "4 3");
+      b += almHalo(pad.l + 8, Math.max(pad.t + 12, ry - 7), ref.label, { size: m ? 11 : 12.5, fill: "#4f4f4f" });
+    }
+  }
+  // context series first, emphasised series on top
+  const order = g.paths.map((p, i) => ({ p, i })).sort((a, z) => Number(Boolean(a.p.emphasis)) - Number(Boolean(z.p.emphasis)));
+  const hasEmph = g.paths.some((p) => p.emphasis);
+  for (const { p, i } of order) {
+    const w = single ? (o.isLead ? 2.6 : 2.2) : p.emphasis ? 2.6 : hasEmph || n > 3 ? 1.6 : 2;
+    // A wash under a single series, only when the axis starts at zero so the area means something.
+    if (single && g.ticks[0] === 0 && p.points.length > 2) {
+      const gid = `ga-${o.chartId}-${m ? "m" : "d"}`;
+      b += `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p.color}" stop-opacity="0.14"/><stop offset="1" stop-color="${p.color}" stop-opacity="0.01"/></linearGradient></defs><path d="${p.areaD}" fill="url(#${gid})"/>`;
+    }
+    b += `<path d="${p.d}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"${p.dash ? ` stroke-dasharray="4 3"` : ""}${!single && hasEmph && !p.emphasis ? ` stroke-opacity="0.85"` : ""}><title>${p.label}</title></path>`;
+    void i;
+  }
+  for (const p of g.paths) {
+    if (!p.latest) continue;
+    b += `<circle cx="${svgCoord(p.latestX)}" cy="${svgCoord(p.latestY)}" r="${single ? (m ? 4 : 4.5) : m ? 3 : 3.5}" fill="${p.color}" stroke="#fff" stroke-width="${m ? 1.5 : 2}"/>`;
+    if (single) {
+      // the latest value, written beside its point
+      const lx = p.latestX + (m ? 8 : 10);
+      b += almTxt(lx, p.latestY + 5, p.endLabelText, { size: m ? 13 : 15, fill: "#121212", weight: 600 });
+      b += almTxt(lx, p.latestY + (m ? 19 : 22), String(p.latest.date).slice(0, 7), { size: m ? 10.5 : 11.5, fill: "#8a8a8a" });
+      const first = p.points[0];
+      if (first && p.points.length > 5 && g.dateMode) {
+        const fx = pad.l + 2, fy = g.y(first.value);
+        b += `<circle cx="${svgCoord(pad.l)}" cy="${svgCoord(fy)}" r="${m ? 3 : 3.5}" fill="${p.color}" stroke="#fff" stroke-width="1.5"/>`;
+        const maxAbs = Math.max(1e-9, ...p.points.map((q) => Math.abs(q.value)));
+        b += almHalo(fx + 6, Math.max(pad.t + 10, fy - 10), `${endLabelInScale(first.value, maxAbs, visual.unit, m, m)} in ${String(first.date).slice(0, 4)}`, { size: m ? 11.5 : 13, fill: "#121212", weight: 600 });
+      }
+    } else {
+      const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + (m ? 9 : 12);
+      if (moved) b += `<path d="M${svgCoord(p.latestX + 4)} ${svgCoord(p.latestY)}L${svgCoord(lx - 3)} ${svgCoord(ly - 4)}" fill="none" stroke="${p.color}" stroke-width="0.8" stroke-opacity="0.6"/>`;
+      b += m
+        ? almTxt(lx, ly, p.endLabelText, { size: labSize, fill: p.color, weight: 600 })
+        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}"><tspan fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${p.label}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
+    }
+  }
+  void axisSize;
+  // Hover data for the crosshair (article-actions.js): each series' points in viewBox
+  // coordinates with a formatted value and date. Parsed back from the drawn path so the
+  // hover sits exactly on the line. Long daily series are thinned to about 600 points.
+  const hover = {
+    plot: [pad.l, pad.t, plotR, plotB],
+    series: g.paths.map((p) => {
+      const xy = [...p.d.matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map((mm) => [Number(mm[1]), Number(mm[2])]);
+      const maxAbs = Math.max(1e-9, ...p.points.map((q) => Math.abs(q.value)));
+      const step = Math.max(1, Math.ceil(p.points.length / 600));
+      const pts = p.points.map((q, k) => [xy[k]?.[0] ?? 0, xy[k]?.[1] ?? 0, endLabelInScale(q.value, maxAbs, visual.unit, false, false), String(q.date)]).filter((_, k) => k % step === 0 || k === p.points.length - 1);
+      return { label: p.label, color: p.color, pts };
+    }),
+  };
+  const hoverAttr = JSON.stringify(hover).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+  return `<svg class="${o.cls}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${visual.title.replace(/"/g, "&quot;")}" data-hover="${hoverAttr}">${b}</svg>`;
 }
 
 /** Shaded event bands (e.g. El Niño years) for a time-axis line chart. Each band is
@@ -1164,6 +1266,39 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         const fileName = fileSafe(visual.title);
         const chartId = `viz-${fileName}-${visualIndex + 1}`;
         const note = chartNotes[visualIndex];
+        if (visual.kind === "almanac") {
+          return (
+            <article class={`${cardClass(visualIndex, visual, leadFirst)} alm-card alm-${visual.form}`}>
+              <div class="viz-head">
+                <div><h2 class="serif">{visual.title}</h2>{visual.subtitle ? <p>{cleanSubtitle(visual.subtitle, source.sourceId)}</p> : null}</div>
+                <span>{visual.unit}</span>
+              </div>
+              <div class="viz-actions" id={chartId} data-file={fileName} data-csv-url={`${chartDownloadBase}/${fileName}.csv`}>
+                <button type="button" data-viz-action="svg">SVG</button>
+                <button type="button" data-viz-action="png">PNG</button>
+                <button type="button" data-viz-action="csv">CSV</button>
+                <button type="button" data-viz-action="share">Share</button>
+              </div>
+              <Fragment set:html={visual.svg} />
+              <Fragment set:html={visual.svgM} />
+              {visual.stat ? <p class="alm-stat">{visual.stat}</p> : null}
+              <div class="chart-note">
+                <p class="cn-take serif">{note.takeaway}</p>
+                {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
+                <div class="cn-meta">
+                  {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
+                  <p><b>How to read</b><span>{note.howToRead}</span></p>
+                  <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p>
+                  {note.mobileNote ? <p class="cn-mobile"><b>On a small screen</b><span>{note.mobileNote}</span></p> : null}
+                </div>
+              </div>
+              <div class="viz-source">
+                <span>Source</span>
+                {source.sourceUrl ? <a href={source.sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
+              </div>
+            </article>
+          );
+        }
         if (visual.kind === "line") {
           const size = (visual as { size?: string }).size;
           const isLead = size === "hero" || (leadFirst && visualIndex === 0 && !size);
@@ -1173,19 +1308,6 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const isLarge = isLead || size === "feature" || (visualIndex === 0 && leadFirst && !size && visual.lines.length > 1);
           const g = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"));
           const gm = lineGeometry(visual as LineVisual, isLarge, sectionClass.includes("story-leftover"), undefined, true);
-          const leadPoint = visual.lines[0]?.points.at(-1);
-          const showLeadPoint = leadPoint && /^-?\d{3,4}/.test(String(leadPoint.date));
-          const leadPointLabel = leadPoint
-            ? [visual.lines.length > 1 ? visual.lines[0]?.label : "", leadPoint.date, "latest point"].filter(Boolean).join(" · ")
-            : "";
-          const refLine = (visual as LineVisual).refLine;
-          const refLabelY = (geom: typeof g) => {
-            const nearLine = geom.y(refLine?.value ?? 0) - 7;
-            const topSlot = geom.pad.t + 18;
-            return visual.lines.length === 1
-              ? Math.max(geom.pad.t + 16, Math.min(geom.height - geom.pad.b - 12, nearLine))
-              : topSlot;
-          };
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head">
@@ -1198,118 +1320,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              {showLeadPoint ? (
-                <div class={isLead ? "viz-lead-number" : "viz-line-number"}>
-                  <span>{fmt(leadPoint.value, visual.unit)}</span>
-                  <p>{leadPointLabel}</p>
-                </div>
-              ) : null}
-              <svg class={isLead ? "viz-svg viz-svg-lead viz-d" : "viz-svg viz-d"} viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={visual.title}>
-                {lineBandRects(visual as LineVisual, g).map((b, i) => (
-                  <g>
-                    <rect x={b.x} y={g.pad.t} width={b.w} height={g.height - g.pad.t - g.pad.b} fill="rgba(211,80,58,0.10)">
-                      {b.label ? <title>{b.label}</title> : null}
-                    </rect>
-                    {b.label ? <text x={b.x + b.w / 2} y={g.pad.t + 14} text-anchor="middle" font-size="12.5" fill="#b06a4f">{b.label}</text> : null}
-                  </g>
-                ))}
-                {g.ticks.map((tick, ti) => (
-                  <g>
-                    {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, visual.unit)}</text>
-                  </g>
-                ))}
-                {g.axisTicks.map((tick) => (
-                  <text class="xaxt" x={tick.xPos} y={g.height - g.pad.b + 24} text-anchor={axisTextAnchor(tick.xPos, g.width, g.pad)}>{tick.label}</text>
-                ))}
-                {refLine ? (
-                  <g>
-                    <line x1={g.pad.l} y1={g.y(refLine.value)} x2={g.width - g.pad.r} y2={g.y(refLine.value)} stroke="#b8b2a8" stroke-width="1.2" stroke-dasharray="5 4" />
-                    <text class="ref-label" x={g.pad.l + 12} y={refLabelY(g)} text-anchor="start">{refLine.label}</text>
-                  </g>
-                ) : null}
-                {g.paths.map((path) => (
-                  <>
-                    {isLead && visual.lines.length === 1 ? (
-                      <>
-                        <defs>
-                          <linearGradient id={`area-${chartId}-d`} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color={path.color} stop-opacity="0.18" />
-                            <stop offset="78%" stop-color={path.color} stop-opacity="0" />
-                          </linearGradient>
-                        </defs>
-                        <path d={path.areaD} fill={`url(#area-${chartId}-d)`} />
-                      </>
-                    ) : null}
-                    <path d={path.d} fill="none" stroke={path.color} stroke-width={(isLead ? g.width * 0.00375 : g.width * 0.003).toFixed(2)} opacity="1" stroke-dasharray={path.dash ? "3 3" : undefined} stroke-linecap="round" stroke-linejoin="round" />
-                    {path.latest && (
-                      <g>
-                        <circle cx={path.latestX} cy={path.latestY} r={isLead ? "7" : "5"} fill="#fff" stroke={path.color} stroke-width={isLead ? "4" : "3"} />
-	                        {/*
-	                          Single-line hero charts already show the latest value as the
-	                          large lead number above the plot. Repeating it beside the
-	                          endpoint crowds the marker and looks like a stray axis tick.
-	                        */}
-                        {visual.lines.length > 1 ? (
-                          <>
-                            <line x1={path.latestX + 6} y1={path.latestY} x2={path.latestX + 18} y2={path.labelY - 3} stroke={path.color} stroke-width="1.2" opacity=".4" />
-                            <text class="end-mini-v" x={path.latestX + 22} y={path.labelY} fill={path.color} font-weight={path.emphasis ? "700" : undefined}>{path.endLabelText}</text>
-                          </>
-                        ) : null}
-                      </g>
-                    )}
-                  </>
-                ))}
-                <text class="chart-watermark" x={g.width - 16} y={g.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
-              <svg class={isLead ? "viz-svg viz-svg-lead viz-m" : "viz-svg viz-m"} viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={visual.title}>
-                {lineBandRects(visual as LineVisual, gm).map((b, i) => (
-                  <g>
-                    <rect x={b.x} y={gm.pad.t} width={b.w} height={gm.height - gm.pad.t - gm.pad.b} fill="rgba(211,80,58,0.10)" />
-                    {b.label ? <text x={b.x + b.w / 2} y={gm.pad.t + 12} text-anchor="middle" font-size="10.5" fill="#b06a4f">{b.label}</text> : null}
-                  </g>
-                ))}
-                {gm.unitCaption ? <text class="yaxt" x={2} y={gm.pad.t - 18} style="font-size:12px;letter-spacing:.03em;opacity:.9">{gm.unitCaption}</text> : null}
-                {gm.ticks.map((tick, ti) => (
-                  <g>
-                    {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, visual.unit, true)}</text>
-                  </g>
-                ))}
-                {gm.axisTicks.map((tick) => (
-                  <text class="xaxt" x={tick.xPos} y={gm.height - gm.pad.b + 22} text-anchor={axisTextAnchor(tick.xPos, gm.width, gm.pad)}>{tick.label}</text>
-                ))}
-                {refLine ? (
-                  <g>
-                    <line x1={gm.pad.l} y1={gm.y(refLine.value)} x2={gm.width - gm.pad.r} y2={gm.y(refLine.value)} stroke="#b8b2a8" stroke-width="1" stroke-dasharray="5 4" />
-                    <text class="ref-label" x={gm.pad.l + 9} y={visual.lines.length === 1 ? Math.max(gm.pad.t + 14, Math.min(gm.height - gm.pad.b - 10, gm.y(refLine.value) - 6)) : gm.pad.t + 16} text-anchor="start">{refLine.label}</text>
-                  </g>
-                ) : null}
-                {gm.paths.map((path) => (
-                  <>
-                    {isLead && visual.lines.length === 1 ? <path d={path.areaD} fill="var(--c-tint)" /> : null}
-                    <path d={path.d} fill="none" stroke={path.color} stroke-width={isLead ? "3.5" : "2.9"} opacity="1" stroke-dasharray={path.dash ? "3 3" : undefined} stroke-linecap="round" stroke-linejoin="round" />
-                    {path.latest && (
-                      <g>
-                        <circle cx={path.latestX} cy={path.latestY} r={isLead ? "5" : "4"} fill="#fff" stroke={path.color} stroke-width={isLead ? "3" : "2.4"} />
-	                        {/*
-	                          See desktop note above: the lead number carries the endpoint
-	                          value, so keep the mobile marker clean too.
-	                        */}
-                        {visual.lines.length > 1 ? (
-                          <>
-                            <line x1={path.latestX + 4} y1={path.latestY} x2={path.latestX + 10} y2={path.labelY - 2} stroke={path.color} stroke-width="1" opacity=".4" />
-                            <text class="end-mini-v" x={path.latestX + 12} y={path.labelY} fill={path.color} font-weight={path.emphasis ? "700" : undefined}>{path.endLabelText}</text>
-                          </>
-                        ) : null}
-                      </g>
-                    )}
-                  </>
-                ))}
-                <text class="chart-watermark" x={gm.width - 12} y={gm.height - 10} text-anchor="end">{WATERMARK_TEXT}</text>
-              </svg>
+              <Fragment set:html={renderLineSvg(visual as LineVisual, g, { isLead, mobile: false, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-d alm-line" : "viz-svg viz-d alm-line" })} />
+              <Fragment set:html={renderLineSvg(visual as LineVisual, gm, { isLead, mobile: true, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-m alm-line" : "viz-svg viz-m alm-line" })} />
               {visual.lines.length > 1 && (
-                <div class="viz-legend">
+                // Desktop names each line at its end; phones show values only, so the key
+                // appears there, and on desktop only when there are too many lines to label.
+                <div class={`viz-legend ${visual.lines.length > 7 ? "" : "viz-legend-m"}`}>
                   {visual.lines.map((line, index) => <span><i style={`background:${line.color ?? colors[index % colors.length]}`}></i>{line.label}</span>)}
                 </div>
               )}
@@ -1351,20 +1367,20 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <svg class="viz-svg viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={lc.title}>
                 {g.gapRect ? (
                   <g>
-                    <rect x={g.gapRect.x} y={g.plotTop} width={g.gapRect.w} height={g.plotBottom - g.plotTop} fill="rgba(211,80,58,0.10)" />
-                    {g.gapRect.label ? <text x={g.gapRect.x + g.gapRect.w / 2} y={g.plotTop + 14} text-anchor="middle" font-size="12.5" fill="#b06a4f">{g.gapRect.label}</text> : null}
+                    <rect x={g.gapRect.x} y={g.plotTop} width={g.gapRect.w} height={g.plotBottom - g.plotTop} fill="rgba(194,74,46,0.08)" />
+                    {g.gapRect.label ? <text x={g.gapRect.x + g.gapRect.w / 2} y={g.plotTop + 14} text-anchor="middle" font-size="12.5" fill="#a63d24">{g.gapRect.label}</text> : null}
                   </g>
                 ) : null}
                 {g.yTicks.map((tick, ti) => (
                   <g>
-                    <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} />
+                    <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} />
                     <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{fmt(tick, lc.unit)}</text>
                   </g>
                 ))}
                 {g.xTickHours.map((h) => (
                   <text class="xaxt" x={g.x(h)} y={g.height - g.pad.b + 24} text-anchor="middle">{hourLabel(h)}</text>
                 ))}
-                {g.peakX !== null ? <line x1={g.peakX} y1={g.plotTop} x2={g.peakX} y2={g.plotBottom} stroke="#b8b2a8" stroke-width="1.2" stroke-dasharray="5 4" /> : null}
+                {g.peakX !== null ? <line x1={g.peakX} y1={g.plotTop} x2={g.peakX} y2={g.plotBottom} stroke="#8a8a8a" stroke-width="1.2" stroke-dasharray="5 4" /> : null}
                 {g.paths.map((path) => (
                   <>
                     {path.area ? <path d={path.areaD} fill={path.color} opacity="0.12" /> : null}
@@ -1377,20 +1393,20 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <svg class="viz-svg viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={lc.title}>
                 {gm.gapRect ? (
                   <g>
-                    <rect x={gm.gapRect.x} y={gm.plotTop} width={gm.gapRect.w} height={gm.plotBottom - gm.plotTop} fill="rgba(211,80,58,0.10)" />
-                    {gm.gapRect.label ? <text x={gm.gapRect.x + gm.gapRect.w / 2} y={gm.plotTop + 12} text-anchor="middle" font-size="10.5" fill="#b06a4f">{gm.gapRect.label}</text> : null}
+                    <rect x={gm.gapRect.x} y={gm.plotTop} width={gm.gapRect.w} height={gm.plotBottom - gm.plotTop} fill="rgba(194,74,46,0.08)" />
+                    {gm.gapRect.label ? <text x={gm.gapRect.x + gm.gapRect.w / 2} y={gm.plotTop + 12} text-anchor="middle" font-size="10.5" fill="#a63d24">{gm.gapRect.label}</text> : null}
                   </g>
                 ) : null}
                 {gm.yTicks.map((tick, ti) => (
                   <g>
-                    <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} />
+                    <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} />
                     <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{fmt(tick, lc.unit)}</text>
                   </g>
                 ))}
                 {gm.xTickHours.map((h) => (
                   <text class="xaxt" x={gm.x(h)} y={gm.height - gm.pad.b + 22} text-anchor="middle">{hourLabel(h)}</text>
                 ))}
-                {gm.peakX !== null ? <line x1={gm.peakX} y1={gm.plotTop} x2={gm.peakX} y2={gm.plotBottom} stroke="#b8b2a8" stroke-width="1" stroke-dasharray="5 4" /> : null}
+                {gm.peakX !== null ? <line x1={gm.peakX} y1={gm.plotTop} x2={gm.peakX} y2={gm.plotBottom} stroke="#8a8a8a" stroke-width="1" stroke-dasharray="5 4" /> : null}
                 {gm.paths.map((path) => (
                   <>
                     {path.area ? <path d={path.areaD} fill={path.color} opacity="0.12" /> : null}
@@ -1451,7 +1467,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                       <svg class="viz-svg viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={`${lp.title}: ${panel.label}`}>
                         {g.ticks.map((tick, ti) => (
                           <g>
-                            {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
+                            {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
                             <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, lp.unit)}</text>
                           </g>
                         ))}
@@ -1476,7 +1492,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         {gm.unitCaption ? <text class="yaxt" x={2} y={gm.pad.t - 18} style="font-size:12px;letter-spacing:.03em;opacity:.9">{gm.unitCaption}</text> : null}
                         {gm.ticks.map((tick, ti) => (
                           <g>
-                            {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
+                            {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
                             <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, lp.unit, true)}</text>
                           </g>
                         ))}
@@ -1536,19 +1552,19 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="share">Share</button>
               </div>
               <svg class="viz-svg scatter-plot viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={scatter.title}>
-                <rect x={g.x(70)} y={g.pad.t} width={g.width - g.pad.r - g.x(70)} height={g.y(80) - g.pad.t} fill="rgba(211,80,58,0.08)" />
+                <rect x={g.x(70)} y={g.pad.t} width={g.width - g.pad.r - g.x(70)} height={g.y(80) - g.pad.t} fill="rgba(194,74,46,0.07)" />
                 <text class="scatter-zone" x={g.x(72)} y={g.y(96)}>Hardest to endure</text>
                 <text class="scatter-zone scatter-zone-muted" x={g.x(4)} y={g.y(96)}>Low heat risk, low cooling</text>
                 {g.ticks.map((tick, ti) => (
                   <g>
-                    {ti < g.ticks.length - 1 ? <line x1={g.x(tick)} y1={g.pad.t} x2={g.x(tick)} y2={g.height - g.pad.b} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
+                    {ti < g.ticks.length - 1 ? <line x1={g.x(tick)} y1={g.pad.t} x2={g.x(tick)} y2={g.height - g.pad.b} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
+                    {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
                     <text class="xaxt" x={g.x(tick)} y={g.height - g.pad.b + 24} text-anchor="middle">{tick}%</text>
                     <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{tick}%</text>
                   </g>
                 ))}
-                <line x1={g.x(70)} y1={g.pad.t} x2={g.x(70)} y2={g.height - g.pad.b} stroke="rgba(211,80,58,0.34)" stroke-dasharray="7 7" />
-                <line x1={g.pad.l} y1={g.y(80)} x2={g.width - g.pad.r} y2={g.y(80)} stroke="rgba(211,80,58,0.34)" stroke-dasharray="7 7" />
+                <line x1={g.x(70)} y1={g.pad.t} x2={g.x(70)} y2={g.height - g.pad.b} stroke="rgba(194,74,46,0.4)" stroke-dasharray="7 7" />
+                <line x1={g.pad.l} y1={g.y(80)} x2={g.width - g.pad.r} y2={g.y(80)} stroke="rgba(194,74,46,0.4)" stroke-dasharray="7 7" />
                 {scatter.points.map((point) => {
                   const cx = g.x(point.x);
                   const cy = g.y(point.y);
@@ -1559,12 +1575,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   const mpce = typeof point.meta?.ruralMpce === "number" ? `, rural MPCE ${fmt(point.meta.ruralMpce, "Rs per person per month")}` : "";
                   return (
                     <g>
-                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(211,80,58,0.72)" : "rgba(63,131,120,0.62)"} stroke="#fff" stroke-width="2">
+                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(194,74,46,0.78)" : "rgba(51,72,154,0.62)"} stroke="#fff" stroke-width="2">
                         <title>{`${point.label}: heat risk ${fmt(point.x, "%")}%, without cooling proxy ${fmt(point.y, "%")}%, MPI ${fmt(point.size || 0, "%")}%${mpce}`}</title>
                       </circle>
                       {label && placement ? (
                         <>
-                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#aaa" stroke-width="1" />
+                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#9a9a9a" stroke-width="1" />
                           <text class="point-label" x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"}>{placement.text}</text>
                         </>
                       ) : null}
@@ -1576,17 +1592,17 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <text class="chart-watermark" x={g.width - 16} y={g.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               <svg class="viz-svg scatter-plot viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={scatter.title}>
-                <rect x={gm.x(70)} y={gm.pad.t} width={gm.width - gm.pad.r - gm.x(70)} height={gm.y(80) - gm.pad.t} fill="rgba(211,80,58,0.08)" />
+                <rect x={gm.x(70)} y={gm.pad.t} width={gm.width - gm.pad.r - gm.x(70)} height={gm.y(80) - gm.pad.t} fill="rgba(194,74,46,0.07)" />
                 {gm.ticks.map((tick, ti) => (
                   <g>
-                    {ti < gm.ticks.length - 1 ? <line x1={gm.x(tick)} y1={gm.pad.t} x2={gm.x(tick)} y2={gm.height - gm.pad.b} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
-                    {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
+                    {ti < gm.ticks.length - 1 ? <line x1={gm.x(tick)} y1={gm.pad.t} x2={gm.x(tick)} y2={gm.height - gm.pad.b} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
+                    {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
                     <text class="xaxt" x={gm.x(tick)} y={gm.height - gm.pad.b + 22} text-anchor="middle">{tick}%</text>
                     <text class="yaxt" x={gm.pad.l - 10} y={gm.y(tick) + 4} text-anchor="end">{tick}%</text>
                   </g>
                 ))}
-                <line x1={gm.x(70)} y1={gm.pad.t} x2={gm.x(70)} y2={gm.height - gm.pad.b} stroke="rgba(211,80,58,0.34)" stroke-dasharray="6 6" />
-                <line x1={gm.pad.l} y1={gm.y(80)} x2={gm.width - gm.pad.r} y2={gm.y(80)} stroke="rgba(211,80,58,0.34)" stroke-dasharray="6 6" />
+                <line x1={gm.x(70)} y1={gm.pad.t} x2={gm.x(70)} y2={gm.height - gm.pad.b} stroke="rgba(194,74,46,0.4)" stroke-dasharray="6 6" />
+                <line x1={gm.pad.l} y1={gm.y(80)} x2={gm.width - gm.pad.r} y2={gm.y(80)} stroke="rgba(194,74,46,0.4)" stroke-dasharray="6 6" />
                 {scatter.points.map((point) => {
                   const cx = gm.x(point.x);
                   const cy = gm.y(point.y);
@@ -1597,12 +1613,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   const mpce = typeof point.meta?.ruralMpce === "number" ? `, rural MPCE ${fmt(point.meta.ruralMpce, "Rs per person per month")}` : "";
                   return (
                     <g>
-                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(211,80,58,0.72)" : "rgba(63,131,120,0.62)"} stroke="#fff" stroke-width="1.6">
+                      <circle cx={cx} cy={cy} r={radius} fill={vulnerable ? "rgba(194,74,46,0.78)" : "rgba(51,72,154,0.62)"} stroke="#fff" stroke-width="1.6">
                         <title>{`${point.label}: heat risk ${fmt(point.x, "%")}%, without cooling proxy ${fmt(point.y, "%")}%, MPI ${fmt(point.size || 0, "%")}%${mpce}`}</title>
                       </circle>
                       {label && placement ? (
                         <>
-                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#aaa" stroke-width="1" />
+                          <line x1={placement.lineX1} y1={placement.lineY1} x2={placement.lineX2} y2={placement.y - 3} stroke="#9a9a9a" stroke-width="1" />
                           <text class="point-label" x={placement.x} y={placement.y} text-anchor={placement.side === "left" ? "end" : "start"}>{placement.text}</text>
                         </>
                       ) : null}
@@ -1614,8 +1630,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <text class="chart-watermark" x={gm.width - 12} y={gm.height - 8} text-anchor="end">{WATERMARK_TEXT}</text>
               </svg>
               <div class="viz-legend">
-                <span><i style="background:rgba(211,80,58,0.72)"></i>High heat risk + little cooling</span>
-                <span><i style="background:rgba(63,131,120,0.62)"></i>Other states</span>
+                <span><i style="background:rgba(194,74,46,0.78)"></i>High heat risk + little cooling</span>
+                <span><i style="background:rgba(51,72,154,0.62)"></i>Other states</span>
                 {scatter.sizeLabel ? <span>{scatter.sizeLabel}</span> : null}
               </div>
               <div class="chart-note">
@@ -1645,13 +1661,13 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
             <svg class={`viz-svg scatter-plot ${mobile ? "viz-m" : "viz-d"}`} viewBox={`0 0 ${geo.width} ${geo.height}`} role="img" aria-label={sc.title}>
               {geo.xTicks.map((tick, ti) => (
                 <g>
-                  <line x1={geo.x(tick)} y1={geo.pad.t} x2={geo.x(tick)} y2={geo.height - geo.pad.b} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} />
+                  <line x1={geo.x(tick)} y1={geo.pad.t} x2={geo.x(tick)} y2={geo.height - geo.pad.b} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} />
                   <text class="xaxt" x={geo.x(tick)} y={geo.height - geo.pad.b + (mobile ? 20 : 24)} text-anchor="middle">{scatterTick(tick, sc.xLabel)}</text>
                 </g>
               ))}
               {geo.yTicks.map((tick) => (
                 <g>
-                  <line x1={geo.pad.l} y1={geo.y(tick)} x2={geo.width - geo.pad.r} y2={geo.y(tick)} stroke="#f1f0ed" />
+                  <line x1={geo.pad.l} y1={geo.y(tick)} x2={geo.width - geo.pad.r} y2={geo.y(tick)} stroke="#ededed" />
                   <text class="yaxt" x={geo.pad.l - 10} y={geo.y(tick) + 4} text-anchor="end">{scatterTick(tick, sc.yLabel)}</text>
                 </g>
               ))}
@@ -1666,7 +1682,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 const cy = geo.y(point.y);
                 const isIndia = point.label === "India";
                 const radius = isIndia ? (mobile ? 6 : 8) : point.highlight ? (mobile ? 4.5 : 6) : (mobile ? 2.6 : 3.4);
-                const fill = isIndia ? "#b3245a" : point.highlight ? "rgba(179,36,90,0.5)" : "rgba(138,133,151,0.4)";
+                const fill = isIndia ? "var(--sindoor)" : point.highlight ? "rgba(194,74,46,0.5)" : "rgba(138,138,138,0.45)";
                 const placement = geo.labelPositions.get(point.label) || null;
                 // Draw a faint leader line when the label sits noticeably off its dot,
                 // so a displaced label reads as attached rather than floating in space.
@@ -1703,9 +1719,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               {renderPlot(g, false)}
               {renderPlot(gm, true)}
               <div class="viz-legend">
-                {hasIndiaPoint ? <span><i style="background:#b3245a"></i>India</span> : null}
-                <span><i style="background:rgba(179,36,90,0.5)"></i>{hasIndiaPoint ? "Selected comparators" : `Highlighted ${sc.entityNoun}`}</span>
-                <span><i style="background:rgba(138,133,151,0.4)"></i>{hasIndiaPoint ? "Other countries" : `Other ${sc.entityNoun}`}</span>
+                {hasIndiaPoint ? <span><i style="background:var(--sindoor)"></i>India</span> : null}
+                <span><i style="background:rgba(194,74,46,0.5)"></i>{hasIndiaPoint ? "Selected comparators" : `Highlighted ${sc.entityNoun}`}</span>
+                <span><i style="background:rgba(138,138,138,0.45)"></i>{hasIndiaPoint ? "Other countries" : `Other ${sc.entityNoun}`}</span>
               </div>
               <div class="chart-note">
                 <p class="cn-take serif">{note.takeaway}</p>
@@ -1797,7 +1813,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               </div>
               <div class="viz-bars">
                 {stack.segments.map((segment, index) => (
-                  <div class="viz-bar"><span>{segment.label}</span><div class="viz-bar-track"><i style={`width:${(segment.value / maxSegment) * 100}%;background:${colors[index % colors.length]}`}></i></div><b>{fmt(segment.value, stack.unit)}</b></div>
+                  <div class="viz-bar viz-bar-inline"><span>{segment.label}</span><div class="viz-bar-track"><i style={`width:${(segment.value / maxSegment) * 100}%;background:${colors[index % colors.length]}`}></i><b>{fmt(segment.value, stack.unit)}</b></div></div>
                 ))}
               </div>
               <div class="chart-note">
@@ -1886,18 +1902,29 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   // a floor of 1, since a correlation of 1 is its meaningful ceiling.
                   const groupScaleFloor = /correlation/i.test(bar.unit) ? 1 : 0;
                   const groupMax = Math.max(groupScaleFloor, 1, ...bar.bars.map((item) => Math.abs(item.value)));
+                  const groupNeg = bar.bars.some((item) => item.value < 0);
                   return (
                     <div class="viz-bar-group">
                       <h3>{group}</h3>
                       <div class="viz-bars">
                         {items.map((item) => (
-                          <div class="viz-bar">
-                            <span>{item.label}</span>
-                            <div class="viz-bar-track">
-                              <i style={`width:${(item.value / groupMax) * 100}%`}></i>
+                          groupNeg ? (
+                            <div class="viz-bar">
+                              <span>{item.label}</span>
+                              <div class="viz-bar-track bipolar">
+                                <i class={item.value < 0 ? "neg" : ""} style={`width:${Math.max(1, (Math.abs(item.value) / groupMax) * 50)}%;margin-left:${item.value < 0 ? 50 - (Math.abs(item.value) / groupMax) * 50 : 50}%;`}></i>
+                              </div>
+                              <b>{fmt(item.value, bar.unit)}</b>
                             </div>
-                            <b>{fmt(item.value, bar.unit)}</b>
-                          </div>
+                          ) : (
+                            <div class="viz-bar viz-bar-inline">
+                              <span>{item.label}</span>
+                              <div class="viz-bar-track">
+                                <i style={`width:${(item.value / groupMax) * 100}%`}></i>
+                                <b>{fmt(item.value, bar.unit)}</b>
+                              </div>
+                            </div>
+                          )
                         ))}
                       </div>
                     </div>
@@ -1907,7 +1934,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               ) : !isStrip ? (
               <div class="viz-bars">
                 {bar.bars.map((item) => (
-                  <div class="viz-bar">
+                  <div class={hasNegative ? "viz-bar" : "viz-bar viz-bar-inline"}>
                     <span>{item.label}</span>
                     <div class={hasNegative ? "viz-bar-track bipolar" : "viz-bar-track"}>
                       <i class={item.value < 0 ? "neg" : ""} style={hasNegative
@@ -1916,8 +1943,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                         ? `width:${logW(item.value)}%;background:${logColor(item.value)}`
                         : `width:${isShare ? item.value : (item.value / max) * 100}%`}
                       ></i>
+                      {!hasNegative ? <b>{fmt(item.value, bar.unit)}</b> : null}
                     </div>
-                    <b>{fmt(item.value, bar.unit)}</b>
+                    {hasNegative ? <b>{fmt(item.value, bar.unit)}</b> : null}
                   </div>
                 ))}
               </div>
@@ -1954,7 +1982,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <svg class="viz-svg grouped-bars viz-d" viewBox={`0 0 ${g.width} ${g.height}`} role="img" aria-label={grouped.title}>
                 {g.ticks.map((tick, ti) => (
                   <g>
-                    {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
+                    {ti < g.ticks.length - 1 ? <line x1={g.pad.l} y1={g.y(tick)} x2={g.width - g.pad.r} y2={g.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
                     <text class="yaxt" x={g.pad.l - 12} y={g.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, g.ticks, grouped.unit)}</text>
                   </g>
                 ))}
@@ -1997,7 +2025,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               <svg class="viz-svg grouped-bars viz-m" viewBox={`0 0 ${gm.width} ${gm.height}`} role="img" aria-label={grouped.title}>
                 {gm.ticks.map((tick, ti) => (
                   <g>
-                    {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#e4e2dd" : "#f1f0ed"} /> : null}
+                    {ti < gm.ticks.length - 1 ? <line x1={gm.pad.l} y1={gm.y(tick)} x2={gm.width - gm.pad.r} y2={gm.y(tick)} stroke={ti === 0 ? "#cfcfcf" : "#ededed"} /> : null}
                     <text class="yaxt" x={gm.pad.l - 12} y={gm.y(tick) + 4} text-anchor="end">{yTickLabel(tick, ti, gm.ticks, grouped.unit)}</text>
                   </g>
                 ))}
@@ -2123,6 +2151,15 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
             if (n - 1 - lastTick < step / 2) tickIdx[tickIdx.length - 1] = n - 1;
             else tickIdx.push(n - 1);
           }
+          // Rain runs dry haldi to wet hara; everything else (temperature) cool neel to hot
+          // sindoor. Both centre on the series' own normal with a grey middle, and both arms
+          // span the same distance so equal departures get equal colour.
+          const isRain = /rain|monsoon|precip|departure/i.test(`${stripes.title} ${stripes.unit}`);
+          const stripeStops: AlmStops = isRain
+            ? ALM_SCALES.rain.map(([v, c]) => [stripes.center + (v / 22) * spread, c] as [number, string])
+            : ([[-1, "#24387f"], [-0.6, "#6a7bc0"], [-0.25, "#c9d0ea"], [0, "#ededed"], [0.25, "#f1cbba"], [0.6, "#cc6849"], [1, "#7a2816"]] as AlmStops).map(([v, c]) => [stripes.center + v * spread, c] as [number, string]);
+          const stripeFmt = (v: number) => { const d = v - stripes.center, t = fmt(Math.abs(d), stripes.unit); return isRain ? `${d > 0 ? "+" : d < 0 ? "−" : ""}${t}` : fmt(v, stripes.unit); };
+          const stripeYears = stripes.stripes.map((st) => ({ year: Number(String(st.date).slice(0, 4)), value: st.value }));
           return (
             <article class={cardClass(visualIndex, visual, leadFirst)}>
               <div class="viz-head"><div><h2 class="serif">{stripes.title}</h2><p>{cleanSubtitle(stripes.subtitle, source.sourceId)}</p></div><span>{stripes.unit}</span></div>
@@ -2132,18 +2169,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 <button type="button" data-viz-action="csv">CSV</button>
                 <button type="button" data-viz-action="share">Share</button>
               </div>
-              <svg class="viz-svg viz-stripes" viewBox={`0 0 ${w} ${h}`} role="img" aria-label={stripes.title} preserveAspectRatio="none">
-                {stripes.stripes.map((s, i) => (
-                  <rect x={i * bw} y={0} width={bw + 0.6} height={h} fill={stripeColor(s.value, stripes.center, spread)} />
-                ))}
-              </svg>
-              <div class="stripe-axis">
-                {tickIdx.map((i) => <span>{formatAxisLabel(stripes.stripes[i].date)}</span>)}
-              </div>
-              <div class="viz-legend">
-                <span><i style={`background:${stripeColor(stripes.min, stripes.center, spread)}`}></i>{lowLabel} ({fmt(stripes.min, stripes.unit)})</span>
-                <span><i style={`background:${stripeColor(stripes.max, stripes.center, spread)}`}></i>{highLabel} ({fmt(stripes.max, stripes.unit)})</span>
-                <span><b>{first.date}</b> → <b>{last.date}</b></span>
+              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: 1040, height: 210, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-d alm"')} />
+              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: 350, height: 170, compact: true, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-m alm"')} />
+              <div class="alm-stripe-key">
+                <Fragment set:html={almScaleKey(stripeStops, [[stripeStops[0][0], lowLabel], [stripes.center, "Normal"], [stripeStops[stripeStops.length - 1][0], highLabel]], 300)} />
               </div>
               <div class="chart-note">
                 <p class="cn-take serif">{note.takeaway}</p>
@@ -2212,16 +2241,16 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   // whole point is that the series all converged low (e.g. fertility).
                   // Draw the line in a solid, legible tone; keep the level cue in the
                   // number badge only. Climate keeps its level-coloured line.
-                  const lineCol = isTemp ? col : "#a8123f";
+                  const lineCol = isTemp ? col : "var(--sindoor)";
                   return (
                     <div class="spark-cell">
                       <div class="spark-head"><b>{c.label}</b><span class="spark-nums">{isTemp
                         ? <Fragment><em style={`color:${col}`}>{fmt(c.latest ?? 0, sg.unit)}{usuffix}</em>{typeof c.change === "number" ? <i class={`spark-d ${c.change >= 0 ? "pos" : "neg"}`}>{signedFmt(c.change, sg.unit)}</i> : null}</Fragment>
                         : sg.latestPeriodLabel
-                          ? <Fragment><i class="spark-period">{compactPeriodLabel(cellEnd)} only</i><em style="color:#a8123f">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>
-                          : <Fragment><i class="spark-d" style="color:#9a938a">{sparkEndpoint(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:#a8123f">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
+                          ? <Fragment><i class="spark-period">{compactPeriodLabel(cellEnd)} only</i><em style="color:var(--sindoor)">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>
+                          : <Fragment><i class="spark-d" style="color:#8a8a8a">{sparkEndpoint(c.points[0]?.value ?? 0, sg.unit)}{usuffix} →</i> <em style="color:var(--sindoor)">{sparkEndpoint(c.latest ?? 0, sg.unit)}{usuffix}</em></Fragment>}</span></div>
                       <svg class="spark-svg" viewBox="0 0 100 36" preserveAspectRatio="none" role="img" aria-label={`${c.label}: ${sparkEndpoint(c.latest ?? 0, sg.unit)} in ${cellEnd}`}>
-                        <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
+                        <line x1="0" y1="34.5" x2="100" y2="34.5" stroke="#e4e4e4" stroke-width="1" vector-effect="non-scaling-stroke" />
                         <polygon points={sparkArea(c.points)} fill={lineCol} fill-opacity={isTemp ? 0.14 : 0.10} stroke="none" />
                         <polyline points={sparkPts(c.points)} fill="none" stroke={lineCol} stroke-width={isTemp ? 1.6 : 2} stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />
                         <text class="chart-watermark" x="98" y="34" text-anchor="end">{WATERMARK_TEXT}</text>
@@ -2274,7 +2303,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   <div class="spark-cell">
                     <div class="spark-head"><b>{panel.label}</b><span class="spark-nums">{panel.unit}</span></div>
                     <svg class="spark-svg" viewBox="0 0 100 40" preserveAspectRatio="none" role="img" aria-label={panel.label}>
-                      <line x1="0" y1="38.5" x2="100" y2="38.5" stroke="#e7e1d8" stroke-width="1" vector-effect="non-scaling-stroke" />
+                      <line x1="0" y1="38.5" x2="100" y2="38.5" stroke="#e4e4e4" stroke-width="1" vector-effect="non-scaling-stroke" />
                       {panel.lines.map((line) => (<polyline points={gridPts(line.points, panel)} fill="none" stroke={line.color} stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" />))}
                       <text class="chart-watermark" x="98" y="37" text-anchor="end">{WATERMARK_TEXT}</text>
                     </svg>
@@ -2399,7 +2428,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     <b class="scenmap-label">{p.label}</b>
                     <svg class="viz-svg scenmap-svg" viewBox={sm.viewBox} role="img" aria-label={`${sm.title}: ${p.label}`}>
                       {p.regions.map((r) => (
-                        <path d={compactSvgPath(r.path)} fill={r.value === null || r.value === undefined ? "#efeae4" : choroColor(r.value, sm.min, sm.max)} stroke="#fff" stroke-width="0.7" stroke-linejoin="round">
+                        <path d={compactSvgPath(r.path)} fill={r.value === null || r.value === undefined ? "#f2f2f2" : choroColor(r.value, sm.min, sm.max)} stroke="#fff" stroke-width="0.7" stroke-linejoin="round">
                           <title>{r.name}: {r.value === null || r.value === undefined ? "no data" : `${fmt(r.value, sm.unit)}${usuffix}`}</title>
                         </path>
                       ))}
@@ -2467,33 +2496,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   </>
                 ) : <Fragment set:html={renderChoroplethSvg(cho)} />}
                 <div class="choro-side">
-                  <div class="choro-scale">
-                    {choPivotPct !== null ? (
-                      <div class="choro-barwrap">
-                        <span class="choro-bar" style={`background:${choGradient}`}></span>
-                        <span class="choro-tick" style={`left:${choPivotPct}%`}><em>{vf(cho.divergeAt as number)}{cho.pivotLabel ? ` ${cho.pivotLabel}` : ""}</em><b></b></span>
-                      </div>
-                    ) : (
-                      <span class="choro-bar" style={`background:${choGradient}`}></span>
-                    )}
-                    <span class="choro-ends"><em>{vf(cho.min)}</em><em>{vf(cho.max)}</em></span>
-                    <span class="choro-cap">{cho.unit}</span>
-                    {cho.regions.length > valued.length ? <span class="choro-nodata"><i style="background:#efeae4"></i>not surveyed</span> : null}
-                  </div>
-                  <div class="choro-top">
-                    <b>{cho.rankLabel || "Highest"}</b>
-                    {top.map((r) => <span><em>{r.name}</em>{vf(r.value)}</span>)}
-                  </div>
-                  {bottom.length ? (
-                    <div class="choro-top choro-bottom">
-                      <b>{cho.bottomLabel}</b>
-                      {bottom.map((r) => <span><em>{r.name}</em>{vf(r.value)}</span>)}
-                    </div>
-                  ) : null}
+                  <Fragment set:html={renderChoroplethStrip(cho)} />
+                  {cho.regions.length > valued.length ? <span class="choro-nodata"><i></i>Outlined: not surveyed</span> : null}
                 </div>
               </div>
               {noDataNames.length ? (
-                <p class="choro-foot">States shown in grey ({noDataNames.join(", ")}) were not covered by the survey sample, so no estimate exists for them. They are left uncoloured rather than counted as zero.</p>
+                <p class="choro-foot">Outlined states ({noDataNames.join(", ")}) were not covered by the survey sample, so no estimate exists for them. They are left uncoloured rather than counted as zero.</p>
               ) : null}
               <div class="chart-note">
                 <p class="cn-take serif">{note.takeaway}</p>

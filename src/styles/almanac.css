@@ -1,0 +1,314 @@
+/* ============================================================
+   THE ALMANAC · component layer (loaded after indica.css)
+   The house style from the redesign: white paper, black ink, Newsreader to read
+   in, Schibsted Grotesk to count in, five named data inks, hairline rules and
+   figures that leave the page whole. Tokens live in indica.css; this file
+   restyles the components that every page shares, so it wins on source order.
+   ============================================================ */
+
+/* ---------- type primitives ---------- */
+.serif{font-family:var(--serif);font-weight:400;font-optical-sizing:auto}
+h1,h2,h3,h4{font-optical-sizing:auto}
+.lbl,.sec-hd{font-family:var(--sans);font-size:.72rem;letter-spacing:.09em;font-weight:600;color:var(--ink)}
+.eyebrow{font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;font-weight:600}
+.sec-hd{border-top:1px solid var(--ink);padding-top:14px;margin-bottom:34px}
+.sec-hd::after{display:none}
+.section{border-top:0}
+.muted{color:var(--mid)}
+
+/* ---------- masthead ---------- */
+.nav{padding:26px 0 18px;align-items:baseline;border-bottom:2px solid var(--ink)}
+.nav + hr.r{display:none}
+.brand{font-family:var(--serif);font-weight:500;font-size:1.7rem;letter-spacing:-.01em;text-transform:none;line-height:1}
+.domains{gap:24px}
+.domains a,.domains button{font-family:var(--sans);font-size:.875rem;letter-spacing:0;text-transform:none;font-weight:400;color:#3a3a3a;padding:2px 0 4px}
+.domains [data-d="reference"]{color:var(--dim)}
+@media(max-width:680px){
+  .nav{align-items:flex-start;flex-direction:column;gap:14px}
+  .brand{align-self:flex-start;font-size:1.5rem}
+  .domains{justify-content:flex-start;gap:10px 16px}
+}
+@media(max-width:400px){.brand{letter-spacing:-.01em;font-size:1.4rem}}
+
+/* ---------- domain chip / kicker ---------- */
+.domain-chip{gap:0}
+.domain-chip .tk{display:none}
+.domain-chip span{font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;font-weight:600;color:var(--c-ink)}
+
+/* ---------- buttons ---------- */
+.btn{font-family:var(--sans);font-size:.875rem;letter-spacing:0;font-weight:600;background:none;color:var(--ink);border:0;border-bottom:1.5px solid var(--ink);border-radius:0;padding:0 0 3px;text-decoration:none;display:inline-block}
+.btn:hover{background:none;color:var(--c-ink);border-color:var(--c)}
+
+/* ---------- article header ---------- */
+.article-head{padding:56px 0 8px;max-width:760px;margin:0 auto}
+.article-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.5rem,5.2vw,3.7rem);line-height:1.03;letter-spacing:-.02em;max-width:none;margin-top:18px}
+.article-head p.muted{font-family:var(--serif);font-size:clamp(1.2rem,2vw,1.45rem);line-height:1.48;color:#2e2e2e;max-width:none;margin-top:20px}
+.article-byline{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;color:var(--ink)}
+.article-byline a{font-weight:500}
+.article-status{margin-top:8px;font-family:var(--sans);font-size:.8rem;color:var(--dim);gap:16px}
+.status{border:0;padding:0;font-size:.7rem;letter-spacing:.06em;color:var(--dim)}
+.status.ready{display:none}
+
+/* views tabs: quiet underline tabs, not pills */
+.article-tabs--views{max-width:760px;margin:26px auto 8px;border-top:0;border-bottom:1px solid var(--rule);padding:0;gap:26px;background:#fff}
+.article-tab{border:0;background:none;padding:12px 0 10px;font-family:var(--sans);font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--mid);border-bottom:2px solid transparent;margin-bottom:-1px}
+.article-tab:hover{color:var(--ink);border-color:transparent}
+.article-tab.is-active{background:none;color:var(--ink);border-color:var(--ink)}
+
+/* "Short answer": the short version, ruled top and bottom */
+.article-hero.single{max-width:760px;margin:30px auto 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:18px 0 22px}
+.article-hero.single .explain-card h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.45rem,2.4vw,1.85rem);line-height:1.2;max-width:none;margin:10px 0 12px}
+.explain-card p:not(.lbl){font-family:var(--serif);font-size:1.2rem;line-height:1.6;color:#1f1f1f;max-width:none}
+.explain-card .lbl{font-size:.7rem}
+
+/* "The point": a big number set in Newsreader light, ruled */
+.data-pull{max-width:1040px;margin:44px auto 0;border-top:1px solid var(--ink);border-bottom:0;grid-template-columns:1fr;gap:10px;padding:16px 0 0}
+.data-pull .lbl{margin-top:0}
+.data-pull div{grid-template-columns:minmax(150px,auto) minmax(0,1fr);gap:40px;align-items:end}
+.data-pull span{font-family:var(--serif);font-weight:300;font-size:clamp(3.4rem,6vw,5rem);line-height:.95;letter-spacing:-.03em}
+.data-pull p:not(.lbl){font-family:var(--serif);font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.3;font-weight:400;max-width:34ch;padding-bottom:6px}
+
+/* ---------- the story: a reading column with wider figures ---------- */
+.story-body{max-width:1040px}
+.story-body>h2,.story-body>.lbl,.story-body>.standfirst{max-width:660px;margin-left:auto;margin-right:auto}
+.story-body>h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3vw,2.3rem);line-height:1.12}
+.story-flow{counter-reset:fig;gap:64px}
+.story-step{border-top:0;padding-top:0;gap:40px}
+.story-copy.longform{max-width:660px;width:100%;margin:0 auto}
+.longform h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.65rem,3vw,2.15rem);line-height:1.15;letter-spacing:-.01em;margin:8px 0 20px}
+.longform h4{font-weight:600;font-size:1.3rem}
+.longform p{color:#1f1f1f;margin-bottom:1.3rem}
+.longform strong{background:none;font-weight:600}
+.longform em{color:inherit}
+.longform a{color:var(--ink);text-decoration:underline;text-decoration-color:#bdbdbd}
+.longform a:hover{color:var(--c-ink);text-decoration-color:var(--c)}
+.story-list li::marker{color:var(--dim)}
+
+/* ---------- figures ---------- */
+/* A figure is ruled, numbered and unboxed: Fig. N, a title that states the
+   finding, a grotesque subtitle, the chart, how to read it, then a footer with
+   the source and the downloads. */
+.viz-grid{gap:72px}
+.viz-card,.story-viz .viz-card,.story-viz .viz-main,.viz-main{border:0;box-shadow:none;padding:0;background:none;border-top:1px solid var(--ink);padding-top:12px}
+.story-viz .viz-card{counter-increment:fig}
+.viz-head{display:block;margin-bottom:18px}
+.viz-head>div::before{content:"Fig. " counter(fig);display:block;font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--c-ink);margin-bottom:12px}
+.viz-section:not(.story-viz) .viz-head>div::before{content:none}
+.viz-head h2,.story-viz .viz-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,2.4vw,1.9rem);line-height:1.18;letter-spacing:-.005em;max-width:46ch}
+.viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font-size:1.45rem}
+.viz-head p{font-family:var(--sans);font-size:.92rem;line-height:1.45;color:var(--mid);margin-top:8px;max-width:84ch}
+.viz-head>span{display:none}
+.story-viz .layers-top{display:none}
+
+/* lead numbers above line charts: grotesque, quieter than before */
+.viz-lead-number span,.viz-line-number span{font-family:var(--sans);font-weight:500;letter-spacing:-.03em}
+.viz-lead-number span{font-size:clamp(2.2rem,3.4vw,2.9rem)}
+.viz-line-number span{font-size:clamp(1.7rem,2.6vw,2.2rem)}
+.viz-lead-number p,.viz-line-number p{font-family:var(--sans);font-size:.82rem;color:var(--dim)}
+
+/* chart text, in viewBox units (desktop boxes render at ~0.9x) */
+.yaxt,.xaxt,.end-s{font-family:var(--sans);font-size:14px;fill:#8a8a8a}
+.ref-label{font-family:var(--sans);font-size:14px;fill:#4f4f4f;stroke:#fff;stroke-width:5px}
+.end-mini-v{font-family:var(--sans);font-weight:600;font-size:15px}
+.end-v{font-family:var(--sans);font-weight:600;font-size:20px}
+.point-label{font-family:var(--sans);font-size:14px;font-weight:500}
+.point-label-muted{font-size:12.5px;fill:#6f6f6f}
+.axis-title{font-family:var(--sans);font-size:14px;fill:#4f4f4f}
+.anno-t{font-family:var(--sans);font-weight:600}
+.viz-m .yaxt,.viz-m .xaxt{font-size:12.5px}
+.viz-m .end-mini-v{font-size:12.5px}
+.viz-m .point-label{font-size:12.5px}
+.viz-m .axis-title{font-size:12px}
+.viz-legend{font-family:var(--sans);font-size:.85rem;color:var(--mid);gap:8px 20px;margin-top:14px}
+.viz-legend i{width:16px;height:2.5px;border-radius:0}
+.viz-bar b,.change-main b,.change-facts b,.trade-note-row b{font-family:var(--sans);font-weight:600;font-size:1rem}
+.viz-bar-track,.change-track,.rdiv-track,.ranked-change-bar{background:#f2f2f2}
+.viz-bar i.neg,.pyr-side.female i{background:var(--ink)}
+.choro-legend,.choro-scale,.choro-top{font-size:.88rem}
+
+/* how to read it: hairline-ruled, no tinted panels */
+.chart-note{border-top:0;padding:18px 0 0;margin-top:14px}
+.chart-note::before{display:none}
+.cn-take{font-family:var(--serif);font-weight:500;font-size:clamp(1.15rem,1.7vw,1.3rem);line-height:1.38;max-width:70ch;color:var(--ink)}
+.cn-detail{font-size:1.1rem;line-height:1.6;columns:1;max-width:72ch;color:#2e2e2e}
+.cn-meta{background:none;border-radius:0;padding:0;border-top:1px solid var(--line);padding-top:14px;gap:14px 40px}
+.cn-meta p{font-family:var(--sans);font-size:.875rem;line-height:1.55;color:var(--mid)}
+.cn-meta b{font-size:.7rem;letter-spacing:.09em;color:var(--ink);font-weight:600}
+.cn-meta b::before{display:none}
+.cn-meta .cn-why{border-bottom:0;padding-bottom:0}
+
+/* footer of a figure: source on the left, downloads on the right */
+.viz-card{display:flex;flex-direction:column}
+.chart-note{order:88}
+.viz-source{order:89;border-top:1px solid var(--rule);margin-top:20px;padding-top:12px;font-family:var(--sans);font-size:.82rem;color:var(--mid);justify-content:flex-start;gap:0}
+.viz-source span{display:inline;font-size:.82rem;letter-spacing:0;text-transform:none;font-weight:400;color:var(--mid)}
+.viz-source span::before{display:none}
+.viz-source span::after{content:":";margin-right:.35em}
+.viz-source a,.viz-source b{font-family:var(--sans);font-size:.82rem;font-weight:400;color:var(--ink);text-align:left;border-bottom:0;text-decoration:underline;text-decoration-color:#bdbdbd;text-underline-offset:3px;padding:0}
+.viz-source a::after{display:none}
+.viz-source a:hover{color:var(--c-ink);text-decoration-color:var(--c)}
+.viz-actions,.viz-card:hover .viz-actions{order:90;opacity:1;justify-content:flex-start;gap:18px;margin:8px 0 0}
+.viz-actions button{border:0;background:none;padding:0;border-radius:0;font-family:var(--sans);font-size:.82rem;letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink)}
+.viz-actions button[data-viz-action="svg"]::before,.viz-actions button[data-viz-action="png"]::before,.viz-actions button[data-viz-action="csv"]::before{content:"↓ "}
+.viz-actions button:hover{background:none;color:var(--c-ink)}
+@media(hover:hover){.viz-actions{opacity:1}}
+@media(max-width:680px){.viz-actions{margin:8px 0 0}.viz-source{flex-direction:row;flex-wrap:wrap}}
+
+/* ---------- concepts, macha, evidence ---------- */
+.concept-blocks{max-width:660px;margin-left:auto;margin-right:auto;border-top:1px solid var(--ink)}
+.concept-item h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;color:var(--ink)}
+.concept-item .concept-why{font-size:.875rem}
+.macha-block{background:#fff;color:var(--ink);max-width:1040px;border-top:2px solid var(--ink);padding:22px 0 0;margin:72px auto 24px}
+.macha-block .lbl{color:var(--c-ink)}
+.macha-block h2{font-family:var(--serif);font-weight:400;color:var(--ink);font-size:clamp(1.8rem,3.2vw,2.5rem);max-width:28ch}
+.macha-body{font-family:var(--serif);color:#1f1f1f;font-size:1.25rem;line-height:1.62;max-width:660px}
+.macha-sowhat{color:var(--ink);border-top:1px solid var(--rule);font-weight:500;max-width:660px}
+
+/* ---------- glossary popovers ---------- */
+.defterm{text-decoration-color:var(--dim)}
+
+/* ---------- question rows and cards ---------- */
+.q-row{padding:12px 0;border-top:1px solid var(--line)}
+.q-row:last-child{border-bottom:0}
+.q-dot{display:none}
+.q-txt{font-size:1.2rem;line-height:1.3}
+.q-arrow{display:none}
+.cards{background:none;border:0;gap:40px 48px}
+.card{padding:16px 0 0;border-top:1px solid var(--ink);background:none}
+.card:hover{background:none}
+.card .tag{font-family:var(--sans);font-size:.72rem;letter-spacing:.09em;font-weight:600}
+.card h2{font-family:var(--serif);font-weight:500;font-size:1.45rem;line-height:1.2}
+.card .sub{font-family:var(--sans);font-size:.875rem}
+.card .arrow{display:none}
+
+/* ---------- footer ---------- */
+footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 48px}
+.foot-brand{font-family:var(--serif);font-size:1.3rem;font-weight:500;letter-spacing:-.01em;text-transform:none;color:var(--ink)}
+.foot-note,.foot-sister{font-family:var(--sans);font-size:.85rem;line-height:1.55;color:var(--mid);grid-column:1;max-width:70ch}
+.foot-sister a{color:var(--ink)}
+.foot-links{grid-column:2;grid-row:1/span 4;flex-direction:column;align-items:flex-end;gap:10px;margin-top:4px;font-family:var(--sans);font-size:.85rem}
+.foot-links a{color:var(--ink);border-bottom:0}
+.foot-links a:hover{color:var(--c-ink)}
+@media(max-width:680px){
+  footer.foot{grid-template-columns:1fr}
+  .foot-links{grid-column:1;grid-row:auto;flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:12px 18px;margin-top:16px}
+}
+
+/* ---------- loading placeholder ---------- */
+.lazy-svg-frame{background:linear-gradient(90deg,#f6f6f6,#eeeeee,#f6f6f6);background-size:220% 100%}
+
+@media(max-width:860px){
+  .article-head,.article-hero.single,.article-tabs--views,.story-copy.longform,.story-body>h2,.story-body>.standfirst{max-width:none}
+}
+@media(max-width:680px){
+  .article-head{padding-top:34px}
+  .data-pull div{grid-template-columns:1fr;gap:10px}
+  .story-flow{gap:48px}
+  .viz-grid{gap:56px}
+}
+
+/* ---------- Almanac figures (src/data/almanac.ts) ---------- */
+/* Their SVGs are drawn at the width they are shown, so text sizes are real pixels. */
+.alm-card .viz-svg{width:100%;height:auto;display:block;overflow:visible;margin-top:6px}
+.alm-card .viz-m{display:none}
+.alm-stat{font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--mid);margin-top:10px}
+.alm-unitChart .viz-svg{max-width:260px}
+@media(max-width:620px){
+  .alm-card .viz-d{display:none}
+  .alm-card .viz-m{display:block}
+}
+
+/* ---------- Almanac line charts (renderLineSvg in ArticleVisuals) ---------- */
+.alm-line{overflow:visible;margin-top:8px}
+.alm-line .yaxt,.alm-line .xaxt{font-size:13px;fill:#8a8a8a}
+.viz-m.alm-line .yaxt,.viz-m.alm-line .xaxt{font-size:12px}
+/* Desktop names every line at its end, so the key is for phones (and for crowded charts). */
+.viz-legend-m{display:none}
+@media(max-width:620px){.viz-legend-m{display:flex}}
+
+/* ---------- horizontal bars ---------- */
+/* Thin bars with the value written at each bar's end, no grey tracks, hairline rows. */
+.viz-bars{gap:0}
+.viz-bar{grid-template-columns:minmax(120px,26%) minmax(0,1fr) auto;gap:16px;font-family:var(--sans);font-size:.875rem;color:var(--ink);padding:5px 0;border-top:1px solid #f2f2f2}
+.viz-bar:first-child{border-top:0}
+.viz-bar>span{color:#2e2e2e}
+.viz-bar-track{height:14px;background:none;overflow:visible}
+.viz-bar-track.bipolar{background:none}
+.viz-bar-track.bipolar:before{border-left-color:#121212}
+.viz-bar-inline{grid-template-columns:minmax(120px,26%) minmax(0,1fr)}
+.viz-bar-inline .viz-bar-track{display:flex;align-items:center;padding-right:5.5em;height:auto;min-height:14px}
+.viz-bar-inline .viz-bar-track i{flex:none;height:14px;min-width:2px}
+.viz-bar-inline .viz-bar-track b{flex:none;margin-left:8px;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--ink);white-space:nowrap}
+.viz-bar-group .viz-bar,.viz-bar-group .viz-bar-inline{grid-template-columns:minmax(150px,28%) minmax(0,1fr)}
+.viz-bar-group h3{font-family:var(--sans);font-size:.72rem;letter-spacing:.09em;color:var(--ink);font-weight:600;margin-top:6px}
+.viz-bar-groups{gap:18px}
+@media(max-width:680px){
+  .viz-bar,.viz-bar-inline,.viz-bar-group .viz-bar-inline{grid-template-columns:minmax(0,1fr);gap:4px}
+  .viz-bar-inline .viz-bar-track{padding-right:4.5em}
+}
+
+/* ---------- maps ---------- */
+.choro-wrap{grid-template-columns:minmax(0,1.35fr) minmax(260px,320px);gap:40px;align-items:start}
+.choro-side{gap:12px;align-content:start}
+.choro-strip{display:block;width:100%;height:auto;overflow:visible}
+.choro-nodata{font-family:var(--sans);font-size:.8rem;color:var(--mid)}
+.choro-nodata i{background:#fff;border:1px dashed #8a8a8a}
+.choro-foot{font-size:.82rem;color:var(--mid);margin-top:10px}
+@media(max-width:760px){.choro-wrap{grid-template-columns:1fr}.choro-side{grid-template-columns:1fr}.choro-strip{max-width:420px}}
+/* On a phone the map is too small for printed values; the ranked strip below carries them. */
+@media(max-width:620px){.choro-map g + g{display:none}}
+
+/* ---------- end matter: one reading column ---------- */
+.article-meta-section,.article-cite-section,.article-related,.editlog{max-width:660px;margin-left:auto;margin-right:auto;padding-top:48px;padding-bottom:0}
+.evidence-col>.lbl{display:block;border-top:2px solid var(--ink);padding-top:14px}
+.evidence-count{font-family:var(--serif);font-size:1.5rem;line-height:1.3;max-width:none;margin:14px 0 10px}
+.evidence-count strong{font-weight:500;color:var(--ink)}
+.evidence-sources{display:block;font-family:var(--sans);font-size:.85rem;color:var(--mid);line-height:1.8}
+.evidence-sources a,.evidence-sources>span{border:0;background:none;padding:0;border-radius:0;font-size:.85rem;color:var(--ink);text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px;white-space:normal}
+.evidence-sources>*:not(:last-child)::after{content:" · ";color:var(--dim);text-decoration:none;display:inline-block;margin:0 .35em}
+.evidence-src-count{margin-left:.3em;color:var(--dim)}
+.ev-block{margin-top:30px}
+.ev-block h3{font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;border-top:1px solid var(--rule);padding-top:12px;margin-bottom:12px}
+.ev-sources{padding-left:1.4em;display:grid;gap:9px;font-family:var(--sans);font-size:.92rem;line-height:1.5;color:#2e2e2e}
+.ev-sources li::marker{color:var(--dim);font-size:.85em}
+.ev-caveats,.ev-reading{list-style:none;display:grid;gap:10px;font-family:var(--serif);font-size:1.08rem;line-height:1.55;color:#2e2e2e}
+.ev-caveats li{padding-left:1.1em;position:relative}
+.ev-caveats li::before{content:"";position:absolute;left:0;top:.7em;width:.45em;height:1px;background:var(--ink)}
+.ev-reading{font-family:var(--sans);font-size:.92rem}
+.ev-sources a,.ev-reading a{color:var(--ink);text-decoration:underline;text-decoration-color:#bdbdbd;text-underline-offset:3px}
+.ev-sources a:hover,.ev-reading a:hover{text-decoration-color:var(--c);color:var(--c-ink)}
+.evidence-series{margin-top:30px;border-top:1px solid var(--rule)}
+.evidence-series summary{font-family:var(--sans);font-size:.875rem;letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink)}
+.article-related .q-row{padding:12px 0}
+.editlog .sec-hd{margin-bottom:18px}
+
+/* ---------- reading touches ---------- */
+/* The opening line of the story is set in small capitals, as a book would. */
+.story-flow>.story-step:first-child .story-copy>p:first-of-type::first-line{font-variant-caps:all-small-caps;letter-spacing:.035em}
+/* Inline definitions: a hairline-ruled note in the flow on narrow screens, a margin
+   note beside the paragraph on wide ones, so the reading line is never interrupted. */
+.defbox{border:0;border-top:1px solid var(--ink);background:none;padding:10px 0 0;margin:6px 0 22px;border-radius:0}
+.defbox-lbl{font-family:var(--sans);font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--c-ink)}
+.defbox-term{font-family:var(--sans);font-weight:600;font-size:.92rem;margin-top:4px}
+.defbox-mean,.defbox-why{font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--mid);margin-top:4px}
+@media(min-width:1240px){
+  .story-copy .defbox{float:right;clear:right;width:210px;margin:6px -250px 16px 0}
+}
+.defbox-term{border:0;padding:0;font-size:.95rem;line-height:1.3;letter-spacing:0}
+.defbox-term::after{display:none}
+.defbox-mean{max-width:none}
+
+/* ---------- hover crosshair tooltip (article-actions.js) ---------- */
+.hov-tip{position:absolute;z-index:5;pointer-events:none;background:#fff;border:1px solid #121212;padding:7px 10px;font-family:var(--sans);font-size:.8rem;line-height:1.45;color:var(--ink);display:flex;flex-direction:column;gap:2px;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.hov-tip[hidden]{display:none}
+.hov-tip em{font-style:normal;color:var(--mid);font-size:.75rem}
+.hov-tip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0}
+.hov-tip b{font-weight:600}
+svg[data-hover]{touch-action:pan-y}
+.alm-stripe-key{max-width:300px;margin-top:12px}
+.alm-stripe-key svg{display:block;width:100%;height:auto;overflow:visible}
+.viz-card .viz-svg.alm.viz-m{display:none}
+@media(max-width:620px){.viz-card .viz-svg.alm.viz-d{display:none}.viz-card .viz-svg.alm.viz-m{display:block}}
+.viz-bar-group .viz-bar:not(.viz-bar-inline){grid-template-columns:minmax(150px,28%) minmax(0,1fr) auto}
+.viz-bar-track.bipolar{height:14px}
+.viz-bar-track.bipolar i{height:14px}

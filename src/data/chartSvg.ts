@@ -1,4 +1,5 @@
 import type { ChoroplethVisual } from "./viz";
+import { ramp, SCALES } from "./almanac";
 
 function escapeHtml(value: unknown) {
   return String(value)
@@ -16,7 +17,7 @@ function watermarkSvg(viewBox: string) {
   const parts = viewBox.trim().split(/\s+/).map(Number);
   const width = parts[2] && Number.isFinite(parts[2]) ? parts[2] : 740;
   const height = parts[3] && Number.isFinite(parts[3]) ? parts[3] : 820;
-  return `<text class="chart-watermark" x="${svgCoord(width - 12)}" y="${svgCoord(height - 10)}" text-anchor="end" font-family="DM Sans, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1.1" text-transform="uppercase" fill="#8c8780" opacity="0.42">thisindianlife.today</text>`;
+  return `<text class="chart-watermark" x="${svgCoord(width - 12)}" y="${svgCoord(height - 10)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1.1" text-transform="uppercase" fill="#8a8a8a" opacity="0.42">thisindianlife.today</text>`;
 }
 
 export function compactSvgPath(path: string) {
@@ -59,57 +60,42 @@ function signedFmt(value: number, unit = "") {
   return `${sign}${fmt(Math.abs(value), unit)}`;
 }
 
-// Multi-stop perceptual ramps (opt-in via the `ramp` field). Smoothly interpolated in
-// sRGB across hand-picked stops — richer and less muddy than a single two-colour lerp.
-const RAMP_STOPS: Record<string, string[]> = {
-  // pale peach -> gold -> coral -> rose -> plum -> deep indigo
-  sunset: ["#fbe9d6", "#f6c879", "#ef9a4f", "#e16a5f", "#b34a78", "#6d2f72", "#3a2356"],
-  // soft mint -> teal -> deep sea -> midnight
-  teal: ["#eef6f2", "#a6dccb", "#56b6a6", "#2a8597", "#1f5278", "#16315a"],
+// Choropleth ramps, built from the Almanac's named inks and interpolated in OKLab
+// (see `ramp` in almanac.ts). Pick one with the plan's `ramp` field; each is
+// sequential, pale tint to deep ink.
+const SEQUENTIAL: Record<string, (t: number) => string> = {
+  // sindoor: heat, burden, more of something bad (the default)
+  warm: ramp([[0, "#f6ebe6"], [0.4, "#e39c81"], [0.75, "#c24a2e"], [1, "#7a2816"]]),
+  // neel
+  cool: ramp(SCALES.neel),
+  // jamun: a neutral "more of it" scale that carries no good/bad charge
+  sunset: ramp([[0, "#f1ebf3"], [0.45, "#a986b8"], [0.8, "#7b4790"], [1, "#4f2b5e"]]),
+  // hara
+  teal: ramp([[0, "#e6f3ef"], [0.45, "#4fb39a"], [0.8, "#008a6e"], [1, "#005a47"]]),
 };
 
-// Diverging palette for maps with a meaningful threshold (passed via `divergeAt`,
-// e.g. fertility's 2.1 replacement line). Below the pivot reads cool, above reads
-// warm, with a near-neutral cream exactly at the pivot — so "above vs below the
-// line" is legible from colour alone, not just the numbers.
-const DIVERGE_LOW = ["#1f5278", "#2a8597", "#56b6a6", "#a6dccb", "#f1ead8"]; // deep teal (min) -> cream (pivot)
-const DIVERGE_HIGH = ["#f1ead8", "#f6c879", "#ef9a4f", "#e16a5f", "#b34a78"]; // cream (pivot) -> rose (max)
-function hexToRgb(h: string): [number, number, number] {
-  const n = parseInt(h.slice(1), 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-}
-function lerpStops(stops: string[], t: number): string {
-  const x = Math.max(0, Math.min(1, t)) * (stops.length - 1);
-  const i = Math.min(stops.length - 2, Math.floor(x));
-  const f = x - i;
-  const [r1, g1, b1] = hexToRgb(stops[i]);
-  const [r2, g2, b2] = hexToRgb(stops[i + 1]);
-  return `rgb(${Math.round(r1 + (r2 - r1) * f)},${Math.round(g1 + (g2 - g1) * f)},${Math.round(b1 + (b2 - b1) * f)})`;
-}
+// Diverging scale for maps with a meaningful threshold (`divergeAt`, e.g. fertility's
+// 2.1 replacement line): below the pivot is neel, above it sindoor, and the pivot
+// itself is neutral grey, never a hue. Each arm runs t = 0..1 from its far end to the
+// pivot (low) or from the pivot to its far end (high). `ramp: "invert"` swaps the arms
+// for measures where falling below the pivot is the concerning side (a yield loss).
+const DIVERGE_LOW = ramp([[0, "#24387f"], [0.3, "#33489a"], [0.6, "#6a7bc0"], [0.82, "#aeb8de"], [1, "#e4e4e4"]]);
+const DIVERGE_HIGH = ramp([[0, "#e4e4e4"], [0.18, "#f1cbba"], [0.42, "#e39c81"], [0.72, "#c24a2e"], [1, "#7a2816"]]);
 
-export function choroColor(value: number, min: number, max: number, ramp: string = "warm", divergeAt?: number) {
+export function choroColor(value: number, min: number, max: number, rampName: string = "warm", divergeAt?: number) {
   // Diverging mode: scale each side of the pivot independently so the threshold
-  // always lands on the cream midpoint regardless of how lopsided the data is.
+  // always lands on the grey midpoint regardless of how lopsided the data is.
   if (divergeAt !== undefined && Number.isFinite(divergeAt)) {
+    const invert = rampName === "invert";
     if (value <= divergeAt) {
       const tl = divergeAt > min ? Math.max(0, Math.min(1, (value - min) / (divergeAt - min))) : 1;
-      return lerpStops(DIVERGE_LOW, tl);
+      return invert ? DIVERGE_HIGH(1 - tl) : DIVERGE_LOW(tl);
     }
     const th = max > divergeAt ? Math.max(0, Math.min(1, (value - divergeAt) / (max - divergeAt))) : 0;
-    return lerpStops(DIVERGE_HIGH, th);
+    return invert ? DIVERGE_LOW(1 - th) : DIVERGE_HIGH(th);
   }
   const t = max > min ? Math.max(0, Math.min(1, (value - min) / (max - min))) : 0;
-  if (RAMP_STOPS[ramp]) return lerpStops(RAMP_STOPS[ramp], t);
-  if (ramp === "cool") {
-    const r = Math.round(233 + (31 - 233) * t);
-    const g = Math.round(239 + (111 - 239) * t);
-    const b = Math.round(243 + (156 - 243) * t);
-    return `rgb(${r},${g},${b})`;
-  }
-  const r = Math.round(242 + (212 - 242) * t);
-  const g = Math.round(233 + (69 - 233) * t);
-  const b = Math.round(226 + (42 - 226) * t);
-  return `rgb(${r},${g},${b})`;
+  return (SEQUENTIAL[rampName] ?? SEQUENTIAL.warm)(t);
 }
 
 export function choroplethValueLabel(visual: ChoroplethVisual, value: number) {
@@ -117,14 +103,73 @@ export function choroplethValueLabel(visual: ChoroplethVisual, value: number) {
   return `${visual.signed ? signedFmt(value, visual.unit) : fmt(value, visual.unit)}${suffix}`;
 }
 
+// Area-weighted centroid and area of a region's largest ring, in viewBox units.
+function ringCentroid(path: string) {
+  let best: [number, number, number] | null = null;
+  for (const ring of path.split(/(?=M)/)) {
+    const pts = [...ring.matchAll(/(-?[\d.]+)[ ,](-?[\d.]+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
+    if (pts.length < 3) continue;
+    let A = 0, cx = 0, cy = 0;
+    for (let i = 0; i < pts.length; i++) {
+      const [x0, y0] = pts[i], [x1, y1] = pts[(i + 1) % pts.length], c = x0 * y1 - x1 * y0;
+      A += c; cx += (x0 + x1) * c; cy += (y0 + y1) * c;
+    }
+    if (A && (!best || Math.abs(A) > Math.abs(best[0]))) best = [A, cx / (3 * A), cy / (3 * A)];
+  }
+  return best ? { area: Math.abs(best[0]) / 2, x: best[1], y: best[2] } : null;
+}
+
+// The map: hairline white borders, no shadow, and the value printed inside every
+// region large enough to hold it (names live in the ranked strip beside the map).
 export function renderChoroplethSvg(visual: ChoroplethVisual) {
+  const [, , vw, vh] = visual.viewBox.trim().split(/\s+/).map(Number);
+  const total = (vw || 740) * (vh || 820);
+  const fontSize = Math.max(11, (vw || 740) / 48);
+  let labels = "";
   const paths = visual.regions.map((region) => {
-    const valueLabel = region.value === null || region.value === undefined ? "no data" : choroplethValueLabel(visual, region.value);
-    const fill = region.value === null || region.value === undefined ? "#efeae4" : choroColor(region.value, visual.min, visual.max, visual.ramp, visual.divergeAt);
-    return `<path d="${escapeHtml(compactSvgPath(region.path))}" fill="${fill}" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" stroke-linecap="round"><title>${escapeHtml(region.name)}: ${escapeHtml(valueLabel)}</title></path>`;
+    const has = region.value !== null && region.value !== undefined;
+    const valueLabel = has ? choroplethValueLabel(visual, region.value as number) : "no data";
+    const fill = has ? choroColor(region.value as number, visual.min, visual.max, visual.ramp, visual.divergeAt) : "#ffffff";
+    if (has) {
+      const c = ringCentroid(region.path);
+      if (c && c.area / total > 0.006 && valueLabel.length * fontSize * 0.6 < Math.sqrt(c.area) * 1.3) {
+        labels += `<text x="${svgCoord(c.x)}" y="${svgCoord(c.y + fontSize * 0.35)}" text-anchor="middle" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${svgCoord(fontSize)}" font-weight="600" fill="#121212" stroke="#ffffff" stroke-width="${svgCoord(fontSize * 0.28)}" stroke-opacity="0.75" paint-order="stroke" stroke-linejoin="round">${escapeHtml(valueLabel)}</text>`;
+      }
+    }
+    return `<path d="${escapeHtml(compactSvgPath(region.path))}" fill="${fill}" stroke="${has ? "#ffffff" : "#8a8a8a"}" stroke-width="${has ? 0.7 : 0.8}"${has ? "" : ' stroke-dasharray="2 2"'} stroke-linejoin="round" stroke-linecap="round"><title>${escapeHtml(region.name)}: ${escapeHtml(valueLabel)}</title></path>`;
   }).join("");
-  // Soft drop-shadow lifts the whole map off the page; applied once to the group, not per path.
-  return `<svg class="viz-svg choro-map" viewBox="${escapeHtml(visual.viewBox)}" role="img" aria-label="${escapeHtml(visual.title)}"><defs><filter id="choroLift" x="-6%" y="-6%" width="112%" height="116%"><feDropShadow dx="0" dy="1.5" stdDeviation="2.4" flood-color="#241f3a" flood-opacity="0.16"/></filter></defs><g filter="url(#choroLift)">${paths}</g>${watermarkSvg(visual.viewBox)}</svg>`;
+  return `<svg class="viz-svg choro-map" viewBox="${escapeHtml(visual.viewBox)}" role="img" aria-label="${escapeHtml(visual.title)}"><g>${paths}</g><g>${labels}</g>${watermarkSvg(visual.viewBox)}</svg>`;
+}
+
+// The ranked strip beside the map: every region in order, a dot on the shared scale
+// and its value. Its header doubles as the legend, with the pivot (e.g. replacement)
+// marked once. Small regions that vanish on the map stay readable here.
+export function renderChoroplethStrip(visual: ChoroplethVisual) {
+  const rows = visual.regions.filter((r) => r.value !== null && r.value !== undefined).sort((a, b) => (b.value as number) - (a.value as number));
+  const W = 320, nameW = 128, x0 = nameW + 8, x1 = W - 46, rowH = rows.length > 30 ? 16 : 19, top = 44;
+  const x = (v: number) => x0 + ((v - visual.min) / (visual.max - visual.min || 1)) * (x1 - x0);
+  const F = 'font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"';
+  const short = (n: string) => n.replace("Dadra and Nagar Haveli and Daman and Diu", "Dadra, Daman & Diu").replace("Andaman and Nicobar Islands", "Andaman & Nicobar").replace("Jammu and Kashmir", "Jammu & Kashmir");
+  let b = "";
+  const N = 60;
+  for (let i = 0; i < N; i++) {
+    const v = visual.min + ((visual.max - visual.min) * (i + 0.5)) / N;
+    b += `<rect x="${svgCoord(x0 + ((x1 - x0) * i) / N)}" y="10" width="${svgCoord((x1 - x0) / N + 0.4)}" height="7" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}"/>`;
+  }
+  b += `<text x="${x0}" y="31" ${F} font-size="10.5" fill="#4f4f4f">${escapeHtml(choroplethValueLabel(visual, visual.min))}</text><text x="${x1}" y="31" ${F} font-size="10.5" fill="#4f4f4f" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, visual.max))}</text>`;
+  const pivot = visual.divergeAt !== undefined && visual.divergeAt > visual.min && visual.divergeAt < visual.max ? visual.divergeAt : null;
+  if (pivot !== null) {
+    b += `<line x1="${svgCoord(x(pivot))}" y1="6" x2="${svgCoord(x(pivot))}" y2="${top + rows.length * rowH}" stroke="#121212" stroke-width="0.8" stroke-dasharray="2 2"/>`;
+    b += `<text x="${svgCoord(x(pivot))}" y="4" ${F} font-size="10.5" font-weight="600" fill="#121212" text-anchor="middle">${escapeHtml(choroplethValueLabel(visual, pivot))}${visual.pivotLabel ? ` ${escapeHtml(visual.pivotLabel)}` : ""}</text>`;
+  }
+  rows.forEach((r, i) => {
+    const v = r.value as number, cy = top + i * rowH + rowH / 2;
+    b += `<text x="${nameW}" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" fill="#121212" text-anchor="end">${escapeHtml(short(r.name))}</text>`;
+    b += `<line x1="${x0}" y1="${svgCoord(cy)}" x2="${x1}" y2="${svgCoord(cy)}" stroke="#ededed" stroke-width="1"/>`;
+    b += `<circle cx="${svgCoord(x(v))}" cy="${svgCoord(cy)}" r="4.5" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}" stroke="#121212" stroke-width="0.6"><title>${escapeHtml(r.name)}: ${escapeHtml(choroplethValueLabel(visual, v))}</title></circle>`;
+    b += `<text x="${W}" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" font-weight="600" fill="#121212" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, v))}</text>`;
+  });
+  return `<svg class="choro-strip" viewBox="0 0 ${W} ${top + rows.length * rowH + 4}" role="img" aria-label="${escapeHtml(visual.title)}, every region ranked">${b}</svg>`;
 }
 
 export function viewBoxAspectRatio(viewBox: string) {
