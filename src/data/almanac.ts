@@ -20,6 +20,8 @@ export const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").repl
  *  ranges ("2016-2025") are untouched because their hyphen follows a digit. */
 const minus = (t: string) => t
   .replace(/(^|[\s(\[~≈:|])-(?=\d|\.\d|₹|\$)/g, "$1\u2212")
+  // a currency sign before the minus ("$-17", "₹-3.2") reads as a glitch: the sign goes first
+  .replace(/(^|[\s(\[~≈:|])([₹$])-(?=\d)/g, "$1\u2212$2")
   .replace(/\s?-(?:&gt;|>)/g, " \u2192")
   .replace(/(?:&lt;|<)-\s?/g, "\u2190 ")
   .replace(/(?:&lt;|<)=/g, "\u2264").replace(/(?:&gt;|>)=/g, "\u2265")
@@ -194,7 +196,19 @@ export function heatStrip(rows: HeatRow[], o: {
 // =====================================================================
 // 2. TILE-MAP SMALL MULTIPLES — one series per state, laid out like the map
 // =====================================================================
-export type Tile = { label: string; col: number; row: number; points: Array<[number, number]> };
+/** Vehicle-registration codes, the abbreviations Indian readers already know, for tiles too
+ *  small to hold a name. */
+export const STATE_CODE: Record<string, string> = {
+  "Andhra Pradesh": "AP", "Arunachal Pradesh": "AR", "Assam": "AS", "Bihar": "BR", "Chhattisgarh": "CG", "Delhi": "DL", "Goa": "GA",
+  "Gujarat": "GJ", "Haryana": "HR", "Himachal Pradesh": "HP", "Jammu & Kashmir": "JK", "Jammu and Kashmir": "JK", "Jharkhand": "JH",
+  "Karnataka": "KA", "Kerala": "KL", "Madhya Pradesh": "MP", "Maharashtra": "MH", "Manipur": "MN", "Meghalaya": "ML", "Mizoram": "MZ",
+  "Nagaland": "NL", "Odisha": "OD", "Punjab": "PB", "Rajasthan": "RJ", "Sikkim": "SK", "Tamil Nadu": "TN", "Telangana": "TS",
+  "Tripura": "TR", "Uttar Pradesh": "UP", "Uttarakhand": "UK", "West Bengal": "WB", "Ladakh": "LA", "Puducherry": "PY",
+  // the short forms the figures print
+  "Andhra Pr.": "AP", "Madhya Pr.": "MP", "Uttar Pr.": "UP", "W. Bengal": "WB", "Himachal": "HP", "J&K": "JK", "Arunachal": "AR",
+};
+
+export type Tile = { label: string; code?: string; col: number; row: number; points: Array<[number, number]> };
 export function tileGrid(tiles: Tile[], o: {
   reference?: Array<[number, number]>; threshold: number; from: number; to: number; yMin: number; yMax: number;
   tw?: number; th?: number; g?: number; cols?: number; rows?: number; above?: string; below?: string; keyAt?: [number, number];
@@ -205,6 +219,9 @@ export function tileGrid(tiles: Tile[], o: {
   const W = cols * (tw + g) - g, H = nrows * (th + g) - g;
   const fmt = o.valueFmt ?? ((v: number) => v.toFixed(1));
   const above = o.above ?? INK.sindoor, below = o.below ?? INK.neel;
+  // A name wider than its tile runs into the next one; when any would, every tile shows its
+  // state code, so the grid reads in one register.
+  const codes = tiles.some((t) => (t.code ?? STATE_CODE[t.label]) && t.label.length * (small ? 10.5 : 11.5) * 0.56 > tw - 2);
   let b = "", defs = "";
   tiles.forEach((t, k) => {
     const ox = t.col * (tw + g), oy = t.row * (th + g), head = small ? 26 : 24;
@@ -219,7 +236,8 @@ export function tileGrid(tiles: Tile[], o: {
     if (o.reference) b += `<path d="${pathOf(o.reference, px, py)}" fill="none" stroke="#bdbdbd" stroke-width="1"/>`;
     b += `<path d="${pathOf(t.points, px, py)}" fill="none" stroke="${INK.ink}" stroke-width="${small ? 1.1 : 1.35}" stroke-linejoin="round" stroke-linecap="round"><title>${esc(t.label)}: ${fmt(last)} in ${t.points[t.points.length - 1][0]}</title></path>`;
     b += `<circle cx="${r1(px(t.points[t.points.length - 1][0]))}" cy="${r1(py(last))}" r="${small ? 2 : 2.6}" fill="${hot ? above : below}" stroke="#ffffff" stroke-width="1"/>`;
-    b += txt(ox, oy + 11, t.label, { size: small ? 10.5 : 11.5, fill: INK.ink, weight: 500 });
+    const name = codes && (t.code ?? STATE_CODE[t.label]) ? t.code ?? STATE_CODE[t.label] : t.label;
+    b += txt(ox, oy + 11, name, { size: small ? 10.5 : 11.5, fill: INK.ink, weight: 500 });
     b += txt(small ? ox : ox + tw, oy + (small ? 23 : 11), fmt(last), { size: small ? 10.5 : 12, fill: hot ? above : below, weight: 600, anchor: small ? "start" : "end" });
   });
   if (o.keyAt) {
@@ -298,9 +316,12 @@ export function scatterFit(pts: ScatterPoint[], o: {
   const xT = fitLines(`${o.xTitle} →`, W - 30 - 4), yT = fitLines(`${o.yTitle} ↑`, W - 4);
   const H = (o.height ?? 460) + (keyBelow ? 80 : 0) + (xT.length - 1) * 14 + (yT.length - 1) * 14;
   const ml = 30, mr = 10, mt = 30 + (yT.length - 1) * 14, mb = 50 + (keyBelow ? 80 : 0) + (xT.length - 1) * 14;
-  const x = scale(o.x[0], o.x[1], ml, W - mr), y = scale(o.y[0], o.y[1], H - mb, mt);
-  const xf = o.xFmt ?? ((v: number) => String(v)), yf = o.yFmt ?? ((v: number) => v.toFixed(1));
   const sized = pts.some((p) => p.size != null), rMax = sm ? 15 : 22;
+  // The plot is inset by most of the largest dot, so a point on the domain's edge (100%) sits
+  // inside the figure instead of over the top tick or past the right edge.
+  const inset = sized ? Math.round(rMax * 0.7) : 6;
+  const x = scale(o.x[0], o.x[1], ml + inset, W - mr - inset), y = scale(o.y[0], o.y[1], H - mb, mt + inset);
+  const xf = o.xFmt ?? ((v: number) => String(v)), yf = o.yFmt ?? ((v: number) => v.toFixed(1));
   const pMax = Math.max(...pts.map((p) => p.size ?? 0));
   const rad = (s?: number) => (sized && s ? Math.max(sm ? 2.5 : 3.5, rMax * Math.sqrt(s / pMax)) : sm ? 4.5 : 5.5);
   let b = "";
@@ -408,7 +429,14 @@ export function beeswarm(points: SwarmPoint[], o: {
     for (const v of o.guides ?? []) b += line(x(v), 22, x(v), axisY, INK.ink3, 0.75, "3 3");
     if (o.guides?.length === 2 && o.guideLabel) b += txt((x(o.guides[0]) + x(o.guides[1])) / 2, 13, o.guideLabel, { ...AX, anchor: "middle" });
     b += line(ml, axisY, W - mr, axisY, INK.ink, 1);
-    for (const v of o.ticks) { b += line(x(v), axisY, x(v), axisY + 5, INK.ink, 1); b += txt(x(v), axisY + 20, tf(v), { ...AX, anchor: "middle" }); }
+    // A tick label that would run into an end caption ("← Drier") keeps its tick, not its label.
+    const endW = o.ends ? o.ends.map((e) => (e.length + 2) * 11.5 * 0.58 + 8) : [0, 0];
+    for (const v of o.ticks) {
+      b += line(x(v), axisY, x(v), axisY + 5, INK.ink, 1);
+      const half = tf(v).length * 11.5 * 0.29;
+      if (o.ends && (x(v) - half < ml + endW[0] || x(v) + half > W - mr - endW[1])) continue;
+      b += txt(x(v), axisY + 20, tf(v), { ...AX, anchor: "middle" });
+    }
     if (o.ends) { b += txt(ml, axisY + 20, `← ${o.ends[0]}`, { size: 11.5, fill: INK.ink2, weight: 500 }); b += txt(W - mr, axisY + 20, `${o.ends[1]} →`, { size: 11.5, fill: INK.ink2, weight: 500, anchor: "end" }); }
   }
   for (const p of placed) b += `<circle cx="${r1(p.x)}" cy="${r1(p.y)}" r="${r}" fill="${colOf[p.group] ?? "#dcdcdc"}" stroke="#ffffff" stroke-width="1"><title>${esc(p.id)}: ${tf(p.value)}</title></circle>`;
@@ -500,7 +528,8 @@ export function parade(series: ParadeSeries[], o: {
 export type DumbbellRow = { label: string; short?: string; a: number; b: number; emphasis?: boolean };
 export function dumbbell(rows: DumbbellRow[], o: { domain: [number, number]; ticks: number[]; fmt?: (v: number) => string; aLabel: string; bLabel: string; width?: number; rowH?: number; half?: boolean; thumb?: boolean; label: string }) {
   const W = o.width ?? 640, rowH = o.rowH ?? 21, half = !!o.half, thumb = !!o.thumb;
-  const lw = thumb ? 0 : half ? 84 : 140, mr = thumb ? 0 : 70, top = thumb ? 0 : 26;
+  // The right margin holds the "a → b" values; the phone version prints none, so needs none.
+  const lw = thumb ? 0 : half ? 84 : 140, mr = thumb ? 0 : half ? 16 : 70, top = thumb ? 0 : 26;
   const x = scale(o.domain[0], o.domain[1], lw, W - mr), f = o.fmt ?? ((v: number) => `${Math.round(v)}%`);
   const H = top + rows.length * rowH + (thumb ? 0 : 36);
   let b = "";
@@ -527,7 +556,10 @@ export function dumbbell(rows: DumbbellRow[], o: { domain: [number, number]; tic
 // =====================================================================
 export function rankSlope(left: string[], right: string[], o: { leftTitle: string; rightTitle: string; moveAt?: number; width?: number; rowH?: number; bare?: boolean; label: string }) {
   const W = o.width ?? 520, rowH = o.rowH ?? 22, bare = !!o.bare, top = bare ? 4 : 30, moveAt = o.moveAt ?? 5;
-  const xl = bare ? 40 : 150, xr = W - (bare ? 40 : 150);
+  // Each label column is as wide as its longest "Name 12", not a fixed 150: on a phone the
+  // fixed columns left the crossing lines, the point of the form, about 50 units.
+  const colW = (names: string[]) => Math.max(...names.map((s, i) => `${s}  ${i + 1}`.length * 12 * 0.56)) + 14;
+  const xl = bare ? 40 : Math.min(150, colW(left)), xr = W - (bare ? 40 : Math.min(150, colW(right)));
   const moved = (i: number, j: number) => Math.abs(i - j) >= moveAt;
   let b = bare ? "" : txt(xl, 12, o.leftTitle, { ...AX, anchor: "middle" }) + txt(xr, 12, o.rightTitle, { ...AX, anchor: "middle" });
   const order = left.map((s, i) => [s, i, right.indexOf(s)] as [string, number, number]).filter(([, , j]) => j >= 0).sort((a, c) => Number(moved(a[1], a[2])) - Number(moved(c[1], c[2])));
@@ -632,7 +664,7 @@ export function miniParade(values: number[], widths: number[], o: { yMax: number
 export type IntervalRow = { label: string; lo: number; hi: number; mid?: number; hot?: boolean };
 export function intervalPlot(rows: IntervalRow[], o: { domain: [number, number]; ticks: number[]; fmt?: (v: number) => string; width?: number; rowH?: number; ref?: { value: number; label: string }; midLabel?: string; label: string }) {
   const W = o.width ?? 1040, sm = W < 480, rowH = o.rowH ?? (sm ? 34 : 30), lw = sm ? 0 : Math.min(200, W * 0.3), top = 26;
-  const x = scale(o.domain[0], o.domain[1], lw + 4, W - 60), f = o.fmt ?? ((v: number) => fmtIN(v));
+  const x = scale(o.domain[0], o.domain[1], lw + 7, W - 60), f = o.fmt ?? ((v: number) => fmtIN(v));
   const rowTop = (i: number) => top + i * rowH + (sm ? 14 : 0);
   const H = rowTop(rows.length - 1) + rowH + 34;
   let b = "";
@@ -703,7 +735,7 @@ export function calendarHeat(points: Array<{ date: string; value: number }>, o: 
   years.forEach((yr, yi) => {
     const oy = top + yi * yearH, jan1 = Date.UTC(yr, 0, 1), dow0 = new Date(jan1).getUTCDay();
     b += txt(lw - 8, oy + 3.5 * cell + 4, yr, { size: sm ? 10.5 : 12, fill: INK.ink, anchor: "end", weight: 600 });
-    if (yi === 0) for (let m = 0; m < 12; m++) { const day = Math.round((Date.UTC(yr, m, 1) - jan1) / 864e5); const wk = Math.floor((day + dow0) / 7); b += txt(lw + wk * cell, top - 6, sm ? MONTHS[m][0] : MONTHS[m], { ...AX, size: sm ? 9.5 : 11 }); }
+    if (yi === 0) for (let m = 0; m < 12; m++) { const day = Math.round((Date.UTC(yr, m, 1) - jan1) / 864e5); const wk = Math.floor((day + dow0) / 7); b += txt(lw + wk * cell, top - 6, sm ? MONTHS[m][0] : MONTHS[m], { ...AX, size: sm ? 10.5 : 11 }); }
     for (const p of byYear.get(yr)!) {
       const day = Math.round((+p.d - jan1) / 864e5), wk = Math.floor((day + dow0) / 7), wd = p.d.getUTCDay();
       b += `<rect x="${r1(lw + wk * cell)}" y="${r1(oy + wd * cell)}" width="${r1(cell - gap)}" height="${r1(cell - gap)}" rx="${sm ? 0.5 : 1.5}" fill="${col(p.v)}"><title>${p.s}: ${f(p.v)}</title></rect>`;
@@ -755,7 +787,8 @@ export function waterfall(steps: Array<{ label: string; value: number }>, o: { t
   const f = o.fmt ?? ((v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(2)}`);
   let acc = 0; const segs = steps.map((s) => { const a = acc; acc += s.value; return { ...s, a, z: acc }; });
   const total = acc, lo = Math.min(0, ...segs.map((s) => Math.min(s.a, s.z))), hi = Math.max(0, ...segs.map((s) => Math.max(s.a, s.z)));
-  const x = scale(lo, hi, lw + 6, W - 70);
+  const valW = Math.max(...segs.map((s) => f(s.value).length), f(total).length) * 12 * 0.58 + 12;
+  const x = scale(lo, hi, lw + 6, W - valW);
   const rowY = (i: number) => top + i * rowH + (sm ? 14 : 0);
   const H = rowY(segs.length) + rowH + 10;
   const up = o.upColor ?? INK.sindoor, down = o.downColor ?? INK.neel;

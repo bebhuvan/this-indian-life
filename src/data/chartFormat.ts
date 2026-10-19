@@ -34,12 +34,12 @@ export function fmt(value: number, unit = "") {
     if (abs >= 1000) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
   }
   if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
-    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 10 ? 1 : 2 })}bn`;
+    return `$${value.toLocaleString("en-US", { maximumFractionDigits: abs >= 10 ? 1 : 2 })}bn`;
   }
   if (/US\$|usd|\$/i.test(unit)) {
-    if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} trillion`;
-    if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-IN", { maximumFractionDigits: 0 })} billion`;
-    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+    if (abs >= 1_000_000_000_000) return `$${(value / 1_000_000_000_000).toLocaleString("en-US", { maximumFractionDigits: 1 })} trillion`;
+    if (abs >= 1_000_000_000) return `$${(value / 1_000_000_000).toLocaleString("en-US", { maximumFractionDigits: 0 })} billion`;
+    return `$${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
   }
   if (/people/i.test(unit)) {
     if (abs >= 10_000_000) return `${(value / 10_000_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })} crore`;
@@ -68,8 +68,8 @@ export function sparkEndpoint(value: number, unit = "") {
   const sign = value < 0 ? "-" : "";
   if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
     if (abs === 0) return "$0";
-    if (abs >= 1) return `${sign}$${abs.toLocaleString("en-IN", { maximumFractionDigits: 2 })}bn`;
-    return `${sign}$${(abs * 1_000).toLocaleString("en-IN", { maximumFractionDigits: abs < 0.01 ? 1 : 0 })}m`;
+    if (abs >= 1) return `${sign}$${abs.toLocaleString("en-US", { maximumFractionDigits: 2 })}bn`;
+    return `${sign}$${(abs * 1_000).toLocaleString("en-US", { maximumFractionDigits: abs < 0.01 ? 1 : 0 })}m`;
   }
   return fmt(value, unit);
 }
@@ -88,9 +88,16 @@ export function splitUnitLabel(full: string, ref: string) {
   return { bare, suffix };
 }
 
+/** A y tick written in the scale of the axis's largest tick, so one axis never mixes
+ *  "5,00,000" with "1 million", or "₹50k cr" with "₹1 lakh cr". Two decimals at most,
+ *  so a quarter step (0.25) is not rounded onto its neighbour. */
+export function axisFmt(tick: number, ticks: number[], unit = "") {
+  return endLabelInScale(tick, Math.max(...ticks.map((t) => Math.abs(t))), unit, false, false, 2);
+}
+
 // The unit suffix to show ONCE as a caption above the axis (mobile), e.g. "lakh cr".
 export function yUnitCaption(ticks: number[], unit = "") {
-  const ref = fmt(ticks[ticks.length - 1], unit);
+  const ref = axisFmt(ticks[ticks.length - 1], ticks, unit);
   return splitUnitLabel(ref, ref).suffix;
 }
 
@@ -99,8 +106,8 @@ export function yUnitCaption(ticks: number[], unit = "") {
 // tick is a bare number and the unit moves to a caption above the axis (yUnitCaption),
 // so the narrow box doesn't reserve a wide left gutter for one long top label.
 export function yTickLabel(tick: number, ti: number, ticks: number[], unit = "", bareAll = false) {
-  const full = fmt(tick, unit);
-  const ref = fmt(ticks[ticks.length - 1], unit);
+  const full = axisFmt(tick, ticks, unit);
+  const ref = axisFmt(ticks[ticks.length - 1], ticks, unit);
   if (!bareAll && ti === ticks.length - 1) return full; // topmost tick keeps the full unit
   return splitUnitLabel(full, ref).bare;
 }
@@ -124,7 +131,7 @@ export function compactBarLabel(value: number, unit = "") {
   return fmt(value, unit);
 }
 
-export function endLabelInScale(value: number, maxAbs: number, unit = "", compact = false, bare = false) {
+export function endLabelInScale(value: number, maxAbs: number, unit = "", compact = false, bare = false, digits = 1) {
   // Format every line's end label in ONE scale (chosen from the chart's largest value)
   // so they're comparable AND the unit is obvious — a small line reads "₹0.2 lakh cr",
   // not fmt()'s per-value "₹22.3k cr" which looks bigger than the "₹7.4 lakh cr" on top.
@@ -132,8 +139,12 @@ export function endLabelInScale(value: number, maxAbs: number, unit = "", compac
   // `bare` drops the scale word entirely (keeps currency + number) — mobile multi-line
   // charts carry the unit once in the axis caption, so the end labels stay short and
   // the plot keeps its width. "%" / "x" attach directly and always survive.
-  const n = (v: number, divisor: number) =>
-    (v / divisor).toLocaleString("en-IN", { maximumFractionDigits: 1 });
+  // A small value in a big chart's scale would round to nothing ("Malaria 0.0 million");
+  // it keeps two significant figures instead, so a real number never reads as zero.
+  const n = (v: number, divisor: number, locale = "en-IN") => {
+    const q = v / divisor, s = q.toLocaleString(locale, { maximumFractionDigits: digits });
+    return q !== 0 && Number(s.replace(/,/g, "")) === 0 ? q.toLocaleString(locale, { maximumSignificantDigits: 2 }) : s;
+  };
   const w = (short: string, long: string) => bare ? "" : ` ${compact ? short : long}`;
   // A change in a share is in points, not per cent: the unit is printed once above the
   // figure, so the value is written bare ("10.2"), never "10.2%".
@@ -154,11 +165,11 @@ export function endLabelInScale(value: number, maxAbs: number, unit = "", compac
     if (maxAbs >= 1e5) return `₹${n(value, 1e5)}${w("lakh", "lakh")}`;
   }
   if (/US\$|usd|\$/i.test(unit) && /billion|\bbn\b/i.test(unit)) {
-    return `$${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 10 ? 1 : 2 })}${w("bn", "billion")}`;
+    return `$${value.toLocaleString("en-US", { maximumFractionDigits: Math.max(digits, Math.abs(value) >= 10 ? 1 : 2) })}${w("bn", "billion")}`;
   }
   if (/US\$|usd|\$/i.test(unit)) {
-    if (maxAbs >= 1e12) return `$${n(value, 1e12)}${w("T", "trillion")}`;
-    if (maxAbs >= 1e9) return `$${n(value, 1e9)}${w("B", "billion")}`;
+    if (maxAbs >= 1e12) return `$${n(value, 1e12, "en-US")}${w("T", "trillion")}`;
+    if (maxAbs >= 1e9) return `$${n(value, 1e9, "en-US")}${w("B", "billion")}`;
   }
   if (/people/i.test(unit)) {
     if (maxAbs >= 1e7) return `${n(value, 1e7)}${w("crore", "crore")}`;

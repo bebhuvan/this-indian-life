@@ -452,7 +452,7 @@ export const v1Questions = [
         why: "The mirror image of the backward chart. India is upstream-tilted, supplying domestic inputs that other countries finish and re-export, while Vietnam plugged in downstream as an assembler. India's forward participation (about 41%) runs well above its backward share (26%); Vietnam's forward share fell as its assembly role grew.",
         read: "Each line is the domestic value added embodied in a country's intermediate exports, the inputs that feed others' production.",
         watch: "Forward and backward participation are two halves of GVC integration; a high forward share can reflect commodities or upstream services rather than sophistication, which is why commodity-exporting Indonesia ranks highest." },
-      { chart: "multiLine", title: "Becoming China's customer", size: "small", beat: "sophistication", unit: "trade with China (current US$ billions)", fromYear: 2000,
+      { chart: "multiLine", title: "Becoming China's customer", size: "small", beat: "sophistication", unit: "trade with China (current US$)", fromYear: 2000,
         subtitle: "UN Comtrade · India's imports from and exports to China · the trade relationship that ran one way",
         series: [
           { indicator: "divergence.india_china_imports", label: "India's imports from China" },

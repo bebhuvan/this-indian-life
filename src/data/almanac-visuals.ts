@@ -2,7 +2,7 @@
 // artifacts (series or tables) and returns an AlmanacVisual: a desktop SVG, a phone
 // SVG drawn for that width (not shrunk), and the rows behind it for the CSV download.
 // Builders return null when their data is missing, so a plan entry fails soft.
-import { INK, SCALES, type Stops, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, slope, stackedArea, type ScatterPoint } from "./almanac";
+import { INK, SCALES, STATE_CODE, type Stops, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, slope, stackedArea, type ScatterPoint } from "./almanac";
 
 type Row = Record<string, unknown>;
 export type AlmanacArtifact = {
@@ -99,7 +99,7 @@ function heatStripVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
 
 // ---------------------------------------------------------------- tile map
 function tileGridVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
-  const tiles = (e.series ?? []).filter((s) => s.pos).map((s) => ({ label: short(s.label), col: s.pos![0], row: s.pos![1], points: series(get(s.indicator)) })).filter((t) => t.points.length > 1);
+  const tiles = (e.series ?? []).filter((s) => s.pos).map((s) => ({ label: short(s.label), code: STATE_CODE[s.label], col: s.pos![0], row: s.pos![1], points: series(get(s.indicator)) })).filter((t) => t.points.length > 1);
   if (tiles.length < 3) return null;
   const ref = e.reference ? series(get(e.reference)) : undefined;
   const first = get(e.series![0].indicator)!;
@@ -128,11 +128,11 @@ function scatterFitVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
     .map((p) => ({ label: p.label, short: short(p.label), x: p.x, y: p.y, size: sizeOf(p.label), hot: e.threshold != null ? p.y > e.threshold : false, wantLabel: (e.labels ? e.labels.includes(p.label) : p.hl) }) as ScatterPoint & { wantLabel: boolean });
   if (pts.length < 4) return null;
   const xa = niceAxis(Math.min(...pts.map((p) => p.x)), Math.max(...pts.map((p) => p.x))), ya = niceAxis(Math.min(...pts.map((p) => p.y)), Math.max(...pts.map((p) => p.y)));
-  const xf = e.xFormat === "pct" ? (v: number) => `${Math.round(v)}%` : e.xFormat === "lakh" ? (v: number) => `₹${v % 1 ? v.toFixed(1) : v} lakh` : e.xFormat === "plain" ? (v: number) => v.toLocaleString("en-IN") : unitFmt(String(md.xLabel ?? "")), yf = (v: number) => (Math.abs(ya.max) < 10 ? v.toFixed(1) : v.toLocaleString("en-IN"));
+  const xf = e.xFormat === "pct" ? (v: number) => `${Math.round(v)}%` : e.xFormat === "lakh" ? (v: number) => `₹${v % 1 ? v.toFixed(1) : v} lakh` : e.xFormat === "plain" ? (v: number) => v.toLocaleString("en-IN") : unitFmt(String(md.xLabel ?? "")), yf = (v: number) => (Math.abs(ya.max) < 10 ? (Math.abs(v * 10 - Math.round(v * 10)) < 1e-9 ? v.toFixed(1) : v.toFixed(2)) : v.toLocaleString("en-IN"));
   const build = (W: number, H: number) => {
     const placed = placeLabels(pts as Array<ScatterPoint & { wantLabel: boolean }>, { W, H, x: [xa.min, xa.max], y: [ya.min, ya.max], sized: pts.some((p) => p.size != null) });
     return scatterFit(placed, {
-      x: [xa.min, xa.max], y: [ya.min, ya.max], xTicks: W < 700 ? xa.ticks.filter((_, i) => i % 2 === 0) : xa.ticks, yTicks: ya.ticks, xFmt: xf, yFmt: yf,
+      x: [xa.min, xa.max], y: [ya.min, ya.max], xTicks: W < 700 ? xa.ticks.filter((_, i) => i % 2 === 0) : xa.ticks, yTicks: W < 700 && ya.ticks.length > 5 ? ya.ticks.filter((_, i) => i % 2 === 0) : ya.ticks, xFmt: xf, yFmt: yf,
       xTitle: e.xTitle ?? String(md.xLabel ?? "x"), yTitle: e.yTitle ?? String(md.yLabel ?? a.unit), width: W, height: H, refY: e.refY,
       sizeKey: e.sizeKey, sizeTitle: e.sizeTitle, label: e.title ?? a.title,
     });

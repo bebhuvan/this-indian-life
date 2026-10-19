@@ -31,7 +31,7 @@ const attr = (s: string) => esc(s).replace(/"/g, "&quot;");
 export const tip = (head: string, ...lines: string[]) => ` data-tip="${attr([head, ...lines].join("|"))}"`;
 const textW = (s: string, size: number, bold = false) => String(s).length * size * (bold ? 0.6 : 0.56);
 /** Width of a label, counting capitals wider: "SOUTH AFRICA" is a third wider than "South Africa". */
-const labelTextW = (s: string, size: number) => [...String(s)].reduce((w, ch) => w + size * (/[A-Z]/.test(ch) ? 0.68 : /[\s.,'()-]/.test(ch) ? 0.32 : 0.54), 0);
+const labelTextW = (s: string, size: number) => [...String(s)].reduce((w, ch) => w + size * (/[A-Z]/.test(ch) ? 0.68 : /[\s.,'()-]/.test(ch) ? 0.34 : 0.575), 0);
 function svgDoc(cls: string, w: number, h: number, body: string, label: string, extra = "") {
   // max-width: a desktop figure drawn narrower than its card is never stretched (text would
   // grow). The phone drawing drops it in renderFigure.
@@ -63,6 +63,20 @@ function multiText(x: number, y: number, lines: string[], o: { size: number; fil
   return `<text x="${r1(x)}" y="${r1(y)}" font-family="${F}" font-size="${o.size}" fill="${o.fill ?? INK.ink2}"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}${o.weight ? ` font-weight="${o.weight}"` : ""}>${lines.map((l, i) => `<tspan x="${r1(x)}"${i ? ` dy="${r1(lh)}"` : ""}>${esc(l)}</tspan>`).join("")}</text>`;
 }
 const fmtU = (v: number, unit: string) => compactBarLabel(v, unit);
+/** Customs and trade tables name partners in capitals and their own abbreviations
+ *  ("U ARAB EMTS", "KOREA RP", "UNITED STATES OF AMERICA"). Shouted names are set in the
+ *  case the rest of the page uses; short acronyms (UAE, OPEC, GDP) stay as they are. */
+const PARTNER_NAMES: Record<string, string> = {
+  "U ARAB EMTS": "UAE", "U S A": "United States", "USA": "United States", "UNITED STATES OF AMERICA": "United States", "KOREA RP": "South Korea",
+  "U K": "United Kingdom", "CHINA P RP": "China", "SAUDI ARAB": "Saudi Arabia", "RUSSIA": "Russia", "NETHERLAND": "Netherlands",
+};
+const SMALL_WORDS = new Set(["of", "and", "the", "for", "in", "on", "to"]);
+function readableLabel(label: string) {
+  const s = String(label).trim();
+  if (PARTNER_NAMES[s]) return PARTNER_NAMES[s];
+  if (!/[A-Z]{2}/.test(s) || /[a-z]/.test(s) || s.replace(/[^A-Z]/g, "").length <= 4) return s;
+  return s.toLowerCase().split(/(\s+|-|\/)/).map((w, i) => (i && SMALL_WORDS.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1))).join("");
+}
 
 // =====================================================================
 // HORIZONTAL BARS — one row per category, value at the bar's end
@@ -70,6 +84,7 @@ const fmtU = (v: number, unit: string) => compactBarLabel(v, unit);
 type BarRow = { label: string; value: number; group?: string };
 function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: string; log?: boolean; label: string; groups?: string[]; anomaly?: [string, string] }) {
   const W = o.width, phone = o.mobile, unit = o.unit;
+  rows = rows.map((r) => ({ ...r, label: readableLabel(r.label) }));
   // Fine bars with room between them: a figure, not a wall of ink. The values carry the weight.
   const labSize = phone ? 13 : 13.5, valSize = phone ? 12.5 : 13.5, few = rows.length <= 6, barH = phone ? (few ? 11 : 8) : few ? 13 : rows.length <= 12 ? 10 : 8;
   // On a phone, labels go above their bars only when they are too long to sit beside them.
@@ -115,6 +130,9 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const tickBase = o.log ? Math.max(capBase, noteBase) + 18 : 0;
   const top = o.log ? tickBase + 8 : Math.max(26, capBase + 14);
   const zeroSegs: Array<[number, number]> = [];
+  // On a desktop the zero line runs down each group's rows, broken at the group headers so
+  // it never strikes through one ("WHERE THEY L|IVE").
+  const groupSegs: Array<[number, number]> = [];
   let y = top, b = "";
   const rowsOut: string[] = [];
   const groups = o.groups?.length ? o.groups : [undefined];
@@ -127,13 +145,17 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       b += line(0, y - 2, W, y - 2, INK.rule, 1);
       y += 22;
     }
+    const groupTop = y;
     // A suffix every label in the group shares ("Bihar (India)" under "Indian state") is noise.
     const common = items.length > 1 ? items[0].label.match(/\s\([^)]+\)$/)?.[0] : undefined;
     const strip = common && items.every((r) => r.label.endsWith(common)) ? common : "";
     for (const r of items) {
       const own = strip ? r.label.slice(0, -strip.length) : r.label;
       // Capitals run wider, so an all-caps label wraps sooner.
-      const lines = wrap(own, Math.max(6, Math.floor(chars * (own.length * labSize * 0.54) / Math.max(1, labelTextW(own, labSize)))), 2);
+      // A label that fits its column stays on one line: the column was sized to it, and a
+      // needless wrap ("Scheduled / Caste") left the column's left half empty.
+      const fitsOne = !m && labelTextW(own, labSize) <= labelW - 12;
+      const lines = fitsOne ? [own] : wrap(own, Math.max(6, Math.floor(chars * (own.length * labSize * 0.54) / Math.max(1, labelTextW(own, labSize)))), 2);
       const nat = isNational(r.label);
       const rowH = m ? 16 + lines.length * 15 + barH : Math.max(barH + (few ? 22 : 16), lines.length * 15 + 12);
       const by = m ? y + lines.length * 15 + 4 : y + rowH / 2 - barH / 2;
@@ -154,6 +176,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       else zeroSegs.push([by - 3, by + barH + 3]);
       y += rowH;
     }
+    groupSegs.push([g === undefined ? top - 4 : groupTop - 2, y]);
   }
   const H = y + 8;
   let axis = "";
@@ -171,7 +194,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     axis += noteInline ? txt(W, 12, note, { size: noteSize, fill: INK.ink3, anchor: "end" }) : txt(0, noteBase, note, { size: noteSize, fill: INK.ink3 });
   }
   if (m && !o.log) for (const [a, c] of zeroSegs) axis += line(zx, a, zx, c, INK.ink, 1);
-  else axis += line(zx, top - 4, zx, H - 8, INK.ink, 1);
+  else if (o.log) axis += line(zx, top - 4, zx, H - 8, INK.ink, 1);
+  else for (const [a, c] of groupSegs) axis += line(zx, a, zx, c, INK.ink, 1);
   const cap = capLines.length ? multiText(capX, 12, capLines, { size: capSize, fill: INK.ink3, lh: 14 }) : "";
   return svgDoc("fig-bars", W, H, cap + axis + b + rowsOut.join(""), o.label);
 }
@@ -200,6 +224,29 @@ function stripRow(segs: Seg[], x0: number, y0: number, w: number, h: number, o: 
 }
 /** Place outside labels under a strip on as few rows as possible, with a tick to each segment. */
 function placeOutside(outs: Array<{ cx: number; text: string[]; color: string }>, y0: number, W: number, size: number) {
+  // Labels that fit on one row hang from their segments by a tick. When they would stack into
+  // a ladder, every tick runs through the labels below it ("Hydro" through "Gas 2%"), so they
+  // become a key instead: a swatch and the name, in the order of the segments.
+  const fitsOneRow = outs.every((o, i) => {
+    const w = textW(o.text[0], size) + 6, x = Math.min(Math.max(0, o.cx - w / 2), W - w);
+    const prev = outs[i - 1];
+    if (!prev) return true;
+    const pw = textW(prev.text[0], size) + 6, px = Math.min(Math.max(0, prev.cx - pw / 2), W - pw);
+    return x >= px + pw + 8;
+  });
+  if (!fitsOneRow) {
+    let x = 0, row = 0, b = "";
+    for (const o of outs) {
+      // a name too long for the row wraps under its swatch and takes the rows it needs
+      const lines = 14 + textW(o.text[0], size) > W ? wrap(o.text[0], Math.floor((W - 14) / (size * 0.56)), 3) : [o.text[0]];
+      const w = 14 + Math.max(...lines.map((l) => textW(l, size))) + 18;
+      if (x > 0 && x + w - 18 > W) { x = 0; row += 1; }
+      const ty = y0 + 22 + row * 20;
+      b += `<rect x="${r1(x)}" y="${r1(ty - 9)}" width="9" height="9" fill="${o.color}"/>` + multiText(x + 14, ty, lines, { size, fill: INK.ink, lh: 17 });
+      if (lines.length > 1) { row += lines.length - 1; x = W; } else x += w;
+    }
+    return { body: b, h: outs.length ? 30 + row * 20 : 0 };
+  }
   const rows: Array<Array<[number, number]>> = [];
   let b = "", maxRow = -1;
   for (const o of outs) {
@@ -330,21 +377,61 @@ function rankedDivergeSvg(v: RankedChangeVisual, o: { width: number; mobile: boo
 // =====================================================================
 // CHANGE — up to four headline changes, each with its own start and end
 // =====================================================================
-function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
-  const items = v.items.slice(0, 4), m = o.mobile;
-  const cols = m ? 1 : items.length, gap = 32, cw = Math.min(m ? o.width : 420, (o.width - gap * (cols - 1)) / cols);
-  const W = m ? o.width : cols * cw + gap * (cols - 1);
+function changeText(v: ChangeVisual) {
   // A change in a percentage is a change in points, not a per cent of a per cent.
   const isPct = /%|percent/i.test(v.unit);
   const val = (x: number) => countFmt(x, v.unit) ?? fmt(x, v.unit);
   const chg = (x: number) => (isPct ? `${x > 0 ? "+" : x < 0 ? "−" : ""}${Math.abs(x).toLocaleString("en-IN", { maximumFractionDigits: 1 })} points` : countFmt(x, v.unit) ? `${x > 0 ? "+" : ""}${countFmt(x, v.unit)}` : signedFmt(x, v.unit));
-  // The closing facts wrap to the card; past a tenfold rise a multiple reads better than
-  // a percentage ("+1,67,49,130%").
-  const factsOf = (it: (typeof items)[number]) => {
+  // The closing facts; past a tenfold rise a multiple reads better than a percentage
+  // ("+1,67,49,130%").
+  const facts = (it: ChangeVisual["items"][number]) => {
     const yrs = yearSpan(it.start.date, it.end.date);
     const growth = Math.abs(it.pctChange) >= 1000 && it.start.value > 0 ? `${(it.end.value / it.start.value).toLocaleString("en-IN", { maximumFractionDigits: it.end.value / it.start.value >= 100 ? 0 : 1 })} times the starting value` : `${pct(it.pctChange)} on the starting value`;
-    return wrap([growth, yrs ? `${chg(it.change / yrs)} a year on average` : ""].filter(Boolean).join("  ·  "), Math.floor(cw / (12 * 0.56)), 3);
+    return [growth, yrs ? `${chg(it.change / yrs)} a year on average` : ""].filter(Boolean).join("  ·  ");
   };
+  return { val, chg, facts };
+}
+/** A single change across a wide column: label, change and dates on the left; the start and
+ *  end values on a line that runs the rest of the width, its facts underneath. */
+function changeWideSvg(v: ChangeVisual, W: number) {
+  const it = v.items[0], { val, chg, facts } = changeText(v);
+  const lab = it.label.replace(/: value$/i, "").replace(/\s+\([^)]*\)/g, "");
+  const lw = 300, sx0 = lw + 60, sx1 = W - 6, sy = 84;
+  const labLines = wrap(lab, Math.floor(lw / 7.3), 2);
+  let b = line(0, 0, W, 0, INK.ink, 1);
+  b += multiText(0, 22, labLines, { size: 13, fill: INK.ink, weight: 600, lh: 16 });
+  const ny = 22 + (labLines.length - 1) * 16 + 46;
+  b += txt(0, ny, chg(it.change), { size: 34, fill: "var(--c)", weight: 500 });
+  b += txt(0, ny + 22, `from ${it.start.date} to ${it.end.date}`, { size: 12.5, fill: INK.ink2 });
+  const lo = Math.min(it.start.value, it.end.value, 0), hi = Math.max(it.start.value, it.end.value);
+  const px = (x: number) => sx0 + ((x - lo) / (hi - lo || 1)) * (sx1 - sx0);
+  const xs = px(it.start.value), xe = px(it.end.value);
+  b += `<g class="mk"${tip(lab, `${it.start.date}: ${val(it.start.value)}`, `${it.end.date}: ${val(it.end.value)}`, `Total growth ${pct(it.pctChange)}, ${multiple(it.start.value, it.end.value)}`)} tabindex="0">`;
+  b += `<rect x="${sx0 - 10}" y="${sy - 40}" width="${r1(sx1 - sx0 + 16)}" height="64" fill="transparent"/>`;
+  b += line(sx0, sy, sx1, sy, INK.grid, 1);
+  b += line(xs, sy, xe, sy, "var(--c)", 3);
+  b += `<circle cx="${r1(xs)}" cy="${sy}" r="4.5" fill="#fff" stroke="${INK.ink3}" stroke-width="1.5"/><circle cx="${r1(xe)}" cy="${sy}" r="5.5" fill="var(--c)"/>`;
+  const anchorAt = (x: number) => (x < sx0 + 40 ? "start" : x > sx1 - 40 ? "end" : "middle");
+  const apart = Math.abs(xe - xs) > 110;
+  b += txt(xe, sy - 14, val(it.end.value), { size: 14, fill: INK.ink, weight: 600, anchor: anchorAt(xe) });
+  b += txt(xe, sy - 32, it.end.date, { size: 12, fill: INK.ink3, anchor: anchorAt(xe) });
+  if (apart) {
+    b += txt(xs, sy - 14, val(it.start.value), { size: 13, fill: INK.ink2, anchor: anchorAt(xs) });
+    b += txt(xs, sy - 32, it.start.date, { size: 12, fill: INK.ink3, anchor: anchorAt(xs) });
+  }
+  b += `</g>`;
+  b += txt(sx1, sy + 22, facts(it), { size: 12.5, fill: INK.ink2, anchor: "end" });
+  return svgDoc("fig-change", W, Math.max(ny + 34, sy + 34), b, v.title);
+}
+function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
+  const items = v.items.slice(0, 4), m = o.mobile;
+  // One change on a wide column reads across: the figure on the left, its line on the right.
+  // A 420-wide card alone in a 1040 column left most of the figure empty.
+  if (!m && items.length === 1 && o.width >= 700) return changeWideSvg(v, o.width);
+  const cols = m ? 1 : items.length, gap = 32, cw = Math.min(m ? o.width : 520, (o.width - gap * (cols - 1)) / cols);
+  const W = m ? o.width : cols * cw + gap * (cols - 1);
+  const { val, chg, facts } = changeText(v);
+  const factsOf = (it: (typeof items)[number]) => wrap(facts(it), Math.floor(cw / (12 * 0.56)), 3);
   const factLines = Math.max(1, ...items.map((it) => factsOf(it).length));
   const ch = (m ? 150 : 176) + (factLines - 1) * 15;
   let b = "";
@@ -410,7 +497,7 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
     const ts = all.map((q) => yearOf(q.date)).filter(Number.isFinite);
     const t0 = Math.min(...ts), t1 = Math.max(...ts);
     // The axis gutter is as wide as its widest value ("-50%" needs more than "0").
-    const padL = o.ticks ? Math.max(m ? 26 : 32, ...sc.ticks.map((t) => textW(o.valueFmt(t), 11) + 7)) : 0, padR = 4;
+    const padL = o.ticks ? Math.max(m ? 26 : 32, ...sc.ticks.map((t) => textW(o.valueFmt(t), 11) * 1.08 + 9)) : 3, padR = 4;
     const px = (t: number) => ox + padL + ((t - t0) / (t1 - t0 || 1)) * (pw - padL - padR);
     const py = (val: number) => oy + head + ph - ((val - sc.min) / (sc.max - sc.min || 1)) * ph;
     // head: name left, the panel's figure right

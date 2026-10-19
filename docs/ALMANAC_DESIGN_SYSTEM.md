@@ -111,6 +111,17 @@ Other rules the renderers keep:
 - Line end labels carry a white halo where they cross other lines; scatter labels are placed by collision (each
   tries four sides; on a phone one that cannot fit is left to the tooltip).
 - Map strips: a value past the colour scale sits at the scale's end with an arrow, and still prints its value.
+- One axis, one scale: every y tick is written in the scale of the top tick (`axisFmt`), and phone end values,
+  which borrow the axis caption's scale word, are written in that same scale.
+- Dollars are grouped in thousands ("$292,344"); rupees and Indian counts keep lakh grouping. A minus goes before
+  the currency sign ("−$17").
+- No label sits on a line: line labels are tested against every segment and end dot before they are placed. A
+  label with nowhere clear is left to the tooltip rather than laid across the line.
+- A line that stops short of the others is named just before its own end, not after it among the lines that carry on.
+- A figure fills its column: a single change card reads across the full width, line-chart gutters are sized to the
+  labels they print (long series names wrap onto two lines), and bar labels that fit their column stay on one line.
+- Phone text is at least 11 px as rendered on a 412 px phone (the line-chart box is drawn at 384 and shown at about
+  368, so its smallest text is set at 11.5).
 
 ## Statistics the figures compute
 

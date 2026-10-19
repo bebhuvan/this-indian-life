@@ -5,9 +5,9 @@ import { formatLockedNumber } from "../data/questions";
 import { fileSafe } from "../data/chartDownloads";
 import FigureCard from "./FigureCard.astro";
 import { renderFigure, cleanUnit } from "../data/figures";
-import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
+import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, axisFmt, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
 import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, viewBoxAspectRatio } from "../data/chartSvg";
-import { typeset, txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
+import { typeset, wrapWords, txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
 
 type ChartExplainer = {
   visualId: string;
@@ -389,7 +389,12 @@ function pointDateLabel(date: string, points: Array<{ date: string }>) {
     return m[1];
   }
   const days = new Set(points.map((q) => String(q.date).slice(8)));
-  if (m[3] && days.size > 2) return `${Number(m[3])} ${compactPeriodLabel(`${m[1]}-${m[2]}`)}`;
+  // A monthly series stamped at month end (30 Apr, 31 May, 28 Feb) has many distinct days
+  // but is still monthly: "Apr 2013", not "30 Apr 2013". Judged by the typical gap.
+  const t = points.map((q) => Date.parse(String(q.date).slice(0, 10))).filter(Number.isFinite).sort((a, b) => a - b);
+  const gaps = t.slice(1).map((v, i) => (v - t[i]) / 864e5).sort((a, b) => a - b);
+  const monthly = gaps.length > 0 && gaps[Math.floor(gaps.length / 2)] >= 27;
+  if (m[3] && days.size > 2 && !monthly) return `${Number(m[3])} ${compactPeriodLabel(`${m[1]}-${m[2]}`)}`;
   return compactPeriodLabel(`${m[1]}-${m[2]}`);
 }
 
@@ -494,7 +499,10 @@ function cleanSubtitle(value: string, sourceId: string) {
     .replace(" · NumericValue", "")
     .split(" · ")
     // Upstream codes (SP.POP.TOTL, NY.GDP.PCAP.CD) belong in the source line, not the subtitle.
-    .filter((seg) => !isMachineId(seg) && !/^[A-Z0-9]+(\.[A-Z0-9]+){1,}$/.test(seg.trim()))
+    // So do database series keys: IndiaDataHub's "IFTLDATPSB11Q", EIA's "47-33-IND-MBTUPP.annual".
+    .filter((seg) => !isMachineId(seg) && !/^[A-Z0-9]+(\.[A-Z0-9]+){1,}$/.test(seg.trim())
+      && !(/^[A-Z0-9]{8,}$/.test(seg.trim()) && /\d/.test(seg) && /[A-Z]{3}/.test(seg))
+      && !/^\d+-\d+-[A-Z]{2,}/.test(seg.trim()))
     .join(" · ");
 }
 
@@ -636,13 +644,17 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const yFontSize = mobile ? 12 : 13;
   const padRTB = mobile
     ? { r: visual.lines.length > 1 ? 48 : 40, t: 22, b: 40 }
-    : isLead ? { r: visual.lines.length > 1 ? 156 : 76, t: 34, b: 48 } : { r: visual.lines.length > 1 ? 118 : 64, t: 26, b: 46 };
+    : isLead ? { r: 48, t: 34, b: 48 } : { r: 40, t: 26, b: 46 };
   // Multi-line charts print each line's latest value to the RIGHT of its end point
   // (.end-mini-v, left-anchored at latestX + offset). Desktop has room for the full
   // value+unit; the narrow mobile box shows the bare number (axis carries the unit) so
   // the plot stays wide. Either way, size the right pad to the widest label — the mirror
   // of the dynamic LEFT pad below — so nothing clips off the viewBox.
-  const endMaxAbs = Math.max(1, ...visual.lines.flatMap((l) => l.points.map((p) => Math.abs(p.value))));
+  const dataMaxAbs = Math.max(1, ...visual.lines.flatMap((l) => l.points.map((p) => Math.abs(p.value))));
+  // Phone end values are bare and borrow the axis's scale word, so they are written in the
+  // scale of the axis's top tick: data peaking at 999.6 million on an axis to 1.2 billion
+  // printed "999.6" under a "billion" caption.
+  const endMaxAbs = mobile ? Math.max(dataMaxAbs, Math.abs(tightScale(0, typeof bounds?.max === "number" ? bounds.max : dataMaxAbs).max)) : dataMaxAbs;
   const endText = (value: number) => endLabelInScale(value, endMaxAbs, visual.unit, mobile, mobile);
   {
     void forceEndLabelPad;
@@ -659,14 +671,17 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       dateLen,
       ...visual.lines.map((line) => {
         const v = line.points.at(-1)?.value;
-        return v == null ? 0 : endText(v).length + (mobile || visual.lines.length === 1 ? 0 : line.label.length + 1);
+        if (v == null) return 0;
+        if (mobile || visual.lines.length === 1) return endText(v).length;
+        const names = endNameLines(line.label, endText(v));
+        return Math.max(...names.slice(0, -1).map((l) => l.length), names.at(-1)!.length + 1 + endText(v).length);
       })
     );
     // Mobile end-labels are bare (short), so reserve the gutter tighter — 0.62/8 over-sized
     // it for the now-bare "$17.3", leaving visible empty space between label and card edge.
     // Desktop labels set the series name in a heavier weight, which runs wider.
     const kerf = mobile ? 0.56 : 0.6;
-    const slack = mobile ? 4 : 6;
+    const slack = mobile ? 4 : 10;
     padRTB.r = Math.max(padRTB.r, endOffset + Math.round(maxEndLabelLen * endFont * kerf) + slack);
     // Trying the values inside the plot: the right gutter only needs room for the end dot.
     if (tightRight) padRTB.r = 12;
@@ -699,12 +714,12 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // On mobile the unit moves to a caption above the axis (unitCaption, rendered in the
   // template) and every tick is a bare number, so the gutter is sized to the bare
   // labels ("₹400") — not the long unit label — which keeps the narrow plot wide.
-  const refLabel = fmt(ticks[ticks.length - 1], visual.unit);
-  const yLabelText = (tick: number) => mobile ? splitUnitLabel(fmt(tick, visual.unit), refLabel).bare : fmt(tick, visual.unit);
+  const refLabel = axisFmt(ticks[ticks.length - 1], ticks, visual.unit);
+  const yLabelText = (tick: number) => mobile ? splitUnitLabel(axisFmt(tick, ticks, visual.unit), refLabel).bare : axisFmt(tick, ticks, visual.unit);
   const maxYLabelLen = Math.max(3, ...ticks.map((tick) => yLabelText(tick).length));
   // The unit, once, over the y axis: the scale word on phones ("lakh cr"), or the measure
   // itself ("births per woman") wherever the tick labels are bare numbers.
-  const bareTop = /^-?[\d.,]+$/.test(fmt(ticks[ticks.length - 1], visual.unit));
+  const bareTop = /^-?[\d.,]+$/.test(refLabel);
   const unitWord = bareTop ? cleanUnit(visual.unit) : "";
   const unitCaption = mobile ? (yUnitCaption(ticks, visual.unit) || unitWord) : unitWord;
   // 0.6em/char tracks Schibsted Grotesk closely; the old 0.78 over-reserved the
@@ -719,8 +734,15 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // Financial-year series ("2017-18", "2018-19"): the second part is the next year, not a
   // month. Read as months they land in December of the first year and the axis misprints.
   const fyMode = isFySeries(visual.lines.flatMap((line) => line.points.map((p) => String(p.date))));
+  // An annual series stamped on one day of the year (31 December, 1 July) is a series of
+  // years: placed by its month it sat most of a year right of its own year tick, so a series
+  // from 1990 opened on a "1991" tick and ended short of the last.
+  const allDates = visual.lines.flatMap((line) => line.points.map((p) => String(p.date)));
+  const tailSet = new Set(allDates.map((d) => d.slice(4)));
+  const annualStamp = !fyMode && tailSet.size === 1 && /^-\d{2}(?:-\d{2})?$/.test([...tailSet][0] ?? "");
   const timeOf = (d: string) => {
     if (fyMode) return Number(String(d).slice(0, 4)) + 0.25;
+    if (annualStamp) return Number(String(d).slice(0, 4));
     // Accepts YYYY, YYYY-MM, YYYY-MM-DD and YYYY-Qn. Both the quarter and the DAY matter:
     // without the quarter branch all four quarters of a year stacked on one x-position, and
     // without the day every date in a month did the same, so a daily series rendered as one
@@ -772,28 +794,33 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       const turns = tail.slice(2).filter((point, index) => Math.sign(point.value - tail[index + 1].value) * Math.sign(tail[index + 1].value - tail[index].value) < 0).length;
       if (dProj && tail.length > 12 && turns / tail.length > 0.25) [dSolid, dProj] = [d, ""];
     }
-    return { ...line, d, dSolid, dProj, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: inks[lineIndex].color, dash: inks[lineIndex].dash };
+    const endLabelText = latest ? endText(latest.value) : "";
+    const nameLines = mobile || visual.lines.length === 1 ? [line.label] : endNameLines(line.label, endLabelText);
+    return { ...line, d, dSolid, dProj, areaD, latest, latestX, latestY, endLabelText, nameLines, color: inks[lineIndex].color, dash: inks[lineIndex].dash };
   });
   const minGap = mobile ? 15 : 18;
+  // A wrapped name runs down from its first baseline, so the label under it starts lower.
+  const extra = (index: number) => ((pathsRaw[index].nameLines?.length ?? 1) - 1) * 15;
   const labelTop = pad.t + 14;
   const labelBottom = height - pad.b - 10;
   const sorted = pathsRaw
     .map((path, index) => ({ index, y: path.latestY }))
     .sort((a, b) => a.y - b.y);
+  const need = (i: number) => minGap + extra(sorted[i - 1].index);
   for (let i = 1; i < sorted.length; i += 1) {
-    if (sorted[i].y - sorted[i - 1].y < minGap) sorted[i].y = sorted[i - 1].y + minGap;
+    if (sorted[i].y - sorted[i - 1].y < need(i)) sorted[i].y = sorted[i - 1].y + need(i);
   }
-  const overflow = sorted.at(-1) ? sorted.at(-1)!.y - labelBottom : 0;
+  const overflow = sorted.at(-1) ? sorted.at(-1)!.y + extra(sorted.at(-1)!.index) - labelBottom : 0;
   if (overflow > 0) {
     for (const item of sorted) item.y -= overflow;
   }
   for (let i = sorted.length - 2; i >= 0; i -= 1) {
-    if (sorted[i + 1].y - sorted[i].y < minGap) sorted[i].y = sorted[i + 1].y - minGap;
+    if (sorted[i + 1].y - sorted[i].y < need(i + 1)) sorted[i].y = sorted[i + 1].y - need(i + 1);
   }
-  for (const item of sorted) item.y = Math.max(labelTop, Math.min(labelBottom, item.y));
+  for (const item of sorted) item.y = Math.max(labelTop, Math.min(labelBottom - extra(item.index), item.y));
   // Clamping to the top can squeeze labels back together; space them again from the top.
   for (let i = 1; i < sorted.length; i += 1) {
-    if (sorted[i].y - sorted[i - 1].y < minGap) sorted[i].y = sorted[i - 1].y + minGap;
+    if (sorted[i].y - sorted[i - 1].y < need(i)) sorted[i].y = sorted[i - 1].y + need(i);
   }
   const labelY = new Map(sorted.map((item) => [item.index, item.y]));
   const endLabels = harmoniseDecimals(pathsRaw.map((path) => path.endLabelText));
@@ -812,7 +839,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
         const firstMonth = Math.ceil(minTime * 12 - 1e-9);
         const lastMonth = Math.floor(maxTime * 12 + 1e-9);
         // Whole months only: a fractional step ("2.5 months") indexed past the month names.
-        const monthStep = Math.max(1, Math.round(niceNum((lastMonth - firstMonth) / (maxLabels - 1), false)));
+        const monthStep = niceMonths((lastMonth - firstMonth) / (maxLabels - 1));
         const months = [firstMonth];
         for (let month = Math.ceil((firstMonth + 1) / monthStep) * monthStep; month < lastMonth; month += monthStep) months.push(month);
         if (lastMonth > firstMonth) months.push(lastMonth);
@@ -821,8 +848,8 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
           label: `${MONTH_ABBR[month % 12]} ${String(Math.floor(month / 12)).slice(-2)}`
         }));
       }
-      const step = niceNum((end - start) / (maxLabels - 1), false);
-      const minGapYears = ((maxTime - minTime) * 48) / plotW;
+      const step = Math.max(1, niceNum((end - start) / (maxLabels - 1), false));
+      const minGapYears = ((maxTime - minTime) * 62) / plotW;
       const years = [start];
       // Use a step suited to the span: every year on a short series, five-year
       // marks on a roughly twenty-year series. Keep the endpoints and omit any
@@ -875,8 +902,8 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       const yearLabels = years.map((time) => String(Math.round(time)));
       if (new Set(yearLabels).size < yearLabels.length) {
         const monthTicks: number[] = [];
-        const monthStep = Math.max(1, Math.round(((maxTime - minTime) * 12) / Math.max(1, tickCount - 1)));
-        const firstMonth = Math.ceil(minTime * 12);
+        const monthStep = niceMonths(((maxTime - minTime) * 12) / Math.max(1, tickCount - 1));
+        const firstMonth = Math.ceil(Math.ceil(minTime * 12 - 1e-9) / monthStep) * monthStep;
         for (let m = firstMonth; m <= maxTime * 12 + 1e-9; m += monthStep) monthTicks.push(m / 12);
         if (monthTicks.length >= 2) {
           axisTicks = monthTicks.map((time) => {
@@ -920,7 +947,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // any between that would run into a kept neighbour (the last wins over the one before it).
   {
     // Measured against the size the stylesheet actually prints ticks at, with a margin.
-    const axisFont = mobile ? 12.5 : 13, room = (t: { label: string }) => String(t.label).length * axisFont * 0.62 + 12;
+    const axisFont = mobile ? 12.5 : 13, room = (t: { label: string }) => String(t.label).length * axisFont * 0.62 + (mobile ? 22 : 16);
     const sortedTicks = [...axisTicks].sort((a, b) => a.xPos - b.xPos);
     const kept: typeof axisTicks = [];
     for (const t of sortedTicks) {
@@ -958,24 +985,45 @@ function isFySeries(dates: string[]) {
   });
 }
 const fyLabel = (year: number) => `${year}-${String((year + 1) % 100).padStart(2, "0")}`;
+/** A month step a calendar reader expects (1, 2, 3, 6 or 12 months, then whole years), at
+ *  least `raw`: an 8-month step ran Jan 24, Sep 24, May 25. */
+const niceMonths = (raw: number) => [1, 2, 3, 6, 12, 24, 36, 60].find((s) => s >= raw - 1e-9) ?? 12 * Math.ceil(raw / 12);
+/** A desktop end label's name, on one line when "Name value" is short, else wrapped onto two
+ *  lines of about half its length with the value after the last. A long name on one line
+ *  ("World Inequality Database method 22.3%") made the right gutter a third of the figure. */
+function endNameLines(label: string, value: string) {
+  if (label.length + value.length + 1 <= 24) return [label];
+  const lines = wrapWords(label, Math.max(14, Math.ceil(label.length / 2) + 2));
+  return lines.length <= 2 ? lines : [lines[0], lines.slice(1).join(" ")];
+}
 
 /** Places each line's end value just above or below its last point, inside the plot, on the
  *  side the line does not come from. Returns null when any label would touch a line, another
  *  label or the plot edges, so the caller keeps the gutter instead. */
+/** Each drawn line as a list of [x, y] vertices, parsed back from its path. */
+const linePolys = (g: LineGeometry) => g.paths.map((p: any) => [...String(p.d).matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map((mm) => [Number(mm[1]), Number(mm[2])]));
+/** The y values of a line over an x range (vertices inside it and the ends, interpolated). */
+function ysOver(pts: number[][], xa: number, xb: number) {
+  const out: number[] = [];
+  for (let i = 1; i < pts.length; i += 1) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
+    if (Math.max(x0, x1) < xa || Math.min(x0, x1) > xb) continue;
+    const at = (x: number) => (x1 === x0 ? y0 : y0 + ((x - x0) / (x1 - x0)) * (y1 - y0));
+    out.push(at(Math.max(xa, Math.min(x0, x1))), at(Math.min(xb, Math.max(x0, x1))));
+  }
+  return out;
+}
+/** Whether a text box [xa, xb] x [top, bot] would touch any drawn line. */
+const boxHitsLines = (polys: number[][][], xa: number, xb: number, top: number, bot: number) =>
+  polys.some((pts) => ysOver(pts, xa, xb).some((yy) => yy > top - 2 && yy < bot + 2) || (() => {
+    // a segment can also pass straight through the box between two sampled ends
+    const ys = ysOver(pts, xa, xb);
+    return ys.length > 1 && Math.min(...ys) < top && Math.max(...ys) > bot;
+  })());
+
 function placeEndLabelsInside(g: LineGeometry, single: boolean) {
   const plotT = g.pad.t, plotB = g.height - g.pad.b, plotL = g.pad.l;
-  const polys = g.paths.map((p: any) => [...String(p.d).matchAll(/[ML](-?[\d.]+) (-?[\d.]+)/g)].map((mm) => [Number(mm[1]), Number(mm[2])]));
-  // The y values of every line over an x range (vertices inside it and the ends, interpolated).
-  const ysOver = (pts: number[][], xa: number, xb: number) => {
-    const out: number[] = [];
-    for (let i = 1; i < pts.length; i += 1) {
-      const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
-      if (Math.max(x0, x1) < xa || Math.min(x0, x1) > xb) continue;
-      const at = (x: number) => (x1 === x0 ? y0 : y0 + ((x - x0) / (x1 - x0)) * (y1 - y0));
-      out.push(at(Math.max(xa, Math.min(x0, x1))), at(Math.min(xb, Math.max(x0, x1))));
-    }
-    return out;
-  };
+  const polys = linePolys(g);
   const boxes: Array<[number, number, number, number]> = [];
   const result: Array<{ x: number; y: number; below: boolean } | null> = [];
   for (let i = 0; i < g.paths.length; i += 1) {
@@ -996,14 +1044,22 @@ function placeEndLabelsInside(g: LineGeometry, single: boolean) {
       for (const below of sides) {
         const top = below ? p.latestY + gap : p.latestY - gap - h, bot = top + h;
         if (top < plotT - 12 || bot > plotB - 3) continue;
-        const hitsLine = polys.some((pts) => ysOver(pts, xa - 2, xb).some((yy) => yy > top - 3 && yy < bot + 3));
+        const hitsLine = boxHitsLines(polys, xa - 2, xb, top - 1, bot + 1);
         const hitsBox = boxes.some(([a, t, b2, bt]) => xa < b2 && xb > a && top < bt + 2 && bot > t - 2);
-        if (!hitsLine && !hitsBox) { done = { x: xb, y: top, below }; boxes.push([xa, top, xb, bot]); break; }
+        // nor any line's end dot (its own included: the label sits beside its dot, not on it)
+        const hitsDot = g.paths.some((q: any) => q.latest && q.latestX > xa - 5 && q.latestX < xb + 5 && q.latestY > top - 5 && q.latestY < bot + 5);
+        if (!hitsLine && !hitsBox && !hitsDot) { done = { x: xb, y: top, below }; boxes.push([xa, top, xb, bot]); break; }
       }
       if (done) break;
     }
     if (!done) return null;
     result.push(done);
+  }
+  // The values must stack in the order the lines end: a higher line's value set below a
+  // lower one's (13,303 printed above 13,631) misreads, so such a chart keeps the gutter.
+  for (let i = 0; i < result.length; i += 1) for (let j = 0; j < result.length; j += 1) {
+    const a = result[i], b = result[j];
+    if (a && b && g.paths[i].latestY < g.paths[j].latestY - 1 && a.y > b.y) return null;
   }
   return result;
 }
@@ -1024,7 +1080,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   const asNotes = bands.filter((band) => !band.proj).length <= 3;
   for (const band of bands) {
     // A label shows only if it clears the previous one (measured by its own width).
-    const bw = String(band.label || "").length * (m ? 11 : 11.5) * 0.58;
+    const bw = String(band.label || "").length * 11.5 * 0.58;
     const showLabel = band.label && band.x + band.w / 2 - bw / 2 > lastBandLabel + 8;
     if (showLabel) lastBandLabel = band.x + band.w / 2 + bw / 2;
     // Everything after the last measured year sits on a faint ground: the projection zone.
@@ -1039,13 +1095,13 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       const firstNearTop = first && g.y(first.value) < pad.t + 34;
       const ly = firstNearTop && (right ? bx - (m ? 72 : 96) : bx) < pad.l + (m ? 110 : 150) ? pad.t + 40 : pad.t + 12;
       b += `<line x1="${svgCoord(bx)}" y1="${pad.t}" x2="${svgCoord(bx)}" y2="${svgCoord(plotB)}" stroke="#121212" stroke-width="0.75" stroke-dasharray="2 3">${band.label ? `<title>${band.label}</title>` : ""}</line>`;
-      if (showLabel) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: m ? 11 : 12, fill: "#4f4f4f", anchor: right ? "end" : "start" });
+      if (showLabel) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: m ? 11.5 : 12, fill: "#4f4f4f", anchor: right ? "end" : "start" });
       continue;
     }
     b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
     // Kept inside the plot: a band near the left edge would otherwise write over the y axis.
-    const half = String(band.label).length * (m ? 11 : 11.5) * 0.28;
-    if (showLabel) b += almTxt(Math.min(plotR - half, Math.max(pad.l + half + 2, band.x + band.w / 2)), pad.t + 12, band.label!, { size: m ? 11 : 11.5, fill: "#a63d24", anchor: "middle" });
+    const half = String(band.label).length * 11.5 * 0.28;
+    if (showLabel) b += almTxt(Math.min(plotR - half, Math.max(pad.l + half + 2, band.x + band.w / 2)), pad.t + 12, band.label!, { size: 11.5, fill: "#a63d24", anchor: "middle" });
   }
   void asNotes;
   if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
@@ -1063,7 +1119,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     const ry = g.y(ref.value);
     if (ry >= pad.t && ry <= plotB) {
       b += almLine(pad.l, ry, plotR, ry, "#4f4f4f", 0.9, "4 3");
-      b += almHalo(pad.l + 8, Math.max(pad.t + 12, ry - 7), ref.label, { size: m ? 11 : 12.5, fill: "#4f4f4f" });
+      b += almHalo(pad.l + 8, Math.max(pad.t + 12, ry - 7), ref.label, { size: m ? 11.5 : 12.5, fill: "#4f4f4f" });
     }
   }
   // context series first, emphasised series on top
@@ -1090,6 +1146,27 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     if (p.dProj) b += `<path d="${p.dProj}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="butt" stroke-dasharray="${svgCoord(w * 2.4)} ${svgCoord(w * 1.8)}"${op}><title>${p.label}, projected</title></path>`;
     void i;
   }
+  // End labels for lines that stop short of the right edge, placed before the loop so each
+  // can be tested against the others as well as against every line. One with no clear spot
+  // falls back to the gutter beside its end.
+  const early = new Map<any, { xr: number; ly: number }>();
+  if (!single) {
+    const polys = linePolys(g), placed: Array<[number, number, number, number]> = [];
+    for (const p of g.paths) {
+      if (!p.latest || g.inside?.[g.paths.indexOf(p)] || p.latestX >= plotR - 40) continue;
+      const text = m ? String(p.endLabelText) : `${(p.nameLines as string[]).join(" ")} ${p.endLabelText}`;
+      const w = text.length * labSize * 0.58, xr = p.latestX - 6;
+      if (xr - w < pad.l + 4) continue;
+      const spots = [p.latestY - 10, p.latestY + 10 + labSize, p.latestY - 22, p.latestY + 22 + labSize].filter((yy) => yy - labSize > pad.t && yy < plotB - 2);
+      const ly = spots.find((yy) => {
+        const box: [number, number, number, number] = [xr - w, yy - labSize * 0.85, xr, yy + labSize * 0.25];
+        return !boxHitsLines(polys, box[0], box[2], box[1], box[3]) && !placed.some((q) => box[0] < q[2] && box[2] > q[0] && box[1] < q[3] + 2 && box[3] > q[1] - 2);
+      });
+      if (ly === undefined) continue;
+      placed.push([xr - w, ly - labSize * 0.85, xr, ly + labSize * 0.25]);
+      early.set(p, { xr, ly });
+    }
+  }
   for (const p of g.paths) {
     if (!p.latest) continue;
     b += `<circle cx="${svgCoord(p.latestX)}" cy="${svgCoord(p.latestY)}" r="${single ? (m ? 4 : 4.5) : m ? 3 : 3.5}" fill="${p.color}" stroke="#fff" stroke-width="${m ? 1.5 : 2}"/>`;
@@ -1098,11 +1175,11 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       // the latest value, written beside its point (on a phone, inside the plot when it fits)
       if (inside) {
         b += almHalo(inside.x, inside.y + 12, p.endLabelText, { size: 14, fill: "#121212", weight: 600, anchor: "end" });
-        b += almHalo(inside.x, inside.y + 26, pointDateLabel(p.latest.date, p.points), { size: 11, fill: "#8a8a8a", anchor: "end" });
+        b += almHalo(inside.x, inside.y + 26, pointDateLabel(p.latest.date, p.points), { size: 11.5, fill: "#8a8a8a", anchor: "end" });
       } else {
       const lx = p.latestX + (m ? 8 : 10);
       b += almTxt(lx, p.latestY + (m ? 5 : 6), p.endLabelText, { size: m ? 14 : o.isLead ? 19 : 17, fill: "#121212", weight: 600 });
-      b += almTxt(lx, p.latestY + (m ? 20 : 25), pointDateLabel(p.latest.date, p.points), { size: m ? 11 : 12, fill: "#8a8a8a" });
+      b += almTxt(lx, p.latestY + (m ? 20 : 25), pointDateLabel(p.latest.date, p.points), { size: m ? 11.5 : 12, fill: "#8a8a8a" });
       }
       const first = p.points[0];
       if (first && p.points.length > 5 && g.dateMode) {
@@ -1115,17 +1192,34 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
         // Set the label on the side the line leaves from: under the point when the line rises.
         const ahead = p.points[Math.min(p.points.length - 1, Math.max(3, Math.round(p.points.length / 12)))];
         const rising = ahead && g.y(ahead.value) < fy - 4;
-        const fly = rising && fy + 20 < plotB - 4 ? fy + 20 : Math.max(pad.t + 10, fy - 10);
-        b += almHalo(fx + 6, fly, `${firstText} in ${pointDateLabel(first.date, p.points)}`, { size: m ? 11.5 : 13, fill: "#121212", weight: 600 });
+        const firstLabel = `${firstText} in ${pointDateLabel(first.date, p.points)}`, fs = m ? 11.5 : 13;
+        // Tried under and over the point, then a step further off, against the line itself:
+        // a label set across a steep first stretch ("43 in 1990" over a spike) is unreadable.
+        const lw = firstLabel.length * fs * 0.58, polys = linePolys(g);
+        const below = (k: number) => fy + 20 + k, above = (k: number) => fy - 10 - k;
+        const tries = (rising ? [below(0), above(0), below(10), above(10), below(20), above(20)] : [above(0), below(0), above(10), below(10), above(20), below(20)])
+          .filter((yy) => yy - fs > pad.t - 4 && yy < plotB - 4);
+        // A dense series with nowhere clear (monthly NREGA spikes) keeps the dot and leaves the
+        // value to the tooltip: text laid across a thicket of lines reads as neither.
+        const fly = tries.find((yy) => !boxHitsLines(polys, fx + 4, fx + 8 + lw, yy - fs * 0.8, yy + fs * 0.2));
+        if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#121212", weight: 600 });
       }
     } else if (inside) {
       b += almHalo(inside.x, inside.y + 10.5, p.endLabelText, { size: labSize, fill: p.color, weight: 600, anchor: "end" });
+    } else if (early.has(p)) {
+      // A line that stops well short of the others (observations ending where the projections
+      // begin) is named just before its own end, above or below it, clear of every line;
+      // set after its end it would sit among the lines that carry on.
+      const { xr, ly } = early.get(p)!, names = m ? [] : (p.nameLines as string[]);
+      b += m
+        ? almHalo(xr, ly, p.endLabelText, { size: labSize, fill: p.color, weight: 600, anchor: "end" })
+        : `<text x="${svgCoord(xr)}" y="${svgCoord(ly)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${names.join(" ")}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
     } else {
       const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + (m ? 9 : 12);
       if (moved) b += `<path d="M${svgCoord(p.latestX + 4)} ${svgCoord(p.latestY)}L${svgCoord(lx - 3)} ${svgCoord(ly - 4)}" fill="none" stroke="${p.color}" stroke-width="0.8" stroke-opacity="0.6"/>`;
       b += m
         ? almHalo(lx, ly, p.endLabelText, { size: labSize, fill: p.color, weight: 600 })
-        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${p.label}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
+        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${(p.nameLines as string[]).map((name, k) => `<tspan${k ? ` x="${svgCoord(lx)}" dy="15"` : ""} fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${name}</tspan>`).join("")}<tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
     }
   }
   void axisSize;
