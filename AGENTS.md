@@ -90,10 +90,20 @@ The per-chart **SOURCE line auto-links** to `series.sourceUrl`. So:
   `ArticleEvidence.astro` calls `refParts()`, which renders `{ label, url }` as a hyperlink,
   a string that is *only* a bare URL as a hyperlink, and any other plain string as dead text.
   So write `{ label: "India Meteorological Department, for all-India rainfall 1901-2025.", url: "https://imdpune.gov.in/cmpg/Product/Rainfall_Data.html" }`,
-  never the bare sentence. (An earlier version of this file said these render as plain text
-  and that adding links needed sign-off. That is out of date: the renderer has supported
-  links for a while and most articles simply never used them. As of Aug 2026 only 24 of 373
-  source notes across the site are linked, so assume any article you touch needs fixing.)
+  never the bare sentence.
+- **The verified lists are pinned in the registry: `scripts/registry/source-notes.mjs`.**
+  Since October 2026 every article's `sourceNotes` and `furtherReading` live there as
+  `{ label, url, check }`, keyed by question id (a question may instead declare them inline
+  in `v1-indicators.mjs`, which wins). `src/data/questions.ts` merges them over the
+  explanation at build time and `generate-explanations.mjs` writes them into fresh
+  explanations, so regenerating prose cannot bring back unlinked or invented notes. After
+  editing a list, run `python3 scripts/apply-pinned-references.py` to sync the JSON files.
+  `npm run explain:v1:validate` **fails** on any rendered entry without a URL or with an em
+  dash. Verify links with `node scripts/check-source-links.mjs [--question=q.id]`
+  (`--file=draft.json` checks a list before pinning; set `INDICA_CHROME` and
+  `INDICA_PUPPETEER_DIR` for client-rendered pages). `check` is the term the page must
+  contain. A host that refuses every automated client (SSRN, unctad.org) may carry
+  `manual: "<how it was checked>"` and reports MANUAL. See `docs/SOURCE_LINKS_REPORT.md`.
 - **Verify the CONTENT, not just the status code.** A 200 is not proof the link is right.
   `psl.noaa.gov/gcos_wgsp/Timeseries/DMI/` returns 200 and serves an **AMO SST page**, with
   no mention of the Dipole Mode Index anywhere; that wrong link shipped once already. Fetch
@@ -111,9 +121,9 @@ The per-chart **SOURCE line auto-links** to `series.sourceUrl`. So:
   ingest used. The artifact's `sourceUrl` is the right starting point but is often an API path.
 - The generator emits plain strings and **invents plausible-but-wrong attributions** (it once
   credited CWC reservoir bulletins for an article that deliberately excluded them), so source
-  notes must be overwritten after generation. See `scripts/finish-el-nino-2026-explanation.mjs`
-  for the pattern: it hard-codes the verified list and **exits non-zero if any note lacks a
-  URL**, so a regeneration cannot silently drop the links.
+  notes must be overwritten after generation. The pinned registry lists above do this for
+  every article; when you add a new article, pin its verified list in `source-notes.mjs`
+  in the same pass, built from the series it actually charts, not from the generated notes.
 - The evidence block already links every figure to its **GitHub data file**, pinned to the publish commit.
 
 ### Evidence commits

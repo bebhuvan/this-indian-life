@@ -389,13 +389,26 @@
     }
   ],
   "sourceNotes": [
-    "Primary access layer: IndiaDataHub Economic Monitor, Banking/Credit category, RBI-sourced monthly identifiers.",
-    "Expanded normalized artifact: data/series/indiadatahub.IN.banking.idh.credit_monthly.long.json, 22,531 rows across 88 grouped monthly line items and 188 fetched series variants.",
-    "Probe catalog: data/catalog/indiadatahub-banking-credit-probe.json; ingest manifest: data/catalog/indiadatahub-banking-credit-manifest.json.",
-    "BIS Total Credit artifact: data/series/bis.IN.credit.total_credit_quarterly.long.json, selected quarterly total-credit rows for household, private non-financial, government and related borrower-sector metrics.",
-    "BIS Credit-to-GDP Gaps artifact: data/series/bis.IN.credit.credit_gap_quarterly.long.json, selected quarterly private non-financial credit-to-GDP actual, trend and gap rows.",
-    "IMF Global Debt Database artifact: data/series/imf.GDD.HH_LS.household_debt_pct_gdp.long.json, annual household debt by loans and debt securities as percent of GDP.",
-    "RBI SIBC Excel archive remains a cross-check for latest line items and taxonomy notes."
+    {
+      "label": "RBI, Sectoral Deployment of Bank Credit, monthly press releases and data, April 2007 onward (old classification to Dec 2018, current from Jan 2019)",
+      "url": "https://rbi.org.in/Scripts/Data_Sectoral_Deployment.aspx"
+    },
+    {
+      "label": "IndiaDataHub Economic Monitor, Banking/Credit category: the access layer used to pull the RBI sectoral credit series (API documentation)",
+      "url": "https://feeds.indiadatahub.com/documentation?urls.primaryName=Economic%20Monitor"
+    },
+    {
+      "label": "BIS, Total credit to the non-financial sector, quarterly, households and private non-financial sector, India and peers",
+      "url": "https://data.bis.org/topics/TOTAL_CREDIT"
+    },
+    {
+      "label": "BIS, Credit-to-GDP gaps, quarterly, private non-financial sector, India",
+      "url": "https://data.bis.org/topics/CREDIT_GAPS"
+    },
+    {
+      "label": "IMF Global Debt Database, household debt, loans and debt securities (HH_LS), % of GDP",
+      "url": "https://www.imf.org/external/datamapper/HH_LS@GDD"
+    }
   ],
   "caveats": [
     "The long monthly charts splice old-classification series through December 2018 with current-classification series from January 2019; this extends history but is not a perfectly unchanged taxonomy.",

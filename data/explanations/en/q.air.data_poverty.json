@@ -253,11 +253,22 @@
     }
   ],
   "sourceNotes": [
-    "CPCB National Air Quality Index official material: https://cpcb.nic.in/National-Air-Quality-Index/ and the CPCB CCR AQI report linked from the portal.",
-    "CPCB Central Control Room raw repository route inspected at https://airquality.cpcb.gov.in/ccr/#/repository/data; reproducible raw file-list endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/file-path and download endpoint: https://airquality.cpcb.gov.in/caaqms-common/dataRepository/download-excel-file.",
-    "CPCB CCR public AQI surfaces inspected at /#/all-india-aqi-portal, /#/caaqm-dashboard-all/advance-search and /#/repository/aqi; several dashboard routes used an encrypted browser proxy, and a stable public AQI audit endpoint was not reproduced.",
-    "OAQ CPCB latest mirror and station hierarchy snapshot inspected through https://oaq.notf.in, generated 2026-06-23T17:40:12+05:30.",
-    "Census 2011 statutory-town count from the Census India urban frame: https://censusindia.gov.in/nada/index.php/catalog/42811."
+    {
+      "label": "CPCB Central Control Room, data repository of station files by frequency and year (audited June 2026)",
+      "url": "https://airquality.cpcb.gov.in/ccr/#/repository/data"
+    },
+    {
+      "label": "CPCB, National Air Quality Index: method, categories and AQI report",
+      "url": "https://cpcb.nic.in/National-Air-Quality-Index/"
+    },
+    {
+      "label": "OAQ (Open Air Quality) platform, CPCB mirror and station hierarchy, snapshot generated 23 June 2026",
+      "url": "https://oaq.notf.in"
+    },
+    {
+      "label": "Census of India 2011, Rural Urban Distribution of Population (Provisional Population Totals), RGI presentation: 4,041 statutory towns",
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/1430"
+    }
   ],
   "caveats": [
     "This is a visibility audit, not a pollution trend. More station-days means more public observations, not dirtier air.",

@@ -12,9 +12,9 @@
 //  - MoSPI's PLFS report pages render a generic shell to automated checks, so the
 //    labour-force note links the eSankhyiki portal the series was taken from, and
 //    says so in the label.
-//  - Business Standard blocks automated access, so its delimitation story was matched
-//    by title and date through a web search rather than by page content; The India
-//    Forum's analysis of the same debate, which did verify, is linked beside it.
+//  - Business Standard serves its delimitation story to a browser user agent. The label
+//    quotes the live headline; the URL slug carries an older one that appears nowhere on
+//    the page (re-checked October 2026). The India Forum's analysis is linked beside it.
 // Exits non-zero if any entry lacks a URL, so a regeneration cannot silently drop links.
 
 import { readFile, writeFile } from "node:fs/promises";
@@ -36,7 +36,7 @@ const SOURCE_NOTES = [
 const FURTHER_READING = [
   { label: "Data For India, interactive fertility charts drawing on SRS", url: "https://www.dataforindia.com/fertility/" },
   { label: "National Commission on Population, Population Projections for India and States 2011-2036 (2019)", url: "https://nhm.gov.in/New_Updates_2018/Report_Population_Projection_2019.pdf" },
-  { label: "Business Standard, 'Fearing political loss, 2 south CMs seek to reverse population policies' (October 2024), on the delimitation debate", url: "https://www.business-standard.com/politics/fearing-political-loss-2-south-cms-seek-to-reverse-population-policies-124102101208_1.html" },
+  { label: "Business Standard, 'Delimitation in focus as 2 South CMs talk reversing population policies' (October 2024), on the delimitation debate", url: "https://www.business-standard.com/politics/fearing-political-loss-2-south-cms-seek-to-reverse-population-policies-124102101208_1.html" },
   { label: "The India Forum, 'South Indian Politicians Want Larger Families: What's in It for the Women?', on fertility and the delimitation debate", url: "https://www.theindiaforum.in/health/south-indian-politicians-want-larger-families" },
 ];
 

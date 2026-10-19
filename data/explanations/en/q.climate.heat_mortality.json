@@ -1008,29 +1008,102 @@
     }
   ],
   "sourceNotes": [
-    "Temperature anomaly data from OWID/Copernicus ERA5.",
-    "State warming map from Copernicus ERA5 reanalysis.",
-    "Heat index historical and projections from World Bank Climate Change Knowledge Portal (CCKP), CMIP6.",
-    "IMD heatwave deaths from Disastrous Weather Events reports 2013-2024.",
-    "NCRB accidental deaths data from news reports citing official report.",
-    "NCDC heatstroke surveillance data from secondary policy articles and parliamentary reporting.",
-    "Frontiers model excess deaths from the primary article.",
-    "OWID/EM-DAT extreme temperature deaths from OWID Grapher, underlain by EM-DAT.",
-    "Labour force shares from MoSPI Periodic Labour Force Survey.",
-    "Electricity access from World Bank.",
-    "Cooling appliance ownership from MoSPI NSS 78th Round (2020-21).",
-    "Anaemia prevalence from NFHS-5 (2019-21).",
-    "Heat risk index from CEEW 2025 study.",
-    "Multidimensional poverty from NITI Aayog National MPI 2023 (based on NFHS-5).",
-    "Crude death rate from World Bank.",
-    "Population for sensitivity check based on implied 2024 population from crude death rate and baseline deaths calculation.",
-    "Lancet Countdown 2025 India indicators, UNDP Human Climate Horizons, and other sources used but not central to main charts.",
-    "Death-registration, institutional death and medical-attention figures from CRS 2023, Office of the Registrar General of India.",
-    "Medical certification coverage and state-wise MCCD coverage from MCCD 2023, Office of the Registrar General of India.",
-    "NFHS-6 electricity figures come from the 2023-24 national factsheets; NFHS-5 fan and combined AC/cooler ownership come from India Report Table 2.11.",
-    "The state vulnerability scatter combines CEEW heat-risk coverage, NSS 78 AC/cooler ownership, NITI MPI 2023 poverty and MCCD 2023 cause-certification coverage; it is context, not a death model.",
-    "Lancet Countdown India 2025 labour-hour figures are labour-capacity estimates, not death counts or observed wage losses.",
-    "MoSPI HCES 2023-24 MPCE is consumption expenditure per person per month, not income or savings."
+    {
+      "label": "India Meteorological Department, Disastrous Weather Events reports: heatwave deaths 2013-2024, with the 2024 report's monthly and state tables (2024 report, PDF)",
+      "url": "https://www.imdpune.gov.in/library/public/DWE_2024.pdf"
+    },
+    {
+      "label": "National Crime Records Bureau, Accidental Deaths and Suicides in India 2023: heat and sun stroke deaths (report index page)",
+      "url": "https://www.ncrb.gov.in/accidental-deaths-suicides-in-india-adsi.html"
+    },
+    {
+      "label": "NCDC heat-related illness surveillance, 2024: 374 heatstroke deaths from 1 March to 27 July, Lok Sabha reply as reported by PTI in The Week",
+      "url": "https://www.theweek.in/wire-updates/national/2024/08/02/del32-lsq-health-heatstroke.html"
+    },
+    {
+      "label": "TERI, 'Silent disaster: why India must build stronger heatwave resilience', citing NCDC's 161 confirmed heatstroke deaths in 2024",
+      "url": "https://www.teriin.org/index.php/article/silent-disaster-why-india-must-build-stronger-heatwave-resilience"
+    },
+    {
+      "label": "Narang et al., 'Estimating heatwave-induced excess mortality in India's districts', Frontiers in Environmental Health (2026): the modelled 3,400 excess-death figure",
+      "url": "https://www.frontiersin.org/journals/environmental-health/articles/10.3389/fenvh.2026.1789071/full"
+    },
+    {
+      "label": "EM-DAT via Our World in Data: deaths from natural disasters by type, extreme temperature, India",
+      "url": "https://ourworldindata.org/grapher/natural-disasters-deaths"
+    },
+    {
+      "label": "Office of the Registrar General of India, Vital Statistics of India based on the Civil Registration System 2023: registration, institutional deaths and medical attention (PDF)",
+      "url": "https://dc.crsorgi.gov.in/assets/download/Annual-Reports/crs/2023.pdf"
+    },
+    {
+      "label": "Office of the Registrar General of India, Medical Certification of Cause of Death 2023: certification coverage by state (PDF)",
+      "url": "https://dc.crsorgi.gov.in/assets/download/Annual-Reports/mccd/2023.pdf"
+    },
+    {
+      "label": "Copernicus Climate Change Service, ERA5 monthly averaged reanalysis: state warming and relative humidity",
+      "url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means"
+    },
+    {
+      "label": "Copernicus Climate Change Service, ERA5 post-processed daily statistics: hot days at or above 40°C and warm nights at or above 26°C",
+      "url": "https://cds.climate.copernicus.eu/datasets/derived-era5-single-levels-daily-statistics"
+    },
+    {
+      "label": "Copernicus ERA5 via Our World in Data: annual temperature anomaly, India",
+      "url": "https://ourworldindata.org/grapher/annual-temperature-anomalies"
+    },
+    {
+      "label": "Open-Meteo Historical Weather API (ERA5 daily): very hot days at or above 35°C for Indian cities, 1940s baseline against 2016-2025",
+      "url": "https://open-meteo.com/en/docs/historical-weather-api"
+    },
+    {
+      "label": "World Bank Climate Change Knowledge Portal, India CMIP6 projections: heat index above 39°C and cooling degree days under SSP1-2.6, SSP2-4.5 and SSP5-8.5",
+      "url": "https://climateknowledgeportal.worldbank.org/country/india/climate-data-projections"
+    },
+    {
+      "label": "World Bank, World Development Indicators, India: crude death rate (SP.DYN.CDRT.IN, also the base for the sensitivity check), employment in agriculture (SL.AGR.EMPL.ZS), vulnerable employment (SL.EMP.VULN.ZS), access to electricity (EG.ELC.ACCS.ZS), population aged 65+ (SP.POP.65UP.TO.ZS), urban population (SP.URB.TOTL.IN.ZS), PM2.5 exposure (EN.ATM.PM25.MC.M3)",
+      "url": "https://databank.worldbank.org/source/world-development-indicators"
+    },
+    {
+      "label": "ILO modelled estimates, informal employment rate in agriculture (SDG indicator 8.3.1), India (data file from the ILOSTAT API)",
+      "url": "https://rplumber.ilo.org/data/indicator?id=SDG_0831_SEX_ECO_RT_A&ref_area=IND&format=.csv"
+    },
+    {
+      "label": "MoSPI eSankhyiki portal (home page), where the Periodic Labour Force Survey workforce shares by sector are published",
+      "url": "https://esankhyiki.mospi.gov.in/"
+    },
+    {
+      "label": "MoSPI, NSS 78th round (2020-21), Table 22: households with an air conditioner or air cooler, by sector and state (XLSX)",
+      "url": "https://mospi.gov.in/sites/default/files/reports_and_publication/NSS78-20-21/Table%2022%20-%20AC,%20cooler.xlsx"
+    },
+    {
+      "label": "IIPS, National Family Health Survey 5 (2019-21) India Report: fan and AC/cooler ownership (Table 2.11) and anaemia (PDF)",
+      "url": "https://healthnutritionindia.in/reports/documents/35/NFHS-5_INDIA_REPORT.pdf"
+    },
+    {
+      "label": "IIPS, National Family Health Survey 6 (2023-24) national fact sheets: population in households with electricity (PDF)",
+      "url": "https://www.nfhsiips.in/nfhsuser/assets/National%20Family%20Health%20Survey%20(NFHS-6)%202023-2024%20Fact%20Sheets.pdf"
+    },
+    {
+      "label": "CEEW (2025), Mapping climate risks and impacts of extreme heatwave disaster in Indian districts: districts and population at high or very high heat risk",
+      "url": "https://www.ceew.in/publications/mapping-climate-risks-and-impacts-of-extreme-heatwave-disaster-in-indian-districts"
+    },
+    {
+      "label": "NITI Aayog, National Multidimensional Poverty Index 2023, based on NFHS-5 (PDF)",
+      "url": "https://www.niti.gov.in/sites/default/files/2023-08/India-National-Multidimentional-Poverty-Index-2023.pdf"
+    },
+    {
+      "label": "MoSPI, Household Consumption Expenditure Survey 2023-24 report: rural monthly per capita consumption expenditure by state, a spending measure, not income (PDF)",
+      "url": "https://mospi.gov.in/sites/default/files/publication_reports/Final_Report_HCES_2023-24L.pdf"
+    },
+    {
+      "label": "Lancet Countdown on Health and Climate Change, India data sheet 2025: heat-related labour-hour losses, a capacity estimate, not deaths or wages (PDF)",
+      "url": "https://lancetcountdown.org/wp-content/uploads/2025/10/India_Lancet-Countdown_2025_Data-Sheet-2.pdf"
+    },
+    {
+      "label": "UNDP Human Climate Horizons: India heat-related mortality and labour indicators",
+      "url": "https://horizons.hdr.undp.org/"
+    }
   ],
   "caveats": [
     "The sensitivity check is an illustrative arithmetic model, not an epidemiological estimate. It assumes uniform exposure and lift, which is unrealistic.",

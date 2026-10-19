@@ -272,11 +272,22 @@
     }
   ],
   "sourceNotes": [
-    "Berkeley Earth, India-wide land temperature anomaly vs the 1951–1980 average, homogenised station record.",
-    "ERA5 reanalysis (Copernicus Climate Change Service / ECMWF), India-wide annual mean temperature, 1940–2024.",
-    "Open-Meteo historical weather API (ERA5 daily), aggregated locally into annual series for 38 city coordinates: annual mean, days ≥35°C, nights ≥28°C, mean feels-like temperature, and days with feels-like maximum ≥40°C, 1940–2025.",
-    "Feels-like / apparent temperature combines air temperature with humidity, wind and radiation (Open-Meteo apparent_temperature), giving a humidity-aware heat measure the dry thermometer cannot.",
-    "All rankings compare each city's 1940s decade average with its 2016–2025 average, so single anomalous years do not drive the result; only complete calendar years are charted (partial 2026 excluded)."
+    {
+      "label": "Berkeley Earth, India regional land temperature: homogenised station record, anomaly against 1951-1980",
+      "url": "https://berkeleyearth.org/temperature-region/india"
+    },
+    {
+      "label": "Berkeley Earth, India TAVG trend file used for the national series (data file)",
+      "url": "https://berkeley-earth-temperature.s3.us-west-1.amazonaws.com/Regional/TAVG/india-TAVG-Trend.txt"
+    },
+    {
+      "label": "Copernicus Climate Change Service, ERA5 monthly averaged reanalysis on single levels: India-wide annual mean 2m temperature, 1940-2024",
+      "url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means"
+    },
+    {
+      "label": "Open-Meteo Historical Weather API (ERA5 daily), aggregated locally for 38 city coordinates: annual mean, days at or above 35°C, nights at or above 28°C, feels-like (apparent) temperature and days with feels-like maximum at or above 40°C, complete years 1940-2025",
+      "url": "https://open-meteo.com/en/docs/historical-weather-api"
+    }
   ],
   "caveats": [
     "ERA5 (via Open-Meteo) is a reanalysis estimate, not a single neighbourhood thermometer; each city uses one coordinate.",
