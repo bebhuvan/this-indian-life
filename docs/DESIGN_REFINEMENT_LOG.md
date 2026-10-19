@@ -96,5 +96,6 @@ Status: **done**, **partly**, **open**.
 | 31 | The contents rail sat at the screen edge at 1440 and highlighted the wrong section after a jump | article page | Shown from 1500 px in the margin beside the figures; highlight read from scroll position | done |
 | 32 | Citation and edit history were boxed grey panels with tiny letter-spaced buttons | `ArticleCite.astro`, edit log | Ruled, unboxed, citation set in Newsreader | done |
 | 33 | Em dashes and spaced hyphens in 45 chart titles, subtitles and reading-list labels | registry | Commas, colons and the house middle dot | done |
+| 34 | Projected years drawn exactly like measured ones (UN population to 2100, MoHFW ageing to 2036, CMIP6 scenarios, the income catch-up) | line charts, registry | `projectedAfter`: dashed after the last measured year, faint ground, "projected" hairline; set on 15 charts from each source's note | done |
 
 New forms added this round are listed in `docs/ALMANAC_DESIGN_SYSTEM.md`.

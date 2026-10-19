@@ -69,7 +69,8 @@ and shown on real data at `/library/`. Pick the form by the data's shape; every 
 Swapping a chart's form: keep its `title` so bindings hold, and rewrite its explainer's `howToRead`.
 Fixed meanings the renderer enforces, so prose must match them: rural is hara (green) and urban neel (blue) in every
 line chart; a departure from normal (°C anomaly, % rainfall departure) diverges neel/sindoor for temperature and
-haldi/hara for rain, in stripes and in bars; stripes centre on the normal (0 for a departure). If an explainer names a
+haldi/hara for rain, in stripes and in bars; stripes centre on the normal (0 for a departure); a projection
+(`projectedAfter` in the plan) is dashed after its last measured year, on a faint ground. If an explainer names a
 colour, check it against the rendered chart; `docs/DESIGN_REFINEMENT_LOG.md` records the October 2026 audit of this.
 
 ### Methodology, assumptions, caveats — end every article

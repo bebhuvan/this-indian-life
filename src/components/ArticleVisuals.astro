@@ -746,7 +746,22 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     const latest = line.points.at(-1);
     const latestX = latest ? xLast : 0;
     const latestY = latest ? y(latest.value) : 0;
-    return { ...line, d, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: inks[lineIndex].color, dash: inks[lineIndex].dash };
+    // Measured and projected parts of the line: solid up to the last measured point, dashed
+    // after it. A line that is projection from end to end is drawn dashed throughout.
+    const after = (line as { projectedAfter?: number }).projectedAfter ?? visual.projectedAfter;
+    let dSolid = d, dProj = "";
+    if (after !== undefined && dateMode) {
+      const k = line.points.reduce((last, point, index) => ((timeOf(point.date) ?? -Infinity) < after + 1 ? index : last), -1);
+      const seg = (from: number, to: number) => line.points.slice(from, to + 1).map((point, index) => `${index === 0 ? "M" : "L"}${svgCoord(px(point, from + index, line.points.length))} ${svgCoord(y(point.value))}`).join("");
+      if (k < 0) [dSolid, dProj] = ["", d];
+      else if (k < line.points.length - 1) [dSolid, dProj] = [k > 0 ? seg(0, k) : "", seg(k, line.points.length - 1)];
+      // A jagged model run (year-to-year noise) breaks a dash pattern into specks. Such a line
+      // stays solid; the shaded projection zone behind it carries the distinction instead.
+      const tail = line.points.slice(Math.max(0, k));
+      const turns = tail.slice(2).filter((point, index) => Math.sign(point.value - tail[index + 1].value) * Math.sign(tail[index + 1].value - tail[index].value) < 0).length;
+      if (dProj && tail.length > 12 && turns / tail.length > 0.25) [dSolid, dProj] = [d, ""];
+    }
+    return { ...line, d, dSolid, dProj, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: inks[lineIndex].color, dash: inks[lineIndex].dash };
   });
   const minGap = mobile ? 15 : 18;
   const labelTop = pad.t + 14;
@@ -888,14 +903,23 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
   const bands = lineBandRects(visual, g);
   // A few single-year marks ("1991: India opens up") are drawn as annotations: a hairline at
   // the year and a short label beside it. Many marks (El Nino years) stay as pale shaded bands.
-  const asNotes = bands.length <= 3;
+  const asNotes = bands.filter((band) => !band.proj).length <= 3;
   for (const band of bands) {
     const showLabel = band.label && band.x - lastBandLabel > (m ? 70 : 110);
     if (showLabel) lastBandLabel = band.x;
-    if (asNotes) {
-      const bx = band.x + band.w / 2, right = bx > (pad.l + plotR) / 2 + (plotR - pad.l) * 0.25;
+    // Everything after the last measured year sits on a faint ground: the projection zone.
+    if (band.proj) b += `<rect x="${svgCoord(band.x + band.w / 2)}" y="${pad.t}" width="${svgCoord(Math.max(0, plotR - band.x - band.w / 2))}" height="${svgCoord(plotB - pad.t)}" fill="#121212" fill-opacity="0.028"/>`;
+    if (asNotes || band.proj) {
+      // The projection mark reads forward ("projected ->"), so its label sits after the line
+      // whenever there is room for it.
+      const bx = band.x + band.w / 2, right = band.proj ? plotR - bx < (m ? 72 : 96) : bx > (pad.l + plotR) / 2 + (plotR - pad.l) * 0.25;
+      // A single line writes its first value near the top left ("3.35 in 2000"); a mark label
+      // that would run into it drops below it.
+      const first = single && g.dateMode ? g.paths[0]?.points[0] : undefined;
+      const firstNearTop = first && g.y(first.value) < pad.t + 34;
+      const ly = firstNearTop && (right ? bx - (m ? 72 : 96) : bx) < pad.l + (m ? 110 : 150) ? pad.t + 40 : pad.t + 12;
       b += `<line x1="${svgCoord(bx)}" y1="${pad.t}" x2="${svgCoord(bx)}" y2="${svgCoord(plotB)}" stroke="#121212" stroke-width="0.75" stroke-dasharray="2 3">${band.label ? `<title>${band.label}</title>` : ""}</line>`;
-      if (showLabel) b += almHalo(right ? bx - 6 : bx + 6, pad.t + 12, band.label!, { size: m ? 10.5 : 12, fill: "#4f4f4f", anchor: right ? "end" : "start" });
+      if (showLabel) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: m ? 10.5 : 12, fill: "#4f4f4f", anchor: right ? "end" : "start" });
       continue;
     }
     b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
@@ -937,7 +961,11 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
       // A flat, quiet tint: it says "this much", where a gradient only decorates.
       b += `<path d="${p.areaD}" fill="${p.color}" fill-opacity="0.07"/>`;
     }
-    b += `<path d="${p.d}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"${p.dash ? ` stroke-dasharray="4 3"` : ""}${!single && hasEmph && !p.emphasis ? ` stroke-opacity="0.7"` : ""}><title>${p.label}</title></path>`;
+    const op = !single && hasEmph && !p.emphasis ? ` stroke-opacity="0.7"` : "";
+    if (p.dSolid) b += `<path d="${p.dSolid}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"${p.dash ? ` stroke-dasharray="4 3"` : ""}${op}><title>${p.label}</title></path>`;
+    // The projected part: the same ink and weight, dashed, so it reads as the same series
+    // carried forward rather than another one.
+    if (p.dProj) b += `<path d="${p.dProj}" fill="none" stroke="${p.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="butt" stroke-dasharray="${svgCoord(w * 2.4)} ${svgCoord(w * 1.8)}"${op}><title>${p.label}, projected</title></path>`;
     void i;
   }
   for (const p of g.paths) {
@@ -992,17 +1020,20 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
  *  drawn as a 1-year-wide rectangle centred on its year, clipped to the plot box, so
  *  it only renders where the axis is actually a date axis. */
 function lineBandRects(visual: LineVisual, g: ReturnType<typeof lineGeometry>) {
-  const bands = (visual as LineVisual & { bands?: Array<{ year: number; label?: string }> }).bands;
-  if (!bands?.length || !g.dateMode) return [];
+  const bands: Array<{ year: number; label?: string; proj?: boolean }> = ((visual as LineVisual & { bands?: Array<{ year: number; label?: string }> }).bands || [])
+    .map((b) => ({ ...b, proj: /^projection\b/i.test(b.label || "") }));
+  // A chart with a projection gets its mark at the last measured year, unless it names one.
+  if (visual.projectedAfter !== undefined && !bands.some((b) => b.proj)) bands.push({ year: visual.projectedAfter, label: "projected ->", proj: true });
+  if (!bands.length || !g.dateMode) return [];
   const left = g.pad.l;
   const right = g.width - g.pad.r;
   return bands
     .map((b) => {
       const x0 = Math.max(left, g.xOfTime(b.year - 0.45));
       const x1 = Math.min(right, g.xOfTime(b.year + 0.55));
-      return x1 > x0 ? { x: x0, w: x1 - x0, label: b.label } : null;
+      return x1 > x0 ? { x: x0, w: x1 - x0, label: b.label, proj: b.proj } : null;
     })
-    .filter((r): r is { x: number; w: number; label?: string } => Boolean(r));
+    .filter((r): r is { x: number; w: number; label?: string; proj?: boolean } => Boolean(r));
 }
 
 const selectedKpis = kpisToShow(lockedNumbers);

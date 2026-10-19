@@ -16,7 +16,7 @@ export type LineVisual = {
   subtitle: string;
   unit: string;
   source: VisualSource;
-  lines: Array<{ label: string; points: Point[]; color?: string; emphasis?: boolean; dash?: boolean }>;
+  lines: Array<{ label: string; points: Point[]; color?: string; emphasis?: boolean; dash?: boolean; projectedAfter?: number }>;
   xTicks?: number[];
   /** Force a categorical x-axis: one tick per actual data point, NOT an interpolated time
    *  axis. Use for 2-3 point survey-round series (NFHS/NSS) so the chart shows the measured
@@ -31,6 +31,9 @@ export type LineVisual = {
   monthAxis?: boolean;
   bands?: Array<{ year: number; label?: string }>;
   refLine?: { value: number; label: string };
+  /** The last measured year: points after it are a projection and are drawn dashed, with a
+   *  "projected" mark at the split. A line may carry its own (two models, two vintages). */
+  projectedAfter?: number;
 };
 export type LinePanelsVisual = {
   kind: "linePanels";
@@ -1125,13 +1128,14 @@ function clipLineFromYear(visual: LineVisual, fromYear?: number): LineVisual {
 // Combine several single-indicator series into one multi-line chart — the
 // "composition over time" lens (e.g. the three age-group shares since 1960).
 function multiSeriesLine(
-  series: Array<{ indicator: string; label: string; color?: string; emphasis?: boolean; dash?: boolean }>,
+  series: Array<{ indicator: string; label: string; color?: string; emphasis?: boolean; dash?: boolean; projectedAfter?: number }>,
   title: string,
   subtitle: string,
   unit: string,
   fromYear?: number,
   bands?: Array<{ year: number; label?: string }>,
-  refLine?: { value: number; label: string }
+  refLine?: { value: number; label: string },
+  projectedAfter?: number
 ): LineVisual | null {
   const clip = (points: LineVisual["lines"][number]["points"]) =>
     fromYear ? points.filter((p) => Number(String(p.date).slice(0, 4)) >= fromYear) : points;
@@ -1142,7 +1146,7 @@ function multiSeriesLine(
       // Carry optional per-series styling (colour / emphasis / dash) so a chart can
       // spotlight one line against a muted field — opt-in; absent fields render as before.
       return line && line.lines[0]
-        ? { label: item.label, points: clip(line.lines[0].points), ...(item.color ? { color: item.color } : {}), ...(item.emphasis ? { emphasis: true } : {}), ...(item.dash ? { dash: true } : {}) }
+        ? { label: item.label, points: clip(line.lines[0].points), ...(item.color ? { color: item.color } : {}), ...(item.emphasis ? { emphasis: true } : {}), ...(item.dash ? { dash: true } : {}), ...(item.projectedAfter ? { projectedAfter: item.projectedAfter } : {}) }
         : null;
     })
     .filter((line): line is LineVisual["lines"][number] => Boolean(line) && line.points.length >= 2);
@@ -1156,7 +1160,8 @@ function multiSeriesLine(
     source: firstArtifact ? sourceFor(firstArtifact) : { sourceId: "worldbank", sourceIndicatorId: title },
     lines,
     ...(bands?.length ? { bands } : {}),
-    ...(refLine ? { refLine } : {})
+    ...(refLine ? { refLine } : {}),
+    ...(projectedAfter ? { projectedAfter } : {})
   };
 }
 
@@ -2206,7 +2211,8 @@ type PlanEntry = {
   limit?: number;
   subtitle?: string;
   seriesName?: string;
-  series?: Array<{ indicator: string; label: string; color?: string; emphasis?: boolean; dash?: boolean }>;
+  series?: Array<{ indicator: string; label: string; color?: string; emphasis?: boolean; dash?: boolean; projectedAfter?: number }>;
+  projectedAfter?: number;
   refLine?: { value: number; label: string };
   panels?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   rows?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
@@ -2677,7 +2683,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "multiLine") {
-    const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands, entry.refLine);
+    const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands, entry.refLine, entry.projectedAfter);
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "multiLineTable") {
@@ -2730,6 +2736,7 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
         if (entry.fromYear) lv = clipLineFromYear(lv, entry.fromYear);
         if (entry.subtitle) lv.subtitle = entry.subtitle;
         if (entry.bands?.length) (lv as LineVisual & { bands?: Array<{ year: number; label?: string }> }).bands = entry.bands;
+        if (entry.projectedAfter) lv.projectedAfter = entry.projectedAfter;
       }
       visual = lv;
       break;

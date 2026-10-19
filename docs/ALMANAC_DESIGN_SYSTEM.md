@@ -71,6 +71,12 @@ The older kinds still render through `ArticleVisuals.astro`, redesigned rather t
   reference line is named beside itself; a soft wash sits under single series only when the axis
   starts at zero. Every line chart has a hover crosshair (`initHover` in `public/article-actions.js`)
   fed by a `data-hover` attribute built at compile time.
+- **Projections** (`projectedAfter` on a `line` or `multiLine` plan entry, or on one `series` item):
+  the year of the last measured point. After it the line is drawn dashed in the same ink and
+  weight, the plot behind it takes a faint ground, and a dotted hairline marked "projected ->"
+  stands at the split. A jagged model run (CMIP6 scenarios) stays solid inside that ground, since
+  dashes break noise into specks. Set it from the source's own note (UN WPP 2024: estimates to
+  2023; MoHFW 2020: Census 2011 then projected), never by eye.
 - **Bars**: thin bars with the value at each bar's end, no grey tracks; groups with negatives
   diverge from a zero line.
 - **Maps** (`renderChoroplethSvg`, `renderChoroplethStrip` in `chartSvg.ts`): hairline borders, no

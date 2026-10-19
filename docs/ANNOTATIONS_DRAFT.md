@@ -16,6 +16,5 @@ two marks per chart; no causal claim in the label (a mark says "when", the prose
 | "India's population, 1960 to today" (`q.people.*`, lines ~669, 719, 846) | `{ year: 2011, label: "Last census" }` | Census 2011 is the last full count; later points are estimates, which the prose already stresses. |
 | "India went into the shock accelerating" (`q.econ.oil_shock_2026`, line ~8553) | none proposed | The chart already makes its point; a mark would crowd it. |
 
-Separately, and not editorial: projection segments (after a "projection" mark) could be drawn
-dashed so measured and projected values read differently. That is a rendering change for the
-design pass, not an annotation.
+Projections are no longer an annotation: `projectedAfter` draws them dashed with their own mark
+(see `docs/ALMANAC_DESIGN_SYSTEM.md`).
