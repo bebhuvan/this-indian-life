@@ -2376,7 +2376,14 @@ function warmingStripes(artifact: Artifact, title: string, subtitle: string, uni
   const vals = stripes.map((s) => s.value);
   const min = Math.min(...vals);
   const max = Math.max(...vals);
-  return { kind: "stripes", title, subtitle: subtitle || artifact.sourceId, unit, source: sourceFor(artifact), stripes, min, max, center: center ?? (min + max) / 2 };
+  // Stripes are centred on the normal, so grey means "normal" and the hue says which side
+  // a year fell. A departure or anomaly is already measured from its normal: the centre is 0.
+  // Otherwise the series' own mean stands in for the normal. (The midpoint of the range,
+  // used before, painted a -2% monsoon as normal and shifted every colour by the skew.)
+  const meta = `${unit} ${subtitle} ${title} ${artifact.unit ?? ""}`;
+  const isDeparture = /departure|anomal|\bvs\b|above or below|relative to|from normal|from the normal/i.test(meta) && min < 0 && max > 0;
+  const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+  return { kind: "stripes", title, subtitle: subtitle || artifact.sourceId, unit, source: sourceFor(artifact), stripes, min, max, center: center ?? (isDeparture ? 0 : mean) };
 }
 
 function attachMeta(visual: VisualSpec, entry: PlanEntry): VisualSpec {

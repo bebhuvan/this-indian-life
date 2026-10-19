@@ -147,7 +147,9 @@ export function renderChoroplethSvg(visual: ChoroplethVisual) {
 export function renderChoroplethStrip(visual: ChoroplethVisual) {
   const rows = visual.regions.filter((r) => r.value !== null && r.value !== undefined).sort((a, b) => (b.value as number) - (a.value as number));
   const W = 320, nameW = 128, x0 = nameW + 8, x1 = W - 46, rowH = rows.length > 30 ? 16 : 19, top = 44;
-  const x = (v: number) => x0 + ((v - visual.min) / (visual.max - visual.min || 1)) * (x1 - x0);
+  // Values past the colour scale (Delhi's income) sit at its end with an open arrowhead,
+  // rather than running into the printed value.
+  const x = (v: number) => x0 + ((Math.min(visual.max, Math.max(visual.min, v)) - visual.min) / (visual.max - visual.min || 1)) * (x1 - x0);
   const F = 'font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"';
   const short = (n: string) => n.replace("Dadra and Nagar Haveli and Daman and Diu", "Dadra, Daman & Diu").replace("Andaman and Nicobar Islands", "Andaman & Nicobar").replace("Jammu and Kashmir", "Jammu & Kashmir");
   let b = "";
@@ -160,12 +162,16 @@ export function renderChoroplethStrip(visual: ChoroplethVisual) {
   const pivot = visual.divergeAt !== undefined && visual.divergeAt > visual.min && visual.divergeAt < visual.max ? visual.divergeAt : null;
   if (pivot !== null) {
     b += `<line x1="${svgCoord(x(pivot))}" y1="6" x2="${svgCoord(x(pivot))}" y2="${top + rows.length * rowH}" stroke="#121212" stroke-width="0.8" stroke-dasharray="2 2"/>`;
-    b += `<text x="${svgCoord(x(pivot))}" y="4" ${F} font-size="10.5" font-weight="600" fill="#121212" text-anchor="middle">${escapeHtml(choroplethValueLabel(visual, pivot))}${visual.pivotLabel ? ` ${escapeHtml(visual.pivotLabel)}` : ""}</text>`;
+    b += `<text x="${svgCoord(x(pivot))}" y="4" ${F} font-size="10.5" font-weight="600" fill="#121212" text-anchor="middle">${visual.pivotLabel && /\d/.test(visual.pivotLabel) ? escapeHtml(visual.pivotLabel) : `${escapeHtml(choroplethValueLabel(visual, pivot))}${visual.pivotLabel ? ` ${escapeHtml(visual.pivotLabel)}` : ""}`}</text>`;
   }
   rows.forEach((r, i) => {
     const v = r.value as number, cy = top + i * rowH + rowH / 2;
     b += `<text x="${nameW}" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" fill="#121212" text-anchor="end">${escapeHtml(short(r.name))}</text>`;
     b += `<line x1="${x0}" y1="${svgCoord(cy)}" x2="${x1}" y2="${svgCoord(cy)}" stroke="#ededed" stroke-width="1"/>`;
+    if (v > visual.max || v < visual.min) {
+      const xe = x(v), dir = v > visual.max ? 1 : -1;
+      b += `<path d="M${svgCoord(xe + dir * 6)} ${svgCoord(cy)}L${svgCoord(xe + dir * 11)} ${svgCoord(cy)}M${svgCoord(xe + dir * 8)} ${svgCoord(cy - 3)}L${svgCoord(xe + dir * 11)} ${svgCoord(cy)}L${svgCoord(xe + dir * 8)} ${svgCoord(cy + 3)}" fill="none" stroke="#121212" stroke-width="1"/>`;
+    }
     b += `<circle cx="${svgCoord(x(v))}" cy="${svgCoord(cy)}" r="4.5" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}" stroke="#121212" stroke-width="0.6"><title>${escapeHtml(r.name)}: ${escapeHtml(choroplethValueLabel(visual, v))}</title></circle>`;
     b += `<text x="${W}" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" font-weight="600" fill="#121212" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, v))}</text>`;
   });

@@ -61,12 +61,16 @@ the built-in batched path (`createBatchedExplanation`, auto-selected for big art
 generate explainers, so no separate explainer pass is needed.
 
 ### Design system and chart forms (the Almanac)
-The site's look, the five data inks and fifteen extra chart forms (`heatStrip`, `tileGrid`, `scatterFit`,
+The site's look, the five data inks and seventeen extra chart forms (`heatStrip`, `tileGrid`, `scatterFit`,
 `parade`, `sensitivity`, `dumbbell`, `rankSlope`, `beeswarm`, `dayRibbon`, `unitChart`, `intervalPlot`,
-`ridgeline`, `calendarHeat`, `connectedScatter`, `waterfall`) are documented in `docs/ALMANAC_DESIGN_SYSTEM.md`
+`ridgeline`, `calendarHeat`, `connectedScatter`, `waterfall`, `slope`, `stackedArea`) are documented in `docs/ALMANAC_DESIGN_SYSTEM.md`
 and shown on real data at `/library/`. Pick the form by the data's shape; every one downloads as SVG, PNG and CSV.
 `scatterFit` prints its own correlation: read it before writing a title that claims one fit beats another.
 Swapping a chart's form: keep its `title` so bindings hold, and rewrite its explainer's `howToRead`.
+Fixed meanings the renderer enforces, so prose must match them: rural is hara (green) and urban neel (blue) in every
+line chart; a departure from normal (°C anomaly, % rainfall departure) diverges neel/sindoor for temperature and
+haldi/hara for rain, in stripes and in bars; stripes centre on the normal (0 for a departure). If an explainer names a
+colour, check it against the rendered chart; `docs/DESIGN_REFINEMENT_LOG.md` records the October 2026 audit of this.
 
 ### Methodology, assumptions, caveats — end every article
 Close with a **"How to read these / methodology & caveats"** section, and populate:

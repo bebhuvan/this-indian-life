@@ -11,9 +11,25 @@ export const INK = {
   neel: "#33489a", sindoor: "#c24a2e", hara: "#008a6e", haldi: "#b98014", jamun: "#7b4790",
 } as const;
 
-const F = "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif";
+export const F = "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif";
 export const r1 = (v: number) => Math.round(v * 10) / 10;
-const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+export const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/** Final typesetting for a chart's SVG string: a true minus sign (U+2212) wherever a
+ *  hyphen stands for a negative number, in visible text and in tooltips. Dates and
+ *  ranges ("2016-2025") are untouched because their hyphen follows a digit. */
+const minus = (t: string) => t
+  .replace(/(^|[\s(\[~≈:|])-(?=\d|\.\d|₹|\$)/g, "$1\u2212")
+  .replace(/\s?-(?:&gt;|>)/g, " \u2192")
+  .replace(/(?:&lt;|<)-\s?/g, "\u2190 ")
+  .replace(/(?:&lt;|<)=/g, "\u2264").replace(/(?:&gt;|>)=/g, "\u2265")
+  .replace(/\bdeg(?:rees)? C\b/g, "\u00b0C")
+  // a zero needs no scale word: "₹0 lakh" reads as a glitch
+  .replace(/^([₹$]?)0 (lakh|crore|cr|L cr|lakh cr|bn|billion|trillion|T)$/, "$10");
+export const typeset = (svg: string) =>
+  String(svg)
+    .replace(/>([^<]+)</g, (_m, t: string) => `>${minus(t)}<`)
+    .replace(/data-tip="([^"]*)"/g, (_m, t: string) => `data-tip="${minus(t)}"`);
 
 type TextOpts = { size?: number; fill?: string; anchor?: "start" | "middle" | "end"; weight?: number };
 export const txt = (x: number, y: number, s: string | number, o: TextOpts = {}) =>
@@ -119,7 +135,13 @@ export function heatStrip(rows: HeatRow[], o: {
   markerNote?: string; valueFmt?: (v: number) => string; hot?: (v: number) => boolean; label: string;
 }) {
   const W = o.width ?? 1040, compact = !!o.compact;
-  const rowH = o.rowH ?? 20, gap = o.gap ?? 5, labelW = o.labelW ?? 140, rightW = o.rightW ?? 80;
+  const rowH = o.rowH ?? 20, gap = o.gap ?? 5;
+  // The label and value columns are at least as wide as what they print, so a long name
+  // ("Maharashtra") or the last year never runs off the figure on a phone.
+  const ls = compact ? 11 : 12.5, fmt0 = o.valueFmt ?? ((v: number) => v.toFixed(1));
+  const nameW = Math.max(...rows.map((r) => String(compact ? r.shortLabel ?? r.label : r.label).length * ls * (r.emphasis ? 0.6 : 0.56)));
+  const valW = Math.max(String(o.to).length * (compact ? 10.5 : 11.5) * 0.58, ...rows.map((r) => fmt0(r.points[r.points.length - 1][1]).length * ls * 0.6));
+  const labelW = Math.max(o.labelW ?? 140, nameW + 14), rightW = Math.max(o.rightW ?? 80, valW + 16);
   const col = ramp(o.stops), n = o.to - o.from + 1, id = uid("hs");
   const top = 30, plotW = W - labelW - rightW, cw = plotW / n;
   const split = rows.findIndex((r) => r.emphasis), extra = compact ? 4 : 8;
@@ -211,7 +233,9 @@ export function stripes(points: Array<{ year: number; value: number; flag?: bool
   stops: Stops; width?: number; height?: number; compact?: boolean; marks?: Record<number, string>; label: string; valueFmt?: (v: number) => string; tickStep?: number;
 }) {
   const W = o.width ?? 1160, H = o.height ?? 230, sm = !!o.compact, col = ramp(o.stops);
-  const y0 = points[0].year, top = sm ? 44 : 52, bh = H - top - (sm ? 54 : 46), sw = W / points.length;
+  // Stripes are placed by year, so a gap in the record stays a gap (and the last year
+  // still lands at the right edge) instead of every later stripe sliding left.
+  const y0 = points[0].year, top = sm ? 44 : 52, bh = H - top - (sm ? 54 : 46), sw = W / (points[points.length - 1].year - y0 + 1);
   const xOf = (yr: number) => (yr - y0) * sw;
   const fmt = o.valueFmt ?? ((v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(Math.round(v))}%`);
   let b = "";
@@ -249,9 +273,18 @@ export type ScatterPoint = { label: string; short?: string; x: number; y: number
 export function scatterFit(pts: ScatterPoint[], o: {
   x: [number, number]; y: [number, number]; xTicks: number[]; yTicks: number[]; xFmt?: (v: number) => string; yFmt?: (v: number) => string;
   xTitle: string; yTitle: string; width?: number; height?: number; refY?: { value: number; label: string }; fit?: boolean; sizeKey?: Array<[number, string]>; sizeTitle?: string; label: string;
+  /** Colour per point (default: sindoor when hot, else neel). */
+  colorOf?: (p: ScatterPoint) => string;
+  /** Extra marks drawn under the points, given the scales (zones, guides). */
+  under?: (x: (v: number) => number, y: (v: number) => number) => string;
+  /** Tooltip lines per point (default: label, x, y). */
+  tipOf?: (p: ScatterPoint) => string[];
 }) {
-  const W = o.width ?? 1040, H = o.height ?? 460, sm = W < 700;
-  const ml = 30, mr = 10, mt = 30, mb = 50;
+  const W = o.width ?? 1040, sm = W < 700;
+  // On a phone the size key moves under the plot, where it cannot sit on a point.
+  const keyBelow = sm && pts.some((p) => p.size != null) && !!o.sizeKey;
+  const H = (o.height ?? 460) + (keyBelow ? 80 : 0);
+  const ml = 30, mr = 10, mt = 30, mb = 50 + (keyBelow ? 80 : 0);
   const x = scale(o.x[0], o.x[1], ml, W - mr), y = scale(o.y[0], o.y[1], H - mb, mt);
   const xf = o.xFmt ?? ((v: number) => String(v)), yf = o.yFmt ?? ((v: number) => v.toFixed(1));
   const sized = pts.some((p) => p.size != null), rMax = sm ? 15 : 22;
@@ -260,10 +293,11 @@ export function scatterFit(pts: ScatterPoint[], o: {
   let b = "";
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
-  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: "middle" }); }
-  b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
+  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
+  b += txt(ml, y(o.y[0]) + 46, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
   b += txt(0, 12, `${o.yTitle} ↑`, { size: 11.5, fill: INK.ink2 });
-  if (o.refY) { b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3"); b += txt(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" }); }
+  if (o.under) b += o.under(x, y);
+  if (o.refY) b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3");
   let stats: { r: number; n: number; slope: number } | null = null;
   if (o.fit !== false && pts.length > 3) {
     // Unweighted least squares: each unit counts once. The band is the 95% interval
@@ -280,15 +314,43 @@ export function scatterFit(pts: ScatterPoint[], o: {
     b += `<g clip-path="url(#${cid})">${line(x(x0), y(ic + sl * x0), x(x1), y(ic + sl * x1), INK.ink2, 1)}</g>`;
     stats = { r: sxy / Math.sqrt(sxx * syy), n, slope: sl };
   }
+  const tipA = (p: ScatterPoint) => (o.tipOf ? o.tipOf(p) : [p.label, `${o.xTitle}: ${xf(p.x)}`, `${o.yTitle}: ${yf(p.y)}`]).join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   for (const p of [...pts].sort((a, c) => (c.size ?? 0) - (a.size ?? 0)))
-    b += `<circle cx="${r1(x(p.x))}" cy="${r1(y(p.y))}" r="${r1(rad(p.size))}" fill="${p.hot ? INK.sindoor : INK.neel}" fill-opacity="${sized ? 0.82 : 1}" stroke="#ffffff" stroke-width="1.25"><title>${esc(p.label)}: ${xf(p.x)}, ${yf(p.y)}</title></circle>`;
-  for (const p of pts) if (p.place) {
-    const rr = rad(p.size) + 5, cx = x(p.x), cy = y(p.y);
-    const [tx, ty, an] = p.place === "r" ? [cx + rr, cy + 4, "start"] : p.place === "l" ? [cx - rr, cy + 4, "end"] : p.place === "t" ? [cx, cy - rr - 1, "middle"] : [cx, cy + rr + 10, "middle"];
-    b += halo(tx, ty, sm ? p.short ?? p.label : p.label, { size: sm ? 11 : 12, fill: INK.ink, anchor: an as TextOpts["anchor"] });
+    b += `<circle class="mk" cx="${r1(x(p.x))}" cy="${r1(y(p.y))}" r="${r1(rad(p.size))}" fill="${o.colorOf ? o.colorOf(p) : p.hot ? INK.sindoor : INK.neel}" fill-opacity="${sized ? 0.82 : 1}" stroke="#ffffff" stroke-width="1.25" data-tip="${tipA(p)}"/>`;
+  if (o.refY) b += halo(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" });
+  // Labels: each named point tries its preferred side, then the other three, and takes the
+  // first that touches no dot, no other label, the reference label or the size key. The
+  // biggest points are placed first. On a phone a label with no free side is left to the
+  // tooltip; on the desk it keeps its preferred side.
+  const fs = sm ? 11 : 12;
+  const textW = (t: string, size: number) => t.length * size * 0.56;
+  type Box = [number, number, number, number];
+  const hit = (a: Box, c: Box) => a[0] < c[2] && a[2] > c[0] && a[1] < c[3] && a[3] > c[1];
+  const blocked: Box[] = [];
+  if (o.refY) { const ty = y(o.refY.value) - 7, w = textW(o.refY.label, 11.5); blocked.push([W - mr - w - 2, ty - 11, W - mr, ty + 3]); }
+  if (sized && o.sizeKey && !keyBelow) blocked.push([W - 262, mt - 18, W, mt + 34 + rMax + 22]);
+  const dots = pts.map((p) => ({ p, cx: x(p.x), cy: y(p.y), r: rad(p.size) }));
+  const named = dots.filter((d) => d.p.place).sort((a, c) => (c.p.size ?? 0) - (a.p.size ?? 0) || Number(!!c.p.hot) - Number(!!a.p.hot));
+  for (const d of named) {
+    const text = sm ? d.p.short ?? d.p.label : d.p.label, w = textW(text, fs), rr = d.r + 4;
+    const pref = d.p.place as "r" | "l" | "t" | "b";
+    const order = [pref, ...(["r", "l", "t", "b"] as const).filter((k) => k !== pref)];
+    const at = (k: "r" | "l" | "t" | "b") => {
+      const [tx, ty, an] = k === "r" ? [d.cx + rr, d.cy + 4, "start"] : k === "l" ? [d.cx - rr, d.cy + 4, "end"] : k === "t" ? [d.cx, d.cy - rr - 1, "middle"] : [d.cx, d.cy + rr + 10, "middle"];
+      const x0 = an === "start" ? tx : an === "end" ? tx - w : tx - w / 2;
+      return { tx, ty, an, box: [x0 - 1, ty - fs + 2, x0 + w + 1, ty + 3] as Box };
+    };
+    const free = (bx: Box) => bx[0] >= 0 && bx[2] <= W && bx[1] >= mt - 14 && bx[3] <= y(o.y[0]) - 2
+      && !blocked.some((c) => hit(bx, c))
+      && !dots.some((q) => q !== d && hit(bx, [q.cx - q.r, q.cy - q.r, q.cx + q.r, q.cy + q.r]));
+    // Desk fallback: a side that may graze a dot but never another label.
+    const pick = order.map(at).find((c) => free(c.box)) ?? (sm ? null : order.map(at).find((c) => c.box[0] >= 0 && c.box[2] <= W && !blocked.some((q) => hit(c.box, q))) ?? null);
+    if (!pick) continue;
+    blocked.push(pick.box);
+    b += halo(pick.tx, pick.ty, text, { size: fs, fill: INK.ink, anchor: pick.an as TextOpts["anchor"] });
   }
   if (sized && o.sizeKey) {
-    const kx = sm ? W - 150 : W - 250, ky = mt + 34;
+    const kx = keyBelow ? ml : sm ? W - 150 : W - 250, ky = keyBelow ? y(o.y[0]) + 92 : mt + 34;
     b += txt(kx, ky - 30, o.sizeTitle ?? "Size", { size: 11.5, fill: INK.ink2, weight: 500 });
     const offs = sm ? [6, 48, 108] : [8, 50, 116];
     o.sizeKey.forEach(([v, s], i) => {
@@ -509,8 +571,9 @@ export function sensitivity(curves: Curve[], o: {
     const v0 = c.points.find((p) => p[0] === at[0])![1], v1 = c.points.find((p) => p[0] === at[1])![1];
     b += dot(x(at[0]), y(v0), 4, INK.ink) + dot(x(at[1]), y(v1), 4, INK.ink);
     b += txt(x(at[1]) + 10, y(v1) + 18, `${Math.round(v1)}%`, { size: 12.5, fill: INK.ink, weight: 600 }) + txt(x(at[0]) + 8, y(v0) + 18, `${Math.round(v0)}%`, { size: 12.5, fill: INK.ink, weight: 600 });
-    const ax = sm ? x((o.x[0] + o.x[1]) / 2) : x(at[0]) - 10, ay = sm ? y(13) : y(96), an = sm ? "start" : "end";
-    b += txt(ax, ay, o.highlight.title, { size: 12.5, fill: INK.ink, weight: 600, anchor: an }) + txt(ax, ay + 16, o.highlight.body[0], { size: 12.5, fill: INK.ink2, anchor: an }) + txt(ax, ay + 32, o.highlight.body[1], { size: 12.5, fill: INK.ink2, anchor: an });
+    const ax = sm ? x((o.x[0] + o.x[1]) / 2) : x(at[0]) - 10, ay = sm ? Math.min(y(13), y(0) - 42) : y(96), an = sm ? "start" : "end";
+    // The note's three lines end clear of the x axis, with a halo where they cross a curve.
+    b += halo(ax, ay, o.highlight.title, { size: 12.5, fill: INK.ink, weight: 600, anchor: an }) + halo(ax, ay + 16, o.highlight.body[0], { size: 12.5, fill: INK.ink2, anchor: an }) + halo(ax, ay + 32, o.highlight.body[1], { size: 12.5, fill: INK.ink2, anchor: an });
   }
   return svg(W, H, b, o.label);
 }
@@ -649,7 +712,7 @@ export function connectedScatter(paths: Path2D[], o: { x: [number, number]; y: [
   let b = "";
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
-  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: "middle" }); }
+  for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
   b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 }) + txt(0, 12, `${o.yTitle} ↑`, { size: 11.5, fill: INK.ink2 });
   if (o.refY) { b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3"); b += halo(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" }); }
   // End labels are stacked so none overlap: sort by end y, push apart by a minimum gap.
@@ -698,5 +761,110 @@ export function waterfall(steps: Array<{ label: string; value: number }>, o: { t
   else b += txt(lw - 12, ty + rowH / 2 + 4, o.totalLabel, { size: 12.5, fill: INK.ink, anchor: "end", weight: 600 });
   b += `<rect x="${r1(x(Math.min(0, total)))}" y="${r1(tby)}" width="${r1(Math.abs(x(total) - x(0)))}" height="14" fill="${INK.ink}"/>`;
   b += txt(x(Math.max(0, total)) + 6, tby + 11, f(total).replace(/^\+/, ""), { size: 12, fill: INK.ink, weight: 600 });
+  return svg(W, H, b, o.label);
+}
+
+// =====================================================================
+// 16. SLOPE — two points in time for a handful of units, values at both ends
+// =====================================================================
+export type SlopeRow = { label: string; a: number; b: number; color?: string; emphasis?: boolean };
+/** Spread end labels so none overlaps, keeping each as close to its point as it can. */
+function spread(ys: number[], gap: number, lo: number, hi: number) {
+  const idx = ys.map((y, i) => [y, i] as [number, number]).sort((p, q) => p[0] - q[0]);
+  const out = idx.map(([y]) => y);
+  for (let i = 1; i < out.length; i++) out[i] = Math.max(out[i], out[i - 1] + gap);
+  const over = out.length ? out[out.length - 1] - hi : 0;
+  if (over > 0) for (let i = out.length - 1; i >= 0; i--) out[i] = Math.min(out[i] - over, i < out.length - 1 ? out[i + 1] - gap : Infinity);
+  for (let i = 0; i < out.length; i++) out[i] = Math.max(lo, out[i]);
+  const res = new Array(ys.length);
+  idx.forEach(([, i], k) => (res[i] = out[k]));
+  return res as number[];
+}
+export function slope(rows: SlopeRow[], o: {
+  aLabel: string; bLabel: string; fmt?: (v: number) => string; domain?: [number, number]; width?: number; height?: number; label: string;
+}) {
+  const W = o.width ?? 1040, sm = W < 700, H = o.height ?? (sm ? 360 : 420);
+  const f = o.fmt ?? ((v: number) => fmtIN(Math.round(v * 10) / 10));
+  const fs = sm ? 11.5 : 13;
+  const tw = (s: string, bold = false) => s.length * fs * (bold ? 0.6 : 0.55);
+  // Label columns as wide as the longest "Name 12.3" on each side.
+  const leftW = Math.max(...rows.map((r) => tw(`${r.label} ${f(r.a)}`, !!r.emphasis))) + 12;
+  const rightW = Math.max(...rows.map((r) => tw(`${f(r.b)} ${r.label}`, !!r.emphasis))) + 12;
+  const x0 = sm ? Math.min(leftW, W * 0.36) : Math.max(leftW, W * 0.22), x1 = W - (sm ? Math.min(rightW, W * 0.36) : Math.max(rightW, W * 0.22));
+  const top = 40, bot = H - 14;
+  const vals = rows.flatMap((r) => [r.a, r.b]);
+  const [lo, hi] = o.domain ?? [Math.min(...vals), Math.max(...vals)];
+  const y = (v: number) => bot - ((v - lo) / (hi - lo || 1)) * (bot - top);
+  let b = txt(x0, 14, o.aLabel, { size: 12, fill: INK.ink, weight: 600, anchor: "middle" }) + txt(x1, 14, o.bLabel, { size: 12, fill: INK.ink, weight: 600, anchor: "middle" });
+  b += line(x0, 24, x0, bot + 6, INK.rule, 1) + line(x1, 24, x1, bot + 6, INK.rule, 1);
+  const ink = (r: SlopeRow) => r.color ?? (r.emphasis ? INK.sindoor : "#8f8f8f");
+  const order = [...rows].sort((p, q) => Number(!!p.emphasis) - Number(!!q.emphasis));
+  const la = spread(rows.map((r) => y(r.a)), fs + 3, top - 6, bot), lb = spread(rows.map((r) => y(r.b)), fs + 3, top - 6, bot);
+  for (const r of order) {
+    const i = rows.indexOf(r), c = ink(r), w = r.emphasis ? 2.6 : 1.4;
+    let g = line(x0, y(r.a), x1, y(r.b), c, w) + dot(x0, y(r.a), r.emphasis ? 4 : 3, c) + dot(x1, y(r.b), r.emphasis ? 4 : 3, c);
+    const wt = r.emphasis ? 600 : undefined, lc = r.emphasis ? INK.ink : INK.ink2;
+    g += `<text x="${r1(x0 - 10)}" y="${r1(la[i] + fs * 0.35)}" font-family="${F}" font-size="${fs}" text-anchor="end"><tspan fill="${lc}"${wt ? ` font-weight="${wt}"` : ""}>${esc(r.label)}</tspan><tspan fill="${INK.ink}" font-weight="600" dx="5">${esc(f(r.a))}</tspan></text>`;
+    g += `<text x="${r1(x1 + 10)}" y="${r1(lb[i] + fs * 0.35)}" font-family="${F}" font-size="${fs}"><tspan fill="${INK.ink}" font-weight="600">${esc(f(r.b))}</tspan><tspan fill="${lc}"${wt ? ` font-weight="${wt}"` : ""} dx="5">${esc(r.label)}</tspan></text>`;
+    const tipS = [r.label, `${o.aLabel}: ${f(r.a)}`, `${o.bLabel}: ${f(r.b)}`].join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    b += `<g class="mk" data-tip="${tipS}" tabindex="0"><path d="M${r1(x0)} ${r1(y(r.a))}L${r1(x1)} ${r1(y(r.b))}" stroke="transparent" stroke-width="12"/>${g}</g>`;
+  }
+  return svg(W, H, b, o.label);
+}
+
+// =====================================================================
+// 17. STACKED AREA — composition over time, each layer named at its end
+// =====================================================================
+export type AreaLayer = { label: string; color: string; points: Array<[number, number]> };
+export function stackedArea(layers: AreaLayer[], o: {
+  share?: boolean; width?: number; height?: number; yTicks?: number[]; fmt?: (v: number) => string; unit?: string; label: string;
+}) {
+  const W = o.width ?? 1040, sm = W < 700, H = o.height ?? (sm ? 300 : 420);
+  const years = [...new Set(layers.flatMap((l) => l.points.map((p) => p[0])))].sort((a, b) => a - b);
+  const at = (l: AreaLayer, t: number) => l.points.find((p) => p[0] === t)?.[1] ?? 0;
+  const totals = years.map((t) => layers.reduce((s, l) => s + Math.max(0, at(l, t)), 0));
+  const val = (l: AreaLayer, k: number) => (o.share ? (Math.max(0, at(l, years[k])) / (totals[k] || 1)) * 100 : Math.max(0, at(l, years[k])));
+  const f = o.fmt ?? ((v: number) => fmtIN(Math.round(v)));
+  const fs = sm ? 11.5 : 13;
+  const last = years.length - 1;
+  const lastVals = layers.map((l) => val(l, last)), lastTot = lastVals.reduce((s, v) => s + v, 0);
+  const shareOf = (v: number) => `${Math.round((v / (lastTot || 1)) * 100)}%`;
+  const endText = (l: AreaLayer, i: number) => (o.share ? `${l.label} ${f(lastVals[i])}` : `${l.label} ${f(lastVals[i])}`);
+  const gut = Math.max(...layers.map((l, i) => endText(l, i).length * fs * 0.56)) + 32;
+  const mr = Math.min(gut, W * (sm ? 0.42 : 0.26)), mt = 18, mb = 26;
+  const t0 = years[0], t1 = years[last];
+  const x = (t: number) => ml + ((t - t0) / (t1 - t0 || 1)) * (W - ml - mr);
+  const yMax = o.share ? 100 : Math.max(...years.map((_, k) => layers.reduce((s, l) => s + val(l, k), 0)));
+  const ticks = o.yTicks ?? (() => { const st = [1, 2, 2.5, 5, 10].map((m) => m * 10 ** Math.floor(Math.log10(yMax / 4))).find((s) => yMax / s <= 5)!; const t: number[] = []; for (let v = 0; v <= yMax + st * 0.01; v += st) t.push(v); if (t[t.length - 1] < yMax) t.push(t[t.length - 1] + st); return t; })();
+  const top = ticks[ticks.length - 1];
+  const ml = Math.max(...ticks.map((v) => (o.share ? `${v}%` : f(v)).length * 11.5 * 0.58)) + 10;
+  const y = (v: number) => H - mb - (v / (top || 1)) * (H - mb - mt);
+  let b = "";
+  for (const v of ticks) { b += line(ml, y(v), W - mr, y(v), v === 0 ? INK.ink : INK.grid, 1); b += txt(ml - 6, y(v) + 4, o.share ? `${v}%` : f(v), { ...AX, anchor: "end" }); }
+  const step = sm ? 10 : 5;
+  const gapPx = 34;
+  for (const t of years) if (t % step === 0 || t === t0 || t === t1) {
+    if (t !== t0 && t !== t1 && (x(t) - x(t0) < gapPx || x(t1) - x(t) < gapPx)) continue;
+    b += txt(x(t), H - mb + 17, t, { ...AX, anchor: t === t0 ? "start" : t === t1 ? "end" : "middle" });
+  }
+  // stack bottom-up in the given order
+  const base = years.map(() => 0);
+  const mids: number[] = [];
+  layers.forEach((l, i) => {
+    const lower = base.slice(), upper = years.map((_, k) => base[k] + val(l, k));
+    const d = years.map((t, k) => `${k ? "L" : "M"}${r1(x(t))} ${r1(y(upper[k]))}`).join("") + years.slice().reverse().map((t, k) => `L${r1(x(t))} ${r1(y(lower[last - k]))}`).join("") + "Z";
+    const tipS = [l.label, `${years[last]}: ${f(lastVals[i])}${o.unit && !o.share ? ` ${o.unit}` : ""}${o.share ? "" : ` (${shareOf(lastVals[i])} of the total)`}`].join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    b += `<path class="mk" d="${d}" fill="${l.color}" fill-opacity="0.88" stroke="#ffffff" stroke-width="0.8" data-tip="${tipS}"/>`;
+    mids.push(y((lower[last] + upper[last]) / 2));
+    years.forEach((_, k) => (base[k] = upper[k]));
+  });
+  const ly = spread(mids, fs + 3, mt + 4, H - mb - 2);
+  layers.forEach((l, i) => {
+    const xe = W - mr;
+    if (Math.abs(ly[i] - mids[i]) > 2) b += `<path d="M${r1(xe + 1)} ${r1(mids[i])}L${r1(xe + 9)} ${r1(ly[i])}" stroke="${INK.ink3}" stroke-width="0.75" fill="none"/>`;
+    // a swatch in the layer's colour, the name in ink: pale layers stay legible
+    b += `<rect x="${r1(xe + 10)}" y="${r1(ly[i] - 4.5)}" width="9" height="9" fill="${l.color}"/>`;
+    b += `<text x="${r1(xe + 24)}" y="${r1(ly[i] + fs * 0.35)}" font-family="${F}" font-size="${fs}"><tspan fill="${INK.ink}" font-weight="600">${esc(l.label)}</tspan><tspan fill="${INK.ink2}" dx="5">${esc(f(lastVals[i]))}</tspan></text>`;
+  });
   return svg(W, H, b, o.label);
 }

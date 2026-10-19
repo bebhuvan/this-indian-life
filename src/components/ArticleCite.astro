@@ -70,28 +70,29 @@ const bibtex = `@misc{${bibKey},
 </div>
 
 <style>
-  .cite{max-width:780px}
-  .cite-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-  .cite-lbl{font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--dim)}
-  .cite-lic{font-family:var(--sans);font-size:.72rem;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--ghost);transition:color .2s,border-color .2s}
-  .cite-lic:hover{color:var(--c-ink);border-color:var(--c)}
-  .cite-main{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--ghost);border-radius:3px;padding:15px 16px}
-  .cite-text{margin:0;flex:1;font-size:.92rem;line-height:1.55;color:var(--ink)}
-  .cite-copy{flex:none;cursor:pointer;font-family:var(--sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--dim);background:var(--bg);border:1px solid var(--ghost);border-radius:2px;padding:6px 11px;transition:.18s;white-space:nowrap}
-  .cite-copy:hover{color:var(--c-ink);border-color:var(--c)}
-  .cite-copy.is-done{color:var(--c-ink);border-color:var(--c)}
-  .cite-formats{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-  .cite-det summary{cursor:pointer;font-family:var(--sans);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);list-style:none;transition:color .2s}
-  .cite-det summary:hover{color:var(--mid)}
+  /* Almanac end matter: ruled, unboxed; the citation is set like a reference in a book. */
+  .cite{max-width:660px;border-top:2px solid var(--ink);padding-top:14px}
+  .cite-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+  .cite-lbl{font-family:var(--sans);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+  .cite-lic{font-family:var(--sans);font-size:.82rem;color:var(--mid);text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px}
+  .cite-lic:hover{color:var(--c-ink);text-decoration-color:var(--c)}
+  .cite-main{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:baseline;border-left:2px solid var(--c);padding:2px 0 2px 16px}
+  .cite-text{margin:0;font-family:var(--serif);font-size:1.08rem;line-height:1.55;color:var(--ink);overflow-wrap:anywhere}
+  .cite-copy{cursor:pointer;font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--ink);background:none;border:0;border-bottom:1.5px solid var(--ink);border-radius:0;padding:0 0 2px;white-space:nowrap}
+  .cite-copy:hover,.cite-copy.is-done{color:var(--c-ink);border-color:var(--c)}
+  .cite-formats{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap}
+  .cite-det{flex:1 1 100%}
+  .cite-det summary{cursor:pointer;display:inline-block;font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--mid);list-style:none}
+  .cite-det summary:hover{color:var(--ink)}
   .cite-det summary::-webkit-details-marker{display:none}
-  .cite-det summary::before{content:'▸';margin-right:8px;font-size:.74em;color:var(--mid)}
-  .cite-det[open] summary::before{content:'▾'}
-  .cite-block{position:relative;margin-top:10px}
-  .cite-block pre,.cite-block p{margin:0;background:var(--paper);border:1px solid var(--ghost);border-radius:3px;padding:14px;line-height:1.5;color:var(--ink)}
-  .cite-block pre{font-size:.78rem;overflow-x:auto;white-space:pre}
-  .cite-block p{font-size:.85rem;padding-right:70px}
-  .cite-block .cite-copy{position:absolute;top:8px;right:8px}
-  @media(max-width:620px){.cite-main{flex-direction:column}.cite-block p{padding-right:14px}.cite-block .cite-copy{position:static;margin-top:10px}}
+  .cite-det summary::before{content:"+";display:inline-block;width:1em;color:var(--dim)}
+  .cite-det[open] summary::before{content:"\2212"}
+  .cite-block{position:relative;margin-top:10px;border-top:1px solid var(--rule);padding-top:12px}
+  .cite-block pre,.cite-block p{margin:0;line-height:1.55;color:var(--ink)}
+  .cite-block pre{font-size:.8rem;overflow-x:auto;white-space:pre;padding-right:70px}
+  .cite-block p{font-family:var(--serif);font-size:1rem;padding-right:70px}
+  .cite-block .cite-copy{position:absolute;top:12px;right:0}
+  @media(max-width:620px){.cite-main{grid-template-columns:1fr;gap:10px}.cite-main .cite-copy{justify-self:start}.cite-block p,.cite-block pre{padding-right:0}.cite-block .cite-copy{position:static;margin-top:10px}}
 </style>
 
 <script>

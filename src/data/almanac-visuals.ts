@@ -2,7 +2,7 @@
 // artifacts (series or tables) and returns an AlmanacVisual: a desktop SVG, a phone
 // SVG drawn for that width (not shrunk), and the rows behind it for the CSV download.
 // Builders return null when their data is missing, so a plan entry fails soft.
-import { INK, SCALES, type Stops, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, type ScatterPoint } from "./almanac";
+import { INK, SCALES, type Stops, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, slope, stackedArea, type ScatterPoint } from "./almanac";
 
 type Row = Record<string, unknown>;
 export type AlmanacArtifact = {
@@ -35,6 +35,10 @@ export type AlmanacEntry = {
   parts?: Array<{ label: string; rows: Array<{ indicator: string; label: string; color?: string }> }>; total?: number; match?: string;
   loField?: string; hiField?: string; midField?: string; eras?: Array<[number, number]>; transform?: "pctChange"; years?: number;
   paths?: Array<{ label: string; x: string; y: string; color?: string; emphasis?: boolean }>; xLog?: boolean; totalIndicator?: string; totalLabel?: string;
+  // slope: two years read from each unit's series
+  aYear?: number; bYear?: number;
+  // stackedArea: a long table (seriesField/valueField/dateField) or one series per layer; share = 100% stacked
+  share?: boolean; seriesField?: string; valueField?: string; dateField?: string; layers?: Array<{ key: string; label?: string; color: string }>;
 };
 type Lookup = (indicatorId: string) => AlmanacArtifact | undefined;
 
@@ -338,10 +342,47 @@ function waterfallVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   return { kind: "almanac", form: "waterfall", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, rows: steps.map((s) => ({ part: s.label, value: s.value, date })) };
 }
 
+
+// ---------------------------------------------------------------- slope
+function slopeVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
+  const units = (e.series ?? []).map((s) => ({ s, pts: series(get(s.indicator)) })).filter((u) => u.pts.length);
+  if (units.length < 2) return null;
+  const a = e.aYear ?? Math.max(...units.map((u) => u.pts[0][0])), b = e.bYear ?? Math.min(...units.map((u) => u.pts[u.pts.length - 1][0]));
+  const rows = units.map((u) => ({ label: u.s.label, a: u.pts.find(([t]) => t === a)?.[1], b: u.pts.find(([t]) => t === b)?.[1], emphasis: u.s.label === e.emphasis, color: u.s.label === e.emphasis ? INK.sindoor : /world|all india/i.test(u.s.label) ? INK.ink : undefined }))
+    .filter((r): r is { label: string; a: number; b: number; emphasis: boolean; color: string | undefined } => r.a != null && r.b != null);
+  if (rows.length < 2) return null;
+  const first = get(e.series![0].indicator)!, f = unitFmt(e.unit ?? first.unit);
+  const opts = { aLabel: e.aLabel ?? String(a), bLabel: e.bLabel ?? String(b), fmt: f, domain: e.domain, label: e.title ?? first.title };
+  const { svg, svgM } = pair(slope(rows, { ...opts, width: 1040 }), slope(rows, { ...opts, width: 350 }));
+  return { kind: "almanac", form: "slope", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, rows: rows.map((r) => ({ unit: r.label, [String(a)]: r.a, [String(b)]: r.b })) };
+}
+
+// ---------------------------------------------------------------- stacked area
+function stackedAreaVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
+  let layers: Array<{ label: string; color: string; points: Array<[number, number]> }> = [];
+  let first: AlmanacArtifact | undefined;
+  if (e.indicator) {
+    first = get(e.indicator);
+    const rows = first?.rows ?? [], sf = e.seriesField ?? "series", vf = e.valueField ?? "value", df = e.dateField ?? "date";
+    layers = (e.layers ?? []).map((l) => ({ label: l.label ?? l.key, color: l.color, points: rows.filter((r) => r[sf] === l.key && r[vf] != null).map((r) => [Number(String(r[df]).slice(0, 4)), Number(r[vf])] as [number, number]).sort((p, q) => p[0] - q[0]) }));
+  } else {
+    first = get(e.series?.[0]?.indicator ?? "");
+    layers = (e.series ?? []).map((s, i) => ({ label: s.label, color: e.layers?.[i]?.color ?? PALETTE[i % PALETTE.length], points: series(get(s.indicator)) }));
+  }
+  layers = layers.filter((l) => l.points.length > 1);
+  if (!first || layers.length < 2) return null;
+  const unit = e.unit ?? first.unit;
+  const f = e.share ? (v: number) => `${Math.round(v)}%` : unitFmt(unit);
+  const opts = { share: e.share, fmt: f, unit: e.share ? "" : unit, label: e.title ?? first.title };
+  const { svg, svgM } = pair(stackedArea(layers, { ...opts, width: 1040 }), stackedArea(layers, { ...opts, width: 350 }));
+  return { kind: "almanac", form: "stackedArea", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit, source: srcOf(first), svg, svgM, rows: layers.flatMap((l) => l.points.map(([t, v]) => ({ series: l.label, year: t, value: v }))) };
+}
+
 const BUILDERS: Record<string, (e: AlmanacEntry, get: Lookup) => AlmanacVisual | null> = {
   heatStrip: heatStripVisual, tileGrid: tileGridVisual, scatterFit: scatterFitVisual, parade: paradeVisual, sensitivity: sensitivityVisual,
   dumbbell: dumbbellVisual, rankSlope: rankSlopeVisual, beeswarm: beeswarmVisual, dayRibbon: dayRibbonVisual, unitChart: unitChartVisual,
   intervalPlot: intervalVisual, ridgeline: ridgelineVisual, calendarHeat: calendarVisual, connectedScatter: connectedVisual, waterfall: waterfallVisual,
+  slope: slopeVisual, stackedArea: stackedAreaVisual,
 };
 export const ALMANAC_FORMS = Object.keys(BUILDERS);
 export function buildAlmanacVisual(entry: AlmanacEntry, get: Lookup): AlmanacVisual | null {
