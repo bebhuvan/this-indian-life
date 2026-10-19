@@ -13,6 +13,9 @@ export function fmt(value: number, unit = "") {
     if (/rupees|inr|₹/i.test(unit) || (/crore/i.test(unit) && /inr|₹|rs/i.test(unit))) return "₹0";
     return "0";
   }
+  // A change in a share is in points, not per cent: the unit is printed once above the
+  // figure, so the value is written bare ("10.2"), never "10.2%".
+  if (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit)) return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
   if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
   if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
@@ -104,6 +107,9 @@ export function yTickLabel(tick: number, ti: number, ticks: number[], unit = "",
 
 export function compactBarLabel(value: number, unit = "") {
   const abs = Math.abs(value);
+  // A change in a share is in points, not per cent: the unit is printed once above the
+  // figure, so the value is written bare ("10.2"), never "10.2%".
+  if (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit)) return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
   if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
@@ -129,6 +135,9 @@ export function endLabelInScale(value: number, maxAbs: number, unit = "", compac
   const n = (v: number, divisor: number) =>
     (v / divisor).toLocaleString("en-IN", { maximumFractionDigits: 1 });
   const w = (short: string, long: string) => bare ? "" : ` ${compact ? short : long}`;
+  // A change in a share is in points, not per cent: the unit is printed once above the
+  // figure, so the value is written bare ("10.2"), never "10.2%".
+  if (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit)) return n(value, 1);
   if (/multiple/i.test(unit)) return `${n(value, 1)}x`;
   if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 100 ? 0 : 1 })}%`;
   if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
@@ -221,11 +230,26 @@ export function harmoniseDecimals(labels: string[]) {
   const key = (m: RegExpMatchArray | null) => (m ? `${m[1].replace(/[-\u2212+]/g, "")}|${m[4]}` : "");
   const need = new Map<string, number>();
   for (const m of parts) if (m) need.set(key(m), Math.max(need.get(key(m)) ?? 0, (m[3] ?? "").length));
+  // Mixed magnitudes (7.52 beside 117) keep their own precision: padding the small ones
+  // would only make them look more exact than the large.
+  if (parts.some((m) => m && m[2].replace(/,/g, "").length >= 3)) return labels;
   return labels.map((l, i) => {
     const m = parts[i];
     if (!m) return l;
     const d = need.get(key(m)) ?? 0, have = (m[3] ?? "").length;
-    if (!d || have >= d || m[2].replace(/,/g, "").length >= 3) return l;
+    if (!d || have >= d || m[2].replace(/,/g, "").length >= 4) return l;
     return `${m[1]}${m[2]}.${(m[3] ?? "").padEnd(d, "0")}${m[4]}`;
   });
+}
+
+/** Counts stored in crore or lakh (people, cases, households; not rupees) written the way
+ *  an Indian reader says them: 0.88 crore is "88 lakh", 1.69 crore stays "1.69 crore". */
+export function countFmt(value: number, unit = ""): string | null {
+  if (/inr|₹|rs\b|rupee/i.test(unit)) return null;
+  const crore = /^\s*crore\b/i.test(unit), lakh = /^\s*lakh\b/i.test(unit);
+  if (!crore && !lakh) return null;
+  const abs = Math.abs(value) * (crore ? 100 : 1); // in lakh
+  const sign = value < 0 ? "\u2212" : "";
+  if (abs >= 100) return `${sign}${(abs / 100).toLocaleString("en-IN", { maximumFractionDigits: 2 })} crore`;
+  return `${sign}${abs.toLocaleString("en-IN", { maximumFractionDigits: abs >= 10 ? 0 : 1 })} lakh`;
 }

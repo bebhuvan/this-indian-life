@@ -18,7 +18,14 @@ export const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").repl
 /** Final typesetting for a chart's SVG string: a true minus sign (U+2212) wherever a
  *  hyphen stands for a negative number, in visible text and in tooltips. Dates and
  *  ranges ("2016-2025") are untouched because their hyphen follows a digit. */
-const minus = (t: string) => t.replace(/(^|[\s(\[~≈:|])-(?=\d|\.\d|₹|\$)/g, "$1\u2212");
+const minus = (t: string) => t
+  .replace(/(^|[\s(\[~≈:|])-(?=\d|\.\d|₹|\$)/g, "$1\u2212")
+  .replace(/\s?-(?:&gt;|>)/g, " \u2192")
+  .replace(/(?:&lt;|<)-\s?/g, "\u2190 ")
+  .replace(/(?:&lt;|<)=/g, "\u2264").replace(/(?:&gt;|>)=/g, "\u2265")
+  .replace(/\bdeg(?:rees)? C\b/g, "\u00b0C")
+  // a zero needs no scale word: "₹0 lakh" reads as a glitch
+  .replace(/^([₹$]?)0 (lakh|crore|cr|L cr|lakh cr|bn|billion|trillion|T)$/, "$10");
 export const typeset = (svg: string) =>
   String(svg)
     .replace(/>([^<]+)</g, (_m, t: string) => `>${minus(t)}<`)

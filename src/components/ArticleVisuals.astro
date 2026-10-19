@@ -5,7 +5,7 @@ import { formatLockedNumber } from "../data/questions";
 import { fileSafe } from "../data/chartDownloads";
 import FigureCard from "./FigureCard.astro";
 import { renderFigure, cleanUnit } from "../data/figures";
-import { fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
+import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
 import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, viewBoxAspectRatio } from "../data/chartSvg";
 import { typeset, txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
 
@@ -46,6 +46,25 @@ const {
 // domain does not already use (set per domain as --s3..--s5 in indica.css), then grey.
 // A seventh series folds into a light grey rather than inventing a hue.
 const colors = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b3b3b3"];
+
+/** The ink of every line in a chart. Fixed meanings win over the palette and over colours
+ *  hard-coded in the registry: rural is always hara, urban always neel. When two lines
+ *  share a meaning ("Rural, with imputation" and "Rural, without"), the second is dashed.
+ *  The other lines take the palette in order, skipping inks a fixed meaning has used. */
+function lineInks(lines: Array<{ label: string; color?: string; dash?: boolean }>) {
+  const fixed = (label: string) => (/\brural\b/i.test(label) ? "#008a6e" : /\burban\b/i.test(label) ? "#33489a" : null);
+  const anyFixed = lines.some((l) => fixed(l.label));
+  const seen = new Set<string>();
+  let k = 0;
+  // With rural/urban present, the domain ink could repeat hara or neel, so the others start at ink black.
+  const rest = anyFixed ? ["#121212", "#b98014", "#7b4790", "#c24a2e", "#8a8a8a", "#b3b3b3"] : colors;
+  return lines.map((l, i) => {
+    const f = fixed(l.label);
+    if (f) { const dash = seen.has(f) || !!l.dash; seen.add(f); return { color: f, dash }; }
+    if (!anyFixed) return { color: l.color ?? colors[i % colors.length], dash: !!l.dash };
+    return { color: rest[k++ % rest.length], dash: !!l.dash };
+  });
+}
 const WATERMARK_TEXT = "thisindianlife.today";
 const sourceNames: Record<string, string> = {
   dataforindia: "Data For India",
@@ -459,6 +478,8 @@ function sourceLabel(source: VisualSpec["source"]) {
 function isMachineId(seg: string) {
   const s = seg.trim();
   if (!s || /\s/.test(s)) return false;
+  // Dotted keys with lowercase hyphenated segments ("international-prices-crude-oil.indian-basket.$-per-bbl").
+  if (/\./.test(s) && /[a-z]-[a-z]/.test(s)) return true;
   return /:/.test(s) || /^\d+$/.test(s) || /_/.test(s) || /^[a-z]+[A-Z][A-Za-z]*(:\w+)?$/.test(s) || /^derived:/.test(s);
 }
 
@@ -701,6 +722,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     }
     return time;
   };
+  const inks = lineInks(visual.lines);
   const totalPoints = visual.lines.reduce((n, l) => n + l.points.length, 0);
   const timesAll = visual.lines.flatMap((line) => line.points.map((p) => timeOf(p.date))).filter((v): v is number => v !== null);
   const dateMode = !visual.categoricalX && timesAll.length === totalPoints && timesAll.length > 0 && Math.max(...timesAll) > Math.min(...timesAll);
@@ -719,7 +741,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     const latest = line.points.at(-1);
     const latestX = latest ? xLast : 0;
     const latestY = latest ? y(latest.value) : 0;
-    return { ...line, d, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: line.color ?? colors[lineIndex % colors.length] };
+    return { ...line, d, areaD, latest, latestX, latestY, endLabelText: latest ? endText(latest.value) : "", color: inks[lineIndex].color, dash: inks[lineIndex].dash };
   });
   const minGap = mobile ? 15 : 18;
   const labelTop = pad.t + 14;
@@ -739,7 +761,8 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   }
   for (const item of sorted) item.y = Math.max(labelTop, Math.min(labelBottom, item.y));
   const labelY = new Map(sorted.map((item) => [item.index, item.y]));
-  const paths = pathsRaw.map((path, index) => ({ ...path, labelY: labelY.get(index) || path.latestY }));
+  const endLabels = harmoniseDecimals(pathsRaw.map((path) => path.endLabelText));
+  const paths = pathsRaw.map((path, index) => ({ ...path, endLabelText: endLabels[index], labelY: labelY.get(index) || path.latestY }));
   const tickCount = mobile ? 4 : isLead ? 5 : 4;
   let axisTicks: Array<{ xPos: number; label: string }>;
   if (dateMode) {
@@ -916,8 +939,8 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
       const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + (m ? 9 : 12);
       if (moved) b += `<path d="M${svgCoord(p.latestX + 4)} ${svgCoord(p.latestY)}L${svgCoord(lx - 3)} ${svgCoord(ly - 4)}" fill="none" stroke="${p.color}" stroke-width="0.8" stroke-opacity="0.6"/>`;
       b += m
-        ? almTxt(lx, ly, p.endLabelText, { size: labSize, fill: p.color, weight: 600 })
-        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}"><tspan fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${p.label}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
+        ? almHalo(lx, ly, p.endLabelText, { size: labSize, fill: p.color, weight: 600 })
+        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${p.color}" font-weight="${p.emphasis ? 700 : 600}">${p.label}</tspan><tspan fill="#4f4f4f" dx="5">${p.endLabelText}</tspan></text>`;
     }
   }
   void axisSize;
@@ -1021,7 +1044,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                 // Desktop names each line at its end; phones show values only, so the key
                 // appears there, and on desktop only when there are too many lines to label.
                 <div class={`viz-legend ${visual.lines.length > 7 ? "" : "viz-legend-m"}`}>
-                  {visual.lines.map((line, index) => <span><i style={`background:${line.color ?? colors[index % colors.length]}`}></i>{line.label}</span>)}
+                  {lineInks(visual.lines).map((ink, index) => <span><i style={`background:${ink.color}`}></i>{visual.lines[index].label}</span>)}
                 </div>
               )}
             </FigureCard>
@@ -1039,7 +1062,13 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const stripeStops: AlmStops = isRain
             ? ALM_SCALES.rain.map(([v, c]) => [stripes.center + (v / 22) * spread, c] as [number, string])
             : ([[-1, "#24387f"], [-0.6, "#6a7bc0"], [-0.25, "#c9d0ea"], [0, "#ededed"], [0.25, "#f1cbba"], [0.6, "#cc6849"], [1, "#7a2816"]] as AlmStops).map(([v, c]) => [stripes.center + v * spread, c] as [number, string]);
-          const stripeFmt = (v: number) => { const d = v - stripes.center, t = fmt(Math.abs(d), stripes.unit); return isRain ? `${d > 0 ? "+" : d < 0 ? "−" : ""}${t}` : fmt(v, stripes.unit); };
+          // A stripe's tooltip prints the published value. Only an absolute rain series
+          // (mm, not a departure) is written as its distance from the normal, and says so.
+          const stripeFmt = (v: number) => {
+            if (!isRain) return fmt(v, stripes.unit);
+            const d = stripes.center === 0 ? v : v - stripes.center, t = fmt(Math.abs(d), stripes.unit);
+            return `${d > 0 ? "+" : d < 0 ? "−" : ""}${t}${stripes.center === 0 ? "" : " vs normal"}`;
+          };
           const stripeYears = stripes.stripes.map((st) => ({ year: Number(String(st.date).slice(0, 4)), value: st.value }));
           return (
             <FigureCard cls={base} {...card}>

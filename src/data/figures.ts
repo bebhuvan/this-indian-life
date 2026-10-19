@@ -6,7 +6,7 @@
 // tooltip layer in public/article-actions.js shows on hover, tap and keyboard focus.
 import type { BarVisual, StackVisual, StripPairVisual, PyramidVisual, RankedChangeVisual, ChangeVisual, SparkGridVisual, StartingGridVisual, LinePanelsVisual, LoadCurveVisual, ScatterVisual, ScatterXYVisual, ScenarioMapsVisual, GroupedBarVisual, VisualSpec } from "./viz";
 import { INK, F, esc, r1, txt, halo, line, scatterFit, type ScatterPoint } from "./almanac";
-import { harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
+import { countFmt, harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
 import { choroColor, compactSvgPath } from "./chartSvg";
 
 export type Figure = { svg: string; svgM: string; note?: string };
@@ -15,6 +15,14 @@ export type FigureContext = { narrow?: boolean; chartId: string };
 /** Series order, as in ArticleVisuals: the domain ink, ink black, then the free inks. */
 export const SERIES = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b3b3b3"];
 const W_D = 1040, W_NARROW = 508, W_M = 346;
+/** Inks for a departure from a normal, as the stripes use them: temperature runs neel
+ *  (cooler) to sindoor (warmer), rainfall haldi (drier) to hara (wetter). Null when the
+ *  unit is not a departure, so other signed values keep the domain ink. */
+const anomalyInks = (unit = "", title = ""): [string, string] | undefined => {
+  const t = `${unit} ${title}`;
+  if (!/°[CF]|anomal|departure|above or below normal/i.test(t)) return undefined;
+  return /rain|monsoon|precip|wet|dry/i.test(t) ? ["#b98014", "#008a6e"] : ["#33489a", "#c24a2e"];
+};
 const isNational = (s: string) => /^(all[- ]india|india|national|all states|total)$/i.test(s.trim());
 
 // ---------- shared bits ----------
@@ -23,7 +31,8 @@ const attr = (s: string) => esc(s).replace(/"/g, "&quot;");
 export const tip = (head: string, ...lines: string[]) => ` data-tip="${attr([head, ...lines].join("|"))}"`;
 const textW = (s: string, size: number, bold = false) => String(s).length * size * (bold ? 0.6 : 0.56);
 function svgDoc(cls: string, w: number, h: number, body: string, label: string, extra = "") {
-  return `<svg class="viz-svg alm fig ${cls}" viewBox="0 0 ${w} ${r1(h)}" role="img" aria-label="${attr(label)}"${extra}>${body}</svg>`;
+  // max-width: a figure drawn narrower than its card is never stretched (text would grow).
+  return `<svg class="viz-svg alm fig ${cls}" viewBox="0 0 ${w} ${r1(h)}" style="max-width:${w}px" role="img" aria-label="${attr(label)}"${extra}>${body}</svg>`;
 }
 /** The unit, once, in the top-left corner of the plot. */
 function unitCaption(x: number, y: number, unit: string, size: number) {
@@ -56,15 +65,22 @@ const fmtU = (v: number, unit: string) => compactBarLabel(v, unit);
 // HORIZONTAL BARS — one row per category, value at the bar's end
 // =====================================================================
 type BarRow = { label: string; value: number; group?: string };
-function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: string; log?: boolean; label: string; groups?: string[] }) {
+function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: string; log?: boolean; label: string; groups?: string[]; anomaly?: [string, string] }) {
   const W = o.width, m = o.mobile, unit = o.unit;
   const labSize = 13, valSize = m ? 12.5 : 13, few = rows.length <= 6, barH = m ? (few ? 14 : 10) : few ? 18 : rows.length <= 12 ? 14 : 12;
   const vals = rows.map((r) => r.value), lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
   const neg = lo < 0;
-  const harmonised = harmoniseDecimals(vals.map((v) => fmtU(v, unit)));
-  const valTxt = (v: number) => harmonised[vals.indexOf(v)] ?? fmtU(v, unit);
-  const posValW = Math.max(0, ...rows.filter((r) => r.value >= 0).map((r) => textW(valTxt(r.value), valSize, true))) + 10;
-  const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textW(valTxt(r.value), valSize, true))) + 10 : 0;
+  // One precision per group: groups often come from different sources (World Bank to two
+  // decimals, SRS to one), and padding one to match the other would overstate it.
+  const harmonised = new Map<BarRow, string>();
+  for (const g of o.groups?.length ? o.groups : [undefined]) {
+    const items = g === undefined ? rows : rows.filter((r) => r.group === g);
+    harmoniseDecimals(items.map((r) => fmtU(r.value, unit))).forEach((t, i) => harmonised.set(items[i], t));
+  }
+  const rowTxt = (r: BarRow) => harmonised.get(r) ?? fmtU(r.value, unit);
+  const valTxt = (v: number) => fmtU(v, unit);
+  const posValW = Math.max(0, ...rows.filter((r) => r.value >= 0).map((r) => textW(rowTxt(r), valSize, true))) + 10;
+  const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textW(rowTxt(r), valSize, true))) + 10 : 0;
   // Label column on desktop: wide enough for the longest label (wrapped to two lines past ~30 chars).
   const longest = Math.max(...rows.map((r) => Math.min(r.label.length, 34)));
   const labelW = m ? 0 : Math.min(W * 0.36, Math.max(80, longest * labSize * 0.54 + 18));
@@ -93,21 +109,26 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       b += line(0, y - 2, W, y - 2, INK.rule, 1);
       y += 22;
     }
+    // A suffix every label in the group shares ("Bihar (India)" under "Indian state") is noise.
+    const common = items.length > 1 ? items[0].label.match(/\s\([^)]+\)$/)?.[0] : undefined;
+    const strip = common && items.every((r) => r.label.endsWith(common)) ? common : "";
     for (const r of items) {
-      const lines = wrap(r.label, chars, 2);
+      const lines = wrap(strip ? r.label.slice(0, -strip.length) : r.label, chars, 2);
       const nat = isNational(r.label);
       const rowH = m ? 16 + lines.length * 15 + barH : Math.max(barH + 14, lines.length * 15 + 10);
       const by = m ? y + lines.length * 15 + 4 : y + rowH / 2 - barH / 2;
       const xa = o.log ? x0 : Math.min(xs(r.value), zx), xb = o.log ? xs(r.value) : Math.max(xs(r.value), zx);
-      const fill = nat ? INK.ink : "var(--c)";
+      // An anomaly (departure from a normal) diverges in the house colours: below normal
+      // neel, above it sindoor. Other signed values keep the domain ink either side of zero.
+      const fill = nat ? INK.ink : o.anomaly ? o.anomaly[r.value < 0 ? 0 : 1] : "var(--c)";
       let row = `<rect x="0" y="${r1(y)}" width="${W}" height="${r1(rowH)}" fill="transparent"/>`;
       row += m
         ? multiText(0, y + 12, lines, { size: labSize, fill: INK.ink, weight: nat ? 600 : undefined, lh: 15 })
         : multiText(labelW - 12, y + rowH / 2 + 4.5 - (lines.length - 1) * 7.5, lines, { size: labSize, fill: INK.ink, anchor: "end", weight: nat ? 600 : undefined, lh: 15 });
       row += `<rect class="mk-bar" x="${r1(xa)}" y="${r1(by)}" width="${r1(Math.max(1.5, xb - xa))}" height="${barH}" fill="${fill}"/>`;
       const vx = r.value < 0 && !o.log ? xa - 6 : xb + 6;
-      row += txt(vx, by + barH / 2 + valSize * 0.36, valTxt(r.value), { size: valSize, fill: INK.ink, weight: 600, anchor: r.value < 0 && !o.log ? "end" : "start" });
-      rowsOut.push(`<g class="mk"${tip(r.label + (g ? ` · ${g}` : ""), valTxt(r.value) + (cleanUnit(unit) && !/[%₹$x]/.test(valTxt(r.value)) ? ` ${cleanUnit(unit)}` : ""))} tabindex="0">${row}</g>`);
+      row += txt(vx, by + barH / 2 + valSize * 0.36, rowTxt(r), { size: valSize, fill: INK.ink, weight: 600, anchor: r.value < 0 && !o.log ? "end" : "start" });
+      rowsOut.push(`<g class="mk"${tip(r.label + (g ? ` · ${g}` : ""), rowTxt(r) + (cleanUnit(unit) && !/[%₹$x]/.test(rowTxt(r)) ? ` ${cleanUnit(unit)}` : ""))} tabindex="0">${row}</g>`);
       if (!m) b += line(labelW, y + rowH, W, y + rowH, "#f3f3f3", 1);
       y += rowH;
     }
@@ -264,7 +285,7 @@ function rankedSvg(v: RankedChangeVisual, o: { width: number; mobile: boolean })
 /** Diverging ranked change: one bar per unit from zero. */
 function rankedDivergeSvg(v: RankedChangeVisual, o: { width: number; mobile: boolean }) {
   const label = v.divergeLabel ? v.divergeLabel : "";
-  const bars = barsSvg(v.rows.map((r) => ({ label: r.label, value: r.change })), { width: o.width, mobile: o.mobile, unit: v.unit, label: v.title });
+  const bars = barsSvg(v.rows.map((r) => ({ label: r.label, value: r.change })), { width: o.width, mobile: o.mobile, unit: v.unit, label: v.title, anomaly: anomalyInks(v.unit, v.title) });
   if (!label) return bars;
   // put the direction note in the caption row, right-aligned
   return bars.replace(/(<svg[^>]*>)/, `$1${txt(o.width, 12, `${label}  ·  ${v.startLabel} to ${v.endLabel}`, { size: 11.5, fill: INK.ink3, anchor: "end" })}`);
@@ -279,7 +300,8 @@ function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
   const W = m ? o.width : cols * cw + gap * (cols - 1);
   // A change in a percentage is a change in points, not a per cent of a per cent.
   const isPct = /%|percent/i.test(v.unit);
-  const chg = (x: number) => (isPct ? `${x > 0 ? "+" : x < 0 ? "−" : ""}${Math.abs(x).toLocaleString("en-IN", { maximumFractionDigits: 1 })} points` : signedFmt(x, v.unit));
+  const val = (x: number) => countFmt(x, v.unit) ?? fmt(x, v.unit);
+  const chg = (x: number) => (isPct ? `${x > 0 ? "+" : x < 0 ? "−" : ""}${Math.abs(x).toLocaleString("en-IN", { maximumFractionDigits: 1 })} points` : countFmt(x, v.unit) ? `${x > 0 ? "+" : ""}${countFmt(x, v.unit)}` : signedFmt(x, v.unit));
   let b = "";
   items.forEach((it, i) => {
     const c = i % cols, r = Math.floor(i / cols), ox = c * (cw + gap), oy = r * (ch + 18);
@@ -293,10 +315,16 @@ function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
     b += line(sx0, sy, sx1, sy, INK.grid, 1);
     const lo = Math.min(it.start.value, it.end.value, 0), hi = Math.max(it.start.value, it.end.value);
     const px = (val: number) => sx0 + ((val - lo) / (hi - lo || 1)) * (sx1 - sx0);
-    b += `<g class="mk"${tip(lab, `${it.start.date}: ${fmt(it.start.value, v.unit)}`, `${it.end.date}: ${fmt(it.end.value, v.unit)}`, `Total growth ${pct(it.pctChange)}, ${multiple(it.start.value, it.end.value)}`)} tabindex="0">`;
+    b += `<g class="mk"${tip(lab, `${it.start.date}: ${val(it.start.value)}`, `${it.end.date}: ${val(it.end.value)}`, `Total growth ${pct(it.pctChange)}, ${multiple(it.start.value, it.end.value)}`)} tabindex="0">`;
     b += `<rect x="${r1(ox)}" y="${r1(oy)}" width="${r1(cw)}" height="${ch}" fill="transparent"/>`;
     b += line(px(it.start.value), sy, px(it.end.value), sy, "var(--c)", 3);
     b += `<circle cx="${r1(px(it.start.value))}" cy="${sy}" r="4" fill="#fff" stroke="${INK.ink3}" stroke-width="1.5"/><circle cx="${r1(px(it.end.value))}" cy="${sy}" r="5" fill="var(--c)"/>`;
+    // the two values the change runs between, above their dots
+    const sxS = px(it.start.value), sxE = px(it.end.value), apart = Math.abs(sxE - sxS) > 90;
+    if (apart) {
+      b += txt(sxS, sy - 10, val(it.start.value), { size: 12, fill: INK.ink2, anchor: sxS < sx0 + 30 ? "start" : "middle" });
+      b += txt(sxE, sy - 10, val(it.end.value), { size: 12, fill: INK.ink, weight: 600, anchor: sxE > sx1 - 30 ? "end" : "middle" });
+    }
     b += `</g>`;
     const yrs = yearSpan(it.start.date, it.end.date);
     const facts = [`${pct(it.pctChange)} on the starting value`, yrs ? `${chg(it.change / yrs)} a year on average` : ""].filter(Boolean).join("  ·  ");
@@ -393,6 +421,9 @@ function sparkGridFigure(v: SparkGridVisual, ctx: FigureContext): Figure {
       sub: isTemp && typeof c.change === "number" ? `${signedT(c.change)} since the ${startY.slice(0, 3)}0s` : v.latestPeriodLabel ? `${String(c.points.at(-1)?.date ?? "")} only` : `from ${f(first)}`,
     };
   });
+  const heads = harmoniseDecimals(panels.map((p) => p.head ?? ""));
+  const froms = harmoniseDecimals(panels.map((p) => (p.sub ?? "").replace(/^from /, "")));
+  panels.forEach((p, i) => { p.head = heads[i]; if (p.sub?.startsWith("from ")) p.sub = `from ${froms[i]}`; });
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 46 : 54, label: v.title, unit: v.unit, valueFmt: f, firstLast: !isTemp, chartId: ctx.chartId });
   const note = isTemp
     ? `Each panel is one city on its own scale, so read the slope, not the height. The figure is the latest year; beneath it, the change between the first and last ten years.`
@@ -591,7 +622,7 @@ function renderRaw(visual: VisualSpec, ctx: FigureContext): Figure | null {
       const isShare = v.share === true || (/%/.test(v.unit) && v.bars.length <= 4 && Math.abs(total - 100) <= 3 && !hasNeg && !isComparison);
       if (isShare) return both((o) => shareSvg([{ segs: v.bars.map((b, i) => ({ label: b.label, value: b.value, color: SERIES[i % SERIES.length] })) }], { ...o, label: v.title }));
       const groups = [...new Set(v.bars.map((b) => b.group).filter(Boolean))] as string[];
-      return both((o) => barsSvg(v.bars, { ...o, unit: v.unit, log: v.scale === "log", label: v.title, groups }));
+      return both((o) => barsSvg(v.bars, { ...o, unit: v.unit, log: v.scale === "log", label: v.title, groups, anomaly: v.bars.some((b) => b.value < 0) ? anomalyInks(v.unit, v.title) : undefined }));
     }
     case "stack": {
       const v = visual as StackVisual;
