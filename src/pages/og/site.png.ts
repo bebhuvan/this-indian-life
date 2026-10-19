@@ -49,7 +49,8 @@ export const GET: APIRoute = async () => {
           el({ fontSize: "20px", color: INK.ink2 }, "thisindianlife.today")
         ]),
         el({ fontFamily: "Newsreader", fontSize: "100px", fontWeight: 400, lineHeight: 1, letterSpacing: "-2px", marginTop: "46px" }, "How does India live?"),
-        el({ fontSize: "25px", color: INK.ink2, marginTop: "18px" }, SITE.description),
+        // Not the site description: under "How does India live?" it would say "how India lives" twice.
+        el({ fontSize: "25px", color: INK.ink2, marginTop: "18px" }, "Charts and plain-language explainers, every number sourced."),
         el({ display: "flex", flexDirection: "column", marginTop: "auto" }, [
           { type: "img", props: { src: stripesUri(BW, BH), width: BW, height: BH } },
           el({ display: "flex", justifyContent: "space-between", fontSize: "16px", color: "#737373", marginTop: "8px" }, [
