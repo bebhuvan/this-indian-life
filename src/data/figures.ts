@@ -96,7 +96,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     xs = (v) => x0 + ((v - lo) / Math.max(1e-9, hi - lo)) * (x1 - x0);
   }
   const zx = o.log ? x0 : xs(0);
-  const top = 26;
+  const top = m && o.log ? 56 : 26;
   const zeroSegs: Array<[number, number]> = [];
   let y = top, b = "";
   const rowsOut: string[] = [];
@@ -139,8 +139,9 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const H = y + 8;
   let axis = "";
   if (o.log) {
-    for (const t of logTicks) { axis += line(xs(t), top - 4, xs(t), H - 8, INK.grid, 1); axis += txt(xs(t), top - 8, fmtU(t, unit), { size: 11.5, fill: INK.ink3, anchor: "middle" }); }
-    axis += txt(W, 12, "Log scale: each gridline is ten times the last", { size: 11.5, fill: INK.ink3, anchor: "end" });
+    for (const t of logTicks) { axis += line(xs(t), top - 4, xs(t), H - 8, INK.grid, 1); axis += txt(xs(t), top - 8, fmtU(t, unit), { size: 11.5, fill: INK.ink3, anchor: xs(t) < 20 ? "start" : xs(t) > W - 20 ? "end" : "middle" }); }
+    // On a phone the note takes its own line under the unit, so the two never collide.
+    axis += m ? txt(0, 26, "Log scale: each gridline is ten times the last", { size: 11, fill: INK.ink3 }) : txt(W, 12, "Log scale: each gridline is ten times the last", { size: 11.5, fill: INK.ink3, anchor: "end" });
   }
   if (m && !o.log) for (const [a, c] of zeroSegs) axis += line(zx, a, zx, c, INK.ink, 1);
   else axis += line(zx, top - 4, zx, H - 8, INK.ink, 1);
