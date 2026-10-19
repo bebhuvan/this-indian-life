@@ -415,7 +415,7 @@
       "detail": "This chart overlays nominal and real earnings for regular wage/salaried workers. The nominal line (blue) rises, but the real line (red), deflated by CPI‑IW to 2012 rupees, falls. In 2023‑24, nominal earnings were ₹20,702, but in real terms they had shrunk from ₹12,101 to ₹11,112 over six years. This means a salaried worker's basket of goods has gotten smaller. It is the most jarring number on the page: even the 'privileged' formal workers have lost ground. The chart shows the nominal-wage illusion: higher numbers on a payslip do not mean higher purchasing power.",
       "whyShowThis": "The single most important thing about Indian pay this decade: once you strip out inflation, salaried earnings have not risen, they have fallen.",
       "howToRead": "Two lines: nominal wages rising, real wages (2012 ₹) falling from ₹12,101 to ₹11,112.",
-      "mistakeToAvoid": "Real wages are deflated by CPI-IW; different deflators give slightly different trends.",
+      "mistakeToAvoid": "Real wages are deflated by MoSPI's CPI (2012=100): CPI-Combined for PLFS earnings, CPI-Rural for rural daily wages. A different deflator gives a slightly different trend.",
       "mobileNote": "Two lines with opposite directions; use annotation to highlight the divergence."
     },
     {
@@ -674,12 +674,62 @@
     }
   ],
   "sourceNotes": [
-    "PLFS Annual Reports (MoSPI), various years, usual status (ps+ss) unless otherwise noted.",
-    "World Bank, World Development Indicators, modelled ILO estimates for labour force, participation, employment, and productivity.",
-    "ILOStat, SDG indicators for informal employment, NEET, and working poverty.",
-    "IndiaDataHub for EPFO, MGNREGA, rural wages, and the monthly PLFS unemployment rate.",
-    "Our World in Data, Maddison Project Database for historical GDP per capita.",
-    "Real wage series derived by deflating nominal wages with CPI-IW and CPI-Rural (MoSPI)."
+    {
+      "label": "MoSPI, Periodic Labour Force Survey Annual Report 2023-24 (July 2023-June 2024), with comparison tables back to 2017-18: participation, worker ratio, unemployment by education and social group, status, sector and earnings, PDF",
+      "url": "https://mospi.gov.in/sites/default/files/publication_reports/AnnualReport_PLFS2023-24L2.pdf"
+    },
+    {
+      "label": "MoSPI eSankhyiki portal (home page), where the PLFS calendar-year unemployment rates for 2022-2025, usual status and current weekly status, are published",
+      "url": "https://esankhyiki.mospi.gov.in/"
+    },
+    {
+      "label": "MoSPI eSankhyiki portal (home page), where the CPI (2012=100) series used to deflate PLFS earnings (CPI-Combined, survey-year mean) and rural wages (CPI-Rural) to 2012 rupees are published",
+      "url": "https://esankhyiki.mospi.gov.in/"
+    },
+    {
+      "label": "World Bank WDI, labour force and participation (modelled ILO estimate): SL.TLF.TOTL.IN, SL.TLF.CACT.ZS, SL.TLF.CACT.FE.ZS, youth unemployment SL.UEM.1524.ZS, India and comparison countries, 1990-2025",
+      "url": "https://data.worldbank.org/indicator/SL.TLF.CACT.ZS"
+    },
+    {
+      "label": "World Bank WDI, status in employment (modelled ILO estimate): self-employed SL.EMP.SELF.ZS, wage and salaried SL.EMP.WORK.ZS, vulnerable employment SL.EMP.VULN.ZS, India, 1991-2025",
+      "url": "https://data.worldbank.org/indicator/SL.EMP.VULN.ZS?locations=IN"
+    },
+    {
+      "label": "World Bank WDI, sector structure and productivity: employment in agriculture SL.AGR.EMPL.ZS, value added NV.AGR.TOTL.ZS, NV.IND.TOTL.ZS, NV.SRV.TOTL.ZS, GDP per person employed SL.GDP.PCAP.EM.KD",
+      "url": "https://data.worldbank.org/indicator/SL.GDP.PCAP.EM.KD"
+    },
+    {
+      "label": "World Bank WDI, population by age group, % of total: SP.POP.0014.TO.ZS, SP.POP.1564.TO.ZS, SP.POP.65UP.TO.ZS, India, 1960-2025",
+      "url": "https://data.worldbank.org/indicator/SP.POP.1564.TO.ZS?locations=IN"
+    },
+    {
+      "label": "ILOSTAT, SDG 8.3.1 informal employment rate by sector (SDG_0831_SEX_ECO_RT_A), India 2010-2025 (data file; comparison countries from the same indicator)",
+      "url": "https://rplumber.ilo.org/data/indicator?id=SDG_0831_SEX_ECO_RT_A&ref_area=IND&format=.csv"
+    },
+    {
+      "label": "ILOSTAT, SDG 8.6.1 youth NEET rate (SDG_0861_SEX_RT_A), India 2000-2025 (data file)",
+      "url": "https://rplumber.ilo.org/data/indicator?id=SDG_0861_SEX_RT_A&ref_area=IND&format=.csv"
+    },
+    {
+      "label": "ILOSTAT, SDG 1.1.1 working poverty rate (SDG_0111_SEX_AGE_RT_A), India 2000-2025 (data file)",
+      "url": "https://rplumber.ilo.org/data/indicator?id=SDG_0111_SEX_AGE_RT_A&ref_area=IND&format=.csv"
+    },
+    {
+      "label": "IndiaDataHub (home page), Economic Monitor series: EPFO net new subscribers (LAEMNETNSB11M), MGNREGA demand, person-days and active workers (LAEMNREGWD11M, LAEMNREGPD11M, LAEMNRGAWR11M), Labour Bureau rural wage rates (LAWRAGGAVG13M, LAWRWTTAVG13M) and the monthly PLFS unemployment rate (LAPLURARTT11M)",
+      "url": "https://www.indiadatahub.com/"
+    },
+    {
+      "label": "Maddison Project Database 2023 (Bolt and van Zanden) via Our World in Data, GDP per capita, India and comparison countries",
+      "url": "https://ourworldindata.org/grapher/gdp-per-capita-maddison-project-database"
+    },
+    {
+      "label": "Penn World Table (Feenstra et al.) and Huberman and Minns via Our World in Data, annual working hours per worker, 1970-2023",
+      "url": "https://ourworldindata.org/grapher/annual-working-hours-per-worker"
+    },
+    {
+      "label": "Penn World Table (Feenstra et al.) via Our World in Data, labour productivity: output per hour worked, 1970-2023",
+      "url": "https://ourworldindata.org/grapher/labor-productivity-per-hour-pennworldtable"
+    }
   ],
   "caveats": [
     "World Bank/ILO figures are modelled estimates and differ from PLFS survey numbers; use PLFS as the authoritative India spine and World Bank for cross‑country comparison.",
@@ -1445,7 +1495,7 @@
         "title": "The salary freeze: pay rose on paper, not in real life",
         "whyShowThis": "The single most important thing about Indian pay this decade: once you strip out inflation, salaried earnings have not risen, they have fallen.",
         "howToRead": "Two lines: nominal wages rising, real wages (2012 ₹) falling from ₹12,101 to ₹11,112.",
-        "mistakeToAvoid": "Real wages are deflated by CPI-IW; different deflators give slightly different trends."
+        "mistakeToAvoid": "Real wages are deflated by MoSPI's CPI (2012=100): CPI-Combined for PLFS earnings, CPI-Rural for rural daily wages. A different deflator gives a slightly different trend."
       },
       {
         "visualId": "the-casual-daily-wage",

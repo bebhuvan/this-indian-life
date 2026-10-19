@@ -2162,6 +2162,12 @@ async function main() {
       editorialPlanDraft: generatedResult.plan,
       evidence
     };
+    // The model's sourceNotes are plain strings and sometimes invented attributions. Where
+    // the registry pins a verified, linked list (scripts/registry/source-notes.mjs), write
+    // that instead, so the explanation file matches what the page renders.
+    for (const field of ["sourceNotes", "furtherReading"]) {
+      if (question[field]) document[field] = question[field].map((entry) => (typeof entry === "string" ? entry : { label: entry.label, url: entry.url }));
+    }
     await writeFile(outputPath, `${stableJson(document)}\n`);
     const flagNote = document.qualityFlags?.length ? ` (${document.qualityFlags.length} qualityFlag(s))` : "";
     console.log(`wrote explanation ${question.id}${flagNote}`);

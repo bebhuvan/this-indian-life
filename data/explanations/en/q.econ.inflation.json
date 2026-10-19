@@ -737,10 +737,26 @@
     }
   ],
   "sourceNotes": [
-    "CPI and WPI data from MOSPI (Ministry of Statistics and Programme Implementation), via their open data portal.",
-    "Long-run CPI inflation (1960-2025) sourced from World Bank World Development Indicators, spliced with MOSPI for recent years.",
-    "Core inflation and FD returns derived by IndiaDataHub from raw MOSPI and RBI datasets.",
-    "International comparisons use World Bank CPI data for each country."
+    {
+      "label": "MoSPI, Consumer Price Index (base 2012, and the new base-2024 series for basket weights), all-India rural, urban and combined, by group and item: eSankhyiki portal home, where the CPI tables are published",
+      "url": "https://esankhyiki.mospi.gov.in/"
+    },
+    {
+      "label": "Office of the Economic Adviser, DPIIT, Wholesale Price Index (2011-12=100): all commodities, primary articles, fuel and power, manufactured products (pulled via MoSPI eSankhyiki)",
+      "url": "https://eaindustry.nic.in/"
+    },
+    {
+      "label": "World Bank WDI, Inflation, consumer prices (annual %, FP.CPI.TOTL.ZG): India 1960 onward, spliced with MoSPI CPI for recent years; also the peer and peak-inflation comparisons",
+      "url": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations=IN"
+    },
+    {
+      "label": "IndiaDataHub Economic Monitor: core CPI (excluding food and fuel) and CPI excluding food, built from MoSPI indices; also the access layer for the RBI rate series (API documentation)",
+      "url": "https://feeds.indiadatahub.com/documentation?urls.primaryName=Economic%20Monitor"
+    },
+    {
+      "label": "RBI, Database on Indian Economy: policy repo rate, weighted average term-deposit and lending rates of scheduled commercial banks (used for the real FD return)",
+      "url": "https://data.rbi.org.in/DBIE/#/dbie/home"
+    }
   ],
   "caveats": [
     "All figures use the 2012 CPI basket unless otherwise noted; the 2024 basket revision is not yet reflected in headline CPI series, so historical comparisons should be interpreted with caution.",
