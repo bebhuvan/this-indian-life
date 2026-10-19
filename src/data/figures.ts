@@ -97,6 +97,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   }
   const zx = o.log ? x0 : xs(0);
   const top = 26;
+  const zeroSegs: Array<[number, number]> = [];
   let y = top, b = "";
   const rowsOut: string[] = [];
   const groups = o.groups?.length ? o.groups : [undefined];
@@ -130,6 +131,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       row += txt(vx, by + barH / 2 + valSize * 0.36, rowTxt(r), { size: valSize, fill: INK.ink, weight: 600, anchor: r.value < 0 && !o.log ? "end" : "start" });
       rowsOut.push(`<g class="mk"${tip(r.label + (g ? ` · ${g}` : ""), rowTxt(r) + (cleanUnit(unit) && !/[%₹$x]/.test(rowTxt(r)) ? ` ${cleanUnit(unit)}` : ""))} tabindex="0">${row}</g>`);
       if (!m) b += line(labelW, y + rowH, W, y + rowH, "#f3f3f3", 1);
+      // On a phone the labels sit above the bars, so the zero line runs beside the bars only.
+      else zeroSegs.push([by - 3, by + barH + 3]);
       y += rowH;
     }
   }
@@ -139,7 +142,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     for (const t of logTicks) { axis += line(xs(t), top - 4, xs(t), H - 8, INK.grid, 1); axis += txt(xs(t), top - 8, fmtU(t, unit), { size: 11.5, fill: INK.ink3, anchor: "middle" }); }
     axis += txt(W, 12, "Log scale: each gridline is ten times the last", { size: 11.5, fill: INK.ink3, anchor: "end" });
   }
-  axis += line(zx, top - 4, zx, H - 8, INK.ink, 1);
+  if (m && !o.log) for (const [a, c] of zeroSegs) axis += line(zx, a, zx, c, INK.ink, 1);
+  else axis += line(zx, top - 4, zx, H - 8, INK.ink, 1);
   const cap = unitCaption(m ? 0 : labelW, 12, unit, m ? 11.5 : 12);
   return svgDoc("fig-bars", W, H, cap + axis + b + rowsOut.join(""), o.label);
 }

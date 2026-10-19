@@ -28,44 +28,41 @@ const searchText = (page: (typeof questionPages)[number], domainLabel?: string) 
   <div class="wrap">
     <Nav locale={locale} />
 
-    <header class="domain-head">
+    <header class="domain-head ax-head">
       <span class="lbl">Articles</span>
-      <h1 class="serif">The first question set.</h1>
-      <p class="muted">
-        National questions about India, each written from local data artifacts and stored evidence
-        packets. Browse by topic, or search for the one you want.
-      </p>
+      <h1 class="serif">Every question, by subject.</h1>
+      <p class="ax-dek">{questionPages.filter((p) => p.explanation.status === "ready").length} explainers on how India lives, each built from official data with every chart's numbers to download. Search them, or pick a subject.</p>
     </header>
 
-    <div class="archive-search">
+    <div class="archive-search ax-search">
       <input
         id="q-search"
         type="search"
-        placeholder="Search questions — try “inflation”, “electricity”, “children”…"
+        placeholder="Search: inflation, electricity, children"
         autocomplete="off"
         aria-label="Search questions"
       />
     </div>
 
-    <div class="archive-filters" id="q-filters" role="group" aria-label="Filter by topic">
-      <button class="afilter is-active" data-domain="all" type="button">All topics</button>
+    <div class="archive-filters ax-filters" id="q-filters" role="group" aria-label="Filter by subject">
+      <button class="afilter is-active" data-domain="all" type="button" aria-pressed="true">All</button>
       {domains.map((domain) => (
-        <button class="afilter" data-domain={domain.id} type="button">{domain.label}</button>
+        <button class="afilter" data-domain={domain.id} type="button" aria-pressed="false">{domain.label}</button>
       ))}
     </div>
 
     {domains.map((domain) => {
-      const pages = questionPages.filter((page) => page.domain === domain.id);
+      const pages = questionPages.filter((page) => page.domain === domain.id)
+        .sort((a, b) => Number(a.explanation.status !== "ready") - Number(b.explanation.status !== "ready"));
       if (!pages.length) return null;
       return (
-        <section class={`section dom-${domain.id} qgroup`} data-section={domain.id}>
-          <p class="sec-hd">{domain.label}</p>
+        <section class={`section dom-${domain.id} qgroup ax-group`} data-section={domain.id}>
+          <p class="ax-hd"><a href={`/${domain.id}/`}>{domain.label}</a><span>{pages.length}</span></p>
           {pages.map((page) => (
-            <a class="q-row qrow" href={questionUrl(page, locale)} data-domain={domain.id} data-text={searchText(page, domain.label)}>
-              <span class="q-dot" style={`background:var(--${page.domain})`}></span>
-              <span class="q-txt">{page.question}</span>
-              <span class="q-ans" style={`color:var(--${page.domain}-ink)`}>{statusMeta(page.explanation.status).short}</span>
-              <span class="q-arrow">-></span>
+            <a class="qrow ax-row" href={questionUrl(page, locale)} data-domain={domain.id} data-text={searchText(page, domain.label)}>
+              <span class="ax-q">{page.question}</span>
+              {page.explanation.short?.dek ? <span class="ax-d">{page.explanation.short.dek}</span> : null}
+              {page.explanation.status !== "ready" ? <span class="ax-s">{statusMeta(page.explanation.status).short}</span> : null}
             </a>
           ))}
         </section>
@@ -112,8 +109,9 @@ const searchText = (page: (typeof questionPages)[number], domainLabel?: string) 
       }
       filters.forEach((button) => {
         button.addEventListener("click", () => {
-          filters.forEach((other) => other.classList.remove("is-active"));
+          filters.forEach((other) => { other.classList.remove("is-active"); other.setAttribute("aria-pressed", "false"); });
           button.classList.add("is-active");
+          button.setAttribute("aria-pressed", "true");
           domain = button.getAttribute("data-domain") || "all";
           apply();
         });
@@ -121,3 +119,29 @@ const searchText = (page: (typeof questionPages)[number], domainLabel?: string) 
     })();
   </script>
 </Base>
+
+<style>
+  /* The archive: subject sections in two columns on the desk, each row a question and its
+     one-line answer; only unfinished pieces carry a status. Filters are plain text tabs. */
+  .ax-dek{font-family:var(--serif);font-size:1.2rem;line-height:1.5;color:#2e2e2e;max-width:58ch;margin-top:16px}
+  .ax-search{margin-top:36px}
+  .ax-search input{width:100%;font-family:var(--sans);font-size:1rem;border:0;border-bottom:1.5px solid var(--ink);border-radius:0;padding:10px 0;background:none;color:var(--ink)}
+  .ax-search input:focus{outline:none;border-bottom-color:var(--c)}
+  .ax-filters{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px}
+  .ax-filters .afilter{border:0;border-radius:0;background:none;padding:4px 0;font-family:var(--sans);font-size:.875rem;color:var(--mid);border-bottom:2px solid transparent;cursor:pointer}
+  .ax-filters .afilter:hover{color:var(--ink)}
+  .ax-filters .afilter.is-active{color:var(--ink);border-bottom-color:var(--ink);background:none}
+  .ax-group{border-top:2px solid var(--ink);margin-top:56px;padding-top:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px}
+  .ax-group[hidden]{display:none}
+  .ax-hd{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin-bottom:10px;font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+  .ax-hd a{color:var(--c-ink);text-decoration:none}
+  .ax-hd a:hover{text-decoration:underline}
+  .ax-hd span{color:var(--dim);font-weight:400;letter-spacing:0}
+  .ax-row{display:grid;gap:4px;align-content:start;padding:14px 0 16px;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+  .ax-row[hidden]{display:none}
+  .ax-q{font-family:var(--serif);font-size:1.18rem;line-height:1.28;color:var(--ink);text-wrap:balance}
+  .ax-d{font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--mid);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .ax-s{font-family:var(--sans);font-size:.75rem;color:var(--dim)}
+  .ax-row:hover .ax-q{color:var(--c-ink)}
+  @media(max-width:760px){.ax-group{grid-template-columns:1fr}}
+</style>

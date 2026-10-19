@@ -135,7 +135,13 @@ export function heatStrip(rows: HeatRow[], o: {
   markerNote?: string; valueFmt?: (v: number) => string; hot?: (v: number) => boolean; label: string;
 }) {
   const W = o.width ?? 1040, compact = !!o.compact;
-  const rowH = o.rowH ?? 20, gap = o.gap ?? 5, labelW = o.labelW ?? 140, rightW = o.rightW ?? 80;
+  const rowH = o.rowH ?? 20, gap = o.gap ?? 5;
+  // The label and value columns are at least as wide as what they print, so a long name
+  // ("Maharashtra") or the last year never runs off the figure on a phone.
+  const ls = compact ? 11 : 12.5, fmt0 = o.valueFmt ?? ((v: number) => v.toFixed(1));
+  const nameW = Math.max(...rows.map((r) => String(compact ? r.shortLabel ?? r.label : r.label).length * ls * (r.emphasis ? 0.6 : 0.56)));
+  const valW = Math.max(String(o.to).length * (compact ? 10.5 : 11.5) * 0.58, ...rows.map((r) => fmt0(r.points[r.points.length - 1][1]).length * ls * 0.6));
+  const labelW = Math.max(o.labelW ?? 140, nameW + 14), rightW = Math.max(o.rightW ?? 80, valW + 16);
   const col = ramp(o.stops), n = o.to - o.from + 1, id = uid("hs");
   const top = 30, plotW = W - labelW - rightW, cw = plotW / n;
   const split = rows.findIndex((r) => r.emphasis), extra = compact ? 4 : 8;
@@ -274,8 +280,11 @@ export function scatterFit(pts: ScatterPoint[], o: {
   /** Tooltip lines per point (default: label, x, y). */
   tipOf?: (p: ScatterPoint) => string[];
 }) {
-  const W = o.width ?? 1040, H = o.height ?? 460, sm = W < 700;
-  const ml = 30, mr = 10, mt = 30, mb = 50;
+  const W = o.width ?? 1040, sm = W < 700;
+  // On a phone the size key moves under the plot, where it cannot sit on a point.
+  const keyBelow = sm && pts.some((p) => p.size != null) && !!o.sizeKey;
+  const H = (o.height ?? 460) + (keyBelow ? 80 : 0);
+  const ml = 30, mr = 10, mt = 30, mb = 50 + (keyBelow ? 80 : 0);
   const x = scale(o.x[0], o.x[1], ml, W - mr), y = scale(o.y[0], o.y[1], H - mb, mt);
   const xf = o.xFmt ?? ((v: number) => String(v)), yf = o.yFmt ?? ((v: number) => v.toFixed(1));
   const sized = pts.some((p) => p.size != null), rMax = sm ? 15 : 22;
@@ -285,10 +294,10 @@ export function scatterFit(pts: ScatterPoint[], o: {
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
   for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
-  b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
+  b += txt(ml, y(o.y[0]) + 46, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
   b += txt(0, 12, `${o.yTitle} ↑`, { size: 11.5, fill: INK.ink2 });
   if (o.under) b += o.under(x, y);
-  if (o.refY) { b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3"); b += txt(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" }); }
+  if (o.refY) b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3");
   let stats: { r: number; n: number; slope: number } | null = null;
   if (o.fit !== false && pts.length > 3) {
     // Unweighted least squares: each unit counts once. The band is the 95% interval
@@ -308,13 +317,40 @@ export function scatterFit(pts: ScatterPoint[], o: {
   const tipA = (p: ScatterPoint) => (o.tipOf ? o.tipOf(p) : [p.label, `${o.xTitle}: ${xf(p.x)}`, `${o.yTitle}: ${yf(p.y)}`]).join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   for (const p of [...pts].sort((a, c) => (c.size ?? 0) - (a.size ?? 0)))
     b += `<circle class="mk" cx="${r1(x(p.x))}" cy="${r1(y(p.y))}" r="${r1(rad(p.size))}" fill="${o.colorOf ? o.colorOf(p) : p.hot ? INK.sindoor : INK.neel}" fill-opacity="${sized ? 0.82 : 1}" stroke="#ffffff" stroke-width="1.25" data-tip="${tipA(p)}"/>`;
-  for (const p of pts) if (p.place) {
-    const rr = rad(p.size) + 5, cx = x(p.x), cy = y(p.y);
-    const [tx, ty, an] = p.place === "r" ? [cx + rr, cy + 4, "start"] : p.place === "l" ? [cx - rr, cy + 4, "end"] : p.place === "t" ? [cx, cy - rr - 1, "middle"] : [cx, cy + rr + 10, "middle"];
-    b += halo(tx, ty, sm ? p.short ?? p.label : p.label, { size: sm ? 11 : 12, fill: INK.ink, anchor: an as TextOpts["anchor"] });
+  if (o.refY) b += halo(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" });
+  // Labels: each named point tries its preferred side, then the other three, and takes the
+  // first that touches no dot, no other label, the reference label or the size key. The
+  // biggest points are placed first. On a phone a label with no free side is left to the
+  // tooltip; on the desk it keeps its preferred side.
+  const fs = sm ? 11 : 12;
+  const textW = (t: string, size: number) => t.length * size * 0.56;
+  type Box = [number, number, number, number];
+  const hit = (a: Box, c: Box) => a[0] < c[2] && a[2] > c[0] && a[1] < c[3] && a[3] > c[1];
+  const blocked: Box[] = [];
+  if (o.refY) { const ty = y(o.refY.value) - 7, w = textW(o.refY.label, 11.5); blocked.push([W - mr - w - 2, ty - 11, W - mr, ty + 3]); }
+  if (sized && o.sizeKey && !keyBelow) blocked.push([W - 262, mt - 18, W, mt + 34 + rMax + 22]);
+  const dots = pts.map((p) => ({ p, cx: x(p.x), cy: y(p.y), r: rad(p.size) }));
+  const named = dots.filter((d) => d.p.place).sort((a, c) => (c.p.size ?? 0) - (a.p.size ?? 0) || Number(!!c.p.hot) - Number(!!a.p.hot));
+  for (const d of named) {
+    const text = sm ? d.p.short ?? d.p.label : d.p.label, w = textW(text, fs), rr = d.r + 4;
+    const pref = d.p.place as "r" | "l" | "t" | "b";
+    const order = [pref, ...(["r", "l", "t", "b"] as const).filter((k) => k !== pref)];
+    const at = (k: "r" | "l" | "t" | "b") => {
+      const [tx, ty, an] = k === "r" ? [d.cx + rr, d.cy + 4, "start"] : k === "l" ? [d.cx - rr, d.cy + 4, "end"] : k === "t" ? [d.cx, d.cy - rr - 1, "middle"] : [d.cx, d.cy + rr + 10, "middle"];
+      const x0 = an === "start" ? tx : an === "end" ? tx - w : tx - w / 2;
+      return { tx, ty, an, box: [x0 - 1, ty - fs + 2, x0 + w + 1, ty + 3] as Box };
+    };
+    const free = (bx: Box) => bx[0] >= 0 && bx[2] <= W && bx[1] >= mt - 14 && bx[3] <= y(o.y[0]) - 2
+      && !blocked.some((c) => hit(bx, c))
+      && !dots.some((q) => q !== d && hit(bx, [q.cx - q.r, q.cy - q.r, q.cx + q.r, q.cy + q.r]));
+    // Desk fallback: a side that may graze a dot but never another label.
+    const pick = order.map(at).find((c) => free(c.box)) ?? (sm ? null : order.map(at).find((c) => c.box[0] >= 0 && c.box[2] <= W && !blocked.some((q) => hit(c.box, q))) ?? null);
+    if (!pick) continue;
+    blocked.push(pick.box);
+    b += halo(pick.tx, pick.ty, text, { size: fs, fill: INK.ink, anchor: pick.an as TextOpts["anchor"] });
   }
   if (sized && o.sizeKey) {
-    const kx = sm ? W - 150 : W - 250, ky = mt + 34;
+    const kx = keyBelow ? ml : sm ? W - 150 : W - 250, ky = keyBelow ? y(o.y[0]) + 92 : mt + 34;
     b += txt(kx, ky - 30, o.sizeTitle ?? "Size", { size: 11.5, fill: INK.ink2, weight: 500 });
     const offs = sm ? [6, 48, 108] : [8, 50, 116];
     o.sizeKey.forEach(([v, s], i) => {
@@ -535,8 +571,9 @@ export function sensitivity(curves: Curve[], o: {
     const v0 = c.points.find((p) => p[0] === at[0])![1], v1 = c.points.find((p) => p[0] === at[1])![1];
     b += dot(x(at[0]), y(v0), 4, INK.ink) + dot(x(at[1]), y(v1), 4, INK.ink);
     b += txt(x(at[1]) + 10, y(v1) + 18, `${Math.round(v1)}%`, { size: 12.5, fill: INK.ink, weight: 600 }) + txt(x(at[0]) + 8, y(v0) + 18, `${Math.round(v0)}%`, { size: 12.5, fill: INK.ink, weight: 600 });
-    const ax = sm ? x((o.x[0] + o.x[1]) / 2) : x(at[0]) - 10, ay = sm ? y(13) : y(96), an = sm ? "start" : "end";
-    b += txt(ax, ay, o.highlight.title, { size: 12.5, fill: INK.ink, weight: 600, anchor: an }) + txt(ax, ay + 16, o.highlight.body[0], { size: 12.5, fill: INK.ink2, anchor: an }) + txt(ax, ay + 32, o.highlight.body[1], { size: 12.5, fill: INK.ink2, anchor: an });
+    const ax = sm ? x((o.x[0] + o.x[1]) / 2) : x(at[0]) - 10, ay = sm ? Math.min(y(13), y(0) - 42) : y(96), an = sm ? "start" : "end";
+    // The note's three lines end clear of the x axis, with a halo where they cross a curve.
+    b += halo(ax, ay, o.highlight.title, { size: 12.5, fill: INK.ink, weight: 600, anchor: an }) + halo(ax, ay + 16, o.highlight.body[0], { size: 12.5, fill: INK.ink2, anchor: an }) + halo(ax, ay + 32, o.highlight.body[1], { size: 12.5, fill: INK.ink2, anchor: an });
   }
   return svg(W, H, b, o.label);
 }
