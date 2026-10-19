@@ -71,7 +71,7 @@ export function textWidth(s: string, size: number, weight = 400) {
   for (const ch of String(s)) {
     const k = GLYPHS.indexOf(ch);
     w += k >= 0 ? g[k] / 1000 : ch === " " ? a.space
-      : /[.,:;'()·|]/.test(ch) ? a.narrow : ch === "%" ? a.pct : /[₹$€£]/.test(ch) ? a.cur : ch === "-" ? a.dash : ch === "−" ? a.minus : 0.6;
+      : /[.,:;'()·|]/.test(ch) ? a.narrow : ch === "%" ? a.pct : /[₹$€£]/.test(ch) ? a.cur : ch === "-" ? a.dash : ch === "−" ? a.minus : ch === "\u2014" ? 0.92 : ch === "\u2013" ? 0.55 : 0.6;
   }
   return w * size;
 }
@@ -197,9 +197,11 @@ export function heatStrip(rows: HeatRow[], o: {
   // The label and value columns are at least as wide as what they print, so a long name
   // ("Maharashtra") or the last year never runs off the figure on a phone.
   const ls = compact ? 11 : 12.5, fmt0 = o.valueFmt ?? ((v: number) => v.toFixed(1));
-  const nameW = Math.max(...rows.map((r) => String(compact ? r.shortLabel ?? r.label : r.label).length * ls * (r.emphasis ? 0.6 : 0.56)));
-  const valW = Math.max(String(o.to).length * (compact ? 10.5 : 11.5) * 0.58, ...rows.map((r) => fmt0(r.points[r.points.length - 1][1]).length * ls * 0.6));
-  const labelW = Math.max(o.labelW ?? 140, nameW + 14), rightW = Math.max(o.rightW ?? 80, valW + 16);
+  // Names sit flush left, so the row labels share the card's left edge with the title above;
+  // the column is as wide as the longest name as the font sets it.
+  const nameW = Math.max(...rows.map((r) => textWidth(String(compact ? r.shortLabel ?? r.label : r.label), ls, r.emphasis ? 600 : 400)));
+  const valW = Math.max(textWidth(String(o.to), compact ? 10.5 : 11.5), ...rows.map((r) => textWidth(fmt0(r.points[r.points.length - 1][1]), ls, 600)));
+  const labelW = Math.ceil(nameW) + 14, rightW = Math.ceil(valW) + 16;
   const col = ramp(o.stops), n = o.to - o.from + 1, id = uid("hs");
   const top = 30, plotW = W - labelW - rightW, cw = plotW / n;
   const split = rows.findIndex((r) => r.emphasis), extra = compact ? 4 : 8;
@@ -225,13 +227,14 @@ export function heatStrip(rows: HeatRow[], o: {
   b += `</g>`;
   rows.forEach((r, i) => {
     const yy = rowY(i), last = r.points[r.points.length - 1][1], hot = o.hot?.(last) ?? false;
-    b += txt(labelW - 10, yy + rowH / 2 + 4, compact ? r.shortLabel ?? r.label : r.label, { anchor: "end", size: compact ? 11 : 12.5, fill: INK.ink, weight: r.emphasis ? 600 : undefined });
+    b += txt(0, yy + rowH / 2 + 4, compact ? r.shortLabel ?? r.label : r.label, { size: compact ? 11 : 12.5, fill: INK.ink, weight: r.emphasis ? 600 : undefined });
     if (r.marker) b += dot(xOf(r.marker) + cw / 2, yy + rowH / 2, compact ? 2.3 : 3, INK.ink, compact ? 1 : 1.25);
     b += txt(W - rightW + 12, yy + rowH / 2 + 4, fmt(last), { size: compact ? 11 : 12.5, fill: hot ? INK.sindoor : INK.ink, weight: r.emphasis || hot ? 600 : undefined });
   });
   const ly = top + rowsH + (compact ? 34 : 44);
   const lg = { ticks: o.legendTicks, mark: o.legendMark, title: compact ? undefined : o.legendTitle };
-  if (compact) b += scaleLegend(0, ly, W, o.stops, lg);
+  // The key spans the strip itself, so its colours line up under the years they colour.
+  if (compact) b += scaleLegend(labelW, ly, plotW, o.stops, lg);
   else {
     b += scaleLegend(labelW, ly, 340, o.stops, lg);
     if (o.markerNote) { const lx = labelW + 400; b += dot(lx, ly + 3, 3, INK.ink, 1.25) + txt(lx + 10, ly + 7, o.markerNote, { size: 11.5 }); }

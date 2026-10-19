@@ -658,7 +658,6 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   const isHero = (visual as { size?: string }).size === "hero";
   const width = mobile ? 384 : (twoUp ? (isLead ? 720 : 660) : (isLead ? 1120 : 1000));
   const height = mobile ? (isHero ? 406 : 346) : (isHero ? 560 : isLead ? 500 : 360);
-  const baseLeft = mobile ? 34 : 44;
   const yFontSize = mobile ? 12 : 13;
   const padRTB = mobile
     ? { r: 24, t: 22, b: 40 }
@@ -742,16 +741,14 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // template) and every tick is a bare number, so the gutter is sized to the bare
   // labels ("₹400") — not the long unit label — which keeps the narrow plot wide.
   const refLabel = axisFmt(ticks[ticks.length - 1], ticks, visual.unit);
-  const yLabelText = (tick: number) => mobile ? splitUnitLabel(axisFmt(tick, ticks, visual.unit), refLabel).bare : axisFmt(tick, ticks, visual.unit);
-  const maxYLabelLen = Math.max(3, ...ticks.map((tick) => yLabelText(tick).length));
   // The unit, once, over the y axis: the scale word on phones ("lakh cr"), or the measure
   // itself ("births per woman") wherever the tick labels are bare numbers.
   const bareTop = /^-?[\d.,]+$/.test(refLabel);
   const unitWord = bareTop ? cleanUnit(visual.unit) : "";
   const unitCaption = mobile ? (yUnitCaption(ticks, visual.unit) || unitWord) : unitWord;
-  // 0.6em/char tracks Schibsted Grotesk closely; the old 0.78 over-reserved the
-  // left gutter by ~70px on long labels ("40 million"), leaving a visible empty band.
-  const pad = { l: Math.max(baseLeft, Math.round(maxYLabelLen * yFontSize * 0.6) + 14), ...padRTB };
+  // The y gutter is as wide as the widest tick label as the font sets it, plus the 10-unit gap
+  // to the plot: a fixed 34-unit floor left a third of it empty beside "0", "2", "4".
+  const pad = { l: Math.max(16, Math.ceil(Math.max(...ticks.map((tick, ti) => textWidth(typeset(`>${yTickLabel(tick, ti, ticks, visual.unit, mobile)}<`).slice(1, -1), yFontSize)))) + 16), ...padRTB };
   // The unit caption sits in its own row ABOVE the top tick, so give it headroom — without
   // it the caption ("lakh cr") collides with the topmost number ("₹400") at the same corner.
   if (unitCaption) pad.t += 16;
@@ -878,10 +875,14 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
       }
       const step = Math.max(1, niceNum((end - start) / (maxLabels - 1), false));
       const minGapYears = ((maxTime - minTime) * 62) / plotW;
+      // Ticks on round years only (1990, 2000, 2010, 2020), evenly spaced, as on desktop.
+      // Forcing the first and last years on as well gave uneven axes ("1990 2000 2010 2025",
+      // the last crowding 2020 out); the end year is already written under the end value.
+      // A span with fewer than three round marks keeps its endpoints instead.
+      const round: number[] = [];
+      for (let year = Math.ceil(start / step) * step; year <= end; year += step) round.push(year);
+      if (round.length >= 3) return round.map((time) => ({ xPos: xByTime(time), label: String(time) }));
       const years = [start];
-      // Use a step suited to the span: every year on a short series, five-year
-      // marks on a roughly twenty-year series. Keep the endpoints and omit any
-      // interior mark too close to either end to fit a four-digit label.
       for (let year = Math.ceil((start + 1) / step) * step; year < end; year += step) {
         if (year - start >= minGapYears && end - year >= minGapYears) years.push(year);
       }
@@ -978,13 +979,21 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // any between that would run into a kept neighbour (the last wins over the one before it).
   {
     // Measured against the size the stylesheet actually prints ticks at, with a margin.
-    const axisFont = mobile ? 12.5 : 13, room = (t: { label: string }) => String(t.label).length * axisFont * 0.62 + (mobile ? 22 : 16);
+    // Each label's real extent: its width as the font sets it, placed by its own anchor (the
+    // edge ticks are anchored start and end, so "2023-24" at the right edge runs leftwards
+    // into "2022-23"; a centred-label test missed that).
+    const axisFont = mobile ? 12.5 : 13, gapMin = mobile ? 14 : 10;
+    const span = (t: { xPos: number; label: string }) => {
+      const w = textWidth(String(t.label), axisFont), an = axisTextAnchor(t.xPos, width, pad);
+      return an === "start" ? [t.xPos, t.xPos + w] : an === "end" ? [t.xPos - w, t.xPos] : [t.xPos - w / 2, t.xPos + w / 2];
+    };
+    const clear = (a: { xPos: number; label: string }, b: { xPos: number; label: string }) => span(b)[0] - span(a)[1] >= gapMin;
     const sortedTicks = [...axisTicks].sort((a, b) => a.xPos - b.xPos);
     const kept: typeof axisTicks = [];
     for (const t of sortedTicks) {
       const prev = kept.at(-1);
-      if (!prev || t.xPos - prev.xPos >= (room(prev) + room(t)) / 2) kept.push(t);
-      else if (t === sortedTicks.at(-1) && kept.length > 1) { kept.pop(); if (t.xPos - kept.at(-1)!.xPos >= (room(kept.at(-1)!) + room(t)) / 2) kept.push(t); }
+      if (!prev || clear(prev, t)) kept.push(t);
+      else if (t === sortedTicks.at(-1) && kept.length > 1) { kept.pop(); if (clear(kept.at(-1)!, t)) kept.push(t); }
     }
     axisTicks = kept;
   }
@@ -1134,9 +1143,12 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   const asNotes = bands.filter((band) => !band.proj).length <= 3;
   for (const band of bands) {
     // A label shows only if it clears the previous one (measured by its own width).
-    const bw = String(band.label || "").length * 11.5 * 0.58;
-    const showLabel = band.label && band.x + band.w / 2 - bw / 2 > lastBandLabel + 8;
-    if (showLabel) lastBandLabel = band.x + band.w / 2 + bw / 2;
+    // Measured with the font and clamped inside the plot BEFORE the collision test: testing the
+    // unclamped centre let two clamped labels meet ("El Nino 1963" on "El Nino 1982").
+    const bw = textWidth(String(band.label || ""), 11.5);
+    const bcx = Math.min(plotR - bw / 2, Math.max(pad.l + bw / 2 + 2, band.x + band.w / 2));
+    const showLabel = band.label && bcx - bw / 2 > lastBandLabel + 8;
+    if (showLabel) lastBandLabel = bcx + bw / 2;
     // Everything after the last measured year sits on a faint ground: the projection zone.
     if (band.proj) b += `<rect x="${svgCoord(band.x + band.w / 2)}" y="${pad.t}" width="${svgCoord(Math.max(0, plotR - band.x - band.w / 2))}" height="${svgCoord(plotB - pad.t)}" fill="#121212" fill-opacity="0.028"/>`;
     if (asNotes || band.proj) {
@@ -1154,8 +1166,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     }
     b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
     // Kept inside the plot: a band near the left edge would otherwise write over the y axis.
-    const half = String(band.label).length * 11.5 * 0.28;
-    if (showLabel) b += almTxt(Math.min(plotR - half, Math.max(pad.l + half + 2, band.x + band.w / 2)), pad.t + 12, band.label!, { size: 11.5, fill: "#a63d24", anchor: "middle" });
+    if (showLabel) b += almTxt(bcx, pad.t + 12, band.label!, { size: 11.5, fill: "#a63d24", anchor: "middle" });
   }
   void asNotes;
   if (g.unitCaption) b += almTxt(2, pad.t - 18, g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });

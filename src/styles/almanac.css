@@ -338,10 +338,18 @@ svg[data-hover]{touch-action:pan-y}
 .article-head h1{width:min(880px,100%);max-width:none;margin-right:-220px;text-wrap:balance}
 @media(max-width:1180px){.article-head h1{margin-right:0;width:auto}}
 .article-head p.muted{text-wrap:pretty}
-.article-byline{display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px;color:var(--mid);font-size:.84rem}
-.article-byline>span+span::before{content:"·";margin:0 .6em;color:#b3b3b3}
-.article-byline a{color:var(--ink);font-weight:500}
-.article-byline .status{border:0;padding:0;font-size:.84rem;letter-spacing:0;text-transform:none;color:var(--energy-ink);font-weight:500}
+.article-byline{display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px;color:var(--mid);font-size:.8rem}
+.article-byline>span+span::before{content:"·";margin:0 .45em;color:#b3b3b3}
+/* One quiet line: the name in ink (underlined only on hover), the rest in mid grey, the
+   status in the same type as its neighbours. It was a tinted pill with its own dot, which
+   wrapped onto a line of its own on phones and took the separator's place. */
+.article-byline a{color:var(--ink);font-weight:500;text-decoration:none}
+.article-byline a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+/* A draft's status rides in the section label above the headline, in the label's own type
+   and a quiet grey: "ECONOMY · WORK IN PROGRESS". In the byline it wrapped onto a line of its
+   own on phones, behind a stray separator. */
+.domain-chip .head-status{color:var(--dim);font-weight:500;text-transform:uppercase}
+.domain-chip .head-status::before{content:"·";margin:0 .55em;color:#b3b3b3}
 .data-pull{margin-top:36px;padding-top:14px}
 .data-pull div{grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end}
 .data-pull span{color:var(--c-ink);font-size:clamp(3rem,5.4vw,4.4rem)}

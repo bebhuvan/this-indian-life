@@ -122,7 +122,7 @@ const railItems = annotatedSections
     <Nav active={page.domain} locale={locale} />
 
     <header class="article-head">
-      <span class="domain-chip"><span class="tk"></span><span>{domains.find((d) => d.id === page.domain)?.label ?? page.domain}</span></span>
+      <span class="domain-chip"><span class="tk"></span><span>{domains.find((d) => d.id === page.domain)?.label ?? page.domain}</span>{status.cls !== "ready" ? <span class={`head-status ${status.cls}`}>{status.label}</span> : null}</span>
       <h1 class="serif">{page.question}</h1>
       <p class="muted">{explanation.short.dek}</p>
       <p class="article-byline">
@@ -131,7 +131,6 @@ const railItems = annotatedSections
           ? <span>Last reviewed {explanation.lastReviewed}</span>
           : (updatedLabel ? <span>Updated {updatedLabel}</span> : null)}
         {explanation.dataThrough ? <span>Data through {explanation.dataThrough}</span> : null}
-        {status.cls !== "ready" ? <span class={`status ${status.cls}`}>{status.label}</span> : null}
       </p>
     </header>
 

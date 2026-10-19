@@ -31,7 +31,8 @@ const attr = (s: string) => esc(s).replace(/"/g, "&quot;");
 export const tip = (head: string, ...lines: string[]) => ` data-tip="${attr([head, ...lines].join("|"))}"`;
 const textW = (s: string, size: number, bold = false) => String(s).length * size * (bold ? 0.6 : 0.56);
 /** Width of a label, counting capitals wider: "SOUTH AFRICA" is a third wider than "South Africa". */
-const labelTextW = (s: string, size: number) => [...String(s)].reduce((w, ch) => w + size * (/[A-Z]/.test(ch) ? 0.68 : /[\s.,'()-]/.test(ch) ? 0.34 : 0.575), 0);
+/** Width of a label as the font sets it (measured glyph advances, textWidth in almanac.ts). */
+const labelTextW = (s: string, size: number, weight = 400) => textWidth(s, size, weight);
 function svgDoc(cls: string, w: number, h: number, body: string, label: string, extra = "") {
   // max-width: a desktop figure drawn narrower than its card is never stretched (text would
   // grow). The phone drawing drops it in renderFigure.
@@ -73,7 +74,9 @@ const PARTNER_NAMES: Record<string, string> = {
 const SMALL_WORDS = new Set(["of", "and", "the", "for", "in", "on", "to"]);
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 function readableLabel(label: string) {
-  const s = String(label).trim();
+  // A spaced dash between a name and its gloss reads as a comma in the house style
+  // ("Mangalyaan, India to Mars"); the site sets no em dashes.
+  const s = String(label).trim().replace(/\s+[\u2014\u2013]\s+/g, ", ");
   // A category that is a raw date reads as the period it stands for: 31 December is the
   // calendar year, 31 March the financial year that ends on it, any other day its month.
   const d = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -105,12 +108,13 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   }
   const rowTxt = (r: BarRow) => harmonised.get(r) ?? fmtU(r.value, unit);
   const valTxt = (v: number) => fmtU(v, unit);
-  const posValW = Math.max(0, ...rows.filter((r) => r.value >= 0).map((r) => textW(rowTxt(r), valSize, true))) + 10;
-  const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textW(rowTxt(r), valSize, true))) + 10 : 0;
+  const posValW = Math.max(0, ...rows.filter((r) => r.value >= 0).map((r) => textWidth(rowTxt(r), valSize, 600))) + 10;
+  const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textWidth(rowTxt(r), valSize, 600))) + 10 : 0;
   // Label column on desktop: wide enough for the longest label (wrapped to two lines past ~30 chars).
-  const longest = Math.max(...rows.map((r) => labelTextW(r.label.slice(0, 34), labSize)));
+  const longest = Math.max(...rows.map((r) => labelTextW(r.label.slice(0, 34), labSize, isNational(r.label) ? 600 : 400)));
   // A phone column is only as wide as its labels: four-digit years need no 80-unit gutter.
-  const labelW = m ? 0 : Math.min(W * 0.36, phone ? longest + 24 : Math.max(80, longest + 18));
+  // The label column is as wide as the longest label plus the 12-unit gap to the bars.
+  const labelW = m ? 0 : Math.min(W * 0.36, Math.ceil(longest) + 14);
   const x0 = labelW + negValW, x1 = W - posValW - 2;
   let xs: (v: number) => number;
   let logTicks: number[] = [];
@@ -141,7 +145,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   let y = top, b = "";
   const rowsOut: string[] = [];
   const groups = o.groups?.length ? o.groups : [undefined];
-  const chars = m ? Math.floor(W / (labSize * 0.55)) : Math.floor((labelW - 16) / (labSize * 0.54));
+  const chars = m ? Math.floor(W / (labSize * 0.55)) : Math.floor((labelW - 16) / (labSize * 0.58));
   for (const g of groups) {
     const items = g === undefined ? rows : rows.filter((r) => r.group === g);
     if (g !== undefined) {
@@ -341,7 +345,7 @@ function rankedSvg(v: RankedChangeVisual, o: { width: number; mobile: boolean })
   const lo0 = Math.min(...rows.flatMap((r) => [r.start, r.end])), hi0 = Math.max(...rows.flatMap((r) => [r.start, r.end]));
   const zeroBased = !(lo0 > hi0 * 0.25);
   const sc = tightScale(zeroBased ? Math.min(0, lo0) : lo0, hi0);
-  const labelW = m ? 0 : Math.min(W * 0.3, Math.max(90, Math.max(...rows.map((r) => r.label.length)) * 7.2 + 16));
+  const labelW = m ? 0 : Math.min(W * 0.3, Math.ceil(Math.max(...rows.map((r) => textWidth(r.label, labSize, isNational(r.label) ? 600 : 400)))) + 2);
   const chW = m ? 54 : 70;
   const x0 = labelW + 8, x1 = W - chW - 10;
   const x = (val: number) => x0 + ((val - sc.min) / (sc.max - sc.min || 1)) * (x1 - x0);

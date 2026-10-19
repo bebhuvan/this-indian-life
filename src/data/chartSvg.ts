@@ -1,5 +1,5 @@
 import type { ChoroplethVisual } from "./viz";
-import { ramp, SCALES } from "./almanac";
+import { ramp, SCALES, textWidth } from "./almanac";
 
 function escapeHtml(value: unknown) {
   return String(value)
@@ -164,12 +164,17 @@ export function renderChoroplethSvg(visual: ChoroplethVisual) {
 // marked once. Small regions that vanish on the map stay readable here.
 export function renderChoroplethStrip(visual: ChoroplethVisual) {
   const rows = visual.regions.filter((r) => r.value !== null && r.value !== undefined).sort((a, b) => (b.value as number) - (a.value as number));
-  const W = 320, nameW = 128, x0 = nameW + 8, x1 = W - 46, rowH = rows.length > 30 ? 16 : 19, top = 44;
+  // Names flush left at the card's edge, in a column as wide as the longest one as the font
+  // sets it; the value column as wide as its widest value. A fixed 128-unit name column left
+  // about 36 px empty on a phone, so the strip did not line up with the map or the card.
+  const shortName = (n: string) => n.replace("Dadra and Nagar Haveli and Daman and Diu", "Dadra, Daman & Diu").replace("Andaman and Nicobar Islands", "Andaman & Nicobar").replace("Jammu and Kashmir", "Jammu & Kashmir");
+  const nameW = Math.ceil(Math.max(...rows.map((r) => textWidth(shortName(r.name), 11.5))));
+  const valW = Math.ceil(Math.max(...rows.map((r) => textWidth(choroplethValueLabel(visual, r.value as number), 11.5, 600))));
+  const W = 320, x0 = nameW + 12, x1 = W - valW - 14, rowH = rows.length > 30 ? 16 : 19, top = 44;
   // Values past the colour scale (Delhi's income) sit at its end with an open arrowhead,
   // rather than running into the printed value.
   const x = (v: number) => x0 + ((Math.min(visual.max, Math.max(visual.min, v)) - visual.min) / (visual.max - visual.min || 1)) * (x1 - x0);
   const F = 'font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"';
-  const short = (n: string) => n.replace("Dadra and Nagar Haveli and Daman and Diu", "Dadra, Daman & Diu").replace("Andaman and Nicobar Islands", "Andaman & Nicobar").replace("Jammu and Kashmir", "Jammu & Kashmir");
   let b = "";
   const N = 60;
   for (let i = 0; i < N; i++) {
@@ -184,7 +189,7 @@ export function renderChoroplethStrip(visual: ChoroplethVisual) {
   }
   rows.forEach((r, i) => {
     const v = r.value as number, cy = top + i * rowH + rowH / 2;
-    b += `<text x="${nameW}" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" fill="#121212" text-anchor="end">${escapeHtml(short(r.name))}</text>`;
+    b += `<text x="0" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" fill="#121212">${escapeHtml(shortName(r.name))}</text>`;
     b += `<line x1="${x0}" y1="${svgCoord(cy)}" x2="${x1}" y2="${svgCoord(cy)}" stroke="#ededed" stroke-width="1"/>`;
     if (v > visual.max || v < visual.min) {
       const xe = x(v), dir = v > visual.max ? 1 : -1;
