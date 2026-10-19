@@ -12,20 +12,28 @@ const zones = primer.ladder ?? [];
 const zoneW = zones.length ? 100 / zones.length : 0;
 const hereIdx = zones.findIndex((z) => z.here);
 const TONE: Record<string, string> = { cold: "#33489a", cool: "#6a7bc0", mid: "#008a6e", warm: "#b98014", hot: "#c24a2e" };
+
+// A long lead reads as a headline sentence plus a standfirst: setting a whole paragraph
+// at display size makes a wall of type.
+const leadSplit = primer.lead.length > 180 ? primer.lead.match(/^(.+?[.?!])\s+(?=[A-Z‘“'"])([\s\S]+)$/) : null;
+const leadHead = leadSplit ? leadSplit[1] : primer.lead;
+const leadRest = leadSplit ? leadSplit[2] : "";
+const hasClose = Boolean(primer.hyperinflation || primer.protect);
 ---
 <section class={`primer dom-${domain}`}>
   <div class="primer-head">
     <p class="lbl">{primer.kicker}</p>
-    <h2 class="serif primer-lead">{primer.lead}</h2>
+    <h2 class={`serif primer-lead${leadRest ? " primer-lead--split" : ""}`}>{leadHead}</h2>
+    {leadRest ? <p class="primer-stand">{leadRest}</p> : null}
   </div>
 
   {primer.myths?.length ? (
     <ol class="primer-myths">
       {primer.myths.map((m, i) => (
         <li class="myth">
-          <span class="myth-no serif">{String(i + 1).padStart(2, "0")}</span>
-          <p class="myth-claim serif">{m.myth}</p>
-          <p class="myth-real"><span class="myth-lead">Actually —</span> {m.reality}</p>
+          <p class="myth-tag"><span class="myth-no">{String(i + 1).padStart(2, "0")}</span><span>Myth</span></p>
+          <p class="myth-claim serif"><span class="vh">Myth: </span>{m.myth}</p>
+          <p class="myth-real"><span class="vh">Reality: </span>{m.reality}</p>
         </li>
       ))}
     </ol>
@@ -62,7 +70,7 @@ const TONE: Record<string, string> = { cold: "#33489a", cool: "#6a7bc0", mid: "#
           </g>
         ) : null}
       </svg>
-      <p class="sp-caption">India’s worst year ever (1974) was 29% — high, but never near the runaway end. Hyperinflation runs into the thousands of percent, off the right of this scale.</p>
+      <p class="sp-caption">India’s worst year ever (1974) was 29%: high, but never near the runaway end. Hyperinflation runs into the thousands of percent, off the right of this scale.</p>
     </figure>
   ) : null}
 
@@ -82,6 +90,7 @@ const TONE: Record<string, string> = { cold: "#33489a", cool: "#6a7bc0", mid: "#
     </div>
   ) : null}
 
+  {hasClose ? (
   <div class="primer-close">
     {primer.hyperinflation ? (
       <div class="primer-hyper">
@@ -100,4 +109,5 @@ const TONE: Record<string, string> = { cold: "#33489a", cool: "#6a7bc0", mid: "#
       </div>
     ) : null}
   </div>
+  ) : null}
 </section>

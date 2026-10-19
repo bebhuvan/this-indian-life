@@ -89,7 +89,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textW(rowTxt(r), valSize, true))) + 10 : 0;
   // Label column on desktop: wide enough for the longest label (wrapped to two lines past ~30 chars).
   const longest = Math.max(...rows.map((r) => labelTextW(r.label.slice(0, 34), labSize)));
-  const labelW = m ? 0 : Math.min(W * 0.36, Math.max(80, longest + 18));
+  // A phone column is only as wide as its labels: four-digit years need no 80-unit gutter.
+  const labelW = m ? 0 : Math.min(W * 0.36, phone ? longest + 24 : Math.max(80, longest + 18));
   const x0 = labelW + negValW, x1 = W - posValW - 2;
   let xs: (v: number) => number;
   let logTicks: number[] = [];

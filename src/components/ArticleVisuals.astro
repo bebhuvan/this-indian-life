@@ -990,12 +990,17 @@ function placeEndLabelsInside(g: LineGeometry, single: boolean) {
     const fromBelow = back.length ? Math.max(...back) > p.latestY : true;
     const sides = fromBelow ? [false, true] : [true, false];
     let done: { x: number; y: number; below: boolean } | null = null;
-    for (const below of sides) {
-      const top = below ? p.latestY + 7 : p.latestY - 7 - h, bot = top + h;
-      if (top < plotT - 12 || bot > plotB - 3) continue;
-      const hitsLine = polys.some((pts) => ysOver(pts, xa - 2, xb).some((yy) => yy > top - 3 && yy < bot + 3));
-      const hitsBox = boxes.some(([a, t, b2, bt]) => xa < b2 && xb > a && top < bt + 2 && bot > t - 2);
-      if (!hitsLine && !hitsBox) { done = { x: xb, y: top, below }; boxes.push([xa, top, xb, bot]); break; }
+    // Close beside the point first, then a little further off: a label a few units clear of
+    // a line that rises past it still reads as that line's end, the dot ties them.
+    for (const gap of [7, 13, 19, 25]) {
+      for (const below of sides) {
+        const top = below ? p.latestY + gap : p.latestY - gap - h, bot = top + h;
+        if (top < plotT - 12 || bot > plotB - 3) continue;
+        const hitsLine = polys.some((pts) => ysOver(pts, xa - 2, xb).some((yy) => yy > top - 3 && yy < bot + 3));
+        const hitsBox = boxes.some(([a, t, b2, bt]) => xa < b2 && xb > a && top < bt + 2 && bot > t - 2);
+        if (!hitsLine && !hitsBox) { done = { x: xb, y: top, below }; boxes.push([xa, top, xb, bot]); break; }
+      }
+      if (done) break;
     }
     if (!done) return null;
     result.push(done);
