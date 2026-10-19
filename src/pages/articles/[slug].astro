@@ -430,21 +430,30 @@ const railItems = annotatedSections
     <script src="/article-actions.js" defer></script>
   </div>
   <script>
-    // Contents rail: mark the section being read. The rail only shows on wide screens.
+    // Contents rail: mark the section being read, the last heading above the top third of
+    // the screen. Read on scroll (one frame at a time), so a jump or a link lands right too.
     (() => {
       const links = Array.from(document.querySelectorAll(".story-rail a"));
-      if (!links.length || !("IntersectionObserver" in window)) return;
-      const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
-      const targets = Array.from(byId.keys()).map((id) => document.getElementById(id)).filter(Boolean);
-      let current = null;
-      const io = new IntersectionObserver((entries) => {
-        for (const e of entries) if (e.isIntersecting) {
-          if (current) current.removeAttribute("aria-current");
-          current = byId.get(e.target.id) || null;
-          current?.setAttribute("aria-current", "true");
-        }
-      }, { rootMargin: "0px 0px -70% 0px" });
-      targets.forEach((t) => io.observe(t));
+      if (!links.length) return;
+      const targets = links.map((a) => document.getElementById(a.getAttribute("href").slice(1)));
+      let current = null, queued = false;
+      const update = () => {
+        queued = false;
+        const line = window.innerHeight * 0.3;
+        let k = 0;
+        targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= line) k = i; });
+        const next = links[k];
+        if (next === current) return;
+        if (current) current.removeAttribute("aria-current");
+        next.setAttribute("aria-current", "true");
+        current = next;
+        const box = next.closest(".story-rail-in");
+        if (box) { const r = next.getBoundingClientRect(), br = box.getBoundingClientRect(); if (r.top < br.top || r.bottom > br.bottom) box.scrollTop += r.top - br.top - br.height / 3; }
+      };
+      const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      update();
     })();
     // Inline glossary terms: tap to toggle the definition popover (touch), with
     // keyboard support; CSS handles hover/focus on pointer devices.

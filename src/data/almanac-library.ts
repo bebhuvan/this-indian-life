@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import {
   INK, SCALES, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart,
-  stripes, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, type Stops,
+  stripes, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, slope, stackedArea, fmtIN, type Stops,
 } from "./almanac";
 import { tfrRows, tfrSeries, FRACTILE_WIDTHS, REPLACEMENT } from "./almanac-home";
 
@@ -182,6 +182,26 @@ const phase = Object.fromEntries((read("derived.IN.climate.enso_imd_monsoon_join
   entries.push({ key: "waterfall", name: "Waterfall", shape: "Parts that add up to a total, some negative", use: "Which parts pushed a total up and which pulled it down", avoid: "The parts are not additive",
     ...pair(waterfall(steps, { totalLabel: "Headline CPI inflation", width: 620, label: "CPI inflation by group" }), waterfall(steps, { totalLabel: "Headline CPI inflation", width: 350, label: "CPI inflation by group" })),
     note: `Contributions to all-India CPI inflation, ${month}, percentage points`, source: "MoSPI, Consumer Price Index" });
+}
+
+// 16. slope
+{
+  const C: Array<[string, string]> = [["in", "India"], ["chn", "China"], ["bgd", "Bangladesh"], ["idn", "Indonesia"], ["vnm", "Vietnam"], ["tha", "Thailand"], ["mys", "Malaysia"], ["kor", "South Korea"], ["wld", "World"]];
+  const rows = C.map(([c, label]) => { const s = yearly(`worldbank.compare.${c}.SL_AGR_EMPL_ZS.json`); return { label, a: s.find(([t]) => t === 1991)![1], b: s.find(([t]) => t === 2025)![1], emphasis: c === "in", color: c === "in" ? INK.sindoor : c === "wld" ? INK.ink : undefined }; });
+  const o = { aLabel: "1991", bLabel: "2025", fmt: fmtPct, domain: [0, 80] as [number, number], label: "Share of workers in farming, 1991 and 2025" };
+  entries.push({ key: "slope", name: "Slope", shape: "Two points in time for a handful of units", use: "Who moved and how far, with both values printed", avoid: "More than about a dozen units, or when the path between the points matters",
+    ...pair(slope(rows, { ...o, width: 620, height: 400 }), slope(rows, { ...o, width: 350, height: 380 })),
+    note: "Share of employment in agriculture, 1991 and 2025; India in sindoor, the world in ink", source: "World Bank WDI (ILO modelled estimates), SL.AGR.EMPL.ZS" });
+}
+// 17. stacked area
+{
+  const g = read("ember.IN.electricity-generation.yearly.json").rows as Array<{ date: string; series: string; generation_twh: number }>;
+  const L: Array<[string, string]> = [["Coal", "#6e6e6e"], ["Gas", "#a3a3a3"], ["Other fossil", "#cacaca"], ["Nuclear", INK.jamun], ["Hydro", INK.neel], ["Bioenergy", "#7fae9c"], ["Wind", INK.hara], ["Solar", INK.haldi]];
+  const layers = L.map(([k, color]) => ({ label: k, color, points: g.filter((r) => r.series === k && r.generation_twh != null).map((r) => [Number(r.date), r.generation_twh] as [number, number]).sort((p, q) => p[0] - q[0]) }));
+  const tw = (v: number) => fmtIN(Math.round(v));
+  entries.push({ key: "stackedArea", name: "Stacked area", shape: "Parts of a total, year by year", use: "How the mix changes while the total grows", avoid: "Readers must compare the middle layers precisely; use lines instead",
+    ...pair(stackedArea(layers, { width: 620, height: 380, fmt: tw, unit: "TWh", label: "Electricity generation by source" }), stackedArea(layers, { width: 350, height: 300, fmt: tw, unit: "TWh", label: "Electricity generation by source" })),
+    note: "India's electricity generation by source, terawatt-hours, 2000 onward; fossil in greys, clean sources in the data inks", source: "Ember, yearly electricity data" });
 }
 
 export const library = entries;

@@ -57,6 +57,8 @@ Use them in a `visualPlan` entry with `chart: "<form>"`. Each adapter returns `n
 | `calendarHeat` | one value per day over months or years | seasons, weekdays and shocks in daily data | the series is weekly or sparser | `indicator` (daily series), `transform: "pctChange"`, `years`, `scale` |
 | `connectedScatter` | two measures moving together through time, for a few units | paths: who got where, and in what order | more than about six units | `paths: [{label, x, y, color}]`, `xLog`, `xTitle`, `yTitle`, `refY` |
 | `waterfall` | parts that add up to a total, some negative | which parts pushed a total up and which pulled it down | the parts are not additive | `series[]` (one indicator per part), `totalIndicator`, `totalLabel` |
+| `slope` | two points in time for a handful of units | who moved and how far, both values printed at the ends | more than about a dozen units, or the path between the points matters | `series[]` (one yearly indicator per unit), `aYear`, `bYear`, `aLabel`, `bLabel`, `emphasis`, `domain` |
+| `stackedArea` | parts of a total, year by year | how the mix changes while the total grows | readers must compare the middle layers precisely (use lines) | `indicator` (long table) with `seriesField`, `valueField`, `dateField`, `layers: [{key, label, color}]` in stacking order; or `series[]`; `share: true` for 100% |
 
 Every form is shown on real data at `/library/` (`src/pages/library.astro`, data in
 `src/data/almanac-library.ts`), with its data shape and when to avoid it.
@@ -75,10 +77,34 @@ The older kinds still render through `ArticleVisuals.astro`, redesigned rather t
   shadow, values printed inside regions big enough to hold them, and a ranked strip of every region
   beside the map whose header is the legend, with any pivot (such as replacement) marked.
 - **Stripes**: drawn by the Almanac `stripes` form; rain runs dry haldi to wet hara, temperature
-  cool neel to hot sindoor, both centred on the series' normal.
+  cool neel to hot sindoor, both centred on the series' normal: 0 for a departure or anomaly series, the series
+  mean otherwise. (They were once centred on the midpoint of the range, which painted a −2% monsoon "normal".)
+  The tooltip prints the published value.
+- **Departure bars**: a bar chart whose unit or title is a departure from normal colours each bar by sign in the
+  stripe inks (below normal neel or haldi, above sindoor or hara); other signed values keep the domain ink.
+- **Fixed inks in line charts**: a series named rural is hara and urban neel whatever the palette or the registry
+  says; a second series with the same meaning is dashed. Other lines then start at ink black.
 
 Every new figure still needs a `chartExplainers` entry whose `howToRead` describes the new form. If you
 swap a chart's form, keep its `title` so `sectionVisualMap` and the explainer still bind, and rewrite the explainer.
+
+## Typesetting every figure shares
+
+`typeset()` in `almanac.ts` runs over every chart's SVG before it reaches the page, so these hold everywhere:
+a true minus sign (U+2212) for negative numbers, in text and tooltips; `->` and `<=` set as → and ≤; "deg C" as °C;
+a zero with no scale word ("₹0", not "₹0 lakh"). `harmoniseDecimals()` in `chartFormat.ts` gives the labels of one
+chart (or one bar group, since groups often come from different sources) the same number of decimals, never padding
+a one-decimal source to look like a two-decimal one, and leaving mixed magnitudes (7.52 beside 117) alone.
+
+Other rules the renderers keep:
+- A figure is never drawn wider than the width it was laid out for (`max-width` on every figure SVG), so a narrow
+  form cannot be stretched into giant text.
+- A change in a share is in percentage points and prints bare ("10.2" under a "percentage points" caption), not "10.2%".
+- Counts stored in crore or lakh (people, cases) print the Indian way: 0.88 crore is "88 lakh".
+- Annual series dated 31 March label their latest point as a financial year ("2025-26").
+- Line end labels carry a white halo where they cross other lines; scatter labels are placed by collision (each
+  tries four sides; on a phone one that cannot fit is left to the tooltip).
+- Map strips: a value past the colour scale sits at the scale's end with an arrow, and still prints its value.
 
 ## Statistics the figures compute
 

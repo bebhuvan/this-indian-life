@@ -1,5 +1,50 @@
 # Design refinement log
 
+## Summary (October 2026, second session)
+
+The first session's crash left one commit (a793486) and uncommitted article-page work. This session verified
+the 18 earlier findings on screen, committed the unfinished work, and ran four more passes, each followed by a
+fresh screenshot sweep at 1440 and 390 px from a static build (15 articles covering every chart kind, plus home,
+a domain page, `/articles/`, `/library/`, `/about/`, `/methodology/`, `/nfhs6/`).
+
+Commits on `worktree-agent-a8ec08bf0cda3da10`:
+1. `cfd80e6` One reading column, a contents rail, and typeset chart numbers
+2. `a106770` Make every chart say what the data says: normals, units, fixed inks, colours in prose
+3. `af5e72c` Domain pages and the archive as edited front pages; phone fixes for scatters, bars and heat strips
+4. `5d0fe1a` New forms `slope` and `stackedArea`; docs; rail and source-line fixes
+
+**New forms:** `slope` (two points in time for a handful of units, values printed at both ends) and
+`stackedArea` (composition over time, layers named at the right edge). Both are in the engine (`almanac.ts`),
+the registry adapters (`almanac-visuals.ts`), the library page on real data (World Bank employment in
+agriculture 1991 and 2025 for India and eight peers; Ember generation by source since 2000) and the design doc.
+
+**Explainer text edited, and why:** 99 sentences in 20 files under `data/explanations/en/` named colours from the
+pre-Almanac palette ("the orange line", "blue for rural", "deep blue stripes for a deficit"). Each was checked
+against the rendered chart and now names the colour drawn, or the series by name. A script confirmed that no
+number, date or other field changed (the only added digits are "the 2026 line", a series name). Chart titles and
+subtitles in the registry lost 18 em dashes and 27 spaced hyphens used as dashes; bindings are by slug and hold.
+
+**Integrity fixes worth knowing about:** stripes were centred on the midpoint of the range rather than the normal
+(a −2% monsoon was painted "normal", and the 1901 tooltip read −16% against a published −13.8%); a
+percentage-point change printed as "%"; a change card printed "+0.81" for +81 lakh people; rural and urban lines
+were sometimes black or swapped.
+
+**Left alone, and why:**
+- Article prose and headlines (em dashes in `/about/`, "What India's AQI Can See, And What It Can't" in title
+  case, "El Nino" without the tilde): these are the author's words, not chart furniture.
+- Chart choices that are editorial: spaghetti charts of eight countries, three near-identical GDP/GNI/GNDI lines.
+  A different form would change what the figure argues; that is the author's call.
+- Possible content errors the colour audit surfaced, not fixed because they are not design: the gold article's
+  "The import figures check out" explainer says "follow the two lines" over a one-line chart; the El Niño droughts
+  explainer mentions ONI and DMI values the bar chart does not show; the wealth-share chart's subtitle says
+  1961 to 2023 but its data starts in the nineteenth century.
+
+**Next, if there is another pass:** move the GVA-by-sector and generation-mix articles onto `stackedArea` (with
+their `howToRead` rewritten); a marimekko for state × sector composition; per-panel scales on `scenarioMaps` on
+phones (three maps at 110 px each are small); a crosshair for stacked areas; fold the remaining legacy chart-note
+fallbacks into the explainers.
+
+
 The audit behind the October 2026 refinement of the Almanac, and what was done about
 each problem. Ranked by how much it hurts a reader, worst first. Screenshots were taken
 with puppeteer at 1440 and 390 px across 16 articles that between them use every chart
@@ -25,7 +70,22 @@ Status: **done**, **partly**, **open**.
 | 14 | Stack and share strips: blocky, labels clipped inside narrow segments, the same numbers repeated as bars underneath | `stack`, `share`, `stripPair` | One SVG share strip per row, labels outside narrow segments with ticks, no duplicate bars | done |
 | 15 | Scatter (heat vulnerability) and scatterXY: faint dots, line swatches for dots in the legend, axis titles rotated | `scatter`, `scatterXY` | Rebuilt on the `scatterFit` anatomy (no fit line unless asked) | done |
 | 16 | Anomaly line charts did not mark zero; no chart printed its unit | `renderLineSvg` | Zero drawn in ink when the axis crosses it; unit printed once over the y axis | done |
-| 17 | Domain pages and /articles/ were bare lists | `[domain]/index.astro`, `articles/index.astro` | Lead story, deks, small figures, status shown quietly | done |
+| 17 | Domain pages and /articles/ were bare lists | `[domain]/index.astro`, `articles/index.astro` | Lead story, deks, small figures, status shown quietly. (Marked done by the first session but not on disk after its crash; built in the second session, `af5e72c`.) | done |
 | 18 | Change cards, line panels, scenario maps were legacy HTML/JSX | `change`, `linePanels`, `scenarioMaps` | Redrawn as SVG small multiples | done |
+| 19 | Stripes centred on the midpoint of the range, not the normal: a −2% monsoon painted grey "normal", every colour shifted, and the rain tooltip printed the re-centred value (1901: −16% against a published −13.8%) | `warmingStripes` in `viz.ts`, stripes in `ArticleVisuals.astro` | Centre 0 for departure and anomaly series, the mean otherwise; tooltip prints the published value | done |
+| 20 | 99 explainer sentences named colours the charts no longer draw | `data/explanations/en/` (20 files) | Each checked against the render; colour corrected or replaced by the series name | done |
+| 21 | Rural and urban lines drawn black, or swapped, against the fixed meanings | line charts | `lineInks()`: rural hara, urban neel, a second line of the same meaning dashed | done |
+| 22 | A change in a share printed as "10.2%" under a "percentage points" caption | `chartFormat.ts` | Points print bare | done |
+| 23 | Change card printed "+0.81" for +81 lakh people, and was stretched from 420 to 900 px with doubled text | `changeSvg` | Counts in crore/lakh written the Indian way, endpoints labelled; no figure drawn past its width | done |
+| 24 | Hyphens for minus signs; "2.2" beside "1.83"; "->", "<=", "deg C" in labels; "₹0 lakh"; "2026-03" for FY 2025-26; "₹0 lakh in 1961" for ₹404 | all figures | `typeset()`, `harmoniseDecimals()` (per group), `pointDateLabel()`, first value in its own scale | done |
+| 25 | Raw ids in subtitles and sources ("ncp · by state", "SP.POP.TOTL", "international-prices-crude-oil.indian-basket.$-per-bbl", "RBI e-STATES · RBI e-STATES") | `ArticleVisuals.astro` | Sixty more source names; upstream codes kept to the source line; duplicates dropped | done |
+| 26 | Scatter labels collided on phones and on the desk ("Telang Karnataka"), and the size key sat on points | `scatterFit` | Collision-aware placement; key under the plot on phones; reference label haloed | done |
+| 27 | Heat strip clipped "Maharashtra" and the last year on phones | `heatStrip` | Columns sized to what they print | done |
+| 28 | Phone bars: the zero line ran through the labels set above each bar | `barsSvg` | Zero line drawn beside the bars only | done |
+| 29 | Departure bars in one ink either side of zero | `barsSvg` | Temperature neel/sindoor, rain haldi/hara, as the stripes | done |
+| 30 | Map strip: Delhi's income past the scale ran into its printed value; pivot label read "45.0% about 45%" | `renderChoroplethStrip` | Clamped with an arrow; a pivot label with a number prints alone | done |
+| 31 | The contents rail sat at the screen edge at 1440 and highlighted the wrong section after a jump | article page | Shown from 1500 px in the margin beside the figures; highlight read from scroll position | done |
+| 32 | Citation and edit history were boxed grey panels with tiny letter-spaced buttons | `ArticleCite.astro`, edit log | Ruled, unboxed, citation set in Newsreader | done |
+| 33 | Em dashes and spaced hyphens in 45 chart titles, subtitles and reading-list labels | registry | Commas, colons and the house middle dot | done |
 
 New forms added this round are listed in `docs/ALMANAC_DESIGN_SYSTEM.md`.

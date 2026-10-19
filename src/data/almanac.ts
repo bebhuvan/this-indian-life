@@ -763,3 +763,108 @@ export function waterfall(steps: Array<{ label: string; value: number }>, o: { t
   b += txt(x(Math.max(0, total)) + 6, tby + 11, f(total).replace(/^\+/, ""), { size: 12, fill: INK.ink, weight: 600 });
   return svg(W, H, b, o.label);
 }
+
+// =====================================================================
+// 16. SLOPE — two points in time for a handful of units, values at both ends
+// =====================================================================
+export type SlopeRow = { label: string; a: number; b: number; color?: string; emphasis?: boolean };
+/** Spread end labels so none overlaps, keeping each as close to its point as it can. */
+function spread(ys: number[], gap: number, lo: number, hi: number) {
+  const idx = ys.map((y, i) => [y, i] as [number, number]).sort((p, q) => p[0] - q[0]);
+  const out = idx.map(([y]) => y);
+  for (let i = 1; i < out.length; i++) out[i] = Math.max(out[i], out[i - 1] + gap);
+  const over = out.length ? out[out.length - 1] - hi : 0;
+  if (over > 0) for (let i = out.length - 1; i >= 0; i--) out[i] = Math.min(out[i] - over, i < out.length - 1 ? out[i + 1] - gap : Infinity);
+  for (let i = 0; i < out.length; i++) out[i] = Math.max(lo, out[i]);
+  const res = new Array(ys.length);
+  idx.forEach(([, i], k) => (res[i] = out[k]));
+  return res as number[];
+}
+export function slope(rows: SlopeRow[], o: {
+  aLabel: string; bLabel: string; fmt?: (v: number) => string; domain?: [number, number]; width?: number; height?: number; label: string;
+}) {
+  const W = o.width ?? 1040, sm = W < 700, H = o.height ?? (sm ? 360 : 420);
+  const f = o.fmt ?? ((v: number) => fmtIN(Math.round(v * 10) / 10));
+  const fs = sm ? 11.5 : 13;
+  const tw = (s: string, bold = false) => s.length * fs * (bold ? 0.6 : 0.55);
+  // Label columns as wide as the longest "Name 12.3" on each side.
+  const leftW = Math.max(...rows.map((r) => tw(`${r.label} ${f(r.a)}`, !!r.emphasis))) + 12;
+  const rightW = Math.max(...rows.map((r) => tw(`${f(r.b)} ${r.label}`, !!r.emphasis))) + 12;
+  const x0 = sm ? Math.min(leftW, W * 0.36) : Math.max(leftW, W * 0.22), x1 = W - (sm ? Math.min(rightW, W * 0.36) : Math.max(rightW, W * 0.22));
+  const top = 40, bot = H - 14;
+  const vals = rows.flatMap((r) => [r.a, r.b]);
+  const [lo, hi] = o.domain ?? [Math.min(...vals), Math.max(...vals)];
+  const y = (v: number) => bot - ((v - lo) / (hi - lo || 1)) * (bot - top);
+  let b = txt(x0, 14, o.aLabel, { size: 12, fill: INK.ink, weight: 600, anchor: "middle" }) + txt(x1, 14, o.bLabel, { size: 12, fill: INK.ink, weight: 600, anchor: "middle" });
+  b += line(x0, 24, x0, bot + 6, INK.rule, 1) + line(x1, 24, x1, bot + 6, INK.rule, 1);
+  const ink = (r: SlopeRow) => r.color ?? (r.emphasis ? INK.sindoor : "#8f8f8f");
+  const order = [...rows].sort((p, q) => Number(!!p.emphasis) - Number(!!q.emphasis));
+  const la = spread(rows.map((r) => y(r.a)), fs + 3, top - 6, bot), lb = spread(rows.map((r) => y(r.b)), fs + 3, top - 6, bot);
+  for (const r of order) {
+    const i = rows.indexOf(r), c = ink(r), w = r.emphasis ? 2.6 : 1.4;
+    let g = line(x0, y(r.a), x1, y(r.b), c, w) + dot(x0, y(r.a), r.emphasis ? 4 : 3, c) + dot(x1, y(r.b), r.emphasis ? 4 : 3, c);
+    const wt = r.emphasis ? 600 : undefined, lc = r.emphasis ? INK.ink : INK.ink2;
+    g += `<text x="${r1(x0 - 10)}" y="${r1(la[i] + fs * 0.35)}" font-family="${F}" font-size="${fs}" text-anchor="end"><tspan fill="${lc}"${wt ? ` font-weight="${wt}"` : ""}>${esc(r.label)}</tspan><tspan fill="${INK.ink}" font-weight="600" dx="5">${esc(f(r.a))}</tspan></text>`;
+    g += `<text x="${r1(x1 + 10)}" y="${r1(lb[i] + fs * 0.35)}" font-family="${F}" font-size="${fs}"><tspan fill="${INK.ink}" font-weight="600">${esc(f(r.b))}</tspan><tspan fill="${lc}"${wt ? ` font-weight="${wt}"` : ""} dx="5">${esc(r.label)}</tspan></text>`;
+    const tipS = [r.label, `${o.aLabel}: ${f(r.a)}`, `${o.bLabel}: ${f(r.b)}`].join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    b += `<g class="mk" data-tip="${tipS}" tabindex="0"><path d="M${r1(x0)} ${r1(y(r.a))}L${r1(x1)} ${r1(y(r.b))}" stroke="transparent" stroke-width="12"/>${g}</g>`;
+  }
+  return svg(W, H, b, o.label);
+}
+
+// =====================================================================
+// 17. STACKED AREA — composition over time, each layer named at its end
+// =====================================================================
+export type AreaLayer = { label: string; color: string; points: Array<[number, number]> };
+export function stackedArea(layers: AreaLayer[], o: {
+  share?: boolean; width?: number; height?: number; yTicks?: number[]; fmt?: (v: number) => string; unit?: string; label: string;
+}) {
+  const W = o.width ?? 1040, sm = W < 700, H = o.height ?? (sm ? 300 : 420);
+  const years = [...new Set(layers.flatMap((l) => l.points.map((p) => p[0])))].sort((a, b) => a - b);
+  const at = (l: AreaLayer, t: number) => l.points.find((p) => p[0] === t)?.[1] ?? 0;
+  const totals = years.map((t) => layers.reduce((s, l) => s + Math.max(0, at(l, t)), 0));
+  const val = (l: AreaLayer, k: number) => (o.share ? (Math.max(0, at(l, years[k])) / (totals[k] || 1)) * 100 : Math.max(0, at(l, years[k])));
+  const f = o.fmt ?? ((v: number) => fmtIN(Math.round(v)));
+  const fs = sm ? 11.5 : 13;
+  const last = years.length - 1;
+  const lastVals = layers.map((l) => val(l, last)), lastTot = lastVals.reduce((s, v) => s + v, 0);
+  const shareOf = (v: number) => `${Math.round((v / (lastTot || 1)) * 100)}%`;
+  const endText = (l: AreaLayer, i: number) => (o.share ? `${l.label} ${f(lastVals[i])}` : `${l.label} ${f(lastVals[i])}`);
+  const gut = Math.max(...layers.map((l, i) => endText(l, i).length * fs * 0.56)) + 32;
+  const mr = Math.min(gut, W * (sm ? 0.42 : 0.26)), mt = 18, mb = 26;
+  const t0 = years[0], t1 = years[last];
+  const x = (t: number) => ml + ((t - t0) / (t1 - t0 || 1)) * (W - ml - mr);
+  const yMax = o.share ? 100 : Math.max(...years.map((_, k) => layers.reduce((s, l) => s + val(l, k), 0)));
+  const ticks = o.yTicks ?? (() => { const st = [1, 2, 2.5, 5, 10].map((m) => m * 10 ** Math.floor(Math.log10(yMax / 4))).find((s) => yMax / s <= 5)!; const t: number[] = []; for (let v = 0; v <= yMax + st * 0.01; v += st) t.push(v); if (t[t.length - 1] < yMax) t.push(t[t.length - 1] + st); return t; })();
+  const top = ticks[ticks.length - 1];
+  const ml = Math.max(...ticks.map((v) => (o.share ? `${v}%` : f(v)).length * 11.5 * 0.58)) + 10;
+  const y = (v: number) => H - mb - (v / (top || 1)) * (H - mb - mt);
+  let b = "";
+  for (const v of ticks) { b += line(ml, y(v), W - mr, y(v), v === 0 ? INK.ink : INK.grid, 1); b += txt(ml - 6, y(v) + 4, o.share ? `${v}%` : f(v), { ...AX, anchor: "end" }); }
+  const step = sm ? 10 : 5;
+  const gapPx = 34;
+  for (const t of years) if (t % step === 0 || t === t0 || t === t1) {
+    if (t !== t0 && t !== t1 && (x(t) - x(t0) < gapPx || x(t1) - x(t) < gapPx)) continue;
+    b += txt(x(t), H - mb + 17, t, { ...AX, anchor: t === t0 ? "start" : t === t1 ? "end" : "middle" });
+  }
+  // stack bottom-up in the given order
+  const base = years.map(() => 0);
+  const mids: number[] = [];
+  layers.forEach((l, i) => {
+    const lower = base.slice(), upper = years.map((_, k) => base[k] + val(l, k));
+    const d = years.map((t, k) => `${k ? "L" : "M"}${r1(x(t))} ${r1(y(upper[k]))}`).join("") + years.slice().reverse().map((t, k) => `L${r1(x(t))} ${r1(y(lower[last - k]))}`).join("") + "Z";
+    const tipS = [l.label, `${years[last]}: ${f(lastVals[i])}${o.unit && !o.share ? ` ${o.unit}` : ""}${o.share ? "" : ` (${shareOf(lastVals[i])} of the total)`}`].join("|").replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    b += `<path class="mk" d="${d}" fill="${l.color}" fill-opacity="0.88" stroke="#ffffff" stroke-width="0.8" data-tip="${tipS}"/>`;
+    mids.push(y((lower[last] + upper[last]) / 2));
+    years.forEach((_, k) => (base[k] = upper[k]));
+  });
+  const ly = spread(mids, fs + 3, mt + 4, H - mb - 2);
+  layers.forEach((l, i) => {
+    const xe = W - mr;
+    if (Math.abs(ly[i] - mids[i]) > 2) b += `<path d="M${r1(xe + 1)} ${r1(mids[i])}L${r1(xe + 9)} ${r1(ly[i])}" stroke="${INK.ink3}" stroke-width="0.75" fill="none"/>`;
+    // a swatch in the layer's colour, the name in ink: pale layers stay legible
+    b += `<rect x="${r1(xe + 10)}" y="${r1(ly[i] - 4.5)}" width="9" height="9" fill="${l.color}"/>`;
+    b += `<text x="${r1(xe + 24)}" y="${r1(ly[i] + fs * 0.35)}" font-family="${F}" font-size="${fs}"><tspan fill="${INK.ink}" font-weight="600">${esc(l.label)}</tspan><tspan fill="${INK.ink2}" dx="5">${esc(f(lastVals[i]))}</tspan></text>`;
+  });
+  return svg(W, H, b, o.label);
+}

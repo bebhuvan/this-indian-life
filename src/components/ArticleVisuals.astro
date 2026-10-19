@@ -230,7 +230,7 @@ const sourceNames: Record<string, string> = {
   offswitch: "SFLC.in",
   energy: "Energy statistics",
   air: "Air quality data",
-  lasidad: "LASIDAD",
+  lasidad: "LASI-DAD",
   ictd: "ICTD",
   icrier: "ICRIER",
   "crs-mccd": "CRS + MCCD",
@@ -469,6 +469,9 @@ function sourceLabel(source: VisualSpec["source"]) {
   if (source.sourceId === "india-energy-derived") {
     if (id === "ppac-and-tradestat.fuel-import-spend.2025-2026") return "PPAC + TradeStat / DGCI&S · Fuel import spend · 2025-26";
   }
+  // Never print the source twice ("RBI e-STATES · RBI e-STATES").
+  const nm = sourceName(source.sourceId).trim();
+  if (id && id.trim().toLowerCase().startsWith(nm.toLowerCase())) return id.trim();
   return id ? `${sourceName(source.sourceId)} · ${id}` : sourceName(source.sourceId);
 }
 
