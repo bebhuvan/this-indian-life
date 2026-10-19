@@ -11,7 +11,8 @@ export const SITE = {
   description: "Sourced charts and plain-language explainers about how India lives.",
   author: { name: "Bhuvanesh", url: "https://bebhuvan.com" },
   sameAs: ["https://twitter.com/bebhuvan", "https://www.linkedin.com/in/bebhuvan/"],
-  ogImage: "/og-default.png"
+  ogImage: "/og/site.png",
+  ogImageAlt: "How does India live? Above a band of stripes, one for every all-India monsoon since 1901, dry years ochre and wet years green."
 };
 
 export const abs = (path: string) => new URL(path, SITE.url).toString();

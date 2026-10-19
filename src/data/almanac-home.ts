@@ -27,7 +27,7 @@ const extreme = (sign: 1 | -1) => monsoon.reduce((best, p) => (sign * p[1] > sig
 const driest = extreme(-1), wettest = extreme(1);
 const heroMarks: Record<number, string> = { [wettest[0]]: String(wettest[0]), [driest[0]]: String(driest[0]) };
 for (const [y] of deficientElNino.slice().sort((a, b) => a[1] - b[1]).slice(0, 4)) heroMarks[y] = String(y);
-const heroPoints = monsoon.map(([year, value]) => ({ year, value, flag: year >= 1950 && value <= -10 && phase[year] === "El Nino" }));
+export const heroPoints = monsoon.map(([year, value]) => ({ year, value, flag: year >= 1950 && value <= -10 && phase[year] === "El Nino" }));
 export const hero = {
   svg: stripes(heroPoints, { stops: SCALES.rain, width: 1160, height: 230, marks: heroMarks, label: `All-India monsoon rainfall departure from normal, ${monsoon[0][0]} to ${monsoon[monsoon.length - 1][0]}, one stripe per year` }),
   svgM: stripes(heroPoints, { stops: SCALES.rain, width: 358, height: 200, compact: true, marks: { [wettest[0]]: String(wettest[0]), [driest[0]]: String(driest[0]) }, label: "Monsoon rainfall departure from normal, one stripe per year" }),
