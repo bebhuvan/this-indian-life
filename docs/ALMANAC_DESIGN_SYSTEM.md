@@ -80,7 +80,9 @@ The older kinds still render through `ArticleVisuals.astro`, redesigned rather t
   Context lines are 1.25 px at 60% when a series is emphasised, and the emphasised line is cased in the ground
   colour. A single series' first value is set lighter than its latest. A second line with the same fixed meaning is
   dashed with butt caps at a length scaled to its weight. On a phone, five or more lines with a protagonist write
-  only the protagonist's value; the key and tooltip carry the rest.
+  only the protagonist's value; the key and tooltip carry the rest. Otherwise, when phone end values would have to
+  ladder away from their lines to clear each other, they move into the key beside each name (ordered as the lines
+  end) and the plot runs to the right edge.
 - **Projections** (`projectedAfter` on a `line` or `multiLine` plan entry, or on one `series` item):
   the year of the last measured point. After it the line is drawn dashed in the same ink and
   weight, the plot behind it takes a faint ground, and a dotted hairline marked "projected ->"

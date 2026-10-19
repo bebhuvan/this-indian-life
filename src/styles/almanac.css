@@ -225,6 +225,12 @@ footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px
 /* Desktop names every line at its end, so the key is for phones (and for crowded charts). */
 .viz-legend-m{display:none}
 @media(max-width:620px){.viz-legend-m{display:flex}}
+/* End values moved into the key: the value follows its series' name. The desktop key shows
+   past seven lines or when its labels would ladder; the phone key always, on phones only. */
+.viz-legend .kv{font-weight:600;color:var(--ink);margin-left:7px}
+.viz-legend-kv{gap:6px 20px}
+.viz-legend-d{display:flex}
+@media(max-width:620px){.viz-legend-d{display:none}}
 
 /* ---------- horizontal bars ---------- */
 /* Thin bars with the value written at each bar's end, no grey tracks, hairline rows. */

@@ -48,6 +48,34 @@ export const typeset = (svg: string) =>
     .replace(/>([^<]+)</g, (_m, t: string) => `>${minus(t)}<`)
     .replace(/data-tip="([^"]*)"/g, (_m, t: string) => `data-tip="${minus(t)}"`);
 
+/** Advance widths of Schibsted Grotesk in em, measured in the browser from the self-hosted
+ *  font (regular, semibold, bold). Letters use the alphabet's average; a label's width comes
+ *  out within a few per cent, where a flat 0.6 em per character over-reserved gutters by
+ *  25 to 80 px on desktop. */
+const ADV: Record<400 | 600 | 700, { digit: number; lower: number; upper: number; space: number; narrow: number; pct: number; cur: number; dash: number; minus: number }> = {
+  400: { digit: 0.555, lower: 0.526, upper: 0.662, space: 0.25, narrow: 0.28, pct: 0.85, cur: 0.58, dash: 0.49, minus: 0.63 },
+  600: { digit: 0.576, lower: 0.55, upper: 0.688, space: 0.23, narrow: 0.29, pct: 0.89, cur: 0.59, dash: 0.47, minus: 0.63 },
+  700: { digit: 0.59, lower: 0.566, upper: 0.704, space: 0.21, narrow: 0.3, pct: 0.91, cur: 0.6, dash: 0.46, minus: 0.63 },
+};
+/** Per-glyph advances (thousandths of an em) for 0-9, a-z, A-Z, from the same measurement:
+ *  "i" and "l" are less than half the width of "m", so a class average is not enough. */
+const GLYPHS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const GLYPH_W: Record<400 | 600 | 700, number[]> = {
+  400: [610,340,570,580,580,580,590,530,580,590,550,590,550,590,570,340,560,570,240,270,550,260,870,580,600,590,590,400,510,340,580,550,810,560,550,500,700,640,700,700,590,560,720,720,350,540,660,550,870,730,770,610,770,630,610,640,670,680,930,650,620,600],
+  600: [620,380,590,590,610,600,610,550,600,610,580,610,570,610,590,360,570,590,270,290,590,280,900,600,610,610,610,440,530,360,600,580,850,590,590,530,720,670,710,720,600,580,730,740,400,570,700,570,910,750,770,650,770,670,630,670,700,700,980,700,650,620],
+  700: [630,400,600,600,630,620,620,570,610,620,600,630,580,630,600,370,580,600,280,300,610,300,910,620,610,630,630,460,540,380,620,600,880,610,610,540,740,680,720,740,610,580,730,750,430,590,730,580,940,770,770,670,770,690,650,690,720,710,1010,740,660,630],
+};
+export function textWidth(s: string, size: number, weight = 400) {
+  const wt = weight >= 700 ? 700 : weight >= 600 ? 600 : 400, a = ADV[wt], g = GLYPH_W[wt];
+  let w = 0;
+  for (const ch of String(s)) {
+    const k = GLYPHS.indexOf(ch);
+    w += k >= 0 ? g[k] / 1000 : ch === " " ? a.space
+      : /[.,:;'()·|]/.test(ch) ? a.narrow : ch === "%" ? a.pct : /[₹$€£]/.test(ch) ? a.cur : ch === "-" ? a.dash : ch === "−" ? a.minus : 0.6;
+  }
+  return w * size;
+}
+
 type TextOpts = { size?: number; fill?: string; anchor?: "start" | "middle" | "end"; weight?: number; track?: number };
 /** Words into lines of at most `chars` characters. */
 export function wrapWords(s: string, chars: number) {

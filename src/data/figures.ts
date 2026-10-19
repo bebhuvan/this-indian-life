@@ -5,7 +5,7 @@
 // Every mark that carries a number has a `data-tip` ("Head|line|line"), which the
 // tooltip layer in public/article-actions.js shows on hover, tap and keyboard focus.
 import type { BarVisual, StackVisual, StripPairVisual, PyramidVisual, RankedChangeVisual, ChangeVisual, SparkGridVisual, StartingGridVisual, LinePanelsVisual, LoadCurveVisual, ScatterVisual, ScatterXYVisual, ScenarioMapsVisual, GroupedBarVisual, VisualSpec } from "./viz";
-import { INK, F, esc, r1, txt, halo, line, scatterFit, textInk, type ScatterPoint } from "./almanac";
+import { INK, F, esc, r1, txt, halo, line, textWidth, scatterFit, textInk, type ScatterPoint } from "./almanac";
 import { countFmt, harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
 import { choroColor, compactSvgPath } from "./chartSvg";
 
@@ -611,7 +611,7 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
   const sc = niceScale(0, Math.max(v.yMax ?? 0, ...vals), m ? 4 : 5);
   const labelSize = m ? 12 : 13;
   const endTxt = (s: LoadCurveVisual["series"][number]) => (m ? fmt(s.values.at(-1) ?? 0, v.unit) : `${s.label} ${fmt(s.values.at(-1) ?? 0, v.unit)}`);
-  const padR = Math.max(...v.series.map((s) => textW(endTxt(s), labelSize, true))) + 16;
+  const padR = Math.max(...v.series.map((s) => textWidth(endTxt(s), labelSize, 600))) + 18;
   const padL = 40, top = m ? 30 + 20 * Math.ceil(v.series.length / 2) : 30, bot = 34;
   const x = (h: number) => padL + (h / 23) * (W - padL - padR), y = (val: number) => H - bot - ((val - sc.min) / (sc.max - sc.min)) * (H - top - bot);
   // On a phone the unit sits just above the plot, so it starts where the plot does, clear of the top tick.
