@@ -13,6 +13,15 @@ Commits on `worktree-agent-a8ec08bf0cda3da10`:
 3. `af5e72c` Domain pages and the archive as edited front pages; phone fixes for scatters, bars and heat strips
 4. `5d0fe1a` New forms `slope` and `stackedArea`; docs; rail and source-line fixes
 
+**Facelift (after the owner asked for "presence and visual beauty"):** `1665642` makes India the protagonist in
+line comparisons of three or more places (heavier, on top; others finer and quieter, each keeping its ink), sets a
+single line's latest value as a headline figure, replaces the gradient wash with a flat tint, and fines the bars down
+(and lets short labels sit beside bars on phones, halving their height). `dd3bbc0` rebuilds the figure frame (the
+point behind a fine domain rule, reading aids in three quiet columns, source and downloads on one footer line), gives
+the lead figure more presence, and turns line panels of four or more lines into one panel per line on a scale fitted
+to the data. The hot-nights explainer in `q.climate.heat_mortality` was rewritten to describe the new form.
+Tried and dropped: tabular figures in chart text (Schibsted Grotesk's tabular forms open gaps such as "₹357 .1").
+
 **New forms:** `slope` (two points in time for a handful of units, values printed at both ends) and
 `stackedArea` (composition over time, layers named at the right edge). Both are in the engine (`almanac.ts`),
 the registry adapters (`almanac-visuals.ts`), the library page on real data (World Bank employment in
