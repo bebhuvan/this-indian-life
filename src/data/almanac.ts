@@ -15,6 +15,15 @@ export const F = "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif";
 export const r1 = (v: number) => Math.round(v * 10) / 10;
 export const esc = (s: string | number) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+/** Final typesetting for a chart's SVG string: a true minus sign (U+2212) wherever a
+ *  hyphen stands for a negative number, in visible text and in tooltips. Dates and
+ *  ranges ("2016-2025") are untouched because their hyphen follows a digit. */
+const minus = (t: string) => t.replace(/(^|[\s(\[~≈:|])-(?=\d|\.\d|₹|\$)/g, "$1\u2212");
+export const typeset = (svg: string) =>
+  String(svg)
+    .replace(/>([^<]+)</g, (_m, t: string) => `>${minus(t)}<`)
+    .replace(/data-tip="([^"]*)"/g, (_m, t: string) => `data-tip="${minus(t)}"`);
+
 type TextOpts = { size?: number; fill?: string; anchor?: "start" | "middle" | "end"; weight?: number };
 export const txt = (x: number, y: number, s: string | number, o: TextOpts = {}) =>
   `<text x="${r1(x)}" y="${r1(y)}" font-family="${F}" font-size="${o.size ?? 12}" fill="${o.fill ?? INK.ink2}"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}${o.weight ? ` font-weight="${o.weight}"` : ""}>${esc(s)}</text>`;

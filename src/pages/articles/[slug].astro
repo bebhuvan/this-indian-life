@@ -109,6 +109,12 @@ const chartLabel = (index: number) => {
 const glossaryBlocks = explanation.editorialPlan?.glossaryBlocks ?? [];
 const keyTerms = keyGlossaryTerms(glossaryBlocks, `${explanation.short.headline} ${explanation.short.dek}`);
 const annotatedSections = annotateStorySections(storySections, glossaryBlocks, keyTerms);
+// Section anchors for the contents rail. The first section repeats the story title when
+// the prose opens before its first heading; that heading is dropped, not listed twice.
+const sectionIds = annotatedSections.map((section, index) => `s${index + 1}-${section.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48)}`);
+const railItems = annotatedSections
+  .map((section, index) => ({ heading: section.heading, id: sectionIds[index] }))
+  .filter((item, index) => !(index === 0 && item.heading === explanation.article.title));
 ---
 
 <Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
@@ -119,14 +125,14 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
       <span class="domain-chip"><span class="tk"></span><span>{domains.find((d) => d.id === page.domain)?.label ?? page.domain}</span></span>
       <h1 class="serif">{page.question}</h1>
       <p class="muted">{explanation.short.dek}</p>
-      <p class="article-byline">By <a href={SITE.author.url} rel="author">{SITE.author.name}</a></p>
-      <div class="article-status">
-        <span class={`status ${status.cls}`}>{status.label}</span>
+      <p class="article-byline">
+        <span>By <a href={SITE.author.url} rel="author">{SITE.author.name}</a></span>
         {explanation.lastReviewed
           ? <span>Last reviewed {explanation.lastReviewed}</span>
           : (updatedLabel ? <span>Updated {updatedLabel}</span> : null)}
         {explanation.dataThrough ? <span>Data through {explanation.dataThrough}</span> : null}
-      </div>
+        {status.cls !== "ready" ? <span class={`status ${status.cls}`}>{status.label}</span> : null}
+      </p>
     </header>
 
     {editorialStory ? (
@@ -145,6 +151,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
       </div>
     </section>
 
+    {!(pullQuote as { generic?: boolean }).generic ? (
     <section class="data-pull">
       <p class="lbl">The point</p>
       <div>
@@ -152,6 +159,7 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
         <p class="serif">{pullQuote.line}</p>
       </div>
     </section>
+    ) : null}
 
     {page.primer ? <ConceptPrimer primer={page.primer} domain={page.domain} /> : null}
 
@@ -159,15 +167,20 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
       <>
         <section class="article-panel" data-article-panel="data">
           <section class="section article-story-section" id="charts">
+            {railItems.length > 2 ? (
+              <nav class="story-rail" aria-label="In this story">
+                <div class="story-rail-in"><p class="story-rail-h">In this story</p>
+                <ol>{railItems.map((item) => <li><a href={`#${item.id}`}><span>{item.heading}</span></a></li>)}</ol></div>
+              </nav>
+            ) : null}
             <article class="article-body story-body">
-              <p class="lbl">Guided story</p>
-              <h2 class="serif">{explanation.article.title}</h2>
+              <h2 class="serif story-title">{explanation.article.title}</h2>
               <p class="standfirst">{explanation.article.standfirst}</p>
               <div class="story-flow">
                 {annotatedSections.map((section, index) => (
                   <section class={`story-step ${boundVisualGroups[index]?.some((visual) => (visual as { size?: string }).size === "small") ? "story-step--small" : "story-step--feature"}`}>
                     <div class="story-copy longform">
-                      <h3>{section.heading}</h3>
+                      {index === 0 && section.heading === explanation.article.title ? <span id={sectionIds[index]} class="story-anchor"></span> : <h3 id={sectionIds[index]}>{section.heading}</h3>}
                       {section.blocks.map((block) => {
                         if (block.type === "h3") return <h4>{block.text}</h4>;
                         if (block.type === "defbox") return (<aside class="defbox"><p class="defbox-lbl">Definition</p><p class="defbox-term">{block.item.term}</p><p class="defbox-mean">{block.item.plainMeaning}</p>{block.item.whyItMattersHere ? <p class="defbox-why">{block.item.whyItMattersHere}</p> : null}</aside>);
@@ -297,15 +310,20 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
     ) : (
       <>
         <section class="section article-story-section" id="charts">
+            {railItems.length > 2 ? (
+              <nav class="story-rail" aria-label="In this story">
+                <div class="story-rail-in"><p class="story-rail-h">In this story</p>
+                <ol>{railItems.map((item) => <li><a href={`#${item.id}`}><span>{item.heading}</span></a></li>)}</ol></div>
+              </nav>
+            ) : null}
           <article class="article-body story-body">
-            <p class="lbl">Guided story</p>
-            <h2 class="serif">{explanation.article.title}</h2>
+            <h2 class="serif story-title">{explanation.article.title}</h2>
             <p class="standfirst">{explanation.article.standfirst}</p>
             <div class="story-flow">
               {annotatedSections.map((section, index) => (
                 <section class={`story-step ${boundVisualGroups[index]?.some((visual) => (visual as { size?: string }).size === "small") ? "story-step--small" : "story-step--feature"}`}>
                   <div class="story-copy longform">
-                    <h3>{section.heading}</h3>
+                    {index === 0 && section.heading === explanation.article.title ? <span id={sectionIds[index]} class="story-anchor"></span> : <h3 id={sectionIds[index]}>{section.heading}</h3>}
                     {section.blocks.map((block) => {
                       if (block.type === "h3") return <h4>{block.text}</h4>;
                       if (block.type === "defbox") return (<aside class="defbox"><p class="defbox-lbl">Definition</p><p class="defbox-term">{block.item.term}</p><p class="defbox-mean">{block.item.plainMeaning}</p>{block.item.whyItMattersHere ? <p class="defbox-why">{block.item.whyItMattersHere}</p> : null}</aside>);
@@ -412,6 +430,22 @@ const annotatedSections = annotateStorySections(storySections, glossaryBlocks, k
     <script src="/article-actions.js" defer></script>
   </div>
   <script>
+    // Contents rail: mark the section being read. The rail only shows on wide screens.
+    (() => {
+      const links = Array.from(document.querySelectorAll(".story-rail a"));
+      if (!links.length || !("IntersectionObserver" in window)) return;
+      const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
+      const targets = Array.from(byId.keys()).map((id) => document.getElementById(id)).filter(Boolean);
+      let current = null;
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) if (e.isIntersecting) {
+          if (current) current.removeAttribute("aria-current");
+          current = byId.get(e.target.id) || null;
+          current?.setAttribute("aria-current", "true");
+        }
+      }, { rootMargin: "0px 0px -70% 0px" });
+      targets.forEach((t) => io.observe(t));
+    })();
     // Inline glossary terms: tap to toggle the definition popover (touch), with
     // keyboard support; CSS handles hover/focus on pointer devices.
     (() => {

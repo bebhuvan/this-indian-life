@@ -211,3 +211,21 @@ export function niceScale(lo: number, hi: number, count = 5) {
   for (let v = niceMin; v <= niceMax + step * 0.5; v += step) ticks.push(Number(v.toPrecision(12)));
   return { min: niceMin, max: niceMax, ticks };
 }
+
+/** Give every label in one chart the same number of decimals, so "2.2" does not sit
+ *  beside "1.83". Labels are grouped by what surrounds the number (unit, suffix), and
+ *  each group is padded to its most precise member; nothing is rounded away. */
+export function harmoniseDecimals(labels: string[]) {
+  const re = /^([^\d]*?)(\d[\d,]*)(?:\.(\d+))?(.*)$/;
+  const parts = labels.map((l) => String(l).match(re));
+  const key = (m: RegExpMatchArray | null) => (m ? `${m[1].replace(/[-\u2212+]/g, "")}|${m[4]}` : "");
+  const need = new Map<string, number>();
+  for (const m of parts) if (m) need.set(key(m), Math.max(need.get(key(m)) ?? 0, (m[3] ?? "").length));
+  return labels.map((l, i) => {
+    const m = parts[i];
+    if (!m) return l;
+    const d = need.get(key(m)) ?? 0, have = (m[3] ?? "").length;
+    if (!d || have >= d || m[2].replace(/,/g, "").length >= 3) return l;
+    return `${m[1]}${m[2]}.${(m[3] ?? "").padEnd(d, "0")}${m[4]}`;
+  });
+}

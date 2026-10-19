@@ -324,3 +324,79 @@ svg[data-hover]{touch-action:pan-y}
 .hov-tip>b{display:block;font-weight:600}
 .hov-tip>b+b{font-weight:400;color:var(--mid)}
 .fig-card .alm-stat{max-width:72ch}
+
+/* ---------- article: one reading column, figures wider ---------- */
+/* Header, short answer, "the point" and the story all share one 660px column, so the
+   page has a single left edge; the headline alone may run wider to the right. */
+.article-head,.article-hero.single,.article-tabs--views,.data-pull,.story-body>.story-title,.story-body>.standfirst{max-width:660px;margin-left:auto;margin-right:auto}
+.article-head h1{width:min(880px,100%);max-width:none;margin-right:-220px;text-wrap:balance}
+@media(max-width:1180px){.article-head h1{margin-right:0;width:auto}}
+.article-head p.muted{text-wrap:pretty}
+.article-byline{display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px;color:var(--mid);font-size:.84rem}
+.article-byline>span+span::before{content:"·";margin:0 .6em;color:#b3b3b3}
+.article-byline a{color:var(--ink);font-weight:500}
+.article-byline .status{border:0;padding:0;font-size:.84rem;letter-spacing:0;text-transform:none;color:var(--energy-ink);font-weight:500}
+.data-pull{margin-top:36px;padding-top:14px}
+.data-pull div{grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end}
+.data-pull span{color:var(--c-ink);font-size:clamp(3rem,5.4vw,4.4rem)}
+.data-pull p:not(.lbl){font-size:clamp(1.2rem,1.8vw,1.42rem);line-height:1.35;max-width:none}
+.story-body>h2.story-title{border-top:2px solid var(--ink);padding-top:22px;margin-top:56px;font-size:clamp(1.75rem,3vw,2.3rem);line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
+.story-body>.standfirst{font-size:1.28rem;line-height:1.55;color:#3a3a3a;margin:14px auto 40px}
+.story-anchor{display:block;height:0}
+.longform h3{scroll-margin-top:24px;text-wrap:balance}
+.longform h4{font-family:var(--serif);font-weight:600;font-size:1.22rem;line-height:1.3;margin:30px 0 10px}
+.longform p{hyphens:manual;-webkit-hyphens:manual}
+
+/* contents rail: in the left margin beside the figures, only when the margin can hold it
+   without touching a 1040px figure. */
+.story-rail{display:none}
+@media(min-width:1500px){
+  .article-story-section{position:relative}
+  .story-rail{display:block;position:absolute;top:0;bottom:0;left:calc(50% - 520px - 220px);width:176px}
+  .story-rail-in{position:sticky;top:28px;max-height:calc(100vh - 56px);overflow:auto;border-top:1px solid var(--ink);padding-top:10px;scrollbar-width:none}
+  .story-rail-h{font-family:var(--sans);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--ink);margin-bottom:6px}
+  .story-rail ol{list-style:none;display:grid;gap:0;counter-reset:rail}
+  .story-rail li{counter-increment:rail}
+  .story-rail a{display:grid;grid-template-columns:1.6em minmax(0,1fr);font-family:var(--sans);font-size:.8rem;line-height:1.35;color:var(--dim);text-decoration:none;padding:6px 0 6px 10px;border-left:1px solid var(--rule)}
+  .story-rail a::before{content:counter(rail);font-variant-numeric:tabular-nums;color:#a3a3a3}
+  .story-rail a span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .story-rail a:hover{color:var(--ink)}
+  .story-rail a[aria-current]{color:var(--ink);border-left:2px solid var(--c);padding-left:9px}
+}
+
+/* tables in prose: ruled, numbers right-aligned, no box */
+.story-table-wrap{border:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:26px 0 30px}
+.story-table{font-family:var(--sans);font-size:.88rem;min-width:0}
+.story-table th{background:none;color:var(--ink);font-size:.7rem;border-bottom:1px solid var(--rule)}
+.story-table td{font-weight:400;font-variant-numeric:tabular-nums lining-nums}
+.story-table tbody tr:hover td{background:#f7f7f7}
+@media(max-width:680px){.story-table{min-width:560px}}
+
+/* lists: a quiet en rule instead of the bullet */
+.longform .story-list{list-style:none;margin-left:0;gap:.6rem}
+.longform .story-list li{position:relative;padding-left:1.15em}
+.longform .story-list li::before{content:"";position:absolute;left:0;top:.82em;width:.55em;height:1px;background:var(--ink)}
+
+/* glossary: a two-column lexicon */
+.concept-blocks{margin-top:72px;padding-top:14px}
+.concept-blocks>.lbl{display:block;margin-bottom:22px}
+.concept-item{grid-template-columns:170px minmax(0,1fr);gap:8px 28px;padding:20px 0;border-top:1px solid var(--line)}
+.concept-item h3{font-size:1.2rem;line-height:1.25;color:var(--ink);font-weight:600}
+.concept-item p{font-size:1.1rem;line-height:1.55}
+.concept-item .concept-why{margin-top:0;font-size:.86rem}
+@media(max-width:680px){.concept-item{grid-template-columns:1fr}}
+
+/* the macha block: plain talk, set like a letter in the reading column */
+.macha-block{max-width:660px;border-top:2px solid var(--ink);margin:88px auto 24px}
+.macha-block h2{font-size:clamp(1.6rem,2.8vw,2.1rem);line-height:1.15;max-width:none;text-wrap:balance}
+.macha-body{font-size:1.22rem}
+
+/* edit history: dates in tabular figures, the diff link as a plain link */
+.editlog-meta{font-family:var(--sans);font-size:.82rem;color:var(--mid)}
+.editlog-list{border-top:1px solid var(--rule)}
+.editlog-list li{border-bottom:1px solid var(--line);font-family:var(--sans);font-size:.9rem}
+.editlog-date{font-variant-numeric:tabular-nums lining-nums;color:var(--mid)}
+.editlog-diff{border:0;padding:0;font-size:.82rem;letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px}
+.editlog-diff:hover{color:var(--c-ink);text-decoration-color:var(--c)}
+.editlog-history{font-family:var(--sans);font-size:.82rem;color:var(--ink);border:0;text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px}
+.article-cite-section .sec-hd{display:none}

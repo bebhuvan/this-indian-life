@@ -260,6 +260,10 @@ export function formatLockedNumber(item: LockedNumber) {
   if (/tonnes|twh|mtco2|kwh/i.test(item.unit) && abs >= 1_000_000_000) return `${(item.value / 1_000_000_000).toFixed(2)}B`;
   if (abs >= 1_000_000) return item.value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   if (abs >= 100) return item.value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
+  // Round like a person would: one decimal from 10 up, two below that, three only for
+  // values under one (where a digit carries meaning). 78.163 reads as 78.2.
+  if (abs >= 10) return item.value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
+  if (abs >= 1) return item.value.toLocaleString("en-IN", { maximumFractionDigits: 2 });
   return item.value.toLocaleString("en-IN", { maximumFractionDigits: 3 });
 }
 
@@ -299,6 +303,7 @@ export function pullQuoteForPage(page: QuestionPage) {
   if (q) {
     const locked = page.explanation.evidence.lockedNumbers?.find((n) => n.label === q.numberLabel);
     let stat = locked ? formatLockedNumber(locked) : "";
+    if (locked && stat && /%|per ?cent/i.test(locked.unit) && !/%/.test(stat)) stat += "%";
     if (!stat) {
       const m = q.quote.match(/[₹$]?\d[\d,.]*\s?(%|crore|lakh|billion|million|trillion|TWh|GB|years)?/i);
       stat = m ? m[0].trim() : "";
@@ -324,6 +329,7 @@ export function pullQuoteForQuestion(page: QuestionPage) {
   }
   if (page.id.startsWith("q.people.")) {
     return {
+      generic: true,
       stat: top ? formatLockedNumber(top) : "India-scale",
       line: "In India, scale is the story. A small-looking change can still mean a city, a state, or a generation."
     };
@@ -348,12 +354,14 @@ export function pullQuoteForQuestion(page: QuestionPage) {
   }
   if (page.id.startsWith("q.econ.")) {
     return {
+      generic: true,
       stat: top ? formatLockedNumber(top) : "The average",
       line: "The total number shows national scale. The per-person number is the reality check."
     };
   }
 	  if (page.id.startsWith("q.energy.")) {
 	    return {
+	      generic: true,
 	      stat: top ? formatLockedNumber(top) : "The grid",
 	      line: "Energy data is not abstract. It is fans, pumps, factories, trains, and the fuel mix behind them."
 	    };
@@ -366,6 +374,7 @@ export function pullQuoteForQuestion(page: QuestionPage) {
 	  }
 	  if (page.id.startsWith("q.climate.") || page.id.startsWith("q.air.")) {
 	    return {
+	      generic: true,
 	      stat: top ? formatLockedNumber(top) : "The atmosphere",
 	      line: "Climate and air numbers become real when you read them beside exposure, people, and time."
 	    };
@@ -381,6 +390,7 @@ export function pullQuoteForQuestion(page: QuestionPage) {
   // boilerplate line if, somehow, no chart takeaway exists.
   const leadTakeaway = page.explanation.chartExplainers?.find((c) => c && c.takeaway)?.takeaway;
   return {
+    generic: true,
     stat: top ? formatLockedNumber(top) : "The number",
     line: leadTakeaway || "The first number is only the entry point. The shape of the data is where the answer begins."
   };

@@ -6,7 +6,7 @@
 // tooltip layer in public/article-actions.js shows on hover, tap and keyboard focus.
 import type { BarVisual, StackVisual, StripPairVisual, PyramidVisual, RankedChangeVisual, ChangeVisual, SparkGridVisual, StartingGridVisual, LinePanelsVisual, LoadCurveVisual, ScatterVisual, ScatterXYVisual, ScenarioMapsVisual, GroupedBarVisual, VisualSpec } from "./viz";
 import { INK, F, esc, r1, txt, halo, line, scatterFit, type ScatterPoint } from "./almanac";
-import { fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
+import { harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
 import { choroColor, compactSvgPath } from "./chartSvg";
 
 export type Figure = { svg: string; svgM: string; note?: string };
@@ -61,7 +61,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const labSize = 13, valSize = m ? 12.5 : 13, few = rows.length <= 6, barH = m ? (few ? 14 : 10) : few ? 18 : rows.length <= 12 ? 14 : 12;
   const vals = rows.map((r) => r.value), lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
   const neg = lo < 0;
-  const valTxt = (v: number) => fmtU(v, unit);
+  const harmonised = harmoniseDecimals(vals.map((v) => fmtU(v, unit)));
+  const valTxt = (v: number) => harmonised[vals.indexOf(v)] ?? fmtU(v, unit);
   const posValW = Math.max(0, ...rows.filter((r) => r.value >= 0).map((r) => textW(valTxt(r.value), valSize, true))) + 10;
   const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textW(valTxt(r.value), valSize, true))) + 10 : 0;
   // Label column on desktop: wide enough for the longest label (wrapped to two lines past ~30 chars).
@@ -235,6 +236,7 @@ function rankedSvg(v: RankedChangeVisual, o: { width: number; mobile: boolean })
   const x0 = labelW + 8, x1 = W - chW - 10;
   const x = (val: number) => x0 + ((val - sc.min) / (sc.max - sc.min || 1)) * (x1 - x0);
   const top = 46;
+  const chg = harmoniseDecimals(rows.map((r) => signedFmt(r.change, unit)));
   let b = "";
   // key
   b += `<circle cx="${r1(m ? 5 : x0 + 5)}" cy="10" r="4" fill="#fff" stroke="${INK.ink3}" stroke-width="1.5"/>` + txt((m ? 5 : x0 + 5) + 9, 14, `${v.startLabel}${/avg|average/.test(v.startLabel) ? "" : ""}`, { size: 12, fill: INK.ink2 });
@@ -253,7 +255,7 @@ function rankedSvg(v: RankedChangeVisual, o: { width: number; mobile: boolean })
     g += line(xa, cy, xb, cy, "var(--c)", 2);
     g += `<circle cx="${r1(xa)}" cy="${r1(cy)}" r="4" fill="#fff" stroke="${INK.ink3}" stroke-width="1.5"/>`;
     g += `<circle cx="${r1(xb)}" cy="${r1(cy)}" r="4.5" fill="var(--c)" stroke="#fff" stroke-width="1"/>`;
-    g += txt(W, cy + 4.5, signedFmt(r.change, unit), { size: m ? 12.5 : 13, fill: INK.ink, weight: 600, anchor: "end" });
+    g += txt(W, cy + 4.5, chg[i], { size: m ? 12.5 : 13, fill: INK.ink, weight: 600, anchor: "end" });
     b += `<g class="mk"${tip(r.label, `${v.startLabel}: ${fmt(r.start, unit)}`, `${v.endLabel}: ${fmt(r.end, unit)}`, `Change: ${signedFmt(r.change, unit)}`)} tabindex="0">${g}</g>`;
     void up;
   });

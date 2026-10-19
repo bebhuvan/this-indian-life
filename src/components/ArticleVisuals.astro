@@ -7,7 +7,7 @@ import FigureCard from "./FigureCard.astro";
 import { renderFigure, cleanUnit } from "../data/figures";
 import { fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
 import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, viewBoxAspectRatio } from "../data/chartSvg";
-import { txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
+import { typeset, txt as almTxt, halo as almHalo, line as almLine, stripes as almStripes, scaleKey as almScaleKey, SCALES as ALM_SCALES, type Stops as AlmStops } from "../data/almanac";
 
 type ChartExplainer = {
   visualId: string;
@@ -91,7 +91,6 @@ const sourceNames: Record<string, string> = {
   ceew: "CEEW",
   imd: "IMD",
   nfhs: "NFHS",
-  mospi: "MoSPI",
   hces: "MoSPI HCES",
   "mospi-hces": "MoSPI HCES",
   srs: "Sample Registration System",
@@ -165,7 +164,60 @@ const sourceNames: Record<string, string> = {
   "imd-temperature": "IMD",
   cwc: "CWC",
   psmsl: "PSMSL",
-  "ophi-undp": "OPHI and UNDP"
+  "ophi-undp": "OPHI and UNDP",
+  ncp: "National Commission on Population",
+  states: "State statistics",
+  poverty: "Poverty estimates",
+  water: "Ministry of Jal Shakti",
+  "trade-derived": "UN Comtrade",
+  "rupee-derived": "RBI",
+  "gold-derived": "World Gold Council + RBI",
+  "oil-shock-derived": "PPAC + RBI",
+  "heat-mortality": "Heat mortality studies",
+  "morth-road-accidents-2024": "MoRTH, Road Accidents in India 2024",
+  "road-safety-2024": "MoRTH, Road Accidents in India 2024",
+  "who-road-safety-2023": "WHO Global Status Report on Road Safety 2023",
+  "nss-health-rounds": "NSS health rounds",
+  "nss80-health": "NSS 80th round",
+  nss80: "NSS 80th round",
+  nssladder: "NSS",
+  nhp: "National Health Profile",
+  nhpcod: "National Health Profile",
+  nha: "National Health Accounts",
+  nfhs6: "NFHS-6",
+  "rbi-trade": "RBI",
+  sflc: "SFLC.in",
+  meity: "MeitY",
+  siam: "SIAM",
+  "climatetrace-derived": "Climate TRACE",
+  "owid-derived": "Our World in Data",
+  "era5-derived": "Copernicus ERA5",
+  "berkeley-derived": "Berkeley Earth",
+  "rbi-handbook-states": "RBI Handbook of Statistics on Indian States",
+  "rbi-state-finances+rbi-handbook-states": "RBI State Finances + Handbook on States",
+  tinbergen: "Tinbergen Institute",
+  nber: "NBER",
+  undp: "UNDP",
+  "undp-hch": "UNDP",
+  ipp: "Indian Public Policy data",
+  "icrisat-dld": "ICRISAT District Level Database",
+  "des-agri": "Directorate of Economics and Statistics",
+  datacommons: "Data Commons",
+  accessnow: "Access Now",
+  "ministry-tourism-boi": "Ministry of Tourism",
+  "finance-ministry-lrs-tcs": "Ministry of Finance",
+  "finance-acts": "Finance Acts",
+  "rnd-india": "DST / NSTMIS",
+  offswitch: "SFLC.in",
+  energy: "Energy statistics",
+  air: "Air quality data",
+  lasidad: "LASIDAD",
+  ictd: "ICTD",
+  icrier: "ICRIER",
+  "crs-mccd": "CRS + MCCD",
+  crsmccd: "CRS + MCCD",
+  adi: "ADI",
+  work: "MoSPI + ILOSTAT"
 };
 
 function viewBoxSize(viewBox: string) {
@@ -303,6 +355,24 @@ function compactPeriodLabel(date: string) {
   return month ? `${month} ${match[1]}` : String(date);
 }
 
+/** How a single point's date is written beside it. Annual series dated 31 March are
+ *  financial years ("2025-26"); other annual series are years; monthly ones "Mar 2026". */
+function pointDateLabel(date: string, points: Array<{ date: string }>) {
+  const d = String(date);
+  const m = d.match(/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/);
+  if (!m) return d.slice(0, 10);
+  const tails = new Set(points.map((q) => String(q.date).slice(4)));
+  const years = points.map((q) => Number(String(q.date).slice(0, 4)));
+  const annual = tails.size === 1 && years.every((y, i) => i === 0 || y - years[i - 1] >= 1);
+  if (!m[2] || annual) {
+    if (annual && m[2] === "03" && m[3] === "31") return `${Number(m[1]) - 1}-${m[1].slice(2)}`;
+    return m[1];
+  }
+  const days = new Set(points.map((q) => String(q.date).slice(8)));
+  if (m[3] && days.size > 2) return `${Number(m[3])} ${compactPeriodLabel(`${m[1]}-${m[2]}`)}`;
+  return compactPeriodLabel(`${m[1]}-${m[2]}`);
+}
+
 function svgCoord(value: number, precision = 1) {
   return Number(value.toFixed(precision)).toString();
 }
@@ -328,7 +398,10 @@ function cardClass(visualIndex: number, visual: VisualSpec, leadFirst = true) {
 }
 
 function sourceName(sourceId: string) {
-  return sourceNames[sourceId] || sourceId;
+  if (sourceNames[sourceId]) return sourceNames[sourceId];
+  // Unknown ids print as words, short ones as acronyms: "foo-bar" -> "FOO Bar".
+  return String(sourceId).replace(/-derived$/, "").split(/[-_]/).filter(Boolean)
+    .map((part) => (part.length <= 4 ? part.toUpperCase() : part.charAt(0).toUpperCase() + part.slice(1))).join(" ");
 }
 
 function sourceLabel(source: VisualSpec["source"]) {
@@ -395,7 +468,8 @@ function cleanSubtitle(value: string, sourceId: string) {
     .replace(" · value", "")
     .replace(" · NumericValue", "")
     .split(" · ")
-    .filter((seg) => !isMachineId(seg))
+    // Upstream codes (SP.POP.TOTL, NY.GDP.PCAP.CD) belong in the source line, not the subtitle.
+    .filter((seg) => !isMachineId(seg) && !/^[A-Z0-9]+(\.[A-Z0-9]+){1,}$/.test(seg.trim()))
     .join(" · ");
 }
 
@@ -827,13 +901,16 @@ function renderLineSvg(visual: LineVisual, g: ReturnType<typeof lineGeometry>, o
       // the latest value, written beside its point
       const lx = p.latestX + (m ? 8 : 10);
       b += almTxt(lx, p.latestY + 5, p.endLabelText, { size: m ? 13 : 15, fill: "#121212", weight: 600 });
-      b += almTxt(lx, p.latestY + (m ? 19 : 22), String(p.latest.date).slice(0, 7), { size: m ? 10.5 : 11.5, fill: "#8a8a8a" });
+      b += almTxt(lx, p.latestY + (m ? 19 : 22), pointDateLabel(p.latest.date, p.points), { size: m ? 10.5 : 11.5, fill: "#8a8a8a" });
       const first = p.points[0];
       if (first && p.points.length > 5 && g.dateMode) {
         const fx = pad.l + 2, fy = g.y(first.value);
         b += `<circle cx="${svgCoord(pad.l)}" cy="${svgCoord(fy)}" r="${m ? 3 : 3.5}" fill="${p.color}" stroke="#fff" stroke-width="1.5"/>`;
         const maxAbs = Math.max(1e-9, ...p.points.map((q) => Math.abs(q.value)));
-        b += almHalo(fx + 6, Math.max(pad.t + 10, fy - 10), `${endLabelInScale(first.value, maxAbs, visual.unit, m, m)} in ${String(first.date).slice(0, 4)}`, { size: m ? 11.5 : 13, fill: "#121212", weight: 600 });
+        // In the chart's scale unless that would round the first value away ("₹0 lakh"),
+        // in which case it is written in its own.
+        const firstText = endLabelInScale(first.value, Math.abs(first.value) / maxAbs < 0.05 ? Math.abs(first.value) : maxAbs, visual.unit, m, m);
+        b += almHalo(fx + 6, Math.max(pad.t + 10, fy - 10), `${firstText} in ${pointDateLabel(first.date, p.points)}`, { size: m ? 11.5 : 13, fill: "#121212", weight: 600 });
       }
     } else {
       const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + (m ? 9 : 12);
@@ -922,8 +999,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (visual.kind === "almanac") {
           return (
             <FigureCard cls={`${base} alm-card alm-${visual.form}`} {...card} figNote={visual.stat}>
-              <Fragment set:html={visual.svg} />
-              <Fragment set:html={visual.svgM} />
+              <Fragment set:html={typeset(visual.svg)} />
+              <Fragment set:html={typeset(visual.svgM)} />
             </FigureCard>
           );
         }
@@ -938,8 +1015,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const gm = lineGeometry(visual as LineVisual, isLarge, narrow, undefined, true);
           return (
             <FigureCard cls={base} {...card}>
-              <Fragment set:html={renderLineSvg(visual as LineVisual, g, { isLead, mobile: false, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-d alm-line" : "viz-svg viz-d alm-line" })} />
-              <Fragment set:html={renderLineSvg(visual as LineVisual, gm, { isLead, mobile: true, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-m alm-line" : "viz-svg viz-m alm-line" })} />
+              <Fragment set:html={typeset(renderLineSvg(visual as LineVisual, g, { isLead, mobile: false, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-d alm-line" : "viz-svg viz-d alm-line" }))} />
+              <Fragment set:html={typeset(renderLineSvg(visual as LineVisual, gm, { isLead, mobile: true, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-m alm-line" : "viz-svg viz-m alm-line" }))} />
               {visual.lines.length > 1 && (
                 // Desktop names each line at its end; phones show values only, so the key
                 // appears there, and on desktop only when there are too many lines to label.
@@ -966,10 +1043,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const stripeYears = stripes.stripes.map((st) => ({ year: Number(String(st.date).slice(0, 4)), value: st.value }));
           return (
             <FigureCard cls={base} {...card}>
-              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: narrow ? 508 : 1040, height: 210, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-d alm"')} />
-              <Fragment set:html={almStripes(stripeYears, { stops: stripeStops, width: 346, height: 170, compact: true, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-m alm"')} />
+              <Fragment set:html={typeset(almStripes(stripeYears, { stops: stripeStops, width: narrow ? 508 : 1040, height: 210, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-d alm"'))} />
+              <Fragment set:html={typeset(almStripes(stripeYears, { stops: stripeStops, width: 346, height: 170, compact: true, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-m alm"'))} />
               <div class="alm-stripe-key">
-                <Fragment set:html={almScaleKey(stripeStops, [[stripeStops[0][0], lowLabel], [stripes.center, "Normal"], [stripeStops[stripeStops.length - 1][0], highLabel]], 300)} />
+                <Fragment set:html={typeset(almScaleKey(stripeStops, [[stripeStops[0][0], lowLabel], [stripes.center, "Normal"], [stripeStops[stripeStops.length - 1][0], highLabel]], 300))} />
               </div>
             </FigureCard>
           );
@@ -991,9 +1068,9 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                     <div class="lazy-svg-frame choro-map-frame" data-lazy-svg={svgUrl} aria-label={cho.title} style={`aspect-ratio:${viewBoxAspectRatio(cho.viewBox)}`}></div>
                     <noscript><img class="viz-svg choro-map" src={svgUrl} alt={cho.title} loading="lazy" /></noscript>
                   </>
-                ) : <Fragment set:html={renderChoroplethSvg(cho)} />}
+                ) : <Fragment set:html={typeset(renderChoroplethSvg(cho))} />}
                 <div class="choro-side">
-                  <Fragment set:html={renderChoroplethStrip(cho)} />
+                  <Fragment set:html={typeset(renderChoroplethStrip(cho))} />
                   {cho.regions.length > valued.length ? <span class="choro-nodata"><i></i>Outlined: not surveyed</span> : null}
                 </div>
               </div>
@@ -1007,8 +1084,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (!fig) return null;
         return (
           <FigureCard cls={`${base} alm-card fig-card fig-${visual.kind}`} {...card} figNote={fig.note}>
-            <Fragment set:html={fig.svg} />
-            <Fragment set:html={fig.svgM} />
+            <Fragment set:html={typeset(fig.svg)} />
+            <Fragment set:html={typeset(fig.svgM)} />
           </FigureCard>
         );
       })}
