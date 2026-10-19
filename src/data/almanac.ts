@@ -32,6 +32,16 @@ export const typeset = (svg: string) =>
     .replace(/data-tip="([^"]*)"/g, (_m, t: string) => `data-tip="${minus(t)}"`);
 
 type TextOpts = { size?: number; fill?: string; anchor?: "start" | "middle" | "end"; weight?: number };
+/** Words into lines of at most `chars` characters. */
+export function wrapWords(s: string, chars: number) {
+  const out: string[] = [];
+  let cur = "";
+  for (const w of String(s).split(/\s+/).filter(Boolean)) {
+    if (cur && (cur + " " + w).length > chars) { out.push(cur); cur = w; } else cur = cur ? `${cur} ${w}` : w;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
 export const txt = (x: number, y: number, s: string | number, o: TextOpts = {}) =>
   `<text x="${r1(x)}" y="${r1(y)}" font-family="${F}" font-size="${o.size ?? 12}" fill="${o.fill ?? INK.ink2}"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}${o.weight ? ` font-weight="${o.weight}"` : ""}>${esc(s)}</text>`;
 /** Text with a white halo so it stays legible where it crosses marks. */
@@ -252,7 +262,7 @@ export function stripes(points: Array<{ year: number; value: number; flag?: bool
   }
   for (const p of points) if (p.flag) b += `<rect x="${r1(xOf(p.year) + sw / 2 - 2)}" y="${top + bh + 5}" width="4" height="4" fill="${INK.sindoor}"/>`;
   const ay = top + bh + 26, st = o.tickStep ?? (sm ? 30 : 10);
-  for (let yr = Math.ceil((y0 + 5) / st) * st; yr <= points[points.length - 1].year; yr += st) b += txt(xOf(yr) + sw / 2, ay, yr, { ...AX, size: sm ? 10.5 : 11.5, anchor: "middle" });
+  for (let yr = Math.ceil((y0 + 5) / st) * st; yr <= points[points.length - 1].year; yr += st) { const tx = xOf(yr) + sw / 2; b += txt(tx, ay, yr, { ...AX, size: sm ? 10.5 : 11.5, anchor: tx > W - 16 ? "end" : tx < 16 ? "start" : "middle" }); }
   return svg(W, H, b, o.label);
 }
 
@@ -283,8 +293,11 @@ export function scatterFit(pts: ScatterPoint[], o: {
   const W = o.width ?? 1040, sm = W < 700;
   // On a phone the size key moves under the plot, where it cannot sit on a point.
   const keyBelow = sm && pts.some((p) => p.size != null) && !!o.sizeKey;
-  const H = (o.height ?? 460) + (keyBelow ? 80 : 0);
-  const ml = 30, mr = 10, mt = 30, mb = 50 + (keyBelow ? 80 : 0);
+  // Axis titles wrap to the figure instead of running off it; the plot gives up the room.
+  const fitLines = (t: string, room: number) => (t.length * 11.5 * 0.56 <= room ? [t] : wrapWords(t, Math.floor(room / (11.5 * 0.56))));
+  const xT = fitLines(`${o.xTitle} →`, W - 30 - 4), yT = fitLines(`${o.yTitle} ↑`, W - 4);
+  const H = (o.height ?? 460) + (keyBelow ? 80 : 0) + (xT.length - 1) * 14 + (yT.length - 1) * 14;
+  const ml = 30, mr = 10, mt = 30 + (yT.length - 1) * 14, mb = 50 + (keyBelow ? 80 : 0) + (xT.length - 1) * 14;
   const x = scale(o.x[0], o.x[1], ml, W - mr), y = scale(o.y[0], o.y[1], H - mb, mt);
   const xf = o.xFmt ?? ((v: number) => String(v)), yf = o.yFmt ?? ((v: number) => v.toFixed(1));
   const sized = pts.some((p) => p.size != null), rMax = sm ? 15 : 22;
@@ -294,8 +307,8 @@ export function scatterFit(pts: ScatterPoint[], o: {
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
   for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
-  b += txt(ml, y(o.y[0]) + 46, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
-  b += txt(0, 12, `${o.yTitle} ↑`, { size: 11.5, fill: INK.ink2 });
+  xT.forEach((t, i) => (b += txt(ml, y(o.y[0]) + 46 + i * 14, t, { size: 11.5, fill: INK.ink2 })));
+  yT.forEach((t, i) => (b += txt(0, 12 + i * 14, t, { size: 11.5, fill: INK.ink2 })));
   if (o.under) b += o.under(x, y);
   if (o.refY) b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3");
   let stats: { r: number; n: number; slope: number } | null = null;
@@ -350,7 +363,7 @@ export function scatterFit(pts: ScatterPoint[], o: {
     b += halo(pick.tx, pick.ty, text, { size: fs, fill: INK.ink, anchor: pick.an as TextOpts["anchor"] });
   }
   if (sized && o.sizeKey) {
-    const kx = keyBelow ? ml : sm ? W - 150 : W - 250, ky = keyBelow ? y(o.y[0]) + 92 : mt + 34;
+    const kx = keyBelow ? ml : sm ? W - 150 : W - 250, ky = keyBelow ? y(o.y[0]) + 92 + (xT.length - 1) * 14 : mt + 34;
     b += txt(kx, ky - 30, o.sizeTitle ?? "Size", { size: 11.5, fill: INK.ink2, weight: 500 });
     const offs = sm ? [6, 48, 108] : [8, 50, 116];
     o.sizeKey.forEach(([v, s], i) => {

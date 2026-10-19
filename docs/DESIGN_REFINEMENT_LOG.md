@@ -97,5 +97,6 @@ Status: **done**, **partly**, **open**.
 | 32 | Citation and edit history were boxed grey panels with tiny letter-spaced buttons | `ArticleCite.astro`, edit log | Ruled, unboxed, citation set in Newsreader | done |
 | 33 | Em dashes and spaced hyphens in 45 chart titles, subtitles and reading-list labels | registry | Commas, colons and the house middle dot | done |
 | 34 | Projected years drawn exactly like measured ones (UN population to 2100, MoHFW ageing to 2036, CMIP6 scenarios, the income catch-up) | line charts, registry | `projectedAfter`: dashed after the last measured year, faint ground, "projected" hairline; set on 15 charts from each source's note | done |
+| 35 | Phone figures stopped 22 px short of the column on larger phones; bar captions, axis titles, change-card notes and share labels ran off the edge; month ticks printed "undefined"; financial years ("2017-18") were read as months; ticks, end labels and band labels collided | all figures | Phone figures fill the column; captions and notes wrap; FY axes; every tick set thinned so no two touch; end values inside the plot on phones when clear of the lines. Audit of 1,024 figures at 412 and 1440 px: overlaps 17 and 7 to 0, spills 33 and 10 to 0 or under 8 px | done |
 
 New forms added this round are listed in `docs/ALMANAC_DESIGN_SYSTEM.md`.

@@ -30,8 +30,11 @@ const attr = (s: string) => esc(s).replace(/"/g, "&quot;");
 /** A tooltip on a mark: first part is the heading, the rest are value lines. */
 export const tip = (head: string, ...lines: string[]) => ` data-tip="${attr([head, ...lines].join("|"))}"`;
 const textW = (s: string, size: number, bold = false) => String(s).length * size * (bold ? 0.6 : 0.56);
+/** Width of a label, counting capitals wider: "SOUTH AFRICA" is a third wider than "South Africa". */
+const labelTextW = (s: string, size: number) => [...String(s)].reduce((w, ch) => w + size * (/[A-Z]/.test(ch) ? 0.68 : /[\s.,'()-]/.test(ch) ? 0.32 : 0.54), 0);
 function svgDoc(cls: string, w: number, h: number, body: string, label: string, extra = "") {
-  // max-width: a figure drawn narrower than its card is never stretched (text would grow).
+  // max-width: a desktop figure drawn narrower than its card is never stretched (text would
+  // grow). The phone drawing drops it in renderFigure.
   return `<svg class="viz-svg alm fig ${cls}" viewBox="0 0 ${w} ${r1(h)}" style="max-width:${w}px" role="img" aria-label="${attr(label)}"${extra}>${body}</svg>`;
 }
 /** The unit, once, in the top-left corner of the plot. */
@@ -70,7 +73,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   // Fine bars with room between them: a figure, not a wall of ink. The values carry the weight.
   const labSize = phone ? 13 : 13.5, valSize = phone ? 12.5 : 13.5, few = rows.length <= 6, barH = phone ? (few ? 11 : 8) : few ? 13 : rows.length <= 12 ? 10 : 8;
   // On a phone, labels go above their bars only when they are too long to sit beside them.
-  const m = phone && Math.max(...rows.map((r) => r.label.length)) * labSize * 0.54 > W * 0.36;
+  const m = phone && Math.max(...rows.map((r) => labelTextW(r.label, labSize))) > W * 0.36;
   const vals = rows.map((r) => r.value), lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
   const neg = lo < 0;
   // One precision per group: groups often come from different sources (World Bank to two
@@ -85,8 +88,8 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const posValW = Math.max(0, ...rows.filter((r) => r.value >= 0).map((r) => textW(rowTxt(r), valSize, true))) + 10;
   const negValW = neg ? Math.max(0, ...rows.filter((r) => r.value < 0).map((r) => textW(rowTxt(r), valSize, true))) + 10 : 0;
   // Label column on desktop: wide enough for the longest label (wrapped to two lines past ~30 chars).
-  const longest = Math.max(...rows.map((r) => Math.min(r.label.length, 34)));
-  const labelW = m ? 0 : Math.min(W * 0.36, Math.max(80, longest * labSize * 0.54 + 18));
+  const longest = Math.max(...rows.map((r) => labelTextW(r.label.slice(0, 34), labSize)));
+  const labelW = m ? 0 : Math.min(W * 0.36, Math.max(80, longest + 18));
   const x0 = labelW + negValW, x1 = W - posValW - 2;
   let xs: (v: number) => number;
   let logTicks: number[] = [];
@@ -99,7 +102,17 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     xs = (v) => x0 + ((v - lo) / Math.max(1e-9, hi - lo)) * (x1 - x0);
   }
   const zx = o.log ? x0 : xs(0);
-  const top = m && o.log ? 56 : 26;
+  // The header: the unit (wrapped to the figure, and moved to the left edge when it would
+  // run past the right one), then on a log scale the note and the gridline values, each on
+  // its own row so none of the three can run into another.
+  const capU = cleanUnit(unit), capSize = m ? 11.5 : 12, note = "Log scale: each gridline is ten times the last", noteSize = m ? 11 : 11.5;
+  const capX = o.log || m || (capU && textW(capU, capSize) > W - labelW) ? 0 : labelW;
+  const capLines = !capU ? [] : textW(capU, capSize) > W - capX ? wrap(capU, Math.floor((W - capX) / (capSize * 0.56)), 3) : [capU];
+  const capBase = capLines.length ? 12 + (capLines.length - 1) * 14 : 0;
+  const noteInline = o.log && capLines.length <= 1 && capX + (capLines[0] ? textW(capLines[0], capSize) : 0) + 24 + textW(note, noteSize) < W;
+  const noteBase = !o.log ? 0 : noteInline ? 12 : capBase + 15;
+  const tickBase = o.log ? Math.max(capBase, noteBase) + 18 : 0;
+  const top = o.log ? tickBase + 8 : Math.max(26, capBase + 14);
   const zeroSegs: Array<[number, number]> = [];
   let y = top, b = "";
   const rowsOut: string[] = [];
@@ -117,7 +130,9 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     const common = items.length > 1 ? items[0].label.match(/\s\([^)]+\)$/)?.[0] : undefined;
     const strip = common && items.every((r) => r.label.endsWith(common)) ? common : "";
     for (const r of items) {
-      const lines = wrap(strip ? r.label.slice(0, -strip.length) : r.label, chars, 2);
+      const own = strip ? r.label.slice(0, -strip.length) : r.label;
+      // Capitals run wider, so an all-caps label wraps sooner.
+      const lines = wrap(own, Math.max(6, Math.floor(chars * (own.length * labSize * 0.54) / Math.max(1, labelTextW(own, labSize)))), 2);
       const nat = isNational(r.label);
       const rowH = m ? 16 + lines.length * 15 + barH : Math.max(barH + (few ? 22 : 16), lines.length * 15 + 12);
       const by = m ? y + lines.length * 15 + 4 : y + rowH / 2 - barH / 2;
@@ -142,13 +157,21 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const H = y + 8;
   let axis = "";
   if (o.log) {
-    for (const t of logTicks) { axis += line(xs(t), top - 4, xs(t), H - 8, INK.grid, 1); axis += txt(xs(t), top - 8, fmtU(t, unit), { size: 11.5, fill: INK.ink3, anchor: xs(t) < 20 ? "start" : xs(t) > W - 20 ? "end" : "middle" }); }
-    // On a phone the note takes its own line under the unit, so the two never collide.
-    axis += m ? txt(0, 26, "Log scale: each gridline is ten times the last", { size: 11, fill: INK.ink3 }) : txt(W, 12, "Log scale: each gridline is ten times the last", { size: 11.5, fill: INK.ink3, anchor: "end" });
+    // Gridline values: the edge ones anchored inward, and any that would touch the one before dropped.
+    let lastR = -Infinity;
+    for (const t of logTicks) {
+      axis += line(xs(t), top - 4, xs(t), H - 8, INK.grid, 1);
+      const label = fmtU(t, unit), w = textW(label, 11.5), anchor = xs(t) - w / 2 < 0 ? "start" : xs(t) + w / 2 > W ? "end" : "middle";
+      const left = anchor === "start" ? xs(t) : anchor === "end" ? xs(t) - w : xs(t) - w / 2;
+      if (left < lastR + 6) continue;
+      lastR = left + w;
+      axis += txt(xs(t), tickBase, label, { size: 11.5, fill: INK.ink3, anchor });
+    }
+    axis += noteInline ? txt(W, 12, note, { size: noteSize, fill: INK.ink3, anchor: "end" }) : txt(0, noteBase, note, { size: noteSize, fill: INK.ink3 });
   }
   if (m && !o.log) for (const [a, c] of zeroSegs) axis += line(zx, a, zx, c, INK.ink, 1);
   else axis += line(zx, top - 4, zx, H - 8, INK.ink, 1);
-  const cap = unitCaption(m ? 0 : labelW, 12, unit, m ? 11.5 : 12);
+  const cap = capLines.length ? multiText(capX, 12, capLines, { size: capSize, fill: INK.ink3, lh: 14 }) : "";
   return svgDoc("fig-bars", W, H, cap + axis + b + rowsOut.join(""), o.label);
 }
 
@@ -179,15 +202,18 @@ function placeOutside(outs: Array<{ cx: number; text: string[]; color: string }>
   const rows: Array<Array<[number, number]>> = [];
   let b = "", maxRow = -1;
   for (const o of outs) {
-    const w = textW(o.text[0], size) + 6;
-    let x = Math.min(Math.max(0, o.cx - w / 2), W - w);
+    // A long label wraps to at most two thirds of the figure, so it can never run off an edge.
+    const lines = textW(o.text[0], size) + 6 > W * 0.66 ? wrap(o.text[0], Math.floor((W * 0.66) / (size * 0.56)), 3) : [o.text[0]];
+    const w = Math.max(...lines.map((l) => textW(l, size))) + 6;
+    const x = Math.min(Math.max(0, o.cx - w / 2), W - w);
+    const free = (r: number) => lines.every((_, k) => !rows[r + k]?.some(([a, c]) => x < c + 8 && x + w > a - 8));
     let r = 0;
-    while (rows[r]?.some(([a, c]) => x < c + 8 && x + w > a - 8)) r++;
-    (rows[r] ??= []).push([x, x + w]);
-    maxRow = Math.max(maxRow, r);
+    while (!free(r)) r++;
+    lines.forEach((_, k) => (rows[r + k] ??= []).push([x, x + w]));
+    maxRow = Math.max(maxRow, r + lines.length - 1);
     const ty = y0 + 20 + r * 17;
     b += line(o.cx, y0 + 2, o.cx, ty - size + 1, INK.ink3, 0.75);
-    b += txt(x + w / 2, ty, o.text[0], { size, fill: INK.ink, anchor: "middle" });
+    b += multiText(x + w / 2, ty, lines, { size, fill: INK.ink, anchor: "middle", lh: 17 });
   }
   return { body: b, h: outs.length ? 22 + (maxRow + 1) * 17 : 0 };
 }
@@ -223,8 +249,9 @@ function pyramidSvg(v: PyramidVisual, o: { width: number; mobile: boolean }) {
   const W = o.width, m = o.mobile, mid = m ? 46 : 64, valSize = m ? 11 : 12;
   const n = v.rows.length, rowH = m ? 15 : 21, gap = m ? 2 : 4, top = 30;
   const max = Math.max(...v.rows.flatMap((r) => [r.male, r.female]), 1);
-  const valW = m ? 54 : 70;
   const pv = (x: number) => (m ? fmt(x, v.unit).replace(" crore", " cr") : fmt(x, v.unit));
+  // The value gutter is as wide as the longest value printed, not a fixed allowance.
+  const valW = Math.max(...v.rows.flatMap((r) => [r.male, r.female]).map((x) => textW(pv(x), valSize))) + 10;
   const half = (W - mid) / 2 - valW;
   const cx = W / 2;
   const ml = cx - mid / 2, fr = cx + mid / 2;
@@ -304,12 +331,21 @@ function rankedDivergeSvg(v: RankedChangeVisual, o: { width: number; mobile: boo
 // =====================================================================
 function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
   const items = v.items.slice(0, 4), m = o.mobile;
-  const cols = m ? 1 : items.length, gap = 32, cw = Math.min(m ? o.width : 420, (o.width - gap * (cols - 1)) / cols), ch = m ? 150 : 176;
+  const cols = m ? 1 : items.length, gap = 32, cw = Math.min(m ? o.width : 420, (o.width - gap * (cols - 1)) / cols);
   const W = m ? o.width : cols * cw + gap * (cols - 1);
   // A change in a percentage is a change in points, not a per cent of a per cent.
   const isPct = /%|percent/i.test(v.unit);
   const val = (x: number) => countFmt(x, v.unit) ?? fmt(x, v.unit);
   const chg = (x: number) => (isPct ? `${x > 0 ? "+" : x < 0 ? "−" : ""}${Math.abs(x).toLocaleString("en-IN", { maximumFractionDigits: 1 })} points` : countFmt(x, v.unit) ? `${x > 0 ? "+" : ""}${countFmt(x, v.unit)}` : signedFmt(x, v.unit));
+  // The closing facts wrap to the card; past a tenfold rise a multiple reads better than
+  // a percentage ("+1,67,49,130%").
+  const factsOf = (it: (typeof items)[number]) => {
+    const yrs = yearSpan(it.start.date, it.end.date);
+    const growth = Math.abs(it.pctChange) >= 1000 && it.start.value > 0 ? `${(it.end.value / it.start.value).toLocaleString("en-IN", { maximumFractionDigits: it.end.value / it.start.value >= 100 ? 0 : 1 })} times the starting value` : `${pct(it.pctChange)} on the starting value`;
+    return wrap([growth, yrs ? `${chg(it.change / yrs)} a year on average` : ""].filter(Boolean).join("  ·  "), Math.floor(cw / (12 * 0.56)), 3);
+  };
+  const factLines = Math.max(1, ...items.map((it) => factsOf(it).length));
+  const ch = (m ? 150 : 176) + (factLines - 1) * 15;
   let b = "";
   items.forEach((it, i) => {
     const c = i % cols, r = Math.floor(i / cols), ox = c * (cw + gap), oy = r * (ch + 18);
@@ -319,7 +355,8 @@ function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
     b += txt(ox, oy + 74, chg(it.change), { size: m ? 28 : 32, fill: "var(--c)", weight: 500 });
     b += txt(ox, oy + 96, `from ${it.start.date} to ${it.end.date}`, { size: 12, fill: INK.ink2 });
     // a two-point slope: start value to end value
-    const sx0 = ox, sx1 = ox + cw - 4, sy = oy + 128;
+    // Inset by the dots' radius so the end dots sit inside the figure.
+    const sx0 = ox + 5, sx1 = ox + cw - 6, sy = oy + 128;
     b += line(sx0, sy, sx1, sy, INK.grid, 1);
     const lo = Math.min(it.start.value, it.end.value, 0), hi = Math.max(it.start.value, it.end.value);
     const px = (val: number) => sx0 + ((val - lo) / (hi - lo || 1)) * (sx1 - sx0);
@@ -330,13 +367,13 @@ function changeSvg(v: ChangeVisual, o: { width: number; mobile: boolean }) {
     // the two values the change runs between, above their dots
     const sxS = px(it.start.value), sxE = px(it.end.value), apart = Math.abs(sxE - sxS) > 90;
     if (apart) {
-      b += txt(sxS, sy - 10, val(it.start.value), { size: 12, fill: INK.ink2, anchor: sxS < sx0 + 30 ? "start" : "middle" });
-      b += txt(sxE, sy - 10, val(it.end.value), { size: 12, fill: INK.ink, weight: 600, anchor: sxE > sx1 - 30 ? "end" : "middle" });
+      // Each value is anchored inward at whichever end of the line it sits (a fall puts the start on the right).
+      const anchorAt = (x: number) => (x < sx0 + 30 ? "start" : x > sx1 - 30 ? "end" : "middle");
+      b += txt(sxS, sy - 10, val(it.start.value), { size: 12, fill: INK.ink2, anchor: anchorAt(sxS) });
+      b += txt(sxE, sy - 10, val(it.end.value), { size: 12, fill: INK.ink, weight: 600, anchor: anchorAt(sxE) });
     }
     b += `</g>`;
-    const yrs = yearSpan(it.start.date, it.end.date);
-    const facts = [`${pct(it.pctChange)} on the starting value`, yrs ? `${chg(it.change / yrs)} a year on average` : ""].filter(Boolean).join("  ·  ");
-    b += txt(ox, sy + 24, facts, { size: 12, fill: INK.ink2 });
+    b += multiText(ox, sy + 24, factsOf(it), { size: 12, fill: INK.ink2, lh: 15 });
   });
   const rowsN = Math.ceil(items.length / cols);
   return svgDoc("fig-change", W, rowsN * (ch + 18), b, v.title);
@@ -371,7 +408,8 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
     const sc = o.ticks ? niceScale(lo, hi, o.tickCount ?? 3) : { min: lo - (hi - lo) * 0.08, max: hi + (hi - lo) * 0.08, ticks: [] as number[] };
     const ts = all.map((q) => yearOf(q.date)).filter(Number.isFinite);
     const t0 = Math.min(...ts), t1 = Math.max(...ts);
-    const padL = o.ticks ? (m ? 26 : 32) : 0, padR = 4;
+    // The axis gutter is as wide as its widest value ("-50%" needs more than "0").
+    const padL = o.ticks ? Math.max(m ? 26 : 32, ...sc.ticks.map((t) => textW(o.valueFmt(t), 11) + 7)) : 0, padR = 4;
     const px = (t: number) => ox + padL + ((t - t0) / (t1 - t0 || 1)) * (pw - padL - padR);
     const py = (val: number) => oy + head + ph - ((val - sc.min) / (sc.max - sc.min || 1)) * ph;
     // head: name left, the panel's figure right
@@ -482,7 +520,8 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
   const padR = Math.max(...v.series.map((s) => textW(endTxt(s), labelSize, true))) + 16;
   const padL = 40, top = m ? 30 + 20 * Math.ceil(v.series.length / 2) : 30, bot = 34;
   const x = (h: number) => padL + (h / 23) * (W - padL - padR), y = (val: number) => H - bot - ((val - sc.min) / (sc.max - sc.min)) * (H - top - bot);
-  let b = unitCaption(0, m ? top - 6 : 12, v.unit, m ? 11.5 : 12);
+  // On a phone the unit sits just above the plot, so it starts where the plot does, clear of the top tick.
+  let b = unitCaption(m ? padL : 0, m ? top - 6 : 12, v.unit, m ? 11.5 : 12);
   // Phones print values only at the line ends, so the series are named in a key above.
   if (m) v.series.forEach((s, i) => { const kx = (i % 2) * (W / 2), ky = 12 + Math.floor(i / 2) * 20, c = s.color ?? SERIES[i % SERIES.length]; b += line(kx, ky - 4, kx + 16, ky - 4, c, 2.5) + txt(kx + 22, ky, s.label, { size: 12, fill: INK.ink2 }); });
   if (v.gap) {
@@ -630,7 +669,9 @@ export function renderFigure(visual: VisualSpec, ctx: FigureContext): Figure | n
   const f = renderRaw(visual, ctx);
   if (!f) return null;
   const tag = (s: string, c: string) => s.replace(/^<svg class="viz-svg /, `<svg class="viz-svg ${c} `);
-  return { ...f, svg: tag(f.svg, "viz-d"), svgM: tag(f.svgM, "viz-m") };
+  // A phone figure fills the column: phones run 360 to 430 wide, and capping the 346 drawing
+  // left a dead strip down the right of every figure on the larger ones.
+  return { ...f, svg: tag(f.svg, "viz-d"), svgM: tag(f.svgM, "viz-m").replace(/^(<svg[^>]*?) style="max-width:[\d.]+px"/, "$1") };
 }
 function renderRaw(visual: VisualSpec, ctx: FigureContext): Figure | null {
   const W = ctx.narrow ? W_NARROW : W_D;
