@@ -461,7 +461,7 @@
       return c > 0 ? fits(c, options(card)) : null;
     };
     const load = (card, w) => {
-      const key = `${card.dataset.rungBase}@${w}`;
+      const key = `${card.dataset.rungBase}.w${w}`;
       if (!cache.has(key)) {
         // In astro dev the drawings are in the card, in <template>s; a build writes them as files.
         const tpl = card.querySelector(`template[data-w="${w}"]`);
@@ -489,7 +489,7 @@
       try { html = await load(card, best.w); } catch (e) {
         // A failed fetch is forgotten and tried again, twice, a little later; the inline drawing
         // stands in meanwhile.
-        cache.delete(`${card.dataset.rungBase}@${best.w}`);
+        cache.delete(`${card.dataset.rungBase}.w${best.w}`);
         card.dataset.want = "";
         const tries = Number(card.dataset.tries || 0) + 1;
         card.dataset.tries = String(tries);

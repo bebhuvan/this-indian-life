@@ -24,7 +24,7 @@ export const isPhoneW = (w: number) => w < PHONE_W;
 export const PHONE_DRAW_W = 320;
 
 /** A rung's drawings, collected during the build and written beside the page by the
- *  integration in astro.config.mjs (dist/articles/<slug>/charts/<file>@<w>.json). */
+ *  integration in astro.config.mjs (dist/articles/<slug>/charts/<file>.w<w>.json; an "@" was redirected to "%40" by the host). */
 type Board = { w: number; path: string; svg: string };
 const g = globalThis as unknown as { __indicaArtboards?: Map<string, string> };
 export const artboardStore = () => (g.__indicaArtboards ??= new Map());
@@ -43,7 +43,7 @@ export function artboardsFor(base: string, file: string, inline: number[], draw:
   for (const w of rungs) {
     const svg = draw(w);
     if (!svg) continue;
-    boards.push({ w, path: `${base.replace(/^\/+/, "")}/${file}@${w}.json`, svg });
+    boards.push({ w, path: `${base.replace(/^\/+/, "")}/${file}.w${w}.json`, svg });
   }
   if (!dev) for (const b of boards) artboardStore().set(b.path, b.svg);
   return {

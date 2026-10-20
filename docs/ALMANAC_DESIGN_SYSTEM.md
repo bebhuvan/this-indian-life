@@ -183,7 +183,7 @@ and every renderer is a function of the width it draws at (`draw(w)` on a figure
 
 - The page carries two drawings per card, its desktop width (1040, 640 compact, 508 half) and the phone's (320).
   The other rungs are written at build time (the `indica-artboards` integration in `astro.config.mjs`) to
-  `articles/<slug>/charts/<file>@<w>.json` (`{ html }`: the SVG, and a line chart's key) and fetched on demand.
+  `articles/<slug>/charts/<file>.w<w>.json` (`{ html }`: the SVG, and a line chart's key) and fetched on demand.
   In `astro dev` they sit in the card as `<template data-w>` instead.
 - `initArtboards` in `public/article-actions.js` measures each card and shows the widest drawing no wider than the
   card (4% grace) and stretched at most a quarter: type is never shrunk, and enlarged by at most about a fifth.

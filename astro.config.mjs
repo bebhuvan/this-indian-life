@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 // Chart artboards (src/data/artboards.ts): each chart's drawings at the ladder's in-between
 // widths are collected while the pages render, then written beside each article as
-// charts/<file>@<width>.json for the page to fetch when a card is that wide.
+// charts/<file>.w<width>.json for the page to fetch when a card is that wide.
 const artboards = {
   name: "indica-artboards",
   hooks: {
