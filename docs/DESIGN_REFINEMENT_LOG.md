@@ -171,5 +171,6 @@ Status: **done**, **partly**, **open**.
 | 106 | The opening section, which has no heading, took the national chart from the section the chart map gave it to, so it showed as Fig. 1 | `viz.ts` (`bindSectionVisuals`) | The word-overlap fallback skips charts the map reserves for another section | done |
 | 107 | "India's states span the world" coloured the "World average" row and greyed the states its takeaway names | `almanac.ts` (`namedIn`) | A leading part of a label names it only as written, capitalised: "the world" no longer names "World average" | done |
 | 108 | The coda sat in a black box that broke the page | `ArticleFlow.astro`, `article.css` | A short rule in the domain ink, italic label and headline, the answer a size up, ending on the double danda (॥) | done |
+| 109 | On phones the site menu wrapped to two lines under the brand | `Nav.astro`, `almanac.css` | One line: the brand, the section you are in, and a Sections menu that opens every section at once (six topics with their inks, then Academy, Articles, About); closes on Escape or a tap outside | done |
 
 New forms added this round are listed in `docs/ALMANAC_DESIGN_SYSTEM.md`.

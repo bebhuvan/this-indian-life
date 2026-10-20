@@ -23,12 +23,39 @@ h1,h2,h3,h4{font-optical-sizing:auto}
 .domains{gap:24px}
 .domains a,.domains button{font-family:var(--sans);font-size:.875rem;letter-spacing:0;text-transform:none;font-weight:400;color:#3a3a3a;padding:2px 0 4px}
 .domains [data-d="reference"]{color:var(--dim)}
+/* Phones: one line. The brand, the section you are in, and a menu that opens every
+   section at once (a swipe strip would hide half of them without saying so). */
+.nav{position:relative}
+.nav-menu{display:none}
 @media(max-width:680px){
-  .nav{align-items:flex-start;flex-direction:column;gap:14px}
-  .brand{align-self:flex-start;font-size:1.5rem}
-  .domains{justify-content:flex-start;gap:10px 16px}
+  .nav{flex-direction:row;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 14px}
+  .brand{align-self:center;font-size:1.4rem;letter-spacing:-.01em;white-space:nowrap}
+  .domains{display:none}
+  .nav-menu{display:block}
+  .nav-menu summary{list-style:none;display:flex;align-items:center;gap:12px;cursor:pointer;font-family:var(--sans);font-size:.86rem;line-height:1}
+  .nav-menu summary::-webkit-details-marker{display:none}
+  .nav-menu summary:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+  .nm-here{color:var(--c-ink);font-weight:600;white-space:nowrap}
+  .nm-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:3px;padding:8px 10px 8px 11px;color:var(--ink);font-weight:500;white-space:nowrap}
+  .nm-btn svg{width:12px;height:12px;transition:transform .15s}
+  .nav-menu[open] .nm-btn{border-color:var(--ink)}
+  .nav-menu[open] .nm-btn svg{transform:rotate(180deg)}
+  .nm-panel{position:absolute;left:0;right:0;top:100%;z-index:40;background:var(--bg);border-bottom:2px solid var(--ink);padding:4px 0 18px;box-shadow:0 18px 30px rgba(0,0,0,.07)}
+  .nm-topics{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+  .nm-topics a{display:flex;align-items:center;gap:10px;padding:13px 0;font-family:var(--serif);font-size:1.2rem;color:var(--ink);text-decoration:none;border-bottom:1px solid #ececec}
+  .nm-topics a.on{font-weight:600}
+  .nm-topics i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--slate)}
+  .nm-topics [data-d="economy"] i{background:var(--economy)}
+  .nm-topics [data-d="people"] i{background:var(--people)}
+  .nm-topics [data-d="health"] i{background:var(--health)}
+  .nm-topics [data-d="energy"] i{background:var(--energy)}
+  .nm-topics [data-d="society"] i{background:var(--society)}
+  .nm-topics [data-d="climate"] i{background:var(--climate)}
+  .nm-ref{list-style:none;margin:14px 0 0;padding:0;display:flex;gap:22px;font-family:var(--sans);font-size:.88rem}
+  .nm-ref a{color:var(--mid);text-decoration:none}
+  .nm-ref a.on{color:var(--ink);font-weight:600}
 }
-@media(max-width:400px){.brand{letter-spacing:-.01em;font-size:1.4rem}}
+@media(max-width:380px){.nm-here{display:none}}
 
 /* ---------- domain chip / kicker ---------- */
 .domain-chip{gap:0}
