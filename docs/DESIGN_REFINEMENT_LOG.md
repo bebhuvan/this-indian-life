@@ -162,5 +162,6 @@ Status: **done**, **partly**, **open**.
 | 97 | Subtitles repeated the source the footer already names ("... · 1990-2025 · UNCTAD") | `cleanSubtitle` | A last segment equal to the source's name is dropped | done |
 | 98 | Phone ranked dot plots and bar lists set every name above its row when one name (Thiruvananthapuram) was a few units too long | `rankedSvg`, `barsSvg` | Names sit beside rows while the longest fits in two fifths of the width: 38 cities went from 1,813 to 1,167 px and 1,875 to 1,148 px | done |
 | 99 | The pyramid's women in near-black outweighed the men | `pyramidSvg` | Women take the domain's next data ink (`--s3`), equal in weight to the men's domain ink | done |
+| 100 | The warm paper and warm greys read as beige across the whole site | `indica.css`, `almanac.css`, renderers, exports | Ground back to `#ffffff` and greys back to neutral; story inks, gap bands, peaks, trends and the rest of the chart work kept. The ground stays one token (`--bg`) | done |
 
 New forms added this round are listed in `docs/ALMANAC_DESIGN_SYSTEM.md`.

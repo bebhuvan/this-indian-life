@@ -303,7 +303,7 @@ function calendarVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   let pts = e.transform === "pctChange" ? raw.slice(1).map((p, i) => ({ date: p.date, value: ((p.value - raw[i].value) / raw[i].value) * 100 })) : raw;
   const last = Number(pts[pts.length - 1].date.slice(0, 4));
   pts = pts.filter((p) => Number(p.date.slice(0, 4)) > last - (e.years ?? 3));
-  const stops: Stops = e.scale ? SCALES[e.scale] : [[-3, "#7a2816"], [-1.5, "#c24a2e"], [-0.4, "#f1cbba"], [0, "#e9e4da"], [0.4, "#9fcfc0"], [1.5, "#008a6e"], [3, "#0b5e4b"]];
+  const stops: Stops = e.scale ? SCALES[e.scale] : [[-3, "#7a2816"], [-1.5, "#c24a2e"], [-0.4, "#f1cbba"], [0, "#ededed"], [0.4, "#9fcfc0"], [1.5, "#008a6e"], [3, "#0b5e4b"]];
   const f = e.transform === "pctChange" ? (v: number) => `${v > 0 ? "+" : ""}${v.toFixed(2)}%` : unitFmt(a.unit);
   const lt: Array<[number, string]> = e.transform === "pctChange" ? [[-2, "−2%"], [0, "0"], [2, "+2%"]] : [];
   const { svg, svgM } = pair(calendarHeat(pts, { stops, width: 1040, fmt: f, legendTicks: lt, label: e.title ?? a.title }), calendarHeat(pts, { stops, width: 350, fmt: f, legendTicks: lt, label: e.title ?? a.title }));

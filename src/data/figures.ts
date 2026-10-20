@@ -13,7 +13,7 @@ export type Figure = { svg: string; svgM: string; note?: string };
 export type FigureContext = { narrow?: boolean; chartId: string };
 
 /** Series order, as in ArticleVisuals: the domain ink, ink black, then the free inks. */
-export const SERIES = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b9b2a6"];
+export const SERIES = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#bdbdbd"];
 const W_D = 1040, W_NARROW = 508, W_M = 346;
 /** Inks for a departure from a normal, as the stripes use them: temperature runs neel
  *  (cooler) to sindoor (warmer), rainfall haldi (drier) to hara (wetter). Null when the
@@ -209,7 +209,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       // neel, above it sindoor. Other signed values keep the domain ink either side of zero.
       const hot = inkOf.get(r);
       // The rest of a story is warm grey: the named rows are the only colour on the figure.
-      const fill = o.anomaly ? o.anomaly[r.value < 0 ? 0 : 1] : story ? hot ?? "#cfc8bb" : nat ? INK.ink : "var(--c)";
+      const fill = o.anomaly ? o.anomaly[r.value < 0 ? 0 : 1] : story ? hot ?? "#cfcfcf" : nat ? INK.ink : "var(--c)";
       const tint = "";
       const strong = hot || (!story && nat);
       let row = `<rect x="0" y="${r1(y)}" width="${W}" height="${r1(rowH)}" fill="transparent"/>`;
@@ -266,7 +266,7 @@ function stripRow(segs: Seg[], x0: number, y0: number, w: number, h: number, o: 
     const share = (Math.max(0, s.value) / total) * 100;
     const pctS = `${share < 1 ? share.toFixed(1) : Math.round(share)}%`;
     b += `<rect class="mk" x="${r1(sx + (i ? 1 : 0))}" y="${r1(y0)}" width="${r1(Math.max(0.8, sw - (i ? 1 : 0)))}" height="${h}" fill="${s.color}"${tip((o.rowLabel ? o.rowLabel + " · " : "") + s.label, pctS + (s.detail ? ` · ${s.detail}` : ""))}/>`;
-    const dark = s.color !== "#b9b2a6" && !/s6/.test(s.color);
+    const dark = s.color !== "#bdbdbd" && !/s6/.test(s.color);
     const fillT = dark ? "#ffffff" : INK.ink;
     const inner = `${s.label} ${pctS}`;
     if (textW(inner, o.size, true) + 14 < sw) b += txt(sx + 7, y0 + h / 2 + o.size * 0.36, inner, { size: o.size, fill: fillT, weight: 600 });
@@ -587,7 +587,7 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
     // The other panels' lines, as ghosts under this one: each panel reads against the whole set.
     for (const gp of p.ghosts ?? []) {
       const pts = gp.filter((q) => Number.isFinite(yearOf(q.date)));
-      if (pts.length > 1) b += `<path d="${pts.map((q, k) => `${k ? "L" : "M"}${r1(px(yearOf(q.date)))} ${r1(py(q.value))}`).join("")}" fill="none" stroke="#ddd6ca" stroke-width="1" stroke-linejoin="round"/>`;
+      if (pts.length > 1) b += `<path d="${pts.map((q, k) => `${k ? "L" : "M"}${r1(px(yearOf(q.date)))} ${r1(py(q.value))}`).join("")}" fill="none" stroke="#dddddd" stroke-width="1" stroke-linejoin="round"/>`;
     }
     for (const l of p.lines) {
       const pts = l.points.filter((q) => Number.isFinite(yearOf(q.date)));
@@ -746,7 +746,7 @@ function scatterXYFigure(v: ScatterXYVisual, ctx: FigureContext): Figure {
   const xa = niceTicks(v.xMin, v.xMax), ya = niceTicks(v.yMin, v.yMax);
   const xf = scatterTickFmt(v.xLabel), yf = scatterTickFmt(v.yLabel);
   const few = v.points.length <= 12;
-  const pts = v.points.map((p) => ({ label: p.label, x: p.x, y: p.y, hot: p.highlight || p.label === "India", wantLabel: few || p.highlight || p.label === "India", color: p.label === "India" ? INK.ink : p.highlight ? INK.sindoor : "#b1aa9e" }));
+  const pts = v.points.map((p) => ({ label: p.label, x: p.x, y: p.y, hot: p.highlight || p.label === "India", wantLabel: few || p.highlight || p.label === "India", color: p.label === "India" ? INK.ink : p.highlight ? INK.sindoor : "#a9a9a9" }));
   const build = (W: number, H: number) => {
     const placed = placeScatterLabels(pts, { W, H, x: [xa.min, xa.max], y: [ya.min, ya.max] });
     return scatterFit(placed as ScatterPoint[], {
@@ -811,7 +811,7 @@ function scenarioMapsSvg(v: ScenarioMapsVisual, o: { width: number; mobile: bool
     b += `<g transform="translate(${r1(ox)} ${top}) scale(${s.toFixed(4)})">`;
     for (const r of p.regions) {
       const has = r.value !== null && r.value !== undefined;
-      b += `<path d="${compactSvgPath(r.path)}" fill="${has ? choroColor(r.value as number, v.min, v.max) : "#efebe3"}" stroke="#fff" stroke-width="${r1(0.8 / s) / 2}" stroke-linejoin="round"${tip(r.name, `${p.label}: ${has ? f(r.value as number) : "no data"}`)}/>`;
+      b += `<path d="${compactSvgPath(r.path)}" fill="${has ? choroColor(r.value as number, v.min, v.max) : "#f2f2f2"}" stroke="#fff" stroke-width="${r1(0.8 / s) / 2}" stroke-linejoin="round"${tip(r.name, `${p.label}: ${has ? f(r.value as number) : "no data"}`)}/>`;
     }
     b += `</g>`;
   });

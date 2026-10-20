@@ -46,7 +46,7 @@ const {
 // domain does not already use (set per domain as --s3..--s5 in indica.css), then grey.
 // A seventh series folds into a light grey rather than inventing a hue, and so does every
 // series after it: cycling back to the domain ink would give two lines the same colour.
-const colors = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#b9b2a6"];
+const colors = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#bdbdbd"];
 
 /** The ink of every line in a chart. Fixed meanings win over the palette and over colours
  *  hard-coded in the registry: rural is always hara, urban always neel. When two lines
@@ -91,7 +91,7 @@ function lineInks(lines: Array<{ label: string; color?: string; dash?: boolean; 
     // rival the next data ink, any further named line a darker grey, the rest context grey.
     let k = 0;
     return lines.map((l, i) => ({
-      color: roles[i] === "lead" ? (l.color ?? colors[0]) : roles[i] === "rival" ? (k++ === 0 ? "#121212" : "var(--s3)") : roles[i] === "named" ? "#857f75" : CONTEXT,
+      color: roles[i] === "lead" ? (l.color ?? colors[0]) : roles[i] === "rival" ? (k++ === 0 ? "#121212" : "var(--s3)") : roles[i] === "named" ? "#8a8a8a" : CONTEXT,
       dash: !!l.dash, role: roles[i],
     }));
   }
@@ -103,7 +103,7 @@ function lineInksPalette(lines: Array<{ label: string; color?: string; dash?: bo
   const seen = new Set<string>();
   let k = 0;
   // With rural/urban present, the domain ink could repeat hara or neel, so the others start at ink black.
-  const rest = anyFixed ? ["#121212", "#b98014", "#7b4790", "#c24a2e", "#857f75", "#b9b2a6"] : colors;
+  const rest = anyFixed ? ["#121212", "#b98014", "#7b4790", "#c24a2e", "#8a8a8a", "#bdbdbd"] : colors;
   // India among other countries always wears the domain ink, as it does when it is listed
   // first, so its colour holds from chart to chart within an article: when it sits later in
   // the plan it trades inks with the first line. Registry colours still win.
@@ -1321,7 +1321,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       b += `<line x1="${svgCoord(bx)}" y1="${pad.t}" x2="${svgCoord(bx)}" y2="${svgCoord(plotB)}" stroke="#121212" stroke-width="0.75" stroke-dasharray="2 3">${band.label ? `<title>${band.label}</title>` : ""}</line>`;
       const fs = m ? 11.5 : 12.5, nx = right ? bx - 6 - bw : bx + 6;
       const ly = [ly0, pad.t + 12, pad.t + 26, pad.t + 40, plotB - 8].find((yy) => clearAt(nx, nx + bw, yy, fs));
-      if (showLabel && ly !== undefined) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: fs, fill: "#4a4640", anchor: right ? "end" : "start" });
+      if (showLabel && ly !== undefined) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: fs, fill: "#4f4f4f", anchor: right ? "end" : "start" });
       continue;
     }
     b += `<rect x="${svgCoord(band.x)}" y="${pad.t}" width="${svgCoord(band.w)}" height="${svgCoord(plotB - pad.t)}" fill="rgba(194,74,46,0.07)">${band.label ? `<title>${band.label}</title>` : ""}</rect>`;
@@ -1330,7 +1330,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     if (showLabel && by !== undefined) b += almTxt(bcx, by, band.label!, { size: bandSize, fill: "#a63d24", anchor: "middle" });
   }
   void asNotes;
-  if (g.unitCaption) b += almTxt(0, pad.t - (m ? 16 : 18), g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#6e6961" });
+  if (g.unitCaption) b += almTxt(0, pad.t - (m ? 16 : 18), g.unitCaption, { size: m ? 11.5 : 12.5, fill: "#737373" });
   // Gridlines run to the figure's edge, under the end labels, so the values sit inside the
   // chart's frame instead of hanging in a blank margin past the last gridline.
   const yTickBoxes: Array<[number, number, number, number]> = [];
@@ -1339,7 +1339,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   g.ticks.forEach((tick, ti) => {
     const yy = g.y(tick), base = g.rank ? ti === g.ticks.length - 1 : g.ticks.includes(0) ? tick === 0 : ti === 0;
     const label = yTickLabel(tick, ti, g.ticks, visual.unit, m);
-    b += almLine(pad.l, yy, width - 2, yy, base ? "#121212" : "#e9e4da", 1);
+    b += almLine(pad.l, yy, width - 2, yy, base ? "#121212" : "#ededed", 1);
     b += `<text class="yaxt" x="${svgCoord(pad.l - (m ? 6 : 10))}" y="${svgCoord(yy + 4)}" text-anchor="end">${label}</text>`;
   });
   for (const t of g.axisTicks) {
@@ -1350,7 +1350,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
   if (ref) {
     const ry = g.y(ref.value);
     if (ry >= pad.t && ry <= plotB) {
-      b += almLine(pad.l, ry, plotR, ry, "#4a4640", 0.9, "4 3");
+      b += almLine(pad.l, ry, plotR, ry, "#4f4f4f", 0.9, "4 3");
       // Named beside itself at the left, or further along where a line runs through that spot.
       const fs = m ? 11.5 : 12.5, rw = textWidth(ref.label, fs);
       let at: [number, number] | undefined;
@@ -1358,7 +1358,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
         const yy = [Math.max(pad.t + 12, ry - 7), ry + 15].find((v) => v < plotB - 2 && clearAt(x, x + rw, v, fs));
         if (yy !== undefined) at = [x, yy];
       }
-      if (at) b += almHalo(at[0], at[1], ref.label, { size: fs, fill: "#4a4640" });
+      if (at) b += almHalo(at[0], at[1], ref.label, { size: fs, fill: "#4f4f4f" });
     }
   }
   // context series first, emphasised series on top
@@ -1434,14 +1434,14 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       // the latest value, written beside its point (on a phone, inside the plot when it fits)
       if (inside) {
         b += almHalo(inside.x, inside.y + 12, p.endLabelText, { size: 14, fill: "#121212", weight: 600, anchor: "end" });
-        b += almHalo(inside.x, inside.y + 26, pointDateLabel(p.latest.date, p.points), { size: 11.5, fill: "#857f75", anchor: "end" });
+        b += almHalo(inside.x, inside.y + 26, pointDateLabel(p.latest.date, p.points), { size: 11.5, fill: "#8a8a8a", anchor: "end" });
       } else {
       const lx = p.latestX + (m ? 8 : 10);
       // The date under the value must stay above the axis: a line ending near the bottom lifts
       // the pair, so "2023-24" never lands on the "2022-23" tick below it.
       const lift = Math.min(0, plotB - 6 - (p.latestY + (m ? 20 : 25)));
       b += almTxt(lx, p.latestY + (m ? 5 : 6) + lift, p.endLabelText, { size: g.endFont, fill: "#121212", weight: 600 });
-      b += almTxt(lx, p.latestY + (m ? 20 : 25) + lift, pointDateLabel(p.latest.date, p.points), { size: m ? 11.5 : 12, fill: "#857f75" });
+      b += almTxt(lx, p.latestY + (m ? 20 : 25) + lift, pointDateLabel(p.latest.date, p.points), { size: m ? 11.5 : 12, fill: "#8a8a8a" });
       }
       const first = p.points[0];
       if (first && p.points.length > 5 && g.dateMode) {
@@ -1470,7 +1470,7 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
           && !yTickBoxes.some(([a, t, c, d]) => fx + 4 < c && fx + 8 + lw > a && yy - fs * 0.8 < d && yy + fs * 0.2 > t));
         // The starting point is context, the latest is the news: the first value is set
         // lighter and in mid grey so the end label leads.
-        if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#4a4640", weight: 500 });
+        if (fly !== undefined) b += almHalo(fx + 6, fly, firstLabel, { size: fs, fill: "#4f4f4f", weight: 500 });
       }
     } else if (inside) {
       b += almHalo(inside.x, inside.y + 10.5, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600, anchor: "end" });
@@ -1481,13 +1481,13 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       const { xr, ly } = early.get(p)!, names = m ? [] : (p.nameLines as string[]);
       b += m
         ? almHalo(xr, ly, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600, anchor: "end" })
-        : `<text x="${svgCoord(xr)}" y="${svgCoord(ly)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : roles[g.paths.indexOf(p)] === "context" ? 500 : 600}">${names.join(" ")}</tspan><tspan fill="${roles[g.paths.indexOf(p)] === "context" ? CONTEXT_INK : "#4a4640"}" dx="5">${p.endLabelText}</tspan></text>`;
+        : `<text x="${svgCoord(xr)}" y="${svgCoord(ly)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"><tspan fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : roles[g.paths.indexOf(p)] === "context" ? 500 : 600}">${names.join(" ")}</tspan><tspan fill="${roles[g.paths.indexOf(p)] === "context" ? CONTEXT_INK : "#4f4f4f"}" dx="5">${p.endLabelText}</tspan></text>`;
     } else {
       const ly = p.labelY, moved = Math.abs(ly - p.latestY) > 3, lx = p.latestX + 9;
       if (moved) b += `<path d="M${svgCoord(p.latestX + 4)} ${svgCoord(p.latestY)}L${svgCoord(lx - 3)} ${svgCoord(ly - 4)}" fill="none" stroke="${p.color}" stroke-width="0.8" stroke-opacity="0.6"/>`;
       b += m
         ? almHalo(lx, ly, p.endLabelText, { size: labSize, fill: textInk(p.color), weight: 600 })
-        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${(p.nameLines as string[]).map((name, k) => `<tspan${k ? ` x="${svgCoord(lx)}" dy="15"` : ""} fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : roles[g.paths.indexOf(p)] === "context" ? 500 : 600}">${name}</tspan>`).join("")}<tspan fill="${roles[g.paths.indexOf(p)] === "context" ? CONTEXT_INK : "#4a4640"}" dx="5">${p.endLabelText}</tspan></text>`;
+        : `<text x="${svgCoord(lx)}" y="${svgCoord(ly)}" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${labSize}" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${(p.nameLines as string[]).map((name, k) => `<tspan${k ? ` x="${svgCoord(lx)}" dy="15"` : ""} fill="${textInk(p.color)}" font-weight="${p.emphasis ? 700 : roles[g.paths.indexOf(p)] === "context" ? 500 : 600}">${name}</tspan>`).join("")}<tspan fill="${roles[g.paths.indexOf(p)] === "context" ? CONTEXT_INK : "#4f4f4f"}" dx="5">${p.endLabelText}</tspan></text>`;
     }
   }
   void axisSize;
@@ -1557,7 +1557,7 @@ function gapBand(visual: LineVisual, g: LineGeometry, roles: Role[], m: boolean,
     const fs = m ? 13 : 14.5, tw = noteWidth(text, fs), plotB = g.height - g.pad.b, plotR = g.width - g.pad.r;
     let spot: [number, number] | undefined;
     for (let yy = g.pad.t + fs + 2; yy < plotB - 6 && !spot; yy += 14) for (let x = g.pad.l + 8; x + tw < plotR - 4 && !spot; x += 16) if (clearAt(x, x + tw, yy, fs)) spot = [x, yy];
-    if (spot) out += `<g>${`<rect x="${svgCoord(spot[0])}" y="${svgCoord(spot[1] - fs * 0.62)}" width="9" height="9" ${fill.replace(/0\.\d+"$/, (o) => `${Math.min(0.3, Number(o.slice(0, -1)) * 2.4).toFixed(2)}"`)}/>`}${almNote(spot[0] + 14, spot[1], text, { size: fs, fill: "#4a4640" })}</g>`;
+    if (spot) out += `<g>${`<rect x="${svgCoord(spot[0])}" y="${svgCoord(spot[1] - fs * 0.62)}" width="9" height="9" ${fill.replace(/0\.\d+"$/, (o) => `${Math.min(0.3, Number(o.slice(0, -1)) * 2.4).toFixed(2)}"`)}/>`}${almNote(spot[0] + 14, spot[1], text, { size: fs, fill: "#4f4f4f" })}</g>`;
   }
   return out;
 }
@@ -1610,7 +1610,7 @@ function peakMark(visual: LineVisual, g: LineGeometry, m: boolean, clearAt: (xa:
   if (!ok) return "";
   boxes.push([ok[0] - 4, ok[1] - fs - 2, ok[0] + lw + 4, ok[1] + 4]);
   return `<circle cx="${svgCoord(px)}" cy="${svgCoord(py)}" r="${m ? 3 : 3.5}" fill="#ffffff" stroke="${p.color}" stroke-width="1.6"/>`
-    + almHalo(ok[0], ok[1], label, { size: fs, fill: "#4a4640", weight: 500 });
+    + almHalo(ok[0], ok[1], label, { size: fs, fill: "#4f4f4f", weight: 500 });
 }
 
 /** Shaded event bands (e.g. El Niño years) for a time-axis line chart. Each band is
@@ -1751,7 +1751,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           // span the same distance so equal departures get equal colour.
           const stripeStops: AlmStops = isRain
             ? ALM_SCALES.rain.map(([v, c]) => [stripes.center + (v / 22) * spread, c] as [number, string])
-            : ([[-1, "#24387f"], [-0.6, "#6a7bc0"], [-0.25, "#c9d0ea"], [0, "#e9e4da"], [0.25, "#f1cbba"], [0.6, "#cc6849"], [1, "#7a2816"]] as AlmStops).map(([v, c]) => [stripes.center + v * spread, c] as [number, string]);
+            : ([[-1, "#24387f"], [-0.6, "#6a7bc0"], [-0.25, "#c9d0ea"], [0, "#ededed"], [0.25, "#f1cbba"], [0.6, "#cc6849"], [1, "#7a2816"]] as AlmStops).map(([v, c]) => [stripes.center + v * spread, c] as [number, string]);
           // A stripe's tooltip prints the published value. Only an absolute rain series
           // (mm, not a departure) is written as its distance from the normal, and says so.
           const stripeFmt = (v: number) => {

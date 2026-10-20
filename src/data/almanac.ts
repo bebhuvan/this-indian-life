@@ -7,7 +7,7 @@
 //   one meaning per colour, and every number set in the grotesque.
 
 export const INK = {
-  ink: "#121212", ink2: "#4a4640", ink3: "#6e6961", grid: "#e9e4da", rule: "#d5cec2", band: "#f1ede5", paper: "#faf8f3",
+  ink: "#121212", ink2: "#4f4f4f", ink3: "#737373", grid: "#ededed", rule: "#dadada", band: "#f4f4f4", paper: "#ffffff",
   neel: "#33489a", sindoor: "#c24a2e", hara: "#008a6e", haldi: "#b98014", jamun: "#7b4790",
 } as const;
 
@@ -16,7 +16,7 @@ export const F = "Schibsted Grotesk, Helvetica Neue, Arial, sans-serif";
  *  peak, a gap, a trend). Numbers and names stay in the grotesque. */
 export const SERIF = "Newsreader, Georgia, serif";
 /** Context: the warm grey every series that is not the story is drawn in, and its text shade. */
-export const CONTEXT = "#b9b2a6", CONTEXT_INK = "#7a746a";
+export const CONTEXT = "#bdbdbd", CONTEXT_INK = "#767676";
 
 const DEMONYMS: Record<string, string> = {
   indian: "india", indians: "india", chinese: "china", pakistani: "pakistan", pakistanis: "pakistan", vietnamese: "vietnam",
@@ -47,7 +47,7 @@ export function namedIn(label: string, text: string) {
 }
 /** A note in the annotation voice. Width estimates use 0.9 of the grotesque's measure. */
 export const note = (x: number, y: number, s: string, o: { size?: number; fill?: string; anchor?: "start" | "middle" | "end" } = {}) =>
-  `<text class="anno" x="${r1(x)}" y="${r1(y)}" font-family="${SERIF}" font-style="italic" font-size="${o.size ?? 14}" fill="${o.fill ?? "#4a4640"}" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}>${esc(s)}</text>`;
+  `<text class="anno" x="${r1(x)}" y="${r1(y)}" font-family="${SERIF}" font-style="italic" font-size="${o.size ?? 14}" fill="${o.fill ?? "#4f4f4f"}" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" paint-order="stroke"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}>${esc(s)}</text>`;
 export const noteWidth = (s: string, size = 14) => textWidth(s, size) * 0.9;
 
 /** Marks take the ink; words take its text-safe shade. A label set in the same ink as its
@@ -56,7 +56,7 @@ export const noteWidth = (s: string, size = 14) => textWidth(s, size) * 0.9;
  *  darker; the domain and series variables have matching -ink tokens in almanac.css. */
 const TEXT_INK: Record<string, string> = {
   "#33489a": "#2e418c", "#c24a2e": "#a63d24", "#008a6e": "#00735c", "#b98014": "#8a5f0a", "#7b4790": "#6a3c7d",
-  "#1f6f8b": "#1a5d75", "#857f75": "#6b665e", "#b9b2a6": "#7a746a",
+  "#1f6f8b": "#1a5d75", "#8a8a8a": "#6b665e", "#bdbdbd": "#767676",
 };
 export const textInk = (c: string) => {
   const k = String(c ?? "").trim().toLowerCase();
@@ -206,9 +206,9 @@ export function ramp(stops: Stops) {
 // Named scales. Diverging scales have a neutral grey middle, never a hue.
 export const SCALES = {
   /** births per woman around replacement (2.1) */
-  fertility: [[1.0, "#24387f"], [1.3, "#2f4596"], [1.6, "#6a7bc0"], [1.85, "#aeb8de"], [2.1, "#e6e1d7"], [2.35, "#f1cbba"], [2.75, "#e39c81"], [3.5, "#cc6849"], [4.5, "#a8412a"], [5.6, "#7a2816"]] as Stops,
+  fertility: [[1.0, "#24387f"], [1.3, "#2f4596"], [1.6, "#6a7bc0"], [1.85, "#aeb8de"], [2.1, "#e4e4e4"], [2.35, "#f1cbba"], [2.75, "#e39c81"], [3.5, "#cc6849"], [4.5, "#a8412a"], [5.6, "#7a2816"]] as Stops,
   /** rainfall departure from normal, % (dry haldi to wet hara) */
-  rain: [[-22, "#6e4a12"], [-14, "#a8782a"], [-7, "#ddbe84"], [0, "#e9e4da"], [7, "#9fcfc0"], [14, "#3f9a82"], [22, "#0b5e4b"]] as Stops,
+  rain: [[-22, "#6e4a12"], [-14, "#a8782a"], [-7, "#ddbe84"], [0, "#ededed"], [7, "#9fcfc0"], [14, "#3f9a82"], [22, "#0b5e4b"]] as Stops,
   /** sequential, one ink light to dark */
   neel: [[0, "#e3e7f3"], [0.5, "#6e80bf"], [1, "#233472"]] as Stops,
 };
@@ -338,7 +338,7 @@ export function tileGrid(tiles: Tile[], o: {
     b += `<path d="${area}" fill="${below}" fill-opacity="0.3" clip-path="url(#${id}b${k})"/>`;
     b += line(ox, oy + th, ox + tw, oy + th, INK.rule, 1);
     b += line(ox, rp, ox + tw, rp, INK.ink3, 0.6, "2 2");
-    if (o.reference) b += `<path d="${pathOf(o.reference, px, py)}" fill="none" stroke="#b9b2a6" stroke-width="1"/>`;
+    if (o.reference) b += `<path d="${pathOf(o.reference, px, py)}" fill="none" stroke="#bdbdbd" stroke-width="1"/>`;
     b += `<path d="${pathOf(t.points, px, py)}" fill="none" stroke="${INK.ink}" stroke-width="${small ? 1.1 : 1.35}" stroke-linejoin="round" stroke-linecap="round"><title>${esc(t.label)}: ${fmt(last)} in ${t.points[t.points.length - 1][0]}</title></path>`;
     b += `<circle cx="${r1(px(t.points[t.points.length - 1][0]))}" cy="${r1(py(last))}" r="${small ? 2 : 2.6}" fill="${hot ? above : below}" stroke="#ffffff" stroke-width="1"/>`;
     const name = codes && (t.code ?? STATE_CODE[t.label]) ? t.code ?? STATE_CODE[t.label] : t.label;
@@ -352,7 +352,7 @@ export function tileGrid(tiles: Tile[], o: {
       [`<rect x="${kx}" y="${ky + 14}" width="${sw}" height="10" fill="${below}" fill-opacity="0.3"/>`, `Years below ${tl}`],
       [line(kx, ky + 40, kx + sw, ky + 40, INK.ink, 1.35), "The state"],
     ];
-    if (o.reference) keys.push([line(kx, ky + 60, kx + sw, ky + 60, "#b9b2a6", 1), o.referenceLabel ?? "India, for comparison"]);
+    if (o.reference) keys.push([line(kx, ky + 60, kx + sw, ky + 60, "#bdbdbd", 1), o.referenceLabel ?? "India, for comparison"]);
     keys.forEach(([m, s], i) => { b += m + txt(kx + sw + 8, ky + i * 20 + 4, s, { size: small ? 10.5 : 11.5 }); });
     b += txt(kx, ky + keys.length * 20 + 6, `Figure: ${o.to}. Red if still above ${tl}`, { size: small ? 10.5 : 11.5, fill: INK.ink3 });
   }
@@ -600,7 +600,7 @@ export function dayRibbon(rows: RibbonRow[], o: { total: number; width?: number;
   rows.forEach((r, i) => {
     const yy = top + i * (bh + rowGap);
     if (!bare) b += sm ? txt(0, yy - 9, r.label, { size: 13, fill: INK.ink, weight: 600 }) : txt(lw - 14, yy + bh / 2 + 5, r.label, { size: 13.5, fill: INK.ink, weight: 600, anchor: "end" });
-    b += `<rect x="${r1(x(0))}" y="${yy}" width="${r1(W - x(0))}" height="${bh}" fill="#e9e4da"/>`;
+    b += `<rect x="${r1(x(0))}" y="${yy}" width="${r1(W - x(0))}" height="${bh}" fill="#ededed"/>`;
     let acc = 0;
     r.parts.forEach((p, j) => {
       const x0 = x(acc) + (j ? 1.5 : 0), x1 = x(acc + p.value);
@@ -699,7 +699,7 @@ export function rankSlope(left: string[], right: string[], o: { leftTitle: strin
   for (const [s, i, j] of order) {
     const y1 = top + i * rowH, y2 = top + j * rowH, m = moved(i, j), c = m ? (j < i ? INK.neel : INK.sindoor) : "#d6d6d6";
     b += `<path d="M${xl + (bare ? 0 : 6)} ${r1(y1)}C${(xl + xr) / 2} ${r1(y1)} ${(xl + xr) / 2} ${r1(y2)} ${xr - (bare ? 0 : 6)} ${r1(y2)}" fill="none" stroke="${c}" stroke-width="${m ? (bare ? 1.5 : 1.75) : bare ? 0.9 : 1}"><title>${esc(s)}: ${i + 1} to ${j + 1}</title></path>`;
-    b += `<circle cx="${xl + (bare ? 0 : 4)}" cy="${r1(y1)}" r="${bare ? 2 : 2.5}" fill="${m ? c : "#b9b2a6"}"/><circle cx="${xr - (bare ? 0 : 4)}" cy="${r1(y2)}" r="${bare ? 2 : 2.5}" fill="${m ? c : "#b9b2a6"}"/>`;
+    b += `<circle cx="${xl + (bare ? 0 : 4)}" cy="${r1(y1)}" r="${bare ? 2 : 2.5}" fill="${m ? c : "#bdbdbd"}"/><circle cx="${xr - (bare ? 0 : 4)}" cy="${r1(y2)}" r="${bare ? 2 : 2.5}" fill="${m ? c : "#bdbdbd"}"/>`;
   }
   if (!bare) {
     left.forEach((s, i) => { const m = moved(i, right.indexOf(s)); b += txt(xl - 8, top + i * rowH + 4, `${s}  ${i + 1}`, { anchor: "end", size: 12, fill: m ? INK.ink : INK.ink2, weight: m ? 600 : undefined }); });
@@ -780,7 +780,7 @@ export function miniRibbon(rows: Array<{ label: string; parts: Array<{ value: nu
   let b = "";
   rows.forEach((r, i) => {
     const yy = 6 + i * 20; let acc = 0;
-    b += txt(0, yy + 9, r.label, { size: 10.5, fill: INK.ink2 }) + `<rect x="46" y="${yy}" width="${W - 46}" height="12" fill="#e9e4da"/>`;
+    b += txt(0, yy + 9, r.label, { size: 10.5, fill: INK.ink2 }) + `<rect x="46" y="${yy}" width="${W - 46}" height="12" fill="#ededed"/>`;
     r.parts.forEach((p, j) => { const x0 = x(acc) + (j ? 1.5 : 0); b += `<rect x="${r1(x0)}" y="${yy}" width="${r1(Math.max(1, x(acc + p.value) - x0))}" height="12" fill="${p.color}"/>`; acc += p.value; });
   });
   return svg(W, 44, b, o.label, "alm-mini");

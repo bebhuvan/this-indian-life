@@ -114,7 +114,7 @@ cold #ededed greys on #ffffff.
 4. **Honest scales.** Ranks run with 1 at the top. A bar that would crush the rest is broken and its value
    written on the break. Line scales stop at the last gridline the data reach, letting the line rise a little
    above it rather than leaving a third of the plot empty. Bars always start at zero.
-5. **Warm paper, warm greys.** The page ground moves from #ffffff to a warm paper (#faf8f3); greys move
+5. **Warm paper, warm greys (tried, then reverted: the owner keeps white and neutral greys).** The page ground moves from #ffffff to a warm paper (#faf8f3); greys move
    from cold #ededed/#737373 to warm (#e7e2d8 grid, #6f6a62 axis text, #b7b0a4 context lines). Ink stays
    #121212. The data inks keep their names and meanings.
 6. **Two voices.** Data labels in Schibsted Grotesk: axis numbers at 400, values at 500, the protagonist's
@@ -153,7 +153,7 @@ cold #ededed greys on #ffffff.
   y gutter") deliberately: the gutter is now required to equal the widest phone y label plus its gap.
 - **Tabular figures.** Kept off. Values sit at bar ends and line ends, left-aligned, so column alignment
   gains nothing, and the face's tabular forms open visible gaps.
-- **Pure white.** The site's ground moves to warm paper, in line with the owner's standing preference.
+- **Pure white.** Proposed a warm paper; the owner saw it and preferred white, so white and neutral greys stay.
 - **Wash under single lines.** Removed, not toned down.
 
 ### What stays

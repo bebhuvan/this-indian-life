@@ -1,6 +1,6 @@
 # The Almanac: design system and chart forms
 
-The house style since October 2026. Warm paper and black ink; Newsreader to read in,
+The house style since October 2026. White paper and black ink; Newsreader to read in,
 Schibsted Grotesk to count in; five data inks named after Indian dyes; hairline rules;
 figures that leave the page whole.
 
@@ -28,8 +28,8 @@ figures that leave the page whole.
 
 ## Colour
 
-- Paper `#faf8f3` (`--bg`), ink `#121212`, mid `#4a4640`, dim `#6e6961` (text and axis numbers), grid `#e9e4da`, rule `#d5cec2`.
-  The neutrals are warm, to sit on the paper. White halos, rings and knock-outs in a figure follow `--bg`, in exports too.
+- Paper `#ffffff` (`--bg`), ink `#121212`, mid `#4f4f4f`, dim `#737373` (text and axis numbers), grid `#ededed`, rule `#dadada`.
+  The neutrals are neutral greys; a warm ground was tried in October 2026 and reverted at the owner's call. White halos, rings and knock-outs in a figure follow `--bg`, in exports too.
 - Data inks: neel `#33489a`, sindoor `#c24a2e`, hara `#008a6e`, haldi `#b98014`, jamun `#7b4790`.
 - Each domain borrows one ink as `--c` (people sindoor, economy hara, energy haldi, climate `#1f6f8b`, health jamun, society neel).
   Chart series follow `--c`, then ink black (`--s2`), then the three inks the domain does not use (`--s3..--s5`), then grey.
@@ -45,10 +45,10 @@ Registry entries that hard-code `color` on a series still win over the palette. 
 - **Story inks** (`lineRoles` in `ArticleVisuals.astro`; `barsSvg` in `figures.ts`). A chart is about something. In a line
   chart of three or more lines, the protagonist (the plan's `emphasis`, else India, else the line the title names) wears
   `--c` at 2.8 units, cased in the paper; the first rival the title or takeaway names is ink black at 2, a second the next
-  data ink; every other line is context, warm grey `#b9b2a6` at 1.25, its name and value in `#7a746a`. Phones write
+  data ink; every other line is context, grey `#bdbdbd` at 1.25, its name and value in `#767676`. Phones write
   values for the protagonist and rivals only, and name the context lines once in the key under a single grey swatch.
   Rural/urban keep their fixed inks; men/women lines are never context. Bars: the national row and rows the title names
-  (demonyms count: "per Chinese" names China) take `--c` then ink, the rest warm grey `#cfc8bb`, when they are at most a
+  (demonyms count: "per Chinese" names China) take `--c` then ink, the rest grey `#cfcfcf`, when they are at most a
   third of the rows. Three or four lines with no subject keep the palette. A chart whose explainer names its colours keeps
   the palette until the prose is rewritten (`namesColours`).
 - **The annotation voice** is Newsreader italic (`note()` in `almanac.ts`), for what a chart says about itself: a gap's

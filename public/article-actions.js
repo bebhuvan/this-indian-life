@@ -144,7 +144,7 @@
     clone.removeAttribute("aria-label");
     clone.querySelectorAll("script, foreignObject").forEach((node) => { node.remove(); });
     // The figure prints on the page's paper: halos, rings and knock-outs drawn in white follow it.
-    const paper = oneLine(getComputedStyle(document.body).getPropertyValue("--bg")) || "#faf8f3";
+    const paper = oneLine(getComputedStyle(document.body).getPropertyValue("--bg")) || "#ffffff";
     const inner = resolveVars(clone.innerHTML, card).replace(/(stroke|fill)="#fff(?:fff)?"/g, `$1="${paper}"`);
     const titleText = titleLines.map((line, index) => `<tspan x="${pad}" dy="${index === 0 ? 0 : Math.round(titleSize * 1.15)}">${escapeXml(line)}</tspan>`).join("");
     const subtitleText = subtitleLines.map((line, index) => `<tspan x="${pad}" dy="${index === 0 ? 0 : Math.round(subSize * 1.4)}">${escapeXml(line)}</tspan>`).join("");
@@ -155,17 +155,17 @@
   <style>
     ${fontCss}
     text{font-family:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;font-variant-numeric:lining-nums}
-    :where(text:not([fill])){fill:#6e6961}
+    :where(text:not([fill])){fill:#737373}
     .serif,.export-title,.export-brand{font-family:"Newsreader",Georgia,serif}
     .export-title{font-size:${titleSize}px;font-weight:500;fill:#121212}
-    .export-subtitle{font-size:${subSize}px;fill:#4a4640}
-    .export-source{font-size:${Math.max(11, Math.round(subSize * 0.85))}px;fill:#4a4640}
+    .export-subtitle{font-size:${subSize}px;fill:#4f4f4f}
+    .export-source{font-size:${Math.max(11, Math.round(subSize * 0.85))}px;fill:#4f4f4f}
     .export-brand{font-size:${Math.round(subSize * 1.3)}px;font-weight:500;fill:#121212}
-    .yaxt,.xaxt,.end-s{font-size:14px;fill:#6e6961}
-    .ref-label{font-size:14px;fill:#4a4640}
+    .yaxt,.xaxt,.end-s{font-size:14px;fill:#737373}
+    .ref-label{font-size:14px;fill:#4f4f4f}
     .end-mini-v{font-size:15px;font-weight:600}
     .point-label{font-size:14px;font-weight:500;fill:#121212}
-    .axis-title{font-size:14px;fill:#4a4640}
+    .axis-title{font-size:14px;fill:#4f4f4f}
     .bar-value-label{font-size:11px;font-weight:500}
     .chart-watermark{display:none}
   </style>
@@ -174,7 +174,7 @@
   <text class="export-title" x="${pad}" y="${titleY}">${titleText}</text>
   ${meta.subtitle ? `<text class="export-subtitle" x="${pad}" y="${Math.round(subY)}">${subtitleText}</text>` : ""}
   <svg x="${pad}" y="${header}" width="${chartW}" height="${height}" viewBox="${escapeXml(viewBox.raw)}" overflow="visible">${inner}</svg>
-  <rect x="${pad}" y="${ruleY}" width="${width - 2 * pad}" height="1" fill="#d5cec2"/>
+  <rect x="${pad}" y="${ruleY}" width="${width - 2 * pad}" height="1" fill="#dadada"/>
   ${source ? `<text class="export-source" x="${pad}" y="${footY}">${escapeXml(source)}</text>` : ""}
   <text class="export-brand" x="${width - pad}" y="${footY}" text-anchor="end">This Indian Life</text>
 </svg>`;
@@ -199,7 +199,7 @@
       canvas.width = Math.round(viewBox.width * scale);
       canvas.height = Math.round(viewBox.height * scale);
       const ctx = canvas.getContext("2d");
-      ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--bg").trim() || "#faf8f3";
+      ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--bg").trim() || "#ffffff";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       const pngBlob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png", 0.92));

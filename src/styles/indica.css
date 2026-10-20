@@ -8,8 +8,8 @@
 /* ---------- TOKENS ---------- */
 :root{
   /* surface + neutrals */
-  --bg:#faf8f3; --ink:#121212; --mid:#4a4640; --dim:#6e6961;
-  --ghost:#e6e1d7; --line:#e9e4da; --paper:#f2eee6; --rule:#d5cec2;
+  --bg:#ffffff; --ink:#121212; --mid:#4f4f4f; --dim:#737373;
+  --ghost:#e4e4e4; --line:#ededed; --paper:#f5f5f5; --rule:#dadada;
   /* the five data inks, named after Indian dyes. Each carries one meaning inside a
      chart (see docs/CHART_SELECTION_PHILOSOPHY.md): neel = urban / below a line,
      sindoor = above a line / heat, hara = rural, haldi and jamun = 4th and 5th series. */
@@ -18,14 +18,14 @@
      lead series in its charts). Climate takes a deep sea blue so it never shares
      sindoor with People. */
   --people:var(--sindoor); --economy:var(--hara); --energy:var(--haldi);
-  --climate:#1f6f8b; --health:var(--jamun); --society:var(--neel); --slate:#b9b2a6;
+  --climate:#1f6f8b; --health:var(--jamun); --society:var(--neel); --slate:#bdbdbd;
   /* darker text-safe variants — same hue, ≥4.5:1 on white, used only for small colored TEXT */
   --people-ink:#a63d24; --economy-ink:#00735c; --energy-ink:#8a5f0a;
   --climate-ink:#1a5d75; --health-ink:#6a3c7d; --society-ink:#2e418c;
   --c:var(--ink);                 /* active domain ink (set per page/element) */
   --c-ink:var(--ink);             /* text-safe active ink (set per page/element) */
   --c-tint:rgba(18,18,18,.08);
-  --s2:#121212; --s3:var(--neel); --s4:var(--hara); --s5:var(--haldi); --s6:#857f75;
+  --s2:#121212; --s3:var(--neel); --s4:var(--hara); --s5:var(--haldi); --s6:#8a8a8a;
   /* type */
   --serif:'Newsreader',Georgia,serif;          /* display and reading: headlines, prose */
   --serif-text:'Newsreader',Georgia,serif;
@@ -707,7 +707,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
     overflow-wrap:anywhere;
   }
 }
-.lazy-svg-frame{display:block;background:linear-gradient(90deg,#f1ede5,#ebebeb,#f1ede5);background-size:220% 100%;animation:lazy-svg-pulse 1.4s ease-in-out infinite;border-radius:6px}
+.lazy-svg-frame{display:block;background:linear-gradient(90deg,#f4f4f4,#ebebeb,#f4f4f4);background-size:220% 100%;animation:lazy-svg-pulse 1.4s ease-in-out infinite;border-radius:6px}
 @keyframes lazy-svg-pulse{0%{background-position:100% 0}100%{background-position:-100% 0}}
 .stripe-axis{display:flex;justify-content:space-between;margin-top:10px;font-family:var(--sans);font-size:.82rem;color:var(--mid);font-variant-numeric:lining-nums;letter-spacing:.02em}
 .choro-wrap{display:grid;grid-template-columns:minmax(360px,1fr) minmax(240px,300px);gap:36px;align-items:center;margin:8px 0 4px}
@@ -762,7 +762,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .rdiv-row em{font-style:normal;font-size:.78rem;text-align:right;font-weight:600;font-variant-numeric:lining-nums}
 .rdiv-row em.pos{color:var(--sindoor)}
 .rdiv-row em.neg{color:var(--neel)}
-.rdiv-track{position:relative;height:22px;background:#efebe3}
+.rdiv-track{position:relative;height:22px;background:#f2f2f2}
 .rdiv-zero{position:absolute;left:50%;top:0;bottom:0;width:1px;background:#c4c4c4}
 .rdiv-bar{position:absolute;top:0;bottom:0}
 .rdiv-bar.pos{background:var(--sindoor)}
@@ -782,7 +782,7 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 .ranked-change-row em{font-style:normal;font-size:.78rem;font-variant-numeric:lining-nums;text-align:right;font-weight:600}
 .ranked-change-row em.pos{color:var(--climate)}
 .ranked-change-row em.neg{color:var(--health)}
-.ranked-change-bar{height:24px;background:#efebe3;position:relative;overflow:hidden}
+.ranked-change-bar{height:24px;background:#f2f2f2;position:relative;overflow:hidden}
 .ranked-change-bar i{display:block;height:100%}
 .ranked-change-bar.muted i{background:#d6d6d6}
 .ranked-change-bar.hot i{background:var(--sindoor)}
@@ -982,8 +982,8 @@ footer.foot{padding:42px 0 64px;border-top:1px solid var(--ghost)}
 
 /* ---------- HERO CHART (Indica.heroLine) ---------- */
 /* Axis ticks recede to a soft, unified grey so the data lines are the loudest ink. */
-.yaxt{font-family:var(--sans);font-size:21px;fill:#857f75}
-.xaxt{font-family:var(--sans);font-size:21px;fill:#857f75}
+.yaxt{font-family:var(--sans);font-size:21px;fill:#8a8a8a}
+.xaxt{font-family:var(--sans);font-size:21px;fill:#8a8a8a}
 .anno-line{stroke:var(--c);stroke-width:1;stroke-dasharray:2 4;opacity:.45}
 .anno-dot{fill:#fff;stroke:var(--c);stroke-width:2}
 .anno-t{font-family:var(--sans);font-size:11.5px;font-weight:500;fill:var(--ink)}

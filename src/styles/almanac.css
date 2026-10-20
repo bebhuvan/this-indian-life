@@ -80,7 +80,7 @@ h1,h2,h3,h4{font-optical-sizing:auto}
 .longform p{color:#1f1f1f;margin-bottom:1.3rem}
 .longform strong{background:none;font-weight:600}
 .longform em{color:inherit}
-.longform a{color:var(--ink);text-decoration:underline;text-decoration-color:#b9b2a6}
+.longform a{color:var(--ink);text-decoration:underline;text-decoration-color:#bdbdbd}
 .longform a:hover{color:var(--c-ink);text-decoration-color:var(--c)}
 .story-list li::marker{color:var(--dim)}
 
@@ -107,13 +107,13 @@ h1,h2,h3,h4{font-optical-sizing:auto}
 .viz-lead-number p,.viz-line-number p{font-family:var(--sans);font-size:.82rem;color:var(--dim)}
 
 /* chart text, in viewBox units (desktop boxes render at ~0.9x) */
-.yaxt,.xaxt,.end-s{font-family:var(--sans);font-size:14px;fill:#857f75}
-.ref-label{font-family:var(--sans);font-size:14px;fill:#4a4640;stroke:#fff;stroke-width:5px}
+.yaxt,.xaxt,.end-s{font-family:var(--sans);font-size:14px;fill:#8a8a8a}
+.ref-label{font-family:var(--sans);font-size:14px;fill:#4f4f4f;stroke:#fff;stroke-width:5px}
 .end-mini-v{font-family:var(--sans);font-weight:600;font-size:15px}
 .end-v{font-family:var(--sans);font-weight:600;font-size:20px}
 .point-label{font-family:var(--sans);font-size:14px;font-weight:500}
 .point-label-muted{font-size:12.5px;fill:#6f6f6f}
-.axis-title{font-family:var(--sans);font-size:14px;fill:#4a4640}
+.axis-title{font-family:var(--sans);font-size:14px;fill:#4f4f4f}
 .anno-t{font-family:var(--sans);font-weight:600}
 .viz-m .yaxt,.viz-m .xaxt{font-size:12.5px}
 .viz-m .end-mini-v{font-size:12.5px}
@@ -122,7 +122,7 @@ h1,h2,h3,h4{font-optical-sizing:auto}
 .viz-legend{font-family:var(--sans);font-size:.85rem;color:var(--mid);gap:8px 20px;margin-top:14px}
 .viz-legend i{width:16px;height:2.5px;border-radius:0}
 .viz-bar b,.change-main b,.change-facts b,.trade-note-row b{font-family:var(--sans);font-weight:600;font-size:1rem}
-.viz-bar-track,.change-track,.rdiv-track,.ranked-change-bar{background:#efebe3}
+.viz-bar-track,.change-track,.rdiv-track,.ranked-change-bar{background:#f2f2f2}
 .viz-bar i.neg,.pyr-side.female i{background:var(--ink)}
 .choro-legend,.choro-scale,.choro-top{font-size:.88rem}
 
@@ -144,7 +144,7 @@ h1,h2,h3,h4{font-optical-sizing:auto}
 .viz-source span{display:inline;font-size:.82rem;letter-spacing:0;text-transform:none;font-weight:400;color:var(--mid)}
 .viz-source span::before{display:none}
 .viz-source span::after{content:":";margin-right:.35em}
-.viz-source a,.viz-source b{font-family:var(--sans);font-size:.82rem;font-weight:400;color:var(--ink);text-align:left;border-bottom:0;text-decoration:underline;text-decoration-color:#b9b2a6;text-underline-offset:3px;padding:0}
+.viz-source a,.viz-source b{font-family:var(--sans);font-size:.82rem;font-weight:400;color:var(--ink);text-align:left;border-bottom:0;text-decoration:underline;text-decoration-color:#bdbdbd;text-underline-offset:3px;padding:0}
 .viz-source a::after{display:none}
 .viz-source a:hover{color:var(--c-ink);text-decoration-color:var(--c)}
 .viz-actions,.viz-card:hover .viz-actions{order:90;opacity:1;justify-content:flex-start;gap:18px;margin:8px 0 0}
@@ -220,7 +220,7 @@ footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px
 
 /* ---------- Almanac line charts (renderLineSvg in ArticleVisuals) ---------- */
 .alm-line{overflow:visible;margin-top:8px}
-.alm-line .yaxt,.alm-line .xaxt{font-size:13px;fill:#857f75}
+.alm-line .yaxt,.alm-line .xaxt{font-size:13px;fill:#8a8a8a}
 .viz-m.alm-line .yaxt,.viz-m.alm-line .xaxt{font-size:12px}
 /* Desktop names every line at its end, so the key is for phones (and for crowded charts). */
 .viz-legend-m{display:none}
@@ -235,7 +235,7 @@ footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px
 /* ---------- horizontal bars ---------- */
 /* Thin bars with the value written at each bar's end, no grey tracks, hairline rows. */
 .viz-bars{gap:0}
-.viz-bar{grid-template-columns:minmax(120px,26%) minmax(0,1fr) auto;gap:16px;font-family:var(--sans);font-size:.875rem;color:var(--ink);padding:5px 0;border-top:1px solid #efebe3}
+.viz-bar{grid-template-columns:minmax(120px,26%) minmax(0,1fr) auto;gap:16px;font-family:var(--sans);font-size:.875rem;color:var(--ink);padding:5px 0;border-top:1px solid #f2f2f2}
 .viz-bar:first-child{border-top:0}
 .viz-bar>span{color:#2e2e2e}
 .viz-bar-track{height:14px;background:none;overflow:visible}
@@ -261,7 +261,7 @@ footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px
 .choro-dots{display:none;width:100%;height:auto;overflow:visible}
 @media(max-width:620px){.choro-side .choro-strip{display:none}.choro-dots{display:block}}
 .choro-nodata{font-family:var(--sans);font-size:.8rem;color:var(--mid)}
-.choro-nodata i{background:var(--bg);border:1px dashed #857f75}
+.choro-nodata i{background:var(--bg);border:1px dashed #8a8a8a}
 .choro-foot{font-size:.82rem;color:var(--mid);margin-top:10px}
 @media(max-width:760px){.choro-wrap{grid-template-columns:1fr}.choro-side{grid-template-columns:1fr}.choro-strip{max-width:420px}}
 /* On a phone the map is too small for printed values; the ranked strip below carries them. */
@@ -273,7 +273,7 @@ footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px
 .evidence-count{font-family:var(--serif);font-size:1.5rem;line-height:1.3;max-width:none;margin:14px 0 10px}
 .evidence-count strong{font-weight:500;color:var(--ink)}
 .evidence-sources{display:block;font-family:var(--sans);font-size:.85rem;color:var(--mid);line-height:1.8}
-.evidence-sources a,.evidence-sources>span{border:0;background:none;padding:0;border-radius:0;font-size:.85rem;color:var(--ink);text-decoration:underline;text-decoration-color:#d5cec2;text-underline-offset:3px;white-space:normal}
+.evidence-sources a,.evidence-sources>span{border:0;background:none;padding:0;border-radius:0;font-size:.85rem;color:var(--ink);text-decoration:underline;text-decoration-color:#dadada;text-underline-offset:3px;white-space:normal}
 .evidence-sources>*:not(:last-child)::after{content:" · ";color:var(--dim);text-decoration:none;display:inline-block;margin:0 .35em}
 .evidence-src-count{margin-left:.3em;color:var(--dim)}
 .ev-block{margin-top:30px}
@@ -284,7 +284,7 @@ footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px
 .ev-caveats li{padding-left:1.1em;position:relative}
 .ev-caveats li::before{content:"";position:absolute;left:0;top:.7em;width:.45em;height:1px;background:var(--ink)}
 .ev-reading{font-family:var(--sans);font-size:.92rem}
-.ev-sources a,.ev-reading a{color:var(--ink);text-decoration:underline;text-decoration-color:#b9b2a6;text-underline-offset:3px}
+.ev-sources a,.ev-reading a{color:var(--ink);text-decoration:underline;text-decoration-color:#bdbdbd;text-underline-offset:3px}
 .ev-sources a:hover,.ev-reading a:hover{text-decoration-color:var(--c);color:var(--c-ink)}
 .evidence-series{margin-top:30px;border-top:1px solid var(--rule)}
 .evidence-series summary{font-family:var(--sans);font-size:.875rem;letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink)}
@@ -326,7 +326,7 @@ svg[data-hover]{touch-action:pan-y}
 /* One tooltip layer for every mark with a data-tip (article-actions.js). The hovered
    mark gets a hairline ink outline; a hovered row gets a faint band behind it. */
 .viz-svg [data-tip]{outline:none}
-.viz-svg g.mk.is-hot>rect:first-child,.viz-svg g.mk:focus-visible>rect:first-child{fill:#efebe3}
+.viz-svg g.mk.is-hot>rect:first-child,.viz-svg g.mk:focus-visible>rect:first-child{fill:#f2f2f2}
 .viz-svg [data-tip].is-hot:not(g),.viz-svg [data-tip]:focus-visible:not(g){stroke:#121212;stroke-width:1.5px;paint-order:stroke}
 .viz-svg g.mk:focus-visible{outline:none}
 .hov-tip{max-width:min(300px,82vw);white-space:normal}
@@ -342,7 +342,7 @@ svg[data-hover]{touch-action:pan-y}
 @media(max-width:1180px){.article-head h1{margin-right:0;width:auto}}
 .article-head p.muted{text-wrap:pretty}
 .article-byline{display:flex;flex-wrap:wrap;align-items:baseline;row-gap:4px;color:var(--mid);font-size:.8rem}
-.article-byline>span+span::before{content:"·";margin:0 .45em;color:#b9b2a6}
+.article-byline>span+span::before{content:"·";margin:0 .45em;color:#bdbdbd}
 /* One quiet line: the name in ink (underlined only on hover), the rest in mid grey, the
    status in the same type as its neighbours. It was a tinted pill with its own dot, which
    wrapped onto a line of its own on phones and took the separator's place. */
@@ -352,7 +352,7 @@ svg[data-hover]{touch-action:pan-y}
    and a quiet grey: "ECONOMY · WORK IN PROGRESS". In the byline it wrapped onto a line of its
    own on phones, behind a stray separator. */
 .domain-chip .head-status{color:var(--dim);font-weight:500;text-transform:uppercase}
-.domain-chip .head-status::before{content:"·";margin:0 .55em;color:#b9b2a6}
+.domain-chip .head-status::before{content:"·";margin:0 .55em;color:#bdbdbd}
 .data-pull{margin-top:36px;padding-top:14px}
 .data-pull div{grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end}
 .data-pull span{color:var(--c-ink);font-size:clamp(3rem,5.4vw,4.4rem)}
@@ -416,9 +416,9 @@ svg[data-hover]{touch-action:pan-y}
 .editlog-list{border-top:1px solid var(--rule)}
 .editlog-list li{border-bottom:1px solid var(--line);font-family:var(--sans);font-size:.9rem}
 .editlog-date{font-variant-numeric:tabular-nums lining-nums;color:var(--mid)}
-.editlog-diff{border:0;padding:0;font-size:.82rem;letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-color:#d5cec2;text-underline-offset:3px}
+.editlog-diff{border:0;padding:0;font-size:.82rem;letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-color:#dadada;text-underline-offset:3px}
 .editlog-diff:hover{color:var(--c-ink);text-decoration-color:var(--c)}
-.editlog-history{font-family:var(--sans);font-size:.82rem;color:var(--ink);border:0;text-decoration:underline;text-decoration-color:#d5cec2;text-underline-offset:3px}
+.editlog-history{font-family:var(--sans);font-size:.82rem;color:var(--ink);border:0;text-decoration:underline;text-decoration-color:#dadada;text-underline-offset:3px}
 .article-cite-section .sec-hd{display:none}
 
 /* ---------- the figure frame, refined ---------- */
@@ -487,8 +487,8 @@ svg[data-hover]{touch-action:pan-y}
 .dom-climate{--s3-ink:var(--sindoor-ink);--s4-ink:var(--haldi-ink);--s5-ink:var(--jamun-ink)}
 .dom-health{--s3-ink:var(--neel-ink);--s4-ink:var(--sindoor-ink);--s5-ink:var(--hara-ink)}
 .dom-society{--s3-ink:var(--sindoor-ink);--s4-ink:var(--hara-ink);--s5-ink:var(--haldi-ink)}
-/* Axis numbers sit at the house dim (#6e6961, 4.7:1 on white), not a paler grey. */
-.yaxt,.xaxt,.end-s,.alm-line .yaxt,.alm-line .xaxt{fill:#6e6961}
+/* Axis numbers sit at the house dim (#737373, 4.7:1 on white), not a paler grey. */
+.yaxt,.xaxt,.end-s,.alm-line .yaxt,.alm-line .xaxt{fill:#737373}
 /* Halos, dot rings and the gaps cut between marks are drawn in white; they follow the
    page ground, so the figures stay seamless if the ground is ever toned. */
 .viz-svg [stroke="#fff"],.viz-svg [stroke="#ffffff"]{stroke:var(--bg)}
