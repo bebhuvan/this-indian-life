@@ -4,6 +4,7 @@ import type { LockedNumber } from "../data/questions";
 import { formatLockedNumber } from "../data/questions";
 import { fileSafe } from "../data/chartDownloads";
 import FigureCard from "./FigureCard.astro";
+import { artboardsFor, isPhoneW, PHONE_DRAW_W } from "../data/artboards";
 import { renderFigure, cleanUnit, linePeersFigure, tagFigure } from "../data/figures";
 import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, axisFmt, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
 import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, renderChoroplethDots, viewBoxAspectRatio } from "../data/chartSvg";
@@ -176,6 +177,8 @@ const sourceNames: Record<string, string> = {
   niti: "NITI Aayog",
   oecd: "OECD",
   wipo: "WIPO",
+  "wipo-gii": "WIPO, Global Innovation Index",
+  ipindia: "IP India",
   nsf: "NSF / Scopus",
   isro: "ISRO / press reports",
   openbudgets: "Open Budgets India",
@@ -708,9 +711,14 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // Two-up cards render about 510 px wide on a desktop: a 660 box set 13-unit axis text at 10 px.
   // A compact figure sets the width it is drawn at (the text column's), so it renders 1:1.
   const drawW = (visual as { drawW?: number }).drawW;
-  // Page-wide charts are drawn at the page's 1040, so they too render 1:1.
-  const width = mobile ? 384 : drawW ?? (twoUp ? (isLead ? 560 : 520) : 1040);
-  const height = mobile ? (isHero ? 406 : 346) : drawW ? 380 : (isHero ? 560 : isLead ? 500 : 360);
+  // Page-wide charts are drawn at the page's 1040, so they too render 1:1. An artboard rung
+  // (artboards.ts) sets its own width, in either layout, and a height in proportion to it.
+  const rungW = (visual as { rungW?: number }).rungW;
+  const width = rungW ?? (mobile ? PHONE_DRAW_W : drawW ?? (twoUp ? (isLead ? 560 : 520) : 1040));
+  const height = rungW
+    // A phone layout drawn wider than a phone (a small tablet's card) stops growing taller at 340 (hero 400).
+    ? (mobile ? Math.min(isHero ? 400 : 340, Math.round(rungW * (isHero ? 1.06 : 0.9))) : Math.max(340, Math.min(isHero ? 560 : isLead ? 500 : 380, Math.round(rungW * 0.6))))
+    : mobile ? Math.round(PHONE_DRAW_W * (isHero ? 1.06 : 0.9)) : drawW ? 380 : (isHero ? 560 : isLead ? 500 : 360);
   const yFontSize = mobile ? 12 : 13;
   const padRTB = mobile
     ? { r: 24, t: 22, b: 40 }
@@ -775,12 +783,13 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     );
     // The gutter is the gap to the label, the label, and a few units so its last glyph clears
     // the edge: no wider, or the plot gives up width to blank paper.
-    padRTB.r = Math.max(mobile ? padRTB.r : 12, endOffset + Math.ceil(maxLabelW) + (mobile ? 3 : 1));
+    padRTB.r = Math.max(mobile ? padRTB.r : 12, endOffset + Math.ceil(maxLabelW) + 1);
     // Trying the values inside the plot: the right gutter only needs room for the end dot.
     if (tightRight) padRTB.r = 12;
   }
   const all = visual.lines.flatMap((line) => line.points);
-  const values = all.map((point) => point.value);
+  // A shaded range must sit inside the axis, so its bounds count toward the scale.
+  const values = [...all.map((point) => point.value), ...(visual.range?.points ?? []).flatMap((r) => [r.low, r.high])];
   const useLogScale = visual.title.toLowerCase().includes("gdp per person over time")
     || visual.title.toLowerCase().includes("the same starting line")
     || (visual as { logScale?: boolean }).logScale === true;
@@ -1091,7 +1100,9 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
     }
     axisTicks = kept;
   }
-  const geom: LineGeometry = { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime, unitCaption, rank, roles, endFont: mobile ? (visual.lines.length === 1 ? 14 : 12) : visual.lines.length === 1 ? (isLead ? 19 : 17) : 13.5 };
+  const rangePts = dateMode && visual.range ? visual.range.points.map((r) => ({ x: xByTime(timeOf(r.date) ?? minTime), lo: y(r.low), hi: y(r.high) })) : [];
+  const rangeD = rangePts.length >= 2 ? `M${rangePts.map((r) => `${svgCoord(r.x)} ${svgCoord(r.hi)}`).join("L")}L${[...rangePts].reverse().map((r) => `${svgCoord(r.x)} ${svgCoord(r.lo)}`).join("L")}Z` : undefined;
+  const geom: LineGeometry = { width, height, pad, ticks, paths, axisTicks, y, xOfTime: xByTime, dateMode, minTime, maxTime, unitCaption, rank, roles, rangeD, rangeEnd: rangePts.at(-1), endFont: mobile ? (visual.lines.length === 1 ? 14 : 12) : visual.lines.length === 1 ? (isLead ? 19 : 17) : 13.5 };
   if (!tightRight) {
     // On a phone the right gutter for the end values costs an eighth of the plot. Try the
     // values inside the plot beside each line's end; keep the gutter if any would collide.
@@ -1126,6 +1137,8 @@ type LineGeometry = {
   minTime: number; maxTime: number; unitCaption: string;
   /** A rank axis, drawn with 1 at the top. */
   rank?: boolean;
+  /** The shaded range's outline and its last point (LineVisual.range). */
+  rangeD?: string; rangeEnd?: { x: number; lo: number; hi: number };
   /** Each line's part in the story (lineRoles). */
   roles?: Role[];
   /** The end label's size, as the gutter was measured for it. */
@@ -1214,7 +1227,8 @@ function placeEndLabelsInside(g: LineGeometry, single: boolean) {
   for (let i = 0; i < g.paths.length; i += 1) {
     const p = g.paths[i];
     if (!p.latest || p.quiet) { result.push(null); continue; }
-    const w = String(p.endLabelText).length * (single ? 14 : 12) * 0.6 + 4;
+    // A single line's value has its date under it ("May 2026"), often the wider of the two.
+    const w = Math.max(textWidth(String(p.endLabelText), single ? 14 : 12, 600), single && p.latest ? textWidth(pointDateLabel(p.latest.date, p.points), 11.5) : 0) + 4;
     const h = single ? 30 : 13;
     const xb = p.latestX + 4, xa = xb - w;
     if (xa < plotL + 4) return null;
@@ -1295,9 +1309,20 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     ...(p.latest ? [[p.latestX, p.latestY] as [number, number]] : []),
     ...(single && g.dateMode && p.points.length > 5 ? [[pad.l, g.y(p.points[0].value)] as [number, number]] : []),
   ]);
+  // End values set inside the plot (a phone's, when they fit there): the value, and under a single
+  // line's value its date, right-aligned at the anchor (placeEndLabelsInside measures the same).
+  const endBoxes = g.paths.flatMap((p: any, i: number) => {
+    const ins = g.inside?.[i];
+    if (!ins) return [];
+    const w = Math.max(textWidth(String(p.endLabelText), single ? 14 : 12, 600), single && p.latest ? textWidth(pointDateLabel(p.latest.date, p.points), 11.5) : 0) + 4;
+    return [[ins.x - w, ins.y, ins.x, ins.y + (single ? 30 : 13)] as [number, number, number, number]];
+  });
   const clearAt = (xa: number, xb: number, base: number, size: number) =>
-    !boxHitsLines(polysAll, xa, xb, base - size * 0.75, base) && !dotsAll.some(([dx, dy]) => dx > xa - 6 && dx < xb + 6 && dy > base - size - 5 && dy < base + 5);
+    !boxHitsLines(polysAll, xa, xb, base - size * 0.75, base) && !dotsAll.some(([dx, dy]) => dx > xa - 6 && dx < xb + 6 && dy > base - size - 5 && dy < base + 5)
+    && !endBoxes.some(([a, t, r, bt]) => xa < r + 4 && xb > a - 4 && base - size < bt + 2 && base > t - 2);
   let lastBandLabel = -Infinity;
+  // Mark notes as set, so each next one is tried clear of them (8 units apart), not just of its line.
+  const noteBoxes: Array<[number, number, number, number]> = [];
   const bands = lineBandRects(visual, g);
   // A few single-year marks ("1991: India opens up") are drawn as annotations: a hairline at
   // the year and a short label beside it. Many marks (El Nino years) stay as pale shaded bands.
@@ -1323,7 +1348,8 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
       const ly0 = firstNearTop && (right ? bx - (m ? 72 : 96) : bx) < pad.l + (m ? 110 : 150) ? pad.t + 40 : pad.t + 12;
       b += `<line x1="${svgCoord(bx)}" y1="${pad.t}" x2="${svgCoord(bx)}" y2="${svgCoord(plotB)}" stroke="#121212" stroke-width="0.75" stroke-dasharray="2 3">${band.label ? `<title>${band.label}</title>` : ""}</line>`;
       const fs = m ? 11.5 : 12.5, nx = right ? bx - 6 - bw : bx + 6;
-      const ly = [ly0, pad.t + 12, pad.t + 26, pad.t + 40, plotB - 8].find((yy) => clearAt(nx, nx + bw, yy, fs));
+      const ly = [ly0, pad.t + 12, pad.t + 26, pad.t + 40, plotB - 8].find((yy) => clearAt(nx, nx + bw, yy, fs) && !noteBoxes.some(([a, t, r, bt]) => nx < r + 8 && nx + bw > a - 8 && yy - fs < bt && yy > t));
+      if (showLabel && ly !== undefined) noteBoxes.push([nx, ly - fs, nx + bw, ly + 2]);
       if (showLabel && ly !== undefined) b += almHalo(right ? bx - 6 : bx + 6, ly, band.label!, { size: fs, fill: "#4f4f4f", anchor: right ? "end" : "start" });
       continue;
     }
@@ -1382,6 +1408,17 @@ function renderLineSvg(visual: LineVisual, g: LineGeometry, o: { isLead: boolean
     return namedIn(String(p.label), mention);
   };
   b += gapBand(visual, g, roles, m, clearAt);
+  // An interval drawn under the lines in the protagonist's ink, named once in the annotation voice
+  // where it is clear of every line, nearest the range's latest end.
+  if (g.rangeD && visual.range) {
+    const ink = (g.paths.find((p: any) => p.emphasis) ?? g.paths[0])?.color ?? "#121212";
+    b += `<path d="${g.rangeD}" fill="${ink}" fill-opacity="0.13" stroke="none"><title>${visual.range.label}</title></path>`;
+    const fs = m ? 13 : 14.5, tw = noteWidth(visual.range.label, fs), e = g.rangeEnd!, plotB = height - pad.b;
+    const spots: Array<[number, number]> = [];
+    for (const dx of [-tw - 10, -tw - 60, -tw - 120, -tw - 200]) for (const yy of [e.hi - 10, e.lo + fs + 6, e.hi - 28, e.lo + fs + 24]) spots.push([e.x + dx, yy]);
+    const at = spots.find(([x, yy]) => x > pad.l + 4 && x + tw < plotR - 4 && yy - fs > pad.t && yy < plotB - 4 && clearAt(x, x + tw, yy, fs));
+    if (at) b += almNote(at[0], at[1], visual.range.label, { size: fs, fill: "#4f4f4f" });
+  }
   // Climate measures only, for now: a year's temperature or rain is weather, the trend is the
   // climate the title is about. (An economic series' single years are often the story.)
   const climate = /°C|anomal|departure|\brain|monsoon|precip/i.test(`${visual.unit} ${visual.title} ${visual.subtitle ?? ""}`);
@@ -1557,7 +1594,9 @@ function gapBand(visual: LineVisual, g: LineGeometry, roles: Role[], m: boolean,
   const years = yearly(g.paths[li].points.filter((q: any) => mr.has(String(q.date))));
   if (years && clearAt) {
     const text = k === N ? `${R.label} above ${L.label} in every year` : `${R.label} above ${L.label} in ${k} of ${N} years`;
-    const fs = m ? 13 : 14.5, tw = noteWidth(text, fs), plotB = g.height - g.pad.b, plotR = g.width - g.pad.r;
+    // The note's width as set in the italic serif, with room to spare: measured at 0.9 of the
+    // grotesque, a narrow phone drawing let its last word run onto a line.
+    const fs = m ? 13 : 14.5, tw = noteWidth(text, fs) * 1.08 + 14 + 6, plotB = g.height - g.pad.b, plotR = g.width - g.pad.r;
     let spot: [number, number] | undefined;
     for (let yy = g.pad.t + fs + 2; yy < plotB - 6 && !spot; yy += 14) for (let x = g.pad.l + 8; x + tw < plotR - 4 && !spot; x += 16) if (clearAt(x, x + tw, yy, fs)) spot = [x, yy];
     if (spot) out += `<g>${`<rect x="${svgCoord(spot[0])}" y="${svgCoord(spot[1] - fs * 0.62)}" width="9" height="9" ${fill.replace(/0\.\d+"$/, (o) => `${Math.min(0.3, Number(o.slice(0, -1)) * 2.4).toFixed(2)}"`)}/>`}${almNote(spot[0] + 14, spot[1], text, { size: fs, fill: "#4f4f4f" })}</g>`;
@@ -1644,9 +1683,29 @@ function compactFigure(visual: VisualSpec) {
   const size = (visual as { size?: string }).size;
   if (size === "hero" || ["almanac", "choropleth", "stripes", "scenarioMaps", "sparkGrid", "scatter", "scatterXY", "linePanels"].includes(visual.kind)) return false;
   if (size === "small") return true;
+  // A plan that asks for a feature gets the page's width, so it lines up with the figures around it.
+  if (size === "feature") return false;
   // A list of bars compares lengths; past the text column's width a bar only gets longer.
   if (visual.kind === "bar") return true;
   return visual.kind === "line" && visual.lines.length === 1;
+}
+
+const DEV = import.meta.env.DEV;
+const viewW = (svg: string) => Number(/viewBox="[-\d.]+ [-\d.]+ ([\d.]+)/.exec(svg)?.[1] ?? 0);
+/** A card's artboard rungs (artboards.ts): the chart drawn at every width of the ladder the page
+ *  does not already carry inline, each tagged with the layout it is drawn in. */
+function rungsFor(fileName: string, inline: string[], draw?: (w: number) => string) {
+  if (!draw) return undefined;
+  const mode = (w: number, svg: string) => (/^<svg class="viz-svg[^"]*\bviz-[dm]\b/.test(svg) ? svg : svg.replace(/^<svg class="viz-svg /, `<svg class="viz-svg ${isPhoneW(w) ? "viz-m" : "viz-d"} `));
+  return artboardsFor(chartDownloadBase, fileName, inline.map(viewW).filter(Boolean), (w) => typeset(mode(w, draw(w))), DEV);
+}
+const escText = (s: unknown) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+/** A line chart's key as markup, for a rung's drawing (the inline drawings' keys are in the template below). */
+function legendHtml(visual: LineVisual, geo: LineGeometry, inks: Array<{ role: string; color: string }>, ctxNames: string[]) {
+  const order = (geo.keyOrder ?? visual.lines.map((_, index) => index)).filter((index) => inks[index].role !== "context");
+  const items = order.map((index) => `<span${inks[index].role === "lead" ? ' class="k-lead"' : ""}><i style="background:${inks[index].color}"></i>${escText(visual.lines[index].label)}${geo.keyValues?.[index] ? `<b class="kv">${escText(geo.keyValues[index])}</b>` : ""}</span>`).join("");
+  const ctx = ctxNames.length ? `<span class="k-ctx"><i style="background:${CONTEXT}"></i>${escText(ctxNames.join(", "))}</span>` : "";
+  return `<div class="viz-legend${geo.keyValues ? " viz-legend-kv" : ""}">${items}${ctx}</div>`;
 }
 
 const selectedKpis = kpisToShow(lockedNumbers);
@@ -1708,9 +1767,10 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           sourceUrl: source.sourceUrl
         };
         if (visual.kind === "almanac") {
+          const svgD = paired && visual.svgHalf ? visual.svgHalf : visual.svg;
           return (
-            <FigureCard cls={`${base} alm-card alm-${visual.form}`} {...card} figNote={visual.stat}>
-              <Fragment set:html={typeset(paired && visual.svgHalf ? visual.svgHalf : visual.svg)} />
+            <FigureCard cls={`${base} alm-card alm-${visual.form}`} {...card} figNote={visual.stat} rungs={rungsFor(fileName, [svgD, visual.svgM], visual.draw)}>
+              <Fragment set:html={typeset(svgD)} />
               <Fragment set:html={typeset(visual.svgM)} />
             </FigureCard>
           );
@@ -1730,7 +1790,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           if (peerPanels(visual as LineVisual, mention)) {
             const fig = tagFigure(linePeersFigure(visual as LineVisual, { narrow, chartId }))!;
             return (
-              <FigureCard cls={`${base} alm-card fig-card fig-linePeers`} {...card} figNote={fig.note}>
+              <FigureCard cls={`${base} alm-card fig-card fig-linePeers`} {...card} figNote={fig.note} rungs={rungsFor(fileName, [fig.svg, fig.svgM], fig.draw)}>
                 <Fragment set:html={typeset(fig.svg)} />
                 <Fragment set:html={typeset(fig.svgM)} />
               </FigureCard>
@@ -1743,10 +1803,23 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           const inksK = lineInks(visual.lines, mention);
           // Context lines share one grey swatch in the key, named together after the story's lines.
           const ctxNames = visual.lines.filter((_, i) => inksK[i].role === "context").map((l) => l.label);
+          const lineD = renderLineSvg(visual as LineVisual, g, { isLead, mobile: false, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-d alm-line" : "viz-svg viz-d alm-line", mention });
+          const lineM = renderLineSvg(visual as LineVisual, gm, { isLead, mobile: true, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-m alm-line" : "viz-svg viz-m alm-line", mention });
+          // A rung's drawing carries its own key: a phone layout always has one; a desktop layout
+          // when the inline desktop drawing would (past seven lines, or values moved into the key).
+          const drawLine = (w: number) => {
+            const ph = isPhoneW(w), v = visual as LineVisual & { rungW?: number };
+            v.rungW = w;
+            try {
+              const geo = lineGeometry(v, isLarge, narrow, undefined, ph);
+              const svg = renderLineSvg(v, geo, { isLead, mobile: ph, chartId, cls: `viz-svg${isLead ? " viz-svg-lead" : ""} ${ph ? "viz-m" : "viz-d"} alm-line`, mention });
+              return svg + (v.lines.length > 1 && (ph || v.lines.length > 7 || geo.keyValues) ? legendHtml(v, geo, inksK, ctxNames) : "");
+            } finally { delete v.rungW; }
+          };
           return (
-            <FigureCard cls={base} {...card}>
-              <Fragment set:html={typeset(renderLineSvg(visual as LineVisual, g, { isLead, mobile: false, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-d alm-line" : "viz-svg viz-d alm-line", mention }))} />
-              <Fragment set:html={typeset(renderLineSvg(visual as LineVisual, gm, { isLead, mobile: true, chartId, cls: isLead ? "viz-svg viz-svg-lead viz-m alm-line" : "viz-svg viz-m alm-line", mention }))} />
+            <FigureCard cls={base} {...card} rungs={rungsFor(fileName, [lineD, lineM], drawLine)}>
+              <Fragment set:html={typeset(lineD)} />
+              <Fragment set:html={typeset(lineM)} />
               {visual.lines.length > 1 && (
                 // Desktop names each line at its end; phones show values only, so the key
                 // appears there, and on desktop only when there are too many lines to label.
@@ -1782,10 +1855,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
             return `${d > 0 ? "+" : d < 0 ? "−" : ""}${t}${stripes.center === 0 ? "" : " vs normal"}`;
           };
           const stripeYears = stripes.stripes.map((st) => ({ year: Number(String(st.date).slice(0, 4)), value: st.value }));
+          const drawStripes = (w: number) => almStripes(stripeYears, { stops: stripeStops, width: w, height: isPhoneW(w) ? 170 : 210, compact: isPhoneW(w), valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', `class="viz-svg ${isPhoneW(w) ? "viz-m" : "viz-d"} alm"`);
+          const stripesD = drawStripes(narrow ? 508 : 1040), stripesM = drawStripes(PHONE_DRAW_W);
           return (
-            <FigureCard cls={base} {...card}>
-              <Fragment set:html={typeset(almStripes(stripeYears, { stops: stripeStops, width: narrow ? 508 : 1040, height: 210, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-d alm"'))} />
-              <Fragment set:html={typeset(almStripes(stripeYears, { stops: stripeStops, width: 346, height: 170, compact: true, valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', 'class="viz-svg viz-m alm"'))} />
+            <FigureCard cls={base} {...card} rungs={rungsFor(fileName, [stripesD, stripesM], drawStripes)}>
+              <Fragment set:html={typeset(stripesD)} />
+              <Fragment set:html={typeset(stripesM)} />
               <div class="alm-stripe-key">
                 <Fragment set:html={typeset(almScaleKey(stripeStops, [[stripeStops[0][0], lowLabel], [stripes.center, "Normal"], [stripeStops[stripeStops.length - 1][0], highLabel]], 300))} />
               </div>
@@ -1811,7 +1886,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
                   </>
                 ) : <Fragment set:html={typeset(renderChoroplethSvg(cho))} />}
                 <div class="choro-side">
-                  <Fragment set:html={typeset(renderChoroplethStrip(cho))} />
+                  {/* The ranked strip at three widths; the side column's own width picks one (almanac.css). */}
+                  {[260, 340, 420].map((w) => <Fragment set:html={typeset(renderChoroplethStrip(cho, w))} />)}
                   <Fragment set:html={typeset(renderChoroplethDots(cho))} />
                   {cho.regions.length > valued.length ? <span class="choro-nodata"><i></i>Outlined: not surveyed</span> : null}
                 </div>
@@ -1825,7 +1901,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         const fig = renderFigure(visual, { narrow: narrow || compact, chartId, ...(compact ? { width: TEXT_W } : {}) });
         if (!fig) return null;
         return (
-          <FigureCard cls={`${base} alm-card fig-card fig-${visual.kind}`} {...card} figNote={fig.note}>
+          <FigureCard cls={`${base} alm-card fig-card fig-${visual.kind}`} {...card} figNote={fig.note} rungs={rungsFor(fileName, [fig.svg, fig.svgM], fig.draw)}>
             <Fragment set:html={typeset(fig.svg)} />
             <Fragment set:html={typeset(fig.svgM)} />
           </FigureCard>

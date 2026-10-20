@@ -2,6 +2,7 @@
 // artifacts (series or tables) and returns an AlmanacVisual: a desktop SVG, a phone
 // SVG drawn for that width (not shrunk), and the rows behind it for the CSV download.
 // Builders return null when their data is missing, so a plan entry fails soft.
+import { isPhoneW, PHONE_DRAW_W } from "./artboards";
 import { INK, SCALES, STATE_CODE, type Stops, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, slope, stackedArea, type ScatterPoint } from "./almanac";
 
 type Row = Record<string, unknown>;
@@ -20,6 +21,8 @@ export type AlmanacVisual = {
   svgM: string;
   /** a desktop drawing for half the page width, where two figures sit side by side */
   svgHalf?: string;
+  /** The figure drawn at any width, for the artboard rungs (artboards.ts). */
+  draw?: (w: number) => string;
   rows: Row[];
   /** A one-line statistic the figure computed itself (for example a correlation). */
   stat?: string;
@@ -32,7 +35,7 @@ export type AlmanacEntry = {
   reference?: string; yRange?: [number, number]; sizePrefix?: string; sizeFallback?: Record<string, number>; sizeTitle?: string; sizeKey?: Array<[number, string]>;
   labels?: string[]; refY?: { value: number; label: string }; xField?: string; yField?: string; groupField?: string; band?: [number, number];
   highlight?: { curve: string; at: [number, number] }; widths?: number[]; aField?: string; bField?: string; labelField?: string;
-  aLabel?: string; bLabel?: string; exclude?: string[]; xFormat?: "pct" | "lakh" | "plain"; domain?: [number, number]; ticks?: number[]; xTitle?: string; yTitle?: string;
+  aLabel?: string; bLabel?: string; exclude?: string[]; valueField?: string; ends?: [string, string]; yLog?: boolean; order?: "asc" | "desc"; midLabel?: string; xFormat?: "pct" | "lakh" | "plain"; domain?: [number, number]; ticks?: number[]; xTitle?: string; yTitle?: string;
   groupIndicator?: string; groups?: Array<{ key: string; label: string; color: string }>; marks?: Record<string, string>;
   parts?: Array<{ label: string; rows: Array<{ indicator: string; label: string; color?: string }> }>; total?: number; match?: string;
   loField?: string; hiField?: string; midField?: string; eras?: Array<[number, number]>; transform?: "pctChange"; years?: number;
@@ -57,10 +60,23 @@ const multiSource = (a: AlmanacArtifact, label: string) => ({ ...srcOf(a), sourc
 const srcOf = (a: AlmanacArtifact) => ({ indicatorId: a.indicatorId, sourceId: a.sourceId, sourceIndicatorId: a.sourceIndicatorId, sourceUrl: a.sourceUrl });
 const tag = (s: string, cls: string) => s.replace(`class="viz-svg alm"`, `class="viz-svg ${cls} alm"`);
 const pair = (d: string, m: string) => ({ svg: tag(d, "viz-d"), svgM: tag(m, "viz-m") });
+/** A figure drawn by two functions of width, its desktop layout and its phone layout: the
+ *  inline drawings at 1040 and the phone's width, and `draw` for the artboard rungs (artboards.ts). */
+const pairAt = (d: (w: number) => string, m: (w: number) => string) => ({ ...pair(d(1040), m(PHONE_DRAW_W)), draw: (w: number) => (isPhoneW(w) ? m(w) : d(w)) });
 const fmt1 = (v: number) => v.toFixed(1);
 const PALETTE = [INK.neel, INK.sindoor, INK.hara, INK.haldi, INK.jamun];
 // Rural is always hara and urban always neel, wherever they appear.
 const colourFor = (label: string, i: number) => (/rural|village/i.test(label) ? INK.hara : /urban|cit(y|ies)|town/i.test(label) ? INK.neel : /all india|^india$|total/i.test(label) ? INK.ink : PALETTE[i % PALETTE.length]);
+
+/** A log10 axis (values already in log10): bounds on whole 1-2-5 steps, ticks at each. */
+function logAxis(lo: number, hi: number): { min: number; max: number; ticks: number[] } {
+  const steps: number[] = [];
+  for (let p = Math.floor(lo); p <= Math.ceil(hi); p += 1) for (const m of [1, 2, 5]) steps.push(Math.log10(m * 10 ** p));
+  const min = Math.max(...steps.filter((t) => t <= lo + 1e-9)), max = Math.min(...steps.filter((t) => t >= hi - 1e-9));
+  return { min, max, ticks: steps.filter((t) => t >= min - 1e-9 && t <= max + 1e-9) };
+}
+/** 1,000 -> "1k", 150,000 -> "150k": axis labels for a log scale of counts or dollars. */
+const compact = (v: number) => (v >= 1e6 ? `${+(v / 1e6).toPrecision(3)}m` : v >= 1e3 ? `${+(v / 1e3).toPrecision(3)}k` : `${+v.toPrecision(3)}`);
 
 /** Nice axis bounds and ticks on a 1/2/2.5/5 ladder, five to seven intervals. */
 function niceAxis(lo: number, hi: number, zero = false): { min: number; max: number; ticks: number[] } {
@@ -92,9 +108,9 @@ function heatStripVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
     markerNote: t != null ? `First year at or below ${t} ${unit}${e.thresholdLabel ? `, the ${e.thresholdLabel} rate` : ""}` : undefined,
     label: e.title ?? first.title,
   };
-  const { svg, svgM } = pair(heatStrip(rows, { ...common, width: 1040 }), heatStrip(rows, { ...common, width: 350, rowH: 14, gap: 3, labelW: 70, rightW: 30, compact: true }));
+  const { svg, svgM, draw } = pairAt((w) => heatStrip(rows, { ...common, width: w }), (w) => heatStrip(rows, { ...common, width: w, rowH: 14, gap: 3, labelW: 70, rightW: 30, compact: true }));
   return {
-    kind: "almanac", form: "heatStrip", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit, source: multiSource(first, rows0[0].s.label), svg, svgM,
+    kind: "almanac", form: "heatStrip", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit, source: multiSource(first, rows0[0].s.label), svg, svgM, draw,
     rows: rows.flatMap((r) => r.points.map(([date, value]) => ({ series: r.label, date, value }))),
   };
 }
@@ -110,8 +126,12 @@ function tileGridVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const [yMin, yMax] = e.yRange ?? [Math.floor(Math.min(...vals)), Math.ceil(Math.max(...vals))];
   const opts = { reference: ref, threshold: e.threshold ?? 0, thresholdLabel: e.thresholdLabel ? `${e.threshold}` : undefined, from: Math.min(...all), to: Math.max(...all), yMin, yMax, label: e.title ?? first.title };
   const cols = Math.max(...tiles.map((t) => t.col)) + 1;
-  const { svg, svgM } = pair(tileGrid(tiles, { ...opts, tw: 124, th: 92, keyAt: [Math.max(0, cols - 3), Math.max(...tiles.map((t) => t.row)) - 1] }), tileGrid(tiles, { ...opts, tw: 44, th: 40, g: 6 }));
-  return { kind: "almanac", form: "tileGrid", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: multiSource(first, e.series![0].label), svg, svgM, rows: tiles.flatMap((t) => t.points.map(([date, value]) => ({ series: t.label, date, value }))) };
+  // A tile is as wide as the drawing's width allows: at most 124 on a desktop (the size it was
+  // designed at), 44 to 60 on a phone.
+  const keyAt: [number, number] = [Math.max(0, cols - 3), Math.max(...tiles.map((t) => t.row)) - 1];
+  const fit = (w: number, g: number, max: number) => Math.min(max, Math.floor((w + g) / cols - g));
+  const { svg, svgM, draw } = pairAt((w) => { const tw = fit(w, 14, 124); return tileGrid(tiles, { ...opts, tw, th: Math.round((tw * 92) / 124), keyAt }); }, (w) => { const tw = fit(w, 6, 60); return tileGrid(tiles, { ...opts, tw, th: Math.max(40, Math.round((tw * 40) / 44)), g: 6 }); });
+  return { kind: "almanac", form: "tileGrid", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: multiSource(first, e.series![0].label), svg, svgM, draw, rows: tiles.flatMap((t) => t.points.map(([date, value]) => ({ series: t.label, date, value }))) };
 }
 
 // ---------------------------------------------------------------- scatter with fit
@@ -125,12 +145,14 @@ function scatterFitVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
     const s = series(get(`${e.sizePrefix}${slug(label)}`));
     return s.length ? s[s.length - 1][1] : undefined;
   };
-  const pts: ScatterPoint[] = a.rows.map((r) => ({ label: String(r.label ?? ""), x: Number(r.x), y: Number(r.y), hl: r.highlight === 1 || r.highlight === true }))
+  // A log x axis (income, size) plots log10(x); ticks sit at 1-2-5 steps and print the raw value.
+  const lx = (v: number) => (e.xLog ? Math.log10(v) : v), ly = (v: number) => (e.yLog ? Math.log10(v) : v);
+  const pts: ScatterPoint[] = a.rows.map((r) => ({ label: String(r.label ?? ""), x: lx(Number(r.x)), y: ly(Number(r.y)), hl: r.highlight === 1 || r.highlight === true }))
     .filter((p) => p.label && Number.isFinite(p.x) && Number.isFinite(p.y))
     .map((p) => ({ label: p.label, short: short(p.label), x: p.x, y: p.y, size: sizeOf(p.label), hot: e.threshold != null ? p.y > e.threshold : false, wantLabel: (e.labels ? e.labels.includes(p.label) : p.hl) }) as ScatterPoint & { wantLabel: boolean });
   if (pts.length < 4) return null;
-  const xa = niceAxis(Math.min(...pts.map((p) => p.x)), Math.max(...pts.map((p) => p.x))), ya = niceAxis(Math.min(...pts.map((p) => p.y)), Math.max(...pts.map((p) => p.y)));
-  const xf = e.xFormat === "pct" ? (v: number) => `${Math.round(v)}%` : e.xFormat === "lakh" ? (v: number) => `₹${v % 1 ? v.toFixed(1) : v} lakh` : e.xFormat === "plain" ? (v: number) => v.toLocaleString("en-IN") : unitFmt(String(md.xLabel ?? "")), yf = (v: number) => (Math.abs(ya.max) < 10 ? (Math.abs(v * 10 - Math.round(v * 10)) < 1e-9 ? v.toFixed(1) : v.toFixed(2)) : v.toLocaleString("en-IN"));
+  const xa = e.xLog ? logAxis(Math.min(...pts.map((p) => p.x)), Math.max(...pts.map((p) => p.x))) : niceAxis(Math.min(...pts.map((p) => p.x)), Math.max(...pts.map((p) => p.x))), ya = e.yLog ? logAxis(Math.min(...pts.map((p) => p.y)), Math.max(...pts.map((p) => p.y))) : niceAxis(Math.min(...pts.map((p) => p.y)), Math.max(...pts.map((p) => p.y)));
+  const xf0 = e.xFormat === "pct" ? (v: number) => `${Math.round(v)}%` : e.xFormat === "lakh" ? (v: number) => `₹${v % 1 ? v.toFixed(1) : v} lakh` : e.xFormat === "plain" ? (v: number) => v.toLocaleString("en-IN") : unitFmt(String(md.xLabel ?? "")), xf = e.xLog ? (v: number) => compact(10 ** v) : xf0, yf = e.yLog ? (v: number) => compact(10 ** v) : (v: number) => (Math.abs(ya.max) < 10 ? (Math.abs(v * 10 - Math.round(v * 10)) < 1e-9 ? v.toFixed(1) : v.toFixed(2)) : v.toLocaleString("en-IN"));
   const build = (W: number, H: number) => {
     const placed = placeLabels(pts as Array<ScatterPoint & { wantLabel: boolean }>, { W, H, x: [xa.min, xa.max], y: [ya.min, ya.max], sized: pts.some((p) => p.size != null) });
     return scatterFit(placed, {
@@ -139,12 +161,13 @@ function scatterFitVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
       sizeKey: e.sizeKey, sizeTitle: e.sizeTitle, label: e.title ?? a.title,
     });
   };
-  const d = build(1040, 460), m = build(350, 360), half = build(460, 400);
+  const d = build(1040, 460), m = build(PHONE_DRAW_W, 360), half = build(460, 400);
+  const draw = (w: number) => build(w, isPhoneW(w) ? 360 : w < 700 ? 400 : 460).svg;
   const r = d.stats?.r, n = d.stats?.n;
   return {
     kind: "almanac", form: "scatterFit", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a),
-    ...pair(d.svg, m.svg), svgHalf: tag(half.svg, "viz-d"),
-    rows: pts.map((p) => ({ label: p.label, x: p.x, y: p.y, ...(p.size != null ? { size: p.size } : {}) })),
+    ...pair(d.svg, m.svg), svgHalf: tag(half.svg, "viz-d"), draw,
+    rows: pts.map((p) => ({ label: p.label, x: e.xLog ? Math.round(10 ** p.x) : p.x, y: e.yLog ? +(10 ** p.y).toPrecision(4) : p.y, ...(p.size != null ? { size: p.size } : {}) })),
     stat: r != null ? `Least-squares fit across ${n} ${n === 1 ? "unit" : "units"}, r = ${r < 0 ? "−" : ""}${Math.abs(r).toFixed(2)}. The grey band is the 95% interval for the fitted line.` : undefined,
   };
 }
@@ -185,8 +208,8 @@ function paradeVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const top = Math.max(...ser.flatMap((s) => s.values)), ax = niceAxis(0, top * 1.04, true);
   const first = groups[0].a!;
   const opts = { widths, yMax: ax.max, yTicks: ax.ticks.filter((v) => v > 0), xTitle: "Everyone lined up from the lowest spender to the highest, percentile", label: e.title ?? first.title };
-  const { svg, svgM } = pair(parade(ser, { ...opts, width: 1040, height: 400 }), parade(ser, { ...opts, width: 350, height: 300, xTitle: "Lowest to highest spender, percentile", yTicks: ax.ticks.filter((v, k) => v > 0 && k % 2 === 0) }));
-  return { kind: "almanac", form: "parade", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, rows: groups.flatMap(({ s, a }) => a!.rows!.map((r) => ({ series: s.label, group: r.label, value: r.value }))) };
+  const { svg, svgM, draw } = pairAt((w) => parade(ser, { ...opts, width: w, height: 400 }), (w) => parade(ser, { ...opts, width: w, height: 300, xTitle: "Lowest to highest spender, percentile", yTicks: ax.ticks.filter((v, k) => v > 0 && k % 2 === 0) }));
+  return { kind: "almanac", form: "parade", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, draw, rows: groups.flatMap(({ s, a }) => a!.rows!.map((r) => ({ series: s.label, group: r.label, value: r.value }))) };
 }
 
 // ---------------------------------------------------------------- sensitivity
@@ -206,8 +229,8 @@ function sensitivityVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
     if (c && v0 != null && v1 != null) highlight = { curve: c.label, at: e.highlight.at, title: `Move the line by ₹${(e.highlight.at[1] - e.highlight.at[0]).toLocaleString("en-IN")}`, body: ["and the share below it moves", `from ${Math.round(v0)}% to ${Math.round(v1)}%`] as [string, string] };
   }
   const opts = { x: [x0, x1] as [number, number], xTicks, yTicks: [0, 25, 50, 75, 100], band: e.band, highlight, label: e.title ?? a.title };
-  const { svg, svgM } = pair(sensitivity(curves, { ...opts, width: 1040, height: 380, xTitle: "Where the line is drawn, rupees per person per month" }), sensitivity(curves, { ...opts, width: 350, height: 300, xTicks: xTicks.filter((_, k) => k % 2 === 0), xTitle: "Line, ₹ per person per month" }));
-  return { kind: "almanac", form: "sensitivity", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, rows: curves.flatMap((c) => c.points.map(([x, y]) => ({ series: c.label, threshold: x, value: y }))) };
+  const { svg, svgM, draw } = pairAt((w) => sensitivity(curves, { ...opts, width: w, height: 380, xTitle: "Where the line is drawn, rupees per person per month" }), (w) => sensitivity(curves, { ...opts, width: w, height: 300, xTicks: xTicks.filter((_, k) => k % 2 === 0), xTitle: "Line, ₹ per person per month" }));
+  return { kind: "almanac", form: "sensitivity", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: curves.flatMap((c) => c.points.map(([x, y]) => ({ series: c.label, threshold: x, value: y }))) };
 }
 
 // ---------------------------------------------------------------- dumbbell
@@ -216,13 +239,13 @@ function dumbbellVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   if (!a?.rows?.length) return null;
   const lf = e.labelField ?? "state", af = e.aField ?? "nfhs5", bf = e.bField ?? "value";
   const rows = a.rows.filter((r) => r[af] != null && r[bf] != null && !(e.exclude ?? []).includes(String(r[lf])))
-    .map((r) => ({ label: String(r[lf]).replace("Jammu and Kashmir", "Jammu & Kashmir"), short: short(String(r[lf])), a: Number(r[af]), b: Number(r[bf]), emphasis: String(r[lf]) === (e.emphasis ?? "India") }))
+    .map((r) => ({ label: String(r[lf]).replace("Jammu and Kashmir", "Jammu & Kashmir"), short: r.short != null ? String(r.short) : short(String(r[lf])), a: Number(r[af]), b: Number(r[bf]), emphasis: String(r[lf]) === (e.emphasis ?? "India") }))
     .sort((p, q) => q.b - p.b);
   if (rows.length < 3) return null;
   const all = rows.flatMap((r) => [r.a, r.b]), ax = e.domain ? { min: e.domain[0], max: e.domain[1], ticks: e.ticks ?? [] } : niceAxis(Math.min(...all), Math.max(...all));
   const opts = { domain: [ax.min, ax.max] as [number, number], ticks: e.ticks ?? ax.ticks, aLabel: e.aLabel ?? "Before", bLabel: e.bLabel ?? "Latest", label: e.title ?? a.title };
-  const { svg, svgM } = pair(dumbbell(rows, { ...opts, width: 1040, rowH: 21 }), dumbbell(rows.filter((r, i) => i % 2 === 0 || r.emphasis), { ...opts, width: 350, rowH: 20, half: true }));
-  return { kind: "almanac", form: "dumbbell", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, rows: rows.map((r) => ({ label: r.label, [af]: r.a, [bf]: r.b })) };
+  const { svg, svgM, draw } = pairAt((w) => dumbbell(rows, { ...opts, width: w }), (w) => dumbbell(rows.length > 12 ? rows.filter((r, i) => i % 2 === 0 || r.emphasis) : rows, { ...opts, width: w, rowH: 20, half: true }));
+  return { kind: "almanac", form: "dumbbell", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: rows.map((r) => ({ label: r.label, [af]: r.a, [bf]: r.b })) };
 }
 
 // ---------------------------------------------------------------- rank slope
@@ -231,14 +254,16 @@ function rankSlopeVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   if (!l?.rows?.length || !r?.rows?.length) return null;
   const order = (a: AlmanacArtifact) => [...a.rows!].sort((p, q) => Number(q.value) - Number(p.value)).map((x) => String(x.label));
   const left = order(l), right = order(r).filter((s) => left.includes(s));
-  const opts = { leftTitle: e.series![0].label, rightTitle: e.series![1].label, label: e.title ?? l.title };
-  const { svg, svgM } = pair(rankSlope(left, right, { ...opts, width: 1040, rowH: 22 }), rankSlope(left.map(short), right.map(short), { ...opts, width: 350, rowH: 20 }));
-  return { kind: "almanac", form: "rankSlope", title: e.title ?? l.title, subtitle: e.subtitle ?? "", unit: e.unit ?? l.unit, source: srcOf(l), svg, svgM, rows: left.map((s, i) => ({ label: s, [e.series![0].label]: i + 1, [e.series![1].label]: right.indexOf(s) + 1 })) };
+  const opts = { leftTitle: e.series![0].label, rightTitle: e.series![1].label, emphasis: e.emphasis, label: e.title ?? l.title };
+  const { svg, svgM, draw } = pairAt((w) => rankSlope(left, right, { ...opts, width: w }), (w) => rankSlope(left.map(short), right.map(short), { ...opts, width: w, rowH: 20 }));
+  return { kind: "almanac", form: "rankSlope", title: e.title ?? l.title, subtitle: e.subtitle ?? "", unit: e.unit ?? l.unit, source: srcOf(l), svg, svgM, draw, rows: left.map((s, i) => ({ label: s, [e.series![0].label]: i + 1, [e.series![1].label]: right.indexOf(s) + 1 })) };
 }
 
 // ---------------------------------------------------------------- beeswarm
 function beeswarmVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
-  const a = get(e.indicator ?? ""), pts0 = series(a);
+  const t = get(e.indicator ?? "");
+  if (t?.rows?.length) return beeswarmTable(e, t);
+  const a = t, pts0 = series(a);
   if (!a || pts0.length < 10) return null;
   const g = e.groupIndicator ? get(e.groupIndicator) : undefined, gf = e.groupField ?? "oni_monsoon_phase_by_mean";
   const phase = new Map((g?.rows ?? []).filter((r) => !r.region_id || r.region_id === "all_india").map((r) => [Number(r.year), String(r[gf])]));
@@ -248,8 +273,33 @@ function beeswarmVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const labels = Object.fromEntries(Object.entries(e.marks ?? {}).map(([k, text], i) => [k, { dir: (i % 2 ? 1 : -1) as 1 | -1, text }]));
   const sign = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v)}%`;
   const opts = { domain: [lo, hi] as [number, number], groups, guides: e.band ?? [-10, 10], guideLabel: "Within 10% of normal", ends: ["Drier", "Wetter"] as [string, string], tickFmt: sign, labels, label: e.title ?? a.title };
-  const { svg, svgM } = pair(beeswarm(pts, { ...opts, width: 1040, height: 240, ticks: [-20, -10, 0, 10, 20] }), beeswarm(pts, { ...opts, width: 350, height: 240, r: 2.6, ticks: [-10, 0, 10], labels: {} }));
-  return { kind: "almanac", form: "beeswarm", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, rows: pts.map((p) => ({ year: p.id, value: p.value, group: p.group })) };
+  const { svg, svgM, draw } = pairAt((w) => beeswarm(pts, { ...opts, width: w, height: 240, ticks: [-20, -10, 0, 10, 20] }), (w) => beeswarm(pts, { ...opts, width: w, height: 240, r: 2.6, ticks: [-10, 0, 10], labels: {} }));
+  return { kind: "almanac", form: "beeswarm", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: pts.map((p) => ({ year: p.id, value: p.value, group: p.group })) };
+}
+
+/**
+ * A beeswarm of a table's rows: one dot per row, `valueField` along the axis, coloured by
+ * `groupField`. `domain` may run high to low (a rank, 1 = best, on the right); `ends` names
+ * the two directions; `marks` labels chosen rows by their `labelField` value.
+ */
+function beeswarmTable(e: AlmanacEntry, a: AlmanacArtifact): AlmanacVisual | null {
+  const lf = e.labelField ?? "label", vf = e.valueField ?? "value", gf = e.groupField ?? "group";
+  const pts = a.rows!.filter((r) => r[vf] != null && Number.isFinite(Number(r[vf]))).map((r) => ({ id: String(r[lf]), value: Number(r[vf]), group: String(r[gf] ?? "none") }));
+  if (pts.length < 10) return null;
+  const vals = pts.map((p) => p.value), ax = niceAxis(Math.min(...vals), Math.max(...vals));
+  const domain = e.domain ?? [ax.min, ax.max], ticks = e.ticks ?? ax.ticks;
+  const groups = e.groups ?? [...new Set(pts.map((p) => p.group))].map((k, i) => ({ key: k, label: k, color: PALETTE[i % PALETTE.length] }));
+  // Marks alternate above and below in their order along the axis, so neighbours never share a
+  // side, and a mark near either end is anchored inward so its label stays on the page.
+  const at = (v: number) => (v - domain[0]) / (domain[1] - domain[0]);
+  const marks = Object.entries(e.marks ?? {}).map(([k, text]) => ({ k, text, f: at(pts.find((p) => p.id === k)?.value ?? NaN) })).filter((m) => Number.isFinite(m.f)).sort((p, q) => p.f - q.f);
+  const labels = (narrow: boolean) => Object.fromEntries(marks.map((m, i) => [m.k, {
+    dir: (i % 2 ? 1 : -1) as 1 | -1, text: narrow ? m.text.split(" · ")[0] : m.text,
+    anchor: (m.f > 0.85 ? "end" : m.f < 0.15 ? "start" : "middle") as "start" | "middle" | "end",
+  }]));
+  const opts = { domain, groups, ticks, tickFmt: (v: number) => String(v), guides: e.band ?? [], guideLabel: e.thresholdLabel, ends: e.ends, label: e.title ?? a.title };
+  const { svg, svgM, draw } = pairAt((w) => beeswarm(pts, { ...opts, labels: labels(false), width: w, height: 320, r: 8 }), (w) => beeswarm(pts, { ...opts, labels: {}, width: w, height: 190, r: 3.6, ticks: ticks.filter((_, i) => i % 2 === 0) }));
+  return { kind: "almanac", form: "beeswarm", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: pts.map((p) => ({ label: p.id, value: p.value, group: p.group })) };
 }
 
 // ---------------------------------------------------------------- day ribbon
@@ -258,8 +308,8 @@ function dayRibbonVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   if (!rows.length || rows.some((r) => r.parts.some((p) => !Number.isFinite(p.value)))) return null;
   const first = get(e.parts![0].rows[0].indicator)!, total = e.total ?? 1440;
   const ticks: Array<[number, string]> = total === 1440 ? [[0, "0"], [360, "6"], [720, "12"], [1080, "18"], [1440, "24 hours"]] : [[0, "0"], [total, String(total)]];
-  const { svg, svgM } = pair(dayRibbon(rows, { total, ticks, hourly: total === 1440, width: 1040, label: e.title ?? first.title }), dayRibbon(rows, { total, ticks, hourly: total === 1440, width: 350, label: e.title ?? first.title }));
-  return { kind: "almanac", form: "dayRibbon", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, rows: rows.flatMap((r) => r.parts.map((p) => ({ group: r.label, part: p.label, value: p.value }))) };
+  const { svg, svgM, draw } = pairAt((w) => dayRibbon(rows, { total, ticks, hourly: total === 1440, width: w, label: e.title ?? first.title }), (w) => dayRibbon(rows, { total, ticks, hourly: total === 1440, width: w, label: e.title ?? first.title }));
+  return { kind: "almanac", form: "dayRibbon", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, draw, rows: rows.flatMap((r) => r.parts.map((p) => ({ group: r.label, part: p.label, value: p.value }))) };
 }
 
 // ---------------------------------------------------------------- unit chart
@@ -276,13 +326,15 @@ function intervalVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const a = get(e.indicator ?? "");
   if (!a?.rows?.length) return null;
   const lf = e.labelField ?? "label", lo = e.loField ?? "low", hi = e.hiField ?? "high", mid = e.midField ?? "value";
-  const rows = a.rows.map((r) => ({ label: String(r[lf]), lo: Number(r[lo]), hi: Number(r[hi]), mid: r[mid] != null ? Number(r[mid]) : undefined, hot: e.threshold != null && Number(r[mid]) > e.threshold }))
-    .filter((r) => Number.isFinite(r.lo) && Number.isFinite(r.hi)).sort((p, q) => (q.mid ?? q.hi) - (p.mid ?? p.hi));
+  // `order: "asc"` lists the smallest first (a rank, 1 = best, at the top); `domain` sets the axis
+  // where zero means nothing (ranks); `emphasis` names the row the figure is about.
+  const rows = a.rows.map((r) => ({ label: String(r[lf]), lo: Number(r[lo]), hi: Number(r[hi]), mid: r[mid] != null ? Number(r[mid]) : undefined, hot: e.threshold != null && Number(r[mid]) > e.threshold, emphasis: e.emphasis != null && String(r[lf]) === e.emphasis }))
+    .filter((r) => Number.isFinite(r.lo) && Number.isFinite(r.hi)).sort((p, q) => (e.order === "asc" ? -1 : 1) * ((q.mid ?? q.hi) - (p.mid ?? p.hi)));
   if (!rows.length) return null;
-  const ax = niceAxis(Math.min(0, ...rows.map((r) => r.lo)), Math.max(...rows.map((r) => r.hi)), true), f = unitFmt(a.unit);
-  const opts = { domain: [ax.min, ax.max] as [number, number], fmt: f, ref: e.refY, label: e.title ?? a.title, midLabel: rows.some((r) => r.mid != null) ? "Central estimate" : undefined };
-  const { svg, svgM } = pair(intervalPlot(rows, { ...opts, ticks: ax.ticks, width: 1040 }), intervalPlot(rows, { ...opts, ticks: ax.ticks.filter((_, i) => i % 2 === 0), width: 350 }));
-  return { kind: "almanac", form: "intervalPlot", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, rows: rows.map((r) => ({ label: r.label, low: r.lo, high: r.hi, central: r.mid })) };
+  const ax = e.domain ? { min: e.domain[0], max: e.domain[1], ticks: e.ticks ?? niceAxis(e.domain[0], e.domain[1]).ticks } : niceAxis(Math.min(0, ...rows.map((r) => r.lo)), Math.max(...rows.map((r) => r.hi)), true), f = unitFmt(a.unit);
+  const opts = { domain: [ax.min, ax.max] as [number, number], fmt: f, ref: e.refY, label: e.title ?? a.title, midLabel: rows.some((r) => r.mid != null) ? e.midLabel ?? "Central estimate" : undefined };
+  const { svg, svgM, draw } = pairAt((w) => intervalPlot(rows, { ...opts, ticks: ax.ticks, width: w }), (w) => intervalPlot(rows, { ...opts, ticks: ax.ticks.filter((_, i) => i % 2 === 0), width: w }));
+  return { kind: "almanac", form: "intervalPlot", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: rows.map((r) => ({ label: r.label, low: r.lo, high: r.hi, central: r.mid })) };
 }
 
 // ---------------------------------------------------------------- ridgeline
@@ -293,8 +345,8 @@ function ridgelineVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const vals = pts.map(([, v]) => v), ax = niceAxis(Math.min(...vals), Math.max(...vals));
   const pad = (ax.max - ax.min) * 0.12, f = unitFmt(a.unit);
   const opts = { domain: [ax.min - pad, ax.max + pad] as [number, number], ticks: ax.ticks, fmt: f, stops: e.scale ? SCALES[e.scale] : undefined, ref: e.threshold, label: e.title ?? a.title };
-  const { svg, svgM } = pair(ridgeline(groups, { ...opts, width: 1040 }), ridgeline(groups, { ...opts, width: 350, ticks: ax.ticks.filter((_, i) => i % 2 === 0) }));
-  return { kind: "almanac", form: "ridgeline", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, rows: groups.flatMap((g) => g.values.map((value) => ({ group: g.label, value }))) };
+  const { svg, svgM, draw } = pairAt((w) => ridgeline(groups, { ...opts, width: w }), (w) => ridgeline(groups, { ...opts, width: w, ticks: ax.ticks.filter((_, i) => i % 2 === 0) }));
+  return { kind: "almanac", form: "ridgeline", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: groups.flatMap((g) => g.values.map((value) => ({ group: g.label, value }))) };
 }
 
 // ---------------------------------------------------------------- calendar heatmap
@@ -308,8 +360,8 @@ function calendarVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const stops: Stops = e.scale ? SCALES[e.scale] : [[-3, "#7a2816"], [-1.5, "#c24a2e"], [-0.4, "#f1cbba"], [0, "#ededed"], [0.4, "#9fcfc0"], [1.5, "#008a6e"], [3, "#0b5e4b"]];
   const f = e.transform === "pctChange" ? (v: number) => `${v > 0 ? "+" : ""}${v.toFixed(2)}%` : unitFmt(a.unit);
   const lt: Array<[number, string]> = e.transform === "pctChange" ? [[-2, "−2%"], [0, "0"], [2, "+2%"]] : [];
-  const { svg, svgM } = pair(calendarHeat(pts, { stops, width: 1040, fmt: f, legendTicks: lt, label: e.title ?? a.title }), calendarHeat(pts, { stops, width: 350, fmt: f, legendTicks: lt, label: e.title ?? a.title }));
-  return { kind: "almanac", form: "calendarHeat", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, rows: pts.map((p) => ({ date: p.date, value: p.value })) };
+  const { svg, svgM, draw } = pairAt((w) => calendarHeat(pts, { stops, width: w, fmt: f, legendTicks: lt, label: e.title ?? a.title }), (w) => calendarHeat(pts, { stops, width: w, fmt: f, legendTicks: lt, label: e.title ?? a.title }));
+  return { kind: "almanac", form: "calendarHeat", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: pts.map((p) => ({ date: p.date, value: p.value })) };
 }
 
 // ---------------------------------------------------------------- connected scatter
@@ -325,8 +377,8 @@ function connectedVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const xa = e.xLog ? { min: 10 ** Math.floor(Math.log10(xmin)), max: 10 ** Math.ceil(Math.log10(xmax)), ticks: [] as number[] } : niceAxis(xmin, xmax);
   if (e.xLog) for (let v = xa.min; v <= xa.max; v *= 10) xa.ticks.push(v);
   const opts = { x: [xa.min, xa.max] as [number, number], y: [ya.min, ya.max] as [number, number], xTicks: xa.ticks, yTicks: ya.ticks, xLog: e.xLog, refY: e.refY, xTitle: e.xTitle ?? "", yTitle: e.yTitle ?? first.unit, label: e.title ?? first.title };
-  const { svg, svgM } = pair(connectedScatter(paths, { ...opts, width: 1040, height: 520 }), connectedScatter(paths, { ...opts, width: 350, height: 340 }));
-  return { kind: "almanac", form: "connectedScatter", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, rows: paths.flatMap((p) => p.points.map((q) => ({ series: p.label, year: q.t, x: q.x, y: q.y }))) };
+  const { svg, svgM, draw } = pairAt((w) => connectedScatter(paths, { ...opts, width: w, height: 520 }), (w) => connectedScatter(paths, { ...opts, width: w, height: 340 }));
+  return { kind: "almanac", form: "connectedScatter", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, draw, rows: paths.flatMap((p) => p.points.map((q) => ({ series: p.label, year: q.t, x: q.x, y: q.y }))) };
 }
 
 // ---------------------------------------------------------------- waterfall
@@ -340,8 +392,8 @@ function waterfallVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
     if (tot != null) { const gap = Math.round((tot - steps.reduce((x, s) => x + s.value, 0)) * 100) / 100; if (Math.abs(gap) >= 0.01) steps.push({ label: "Rounding and weights in the published figures", value: gap }); }
   }
   const first = get(e.series![0].indicator)!, opts = { totalLabel: e.totalLabel ?? "Total", label: e.title ?? first.title };
-  const { svg, svgM } = pair(waterfall(steps, { ...opts, width: 1040 }), waterfall(steps, { ...opts, width: 350 }));
-  return { kind: "almanac", form: "waterfall", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, rows: steps.map((s) => ({ part: s.label, value: s.value, date })) };
+  const { svg, svgM, draw } = pairAt((w) => waterfall(steps, { ...opts, width: w }), (w) => waterfall(steps, { ...opts, width: w }));
+  return { kind: "almanac", form: "waterfall", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, draw, rows: steps.map((s) => ({ part: s.label, value: s.value, date })) };
 }
 
 
@@ -355,8 +407,8 @@ function slopeVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   if (rows.length < 2) return null;
   const first = get(e.series![0].indicator)!, f = unitFmt(e.unit ?? first.unit);
   const opts = { aLabel: e.aLabel ?? String(a), bLabel: e.bLabel ?? String(b), fmt: f, domain: e.domain, label: e.title ?? first.title };
-  const { svg, svgM } = pair(slope(rows, { ...opts, width: 1040 }), slope(rows, { ...opts, width: 350 }));
-  return { kind: "almanac", form: "slope", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, rows: rows.map((r) => ({ unit: r.label, [String(a)]: r.a, [String(b)]: r.b })) };
+  const { svg, svgM, draw } = pairAt((w) => slope(rows, { ...opts, width: w }), (w) => slope(rows, { ...opts, width: w }));
+  return { kind: "almanac", form: "slope", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit: e.unit ?? first.unit, source: srcOf(first), svg, svgM, draw, rows: rows.map((r) => ({ unit: r.label, [String(a)]: r.a, [String(b)]: r.b })) };
 }
 
 // ---------------------------------------------------------------- stacked area
@@ -376,8 +428,8 @@ function stackedAreaVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const unit = e.unit ?? first.unit;
   const f = e.share ? (v: number) => `${Math.round(v)}%` : unitFmt(unit);
   const opts = { share: e.share, fmt: f, unit: e.share ? "" : unit, label: e.title ?? first.title };
-  const { svg, svgM } = pair(stackedArea(layers, { ...opts, width: 1040 }), stackedArea(layers, { ...opts, width: 350 }));
-  return { kind: "almanac", form: "stackedArea", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit, source: srcOf(first), svg, svgM, rows: layers.flatMap((l) => l.points.map(([t, v]) => ({ series: l.label, year: t, value: v }))) };
+  const { svg, svgM, draw } = pairAt((w) => stackedArea(layers, { ...opts, width: w }), (w) => stackedArea(layers, { ...opts, width: w }));
+  return { kind: "almanac", form: "stackedArea", title: e.title ?? first.title, subtitle: e.subtitle ?? "", unit, source: srcOf(first), svg, svgM, draw, rows: layers.flatMap((l) => l.points.map(([t, v]) => ({ series: l.label, year: t, value: v }))) };
 }
 
 const BUILDERS: Record<string, (e: AlmanacEntry, get: Lookup) => AlmanacVisual | null> = {

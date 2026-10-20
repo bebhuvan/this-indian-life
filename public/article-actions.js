@@ -434,7 +434,115 @@
     });
   }
 
-  const ready = () => { initLazySvgs(); initHover(); initTips(); observeLazy(); };
+  // Artboards (src/data/artboards.ts). A chart is drawn at a ladder of widths: the page carries
+  // its desktop and phone drawings, the rest are files beside the page. Each card shows the
+  // drawing that fits its own width, so a chart's type renders at the size it was set at or up
+  // to a fifth larger, on any screen; an SVG stretched or squeezed to fit scales its text with it.
+  function initArtboards() {
+    const cards = [...document.querySelectorAll(".viz-card[data-rungs]")];
+    if (!cards.length || !("ResizeObserver" in window)) return;
+    const cache = new Map();
+    let copies = 0;
+    const inner = (card) => { const s = getComputedStyle(card); return card.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight); };
+    const drawn = (card, cls) => card.querySelector(`:scope > svg.${cls}`)?.viewBox?.baseVal?.width || 0;
+    const options = (card) => [
+      { w: drawn(card, "viz-d"), show: "d" }, { w: drawn(card, "viz-m"), show: "m" },
+      ...card.dataset.rungs.split(",").filter(Boolean).map((w) => ({ w: Number(w), show: "r" })),
+    ].filter((o) => o.w > 0);
+    // The widest drawing no wider than the card (4% grace) and not stretched past a quarter: type
+    // is never shrunk, and with the rungs a fifth apart it is never enlarged by more than about a
+    // fifth. With nothing in that band, the drawing nearest the card's width.
+    const fits = (c, list) => {
+      const under = list.filter((o) => o.w <= c * 1.04 && c / o.w <= 1.25).sort((a, b) => b.w - a.w);
+      return under[0] ?? [...list].sort((a, b) => Math.abs(Math.log(c / a.w)) - Math.abs(Math.log(c / b.w)))[0];
+    };
+    const nearest = (card) => {
+      const c = inner(card);
+      return c > 0 ? fits(c, options(card)) : null;
+    };
+    const load = (card, w) => {
+      const key = `${card.dataset.rungBase}@${w}`;
+      if (!cache.has(key)) {
+        // In astro dev the drawings are in the card, in <template>s; a build writes them as files.
+        const tpl = card.querySelector(`template[data-w="${w}"]`);
+        cache.set(key, tpl ? Promise.resolve(tpl.innerHTML) : fetch(`${key}.json`).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status))))).then((j) => j.html));
+      }
+      return cache.get(key);
+    };
+    // Clip paths and other ids are renamed for each copy, so url(#id) finds this drawing's own.
+    const ownIds = (html) => {
+      const n = ++copies, ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]);
+      return ids.reduce((h, id) => h.split(`id="${id}"`).join(`id="${id}-r${n}"`).split(`url(#${id})`).join(`url(#${id}-r${n})`), html);
+    };
+    const apply = async (card) => {
+      const best = nearest(card);
+      if (!best || card.dataset.want === `${best.show}${best.w}`) return;
+      card.dataset.want = `${best.show}${best.w}`;
+      if (best.show !== "r") { card.dataset.show = best.show; return; }
+      // Until the in-between drawing arrives, the nearer of the two inline ones stands in.
+      if (card.dataset.show !== "r") {
+        const stand = fits(inner(card), options(card).filter((o) => o.show !== "r"));
+        if (stand) card.dataset.show = stand.show;
+      }
+      if (!card.dataset.near) return void (card.dataset.want = "");
+      let html;
+      try { html = await load(card, best.w); } catch (e) {
+        // A failed fetch is forgotten and tried again, twice, a little later; the inline drawing
+        // stands in meanwhile.
+        cache.delete(`${card.dataset.rungBase}@${best.w}`);
+        card.dataset.want = "";
+        const tries = Number(card.dataset.tries || 0) + 1;
+        card.dataset.tries = String(tries);
+        if (tries <= 2) setTimeout(() => apply(card), 1500 * tries);
+        return;
+      }
+      if (card.dataset.want !== `r${best.w}`) return;
+      const wrap = document.createElement("div");
+      wrap.className = "viz-rung";
+      wrap.dataset.w = String(best.w);
+      wrap.innerHTML = ownIds(html);
+      const old = card.querySelector(":scope > .viz-rung");
+      if (old) old.replaceWith(wrap);
+      else card.insertBefore(wrap, card.querySelector(":scope > .alm-stat, :scope > details, :scope > footer"));
+      card.dataset.show = "r";
+      promoteTitles();
+      initHover();
+    };
+    const ro = new ResizeObserver((entries) => entries.forEach((e) => apply(e.target)));
+    const near = "IntersectionObserver" in window ? new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      near.unobserve(e.target);
+      e.target.dataset.near = "1";
+      e.target.dataset.want = "";
+      apply(e.target);
+    }), { rootMargin: "1200px 0px" }) : null;
+    cards.forEach((card) => { if (!near) card.dataset.near = "1"; else near.observe(card); ro.observe(card); });
+  }
+
+  // A map's paths scale with it, but its value labels should not: a 740-wide map shown 316 wide
+  // on a phone set them at 6.6 px. Each label is re-set at 12 px for the map's shown width, and
+  // one that no longer fits its region is hidden (the ranked list beside the map has every value).
+  function fitMapLabels(svg) {
+    const vw = svg.viewBox?.baseVal?.width, shown = svg.getBoundingClientRect().width;
+    if (!vw || !shown) return;
+    const fs = (12 * vw) / shown;
+    svg.querySelectorAll("text.choro-lab").forEach((t) => {
+      t.setAttribute("font-size", fs.toFixed(2));
+      t.setAttribute("stroke-width", (fs * 0.28).toFixed(2));
+      t.setAttribute("y", (Number(t.dataset.cy) + fs * 0.35).toFixed(1));
+      t.style.display = (t.textContent || "").length * fs * 0.6 < Number(t.dataset.room) ? "" : "none";
+    });
+  }
+  function initMapLabels() {
+    if (!("ResizeObserver" in window)) return;
+    const ro = new ResizeObserver((entries) => entries.forEach((e) => fitMapLabels(e.target)));
+    const watch = () => document.querySelectorAll("svg.choro-map:not([data-fit])").forEach((svg) => { svg.dataset.fit = "1"; ro.observe(svg); fitMapLabels(svg); });
+    watch();
+    // Maps further down arrive lazily (initLazySvgs).
+    if ("MutationObserver" in window) new MutationObserver(watch).observe(document.body, { childList: true, subtree: true });
+  }
+
+  const ready = () => { initLazySvgs(); initArtboards(); initMapLabels(); initHover(); initTips(); observeLazy(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ready);
   else ready();
 })();

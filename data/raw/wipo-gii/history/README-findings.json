@@ -1,0 +1,686 @@
+{
+  "_about": "India in WIPO's Global Innovation Index, editions before 2022, extracted from the official report PDFs (and the 2021 dataset xlsx). Page numbers are physical PDF pages (1-based), not printed folios. ci = 90% rank confidence interval from the JRC statistical audit (published from 2012). efficiency_rank = Innovation Efficiency Ratio rank (called 'Efficiency Index' in 2011-2012; dropped from 2019). Scores 2007-2010 are on a 1-7 scale, 2011+ on 0-100; not comparable.",
+  "back_series": "No official back-calculated or framework-consistent GII time series exists for these editions. Every edition says ranks/scores are not directly comparable year to year. The only official re-computations are (a) GII 2012 Annex 2 Table 2 and GII 2013 Annex 2 Table 3, which decompose each economy's one-year rank change into performance/data, framework and sample effects; (b) the GII 2013 profile line 'Global Innovation Index 2012 (based on GII 2012 framework)'. WIPO's dataset collection on tind.wipo.int starts with GII 2021 (not checkable directly: host blocks automated clients). GII 2026 Appendix I repeats: 'scores and rankings are not directly comparable between one year and another.'",
+  "news_crosscheck": {
+    "2015_81": "confirmed (81 of 141)",
+    "2019_66": "WRONG: official GII 2019 rank is 52 of 129 (66 was India's 2013 and 2016 rank)",
+    "2020_48": "confirmed (48 of 131)",
+    "2021_46": "confirmed (46 of 132)"
+  },
+  "editions": [
+    {
+      "edition": "2007",
+      "url_of_file": null,
+      "local_path": null,
+      "sha256": null,
+      "retrieved": "2026-10-20",
+      "india_rank": 23,
+      "n_economies": null,
+      "score": null,
+      "input_rank": null,
+      "output_rank": null,
+      "efficiency_rank": null,
+      "ci": null,
+      "n_indicators": null,
+      "evidence": [
+        {
+          "field": "india_rank",
+          "page_or_cell": "history/2009/GII-2008-2009-Report.pdf p45 (PDF page)",
+          "snippet": "Unlike last year when India and China (23 and 29 ranks respectively) ran neck-and-neck at the top of the second quartile"
+        },
+        {
+          "field": "india_rank",
+          "page_or_cell": "history/2009/GII-2008-2009-Report.pdf p44",
+          "snippet": "last time Japan stood fourth; Singapore (7th); Hong Kong (10th); South Korea (19th); and India and China, 23rd and 29th respectively"
+        }
+      ],
+      "framework_notes": "First GII (INSEAD with World Business magazine, released Jan 2007). Original report not retrieved: no official WIPO/INSEAD copy found; WIPO repository (tind.wipo.int) blocks automated clients (HTTP 202 challenge / 403). Rank 23 is only as recalled in the 2008-09 report. Different framework and 1-7 scale; not comparable with 2011+."
+    },
+    {
+      "edition": "2008-2009",
+      "url_of_file": "https://www.gov.cn/xinwen/2016-08/11/5098835/files/4177d21d03254988a0ea4fc6b9014fad.pdf",
+      "local_path": "data/raw/wipo-gii/history/2009/GII-2008-2009-Report.pdf",
+      "sha256": "6959028c59a29111fd6e6481bf9061480dd51a71334715b9c9d43c57d93a071d",
+      "retrieved": "2026-10-20",
+      "india_rank": 41,
+      "n_economies": 130,
+      "score": 3.44,
+      "input_rank": 49,
+      "output_rank": 34,
+      "efficiency_rank": null,
+      "ci": null,
+      "n_indicators": null,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "p13 Table 1: GII 2008/2009 Overall Rankings",
+          "snippet": "Denmark 4.69 8 India 3.44 41"
+        },
+        {
+          "field": "input_rank",
+          "page_or_cell": "p15 Table 2: Overall Input Pillars Index",
+          "snippet": "Iceland 5.16 16 India 3.82 49"
+        },
+        {
+          "field": "output_rank",
+          "page_or_cell": "p17 Table 3: Overall Output Pillars Index",
+          "snippet": "United States 4.84 1 India 3.05 34"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p6",
+          "snippet": "this year covers a record number of 130 economies"
+        },
+        {
+          "field": "provenance",
+          "page_or_cell": "p5/p6",
+          "snippet": "© 2009 INSEAD All Rights Reserved ... CII along with INSEAD is pleased to present the Global Innovation Index"
+        }
+      ],
+      "framework_notes": "INSEAD + Confederation of Indian Industry edition, pre-WIPO. File is a third-party mirror on gov.cn (PDF metadata: created 7 Jan 2009, InDesign), not an INSEAD/WIPO host; content is the INSEAD report. Score on 1-7 scale. Model variable count not stated plainly (profiles 'covering over 90 indicators'), so n_indicators null. The GII 2011 report's 'GII past years' column lists India 2009 = 41, matching this file. Efficiency ratio and CI not published."
+    },
+    {
+      "edition": "2009-2010",
+      "url_of_file": "https://english.www.gov.cn/r/Pub/GOV/ReceivedContent/Other/2016-08-12/GII-2009-2010-Report.pdf",
+      "local_path": "data/raw/wipo-gii/history/2010/GII-2009-2010-Report.pdf",
+      "sha256": "5316237d9cd2c9284c31cd3392a09f0a1a79f9eefcfbb05e771a7ae2a350147b",
+      "retrieved": "2026-10-20",
+      "india_rank": 56,
+      "n_economies": 132,
+      "score": 3.1,
+      "input_rank": 54,
+      "output_rank": 69,
+      "efficiency_rank": null,
+      "ci": null,
+      "n_indicators": 60,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "p17 Table 1: GII 2009-2010 Overall Rankings",
+          "snippet": "United Arab Emirates 3.98 24 India 3.10 56"
+        },
+        {
+          "field": "input_rank",
+          "page_or_cell": "p19 Table 2: Innovation Input Index",
+          "snippet": "France 4.94 21 India 3.82 54"
+        },
+        {
+          "field": "output_rank",
+          "page_or_cell": "p22 Table 3: Innovation Output Index",
+          "snippet": "India 2.37 69 Jamaica 2.13 102"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p15",
+          "snippet": "The GII 2009–2010 covers a record number of 132 economies"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p8 / p14",
+          "snippet": "detailed data tables for each of the 60 variables comprising ...; No of Variables 60 variables"
+        }
+      ],
+      "framework_notes": "INSEAD + CII edition, pre-WIPO; third-party gov.cn mirror (PDF created 2 Aug 2010; '© 2010 INSEAD'). Scores on 1-7 scale. GII 2011 report lists India 2010 = 56, matching. Not comparable with 2011+ (2011 note 27: 'Caution should be exercised in directly comparing ranks across years because the model has evolved since the first GII')."
+    },
+    {
+      "edition": "2011",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/economics/gii/gii_2011.pdf",
+      "local_path": "data/raw/wipo-gii/history/2011/gii_2011.pdf",
+      "sha256": "c0f437cb12852e8a5e37b3f4514151f70f2f777c838ab35c453f7661ca6d0b32",
+      "retrieved": "2026-10-20",
+      "india_rank": 62,
+      "n_economies": 125,
+      "score": 34.52,
+      "input_rank": 87,
+      "output_rank": 44,
+      "efficiency_rank": 9,
+      "ci": null,
+      "n_indicators": 80,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "p20 Global Innovation Index rankings",
+          "snippet": "India 34.52 62 LM 8 SAS 1 56 41  [cols: Score, Rank, Income, Region, GII past years 2010, 2009]"
+        },
+        {
+          "field": "input_rank",
+          "page_or_cell": "p43 Table 3: Innovation Input Sub-Index rankings",
+          "snippet": "India 36.47 87 LM 14 SAS 1"
+        },
+        {
+          "field": "output_rank",
+          "page_or_cell": "p44 Table 4: Innovation Output Sub-Index rankings",
+          "snippet": "India 32.56 44 LM 5 SAS 1"
+        },
+        {
+          "field": "efficiency_rank",
+          "page_or_cell": "p191 India profile",
+          "snippet": "Innovation Efficiency Index ....... 0.9 ....... 9"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p381",
+          "snippet": "This year the GII Report covers 125 countries"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p371",
+          "snippet": "The model includes 80 indicators"
+        },
+        {
+          "field": "past_ranks",
+          "page_or_cell": "p191 India profile",
+          "snippet": "Global Innovation Index 2010 ... 56; Global Innovation Index 2009 ... 41"
+        }
+      ],
+      "framework_notes": "First edition co-published by INSEAD with WIPO; new 0-100 scale and 7-pillar input/output framework, so a hard break from 2007-2010 (1-7 scale). Note 27 (p76): 'Caution should be exercised in directly comparing ranks across years because the model has evolved since the first GII, as have the variables that are included and particular countries covered.' No rank confidence interval published in 2011."
+    },
+    {
+      "edition": "2012",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/economics/gii/gii_2012.pdf",
+      "local_path": "data/raw/wipo-gii/history/2012/gii_2012.pdf",
+      "sha256": "76aa02b57e378065c5e9618eb0257dac64defe1fbd969194d41dca0981ad983c",
+      "retrieved": "2026-10-20",
+      "india_rank": 64,
+      "n_economies": 141,
+      "score": 35.7,
+      "input_rank": 96,
+      "output_rank": 40,
+      "efficiency_rank": 2,
+      "ci": [
+        57,
+        77
+      ],
+      "n_indicators": 84,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "p20 Global Innovation Index rankings",
+          "snippet": "India 35.7 64 LM 3 CSA 1"
+        },
+        {
+          "field": "input_rank",
+          "page_or_cell": "p33 Innovation Input Sub-Index rankings",
+          "snippet": "India 34.0 96 LM 14 CSA 3"
+        },
+        {
+          "field": "output_rank",
+          "page_or_cell": "p34 Innovation Output Sub-Index rankings",
+          "snippet": "India 37.3 40 LM 2 CSA 1"
+        },
+        {
+          "field": "efficiency_rank",
+          "page_or_cell": "p255 India profile",
+          "snippet": "Innovation Efficiency Index ...... 1.1  2"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p98 Table 2: GII 2012 and Input and Output Sub-Indices: Ranks and 90% confidence intervals",
+          "snippet": "India 64 [57, 77] 96 [87, 102] 40 [39, 56]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p255 India profile",
+          "snippet": "Global Innovation Index 2012 (out of 141)"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p29",
+          "snippet": "for a total of 84 indicators"
+        },
+        {
+          "field": "rank_change_decomposition",
+          "page_or_cell": "p90 Annex 2 Table 2: Source of changes in the rankings: 2012 compared with 2011",
+          "snippet": "India 64 62 62 –2 3 –3 –2  [A GII 2012 rank; B 2012 rank among 2011 economies; C GII 2011 rank; D change; E performance on 2011 framework; F framework adjustments; G added economies]"
+        }
+      ],
+      "framework_notes": "Infrastructure pillar reorganised (new Ecological sustainability sub-pillar), pillar 6 renamed Knowledge & technology outputs, new Online creativity sub-pillar (7.3), GMAT, ISO 9001 etc. added (Annex 2 Table 1, p89). 16 new economies. WIPO's own decomposition for India: -2 places overall = +3 from performance, -3 from framework changes, -2 from new economies. First year rank CIs (JRC audit) published."
+    },
+    {
+      "edition": "2013",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/economics/gii/gii_2013.pdf",
+      "local_path": "data/raw/wipo-gii/history/2013/gii_2013.pdf",
+      "sha256": "635c92a17b11ebc1d9d7f3b991b0edfc26db9b1a0906d197bd4cbe6836351738",
+      "retrieved": "2026-10-20",
+      "india_rank": 66,
+      "n_economies": 142,
+      "score": 36.17,
+      "input_rank": 87,
+      "output_rank": 42,
+      "efficiency_rank": 11,
+      "ci": [
+        64,
+        89
+      ],
+      "n_indicators": 84,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "p22 Global Innovation Index rankings",
+          "snippet": "India 36.17 66 LM 3 CSA 1 1.02 11"
+        },
+        {
+          "field": "input_rank,output_rank",
+          "page_or_cell": "p211 India profile",
+          "snippet": "Innovation Output Sub-Index ... 36.6 42; Innovation Input Sub-Index ... 35.8 87"
+        },
+        {
+          "field": "efficiency_rank",
+          "page_or_cell": "p22",
+          "snippet": "India 36.17 66 LM 3 CSA 1 1.02 11 [Efficiency Ratio 1.02, rank 11]"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p84 Table 3: GII 2013 and Input/Output Sub-Indices: Ranks and 90% confidence intervals",
+          "snippet": "India 66 [64, 89] 87 [87, 106] 42 [42, 74]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p211 India profile",
+          "snippet": "Global Innovation Index (out of 142)"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p64",
+          "snippet": "a total of 84 indicators"
+        },
+        {
+          "field": "rank_change_decomposition",
+          "page_or_cell": "p76 Annex 2 Table 3: Source of changes in the rankings: 2013 compared with 2012",
+          "snippet": "India 66 64 –2 –6 5 –1  [GII 2013 rank; GII 2012 rank; change; data updates; adjustments to GII framework; inclusion/exclusion of economies]"
+        }
+      ],
+      "framework_notes": "20 indicators modified, 10 deleted or replaced, 10 methodological changes (p73); Doing Business indicators switched from percent rank to distance-to-frontier; QS university ranking replaced research-institution survey; imports/exports of goods & services deleted. WIPO decomposition for India: -2 places = -6 data updates, +5 framework, -1 sample. Last edition with a per-economy decomposition table."
+    },
+    {
+      "edition": "2014",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/economics/gii/gii_2014.pdf",
+      "local_path": "data/raw/wipo-gii/history/2014/gii_2014.pdf",
+      "sha256": "91d70b5e215da2a98cfb11262991bc330a183cfdb6b4cbd2a4e58ba2d2ce8aa9",
+      "retrieved": "2026-10-20",
+      "india_rank": 76,
+      "n_economies": 143,
+      "score": 33.7,
+      "input_rank": 93,
+      "output_rank": 65,
+      "efficiency_rank": 31,
+      "ci": [
+        72,
+        78
+      ],
+      "n_indicators": 81,
+      "evidence": [
+        {
+          "field": "india_rank,score,efficiency_rank",
+          "page_or_cell": "p27 Global Innovation Index rankings (continued)",
+          "snippet": "India 33.70 76 LM 7 CSA 1 0.82 31"
+        },
+        {
+          "field": "input_rank,output_rank",
+          "page_or_cell": "p225 India profile",
+          "snippet": "Innovation Output Sub-Index ... 30.4 65; Innovation Input Sub-Index ... 37.0 93"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p89 Table 4 (continued): Ranks and 90% confidence intervals",
+          "snippet": "India 76 [72, 78] 93 [84, 95] 65 [61, 69]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p225 India profile",
+          "snippet": "Global Innovation Index (out of 143)"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p35",
+          "snippet": "for a total of 81 indicators"
+        }
+      ],
+      "framework_notes": "18 indicators modified: 4 deleted or replaced, 11 methodological changes, 3 renumbered (Annex 2, p81); education expenditure indicators redefined, gross tertiary outbound enrolment, electricity consumption and GMAT mean score deleted; eight indicators re-scaled by total trade. Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2)."
+    },
+    {
+      "edition": "2015",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_gii_2015.pdf",
+      "local_path": "data/raw/wipo-gii/history/2015/wipo_gii_2015.pdf",
+      "sha256": "c3e3118a1eb673597be2f6b351038e8210b846bc38013dd9b761b005dd425c47",
+      "retrieved": "2026-10-20",
+      "india_rank": 81,
+      "n_economies": 141,
+      "score": 31.74,
+      "input_rank": 100,
+      "output_rank": 69,
+      "efficiency_rank": 31,
+      "ci": [
+        73,
+        81
+      ],
+      "n_indicators": 79,
+      "evidence": [
+        {
+          "field": "india_rank,score,efficiency_rank",
+          "page_or_cell": "p33 Global Innovation Index rankings (continued)",
+          "snippet": "India 31.74 81 LM 8 CSA 1 0.79 31"
+        },
+        {
+          "field": "input_rank,output_rank",
+          "page_or_cell": "p251 India profile",
+          "snippet": "Innovation Output Sub-Index ... 28.0 69; Innovation Input Sub-Index ... 35.5 100"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p95 Table 4 (continued): Ranks and 90% confidence intervals",
+          "snippet": "India 81 [73, 81] 100 [84, 100] 69 [58, 69]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p251 India profile",
+          "snippet": "Global Innovation Index (out of 141)"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p44",
+          "snippet": "for a total of 79 indicators"
+        }
+      ],
+      "framework_notes": "Six indicators modified: Press Freedom Index deleted, non-agricultural market access tariff deleted, researchers switched from headcount to FTE, GERD performed-by-business changed to financed-by-business, GMAT test takers replaced by females employed with advanced degrees (Annex 2 Table 1, p83). Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2). Note the upper CI bound equals the published rank (81): India sat at the weak end of its plausible range."
+    },
+    {
+      "edition": "2016",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_pub_gii_2016.pdf",
+      "local_path": "data/raw/wipo-gii/history/2016/wipo_pub_gii_2016.pdf",
+      "sha256": "52476ac48e5e7718b19b3750cd2dbdda0fe82d33b57e5815101683d39b63f277",
+      "retrieved": "2026-10-20",
+      "india_rank": 66,
+      "n_economies": 128,
+      "score": 33.61,
+      "input_rank": 72,
+      "output_rank": 59,
+      "efficiency_rank": 63,
+      "ci": [
+        59,
+        68
+      ],
+      "n_indicators": 82,
+      "evidence": [
+        {
+          "field": "india_rank,score,efficiency_rank",
+          "page_or_cell": "p21 Global Innovation Index 2016 rankings (continued)",
+          "snippet": "India 33.61 66 LM 6 CSA 1 0.66 63"
+        },
+        {
+          "field": "input_rank,output_rank",
+          "page_or_cell": "p253 India profile",
+          "snippet": "Innovation Output Sub-Index ... 26.7 59; Innovation Input Sub-Index ... 40.5 72"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p97 Table 4 (continued): Ranks and 90% confidence intervals",
+          "snippet": "India 66 [59, 68] 72 [61, 74] 59 [55, 67]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p253 India profile",
+          "snippet": "Global Innovation Index (out of 128)"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p42",
+          "snippet": "for a total of 82 indicators this year"
+        }
+      ],
+      "framework_notes": "Sub-pillar 4.3 and 14 indicators modified: 8 methodological changes at source, 3 indicators added, 1 replaced, 4 renamed (Annex 2, p86); WIPO and WTO revised methodologies for patent families and services-trade indicators (5.2.5, 5.3.1, 5.3.3, 6.3.1, 6.3.3, 7.2.1), 'caused significant shifts in the results for several countries'. Sample fell from 141 to 128 economies; a smaller sample can by itself lift a mid-ranked economy (our inference, not a WIPO statement; WIPO published no per-economy decomposition after 2013). Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2)."
+    },
+    {
+      "edition": "2017",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_pub_gii_2017.pdf",
+      "local_path": "data/raw/wipo-gii/history/2017/wipo_pub_gii_2017.pdf",
+      "sha256": "da6d71fe79e9186d8381692a86e1ca2da60c7ac25dda7ba697f3a2ce54a678e9",
+      "retrieved": "2026-10-20",
+      "india_rank": 60,
+      "n_economies": 127,
+      "score": 35.47,
+      "input_rank": 66,
+      "output_rank": 58,
+      "efficiency_rank": 53,
+      "ci": [
+        52,
+        63
+      ],
+      "n_indicators": 81,
+      "evidence": [
+        {
+          "field": "india_rank,score,efficiency_rank",
+          "page_or_cell": "p20 Global Innovation Index 2017 rankings",
+          "snippet": "India 35.47 60 LM 6 CSA 1 0.66 53"
+        },
+        {
+          "field": "input_rank,output_rank",
+          "page_or_cell": "p264 India profile",
+          "snippet": "Innovation Output Sub-Index ... 28.1 58; Innovation Input Sub-Index ... 42.8 66; Innovation Efficiency Ratio ... 0.7 53"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p96 Table 4: Ranks and 90% confidence intervals",
+          "snippet": "India 60 [52, 63] 66 [52, 69] 58 [52, 59]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p264 India profile",
+          "snippet": "Global Innovation Index (out of 127) ... 35.5 60"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p42",
+          "snippet": "for a total of 81 indicators this year"
+        }
+      ],
+      "framework_notes": "Five indicators modified: total value of stocks traded removed, FDI in/outflows switched to 3-year averages, Wikipedia monthly -> yearly edits (Annex 2 Table 1, p85). No pillar/sub-pillar change. Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2). Official data bundle wipo_pub_gii_2017-tech1.zip (~270 MB) exists on the WIPO page but was not downloaded; values here come from the report PDF."
+    },
+    {
+      "edition": "2018",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_pub_gii_2018.pdf",
+      "local_path": "data/raw/wipo-gii/history/2018/wipo_pub_gii_2018.pdf",
+      "sha256": "092efe21d2f6d7284f70df63e8cd820a368f8bf2528ffc3555e5d462b9237c2a",
+      "retrieved": "2026-10-20",
+      "india_rank": 57,
+      "n_economies": 126,
+      "score": 35.18,
+      "input_rank": 63,
+      "output_rank": 57,
+      "efficiency_rank": 49,
+      "ci": [
+        52,
+        59
+      ],
+      "n_indicators": 80,
+      "evidence": [
+        {
+          "field": "india_rank,score,efficiency_rank",
+          "page_or_cell": "p22 Global Innovation Index 2018 rankings",
+          "snippet": "India 35.18 57 LM 5 CSA 1 0.65 49"
+        },
+        {
+          "field": "input_rank,output_rank,efficiency_rank",
+          "page_or_cell": "p310 India profile",
+          "snippet": "GII 2018 rank 57; Output rank 57; Input rank 63; Efficiency ratio 49; GII 2017 rank 60"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p124 Table 4: GII 2018 and Input/Output Sub-Indices: Ranks and 90% confidence intervals",
+          "snippet": "India 57 [52, 59] 63 [56, 66] 57 [49, 57]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p414",
+          "snippet": "This year's GII covers 126 economies"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p59",
+          "snippet": "for a total of 80 indicators this year"
+        }
+      ],
+      "framework_notes": "12 indicators modified: 1 removed, 1 replaced, 10 methodological and/or name changes; no pillar/sub-pillar change (Annex 2, p109). Last edition publishing the Innovation Efficiency Ratio. Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2)."
+    },
+    {
+      "edition": "2019",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_pub_gii_2019.pdf",
+      "local_path": "data/raw/wipo-gii/history/2019/wipo_pub_gii_2019.pdf",
+      "sha256": "991de2aa767a1629d8f658898a9bd50aa7db63fedd30e962a89ef8330ded3104",
+      "retrieved": "2026-10-20",
+      "india_rank": 52,
+      "n_economies": 129,
+      "score": 36.58,
+      "input_rank": 61,
+      "output_rank": 51,
+      "efficiency_rank": null,
+      "ci": [
+        44,
+        53
+      ],
+      "n_indicators": 80,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "p35 Global Innovation Index 2019 rankings",
+          "snippet": "India 36.58 52 LM 4 CSA 1"
+        },
+        {
+          "field": "input_rank,output_rank",
+          "page_or_cell": "p319 India profile",
+          "snippet": "GII 2019 rank 52; Output rank 51; Input rank 61; GII 2018 rank 57"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p433 Table A-V.4: GII 2019 and Input/Output Sub-Indices: ranks and 90% confidence intervals",
+          "snippet": "India 52 [44, 53] 61 [50, 63] 51 [46, 54]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p423",
+          "snippet": "This year the GII covers 129 economies"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p264",
+          "snippet": "The 2019 GII includes 80 indicators and three types of data."
+        },
+        {
+          "field": "efficiency_rank",
+          "page_or_cell": "p88 note 25",
+          "snippet": "This year the Innovation Efficiency Ratio has been replaced by an analysis of the connection between Innovation Inputs and Innovation Outputs"
+        }
+      ],
+      "framework_notes": "Seven indicators modified: political stability & safety (World Bank) replaced by political & operational stability (IHS Markit); IP payments/receipts and GDP-per-worker growth moved to 3-year averages; EPI changed at source (Appendix IV, p418). Efficiency Ratio dropped. Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2)."
+    },
+    {
+      "edition": "2020",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_pub_gii_2020.pdf",
+      "local_path": "data/raw/wipo-gii/history/2020/wipo_pub_gii_2020.pdf",
+      "sha256": "bea05102590bca1930cf856a3ad864fb5b19224077c551b3bac17f959cecacd1",
+      "retrieved": "2026-10-20",
+      "india_rank": 48,
+      "n_economies": 131,
+      "score": 35.59,
+      "input_rank": 57,
+      "output_rank": 45,
+      "efficiency_rank": null,
+      "ci": [
+        44,
+        51
+      ],
+      "n_indicators": 80,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "p33 Global Innovation Index 2020 rankings",
+          "snippet": "India 35.59 48 LM 3 CSA 1"
+        },
+        {
+          "field": "input_rank,output_rank",
+          "page_or_cell": "p314 India profile",
+          "snippet": "GII 2020 rank 48; Output rank 45; Input rank 57; GII 2019 rank 52"
+        },
+        {
+          "field": "ci",
+          "page_or_cell": "p429 Table A-V.4: GII 2020 ... ranks and 90% confidence intervals",
+          "snippet": "India 48 [44, 51] 57 [48, 59] 45 [44, 50]"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "p419",
+          "snippet": "This year the GII covers 131 economies"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "p260",
+          "snippet": "The 2020 GII includes 80 indicators and three types of data."
+        }
+      ],
+      "framework_notes": "10 indicators modified: six changed at source (EPI, ISO 14001, minority investors, VC deals, ISO 9001, entertainment & media), GERD financed by abroad re-scaled to % GDP, ICTs & business-model creation replaced by Global brand value (Appendix IV, p414): 'the scores calculated under the old methodology are not comparable to the new scores'. Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2)."
+    },
+    {
+      "edition": "2021",
+      "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_pub_gii_2021.pdf",
+      "local_path": "data/raw/wipo-gii/history/2021/wipo_pub_gii_2021.pdf",
+      "sha256": "ec863890389e1fa6a3503160ee9727f1c85e4d28708b41509cf37a02ad26bac1",
+      "retrieved": "2026-10-20",
+      "india_rank": 46,
+      "n_economies": 132,
+      "score": 36.4,
+      "input_rank": 57,
+      "output_rank": 45,
+      "efficiency_rank": null,
+      "ci": [
+        43,
+        48
+      ],
+      "n_indicators": 81,
+      "evidence": [
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "wipo_pub_gii_2021.pdf p24 Global Innovation Index 2021 rankings",
+          "snippet": "46 India 36.4 2 1"
+        },
+        {
+          "field": "ci,input_rank,output_rank",
+          "page_or_cell": "wipo_pub_gii_2021.pdf p201 Annex Table 2: GII 2021 and Input/Output Sub-Indices: Ranks and 90 percent confidence intervals",
+          "snippet": "India 46 [43, 48] 57 [47, 58] 45 [41, 47]"
+        },
+        {
+          "field": "india_rank,score",
+          "page_or_cell": "wipo_pub_2000-tech1.xlsx sheet 'GII 2021 Data' row 5716",
+          "snippet": "('IND', 'India', 'Index', '0', 'Global Innovation Index', 46, 36.3863685191455)"
+        },
+        {
+          "field": "input_rank",
+          "page_or_cell": "wipo_pub_2000-tech1.xlsx 'GII 2021 Data' row 5714",
+          "snippet": "('IND', 'India', 'Inputs', '.1', 'Innovation Input Sub-index', 57, 44.00873768233)"
+        },
+        {
+          "field": "output_rank",
+          "page_or_cell": "wipo_pub_2000-tech1.xlsx 'GII 2021 Data' row 5715",
+          "snippet": "('IND', 'India', 'Outputs', '.2', 'Innovation Output Sub-index', 45, 28.763999355961)"
+        },
+        {
+          "field": "n_economies",
+          "page_or_cell": "wipo_pub_gii_2021.pdf p58; xlsx count of economies with an Index rank = 132",
+          "snippet": "for 132 economies"
+        },
+        {
+          "field": "n_indicators",
+          "page_or_cell": "wipo_pub_gii_2021.pdf p196; xlsx 'GII Pillars & Indicators' has 81 x.x.x rows",
+          "snippet": "a total of 81 this year"
+        }
+      ],
+      "framework_notes": "11 indicators modified: 5 methodology changes, 3 new (VC recipients 4.2.4, domestic industry diversification 4.3.2, production & export complexity 6.3.2), 2 dropped (intensity of local competition survey, FDI net outflows), 1 renamed (Annex Table 1, p196). This PDF (226 pp.) omits the economy profiles, which were published separately; the official dataset xlsx (wipo_pub_2000-tech1.xlsx, from the WIPO GII 2021 page, id 4560) was used for full-precision values. Report states scores and ranks are not directly comparable year to year (framework changes, data updates, sample changes; see GII 2013 Annex 2).",
+      "additional_files": [
+        {
+          "url_of_file": "https://www.wipo.int/edocs/pubdocs/en/wipo_pub_2000-tech1.xlsx",
+          "local_path": "data/raw/wipo-gii/history/2021/wipo_pub_2000-tech1.xlsx",
+          "sha256": "a93900f35db1bd8fbf760c134d463af90dd8f07b0428927290433d4149fbcf6f"
+        }
+      ]
+    }
+  ]
+}

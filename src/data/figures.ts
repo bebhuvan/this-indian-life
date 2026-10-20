@@ -1,21 +1,27 @@
 // SVG renderers for the older chart kinds (bars, share strips, pyramids, small
 // multiples, ranked change, load curves, scatters, scenario maps). They follow the
 // Almanac's anatomy: hairline neutrals, thin marks, values written beside the data,
-// the unit printed once, and a phone version drawn for ~346px rather than shrunk.
+// the unit printed once, and a phone version drawn for its width rather than shrunk.
 // Every mark that carries a number has a `data-tip` ("Head|line|line"), which the
 // tooltip layer in public/article-actions.js shows on hover, tap and keyboard focus.
 import type { LineVisual, BarVisual, StackVisual, StripPairVisual, PyramidVisual, RankedChangeVisual, ChangeVisual, SparkGridVisual, StartingGridVisual, LinePanelsVisual, LoadCurveVisual, ScatterVisual, ScatterXYVisual, ScenarioMapsVisual, GroupedBarVisual, VisualSpec } from "./viz";
 import { INK, F, esc, r1, txt, halo, line, textWidth, scatterFit, textInk, namedIn, type ScatterPoint } from "./almanac";
 import { countFmt, harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
 import { choroColor, compactSvgPath } from "./chartSvg";
+import { isPhoneW, PHONE_DRAW_W } from "./artboards";
 
-export type Figure = { svg: string; svgM: string; note?: string };
+/** A figure's two inline drawings, and `draw` for any other width (the artboard rungs, artboards.ts). */
+export type Figure = { svg: string; svgM: string; note?: string; draw?: (w: number) => string };
 export type FigureContext = { narrow?: boolean; chartId: string; /** draw at this width (a compact figure at the text column's width) */ width?: number };
 
 /** Series order, as in ArticleVisuals: the domain ink, ink black, then the free inks. */
 export const SERIES = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#bdbdbd"];
-const W_D = 1040, W_NARROW = 508, W_M = 346;
+const W_D = 1040, W_NARROW = 508, W_M = PHONE_DRAW_W;
 const wOf = (ctx: FigureContext) => ctx.width ?? (ctx.narrow ? W_NARROW : W_D);
+/** A figure drawn by one function of its width: the card's drawing, the phone's, and `draw` for the rungs. */
+const drawn = (ctx: FigureContext, at: (w: number) => string, note?: string): Figure => ({ svg: at(wOf(ctx)), svgM: at(W_M), draw: at, ...(note ? { note } : {}) });
+/** Small-multiple columns for a width: as many panels of at least `min` as fit, from 2 up to `max`. */
+const panelCols = (w: number, min: number, max: number) => Math.max(2, Math.min(max, Math.floor(w / min)));
 /** Inks for a departure from a normal, as the stripes use them: temperature runs neel
  *  (cooler) to sindoor (warmer), rainfall haldi (drier) to hara (wetter). Null when the
  *  unit is not a departure, so other signed values keep the domain ink. */
@@ -96,7 +102,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   rows = rows.map((r) => ({ ...r, label: readableLabel(r.label) }));
   // Fine bars with room between them: a figure, not a wall of ink. The values carry the weight.
   // Solid, close-set bars: a bar is a quantity to compare, not a rule under a label.
-  const labSize = phone ? 13 : 13.5, valSize = phone ? 12.5 : 13.5, few = rows.length <= 6;
+  const labSize = phone ? 13 : 13.5, valSize = phone ? 12.5 : 13.5, few = rows.length <= 8;
   // On a phone, labels go above their bars only when they are too long to sit beside them.
   // Beside them whenever the longest fits in two fifths of the width: 38 cities set above their
   // bars ran three screens because one name (Thiruvananthapuram) was a few units too long.
@@ -131,7 +137,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const harmonised = new Map<BarRow, string>();
   for (const g of o.groups?.length ? o.groups : [undefined]) {
     const items = g === undefined ? rows : rows.filter((r) => r.group === g);
-    harmoniseDecimals(items.map((r) => fmtU(r.value, unit))).forEach((t, i) => harmonised.set(items[i], t));
+    harmoniseDecimals(items.map((r) => fmtU(r.value, unit)), items.map((r) => r.value)).forEach((t, i) => harmonised.set(items[i], t));
   }
   const rowTxt = (r: BarRow) => harmonised.get(r) ?? fmtU(r.value, unit);
   const valTxt = (v: number) => fmtU(v, unit);
@@ -195,10 +201,17 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     const items = g === undefined ? rows : rows.filter((r) => r.group === g);
     if (g !== undefined) {
       y += y > top ? 14 : 0;
-      // A group head is a quiet kicker, tracked like the "Fig." line above the title.
-      b += txt(0, y + 10, g.toUpperCase(), { size: 11, fill: INK.ink2, weight: 600, track: 0.07 });
+      // A group head is a quiet kicker, tracked like the "Fig." line above the title. One wider
+      // than the drawing wraps at a word, measured with its tracking.
+      const capsW = (s: string) => labelTextW(s, 11, 600) + s.length * 11 * 0.07;
+      const heads: string[] = [];
+      for (const word of g.toUpperCase().split(" ")) {
+        const last = heads.length ? `${heads[heads.length - 1]} ${word}` : word;
+        if (heads.length && capsW(last) <= W) heads[heads.length - 1] = last; else heads.push(word);
+      }
       b += line(0, y - 2, W, y - 2, INK.rule, 1);
-      y += 22;
+      heads.forEach((h, k) => { b += txt(0, y + 10 + k * 14, h, { size: 11, fill: INK.ink2, weight: 600, track: 0.07 }); });
+      y += 22 + (heads.length - 1) * 14;
     }
     const groupTop = y;
     // A suffix every label in the group shares ("Bihar (India)" under "Indian state") is noise.
@@ -455,8 +468,11 @@ function rankedDivergeSvg(v: RankedChangeVisual, o: { width: number; mobile: boo
   const label = v.divergeLabel ? v.divergeLabel : "";
   const bars = barsSvg(v.rows.map((r) => ({ label: r.label, value: r.change })), { width: o.width, mobile: o.mobile, unit: v.unit, label: v.title, anomaly: anomalyInks(v.unit, v.title) });
   if (!label) return bars;
-  // put the direction note in the caption row, right-aligned
-  return bars.replace(/(<svg[^>]*>)/, `$1${txt(o.width, 12, `${label}  ·  ${v.startLabel} to ${v.endLabel}`, { size: 11.5, fill: INK.ink3, anchor: "end" })}`);
+  // The direction note in the caption row, right-aligned, as much of it as clears the unit on the
+  // left: the note and its period, the note alone, or neither on a narrow drawing.
+  const unitW = labelTextW(cleanUnit(v.unit), 11.5);
+  const note = [`${label}  ·  ${v.startLabel} to ${v.endLabel}`, label].find((t) => unitW + labelTextW(t, 11.5) + 16 <= o.width);
+  return note ? bars.replace(/(<svg[^>]*>)/, `$1${txt(o.width, 12, note, { size: 11.5, fill: INK.ink3, anchor: "end" })}`) : bars;
 }
 
 // =====================================================================
@@ -660,7 +676,7 @@ function sparkGridFigure(v: SparkGridVisual, ctx: FigureContext): Figure {
     : v.latestPeriodLabel
       ? `Each panel plots monthly observations on its own scale, so read the slope, not the height. The figure is the latest month only, not a financial-year total.`
       : `Each panel uses its own vertical scale, so read the slope, not the height. The figures are the latest observation and, beneath it, the first. They are not totals for the period.`;
-  return { svg: mk(wOf(ctx), false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note };
+  return drawn(ctx, (w) => mk(w, isPhoneW(w), isPhoneW(w) ? 2 : panelCols(w, 230, 4)), note);
 }
 
 function startingGridFigure(v: StartingGridVisual, ctx: FigureContext): Figure {
@@ -668,7 +684,7 @@ function startingGridFigure(v: StartingGridVisual, ctx: FigureContext): Figure {
   const f = (x: number) => fmt(x, "");
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 70 : 90, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, key: v.legend });
   const note = `Each panel is one measure, every country drawn from ${v.anchorYear || "the same start"} on that panel's own scale. Read the fan-out: lines that start close and spread apart show a gap opening from a shared starting point.`;
-  return { svg: mk(wOf(ctx), false, ctx.narrow ? 2 : 3), svgM: mk(W_M, true, 2), note };
+  return drawn(ctx, (w) => mk(w, isPhoneW(w), isPhoneW(w) ? 2 : panelCols(w, 300, 3)), note);
 }
 
 /** Five or more peer lines (no protagonist, none named): one panel per line on one shared scale,
@@ -688,8 +704,8 @@ export function linePeersFigure(v: LineVisual, ctx: FigureContext): Figure {
   }));
   const n = panels.length;
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 78 : 104, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, tickCount: 4, firstLast: false });
-  const cols = ctx.narrow ? 2 : n % 3 === 0 || n > 8 ? 3 : n === 4 ? 4 : 3;
-  return { svg: mk(wOf(ctx), false, cols), svgM: mk(W_M, true, 2), note: `One panel for each line, all on the same scale, ordered by the latest value; the grey lines behind each are the others. The figure at each panel's head is its latest value.` };
+  const cols = (w: number) => (w < 700 ? 2 : n % 3 === 0 || n > 8 ? 3 : n === 4 ? 4 : 3);
+  return drawn(ctx, (w) => mk(w, isPhoneW(w), isPhoneW(w) ? 2 : cols(w)), `One panel for each line, all on the same scale, ordered by the latest value; the grey lines behind each are the others. The figure at each panel's head is its latest value.`);
 }
 
 function linePanelsFigure(v: LinePanelsVisual, ctx: FigureContext): Figure {
@@ -706,11 +722,11 @@ function linePanelsFigure(v: LinePanelsVisual, ctx: FigureContext): Figure {
     })));
     const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 60 : 78, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, tickCount: 4, firstLast: true });
     const groups = v.panels.map((p, i) => `${i === 0 ? `the first ${p.lines.length}` : i === v.panels.length - 1 ? `the last ${p.lines.length}` : `the next ${p.lines.length}`} are ${p.label.toLowerCase()}`).join("; ");
-    return { svg: mk(wOf(ctx), false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note: `One panel for each line, every panel on the same scale, so heights compare directly; the figure is the latest year. In order, ${groups}.` };
+    return drawn(ctx, (w) => mk(w, isPhoneW(w), isPhoneW(w) ? 2 : panelCols(w, 240, 4)), `One panel for each line, every panel on the same scale, so heights compare directly; the figure is the latest year. In order, ${groups}.`);
   }
   const panels: Panel[] = v.panels.map((p) => ({ label: p.label, lines: p.lines.map((l, i) => ({ label: l.label, color: l.color ?? SERIES[Math.min(i, SERIES.length - 1)], points: l.points })) }));
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 120 : 170, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, panelKeys: true });
-  return { svg: mk(wOf(ctx), false, ctx.narrow ? 1 : 2), svgM: mk(W_M, true, 1) };
+  return drawn(ctx, (w) => mk(w, isPhoneW(w), w < 700 ? 1 : 2));
 }
 
 // =====================================================================
@@ -776,8 +792,7 @@ function scatterXYFigure(v: ScatterXYVisual, ctx: FigureContext): Figure {
       xTitle: v.xLabel, yTitle: v.yLabel, width: W, height: H, refY: v.refY, fit: false, label: v.title, colorOf: (p) => (p as typeof pts[number]).color,
     }).svg;
   };
-  const W = wOf(ctx);
-  return { svg: build(W, ctx.narrow ? 380 : 460), svgM: build(W_M, 340) };
+  return drawn(ctx, (w) => build(w, isPhoneW(w) ? 340 : w < 700 ? 380 : 460));
 }
 function heatScatterFigure(v: ScatterVisual, ctx: FigureContext): Figure {
   const pts = v.points.map((p) => ({ label: p.label, x: p.x, y: p.y, size: p.size ?? undefined, hot: p.x >= 70 && p.y >= 80, wantLabel: false }));
@@ -793,7 +808,7 @@ function heatScatterFigure(v: ScatterVisual, ctx: FigureContext): Figure {
       tipOf: (p) => { const q = v.points.find((z) => z.label === p.label); return [p.label, `Heat risk ${Math.round(p.x)}%`, `Without cooling ${Math.round(p.y)}%`, q?.size != null ? `${v.sizeLabel ? "MPI" : "Size"} ${Number(q.size).toFixed(1)}%` : ""].filter(Boolean); },
     }).svg;
   };
-  return { svg: build(wOf(ctx), 480), svgM: build(W_M, 360), note: v.sizeLabel ? `Circle area: ${v.sizeLabel}. Shaded corner: more than 70% of districts at high heat risk and more than 80% of homes without AC or a cooler.` : undefined };
+  return drawn(ctx, (w) => build(w, isPhoneW(w) ? 360 : 480), v.sizeLabel ? `Circle area: ${v.sizeLabel}. Shaded corner: more than 70% of districts at high heat risk and more than 80% of homes without AC or a cooler.` : undefined);
 }
 /** Greedy label placement for scatters (right, left, above, below; skip if nothing clears). */
 export function placeScatterLabels<T extends { label: string; x: number; y: number; size?: number; wantLabel?: boolean; place?: ScatterPoint["place"]; short?: string }>(pts: T[], o: { W: number; H: number; x: [number, number]; y: [number, number]; sized?: boolean }) {
@@ -851,18 +866,36 @@ function scenarioMapsSvg(v: ScenarioMapsVisual, o: { width: number; mobile: bool
 // GROUPED COLUMNS — kept for completeness (no live article uses them today)
 // =====================================================================
 function groupedSvg(v: GroupedBarVisual, o: { width: number; mobile: boolean }) {
-  const W = o.width, m = o.mobile, H = m ? 300 : 400, padL = 44, top = 34, bot = 30;
+  // The key and the unit each get a row of their own above the plot: set on one line, the unit
+  // sat in small type over the key and read as a stray caption.
+  const W = o.width, m = o.mobile, H = m ? 320 : 430, padL = 44, top = m ? 64 : 70, bot = 32;
   const sc = tightScale(0, Math.max(...v.groups.flatMap((g) => g.values), 1));
-  const gw = (W - padL) / v.groups.length, ns = v.series.length, bw = Math.min(m ? 10 : 22, (gw - 8) / ns - 2);
+  const gw = (W - padL) / v.groups.length, ns = v.series.length, gap = m ? 2 : 3, bw = Math.min(m ? 10 : 26, (gw - 10) / ns - gap);
   const y = (val: number) => H - bot - ((val - sc.min) / (sc.max - sc.min)) * (H - top - bot);
-  let b = unitCaption(0, 12, v.unit, 12);
+  const ks = m ? 12.5 : 13;
+  let b = "", kx = 0;
+  v.series.forEach((s, i) => { b += `<rect x="${kx}" y="4" width="11" height="11" fill="${SERIES[Math.min(i, SERIES.length - 1)]}"/>` + txt(kx + 16, 14, s, { size: ks, fill: INK.ink }); kx += textW(s, ks) + 36; });
+  b += unitCaption(0, top - 22, v.unit, m ? 12 : 12.5);
   sc.ticks.forEach((t, i) => { b += line(padL, y(t), W, y(t), i ? INK.grid : INK.ink, 1); b += txt(padL - 8, y(t) + 4, fmt(t, v.unit), { size: 12, fill: INK.ink3, anchor: "end" }); });
-  let kx = padL;
-  v.series.forEach((s, i) => { b += `<rect x="${kx}" y="${18}" width="10" height="10" fill="${SERIES[Math.min(i, SERIES.length - 1)]}"/>` + txt(kx + 15, 27, s, { size: 12 }); kx += textW(s, 12) + 34; });
+  // Values sit on the bars when there is room for them: a dozen or more bars are hard to read off
+  // the gridlines, and the unit is already named above the plot, so each value is the bare number.
+  const label = !m && bw >= 16;
+  const num = (val: number) => (Math.abs(val) >= 10 ? String(Math.round(val)) : String(Math.round(val * 10) / 10));
+  // Group names centred under their bars, kept inside the drawing, and left out where one would
+  // run into the last one set (a phone sets every second name, counted from the last).
+  const nameSize = m ? 12 : 13;
+  let lastR = -Infinity;
   v.groups.forEach((g, gi) => {
     const cx = padL + gi * gw + gw / 2;
-    g.values.forEach((val, si) => { const x = cx - (ns * (bw + 2)) / 2 + si * (bw + 2); b += `<rect class="mk" x="${r1(x)}" y="${r1(y(val))}" width="${r1(bw)}" height="${r1(Math.max(1, y(0) - y(val)))}" fill="${SERIES[Math.min(si, SERIES.length - 1)]}"${tip(`${g.label} · ${v.series[si]}`, fmt(val, v.unit))}/>`; });
-    if (!m || (v.groups.length - 1 - gi) % 2 === 0) b += txt(cx, H - bot + 18, g.label, { size: 12, fill: INK.ink3, anchor: "middle" });
+    g.values.forEach((val, si) => {
+      const x = cx - (ns * (bw + gap)) / 2 + si * (bw + gap);
+      b += `<rect class="mk" x="${r1(x)}" y="${r1(y(val))}" width="${r1(bw)}" height="${r1(Math.max(1, y(0) - y(val)))}" fill="${SERIES[Math.min(si, SERIES.length - 1)]}"${tip(`${g.label} · ${v.series[si]}`, fmt(val, v.unit))}/>`;
+      if (label) b += txt(x + bw / 2, y(val) - 5, num(val), { size: 11.5, fill: INK.ink2, anchor: "middle" });
+    });
+    if (!m || (v.groups.length - 1 - gi) % 2 === 0) {
+      const tw = labelTextW(g.label, nameSize), x0 = Math.min(W - tw, Math.max(0, cx - tw / 2));
+      if (x0 >= lastR + 8) { b += txt(x0, H - bot + 19, g.label, { size: nameSize, fill: INK.ink2 }); lastR = x0 + tw; }
+    }
   });
   return svgDoc("fig-grouped", W, H, b, v.title);
 }
@@ -882,8 +915,7 @@ export function tagFigure(f: Figure | null): Figure | null {
   return { ...f, svg: tag(f.svg, "viz-d"), svgM: tag(f.svgM, "viz-m").replace(/^(<svg[^>]*?) style="max-width:[\d.]+px"/, "$1") };
 }
 function renderRaw(visual: VisualSpec, ctx: FigureContext): Figure | null {
-  const W = wOf(ctx);
-  const both = (fn: (o: { width: number; mobile: boolean }) => string): Figure => ({ svg: fn({ width: W, mobile: false }), svgM: fn({ width: W_M, mobile: true }) });
+  const both = (fn: (o: { width: number; mobile: boolean }) => string): Figure => drawn(ctx, (w) => fn({ width: w, mobile: isPhoneW(w) }));
   switch (visual.kind) {
     case "bar": {
       const v = visual as BarVisual;

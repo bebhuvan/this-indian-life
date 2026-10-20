@@ -1,0 +1,1285 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.innovation",
+  "question": "How innovative is India?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "innov.gii.ahead.IN",
+    "innov.gii.indicators_2026.IN",
+    "innov.scale_vs_person.IN",
+    "innov.ipindia.filings_by_applicant.IN"
+  ],
+  "availableIndicatorIds": [
+    "innov.gii.ahead.IN",
+    "innov.gii.indicators_2026.IN",
+    "innov.scale_vs_person.IN",
+    "innov.ipindia.filings_by_applicant.IN"
+  ],
+  "themeIndicatorIds": [
+    "innov.gii.ahead.IN",
+    "innov.gii.indicators_2026.IN",
+    "innov.scale_vs_person.IN",
+    "innov.ipindia.filings_by_applicant.IN"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.innov.gii.ahead.IN",
+      "indicatorId": "innov.gii.ahead.IN",
+      "title": "India, GII overall: share of economies ranked below",
+      "sourceId": "wipo-gii",
+      "unit": "% of ranked economies India is ahead of",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.innov.gii.indicators_2026.IN",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "title": "India's rank on every GII 2026 indicator",
+      "sourceId": "wipo-gii",
+      "unit": "rank of 139 (1 = best)",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.innov.scale_vs_person.IN",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "title": "India's world rank by total and per person",
+      "sourceId": "worldbank",
+      "unit": "% of economies with data that India ranks ahead of",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.innov.ipindia.filings_by_applicant.IN",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN",
+      "title": "Patent applications by Indian applicants, by type of applicant",
+      "sourceId": "ipindia",
+      "unit": "applications",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "india-climbed-from-the-bottom-half-of-the-index-to-its-top-third",
+      "title": "India climbed from the bottom half of the index to its top third",
+      "chartType": "line",
+      "beat": "rank",
+      "window": "full",
+      "indicator": "innov.gii.ahead.IN",
+      "series": [],
+      "unit": "% of ranked economies India is ahead of",
+      "subtitle": "Share of the other ranked economies that India ranks ahead of, with the 90% interval from the EU Joint Research Centre's audit · GII 2011-2026 · WIPO",
+      "whyThisChart": "The rank everyone quotes, drawn so that years with different numbers of economies can sit on one line."
+    },
+    {
+      "order": 2,
+      "chartId": "india-s-outputs-have-outranked-its-inputs-in-every-edition-since-2011",
+      "title": "India's outputs have outranked its inputs in every edition since 2011",
+      "chartType": "multiLine",
+      "beat": "inputs-outputs",
+      "window": "",
+      "indicator": "innov.gii.input_ahead.IN",
+      "series": [
+        {
+          "indicator": "innov.gii.output_ahead.IN",
+          "label": "Outputs",
+          "emphasis": true
+        },
+        {
+          "indicator": "innov.gii.input_ahead.IN",
+          "label": "Inputs"
+        }
+      ],
+      "unit": "% of ranked economies India is ahead of",
+      "subtitle": "Share of ranked economies India is ahead of, on the input and output sub-indices · GII 2011-2026 · WIPO",
+      "whyThisChart": "The gap between what goes in and what comes out is older than the climb."
+    },
+    {
+      "order": 3,
+      "chartId": "india-s-38th-could-be-anywhere-from-34th-to-39th",
+      "title": "India's 38th could be anywhere from 34th to 39th",
+      "chartType": "intervalPlot",
+      "beat": "uncertainty",
+      "window": "",
+      "indicator": "innov.gii.neighbours_2026",
+      "series": [],
+      "unit": "GII 2026 rank (1 = best)",
+      "subtitle": "GII 2026 rank and its 90% interval, economies ranked 28th to 50th · WIPO, EU Joint Research Centre audit",
+      "whyThisChart": "A rank is an estimate; the audit says how firm it is."
+    },
+    {
+      "order": 4,
+      "chartId": "india-is-in-the-world-s-top-20-on-15-measures-and-below-100th-on-five",
+      "title": "India is in the world's top 20 on 15 measures, and below 100th on five",
+      "chartType": "beeswarm",
+      "beat": "indicators",
+      "window": "",
+      "indicator": "innov.gii.indicators_2026.IN",
+      "series": [],
+      "unit": "rank of 139 (1 = best)",
+      "subtitle": "India's rank on each of the 77 GII 2026 indicators with an Indian value, of 139 economies · WIPO",
+      "whyThisChart": "One dot per measure shows what the single rank averages over."
+    },
+    {
+      "order": 5,
+      "chartId": "three-quarters-of-india-s-lead-over-a-typical-economy-comes-from-its-outputs",
+      "title": "Three-quarters of India's lead over a typical economy comes from its outputs",
+      "chartType": "waterfall",
+      "beat": "composition",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "innov.gii.gap_vs_median_2026.in_1.IN",
+          "label": "Institutions"
+        },
+        {
+          "indicator": "innov.gii.gap_vs_median_2026.in_2.IN",
+          "label": "Human capital and research"
+        },
+        {
+          "indicator": "innov.gii.gap_vs_median_2026.in_3.IN",
+          "label": "Infrastructure"
+        },
+        {
+          "indicator": "innov.gii.gap_vs_median_2026.in_4.IN",
+          "label": "Market sophistication"
+        },
+        {
+          "indicator": "innov.gii.gap_vs_median_2026.in_5.IN",
+          "label": "Business sophistication"
+        },
+        {
+          "indicator": "innov.gii.gap_vs_median_2026.out_6.IN",
+          "label": "Knowledge and technology outputs"
+        },
+        {
+          "indicator": "innov.gii.gap_vs_median_2026.out_7.IN",
+          "label": "Creative outputs"
+        }
+      ],
+      "unit": "GII points",
+      "subtitle": "India's 2026 score minus a typical economy's, by pillar, in GII points weighted as the index weights them · median of 139 economies · WIPO",
+      "whyThisChart": "It splits India's lead into the parts that make it."
+    },
+    {
+      "order": 6,
+      "chartId": "since-2022-india-has-risen-on-both-output-pillars-and-slipped-on-four-of-five-input-pillars",
+      "title": "Since 2022, India has risen on both output pillars and slipped on four of five input pillars",
+      "chartType": "dumbbell",
+      "beat": "pillars",
+      "window": "",
+      "indicator": "innov.gii.pillars_2022_2026.IN",
+      "series": [],
+      "unit": "% of ranked economies India is ahead of",
+      "subtitle": "Share of ranked economies India is ahead of, by pillar · GII 2022 (132 economies) and 2026 (139) · WIPO",
+      "whyThisChart": "The recent climb, pillar by pillar."
+    },
+    {
+      "order": 7,
+      "chartId": "in-the-world-s-top-ten-by-total-far-lower-per-person",
+      "title": "In the world's top ten by total, far lower per person",
+      "chartType": "dumbbell",
+      "beat": "scale",
+      "window": "",
+      "indicator": "innov.scale_vs_person.IN",
+      "series": [],
+      "unit": "% of economies with data India is ahead of",
+      "subtitle": "India's standing among economies with data, by total and per person · latest year since 2018 or 2020 · World Bank WDI (UNESCO, WIPO, NSF, IMF)",
+      "whyThisChart": "A country of 1.4 billion looks large on any total; per person is the other half of the truth."
+    },
+    {
+      "order": 8,
+      "chartId": "for-its-income-india-scores-well-above-the-line",
+      "title": "For its income, India scores well above the line",
+      "chartType": "scatterFit",
+      "beat": "income",
+      "window": "",
+      "indicator": "innov.gii.score_vs_income_2026",
+      "series": [],
+      "unit": "GII score (0-100)",
+      "subtitle": "GII 2026 score against GDP per person (PPP dollars, log scale), 139 economies · WIPO, IMF",
+      "whyThisChart": "Richer countries score higher; the question is how India does for its income."
+    },
+    {
+      "order": 9,
+      "chartId": "five-of-india-s-research-figures-in-the-index-still-describe-2020",
+      "title": "Five of India's research figures in the index still describe 2020",
+      "chartType": "tableBars",
+      "beat": "data-age",
+      "window": "",
+      "indicator": "innov.gii.data_age_2026.IN",
+      "series": [],
+      "unit": "indicators",
+      "subtitle": "India's GII 2026 indicators by the year their data describes · WIPO",
+      "whyThisChart": "A score is only as current as its inputs."
+    },
+    {
+      "order": 10,
+      "chartId": "even-on-its-new-survey-india-spends-less-of-its-gdp-on-research-than-most-peers",
+      "title": "Even on its new survey, India spends less of its GDP on research than most peers",
+      "chartType": "tableBars",
+      "beat": "rnd",
+      "window": "",
+      "indicator": "innov.rd_pct_gdp_peers",
+      "series": [],
+      "unit": "% of GDP",
+      "subtitle": "Gross expenditure on R&D as a share of GDP, latest year since 2018 · UNESCO via World Bank; India's 2023-24 figure from DST",
+      "whyThisChart": "The input the index cannot see past 2020, checked against India's own newer survey."
+    },
+    {
+      "order": 11,
+      "chartId": "india-has-fewer-researchers-per-person-than-any-peer-shown",
+      "title": "India has fewer researchers per person than any peer shown",
+      "chartType": "tableBars",
+      "beat": "researchers",
+      "window": "",
+      "indicator": "innov.researchers_peers",
+      "series": [],
+      "unit": "researchers per million people",
+      "subtitle": "Full-time-equivalent researchers per million people, latest year since 2014 · UNESCO via World Bank",
+      "whyThisChart": "People are the input research money buys."
+    },
+    {
+      "order": 12,
+      "chartId": "india-s-r-d-share-jumped-in-2021-22-the-year-the-survey-changed",
+      "title": "India's R&D share jumped in 2021-22, the year the survey changed",
+      "chartType": "multiLine",
+      "beat": "rnd-break",
+      "window": "",
+      "indicator": "innov.dst_gerd_pct_gdp_old.IN",
+      "series": [
+        {
+          "indicator": "innov.dst_gerd_pct_gdp_old.IN",
+          "label": "Earlier survey"
+        },
+        {
+          "indicator": "innov.dst_gerd_pct_gdp_new.IN",
+          "label": "New national survey"
+        }
+      ],
+      "unit": "% of GDP",
+      "subtitle": "Gross expenditure on R&D, % of GDP, by fiscal year · DST/NSTMIS R&D Statistics 2022-23 and 2025-26",
+      "whyThisChart": "A rise that comes from counting more is not a rise in research."
+    },
+    {
+      "order": 13,
+      "chartId": "universities-now-file-more-than-half-of-india-s-patent-applications",
+      "title": "Universities now file more than half of India's patent applications",
+      "chartType": "stackedArea",
+      "beat": "patents",
+      "window": "",
+      "indicator": "innov.ipindia.filings_by_applicant.IN",
+      "series": [],
+      "unit": "applications",
+      "subtitle": "Patent applications by Indian applicants, by type of applicant, financial years · IP India annual reports",
+      "whyThisChart": "India's patent count is the GII output that rose fastest; who files tells you what it means."
+    },
+    {
+      "order": 14,
+      "chartId": "india-s-share-of-the-world-s-ict-services-exports-peaked-in-2012",
+      "title": "India's share of the world's ICT services exports peaked in 2012",
+      "chartType": "line",
+      "beat": "ict",
+      "window": "full",
+      "indicator": "innov.ict_exports_world_share.IN",
+      "series": [],
+      "unit": "% of world ICT services exports",
+      "subtitle": "India's computer, communications and other ICT services exports as a share of the world's · 2005-2024 · World Bank (IMF balance of payments)",
+      "whyThisChart": "India's first-place indicator, read over twenty years."
+    },
+    {
+      "order": 15,
+      "chartId": "india-s-four-clusters-are-large-but-spread-over-many-people",
+      "title": "India's four clusters are large, but spread over many people",
+      "chartType": "scatterFit",
+      "beat": "clusters",
+      "window": "",
+      "indicator": "innov.clusters_2026",
+      "series": [],
+      "unit": "innovation intensity (per person)",
+      "subtitle": "The world's top 100 science and technology clusters: share of world patents, papers and VC deals, against the same per person · GII 2026 · WIPO",
+      "whyThisChart": "Cities, not countries, are where invention concentrates."
+    },
+    {
+      "order": 16,
+      "chartId": "tamil-nadu-files-80-times-as-many-patents-per-person-as-bihar",
+      "title": "Tamil Nadu files 80 times as many patents per person as Bihar",
+      "chartType": "choropleth",
+      "beat": "states",
+      "window": "latest",
+      "indicator": "innov.ipindia.state_filings_per_million",
+      "series": [],
+      "unit": "applications per million people",
+      "subtitle": "Patent applications by Indian applicants per million people, by the applicant's state, 2024-25 · IP India; National Commission on Population projections",
+      "whyThisChart": "The state picture, from India's own patent office."
+    },
+    {
+      "order": 17,
+      "chartId": "among-eleven-peers-india-moved-from-fourth-to-third-since-2022",
+      "title": "Among eleven peers, India moved from fourth to third since 2022",
+      "chartType": "rankSlope",
+      "beat": "peers",
+      "window": "",
+      "indicator": "",
+      "series": [
+        {
+          "indicator": "innov.gii.peers_score_2022",
+          "label": "2022"
+        },
+        {
+          "indicator": "innov.gii.peers_score_2026",
+          "label": "2026"
+        }
+      ],
+      "unit": "order among the eleven",
+      "subtitle": "Order by GII score among India and ten middle-income peers, 2022 and 2026 · WIPO",
+      "whyThisChart": "Peers at a similar stage say more than the top of the table."
+    },
+    {
+      "order": 18,
+      "chartId": "india-leads-viet-nam-on-knowledge-outputs-viet-nam-leads-on-business-sophistication",
+      "title": "India leads Viet Nam on knowledge outputs; Viet Nam leads on business sophistication",
+      "chartType": "groupedTable",
+      "beat": "profiles",
+      "window": "",
+      "indicator": "innov.gii.pillar_profile_2026",
+      "series": [],
+      "unit": "% of ranked economies ahead of",
+      "subtitle": "Share of 139 economies each ranks ahead of, by GII 2026 pillar · WIPO",
+      "whyThisChart": "The two longest-running overperformers got there by different routes."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "India, GII overall: share of economies ranked below, latest",
+      "value": 73.2,
+      "displayValue": "73.2%",
+      "date": "2026-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "indicatorId": "innov.gii.ahead.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India, GII overall: share of economies ranked below, minimum (2015-12-31)",
+      "value": 42.9,
+      "displayValue": "42.9%",
+      "date": "2015-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "indicatorId": "innov.gii.ahead.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India, GII overall: share of economies ranked below, maximum (2025-12-31)",
+      "value": 73.2,
+      "displayValue": "73.2%",
+      "date": "2025-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "indicatorId": "innov.gii.ahead.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India, GII overall: share of economies ranked below, earliest",
+      "value": 50.8,
+      "displayValue": "50.8%",
+      "date": "2011-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "indicatorId": "innov.gii.ahead.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: rank",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: value",
+      "value": 14.0975135395001,
+      "displayValue": "14.1",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: dataYear",
+      "value": 2024,
+      "displayValue": "2,024",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: outdated",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: row",
+      "value": 6145,
+      "displayValue": "6,145",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: rank",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: value",
+      "value": 17714.186,
+      "displayValue": "17,714.19",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: dataYear",
+      "value": 2025,
+      "displayValue": "2,025",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: outdated",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: row",
+      "value": 6107,
+      "displayValue": "6,107",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: rank",
+      "value": 4,
+      "displayValue": "4",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: value",
+      "value": 1.51615500722597,
+      "displayValue": "1.52",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "sourceId": "wipo-gii",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: economies",
+      "value": 179,
+      "displayValue": "179%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: rankTotal",
+      "value": 2,
+      "displayValue": "2%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: rankPerPerson",
+      "value": 64,
+      "displayValue": "64%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: aheadTotal",
+      "value": 99.4,
+      "displayValue": "99.4%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: aheadPerPerson",
+      "value": 64.6,
+      "displayValue": "64.6%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: indiaTotal",
+      "value": 200343788282.6,
+      "displayValue": "2,00,34,37,88,282.6%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: indiaPerMillion",
+      "value": 136859421.07,
+      "displayValue": "13,68,59,421.1%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "India's world rank by total and per person: economies",
+      "value": 109,
+      "displayValue": "109%",
+      "date": 2020,
+      "unit": "% of economies with data that India ranks ahead of",
+      "indicatorId": "innov.scale_vs_person.IN",
+      "sourceId": "worldbank",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "India, GII overall: share of economies ranked below, latest",
+      "value": 73.2,
+      "displayValue": "73.2%",
+      "date": "2026-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.ahead.IN"
+    },
+    {
+      "label": "India, GII overall: share of economies ranked below, minimum (2015-12-31)",
+      "value": 42.9,
+      "displayValue": "42.9%",
+      "date": "2015-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.ahead.IN"
+    },
+    {
+      "label": "India, GII overall: share of economies ranked below, maximum (2025-12-31)",
+      "value": 73.2,
+      "displayValue": "73.2%",
+      "date": "2025-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.ahead.IN"
+    },
+    {
+      "label": "India, GII overall: share of economies ranked below, earliest",
+      "value": 50.8,
+      "displayValue": "50.8%",
+      "date": "2011-12-31",
+      "unit": "% of ranked economies India is ahead of",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.ahead.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: rank",
+      "value": 1,
+      "displayValue": "1",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: value",
+      "value": 14.0975135395001,
+      "displayValue": "14.1",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: dataYear",
+      "value": 2024,
+      "displayValue": "2,024",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: outdated",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: row",
+      "value": 6145,
+      "displayValue": "6,145",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: rank",
+      "value": 3,
+      "displayValue": "3",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: value",
+      "value": 17714.186,
+      "displayValue": "17,714.19",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: dataYear",
+      "value": 2025,
+      "displayValue": "2,025",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: outdated",
+      "value": 0,
+      "displayValue": "0",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: row",
+      "value": 6107,
+      "displayValue": "6,107",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: rank",
+      "value": 4,
+      "displayValue": "4",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's rank on every GII 2026 indicator: value",
+      "value": 1.51615500722597,
+      "displayValue": "1.52",
+      "date": "",
+      "unit": "rank of 139 (1 = best)",
+      "sourceId": "wipo-gii",
+      "indicatorId": "innov.gii.indicators_2026.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: economies",
+      "value": 179,
+      "displayValue": "179%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: rankTotal",
+      "value": 2,
+      "displayValue": "2%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: rankPerPerson",
+      "value": 64,
+      "displayValue": "64%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: aheadTotal",
+      "value": 99.4,
+      "displayValue": "99.4%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: aheadPerPerson",
+      "value": 64.6,
+      "displayValue": "64.6%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: indiaTotal",
+      "value": 200343788282.6,
+      "displayValue": "2,00,34,37,88,282.6%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: indiaPerMillion",
+      "value": 136859421.07,
+      "displayValue": "13,68,59,421.1%",
+      "date": 2025,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: economies",
+      "value": 109,
+      "displayValue": "109%",
+      "date": 2020,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: rankTotal",
+      "value": 8,
+      "displayValue": "8%",
+      "date": 2020,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: rankPerPerson",
+      "value": 83,
+      "displayValue": "83%",
+      "date": 2020,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: aheadTotal",
+      "value": 93.5,
+      "displayValue": "93.5%",
+      "date": 2020,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "India's world rank by total and per person: aheadPerPerson",
+      "value": 24.1,
+      "displayValue": "24.1%",
+      "date": 2020,
+      "unit": "% of economies with data that India ranks ahead of",
+      "sourceId": "worldbank",
+      "indicatorId": "innov.scale_vs_person.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Educational institutions): value",
+      "value": 37681,
+      "displayValue": "37,681",
+      "date": "2024",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Companies and labs): value",
+      "value": 8095,
+      "displayValue": "8,095",
+      "date": "2024",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Startups and small firms): value",
+      "value": 5255,
+      "displayValue": "5,255",
+      "date": "2024",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Individuals): value",
+      "value": 17170,
+      "displayValue": "17,170",
+      "date": "2024",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Educational institutions): value",
+      "value": 0,
+      "displayValue": "0",
+      "date": "2016",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Companies and labs): value",
+      "value": 6729,
+      "displayValue": "6,729",
+      "date": "2016",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Startups and small firms): value",
+      "value": 572,
+      "displayValue": "572",
+      "date": "2016",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    },
+    {
+      "label": "Patent applications by Indian applicants, by type of applicant (Individuals): value",
+      "value": 5918,
+      "displayValue": "5,918",
+      "date": "2016",
+      "unit": "applications",
+      "sourceId": "ipindia",
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "innov.gii.ahead.IN",
+      "title": "India, GII overall: share of economies ranked below",
+      "sourceId": "wipo-gii",
+      "sourceIndicatorId": "innov.gii.ahead.IN",
+      "unit": "% of ranked economies India is ahead of",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "observations": 16,
+      "earliest": {
+        "date": "2011-12-31",
+        "value": 50.8
+      },
+      "latest": {
+        "date": "2026-12-31",
+        "value": 73.2
+      }
+    },
+    {
+      "indicatorId": "innov.gii.indicators_2026.IN",
+      "title": "India's rank on every GII 2026 indicator",
+      "sourceId": "wipo-gii",
+      "sourceIndicatorId": "innov.gii.indicators_2026.IN",
+      "unit": "rank of 139 (1 = best)",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 79,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "code": "OUT.6.3.4",
+          "indicator": "ICT services exports, % total trade",
+          "pillar": "Knowledge and technology outputs",
+          "side": "Outputs",
+          "type": "Data",
+          "rank": 1,
+          "value": 14.0975135395001,
+          "dataYear": 2024,
+          "outdated": 0,
+          "row": 6145
+        },
+        {
+          "code": "IN.4.3.3",
+          "indicator": "Domestic market scale, bn PPP$",
+          "pillar": "Market sophistication",
+          "side": "Inputs",
+          "type": "Data",
+          "rank": 3,
+          "value": 17714.186,
+          "dataYear": 2025,
+          "outdated": 0,
+          "row": 6107
+        },
+        {
+          "code": "IN.4.2.3",
+          "indicator": "Late-stage VC deal count, % global VC",
+          "pillar": "Market sophistication",
+          "side": "Inputs",
+          "type": "Data",
+          "rank": 4,
+          "value": 1.51615500722597,
+          "dataYear": 2025,
+          "outdated": 0,
+          "row": 6102
+        },
+        {
+          "code": "IN.4.1.1",
+          "indicator": "Finance for startups and scaleups†",
+          "pillar": "Market sophistication",
+          "side": "Inputs",
+          "type": "Survey",
+          "rank": 8,
+          "value": 5.93816,
+          "dataYear": 2025,
+          "outdated": 0,
+          "row": 6096
+        },
+        {
+          "code": "OUT.6.2.2",
+          "indicator": "Unicorn valuation, % GDP",
+          "pillar": "Knowledge and technology outputs",
+          "side": "Outputs",
+          "type": "Data",
+          "rank": 10,
+          "value": 5.05582535555284,
+          "dataYear": 2026,
+          "outdated": 0,
+          "row": 6138
+        },
+        {
+          "code": "IN.1.3.2",
+          "indicator": "Entrepreneurship policies and culture†",
+          "pillar": "Institutions",
+          "side": "Inputs",
+          "type": "Survey",
+          "rank": 11,
+          "value": 5.99948428571428,
+          "dataYear": 2025,
+          "outdated": 0,
+          "row": 6063
+        },
+        {
+          "code": "IN.4.2.1",
+          "indicator": "Market capitalization, % GDP",
+          "pillar": "Market sophistication",
+          "side": "Inputs",
+          "type": "Data",
+          "rank": 11,
+          "value": 117.252786666667,
+          "dataYear": 2024,
+          "outdated": 0,
+          "row": 6100
+        },
+        {
+          "code": "IN.4.3.2",
+          "indicator": "Domestic industry diversification",
+          "pillar": "Market sophistication",
+          "side": "Inputs",
+          "type": "Data",
+          "rank": 11,
+          "value": 0.0865111456099988,
+          "dataYear": 2023,
+          "outdated": 0,
+          "row": 6106
+        },
+        {
+          "code": "OUT.6.2.1",
+          "indicator": "Labor productivity growth, %",
+          "pillar": "Knowledge and technology outputs",
+          "side": "Outputs",
+          "type": "Data",
+          "rank": 12,
+          "value": 3.96495265654379,
+          "dataYear": 2025,
+          "outdated": 0,
+          "row": 6137
+        },
+        {
+          "code": "OUT.7.2.1",
+          "indicator": "Cultural and creative services exports, % total trade",
+          "pillar": "Creative outputs",
+          "side": "Outputs",
+          "type": "Data",
+          "rank": 12,
+          "value": 2.28452692538754,
+          "dataYear": 2024,
+          "outdated": 0,
+          "row": 6154
+        }
+      ]
+    },
+    {
+      "indicatorId": "innov.scale_vs_person.IN",
+      "title": "India's world rank by total and per person",
+      "sourceId": "worldbank",
+      "sourceIndicatorId": "innov.scale_vs_person.IN",
+      "unit": "% of economies with data that India ranks ahead of",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 5,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "measure": "ICT services exports",
+          "short": "ICT exports",
+          "code": "BX.GSR.CCIS.CD",
+          "year": 2025,
+          "economies": 179,
+          "rankTotal": 2,
+          "rankPerPerson": 64,
+          "aheadTotal": 99.4,
+          "aheadPerPerson": 64.6,
+          "indiaTotal": 200343788282.6,
+          "indiaPerMillion": 136859421.07
+        },
+        {
+          "measure": "Patent applications by residents",
+          "short": "Patents",
+          "code": "IP.PAT.RESD",
+          "year": 2024,
+          "economies": 137,
+          "rankTotal": 5,
+          "rankPerPerson": 38,
+          "aheadTotal": 97.1,
+          "aheadPerPerson": 72.8,
+          "indiaTotal": 63217,
+          "indiaPerMillion": 43.57
+        },
+        {
+          "measure": "Scientific and technical articles",
+          "short": "Papers",
+          "code": "IP.JRN.ARTC.SC",
+          "year": 2023,
+          "economies": 197,
+          "rankTotal": 3,
+          "rankPerPerson": 89,
+          "aheadTotal": 99,
+          "aheadPerPerson": 55.1,
+          "indiaTotal": 228174.3,
+          "indiaPerMillion": 158.67
+        },
+        {
+          "measure": "Researchers in R&D",
+          "short": "Researchers",
+          "code": "SP.POP.SCIE.RD.P6",
+          "year": 2020,
+          "economies": 109,
+          "rankTotal": 8,
+          "rankPerPerson": 83,
+          "aheadTotal": 93.5,
+          "aheadPerPerson": 24.1,
+          "indiaTotal": 363647.2,
+          "indiaPerMillion": 259.26
+        },
+        {
+          "measure": "Spending on R&D (PPP dollars)",
+          "short": "R&D spending",
+          "code": "GB.XPD.RSDV.GD.ZS",
+          "year": 2020,
+          "economies": 117,
+          "rankTotal": 9,
+          "rankPerPerson": 84,
+          "aheadTotal": 93.1,
+          "aheadPerPerson": 28.4,
+          "indiaTotal": 61266814769.6,
+          "indiaPerMillion": 43680337.83
+        }
+      ]
+    },
+    {
+      "indicatorId": "innov.ipindia.filings_by_applicant.IN",
+      "title": "Patent applications by Indian applicants, by type of applicant",
+      "sourceId": "ipindia",
+      "sourceIndicatorId": "IP India annual reports, applications by category of applicant",
+      "unit": "applications",
+      "geography": {
+        "type": "country",
+        "id": "IND",
+        "name": "India"
+      },
+      "rows": 36,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "date": "2024",
+          "fy": "2024-25",
+          "series": "Educational institutions",
+          "value": 37681
+        },
+        {
+          "date": "2024",
+          "fy": "2024-25",
+          "series": "Companies and labs",
+          "value": 8095
+        },
+        {
+          "date": "2024",
+          "fy": "2024-25",
+          "series": "Startups and small firms",
+          "value": 5255
+        },
+        {
+          "date": "2024",
+          "fy": "2024-25",
+          "series": "Individuals",
+          "value": 17170
+        },
+        {
+          "date": "2023",
+          "fy": "2023-24",
+          "series": "Educational institutions",
+          "value": 23306
+        },
+        {
+          "date": "2023",
+          "fy": "2023-24",
+          "series": "Companies and labs",
+          "value": 7870
+        },
+        {
+          "date": "2023",
+          "fy": "2023-24",
+          "series": "Startups and small firms",
+          "value": 5967
+        },
+        {
+          "date": "2023",
+          "fy": "2023-24",
+          "series": "Individuals",
+          "value": 14431
+        },
+        {
+          "date": "2022",
+          "fy": "2022-23",
+          "series": "Educational institutions",
+          "value": 19155
+        },
+        {
+          "date": "2022",
+          "fy": "2022-23",
+          "series": "Companies and labs",
+          "value": 6202
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

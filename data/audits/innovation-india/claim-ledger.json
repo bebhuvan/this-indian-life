@@ -1,0 +1,1622 @@
+{
+ "article": "q.econ.innovation",
+ "vintage": "Global Innovation Index 2026 (and 2011-2025 editions); World Bank WDI October 2026; DST R&D Statistics 2025-26; IP India Annual Report 2024-25",
+ "note": "Every claim recomputed from the story's artifacts or audited extracts by verify_claims.py; values compared at the precision written in the prose. Source values are traced cell by cell in gii-source-audit.json, peer_series.json, ipindia_extract.json and clusters-audit.json.",
+ "evidenceBundle": {
+  "sourceManifests": [
+   "data/raw/wipo-gii/manifest.json",
+   "data/raw/innovation-peers/manifest.json",
+   "data/raw/ipindia-patents/manifest.json",
+   "data/raw/innovation-claims/manifest.json"
+  ],
+  "artifactCatalog": "data/catalog/innovation-india-manifest.json",
+  "repositoryFiles": [
+   "data/audits/innovation-india/clusters-audit.json",
+   "data/audits/innovation-india/gii-source-audit.json",
+   "data/audits/innovation-india/ipindia_extract.json",
+   "data/audits/innovation-india/ipindia_notes.md",
+   "data/audits/innovation-india/ipindia_selfcheck.json",
+   "data/audits/innovation-india/patents-build-audit.json",
+   "data/audits/innovation-india/peer-build-audit.json",
+   "data/audits/innovation-india/peer_series.json",
+   "data/audits/innovation-india/peer_series_notes.md",
+   "data/audits/innovation-india/peer_series_selfcheck.json",
+   "data/explanations/en/q.econ.innovation.evidence.json",
+   "data/explanations/en/q.econ.innovation.json",
+   "data/prose/q.econ.innovation.md",
+   "scripts/check-story-evidence-commit.py",
+   "scripts/registry/source-notes.mjs",
+   "scripts/registry/v1-indicators.mjs",
+   "scripts/stories/innovation-india/SCOPE.md",
+   "scripts/stories/innovation-india/build_clusters.py",
+   "scripts/stories/innovation-india/build_explanation.py",
+   "scripts/stories/innovation-india/build_gii.py",
+   "scripts/stories/innovation-india/build_manifests.py",
+   "scripts/stories/innovation-india/build_patents.py",
+   "scripts/stories/innovation-india/build_peers.py",
+   "scripts/stories/innovation-india/chart_explainers.json",
+   "scripts/stories/innovation-india/clean_peer_series.py",
+   "scripts/stories/innovation-india/extract_ipindia.py",
+   "scripts/stories/innovation-india/fetch_peer_sources.py",
+   "scripts/stories/innovation-india/fetch_wdi_world.py",
+   "scripts/stories/innovation-india/notes.json",
+   "scripts/stories/innovation-india/selfcheck_peer_series.py",
+   "scripts/stories/innovation-india/verify_claims.py"
+  ]
+ },
+ "claims": [
+  {
+   "section": "What does 38th actually measure?",
+   "phrase": "India is 38th of 139 economies",
+   "values": [
+    {
+     "computed": 38,
+     "written": "38"
+    },
+    {
+     "computed": 139,
+     "written": "139"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What does 38th actually measure?",
+   "phrase": "The number is an average of 79 indicators, and India has values for 77 of them",
+   "values": [
+    {
+     "computed": 77,
+     "written": "77"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json); Index Structure sheet, 79 indicators",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What does 38th actually measure?",
+   "phrase": "India's overall score is 40.1 out of 100",
+   "values": [
+    {
+     "computed": 40.14,
+     "written": "40.1"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What does 38th actually measure?",
+   "phrase": "as few as 125 economies (2011) and as many as 143 (2014)",
+   "values": [
+    {
+     "computed": 125,
+     "written": "125"
+    },
+    {
+     "computed": 143,
+     "written": "143"
+    }
+   ],
+   "source": "GII 2011 and 2014 reports (history/README-findings.json, page-cited)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What does 38th actually measure?",
+   "phrase": "In 2015, at 81st of 141, India was ahead of 43 per cent",
+   "values": [
+    {
+     "computed": 81,
+     "written": "81"
+    },
+    {
+     "computed": 141,
+     "written": "141"
+    },
+    {
+     "computed": 42.9,
+     "written": "43"
+    }
+   ],
+   "source": "GII 2015 report; ahead = (n - rank)/(n - 1)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What does 38th actually measure?",
+   "phrase": "In 2026, at 38th of 139, it is ahead of 73 per cent",
+   "values": [
+    {
+     "computed": 73.2,
+     "written": "73"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Has India always got more out than it puts in?",
+   "phrase": "In 2011 India was 87th on inputs and 44th on outputs. In 2026 it is 49th and 25th",
+   "values": [
+    {
+     "computed": 87,
+     "written": "87"
+    },
+    {
+     "computed": 44,
+     "written": "44"
+    },
+    {
+     "computed": 49,
+     "written": "49"
+    },
+    {
+     "computed": 25,
+     "written": "25"
+    }
+   ],
+   "source": "GII 2011 report; GII 2026 database",
+   "interpretationLimit": "Sub-index ranks across editions are not directly comparable (WIPO).",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Has India always got more out than it puts in?",
+   "phrase": "India ranked second in the world on it in 2012",
+   "values": [
+    {
+     "computed": 2,
+     "written": "2"
+    }
+   ],
+   "source": "GII 2012 report, efficiency ratio",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How exact is a rank?",
+   "phrase": "a range from 34th to 39th",
+   "values": [
+    {
+     "computed": 34,
+     "written": "34"
+    },
+    {
+     "computed": 39,
+     "written": "39"
+    }
+   ],
+   "source": "GII 2026 Appendix II, JRC 90% interval table",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How exact is a rank?",
+   "phrase": "Five economies sit inside that range with India: Malaysia, Slovenia, Hungary, Bulgaria and Poland",
+   "values": [
+    {
+     "computed": 5,
+     "written": "5"
+    }
+   ],
+   "source": "GII 2026 Appendix II",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How exact is a rank?",
+   "phrase": "for 86 of the 139 economies the range is 10 places or fewer",
+   "values": [],
+   "source": "GII 2026 report, Appendix II text",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "From 81st in 2015 to 38th in 2026 is 43 places",
+   "values": [
+    {
+     "computed": 43,
+     "written": "43"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "In 2016 the table shrank from 141 economies to 128",
+   "values": [
+    {
+     "computed": 141,
+     "written": "141"
+    },
+    {
+     "computed": 128,
+     "written": "128"
+    }
+   ],
+   "source": "GII 2015 and 2016 reports",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "from ahead of 43 per cent to ahead of 49 per cent",
+   "values": [
+    {
+     "computed": 42.9,
+     "written": "43"
+    },
+    {
+     "computed": 48.8,
+     "written": "49"
+    }
+   ],
+   "source": "derived",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "In 2025 six more economies joined",
+   "values": [
+    {
+     "computed": 6,
+     "written": "6"
+    }
+   ],
+   "source": "GII 2024 and 2025 databases",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "its audited range, 73rd to 81st",
+   "values": [
+    {
+     "computed": 73,
+     "written": "73"
+    },
+    {
+     "computed": 81,
+     "written": "81"
+    }
+   ],
+   "source": "GII 2015 report, rank interval table",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "put India at 52nd. India was 66th in 2013 and 2016",
+   "values": [
+    {
+     "computed": 52,
+     "written": "52"
+    },
+    {
+     "computed": 66,
+     "written": "66"
+    },
+    {
+     "computed": 66,
+     "written": "66"
+    }
+   ],
+   "source": "GII 2013, 2016, 2019 reports; PIB 24 July 2019",
+   "interpretationLimit": "The Survey's 66th cannot be traced to any WIPO figure for 2019.",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "\"improved from 66th in 2019 to 38th in 2025\"",
+   "values": [],
+   "source": "Economic Survey 2025-26, ch. 8, para 8.43 (data/raw/innovation-claims)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "\"has been slower than that of several peer economies, including China\"",
+   "values": [],
+   "source": "Economic Survey 2025-26, ch. 4, para 4.100",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "\"will not rest on past laurels\" until it is among the top 25",
+   "values": [],
+   "source": "PIB, 24 July 2019 (data/raw/innovation-claims/pib)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Did India really climb 43 places?",
+   "phrase": "a 46 per cent rise in domestic patent filings over five years",
+   "values": [],
+   "source": "PIB, 29 September 2022 (data/raw/innovation-claims/pib/pib_1863536.html)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "it is in the world's top 20 on 15, and in the top 10 on five. It is in the bottom half on 25, and below 100th on five. Its median rank is 48th",
+   "values": [
+    {
+     "computed": 15,
+     "written": "15"
+    },
+    {
+     "computed": 5,
+     "written": "5"
+    },
+    {
+     "computed": 25,
+     "written": "25"
+    },
+    {
+     "computed": 5,
+     "written": "5"
+    },
+    {
+     "computed": 48,
+     "written": "48"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "ICT services exports, % total trade",
+   "values": [
+    {
+     "computed": 1,
+     "written": "1"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Domestic market scale, bn PPP$",
+   "values": [
+    {
+     "computed": 3,
+     "written": "3"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Late-stage VC deal count, % global VC",
+   "values": [
+    {
+     "computed": 4,
+     "written": "4"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Unicorn valuation, % GDP",
+   "values": [
+    {
+     "computed": 10,
+     "written": "10"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Researchers, FTE/mn pop.",
+   "values": [
+    {
+     "computed": 83,
+     "written": "83"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Knowledge-intensive employment, %",
+   "values": [
+    {
+     "computed": 98,
+     "written": "98"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Females employed w/advanced degrees, %",
+   "values": [
+    {
+     "computed": 103,
+     "written": "103"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Tertiary inbound mobility, %",
+   "values": [
+    {
+     "computed": 115,
+     "written": "115"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Finance for startups and scaleups†",
+   "values": [
+    {
+     "computed": 8,
+     "written": "8"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where is India world-class, and where is it near the bottom?",
+   "phrase": "Entrepreneurship policies and culture†",
+   "values": [
+    {
+     "computed": 11,
+     "written": "11"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where does India's lead come from?",
+   "phrase": "A typical economy, built from the median score",
+   "values": [],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where does India's lead come from?",
+   "phrase": "scores 30.3",
+   "values": [
+    {
+     "computed": 30.3,
+     "written": "30.3"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Where does India's lead come from?",
+   "phrase": "Knowledge and technology outputs alone supply about 5 of the 10 points, and creative outputs about 2.5. The five input pillars together add about 2.3",
+   "values": [
+    {
+     "computed": 4.98,
+     "written": "5"
+    },
+    {
+     "computed": 2.52,
+     "written": "2.5"
+    },
+    {
+     "computed": 2.32,
+     "written": "2.3"
+    },
+    {
+     "computed": 9.82,
+     "written": "10"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "interpretationLimit": "The typical economy is a construction (pillar medians), not a real country.",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "34th to 15th",
+   "values": [
+    {
+     "computed": 34,
+     "written": "34"
+    },
+    {
+     "computed": 15,
+     "written": "15"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "52th to 43th",
+   "values": [
+    {
+     "computed": 52,
+     "written": "52"
+    },
+    {
+     "computed": 43,
+     "written": "43"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "78th to 62th",
+   "values": [
+    {
+     "computed": 78,
+     "written": "78"
+    },
+    {
+     "computed": 62,
+     "written": "62"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "54th to 60th",
+   "values": [
+    {
+     "computed": 54,
+     "written": "54"
+    },
+    {
+     "computed": 60,
+     "written": "60"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "43th to 54th",
+   "values": [
+    {
+     "computed": 43,
+     "written": "43"
+    },
+    {
+     "computed": 54,
+     "written": "54"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "54th to 63th",
+   "values": [
+    {
+     "computed": 54,
+     "written": "54"
+    },
+    {
+     "computed": 63,
+     "written": "63"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "19th to 35th",
+   "values": [
+    {
+     "computed": 19,
+     "written": "19"
+    },
+    {
+     "computed": 35,
+     "written": "35"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "IP.PAT.RESD",
+   "values": [
+    {
+     "computed": 5,
+     "written": "5"
+    },
+    {
+     "computed": 38,
+     "written": "38"
+    }
+   ],
+   "source": "World Bank WDI, all economies (worldbank-wdi-world), build_peers.py",
+   "textFound": true,
+   "valuesMatch": true,
+   "interpretationLimit": "Latest year differs by economy (since 2018 or 2020)."
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "IP.JRN.ARTC.SC",
+   "values": [
+    {
+     "computed": 3,
+     "written": "3"
+    },
+    {
+     "computed": 89,
+     "written": "89"
+    }
+   ],
+   "source": "World Bank WDI, all economies (worldbank-wdi-world), build_peers.py",
+   "textFound": true,
+   "valuesMatch": true,
+   "interpretationLimit": "Latest year differs by economy (since 2018 or 2020)."
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "SP.POP.SCIE.RD.P6",
+   "values": [
+    {
+     "computed": 8,
+     "written": "8"
+    },
+    {
+     "computed": 83,
+     "written": "83"
+    }
+   ],
+   "source": "World Bank WDI, all economies (worldbank-wdi-world), build_peers.py",
+   "textFound": true,
+   "valuesMatch": true,
+   "interpretationLimit": "Latest year differs by economy (since 2018 or 2020)."
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "GB.XPD.RSDV.GD.ZS",
+   "values": [
+    {
+     "computed": 9,
+     "written": "9"
+    },
+    {
+     "computed": 84,
+     "written": "84"
+    }
+   ],
+   "source": "World Bank WDI, all economies (worldbank-wdi-world), build_peers.py",
+   "textFound": true,
+   "valuesMatch": true,
+   "interpretationLimit": "Latest year differs by economy (since 2018 or 2020)."
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "BX.GSR.CCIS.CD",
+   "values": [
+    {
+     "computed": 2,
+     "written": "2"
+    },
+    {
+     "computed": 64,
+     "written": "64"
+    }
+   ],
+   "source": "World Bank WDI, all economies (worldbank-wdi-world), build_peers.py",
+   "textFound": true,
+   "valuesMatch": true,
+   "interpretationLimit": "Latest year differs by economy (since 2018 or 2020)."
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "about 63,000 patent applications in 2024",
+   "values": [
+    {
+     "computed": 63.217,
+     "written": "63"
+    }
+   ],
+   "source": "World Bank IP.PAT.RESD",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "about 2.3 lakh scientific articles in 2023",
+   "values": [
+    {
+     "computed": 2.281743,
+     "written": "2.3"
+    }
+   ],
+   "source": "World Bank IP.JRN.ARTC.SC",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "about 3.6 lakh full-time researchers in 2020",
+   "values": [
+    {
+     "computed": 3.636472,
+     "written": "3.6"
+    }
+   ],
+   "source": "World Bank SP.POP.SCIE.RD.P6 x population",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "about $200 billion in 2025, second only to Ireland's",
+   "values": [
+    {
+     "computed": 200.3,
+     "written": "200"
+    }
+   ],
+   "source": "World Bank BX.GSR.CCIS.CD",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is India big, or is it advanced?",
+   "phrase": "25 of its 79 indicators are scaled to GDP and only six to population",
+   "values": [],
+   "source": "GII 2026 Index Structure sheet (indicator names)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is that good for a country of India's income?",
+   "phrase": "about 13.5 points above what its income would predict, the eighth-largest margin",
+   "values": [
+    {
+     "computed": 13.5,
+     "written": "13.5"
+    },
+    {
+     "computed": 8,
+     "written": "8"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is that good for a country of India's income?",
+   "phrase": "16 years running",
+   "values": [],
+   "source": "GII 2026 report, overperformers table: India 2011-2026 (16)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How current is the data?",
+   "phrase": "Of India's 77 values, 30 describe 2024, 29 describe 2025 and 3 describe 2026. Five describe 2020",
+   "values": [
+    {
+     "computed": 30,
+     "written": "30"
+    },
+    {
+     "computed": 29,
+     "written": "29"
+    },
+    {
+     "computed": 3,
+     "written": "3"
+    },
+    {
+     "computed": 5,
+     "written": "5"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "0.65 per cent of GDP in 2020",
+   "values": [
+    {
+     "computed": 0.65,
+     "written": "0.65"
+    }
+   ],
+   "source": "UNESCO UIS via World Bank",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "The world spends about 2.6 per cent, China 2.6, South Korea 4.9, Brazil 1.2. Five of the twelve peers in the chart spend less than India: South Africa, Viet Nam (0.41 per cent)",
+   "values": [
+    {
+     "computed": 2.6,
+     "written": "2.6"
+    },
+    {
+     "computed": 2.58,
+     "written": "2.6"
+    },
+    {
+     "computed": 4.94,
+     "written": "4.9"
+    },
+    {
+     "computed": 1.19,
+     "written": "1.2"
+    },
+    {
+     "computed": 0.41,
+     "written": "0.41"
+    },
+    {
+     "computed": 5,
+     "written": "5"
+    },
+    {
+     "computed": 12,
+     "written": "12"
+    }
+   ],
+   "source": "UNESCO UIS via World Bank",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "0.84 per cent of GDP in 2023-24",
+   "values": [
+    {
+     "computed": 0.84,
+     "written": "0.84"
+    }
+   ],
+   "source": "DST R&D Statistics at a Glance 2025-26; Tables 2025-26, Table 3",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "from about ₹46,000 crore to about ₹83,000 crore",
+   "values": [],
+   "source": "DST Tables 2025-26, Table 1: 46,388.13 (2020-21) and 82,974.99 (2021-22)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "India had 259 full-time researchers per million people in 2020",
+   "values": [
+    {
+     "computed": 259.26,
+     "written": "259"
+    }
+   ],
+   "source": "UNESCO UIS via World Bank",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "China had about 2,100 in 2023 and the world about 1,650 in 2020",
+   "values": [
+    {
+     "computed": 21.0727,
+     "written": "21"
+    },
+    {
+     "computed": 165.159,
+     "written": "165"
+    }
+   ],
+   "source": "UNESCO UIS via World Bank",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "13,219 applications at the Indian Patent Office in 2016-17 and 68,201 in 2024-25",
+   "values": [
+    {
+     "computed": 13219,
+     "written": "13219"
+    },
+    {
+     "computed": 68201,
+     "written": "68201"
+    }
+   ],
+   "source": "IP India annual reports, category tables (ipindia_extract.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "from 28th in the 2022 index to 16th in 2026",
+   "values": [],
+   "source": "GII databases 2022 and 2026, Patents by origin/bn PPP$ GDP",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "educational institutions filed 37,681 applications, 55 per cent",
+   "values": [
+    {
+     "computed": 37681,
+     "written": "37681"
+    },
+    {
+     "computed": 55.24992302165657,
+     "written": "55"
+    }
+   ],
+   "source": "IP India Annual Report 2024-25",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "Individuals filed 17,170, companies, government labs and other organisations 8,095, and startups and small firms about 5,300",
+   "values": [
+    {
+     "computed": 17170,
+     "written": "17170"
+    },
+    {
+     "computed": 8095,
+     "written": "8095"
+    },
+    {
+     "computed": 52.55,
+     "written": "53"
+    }
+   ],
+   "source": "IP India Annual Report 2024-25",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "11,150 applications in 2020-21 and 45,776 in 2024-25",
+   "values": [
+    {
+     "computed": 11150,
+     "written": "11150"
+    },
+    {
+     "computed": 45776,
+     "written": "45776"
+    }
+   ],
+   "source": "IP India annual reports",
+   "interpretationLimit": "Applications, not grants; the category break is September 2021.",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "Lovely Professional University, a private university in Punjab, filed 2,241 applications in 2024-25, more than all the IITs together, which filed 1,740",
+   "values": [
+    {
+     "computed": 2241,
+     "written": "2241"
+    },
+    {
+     "computed": 1740,
+     "written": "1740"
+    }
+   ],
+   "source": "IP India Annual Report 2024-25, top academic applicants",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "Saveetha Institute of Medical and Technical Sciences in Chennai filed 2,038",
+   "values": [
+    {
+     "computed": 2038,
+     "written": "2038"
+    }
+   ],
+   "source": "IP India Annual Report 2024-25",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "Council of Scientific and Industrial Research (CSIR), with 200 applications",
+   "values": [
+    {
+     "computed": 200,
+     "written": "200"
+    }
+   ],
+   "source": "IP India Annual Report 2020-21, top R&D organisations",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "1,03,057 in 2023-24, then 33,504 in 2024-25",
+   "values": [
+    {
+     "computed": 103057,
+     "written": "103057"
+    },
+    {
+     "computed": 33504,
+     "written": "33504"
+    }
+   ],
+   "source": "IP India Annual Report 2024-25, Appendix D",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "rose from about 1,900 in 2020 to about 4,500 in 2024, then fell to about 3,100 in 2025",
+   "values": [
+    {
+     "computed": 19.07,
+     "written": "19"
+    },
+    {
+     "computed": 45.35,
+     "written": "45"
+    },
+    {
+     "computed": 30.66,
+     "written": "31"
+    }
+   ],
+   "source": "WIPO IP Statistics, PCT by origin",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which states file the most patents?",
+   "phrase": "Tamil Nadu filed 15,440 applications, almost twice Karnataka's 8,371",
+   "values": [
+    {
+     "computed": 15440,
+     "written": "15440"
+    },
+    {
+     "computed": 8371,
+     "written": "8371"
+    }
+   ],
+   "source": "IP India Annual Report 2024-25, Appendix B",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which states file the most patents?",
+   "phrase": "about 200 applications per million people, followed by Punjab (143), Karnataka (122), Uttarakhand (114), Delhi (114) and Telangana (112). Chandigarh, a small union territory, is higher still at 230. Bihar files about 2.5",
+   "values": [
+    {
+     "computed": 199.7,
+     "written": "200"
+    },
+    {
+     "computed": 143.3,
+     "written": "143"
+    },
+    {
+     "computed": 122.1,
+     "written": "122"
+    },
+    {
+     "computed": 114.4,
+     "written": "114"
+    },
+    {
+     "computed": 113.8,
+     "written": "114"
+    },
+    {
+     "computed": 111.6,
+     "written": "112"
+    },
+    {
+     "computed": 230.2,
+     "written": "230"
+    },
+    {
+     "computed": 2.5,
+     "written": "2.5"
+    }
+   ],
+   "source": "IP India Appendix B; NCP Table 21 interpolated to 1 March 2025",
+   "interpretationLimit": "By applicant's address, not inventor's.",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which states file the most patents?",
+   "phrase": "Tamil Nadu files 80 times as many per person",
+   "values": [
+    {
+     "computed": 79.88,
+     "written": "80"
+    }
+   ],
+   "source": "derived",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is India's IT strength innovation?",
+   "phrase": "from 12.7 per cent in 2005 to a peak of 17.2 per cent in 2012, fell to 12.6 per cent in 2021, and was 13.9 per cent in 2024",
+   "values": [
+    {
+     "computed": 12.74,
+     "written": "12.7"
+    },
+    {
+     "computed": 17.17,
+     "written": "17.2"
+    },
+    {
+     "computed": 12.58,
+     "written": "12.6"
+    },
+    {
+     "computed": 13.88,
+     "written": "13.9"
+    }
+   ],
+   "source": "World Bank BX.GSR.CCIS.CD, India / World",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is India's IT strength innovation?",
+   "phrase": "from about $23 billion in 2005 to about $200 billion in 2025",
+   "values": [
+    {
+     "computed": 22.7,
+     "written": "23"
+    },
+    {
+     "computed": 200.3,
+     "written": "200"
+    }
+   ],
+   "source": "World Bank BX.GSR.CCIS.CD",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which Indian cities count as innovation clusters?",
+   "phrase": "Bengaluru",
+   "values": [
+    {
+     "computed": 25,
+     "written": "25"
+    },
+    {
+     "computed": 83,
+     "written": "83"
+    }
+   ],
+   "source": "GII 2026 Appendix IV, Tables 2 and 3",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which Indian cities count as innovation clusters?",
+   "phrase": "Delhi",
+   "values": [
+    {
+     "computed": 27,
+     "written": "27"
+    },
+    {
+     "computed": 96,
+     "written": "96"
+    }
+   ],
+   "source": "GII 2026 Appendix IV, Tables 2 and 3",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which Indian cities count as innovation clusters?",
+   "phrase": "Mumbai",
+   "values": [
+    {
+     "computed": 43,
+     "written": "43"
+    },
+    {
+     "computed": 98,
+     "written": "98"
+    }
+   ],
+   "source": "GII 2026 Appendix IV, Tables 2 and 3",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which Indian cities count as innovation clusters?",
+   "phrase": "Chennai",
+   "values": [
+    {
+     "computed": 79,
+     "written": "79"
+    },
+    {
+     "computed": 97,
+     "written": "97"
+    }
+   ],
+   "source": "GII 2026 Appendix IV, Tables 2 and 3",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which Indian cities count as innovation clusters?",
+   "phrase": "more than 31 million people in WIPO's Delhi cluster alone",
+   "values": [
+    {
+     "computed": 31.258382,
+     "written": "31"
+    }
+   ],
+   "source": "GII 2026 Appendix IV, Table 3",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which Indian cities count as innovation clusters?",
+   "phrase": "files 29 per cent of them, and Chennai's on TVS Motor, with 33 per cent",
+   "values": [],
+   "source": "WIPO cluster briefs 2026 (data/raw/wipo-gii/clusters-2026)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Which Indian cities count as innovation clusters?",
+   "phrase": "they were in the top 50 by size, at 21st, 26th and 46th. By intensity they were 83rd, 95th and 97th",
+   "values": [],
+   "source": "GII 2025 Appendix IV, Tables 2 and 3 (report p. 292, 294)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How has India moved against its peers?",
+   "phrase": "India moved from 40th to 38th over these four years. Viet Nam moved from 48th to 43rd, the Philippines from 59th to 52nd, and Indonesia from 75th to 55th",
+   "values": [
+    {
+     "computed": 40,
+     "written": "40"
+    },
+    {
+     "computed": 38,
+     "written": "38"
+    },
+    {
+     "computed": 48,
+     "written": "48"
+    },
+    {
+     "computed": 43,
+     "written": "43"
+    },
+    {
+     "computed": 59,
+     "written": "59"
+    },
+    {
+     "computed": 52,
+     "written": "52"
+    },
+    {
+     "computed": 75,
+     "written": "75"
+    },
+    {
+     "computed": 55,
+     "written": "55"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How has India moved against its peers?",
+   "phrase": "Türkiye fell from 37th to 45th and Mexico from 58th to 65th",
+   "values": [
+    {
+     "computed": 37,
+     "written": "37"
+    },
+    {
+     "computed": 45,
+     "written": "45"
+    },
+    {
+     "computed": 58,
+     "written": "58"
+    },
+    {
+     "computed": 65,
+     "written": "65"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is Viet Nam's path the same as India's?",
+   "phrase": "OUT.6",
+   "values": [
+    {
+     "computed": 15,
+     "written": "15"
+    },
+    {
+     "computed": 35,
+     "written": "35"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is Viet Nam's path the same as India's?",
+   "phrase": "IN.2",
+   "values": [
+    {
+     "computed": 54,
+     "written": "54"
+    },
+    {
+     "computed": 79,
+     "written": "79"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is Viet Nam's path the same as India's?",
+   "phrase": "IN.5",
+   "values": [
+    {
+     "computed": 63,
+     "written": "63"
+    },
+    {
+     "computed": 48,
+     "written": "48"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is Viet Nam's path the same as India's?",
+   "phrase": "OUT.7",
+   "values": [
+    {
+     "computed": 43,
+     "written": "43"
+    },
+    {
+     "computed": 35,
+     "written": "35"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is Viet Nam's path the same as India's?",
+   "phrase": "Viet Nam is first in the world on high-technology exports as a share of its trade, India 35th",
+   "values": [
+    {
+     "computed": 35,
+     "written": "35"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What has changed since 2022?",
+   "phrase": "Out went new businesses per person, on which India ranked 114th; in came the value of unicorns relative to GDP, on which it ranked 9th. The knowledge impact sub-pillar moved from 56th to 9th that year. Knowledge creation, where patents and papers sit, moved more slowly, from 46th to 39th",
+   "values": [
+    {
+     "computed": 114,
+     "written": "114"
+    },
+    {
+     "computed": 9,
+     "written": "9"
+    },
+    {
+     "computed": 56,
+     "written": "56"
+    },
+    {
+     "computed": 9,
+     "written": "9"
+    },
+    {
+     "computed": 46,
+     "written": "46"
+    },
+    {
+     "computed": 39,
+     "written": "39"
+    }
+   ],
+   "source": "GII 2022 and 2023 databases, OUT.6.2.2 and sub-pillars",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Is that good for a country of India's income?",
+   "phrase": "higher than those of 33 of the 35 upper-middle-income economies in the index, all but China and Malaysia, and of 19 of the 54 high-income ones",
+   "values": [
+    {
+     "computed": 33,
+     "written": "33"
+    },
+    {
+     "computed": 35,
+     "written": "35"
+    },
+    {
+     "computed": 19,
+     "written": "19"
+    },
+    {
+     "computed": 54,
+     "written": "54"
+    }
+   ],
+   "source": "WIPO GII database (data/series/wipo-gii.*, built by build_gii.py; cells in gii-source-audit.json)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "DST's new survey counts 354 in 2023-24",
+   "values": [],
+   "source": "DST R&D Statistics at a Glance 2025-26: 'increased to 354 in 2023-24 from 262 in 2020-21'",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "How much does India spend on research?",
+   "phrase": "from about ₹69,000 crore to ₹61,000 crore",
+   "values": [],
+   "source": "DST S&T Indicators Tables 2025-26, Table 1, central sector: 69,317.09 (2019-20), 61,281.48 (2020-21)",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "already filing 545 a year in 2020-21",
+   "values": [
+    {
+     "computed": 545,
+     "written": "545"
+    }
+   ],
+   "source": "IP India Annual Report 2020-21, top academic applicants",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "tenth place needed 227 applications",
+   "values": [
+    {
+     "computed": 227,
+     "written": "227"
+    }
+   ],
+   "source": "IP India Annual Report 2024-25, top R&D organisations",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "What is behind the patent boom?",
+   "phrase": "up to 4.5 of a university's 100 marks, a third of that for published applications",
+   "values": [
+    {
+     "computed": 4.5,
+     "written": "4.5"
+    }
+   ],
+   "source": "NIRF 2025 Overall framework: RP weight 0.30; IPR 15 marks = IPG 10 + IPP 5",
+   "textFound": true,
+   "valuesMatch": true
+  },
+  {
+   "section": "Has India always got more out than it puts in?",
+   "phrase": "\"often reflected blatant deficiencies in the input side\"",
+   "values": [],
+   "source": "GII 2012 report (data/raw/wipo-gii/history/2012)",
+   "textFound": true,
+   "valuesMatch": true
+  }
+ ],
+ "releaseChecks": {
+  "claims": 98,
+  "claimFailures": 0
+ }
+}

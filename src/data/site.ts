@@ -334,6 +334,8 @@ const SOURCE_LABELS: Record<string, string> = {
   dst: "DST / NSTMIS",
   oecd: "OECD",
   wipo: "WIPO",
+  "wipo-gii": "WIPO, Global Innovation Index",
+  ipindia: "IP India",
   nsf: "NSF / Scopus",
   isro: "ISRO / press reports",
   openbudgets: "Open Budgets India",

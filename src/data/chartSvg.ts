@@ -116,6 +116,9 @@ export function choroplethValueLabel(visual: ChoroplethVisual, value: number) {
     const sign = visual.signed && value > 0 ? "+" : value < 0 ? "-" : "";
     return `${sign}${Math.abs(value)}${suffix}`;
   }
+  // On a scale into the hundreds, values of 10 and up are whole numbers ("67" beside "112", not "66.9"); only
+  // the small ones keep a decimal, where it still carries meaning (2.5 against 7.5).
+  if (!suffix && !visual.signed && Math.max(Math.abs(visual.min), Math.abs(visual.max)) >= 100 && Math.abs(value) >= 10) value = Math.round(value);
   const out = `${visual.signed ? signedFmt(value, visual.unit) : fmt(value, visual.unit)}${suffix}`;
   // A scale that runs into the hundreds is read in whole numbers: "97" beside "459", not "97.0".
   return !suffix && Math.max(Math.abs(visual.min), Math.abs(visual.max)) >= 100 ? out.replace(/(\d)\.0(?!\d)/, "$1") : out;
@@ -150,8 +153,11 @@ export function renderChoroplethSvg(visual: ChoroplethVisual) {
     const fill = has ? choroColor(region.value as number, visual.min, visual.max, visual.ramp, visual.divergeAt) : "#ffffff";
     if (has) {
       const c = ringCentroid(region.path);
-      if (c && c.area / total > 0.006 && valueLabel.length * fontSize * 0.6 < Math.sqrt(c.area) * 1.3) {
-        labels += `<text x="${svgCoord(c.x)}" y="${svgCoord(c.y + fontSize * 0.35)}" text-anchor="middle" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${svgCoord(fontSize)}" font-weight="600" fill="#121212" stroke="#ffffff" stroke-width="${svgCoord(fontSize * 0.28)}" stroke-opacity="0.75" paint-order="stroke" stroke-linejoin="round">${escapeHtml(valueLabel)}</text>`;
+      // data-cy and data-room let the page re-set the label for the map's shown width
+      // (fitMapLabels in article-actions.js): its centre, and the widest label the region holds.
+      const room = Math.sqrt(c?.area ?? 0) * 1.3;
+      if (c && c.area / total > 0.006 && valueLabel.length * fontSize * 0.6 < room) {
+        labels += `<text class="choro-lab" data-cy="${svgCoord(c.y)}" data-room="${svgCoord(room)}" x="${svgCoord(c.x)}" y="${svgCoord(c.y + fontSize * 0.35)}" text-anchor="middle" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${svgCoord(fontSize)}" font-weight="600" fill="#121212" stroke="#ffffff" stroke-width="${svgCoord(fontSize * 0.28)}" stroke-opacity="0.75" paint-order="stroke" stroke-linejoin="round">${escapeHtml(valueLabel)}</text>`;
       }
     }
     return `<path d="${escapeHtml(compactSvgPath(region.path))}" fill="${fill}" stroke="${has ? "#ffffff" : "#8a8a8a"}" stroke-width="${has ? 0.7 : 0.8}"${has ? "" : ' stroke-dasharray="2 2"'} stroke-linejoin="round" stroke-linecap="round"><title>${escapeHtml(region.name)}: ${escapeHtml(valueLabel)}</title></path>`;
@@ -162,7 +168,7 @@ export function renderChoroplethSvg(visual: ChoroplethVisual) {
 // The ranked strip beside the map: every region in order, a dot on the shared scale
 // and its value. Its header doubles as the legend, with the pivot (e.g. replacement)
 // marked once. Small regions that vanish on the map stay readable here.
-export function renderChoroplethStrip(visual: ChoroplethVisual) {
+export function renderChoroplethStrip(visual: ChoroplethVisual, W = 320) {
   const rows = visual.regions.filter((r) => r.value !== null && r.value !== undefined).sort((a, b) => (b.value as number) - (a.value as number));
   // Names flush left at the card's edge, in a column as wide as the longest one as the font
   // sets it; the value column as wide as its widest value. A fixed 128-unit name column left
@@ -170,7 +176,7 @@ export function renderChoroplethStrip(visual: ChoroplethVisual) {
   const shortName = (n: string) => n.replace("Dadra and Nagar Haveli and Daman and Diu", "Dadra, Daman & Diu").replace("Andaman and Nicobar Islands", "Andaman & Nicobar").replace("Jammu and Kashmir", "Jammu & Kashmir");
   const nameW = Math.ceil(Math.max(...rows.map((r) => textWidth(shortName(r.name), 11.5))));
   const valW = Math.ceil(Math.max(...rows.map((r) => textWidth(choroplethValueLabel(visual, r.value as number), 11.5, 600))));
-  const W = 320, x0 = nameW + 12, x1 = W - valW - 14, rowH = rows.length > 30 ? 16 : 19, top = 44;
+  const x0 = nameW + 12, x1 = W - valW - 14, rowH = rows.length > 30 ? 16 : 19, top = 44;
   // Values past the colour scale (Delhi's income) sit at its end with an open arrowhead,
   // rather than running into the printed value.
   const x = (v: number) => x0 + ((Math.min(visual.max, Math.max(visual.min, v)) - visual.min) / (visual.max - visual.min || 1)) * (x1 - x0);
@@ -198,14 +204,14 @@ export function renderChoroplethStrip(visual: ChoroplethVisual) {
     b += `<circle cx="${svgCoord(x(v))}" cy="${svgCoord(cy)}" r="4.5" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}" stroke="#121212" stroke-width="0.6"><title>${escapeHtml(r.name)}: ${escapeHtml(choroplethValueLabel(visual, v))}</title></circle>`;
     b += `<text x="${W}" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" font-weight="600" fill="#121212" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, v))}</text>`;
   });
-  return `<svg class="choro-strip" viewBox="0 0 ${W} ${top + rows.length * rowH + 4}" role="img" aria-label="${escapeHtml(visual.title)}, every region ranked">${b}</svg>`;
+  return `<svg class="choro-strip cs-${W}" viewBox="0 0 ${W} ${top + rows.length * rowH + 4}" role="img" aria-label="${escapeHtml(visual.title)}, every region ranked">${b}</svg>`;
 }
 
 // The phone's version of the strip: every region as one dot on the measure's scale, stacked
 // where they crowd, over the colour key, with the highest and lowest named in two lines of
 // type. The 28-row ranking ran two screens on a phone; the ranking stays in each dot's
 // tooltip and in the CSV.
-export function renderChoroplethDots(visual: ChoroplethVisual, W = 346) {
+export function renderChoroplethDots(visual: ChoroplethVisual, W = 320) {
   const rows = visual.regions.filter((r) => r.value !== null && r.value !== undefined).sort((a, b) => (a.value as number) - (b.value as number));
   if (rows.length < 6) return "";
   const F = 'font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"';

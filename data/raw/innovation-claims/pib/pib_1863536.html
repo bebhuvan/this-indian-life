@@ -1,0 +1,1126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head id="Head1"><title>
+	Press Release Page | Press Information Bureau
+</title><link href="css/style.css?v=1" rel="stylesheet" type="text/css" /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="alternate stylesheet" href="css/change.css?v=1" media="screen" title="change" /><link rel="alternate stylesheet" href="css/green.css?v=1" media="screen" title="green" /><link rel="alternate stylesheet" href="css/yellow.css" media="screen" title="yellow" /><link rel="stylesheet" type="text/css" href="css/prtint.css" media="print" /><link rel="stylesheet" href="css/style3.1.css" type="text/css" /><link id="pibA11yCss" rel="stylesheet" href="/css/accessibility.css?v=7" type="text/css" />
+      <script type="text/javascript">
+        /* Stamps the saved theme on <html> before the page paints. The
+           switcher in js/accessibility.js settles the rest, but on inner
+           pages it does not run until the end of the body and inside the
+           release frame it is a separate download - either way the reader
+           would otherwise watch a light page turn dark in front of them. */
+        (function (d) {
+            var t = "";
+            try {
+                t = window.localStorage.getItem("pibStyle") || "";
+            } catch (e) {
+                t = "";
+            }
+            if (t === "orange") {
+                t = "yellow";
+            }
+            var c = t === "change" ? " pib-hc"
+                : t === "green" ? " pib-theme-green"
+                : t === "yellow" ? " pib-theme-yellow" : "";
+            d.documentElement.className += c + " pib-a11y-content";
+        }(document));
+      </script>
+
+
+      <script src="js/jquery.min.js" type="text/javascript"></script>
+      <script type="text/javascript" src="/js/accessibility.js?v=7"></script>
+
+      <script type="text/javascript">
+            $(document).ready(function () {
+                  function getParameterByName(name) {
+                        var url = window.location.href;
+                        name = name.replace(/[\[\]]/g, '\\$&');
+                        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                              results = regex.exec(url);
+                        if (!results) return null;
+                        if (!results[2]) return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                  }
+                  // Get the IDs from the current page's URL
+                  let prid = parseInt(getParameterByName('PRID'), 10);
+
+                  if (!isNaN(prid) && prid > 0) {
+                        $.ajax({
+                              type: "POST",
+                              url: "AjaxMethod.aspx/UpdatePRHitCount",
+                              async: false,
+                              data: JSON.stringify({ 'PermId': prid }),
+                              contentType: "application/json; charset=utf-8",
+                              dataType: "json",
+                              success: function (response) {
+                                    console.log(response);
+                              },
+                              error: function (error) {
+                                    console.log("Error in AJAX request", error);
+                              }
+                        });
+                  } else {
+                        console.log("Invalid parameters:", prid);
+                  }
+
+            });
+      </script>
+      <style type="text/css">
+            .table-responsive {
+                  width: 100%;
+                  overflow-x: auto;
+            }
+
+            .banner {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  background-color: #000;
+                  color: #fff;
+                  padding: 20px;
+            }
+
+            full-width {
+                  width: 100%;
+            }
+
+            .logo-left, .logo-center, .countdown {
+                  display: flex;
+                  align-items: center;
+            }
+
+                  .logo-left img, .logo-center img {
+                        height: 70px;
+                  }
+
+            .countdown {
+                  text-align: center;
+                  background-color: var(--dbim-text, #150202);
+                  border-radius: 10px;
+                  padding: 10px;
+                  border: 2px solid grey;
+            }
+
+            .firstnumber {
+                  color: #000000;
+                  position: absolute;
+                  top: 50px;
+                  right: 90px;
+                  font-size: 30px;
+            }
+
+            .secondnumber {
+                  position: absolute;
+                  color: #000000;
+                  right: 45px;
+                  top: 50px;
+                  font-size: 30px;
+            }
+
+            .countdown .days {
+                  font-size: 35px;
+                  color: gold;
+            }
+
+            .countdown p {
+                  margin: 0;
+            }
+
+            .countdown .text {
+                  font-size: 16px;
+            }
+
+            a {
+                  word-break: break-all;
+            }
+
+            iframe, img {
+                  max-width: 100%;
+            }
+
+            @media(max-width:1199px) {
+                  .firstnumber {
+                        top: 40px;
+                        right: 72px;
+                        font-size: 30px;
+                  }
+
+                  .secondnumber {
+                        right: 35px;
+                        top: 40px;
+                        font-size: 30px;
+                  }
+            }
+
+            @media(max-width:990px) {
+                  .firstnumber {
+                        top: 25px;
+                        right: 54px;
+                        font-size: 30px;
+                  }
+
+                  .secondnumber {
+                        right: 25px;
+                        top: 25px;
+                        font-size: 30px;
+                  }
+            }
+
+            @media(max-width:768px) {
+                  .countdown, .days {
+                        font-size: 12px !important;
+                  }
+
+
+                  .firstnumber {
+                        top: 25%;
+                        right: 8%;
+                        font-size: 30px;
+                  }
+
+                  .secondnumber {
+                        right: 4.5%;
+                        top: 25%;
+                        font-size: 30px;
+                  }
+            }
+
+            @media(max-width:475px) {
+                  .countdown, .days {
+                        font-size: 10px !important;
+                        top: 20%;
+                  }
+
+                  .bannerimgdiv {
+                        padding: 0 !important;
+                  }
+
+                  .bannerimg {
+                        width: 108% !important;
+                  }
+            }
+      </style>
+      <script type="text/javascript">
+            $(function () {
+                  $("[id*=printPDF]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+            $(function () {
+                  $("[id*=printPDFEvent]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+      </script>
+
+      
+
+      <link id="pibConsentCss" href="/css/consent.css?v=8" rel="stylesheet" type="text/css" /><link id="pibFontsCss" href="/css/fonts-noto.css?v=6" rel="stylesheet" type="text/css" /><link id="pibDbimCss" href="/css/dbim.css?v=1120" rel="stylesheet" type="text/css" /><meta property="og:title" content="India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years" /><meta property="og:url" content="www.pib.gov.in/Pressreleaseshare.aspx?PRID=1863536" /><meta property="og:description" content="Union Minister for Commerce and Industry, Consumer Affairs, Food and Public Distribution and Textile" /><meta property="og:image" content="https:/pib.gov.in/images/indian-emblem.png" />
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="C4E7H-KSCMC-422L4-W3EM5-U36MF",function(){function e(){if(!i){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.parentNode.appendChild(e),i=!0}}function t(e){i=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",o.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"C4E7H-KSCMC-422L4-W3EM5-U36MF";var o=document.currentScript||document.getElementsByTagName("script")[0],i=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!i)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="ghhtwadkgmwtc2ww5ega-f-c009b9f6b-clientnsv4-s.akamaihd.net",o="false"=="true"?2:1,i={"ak.v":"41","ak.cp":"1825201","ak.ai":parseInt("1215205",10),"ak.ol":"0","ak.cr":2,"ak.ipv":4,"ak.proto":"h2","ak.rid":"d786b6","ak.r":47379,"ak.a2":n,"ak.m":"dscb","ak.n":"ff","ak.cport":49090,"ak.gh":"106.51.45.45","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"","ak.t":"1792469260","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==pvn1AKHbwP144EATd7YpDewBpj6gNtqPED911Be1Eq/jkzbhrJghpXIWO8Ue3JASAmaKBSYpnaxaRqGYEmV2jDmdLUVwjOhYSO1pBwLVz6QwquCI9MwMtrQDj5qvAqb8XPcWxJ6oSOnwMEhOwZa5h79gjX43cd9eZS8IoPuiGQ61guiwU+Tip1RQS8XkVwZqo1zXwbe80Ggc5E8uZcdjXyHSfiMecQu0weVoU3yR9QsY1sARIIM2tNy6mg8hYqb8uEEgVOPA+atlJdkHFYqASuzMlv6C78CzwHVWloD6aFLA20PSHDp7Necz0Qdkkr6/Nc49ocPfSjhQoV678aCEaDuM2M1QelZC2f1hJKhFbitVjy4Kv2bjRmPSPL1yzQQnO5NASOxGJ/WG770JnY/sqfYTtTxEOOJFhdVeTsU6XkI=","ak.pv":"9","ak.dpoabenc":"","ak.tf":o};if(""!==t)i["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body>
+    
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+     style="position:absolute;width:0;height:0;overflow:hidden" id="dbim-icon-sprite">
+    <defs>
+        <symbol id="icon-angle-double-left" viewBox="0 0 24 24"><path d="M11.6 4.6 4.2 12l7.4 7.4 2.2-2.2L8.6 12l5.2-5.2z"/><path d="M19 4.6 11.6 12 19 19.4l2.2-2.2L16 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-angle-double-right" viewBox="0 0 24 24"><path d="M12.4 4.6 10.2 6.8 15.4 12l-5.2 5.2 2.2 2.2L19.8 12z"/><path d="M5 4.6 2.8 6.8 8 12l-5.2 5.2L5 19.4 12.4 12z"/></symbol>
+        <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M20.8 10.6H9.6v2.8h11.2z"/><path d="M10.8 5.6 3.2 12l7.6 6.4z"/></symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M3.2 10.6h11.2v2.8H3.2z"/><path d="M13.2 5.6 20.8 12l-7.6 6.4z"/></symbol>
+        <symbol id="icon-blogger" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.4 2.4h11.2a4 4 0 0 1 4 4v11.2a4 4 0 0 1-4 4H6.4a4 4 0 0 1-4-4V6.4a4 4 0 0 1 4-4zm2.8 5.2a2 2 0 0 0 0 4h2.4a2 2 0 0 0 0-4zm0 5.6a2 2 0 0 0 0 4h5.6a2 2 0 0 0 0-4z"/></symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M7.6 2.4H10v2.4H7.6z"/><path d="M14 2.4h2.4v2.4H14z"/><path fill-rule="evenodd" d="M4 4.8h16a1.6 1.6 0 0 1 1.6 1.6v13.2a1.6 1.6 0 0 1-1.6 1.6H4a1.6 1.6 0 0 1-1.6-1.6V6.4A1.6 1.6 0 0 1 4 4.8zm.4 5.6v8.4h15.2v-8.4z"/><path d="M6.4 12.4h3.2v3.2H6.4z"/></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15.4 4.6 8 12l7.4 7.4 2.2-2.2L12.4 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M8.6 4.6 6.4 6.8 11.6 12l-5.2 5.2 2.2 2.2L16 12z"/></symbol>
+        <symbol id="icon-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24"><path d="M10.8 3h2.4v7.6h3.4L12 16.6l-4.6-6h3.4z"/><path d="M4 17.2h2.4v2.4h11.2v-2.4H20v3.2a1.4 1.4 0 0 1-1.4 1.4H5.4A1.4 1.4 0 0 1 4 20.4z"/></symbol>
+        <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M13.6 21.6v-8.4h2.8l.42-3.3h-3.22V7.8c0-.95.27-1.6 1.64-1.6h1.74V3.26a23 23 0 0 0-2.54-.13c-2.5 0-4.22 1.53-4.22 4.34v2.43H7.4v3.3h2.82v8.4z"/></symbol>
+        <symbol id="icon-fact-check" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4 3.6 5.6v6.2c0 4.6 3.4 8.6 8.4 9.8 5-1.2 8.4-5.2 8.4-9.8V5.6zm-1 13.2-3.6-3.6 1.7-1.7 1.9 1.9 4.5-4.5 1.7 1.7z"/></symbol>
+        <symbol id="icon-hashtag" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8.8 3h2.4l-1 6h3.2l1-6h2.4l-1 6h3.4v2.4h-3.8l-.6 3.2h3.6V17h-4l-1 5h-2.4l1-5h-3.2l-1 5H5.4l1-5H3V14.6h3.8l.6-3.2H3.8V9h4zm.6 8.4-.6 3.2h3.2l.6-3.2z"/></symbol>
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M12 3.4 2.8 11.6h2.4v8.4a1 1 0 0 0 1 1h3.3v-5.4h5v5.4h3.3a1 1 0 0 0 1-1v-8.4h2.4z"/></symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.6 2.4h8.8a5.2 5.2 0 0 1 5.2 5.2v8.8a5.2 5.2 0 0 1-5.2 5.2H7.6a5.2 5.2 0 0 1-5.2-5.2V7.6a5.2 5.2 0 0 1 5.2-5.2zm0 2.4a2.8 2.8 0 0 0-2.8 2.8v8.8a2.8 2.8 0 0 0 2.8 2.8h8.8a2.8 2.8 0 0 0 2.8-2.8V7.6a2.8 2.8 0 0 0-2.8-2.8z"/><path fill-rule="evenodd" d="M12 6.8a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 2.4a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/><circle cx="17.3" cy="6.7" r="1.3"/></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M4.8 8.8h3.6v12H4.8z"/><circle cx="6.6" cy="5.4" r="2.1"/><path d="M10.8 8.8h3.45v1.65h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.35 4.3 5.4v6.6h-3.6v-5.85c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1v5.95h-3.6z"/></symbol>
+        <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M2.4 7.6v9.2a1.6 1.6 0 0 0 1.6 1.6h16a1.6 1.6 0 0 0 1.6-1.6V7.6L12 14z"/><path d="M21.2 5.4H2.8L12 11.8z"/></symbol>
+        <symbol id="icon-mail-open" viewBox="0 0 24 24"><path d="M2.4 9.8h19.2v9.6A1.6 1.6 0 0 1 20 21H4a1.6 1.6 0 0 1-1.6-1.6z"/><path d="M12 2.6 21.6 9.2h-3.8L12 5.3 6.2 9.2H2.4z"/><path d="m3.9 11.2 8.1 5.4 8.1-5.4 1.5 1.3-9.6 6.4-9.6-6.4z"/></symbol>
+        <symbol id="icon-map-marker" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a7 7 0 0 0-7 7c0 5.2 7 12.2 7 12.2s7-7 7-12.2a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z"/></symbol>
+        <symbol id="icon-newspaper" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.8 4.4h14.8v15.2H2.8zm2 2v11.2h10.8V6.4z"/><path d="M6 7.6h8.4v1.6H6z"/><path d="M6 10.8h8.4v1.6H6z"/><path d="M6 14h5.2v1.6H6z"/><path d="M18.4 8.4h2.8v9.6a1.4 1.4 0 0 1-2.8 0z"/></symbol>
+        <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="7.4" y="4" width="3.6" height="16" rx="0.9"/><rect x="13" y="4" width="3.6" height="16" rx="0.9"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 4.5v15l12-7.5z"/></symbol>
+        <symbol id="icon-picture" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.4 5.2h19.2v13.6H2.4zm2 2v9.6h15.2V7.2z"/><path d="M5.6 16.4 10 11l2.6 3 2-2.2 4 4.6z"/><circle cx="8" cy="10.4" r="1.5"/></symbol>
+        <symbol id="icon-press-conference" viewBox="0 0 24 24"><circle cx="12" cy="5.2" r="2.6"/><path d="M7.6 12.2a4.4 4.4 0 0 1 8.8 0z"/><circle cx="4.9" cy="9.6" r="2.2"/><path d="M1.8 15.2a3.1 3.1 0 0 1 6.2 0z"/><circle cx="19.1" cy="9.6" r="2.2"/><path d="M16 15.2a3.1 3.1 0 0 1 6.2 0z"/><path d="M6.6 13.6h10.8l2.2 7.8H4.4z"/></symbol>
+        <symbol id="icon-print" viewBox="0 0 24 24"><path d="M6.4 2.8h11.2v4.4H6.4z"/><path d="M4 8.4h16a1.6 1.6 0 0 1 1.6 1.6v5.6a1.6 1.6 0 0 1-1.6 1.6h-1.6v-2.8H6v2.8H4a1.6 1.6 0 0 1-1.6-1.6V10A1.6 1.6 0 0 1 4 8.4z"/><path d="M7.2 15.6h9.6v5.6H7.2z"/></symbol>
+        <symbol id="icon-rss" viewBox="0 0 24 24"><circle cx="4.8" cy="19.2" r="2.4"/><path d="M2.4 11.2v3.2a6.4 6.4 0 0 1 6.4 6.4H12A9.6 9.6 0 0 0 2.4 11.2z"/><path d="M2.4 4.8V8A13.6 13.6 0 0 1 16 21.6h3.2A16.8 16.8 0 0 0 2.4 4.8z"/></symbol>
+        <symbol id="icon-search-plus" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10 2.8a7.2 7.2 0 1 0 0 14.4 7.2 7.2 0 0 0 0-14.4zm0 2.4a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6z"/><path d="M15.3 14.6 21.2 20.5l-1.5 1.5-5.9-5.9z"/><path d="M9.2 6.8h1.6v2.4h2.4v1.6h-2.4v2.4H9.2v-2.4H6.8V9.2h2.4z"/></symbol>
+        <symbol id="icon-share" viewBox="0 0 24 24"><circle cx="18" cy="5.6" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="18.4" r="3"/><path d="M8.3 10.9 15.7 7.2l.9 1.8-7.4 3.7z"/><path d="M9.2 13.1 16.6 16.8l-.9 1.8-7.4-3.7z"/></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M4.2 3h4.3l11.3 18h-4.3z"/><path d="M19.3 3h-2.6L4.2 21h2.6z"/></symbol>
+        <symbol id="icon-university" viewBox="0 0 24 24"><path d="M12 2.4 21.6 7.2v1.6H2.4V7.2z"/><path d="M4.8 10.4h2.4v8H4.8z"/><path d="M9.2 10.4h2.4v8H9.2z"/><path d="M13.4 10.4h2.4v8h-2.4z"/><path d="M17.6 10.4H20v8h-2.4z"/><path d="M3.2 19.8h17.6v1.8H3.2z"/></symbol>
+        <symbol id="icon-volume-up" viewBox="0 0 24 24"><path d="M3.2 9.2h3.3l5-4.2v14l-5-4.2H3.2z"/><path d="M14.6 8.4a5 5 0 0 1 0 7.2l1.6 1.6a7.2 7.2 0 0 0 0-10.4z"/><path d="M17.4 5.6a8.8 8.8 0 0 1 0 12.8l1.5 1.5a10.9 10.9 0 0 0 0-15.8z"/></symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a9.5 9.5 0 0 0-8.1 14.5L2.4 21.6l4.8-1.4A9.5 9.5 0 1 0 12 2.4zm0 2.2a7.3 7.3 0 1 1-3.8 13.5l-.4-.2-2.6.7.7-2.5-.3-.4A7.3 7.3 0 0 1 12 4.6z"/><path d="M9.4 7.8c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6 6 0 0 1-1.8-1.1 6.6 6.6 0 0 1-1.2-1.6c-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5z"/></symbol>
+        <symbol id="icon-youtube" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8zM10.2 15.1V8.9l5.1 3.1z"/></symbol>
+    </defs>
+</svg>
+
+      <form method="post" action="./PressReleasePage.aspx?PRID=1863536&amp;reg=48&amp;lang=2" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="sc_HiddenField" id="sc_HiddenField" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZPQet1wIx1Q48y3xJY2k25Y7qxH5RrQ9qQcN-OiTC9guZtri9w2&amp;t=639246315009809930" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=x6wALODbMJK5e0eRC_p1LdIxBJXt0U_WW5GWfJqHAqo6frgCmGRfEywglicTersO2OKrFhK1gAIp0Wk2al2YrpdR3uWqH6f4nfjBsCyRUfTUUVmb0&amp;t=ffffffffecf8d3f2" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=P5lTttoqSeZXoYRLQMIScH645UK3RD852IErF2548Wz9Ssv0rLjB4fhVKnHcMpqkaMHpNAGOeWY02Lf4aBYN9-dVBme_SNK5KJwmFQNpMixYDZ7M0&amp;t=ffffffffecf8d3f2" type="text/javascript"></script>
+<script src="/PressReleasePage.aspx?_TSM_HiddenField_=sc_HiddenField&amp;_TSM_CombinedScripts_=%3b%3bAjaxControlToolkit%2c+Version%3d3.5.7.123%2c+Culture%3dneutral%2c+PublicKeyToken%3d28f01b0e84b6d53e%3aen-US%3a5a4df314-b4a2-4da2-a207-9284f1b1e96c%3ade1feab2%3af2c8e708%3a8613aea7%3af9cec9bc%3a3202a5a2%3aab09e3fe%3a87104b7c%3a720a52bf%3a589eaa30%3aa67c2700%3abe6fb298" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="59B53027" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="PbSZrKaEn2SuhdUNAcqwNPf3afToyWqxiUHQlZnf5rsAqM8sALMh+tpALmnprjW1G/Uy+BdsPM9gcKuz1fJNvKdOm9AZ2SeIB+KPI08rwc0N6yo+QQWfaZnam72nzb+A3EHd+i4zmSW57ZjVJr+xmWzZhsFxFyELDJLrI8R5Ld8/oAcZzQxLqZNTqeD5FCiEzzE2DOm9s0jBmWP2wuDPxoCCSKUmxuzRkMYIHiU4dOh5tysIdDU7BebgJHrjQ2ByC4gJkOCuCZY6fJdvo9GfBkwcLlE=" />
+</div>
+                              
+            <div id="templateCss"></div>
+            <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('sc', 'form1', ['tupdate12','update12'], [], [], 90, '');
+//]]>
+</script>
+
+            <input type="hidden" name="hfGridHtml" id="hfGridHtml" />
+            <div class="container" style='margin-bottom: 50px;'>
+                  <div id="accessories">
+
+                        
+                        <div class="pull-right" style="display: flex">
+                              <div id="voll"></div>
+                              <div id="vollDT"></div>
+                              
+                              
+
+<span class="print-icons">
+<input type="image" name="Print1$print" id="Print1_print" aria-label="Print" src="images/printer_icon.png" alt="print page button" style="padding: 5px 10px 5px 10px;" />
+</span>
+                        </div>
+                  </div>
+                  <input type="hidden" name="hydpermid" id="hydpermid" value="1863536" />
+                  
+
+
+
+                  <div class="innner-page-main-about-us-content-right-part">
+
+                        <div id="MinistryName" class="MinistryNameSubhead text-center">
+                              Ministry of Commerce & Industry
+                        </div>
+                        
+                        <div id="lg_g"><div class='log_oo'>  <img src='https://static.pib.gov.in/WriteReadData/specificdocs/photo/2026/sep/ph_9768_20260902_10000501.png' alt='azadi ka amrit mahotsav' /> </div></div>
+
+
+
+
+
+                        <div class="text-center event-heading-background">
+                              
+                              <h1 id="Titleh2">
+                                    India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years
+                              </h1>
+                              <h3 id="Subtitleh3">
+                                    <span id="ltrSubtitle"><br/>India today aspires to take our ranking in the GII Index to the top 25: Shri Piyush Goyal<br/><br/>GII has over the years recognized India’s continuous rise due to progressive measures taken by the government and industry working hand in hand: Shri Piyush Goyal<br/><br/>As the importance of the ‘knowledge economy’ grows, innovation will lay the roadmap for development in India: Shri Piyush Goyal<br/><br/>Incubation, handholding, funding, industry-academia partnership and mentorship have stirred entrepreneurial spirit across the country: Shri Piyush Goyal<br/><br/>India is rapidly transitioning into a knowledge economy; domestic filing of Patents registered a 46% growth in the last 5 years: Shri Piyush Goyal<br/></span>
+                              </h3>
+                        </div>
+
+                        <div id="PrDateTime" class="ReleaseDateSubHeaddateTime text-center pt20">
+                              Posted On:
+                29 SEP 2022 9:29PM by PIB Delhi
+                        </div>
+                        
+                        <div class='pt20'>
+                        </div>
+                        <input type="hidden" name="hydphotoUrl" id="hydphotoUrl" />
+                        
+                        <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Union Minister for Commerce and Industry, Consumer Affairs, Food and Public Distribution and Textiles,&nbsp; Shri Piyush Goyal said that India had come a long way in the Global Innovation Index (GII) from the 81st spot in 2015 to the 40th spot in 2022 today. &lsquo;We were 46 last time the ranking was done. We have also maintained 1st rank in ICT services exports over the years&rsquo; he added. Shri Goyal was delivering a virtual message to mark the launch of the Global Innovation Index, 2022 by the World Intellectual Property Organization (WIPO).</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister said that GII has established itself as a tool for Governments across the world to reflect upon policies and their impact. &ldquo;GII has over the years recognized India&rsquo;s continuous rise due to the progressive measures taken by the government and industry working hand in hand&rdquo;, he added. He also expressed his gratitude to WIPO on behalf of 1.3 billion Indians and said that India today aspires to take our ranking in the GII Index amongst top 25, he said.&nbsp;</span></p>
+
+
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">India Innovating Like Never Before! <br><br>India climbs to the 40th rank in the Global Innovation Index of <a href="https://twitter.com/WIPO?ref_src=twsrc%5Etfw">@WIPO</a>, a huge leap of 41 places in 7 years.<br><br>The steady rise testifies that India under the leadership of PM <a href="https://twitter.com/narendramodi?ref_src=twsrc%5Etfw">@NarendraModi</a> ji is rapidly emerging as the global innovation hub. <a href="https://t.co/pltqW8kdUh">pic.twitter.com/pltqW8kdUh</a></p>&mdash; Piyush Goyal (@PiyushGoyal) <a href="https://twitter.com/PiyushGoyal/status/1575454582251352064?ref_src=twsrc%5Etfw">September 29, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Shri Goyal said that Innovation has been a catalytic force for the economy and society. &ldquo;Though innovation implies novelty, it is also rooted in tradition for us in India. Ancient scientific knowledge including the Vedas and traditional medicine are a testament to India&rsquo;s innovative spirit&rdquo;, he added.&nbsp;</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister said that India had established the first of its kind Global Centre for Traditional Medicines in collaboration with the WHO, representing India&rsquo;s ancient scientific prowess.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Shri Goyal said that as the importance of the &lsquo;knowledge economy&rsquo; grows, innovation will lay the roadmap for development in India. &ldquo;We have been working to strengthen Research &amp; Development across sectors as amplified by Prime Minister Shri Narendra Modi&rsquo;s clarion call to make innovation our nation&rsquo;s mission&rdquo;, he added.&nbsp;</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister noted that agility, enthusiasm and energy of our youth are powering the start-up ecosystem. He observed that India today the 3rd largest start-up ecosystem and is home to over a 100 unicorns.&nbsp; &ldquo;Start up revolution has spread across India. Over half the start-ups are from remote small towns&rdquo;, he said.&nbsp;</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Shri Goyal opined that incubation, handholding, funding, industry-academia partnership and mentorship have stirred entrepreneurial spirit across the country. He said that India had embarked on the &lsquo;Digital India&rsquo; journey in 2015 and have set up a goal of a trillion-dollar digital economy in the next few years. &ldquo;Digitization of Government initiatives and public services has been our continuous focus&rdquo;, he observed.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister outlined several areas in which digital technologies are employed from mapping capital assets using GIS technology to revolutionizing payments through UPI. In fact, 40% of global real-time digital transactions happened in India last year, he underscored. &ldquo;To further strengthen innovation, we have introduced the National Education Policy, which promotes the spirit of enquiry by setting up incubation &amp; technology development centers. With over 9000 Atal Tinkering Labs, we encourage youth to develop solutions to society&rsquo;s problems&rdquo;, he added.&nbsp;</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Shri Goyal also stressed that India has taken up structural reforms to strengthen its IPR regime including modernization of IP office, reducing legal compliances and facilitating IP filing for start-ups, women entrepreneurs, the small industries and others. &ldquo;Domestic filing of Patents registered a 46% growth in the last 5 years. We are now transitioning to a knowledge-based economy&rdquo;</span></p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">***********</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">AD/KP/MS</span></span></p>
+
+
+                        
+                        <div id="reel_pic">
+                        </div>
+
+
+
+                        
+                        <br />
+                        <span id="ReleaseId">(Release ID: 1863536)</span>
+                        <span id="lblViews">Visitor Counter : 3631</span>
+                        <div>
+                              
+                        </div>
+                        
+
+                        <span id="lblRefPhoto"></span>
+
+                        <div class="BackgroundRelease">
+                              
+                        </div>
+                        <div>
+                              
+                        </div>
+                        <div class="ReleaseLang">Read this release in: 
+                        
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1863556' target="_blank">
+                                          Gujarati </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1863638' target="_blank">
+                                          Urdu </a>
+                              
+                                    ,
+                              
+                                    
+                                    <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1863725' target="_blank">
+                                          हिन्दी </a>
+                              
+                        </div>
+
+                        <div class="RelTag">
+                              <ul>
+                                    
+                              </ul>
+                        </div>
+                        <div class="clear">
+                        </div>
+                        
+                        <div class="pr-share pr-share--footer" role="group" aria-label="Share this press release">
+                              <span class="pr-share__label" aria-hidden="true">Share</span>
+                              <ul class="pr-share__list">
+                                    <li><a class="pr-share__btn pr-share__btn--facebook"
+                                           href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1863536"
+                                           target="_blank" rel="noopener noreferrer"
+                                           aria-label="Share on Facebook">
+                                        <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><use href="#icon-facebook" xlink:href="#icon-facebook"></use></svg>
+                                    </a></li>
+                                    <li><a class="pr-share__btn pr-share__btn--twitter"
+                                           href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1863536"
+                                           target="_blank" rel="noopener noreferrer"
+                                           aria-label="Share on X">
+                                        <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><use href="#icon-twitter" xlink:href="#icon-twitter"></use></svg>
+                                    </a></li>
+                                    <li><a class="pr-share__btn pr-share__btn--whatsapp"
+                                           href="https://api.whatsapp.com/send?text=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1863536"
+                                           target="_blank" rel="noopener noreferrer"
+                                           aria-label="Share on WhatsApp">
+                                        <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><use href="#icon-whatsapp" xlink:href="#icon-whatsapp"></use></svg>
+                                    </a></li>
+                                    <li><a class="pr-share__btn pr-share__btn--linkedin"
+                                           href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1863536"
+                                           target="_blank" rel="noopener noreferrer"
+                                           aria-label="Share on LinkedIn">
+                                        <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><use href="#icon-linkedin" xlink:href="#icon-linkedin"></use></svg>
+                                    </a></li>
+                                    <li><a class="pr-share__btn pr-share__btn--mail"
+                                           href="mailto:?subject=Press+release+from+PIB&amp;body=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1863536"
+                                           aria-label="Share by email">
+                                        <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><use href="#icon-mail" xlink:href="#icon-mail"></use></svg>
+                                    </a></li>
+                              </ul>
+                        </div>
+                        <div id="RelLink" class="RelLink">
+                              <ul>
+                                    
+                                    
+                              </ul>
+                        </div>
+                        <center>
+                              
+                        </center>
+                  </div>
+
+                  <div id="update12">
+	
+                              
+                              <input type="hidden" name="Hidden" id="Hidden" />
+                              <div id="P_CategoryManagement" class="ModalWindow" style="border-width:0px;height:60%;width:60%;overflow:auto;display: none">
+		
+                                    <div>
+                                          <input type="image" name="btnClose" id="btnClose" src="images/close_flat_icon.png" />
+                                    </div>
+                                    <div id="description">
+                                    </div>
+                                    <div class="text-center">
+                                          <h2>
+                                                
+                                                <br>
+                                                
+                                          </h2>
+                                    </div>
+                                    <br />
+                                    <div class="clear">
+                                    </div>
+                                    
+                              
+	</div>
+                        
+</div>
+            </div>
+            
+            <div id="PdfDiv" style="display: none;">
+                  <table width="100%">
+                        <tr>
+                              <td style="font-weight: 200; text-align: center">
+                                    Ministry of Commerce & Industry
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                                          India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                                          <div style='height:30px;width:100%;'></div>India today aspires to take our ranking in the GII Index to the top 25: Shri Piyush Goyal<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>GII has over the years recognized India’s continuous rise due to progressive measures taken by the government and industry working hand in hand: Shri Piyush Goyal<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>As the importance of the ‘knowledge economy’ grows, innovation will lay the roadmap for development in India: Shri Piyush Goyal<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>Incubation, handholding, funding, industry-academia partnership and mentorship have stirred entrepreneurial spirit across the country: Shri Piyush Goyal<div style='height:30px;width:100%;'></div><div style='height:30px;width:100%;'></div>India is rapidly transitioning into a knowledge economy; domestic filing of Patents registered a 46% growth in the last 5 years: Shri Piyush Goyal<div style='height:30px;width:100%;'></div>
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="text-align: center; font-size: 14px;">
+                                          Posted On:
+                        29 SEP 2022 9:29PM by PIB Delhi
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 200; text-align: left; font-size: 16px;">
+                                          <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Union Minister for Commerce and Industry, Consumer Affairs, Food and Public Distribution and Textiles,&nbsp; Shri Piyush Goyal said that India had come a long way in the Global Innovation Index (GII) from the 81st spot in 2015 to the 40th spot in 2022 today. &lsquo;We were 46 last time the ranking was done. We have also maintained 1st rank in ICT services exports over the years&rsquo; he added. Shri Goyal was delivering a virtual message to mark the launch of the Global Innovation Index, 2022 by the World Intellectual Property Organization (WIPO).</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister said that GII has established itself as a tool for Governments across the world to reflect upon policies and their impact. &ldquo;GII has over the years recognized India&rsquo;s continuous rise due to the progressive measures taken by the government and industry working hand in hand&rdquo;, he added. He also expressed his gratitude to WIPO on behalf of 1.3 billion Indians and said that India today aspires to take our ranking in the GII Index amongst top 25, he said.&nbsp;</span></p>
+
+
+<center><blockquote class="twitter-tweet"><p lang="en" dir="ltr">India Innovating Like Never Before! <br><br>India climbs to the 40th rank in the Global Innovation Index of <a href="https://twitter.com/WIPO?ref_src=twsrc%5Etfw">@WIPO</a>, a huge leap of 41 places in 7 years.<br><br>The steady rise testifies that India under the leadership of PM <a href="https://twitter.com/narendramodi?ref_src=twsrc%5Etfw">@NarendraModi</a> ji is rapidly emerging as the global innovation hub. <a href="https://t.co/pltqW8kdUh">pic.twitter.com/pltqW8kdUh</a></p>&mdash; Piyush Goyal (@PiyushGoyal) <a href="https://twitter.com/PiyushGoyal/status/1575454582251352064?ref_src=twsrc%5Etfw">September 29, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Shri Goyal said that Innovation has been a catalytic force for the economy and society. &ldquo;Though innovation implies novelty, it is also rooted in tradition for us in India. Ancient scientific knowledge including the Vedas and traditional medicine are a testament to India&rsquo;s innovative spirit&rdquo;, he added.&nbsp;</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister said that India had established the first of its kind Global Centre for Traditional Medicines in collaboration with the WHO, representing India&rsquo;s ancient scientific prowess.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Shri Goyal said that as the importance of the &lsquo;knowledge economy&rsquo; grows, innovation will lay the roadmap for development in India. &ldquo;We have been working to strengthen Research &amp; Development across sectors as amplified by Prime Minister Shri Narendra Modi&rsquo;s clarion call to make innovation our nation&rsquo;s mission&rdquo;, he added.&nbsp;</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister noted that agility, enthusiasm and energy of our youth are powering the start-up ecosystem. He observed that India today the 3rd largest start-up ecosystem and is home to over a 100 unicorns.&nbsp; &ldquo;Start up revolution has spread across India. Over half the start-ups are from remote small towns&rdquo;, he said.&nbsp;</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Shri Goyal opined that incubation, handholding, funding, industry-academia partnership and mentorship have stirred entrepreneurial spirit across the country. He said that India had embarked on the &lsquo;Digital India&rsquo; journey in 2015 and have set up a goal of a trillion-dollar digital economy in the next few years. &ldquo;Digitization of Government initiatives and public services has been our continuous focus&rdquo;, he observed.</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">The Minister outlined several areas in which digital technologies are employed from mapping capital assets using GIS technology to revolutionizing payments through UPI. In fact, 40% of global real-time digital transactions happened in India last year, he underscored. &ldquo;To further strengthen innovation, we have introduced the National Education Policy, which promotes the spirit of enquiry by setting up incubation &amp; technology development centers. With over 9000 Atal Tinkering Labs, we encourage youth to develop solutions to society&rsquo;s problems&rdquo;, he added.&nbsp;</span></p>
+
+<p style="text-align:justify"><span style="font-family:&quot;Times New Roman&quot;,Times,serif; font-size:16px">Shri Goyal also stressed that India has taken up structural reforms to strengthen its IPR regime including modernization of IP office, reducing legal compliances and facilitating IP filing for start-ups, women entrepreneurs, the small industries and others. &ldquo;Domestic filing of Patents registered a 46% growth in the last 5 years. We are now transitioning to a knowledge-based economy&rdquo;</span></p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">***********</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">AD/KP/MS</span></span></p>
+
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                                    <div style="font-weight: 100; text-align: left; font-size: 16px;">
+                                          (Release ID: 1863536)
+                                    </div>
+                                    <div style="height: 30px; width: 100%;">
+                                    </div>
+                              </td>
+                        </tr>
+                        <tr>
+                              <td style="font-weight: 200; text-align: center; font-size: 24px;"></td>
+                        </tr>
+                  </table>
+            </div>
+            <div class="clearfix">
+            </div>
+
+            
+
+            <div class="section1">
+                  <div id="frst_t">
+                        <div id="arr_rm"><div class='sticky-social_mb'><ul class='social_mb'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536&text=India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years&body=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536&title=India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+                  </div>
+                  <div id="second_t">
+                        <div id="sndr_rm"><div class='sticky-social'><ul class='social'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536&text=India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years&body=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=1863536&title=India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+                  </div>
+            </div>
+            <input type="hidden" name="ltrTitlee" id="ltrTitlee" value="India climbs to the 40th rank in the Global Innovation Index of WIPO; a huge leap of 41 places in 7 years" />
+            <input type="hidden" name="ltrSubtitlee" id="ltrSubtitlee" value="&lt;br/>India today aspires to take our ranking in the GII Index to the top 25: Shri Piyush Goyal&lt;br/>&lt;br/>GII has over the years recognized India’s continuous rise due to progressive measures taken by the government and industry working hand in hand: Shri Piyush Goyal&lt;br/>&lt;br/>As the importance of the ‘knowledge economy’ grows, innovation will lay the roadmap for development in India: Shri Piyush Goyal&lt;br/>&lt;br/>Incubation, handholding, funding, industry-academia partnership and mentorship have stirred entrepreneurial spirit across the country: Shri Piyush Goyal&lt;br/>&lt;br/>India is rapidly transitioning into a knowledge economy; domestic filing of Patents registered a 46% growth in the last 5 years: Shri Piyush Goyal&lt;br/>" />
+            <input type="hidden" name="ltrDescriptionn" id="ltrDescriptionn" value="&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Union Minister for Commerce and Industry, Consumer Affairs, Food and Public Distribution and Textiles,&amp;nbsp; Shri Piyush Goyal said that India had come a long way in the Global Innovation Index (GII) from the 81st spot in 2015 to the 40th spot in 2022 today. &amp;lsquo;We were 46 last time the ranking was done. We have also maintained 1st rank in ICT services exports over the years&amp;rsquo; he added. Shri Goyal was delivering a virtual message to mark the launch of the Global Innovation Index, 2022 by the World Intellectual Property Organization (WIPO).&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>The Minister said that GII has established itself as a tool for Governments across the world to reflect upon policies and their impact. &amp;ldquo;GII has over the years recognized India&amp;rsquo;s continuous rise due to the progressive measures taken by the government and industry working hand in hand&amp;rdquo;, he added. He also expressed his gratitude to WIPO on behalf of 1.3 billion Indians and said that India today aspires to take our ranking in the GII Index amongst top 25, he said.&amp;nbsp;&lt;/span>&lt;/p>
+
+
+&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;>India Innovating Like Never Before! &lt;br>&lt;br>India climbs to the 40th rank in the Global Innovation Index of &lt;a href=&quot;https://twitter.com/WIPO?ref_src=twsrc%5Etfw&quot;>@WIPO&lt;/a>, a huge leap of 41 places in 7 years.&lt;br>&lt;br>The steady rise testifies that India under the leadership of PM &lt;a href=&quot;https://twitter.com/narendramodi?ref_src=twsrc%5Etfw&quot;>@NarendraModi&lt;/a> ji is rapidly emerging as the global innovation hub. &lt;a href=&quot;https://t.co/pltqW8kdUh&quot;>pic.twitter.com/pltqW8kdUh&lt;/a>&lt;/p>&amp;mdash; Piyush Goyal (@PiyushGoyal) &lt;a href=&quot;https://twitter.com/PiyushGoyal/status/1575454582251352064?ref_src=twsrc%5Etfw&quot;>September 29, 2022&lt;/a> 
+&lt;p style=&quot;text-align:justify&quot;>&amp;nbsp;&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Shri Goyal said that Innovation has been a catalytic force for the economy and society. &amp;ldquo;Though innovation implies novelty, it is also rooted in tradition for us in India. Ancient scientific knowledge including the Vedas and traditional medicine are a testament to India&amp;rsquo;s innovative spirit&amp;rdquo;, he added.&amp;nbsp;&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>The Minister said that India had established the first of its kind Global Centre for Traditional Medicines in collaboration with the WHO, representing India&amp;rsquo;s ancient scientific prowess.&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>Shri Goyal said that as the importance of the &amp;lsquo;knowledge economy&amp;rsquo; grows, innovation will lay the roadmap for development in India. &amp;ldquo;We have been working to strengthen Research &amp;amp; Development across sectors as amplified by Prime Minister Shri Narendra Modi&amp;rsquo;s clarion call to make innovation our nation&amp;rsquo;s mission&amp;rdquo;, he added.&amp;nbsp;&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>The Minister noted that agility, enthusiasm and energy of our youth are powering the start-up ecosystem. He observed that India today the 3rd largest start-up ecosystem and is home to over a 100 unicorns.&amp;nbsp; &amp;ldquo;Start up revolution has spread across India. Over half the start-ups are from remote small towns&amp;rdquo;, he said.&amp;nbsp;&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>Shri Goyal opined that incubation, handholding, funding, industry-academia partnership and mentorship have stirred entrepreneurial spirit across the country. He said that India had embarked on the &amp;lsquo;Digital India&amp;rsquo; journey in 2015 and have set up a goal of a trillion-dollar digital economy in the next few years. &amp;ldquo;Digitization of Government initiatives and public services has been our continuous focus&amp;rdquo;, he observed.&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>The Minister outlined several areas in which digital technologies are employed from mapping capital assets using GIS technology to revolutionizing payments through UPI. In fact, 40% of global real-time digital transactions happened in India last year, he underscored. &amp;ldquo;To further strengthen innovation, we have introduced the National Education Policy, which promotes the spirit of enquiry by setting up incubation &amp;amp; technology development centers. With over 9000 Atal Tinkering Labs, we encourage youth to develop solutions to society&amp;rsquo;s problems&amp;rdquo;, he added.&amp;nbsp;&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:&amp;quot;Times New Roman&amp;quot;,Times,serif; font-size:16px&quot;>Shri Goyal also stressed that India has taken up structural reforms to strengthen its IPR regime including modernization of IP office, reducing legal compliances and facilitating IP filing for start-ups, women entrepreneurs, the small industries and others. &amp;ldquo;Domestic filing of Patents registered a 46% growth in the last 5 years. We are now transitioning to a knowledge-based economy&amp;rdquo;&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&amp;nbsp;&lt;/p>
+
+&lt;p style=&quot;text-align:center&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>***********&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>AD/KP/MS&lt;/span>&lt;/span>&lt;/p>
+" />
+            <script type="text/javascript">
+                  var mPlayer = document.getElementById("background_music");
+                  var mPlayAction = document.getElementById("playbutton");
+
+                  var isPlaying = false;
+
+                  function playAudio() {
+                        mPlayer.play();
+                        isPlaying = true;
+                        document.getElementById('stopA').style.display = "block";
+                        document.getElementById('playA').style.display = "none";
+                  }
+
+                  function pauseAudio() {
+                        mPlayer.pause();
+                        isPlaying = false;
+                        document.getElementById('playA').style.display = "block";
+                        document.getElementById('stopA').style.display = "none";
+                  }
+                  //function HandleAudio() {
+                  //    if (isPlaying == true) {
+                  //        //Playing already Pause it
+                  //        pauseAudio();
+                  //    } else {
+                  //        //Play the music
+                  //        playAudio();
+                  //    }
+                  //}
+            </script>
+            <script type="text/javascript">
+                  var synth = window.speechSynthesis;
+
+            
+                  function CleanHtml(html) {
+
+                        html = html.replace(/<script[\s\S]*?<\/script>/gi, '');
+
+                        return html;
+                  }
+                  function stripHtml(html) {
+                        let tmp = document.createElement("DIV");
+                        tmp.innerHTML = CleanHtml(html);
+                        return tmp.textContent || tmp.innerText || "";
+                  }
+            </script>
+            <script type="text/javascript">
+                  $(document).ready(function () {
+                        //for responsive tables
+                        $("table").each(function () {
+                              if (!$(this).closest(".table-responsive").length) {
+                                    $(this).wrap("<div class='table-responsive'></div>");
+                              }
+                        });
+
+                        var width = $(window).width();
+                        if (width < 768) {
+
+                              // Extra Small Device
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+
+                        } else if (width < 991) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                              // Small Device
+
+                        } else if (width < 1199) {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Medium Device
+
+                        } else {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Large Device
+
+                        }
+                  });
+            </script>
+            <script type="text/javascript">
+                  $(document).ready(function () {
+                        var width = $(window).width();
+                        if (width < 768) {
+
+                              // Extra Small Device
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+
+                        } else if (width < 991) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                              // Small Device
+
+                        } else if (width < 1199) {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Medium Device
+
+                        } else {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                              // Large Device
+
+                        }
+                  });
+            </script>
+            
+            <style type="text/css">
+                  @media print {
+                        .sticky-social, .sticky-social_mb, .pull-right, #printPDF {
+                              display: none !important;
+                        }
+                  }
+
+                  .f_vl {
+                        padding-right: 30px;
+                        font-size: 17px;
+                        cursor: pointer;
+                  }
+
+                  .log_oo {
+                        // width: 20%;
+                        display: flex;
+                        justify-content: space-between;
+                  }
+
+                        .log_oo img {
+                              width: 150px;
+                              /*width: 100%;
+                    height: auto;*/
+                        }
+
+                  .sticky-social_mb {
+                        position: fixed;
+                        bottom: 0px;
+                        padding: 0px;
+                        margin: 0px;
+                        width: 100%;
+                  }
+
+                  .social_mb {
+                        list-style: none;
+                        display: flex;
+                        width: 100%;
+                        margin-bottom: -8px;
+                  }
+
+                        .social_mb a {
+                              padding: 8px 0px;
+                              font-size: 30px;
+                              transition: all 0.8s ease-in-out;
+                              width: 20% !important;
+                              text-align: center;
+                        }
+            </style>
+            <style type="text/css">
+                  .section1 {
+                        position: relative;
+                        padding: 10px 0px;
+                        width: 100%;
+                  }
+
+
+
+                  .sticky-social {
+                        position: fixed;
+                        top: 20px;
+                        left: 0px;
+                        padding: 0px;
+                        margin: 0px;
+                  }
+
+                  .social {
+                        list-style: none;
+                  }
+
+                        .social a li {
+                              padding: 8px 12px;
+                              font-size: 25px;
+                              transition: all 0.8s ease-in-out;
+                        }
+
+                              .social a li:hover {
+                                    margin-right: -30px;
+                                    box-shadow: 2px 5px 10px grey;
+                              }
+
+                                    .social a li:hover .fa {
+                                          margin-left: 20px;
+                                    }
+
+                  .fb_b {
+                        /* background-color: var(--dbim-key, #0F5757);*/
+                        background-color: var(--dbim-key, #0F5757);
+                  }
+
+                  .twitter_r {
+                        /* background-color: rgb(29, 161, 242);*/
+                        background-color: var(--dbim-key, #0F5757);
+                  }
+
+                  .whatsapp_r {
+                        /* background-color: var(--dbim-key, #0F5757);*/
+                        background-color: var(--dbim-key, #0F5757);
+                  }
+
+                  .fa-envelope_r {
+                        /* background-color: var(--dbim-key, #0F5757);*/
+                        background-color: var(--dbim-key, #0F5757);
+                  }
+
+                  .fa-linkedin_r {
+                        background-color: var(--dbim-key, #0F5757);
+                  }
+            </style>
+            <style type="text/css">
+                  @media only screen and (max-device-width: 767px) {
+                        p span img {
+                              max-width: 90% !important;
+                              height: auto !important;
+                        }
+
+                        p img {
+                              max-width: 90% !important;
+                              height: auto !important;
+                        }
+
+                        h2 {
+                              font-size: var(--dbim-h2, 20px);   /* was 20px !important - the !important blocked A+/A- */
+                              font-weight: 600 !important;
+                        }
+
+                        h3 {
+                              font-size: var(--dbim-h3, 16px);   /* was 16px !important */
+                              font-weight: 600 !important;
+                        }
+                  }
+            </style>
+            <style type="text/css">
+                  /* === Film Roll Badge Styling(IFFI2025 countdown) === */
+                  .film-roll-badge {
+                        position: absolute;
+                        top:82%;
+                        right: 20px;
+                        width: 230px;
+                        height: 70px;
+                        background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 18px, var(--dbim-text, #150202) 18px, var(--dbim-text, #150202) 36px );
+                        border-top: 8px solid var(--dbim-green-key, #0F5757);
+                        border-bottom: 8px solid var(--dbim-green-key, #0F5757);
+                        border-radius: 8px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                        animation: moveFilm 8s linear infinite;
+                        z-index: 10;
+                  }
+
+                        /* film sprocket holes */
+                        .film-roll-badge::before,
+                        .film-roll-badge::after {
+                              content: "";
+                              position: absolute;
+                              width: 100%;
+                              height: 10px;
+                              background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 10px, #fff 10px, #fff 20px );
+                              left: 0;
+                              z-index: 2;
+                        }
+
+                        .film-roll-badge::before {
+                              top: -4px;
+                        }
+
+                        .film-roll-badge::after {
+                              bottom: -4px;
+                        }
+
+                  .film-roll-inner {
+                        position: relative;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        animation: flicker 2s infinite ease-in-out;
+                  }
+
+                  .countdown-text {
+                        font-size: 1.3rem;
+                        font-weight: 700;
+                        color: #fff;
+                        text-shadow: 0 0 6px rgba(255, 255, 255, 0.4), 0 0 10px #000;
+                        white-space: nowrap;
+                  }
+
+                  /* === Animations === */
+                  @keyframes moveFilm {
+                        0% {
+                              background-position: 0 0;
+                        }
+
+                        100% {
+                              background-position: 120px 0;
+                        }
+                  }
+
+                  @keyframes flicker {
+                        0%, 100% {
+                              opacity: 1;
+                        }
+
+                        50% {
+                              opacity: 0.9;
+                        }
+
+                        25% {
+                              opacity: 0.95;
+                        }
+
+                        75% {
+                              opacity: 0.85;
+                        }
+                  }
+
+                  /* === Responsive Adjustments === */
+                  @media (max-width: 1500px) {
+                        .film-roll-badge {
+                              top: 68%;
+                              right: 18px;
+                              /* width: 220px; */
+                              height: 65px;
+                              font-size: 0.85rem;
+                        }
+
+                        .press-section {
+                              margin-top: 35px;
+                        }
+                  }
+
+                  @media (max-width: 992px) {
+                        .film-roll-badge {
+                              top: 52%;
+                              right: 10px;
+                               width: 200px; 
+                              height: 60px;
+                        }
+                  }
+
+                  @media (max-width: 768px) {
+                        .film-roll-badge {
+                              top: 56%;
+                              right: 10px;
+                               width: 124px; 
+                              height: 55px;
+                        }
+
+                        .countdown-text {
+                              font-size: 0.9rem;
+                        }
+                  }
+
+                  @media (max-width: 576px) {
+                        .film-roll-badge {
+                              top: 59%;
+                              right: 5px;
+                              /* width: 160px; */
+                              height: 50px;
+                        }
+
+                        .countdown-text {
+                              font-size: 0.85rem;
+                        }
+                  }
+            </style>
+          <script type="text/javascript">
+                const festivalStart = new Date("2025-11-20T00:00:00").getTime();
+                const festivalEnd = new Date("2025-11-28T23:59:59").getTime();
+
+                const countdownElement = document.getElementById("countdown");
+
+                const interval = setInterval(() => {
+                      const now = new Date().getTime();
+
+                      // BEFORE FESTIVAL — show days + hours left
+                      if (now < festivalStart) {
+                            const diff = festivalStart - now;
+                            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                            countdownElement.innerHTML = `
+              ${days} Day${days !== 1 ? 's' : ''} 
+              ${hours} Hour${hours !== 1 ? 's' : ''} to go
+          `;
+
+                      }
+
+                      // DURING FESTIVAL — show 56th IFFI - Day X
+                      else if (now >= festivalStart && now <= festivalEnd) {
+                            const dayNumber = Math.floor((now - festivalStart) / (1000 * 60 * 60 * 24)) + 1;
+                            countdownElement.innerHTML = `56th IFFI - Day ${dayNumber}`;
+                      }
+
+                      // AFTER FESTIVAL — new message
+                      else {
+                            countdownElement.innerHTML = `✨ IFFI closes but never ends…`;
+
+                            // Width change logic
+                            const elements = document.querySelectorAll('.film-roll-badge');
+                            elements.forEach(el => el.style.width = "350px");
+
+                            clearInterval(interval);
+                      }
+
+                }, 1000);
+          </script>
+ <script type="text/javascript">
+
+               const miffStart = new Date("2026-06-15T00:00:00").getTime();
+               const miffEnd = new Date("2026-06-15T23:59:59").getTime();
+
+               const miffElement = document.getElementById("miff");
+
+               if (miffElement) {
+
+                   const miffInterval = setInterval(() => {
+
+                       const now = new Date().getTime();
+
+                       // Before MIFF
+                       if (now < miffStart) {
+
+                           const diff = miffStart - now;
+                           const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                           const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        
+
+                   /*  miffElement.innerHTML = `${days} Day${days !== 1 ? 's' : ''} ${hours} Hour${hours !== 1 ? 's' : ''} to MIFF`;*/
+                           miffElement.innerHTML = `${days} Day${days === 1 ? '' : 's'} to MIFF ...`;
+
+
+                     }
+
+                       // During MIFF
+                       else if (now >= miffStart && now <= miffEnd) {
+
+                           const dayNumber =
+                               Math.floor((now - miffStart) / (1000 * 60 * 60 * 24)) + 1;
+
+                           miffElement.innerHTML = `19th MIFF - Day ${dayNumber}`;
+                       }
+
+                       // After MIFF
+                       else {
+
+                           miffElement.innerHTML = `✨ MIFF concludes, cinema lives on...`;
+
+                           document.querySelectorAll('.film-roll-badge')
+                               .forEach(el => el.style.width = "350px");
+
+                           clearInterval(miffInterval);
+                       }
+
+                   }, 1000);
+               }
+
+</script>
+
+      
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {$get("sc_HiddenField").value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"P_CategoryManagement","dynamicServicePath":"/PressReleasePage.aspx","id":"mpe"}, null, null, $get("Hidden"));
+});
+//]]>
+</script>
+<input type="hidden" name="__ncforminfo" value="U_hOKssqz9Q5_LHbnr0myHVRXHTzv4jd-jgv8RrILmClzDOxlyg7O7qJr0LPd4ulFREoenEY5rcARszjLgJbtD_1zCJlDZ_z_KqzgIZQ6pWSrSj1hXZuPw=="/></form>
+      
+      
+
+<script type="application/json" id="pibConsentConfig">{"ga4Id":"G-Q414Y0X6EE,G-QJJ6LZ8LHV","policyUrl":"/CookiePolicy.aspx","text":{"bannerLabel":"Cookie consent","title":"Cookies on this website","body":"We use essential cookies to make this website work. We also set analytics cookies when you arrive, so we can see how the site is used and improve it - you can switch these off below or at any time from the Cookie Policy page. Cookies from embedded social media content are set only if you allow them.","policyLink":"Read our Cookie Policy","accept":"Accept all","reject":"Reject optional","customize":"Customise","prefsTitle":"Cookie preferences","prefsIntro":"Choose which cookies this website may set. Essential cookies cannot be switched off because the site does not work without them. Analytics cookies are on unless you turn them off. Social media cookies stay off until you allow them. You can change these choices at any time from the Cookie Policy page.","essentialName":"Essential cookies","essentialDesc":"Needed for the site to function. These remember your session, your language and region, your text size and colour theme, and verify the security check on forms. They are always on.","analyticsName":"Analytics cookies","analyticsDesc":"Help us understand how visitors use the site - which pages are read and how long people stay - so it can be improved. The information is collected in a form that does not directly identify you. These are on when you arrive; switching them off here stops them and deletes the ones already set.","socialName":"Social media cookies","socialDesc":"Set by content embedded from X, Facebook and YouTube, such as timelines and videos. These platforms may use them to track you across websites. They stay off until you allow them.","save":"Save preferences","cancel":"Cancel"}}</script>
+<script type="text/javascript" src='/js/consent.js?v=10'></script>
+
+<script type="text/javascript" src='/js/consent-embeds.js?v=10'></script>
+
+    
+
+<script type="text/javascript">
+    (function () {
+        try {
+            if (window.self === window.top) { return; }
+        } catch (e) { return; }
+        var s = document.createElement("style");
+        s.textContent =
+            ".sticky-social, .sticky-social_mb { display: none !important; }";
+        (document.head || document.documentElement).appendChild(s);
+    }());
+</script>
+</body>
+</html>
+

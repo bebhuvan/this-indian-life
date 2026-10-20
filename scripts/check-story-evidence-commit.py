@@ -9,6 +9,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# GitHub refuses any file over 100 MB. A raw source that large is kept out of Git and listed in
+# its manifest with "external" (where the copy of record lives), its URL, bytes and sha256; the
+# hash is checked wherever the file is present, and it is gitignored so it cannot be staged.
+GITHUB_FILE_LIMIT = 100 * 1000 * 1000
 
 
 def repo_path(value):
@@ -29,33 +33,42 @@ def check_ledger(ledger_path):
     ledger_path = repo_path(ledger_path)
     ledger = json.loads((ROOT / ledger_path).read_text())
     bundle = ledger["evidenceBundle"]
-    raw_manifest_path = repo_path(bundle["sourceManifest"])
+    # A story drawing on several raw folders lists one manifest per folder in `sourceManifests`.
+    manifest_paths = [repo_path(p) for p in bundle.get("sourceManifests") or [bundle["sourceManifest"]]]
     artifact_catalog_path = repo_path(bundle["artifactCatalog"])
-    raw_manifest = json.loads((ROOT / raw_manifest_path).read_text())
     artifact_catalog = json.loads((ROOT / artifact_catalog_path).read_text())
 
-    required = {ledger_path, raw_manifest_path, artifact_catalog_path}
+    required = {ledger_path, artifact_catalog_path, *manifest_paths}
     required.update(repo_path(path) for path in bundle["repositoryFiles"])
-    raw_root = Path(raw_manifest_path).parent
     raw_files = set()
     errors = []
 
-    for item in raw_manifest["files"]:
-        path = repo_path((raw_root / repo_path(item["path"])).as_posix())
-        raw_files.add(path)
-        file = ROOT / path
-        if file.is_file():
-            digest = hashlib.sha256(file.read_bytes()).hexdigest()
-            if digest != item["sha256"]:
-                errors.append(f"source hash mismatch: {path}")
-        required.add(path)
-
-    actual_raw = {
-        path.relative_to(ROOT).as_posix()
-        for path in (ROOT / raw_root).rglob("*") if path.is_file()
-    } - {raw_manifest_path}
-    for path in sorted(actual_raw - raw_files):
-        errors.append(f"raw file absent from source manifest: {path}")
+    for raw_manifest_path in manifest_paths:
+        raw_manifest = json.loads((ROOT / raw_manifest_path).read_text())
+        raw_root = Path(raw_manifest_path).parent
+        listed = set()
+        for item in raw_manifest["files"]:
+            path = repo_path((raw_root / repo_path(item["path"])).as_posix())
+            listed.add(path)
+            file = ROOT / path
+            if file.is_file():
+                digest = hashlib.sha256(file.read_bytes()).hexdigest()
+                if digest != item["sha256"]:
+                    errors.append(f"source hash mismatch: {path}")
+            if item.get("external"):
+                if int(item.get("bytes") or 0) <= GITHUB_FILE_LIMIT or not item.get("url") or not item.get("sha256"):
+                    errors.append(f"external source must be over 100 MB with a url and sha256: {path}")
+                elif not git("ls-files", "--cached", "--error-unmatch", "--", path):
+                    errors.append(f"external source is in Git, which refuses it: {path}")
+                continue
+            required.add(path)
+        actual_raw = {
+            path.relative_to(ROOT).as_posix()
+            for path in (ROOT / raw_root).rglob("*") if path.is_file()
+        } - {raw_manifest_path}
+        for path in sorted(actual_raw - listed):
+            errors.append(f"raw file absent from source manifest: {path}")
+        raw_files |= listed
 
     for item in artifact_catalog:
         if item.get("status") == "ready":

@@ -21,7 +21,7 @@ export function fmt(value: number, unit = "") {
   // figure, so the value is written bare ("10.2"), never "10.2%".
   if (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit)) return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
-  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
+  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : abs > 0 && abs < 1 ? 2 : 1 })}%`; // under 1%: 0.65, not 0.7
   if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
     return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   }
@@ -123,7 +123,7 @@ export function compactBarLabel(value: number, unit = "") {
   // figure, so the value is written bare ("10.2"), never "10.2%".
   if (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit)) return value.toLocaleString("en-IN", { maximumFractionDigits: 1 });
   if (/multiple/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: 1 })}x`;
-  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}%`;
+  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : abs > 0 && abs < 1 ? 2 : 1 })}%`; // under 1%: 0.65, not 0.7
   if (LAKH_CRORE(unit)) return `₹${value.toLocaleString("en-IN", { maximumFractionDigits: abs >= 100 ? 0 : 1 })}L cr`;
   if (/crore/i.test(unit) && /inr|₹|rs/i.test(unit)) {
     if (abs >= 100_000) return `₹${(value / 100_000).toLocaleString("en-IN", { maximumFractionDigits: 1 })}L cr`;
@@ -156,7 +156,9 @@ export function endLabelInScale(value: number, maxAbs: number, unit = "", compac
   // figure, so the value is written bare ("10.2"), never "10.2%".
   if (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit)) return n(value, 1);
   if (/multiple/i.test(unit)) return `${n(value, 1)}x`;
-  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 100 ? 0 : 1 })}%`;
+  // On an axis that stays under 1% (R&D at 0.6-0.9% of GDP), one decimal prints 0.65 and 0.7
+  // both as "0.7%": every label on that scale keeps two.
+  if (/%|percent/i.test(unit)) return `${value.toLocaleString("en-IN", { maximumFractionDigits: Math.abs(value) >= 100 ? 0 : maxAbs > 0 && maxAbs <= 1 ? 2 : 1 })}%`;
   if (/(station-years|station-days|station records|daily rows|listed files|stations|towns\/city names)/i.test(unit)) {
     return value.toLocaleString("en-IN", { maximumFractionDigits: 0 });
   }
@@ -241,8 +243,10 @@ export function niceScale(lo: number, hi: number, count = 5) {
 
 /** Give every label in one chart the same number of decimals, so "2.2" does not sit
  *  beside "1.83". Labels are grouped by what surrounds the number (unit, suffix), and
- *  each group is padded to its most precise member; nothing is rounded away. */
-export function harmoniseDecimals(labels: string[]) {
+ *  each group is padded to its most precise member; nothing is rounded away.
+ *  Pass the raw `values` when the labels were rounded: a label is then re-printed from its value
+ *  rather than padded, so 4.94 printed as "4.9" becomes "4.94", never "4.90". */
+export function harmoniseDecimals(labels: string[], values?: number[]) {
   const re = /^([^\d]*?)(\d[\d,]*)(?:\.(\d+))?(.*)$/;
   const parts = labels.map((l) => String(l).match(re));
   const key = (m: RegExpMatchArray | null) => (m ? `${m[1].replace(/[-\u2212+]/g, "")}|${m[4]}` : "");
@@ -256,6 +260,12 @@ export function harmoniseDecimals(labels: string[]) {
     if (!m) return l;
     const d = need.get(key(m)) ?? 0, have = (m[3] ?? "").length;
     if (!d || have >= d || m[2].replace(/,/g, "").length >= 4) return l;
+    const v = values?.[i];
+    if (v != null && Number.isFinite(v)) {
+      const [ip, fp] = Math.abs(v).toFixed(d).split(".");
+      // only when the re-printed figure agrees with the label's whole part (no unit rescaling, e.g. "1.2 lakh")
+      if (ip === m[2].replace(/,/g, "")) return `${m[1]}${m[2]}.${fp}${m[4]}`;
+    }
     return `${m[1]}${m[2]}.${(m[3] ?? "").padEnd(d, "0")}${m[4]}`;
   });
 }

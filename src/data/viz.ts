@@ -31,6 +31,8 @@ export type LineVisual = {
   monthAxis?: boolean;
   bands?: Array<{ year: number; label?: string }>;
   refLine?: { value: number; label: string };
+  /** A shaded range under the lines (an interval, a min-max), from two series by date. */
+  range?: { label: string; points: Array<{ date: string; low: number; high: number }> };
   /** The last measured year: points after it are a projection and are drawn dashed, with a
    *  "projected" mark at the split. A line may carry its own (two models, two vintages). */
   projectedAfter?: number;
@@ -1172,6 +1174,15 @@ function multiSeriesLine(
   };
 }
 
+/** Pair two bound series by date into a shaded range for a line chart. */
+function rangeFor(spec?: { low: string; high: string; label: string }): LineVisual["range"] | undefined {
+  if (!spec) return undefined;
+  const lo = artifactById(spec.low), hi = artifactById(spec.high);
+  const los = lo ? lineFor(lo)?.lines[0]?.points ?? [] : [], his = new Map((hi ? lineFor(hi)?.lines[0]?.points ?? [] : []).map((p) => [String(p.date), p.value]));
+  const points = los.filter((p) => his.has(String(p.date))).map((p) => ({ date: String(p.date), low: p.value, high: his.get(String(p.date)) as number }));
+  return points.length >= 2 ? { label: spec.label, points } : undefined;
+}
+
 // One table -> many lines, grouped by a `series` column. Every other line builder maps
 // one indicator to one line, which cannot express "the same measurement for several
 // years overlaid on a shared axis". The rows carry their own `date`, so a chart can
@@ -2224,12 +2235,16 @@ type PlanEntry = {
   panels?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   rows?: Array<{ label: string; series: Array<{ indicator: string; label: string }> }>;
   columns?: Array<{ key: string; label: string }>;
+  /** groupedTable: the row field that names each group (default "label"). */
+  labelField?: string;
   fromYear?: number;
   latestPeriodLabel?: boolean;
   xTicks?: number[];
   categoricalX?: boolean;
   xLabels?: string[];
   bands?: Array<{ year: number; label?: string }>;
+  /** Shade between two series (low and high bounds) under a line chart. */
+  range?: { low: string; high: string; label: string };
   years?: number[];
   decades?: string[];
   denominator?: string;
@@ -2691,6 +2706,8 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
   }
   if (entry.chart === "multiLine") {
     const visual = multiSeriesLine(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "", entry.fromYear, entry.bands, entry.refLine, entry.projectedAfter);
+    const range = rangeFor(entry.range);
+    if (visual && range) visual.range = range;
     return visual ? attachMeta(visual, entry) : null;
   }
   if (entry.chart === "multiLineTable") {
@@ -2716,6 +2733,19 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
   if (entry.chart === "latestBars") {
     const visual = latestBarsFromIndicators(entry.series || [], entry.title || "", entry.subtitle || "", entry.unit || "");
     return visual ? attachMeta(visual, entry) : null;
+  }
+  if (entry.chart === "groupedTable") {
+    // One group per table row, one bar per named column, every column on the same unit.
+    const artifact = artifactById(entry.indicator || "");
+    const cols = entry.columns || [];
+    const lf = entry.labelField || "label";
+    if (!artifact?.rows?.length || cols.length < 2) return null;
+    const groups = artifact.rows
+      .map((row) => ({ label: String(row[lf] ?? ""), date: "", values: cols.map((c) => Number(row[c.key])) }))
+      .filter((g) => g.label && g.values.every((v) => Number.isFinite(v)));
+    if (groups.length < 2) return null;
+    const visual: GroupedBarVisual = { kind: "groupedBar", title: entry.title || artifact.title, subtitle: entry.subtitle || "", unit: entry.unit || artifact.unit, source: sourceFor(artifact), series: cols.map((c) => c.label), groups };
+    return attachMeta(visual, entry);
   }
   if (entry.chart === "tableBars") {
     const visual = barsFromTableRows(entry.indicator || "", entry.title || "", entry.subtitle || "", entry.unit || "");
@@ -2744,6 +2774,8 @@ function buildPlannedVisual(entry: PlanEntry): VisualSpec | null {
         if (entry.subtitle) lv.subtitle = entry.subtitle;
         if (entry.bands?.length) (lv as LineVisual & { bands?: Array<{ year: number; label?: string }> }).bands = entry.bands;
         if (entry.projectedAfter) lv.projectedAfter = entry.projectedAfter;
+        const range = rangeFor(entry.range);
+        if (range) lv.range = range;
       }
       visual = lv;
       break;

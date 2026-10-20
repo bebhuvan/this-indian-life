@@ -8009,6 +8009,158 @@ export const v1Questions = [
   },
 
   {
+    id: "q.econ.innovation",
+    slug: "how-innovative-is-india",
+    question: "How innovative is India?",
+    priority: "core",
+    // Built Oct 2026 from WIPO's Global Innovation Index 2026 (CC BY 4.0) and its 2011-2025
+    // editions, checked against independent series: World Bank WDI / UNESCO UIS (R&D, researchers,
+    // ICT services exports), WIPO IP statistics (PCT), DST/NSTMIS R&D Statistics 2025-26 and IP India
+    // annual reports (patent filings by applicant type and state). Every GII value is traced to a
+    // database cell or report page by scripts/stories/innovation-india/build_gii.py; see SCOPE.md.
+    // WIPO says ranks are not directly comparable across editions, so the rank history is drawn as
+    // the share of ranked economies India is ahead of, with the JRC 90% interval as a band.
+    // Distinct from q.econ.rnd (spending on research): this asks what the index measures and
+    // whether India's rise in it is real.
+    parts: [
+      { title: "The number everyone quotes", at: "What does 38th actually measure?" },
+      { title: "Inside the 38th", at: "Where is India world-class, and where is it near the bottom?" },
+      { title: "Checking the score", at: "How much does India spend on research?" },
+      { title: "Where in India", at: "Which Indian cities count as innovation clusters?" },
+      { title: "Beside its peers", at: "How has India moved against its peers?" }
+    ],
+    keyNumbers: [
+      { value: "38th", label: "of 139 economies in the Global Innovation Index 2026" },
+      { value: "34-39", label: "the range WIPO's auditors give for that rank" },
+      { value: "25th", label: "on innovation outputs" },
+      { value: "49th", label: "on innovation inputs", hot: true }
+    ],
+    indicators: [
+      "innov.gii.ahead.IN", "innov.gii.ahead_ci_low.IN", "innov.gii.ahead_ci_high.IN", "innov.gii.input_ahead.IN", "innov.gii.output_ahead.IN",
+      "innov.gii.rank_history.IN", "innov.gii.neighbours_2026", "innov.gii.indicators_2026.IN", "innov.gii.pillars_2022_2026.IN",
+      "innov.gii.gap_vs_median_2026.in_1.IN", "innov.gii.gap_vs_median_2026.in_2.IN", "innov.gii.gap_vs_median_2026.in_3.IN",
+      "innov.gii.gap_vs_median_2026.in_4.IN", "innov.gii.gap_vs_median_2026.in_5.IN", "innov.gii.gap_vs_median_2026.out_6.IN",
+      "innov.gii.gap_vs_median_2026.out_7.IN", "innov.gii.gap_vs_median_2026.total.IN", "innov.gii.score_vs_income_2026",
+      "innov.gii.data_age_2026.IN", "innov.gii.peers_score_2022", "innov.gii.peers_score_2026", "innov.gii.pillar_profile_2026",
+      "innov.scale_vs_person.IN", "innov.rd_pct_gdp_peers", "innov.researchers_peers", "innov.dst_gerd_pct_gdp_old.IN",
+      "innov.dst_gerd_pct_gdp_new.IN", "innov.ict_exports_world_share.IN", "innov.ict_exports_usd.IN", "innov.pct_by_origin.IN",
+      "innov.clusters_2026", "innov.clusters_india_2026", "innov.ipindia.filings_by_applicant.IN", "innov.ipindia.state_filings_per_million"
+    ],
+    core: ["innov.gii.ahead.IN", "innov.gii.indicators_2026.IN", "innov.scale_vs_person.IN", "innov.ipindia.filings_by_applicant.IN"],
+    context: [],
+    visualPlan: [
+      // --- PART ONE: THE NUMBER EVERYONE QUOTES ---
+      { indicator: "innov.gii.ahead.IN", chart: "line", title: "India climbed from the bottom half of the index to its top third", size: "hero", window: "full", beat: "rank",
+        subtitle: "Share of the other ranked economies that India ranks ahead of, with the 90% interval from the EU Joint Research Centre's audit · GII 2011-2026 · WIPO",
+        unit: "% of ranked economies India is ahead of",
+        range: { low: "innov.gii.ahead_ci_low.IN", high: "innov.gii.ahead_ci_high.IN", label: "90% interval" },
+        bands: [{ year: 2016, label: "128 economies" }, { year: 2025, label: "139 economies" }],
+        why: "The rank everyone quotes, drawn so that years with different numbers of economies can sit on one line.", read: "Each point is India's position as the share of other ranked economies below it; the band is the audit's 90% interval.", watch: "81st of 141 in 2015 is ahead of 43%; 38th of 139 in 2026 is ahead of 73%." },
+      { chart: "multiLine", title: "India's outputs have outranked its inputs in every edition since 2011", size: "feature", beat: "inputs-outputs",
+        subtitle: "Share of ranked economies India is ahead of, on the input and output sub-indices · GII 2011-2026 · WIPO", unit: "% of ranked economies India is ahead of",
+        indicator: "innov.gii.input_ahead.IN",
+        series: [
+          { indicator: "innov.gii.output_ahead.IN", label: "Outputs", emphasis: true },
+          { indicator: "innov.gii.input_ahead.IN", label: "Inputs" }
+        ],
+        why: "The gap between what goes in and what comes out is older than the climb.", read: "Two lines: India's standing on the inputs half of the index and on the outputs half.", watch: "87th on inputs and 44th on outputs in 2011; 49th and 25th in 2026." },
+      { indicator: "innov.gii.neighbours_2026", chart: "intervalPlot", title: "India's 38th could be anywhere from 34th to 39th", size: "feature", beat: "uncertainty",
+        subtitle: "GII 2026 rank and its 90% interval, economies ranked 28th to 50th · WIPO, EU Joint Research Centre audit", unit: "GII 2026 rank (1 = best)",
+        labelField: "label", loField: "low", hiField: "high", midField: "rank", order: "asc", domain: [20, 65], ticks: [20, 30, 40, 50, 60], emphasis: "India", midLabel: "Published rank",
+        why: "A rank is an estimate; the audit says how firm it is.", read: "Each bar is the range of ranks an economy takes when the index's choices are varied; the dot is the published rank.", watch: "India's range overlaps those of the five economies ranked 34th to 39th." },
+      // --- PART TWO: INSIDE THE 38TH ---
+      { indicator: "innov.gii.indicators_2026.IN", chart: "beeswarm", title: "India is in the world's top 20 on 15 measures, and below 100th on five", size: "hero", beat: "indicators",
+        subtitle: "India's rank on each of the 77 GII 2026 indicators with an Indian value, of 139 economies · WIPO", unit: "rank of 139 (1 = best)",
+        labelField: "indicator", valueField: "rank", groupField: "side", domain: [139, 1], ticks: [125, 100, 75, 50, 25, 1], ends: ["Lower", "Higher"],
+        groups: [{ key: "Inputs", label: "Input indicator", color: "#33489a" }, { key: "Outputs", label: "Output indicator", color: "#008a6e" }],
+        marks: {
+          "ICT services exports, % total trade": "ICT services exports · 1st",
+          "Domestic market scale, bn PPP$": "Market size · 3rd",
+          "Researchers, FTE/mn pop.": "Researchers per person · 83rd",
+          "Knowledge-intensive employment, %": "Knowledge-intensive jobs · 98th",
+          "Tertiary inbound mobility, %": "Foreign students · 115th"
+        },
+        why: "One dot per measure shows what the single rank averages over.", read: "Each dot is one indicator; further right is a better rank.", watch: "The top ranks are about size, markets and IT services; the low ones about people per head." },
+      { chart: "waterfall", title: "Three-quarters of India's lead over a typical economy comes from its outputs", size: "feature", beat: "composition",
+        subtitle: "India's 2026 score minus a typical economy's, by pillar, in GII points weighted as the index weights them · median of 139 economies · WIPO", unit: "GII points",
+        series: [
+          { indicator: "innov.gii.gap_vs_median_2026.in_1.IN", label: "Institutions" },
+          { indicator: "innov.gii.gap_vs_median_2026.in_2.IN", label: "Human capital and research" },
+          { indicator: "innov.gii.gap_vs_median_2026.in_3.IN", label: "Infrastructure" },
+          { indicator: "innov.gii.gap_vs_median_2026.in_4.IN", label: "Market sophistication" },
+          { indicator: "innov.gii.gap_vs_median_2026.in_5.IN", label: "Business sophistication" },
+          { indicator: "innov.gii.gap_vs_median_2026.out_6.IN", label: "Knowledge and technology outputs" },
+          { indicator: "innov.gii.gap_vs_median_2026.out_7.IN", label: "Creative outputs" }
+        ],
+        totalIndicator: "innov.gii.gap_vs_median_2026.total.IN", totalLabel: "India above a typical economy",
+        why: "It splits India's lead into the parts that make it.", read: "Each bar is how far India's pillar score sits above the median economy's, times the weight the index gives that pillar.", watch: "Knowledge and technology outputs alone supply about half of the lead." },
+      { indicator: "innov.gii.pillars_2022_2026.IN", chart: "dumbbell", title: "Since 2022, India has risen on both output pillars and slipped on four of five input pillars", size: "feature", beat: "pillars",
+        subtitle: "Share of ranked economies India is ahead of, by pillar · GII 2022 (132 economies) and 2026 (139) · WIPO", unit: "% of ranked economies India is ahead of",
+        labelField: "pillar", aField: "ahead2022", bField: "ahead2026", aLabel: "2022", bLabel: "2026", domain: [0, 100], ticks: [0, 25, 50, 75, 100],
+        why: "The recent climb, pillar by pillar.", read: "The left end of each bar is 2022, the dot 2026; red means India's standing fell.", watch: "Market sophistication fell after the 2025 edition changed its venture-capital measures." },
+      { indicator: "innov.scale_vs_person.IN", chart: "dumbbell", title: "In the world's top ten by total, far lower per person", size: "feature", beat: "scale",
+        subtitle: "India's standing among economies with data, by total and per person · latest year since 2018 or 2020 · World Bank WDI (UNESCO, WIPO, NSF, IMF)", unit: "% of economies with data India is ahead of",
+        labelField: "measure", aField: "aheadTotal", bField: "aheadPerPerson", aLabel: "Total", bLabel: "Per person", domain: [0, 100], ticks: [0, 25, 50, 75, 100],
+        why: "A country of 1.4 billion looks large on any total; per person is the other half of the truth.", read: "Each row is one measure: the open end is India's standing by total, the dot per person.", watch: "3rd in the world for scientific papers, 89th per person." },
+      { indicator: "innov.gii.score_vs_income_2026", chart: "scatterFit", title: "For its income, India scores well above the line", size: "feature", beat: "income",
+        subtitle: "GII 2026 score against GDP per person (PPP dollars, log scale), 139 economies · WIPO, IMF", unit: "GII score (0-100)", xLog: true,
+        labels: ["India", "Viet Nam", "China", "Switzerland", "United States of America", "Republic of Korea"],
+        xTitle: "GDP per person, PPP dollars (log scale)", yTitle: "GII 2026 score",
+        why: "Richer countries score higher; the question is how India does for its income.", read: "Each dot is an economy; the line is the average relation between income and score.", watch: "India sits about 13 points above the line, eighth-highest of 139." },
+      { indicator: "innov.gii.data_age_2026.IN", chart: "tableBars", title: "Five of India's research figures in the index still describe 2020", size: "feature", beat: "data-age",
+        subtitle: "India's GII 2026 indicators by the year their data describes · WIPO", unit: "indicators",
+        why: "A score is only as current as its inputs.", read: "Each bar counts India's indicators whose latest value describes that year.", watch: "The five 2020 indicators are R&D spending and researchers." },
+      // --- PART THREE: CHECKING THE SCORE ---
+      { indicator: "innov.rd_pct_gdp_peers", chart: "tableBars", title: "Even on its new survey, India spends less of its GDP on research than most peers", size: "feature", beat: "rnd",
+        subtitle: "Gross expenditure on R&D as a share of GDP, latest year since 2018 · UNESCO via World Bank; India's 2023-24 figure from DST", unit: "% of GDP",
+        why: "The input the index cannot see past 2020, checked against India's own newer survey.", read: "Bars are R&D spending as a share of GDP; each name carries its year.", watch: "0.65% on UNESCO's 2020 figure, 0.84% on DST's 2023-24 survey; the world is 2.6%." },
+      { indicator: "innov.researchers_peers", chart: "tableBars", title: "India has fewer researchers per person than any peer shown", size: "feature", beat: "researchers", pairWith: "Even on its new survey, India spends less of its GDP on research than most peers",
+        subtitle: "Full-time-equivalent researchers per million people, latest year since 2014 · UNESCO via World Bank", unit: "researchers per million people",
+        why: "People are the input research money buys.", read: "Bars are researchers per million people; each name carries its year.", watch: "India 259 in 2020; China about 2,100; the world about 1,650." },
+      { chart: "multiLine", title: "India's R&D share jumped in 2021-22, the year the survey changed", size: "feature", beat: "rnd-break",
+        subtitle: "Gross expenditure on R&D, % of GDP, by fiscal year · DST/NSTMIS R&D Statistics 2022-23 and 2025-26", unit: "% of GDP",
+        indicator: "innov.dst_gerd_pct_gdp_old.IN",
+        series: [
+          { indicator: "innov.dst_gerd_pct_gdp_old.IN", label: "Earlier survey" },
+          { indicator: "innov.dst_gerd_pct_gdp_new.IN", label: "New national survey" }
+        ],
+        why: "A rise that comes from counting more is not a rise in research.", read: "Two lines from two survey designs; they do not join.", watch: "0.64% in 2020-21 on the old basis, 0.83% in 2021-22 on the new." },
+      { indicator: "innov.ipindia.filings_by_applicant.IN", chart: "stackedArea", title: "Universities now file more than half of India's patent applications", size: "feature", beat: "patents",
+        subtitle: "Patent applications by Indian applicants, by type of applicant, financial years · IP India annual reports", unit: "applications",
+        seriesField: "series", valueField: "value", dateField: "date",
+        layers: [
+          { key: "Educational institutions", label: "Educational institutions", color: "#008a6e" },
+          { key: "Companies and labs", label: "Companies and labs", color: "#33489a" },
+          { key: "Startups and small firms", label: "Startups and small firms", color: "#b98014" },
+          { key: "Individuals", label: "Individuals", color: "#a8a8a8" }
+        ],
+        why: "India's patent count is the GII output that rose fastest; who files tells you what it means.", read: "Each band is one kind of applicant; the top edge is all Indian filings.", watch: "Educational institutions are a separate, reduced-fee category only from September 2021; before that they sat with organisations." },
+      { indicator: "innov.ict_exports_world_share.IN", chart: "line", title: "India's share of the world's ICT services exports peaked in 2012", size: "feature", window: "full", beat: "ict",
+        subtitle: "India's computer, communications and other ICT services exports as a share of the world's · 2005-2024 · World Bank (IMF balance of payments)", unit: "% of world ICT services exports",
+        why: "India's first-place indicator, read over twenty years.", read: "One line: India's slice of world ICT services exports.", watch: "12.7% in 2005, 17.2% in 2012, 13.9% in 2024, while the dollar value rose about ninefold." },
+      // --- PART FOUR: WHERE IN INDIA ---
+      { indicator: "innov.clusters_2026", chart: "scatterFit", title: "India's four clusters are large, but spread over many people", size: "feature", beat: "clusters",
+        subtitle: "The world's top 100 science and technology clusters: share of world patents, papers and VC deals, against the same per person · GII 2026 · WIPO", unit: "innovation intensity (per person)", xLog: true, yLog: true,
+        labels: ["Bengaluru", "Delhi", "Mumbai", "Chennai", "San Jose–San Francisco", "Tokyo–Yokohama"],
+        xTitle: "Share of world activity, % (log scale)", yTitle: "Intensity per person (log scale)",
+        why: "Cities, not countries, are where invention concentrates.", read: "Each dot is a cluster: across is its share of world activity, up is the same per person.", watch: "Bengaluru is 25th by size and 83rd of 100 by intensity; Mumbai is 98th." },
+      { indicator: "innov.ipindia.state_filings_per_million", chart: "choropleth", title: "Tamil Nadu files 80 times as many patents per person as Bihar", size: "feature", window: "latest", beat: "states", rankLabel: "Most", bottomLabel: "Fewest",
+        subtitle: "Patent applications by Indian applicants per million people, by the applicant's state, 2024-25 · IP India; National Commission on Population projections", unit: "applications per million people",
+        why: "The state picture, from India's own patent office.", read: "Each state shaded by patent applications per million people in 2024-25.", watch: "About 200 per million in Tamil Nadu, 143 in Punjab, 2.5 in Bihar; Chandigarh, a small union territory, is highest at 230." },
+      // --- PART FIVE: BESIDE ITS PEERS ---
+      { chart: "rankSlope", title: "Among eleven peers, India moved from fourth to third since 2022", size: "feature", beat: "peers",
+        subtitle: "Order by GII score among India and ten middle-income peers, 2022 and 2026 · WIPO", unit: "order among the eleven",
+        series: [{ indicator: "innov.gii.peers_score_2022", label: "2022" }, { indicator: "innov.gii.peers_score_2026", label: "2026" }],
+        emphasis: "India",
+        why: "Peers at a similar stage say more than the top of the table.", read: "Each line joins an economy's place among these eleven in 2022 and 2026.", watch: "Indonesia and Viet Nam climbed most in the full table; Türkiye fell." },
+      { indicator: "innov.gii.pillar_profile_2026", chart: "groupedTable", title: "India leads Viet Nam on knowledge outputs; Viet Nam leads on business sophistication", size: "feature", beat: "profiles",
+        subtitle: "Share of 139 economies each ranks ahead of, by GII 2026 pillar · WIPO", unit: "% of ranked economies ahead of",
+        labelField: "short", columns: [{ key: "IND_ahead", label: "India" }, { key: "VNM_ahead", label: "Viet Nam" }, { key: "CHN_ahead", label: "China" }],
+        why: "The two longest-running overperformers got there by different routes.", read: "Three bars per pillar: India, Viet Nam and China.", watch: "China leads both on every pillar but institutions; India's edge is knowledge and technology outputs." }
+    ]
+  },
+
+  {
     id: "q.econ.poverty",
     slug: "has-india-ended-poverty",
     question: "Has India ended poverty?",

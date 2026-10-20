@@ -84,19 +84,32 @@
 .ar .story-viz .viz-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ar-s6);row-gap:var(--ar-s7);margin:0}
 .ar .story-viz .viz-grid>.viz-card{grid-column:1/-1;margin:0;padding:var(--ar-s2) 0 0;border:0;border-top:1px solid var(--ink);display:flex;flex-direction:column;min-width:0}
 .ar .story-viz .viz-grid>.viz-card.fig-paired{grid-column:auto}
+/* Two charts side by side share rows: headline block, drawing, notes, source (six rows, room for a fit
+   note or stat; rows a card does not use collapse to nothing). Their plots then start at one
+   height even when one standfirst runs a line longer, and their notes and sources line up. */
+@media(min-width:761px){.ar .story-viz .viz-grid>.viz-card.fig-paired{display:grid;grid-row:span 6;grid-template-rows:subgrid;row-gap:0;align-content:start}
+  .ar .story-viz .viz-grid>.viz-card.fig-paired>.fig-more{align-self:start}
+  /* The grid's 72 px row gap would also fall between a pair's shared rows, so a grid holding a pair spaces
+     its rows with margins instead. */
+  .ar .story-viz .viz-grid:has(>.fig-paired){row-gap:0}
+  .ar .story-viz .viz-grid:has(>.fig-paired)>.viz-card:not(:first-child){margin-top:var(--ar-s7)}
+  .ar .story-viz .viz-grid:has(>.fig-paired)>.fig-paired:first-child+.fig-paired{margin-top:0}}
 .ar .story-viz .viz-grid>.viz-card.fig-compact{max-width:var(--ar-text)}
 .ar .story-leftover .viz-grid>.viz-card:not(.viz-span){grid-column:auto}
 
 .ar .viz-head{display:block;margin:0 0 var(--ar-s4)}
 .ar .viz-head>div::before{font-size:.72rem;margin-bottom:var(--ar-s2)}
-.ar .viz-head h2,.ar .story-viz .viz-main .viz-head h2{font-family:var(--serif);font-weight:500;font-size:1.55rem;line-height:1.2;letter-spacing:-.01em;max-width:34ch;text-wrap:pretty;margin:0}
-.ar .story-viz .viz-main .viz-head h2{font-size:clamp(1.7rem,2.6vw,2.1rem);max-width:30ch}
+/* A chart's headline runs to the text column's width (640), as its standfirst does: capped at 34ch it
+   broke a two-line headline after four words, and read as clamped beside the wider line under it. */
+.ar .viz-head h2,.ar .story-viz .viz-main .viz-head h2{font-family:var(--serif);font-weight:500;font-size:1.55rem;line-height:1.2;letter-spacing:-.01em;max-width:640px;text-wrap:pretty;margin:0}
+.ar .story-viz .viz-main .viz-head h2{font-size:clamp(1.7rem,2.6vw,2.1rem);max-width:720px}
 .ar .fig-paired .viz-head h2{font-size:1.3rem}
 .ar .viz-head .fig-take{font-family:var(--sans);font-size:.98rem;line-height:1.45;color:var(--mid);margin:var(--ar-s1, 8px) 0 0;max-width:62ch;text-wrap:pretty}
 .ar .viz-head .fig-measure{font-family:var(--sans);font-size:.8rem;line-height:1.4;color:var(--dim);margin:6px 0 0;max-width:80ch}
 .ar .viz-card>.viz-svg,.ar .viz-card>svg{margin-top:0}
 /* a map is at most 620 high, so its column is the width that height allows: it sits on the edge */
-@media(min-width:761px){.ar .choro-wrap{grid-template-columns:minmax(0,560px) minmax(260px,1fr);gap:var(--ar-s6)}}
+/* The map is centred on the ranked list beside it: set at the top, a 34-row list left a block of white under the map. */
+@media(min-width:761px){.ar .choro-wrap{grid-template-columns:minmax(0,560px) minmax(260px,1fr);gap:var(--ar-s6);align-items:center}}
 /* On a phone a map is only as tall as its width allows (about 400 px), so it takes the full width
    and sits on the edge; a height cap shrank it and centred it 22 px in. */
 @media(max-width:760px){.ar .viz-svg.choro-map,.ar .choro-map-frame{max-height:none;margin-inline:0}}

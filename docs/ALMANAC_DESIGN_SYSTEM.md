@@ -63,15 +63,15 @@ Use them in a `visualPlan` entry with `chart: "<form>"`. Each adapter returns `n
 |---|---|---|---|---|
 | `heatStrip` | many units × many years, one measure | when each unit crossed a threshold, and in what order | exact values matter more than the pattern | `series[]`, `scale`, `threshold`, `thresholdLabel`, `emphasis`, `legendTicks` |
 | `tileGrid` | one series per state | regional patterns, every state equal space | area or population should dominate | `series[]` with `pos: [col,row]`, `reference`, `threshold`, `yRange` |
-| `scatterFit` | two measures for the same units | association, outliers named, honest r | readers will take it as cause | `indicator` (table rows `label,x,y,highlight`), `sizePrefix`, `sizeFallback`, `sizeKey`, `refY`, `threshold` |
+| `scatterFit` | two measures for the same units | association, outliers named, honest r | readers will take it as cause | `indicator` (table rows `label,x,y,highlight`), `sizePrefix`, `sizeFallback`, `sizeKey`, `refY`, `threshold`, `xLog`/`yLog` (log axes on 1-2-5 ticks; r is computed on the logs) |
 | `parade` | values for fractiles of a population | inequality, each group as wide as its share | the groups are not ordered | `series[]` (fractile tables), `widths` |
 | `sensitivity` | an estimate that depends on a chosen threshold | showing the range a choice creates | the threshold is fixed by law and not in dispute | `indicator`, `groupField`, `xField`, `yField`, `band`, `highlight` |
-| `dumbbell` | two survey rounds, many units | who moved, by how much, who fell back | more than two time points | `indicator`, `labelField`, `aField`, `bField`, `aLabel`, `bLabel`, `exclude` |
-| `rankSlope` | the same units ranked two ways | where two rankings disagree | gaps between ranks are what matter | `series[2]` (tables with `label,value`) |
-| `beeswarm` | one value per year or place, up to a few hundred | a whole distribution, every case visible | the order in time is the point | `indicator`, `groupIndicator`, `groupField`, `groups`, `marks` |
+| `dumbbell` | two survey rounds, many units | who moved, by how much, who fell back | more than two time points | `indicator`, `labelField`, `aField`, `bField`, `aLabel`, `bLabel`, `exclude`; a `short` column labels the phone version, which drops alternate rows only past 12 |
+| `rankSlope` | the same units ranked two ways | where two rankings disagree | gaps between ranks are what matter | `series[2]` (tables with `label,value`), `emphasis` (the unit drawn in ink) |
+| `beeswarm` | one value per year or place, up to a few hundred | a whole distribution, every case visible | the order in time is the point | `indicator`, `groupIndicator`, `groupField`, `groups`, `marks`; or a table: `labelField`, `valueField`, `groupField`, `domain` (may run high to low, for ranks), `ticks`, `ends` |
 | `dayRibbon` | parts of a fixed whole (a day, a rupee) | how two groups divide the same whole | the parts do not add up to a real total | `parts[]`, `total` |
 | `unitChart` | a single share | making a percentage countable | the share is under 2% or must be compared with many others | `indicator`, `match`, `labelField`, `bField` |
-| `intervalPlot` | estimates that are ranges, not points | honest uncertainty, side by side | the range is so narrow a dot would do | `indicator` (table), `labelField`, `loField`, `hiField`, `midField`, `refY` |
+| `intervalPlot` | estimates that are ranges, not points | honest uncertainty, side by side | the range is so narrow a dot would do | `indicator` (table), `labelField`, `loField`, `hiField`, `midField`, `refY`, `order: "asc"` (ranks, best first), `domain`, `emphasis`, `midLabel` |
 | `ridgeline` | a distribution for each of several groups | how the shape of a spread changes across eras or places | a group has fewer than about 20 values | `indicator` (yearly series), `eras: [[from,to],...]`, `scale`, `threshold` |
 | `calendarHeat` | one value per day over months or years | seasons, weekdays and shocks in daily data | the series is weekly or sparser | `indicator` (daily series), `transform: "pctChange"`, `years`, `scale` |
 | `connectedScatter` | two measures moving together through time, for a few units | paths: who got where, and in what order | more than about six units | `paths: [{label, x, y, color}]`, `xLog`, `xTitle`, `yTitle`, `refY` |
@@ -171,8 +171,58 @@ Other rules the renderers keep:
   out, where a line ran past.)
 - No label sits across a line or a dot anywhere in the plot: early line ends, reference names, band and mark labels
   and scatter names are each tried in several places, and a name with nowhere clear goes to the key or the tooltip.
-- Phone text is at least 11 px as rendered on a 412 px phone (the line-chart box is drawn at 384 and shown at about
-  368, so its smallest text is set at 11.5).
+- Phone text is at least 11 px as rendered on a phone. The phone drawing is set at 320, the card of a 360 px phone
+  (the commonest in India), and shown at 1.0 to 1.2 on phones up to 430.
+
+## Artboards: every figure drawn at the width it is shown
+
+An SVG with a viewBox scales its text with its box. A chart drawn once at 1040 and shown in a 700-wide tablet card
+set 12 px labels at 8 px; a 640 drawing stretched to 900 set them at 17. So no figure is drawn once and resized:
+`src/data/artboards.ts` holds a ladder of widths (320, 384, 460, 552, 660, 790, 940, 1040, about a fifth apart),
+and every renderer is a function of the width it draws at (`draw(w)` on a figure; phone layout below 480).
+
+- The page carries two drawings per card, its desktop width (1040, 640 compact, 508 half) and the phone's (320).
+  The other rungs are written at build time (the `indica-artboards` integration in `astro.config.mjs`) to
+  `articles/<slug>/charts/<file>@<w>.json` (`{ html }`: the SVG, and a line chart's key) and fetched on demand.
+  In `astro dev` they sit in the card as `<template data-w>` instead.
+- `initArtboards` in `public/article-actions.js` measures each card and shows the widest drawing no wider than the
+  card (4% grace) and stretched at most a quarter: type is never shrunk, and enlarged by at most about a fifth.
+  `data-show` on the card names what it shows (`d`, `m`, or `r` for a fetched rung). Without script, the old
+  viewport rule shows the desktop or phone drawing.
+- A figure that caps its own width (an inline `max-width`, as a single change card's 520) keeps the cap.
+- Maps are the exception: their paths scale with the column, and `fitMapLabels` re-sets the value labels at 12 px
+  for the map's shown width, hiding one its region can no longer hold (the ranked list beside has every value).
+- A new renderer must take its width as a parameter and lay itself out from it (columns, tick steps, label room),
+  never from a fixed 1040 or a `narrow` flag. Check with `scripts/check-chart-type-scale.mjs` (every article at 360,
+  768, 1024 and 1440: a drawing's scale must stay within 0.95-1.25 and no label under 10.5 px).
+
+Two more options outside the Almanac forms, added for the innovation article (October 2026):
+
+- **A shaded range on a line chart.** `range: { low, high, label }` on a `line` or `multiLine` entry shades
+  between two series by date (an audited interval, a min-max) in the protagonist's ink, under the lines, and
+  counts toward the axis. The label is set once in the annotation voice where it clears every line.
+- **`groupedTable`.** One group per table row, one bar per named column (`columns: [{ key, label }]`,
+  `labelField`), all on one unit. Use short labels: seven groups of long names collide on the axis.
+
+Percentages under 1 print with two decimals (0.65%, not 0.7%), on bars, axes and line ends alike.
+
+**Short lists across the page.** A row form drawn at the page's width with few rows used to come out as a thin
+strip of 11-12 px type. Now, at 1040: a `dumbbell` of up to 12 rows, a `rankSlope` of up to 15 and every
+`waterfall` take taller rows (about 300-380 units of plot in all, capped at 36-44 a row), a step larger type and
+bigger marks; `intervalPlot` sets labels at 13.5 and values at 12.5. A `rankSlope` of up to 15 units colours a
+move of two places (five in a longer list). The `dumbbell` key shows the inks the rows use ("2026, higher" /
+"2026, lower" when both occur; one sindoor dot when every row fell). `groupedTable` sets its key and unit on rows
+of their own and prints each value on its bar when the bars are 16 units or wider (desktop only). A
+`stackedArea` puts its tick labels on the left edge like the line charts, sizes its end-label column to the
+measured labels, and on a phone moves the names into a key under the plot. A bar list of up to 8 rows gets
+18-unit bars. A choropleth on a scale into the hundreds labels values of 10 and up as whole numbers, and the
+map is centred on the ranked list beside it. A plan entry with `size: "feature"` is drawn at the page's width
+even when it is a single line or a bar list (which otherwise sit at the text column's width).
+
+Two charts set side by side (`pairWith`) share rows on desktop (CSS subgrid): their plots start at one height
+even when one standfirst is a line longer, and their notes and sources line up. Bar values in one chart share
+a precision, re-printed from the data rather than padded: 4.94 beside 0.84 prints "4.94%", never "4.90%".
+Chart headlines run to the text column's width (640 px), not 34ch.
 
 ## The article page
 

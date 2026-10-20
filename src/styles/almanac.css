@@ -288,6 +288,15 @@ footer.foot{border-top:1px solid var(--rule);margin-top:96px;padding:24px 0 72px
 /* Phones get the dot row under the map instead of the 28-row ranking (renderChoroplethDots). */
 .choro-dots{display:none;width:100%;height:auto;overflow:visible}
 @media(max-width:620px){.choro-side .choro-strip{display:none}.choro-dots{display:block}}
+/* The ranked strip is drawn at 260, 340 and 420, and the side column shows the widest that fits it
+   (with 4% grace), so its names and values render at their set size: the one 320 drawing, squeezed
+   into a 260 column beside a tablet's map, set them at 9 px. */
+.choro-side{container-type:inline-size}
+.choro-side .choro-strip.cs-340,.choro-side .choro-strip.cs-420{display:none}
+@media(min-width:621px){
+  @container (min-width:327px){.choro-side .choro-strip.cs-260{display:none}.choro-side .choro-strip.cs-340{display:block}}
+  @container (min-width:404px){.choro-side .choro-strip.cs-340{display:none}.choro-side .choro-strip.cs-420{display:block}}
+}
 .choro-nodata{font-family:var(--sans);font-size:.8rem;color:var(--mid)}
 .choro-nodata i{background:var(--bg);border:1px dashed #8a8a8a}
 .choro-foot{font-size:.82rem;color:var(--mid);margin-top:10px}
@@ -521,3 +530,17 @@ svg[data-hover]{touch-action:pan-y}
    page ground, so the figures stay seamless if the ground is ever toned. */
 .viz-svg [stroke="#fff"],.viz-svg [stroke="#ffffff"]{stroke:var(--bg)}
 .viz-svg [fill="#fff"],.viz-svg [fill="#ffffff"]{fill:var(--bg)}
+
+/* ---------- artboards (src/data/artboards.ts, initArtboards in article-actions.js) ----------
+   Once the script has measured a card, data-show names the drawing it shows: the inline desktop
+   (d) or phone (m) drawing, or a rung (r) fetched for the card's width. Each drawing is set at
+   about the width it is shown, so it fills the card and its type renders near its set size. */
+.viz-card:not([data-show="r"])>.viz-rung{display:none}
+.viz-card[data-show]>svg.viz-svg.viz-d,.viz-card[data-show]>svg.viz-svg.viz-m,.viz-card[data-show]>.viz-legend{display:none!important}
+.viz-card[data-show="d"]>svg.viz-svg.viz-d,.viz-card[data-show="m"]>svg.viz-svg.viz-m{display:block!important}
+.viz-card[data-show="d"]>.viz-legend-d,.viz-card[data-show="m"]>.viz-legend-m{display:flex!important}
+.viz-card[data-show="m"]>svg.viz-svg.viz-m{width:100%;max-width:none}
+/* A rung fills the card, except a figure that caps its own width (an inline max-width, as a
+   single change card's 520 does): it keeps its cap rather than stretch its type. */
+.viz-rung>svg.viz-svg{display:block!important;width:100%;height:auto;overflow:visible;margin-top:6px}
+.viz-rung>.viz-legend{display:flex!important}

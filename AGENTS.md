@@ -42,6 +42,7 @@ name is cosmetic. **A question with no explanation file is silently dropped from
 
 1. **Scope.** One real question. Blend **≥2 independent sources**. Decide the act structure (a curated set of high-signal visuals; see `CHART_SELECTION_PHILOSOPHY.md`). Don't pad with low-signal charts.
 2. **Ingest data** → `data/series/`. Reuse adapters (`scripts/adapters/*`) and write `scripts/ingest-*.mjs` (or `.py`, mixing is fine — see era5/gold). Snapshot raw payloads. **Every series needs a precise `sourceUrl`** (see Source linking).
+   - `data/snapshots/era5/` (~25 GB) and `data/snapshots/microdata-nada/` (~18 GB) live in private Hugging Face datasets, not on disk (moved 2026-09-30 to free space). Before re-running an ERA5 or MOSPI-microdata script, restore what it needs: `uv run --with huggingface_hub python3 scripts/restore-snapshots-from-hf.py era5 [--include 'era5_hourly_heat_2024_*']`. Keep the microdata repo private (MOSPI terms).
 3. **Registry `visualPlan`.** Add the question + chart list to `v1-indicators.mjs`. Each chart: `indicator` (or `series:[]`), `chart` type, `size` (hero/feature/small), `why`/`read`/`watch` (short hints, **not** the reader-facing description). Verify every indicator resolves before generating.
 4. **Editorial brief.** Add a `if (evidence.questionId === "<id>")` block in `articleTemplateFor()` with `purpose`, `requiredSections`, `requiredConcepts` (the locked facts + honesty rules), `styleExample`.
 5. **Generate prose** (deepseek-v4-pro). `node scripts/generate-explanations.mjs --questions=<id>`. Then **generate chart explainers** (see below) and **validate** (`npm run explain:v1:validate`).
@@ -143,6 +144,15 @@ explanation. Keep these in the existing `data/raw/<story>/`, `data/catalog/`,
 locations. Do not commit temporary extracts, model transcripts, caches or duplicate
 write-ups. Record which source vintage and audit result the article uses.
 
+A raw file over GitHub's 100 MB limit cannot be committed. List it in its manifest with
+`"external": "<where the copy of record is>"` beside its `url`, `bytes` and `sha256`, and add it to
+`.gitignore`; the checker then verifies its hash wherever the file is present and does not require
+it in Git (it refuses `external` on anything under 100 MB).
+
+A story whose raw files sit in several `data/raw/` folders lists one manifest per folder under
+`evidenceBundle.sourceManifests` (each with `files[].path` relative to its folder and `sha256`); the
+checker treats them exactly as it treats a single `sourceManifest`.
+
 Before a release commit, stage only the story's reviewed paths, run
 `python3 scripts/check-story-evidence-commit.py data/audits/<story>/claim-ledger.json`,
 and inspect `git diff --cached --stat` and `git diff --cached --check`. The checker
@@ -184,6 +194,7 @@ See `docs/DATA_SOURCES.md` for the full map. Highest-leverage sources discovered
 - **`sectionVisualMap` binds sections to charts by `chartId`.** The generators build it automatically; if you splice a prose-only section in by hand, walk the sections in order, skip prose-only ones, and assign the next chart's `chartId` as `visualId`, or everything after the splice mis-binds.
 - **`sectionVisualMap` entries MUST use the key `heading`** (not `sectionHeading`, not `title`). `src/pages/articles/[slug].astro` builds its map with `Object.fromEntries(entries.map(e => [e.heading, e.visualId]))`, so any other key yields a map of `undefined` and the page **silently** falls back to a token-overlap heuristic that mis-binds most of the article. Nothing errors and the build stays green — the charts just sit under the wrong prose. Verify by diffing rendered section/chart pairs out of `dist/`, not by reading the JSON.
 - **The page `<h1>` is the registry's `question`, not `article.title`.** Retitling an article means editing `v1Questions[].question` too, or the old headline stays on the page.
+- **Charts are drawn per width, never resized** (`src/data/artboards.ts`, `docs/ALMANAC_DESIGN_SYSTEM.md` "Artboards"). A renderer takes its width and lays out from it; a fixed 1040 viewBox shown in a 700 px tablet card set labels at 8 px. A new chart kind returns `draw(w)` (figures.ts `drawn`, almanac-visuals `pairAt`) or it falls back to scaling. After a chart change, run `scripts/check-chart-type-scale.mjs` as well as `scripts/audit-charts.mjs` (which only checks 412 and 1440).
 - **Not every authored explainer field renders.** `noteFor()` in `ArticleVisuals.astro` computes six, and each `chart-note` block must actually emit them — `whyShowThis` and `mobileNote` were computed and dropped site-wide for a long time. If you add a field to the generator prompt, wire it into the markup in the same pass, and give it an empty fallback: the old `mobileNote` default ("fewer ticks, short labels") was an instruction to the chart author that would have shipped to readers.
 - **Comtrade jewellery (HS 7113) net weight is glitched** — chart by value only. Some HS 7108 annual weights are missing (e.g. 2014) — estimate from value ÷ world price, flagged.
 - **RBI gold tonnage is NOT derivable from reserve value ÷ price** (RBI values gold ~11% below spot). Use WGC/IMF published tonnage.
