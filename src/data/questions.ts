@@ -434,7 +434,10 @@ function parseMarkdownTable(block: string) {
 
 export function markdownBlocks(markdown: string) {
   const blocks: MarkdownBlock[] = [];
-  for (const block of markdown.split(/\n{2,}/).map((item) => item.trim()).filter(Boolean)) {
+  // A heading is its own line: generated prose sometimes runs the paragraph straight on
+  // under it ("## Heading\nText"), which read the whole paragraph as the heading.
+  const split = markdown.replace(/^(#{2,3} [^\n]+)\n(?!\n)/gm, "$1\n\n");
+  for (const block of split.split(/\n{2,}/).map((item) => item.trim()).filter(Boolean)) {
     const table = parseMarkdownTable(block);
     if (table) blocks.push({ type: "table", ...table });
     else if (block.startsWith("### ")) blocks.push({ type: "h3", text: block.slice(4) });

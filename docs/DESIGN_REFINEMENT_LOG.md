@@ -172,5 +172,7 @@ Status: **done**, **partly**, **open**.
 | 107 | "India's states span the world" coloured the "World average" row and greyed the states its takeaway names | `almanac.ts` (`namedIn`) | A leading part of a label names it only as written, capitalised: "the world" no longer names "World average" | done |
 | 108 | The coda sat in a black box that broke the page | `ArticleFlow.astro`, `article.css` | A short rule in the domain ink, italic label and headline, the answer a size up, ending on the double danda (॥) | done |
 | 109 | On phones the site menu wrapped to two lines under the brand | `Nav.astro`, `almanac.css` | One line: the brand, the section you are in, and a Sections menu that opens every section at once (six topics with their inks, then Academy, Articles, About); closes on Escape or a tap outside | done |
+| 110 | The phone menu sheet started at the content edge, so its dots sat on the sheet's border | `almanac.css` | The sheet runs from screen edge to screen edge; its links keep the page's left edge | done |
+| 111 | The El Nino article set whole paragraphs as headings: its prose runs each paragraph straight on under its heading, with no blank line | `questions.ts` (`markdownBlocks`) | A heading is its own line; the text after it is a paragraph. The section map's headings now match, so charts sit under their sections | done |
 
 New forms added this round are listed in `docs/ALMANAC_DESIGN_SYSTEM.md`.
