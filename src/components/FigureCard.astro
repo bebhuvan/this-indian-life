@@ -1,7 +1,7 @@
 ---
-// One figure: Fig. N, the title that states the finding, the measure, the chart
-// (slot), how to read it, then the source and the downloads. Every chart kind on an
-// article renders through this card so the anatomy never drifts.
+// One figure, in reading order: the title, the takeaway under it, the measure, the chart
+// (slot), then the notes folded away, and last the source with the downloads and Share.
+// Every chart kind on an article renders through this card so the anatomy never drifts.
 type Note = { takeaway?: string; detail?: string; whyShowThis?: string; howToRead?: string; mistakeToAvoid?: string };
 type Props = {
   cls: string;
@@ -19,33 +19,41 @@ type Props = {
   sourceUrl?: string;
 };
 const { cls, title, subtitle, unit, chartId, fileName, csvUrl, svgUrl, image = true, figNote, note, sourceText, sourceUrl } = Astro.props;
+const more = Boolean(note.detail || note.whyShowThis || note.howToRead || note.mistakeToAvoid);
+const down = '<svg class="ic" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v6.2M3.3 5.2 6 7.9l2.7-2.7M2 10.5h8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 ---
 <article class={cls} id={chartId}>
   <div class="viz-head">
-    <div><h2 class="serif">{title}</h2>{subtitle ? <p>{subtitle}</p> : null}</div>
+    <div>
+      <h2 class="serif">{title}</h2>
+      {note.takeaway ? <p class="fig-take">{note.takeaway}</p> : null}
+      {subtitle ? <p class="fig-measure">{subtitle}</p> : null}
+    </div>
     <span>{unit}</span>
   </div>
   <slot />
   {figNote ? <p class="alm-stat">{figNote}</p> : null}
-  <div class="chart-note">
-    {note.takeaway ? <p class="cn-take serif">{note.takeaway}</p> : null}
-    {note.detail ? <p class="cn-detail">{note.detail}</p> : null}
-    <div class="cn-meta">
-      {note.whyShowThis ? <p class="cn-why"><b>Why this chart</b><span>{note.whyShowThis}</span></p> : null}
-      {note.howToRead ? <p><b>How to read</b><span>{note.howToRead}</span></p> : null}
-      {note.mistakeToAvoid ? <p><b>Watch out</b><span>{note.mistakeToAvoid}</span></p> : null}
-    </div>
-  </div>
+  {more ? (
+    <details class="fig-more">
+      <summary>About this chart</summary>
+      <div class="fig-more-in">
+        {note.detail ? <p class="fm-detail">{note.detail}</p> : null}
+        {note.whyShowThis ? <p><b>Why this chart</b> {note.whyShowThis}</p> : null}
+        {note.howToRead ? <p><b>How to read it</b> {note.howToRead}</p> : null}
+        {note.mistakeToAvoid ? <p><b>Watch out</b> {note.mistakeToAvoid}</p> : null}
+      </div>
+    </details>
+  ) : null}
   <footer class="viz-foot">
     <div class="viz-source">
       <span>Source</span>
       {sourceUrl ? <a href={sourceUrl} target="_blank" rel="noreferrer">{sourceText}</a> : <b>{sourceText}</b>}
     </div>
-    <div class="viz-actions" data-file={fileName} data-csv-url={csvUrl} data-svg-url={svgUrl}>
-      {image ? <button type="button" data-viz-action="svg">SVG</button> : null}
-      {image ? <button type="button" data-viz-action="png">PNG</button> : null}
-      <button type="button" data-viz-action="csv">CSV</button>
-      <button type="button" data-viz-action="share">Share</button>
+    <div class="viz-actions" data-file={fileName} data-csv-url={csvUrl} data-svg-url={svgUrl} role="group" aria-label="Download or share this chart">
+      {image ? <button type="button" data-viz-action="svg"><Fragment set:html={down} />SVG</button> : null}
+      {image ? <button type="button" data-viz-action="png"><Fragment set:html={down} />PNG</button> : null}
+      <button type="button" data-viz-action="csv"><Fragment set:html={down} />CSV</button>
+      <button type="button" data-viz-action="share" class="va-share">Share</button>
     </div>
   </footer>
 </article>

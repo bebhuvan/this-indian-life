@@ -24,8 +24,8 @@
 //                       that the card names (title or takeaway) or that is one side of a
 //                       rural/urban, male/female or India-against-one comparison
 //   5 text on marks     no phone text under 11 px; no label crossing a line or a dot
-//   6 notes align       .chart-note, .cn-take, .cn-detail, .cn-meta, .viz-foot start on the
-//                       title's x; The Point stacks on phones
+//   6 notes align       the figure's notes (.fig-more), its printed statistic and its footer
+//                       start on the title's x
 // Allowed exceptions (rules 1 and 2): centred pyramids, a map strip beside its map, the
 // climate theme's padded cards and the library's samples. The audit lists them apart.
 // Run after `npm run build`:
@@ -106,7 +106,7 @@ function probe() {
     const climate = !!card.closest(".theme-climate-canonical"), lib = card.matches(".lib-item");
     // The title and the takeaway name a chart's sides. The subtitle lists what is plotted
     // ("India, Pakistan, Sri Lanka and Bangladesh") and names none (row 87).
-    const hay = words([card.querySelector("h2,h3")?.textContent, card.querySelector(".cn-take")?.textContent].join(" "));
+    const hay = words([card.querySelector("h2,h3")?.textContent, card.querySelector(".fig-take, .cn-take")?.textContent].join(" "));
     const cardEx = lib ? "library sample" : climate ? "climate theme card" : "";
 
     // Rule 1 (HTML parts) and rule 6: one left edge for title, subtitle, legend and the note.
@@ -118,7 +118,7 @@ function probe() {
         if (x != null && Math.abs(x - titleX) > 2) edgeHtml.push(`${sel}@${Math.round(x - titleX)}`);
       }
     }
-    for (const sel of [".chart-note", ".cn-take", ".cn-detail", ".cn-meta", ".viz-foot"]) {
+    for (const sel of [".fig-more", ".alm-stat", ".viz-foot"]) {
       const x = textLeft(card.querySelector(sel));
       if (x != null && Math.abs(x - titleX) > 2) notes.push(`${sel}@${Math.round(x - titleX)}`);
     }

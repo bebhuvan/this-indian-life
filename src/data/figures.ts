@@ -10,11 +10,12 @@ import { countFmt, harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale
 import { choroColor, compactSvgPath } from "./chartSvg";
 
 export type Figure = { svg: string; svgM: string; note?: string };
-export type FigureContext = { narrow?: boolean; chartId: string };
+export type FigureContext = { narrow?: boolean; chartId: string; /** draw at this width (a compact figure at the text column's width) */ width?: number };
 
 /** Series order, as in ArticleVisuals: the domain ink, ink black, then the free inks. */
 export const SERIES = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#bdbdbd"];
 const W_D = 1040, W_NARROW = 508, W_M = 346;
+const wOf = (ctx: FigureContext) => ctx.width ?? (ctx.narrow ? W_NARROW : W_D);
 /** Inks for a departure from a normal, as the stripes use them: temperature runs neel
  *  (cooler) to sindoor (warmer), rainfall haldi (drier) to hara (wetter). Null when the
  *  unit is not a departure, so other signed values keep the domain ink. */
@@ -638,7 +639,7 @@ function sparkGridFigure(v: SparkGridVisual, ctx: FigureContext): Figure {
     : v.latestPeriodLabel
       ? `Each panel plots monthly observations on its own scale, so read the slope, not the height. The figure is the latest month only, not a financial-year total.`
       : `Each panel uses its own vertical scale, so read the slope, not the height. The figures are the latest observation and, beneath it, the first. They are not totals for the period.`;
-  return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note };
+  return { svg: mk(wOf(ctx), false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note };
 }
 
 function startingGridFigure(v: StartingGridVisual, ctx: FigureContext): Figure {
@@ -646,7 +647,7 @@ function startingGridFigure(v: StartingGridVisual, ctx: FigureContext): Figure {
   const f = (x: number) => fmt(x, "");
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 70 : 90, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, key: v.legend });
   const note = `Each panel is one measure, every country drawn from ${v.anchorYear || "the same start"} on that panel's own scale. Read the fan-out: lines that start close and spread apart show a gap opening from a shared starting point.`;
-  return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 2 : 3), svgM: mk(W_M, true, 2), note };
+  return { svg: mk(wOf(ctx), false, ctx.narrow ? 2 : 3), svgM: mk(W_M, true, 2), note };
 }
 
 /** Five or more peer lines (no protagonist, none named): one panel per line on one shared scale,
@@ -667,7 +668,7 @@ export function linePeersFigure(v: LineVisual, ctx: FigureContext): Figure {
   const n = panels.length;
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 78 : 104, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, tickCount: 4, firstLast: false });
   const cols = ctx.narrow ? 2 : n % 3 === 0 || n > 8 ? 3 : n === 4 ? 4 : 3;
-  return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, cols), svgM: mk(W_M, true, 2), note: `One panel for each line, all on the same scale, ordered by the latest value; the grey lines behind each are the others. The figure at each panel's head is its latest value.` };
+  return { svg: mk(wOf(ctx), false, cols), svgM: mk(W_M, true, 2), note: `One panel for each line, all on the same scale, ordered by the latest value; the grey lines behind each are the others. The figure at each panel's head is its latest value.` };
 }
 
 function linePanelsFigure(v: LinePanelsVisual, ctx: FigureContext): Figure {
@@ -684,11 +685,11 @@ function linePanelsFigure(v: LinePanelsVisual, ctx: FigureContext): Figure {
     })));
     const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 60 : 78, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, tickCount: 4, firstLast: true });
     const groups = v.panels.map((p, i) => `${i === 0 ? `the first ${p.lines.length}` : i === v.panels.length - 1 ? `the last ${p.lines.length}` : `the next ${p.lines.length}`} are ${p.label.toLowerCase()}`).join("; ");
-    return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note: `One panel for each line, every panel on the same scale, so heights compare directly; the figure is the latest year. In order, ${groups}.` };
+    return { svg: mk(wOf(ctx), false, ctx.narrow ? 2 : 4), svgM: mk(W_M, true, 2), note: `One panel for each line, every panel on the same scale, so heights compare directly; the figure is the latest year. In order, ${groups}.` };
   }
   const panels: Panel[] = v.panels.map((p) => ({ label: p.label, lines: p.lines.map((l, i) => ({ label: l.label, color: l.color ?? SERIES[Math.min(i, SERIES.length - 1)], points: l.points })) }));
   const mk = (W: number, mobile: boolean, cols: number) => smallMultiples(panels, { width: W, mobile, cols, ph: mobile ? 120 : 170, label: v.title, unit: v.unit, valueFmt: f, chartId: ctx.chartId, shared, ticks: true, panelKeys: true });
-  return { svg: mk(ctx.narrow ? W_NARROW : W_D, false, ctx.narrow ? 1 : 2), svgM: mk(W_M, true, 1) };
+  return { svg: mk(wOf(ctx), false, ctx.narrow ? 1 : 2), svgM: mk(W_M, true, 1) };
 }
 
 // =====================================================================
@@ -754,7 +755,7 @@ function scatterXYFigure(v: ScatterXYVisual, ctx: FigureContext): Figure {
       xTitle: v.xLabel, yTitle: v.yLabel, width: W, height: H, refY: v.refY, fit: false, label: v.title, colorOf: (p) => (p as typeof pts[number]).color,
     }).svg;
   };
-  const W = ctx.narrow ? W_NARROW : W_D;
+  const W = wOf(ctx);
   return { svg: build(W, ctx.narrow ? 380 : 460), svgM: build(W_M, 340) };
 }
 function heatScatterFigure(v: ScatterVisual, ctx: FigureContext): Figure {
@@ -771,7 +772,7 @@ function heatScatterFigure(v: ScatterVisual, ctx: FigureContext): Figure {
       tipOf: (p) => { const q = v.points.find((z) => z.label === p.label); return [p.label, `Heat risk ${Math.round(p.x)}%`, `Without cooling ${Math.round(p.y)}%`, q?.size != null ? `${v.sizeLabel ? "MPI" : "Size"} ${Number(q.size).toFixed(1)}%` : ""].filter(Boolean); },
     }).svg;
   };
-  return { svg: build(ctx.narrow ? W_NARROW : W_D, 480), svgM: build(W_M, 360), note: v.sizeLabel ? `Circle area: ${v.sizeLabel}. Shaded corner: more than 70% of districts at high heat risk and more than 80% of homes without AC or a cooler.` : undefined };
+  return { svg: build(wOf(ctx), 480), svgM: build(W_M, 360), note: v.sizeLabel ? `Circle area: ${v.sizeLabel}. Shaded corner: more than 70% of districts at high heat risk and more than 80% of homes without AC or a cooler.` : undefined };
 }
 /** Greedy label placement for scatters (right, left, above, below; skip if nothing clears). */
 export function placeScatterLabels<T extends { label: string; x: number; y: number; size?: number; wantLabel?: boolean; place?: ScatterPoint["place"]; short?: string }>(pts: T[], o: { W: number; H: number; x: [number, number]; y: [number, number]; sized?: boolean }) {
@@ -860,7 +861,7 @@ export function tagFigure(f: Figure | null): Figure | null {
   return { ...f, svg: tag(f.svg, "viz-d"), svgM: tag(f.svgM, "viz-m").replace(/^(<svg[^>]*?) style="max-width:[\d.]+px"/, "$1") };
 }
 function renderRaw(visual: VisualSpec, ctx: FigureContext): Figure | null {
-  const W = ctx.narrow ? W_NARROW : W_D;
+  const W = wOf(ctx);
   const both = (fn: (o: { width: number; mobile: boolean }) => string): Figure => ({ svg: fn({ width: W, mobile: false }), svgM: fn({ width: W_M, mobile: true }) });
   switch (visual.kind) {
     case "bar": {

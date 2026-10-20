@@ -706,8 +706,11 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // box that renders close to 1:1: a taller chart with readable labels (see .viz-m CSS).
   const isHero = (visual as { size?: string }).size === "hero";
   // Two-up cards render about 510 px wide on a desktop: a 660 box set 13-unit axis text at 10 px.
-  const width = mobile ? 384 : (twoUp ? (isLead ? 560 : 520) : (isLead ? 1120 : 1000));
-  const height = mobile ? (isHero ? 406 : 346) : (isHero ? 560 : isLead ? 500 : 360);
+  // A compact figure sets the width it is drawn at (the text column's), so it renders 1:1.
+  const drawW = (visual as { drawW?: number }).drawW;
+  // Page-wide charts are drawn at the page's 1040, so they too render 1:1.
+  const width = mobile ? 384 : drawW ?? (twoUp ? (isLead ? 560 : 520) : 1040);
+  const height = mobile ? (isHero ? 406 : 346) : drawW ? 380 : (isHero ? 560 : isLead ? 500 : 360);
   const yFontSize = mobile ? 12 : 13;
   const padRTB = mobile
     ? { r: 24, t: 22, b: 40 }
@@ -766,7 +769,7 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
         const v = line.points.at(-1)?.value, text = printed[index];
         if (v == null || quiet(index) || stopsShort(line)) return 0;
         if (mobile || one) return tw(text, endFont, 600);
-        const names = endNameLines(line.label, endText(v)), wt = emph[index] ? 700 : 600;
+        const names = endNameLines(line.label, endText(v)), wt = emph[index] ? 700 : roles[index] === "context" ? 500 : 600;
         return Math.max(...names.slice(0, -1).map((l) => tw(l, endFont, wt)), tw(names.at(-1)!, endFont, wt) + 5 + tw(text, endFont));
       })
     );
@@ -1633,6 +1636,17 @@ function lineBandRects(visual: LineVisual, g: LineGeometry) {
     .filter((r): r is { x: number; w: number; label?: string; proj?: boolean } => Boolean(r));
 }
 
+/** The text column's width: a compact figure is drawn at it, so its type renders 1:1. */
+const TEXT_W = 640;
+/** Charts that read as well at the text column's width as across the page: one line, or a
+ *  figure the plan calls small. Maps, stripes, scatters and the Almanac forms keep the page. */
+function compactFigure(visual: VisualSpec) {
+  const size = (visual as { size?: string }).size;
+  if (size === "hero" || ["almanac", "choropleth", "stripes", "scenarioMaps", "sparkGrid", "scatter", "scatterXY", "linePanels"].includes(visual.kind)) return false;
+  if (size === "small") return true;
+  return visual.kind === "line" && visual.lines.length === 1;
+}
+
 const selectedKpis = kpisToShow(lockedNumbers);
 const leftoverGrid = sectionClass.includes("story-leftover");
 // In the two-up grid of charts not bound to a section, wide forms (maps, scatters, pyramids,
@@ -1674,8 +1688,12 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         const fileName = fileSafe(visual.title);
         const chartId = `viz-${fileName}-${visualIndex + 1}`;
         const note = chartNotes[visualIndex];
-        const narrow = leftoverGrid && !fullRow[visualIndex];
-        const base = cardClass(visualIndex, visual, leadFirst) + (leftoverGrid && fullRow[visualIndex] ? " viz-span" : "");
+        // Two figures the plan pairs sit side by side, each drawn for half the page. A compact
+        // figure (a single line, or one the plan calls small) is drawn at the text column's width.
+        const paired = Boolean((visual as { pairRole?: string }).pairRole);
+        const compact = !leftoverGrid && !paired && compactFigure(visual);
+        const narrow = (leftoverGrid && !fullRow[visualIndex]) || paired;
+        const base = cardClass(visualIndex, visual, leadFirst) + (leftoverGrid && fullRow[visualIndex] ? " viz-span" : "") + (paired ? " fig-paired" : "") + (compact ? " fig-compact" : "");
         const card = {
           title: visual.title,
           subtitle: cleanSubtitle(visual.subtitle || "", source.sourceId),
@@ -1690,7 +1708,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (visual.kind === "almanac") {
           return (
             <FigureCard cls={`${base} alm-card alm-${visual.form}`} {...card} figNote={visual.stat}>
-              <Fragment set:html={typeset(visual.svg)} />
+              <Fragment set:html={typeset(paired && visual.svgHalf ? visual.svgHalf : visual.svg)} />
               <Fragment set:html={typeset(visual.svgM)} />
             </FigureCard>
           );
@@ -1716,6 +1734,8 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
               </FigureCard>
             );
           }
+          if (compact) (visual as { drawW?: number }).drawW = TEXT_W;
+          else delete (visual as { drawW?: number }).drawW;
           const g = lineGeometry(visual as LineVisual, isLarge, narrow);
           const gm = lineGeometry(visual as LineVisual, isLarge, narrow, undefined, true);
           const inksK = lineInks(visual.lines, mention);
@@ -1800,7 +1820,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
             </FigureCard>
           );
         }
-        const fig = renderFigure(visual, { narrow, chartId });
+        const fig = renderFigure(visual, { narrow: narrow || compact, chartId, ...(compact ? { width: TEXT_W } : {}) });
         if (!fig) return null;
         return (
           <FigureCard cls={`${base} alm-card fig-card fig-${visual.kind}`} {...card} figNote={fig.note}>

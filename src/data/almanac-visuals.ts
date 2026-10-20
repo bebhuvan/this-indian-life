@@ -18,6 +18,8 @@ export type AlmanacVisual = {
   source: { indicatorId?: string; sourceId: string; sourceIndicatorId: string; sourceUrl?: string };
   svg: string;
   svgM: string;
+  /** a desktop drawing for half the page width, where two figures sit side by side */
+  svgHalf?: string;
   rows: Row[];
   /** A one-line statistic the figure computed itself (for example a correlation). */
   stat?: string;
@@ -137,11 +139,11 @@ function scatterFitVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
       sizeKey: e.sizeKey, sizeTitle: e.sizeTitle, label: e.title ?? a.title,
     });
   };
-  const d = build(1040, 460), m = build(350, 360);
+  const d = build(1040, 460), m = build(350, 360), half = build(460, 400);
   const r = d.stats?.r, n = d.stats?.n;
   return {
     kind: "almanac", form: "scatterFit", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a),
-    ...pair(d.svg, m.svg),
+    ...pair(d.svg, m.svg), svgHalf: tag(half.svg, "viz-d"),
     rows: pts.map((p) => ({ label: p.label, x: p.x, y: p.y, ...(p.size != null ? { size: p.size } : {}) })),
     stat: r != null ? `Least-squares fit across ${n} ${n === 1 ? "unit" : "units"}, r = ${r < 0 ? "−" : ""}${Math.abs(r).toFixed(2)}. The grey band is the 95% interval for the fitted line.` : undefined,
   };

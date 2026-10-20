@@ -2936,6 +2936,15 @@ export function bindSectionVisuals(
   const used = new Set<number>();
   const bound: Array<VisualSpec | null> = [];
   const hasExplicitMap = Boolean(explicitMap && Object.keys(explicitMap).length);
+  // A chart the map gives to a section is that section's: the word-overlap fallback for an
+  // unmapped section (an opening with no heading) must not take it first.
+  const headings = new Set(sections.map((section) => section.heading));
+  const reserved = new Set<number>();
+  for (const [heading, id] of Object.entries(explicitMap || {})) {
+    if (!headings.has(heading)) continue;
+    const k = visuals.findIndex((visual) => visualMatchesId(visual, id));
+    if (k >= 0) reserved.add(k);
+  }
 
   for (const section of sections) {
     let pick = -1;
@@ -2951,7 +2960,7 @@ export function bindSectionVisuals(
       const sectionSet = storyTokens(`${section.heading} ${section.text}`);
       let bestScore = 0;
       visuals.forEach((visual, index) => {
-        if (used.has(index)) return;
+        if (used.has(index) || reserved.has(index)) return;
         let score = 0;
         for (const token of visualTokens(visual)) if (sectionSet.has(token)) score += 1;
         if (score > bestScore) {

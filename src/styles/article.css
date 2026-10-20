@@ -1,0 +1,181 @@
+/* ============================================================
+   The article page (October 2026). One left edge, three measures that share it:
+   the text column (a book measure), the page (figures that need the room) and a
+   margin rail beside the opening. The head, the flow, the coda and the notes all
+   hang from that edge. Spacing comes from one scale: 8 12 16 24 32 48 72 96.
+   ============================================================ */
+:root{
+  --ar-text:640px; --ar-rail:336px; --ar-gap:64px;
+  --ar-page:calc(var(--ar-text) + var(--ar-gap) + var(--ar-rail));
+  --ar-s2:12px; --ar-s3:16px; --ar-s4:24px; --ar-s5:32px; --ar-s6:48px; --ar-s7:72px; --ar-s8:96px;
+  --ar-hair:#ececec;
+}
+
+/* ---------- the head: kicker, question, dek, byline; nothing else ---------- */
+.ar-head{max-width:var(--ar-page);margin:0 auto;padding:var(--ar-s7) 0 var(--ar-s6)}
+.ar-kicker{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c-ink);margin:0 0 var(--ar-s3);display:flex;gap:12px;align-items:center}
+.ar-head h1{font-family:var(--serif);font-weight:400;font-optical-sizing:auto;font-size:clamp(2.4rem,5.2vw,4rem);line-height:1.04;letter-spacing:-.022em;margin:0;max-width:18ch;text-wrap:balance}
+.ar-dek{font-family:var(--serif);font-size:clamp(1.18rem,1.8vw,1.4rem);line-height:1.45;color:var(--mid);margin:var(--ar-s4) 0 0;max-width:36em;text-wrap:pretty}
+.ar-byline{display:flex;flex-wrap:wrap;gap:6px 20px;margin:var(--ar-s4) 0 0;font-family:var(--sans);font-size:.84rem;color:var(--dim)}
+.ar-byline a{color:var(--ink);font-weight:600;text-decoration:none}
+.ar-byline a:hover{color:var(--c-ink)}
+
+/* ---------- the flow ---------- */
+.ar{max-width:var(--ar-page);margin:0 auto;padding:0;border:0}
+.ar-flow{display:grid;grid-template-columns:minmax(0,var(--ar-text)) var(--ar-rail);column-gap:var(--ar-gap);align-items:start;counter-reset:sidenote fig}
+.ar-flow>*{grid-column:1;min-width:0}
+.ar-flow>.ar-figs,.ar-flow>.ar-part,.ar-flow>.ar-parts,.ar-flow>.ar-contents{grid-column:1/-1}
+.ar-flow>.ar-rail{grid-column:2}
+.ar-flow>.ar-lead{margin-top:0}
+
+/* prose: the site's reading styles (.longform), on the text column */
+.ar-text{max-width:var(--ar-text)}
+.ar-text>p{font-family:var(--serif-text);font-size:var(--t-prose);line-height:var(--lh-prose);color:#1d1d1d;margin:0 0 1em;text-wrap:pretty;hanging-punctuation:first}
+.ar-text a{color:inherit;text-decoration:underline;text-decoration-color:#c4c4c4;text-decoration-thickness:1px;text-underline-offset:3px}
+.ar-text a:hover{color:var(--c-ink);text-decoration-color:var(--c)}
+.ar-text strong{font-weight:600}
+.ar-text h4{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:var(--ar-s5) 0 var(--ar-s2)}
+.ar-lede{margin-top:var(--ar-s7)}
+.ar-flow>.ar-lede:first-child{margin-top:0}
+.ar-lede>p:first-of-type::first-line{font-variant-caps:all-small-caps;letter-spacing:.045em;font-weight:500}
+.ar-sec{margin-top:var(--ar-s7)}
+.ar-sec h3{font-family:var(--serif);font-weight:500;font-size:1.72rem;line-height:1.18;letter-spacing:-.012em;margin:0 0 var(--ar-s3);text-wrap:pretty;scroll-margin-top:24px}
+.ar-sec .sidenote{margin:.85rem 0}
+@media(min-width:1000px){
+  .ar-sec .sidenote,.ar-lede .sidenote{float:right;clear:right;width:220px;margin:.3rem calc(-1 * (var(--ar-gap) + 220px)) .7rem 0;font-size:.8rem;line-height:1.5;padding-left:14px;border-left:1px solid var(--c)}
+}
+
+/* the margin rail: the article's figures, set once beside the opening */
+.ar-rail{margin-top:var(--ar-s7);padding-top:var(--ar-s2);border-top:1px solid var(--ink)}
+.ar-flow>.ar-rail:nth-child(2){margin-top:var(--ar-s7)}
+.ar .ar-label,.ar-label{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 var(--ar-s3)}
+.ar-kn{display:grid;grid-template-columns:1fr;margin:0}
+.ar-kn>div{display:flex;flex-direction:column;gap:6px;padding:var(--ar-s3) 0;border-top:1px solid var(--ar-hair)}
+.ar-kn>div:first-child{border-top:0;padding-top:0}
+.ar-kn dt{font-family:var(--serif);font-size:2.4rem;line-height:1;font-weight:400;letter-spacing:-.02em;font-variant-numeric:lining-nums;color:var(--ink)}
+.ar-kn dt.hot{color:var(--c-ink)}
+.ar-kn dd{margin:0;font-family:var(--sans);font-size:.86rem;line-height:1.4;color:var(--mid)}
+
+/* contents: the parts as a strip, or the sections folded away */
+.ar-parts{display:flex;margin-top:var(--ar-s6);border-top:1px solid var(--ar-hair);border-bottom:1px solid var(--ar-hair)}
+.ar-parts a{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:3px;padding:var(--ar-s2) var(--ar-s3) var(--ar-s2) 0;font-family:var(--serif);font-size:1.12rem;line-height:1.25;color:var(--ink);text-decoration:none}
+.ar-parts a+a{padding-left:var(--ar-s3);border-left:1px solid var(--ar-hair)}
+.ar-parts span{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.ar-parts a:hover{color:var(--c-ink)}
+.ar-contents{margin-top:var(--ar-s6);max-width:var(--ar-text);border-top:1px solid var(--ar-hair);border-bottom:1px solid var(--ar-hair);font-family:var(--sans)}
+.ar-contents summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:var(--ar-s2) 0;font-size:.86rem;font-weight:600;color:var(--ink)}
+.ar-contents summary::-webkit-details-marker{display:none}
+.ar-contents summary span{font-weight:400;color:var(--dim)}
+.ar-contents summary span::after{content:"+";margin-left:10px}
+.ar-contents[open] summary span::after{content:"\2212"}
+.ar-contents ol{margin:0 0 var(--ar-s3);padding-left:1.4em;display:grid;gap:6px;font-size:.9rem;line-height:1.4}
+.ar-contents a{color:var(--mid);text-decoration:none}
+.ar-contents a:hover{color:var(--c-ink)}
+
+/* part openers: the planned pause in each act */
+.ar-part{margin-top:var(--ar-s8);padding-top:var(--ar-s4);border-top:3px double var(--ink);display:flex;align-items:baseline;gap:var(--ar-s4)}
+.ar-part span{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c-ink);white-space:nowrap}
+.ar-part h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem);line-height:1.05;letter-spacing:-.02em;margin:0}
+.ar-part+.ar-sec{margin-top:var(--ar-s5)}
+
+/* ---------- figures: wide, compact (the text column) or paired ---------- */
+.ar-figs{margin-top:var(--ar-s7)}
+.ar .story-viz{padding:0;margin:0;border:0}
+.ar .story-viz .viz-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ar-s6);row-gap:var(--ar-s7);margin:0}
+.ar .story-viz .viz-grid>.viz-card{grid-column:1/-1;margin:0;padding:var(--ar-s2) 0 0;border:0;border-top:1px solid var(--ink);display:flex;flex-direction:column;min-width:0}
+.ar .story-viz .viz-grid>.viz-card.fig-paired{grid-column:auto}
+.ar .story-viz .viz-grid>.viz-card.fig-compact{max-width:var(--ar-text)}
+.ar .story-leftover .viz-grid>.viz-card:not(.viz-span){grid-column:auto}
+
+.ar .viz-head{display:block;margin:0 0 var(--ar-s4)}
+.ar .viz-head>div::before{font-size:.72rem;margin-bottom:var(--ar-s2)}
+.ar .viz-head h2,.ar .story-viz .viz-main .viz-head h2{font-family:var(--serif);font-weight:500;font-size:1.55rem;line-height:1.2;letter-spacing:-.01em;max-width:34ch;text-wrap:pretty;margin:0}
+.ar .story-viz .viz-main .viz-head h2{font-size:clamp(1.7rem,2.6vw,2.1rem);max-width:30ch}
+.ar .fig-paired .viz-head h2{font-size:1.3rem}
+.ar .viz-head .fig-take{font-family:var(--sans);font-size:.98rem;line-height:1.45;color:var(--mid);margin:var(--ar-s1, 8px) 0 0;max-width:62ch;text-wrap:pretty}
+.ar .viz-head .fig-measure{font-family:var(--sans);font-size:.8rem;line-height:1.4;color:var(--dim);margin:6px 0 0;max-width:80ch}
+.ar .viz-card>.viz-svg,.ar .viz-card>svg{margin-top:0}
+/* a map is at most 620 high, so its column is the width that height allows: it sits on the edge */
+@media(min-width:761px){.ar .choro-wrap{grid-template-columns:minmax(0,560px) minmax(260px,1fr);gap:var(--ar-s6)}}
+.ar .alm-stat{font-family:var(--sans);font-size:.84rem;line-height:1.45;color:var(--mid);margin:var(--ar-s2) 0 0;max-width:72ch}
+
+/* the notes, folded: detail, why, how to read, what to watch */
+.ar .fig-more{margin-top:var(--ar-s3);font-family:var(--sans);max-width:72ch}
+.ar .fig-more summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;font-size:.86rem;font-weight:500;color:var(--ink);padding:2px 0}
+.ar .fig-more summary::-webkit-details-marker{display:none}
+.ar .fig-more summary::before{content:"+";width:10px;color:var(--dim);font-weight:400}
+.ar .fig-more[open] summary::before{content:"\2212"}
+.ar .fig-more summary:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+.ar .fig-more-in{display:grid;gap:10px;margin-top:var(--ar-s2);padding-left:18px;border-left:1px solid var(--ar-hair)}
+.ar .fig-more-in p{margin:0;font-size:.9rem;line-height:1.55;color:var(--mid)}
+.ar .fig-more-in b{color:var(--ink);font-weight:600;margin-right:4px}
+.ar .fig-more-in .fm-detail{font-family:var(--serif-text);font-size:1rem;line-height:1.55;color:#2a2a2a}
+
+/* the foot, always last: the source, then the downloads and Share */
+.ar .viz-foot{order:99;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--ar-s2) var(--ar-s4);margin-top:var(--ar-s3);padding-top:var(--ar-s2);border-top:1px solid var(--ar-hair)}
+.ar .viz-source{display:flex;gap:8px;align-items:baseline;border:0;margin:0;padding:0;font-family:var(--sans);font-size:.8rem;color:var(--dim);min-width:0;flex:1 1 260px}
+.ar .viz-source span{font-size:.8rem;letter-spacing:0;text-transform:none;font-weight:400;color:var(--dim)}
+.ar .viz-source span::before{content:none}
+.ar .viz-source span::after{content:":"}
+.ar .viz-source a,.ar .viz-source b{font-family:var(--sans);font-size:.8rem;font-weight:400;letter-spacing:0;color:var(--mid);text-align:left;text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px;border:0;padding:0}
+.ar .viz-source a:hover{color:var(--c-ink);text-decoration-color:var(--c)}
+.ar .viz-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;margin:0;opacity:1;order:0}
+.ar .viz-actions button{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.03em;text-transform:none;line-height:1;color:var(--ink);background:var(--bg);border:1px solid var(--rule);border-radius:3px;padding:7px 11px 7px 9px;cursor:pointer;transition:border-color .15s,background .15s}
+.ar .viz-actions button:hover{border-color:var(--ink);background:#f6f6f6;color:var(--ink)}
+.ar .viz-actions button:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.ar .viz-actions .ic{width:12px;height:12px;display:block;flex:none}
+.ar .viz-actions button::before{content:none}
+.ar .viz-actions .va-share{background:var(--ink);color:var(--bg);border-color:var(--ink);padding-left:12px;padding-right:12px}
+.ar .viz-actions .va-share:hover{background:#000;border-color:#000;color:var(--bg)}
+@media(hover:hover){.ar .viz-actions,.ar .viz-card:hover .viz-actions,.ar .viz-card:focus-within .viz-actions{opacity:1}}
+
+/* ---------- the coda: a note from the writer, then the notes on method ---------- */
+.ar-macha{margin-top:var(--ar-s8);padding-top:var(--ar-s5);position:relative;max-width:var(--ar-text)}
+.ar-macha::before{content:"";position:absolute;top:0;left:0;width:40px;border-top:2px solid var(--c)}
+.ar-macha-k{font-family:var(--serif);font-style:italic;font-size:1.04rem;color:var(--c-ink);margin:0 0 var(--ar-s1, 8px)}
+.ar-macha h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.6rem,2.6vw,2rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 var(--ar-s4);text-wrap:pretty}
+.ar-macha-b{font-family:var(--serif-text);font-size:1.3rem;line-height:1.6;color:var(--ink);margin:0;text-wrap:pretty}
+.ar-end{font-family:var(--deva),var(--serif);color:var(--c-ink);margin-left:.5em;font-size:.9em;white-space:nowrap}
+.ar-macha-s{font-family:var(--serif);font-size:1.22rem;line-height:1.4;margin:var(--ar-s4) 0 0;padding-top:var(--ar-s3);border-top:1px solid var(--ar-hair)}
+.ar-sec--method{margin-top:var(--ar-s7);padding-top:var(--ar-s2);border-top:1px solid var(--ink)}
+.ar-sec--method h3{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin:0 0 var(--ar-s3)}
+.ar-sec--method>p{font-family:var(--sans);font-size:.92rem;line-height:1.6;color:var(--mid)}
+.ar .concept-blocks{margin-top:var(--ar-s7);max-width:var(--ar-text)}
+.ar .concept-blocks>.ar-label{margin-bottom:var(--ar-s3)}
+
+/* what follows the article keeps the same edge */
+.wrap>.article-tabs--views,.wrap>.article-panel>.article-meta-section,.wrap>.article-meta-section,.wrap>.article-cite-section,.wrap>.article-related{max-width:var(--ar-page);margin-left:auto;margin-right:auto}
+
+/* ---------- tablets and phones ---------- */
+@media(max-width:1060px){
+  .ar-flow{grid-template-columns:minmax(0,1fr)}
+  .ar-flow>.ar-rail{grid-column:1;grid-row:auto}
+  .ar .story-viz .viz-grid>.viz-card.fig-paired,.ar .story-leftover .viz-grid>.viz-card:not(.viz-span){grid-column:1/-1}
+  .ar .story-viz .viz-grid>.viz-card.fig-compact{max-width:none}
+  .ar-text,.ar-macha{max-width:none}
+}
+@media(max-width:1060px) and (min-width:681px){
+  .ar-kn{grid-template-columns:repeat(4,1fr);column-gap:var(--ar-s4)}
+  .ar-kn>div,.ar-kn>div:first-child{border-top:0;padding-top:0}
+}
+@media(max-width:680px){
+  .ar-head{padding:var(--ar-s6) 0 var(--ar-s5)}
+  .ar-head h1{font-size:clamp(2.1rem,9vw,2.6rem);text-wrap:pretty;max-width:none}
+  .ar-sec{margin-top:var(--ar-s6)}
+  .ar-sec h3{font-size:1.45rem}
+  .ar-figs{margin-top:var(--ar-s6)}
+  .ar .story-viz .viz-grid{row-gap:var(--ar-s6)}
+  .ar .viz-head h2,.ar .story-viz .viz-main .viz-head h2{font-size:1.3rem}
+  .ar-rail{margin-top:var(--ar-s5)}
+  .ar-kn{grid-template-columns:1fr 1fr;column-gap:var(--ar-s4)}
+  .ar-kn>div:nth-child(2){border-top:0;padding-top:0}
+  .ar-kn dt{font-size:2rem}
+  .ar-parts a{font-size:1rem;padding-right:var(--ar-s2)}
+  .ar-parts a+a{padding-left:var(--ar-s2)}
+  .ar-part{flex-direction:column;gap:6px;margin-top:var(--ar-s7)}
+  .ar-macha{margin-top:var(--ar-s7)}
+  .ar-macha-b{font-size:1.16rem}
+  .ar .viz-foot{flex-direction:column;align-items:flex-start}
+  .ar .viz-source{flex:none}
+  .ar .viz-actions{justify-content:flex-start}
+}

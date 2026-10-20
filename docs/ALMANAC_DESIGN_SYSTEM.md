@@ -10,6 +10,7 @@ figures that leave the page whole.
 |---|---|
 | Tokens (colours, type, domain inks, series order) | `src/styles/indica.css` (top) |
 | Component layer (nav, article, figures, notes, footer) | `src/styles/almanac.css` |
+| The article page (head, flow, rail, parts, figure anatomy, coda) | `src/styles/article.css`, `src/components/ArticleFlow.astro`, `src/components/FigureCard.astro` |
 | Chart engine: pure functions, data in, SVG string out | `src/data/almanac.ts` |
 | Registry adapters for the new forms | `src/data/almanac-visuals.ts` |
 | Home page data (every number computed from series) | `src/data/almanac-home.ts`, `src/components/HomePage.astro` |
@@ -172,6 +173,37 @@ Other rules the renderers keep:
   and scatter names are each tried in several places, and a name with nowhere clear goes to the key or the tooltip.
 - Phone text is at least 11 px as rendered on a 412 px phone (the line-chart box is drawn at 384 and shown at about
   368, so its smallest text is set at 11.5).
+
+## The article page
+
+Since October 2026 an article hangs from one left edge, with three measures that share it: the text column
+(640 px, a book measure), the page (1040 px, the width every page-wide chart is drawn at, so it renders 1:1) and a
+margin rail (336 px) beside the opening.
+
+- **The head** is the section label, the question, the dek and a byline with the date written out ("Reviewed 11 July
+  2026"). Nothing else: the short-answer box, the second title and standfirst, and The Point no longer render (the
+  explanation keeps them). The question stays plain, one colour, one weight.
+- **The lead figure** is the plan's `size: "hero"` chart. It opens the page, above the first words.
+- **The opening** keeps its first line in small capitals. Beside it, or beside the first section when the prose
+  opens on a heading, the rail sets **the numbers**: the registry's `keyNumbers` (each value stated in the article's
+  own text), else the article's one point.
+- **Contents.** A question with `parts` gets a strip of its parts under the opening, and a part opener (a double rule,
+  "Part one", the part's title) before the section each part names in `at`. Without parts, a folded list of sections.
+- **Paragraphs** longer than five sentences are broken where the thought turns (before "But", "Then", "So", "Today"
+  and the like), three to five sentences each. The words are untouched; no break lands inside a link or a note.
+- **Figures** take one of three widths. Page-wide is the default. A single line, or a chart the plan calls `small`, is
+  compact: drawn at the text column's 640 px. Two charts the plan pairs (`pairWith: "<title of the other>"` on the
+  second) sit side by side where the second falls, each drawn for half the page. Maps, stripes, scatters and the
+  Almanac forms keep the page.
+- **A figure reads in one order:** Fig. N, the title, the takeaway as its subheading, the measure in grey, the chart,
+  its printed statistic, then "About this chart" folded (the detail, why this chart, how to read it, what to watch),
+  and last the footer: the source on the left, the downloads and Share on the right. The buttons are always visible,
+  outlined with a download mark; Share is solid ink.
+- **The coda** ("Tell me what this means, bro") opens with a short rule in the domain ink, the label in red italic, the
+  question as an italic headline, and the answer a size up from the body. It ends on a double danda (॥) in the domain
+  ink, the house's end mark. Notes on method follow it, set small in the grotesque.
+- **Phones** stack everything on one column: the rail becomes a 2 by 2 grid of numbers, paired and compact figures
+  take the full width, the footer stacks the source over the buttons.
 
 ## The layout audit
 

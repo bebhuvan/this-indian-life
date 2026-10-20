@@ -122,6 +122,11 @@ export type QuestionPage = {
   visualPlan: VisualPlanEntry[] | null;
   /** Optional hand-authored concept primer (e.g. "what inflation means"), rendered as a styled interlude. */
   primer: ConceptPrimer | null;
+  /** Optional acts: each part opens before the section whose heading is `at`, and the
+   *  page lists the parts as its contents. */
+  parts: Array<{ title: string; at: string }> | null;
+  /** Optional figures for the margin beside the opening, each traced to the article's text. */
+  keyNumbers: Array<{ value: string; label: string; hot?: boolean }> | null;
   explanation: ExplanationArtifact;
 };
 
@@ -217,6 +222,8 @@ export const questionPages: QuestionPage[] = v1Questions
       context: item.context ?? null,
       visualPlan: item.visualPlan ?? null,
       primer: item.primer ?? null,
+      parts: (item as { parts?: QuestionPage["parts"] }).parts ?? null,
+      keyNumbers: (item as { keyNumbers?: QuestionPage["keyNumbers"] }).keyNumbers ?? null,
       explanation
     };
   })
@@ -441,6 +448,43 @@ export function markdownBlocks(markdown: string) {
     else blocks.push({ type: "p", text: block.replace(/\n/g, " ") });
   }
   return blocks;
+}
+
+// Sentences that turn the argument; a paragraph break lands before one when it can.
+const TURN = /^(But|Yet|Then|So|This|That|These|Meanwhile|Now|Today|Still|Instead|There is|At the other end|The case|The honest|In short)\b/;
+
+/** Long paragraphs broken where the thought turns, three to five sentences each. The words are
+ *  untouched: a break lands only between sentences, never inside a link, a note or brackets. */
+export function readableBlocks(blocks: MarkdownBlock[]): MarkdownBlock[] {
+  const sentences = (text: string) => {
+    const out: string[] = [];
+    let depth = 0, start = 0;
+    for (let i = 0; i < text.length; i += 1) {
+      const ch = text[i];
+      if (ch === "[" || ch === "(") depth += 1;
+      else if ((ch === "]" || ch === ")") && depth > 0) depth -= 1;
+      else if (depth === 0 && /[.?!]/.test(ch) && text[i + 1] === " " && /["“(A-Z0-9]/.test(text[i + 2] ?? "") && !/\b(?:Rs|No|Dr|Mr|Ms|St|vs|e\.g|i\.e)$/.test(text.slice(start, i))) {
+        out.push(text.slice(start, i + 1).trim());
+        start = i + 2;
+      }
+    }
+    out.push(text.slice(start).trim());
+    return out.filter(Boolean);
+  };
+  return blocks.flatMap((block) => {
+    if (block.type !== "p") return [block];
+    const ss = sentences(block.text);
+    if (ss.length <= 5) return [block];
+    const groups: string[][] = [];
+    let cur: string[] = [];
+    for (const s of ss) {
+      if (cur.length >= 5 || (cur.length >= 3 && TURN.test(s))) { groups.push(cur); cur = []; }
+      cur.push(s);
+    }
+    if (cur.length < 2 && groups.length) groups[groups.length - 1].push(...cur);
+    else groups.push(cur);
+    return groups.map((g) => ({ type: "p" as const, text: g.join(" ") }));
+  });
 }
 
 function escapeHtml(value: string) {

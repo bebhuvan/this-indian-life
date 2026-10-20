@@ -88,7 +88,8 @@
 
   function chartMeta(card) {
     const title = oneLine(card.querySelector(".viz-head h2")?.textContent) || "Indica chart";
-    const subtitle = oneLine(card.querySelector(".viz-head p")?.textContent);
+    // The finding (the takeaway) under the title; the measure when a chart has no takeaway.
+    const subtitle = oneLine((card.querySelector(".viz-head .fig-take") || card.querySelector(".viz-head .fig-measure, .viz-head p"))?.textContent);
     const unit = oneLine(card.querySelector(".viz-head > span, .viz-head .choro-unit")?.textContent);
     const source = oneLine(card.querySelector(".viz-source a, .viz-source b")?.textContent);
     return { title, subtitle, unit, source };
@@ -108,7 +109,12 @@
   }
 
   async function chartSvg(card, actions) {
-    const inlineSvg = card.querySelector("svg.viz-d, svg.viz-svg, svg");
+    // A map not yet scrolled into view is still an empty frame: fetch its file, or the
+    // export would take the ranked strip beside it.
+    const frame = card.querySelector("[data-lazy-svg]");
+    if (frame && !frame.dataset.loaded && actions?.dataset.svgUrl) return svgFromText(await fetchText(actions.dataset.svgUrl));
+    // The chart's own drawing, never a button's icon.
+    const inlineSvg = card.querySelector("svg.viz-d, svg.viz-svg") || [...card.querySelectorAll("svg")].find((s) => !s.classList.contains("ic"));
     if (inlineSvg) return inlineSvg.cloneNode(true);
     if (!actions?.dataset.svgUrl) return null;
     const svgText = await fetchText(actions.dataset.svgUrl);

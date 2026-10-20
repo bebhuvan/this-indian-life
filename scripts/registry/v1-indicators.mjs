@@ -979,6 +979,19 @@ export const v1Questions = [
     slug: "why-indian-states-have-different-birth-rates",
     question: "Why is India two countries when it comes to birth rates?",
     priority: "core",
+    // The page in three acts (each opens before the named section), and the margin figures
+    // beside the opening: every value is stated in the article's own text.
+    parts: [
+      { title: "The divide", at: "How did fertility fall so differently in two ends of India?" },
+      { title: "Why it opened", at: "Do richer states always have lower fertility?" },
+      { title: "What it means", at: "Which states are growing fastest now and why does it matter?" }
+    ],
+    keyNumbers: [
+      { value: "1.5", label: "children per woman in Kerala, 2023" },
+      { value: "2.8", label: "in Bihar, the highest of any state", hot: true },
+      { value: "1988", label: "the year Kerala fell below 2.1, the replacement rate" },
+      { value: "1.96", label: "India as a whole, 2024" }
+    ],
     // The economic and political story of fertility DIVERGENCE across states.
     // Distinct from q.people.population (the demographic overview): this article
     // is about why the map splits, and what it costs. Spine = income and female
@@ -1041,7 +1054,7 @@ export const v1Questions = [
         why: "Before the states, the headline: the national average is now below 2.1.", read: "India's births per woman since 1960, falling from near six to about two.", watch: "The national number hides everything this article is about: it is an average of states a full generation apart." },
       { indicator: "econ.state.income_vs_tfr", chart: "scatterFit", xFormat: "lakh", xTitle: "Income per person, 2023, ₹ lakh at current prices", sizePrefix: "people.state_population.", sizeFallback: { "Jammu & Kashmir": 12541302 }, sizeTitle: "Population, 2024", sizeKey: [[2e7, "2 crore"], [1e8, "10 crore"], [2.4e8, "24 crore"]], threshold: 2.1, refY: { value: 2.1, label: "replacement, 2.1" }, title: "Richer states, fewer children", size: "feature", beat: "income", unit: "births per woman", subtitle: "RBI DBIE per-capita income (2023) vs SRS fertility (2023) · by state",
         why: "The first suspect: money. Plot each state's income against its fertility.", read: "Each dot is a state: per-capita income across the bottom, births per woman up the side.", watch: "The line slopes down: richer states have fewer children today. But Kerala reached replacement in 1988 with about half of Punjab's income per head, so income does not explain who got there first." },
-      { indicator: "people.education_vs_tfr", chart: "scatterFit", xFormat: "pct", xTitle: "Women aged 15-49 with ten or more years of schooling", sizePrefix: "people.state_population.", sizeFallback: { "Jammu & Kashmir": 12541302 }, sizeTitle: "Population, 2024", sizeKey: [[2e7, "2 crore"], [1e8, "10 crore"], [2.4e8, "24 crore"]], threshold: 2.1, refY: { value: 2.1, label: "replacement, 2.1" }, title: "Girls' schooling tracks it just as closely", size: "feature", beat: "education", unit: "births per woman", subtitle: "NFHS-6 women with 10+ years schooling vs SRS fertility (2023) · by state",
+      { indicator: "people.education_vs_tfr", chart: "scatterFit", xFormat: "pct", xTitle: "Women aged 15-49 with ten or more years of schooling", sizePrefix: "people.state_population.", sizeFallback: { "Jammu & Kashmir": 12541302 }, sizeTitle: "Population, 2024", sizeKey: [[2e7, "2 crore"], [1e8, "10 crore"], [2.4e8, "24 crore"]], threshold: 2.1, refY: { value: 2.1, label: "replacement, 2.1" }, title: "Girls' schooling tracks it just as closely", size: "feature", pairWith: "Richer states, fewer children", beat: "education", unit: "births per woman", subtitle: "NFHS-6 women with 10+ years schooling vs SRS fertility (2023) · by state",
         why: "Swap income for female education: the fit is about as strong, so the case for schooling rests on timing and the household gradient.", read: "Share of women with 10+ years of schooling across the bottom, fertility up the side; compare the printed correlation with the income chart's.", watch: "On today's cross-section neither income nor schooling wins; West Bengal is the clearest exception, with low schooling and very low fertility." },
       { indicator: "people.lfp_vs_tfr", chart: "scatterFit", xFormat: "pct", xTitle: "Female labour-force participation, 2023-24", sizePrefix: "people.state_population.", sizeFallback: { "Jammu & Kashmir": 12541302 }, sizeTitle: "Population, 2024", sizeKey: [[2e7, "2 crore"], [1e8, "10 crore"], [2.4e8, "24 crore"]], threshold: 2.1, refY: { value: 2.1, label: "replacement, 2.1" }, title: "It is not women working", size: "small", beat: "lfp-paradox", unit: "births per woman", subtitle: "MOSPI PLFS female LFP (2023-24) vs SRS fertility (2023) · by state",
         why: "The usual global explanation, jobs for women, breaks down inside India.", read: "Female labour-force participation across the bottom, fertility up the side.", watch: "No clean pattern: Haryana has the lowest female work rate yet low fertility; the link that holds across countries does not hold across these states." },

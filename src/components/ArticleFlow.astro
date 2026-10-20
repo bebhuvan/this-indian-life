@@ -1,0 +1,125 @@
+---
+// The article's reading flow on one left edge: the lead figure, the opening beside its key
+// numbers, the contents, then each section (opened by its part when the registry divides the
+// story into parts) with the figures it discusses. Text keeps a book measure; figures take the
+// page, the text column, or half the page each when the plan pairs two.
+import ArticleVisuals from "./ArticleVisuals.astro";
+import { inlineMarkdownHtml, type LockedNumber } from "../data/questions";
+
+type Block = any;
+type Section = { heading: string; blocks: Block[] };
+type Props = {
+  title: string;
+  sections: Section[];
+  sectionIds: string[];
+  groups: any[][];
+  starts: number[];
+  hero: { visual: any; start: number } | null;
+  leftover: any[];
+  leftoverStart: number;
+  lockedNumbers: LockedNumber[];
+  chartExplainers: any[];
+  parts: Array<{ title: string; at: string }> | null;
+  keyNumbers: Array<{ value: string; label: string; hot?: boolean }>;
+  machaBlock: { heading: string; body: string; soWhat: string };
+  concepts: Array<{ term: string; plainMeaning: string; whyItMattersHere?: string }>;
+};
+const { title, sections, sectionIds, groups, starts, hero, leftover, leftoverStart, lockedNumbers, chartExplainers, parts, keyNumbers, machaBlock, concepts } = Astro.props;
+
+const ORDINAL = ["one", "two", "three", "four", "five", "six", "seven", "eight"];
+const ledeFirst = sections[0]?.heading === title;
+const partAt = new Map((parts || []).map((p, i) => [p.at, { ...p, n: i, id: `part-${i + 1}` }]));
+const listed = sections.map((s, i) => ({ heading: s.heading, id: sectionIds[i] })).filter((_, i) => !(i === 0 && ledeFirst));
+// The closing notes on method read as notes: smaller and quieter than the story.
+const isMethod = (h: string) => /how (should you|to) read|methodolog|caveat|about (the|this) data/i.test(h);
+
+const md = (v: unknown) => (v == null ? "" : inlineMarkdownHtml(String(v)));
+function blockHtml(block: Block) {
+  if (block.type === "h3") return `<h4>${md(block.text)}</h4>`;
+  if (block.type === "defbox") return `<aside class="defbox"><p class="defbox-lbl">Definition</p><p class="defbox-term">${md(block.item.term)}</p><p class="defbox-mean">${md(block.item.plainMeaning)}</p>${block.item.whyItMattersHere ? `<p class="defbox-why">${md(block.item.whyItMattersHere)}</p>` : ""}</aside>`;
+  if (block.type === "p") return `<p>${block.html ?? md(block.text)}</p>`;
+  if (block.type === "ul") return `<ul class="story-list">${(block.htmlItems ?? block.items.map((it: string) => md(it))).map((it: string) => `<li>${it}</li>`).join("")}</ul>`;
+  if (block.type === "table") return `<div class="story-table-wrap"><table class="story-table"><thead><tr>${block.headers.map((h: string) => `<th>${md(h)}</th>`).join("")}</tr></thead><tbody>${block.rows.map((r: string[]) => `<tr>${r.map((c) => `<td>${md(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  return "";
+}
+// The key numbers sit beside the opening words: the lede, or the first section when there is none.
+const esc = (t: string) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const railHtml = keyNumbers.length
+  ? `<aside class="ar-rail" aria-label="The numbers"><p class="ar-label">The numbers</p><dl class="ar-kn">${keyNumbers.map((k) => `<div><dt${k.hot ? ' class="hot"' : ""}>${esc(k.value)}</dt><dd>${esc(k.label)}</dd></div>`).join("")}</dl></aside>`
+  : "";
+const firstSec = sections.findIndex((_, i) => !(i === 0 && ledeFirst));
+const figs = (visuals: any[], start: number, cls = "story-viz") => ({ visuals, lockedNumbers, chartExplainers, showKpis: false, leadFirst: false, startIndex: start, sectionLabel: "Chart", sectionClass: cls });
+---
+<div class="ar-flow">
+  {hero ? <div class="ar-figs ar-lead"><ArticleVisuals {...figs([hero.visual], hero.start)} /></div> : null}
+
+  {ledeFirst ? (
+    <section class="ar-text ar-lede" id={sectionIds[0]}>
+      <Fragment set:html={sections[0].blocks.map(blockHtml).join("")} />
+    </section>
+  ) : null}
+
+  {ledeFirst ? <Fragment set:html={railHtml} /> : null}
+
+  {parts?.length ? (
+    <nav class="ar-parts" aria-label="In this article">
+      {parts.map((p, i) => <a href={`#part-${i + 1}`}><span>Part {ORDINAL[i] ?? i + 1}</span>{p.title}</a>)}
+    </nav>
+  ) : listed.length > 3 ? (
+    <details class="ar-contents">
+      <summary>In this article <span>{listed.length} sections</span></summary>
+      <ol>{listed.map((item) => <li><a href={`#${item.id}`}>{item.heading}</a></li>)}</ol>
+    </details>
+  ) : null}
+
+  {sections.map((section, index) => {
+    if (index === 0 && ledeFirst) return groups[0]?.length ? <div class="ar-figs"><ArticleVisuals {...figs(groups[0], starts[0])} /></div> : null;
+    if (isMethod(section.heading) && !groups[index]?.length && index === sections.length - 1) return null;
+    const part = partAt.get(section.heading);
+    return (
+      <>
+        {part ? (
+          <header class="ar-part" id={part.id}>
+            <span>Part {ORDINAL[part.n] ?? part.n + 1}</span>
+            <h2 class="serif">{part.title}</h2>
+          </header>
+        ) : null}
+        <section class={`ar-text ar-sec${isMethod(section.heading) ? " ar-sec--method" : ""}`}>
+          <h3 id={sectionIds[index]}>{section.heading}</h3>
+          <Fragment set:html={section.blocks.map(blockHtml).join("")} />
+        </section>
+        {!ledeFirst && index === firstSec ? <Fragment set:html={railHtml} /> : null}
+        {groups[index]?.length ? <div class="ar-figs"><ArticleVisuals {...figs(groups[index], starts[index])} /></div> : null}
+      </>
+    );
+  })}
+
+  {leftover.length ? <div class="ar-figs"><ArticleVisuals {...figs(leftover, leftoverStart, "story-viz story-leftover")} /></div> : null}
+
+  <section class="ar-macha">
+    <p class="ar-macha-k">Tell me what this means, bro</p>
+    <h2 class="serif">{machaBlock.heading}</h2>
+    <p class="ar-macha-b">{machaBlock.body}{machaBlock.soWhat ? null : <span class="ar-end" aria-hidden="true">॥</span>}</p>
+    {machaBlock.soWhat ? <p class="ar-macha-s serif">{machaBlock.soWhat}<span class="ar-end" aria-hidden="true">॥</span></p> : null}
+  </section>
+
+  {sections.length > 1 && isMethod(sections.at(-1)!.heading) && !groups[sections.length - 1]?.length ? (
+    <section class="ar-text ar-sec ar-sec--method">
+      <h3 id={sectionIds[sections.length - 1]}>{sections.at(-1)!.heading}</h3>
+      <Fragment set:html={sections.at(-1)!.blocks.map(blockHtml).join("")} />
+    </section>
+  ) : null}
+
+  {concepts.length ? (
+    <section class="ar-text concept-blocks">
+      <p class="ar-label">Plain English concepts</p>
+      {concepts.map((item) => (
+        <div class="concept-item">
+          <h3 class="serif">{item.term}</h3>
+          <p>{item.plainMeaning}</p>
+          {item.whyItMattersHere ? <p class="concept-why">{item.whyItMattersHere}</p> : null}
+        </div>
+      ))}
+    </section>
+  ) : null}
+</div>

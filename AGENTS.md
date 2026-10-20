@@ -73,6 +73,13 @@ haldi/hara for rain, in stripes and in bars; stripes centre on the normal (0 for
 (`projectedAfter` in the plan) is dashed after its last measured year, on a faint ground. If an explainer names a
 colour, check it against the rendered chart; `docs/DESIGN_REFINEMENT_LOG.md` records the October 2026 audit of this.
 
+### The article page: parts, key numbers, pairs
+The page layout is in `docs/ALMANAC_DESIGN_SYSTEM.md` ("The article page"). Three optional registry fields shape it:
+`parts: [{ title, at: "<section heading>" }]` divides the story into acts; `keyNumbers: [{ value, label, hot? }]`
+sets the margin figures beside the opening (every value must appear in the article's own text); and
+`pairWith: "<title>"` on a `visualPlan` entry sets that chart beside the named one, half the page each. The plan's
+`size: "hero"` chart leads the page; a single line or `size: "small"` renders at the text column's width.
+
 ### Methodology, assumptions, caveats — end every article
 Close with a **"How to read these / methodology & caveats"** section, and populate:
 - `caveats[]` — what the numbers can't show; estimates vs measurements; survey vintage; etc.

@@ -39,9 +39,12 @@ export function namedIn(label: string, text: string) {
     if (DEMONYMS[run]) hay.add(DEMONYMS[run]);
   }
   const lw = String(label).replace(/\s*\([^)]*\)\s*$/, "").split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+  // A leading part of a label names it only as a proper noun, written as the label writes it:
+  // "Tamil" names Tamil Nadu, but "the world" does not name a "World average" row.
+  const cased = (ws: string[]) => new RegExp(`(^|[^\\p{L}])${ws.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("[^\\p{L}\\p{N}]+")}([^\\p{L}]|$)`, "u").test(String(text));
   for (let k = lw.length; k >= 1; k -= 1) {
     const s = squash(lw.slice(0, k).join(""));
-    if (s.length >= (k === lw.length ? 1 : 5) && hay.has(s)) return true;
+    if (s.length >= (k === lw.length ? 1 : 5) && hay.has(s) && (k === lw.length || cased(lw.slice(0, k)))) return true;
   }
   return false;
 }
