@@ -62,12 +62,20 @@ async function measure(slug, width) {
     // skipped over keeps its inline drawing until it is next on screen).
     const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
     for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await frame(); }
+    // On a long page the observer can miss a card passed at this speed (a reader who stops on it
+    // triggers it), so any card it missed is brought into view and given a moment.
+    for (const card of document.querySelectorAll(".viz-card[data-rungs]:not([data-near])")) {
+      card.scrollIntoView({ block: "center" });
+      for (let i = 0; i < 10 && !card.dataset.near; i++) await frame();
+    }
   });
   // Every card with rungs has chosen its drawing and, if that is a fetched rung, shows it.
-  await page.waitForFunction(() => [...document.querySelectorAll(".viz-card[data-rungs]")].every((c) => {
+  const unsettled = () => [...document.querySelectorAll(".viz-card[data-rungs]")].filter((c) => {
     const { show, want } = c.dataset;
-    return show && want && want.startsWith(show) && (show !== "r" || c.querySelector(":scope > .viz-rung")?.dataset.w === want.slice(1));
-  }), { timeout: 60000, polling: 200 }).catch(() => console.warn(`   ${slug} at ${width}px: some cards had not settled after 60 s`));
+    return !(show && want && want.startsWith(show) && (show !== "r" || c.querySelector(":scope > .viz-rung")?.dataset.w === want.slice(1)));
+  }).map((c) => `${c.querySelector("h2")?.textContent?.trim().slice(0, 50)} (show ${c.dataset.show ?? "-"}, want ${c.dataset.want ?? "-"})`);
+  await page.waitForFunction(`(${unsettled})().length === 0`, { timeout: 60000, polling: 200 })
+    .catch(async () => console.warn(`   ${slug} at ${width}px: not settled after 60 s: ${(await page.evaluate(unsettled)).join("; ")}`));
   const rows = await page.evaluate(() => [...document.querySelectorAll(".viz-card")].flatMap((card) => {
     // Every drawing the card shows: the chart, and beside a map its ranked strip and dots.
     const svgs = [...card.querySelectorAll("svg")].filter((s) => !s.classList.contains("ic") && s.getBoundingClientRect().width > 0 && s.viewBox?.baseVal?.width > 100);
