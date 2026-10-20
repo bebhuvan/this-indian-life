@@ -144,7 +144,9 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   // shrinks to the widest line actually set: sized before wrapping, "Chronic respiratory"
   // kept the whole column at its one-line width and left every label 17 px in from the edge.
   // A label that fits stays on one line ("Scheduled / Caste" wrapped needlessly once).
-  const capW = Math.min(W * (phone ? 0.42 : 0.36), Math.ceil(longest) + 14);
+  // A text-width figure gives its labels a little more of the width: a third of 640 wrapped
+  // "with a positive Indian Ocean Dipole" though the bars had room to spare.
+  const capW = Math.min(W * (phone ? 0.42 : W <= 700 ? 0.42 : 0.36), Math.ceil(longest) + 14);
   const wrapAt = (s: string, chars: number) => wrap(s, Math.max(6, Math.floor(chars * (s.length * labSize * 0.54) / Math.max(1, labelTextW(s, labSize)))), 2);
   const linesFor = (s: string) => (labelTextW(s, labSize) <= capW - 12 ? [s] : wrapAt(s, Math.floor((capW - 16) / (labSize * 0.58))));
   const labelW = m ? 0 : Math.min(capW, Math.ceil(Math.max(...rows.map((r) => Math.max(...linesFor(r.label).map((l) => labelTextW(l, labSize, isNational(r.label) ? 600 : 400)))))) + 14);
@@ -177,7 +179,10 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   const noteInline = o.log && capLines.length <= 1 && capX + (capLines[0] ? textW(capLines[0], capSize) : 0) + 24 + textW(note, noteSize) < W;
   const noteBase = !o.log ? 0 : noteInline ? 12 : capBase + 15;
   const tickBase = o.log ? Math.max(capBase, noteBase) + 18 : 0;
-  const top = o.log ? tickBase + 8 : Math.max(26, capBase + 14);
+  // Signed bars get a scale: faint gridlines with their values above the first row and the
+  // zero named, so a bar that starts mid-figure reads as below zero rather than adrift.
+  const grid = neg && !o.log && !broken ? niceScale(lo, hi, phone ? 4 : 5).ticks.filter((t) => t >= lo - 1e-9 && t <= hi + 1e-9) : [];
+  const top = o.log ? tickBase + 8 : Math.max(26, capBase + 14) + (grid.length ? 20 : 0);
   const zeroSegs: Array<[number, number]> = [];
   // On a desktop the zero line runs down each group's rows, broken at the group headers so
   // it never strikes through one ("WHERE THEY L|IVE").
@@ -227,7 +232,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       row += txt(vx, by + barH / 2 + valSize * 0.36, rowTxt(r), { size: valSize, fill: story && !hot ? INK.ink2 : INK.ink, weight: strong ? 700 : 500, anchor: r.value < 0 && !o.log ? "end" : "start" });
       rowsOut.push(`<g class="mk"${tip(r.label + (g ? ` · ${g}` : ""), rowTxt(r) + (cleanUnit(unit) && !/[%₹$x]/.test(rowTxt(r)) ? ` ${cleanUnit(unit)}` : ""))} tabindex="0">${row}</g>`);
       // No rules between rows: close-set solid bars need none.
-      if (m) zeroSegs.push([by - 3, by + barH + 3]);
+      zeroSegs.push([by - 3, by + barH + 3]);
       y += rowH;
     }
     groupSegs.push([g === undefined ? top - 4 : groupTop - 2, y]);
@@ -246,6 +251,22 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       axis += txt(xs(t), tickBase, label, { size: 11.5, fill: INK.ink3, anchor });
     }
     axis += noteInline ? txt(W, 12, note, { size: noteSize, fill: INK.ink3, anchor: "end" }) : txt(0, noteBase, note, { size: noteSize, fill: INK.ink3 });
+  }
+  if (grid.length) {
+    // Gridlines run through the bars' rows only, never through a label set above its bar or a
+    // group's head; the values sit in a row of their own above the first bar.
+    // Zero is named first; any other value that would touch a named one is left unwritten.
+    const placed: Array<[number, number]> = [];
+    for (const t of [...grid].sort((p, q) => Number(p !== 0) - Number(q !== 0))) {
+      const gx = xs(t);
+      if (t !== 0) for (const [a, c] of m ? zeroSegs : groupSegs) axis += line(gx, a, gx, c, INK.grid, 1);
+      const label = t === 0 ? "0" : fmtU(t, unit), w = textWidth(label, 11.5, t === 0 ? 600 : 400);
+      const anchor = gx - w / 2 < 0 ? "start" : gx + w / 2 > W ? "end" : "middle";
+      const left = anchor === "start" ? gx : anchor === "end" ? gx - w : gx - w / 2;
+      if (placed.some(([a, c]) => left < c + 8 && left + w > a - 8)) continue;
+      placed.push([left, left + w]);
+      axis += txt(gx, top - 12, label, { size: 11.5, fill: t === 0 ? INK.ink : INK.ink3, anchor, weight: t === 0 ? 600 : undefined });
+    }
   }
   if (m && !o.log) for (const [a, c] of zeroSegs) axis += line(zx, a, zx, c, INK.ink, 1);
   else if (o.log) axis += line(zx, top - 4, zx, H - 8, INK.ink, 1);

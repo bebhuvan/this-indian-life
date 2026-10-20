@@ -192,7 +192,8 @@ margin rail (336 px) beside the opening.
 - **Paragraphs** longer than five sentences are broken where the thought turns (before "But", "Then", "So", "Today"
   and the like), three to five sentences each. The words are untouched; no break lands inside a link or a note.
 - **Figures** take one of three widths. Page-wide is the default. A single line, or a chart the plan calls `small`, is
-  compact: drawn at the text column's 640 px. Two charts the plan pairs (`pairWith: "<title of the other>"` on the
+  compact: drawn at the text column's 640 px. So is every bar chart that does not lead the page; a bar chart with
+  any negative value carries a scale, faint gridlines with their values above the first row and zero named. Two charts the plan pairs (`pairWith: "<title of the other>"` on the
   second) sit side by side where the second falls, each drawn for half the page. Maps, stripes, scatters and the
   Almanac forms keep the page.
 - **A figure reads in one order:** Fig. N, the title, the takeaway as its subheading, the measure in grey, the chart,

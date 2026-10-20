@@ -97,6 +97,9 @@
 .ar .viz-card>.viz-svg,.ar .viz-card>svg{margin-top:0}
 /* a map is at most 620 high, so its column is the width that height allows: it sits on the edge */
 @media(min-width:761px){.ar .choro-wrap{grid-template-columns:minmax(0,560px) minmax(260px,1fr);gap:var(--ar-s6)}}
+/* On a phone a map is only as tall as its width allows (about 400 px), so it takes the full width
+   and sits on the edge; a height cap shrank it and centred it 22 px in. */
+@media(max-width:760px){.ar .viz-svg.choro-map,.ar .choro-map-frame{max-height:none;margin-inline:0}}
 .ar .alm-stat{font-family:var(--sans);font-size:.84rem;line-height:1.45;color:var(--mid);margin:var(--ar-s2) 0 0;max-width:72ch}
 
 /* the notes, folded: detail, why, how to read, what to watch */

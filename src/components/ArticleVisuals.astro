@@ -1644,6 +1644,8 @@ function compactFigure(visual: VisualSpec) {
   const size = (visual as { size?: string }).size;
   if (size === "hero" || ["almanac", "choropleth", "stripes", "scenarioMaps", "sparkGrid", "scatter", "scatterXY", "linePanels"].includes(visual.kind)) return false;
   if (size === "small") return true;
+  // A list of bars compares lengths; past the text column's width a bar only gets longer.
+  if (visual.kind === "bar") return true;
   return visual.kind === "line" && visual.lines.length === 1;
 }
 
