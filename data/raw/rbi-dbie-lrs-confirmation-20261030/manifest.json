@@ -1,0 +1,313 @@
+{
+  "story": "q.econ.lrs_controls",
+  "purpose": "Independent direct RBI refresh of frozen Webi reports and original CAS responses, preserving original source data and any live additions separately.",
+  "retrieved": "2026-10-30",
+  "transport": "RBI public guest session. Session credentials are neither saved nor logged.",
+  "files": [
+    {
+      "path": "report-19-live.csv.gz",
+      "url": "https://data.rbi.org.in/BOE/OpenDocument/2306191402/biprwsproxy/biprws/raylight/v1/documents/137499/dataproviders/DP0/flows/0",
+      "retrieved": "2026-10-30",
+      "bytes": 100600,
+      "sha256": "b5c6b866bdd5d29a0a34f9d4e2657304ffca112bdc29d131e3feb23788a2afc4",
+      "role": "independent live Webi data-provider download",
+      "uncompressedSha256": "78bc19fe814bcbfe346065db54774bc50fdc799dcb46d7e4335e7ffd53e050b3"
+    },
+    {
+      "path": "report-19-receipt.json",
+      "url": "https://data.rbi.org.in/BOE/OpenDocument/2306191402/biprwsproxy/biprws/raylight/v1/documents/137499/dataproviders/DP0/flows/0",
+      "retrieved": "2026-10-30",
+      "bytes": 425,
+      "sha256": "1580bc7a1b51e62e7c33d1bb98e91362736dd96233c9393768643435634e11c9",
+      "role": "live provider metadata without session credentials"
+    },
+    {
+      "path": "report-752-live.csv.gz",
+      "url": "https://data.rbi.org.in/BOE/OpenDocument/2306191402/biprwsproxy/biprws/raylight/v1/documents/618278/dataproviders/DP0/flows/0",
+      "retrieved": "2026-10-30",
+      "bytes": 14974,
+      "sha256": "9a65fcff58240f8ce58a721e107591241ad1e87798fe4578b09c47f9605169ca",
+      "role": "independent live Webi data-provider download",
+      "uncompressedSha256": "d3c4a88f83d8a0e0570f55510b1f26afb35fda42a50fd737b5dd3c4eddb9c5c1"
+    },
+    {
+      "path": "report-752-receipt.json",
+      "url": "https://data.rbi.org.in/BOE/OpenDocument/2306191402/biprwsproxy/biprws/raylight/v1/documents/618278/dataproviders/DP0/flows/0",
+      "retrieved": "2026-10-30",
+      "bytes": 425,
+      "sha256": "fa29f7c1a94981894fd0541b99129a46aee7327221aa0668833790caa3628075",
+      "role": "live provider metadata without session credentials"
+    },
+    {
+      "path": "cas-0-original.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 434938,
+      "sha256": "7fb069b66b8b26bab7987e3df3ea7be00678cb77c78fc76f1181673fdf0b2f2e",
+      "role": "original RBI response underlying frozen warehouse CSV",
+      "uncompressedSha256": "ebf5cbe9c197feae040485dc0d7f8db47db235d27e3e4eb8ec7715bdecc53a7a",
+      "originalArtifactId": "1e2c611821fce3ce83a4bd26c44dac0d32b39ac90f5b80d9acead39c51536ed5",
+      "originalRetrievedAt": "2026-10-02T01:39:24.904264+00:00"
+    },
+    {
+      "path": "cas-0-live.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 434904,
+      "sha256": "b9dce8d13a09c7a2766fe521153c8ddb38393bf71b5f14f6ad38f791012c0b5e",
+      "role": "independent live replay of original read-only query",
+      "uncompressedSha256": "4d4d1fb3d00e565026b59edefe478dfd419f8f1ae5b9a52e4fd75bc608b35ac4"
+    },
+    {
+      "path": "cas-0-request.json",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 2356,
+      "sha256": "a9a460b7ef935e7d027258c5baf93caa96a79e575fab65ab9356beb77e141aa3",
+      "role": "replayable query; session authorization omitted"
+    },
+    {
+      "path": "cas-1-original.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 32844,
+      "sha256": "082206f7d5ea33040204beb620cd3946fe9eb67f401834dc6a27f0dde1153d98",
+      "role": "original RBI response underlying frozen warehouse CSV",
+      "uncompressedSha256": "1e328a893002964a0979dc6b5b3f4dc7f19068944f8d5b9bc1a4616ffd95f7f7",
+      "originalArtifactId": "256b5f29c951f80716070056528a794966d4dd2bb672f9b7e6bcea929af738dd",
+      "originalRetrievedAt": "2026-10-02T01:39:58.842803+00:00"
+    },
+    {
+      "path": "cas-1-live.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 33026,
+      "sha256": "6a761bbaf3bf11be8193b27094cd64d735d086e38043af8e383761542afedd95",
+      "role": "independent live replay of original read-only query",
+      "uncompressedSha256": "245be205fda68fb914b940052eb67783822b49ededb4f650919436fb38ad9603"
+    },
+    {
+      "path": "cas-1-request.json",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 2294,
+      "sha256": "0ffe46d376b941f8724c80265b812a01db8f1d9394e1921c507a0fe0965ed273",
+      "role": "replayable query; session authorization omitted"
+    },
+    {
+      "path": "cas-2-original.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 4352,
+      "sha256": "56ece195119f7f54ea2a40b98a02217807a4618149ac65f3160c9a657267d676",
+      "role": "original RBI response underlying frozen warehouse CSV",
+      "uncompressedSha256": "6c86edf0565d2a1cf722e684cbb39ce6821d66ecd3e958697a25f854d3146419",
+      "originalArtifactId": "360f1bcfd1facc6ece773ab7458b230cf552edc9facd0f0342daa349cb7a64a8",
+      "originalRetrievedAt": "2026-10-24T02:03:57.068169+00:00"
+    },
+    {
+      "path": "cas-2-live.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 4351,
+      "sha256": "42d870c4fb18dbd1531f98c6fc6a2962be44e895491192750ee4198c23549c67",
+      "role": "independent live replay of original read-only query",
+      "uncompressedSha256": "c82621ece8eb272945fe2de298934c55c6c0da63fd48ff1231fe956e3b902442"
+    },
+    {
+      "path": "cas-2-request.json",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 2293,
+      "sha256": "a5228dae1be0105910fc66f533a677878f3cfe821bd2da13271d168a376a582b",
+      "role": "replayable query; session authorization omitted"
+    },
+    {
+      "path": "cas-3-original.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 3285,
+      "sha256": "24c81d2ea7d8c2d65b585b9fc6a25c7cb024b60de8d03058435aef724be5b360",
+      "role": "original RBI response underlying frozen warehouse CSV",
+      "uncompressedSha256": "311297944aeaad430ed67e8e8a726e6fe303dd5c9eb91244976466d82c9962a9",
+      "originalArtifactId": "387505ea4a11e29f64895e23a5ab78600206f3d66903e9b92ea799983389f552",
+      "originalRetrievedAt": "2026-10-24T02:04:17.824124+00:00"
+    },
+    {
+      "path": "cas-3-live.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 3291,
+      "sha256": "428f174f2a7377be8cf1fc634e498e3b006e11a63f9ddf49643780a07ce38fce",
+      "role": "independent live replay of original read-only query",
+      "uncompressedSha256": "e6f6855c85d8918b1851af4fbd2306c80ad96741b54d77f2b86305ceacf8426d"
+    },
+    {
+      "path": "cas-3-request.json",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 2289,
+      "sha256": "39d225bddb22ebf4209d92a4273c764aa04e111a16edffbc430a582bcfbcdbf2",
+      "role": "replayable query; session authorization omitted"
+    },
+    {
+      "path": "cas-4-original.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 41586,
+      "sha256": "32d81f51fc5f57922c506dd4c0cd449b883b272aa62cc3569827e38fc223cdb0",
+      "role": "original RBI response underlying frozen warehouse CSV",
+      "uncompressedSha256": "384a09b0be95400b96b8671a16995939d391c2d5e41c71632e750e62b7003470",
+      "originalArtifactId": "a05f2fe16855b6d3a77993f4ca05d25d908f0ba6ac1ea4f4b34db6c085852c9a",
+      "originalRetrievedAt": "2026-10-02T01:39:54.660355+00:00"
+    },
+    {
+      "path": "cas-4-live.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 41699,
+      "sha256": "b0b482e23d08983279895ba81ed64157ae4c9c00edf82bfacb821a17f26a0166",
+      "role": "independent live replay of original read-only query",
+      "uncompressedSha256": "c94e92bd4ee28f432ffb230c6fac6b1a96a3749a49bfb112bea024408e2bd17b"
+    },
+    {
+      "path": "cas-4-request.json",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 2289,
+      "sha256": "aa43f671379c66ae51c2847e0cd757bd85efbfa97318b1eade17933538eacec9",
+      "role": "replayable query; session authorization omitted"
+    },
+    {
+      "path": "cas-5-original.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 102818,
+      "sha256": "bd1006d26f8fb5052aafe0e990c3d794bd5cf50f94da579d2126355dfc40ee43",
+      "role": "original RBI response underlying frozen warehouse CSV",
+      "uncompressedSha256": "99615c10c3c8a93f708fec8794af6e27de6a28abc73e66024f1846f5ae6a8174",
+      "originalArtifactId": "a8a20e5c32d432e1ba2e04785c221ea576679e3520363e4d98f999a366eb6b01",
+      "originalRetrievedAt": "2026-10-02T01:30:07.242231+00:00"
+    },
+    {
+      "path": "cas-5-live.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 102939,
+      "sha256": "d4225f4b51fc7f8dd2d7e56466edd0bfe867f40f3da723a2041121a74fc467d2",
+      "role": "independent live replay of original read-only query",
+      "uncompressedSha256": "42021b862bb9786700208d8c09e791c2af6a850f7f844f537c2fccb1119dfb45"
+    },
+    {
+      "path": "cas-5-request.json",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 2293,
+      "sha256": "6f146f970ab6bee1df6091726175b3a2f268620dff6d2b3d1966c99358d425df",
+      "role": "replayable query; session authorization omitted"
+    },
+    {
+      "path": "cas-6-original.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 3353,
+      "sha256": "f3bc4eb5096b95599348aae7c5cce06e6394990d124ee0e4fe256411e894ef12",
+      "role": "original RBI response underlying frozen warehouse CSV",
+      "uncompressedSha256": "59517e2c2f515876895fae47c328777a85441294e027fbd2ebad0fe9a9a9280a",
+      "originalArtifactId": "e1b755d5ae2a6decf99dbb27c24dd6c6a9fd0bc47e7a68f636c92d3fb3d858ef",
+      "originalRetrievedAt": "2026-10-24T02:04:21.822014+00:00"
+    },
+    {
+      "path": "cas-6-live.txt.gz",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 3360,
+      "sha256": "bfafaae1736529cf9d5033039233fb1a882b99acebee2c6b6bd12e00d80b661b",
+      "role": "independent live replay of original read-only query",
+      "uncompressedSha256": "82dddab427c1eea1f591be04ccc2f4c6f5c5a9240592b9d83a2ecf3b2700307e"
+    },
+    {
+      "path": "cas-6-request.json",
+      "url": "https://data.rbi.org.in/CIMS_Gateway_DBIE/GATEWAY/SERVICES/dbie_getImpalaDQActionEnhanced",
+      "retrieved": "2026-10-30",
+      "bytes": 2294,
+      "sha256": "221e44efc31419d8fcd288d869ce1350172c2d17340395b90f29ad7425d6a255",
+      "role": "replayable query; session authorization omitted"
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "Webi 19",
+      "kind": "webi",
+      "frozenPath": "data/raw/rbi-dbie-lrs-2026/rbi_dbie_report_19_lrs_monthly_200804_202608.csv_gz",
+      "livePath": "report-19-live.csv.gz"
+    },
+    {
+      "id": "Webi 752",
+      "kind": "webi",
+      "frozenPath": "data/raw/rbi-dbie-lrs-2026/rbi_dbie_report_752_lrs_annual_200809_202425.csv_gz",
+      "livePath": "report-752-live.csv.gz"
+    },
+    {
+      "id": "CAS 0",
+      "kind": "cas",
+      "frozenPath": "cas-0-original.txt.gz",
+      "livePath": "cas-0-live.txt.gz",
+      "requestPath": "cas-0-request.json",
+      "originalArtifactId": "1e2c611821fce3ce83a4bd26c44dac0d32b39ac90f5b80d9acead39c51536ed5"
+    },
+    {
+      "id": "CAS 1",
+      "kind": "cas",
+      "frozenPath": "cas-1-original.txt.gz",
+      "livePath": "cas-1-live.txt.gz",
+      "requestPath": "cas-1-request.json",
+      "originalArtifactId": "256b5f29c951f80716070056528a794966d4dd2bb672f9b7e6bcea929af738dd"
+    },
+    {
+      "id": "CAS 2",
+      "kind": "cas",
+      "frozenPath": "cas-2-original.txt.gz",
+      "livePath": "cas-2-live.txt.gz",
+      "requestPath": "cas-2-request.json",
+      "originalArtifactId": "360f1bcfd1facc6ece773ab7458b230cf552edc9facd0f0342daa349cb7a64a8"
+    },
+    {
+      "id": "CAS 3",
+      "kind": "cas",
+      "frozenPath": "cas-3-original.txt.gz",
+      "livePath": "cas-3-live.txt.gz",
+      "requestPath": "cas-3-request.json",
+      "originalArtifactId": "387505ea4a11e29f64895e23a5ab78600206f3d66903e9b92ea799983389f552"
+    },
+    {
+      "id": "CAS 4",
+      "kind": "cas",
+      "frozenPath": "cas-4-original.txt.gz",
+      "livePath": "cas-4-live.txt.gz",
+      "requestPath": "cas-4-request.json",
+      "originalArtifactId": "a05f2fe16855b6d3a77993f4ca05d25d908f0ba6ac1ea4f4b34db6c085852c9a"
+    },
+    {
+      "id": "CAS 5",
+      "kind": "cas",
+      "frozenPath": "cas-5-original.txt.gz",
+      "livePath": "cas-5-live.txt.gz",
+      "requestPath": "cas-5-request.json",
+      "originalArtifactId": "a8a20e5c32d432e1ba2e04785c221ea576679e3520363e4d98f999a366eb6b01"
+    },
+    {
+      "id": "CAS 6",
+      "kind": "cas",
+      "frozenPath": "cas-6-original.txt.gz",
+      "livePath": "cas-6-live.txt.gz",
+      "requestPath": "cas-6-request.json",
+      "originalArtifactId": "e1b755d5ae2a6decf99dbb27c24dd6c6a9fd0bc47e7a68f636c92d3fb3d858ef"
+    }
+  ],
+  "clientCodeHashes": {
+    "rbi_dbie/webi.py": "fb1f02df0da47763e500f11081bec833e43c9e684d5f0eddb164fb28f9dcee4c",
+    "connectors/rbi_dbie_cas_money.py": "38be958a50000279593743ed1deacee3c88d62f3722226c7f3c6313ae4306a87",
+    "rbi_dbie/discovery.py": "940597a4df1fde4df6ea1dbfec21341ed56ae73337c584a3ca3e97e6adeb9f81"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "pov26.poverty_buffer_2024.IN",
+  "title": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins",
+  "sourceId": "wb_3pr_2026",
+  "sourceIndicatorId": "WB_3PR_CH1_GLOBALDIST1000BINS_IND_SENSITIVITY",
+  "sourceUrl": "https://www.worldbank.org/en/publication/poverty-prosperity-and-planet",
+  "unit": "% of population",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-10-29T00:00:00.000Z",
+  "rows": [
+    {
+      "line": "$3.00/day",
+      "baseline": 2.3,
+      "loss10": 4.4
+    },
+    {
+      "line": "$4.20/day",
+      "baseline": 14.9,
+      "loss10": 23.2
+    },
+    {
+      "line": "$8.30/day",
+      "baseline": 78.8,
+      "loss10": 85.1
+    }
+  ],
+  "metadata": {
+    "scenario": "Hypothetical uniform 10% real consumption loss, not a forecast or transition probability.",
+    "formula": "sum(pop where welf*(1-loss)<line) / sum(pop) * 100; loss is 0 or 0.10",
+    "resolution": "Approximately 0.1 percentage point; baseline and scenario both use the same 1,000 population bins.",
+    "differenceFromHeadline": "Bin headcounts approximate the full-precision Country_FGT lineup estimates."
+  }
+}

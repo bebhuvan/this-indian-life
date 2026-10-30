@@ -1950,7 +1950,320 @@ export const v1Questions = [
         subtitle: "Monthly total sent abroad under LRS by people resident in India · sum of RBI's ten main purposes · January 2022 to April 2026",
         why: "Annual totals hide the June and September 2023 timing spikes and the quieter months after them.",
         read: "The monthly line is the same ten-purpose total at higher frequency.",
-        watch: "Timing around the October 2023 TCS change is not proof that TCS caused the later decline. Remitters could also respond to fees, travel calendars, exchange rates or other rules." }
+        why: "Timing around the October 2023 TCS change is not proof that TCS caused the later decline. Remitters could also respond to fees, travel calendars, exchange rates or other rules." }
+    ]
+  },
+  {
+    "id": "q.econ.lrs_controls",
+    "slug": "why-is-rbi-rethinking-india-250k-lrs-remittance-window",
+    "question": "Why is the RBI rethinking India's $250,000 remittance window, and where do the dollars actually go?",
+    "priority": "core",
+    "parts": [
+      {
+        "title": "The remittance window",
+        "at": "What is RBI reviewing, and how big is LRS?"
+      },
+      {
+        "title": "Travel and education",
+        "at": "What do the first six months of RBI's travel breakdown reveal?"
+      },
+      {
+        "title": "Investment and the headline",
+        "at": "Why are foreign equity and deposit outflows surging in FY27?"
+      },
+      {
+        "title": "Rules, tax and timing",
+        "at": "What do the tax rules and annual calendar mean for a remitter?"
+      }
+    ],
+    "keyNumbers": [
+      {
+        "value": "$28.98 billion",
+        "label": "total resident LRS outflows in FY2025-26 across all purposes"
+      },
+      {
+        "value": "$1.05 billion",
+        "label": "two education-related LRS lines, August 2026",
+        "hot": true
+      },
+      {
+        "value": "2.1%",
+        "label": "share of LRS travel spent on business trips and pilgrimage"
+      },
+      {
+        "value": "109.6%",
+        "label": "jump in foreign equity and debt investment in Apr-Aug FY27"
+      }
+    ],
+    "indicators": [
+      "lrs26.capital_contributions.IN",
+      "lrs26.monthly_total.IN",
+      "lrs26.monthly_travel_studies.IN",
+      "lrs26.monthly_capital_triad.IN",
+      "lrs26.monthly_family_gifts.IN",
+      "lrs26.external_sector_scale.IN",
+      "lrs26.bop_cad_net.IN",
+      "lrs26.bop_cap_net.IN",
+      "lrs26.bop_overall_net.IN",
+      "lrs26.bop_travel_net.IN",
+      "lrs26.travel_subcategories_6m.IN",
+      "lrs26.studies_abroad_line19.IN",
+      "lrs26.travel_education_line164.IN",
+      "lrs26.education_combined.IN",
+      "lrs26.fy27_5m_yoy_shift.IN",
+      "lrs26.annual_equity_debt.IN",
+      "lrs26.annual_deposits.IN",
+      "lrs26.annual_property.IN",
+      "lrs26.seasonal_calendar_profile.IN",
+      "lrs26.tcs_regime_audit.IN",
+      "lrs26.ceiling_rupee_lakhs.IN",
+      "lrs26.proposed_sublimit_lakhs.IN",
+      "lrs26.tcs_exempt_threshold_lakhs.IN",
+      "lrs26.remittance_context.IN",
+      "lrs26.matched_purpose_change.IN",
+      "lrs26.seasonal_allocation_share.IN"
+    ],
+    "core": [
+      "lrs26.monthly_total.IN",
+      "lrs26.remittance_context.IN",
+      "lrs26.travel_subcategories_6m.IN",
+      "lrs26.matched_purpose_change.IN"
+    ],
+    "context": [],
+    "visualPlan": [
+      {
+        "chart": "multiLine",
+        "title": "Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes",
+        "size": "hero",
+        "beat": "regime-shifts",
+        "unit": "USD million",
+        "indicator": "lrs26.monthly_total.IN",
+        "subtitle": "Monthly outward remittances under the Liberalised Remittance Scheme, total and major channels · April 2008 to August 2026 · RBI DBIE Report 19",
+        "series": [
+          {
+            "indicator": "lrs26.monthly_total.IN",
+            "label": "Total LRS outflows",
+            "emphasis": true
+          },
+          {
+            "indicator": "lrs26.monthly_travel_studies.IN",
+            "label": "Travel and studies abroad (1.6 + 1.9)"
+          },
+          {
+            "indicator": "lrs26.monthly_family_gifts.IN",
+            "label": "Family maintenance, gifts and donations"
+          },
+          {
+            "indicator": "lrs26.monthly_capital_triad.IN",
+            "label": "Equity, debt, deposits and property"
+          }
+        ],
+        "why": "Shows the complete 221-month arc from April 2008 to August 2026 so readers can see how rule changes and tax deadlines shaped the flow.",
+        "read": "The top line is total monthly LRS outflows in USD millions; the three lower lines track travel plus education, family transfers, and financial asset purchases.",
+        "watch": "The June 2015 jump marks the merger of current-account travel into LRS; the June and September 2023 spikes precede the original and deferred TCS dates; timing alone cannot establish causation."
+      },
+      {
+        "indicator": "lrs26.remittance_context.IN",
+        "chart": "tableBars",
+        "title": "Resident LRS outflows were $29 billion in FY26; inward private transfers were $155 billion",
+        "size": "small",
+        "beat": "remittance-context",
+        "unit": "USD billion",
+        "subtitle": "Selected gross cross-border flows · FY2025-26 · RBI LRS and balance-of-payments tables",
+        "why": "Gives one compact sense of scale before turning to the people and purposes behind LRS.",
+        "read": "The bars compare selected gross flows for the same fiscal year; coverage differs across them.",
+        "watch": "Private transfers are broader than household remittances. FDI and LRS can overlap; these bars are not additive or a clean financing offset."
+      },
+      {
+        "indicator": "lrs26.travel_subcategories_6m.IN",
+        "chart": "groupedTable",
+        "title": "Education and other travel account for 97.6% of LRS travel",
+        "size": "feature",
+        "beat": "travel-xray",
+        "unit": "USD million",
+        "subtitle": "Five monthly LRS travel categories · March to August 2026 · RBI DBIE Report 19",
+        "labelField": "month",
+        "columns": [
+          {
+            "key": "other",
+            "label": "Other travel"
+          },
+          {
+            "key": "education",
+            "label": "Education"
+          },
+          {
+            "key": "business",
+            "label": "Business"
+          },
+          {
+            "key": "pilgrimage",
+            "label": "Pilgrimage"
+          },
+          {
+            "key": "medical",
+            "label": "Medical"
+          }
+        ],
+        "why": "Uses six full months of RBI's March-August 2026 travel decomposition to test what a Rs 50 lakh sub-limit on business and pilgrimage travel would actually touch.",
+        "read": "Each month has five bars on the same USD-million scale, one for each travel purpose.",
+        "watch": "Across the six months, business travel ($115.69 million) and pilgrimage ($52.15 million) together make up only 2.1% of the $7,995.32 million travel total."
+      },
+      {
+        "chart": "multiLine",
+        "title": "Two education-related LRS lines totalled $1.05 billion in August 2026",
+        "size": "feature",
+        "beat": "education-reclass",
+        "unit": "USD million",
+        "indicator": "lrs26.education_combined.IN",
+        "subtitle": "Monthly overseas education remittances: direct Studies Abroad (1.9), Travel for Education (1.6.4), and combined total · Jan 2024 to Aug 2026 · RBI DBIE",
+        "series": [
+          {
+            "indicator": "lrs26.education_combined.IN",
+            "label": "Combined overseas education (1.9 + 1.6.4)",
+            "emphasis": true
+          },
+          {
+            "indicator": "lrs26.studies_abroad_line19.IN",
+            "label": "Studies abroad direct line (1.9)"
+          },
+          {
+            "indicator": "lrs26.travel_education_line164.IN",
+            "label": "Travel for education sub-category (1.6.4)"
+          }
+        ],
+        "why": "Resolves the apparent drop in India's overseas education spending by combining direct university fee transfers with student travel and card spend.",
+        "read": "The combined series begins in March 2026, when the travel-for-education detail becomes available; earlier direct studies transfers are shown separately.",
+        "watch": "In August 2026, line 1.9 was $191.84 million while line 1.6.4 was $855.52 million, taking combined student outflows to $1,047.36 million."
+      },
+      {
+        "indicator": "lrs26.matched_purpose_change.IN",
+        "chart": "tableBars",
+        "title": "Capital transfers added $1.03 billion while other LRS purposes fell by $491 million",
+        "size": "feature",
+        "beat": "matched-purpose-contributions",
+        "unit": "USD million",
+        "subtitle": "Contribution to the change in total LRS · April-August 2025 to April-August 2026 · RBI Report 19",
+        "why": "Explains how modest headline growth can coexist with a much larger increase in investment remittances.",
+        "read": "Positive bars add to the change in total outflows; negative bars offset it. The mutually exclusive groups reconcile to the headline increase.",
+        "watch": "Travel and studies are grouped across the reporting break. The changes do not identify motives or the effect of TCS."
+      },
+      {
+        "chart": "multiLine",
+        "title": "Resident investment in foreign equities, deposits, and property has more than doubled since FY22 to $3.93 billion",
+        "size": "feature",
+        "beat": "capital-triad",
+        "unit": "USD million",
+        "indicator": "lrs26.annual_equity_debt.IN",
+        "subtitle": "Annual LRS capital-account outflows by channel, FY2008-09 to FY2025-26 · RBI DBIE Report 19",
+        "series": [
+          {
+            "indicator": "lrs26.annual_equity_debt.IN",
+            "label": "Investment in equity and debt (1.3)",
+            "emphasis": true
+          },
+          {
+            "indicator": "lrs26.annual_deposits.IN",
+            "label": "Foreign bank deposits (1.1)"
+          },
+          {
+            "indicator": "lrs26.annual_property.IN",
+            "label": "Purchase of immovable property (1.2)"
+          }
+        ],
+        "why": "Tracks the three pure capital-account channels over eighteen years to show why the RBI is scrutinizing financial outflows.",
+        "read": "Three annual lines for equity and debt, overseas bank deposits, and foreign property purchases, indexed by fiscal year end.",
+        "watch": "Equity and debt transfers reached $2,652.01 million in FY26; aggregate purpose totals do not identify switches by individual investors."
+      },
+      {
+        "indicator": "lrs26.seasonal_allocation_share.IN",
+        "chart": "groupedTable",
+        "title": "March takes an outsized share of annual capital transfers",
+        "size": "feature",
+        "beat": "within-year-calendar",
+        "unit": "% of channel's annual remittances",
+        "subtitle": "Average monthly share within each channel and financial year · FY2022-23 to FY2025-26 · four complete fiscal years",
+        "labelField": "month",
+        "columns": [
+          {
+            "key": "travel",
+            "label": "Travel"
+          },
+          {
+            "key": "studies",
+            "label": "Direct studies"
+          },
+          {
+            "key": "capital",
+            "label": "Capital transfers"
+          },
+          {
+            "key": "family",
+            "label": "Relatives, gifts and donations"
+          }
+        ],
+        "why": "Tests the calendar pattern after giving each complete fiscal year equal weight.",
+        "read": "Each month is divided by the same channel’s full-year total, then averaged across four fiscal years. Each channel’s twelve monthly shares sum to about 100%.",
+        "watch": "The partial latest year is excluded. The direct studies line is not a complete measure of overseas education spending."
+      },
+      {
+        "indicator": "lrs26.tcs_regime_audit.IN",
+        "chart": "groupedTable",
+        "title": "After the TCS changes, family transfers were lower while travel and equity flows were higher",
+        "size": "feature",
+        "beat": "tcs-audit",
+        "unit": "USD million / month",
+        "subtitle": "Average monthly LRS outflows across four TCS comparison windows; education and medical rates changed again in April 2026 · April 2022 to August 2026 · RBI DBIE Report 19",
+        "labelField": "purpose",
+        "columns": [
+          {
+            "key": "fy23_5pct",
+            "label": "5% TCS (FY23)"
+          },
+          {
+            "key": "frontrun_2023",
+            "label": "Pre-hike rush (Apr-Sep 23)"
+          },
+          {
+            "key": "tcs20_7l",
+            "label": "20% TCS >Rs 7L (Oct 23-Mar 25)"
+          },
+          {
+            "key": "tcs20_10l",
+            "label": "20% TCS >Rs 10L (Apr 25-Aug 26)"
+          }
+        ],
+        "why": "Evaluates India's 20% TCS experiment by comparing monthly run-rates before, during, and after the October 2023 tax hike.",
+        "read": "Four columns compare monthly average outflows (in USD millions) across each tax regime for every LRS purpose.",
+        "watch": "Family maintenance dropped from $347.8 million/month in FY23 to $294.3 million/month in the latest window, while equity and debt more than doubled from $104.7 million to $257.5 million/month."
+      },
+      {
+        "chart": "multiLine",
+        "title": "Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026",
+        "size": "feature",
+        "beat": "rupee-ceiling",
+        "unit": "INR lakh",
+        "indicator": "lrs26.ceiling_rupee_lakhs.IN",
+        "subtitle": "Rupee equivalent of the $250,000 annual LRS limit vs the proposed Rs 50 lakh sub-limit and the TCS-free threshold · June 2015 to August 2026 · RBI DBIE",
+        "series": [
+          {
+            "indicator": "lrs26.ceiling_rupee_lakhs.IN",
+            "label": "$250,000 LRS ceiling in Rs lakh",
+            "emphasis": true
+          },
+          {
+            "indicator": "lrs26.proposed_sublimit_lakhs.IN",
+            "label": "Proposed Rs 50 lakh sub-limit"
+          },
+          {
+            "indicator": "lrs26.tcs_exempt_threshold_lakhs.IN",
+            "label": "TCS-free annual threshold (Rs 7L to Rs 10L)"
+          }
+        ],
+        "why": "Shows the structural asymmetry between a dollar-denominated remittance cap and rupee-denominated domestic incomes and tax thresholds.",
+        "read": "The top line tracks the rupee value of $250,000 using RBI's monthly reserve valuation rate; the lower lines show Rs 50 lakh and the Rs 7-10 lakh TCS threshold.",
+        "watch": "Every time the rupee weakens against the dollar, the rupee allowance per resident PAN expands automatically, rising by Rs 78.82 lakh since June 2015."
+      }
     ]
   },
   {
@@ -8209,6 +8522,403 @@ export const v1Questions = [
       { chart: "multiLine", indicator: "econ.poverty.pip_peer_300_ind", series: [{ indicator: "econ.poverty.pip_peer_300_ind", label: "India" }, { indicator: "econ.poverty.pip_peer_300_chn", label: "China" }, { indicator: "econ.poverty.pip_peer_300_idn", label: "Indonesia" }, { indicator: "econ.poverty.pip_peer_300_vnm", label: "Vietnam" }, { indicator: "econ.poverty.pip_peer_300_bgd", label: "Bangladesh" }], size: "feature", unit: "% of population below the line", subtitle: "World Bank PIP · % below $3/day (2021 PPP) · latest survey per country; survey years differ", title: "Even at the lowest line, China and Vietnam pulled ahead", why: "At the extreme line India is middling among peers, not exceptional; China and Vietnam are far ahead.", read: "Each line is a country's headcount below $3/day across its survey years. China runs along the floor; India, Indonesia and Bangladesh sit close together near the top.", watch: "China at 0% means below this very low line, not that China has no poverty; its poverty now shows up only at higher lines." },
       { chart: "tableBars", indicator: "econ.poverty.hces_imputation_share_rural", size: "small", unit: "% of household MPCE", subtitle: "Computed from HCES 2023-24 unit-level microdata · imputed value of free welfare items as a share of consumption, rural deciles", title: "Free welfare items are a bigger slice of the poorest budgets", why: "Free foodgrain and other transfers are worth a near-identical rupee amount to most households, so they are a much larger share of consumption for the poorest.", read: "Each bar is the imputed value of free welfare items as a percentage of that decile's consumption. The share falls steadily from the poorest decile to the richest.", watch: "This is a share, not a rupee amount. In rupees the gift is broadly flat across deciles; it looms larger at the bottom only because the poor consume so little." },
       { chart: "multiLine", indicator: "econ.poverty.real_floor_poorest5_rural", series: [{ indicator: "econ.poverty.real_floor_poorest5_rural", label: "Rural poorest 5%" }, { indicator: "econ.poverty.real_floor_poorest5_urban", label: "Urban poorest 5%" }], size: "feature", unit: "₹ per person per month (2023-24 prices)", subtitle: "Published bottom-fractile MPCE (NSS Report 555 MMRP; HCES press note) deflated to 2023-24 prices · CES 2011-12, HCES 2022-23, 2023-24", title: "The real floor rose, and is still low", why: "In constant prices the consumption of the poorest 5% rose by about 62% (rural) and 76% (urban) since 2011-12, faster than the median, yet the floor is still only about Rs 1,677 a month in rural India.", read: "Each line is the inflation-adjusted average consumption of the poorest 5%, in today's rupees, across the three survey rounds. Both rise.", watch: "The surveys are not perfectly comparable (recall periods and free-item treatment changed), so part of the measured rise is a methodological lift. Read the direction, not a precise rate." }
+    ]
+  },
+
+  {
+    "id": "q.econ.poverty_debate",
+    "slug": "what-the-world-bank-2026-poverty-report-actually-shows-about-india",
+    "question": "What does the World Bank's 2026 poverty report actually show about India, and why do economists still disagree?",
+    "priority": "core",
+    "parts": [
+      {
+        "title": "The wrong question and the bunching cliff",
+        "at": "Why is 'Has India ended extreme poverty?' the wrong question to ask in 2026?"
+      },
+      {
+        "title": "The four measurement controversies",
+        "at": "How did a 2021 PPP price revision and a new survey questionnaire rewrite the numbers?"
+      },
+      {
+        "title": "The jobs and productivity trap",
+        "at": "Why do working Indians stay poor even when they work 44 hours a week?"
+      },
+      {
+        "title": "What consumption surveys cannot see",
+        "at": "What questions about Indian poverty can still not be answered?"
+      }
+    ],
+    "keyNumbers": [
+      {
+        "value": "2.29%",
+        "label": "India's lined-up extreme poverty rate at $3.00/day in 2024 (33.23 million people)"
+      },
+      {
+        "value": "76.5%",
+        "label": "share of Indians bunched in the $3.00 to $8.30/day vulnerability band in 2024",
+        "hot": true
+      },
+      {
+        "value": "30.42%",
+        "label": "India's share of the world's poor at the $8.30/day threshold in 2024"
+      },
+      {
+        "value": "44.05",
+        "label": "weekly hours worked by paid employees in extreme poverty (<$3/day)"
+      }
+    ],
+    "indicators": [
+      "pov26.mean_shortfall_among_poor.IN",
+      "pov26.linedup_300.IN",
+      "pov26.linedup_420.IN",
+      "pov26.linedup_830.IN",
+      "pov26.societal_poverty_rate.IN",
+      "pov26.poverty_buffer_2024.IN",
+      "pov26.state_prosperity_gap_2023.IN",
+      "pov26.child_poverty_2023.IN",
+      "pov26.ppp_revision_paradox.IN",
+      "pov26.survey_method_controversy_2022.IN",
+      "pov26.free_grain_imputation_deciles.IN",
+      "pov26.idx_survey_mean_1977.IN",
+      "pov26.idx_na_hfce_1977.IN",
+      "pov26.idx_gdp_pcap_1977.IN",
+      "pov26.jobs_shift_2003_2024.IN",
+      "pov26.worker_structural_trap_2024.IN",
+      "pov26.jobs_counterfactual_2024.IN",
+      "pov26.monetary_vs_capability_deprivation.IN",
+      "pov26.peer_thresholds_2024.IN",
+      "pov26.decile_real_growth_2022_2023.IN"
+    ],
+    "core": [
+      "pov26.linedup_300.IN",
+      "pov26.poverty_buffer_2024.IN",
+      "pov26.state_prosperity_gap_2023.IN",
+      "pov26.jobs_counterfactual_2024.IN"
+    ],
+    "context": [],
+    "visualPlan": [
+      {
+        "chart": "multiLine",
+        "title": "India largely cleared the $3/day floor by 2024, yet 78.8% of the population still lives below the $8.30/day threshold",
+        "size": "hero",
+        "beat": "four-lines-trajectory",
+        "projectedAfter": 2024,
+        "unit": "% of population",
+        "indicator": "pov26.linedup_300.IN",
+        "subtitle": "World Bank 2026 Poverty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+        "series": [
+          {
+            "indicator": "pov26.linedup_300.IN",
+            "label": "$3.00/day extreme poverty line",
+            "emphasis": true
+          },
+          {
+            "indicator": "pov26.linedup_420.IN",
+            "label": "$4.20/day lower-middle-income line"
+          },
+          {
+            "indicator": "pov26.societal_poverty_rate.IN",
+            "label": "Societal poverty rate ($3.00 to $4.27/day dynamic line)"
+          },
+          {
+            "indicator": "pov26.linedup_830.IN",
+            "label": "$8.30/day upper-middle-income line"
+          }
+        ],
+        "why": "Shows all four World Bank poverty benchmarks together from 1990 to 2030 so readers see why celebrating the end of $3/day poverty misses four-fifths of the population.",
+        "read": "Three lines trace the World Bank's lined-up annual estimates and nowcasts (dashed after 2024) at $3.00, $4.20, and $8.30/day; the fourth traces India's dynamic societal poverty rate across survey years.",
+        "watch": "In 2024, only 2.29% of Indians are below $3.00/day, but 14.88% are below $4.20/day and 78.78% (1,143.05 million people) remain below $8.30/day."
+      },
+      {
+        "indicator": "pov26.poverty_buffer_2024.IN",
+        "chart": "dumbbell",
+        "title": "A hypothetical 10% real consumption loss lifts the $4.20 poverty share from 14.9% to 23.2%",
+        "size": "feature",
+        "beat": "consumption-buffer",
+        "unit": "% of population",
+        "subtitle": "Same 2024 population bins, before and after a hypothetical uniform consumption loss · 2021 PPP · approximately 0.1 percentage-point resolution",
+        "labelField": "line",
+        "aField": "baseline",
+        "bField": "loss10",
+        "aLabel": "2024 bin estimate",
+        "bLabel": "Hypothetical 10% loss",
+        "domain": [
+          0,
+          100
+        ],
+        "ticks": [
+          0,
+          25,
+          50,
+          75,
+          100
+        ],
+        "why": "Tests how much consumption security sits just above each poverty line.",
+        "read": "Open circles show baseline shares from the 2024 bins; solid dots reduce every bin’s real consumption by 10% before recounting.",
+        "watch": "This is a static sensitivity, not a forecast, shock probability or a household transition rate. The bin baseline rounds to 14.9%, versus 14.88% in the national lineup."
+      },
+      {
+        "indicator": "pov26.mean_shortfall_among_poor.IN",
+        "chart": "tableBars",
+        "title": "Among Indians below $8.30, consumption averages 34.1% short of the line",
+        "size": "small",
+        "beat": "poverty-depth",
+        "unit": "% of poverty line, among those below it",
+        "subtitle": "Average consumption shortfall among people below each line · HCES 2023-24 · 2021 PPP · PIP September 2026",
+        "why": "Headcounts count people below the line; this measures how far below it those people live.",
+        "read": "Divide the population-average poverty-gap index by the headcount ratio, then multiply by 100; each bar conditions on the people below its own line.",
+        "watch": "The groups differ across thresholds. This is not the population-average poverty-gap index or the share of people who are poor."
+      },
+      {
+        "indicator": "pov26.state_prosperity_gap_2023.IN",
+        "chart": "choropleth",
+        "title": "The Prosperity Gap is 6.72 in Jharkhand and 3.16 in Goa",
+        "size": "feature",
+        "beat": "state-prosperity-gap",
+        "unit": "average of $28 / daily consumption",
+        "rankLabel": "Furthest from $28/day",
+        "bottomLabel": "Closest to $28/day",
+        "subtitle": "World Bank Global Subnational Atlas of Poverty (GSAP) Fall 2026 · average shortfall factor from the $28/day prosperity standard across all 36 states and UTs · HCES 2023-24",
+        "why": "Maps the World Bank's new flagship Prosperity Gap indicator across all 36 Indian states and union territories for the first time.",
+        "read": "The Prosperity Gap averages $28 divided by individual daily consumption. Higher values indicate deeper shortfalls; 4.95 is the national comparison. It is not a uniform increase needed by every household.",
+        "watch": "Jharkhand (6.72x), Chhattisgarh (6.31x), Odisha (5.92x), Bihar (5.68x), and Uttar Pradesh (5.49x) face the steepest shortfalls, while Kerala (3.91x), Tamil Nadu (3.97x), and Goa (3.16x) are closest."
+      },
+      {
+        "indicator": "pov26.child_poverty_2023.IN",
+        "chart": "dumbbell",
+        "title": "Young children are more likely to live below $8.30 a day in every state and union territory",
+        "size": "feature",
+        "beat": "child-household-poverty",
+        "unit": "% of each age group",
+        "subtitle": "Ages 0-5 versus all ages, 14 selected states · SPID direct HCES 2023-24 estimates · source reference year 2023.58",
+        "labelField": "state",
+        "aField": "allAges",
+        "bField": "ages0to5",
+        "aLabel": "All ages",
+        "bLabel": "Ages 0-5",
+        "domain": [
+          40,
+          100
+        ],
+        "ticks": [
+          40,
+          60,
+          80,
+          100
+        ],
+        "why": "Adds a demographic comparison within each state rather than another map of average poverty.",
+        "read": "Compare household consumption poverty among children aged 0-5 with the state’s all-age rate at the same $8.30 line.",
+        "watch": "These are nested groups: all ages includes young children. SPID survey estimates differ from the GSAP calendar lineup used for the Prosperity Gap map."
+      },
+      {
+        "indicator": "pov26.ppp_revision_paradox.IN",
+        "chart": "dumbbell",
+        "title": "The 2021 PPP revision paradox: Updating global prices raised India's 2023 extreme poverty rate to 2.57% while cutting $4.20 poverty to 16.12%",
+        "size": "feature",
+        "beat": "ppp-paradox",
+        "unit": "% of population",
+        "subtitle": "Indian survey-year poverty headcount rates in the September 2026 PIP release under the 2017 PPP lines ($2.15, $3.65, $6.85) vs 2021 PPP lines ($3.00, $4.20, $8.30)",
+        "labelField": "benchmark",
+        "aField": "ppp2017",
+        "bField": "ppp2021",
+        "aLabel": "2017 PPP vintage",
+        "bLabel": "2021 PPP vintage",
+        "domain": [
+          0,
+          85
+        ],
+        "ticks": [
+          0,
+          20,
+          40,
+          60,
+          80
+        ],
+        "why": "Explains the counter-intuitive arithmetic of the World Bank's switch from 2017 ICP PPP to 2021 ICP PPP: extreme poverty rose in every survey year while lower-middle-income poverty fell.",
+        "read": "Open circles show headcount rates under the 2017 PPP lines; solid dots show headcount rates on the exact same survey distributions under the new 2021 PPP lines.",
+        "watch": "For 2023-24, switching to 2021 PPP raised extreme poverty by +1.55 percentage points (1.02% to 2.57%) but lowered LMIC poverty by -3.79 points (19.91% to 16.12%)."
+      },
+      {
+        "indicator": "pov26.survey_method_controversy_2022.IN",
+        "chart": "tableBars",
+        "title": "Depending on survey adjustment and poverty line, India's 2022-23 poverty rate was anywhere between 2.35% and 25.9%",
+        "size": "feature",
+        "beat": "method-spread",
+        "unit": "% of population",
+        "subtitle": "Published 2022-23 Indian poverty headcount estimates across direct HCES (World Bank PIP) and survey-consistent imputation models (Himanshu, Lanjouw & Schirmer 2025)",
+        "why": "Places the World Bank's unadjusted HCES headcounts next to academic imputation estimates that seek to account for the 2022-23 questionnaire and three-visit overhaul.",
+        "read": "Each horizontal bar is a published poverty headcount estimate for India in 2022-23, ordered from the lowest international line to the highest survey-consistent Rangarajan estimate.",
+        "watch": "The range combines different lines and models; compare within a fixed line before attributing a difference to survey treatment."
+      },
+      {
+        "indicator": "pov26.free_grain_imputation_deciles.IN",
+        "chart": "groupedTable",
+        "title": "Free public foodgrain and welfare items raise measured rural spending by 3.0%, against 1.2% in urban India",
+        "size": "feature",
+        "beat": "free-grain-imputation",
+        "unit": "Rs per person per month",
+        "subtitle": "Average monthly per-capita consumption, with and without imputed free food and selected welfare goods · HCES 2023-24 published fact sheet",
+        "labelField": "sector",
+        "columns": [
+          {
+            "key": "without",
+            "label": "Without imputation"
+          },
+          {
+            "key": "with",
+            "label": "With imputation"
+          }
+        ],
+        "why": "Shows the size of imputed public transfers using published rural and urban averages.",
+        "read": "Compare the without-imputation and with-imputation bars for rural and urban residents, in rupees per person per month.",
+        "watch": "Published averages cannot establish the transfer share for the poorest decile. Free public health and education services are excluded."
+      },
+      {
+        "indicator": "pov26.decile_real_growth_2022_2023.IN",
+        "chart": "tableBars",
+        "title": "The poorest surveyed tenth gained 13.1% in real consumption between the two comparable HCES rounds",
+        "size": "feature",
+        "beat": "comparable-decile-growth",
+        "unit": "% change",
+        "subtitle": "Average real consumption by survey decile · HCES 2022-23 to 2023-24 · PIP comparable spell 2022-2023",
+        "why": "Shows which parts of the measured distribution gained within the two explicitly comparable rounds.",
+        "read": "Each bar is the percentage change in a decile’s average real consumption, not its share of national consumption.",
+        "watch": "Deciles contain different people at each survey. The richest surveyed tenth’s measured decline is not evidence that rich Indians as a whole became poorer."
+      },
+      {
+        "chart": "multiLine",
+        "title": "National Accounts spending grew 4.49x since 1977 while survey mean grew 2.09x",
+        "size": "feature",
+        "beat": "na-vs-survey",
+        "unit": "index (1977 = 100)",
+        "indicator": "pov26.idx_gdp_pcap_1977.IN",
+        "subtitle": "Indexed real per-capita growth in GDP, National Accounts Household Final Consumption Expenditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP",
+        "series": [
+          {
+            "indicator": "pov26.idx_gdp_pcap_1977.IN",
+            "label": "Real GDP per capita (1977 = 100)",
+            "emphasis": true
+          },
+          {
+            "indicator": "pov26.idx_na_hfce_1977.IN",
+            "label": "National Accounts HFCE per capita (1977 = 100)"
+          },
+          {
+            "indicator": "pov26.idx_survey_mean_1977.IN",
+            "label": "NSS / HCES survey mean consumption (1977 = 100)"
+          }
+        ],
+        "why": "Shows the divergence between macro National Accounts and household surveys; it cannot identify the source of the gap or measure missing top-end consumption.",
+        "read": "All three real per-capita series are indexed to 100 in 1977 across the nine PIP survey years through 2023.",
+        "watch": "Between 1977 and 2023, real GDP per capita rose to 569.8 (5.70x) and National Accounts HFCE rose to 449.1 (4.49x), while survey mean consumption reached only 208.9 (2.09x)."
+      },
+      {
+        "indicator": "pov26.jobs_shift_2003_2024.IN",
+        "chart": "dumbbell",
+        "title": "Between 2003 and 2024, adult employment rates in poor Indian households fell to 58.3% while rising to 57.6% among the non-poor",
+        "size": "feature",
+        "beat": "jobs-shift",
+        "unit": "% of adults / workers",
+        "subtitle": "Employment rate of working-age adults (15-64) and share of workers lacking secondary education by household poverty status (<$8.30/day vs >=$8.30/day), 2003 vs 2024 · World Bank 3PR Chapter 4",
+        "labelField": "metric",
+        "aField": "y2003",
+        "bField": "y2024",
+        "aLabel": "2003",
+        "bLabel": "2024",
+        "domain": [
+          30,
+          90
+        ],
+        "ticks": [
+          30,
+          45,
+          60,
+          75,
+          90
+        ],
+        "why": "Extracts the core finding of Chapter 4 ('Jobs at the Center of Poverty Eradication'): poor Indian households have expanded schooling over twenty years, yet their adult employment rate declined.",
+        "read": "Open circles mark 2003 and solid dots mark 2024 for poor (<$8.30/day) and non-poor (>=$8.30/day) Indian households.",
+        "watch": "The share of poor workers without secondary education dropped 30.24 points (86.71% to 56.47%), but adult employment in poor households slipped from 60.72% to 58.29%."
+      },
+      {
+        "indicator": "pov26.worker_structural_trap_2024.IN",
+        "chart": "dumbbell",
+        "title": "Paid employees below $3/day work 44.1 hours a week, against 44.9 above the line",
+        "size": "feature",
+        "beat": "worker-trap",
+        "unit": "hours / week",
+        "subtitle": "Weekly hours in paid and self/unpaid work by household poverty status at $3/day · India, 2024 · World Bank Chapter 4, Box 4.1",
+        "labelField": "dimension",
+        "aField": "poor",
+        "bField": "nonpoor",
+        "aLabel": "Below $3/day",
+        "bLabel": "At least $3/day",
+        "why": "Compares hours among employed people on either side of the $3/day household-consumption line.",
+        "read": "Each row compares workers below and above the $3/day household-consumption line; both endpoints are weekly hours.",
+        "watch": "Hours measure time at work, not hourly earnings or job security. These groups use the $3/day line, unlike the $8.30/day employment-profile comparison."
+      },
+      {
+        "indicator": "pov26.jobs_counterfactual_2024.IN",
+        "chart": "groupedTable",
+        "title": "World Bank simulation: Closing India's employment and worker earnings gaps cuts $8.30 poverty by 22.2 percentage points",
+        "size": "feature",
+        "beat": "jobs-counterfactual",
+        "unit": "% of population / poverty line",
+        "subtitle": "Combined employment and worker-earnings counterfactual · India, 2024 · World Bank Chapter 4",
+        "labelField": "measure",
+        "columns": [
+          {
+            "key": "baseline2024",
+            "label": "2024 baseline (%)"
+          },
+          {
+            "key": "afterJobsClosing",
+            "label": "Simulated (%)"
+          }
+        ],
+        "why": "Shows the combined accounting counterfactual, not a causal policy payoff.",
+        "read": "Compares India's 2024 baseline headcount and poverty gap at $8.30/day and $3.00/day against the World Bank's counterfactual simulation (`poor_new830` and `poor_new300`).",
+        "watch": "Closing the employment and worker earnings gaps slashes India's $8.30/day poverty rate from 78.78% to 56.61% (-22.17 percentage points, lifting roughly 322 million people above the UMIC threshold)."
+      },
+      {
+        "indicator": "pov26.monetary_vs_capability_deprivation.IN",
+        "chart": "tableBars",
+        "title": "Monetary poverty and deprivation measure different things: 35.5% of children were stunted in NFHS-5",
+        "size": "feature",
+        "beat": "capability-gap",
+        "unit": "% of population / children",
+        "subtitle": "Different denominators and vintages: HCES 2022-23/2023-24 poverty, NFHS-5 child nutrition (2019-21), health-spending hardship (2022)",
+        "why": "Shows what household expenditure surveys miss: non-market capability deficits in sanitation, schooling, child nutrition, and catastrophic out-of-pocket medical bills.",
+        "read": "Each bar represents the percentage of India's population (or children under five for stunting/underweight) experiencing that specific monetary or non-monetary deprivation.",
+        "watch": "While $3.00/day monetary poverty fell to 2.57% in HCES 2023-24, 29.60% of Indians lacked limited-standard sanitation in the World Bank's MPM, 30.94% faced health-spending hardship, and 35.5% of children under five were stunted."
+      },
+      {
+        "indicator": "pov26.peer_thresholds_2024.IN",
+        "chart": "groupedTable",
+        "title": "India has lower $3 poverty than Bangladesh and Indonesia, and higher poverty at $8.30",
+        "size": "feature",
+        "beat": "asian-comparators",
+        "unit": "% of population",
+        "subtitle": "Selected Asian countries at the same three lines · 2024 calendar year · 2021 PPP · Indonesia actual, others projection/lineup",
+        "labelField": "country",
+        "columns": [
+          {
+            "key": "p300",
+            "label": "$3/day"
+          },
+          {
+            "key": "p420",
+            "label": "$4.20/day"
+          },
+          {
+            "key": "p830",
+            "label": "$8.30/day"
+          }
+        ],
+        "why": "Tests the impression of success against neighbouring consumption distributions at common thresholds.",
+        "read": "Compare each country’s share below the same line; the three groups overlap.",
+        "watch": "These are selected Asian comparators, not an exhaustive ranking or one income group. A common year does not mean every estimate comes from a survey conducted that year."
+      }
     ]
   },
 

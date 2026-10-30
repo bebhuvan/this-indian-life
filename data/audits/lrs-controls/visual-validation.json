@@ -1,0 +1,380 @@
+{
+  "checkedAt": "2026-10-30T11:34:02.410195+00:00",
+  "status": "pass",
+  "questionId": "q.econ.lrs_controls",
+  "buildLog": "/tmp/indica-focused-final-build-v2.log",
+  "plannedAndRenderedCards": 9,
+  "layoutWidths": [
+    412,
+    1440
+  ],
+  "bindingFailures": [],
+  "scaleWidths": [
+    360,
+    768,
+    1024,
+    1440
+  ],
+  "scaleLog": [
+    "360px: 9 drawings, scale 0.99-0.99, smallest text 11.4px, 0 outside the limits",
+    "768px: 9 drawings, scale 1.00-1.01, smallest text 11.5px, 0 outside the limits",
+    "1024px: 9 drawings, scale 0.98-0.98, smallest text 11.3px, 0 outside the limits",
+    "1440px: 9 drawings, scale 1.00-1.00, smallest text 11.5px, 0 outside the limits"
+  ],
+  "scaleMeasurements": [
+    {
+      "width": 360,
+      "drawings": 9,
+      "minScale": 0.99,
+      "maxScale": 0.99,
+      "smallestTextPx": 11.4,
+      "outsideLimits": 0
+    },
+    {
+      "width": 768,
+      "drawings": 9,
+      "minScale": 1.0,
+      "maxScale": 1.01,
+      "smallestTextPx": 11.5,
+      "outsideLimits": 0
+    },
+    {
+      "width": 1024,
+      "drawings": 9,
+      "minScale": 0.98,
+      "maxScale": 0.98,
+      "smallestTextPx": 11.3,
+      "outsideLimits": 0
+    },
+    {
+      "width": 1440,
+      "drawings": 9,
+      "minScale": 1.0,
+      "maxScale": 1.0,
+      "smallestTextPx": 11.5,
+      "outsideLimits": 0
+    }
+  ],
+  "unitRegressionCommand": "node scripts/stories/check-almanac-unit-formats.mjs",
+  "unitRegressionDrawings": 46,
+  "sharedRegressionRecord": "data/audits/lrs-controls/final-focused-layout-audit.json",
+  "historicalSharedRegressionRecord": "data/audits/lrs-controls/shared-renderer-regressions.json",
+  "combinedLayoutSummary": {
+    "412": {
+      "figures": 84,
+      "overlaps": 0,
+      "spills": 0,
+      "small": 0,
+      "ladders": 0,
+      "gutters": 0,
+      "edge": 0,
+      "width": 0,
+      "ticks": 0,
+      "demoted": 0,
+      "text": 0,
+      "notes": 0,
+      "excepted": 3
+    },
+    "1440": {
+      "figures": 84,
+      "overlaps": 0,
+      "spills": 0,
+      "small": 0,
+      "ladders": 0,
+      "gutters": 0,
+      "edge": 0,
+      "width": 0,
+      "ticks": 0,
+      "demoted": 0,
+      "text": 0,
+      "notes": 0,
+      "excepted": 7
+    }
+  },
+  "visualReviewScreenshots": 18,
+  "sha256": {
+    "src/data/almanac.ts": "ee498a9fcc9da7d50a42662d6c5ef3bb4ae312df9375ff2d8b530304b1a5f958",
+    "src/data/almanac-visuals.ts": "008ef8049a6d5992215508d84ee161100f12e2f82dc7bdc85f03c0de7dc92ee6",
+    "src/data/figures.ts": "b256b1cd11f54f2a7a2df064926255baf1b3d9c105ff481f1f1effee0cde1bb8",
+    "scripts/audit-charts.mjs": "2a5b1e8ecac07664c8cd09484acdad38627f419e47745d976d5b06768ad107d4",
+    "scripts/stories/audit-flagship-visuals.mjs": "c63fc2536dd5550ac0ec311fc0003157099f851d4a090a6daa0318107ae2dad1",
+    "scripts/stories/check-almanac-unit-formats.mjs": "7eda4196d84f16b02ac289ba1e216abdc8ee0364cecc5a41321ad6a938a265c1",
+    "dist/articles/why-is-rbi-rethinking-india-250k-lrs-remittance-window/index.html": "4d01df029842a066f5943d173ef024e16d38679253b3943e7b8036633f7f123e"
+  },
+  "reviewLimit": "Visual verification covers the named build and widths; it does not establish raw-data authenticity.",
+  "manualReview": {
+    "completedAt": "2026-10-30T11:34:02.410195+00:00",
+    "cardsInspected": 18,
+    "widths": [
+      412,
+      1440
+    ],
+    "unresolvedVisualFindings": [],
+    "checks": [
+      "Every chart screenshot inspected for labels, units, comparison keys, inks and form suitability.",
+      "All section bindings match the intended headings in the built HTML.",
+      "Signed contributions preserve their zero baseline; hours remain numeric and percentages preserve their unit.",
+      "The complete six-group purpose bridge shows both signs on one zero baseline; the normalized calendar uses percentage units and all twelve months.",
+      "Rendered SVG inks were checked against explainer descriptions; no explainer names an ink that conflicts with the drawing.",
+      "V2 screenshots inspected directly where changed; pixel-identical contact sheets confirm the remaining reviewed cards match the first pass."
+    ]
+  },
+  "commands": [
+    {
+      "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/stories/audit-flagship-visuals.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/check-chart-type-scale.mjs --article=why-is-rbi-rethinking-india-250k-lrs-remittance-window",
+      "exitCode": 0
+    },
+    {
+      "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/audit-charts.mjs --pages=/articles/why-is-rbi-rethinking-india-250k-lrs-remittance-window/,/articles/what-the-world-bank-2026-poverty-report-actually-shows-about-india/,/articles/how-much-money-did-indians-send-abroad/,/articles/has-india-ended-poverty/,/library/",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/stories/check-almanac-unit-formats.mjs",
+      "exitCode": 0
+    }
+  ],
+  "priorValidationRecord": {
+    "checkedAt": "2026-10-30T07:55:26.738524+00:00",
+    "status": "pass",
+    "questionId": "q.econ.lrs_controls",
+    "buildLog": "/tmp/indica-lrs-source-confirmed-build.log",
+    "plannedAndRenderedCards": 11,
+    "layoutWidths": [
+      412,
+      1440
+    ],
+    "layoutChecks": {
+      "overlaps": 0,
+      "spills": 0,
+      "small": 0,
+      "ladders": 0,
+      "gutters": 0,
+      "sixLayoutRules": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bindingFailures": [],
+    "scaleWidths": [
+      360,
+      768,
+      1024,
+      1440
+    ],
+    "scaleLog": [
+      "360px: 11 drawings, scale 0.99-0.99, smallest text 10.9px, 0 outside the limits",
+      "768px: 11 drawings, scale 1.00-1.01, smallest text 11.5px, 0 outside the limits",
+      "1024px: 11 drawings, scale 0.98-0.98, smallest text 11.3px, 0 outside the limits",
+      "1440px: 11 drawings, scale 1.00-1.00, smallest text 11.5px, 0 outside the limits"
+    ],
+    "unitRegressionCommand": "node scripts/stories/check-almanac-unit-formats.mjs",
+    "unitRegressionDrawings": 40,
+    "sharedRegressionRecord": "data/audits/lrs-controls/shared-renderer-regressions.json",
+    "sharedRegressionCardsPerWidth": 60,
+    "visualReviewScreenshots": 22,
+    "reviewLimit": "Visual verification covers this built artifact at the named widths; it is not a raw-data authenticity check.",
+    "sha256": {
+      "src/data/almanac.ts": "ee498a9fcc9da7d50a42662d6c5ef3bb4ae312df9375ff2d8b530304b1a5f958",
+      "src/data/almanac-visuals.ts": "057a82b970bef6432fc47685d0f6df6ccb81fffcbac1f5832e61fa97b33ee21d",
+      "src/data/figures.ts": "b256b1cd11f54f2a7a2df064926255baf1b3d9c105ff481f1f1effee0cde1bb8",
+      "scripts/audit-charts.mjs": "2a5b1e8ecac07664c8cd09484acdad38627f419e47745d976d5b06768ad107d4",
+      "scripts/stories/audit-flagship-visuals.mjs": "c63fc2536dd5550ac0ec311fc0003157099f851d4a090a6daa0318107ae2dad1",
+      "dist/articles/why-is-rbi-rethinking-india-250k-lrs-remittance-window/index.html": "ff1fff578e63e4d0bca9e1e535d36d0b4ef5a54fd0f856ae4c2a769e779628ba",
+      "scripts/stories/check-almanac-unit-formats.mjs": "cb04096773b76a95161cdd962b0ba7cc893b4132f5d187b0a12a6033981fbf6d"
+    },
+    "scaleMeasurements": [
+      {
+        "width": 360,
+        "drawings": 11,
+        "minScale": 0.99,
+        "maxScale": 0.99,
+        "smallestTextPx": 10.9,
+        "outsideLimits": 0
+      },
+      {
+        "width": 768,
+        "drawings": 11,
+        "minScale": 1.0,
+        "maxScale": 1.01,
+        "smallestTextPx": 11.5,
+        "outsideLimits": 0
+      },
+      {
+        "width": 1024,
+        "drawings": 11,
+        "minScale": 0.98,
+        "maxScale": 0.98,
+        "smallestTextPx": 11.3,
+        "outsideLimits": 0
+      },
+      {
+        "width": 1440,
+        "drawings": 11,
+        "minScale": 1.0,
+        "maxScale": 1.0,
+        "smallestTextPx": 11.5,
+        "outsideLimits": 0
+      }
+    ],
+    "commands": [
+      {
+        "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/audit-charts.mjs --pages=/articles/why-is-rbi-rethinking-india-250k-lrs-remittance-window/",
+        "exitCode": 0
+      },
+      {
+        "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/check-chart-type-scale.mjs --article=why-is-rbi-rethinking-india-250k-lrs-remittance-window",
+        "exitCode": 0
+      },
+      {
+        "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/stories/audit-flagship-visuals.mjs",
+        "exitCode": 0
+      },
+      {
+        "command": "node scripts/stories/check-almanac-unit-formats.mjs",
+        "exitCode": 0
+      }
+    ],
+    "manualReview": {
+      "completedAt": "2026-10-30T07:04:17.040322+00:00",
+      "cardsInspected": 22,
+      "widths": [
+        412,
+        1440
+      ],
+      "unresolvedVisualFindings": [],
+      "checks": [
+        "All chart screenshots reviewed, with individual inspection of previously broken charts.",
+        "Every categorical label and comparison-key entry remains visible.",
+        "Hours comparison renders both rows with numeric hours, without currency or percentage symbols.",
+        "Rural and Urban both appear on the imputation comparison.",
+        "The combined education series starts when both components are observed.",
+        "Chart forms preserve distinct time, composition, comparison and distribution questions."
+      ]
+    },
+    "priorUnchangedRendererSuite": {
+      "checkedAt": "2026-10-30T07:01:57.097580+00:00",
+      "buildLog": "/tmp/indica-flagship-verified-build.log",
+      "combinedLayoutSummary": {
+        "412": {
+          "figures": 85,
+          "overlaps": 0,
+          "spills": 0,
+          "small": 0,
+          "ladders": 0,
+          "gutters": 0,
+          "edge": 0,
+          "width": 0,
+          "ticks": 0,
+          "demoted": 0,
+          "text": 0,
+          "notes": 0,
+          "excepted": 3
+        },
+        "1440": {
+          "figures": 85,
+          "overlaps": 0,
+          "spills": 0,
+          "small": 0,
+          "ladders": 0,
+          "gutters": 0,
+          "edge": 0,
+          "width": 0,
+          "ticks": 0,
+          "demoted": 0,
+          "text": 0,
+          "notes": 0,
+          "excepted": 7
+        }
+      },
+      "sharedRegressionRecord": "data/audits/lrs-controls/shared-renderer-regressions.json",
+      "reason": "Subsequent change added methodology source-confirmation sentences and review date only; renderer hashes match the prior full two-story, two-older-article and library regression suite."
+    },
+    "focusedLayoutSummary": {
+      "412": {
+        "figures": 11,
+        "overlaps": 0,
+        "spills": 0,
+        "small": 0,
+        "ladders": 0,
+        "gutters": 0,
+        "edge": 0,
+        "width": 0,
+        "ticks": 0,
+        "demoted": 0,
+        "text": 0,
+        "notes": 0,
+        "excepted": 0
+      },
+      "1440": {
+        "figures": 11,
+        "overlaps": 0,
+        "spills": 0,
+        "small": 0,
+        "ladders": 0,
+        "gutters": 0,
+        "edge": 0,
+        "width": 0,
+        "ticks": 0,
+        "demoted": 0,
+        "text": 0,
+        "notes": 0,
+        "excepted": 0
+      }
+    },
+    "sourceConfirmationMethodologyReview": {
+      "completedAt": "2026-10-30T07:55:26.738524+00:00",
+      "widths": [
+        412,
+        1440
+      ],
+      "result": "pass",
+      "screenshots": [
+        "/tmp/lrs-source-confirmed-method-412.png",
+        "/tmp/lrs-source-confirmed-method-1440.png"
+      ],
+      "checks": [
+        {
+          "width": 412,
+          "text": "HOW TO READ THESE NUMBERS: METHODOLOGY AND CAVEATS\n\nMonthly figures use the unchanged RBI Database on Indian Economy (DBIE) Report 19 export retrieved October 25, 2026. The ACTUALS rows contain US dollars despite the measure column's display-unit label. We divide by one million for USD millions and aggregate April-March for fiscal years. FY26 means April 2025-March 2026; FY27's latest comparison covers only April-August 2026.\n\nThe raw export contains 222 distinct date strings, but only 221 calendar months: six identical category rows dated May 30, 2009 repeat rows dated May 31. We keep one identical value per month and category and reject conflicting duplicates. Three early donation cells are blank; the family/gifts composite omits those months rather than turning the blanks into measured zeros.\n\nAn independent reconciliation checks every numeric artifact cell against source CSV coordinates. Of the annual Report 752 cells compared with monthly sums, all but the FY2008-09 total agree at the displayed precision: that annual total is $124.6 million, against $808.1 million from the monthly record. The annual purpose components agree with the monthly aggregate; the disputed headline equals March alone. We use the monthly record consistently and disclose the conflict. We do not claim the two raw exports match throughout.\n\nThe education-travel and combined-education series begin in March 2026, when both components are observable. The reported Rs 50 lakh line is a reference benchmark across the valuation chart, not a historical limit. There was no LRS TCS threshold before its introduction, so its line begins in October 2020. External-sector comparisons use the frozen RBI DBIE annual BoP and monthly reserve extracts. All values describe that frozen vintage.\n\nA fresh direct download from RBI reproduced the frozen monthly and annual records and the original external-sector observations. Original responses and refresh receipts are retained with the source-cell audit.",
+          "documentOverflow": 0,
+          "left": 22,
+          "right": 390,
+          "refreshSentencePresent": true,
+          "receiptSentencePresent": true
+        },
+        {
+          "width": 1440,
+          "text": "HOW TO READ THESE NUMBERS: METHODOLOGY AND CAVEATS\n\nMonthly figures use the unchanged RBI Database on Indian Economy (DBIE) Report 19 export retrieved October 25, 2026. The ACTUALS rows contain US dollars despite the measure column's display-unit label. We divide by one million for USD millions and aggregate April-March for fiscal years. FY26 means April 2025-March 2026; FY27's latest comparison covers only April-August 2026.\n\nThe raw export contains 222 distinct date strings, but only 221 calendar months: six identical category rows dated May 30, 2009 repeat rows dated May 31. We keep one identical value per month and category and reject conflicting duplicates. Three early donation cells are blank; the family/gifts composite omits those months rather than turning the blanks into measured zeros.\n\nAn independent reconciliation checks every numeric artifact cell against source CSV coordinates. Of the annual Report 752 cells compared with monthly sums, all but the FY2008-09 total agree at the displayed precision: that annual total is $124.6 million, against $808.1 million from the monthly record. The annual purpose components agree with the monthly aggregate; the disputed headline equals March alone. We use the monthly record consistently and disclose the conflict. We do not claim the two raw exports match throughout.\n\nThe education-travel and combined-education series begin in March 2026, when both components are observable. The reported Rs 50 lakh line is a reference benchmark across the valuation chart, not a historical limit. There was no LRS TCS threshold before its introduction, so its line begins in October 2020. External-sector comparisons use the frozen RBI DBIE annual BoP and monthly reserve extracts. All values describe that frozen vintage.\n\nA fresh direct download from RBI reproduced the frozen monthly and annual records and the original external-sector observations. Original responses and refresh receipts are retained with the source-cell audit.",
+          "documentOverflow": 0,
+          "left": 200,
+          "right": 840,
+          "refreshSentencePresent": true,
+          "receiptSentencePresent": true
+        }
+      ]
+    }
+  },
+  "layoutChecks": {
+    "overlaps": 0,
+    "spills": 0,
+    "small": 0,
+    "ladders": 0,
+    "gutters": 0,
+    "sixLayoutRules": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

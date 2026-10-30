@@ -1,0 +1,3486 @@
+{
+  "article": "q.econ.lrs_controls",
+  "vintage": "Frozen RBI DBIE exports throughAugust2026, hashes in independent-cell-audit.json",
+  "note": "Context-locked occurrence review plus independent raw-to-artifact cell audit. Numeric review does not establish source authenticity.",
+  "evidenceBundle": {
+    "sourceManifests": [
+      "data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "data/raw/rbi-dbie-lrs-confirmation-20261030/manifest.json"
+    ],
+    "artifactCatalog": "data/catalog/lrs-controls-manifest.json",
+    "repositoryFiles": [
+      "data/audits/flagship-2026-10-30-release.json",
+      "data/audits/lrs-controls/dbie-reader-evidence.json",
+      "data/audits/lrs-controls/editorial-audit.md",
+      "data/audits/lrs-controls/final-focused-layout-audit.json",
+      "data/audits/lrs-controls/fy2009-discrepancy-investigation.json",
+      "data/audits/lrs-controls/independent-cell-audit.json",
+      "data/audits/lrs-controls/live-source-confirmation.json",
+      "data/audits/lrs-controls/live-source-mutation-probes.json",
+      "data/audits/lrs-controls/lrs-source-audit.json",
+      "data/audits/lrs-controls/missing-layer-calculations.json",
+      "data/audits/lrs-controls/numeric-occurrence-review.json",
+      "data/audits/lrs-controls/rendered-visual-audit.json",
+      "data/audits/lrs-controls/shared-renderer-regressions.json",
+      "data/audits/lrs-controls/source-links-audit.txt",
+      "data/audits/lrs-controls/verifier-mutation-probes.json",
+      "data/audits/lrs-controls/visual-layout-audit.json",
+      "data/audits/lrs-controls/visual-scale-audit.log",
+      "data/audits/lrs-controls/visual-validation.json",
+      "data/explanations/en/q.econ.lrs_controls.evidence.json",
+      "data/explanations/en/q.econ.lrs_controls.json",
+      "data/prose/q.econ.lrs_controls.md",
+      "docs/ALMANAC_DESIGN_SYSTEM.md",
+      "docs/DATA_INTEGRITY_GUARDRAILS.md",
+      "docs/FLAGSHIP_AUDIT_2026-10-30.md",
+      "scripts/audit-charts.mjs",
+      "scripts/registry/source-notes.mjs",
+      "scripts/registry/v1-indicators.mjs",
+      "scripts/stories/audit-flagship-visuals.mjs",
+      "scripts/stories/check-almanac-unit-formats.mjs",
+      "scripts/stories/lrs-controls/SCOPE.md",
+      "scripts/stories/lrs-controls/SOURCE_CONFIRMATION.md",
+      "scripts/stories/lrs-controls/analyse_missing_layers.py",
+      "scripts/stories/lrs-controls/audit-title-changes.json",
+      "scripts/stories/lrs-controls/audit_independent.py",
+      "scripts/stories/lrs-controls/build_explanation.py",
+      "scripts/stories/lrs-controls/build_lrs_controls.py",
+      "scripts/stories/lrs-controls/chart_explainers.json",
+      "scripts/stories/lrs-controls/freeze_raw.py",
+      "scripts/stories/lrs-controls/notes.json",
+      "scripts/stories/lrs-controls/policy-evidence.json",
+      "scripts/stories/lrs-controls/refresh_live_sources.py",
+      "scripts/stories/lrs-controls/verify_claims.py",
+      "scripts/stories/lrs-controls/verify_live_sources.py",
+      "src/data/almanac-visuals.ts",
+      "src/data/almanac.ts",
+      "src/data/figures.ts"
+    ]
+  },
+  "numericOccurrences": 287,
+  "issues": [],
+  "claims": [
+    {
+      "field": "prose",
+      "offset": 74,
+      "number": "28.98",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 146,
+      "number": "2025-26",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 350,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 393,
+      "number": "50",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 754,
+      "number": "250,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 896,
+      "number": "221",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell254"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 927,
+      "number": "2008",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 942,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 973,
+      "number": "31.74",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2024"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 992,
+      "number": "2023-24",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 1018,
+      "number": "29.56",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2025"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 1037,
+      "number": "2024-25",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 1050,
+      "number": "28.98",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 1069,
+      "number": "2025-26",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 1097,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 1108,
+      "number": "2.74",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "aug2026total"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 1149,
+      "number": "2026-27",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 1174,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 1190,
+      "number": "12.56",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "aprAug2026total"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 1208,
+      "number": "4.5",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "totalYoY"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 1308,
+      "number": "155.12",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "privateTransfersCredit"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 1328,
+      "number": "2025-26",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 1402,
+      "number": "37.33",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "outwardFDI"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2150,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 2188,
+      "number": "7,995.32",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "travel6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2238,
+      "number": "3,322.07",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "education6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2259,
+      "number": "41.6",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "educationShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2293,
+      "number": "4,478.90",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "other6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2314,
+      "number": "56.0",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "otherShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2343,
+      "number": "97.6",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "educationOtherShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2576,
+      "number": "167.84",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "businessPilgrimage6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2595,
+      "number": "2.1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "businessPilgrimageShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2681,
+      "number": "50",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 2916,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 2949,
+      "number": "191.84",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "augStudies"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 2992,
+      "number": "855.52",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "augEducation"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3024,
+      "number": "1,047.36",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "augCombinedEducation"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3049,
+      "number": "1.05",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "augCombinedEducationB"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3067,
+      "number": "38.2",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "augEducationShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3369,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 3436,
+      "number": "27",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 3536,
+      "number": "2025",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 3558,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 3589,
+      "number": "538",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "headlineChange"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3663,
+      "number": "1.03",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalChangeBillion"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3730,
+      "number": "491",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "noncapitalDecrease"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3835,
+      "number": "822.87",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "equityAprAug2025"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3854,
+      "number": "1,725.08",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "equityAprAug2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3887,
+      "number": "109.6",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "equityYoY"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3922,
+      "number": "36.1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "depositsYoY"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 3959,
+      "number": "12.7",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "propertyYoY"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 4664,
+      "number": "1,141.21",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalFY2020"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 4686,
+      "number": "2019-20",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 4698,
+      "number": "3,933.79",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 4720,
+      "number": "2025-26",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 4756,
+      "number": "2,652.01",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "equityFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 5072,
+      "number": "180",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 5206,
+      "number": "180",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 5377,
+      "number": "10",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 5381,
+      "number": "2024",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 5915,
+      "number": "20",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "exampleAmountLakh"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 6040,
+      "number": "20",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "otherPurposeRatePercent"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 6072,
+      "number": "10",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "thresholdLakh"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 6102,
+      "number": "2",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "exampleCollectionLakh"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 6336,
+      "number": "2020",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6402,
+      "number": "1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6405,
+      "number": "2020",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6453,
+      "number": "5",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6520,
+      "number": "1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6523,
+      "number": "2023",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6554,
+      "number": "20",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6578,
+      "number": "7",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6664,
+      "number": "1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6667,
+      "number": "2025",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6698,
+      "number": "10",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6729,
+      "number": "80",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6786,
+      "number": "1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6789,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6836,
+      "number": "5",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6842,
+      "number": "2",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6859,
+      "number": "394",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 6890,
+      "number": "2025",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 7021,
+      "number": "347.8",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1474"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7048,
+      "number": "2022-23",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 7061,
+      "number": "294.3",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1477"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7086,
+      "number": "2025",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 7101,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 7130,
+      "number": "104.7",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1486"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7148,
+      "number": "257.5",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1489"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7210,
+      "number": "1,138.5",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1470"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7230,
+      "number": "1,372.9",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1473"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7553,
+      "number": "2022-23",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 7566,
+      "number": "2025-26",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 7601,
+      "number": "17",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "focused:seasonal_allocation_share:11.capital"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7677,
+      "number": "14",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "focused:seasonal_allocation_share:4.studies"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 7853,
+      "number": "8.3",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "evenMonthShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 8069,
+      "number": "25,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8079,
+      "number": "2004",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8099,
+      "number": "50,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8111,
+      "number": "100,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8123,
+      "number": "200,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8141,
+      "number": "75,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8151,
+      "number": "2013",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8175,
+      "number": "125,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8186,
+      "number": "2014",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8210,
+      "number": "250,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8225,
+      "number": "26",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8229,
+      "number": "2015",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8278,
+      "number": "1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8394,
+      "number": "2015",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8606,
+      "number": "250,000",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8626,
+      "number": "159.13",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "ceiling2015"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 8646,
+      "number": "2015",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8658,
+      "number": "237.95",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "ceiling2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 8680,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 8699,
+      "number": "78.82",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "ceilingDifference"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 8714,
+      "number": "49.5",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "ceilingGrowth"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 9728,
+      "number": "19",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 9756,
+      "number": "25",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 9760,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 9939,
+      "number": "26",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 9954,
+      "number": "2025",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 9965,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 9973,
+      "number": "27",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 10021,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 10052,
+      "number": "222",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell255"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 10088,
+      "number": "221",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "cell254"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 10147,
+      "number": "30",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 10151,
+      "number": "2009",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 10178,
+      "number": "31",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 11014,
+      "number": "752",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 11066,
+      "number": "2008-09",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 11136,
+      "number": "124.6",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "annualFY2009"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 11160,
+      "number": "808.1",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "measurement",
+      "metricIds": [
+        "monthlyFY2009"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "prose",
+      "offset": 11434,
+      "number": "2026",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "prose",
+      "offset": 11484,
+      "number": "50",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "prose",
+      "offset": 11633,
+      "number": "2020",
+      "fieldSha256": "a3f6c3bd548d787e87097d5f16ccfabb6221ea64f9ae44db46292a7f2133e058",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "explainers.Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes.takeaway",
+      "offset": 23,
+      "number": "2.74",
+      "fieldSha256": "c7b9d4a829f0bdac8e4b3d5b472ca09407f687803a0d6b22bc5977acb95a39fd",
+      "classification": "measurement",
+      "metricIds": [
+        "aug2026total"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes.takeaway",
+      "offset": 46,
+      "number": "2026",
+      "fieldSha256": "c7b9d4a829f0bdac8e4b3d5b472ca09407f687803a0d6b22bc5977acb95a39fd",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes.detail",
+      "offset": 18,
+      "number": "221",
+      "fieldSha256": "d76a10adb2abe433a0bd2ff6444a8197d2842cffb233998e4df164a5ae02ab4b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes.detail",
+      "offset": 49,
+      "number": "2008",
+      "fieldSha256": "d76a10adb2abe433a0bd2ff6444a8197d2842cffb233998e4df164a5ae02ab4b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes.detail",
+      "offset": 64,
+      "number": "2026",
+      "fieldSha256": "d76a10adb2abe433a0bd2ff6444a8197d2842cffb233998e4df164a5ae02ab4b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes.detail",
+      "offset": 93,
+      "number": "2023",
+      "fieldSha256": "d76a10adb2abe433a0bd2ff6444a8197d2842cffb233998e4df164a5ae02ab4b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes.mistakeToAvoid",
+      "offset": 35,
+      "number": "2015",
+      "fieldSha256": "80450388a84f489ecd18f8c88e7cb326b3539cce32258214c022da63347d1145",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident LRS outflows were $29 billion in FY26; inward private transfers were $155 billion.detail",
+      "offset": 28,
+      "number": "28.98",
+      "fieldSha256": "c5bbe9b2fdd313f50faafe11c4cc45be23a8cb54206937a6f6e18aa58953f9b7",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.Resident LRS outflows were $29 billion in FY26; inward private transfers were $155 billion.detail",
+      "offset": 47,
+      "number": "2025-26",
+      "fieldSha256": "c5bbe9b2fdd313f50faafe11c4cc45be23a8cb54206937a6f6e18aa58953f9b7",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "explainers.Resident LRS outflows were $29 billion in FY26; inward private transfers were $155 billion.detail",
+      "offset": 93,
+      "number": "155.12",
+      "fieldSha256": "c5bbe9b2fdd313f50faafe11c4cc45be23a8cb54206937a6f6e18aa58953f9b7",
+      "classification": "measurement",
+      "metricIds": [
+        "privateTransfersCredit"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.Resident LRS outflows were $29 billion in FY26; inward private transfers were $155 billion.detail",
+      "offset": 143,
+      "number": "37.33",
+      "fieldSha256": "c5bbe9b2fdd313f50faafe11c4cc45be23a8cb54206937a6f6e18aa58953f9b7",
+      "classification": "measurement",
+      "metricIds": [
+        "outwardFDI"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.Education and other travel account for 97.6% of LRS travel.takeaway",
+      "offset": 35,
+      "number": "97.6",
+      "fieldSha256": "ebe1554a90ed0ebe3b2c495f86a7ea1d9eb2ea0a0d3c3cb404f1231bda489aa4",
+      "classification": "measurement",
+      "metricIds": [
+        "educationOtherShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Education and other travel account for 97.6% of LRS travel.takeaway",
+      "offset": 61,
+      "number": "2026",
+      "fieldSha256": "ebe1554a90ed0ebe3b2c495f86a7ea1d9eb2ea0a0d3c3cb404f1231bda489aa4",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Education and other travel account for 97.6% of LRS travel.takeaway",
+      "offset": 109,
+      "number": "2.1",
+      "fieldSha256": "ebe1554a90ed0ebe3b2c495f86a7ea1d9eb2ea0a0d3c3cb404f1231bda489aa4",
+      "classification": "measurement",
+      "metricIds": [
+        "businessPilgrimageShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Education and other travel account for 97.6% of LRS travel.detail",
+      "offset": 27,
+      "number": "7,995.32",
+      "fieldSha256": "94e9b7a8e1a0d4e3b67987f9ac28568795dc4ff1f10d4309fd89f838e0dfae63",
+      "classification": "measurement",
+      "metricIds": [
+        "travel6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Education and other travel account for 97.6% of LRS travel.detail",
+      "offset": 91,
+      "number": "3,322.07",
+      "fieldSha256": "94e9b7a8e1a0d4e3b67987f9ac28568795dc4ff1f10d4309fd89f838e0dfae63",
+      "classification": "measurement",
+      "metricIds": [
+        "education6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Education and other travel account for 97.6% of LRS travel.detail",
+      "offset": 126,
+      "number": "4,478.90",
+      "fieldSha256": "94e9b7a8e1a0d4e3b67987f9ac28568795dc4ff1f10d4309fd89f838e0dfae63",
+      "classification": "measurement",
+      "metricIds": [
+        "other6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Two education-related LRS lines totalled $1.05 billion in August 2026.takeaway",
+      "offset": 42,
+      "number": "1,047.36",
+      "fieldSha256": "e6c871db9ca765e6b08c3c3fd10b887f242d17e094115c7074d62dce6d82e01c",
+      "classification": "measurement",
+      "metricIds": [
+        "augCombinedEducation"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Two education-related LRS lines totalled $1.05 billion in August 2026.takeaway",
+      "offset": 69,
+      "number": "2026",
+      "fieldSha256": "e6c871db9ca765e6b08c3c3fd10b887f242d17e094115c7074d62dce6d82e01c",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Two education-related LRS lines totalled $1.05 billion in August 2026.takeaway",
+      "offset": 78,
+      "number": "38.2",
+      "fieldSha256": "e6c871db9ca765e6b08c3c3fd10b887f242d17e094115c7074d62dce6d82e01c",
+      "classification": "measurement",
+      "metricIds": [
+        "augEducationShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Two education-related LRS lines totalled $1.05 billion in August 2026.detail",
+      "offset": 20,
+      "number": "191.84",
+      "fieldSha256": "a888e304d4cfca7b8683df84b65e6959a874fbec79767805c722860e72791a05",
+      "classification": "measurement",
+      "metricIds": [
+        "augStudies"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Two education-related LRS lines totalled $1.05 billion in August 2026.detail",
+      "offset": 65,
+      "number": "855.52",
+      "fieldSha256": "a888e304d4cfca7b8683df84b65e6959a874fbec79767805c722860e72791a05",
+      "classification": "measurement",
+      "metricIds": [
+        "augEducation"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Two education-related LRS lines totalled $1.05 billion in August 2026.howToRead",
+      "offset": 98,
+      "number": "2026",
+      "fieldSha256": "81750f2ed2675f821244c2391c9c497ec8a2e083b32636f002d61cf501bfbaa7",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Capital transfers added $1.03 billion while other LRS purposes fell by $491 million.detail",
+      "offset": 69,
+      "number": "1.03",
+      "fieldSha256": "03efa6dab033a92b27f8d7c551b6761baca5a6a689118411547a40429681086e",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalChangeBillion"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.Capital transfers added $1.03 billion while other LRS purposes fell by $491 million.detail",
+      "offset": 135,
+      "number": "491",
+      "fieldSha256": "03efa6dab033a92b27f8d7c551b6761baca5a6a689118411547a40429681086e",
+      "classification": "measurement",
+      "metricIds": [
+        "noncapitalDecrease"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.Capital transfers added $1.03 billion while other LRS purposes fell by $491 million.detail",
+      "offset": 178,
+      "number": "538",
+      "fieldSha256": "03efa6dab033a92b27f8d7c551b6761baca5a6a689118411547a40429681086e",
+      "classification": "measurement",
+      "metricIds": [
+        "headlineChange"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.Resident investment in foreign equities, deposits, and property has more than doubled since FY22 to $3.93 billion.takeaway",
+      "offset": 45,
+      "number": "3,933.79",
+      "fieldSha256": "4e24edad05fb21efa1c75e0ef5883542e473644c7590790cc18de6b9a59794b5",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident investment in foreign equities, deposits, and property has more than doubled since FY22 to $3.93 billion.takeaway",
+      "offset": 67,
+      "number": "2025-26",
+      "fieldSha256": "4e24edad05fb21efa1c75e0ef5883542e473644c7590790cc18de6b9a59794b5",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident investment in foreign equities, deposits, and property has more than doubled since FY22 to $3.93 billion.takeaway",
+      "offset": 85,
+      "number": "1,141.21",
+      "fieldSha256": "4e24edad05fb21efa1c75e0ef5883542e473644c7590790cc18de6b9a59794b5",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalFY2020"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident investment in foreign equities, deposits, and property has more than doubled since FY22 to $3.93 billion.takeaway",
+      "offset": 107,
+      "number": "2019-20",
+      "fieldSha256": "4e24edad05fb21efa1c75e0ef5883542e473644c7590790cc18de6b9a59794b5",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Resident investment in foreign equities, deposits, and property has more than doubled since FY22 to $3.93 billion.detail",
+      "offset": 25,
+      "number": "2,652.01",
+      "fieldSha256": "8dab669febe3d3774f52e2d363d2bcb7351f879e3d195f5e2f89006979720338",
+      "classification": "measurement",
+      "metricIds": [
+        "equityFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.March takes an outsized share of annual capital transfers.takeaway",
+      "offset": 21,
+      "number": "17",
+      "fieldSha256": "1883cdda85e59beda791157e2bfe71b09175a0b28cf576107a4ed3e7b13d6c9d",
+      "classification": "measurement",
+      "metricIds": [
+        "focused:seasonal_allocation_share:11.capital"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.March takes an outsized share of annual capital transfers.takeaway",
+      "offset": 87,
+      "number": "14",
+      "fieldSha256": "1883cdda85e59beda791157e2bfe71b09175a0b28cf576107a4ed3e7b13d6c9d",
+      "classification": "measurement",
+      "metricIds": [
+        "focused:seasonal_allocation_share:4.studies"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.March takes an outsized share of annual capital transfers.detail",
+      "offset": 92,
+      "number": "2022-23",
+      "fieldSha256": "b33d8ffedd44b12565c8dd73f6a2ed7a1443298f1df9bd5a752d36168b77d1e4",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "explainers.March takes an outsized share of annual capital transfers.detail",
+      "offset": 105,
+      "number": "2025-26",
+      "fieldSha256": "b33d8ffedd44b12565c8dd73f6a2ed7a1443298f1df9bd5a752d36168b77d1e4",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "explainers.March takes an outsized share of annual capital transfers.howToRead",
+      "offset": 132,
+      "number": "100",
+      "fieldSha256": "8ac351743f356c4c03646f029f5ee5652788bbb0a035811770fb0afd728eec3e",
+      "classification": "measurement",
+      "metricIds": [
+        "unit100"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 30,
+      "number": "347.8",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1474"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 49,
+      "number": "2022-23",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 62,
+      "number": "294.3",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1477"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 85,
+      "number": "2025",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 97,
+      "number": "2026",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 126,
+      "number": "104.7",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1486"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 144,
+      "number": "257.5",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1489"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 175,
+      "number": "1,138.5",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1470"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.After the TCS changes, family transfers were lower while travel and equity flows were higher.detail",
+      "offset": 195,
+      "number": "1,372.9",
+      "fieldSha256": "da41a666873cacdb8a4577ede0400da252ff1ad1dd1d4f70cf377cd60729e9d2",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1473"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.takeaway",
+      "offset": 25,
+      "number": "250,000",
+      "fieldSha256": "e0c9f897bab939c49596c0c9baeeeb75cc5bb24227b2c9c1864a438b868ad33f",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.takeaway",
+      "offset": 46,
+      "number": "159.13",
+      "fieldSha256": "e0c9f897bab939c49596c0c9baeeeb75cc5bb24227b2c9c1864a438b868ad33f",
+      "classification": "measurement",
+      "metricIds": [
+        "cell132"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.takeaway",
+      "offset": 66,
+      "number": "2015",
+      "fieldSha256": "e0c9f897bab939c49596c0c9baeeeb75cc5bb24227b2c9c1864a438b868ad33f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.takeaway",
+      "offset": 77,
+      "number": "237.95",
+      "fieldSha256": "e0c9f897bab939c49596c0c9baeeeb75cc5bb24227b2c9c1864a438b868ad33f",
+      "classification": "measurement",
+      "metricIds": [
+        "cell263"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.takeaway",
+      "offset": 99,
+      "number": "2026",
+      "fieldSha256": "e0c9f897bab939c49596c0c9baeeeb75cc5bb24227b2c9c1864a438b868ad33f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.detail",
+      "offset": 131,
+      "number": "78.82",
+      "fieldSha256": "e652b891e6461fcd9bc24b0234bd14a02cac5319dc12f23e26e3f8f7a7922b12",
+      "classification": "measurement",
+      "metricIds": [
+        "ceilingDifference"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.detail",
+      "offset": 146,
+      "number": "49.5",
+      "fieldSha256": "e652b891e6461fcd9bc24b0234bd14a02cac5319dc12f23e26e3f8f7a7922b12",
+      "classification": "measurement",
+      "metricIds": [
+        "ceilingGrowth"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.howToRead",
+      "offset": 65,
+      "number": "50",
+      "fieldSha256": "255f8999c2723ee8653de2e2d026019658fac34d25180d77e71f8a3cc7e0a443",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "explainers.Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026.howToRead",
+      "offset": 173,
+      "number": "2020",
+      "fieldSha256": "255f8999c2723ee8653de2e2d026019658fac34d25180d77e71f8a3cc7e0a443",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "notes.title",
+      "offset": 35,
+      "number": "250,000",
+      "fieldSha256": "71f3207dd9e326522f4615322c313790a58a4e317edb27f770450d5a678ae690",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "notes.standfirst",
+      "offset": 25,
+      "number": "50",
+      "fieldSha256": "c7cccb242ba7e36c8214004649ce5cb030572f35b490d4bd1c73380cd7ccc592",
+      "classification": "policy",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Re-read in full context against the pinned statutory/RBI chronology. Proposal remains reported, not implemented; Rs50 lakh is a proposed cap, not measured data. Dates, ceiling ladder, tax rates/thresholds, Section80E/394 and 180-day rule retain the already verified legal meaning."
+    },
+    {
+      "field": "notes.short.body",
+      "offset": 23,
+      "number": "28.98",
+      "fieldSha256": "33d1f74930309ad111201b31bfaa7d69fc5483846526f1548cf3996942d8355d",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "notes.short.body",
+      "offset": 42,
+      "number": "2025-26",
+      "fieldSha256": "33d1f74930309ad111201b31bfaa7d69fc5483846526f1548cf3996942d8355d",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "notes.short.body",
+      "offset": 87,
+      "number": "2.1",
+      "fieldSha256": "33d1f74930309ad111201b31bfaa7d69fc5483846526f1548cf3996942d8355d",
+      "classification": "measurement",
+      "metricIds": [
+        "businessPilgrimageShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "notes.short.body",
+      "offset": 108,
+      "number": "2026",
+      "fieldSha256": "33d1f74930309ad111201b31bfaa7d69fc5483846526f1548cf3996942d8355d",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "notes.short.body",
+      "offset": 199,
+      "number": "1.03",
+      "fieldSha256": "33d1f74930309ad111201b31bfaa7d69fc5483846526f1548cf3996942d8355d",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalChangeBillion"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "notes.short.body",
+      "offset": 265,
+      "number": "491",
+      "fieldSha256": "33d1f74930309ad111201b31bfaa7d69fc5483846526f1548cf3996942d8355d",
+      "classification": "measurement",
+      "metricIds": [
+        "noncapitalDecrease"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "notes.caveats[0]",
+      "offset": 16,
+      "number": "50",
+      "fieldSha256": "dffc4872c01ec331f9b742d125bd175847d0f695d81ba8933de1fe10e854e54a",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "notes.caveats[1]",
+      "offset": 51,
+      "number": "2026",
+      "fieldSha256": "ae372fc44f868e02b44e74e8b18d722e12e5a5b39fa03bc0b7e491e65aa2b1ba",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "notes.caveats[5]",
+      "offset": 13,
+      "number": "2008-09",
+      "fieldSha256": "60f9b4143d6183b399b8f4df9b528a179bc046c1172206cda7c92c7c0c948265",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "notes.caveats[5]",
+      "offset": 37,
+      "number": "752",
+      "fieldSha256": "60f9b4143d6183b399b8f4df9b528a179bc046c1172206cda7c92c7c0c948265",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.question",
+      "offset": 35,
+      "number": "250,000",
+      "fieldSha256": "71f3207dd9e326522f4615322c313790a58a4e317edb27f770450d5a678ae690",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.keyNumbers[0].value",
+      "offset": 1,
+      "number": "28.98",
+      "fieldSha256": "ab2d4eead89fa307b2f25d7c9ba9f7ce32830fa8b5f2144bfbb8a03ad3532a44",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.keyNumbers[0].label",
+      "offset": 33,
+      "number": "2025-26",
+      "fieldSha256": "1cbda977ab97139f546e669cfd1c1dd91bbef63608ba2eed47649a325a9fb77c",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.keyNumbers[1].value",
+      "offset": 1,
+      "number": "1.05",
+      "fieldSha256": "e2088d8af112cd0920328bc82ce25fea7f44e190286c8cfbbd87c5c9d7232eb7",
+      "classification": "measurement",
+      "metricIds": [
+        "augCombinedEducationB"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.keyNumbers[1].label",
+      "offset": 40,
+      "number": "2026",
+      "fieldSha256": "41ae81acd8795172b1096b35a1f517f541a47caa88d7a60f8ff4c2627c7eab1e",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.keyNumbers[2].value",
+      "offset": 0,
+      "number": "2.1",
+      "fieldSha256": "5fb4b655a47dfdb0540e96b7c420090b2eaf34af46122e6325182d4ee778a077",
+      "classification": "measurement",
+      "metricIds": [
+        "businessPilgrimageShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.keyNumbers[3].value",
+      "offset": 0,
+      "number": "109.6",
+      "fieldSha256": "587d04a745518eddf6b2e22d90e509aef21a86a22f9411aceaec68674cac7876",
+      "classification": "measurement",
+      "metricIds": [
+        "equityYoY"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.keyNumbers[3].label",
+      "offset": 56,
+      "number": "27",
+      "fieldSha256": "088ecafa0ac7639f359d4f10a84811cd47bddeed3cc6521b6a1868f80d63bf07",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].title",
+      "offset": 26,
+      "number": "2.74",
+      "fieldSha256": "e7f2d8aefb4d2a8b893d1d99a80422dd8d74fef34b6ca2ef04edc1712d0f8767",
+      "classification": "measurement",
+      "metricIds": [
+        "aug2026total"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].title",
+      "offset": 49,
+      "number": "2026",
+      "fieldSha256": "e7f2d8aefb4d2a8b893d1d99a80422dd8d74fef34b6ca2ef04edc1712d0f8767",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].subtitle",
+      "offset": 102,
+      "number": "2008",
+      "fieldSha256": "8c1f8bcfc0af3841acf5561bed61d53ae37bbb0724eb6056c7e3a30f80c89aba",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].subtitle",
+      "offset": 117,
+      "number": "2026",
+      "fieldSha256": "8c1f8bcfc0af3841acf5561bed61d53ae37bbb0724eb6056c7e3a30f80c89aba",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].subtitle",
+      "offset": 140,
+      "number": "19",
+      "fieldSha256": "8c1f8bcfc0af3841acf5561bed61d53ae37bbb0724eb6056c7e3a30f80c89aba",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].why",
+      "offset": 19,
+      "number": "221",
+      "fieldSha256": "0368e03cb53594af8c3472164cc7f334a784f55e2f02d5405354c3468e99af60",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].why",
+      "offset": 44,
+      "number": "2008",
+      "fieldSha256": "0368e03cb53594af8c3472164cc7f334a784f55e2f02d5405354c3468e99af60",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].why",
+      "offset": 59,
+      "number": "2026",
+      "fieldSha256": "0368e03cb53594af8c3472164cc7f334a784f55e2f02d5405354c3468e99af60",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].watch",
+      "offset": 9,
+      "number": "2015",
+      "fieldSha256": "83024dc243c53013da480c387ce7ceb45a4b835bdb74446361724ef8cbaf76b1",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[0].watch",
+      "offset": 95,
+      "number": "2023",
+      "fieldSha256": "83024dc243c53013da480c387ce7ceb45a4b835bdb74446361724ef8cbaf76b1",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[1].title",
+      "offset": 28,
+      "number": "29",
+      "fieldSha256": "5d893d4af7052c726d5a2876b5fe7c703ce03ef7cddee3967e2602d9f368bbfb",
+      "classification": "measurement",
+      "metricIds": [
+        "lrsFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "registry.visualPlan[1].title",
+      "offset": 44,
+      "number": "26",
+      "fieldSha256": "5d893d4af7052c726d5a2876b5fe7c703ce03ef7cddee3967e2602d9f368bbfb",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "registry.visualPlan[1].title",
+      "offset": 79,
+      "number": "155",
+      "fieldSha256": "5d893d4af7052c726d5a2876b5fe7c703ce03ef7cddee3967e2602d9f368bbfb",
+      "classification": "measurement",
+      "metricIds": [
+        "privateTransfersCredit"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "registry.visualPlan[1].subtitle",
+      "offset": 38,
+      "number": "2025-26",
+      "fieldSha256": "fdda01b5d53f474fd444783acaf273331fa055702f516cdca29406fcbbb2ac06",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "registry.visualPlan[2].title",
+      "offset": 39,
+      "number": "97.6",
+      "fieldSha256": "03481e20d5331f92576b1fc34a9d09178e5d3d487f27d53f6c7cb139703088df",
+      "classification": "measurement",
+      "metricIds": [
+        "educationOtherShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].subtitle",
+      "offset": 53,
+      "number": "2026",
+      "fieldSha256": "f8b4f4c35c1272921ffb24946add62c63ca5a3db63eea5608ed212e572b38458",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].subtitle",
+      "offset": 76,
+      "number": "19",
+      "fieldSha256": "f8b4f4c35c1272921ffb24946add62c63ca5a3db63eea5608ed212e572b38458",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].why",
+      "offset": 43,
+      "number": "2026",
+      "fieldSha256": "348a41caf165b831fdb1dcd988844b9e1021ff78bb74435479068536e4d1c3ea",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].why",
+      "offset": 87,
+      "number": "50",
+      "fieldSha256": "348a41caf165b831fdb1dcd988844b9e1021ff78bb74435479068536e4d1c3ea",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].watch",
+      "offset": 41,
+      "number": "115.69",
+      "fieldSha256": "525ea92649691a75a1f3603858ac3e26a54f7e463bef3b34540f71e778bc6f11",
+      "classification": "measurement",
+      "metricIds": [
+        "business6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].watch",
+      "offset": 74,
+      "number": "52.15",
+      "fieldSha256": "525ea92649691a75a1f3603858ac3e26a54f7e463bef3b34540f71e778bc6f11",
+      "classification": "measurement",
+      "metricIds": [
+        "pilgrimage6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].watch",
+      "offset": 111,
+      "number": "2.1",
+      "fieldSha256": "525ea92649691a75a1f3603858ac3e26a54f7e463bef3b34540f71e778bc6f11",
+      "classification": "measurement",
+      "metricIds": [
+        "businessPilgrimageShare"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[2].watch",
+      "offset": 124,
+      "number": "7,995.32",
+      "fieldSha256": "525ea92649691a75a1f3603858ac3e26a54f7e463bef3b34540f71e778bc6f11",
+      "classification": "measurement",
+      "metricIds": [
+        "travel6m"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].title",
+      "offset": 42,
+      "number": "1.05",
+      "fieldSha256": "89937e1341d916e90ef6e79bbac50fcd373da97c07e37018624bc6dbe1361f47",
+      "classification": "measurement",
+      "metricIds": [
+        "augCombinedEducationB"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].title",
+      "offset": 65,
+      "number": "2026",
+      "fieldSha256": "89937e1341d916e90ef6e79bbac50fcd373da97c07e37018624bc6dbe1361f47",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].subtitle",
+      "offset": 63,
+      "number": "1.9",
+      "fieldSha256": "58e485801a9081138bd787d790dc7e7976801b09718a4eb91565e8d67c3a339f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].subtitle",
+      "offset": 91,
+      "number": "1.6.4",
+      "fieldSha256": "58e485801a9081138bd787d790dc7e7976801b09718a4eb91565e8d67c3a339f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].subtitle",
+      "offset": 124,
+      "number": "2024",
+      "fieldSha256": "58e485801a9081138bd787d790dc7e7976801b09718a4eb91565e8d67c3a339f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].subtitle",
+      "offset": 136,
+      "number": "2026",
+      "fieldSha256": "58e485801a9081138bd787d790dc7e7976801b09718a4eb91565e8d67c3a339f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].read",
+      "offset": 36,
+      "number": "2026",
+      "fieldSha256": "72afecec1cf665601e6fc4fd70baa3f66bf95f5846d01da9f3924d79401cd5a6",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].watch",
+      "offset": 10,
+      "number": "2026",
+      "fieldSha256": "6fe10e2b6e7499191f179149c500f7028f853fa295010e0a058544b36ef3f15f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].watch",
+      "offset": 21,
+      "number": "1.9",
+      "fieldSha256": "6fe10e2b6e7499191f179149c500f7028f853fa295010e0a058544b36ef3f15f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].watch",
+      "offset": 30,
+      "number": "191.84",
+      "fieldSha256": "6fe10e2b6e7499191f179149c500f7028f853fa295010e0a058544b36ef3f15f",
+      "classification": "measurement",
+      "metricIds": [
+        "augStudies"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].watch",
+      "offset": 56,
+      "number": "1.6.4",
+      "fieldSha256": "6fe10e2b6e7499191f179149c500f7028f853fa295010e0a058544b36ef3f15f",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].watch",
+      "offset": 67,
+      "number": "855.52",
+      "fieldSha256": "6fe10e2b6e7499191f179149c500f7028f853fa295010e0a058544b36ef3f15f",
+      "classification": "measurement",
+      "metricIds": [
+        "augEducation"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[3].watch",
+      "offset": 120,
+      "number": "1,047.36",
+      "fieldSha256": "6fe10e2b6e7499191f179149c500f7028f853fa295010e0a058544b36ef3f15f",
+      "classification": "measurement",
+      "metricIds": [
+        "augCombinedEducation"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[4].title",
+      "offset": 25,
+      "number": "1.03",
+      "fieldSha256": "7666fcbfbafa9e85d47c57a561ffa49e2f93e206ce4bc8032eed7d795c613aa8",
+      "classification": "measurement",
+      "metricIds": [
+        "capitalChangeBillion"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "registry.visualPlan[4].title",
+      "offset": 72,
+      "number": "491",
+      "fieldSha256": "7666fcbfbafa9e85d47c57a561ffa49e2f93e206ce4bc8032eed7d795c613aa8",
+      "classification": "measurement",
+      "metricIds": [
+        "noncapitalDecrease"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "registry.visualPlan[4].subtitle",
+      "offset": 55,
+      "number": "2025",
+      "fieldSha256": "105be5d455bc0c9ed316f4ff85888fa6c5a815534808cc1a7738e0d203a9922b",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "registry.visualPlan[4].subtitle",
+      "offset": 76,
+      "number": "2026",
+      "fieldSha256": "105be5d455bc0c9ed316f4ff85888fa6c5a815534808cc1a7738e0d203a9922b",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "registry.visualPlan[4].subtitle",
+      "offset": 94,
+      "number": "19",
+      "fieldSha256": "105be5d455bc0c9ed316f4ff85888fa6c5a815534808cc1a7738e0d203a9922b",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "registry.visualPlan[5].title",
+      "offset": 94,
+      "number": "22",
+      "fieldSha256": "27bff9fe09067fafca57da90d71dadd0970c056ccc957be5a3b771256c686f43",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[5].title",
+      "offset": 101,
+      "number": "3.93",
+      "fieldSha256": "27bff9fe09067fafca57da90d71dadd0970c056ccc957be5a3b771256c686f43",
+      "classification": "measurement",
+      "metricIds": [
+        "cell281"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[5].subtitle",
+      "offset": 50,
+      "number": "2008-09",
+      "fieldSha256": "bed59f282b81658e70f808ba2d6596edebf18fd74a87948945bb52cc6706c385",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[5].subtitle",
+      "offset": 63,
+      "number": "2025-26",
+      "fieldSha256": "bed59f282b81658e70f808ba2d6596edebf18fd74a87948945bb52cc6706c385",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[5].subtitle",
+      "offset": 89,
+      "number": "19",
+      "fieldSha256": "bed59f282b81658e70f808ba2d6596edebf18fd74a87948945bb52cc6706c385",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[5].watch",
+      "offset": 35,
+      "number": "2,652.01",
+      "fieldSha256": "f8a530b156c3d1e6b1ba1d16182e1218b9dfd1652b29d2a3e04011c625814374",
+      "classification": "measurement",
+      "metricIds": [
+        "equityFY2026"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[5].watch",
+      "offset": 57,
+      "number": "26",
+      "fieldSha256": "f8a530b156c3d1e6b1ba1d16182e1218b9dfd1652b29d2a3e04011c625814374",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[6].subtitle",
+      "offset": 65,
+      "number": "2022-23",
+      "fieldSha256": "e6ed70817411f1cfd4ffd6cd40d5a84148e66a502ede3868089d6c65f2731b8e",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "registry.visualPlan[6].subtitle",
+      "offset": 78,
+      "number": "2025-26",
+      "fieldSha256": "e6ed70817411f1cfd4ffd6cd40d5a84148e66a502ede3868089d6c65f2731b8e",
+      "classification": "period/report metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; data/raw/rbi-dbie-lrs-2026/manifest.json",
+      "reviewNote": "Reviewed date, fiscal-year alias, report identifier or documented duplicate-source date against the raw observation dates and source receipts. FY26 is April 2025-March 2026; matched windows are April-August 2025 and 2026; normalized calendar uses four complete FY2022-23 through FY2025-26."
+    },
+    {
+      "field": "registry.visualPlan[6].read",
+      "offset": 151,
+      "number": "100",
+      "fieldSha256": "793b57a244ff6b1b6337666828493a0ad02c29441ec1dca6aa2fdaecbed92110",
+      "classification": "measurement",
+      "metricIds": [
+        "unit100"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json; raw CSV row selectors and explicit derived metrics in this inventory",
+      "reviewNote": "Read in the complete focused article/explainer/registry context. Explicit intended source measure selected; independent raw-cell check validates underlying observations and transformation."
+    },
+    {
+      "field": "registry.visualPlan[7].subtitle",
+      "offset": 116,
+      "number": "2026",
+      "fieldSha256": "a69edf3679ff01affc48c8bc9403d35fd6df55bb46bf72bb37aa273b46c3e03b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].subtitle",
+      "offset": 129,
+      "number": "2022",
+      "fieldSha256": "a69edf3679ff01affc48c8bc9403d35fd6df55bb46bf72bb37aa273b46c3e03b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].subtitle",
+      "offset": 144,
+      "number": "2026",
+      "fieldSha256": "a69edf3679ff01affc48c8bc9403d35fd6df55bb46bf72bb37aa273b46c3e03b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].subtitle",
+      "offset": 167,
+      "number": "19",
+      "fieldSha256": "a69edf3679ff01affc48c8bc9403d35fd6df55bb46bf72bb37aa273b46c3e03b",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].why",
+      "offset": 18,
+      "number": "20",
+      "fieldSha256": "6e41f7c919c4c006f4c456b05a9d82831a88ff7c1f130779de2d6cfdce50f0f3",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].why",
+      "offset": 106,
+      "number": "2023",
+      "fieldSha256": "6e41f7c919c4c006f4c456b05a9d82831a88ff7c1f130779de2d6cfdce50f0f3",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].watch",
+      "offset": 33,
+      "number": "347.8",
+      "fieldSha256": "95642d6483cb58ab3c5c40b802710b14adfe71cd7d1485ffd7fc595ae1b2e1d5",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1474"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].watch",
+      "offset": 58,
+      "number": "23",
+      "fieldSha256": "95642d6483cb58ab3c5c40b802710b14adfe71cd7d1485ffd7fc595ae1b2e1d5",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].watch",
+      "offset": 65,
+      "number": "294.3",
+      "fieldSha256": "95642d6483cb58ab3c5c40b802710b14adfe71cd7d1485ffd7fc595ae1b2e1d5",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1477"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].watch",
+      "offset": 153,
+      "number": "104.7",
+      "fieldSha256": "95642d6483cb58ab3c5c40b802710b14adfe71cd7d1485ffd7fc595ae1b2e1d5",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1486"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[7].watch",
+      "offset": 171,
+      "number": "257.5",
+      "fieldSha256": "95642d6483cb58ab3c5c40b802710b14adfe71cd7d1485ffd7fc595ae1b2e1d5",
+      "classification": "measurement",
+      "metricIds": [
+        "cell1489"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].title",
+      "offset": 41,
+      "number": "250,000",
+      "fieldSha256": "a29d3fe2a0598b65ebe935c88730a3a14bd0269a05327e5d1184221d6dfbaaa0",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].title",
+      "offset": 67,
+      "number": "1.59",
+      "fieldSha256": "a29d3fe2a0598b65ebe935c88730a3a14bd0269a05327e5d1184221d6dfbaaa0",
+      "classification": "measurement",
+      "metricIds": [
+        "ceiling2015Crore"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].title",
+      "offset": 81,
+      "number": "2015",
+      "fieldSha256": "a29d3fe2a0598b65ebe935c88730a3a14bd0269a05327e5d1184221d6dfbaaa0",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].title",
+      "offset": 92,
+      "number": "2.38",
+      "fieldSha256": "a29d3fe2a0598b65ebe935c88730a3a14bd0269a05327e5d1184221d6dfbaaa0",
+      "classification": "measurement",
+      "metricIds": [
+        "ceiling2026Crore"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].title",
+      "offset": 113,
+      "number": "2026",
+      "fieldSha256": "a29d3fe2a0598b65ebe935c88730a3a14bd0269a05327e5d1184221d6dfbaaa0",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].subtitle",
+      "offset": 25,
+      "number": "250,000",
+      "fieldSha256": "0737b83b937a0410a3efddb397a9a5a94279c1c344eb82c03058d74f22e074b1",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].subtitle",
+      "offset": 69,
+      "number": "50",
+      "fieldSha256": "0737b83b937a0410a3efddb397a9a5a94279c1c344eb82c03058d74f22e074b1",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].subtitle",
+      "offset": 121,
+      "number": "2015",
+      "fieldSha256": "0737b83b937a0410a3efddb397a9a5a94279c1c344eb82c03058d74f22e074b1",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].subtitle",
+      "offset": 136,
+      "number": "2026",
+      "fieldSha256": "0737b83b937a0410a3efddb397a9a5a94279c1c344eb82c03058d74f22e074b1",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].read",
+      "offset": 40,
+      "number": "250,000",
+      "fieldSha256": "918f8af8038bf585d6394eade47da9340ef838ec91018ae5439ef38676403197",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].read",
+      "offset": 116,
+      "number": "50",
+      "fieldSha256": "918f8af8038bf585d6394eade47da9340ef838ec91018ae5439ef38676403197",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].read",
+      "offset": 135,
+      "number": "7-10",
+      "fieldSha256": "918f8af8038bf585d6394eade47da9340ef838ec91018ae5439ef38676403197",
+      "classification": "policy",
+      "metricIds": [
+        "policy"
+      ],
+      "status": "reviewed",
+      "source": "scripts/stories/lrs-controls/policy-evidence.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].watch",
+      "offset": 122,
+      "number": "78.82",
+      "fieldSha256": "612e0d99e21556953a30c22e758a68d6ab4a904c227b910791ce42c699b65eb5",
+      "classification": "measurement",
+      "metricIds": [
+        "ceilingDifference"
+      ],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    },
+    {
+      "field": "registry.visualPlan[8].watch",
+      "offset": 144,
+      "number": "2015",
+      "fieldSha256": "612e0d99e21556953a30c22e758a68d6ab4a904c227b910791ce42c699b65eb5",
+      "classification": "period/report/source metadata",
+      "metricIds": [],
+      "status": "reviewed",
+      "source": "data/audits/lrs-controls/independent-cell-audit.json",
+      "reviewNote": "Original full field read in editorial audit; changed field invalidates all its occurrences. Periods/report identifiers verified against source date coverage and policy chronology."
+    }
+  ],
+  "publicationDecision": "ready: live RBI source confirmation and numeric gates pass; annual headline conflict disclosed"
+}

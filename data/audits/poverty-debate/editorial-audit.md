@@ -1,0 +1,56 @@
+# Poverty debate: editorial and evidence audit, 30 October 2026
+
+The numerical audit covers twenty-three current artifacts, 621 numeric data cells and thirty-one frozen source-file hashes. The source reader is independent of the builder and does not consume its summary. The current claim ledger inventories 824 numeric occurrences across 402 text surfaces, including all explainer fields, notes, chart titles/subtitles/hints and key numbers. Each occurrence retains a selected source, rather than an unrelated list of matching values. Text hashes lock the reviewed meaning, population, unit and time basis. These checks do not turn modelled survey estimates into exact measurements.
+
+## Material corrections
+
+- The 2021 PPP Societal Poverty Line uses `max(3, 1.30 + 0.5 × median)`. The article's 1.40 and the audit prompt's 1.50 were both wrong. The frozen PIP methodology and national survey rows agree. The 2011 societal line is 3.23, not 3.33.
+- Survey Prosperity Gaps are 9.70 in 1993, 7.67 in 2011 and 5.36 in 2022, not 8.40, 6.99 and 5.20. The measure averages individual ratios and is not a uniform multiplier for an average Indian or every resident of a state.
+- The frozen API gives 79.98% below the 2021 PPP upper-middle-income line in the 2023 survey, against 79.81% under the old line. Earlier prose said 79.71% and 79.13%. The PIP DTA used here has only the 3-dollar headcount; it does not provide a conflicting 8.30-dollar observation.
+- Kerala's atlas headcounts are 5.2% at 4.20 dollars and 60.6% at 8.30 dollars. Tamil Nadu is 64.0% at 8.30 dollars. Earlier prose had 2.7%, 59.3% and 62.6%. The builder already produced the correct source values; the prior verifier failed to cover these prose occurrences.
+- Rupee illustrations now use the unrounded national PPP and CPI fields, with human rounding in prose. The 8.30-dollar equivalent is about Rs 187 daily, not Rs 188. A national PPP factor is not replaced by invented rural and urban factors.
+- Removed the calibrated, unfrozen fractile welfare reconstruction and its unsupported precision. Published rural MPCE rises from Rs 4,122 to Rs 4,247; urban MPCE rises from Rs 6,996 to Rs 7,078. The denominator for the percentage boost is spending without imputation. Free health services and education-fee waivers are excluded by MoSPI's published method.
+- Corrected the EUS-to-PLFS model labels. The 17.5% Tendulkar estimate is a sector model applied within states, not the statewide LASSO model, which gives 18.3%. The survey-method chart changes poverty lines as well as model assumptions and is not a confidence interval or a pure questionnaire effect.
+- Removed claims that crossing 3 dollars establishes adequate calories; that the macro-survey gap proves gated-household nonresponse; that the employment comparison establishes a women-or-schooling mechanism; or that the jobs simulation proves an exclusive policy solution. Removed the hospital-bill numerical hypothetical and the stale IHDS-last-survey assertion.
+- Health-financing observations are dated 2022. NFHS-5 nutrition is dated 2019-21 and uses children under five. These are not concurrent measurements of the whole population. The unrelated NITI projection was removed from the mixed-source chart.
+
+## Audit of the auditors
+
+The old `poverty-source-audit.json` was an ingest summary. Its presence did not show that published cells were independently reconciled. The prior `verify_claims.py` checked selected long phrases against artifacts or that same summary, omitted several explainer fields and registry surfaces, and did not discover new numeric claims. It could report success while the wrong state, PPP, Prosperity Gap and denominator claims remained in the story.
+
+The replacement `audit_sources.py` reads the frozen CSV, DTA, XLSX, JSON and PDF files. It checks source hashes, unique source selections, time coverage, transformations and every numeric data cell, including duplicated map values. Tinbergen estimates are checked against named table rows and national columns in the frozen PDF. NFHS figures are checked against the parliamentary annex's India row. Schema checks remain separate from numerical reconciliation.
+
+`verify_claims.py` calls that independent auditor, inventories the complete textual surfaces, checks durable-to-built consistency and requires the occurrence-specific source selector recorded in `reviewed-surfaces.json`. The reviewed context check catches an edited interpretation even if the same number exists elsewhere. The ledger separates value provenance from the reviewed interpretation. `test_audit_mutations.py` tests a wrong artifact value, an altered raw hash, an edited textual context, a swapped scenario endpoint, a false peer estimate-type flag and a changed child share in an unplotted state through virtual reads, then restores positive audit reports without changing source files.
+
+## Omitted-data search and chart decisions
+
+`package-inventory.json` inventories seventy data files in the original four-chapter replication package, including workbook sheets, Stata columns and country-labelled India rows. There are zero inventory-read errors after fixing lazy Stata metadata initialization. The large global distribution file is represented by the frozen India extract used for this story; it is not described as new household microdata. The named `all_indicators_main_p21_v15.dta` is absent from this package, so no result is attributed to it.
+
+The added poverty-depth chart uses the same survey, threshold and release for its numerator and denominator: population-average poverty gap divided by headcount. The average shortfalls among those below the respective lines are about 13.2%, 15.9% and 34.1%. It adds intensity to the existing headcount and distribution views. The API inputs are rounded, so the resulting ratios are labelled approximate.
+
+Chapter-three exposure workbooks provide regional and income-group aggregates. They cannot be joined to Indian states as if they were local heat/flood observations. Chapter-one rural/urban figures are also global aggregates. Chapter-four 4.8/4.9 outputs provide global decomposition results, while several gender/sector percentile files omit country identifiers. They do not support an India-specific decomposition of the 22.17-point simulation. These are explicit exclusions, not charts silently left on the table.
+
+The original worker chart mixed hours with percentages and two poverty thresholds. It now plots only weekly hours at the 3-dollar threshold. Job structure remains in the prose, sourced to the separate 8.30-dollar tables. The state headcount chart no longer plots Prosperity Gap ratios beside percentages; the welfare chart no longer plots rupees beside percentage boosts; the counterfactual no longer plots percentage-point reductions as level columns; global shares no longer share an axis with millions of people. MoSPI and Tinbergen artifacts now use their correct source names in the chart footer.
+
+## Gates and limits
+
+The focused artifact validator passes twenty-three artifacts with zero errors and warnings. The focused explanation validator passes with zero failures and zero warnings. Parent-session release records hold the final static-build, rendered heading/chart-binding, source-link and desktop/mobile visual-review results. This record does not substitute a code-level check for that visual inspection.
+
+The source-level claim is reconciliation to the frozen primary published tables and official API payloads. Restricted underlying World Bank household microdata are not available in this package; its processed tables cannot be independently re-estimated all the way from household records. Removed or bounded claims are not counted as verified causal findings. Do not publish a claim of mathematical certainty or unrestricted microdata replication.
+
+
+## Added layers, 30 October 2026
+
+The published plan now has fifteen visuals. Three replacements make room for distinct questions: the multi-vintage percentile ladder becomes a static consumption-buffer sensitivity; the repeated state three-threshold grid becomes an age comparison within states; and the global-share visual becomes a common-year Asian comparison. Global headcounts and shares remain in prose. A fourth layer adds decile growth beside the measured Gini, before the separate long-run survey/National Accounts comparison. The previous artifacts remain in the reproducibility catalog and are still independently audited, even when no longer charted.
+
+The decile calculation uses PIP national India observations for 2022 and 2023, explicitly in the same `2022 - 2023` comparability spell, consumption welfare and the same PPP basis. Decile means are national mean times decile share divided by 0.1. Growth compares decile averages across repeated cross-sections; the people and survey coverage can differ.
+
+The buffer scenario reduces every 2024 welfare bin by exactly ten percent, preserves its population weight and recomputes headcounts. Baseline and scenario use the same bins and resolve to approximately 0.1 percentage point. This is neither a forecast nor a transition rate. At $4.20 the bin baseline is 14.9%, while the more precise national lineup is 14.88%; the two bases are explicitly distinguished.
+
+The Asian comparison selects India, Bangladesh, Indonesia, Viet Nam and Pakistan at the same three 2021 PPP thresholds in calendar 2024. The source's estimate-type flags are retained and independently checked: Indonesia is actual; the others are projection. The selection is neither exhaustive nor a single income group. Its rates cannot imply surveys conducted simultaneously.
+
+The original SPID workbook is frozen unchanged. The exact official download is byte-identical to the package workbook: 18,419,638 bytes, SHA256 `4a63361863218b1a58be1b116ba0425c52e5fcd2d5acc4d524da57b38f206a51`. The direct HCES rows are labelled year 2023 and reference year 2023.58. Each age comparison uses the same state, source year and welfare line. The plotted fourteen states compare `0-5` with `ALL`, and all ages includes the children. An independent all-thirty-six-state check, including unplotted states, supports the nationwide pattern; its source Excel cells and values are recorded in `independent-cell-audit.json`. No state weights, national child headcounts, adult boundaries or within-household allocations are invented.
+
+The source's `17+` group is deliberately unused because its boundary overlaps the separately printed `12-17` label in the methods paper. The SPID survey rows also differ from GSAP's calendar lineups. The article keeps the Prosperity Gap map on its GSAP basis and clearly labels the separate survey basis of the child comparison, without asserting an unverified cause of the difference.
+
+The expanded independent audit reconciles twenty-three artifacts, 621 numerical data cells and thirty-one frozen-file hashes. It also checks the peer estimate flags and the unplotted SPID child pattern. Selected-source occurrence locks have been renewed for the changed surfaces. Final focused-gate and mutation results are recorded in the machine-readable audit files; parent-session release records supply the rebuilt visual and heading-binding checks.

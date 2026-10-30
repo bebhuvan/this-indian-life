@@ -1,0 +1,749 @@
+{
+  "purpose": "Analysis-only ranked candidates; script does not change article/chart artifacts. Published additions and exclusions are recorded in editorial-audit.md; the published child cut uses0-5vsALL, not the older17+ comparison below.",
+  "sources": {
+    "SPID": {
+      "path": "/home/bhuvanesh.r/Documents/Bhuvan projects/THis Indian Life/data/raw/wb-3pr-2026/AM26_SPID_data.xlsx",
+      "sha256": "4a63361863218b1a58be1b116ba0425c52e5fcd2d5acc4d524da57b38f206a51",
+      "sheet": "Data",
+      "indiaRows": 1463,
+      "india2023Rows": 252,
+      "notFrozenInStory": false,
+      "subgroupsAvailable": [
+        "reg_agegr3",
+        "reg_gender",
+        "subnatid1",
+        "subnatidsurvey"
+      ],
+      "populationWeightsAvailable": false
+    },
+    "PIP": {
+      "path": "data/raw/wb-3pr-2026/pip_20260922_2021_01_02_PROD.dta",
+      "observations": [
+        1168,
+        1169
+      ],
+      "selector": "country_code=IND, reporting_level=national, year=2022 or 2023; fields mean,decile1..decile10,pg",
+      "comparisonSpell": "2022 - 2023",
+      "welfareType": "consumption",
+      "ppp": 19.468950271606,
+      "surveyComparability": 9,
+      "surveyYears": [
+        "2022-2023",
+        "2023-2024"
+      ]
+    },
+    "bins": {
+      "path": "data/raw/wb-3pr-2026/IND_GlobalDist1000bins_1990_2026.csv",
+      "selector": "year=2024 for sensitivity; year=2011 and2024 for two-order decomposition; code=IND; fields welf,pop,quantile"
+    }
+  },
+  "ageGap": {
+    "rows": [
+      {
+        "state": "Andaman and Nicobar",
+        "childExcelRow": 48935,
+        "olderExcelRow": 49043,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 1.611802,
+        "poor300_older17plus": 0.744472,
+        "poor420_child0_5": 7.409946000000001,
+        "poor420_older17plus": 4.119241,
+        "poor830_child0_5": 36.435803,
+        "poor830_older17plus": 30.722203999999998
+      },
+      {
+        "state": "Assam",
+        "childExcelRow": 48936,
+        "olderExcelRow": 49044,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 7.354186,
+        "poor300_older17plus": 3.864675,
+        "poor420_child0_5": 35.560045,
+        "poor420_older17plus": 23.828388,
+        "poor830_child0_5": 96.231106,
+        "poor830_older17plus": 90.339969
+      },
+      {
+        "state": "Delhi",
+        "childExcelRow": 48937,
+        "olderExcelRow": 49045,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.897703,
+        "poor300_older17plus": 0.29280500000000004,
+        "poor420_child0_5": 4.324229,
+        "poor420_older17plus": 2.1706570000000003,
+        "poor830_child0_5": 67.861301,
+        "poor830_older17plus": 49.667547
+      },
+      {
+        "state": "Goa",
+        "childExcelRow": 48938,
+        "olderExcelRow": 49046,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.520411,
+        "poor300_older17plus": 0.086616,
+        "poor420_child0_5": 1.785863,
+        "poor420_older17plus": 2.139631,
+        "poor830_child0_5": 42.763458,
+        "poor830_older17plus": 29.517464999999998
+      },
+      {
+        "state": "Gujarat",
+        "childExcelRow": 48939,
+        "olderExcelRow": 49047,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 3.580133,
+        "poor300_older17plus": 1.462697,
+        "poor420_child0_5": 27.503420000000002,
+        "poor420_older17plus": 14.212496,
+        "poor830_child0_5": 92.018758,
+        "poor830_older17plus": 78.335641
+      },
+      {
+        "state": "Haryana",
+        "childExcelRow": 48940,
+        "olderExcelRow": 49048,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.64022,
+        "poor300_older17plus": 0.154828,
+        "poor420_child0_5": 5.938902,
+        "poor420_older17plus": 2.957725,
+        "poor830_child0_5": 76.036361,
+        "poor830_older17plus": 59.87371099999999
+      },
+      {
+        "state": "Himachal Pradesh",
+        "childExcelRow": 48941,
+        "olderExcelRow": 49049,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.0,
+        "poor300_older17plus": 0.0,
+        "poor420_child0_5": 4.9425040000000005,
+        "poor420_older17plus": 2.027987,
+        "poor830_child0_5": 72.581828,
+        "poor830_older17plus": 50.440051
+      },
+      {
+        "state": "Karnataka",
+        "childExcelRow": 48942,
+        "olderExcelRow": 49050,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 3.0057259999999997,
+        "poor300_older17plus": 1.044453,
+        "poor420_child0_5": 17.206039,
+        "poor420_older17plus": 8.454365,
+        "poor830_child0_5": 80.068709,
+        "poor830_older17plus": 67.612157
+      },
+      {
+        "state": "Kerala",
+        "childExcelRow": 48943,
+        "olderExcelRow": 49051,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.43241699999999994,
+        "poor300_older17plus": 0.41340400000000005,
+        "poor420_child0_5": 7.102495,
+        "poor420_older17plus": 3.13358,
+        "poor830_child0_5": 75.821267,
+        "poor830_older17plus": 55.346227000000006
+      },
+      {
+        "state": "Lakshadweep",
+        "childExcelRow": 48944,
+        "olderExcelRow": 49052,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.40427500000000005,
+        "poor300_older17plus": 0.812814,
+        "poor420_child0_5": 6.87051,
+        "poor420_older17plus": 4.82003,
+        "poor830_child0_5": 69.299798,
+        "poor830_older17plus": 60.97899100000001
+      },
+      {
+        "state": "Maharashtra",
+        "childExcelRow": 48945,
+        "olderExcelRow": 49053,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 6.360461000000001,
+        "poor300_older17plus": 2.611148,
+        "poor420_child0_5": 30.821358999999998,
+        "poor420_older17plus": 16.548914,
+        "poor830_child0_5": 91.006318,
+        "poor830_older17plus": 80.18492
+      },
+      {
+        "state": "Manipur",
+        "childExcelRow": 48946,
+        "olderExcelRow": 49054,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 6.953656,
+        "poor300_older17plus": 3.555823,
+        "poor420_child0_5": 32.796763,
+        "poor420_older17plus": 22.782752000000002,
+        "poor830_child0_5": 94.916548,
+        "poor830_older17plus": 91.98524300000001
+      },
+      {
+        "state": "Meghalaya",
+        "childExcelRow": 48947,
+        "olderExcelRow": 49055,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 8.146227,
+        "poor300_older17plus": 4.658197,
+        "poor420_child0_5": 30.956019,
+        "poor420_older17plus": 18.675466,
+        "poor830_child0_5": 94.208771,
+        "poor830_older17plus": 85.098691
+      },
+      {
+        "state": "Mizoram",
+        "childExcelRow": 48948,
+        "olderExcelRow": 49056,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.28538600000000003,
+        "poor300_older17plus": 0.41033,
+        "poor420_child0_5": 7.210356,
+        "poor420_older17plus": 5.097937,
+        "poor830_child0_5": 65.98673000000001,
+        "poor830_older17plus": 63.896239
+      },
+      {
+        "state": "Nagaland",
+        "childExcelRow": 48949,
+        "olderExcelRow": 49057,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 4.126046,
+        "poor300_older17plus": 2.323381,
+        "poor420_child0_5": 18.194639000000002,
+        "poor420_older17plus": 12.575396,
+        "poor830_child0_5": 84.126771,
+        "poor830_older17plus": 77.512862
+      },
+      {
+        "state": "Orissa",
+        "childExcelRow": 48950,
+        "olderExcelRow": 49058,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 9.021275,
+        "poor300_older17plus": 3.9565219999999997,
+        "poor420_child0_5": 40.31108,
+        "poor420_older17plus": 26.120993,
+        "poor830_child0_5": 94.97102699999999,
+        "poor830_older17plus": 87.35660800000001
+      },
+      {
+        "state": "Punjab",
+        "childExcelRow": 48951,
+        "olderExcelRow": 49059,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.420724,
+        "poor300_older17plus": 0.09226100000000001,
+        "poor420_child0_5": 3.898873,
+        "poor420_older17plus": 1.6656109999999997,
+        "poor830_child0_5": 71.830382,
+        "poor830_older17plus": 56.301456
+      },
+      {
+        "state": "Rajasthan",
+        "childExcelRow": 48952,
+        "olderExcelRow": 49060,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 6.186965,
+        "poor300_older17plus": 2.2488390000000003,
+        "poor420_child0_5": 27.007753,
+        "poor420_older17plus": 13.826321,
+        "poor830_child0_5": 87.89805000000001,
+        "poor830_older17plus": 74.495085
+      },
+      {
+        "state": "Sikkim",
+        "childExcelRow": 48953,
+        "olderExcelRow": 49061,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.476653,
+        "poor300_older17plus": 0.46203700000000003,
+        "poor420_child0_5": 5.656522,
+        "poor420_older17plus": 3.2935100000000004,
+        "poor830_child0_5": 40.090818999999996,
+        "poor830_older17plus": 34.878721
+      },
+      {
+        "state": "Tamil Nadu",
+        "childExcelRow": 48954,
+        "olderExcelRow": 49062,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.385675,
+        "poor300_older17plus": 0.203214,
+        "poor420_child0_5": 4.9123,
+        "poor420_older17plus": 2.724416,
+        "poor830_child0_5": 74.157646,
+        "poor830_older17plus": 60.05175499999999
+      },
+      {
+        "state": "Tripura",
+        "childExcelRow": 48955,
+        "olderExcelRow": 49063,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.20371899999999998,
+        "poor300_older17plus": 0.026099,
+        "poor420_child0_5": 3.6907080000000003,
+        "poor420_older17plus": 1.3433169999999999,
+        "poor830_child0_5": 74.56036499999999,
+        "poor830_older17plus": 58.475564999999996
+      },
+      {
+        "state": "West Bengal",
+        "childExcelRow": 48956,
+        "olderExcelRow": 49064,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 3.27709,
+        "poor300_older17plus": 1.850911,
+        "poor420_child0_5": 21.502104,
+        "poor420_older17plus": 13.372784,
+        "poor830_child0_5": 89.65451399999999,
+        "poor830_older17plus": 81.473056
+      },
+      {
+        "state": "Arunachal Pradesh",
+        "childExcelRow": 48957,
+        "olderExcelRow": 49065,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 3.229392,
+        "poor300_older17plus": 1.975591,
+        "poor420_child0_5": 13.05849,
+        "poor420_older17plus": 10.025580000000001,
+        "poor830_child0_5": 75.17752800000001,
+        "poor830_older17plus": 68.738388
+      },
+      {
+        "state": "Bihar",
+        "childExcelRow": 48958,
+        "olderExcelRow": 49066,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 5.696563,
+        "poor300_older17plus": 3.6839999999999997,
+        "poor420_child0_5": 27.7449,
+        "poor420_older17plus": 20.23277,
+        "poor830_child0_5": 94.887946,
+        "poor830_older17plus": 89.977045
+      },
+      {
+        "state": "Chandigarh",
+        "childExcelRow": 48959,
+        "olderExcelRow": 49067,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.0,
+        "poor300_older17plus": 0.0,
+        "poor420_child0_5": 0.0,
+        "poor420_older17plus": 0.0,
+        "poor830_child0_5": 23.364499,
+        "poor830_older17plus": 9.606486
+      },
+      {
+        "state": "Chhattisgarh",
+        "childExcelRow": 48960,
+        "olderExcelRow": 49068,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 11.517837,
+        "poor300_older17plus": 6.727047,
+        "poor420_child0_5": 46.967664,
+        "poor420_older17plus": 30.593158,
+        "poor830_child0_5": 96.367598,
+        "poor830_older17plus": 90.724355
+      },
+      {
+        "state": "Jharkhand",
+        "childExcelRow": 48961,
+        "olderExcelRow": 49069,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 15.937538000000002,
+        "poor300_older17plus": 12.129799,
+        "poor420_child0_5": 48.290451000000004,
+        "poor420_older17plus": 39.238704,
+        "poor830_child0_5": 96.532099,
+        "poor830_older17plus": 91.54119200000001
+      },
+      {
+        "state": "Madhya Pradesh",
+        "childExcelRow": 48962,
+        "olderExcelRow": 49070,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 5.5759360000000004,
+        "poor300_older17plus": 2.09729,
+        "poor420_child0_5": 32.582418000000004,
+        "poor420_older17plus": 17.818837000000002,
+        "poor830_child0_5": 93.936566,
+        "poor830_older17plus": 85.250847
+      },
+      {
+        "state": "Puducherry",
+        "childExcelRow": 48963,
+        "olderExcelRow": 49071,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.0,
+        "poor300_older17plus": 0.063494,
+        "poor420_child0_5": 0.45531800000000006,
+        "poor420_older17plus": 0.265599,
+        "poor830_child0_5": 50.125494,
+        "poor830_older17plus": 38.351672
+      },
+      {
+        "state": "Uttar Pradesh",
+        "childExcelRow": 48964,
+        "olderExcelRow": 49072,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 3.4332590000000005,
+        "poor300_older17plus": 1.6959060000000001,
+        "poor420_child0_5": 29.505919000000002,
+        "poor420_older17plus": 17.929363000000002,
+        "poor830_child0_5": 94.798878,
+        "poor830_older17plus": 88.498562
+      },
+      {
+        "state": "Uttarakhand",
+        "childExcelRow": 48965,
+        "olderExcelRow": 49073,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 2.470009,
+        "poor300_older17plus": 0.784531,
+        "poor420_child0_5": 16.950227,
+        "poor420_older17plus": 8.420551,
+        "poor830_child0_5": 86.16136300000001,
+        "poor830_older17plus": 74.258097
+      },
+      {
+        "state": "Andhra Pradesh",
+        "childExcelRow": 48966,
+        "olderExcelRow": 49074,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 2.021756,
+        "poor300_older17plus": 0.504992,
+        "poor420_child0_5": 9.808088,
+        "poor420_older17plus": 3.76557,
+        "poor830_child0_5": 83.13439500000001,
+        "poor830_older17plus": 63.183957
+      },
+      {
+        "state": "Daman and Diu & Dadra and Nagar Haveli",
+        "childExcelRow": 48967,
+        "olderExcelRow": 49075,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.931242,
+        "poor300_older17plus": 0.8431869999999999,
+        "poor420_child0_5": 22.688608,
+        "poor420_older17plus": 13.918588000000002,
+        "poor830_child0_5": 85.98226700000001,
+        "poor830_older17plus": 78.81263899999999
+      },
+      {
+        "state": "Jammu and Kashmir",
+        "childExcelRow": 48968,
+        "olderExcelRow": 49076,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 2.382684,
+        "poor300_older17plus": 0.553795,
+        "poor420_child0_5": 21.400121,
+        "poor420_older17plus": 10.838644,
+        "poor830_child0_5": 82.646119,
+        "poor830_older17plus": 73.793362
+      },
+      {
+        "state": "Ladakh",
+        "childExcelRow": 48969,
+        "olderExcelRow": 49077,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.125003,
+        "poor300_older17plus": 0.032444,
+        "poor420_child0_5": 16.799558,
+        "poor420_older17plus": 10.033218000000002,
+        "poor830_child0_5": 77.771525,
+        "poor830_older17plus": 70.960081
+      },
+      {
+        "state": "Telangana",
+        "childExcelRow": 48970,
+        "olderExcelRow": 49078,
+        "year": 2023,
+        "refYear": 2023.58,
+        "survey": "HCES",
+        "poor300_child0_5": 0.212936,
+        "poor300_older17plus": 0.143637,
+        "poor420_child0_5": 6.214842,
+        "poor420_older17plus": 3.5309489999999997,
+        "poor830_child0_5": 82.071175,
+        "poor830_older17plus": 66.1413
+      }
+    ],
+    "childrenHigherCountOf36": {
+      "poor300": 31,
+      "poor420": 34,
+      "poor830": 36
+    },
+    "interpretation": "Poverty among persons aged0-5 vs the exact source label17+, using household per-capita welfare. Not individual nutrition or intrahousehold allocation.",
+    "limitations": [
+      "SPID direct survey rows must not be silently spliced with GSAP calendar lineup rows.",
+      "Age17+ exact boundary requires source-method confirmation before relabelling as18+.",
+      "Other age labels6-11/12-17 are Excel dates; avoid automatic parsing.",
+      "No state or group weights, so no invented national child headcount."
+    ]
+  },
+  "growthIncidence": {
+    "rows": [
+      {
+        "decile": 1,
+        "mean2022": 2.8665406087047995,
+        "mean2023": 3.240720100013642,
+        "realChangePct": 13.053346956696664
+      },
+      {
+        "decile": 2,
+        "mean2022": 3.7165810540698123,
+        "mean2023": 4.125551018404976,
+        "realChangePct": 11.003929643544952
+      },
+      {
+        "decile": 3,
+        "mean2022": 4.254429196721963,
+        "mean2023": 4.675110294573266,
+        "realChangePct": 9.888073779096796
+      },
+      {
+        "decile": 4,
+        "mean2022": 4.754324798277657,
+        "mean2023": 5.172702350593126,
+        "realChangePct": 8.79993626996276
+      },
+      {
+        "decile": 5,
+        "mean2022": 5.265068342388322,
+        "mean2023": 5.672653598945039,
+        "realChangePct": 7.741309894789117
+      },
+      {
+        "decile": 6,
+        "mean2022": 5.833149401887248,
+        "mean2023": 6.228122008127079,
+        "realChangePct": 6.7711724666617235
+      },
+      {
+        "decile": 7,
+        "mean2022": 6.514799805483828,
+        "mean2023": 6.892376926041823,
+        "realChangePct": 5.795682627732779
+      },
+      {
+        "decile": 8,
+        "mean2022": 7.421119350451167,
+        "mean2023": 7.75546877289482,
+        "realChangePct": 4.5053772437082085
+      },
+      {
+        "decile": 9,
+        "mean2022": 8.859666037099934,
+        "mean2023": 9.110666664731289,
+        "realChangePct": 2.833070982363073
+      },
+      {
+        "decile": 10,
+        "mean2022": 14.065245112121717,
+        "mean2023": 13.652416850694937,
+        "realChangePct": -2.9350946829287516
+      }
+    ],
+    "nationalMeanGrowthPct": 4.681072601639746,
+    "formula": "decile mean = national mean * decile consumption share /0.1; relative growth = new/old -1",
+    "limitations": [
+      "Repeated cross-sections, not the same people.",
+      "Measured top-decile decline is not proof that rich Indians became poorer.",
+      "The survey can miss the affluent; price/welfare harmonization remains part of the estimate."
+    ]
+  },
+  "shockSensitivity": {
+    "rows": [
+      {
+        "uniformRealConsumptionLossPct": 0,
+        "headcountsPct": {
+          "3": 2.2999999999996454,
+          "4.2": 14.899999999997707,
+          "8.3": 78.79999999998788
+        },
+        "additionalPoorMillions": {
+          "3": 0.0,
+          "4.2": 0.0,
+          "8.3": 0.0
+        }
+      },
+      {
+        "uniformRealConsumptionLossPct": 5.0,
+        "headcountsPct": {
+          "3": 3.1999999999995072,
+          "4.2": 18.699999999997125,
+          "8.3": 82.09999999998736
+        },
+        "additionalPoorMillions": {
+          "3": 13.058422118998262,
+          "4.2": 55.13556005799266,
+          "8.3": 47.88088110299363
+        }
+      },
+      {
+        "uniformRealConsumptionLossPct": 10.0,
+        "headcountsPct": {
+          "3": 4.399999999999323,
+          "4.2": 23.19999999999643,
+          "8.3": 85.0999999999869
+        },
+        "additionalPoorMillions": {
+          "3": 30.469651610995946,
+          "4.2": 120.42767065298399,
+          "8.3": 91.40895483298785
+        }
+      },
+      {
+        "uniformRealConsumptionLossPct": 20.0,
+        "headcountsPct": {
+          "3": 8.499999999998693,
+          "4.2": 34.69999999999466,
+          "8.3": 90.1999999999861
+        },
+        "additionalPoorMillions": {
+          "3": 89.95801904198804,
+          "4.2": 287.2852866179618,
+          "8.3": 165.406680173978
+        }
+      }
+    ],
+    "resolutionPP": 0.1,
+    "populationMillions": 1450.9357910000303,
+    "formula": "For each uniform loss s, evaluate weighted share welf*(1-s)<line. Additional poor = population with line<=welf<line/(1-s).",
+    "limitations": [
+      "Hypothetical sensitivity, not a forecast or household transition probability.",
+      "A10%consumption loss is not the same arithmetic as10%price inflation.",
+      "Bin means approximate positions, so counts are rounded and resolve to roughly0.1pp."
+    ]
+  },
+  "growthShapeDecomposition": {
+    "meanGrowthFactor": 1.4895326452650455,
+    "rows": [
+      {
+        "line": 3,
+        "startHeadcount": 28.49999999999297,
+        "endHeadcount": 2.2999999999996454,
+        "uniformGrowthOnlyHeadcount": 5.099999999998742,
+        "meanGrowthComponentPP": -20.29999999999579,
+        "distributionShapeComponentPP": -5.899999999997532
+      },
+      {
+        "line": 4.2,
+        "startHeadcount": 59.399999999985354,
+        "endHeadcount": 14.899999999997707,
+        "uniformGrowthOnlyHeadcount": 23.499999999994202,
+        "meanGrowthComponentPP": -37.34999999999259,
+        "distributionShapeComponentPP": -7.1499999999950585
+      },
+      {
+        "line": 8.3,
+        "startHeadcount": 93.09999999997703,
+        "endHeadcount": 78.79999999998788,
+        "uniformGrowthOnlyHeadcount": 78.99999999998052,
+        "meanGrowthComponentPP": -15.149999999997,
+        "distributionShapeComponentPP": 0.8500000000078458
+      }
+    ],
+    "recommendation": "Lower priority than comparable2022-23 decile growth; keep as exploratory because2011-to-new-HCES comparison crosses a survey break.",
+    "limitations": [
+      "Arithmetic decomposition of measured distributions, not causal growth/redistribution shares.",
+      "Two orderings averaged because the poverty function is nonlinear."
+    ]
+  },
+  "prosperityGapExplanation": {
+    "year": 2023,
+    "mean": 6.652578858502,
+    "actualPG": 4.947352593638,
+    "equalConsumptionBenchmarkPG": 4.2088941139293645,
+    "ratioActualToBenchmark": 1.1754519024996855,
+    "recommendation": "Use as an annotation/example inside the existing Prosperity Gap explainer, not another state ranking.",
+    "formula": "actual PG / (28/mean) = mean * E(1/welfare) >=1; this measures distribution sensitivity within the survey."
+  },
+  "SPIDvsGSAP": {
+    "matchedStates": 36,
+    "gsap2023ToSpidPGFactorMin": 1.0244322221110351,
+    "gsap2023ToSpidPGFactorMax": 1.0244322588367705,
+    "fact": "Every matched2023state differs by essentially one common PG scale factor.",
+    "inference": "Likely reference-year/calendar lineup alignment; mechanism must be checked before treating the two tables as interchangeable."
+  },
+  "notAvailable": [
+    "SPID India rows have state,gender,age categories but no rural/urban or national subgroup row.",
+    "Latest GSAP/SPID tables and mapDBFs have no population weights; weighted state burden requires another compatible source."
+  ]
+}

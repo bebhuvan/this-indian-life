@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "pov26.mean_shortfall_among_poor.IN",
+  "title": "Mean consumption shortfall among those below each line, HCES 2023-24",
+  "sourceId": "wb_3pr_2026",
+  "sourceIndicatorId": "PIP_20260922_2021_POVERTY_GAP_DIV_HEADCOUNT_2023",
+  "sourceUrl": "https://pip.worldbank.org/country-profiles/IND",
+  "unit": "% of poverty line, among the poor",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-10-29T00:00:00.000Z",
+  "rows": [
+    {
+      "label": "Below $3.00/day",
+      "value": 13.23
+    },
+    {
+      "label": "Below $4.20/day",
+      "value": 15.88
+    },
+    {
+      "label": "Below $8.30/day",
+      "value": 34.1
+    }
+  ],
+  "metadata": {
+    "formula": "100 * population-average poverty_gap / headcount; both inputs from same national survey row and threshold",
+    "precision": "API inputs are rounded to four decimals; results are approximate."
+  }
+}

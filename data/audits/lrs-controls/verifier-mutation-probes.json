@@ -1,0 +1,23 @@
+[
+  {
+    "probe": "changed raw-derived metric must fail",
+    "exitCode": 1,
+    "expectedDiagnostic": "Raw metric changed lrsFY2026",
+    "diagnosticFound": true,
+    "passed": true
+  },
+  {
+    "probe": "changed published measurement must invalidate context",
+    "exitCode": 1,
+    "expectedDiagnostic": "Numeric occurrence/field context changed",
+    "diagnosticFound": true,
+    "passed": true
+  },
+  {
+    "probe": "raw manifest hash mismatch must fail",
+    "exitCode": 1,
+    "expectedDiagnostic": "Raw manifest hash mismatch",
+    "diagnosticFound": true,
+    "passed": true
+  }
+]

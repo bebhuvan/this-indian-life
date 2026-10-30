@@ -1,0 +1,911 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.lrs_controls",
+  "question": "Why is the RBI rethinking India's $250,000 remittance window, and where do the dollars actually go?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "lrs26.monthly_total.IN",
+    "lrs26.remittance_context.IN",
+    "lrs26.travel_subcategories_6m.IN",
+    "lrs26.matched_purpose_change.IN"
+  ],
+  "availableIndicatorIds": [
+    "lrs26.monthly_total.IN",
+    "lrs26.remittance_context.IN",
+    "lrs26.travel_subcategories_6m.IN",
+    "lrs26.matched_purpose_change.IN"
+  ],
+  "themeIndicatorIds": [
+    "lrs26.monthly_total.IN",
+    "lrs26.remittance_context.IN",
+    "lrs26.travel_subcategories_6m.IN",
+    "lrs26.matched_purpose_change.IN"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.lrs26.monthly_total.IN",
+      "indicatorId": "lrs26.monthly_total.IN",
+      "title": "Total monthly outward remittances under LRS",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.lrs26.remittance_context.IN",
+      "indicatorId": "lrs26.remittance_context.IN",
+      "title": "Selected gross cross-border flows, FY2025-26",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "unit": "USD billion",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.lrs26.travel_subcategories_6m.IN",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "title": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million)",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.lrs26.matched_purpose_change.IN",
+      "indicatorId": "lrs26.matched_purpose_change.IN",
+      "title": "Contributions to change in total LRS, April-August 2025 to April-August 2026",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "unit": "USD million",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "resident-remittances-hit-2-74-billion-in-august-2026-after-two-decades-of-step-changes",
+      "title": "Resident remittances hit $2.74 billion in August 2026 after two decades of step-changes",
+      "chartType": "multiLine",
+      "beat": "regime-shifts",
+      "window": "",
+      "indicator": "lrs26.monthly_total.IN",
+      "series": [
+        {
+          "indicator": "lrs26.monthly_total.IN",
+          "label": "Total LRS outflows",
+          "emphasis": true
+        },
+        {
+          "indicator": "lrs26.monthly_travel_studies.IN",
+          "label": "Travel and studies abroad (1.6 + 1.9)"
+        },
+        {
+          "indicator": "lrs26.monthly_family_gifts.IN",
+          "label": "Family maintenance, gifts and donations"
+        },
+        {
+          "indicator": "lrs26.monthly_capital_triad.IN",
+          "label": "Equity, debt, deposits and property"
+        }
+      ],
+      "unit": "USD million",
+      "subtitle": "Monthly outward remittances under the Liberalised Remittance Scheme, total and major channels · April 2008 to August 2026 · RBI DBIE Report 19",
+      "whyThisChart": "Shows the complete 221-month arc from April 2008 to August 2026 so readers can see how rule changes and tax deadlines shaped the flow."
+    },
+    {
+      "order": 2,
+      "chartId": "resident-lrs-outflows-were-29-billion-in-fy26-inward-private-transfers-were-155-billion",
+      "title": "Resident LRS outflows were $29 billion in FY26; inward private transfers were $155 billion",
+      "chartType": "tableBars",
+      "beat": "remittance-context",
+      "window": "",
+      "indicator": "lrs26.remittance_context.IN",
+      "series": [],
+      "unit": "USD billion",
+      "subtitle": "Selected gross cross-border flows · FY2025-26 · RBI LRS and balance-of-payments tables",
+      "whyThisChart": "Gives one compact sense of scale before turning to the people and purposes behind LRS."
+    },
+    {
+      "order": 3,
+      "chartId": "education-and-other-travel-account-for-97-6-of-lrs-travel",
+      "title": "Education and other travel account for 97.6% of LRS travel",
+      "chartType": "groupedTable",
+      "beat": "travel-xray",
+      "window": "",
+      "indicator": "lrs26.travel_subcategories_6m.IN",
+      "series": [],
+      "unit": "USD million",
+      "subtitle": "Five monthly LRS travel categories · March to August 2026 · RBI DBIE Report 19",
+      "whyThisChart": "Uses six full months of RBI's March-August 2026 travel decomposition to test what a Rs 50 lakh sub-limit on business and pilgrimage travel would actually touch."
+    },
+    {
+      "order": 4,
+      "chartId": "two-education-related-lrs-lines-totalled-1-05-billion-in-august-2026",
+      "title": "Two education-related LRS lines totalled $1.05 billion in August 2026",
+      "chartType": "multiLine",
+      "beat": "education-reclass",
+      "window": "",
+      "indicator": "lrs26.education_combined.IN",
+      "series": [
+        {
+          "indicator": "lrs26.education_combined.IN",
+          "label": "Combined overseas education (1.9 + 1.6.4)",
+          "emphasis": true
+        },
+        {
+          "indicator": "lrs26.studies_abroad_line19.IN",
+          "label": "Studies abroad direct line (1.9)"
+        },
+        {
+          "indicator": "lrs26.travel_education_line164.IN",
+          "label": "Travel for education sub-category (1.6.4)"
+        }
+      ],
+      "unit": "USD million",
+      "subtitle": "Monthly overseas education remittances: direct Studies Abroad (1.9), Travel for Education (1.6.4), and combined total · Jan 2024 to Aug 2026 · RBI DBIE",
+      "whyThisChart": "Resolves the apparent drop in India's overseas education spending by combining direct university fee transfers with student travel and card spend."
+    },
+    {
+      "order": 5,
+      "chartId": "capital-transfers-added-1-03-billion-while-other-lrs-purposes-fell-by-491-million",
+      "title": "Capital transfers added $1.03 billion while other LRS purposes fell by $491 million",
+      "chartType": "tableBars",
+      "beat": "matched-purpose-contributions",
+      "window": "",
+      "indicator": "lrs26.matched_purpose_change.IN",
+      "series": [],
+      "unit": "USD million",
+      "subtitle": "Contribution to the change in total LRS · April-August 2025 to April-August 2026 · RBI Report 19",
+      "whyThisChart": "Explains how modest headline growth can coexist with a much larger increase in investment remittances."
+    },
+    {
+      "order": 6,
+      "chartId": "resident-investment-in-foreign-equities-deposits-and-property-has-more-than-doubled-since-fy22-to-3-93-billion",
+      "title": "Resident investment in foreign equities, deposits, and property has more than doubled since FY22 to $3.93 billion",
+      "chartType": "multiLine",
+      "beat": "capital-triad",
+      "window": "",
+      "indicator": "lrs26.annual_equity_debt.IN",
+      "series": [
+        {
+          "indicator": "lrs26.annual_equity_debt.IN",
+          "label": "Investment in equity and debt (1.3)",
+          "emphasis": true
+        },
+        {
+          "indicator": "lrs26.annual_deposits.IN",
+          "label": "Foreign bank deposits (1.1)"
+        },
+        {
+          "indicator": "lrs26.annual_property.IN",
+          "label": "Purchase of immovable property (1.2)"
+        }
+      ],
+      "unit": "USD million",
+      "subtitle": "Annual LRS capital-account outflows by channel, FY2008-09 to FY2025-26 · RBI DBIE Report 19",
+      "whyThisChart": "Tracks the three pure capital-account channels over eighteen years to show why the RBI is scrutinizing financial outflows."
+    },
+    {
+      "order": 7,
+      "chartId": "march-takes-an-outsized-share-of-annual-capital-transfers",
+      "title": "March takes an outsized share of annual capital transfers",
+      "chartType": "groupedTable",
+      "beat": "within-year-calendar",
+      "window": "",
+      "indicator": "lrs26.seasonal_allocation_share.IN",
+      "series": [],
+      "unit": "% of channel's annual remittances",
+      "subtitle": "Average monthly share within each channel and financial year · FY2022-23 to FY2025-26 · four complete fiscal years",
+      "whyThisChart": "Tests the calendar pattern after giving each complete fiscal year equal weight."
+    },
+    {
+      "order": 8,
+      "chartId": "after-the-tcs-changes-family-transfers-were-lower-while-travel-and-equity-flows-were-higher",
+      "title": "After the TCS changes, family transfers were lower while travel and equity flows were higher",
+      "chartType": "groupedTable",
+      "beat": "tcs-audit",
+      "window": "",
+      "indicator": "lrs26.tcs_regime_audit.IN",
+      "series": [],
+      "unit": "USD million / month",
+      "subtitle": "Average monthly LRS outflows across four TCS comparison windows; education and medical rates changed again in April 2026 · April 2022 to August 2026 · RBI DBIE Report 19",
+      "whyThisChart": "Evaluates India's 20% TCS experiment by comparing monthly run-rates before, during, and after the October 2023 tax hike."
+    },
+    {
+      "order": 9,
+      "chartId": "rupee-depreciation-quietly-expanded-the-250-000-lrs-limit-from-rs-1-59-crore-in-2015-to-rs-2-38-crore-by-august-2026",
+      "title": "Rupee depreciation quietly expanded the $250,000 LRS limit from Rs 1.59 crore in 2015 to Rs 2.38 crore by August 2026",
+      "chartType": "multiLine",
+      "beat": "rupee-ceiling",
+      "window": "",
+      "indicator": "lrs26.ceiling_rupee_lakhs.IN",
+      "series": [
+        {
+          "indicator": "lrs26.ceiling_rupee_lakhs.IN",
+          "label": "$250,000 LRS ceiling in Rs lakh",
+          "emphasis": true
+        },
+        {
+          "indicator": "lrs26.proposed_sublimit_lakhs.IN",
+          "label": "Proposed Rs 50 lakh sub-limit"
+        },
+        {
+          "indicator": "lrs26.tcs_exempt_threshold_lakhs.IN",
+          "label": "TCS-free annual threshold (Rs 7L to Rs 10L)"
+        }
+      ],
+      "unit": "INR lakh",
+      "subtitle": "Rupee equivalent of the $250,000 annual LRS limit vs the proposed Rs 50 lakh sub-limit and the TCS-free threshold · June 2015 to August 2026 · RBI DBIE",
+      "whyThisChart": "Shows the structural asymmetry between a dollar-denominated remittance cap and rupee-denominated domestic incomes and tax thresholds."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Total monthly outward remittances under LRS, latest",
+      "value": 2738.58,
+      "displayValue": "2,738.58",
+      "date": "2026-08",
+      "unit": "USD million",
+      "indicatorId": "lrs26.monthly_total.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Total monthly outward remittances under LRS, minimum (2009-02)",
+      "value": 39.2,
+      "displayValue": "39.2",
+      "date": "2009-02",
+      "unit": "USD million",
+      "indicatorId": "lrs26.monthly_total.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Total monthly outward remittances under LRS, maximum (2023-06)",
+      "value": 3890.83,
+      "displayValue": "3,890.83",
+      "date": "2023-06",
+      "unit": "USD million",
+      "indicatorId": "lrs26.monthly_total.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Total monthly outward remittances under LRS, earliest",
+      "value": 50.5,
+      "displayValue": "50.5",
+      "date": "2008-04",
+      "unit": "USD million",
+      "indicatorId": "lrs26.monthly_total.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Selected gross cross-border flows, FY2025-26: value",
+      "value": 28.98,
+      "displayValue": "28.98",
+      "date": "",
+      "unit": "USD billion",
+      "indicatorId": "lrs26.remittance_context.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Selected gross cross-border flows, FY2025-26: value",
+      "value": 37.33,
+      "displayValue": "37.33",
+      "date": "",
+      "unit": "USD billion",
+      "indicatorId": "lrs26.remittance_context.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Selected gross cross-border flows, FY2025-26: value",
+      "value": 155.12,
+      "displayValue": "155.12",
+      "date": "",
+      "unit": "USD billion",
+      "indicatorId": "lrs26.remittance_context.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): other",
+      "value": 623.05,
+      "displayValue": "623.05",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): education",
+      "value": 450.16,
+      "displayValue": "450.16",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): business",
+      "value": 16.05,
+      "displayValue": "16.05",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): medical",
+      "value": 2.79,
+      "displayValue": "2.79",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): pilgrimage",
+      "value": 2.55,
+      "displayValue": "2.55",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): other",
+      "value": 686.65,
+      "displayValue": "686.65",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): education",
+      "value": 439.34,
+      "displayValue": "439.34",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): business",
+      "value": 10.03,
+      "displayValue": "10.03",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): medical",
+      "value": 4.58,
+      "displayValue": "4.58",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): pilgrimage",
+      "value": 17.31,
+      "displayValue": "17.31",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): other",
+      "value": 831.44,
+      "displayValue": "831.44",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): education",
+      "value": 422.97,
+      "displayValue": "422.97",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": 1028.821551,
+      "displayValue": "1,028.82",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.matched_purpose_change.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -394.288298,
+      "displayValue": "-394.29",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.matched_purpose_change.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -89.86458,
+      "displayValue": "-89.86",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.matched_purpose_change.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -0.940387,
+      "displayValue": "-0.94",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.matched_purpose_change.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -7.346034,
+      "displayValue": "-7.35",
+      "date": "",
+      "unit": "USD million",
+      "indicatorId": "lrs26.matched_purpose_change.IN",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Total monthly outward remittances under LRS, latest",
+      "value": 2738.58,
+      "displayValue": "2,738.58",
+      "date": "2026-08",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.monthly_total.IN"
+    },
+    {
+      "label": "Total monthly outward remittances under LRS, minimum (2009-02)",
+      "value": 39.2,
+      "displayValue": "39.2",
+      "date": "2009-02",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.monthly_total.IN"
+    },
+    {
+      "label": "Total monthly outward remittances under LRS, maximum (2023-06)",
+      "value": 3890.83,
+      "displayValue": "3,890.83",
+      "date": "2023-06",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.monthly_total.IN"
+    },
+    {
+      "label": "Total monthly outward remittances under LRS, earliest",
+      "value": 50.5,
+      "displayValue": "50.5",
+      "date": "2008-04",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.monthly_total.IN"
+    },
+    {
+      "label": "Selected gross cross-border flows, FY2025-26: value",
+      "value": 28.98,
+      "displayValue": "28.98",
+      "date": "",
+      "unit": "USD billion",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.remittance_context.IN"
+    },
+    {
+      "label": "Selected gross cross-border flows, FY2025-26: value",
+      "value": 37.33,
+      "displayValue": "37.33",
+      "date": "",
+      "unit": "USD billion",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.remittance_context.IN"
+    },
+    {
+      "label": "Selected gross cross-border flows, FY2025-26: value",
+      "value": 155.12,
+      "displayValue": "155.12",
+      "date": "",
+      "unit": "USD billion",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.remittance_context.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): other",
+      "value": 623.05,
+      "displayValue": "623.05",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): education",
+      "value": 450.16,
+      "displayValue": "450.16",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): business",
+      "value": 16.05,
+      "displayValue": "16.05",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): medical",
+      "value": 2.79,
+      "displayValue": "2.79",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): pilgrimage",
+      "value": 2.55,
+      "displayValue": "2.55",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): other",
+      "value": 686.65,
+      "displayValue": "686.65",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): education",
+      "value": 439.34,
+      "displayValue": "439.34",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): business",
+      "value": 10.03,
+      "displayValue": "10.03",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): medical",
+      "value": 4.58,
+      "displayValue": "4.58",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): pilgrimage",
+      "value": 17.31,
+      "displayValue": "17.31",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): other",
+      "value": 831.44,
+      "displayValue": "831.44",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million): education",
+      "value": 422.97,
+      "displayValue": "422.97",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.travel_subcategories_6m.IN"
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": 1028.821551,
+      "displayValue": "1,028.82",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.matched_purpose_change.IN"
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -394.288298,
+      "displayValue": "-394.29",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.matched_purpose_change.IN"
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -89.86458,
+      "displayValue": "-89.86",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.matched_purpose_change.IN"
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -0.940387,
+      "displayValue": "-0.94",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.matched_purpose_change.IN"
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": -7.346034,
+      "displayValue": "-7.35",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.matched_purpose_change.IN"
+    },
+    {
+      "label": "Contributions to change in total LRS, April-August 2025 to April-August 2026: value",
+      "value": 1.3593,
+      "displayValue": "1.36",
+      "date": "",
+      "unit": "USD million",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "indicatorId": "lrs26.matched_purpose_change.IN"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "lrs26.monthly_total.IN",
+      "title": "Total monthly outward remittances under LRS",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "sourceIndicatorId": "RBI_DBIE_R19_1_TOTAL",
+      "unit": "USD million",
+      "frequency": "monthly",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 221,
+      "earliest": {
+        "date": "2008-04",
+        "value": 50.5
+      },
+      "latest": {
+        "date": "2026-08",
+        "value": 2738.58
+      }
+    },
+    {
+      "indicatorId": "lrs26.remittance_context.IN",
+      "title": "Selected gross cross-border flows, FY2025-26",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "sourceIndicatorId": "RBI_DBIE_LRS_PRIVATE_TRANSFERS_OUTWARD_FDI_FY26",
+      "unit": "USD billion",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Resident LRS outflows",
+          "value": 28.98
+        },
+        {
+          "label": "Gross outward FDI debit",
+          "value": 37.33
+        },
+        {
+          "label": "Gross inward private transfers",
+          "value": 155.12
+        }
+      ]
+    },
+    {
+      "indicatorId": "lrs26.travel_subcategories_6m.IN",
+      "title": "Monthly LRS travel outflows by RBI sub-category, March to August 2026 (USD million)",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "sourceIndicatorId": "RBI_DBIE_R19_1.6.1_TO_1.6.5",
+      "unit": "USD million",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "month": "2026-03",
+          "other": 623.05,
+          "education": 450.16,
+          "business": 16.05,
+          "medical": 2.79,
+          "pilgrimage": 2.55
+        },
+        {
+          "month": "2026-04",
+          "other": 686.65,
+          "education": 439.34,
+          "business": 10.03,
+          "medical": 4.58,
+          "pilgrimage": 17.31
+        },
+        {
+          "month": "2026-05",
+          "other": 831.44,
+          "education": 422.97,
+          "business": 13.95,
+          "medical": 4.13,
+          "pilgrimage": 10.13
+        },
+        {
+          "month": "2026-06",
+          "other": 853.11,
+          "education": 488.32,
+          "business": 13.68,
+          "medical": 5.12,
+          "pilgrimage": 6.58
+        },
+        {
+          "month": "2026-07",
+          "other": 770.84,
+          "education": 665.76,
+          "business": 10.96,
+          "medical": 5.42,
+          "pilgrimage": 10.12
+        },
+        {
+          "month": "2026-08",
+          "other": 713.8,
+          "education": 855.52,
+          "business": 51.01,
+          "medical": 4.46,
+          "pilgrimage": 5.47
+        }
+      ]
+    },
+    {
+      "indicatorId": "lrs26.matched_purpose_change.IN",
+      "title": "Contributions to change in total LRS, April-August 2025 to April-August 2026",
+      "sourceId": "rbi_dbie_lrs_2026",
+      "sourceIndicatorId": "RBI_DBIE_R19_MATCHED_PURPOSE_CHANGE_APR_AUG",
+      "unit": "USD million",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 6,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "label": "Capital transfers",
+          "value": 1028.821551
+        },
+        {
+          "label": "Travel and studies",
+          "value": -394.288298
+        },
+        {
+          "label": "Maintenance of relatives",
+          "value": -89.86458
+        },
+        {
+          "label": "Gifts and donations",
+          "value": -0.940387
+        },
+        {
+          "label": "Medical treatment",
+          "value": -7.346034
+        },
+        {
+          "label": "Others",
+          "value": 1.3593
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}

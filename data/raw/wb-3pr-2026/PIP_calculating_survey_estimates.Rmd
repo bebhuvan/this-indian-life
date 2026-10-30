@@ -1,0 +1,139 @@
+# Calculating survey estimates of poverty and inequality {#surveyestimates}
+
+## Monetary poverty measures {#monetarypoverty}
+
+Armed with welfare distributions expressed in 2021 PPPs and an international poverty line, poverty and inequality can be calculated and compared across countries and over time. The poverty and inequality measures used in the Poverty and Equity Platform (PIP) are mainly based on a formula in @haughton2009. In the formulas below we abstract from household weights for simplicity.
+
+**Poverty headcount ratio**: The poverty headcount ratio ($P_0$) measures the proportion of the population that is counted as poor. When using micro data, the poverty headcount ratio is obtained using the following expression:$$ P_0 = \frac{1}{N} \sum_{i=1}^{N} I (y_i < z), $$
+
+where $N$ is the total population size, $y_i$ is the welfare of individual $i$, $z$ is the poverty line, and $I(.)$ is an indicator function that takes on the value 1 if the bracketed expression is true or 0 otherwise. You can find the source code where this calculation is carried out [here](https://github.com/PIP-Technical-Team/wbpip/blob/master/R/md_compute_poverty_stats.R).
+
+**Societal poverty headcount ratio**: The societal poverty headcount ratio reflects a more relative concept of poverty. With the 2021 PPPs, the societal poverty line ($z_{sp}$) is defined as
+
+$$ z_{sp} = max($3.00,$1.30+0.5*median) $$
+
+That is, the societal poverty line is defined as \$1.30 plus half the median level of consumption in a country, or the international poverty line if \$1.30 plus half the median level of consumption is lower than the international poverty line [@jolliffe2024a; @jolliffe2025]. This line increases as a country grows (and the median increases). The societal poverty headcount ratio is simply the poverty headcount ratio using $z_{sp}$ as the poverty line.
+
+**Poverty gap index**: The poverty gap index ($P_1$) is a measure that adds up the extent to which individuals on average fall below the poverty line (i.e. the depth of poverty), and expresses it as a percentage of the poverty line. The poverty gap index is obtained from micro data with the following expression ([source code](https://github.com/PIP-Technical-Team/wbpip/blob/master/R/md_compute_poverty_stats.R)):
+
+$$ P_1 = \frac{1}{N} \sum_{i=1}^{N} \frac{G_i}{z} $$with $G_i = (z - y_i) × I (y_i < z)$, where $G_i$ is defined as the poverty gap (i.e. poverty line ($z$) less welfare ($y_i$)) of poor individuals; the gap is considered to be zero for everyone else.
+
+**Poverty severity index**: The poverty severity index ($P_2$) is a measure of the weighted sum of poverty gaps (as a proportion of the poverty line), where the weights are the proportionate poverty gaps themselves. The poverty severity index is obtained from micro data with the following expression ([source code](https://github.com/PIP-Technical-Team/wbpip/blob/master/R/md_compute_poverty_stats.R)):
+
+$$ P_2 = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{G_i}{z} \right)^2 $$
+
+with all variables defined as before. Also known as the squared poverty gap index, the poverty severity index accounts for inequality among the poor.
+
+**The Watts index**: The Watts index ($W$) is also an inequality-sensitive poverty measure that is given as ([source code](https://github.com/PIP-Technical-Team/wbpip/blob/master/R/md_compute_poverty_stats.R)):
+
+$$ W  = \frac{1}{N} \sum_{i=1}^{q} \ln \left(\frac{z}{y_i} \right), $$
+
+where the $N$ individuals of the population are indexed in ascending order of welfare, and the sum is taken over $q$ individuals whose welfare, $y_i$, falls below the poverty line $z$.
+
+## Multidimensional Poverty Measure {#mpm}
+
+In many settings, important aspects of well-being, such as access to quality education or core services, are not captured by monetary measures of poverty. To address this issue, an established tradition of multidimensional poverty measures these nonmonetary dimensions and aggregates them into an index [@alkire2015]. The [United Nations Development Programme's Multidimensional Poverty Index (Global MPI)](http://hdr.undp.org/en/2020-MPI), produced in conjunction with the [Oxford Poverty and Human Development Initiative](https://ophi.org.uk/multidimensional-poverty-index/), is a foremost example of such a multidimensional poverty measure. In 2018, the World Bank launched its own multidimensional poverty measure, building heavily on these prior efforts [@worldbank2018].
+
+The dimensions, indicators, and weights of the World Bank's multidimensional poverty measure are given as follows:
+
+| Dimension                      | Indicator                                                                           | Weight |
+|------------------|------------------------------------|------------------|
+| Monetary poverty               | Daily consumption or income is less than US\$3.00 per person                        | 1/3    |
+| Education                      | At least one school-age child up to the age of grade 8 is not enrolled in school    | 1/6    |
+| Education                      | No adult in the household (age of grade 9 or above) has completed primary education | 1/6    |
+| Access to basic infrastructure | The household lacks access to limited-standard drinking water                       | 1/9    |
+| Access to basic infrastructure | The household lacks access to limited-standard sanitation                           | 1/9    |
+| Access to basic infrastructure | The household has no access to electricity                                          | 1/9    |
+
+An individual is considered poor if she/he lives in a household that is deprived in at least 1/3 of the weighted indicators. PIP reports the share of individuals that are poor.
+
+## Inequality measures {#inequality}
+
+**Gini index**: The Gini index is derived from the Lorenz curve, which plots the cumulative welfare share (on the y-axis) against the cumulative population share (on the x-axis). A 45-degree line is defined over the Lorenz curve as a line of perfect equality. The Gini index is the area between the 45-degree line and the Lorenz curve (multiplied by 100). Let $A$ be the area between the 45-degree line and the Lorenz curve, and let $B$ be the area under the Lorenz curve. The Gini coefficient is given as: $\frac{A}{A + B}= 2A$ (since $A + B = 0.5$).
+
+Formally, if $x_i$ is a point on the x-axis, and $y_i$ a point on the y-axis, then
+
+$$ Gini= 100*(1 - \sum_{i=1}^{N} (x_i - x_{i-1})(y_i + y_{i-1}))
+,
+$$
+
+where there are $N$ equal intervals on the x-axis ([source code](https://github.com/PIP-Technical-Team/wbpip/blob/master/R/md_compute_gini.R)). The Gini index ranges from 0 (perfect equality) to 100 (complete inequality) .
+
+**Number of countries with high inequality**: This indicator, which is only reported at the regional and global level, counts the number of countries with a Gini index greater than 40. For more information on this indicator, see @haddad2024.
+
+**Mean log deviation**: The mean log deviation (MLD) belongs to the family of generalized entropy inequality measures. It is given as:
+
+$$ MLD  = \frac{1}{N} \sum_{i=1}^{N} ln \left(\frac{μ}{y_i} \right)*100, $$
+
+where $N$ is the total population size, $μ$ is the mean welfare per person, and $y_i$ is welfare of individual $i$. The MLD has a minimum value of 0 (perfect equality) and has no upper bound ([source code](https://github.com/PIP-Technical-Team/wbpip/blob/master/R/md_compute_mld.R)).
+
+**Polarization**: The polarization index ($P$), also known as the Wolfson polarization index, measures the extent to which the distribution of welfare is "spread out" and bi-modal. It is given as ([source code](https://github.com/PIP-Technical-Team/wbpip/blob/master/R/md_compute_polarization.R)):
+
+$$
+P =  \frac{2(\mu^* - \mu^L)}{m},
+$$
+
+where $\mu^*$ is the distribution-corrected mean (i.e. $\mu(1 - Gini/100)$), $\mu^L$ is the mean of the poorest half of the population, and $m$ is the median. Like the Gini coefficient, the polarization index ranges from 0 (no polarization) to 1 (complete polarization). The polarization index is based on @wolfson1994 and @ravallion1997.
+
+## Other distributional statistics {#dist}
+
+**Median**:
+
+The median is the amount of welfare per capita that divides the distribution into two equal halves. For micro data, the median is estimated as:
+
+$$
+Med = \begin{cases}
+ Y \left[\frac{n}{2}\right] & \text{if $n$ is even} \\ 
+   \left(Y\left[\frac{n - 1}{2} \right] + Y \left[\frac{n + 1}{2} \right]\right) &  \text{if $n$ is odd}
+ \end{cases} 
+ $$
+
+where $Y$ is the ordered list of welfare per capita in the sample, and $n$ is the sample size.
+
+**Decile shares**:
+
+Imagine that we order all households according to their welfare per capita, such that the first decile contains the 10% of the population with the lowest welfare and so on. Decile shares measure the share of total welfare belonging to each decile. Formally, the decile share of decile $d$ is given by:
+
+$$ decileshare_d= \frac{\sum_{i \in d} {y_i}}{\sum_{i=1}^{N} {y_i}} ,  d \in \{1,2,..,10 \} $$
+
+**Prosperity gap**
+
+The prosperity gap (PG) is the average factor by which incomes fall short of a prosperity standard of \$28 per person per day (expressed in 2021 PPP dollars) (@kraay2023 and @jolliffe2025). It is given by:
+
+$$ PG  = \frac{1}{N} \sum_{i=1}^{N} \frac{28}{y_i}. $$ For a person whose welfare is $\$2.80$ per day, this ratio is $10$, meaning that their welfare falls short of the prosperity standard by a factor of $10$. This measure unambiguously gives greater weight to poorer people. The poorest person with daily welfare equal to $\$2.80$ gets twice the weight of a person with twice the welfare (at $\$5.60$), and ten times the weight of a person with ten times higher welfare (at $\$28$).
+
+**Shared prosperity**
+
+Shared prosperity measures the extent to which welfare growth is inclusive by focusing on growth of the population at the bottom of the distribution. It is defined as the annualized growth rate of mean household per capita welfare of the bottom 40%. Promoting shared prosperity is one of the twin goals of the World Bank Group together with eradicating extreme poverty. The selection of the bottom 40% is a compromise between competing considerations; the bottom 40% still focuses on the bottom of the distribution but is not too small that it risks introducing measurement errors.
+
+Formally, shared prosperity, $sp$, is calculated as
+
+$$ sp = \left(\frac{\mu_{b40,t_2}}{\mu_{b40,t_1}}\right)^{\frac{1}{t_2-t_1}}-1 $$,
+
+where $\mu_{b40,t_2}$ and $\mu_{b40,t_1}$ are the mean welfare of the bottom 40% at time $t_2$ and $t_1$. Shared prosperity is anonymized, meaning that it does not track the same individuals in both time periods.
+
+In order for shared prosperity to be calculated for a country the following three criteria must be met:
+
+1.  Two [comparable](#comparability) household surveys must be available.
+
+2.  Among comparable surveys, one must be conducted within two years of the latest reference year and the other within two years of five years prior to the reference year.
+
+3.  The period between the initial and end years should range between three and seven years. For example, a shared prosperity period of 2021--22 meets the second selection criterion but would not be allowed because it does not meet this third requirement.
+
+In cases where multiple surveys fulfill these criteria, the most recent survey years are typically chosen. In countries in Europe and Central Asia using incomes as the welfare aggregate, households with negative incomes are included when estimating shared prosperity.
+
+More information on shared prosperity can be found at the [Global Database of Shared Prosperity](https://www.worldbank.org/en/topic/poverty/brief/global-database-of-shared-prosperity).
+
+**Shared prosperity premium**
+
+The shared prosperity premium, $spp$, measures the difference in annualized growth of the bottom 40%, shared prosperity, $sp$, and the annualized growth of the mean:
+
+$$ spp = \left(\frac{\mu_{b40,t_2}}{\mu_{b40,t_1}}\right)^{\frac{1}{t_2-t_1}} - \left(\frac{\mu_{t_2}}{\mu_{t_1}}\right)^{\frac{1}{t_2-t_1}}. $$
+
+**Percentiles database**
+
+The [percentiles database](https://datacatalog.worldbank.org/int/search/dataset/0063646) reports 100 points ranked according to the consumption or income distributions for each survey data available in PIP.
+
+Each percentile distribution reports 100 points per country per survey year ranked from the smallest income (percentile 1) to the largest (percentile 100). For each percentile, the database reports the following variables: The average welfare within the percentile group (avg_welfare); the value for the upper threshold of the percentile group (quantile); the share of the population in the percentile group (which might deviate slightly from 1% due to coarseness in the raw data) (pop_share); and the share of income held by each percentile group (welfare_share). In addition, the database reports the welfare measure (welfare_type) used in the survey data — income or consumption — and the region covered (reporting_level) - urban, rural, or national. The database can be merged with the PIP data using the country_code, reporting_level, year, and welfare_type variables.
+
+For surveys with access to the microdata and for distributions based on binned data, the Stata quantiles function is used to allocate the survey population into 100 equally sized percentiles. The income and consumption averages, thresholds, and shares of each percentile is derived using the population and their income or consumption in each bin. The quantiles function to bin the distribution is used consistently throughout PIP when bins are necessary. For instance, the same approach is used to derive the 1000 bins from LIS data.

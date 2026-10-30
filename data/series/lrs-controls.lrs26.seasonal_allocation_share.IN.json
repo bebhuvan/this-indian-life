@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "table",
+  "indicatorId": "lrs26.seasonal_allocation_share.IN",
+  "title": "Average within-financial-year monthly allocation by LRS channel, FY2022-23 to FY2025-26",
+  "sourceId": "rbi_dbie_lrs_2026",
+  "sourceIndicatorId": "RBI_DBIE_R19_WITHIN_FY_ALLOCATION_SHARE",
+  "sourceUrl": "https://data.rbi.org.in/DBIE/#/dbie/reports/External%20Sector/External%20Sector/Outward%20Remittances%20under%20the%20Liberalised%20Remittance%20Scheme%20for%20Resident%20Individuals",
+  "unit": "% of that channel's annual remittances",
+  "geography": {
+    "type": "country",
+    "id": "IN",
+    "name": "India"
+  },
+  "dimensions": [],
+  "fetchedAt": "2026-10-25T22:06:07.000Z",
+  "rows": [
+    {
+      "month": "Apr",
+      "travel": 6.85,
+      "studies": 6.76,
+      "capital": 7.99,
+      "family": 10.24
+    },
+    {
+      "month": "May",
+      "travel": 8.2,
+      "studies": 7.14,
+      "capital": 6.77,
+      "family": 9.22
+    },
+    {
+      "month": "Jun",
+      "travel": 7.85,
+      "studies": 6.48,
+      "capital": 10.5,
+      "family": 10.25
+    },
+    {
+      "month": "Jul",
+      "travel": 8.59,
+      "studies": 8.75,
+      "capital": 5.95,
+      "family": 7.77
+    },
+    {
+      "month": "Aug",
+      "travel": 11.12,
+      "studies": 13.9,
+      "capital": 6.25,
+      "family": 7.88
+    },
+    {
+      "month": "Sep",
+      "travel": 10.22,
+      "studies": 11.55,
+      "capital": 9.3,
+      "family": 8.8
+    },
+    {
+      "month": "Oct",
+      "travel": 7.99,
+      "studies": 7.19,
+      "capital": 7.35,
+      "family": 6.7
+    },
+    {
+      "month": "Nov",
+      "travel": 6.94,
+      "studies": 5.82,
+      "capital": 5.41,
+      "family": 6.67
+    },
+    {
+      "month": "Dec",
+      "travel": 8.29,
+      "studies": 7.25,
+      "capital": 7.68,
+      "family": 6.71
+    },
+    {
+      "month": "Jan",
+      "travel": 9.96,
+      "studies": 12.17,
+      "capital": 7.19,
+      "family": 7.32
+    },
+    {
+      "month": "Feb",
+      "travel": 7.1,
+      "studies": 6.91,
+      "capital": 8.6,
+      "family": 7.01
+    },
+    {
+      "month": "Mar",
+      "travel": 6.9,
+      "studies": 6.1,
+      "capital": 17.01,
+      "family": 11.42
+    }
+  ],
+  "metadata": {
+    "formula": "For each month and channel, monthly remittances / same channel's full-year remittances * 100, then unweighted mean of four complete fiscal years.",
+    "years": [
+      "2022-23",
+      "2023-24",
+      "2024-25",
+      "2025-26"
+    ],
+    "groups": {
+      "travel": [
+        7
+      ],
+      "studies": [
+        15
+      ],
+      "capital": [
+        2,
+        3,
+        4
+      ],
+      "family": [
+        5,
+        6,
+        13
+      ]
+    },
+    "limit": "Each channel has its own annual denominator. Direct studies is the reporting line, not a complete education total."
+  }
+}

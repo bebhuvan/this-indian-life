@@ -395,6 +395,22 @@ export const pinnedReferences = {
       { label: "FRED, Indian rupees per US dollar, monthly average (EXINUS): used for approximate rupee equivalents", url: "https://fred.stlouisfed.org/series/EXINUS", check: "EXINUS" }
     ]
   },
+  "q.econ.lrs_controls": {
+    sourceNotes: [
+      { label: "Finance Act 2026, section 85(e), Gazette page 57: education and medical LRS collection rate amended under section 394 of the Income-tax Act 2025", url: "https://egazette.gov.in/WriteReadData/2026/271439.pdf", check: ["section 394", "85."] },
+      { label: "Ministry of Finance, Lok Sabha answer 2345, 4 August 2025: LRS TCS introduced by the Finance Act 2020 and effective 1 October 2020", url: "https://sansad.in/getFile/loksabhaquestions/annex/185/AU2345_qLs5DG.pdf?source=pqals", check: ["Finance Act, 2020", "October 1, 2020"] },
+      { label: "Finance Act 2025, section 72(b), Gazette page 35: Rs 10 lakh threshold and qualifying Section 80E education-loan exemption, effective 1 April 2025", url: "https://egazette.gov.in/WriteReadData/2025/262125.pdf", check: ["ten lakh", "80E"] },
+      { label: "RBI Bulletin, 22 June 2026, Table 36: published FY2025-26 LRS totals and March-April 2026 travel detail", url: "https://www.rbi.org.in/scripts/BS_ViewBulletin.aspx?Id=24281", check: "Liberalised Remittance Scheme" },
+      { label: "RBI Master Direction on the Liberalised Remittance Scheme (FEMA 1999), paragraph 2 and annex rules: $250,000 ceiling, permitted transfers and repatriation of unspent funds", url: "https://www.rbi.org.in/scripts/BS_ViewMasDirections.aspx?id=10192", check: "Liberalised Remittance Scheme" },
+      { label: "Ministry of Finance press release, 28 June 2023 (PIB): Section 206C(1G) Tax Collection at Source (TCS) rate revisions on LRS remittances effective 1 October 2023", url: "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1936105", check: ["TCS", "LRS"] },
+      { label: "RBI DBIE, Report 19 (Document 137499): monthly LRS by purpose, April 2008 to August 2026; interactive report behind the frozen SAP export", url: "https://data.rbi.org.in/DBIE/#/dbie/reports/External%20Sector/External%20Sector/Outward%20Remittances%20under%20the%20Liberalised%20Remittance%20Scheme%20for%20Resident%20Individuals", check: "Outward Remittances Under The Liberalised Remittance Scheme For Resident Individuals" },
+      { label: "RBI DBIE, annual balance of payments: FY2025-26 current, capital and overall balances; interactive report behind the frozen CAS export", url: "https://data.rbi.org.in/DBIE/#/dbie/reports/External%20Sector/External%20Sector/India's%20Overall%20Balance%20of%20Payments", check: "India's Overall Balance Of Payments" },
+      { label: "RBI DBIE, foreign exchange reserves: monthly USD and INR valuations through August 2026; interactive report behind the frozen CAS export", url: "https://data.rbi.org.in/DBIE/#/dbie/reports/External%20Sector/External%20Sector/Foreign%20Exchange%20Reserves", check: "Foreign Exchange Reserves" }
+    ],
+    furtherReading: [
+      { label: "Outlook Money, 29 October 2026: reported Rs 50 lakh LRS proposal; this is press reporting, not an RBI notification", url: "https://www.outlookmoney.com/banking/rbi-proposes-rs-50-lakh-sub-limit-for-certain-overseas-remittances-under-lrs", check: ["50 lakh", "LRS"] }
+    ]
+  },
   "q.econ.motorisation": {
     sourceNotes: [
       { label: "VAHAN dashboard, Ministry of Road Transport and Highways: monthly vehicle registrations by state, vehicle class and fuel, January 2003 to June 2026", url: "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml", check: "Vahan" },
@@ -458,6 +474,26 @@ export const pinnedReferences = {
       { label: "ILOSTAT, working poverty rate (SDG_0111_SEX_AGE_RT_A), India, all ages and youth (data file; the ILOSTAT topic page blocks automated checks)", url: "https://rplumber.ilo.org/data/indicator?id=SDG_0111_SEX_AGE_RT_A&ref_area=IND&format=.json", check: "SDG_0111" },
       { label: "Max Roser, Our World in Data, Extreme poverty in brief: how low the international poverty lines are set (the $30-a-day comparison)", url: "https://ourworldindata.org/extreme-poverty-in-brief", check: "30" },
       { label: "Max Roser, Our World in Data, The end of progress against extreme poverty? (November 2025)", url: "https://ourworldindata.org/end-progress-extreme-poverty", check: "extreme poverty" }
+    ]
+  },
+  "q.econ.poverty_debate": {
+    sourceNotes: [
+      { label: "World Bank, Subnational Poverty and Inequality Database (SPID), Fall 2026 Excel workbook: HCES 2023-24 state poverty among ages 0-5 and all ages, on the survey reference basis", url: "https://datacatalogfiles.worldbank.org/ddh-published/0064796/DR0092191/AM26%20-%20SPID%20data.xlsx", check: ["poor830", "data_group"] },
+      { label: "Ministry of Health and Family Welfare, Rajya Sabha answer 1272, Annexure I: NFHS-5 (2019-21) child stunting and underweight, India", url: "https://sansad.in/getFile/annex/257/AU1272.pdf?source=pqars", check: ["35.5", "32.1"] },
+      { label: "World Bank, Poverty, Prosperity, and Planet Report 2026: Jobs at the Center of Poverty Eradication (October 26, 2026): flagship report landing page, Chapter 1-4 findings, Global Prosperity Gap, and working poverty analysis", url: "https://www.worldbank.org/en/publication/poverty-prosperity-and-planet", check: ["Poverty, Prosperity, and Planet", "Jobs at the Center of Poverty Eradication"] },
+      { label: "World Bank Reproducibility Package for Poverty, Prosperity, and Planet Report 2026 (Catalog #659, FR_WLD_2026_763, October 2026): Country_FGT lined-up estimates (1981-2050), GlobalDist1000bins quantile distributions, GSAP Fall 2026 subnational atlas, MPM Fall 2026, and Chapter 4 labour-market counterfactuals", url: "https://reproducibility.worldbank.org/index.php/catalog/659", check: ["Poverty, Prosperity, and Planet", "2026"] },
+      { label: "World Bank Poverty and Inequality Platform (PIP), September 2026 release (20260922_2021_01_02_PROD and 20260922_2017_01_02_PROD): India survey-year headcounts across 2021 PPP ($3.00, $4.20, $8.30) and 2017 PPP ($2.15, $3.65, $6.85), Societal Poverty Line, Prosperity Gap, and National Accounts vs survey means", url: "https://pip.worldbank.org/country-profiles/IND", check: ["Poverty and Inequality Platform", "India"] },
+      { label: "World Bank, June 2025 update to global poverty lines: methodology for the transition from 2017 ICP PPP ($2.15, $3.65, $6.85) to 2021 ICP PPP ($3.00, $4.20, $8.30)", url: "https://www.worldbank.org/en/news/factsheet/2025/06/05/june-2025-update-to-global-poverty-lines", check: ["$3.00", "2021 PPP"] },
+      { label: "Himanshu, Peter Lanjouw and Philipp Schirmer, Tinbergen Institute Discussion Paper TI 2025-069/V: survey-consistent PLFS and CES imputation estimates on Tendulkar and Rangarajan poverty lines after 2011-12", url: "https://papers.tinbergen.nl/25069.pdf", check: "Himanshu" },
+      { label: "MoSPI, Household Consumption Expenditure Survey 2023-24 Fact Sheet (December 2024): rural and urban MPCE published rural and urban averages with and without imputation of free foodgrain and selected welfare items", url: "https://www.mospi.gov.in/sites/default/files/press_release/HCES_Press_Note_2023-24_27122024_rev.pdf", check: ["Household Consumption Expenditure Survey", "2023-24"] },
+      { label: "Planning Commission, Press Note on Poverty Estimates 2011-12 (July 2013): India's last official Tendulkar poverty line (Rs 816 rural, Rs 1,000 urban) and 21.9% national headcount", url: "https://www.niti.gov.in/sites/default/files/2020-05/press-note-poverty-2011-12-23-08-16.pdf", check: "Tendulkar" },
+      { label: "C. Rangarajan and S. Mahendra Dev, Counting the Poor (MSE Monograph 30): the 2014 Rangarajan Expert Group methodology (Rs 972 rural, Rs 1,407 urban; 29.5% headcount in 2011-12)", url: "https://mse.ac.in/wp-content/uploads/2021/05/Monograph-30.pdf", check: ["Counting the Poor", "1407"] },
+      { label: "World Bank, financial hardship from out-of-pocket health spending (SH_UHC_FH40 and impoverishing health expenditure indicators), India", url: "https://data.worldbank.org/indicator/SH_UHC_FH40", check: "out-of-pocket" }
+    ],
+    furtherReading: [
+      { label: "World Bank PIP methodology: societal poverty line and prosperity gap definitions (source code and documentation)", url: "https://raw.githubusercontent.com/worldbank/PIP-Methodology/master/04-Calculating-survey-estimates.Rmd", check: ["1.30", "Prosperity gap"] },
+      { label: "NITI Aayog, Multidimensional Poverty in India since 2005-06 (January 2024 discussion paper)", url: "https://www.niti.gov.in/sites/default/files/2024-01/MPI-22_NITI-Aayog20254.pdf", check: "Multidimensional Poverty in India since 2005-06" },
+      { label: "OPHI and UNDP, Global Multidimensional Poverty Index Country Briefing 2023: India", url: "https://ophi.org.uk/sites/default/files/2024-01/CB_IND_2023.pdf", check: "Country Briefing" }
     ]
   },
   "q.econ.rnd": {

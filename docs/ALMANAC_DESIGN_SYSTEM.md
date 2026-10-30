@@ -66,7 +66,7 @@ Use them in a `visualPlan` entry with `chart: "<form>"`. Each adapter returns `n
 | `scatterFit` | two measures for the same units | association, outliers named, honest r | readers will take it as cause | `indicator` (table rows `label,x,y,highlight`), `sizePrefix`, `sizeFallback`, `sizeKey`, `refY`, `threshold`, `xLog`/`yLog` (log axes on 1-2-5 ticks; r is computed on the logs) |
 | `parade` | values for fractiles of a population | inequality, each group as wide as its share | the groups are not ordered | `series[]` (fractile tables), `widths` |
 | `sensitivity` | an estimate that depends on a chosen threshold | showing the range a choice creates | the threshold is fixed by law and not in dispute | `indicator`, `groupField`, `xField`, `yField`, `band`, `highlight` |
-| `dumbbell` | two survey rounds, many units | who moved, by how much, who fell back | more than two time points | `indicator`, `labelField`, `aField`, `bField`, `aLabel`, `bLabel`, `exclude`; a `short` column labels the phone version, which drops alternate rows only past 12 |
+| `dumbbell` | two survey rounds, many units | who moved, by how much, who fell back | more than two time points | `indicator`, `labelField`, `aField`, `bField`, `aLabel`, `bLabel`, `exclude`; a `short` column labels the phone version; all rows are retained as the drawing grows vertically |
 | `rankSlope` | the same units ranked two ways | where two rankings disagree | gaps between ranks are what matter | `series[2]` (tables with `label,value`), `emphasis` (the unit drawn in ink) |
 | `beeswarm` | one value per year or place, up to a few hundred | a whole distribution, every case visible | the order in time is the point | `indicator`, `groupIndicator`, `groupField`, `groups`, `marks`; or a table: `labelField`, `valueField`, `groupField`, `domain` (may run high to low, for ranks), `ticks`, `ends` |
 | `dayRibbon` | parts of a fixed whole (a day, a rupee) | how two groups divide the same whole | the parts do not add up to a real total | `parts[]`, `total` |
@@ -202,7 +202,9 @@ Two more options outside the Almanac forms, added for the innovation article (Oc
   between two series by date (an audited interval, a min-max) in the protagonist's ink, under the lines, and
   counts toward the axis. The label is set once in the annotation voice where it clears every line.
 - **`groupedTable`.** One group per table row, one bar per named column (`columns: [{ key, label }]`,
-  `labelField`), all on one unit. Use short labels: seven groups of long names collide on the axis.
+  `labelField`), all on one unit. When category names or bar counts cannot fit a vertical drawing,
+  the renderer uses horizontal grouped rows, wrapping the full category name and printing every value.
+  Comparison keys wrap at each artboard's width; rural and urban keep hara and neel.
 
 Percentages under 1 print with two decimals (0.65%, not 0.7%), on bars, axes and line ends alike.
 
@@ -271,3 +273,13 @@ figures. A new layout problem found by eye becomes a rule here, not a one-chart 
 before you write the title: on the fertility page, income tracks fertility slightly more tightly than girls'
 schooling on a linear fit (r −0.69 against −0.64), which is why those two charts stay as `scatterXY` until the
 claim in the prose is settled.
+
+## October 2026 flagship audit corrections
+
+Dumbbell axes use the chart's actual unit formatter, including money and hours. Long row labels and comparison keys wrap to the current drawing width. Grouped comparisons switch to horizontal groups when names or bars cannot fit as columns, preserving every category and a common zero-based scale; rural and urban retain hara and neel. Long bar labels may take as many lines as needed.
+
+`audit-charts.mjs` scrolls through figures and waits for lazy artboard selection before measuring. Measurements of untouched desktop fallback SVGs on a phone are not measurements of the reader's displayed drawing.
+
+The `stackedArea` adapter currently expects annual dates. Do not feed it several monthly dates from one year: they collapse to one x coordinate. The LRS six-month travel breakdown uses grouped monthly rows instead.
+
+The dumbbell adapter accepts a valid two-row comparison. Every drawing, including mobile, retains all eligible input rows; adapt its height rather than silently dropping alternate categories. Its percentage formatter shares the standard below-one-percent precision rule, and percentage points stay bare, including zero. Currency detection matches the whole abbreviation `Rs`, so `hours` and `years` remain numeric. Run `node scripts/stories/check-almanac-unit-formats.mjs` for production-adapter regressions across the artboard ladder.

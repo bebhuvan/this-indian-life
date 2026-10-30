@@ -153,7 +153,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   // A text-width figure gives its labels a little more of the width: a third of 640 wrapped
   // "with a positive Indian Ocean Dipole" though the bars had room to spare.
   const capW = Math.min(W * (phone ? 0.42 : W <= 700 ? 0.42 : 0.36), Math.ceil(longest) + 14);
-  const wrapAt = (s: string, chars: number) => wrap(s, Math.max(6, Math.floor(chars * (s.length * labSize * 0.54) / Math.max(1, labelTextW(s, labSize)))), 2);
+  const wrapAt = (s: string, chars: number) => wrap(s, Math.max(6, Math.floor(chars * (s.length * labSize * 0.54) / Math.max(1, labelTextW(s, labSize)))), 20);
   const linesFor = (s: string) => (labelTextW(s, labSize) <= capW - 12 ? [s] : wrapAt(s, Math.floor((capW - 16) / (labSize * 0.58))));
   const labelW = m ? 0 : Math.min(capW, Math.ceil(Math.max(...rows.map((r) => Math.max(...linesFor(r.label).map((l) => labelTextW(l, labSize, isNational(r.label) ? 600 : 400)))))) + 14);
   const x0 = labelW + negValW;
@@ -868,13 +868,66 @@ function scenarioMapsSvg(v: ScenarioMapsVisual, o: { width: number; mobile: bool
 function groupedSvg(v: GroupedBarVisual, o: { width: number; mobile: boolean }) {
   // The key and the unit each get a row of their own above the plot: set on one line, the unit
   // sat in small type over the key and read as a stray caption.
-  const W = o.width, m = o.mobile, H = m ? 320 : 430, padL = 44, top = m ? 64 : 70, bot = 32;
+  const W = o.width, m = o.mobile, padL = 44, bot = 32;
+  const ks = m ? 12.5 : 13;
+  const seriesColor = (i: number) => /\brural\b/i.test(v.series[i]) ? INK.hara : /\burban\b/i.test(v.series[i]) ? INK.neel : SERIES[Math.min(i, SERIES.length - 1)];
+  // A long comparison key needs as many rows as its labels require at this artboard.
+  // Keeping it on one line silently clipped entire series on phones and paired charts.
+  let kx = 0, ky = 4, keyRowH = ks;
+  const key = v.series.map((s,i) => {
+    const lines = textW(s,ks) > W - 20 ? wrap(s,Math.max(8,Math.floor((W-20)/(ks*.57))),20) : [s];
+    const width = Math.max(...lines.map(s=>textW(s,ks))) + 36;
+    if (kx && kx + width > W) { kx = 0; ky += keyRowH + 12; keyRowH = ks; }
+    const entry = {lines,i,x:kx,y:ky}; kx += width; keyRowH = Math.max(keyRowH,lines.length*(ks+3)-3); return entry;
+  });
+  const keyExtra = ky - 4 + keyRowH - ks, top = (m ? 64 : 70) + keyExtra, H = (m ? 320 : 430) + keyExtra;
   const sc = tightScale(0, Math.max(...v.groups.flatMap((g) => g.values), 1));
   const gw = (W - padL) / v.groups.length, ns = v.series.length, gap = m ? 2 : 3, bw = Math.min(m ? 10 : 26, (gw - 10) / ns - gap);
   const y = (val: number) => H - bot - ((val - sc.min) / (sc.max - sc.min)) * (H - top - bot);
-  const ks = m ? 12.5 : 13;
-  let b = "", kx = 0;
-  v.series.forEach((s, i) => { b += `<rect x="${kx}" y="4" width="11" height="11" fill="${SERIES[Math.min(i, SERIES.length - 1)]}"/>` + txt(kx + 16, 14, s, { size: ks, fill: INK.ink }); kx += textW(s, ks) + 36; });
+  let b = "";
+  key.forEach(({lines,i,x,y}) => { b += `<rect x="${x}" y="${y}" width="11" height="11" fill="${seriesColor(i)}"/>`; lines.forEach((s,j)=>{ b += txt(x + 16, y + 10 + j*(ks+3), s, { size: ks, fill: INK.ink }); }); });
+  // Preserve every category when a vertical layout cannot fit its names or its bars.
+  // Table-shaped comparisons read as rows, with a common zero-based horizontal scale.
+  const horizontal = (m && v.groups.length > 4) || bw < 7 || v.groups.some(g => labelTextW(g.label, m ? 12 : 13) > gw - 8);
+  if (horizontal) {
+    const fs = m ? 12 : 13, bh = 12, step = 19;
+    const values = v.groups.flatMap(g => g.values);
+    const negativeMargin = Math.max(0,...values.filter(val=>val<0).map(val=>labelTextW(fmt(val,v.unit),11.5)+8));
+    const lw = m ? 0 : Math.min(W * .32, 230), left = (m ? 0 : lw + 14) + negativeMargin;
+    const lo = Math.min(0,...values), hi = Math.max(0,...values), span = hi-lo || 1;
+    const scale = niceScale(lo,hi);
+    // Fit the printed value at each bar's actual position. A rounded axis ceiling
+    // plus a fixed longest-value gutter left a conspicuous blank strip after every row.
+    const plotW = Math.min(W-left-8,...values.filter(val=>val>0).map(val=>(W-left-8-labelTextW(fmt(val,v.unit),11.5))/((val-lo)/span)));
+    const x = (val:number) => left + (val-lo)/span*plotW;
+    const rows = v.groups.map(g=>{
+      const lines = wrap(g.label,Math.max(8,Math.floor((m ? W : lw)/(fs*.57))),20);
+      return {g,lines,height: m ? lines.length*15 + ns*step + 15 : Math.max(lines.length*15,ns*step) + 18};
+    });
+    const bottom = top + rows.reduce((n,r)=>n+r.height,0);
+    b += unitCaption(0,top-26,v.unit,m?12:12.5);
+    let lastTickR=-Infinity;
+    for (const t of scale.ticks) {
+      if(t<lo||t>hi)continue;
+      const label=fmt(t,v.unit), tw=labelTextW(label,11.5), anchor=t===scale.min?'start':'middle', tl=t===scale.min?x(t):x(t)-tw/2;
+      if(tl<lastTickR+8)continue;
+      b+=line(x(t),top-2,x(t),bottom,t===0?INK.rule:INK.grid,1);
+      b+=txt(x(t),top-10,label,{size:11.5,fill:INK.ink3,anchor});lastTickR=tl+tw;
+    }
+    let cy=top+8;
+    for(const {g,lines,height} of rows){
+      if(m) lines.forEach((s,i)=>{b+=txt(0,cy+11+i*15,s,{size:fs,fill:INK.ink});});
+      else lines.forEach((s,i)=>{b+=txt(0,cy+ns*step/2+(i-(lines.length-1)/2)*15,s,{size:fs,fill:INK.ink});});
+      const by=cy+(m?lines.length*15+5:0);
+      g.values.forEach((val,si)=>{
+        const yy=by+si*step, start=Math.min(x(0),x(val)), width=Math.abs(x(val)-x(0));
+        b+=`<rect class="mk" x="${r1(start)}" y="${r1(yy)}" width="${r1(width)}" height="${bh}" fill="${seriesColor(si)}"${tip(`${g.label} · ${v.series[si]}`,fmt(val,v.unit))}/>`;
+        b+=txt(val<0?x(val)-5:x(val)+5,yy+10,fmt(val,v.unit),{size:11.5,fill:INK.ink2,anchor:val<0?'end':'start'});
+      });
+      cy+=height;
+    }
+    return svgDoc('fig-grouped fig-grouped-rows',W,bottom+10,b,v.title);
+  }
   b += unitCaption(0, top - 22, v.unit, m ? 12 : 12.5);
   sc.ticks.forEach((t, i) => { b += line(padL, y(t), W, y(t), i ? INK.grid : INK.ink, 1); b += txt(padL - 8, y(t) + 4, fmt(t, v.unit), { size: 12, fill: INK.ink3, anchor: "end" }); });
   // Values sit on the bars when there is room for them: a dozen or more bars are hard to read off
@@ -889,10 +942,10 @@ function groupedSvg(v: GroupedBarVisual, o: { width: number; mobile: boolean }) 
     const cx = padL + gi * gw + gw / 2;
     g.values.forEach((val, si) => {
       const x = cx - (ns * (bw + gap)) / 2 + si * (bw + gap);
-      b += `<rect class="mk" x="${r1(x)}" y="${r1(y(val))}" width="${r1(bw)}" height="${r1(Math.max(1, y(0) - y(val)))}" fill="${SERIES[Math.min(si, SERIES.length - 1)]}"${tip(`${g.label} · ${v.series[si]}`, fmt(val, v.unit))}/>`;
+      b += `<rect class="mk" x="${r1(x)}" y="${r1(y(val))}" width="${r1(bw)}" height="${r1(Math.max(1, y(0) - y(val)))}" fill="${seriesColor(si)}"${tip(`${g.label} · ${v.series[si]}`, fmt(val, v.unit))}/>`;
       if (label) b += txt(x + bw / 2, y(val) - 5, num(val), { size: 11.5, fill: INK.ink2, anchor: "middle" });
     });
-    if (!m || (v.groups.length - 1 - gi) % 2 === 0) {
+    {
       const tw = labelTextW(g.label, nameSize), x0 = Math.min(W - tw, Math.max(0, cx - tw / 2));
       if (x0 >= lastR + 8) { b += txt(x0, H - bot + 19, g.label, { size: nameSize, fill: INK.ink2 }); lastR = x0 + tw; }
     }

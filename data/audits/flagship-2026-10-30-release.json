@@ -1,0 +1,342 @@
+{
+  "auditDate": "2026-10-30",
+  "scope": [
+    "q.econ.lrs_controls",
+    "q.econ.poverty_debate"
+  ],
+  "sourceCellsChecked": 2212,
+  "numericOccurrencesReviewed": 1111,
+  "artifactsChecked": 49,
+  "plannedCharts": 24,
+  "focusedGates": [
+    {
+      "story": "lrs",
+      "gate": "claims",
+      "output": "Live source confirmation: 9 response comparisons; 18273 CAS CSV observations; no changed/missing frozen rows.\n1591 artifact numeric cells; 0 mismatches; 183 annual comparison cells; 6 identical duplicates\n287 numeric occurrences; 1591 raw-to-artifact cells; 0 coverage failures."
+    },
+    {
+      "story": "lrs",
+      "gate": "artifacts",
+      "output": "{\n  \"ok\": true,\n  \"strict\": false,\n  \"checked\": {\n    \"seriesArtifacts\": 26,\n    \"catalogFiles\": 1\n  },\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"findings\": []\n}"
+    },
+    {
+      "story": "lrs",
+      "gate": "explanation",
+      "output": "Validated 1 explanation artifact(s): 0 failure(s), 0 warning(s)."
+    },
+    {
+      "story": "poverty",
+      "gate": "claims",
+      "output": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 0 mismatches; 31 source hashes.\nNumeric claim inventory: 824 occurrences, 402 text surfaces, 0 failures."
+    },
+    {
+      "story": "poverty",
+      "gate": "artifacts",
+      "output": "{\n  \"ok\": true,\n  \"strict\": false,\n  \"checked\": {\n    \"seriesArtifacts\": 23,\n    \"catalogFiles\": 1\n  },\n  \"errors\": 0,\n  \"warnings\": 0,\n  \"findings\": []\n}"
+    },
+    {
+      "story": "poverty",
+      "gate": "explanation",
+      "output": "Validated 1 explanation artifact(s): 0 failure(s), 0 warning(s)."
+    }
+  ],
+  "sourceLinkChecks": {
+    "lrs": {
+      "checked": 10,
+      "failed": 0,
+      "report": "data/audits/lrs-controls/source-links-audit.txt"
+    },
+    "poverty": {
+      "checked": 14,
+      "failed": 0,
+      "report": "data/audits/poverty-debate/source-links-audit.txt"
+    },
+    "limit": "The reader-page checks verify report headings. The separate direct-source confirmation now verifies the monthly and annual exports and original external-sector observations."
+  },
+  "olderExplanationHashes": {
+    "data/explanations/en/q.econ.lrs_remittances.json": {
+      "sha256": "070fe2e5896fb1ea38e42735203e703d61eb0c1d4716811af7b20d2c962da41b",
+      "unchanged": true
+    },
+    "data/explanations/en/q.econ.poverty.json": {
+      "sha256": "799dca0513266eeab62310e180ec608347a907bfc348cdfc1e4730e23085a131",
+      "unchanged": true
+    }
+  },
+  "rawManifests": {
+    "data/raw/rbi-dbie-lrs-2026/manifest.json": {
+      "sha256": "0ce28f40cc097d221e43637dd88efc3206f297b7a8e8d955e5fd475ff336115f",
+      "files": 6
+    },
+    "data/raw/wb-3pr-2026/manifest.json": {
+      "sha256": "18b33794698ee12c403c30d77c014e93c1216021cdde35c5c989e1f1cd0ec1a3",
+      "files": 31
+    },
+    "data/raw/rbi-dbie-lrs-confirmation-20261030/manifest.json": {
+      "sha256": "a2002e874d8342d9ff009ab68651d0090aa0f6c9bb14bff0328849338e78bd8a",
+      "files": 25
+    }
+  },
+  "build": {
+    "command": "npm run build",
+    "status": "pass",
+    "pages": 112,
+    "chartArtboards": 6218,
+    "elapsed": "1m 7s",
+    "outputTail": [
+      "17:02:53 [build] \u2713 Completed in 1m 6s.",
+      "17:02:54 [indica-artboards] wrote 6218 chart artboards (72 MB)",
+      "17:02:54 [build] 112 page(s) built in 1m 7s",
+      "17:02:54 [build] Complete!"
+    ]
+  },
+  "visualReview": {
+    "lrs-controls": {
+      "status": "pass",
+      "plannedAndRenderedCards": 9,
+      "layoutWidths": [
+        412,
+        1440
+      ],
+      "layoutChecks": {
+        "overlaps": 0,
+        "spills": 0,
+        "small": 0,
+        "ladders": 0,
+        "gutters": 0,
+        "sixLayoutRules": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "scaleWidths": [
+        360,
+        768,
+        1024,
+        1440
+      ],
+      "scaleLog": [
+        "360px: 9 drawings, scale 0.99-0.99, smallest text 11.4px, 0 outside the limits",
+        "768px: 9 drawings, scale 1.00-1.01, smallest text 11.5px, 0 outside the limits",
+        "1024px: 9 drawings, scale 0.98-0.98, smallest text 11.3px, 0 outside the limits",
+        "1440px: 9 drawings, scale 1.00-1.00, smallest text 11.5px, 0 outside the limits"
+      ],
+      "manualReview": {
+        "completedAt": "2026-10-30T11:34:02.410195+00:00",
+        "cardsInspected": 18,
+        "widths": [
+          412,
+          1440
+        ],
+        "unresolvedVisualFindings": [],
+        "checks": [
+          "Every chart screenshot inspected for labels, units, comparison keys, inks and form suitability.",
+          "All section bindings match the intended headings in the built HTML.",
+          "Signed contributions preserve their zero baseline; hours remain numeric and percentages preserve their unit.",
+          "The complete six-group purpose bridge shows both signs on one zero baseline; the normalized calendar uses percentage units and all twelve months.",
+          "Rendered SVG inks were checked against explainer descriptions; no explainer names an ink that conflicts with the drawing.",
+          "V2 screenshots inspected directly where changed; pixel-identical contact sheets confirm the remaining reviewed cards match the first pass."
+        ]
+      },
+      "report": "data/audits/lrs-controls/visual-validation.json",
+      "bindingFailures": 0
+    },
+    "poverty-debate": {
+      "status": "pass",
+      "plannedAndRenderedCards": 15,
+      "layoutWidths": [
+        412,
+        1440
+      ],
+      "layoutChecks": {
+        "overlaps": 0,
+        "spills": 0,
+        "small": 0,
+        "ladders": 0,
+        "gutters": 0,
+        "sixLayoutRules": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "scaleWidths": [
+        360,
+        768,
+        1024,
+        1440
+      ],
+      "scaleLog": [
+        "360px: 16 drawings, scale 0.99-0.99, smallest text 10.9px, 0 outside the limits",
+        "768px: 16 drawings, scale 1.00-1.01, smallest text 11.5px, 0 outside the limits",
+        "1024px: 16 drawings, scale 0.98-0.98, smallest text 11.3px, 0 outside the limits",
+        "1440px: 16 drawings, scale 1.00-1.00, smallest text 11.5px, 0 outside the limits"
+      ],
+      "manualReview": {
+        "completedAt": "2026-10-30T11:34:02.410195+00:00",
+        "cardsInspected": 30,
+        "widths": [
+          412,
+          1440
+        ],
+        "unresolvedVisualFindings": [],
+        "checks": [
+          "Every chart screenshot inspected for labels, units, comparison keys, inks and form suitability.",
+          "All section bindings match the intended headings in the built HTML.",
+          "Signed contributions preserve their zero baseline; hours remain numeric and percentages preserve their unit.",
+          "The 14-state child comparison retains all 14 rows on mobile, including Kerala; no alternating categories are discarded.",
+          "Rendered SVG inks were checked against explainer descriptions; no explainer names an ink that conflicts with the drawing.",
+          "V2 screenshots inspected directly where changed; pixel-identical contact sheets confirm the remaining reviewed cards match the first pass."
+        ]
+      },
+      "report": "data/audits/poverty-debate/visual-validation.json",
+      "bindingFailures": 0
+    }
+  },
+  "publicationDecision": "Approved for production by the user. Source, numeric, rendered-page and indexed-evidence gates pass. Publish through the main-branch Cloudflare deployment workflow; the Git commit and Actions run provide the release revision. Historical LRS annual-headline conflict remains disclosed; poverty replicates published tables.",
+  "unitFormatRegression": {
+    "command": "node scripts/stories/check-almanac-unit-formats.mjs",
+    "status": "pass",
+    "drawingsChecked": 46,
+    "widths": [
+      320,
+      384,
+      508,
+      660,
+      1040
+    ],
+    "classes": [
+      "hours",
+      "years",
+      "USD million",
+      "Rs lakh",
+      "percent",
+      "percentage points"
+    ],
+    "twoRowComparisonPresent": true,
+    "completeMobileComparisonRows": 14,
+    "completeComparisonDrawings": 6
+  },
+  "sharedRendererRegression": {
+    "report": "data/audits/lrs-controls/final-focused-layout-audit.json",
+    "oldArticleAndLibraryCardsPerWidth": 60,
+    "combinedFiguresPerWidth": 84,
+    "widths": [
+      412,
+      1440
+    ],
+    "historicalReport": "data/audits/lrs-controls/shared-renderer-regressions.json"
+  },
+  "finalWhitespaceCheck": "git diff --check: pass",
+  "auditStatus": "complete; numeric, source and final rendered-page gates pass",
+  "sourceConfirmation": {
+    "status": "pass",
+    "report": "data/audits/lrs-controls/live-source-confirmation.json",
+    "comparisons": [
+      {
+        "id": "Webi 19",
+        "kind": "webi",
+        "frozenRows": 14514,
+        "liveRows": 14514,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 0,
+        "sameRowMultiset": true
+      },
+      {
+        "id": "Webi 752",
+        "kind": "webi",
+        "frozenRows": 2928,
+        "liveRows": 2928,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 0,
+        "sameRowMultiset": true
+      },
+      {
+        "id": "CAS 0",
+        "kind": "cas",
+        "frozenRows": 11492,
+        "liveRows": 11492,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 0,
+        "sameRowMultiset": true
+      },
+      {
+        "id": "CAS 1",
+        "kind": "cas",
+        "frozenRows": 1008,
+        "liveRows": 1012,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 4,
+        "sameRowMultiset": false
+      },
+      {
+        "id": "CAS 2",
+        "kind": "cas",
+        "frozenRows": 121,
+        "liveRows": 121,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 0,
+        "sameRowMultiset": true
+      },
+      {
+        "id": "CAS 3",
+        "kind": "cas",
+        "frozenRows": 60,
+        "liveRows": 60,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 0,
+        "sameRowMultiset": true
+      },
+      {
+        "id": "CAS 4",
+        "kind": "cas",
+        "frozenRows": 1267,
+        "liveRows": 1271,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 4,
+        "sameRowMultiset": false
+      },
+      {
+        "id": "CAS 5",
+        "kind": "cas",
+        "frozenRows": 4498,
+        "liveRows": 4498,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 0,
+        "sameRowMultiset": true
+      },
+      {
+        "id": "CAS 6",
+        "kind": "cas",
+        "frozenRows": 60,
+        "liveRows": 60,
+        "missingOrChangedRows": 0,
+        "additionalLiveRows": 0,
+        "sameRowMultiset": true
+      }
+    ],
+    "warehouseCsvObservationsChecked": 18273,
+    "mutationProbes": "data/audits/lrs-controls/live-source-mutation-probes.json",
+    "priorHold": "resolved by direct RBI guest-session retrieval, not waived",
+    "mutationProbeCount": 4
+  },
+  "focusedRevision": {
+    "lrs": "Nine charts; one same-year macro scale comparison; purpose-change bridge; seasonality normalized within fiscal year; worked TCS example. Extended BoP/CAD/reserve exposition removed.",
+    "poverty": "Fifteen charts; decile real consumption growth, hypothetical loss sensitivity, SPID child comparison and common-year Asian peers. Three existing charts replaced.",
+    "sourceAddition": "Unchanged official SPID Fall 2026 Excel workbook, byte-identical download hash verified."
+  },
+  "releasePreparation": {
+    "authorizationDate": "2026-10-30",
+    "workflow": ".github/workflows/deploy.yml",
+    "branch": "main",
+    "indexedEvidenceCheck": "python3 scripts/check-story-evidence-commit.py --all: six bundles pass",
+    "scope": "Both new articles, their complete evidence bundles and reviewed shared chart fixes; unrelated local work excluded."
+  }
+}

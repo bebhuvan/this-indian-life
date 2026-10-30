@@ -3,6 +3,7 @@
 // SVG drawn for that width (not shrunk), and the rows behind it for the CSV download.
 // Builders return null when their data is missing, so a plan entry fails soft.
 import { isPhoneW, PHONE_DRAW_W } from "./artboards";
+import { fmt } from "./chartFormat";
 import { INK, SCALES, STATE_CODE, type Stops, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, slope, stackedArea, type ScatterPoint } from "./almanac";
 
 type Row = Record<string, unknown>;
@@ -88,7 +89,7 @@ function niceAxis(lo: number, hi: number, zero = false): { min: number; max: num
   for (let v = min; v <= max + step / 2; v += step) ticks.push(Math.round(v * 1e6) / 1e6);
   return { min, max, ticks };
 }
-const unitFmt = (unit: string) => (/%|per ?cent/i.test(unit) ? (v: number) => `${Math.round(v)}%` : /₹|rupee|rs\b/i.test(unit) ? (v: number) => `₹${v.toLocaleString("en-IN")}` : (v: number) => (Math.abs(v) < 10 && v % 1 ? v.toFixed(1) : v.toLocaleString("en-IN")));
+const unitFmt = (unit: string) => (/percentage[- ]points?|\bpp\b|\bpts?\b/i.test(unit) ? (v: number) => v === 0 ? "0" : fmt(v, unit) : /%|per ?cent/i.test(unit) ? (v: number) => fmt(v, unit) : /₹|rupee|\brs\b/i.test(unit) ? (v: number) => `₹${v.toLocaleString("en-IN")}` : (v: number) => (Math.abs(v) < 10 && v % 1 ? v.toFixed(1) : v.toLocaleString("en-IN")));
 
 // ---------------------------------------------------------------- heat strip
 function heatStripVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
@@ -241,10 +242,10 @@ function dumbbellVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const rows = a.rows.filter((r) => r[af] != null && r[bf] != null && !(e.exclude ?? []).includes(String(r[lf])))
     .map((r) => ({ label: String(r[lf]).replace("Jammu and Kashmir", "Jammu & Kashmir"), short: r.short != null ? String(r.short) : short(String(r[lf])), a: Number(r[af]), b: Number(r[bf]), emphasis: String(r[lf]) === (e.emphasis ?? "India") }))
     .sort((p, q) => q.b - p.b);
-  if (rows.length < 3) return null;
+  if (rows.length < 2) return null;
   const all = rows.flatMap((r) => [r.a, r.b]), ax = e.domain ? { min: e.domain[0], max: e.domain[1], ticks: e.ticks ?? [] } : niceAxis(Math.min(...all), Math.max(...all));
-  const opts = { domain: [ax.min, ax.max] as [number, number], ticks: e.ticks ?? ax.ticks, aLabel: e.aLabel ?? "Before", bLabel: e.bLabel ?? "Latest", label: e.title ?? a.title };
-  const { svg, svgM, draw } = pairAt((w) => dumbbell(rows, { ...opts, width: w }), (w) => dumbbell(rows.length > 12 ? rows.filter((r, i) => i % 2 === 0 || r.emphasis) : rows, { ...opts, width: w, rowH: 20, half: true }));
+  const opts = { domain: [ax.min, ax.max] as [number, number], ticks: e.ticks ?? ax.ticks, fmt: unitFmt(e.unit ?? a.unit), aLabel: e.aLabel ?? "Before", bLabel: e.bLabel ?? "Latest", label: e.title ?? a.title };
+  const { svg, svgM, draw } = pairAt((w) => dumbbell(rows, { ...opts, width: w }), (w) => dumbbell(rows, { ...opts, width: w, rowH: 20, half: true }));
   return { kind: "almanac", form: "dumbbell", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: rows.map((r) => ({ label: r.label, [af]: r.a, [bf]: r.b })) };
 }
 

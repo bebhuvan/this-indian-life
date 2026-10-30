@@ -686,31 +686,59 @@ export function dumbbell(rows: DumbbellRow[], o: { domain: [number, number]; tic
   // The right margin holds the "a → b" values; the phone version prints none, so needs none.
   // The label column fits the longest label (at least the old fixed width, at most 40% of the figure).
   const longest = Math.max(0, ...rows.map((r) => textWidth(half ? r.short ?? r.label : r.label, ls, r.emphasis ? 600 : 400)));
-  const lw = thumb ? 0 : Math.min(W * 0.4, Math.max(half ? 84 : 140, Math.ceil(longest) + 18)), mr = thumb ? 0 : half ? 16 : roomy ? 90 : 70, top = thumb ? 0 : roomy ? 32 : 26;
-  const x = scale(o.domain[0], o.domain[1], lw, W - mr), f = o.fmt ?? ((v: number) => `${Math.round(v)}%`);
-  const H = top + rows.length * rowH + (thumb ? 0 : 36);
+  const f = o.fmt ?? ((v: number) => `${Math.round(v)}%`);
+  const lw = thumb ? 0 : Math.min(W * 0.44, Math.max(half ? 84 : 140, Math.ceil(longest) + 18));
+  const mr = thumb ? 0 : half ? Math.max(16, ...o.ticks.map(v => textWidth(f(v), ax.size) / 2 + 3)) : Math.max(...rows.map(r => textWidth(`${f(r.a)} → ${f(r.b)}`, vs, r.emphasis ? 600 : 400) + 14));
+  const top = thumb ? 0 : roomy ? 32 : 26, x = scale(o.domain[0], o.domain[1], lw, W - mr);
+  const labelLines = rows.map(r => {
+    const words = (half ? r.short ?? r.label : r.label).split(/\s+/), lines: string[] = [];
+    let current = '';
+    for (const word of words) {
+      const next = current ? `${current} ${word}` : word;
+      if (current && textWidth(next, ls, r.emphasis ? 600 : 400) > lw - 14) { lines.push(current); current = word; } else current = next;
+    }
+    if (current) lines.push(current);
+    return lines;
+  });
+  const heights = rows.map((_,i) => Math.max(rowH, labelLines[i].length * ls * 1.2 + 8));
+  const plotH = heights.reduce((a,b)=>a+b,0);
+  const rose = rows.some((r) => r.b >= r.a && !r.emphasis), fell = rows.some((r) => r.b < r.a);
+  const keys = [[null, o.aLabel], ...(rose && fell ? [[INK.neel, `${o.bLabel}, higher`], [INK.sindoor, `${o.bLabel}, lower`]] : [[fell ? INK.sindoor : INK.neel, o.bLabel]])];
+  let keyX = 4, keyY = top + plotH + 24;
+  const placedKeys = keys.map(([color,text]) => {
+    const width = 10 + textWidth(text!, vs) + 20;
+    if (keyX > 4 && keyX + width > W) { keyX = 4; keyY += vs + 10; }
+    const key = {color,text:text!,x:keyX,y:keyY}; keyX += width; return key;
+  });
+  const H = thumb ? top + plotH : keyY + 12;
   let b = "";
-  if (!thumb) for (const v of o.ticks) { b += line(x(v), top - 4, x(v), top + rows.length * rowH, INK.grid); b += txt(x(v), top - 12, f(v), { ...ax, anchor: "middle" }); }
+  if (!thumb) {
+    // Name the full plotting domain even when the final round tick is short of it.
+    b += line(x(o.domain[1]), top - 4, x(o.domain[1]), top + plotH, INK.grid);
+    let previousRight = -Infinity;
+    for (const v of o.ticks) {
+      const tw = textWidth(f(v), ax.size);
+      if (x(v) - tw / 2 < previousRight + 8) continue;
+      b += line(x(v), top - 4, x(v), top + plotH, INK.grid);
+      b += txt(x(v), top - 12, f(v), { ...ax, anchor: "middle" });
+      previousRight = x(v) + tw / 2;
+    }
+  }
+  let rowTop = top;
   rows.forEach((r, i) => {
-    const yy = top + i * rowH + rowH / 2;
-    if (!thumb) b += txt(lw - 10, yy + 4, half ? r.short ?? r.label : r.label, { anchor: "end", size: ls, fill: INK.ink, weight: r.emphasis ? 600 : undefined });
+    const yy = rowTop + heights[i] / 2;
+    rowTop += heights[i];
+    if (!thumb) labelLines[i].forEach((s,k) => { b += txt(lw - 10, yy + ls * .32 + (k - (labelLines[i].length - 1) / 2) * ls * 1.2, s, { anchor: "end", size: ls, fill: INK.ink, weight: r.emphasis ? 600 : undefined }); });
     const a = x(r.a), c = x(r.b), fell = r.b < r.a;
     b += line(a, yy, c, yy, r.emphasis ? "#9a9a9a" : "#c9cfe6", thumb ? 1.5 : roomy ? 2.5 : 2);
     b += `<circle cx="${r1(a)}" cy="${r1(yy)}" r="${thumb ? 2 : ra}" fill="#ffffff" stroke="${INK.ink3}" stroke-width="1.25"/>`;
     b += `<circle cx="${r1(c)}" cy="${r1(yy)}" r="${thumb ? 2.6 : rb}" fill="${fell ? INK.sindoor : r.emphasis ? INK.ink : INK.neel}"><title>${esc(r.label)}: ${f(r.a)} to ${f(r.b)}</title></circle>`;
-    if (!thumb && !half && (i === 0 || r.emphasis || i === rows.length - 1)) b += txt(Math.max(a, c) + 10, yy + 4, `${f(r.a)} → ${f(r.b)}`, { size: vs, fill: r.emphasis ? INK.ink : INK.ink2, weight: r.emphasis ? 600 : undefined });
+    if (!thumb && !half) b += txt(Math.max(a, c) + 10, yy + 4, `${f(r.a)} → ${f(r.b)}`, { size: vs, fill: r.emphasis ? INK.ink : INK.ink2, weight: r.emphasis ? 600 : undefined });
   });
   if (!thumb) {
-    // On a phone the key starts at the left edge: under the plot, three entries ran off the figure.
-    const ly = H - 10, k0 = half ? 4 : lw + 4;
-    b += `<circle cx="${k0}" cy="${ly - 4}" r="3.5" fill="#ffffff" stroke="${INK.ink3}" stroke-width="1.25"/>` + txt(k0 + 9, ly, o.aLabel, { size: vs });
-    // The key shows the inks the rows use: a fall is sindoor, so a key of one neel dot misread a chart where every row fell.
-    const rose = rows.some((r) => r.b >= r.a && !r.emphasis), fell = rows.some((r) => r.b < r.a);
-    const keys = rose && fell ? [[INK.neel, `${o.bLabel}, higher`], [INK.sindoor, `${o.bLabel}, lower`]] : [[fell ? INK.sindoor : INK.neel, o.bLabel]];
-    let kx = k0 + 9 + textWidth(o.aLabel, vs) + 22;
-    for (const [c, t] of keys) { b += `<circle cx="${r1(kx)}" cy="${ly - 4}" r="4.5" fill="${c}"/>` + txt(kx + 10, ly, t, { size: vs }); kx += 10 + textWidth(t, vs) + 22; }
+    for (const key of placedKeys) b += `<circle cx="${r1(key.x)}" cy="${r1(key.y - 4)}" r="${key.color ? 4.5 : 3.5}" fill="${key.color || '#ffffff'}"${key.color ? '' : ` stroke="${INK.ink3}" stroke-width="1.25"`}/>` + txt(key.x + 10, key.y, key.text, { size: vs });
   }
-  return svg(W, H, b, o.label);
+  return svg(W, H, b, o.label).replace('role="img"','data-form="dumbbell" role="img"');
 }
 
 // =====================================================================

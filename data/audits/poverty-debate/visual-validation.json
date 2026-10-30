@@ -1,0 +1,311 @@
+{
+  "checkedAt": "2026-10-30T11:34:02.410195+00:00",
+  "status": "pass",
+  "questionId": "q.econ.poverty_debate",
+  "buildLog": "/tmp/indica-focused-final-build-v2.log",
+  "plannedAndRenderedCards": 15,
+  "layoutWidths": [
+    412,
+    1440
+  ],
+  "bindingFailures": [],
+  "scaleWidths": [
+    360,
+    768,
+    1024,
+    1440
+  ],
+  "scaleLog": [
+    "360px: 16 drawings, scale 0.99-0.99, smallest text 10.9px, 0 outside the limits",
+    "768px: 16 drawings, scale 1.00-1.01, smallest text 11.5px, 0 outside the limits",
+    "1024px: 16 drawings, scale 0.98-0.98, smallest text 11.3px, 0 outside the limits",
+    "1440px: 16 drawings, scale 1.00-1.00, smallest text 11.5px, 0 outside the limits"
+  ],
+  "scaleMeasurements": [
+    {
+      "width": 360,
+      "drawings": 16,
+      "minScale": 0.99,
+      "maxScale": 0.99,
+      "smallestTextPx": 10.9,
+      "outsideLimits": 0
+    },
+    {
+      "width": 768,
+      "drawings": 16,
+      "minScale": 1.0,
+      "maxScale": 1.01,
+      "smallestTextPx": 11.5,
+      "outsideLimits": 0
+    },
+    {
+      "width": 1024,
+      "drawings": 16,
+      "minScale": 0.98,
+      "maxScale": 0.98,
+      "smallestTextPx": 11.3,
+      "outsideLimits": 0
+    },
+    {
+      "width": 1440,
+      "drawings": 16,
+      "minScale": 1.0,
+      "maxScale": 1.0,
+      "smallestTextPx": 11.5,
+      "outsideLimits": 0
+    }
+  ],
+  "unitRegressionCommand": "node scripts/stories/check-almanac-unit-formats.mjs",
+  "unitRegressionDrawings": 46,
+  "sharedRegressionRecord": "data/audits/lrs-controls/final-focused-layout-audit.json",
+  "historicalSharedRegressionRecord": "data/audits/lrs-controls/shared-renderer-regressions.json",
+  "combinedLayoutSummary": {
+    "412": {
+      "figures": 84,
+      "overlaps": 0,
+      "spills": 0,
+      "small": 0,
+      "ladders": 0,
+      "gutters": 0,
+      "edge": 0,
+      "width": 0,
+      "ticks": 0,
+      "demoted": 0,
+      "text": 0,
+      "notes": 0,
+      "excepted": 3
+    },
+    "1440": {
+      "figures": 84,
+      "overlaps": 0,
+      "spills": 0,
+      "small": 0,
+      "ladders": 0,
+      "gutters": 0,
+      "edge": 0,
+      "width": 0,
+      "ticks": 0,
+      "demoted": 0,
+      "text": 0,
+      "notes": 0,
+      "excepted": 7
+    }
+  },
+  "visualReviewScreenshots": 30,
+  "sha256": {
+    "src/data/almanac.ts": "ee498a9fcc9da7d50a42662d6c5ef3bb4ae312df9375ff2d8b530304b1a5f958",
+    "src/data/almanac-visuals.ts": "008ef8049a6d5992215508d84ee161100f12e2f82dc7bdc85f03c0de7dc92ee6",
+    "src/data/figures.ts": "b256b1cd11f54f2a7a2df064926255baf1b3d9c105ff481f1f1effee0cde1bb8",
+    "scripts/audit-charts.mjs": "2a5b1e8ecac07664c8cd09484acdad38627f419e47745d976d5b06768ad107d4",
+    "scripts/stories/audit-flagship-visuals.mjs": "c63fc2536dd5550ac0ec311fc0003157099f851d4a090a6daa0318107ae2dad1",
+    "scripts/stories/check-almanac-unit-formats.mjs": "7eda4196d84f16b02ac289ba1e216abdc8ee0364cecc5a41321ad6a938a265c1",
+    "dist/articles/what-the-world-bank-2026-poverty-report-actually-shows-about-india/index.html": "d96b83a90d109e630c9545b8fcec81885170b8173ecf34d8a26564afd0d6b5f3"
+  },
+  "reviewLimit": "Visual verification covers the named build and widths; it does not establish raw-data authenticity.",
+  "manualReview": {
+    "completedAt": "2026-10-30T11:34:02.410195+00:00",
+    "cardsInspected": 30,
+    "widths": [
+      412,
+      1440
+    ],
+    "unresolvedVisualFindings": [],
+    "checks": [
+      "Every chart screenshot inspected for labels, units, comparison keys, inks and form suitability.",
+      "All section bindings match the intended headings in the built HTML.",
+      "Signed contributions preserve their zero baseline; hours remain numeric and percentages preserve their unit.",
+      "The 14-state child comparison retains all 14 rows on mobile, including Kerala; no alternating categories are discarded.",
+      "Rendered SVG inks were checked against explainer descriptions; no explainer names an ink that conflicts with the drawing.",
+      "V2 screenshots inspected directly where changed; pixel-identical contact sheets confirm the remaining reviewed cards match the first pass."
+    ]
+  },
+  "commands": [
+    {
+      "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/stories/audit-flagship-visuals.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/check-chart-type-scale.mjs --article=what-the-world-bank-2026-poverty-report-actually-shows-about-india",
+      "exitCode": 0
+    },
+    {
+      "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/audit-charts.mjs --pages=/articles/why-is-rbi-rethinking-india-250k-lrs-remittance-window/,/articles/what-the-world-bank-2026-poverty-report-actually-shows-about-india/,/articles/how-much-money-did-indians-send-abroad/,/articles/has-india-ended-poverty/,/library/",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/stories/check-almanac-unit-formats.mjs",
+      "exitCode": 0
+    }
+  ],
+  "priorValidationRecord": {
+    "checkedAt": "2026-10-30T07:01:57.101884+00:00",
+    "status": "pass",
+    "questionId": "q.econ.poverty_debate",
+    "buildLog": "/tmp/indica-flagship-verified-build.log",
+    "plannedAndRenderedCards": 14,
+    "layoutWidths": [
+      412,
+      1440
+    ],
+    "layoutChecks": {
+      "overlaps": 0,
+      "spills": 0,
+      "small": 0,
+      "ladders": 0,
+      "gutters": 0,
+      "sixLayoutRules": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bindingFailures": [],
+    "scaleWidths": [
+      360,
+      768,
+      1024,
+      1440
+    ],
+    "scaleLog": [
+      "360px: 15 drawings, scale 0.99-0.99, smallest text 10.9px, 0 outside the limits",
+      "768px: 15 drawings, scale 1.00-1.01, smallest text 11.5px, 0 outside the limits",
+      "1024px: 15 drawings, scale 0.98-0.98, smallest text 11.3px, 0 outside the limits",
+      "1440px: 15 drawings, scale 1.00-1.00, smallest text 11.5px, 0 outside the limits"
+    ],
+    "unitRegressionCommand": "node scripts/stories/check-almanac-unit-formats.mjs",
+    "unitRegressionDrawings": 40,
+    "sharedRegressionRecord": "data/audits/lrs-controls/shared-renderer-regressions.json",
+    "sharedRegressionCardsPerWidth": 60,
+    "visualReviewScreenshots": 28,
+    "reviewLimit": "Visual verification covers this built artifact at the named widths; it is not a raw-data authenticity check.",
+    "sha256": {
+      "src/data/almanac.ts": "ee498a9fcc9da7d50a42662d6c5ef3bb4ae312df9375ff2d8b530304b1a5f958",
+      "src/data/almanac-visuals.ts": "057a82b970bef6432fc47685d0f6df6ccb81fffcbac1f5832e61fa97b33ee21d",
+      "src/data/figures.ts": "b256b1cd11f54f2a7a2df064926255baf1b3d9c105ff481f1f1effee0cde1bb8",
+      "scripts/audit-charts.mjs": "2a5b1e8ecac07664c8cd09484acdad38627f419e47745d976d5b06768ad107d4",
+      "scripts/stories/audit-flagship-visuals.mjs": "c63fc2536dd5550ac0ec311fc0003157099f851d4a090a6daa0318107ae2dad1",
+      "dist/articles/what-the-world-bank-2026-poverty-report-actually-shows-about-india/index.html": "795c9dd8005ec720b30c3d324c4c58c0bb5edc29c544818334820fcf6799d859",
+      "scripts/stories/check-almanac-unit-formats.mjs": "cb04096773b76a95161cdd962b0ba7cc893b4132f5d187b0a12a6033981fbf6d"
+    },
+    "combinedLayoutSummary": {
+      "412": {
+        "figures": 85,
+        "overlaps": 0,
+        "spills": 0,
+        "small": 0,
+        "ladders": 0,
+        "gutters": 0,
+        "edge": 0,
+        "width": 0,
+        "ticks": 0,
+        "demoted": 0,
+        "text": 0,
+        "notes": 0,
+        "excepted": 3
+      },
+      "1440": {
+        "figures": 85,
+        "overlaps": 0,
+        "spills": 0,
+        "small": 0,
+        "ladders": 0,
+        "gutters": 0,
+        "edge": 0,
+        "width": 0,
+        "ticks": 0,
+        "demoted": 0,
+        "text": 0,
+        "notes": 0,
+        "excepted": 7
+      }
+    },
+    "scaleMeasurements": [
+      {
+        "width": 360,
+        "drawings": 15,
+        "minScale": 0.99,
+        "maxScale": 0.99,
+        "smallestTextPx": 10.9,
+        "outsideLimits": 0
+      },
+      {
+        "width": 768,
+        "drawings": 15,
+        "minScale": 1.0,
+        "maxScale": 1.01,
+        "smallestTextPx": 11.5,
+        "outsideLimits": 0
+      },
+      {
+        "width": 1024,
+        "drawings": 15,
+        "minScale": 0.98,
+        "maxScale": 0.98,
+        "smallestTextPx": 11.3,
+        "outsideLimits": 0
+      },
+      {
+        "width": 1440,
+        "drawings": 15,
+        "minScale": 1.0,
+        "maxScale": 1.0,
+        "smallestTextPx": 11.5,
+        "outsideLimits": 0
+      }
+    ],
+    "commands": [
+      {
+        "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/audit-charts.mjs --pages=/articles/why-is-rbi-rethinking-india-250k-lrs-remittance-window/,/articles/what-the-world-bank-2026-poverty-report-actually-shows-about-india/,/library/,/articles/how-much-money-did-indians-send-abroad/,/articles/has-india-ended-poverty/",
+        "exitCode": 0
+      },
+      {
+        "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/check-chart-type-scale.mjs --article=what-the-world-bank-2026-poverty-report-actually-shows-about-india",
+        "exitCode": 0
+      },
+      {
+        "command": "INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=/tmp/indica-puppeteer node scripts/stories/audit-flagship-visuals.mjs",
+        "exitCode": 0
+      },
+      {
+        "command": "node scripts/stories/check-almanac-unit-formats.mjs",
+        "exitCode": 0
+      }
+    ],
+    "manualReview": {
+      "completedAt": "2026-10-30T07:04:17.041422+00:00",
+      "cardsInspected": 28,
+      "widths": [
+        412,
+        1440
+      ],
+      "unresolvedVisualFindings": [],
+      "checks": [
+        "All chart screenshots reviewed, with individual inspection of previously broken charts.",
+        "Every categorical label and comparison-key entry remains visible.",
+        "Hours comparison renders both rows with numeric hours, without currency or percentage symbols.",
+        "Rural and Urban both appear on the imputation comparison.",
+        "The combined education series starts when both components are observed.",
+        "Chart forms preserve distinct time, composition, comparison and distribution questions."
+      ]
+    }
+  },
+  "layoutChecks": {
+    "overlaps": 0,
+    "spills": 0,
+    "small": 0,
+    "ladders": 0,
+    "gutters": 0,
+    "sixLayoutRules": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "scaleDrawingNote": "15 chart cards produce 16 visible drawings because the map includes its accompanying ranked strip."
+}

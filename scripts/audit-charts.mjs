@@ -265,10 +265,19 @@ function probe() {
         if (hit || onDot) cross.push(`${t.matches(".yaxt") ? "y:" : t.matches(".xaxt") ? "x:" : ""}${t.textContent.trim().slice(0, 22)}${onDot ? " (dot)" : ""}`);
       }
       if (!isLine) {
-        // Other figures: the drawing reaches the card's right edge.
+        // A dumbbell's explicit domain keeps a measured gutter for its endpoint pairs,
+        // as a line chart keeps room for its line-end labels. Check the actual domain
+        // edge and actual printed pair widths, not an exemption by chart name.
         const dead = contentR - maxR;
+        const pairedValues = textEls.filter(t => /[→]/.test(t.textContent));
+        if (s.dataset.form === 'dumbbell' && pairedValues.length) {
+          const grids = [...s.querySelectorAll('line')].filter(l => l.getAttribute('x1')===l.getAttribute('x2') && +l.getAttribute('y2')-+l.getAttribute('y1')>30);
+          const plotRight = Math.max(...grids.map(l=>l.getBoundingClientRect().right));
+          const widestPair = Math.max(...pairedValues.map(t=>t.getBoundingClientRect().width));
+          if(contentR-plotRight>widestPair+16 && !rec.edgeEx)wide.push(`right gutter ${Math.round(contentR-plotRight)} > pair ${Math.round(widestPair)}+16`);
+        }
         // (A centred pyramid's shorter side and the library's samples are the listed exceptions.)
-        if (dead > 24 && sr.right > contentR - 30 && !rec.edgeEx) wide.push(`right edge ${Math.round(dead)} short`);
+        else if (dead > 24 && sr.right > contentR - 30 && !rec.edgeEx) wide.push(`right edge ${Math.round(dead)} short`);
       }
       Object.assign(rec, { wide, ticks, demoted, cross });
       if (isLine || s.matches("svg.fig-load")) {
@@ -319,6 +328,18 @@ for (const width of [412, 1440]) {
     for (let url; (url = queue.shift()); ) {
       await page.goto(`http://dist.local${url}`, { waitUntil: "networkidle0", timeout: 90000 }).catch(() => null);
       await page.evaluate(() => document.fonts.ready);
+      // Article artboards are selected lazily as figures enter the viewport. Measure
+      // the drawings a reader sees after scrolling, not untouched inline fallbacks.
+      await page.evaluate(async () => {
+        for (const card of document.querySelectorAll('.viz-card')) {
+          card.scrollIntoView({ block: 'center' });
+          await new Promise(r => setTimeout(r, 80));
+        }
+      });
+      await page.waitForFunction(() => [...document.querySelectorAll('.viz-card[data-rungs]')].every(c => {
+        const {show,want}=c.dataset;
+        return show && want && want.startsWith(show) && (show !== 'r' || c.querySelector(':scope > .viz-rung')?.dataset.w === want.slice(1));
+      }), { timeout: 30000 }).catch(() => { throw new Error(`${url}: chart artboards did not settle`); });
       for (const r of await page.evaluate(probe)) results.push({ width, url, ...r });
     }
     await page.close();

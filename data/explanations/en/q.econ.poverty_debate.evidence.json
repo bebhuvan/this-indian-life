@@ -1,0 +1,1067 @@
+{
+  "schemaVersion": 1,
+  "questionId": "q.econ.poverty_debate",
+  "question": "What does the World Bank's 2026 poverty report actually show about India, and why do economists still disagree?",
+  "priority": "core",
+  "theme": {
+    "id": "economy",
+    "label": "Economy and public money",
+    "readerQuestions": [
+      "What is the headline economic number?",
+      "Is this a total number or a per-person number?",
+      "How much of the story is prices, exchange rates, or GDP share?",
+      "What does this explain about household life?"
+    ],
+    "glossaryTerms": [
+      "GDP",
+      "GDP per capita",
+      "real growth",
+      "nominal",
+      "inflation",
+      "CPI",
+      "tax-to-GDP"
+    ]
+  },
+  "requiredIndicatorIds": [
+    "pov26.linedup_300.IN",
+    "pov26.poverty_buffer_2024.IN",
+    "pov26.state_prosperity_gap_2023.IN",
+    "pov26.jobs_counterfactual_2024.IN"
+  ],
+  "availableIndicatorIds": [
+    "pov26.linedup_300.IN",
+    "pov26.poverty_buffer_2024.IN",
+    "pov26.state_prosperity_gap_2023.IN",
+    "pov26.jobs_counterfactual_2024.IN"
+  ],
+  "themeIndicatorIds": [
+    "pov26.linedup_300.IN",
+    "pov26.poverty_buffer_2024.IN",
+    "pov26.state_prosperity_gap_2023.IN",
+    "pov26.jobs_counterfactual_2024.IN"
+  ],
+  "visualPlan": [
+    {
+      "visualId": "v1.pov26.linedup_300.IN",
+      "indicatorId": "pov26.linedup_300.IN",
+      "title": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030",
+      "sourceId": "wb_3pr_2026",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "single-series line chart with latest value and first-to-latest change",
+      "mobileGuidance": "Use a line chart with large labels, sparse ticks, and a short reader caption.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v2.pov26.poverty_buffer_2024.IN",
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "title": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins",
+      "sourceId": "wb_3pr_2026",
+      "unit": "% of population",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v3.pov26.state_prosperity_gap_2023.IN",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "title": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day)",
+      "sourceId": "wb_3pr_2026",
+      "unit": "multiple to $28/day",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    },
+    {
+      "visualId": "v4.pov26.jobs_counterfactual_2024.IN",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN",
+      "title": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%)",
+      "sourceId": "wb_3pr_2026",
+      "unit": "% of population / line",
+      "role": "primary",
+      "recommendedVisualization": "mobile horizontal bars or selected multi-line chart",
+      "mobileGuidance": "Prefer horizontal bars, share strips, or at most three lines; avoid dense tables.",
+      "whyThisMatters": "This is the chart that answers the page question most directly."
+    }
+  ],
+  "plannedCharts": [
+    {
+      "order": 1,
+      "chartId": "india-largely-cleared-the-3-day-floor-by-2024-yet-78-8-of-the-population-still-lives-below-the-8-30-day-threshold",
+      "title": "India largely cleared the $3/day floor by 2024, yet 78.8% of the population still lives below the $8.30/day threshold",
+      "chartType": "multiLine",
+      "beat": "four-lines-trajectory",
+      "window": "",
+      "indicator": "pov26.linedup_300.IN",
+      "series": [
+        {
+          "indicator": "pov26.linedup_300.IN",
+          "label": "$3.00/day extreme poverty line",
+          "emphasis": true
+        },
+        {
+          "indicator": "pov26.linedup_420.IN",
+          "label": "$4.20/day lower-middle-income line"
+        },
+        {
+          "indicator": "pov26.societal_poverty_rate.IN",
+          "label": "Societal poverty rate ($3.00 to $4.27/day dynamic line)"
+        },
+        {
+          "indicator": "pov26.linedup_830.IN",
+          "label": "$8.30/day upper-middle-income line"
+        }
+      ],
+      "unit": "% of population",
+      "subtitle": "World Bank 2026 Poverty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+      "whyThisChart": "Shows all four World Bank poverty benchmarks together from 1990 to 2030 so readers see why celebrating the end of $3/day poverty misses four-fifths of the population."
+    },
+    {
+      "order": 2,
+      "chartId": "a-hypothetical-10-real-consumption-loss-lifts-the-4-20-poverty-share-from-14-9-to-23-2",
+      "title": "A hypothetical 10% real consumption loss lifts the $4.20 poverty share from 14.9% to 23.2%",
+      "chartType": "dumbbell",
+      "beat": "consumption-buffer",
+      "window": "",
+      "indicator": "pov26.poverty_buffer_2024.IN",
+      "series": [],
+      "unit": "% of population",
+      "subtitle": "Same 2024 population bins, before and after a hypothetical uniform consumption loss · 2021 PPP · approximately 0.1 percentage-point resolution",
+      "whyThisChart": "Tests how much consumption security sits just above each poverty line."
+    },
+    {
+      "order": 3,
+      "chartId": "among-indians-below-8-30-consumption-averages-34-1-short-of-the-line",
+      "title": "Among Indians below $8.30, consumption averages 34.1% short of the line",
+      "chartType": "tableBars",
+      "beat": "poverty-depth",
+      "window": "",
+      "indicator": "pov26.mean_shortfall_among_poor.IN",
+      "series": [],
+      "unit": "% of poverty line, among those below it",
+      "subtitle": "Average consumption shortfall among people below each line · HCES 2023-24 · 2021 PPP · PIP September 2026",
+      "whyThisChart": "Headcounts count people below the line; this measures how far below it those people live."
+    },
+    {
+      "order": 4,
+      "chartId": "the-prosperity-gap-is-6-72-in-jharkhand-and-3-16-in-goa",
+      "title": "The Prosperity Gap is 6.72 in Jharkhand and 3.16 in Goa",
+      "chartType": "choropleth",
+      "beat": "state-prosperity-gap",
+      "window": "",
+      "indicator": "pov26.state_prosperity_gap_2023.IN",
+      "series": [],
+      "unit": "average of $28 / daily consumption",
+      "subtitle": "World Bank Global Subnational Atlas of Poverty (GSAP) Fall 2026 · average shortfall factor from the $28/day prosperity standard across all 36 states and UTs · HCES 2023-24",
+      "whyThisChart": "Maps the World Bank's new flagship Prosperity Gap indicator across all 36 Indian states and union territories for the first time."
+    },
+    {
+      "order": 5,
+      "chartId": "young-children-are-more-likely-to-live-below-8-30-a-day-in-every-state-and-union-territory",
+      "title": "Young children are more likely to live below $8.30 a day in every state and union territory",
+      "chartType": "dumbbell",
+      "beat": "child-household-poverty",
+      "window": "",
+      "indicator": "pov26.child_poverty_2023.IN",
+      "series": [],
+      "unit": "% of each age group",
+      "subtitle": "Ages 0-5 versus all ages, 14 selected states · SPID direct HCES 2023-24 estimates · source reference year 2023.58",
+      "whyThisChart": "Adds a demographic comparison within each state rather than another map of average poverty."
+    },
+    {
+      "order": 6,
+      "chartId": "the-2021-ppp-revision-paradox-updating-global-prices-raised-india-s-2023-extreme-poverty-rate-to-2-57-while-cutting-4-20-poverty-to-16-12",
+      "title": "The 2021 PPP revision paradox: Updating global prices raised India's 2023 extreme poverty rate to 2.57% while cutting $4.20 poverty to 16.12%",
+      "chartType": "dumbbell",
+      "beat": "ppp-paradox",
+      "window": "",
+      "indicator": "pov26.ppp_revision_paradox.IN",
+      "series": [],
+      "unit": "% of population",
+      "subtitle": "Indian survey-year poverty headcount rates in the September 2026 PIP release under the 2017 PPP lines ($2.15, $3.65, $6.85) vs 2021 PPP lines ($3.00, $4.20, $8.30)",
+      "whyThisChart": "Explains the counter-intuitive arithmetic of the World Bank's switch from 2017 ICP PPP to 2021 ICP PPP: extreme poverty rose in every survey year while lower-middle-income poverty fell."
+    },
+    {
+      "order": 7,
+      "chartId": "depending-on-survey-adjustment-and-poverty-line-india-s-2022-23-poverty-rate-was-anywhere-between-2-35-and-25-9",
+      "title": "Depending on survey adjustment and poverty line, India's 2022-23 poverty rate was anywhere between 2.35% and 25.9%",
+      "chartType": "tableBars",
+      "beat": "method-spread",
+      "window": "",
+      "indicator": "pov26.survey_method_controversy_2022.IN",
+      "series": [],
+      "unit": "% of population",
+      "subtitle": "Published 2022-23 Indian poverty headcount estimates across direct HCES (World Bank PIP) and survey-consistent imputation models (Himanshu, Lanjouw & Schirmer 2025)",
+      "whyThisChart": "Places the World Bank's unadjusted HCES headcounts next to academic imputation estimates that seek to account for the 2022-23 questionnaire and three-visit overhaul."
+    },
+    {
+      "order": 8,
+      "chartId": "free-public-foodgrain-and-welfare-items-raise-measured-rural-spending-by-3-0-against-1-2-in-urban-india",
+      "title": "Free public foodgrain and welfare items raise measured rural spending by 3.0%, against 1.2% in urban India",
+      "chartType": "groupedTable",
+      "beat": "free-grain-imputation",
+      "window": "",
+      "indicator": "pov26.free_grain_imputation_deciles.IN",
+      "series": [],
+      "unit": "Rs per person per month",
+      "subtitle": "Average monthly per-capita consumption, with and without imputed free food and selected welfare goods · HCES 2023-24 published fact sheet",
+      "whyThisChart": "Shows the size of imputed public transfers using published rural and urban averages."
+    },
+    {
+      "order": 9,
+      "chartId": "the-poorest-surveyed-tenth-gained-13-1-in-real-consumption-between-the-two-comparable-hces-rounds",
+      "title": "The poorest surveyed tenth gained 13.1% in real consumption between the two comparable HCES rounds",
+      "chartType": "tableBars",
+      "beat": "comparable-decile-growth",
+      "window": "",
+      "indicator": "pov26.decile_real_growth_2022_2023.IN",
+      "series": [],
+      "unit": "% change",
+      "subtitle": "Average real consumption by survey decile · HCES 2022-23 to 2023-24 · PIP comparable spell 2022-2023",
+      "whyThisChart": "Shows which parts of the measured distribution gained within the two explicitly comparable rounds."
+    },
+    {
+      "order": 10,
+      "chartId": "national-accounts-spending-grew-4-49x-since-1977-while-survey-mean-grew-2-09x",
+      "title": "National Accounts spending grew 4.49x since 1977 while survey mean grew 2.09x",
+      "chartType": "multiLine",
+      "beat": "na-vs-survey",
+      "window": "",
+      "indicator": "pov26.idx_gdp_pcap_1977.IN",
+      "series": [
+        {
+          "indicator": "pov26.idx_gdp_pcap_1977.IN",
+          "label": "Real GDP per capita (1977 = 100)",
+          "emphasis": true
+        },
+        {
+          "indicator": "pov26.idx_na_hfce_1977.IN",
+          "label": "National Accounts HFCE per capita (1977 = 100)"
+        },
+        {
+          "indicator": "pov26.idx_survey_mean_1977.IN",
+          "label": "NSS / HCES survey mean consumption (1977 = 100)"
+        }
+      ],
+      "unit": "index (1977 = 100)",
+      "subtitle": "Indexed real per-capita growth in GDP, National Accounts Household Final Consumption Expenditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP",
+      "whyThisChart": "Shows the divergence between macro National Accounts and household surveys; it cannot identify the source of the gap or measure missing top-end consumption."
+    },
+    {
+      "order": 11,
+      "chartId": "between-2003-and-2024-adult-employment-rates-in-poor-indian-households-fell-to-58-3-while-rising-to-57-6-among-the-non-poor",
+      "title": "Between 2003 and 2024, adult employment rates in poor Indian households fell to 58.3% while rising to 57.6% among the non-poor",
+      "chartType": "dumbbell",
+      "beat": "jobs-shift",
+      "window": "",
+      "indicator": "pov26.jobs_shift_2003_2024.IN",
+      "series": [],
+      "unit": "% of adults / workers",
+      "subtitle": "Employment rate of working-age adults (15-64) and share of workers lacking secondary education by household poverty status (<$8.30/day vs >=$8.30/day), 2003 vs 2024 · World Bank 3PR Chapter 4",
+      "whyThisChart": "Extracts the core finding of Chapter 4 ('Jobs at the Center of Poverty Eradication'): poor Indian households have expanded schooling over twenty years, yet their adult employment rate declined."
+    },
+    {
+      "order": 12,
+      "chartId": "paid-employees-below-3-day-work-44-1-hours-a-week-against-44-9-above-the-line",
+      "title": "Paid employees below $3/day work 44.1 hours a week, against 44.9 above the line",
+      "chartType": "dumbbell",
+      "beat": "worker-trap",
+      "window": "",
+      "indicator": "pov26.worker_structural_trap_2024.IN",
+      "series": [],
+      "unit": "hours / week",
+      "subtitle": "Weekly hours in paid and self/unpaid work by household poverty status at $3/day · India, 2024 · World Bank Chapter 4, Box 4.1",
+      "whyThisChart": "Compares hours among employed people on either side of the $3/day household-consumption line."
+    },
+    {
+      "order": 13,
+      "chartId": "world-bank-simulation-closing-india-s-employment-and-worker-earnings-gaps-cuts-8-30-poverty-by-22-2-percentage-points",
+      "title": "World Bank simulation: Closing India's employment and worker earnings gaps cuts $8.30 poverty by 22.2 percentage points",
+      "chartType": "groupedTable",
+      "beat": "jobs-counterfactual",
+      "window": "",
+      "indicator": "pov26.jobs_counterfactual_2024.IN",
+      "series": [],
+      "unit": "% of population / poverty line",
+      "subtitle": "Combined employment and worker-earnings counterfactual · India, 2024 · World Bank Chapter 4",
+      "whyThisChart": "Shows the combined accounting counterfactual, not a causal policy payoff."
+    },
+    {
+      "order": 14,
+      "chartId": "monetary-poverty-and-deprivation-measure-different-things-35-5-of-children-were-stunted-in-nfhs-5",
+      "title": "Monetary poverty and deprivation measure different things: 35.5% of children were stunted in NFHS-5",
+      "chartType": "tableBars",
+      "beat": "capability-gap",
+      "window": "",
+      "indicator": "pov26.monetary_vs_capability_deprivation.IN",
+      "series": [],
+      "unit": "% of population / children",
+      "subtitle": "Different denominators and vintages: HCES 2022-23/2023-24 poverty, NFHS-5 child nutrition (2019-21), health-spending hardship (2022)",
+      "whyThisChart": "Shows what household expenditure surveys miss: non-market capability deficits in sanitation, schooling, child nutrition, and catastrophic out-of-pocket medical bills."
+    },
+    {
+      "order": 15,
+      "chartId": "india-has-lower-3-poverty-than-bangladesh-and-indonesia-and-higher-poverty-at-8-30",
+      "title": "India has lower $3 poverty than Bangladesh and Indonesia, and higher poverty at $8.30",
+      "chartType": "groupedTable",
+      "beat": "asian-comparators",
+      "window": "",
+      "indicator": "pov26.peer_thresholds_2024.IN",
+      "series": [],
+      "unit": "% of population",
+      "subtitle": "Selected Asian countries at the same three lines · 2024 calendar year · 2021 PPP · Indonesia actual, others projection/lineup",
+      "whyThisChart": "Tests the impression of success against neighbouring consumption distributions at common thresholds."
+    }
+  ],
+  "selectedDataPoints": [
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, latest",
+      "value": 0.4,
+      "displayValue": "0.4%",
+      "date": "2030",
+      "unit": "% of population",
+      "indicatorId": "pov26.linedup_300.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, minimum (2030)",
+      "value": 0.4,
+      "displayValue": "0.4%",
+      "date": "2030",
+      "unit": "% of population",
+      "indicatorId": "pov26.linedup_300.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, maximum (1990)",
+      "value": 49.38,
+      "displayValue": "49.4%",
+      "date": "1990",
+      "unit": "% of population",
+      "indicatorId": "pov26.linedup_300.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, earliest",
+      "value": 49.38,
+      "displayValue": "49.4%",
+      "date": "1990",
+      "unit": "% of population",
+      "indicatorId": "pov26.linedup_300.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: baseline",
+      "value": 2.3,
+      "displayValue": "2.3%",
+      "date": "",
+      "unit": "% of population",
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: loss10",
+      "value": 4.4,
+      "displayValue": "4.4%",
+      "date": "",
+      "unit": "% of population",
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: baseline",
+      "value": 14.9,
+      "displayValue": "14.9%",
+      "date": "",
+      "unit": "% of population",
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: loss10",
+      "value": 23.2,
+      "displayValue": "23.2%",
+      "date": "",
+      "unit": "% of population",
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: baseline",
+      "value": 78.8,
+      "displayValue": "78.8%",
+      "date": "",
+      "unit": "% of population",
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: loss10",
+      "value": 85.1,
+      "displayValue": "85.1%",
+      "date": "",
+      "unit": "% of population",
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor300",
+      "value": 17.13,
+      "displayValue": "17.13",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor420",
+      "value": 47.08,
+      "displayValue": "47.08",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor830",
+      "value": 93.23,
+      "displayValue": "93.23",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): prosperityGap",
+      "value": 6.72,
+      "displayValue": "6.72",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor300",
+      "value": 11.77,
+      "displayValue": "11.77",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor420",
+      "value": 39.87,
+      "displayValue": "39.87",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor830",
+      "value": 92.54,
+      "displayValue": "92.54",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): prosperityGap",
+      "value": 6.31,
+      "displayValue": "6.31",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor300",
+      "value": 8.29,
+      "displayValue": "8.29",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor420",
+      "value": 34.99,
+      "displayValue": "34.99",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor830",
+      "value": 89.49,
+      "displayValue": "89.49",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): prosperityGap",
+      "value": 5.92,
+      "displayValue": "5.92",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): baseline2024",
+      "value": 78.78,
+      "displayValue": "78.8%",
+      "date": "",
+      "unit": "% of population / line",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): afterJobsClosing",
+      "value": 56.61,
+      "displayValue": "56.6%",
+      "date": "",
+      "unit": "% of population / line",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN",
+      "sourceId": "wb_3pr_2026",
+      "editorialUse": "Use only if it directly supports the answer, a chart caption, a pull quote, or a caveat."
+    }
+  ],
+  "lockedNumbers": [
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, latest",
+      "value": 0.4,
+      "displayValue": "0.4%",
+      "date": "2030",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.linedup_300.IN"
+    },
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, minimum (2030)",
+      "value": 0.4,
+      "displayValue": "0.4%",
+      "date": "2030",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.linedup_300.IN"
+    },
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, maximum (1990)",
+      "value": 49.38,
+      "displayValue": "49.4%",
+      "date": "1990",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.linedup_300.IN"
+    },
+    {
+      "label": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030, earliest",
+      "value": 49.38,
+      "displayValue": "49.4%",
+      "date": "1990",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.linedup_300.IN"
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: baseline",
+      "value": 2.3,
+      "displayValue": "2.3%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.poverty_buffer_2024.IN"
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: loss10",
+      "value": 4.4,
+      "displayValue": "4.4%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.poverty_buffer_2024.IN"
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: baseline",
+      "value": 14.9,
+      "displayValue": "14.9%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.poverty_buffer_2024.IN"
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: loss10",
+      "value": 23.2,
+      "displayValue": "23.2%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.poverty_buffer_2024.IN"
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: baseline",
+      "value": 78.8,
+      "displayValue": "78.8%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.poverty_buffer_2024.IN"
+    },
+    {
+      "label": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins: loss10",
+      "value": 85.1,
+      "displayValue": "85.1%",
+      "date": "",
+      "unit": "% of population",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.poverty_buffer_2024.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor300",
+      "value": 17.13,
+      "displayValue": "17.13",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor420",
+      "value": 47.08,
+      "displayValue": "47.08",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor830",
+      "value": 93.23,
+      "displayValue": "93.23",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): prosperityGap",
+      "value": 6.72,
+      "displayValue": "6.72",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor300",
+      "value": 11.77,
+      "displayValue": "11.77",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor420",
+      "value": 39.87,
+      "displayValue": "39.87",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor830",
+      "value": 92.54,
+      "displayValue": "92.54",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): prosperityGap",
+      "value": 6.31,
+      "displayValue": "6.31",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor300",
+      "value": 8.29,
+      "displayValue": "8.29",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor420",
+      "value": 34.99,
+      "displayValue": "34.99",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): poor830",
+      "value": 89.49,
+      "displayValue": "89.49",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day): prosperityGap",
+      "value": 5.92,
+      "displayValue": "5.92",
+      "date": "",
+      "unit": "multiple to $28/day",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): baseline2024",
+      "value": 78.78,
+      "displayValue": "78.8%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): afterJobsClosing",
+      "value": 56.61,
+      "displayValue": "56.6%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): reduction_pp",
+      "value": 22.17,
+      "displayValue": "22.2%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): baseline2024",
+      "value": 25.73,
+      "displayValue": "25.7%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): afterJobsClosing",
+      "value": 16.64,
+      "displayValue": "16.6%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): reduction_pp",
+      "value": 9.09,
+      "displayValue": "9.1%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): baseline2024",
+      "value": 2.28,
+      "displayValue": "2.3%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): afterJobsClosing",
+      "value": 1.14,
+      "displayValue": "1.1%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): reduction_pp",
+      "value": 1.14,
+      "displayValue": "1.1%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): baseline2024",
+      "value": 0.27,
+      "displayValue": "0.3%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): afterJobsClosing",
+      "value": 0.13,
+      "displayValue": "0.1%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    },
+    {
+      "label": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%): reduction_pp",
+      "value": 0.14,
+      "displayValue": "0.1%",
+      "date": "",
+      "unit": "% of population / line",
+      "sourceId": "wb_3pr_2026",
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN"
+    }
+  ],
+  "sourceSummaries": [
+    {
+      "indicatorId": "pov26.linedup_300.IN",
+      "title": "Lined-up poverty headcount at $3.00/day (2021 PPP), 1990 to 2030",
+      "sourceId": "wb_3pr_2026",
+      "sourceIndicatorId": "WB_3PR_CH1_FGT_HEADCOUNT300",
+      "unit": "% of population",
+      "frequency": "annual",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "observations": 41,
+      "earliest": {
+        "date": "1990",
+        "value": 49.38
+      },
+      "latest": {
+        "date": "2030",
+        "value": 0.4
+      }
+    },
+    {
+      "indicatorId": "pov26.poverty_buffer_2024.IN",
+      "title": "Poverty headcounts under a hypothetical uniform 10% real consumption loss, 2024 bins",
+      "sourceId": "wb_3pr_2026",
+      "sourceIndicatorId": "WB_3PR_CH1_GLOBALDIST1000BINS_IND_SENSITIVITY",
+      "unit": "% of population",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 3,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "line": "$3.00/day",
+          "baseline": 2.3,
+          "loss10": 4.4
+        },
+        {
+          "line": "$4.20/day",
+          "baseline": 14.9,
+          "loss10": 23.2
+        },
+        {
+          "line": "$8.30/day",
+          "baseline": 78.8,
+          "loss10": 85.1
+        }
+      ]
+    },
+    {
+      "indicatorId": "pov26.state_prosperity_gap_2023.IN",
+      "title": "World Bank Prosperity Gap by Indian state and union territory, HCES 2023-24 (multiple of consumption needed to reach $28/day)",
+      "sourceId": "wb_3pr_2026",
+      "sourceIndicatorId": "WB_3PR_CH1_GSAP_2023_PROSGAP2021",
+      "unit": "multiple to $28/day",
+      "geography": {
+        "type": "subnational",
+        "id": "IND-states",
+        "name": "India states"
+      },
+      "rows": 36,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "state": "Jharkhand",
+          "poor300": 17.13,
+          "poor420": 47.08,
+          "poor830": 93.23,
+          "prosperityGap": 6.72
+        },
+        {
+          "state": "Chhattisgarh",
+          "poor300": 11.77,
+          "poor420": 39.87,
+          "poor830": 92.54,
+          "prosperityGap": 6.31
+        },
+        {
+          "state": "Odisha",
+          "poor300": 8.29,
+          "poor420": 34.99,
+          "poor830": 89.49,
+          "prosperityGap": 5.92
+        },
+        {
+          "state": "Assam",
+          "poor300": 6.34,
+          "poor420": 31.36,
+          "poor830": 92.37,
+          "prosperityGap": 5.82
+        },
+        {
+          "state": "Manipur",
+          "poor300": 6.71,
+          "poor420": 29.58,
+          "poor830": 93.17,
+          "prosperityGap": 5.75
+        },
+        {
+          "state": "Bihar",
+          "poor300": 6.03,
+          "poor420": 27,
+          "poor830": 92.32,
+          "prosperityGap": 5.68
+        },
+        {
+          "state": "Meghalaya",
+          "poor300": 7.88,
+          "poor420": 26.94,
+          "poor830": 88.39,
+          "prosperityGap": 5.65
+        },
+        {
+          "state": "Uttar Pradesh",
+          "poor300": 3.66,
+          "poor420": 25.81,
+          "poor830": 90.9,
+          "prosperityGap": 5.49
+        },
+        {
+          "state": "Madhya Pradesh",
+          "poor300": 4.21,
+          "poor420": 25.19,
+          "poor830": 87.95,
+          "prosperityGap": 5.42
+        },
+        {
+          "state": "Maharashtra",
+          "poor300": 4.87,
+          "poor420": 22.76,
+          "poor830": 82.75,
+          "prosperityGap": 5.22
+        }
+      ]
+    },
+    {
+      "indicatorId": "pov26.jobs_counterfactual_2024.IN",
+      "title": "World Bank 2026 counterfactual simulation: Indian poverty before and after closing the employment and worker earnings gaps (%)",
+      "sourceId": "wb_3pr_2026",
+      "sourceIndicatorId": "WB_3PR_CH4_DATAFIG4C_123_IND",
+      "unit": "% of population / line",
+      "geography": {
+        "type": "country",
+        "id": "IN",
+        "name": "India"
+      },
+      "rows": 4,
+      "dimensions": [],
+      "latestRows": [
+        {
+          "measure": "Headcount below $8.30/day (UMIC line, %)",
+          "baseline2024": 78.78,
+          "afterJobsClosing": 56.61,
+          "reduction_pp": 22.17
+        },
+        {
+          "measure": "Poverty gap at $8.30/day (% of line)",
+          "baseline2024": 25.73,
+          "afterJobsClosing": 16.64,
+          "reduction_pp": 9.09
+        },
+        {
+          "measure": "Headcount below $3.00/day (Extreme line, %)",
+          "baseline2024": 2.28,
+          "afterJobsClosing": 1.14,
+          "reduction_pp": 1.14
+        },
+        {
+          "measure": "Poverty gap at $3.00/day (% of line)",
+          "baseline2024": 0.27,
+          "afterJobsClosing": 0.13,
+          "reduction_pp": 0.14
+        }
+      ]
+    }
+  ],
+  "selectionRules": [
+    "Start from the page question, not from the indicator name.",
+    "Choose the smallest set of visuals that explains scale, trend, structure, comparison, and caveat.",
+    "Prefer mobile-friendly charts: line charts with sparse ticks, horizontal bars, share strips, pyramids only when essential, and no dense tables.",
+    "Use one strong pull quote only when the evidence supports it with a number.",
+    "Add glossary blocks for technical terms that normal readers may not know."
+  ],
+  "caveats": [
+    "Use only figures present in lockedNumbers or sourceSummaries.",
+    "If a related theme indicator is present, you may use it for context, but do not pretend it is the main answer.",
+    "If source coverage is thin, say so directly.",
+    "Do not compare states, districts, or cities unless the evidence packet contains those geographies."
+  ],
+  "forbiddenClaims": [
+    "Do not invent current-year figures.",
+    "Do not infer causality from a trend unless the evidence explicitly supports it.",
+    "Do not cite a source that is not present in sourceSummaries."
+  ]
+}
