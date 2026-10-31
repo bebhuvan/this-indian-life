@@ -28,7 +28,7 @@ type Props = { locale?: string };
   // for readers who ask for less motion, and nothing waits on this script to be read.
   (() => {
     if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const hosts = document.querySelectorAll(".tl-plate, .tl-plot, .tl-em, .tl-sm > div, .ar-figs .kit-host");
+    const hosts = document.querySelectorAll(".tl-plate, .tl-plot, .tl-em, .tl-sm > div, .ar-figs .kit-host, .ar-figs .viz-card");
     const prime = (el) => {
       el.classList.add("tl-anim");
       el.querySelectorAll("path").forEach((p) => {

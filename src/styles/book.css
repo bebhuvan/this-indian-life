@@ -223,6 +223,24 @@
 .tl-art .ar-text>p{margin:0 0 22px}
 .tl-art .ar-text>p:last-child{margin-bottom:0}
 
+/* ---------- the older renderer's charts, brought into the kit's inks ----------
+   Presentation attributes lose to CSS, so the inks are mapped here, not in 1,900 lines of
+   renderer: context recedes (stone axes, warm hairlines), the protagonist gains weight. */
+.tl-art svg.viz-svg line[stroke="#121212"]{stroke:#A9A49C}
+.tl-art svg.viz-svg [stroke="#ededed"]{stroke:var(--k-rule)}
+.tl-art svg.viz-svg [stroke="#33489a"],.tl-art svg.viz-svg [stroke="#2e418c"]{stroke:var(--k-neel)}
+.tl-art svg.viz-svg [fill="#33489a"],.tl-art svg.viz-svg [fill="#2e418c"]{fill:var(--k-neel)}
+.tl-art svg.viz-svg [stroke="#008a6e"],.tl-art svg.viz-svg [stroke="#00735c"]{stroke:#2E7D5B}
+.tl-art svg.viz-svg [fill="#008a6e"],.tl-art svg.viz-svg [fill="#00735c"]{fill:#2E7D5B}
+.tl-art svg.viz-svg [stroke="#bdbdbd"]{stroke:#B5AFA4}
+.tl-art svg.viz-svg [fill="#bdbdbd"]{fill:var(--k-stone)}
+.tl-art svg.viz-svg text[fill="#121212"]{fill:var(--k-ink)}
+.tl-art svg.viz-svg text[fill="#4f4f4f"]{fill:var(--k-ink2)}
+.tl-art svg.viz-svg text[fill="#737373"],.tl-art svg.viz-svg .yaxt,.tl-art svg.viz-svg .xaxt{fill:var(--k-ink3)}
+.tl-art svg.viz-svg path[stroke="var(--c)"][fill="none"]{stroke-width:2.6px}
+.tl-art svg.viz-svg path[stroke^="var(--s"][fill="none"]{stroke-width:1.6px}
+.tl-art svg.fig-bars rect.mk-bar{transform:scaleY(1.22);transform-box:fill-box;transform-origin:left center}
+
 /* ---------- motion: lines draw once as they arrive; the plate sweeps in ---------- */
 @media (prefers-reduced-motion:no-preference){
   .tl-anim path.tl-draw{transition:stroke-dashoffset 1.5s cubic-bezier(.3,.6,.2,1)}
@@ -231,6 +249,10 @@
   .tl-plate.tl-anim .bar{clip-path:inset(0 100% 0 0);transition:clip-path 1.8s cubic-bezier(.4,.1,.2,1)}
   .tl-plate.tl-anim.tl-in .bar{clip-path:inset(0 0 0 0)}
   .tl-plate.tl-anim .ann span{opacity:0;transition:opacity .6s ease 1.4s}
+  .tl-art .tl-anim svg.fig-bars rect.mk-bar{transform:scale(0,1.22);transition:transform 1.1s cubic-bezier(.3,.6,.2,1)}
+  .tl-art .tl-anim.tl-in svg.fig-bars rect.mk-bar{transform:scaleY(1.22)}
+  .tl-anim svg.fig-bars .mk text[font-weight="500"]{opacity:0;transition:opacity .5s ease .9s}
+  .tl-anim.tl-in svg.fig-bars .mk text[font-weight="500"]{opacity:1}
   .tl-plate.tl-anim.tl-in .ann span{opacity:1}
 }
 
