@@ -219,12 +219,17 @@
 .tl-art .viz-foot{margin-top:20px;padding-top:11px;border-top:1px solid var(--k-rule)}
 .tl-art .viz-source,.tl-art .viz-source span,.tl-art .viz-source a,.tl-art .viz-source b{font:400 12.5px/1.45 var(--k-sans);color:var(--k-ink3)}
 .tl-art .viz-source a{color:var(--k-ink2);text-decoration-color:var(--k-stone)}
-.tl-art .viz-actions{gap:16px}
-.tl-art .ar .viz-actions button,.tl-art .ar .viz-actions .va-share{all:unset;cursor:pointer;font:400 12.5px/1.45 var(--k-sans);color:var(--k-ink3)}
-.tl-art .ar .viz-actions .va-share{color:var(--k-ink)}
-.tl-art .ar .viz-actions button:hover{color:var(--k-neel)}
-.tl-art .ar .viz-actions button:focus-visible{outline:2px solid var(--k-neel);outline-offset:2px}
+/* Downloads read as controls: a quiet label, the three formats as one squared group sharing
+   hairlines, and Share apart in ink. No radius, no fill; hover inks the edge and the word. */
+.tl-art .viz-actions{display:flex;align-items:center;gap:0}
+.tl-art .viz-actions::before{content:"Download";margin-right:10px;font:400 12.5px/1 var(--k-sans);color:var(--k-ink3)}
+.tl-art .ar .viz-actions button,.tl-art .ar .viz-actions .va-share{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;margin-left:-1px;border:1px solid var(--k-stone);background:var(--bg,#fff);font:600 11.5px/1 var(--k-sans);letter-spacing:.06em;color:var(--k-ink);position:relative}
+.tl-art .ar .viz-actions .va-share{margin-left:14px;border-color:var(--k-ink);letter-spacing:.01em;font-size:12.5px}
+.tl-art .ar .viz-actions .va-share::after{content:"\2197";font-weight:400;font-size:12px}
+.tl-art .ar .viz-actions button:hover{border-color:var(--k-ink);color:var(--k-neel);z-index:1}
+.tl-art .ar .viz-actions button:focus-visible{outline:2px solid var(--k-neel);outline-offset:2px;z-index:2}
 .tl-art .viz-actions .ic{display:none}
+@media(max-width:760px){.tl-art .ar .viz-actions button,.tl-art .ar .viz-actions .va-share{height:40px;padding:0 13px}}
 /* Vertical rhythm on one step: text to figure, figure to text and section to section are all
    --tl-step (72); a part opens on two steps; paragraphs are --tl-para apart. */
 .tl-art .ar-sec,.tl-art .ar-lede,.tl-art .ar-figs+.ar-sec{margin-top:var(--tl-step)}
