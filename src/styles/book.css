@@ -191,6 +191,38 @@
 .tl-sm svg{display:block;width:100%;height:auto}
 .tl-sm .f{margin:8px 0 0;font:italic 400 13px/1.3 var(--k-display);color:var(--k-ink3)}
 
+/* ---------- article figures: the kit's signature on every card, in the page column ---------- */
+/* One ink leads every chart, whatever the chapter: neel. Sindoor stays a loss, hara rural. */
+.dom-people,.dom-economy,.dom-energy,.dom-climate,.dom-health,.dom-society{--c:var(--k-neel);--c-ink:var(--k-neel);--c-tint:rgba(38,64,139,.08);--s3:var(--k-plum);--s4:var(--haldi);--s5:#8a8a8a}
+.tl-art .ar-flow>.ar-figs{grid-column:2}
+.tl-art .ar-figs{margin-top:56px}
+.tl-art .ar .story-viz .viz-grid{row-gap:64px;column-gap:40px}
+.tl-art .story-viz .viz-card,.tl-art .story-viz .viz-main{border-top:1px solid var(--k-ink);padding-top:18px;background:linear-gradient(var(--k-ink),var(--k-ink)) 0 3px/100% 2px no-repeat}
+.tl-art .viz-head{margin-bottom:24px}
+.tl-art .viz-head>div::before{content:"Fig. " counter(fig);float:right;margin:4px 0 0 24px;font:400 13px/1 var(--k-sans);letter-spacing:0;text-transform:none;color:var(--k-ink3)}
+.tl-art .viz-head h2,.tl-art .story-viz .viz-main .viz-head h2,.tl-art .viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font:600 22px/1.25 var(--k-display);letter-spacing:-.012em;max-width:none;text-wrap:balance}
+.tl-art .viz-head .fig-take{margin:8px 0 0;font:400 14.5px/1.45 var(--k-sans);color:var(--k-ink2)}
+.tl-art .viz-head .fig-measure{margin:4px 0 0;font:400 13px/1.4 var(--k-sans);color:var(--k-ink3)}
+.tl-art .fig-more{margin-top:18px}
+.tl-art .fig-more summary{font:400 13.5px/1.2 var(--k-sans);color:var(--k-ink2)}
+.tl-art .fig-more-in{border-left:0;padding-left:0}
+.tl-art .fig-more-in p{font:400 14px/1.55 var(--k-sans);color:var(--k-ink2)}
+.tl-art .viz-foot{margin-top:20px;padding-top:11px;border-top:1px solid var(--k-rule)}
+.tl-art .viz-source,.tl-art .viz-source span,.tl-art .viz-source a,.tl-art .viz-source b{font:400 12.5px/1.45 var(--k-sans);color:var(--k-ink3)}
+.tl-art .viz-source a{color:var(--k-ink2);text-decoration-color:var(--k-stone)}
+.tl-art .viz-actions{gap:16px}
+.tl-art .ar .viz-actions button,.tl-art .ar .viz-actions .va-share{all:unset;cursor:pointer;font:400 12.5px/1.45 var(--k-sans);color:var(--k-ink3)}
+.tl-art .ar .viz-actions .va-share{color:var(--k-ink)}
+.tl-art .ar .viz-actions button:hover{color:var(--k-neel)}
+.tl-art .ar .viz-actions button:focus-visible{outline:2px solid var(--k-neel);outline-offset:2px}
+.tl-art .viz-actions .ic{display:none}
+/* prose rhythm: a section follows the last words or figure by one clear step, not a chasm */
+.tl-art .ar-sec{margin-top:52px}
+.tl-art .ar-figs+.ar-sec{margin-top:64px}
+.tl-art .ar-sec h3{margin:0 0 14px}
+.tl-art .ar-text>p{margin:0 0 22px}
+.tl-art .ar-text>p:last-child{margin-bottom:0}
+
 /* ---------- motion: lines draw once as they arrive; the plate sweeps in ---------- */
 @media (prefers-reduced-motion:no-preference){
   .tl-anim path.tl-draw{transition:stroke-dashoffset 1.5s cubic-bezier(.3,.6,.2,1)}
@@ -258,4 +290,7 @@
   .tl-art .ar-part h2{font-size:34px}
   .tl-sm{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px;row-gap:28px}
   .tl-sm .h span{font-size:19px}
+  .tl-art .ar-flow>.ar-figs{grid-column:1}
+  .tl-art .ar-sec{margin-top:40px}
+  .tl-art .viz-head h2,.tl-art .story-viz .viz-main .viz-head h2,.tl-art .viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font-size:19px}
 }
