@@ -1,0 +1,47 @@
+---
+// One figure in the new kit: the double rule, a finding as the title, one dek line, the
+// chart drawn for its width, and a quiet footer. The page sets the words; the chart
+// draws only data. Drawn on the server at the column width, redrawn in the browser.
+import { svg, type AnySpec } from "../../kit/index";
+
+interface Props {
+  id: string;
+  spec: AnySpec;
+  title: string;
+  dek?: string;
+  source?: string;
+  kicker?: string;
+  /** "column" sits in the reading measure; "plate" takes the page width. */
+  size?: "column" | "plate";
+}
+const { id, spec, title, dek, source, kicker, size = "plate" } = Astro.props;
+const initial = svg(spec, size === "plate" ? 1040 : 680);
+---
+
+<figure class={`kit-fig kit-${size}`} id={id} data-kit={JSON.stringify(spec)} data-title={title} data-dek={dek} data-source={source}>
+  <div class="kit-rule" aria-hidden="true"></div>
+  {kicker && <p class="kit-kicker">{kicker}</p>}
+  <h2 class="kit-title">{title}</h2>
+  {dek && <p class="kit-dek">{dek}</p>}
+  <div class="kit-plot" data-kit-plot set:html={initial} />
+  <footer class="kit-foot">
+    {source && <span>Source: {source}</span>}
+    <button type="button" data-kit-dl>Download</button>
+  </footer>
+</figure>
+
+<style>
+  .kit-fig { margin: 0; }
+  .kit-rule { height: 6px; border-top: 1px solid var(--k-ink); border-bottom: 2px solid var(--k-ink); margin-bottom: 18px; }
+  .kit-kicker { margin: 0 0 8px; font: 600 11.5px/1.2 var(--k-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--k-accent); }
+  /* A headline takes the figure's full width and wraps only when it must; `pretty`
+     just keeps a last word from standing alone. */
+  .kit-title { margin: 0; font: 600 clamp(22px, 1.4rem + 0.9vw, 32px)/1.14 var(--k-display); letter-spacing: -0.015em; color: var(--k-ink); text-wrap: pretty; }
+  .kit-dek { margin: 10px 0 0; max-width: 62ch; font: 400 15.5px/1.5 var(--k-sans); color: var(--k-ink2); }
+  .kit-plot { margin-top: 28px; width: 100%; }
+  .kit-plot :global(svg) { display: block; width: 100%; height: auto; }
+  .kit-foot { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--k-rule); display: flex; justify-content: space-between; gap: 16px; font: 400 12px/1.4 var(--k-sans); color: var(--k-ink3); }
+  .kit-foot button { font: 600 12px/1 var(--k-sans); color: var(--k-ink); background: none; border: 0; border-bottom: 1px solid currentColor; padding: 0 0 2px; cursor: pointer; }
+  .kit-foot button:hover { color: var(--k-accent); }
+  .kit-column { max-width: 680px; }
+</style>

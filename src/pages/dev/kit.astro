@@ -1,0 +1,59 @@
+---
+// The chart kit's gallery: every form on real data from the published stories. Resize the
+// window to see each chart redraw for its width.
+import Figure from "../../components/kit/Figure.astro";
+import { SAMPLES } from "../../kit/samples/index";
+import "../../styles/fonts.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Chart kit · This Indian Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="kit-rule" aria-hidden="true"></div>
+      <p class="eyebrow">This Indian Life · Chart kit</p>
+      <h1>Every form, on real data</h1>
+      <p class="lede">{SAMPLES.length} charts from the remittance and poverty stories. Each one is drawn for the width it is shown at; resize the window and it redraws, it is never scaled.</p>
+    </header>
+    <main>
+      {SAMPLES.map((s) => (
+        <section class="plate">
+          <Figure id={s.id} spec={s.spec} title={s.title} dek={s.dek} source={s.source} kicker={s.spec.form} />
+        </section>
+      ))}
+    </main>
+    <script>
+      import "../../kit/client";
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --k-ink: #1a1a1a; --k-ink2: #57534d; --k-ink3: #6e6962; --k-rule: #ece9e3; --k-accent: #26408b;
+    --k-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --k-display: Literata, Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--k-ink); font-family: var(--k-sans); -webkit-font-smoothing: antialiased; }
+  .masthead, main { max-width: 1104px; margin: 0 auto; padding: 0 32px; }
+  .masthead { padding-top: 56px; }
+  .masthead .kit-rule { height: 6px; border-top: 1px solid var(--k-ink); border-bottom: 2px solid var(--k-ink); }
+  .eyebrow { margin: 18px 0 0; font: 600 12px/1 var(--k-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--k-accent); }
+  h1 { margin: 14px 0 0; font: 600 clamp(34px, 2rem + 2vw, 56px)/1.05 var(--k-display); letter-spacing: -0.025em; }
+  .lede { margin: 16px 0 0; max-width: 58ch; font: 400 18px/1.55 var(--k-display); color: var(--k-ink2); }
+  .plate { margin: 96px 0; }
+  @media (max-width: 600px) {
+    .masthead, main { padding: 0 16px; }
+    .masthead { padding-top: 32px; }
+    .plate { margin: 64px 0; }
+  }
+</style>

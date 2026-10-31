@@ -1,0 +1,30 @@
+---
+// A kit chart inside an article's figure card: drawn on the server at the width the card
+// is laid out for, redrawn in the browser at the exact width once it nears the screen.
+import { svg, type AnySpec } from "../../kit/index";
+
+interface Props {
+  spec: AnySpec;
+  id: string;
+  title: string;
+  dek?: string;
+  source?: string;
+  /** The width the server draws at: the card's usual width. */
+  width: number;
+}
+const { spec, id, title, dek, source, width } = Astro.props;
+const initial = svg(spec, width);
+---
+
+<div class="kit-host" id={`${id}-kit`} data-kit={JSON.stringify(spec)} data-kit-w={width} data-title={title} data-dek={dek} data-source={source}>
+  <div class="kit-plot" data-kit-plot set:html={initial} />
+</div>
+
+<script>
+  import "../../kit/client";
+</script>
+
+<style>
+  .kit-host { width: 100%; margin-top: 20px; }
+  .kit-plot :global(svg) { display: block; width: 100%; height: auto; max-width: none; }
+</style>

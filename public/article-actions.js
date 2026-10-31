@@ -269,7 +269,9 @@
       const svg = await chartSvg(card, actions);
       if (!svg) return;
       const fontCss = await embeddedFontCss();
-      const svgText = portableSvg(card, svg, fontCss);
+      // A chart-kit card exports through the kit: its own title, dek, source and mark.
+      const kitHost = card.querySelector("[data-kit]");
+      const svgText = kitHost && window.tilKit ? window.tilKit.exportSvg(kitHost, fontCss) : portableSvg(card, svg, fontCss);
       if (action === "svg") downloadBlob(`${file}.svg`, "image/svg+xml;charset=utf-8", svgText);
       if (action === "png") await downloadPng(file, svgText);
     }

@@ -12,6 +12,7 @@ import { domains, locales } from "../../data/site";
 import { annotateStorySections, keyGlossaryTerms, macchaExplanation, markdownBlocks, pullQuoteForPage, questionPages, questionUrl, readableBlocks, statusMeta } from "../../data/questions";
 import { visualsForQuestion, bindSectionVisuals, bindSectionVisualGroups } from "../../data/viz";
 import { articleGraph, SITE } from "../../data/seo";
+import { KIT_ARTICLES } from "../../kit/adapt";
 
 export function getStaticPaths() {
   return questionPages.map((page) => ({
@@ -34,6 +35,8 @@ const status = statusMeta(explanation.status);
 // narrative: an opening answer + hero chart, then prose sections each interleaved
 // with the chart they discuss. The lead (core indicator) chart opens the story.
 const visuals = visualsForQuestion(page);
+// Articles moved to the chart kit mark their visuals; ArticleVisuals draws those it can.
+if (KIT_ARTICLES.has(page.id)) for (const v of visuals as Array<{ kit?: boolean }>) v.kit = true;
 // Bind ALL charts to sections via the map (including the hero) so the section that
 // maps to the lead chart actually receives it. Sizing (hero/feature/small) is carried
 // on each visual, so the lead still renders large in its section.

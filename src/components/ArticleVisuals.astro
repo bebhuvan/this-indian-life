@@ -4,6 +4,8 @@ import type { LockedNumber } from "../data/questions";
 import { formatLockedNumber } from "../data/questions";
 import { fileSafe } from "../data/chartDownloads";
 import FigureCard from "./FigureCard.astro";
+import KitPlot from "./kit/KitPlot.astro";
+import { toKitSpec } from "../kit/adapt";
 import { artboardsFor, isPhoneW, PHONE_DRAW_W } from "../data/artboards";
 import { renderFigure, cleanUnit, linePeersFigure, tagFigure } from "../data/figures";
 import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, axisFmt, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
@@ -1766,6 +1768,15 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           sourceText,
           sourceUrl: source.sourceUrl
         };
+        // An article moved to the chart kit draws every visual the kit can translate.
+        const kitSpec = (visual as { kit?: boolean }).kit ? toKitSpec(visual) : null;
+        if (kitSpec) {
+          return (
+            <FigureCard cls={`${base} kit-card`} {...card}>
+              <KitPlot spec={kitSpec} id={chartId} title={visual.title} dek={card.subtitle} source={sourceText} width={compact || narrow ? 680 : 1040} />
+            </FigureCard>
+          );
+        }
         if (visual.kind === "almanac") {
           const svgD = paired && visual.svgHalf ? visual.svgHalf : visual.svg;
           return (

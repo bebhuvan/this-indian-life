@@ -24,6 +24,8 @@ export type AlmanacVisual = {
   svgHalf?: string;
   /** The figure drawn at any width, for the artboard rungs (artboards.ts). */
   draw?: (w: number) => string;
+  /** The names of a dumbbell's two ends, for the chart kit. */
+  ends?: [string, string];
   rows: Row[];
   /** A one-line statistic the figure computed itself (for example a correlation). */
   stat?: string;
@@ -246,7 +248,7 @@ function dumbbellVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
   const all = rows.flatMap((r) => [r.a, r.b]), ax = e.domain ? { min: e.domain[0], max: e.domain[1], ticks: e.ticks ?? [] } : niceAxis(Math.min(...all), Math.max(...all));
   const opts = { domain: [ax.min, ax.max] as [number, number], ticks: e.ticks ?? ax.ticks, fmt: unitFmt(e.unit ?? a.unit), aLabel: e.aLabel ?? "Before", bLabel: e.bLabel ?? "Latest", label: e.title ?? a.title };
   const { svg, svgM, draw } = pairAt((w) => dumbbell(rows, { ...opts, width: w }), (w) => dumbbell(rows, { ...opts, width: w, rowH: 20, half: true }));
-  return { kind: "almanac", form: "dumbbell", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, rows: rows.map((r) => ({ label: r.label, [af]: r.a, [bf]: r.b })) };
+  return { kind: "almanac", form: "dumbbell", title: e.title ?? a.title, subtitle: e.subtitle ?? "", unit: e.unit ?? a.unit, source: srcOf(a), svg, svgM, draw, ends: [opts.aLabel, opts.bLabel], rows: rows.map((r) => ({ label: r.label, [af]: r.a, [bf]: r.b })) };
 }
 
 // ---------------------------------------------------------------- rank slope

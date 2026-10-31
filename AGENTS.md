@@ -61,6 +61,13 @@ empty, the boxes fall back to those one-liners and **read thin**. Both the multi
 the built-in batched path (`createBatchedExplanation`, auto-selected for big articles)
 generate explainers, so no separate explainer pass is needed.
 
+### The chart kit (new charts)
+New charts are drawn by the chart kit in `src/kit/`, documented in `docs/CHART_KIT.md`
+(design rules, the signature, architecture, how an article opts in, how to check a change).
+The gallery is `/dev/kit/`. Articles listed in `KIT_ARTICLES` (`src/kit/adapt.ts`) draw every
+chart the kit can translate with the kit and fall back to the Almanac renderer for the rest.
+Move an article by adding its id there, then check it with `scripts/kit/render-article.mjs`.
+
 ### Design system and chart forms (the Almanac)
 The site's look, the five data inks and seventeen extra chart forms (`heatStrip`, `tileGrid`, `scatterFit`,
 `parade`, `sensitivity`, `dumbbell`, `rankSlope`, `beeswarm`, `dayRibbon`, `unitChart`, `intervalPlot`,
