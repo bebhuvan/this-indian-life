@@ -1,36 +1,60 @@
 ---
+// The colophon: what the numbers are and how the book is made, ending on the double danda.
 import { REPO_URL } from "../data/site";
+import { inWords, totals } from "../data/book";
 
 type Props = { locale?: string };
-const { locale = "en" } = Astro.props;
 ---
 
-<footer class="foot">
-  <div class="foot-brand">This Indian Life</div>
-  <p class="foot-note">
-    One person dragging India's most important numbers out of stubborn PDFs and tired
-    government portals, and putting them in plain language. The data comes from the World Bank,
-    UN, WHO, Our World in Data, Ember and others. Every page is static, sourced, and tied back
-    to where the numbers began.
-  </p>
-  <p class="foot-sister">
-    Sister project:
-    <a href="https://hopeanddespair.world/" target="_blank" rel="noreferrer">Hope &amp; Despair</a>.
-    Is the world getting better or worse? The same approach, pointed at the whole planet.
-  </p>
-  <p class="foot-sister">
-    Sister project:
-    <a href="https://measure.thisindianlife.today/">Measure of India</a>.
-    India's official economic statistics, guide by guide and state by state.
-  </p>
-  <nav class="foot-links" aria-label="Site">
-    <a href={`/articles/`}>All articles</a>
-    <a href={`/about/`}>About</a>
-    <a href={`/methodology/`}>Methodology</a>
-    <a href={`/install/`}>Install the app</a>
-    <a href={`/license/`}>License · CC BY 4.0</a>
-    <a href={`/library/`}>Chart library</a>
-    <a href={`/rss.xml`}>RSS feed</a>
-    <a href={REPO_URL} target="_blank" rel="noreferrer">Source on GitHub</a>
-  </nav>
+<footer class="tl-colo">
+  <div class="tl-dr" aria-hidden="true"></div>
+  <div class="tl-grid">
+    <div>
+      <p class="tl-colo-name">This Indian Life</p>
+      <p class="tl-colo-line">India, asked plainly and answered in its own numbers.</p>
+      <nav aria-label="Site">
+        <a href="/articles/">Contents</a><a href="/academy/">Academy</a><a href="/library/">Chart library</a><a href="/methodology/">Methodology</a><a href="/about/">About</a><a href="/rss.xml">RSS</a>
+      </nav>
+    </div>
+    <div class="tl-colo-cols">
+      <div><h2>The numbers</h2><p class="c">Every figure links to the table it came from: the Sample Registration System, the RBI's Database on Indian Economy, MOSPI, the World Bank, the UN and Our World in Data, among others. Estimates are drawn as dots, and say so. {inWords(totals.answered).replace(/^./, (c) => c.toUpperCase())} questions are answered so far.</p></div>
+      <div><h2>The making</h2><p class="c">Written by Bhuvanesh. Set in Literata and Schibsted Grotesk. Each chart is drawn for the width you read it at, and downloads as SVG, PNG or CSV. <a href={REPO_URL} rel="noreferrer">The source</a> and the <a href="/license/">licence, CC BY 4.0</a>.</p></div>
+    </div>
+  </div>
+  <svg class="tl-end" viewBox="0 0 22 26" aria-hidden="true" focusable="false"><rect x="5" y="0" width="3" height="26" fill="currentColor"/><rect x="14" y="0" width="3" height="26" fill="currentColor"/></svg>
 </footer>
+<script is:inline>
+  // Lines draw once as their chart arrives; the monsoon plate sweeps in. Nothing moves
+  // for readers who ask for less motion, and nothing waits on this script to be read.
+  (() => {
+    if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const hosts = document.querySelectorAll(".tl-plate, .tl-plot, .tl-em, .tl-sm > div, .ar-figs .kit-host");
+    const prime = (el) => {
+      el.classList.add("tl-anim");
+      el.querySelectorAll("path").forEach((p) => {
+        const s = p.getAttribute("stroke");
+        if (!s || s === "none" || p.getAttribute("stroke-dasharray") || p.getAttribute("fill") && p.getAttribute("fill") !== "none") return;
+        const w = parseFloat(p.getAttribute("stroke-width") || "1");
+        if (w < 1.4) return;
+        const len = p.getTotalLength ? p.getTotalLength() : 0;
+        if (!len) return;
+        p.classList.add("tl-draw");
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = String(len);
+      });
+      el.querySelectorAll("circle").forEach((c) => c.classList.add("tl-pop"));
+    };
+    const io = new IntersectionObserver((list) => {
+      for (const e of list) {
+        if (!e.isIntersecting) continue;
+        const el = e.target;
+        io.unobserve(el);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.classList.add("tl-in");
+          el.querySelectorAll("path.tl-draw").forEach((p) => { p.style.strokeDashoffset = "0"; });
+        }));
+      }
+    }, { threshold: 0.3 });
+    hosts.forEach((h) => { prime(h); io.observe(h); });
+  })();
+</script>

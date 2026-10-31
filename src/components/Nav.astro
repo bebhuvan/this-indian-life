@@ -1,57 +1,43 @@
 ---
+// The masthead: the wordmark (its point is the last value of a line), the six chapters,
+// the contents and search, then the double rule. On phones the chapters fold into a sheet.
 import { domains } from "../data/site";
+import { chapters } from "../data/book";
 
-type Props = {
-  active?: string;
-  locale?: string;
-};
-
-const { active, locale = "en" } = Astro.props;
+type Props = { active?: string; locale?: string };
+const { active } = Astro.props;
 const reference = [
+  { id: "articles", label: "Contents", href: "/articles/" },
   { id: "academy", label: "Academy", href: "/academy/" },
-  { id: "articles", label: "Articles", href: "/articles/" },
-  { id: "about", label: "About", href: "/about/" }
+  { id: "about", label: "About", href: "/about/" },
 ];
-const current = domains.find((d) => d.id === active)?.label ?? reference.find((r) => r.id === active)?.label;
+const count = (id: string) => chapters.find((c) => c.id === id)?.entries.length ?? 0;
 ---
 
-<nav class="nav">
-  <a class="brand" href="/">This Indian Life</a>
-  <div class="domains">
-    {domains.map((domain) => (
-      <a
-        data-d={domain.id}
-        class={active === domain.id ? "on" : ""}
-        href={`/${domain.id}/`}
-      >
-        {domain.label}
-      </a>
-    ))}
-    {reference.map((r) => <a data-d="reference" class={active === r.id ? "on" : ""} href={r.href}>{r.label}</a>)}
-  </div>
-  {/* Phones: one line, the brand and a menu that names the section you are in. */}
-  <details class="nav-menu">
-    <summary aria-label="Sections">
-      {current ? <span class="nm-here" data-d={active}>{current}</span> : null}
-      <span class="nm-btn">Sections<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-    </summary>
-    <div class="nm-panel">
-      <ul class="nm-topics">
-        {domains.map((domain) => (
-          <li><a data-d={domain.id} class={active === domain.id ? "on" : ""} href={`/${domain.id}/`}><i></i>{domain.label}</a></li>
-        ))}
-      </ul>
-      <ul class="nm-ref">
-        {reference.map((r) => <li><a class={active === r.id ? "on" : ""} href={r.href}>{r.label}</a></li>)}
-      </ul>
+<header class="tl-mast">
+  <div class="bar">
+    <a class="tl-wm" href="/" aria-label="This Indian Life, home">This Indian Life<i aria-hidden="true"></i></a>
+    <nav class="tl-nav" aria-label="Chapters">
+      {domains.map((d) => <a href={`/${d.id}/`} aria-current={active === d.id ? "page" : undefined}>{d.label}</a>)}
+    </nav>
+    <div class="tl-tools">
+      <a href="/articles/" aria-current={active === "articles" ? "page" : undefined}>Contents</a>
+      <a class="srch" href="/articles/#find">Search</a>
+      <details class="tl-menu">
+        <summary aria-label="Open the chapters">Chapters</summary>
+        <div class="tl-sheet">
+          {domains.map((d) => <a href={`/${d.id}/`} aria-current={active === d.id ? "page" : undefined}>{d.label}<span>{count(d.id)} questions</span></a>)}
+          {reference.map((r) => <a class="ref" href={r.href}>{r.label}</a>)}
+        </div>
+      </details>
     </div>
-  </details>
-</nav>
-<hr class="r" />
+  </div>
+  <div class="tl-dr" aria-hidden="true"></div>
+</header>
 <script is:inline>
-  // The phone menu closes on Escape or a tap outside it.
+  // The phone sheet closes on Escape or a tap outside it.
   (() => {
-    const m = document.querySelector(".nav-menu");
+    const m = document.querySelector(".tl-menu");
     if (!m) return;
     document.addEventListener("click", (e) => { if (m.open && !m.contains(e.target)) m.open = false; });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && m.open) { m.open = false; m.querySelector("summary")?.focus(); } });

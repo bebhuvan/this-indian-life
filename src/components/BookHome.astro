@@ -1,0 +1,110 @@
+---
+// The landing: India in one sentence, the monsoon plate, the lead question with its
+// numeral and chart, three more answered questions, and the six chapters with their records.
+import Base from "../layouts/Base.astro";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+import KitPlot from "./kit/KitPlot.astro";
+import { domains } from "../data/site";
+import { homeGraph } from "../data/seo";
+import { chapters, entry, glyph, homeBand, homeLead, inWords, monsoon, opening, RECORDS, emblem, totals } from "../data/book";
+
+type Props = { canonicalPath?: string };
+const { canonicalPath } = Astro.props;
+const label = (id: string) => domains.find((d) => d.id === id)!.label;
+const lead = entry(homeLead.id);
+const pickThree = (c: (typeof chapters)[number]) => c.entries.filter((e) => e.answered).slice(0, 3);
+const cap = (s: string) => s.replace(/^./, (c) => c.toUpperCase());
+---
+
+<Base jsonLd={homeGraph()} canonicalPath={canonicalPath}>
+  <div class="wrap">
+    <Nav />
+
+    <section class="tl-front" aria-label="India, in six numbers">
+      <p class="tl-fr">
+        {opening.map((part) => part.fig
+          ? <><a href={entry(part.q!).href}>{part.fig}</a><sup class="tl-qn">{entry(part.q!).n}</sup></>
+          : part.text)}
+      </p>
+      <div class="tl-grid" style="margin-top:48px">
+        <span></span>
+        <div>
+          <p class="tl-pitch">Each figure answers one of {inWords(totals.all)} plain questions in this book; the small number says which. Every answer comes with its chart and the table it was drawn from.</p>
+          <p style="margin:16px 0 0;font:400 14.5px/1 var(--k-sans)"><a class="tl-ul" href="/articles/">Read the contents</a><span style="margin-left:16px;color:var(--k-ink3)">{totals.answered} answered, {totals.all - totals.answered} under way</span></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="tl-plate" aria-labelledby="monsoon">
+    <div class="wrap"><div class="tl-dr" aria-hidden="true"></div></div>
+    <div class="ann" aria-hidden="true">
+      {monsoon.notes.map((n) => <span class={n.phone ? "ph" : undefined} style={`left:${n.at}`}><i class={n.side}>{n.text}</i></span>)}
+    </div>
+    <div class="bar" role="img" aria-label={monsoon.alt} set:html={monsoon.svg} />
+    <div class="axis" aria-hidden="true">{monsoon.years.map((y) => <span style={`left:${y.at}`}>{y.y}</span>)}</div>
+    <div class="wrap">
+      <div class="tl-grid" style="margin-top:36px">
+        <h2 id="monsoon">Every monsoon since {monsoon.from}</h2>
+        <div>
+          <p class="tl-mv" style="margin:0;max-width:640px;font-size:19px;line-height:1.55">One stripe a year, coloured by how far June to September rain ran from the long-run average. Red years fell short, blue years ran over; the deeper the colour, the further. India still plants by these four months.</p>
+          <p style="margin:14px 0 0;font:400 12.5px/1.5 var(--k-sans);color:var(--k-ink3)">Source: <a href="https://imdpune.gov.in/cmpg/Product/Rainfall_Data.html" style="color:var(--k-ink2)">India Meteorological Department, all-India monsoon rainfall</a> · <a class="tl-ul" href={entry("q.climate.el_nino_india").href}>What does El Niño do to India?</a><sup class="tl-qn" style="vertical-align:.6em">{entry("q.climate.el_nino_india").n}</sup></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="tl-lead" style="padding-top:136px">
+      <div class="tl-grid">
+        <div>
+          <p class="tl-k"><span class="tl-g" set:html={glyph(lead.page.domain)} />{label(lead.page.domain)} <span>· Question {lead.n}</span></p>
+          <h2 class="big tl-q"><a href={lead.href}>{lead.page.question}</a></h2>
+          <p style="margin:44px 0 0;display:flex;align-items:baseline;gap:14px"><span class="tl-num big" style="font-size:188px">{homeLead.numeral}</span><span class="tl-mv" style="font-size:30px;letter-spacing:-.01em">{homeLead.unit}</span></p>
+          <p class="tl-ans" style="margin-top:30px">{homeLead.text}</p>
+          <p style="margin:30px 0 0;font:400 14.5px/1 var(--k-sans)"><a class="tl-ul" href={lead.href}>Read the answer</a></p>
+        </div>
+        <figure class="tl-fig">
+          <div class="tl-dr" aria-hidden="true"></div>
+          <figcaption><span><span class="tl-ft">{homeLead.title}</span><span class="tl-fd">{homeLead.dek}</span></span></figcaption>
+          <div class="tl-plot"><KitPlot spec={homeLead.spec} id="home-lead" title={homeLead.title} dek={homeLead.dek} source={homeLead.source} width={780} /></div>
+          <footer class="tl-fs"><span>Source: {homeLead.source}</span></footer>
+        </figure>
+      </div>
+    </section>
+
+    <section style="padding-top:144px" aria-labelledby="lately">
+      <div class="tl-grid tl-sh"><h2 id="lately">Lately answered</h2><p>Three more questions, each with the chart that settles it. <a class="tl-ul" href="/articles/">All {inWords(totals.answered)}</a></p></div>
+      <div class="tl-band" style="margin-top:44px">
+        {homeBand.map((f) => { const e = entry(f.q); return (
+          <article>
+            <div><div class="tl-dr" aria-hidden="true"></div><p class="tl-k" style="margin-top:14px"><span class="tl-g" set:html={glyph(e.page.domain)} />{label(e.page.domain)} <span>· Question {e.n}</span></p></div>
+            <h3 class="tl-q"><a href={e.href}>{e.page.question}</a></h3>
+            <p class="ab">{f.text}</p>
+            <div class="tl-plot"><KitPlot spec={f.spec} id={f.id} title={e.page.question} source={f.source} width={368} /></div>
+            <footer class="tl-fs"><span>Source: {f.source}</span></footer>
+          </article>
+        ); })}
+      </div>
+    </section>
+
+    <section style="padding-top:152px" aria-labelledby="chapters">
+      <div class="tl-grid tl-sh"><h2 id="chapters">Six chapters</h2><p>Each line is a chapter's defining record, drawn from its first year to its latest.</p></div>
+      <div class="tl-chs" style="margin-top:44px">
+        {chapters.map((c) => { const r = RECORDS[c.id]; return (
+          <section>
+            <div class="top"><i>Chapter {c.ordinal}</i><span>{c.answered === c.entries.length ? `all ${c.entries.length} answered` : `${c.answered} of ${c.entries.length} answered`}</span></div>
+            <h3><a href={`/${c.id}/`}>{c.label}</a></h3>
+            <p class="cd">{c.line}</p>
+            <div class="tl-em" role="img" aria-label={`${r.series}: ${r.start.value} ${r.start.note}, ${r.end.value} ${r.end.note}`} set:html={emblem(r.spec, 368, 88)} />
+            <div class="tl-ends"><span><b>{r.start.value}</b><i>{r.start.note}</i></span><span class="e"><b>{r.end.value}</b><i>{r.end.note}</i></span></div>
+            <ul>{pickThree(c).map((e) => <li><a href={e.href}>{e.page.question}</a></li>)}</ul>
+          </section>
+        ); })}
+      </div>
+    </section>
+
+    <Footer />
+  </div>
+</Base>

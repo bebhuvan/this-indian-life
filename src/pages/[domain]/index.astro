@@ -1,154 +1,116 @@
 ---
+// A chapter: its name, what it is about, its defining record from first year to latest,
+// the lead question with its figure, up to three more with theirs, then every other
+// question in the chapter with its answer.
 import Base from "../../layouts/Base.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import { domainFor, domains, locales } from "../../data/site";
-import { questionPages, questionUrl, statusMeta, gitMetaFor } from "../../data/questions";
-import { articleThumb, figureCount } from "../../data/thumbs";
+import KitPlot from "../../components/kit/KitPlot.astro";
+import { domains, type DomainId } from "../../data/site";
+import { chapters, CHAPTER_FIGS, emblem, entry, inWords, RECORDS } from "../../data/book";
 
 export function getStaticPaths() {
   return domains.map((domain) => ({ params: { domain: domain.id } }));
 }
 
-const { domain } = Astro.params;
-const locale = "en";
-const current = domainFor(domain as any)!;
-const domainQuestions = questionPages.filter((page) => page.domain === domain);
-
-// Group by readiness so finished pieces aren't mixed in with half-built ones.
-// Mirror the Ask page: "Ready to read" vs "Still building" (work-in-progress and
-// needs-data both live under the latter, honest rather than hidden).
-const statusOrder: Record<string, number> = { ready: 0, work_in_progress: 1, needs_data: 2 };
-const sortedQuestions = [...domainQuestions].sort(
-  (a, b) =>
-    (statusOrder[a.explanation.status] ?? 9) - (statusOrder[b.explanation.status] ?? 9) ||
-    a.question.localeCompare(b.question)
-);
-// Ready pieces, newest first: the most recently published or revised one leads.
-const updated = (p: (typeof questionPages)[number]) => gitMetaFor(p.id).updated || p.explanation.lastReviewed || p.explanation.generatedAt || "";
-const ready = sortedQuestions.filter((p) => p.explanation.status === "ready").sort((a, b) => String(updated(b)).localeCompare(String(updated(a))));
-const building = sortedQuestions.filter((p) => p.explanation.status !== "ready");
-const [lead, ...rest] = ready;
-const meta = (p: (typeof questionPages)[number]) => {
-  const n = figureCount(p);
-  return [n ? `${n} ${n === 1 ? "figure" : "figures"}` : "", p.explanation.dataThrough && String(p.explanation.dataThrough).length <= 16 ? `data through ${p.explanation.dataThrough}` : ""].filter(Boolean).join(" · ");
-};
-const questionGroups = [
-  { id: "ready", label: "Ready to read", pages: sortedQuestions.filter((p) => p.explanation.status === "ready") },
-  { id: "building", label: "Still building", pages: sortedQuestions.filter((p) => p.explanation.status !== "ready") }
-];
-const featuredReports = domain === "health"
-  ? [
-      {
-        title: "What NFHS-6 reveals about India",
-        dek: "A visual reading of the 2023-24 National Family Health Survey: homes, women, fertility, birth, child health, nutrition, chronic disease, ageing, and care.",
-        href: `/health/nfhs-6/`,
-        meta: "Special report",
-      },
-    ]
-  : [];
+const id = Astro.params.domain as DomainId;
+const chapter = chapters.find((c) => c.id === id)!;
+const figs = CHAPTER_FIGS[id];
+const record = RECORDS[id];
+const lead = entry(figs.lead.q);
+const shown = new Set([figs.lead.q, ...figs.band.map((f) => f.q)]);
+const rest = chapter.entries.filter((e) => !shown.has(e.page.id));
+const cap = (s: string) => s.replace(/^./, (c) => c.toUpperCase());
+const counts = chapter.answered === chapter.entries.length
+  ? `${cap(inWords(chapter.entries.length))} questions, all answered`
+  : `${cap(inWords(chapter.entries.length))} questions, ${inWords(chapter.answered)} answered`;
+const report = id === "health"
+  ? { title: "What NFHS-6 reveals about India", dek: "A visual reading of the 2023–24 National Family Health Survey: homes, women, fertility, birth, child health, nutrition, chronic disease, ageing and care.", href: "/health/nfhs-6/" }
+  : null;
 ---
-<Base title={`${current.label} · This Indian Life`} domain={current.id}>
+
+<Base title={`${chapter.label} · This Indian Life`} description={chapter.line} domain={id}>
   <div class="wrap">
-    <Nav active={current.id} locale={locale} />
+    <Nav active={id} />
 
-    <header class="domain-head dh">
-      <span class="domain-chip"><span class="tk"></span><span>{current.label}</span></span>
-      <h1 class="serif">{current.line}</h1>
-      <p class="dh-dek">{ready.length} {ready.length === 1 ? "explainer" : "explainers"}{building.length ? `, and ${building.length} still being built` : ""}. Every chart comes with its data and its source.</p>
-    </header>
+    <section style="padding-top:64px">
+      <div class="tl-opn">
+        <div>
+          <p class="tl-mv" style="margin:0;font-size:20px;line-height:1;color:var(--k-ink3)">Chapter {chapter.ordinal}</p>
+          <h1>{chapter.label}</h1>
+        </div>
+        <div style="padding-bottom:6px">
+          <p class="tl-st">{figs.statement}</p>
+          <p style="margin:20px 0 0;font:400 13.5px/1.4 var(--k-sans);color:var(--k-ink3)">{counts}</p>
+        </div>
+      </div>
+      <div class="tl-em" style="margin-top:56px" role="img" aria-label={`${record.series}: ${record.start.value} ${record.start.note}, ${record.end.value} ${record.end.note}`} set:html={emblem(record.spec, 1184, 96)} />
+      <div class="tl-ends"><span><b>{record.start.value}</b><i>{record.start.note}</i></span><span class="e"><b>{record.end.value}</b><i>{record.end.note}</i></span></div>
+    </section>
 
-    {featuredReports.length > 0 && (
-      <section class="dp-report">
-        {featuredReports.map((report) => (
-          <a href={report.href}>
-            <span class="dp-tag">{report.meta}</span>
-            <span class="dp-q">{report.title}</span>
-            <span class="dp-dek">{report.dek}</span>
-          </a>
-        ))}
+    <section style="padding-top:112px">
+      <div class="tl-dr" aria-hidden="true"></div>
+      <div class="tl-grid" style="padding-top:18px">
+        <div>
+          <p class="tl-k">Question {lead.n}</p>
+          <h2 class="tl-q" style="margin:16px 0 0;font:400 44px/1.06 var(--k-display);letter-spacing:-.026em;text-wrap:balance"><a href={lead.href}>{lead.page.question}</a></h2>
+          <p class="tl-ans" style="margin-top:26px">{figs.lead.text}</p>
+          <p style="margin:22px 0 0;font:400 14.5px/1 var(--k-sans)"><a class="tl-ul" href={lead.href}>Read the answer</a></p>
+        </div>
+        <figure class="tl-fig">
+          <figcaption style="padding-top:0"><span><span class="tl-ft">{figs.lead.title}</span><span class="tl-fd">{figs.lead.dek}</span></span><span class="tl-fn">Fig. 1</span></figcaption>
+          <div class="tl-plot"><KitPlot spec={figs.lead.spec} id={figs.lead.id} title={figs.lead.title!} dek={figs.lead.dek} source={figs.lead.source} width={780} /></div>
+          <footer class="tl-fs"><span>Source: {figs.lead.source}</span></footer>
+        </figure>
+      </div>
+    </section>
+
+    {figs.band.length ? (
+      <section style="padding-top:136px">
+        <div class="tl-band">
+          {figs.band.map((f) => { const e = entry(f.q); return (
+            <article>
+              <div><div class="tl-dr" aria-hidden="true"></div><p class="tl-k" style="margin-top:14px;font-weight:400;color:var(--k-ink3)">Question {e.n}</p></div>
+              <h3 class="tl-q"><a href={e.href}>{e.page.question}</a></h3>
+              <p class="ab">{f.text}</p>
+              <div class="tl-plot"><KitPlot spec={f.spec} id={f.id} title={e.page.question} source={f.source} width={368} /></div>
+              <footer class="tl-fs"><span>Source: {f.source}</span></footer>
+            </article>
+          ); })}
+        </div>
       </section>
-    )}
+    ) : null}
 
-    {lead && (
-      <section class="dp-lead">
-        <a href={questionUrl(lead, locale)}>
-          <span class="dp-lead-text">
-            <span class="dp-tag">Latest</span>
-            <span class="dp-q dp-q-lead">{lead.question}</span>
-            <span class="dp-dek">{lead.explanation.short?.dek}</span>
-            <span class="dp-meta">{meta(lead)}</span>
-          </span>
-          {articleThumb(lead, [560, 220]) ? <span class="dp-thumb dp-thumb-lead" set:html={articleThumb(lead, [560, 220])} /> : null}
-        </a>
+    {report ? (
+      <section style="padding-top:128px">
+        <div class="tl-dr" aria-hidden="true"></div>
+        <div class="tl-grid" style="padding-top:18px">
+          <p class="tl-mv" style="margin:0;font-size:20px;color:var(--k-ink3)">A special report</p>
+          <div>
+            <h2 class="tl-q" style="margin:0;font:400 36px/1.1 var(--k-display);letter-spacing:-.02em"><a href={report.href}>{report.title}</a></h2>
+            <p class="tl-ans" style="margin-top:14px;max-width:640px">{report.dek}</p>
+          </div>
+        </div>
       </section>
-    )}
+    ) : null}
 
-    {rest.length > 0 && (
-      <section class="dp-grid">
-        {rest.map((page) => (
-          <a class="dp-card" href={questionUrl(page, locale)}>
-            {articleThumb(page) ? <span class="dp-thumb" set:html={articleThumb(page)} /> : null}
-            <span class="dp-q">{page.question}</span>
-            <span class="dp-dek">{page.explanation.short?.dek}</span>
-            <span class="dp-meta">{meta(page)}</span>
-          </a>
-        ))}
+    {rest.length ? (
+      <section style="padding-top:128px">
+        <div class="tl-grid">
+          <div class="tl-sh"><h2 style="margin:0;font:400 30px/1.1 var(--k-display);letter-spacing:-.02em">Also in this chapter</h2></div>
+          <ol class="tl-rows">
+            {rest.map((e) => (
+              <li class={e.answered ? undefined : "wip"}>
+                <span class="no">{String(e.n).padStart(2, "0")}</span>
+                <a class="qq" href={e.href}>{e.page.question}</a>
+                <span class="a">{e.answer ? <><b>{e.answer.value}</b><i>{e.answer.note}</i></> : <i>{e.state || "answered"}</i>}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
-    )}
+    ) : null}
 
-    {building.length > 0 && (
-      <section class="dp-building">
-        <p class="lbl">Still being built</p>
-        <ul>
-          {building.map((page) => (
-            <li><a href={questionUrl(page, locale)}><span>{page.question}</span><span class="dp-status">{statusMeta(page.explanation.status).short}</span></a></li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    <Footer locale={locale} />
+    <Footer />
   </div>
 </Base>
-
-<style>
-  /* Domain page: the newest explainer leads with its own figure, the rest sit in a grid
-     of cards (picture, question, one-line dek, figure count), work in progress last. */
-  .dh h1{max-width:18ch}
-  .dh-dek{font-family:var(--sans);font-size:.95rem;color:var(--mid);margin-top:16px;max-width:60ch}
-  .dp-tag{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--c-ink)}
-  .dp-q{display:block;font-family:var(--serif);font-weight:500;font-size:1.32rem;line-height:1.22;color:var(--ink);text-wrap:balance}
-  .dp-dek{display:block;font-family:var(--serif);font-size:1.02rem;line-height:1.5;color:#3a3a3a;text-wrap:pretty}
-  .dp-card .dp-dek{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-  .dp-meta{display:block;font-family:var(--sans);font-size:.78rem;color:var(--dim);font-variant-numeric:tabular-nums}
-  .dp-thumb{display:block}
-  .dp-thumb :global(svg){display:block;width:100%;height:auto;overflow:visible}
-  a:hover .dp-q{color:var(--c-ink)}
-  .dp-report,.dp-lead{margin-top:56px;border-top:2px solid var(--ink);padding-top:18px}
-  .dp-report a,.dp-lead a{text-decoration:none;color:inherit;display:grid;gap:10px}
-  .dp-report a{max-width:760px}
-  .dp-lead a{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:center}
-  .dp-lead-text{display:grid;gap:12px}
-  .dp-q-lead{font-size:clamp(1.8rem,3.2vw,2.5rem);line-height:1.1;font-weight:400;letter-spacing:-.01em}
-  .dp-lead .dp-dek{font-size:1.18rem}
-  .dp-grid{margin-top:64px;border-top:1px solid var(--ink);padding-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 44px}
-  .dp-card{display:grid;align-content:start;gap:10px;text-decoration:none;color:inherit}
-  .dp-card .dp-thumb{margin-bottom:6px}
-  .dp-building{margin-top:72px;border-top:1px solid var(--ink);padding-top:14px}
-  .dp-building ul{list-style:none;margin-top:14px}
-  .dp-building a{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:11px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);font-family:var(--serif);font-size:1.1rem}
-  .dp-building a:hover span:first-child{color:var(--c-ink)}
-  .dp-status{font-family:var(--sans);font-size:.78rem;color:var(--dim);white-space:nowrap}
-  @media(max-width:980px){.dp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media(max-width:680px){
-    .dp-lead a{grid-template-columns:1fr;gap:20px}
-    .dp-thumb-lead{order:-1}
-    .dp-grid{grid-template-columns:1fr;gap:40px}
-    .dp-card{grid-template-columns:minmax(0,1fr) 96px;column-gap:18px;row-gap:8px}
-    .dp-card .dp-thumb{grid-column:2;grid-row:1;margin:4px 0 0;align-self:start}
-    .dp-card .dp-q{grid-column:1;grid-row:1;font-size:1.18rem}
-    .dp-card .dp-dek,.dp-card .dp-meta{grid-column:1/-1}
-    .dp-card .dp-dek{font-size:.98rem;-webkit-line-clamp:3}
-  }
-</style>

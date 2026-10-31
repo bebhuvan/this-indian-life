@@ -1,147 +1,73 @@
 ---
+// The contents: every question in six chapters, numbered, each with the answer it gives.
+// The search box filters the list as you type; the words it searches are baked in.
 import Base from "../../layouts/Base.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import { domains, locales } from "../../data/site";
-import { questionPages, questionUrl, statusMeta } from "../../data/questions";
+import { chapters, emblem, inWords, RECORDS, totals } from "../../data/book";
 
-const locale = "en";
-
-// Searchable text per question, baked in at build time (a few KB inline — no search
-// library, no extra request). The browse-by-domain grouping stays the default view;
-// the search box and chips filter it live.
-const searchText = (page: (typeof questionPages)[number], domainLabel?: string) =>
-  [
-    page.question,
-    page.explanation.short?.dek,
-    page.explanation.short?.headline,
-    page.explanation.article?.title,
-    domainLabel,
-    ...(page.explanation.editorialPlan?.glossaryBlocks?.map((g) => g.term) ?? [])
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
+const searchText = (e: (typeof chapters)[number]["entries"][number], chapter: string) =>
+  [e.page.question, e.page.explanation.short?.headline, e.page.explanation.short?.dek, chapter, e.answer?.value, e.answer?.note,
+    ...(e.page.explanation.editorialPlan?.glossaryBlocks?.map((g) => g.term) ?? [])]
+    .filter(Boolean).join(" ").toLowerCase();
+const cap = (s: string) => s.replace(/^./, (c) => c.toUpperCase());
 ---
 
-<Base title="Articles · This Indian Life" description="Every question on how India lives, each written from sourced data and locked evidence. Browse by topic or search.">
+<Base title="Contents · This Indian Life" description={`${cap(inWords(totals.all))} questions about India in six chapters, each answered from official data with the table it came from.`}>
   <div class="wrap">
-    <Nav locale={locale} />
+    <Nav active="articles" />
 
-    <header class="domain-head ax-head">
-      <span class="lbl">Articles</span>
-      <h1 class="serif">Every question, by subject.</h1>
-      <p class="ax-dek">{questionPages.filter((p) => p.explanation.status === "ready").length} explainers on how India lives, each built from official data with every chart's numbers to download. Search them, or pick a subject.</p>
-    </header>
+    <section class="tl-grid" style="padding-top:72px">
+      <div><h1 style="margin:0;font:300 104px/.9 var(--k-display);letter-spacing:-.05em" class="tl-h-c">Contents</h1></div>
+      <div style="padding-top:10px">
+        <p class="tl-st">{cap(inWords(totals.all))} questions about India in six chapters. {cap(inWords(totals.answered))} are answered, each with the number that settles it and the table it came from.</p>
+        <div class="tl-find" id="find"><label for="find-q">Find a question</label><input id="find-q" type="search" placeholder="fertility, rupee, heat…" autocomplete="off" /></div>
+        <p style="margin:18px 0 0;font:400 14px/1.8 var(--k-sans)">
+          {chapters.map((c, i) => <>{i ? " · " : ""}<a href={`#${c.id}`} style="color:var(--k-ink);text-decoration:none">{c.label}</a> <span style="color:var(--k-ink3)">{c.entries.length}</span></>)}
+        </p>
+        <p id="find-none" hidden class="tl-mv" style="margin:24px 0 0;font-size:18px">No question matches that yet.</p>
+      </div>
+    </section>
 
-    <div class="archive-search ax-search">
-      <input
-        id="q-search"
-        type="search"
-        placeholder="Search: inflation, electricity, children"
-        autocomplete="off"
-        aria-label="Search questions"
-      />
-    </div>
+    {chapters.map((c) => (
+      <section style="padding-top:96px" id={c.id} data-chapter>
+        <div class="tl-dr" aria-hidden="true"></div>
+        <div class="tl-grid" style="padding-top:22px">
+          <div>
+            <p class="tl-mv" style="margin:0;font-size:18px;color:var(--k-ink3)">Chapter {c.ordinal}</p>
+            <h2 style="margin:12px 0 0;font:300 64px/1 var(--k-display);letter-spacing:-.04em"><a href={`/${c.id}/`} style="color:inherit;text-decoration:none">{c.label}</a></h2>
+            <p style="margin:16px 0 0;max-width:300px;font:400 14.5px/1.45 var(--k-sans);color:var(--k-ink2)">{c.line}</p>
+            <div class="tl-em" style="margin-top:28px;max-width:200px" aria-hidden="true" set:html={emblem(RECORDS[c.id].spec, 200, 40)} />
+            <p style="margin:12px 0 0;font:400 13px/1 var(--k-sans);color:var(--k-ink3)">{c.answered} answered{c.answered === c.entries.length ? "" : `, ${c.entries.length - c.answered} under way`}</p>
+          </div>
+          <ol class="tl-rows">
+            {c.entries.map((e) => (
+              <li class={e.answered ? undefined : "wip"} data-s={searchText(e, c.label)}>
+                <span class="no">{String(e.n).padStart(2, "0")}</span>
+                <a class="qq" href={e.href}>{e.page.question}</a>
+                <span class="a">{e.answer ? <><b>{e.answer.value}</b><i>{e.answer.note}</i></> : <i>{e.state || "answered"}</i>}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    ))}
 
-    <div class="archive-filters ax-filters" id="q-filters" role="group" aria-label="Filter by subject">
-      <button class="afilter is-active" data-domain="all" type="button" aria-pressed="true">All</button>
-      {domains.map((domain) => (
-        <button class="afilter" data-domain={domain.id} type="button" aria-pressed="false">{domain.label}</button>
-      ))}
-    </div>
-
-    {domains.map((domain) => {
-      const pages = questionPages.filter((page) => page.domain === domain.id)
-        .sort((a, b) => Number(a.explanation.status !== "ready") - Number(b.explanation.status !== "ready"));
-      if (!pages.length) return null;
-      return (
-        <section class={`section dom-${domain.id} qgroup ax-group`} data-section={domain.id}>
-          <p class="ax-hd"><a href={`/${domain.id}/`}>{domain.label}</a><span>{pages.length}</span></p>
-          {pages.map((page) => (
-            <a class="qrow ax-row" href={questionUrl(page, locale)} data-domain={domain.id} data-text={searchText(page, domain.label)}>
-              <span class="ax-q">{page.question}</span>
-              {page.explanation.short?.dek ? <span class="ax-d">{page.explanation.short.dek}</span> : null}
-              {page.explanation.status !== "ready" ? <span class="ax-s">{statusMeta(page.explanation.status).short}</span> : null}
-            </a>
-          ))}
-        </section>
-      );
-    })}
-
-    <p class="archive-empty" id="q-empty" hidden>No questions match that search yet.</p>
-
-    <Footer locale={locale} />
+    <Footer />
   </div>
-
   <script is:inline>
     (() => {
-      const input = document.getElementById("q-search");
-      const empty = document.getElementById("q-empty");
-      const groups = Array.from(document.querySelectorAll(".qgroup"));
-      const filters = Array.from(document.querySelectorAll(".afilter"));
-      let domain = "all";
-      let term = "";
-
-      function apply() {
-        let total = 0;
-        groups.forEach((group) => {
-          const groupDomain = group.getAttribute("data-section");
-          const domainMatch = domain === "all" || domain === groupDomain;
-          let visibleInGroup = 0;
-          group.querySelectorAll(".qrow").forEach((row) => {
-            const termMatch = !term || (row.getAttribute("data-text") || "").includes(term);
-            const show = domainMatch && termMatch;
-            row.hidden = !show;
-            if (show) visibleInGroup += 1;
-          });
-          group.hidden = visibleInGroup === 0;
-          total += visibleInGroup;
-        });
-        if (empty) empty.hidden = total !== 0;
-      }
-
-      if (input) {
-        input.addEventListener("input", (event) => {
-          term = event.target.value.trim().toLowerCase();
-          apply();
-        });
-      }
-      filters.forEach((button) => {
-        button.addEventListener("click", () => {
-          filters.forEach((other) => { other.classList.remove("is-active"); other.setAttribute("aria-pressed", "false"); });
-          button.classList.add("is-active");
-          button.setAttribute("aria-pressed", "true");
-          domain = button.getAttribute("data-domain") || "all";
-          apply();
-        });
-      });
+      const input = document.getElementById("find-q"), none = document.getElementById("find-none");
+      const rows = [...document.querySelectorAll("[data-s]")], groups = [...document.querySelectorAll("[data-chapter]")];
+      const run = () => {
+        const terms = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+        let shown = 0;
+        rows.forEach((r) => { const hit = terms.every((t) => r.dataset.s.includes(t)); r.hidden = !hit; if (hit) shown++; });
+        groups.forEach((g) => { g.hidden = !g.querySelector("[data-s]:not([hidden])"); });
+        none.hidden = shown > 0;
+      };
+      input.addEventListener("input", run);
+      if (location.hash === "#find") input.focus();
     })();
   </script>
 </Base>
-
-<style>
-  /* The archive: subject sections in two columns on the desk, each row a question and its
-     one-line answer; only unfinished pieces carry a status. Filters are plain text tabs. */
-  .ax-dek{font-family:var(--serif);font-size:1.2rem;line-height:1.5;color:#2e2e2e;max-width:58ch;margin-top:16px}
-  .ax-search{margin-top:36px}
-  .ax-search input{width:100%;font-family:var(--sans);font-size:1rem;border:0;border-bottom:1.5px solid var(--ink);border-radius:0;padding:10px 0;background:none;color:var(--ink)}
-  .ax-search input:focus{outline:none;border-bottom-color:var(--c)}
-  .ax-filters{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px}
-  .ax-filters .afilter{border:0;border-radius:0;background:none;padding:4px 0;font-family:var(--sans);font-size:.875rem;color:var(--mid);border-bottom:2px solid transparent;cursor:pointer}
-  .ax-filters .afilter:hover{color:var(--ink)}
-  .ax-filters .afilter.is-active{color:var(--ink);border-bottom-color:var(--ink);background:none}
-  .ax-group{border-top:2px solid var(--ink);margin-top:56px;padding-top:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px}
-  .ax-group[hidden]{display:none}
-  .ax-hd{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin-bottom:10px;font-family:var(--sans);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600}
-  .ax-hd a{color:var(--c-ink);text-decoration:none}
-  .ax-hd a:hover{text-decoration:underline}
-  .ax-hd span{color:var(--dim);font-weight:400;letter-spacing:0}
-  .ax-row{display:grid;gap:4px;align-content:start;padding:14px 0 16px;border-top:1px solid var(--line);text-decoration:none;color:inherit}
-  .ax-row[hidden]{display:none}
-  .ax-q{font-family:var(--serif);font-size:1.18rem;line-height:1.28;color:var(--ink);text-wrap:balance}
-  .ax-d{font-family:var(--sans);font-size:.85rem;line-height:1.5;color:var(--mid);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .ax-s{font-family:var(--sans);font-size:.75rem;color:var(--dim)}
-  .ax-row:hover .ax-q{color:var(--c-ink)}
-  @media(max-width:760px){.ax-group{grid-template-columns:1fr}}
-</style>

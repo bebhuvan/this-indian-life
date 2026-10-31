@@ -62,7 +62,7 @@ const figs = (visuals: any[], start: number, cls = "story-viz") => ({ visuals, l
   {ledeFirst ? <Fragment set:html={railHtml} /> : null}
 
   {parts?.length ? (
-    <nav class="ar-parts" aria-label="In this article">
+    <nav class="ar-parts" aria-label="In this article" data-count={ORDINAL[parts.length - 1] ?? String(parts.length)}>
       {parts.map((p, i) => <a href={`#part-${i + 1}`}><span>Part {ORDINAL[i] ?? i + 1}</span>{p.title}</a>)}
     </nav>
   ) : listed.length > 3 ? (

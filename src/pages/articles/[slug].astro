@@ -13,6 +13,7 @@ import { annotateStorySections, keyGlossaryTerms, macchaExplanation, markdownBlo
 import { visualsForQuestion, bindSectionVisuals, bindSectionVisualGroups } from "../../data/viz";
 import { articleGraph, SITE } from "../../data/seo";
 import { KIT_ARTICLES } from "../../kit/adapt";
+import { entry, glyph } from "../../data/book";
 
 export function getStaticPaths() {
   return questionPages.map((page) => ({
@@ -163,20 +164,23 @@ const flowProps = {
 ---
 
 <Base title={`${page.question} · This Indian Life`} description={explanation.short.dek} domain={page.domain} ogType="article" image={`/og/articles/${page.slug}.png`} jsonLd={articleGraph(page, locale)} markdownUrl={`/articles/${page.slug}.md`}>
-  <div class={`wrap${page.slug === "india-and-gold" ? " theme-gold" : ""}${page.slug === "how-is-climate-change-changing-india" ? " theme-climate-canonical" : ""}${page.slug === "why-the-rupee-falls" ? " theme-rupee" : ""}${page.slug === "when-does-india-actually-turn-the-power-on" ? " theme-grid" : ""}${page.id === "q.econ.income_classification" ? " theme-income-classification" : ""}`}>
+  <div class={`wrap tl-art${page.slug === "india-and-gold" ? " theme-gold" : ""}${page.slug === "how-is-climate-change-changing-india" ? " theme-climate-canonical" : ""}${page.slug === "why-the-rupee-falls" ? " theme-rupee" : ""}${page.slug === "when-does-india-actually-turn-the-power-on" ? " theme-grid" : ""}${page.id === "q.econ.income_classification" ? " theme-income-classification" : ""}`}>
     <Nav active={page.domain} locale={locale} />
 
-    <header class="ar-head">
-      <p class="ar-kicker">{domains.find((d) => d.id === page.domain)?.label ?? page.domain}{status.cls !== "ready" ? <span class={`head-status ${status.cls}`}>{status.label}</span> : null}</p>
-      <h1 class="serif">{page.question}</h1>
-      <p class="ar-dek">{explanation.short.dek}</p>
-      <p class="ar-byline">
-        <span>By <a href={SITE.author.url} rel="author">{SITE.author.name}</a></span>
-        {reviewed
-          ? <span>Reviewed {reviewed}</span>
-          : (updatedLabel ? <span>Updated {updatedLabel}</span> : null)}
-        {explanation.dataThrough ? <span>Data through {explanation.dataThrough}</span> : null}
-      </p>
+    <header class="ar-head tl-grid">
+      <div>
+        <p class="tl-k"><span class="tl-g" set:html={glyph(page.domain)} />{domains.find((d) => d.id === page.domain)?.label ?? page.domain} <span>· Question {entry(page.id).n}</span></p>
+        {status.cls !== "ready" ? <p class="tl-mv" style="margin:10px 0 0;font-size:15px">{status.label}</p> : null}
+        <p class="by">
+          By <a href={SITE.author.url} rel="author">{SITE.author.name}</a>
+          {reviewed ? <><br />Reviewed {reviewed}</> : (updatedLabel ? <><br />Updated {updatedLabel}</> : null)}
+          {explanation.dataThrough ? <><br />Data through {explanation.dataThrough}</> : null}
+        </p>
+      </div>
+      <div>
+        <h1>{page.question}</h1>
+        <p class="ar-dek">{explanation.short.dek}</p>
+      </div>
     </header>
 
     {editorialStory ? (
