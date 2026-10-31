@@ -2,7 +2,7 @@
 // artifacts (series or tables) and returns an AlmanacVisual: a desktop SVG, a phone
 // SVG drawn for that width (not shrunk), and the rows behind it for the CSV download.
 // Builders return null when their data is missing, so a plan entry fails soft.
-import { isPhoneW, PHONE_DRAW_W } from "./artboards";
+import { isPhoneW, PHONE_DRAW_W, PAGE_W } from "./artboards";
 import { fmt } from "./chartFormat";
 import { INK, SCALES, STATE_CODE, type Stops, heatStrip, tileGrid, scatterFit, parade, sensitivity, dumbbell, rankSlope, beeswarm, dayRibbon, unitChart, intervalPlot, ridgeline, calendarHeat, connectedScatter, waterfall, slope, stackedArea, type ScatterPoint } from "./almanac";
 
@@ -64,8 +64,8 @@ const srcOf = (a: AlmanacArtifact) => ({ indicatorId: a.indicatorId, sourceId: a
 const tag = (s: string, cls: string) => s.replace(`class="viz-svg alm"`, `class="viz-svg ${cls} alm"`);
 const pair = (d: string, m: string) => ({ svg: tag(d, "viz-d"), svgM: tag(m, "viz-m") });
 /** A figure drawn by two functions of width, its desktop layout and its phone layout: the
- *  inline drawings at 1040 and the phone's width, and `draw` for the artboard rungs (artboards.ts). */
-const pairAt = (d: (w: number) => string, m: (w: number) => string) => ({ ...pair(d(1040), m(PHONE_DRAW_W)), draw: (w: number) => (isPhoneW(w) ? m(w) : d(w)) });
+ *  inline drawings at the page grid's width and the phone's, and `draw` for the artboard rungs (artboards.ts). */
+const pairAt = (d: (w: number) => string, m: (w: number) => string) => ({ ...pair(d(PAGE_W), m(PHONE_DRAW_W)), draw: (w: number) => (isPhoneW(w) ? m(w) : d(w)) });
 const fmt1 = (v: number) => v.toFixed(1);
 const PALETTE = [INK.neel, INK.sindoor, INK.hara, INK.haldi, INK.jamun];
 // Rural is always hara and urban always neel, wherever they appear.
@@ -164,7 +164,7 @@ function scatterFitVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
       sizeKey: e.sizeKey, sizeTitle: e.sizeTitle, label: e.title ?? a.title,
     });
   };
-  const d = build(1040, 460), m = build(PHONE_DRAW_W, 360), half = build(460, 400);
+  const d = build(PAGE_W, 460), m = build(PHONE_DRAW_W, 360), half = build(460, 400);
   const draw = (w: number) => build(w, isPhoneW(w) ? 360 : w < 700 ? 400 : 460).svg;
   const r = d.stats?.r, n = d.stats?.n;
   return {

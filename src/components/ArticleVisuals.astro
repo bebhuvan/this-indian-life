@@ -6,7 +6,7 @@ import { fileSafe } from "../data/chartDownloads";
 import FigureCard from "./FigureCard.astro";
 import KitPlot from "./kit/KitPlot.astro";
 import { toKitSpec } from "../kit/adapt";
-import { artboardsFor, isPhoneW, PHONE_DRAW_W } from "../data/artboards";
+import { artboardsFor, isPhoneW, PHONE_DRAW_W, PAGE_W, COLUMN_W } from "../data/artboards";
 import { renderFigure, cleanUnit, linePeersFigure, tagFigure } from "../data/figures";
 import { harmoniseDecimals, fmt, sparkEndpoint, splitUnitLabel, yUnitCaption, yTickLabel, axisFmt, compactBarLabel, endLabelInScale, pct, signedFmt, yearSpan, multiple, niceNum, tightScale, niceScale } from "../data/chartFormat";
 import { choroColor, compactSvgPath, choroplethValueLabel, renderChoroplethSvg, renderChoroplethStrip, renderChoroplethDots, viewBoxAspectRatio } from "../data/chartSvg";
@@ -713,10 +713,10 @@ function lineGeometry(visual: LineVisual, isLead = false, twoUp = false, bounds?
   // Two-up cards render about 510 px wide on a desktop: a 660 box set 13-unit axis text at 10 px.
   // A compact figure sets the width it is drawn at (the text column's), so it renders 1:1.
   const drawW = (visual as { drawW?: number }).drawW;
-  // Page-wide charts are drawn at the page's 1040, so they too render 1:1. An artboard rung
+  // Page-wide charts are drawn at the page grid's PAGE_W, so they too render 1:1. An artboard rung
   // (artboards.ts) sets its own width, in either layout, and a height in proportion to it.
   const rungW = (visual as { rungW?: number }).rungW;
-  const width = rungW ?? (mobile ? PHONE_DRAW_W : drawW ?? (twoUp ? (isLead ? 560 : 520) : 1040));
+  const width = rungW ?? (mobile ? PHONE_DRAW_W : drawW ?? (twoUp ? (isLead ? 560 : 520) : PAGE_W));
   const height = rungW
     // A phone layout drawn wider than a phone (a small tablet's card) stops growing taller at 340 (hero 400).
     ? (mobile ? Math.min(isHero ? 400 : 340, Math.round(rungW * (isHero ? 1.06 : 0.9))) : Math.max(340, Math.min(isHero ? 560 : isLead ? 500 : 380, Math.round(rungW * 0.6))))
@@ -1677,8 +1677,8 @@ function lineBandRects(visual: LineVisual, g: LineGeometry) {
     .filter((r): r is { x: number; w: number; label?: string; proj?: boolean } => Boolean(r));
 }
 
-/** The text column's width: a compact figure is drawn at it, so its type renders 1:1. */
-const TEXT_W = 640;
+/** A compact figure takes the page column beside the margin and is drawn at its width, so its type renders 1:1. */
+const TEXT_W = COLUMN_W;
 /** Charts that read as well at the text column's width as across the page: one line, or a
  *  figure the plan calls small. Maps, stripes, scatters and the Almanac forms keep the page. */
 function compactFigure(visual: VisualSpec) {
@@ -1773,7 +1773,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
         if (kitSpec) {
           return (
             <FigureCard cls={`${base} kit-card`} {...card}>
-              <KitPlot spec={kitSpec} id={chartId} title={visual.title} dek={card.subtitle} source={sourceText} width={compact || narrow ? 680 : 1040} />
+              <KitPlot spec={kitSpec} id={chartId} title={visual.title} dek={card.subtitle} source={sourceText} width={compact || narrow ? COLUMN_W : PAGE_W} />
             </FigureCard>
           );
         }
@@ -1867,7 +1867,7 @@ const chartNotes = visuals.map((visual, index) => explainerForVisual(visual, ind
           };
           const stripeYears = stripes.stripes.map((st) => ({ year: Number(String(st.date).slice(0, 4)), value: st.value }));
           const drawStripes = (w: number) => almStripes(stripeYears, { stops: stripeStops, width: w, height: isPhoneW(w) ? 170 : 210, compact: isPhoneW(w), valueFmt: stripeFmt, label: stripes.title }).replace('class="viz-svg alm"', `class="viz-svg ${isPhoneW(w) ? "viz-m" : "viz-d"} alm"`);
-          const stripesD = drawStripes(narrow ? 508 : 1040), stripesM = drawStripes(PHONE_DRAW_W);
+          const stripesD = drawStripes(narrow ? 508 : PAGE_W), stripesM = drawStripes(PHONE_DRAW_W);
           return (
             <FigureCard cls={base} {...card} rungs={rungsFor(fileName, [stripesD, stripesM], drawStripes)}>
               <Fragment set:html={typeset(stripesD)} />

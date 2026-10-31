@@ -8,7 +8,7 @@ import type { LineVisual, BarVisual, StackVisual, StripPairVisual, PyramidVisual
 import { INK, F, esc, r1, txt, halo, line, textWidth, scatterFit, textInk, namedIn, type ScatterPoint } from "./almanac";
 import { countFmt, harmoniseDecimals, fmt, compactBarLabel, signedFmt, niceScale, tightScale, sparkEndpoint, pct, multiple, yearSpan } from "./chartFormat";
 import { choroColor, compactSvgPath } from "./chartSvg";
-import { isPhoneW, PHONE_DRAW_W } from "./artboards";
+import { isPhoneW, PHONE_DRAW_W, PAGE_W } from "./artboards";
 
 /** A figure's two inline drawings, and `draw` for any other width (the artboard rungs, artboards.ts). */
 export type Figure = { svg: string; svgM: string; note?: string; draw?: (w: number) => string };
@@ -16,7 +16,7 @@ export type FigureContext = { narrow?: boolean; chartId: string; /** draw at thi
 
 /** Series order, as in ArticleVisuals: the domain ink, ink black, then the free inks. */
 export const SERIES = ["var(--c)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)", "var(--s6)", "#bdbdbd"];
-const W_D = 1040, W_NARROW = 508, W_M = PHONE_DRAW_W;
+const W_D = PAGE_W, W_NARROW = 508, W_M = PHONE_DRAW_W;
 const wOf = (ctx: FigureContext) => ctx.width ?? (ctx.narrow ? W_NARROW : W_D);
 /** A figure drawn by one function of its width: the card's drawing, the phone's, and `draw` for the rungs. */
 const drawn = (ctx: FigureContext, at: (w: number) => string, note?: string): Figure => ({ svg: at(wOf(ctx)), svgM: at(W_M), draw: at, ...(note ? { note } : {}) });

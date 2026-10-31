@@ -12,11 +12,15 @@
 //
 // Card widths, measured: phones 316-386 (viewport less 44; 360-wide phones, the commonest in
 // India, give 316), tablets 436-1000, desktops 1040 for a page-wide figure, 640 for a compact
-// one, 508 for a half.
+// one, 508 for a half. Since November 2026: 1184 for a hero plate, 780 for a column figure.
 
 /** The ladder, about a fifth apart. 320 is the phone drawing; the others are fetched unless the
  *  card already carries a drawing within 6% of them. */
-export const RUNGS = [320, 384, 460, 552, 660, 790, 940, 1040] as const;
+export const RUNGS = [320, 384, 460, 552, 660, 790, 940, 1040, 1184] as const;
+/** The two widths an article figure takes on a desktop: the page grid (a hero plate, margin
+ *  and column together) and the page column beside the margin. Nothing is drawn at the text's 640. */
+export const PAGE_W = 1184;
+export const COLUMN_W = 780;
 /** Below this a figure is drawn in its phone layout (a key below, bare values, fewer ticks). */
 export const PHONE_W = 480;
 export const isPhoneW = (w: number) => w < PHONE_W;
