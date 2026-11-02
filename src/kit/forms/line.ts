@@ -18,6 +18,10 @@ export interface LineSeries {
   color?: string;
   /** Points after this date are estimates and are dashed. */
   projectedAfter?: string;
+  /** Dates after which the series is not joined to its next point: a change of survey or
+   *  method that the source marks as not comparable. Each run is solid, the step across a
+   *  break is a stone hairline, and every observation gets a dot so a lone survey shows. */
+  breaksAfter?: string[];
 }
 
 export interface LineSpec extends BaseSpec {
@@ -116,7 +120,20 @@ export function line(spec: LineSpec, w: number): Scene {
     const pts = s.points.map((p) => [sx(xv(p.date)), sy(p.value)] as [number, number]);
     ptsBy[i] = pts;
     const cut = s.projectedAfter ? s.points.findIndex((p) => p.date === s.projectedAfter) : -1;
-    if (cut >= 0) {
+    const breaks = new Set(s.breaksAfter ?? []);
+    if (breaks.size && cut < 0) {
+      let run: Array<[number, number]> = [];
+      s.points.forEach((p, k) => {
+        run.push(pts[k]);
+        const last = k === s.points.length - 1;
+        if (last || breaks.has(p.date)) {
+          if (run.length > 1) b.path(polyline(run), { stroke: inks[i], width });
+          if (!last) b.line(pts[k][0], pts[k][1], pts[k + 1][0], pts[k + 1][1], INK.stone, 1);
+          run = [];
+        }
+      });
+      for (const [px, py] of pts) b.circle(px, py, Math.max(2, z.dot - 2), inks[i]);
+    } else if (cut >= 0) {
       b.path(polyline(pts.slice(0, cut + 1)), { stroke: inks[i], width });
       // Estimates are a line of round dots: zero-length dashes with round caps.
       b.path(polyline(pts.slice(cut)), { stroke: inks[i], width: width + 0.75, dash: `0 ${Math.round(width * 2.6)}` });

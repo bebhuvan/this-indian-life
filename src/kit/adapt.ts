@@ -33,7 +33,11 @@ export function toKitSpec(v: VisualSpec): AnySpec | null {
         const after = cut != null ? l.points.find((p) => Number(p.date.slice(0, 4)) === cut)?.date : undefined;
         const role = i === (lead >= 0 ? lead : 0) ? "lead" : v.lines.length > 4 ? "context" : "compare";
         // The kit owns colour: the old renderer's inks are not carried over.
-        return { label: l.label, points: l.points, role, projectedAfter: after };
+        // Comparability breaks are years; the kit takes the dates of the points they fall on.
+        const breaks = ((l as { breaks?: number[] }).breaks ?? (v as { breaks?: number[] }).breaks ?? [])
+          .map((y) => l.points.find((p) => Number(p.date.slice(0, 4)) === y)?.date)
+          .filter((d): d is string => Boolean(d));
+        return { label: l.label, points: l.points, role, projectedAfter: after, ...(breaks.length ? { breaksAfter: breaks } : {}) };
       });
       const all = v.lines.flatMap((l) => l.points.map((p) => p.value));
       const share = unit === "%" && Math.min(...all) >= 0 && Math.max(...all) <= 100;

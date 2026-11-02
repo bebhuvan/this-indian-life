@@ -5,7 +5,7 @@
     "exitCode": 1,
     "pass": true,
     "expectedReason": "1 mismatches",
-    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 1 mismatches; 31 source hashes.\n\n"
+    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 1 mismatches; 31 source hashes.\n\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n"
   },
   {
     "test": "raw_hash",
@@ -13,7 +13,7 @@
     "exitCode": 1,
     "pass": true,
     "expectedReason": "raw hash mismatch",
-    "outputTail": "\nTraceback (most recent call last):\n  File \"<string>\", line 8, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"scripts/stories/poverty-debate/audit_sources.py\", line 35, in <module>\n    assert len(b)==r['bytes'] and hashlib.sha256(b).hexdigest()==r['sha256'],f'raw hash mismatch {r[\"path\"]}'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: raw hash mismatch Country_FGT_1981_2050_20260922_2021_01_02_PROD.dta\n"
+    "outputTail": "\nTraceback (most recent call last):\n  File \"<string>\", line 8, in <module>\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"scripts/stories/poverty-debate/audit_sources.py\", line 35, in <module>\n    assert len(b)==r['bytes'] and hashlib.sha256(b).hexdigest()==r['sha256'],f'raw hash mismatch {r[\"path\"]}'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: raw hash mismatch Country_FGT_1981_2050_20260922_2021_01_02_PROD.dta\n"
   },
   {
     "test": "edited_context",
@@ -21,7 +21,7 @@
     "exitCode": 1,
     "pass": true,
     "expectedReason": "text context changed or missing review",
-    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 0 mismatches; 31 source hashes.\nNumeric claim inventory: 824 occurrences, 402 text surfaces, 1 failures.\nFAIL {'path': 'notes.macha', 'reason': 'text context changed or missing review', 'text': 'India has made a large dent in extreme poverty. That still leaves most households below the higher benchmark used for upper-middle-income countries. The distinction matters for a family trying to pay for healthcare or survive a spell without work. Poor paid workers already put in about 44 hours a week. The question is what those hours buy them, and how much of their security a consumption survey can actually see. An unaudited editorial assertion.'}\n\n"
+    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 0 mismatches; 31 source hashes.\nNumeric claim inventory: 977 occurrences, 421 text surfaces, 1 failures.\nFAIL {'path': 'notes.macha', 'reason': 'text context changed or missing review', 'text': 'India has made a large dent in extreme poverty. That still leaves most households below the higher benchmark used for upper-middle-income countries. The distinction matters for a family trying to pay for healthcare or survive a spell without work. Poor paid workers already put in about 44 hours a week. The question is what those hours buy them, and how much of their security a consumption survey can actually see. An unaudited editorial assertion.'}\n\n/home/bebhuvan/Documents/Bhuvan/Bhuvan projects/THis Indian Life/.claude/worktrees/merge-lrs-poverty/scripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n/home/bebhuvan/Documents/Bhuvan/Bhuvan projects/THis Indian Life/.claude/worktrees/merge-lrs-poverty/scripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n/home/bebhuvan/Documents/Bhuvan/Bhuvan projects/THis Indian Life/.claude/worktrees/merge-lrs-poverty/scripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n"
   },
   {
     "test": "scenario_endpoint",
@@ -29,7 +29,7 @@
     "exitCode": 1,
     "pass": true,
     "expectedReason": "1 mismatches",
-    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 1 mismatches; 31 source hashes.\n\n"
+    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 1 mismatches; 31 source hashes.\n\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n"
   },
   {
     "test": "peer_estimate_basis",
@@ -37,7 +37,7 @@
     "exitCode": 1,
     "pass": true,
     "expectedReason": "assert r['estimateBasis'][key]",
-    "outputTail": "\nTraceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"scripts/stories/poverty-debate/audit_sources.py\", line 188, in <module>\n    assert r['estimateBasis'][key]==str(v.iloc[0].estimate_type)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    "outputTail": "\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nTraceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"scripts/stories/poverty-debate/audit_sources.py\", line 188, in <module>\n    assert r['estimateBasis'][key]==str(v.iloc[0].estimate_type)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
   },
   {
     "test": "unplotted_child_pattern",
@@ -45,13 +45,13 @@
     "exitCode": 1,
     "pass": true,
     "expectedReason": "assert (children.poor830>everyone.poor830).all()",
-    "outputTail": "\nTraceback (most recent call last):\n  File \"<string>\", line 12, in <module>\n  File \"<frozen runpy>\", line 286, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"scripts/stories/poverty-debate/audit_sources.py\", line 199, in <module>\n    assert (children.poor830>everyone.poor830).all()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    "outputTail": "\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nscripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\nTraceback (most recent call last):\n  File \"<string>\", line 12, in <module>\n  File \"<frozen runpy>\", line 287, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"scripts/stories/poverty-debate/audit_sources.py\", line 199, in <module>\n    assert (children.poor830>everyone.poor830).all()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
   },
   {
     "test": "unmodified_current_sources",
     "expected": "pass",
     "exitCode": 0,
     "pass": true,
-    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 0 mismatches; 31 source hashes.\nNumeric claim inventory: 824 occurrences, 402 text surfaces, 0 failures.\n"
+    "outputTail": "Independent raw reconciliation: 23 artifacts, 621 numeric cells, 0 mismatches; 31 source hashes.\nNumeric claim inventory: 977 occurrences, 421 text surfaces, 0 failures.\n/home/bebhuvan/Documents/Bhuvan/Bhuvan projects/THis Indian Life/.claude/worktrees/merge-lrs-poverty/scripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n/home/bebhuvan/Documents/Bhuvan/Bhuvan projects/THis Indian Life/.claude/worktrees/merge-lrs-poverty/scripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n/home/bebhuvan/Documents/Bhuvan/Bhuvan projects/THis Indian Life/.claude/worktrees/merge-lrs-poverty/scripts/stories/poverty-debate/audit_sources.py:149: Pandas4Warning: ExcelFile.parse is deprecated. Use pd.read_excel instead.\n  d=x.parse(['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]\n"
   }
 ]

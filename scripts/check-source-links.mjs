@@ -84,7 +84,9 @@ async function renderText(url) {
   }
 }
 
-const hits = (text, term) => text.toLowerCase().split(term.toLowerCase()).length - 1;
+// Whitespace is collapsed on both sides, so a phrase that pdftotext breaks across lines still matches.
+const squash = (s) => s.toLowerCase().replace(/\s+/g, " ");
+const hits = (text, term) => squash(text).split(squash(term)).length - 1;
 
 let fails = 0;
 let checked = 0;

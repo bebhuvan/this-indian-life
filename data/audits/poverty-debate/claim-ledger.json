@@ -3,11 +3,15 @@
   "slug": "what-the-world-bank-2026-poverty-report-actually-shows-about-india",
   "evidenceBundle": {
     "rawDirectory": "data/raw/wb-3pr-2026",
-    "sourceManifest": "data/raw/wb-3pr-2026/manifest.json",
+    "sourceManifests": [
+      "data/raw/wb-3pr-2026/manifest.json",
+      "data/raw/poverty-debate-followup-2026-11/manifest.json"
+    ],
     "artifactCatalog": "data/catalog/poverty-debate-manifest.json",
     "sourceCellAudit": "data/audits/poverty-debate/independent-cell-audit.json",
     "ingestScripts": [
       "scripts/stories/poverty-debate/freeze_raw.py",
+      "scripts/stories/poverty-debate/freeze_followup.py",
       "scripts/stories/poverty-debate/build_poverty_debate.py",
       "scripts/stories/poverty-debate/build_explanation.py",
       "scripts/stories/poverty-debate/audit_sources.py",
@@ -51,6 +55,7 @@
       "scripts/stories/poverty-debate/build_explanation.py",
       "scripts/stories/poverty-debate/build_poverty_debate.py",
       "scripts/stories/poverty-debate/chart_explainers.json",
+      "scripts/stories/poverty-debate/freeze_followup.py",
       "scripts/stories/poverty-debate/freeze_raw.py",
       "scripts/stories/poverty-debate/inventory_package.py",
       "scripts/stories/poverty-debate/notes.json",
@@ -62,10 +67,10 @@
     ]
   },
   "method": "Every numeric occurrence inventoried across durable prose, all explainer fields, notes, registry titles/subtitles/hints/keyNumbers. Source-value matches are separate from reviewed textual context; changed text fails. All numeric artifact cells independently reconciled first.",
-  "numericOccurrenceCount": 824,
-  "reviewedSurfaceCount": 402,
+  "numericOccurrenceCount": 977,
+  "reviewedSurfaceCount": 421,
   "sourceCellCount": 621,
-  "claimCount": 824,
+  "claimCount": 977,
   "failures": 0,
   "allVerified": true,
   "claims": [
@@ -770,6 +775,176 @@
     },
     {
       "surface": "prose.paragraph[5]",
+      "offset": 55,
+      "written": "2026,",
+      "context": "The World Bank's own India brief, published in October 2026, projects a slower decline. It puts the share below $4.20 at 14.2% in 2026, falling to 12.",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 113,
+      "written": "4.20",
+      "context": "ctober 2026, projects a slower decline. It puts the share below $4.20 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineu",
+      "valueSources": [
+        "PIP2021PPP LMICline"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 121,
+      "written": "14.2",
+      "context": "026, projects a slower decline. It puts the share below $4.20 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineup. The t",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"expected to fall from 14\\.2 percent in 2026 to 12\\.1 percent by 2028\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 130,
+      "written": "2026,",
+      "context": "ects a slower decline. It puts the share below $4.20 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineup. The two come fr",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 147,
+      "written": "12.1",
+      "context": "line. It puts the share below $4.20 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineup. The two come from different mod",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"expected to fall from 14\\.2 percent in 2026 to 12\\.1 percent by 2028\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 156,
+      "written": "2028,",
+      "context": "puts the share below $4.20 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineup. The two come from different models. The r",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"12\\.1 percent by 2028\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 170,
+      "written": "10.24",
+      "context": " below $4.20 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineup. The two come from different models. The report's nowcas",
+      "valueSources": [
+        "Country_FGT IND year=2026,povertyline=4.2,fgt0"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 181,
+      "written": "2026",
+      "context": "0 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineup. The two come from different models. The report's nowcasts apply r",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 340,
+      "written": "2026,",
+      "context": "eal per-capita GDP growth from *Global Economic Prospects*, June 2026, assume that everyone's income grows at the same rate, and pass 0.7 of that growth through",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[5]",
+      "offset": 409,
+      "written": "0.7",
+      "context": ", assume that everyone's income grows at the same rate, and pass 0.7 of that growth through to consumption-based estimates such as India's. The brief calls it",
+      "valueSources": [
+        "pppr-2026-chapter-01.pdf: \"consumption aggregate, a pass-through rate of 0\\.7 is applied\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "pppr-2026-chapter-01.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[6]",
       "offset": 73,
       "written": "1,000",
       "context": "e between those lines contains most of the country. The report's 1,000-bin distribution puts **76.5% of Indians between $3 and $8.30 a day in 2024**. Reduce eve",
@@ -795,7 +970,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 103,
       "written": "76.5",
       "context": " most of the country. The report's 1,000-bin distribution puts **76.5% of Indians between $3 and $8.30 a day in 2024**. Reduce every bin's real consumption by ",
@@ -821,7 +996,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 129,
       "written": "3",
       "context": "report's 1,000-bin distribution puts **76.5% of Indians between $3 and $8.30 a day in 2024**. Reduce every bin's real consumption by a hypothetical 10%, the",
@@ -847,7 +1022,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 136,
       "written": "8.30",
       "context": "s 1,000-bin distribution puts **76.5% of Indians between $3 and $8.30 a day in 2024**. Reduce every bin's real consumption by a hypothetical 10%, then count ag",
@@ -873,7 +1048,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 150,
       "written": "2024",
       "context": "stribution puts **76.5% of Indians between $3 and $8.30 a day in 2024**. Reduce every bin's real consumption by a hypothetical 10%, then count again. The share",
@@ -899,7 +1074,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 212,
       "written": "10",
       "context": "in 2024**. Reduce every bin's real consumption by a hypothetical 10%, then count again. The share below $4.20 rises from 14.9% to 23.2%; at $3 it rises from ",
@@ -925,7 +1100,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 252,
       "written": "4.20",
       "context": "mption by a hypothetical 10%, then count again. The share below $4.20 rises from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 8",
@@ -951,7 +1126,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 268,
       "written": "14.9",
       "context": "thetical 10%, then count again. The share below $4.20 rises from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This stati",
@@ -977,7 +1152,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 277,
       "written": "23.2",
       "context": "10%, then count again. The share below $4.20 rises from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercis",
@@ -1003,7 +1178,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 288,
       "written": "3",
       "context": "ount again. The share below $4.20 rises from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercise shows ",
@@ -1029,7 +1204,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 304,
       "written": "2.3",
       "context": "share below $4.20 rises from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercise shows the thin buffer ab",
@@ -1055,7 +1230,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 312,
       "written": "4.4",
       "context": "low $4.20 rises from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercise shows the thin buffer above each",
@@ -1081,7 +1256,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 326,
       "written": "8.30",
       "context": "s from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercise shows the thin buffer above each cutoff. It doe",
@@ -1107,7 +1282,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 336,
       "written": "78.8",
       "context": "9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercise shows the thin buffer above each cutoff. It does not pred",
@@ -1133,7 +1308,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 345,
       "written": "85.1",
       "context": "2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercise shows the thin buffer above each cutoff. It does not predict a sho",
@@ -1159,7 +1334,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[5]",
+      "surface": "prose.paragraph[6]",
       "offset": 588,
       "written": "0.1",
       "context": "bins, which approximate the national lineup and resolve to about 0.1 percentage point.",
@@ -1185,7 +1360,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 189,
       "written": "2023",
       "context": "t is the average shortfall among poor people. In the direct HCES 2023-24 PIP estimates, consumption among those below $3 averages about 13.2% short of that lin",
@@ -1199,7 +1374,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 194,
       "written": "24",
       "context": "the average shortfall among poor people. In the direct HCES 2023-24 PIP estimates, consumption among those below $3 averages about 13.2% short of that line. ",
@@ -1213,7 +1388,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 243,
       "written": "3",
       "context": "irect HCES 2023-24 PIP estimates, consumption among those below $3 averages about 13.2% short of that line. At $4.20 the shortfall is 15.9%; at $8.30 it is ",
@@ -1227,7 +1402,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 260,
       "written": "13.2",
       "context": "4 PIP estimates, consumption among those below $3 averages about 13.2% short of that line. At $4.20 the shortfall is 15.9%; at $8.30 it is 34.1%. The higher li",
@@ -1241,7 +1416,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 290,
       "written": "4.20",
       "context": "mong those below $3 averages about 13.2% short of that line. At $4.20 the shortfall is 15.9%; at $8.30 it is 34.1%. The higher line captures a much deeper aver",
@@ -1255,7 +1430,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 312,
       "written": "15.9",
       "context": "erages about 13.2% short of that line. At $4.20 the shortfall is 15.9%; at $8.30 it is 34.1%. The higher line captures a much deeper average deficit, not merel",
@@ -1269,7 +1444,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 323,
       "written": "8.30",
       "context": "t 13.2% short of that line. At $4.20 the shortfall is 15.9%; at $8.30 it is 34.1%. The higher line captures a much deeper average deficit, not merely more hous",
@@ -1283,7 +1458,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[6]",
+      "surface": "prose.paragraph[7]",
       "offset": 334,
       "written": "34.1",
       "context": "rt of that line. At $4.20 the shortfall is 15.9%; at $8.30 it is 34.1%. The higher line captures a much deeper average deficit, not merely more households just",
@@ -1297,7 +1472,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 101,
       "written": "2021",
       "context": "line rise with domestic living standards. Under the World Bank's 2021 PPP method, the Societal Poverty Line is `max($3.00, $1.30 + 0.5 × national median daily ",
@@ -1311,7 +1486,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 153,
       "written": "3.00",
       "context": "World Bank's 2021 PPP method, the Societal Poverty Line is `max($3.00, $1.30 + 0.5 × national median daily consumption)`. For India, the line was $3.23 in 2011",
@@ -1325,7 +1500,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 160,
       "written": "1.30",
       "context": "ank's 2021 PPP method, the Societal Poverty Line is `max($3.00, $1.30 + 0.5 × national median daily consumption)`. For India, the line was $3.23 in 2011-12 and",
@@ -1339,7 +1514,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 167,
       "written": "0.5",
       "context": "021 PPP method, the Societal Poverty Line is `max($3.00, $1.30 + 0.5 × national median daily consumption)`. For India, the line was $3.23 in 2011-12 and $4.27",
@@ -1353,7 +1528,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 235,
       "written": "3.23",
       "context": " × national median daily consumption)`. For India, the line was $3.23 in 2011-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero ",
@@ -1367,7 +1542,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 243,
       "written": "2011",
       "context": "nal median daily consumption)`. For India, the line was $3.23 in 2011-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero chart sh",
@@ -1381,7 +1556,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 248,
       "written": "12",
       "context": "edian daily consumption)`. For India, the line was $3.23 in 2011-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero chart shows",
@@ -1395,7 +1570,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 256,
       "written": "4.27",
       "context": "ily consumption)`. For India, the line was $3.23 in 2011-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero chart shows this surv",
@@ -1409,7 +1584,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 264,
       "written": "2023",
       "context": "umption)`. For India, the line was $3.23 in 2011-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero chart shows this survey-year ",
@@ -1423,7 +1598,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 269,
       "written": "24",
       "context": "on)`. For India, the line was $3.23 in 2011-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero chart shows this survey-year ser",
@@ -1437,7 +1612,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 302,
       "written": "33.44",
       "context": "23 in 2011-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero chart shows this survey-year series alongside the three calendar-yea",
@@ -1451,7 +1626,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[7]",
+      "surface": "prose.paragraph[8]",
       "offset": 312,
       "written": "17.35",
       "context": "-12 and $4.27 in 2023-24. The share below it fell from 33.44% to 17.35%. The hero chart shows this survey-year series alongside the three calendar-year lines, s",
@@ -1465,7 +1640,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[8]",
+      "surface": "prose.paragraph[9]",
       "offset": 78,
       "written": "28",
       "context": "ity Gap** answers another question. For each person, divide the $28-a-day prosperity standard by their daily consumption, then average those ratios across ev",
@@ -1478,7 +1653,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[8]",
+      "surface": "prose.paragraph[9]",
       "offset": 267,
       "written": "28",
       "context": " more to the score because their ratios are larger. This is not $28 divided by average consumption, and a national score of five does not mean multiplying ev",
@@ -1491,7 +1666,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[8]",
+      "surface": "prose.paragraph[9]",
       "offset": 410,
       "written": "28",
       "context": "multiplying everyone's spending by five would bring everyone to $28.",
@@ -1504,7 +1679,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 46,
       "written": "9.70",
       "context": "India's survey-based Prosperity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly ",
@@ -1519,7 +1694,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 54,
       "written": "1993",
       "context": "India's survey-based Prosperity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly that sho",
@@ -1534,7 +1709,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 62,
       "written": "7.67",
       "context": "India's survey-based Prosperity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly that shortfall i",
@@ -1549,7 +1724,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 70,
       "written": "2011,",
       "context": "'s survey-based Prosperity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly that shortfall is distrib",
@@ -1564,7 +1739,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 76,
       "written": "5.36",
       "context": "vey-based Prosperity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly that shortfall is distributed.",
@@ -1579,7 +1754,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 84,
       "written": "2022",
       "context": "d Prosperity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly that shortfall is distributed. Using t",
@@ -1594,7 +1769,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 93,
       "written": "4.95",
       "context": "ity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly that shortfall is distributed. Using the Global",
@@ -1609,7 +1784,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 101,
       "written": "2023",
       "context": "fell from 9.70 in 1993 to 7.67 in 2011, 5.36 in 2022 and 4.95 in 2023. The state map shows how unevenly that shortfall is distributed. Using the Global Subnati",
@@ -1624,7 +1799,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 219,
       "written": "2023",
       "context": " is distributed. Using the Global Subnational Atlas of Poverty's 2023 reference year, Jharkhand's score is 6.72, Chhattisgarh's 6.31 and Odisha's 5.92. Kerala ",
@@ -1639,7 +1814,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 261,
       "written": "6.72",
       "context": "nal Atlas of Poverty's 2023 reference year, Jharkhand's score is 6.72, Chhattisgarh's 6.31 and Odisha's 5.92. Kerala is at 3.91, Goa at 3.16 and Chandigarh at ",
@@ -1654,7 +1829,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 282,
       "written": "6.31",
       "context": "s 2023 reference year, Jharkhand's score is 6.72, Chhattisgarh's 6.31 and Odisha's 5.92. Kerala is at 3.91, Goa at 3.16 and Chandigarh at 2.22. These are popul",
@@ -1669,7 +1844,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 300,
       "written": "5.92",
       "context": "ear, Jharkhand's score is 6.72, Chhattisgarh's 6.31 and Odisha's 5.92. Kerala is at 3.91, Goa at 3.16 and Chandigarh at 2.22. These are population averages of ",
@@ -1684,7 +1859,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 319,
       "written": "3.91",
       "context": "ore is 6.72, Chhattisgarh's 6.31 and Odisha's 5.92. Kerala is at 3.91, Goa at 3.16 and Chandigarh at 2.22. These are population averages of individual ratios, ",
@@ -1699,7 +1874,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 332,
       "written": "3.16",
       "context": "Chhattisgarh's 6.31 and Odisha's 5.92. Kerala is at 3.91, Goa at 3.16 and Chandigarh at 2.22. These are population averages of individual ratios, not uniform g",
@@ -1714,7 +1889,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[9]",
+      "surface": "prose.paragraph[10]",
       "offset": 355,
       "written": "2.22",
       "context": " Odisha's 5.92. Kerala is at 3.91, Goa at 3.16 and Chandigarh at 2.22. These are population averages of individual ratios, not uniform growth targets for each ",
@@ -1729,7 +1904,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[10]",
+      "surface": "prose.paragraph[11]",
       "offset": 166,
       "written": "0",
       "context": "verty and Inequality Database (SPID), the share of children aged 0-5 living in households below $8.30 is higher than the all-age share in every state and un",
@@ -1748,7 +1923,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[10]",
+      "surface": "prose.paragraph[11]",
       "offset": 168,
       "written": "5",
       "context": "rty and Inequality Database (SPID), the share of children aged 0-5 living in households below $8.30 is higher than the all-age share in every state and unio",
@@ -1767,7 +1942,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[10]",
+      "surface": "prose.paragraph[11]",
       "offset": 198,
       "written": "8.30",
       "context": "PID), the share of children aged 0-5 living in households below $8.30 is higher than the all-age share in every state and union territory. In Kerala, the compa",
@@ -1786,7 +1961,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[10]",
+      "surface": "prose.paragraph[11]",
       "offset": 301,
       "written": "75.8",
       "context": "in every state and union territory. In Kerala, the comparison is 75.8% against 58.5%; in Maharashtra, 91.0% against 82.0%. The chart shows selected states. The",
@@ -1805,7 +1980,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[10]",
+      "surface": "prose.paragraph[11]",
       "offset": 315,
       "written": "58.5",
       "context": " and union territory. In Kerala, the comparison is 75.8% against 58.5%; in Maharashtra, 91.0% against 82.0%. The chart shows selected states. These groups over",
@@ -1824,7 +1999,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[10]",
+      "surface": "prose.paragraph[11]",
       "offset": 338,
       "written": "91.0",
       "context": "n Kerala, the comparison is 75.8% against 58.5%; in Maharashtra, 91.0% against 82.0%. The chart shows selected states. These groups overlap: the all-age popula",
@@ -1843,7 +2018,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[10]",
+      "surface": "prose.paragraph[11]",
       "offset": 352,
       "written": "82.0",
       "context": "comparison is 75.8% against 58.5%; in Maharashtra, 91.0% against 82.0%. The chart shows selected states. These groups overlap: the all-age population includes ",
@@ -1862,7 +2037,119 @@
       ]
     },
     {
-      "surface": "prose.paragraph[11]",
+      "surface": "prose.paragraph[12]",
+      "offset": 46,
+      "written": "2023",
+      "context": "The brief adds the rural-urban split for HCES 2023-24 at $4.20: 19.3% of rural Indians and 8.6% of urban Indians were below the line. It war",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "PIP2021PPP",
+        "dataset,",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[12]",
+      "offset": 51,
+      "written": "24",
+      "context": "The brief adds the rural-urban split for HCES 2023-24 at $4.20: 19.3% of rural Indians and 8.6% of urban Indians were below the line. It warns ",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "PIP2021PPP",
+        "dataset,",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[12]",
+      "offset": 58,
+      "written": "4.20",
+      "context": "The brief adds the rural-urban split for HCES 2023-24 at $4.20: 19.3% of rural Indians and 8.6% of urban Indians were below the line. It warns that the ",
+      "valueSources": [
+        "PIP2021PPP LMICline"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "PIP2021PPP",
+        "dataset,",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[12]",
+      "offset": 64,
+      "written": "19.3",
+      "context": "The brief adds the rural-urban split for HCES 2023-24 at $4.20: 19.3% of rural Indians and 8.6% of urban Indians were below the line. It warns that the survey",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"Rural population 19\\.3\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "PIP2021PPP",
+        "dataset,",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[12]",
+      "offset": 91,
+      "written": "8.6",
+      "context": "rban split for HCES 2023-24 at $4.20: 19.3% of rural Indians and 8.6% of urban Indians were below the line. It warns that the survey weights are anchored in t",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"Urban population 8\\.6\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "PIP2021PPP",
+        "dataset,",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[12]",
+      "offset": 187,
+      "written": "2011",
+      "context": "w the line. It warns that the survey weights are anchored in the 2011 Census frame, so the survey likely understates the current urban share of the population.",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "PIP2021PPP",
+        "dataset,",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[12]",
+      "offset": 422,
+      "written": "57",
+      "context": "tiguous belt from Uttar Pradesh to West Bengal account for about 57% of India's poor population.",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"Uttar Pradesh to West Bengal account for about 57 percent\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "PIP2021PPP",
+        "dataset,",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[13]",
       "offset": 13,
       "written": "2021",
       "context": "## How did a 2021 PPP price revision and a new survey questionnaire rewrite the numbers?",
@@ -1875,7 +2162,659 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[15]",
+      "offset": 40,
+      "written": "2011",
+      "context": "### India's own poverty line stopped in 2011-12",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[15]",
+      "offset": 45,
+      "written": "12",
+      "context": "### India's own poverty line stopped in 2011-12",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 104,
+      "written": "2011",
+      "context": "ine. The last official estimate is the Planning Commission's for 2011-12, made with the Tendulkar method: 21.9% of the population, down from 45.3% in 1993-94. ",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 109,
+      "written": "12,",
+      "context": "The last official estimate is the Planning Commission's for 2011-12, made with the Tendulkar method: 21.9% of the population, down from 45.3% in 1993-94. The ",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 145,
+      "written": "21.9",
+      "context": "anning Commission's for 2011-12, made with the Tendulkar method: 21.9% of the population, down from 45.3% in 1993-94. The next national consumption survey, for",
+      "valueSources": [
+        "planning-commission-press-note-2011-12.pdf: \"13\\.7% in urban areas and 21\\.9% for the country as a whole\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 180,
+      "written": "45.3",
+      "context": "de with the Tendulkar method: 21.9% of the population, down from 45.3% in 1993-94. The next national consumption survey, for 2017-18, was withheld, officially ",
+      "valueSources": [
+        "planning-commission-press-note-2011-12.pdf: \"45\\.3% for the country as a whole in 1993-94\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 189,
+      "written": "1993",
+      "context": "he Tendulkar method: 21.9% of the population, down from 45.3% in 1993-94. The next national consumption survey, for 2017-18, was withheld, officially for data-",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 194,
+      "written": "94",
+      "context": "ndulkar method: 21.9% of the population, down from 45.3% in 1993-94. The next national consumption survey, for 2017-18, was withheld, officially for data-qua",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 240,
+      "written": "2017",
+      "context": "from 45.3% in 1993-94. The next national consumption survey, for 2017-18, was withheld, officially for data-quality reasons. Leaked findings reported in Novemb",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 245,
+      "written": "18,",
+      "context": "45.3% in 1993-94. The next national consumption survey, for 2017-18, was withheld, officially for data-quality reasons. Leaked findings reported in November 2",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 337,
+      "written": "2019",
+      "context": "y for data-quality reasons. Leaked findings reported in November 2019 said real average spending per person had fallen 3.7% since 2011-12, with rural spending ",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 391,
+      "written": "3.7",
+      "context": "n November 2019 said real average spending per person had fallen 3.7% since 2011-12, with rural spending down 8.8% and urban spending up 2%. The next publishe",
+      "valueSources": [
+        "wire-leaked-nso-2017-18.html: \"fell by 3\\.7% to Rs 1,446 in 2017-18\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 402,
+      "written": "2011",
+      "context": "2019 said real average spending per person had fallen 3.7% since 2011-12, with rural spending down 8.8% and urban spending up 2%. The next published survey, HC",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 407,
+      "written": "12,",
+      "context": "said real average spending per person had fallen 3.7% since 2011-12, with rural spending down 8.8% and urban spending up 2%. The next published survey, HCES 2",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 436,
+      "written": "8.8",
+      "context": "r person had fallen 3.7% since 2011-12, with rural spending down 8.8% and urban spending up 2%. The next published survey, HCES 2022-23, used a new design.",
+      "valueSources": [
+        "wire-leaked-nso-2017-18.html: \"consumer spending declined by 8\\.8% in 2017-18\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 463,
+      "written": "2",
+      "context": "nce 2011-12, with rural spending down 8.8% and urban spending up 2%. The next published survey, HCES 2022-23, used a new design.",
+      "valueSources": [
+        "wire-leaked-nso-2017-18.html: \"in cities it rose by 2% over the same six years\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 499,
+      "written": "2022",
+      "context": "n 8.8% and urban spending up 2%. The next published survey, HCES 2022-23, used a new design.",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[16]",
+      "offset": 504,
+      "written": "23,",
+      "context": "% and urban spending up 2%. The next published survey, HCES 2022-23, used a new design.",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "planning-commission-press-note-2011-12.pdf",
+        "source",
+        "wire-leaked-nso-2017-18.html"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 53,
+      "written": "1979",
+      "context": "Where the line sits has been disputed for decades. A 1979 task force led by Y.K. Alagh tied it to food energy: the spending at which people typical",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 159,
+      "written": "2,400",
+      "context": " to food energy: the spending at which people typically consumed 2,400 kcal a day in rural areas and 2,100 kcal in urban areas. The Lakdawala expert group, appo",
+      "valueSources": [
+        "mse-monograph-30-counting-the-poor.pdf: \"2400 kcal per capita per day in rural areas\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 195,
+      "written": "2,100",
+      "context": "ch people typically consumed 2,400 kcal a day in rural areas and 2,100 kcal in urban areas. The Lakdawala expert group, appointed in 1989, reported in 1993 and ",
+      "valueSources": [
+        "mse-monograph-30-counting-the-poor.pdf: \"2100 kcal per capita per day in urban areas\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 263,
+      "written": "1989,",
+      "context": "00 kcal in urban areas. The Lakdawala expert group, appointed in 1989, reported in 1993 and kept that line. The Tendulkar expert group, reporting in 2009, did n",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 281,
+      "written": "1993",
+      "context": "reas. The Lakdawala expert group, appointed in 1989, reported in 1993 and kept that line. The Tendulkar expert group, reporting in 2009, did not construct a ne",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 347,
+      "written": "2009,",
+      "context": "993 and kept that line. The Tendulkar expert group, reporting in 2009, did not construct a new line; it adopted the officially measured 2004-05 urban line and c",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 418,
+      "written": "2004",
+      "context": "did not construct a new line; it adopted the officially measured 2004-05 urban line and converted it to a different recall period. In September 2011 the Planni",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 423,
+      "written": "05",
+      "context": "ot construct a new line; it adopted the officially measured 2004-05 urban line and converted it to a different recall period. In September 2011 the Planning ",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 497,
+      "written": "2011",
+      "context": "line and converted it to a different recall period. In September 2011 the Planning Commission told the Supreme Court that, at June 2011 prices, the line was Rs",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 563,
+      "written": "2011",
+      "context": "011 the Planning Commission told the Supreme Court that, at June 2011 prices, the line was Rs 965 per person a month in urban areas and Rs 781 in rural areas, ",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 592,
+      "written": "965",
+      "context": "old the Supreme Court that, at June 2011 prices, the line was Rs 965 per person a month in urban areas and Rs 781 in rural areas, about Rs 32 and Rs 26 a day.",
+      "valueSources": [
+        "dte-planning-commission-affidavit-2011-09-20.html: \"Rs 965 per capita per month \\(Rs 32 per day\\)\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 637,
+      "written": "781",
+      "context": "es, the line was Rs 965 per person a month in urban areas and Rs 781 in rural areas, about Rs 32 and Rs 26 a day. The figure became shorthand for a line that ",
+      "valueSources": [
+        "dte-planning-commission-affidavit-2011-09-20.html: \"Rs 781 per capita per month \\(Rs 26 per capita per day\\)\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 666,
+      "written": "32",
+      "context": "erson a month in urban areas and Rs 781 in rural areas, about Rs 32 and Rs 26 a day. The figure became shorthand for a line that seemed to describe destituti",
+      "valueSources": [
+        "dte-planning-commission-affidavit-2011-09-20.html: \"Rs 965 per capita per month \\(Rs 32 per day\\)\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[17]",
+      "offset": 676,
+      "written": "26",
+      "context": "nth in urban areas and Rs 781 in rural areas, about Rs 32 and Rs 26 a day. The figure became shorthand for a line that seemed to describe destitution rather ",
+      "valueSources": [
+        "dte-planning-commission-affidavit-2011-09-20.html: \"Rs 781 per capita per month \\(Rs 26 per capita per day\\)\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "dte-planning-commission-affidavit-2011-09-20.html",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 4,
+      "written": "2011",
+      "context": "For 2011-12 the Tendulkar lines were Rs 816 per person a month in rural India and Rs 1,000 in urba",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 9,
+      "written": "12",
+      "context": "For 2011-12 the Tendulkar lines were Rs 816 per person a month in rural India and Rs 1,000 in urban I",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 40,
+      "written": "816",
+      "context": "For 2011-12 the Tendulkar lines were Rs 816 per person a month in rural India and Rs 1,000 in urban India. The Rangarajan expert grou",
+      "valueSources": [
+        "planning-commission-press-note-2011-12.pdf: \"Rs\\. 816 per capita per month and Rs\\. 1,000 per capita per month in urban areas\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 85,
+      "written": "1,000",
+      "context": "ulkar lines were Rs 816 per person a month in rural India and Rs 1,000 in urban India. The Rangarajan expert group, reporting in 2014, recomputed requirements f",
+      "valueSources": [
+        "planning-commission-press-note-2011-12.pdf: \"Rs\\. 816 per capita per month and Rs\\. 1,000 per capita per month in urban areas\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 149,
+      "written": "2014,",
+      "context": " 1,000 in urban India. The Rangarajan expert group, reporting in 2014, recomputed requirements for calories, proteins and fats, added essential non-food spendin",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 258,
+      "written": "972",
+      "context": "proteins and fats, added essential non-food spending, and set Rs 972 and Rs 1,407. On the same survey its line put 29.5% of Indians below it. That line was ne",
+      "valueSources": [
+        "mse-monograph-30-counting-the-poor.pdf: \"Rs\\.972 \\(554\\+141\\+277\\) in rural areas\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 269,
+      "written": "1,407",
+      "context": "d fats, added essential non-food spending, and set Rs 972 and Rs 1,407. On the same survey its line put 29.5% of Indians below it. That line was never adopted. ",
+      "valueSources": [
+        "mse-monograph-30-counting-the-poor.pdf: \"Rs\\.1407 \\(656\\+407\\+344\\) in urban areas\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 308,
+      "written": "29.5",
+      "context": "ng, and set Rs 972 and Rs 1,407. On the same survey its line put 29.5% of Indians below it. That line was never adopted. A NITI Aayog task force reported in 20",
+      "valueSources": [
+        "mse-monograph-30-counting-the-poor.pdf: \"The all-India ratio was 29\\.5 percent\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[18]",
+      "offset": 400,
+      "written": "2016",
+      "context": "That line was never adopted. A NITI Aayog task force reported in 2016 that a consensus for either the Tendulkar line or a higher one did not emerge, and recomm",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "mse-monograph-30-counting-the-poor.pdf",
+        "planning-commission-press-note-2011-12.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[20]",
       "offset": 27,
       "written": "2021",
       "context": "The World Bank adopted the 2021 PPP poverty lines in June 2025. The old lines of $2.15, $3.65 and $6.85 in 2017 PPP becam",
@@ -1888,7 +2827,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 58,
       "written": "2025",
       "context": "The World Bank adopted the 2021 PPP poverty lines in June 2025. The old lines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 P",
@@ -1901,7 +2840,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 82,
       "written": "2.15",
       "context": "opted the 2021 PPP poverty lines in June 2025. The old lines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PP",
@@ -1914,7 +2853,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 89,
       "written": "3.65",
       "context": "he 2021 PPP poverty lines in June 2025. The old lines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PPP vinta",
@@ -1927,7 +2866,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 99,
       "written": "6.85",
       "context": "P poverty lines in June 2025. The old lines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PPP vintages within",
@@ -1940,7 +2879,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 107,
       "written": "2017",
       "context": "y lines in June 2025. The old lines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PPP vintages within the fro",
@@ -1953,7 +2892,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 124,
       "written": "3,",
       "context": "025. The old lines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PPP vintages within the frozen September 2",
@@ -1966,7 +2905,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 128,
       "written": "4.20",
       "context": " The old lines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PPP vintages within the frozen September 2026 PI",
@@ -1979,7 +2918,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 138,
       "written": "8.30",
       "context": "ines of $2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PPP vintages within the frozen September 2026 PIP release ",
@@ -1992,7 +2931,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 146,
       "written": "2021",
       "context": "$2.15, $3.65 and $6.85 in 2017 PPP became $3, $4.20 and $8.30 in 2021 PPP. Comparing the two PPP vintages within the frozen September 2026 PIP release holds th",
@@ -2005,7 +2944,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[14]",
+      "surface": "prose.paragraph[20]",
       "offset": 215,
       "written": "2026",
       "context": " PPP. Comparing the two PPP vintages within the frozen September 2026 PIP release holds the release and survey year fixed.",
@@ -2018,7 +2957,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 9,
       "written": "2023",
       "context": "For HCES 2023-24, the extreme-poverty estimate changes from 1.02% at the old $2.15 line to 2.57% at the",
@@ -2032,7 +2971,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 14,
       "written": "24,",
       "context": "For HCES 2023-24, the extreme-poverty estimate changes from 1.02% at the old $2.15 line to 2.57% at the new",
@@ -2046,7 +2985,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 60,
       "written": "1.02",
       "context": "For HCES 2023-24, the extreme-poverty estimate changes from 1.02% at the old $2.15 line to 2.57% at the new $3 line. At the lower-middle-income benchmark,",
@@ -2060,7 +2999,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 78,
       "written": "2.15",
       "context": "-24, the extreme-poverty estimate changes from 1.02% at the old $2.15 line to 2.57% at the new $3 line. At the lower-middle-income benchmark, the estimate goes",
@@ -2074,7 +3013,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 91,
       "written": "2.57",
       "context": "eme-poverty estimate changes from 1.02% at the old $2.15 line to 2.57% at the new $3 line. At the lower-middle-income benchmark, the estimate goes the other wa",
@@ -2088,7 +3027,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 109,
       "written": "3",
       "context": "te changes from 1.02% at the old $2.15 line to 2.57% at the new $3 line. At the lower-middle-income benchmark, the estimate goes the other way, from 19.91% ",
@@ -2102,7 +3041,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 193,
       "written": "19.91",
       "context": "r-middle-income benchmark, the estimate goes the other way, from 19.91% at $3.65 to 16.12% at $4.20. At the upper-middle-income benchmark, it moves from 79.81% ",
@@ -2116,7 +3055,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 204,
       "written": "3.65",
       "context": "come benchmark, the estimate goes the other way, from 19.91% at $3.65 to 16.12% at $4.20. At the upper-middle-income benchmark, it moves from 79.81% to 79.98%.",
@@ -2130,7 +3069,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 212,
       "written": "16.12",
       "context": "chmark, the estimate goes the other way, from 19.91% at $3.65 to 16.12% at $4.20. At the upper-middle-income benchmark, it moves from 79.81% to 79.98%.",
@@ -2144,7 +3083,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 223,
       "written": "4.20",
       "context": " estimate goes the other way, from 19.91% at $3.65 to 16.12% at $4.20. At the upper-middle-income benchmark, it moves from 79.81% to 79.98%.",
@@ -2158,7 +3097,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 281,
       "written": "79.81",
       "context": "2% at $4.20. At the upper-middle-income benchmark, it moves from 79.81% to 79.98%.",
@@ -2172,7 +3111,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[15]",
+      "surface": "prose.paragraph[21]",
       "offset": 291,
       "written": "79.98",
       "context": "0. At the upper-middle-income benchmark, it moves from 79.81% to 79.98%.",
@@ -2186,7 +3125,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[17]",
+      "surface": "prose.paragraph[23]",
       "offset": 59,
       "written": "19.47",
       "context": "PIP uses one national consumption PPP factor for India, Rs 19.47 per international dollar in 2021 prices. The frozen national series does not contain sepa",
@@ -2200,7 +3139,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[17]",
+      "surface": "prose.paragraph[23]",
       "offset": 93,
       "written": "2021",
       "context": "ption PPP factor for India, Rs 19.47 per international dollar in 2021 prices. The frozen national series does not contain separate rural and urban PPP conversi",
@@ -2214,7 +3153,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[19]",
+      "surface": "prose.paragraph[25]",
       "offset": 5,
       "written": "2022",
       "context": "HCES 2022-23 and 2023-24 collect the food, consumables and services, and durables modules over thre",
@@ -2228,7 +3167,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[19]",
+      "surface": "prose.paragraph[25]",
       "offset": 10,
       "written": "23",
       "context": "HCES 2022-23 and 2023-24 collect the food, consumables and services, and durables modules over three m",
@@ -2242,7 +3181,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[19]",
+      "surface": "prose.paragraph[25]",
       "offset": 17,
       "written": "2023",
       "context": "HCES 2022-23 and 2023-24 collect the food, consumables and services, and durables modules over three monthly vi",
@@ -2256,7 +3195,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[19]",
+      "surface": "prose.paragraph[25]",
       "offset": 22,
       "written": "24",
       "context": "HCES 2022-23 and 2023-24 collect the food, consumables and services, and durables modules over three monthly visit",
@@ -2270,7 +3209,343 @@
       ]
     },
     {
-      "surface": "prose.paragraph[20]",
+      "surface": "prose.paragraph[26]",
+      "offset": 97,
+      "written": "1977,",
+      "context": "Its comparability field puts India's surveys in separate groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stand",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 103,
+      "written": "1983",
+      "context": "mparability field puts India's surveys in separate groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alo",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 112,
+      "written": "1987",
+      "context": "ty field puts India's surveys in separate groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 135,
+      "written": "1993",
+      "context": "urveys in separate groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form ",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 140,
+      "written": "94",
+      "context": "s in separate groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form ano",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 146,
+      "written": "2009",
+      "context": "eparate groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. Th",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 151,
+      "written": "10",
+      "context": "te groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The c",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 179,
+      "written": "2011",
+      "context": "87 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The charts here draw each survey as",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 184,
+      "written": "12",
+      "context": "ch stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The charts here draw each survey as a ",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 205,
+      "written": "2022",
+      "context": "94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The charts here draw each survey as a dot and join surveys fr",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 210,
+      "written": "23",
+      "context": " 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The charts here draw each survey as a dot and join surveys from ",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 216,
+      "written": "2023",
+      "context": "10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The charts here draw each survey as a dot and join surveys from differen",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 221,
+      "written": "24",
+      "context": "rm one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The charts here draw each survey as a dot and join surveys from different g",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 359,
+      "written": "2026",
+      "context": "ys from different groups only with a thin grey link. The October 2026 India brief is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys \"b",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 414,
+      "written": "2011",
+      "context": "e October 2026 India brief is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys \"broadly comparable, despite several key improvements\", b",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 419,
+      "written": "12,",
+      "context": "ober 2026 India brief is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys \"broadly comparable, despite several key improvements\", but a",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 423,
+      "written": "2022",
+      "context": " 2026 India brief is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys \"broadly comparable, despite several key improvements\", but adds t",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 428,
+      "written": "23",
+      "context": " India brief is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys \"broadly comparable, despite several key improvements\", but adds that",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 435,
+      "written": "2023",
+      "context": "brief is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys \"broadly comparable, despite several key improvements\", but adds that the larg",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 440,
+      "written": "24",
+      "context": " is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys \"broadly comparable, despite several key improvements\", but adds that the large w",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 553,
+      "written": "2022",
+      "context": "key improvements\", but adds that the large welfare gains between 2022-23 and 2023-24 \"likely reflect both genuine welfare gains and better measurement\".",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 558,
+      "written": "23",
+      "context": "mprovements\", but adds that the large welfare gains between 2022-23 and 2023-24 \"likely reflect both genuine welfare gains and better measurement\".",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 565,
+      "written": "2023",
+      "context": "ents\", but adds that the large welfare gains between 2022-23 and 2023-24 \"likely reflect both genuine welfare gains and better measurement\".",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[26]",
+      "offset": 570,
+      "written": "24",
+      "context": ", but adds that the large welfare gains between 2022-23 and 2023-24 \"likely reflect both genuine welfare gains and better measurement\".",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[27]",
       "offset": 107,
       "written": "2025",
       "context": "er examine that break in Tinbergen Institute Discussion Paper TI 2025-069/V. They use survey-to-survey imputation to estimate consumption on a more consistent ",
@@ -2284,7 +3559,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[20]",
+      "surface": "prose.paragraph[27]",
       "offset": 112,
       "written": "069",
       "context": "amine that break in Tinbergen Institute Discussion Paper TI 2025-069/V. They use survey-to-survey imputation to estimate consumption on a more consistent hist",
@@ -2298,7 +3573,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 108,
       "written": "2.35",
       "context": "y lines as well as several survey treatments. Direct HCES yields 2.35% at the old $2.15 line and 5.25% at the new $3 line. Applying the Rangarajan line directl",
@@ -2313,7 +3588,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 126,
       "written": "2.15",
       "context": " several survey treatments. Direct HCES yields 2.35% at the old $2.15 line and 5.25% at the new $3 line. Applying the Rangarajan line directly gives 7.2%. The ",
@@ -2328,7 +3603,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 140,
       "written": "5.25",
       "context": "y treatments. Direct HCES yields 2.35% at the old $2.15 line and 5.25% at the new $3 line. Applying the Rangarajan line directly gives 7.2%. The paper's CES-ba",
@@ -2343,7 +3618,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 158,
       "written": "3",
       "context": "ct HCES yields 2.35% at the old $2.15 line and 5.25% at the new $3 line. Applying the Rangarajan line directly gives 7.2%. The paper's CES-based Tendulkar e",
@@ -2358,7 +3633,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 210,
       "written": "7.2",
       "context": " at the new $3 line. Applying the Rangarajan line directly gives 7.2%. The paper's CES-based Tendulkar estimates range from 11.3% to 13.6%; its EUS-to-PLFS Te",
@@ -2373,7 +3648,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 269,
       "written": "11.3",
       "context": "gives 7.2%. The paper's CES-based Tendulkar estimates range from 11.3% to 13.6%; its EUS-to-PLFS Tendulkar estimates include 17.5%, 18.3% and 19.9%. Under the ",
@@ -2388,7 +3663,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 278,
       "written": "13.6",
       "context": "%. The paper's CES-based Tendulkar estimates range from 11.3% to 13.6%; its EUS-to-PLFS Tendulkar estimates include 17.5%, 18.3% and 19.9%. Under the Rangaraja",
@@ -2403,7 +3678,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 329,
       "written": "17.5",
       "context": "from 11.3% to 13.6%; its EUS-to-PLFS Tendulkar estimates include 17.5%, 18.3% and 19.9%. Under the Rangarajan-equivalent MMRP line, the sector-wide EUS-to-PLFS",
@@ -2418,7 +3693,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 336,
       "written": "18.3",
       "context": ".3% to 13.6%; its EUS-to-PLFS Tendulkar estimates include 17.5%, 18.3% and 19.9%. Under the Rangarajan-equivalent MMRP line, the sector-wide EUS-to-PLFS model ",
@@ -2433,7 +3708,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 346,
       "written": "19.9",
       "context": "6%; its EUS-to-PLFS Tendulkar estimates include 17.5%, 18.3% and 19.9%. Under the Rangarajan-equivalent MMRP line, the sector-wide EUS-to-PLFS model gives 25.9",
@@ -2448,7 +3723,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[21]",
+      "surface": "prose.paragraph[28]",
       "offset": 436,
       "written": "25.9",
       "context": "an-equivalent MMRP line, the sector-wide EUS-to-PLFS model gives 25.9%.",
@@ -2463,7 +3738,478 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[31]",
+      "offset": 133,
+      "written": "2022,",
+      "context": "aran Bhasin and Arvind Virmani, in an IMF working paper in April 2022, put extreme poverty at $1.90 a day in 2011 PPP at 0.8% in 2019, counting in-kind food tra",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 163,
+      "written": "1.90",
+      "context": ", in an IMF working paper in April 2022, put extreme poverty at $1.90 a day in 2011 PPP at 0.8% in 2019, counting in-kind food transfers. After the HCES 2022-2",
+      "valueSources": [
+        "imf-wp-2022-069.html: \"extreme poverty PPP\\$1\\.9\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 177,
+      "written": "2011",
+      "context": "rking paper in April 2022, put extreme poverty at $1.90 a day in 2011 PPP at 0.8% in 2019, counting in-kind food transfers. After the HCES 2022-23 factsheet ap",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 189,
+      "written": "0.8",
+      "context": "in April 2022, put extreme poverty at $1.90 a day in 2011 PPP at 0.8% in 2019, counting in-kind food transfers. After the HCES 2022-23 factsheet appeared in F",
+      "valueSources": [
+        "imf-wp-2022-069.html: \"Extreme poverty was as low as 0\\.8 percent in the pre-pandemic year 2019\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 197,
+      "written": "2019,",
+      "context": " 2022, put extreme poverty at $1.90 a day in 2011 PPP at 0.8% in 2019, counting in-kind food transfers. After the HCES 2022-23 factsheet appeared in February 20",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 251,
+      "written": "2022",
+      "context": "at 0.8% in 2019, counting in-kind food transfers. After the HCES 2022-23 factsheet appeared in February 2024, NITI Aayog's chief executive said the survey indi",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 256,
+      "written": "23",
+      "context": "8% in 2019, counting in-kind food transfers. After the HCES 2022-23 factsheet appeared in February 2024, NITI Aayog's chief executive said the survey indicat",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 290,
+      "written": "2024,",
+      "context": "transfers. After the HCES 2022-23 factsheet appeared in February 2024, NITI Aayog's chief executive said the survey indicated poverty below 5%. SBI Research, us",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 365,
+      "written": "5",
+      "context": " Aayog's chief executive said the survey indicated poverty below 5%. SBI Research, using HCES 2023-24, put rural poverty at 4.86% and urban poverty at 4.09%",
+      "valueSources": [
+        "business-standard-niti-2024-02-28.html: \"poverty rate in India is below five per cent\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 394,
+      "written": "2023",
+      "context": " the survey indicated poverty below 5%. SBI Research, using HCES 2023-24, put rural poverty at 4.86% and urban poverty at 4.09%. Each uses its own line and its",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 399,
+      "written": "24,",
+      "context": "survey indicated poverty below 5%. SBI Research, using HCES 2023-24, put rural poverty at 4.86% and urban poverty at 4.09%. Each uses its own line and its own",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 424,
+      "written": "4.86",
+      "context": "below 5%. SBI Research, using HCES 2023-24, put rural poverty at 4.86% and urban poverty at 4.09%. Each uses its own line and its own treatment of transfers, s",
+      "valueSources": [
+        "sbi-research-hces-2025-01.pdf: \"Rural Poverty estimated at 4\\.86% in FY24\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[31]",
+      "offset": 451,
+      "written": "4.09",
+      "context": "ng HCES 2023-24, put rural poverty at 4.86% and urban poverty at 4.09%. Each uses its own line and its own treatment of transfers, so these numbers cannot be l",
+      "valueSources": [
+        "sbi-research-hces-2025-01.pdf: \"Urban Poverty estimated at 4\\.09%\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "business-standard-niti-2024-02-28.html",
+        "dataset,",
+        "imf-wp-2022-069.html",
+        "sbi-research-hces-2025-01.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 58,
+      "written": "2022,",
+      "context": "The World Bank has been on both sides of the argument. In 2022, Sutirtha Sinha Roy and Roy van der Weide used the private Consumer Pyramids Household Sur",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 188,
+      "written": "10.2",
+      "context": "onsumer Pyramids Household Survey to estimate extreme poverty at 10.2% in 2019, down from 22.5% in 2011. Jean Drèze and Anmol Somanchi argued that poor househo",
+      "valueSources": [
+        "wb-prwp-9994.pdf: \"10\\.2 percent in 2019, down from 22\\.5 percent in 2011\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 197,
+      "written": "2019,",
+      "context": "yramids Household Survey to estimate extreme poverty at 10.2% in 2019, down from 22.5% in 2011. Jean Drèze and Anmol Somanchi argued that poor households were g",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 213,
+      "written": "22.5",
+      "context": "d Survey to estimate extreme poverty at 10.2% in 2019, down from 22.5% in 2011. Jean Drèze and Anmol Somanchi argued that poor households were grossly under-re",
+      "valueSources": [
+        "wb-prwp-9994.pdf: \"10\\.2 percent in 2019, down from 22\\.5 percent in 2011\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 222,
+      "written": "2011",
+      "context": "to estimate extreme poverty at 10.2% in 2019, down from 22.5% in 2011. Jean Drèze and Anmol Somanchi argued that poor households were grossly under-represented",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 337,
+      "written": "2026",
+      "context": "or households were grossly under-represented in that survey. The 2026 report says the Consumer Pyramids-based estimates for 2015 to 2021 have been removed from",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 396,
+      "written": "2015",
+      "context": ". The 2026 report says the Consumer Pyramids-based estimates for 2015 to 2021 have been removed from PIP because of concerns about comparability with the gover",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 404,
+      "written": "2021",
+      "context": "26 report says the Consumer Pyramids-based estimates for 2015 to 2021 have been removed from PIP because of concerns about comparability with the government's ",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 559,
+      "written": "2011",
+      "context": "t's new survey. India therefore has no PIP survey points between 2011-12 and 2022-23.",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 564,
+      "written": "12",
+      "context": "ew survey. India therefore has no PIP survey points between 2011-12 and 2022-23.",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 571,
+      "written": "2022",
+      "context": "ey. India therefore has no PIP survey points between 2011-12 and 2022-23.",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[32]",
+      "offset": 576,
+      "written": "23",
+      "context": "ndia therefore has no PIP survey points between 2011-12 and 2022-23.",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source",
+        "wb-prwp-9994.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[33]",
+      "offset": 56,
+      "written": "2011",
+      "context": "None of these estimates finds that poverty rose between 2011-12 and the 2020s, although the withheld 2017-18 survey suggested spending fell for a time",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[33]",
+      "offset": 61,
+      "written": "12",
+      "context": "None of these estimates finds that poverty rose between 2011-12 and the 2020s, although the withheld 2017-18 survey suggested spending fell for a time. T",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[33]",
+      "offset": 72,
+      "written": "2020",
+      "context": " these estimates finds that poverty rose between 2011-12 and the 2020s, although the withheld 2017-18 survey suggested spending fell for a time. The dispute is",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[33]",
+      "offset": 101,
+      "written": "2017",
+      "context": "overty rose between 2011-12 and the 2020s, although the withheld 2017-18 survey suggested spending fell for a time. The dispute is over how far and how fast po",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[33]",
+      "offset": 106,
+      "written": "18",
+      "context": "y rose between 2011-12 and the 2020s, although the withheld 2017-18 survey suggested spending fell for a time. The dispute is over how far and how fast pover",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[36]",
       "offset": 21,
       "written": "2023",
       "context": "In the official HCES 2023-24 press note, average monthly per-capita spending rises from **Rs 4,122 to Rs 4,247 in r",
@@ -2477,7 +4223,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 26,
       "written": "24",
       "context": "In the official HCES 2023-24 press note, average monthly per-capita spending rises from **Rs 4,122 to Rs 4,247 in rura",
@@ -2491,7 +4237,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 93,
       "written": "4,122",
       "context": " press note, average monthly per-capita spending rises from **Rs 4,122 to Rs 4,247 in rural India** when these items are included, a Rs 125 increase, or about 3",
@@ -2505,7 +4251,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 105,
       "written": "4,247",
       "context": " average monthly per-capita spending rises from **Rs 4,122 to Rs 4,247 in rural India** when these items are included, a Rs 125 increase, or about 3.0%. In urba",
@@ -2519,7 +4265,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 164,
       "written": "125",
       "context": "to Rs 4,247 in rural India** when these items are included, a Rs 125 increase, or about 3.0%. In urban India it rises from Rs 6,996 to Rs 7,078, a Rs 82 incre",
@@ -2533,7 +4279,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 187,
       "written": "3.0",
       "context": "dia** when these items are included, a Rs 125 increase, or about 3.0%. In urban India it rises from Rs 6,996 to Rs 7,078, a Rs 82 increase, or about 1.2%. Tho",
@@ -2547,7 +4293,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 225,
       "written": "6,996",
       "context": " Rs 125 increase, or about 3.0%. In urban India it rises from Rs 6,996 to Rs 7,078, a Rs 82 increase, or about 1.2%. Those are sector averages; they cannot esta",
@@ -2561,7 +4307,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 237,
       "written": "7,078,",
       "context": "ease, or about 3.0%. In urban India it rises from Rs 6,996 to Rs 7,078, a Rs 82 increase, or about 1.2%. Those are sector averages; they cannot establish the boo",
@@ -2575,7 +4321,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 249,
       "written": "82",
       "context": "ut 3.0%. In urban India it rises from Rs 6,996 to Rs 7,078, a Rs 82 increase, or about 1.2%. Those are sector averages; they cannot establish the boost for t",
@@ -2589,7 +4335,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[25]",
+      "surface": "prose.paragraph[36]",
       "offset": 271,
       "written": "1.2",
       "context": "a it rises from Rs 6,996 to Rs 7,078, a Rs 82 increase, or about 1.2%. Those are sector averages; they cannot establish the boost for the poorest households o",
@@ -2603,7 +4349,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 44,
       "written": "28.78",
       "context": "In PIP, India's consumption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of",
@@ -2617,7 +4363,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 53,
       "written": "2011",
       "context": "In PIP, India's consumption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consump",
@@ -2631,7 +4377,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 58,
       "written": "12",
       "context": "In PIP, India's consumption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumptio",
@@ -2645,7 +4391,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 64,
       "written": "25.51",
       "context": "In PIP, India's consumption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumption falls f",
@@ -2659,7 +4405,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 73,
       "written": "2022",
       "context": "India's consumption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumption falls from 24.8",
@@ -2673,7 +4419,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 78,
       "written": "23",
       "context": "'s consumption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumption falls from 24.80% ",
@@ -2687,7 +4433,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 85,
       "written": "23.00",
       "context": "umption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumption falls from 24.80% to 20.52% ",
@@ -2701,7 +4447,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 94,
       "written": "2023",
       "context": "ini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumption falls from 24.80% to 20.52% over the",
@@ -2715,7 +4461,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 99,
       "written": "24",
       "context": "alls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumption falls from 24.80% to 20.52% over the sa",
@@ -2729,7 +4475,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 163,
       "written": "24.80",
       "context": "-24. The richest survey decile's share of consumption falls from 24.80% to 20.52% over the same endpoints. These describe measured consumption, not the distribu",
@@ -2743,7 +4489,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[28]",
+      "surface": "prose.paragraph[39]",
       "offset": 173,
       "written": "20.52",
       "context": "ichest survey decile's share of consumption falls from 24.80% to 20.52% over the same endpoints. These describe measured consumption, not the distribution of in",
@@ -2757,7 +4503,49 @@
       ]
     },
     {
-      "surface": "prose.paragraph[29]",
+      "surface": "prose.paragraph[40]",
+      "offset": 57,
+      "written": "2025",
+      "context": "Those figures have been used for a larger claim. In July 2025 a Press Information Bureau backgrounder cited a Gini of 25.5 to call India \"the fourth mo",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "pib-most-equal-2025-07-05.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[40]",
+      "offset": 118,
+      "written": "25.5",
+      "context": "uly 2025 a Press Information Bureau backgrounder cited a Gini of 25.5 to call India \"the fourth most equal country in the world\", after the Slovak Republic, Sl",
+      "valueSources": [
+        "pib-most-equal-2025-07-05.pdf: \"Gini Index stands at 25\\.5, making it the fourth most equal country\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "pib-most-equal-2025-07-05.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[40]",
+      "offset": 419,
+      "written": "2026",
+      "context": "mostly report income, which is usually more unequal. The October 2026 India brief says the surveys may not fully capture the consumption of wealthier household",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "pib-most-equal-2025-07-05.pdf",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[41]",
       "offset": 83,
       "written": "2022",
       "context": "S rounds offer a cleaner comparison because PIP explicitly marks 2022-23 and 2023-24 as comparable. Average real consumption grows 13.1% for the poorest survey",
@@ -2774,7 +4562,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[29]",
+      "surface": "prose.paragraph[41]",
       "offset": 88,
       "written": "23",
       "context": "nds offer a cleaner comparison because PIP explicitly marks 2022-23 and 2023-24 as comparable. Average real consumption grows 13.1% for the poorest surveyed ",
@@ -2791,7 +4579,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[29]",
+      "surface": "prose.paragraph[41]",
       "offset": 95,
       "written": "2023",
       "context": "er a cleaner comparison because PIP explicitly marks 2022-23 and 2023-24 as comparable. Average real consumption grows 13.1% for the poorest surveyed tenth, ag",
@@ -2808,7 +4596,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[29]",
+      "surface": "prose.paragraph[41]",
       "offset": 100,
       "written": "24",
       "context": "cleaner comparison because PIP explicitly marks 2022-23 and 2023-24 as comparable. Average real consumption grows 13.1% for the poorest surveyed tenth, again",
@@ -2825,7 +4613,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[29]",
+      "surface": "prose.paragraph[41]",
       "offset": 149,
       "written": "13.1",
       "context": "022-23 and 2023-24 as comparable. Average real consumption grows 13.1% for the poorest surveyed tenth, against a measured decline of 2.9% for the richest surve",
@@ -2842,7 +4630,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[29]",
+      "surface": "prose.paragraph[41]",
       "offset": 217,
       "written": "2.9",
       "context": "1% for the poorest surveyed tenth, against a measured decline of 2.9% for the richest surveyed tenth. The national mean rises 4.7%. This helps explain the fal",
@@ -2859,7 +4647,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[29]",
+      "surface": "prose.paragraph[41]",
       "offset": 278,
       "written": "4.7",
       "context": " of 2.9% for the richest surveyed tenth. The national mean rises 4.7%. This helps explain the falling consumption Gini within these rounds. Each decile contai",
@@ -2876,7 +4664,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[30]",
+      "surface": "prose.paragraph[42]",
       "offset": 30,
       "written": "1977",
       "context": "Index the available series to 1977 and the divergence becomes clear. Real GDP per capita grows 5.70-fold by 2023, National A",
@@ -2890,7 +4678,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[30]",
+      "surface": "prose.paragraph[42]",
       "offset": 95,
       "written": "5.70",
       "context": "1977 and the divergence becomes clear. Real GDP per capita grows 5.70-fold by 2023, National Accounts household consumption per capita grows 4.49-fold, and sur",
@@ -2904,7 +4692,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[30]",
+      "surface": "prose.paragraph[42]",
       "offset": 108,
       "written": "2023,",
       "context": "divergence becomes clear. Real GDP per capita grows 5.70-fold by 2023, National Accounts household consumption per capita grows 4.49-fold, and survey mean consu",
@@ -2918,7 +4706,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[30]",
+      "surface": "prose.paragraph[42]",
       "offset": 171,
       "written": "4.49",
       "context": "y 2023, National Accounts household consumption per capita grows 4.49-fold, and survey mean consumption grows 2.09-fold. Each line is indexed from its own star",
@@ -2932,7 +4720,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[30]",
+      "surface": "prose.paragraph[42]",
       "offset": 216,
       "written": "2.09",
       "context": "on per capita grows 4.49-fold, and survey mean consumption grows 2.09-fold. Each line is indexed from its own starting value; their original currency units are",
@@ -2946,7 +4734,135 @@
       ]
     },
     {
-      "surface": "prose.paragraph[32]",
+      "surface": "prose.paragraph[44]",
+      "offset": 137,
+      "written": "0.8",
+      "context": "abour Bureau's village wage series, estimate real wage growth of 0.8% a year between 2014-15 and 2023-24 for male agricultural labourers, and describe a \"virt",
+      "valueSources": [
+        "i4i-das-dreze-2024-07-26.html: \"Annual growth rates of real wages, 2014-15 to 2023-24 \\(%\\) Male Female General agricultural labourers 0\\.8\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[44]",
+      "offset": 157,
+      "written": "2014",
+      "context": "ge wage series, estimate real wage growth of 0.8% a year between 2014-15 and 2023-24 for male agricultural labourers, and describe a \"virtual stagnation\" of re",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[44]",
+      "offset": 162,
+      "written": "15",
+      "context": "ge series, estimate real wage growth of 0.8% a year between 2014-15 and 2023-24 for male agricultural labourers, and describe a \"virtual stagnation\" of real ",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[44]",
+      "offset": 169,
+      "written": "2023",
+      "context": "es, estimate real wage growth of 0.8% a year between 2014-15 and 2023-24 for male agricultural labourers, and describe a \"virtual stagnation\" of real wages ove",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[44]",
+      "offset": 174,
+      "written": "24",
+      "context": "stimate real wage growth of 0.8% a year between 2014-15 and 2023-24 for male agricultural labourers, and describe a \"virtual stagnation\" of real wages over t",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[44]",
+      "offset": 331,
+      "written": "134",
+      "context": "he decade. The India brief reports that employment rose by about 134 million between 2017 and 2023, nearly twice the growth of the working-age population, lar",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"employment increased by about 134 million people, nearly twice\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[44]",
+      "offset": 351,
+      "written": "2017",
+      "context": " brief reports that employment rose by about 134 million between 2017 and 2023, nearly twice the growth of the working-age population, largely as rural women e",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[44]",
+      "offset": 360,
+      "written": "2023,",
+      "context": "ports that employment rose by about 134 million between 2017 and 2023, nearly twice the growth of the working-age population, largely as rural women entered pai",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "dataset,",
+        "i4i-das-dreze-2024-07-26.html",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[45]",
       "offset": 56,
       "written": "44",
       "context": "## Why do working Indians stay poor even when they work 44 hours a week?",
@@ -2960,7 +4876,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[33]",
+      "surface": "prose.paragraph[46]",
       "offset": 190,
       "written": "3",
       "context": "different poverty thresholds. The working-hours comparison uses $3 a day; most of the employment and education comparisons use $8.30. Mixing them would chan",
@@ -2975,7 +4891,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[33]",
+      "surface": "prose.paragraph[46]",
       "offset": 253,
       "written": "8.30",
       "context": " $3 a day; most of the employment and education comparisons use $8.30. Mixing them would change who counts as poor halfway through an argument.",
@@ -2990,7 +4906,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[34]",
+      "surface": "prose.paragraph[47]",
       "offset": 42,
       "written": "3",
       "context": "Among paid employees in households below $3 a day, average weekly hours are **44.05**, against 44.95 above the line. Among self-emplo",
@@ -3004,7 +4920,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[34]",
+      "surface": "prose.paragraph[47]",
       "offset": 78,
       "written": "44.05",
       "context": "ployees in households below $3 a day, average weekly hours are **44.05**, against 44.95 above the line. Among self-employed and unpaid workers, the correspondin",
@@ -3018,7 +4934,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[34]",
+      "surface": "prose.paragraph[47]",
       "offset": 95,
       "written": "44.95",
       "context": "olds below $3 a day, average weekly hours are **44.05**, against 44.95 above the line. Among self-employed and unpaid workers, the corresponding figures are 37.",
@@ -3032,7 +4948,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[34]",
+      "surface": "prose.paragraph[47]",
       "offset": 187,
       "written": "37.05",
       "context": " self-employed and unpaid workers, the corresponding figures are 37.05 and 40.61 hours. These are averages among people already working, not among all adults. H",
@@ -3046,7 +4962,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[34]",
+      "surface": "prose.paragraph[47]",
       "offset": 197,
       "written": "40.61",
       "context": "oyed and unpaid workers, the corresponding figures are 37.05 and 40.61 hours. These are averages among people already working, not among all adults. Hours alone",
@@ -3060,7 +4976,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 8,
       "written": "8.30",
       "context": "At the $8.30 line, the share of workers in poor households without secondary education falls from 86.7",
@@ -3074,7 +4990,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 98,
       "written": "86.71",
       "context": "orkers in poor households without secondary education falls from 86.71% in 2003 to 56.47% in 2024. Yet the share of working-age adults employed in those househo",
@@ -3088,7 +5004,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 108,
       "written": "2003",
       "context": "poor households without secondary education falls from 86.71% in 2003 to 56.47% in 2024. Yet the share of working-age adults employed in those households falls",
@@ -3102,7 +5018,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 116,
       "written": "56.47",
       "context": "seholds without secondary education falls from 86.71% in 2003 to 56.47% in 2024. Yet the share of working-age adults employed in those households falls from 60.",
@@ -3116,7 +5032,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 126,
       "written": "2024",
       "context": "thout secondary education falls from 86.71% in 2003 to 56.47% in 2024. Yet the share of working-age adults employed in those households falls from 60.72% to 58",
@@ -3130,7 +5046,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 208,
       "written": "60.72",
       "context": "re of working-age adults employed in those households falls from 60.72% to 58.29%. Among non-poor households, employment rises from 50.25% to 57.58%. These comp",
@@ -3144,7 +5060,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 218,
       "written": "58.29",
       "context": "ing-age adults employed in those households falls from 60.72% to 58.29%. Among non-poor households, employment rises from 50.25% to 57.58%. These comparisons do",
@@ -3158,7 +5074,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 275,
       "written": "50.25",
       "context": ".72% to 58.29%. Among non-poor households, employment rises from 50.25% to 57.58%. These comparisons do not track the same families over time: households can mo",
@@ -3172,7 +5088,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[35]",
+      "surface": "prose.paragraph[48]",
       "offset": 285,
       "written": "57.58",
       "context": ".29%. Among non-poor households, employment rises from 50.25% to 57.58%. These comparisons do not track the same families over time: households can move between",
@@ -3186,7 +5102,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[36]",
+      "surface": "prose.paragraph[49]",
       "offset": 34,
       "written": "2024,",
       "context": "Job structure differs sharply. In 2024, 58.24% of workers in households below $8.30 are self-employed, against 45.24% above the l",
@@ -3200,7 +5116,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[36]",
+      "surface": "prose.paragraph[49]",
       "offset": 40,
       "written": "58.24",
       "context": "Job structure differs sharply. In 2024, 58.24% of workers in households below $8.30 are self-employed, against 45.24% above the line. A",
@@ -3214,7 +5130,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[36]",
+      "surface": "prose.paragraph[49]",
       "offset": 79,
       "written": "8.30",
       "context": "differs sharply. In 2024, 58.24% of workers in households below $8.30 are self-employed, against 45.24% above the line. Agriculture employs 45.92% of poor work",
@@ -3228,7 +5144,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[36]",
+      "surface": "prose.paragraph[49]",
       "offset": 111,
       "written": "45.24",
       "context": " of workers in households below $8.30 are self-employed, against 45.24% above the line. Agriculture employs 45.92% of poor workers and 24.77% of non-poor worker",
@@ -3242,7 +5158,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[36]",
+      "surface": "prose.paragraph[49]",
       "offset": 154,
       "written": "45.92",
       "context": "elf-employed, against 45.24% above the line. Agriculture employs 45.92% of poor workers and 24.77% of non-poor workers. These descriptive differences help expla",
@@ -3256,7 +5172,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[36]",
+      "surface": "prose.paragraph[49]",
       "offset": 181,
       "written": "24.77",
       "context": "% above the line. Agriculture employs 45.92% of poor workers and 24.77% of non-poor workers. These descriptive differences help explain why [the quality of empl",
@@ -3270,7 +5186,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 121,
       "written": "8.30",
       "context": "n its combined employment-and-worker-earnings scenario, India's $8.30 poverty rate falls from 78.78% to 56.61%, a **22.17 percentage-point reduction**. The pov",
@@ -3285,7 +5201,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 150,
       "written": "78.78",
       "context": "-worker-earnings scenario, India's $8.30 poverty rate falls from 78.78% to 56.61%, a **22.17 percentage-point reduction**. The poverty gap at that line, which a",
@@ -3300,7 +5216,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 160,
       "written": "56.61",
       "context": "rnings scenario, India's $8.30 poverty rate falls from 78.78% to 56.61%, a **22.17 percentage-point reduction**. The poverty gap at that line, which averages th",
@@ -3315,7 +5231,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 172,
       "written": "22.17",
       "context": "rio, India's $8.30 poverty rate falls from 78.78% to 56.61%, a **22.17 percentage-point reduction**. The poverty gap at that line, which averages the shortfall ",
@@ -3330,7 +5246,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 330,
       "written": "25.73",
       "context": "l across the whole population as a share of the line, falls from 25.73% to 16.64%. At $3, the simulated headcount falls from 2.28% to 1.14%. The tiny difference",
@@ -3345,7 +5261,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 340,
       "written": "16.64",
       "context": "he whole population as a share of the line, falls from 25.73% to 16.64%. At $3, the simulated headcount falls from 2.28% to 1.14%. The tiny difference between t",
@@ -3360,7 +5276,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 352,
       "written": "3,",
       "context": "ulation as a share of the line, falls from 25.73% to 16.64%. At $3, the simulated headcount falls from 2.28% to 1.14%. The tiny difference between this basel",
@@ -3375,7 +5291,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 390,
       "written": "2.28",
       "context": "from 25.73% to 16.64%. At $3, the simulated headcount falls from 2.28% to 1.14%. The tiny difference between this baseline and the chapter-one 2.29% figure com",
@@ -3390,7 +5306,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 399,
       "written": "1.14",
       "context": "3% to 16.64%. At $3, the simulated headcount falls from 2.28% to 1.14%. The tiny difference between this baseline and the chapter-one 2.29% figure comes from s",
@@ -3405,7 +5321,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[37]",
+      "surface": "prose.paragraph[50]",
       "offset": 468,
       "written": "2.29",
       "context": "%. The tiny difference between this baseline and the chapter-one 2.29% figure comes from separate replication outputs; we keep each as supplied.",
@@ -3420,7 +5336,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[38]",
+      "surface": "prose.paragraph[51]",
       "offset": 91,
       "written": "8.30",
       "context": "change, but it still leaves more than half the population below $8.30. It is not a forecast, a costed programme or proof that one particular jobs policy would ",
@@ -3434,7 +5350,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[38]",
+      "surface": "prose.paragraph[51]",
       "offset": 337,
       "written": "22.17",
       "context": "not identify India's education-versus-sector contribution to the 22.17-point reduction.",
@@ -3448,7 +5364,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 100,
       "written": "2022",
       "context": " lockstep. In the World Bank's multidimensional measure for HCES 2022-23, 17.74% of Indians are poor, against 5.25% below the monetary extreme line in the same",
@@ -3462,7 +5378,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 105,
       "written": "23,",
       "context": "step. In the World Bank's multidimensional measure for HCES 2022-23, 17.74% of Indians are poor, against 5.25% below the monetary extreme line in the same sur",
@@ -3476,7 +5392,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 109,
       "written": "17.74",
       "context": ". In the World Bank's multidimensional measure for HCES 2022-23, 17.74% of Indians are poor, against 5.25% below the monetary extreme line in the same survey. S",
@@ -3490,7 +5406,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 145,
       "written": "5.25",
       "context": "al measure for HCES 2022-23, 17.74% of Indians are poor, against 5.25% below the monetary extreme line in the same survey. Sanitation deprivation affects 29.60",
@@ -3504,7 +5420,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 234,
       "written": "29.60",
       "context": " extreme line in the same survey. Sanitation deprivation affects 29.60%, lack of an adult with completed primary schooling 13.82%, drinking-water deprivation 6.",
@@ -3518,7 +5434,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 292,
       "written": "13.82",
       "context": "ffects 29.60%, lack of an adult with completed primary schooling 13.82%, drinking-water deprivation 6.39% and electricity deprivation 1.02%. These overlapping d",
@@ -3532,7 +5448,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 327,
       "written": "6.39",
       "context": "h completed primary schooling 13.82%, drinking-water deprivation 6.39% and electricity deprivation 1.02%. These overlapping deprivations cannot be added togeth",
@@ -3546,7 +5462,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[40]",
+      "surface": "prose.paragraph[53]",
       "offset": 361,
       "written": "1.02",
       "context": "2%, drinking-water deprivation 6.39% and electricity deprivation 1.02%. These overlapping deprivations cannot be added together.",
@@ -3560,7 +5476,211 @@
       ]
     },
     {
-      "surface": "prose.paragraph[41]",
+      "surface": "prose.paragraph[54]",
+      "offset": 88,
+      "written": "2026",
+      "context": "hat measure differs between World Bank publications. The October 2026 India brief prints 15.5% for the same survey, while the report's MPM file used here gives",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 112,
+      "written": "15.5",
+      "context": "een World Bank publications. The October 2026 India brief prints 15.5% for the same survey, while the report's MPM file used here gives 17.74%, with the same c",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"Multidimensional Poverty Measure 15\\.5 2022\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 183,
+      "written": "17.74",
+      "context": "for the same survey, while the report's MPM file used here gives 17.74%, with the same component rates after rounding. NITI Aayog's index has a different limit.",
+      "valueSources": [
+        "MPM_AM26.xlsx data Country code=IND column=Multidimensional poverty headcount ratio (%)"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 311,
+      "written": "24.82",
+      "context": "g's index has a different limit. Its widely quoted estimate that 24.82 crore people escaped multidimensional poverty in the nine years to 2022-23 runs from an e",
+      "valueSources": [
+        "niti-mpi-since-2005-06.pdf: \"29\\.17% in 2013-14 to 11\\.28% in 2022-23 with about 24\\.82 crore\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 384,
+      "written": "2022",
+      "context": "ore people escaped multidimensional poverty in the nine years to 2022-23 runs from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. N",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 389,
+      "written": "23",
+      "context": "eople escaped multidimensional poverty in the nine years to 2022-23 runs from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neit",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 415,
+      "written": "2013",
+      "context": "onal poverty in the nine years to 2022-23 runs from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neither endpoint is a survey rea",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 420,
+      "written": "14",
+      "context": "poverty in the nine years to 2022-23 runs from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neither endpoint is a survey readin",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 431,
+      "written": "29.17",
+      "context": "the nine years to 2022-23 runs from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neither endpoint is a survey reading.",
+      "valueSources": [
+        "niti-mpi-since-2005-06.pdf: \"29\\.17% in 2013-14 to 11\\.28% in 2022-23 with about 24\\.82 crore\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 453,
+      "written": "2022",
+      "context": "-23 runs from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neither endpoint is a survey reading.",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 458,
+      "written": "23",
+      "context": "uns from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neither endpoint is a survey reading.",
+      "valueSources": [
+        "dataset, survey or paper reference identifier; see full reviewed context"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[54]",
+      "offset": 469,
+      "written": "11.28",
+      "context": " estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neither endpoint is a survey reading.",
+      "valueSources": [
+        "niti-mpi-since-2005-06.pdf: \"29\\.17% in 2013-14 to 11\\.28% in 2022-23 with about 24\\.82 crore\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "MPM_AM26.xlsx",
+        "dataset,",
+        "niti-mpi-since-2005-06.pdf",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[55]",
       "offset": 122,
       "written": "5",
       "context": "ominator and date. The fifth National Family Health Survey (NFHS-5), conducted in 2019-21, found 35.5% of children under five stunted and 32.1% underweight.",
@@ -3574,7 +5694,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[41]",
+      "surface": "prose.paragraph[55]",
       "offset": 139,
       "written": "2019",
       "context": ". The fifth National Family Health Survey (NFHS-5), conducted in 2019-21, found 35.5% of children under five stunted and 32.1% underweight. These are not perce",
@@ -3588,7 +5708,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[41]",
+      "surface": "prose.paragraph[55]",
       "offset": 144,
       "written": "21,",
       "context": " fifth National Family Health Survey (NFHS-5), conducted in 2019-21, found 35.5% of children under five stunted and 32.1% underweight. These are not percentag",
@@ -3602,7 +5722,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[41]",
+      "surface": "prose.paragraph[55]",
       "offset": 154,
       "written": "35.5",
       "context": "ional Family Health Survey (NFHS-5), conducted in 2019-21, found 35.5% of children under five stunted and 32.1% underweight. These are not percentages of all I",
@@ -3616,7 +5736,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[41]",
+      "surface": "prose.paragraph[55]",
       "offset": 195,
       "written": "32.1",
       "context": "ucted in 2019-21, found 35.5% of children under five stunted and 32.1% underweight. These are not percentages of all Indians or new findings from HCES 2023-24.",
@@ -3630,7 +5750,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[41]",
+      "surface": "prose.paragraph[55]",
       "offset": 281,
       "written": "2023",
       "context": "ese are not percentages of all Indians or new findings from HCES 2023-24. The World Bank's multidimensional measure excludes nutrition and health, so it cannot",
@@ -3644,7 +5764,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[41]",
+      "surface": "prose.paragraph[55]",
       "offset": 286,
       "written": "24",
       "context": "re not percentages of all Indians or new findings from HCES 2023-24. The World Bank's multidimensional measure excludes nutrition and health, so it cannot st",
@@ -3658,7 +5778,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[42]",
+      "surface": "prose.paragraph[56]",
       "offset": 264,
       "written": "2022",
       "context": "alance sheet. The World Bank's financial-protection series for **2022** reports 30.94% facing financial hardship from out-of-pocket health spending, including ",
@@ -3672,7 +5792,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[42]",
+      "surface": "prose.paragraph[56]",
       "offset": 279,
       "written": "30.94",
       "context": "he World Bank's financial-protection series for **2022** reports 30.94% facing financial hardship from out-of-pocket health spending, including 22.27% facing im",
@@ -3686,7 +5806,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[42]",
+      "surface": "prose.paragraph[56]",
       "offset": 358,
       "written": "22.27",
       "context": "financial hardship from out-of-pocket health spending, including 22.27% facing impoverishing spending. These are separate health-financing indicators, not the p",
@@ -3700,7 +5820,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[42]",
+      "surface": "prose.paragraph[56]",
       "offset": 492,
       "written": "3",
       "context": "cing indicators, not the percentage pushed below this article's $3 line by one hospital bill.",
@@ -3714,7 +5834,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 85,
       "written": "2024",
       "context": "mparison becomes less flattering at a higher line. In the common 2024 estimates, 78.8% of Indians are below $8.30 a day, against 68.5% in Bangladesh, 68.1% in ",
@@ -3734,7 +5854,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 101,
       "written": "78.8",
       "context": " less flattering at a higher line. In the common 2024 estimates, 78.8% of Indians are below $8.30 a day, against 68.5% in Bangladesh, 68.1% in Indonesia and 18",
@@ -3754,7 +5874,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 129,
       "written": "8.30",
       "context": " line. In the common 2024 estimates, 78.8% of Indians are below $8.30 a day, against 68.5% in Bangladesh, 68.1% in Indonesia and 18.2% in Viet Nam; Pakistan is",
@@ -3774,7 +5894,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 149,
       "written": "68.5",
       "context": " 2024 estimates, 78.8% of Indians are below $8.30 a day, against 68.5% in Bangladesh, 68.1% in Indonesia and 18.2% in Viet Nam; Pakistan is at 87.2%. India has",
@@ -3794,7 +5914,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 170,
       "written": "68.1",
       "context": "% of Indians are below $8.30 a day, against 68.5% in Bangladesh, 68.1% in Indonesia and 18.2% in Viet Nam; Pakistan is at 87.2%. India has a lower $3 poverty s",
@@ -3814,7 +5934,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 193,
       "written": "18.2",
       "context": "$8.30 a day, against 68.5% in Bangladesh, 68.1% in Indonesia and 18.2% in Viet Nam; Pakistan is at 87.2%. India has a lower $3 poverty share than Bangladesh an",
@@ -3834,7 +5954,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 227,
       "written": "87.2",
       "context": "ladesh, 68.1% in Indonesia and 18.2% in Viet Nam; Pakistan is at 87.2%. India has a lower $3 poverty share than Bangladesh and Indonesia, but a higher share be",
@@ -3854,7 +5974,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 253,
       "written": "3",
       "context": " and 18.2% in Viet Nam; Pakistan is at 87.2%. India has a lower $3 poverty share than Bangladesh and Indonesia, but a higher share below $8.30. These are se",
@@ -3874,7 +5994,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[45]",
+      "surface": "prose.paragraph[59]",
       "offset": 326,
       "written": "8.30",
       "context": "y share than Bangladesh and Indonesia, but a higher share below $8.30. These are selected Asian comparators, not one income group. Indonesia's observation is m",
@@ -3894,7 +6014,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 82,
       "written": "2024",
       "context": "lobal poverty changes with the benchmark too. In the chapter-one 2024 tables, India accounts for 4.03% of the world's population below $3, 14.56% below $4.20 a",
@@ -3908,7 +6028,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 114,
       "written": "4.03",
       "context": "enchmark too. In the chapter-one 2024 tables, India accounts for 4.03% of the world's population below $3, 14.56% below $4.20 and 30.42% below $8.30. In the se",
@@ -3922,7 +6042,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 153,
       "written": "3,",
       "context": "ables, India accounts for 4.03% of the world's population below $3, 14.56% below $4.20 and 30.42% below $8.30. In the separate 2026 table, it contributes 18.",
@@ -3936,7 +6056,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 156,
       "written": "14.56",
       "context": "es, India accounts for 4.03% of the world's population below $3, 14.56% below $4.20 and 30.42% below $8.30. In the separate 2026 table, it contributes 18.49% of",
@@ -3950,7 +6070,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 170,
       "written": "4.20",
       "context": "unts for 4.03% of the world's population below $3, 14.56% below $4.20 and 30.42% below $8.30. In the separate 2026 table, it contributes 18.49% of the Global P",
@@ -3964,7 +6084,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 179,
       "written": "30.42",
       "context": "4.03% of the world's population below $3, 14.56% below $4.20 and 30.42% below $8.30. In the separate 2026 table, it contributes 18.49% of the Global Prosperity ",
@@ -3978,7 +6098,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 193,
       "written": "8.30",
       "context": "orld's population below $3, 14.56% below $4.20 and 30.42% below $8.30. In the separate 2026 table, it contributes 18.49% of the Global Prosperity Gap, against ",
@@ -3992,7 +6112,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 215,
       "written": "2026",
       "context": "w $3, 14.56% below $4.20 and 30.42% below $8.30. In the separate 2026 table, it contributes 18.49% of the Global Prosperity Gap, against 18.31% of world popula",
@@ -4006,7 +6126,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 242,
       "written": "18.49",
       "context": "d 30.42% below $8.30. In the separate 2026 table, it contributes 18.49% of the Global Prosperity Gap, against 18.31% of world population. The latter compares av",
@@ -4020,7 +6140,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 287,
       "written": "18.31",
       "context": "ble, it contributes 18.49% of the Global Prosperity Gap, against 18.31% of world population. The latter compares average welfare ratios, not a count of people b",
@@ -4034,7 +6154,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[46]",
+      "surface": "prose.paragraph[60]",
       "offset": 388,
       "written": "28",
       "context": "er compares average welfare ratios, not a count of people below $28. A small share of global extreme poverty and a large share of the world's wider consumpti",
@@ -4048,7 +6168,142 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[61]",
+      "offset": 42,
+      "written": "3",
+      "context": "Counted in people, India ranked fifth at $3 a day in 2024, with about 33 million below the line, behind Nigeria (95 million), the Dem",
+      "valueSources": [
+        "PIP2021PPP extreme poverty line/SPLfloor"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 53,
+      "written": "2024,",
+      "context": "Counted in people, India ranked fifth at $3 a day in 2024, with about 33 million below the line, behind Nigeria (95 million), the Democratic Republi",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 70,
+      "written": "33",
+      "context": "ed in people, India ranked fifth at $3 a day in 2024, with about 33 million below the line, behind Nigeria (95 million), the Democratic Republic of Congo (90",
+      "valueSources": [
+        "Country_FGT IND year=2024,povertyline=3.0,poorpop"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 113,
+      "written": "95",
+      "context": "y in 2024, with about 33 million below the line, behind Nigeria (95 million), the Democratic Republic of Congo (90 million), Pakistan (56 million) and Ethiop",
+      "valueSources": [
+        "Country_FGT NGA year=2024,povertyline=3.0,poorpop"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 160,
+      "written": "90",
+      "context": ", behind Nigeria (95 million), the Democratic Republic of Congo (90 million), Pakistan (56 million) and Ethiopia (42 million). At $4.20 it ranks first, with ",
+      "valueSources": [
+        "Country_FGT COD year=2024,povertyline=3.0,poorpop"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 183,
+      "written": "56",
+      "context": "llion), the Democratic Republic of Congo (90 million), Pakistan (56 million) and Ethiopia (42 million). At $4.20 it ranks first, with about 216 million peopl",
+      "valueSources": [
+        "Country_FGT PAK year=2024,povertyline=3.0,poorpop"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 209,
+      "written": "42",
+      "context": "ublic of Congo (90 million), Pakistan (56 million) and Ethiopia (42 million). At $4.20 it ranks first, with about 216 million people. The report notes that I",
+      "valueSources": [
+        "Country_FGT ETH year=2024,povertyline=3.0,poorpop"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 226,
+      "written": "4.20",
+      "context": "0 million), Pakistan (56 million) and Ethiopia (42 million). At $4.20 it ranks first, with about 216 million people. The report notes that India appears among ",
+      "valueSources": [
+        "PIP2021PPP LMICline"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[61]",
+      "offset": 258,
+      "written": "216",
+      "context": ") and Ethiopia (42 million). At $4.20 it ranks first, with about 216 million people. The report notes that India appears among the economies with the most ext",
+      "valueSources": [
+        "Country_FGT IND year=2024,povertyline=4.2,poorpop"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[63]",
       "offset": 40,
       "written": "2026",
       "context": "The frozen sources are the World Bank's 2026 report reproducibility package, FR_WLD_2026_763, the September 2026 PIP releases in both ",
@@ -4064,7 +6319,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[63]",
       "offset": 84,
       "written": "2026",
       "context": "are the World Bank's 2026 report reproducibility package, FR_WLD_2026_763, the September 2026 PIP releases in both PPP vintages, MoSPI's HCES 2023-24 press not",
@@ -4080,7 +6335,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[63]",
       "offset": 89,
       "written": "763,",
       "context": "he World Bank's 2026 report reproducibility package, FR_WLD_2026_763, the September 2026 PIP releases in both PPP vintages, MoSPI's HCES 2023-24 press note, th",
@@ -4096,7 +6351,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[63]",
       "offset": 108,
       "written": "2026",
       "context": "6 report reproducibility package, FR_WLD_2026_763, the September 2026 PIP releases in both PPP vintages, MoSPI's HCES 2023-24 press note, the Tinbergen paper, ",
@@ -4112,7 +6367,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[63]",
       "offset": 161,
       "written": "2023",
       "context": "e September 2026 PIP releases in both PPP vintages, MoSPI's HCES 2023-24 press note, the Tinbergen paper, NFHS-5 and the World Bank's 2022 health-financing obs",
@@ -4128,7 +6383,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[63]",
       "offset": 166,
       "written": "24",
       "context": "tember 2026 PIP releases in both PPP vintages, MoSPI's HCES 2023-24 press note, the Tinbergen paper, NFHS-5 and the World Bank's 2022 health-financing observ",
@@ -4144,7 +6399,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[63]",
       "offset": 207,
       "written": "5",
       "context": "ages, MoSPI's HCES 2023-24 press note, the Tinbergen paper, NFHS-5 and the World Bank's 2022 health-financing observations. The package contains four chapte",
@@ -4160,7 +6415,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[48]",
+      "surface": "prose.paragraph[63]",
       "offset": 230,
       "written": "2022",
       "context": "-24 press note, the Tinbergen paper, NFHS-5 and the World Bank's 2022 health-financing observations. The package contains four chapters. Its processed tables c",
@@ -4176,7 +6431,59 @@
       ]
     },
     {
-      "surface": "prose.paragraph[49]",
+      "surface": "prose.paragraph[64]",
+      "offset": 13,
+      "written": "2026",
+      "context": "The November 2026 additions draw on the World Bank's October 2026 India brief, the first chapter of the 202",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[64]",
+      "offset": 61,
+      "written": "2026",
+      "context": "The November 2026 additions draw on the World Bank's October 2026 India brief, the first chapter of the 2026 report for the nowcast method and the Consumer",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[64]",
+      "offset": 104,
+      "written": "2026",
+      "context": " World Bank's October 2026 India brief, the first chapter of the 2026 report for the nowcast method and the Consumer Pyramids removal, the Planning Commission'",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[64]",
+      "offset": 200,
+      "written": "2013",
+      "context": "hod and the Consumer Pyramids removal, the Planning Commission's 2013 press note and the Rangarajan-Dev monograph for India's poverty-line history, and the pub",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "source"
+      ]
+    },
+    {
+      "surface": "prose.paragraph[65]",
       "offset": 85,
       "written": "1990",
       "context": "rajectories use `Country_FGT`, with all annual observations from 1990 to 2030. Estimates after 2024 are drawn dashed. The societal-poverty series uses direct s",
@@ -4192,7 +6499,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[49]",
+      "surface": "prose.paragraph[65]",
       "offset": 93,
       "written": "2030",
       "context": "ies use `Country_FGT`, with all annual observations from 1990 to 2030. Estimates after 2024 are drawn dashed. The societal-poverty series uses direct survey-ye",
@@ -4208,7 +6515,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[49]",
+      "surface": "prose.paragraph[65]",
       "offset": 115,
       "written": "2024",
       "context": " with all annual observations from 1990 to 2030. Estimates after 2024 are drawn dashed. The societal-poverty series uses direct survey-year PIP observations, n",
@@ -4224,7 +6531,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[50]",
+      "surface": "prose.paragraph[66]",
       "offset": 32,
       "written": "2023",
       "context": "The state figures use the `Data 2023` sheet of `AM26_GSAP_data.xlsx`. They are tied to HCES 2023-24 and the atlas's 2023 refer",
@@ -4238,7 +6545,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[50]",
+      "surface": "prose.paragraph[66]",
       "offset": 92,
       "written": "2023",
       "context": "Data 2023` sheet of `AM26_GSAP_data.xlsx`. They are tied to HCES 2023-24 and the atlas's 2023 reference year. The `Data 2024` sheet applies a later lineup and ",
@@ -4252,7 +6559,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[50]",
+      "surface": "prose.paragraph[66]",
       "offset": 97,
       "written": "24",
       "context": "2023` sheet of `AM26_GSAP_data.xlsx`. They are tied to HCES 2023-24 and the atlas's 2023 reference year. The `Data 2024` sheet applies a later lineup and sho",
@@ -4266,7 +6573,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[50]",
+      "surface": "prose.paragraph[66]",
       "offset": 116,
       "written": "2023",
       "context": "6_GSAP_data.xlsx`. They are tied to HCES 2023-24 and the atlas's 2023 reference year. The `Data 2024` sheet applies a later lineup and should not be substitute",
@@ -4280,7 +6587,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[50]",
+      "surface": "prose.paragraph[66]",
       "offset": 147,
       "written": "2024",
       "context": "d to HCES 2023-24 and the atlas's 2023 reference year. The `Data 2024` sheet applies a later lineup and should not be substituted without relabelling. State po",
@@ -4294,7 +6601,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[50]",
+      "surface": "prose.paragraph[66]",
       "offset": 272,
       "written": "100",
       "context": "uted without relabelling. State poverty shares are multiplied by 100 to convert proportions to percentages. Prosperity Gap values remain ratios.",
@@ -4308,7 +6615,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[51]",
+      "surface": "prose.paragraph[67]",
       "offset": 94,
       "written": "2023",
       "context": "tirely within SPID's direct HCES survey estimates, labelled year 2023 and reference year 2023.58 in the workbook. The same-state rows use age groups `0-5` and ",
@@ -4324,7 +6631,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[51]",
+      "surface": "prose.paragraph[67]",
       "offset": 118,
       "written": "2023.58",
       "context": "ect HCES survey estimates, labelled year 2023 and reference year 2023.58 in the workbook. The same-state rows use age groups `0-5` and `ALL`; the latter includes ",
@@ -4340,7 +6647,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[51]",
+      "surface": "prose.paragraph[67]",
       "offset": 179,
       "written": "0",
       "context": "ear 2023.58 in the workbook. The same-state rows use age groups `0-5` and `ALL`; the latter includes the former. Those estimates are distinct from the GSAP ",
@@ -4356,7 +6663,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[51]",
+      "surface": "prose.paragraph[67]",
       "offset": 181,
       "written": "5",
       "context": "r 2023.58 in the workbook. The same-state rows use age groups `0-5` and `ALL`; the latter includes the former. Those estimates are distinct from the GSAP ca",
@@ -4372,7 +6679,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[52]",
+      "surface": "prose.paragraph[68]",
       "offset": 110,
       "written": "0.1",
       "context": " national mean by that decile's consumption share and divides by 0.1, then computes the percentage change between the two comparable rounds. The consumption-l",
@@ -4388,7 +6695,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[52]",
+      "surface": "prose.paragraph[68]",
       "offset": 233,
       "written": "2024",
       "context": "omparable rounds. The consumption-loss exercise multiplies every 2024 bin's welfare by 0.9, keeps its population weight fixed and recomputes the share below ea",
@@ -4404,7 +6711,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[52]",
+      "surface": "prose.paragraph[68]",
       "offset": 255,
       "written": "0.9",
       "context": "consumption-loss exercise multiplies every 2024 bin's welfare by 0.9, keeps its population weight fixed and recomputes the share below each line. It assumes a",
@@ -4420,7 +6727,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[52]",
+      "surface": "prose.paragraph[68]",
       "offset": 427,
       "written": "10",
       "context": "tional loss, and represents neither a forecast nor the effect of 10% price inflation. The Asian comparison uses `Country_FGT` at all three common lines in 20",
@@ -4436,7 +6743,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[52]",
+      "surface": "prose.paragraph[68]",
       "offset": 517,
       "written": "2024,",
       "context": "Asian comparison uses `Country_FGT` at all three common lines in 2024, retaining each country's actual/projection flag.",
@@ -4452,7 +6759,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 47,
       "written": "2021",
       "context": "For a rough rupee illustration, PIP's national 2021 PPP factor of Rs 19.47 multiplied by its unrounded 2023 consumer-price ratio gives about ",
@@ -4466,7 +6773,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 69,
       "written": "19.47",
       "context": "a rough rupee illustration, PIP's national 2021 PPP factor of Rs 19.47 multiplied by its unrounded 2023 consumer-price ratio gives about Rs 22.55 per PPP dollar",
@@ -4480,7 +6787,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 103,
       "written": "2023",
       "context": "national 2021 PPP factor of Rs 19.47 multiplied by its unrounded 2023 consumer-price ratio gives about Rs 22.55 per PPP dollar in survey-year prices. Using 365",
@@ -4494,7 +6801,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 144,
       "written": "22.55",
       "context": "iplied by its unrounded 2023 consumer-price ratio gives about Rs 22.55 per PPP dollar in survey-year prices. Using 365/12 days per month, $3 is roughly Rs 68 a ",
@@ -4508,7 +6815,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 194,
       "written": "365",
       "context": "gives about Rs 22.55 per PPP dollar in survey-year prices. Using 365/12 days per month, $3 is roughly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or",
@@ -4522,7 +6829,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 198,
       "written": "12",
       "context": "s about Rs 22.55 per PPP dollar in survey-year prices. Using 365/12 days per month, $3 is roughly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs",
@@ -4536,7 +6843,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 218,
       "written": "3",
       "context": " PPP dollar in survey-year prices. Using 365/12 days per month, $3 is roughly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.",
@@ -4550,7 +6857,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 234,
       "written": "68",
       "context": "urvey-year prices. Using 365/12 days per month, $3 is roughly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a da",
@@ -4564,7 +6871,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 249,
       "written": "2,060",
       "context": "es. Using 365/12 days per month, $3 is roughly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a day or Rs 5,700 a mo",
@@ -4578,7 +6885,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 265,
       "written": "4.20",
       "context": " days per month, $3 is roughly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a day or Rs 5,700 a month. These are ",
@@ -4592,7 +6899,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 276,
       "written": "95",
       "context": "onth, $3 is roughly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a day or Rs 5,700 a month. These are national ",
@@ -4606,7 +6913,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 291,
       "written": "2,880",
       "context": "ghly Rs 68 a day or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a day or Rs 5,700 a month. These are national price equivalents,",
@@ -4620,7 +6927,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 307,
       "written": "8.30",
       "context": " or Rs 2,060 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a day or Rs 5,700 a month. These are national price equivalents, not separate r",
@@ -4634,7 +6941,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 318,
       "written": "187",
       "context": "0 a month; $4.20 is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a day or Rs 5,700 a month. These are national price equivalents, not separate rural and u",
@@ -4648,7 +6955,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[53]",
+      "surface": "prose.paragraph[69]",
       "offset": 334,
       "written": "5,700",
       "context": " is Rs 95 a day or Rs 2,880 a month; $8.30 is Rs 187 a day or Rs 5,700 a month. These are national price equivalents, not separate rural and urban budgets or re",
@@ -4662,7 +6969,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[54]",
+      "surface": "prose.paragraph[70]",
       "offset": 142,
       "written": "100",
       "context": "s `(with imputation − without imputation) / without imputation × 100`. A previous reconstruction by consumption fractile could not be independently reproduced",
@@ -4676,7 +6983,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[55]",
+      "surface": "prose.paragraph[71]",
       "offset": 23,
       "written": "3",
       "context": "The jobs chapter uses $3 for weekly hours and $8.30 for the employment, schooling and job-structure splits. Its si",
@@ -4691,7 +6998,7 @@
       ]
     },
     {
-      "surface": "prose.paragraph[55]",
+      "surface": "prose.paragraph[71]",
       "offset": 47,
       "written": "8.30",
       "context": "The jobs chapter uses $3 for weekly hours and $8.30 for the employment, schooling and job-structure splits. Its simulation is an accounting e",
@@ -8464,6 +10771,86 @@
       ]
     },
     {
+      "surface": "notes.caveats[11]",
+      "offset": 86,
+      "written": "4.20",
+      "context": "hes two projections for India: the report's lineup nowcast puts $4.20 poverty at 10.24% in 2026, while the October 2026 India brief projects 14.2% from a micro",
+      "valueSources": [
+        "PIP2021PPP LMICline"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "notes.caveats[11]",
+      "offset": 102,
+      "written": "10.24",
+      "context": "ons for India: the report's lineup nowcast puts $4.20 poverty at 10.24% in 2026, while the October 2026 India brief projects 14.2% from a microsimulation it doe",
+      "valueSources": [
+        "Country_FGT IND year=2026,povertyline=4.2,fgt0"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "notes.caveats[11]",
+      "offset": 112,
+      "written": "2026,",
+      "context": "dia: the report's lineup nowcast puts $4.20 poverty at 10.24% in 2026, while the October 2026 India brief projects 14.2% from a microsimulation it does not publ",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "notes.caveats[11]",
+      "offset": 136,
+      "written": "2026",
+      "context": " nowcast puts $4.20 poverty at 10.24% in 2026, while the October 2026 India brief projects 14.2% from a microsimulation it does not publish. Neither is a measu",
+      "valueSources": [
+        "source vintage, survey/calendar year or report/publication reference; context reviewed below"
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
+      "surface": "notes.caveats[11]",
+      "offset": 162,
+      "written": "14.2",
+      "context": "y at 10.24% in 2026, while the October 2026 India brief projects 14.2% from a microsimulation it does not publish. Neither is a measurement.",
+      "valueSources": [
+        "wb-poverty-equity-brief-india-2026-10.pdf: \"expected to fall from 14\\.2 percent in 2026 to 12\\.1 percent by 2028\""
+      ],
+      "contextReviewed": true,
+      "reviewSources": [
+        "Country_FGT",
+        "PIP2021PPP",
+        "source",
+        "wb-poverty-equity-brief-india-2026-10.pdf"
+      ]
+    },
+    {
       "surface": "notes.lockedNumbersUsed[0]",
       "offset": 0,
       "written": "2.29",
@@ -9253,7 +11640,7 @@
       "surface": "registry.visualPlan[0].subtitle",
       "offset": 81,
       "written": "1990",
-      "context": "Poverty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+      "context": "Poverty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP · survey points are dots; a gr",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -9268,7 +11655,7 @@
       "surface": "registry.visualPlan[0].subtitle",
       "offset": 86,
       "written": "2030",
-      "context": "ty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+      "context": "ty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP · survey points are dots; a grey li",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -9283,7 +11670,7 @@
       "surface": "registry.visualPlan[0].subtitle",
       "offset": 123,
       "written": "1993",
-      "context": "ed-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+      "context": "ed-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP · survey points are dots; a grey link joins surveys PIP does not treat a",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -9298,7 +11685,7 @@
       "surface": "registry.visualPlan[0].subtitle",
       "offset": 128,
       "written": "2023",
-      "context": " headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+      "context": " headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP · survey points are dots; a grey link joins surveys PIP does not treat as com",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -9313,7 +11700,7 @@
       "surface": "registry.visualPlan[0].subtitle",
       "offset": 136,
       "written": "2021",
-      "context": "nt rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+      "context": "nt rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP · survey points are dots; a grey link joins surveys PIP does not treat as comparable",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -11370,7 +13757,7 @@
       "surface": "registry.visualPlan[9].subtitle",
       "offset": 144,
       "written": "1977",
-      "context": "ption Expenditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP",
+      "context": "ption Expenditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP · grey links join survey means PIP does not treat a",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -11384,7 +13771,7 @@
       "surface": "registry.visualPlan[9].subtitle",
       "offset": 152,
       "written": "2023",
-      "context": "penditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP",
+      "context": "penditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP · grey links join survey means PIP does not treat as compar",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -11398,7 +13785,7 @@
       "surface": "registry.visualPlan[9].subtitle",
       "offset": 158,
       "written": "1977",
-      "context": "ure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP",
+      "context": "ure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP · grey links join survey means PIP does not treat as comparable",
       "valueSources": [
         "source vintage, survey/calendar year or report/publication reference; context reviewed below"
       ],
@@ -11412,7 +13799,7 @@
       "surface": "registry.visualPlan[9].subtitle",
       "offset": 165,
       "written": "100",
-      "context": "CE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP",
+      "context": "CE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP · grey links join survey means PIP does not treat as comparable",
       "valueSources": [
         "idx_survey_mean_1977: index; year=1977; *1; round 1"
       ],

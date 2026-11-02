@@ -8,6 +8,8 @@ The report's calendar-year estimates are also different from direct survey readi
 
 At the extreme line, the historical change is large. Lined-up poverty fell from 49.38% in 1990 to 28.51% in 2011 and 2.29% in 2024, when about 33 million people remained below $3 a day. The 2026 nowcast is 1.40%. At the $4.20 lower-middle-income line, the corresponding rates were 77.29%, 59.39% and 14.88%, leaving about 216 million people below the line in 2024. At $8.30, the decline was much slower: from 97.08% in 1990 to 93.08% in 2011 and 78.78% in 2024, or about 1.14 billion people.
 
+The World Bank's own India brief, published in October 2026, projects a slower decline. It puts the share below $4.20 at 14.2% in 2026, falling to 12.1% by 2028, against 10.24% for 2026 in the report's lineup. The two come from different models. The report's nowcasts apply real per-capita GDP growth from *Global Economic Prospects*, June 2026, assume that everyone's income grows at the same rate, and pass 0.7 of that growth through to consumption-based estimates such as India's. The brief calls its figures "indicative microsimulation-based projections" that will be updated as labour-market and macroeconomic data are revised, and does not set out the model. Neither is a measurement. A gap of about four points between two World Bank estimates for the same year shows how much a projection depends on its assumptions.
+
 The space between those lines contains most of the country. The report's 1,000-bin distribution puts **76.5% of Indians between $3 and $8.30 a day in 2024**. Reduce every bin's real consumption by a hypothetical 10%, then count again. The share below $4.20 rises from 14.9% to 23.2%; at $3 it rises from 2.3% to 4.4%, and at $8.30 from 78.8% to 85.1%. This static exercise shows the thin buffer above each cutoff. It does not predict a shock or track which families will fall back into poverty. Both endpoints use the same bins, which approximate the national lineup and resolve to about 0.1 percentage point.
 
 The poverty gap adds depth to that count. Divide the population-average shortfall by the share below the line, and the result is the average shortfall among poor people. In the direct HCES 2023-24 PIP estimates, consumption among those below $3 averages about 13.2% short of that line. At $4.20 the shortfall is 15.9%; at $8.30 it is 34.1%. The higher line captures a much deeper average deficit, not merely more households just below a cutoff. These ratios are approximate because the API inputs are rounded.
@@ -20,9 +22,19 @@ India's survey-based Prosperity Gap fell from 9.70 in 1993 to 7.67 in 2011, 5.36
 
 Young children face another disadvantage within those states. In the report's separate Subnational Poverty and Inequality Database (SPID), the share of children aged 0-5 living in households below $8.30 is higher than the all-age share in every state and union territory. In Kerala, the comparison is 75.8% against 58.5%; in Maharashtra, 91.0% against 82.0%. The chart shows selected states. These groups overlap: the all-age population includes the children. The measure describes the household consumption available per person, not what a child eats or receives within the home.
 
+The brief adds the rural-urban split for HCES 2023-24 at $4.20: 19.3% of rural Indians and 8.6% of urban Indians were below the line. It warns that the survey weights are anchored in the 2011 Census frame, so the survey likely understates the current urban share of the population. It also describes poverty as increasingly concentrated: households in a contiguous belt from Uttar Pradesh to West Bengal account for about 57% of India's poor population.
+
 ## How did a 2021 PPP price revision and a new survey questionnaire rewrite the numbers?
 
 A poverty estimate depends on what households report, how that spending is valued and where the line is set. India's recent estimates changed on all these fronts. The disputes are easier to follow when those changes are kept separate.
+
+### India's own poverty line stopped in 2011-12
+
+India has no current official poverty line. The last official estimate is the Planning Commission's for 2011-12, made with the Tendulkar method: 21.9% of the population, down from 45.3% in 1993-94. The next national consumption survey, for 2017-18, was withheld, officially for data-quality reasons. Leaked findings reported in November 2019 said real average spending per person had fallen 3.7% since 2011-12, with rural spending down 8.8% and urban spending up 2%. The next published survey, HCES 2022-23, used a new design.
+
+Where the line sits has been disputed for decades. A 1979 task force led by Y.K. Alagh tied it to food energy: the spending at which people typically consumed 2,400 kcal a day in rural areas and 2,100 kcal in urban areas. The Lakdawala expert group, appointed in 1989, reported in 1993 and kept that line. The Tendulkar expert group, reporting in 2009, did not construct a new line; it adopted the officially measured 2004-05 urban line and converted it to a different recall period. In September 2011 the Planning Commission told the Supreme Court that, at June 2011 prices, the line was Rs 965 per person a month in urban areas and Rs 781 in rural areas, about Rs 32 and Rs 26 a day. The figure became shorthand for a line that seemed to describe destitution rather than poverty.
+
+For 2011-12 the Tendulkar lines were Rs 816 per person a month in rural India and Rs 1,000 in urban India. The Rangarajan expert group, reporting in 2014, recomputed requirements for calories, proteins and fats, added essential non-food spending, and set Rs 972 and Rs 1,407. On the same survey its line put 29.5% of Indians below it. That line was never adopted. A NITI Aayog task force reported in 2016 that a consensus for either the Tendulkar line or a higher one did not emerge, and recommended another expert committee. No national line has been set since, so every recent Indian poverty rate is an estimate on someone's chosen line.
 
 ### The PPP revision changed the yardstick
 
@@ -38,11 +50,21 @@ PIP uses one national consumption PPP factor for India, Rs 19.47 per internation
 
 HCES 2022-23 and 2023-24 collect the food, consumables and services, and durables modules over three monthly visits, rather than the earlier single-visit schedule. Longer item lists and changes in fieldwork can change how much spending households recall. A cleaner questionnaire is valuable, but it complicates comparison with an older survey.
 
+PIP records the break formally. Its comparability field puts India's surveys in separate groups: 1977, 1983 and 1987 each stand alone, 1993-94 to 2009-10 form one comparable run, 2011-12 stands alone, and 2022-23 to 2023-24 form another. The charts here draw each survey as a dot and join surveys from different groups only with a thin grey link. The October 2026 India brief is less strict in words. It calls the 2011-12, 2022-23 and 2023-24 surveys "broadly comparable, despite several key improvements", but adds that the large welfare gains between 2022-23 and 2023-24 "likely reflect both genuine welfare gains and better measurement".
+
 Himanshu, Peter Lanjouw and Philipp Schirmer examine that break in Tinbergen Institute Discussion Paper TI 2025-069/V. They use survey-to-survey imputation to estimate consumption on a more consistent historical basis. Their models do not measure an alternative truth directly; they depend on the stability of relationships between consumption and the characteristics used to predict it.
 
 The chart deliberately shows several poverty lines as well as several survey treatments. Direct HCES yields 2.35% at the old $2.15 line and 5.25% at the new $3 line. Applying the Rangarajan line directly gives 7.2%. The paper's CES-based Tendulkar estimates range from 11.3% to 13.6%; its EUS-to-PLFS Tendulkar estimates include 17.5%, 18.3% and 19.9%. Under the Rangarajan-equivalent MMRP line, the sector-wide EUS-to-PLFS model gives 25.9%.
 
 That spread cannot be attributed entirely to the questionnaire. It combines different poverty lines, recall concepts and models. The useful comparisons hold the line fixed while changing the survey treatment. Standard errors and model assumptions matter too; this chart is not a confidence interval for India's poverty rate.
+
+### Who says poverty has nearly vanished?
+
+The same data feed sharply different public claims. Surjit Bhalla, Karan Bhasin and Arvind Virmani, in an IMF working paper in April 2022, put extreme poverty at $1.90 a day in 2011 PPP at 0.8% in 2019, counting in-kind food transfers. After the HCES 2022-23 factsheet appeared in February 2024, NITI Aayog's chief executive said the survey indicated poverty below 5%. SBI Research, using HCES 2023-24, put rural poverty at 4.86% and urban poverty at 4.09%. Each uses its own line and its own treatment of transfers, so these numbers cannot be lined up against each other or against the World Bank's.
+
+The World Bank has been on both sides of the argument. In 2022, Sutirtha Sinha Roy and Roy van der Weide used the private Consumer Pyramids Household Survey to estimate extreme poverty at 10.2% in 2019, down from 22.5% in 2011. Jean Drèze and Anmol Somanchi argued that poor households were grossly under-represented in that survey. The 2026 report says the Consumer Pyramids-based estimates for 2015 to 2021 have been removed from PIP because of concerns about comparability with the government's new survey. India therefore has no PIP survey points between 2011-12 and 2022-23.
+
+None of these estimates finds that poverty rose between 2011-12 and the 2020s, although the withheld 2017-18 survey suggested spending fell for a time. The dispute is over how far and how fast poverty fell, and how much of the measured fall comes from changes in measurement.
 
 ### Free goods count as consumption, with limits
 
@@ -56,11 +78,15 @@ The boundary matters. MoSPI does not impute the value of free health services or
 
 In PIP, India's consumption Gini falls from 28.78 in 2011-12 to 25.51 in 2022-23 and 23.00 in 2023-24. The richest survey decile's share of consumption falls from 24.80% to 20.52% over the same endpoints. These describe measured consumption, not the distribution of income or wealth.
 
+Those figures have been used for a larger claim. In July 2025 a Press Information Bureau backgrounder cited a Gini of 25.5 to call India "the fourth most equal country in the world", after the Slovak Republic, Slovenia and Belarus. Critics, including Alt News, pointed out that India's Gini measures consumption while the countries it was ranked against mostly report income, which is usually more unequal. The October 2026 India brief says the surveys may not fully capture the consumption of wealthier households and are likely to understate inequality.
+
 The two latest HCES rounds offer a cleaner comparison because PIP explicitly marks 2022-23 and 2023-24 as comparable. Average real consumption grows 13.1% for the poorest surveyed tenth, against a measured decline of 2.9% for the richest surveyed tenth. The national mean rises 4.7%. This helps explain the falling consumption Gini within these rounds. Each decile contains different people at each date, however, and the survey's coverage of affluent households still matters. The result cannot establish that rich Indians as a whole became poorer.
 
 Index the available series to 1977 and the divergence becomes clear. Real GDP per capita grows 5.70-fold by 2023, National Accounts household consumption per capita grows 4.49-fold, and survey mean consumption grows 2.09-fold. Each line is indexed from its own starting value; their original currency units are not placed on one scale.
 
 This discrepancy warrants scrutiny. It does not, by itself, prove that missing rich households explain the whole gap or that National Accounts supply the correct distribution. Coverage, valuation, reporting errors and survey design can all contribute. The chart cannot tell us how to allocate the missing consumption across households. [Consumption inequality](/articles/income-inequality/) is only one part of the larger inequality question.
+
+Wages tell a slower story still. Arindam Das and Jean Drèze, using the Labour Bureau's village wage series, estimate real wage growth of 0.8% a year between 2014-15 and 2023-24 for male agricultural labourers, and describe a "virtual stagnation" of real wages over the decade. The India brief reports that employment rose by about 134 million between 2017 and 2023, nearly twice the growth of the working-age population, largely as rural women entered paid work, while real earnings remained broadly unchanged. More earners per household is one way consumption can rise while wages do not; transfers and survey design are others. These sources cannot apportion the gap between them.
 
 ## Why do working Indians stay poor even when they work 44 hours a week?
 
@@ -80,6 +106,8 @@ That is a large simulated change, but it still leaves more than half the populat
 
 Money and capability do not move in lockstep. In the World Bank's multidimensional measure for HCES 2022-23, 17.74% of Indians are poor, against 5.25% below the monetary extreme line in the same survey. Sanitation deprivation affects 29.60%, lack of an adult with completed primary schooling 13.82%, drinking-water deprivation 6.39% and electricity deprivation 1.02%. These overlapping deprivations cannot be added together.
 
+Even the headline for that measure differs between World Bank publications. The October 2026 India brief prints 15.5% for the same survey, while the report's MPM file used here gives 17.74%, with the same component rates after rounding. NITI Aayog's index has a different limit. Its widely quoted estimate that 24.82 crore people escaped multidimensional poverty in the nine years to 2022-23 runs from an estimated 2013-14 rate of 29.17% to a projected 2022-23 rate of 11.28%. Neither endpoint is a survey reading.
+
 Nutrition provides a different lens, with a different denominator and date. The fifth National Family Health Survey (NFHS-5), conducted in 2019-21, found 35.5% of children under five stunted and 32.1% underweight. These are not percentages of all Indians or new findings from HCES 2023-24. The World Bank's multidimensional measure excludes nutrition and health, so it cannot stand in for them either.
 
 Medical spending exposes another limit of expenditure measures. A household can finance treatment by borrowing or selling assets; the expenditure records consumption while the financing damages its balance sheet. The World Bank's financial-protection series for **2022** reports 30.94% facing financial hardship from out-of-pocket health spending, including 22.27% facing impoverishing spending. These are separate health-financing indicators, not the percentage pushed below this article's $3 line by one hospital bill.
@@ -92,9 +120,13 @@ The international comparison becomes less flattering at a higher line. In the co
 
 India's role in global poverty changes with the benchmark too. In the chapter-one 2024 tables, India accounts for 4.03% of the world's population below $3, 14.56% below $4.20 and 30.42% below $8.30. In the separate 2026 table, it contributes 18.49% of the Global Prosperity Gap, against 18.31% of world population. The latter compares average welfare ratios, not a count of people below $28. A small share of global extreme poverty and a large share of the world's wider consumption shortfall can coexist.
 
+Counted in people, India ranked fifth at $3 a day in 2024, with about 33 million below the line, behind Nigeria (95 million), the Democratic Republic of Congo (90 million), Pakistan (56 million) and Ethiopia (42 million). At $4.20 it ranks first, with about 216 million people. The report notes that India appears among the economies with the most extremely poor people because it is the most populous country in the world, not because its extreme-poverty rate is high.
+
 ## How to read these numbers: methodology and caveats
 
 The frozen sources are the World Bank's 2026 report reproducibility package, FR_WLD_2026_763, the September 2026 PIP releases in both PPP vintages, MoSPI's HCES 2023-24 press note, the Tinbergen paper, NFHS-5 and the World Bank's 2022 health-financing observations. The package contains four chapters. Its processed tables can be audited without treating them as household-level raw microdata.
+
+The November 2026 additions draw on the World Bank's October 2026 India brief, the first chapter of the 2026 report for the nowcast method and the Consumer Pyramids removal, the Planning Commission's 2013 press note and the Rangarajan-Dev monograph for India's poverty-line history, and the published positions in the measurement debate. Each is frozen with its hash in a separate follow-up folder. Statements by governments, banks and researchers are reported as their claims, not as estimates this article reproduces.
 
 The three national trajectories use `Country_FGT`, with all annual observations from 1990 to 2030. Estimates after 2024 are drawn dashed. The societal-poverty series uses direct survey-year PIP observations, not the calendar-year lineup. Binned consumption values are approximate locations in the distribution; bin-based shares resolve only to a tenth of a percentage point.
 

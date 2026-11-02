@@ -8605,7 +8605,7 @@ export const v1Questions = [
         "projectedAfter": 2024,
         "unit": "% of population",
         "indicator": "pov26.linedup_300.IN",
-        "subtitle": "World Bank 2026 Poverty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP",
+        "subtitle": "World Bank 2026 Poverty, Prosperity, and Planet Report lined-up headcount rates (1990-2030) and PIP Societal Poverty Rate (1993-2023) · 2021 PPP · survey points are dots; a grey link joins surveys PIP does not treat as comparable",
         "series": [
           {
             "indicator": "pov26.linedup_300.IN",
@@ -8618,7 +8618,8 @@ export const v1Questions = [
           },
           {
             "indicator": "pov26.societal_poverty_rate.IN",
-            "label": "Societal poverty rate ($3.00 to $4.27/day dynamic line)"
+            "label": "Societal poverty rate ($3.00 to $4.27/day dynamic line)",
+            "breaks": [2009, 2011]
           },
           {
             "indicator": "pov26.linedup_830.IN",
@@ -8792,7 +8793,7 @@ export const v1Questions = [
         "beat": "na-vs-survey",
         "unit": "index (1977 = 100)",
         "indicator": "pov26.idx_gdp_pcap_1977.IN",
-        "subtitle": "Indexed real per-capita growth in GDP, National Accounts Household Final Consumption Expenditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP",
+        "subtitle": "Indexed real per-capita growth in GDP, National Accounts Household Final Consumption Expenditure (HFCE), and NSS/HCES survey mean consumption · 1977 to 2023 (1977 = 100) · World Bank PIP · grey links join survey means PIP does not treat as comparable",
         "series": [
           {
             "indicator": "pov26.idx_gdp_pcap_1977.IN",
@@ -8805,7 +8806,8 @@ export const v1Questions = [
           },
           {
             "indicator": "pov26.idx_survey_mean_1977.IN",
-            "label": "NSS / HCES survey mean consumption (1977 = 100)"
+            "label": "NSS / HCES survey mean consumption (1977 = 100)",
+            "breaks": [1977, 1983, 1987, 2009, 2011]
           }
         ],
         "why": "Shows the divergence between macro National Accounts and household surveys; it cannot identify the source of the gap or measure missing top-end consumption.",
