@@ -68,22 +68,27 @@ function stacked(spec: DumbbellSpec, w: number): Scene {
   const r = z.dot;
   const sx = linear([lo, hi], [r + 1, w - r - 1]);
   const lh = b.lh("label");
-  const rowH = lh + 24;
   const legend = b.lh("axis") + 4;
   const top = legend + 2;
-  const bottom = top + items.length * rowH;
-
-  for (const v of ticks) b.hair(sx(v), top, sx(v), bottom, INK.rule);
 
   // On a phone the value columns name the two ends; they are the only set of headers.
   const colB = Math.max(...items.map((d) => b.tw(val(d.b), "value", true)), b.tw(spec.ends[1].toLowerCase(), "axis", true));
   const xA = w - colB - 10;
+  const colA = Math.max(...items.map((d) => b.tw(val(d.a), "value")), b.tw(spec.ends[0].toLowerCase(), "axis"));
+  // A name wraps within the space left of the value columns, so it never runs under them.
+  const nameW = Math.max(60, xA - colA - 12);
+  const names = items.map((d) => (b.tw(d.label, "label", d.highlight) <= nameW ? [d.label] : wrap(d.label, z.label, nameW, d.highlight)));
+  const rowHs = names.map((n) => n.length * lh + 24);
+  const rowTop = rowHs.map((_, k) => top + rowHs.slice(0, k).reduce((a, c) => a + c, 0));
+  const bottom = top + rowHs.reduce((a, c) => a + c, 0);
+
+  for (const v of ticks) b.hair(sx(v), top, sx(v), bottom, INK.rule);
   b.text(xA, top - legend / 2 + 1, spec.ends[0].toLowerCase(), "axis", "end", { color: INK.ink2 });
   b.text(w, top - legend / 2 + 1, spec.ends[1].toLowerCase(), "axis", "end", { bold: true, color: INK.neel });
   items.forEach((d, k) => {
-    const ty = top + k * rowH + lh / 2 + 2;
-    const cy = ty + lh / 2 + 11;
-    b.text(0, ty, d.label, "label", "start", { bold: d.highlight, halo: true });
+    const ty = rowTop[k] + lh / 2 + 2;
+    const cy = ty + (names[k].length - 1) * lh + lh / 2 + 11;
+    names[k].forEach((l, j) => b.text(0, ty + j * lh, l, "label", "start", { bold: d.highlight, halo: true }));
     b.text(w, ty, val(d.b), "value", "end", { bold: true, color: INK.neel, halo: true });
     b.text(xA, ty, val(d.a), "value", "end", { color: INK.ink2, halo: true });
     pair(b, sx(d.a), sx(d.b), cy, r);
@@ -101,8 +106,10 @@ function wide(spec: DumbbellSpec, w: number): Scene {
 
   // Name column, then the plot, then the two values in a compact column.
   const maxCol = w * 0.24;
-  const names = items.map((d) => (b.tw(d.label, "label") <= maxCol ? [d.label] : wrap(d.label, z.label, maxCol).slice(0, 2)));
-  const col = Math.min(maxCol, Math.max(...names.flat().map((l) => b.tw(l, "label", true))));
+  const names = items.map((d) => (b.tw(d.label, "label", d.highlight) <= maxCol ? [d.label] : wrap(d.label, z.label, maxCol, d.highlight).slice(0, 2)));
+  // Each name is measured in the weight it is drawn in (bold only when highlighted), so the
+  // longest one starts at the left edge rather than a bold-width gap in from it.
+  const col = Math.min(maxCol, Math.max(...names.flatMap((n, k) => n.map((l) => b.tw(l, "label", items[k].highlight)))));
   const colW = Math.max(...items.flatMap((d) => [b.tw(val(d.a), "value"), b.tw(val(d.b), "value", true)]));
   const xB = w;
   const xA = xB - colW - 18;

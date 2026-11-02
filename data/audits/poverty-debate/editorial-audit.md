@@ -71,3 +71,10 @@ What was added, and its basis:
 - The world ranking by people in 2024 from `Country_FGT` rows for Nigeria, DR Congo, Pakistan and Ethiopia; it matches figures 1.6 and 1B.2 of the report.
 
 Gates: `verify_claims.py` inventories 977 numeric occurrences across 421 reviewed surfaces with zero failures; the sixteen new paragraphs, three new caveats and two changed subtitles each carry a review record with an explicit source selector for every number. The fifty-six unchanged paragraphs keep their original review records, moved to their new positions by text hash. `test_audit_mutations.py` still rejects all six mutations. The explanation validator reports zero failures and warnings, and all twenty-seven source links pass, one through a rendered browser check.
+
+
+## Chart-kit and checker fixes, 2 November 2026
+
+The phone-width scale flags and the "artboards did not settle" failures recorded after the 31 October redesign came from the checkers, not the page: the site scrolls smoothly (`scroll-behavior: smooth`), so scripted jumps were still animating when the checks measured, and under four parallel pages Chromium throttled the unfocused tabs. `check-chart-type-scale.mjs` and `audit-charts.mjs` now scroll instantly, bring chart-kit cards and any unsettled card into view, launch without background throttling, and `audit-charts.mjs` takes `--jobs`. A real-browser probe confirmed every kit card redraws at its shown width at 360, 768 and 1024 px.
+
+Three real rendering defects were then visible and are fixed in the kit: on phones, long bar labels wrapped instead of running past the frame, and long dumbbell names wrap within the space left of the value columns instead of running under them; on desktop, the dumbbell name column is measured in the weight it is drawn in, so names start at the left edge. A zero tick label may now sit under its gridline when a line lies on the floor. After the fixes this article passes the layout audit at 412 and 1440 px with no findings, the type-scale check at 360, 768, 1024 and 1440 px with none outside the limits, and the rendered-binding audit with no failures.

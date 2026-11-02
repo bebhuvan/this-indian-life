@@ -159,8 +159,11 @@ export function line(spec: LineSpec, w: number): Scene {
   yt.ticks.forEach((t, k) => {
     if (t === yt.lo && t !== 0) return;
     const text = tick(t, k === yt.ticks.length - 1);
-    const above = sy(t) - b.lh("axis") / 2 - 2, below = sy(t) + b.lh("axis") / 2 + 2;
-    const cands: Array<[number, number, "start"]> = t === yt.lo || t === 0 ? [[x0, above, "start"]] : [[x0, above, "start"], [x0, below, "start"]];
+    // Under the zero line the label clears a line lying on the floor (its reserved band plus padding).
+    const above = sy(t) - b.lh("axis") / 2 - 2, below = sy(t) + b.lh("axis") / 2 + (t === 0 ? 5 : 2);
+    // The zero line may also take the space under it when a line runs along the floor at the
+    // left edge; the time-axis labels there are reserved, so it is used only when free.
+    const cands: Array<[number, number, "start"]> = [[x0, above, "start"], [x0, below, "start"]];
     if (!b.tryText(cands, text, "axis", { halo: true })) b.text(x0, above, text, "axis", "start", { halo: true });
   });
 

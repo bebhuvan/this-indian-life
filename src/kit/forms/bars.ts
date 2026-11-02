@@ -29,9 +29,11 @@ export function bars(spec: BarsSpec, w: number): Scene {
   // wrapping. Phone: each name sits above its bar and the bars take the full width.
   const stacked = z.cls === "s";
   const maxCol = stacked ? w : w * 0.3;
-  const names = items.map((d) => (stacked || b.tw(d.label, "label") <= maxCol ? [d.label] : wrap(d.label, z.label, maxCol).slice(0, 2)));
+  // On a phone a name longer than the width wraps onto further lines above its bar, so it
+  // never runs out of the frame.
+  const names = items.map((d) => (b.tw(d.label, "label") <= maxCol ? [d.label] : stacked ? wrap(d.label, z.label, maxCol) : wrap(d.label, z.label, maxCol).slice(0, 2)));
   const col = stacked ? 0 : Math.min(maxCol, Math.max(...names.flat().map((l) => b.tw(l, "label"))));
-  const rowH = (k: number) => (stacked ? b.lh("label") + 6 + z.bar + 14 : Math.max(z.row, names[k].length * b.lh("label") + 10));
+  const rowH = (k: number) => (stacked ? names[k].length * b.lh("label") + 6 + z.bar + 14 : Math.max(z.row, names[k].length * b.lh("label") + 10));
 
   // Room for values on both sides, so no label leaves the frame or meets the names.
   const posW = Math.max(0, ...items.filter((d) => d.value >= 0).map((d) => b.tw(val(d.value), "value", true)));
@@ -45,7 +47,7 @@ export function bars(spec: BarsSpec, w: number): Scene {
   let y = top;
   const rows = items.map((d, k) => {
     const h = rowH(k);
-    const r = { d, k, y: stacked ? y + b.lh("label") + 6 + z.bar / 2 : y + h / 2, nameY: y + b.lh("label") / 2 };
+    const r = { d, k, y: stacked ? y + names[k].length * b.lh("label") + 6 + z.bar / 2 : y + h / 2, nameY: y + b.lh("label") / 2 };
     y += h;
     return r;
   });
@@ -57,7 +59,7 @@ export function bars(spec: BarsSpec, w: number): Scene {
     // A value too small to see still gets a 2 px stub in its own ink.
     b.rect(a, cy - z.bar / 2, Math.max(e - a, 2), z.bar, ink);
     const lines = names[k];
-    if (stacked) b.text(0, nameY, lines[0], "label", "start", { bold: d.highlight });
+    if (stacked) lines.forEach((l, j) => b.text(0, nameY + j * b.lh("label"), l, "label", "start", { bold: d.highlight }));
     else lines.forEach((l, j) => b.text(col, cy + (j - (lines.length - 1) / 2) * b.lh("label"), l, "label", "end", { bold: d.highlight }));
     // Gains and losses take the same weight; only the protagonist is set bold.
     const v = val(d.value);

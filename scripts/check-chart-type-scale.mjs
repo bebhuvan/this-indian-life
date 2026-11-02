@@ -61,9 +61,18 @@ async function measure(slug, width) {
     // In steps under a screen, two frames each, so the observer sees every card pass (a card
     // skipped over keeps its inline drawing until it is next on screen).
     const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    // The site scrolls smoothly (indica.css), so a scripted jump is still animating when the
+    // next one starts and the page never reaches the last cards. Measure with instant scrolling.
+    document.documentElement.style.scrollBehavior = "auto";
     for (let y = 0; y < document.body.scrollHeight; y += 700) { window.scrollTo(0, y); await frame(); }
     // On a long page the observer can miss a card passed at this speed (a reader who stops on it
     // triggers it), so any card it missed is brought into view and given a moment.
+    // Chart-kit cards redraw themselves when near the screen (src/kit/client.ts) and carry no
+    // rungs; bring each into view too, so the drawing measured is the one a reader sees.
+    for (const card of document.querySelectorAll(".viz-card.kit-card")) {
+      card.scrollIntoView({ block: "center" });
+      await frame(); await frame();
+    }
     for (const card of document.querySelectorAll(".viz-card[data-rungs]:not([data-near])")) {
       card.scrollIntoView({ block: "center" });
       for (let i = 0; i < 10 && !card.dataset.near; i++) await frame();

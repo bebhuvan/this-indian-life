@@ -31,7 +31,7 @@
 // Run after `npm run build`:
 //   INDICA_CHROME=/usr/bin/google-chrome INDICA_PUPPETEER_DIR=<dir with puppeteer-core> \
 //     node scripts/audit-charts.mjs [--pages=/articles/x/,/library/] [--json=out.json]
-//     [--summary=counts.json] [--list] [--rule=edge|width|ticks|demoted|text|notes]
+//     [--summary=counts.json] [--list] [--jobs=4] [--rule=edge|width|ticks|demoted|text|notes]
 // Exits 1 when any overlap, spill, phone small text, phone ladder or phone gutter is found, or
 // any rule counts above zero; desktop small text, ladders and gutters are reported.
 // See docs/DESIGN_REFINEMENT_LOG.md rows 35, 61 and 76 on.
@@ -309,11 +309,13 @@ function probe() {
   return out;
 }
 
-const browser = await puppeteer.launch({ executablePath: chrome, headless: true, args: ["--no-sandbox"], protocolTimeout: 300000 });
+// Several pages run at once; unfocused pages must not be throttled, or their lazy artboards
+// (chosen on animation frames) never settle.
+const browser = await puppeteer.launch({ executablePath: chrome, headless: true, args: ["--no-sandbox", "--disable-background-timer-throttling", "--disable-renderer-backgrounding", "--disable-backgrounding-occluded-windows"], protocolTimeout: 300000 });
 const results = [];
 for (const width of [412, 1440]) {
   const queue = pages.slice();
-  await Promise.all(Array.from({ length: 4 }, async () => {
+  await Promise.all(Array.from({ length: Number(arg("jobs")) || 4 }, async () => {
     const page = await browser.newPage();
     await page.setViewport({ width, height: 900, isMobile: width < 700, deviceScaleFactor: 1 });
     await page.setRequestInterception(true);
@@ -331,15 +333,25 @@ for (const width of [412, 1440]) {
       // Article artboards are selected lazily as figures enter the viewport. Measure
       // the drawings a reader sees after scrolling, not untouched inline fallbacks.
       await page.evaluate(async () => {
+        // The site scrolls smoothly; scripted jumps must be instant or the last cards are never
+        // reached and their artboards never chosen.
+        document.documentElement.style.scrollBehavior = 'auto';
         for (const card of document.querySelectorAll('.viz-card')) {
           card.scrollIntoView({ block: 'center' });
           await new Promise(r => setTimeout(r, 80));
+        }
+        // Under load (four pages at once) a card can pass before its observer fires; bring any
+        // card that has not chosen a drawing back into view and give it time, as a reader would.
+        for (let pass = 0; pass < 6; pass++) {
+          const missed = [...document.querySelectorAll('.viz-card[data-rungs]')].filter(c => !c.dataset.show || !c.dataset.want || !c.dataset.want.startsWith(c.dataset.show));
+          if (!missed.length) break;
+          for (const card of missed) { card.scrollIntoView({ block: 'center' }); await new Promise(r => setTimeout(r, 400)); }
         }
       });
       await page.waitForFunction(() => [...document.querySelectorAll('.viz-card[data-rungs]')].every(c => {
         const {show,want}=c.dataset;
         return show && want && want.startsWith(show) && (show !== 'r' || c.querySelector(':scope > .viz-rung')?.dataset.w === want.slice(1));
-      }), { timeout: 30000 }).catch(() => { throw new Error(`${url}: chart artboards did not settle`); });
+      }), { timeout: 90000 }).catch(() => { throw new Error(`${url}: chart artboards did not settle`); });
       for (const r of await page.evaluate(probe)) results.push({ width, url, ...r });
     }
     await page.close();
