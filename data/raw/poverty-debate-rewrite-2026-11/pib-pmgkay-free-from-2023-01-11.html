@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head id="Head1"><title>
+	Press Release Page | Press Information Bureau
+</title><link href="css/style.css?v=1" rel="stylesheet" type="text/css" /><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="alternate stylesheet" href="css/change.css?v=1" media="screen" title="change" /><link rel="alternate stylesheet" href="css/green.css?v=1" media="screen" title="green" /><link rel="alternate stylesheet" href="css/yellow.css" media="screen" title="yellow" /><link rel="stylesheet" type="text/css" href="css/prtint.css" media="print" /><link rel="stylesheet" href="css/style3.1.css" type="text/css" /><link id="pibA11yCss" rel="stylesheet" href="/css/accessibility.css?v=7" type="text/css" />
+    <script type="text/javascript">
+        (function (d) {
+            var t = "";
+            try {
+                t = window.localStorage.getItem("pibStyle") || "";
+            } catch (e) {
+                t = "";
+            }
+            if (t === "orange") {
+                t = "yellow";
+            }
+            var c = t === "change" ? " pib-hc"
+                : t === "green" ? " pib-theme-green"
+                : t === "yellow" ? " pib-theme-yellow" : "";
+            d.documentElement.className += c + " pib-a11y-content";
+        }(document));
+    </script>
+
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/accessibility.js?v=7"></script>
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+                  function getParameterByName(name) {
+                        var url = window.location.href;
+                        name = name.replace(/[\[\]]/g, '\\$&');
+                        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                              results = regex.exec(url);
+                        if (!results) return null;
+                        if (!results[2]) return '';
+                        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                  }
+                  let prid = parseInt(getParameterByName('PRID'), 10);
+
+                  if (!isNaN(prid) && prid > 0) {
+                        $.ajax({
+                              type: "POST",
+                              url: "AjaxMethod.aspx/UpdatePRHitCount",
+                              async: false,
+                              data: JSON.stringify({ 'PermId': prid }),
+                              contentType: "application/json; charset=utf-8",
+                              dataType: "json",
+                              success: function (response) {
+                                    console.log(response);
+                              },
+                              error: function (error) {
+                                    console.log("Error in AJAX request", error);
+                              }
+                        });
+                  } else {
+                        console.log("Invalid parameters:", prid);
+                  }
+            });
+    </script>
+    <style type="text/css">
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        full-width {
+            width: 100%;
+        }
+
+        .logo-left, .logo-center, .countdown {
+            display: flex;
+            align-items: center;
+        }
+
+            .logo-left img, .logo-center img {
+                height: 70px;
+            }
+
+        .countdown {
+            text-align: center;
+            background-color: var(--dbim-text, #150202);
+            border-radius: 10px;
+            padding: 10px;
+            border: 2px solid grey;
+        }
+
+        .firstnumber {
+            color: #000000;
+            position: absolute;
+            top: 50px;
+            right: 90px;
+            font-size: 30px;
+        }
+
+        .secondnumber {
+            position: absolute;
+            color: #000000;
+            right: 45px;
+            top: 50px;
+            font-size: 30px;
+        }
+
+        .countdown .days {
+            font-size: 35px;
+            color: gold;
+        }
+
+        .countdown p {
+            margin: 0;
+        }
+
+        .countdown .text {
+            font-size: 16px;
+        }
+
+        a {
+            word-break: break-all;
+        }
+
+        iframe, img {
+            max-width: 100%;
+        }
+
+        /* === DBIM 3.0 Option 4 Separator Line & Reading Meta Styling === */
+        .pr-share--footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-top: 1px solid var(--dbim-border, #d1d5db);
+            padding-top: 16px;
+            margin-top: 24px;
+        }
+
+        .pr-share__left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pr-reading-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--dbim-text-secondary, #475569);
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .pr-reading-meta__item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pr-reading-meta__divider {
+            color: var(--dbim-border, #cbd5e1);
+            font-weight: 300;
+        }
+
+        .pib-hc .pr-reading-meta,
+        .pib-hc .pr-reading-meta svg {
+            color: currentColor !important;
+        }
+
+        @media (max-width: 680px) {
+            .pr-share--footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .pr-reading-meta {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media(max-width:1199px) {
+            .firstnumber {
+                top: 40px;
+                right: 72px;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 35px;
+                top: 40px;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:990px) {
+            .firstnumber {
+                top: 25px;
+                right: 54px;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 25px;
+                top: 25px;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:768px) {
+            .countdown, .days {
+                font-size: 12px !important;
+            }
+
+            .firstnumber {
+                top: 25%;
+                right: 8%;
+                font-size: 30px;
+            }
+
+            .secondnumber {
+                right: 4.5%;
+                top: 25%;
+                font-size: 30px;
+            }
+        }
+
+        @media(max-width:475px) {
+            .countdown, .days {
+                font-size: 10px !important;
+                top: 20%;
+            }
+
+            .bannerimgdiv {
+                padding: 0 !important;
+            }
+
+            .bannerimg {
+                width: 108% !important;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+            $(function () {
+                  $("[id*=printPDF]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+            $(function () {
+                  $("[id*=printPDFEvent]").click(function () {
+                        $("[id*=hfGridHtml]").val($("#PdfDiv").html());
+                  });
+            });
+    </script>
+
+    <link id="pibConsentCss" href="/css/consent.css?v=8" rel="stylesheet" type="text/css" /><link id="pibFontsCss" href="/css/fonts-noto.css?v=6" rel="stylesheet" type="text/css" /><link id="pibDbimCss" href="/css/dbim.css?v=1120" rel="stylesheet" type="text/css" /><meta property="og:title" content="Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”" /><meta property="og:url" content="www.pib.gov.in/Pressreleaseshare.aspx?PRID=1890272" /><meta property="og:description" content="The Cabinet led by Hon’ble Prime Minister Shri Narendra Modi had approved new integrated food securi" /><meta property="og:image" content="https:/pib.gov.in/images/indian-emblem.png" />
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="C4E7H-KSCMC-422L4-W3EM5-U36MF",function(){function e(){if(!i){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.parentNode.appendChild(e),i=!0}}function t(e){i=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",o.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"C4E7H-KSCMC-422L4-W3EM5-U36MF";var o=document.currentScript||document.getElementsByTagName("script")[0],i=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!i)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="ghhtypyxzvsyc2xjiafq-f-cc1b62ca4-clientnsv4-s.akamaihd.net",o="false"=="true"?2:1,i={"ak.v":"41","ak.cp":"1825201","ak.ai":parseInt("1215205",10),"ak.ol":"0","ak.cr":16,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"72e25a","ak.r":39570,"ak.a2":n,"ak.m":"dscb","ak.n":"ff","ak.cport":34970,"ak.gh":"23.205.101.167","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1793671179","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==uN05tgZCI40gGp5snycD53C7Z3kKZySIX0RNkRBmNt8fBHNVlr56XNVBIKGFRgpKu/sBPGa3qxNnlBIdXtafUk5stHe0Jg40pbArKqTwboG14Zf8QrpgSKcx8ueoQ/QaP0vuLmJX2rJRoUyZudGrYsbYxfx/6dEA6HYeVEIBAnbId3kq4mwLXXfjabVuY6SwFkHT9AoF1xa1bCsMg40vDV3dAhURvaxx0FWeuqtExUOHrP00WQo7VxpfYNmoa/tPgMwAJ1rMtxQPwfOu+Gw2yCevdhdUrBCmCufYVg8vjUA6gr/cIRPhsCVPYBc/+AgBiE78yEUTWkbRXLGkKnyRx6Npr6bVZlKiG4WnC184/7xn2RGbiJoSzmp/pmc1LHki8Y69Kd9rlg8IHIwoyIwPpzHdWfLnc7sdRGuXQ+mDEOU=","ak.pv":"9","ak.dpoabenc":"","ak.tf":o};if(""!==t)i["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+     style="position:absolute;width:0;height:0;overflow:hidden" id="dbim-icon-sprite">
+    <defs>
+        <symbol id="icon-angle-double-left" viewBox="0 0 24 24"><path d="M11.6 4.6 4.2 12l7.4 7.4 2.2-2.2L8.6 12l5.2-5.2z"/><path d="M19 4.6 11.6 12 19 19.4l2.2-2.2L16 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-angle-double-right" viewBox="0 0 24 24"><path d="M12.4 4.6 10.2 6.8 15.4 12l-5.2 5.2 2.2 2.2L19.8 12z"/><path d="M5 4.6 2.8 6.8 8 12l-5.2 5.2L5 19.4 12.4 12z"/></symbol>
+        <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="M20.8 10.6H9.6v2.8h11.2z"/><path d="M10.8 5.6 3.2 12l7.6 6.4z"/></symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M3.2 10.6h11.2v2.8H3.2z"/><path d="M13.2 5.6 20.8 12l-7.6 6.4z"/></symbol>
+        <symbol id="icon-blogger" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.4 2.4h11.2a4 4 0 0 1 4 4v11.2a4 4 0 0 1-4 4H6.4a4 4 0 0 1-4-4V6.4a4 4 0 0 1 4-4zm2.8 5.2a2 2 0 0 0 0 4h2.4a2 2 0 0 0 0-4zm0 5.6a2 2 0 0 0 0 4h5.6a2 2 0 0 0 0-4z"/></symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M7.6 2.4H10v2.4H7.6z"/><path d="M14 2.4h2.4v2.4H14z"/><path fill-rule="evenodd" d="M4 4.8h16a1.6 1.6 0 0 1 1.6 1.6v13.2a1.6 1.6 0 0 1-1.6 1.6H4a1.6 1.6 0 0 1-1.6-1.6V6.4A1.6 1.6 0 0 1 4 4.8zm.4 5.6v8.4h15.2v-8.4z"/><path d="M6.4 12.4h3.2v3.2H6.4z"/></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15.4 4.6 8 12l7.4 7.4 2.2-2.2L12.4 12l5.2-5.2z"/></symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M8.6 4.6 6.4 6.8 11.6 12l-5.2 5.2 2.2 2.2L16 12z"/></symbol>
+        <symbol id="icon-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24"><path d="M10.8 3h2.4v7.6h3.4L12 16.6l-4.6-6h3.4z"/><path d="M4 17.2h2.4v2.4h11.2v-2.4H20v3.2a1.4 1.4 0 0 1-1.4 1.4H5.4A1.4 1.4 0 0 1 4 20.4z"/></symbol>
+        <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M13.6 21.6v-8.4h2.8l.42-3.3h-3.22V7.8c0-.95.27-1.6 1.64-1.6h1.74V3.26a23 23 0 0 0-2.54-.13c-2.5 0-4.22 1.53-4.22 4.34v2.43H7.4v3.3h2.82v8.4z"/></symbol>
+        <symbol id="icon-fact-check" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4 3.6 5.6v6.2c0 4.6 3.4 8.6 8.4 9.8 5-1.2 8.4-5.2 8.4-9.8V5.6zm-1 13.2-3.6-3.6 1.7-1.7 1.9 1.9 4.5-4.5 1.7 1.7z"/></symbol>
+        <symbol id="icon-hashtag" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8.8 3h2.4l-1 6h3.2l1-6h2.4l-1 6h3.4v2.4h-3.8l-.6 3.2h3.6V17h-4l-1 5h-2.4l1-5h-3.2l-1 5H5.4l1-5H3V14.6h3.8l.6-3.2H3.8V9h4zm.6 8.4-.6 3.2h3.2l.6-3.2z"/></symbol>
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M12 3.4 2.8 11.6h2.4v8.4a1 1 0 0 0 1 1h3.3v-5.4h5v5.4h3.3a1 1 0 0 0 1-1v-8.4h2.4z"/></symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7.6 2.4h8.8a5.2 5.2 0 0 1 5.2 5.2v8.8a5.2 5.2 0 0 1-5.2 5.2H7.6a5.2 5.2 0 0 1-5.2-5.2V7.6a5.2 5.2 0 0 1 5.2-5.2zm0 2.4a2.8 2.8 0 0 0-2.8 2.8v8.8a2.8 2.8 0 0 0 2.8 2.8h8.8a2.8 2.8 0 0 0 2.8-2.8V7.6a2.8 2.8 0 0 0-2.8-2.8z"/><path fill-rule="evenodd" d="M12 6.8a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4zm0 2.4a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/><circle cx="17.3" cy="6.7" r="1.3"/></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M4.8 8.8h3.6v12H4.8z"/><circle cx="6.6" cy="5.4" r="2.1"/><path d="M10.8 8.8h3.45v1.65h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.35 4.3 5.4v6.6h-3.6v-5.85c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1v5.95h-3.6z"/></symbol>
+        <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M2.4 7.6v9.2a1.6 1.6 0 0 0 1.6 1.6h16a1.6 1.6 0 0 0 1.6-1.6V7.6L12 14z"/><path d="M21.2 5.4H2.8L12 11.8z"/></symbol>
+        <symbol id="icon-mail-open" viewBox="0 0 24 24"><path d="M2.4 9.8h19.2v9.6A1.6 1.6 0 0 1 20 21H4a1.6 1.6 0 0 1-1.6-1.6z"/><path d="M12 2.6 21.6 9.2h-3.8L12 5.3 6.2 9.2H2.4z"/><path d="m3.9 11.2 8.1 5.4 8.1-5.4 1.5 1.3-9.6 6.4-9.6-6.4z"/></symbol>
+        <symbol id="icon-map-marker" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a7 7 0 0 0-7 7c0 5.2 7 12.2 7 12.2s7-7 7-12.2a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z"/></symbol>
+        <symbol id="icon-newspaper" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.8 4.4h14.8v15.2H2.8zm2 2v11.2h10.8V6.4z"/><path d="M6 7.6h8.4v1.6H6z"/><path d="M6 10.8h8.4v1.6H6z"/><path d="M6 14h5.2v1.6H6z"/><path d="M18.4 8.4h2.8v9.6a1.4 1.4 0 0 1-2.8 0z"/></symbol>
+        <symbol id="icon-pause" viewBox="0 0 24 24"><rect x="7.4" y="4" width="3.6" height="16" rx="0.9"/><rect x="13" y="4" width="3.6" height="16" rx="0.9"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 4.5v15l12-7.5z"/></symbol>
+        <symbol id="icon-picture" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M2.4 5.2h19.2v13.6H2.4zm2 2v9.6h15.2V7.2z"/><path d="M5.6 16.4 10 11l2.6 3 2-2.2 4 4.6z"/><circle cx="8" cy="10.4" r="1.5"/></symbol>
+        <symbol id="icon-press-conference" viewBox="0 0 24 24"><circle cx="12" cy="5.2" r="2.6"/><path d="M7.6 12.2a4.4 4.4 0 0 1 8.8 0z"/><circle cx="4.9" cy="9.6" r="2.2"/><path d="M1.8 15.2a3.1 3.1 0 0 1 6.2 0z"/><circle cx="19.1" cy="9.6" r="2.2"/><path d="M16 15.2a3.1 3.1 0 0 1 6.2 0z"/><path d="M6.6 13.6h10.8l2.2 7.8H4.4z"/></symbol>
+        <symbol id="icon-print" viewBox="0 0 24 24"><path d="M6.4 2.8h11.2v4.4H6.4z"/><path d="M4 8.4h16a1.6 1.6 0 0 1 1.6 1.6v5.6a1.6 1.6 0 0 1-1.6 1.6h-1.6v-2.8H6v2.8H4a1.6 1.6 0 0 1-1.6-1.6V10A1.6 1.6 0 0 1 4 8.4z"/><path d="M7.2 15.6h9.6v5.6H7.2z"/></symbol>
+        <symbol id="icon-rss" viewBox="0 0 24 24"><circle cx="4.8" cy="19.2" r="2.4"/><path d="M2.4 11.2v3.2a6.4 6.4 0 0 1 6.4 6.4H12A9.6 9.6 0 0 0 2.4 11.2z"/><path d="M2.4 4.8V8A13.6 13.6 0 0 1 16 21.6h3.2A16.8 16.8 0 0 0 2.4 4.8z"/></symbol>
+        <symbol id="icon-search-plus" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10 2.8a7.2 7.2 0 1 0 0 14.4 7.2 7.2 0 0 0 0-14.4zm0 2.4a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6z"/><path d="M15.3 14.6 21.2 20.5l-1.5 1.5-5.9-5.9z"/><path d="M9.2 6.8h1.6v2.4h2.4v1.6h-2.4v2.4H9.2v-2.4H6.8V9.2h2.4z"/></symbol>
+        <symbol id="icon-share" viewBox="0 0 24 24"><circle cx="18" cy="5.6" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="18.4" r="3"/><path d="M8.3 10.9 15.7 7.2l.9 1.8-7.4 3.7z"/><path d="M9.2 13.1 16.6 16.8l-.9 1.8-7.4-3.7z"/></symbol>
+        <symbol id="icon-twitter" viewBox="0 0 24 24"><path d="M4.2 3h4.3l11.3 18h-4.3z"/><path d="M19.3 3h-2.6L4.2 21h2.6z"/></symbol>
+        <symbol id="icon-university" viewBox="0 0 24 24"><path d="M12 2.4 21.6 7.2v1.6H2.4V7.2z"/><path d="M4.8 10.4h2.4v8H4.8z"/><path d="M9.2 10.4h2.4v8H9.2z"/><path d="M13.4 10.4h2.4v8h-2.4z"/><path d="M17.6 10.4H20v8h-2.4z"/><path d="M3.2 19.8h17.6v1.8H3.2z"/></symbol>
+        <symbol id="icon-volume-up" viewBox="0 0 24 24"><path d="M3.2 9.2h3.3l5-4.2v14l-5-4.2H3.2z"/><path d="M14.6 8.4a5 5 0 0 1 0 7.2l1.6 1.6a7.2 7.2 0 0 0 0-10.4z"/><path d="M17.4 5.6a8.8 8.8 0 0 1 0 12.8l1.5 1.5a10.9 10.9 0 0 0 0-15.8z"/></symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.4a9.5 9.5 0 0 0-8.1 14.5L2.4 21.6l4.8-1.4A9.5 9.5 0 1 0 12 2.4zm0 2.2a7.3 7.3 0 1 1-3.8 13.5l-.4-.2-2.6.7.7-2.5-.3-.4A7.3 7.3 0 0 1 12 4.6z"/><path d="M9.4 7.8c-.2-.5-.4-.5-.6-.5h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3-1.6-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6 6 0 0 1-1.8-1.1 6.6 6.6 0 0 1-1.2-1.6c-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.5z"/></symbol>
+        <symbol id="icon-youtube" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8zM10.2 15.1V8.9l5.1 3.1z"/></symbol>
+    </defs>
+</svg>
+
+    <form method="post" action="./PressReleasePage.aspx?PRID=1890272&amp;reg=48&amp;lang=2" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="sc_HiddenField" id="sc_HiddenField" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZPQet1wIx1Q48y3xJY2k25Y7qxH5RrQ9qQcN-OiTC9guZtri9w2&amp;t=639191042600000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=x6wALODbMJK5e0eRC_p1LdIxBJXt0U_WW5GWfJqHAqo6frgCmGRfEywglicTersO2OKrFhK1gAIp0Wk2al2YrpdR3uWqH6f4nfjBsCyRUfTUUVmb0&amp;t=ffffffffecf8d3f2" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=P5lTttoqSeZXoYRLQMIScH645UK3RD852IErF2548Wz9Ssv0rLjB4fhVKnHcMpqkaMHpNAGOeWY02Lf4aBYN9-dVBme_SNK5KJwmFQNpMixYDZ7M0&amp;t=ffffffffecf8d3f2" type="text/javascript"></script>
+<script src="/PressReleasePage.aspx?_TSM_HiddenField_=sc_HiddenField&amp;_TSM_CombinedScripts_=%3b%3bAjaxControlToolkit%2c+Version%3d3.5.7.123%2c+Culture%3dneutral%2c+PublicKeyToken%3d28f01b0e84b6d53e%3aen-US%3a5a4df314-b4a2-4da2-a207-9284f1b1e96c%3ade1feab2%3af2c8e708%3a8613aea7%3af9cec9bc%3a3202a5a2%3aab09e3fe%3a87104b7c%3a720a52bf%3a589eaa30%3aa67c2700%3abe6fb298" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="59B53027" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="6dQhRs7mStOaeZGKYLUcZyB3bNYa7DFW+rcK1DYGP2ZZ1HR6WjUB697ypjGIuHVKUUdf/17ur//DhqdFQgqx5kagkmEtQSh08CqyUuI7L8XL4hVAnCP/llRxw+ARKAwllFy11jlqeZOXXuO+TvvkzfXQySnAvufO10pFeHhF4jWkc1lqOg2BWGvol6a2eRjNDGW6af6GmXIpkYI9w0mpSQTMDpGxYmKKAoKdTMS4iUrTZUA0YXUEU+tYlRJMXUc730yOzPhM3R0+4mc8kqJNhbblROI=" />
+</div>
+        
+        <div id="templateCss"></div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('sc', 'form1', ['tupdate12','update12'], [], [], 90, '');
+//]]>
+</script>
+
+        <input type="hidden" name="hfGridHtml" id="hfGridHtml" />
+        <div class="container" style='margin-bottom: 50px;'>
+            <div id="accessories">
+                
+                <div class="pull-right" style="display: flex">
+                    <div id="voll"></div>
+                    <div id="vollDT"></div>
+                    
+
+<span class="print-icons">
+<input type="image" name="Print1$print" id="Print1_print" aria-label="Print" src="images/printer_icon.png" alt="print page button" style="padding: 5px 10px 5px 10px;" />
+</span>
+                </div>
+            </div>
+            <input type="hidden" name="hydpermid" id="hydpermid" value="1890272" />
+            
+
+            <div class="innner-page-main-about-us-content-right-part">
+                <div id="MinistryName" class="MinistryNameSubhead text-center">
+                    Ministry of Consumer Affairs, Food & Public Distribution
+                </div>
+                <div id="lg_g"><div class='log_oo'>  <img src='https://static.pib.gov.in/WriteReadData/specificdocs/photo/2026/sep/ph_9768_20260902_10000501.png' alt='azadi ka amrit mahotsav' /> </div></div>
+
+                <div class="text-center event-heading-background">
+                    
+                    <h1 id="Titleh2">
+                        Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”
+                    </h1>
+                    <h3 id="Subtitleh3">
+                        <span id="ltrSubtitle"></span>
+                    </h3>
+                </div>
+
+                <div id="PrDateTime" class="ReleaseDateSubHeaddateTime text-center pt20">
+                    Posted On:
+                              11 JAN 2023 2:24PM by PIB Delhi
+                </div>
+                
+                <div class='pt20'>
+                </div>
+                <input type="hidden" name="hydphotoUrl" id="hydphotoUrl" />
+                
+
+                <!-- Release content wrapper for client-side zero-reflow word count -->
+                <div id="pibReleaseBody">
+                    <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Cabinet led by Hon’ble Prime Minister Shri Narendra Modi had approved new integrated food security scheme for providing free foodgrains to Antodaya Ann Yojna (AAY) & Primary Household (PHH) beneficiaries, to be rolled out from 1<sup>st</sup> January 2023. New scheme has been named as Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY).  Implementation of the new scheme has started from 1<sup>st</sup> January 2023, benefitting more than 80 crore poor and poorest of poor people. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Keeping in view welfare of the beneficiaries and in order to maintain uniformity across the States, free foodgrains will be provided under PMGKAY for the year 2023 to all PHH and AAY beneficiaries, as per entitlement under NFSA. The integrated scheme will strengthen the provisions of NFSA, 2013 in terms of accessibility, affordability and availability of foodgrains for the poor.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">For effective and uniform implementation of NFSA 2013, PMGKAY will subsume the two subsidy schemes of Department of Food & Public Distribution (a) Food Subsidy to FCI (b) Food Subsidy for decentralized procurement states dealing with procurement, allocation and delivery of free foodgrains to the states under NFSA.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Necessary steps have already been taken for smooth implementation of the PMGKAY in the field, i.e. necessary notification has been issued for making price of foodgrains zero for AAY and PHH beneficiaries, resolution of technical issues at Fair Price Shops (FPS), advisory related to margin to the Fair Price Shop Dealers, zero prices in the print receipts given to beneficiaries etc.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Officers of the Department of Food & Public Distribution and FCI are regularly interacting with State Government officers for smooth roll out of new scheme in the field.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government will spend more than Rs 2 lakh crore in 2023 as food subsidy under NFSA and other welfare schemes, to remove the financial burden of the poor and the poorest of the poor.</span></span></p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">*****</span></span></p>
+
+<p><span style="font-family:Times New Roman,Times,serif"><strong><span style="font-size:16px">AD/NS</span></strong></span></p>
+
+                </div>
+
+                <div id="reel_pic">
+                </div>
+
+                <br />
+                <span id="ReleaseId">(Release ID: 1890272)</span>
+                <span id="lblViews">Visitor Counter : 36007</span>
+                <div>
+                    
+                </div>
+                
+
+                <span id="lblRefPhoto"></span>
+
+                <div class="BackgroundRelease">
+                    
+                </div>
+                <div>
+                    
+                </div>
+                <div class="ReleaseLang">Read this release in: 
+                
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890545' target="_blank">
+                            Telugu </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890390' target="_blank">
+                            Kannada </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890371' target="_blank">
+                            Malayalam </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890618' target="_blank">
+                            Urdu </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890409' target="_blank">
+                            हिन्दी </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890477' target="_blank">
+                            Marathi </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890304' target="_blank">
+                            Gujarati </a>
+                    
+                        ,
+                    
+                        <a href='https://pib.gov.in/PressReleasePage.aspx?PRID=1890300' target="_blank">
+                            Tamil </a>
+                    
+                </div>
+
+                <div class="RelTag">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <div class="clear">
+                </div>
+
+                <!-- DBIM 3.0 Option 4: Separator Line with Left Share Rail & Right Reading Metrics -->
+                <div class="pr-share pr-share--footer" role="region" aria-label="Share and reading details">
+                    <div class="pr-share__left">
+                        <span class="pr-share__label" aria-hidden="true">Share</span>
+                        <ul class="pr-share__list">
+                            <li><a class="pr-share__btn pr-share__btn--facebook"
+                                href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1890272"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on Facebook">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-facebook" xlink:href="#icon-facebook"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--twitter"
+                                href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1890272"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on X">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-twitter" xlink:href="#icon-twitter"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--whatsapp"
+                                href="https://api.whatsapp.com/send?text=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1890272"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on WhatsApp">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-whatsapp" xlink:href="#icon-whatsapp"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--linkedin"
+                                href="https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1890272"
+                                target="_blank" rel="noopener noreferrer"
+                                aria-label="Share on LinkedIn">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-linkedin" xlink:href="#icon-linkedin"></use>
+                                </svg>
+                            </a></li>
+                            <li><a class="pr-share__btn pr-share__btn--mail"
+                                href="mailto:?subject=Press+release+from+PIB&amp;body=https%3a%2f%2fpib.gov.in%2fPressReleasePage.aspx%3fPRID%3d1890272"
+                                aria-label="Share by email">
+                                <svg class="dbim-icon dbim-icon-24" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <use href="#icon-mail" xlink:href="#icon-mail"></use>
+                                </svg>
+                            </a></li>
+                        </ul>
+                    </div>
+                    <div class="pr-reading-meta" id="prReadingMeta" aria-label="Reading statistics">
+                        <span class="pr-reading-meta__item">
+                            <!-- Modern Document / Word Count Icon -->
+                            <svg class="pr-reading-meta__icon" width="18" height="18" viewbox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+                                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+                            </svg>
+                            <span id="prWordCount">-- words</span>
+                        </span>
+
+                        <span class="pr-reading-meta__divider" aria-hidden="true">|</span>
+
+                        <span class="pr-reading-meta__item">
+                            <!-- Modern Precision Clock / Read Time Icon -->
+                            <svg class="pr-reading-meta__icon" width="18" height="18" viewbox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                            </svg>
+                            <span id="prReadTime">-- min read</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div id="RelLink" class="RelLink">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <center>
+                    
+                </center>
+            </div>
+
+            <div id="update12">
+	
+                    
+                    <input type="hidden" name="Hidden" id="Hidden" />
+                    <div id="P_CategoryManagement" class="ModalWindow" style="border-width:0px;height:60%;width:60%;overflow:auto;display: none">
+		
+                        <div>
+                            <input type="image" name="btnClose" id="btnClose" src="images/close_flat_icon.png" />
+                        </div>
+                        <div id="description">
+                        </div>
+                        <div class="text-center">
+                            <h2>
+                                
+                                <br>
+                                
+                            </h2>
+                        </div>
+                        <br />
+                        <div class="clear">
+                        </div>
+                        
+                    
+	</div>
+                
+</div>
+        </div>
+
+        <div id="PdfDiv" style="display: none;">
+            <table width="100%">
+                <tr>
+                    <td style="font-weight: 200; text-align: center">
+                        Ministry of Consumer Affairs, Food & Public Distribution
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                            Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: center; font-size: 30px;">
+                            
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="text-align: center; font-size: 14px;">
+                            Posted On:
+                                          11 JAN 2023 2:24PM by PIB Delhi
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 200; text-align: left; font-size: 16px;">
+                            <p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Cabinet led by Hon’ble Prime Minister Shri Narendra Modi had approved new integrated food security scheme for providing free foodgrains to Antodaya Ann Yojna (AAY) & Primary Household (PHH) beneficiaries, to be rolled out from 1<sup>st</sup> January 2023. New scheme has been named as Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY).  Implementation of the new scheme has started from 1<sup>st</sup> January 2023, benefitting more than 80 crore poor and poorest of poor people. </span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Keeping in view welfare of the beneficiaries and in order to maintain uniformity across the States, free foodgrains will be provided under PMGKAY for the year 2023 to all PHH and AAY beneficiaries, as per entitlement under NFSA. The integrated scheme will strengthen the provisions of NFSA, 2013 in terms of accessibility, affordability and availability of foodgrains for the poor.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">For effective and uniform implementation of NFSA 2013, PMGKAY will subsume the two subsidy schemes of Department of Food & Public Distribution (a) Food Subsidy to FCI (b) Food Subsidy for decentralized procurement states dealing with procurement, allocation and delivery of free foodgrains to the states under NFSA.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Necessary steps have already been taken for smooth implementation of the PMGKAY in the field, i.e. necessary notification has been issued for making price of foodgrains zero for AAY and PHH beneficiaries, resolution of technical issues at Fair Price Shops (FPS), advisory related to margin to the Fair Price Shop Dealers, zero prices in the print receipts given to beneficiaries etc.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">Officers of the Department of Food & Public Distribution and FCI are regularly interacting with State Government officers for smooth roll out of new scheme in the field.</span></span></p>
+
+<p style="text-align:justify"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">The Central Government will spend more than Rs 2 lakh crore in 2023 as food subsidy under NFSA and other welfare schemes, to remove the financial burden of the poor and the poorest of the poor.</span></span></p>
+
+<p style="text-align:center"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:16px">*****</span></span></p>
+
+<p><span style="font-family:Times New Roman,Times,serif"><strong><span style="font-size:16px">AD/NS</span></strong></span></p>
+
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                        <div style="font-weight: 100; text-align: left; font-size: 16px;">
+                            (Release ID: 1890272)
+                        </div>
+                        <div style="height: 30px; width: 100%;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 200; text-align: center; font-size: 24px;"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="clearfix">
+        </div>
+
+        <div class="section1">
+            <div id="frst_t">
+                <div id="arr_rm"><div class='sticky-social_mb'><ul class='social_mb'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272&text=Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”&body=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272&title=Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+            </div>
+            <div id="second_t">
+                <div id="sndr_rm"><div class='sticky-social'><ul class='social'><a href='http://www.facebook.com/share.php?u=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272' target='_blank'><li class='fb_b'   ></li></a><a href='https://twitter.com/intent/tweet?url=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272&text=Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”' target='_blank'><li class='twitter_r'  > </li></a><a href='https://api.whatsapp.com/send?text=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272' target='_blank'><li class='whatsapp_r'  ></li></a><a href='https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”&body=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272&ui=2&tf=1&pli=1' title='Share by Email' target='_blank'><li class='fa-envelope_r' ></li></a><a href='https://www.linkedin.com/shareArticle?mini=true&url=https://pib.gov.in/PressReleasePage.aspx?PRID=1890272&title=Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”&summary=My%20favorite%20developer%20program&source=LinkedIn' target='_blank'><li class='fa-linkedin_r'  ></li></a></ul></div></div>
+            </div>
+        </div>
+        <input type="hidden" name="ltrTitlee" id="ltrTitlee" value="Centre names new integrated food security scheme launched from 1 January 2023 as “Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY)”" />
+        <input type="hidden" name="ltrSubtitlee" id="ltrSubtitlee" />
+        <input type="hidden" name="ltrDescriptionn" id="ltrDescriptionn" value="&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Cabinet led by Hon’ble Prime Minister Shri Narendra Modi had approved new integrated food security scheme for providing free foodgrains to Antodaya Ann Yojna (AAY) &amp; Primary Household (PHH) beneficiaries, to be rolled out from 1st January 2023. New scheme has been named as Pradhan Mantri Garib Kalyan Ann Yojana (PMGKAY).  Implementation of the new scheme has started from 1st January 2023, benefitting more than 80 crore poor and poorest of poor people. &lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Keeping in view welfare of the beneficiaries and in order to maintain uniformity across the States, free foodgrains will be provided under PMGKAY for the year 2023 to all PHH and AAY beneficiaries, as per entitlement under NFSA. The integrated scheme will strengthen the provisions of NFSA, 2013 in terms of accessibility, affordability and availability of foodgrains for the poor.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>For effective and uniform implementation of NFSA 2013, PMGKAY will subsume the two subsidy schemes of Department of Food &amp; Public Distribution (a) Food Subsidy to FCI (b) Food Subsidy for decentralized procurement states dealing with procurement, allocation and delivery of free foodgrains to the states under NFSA.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Necessary steps have already been taken for smooth implementation of the PMGKAY in the field, i.e. necessary notification has been issued for making price of foodgrains zero for AAY and PHH beneficiaries, resolution of technical issues at Fair Price Shops (FPS), advisory related to margin to the Fair Price Shop Dealers, zero prices in the print receipts given to beneficiaries etc.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>Officers of the Department of Food &amp; Public Distribution and FCI are regularly interacting with State Government officers for smooth roll out of new scheme in the field.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:justify&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>The Central Government will spend more than Rs 2 lakh crore in 2023 as food subsidy under NFSA and other welfare schemes, to remove the financial burden of the poor and the poorest of the poor.&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p style=&quot;text-align:center&quot;>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;span style=&quot;font-size:16px&quot;>*****&lt;/span>&lt;/span>&lt;/p>
+
+&lt;p>&lt;span style=&quot;font-family:Times New Roman,Times,serif&quot;>&lt;strong>&lt;span style=&quot;font-size:16px&quot;>AD/NS&lt;/span>&lt;/strong>&lt;/span>&lt;/p>
+" />
+        <script type="text/javascript">
+                  var mPlayer = document.getElementById("background_music");
+                  var mPlayAction = document.getElementById("playbutton");
+                  var isPlaying = false;
+
+                  function playAudio() {
+                        mPlayer.play();
+                        isPlaying = true;
+                        document.getElementById('stopA').style.display = "block";
+                        document.getElementById('playA').style.display = "none";
+                  }
+
+                  function pauseAudio() {
+                        mPlayer.pause();
+                        isPlaying = false;
+                        document.getElementById('playA').style.display = "block";
+                        document.getElementById('stopA').style.display = "none";
+                  }
+        </script>
+        <script type="text/javascript">
+                  var synth = window.speechSynthesis;
+
+                  function CleanHtml(html) {
+                        html = html.replace(/<script[\s\S]*?<\/script>/gi, '');
+                        return html;
+                  }
+                  function stripHtml(html) {
+                        let tmp = document.createElement("DIV");
+                        tmp.innerHTML = CleanHtml(html);
+                        return tmp.textContent || tmp.innerText || "";
+                  }
+        </script>
+        <script type="text/javascript">
+                  $(document).ready(function () {
+                        $("table").each(function () {
+                              if (!$(this).closest(".table-responsive").length) {
+                                    $(this).wrap("<div class='table-responsive'></div>");
+                              }
+                        });
+
+                        var width = $(window).width();
+                        if (width < 768) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                        } else if (width < 991) {
+                              document.getElementById('frst_t').style.display = "block";
+                              document.getElementById('second_t').style.display = "none";
+                        } else if (width < 1199) {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                        } else {
+                              document.getElementById('frst_t').style.display = "none";
+                              document.getElementById('second_t').style.display = "block";
+                        }
+                  });
+        </script>
+        <style type="text/css">
+            @media print {
+                .sticky-social, .sticky-social_mb, .pull-right, #printPDF {
+                    display: none !important;
+                }
+            }
+
+            .f_vl {
+                padding-right: 30px;
+                font-size: 17px;
+                cursor: pointer;
+            }
+
+            .log_oo {
+                display: flex;
+                justify-content: space-between;
+            }
+
+                .log_oo img {
+                    width: 150px;
+                }
+
+            .sticky-social_mb {
+                position: fixed;
+                bottom: 0px;
+                padding: 0px;
+                margin: 0px;
+                width: 100%;
+            }
+
+            .social_mb {
+                list-style: none;
+                display: flex;
+                width: 100%;
+                margin-bottom: -8px;
+            }
+
+                .social_mb a {
+                    padding: 8px 0px;
+                    font-size: 30px;
+                    transition: all 0.8s ease-in-out;
+                    width: 20% !important;
+                    text-align: center;
+                }
+        </style>
+        <style type="text/css">
+            .section1 {
+                position: relative;
+                padding: 10px 0px;
+                width: 100%;
+            }
+
+            .sticky-social {
+                position: fixed;
+                top: 20px;
+                left: 0px;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            .social {
+                list-style: none;
+            }
+
+                .social a li {
+                    padding: 8px 12px;
+                    font-size: 25px;
+                    transition: all 0.8s ease-in-out;
+                }
+
+                    .social a li:hover {
+                        margin-right: -30px;
+                        box-shadow: 2px 5px 10px grey;
+                    }
+
+                        .social a li:hover .fa {
+                            margin-left: 20px;
+                        }
+
+            .fb_b {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .twitter_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .whatsapp_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .fa-envelope_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+
+            .fa-linkedin_r {
+                background-color: var(--dbim-key, #0F5757);
+            }
+        </style>
+        <style type="text/css">
+            @media only screen and (max-device-width: 767px) {
+                p span img {
+                    max-width: 90% !important;
+                    height: auto !important;
+                }
+
+                p img {
+                    max-width: 90% !important;
+                    height: auto !important;
+                }
+
+                h2 {
+                    font-size: var(--dbim-h2, 20px);
+                    font-weight: 600 !important;
+                }
+
+                h3 {
+                    font-size: var(--dbim-h3, 16px);
+                    font-weight: 600 !important;
+                }
+            }
+        </style>
+        <style type="text/css">
+            .film-roll-badge {
+                position: absolute;
+                top: 82%;
+                right: 20px;
+                width: 230px;
+                height: 70px;
+                background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 18px, var(--dbim-text, #150202) 18px, var(--dbim-text, #150202) 36px );
+                border-top: 8px solid var(--dbim-green-key, #0F5757);
+                border-bottom: 8px solid var(--dbim-green-key, #0F5757);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                animation: moveFilm 8s linear infinite;
+                z-index: 10;
+            }
+
+                .film-roll-badge::before,
+                .film-roll-badge::after {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 10px;
+                    background: repeating-linear-gradient( to right, var(--dbim-green-key, #0F5757) 0px, var(--dbim-green-key, #0F5757) 10px, #fff 10px, #fff 20px );
+                    left: 0;
+                    z-index: 2;
+                }
+
+                .film-roll-badge::before {
+                    top: -4px;
+                }
+
+                .film-roll-badge::after {
+                    bottom: -4px;
+                }
+
+            .film-roll-inner {
+                position: relative;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: flicker 2s infinite ease-in-out;
+            }
+
+            .countdown-text {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #fff;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.4), 0 0 10px #000;
+                white-space: nowrap;
+            }
+
+            @keyframes moveFilm {
+                0% {
+                    background-position: 0 0;
+                }
+
+                100% {
+                    background-position: 120px 0;
+                }
+            }
+
+            @keyframes flicker {
+                0%, 100% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.9;
+                }
+
+                25% {
+                    opacity: 0.95;
+                }
+
+                75% {
+                    opacity: 0.85;
+                }
+            }
+
+            @media (max-width: 1500px) {
+                .film-roll-badge {
+                    top: 68%;
+                    right: 18px;
+                    height: 65px;
+                    font-size: 0.85rem;
+                }
+
+                .press-section {
+                    margin-top: 35px;
+                }
+            }
+
+            @media (max-width: 992px) {
+                .film-roll-badge {
+                    top: 52%;
+                    right: 10px;
+                    width: 200px;
+                    height: 60px;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .film-roll-badge {
+                    top: 56%;
+                    right: 10px;
+                    width: 124px;
+                    height: 55px;
+                }
+
+                .countdown-text {
+                    font-size: 0.9rem;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .film-roll-badge {
+                    top: 59%;
+                    right: 5px;
+                    height: 50px;
+                }
+
+                .countdown-text {
+                    font-size: 0.85rem;
+                }
+            }
+        </style>
+        <script type="text/javascript">
+                  const festivalStart = new Date("2025-11-20T00:00:00").getTime();
+                  const festivalEnd = new Date("2025-11-28T23:59:59").getTime();
+                  const countdownElement = document.getElementById("countdown");
+
+                  if (countdownElement) {
+                        const interval = setInterval(() => {
+                              const now = new Date().getTime();
+
+                              if (now < festivalStart) {
+                                    const diff = festivalStart - now;
+                                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                                    countdownElement.innerHTML = `${days} Day${days !== 1 ? 's' : ''} ${hours} Hour${hours !== 1 ? 's' : ''} to go`;
+                              } else if (now >= festivalStart && now <= festivalEnd) {
+                                    const dayNumber = Math.floor((now - festivalStart) / (1000 * 60 * 60 * 24)) + 1;
+                                    countdownElement.innerHTML = `56th IFFI - Day ${dayNumber}`;
+                              } else {
+                                    countdownElement.innerHTML = `✨ IFFI closes but never ends…`;
+                                    const elements = document.querySelectorAll('.film-roll-badge');
+                                    elements.forEach(el => el.style.width = "350px");
+                                    clearInterval(interval);
+                              }
+                        }, 1000);
+                  }
+        </script>
+        <script type="text/javascript">
+                  const miffStart = new Date("2026-06-15T00:00:00").getTime();
+                  const miffEnd = new Date("2026-06-15T23:59:59").getTime();
+                  const miffElement = document.getElementById("miff");
+
+                  if (miffElement) {
+                        const miffInterval = setInterval(() => {
+                              const now = new Date().getTime();
+
+                              if (now < miffStart) {
+                                    const diff = miffStart - now;
+                                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    miffElement.innerHTML = `${days} Day${days === 1 ? '' : 's'} to MIFF ...`;
+                              } else if (now >= miffStart && now <= miffEnd) {
+                                    const dayNumber = Math.floor((now - miffStart) / (1000 * 60 * 60 * 24)) + 1;
+                                    miffElement.innerHTML = `19th MIFF - Day ${dayNumber}`;
+                              } else {
+                                    miffElement.innerHTML = `✨ MIFF concludes, cinema lives on...`;
+                                    document.querySelectorAll('.film-roll-badge').forEach(el => el.style.width = "350px");
+                                    clearInterval(miffInterval);
+                              }
+                        }, 1000);
+                  }
+        </script>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {$get("sc_HiddenField").value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ModalPopupBehavior, {"BackgroundCssClass":"modalBackground","PopupControlID":"P_CategoryManagement","dynamicServicePath":"/PressReleasePage.aspx","id":"mpe"}, null, null, $get("Hidden"));
+});
+//]]>
+</script>
+<input type="hidden" name="__ncforminfo" value="hTmwEd_1A1v0Vcf4v1FUher84z_G5WDot4lJD0XZMheSSSPHhq12mzyOiOeaM5QRlLS8Qy167hrWRn1tCR_B9oWhqU15thphYWVAbgOohPvgLpJznxnLtw=="/></form>
+    
+
+<script type="application/json" id="pibConsentConfig">{"ga4Id":"G-Q414Y0X6EE,G-QJJ6LZ8LHV","policyUrl":"/CookiePolicy.aspx","text":{"bannerLabel":"Cookie consent","title":"Cookies on this website","body":"We use essential cookies to make this website work. We also set analytics cookies when you arrive, so we can see how the site is used and improve it - you can switch these off below or at any time from the Cookie Policy page. Cookies from embedded social media content are set only if you allow them.","policyLink":"Read our Cookie Policy","accept":"Accept all","reject":"Reject optional","customize":"Customise","prefsTitle":"Cookie preferences","prefsIntro":"Choose which cookies this website may set. Essential cookies cannot be switched off because the site does not work without them. Analytics cookies are on unless you turn them off. Social media cookies stay off until you allow them. You can change these choices at any time from the Cookie Policy page.","essentialName":"Essential cookies","essentialDesc":"Needed for the site to function. These remember your session, your language and region, your text size and colour theme, and verify the security check on forms. They are always on.","analyticsName":"Analytics cookies","analyticsDesc":"Help us understand how visitors use the site - which pages are read and how long people stay - so it can be improved. The information is collected in a form that does not directly identify you. These are on when you arrive; switching them off here stops them and deletes the ones already set.","socialName":"Social media cookies","socialDesc":"Set by content embedded from X, Facebook and YouTube, such as timelines and videos. These platforms may use them to track you across websites. They stay off until you allow them.","save":"Save preferences","cancel":"Cancel"}}</script>
+<script type="text/javascript" src='/js/consent.js?v=10'></script>
+
+<script type="text/javascript" src='/js/consent-embeds.js?v=10'></script>
+
+
+    <!-- Minimal O(N) Time and O(1) Auxiliary Space Word Count & Read Time Calculation -->
+    <script type="text/javascript">
+            (function () {
+                  function calculateReadingStats() {
+                        var bodyEl = document.getElementById("pibReleaseBody");
+                        if (!bodyEl) return;
+
+                        // textContent extracts text without triggering expensive layout/reflow computations
+                        var text = bodyEl.textContent || "";
+                        var words = 0;
+                        var inWord = false;
+
+                        // O(N) single pass character code scan: achieves O(1) space with zero array allocations
+                        for (var i = 0, len = text.length; i < len; i++) {
+                              var code = text.charCodeAt(i);
+                              // Delimits on ASCII whitespace, control characters, tabs, newlines, and non-breaking spaces (160)
+                              if (code <= 32 || code === 160) {
+                                    inWord = false;
+                              } else if (!inWord) {
+                                    inWord = true;
+                                    words++;
+                              }
+                        }
+
+                        // Standard 250 WPM reading speed (e.g., 612 words yields 2 min read)
+                        var minutes = Math.max(1, Math.round(words / 250));
+
+                        var elWords = document.getElementById("prWordCount");
+                        var elTime = document.getElementById("prReadTime");
+
+                        if (elWords) elWords.textContent = words + (words === 1 ? " word" : " words");
+                        if (elTime) elTime.textContent = minutes + " min read";
+                  }
+
+                  if (document.readyState === "loading") {
+                        document.addEventListener("DOMContentLoaded", calculateReadingStats);
+                  } else {
+                        calculateReadingStats();
+                  }
+            })();
+    </script>
+
+    <script type="text/javascript">
+            (function () {
+                  try {
+                        if (window.self === window.top) { return; }
+                  } catch (e) { return; }
+                  var s = document.createElement("style");
+                  s.textContent = ".sticky-social, .sticky-social_mb { display: none !important; }";
+                  (document.head || document.documentElement).appendChild(s);
+            }());
+    </script>
+</body>
+</html>

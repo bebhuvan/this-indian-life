@@ -673,6 +673,128 @@ def main():
         catalog_entries,
     )
 
+    # --- November 2026 rewrite: charts added by data/stories/poverty-debate/story-design.md ---
+
+    # India against the world and Sub-Saharan Africa at $3.00, 1990-2026. World and region
+    # rows are the report's own aggregates (chapter 1 fig1, fig4 3.00); India is Country_FGT.
+    f1 = xl1.parse("fig1")
+    f4 = xl1.parse("fig4 3.00")
+    world = f1["headcount300_actual"].fillna(f1["headcount300_nowc"])
+    ssa = f4["headcountSSF_actual"].fillna(f4["headcountSSF_nowc"]).fillna(f4["headcountSSF_proj"]) * 100
+    for stem, title, years, vals in [
+        ("cmp300_world", "World share of people below $3.00/day (2021 PPP), 1990-2026", f1["year"], world),
+        ("cmp300_ssa", "Sub-Saharan Africa share of people below $3.00/day (2021 PPP), 1990-2026", f4["year"], ssa),
+    ]:
+        obs = [{"date": str(int(y)), "value": round(float(v), 2)} for y, v in zip(years, vals) if 1990 <= int(y) <= 2026 and pd.notna(v)]
+        write_artifact(f"poverty-debate.pov26.{stem}.IN.json",
+                       make_series(f"pov26.{stem}.IN", title, "% of population", obs, f"WB_3PR_CH1_{stem.upper()}",
+                                   metadata={"basis": "Report aggregates; 2025-2026 are nowcasts."}), catalog_entries)
+    obs = [o for o in obs_ln_300 if int(o["date"]) <= 2026]
+    write_artifact("poverty-debate.pov26.cmp300_india.IN.json",
+                   make_series("pov26.cmp300_india.IN", "India share of people below $3.00/day (2021 PPP), 1990-2026", "% of population", obs,
+                               "WB_3PR_CH1_FGT_HEADCOUNT300", metadata={"basis": "Country_FGT lineup; after 2023 the values are estimates, not surveys."}), catalog_entries)
+
+    # Share of people below $4.20 by state, same GSAP sheet and map geometry as the Prosperity Gap map.
+    p420_regions = [{"name": reg["name"], "value": round(float(gsap_by_name[reg["name"]]["poor420_ln"]) * 100, 1), "path": reg["path"]}
+                    for reg in base_map["regions"]]
+    write_artifact("poverty-debate.pov26.state_poor420_2023.IN.json", {
+        "schemaVersion": 1, "artifactType": "table", "indicatorId": "pov26.state_poor420_2023.IN",
+        "title": "Share of people below $4.20 a day (2021 PPP) by Indian state and union territory, 2023 reference year",
+        "sourceId": "wb_3pr_2026", "sourceIndicatorId": "WB_3PR_CH1_GSAP_2023_POOR420_LN", "sourceUrl": WB_3PR_URL,
+        "unit": "% of population", "geography": {"type": "subnational", "id": "IND-states", "name": "India states"},
+        "fetchedAt": FETCHED_AT, "dimensions": [],
+        "rows": [{"state": r["name"], "value": r["value"]} for r in sorted(p420_regions, key=lambda r: -r["value"])],
+        "viewBox": base_map["viewBox"], "min": min(r["value"] for r in p420_regions), "max": max(r["value"] for r in p420_regions),
+        "regions": p420_regions,
+        "metadata": {"basis": "GSAP Fall 2026, sheet Data 2023, poor420_ln x 100; lineup to the 2023 reference year from HCES 2023-24."},
+    }, catalog_entries)
+
+    # India's share of the world's poor at each line, beside its share of world population.
+    write_artifact("poverty-debate.pov26.india_share_world_poor_2024.IN.json",
+                   make_table("pov26.india_share_world_poor_2024.IN", "India's share of the world's poor at each line in 2024, beside its share of world population",
+                              "% of world total",
+                              [{"label": lab, "poorShare": r["india_global_share_pct"], "popShare": r["india_pop_share_pct"]}
+                               for lab, r in zip(["Below $3 a day", "Below $4.20 a day", "Below $8.30 a day"], global_share_rows[:3])],
+                              "WB_3PR_CH1_FIG6_AND_CH2_FIG10",
+                              metadata={"basis": "Poor shares: chapter 1 fig6, 2024. Population share: chapter 2 fig10_2026 (2026)."}), catalog_entries)
+
+    # The PPP revision for the latest survey only: the three lines, old and new price base.
+    write_artifact("poverty-debate.pov26.ppp_revision_2023.IN.json",
+                   make_table("pov26.ppp_revision_2023.IN", "India's 2023-24 poverty rates under the 2017 and 2021 PPP lines", "% of population",
+                              [r for r in ppp_paradox_rows if str(r["benchmark"]).startswith("2023")], "PIP_20260922_PPP2017_VS_PPP2021_2023",
+                              source_url=PIP_URL), catalog_entries)
+
+    # What poor and better-off workers do (2024, $8.30 line), from the chapter 4 files.
+    write_artifact("poverty-debate.pov26.worker_job_type_2024.IN.json",
+                   make_table("pov26.worker_job_type_2024.IN", "Self-employment and farm work among workers in poor and better-off Indian households, 2024 ($8.30/day line)",
+                              "% of workers", worker_profile_rows[:2], "WB_3PR_CH4_FIG4D_2B_3B"), catalog_entries)
+
+    # Beyond money: six measures, each with its own population and year.
+    keep = ["Children under 5 stunted", "Facing financial hardship", "Deprived of limited-standard sanitation",
+            "World Bank Multidimensional Poverty Measure", "Lower-middle-income monetary poverty", "Monetary extreme poverty at $3.00/day (WB MPM / PIP, HCES 2022)"]
+    write_artifact("poverty-debate.pov26.beyond_money.IN.json",
+                   make_table("pov26.beyond_money.IN", "Money poverty beside schooling, sanitation, child nutrition and health-spending hardship in India",
+                              "% of population", [r for r in cap_rows if any(r["label"].startswith(k) for k in keep)], "WB_3PR_MPM_AM26_AND_UHC_NFHS"),
+                   catalog_entries)
+
+    # Real wages against real GDP per person, 2014-15 = 100. Every deflator is on one base
+    # (MOSPI CPI 2012=100), so no linking factors; 2014-15 is the first full fiscal year of
+    # the Labour Bureau's November 2013 occupation classification. Only full 12-month years.
+    WAGE_DIR = ROOT / "data/raw/poverty-debate-wages-2026-11"
+    for r in json.loads((WAGE_DIR / "manifest.json").read_text())["files"]:
+        assert hashlib.sha256((WAGE_DIR / r["path"]).read_bytes()).hexdigest() == r["sha256"], r["path"]
+
+    def fy(d):
+        s = d.year if d.month >= 4 else d.year - 1
+        return f"{s}-{str(s + 1)[2:]}"
+
+    def full_fy_mean(s):
+        g = s.groupby(s.index.map(fy))
+        n = g.size()
+        return g.mean()[n == 12]
+
+    def cpi(name):
+        o = json.loads((SERIES_DIR / f"{name}.json").read_text())["observations"]
+        return full_fy_mean(pd.Series({pd.Timestamp(x["date"] + "-01"): x["value"] for x in o if x.get("value") is not None}))
+
+    cpi_rural, cpi_comb = cpi("mospi.IN.prices.cpi.rural.general.index"), cpi("mospi.IN.prices.cpi.combined.general.index")
+    rw = pd.read_csv(WAGE_DIR / "dbie-664-rural-wage-rates-men.csv.gz", sep=";", dtype=str)
+    rw = rw[rw["State Name"].str.strip() == "ALL INDIA"]
+    rw["d"] = pd.to_datetime(rw["Time Date"])
+
+    def rural(occ):
+        s = rw[rw["Occ Description"].str.strip() == occ].drop_duplicates("d").set_index("d")["Wages In Rupees"].astype(float)
+        return full_fy_mean(s)
+
+    asi = pd.read_csv(WAGE_DIR / "dbie-155-asi-principal-characteristics.csv.gz", sep=";", dtype=str)
+    asi = asi[asi["Unit Description"] == "NUMBER"]
+
+    def asi_item(item):
+        return asi[asi["Item"].str.strip() == item].groupby(asi["Fiscal Year"].str.strip())["Aggragate Value"].first().astype(float)
+
+    gdp_o = json.loads((SERIES_DIR / "mospi.IN.econ.nas.per_capita_gdp_real.json").read_text())["observations"]
+    gdp = pd.Series({fy(pd.Timestamp(x["date"]) - pd.Timedelta(days=1)): x["value"] for x in gdp_o})
+    wage_series = [
+        ("realwage_gdp_pcap", "Real GDP per person (2011-12 prices)", gdp, "MOSPI_NAS_PER_CAPITA_GDP_REAL", "https://esankhyiki.mospi.gov.in/macroindicators?product=nas"),
+        ("realwage_rural_farm", "Rural general farm labourer, men, real daily wage (CPI-Rural)",
+         rural("General Agricultural Labourers including Watering & Irrigation workers etc.") / cpi_rural, "RBI_DBIE_664_GEN_AG_LAB_ALL_INDIA", "https://data.rbi.org.in/DBIE/"),
+        ("realwage_rural_nonfarm", "Rural non-farm labourer, men, real daily wage (CPI-Rural)",
+         rural("Nonagricultural labourers (Including porters, loaders)") / cpi_rural, "RBI_DBIE_664_NONAG_LAB_ALL_INDIA", "https://data.rbi.org.in/DBIE/"),
+        ("realwage_rural_construction", "Rural construction worker, men, real daily wage (CPI-Rural)",
+         rural("Construction Workers (for roads, dams, industrial & project construction work & well diggers)") / cpi_rural, "RBI_DBIE_664_CONSTRUCTION_ALL_INDIA", "https://data.rbi.org.in/DBIE/"),
+        ("realwage_factory", "Factory workers' real daily wage, ASI wages per manday (CPI-Combined)",
+         asi_item("11. Wages to workers") / asi_item("7. Mandays-workers (In Thousand)") / cpi_comb, "RBI_DBIE_155_ASI_WAGES_PER_MANDAY", "https://data.rbi.org.in/DBIE/"),
+    ]
+    wage_years = [f"{y}-{str(y + 1)[2:]}" for y in range(2014, 2025)]
+    for stem, title, s, src_id, url in wage_series:
+        s = s.dropna()
+        obs = [{"date": y, "value": round(float(100 * s[y] / s["2014-15"]), 1)} for y in wage_years if y in s.index]
+        write_artifact(f"poverty-debate.pov26.{stem}.IN.json",
+                       make_series(f"pov26.{stem}.IN", f"{title}, index 2014-15 = 100", "index, 2014-15 = 100", obs, src_id, source_url=url,
+                                   metadata={"deflator": "MOSPI CPI 2012=100, fiscal-year mean of 12 monthly values" if stem != "realwage_gdp_pcap" else "NAS constant 2011-12 prices",
+                                             "years": "Fiscal years April-March; incomplete rural years 2019-20 and 2020-21 are omitted, not interpolated."}),
+                       catalog_entries)
+
     # Write catalog manifest
     CATALOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     CATALOG_PATH.write_text(stable_json(catalog_entries), encoding="utf-8")

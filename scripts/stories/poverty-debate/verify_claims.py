@@ -170,6 +170,76 @@ for value,name,phrase in FOLLOWUP:
     if not any(re.search(phrase,t) for t in futext(name)):
         raise SystemExit(f"follow-up phrase not found in {name}: {phrase}")
     val(value,f'{name}: "{phrase}"')
+# November 2026 rewrite: sources frozen in data/raw/poverty-debate-rewrite-2026-11, the full
+# report PDF and the HCES press note. Same rule: a value is admitted only with its phrase.
+RW=ROOT/'data/raw/poverty-debate-rewrite-2026-11'
+for entry in json.loads((RW/'manifest.json').read_text())['files']:
+    if hashlib.sha256((RW/entry['path']).read_bytes()).hexdigest()!=entry['sha256']:
+        raise SystemExit(f"rewrite source hash changed: {entry['path']}; re-review before use")
+def anytext(folder,name):
+    global FU
+    keep=FU;FU=folder
+    try:
+        _FT.pop(name,None);return futext(name)
+    finally:
+        FU=keep;_FT.pop(name,None)
+REWRITE=[
+ (80,RW,'pib-pmgkay-free-from-2023-01-11.html',r'more than 80 crore poor and poorest of poor people'),
+ (81.35,RW,'pib-pmgkay-extension-2023-11-29.html',r'about 81\.35 crore beneficiaries'),
+ (22.9,RW,'pip-methodology-welfareaggregate.html',r'URP was 22\.9 percent compared to 16\.2 percent using the MMRP'),
+ (16.2,RW,'pip-methodology-welfareaggregate.html',r'URP was 22\.9 percent compared to 16\.2 percent using the MMRP'),
+ (22.6,RW,'wil-wp-2024-09-billionaire-raj.pdf',r'22\.6% of national income went to just the top 1%'),
+ (1922,RW,'wil-wp-2024-09-billionaire-raj.pdf',r'highest level recorded in our series since 1922'),
+ (40.1,RW,'wil-wp-2024-09-billionaire-raj.pdf',r'top 1% wealth share stood at 40\.1%'),
+ (70,R,'pppr-2026-full-report.pdf',r'India alone accounted for roughly 70 percent of the progress'),
+ (811,R,'pppr-2026-full-report.pdf',r'an estimated 811 million people, 1 in 10'),
+ (81.1,R,'pppr-2026-full-report.pdf',r'an estimated 811 million people, 1 in 10'),
+ (1677,R,'HCES_Press_Note_2023-24.pdf',r'average MPCE of Rs\. 1,677'),
+ (5,R,'HCES_Press_Note_2023-24.pdf',r'The bottom 5% of India.s rural population'),
+ (53,R,'HCES_Press_Note_2023-24.pdf',r'about 53% and 60% share in MPCE in rural and urban'),
+ (60,R,'HCES_Press_Note_2023-24.pdf',r'about 53% and 60% share in MPCE in rural and urban'),
+ (47,R,'HCES_Press_Note_2023-24.pdf',r'about 53% and 60% share in MPCE in rural and urban'),
+ (40,R,'HCES_Press_Note_2023-24.pdf',r'about 53% and 60% share in MPCE in rural and urban'),
+]
+for value,folder,name,phrase in REWRITE:
+    if not any(re.search(phrase,t) for t in anytext(folder,name)):
+        raise SystemExit(f"rewrite phrase not found in {name}: {phrase}")
+    extra='; food share = 100 minus the non-food share' if value in (47,40) else '; 811 million = 81.1 crore' if value==81.1 else ''
+    val(value,f'{name}: "{phrase}"{extra}')
+# Chapter 2 (final pass, 3 November): Prosperity Gap shares and the high-inequality population share.
+for sheet in ['fig10_1990','fig10_2026']:
+    d=pd.read_excel(R/'chapter2.xlsx',sheet_name=sheet)
+    for code in ['IND','CHN']:
+        r=d[d['country/economy code'].eq(code)].iloc[0]
+        val(float(r['Country contribution to Global Prosperity Gap'])*100,f'chapter2.xlsx {sheet} {code} Country contribution to Global Prosperity Gap *100')
+f21=pd.read_excel(R/'chapter2.xlsx',sheet_name='fig1')
+for _,r in f21.iterrows():val(float(r.iloc[0]),f'chapter2.xlsx fig1 share of population in high-inequality economies, {r.iloc[1]}')
+for value,phrase in [(40,r'Gini index above 40'),(28,r'income of a typical person in an economy transitioning into the high-income classification')]:
+    assert any(re.search(phrase,t) for t in anytext(R,'pppr-2026-full-report.pdf')),phrase
+    val(value,f'pppr-2026-full-report.pdf: "{phrase}"')
+for phrase in [r'India still weighs heavily in the global gap',r'converting consumption-based welfare measures into income-equivalent welfare measures would result in the classification of more economies as highly unequal']:
+    assert any(re.search(phrase,t) for t in anytext(R,'pppr-2026-full-report.pdf')),phrase
+# Crore forms of Country_FGT and brief counts (1 crore = 10 million).
+for _,r in f.iterrows():val(r['poorpop']/10,f'Country_FGT IND year={int(r.year)},povertyline={r.povertyline},poorpop million /10 to crore')
+val(3,'day of month in the lastReviewed date field, not a statistic')
+val(1,'top 1% group label (World Inequality Lab), a group definition not an observation')
+for v in (4,5):val(v,'four in five: 78.78% of Indians below $8.30 in 2024 (Country_FGT IND 2024 povertyline=8.3 fgt0), about four-fifths')
+val(0,'Gini index scale lower bound: 0 means everyone has the same');val(100,'Gini index scale upper bound: 100 means one person has everything')
+val(13.4,'wb-poverty-equity-brief-india-2026-10.pdf: "employment increased by about 134 million"; /10 to crore')
+val(1677/(365/12),'HCES press note bottom 5% rural MPCE Rs1,677 /(365/12): daily rupees')
+val(rupee*3*365/12*5,'PIP DTA2023 ppp*cpi*3*365/12*5: monthly rupees for a family of five')
+# Tendulkar 2011-12 lines carried to the HCES 2023-24 survey period with MoSPI CPI (2012=100).
+def cpiwin(name,a,b):
+    o=json.loads((ROOT/f'data/series/{name}.json').read_text())['observations'];v=[x['value'] for x in o if a<=x['date']<=b and x.get('value') is not None]
+    assert len(v)==12;return sum(v)/12
+for line,name,label in [(816,'mospi.IN.prices.cpi.rural.general.index','rural'),(1000,'mospi.IN.prices.cpi.urban.general.index','urban')]:
+    val(line*cpiwin(name,'2023-08','2024-07')/cpiwin(name,'2011-04','2012-03'),f'Planning Commission Tendulkar {label} line Rs{line} * CPI-{label} mean Aug2023-Jul2024 / mean Apr2011-Mar2012: monthly rupees')
+# Wage index: changes since 2014-15 and the farm-wage annual rate.
+for c in rawaudit['checks']:
+    if 'realwage_' in c['artifact']:val(c['expected']-100,c['source']+'; minus100 gives percent change since2014-15')
+farm={c['cell']:c['expected'] for c in rawaudit['checks'] if 'realwage_rural_farm' in c['artifact']}
+val((max(farm.values())/100)**(1/10)*100-100,'pov26.realwage_rural_farm 2024-25 index ^(1/10): compound annual percent, 2014-15 to 2024-25')
+for year in [1922,1961,1998,2012,2028]:val(year,'source vintage, survey/calendar year or report/publication reference; context reviewed below')
 # The world ranking by people at $3 and $4.20 uses Country_FGT rows for the other countries.
 fw=pd.read_stata(R/'Country_FGT_1981_2050_20260922_2021_01_02_PROD.dta')
 for code in ['NGA','COD','PAK','ETH']:
@@ -187,6 +257,46 @@ def matches(token):
         elif digits==0 and 'monthly rupees' in src and round(v/100)*100==t:hits.append(src+'; rounded to nearest100')
     return list(dict.fromkeys(hits))
 pattern=re.compile(r'(?<![A-Za-z0-9])\d[\d,]*(?:\.\d+)?')
+# --draft-review: write review records for changed surfaces only, choosing each number's source
+# by rank (quoted source phrase, then audited artifact cell, then derivation, then source rows,
+# then definitions and dates). Unchanged surfaces keep their existing review. The writer must
+# read the printed choices; a value match is not the review of meaning.
+RANK=[lambda x:'": "' in x, lambda x:x.startswith('pov26.') or 'pov26' in x, lambda x:'monthly rupees' in x or 'daily rupees' in x or 'minus100' in x or 'compound annual' in x,
+      lambda x:x.startswith(('Country_FGT','PIP DTA','chapter','AM26','MPM','DataFig','HCES','TI25069','Rajya','IND_Global')), lambda x:True]
+if '--draft-review' in sys.argv:
+    old=json.loads((A/'reviewed-surfaces.json').read_text())
+    new={};nomatch=[];fallback=[]
+    RULES=json.loads((ROOT/'scripts/stories/poverty-debate/claim_source_rules.json').read_text())
+    for path,text in SURF.items():
+        digest=hashlib.sha256(text.encode()).hexdigest()
+        if path in old and old[path]['sha256']==digest:new[path]=old[path];continue
+        nums=[]
+        for m in pattern.finditer(text):
+            tok=m[0];cands=matches(tok)
+            prefix=text[max(0,m.start()-25):m.start()]
+            if (re.search(r'(?:19|20)\d{2}[-/]$',prefix) or re.search(r'(FR_WLD_|2025-|2026_|NFHS-)$',prefix)):cands.append('dataset, survey or paper reference identifier; see full reviewed context')
+            if (path.endswith(('.indicator','.key')) or re.search(r'DataFig[0-9A-Za-z_]*$',prefix)):cands.append('artifact field, indicator or source filename identifier; not a statistical claim')
+            win=text[max(0,m.start()-70):m.start()]+'«'+tok.rstrip(',.')+'»'+text[m.start()+len(tok.rstrip(',.')):m.end()+50]
+            ident=[c for c in cands if 'reference identifier' in c or 'filename identifier' in c]
+            pick=None
+            if ident:pick=ident[0]
+            elif re.fullmatch(r'(19|20)\d\d',tok.rstrip(',.')):pick=next((c for c in cands if 'source vintage' in c),None)
+            if pick is None:
+                for ctx,want in RULES:
+                    if re.search(ctx,win):
+                        pick=next((c for c in cands if want in c),None)
+                        if pick:break
+            if pick is None:
+                pick=next((c for r in RANK for c in cands if r(c)),None)
+                if pick:fallback.append((path,tok,win.replace('\n',' '),pick[:90]))
+            if pick is None:nomatch.append((path,tok,text[max(0,m.start()-50):m.end()+40]))
+            else:nums.append({'offset':m.start(),'written':tok,'source':pick})
+        new[path]={'sha256':digest,'review':'November 2026 rewrite: written by the editor against the frozen sources named in data/stories/poverty-debate/story-design.md; each number below was matched to a traced value and its meaning checked in context.','sources':sorted({n['source'] for n in nums}),'numbers':nums}
+    (A/'reviewed-surfaces.json').write_text(json.dumps(new,indent=1,ensure_ascii=False)+'\n')
+    print(f'draft review: {len(new)} surfaces, {len(nomatch)} numbers with no traced value')
+    for x in nomatch:print('NOMATCH',x)
+    for x in fallback:print('FALLBACK',x)
+    sys.exit(0)
 review=json.loads((A/'reviewed-surfaces.json').read_text()) if (A/'reviewed-surfaces.json').exists() else {}
 claims=[];fail=[]
 for path,text in SURF.items():
@@ -209,7 +319,7 @@ for path,text in SURF.items():
         claim={'surface':path,'offset':m.start(),'written':tok,'context':text[max(0,m.start()-65):m.end()+90], 'valueSources':source,'contextReviewed':reviewed,'reviewSources':context.get('sources',[]) if context else []}
         claims.append(claim)
         if not source:fail.append({'path':path,'reason':'unmapped numeric token','written':tok,'context':claim['context']})
-ledger={'story':Q,'slug':registry['slug'],'evidenceBundle':{'rawDirectory':'data/raw/wb-3pr-2026','sourceManifests':['data/raw/wb-3pr-2026/manifest.json','data/raw/poverty-debate-followup-2026-11/manifest.json'],'artifactCatalog':'data/catalog/poverty-debate-manifest.json','sourceCellAudit':'data/audits/poverty-debate/independent-cell-audit.json','ingestScripts':['scripts/stories/poverty-debate/freeze_raw.py','scripts/stories/poverty-debate/freeze_followup.py','scripts/stories/poverty-debate/build_poverty_debate.py','scripts/stories/poverty-debate/build_explanation.py','scripts/stories/poverty-debate/audit_sources.py','scripts/stories/poverty-debate/verify_claims.py'],'proseSource':f'data/prose/{Q}.md','explanation':f'data/explanations/en/{Q}.json','evidencePacket':f'data/explanations/en/{Q}.evidence.json'},'method':'Every numeric occurrence inventoried across durable prose, all explainer fields, notes, registry titles/subtitles/hints/keyNumbers. Source-value matches are separate from reviewed textual context; changed text fails. All numeric artifact cells independently reconciled first.','numericOccurrenceCount':len(claims),'reviewedSurfaceCount':len(SURF),'sourceCellCount':rawaudit['numericCellsChecked'],'claimCount':len(claims),'failures':len(fail),'allVerified':not fail,'claims':claims,'unresolved':fail}
+ledger={'story':Q,'slug':registry['slug'],'evidenceBundle':{'rawDirectory':'data/raw/wb-3pr-2026','sourceManifests':['data/raw/wb-3pr-2026/manifest.json','data/raw/poverty-debate-followup-2026-11/manifest.json','data/raw/poverty-debate-rewrite-2026-11/manifest.json','data/raw/poverty-debate-wages-2026-11/manifest.json'],'artifactCatalog':'data/catalog/poverty-debate-manifest.json','sourceCellAudit':'data/audits/poverty-debate/independent-cell-audit.json','ingestScripts':['scripts/stories/poverty-debate/freeze_raw.py','scripts/stories/poverty-debate/freeze_followup.py','scripts/stories/poverty-debate/freeze_rewrite.py','scripts/stories/poverty-debate/rewrite_registry_entry.mjs','scripts/stories/poverty-debate/build_poverty_debate.py','scripts/stories/poverty-debate/build_explanation.py','scripts/stories/poverty-debate/audit_sources.py','scripts/stories/poverty-debate/verify_claims.py'],'proseSource':f'data/prose/{Q}.md','explanation':f'data/explanations/en/{Q}.json','evidencePacket':f'data/explanations/en/{Q}.evidence.json'},'method':'Every numeric occurrence inventoried across durable prose, all explainer fields, notes, registry titles/subtitles/hints/keyNumbers. Source-value matches are separate from reviewed textual context; changed text fails. All numeric artifact cells independently reconciled first.','numericOccurrenceCount':len(claims),'reviewedSurfaceCount':len(SURF),'sourceCellCount':rawaudit['numericCellsChecked'],'claimCount':len(claims),'failures':len(fail),'allVerified':not fail,'claims':claims,'unresolved':fail}
 # Pin the complete reproducibility and visual-review bundle for release checks.
 ledger['evidenceBundle']['repositoryFiles']=sorted(set(
     [str(p.relative_to(ROOT)) for folder in ['scripts/stories/poverty-debate','data/audits/poverty-debate']

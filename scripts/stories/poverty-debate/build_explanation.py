@@ -21,41 +21,28 @@ def cid(title):
 
 
 SECTIONS = [
-    (
-        "Why is 'Has India ended extreme poverty?' the wrong question to ask in 2026?",
-        [
-            "India largely cleared the $3/day floor by 2024, yet 78.8% of the population still lives below the $8.30/day threshold",
-            "A hypothetical 10% real consumption loss lifts the $4.20 poverty share from 14.9% to 23.2%",
-            "Among Indians below $8.30, consumption averages 34.1% short of the line",
-            "The Prosperity Gap is 6.72 in Jharkhand and 3.16 in Goa",
-            "Young children are more likely to live below $8.30 a day in every state and union territory",
-        ],
-    ),
-    (
-        "How did a 2021 PPP price revision and a new survey questionnaire rewrite the numbers?",
-        [
-            "The 2021 PPP revision paradox: Updating global prices raised India's 2023 extreme poverty rate to 2.57% while cutting $4.20 poverty to 16.12%",
-            "Depending on survey adjustment and poverty line, India's 2022-23 poverty rate was anywhere between 2.35% and 25.9%",
-            "Free public foodgrain and welfare items raise measured rural spending by 3.0%, against 1.2% in urban India",
-            "The poorest surveyed tenth gained 13.1% in real consumption between the two comparable HCES rounds",
-            "National Accounts spending grew 4.49x since 1977 while survey mean grew 2.09x",
-        ],
-    ),
-    (
-        "Why do working Indians stay poor even when they work 44 hours a week?",
-        [
-            "Between 2003 and 2024, adult employment rates in poor Indian households fell to 58.3% while rising to 57.6% among the non-poor",
-            "Paid employees below $3/day work 44.1 hours a week, against 44.9 above the line",
-            "World Bank simulation: Closing India's employment and worker earnings gaps cuts $8.30 poverty by 22.2 percentage points",
-        ],
-    ),
-    (
-        "What questions about Indian poverty can still not be answered?",
-        [
-            "Monetary poverty and deprivation measure different things: 35.5% of children were stunted in NFHS-5",
-            "India has lower $3 poverty than Bangladesh and Indonesia, and higher poverty at $8.30",
-        ],
-    ),
+    ("Has India really ended extreme poverty?", ["Almost no Indian is below the lowest poverty line now. Four in five are below the higher one"]),
+    ("What does $3 a day mean in rupees?", []),
+    ("Did the whole world get here, or just India?", ["The world's fall in extreme poverty stalled after 2019. India's kept going"]),
+    ("If almost nobody is that poor, why does it feel like most people are still struggling?",
+     ["India has 18% of the world's people, 4% of its extremely poor, and 30% of everyone below $8.30"]),
+    ("How close to the edge are most Indians?", ["A 10% fall in spending would push the share of Indians below $4.20 a day from 15% to 23%"]),
+    ("If only 2% are poor, why do 80 crore people get free grain?", []),
+    ("Who is still poor, and where?", ["47% of people in Jharkhand live below $4.20 a day. In Goa, under 3% do",
+                                       "In every state, small children are more likely than the average resident to live in a poor household"]),
+    ("Are our neighbours doing better?", ["India has less extreme poverty than Bangladesh or Indonesia, but more people below $8.30"]),
+    ("Poor Indians work as many hours as anyone else. Why are they still poor?",
+     ["Poor Indians work almost the same hours as everyone else", "Poor workers are more often self-employed and on farms"]),
+    ("Hasn't the economy's growth reached workers' pay?", ["Since 2014-15, real GDP per person has grown 62%. A farm labourer's real wage has grown 9%"]),
+    ("What would it take?", ["If poor households had better-off households' jobs and pay, the share below $8.30 would fall from 79% to 57%"]),
+    ("Why doesn't India have an official poverty line any more?", []),
+    ("Why did the World Bank's numbers jump in 2025?", ["New price data raised India's extreme poverty rate and lowered its $4.20 rate, from the same survey"]),
+    ("Did the new survey make poverty look smaller?", ["Depending on the line and the method, India's 2022-23 poverty rate is anywhere from 2% to 26%"]),
+    ("Is India really one of the most equal countries in the world?",
+     ["Between the two newest surveys, the poorest tenth's spending grew fastest",
+      "Since 1977, household spending in the national accounts has more than quadrupled. In the surveys, it has only doubled"]),
+    ("Is being above the line the same as being well?", ["Money poverty is the smallest of these numbers"]),
+    ("What would settle the argument?", []),
     ("How to read these numbers: methodology and caveats", []),
 ]
 
@@ -92,6 +79,8 @@ doc = {
     "sourceNotes": [],
     "furtherReading": [],
     "caveats": NOTES["caveats"],
+    "editorialPlan": {"audience": NOTES["audience"], "heroDescription": NOTES["heroDescription"], "selectedDataPoints": [],
+                      "pullQuotes": NOTES["pullQuotes"], "glossaryBlocks": NOTES["boxes"]},
     "lockedNumbersUsed": NOTES["lockedNumbersUsed"],
     "qualityFlags": [],
     "lastReviewed": NOTES["lastReviewed"],

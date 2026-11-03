@@ -37,6 +37,7 @@ const md = (v: unknown) => (v == null ? "" : inlineMarkdownHtml(String(v)));
 function blockHtml(block: Block) {
   if (block.type === "h3") return `<h4>${md(block.text)}</h4>`;
   if (block.type === "defbox") return `<aside class="defbox"><p class="defbox-lbl">Definition</p><p class="defbox-term">${md(block.item.term)}</p><p class="defbox-mean">${md(block.item.plainMeaning)}</p>${block.item.whyItMattersHere ? `<p class="defbox-why">${md(block.item.whyItMattersHere)}</p>` : ""}</aside>`;
+  if (block.type === "quote") return `<figure class="srcquote"><blockquote><p>${md(block.text)}</p></blockquote>${block.cite ? `<figcaption>${md(block.cite)}</figcaption>` : ""}</figure>`;
   if (block.type === "p") return `<p>${block.html ?? md(block.text)}</p>`;
   if (block.type === "ul") return `<ul class="story-list">${(block.htmlItems ?? block.items.map((it: string) => md(it))).map((it: string) => `<li>${it}</li>`).join("")}</ul>`;
   if (block.type === "table") return `<div class="story-table-wrap"><table class="story-table"><thead><tr>${block.headers.map((h: string) => `<th>${md(h)}</th>`).join("")}</tr></thead><tbody>${block.rows.map((r: string[]) => `<tr>${r.map((c) => `<td>${md(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
