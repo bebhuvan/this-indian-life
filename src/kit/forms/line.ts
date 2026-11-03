@@ -74,7 +74,9 @@ export function line(spec: LineSpec, w: number): Scene {
   // near it anyway (the lowest value under 40% of the highest), where it costs nothing.
   const lo0 = Math.min(...all), hi0 = Math.max(...all);
   const policy = spec.domain ?? (lo0 >= 0 && spec.unit !== "index" && lo0 <= hi0 * 0.4 ? "zero" : "fit");
-  const yt = domain([...all, ...(spec.references ?? []).map((r) => r.value)], policy, z.cls === "s" ? 4 : 5);
+  // A fitted scale asks for one more step, so a range of 33 to 79 is ticked in tens up to 80,
+  // not in twenties up to 100.
+  const yt = domain([...all, ...(spec.references ?? []).map((r) => r.value)], policy, (z.cls === "s" ? 4 : 5) + (policy === "fit" ? 1 : 0));
   const val = formatterFor(all, { unit: spec.unit, decimals: spec.decimals });
   const tickDecimals = Math.max(0, Math.min(2, -Math.floor(Math.log10(yt.step) + 1e-9)));
   const tick = (v: number, top: boolean) => fmt(v, { decimals: tickDecimals, unit: top ? spec.unit : undefined });
@@ -197,9 +199,11 @@ export function line(spec: LineSpec, w: number): Scene {
     const above = sy(t) - b.lh("axis") / 2 - 2, below = sy(t) + b.lh("axis") / 2 + (t === 0 ? 5 : 2);
     // The zero line may also take the space under it when a line runs along the floor at the
     // left edge; the time-axis labels there are reserved, so it is used only when free.
-    // Then the right end of the gridline. A label with no clear place is left off (its
-    // gridline stays), except the top one, which carries the unit and keeps its place on a halo.
-    const cands: Array<[number, number, "start" | "end"]> = [[x0, above, "start"], [x0, below, "start"], [x1, above, "end"], [x1, below, "end"]];
+    // A label with no clear place is left off (its gridline stays; a lone label moved to the
+    // right end read as a stray), except the top one, which carries the unit and keeps its
+    // place on a halo.
+    // The lowest tick only above its line: below it is the time axis, whose first year it took.
+    const cands: Array<[number, number, "start"]> = k === 0 && t !== 0 ? [[x0, above, "start"]] : [[x0, above, "start"], [x0, below, "start"]];
     const top1 = k === yt.ticks.length - 1;
     if (!b.tryText(cands, text, "axis", { halo: true }) && top1) b.text(x0, above, text, "axis", "start", { halo: true });
   });
