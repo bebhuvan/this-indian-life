@@ -45,8 +45,22 @@
 
 /* ---------- masthead ---------- */
 .tl-mast .bar{display:flex;align-items:baseline;gap:44px;padding:30px 0 16px}
-.tl-wm{font:500 25px/1 var(--k-display);letter-spacing:-.018em;color:var(--k-ink);text-decoration:none;white-space:nowrap}
-.tl-wm i{display:inline-block;width:.27em;height:.27em;border-radius:50%;background:var(--k-neel);margin-left:.07em}
+/* The wordmark: Literata light, "Indian" in its italic, closed by a neel full stop. Light
+   type at size reads as a book's title page; the 500 roman read as a heading. */
+.tl-wm,.tl-np{font-family:var(--k-display);font-weight:350;color:var(--k-ink);text-decoration:none;white-space:nowrap;font-feature-settings:"kern","liga"}
+.tl-wm{font-size:28px;line-height:1;letter-spacing:-.028em}
+.tl-wm em,.tl-np em{font-style:italic;font-weight:350;letter-spacing:-.02em}
+.tl-wm i,.tl-np i{display:inline-block;width:.15em;height:.15em;border-radius:50%;background:var(--k-neel);margin-left:.045em;vertical-align:baseline}
+.tl-wm:hover i,.tl-np:hover i{background:var(--k-sindoor)}
+/* The nameplate (home): a kicker, the double rule, the name centred at display size, then
+   the chapters on a hairline. The small wordmark in the bar steps aside for it. */
+.tl-kick{display:flex;justify-content:space-between;gap:16px;padding:22px 0 12px;font:500 11px/1 var(--k-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--k-ink3)}
+.tl-np{display:block;width:max-content;margin:0 auto;padding:22px 0 20px;font-size:clamp(44px,6.4vw,76px);font-weight:300;line-height:1;letter-spacing:-.036em}
+.tl-np em{font-weight:300;letter-spacing:-.03em}
+.tl-mast.is-np .bar{justify-content:center;padding:14px 0;border-top:1px solid var(--k-rule)}
+.tl-mast.is-np .tl-wm{display:none}
+.tl-mast.is-np .tl-tools{margin-left:0}
+.tl-mast.is-np .tl-nav::after{content:"";width:1px;align-self:stretch;background:var(--k-rule);margin-left:4px}
 .tl-nav{display:flex;gap:26px;font:400 14.5px/1 var(--k-sans)}
 .tl-nav a{color:var(--k-ink2);text-decoration:none}
 .tl-nav a:hover,.tl-nav a[aria-current]{color:var(--k-ink)}
@@ -301,7 +315,11 @@
 @media(max-width:760px){
   .tl-mast .bar{gap:16px;padding:20px 0 12px;position:relative}
   .tl-mast{position:relative}
-  .tl-wm{font-size:21px}
+  .tl-wm{font-size:23px}
+  .tl-kick span+span{display:none}
+  .tl-kick{justify-content:center;padding-top:16px}
+  .tl-np{font-size:clamp(36px,11vw,48px);padding:18px 0 14px}
+  .tl-mast.is-np .bar{justify-content:flex-end;padding:10px 0}
   .tl-nav{display:none}
   .tl-tools{gap:16px;font-size:14px}.tl-tools .srch{display:none}
   .tl-menu{display:block}

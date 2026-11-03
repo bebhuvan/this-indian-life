@@ -1,22 +1,31 @@
 ---
-// The masthead: the wordmark (its point is the last value of a line), the six chapters,
-// the contents and search, then the double rule. On phones the chapters fold into a sheet.
+// The masthead: the wordmark, the six chapters, the contents and search, then the double
+// rule. The home page sets the name as a nameplate over the bar, under a kicker with the
+// tagline and the size of the book. On phones the chapters fold into a sheet.
 import { domains } from "../data/site";
 import { chapters } from "../data/book";
 
-type Props = { active?: string; locale?: string };
-const { active } = Astro.props;
+type Props = { active?: string; locale?: string; nameplate?: boolean };
+const { active, nameplate = false } = Astro.props;
 const reference = [
   { id: "articles", label: "Contents", href: "/articles/" },
   { id: "academy", label: "Academy", href: "/academy/" },
   { id: "about", label: "About", href: "/about/" },
 ];
 const count = (id: string) => chapters.find((c) => c.id === id)?.entries.length ?? 0;
+const total = chapters.reduce((n, c) => n + c.entries.length, 0);
 ---
 
-<header class="tl-mast">
+<header class:list={["tl-mast", { "is-np": nameplate }]}>
+  {nameplate ? (
+    <>
+      <div class="tl-kick"><span>India, one number at a time</span><span>{total} questions in {domains.length} chapters</span></div>
+      <div class="tl-dr" aria-hidden="true"></div>
+      <a class="tl-np" href="/" aria-label="This Indian Life, home">This <em>Indian</em> Life<i aria-hidden="true"></i></a>
+    </>
+  ) : null}
   <div class="bar">
-    <a class="tl-wm" href="/" aria-label="This Indian Life, home">This Indian Life<i aria-hidden="true"></i></a>
+    <a class="tl-wm" href="/" aria-label="This Indian Life, home">This <em>Indian</em> Life<i aria-hidden="true"></i></a>
     <nav class="tl-nav" aria-label="Chapters">
       {domains.map((d) => <a href={`/${d.id}/`} aria-current={active === d.id ? "page" : undefined}>{d.label}</a>)}
     </nav>
