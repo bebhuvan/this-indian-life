@@ -64,8 +64,10 @@ function signedFmt(value: number, unit = "") {
 // (see `ramp` in almanac.ts). Pick one with the plan's `ramp` field; each is
 // sequential, pale tint to deep ink.
 const SEQUENTIAL: Record<string, (t: number) => string> = {
-  // sindoor: heat, burden, more of something bad (the default)
-  warm: ramp([[0, "#f6ebe6"], [0.4, "#e39c81"], [0.75, "#c24a2e"], [1, "#7a2816"]]),
+  // sindoor: heat, burden, more of something bad (the default). The chart kit's magnitude
+  // ramp (src/kit/theme.ts RAMP): pale stone through haldi to deep sindoor, quiet in the
+  // middle so a map of mid values reads as tone rather than a field of brick.
+  warm: ramp([[0, "#F3ECDD"], [0.25, "#EBD3A2"], [0.5, "#DDAE63"], [0.75, "#B9583A"], [1, "#7A2216"]]),
   // neel
   cool: ramp(SCALES.neel),
   // jamun: a neutral "more of it" scale that carries no good/bad charge
@@ -140,6 +142,14 @@ function ringCentroid(path: string) {
   return best ? { area: Math.abs(best[0]) / 2, x: best[1], y: best[2] } : null;
 }
 
+/** Ink for a value set on a fill: white where the fill is dark enough (relative luminance
+ *  under 0.2, where white and ink have about equal contrast), the site's ink elsewhere. */
+function labelInk(hex: string) {
+  const lin = (i: number) => { const c = parseInt(hex.slice(i, i + 2), 16) / 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  const L = 0.2126 * lin(1) + 0.7152 * lin(3) + 0.0722 * lin(5);
+  return L < 0.2 ? "#ffffff" : "#1A1A1A";
+}
+
 // The map: hairline white borders, no shadow, and the value printed inside every
 // region large enough to hold it (names live in the ranked strip beside the map).
 export function renderChoroplethSvg(visual: ChoroplethVisual) {
@@ -157,10 +167,12 @@ export function renderChoroplethSvg(visual: ChoroplethVisual) {
       // (fitMapLabels in article-actions.js): its centre, and the widest label the region holds.
       const room = Math.sqrt(c?.area ?? 0) * 1.3;
       if (c && c.area / total > 0.006 && valueLabel.length * fontSize * 0.6 < room) {
-        labels += `<text class="choro-lab" data-cy="${svgCoord(c.y)}" data-room="${svgCoord(room)}" x="${svgCoord(c.x)}" y="${svgCoord(c.y + fontSize * 0.35)}" text-anchor="middle" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${svgCoord(fontSize)}" font-weight="600" fill="#121212" stroke="#ffffff" stroke-width="${svgCoord(fontSize * 0.28)}" stroke-opacity="0.75" paint-order="stroke" stroke-linejoin="round">${escapeHtml(valueLabel)}</text>`;
+        // The value is set in the ink its fill needs, white on the deep steps and ink on the
+        // pale ones, with no halo: a white outline round dark type on a dark state smudged.
+        labels += `<text class="choro-lab" data-cy="${svgCoord(c.y)}" data-room="${svgCoord(room)}" x="${svgCoord(c.x)}" y="${svgCoord(c.y + fontSize * 0.35)}" text-anchor="middle" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="${svgCoord(fontSize)}" font-weight="600" fill="${labelInk(fill)}" style="font-variant-numeric:lining-nums">${escapeHtml(valueLabel)}</text>`;
       }
     }
-    return `<path d="${escapeHtml(compactSvgPath(region.path))}" fill="${fill}" stroke="${has ? "#ffffff" : "#8a8a8a"}" stroke-width="${has ? 0.7 : 0.8}"${has ? "" : ' stroke-dasharray="2 2"'} stroke-linejoin="round" stroke-linecap="round"><title>${escapeHtml(region.name)}: ${escapeHtml(valueLabel)}</title></path>`;
+    return `<path d="${escapeHtml(compactSvgPath(region.path))}" fill="${fill}" stroke="${has ? "#ffffff" : "#8a8a8a"}" stroke-width="${has ? 1 : 0.8}"${has ? "" : ' stroke-dasharray="2 2"'} stroke-linejoin="round" stroke-linecap="round"><title>${escapeHtml(region.name)}: ${escapeHtml(valueLabel)}</title></path>`;
   }).join("");
   return `<svg class="viz-svg choro-map" viewBox="${escapeHtml(visual.viewBox)}" role="img" aria-label="${escapeHtml(visual.title)}"><g>${paths}</g><g>${labels}</g>${watermarkSvg(visual.viewBox)}</svg>`;
 }

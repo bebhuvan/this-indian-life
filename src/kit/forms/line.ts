@@ -72,7 +72,8 @@ export function line(spec: LineSpec, w: number): Scene {
   const blocks = S.map((s, i) => {
     const last = s.points[s.points.length - 1];
     const v = val(last.value);
-    const lines = inside || b.tw(s.label, "label") <= maxName ? [s.label] : wrap(s.label, z.label, maxName).slice(0, 2);
+    // A name wraps onto as many lines as it needs; cutting it at two dropped words unseen.
+    const lines = inside || b.tw(s.label, "label") <= maxName ? [s.label] : wrap(s.label, z.label, maxName);
     const nameW = inside ? 0 : Math.max(...lines.map((l) => b.tw(l, "label")));
     return { i, last, v, lines, nameW, h: lines.length * b.lh("label"), y: 0 };
   });
@@ -228,11 +229,14 @@ export function line(spec: LineSpec, w: number): Scene {
   }
 
   // End labels, dodged so blocks never touch, joined to their line by a hairline if moved.
-  // Values share one right-aligned column; names (wide screens only) sit to their left.
+  // The value comes first, beside the line's end in its ink, and the name follows it: a
+  // number set a whole name's width away at the page edge read as a separate table.
+  // Values share one right-aligned column so their decimals line up.
   for (const k of blocks) k.y = sy(k.last.value);
   const gap = Math.max(...blocks.map((k) => k.h)) + (inside ? 2 : 4);
   dodge(blocks, gap, top + gap / 2 - b.lh("label") / 2, bottom - gap / 2 + b.lh("label") / 2);
   const lx = x1 + z.gap * 1.5;
+  const vx = inside ? w : lx + vW, nx = vx + z.gap * 1.5;
   for (const k of blocks) {
     const i = k.i, ctx = roles[i] === "context";
     const ink = ctx ? INK.ink2 : inks[i];
@@ -240,10 +244,10 @@ export function line(spec: LineSpec, w: number): Scene {
     let y = k.y - (k.h - b.lh("label")) / 2;
     const reach = inside ? w - b.tw(k.v, "label", true) - 3 : lx - 3;
     if (Math.abs(k.y - target) > 3) b.line(sx(xv(k.last.date)) + 3, target, reach, k.y, INK.stone, 1);
-    b.text(w, y, k.v, "label", "end", { bold: true, color: ink });
+    b.text(vx, y, k.v, "label", "end", { bold: true, color: ink });
     if (inside) continue;
     for (const l of k.lines) {
-      b.text(lx, y, l, "label", "start", { color: ctx ? INK.ink2 : INK.ink });
+      b.text(nx, y, l, "label", "start", { color: INK.ink2 });
       y += b.lh("label");
     }
   }

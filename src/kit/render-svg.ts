@@ -3,7 +3,7 @@
 // title, dek, source and the site's name so it can travel on its own.
 
 import type { Mark, Scene, TextMark } from "./types";
-import { FONT, INK, sizes } from "./theme";
+import { FONT, INK, sizes, textInk } from "./theme";
 import { lineHeight, measure, wrap } from "./text";
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -17,7 +17,8 @@ function textSvg(t: TextMark, size: number, ground: string): string {
   const face = t.role === "display" || t.role === "note" ? FONT.display : FONT.sans;
   const weight = t.role === "display" ? 500 : t.bold || t.role === "figure" ? 600 : 400;
   const italic = t.role === "note" ? ` font-style="italic"` : "";
-  const fill = t.color ?? (t.role === "axis" ? INK.ink3 : t.role === "note" ? INK.ink2 : INK.ink);
+  // Text in a series colour is set in its text-safe shade (haldi is for marks only).
+  const fill = t.color ? textInk(t.color) : t.role === "axis" ? INK.ink3 : t.role === "note" ? INK.ink2 : INK.ink;
   const halo = t.halo ? ` stroke="${ground}" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke"` : "";
   return `<text x="${n(t.x)}" y="${n(t.y + size * CENTRE_TO_BASELINE)}" text-anchor="${t.anchor}" font-family="${esc(face)}" font-size="${size}" font-weight="${weight}"${italic} fill="${fill}"${halo} style="font-variant-numeric:proportional-nums lining-nums">${esc(t.text)}</text>`;
 }

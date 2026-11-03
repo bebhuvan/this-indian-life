@@ -181,11 +181,14 @@
 .tl-art .ar-lede>p:first-of-type::first-line{font-variant-caps:normal;letter-spacing:0;font-weight:inherit}
 .tl-art .ar-lede>p:first-of-type::first-letter{float:left;font:300 92px/.8 var(--k-display);margin:8px 12px 0 -3px;color:var(--k-ink)}
 .tl-art .ar-text h3{font:600 24px/1.3 var(--k-display);letter-spacing:-.01em}
-.tl-art .ar-parts{display:block;border:0;margin-top:44px;font:400 15px/1.7 var(--k-sans);color:var(--k-ink3)}
-.tl-art .ar-parts::before{content:"In " attr(data-count) " parts: "}
-.tl-art .ar-parts a{display:inline;padding:0;border:0;font:inherit;color:var(--k-ink);text-decoration:none;border-bottom:1px solid var(--k-ink)}
-.tl-art .ar-parts a+a{border-left:0;padding-left:0;margin-left:14px}
-.tl-art .ar-parts span{display:none}
+/* The parts as a table of contents: a kicker, then one column per part, each opened by a
+   hairline that turns neel on hover. A run of underlined links read as unstyled text. */
+.tl-art .ar-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));column-gap:28px;row-gap:18px;margin-top:48px;border:0}
+.tl-art .ar-parts::before{content:"In " attr(data-count) " parts";grid-column:1/-1;font:600 13px/1.2 var(--k-sans);color:var(--k-neel)}
+.tl-art .ar-parts a{display:flex;flex-direction:column;gap:6px;padding:12px 0 0;border:0;border-top:1px solid var(--k-ink);font:400 18px/1.3 var(--k-display);letter-spacing:-.005em;color:var(--k-ink);text-decoration:none;text-wrap:balance;transition:border-color .15s,color .15s}
+.tl-art .ar-parts a+a{border-left:0;padding-left:0;margin-left:0}
+.tl-art .ar-parts span{display:block;font:italic 400 15px/1.2 var(--k-display);letter-spacing:0;text-transform:none;color:var(--k-ink3)}
+.tl-art .ar-parts a:hover{color:var(--k-neel);border-top-color:var(--k-neel)}
 .tl-art .ar-part{display:grid;grid-template-columns:minmax(0,372fr) minmax(0,780fr);column-gap:32px;align-items:baseline;margin-top:calc(var(--tl-step) * 2);padding-top:18px;border-top:0;position:relative}
 .tl-art .ar-part::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;box-sizing:border-box;border-top:1px solid var(--k-ink);border-bottom:2px solid var(--k-ink)}
 .tl-art .ar-part span{font:italic 400 20px/1.3 var(--k-display);letter-spacing:0;text-transform:none;color:var(--k-ink3)}
@@ -208,10 +211,15 @@
 .tl-art .ar .story-viz .viz-grid{row-gap:64px;column-gap:40px}
 .tl-art .story-viz .viz-card,.tl-art .story-viz .viz-main{border-top:1px solid var(--k-ink);padding-top:18px;background:linear-gradient(var(--k-ink),var(--k-ink)) 0 3px/100% 2px no-repeat}
 .tl-art .viz-head{margin-bottom:24px}
+.tl-art .viz-head+.kit-host{margin-top:0}
 .tl-art .viz-head>div::before{content:"Fig. " counter(fig);float:right;margin:4px 0 0 24px;font:400 13px/1 var(--k-sans);letter-spacing:0;text-transform:none;color:var(--k-ink3)}
 .tl-art .viz-head h2,.tl-art .story-viz .viz-main .viz-head h2,.tl-art .viz-card:not(.viz-main):not(.viz-wide) .viz-head h2{font:600 22px/1.25 var(--k-display);letter-spacing:-.012em;max-width:none;text-wrap:balance}
-.tl-art .viz-head .fig-take{margin:8px 0 0;font:400 14.5px/1.45 var(--k-sans);color:var(--k-ink2)}
-.tl-art .viz-head .fig-measure{margin:4px 0 0;font:400 13px/1.4 var(--k-sans);color:var(--k-ink3)}
+/* Title, then the takeaway, then what is measured: three steps down in size and ink, on
+   one measure so their right edges agree, with the space between them growing as the voice
+   quietens. The takeaway had a 62ch measure and the measure line none, so the two ragged
+   at different widths and the head read as three loose fragments. */
+.tl-art .viz-head .fig-take{margin:10px 0 0;max-width:680px;font:400 16px/1.5 var(--k-sans);color:var(--k-ink2);text-wrap:pretty}
+.tl-art .viz-head .fig-measure{margin:8px 0 0;max-width:680px;font:400 13px/1.45 var(--k-sans);color:var(--k-ink3);text-wrap:pretty}
 .tl-art .fig-more{margin-top:18px}
 .tl-art .fig-more summary{font:400 13.5px/1.2 var(--k-sans);color:var(--k-ink2)}
 .tl-art .fig-more-in{border-left:0;padding-left:0}

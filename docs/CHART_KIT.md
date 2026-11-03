@@ -96,14 +96,33 @@ number. `figure` is a large grotesque numeral for tiles and table totals.
 
 **One display number per chart.** The renderer refuses a chart with two.
 
-| Role | Narrow (< 520) | Wide |
-|---|---|---|
-| axis | 11 | 11.5 |
-| label | 12.5 | 13.5 |
-| value | 12.5 | 13.5 |
-| note | 12 | 12.5 |
-| figure | 17 | 20 |
-| display | 20 | 28 |
+| Role | Narrow (< 520) | Medium (< 800) | Wide |
+|---|---|---|---|
+| axis | 12 | 13 | 13 |
+| label | 13 | 14 | 14.5 |
+| value | 13 | 14 | 14.5 |
+| note | 12.5 | 13.5 | 13.5 |
+| figure | 17 | 19 | 20 |
+| display | 20 | 24 | 28 |
+
+Marks scale with the type: a dot is 4.75, 5.5 and 6.25 px across the three classes, and a
+row is 30, 34 and 38 px. At 11.5 px axis text and 4.75 px dots a wide plot read as faint
+specks (November 2026).
+
+## Data labels
+
+A number sits beside the mark it describes, in that mark's ink (its text-safe shade:
+haldi is set darker, `textInk` in `theme.ts`, applied by the renderer to every text). It
+is never a column away from its mark.
+
+- **Lines**: the last value right after the line's end, then the series name in `ink2`.
+- **Dumbbells**: each value outside its own end, the lower left and the higher right; the
+  protagonist's value bold neel, the other `ink2`. The two ends are keyed once above the
+  plot in their own words (no lowercasing: "PPP" stays "PPP"). Each row runs on a rail; the
+  scale hangs under a baseline. A dumbbell's scale never runs below zero for values that
+  cannot be negative.
+- **Bars**: the value at the bar's end.
+- A name that wraps keeps every word; no line limit silently drops the tail.
 
 ## Architecture
 
