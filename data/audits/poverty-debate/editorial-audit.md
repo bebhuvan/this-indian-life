@@ -78,3 +78,52 @@ Gates: `verify_claims.py` inventories 977 numeric occurrences across 421 reviewe
 The phone-width scale flags and the "artboards did not settle" failures recorded after the 31 October redesign came from the checkers, not the page: the site scrolls smoothly (`scroll-behavior: smooth`), so scripted jumps were still animating when the checks measured, and under four parallel pages Chromium throttled the unfocused tabs. `check-chart-type-scale.mjs` and `audit-charts.mjs` now scroll instantly, bring chart-kit cards and any unsettled card into view, launch without background throttling, and `audit-charts.mjs` takes `--jobs`. A real-browser probe confirmed every kit card redraws at its shown width at 360, 768 and 1024 px.
 
 Three real rendering defects were then visible and are fixed in the kit: on phones, long bar labels wrapped instead of running past the frame, and long dumbbell names wrap within the space left of the value columns instead of running under them; on desktop, the dumbbell name column is measured in the weight it is drawn in, so names start at the left edge. A zero tick label may now sit under its gridline when a line lies on the floor. After the fixes this article passes the layout audit at 412 and 1440 px with no findings, the type-scale check at 360, 768, 1024 and 1440 px with none outside the limits, and the rendered-binding audit with no failures.
+
+## Rewrite for the reader, 3 November 2026
+
+The article was rewritten from scratch under the new `indica-story` pipeline
+(`docs/STORYTELLING.md`, `docs/ARTICLE_RUBRIC.md`). The editor judged the previous version
+correct but unreadable: audit passes had moved method detail into nearly every paragraph.
+
+- **Source read in full.** The 236-page report PDF is now frozen in `data/raw/wb-3pr-2026/`
+  with a LiteParse Markdown reading aid; `data/stories/poverty-debate/source-digest.md`
+  records every India finding, its page, and a skip list.
+- **Design approved before prose.** `data/stories/poverty-debate/story-design.md`: question
+  ladder, five parts, five boxes, the live debate and history, and the editor's added
+  questions (free grain, Tendulkar line in today's prices, recall periods, income and wealth
+  inequality).
+- **New evidence.** `data/raw/poverty-debate-rewrite-2026-11/` (PIB free-grain releases,
+  World Bank India methodology notes, PIP handbook pages, World Inequality Lab paper, NSS
+  reports 591 and 592) and `data/raw/poverty-debate-wages-2026-11/` (RBI DBIE reports 664
+  and 155). Twelve new artifacts, including a real wage index from 2014-15 that uses only
+  single-base deflators (MOSPI CPI 2012=100), so no linking factors; an earlier CPI-IW
+  linked version showed a false 10% factory-wage jump in 2023-24 and was discarded.
+- **Prose** is hand-written in `data/prose/q.econ.poverty_debate.md` (about 4,500 words,
+  18 sections, 16 charts, 3 quoted source passages). Box text sits in `notes.json` as
+  `keyTerm` glossary entries until a dedicated box component exists.
+- **Reviews.** A cold reader with no context scored the draft 20/24 (no dimension below 2).
+  Codex reviewed coverage against the digest and design. Both reported meaning errors that
+  were fixed by the writer: $8.30 had been described as India's peer line (it is the
+  upper-middle-income line; India's is $4.20); "higher pay per worker" overstated a
+  welfare-per-worker decomposition; the decile gain was certified as wholly real against
+  the World Bank's own measurement caveat; the Tendulkar comparison overreached into a
+  poverty-rate claim; the macha box claimed most people were "a bad month away" from
+  poverty. The report's 2026 estimate against the brief's projection was restored, and three
+  readable India findings were added to the digest's skip list.
+- **Claim review.** Changed surfaces were re-reviewed with context rules in
+  `scripts/stories/poverty-debate/claim_source_rules.json`, which bind each number to its
+  intended source row rather than the first value match. Two prose numbers were corrected
+  where rounding did not match the source (Kerala 58.5%, monetary poverty 5%).
+- **Gates, 3 November.** Independent reconciliation: 36 artifacts, 875 numeric cells, 0
+  mismatches, 33 source hashes. Claim inventory: 798 occurrences across 475 surfaces, 0
+  failures. Mutation tests: six of six rejected. Explanation validator: 0 failures, 0
+  warnings. Source links: 42 checked, 0 failures (rendered with Chromium). Static build:
+  113 pages; rendered section-to-chart binding checked in the page.
+- **Final pass over the report, 3 November.** Figure pages the Markdown conversion garbled
+  were read as page images. Two findings were added: India's and China's shares of the
+  global Prosperity Gap, 1990 against 2026 (chapter 2 figure 2.10; `chapter2.xlsx`
+  fig10_1990 and fig10_2026), and the income-equivalent Gini adjustment (annex 2B, map 2B.1,
+  report pp. 99-100) under which India is still not classed as highly unequal, with figure
+  2.1's population shares (`chapter2.xlsx` fig1). Map 2B.1's classification of India is read
+  from the map image; the report's text and data file do not give India's adjusted Gini.
+  Claim inventory after the pass: 830 occurrences, 477 surfaces, 0 failures.

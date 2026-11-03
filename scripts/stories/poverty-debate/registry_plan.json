@@ -1,0 +1,566 @@
+{
+  "question": "Has India really ended poverty? What the World Bank's 2026 report shows, and why economists still argue",
+  "priority": "core",
+  "parts": [
+    {
+      "title": "Out of the pit",
+      "at": "Has India really ended extreme poverty?"
+    },
+    {
+      "title": "Not out of the woods",
+      "at": "If almost nobody is that poor, why does it feel like most people are still struggling?"
+    },
+    {
+      "title": "Working, and still poor",
+      "at": "Poor Indians work as many hours as anyone else. Why are they still poor?"
+    },
+    {
+      "title": "Why nobody agrees on the number",
+      "at": "Why doesn't India have an official poverty line any more?"
+    },
+    {
+      "title": "What the spending numbers cannot see",
+      "at": "Is being above the line the same as being well?"
+    }
+  ],
+  "keyNumbers": [
+    {
+      "value": "2 in 100",
+      "label": "Indians below the World Bank's extreme poverty line, about Rs 68 a day, in 2024"
+    },
+    {
+      "value": "79 in 100",
+      "label": "Indians below the World Bank's line for upper-middle-income countries, about Rs 187 a day",
+      "hot": true
+    },
+    {
+      "value": "30%",
+      "label": "of all the world's people below that higher line live in India"
+    },
+    {
+      "value": "9%",
+      "label": "real growth in a farm labourer's daily wage, 2014-15 to 2024-25, against 62% for GDP per person"
+    }
+  ],
+  "indicators": [
+    "pov26.linedup_300.IN",
+    "pov26.linedup_420.IN",
+    "pov26.linedup_830.IN",
+    "pov26.cmp300_india.IN",
+    "pov26.cmp300_world.IN",
+    "pov26.cmp300_ssa.IN",
+    "pov26.india_share_world_poor_2024.IN",
+    "pov26.poverty_buffer_2024.IN",
+    "pov26.state_poor420_2023.IN",
+    "pov26.child_poverty_2023.IN",
+    "pov26.peer_thresholds_2024.IN",
+    "pov26.worker_structural_trap_2024.IN",
+    "pov26.worker_job_type_2024.IN",
+    "pov26.realwage_gdp_pcap.IN",
+    "pov26.realwage_rural_farm.IN",
+    "pov26.realwage_rural_nonfarm.IN",
+    "pov26.realwage_rural_construction.IN",
+    "pov26.realwage_factory.IN",
+    "pov26.jobs_counterfactual_2024.IN",
+    "pov26.ppp_revision_2023.IN",
+    "pov26.survey_method_controversy_2022.IN",
+    "pov26.decile_real_growth_2022_2023.IN",
+    "pov26.idx_gdp_pcap_1977.IN",
+    "pov26.idx_na_hfce_1977.IN",
+    "pov26.idx_survey_mean_1977.IN",
+    "pov26.beyond_money.IN"
+  ],
+  "core": [
+    "pov26.linedup_300.IN",
+    "pov26.linedup_830.IN",
+    "pov26.poverty_buffer_2024.IN",
+    "pov26.realwage_rural_farm.IN"
+  ],
+  "context": [],
+  "visualPlan": [
+    {
+      "chart": "multiLine",
+      "size": "hero",
+      "beat": "answer",
+      "projectedAfter": 2024,
+      "unit": "% of population",
+      "indicator": "pov26.linedup_300.IN",
+      "title": "Almost no Indian is below the lowest poverty line now. Four in five are below the higher one",
+      "subtitle": "Share of Indians below each World Bank line, 1990-2030 · 2021 prices · dots are survey years; after 2024 the lines are estimates",
+      "series": [
+        {
+          "indicator": "pov26.linedup_300.IN",
+          "label": "Below $3 a day (about Rs 68)",
+          "emphasis": true
+        },
+        {
+          "indicator": "pov26.linedup_420.IN",
+          "label": "Below $4.20 a day (about Rs 95)"
+        },
+        {
+          "indicator": "pov26.linedup_830.IN",
+          "label": "Below $8.30 a day (about Rs 187)"
+        }
+      ],
+      "why": "The whole answer in one picture: the lowest line has almost emptied, the highest has not.",
+      "read": "Each line is the share of Indians below one poverty line. The lower the line, the faster it fell.",
+      "watch": "After 2024 the lines are estimates from growth forecasts, not new surveys."
+    },
+    {
+      "chart": "multiLine",
+      "size": "feature",
+      "beat": "comparison",
+      "projectedAfter": 2024,
+      "unit": "% of population",
+      "indicator": "pov26.cmp300_india.IN",
+      "title": "The world's fall in extreme poverty stalled after 2019. India's kept going",
+      "subtitle": "Share of people below $3 a day (2021 prices), 1990-2026 · World Bank estimates; 2025-26 are estimates, and India's 2015-21 values are filled in without survey data",
+      "series": [
+        {
+          "indicator": "pov26.cmp300_india.IN",
+          "label": "India",
+          "emphasis": true
+        },
+        {
+          "indicator": "pov26.cmp300_world.IN",
+          "label": "World"
+        },
+        {
+          "indicator": "pov26.cmp300_ssa.IN",
+          "label": "Sub-Saharan Africa"
+        }
+      ],
+      "why": "Places India's fall against a world where progress has stopped.",
+      "read": "India started above the world average and is now far below it; the world line has been flat since about 2019.",
+      "watch": "India has no usable survey for 2015-21, so those years are the World Bank's estimates."
+    },
+    {
+      "indicator": "pov26.india_share_world_poor_2024.IN",
+      "chart": "groupedTable",
+      "size": "feature",
+      "beat": "comparison",
+      "title": "India has 18% of the world's people, 4% of its extremely poor, and 30% of everyone below $8.30",
+      "subtitle": "India's share of the world's poor at each World Bank line in 2024, beside its share of world population · 2021 prices",
+      "unit": "% of world total",
+      "labelField": "label",
+      "columns": [
+        {
+          "key": "poorShare",
+          "label": "India's share of the world's poor"
+        },
+        {
+          "key": "popShare",
+          "label": "India's share of world population"
+        }
+      ],
+      "why": "Shows why India drops out of the extreme-poverty story and becomes the centre of the wider one.",
+      "read": "Compare the two bars in each row. Where India's share of the poor is above its share of people, India is over-represented.",
+      "watch": "The poverty shares are for 2024 and the population share for 2026."
+    },
+    {
+      "indicator": "pov26.poverty_buffer_2024.IN",
+      "chart": "dumbbell",
+      "size": "feature",
+      "beat": "exposure",
+      "title": "A 10% fall in spending would push the share of Indians below $4.20 a day from 15% to 23%",
+      "subtitle": "Share of Indians below each line in 2024, and after a hypothetical 10% fall in everyone's spending · 2021 prices",
+      "unit": "% of population",
+      "labelField": "line",
+      "aField": "baseline",
+      "bField": "loss10",
+      "aLabel": "2024",
+      "bLabel": "After a 10% fall",
+      "domain": [
+        0,
+        100
+      ],
+      "ticks": [
+        0,
+        25,
+        50,
+        75,
+        100
+      ],
+      "why": "Shows how many people sit just above each line.",
+      "read": "The gap between the two dots is the number of people within 10% of the line.",
+      "watch": "A thought experiment, not a forecast."
+    },
+    {
+      "indicator": "pov26.state_poor420_2023.IN",
+      "chart": "choropleth",
+      "size": "feature",
+      "beat": "distribution",
+      "title": "47% of people in Jharkhand live below $4.20 a day. In Goa, under 3% do",
+      "subtitle": "Share of people below $4.20 a day (about Rs 95) by state and union territory · World Bank subnational atlas, 2023 reference year, from HCES 2023-24",
+      "unit": "% of population",
+      "rankLabel": "Highest share",
+      "bottomLabel": "Lowest share",
+      "why": "Shows where the poor are concentrated.",
+      "read": "Darker states have a larger share of people below $4.20 a day.",
+      "watch": "Small states and union territories rest on small samples."
+    },
+    {
+      "indicator": "pov26.child_poverty_2023.IN",
+      "chart": "dumbbell",
+      "size": "feature",
+      "beat": "fairness",
+      "title": "In every state, small children are more likely than the average resident to live in a poor household",
+      "subtitle": "Share below $8.30 a day, children aged 0-5 against everyone, 14 selected states · World Bank state estimates from the 2023-24 household survey",
+      "unit": "% of each age group",
+      "labelField": "state",
+      "aField": "allAges",
+      "bField": "ages0to5",
+      "aLabel": "Everyone",
+      "bLabel": "Children 0-5",
+      "domain": [
+        40,
+        100
+      ],
+      "ticks": [
+        40,
+        60,
+        80,
+        100
+      ],
+      "why": "Poverty falls hardest on households with young children.",
+      "read": "In every row the child dot sits to the right of the everyone dot.",
+      "watch": "This measures the household's spending per person, not what each child eats."
+    },
+    {
+      "indicator": "pov26.peer_thresholds_2024.IN",
+      "chart": "groupedTable",
+      "size": "feature",
+      "beat": "comparison",
+      "title": "India has less extreme poverty than Bangladesh or Indonesia, but more people below $8.30",
+      "subtitle": "Share of people below each line in 2024 · 2021 prices · Indonesia from a 2024 survey, the others are estimates",
+      "unit": "% of population",
+      "labelField": "country",
+      "columns": [
+        {
+          "key": "p300",
+          "label": "Below $3"
+        },
+        {
+          "key": "p420",
+          "label": "Below $4.20"
+        },
+        {
+          "key": "p830",
+          "label": "Below $8.30"
+        }
+      ],
+      "why": "Tests India's record against its neighbours at every line.",
+      "read": "Compare each country across the three lines.",
+      "watch": "A selection of Asian countries, not a ranking."
+    },
+    {
+      "indicator": "pov26.worker_structural_trap_2024.IN",
+      "chart": "dumbbell",
+      "size": "small",
+      "beat": "mechanism",
+      "title": "Poor Indians work almost the same hours as everyone else",
+      "subtitle": "Average weekly hours of people in work, by household above or below $3 a day · India, 2024 · World Bank",
+      "unit": "hours a week",
+      "labelField": "dimension",
+      "aField": "poor",
+      "bField": "nonpoor",
+      "aLabel": "Below $3 a day",
+      "bLabel": "Above $3 a day",
+      "domain": [
+        30,
+        50
+      ],
+      "ticks": [
+        30,
+        35,
+        40,
+        45,
+        50
+      ],
+      "why": "Rules out laziness or idleness as the explanation.",
+      "read": "The two dots in each row are close together.",
+      "watch": "Hours, not pay. This uses the $3 line."
+    },
+    {
+      "indicator": "pov26.worker_job_type_2024.IN",
+      "chart": "dumbbell",
+      "size": "small",
+      "beat": "mechanism",
+      "pairWith": "Poor Indians work almost the same hours as everyone else",
+      "title": "Poor workers are more often self-employed and on farms",
+      "subtitle": "Share of workers, by household above or below $8.30 a day · India, 2024 · World Bank",
+      "unit": "% of workers",
+      "labelField": "dimension",
+      "aField": "nonpoor",
+      "bField": "poor",
+      "aLabel": "Above $8.30 a day",
+      "bLabel": "Below $8.30 a day",
+      "domain": [
+        0,
+        100
+      ],
+      "ticks": [
+        0,
+        25,
+        50,
+        75,
+        100
+      ],
+      "why": "What differs is the kind of work, not the amount.",
+      "read": "Poor workers' dots sit further right on both rows.",
+      "watch": "This uses the $8.30 line, unlike the hours chart beside it."
+    },
+    {
+      "chart": "multiLine",
+      "size": "feature",
+      "beat": "mechanism",
+      "unit": "index, 2014-15 = 100",
+      "indicator": "pov26.realwage_gdp_pcap.IN",
+      "title": "Since 2014-15, real GDP per person has grown 62%. A farm labourer's real wage has grown 9%",
+      "subtitle": "Real GDP per person and real daily wages, 2014-15 = 100 · rural wages for men (Labour Bureau, CPI-Rural), factory wage per day worked (Annual Survey of Industries, CPI-Combined) · rural 2019-20 and 2020-21 incomplete",
+      "series": [
+        {
+          "indicator": "pov26.realwage_gdp_pcap.IN",
+          "label": "GDP per person",
+          "emphasis": true
+        },
+        {
+          "indicator": "pov26.realwage_factory.IN",
+          "label": "Factory worker"
+        },
+        {
+          "indicator": "pov26.realwage_rural_farm.IN",
+          "label": "Farm labourer"
+        },
+        {
+          "indicator": "pov26.realwage_rural_nonfarm.IN",
+          "label": "Rural non-farm labourer"
+        },
+        {
+          "indicator": "pov26.realwage_rural_construction.IN",
+          "label": "Rural construction worker"
+        }
+      ],
+      "why": "Tests whether growth reached the pay of the people most likely to be poor.",
+      "read": "Every line starts at 100 in 2014-15. GDP per person climbs; the wage lines stay near 100.",
+      "watch": "Wage rates for men, not household income. Women's wages and days of work are not shown."
+    },
+    {
+      "indicator": "pov26.jobs_counterfactual_2024.IN",
+      "chart": "groupedTable",
+      "size": "feature",
+      "beat": "mechanism",
+      "title": "If poor households had better-off households' jobs and pay, the share below $8.30 would fall from 79% to 57%",
+      "subtitle": "World Bank simulation for India, 2024 · share of people below each line and how far below it they are, now and simulated",
+      "unit": "% of population or of the line",
+      "labelField": "measure",
+      "columns": [
+        {
+          "key": "baseline2024",
+          "label": "2024"
+        },
+        {
+          "key": "afterJobsClosing",
+          "label": "Simulated"
+        }
+      ],
+      "why": "Sizes the jobs route out of poverty.",
+      "read": "Compare the two bars in each row.",
+      "watch": "An accounting exercise, not a forecast or a policy."
+    },
+    {
+      "indicator": "pov26.ppp_revision_2023.IN",
+      "chart": "dumbbell",
+      "size": "feature",
+      "beat": "caveat",
+      "title": "New price data raised India's extreme poverty rate and lowered its $4.20 rate, from the same survey",
+      "subtitle": "India's 2023-24 poverty rates under the World Bank's old (2017) and new (2021) price base · same survey, same release",
+      "unit": "% of population",
+      "labelField": "benchmark",
+      "aField": "ppp2017",
+      "bField": "ppp2021",
+      "aLabel": "Old price base",
+      "bLabel": "New price base",
+      "domain": [
+        0,
+        100
+      ],
+      "ticks": [
+        0,
+        25,
+        50,
+        75,
+        100
+      ],
+      "why": "Shows that a change of yardstick moved the numbers, not a change in people's lives.",
+      "read": "Each row is one line. The dots show the same survey measured two ways.",
+      "watch": "The dollar values of the lines differ between the two price bases."
+    },
+    {
+      "indicator": "pov26.survey_method_controversy_2022.IN",
+      "chart": "tableBars",
+      "size": "feature",
+      "beat": "caveat",
+      "title": "Depending on the line and the method, India's 2022-23 poverty rate is anywhere from 2% to 26%",
+      "subtitle": "Published estimates for 2022-23 · World Bank (direct survey) and Himanshu, Lanjouw and Schirmer (2025, bridging old and new surveys)",
+      "unit": "% of population",
+      "why": "Shows how much of the argument is about the line and the method.",
+      "read": "Each bar is one published estimate. Compare bars that use the same line.",
+      "watch": "The spread mixes different lines and methods; it is not a margin of error."
+    },
+    {
+      "indicator": "pov26.decile_real_growth_2022_2023.IN",
+      "chart": "tableBars",
+      "size": "feature",
+      "beat": "distribution",
+      "title": "Between the two newest surveys, the poorest tenth's spending grew fastest",
+      "subtitle": "Change in average real spending by tenth of the population, HCES 2022-23 to 2023-24 · World Bank",
+      "unit": "% change",
+      "why": "Shows who gained within the two comparable surveys.",
+      "read": "Each bar is one tenth of the population, poorest at the top.",
+      "watch": "Different households in each survey; the survey misses many of the richest."
+    },
+    {
+      "chart": "multiLine",
+      "size": "feature",
+      "beat": "caveat",
+      "unit": "index, 1977 = 100",
+      "indicator": "pov26.idx_gdp_pcap_1977.IN",
+      "title": "Since 1977, household spending in the national accounts has more than quadrupled. In the surveys, it has only doubled",
+      "subtitle": "Real GDP per person, household spending in the national accounts, and average spending in the household surveys, 1977 = 100 · World Bank · grey links join surveys that are not comparable",
+      "series": [
+        {
+          "indicator": "pov26.idx_gdp_pcap_1977.IN",
+          "label": "GDP per person",
+          "emphasis": true
+        },
+        {
+          "indicator": "pov26.idx_na_hfce_1977.IN",
+          "label": "Household spending, national accounts"
+        },
+        {
+          "indicator": "pov26.idx_survey_mean_1977.IN",
+          "label": "Household spending, surveys",
+          "breaks": [
+            1977,
+            1983,
+            1987,
+            2009,
+            2011
+          ]
+        }
+      ],
+      "why": "Shows the gap behind the argument that surveys miss the rich.",
+      "read": "All three start at 100 in 1977. The survey line rises least.",
+      "watch": "The gap has several causes; this chart cannot split them."
+    },
+    {
+      "indicator": "pov26.beyond_money.IN",
+      "chart": "tableBars",
+      "size": "feature",
+      "beat": "missing-data",
+      "title": "Money poverty is the smallest of these numbers",
+      "subtitle": "Six measures, each with its own population and year · child stunting NFHS-5 (2019-21), health-spending hardship (2022), World Bank measures from HCES 2022-23 and 2023-24",
+      "unit": "% of population or of children",
+      "why": "Shows what a spending line cannot see.",
+      "read": "Each bar is a separate measure. They overlap and cannot be added.",
+      "watch": "Different years and populations: stunting is of children under five."
+    }
+  ],
+  "sourceNotesExtra": [
+    {
+      "label": "RBI Database on Indian Economy, Average Daily Wage Rates in Rural India for Men (Labour Bureau, report 664): all-India rates by occupation, 2014-15 to 2024-25, used for the wage index.",
+      "url": "https://data.rbi.org.in/DBIE/",
+      "check": "DBIE",
+      "manual": "DBIE is a client-rendered app; the report was exported through its public guest access on 2026-10-08 and is frozen with its hash in data/raw/poverty-debate-wages-2026-11/."
+    },
+    {
+      "label": "RBI Database on Indian Economy, Annual Survey of Industries principal characteristics (report 155): wages to workers and days worked, 2014-15 to 2023-24.",
+      "url": "https://data.rbi.org.in/DBIE/",
+      "check": "DBIE",
+      "manual": "DBIE is a client-rendered app; the report was exported through its public guest access on 2026-10-08 and is frozen with its hash in data/raw/poverty-debate-wages-2026-11/."
+    },
+    {
+      "label": "MoSPI, Consumer Price Index (2012=100), rural and combined, monthly: deflators for the wage index and the Tendulkar comparison.",
+      "url": "https://esankhyiki.mospi.gov.in/macroindicators?product=cpi",
+      "check": "eSankhyiki"
+    },
+    {
+      "label": "MoSPI, National Accounts Statistics: real GDP per person at 2011-12 prices.",
+      "url": "https://esankhyiki.mospi.gov.in/macroindicators?product=nas",
+      "check": "eSankhyiki"
+    },
+    {
+      "label": "Press Information Bureau, 11 January 2023: free foodgrain under the National Food Security Act from 1 January 2023 for more than 80 crore people.",
+      "url": "https://pib.gov.in/PressReleasePage.aspx?PRID=1890272",
+      "check": "80 crore"
+    },
+    {
+      "label": "Press Information Bureau, 29 November 2023: Cabinet extends free foodgrain (PMGKAY) to about 81.35 crore beneficiaries for five years from 1 January 2024.",
+      "url": "https://pib.gov.in/PressReleasePage.aspx?PRID=1980689",
+      "check": "81.35 crore"
+    },
+    {
+      "label": "World Bank, Global Poverty Monitoring Technical Note 44 (June 2025): India's welfare aggregate, valuation of free ration grain, single national PPP.",
+      "url": "https://documents1.worldbank.org/curated/en/099510306052516849/pdf/IDU-eb272b02-ecd1-4633-9e37-9297e20a711c.pdf",
+      "check": "India"
+    },
+    {
+      "label": "World Bank, India poverty methodology note (2025): the switch of 2011-12 estimates from URP to MMRP and spatial price deflation.",
+      "url": "https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099060325033540333",
+      "check": "India"
+    },
+    {
+      "label": "World Bank, PIP methodology handbook, welfare aggregate: India's 2011-12 rate under URP (22.9%) and MMRP (16.2%), 2017 PPPs.",
+      "url": "https://datanalytics.worldbank.org/PIP-Methodology/welfareaggregate.html",
+      "check": "MMRP"
+    },
+    {
+      "label": "Bharti, Chancel, Piketty and Somanchi, World Inequality Lab Working Paper 2024/09: top 1% income share 22.6% and wealth share 40.1% in 2022-23.",
+      "url": "https://wid.world/www-site/uploads/2024/03/WorldInequalityLab_WP2024_09_Income-and-Wealth-Inequality-in-India-1922-2023_Final.pdf",
+      "check": "22.6%"
+    },
+    {
+      "label": "MoSPI, NSS Report 592, Household Consumption Expenditure Survey 2023-24: coverage exclusions and the Census 2011 rural sampling frame.",
+      "url": "https://mospi.gov.in/sites/default/files/publication_reports/Final_Report_HCES_2023-24L.pdf",
+      "check": "Floating population"
+    }
+  ],
+  "furtherReading": [
+    {
+      "label": "Himanshu, Peter Lanjouw and Philipp Schirmer (2025), Tinbergen Institute Discussion Paper TI 2025-069/V. The most careful attempt to bridge the 2011-12 and 2022-23 surveys; puts 2022-23 poverty between about 11% and 26% depending on the line.",
+      "url": "https://papers.tinbergen.nl/25069.pdf",
+      "check": "Tinbergen"
+    },
+    {
+      "label": "Surjit Bhalla, Karan Bhasin and Arvind Virmani (2022), IMF Working Paper WP/22/69, Pandemic, Poverty, and Inequality: Evidence from India. The case that extreme poverty had all but ended by 2019 once free food is counted.",
+      "url": "https://www.elibrary.imf.org/view/journals/001/2022/069/article-A001-en.xml",
+      "check": "Pandemic, Poverty, and Inequality"
+    },
+    {
+      "label": "World Bank (2025), India poverty methodology note. How the World Bank builds India's numbers from the new surveys: recall period, free grain, price adjustments.",
+      "url": "https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099060325033540333",
+      "check": "India"
+    },
+    {
+      "label": "C. Rangarajan and S. Mahendra Dev, Counting the Poor (MSE Monograph 30). The reasoning behind the higher 2014 line that was never adopted.",
+      "url": "https://mse.ac.in/wp-content/uploads/2021/05/Monograph-30.pdf",
+      "check": "Counting the Poor"
+    },
+    {
+      "label": "Arindam Das and Jean Drèze (2024), The problem of India's stagnant real wages, Ideas for India. A decade of rural wages, and why they matter for the poverty debate.",
+      "url": "https://www.ideasforindia.in/topics/poverty-inequality/the-problem-of-india-s-stagnant-real-wages.html",
+      "check": "stagnant"
+    },
+    {
+      "label": "Nitin Kumar Bharti, Lucas Chancel, Thomas Piketty and Anmol Somanchi (2024), Income and Wealth Inequality in India, 1922-2023: The Rise of the Billionaire Raj. Inequality from income and wealth data, not spending surveys.",
+      "url": "https://wid.world/www-site/uploads/2024/03/WorldInequalityLab_WP2024_09_Income-and-Wealth-Inequality-in-India-1922-2023_Final.pdf",
+      "check": "BILLIONAIRE RAJ"
+    },
+    {
+      "label": "NITI Aayog (2024), Multidimensional Poverty in India since 2005-06. The government's count of poverty beyond spending.",
+      "url": "https://www.niti.gov.in/sites/default/files/2024-01/MPI-22_NITI-Aayog20254.pdf",
+      "check": "Multidimensional Poverty in India since 2005-06"
+    }
+  ]
+}

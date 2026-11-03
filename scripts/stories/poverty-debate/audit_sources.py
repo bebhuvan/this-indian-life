@@ -211,6 +211,59 @@ for i,r in enumerate(a['rows']):
         source=table.loc[r['state']];excelrow=int(source.excelRow)
         assert a['metadata']['sourceRows'][r['state']][key]==excelrow
         cell(fn,f'rows[{i}].{key}',r[key],round(float(source.poor830)*100,2),f'AM26_SPID_data.xlsx Data!T{excelrow},poor830; IND state={r["state"]} year2023 ref_year2023.58 data_group={group}; *100')
+# November 2026 rewrite layers, derived independently from the original files.
+c1=pd.read_excel(R/'chapter1.xlsx',sheet_name='fig1');c4=pd.read_excel(R/'chapter1.xlsx',sheet_name='fig4 3.00')
+for stem,years,vals,src in [('cmp300_world',c1.year,c1.headcount300_actual.fillna(c1.headcount300_nowc),'chapter1.xlsx fig1 headcount300_actual|nowc'),
+                            ('cmp300_ssa',c4.year,c4.headcountSSF_actual.fillna(c4.headcountSSF_nowc).fillna(c4.headcountSSF_proj)*100,'chapter1.xlsx fig4 3.00 headcountSSF_actual|nowc|proj *100'),
+                            ('cmp300_india',f[f.povertyline.round(2).eq(3)].year,f[f.povertyline.round(2).eq(3)].fgt0,'Country_FGT IND povertyline=3 fgt0')]:
+    fn,a=artifact(stem);exp={str(int(y)):round(float(v),2) for y,v in zip(years,vals) if 1990<=int(y)<=2026 and pd.notna(v)}
+    assert set(o['date'] for o in a['observations'])==set(exp),(stem,'year coverage')
+    for i,o in enumerate(a['observations']):cell(fn,f'observations[{i}].value',o['value'],exp[o['date']],f'{src}; year={o["date"]}')
+fn,a=artifact('state_poor420_2023')
+for sec in ['rows','regions']:
+    for i,r in enumerate(a[sec]):
+        nm=r.get('state',r.get('name'));cell(fn,f'{sec}[{i}].value',r['value'],round(float(G[nm]['poor420_ln'])*100,1),f'AM26_GSAP_data.xlsx Data 2023 sample={nm} poor420_ln*100')
+for k,fun in [('min',min),('max',max)]:cell(fn,k,a[k],fun(r['value'] for r in a['regions']),'min/max of reconciled region values')
+fn,a=artifact('india_share_world_poor_2024');assert len(a['rows'])==3
+for i,r in enumerate(a['rows']):
+    d=pd.read_excel(R/'chapter1.xlsx',sheet_name=['fig6 3.00','fig6 4.20','fig6 8.30'][i]);v=d[d['Country Name'].eq('India')].iloc[0]
+    cell(fn,f'rows[{i}].poorShare',r['poorShare'],round(float(v['Share (%)']),2),f'chapter1.xlsx fig6 {[3,4.2,8.3][i]} India Share (%)')
+    cell(fn,f'rows[{i}].popShare',r['popShare'],round(float(z['Country population share of global population'])*100,2),'chapter2.xlsx fig10_2026 IND population share *100')
+fn,a=artifact('ppp_revision_2023');assert len(a['rows'])==3
+for i,r in enumerate(a['rows']):
+    old,new=re.findall(r'\$(\d+\.\d+)',r['benchmark']);fo,po=loadpip(old,2017);fnw,pn=loadpip(new,2021);o=round(po[2023]['headcount']*100,2);n=round(pn[2023]['headcount']*100,2)
+    for k,v in [('ppp2017',o),('ppp2021',n),('diff_pp',round(n-o,2))]:cell(fn,f'rows[{i}].{k}',r[k],v,f'{fo} + {fnw} national reporting_year=2023')
+fn,a=artifact('worker_job_type_2024');s2=stata('DataFig4D_2b.dta');s3=stata('DataFig4D_3b.dta')
+for i,(r,(d,col)) in enumerate(zip(a['rows'],[(s2,'empstat_23452024'),(s3,'industrycat4_12024')])):
+    for k,lv in [('poor',1),('nonpoor',0)]:cell(fn,f'rows[{i}].{k}',r[k],round(float(d[d.level.eq(lv)].iloc[0][col]),2),f'DataFig4D_{"2b" if i==0 else "3b"}.dta IND level={lv} {col}')
+fn,a=artifact('beyond_money');full=json.loads((S/'poverty-debate.pov26.monetary_vs_capability_deprivation.IN.json').read_text())['rows']
+ref={(c['artifact'],c['cell']):c['expected'] for c in checks}
+for i,r in enumerate(a['rows']):
+    j=next(j for j,x in enumerate(full) if x['label']==r['label'])
+    cell(fn,f'rows[{i}].value',r['value'],ref[('poverty-debate.pov26.monetary_vs_capability_deprivation.IN.json',f'rows[{j}].value')],f'same independent source selection as monetary_vs_capability_deprivation rows[{j}]')
+W=ROOT/'data/raw/poverty-debate-wages-2026-11'
+for r in json.loads((W/'manifest.json').read_text())['files']:
+    assert hashlib.sha256((W/r['path']).read_bytes()).hexdigest()==r['sha256'],r['path']
+def fiscal(ts):s=ts.year if ts.month>=4 else ts.year-1;return f'{s}-{str(s+1)[2:]}'
+def fymean(series):g=series.groupby([fiscal(t) for t in series.index]);n=g.size();return g.mean()[n==12]
+def cpis(n):
+    o=json.loads((S/f'{n}.json').read_text())['observations'];return fymean(pd.Series({pd.Timestamp(x['date']+'-01'):float(x['value']) for x in o if x.get('value') is not None}))
+cr,cc=cpis('mospi.IN.prices.cpi.rural.general.index'),cpis('mospi.IN.prices.cpi.combined.general.index')
+lab=pd.read_csv(W/'dbie-664-rural-wage-rates-men.csv.gz',sep=';',dtype=str);lab=lab[lab['State Name'].str.strip().eq('ALL INDIA')]
+def occ(name):
+    z=lab[lab['Occ Description'].str.strip().eq(name)].copy();z['t']=pd.to_datetime(z['Time Date']);z=z.drop_duplicates('t')
+    return fymean(z.set_index('t')['Wages In Rupees'].astype(float))
+asi=pd.read_csv(W/'dbie-155-asi-principal-characteristics.csv.gz',sep=';',dtype=str);asi=asi[asi['Unit Description'].eq('NUMBER')]
+def item(name):return asi[asi.Item.str.strip().eq(name)].groupby(asi['Fiscal Year'].str.strip())['Aggragate Value'].first().astype(float)
+go=json.loads((S/'mospi.IN.econ.nas.per_capita_gdp_real.json').read_text())['observations']
+gd=pd.Series({fiscal(pd.Timestamp(x['date'])-pd.Timedelta(days=1)):float(x['value']) for x in go})
+for stem,ser,src in [('realwage_gdp_pcap',gd,'MOSPI NAS real GDP per capita artifact'),
+    ('realwage_rural_farm',occ('General Agricultural Labourers including Watering & Irrigation workers etc.')/cr,'DBIE 664 ALL INDIA general agricultural labourers / CPI-Rural FY mean'),
+    ('realwage_rural_nonfarm',occ('Nonagricultural labourers (Including porters, loaders)')/cr,'DBIE 664 ALL INDIA non-agricultural labourers / CPI-Rural FY mean'),
+    ('realwage_rural_construction',occ('Construction Workers (for roads, dams, industrial & project construction work & well diggers)')/cr,'DBIE 664 ALL INDIA construction workers / CPI-Rural FY mean'),
+    ('realwage_factory',item('11. Wages to workers')/item('7. Mandays-workers (In Thousand)')/cc,'DBIE 155 item11/item7 / CPI-Combined FY mean')]:
+    fn,a=artifact(stem);ser=ser.dropna()
+    for i,o in enumerate(a['observations']):cell(fn,f'observations[{i}].value',o['value'],round(float(100*ser[o['date']]/ser['2014-15']),1),f'{src}; {o["date"]} / 2014-15 *100')
 # Completeness: every numeric data cell must be mapped. Regions duplicate rows intentionally checked.
 covered={q['artifact'] for q in checks};catalog=json.loads((ROOT/'data/catalog/poverty-debate-manifest.json').read_text())
 assert covered=={Path(q['artifact']).name for q in catalog},('unmapped artifacts',covered ^ {Path(q['artifact']).name for q in catalog})
