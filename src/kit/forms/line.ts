@@ -55,7 +55,11 @@ export function line(spec: LineSpec, w: number): Scene {
   // Roles and inks.
   let ci = 0;
   const roles = S.map((s, i) => s.role ?? (i === 0 ? "lead" : S.length > 4 ? "context" : "compare"));
-  const inks = S.map((s, i) => s.color ?? fixedInk(s.label) ?? (roles[i] === "lead" ? INK.neel : roles[i] === "context" ? INK.stoneLine : COMPARE[ci++ % COMPARE.length]));
+  // Beside rural (hara) and urban (neel) the national line is ink: neel is already urban's,
+  // and a second neel line made All India and Urban one colour.
+  const fixed = S.some((s) => fixedInk(s.label));
+  const national = (l: string) => /^(all[- ]india|india|national|total)$/i.test(l.trim());
+  const inks = S.map((s, i) => s.color ?? fixedInk(s.label) ?? (fixed && national(s.label) ? INK.ink : roles[i] === "lead" ? (fixed ? INK.ink : INK.neel) : roles[i] === "context" ? INK.stoneLine : COMPARE[ci++ % COMPARE.length]));
 
   // The x axis: real time when the dates are dates, otherwise ordered categories.
   const timeAxis = S.every((s) => s.points.every((p) => isDate(p.date)));
@@ -65,7 +69,11 @@ export function line(spec: LineSpec, w: number): Scene {
   const xmin = Math.min(...xs), xmax = Math.max(...xs);
 
   // Value scale and formats.
-  const policy = spec.domain ?? (Math.min(...all) >= 0 && spec.unit !== "index" ? "zero" : "fit");
+  // A line is a position, not a length, so it need not start at zero: life expectancy from
+  // 45 to 73 on a scale from 0 is a flat line at the top. Zero is kept when the data come
+  // near it anyway (the lowest value under 40% of the highest), where it costs nothing.
+  const lo0 = Math.min(...all), hi0 = Math.max(...all);
+  const policy = spec.domain ?? (lo0 >= 0 && spec.unit !== "index" && lo0 <= hi0 * 0.4 ? "zero" : "fit");
   const yt = domain([...all, ...(spec.references ?? []).map((r) => r.value)], policy, z.cls === "s" ? 4 : 5);
   const val = formatterFor(all, { unit: spec.unit, decimals: spec.decimals });
   const tickDecimals = Math.max(0, Math.min(2, -Math.floor(Math.log10(yt.step) + 1e-9)));
@@ -92,8 +100,12 @@ export function line(spec: LineSpec, w: number): Scene {
   // Phones get a taller frame so slopes keep their angle and the chart has presence.
   const ratio = z.cls === "s" ? 0.9 : z.cls === "m" ? 0.56 : 0.44;
   const annRows = spec.annotations?.length ? (z.cls === "s" ? 2 : 1) : 0;
-  const top = b.lh("axis") + 6 + annRows * (b.lh("note") + 2);
-  const H = Math.max(240, Math.min(480, Math.round(w * ratio))) + annRows * b.lh("note");
+  // A free-text unit is captioned once, above the top tick: "years", not a bare number.
+  const capLines = spec.unitLabel ? wrap(spec.unitLabel, z.axis, w) : [];
+  const capH = capLines.length ? capLines.length * b.lh("axis") + 4 : 0;
+  const top = capH + b.lh("axis") + 6 + annRows * (b.lh("note") + 2);
+  const H = Math.max(240, Math.min(480, Math.round(w * ratio))) + annRows * b.lh("note") + capH;
+  capLines.forEach((l, k) => b.text(0, b.lh("axis") / 2 + k * b.lh("axis"), l, "axis", "start", { color: INK.ink2 }));
   const bottom = H - b.lh("axis") - 10;
   const x0 = 0, x1 = w - gutter;
   const sx = linear([xmin, xmax], [x0, x1]);
@@ -101,7 +113,8 @@ export function line(spec: LineSpec, w: number): Scene {
 
   // Gridlines and the baseline.
   for (const t of yt.ticks) {
-    if (t === 0 || t === yt.lo) b.hair(x0, sy(t), x1, sy(t), INK.axis);
+    // The dark baseline means zero; a scale that starts elsewhere ends on an ordinary rule.
+    if (t === 0) b.hair(x0, sy(t), x1, sy(t), INK.axis);
     else b.hair(x0, sy(t), x1, sy(t), INK.rule);
   }
 
@@ -178,14 +191,17 @@ export function line(spec: LineSpec, w: number): Scene {
   // A line crossing a tick label pushes it below its gridline; if both sides are taken
   // the label keeps its place over the line, on a halo.
   yt.ticks.forEach((t, k) => {
-    if (t === yt.lo && t !== 0) return;
+    // Every tick is labelled, the lowest too: a scale that does not start at zero says where it starts.
     const text = tick(t, k === yt.ticks.length - 1);
     // Under the zero line the label clears a line lying on the floor (its reserved band plus padding).
     const above = sy(t) - b.lh("axis") / 2 - 2, below = sy(t) + b.lh("axis") / 2 + (t === 0 ? 5 : 2);
     // The zero line may also take the space under it when a line runs along the floor at the
     // left edge; the time-axis labels there are reserved, so it is used only when free.
-    const cands: Array<[number, number, "start"]> = [[x0, above, "start"], [x0, below, "start"]];
-    if (!b.tryText(cands, text, "axis", { halo: true })) b.text(x0, above, text, "axis", "start", { halo: true });
+    // Then the right end of the gridline. A label with no clear place is left off (its
+    // gridline stays), except the top one, which carries the unit and keeps its place on a halo.
+    const cands: Array<[number, number, "start" | "end"]> = [[x0, above, "start"], [x0, below, "start"], [x1, above, "end"], [x1, below, "end"]];
+    const top1 = k === yt.ticks.length - 1;
+    if (!b.tryText(cands, text, "axis", { halo: true }) && top1) b.text(x0, above, text, "axis", "start", { halo: true });
   });
 
   // The time axis.
@@ -213,6 +229,31 @@ export function line(spec: LineSpec, w: number): Scene {
     const cands: Array<[number, number, "start" | "end"]> = [];
     for (const y of rows) cands.push([a.x + 4, y, "start"], [a.x - 4, y, "end"]);
     b.tryText(cands, a.label, "note");
+  }
+
+  // End labels, placed before the phone's inside names so those names find the values
+  // taken (a name set first was overprinted by a value). Dodged so blocks never touch, joined to their line by a hairline if moved.
+  // The value comes first, beside the line's end in its ink, and the name follows it: a
+  // number set a whole name's width away at the page edge read as a separate table.
+  // Values share one right-aligned column so their decimals line up.
+  for (const k of blocks) k.y = sy(k.last.value);
+  const gap = Math.max(...blocks.map((k) => k.h)) + (inside ? 2 : 4);
+  dodge(blocks, gap, top + gap / 2 - b.lh("label") / 2, bottom - gap / 2 + b.lh("label") / 2);
+  const lx = x1 + z.gap * 1.5;
+  const vx = inside ? w : lx + vW, nx = vx + z.gap * 1.5;
+  for (const k of blocks) {
+    const i = k.i, ctx = roles[i] === "context";
+    const ink = ctx ? INK.ink2 : inks[i];
+    const target = sy(k.last.value);
+    let y = k.y - (k.h - b.lh("label")) / 2;
+    const reach = inside ? w - b.tw(k.v, "label", true) - 3 : lx - 3;
+    if (Math.abs(k.y - target) > 3) b.line(sx(xv(k.last.date)) + 3, target, reach, k.y, INK.stone, 1);
+    b.text(vx, y, k.v, "label", "end", { bold: true, color: ink });
+    if (inside) continue;
+    for (const l of k.lines) {
+      b.text(nx, y, l, "label", "start", { color: INK.ink2 });
+      y += b.lh("label");
+    }
   }
 
   // On a phone, each series is named where its own line has clear space: positions along
@@ -283,30 +324,6 @@ export function line(spec: LineSpec, w: number): Scene {
       b.circle(px, py, z.dot, inks[si]);
       b.circle(px, py, z.dot + 3, undefined, inks[si], 1);
       b.callout(px, py, val(p.value), spec.callout.note, inks[si]);
-    }
-  }
-
-  // End labels, dodged so blocks never touch, joined to their line by a hairline if moved.
-  // The value comes first, beside the line's end in its ink, and the name follows it: a
-  // number set a whole name's width away at the page edge read as a separate table.
-  // Values share one right-aligned column so their decimals line up.
-  for (const k of blocks) k.y = sy(k.last.value);
-  const gap = Math.max(...blocks.map((k) => k.h)) + (inside ? 2 : 4);
-  dodge(blocks, gap, top + gap / 2 - b.lh("label") / 2, bottom - gap / 2 + b.lh("label") / 2);
-  const lx = x1 + z.gap * 1.5;
-  const vx = inside ? w : lx + vW, nx = vx + z.gap * 1.5;
-  for (const k of blocks) {
-    const i = k.i, ctx = roles[i] === "context";
-    const ink = ctx ? INK.ink2 : inks[i];
-    const target = sy(k.last.value);
-    let y = k.y - (k.h - b.lh("label")) / 2;
-    const reach = inside ? w - b.tw(k.v, "label", true) - 3 : lx - 3;
-    if (Math.abs(k.y - target) > 3) b.line(sx(xv(k.last.date)) + 3, target, reach, k.y, INK.stone, 1);
-    b.text(vx, y, k.v, "label", "end", { bold: true, color: ink });
-    if (inside) continue;
-    for (const l of k.lines) {
-      b.text(nx, y, l, "label", "start", { color: INK.ink2 });
-      y += b.lh("label");
     }
   }
 

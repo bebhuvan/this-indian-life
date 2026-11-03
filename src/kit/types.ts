@@ -46,6 +46,9 @@ export interface BaseSpec {
   alt?: string;
   /** Unit of the values: "%", "pts", "$m", "₹ lakh", "x", "index" or free text. */
   unit?: string;
+  /** A unit the formatter cannot attach to a number ("years", "deaths per 1,000 live
+   *  births"), printed once as a caption over the scale. Leave it out when `unit` is set. */
+  unitLabel?: string;
   /** Force a number of decimals instead of the kit choosing from the data. */
   decimals?: number;
 }

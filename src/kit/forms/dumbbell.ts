@@ -51,6 +51,21 @@ function pair(b: Builder, xa: number, xb: number, cy: number, r: number) {
   b.reserve({ x: Math.min(xa, xb) - r - 2, y: cy - r - 2, w: Math.abs(xb - xa) + r * 2 + 4, h: r * 2 + 4 });
 }
 
+/**
+ * The plot's right end: as far right as every row's higher value still fits beside its mark.
+ * Reserving the widest value on every row left the figure 30 px short of its frame whenever
+ * the largest values sat inside the scale's end.
+ */
+function reach(b: Builder, items: DumbbellSpec["items"], val: (v: number) => string, lo: number, hi: number, x0: number, w: number, pad: number) {
+  let x1 = w - 2;
+  for (const d of items) {
+    const v = Math.max(d.a, d.b), f = (v - lo) / (hi - lo || 1);
+    const need = pad + b.tw(val(v), "value", d.b >= d.a);
+    if (f > 0) x1 = Math.min(x1, x0 + (w - need - x0) / f);
+  }
+  return x1;
+}
+
 /** The key: a ring and its end's name, then a dot and the protagonist's, set as written. */
 function key(b: Builder, spec: DumbbellSpec, x: number, y: number) {
   const r = b.z.dot;
@@ -83,7 +98,7 @@ function stacked(spec: DumbbellSpec, w: number): Scene {
   const lowW = Math.max(...items.map((d) => b.tw(val(Math.min(d.a, d.b)), "value", d.b < d.a)));
   const highW = Math.max(...items.map((d) => b.tw(val(Math.max(d.a, d.b)), "value", d.b >= d.a)));
   const pad = r + z.gap;
-  const sx = linear([lo, hi], [lowW + pad, w - highW - pad]);
+  const sx = linear([lo, hi], [lowW + pad, reach(b, items, val, lo, hi, lowW + pad, w, pad)]);
   const lh = b.lh("label");
 
   // The key: ring and name, dot and name; on two lines when one will not hold both.
@@ -138,7 +153,7 @@ function wide(spec: DumbbellSpec, w: number): Scene {
   const highW = Math.max(...items.map((d) => b.tw(val(Math.max(d.a, d.b)), "value", d.b >= d.a)));
   const pad = r + z.gap;
   const x0 = col + z.gap * 3 + lowW + pad;
-  const x1 = w - highW - pad;
+  const x1 = reach(b, items, val, lo, hi, x0, w, pad);
   const sx = linear([lo, hi], [x0, x1]);
 
   const keyH = b.lh("label") + 14;

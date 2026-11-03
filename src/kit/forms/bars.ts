@@ -10,7 +10,9 @@ import { wrap } from "../text";
 
 export interface BarsSpec extends BaseSpec {
   form: "bars";
-  items: { label: string; value: number; highlight?: boolean }[];
+  /** `group` sets bars under a heading per group (regions, then states), each group
+   *  sorted within itself, groups in the order they first appear. */
+  items: { label: string; value: number; highlight?: boolean; group?: string }[];
   sort?: "desc" | "asc" | "none";
   reference?: { value: number; label: string };
 }
@@ -18,8 +20,17 @@ export interface BarsSpec extends BaseSpec {
 export function bars(spec: BarsSpec, w: number): Scene {
   const b = new Builder(w);
   const z = b.z;
-  const items = [...spec.items];
-  if (spec.sort !== "none") items.sort((a, c) => (spec.sort === "asc" ? a.value - c.value : c.value - a.value));
+  const order = (a: { value: number }, c: { value: number }) => (spec.sort === "asc" ? a.value - c.value : c.value - a.value);
+  const groupNames = [...new Set(spec.items.map((d) => d.group).filter((g): g is string => !!g))];
+  const grouped = groupNames.length > 1;
+  const items = grouped
+    ? groupNames.flatMap((g) => spec.items.filter((d) => d.group === g).sort((a, c) => (spec.sort === "none" ? 0 : order(a, c)))).concat(spec.items.filter((d) => !d.group))
+    : [...spec.items];
+  if (!grouped && spec.sort !== "none") items.sort(order);
+  // Where each group starts, for its heading.
+  const heads = new Map<number, string>();
+  if (grouped) items.forEach((d, k) => { if (d.group && (k === 0 || items[k - 1].group !== d.group)) heads.set(k, d.group); });
+  const headH = b.lh("label") + 14;
   const values = items.map((d) => d.value);
   const neg = values.some((v) => v < 0);
   const val = formatterFor(values, { unit: spec.unit, decimals: spec.decimals, sign: neg });
@@ -43,9 +54,18 @@ export function bars(spec: BarsSpec, w: number): Scene {
   const x1 = w - posW - z.gap - 2;
   const sx = linear([lo, hi], [x0, x1]);
 
-  const top = spec.reference ? b.lh("note") + 10 : 4;
+  const capLines = spec.unitLabel ? wrap(spec.unitLabel, z.axis, w) : [];
+  const capH = capLines.length ? capLines.length * b.lh("axis") + 6 : 0;
+  capLines.forEach((l, k) => b.text(0, b.lh("axis") / 2 + k * b.lh("axis"), l, "axis", "start", { color: INK.ink2 }));
+  const top = capH + (spec.reference ? b.lh("note") + 10 : 4);
   let y = top;
+  const headAt: Array<{ y: number; label: string }> = [];
   const rows = items.map((d, k) => {
+    // A group heading: a hairline across the figure, the group's name under it.
+    if (heads.has(k)) {
+      headAt.push({ y: y + (k ? 8 : 0), label: heads.get(k)! });
+      y += headH + (k ? 8 : 0);
+    }
     const h = rowH(k);
     const r = { d, k, y: stacked ? y + names[k].length * b.lh("label") + 6 + z.bar / 2 : y + h / 2, nameY: y + b.lh("label") / 2 };
     y += h;
@@ -68,8 +88,13 @@ export function bars(spec: BarsSpec, w: number): Scene {
     else b.text(a - z.gap, cy, v, "value", "end", { bold: strong, color: INK.sindoor });
   }
 
+  for (const g of headAt) {
+    b.hair(0, g.y, w, g.y, INK.rule);
+    b.text(0, g.y + 6 + b.lh("label") / 2, g.label, "label", "start", { bold: true, color: INK.ink2 });
+  }
+
   // The zero line; on a phone only beside each bar, so it never cuts through a name.
-  if (stacked) for (const r of rows) b.hair(sx(0), r.y - z.bar / 2 - 4, sx(0), r.y + z.bar / 2 + 4, INK.axis);
+  if (stacked || grouped) for (const r of rows) b.hair(sx(0), r.y - z.bar / 2 - 4, sx(0), r.y + z.bar / 2 + 4, INK.axis);
   else b.hair(sx(0), top - 4, sx(0), bottom + 2, INK.axis);
 
   if (spec.reference) {

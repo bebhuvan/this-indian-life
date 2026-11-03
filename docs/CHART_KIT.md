@@ -177,6 +177,16 @@ and the CSV downloads stay as they are.
   almanac `dumbbell`. Anything else returns `null` and keeps the old renderer: maps,
   groups of three or more series, and the older bespoke forms. Add a translation (or a
   form) before moving an article whose charts depend on those.
+- `node scripts/kit/coverage.mjs` reports what the kit can draw across the site and why
+  each refused visual stays on the old engine. November 2026: 919 of 1,061 visuals (87%).
+- The adapter keeps the old engine's editorial rules, so moving an article does not change
+  its story: the lead line is the emphasised one, else India, else the one the title
+  names (`lineRoles`); five or more peer lines, share strips, month axes and dashed lines
+  stay on the old engine until the kit has those forms; India among three or more bars
+  is highlighted. Big counts are set in crore or lakh and dollar sums in $bn or $m
+  (`scaleFor`), and a free-text unit becomes `unitLabel`, captioned over the scale.
+- A line's scale starts at zero only when the data come near it (lowest value under 40%
+  of the highest); otherwise it fits the data and labels its lowest tick.
 - The kit owns colour. The adapter does not carry the old renderer's inks; set a
   series' ink in the spec only for a story-wide meaning (`src/kit/samples/inks.ts`).
 - Units are mapped from the artifact's free text by `kitUnit()` (`USD million` → `$m`,
