@@ -39,25 +39,23 @@ function markSvg(m: Mark, z: ReturnType<typeof sizes>, ground: string): string {
 }
 
 /**
- * The site's credit on an exported chart: the double-rule mark, then the name set as a
- * wordmark, "thisindianlife" in Literata semibold and ".today" in the italic margin voice.
- * `y` is the text baseline; `anchor` places the whole mark at x.
+ * The site's credit on an exported chart, as the masthead sets it: "This Indian Life" in
+ * Literata with Indian in italic and the full stop in haldi, then the web address in the
+ * axis grey, since a downloaded chart travels without a link. `y` is the name's baseline;
+ * `anchor` places the whole credit at x.
  */
 function wordmark(x: number, y: number, anchor: "start" | "end", site: string): string {
-  const dot = site.lastIndexOf(".");
-  const head = dot > 0 ? site.slice(0, dot) : site, tail = dot > 0 ? site.slice(dot) : "";
-  const size = 13;
-  const markW = 14, gap = 7;
-  const w = markW + gap + measure(head, size, true, "display") + measure(tail, size, false, "display");
-  const x0 = anchor === "end" ? x - w : x;
-  const ty = n(x0 + markW + gap);
+  // One run of text, so the renderer sets the name and the address side by side exactly.
   return (
-    `<line x1="${n(x0)}" y1="${n(y - 7.5)}" x2="${n(x0 + markW)}" y2="${n(y - 7.5)}" stroke="${INK.ink}" stroke-width="1"/>` +
-    `<line x1="${n(x0)}" y1="${n(y - 4)}" x2="${n(x0 + markW)}" y2="${n(y - 4)}" stroke="${INK.ink}" stroke-width="2"/>` +
-    `<text x="${ty}" y="${n(y)}" font-family="${esc(FONT.display)}" font-size="${size}" fill="${INK.ink}">` +
-    `<tspan font-weight="600">${esc(head)}</tspan><tspan font-style="italic" fill="${INK.ink2}">${esc(tail)}</tspan></text>`
+    `<text x="${n(x)}" y="${n(y)}" text-anchor="${anchor}" font-family="${esc(FONT.display)}" font-size="15" font-weight="450" fill="${INK.ink}">` +
+    `<tspan letter-spacing="-0.3">This </tspan><tspan font-style="italic" letter-spacing="-0.3">Indian</tspan><tspan letter-spacing="-0.3"> Life</tspan>` +
+    `<tspan font-weight="700" fill="${HALDI_STOP}">.</tspan>` +
+    `<tspan dx="10" font-family="${esc(FONT.sans)}" font-size="11.5" font-weight="400" fill="${INK.ink3}">${esc(site)}</tspan></text>`
   );
 }
+
+/** The full stop's haldi, a shade darker than the mark ink so it holds at text size. */
+const HALDI_STOP = "#C98F12";
 
 export interface Chrome {
   title: string;
@@ -109,7 +107,8 @@ export function renderSvg(scene: Scene, opts: RenderOpts = {}): string {
   // Source on the left, the site on the right; on a narrow export they take a line each.
   const site = c.site ?? "thisindianlife.today";
   const srcLines = c.source ? wrap("Source: " + c.source, 11.5, scene.width) : [];
-  const sideBySide = z.cls !== "s" && srcLines.length <= 1 && measure(srcLines[0] ?? "", 11.5) + measure(site, 11.5, true) + 24 <= scene.width;
+  const creditW = measure("This Indian Life.", 15, false, "display") + 10 + measure(site, 11.5);
+  const sideBySide = z.cls !== "s" && srcLines.length <= 1 && measure(srcLines[0] ?? "", 11.5) + creditW + 24 <= scene.width;
   let fy = y + 20;
   let foot = `<line x1="${pad}" y1="${n(y)}" x2="${n(W - pad)}" y2="${n(y)}" stroke="${INK.rule}" stroke-width="1"/>`;
   srcLines.forEach((l, k) => {

@@ -17,7 +17,9 @@ function watermarkSvg(viewBox: string) {
   const parts = viewBox.trim().split(/\s+/).map(Number);
   const width = parts[2] && Number.isFinite(parts[2]) ? parts[2] : 740;
   const height = parts[3] && Number.isFinite(parts[3]) ? parts[3] : 820;
-  return `<text class="chart-watermark" x="${svgCoord(width - 12)}" y="${svgCoord(height - 10)}" text-anchor="end" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="1.1" text-transform="uppercase" fill="#8a8a8a" opacity="0.42">thisindianlife.today</text>`;
+  // The site's name as the masthead sets it (Literata, Indian in italic, a haldi full stop),
+  // small and grey: it signs the drawing without competing with it.
+  return `<text class="chart-watermark" x="${svgCoord(width - 12)}" y="${svgCoord(height - 10)}" text-anchor="end" font-family="Literata, Newsreader, Georgia, serif" font-size="13" font-weight="450" fill="#6E6962" opacity="0.75">This <tspan font-style="italic">Indian</tspan> Life<tspan font-weight="700" fill="#C98F12">.</tspan></text>`;
 }
 
 export function compactSvgPath(path: string) {

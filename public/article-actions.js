@@ -60,6 +60,9 @@
       { f: "Newsreader", w: "300 700", u: "/fonts/newsreader-latin-ext.woff2", r: "U+0100-02BA,U+20A0-20C0" },
       // the italic carries a chart's own notes (a gap, a trend)
       { f: "Newsreader", w: "300 700", u: "/fonts/newsreader-latin-italic.woff2", s: "italic" },
+      // Literata sets the site's name in the footer and the kit's display numbers
+      { f: "Literata", w: "300 600", u: "/fonts/literata-latin.woff2" },
+      { f: "Literata", w: "300 500", u: "/fonts/literata-latin-italic.woff2", s: "italic" },
       { f: "Schibsted Grotesk", w: "400 800", u: "/fonts/schibsted-grotesk-latin.woff2" },
       { f: "Schibsted Grotesk", w: "400 800", u: "/fonts/schibsted-grotesk-latin-ext.woff2", r: "U+0100-02BA,U+20A0-20C0" },
     ];
@@ -140,7 +143,8 @@
     const titleY = top + titleSize;
     const subY = titleY + (titleLines.length - 1) * titleSize * 1.15 + subSize * 2;
     const header = Math.round((meta.subtitle ? subY + (subtitleLines.length - 1) * subSize * 1.4 : titleY) + pad * 0.8);
-    const footer = Math.round(pad * 2.2);
+    // The footer holds the source and the name, and the web address on a line under the name.
+    const footer = Math.round(pad * 2.2 + subSize * 1.4);
     const exportHeight = header + height + footer;
     const primary = oneLine(getComputedStyle(card).getPropertyValue("--c")) || "#121212";
     const source = meta.source ? `Source: ${meta.source}` : "";
@@ -166,7 +170,9 @@
     .export-title{font-size:${titleSize}px;font-weight:500;fill:#121212}
     .export-subtitle{font-size:${subSize}px;fill:#4f4f4f}
     .export-source{font-size:${Math.max(11, Math.round(subSize * 0.85))}px;fill:#4f4f4f}
-    .export-brand{font-size:${Math.round(subSize * 1.3)}px;font-weight:500;fill:#121212}
+    .export-brand{font-family:"Literata","Newsreader",Georgia,serif;font-size:${Math.round(subSize * 1.3)}px;font-weight:450;letter-spacing:-.02em;fill:#1A1A1A}
+    .export-brand .stop{fill:#C98F12;font-weight:700}
+    .export-domain{font-size:${Math.max(11, Math.round(subSize * 0.85))}px;fill:#6E6962}
     .yaxt,.xaxt,.end-s{font-size:14px;fill:#737373}
     .ref-label{font-size:14px;fill:#4f4f4f}
     .end-mini-v{font-size:15px;font-weight:600}
@@ -182,7 +188,8 @@
   <svg x="${pad}" y="${header}" width="${chartW}" height="${height}" viewBox="${escapeXml(viewBox.raw)}" overflow="visible">${inner}</svg>
   <rect x="${pad}" y="${ruleY}" width="${width - 2 * pad}" height="1" fill="#dadada"/>
   ${source ? `<text class="export-source" x="${pad}" y="${footY}">${escapeXml(source)}</text>` : ""}
-  <text class="export-brand" x="${width - pad}" y="${footY}" text-anchor="end">This Indian Life</text>
+  <text class="export-brand" x="${width - pad}" y="${footY}" text-anchor="end">This <tspan font-style="italic">Indian</tspan> Life<tspan class="stop">.</tspan></text>
+  <text class="export-domain" x="${width - pad}" y="${footY + Math.round(subSize * 1.35)}" text-anchor="end">thisindianlife.today</text>
 </svg>`;
     return xml;
   }
