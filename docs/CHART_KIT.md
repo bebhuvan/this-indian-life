@@ -183,8 +183,16 @@ and the CSV downloads stay as they are.
   its story: the lead line is the emphasised one, else India, else the one the title
   names (`lineRoles`); five or more peer lines, share strips, month axes and dashed lines
   stay on the old engine until the kit has those forms; India among three or more bars
-  is highlighted. Big counts are set in crore or lakh and dollar sums in $bn or $m
-  (`scaleFor`), and a free-text unit becomes `unitLabel`, captioned over the scale.
+  is highlighted; ranks (an axis that runs downwards) stay on the old engine.
+- Money and big counts (`scaleFor`): dollars in $tn, $bn or $m, or $ with what they are
+  per; rupees in ₹ lakh crore, ₹ crore or ₹ lakh, or ₹ per something, grouped the Indian
+  way on every tick; other counts in crore or lakh, said in the caption. A size word in
+  the unit ("trillion $") is trusted only when the values are plausibly in it. Whatever
+  the unit says beyond currency and size becomes `unitLabel`, in a fixed order: what it is
+  per, any qualifier, the price base, purchasing-power parity.
+- `node scripts/kit/values.mjs <article-url ...>` prints what the kit prints for each
+  chart (unit, caption, values, ticks). Read it before moving articles: a layout check
+  cannot see "₹3,57,13,886 crore".
 - A line's scale starts at zero only when the data come near it (lowest value under 40%
   of the highest); otherwise it fits the data and labels its lowest tick.
 - The kit owns colour. The adapter does not carry the old renderer's inks; set a

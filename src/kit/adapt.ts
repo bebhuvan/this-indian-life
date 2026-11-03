@@ -15,6 +15,13 @@ export const KIT_ARTICLES = new Set([
   // November 2026, batch 1: one or two articles per domain, every chart translatable.
   "q.people.growth", "q.people.old_before_rich", "q.health.life", "q.work.women",
   "q.energy.coal", "q.climate.co2", "q.society.connected", "q.econ.trade",
+  // Batch 2: every remaining article whose charts the adapter can all translate.
+  "q.econ.size", "q.econ.gold", "q.econ.foreign_investment", "q.econ.fdi_development",
+  "q.work.how_india_works", "q.work.jobs_challenge", "q.econ.compare", "q.work.force",
+  "q.work.agriculture", "q.energy.access", "q.air.today", "q.air.data_poverty",
+  "q.climate.co2_pc", "q.world.share", "q.agriculture.edible_oil_imports", "q.econ.trade_services",
+  "q.econ.trade_competitiveness", "q.econ.industrial_policy", "q.econ.rupee", "q.econ.oil_shock_2026",
+  "q.media.news_consumption", "q.health.road_safety_2024", "q.health.pedestrian_safety_2024",
 ]);
 
 /**
@@ -43,29 +50,71 @@ export function unitCaption(unit = ""): string | undefined {
   return u.length > 60 ? u.slice(0, 58).trimEnd() + "…" : u;
 }
 
+/** Multipliers named in a unit ("INR billion", "US$ million"). */
+const MAGNITUDE: Array<[RegExp, number]> = [[/\btrillions?\b|\btn\b/i, 1e12], [/\bbillions?\b|\bbn\b/i, 1e9], [/\bmillions?\b|\bmn\b/i, 1e6], [/\bcrores?\b/i, 1e7], [/\blakhs?\b/i, 1e5], [/\bthousands?\b/i, 1e3]];
+
+/** What a money unit says beyond its currency and size, in a fixed order: what it is per,
+ *  any other qualifier, the price base, purchasing-power parity. "per worker, constant 2021
+ *  prices, purchasing-power parity". "current" says nothing a reader needs. */
+function moneyCaption(unit: string): string | undefined {
+  const per = unit.match(/\bper [^,()]+/i)?.[0].trim();
+  const base = unit.match(/\bconstant(?: \d{4})?\b|\b\d{4} prices\b/i)?.[0];
+  const ppp = /\bppp\b|international|int-\$/i.test(unit);
+  const rest = unit
+    .replace(/\bper [^,()]+/i, " ").replace(/\bconstant(?: \d{4})?\b|\b\d{4} prices\b|\bprices\b/gi, " ")
+    .replace(/\bppp\b|\binternational\b|int-\$/gi, " ")
+    .replace(/us\$|usd|\$|₹|\binr\b|\brs\.?(?=\s|$)|rupees?|dollars?/gi, " ")
+    .replace(/\b(trillions?|billions?|millions?|crores?|lakhs?|thousands?|tn|bn|mn|current)\b/gi, " ")
+    .replace(/[()]/g, " ").replace(/\s+/g, " ").replace(/^[\W_]+|[\W_]+$/g, "").trim();
+  const priced = base ? (/prices/i.test(base) ? base : `${base} prices`) : undefined;
+  return [per, rest, priced, ppp ? "purchasing-power parity" : undefined].filter(Boolean).join(", ") || undefined;
+}
+
 /**
- * Big counts and dollar sums in the units a reader uses: dollars in billions or millions,
- * everything else in crore or lakh (the site writes "145 crore people", never
- * 1,450,935,791). Returns the divisor and the unit token or caption to use, or null when
- * the values are small enough to print as they are.
+ * Money and big counts in the units a reader uses. Dollars: $tn, $bn, $m, or $ with what
+ * it is per ("$84,534", "per person"). Rupees: ₹ lakh crore, ₹ crore, ₹ lakh, or ₹ per
+ * something, grouped the Indian way. Other counts: crore or lakh, said in the caption
+ * ("145", "people, crore"; never 1,450,935,791). Returns the divisor, the unit token and
+ * the caption, or null when the values print well as they are.
  */
-export function scaleFor(values: number[], unit = ""): { by: number; unit?: string; caption?: string } | null {
-  const max = Math.max(...values.map(Math.abs));
-  if (kitUnit(unit) || !Number.isFinite(max)) return null;
-  const caption = unitCaption(unit);
-  if (/us\$|usd|dollar/i.test(unit)) {
-    // What is left once the currency is said by the unit: "current" says nothing more,
-    // "constant 2015" is the price base and stays.
-    let rest = caption?.replace(/us\$|usd|dollars?/gi, "").replace(/\(\s*\)/g, "").replace(/^[\W_]+|[\W_]+$/g, "").trim();
-    if (rest && /^current$/i.test(rest)) rest = "";
-    if (rest && /^constant\b/i.test(rest) && !/prices/i.test(rest)) rest = `${rest} prices`;
-    if (max >= 1e9) return { by: 1e9, unit: "$bn", caption: rest || undefined };
-    if (max >= 1e6) return { by: 1e6, unit: "$m", caption: rest || undefined };
-    return null;
+export function scaleFor(values: number[], unit0 = ""): { by: number; unit?: string; caption?: string } | null {
+  // "₹/month" is "₹ per month".
+  const unit = unit0.replace(/\s*\/\s*(?=[a-z])/gi, " per ");
+  const max0 = Math.max(...values.map(Math.abs));
+  if (!Number.isFinite(max0)) return null;
+  const token = kitUnit(unit);
+  // A unit the kit already knows: only crore that run into lakh of crore are restated.
+  if (token === "₹ crore" && max0 >= 1e5) return { by: 1e5, unit: "₹ lakh crore" };
+  if (token === "$m" && max0 >= 1e4) return { by: 1e3, unit: "$bn" };
+  if (token) return null;
+  // An index or a ratio of currencies stays a plain number: "rupees (1970 = 1)", "INR per USD" is a rate.
+  if (/=|index|%|percent|ratio|score/i.test(unit)) return null;
+  const dollar = /us\$|usd|dollar|\$/i.test(unit), rupee = /₹|\brs\.?(?=\s|$)|rupee|\binr\b/i.test(unit);
+  const per = /\bper\b/i.test(unit);
+  if (dollar && rupee) return null;
+  // A size named in the unit applies only when the values are plausibly in it: "trillion $"
+  // over values of 19,626,247,000,000 is a label that describes the axis, not the data.
+  const named = MAGNITUDE.find(([re]) => re.test(unit))?.[1] ?? 1;
+  const mag = named > 1 && max0 >= 1e6 ? 1 : named;
+  const max = max0 * mag, cap = moneyCaption(unit);
+  if (dollar) {
+    if (per) return { by: 1 / mag, unit: "$", caption: cap };
+    if (max >= 1e12) return { by: 1e12 / mag, unit: "$tn", caption: cap };
+    if (max >= 1e9) return { by: 1e9 / mag, unit: "$bn", caption: cap };
+    if (max >= 1e6) return { by: 1e6 / mag, unit: "$m", caption: cap };
+    return { by: 1 / mag, unit: "$", caption: cap };
   }
-  if (/%|percent|per |rate|index|ratio|score/i.test(unit)) return null;
-  if (max >= 1e7) return { by: 1e7, caption: caption ? `${caption}, crore` : "crore" };
-  if (max >= 1e5) return { by: 1e5, caption: caption ? `${caption}, lakh` : "lakh" };
+  if (rupee) {
+    if (per) return { by: 1 / mag, unit: "₹", caption: cap };
+    if (max >= 1e12) return { by: 1e12 / mag, unit: "₹ lakh crore", caption: cap };
+    if (max >= 1e7) return { by: 1e7 / mag, unit: "₹ crore", caption: cap };
+    if (max >= 1e5) return { by: 1e5 / mag, unit: "₹ lakh", caption: cap };
+    return { by: 1 / mag, unit: "₹", caption: cap };
+  }
+  if (per || /rate/i.test(unit)) return null;
+  const caption = unitCaption(unit);
+  if (max0 >= 1e7) return { by: 1e7, caption: caption ? `${caption}, crore` : "crore" };
+  if (max0 >= 1e5) return { by: 1e5, caption: caption ? `${caption}, lakh` : "lakh" };
   return null;
 }
 
@@ -75,6 +124,7 @@ export function kitUnit(unit = ""): string | undefined {
   if (/usd million|us\$ ?million|\$ ?million|\$m\b/.test(u)) return "$m";
   if (/usd billion|\$ ?billion|\$bn\b/.test(u)) return "$bn";
   if (/percentage point|\bpp\b|\bpts?\b/.test(u)) return "pts";
+  if (/^(multiples?|times|x)$/.test(u.trim())) return "x";
   if (/^%|percent|% of|\(%\)|share/.test(u)) return "%";
   if (/(rs|₹|inr) ?lakh/.test(u)) return "₹ lakh";
   if (/(rs|₹|inr) ?crore/.test(u)) return "₹ crore";
@@ -97,7 +147,8 @@ export function toKitSpec(v: VisualSpec): AnySpec | null {
     case "line": {
       // Not yet in the kit: shaded ranges, survey rounds on a categorical axis, calendar
       // overlays (a month axis), and dashed lines (the old engine's second meaning for a dash).
-      if (v.range || v.categoricalX || v.monthAxis || v.lines.some((l) => l.dash)) return null;
+      // Ranks run downwards (first at the top), which the kit's scale does not do yet.
+      if (v.range || v.categoricalX || v.monthAxis || v.lines.some((l) => l.dash) || /\brank\b/i.test(v.unit ?? "")) return null;
       const unit = kitUnit(v.unit);
       const roles = lineRoles(v.lines, v.title);
       // Five or more peers are small multiples, which the kit does not draw yet: as one chart

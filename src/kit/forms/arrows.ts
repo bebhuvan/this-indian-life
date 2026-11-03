@@ -123,7 +123,7 @@ export function arrows(spec: ArrowsSpec, w: number): Scene {
     const fy = y + 4 + b.lh("axis") / 2;
     t.ticks.forEach((v, k) => {
       const last = k === t.ticks.length - 1;
-      b.tryText([[sx(v), fy, last ? "end" : k === 0 ? "start" : "middle"]], fmt(v, { decimals: 0, unit: last ? spec.unit : undefined }), "axis");
+      b.tryText([[sx(v), fy, last ? "end" : k === 0 ? "start" : "middle"]], fmt(v, { decimals: 0, unit: last ? spec.unit : undefined, grouping: spec.unit?.startsWith("₹") ? "in" : undefined }), "axis");
     });
     y = fy + b.lh("axis") / 2;
   });

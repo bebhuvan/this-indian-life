@@ -34,7 +34,7 @@ export function columns(spec: ColumnsSpec, w: number): Scene {
   const margin = spec.reference && z.cls !== "s" ? b.tw(refText, "note") + z.gap * 2 : 0;
 
   // Values on every column if they fit, else a quiet axis with only the extremes labelled.
-  const tickText = (v: number, k: number) => fmt(v, { decimals: 0, unit: k === t.ticks.length - 1 ? spec.unit : undefined });
+  const tickText = (v: number, k: number) => fmt(v, { decimals: 0, unit: k === t.ticks.length - 1 ? spec.unit : undefined, grouping: spec.unit?.startsWith("₹") ? "in" : undefined });
   const tickW = Math.max(...t.ticks.map((v, k) => b.tw(tickText(v, k), "axis")));
   let B = bands(items.length, [0, w - margin], 0.46);
   let labelled = items.length <= 12 && values.every((v, i) => b.tw(label(v, i), i === iMax ? "display" : "value") <= B.step - 6);

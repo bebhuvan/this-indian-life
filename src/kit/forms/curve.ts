@@ -76,7 +76,7 @@ export function curve(spec: CurveSpec, w: number): Scene {
   // Tick labels over their gridlines.
   t.ticks.forEach((v, k) => {
     if (v === t.lo && v > 0) return;
-    b.text(0, sy(v) - b.lh("axis") / 2 - 2, fmt(v, { decimals: tickDec, unit: k === t.ticks.length - 1 ? spec.unit : undefined }), "axis", "start", { halo: true });
+    b.text(0, sy(v) - b.lh("axis") / 2 - 2, fmt(v, { decimals: tickDec, unit: k === t.ticks.length - 1 ? spec.unit : undefined, grouping: spec.unit?.startsWith("₹") ? "in" : undefined }), "axis", "start", { halo: true });
   });
 
   // Reference notes: in the margin when wide, else above their rule at the right.

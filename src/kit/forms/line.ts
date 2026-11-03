@@ -79,7 +79,7 @@ export function line(spec: LineSpec, w: number): Scene {
   const yt = domain([...all, ...(spec.references ?? []).map((r) => r.value)], policy, (z.cls === "s" ? 4 : 5) + (policy === "fit" ? 1 : 0));
   const val = formatterFor(all, { unit: spec.unit, decimals: spec.decimals });
   const tickDecimals = Math.max(0, Math.min(2, -Math.floor(Math.log10(yt.step) + 1e-9)));
-  const tick = (v: number, top: boolean) => fmt(v, { decimals: tickDecimals, unit: top ? spec.unit : undefined });
+  const tick = (v: number, top: boolean) => fmt(v, { decimals: tickDecimals, unit: top ? spec.unit : undefined, grouping: spec.unit?.startsWith("₹") ? "in" : undefined });
 
   // End labels. Wide: a name column (wrapping once at most) and every last value
   // right-aligned in one column at the edge. Phone: only the values keep a narrow gutter,

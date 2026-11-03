@@ -79,7 +79,7 @@ function key(b: Builder, spec: DumbbellSpec, x: number, y: number) {
 /** Ticks under a baseline, the unit on the last one. */
 function scale(b: Builder, spec: DumbbellSpec, ticks: number[], sx: (v: number) => number, y: number) {
   ticks.forEach((v, k) => {
-    const s = fmt(v, { decimals: 0, unit: k === ticks.length - 1 ? spec.unit : undefined });
+    const s = fmt(v, { decimals: 0, unit: k === ticks.length - 1 ? spec.unit : undefined, grouping: spec.unit?.startsWith("₹") ? "in" : undefined });
     b.tryText([[sx(v), y, "middle"], [sx(v), y, k === 0 ? "start" : "end"]], s, "axis", {}, 6);
   });
 }

@@ -38,7 +38,9 @@ export interface FormatOpts {
 
 export function fmt(v: number, o: FormatOpts): string {
   const abs = Math.abs(v);
-  const body = abs.toLocaleString(o.grouping === "in" ? "en-IN" : "en-US", {
+  // Rupees are grouped the Indian way (₹1,02,900) unless a chart asks otherwise.
+  const indian = o.grouping ? o.grouping === "in" : !!o.unit?.startsWith("₹");
+  const body = abs.toLocaleString(indian ? "en-IN" : "en-US", {
     minimumFractionDigits: o.decimals,
     maximumFractionDigits: o.decimals,
   });
@@ -55,10 +57,12 @@ export function withUnit(body: string, unit?: string): string {
   if (unit === "x") return body + "×";
   if (unit === "$m") return "$" + body + "m";
   if (unit === "$bn") return "$" + body + "bn";
+  if (unit === "$tn") return "$" + body + "tn";
   if (unit === "$") return "$" + body;
   if (unit === "₹") return "₹" + body;
   if (unit === "₹ lakh") return "₹" + body + " lakh";
   if (unit === "₹ crore") return "₹" + body + " crore";
+  if (unit === "₹ lakh crore") return "₹" + body + " lakh crore";
   return body;
 }
 

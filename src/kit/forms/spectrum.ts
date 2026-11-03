@@ -70,7 +70,7 @@ function horizontal(spec: SpectrumSpec, w: number): Scene {
     b.text(rx, tickY, `${spec.reference.label} ${val(spec.reference.value)}`, "label", "middle", { bold: true });
   }
   const inRange = t.ticks.filter((v) => v >= t.lo && v <= t.hi);
-  inRange.forEach((v, k) => b.tryText([[sx(v), tickY, "middle"]], fmt(v, { decimals: 0, unit: k === inRange.length - 1 ? spec.unit : undefined }), "axis"));
+  inRange.forEach((v, k) => b.tryText([[sx(v), tickY, "middle"]], fmt(v, { decimals: 0, unit: k === inRange.length - 1 ? spec.unit : undefined, grouping: spec.unit?.startsWith("₹") ? "in" : undefined }), "axis"));
   if (spec.ends) {
     b.text(pad - 6, b.lh("note") / 2 + 2, "← " + spec.ends[0], "note", "start");
     b.text(w - pad + 6, b.lh("note") / 2 + 2, spec.ends[1] + " →", "note", "end");
