@@ -66,14 +66,25 @@ function reach(b: Builder, items: DumbbellSpec["items"], val: (v: number) => str
   return x1;
 }
 
-/** The key: a ring and its end's name, then a dot and the protagonist's, set as written. */
-function key(b: Builder, spec: DumbbellSpec, x: number, y: number) {
+/** The key: a ring and its end's name, then a dot and the protagonist's, set as written.
+ *  On one line when both fit from x, else one under the other (long end names, such as
+ *  "India's share of world population", ran past the frame on one line). Returns the
+ *  key's layout so the plot can start below it. */
+function keyLayout(b: Builder, spec: DumbbellSpec, x: number, w: number) {
   const r = b.z.dot;
-  b.circle(x + r, y, r - 0.75, INK.ground, INK.ink2, 1.75);
-  const ka = b.text(x + r * 2 + 7, y, spec.ends[0], "label", "start", { color: INK.ink2 });
-  const xb = ka.x + ka.w + 22;
-  b.circle(xb + r, y, r + 0.5, INK.neel);
-  b.text(xb + r * 2 + 7, y, spec.ends[1], "label", "start", { bold: true, color: INK.neel });
+  const wa = r * 2 + 7 + b.tw(spec.ends[0], "label"), wb = r * 2 + 7 + b.tw(spec.ends[1], "label", true);
+  const one = x + wa + 22 + wb <= w;
+  const kx = one ? x : Math.max(0, Math.min(x, w - Math.max(wa, wb)));
+  const lh = b.lh("label");
+  return { one, kx, wa, height: one ? lh : lh * 2 + 4 };
+}
+function key(b: Builder, spec: DumbbellSpec, k: ReturnType<typeof keyLayout>, y: number) {
+  const r = b.z.dot, lh = b.lh("label");
+  b.circle(k.kx + r, y, r - 0.75, INK.ground, INK.ink2, 1.75);
+  b.text(k.kx + r * 2 + 7, y, spec.ends[0], "label", "start", { color: INK.ink2 });
+  const xb = k.one ? k.kx + k.wa + 22 : k.kx, yb = k.one ? y : y + lh + 4;
+  b.circle(xb + r, yb, r + 0.5, INK.neel);
+  b.text(xb + r * 2 + 7, yb, spec.ends[1], "label", "start", { bold: true, color: INK.neel });
 }
 
 /** Ticks under a baseline, the unit on the last one. */
@@ -157,7 +168,8 @@ function wide(spec: DumbbellSpec, w: number): Scene {
   const x1 = reach(b, items, val, lo, hi, x0, w, pad);
   const sx = linear([lo, hi], [x0, x1]);
 
-  const keyH = b.lh("label") + 14;
+  const kl = keyLayout(b, spec, x0 - r, w);
+  const keyH = kl.height + 14;
   const top = keyH + 6;
   const rowH = (k: number) => Math.max(z.row, names[k].length * b.lh("label") + 10);
   let y = top;
@@ -185,7 +197,7 @@ function wide(spec: DumbbellSpec, w: number): Scene {
     b.text(aLeft ? Math.max(xa, xb) + off : Math.min(xa, xb) - off, cy, val(d.b), "value", aLeft ? "start" : "end", { bold: true, color: INK.neel, halo: true });
   }
 
-  key(b, spec, x0 - r, keyH / 2);
+  key(b, spec, kl, 7 + b.lh("label") / 2);
 
   // A baseline under the last row, ticks hanging from it.
   b.hair(sx(lo), bottom + 4, sx(hi), bottom + 4, INK.axis);
