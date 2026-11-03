@@ -21,11 +21,11 @@ const total = chapters.reduce((n, c) => n + c.entries.length, 0);
     <>
       <div class="tl-kick"><span>India, one number at a time</span><span>{total} questions in {domains.length} chapters</span></div>
       <div class="tl-dr" aria-hidden="true"></div>
-      <a class="tl-np" href="/" aria-label="This Indian Life, home">This <em>Indian</em> Life<i aria-hidden="true"></i></a>
+      <a class="tl-np" href="/" aria-label="This Indian Life, home">This <em>Indian</em> Life<b aria-hidden="true">.</b></a>
     </>
   ) : null}
   <div class="bar">
-    <a class="tl-wm" href="/" aria-label="This Indian Life, home">This <em>Indian</em> Life<i aria-hidden="true"></i></a>
+    <a class="tl-wm" href="/" aria-label="This Indian Life, home">This <em>Indian</em> Life<b aria-hidden="true">.</b></a>
     <nav class="tl-nav" aria-label="Chapters">
       {domains.map((d) => <a href={`/${d.id}/`} aria-current={active === d.id ? "page" : undefined}>{d.label}</a>)}
     </nav>

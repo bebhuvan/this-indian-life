@@ -3,11 +3,12 @@
    at 1280, split 372 | 780 (the margin and the page), or three equal columns for a band
    of figures. The double rule opens the masthead, every figure and every chapter;
    nothing else is ornament. Literata speaks, Schibsted Grotesk measures. Neel is the
-   only accent; sindoor marks a loss. docs/CHART_KIT.md holds the chart rules.
+   only accent; sindoor marks a loss; haldi is the full stop in the name and nothing else.
+   docs/CHART_KIT.md holds the chart rules.
    ============================================================ */
 :root{
   --k-ink:#1A1A1A; --k-ink2:#57534D; --k-ink3:#6E6962; --k-rule:#ECE9E3; --k-stone:#CFCAC0;
-  --k-neel:#26408B; --k-plum:#6B3E75; --k-sindoor:#C0402A;
+  --k-neel:#26408B; --k-plum:#6B3E75; --k-sindoor:#C0402A; --k-haldi:#C98F12;
   --k-display:'Literata','Newsreader',Georgia,serif;
   --k-sans:'Schibsted Grotesk','Helvetica Neue',Arial,sans-serif;
   --k-accent:var(--k-neel);
@@ -47,16 +48,20 @@
 .tl-mast .bar{display:flex;align-items:baseline;gap:44px;padding:30px 0 16px}
 /* The wordmark: Literata light, "Indian" in its italic, closed by a neel full stop. Light
    type at size reads as a book's title page; the 500 roman read as a heading. */
-.tl-wm,.tl-np{font-family:var(--k-display);font-weight:350;color:var(--k-ink);text-decoration:none;white-space:nowrap;font-feature-settings:"kern","liga"}
-.tl-wm{font-size:28px;line-height:1;letter-spacing:-.028em}
-.tl-wm em,.tl-np em{font-style:italic;font-weight:350;letter-spacing:-.02em}
-.tl-wm i,.tl-np i{display:inline-block;width:.15em;height:.15em;border-radius:50%;background:var(--k-neel);margin-left:.045em;vertical-align:baseline}
-.tl-wm:hover i,.tl-np:hover i{background:var(--k-sindoor)}
+.tl-wm,.tl-np{font-family:var(--k-display);color:var(--k-ink);text-decoration:none;white-space:nowrap;font-feature-settings:"kern","liga"}
+/* In the bar the name is set at 450, heavy enough to hold its own beside the bold section
+   name and the double rule; the italic is spaced a hair apart so the three words read as one name. */
+.tl-wm{font-size:28px;font-weight:450;line-height:1;letter-spacing:-.024em}
+.tl-wm em,.tl-np em{font-style:italic;font-weight:inherit;letter-spacing:-.02em;margin:0 .03em}
+/* The full stop is Literata's own, in haldi: a typeset point that matches the letters' weight
+   and sits on their baseline, where a geometric neel disc read as a speck beside the serif. */
+.tl-wm b,.tl-np b{color:var(--k-haldi);font-weight:700;margin-left:.01em}
 /* The nameplate (home): a kicker, the double rule, the name centred at display size, then
    the chapters on a hairline. The small wordmark in the bar steps aside for it. */
 .tl-kick{display:flex;justify-content:space-between;gap:16px;padding:22px 0 12px;font:500 11px/1 var(--k-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--k-ink3)}
 .tl-np{display:block;width:max-content;margin:0 auto;padding:22px 0 20px;font-size:clamp(44px,6.4vw,76px);font-weight:300;line-height:1;letter-spacing:-.036em}
-.tl-np em{font-weight:300;letter-spacing:-.03em}
+.tl-np em{letter-spacing:-.025em;margin:0 .02em}
+.tl-np b{font-weight:600}
 .tl-mast.is-np .bar{justify-content:center;padding:14px 0;border-top:1px solid var(--k-rule)}
 .tl-mast.is-np .tl-wm{display:none}
 .tl-mast.is-np .tl-tools{margin-left:0}
