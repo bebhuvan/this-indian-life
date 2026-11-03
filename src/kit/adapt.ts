@@ -22,6 +22,16 @@ export function kitUnit(unit = ""): string | undefined {
 }
 
 
+/** Row names without a trailing bracket that every row repeats: "Employed in agriculture (%
+ *  of workers)" beside "Self-employed (% of workers)" is the chart's unit, said once in the
+ *  dek. A bracket that differs between rows ("$2.15 to $3.00", "% of line" beside "% of
+ *  population") carries meaning and stays. */
+export function unitless(labels: string[]): string[] {
+  const tail = (l: string) => l.match(/\s*\([^()]*\)\s*$/)?.[0];
+  const t = tail(labels[0] ?? "");
+  return labels.length > 1 && t && labels.every((l) => tail(l) === t) ? labels.map((l) => l.slice(0, l.length - t.length)) : labels;
+}
+
 export function toKitSpec(v: VisualSpec): AnySpec | null {
   switch (v.kind) {
     case "line": {
@@ -60,7 +70,7 @@ export function toKitSpec(v: VisualSpec): AnySpec | null {
         form: "dumbbell",
         unit: kitUnit(v.unit),
         ends: [v.series[0], v.series[1]],
-        items: v.groups.map((g) => ({ label: g.label, a: g.values[0], b: g.values[1] })),
+        items: ((names) => v.groups.map((g, k) => ({ label: names[k], a: g.values[0], b: g.values[1] })))(unitless(v.groups.map((g) => g.label))),
         sort: "none",
       };
     }
@@ -73,7 +83,7 @@ export function toKitSpec(v: VisualSpec): AnySpec | null {
           form: "dumbbell",
           unit: kitUnit(v.unit),
           ends: a.ends,
-          items: a.rows.map((r) => ({ label: String(r.label), a: Number(r[keys[0]]), b: Number(r[keys[1]]) })),
+          items: ((names) => a.rows.map((r, k) => ({ label: names[k], a: Number(r[keys[0]]), b: Number(r[keys[1]]) })))(unitless(a.rows.map((r) => String(r.label)))),
         };
       }
       return null;

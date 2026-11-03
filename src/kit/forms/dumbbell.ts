@@ -69,41 +69,54 @@ function scale(b: Builder, spec: DumbbellSpec, ticks: number[], sx: (v: number) 
   });
 }
 
-/** Phones: each row is a line of text (name, then both values) over a full-width dumbbell. */
+/**
+ * Narrow widths (phones, half-page pairs): the wide layout's grammar, stacked. The key sits
+ * above; each row is its name on a line of its own, then a rail with the two marks and each
+ * value beside its own mark. A table of values over a separate row of dots read as two
+ * charts, with the numbers a column away from what they describe.
+ */
 function stacked(spec: DumbbellSpec, w: number): Scene {
   const b = new Builder(w);
   const z = b.z;
   const { items, val, lo, hi, ticks } = prepare(spec);
   const r = z.dot;
-  const sx = linear([lo, hi], [r + 1, w - r - 1]);
+  const lowW = Math.max(...items.map((d) => b.tw(val(Math.min(d.a, d.b)), "value", d.b < d.a)));
+  const highW = Math.max(...items.map((d) => b.tw(val(Math.max(d.a, d.b)), "value", d.b >= d.a)));
+  const pad = r + z.gap;
+  const sx = linear([lo, hi], [lowW + pad, w - highW - pad]);
   const lh = b.lh("label");
-  const legend = b.lh("axis") + 4;
-  const top = legend + 2;
 
-  // On a phone the value columns name the two ends; they are the only set of headers.
-  const colB = Math.max(...items.map((d) => b.tw(val(d.b), "value", true)), b.tw(spec.ends[1], "axis", true));
-  const xA = w - colB - 10;
-  const colA = Math.max(...items.map((d) => b.tw(val(d.a), "value")), b.tw(spec.ends[0], "axis"));
-  // A name wraps within the space left of the value columns, so it never runs under them.
-  const nameW = Math.max(60, xA - colA - 12);
-  const names = items.map((d) => (b.tw(d.label, "label", d.highlight) <= nameW ? [d.label] : wrap(d.label, z.label, nameW, d.highlight)));
-  const rowHs = names.map((n) => n.length * lh + 24);
-  const rowTop = rowHs.map((_, k) => top + rowHs.slice(0, k).reduce((a, c) => a + c, 0));
-  const bottom = top + rowHs.reduce((a, c) => a + c, 0);
+  // The key: ring and name, dot and name; on two lines when one will not hold both.
+  const ka = r * 2 + 7 + b.tw(spec.ends[0], "label"), kb = r * 2 + 7 + b.tw(spec.ends[1], "label", true);
+  const oneLine = ka + 22 + kb <= w;
+  const k1 = lh / 2;
+  b.circle(r, k1, r - 0.75, INK.ground, INK.ink2, 1.75);
+  b.text(r * 2 + 7, k1, spec.ends[0], "label", "start", { color: INK.ink2 });
+  const kx = oneLine ? ka + 22 : 0, k2 = oneLine ? k1 : k1 + lh + 2;
+  b.circle(kx + r, k2, r + 0.5, INK.neel);
+  b.text(kx + r * 2 + 7, k2, spec.ends[1], "label", "start", { bold: true, color: INK.neel });
+  const top = k2 + lh / 2 + 14;
 
-  for (const v of ticks) b.hair(sx(v), top, sx(v), bottom, INK.rule);
-  b.text(xA, top - legend / 2 + 1, spec.ends[0], "axis", "end", { color: INK.ink2 });
-  b.text(w, top - legend / 2 + 1, spec.ends[1], "axis", "end", { bold: true, color: INK.neel });
-  items.forEach((d, k) => {
-    const ty = rowTop[k] + lh / 2 + 2;
-    const cy = ty + (names[k].length - 1) * lh + lh / 2 + 11;
-    names[k].forEach((l, j) => b.text(0, ty + j * lh, l, "label", "start", { bold: d.highlight, halo: true }));
-    b.text(w, ty, val(d.b), "value", "end", { bold: true, color: INK.neel, halo: true });
-    b.text(xA, ty, val(d.a), "value", "end", { color: INK.ink2, halo: true });
-    pair(b, sx(d.a), sx(d.b), cy, r);
+  let y = top;
+  const rails: number[] = [];
+  items.forEach((d) => {
+    const names = wrap(d.label, z.label, w, d.highlight);
+    names.forEach((l, j) => b.text(0, y + lh / 2 + j * lh, l, "label", "start", { bold: d.highlight }));
+    const cy = y + names.length * lh + r + 8;
+    rails.push(cy);
+    const xa = sx(d.a), xb = sx(d.b);
+    b.hair(sx(lo), cy, sx(hi), cy, INK.rule);
+    pair(b, xa, xb, cy, r);
+    const aLeft = d.a <= d.b, off = r + z.gap - 1;
+    b.text(aLeft ? Math.min(xa, xb) - off : Math.max(xa, xb) + off, cy, val(d.a), "value", aLeft ? "end" : "start", { color: INK.ink2, halo: true });
+    b.text(aLeft ? Math.max(xa, xb) + off : Math.min(xa, xb) - off, cy, val(d.b), "value", aLeft ? "start" : "end", { bold: true, color: INK.neel, halo: true });
+    y = cy + r + 14;
   });
+  const bottom = rails[rails.length - 1] + r + 8;
 
-  const fy = bottom + 4 + b.lh("axis") / 2;
+  b.hair(sx(lo), bottom, sx(hi), bottom, INK.axis);
+  for (const v of ticks) b.hair(sx(v), bottom, sx(v), bottom + 4, INK.axis);
+  const fy = bottom + 6 + b.lh("axis") / 2;
   scale(b, spec, ticks, sx, fy);
   return b.scene(fy + b.lh("axis") / 2 + 2, spec.alt ?? `${items.length} rows comparing ${spec.ends[0]} with ${spec.ends[1]}.`);
 }

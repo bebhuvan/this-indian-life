@@ -59,7 +59,9 @@ export function tiles(spec: TilesSpec, w: number): Scene {
   });
 
   // The grid: column count by width; every tile the same height, sized for its text.
-  const cols = z.cls === "s" ? (w >= 440 ? 3 : 2) : z.cls === "m" ? 5 : 7;
+  // A medium width under 600 takes four columns: at five, a one-word name (Lakshadweep)
+  // could not fit its tile and ran past the frame.
+  const cols = z.cls === "s" ? (w >= 440 ? 3 : 2) : z.cls === "m" ? (w < 600 ? 4 : 5) : 7;
   const gap = 4;
   const tw = (w - gap * (cols - 1)) / cols;
   const pad = z.cls === "s" ? 10 : 12;

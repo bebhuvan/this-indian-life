@@ -141,7 +141,7 @@ export function slope(spec: SlopeSpec, w: number): Scene {
   let H = maxBottom + 4;
   if (spec.footnote) {
     H += 8;
-    for (const l of wrap(spec.footnote, z.note, w)) {
+    for (const l of wrap(spec.footnote, z.note, w, false, "display")) {
       H += b.lh("note") / 2;
       b.text(0, H, l, "note", "start");
       H += b.lh("note") / 2;

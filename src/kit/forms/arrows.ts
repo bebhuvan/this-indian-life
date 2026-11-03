@@ -62,7 +62,7 @@ export function arrows(spec: ArrowsSpec, w: number): Scene {
     if (g.note) {
       const nx = b.tw(g.label, "label", true) + 12;
       if (!phone && nx + b.tw(g.note, "note") <= w) b.text(nx, y, g.note, "note", "start");
-      else for (const l of wrap(g.note, z.note, w)) {
+      else for (const l of wrap(g.note, z.note, w, false, "display")) {
         y += b.lh("note");
         b.text(0, y, l, "note", "start");
       }

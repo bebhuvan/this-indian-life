@@ -52,7 +52,9 @@ export function season(spec: SeasonSpec, w: number): Scene {
     b.rect(kx + i * (sw + 2), ky - 6, sw, 12, c);
   });
   kx += STEPS.length * (sw + 2) + 6;
-  b.text(kx, ky, "twice even or more", "axis");
+  // The far end's name shortens on the narrowest phones rather than run off the frame.
+  const hiName = ["twice even or more", "twice even", "2× even"].find((t) => kx + b.tw(t, "axis") <= w) ?? "2×";
+  b.text(kx, ky, hiName, "axis");
   // The breakpoint between the two halves of the key is the even spread.
   const evenX = b.tw("Less than even", "axis") + 8 + BELOW.length * (sw + 2) - 1;
   b.hair(evenX, ky - 9, evenX, ky + 9, INK.ink);

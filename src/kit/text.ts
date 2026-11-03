@@ -22,14 +22,15 @@ export function measure(text: string, size: number, bold = false, face: FaceName
   return (units / 1000) * size;
 }
 
-/** Break text into lines no wider than `width`. Words longer than a line are kept whole. */
-export function wrap(text: string, size: number, width: number, bold = false): string[] {
+/** Break text into lines no wider than `width`, measured in the face it will be set in
+ *  (a note is Literata, wider than the grotesque). Words longer than a line are kept whole. */
+export function wrap(text: string, size: number, width: number, bold = false, face: FaceName = "sans"): string[] {
   const words = text.split(/\s+/).filter(Boolean);
   const lines: string[] = [];
   let line = "";
   for (const w of words) {
     const next = line ? line + " " + w : w;
-    if (!line || measure(next, size, bold) <= width) line = next;
+    if (!line || measure(next, size, bold, face, false) <= width) line = next;
     else {
       lines.push(line);
       line = w;
