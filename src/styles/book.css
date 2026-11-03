@@ -324,7 +324,10 @@
   .tl-kick span+span{display:none}
   .tl-kick{justify-content:center;padding-top:16px}
   .tl-np{font-size:clamp(36px,11vw,48px);padding:18px 0 14px}
-  .tl-mast.is-np .bar{justify-content:flex-end;padding:10px 0}
+  /* Under the centred name the links are centred too: pushed right, two words sat orphaned
+     under a name they did not belong to. */
+  .tl-mast.is-np .bar{justify-content:center;padding:12px 0}
+  .tl-mast.is-np .tl-tools{gap:28px}
   .tl-nav{display:none}
   .tl-tools{gap:16px;font-size:14px}.tl-tools .srch{display:none}
   .tl-menu{display:block}
