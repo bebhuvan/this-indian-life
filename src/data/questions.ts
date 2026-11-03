@@ -413,7 +413,8 @@ export function pullQuoteForQuestion(page: QuestionPage) {
 export type MarkdownBlock =
   | { type: "h2" | "h3" | "p"; text: string }
   | { type: "ul"; items: string[] }
-  | { type: "table"; headers: string[]; rows: string[][] };
+  | { type: "table"; headers: string[]; rows: string[][] }
+  | { type: "quote"; text: string; cite: string };
 
 function parseMarkdownTable(block: string) {
   const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
@@ -440,6 +441,13 @@ export function markdownBlocks(markdown: string) {
   for (const block of split.split(/\n{2,}/).map((item) => item.trim()).filter(Boolean)) {
     const table = parseMarkdownTable(block);
     if (table) blocks.push({ type: "table", ...table });
+    else if (block.split("\n").every((line) => line.trim().startsWith(">"))) {
+      // A quotation from a source: "> words" lines, closed by "> Source: who, where".
+      const lines = block.split("\n").map((line) => line.trim().replace(/^>\s?/, ""));
+      const at = lines.findIndex((line) => /^Source:\s/.test(line));
+      const text = (at < 0 ? lines : lines.slice(0, at)).join(" ").trim();
+      blocks.push({ type: "quote", text, cite: at < 0 ? "" : lines.slice(at).join(" ").replace(/^Source:\s*/, "").trim() });
+    }
     else if (block.startsWith("### ")) blocks.push({ type: "h3", text: block.slice(4) });
     else if (block.startsWith("## ")) blocks.push({ type: "h2", text: block.slice(3) });
     else if (block.split("\n").every((line) => /^-\s+/.test(line.trim()))) {

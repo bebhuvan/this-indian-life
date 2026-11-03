@@ -13,6 +13,16 @@ agents read the same playbook.
 > to that playbook for source-to-publication work. Keep article-specific audit rules
 > with the article rather than growing the skill into a second manual.
 >
+> **A true article can still fail its reader.** For the reader's side (what they ask,
+> in what order, how each idea is explained) follow `docs/STORYTELLING.md` and
+> the `indica-story` skill (`.agents/skills/indica-story/`, linked from
+> `.claude/skills/`), scored by `docs/ARTICLE_RUBRIC.md`. Rules that every agent must follow:
+> 1. Read the whole source and write `data/stories/<story>/source-digest.md` before designing anything.
+> 2. Get the story design (big beat, question ladder, boxes) approved before writing prose.
+> 3. Open with the biggest true finding; headings are the questions a lay reader would ask.
+> 4. Explain the thing before naming the term; translate dollars into rupees and people.
+> 5. Reviewers flag and only the writer edits. Method detail goes in chart notes, boxes and the methodology section, not in every paragraph.
+>
 > Deep docs (read the relevant one before starting): `docs/ARCHITECTURE.md`,
 > `docs/EXPLANATION_PIPELINE.md`, `docs/DATA_SOURCES.md`,
 > `docs/CHART_SELECTION_PHILOSOPHY.md`, `docs/EDITORIAL_NORTH_STAR.md`,
@@ -177,7 +187,9 @@ repository because unrelated work may be present. The deploy workflow also runs
 - Link the obvious cross-references (e.g. "current-account deficit" → trade article, "total return / Nifty 500" → an academy returns entry, "inflation" → inflation article).
 
 ### Voice & honesty
-Read `docs/academy/VOICE.md`. The "macha" layer ("okay bro, what does this mean") is
+Read `docs/academy/VOICE.md` for the sentence and `docs/STORYTELLING.md` for the
+voice of the whole piece: an economist who can explain anything to anyone, without
+talking down or showing off. The "macha" layer ("okay bro, what does this mean") is
 warm + grounded. **No em-dashes.** Round like a human. Use only numbers that trace to a
 source. Be scrupulous about estimate vs measurement.
 
