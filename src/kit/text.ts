@@ -25,11 +25,12 @@ export function measure(text: string, size: number, bold = false, face: FaceName
 /** Break text into lines no wider than `width`, measured in the face it will be set in
  *  (a note is Literata, wider than the grotesque). Words longer than a line are kept whole. */
 export function wrap(text: string, size: number, width: number, bold = false, face: FaceName = "sans"): string[] {
-  const words = text.split(/\s+/).filter(Boolean);
+  // A slash is a place to break too ("Tertiary/" then "post-secondary"), joined without a space.
+  const words = text.split(/\s+/).filter(Boolean).flatMap((w) => (measure(w, size, bold, face, false) > width ? w.split(/(?<=\/)/) : [w]));
   const lines: string[] = [];
   let line = "";
   for (const w of words) {
-    const next = line ? line + " " + w : w;
+    const next = line ? (line.endsWith("/") ? line + w : line + " " + w) : w;
     if (!line || measure(next, size, bold, face, false) <= width) line = next;
     else {
       lines.push(line);

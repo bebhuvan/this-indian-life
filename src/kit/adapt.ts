@@ -7,22 +7,13 @@ import type { VisualSpec } from "../data/viz";
 import type { AnySpec } from "./index";
 import { namedIn } from "../data/almanac";
 
-/** Articles drawn with the kit. Add a question id here to move an article over; anything
- *  the adapter cannot translate stays on the old engine within the same article.
- *  scripts/kit/coverage.mjs lists what each article still needs. */
-export const KIT_ARTICLES = new Set([
-  "q.econ.lrs_controls", "q.econ.poverty_debate",
-  // November 2026, batch 1: one or two articles per domain, every chart translatable.
-  "q.people.growth", "q.people.old_before_rich", "q.health.life", "q.work.women",
-  "q.energy.coal", "q.climate.co2", "q.society.connected", "q.econ.trade",
-  // Batch 2: every remaining article whose charts the adapter can all translate.
-  "q.econ.size", "q.econ.gold", "q.econ.foreign_investment", "q.econ.fdi_development",
-  "q.work.how_india_works", "q.work.jobs_challenge", "q.econ.compare", "q.work.force",
-  "q.work.agriculture", "q.energy.access", "q.air.today", "q.air.data_poverty",
-  "q.climate.co2_pc", "q.world.share", "q.agriculture.edible_oil_imports", "q.econ.trade_services",
-  "q.econ.trade_competitiveness", "q.econ.industrial_policy", "q.econ.rupee", "q.econ.oil_shock_2026",
-  "q.media.news_consumption", "q.health.road_safety_2024", "q.health.pedestrian_safety_2024",
-]);
+/** Articles kept on the old engine entirely. Since November 2026 every other article is
+ *  drawn by the kit: each visual the adapter can translate goes to the kit, and the rest
+ *  (maps, small multiples, scatters, share strips and the older bespoke forms) stay on the
+ *  old engine within the same page. scripts/kit/coverage.mjs lists what each still needs. */
+export const KIT_EXCLUDED = new Set<string>([]);
+/** Whether an article is drawn with the kit (kept as a set-like for its callers). */
+export const KIT_ARTICLES = { has: (id: string) => !KIT_EXCLUDED.has(id) };
 
 /**
  * Roles for a line chart's series, by the rule the old engine used (lineRoles in
@@ -53,21 +44,21 @@ export function unitCaption(unit = ""): string | undefined {
 /** Multipliers named in a unit ("INR billion", "US$ million"). */
 const MAGNITUDE: Array<[RegExp, number]> = [[/\btrillions?\b|\btn\b/i, 1e12], [/\bbillions?\b|\bbn\b/i, 1e9], [/\bmillions?\b|\bmn\b/i, 1e6], [/\bcrores?\b/i, 1e7], [/\blakhs?\b/i, 1e5], [/\bthousands?\b/i, 1e3]];
 
-/** What a money unit says beyond its currency and size, in a fixed order: what it is per,
- *  any other qualifier, the price base, purchasing-power parity. "per worker, constant 2021
- *  prices, purchasing-power parity". "current" says nothing a reader needs. */
+/** What a money unit says beyond its currency and size, in a fixed order: what is
+ *  measured, what it is per, the price base, purchasing-power parity. "output, per hour
+ *  worked, purchasing-power parity". "current" says nothing a reader needs. */
 function moneyCaption(unit: string): string | undefined {
-  const per = unit.match(/\bper [^,()]+/i)?.[0].trim();
-  const base = unit.match(/\bconstant(?: \d{4})?\b|\b\d{4} prices\b/i)?.[0];
+  const per = unit.match(/\bper [^,()]+/i)?.[0].replace(/\s+at\s+ppp\b/i, "").replace(/us\$|usd|\$|₹|\binr\b/gi, "").replace(/\s+/g, " ").trim();
+  const base = unit.match(/\bconstant(?: \d{4}(?:-\d{2})?)?\b|\b\d{4}(?:-\d{2})? prices\b/i)?.[0];
   const ppp = /\bppp\b|international|int-\$/i.test(unit);
   const rest = unit
-    .replace(/\bper [^,()]+/i, " ").replace(/\bconstant(?: \d{4})?\b|\b\d{4} prices\b|\bprices\b/gi, " ")
+    .replace(/\bper [^,()]+/i, " ").replace(/\bconstant(?: \d{4}(?:-\d{2})?)?\b|\b\d{4}(?:-\d{2})? prices\b|\bprices\b/gi, " ")
     .replace(/\bppp\b|\binternational\b|int-\$/gi, " ")
     .replace(/us\$|usd|\$|₹|\binr\b|\brs\.?(?=\s|$)|rupees?|dollars?/gi, " ")
     .replace(/\b(trillions?|billions?|millions?|crores?|lakhs?|thousands?|tn|bn|mn|current)\b/gi, " ")
     .replace(/[()]/g, " ").replace(/\s+/g, " ").replace(/^[\W_]+|[\W_]+$/g, "").trim();
   const priced = base ? (/prices/i.test(base) ? base : `${base} prices`) : undefined;
-  return [per, rest, priced, ppp ? "purchasing-power parity" : undefined].filter(Boolean).join(", ") || undefined;
+  return [rest, per, priced, ppp ? "purchasing-power parity" : undefined].filter(Boolean).join(", ") || undefined;
 }
 
 /**
@@ -88,9 +79,12 @@ export function scaleFor(values: number[], unit0 = ""): { by: number; unit?: str
   if (token === "$m" && max0 >= 1e4) return { by: 1e3, unit: "$bn" };
   if (token) return null;
   // An index or a ratio of currencies stays a plain number: "rupees (1970 = 1)", "INR per USD" is a rate.
-  if (/=|index|%|percent|ratio|score/i.test(unit)) return null;
+  if (/=|\bindex\b|%|percent|\bratios?\b|\bscore\b/i.test(unit)) return null;
   const dollar = /us\$|usd|dollar|\$/i.test(unit), rupee = /₹|\brs\.?(?=\s|$)|rupee|\binr\b/i.test(unit);
   const per = /\bper\b/i.test(unit);
+  // A rate (per person, per 1,000, per capita) is read as it is; a count per period
+  // ("deaths per year") is still a count and is sized like one.
+  const rate = /\bper (\d|cent|capita|person|people|head|worker|resident|household|thousand|hundred|million|lakh|km|sq|hour|case|delivery|gb|unit)/i.test(unit) || /\/\s*(\d|km|kwh|gb)/i.test(unit0);
   if (dollar && rupee) return null;
   // A size named in the unit applies only when the values are plausibly in it: "trillion $"
   // over values of 19,626,247,000,000 is a label that describes the axis, not the data.
@@ -111,11 +105,14 @@ export function scaleFor(values: number[], unit0 = ""): { by: number; unit?: str
     if (max >= 1e5) return { by: 1e5 / mag, unit: "₹ lakh", caption: cap };
     return { by: 1 / mag, unit: "₹", caption: cap };
   }
-  if (per || /rate/i.test(unit)) return null;
-  const caption = unitCaption(unit);
-  if (max0 >= 1e7) return { by: 1e7, caption: caption ? `${caption}, crore` : "crore" };
-  if (max0 >= 1e5) return { by: 1e5, caption: caption ? `${caption}, lakh` : "lakh" };
-  return null;
+  if (rate || /\brates?\b/i.test(unit)) return null;
+  // Counts: a size word in the unit is applied, or dropped when the values are plainly raw
+  // ("thousands" over 13,093,785 deaths), so the caption never says two sizes.
+  const n = max0 * mag;
+  const caption = unitCaption(unit.replace(/\b(trillions?|billions?|millions?|crores?|lakhs?|thousands?)\b/gi, " ").replace(/[()]/g, " ").replace(/\s*,(\s*,)+/g, ",").replace(/\s+,/g, ",").replace(/\s+/g, " ").replace(/^[\W_]+|[\W_]+$/g, "").trim());
+  if (n >= 1e7) return { by: 1e7 / mag, caption: caption ? `${caption}, crore` : "crore" };
+  if (n >= 1e5) return { by: 1e5 / mag, caption: caption ? `${caption}, lakh` : "lakh" };
+  return mag > 1 ? { by: 1 / mag, caption } : null;
 }
 
 /** The kit's unit tokens, from the free-text units the artifacts carry. */

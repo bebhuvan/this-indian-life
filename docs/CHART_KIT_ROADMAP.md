@@ -26,7 +26,7 @@ Their charts are not prettier because of a palette. Five habits separate them:
 
 | | Now | Gap |
 |---|---|---|
-| Engines | 3 (kit on 2 of 78 articles, 1,009 charts in all) | the kit should draw everything |
+| Engines | 3; the kit is on every article and draws 916 of 1,061 visuals (step 1, done in November 2026) | the remaining 14% need the forms in step 3 |
 | Forms in the kit | 13 | no map, small multiples, scatter, stacked area or bars, distribution, interval, table |
 | Annotation | line: events, references, periods, point notes; bars: one reference | none on bars, dumbbells, scatters |
 | Checks | scene checker (overlap, overflow, size, contrast) at 91 widths; fingerprints of every sample | no spec validation, no edge-case fixtures, not run in CI |

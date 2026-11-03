@@ -116,13 +116,16 @@ haldi is set darker, `textInk` in `theme.ts`, applied by the renderer to every t
 is never a column away from its mark.
 
 - **Lines**: the last value right after the line's end, then the series name in `ink2`.
+  A single line keeps only the value in the gutter; its name is written on the plot beside
+  the line (a column of one name took a quarter of a wide plot).
 - **Dumbbells**: each value outside its own end, the lower left and the higher right; the
   protagonist's value bold neel, the other `ink2`. The two ends are keyed once above the
   plot in their own words (no lowercasing: "PPP" stays "PPP"). Each row runs on a rail; the
   scale hangs under a baseline. A dumbbell's scale never runs below zero for values that
   cannot be negative.
 - **Bars**: the value at the bar's end.
-- A name that wraps keeps every word; no line limit silently drops the tail.
+- A name that wraps keeps every word; no line limit silently drops the tail. A word too
+  long to break (after a slash, if it has one) widens its column rather than leave the frame.
 
 ## Architecture
 
@@ -177,8 +180,10 @@ and the CSV downloads stay as they are.
   almanac `dumbbell`. Anything else returns `null` and keeps the old renderer: maps,
   groups of three or more series, and the older bespoke forms. Add a translation (or a
   form) before moving an article whose charts depend on those.
-- `node scripts/kit/coverage.mjs` reports what the kit can draw across the site and why
-  each refused visual stays on the old engine. November 2026: 919 of 1,061 visuals (87%).
+- Since November 2026 every article is on the kit (`KIT_EXCLUDED` in `adapt.ts` takes one
+  off). Each visual the adapter can translate is drawn by the kit; the rest stay on the old
+  engine on the same page. `node scripts/kit/coverage.mjs` reports what the kit draws and
+  why each refused visual is refused: 916 of 1,061 visuals (86%) in November 2026.
 - The adapter keeps the old engine's editorial rules, so moving an article does not change
   its story: the lead line is the emphasised one, else India, else the one the title
   names (`lineRoles`); five or more peer lines, share strips, month axes and dashed lines

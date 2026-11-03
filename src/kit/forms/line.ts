@@ -85,7 +85,10 @@ export function line(spec: LineSpec, w: number): Scene {
   // right-aligned in one column at the edge. Phone: only the values keep a narrow gutter,
   // so no number is ever dropped; the names move inside the plot, where their own line
   // has clear space, and the lines run nearly edge to edge.
-  const inside = z.cls === "s";
+  // One line needs no column of names: its name (often the title's own words) is written on
+  // the plot beside the line, and only the value keeps a gutter. A name column for one
+  // series took a quarter of a wide plot for a label.
+  const inside = z.cls === "s" || S.length === 1;
   const vW = Math.max(...S.map((s) => b.tw(val(s.points[s.points.length - 1].value), "label", true)));
   const maxName = z.cls === "m" ? w * 0.2 : w * 0.17;
   const blocks = S.map((s, i) => {

@@ -85,7 +85,7 @@ export function slope(spec: SlopeSpec, w: number): Scene {
     const sy = linear([t.lo, t.hi], [bottom, top]);
     const leftW = Math.max(...p.series.map((s) => b.tw(val(s.values[0]), "value")), b.tw(val(0), "axis"));
     const maxName = pw * (side ? 0.42 : 0.4);
-    const names = p.series.map((s) => (b.tw(s.label, "label") <= maxName ? [s.label] : wrap(s.label, z.label, maxName).slice(0, 2)));
+    const names = p.series.map((s) => (b.tw(s.label, "label") <= maxName ? [s.label] : wrap(s.label, z.label, maxName)));
     const rightW = Math.max(...p.series.map((s, k) => b.tw(val(s.values[s.values.length - 1]), "value", true) + 8 + Math.max(...names[k].map((l) => b.tw(l, "label")))));
     // The end labels set the right margin; nothing is left empty past them.
     const xl = X + leftW + LEAD + 4;

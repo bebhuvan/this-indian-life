@@ -42,8 +42,9 @@ export function bars(spec: BarsSpec, w: number): Scene {
   const maxCol = stacked ? w : w * 0.3;
   // On a phone a name longer than the width wraps onto further lines above its bar, so it
   // never runs out of the frame.
-  const names = items.map((d) => (b.tw(d.label, "label") <= maxCol ? [d.label] : stacked ? wrap(d.label, z.label, maxCol) : wrap(d.label, z.label, maxCol).slice(0, 2)));
-  const col = stacked ? 0 : Math.min(maxCol, Math.max(...names.flat().map((l) => b.tw(l, "label"))));
+  const names = items.map((d) => (b.tw(d.label, "label") <= maxCol ? [d.label] : stacked ? wrap(d.label, z.label, maxCol) : wrap(d.label, z.label, maxCol)));
+  // Every word kept: the column holds a word too long to break.
+  const col = stacked ? 0 : Math.max(...names.flat().map((l) => b.tw(l, "label")));
   const rowH = (k: number) => (stacked ? names[k].length * b.lh("label") + 6 + z.bar + 14 : Math.max(z.row, names[k].length * b.lh("label") + 10));
 
   // Room for values on both sides, so no label leaves the frame or meets the names.

@@ -144,10 +144,11 @@ function wide(spec: DumbbellSpec, w: number): Scene {
   // Name column, then the plot. The values travel with their marks, so the plot keeps
   // room on each side for the widest value that can sit there.
   const maxCol = w * 0.26;
-  const names = items.map((d) => (b.tw(d.label, "label", d.highlight) <= maxCol ? [d.label] : wrap(d.label, z.label, maxCol, d.highlight).slice(0, 2)));
+  const names = items.map((d) => (b.tw(d.label, "label", d.highlight) <= maxCol ? [d.label] : wrap(d.label, z.label, maxCol, d.highlight)));
   // Each name is measured in the weight it is drawn in (bold only when highlighted), so the
   // longest one starts at the left edge rather than a bold-width gap in from it.
-  const col = Math.min(maxCol, Math.max(...names.flatMap((n, k) => n.map((l) => b.tw(l, "label", items[k].highlight)))));
+  // A word that cannot break is wider than the column; the column grows to hold it.
+  const col = Math.max(...names.flatMap((n, k) => n.map((l) => b.tw(l, "label", items[k].highlight))));
   const r = z.dot;
   const lowW = Math.max(...items.map((d) => b.tw(val(Math.min(d.a, d.b)), "value", d.b < d.a)));
   const highW = Math.max(...items.map((d) => b.tw(val(Math.max(d.a, d.b)), "value", d.b >= d.a)));

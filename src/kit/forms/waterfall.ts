@@ -41,7 +41,7 @@ export function waterfall(spec: WaterfallSpec, w: number): Scene {
   // Name column, right-aligned against the bars.
   const names = [spec.start?.label, ...spec.steps.map((d) => d.label), endLabel].filter(Boolean) as string[];
   const maxCol = w * (z.cls === "s" ? 0.38 : 0.28);
-  const lines = (s: string) => (b.tw(s, "label") <= maxCol ? [s] : wrap(s, z.label, maxCol).slice(0, 2));
+  const lines = (s: string) => (b.tw(s, "label") <= maxCol ? [s] : wrap(s, z.label, maxCol));
   const col = Math.min(maxCol, Math.max(...names.flatMap(lines).map((l) => b.tw(l, "label", true))));
   const valW = Math.max(...rows.map((r) => b.tw(val(r.value), "value", true)));
   const netText = val(net);
