@@ -186,9 +186,12 @@ export function renderChoroplethStrip(visual: ChoroplethVisual, W = 320) {
   // sets it; the value column as wide as its widest value. A fixed 128-unit name column left
   // about 36 px empty on a phone, so the strip did not line up with the map or the card.
   const shortName = (n: string) => n.replace("Dadra and Nagar Haveli and Daman and Diu", "Dadra, Daman & Diu").replace("Andaman and Nicobar Islands", "Andaman & Nicobar").replace("Jammu and Kashmir", "Jammu & Kashmir");
-  const nameW = Math.ceil(Math.max(...rows.map((r) => textWidth(shortName(r.name), 11.5))));
-  const valW = Math.ceil(Math.max(...rows.map((r) => textWidth(choroplethValueLabel(visual, r.value as number), 11.5, 600))));
-  const x0 = nameW + 12, x1 = W - valW - 14, rowH = rows.length > 30 ? 16 : 19, top = 44;
+  // Type at the chart kit's label size (13 to 14 px as shown), on rows tall enough to scan;
+  // at 11.5 px on 19-unit rows the ranking read as fine print beside a bold map.
+  const fs = W >= 340 ? 13.5 : 13, rowH = rows.length > 30 ? 21 : 25, top = 50, rDot = 5.5;
+  const nameW = Math.ceil(Math.max(...rows.map((r) => textWidth(shortName(r.name), fs))));
+  const valW = Math.ceil(Math.max(...rows.map((r) => textWidth(choroplethValueLabel(visual, r.value as number), fs, 600))));
+  const x0 = nameW + 14, x1 = W - valW - 16;
   // Values past the colour scale (Delhi's income) sit at its end with an open arrowhead,
   // rather than running into the printed value.
   const x = (v: number) => x0 + ((Math.min(visual.max, Math.max(visual.min, v)) - visual.min) / (visual.max - visual.min || 1)) * (x1 - x0);
@@ -199,22 +202,25 @@ export function renderChoroplethStrip(visual: ChoroplethVisual, W = 320) {
     const v = visual.min + ((visual.max - visual.min) * (i + 0.5)) / N;
     b += `<rect x="${svgCoord(x0 + ((x1 - x0) * i) / N)}" y="10" width="${svgCoord((x1 - x0) / N + 0.4)}" height="7" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}"/>`;
   }
-  b += `<text x="${x0}" y="31" ${F} font-size="11.5" fill="#4f4f4f">${escapeHtml(choroplethValueLabel(visual, visual.min))}</text><text x="${x1}" y="31" ${F} font-size="11.5" fill="#4f4f4f" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, visual.max))}</text>`;
+  b += `<text x="${x0}" y="34" ${F} font-size="${fs - 0.5}" fill="#57534D">${escapeHtml(choroplethValueLabel(visual, visual.min))}</text><text x="${x1}" y="34" ${F} font-size="${fs - 0.5}" fill="#57534D" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, visual.max))}</text>`;
   const pivot = visual.divergeAt !== undefined && visual.divergeAt > visual.min && visual.divergeAt < visual.max ? visual.divergeAt : null;
   if (pivot !== null) {
     b += `<line x1="${svgCoord(x(pivot))}" y1="6" x2="${svgCoord(x(pivot))}" y2="${top + rows.length * rowH}" stroke="#121212" stroke-width="0.8" stroke-dasharray="2 2"/>`;
-    b += `<text x="${svgCoord(x(pivot))}" y="4" ${F} font-size="11" font-weight="600" fill="#121212" text-anchor="middle">${visual.pivotLabel && /\d/.test(visual.pivotLabel) ? escapeHtml(visual.pivotLabel) : `${escapeHtml(choroplethValueLabel(visual, pivot))}${visual.pivotLabel ? ` ${escapeHtml(visual.pivotLabel)}` : ""}`}</text>`;
+    b += `<text x="${svgCoord(x(pivot))}" y="4" ${F} font-size="${fs - 1}" font-weight="600" fill="#121212" text-anchor="middle">${visual.pivotLabel && /\d/.test(visual.pivotLabel) ? escapeHtml(visual.pivotLabel) : `${escapeHtml(choroplethValueLabel(visual, pivot))}${visual.pivotLabel ? ` ${escapeHtml(visual.pivotLabel)}` : ""}`}</text>`;
   }
   rows.forEach((r, i) => {
     const v = r.value as number, cy = top + i * rowH + rowH / 2;
-    b += `<text x="0" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" fill="#121212">${escapeHtml(shortName(r.name))}</text>`;
-    b += `<line x1="${x0}" y1="${svgCoord(cy)}" x2="${x1}" y2="${svgCoord(cy)}" stroke="#ededed" stroke-width="1"/>`;
+    b += `<text x="0" y="${svgCoord(cy + fs * 0.36)}" ${F} font-size="${fs}" fill="#1A1A1A">${escapeHtml(shortName(r.name))}</text>`;
+    b += `<line x1="${x0}" y1="${svgCoord(cy)}" x2="${x1}" y2="${svgCoord(cy)}" stroke="#ECE9E3" stroke-width="1"/>`;
     if (v > visual.max || v < visual.min) {
       const xe = x(v), dir = v > visual.max ? 1 : -1;
       b += `<path d="M${svgCoord(xe + dir * 6)} ${svgCoord(cy)}L${svgCoord(xe + dir * 11)} ${svgCoord(cy)}M${svgCoord(xe + dir * 8)} ${svgCoord(cy - 3)}L${svgCoord(xe + dir * 11)} ${svgCoord(cy)}L${svgCoord(xe + dir * 8)} ${svgCoord(cy + 3)}" fill="none" stroke="#121212" stroke-width="1"/>`;
     }
-    b += `<circle cx="${svgCoord(x(v))}" cy="${svgCoord(cy)}" r="4.5" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}" stroke="#121212" stroke-width="0.6"><title>${escapeHtml(r.name)}: ${escapeHtml(choroplethValueLabel(visual, v))}</title></circle>`;
-    b += `<text x="${W}" y="${svgCoord(cy + 4)}" ${F} font-size="11.5" font-weight="600" fill="#121212" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, v))}</text>`;
+    // A white ring, as the kit draws dots, keeps a pale dot visible on its rail; a black
+    // outline made every dot read as a button.
+    b += `<circle cx="${svgCoord(x(v))}" cy="${svgCoord(cy)}" r="${rDot}" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}" stroke="#ffffff" stroke-width="1.5"><title>${escapeHtml(r.name)}: ${escapeHtml(choroplethValueLabel(visual, v))}</title></circle>`;
+    b += `<circle cx="${svgCoord(x(v))}" cy="${svgCoord(cy)}" r="${rDot + 0.75}" fill="none" stroke="#B5AFA4" stroke-width="0.75"/>`;
+    b += `<text x="${W}" y="${svgCoord(cy + fs * 0.36)}" ${F} font-size="${fs}" font-weight="600" fill="#1A1A1A" text-anchor="end" style="font-variant-numeric:lining-nums">${escapeHtml(choroplethValueLabel(visual, v))}</text>`;
   });
   return `<svg class="choro-strip cs-${W}" viewBox="0 0 ${W} ${top + rows.length * rowH + 4}" role="img" aria-label="${escapeHtml(visual.title)}, every region ranked">${b}</svg>`;
 }
@@ -228,7 +234,7 @@ export function renderChoroplethDots(visual: ChoroplethVisual, W = 320) {
   if (rows.length < 6) return "";
   const F = 'font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif"';
   const shortName = (n: string) => n.replace("Dadra and Nagar Haveli and Daman and Diu", "Dadra, Daman & Diu").replace("Andaman and Nicobar Islands", "Andaman & Nicobar").replace("Jammu and Kashmir", "Jammu & Kashmir");
-  const r = 5, x0 = r + 1, x1 = W - r - 1;
+  const r = 5.5, x0 = r + 1, x1 = W - r - 1;
   const x = (v: number) => x0 + ((Math.min(visual.max, Math.max(visual.min, v)) - visual.min) / (visual.max - visual.min || 1)) * (x1 - x0);
   // One-sided swarm: each dot sits on the lowest level free of the dots already placed.
   const placed: Array<[number, number]> = [];
@@ -242,21 +248,21 @@ export function renderChoroplethDots(visual: ChoroplethVisual, W = 320) {
   let b = "";
   rows.forEach((row, i) => {
     const [cx, lvl] = placed[i], cy = axisY - 4 - r - lvl * (2 * r + 1);
-    b += `<circle cx="${svgCoord(cx)}" cy="${svgCoord(cy)}" r="${r}" fill="${choroColor(row.value as number, visual.min, visual.max, visual.ramp, visual.divergeAt)}" stroke="#121212" stroke-width="0.6" data-tip="${escapeHtml(`${row.name}|${choroplethValueLabel(visual, row.value as number)}, ${ordinal(rows.length - i)} of ${rows.length}`)}"/>`;
+    b += `<circle cx="${svgCoord(cx)}" cy="${svgCoord(cy)}" r="${r}" fill="${choroColor(row.value as number, visual.min, visual.max, visual.ramp, visual.divergeAt)}" stroke="#ffffff" stroke-width="1" data-tip="${escapeHtml(`${row.name}|${choroplethValueLabel(visual, row.value as number)}, ${ordinal(rows.length - i)} of ${rows.length}`)}"/>`;
   });
   const N = 60;
   for (let i = 0; i < N; i++) {
     const v = visual.min + ((visual.max - visual.min) * (i + 0.5)) / N;
     b += `<rect x="${svgCoord(x0 + ((x1 - x0) * i) / N)}" y="${svgCoord(axisY)}" width="${svgCoord((x1 - x0) / N + 0.4)}" height="6" fill="${choroColor(v, visual.min, visual.max, visual.ramp, visual.divergeAt)}"/>`;
   }
-  b += `<text x="0" y="${svgCoord(axisY + 21)}" ${F} font-size="12" fill="#4f4f4f">${escapeHtml(choroplethValueLabel(visual, visual.min))}</text><text x="${W}" y="${svgCoord(axisY + 21)}" ${F} font-size="12" fill="#4f4f4f" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, visual.max))}</text>`;
+  b += `<text x="0" y="${svgCoord(axisY + 21)}" ${F} font-size="13" fill="#57534D">${escapeHtml(choroplethValueLabel(visual, visual.min))}</text><text x="${W}" y="${svgCoord(axisY + 21)}" ${F} font-size="13" fill="#57534D" text-anchor="end">${escapeHtml(choroplethValueLabel(visual, visual.max))}</text>`;
   // The extremes in words: three at the top, two at the bottom, each with its value.
   const list = (rs: typeof rows) => rs.map((q) => `<tspan font-weight="600" fill="#121212">${escapeHtml(shortName(q.name))}</tspan><tspan fill="#4f4f4f"> ${escapeHtml(choroplethValueLabel(visual, q.value as number))}</tspan>`);
   const lines: Array<[string, string[]]> = [[visual.rankLabel || "Highest", list([...rows].reverse().slice(0, 3))], [visual.bottomLabel || "Lowest", list(rows.slice(0, 2))]];
   let y = axisY + 46;
   for (const [head, items] of lines) {
     // Wrapped by measured width, so a long name never runs off the phone.
-    b += `<text x="0" y="${svgCoord(y)}" ${F} font-size="11" font-weight="600" letter-spacing="0.07em" fill="#4f4f4f">${escapeHtml(head.toUpperCase())}</text>`;
+    b += `<text x="0" y="${svgCoord(y)}" ${F} font-size="12" font-weight="600" letter-spacing="0.07em" fill="#4f4f4f">${escapeHtml(head.toUpperCase())}</text>`;
     y += 18;
     let line = "", lw = 0;
     const words = rows.length ? items : [];

@@ -172,7 +172,7 @@ export const svg = (w: number, h: number, body: string, label: string, cls = "vi
 export const scale = (d0: number, d1: number, r0: number, r1_: number) => (v: number) => r0 + ((v - d0) / (d1 - d0)) * (r1_ - r0);
 export const pathOf = (pts: Array<[number, number]>, x: (v: number) => number, y: (v: number) => number) =>
   pts.map(([a, v], i) => `${i ? "L" : "M"}${r1(x(a))} ${r1(y(v))}`).join("");
-const AX: TextOpts = { size: 11.5, fill: INK.ink3 };
+const AX: TextOpts = { size: 12.5, fill: INK.ink3 };
 let UID = 0;
 const uid = (p: string) => `${p}${(UID++).toString(36)}`;
 export const fmtIN = (n: number) => n.toLocaleString("en-IN");
@@ -227,7 +227,7 @@ export function scaleLegend(x0: number, y0: number, w: number, stops: Stops, opt
     const a = stops[i - 1][0], c = stops[i][0];
     return x0 + ((i - 1 + Math.min(1, Math.max(0, (v - a) / (c - a)))) / k) * w;
   };
-  let b = opts.title ? txt(x0, y0 - 10, opts.title, { size: 11.5, fill: INK.ink2, weight: 500 }) : "";
+  let b = opts.title ? txt(x0, y0 - 10, opts.title, { size: 12.5, fill: INK.ink2, weight: 500 }) : "";
   for (let i = 0; i < n; i++) {
     const f = ((i + 0.5) / n) * k, j = Math.min(k - 1, Math.floor(f));
     const v = stops[j][0] + (f - j) * (stops[j + 1][0] - stops[j][0]);
@@ -237,7 +237,7 @@ export function scaleLegend(x0: number, y0: number, w: number, stops: Stops, opt
   for (const v of opts.ticks) {
     const mark = opts.mark && Math.abs(v - opts.mark.value) < 1e-9, x = pos(v);
     b += line(x, mark ? y0 - 3 : y0 + 7, x, y0 + 11, mark ? INK.ink : INK.ink3, mark ? 1 : 0.75);
-    b += txt(x, y0 + 23, mark ? `${fmt(v)} ${opts.mark!.label}` : fmt(v), { size: 11, fill: mark ? INK.ink : INK.ink2, anchor: "middle", weight: mark ? 600 : undefined });
+    b += txt(x, y0 + 23, mark ? `${fmt(v)} ${opts.mark!.label}` : fmt(v), { size: 12, fill: mark ? INK.ink : INK.ink2, anchor: "middle", weight: mark ? 600 : undefined });
   }
   return b;
 }
@@ -296,7 +296,7 @@ export function heatStrip(rows: HeatRow[], o: {
   if (compact) b += scaleLegend(labelW, ly, plotW, o.stops, lg);
   else {
     b += scaleLegend(labelW, ly, 340, o.stops, lg);
-    if (o.markerNote) { const lx = labelW + 400; b += dot(lx, ly + 3, 3, INK.ink, 1.25) + txt(lx + 10, ly + 7, o.markerNote, { size: 11.5 }); }
+    if (o.markerNote) { const lx = labelW + 400; b += dot(lx, ly + 3, 3, INK.ink, 1.25) + txt(lx + 10, ly + 7, o.markerNote, { size: 12.5 }); }
   }
   return svg(W, H, b, o.label);
 }
@@ -383,8 +383,8 @@ export function stripes(points: Array<{ year: number; value: number; flag?: bool
     const cx = xOf(yr) + sw / 2, near = keys.find((k) => k !== yr && Math.abs(k - yr) <= 2);
     const anchor = near === undefined ? "middle" : near > yr ? "end" : "start";
     b += line(cx, top - 14, cx, top - 3, INK.ink, 0.75);
-    b += txt(cx, top - 20, marks[yr], { size: 11.5, fill: INK.ink, weight: 600, anchor });
-    b += txt(cx, top - 34, fmt(p.value), { size: 11, fill: INK.ink2, anchor });
+    b += txt(cx, top - 20, marks[yr], { size: 12.5, fill: INK.ink, weight: 600, anchor });
+    b += txt(cx, top - 34, fmt(p.value), { size: 12, fill: INK.ink2, anchor });
   }
   for (const p of points) if (p.flag) b += `<rect x="${r1(xOf(p.year) + sw / 2 - 2)}" y="${top + bh + 5}" width="4" height="4" fill="${INK.sindoor}"/>`;
   // Year ticks as close as the width allows: the smallest round step that leaves a year label
@@ -411,9 +411,9 @@ export function scaleKey(stops: Stops, ticks: Array<[number, string]>, width = 2
   let b = "";
   for (let i = 0; i < 60; i++) { const v = lo + ((hi - lo) * (i + 0.5)) / 60; b += `<rect x="${r1(pad + (i * bw) / 60)}" y="0" width="${r1(bw / 60 + 0.5)}" height="7" fill="${col(v)}"/>`; }
   for (const [v, s] of ticks) {
-    const x = pad + ((v - lo) / (hi - lo)) * bw, w = textWidth(s, 11.5);
+    const x = pad + ((v - lo) / (hi - lo)) * bw, w = textWidth(s, 12.5);
     const anchor = x - w / 2 < 0 ? "start" : x + w / 2 > width ? "end" : "middle";
-    b += line(x, 7, x, 11, INK.ink3, 0.75) + txt(anchor === "start" ? Math.max(0, x - 2) : anchor === "end" ? Math.min(width, x + 2) : x, 24, s, { size: 11.5, fill: INK.ink2, anchor });
+    b += line(x, 7, x, 11, INK.ink3, 0.75) + txt(anchor === "start" ? Math.max(0, x - 2) : anchor === "end" ? Math.min(width, x + 2) : x, 24, s, { size: 12.5, fill: INK.ink2, anchor });
   }
   return svg(width, 28, b, "Colour key", "alm-key");
 }
@@ -452,8 +452,8 @@ export function scatterFit(pts: ScatterPoint[], o: {
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
   for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
-  xT.forEach((t, i) => (b += txt(ml, y(o.y[0]) + 46 + i * 14, t, { size: 11.5, fill: INK.ink2 })));
-  yT.forEach((t, i) => (b += txt(0, 12 + i * 14, t, { size: 11.5, fill: INK.ink2 })));
+  xT.forEach((t, i) => (b += txt(ml, y(o.y[0]) + 46 + i * 14, t, { size: 12.5, fill: INK.ink2 })));
+  yT.forEach((t, i) => (b += txt(0, 12 + i * 14, t, { size: 12.5, fill: INK.ink2 })));
   if (o.under) b += o.under(x, y);
   if (o.refY) b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3");
   let stats: { r: number; n: number; slope: number } | null = null;
@@ -482,13 +482,13 @@ export function scatterFit(pts: ScatterPoint[], o: {
   // The reference line is named at its right end, or further left where a dot sits there.
   let refAt: [number, number] | null = null;
   if (o.refY) {
-    const rw = textWidth(o.refY.label, 11.5), ry = y(o.refY.value);
+    const rw = textWidth(o.refY.label, 12.5), ry = y(o.refY.value);
     for (let xr = W - mr; xr - rw >= ml && !refAt; xr -= 8) for (const ty of [ry - 7, ry + 15]) {
       const bx: [number, number, number, number] = [xr - rw - 2, ty - 11, xr, ty + 3];
       if (!refAt && !pts.some((p) => { const cx = x(p.x), cy = y(p.y), r = rad(p.size); return cx + r > bx[0] && cx - r < bx[2] && cy + r > bx[1] && cy - r < bx[3]; })) refAt = [xr, ty];
     }
     refAt ??= [W - mr, ry - 7];
-    b += halo(refAt[0], refAt[1], o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" });
+    b += halo(refAt[0], refAt[1], o.refY.label, { size: 12.5, fill: INK.ink2, anchor: "end" });
   }
   // Labels: each named point tries its preferred side, then the other three, then the same
   // sides a step further out, and takes the first that touches no dot, no line (the fit, the
@@ -505,7 +505,7 @@ export function scatterFit(pts: ScatterPoint[], o: {
   type Box = [number, number, number, number];
   const hit = (a: Box, c: Box) => a[0] < c[2] && a[2] > c[0] && a[1] < c[3] && a[3] > c[1];
   const blocked: Box[] = [];
-  if (o.refY && refAt) { const w = textW(o.refY.label, 11.5); blocked.push([refAt[0] - w - 2, refAt[1] - 11, refAt[0], refAt[1] + 3]); }
+  if (o.refY && refAt) { const w = textW(o.refY.label, 12.5); blocked.push([refAt[0] - w - 2, refAt[1] - 11, refAt[0], refAt[1] + 3]); }
   if (sized && o.sizeKey && !keyBelow) blocked.push([W - 262, mt - 18, W, mt + 34 + rMax + 22]);
   const dots = pts.map((p) => ({ p, cx: x(p.x), cy: y(p.y), r: rad(p.size) }));
   const named = dots.filter((d) => d.p.place).sort((a, c) => (c.p.size ?? 0) - (a.p.size ?? 0) || Number(!!c.p.hot) - Number(!!a.p.hot));
@@ -528,7 +528,7 @@ export function scatterFit(pts: ScatterPoint[], o: {
   }
   if (sized && o.sizeKey) {
     const kx = keyBelow ? ml : sm ? W - 150 : W - 250, ky = keyBelow ? y(o.y[0]) + 92 + (xT.length - 1) * 14 : mt + 34;
-    b += txt(kx, ky - 30, o.sizeTitle ?? "Size", { size: 11.5, fill: INK.ink2, weight: 500 });
+    b += txt(kx, ky - 30, o.sizeTitle ?? "Size", { size: 12.5, fill: INK.ink2, weight: 500 });
     const offs = sm ? [6, 48, 108] : [8, 54, 122];
     o.sizeKey.forEach(([v, s], i) => {
       const rr = Math.max(sm ? 2.5 : 3.5, rMax * Math.sqrt(v / pMax)), cx = kx + (offs[i] ?? i * 50);
@@ -651,8 +651,8 @@ export function parade(series: ParadeSeries[], o: {
   const yf = o.yFmt ?? ((v: number) => `₹${fmtIN(v)}`);
   // Gutters as wide as the labels they hold: the y labels at the left, each series' name and
   // last value at the right (fixed gutters left 30 to 45 px of blank paper).
-  const endW = Math.max(...series.map((s) => Math.max(textWidth(s.label, 12.5, 600), textWidth(yf(s.values[s.values.length - 1]), 11.5))));
-  const ml = bare ? 0 : Math.ceil(Math.max(...o.yTicks.map((v) => textWidth(yf(v), 11.5)))) + 10, mr = bare ? 0 : Math.ceil(endW) + 14, mt = bare ? 4 : 22, mb = bare ? 1 : 46;
+  const endW = Math.max(...series.map((s) => Math.max(textWidth(s.label, 12.5, 600), textWidth(yf(s.values[s.values.length - 1]), 12.5))));
+  const ml = bare ? 0 : Math.ceil(Math.max(...o.yTicks.map((v) => textWidth(yf(v), 12.5)))) + 10, mr = bare ? 0 : Math.ceil(endW) + 14, mt = bare ? 4 : 22, mb = bare ? 1 : 46;
   const x = scale(0, 100, ml, W - mr), y = scale(0, o.yMax, H - mb, mt);
   const step = (vals: number[]) => { let c = 0, d = ""; vals.forEach((v, i) => { d += `${i ? "L" : "M"}${r1(x(c))} ${r1(y(v))}H${r1(x(c + o.widths[i]))}`; c += o.widths[i]; }); return d; };
   let b = "";
@@ -663,8 +663,8 @@ export function parade(series: ParadeSeries[], o: {
   if (bare) return svg(W, H, b, o.label);
   b += txt(0, y(0) + 4, "0", AX);
   for (let p = 0; p <= 100; p += sm ? 25 : 10) { b += line(x(p), y(0), x(p), y(0) + 5, INK.ink, 1); b += txt(x(p), y(0) + 20, p, { ...AX, anchor: "middle" }); }
-  if (o.xTitle) b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
-  for (const s of series) { const last = s.values[s.values.length - 1]; b += txt(W - mr + 10, y(last) + 4, s.label, { size: 12.5, fill: textInk(s.color), weight: 600 }) + txt(W - mr + 10, y(last) + 19, yf(last), { size: 11.5, fill: INK.ink2 }); }
+  if (o.xTitle) b += txt(ml, H - 4, `${o.xTitle} →`, { size: 12.5, fill: INK.ink2 });
+  for (const s of series) { const last = s.values[s.values.length - 1]; b += txt(W - mr + 10, y(last) + 4, s.label, { size: 12.5, fill: textInk(s.color), weight: 600 }) + txt(W - mr + 10, y(last) + 19, yf(last), { size: 12.5, fill: INK.ink2 }); }
   if (o.note) {
     const mx = x(o.note.at);
     b += dot(mx, y(o.note.value), 3.5, INK.ink) + line(mx, y(o.note.value) - 6, mx, y(o.note.y), INK.ink, 0.75) + line(mx - 4, y(o.note.y), mx, y(o.note.y), INK.ink, 0.75);
@@ -682,14 +682,17 @@ export function dumbbell(rows: DumbbellRow[], o: { domain: [number, number]; tic
   // Across the page, a short list gets taller rows and larger type: seven rows at 21 units read as a thin strip.
   const roomy = !half && !thumb && W >= 700 && rows.length <= 12;
   const rowH = o.rowH ?? (roomy ? Math.min(46, Math.max(21, Math.round(320 / rows.length))) : 21);
-  const ls = roomy ? 14.5 : half ? 11 : 12, vs = roomy ? 13 : 11.5, ra = roomy ? 5 : 3.5, rb = roomy ? 7 : 4.5, ax = roomy ? { ...AX, size: 12.5 } : AX;
-  // The right margin holds the "a → b" values; the phone version prints none, so needs none.
+  const ls = roomy ? 14.5 : half ? 12 : 13, vs = roomy ? 13.5 : 12.5, ra = roomy ? 5.5 : 4.5, rb = roomy ? 7 : 5.5, ax = roomy ? { ...AX, size: 13 } : AX;
+  // Each value sits outside its own end (the lower left, the higher right), so the plot keeps
+  // room on both sides for the widest value that can land there; the phone version prints none.
   // The label column fits the longest label (at least the old fixed width, at most 40% of the figure).
   const longest = Math.max(0, ...rows.map((r) => textWidth(half ? r.short ?? r.label : r.label, ls, r.emphasis ? 600 : 400)));
   const f = o.fmt ?? ((v: number) => `${Math.round(v)}%`);
   const lw = thumb ? 0 : Math.min(W * 0.44, Math.max(half ? 84 : 140, Math.ceil(longest) + 18));
-  const mr = thumb ? 0 : half ? Math.max(16, ...o.ticks.map(v => textWidth(f(v), ax.size) / 2 + 3)) : Math.max(...rows.map(r => textWidth(`${f(r.a)} → ${f(r.b)}`, vs, r.emphasis ? 600 : 400) + 14));
-  const top = thumb ? 0 : roomy ? 32 : 26, x = scale(o.domain[0], o.domain[1], lw, W - mr);
+  const vw = (v: number, bold: boolean) => textWidth(f(v), vs, bold ? 600 : 400);
+  const ml = thumb || half ? 0 : Math.max(...rows.map((r) => vw(Math.min(r.a, r.b), r.b < r.a))) + rb + 10;
+  const mr = thumb ? 0 : half ? Math.max(16, ...o.ticks.map(v => textWidth(f(v), ax.size) / 2 + 3)) : Math.max(...rows.map((r) => vw(Math.max(r.a, r.b), r.b >= r.a))) + rb + 12;
+  const top = thumb ? 0 : roomy ? 32 : 26, x = scale(o.domain[0], o.domain[1], lw + ml, W - mr);
   const labelLines = rows.map(r => {
     const words = (half ? r.short ?? r.label : r.label).split(/\s+/), lines: string[] = [];
     let current = '';
@@ -704,10 +707,11 @@ export function dumbbell(rows: DumbbellRow[], o: { domain: [number, number]; tic
   const plotH = heights.reduce((a,b)=>a+b,0);
   const rose = rows.some((r) => r.b >= r.a && !r.emphasis), fell = rows.some((r) => r.b < r.a);
   const keys = [[null, o.aLabel], ...(rose && fell ? [[INK.neel, `${o.bLabel}, higher`], [INK.sindoor, `${o.bLabel}, lower`]] : [[fell ? INK.sindoor : INK.neel, o.bLabel]])];
-  let keyX = 4, keyY = top + plotH + 24;
+  // The key's first dot is centred a radius in, so it is not clipped at the figure's edge.
+  let keyX = 6, keyY = top + plotH + 24;
   const placedKeys = keys.map(([color,text]) => {
     const width = 10 + textWidth(text!, vs) + 20;
-    if (keyX > 4 && keyX + width > W) { keyX = 4; keyY += vs + 10; }
+    if (keyX > 6 && keyX + width > W) { keyX = 6; keyY += vs + 10; }
     const key = {color,text:text!,x:keyX,y:keyY}; keyX += width; return key;
   });
   const H = thumb ? top + plotH : keyY + 12;
@@ -730,10 +734,15 @@ export function dumbbell(rows: DumbbellRow[], o: { domain: [number, number]; tic
     rowTop += heights[i];
     if (!thumb) labelLines[i].forEach((s,k) => { b += txt(lw - 10, yy + ls * .32 + (k - (labelLines[i].length - 1) / 2) * ls * 1.2, s, { anchor: "end", size: ls, fill: INK.ink, weight: r.emphasis ? 600 : undefined }); });
     const a = x(r.a), c = x(r.b), fell = r.b < r.a;
-    b += line(a, yy, c, yy, r.emphasis ? "#9a9a9a" : "#c9cfe6", thumb ? 1.5 : roomy ? 2.5 : 2);
+    b += line(a, yy, c, yy, r.emphasis ? "#9a9a9a" : "#c9cfe6", thumb ? 1.5 : roomy ? 3 : 2.5);
     b += `<circle cx="${r1(a)}" cy="${r1(yy)}" r="${thumb ? 2 : ra}" fill="#ffffff" stroke="${INK.ink3}" stroke-width="1.25"/>`;
     b += `<circle cx="${r1(c)}" cy="${r1(yy)}" r="${thumb ? 2.6 : rb}" fill="${fell ? INK.sindoor : r.emphasis ? INK.ink : INK.neel}"><title>${esc(r.label)}: ${f(r.a)} to ${f(r.b)}</title></circle>`;
-    if (!thumb && !half) b += txt(Math.max(a, c) + 10, yy + 4, `${f(r.a)} → ${f(r.b)}`, { size: vs, fill: r.emphasis ? INK.ink : INK.ink2, weight: r.emphasis ? 600 : undefined });
+    if (!thumb && !half) {
+      // The first round in ink2 beside its ring, the latest bold in its dot's ink beside the dot.
+      const off = rb + 7, bInk = r.emphasis ? INK.ink : textInk(fell ? INK.sindoor : INK.neel);
+      b += halo(fell ? a + off : a - off, yy + vs * 0.34, f(r.a), { size: vs, fill: INK.ink2, anchor: fell ? "start" : "end" });
+      b += halo(fell ? c - off : c + off, yy + vs * 0.34, f(r.b), { size: vs, fill: bInk, weight: 600, anchor: fell ? "end" : "start" });
+    }
   });
   if (!thumb) {
     for (const key of placedKeys) b += `<circle cx="${r1(key.x)}" cy="${r1(key.y - 4)}" r="${key.color ? 4.5 : 3.5}" fill="${key.color || '#ffffff'}"${key.color ? '' : ` stroke="${INK.ink3}" stroke-width="1.25"`}/>` + txt(key.x + 10, key.y, key.text, { size: vs });
@@ -796,14 +805,14 @@ export function sensitivity(curves: Curve[], o: {
   const W = o.width ?? 1040, H = o.height ?? 380, sm = W < 700, bare = !!o.bare;
   const xf = o.xFmt ?? ((v: number) => `₹${fmtIN(v)}`), yf = o.yFmt ?? ((v: number) => `${v}%`);
   // Gutters sized to the y labels and the curve names they hold.
-  const ml = bare ? 0 : Math.ceil(Math.max(...o.yTicks.map((v) => textWidth(v ? yf(v) : "0", 11.5)))) + 10;
+  const ml = bare ? 0 : Math.ceil(Math.max(...o.yTicks.map((v) => textWidth(v ? yf(v) : "0", 12.5)))) + 10;
   const mr = bare ? 0 : Math.ceil(Math.max(...curves.map((c) => textWidth(c.label, 12.5, 600)))) + 14, mt = bare ? 4 : 14, mb = bare ? 2 : 46;
   const x = scale(o.x[0], o.x[1], ml, W - mr), y = scale(0, 100, H - mb, mt);
   let b = o.band ? `<rect x="${r1(x(o.band[0]))}" y="${mt}" width="${r1(x(o.band[1]) - x(o.band[0]))}" height="${r1(y(0) - mt)}" fill="${INK.band}"/>` : "";
   if (!bare) {
     for (const v of o.yTicks) { if (v) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, v ? yf(v) : "0", AX); }
     for (const v of o.xTicks) { b += line(x(v), y(0), x(v), y(0) + 5, INK.ink, 1); b += txt(x(v), y(0) + 20, xf(v), { ...AX, anchor: "middle" }); }
-    if (o.xTitle) b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 });
+    if (o.xTitle) b += txt(ml, H - 4, `${o.xTitle} →`, { size: 12.5, fill: INK.ink2 });
   }
   b += line(ml, y(0), W - mr, y(0), INK.ink, 1);
   for (const c of curves) b += `<path d="${pathOf(c.points, x, y)}" fill="none" stroke="${c.color}" stroke-width="${c.width ?? (bare ? 1.75 : 2)}" stroke-linejoin="round" stroke-linecap="round"/>`;
@@ -843,7 +852,7 @@ export function miniRibbon(rows: Array<{ label: string; parts: Array<{ value: nu
   let b = "";
   rows.forEach((r, i) => {
     const yy = 6 + i * 20; let acc = 0;
-    b += txt(0, yy + 9, r.label, { size: 11, fill: INK.ink2 }) + `<rect x="46" y="${yy}" width="${W - 46}" height="12" fill="#ededed"/>`;
+    b += txt(0, yy + 9, r.label, { size: 12, fill: INK.ink2 }) + `<rect x="46" y="${yy}" width="${W - 46}" height="12" fill="#ededed"/>`;
     r.parts.forEach((p, j) => { const x0 = x(acc) + (j ? 1.5 : 0); b += `<rect x="${r1(x0)}" y="${yy}" width="${r1(Math.max(1, x(acc + p.value) - x0))}" height="12" fill="${p.color}"/>`; acc += p.value; });
   });
   return svg(W, 44, b, o.label, "alm-mini");
@@ -922,7 +931,7 @@ export function ridgeline(groups: RidgeGroup[], o: { domain: [number, number]; t
     b += `<path d="${d}" fill="none" stroke="${INK.ink}" stroke-width="0.9"/>`;
     b += line(x(o.domain[0]), y0, x(o.domain[1]), y0, INK.rule, 0.75);
     b += line(x(med), y0, x(med), yy(dens[i][Math.round(((med - o.domain[0]) / (o.domain[1] - o.domain[0])) * N)]), "#ffffff", 1.25);
-    if (sm) b += halo(2, y0 - 6, g.label, { size: 11.5, fill: INK.ink, weight: 600 });
+    if (sm) b += halo(2, y0 - 6, g.label, { size: 12.5, fill: INK.ink, weight: 600 });
     else b += txt(lw - 12, y0 - 4, g.label, { size: 12.5, fill: INK.ink, anchor: "end", weight: 500 });
   });
   return svg(W, H, b, o.label);
@@ -967,8 +976,8 @@ export function connectedScatter(paths: Path2D[], o: { x: [number, number]; y: [
   for (const v of o.yTicks) { if (v !== o.y[0]) b += line(ml, y(v), W - mr, y(v), INK.grid); b += txt(0, y(v) + 4, yf(v), AX); }
   b += line(ml, y(o.y[0]), W - mr, y(o.y[0]), INK.ink, 1);
   for (const v of o.xTicks) { b += line(x(v), y(o.y[0]), x(v), y(o.y[0]) + 5, INK.ink, 1); b += txt(x(v), y(o.y[0]) + 20, xf(v), { ...AX, anchor: x(v) > W - mr - 14 ? "end" : "middle" }); }
-  b += txt(ml, H - 4, `${o.xTitle} →`, { size: 11.5, fill: INK.ink2 }) + txt(0, 12, `${o.yTitle} ↑`, { size: 11.5, fill: INK.ink2 });
-  if (o.refY) { b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3"); b += halo(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 11.5, fill: INK.ink2, anchor: "end" }); }
+  b += txt(ml, H - 4, `${o.xTitle} →`, { size: 12.5, fill: INK.ink2 }) + txt(0, 12, `${o.yTitle} ↑`, { size: 12.5, fill: INK.ink2 });
+  if (o.refY) { b += line(ml, y(o.refY.value), W - mr, y(o.refY.value), INK.ink, 0.75, "3 3"); b += halo(W - mr, y(o.refY.value) - 7, o.refY.label, { size: 12.5, fill: INK.ink2, anchor: "end" }); }
   // End labels are stacked so none overlap: sort by end y, push apart by a minimum gap.
   const gapY = sm ? 13 : 15, ends = paths.map((p) => ({ p, y: y(p.points[p.points.length - 1].y) + 4 })).sort((a, c) => a.y - c.y);
   for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < gapY) ends[i].y = ends[i - 1].y + gapY;
@@ -1007,7 +1016,7 @@ export function waterfall(steps: Array<{ label: string; value: number }>, o: { t
   let b = line(x(0), top - 4, x(0), H - 6, INK.ink, 1);
   segs.forEach((s, i) => {
     const yy = rowY(i), c = s.value >= 0 ? up : down, x0 = x(Math.min(s.a, s.z)), x1 = x(Math.max(s.a, s.z));
-    if (sm) b += halo(0, yy + 2, s.label, { size: 11.5, fill: INK.ink });
+    if (sm) b += halo(0, yy + 2, s.label, { size: 12.5, fill: INK.ink });
     else b += rowLabel(lw - 12, yy + rowH / 2, s.label, lw - 16, { size: ls, fill: INK.ink });
     const by = yy + (sm ? 8 : rowH / 2 - bh / 2);
     b += `<rect x="${r1(x0)}" y="${r1(by)}" width="${r1(Math.max(1.5, x1 - x0))}" height="${bh}" fill="${c}"><title>${esc(s.label)}: ${f(s.value)}</title></rect>`;
@@ -1015,7 +1024,7 @@ export function waterfall(steps: Array<{ label: string; value: number }>, o: { t
     b += txt(x1 + 6, by + bh / 2 + 4, f(s.value), { size: vs, fill: INK.ink2, weight: 500 });
   });
   const ty = rowY(segs.length), tby = ty + (sm ? 8 : rowH / 2 - bh / 2);
-  if (sm) b += halo(0, ty + 2, o.totalLabel, { size: 11.5, fill: INK.ink, weight: 600 });
+  if (sm) b += halo(0, ty + 2, o.totalLabel, { size: 12.5, fill: INK.ink, weight: 600 });
   else b += txt(lw - 12, ty + rowH / 2 + 4, o.totalLabel, { size: ls, fill: INK.ink, anchor: "end", weight: 600 });
   b += `<rect x="${r1(x(Math.min(0, total)))}" y="${r1(tby)}" width="${r1(Math.abs(x(total) - x(0)))}" height="${bh}" fill="${INK.ink}"/>`;
   b += txt(x(Math.max(0, total)) + 6, tby + bh / 2 + 4, f(total).replace(/^\+/, ""), { size: vs + 0.5, fill: INK.ink, weight: 600 });

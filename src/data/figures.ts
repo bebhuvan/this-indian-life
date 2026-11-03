@@ -203,14 +203,14 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
       y += y > top ? 14 : 0;
       // A group head is a quiet kicker, tracked like the "Fig." line above the title. One wider
       // than the drawing wraps at a word, measured with its tracking.
-      const capsW = (s: string) => labelTextW(s, 11, 600) + s.length * 11 * 0.07;
+      const capsW = (s: string) => labelTextW(s, 12, 600) + s.length * 11 * 0.07;
       const heads: string[] = [];
       for (const word of g.toUpperCase().split(" ")) {
         const last = heads.length ? `${heads[heads.length - 1]} ${word}` : word;
         if (heads.length && capsW(last) <= W) heads[heads.length - 1] = last; else heads.push(word);
       }
       b += line(0, y - 2, W, y - 2, INK.rule, 1);
-      heads.forEach((h, k) => { b += txt(0, y + 10 + k * 14, h, { size: 11, fill: INK.ink2, weight: 600, track: 0.07 }); });
+      heads.forEach((h, k) => { b += txt(0, y + 10 + k * 14, h, { size: 12, fill: INK.ink2, weight: 600, track: 0.07 }); });
       y += 22 + (heads.length - 1) * 14;
     }
     const groupTop = y;
@@ -257,11 +257,11 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     let lastR = -Infinity;
     for (const t of logTicks) {
       axis += line(xs(t), top - 4, xs(t), H - 8, INK.grid, 1);
-      const label = fmtU(t, unit), w = textW(label, 11.5), anchor = xs(t) - w / 2 < 0 ? "start" : xs(t) + w / 2 > W ? "end" : "middle";
+      const label = fmtU(t, unit), w = textW(label, 12.5), anchor = xs(t) - w / 2 < 0 ? "start" : xs(t) + w / 2 > W ? "end" : "middle";
       const left = anchor === "start" ? xs(t) : anchor === "end" ? xs(t) - w : xs(t) - w / 2;
       if (left < lastR + 6) continue;
       lastR = left + w;
-      axis += txt(xs(t), tickBase, label, { size: 11.5, fill: INK.ink3, anchor });
+      axis += txt(xs(t), tickBase, label, { size: 12.5, fill: INK.ink3, anchor });
     }
     axis += noteInline ? txt(W, 12, note, { size: noteSize, fill: INK.ink3, anchor: "end" }) : txt(0, noteBase, note, { size: noteSize, fill: INK.ink3 });
   }
@@ -273,12 +273,12 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
     for (const t of [...grid].sort((p, q) => Number(p !== 0) - Number(q !== 0))) {
       const gx = xs(t);
       if (t !== 0) for (const [a, c] of m ? zeroSegs : groupSegs) axis += line(gx, a, gx, c, INK.grid, 1);
-      const label = t === 0 ? "0" : fmtU(t, unit), w = textWidth(label, 11.5, t === 0 ? 600 : 400);
+      const label = t === 0 ? "0" : fmtU(t, unit), w = textWidth(label, 12.5, t === 0 ? 600 : 400);
       const anchor = gx - w / 2 < 0 ? "start" : gx + w / 2 > W ? "end" : "middle";
       const left = anchor === "start" ? gx : anchor === "end" ? gx - w : gx - w / 2;
       if (placed.some(([a, c]) => left < c + 8 && left + w > a - 8)) continue;
       placed.push([left, left + w]);
-      axis += txt(gx, top - 12, label, { size: 11.5, fill: t === 0 ? INK.ink : INK.ink3, anchor, weight: t === 0 ? 600 : undefined });
+      axis += txt(gx, top - 12, label, { size: 12.5, fill: t === 0 ? INK.ink : INK.ink3, anchor, weight: t === 0 ? 600 : undefined });
     }
   }
   if (m && !o.log) for (const [a, c] of zeroSegs) axis += line(zx, a, zx, c, INK.ink, 1);
@@ -447,7 +447,7 @@ function rankedSvg(v: RankedChangeVisual, o: { width: number; mobile: boolean })
   b += txt(W, 14, "Change", { size: 12, fill: INK.ink2, anchor: "end" });
   for (const t of sc.ticks.filter((_, i) => !m || i % 2 === 0)) {
     b += line(x(t), top - 6, x(t), top + rows.length * rowH, t === 0 ? INK.ink : INK.grid, 1);
-    b += txt(x(t), top - 11, fmt(t, unit), { size: 11.5, fill: INK.ink3, anchor: "middle" });
+    b += txt(x(t), top - 11, fmt(t, unit), { size: 12.5, fill: INK.ink3, anchor: "middle" });
   }
   rows.forEach((r, i) => {
     const y = top + i * rowH, cy = !beside ? y + 27 : y + rowH / 2;
@@ -470,9 +470,9 @@ function rankedDivergeSvg(v: RankedChangeVisual, o: { width: number; mobile: boo
   if (!label) return bars;
   // The direction note in the caption row, right-aligned, as much of it as clears the unit on the
   // left: the note and its period, the note alone, or neither on a narrow drawing.
-  const unitW = labelTextW(cleanUnit(v.unit), 11.5);
-  const note = [`${label}  ·  ${v.startLabel} to ${v.endLabel}`, label].find((t) => unitW + labelTextW(t, 11.5) + 16 <= o.width);
-  return note ? bars.replace(/(<svg[^>]*>)/, `$1${txt(o.width, 12, note, { size: 11.5, fill: INK.ink3, anchor: "end" })}`) : bars;
+  const unitW = labelTextW(cleanUnit(v.unit), 12.5);
+  const note = [`${label}  ·  ${v.startLabel} to ${v.endLabel}`, label].find((t) => unitW + labelTextW(t, 12.5) + 16 <= o.width);
+  return note ? bars.replace(/(<svg[^>]*>)/, `$1${txt(o.width, 12, note, { size: 12.5, fill: INK.ink3, anchor: "end" })}`) : bars;
 }
 
 // =====================================================================
@@ -583,7 +583,7 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
   const W = o.width, m = o.mobile, cols = o.cols, gx = m ? 14 : 22, gy = m ? 22 : 30;
   const pw = (W - gx * (cols - 1)) / cols, ph = o.ph;
   // Panels with several lines carry their own key under the name (series differ by panel).
-  const keyLayout = (p: Panel) => { let kx = 0, row = 0; const at: Array<[number, number]> = []; for (const l of p.lines) { const w = textW(l.label, 11.5) + 28; if (kx + w > pw && kx > 0) { kx = 0; row++; } at.push([kx, row]); kx += w; } return { at, rows: row + 1 }; };
+  const keyLayout = (p: Panel) => { let kx = 0, row = 0; const at: Array<[number, number]> = []; for (const l of p.lines) { const w = textW(l.label, 12.5) + 28; if (kx + w > pw && kx > 0) { kx = 0; row++; } at.push([kx, row]); kx += w; } return { at, rows: row + 1 }; };
   const keyRows = o.panelKeys ? Math.max(0, ...panels.map((p) => (p.lines.length > 1 ? keyLayout(p).rows : 0))) : 0;
   const head = 34 + keyRows * 17, foot = 18;
   let b = "", y0 = 0;
@@ -604,7 +604,7 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
     const ts = all.map((q) => yearOf(q.date)).filter(Number.isFinite);
     const t0 = Math.min(...ts), t1 = Math.max(...ts);
     // The axis gutter is as wide as its widest value ("-50%" needs more than "0").
-    const padL = o.ticks ? Math.max(m ? 26 : 32, ...sc.ticks.map((t) => textW(o.valueFmt(t), 11) * 1.08 + 9)) : 3, padR = 4;
+    const padL = o.ticks ? Math.max(m ? 26 : 32, ...sc.ticks.map((t) => textW(o.valueFmt(t), 12) * 1.08 + 9)) : 3, padR = 4;
     const px = (t: number) => ox + padL + ((t - t0) / (t1 - t0 || 1)) * (pw - padL - padR);
     const py = (val: number) => oy + head + ph - ((val - sc.min) / (sc.max - sc.min || 1)) * ph;
     // head: name left, the panel's figure right
@@ -614,11 +614,11 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
     const maxC = Math.floor(room / (ls * 0.6));
     b += txt(ox, oy + 14, p.label.length > maxC ? `${p.label.slice(0, maxC - 1)}…` : p.label, { size: ls, fill: INK.ink, weight: 600 });
     if (p.head) b += txt(ox + pw, oy + 14, p.head, { size: 13, fill: p.headColor ?? INK.ink, weight: 600, anchor: "end" });
-    if (p.sub) b += txt(ox + pw, oy + 29, p.sub, { size: 11, fill: INK.ink3, anchor: "end" });
-    if (o.panelKeys && p.lines.length > 1) keyLayout(p).at.forEach(([kx, row], k) => { const l = p.lines[k], ky = oy + 32 + row * 17; b += line(ox + kx, ky - 4, ox + kx + 14, ky - 4, l.color, 2.2) + txt(ox + kx + 19, ky, l.label, { size: 11.5, fill: INK.ink2 }); });
+    if (p.sub) b += txt(ox + pw, oy + 29, p.sub, { size: 12, fill: INK.ink3, anchor: "end" });
+    if (o.panelKeys && p.lines.length > 1) keyLayout(p).at.forEach(([kx, row], k) => { const l = p.lines[k], ky = oy + 32 + row * 17; b += line(ox + kx, ky - 4, ox + kx + 14, ky - 4, l.color, 2.2) + txt(ox + kx + 19, ky, l.label, { size: 12.5, fill: INK.ink2 }); });
     for (const t of sc.ticks) {
       b += line(ox + padL, py(t), ox + pw, py(t), t === 0 ? INK.ink : t === sc.ticks[0] ? INK.rule : INK.grid, 1);
-      b += txt(ox + padL - 5, py(t) + 4, o.valueFmt(t), { size: 11, fill: INK.ink3, anchor: "end" });
+      b += txt(ox + padL - 5, py(t) + 4, o.valueFmt(t), { size: 12, fill: INK.ink3, anchor: "end" });
     }
     if (!o.ticks) b += line(ox, oy + head + ph + 1, ox + pw, oy + head + ph + 1, INK.rule, 1);
     const hs: (typeof hoverPanels)[number]["series"] = [];
@@ -641,8 +641,8 @@ function smallMultiples(panels: Panel[], o: { width: number; mobile: boolean; co
     const y0s = String(all[0]?.date ?? "").slice(0, 4), y1s = String(all[all.length - 1]?.date ?? "").slice(0, 4);
     const firstDate = p.lines.map((l) => l.points[0]?.date).filter(Boolean).sort()[0] ?? y0s;
     const lastDate = p.lines.map((l) => l.points.at(-1)?.date).filter(Boolean).sort().at(-1) ?? y1s;
-    b += txt(ox + padL, oy + head + ph + 15, String(firstDate).slice(0, 4), { size: 11, fill: INK.ink3 });
-    b += txt(ox + pw, oy + head + ph + 15, String(lastDate).slice(0, 4), { size: 11, fill: INK.ink3, anchor: "end" });
+    b += txt(ox + padL, oy + head + ph + 15, String(firstDate).slice(0, 4), { size: 12, fill: INK.ink3 });
+    b += txt(ox + pw, oy + head + ph + 15, String(lastDate).slice(0, 4), { size: 12, fill: INK.ink3, anchor: "end" });
   });
   const rowsN = Math.ceil(panels.length / cols);
   const H = y0 + rowsN * (head + ph + foot + gy) - gy;
@@ -756,7 +756,7 @@ function loadCurveSvg(v: LoadCurveVisual, o: { width: number; mobile: boolean })
   }
   if (typeof v.peakHour === "number") b += line(x(v.peakHour), top, x(v.peakHour), H - bot, INK.ink2, 0.9, "4 3");
   // The band's name goes over the peak hairline, haloed, so the dashes never strike through it.
-  if (v.gap?.label) b += m ? txt(W - padR, top - 6, v.gap.label, { size: 11.5, fill: "#a63d24", anchor: "end" }) : halo(x(v.gap.fromHour) + 6, top + 14, v.gap.label, { size: 12, fill: "#a63d24" });
+  if (v.gap?.label) b += m ? txt(W - padR, top - 6, v.gap.label, { size: 12.5, fill: "#a63d24", anchor: "end" }) : halo(x(v.gap.fromHour) + 6, top + 14, v.gap.label, { size: 12, fill: "#a63d24" });
   const paths = v.series.map((s, i) => ({ s, color: s.color ?? SERIES[Math.min(i, SERIES.length - 1)], d: s.values.map((val, h) => `${h ? "L" : "M"}${r1(x(h))} ${r1(y(val))}`).join("") }));
   for (const p of paths) {
     if (p.s.area) b += `<path d="${p.d}L${r1(x(p.s.values.length - 1))} ${r1(y(0))}L${r1(x(0))} ${r1(y(0))}Z" fill="${p.color}" fill-opacity="0.1"/>`;
@@ -844,7 +844,7 @@ function scenarioMapsSvg(v: ScenarioMapsVisual, o: { width: number; mobile: bool
   let b = "";
   v.panels.forEach((p, i) => {
     const ox = i * (pw + gap);
-    b += o.mobile ? multiText(ox, 11, wrap(p.label, Math.floor(pw / 6.2), 2), { size: 11, fill: INK.ink, weight: 600, lh: 13 }) : txt(ox, 14, p.label, { size: 13, fill: INK.ink, weight: 600 });
+    b += o.mobile ? multiText(ox, 11, wrap(p.label, Math.floor(pw / 6.2), 2), { size: 12, fill: INK.ink, weight: 600, lh: 13 }) : txt(ox, 14, p.label, { size: 13, fill: INK.ink, weight: 600 });
     b += `<g transform="translate(${r1(ox)} ${top}) scale(${s.toFixed(4)})">`;
     for (const r of p.regions) {
       const has = r.value !== null && r.value !== undefined;
@@ -855,10 +855,10 @@ function scenarioMapsSvg(v: ScenarioMapsVisual, o: { width: number; mobile: bool
   // one legend for every panel
   const ly = top + ph + 18, lw = Math.min(300, W * 0.7), N = 60;
   for (let k = 0; k < N; k++) { const val = v.min + ((v.max - v.min) * (k + 0.5)) / N; b += `<rect x="${r1((k * lw) / N)}" y="${r1(ly)}" width="${r1(lw / N + 0.5)}" height="7" fill="${choroColor(val, v.min, v.max)}"/>`; }
-  b += txt(0, ly + 22, f(v.min), { size: 11.5, fill: INK.ink2 }) + txt(lw, ly + 22, f(v.max), { size: 11.5, fill: INK.ink2, anchor: "end" });
+  b += txt(0, ly + 22, f(v.min), { size: 12.5, fill: INK.ink2 }) + txt(lw, ly + 22, f(v.max), { size: 12.5, fill: INK.ink2, anchor: "end" });
   // The measure sits beside the key on desktop and under it on a phone.
-  if (o.mobile) { b += txt(0, ly + 40, cleanUnit(v.unit), { size: 11.5, fill: INK.ink3 }); return svgDoc("fig-scenmaps", W, ly + 46, b, v.title); }
-  b += txt(lw + 14, ly + 8, cleanUnit(v.unit), { size: 11.5, fill: INK.ink3 });
+  if (o.mobile) { b += txt(0, ly + 40, cleanUnit(v.unit), { size: 12.5, fill: INK.ink3 }); return svgDoc("fig-scenmaps", W, ly + 46, b, v.title); }
+  b += txt(lw + 14, ly + 8, cleanUnit(v.unit), { size: 12.5, fill: INK.ink3 });
   return svgDoc("fig-scenmaps", W, ly + 28, b, v.title);
 }
 
@@ -943,7 +943,7 @@ function groupedSvg(v: GroupedBarVisual, o: { width: number; mobile: boolean }) 
     g.values.forEach((val, si) => {
       const x = cx - (ns * (bw + gap)) / 2 + si * (bw + gap);
       b += `<rect class="mk" x="${r1(x)}" y="${r1(y(val))}" width="${r1(bw)}" height="${r1(Math.max(1, y(0) - y(val)))}" fill="${seriesColor(si)}"${tip(`${g.label} · ${v.series[si]}`, fmt(val, v.unit))}/>`;
-      if (label) b += txt(x + bw / 2, y(val) - 5, num(val), { size: 11.5, fill: INK.ink2, anchor: "middle" });
+      if (label) b += txt(x + bw / 2, y(val) - 5, num(val), { size: 12.5, fill: INK.ink2, anchor: "middle" });
     });
     {
       const tw = labelTextW(g.label, nameSize), x0 = Math.min(W - tw, Math.max(0, cx - tw / 2));
