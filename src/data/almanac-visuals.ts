@@ -180,7 +180,7 @@ function scatterFitVisual(e: AlmanacEntry, get: Lookup): AlmanacVisual | null {
  * already placed. A label that fits nowhere is dropped; the tooltip still names it.
  */
 function placeLabels(pts: Array<ScatterPoint & { wantLabel: boolean }>, o: { W: number; H: number; x: [number, number]; y: [number, number]; sized: boolean }) {
-  const sm = o.W < 700, ml = 30, mr = 10, mt = 30, mb = 50, rMax = sm ? 15 : 22, size = sm ? 11 : 12, cw = size * 0.56;
+  const sm = o.W < 700, ml = 30, mr = 10, mt = 30, mb = 50, rMax = sm ? 15 : 22, size = sm ? 11.5 : 12, cw = size * 0.56;
   const X = (v: number) => ml + ((v - o.x[0]) / (o.x[1] - o.x[0])) * (o.W - ml - mr), Y = (v: number) => o.H - mb + ((v - o.y[0]) / (o.y[1] - o.y[0])) * (mt - (o.H - mb));
   const pMax = Math.max(...pts.map((p) => p.size ?? 0));
   const rad = (p: ScatterPoint) => (o.sized && p.size ? Math.max(sm ? 2.5 : 3.5, rMax * Math.sqrt(p.size / pMax)) : sm ? 4.5 : 5.5);

@@ -2,6 +2,7 @@
 // Charts set proportional lining figures; `tabular` exists for a table that must align.
 
 import { METRICS } from "./metrics.generated";
+import { KERNING } from "./kerning.generated";
 
 type Face = { avg: number; tab: number; map: Record<string, number> };
 const SANS400 = METRICS.sans400 as unknown as Face;
@@ -14,10 +15,15 @@ export type FaceName = "sans" | "display";
 
 export function measure(text: string, size: number, bold = false, face: FaceName = "sans", tabular = true): number {
   const f = face === "display" ? DISPLAY : bold ? SANS600 : SANS400;
-  let units = 0;
+  // Kerning as the browser applies it (scripts/kit/build-kerning.mjs); without it a kerned
+  // label measured up to 4% wide and a right-aligned name started a few pixels in.
+  const kern = face === "sans" && !tabular ? KERNING[bold ? "sans600" : "sans400"] : null;
+  let units = 0, prev = "";
   for (const ch of text) {
     if (ch >= "0" && ch <= "9" && (tabular || !f.map[ch])) units += f.tab;
     else units += f.map[ch] ?? f.avg;
+    if (kern && prev) units += kern[prev + ch] ?? 0;
+    prev = ch;
   }
   return (units / 1000) * size;
 }

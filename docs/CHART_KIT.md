@@ -253,4 +253,7 @@ margin voice (Literata italic, `ink2`):
   drawing moved; look at them, then `--update` in the same commit.
 - Look at the result in a browser too: the PNG checks use a static TTF and miss
   OpenType behaviour. They missed that Schibsted's tabular figures widen punctuation.
-- After changing the font files, run `node scripts/kit/build-metrics.mjs`.
+- After changing the font files, run `node scripts/kit/build-metrics.mjs`, then
+  `node scripts/kit/build-kerning.mjs` (needs `INDICA_CHROME`, as the audits do): kerning
+  pairs measured in the browser from the same fonts, applied by `measure()`. Without them a
+  kerned label measured up to 4% wide and right-aligned names started a few pixels in.

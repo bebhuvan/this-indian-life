@@ -177,7 +177,7 @@ function barsSvg(rows: BarRow[], o: { width: number; mobile: boolean; unit: stri
   // The header: the unit (wrapped to the figure, and moved to the left edge when it would
   // run past the right one), then on a log scale the note and the gridline values, each on
   // its own row so none of the three can run into another.
-  const capU = cleanUnit(unit), capSize = m ? 11.5 : 12, note = "Log scale: each gridline is ten times the last", noteSize = m ? 11 : 11.5;
+  const capU = cleanUnit(unit), capSize = m ? 11.5 : 12, note = "Log scale: each gridline is ten times the last", noteSize = 11.5;
   // The unit starts at the card edge, like the labels under it.
   const capX = 0;
   const capLines = !capU ? [] : textW(capU, capSize) > W - capX ? wrap(capU, Math.floor((W - capX) / (capSize * 0.56)), 3) : [capU];
@@ -382,7 +382,7 @@ function shareSvg(rowsIn: Array<{ label?: string; segs: Seg[] }>, o: { width: nu
 // PYRAMID — two populations by age, the age scale down the middle
 // =====================================================================
 function pyramidSvg(v: PyramidVisual, o: { width: number; mobile: boolean }) {
-  const W = o.width, m = o.mobile, mid = m ? 46 : 64, valSize = m ? 11 : 12;
+  const W = o.width, m = o.mobile, mid = m ? 46 : 64, valSize = m ? 11.5 : 12;
   const n = v.rows.length, rowH = m ? 15 : 21, gap = m ? 2 : 4, top = 30;
   const max = Math.max(...v.rows.flatMap((r) => [r.male, r.female]), 1);
   const pv = (x: number) => (m ? fmt(x, v.unit).replace(" crore", " cr") : fmt(x, v.unit));
@@ -407,7 +407,7 @@ function pyramidSvg(v: PyramidVisual, o: { width: number; mobile: boolean }) {
     b += `<rect x="${r1(ml - wm)}" y="${r1(y + gap / 2)}" width="${r1(Math.max(0.8, wm))}" height="${r1(bh)}" fill="var(--c)"/>`;
     // Two sides of equal standing, two inks of equal weight: near-black women outweighed the men.
     b += `<rect x="${r1(fr)}" y="${r1(y + gap / 2)}" width="${r1(Math.max(0.8, wf))}" height="${r1(bh)}" fill="var(--s3)"/>`;
-    b += txt(cx, y + rowH / 2 + 4, r.age, { size: m ? 11 : 12, fill: INK.ink, anchor: "middle" });
+    b += txt(cx, y + rowH / 2 + 4, r.age, { size: m ? 11.5 : 12, fill: INK.ink, anchor: "middle" });
     const showVal = !m || i % 2 === 0 || i === rows.length - 1;
     if (showVal) {
       b += txt(ml - wm - 5, y + rowH / 2 + 4, pv(r.male), { size: valSize, fill: INK.ink2, anchor: "end" });
@@ -812,7 +812,7 @@ function heatScatterFigure(v: ScatterVisual, ctx: FigureContext): Figure {
 }
 /** Greedy label placement for scatters (right, left, above, below; skip if nothing clears). */
 export function placeScatterLabels<T extends { label: string; x: number; y: number; size?: number; wantLabel?: boolean; place?: ScatterPoint["place"]; short?: string }>(pts: T[], o: { W: number; H: number; x: [number, number]; y: [number, number]; sized?: boolean }) {
-  const sm = o.W < 700, ml = 30, mr = 10, mt = 30, mb = 50, rMax = sm ? 15 : 22, size = sm ? 11 : 12, cw = size * 0.56;
+  const sm = o.W < 700, ml = 30, mr = 10, mt = 30, mb = 50, rMax = sm ? 15 : 22, size = sm ? 11.5 : 12, cw = size * 0.56;
   const X = (v: number) => ml + ((v - o.x[0]) / (o.x[1] - o.x[0])) * (o.W - ml - mr), Y = (v: number) => o.H - mb + ((v - o.y[0]) / (o.y[1] - o.y[0])) * (mt - (o.H - mb));
   const pMax = Math.max(...pts.map((p) => p.size ?? 0));
   const rad = (p: T) => (o.sized && p.size ? Math.max(sm ? 2.5 : 3.5, rMax * Math.sqrt(p.size / pMax)) : sm ? 4.5 : 5.5);

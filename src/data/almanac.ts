@@ -142,12 +142,21 @@ export const txt = (x: number, y: number, s: string | number, o: TextOpts = {}) 
 export const halo = (x: number, y: number, s: string | number, o: TextOpts = {}) =>
   `<text x="${r1(x)}" y="${r1(y)}" font-family="${F}" font-size="${o.size ?? 12}" fill="none" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"${o.anchor ? ` text-anchor="${o.anchor}"` : ""}${o.weight ? ` font-weight="${o.weight}"` : ""}>${esc(s)}</text>` + txt(x, y, s, o);
 /** A right-aligned row label that wraps onto two lines when it would not fit in `maxW`. */
-export function rowLabel(x: number, cy: number, s: string, maxW: number, o: TextOpts = {}) {
-  const size = o.size ?? 12.5, fits = s.length * size * 0.55 <= maxW;
-  if (fits) return txt(x, cy + size * 0.32, s, { ...o, anchor: "end" });
+/** How rowLabel sets a label in `maxW`: one line when it fits as the font sets it, else
+ *  two lines split where their widths are closest. Forms size their name column from the
+ *  widest line this returns, so a wrapped name ends on the column's left edge. */
+export function rowLabelLines(s: string, maxW: number, size = 12.5, weight = 400): string[] {
+  if (textWidth(s, size, weight) <= maxW) return [s];
   const words = s.split(" "); let cut = 1, best = Infinity;
-  for (let i = 1; i < words.length; i++) { const d = Math.abs(words.slice(0, i).join(" ").length - words.slice(i).join(" ").length); if (d < best) { best = d; cut = i; } }
-  const a = words.slice(0, cut).join(" "), b = words.slice(cut).join(" ");
+  for (let i = 1; i < words.length; i++) { const d = Math.abs(textWidth(words.slice(0, i).join(" "), size, weight) - textWidth(words.slice(i).join(" "), size, weight)); if (d < best) { best = d; cut = i; } }
+  return words.length > 1 ? [words.slice(0, cut).join(" "), words.slice(cut).join(" ")] : [s];
+}
+/** The width of a label's widest line as rowLabel sets it. */
+export const rowLabelWidth = (s: string, maxW: number, size = 12.5, weight = 400) => Math.max(...rowLabelLines(s, maxW, size, weight).map((l) => textWidth(l, size, weight)));
+export function rowLabel(x: number, cy: number, s: string, maxW: number, o: TextOpts = {}) {
+  const size = o.size ?? 12.5, lines = rowLabelLines(s, maxW, size, o.weight ?? 400);
+  if (lines.length === 1) return txt(x, cy + size * 0.32, s, { ...o, anchor: "end" });
+  const [a, b] = lines;
   return `<text x="${r1(x)}" y="${r1(cy - size * 0.28)}" font-family="${F}" font-size="${size}" fill="${o.fill ?? INK.ink2}" text-anchor="end"${o.weight ? ` font-weight="${o.weight}"` : ""}><tspan x="${r1(x)}">${esc(a)}</tspan><tspan x="${r1(x)}" dy="${r1(size * 1.15)}">${esc(b)}</tspan></text>`;
 }
 /** A rule. Axis-aligned rules (grid, axes, ticks, zero lines) snap to the pixel grid, so a
@@ -255,11 +264,11 @@ export function heatStrip(rows: HeatRow[], o: {
   const rowH = o.rowH ?? 20, gap = o.gap ?? 5;
   // The label and value columns are at least as wide as what they print, so a long name
   // ("Maharashtra") or the last year never runs off the figure on a phone.
-  const ls = compact ? 11 : 12.5, fmt0 = o.valueFmt ?? ((v: number) => v.toFixed(1));
+  const ls = compact ? 11.5 : 12.5, fmt0 = o.valueFmt ?? ((v: number) => v.toFixed(1));
   // Names sit flush left, so the row labels share the card's left edge with the title above;
   // the column is as wide as the longest name as the font sets it.
   const nameW = Math.max(...rows.map((r) => textWidth(String(compact ? r.shortLabel ?? r.label : r.label), ls, r.emphasis ? 600 : 400)));
-  const valW = Math.max(textWidth(String(o.to), compact ? 11 : 11.5), ...rows.map((r) => textWidth(fmt0(r.points[r.points.length - 1][1]), ls, 600)));
+  const valW = Math.max(textWidth(String(o.to), 11.5), ...rows.map((r) => textWidth(fmt0(r.points[r.points.length - 1][1]), ls, 600)));
   const labelW = Math.ceil(nameW) + 14, rightW = Math.ceil(valW) + 16;
   const col = ramp(o.stops), n = o.to - o.from + 1, id = uid("hs");
   const top = 30, plotW = W - labelW - rightW, cw = plotW / n;
@@ -272,10 +281,10 @@ export function heatStrip(rows: HeatRow[], o: {
   const step = compact ? 20 : 10, first = Math.ceil(o.from / step) * step;
   let b = "";
   for (let y = first; y < o.to - 2; y += step) {
-    b += txt(xOf(y) + cw / 2, 14, y, { ...AX, anchor: "middle", size: compact ? 11 : 11.5 });
+    b += txt(xOf(y) + cw / 2, 14, y, { ...AX, anchor: "middle", size: 11.5 });
     b += line(xOf(y) + cw / 2, 19, xOf(y) + cw / 2, 24, INK.rule, 1);
   }
-  b += txt(W - rightW + 12, 14, o.to, { ...AX, size: compact ? 11 : 11.5 });
+  b += txt(W - rightW + 12, 14, o.to, { ...AX, size: 11.5 });
   let clip = `<clipPath id="${id}">`;
   rows.forEach((r, i) => { const s0 = r.points[0][0]; clip += `<rect x="${r1(xOf(s0))}" y="${r1(rowY(i))}" width="${r1(xOf(o.to + 1) - xOf(s0))}" height="${rowH}" rx="${compact ? 1.5 : 2.5}"/>`; });
   b += `<defs>${clip}</clipPath></defs><g clip-path="url(#${id})">`;
@@ -286,9 +295,9 @@ export function heatStrip(rows: HeatRow[], o: {
   b += `</g>`;
   rows.forEach((r, i) => {
     const yy = rowY(i), last = r.points[r.points.length - 1][1], hot = o.hot?.(last) ?? false;
-    b += txt(0, yy + rowH / 2 + 4, compact ? r.shortLabel ?? r.label : r.label, { size: compact ? 11 : 12.5, fill: INK.ink, weight: r.emphasis ? 600 : undefined });
+    b += txt(0, yy + rowH / 2 + 4, compact ? r.shortLabel ?? r.label : r.label, { size: compact ? 11.5 : 12.5, fill: INK.ink, weight: r.emphasis ? 600 : undefined });
     if (r.marker) b += dot(xOf(r.marker) + cw / 2, yy + rowH / 2, compact ? 2.3 : 3, INK.ink, compact ? 1 : 1.25);
-    b += txt(W - rightW + 12, yy + rowH / 2 + 4, fmt(last), { size: compact ? 11 : 12.5, fill: hot ? INK.sindoor : INK.ink, weight: r.emphasis || hot ? 600 : undefined });
+    b += txt(W - rightW + 12, yy + rowH / 2 + 4, fmt(last), { size: compact ? 11.5 : 12.5, fill: hot ? INK.sindoor : INK.ink, weight: r.emphasis || hot ? 600 : undefined });
   });
   const ly = top + rowsH + (compact ? 34 : 44);
   const lg = { ticks: o.legendTicks, mark: o.legendMark, title: compact ? undefined : o.legendTitle };
@@ -329,7 +338,7 @@ export function tileGrid(tiles: Tile[], o: {
   const above = o.above ?? INK.sindoor, below = o.below ?? INK.neel;
   // A name wider than its tile runs into the next one; when any would, every tile shows its
   // state code, so the grid reads in one register.
-  const codes = tiles.some((t) => (t.code ?? STATE_CODE[t.label]) && t.label.length * (small ? 11 : 11.5) * 0.56 > tw - 2);
+  const codes = tiles.some((t) => (t.code ?? STATE_CODE[t.label]) && t.label.length * (11.5) * 0.56 > tw - 2);
   let b = "", defs = "";
   tiles.forEach((t, k) => {
     const ox = t.col * (tw + g), oy = t.row * (th + g), head = small ? 26 : 24;
@@ -345,8 +354,8 @@ export function tileGrid(tiles: Tile[], o: {
     b += `<path d="${pathOf(t.points, px, py)}" fill="none" stroke="${INK.ink}" stroke-width="${small ? 1.1 : 1.35}" stroke-linejoin="round" stroke-linecap="round"><title>${esc(t.label)}: ${fmt(last)} in ${t.points[t.points.length - 1][0]}</title></path>`;
     b += `<circle cx="${r1(px(t.points[t.points.length - 1][0]))}" cy="${r1(py(last))}" r="${small ? 2 : 2.6}" fill="${hot ? above : below}" stroke="#ffffff" stroke-width="1"/>`;
     const name = codes && (t.code ?? STATE_CODE[t.label]) ? t.code ?? STATE_CODE[t.label] : t.label;
-    b += txt(ox, oy + 11, name, { size: small ? 11 : 11.5, fill: INK.ink, weight: 500 });
-    b += txt(small ? ox : ox + tw, oy + (small ? 23 : 11), fmt(last), { size: small ? 11 : 12, fill: hot ? above : below, weight: 600, anchor: small ? "start" : "end" });
+    b += txt(ox, oy + 11, name, { size: 11.5, fill: INK.ink, weight: 500 });
+    b += txt(small ? ox : ox + tw, oy + (small ? 23 : 11), fmt(last), { size: small ? 11.5 : 12, fill: hot ? above : below, weight: 600, anchor: small ? "start" : "end" });
   });
   if (o.keyAt) {
     const kx = o.keyAt[0] * (tw + g), ky = o.keyAt[1] * (th + g) + 8, sw = 22, tl = o.thresholdLabel ?? String(o.threshold);
@@ -356,8 +365,8 @@ export function tileGrid(tiles: Tile[], o: {
       [line(kx, ky + 40, kx + sw, ky + 40, INK.ink, 1.35), "The state"],
     ];
     if (o.reference) keys.push([line(kx, ky + 60, kx + sw, ky + 60, "#bdbdbd", 1), o.referenceLabel ?? "India, for comparison"]);
-    keys.forEach(([m, s], i) => { b += m + txt(kx + sw + 8, ky + i * 20 + 4, s, { size: small ? 11 : 11.5 }); });
-    b += txt(kx, ky + keys.length * 20 + 6, `Figure: ${o.to}. Red if still above ${tl}`, { size: small ? 11 : 11.5, fill: INK.ink3 });
+    keys.forEach(([m, s], i) => { b += m + txt(kx + sw + 8, ky + i * 20 + 4, s, { size: 11.5 }); });
+    b += txt(kx, ky + keys.length * 20 + 6, `Figure: ${o.to}. Red if still above ${tl}`, { size: 11.5, fill: INK.ink3 });
   }
   return svg(W, H, `<defs>${defs}</defs>` + b, o.label);
 }
@@ -494,7 +503,7 @@ export function scatterFit(pts: ScatterPoint[], o: {
   // sides a step further out, and takes the first that touches no dot, no line (the fit, the
   // reference), no other label, the reference label or the size key. The biggest points are
   // placed first. A label with nowhere clear is left to the tooltip.
-  const fs = sm ? 11 : 12;
+  const fs = sm ? 11.5 : 12;
   const textW = (t: string, size: number) => textWidth(t, size);
   // Whether a segment passes through a box (sampled finely enough for a text line).
   const crosses = (bx: [number, number, number, number]) => segs.some(([x1, y1, x2, y2]) => {
@@ -533,7 +542,7 @@ export function scatterFit(pts: ScatterPoint[], o: {
     o.sizeKey.forEach(([v, s], i) => {
       const rr = Math.max(sm ? 2.5 : 3.5, rMax * Math.sqrt(v / pMax)), cx = kx + (offs[i] ?? i * 50);
       b += `<circle cx="${r1(cx)}" cy="${r1(ky + rMax - rr)}" r="${r1(rr)}" fill="none" stroke="${INK.ink3}" stroke-width="1"/>`;
-      b += txt(cx, ky + rMax + 16, s, { size: sm ? 11 : 11.5, fill: INK.ink2, anchor: "middle" });
+      b += txt(cx, ky + rMax + 16, s, { size: 11.5, fill: INK.ink2, anchor: "middle" });
     });
   }
   return { svg: svg(W, H, b, o.label), stats };
@@ -555,8 +564,10 @@ export function beeswarm(points: SwarmPoint[], o: {
   const W = o.width ?? 1040, H = o.height ?? 230, r = o.r ?? 5.5, thumb = !!o.thumb, narrow = W < 700;
   // Large dots across the page get type to match: 11.5-unit labels beside 8-unit dots read as footnotes.
   const big = !thumb && !narrow && r >= 7, ls = big ? 13 : 11.5, ax = big ? { ...AX, size: 12.5 } : AX;
-  const ml = 10, mr = 10, axisY = H - (thumb ? 4 : narrow ? 54 : 34);
-  const x = scale(o.domain[0], o.domain[1], ml, W - mr);
+  // The axis runs edge to edge; the scale is inset only by a dot's radius, so a dot at either
+  // end is whole and the figure starts on the card's left edge (a 10-unit inset did not).
+  const ml = 0, mr = 0, axisY = H - (thumb ? 4 : narrow ? 54 : 34);
+  const x = scale(o.domain[0], o.domain[1], r + 1, W - r - 1);
   const cy = thumb ? H / 2 : (axisY + 30) / 2;
   const gapR = 2 * r + 1.2, d2 = gapR ** 2;
   const placed: Array<SwarmPoint & { x: number; y: number }> = [];
@@ -596,7 +607,7 @@ export function beeswarm(points: SwarmPoint[], o: {
     b += txt(p.x, yEdge + lab.dir * 10 + (lab.dir > 0 ? ls - 2.5 : 0), lab.text, { size: ls, fill: INK.ink, weight: 600, anchor: lab.anchor ?? "middle" });
   }
   if (!thumb) {
-    const ks = big ? 12.5 : 11, widths = o.groups.map((g) => textWidth(g.label, ks) + 28);
+    const ks = big ? 12.5 : 11.5, widths = o.groups.map((g) => textWidth(g.label, ks) + 28);
     let lx = narrow ? ml : W - mr - widths.reduce((a, c) => a + c, 0) + 12;
     const ly = narrow ? H - 4 : 9;
     o.groups.forEach((g, i) => { b += `<circle cx="${lx + 5}" cy="${ly}" r="4.5" fill="${g.color}"/>` + txt(lx + 14, ly + 4, g.label, { size: ks }); lx += widths[i]; });
@@ -761,9 +772,13 @@ export function rankSlope(left: string[], right: string[], o: { leftTitle: strin
   const rowH = roomy ? Math.min(36, Math.max(22, Math.round(380 / n))) : o.rowH ?? 22, top = bare ? 4 : roomy ? 36 : 30, moveAt = o.moveAt ?? (n <= 15 ? 2 : 5);
   // Each label column is as wide as its longest "Name 12", not a fixed 150: on a phone the
   // fixed columns left the crossing lines, the point of the form, about 50 units.
-  const colW = (names: string[]) => Math.max(...names.map((s, i) => `${s}  ${i + 1}`.length * fs * 0.56)) + 14;
-  const xl = bare ? 40 : Math.min(150, colW(left)), xr = W - (bare ? 40 : Math.min(150, colW(right)));
+  // Measured as the font sets them, each in the weight it is drawn in, plus the 8-unit gap to
+  // the line: a characters-times-0.56 estimate started every label 30 units in.
   const moved = (i: number, j: number) => Math.abs(i - j) >= moveAt;
+  const strong = (s: string, i: number, j: number) => moved(i, j) || s === o.emphasis;
+  const colW = (texts: Array<[string, boolean]>) => Math.ceil(Math.max(...texts.map(([t, b]) => textWidth(t, fs, b ? 600 : 400)))) + 8;
+  const xl = bare ? 40 : Math.min(W * 0.32, colW(left.map((s, i) => [`${s}  ${i + 1}`, strong(s, i, right.indexOf(s))])));
+  const xr = W - (bare ? 40 : Math.min(W * 0.32, colW(right.map((s, j) => [`${j + 1}  ${s}`, strong(s, left.indexOf(s), j)]))));
   const hd = roomy ? { ...AX, size: 12.5, fill: INK.ink2, weight: 600 } : AX;
   let b = bare ? "" : txt(xl, 12, o.leftTitle, { ...hd, anchor: "middle" }) + txt(xr, 12, o.rightTitle, { ...hd, anchor: "middle" });
   const order = left.map((s, i) => [s, i, right.indexOf(s)] as [string, number, number]).filter(([, , j]) => j >= 0).sort((a, c) => Number(moved(a[1], a[2])) - Number(moved(c[1], c[2])));
@@ -878,10 +893,22 @@ export function miniParade(values: number[], widths: number[], o: { yMax: number
 // =====================================================================
 export type IntervalRow = { label: string; lo: number; hi: number; mid?: number; hot?: boolean; emphasis?: boolean };
 export function intervalPlot(rows: IntervalRow[], o: { domain: [number, number]; ticks: number[]; fmt?: (v: number) => string; width?: number; rowH?: number; ref?: { value: number; label: string }; midLabel?: string; label: string }) {
-  const W = o.width ?? 1040, sm = W < 480, rowH = o.rowH ?? (sm ? 34 : 30), lw = sm ? 0 : Math.min(200, W * 0.3), top = 26;
-  const x = scale(o.domain[0], o.domain[1], lw + 7, W - 60), f = o.fmt ?? ((v: number) => fmtIN(v));
+  const W = o.width ?? 1040, sm = W < 480, rowH = o.rowH ?? (sm ? 34 : 30), top = 26, f = o.fmt ?? ((v: number) => fmtIN(v));
   // Across the page the type is a step larger: at 11.5 units the labels read as footnotes beside 17px body text.
-  const ls = sm ? 12 : 13.5, vs = sm ? 11 : 12.5, ax = sm ? AX : { ...AX, size: 12.5 };
+  const ls = sm ? 12 : 13.5, vs = sm ? 11.5 : 12.5, ax = sm ? AX : { ...AX, size: 12.5 };
+  // The name column is as wide as the longest name (at most 30%): a fixed 200 units left
+  // short names floating 90 units in from the figure's edge.
+  const cap = W * 0.3;
+  const lw = sm ? 0 : Math.ceil(Math.max(...rows.map((r) => rowLabelWidth(r.label, cap - 12, ls, r.emphasis ? 600 : 400)))) + 12;
+  // The plot ends as far right as every row's range label still fits after its interval.
+  const x0 = lw + 7;
+  let x1 = W - 2;
+  for (const r of rows) {
+    const t = (r.hi - o.domain[0]) / (o.domain[1] - o.domain[0] || 1), need = 8 + textWidth(`${f(r.lo)}–${f(r.hi)}`, vs, r.emphasis ? 600 : 400) + 2;
+    if (t > 0) x1 = Math.min(x1, x0 + (W - need - x0) / t);
+  }
+  x1 = Math.min(x1, W - textWidth(f(o.ticks[o.ticks.length - 1] ?? o.domain[1]), ax.size ?? 12.5) / 2 - 1);
+  const x = scale(o.domain[0], o.domain[1], x0, x1);
   const rowTop = (i: number) => top + i * rowH + (sm ? 14 : 0);
   const H = rowTop(rows.length - 1) + rowH + 34;
   let b = "";
@@ -891,7 +918,7 @@ export function intervalPlot(rows: IntervalRow[], o: { domain: [number, number];
     // The row the figure is about (India among its neighbours) is set in ink, its label bold.
     const cy = rowTop(i) + rowH / 2, c = r.hot ? INK.sindoor : r.emphasis ? INK.ink : INK.neel;
     if (sm) b += txt(0, rowTop(i) + 2, r.label, { size: ls, fill: INK.ink, weight: r.emphasis ? 700 : 500 });
-    else b += rowLabel(lw - 12, cy, r.label, lw - 16, { size: ls, fill: INK.ink, ...(r.emphasis ? { weight: 600 } : {}) });
+    else b += rowLabel(lw - 12, cy, r.label, Math.max(lw - 12, cap - 12), { size: ls, fill: INK.ink, ...(r.emphasis ? { weight: 600 } : {}) });
     b += `<rect x="${r1(x(r.lo))}" y="${r1(cy - 4)}" width="${r1(Math.max(2, x(r.hi) - x(r.lo)))}" height="8" rx="4" fill="${c}" fill-opacity="0.22"><title>${esc(r.label)}: ${f(r.lo)} to ${f(r.hi)}</title></rect>`;
     b += line(x(r.lo), cy - 6, x(r.lo), cy + 6, c, 1.25) + line(x(r.hi), cy - 6, x(r.hi), cy + 6, c, 1.25);
     if (r.mid != null) b += dot(x(r.mid), cy, sm ? 4 : 4.5, c, 1.5);
@@ -945,15 +972,16 @@ export function calendarHeat(points: Array<{ date: string; value: number }>, o: 
   const byYear = new Map<number, Array<{ d: Date; v: number; s: string }>>();
   for (const p of points) { const d = new Date(`${p.date}T00:00:00Z`); if (isNaN(+d)) continue; const y = d.getUTCFullYear(); if (!byYear.has(y)) byYear.set(y, []); byYear.get(y)!.push({ d, v: p.value, s: p.date }); }
   const years = [...byYear.keys()].sort((a, c) => a - c);
-  const lw = sm ? 34 : 44, cell = Math.min(17, (W - lw - 4) / 54), gap = cell < 8 ? 0.8 : 2;
+  // The year column fits the widest year as it is set (bold), plus the gap to the grid.
+  const lw = Math.ceil(Math.max(...years.map((y) => textWidth(String(y), sm ? 11.5 : 12, 600)))) + 8, cell = Math.min(17, (W - lw - 4) / 54), gap = cell < 8 ? 0.8 : 2;
   const yearH = 7 * cell + (sm ? 12 : 18), top = 18;
   const H = top + years.length * yearH + 40;
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   let b = "";
   years.forEach((yr, yi) => {
     const oy = top + yi * yearH, jan1 = Date.UTC(yr, 0, 1), dow0 = new Date(jan1).getUTCDay();
-    b += txt(lw - 8, oy + 3.5 * cell + 4, yr, { size: sm ? 11 : 12, fill: INK.ink, anchor: "end", weight: 600 });
-    if (yi === 0) for (let m = 0; m < 12; m++) { const day = Math.round((Date.UTC(yr, m, 1) - jan1) / 864e5); const wk = Math.floor((day + dow0) / 7); b += txt(lw + wk * cell, top - 6, sm ? MONTHS[m][0] : MONTHS[m], { ...AX, size: sm ? 11 : 11 }); }
+    b += txt(lw - 8, oy + 3.5 * cell + 4, yr, { size: sm ? 11.5 : 12, fill: INK.ink, anchor: "end", weight: 600 });
+    if (yi === 0) for (let m = 0; m < 12; m++) { const day = Math.round((Date.UTC(yr, m, 1) - jan1) / 864e5); const wk = Math.floor((day + dow0) / 7); b += txt(lw + wk * cell, top - 6, sm ? MONTHS[m][0] : MONTHS[m], { ...AX, size: 11.5 }); }
     for (const p of byYear.get(yr)!) {
       const day = Math.round((+p.d - jan1) / 864e5), wk = Math.floor((day + dow0) / 7), wd = p.d.getUTCDay();
       b += `<rect x="${r1(lw + wk * cell)}" y="${r1(oy + wd * cell)}" width="${r1(cell - gap)}" height="${r1(cell - gap)}" rx="${sm ? 0.5 : 1.5}" fill="${col(p.v)}"><title>${p.s}: ${f(p.v)}</title></rect>`;
@@ -988,11 +1016,11 @@ export function connectedScatter(paths: Path2D[], o: { x: [number, number]; y: [
     for (const q of pts) b += `<circle cx="${r1(x(q.x))}" cy="${r1(y(q.y))}" r="${sm ? 1.6 : 2.2}" fill="${p.color}"><title>${esc(p.label)}, ${q.t}: ${xf(q.x)}, ${yf(q.y)}</title></circle>`;
     const a = pts[0], z = pts[pts.length - 1];
     b += dot(x(a.x), y(a.y), sm ? 3 : 3.5, "#ffffff", 0) + `<circle cx="${r1(x(a.x))}" cy="${r1(y(a.y))}" r="${sm ? 3 : 3.5}" fill="#ffffff" stroke="${p.color}" stroke-width="1.5"/>`;
-    b += halo(x(a.x) - 6, y(a.y) + 4, String(a.t), { size: sm ? 11 : 11.5, fill: INK.ink2, anchor: "end" });
+    b += halo(x(a.x) - 6, y(a.y) + 4, String(a.t), { size: 11.5, fill: INK.ink2, anchor: "end" });
     b += dot(x(z.x), y(z.y), sm ? 3.5 : 4.5, p.color, 1.5);
     const ly = endY.get(p.label)!, lx = Math.max(...paths.map((q) => x(q.points[q.points.length - 1].x))) + 10;
     if (Math.abs(ly - 4 - y(z.y)) > 2 || lx - x(z.x) > 12) b += line(x(z.x) + 5, y(z.y), lx - 3, ly - 4, p.color, 0.75);
-    b += halo(lx, ly, `${p.label} ${z.t}`, { size: sm ? 11 : 12.5, fill: textInk(p.color), weight: 600 });
+    b += halo(lx, ly, `${p.label} ${z.t}`, { size: sm ? 11.5 : 12.5, fill: textInk(p.color), weight: 600 });
   }
   return svg(W, H, b, o.label);
 }
@@ -1001,14 +1029,18 @@ export function connectedScatter(paths: Path2D[], o: { x: [number, number]; y: [
 // 16. WATERFALL — how parts add up to a total (horizontal, so long labels fit)
 // =====================================================================
 export function waterfall(steps: Array<{ label: string; value: number }>, o: { totalLabel: string; fmt?: (v: number) => string; width?: number; rowH?: number; upColor?: string; downColor?: string; label: string }) {
-  const W = o.width ?? 1040, sm = W < 480, lw = sm ? 0 : Math.min(230, W * 0.36), top = 8;
+  const W = o.width ?? 1040, sm = W < 480, top = 8;
   // Across the page a few steps get taller rows and thicker bars, so the figure has the height to read.
   const rowH = o.rowH ?? (sm ? 40 : Math.min(44, Math.max(30, Math.round(340 / (steps.length + 1))))), bh = sm ? 14 : Math.max(14, Math.round(rowH * 0.5));
   const ls = sm ? 11.5 : rowH >= 38 ? 13.5 : 12.5, vs = sm ? 11.5 : rowH >= 38 ? 12.5 : 11.5;
   const f = o.fmt ?? ((v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toFixed(2)}`);
+  // The name column fits the longest name (the total's in bold), at most 36%: a fixed 230
+  // units started short names 20 units in from the figure's edge.
+  const cap = W * 0.36;
+  const lw = sm ? 0 : Math.ceil(Math.max(textWidth(o.totalLabel, ls, 600), ...steps.map((s) => rowLabelWidth(s.label, cap - 12, ls)))) + 12;
   let acc = 0; const segs = steps.map((s) => { const a = acc; acc += s.value; return { ...s, a, z: acc }; });
   const total = acc, lo = Math.min(0, ...segs.map((s) => Math.min(s.a, s.z))), hi = Math.max(0, ...segs.map((s) => Math.max(s.a, s.z)));
-  const valW = Math.max(...segs.map((s) => f(s.value).length), f(total).length) * 12 * 0.58 + 12;
+  const valW = Math.ceil(Math.max(...segs.map((s) => textWidth(f(s.value), vs, 500)), textWidth(f(total), vs + 0.5, 600))) + 10;
   const x = scale(lo, hi, lw + 6, W - valW);
   const rowY = (i: number) => top + i * rowH + (sm ? 14 : 0);
   const H = rowY(segs.length) + rowH + 10;
@@ -1017,7 +1049,7 @@ export function waterfall(steps: Array<{ label: string; value: number }>, o: { t
   segs.forEach((s, i) => {
     const yy = rowY(i), c = s.value >= 0 ? up : down, x0 = x(Math.min(s.a, s.z)), x1 = x(Math.max(s.a, s.z));
     if (sm) b += halo(0, yy + 2, s.label, { size: 12.5, fill: INK.ink });
-    else b += rowLabel(lw - 12, yy + rowH / 2, s.label, lw - 16, { size: ls, fill: INK.ink });
+    else b += rowLabel(lw - 12, yy + rowH / 2, s.label, Math.max(lw - 12, cap - 12), { size: ls, fill: INK.ink });
     const by = yy + (sm ? 8 : rowH / 2 - bh / 2);
     b += `<rect x="${r1(x0)}" y="${r1(by)}" width="${r1(Math.max(1.5, x1 - x0))}" height="${bh}" fill="${c}"><title>${esc(s.label)}: ${f(s.value)}</title></rect>`;
     if (i < segs.length - 1) b += line(x(s.z), by + bh, x(s.z), rowY(i + 1) + (sm ? 8 : rowH / 2 - bh / 2), INK.ink3, 0.75, "2 2");
