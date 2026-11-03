@@ -58,6 +58,25 @@ export const samples: Sample[] = [
     },
   },
   {
+    id: "poverty-annotated",
+    title: "Half of Indians were still below $4.20 a day in 2014",
+    dek: "Share of Indians below $4.20 a day, % (2021 prices). Years between surveys are the World Bank's line-up estimates.",
+    source: "World Bank, Poverty, Prosperity and Planet Report 2026",
+    spec: {
+      form: "line",
+      unit: "%",
+      domain: "share",
+      series: [{ label: "Below $4.20", points: F["pov26.linedup_420"].observations!.filter((p) => Number(p.date) <= 2024), role: "lead", color: POVERTY_LINES["$4.20"] }],
+      references: [{ value: 50, label: "Half of all Indians" }],
+      // The 2017–18 consumption survey was collected and withheld; no national survey was published between these rounds.
+      bands: [{ from: "2012", to: "2022", label: "No published consumption survey" }],
+      notes: [
+        { date: "2011", label: "2011–12, the last survey before the gap" },
+        { date: "2022", label: "The next survey, 2022–23" },
+      ],
+    },
+  },
+  {
     id: "lrs-change",
     title: "Foreign investing did all the growing",
     dek: "Change in remittances by purpose, April–August 2026 against a year earlier, $ million.",

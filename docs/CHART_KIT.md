@@ -198,16 +198,36 @@ the PNG renders in the right faces.
 - The client is one small module (`client.ts` and the kit, no dependencies) shared by
   every chart on the page.
 
+## Annotation
+
+A line chart takes four kinds, each placed only where it collides with nothing, in the
+margin voice (Literata italic, `ink2`):
+
+- `annotations: [{ date, label }]`: an event, a hairline with a tick and its note above.
+- `references: [{ value, label }]`: a value that means something (a poverty line, half the
+  population), a solid stone hairline across the plot, named at its right end where free.
+  The scale extends to include it.
+- `bands: [{ from, to, label }]`: a period (a gap between surveys, a lockdown), a faint
+  ground behind the data, named inside its top; a name that does not fit is keyed under
+  the axis, never dropped.
+- `notes: [{ date, series?, label }]`: a single point, ringed, its note (two lines at
+  most) beside it with a hairline leader. A note with no clear space is left out.
+
 ## Checking a change
 
 - `node scripts/kit/render-samples.mjs <outDir> [--only=<id>]`: every gallery sample at
   360, 680 and 1040 px, to PNG, with the export chrome.
 - `node scripts/kit/render-article.mjs <article-url> <outDir> <tag>`: every kit chart on a
   served article, at 360 and 1040, as one sheet each.
-- `node scripts/kit/stress.mjs [article-url ...]`: every sample, and every kit chart on
-  the given served articles, at each width from 320 to 1040 in 8 px steps; fails on an
-  exception or text anchored outside the frame. The renderer throws on a second display
-  number, so this also enforces the one-display rule.
+- `node scripts/kit/stress.mjs [article-url ...] [--verbose]`: every sample, and every kit
+  chart on the given served articles, at each width from 320 to 1040 in 8 px steps. Each
+  Scene goes through `src/kit/check.ts`: it fails on an exception, text over text, text
+  running past the frame (measured, not just anchored), text under 11 px, or text under
+  4.5:1 against the ground. The renderer throws on a second display number, so this also
+  enforces the one-display rule.
+- `node scripts/kit/snapshots.mjs [--update]`: fingerprints of every sample at 360, 680
+  and 1040 against `src/kit/fixtures/snapshots.json`. A change lists the samples whose
+  drawing moved; look at them, then `--update` in the same commit.
 - Look at the result in a browser too: the PNG checks use a static TTF and miss
   OpenType behaviour. They missed that Schibsted's tabular figures widen punctuation.
 - After changing the font files, run `node scripts/kit/build-metrics.mjs`.

@@ -28,7 +28,16 @@ export interface LineSpec extends BaseSpec {
   form: "line";
   series: LineSeries[];
   domain?: DomainPolicy;
+  /** Events: a hairline at a date, its note above the plot. */
   annotations?: { date: string; label: string }[];
+  /** Reference values (a poverty line, replacement fertility): a hairline across the plot,
+   *  named in the margin voice at one end. They extend the scale to include themselves. */
+  references?: { value: number; label: string }[];
+  /** Periods (a recession, a lockdown, a survey gap): a faint ground behind the data, named
+   *  at its top. */
+  bands?: { from: string; to: string; label?: string }[];
+  /** Notes on single points, written beside them with a short leader: "Peak, May 2021". */
+  notes?: { date: string; series?: number; label: string }[];
   /** The one number the chart is about: a point on a series, set large, with a note. */
   callout?: { series?: number; date: string; note?: string };
 }
@@ -57,7 +66,7 @@ export function line(spec: LineSpec, w: number): Scene {
 
   // Value scale and formats.
   const policy = spec.domain ?? (Math.min(...all) >= 0 && spec.unit !== "index" ? "zero" : "fit");
-  const yt = domain(all, policy, z.cls === "s" ? 4 : 5);
+  const yt = domain([...all, ...(spec.references ?? []).map((r) => r.value)], policy, z.cls === "s" ? 4 : 5);
   const val = formatterFor(all, { unit: spec.unit, decimals: spec.decimals });
   const tickDecimals = Math.max(0, Math.min(2, -Math.floor(Math.log10(yt.step) + 1e-9)));
   const tick = (v: number, top: boolean) => fmt(v, { decimals: tickDecimals, unit: top ? spec.unit : undefined });
@@ -95,6 +104,17 @@ export function line(spec: LineSpec, w: number): Scene {
     if (t === 0 || t === yt.lo) b.hair(x0, sy(t), x1, sy(t), INK.axis);
     else b.hair(x0, sy(t), x1, sy(t), INK.rule);
   }
+
+  // Periods: a faint ground behind everything, clipped to the plot.
+  const bands = (spec.bands ?? []).map((p) => {
+    const a = Math.max(x0, sx(xv(p.from))), c = Math.min(x1, sx(xv(p.to)));
+    return { ...p, a, c };
+  }).filter((p) => p.c > p.a);
+  for (const p of bands) b.rect(p.a, top, p.c - p.a, bottom - top, INK.track);
+
+  // References: solid stone hairlines (dots mean estimate, so never dotted), under the data.
+  const refs = (spec.references ?? []).map((r) => ({ ...r, y: sy(r.value) }));
+  for (const r of refs) b.line(x0, Math.round(r.y) + 0.5, x1, Math.round(r.y) + 0.5, INK.stoneLine, 1);
 
   // Projection ground.
   const proj = S.map((s) => s.projectedAfter).find(Boolean);
@@ -216,6 +236,44 @@ export function line(spec: LineSpec, w: number): Scene {
   }
   b.reserve({ x: x1 + 2, y: top, w: w - x1, h: bottom - top });
 
+  // Reference names, in the margin voice, on their line's right end where it is free (the
+  // eye arrives there from the end labels), else its left end; above, else below.
+  for (const r of refs) {
+    const up = r.y - b.lh("note") / 2 - 2, dn = r.y + b.lh("note") / 2 + 2;
+    b.tryText([[x1 - 4, up, "end"], [x1 - 4, dn, "end"], [x0 + 64, up, "start"], [x0 + 64, dn, "start"]], r.label, "note", { halo: true });
+  }
+  // Period names, inside the top of their band, when the band is wide enough to hold them.
+  // A name that does not fit is keyed under the axis instead: a shaded period with no name
+  // is a question the reader cannot answer.
+  const bandKey: string[] = [];
+  for (const p of bands) if (p.label && !(b.tw(p.label, "note") <= p.c - p.a - 8 && b.tryText([[p.a + 4, top + b.lh("note") / 2 + 2, "start"]], p.label, "note"))) bandKey.push(p.label);
+
+  // Point notes: a ring on the point, the note in clear space beside it (up to two lines),
+  // and a hairline leader from the ring to the note.
+  for (const n of spec.notes ?? []) {
+    const si = n.series ?? 0, p = S[si]?.points.find((q) => q.date === n.date);
+    if (!p) continue;
+    const px = sx(xv(p.date)), py = sy(p.value), lh = b.lh("note");
+    const lines = wrap(n.label, z.note, Math.min(220, w * 0.4), false, "display");
+    const bw = Math.max(...lines.map((l) => b.tw(l, "note"))), bh = lines.length * lh;
+    let placed: { x: number; y: number; right: boolean } | null = null;
+    for (const d of [22, 38, 56]) for (const [dx, dy] of [[1, -1], [-1, -1], [1, 1], [-1, 1]] as const) {
+      const bx = dx > 0 ? px + 10 : px - 10 - bw, by = dy < 0 ? py - d - bh : py + d;
+      const box = { x: bx, y: by, w: bw, h: bh };
+      if (bx < 0 || bx + bw > x1 || by < top || by + bh > bottom || b.occ.hits(box, 3)) continue;
+      placed = { x: bx, y: by, right: dx > 0 };
+      break;
+    }
+    if (!placed) continue;
+    const { x: nx, y: ny, right } = placed;
+    // The leader runs from the ring's edge to the note's near corner.
+    const lx = right ? nx - 2 : nx + bw + 2, ly = ny + bh / 2 > py ? ny + 2 : ny + bh - 2;
+    const ang = Math.atan2(ly - py, lx - px), rr = z.dot + 3;
+    b.line(px + Math.cos(ang) * rr, py + Math.sin(ang) * rr, lx, ly, INK.axis, 1);
+    b.circle(px, py, z.dot + 1.5, undefined, inks[si], 1.25);
+    lines.forEach((l, j) => b.text(right ? nx : nx + bw, ny + lh / 2 + j * lh, l, "note", right ? "start" : "end", { halo: true }));
+  }
+
   // The callout: one value, large, beside its point.
   if (spec.callout) {
     const si = spec.callout.series ?? 0;
@@ -259,16 +317,31 @@ export function line(spec: LineSpec, w: number): Scene {
     let kx = 0, ky = H + 4 + b.lh("label") / 2;
     for (const name of missing) {
       const i = S.findIndex((q) => q.label === name);
-      const wItem = 18 + b.tw(name, "label") + 14;
-      if (kx > 0 && kx + wItem > w) {
+      // A name longer than the line wraps under itself, beside one stroke.
+      const lines = wrap(name, z.label, w - 18);
+      const wItem = 18 + Math.max(...lines.map((l) => b.tw(l, "label"))) + 14;
+      if (kx > 0 && (kx + wItem > w || lines.length > 1)) {
         kx = 0;
         ky += b.lh("label") + 4;
       }
       b.line(kx, ky, kx + 12, ky, inks[i], roles[i] === "context" ? 2 : z.line, undefined, "round");
-      b.text(kx + 18, ky, name, "label", "start", { color: roles[i] === "context" ? INK.ink2 : INK.ink });
-      kx += wItem;
+      lines.forEach((l, j) => b.text(kx + 18, ky + j * b.lh("label"), l, "label", "start", { color: roles[i] === "context" ? INK.ink2 : INK.ink }));
+      ky += (lines.length - 1) * b.lh("label");
+      kx = lines.length > 1 ? w : kx + wItem;
     }
     total = ky + b.lh("label") / 2 + 2;
+  }
+  for (const label of bandKey) {
+    const lines = wrap(label, z.note, w - 22, false, "display");
+    let ky = total + 6 + b.lh("note") / 2;
+    b.rect(0, ky - 6, 14, 12, INK.track);
+    b.hair(0, ky - 6, 14, ky - 6, INK.stone);
+    b.hair(0, ky + 6, 14, ky + 6, INK.stone);
+    for (const l of lines) {
+      b.text(22, ky, l, "note", "start");
+      ky += b.lh("note");
+    }
+    total = ky - b.lh("note") / 2 + 2;
   }
   return b.scene(total, spec.alt ?? `Line chart: ${S.map((s) => s.label).join(", ")}.`);
 }
