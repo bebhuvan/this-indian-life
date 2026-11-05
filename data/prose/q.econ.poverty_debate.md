@@ -2,7 +2,7 @@
 
 Almost. In 2024, about 2 in every 100 Indians lived below the World Bank's extreme poverty line, roughly Rs 68 a person a day. In 1990 it was about 49 in 100.
 
-Raise the line, though, and the picture turns over. India is a lower-middle-income country, and the World Bank's line for that group is $4.20 a day, roughly Rs 95; about 15 in 100 Indians were below it. Its line for upper-middle-income countries, the group India hopes to join, is $8.30 a day, roughly Rs 187. About 4 in 5 Indians, 79 in 100, were below that in 2024. All these numbers come from the same household spending data. They are true at once.
+Raise the line, though, and the picture turns over. India is a lower-middle-income country, and the World Bank's line for that group is $4.20 a day, roughly Rs 95; about 15 in 100 Indians were below it. Its line for upper-middle-income countries, the group India hopes to join, is $8.30 a day, roughly Rs 187. About 4 in 5 Indians, 79 in 100, were below that in 2024. All these numbers come from the same household spending data. They are true at once. A word on these dollars: they are not dollars at the exchange rate, which would make $3 several times Rs 68. The World Bank uses price-adjusted dollars, called purchasing power parity or PPP dollars, which measure what money actually buys in each country. The next section explains how they turn into rupees.
 
 The 2% is the World Bank's best estimate, not a settled fact. How far poverty has really fallen is disputed, for reasons part four explains.
 
@@ -16,7 +16,7 @@ The figures for 2024 are estimates. India's last household survey was the Househ
 
 About Rs 68 a person a day, or Rs 2,060 a month, at 2023-24 prices. For a family of five, that is about Rs 10,300 a month for everything: food, rent, school, bus fare, medicine. The $4.20 line works out to about Rs 95 a day, or Rs 2,880 a month. The $8.30 line is about Rs 187 a day, or Rs 5,700 a month.
 
-These are not dollars converted at the exchange rate. The World Bank uses purchasing power parity, which asks what a dollar buys in America and how many rupees buy the same things in India. Because many goods and services are cheaper here, one of these dollars was worth about Rs 19.5 in 2021 prices.
+These are not dollars converted at the exchange rate. At the market rate, $3 would come to several times Rs 68. The World Bank instead uses purchasing power parity (PPP), which asks what a dollar buys in America and how many rupees buy the same things in India. Because many goods and services are cheaper here, one PPP dollar equalled about Rs 19.5 in 2021. Raised for price rises since then, that is about Rs 22.55 at 2023-24 prices, which is how $3 becomes Rs 68.
 
 The $3 line is the typical poverty line of the world's poorest countries. Clearing it means India is no longer poor by the standard of the poorest countries on earth. It does not mean an Indian family just above Rs 68 a day is eating well, can afford a hospital visit or has any savings.
 
